@@ -1,0 +1,64 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}menu';
+
+#{$block} {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    &__logo {
+        flex: 1;
+        padding: 24px 0;
+        margin: 0 20px 0 0;
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: 700;
+    }
+
+    &__list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+        }
+    }
+
+    &__list-item {
+        // margin-top: 0;
+        margin-left: 20px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 700;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin: 8px 0 0;
+        }
+    }
+
+    &__link.pc-link-block {
+        margin: 0;
+
+        a {
+            white-space: nowrap;
+            text-decoration: none;
+        }
+    }
+
+    &__link-icon {
+        margin: 4px 0 0 10px;
+    }
+}

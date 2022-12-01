@@ -1,0 +1,76 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}custom-banner';
+
+@mixin subtitle {
+    @include pcStyles.heading5();
+    font-weight: normal;
+}
+
+#{$block} {
+    @include pcStyles.animate();
+
+    $class: &;
+    $borderRadius: pcVariables.$borderRadius;
+
+    &__content {
+        width: 100%;
+        border-radius: $borderRadius;
+        display: flex;
+
+        min-height: 271px;
+    }
+
+    &__title {
+        text-align: center;
+        @include pcStyles.heading2();
+
+        a {
+            @include pcStyles.link();
+        }
+    }
+
+    &__info,
+    &__image {
+        flex: 1;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+    }
+
+    &__subtitle {
+        text-align: center;
+        display: inline-block;
+        margin-top: 8px;
+        @include subtitle();
+
+        & p {
+            @include subtitle();
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        margin-top: 28px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__button {
+        margin: 0 8px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin: 8px 0;
+        }
+    }
+}

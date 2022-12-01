@@ -1,0 +1,21 @@
+@import '~@gravity-ui/page-constructor/styles/styles.scss';
+
+.yc-root {
+    --yc-color-base-background: #080349;
+
+    --yc-text-display-4-font-size: 56px;
+    --yc-text-display-4-line-height: 64px;
+
+    --yc-border-radius-xl: 32px;
+    --yc-border-radius-l: 32px;
+    --yc-color-line-generic-accent: #fff;
+
+    margin: 0;
+    background-color: var(--yc-color-base-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    .pc-BackgroundMedia__media {
+        max-width: 100%;
+    }
+}

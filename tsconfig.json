@@ -1,26 +1,16 @@
 {
+  "extends": "@gravity-ui/tsconfig/tsconfig",
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+      "allowJs": true,
+      "outDir": "build/esm",
+      "module": "esnext",
+      "jsx": "react",
+      "baseUrl": ".",
+      "resolveJsonModule": true,
+      "importHelpers": true
   },
   "include": [
-    "src"
+      "src/**/*.ts",
+      "src/**/*.tsx"
   ]
 }

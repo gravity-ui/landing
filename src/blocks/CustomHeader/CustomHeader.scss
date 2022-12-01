@@ -1,0 +1,30 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}custom-header';
+
+#{$block} {
+    &__title {
+        @include pcStyles.heading1();
+        max-width: 800px;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        margin-top: 32px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            justify-content: center;
+        }
+    }
+
+    &__button {
+        margin: 0 8px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin: 0 4px;
+        }
+    }
+}

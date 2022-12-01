@@ -1,0 +1,25 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}footer';
+
+#{$block} {
+    display: flex;
+    margin-top: 80px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 0px;
+    border-radius: 32px 32px 0px 0px;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        margin-top: 40px;
+    }
+
+    &__text {
+        padding: 22px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+    }
+}
