@@ -2,7 +2,7 @@
   "name": "gravity-ui-landing",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://gravity-ui.github.io/landing",
+  "homepage": "http://gravity-ui-landing.github.io/",
   "dependencies": {
     "@doc-tools/transform": "^2.16.0",
     "@gravity-ui/page-constructor": "^1.7.0",
