@@ -2,6 +2,7 @@
   "name": "gravity-ui-landing",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://gravity-ui.github.io/landing",
   "dependencies": {
     "@doc-tools/transform": "^2.16.0",
     "@gravity-ui/page-constructor": "^1.7.0",
@@ -28,6 +29,7 @@
     "@gravity-ui/tsconfig": "^1.0.0",
     "eslint": "^8.27.0",
     "eslint-plugin-testing-library": "^5.9.1",
+    "gh-pages": "^4.0.0",
     "nano-staged": "^0.8.0",
     "prettier": "^2.7.1",
     "react-app-rewired": "^2.2.1",
@@ -42,7 +44,9 @@
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
     "lint:prettier": "prettier --check '**/*.md'",
-    "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier"
+    "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build"
   },
   "browserslist": {
     "production": [
