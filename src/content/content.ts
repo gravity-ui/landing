@@ -139,7 +139,7 @@ const typedContent: CustomPageContent = {
                     text: 'Telegram',
                     view: 'outlined',
                     icon: telegramIcon,
-                    href: '#',
+                    href: 'https://t.me/gravity_ui',
                     target: '_blank',
                 },
             ],

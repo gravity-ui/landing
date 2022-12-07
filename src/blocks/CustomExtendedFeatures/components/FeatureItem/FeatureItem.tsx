@@ -13,6 +13,9 @@ const githubUrl = 'https://github.com/';
 const githubApiUrl = 'https://api.github.com/repos/';
 const npmApiUrl = 'https://registry.npmjs.org/';
 
+const LOCAL_STORAGE_PREFIX = 'githubStars_';
+const LOCAL_STORAGE_CACHE_LIVE_TIME = 60 * 60 * 1000;
+
 export type FeatureItemProps = {
     title?: string;
     text: string;
@@ -43,17 +46,46 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
 
     React.useEffect(() => {
         if (githubId) {
-            fetch(`${githubApiUrl}${githubId}`)
-                .then((response) => response.json())
-                .then((response) => {
-                    if (response?.stargazers_count) {
-                        setStarsCount(response?.stargazers_count);
+            const githubStarsKey = `${LOCAL_STORAGE_PREFIX}${githubId}`;
+            const localStorageValue = localStorage.getItem(githubStarsKey);
+
+            let cachedValue: number | null = null;
+
+            if (localStorageValue) {
+                try {
+                    const parsedLocalStorageValue = JSON.parse(localStorageValue);
+                    if (
+                        new Date().valueOf() - parsedLocalStorageValue.time <
+                        LOCAL_STORAGE_CACHE_LIVE_TIME
+                    ) {
+                        cachedValue = parsedLocalStorageValue.value as number;
                     }
-                })
-                .catch((err) => {
-                    // eslint-disable-next-line no-console
-                    console.error(err);
-                });
+                } catch {}
+            }
+
+            if (cachedValue) {
+                setStarsCount(cachedValue);
+            } else {
+                fetch(`${githubApiUrl}${githubId}`)
+                    .then((response) => response.json())
+                    .then((response) => {
+                        const value = response?.stargazers_count;
+                        if (value) {
+                            setStarsCount(value);
+                            localStorage.setItem(
+                                githubStarsKey,
+                                JSON.stringify({
+                                    time: new Date().valueOf(),
+                                    value,
+                                }),
+                            );
+                        }
+                    })
+                    .catch((err) => {
+                        // eslint-disable-next-line no-console
+                        console.error(err);
+                    });
+            }
         }
 
         if (npmId) {
@@ -85,7 +117,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     }, []);
 
     return (
-        <div className={b()} style={contentStyle}>
+        <div className={b({active: Boolean(githubId || storybookUrl)})} style={contentStyle}>
             {iconData && <Image {...iconData} className={b('icon')} />}
 
             <div className={b('header')}>

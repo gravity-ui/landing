@@ -1,7 +1,7 @@
 export const menu = [
     {
-        title: 'Community',
-        url: '#',
+        title: 'Telegram',
+        url: 'https://t.me/gravity_ui',
     },
     {
         title: 'Storybook',

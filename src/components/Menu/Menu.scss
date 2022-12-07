@@ -49,7 +49,7 @@ $block: '.#{variables.$ns}menu';
         }
     }
 
-    &__link.pc-link-block {
+    & &__link {
         margin: 0;
 
         a {

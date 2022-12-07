@@ -10,6 +10,25 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
     margin-top: pcVariables.$indentM;
     border-radius: 24px;
 
+    &_active {
+        transition: transform 0.2s ease-in-out;
+
+        #{$block}__button {
+            opacity: 0;
+            transform: translateY(50%);
+            transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+        }
+
+        &:hover {
+            transform: translateY(-8px);
+
+            #{$block}__button {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    }
+
     &__icon {
         @include pcStyles.icon();
 
@@ -64,13 +83,10 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
         margin-top: 12px;
     }
 
-    &__release-label {
+    & &__release-label {
         margin-right: 8px;
-
-        &.yc-label_theme_normal {
-            background-color: #9f6fee;
-            color: #fff;
-        }
+        background-color: #9f6fee;
+        color: #fff;
     }
 
     &__release-date {
@@ -81,7 +97,7 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
         color: rgba(255, 255, 255, 0.7);
     }
 
-    &__release-skeleton.yc-skeleton {
+    & &__release-skeleton {
         height: 20px;
         width: 120px;
         border-radius: 8px;
