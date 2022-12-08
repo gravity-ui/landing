@@ -89,7 +89,7 @@ const typedContent: CustomPageContent = {
                 },
                 {
                     title: 'Page&nbsp;constructor',
-                    text: 'A library with a wide range of easy-to-use components for creating interfaces of any complexity.',
+                    text: 'A set of stylish, functional blocks to quickly create promo and landing pages.',
                     githubId: 'gravity-ui/page-constructor',
                     npmId: '@gravity-ui/page-constructor',
                     storybookUrl: 'https://preview.yandexcloud.dev/page-constructor/',
@@ -108,13 +108,13 @@ const typedContent: CustomPageContent = {
                     storybookUrl: 'https://preview.yandexcloud.dev/navigation/',
                 },
                 {
-                    title: '18n',
+                    title: 'i18n',
                     text: 'A library with a wide range of easy-to-use components for creating interfaces of any complexity.',
                     githubId: 'gravity-ui/i18n',
                     npmId: '@gravity-ui/i18n',
                 },
                 {
-                    title: 'Dashkit',
+                    title: 'DashKit',
                     text: 'A library for data visualization, integrated with our design system.',
                     githubId: 'gravity-ui/dashkit',
                     npmId: '@gravity-ui/dashkit',
