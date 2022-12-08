@@ -46,8 +46,7 @@ const typedContent: CustomPageContent = {
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
-            backgroundColor: 'rgba(255, 255, 255, 0.12)',
-            backdropFilter: 'blur(60px)',
+            backgroundColor: 'rgba(36, 28, 100, 0.42)',
             colSizes: {
                 all: 12,
                 md: 12,
@@ -73,7 +72,7 @@ const typedContent: CustomPageContent = {
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
-            backgroundColor: '#241C64',
+            backgroundColor: 'rgba(36, 28, 100, 0.42)',
             title: 'Our libraries',
             colSizes: {
                 all: 12,

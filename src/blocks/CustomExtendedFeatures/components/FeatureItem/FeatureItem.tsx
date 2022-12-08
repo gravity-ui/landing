@@ -1,6 +1,6 @@
 import React from 'react';
 import {HTML, Image, ThemedImage} from '@gravity-ui/page-constructor';
-import {Button, Icon, Label, Skeleton} from '@gravity-ui/uikit';
+import {Icon, Label, Skeleton} from '@gravity-ui/uikit';
 import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
 import starIcon from '../../../../assets/icons/star.svg';
 import calendarIcon from '../../../../assets/icons/calendar.svg';
@@ -157,23 +157,24 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
             {githubId || storybookUrl ? (
                 <div className={b('buttons')}>
                     {githubId ? (
-                        <div key="github" className={b('button')}>
-                            <Button
-                                view="outlined"
-                                size="l"
-                                href={`${githubUrl}${githubId}`}
-                                target="_blank"
-                            >
-                                Github
-                            </Button>
-                        </div>
+                        <a
+                            key="github"
+                            className={b('button')}
+                            href={`${githubUrl}${githubId}`}
+                            target="_blank"
+                        >
+                            Github
+                        </a>
                     ) : null}
                     {storybookUrl ? (
-                        <div key="storybook" className={b('button')}>
-                            <Button view="outlined" size="l" href={storybookUrl} target="_blank">
-                                Storybook
-                            </Button>
-                        </div>
+                        <a
+                            key="storybook"
+                            className={b('button')}
+                            href={storybookUrl}
+                            target="_blank"
+                        >
+                            Storybook
+                        </a>
                     ) : null}
                 </div>
             ) : null}
