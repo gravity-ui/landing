@@ -1,6 +1,8 @@
 import {PageContent, Block} from '@gravity-ui/page-constructor';
 import backgroundAsset from '../assets/background.svg';
-import featureAsset from '../assets/feature.svg';
+import featureUnionAsset from '../assets/feature-union.svg';
+import featureStarAsset from '../assets/feature-star.svg';
+import featureShieldAsset from '../assets/feature-shield.svg';
 import bannerAsset from '../assets/banner.svg';
 import githubIcon from '../assets/icons/github.svg';
 import storybookIcon from '../assets/icons/storybook.svg';
@@ -28,7 +30,7 @@ const typedContent: CustomPageContent = {
             buttons: [
                 {
                     text: 'GitHub',
-                    view: 'outlined',
+                    view: 'action',
                     icon: githubIcon,
                     href: 'https://github.com/gravity-ui',
                     target: '_blank',
@@ -55,17 +57,17 @@ const typedContent: CustomPageContent = {
                 {
                     title: 'Proven in real life',
                     text: "We use Gravity ourselves to build a diverse set of complex services. Our libraries are based on developers' real needs and usage cases.",
-                    icon: featureAsset,
+                    icon: featureUnionAsset,
                 },
                 {
                     title: 'First class design',
                     text: 'Experienced designers curate the look of our libraries, so our components are stylish, consistent, and support dark mode and high-contrast themes.',
-                    icon: featureAsset,
+                    icon: featureStarAsset,
                 },
                 {
                     title: 'An evolving ecosystem',
                     text: 'Our community of developers provide regular feedback that improves our libraries, and we break compatibility only when necessary.',
-                    icon: featureAsset,
+                    icon: featureShieldAsset,
                 },
             ],
         },
@@ -130,7 +132,7 @@ const typedContent: CustomPageContent = {
             buttons: [
                 {
                     text: 'GitHub',
-                    view: 'outlined',
+                    view: 'action',
                     icon: githubIcon,
                     href: 'https://github.com/gravity-ui',
                     target: '_blank',
