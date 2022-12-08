@@ -26,7 +26,7 @@ const typedContent: CustomPageContent = {
     blocks: [
         {
             type: CustomBlock.CustomHeader,
-            title: 'Build modern interfaces with&nbsp;the&nbsp;Gravity design system and&nbsp;libraries',
+            title: 'Build modern interfaces with the Gravity design system and libraries',
             buttons: [
                 {
                     text: 'GitHub',
