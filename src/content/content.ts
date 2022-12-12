@@ -102,20 +102,20 @@ const typedContent: CustomPageContent = {
                 },
                 {
                     title: 'Navigation',
-                    text: 'A library with a wide range of easy-to-use components for creating interfaces of any complexity.',
+                    text: 'Compact and extensible navigation panel for complex services.',
                     githubId: 'gravity-ui/navigation',
                     npmId: '@gravity-ui/navigation',
                     storybookUrl: 'https://preview.yandexcloud.dev/navigation/',
                 },
                 {
                     title: 'i18n',
-                    text: 'A library with a wide range of easy-to-use components for creating interfaces of any complexity.',
+                    text: 'Lightweight internationalization helper.',
                     githubId: 'gravity-ui/i18n',
                     npmId: '@gravity-ui/i18n',
                 },
                 {
                     title: 'DashKit',
-                    text: 'A library for data visualization, integrated with our design system.',
+                    text: 'Grid component for building interactive dashboards.',
                     githubId: 'gravity-ui/dashkit',
                     npmId: '@gravity-ui/dashkit',
                 },

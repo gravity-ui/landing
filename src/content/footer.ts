@@ -1,3 +1,3 @@
 export const footer = {
-    text: `© ${new Date().getFullYear()} ООО «Gravity–UI team»`,
+    text: `© ${new Date().getFullYear()} Gravity UI Team`,
 };
