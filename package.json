@@ -46,7 +46,7 @@
     "lint:prettier": "prettier --check '**/*.md'",
     "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "echo 'gravity-ui.com' > ./build/CNAME && gh-pages -d build"
   },
   "browserslist": {
     "production": [
