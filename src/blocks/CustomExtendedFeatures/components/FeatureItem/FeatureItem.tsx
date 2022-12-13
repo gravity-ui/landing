@@ -116,8 +116,15 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
         }
     }, []);
 
+    const Tag = githubId ? 'a' : 'div';
+    const tagProps = githubId ? {href: `${githubUrl}${githubId}`, target: '_blank'} : {};
+
     return (
-        <div className={b({active: Boolean(githubId || storybookUrl)})} style={contentStyle}>
+        <Tag
+            {...tagProps}
+            className={b({active: Boolean(githubId || storybookUrl)})}
+            style={contentStyle}
+        >
             {iconData && <Image {...iconData} className={b('icon')} />}
 
             <div className={b('header')}>
@@ -162,6 +169,9 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                             className={b('button')}
                             href={`${githubUrl}${githubId}`}
                             target="_blank"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
                         >
                             Github
                         </a>
@@ -172,12 +182,15 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                             className={b('button')}
                             href={storybookUrl}
                             target="_blank"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                            }}
                         >
                             Storybook
                         </a>
                     ) : null}
                 </div>
             ) : null}
-        </div>
+        </Tag>
     );
 };
