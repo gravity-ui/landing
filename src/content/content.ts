@@ -49,6 +49,7 @@ const typedContent: CustomPageContent = {
         {
             type: CustomBlock.CustomExtendedFeatures,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            backdropFilter: 'blur(60px)',
             colSizes: {
                 all: 12,
                 md: 12,
@@ -75,7 +76,6 @@ const typedContent: CustomPageContent = {
         {
             type: CustomBlock.CustomExtendedFeatures,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            backdropFilter: 'blur(60px)',
             title: 'Our libraries',
             colSizes: {
                 all: 12,
@@ -127,8 +127,6 @@ const typedContent: CustomPageContent = {
         {
             type: CustomBlock.CustomBanner,
             title: 'Start creating with Gravity&nbsp;UI',
-            subtitle:
-                'Build it Find the reusable components and instructions you need to get going.',
             color: '#23151e',
             image: bannerAsset,
             commands: [
@@ -139,7 +137,7 @@ const typedContent: CustomPageContent = {
         },
         {
             type: BlockType.CompaniesBlock,
-            title: 'Our libraries use',
+            title: 'Used by',
             images: {
                 desktop: companiesDesktopAsset,
                 tablet: companiesTabletAsset,
