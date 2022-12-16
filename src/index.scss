@@ -1,8 +1,7 @@
 @import '~@gravity-ui/page-constructor/styles/styles.scss';
 
 .yc-root {
-    --yc-color-base-background: #080349;
-
+    --yc-color-base-background: #160d1b;
     --yc-text-display-4-font-size: 56px;
     --yc-text-display-4-line-height: 64px;
 
@@ -10,8 +9,9 @@
     --yc-border-radius-l: 32px;
     --yc-color-line-generic-accent: #fff;
 
-    --yc-color-base-special: #7b47cf;
-    --yc-color-base-special-hover: #6431b6;
+    --yc-color-base-special: #ffbe5c;
+    --yc-color-base-special-hover: #faae3d;
+    --yc-my-color-brand-text-contrast: rgba(0, 0, 0, 0.85);
 
     margin: 0;
     background-color: var(--yc-color-base-background);

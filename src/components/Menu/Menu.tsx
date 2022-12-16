@@ -1,6 +1,7 @@
 import React from 'react';
 import {Grid, Row, Col} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
+import logoIcon from '../../assets/icons/logo.svg';
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
 import menuOpenIcon from '../../assets/icons/menu-open.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
@@ -29,7 +30,9 @@ export const Menu: React.FC<MenuProps> = ({items}) => {
                 <Row>
                     <Col sizes={{sm: 12}}>
                         <div className={b('wrapper')}>
-                            <div className={b('logo')}>GravityUI</div>
+                            <div className={b('logo')}>
+                                <Icon data={logoIcon} className={b('logo-icon')} />
+                            </div>
 
                             <nav className={b('desktop-menu')}>
                                 {items.map((item) => (

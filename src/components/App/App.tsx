@@ -43,7 +43,7 @@ export const App: React.FC = () => {
                     }}
                 />
             </PageConstructorProvider>
-            <Footer text={footer.text} />
+            <Footer text={footer.text} menu={menu} />
         </React.Fragment>
     );
 };

@@ -25,7 +25,8 @@ export type CustomBannerProps = Animatable & {
     subtitle?: string;
     image?: ThemeSupporting<string>;
     color?: ThemeSupporting<string>;
-    buttons: CustomButton[];
+    commands?: string[];
+    buttons?: CustomButton[];
 };
 
 export type CustomBannerModel = CustomBannerProps & {
@@ -38,6 +39,7 @@ export const CustomBanner: React.FC<CustomBannerProps> = ({
     subtitle,
     image,
     color,
+    commands,
     buttons,
 }) => {
     const theme = useThemeValue();
@@ -69,7 +71,18 @@ export const CustomBanner: React.FC<CustomBannerProps> = ({
                             modifiers={{constructor: true}}
                         />
                     )}
-                    {buttons?.length > 0 ? (
+                    {commands && commands.length > 0 ? (
+                        <div className={b('commands')}>
+                            {commands.map((item, index) => {
+                                return (
+                                    <div key={index} className={b('command')}>
+                                        {item}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ) : null}
+                    {buttons && buttons.length > 0 ? (
                         <div className={b('buttons')}>
                             {buttons.map((button, index) => {
                                 const {icon, text, ...buttonProps} = button;

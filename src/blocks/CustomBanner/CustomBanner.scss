@@ -56,6 +56,29 @@ $block: '.#{variables.$ns}custom-banner';
         }
     }
 
+    &__commands {
+        width: 800px;
+        margin-top: 32px;
+        padding: 16px;
+        background: #160d1b;
+        border-radius: 16px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            width: auto;
+        }
+    }
+
+    &__command {
+        margin-top: 8px;
+        font-weight: 400;
+        font-size: 17px;
+        line-height: 24px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
     &__buttons {
         display: flex;
         margin-top: 28px;

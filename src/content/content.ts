@@ -1,12 +1,14 @@
-import {PageContent, Block} from '@gravity-ui/page-constructor';
-import backgroundAsset from '../assets/background.svg';
+import {PageContent, Block, BlockType} from '@gravity-ui/page-constructor';
+import backgroundAsset from '../assets/background.png';
 import featureUnionAsset from '../assets/feature-union.svg';
 import featureStarAsset from '../assets/feature-star.svg';
 import featureShieldAsset from '../assets/feature-shield.svg';
 import bannerAsset from '../assets/banner.svg';
+import companiesDesktopAsset from '../assets/companies-desktop.svg';
+import companiesTabletAsset from '../assets/companies-tablet.svg';
+import companiesMobileAsset from '../assets/companies-mobile.svg';
 import githubIcon from '../assets/icons/github.svg';
 import storybookIcon from '../assets/icons/storybook.svg';
-import telegramIcon from '../assets/icons/telegram.svg';
 import {CustomBlockModel} from '../blocks/types';
 import {CustomBlock} from '../blocks/constants';
 
@@ -46,7 +48,7 @@ const typedContent: CustomPageContent = {
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
-            backgroundColor: 'rgba(36, 28, 100, 0.42)',
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
             colSizes: {
                 all: 12,
                 md: 12,
@@ -72,7 +74,8 @@ const typedContent: CustomPageContent = {
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
-            backgroundColor: 'rgba(36, 28, 100, 0.42)',
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            backdropFilter: 'blur(60px)',
             title: 'Our libraries',
             colSizes: {
                 all: 12,
@@ -126,24 +129,22 @@ const typedContent: CustomPageContent = {
             title: 'Start creating with Gravity&nbsp;UI',
             subtitle:
                 'Build it Find the reusable components and instructions you need to get going.',
-            color: '#241C64',
+            color: '#23151e',
             image: bannerAsset,
-            buttons: [
-                {
-                    text: 'GitHub',
-                    view: 'action',
-                    icon: githubIcon,
-                    href: 'https://github.com/gravity-ui',
-                    target: '_blank',
-                },
-                {
-                    text: 'Telegram',
-                    view: 'outlined',
-                    icon: telegramIcon,
-                    href: 'https://t.me/gravity_ui',
-                    target: '_blank',
-                },
+            commands: [
+                'git clone git@github.com:gravity-ui/uikit-example-cra.git my-project',
+                'npm i',
+                'npm run start',
             ],
+        },
+        {
+            type: BlockType.CompaniesBlock,
+            title: 'Our libraries use',
+            images: {
+                desktop: companiesDesktopAsset,
+                tablet: companiesTabletAsset,
+                mobile: companiesMobileAsset,
+            },
         },
     ],
 };

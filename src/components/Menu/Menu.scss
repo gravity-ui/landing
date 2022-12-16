@@ -10,12 +10,19 @@ $block: '.#{variables.$ns}menu';
     }
 
     &__logo {
+        display: flex;
         flex: 1;
+        align-items: center;
         padding: 24px 0;
         margin: 0 20px 0 0;
         font-size: 24px;
         line-height: 28px;
         font-weight: 700;
+    }
+
+    & &__logo-icon {
+        width: 121px;
+        height: 24px;
     }
 
     &__link {
@@ -65,7 +72,7 @@ $block: '.#{variables.$ns}menu';
         z-index: 10;
         width: 100%;
         padding: 86px 0 38px;
-        background: rgba(36, 28, 100, 0.42);
+        background: rgba(22, 13, 27, 0.42);
         backdrop-filter: blur(60px);
         border-bottom-left-radius: 24px;
         border-bottom-right-radius: 24px;
