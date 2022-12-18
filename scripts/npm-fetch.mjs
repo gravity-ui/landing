@@ -39,7 +39,7 @@ Promise.all(
     .then(() => {
         if (versions.length === 0) {
             console.log('Empty versions');
-            process.exit(0);
+            process.exit(1);
         }
         fs.writeFile(
             path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/versions.json'),
