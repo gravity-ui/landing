@@ -24,7 +24,10 @@ Promise.all(
                     latestReleaseDate = `${day < 10 ? `0${day}` : day}.${
                         month < 10 ? `0${month}` : month
                     }.${date.getUTCFullYear()}`;
-                } catch {}
+                } catch (error) {
+                    console.log(error);
+                    process.exit(1);
+                }
             }
         } else {
             throw Error(`No latest version for ${item.title}`);
