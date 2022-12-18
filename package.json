@@ -18,7 +18,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.1",
-    "typescript": "^4.5.5",
+    "typescript": "^4.9.4",
     "url": "^0.11.0"
   },
   "devDependencies": {
@@ -34,12 +34,16 @@
     "react-app-rewired": "^2.2.1",
     "sass": "^1.56.1",
     "stylelint": "^14.15.0",
-    "svg-inline-loader": "^0.8.2"
+    "svg-inline-loader": "^0.8.2",
+    "undici": "^5.14.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
+    "prestart": "node ./scripts/npm-fetch.mjs",
+    "prebuild": "node ./scripts/npm-fetch.mjs",
+    "pretest": "node ./scripts/npm-fetch.mjs",
     "eject": "react-app-rewired eject",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",

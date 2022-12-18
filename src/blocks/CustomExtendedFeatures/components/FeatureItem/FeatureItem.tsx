@@ -6,12 +6,12 @@ import starIcon from '../../../../assets/icons/star.svg';
 import calendarIcon from '../../../../assets/icons/calendar.svg';
 import {block, getThemedValue, getMediaImage} from '../../../../utils';
 import './FeatureItem.scss';
+import versions from '../../../../versions.json';
 
 const b = block('custom-extended-features-feature-item');
 
 const githubUrl = 'https://github.com/';
 const githubApiUrl = 'https://api.github.com/repos/';
-const npmApiUrl = 'https://registry.npmjs.org/';
 
 const LOCAL_STORAGE_PREFIX = 'githubStars_';
 const LOCAL_STORAGE_CACHE_LIVE_TIME = 60 * 60 * 1000;
@@ -89,30 +89,11 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
         }
 
         if (npmId) {
-            fetch(`${npmApiUrl}${npmId}`)
-                .then((response) => response.json())
-                .then((response) => {
-                    const latestVersion = response?.['dist-tags']?.latest;
-                    if (latestVersion) {
-                        setLatestReleaseVersion(latestVersion);
-                        if (response?.time?.[latestVersion]) {
-                            try {
-                                const date = new Date(response?.time?.[latestVersion]);
-                                const day = date.getUTCDate();
-                                const month = date.getUTCMonth() + 1;
-                                setLatestReleaseDate(
-                                    `${day < 10 ? `0${day}` : day}.${
-                                        month < 10 ? `0${month}` : month
-                                    }.${date.getUTCFullYear()}`,
-                                );
-                            } catch {}
-                        }
-                    }
-                })
-                .catch((err) => {
-                    // eslint-disable-next-line no-console
-                    console.error(err);
-                });
+            const version = versions.find((elem) => elem.title === npmId);
+            if (version) {
+                setLatestReleaseVersion(version.version);
+                setLatestReleaseDate(version.date);
+            }
         }
     }, []);
 
