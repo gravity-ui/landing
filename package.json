@@ -32,6 +32,7 @@
     "nano-staged": "^0.8.0",
     "prettier": "^2.7.1",
     "react-app-rewired": "^2.2.1",
+    "react-snap": "^1.23.0",
     "sass": "^1.56.1",
     "stylelint": "^14.15.0",
     "svg-inline-loader": "^0.8.2"
@@ -46,7 +47,8 @@
     "lint:prettier": "prettier --check '**/*.md'",
     "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
     "predeploy": "npm run build",
-    "deploy": "echo 'gravity-ui.com' > ./build/CNAME && gh-pages -d build"
+    "deploy": "echo 'gravity-ui.com' > ./build/CNAME && gh-pages -d build",
+    "postbuild": "react-snap"
   },
   "browserslist": {
     "production": [
