@@ -60,8 +60,8 @@ function fetchStars() {
     );
     if (cacheFilePath && !process.env.GITHUB_TOKEN) {
         console.error(
-            `Stars cache file exists. You can delete it manually for refetch.
-Read more information about GitHub API limits.
+            `The stars cache file exists. You can delete it manually for refetch.
+Learn more about the limitations of the GitHub API..
 https://docs.github.com/ru/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28#rate-limiting`,
         );
         process.exit(0);
