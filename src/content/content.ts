@@ -1,5 +1,5 @@
 import {PageContent, Block, BlockType} from '@gravity-ui/page-constructor';
-import backgroundAsset from '../assets/background.png';
+import backgroundAsset from '../assets/background.jpg';
 import featureUnionAsset from '../assets/feature-union.svg';
 import featureStarAsset from '../assets/feature-star.svg';
 import featureShieldAsset from '../assets/feature-shield.svg';
