@@ -38,22 +38,17 @@ function fetchVersions() {
                 date: latestReleaseDate,
             });
         }),
-    )
-        .then(() => {
-            if (versions.length === 0) {
-                console.log('Empty versions');
-                process.error(1);
-            }
-            fs.writeFileSync(
-                path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/versions.json'),
-                JSON.stringify(versions),
-                'utf8',
-            );
-        })
-        .catch((err) => {
-            console.log(err.message);
-            process.exit(1);
-        });
+    ).then(() => {
+        if (versions.length === 0) {
+            console.log('Empty versions');
+            process.error(1);
+        }
+        fs.writeFileSync(
+            path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/versions.json'),
+            JSON.stringify(versions),
+            'utf8',
+        );
+    });
 }
 
 function fetchStars() {
@@ -73,28 +68,23 @@ https://docs.github.com/ru/rest/overview/resources-in-the-rest-api?apiVersion=20
     }
     return Promise.all(
         libs.map(async (item) => {
-            try {
-                const headers = {'User-Agent': 'request'};
-                if (process.env.GITHUB_TOKEN) {
-                    headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-                }
-                const {body} = await request(`${githubApiUrl}${item.githubId}`, {
-                    headers,
-                });
-                const data = await body.json();
-                const value = data?.stargazers_count;
+            const headers = {'User-Agent': 'request'};
+            if (process.env.GITHUB_TOKEN) {
+                headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+            }
+            const {body} = await request(`${githubApiUrl}${item.githubId}`, {
+                headers,
+            });
+            const data = await body.json();
+            const value = data?.stargazers_count;
 
-                if (value) {
-                    stars.push({
-                        title: item.githubId,
-                        stars: value,
-                    });
-                } else {
-                    throw Error(JSON.stringify(data));
-                }
-            } catch (err) {
-                console.error(err.message);
-                process.exit(1);
+            if (value) {
+                stars.push({
+                    title: item.githubId,
+                    stars: value,
+                });
+            } else {
+                throw Error(JSON.stringify(data));
             }
         }),
     ).then(() => {
