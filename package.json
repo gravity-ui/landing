@@ -35,12 +35,16 @@
     "react-snap": "^1.23.0",
     "sass": "^1.56.1",
     "stylelint": "^14.15.0",
-    "svg-inline-loader": "^0.8.2"
+    "svg-inline-loader": "^0.8.2",
+    "undici": "^5.14.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "react-app-rewired test",
+    "prestart": "node ./scripts/npm-fetch.mjs",
+    "prebuild": "node ./scripts/npm-fetch.mjs",
+    "pretest": "node ./scripts/npm-fetch.mjs",
     "eject": "react-app-rewired eject",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
