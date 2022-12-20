@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.4dba6958.css",
-    "main.js": "/static/js/main.32a56c46.js",
+    "main.js": "/static/js/main.29f138ed.js",
     "static/media/background.jpg": "/static/media/background.b486f3ed24ef43afdba1.jpg",
-    "static/media/companies-mobile.svg": "/static/media/companies-mobile.9750c66c967e834e14868e3e3f19fe0c.svg",
-    "static/media/companies-tablet.svg": "/static/media/companies-tablet.c22dc5f36a5f4bd6bccf2b032daf378a.svg",
-    "static/media/companies-desktop.svg": "/static/media/companies-desktop.21ca8ceb121e78448cdc7e6db49fdbb4.svg",
-    "static/media/feature-star.svg": "/static/media/feature-star.b84098d5c642a980091523170b71c221.svg",
+    "static/media/companies-mobile.svg": "/static/media/companies-mobile.190eb38d6fd4a8e60c3588a4430c9da5.svg",
+    "static/media/companies-tablet.svg": "/static/media/companies-tablet.a62b90262de69b5d68e96000f70e736f.svg",
+    "static/media/companies-desktop.svg": "/static/media/companies-desktop.adc16a7274d80f854253a5c01e7a4d45.svg",
     "index.html": "/index.html",
-    "static/media/feature-union.svg": "/static/media/feature-union.a371b9535ee36f39db2b96c8eb48e486.svg",
-    "static/media/banner.svg": "/static/media/banner.6f8f9753af9df46e6bb24f770991456e.svg",
-    "static/media/feature-shield.svg": "/static/media/feature-shield.813364a89f02834bfff6859341936b5f.svg"
+    "static/media/feature-star.svg": "/static/media/feature-star.8811f477f94735caa53ee00587b1733a.svg",
+    "static/media/banner.svg": "/static/media/banner.ce26d68aed149aba86b4f9c880c0f8b7.svg",
+    "static/media/feature-union.svg": "/static/media/feature-union.1b4ca5e217bfb528bf7266831f7e7179.svg",
+    "static/media/feature-shield.svg": "/static/media/feature-shield.72b40acf71e8ae9f06b4b61cee1e85ed.svg"
   },
   "entrypoints": [
     "static/css/main.4dba6958.css",
-    "static/js/main.32a56c46.js"
+    "static/js/main.29f138ed.js"
   ]
 }
