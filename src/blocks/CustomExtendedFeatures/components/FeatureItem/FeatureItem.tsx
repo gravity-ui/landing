@@ -7,14 +7,11 @@ import calendarIcon from '../../../../assets/icons/calendar.svg';
 import {block, getThemedValue, getMediaImage} from '../../../../utils';
 import './FeatureItem.scss';
 import versions from '../../../../versions.json';
+import stars from '../../../../stars.json';
 
 const b = block('custom-extended-features-feature-item');
 
 const githubUrl = 'https://github.com/';
-const githubApiUrl = 'https://api.github.com/repos/';
-
-const LOCAL_STORAGE_PREFIX = 'githubStars_';
-const LOCAL_STORAGE_CACHE_LIVE_TIME = 60 * 60 * 1000;
 
 export type FeatureItemProps = {
     title?: string;
@@ -40,62 +37,23 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     const iconThemed = icon && getThemedValue(icon, theme);
     const iconData = iconThemed && getMediaImage(iconThemed);
 
-    const [starsCount, setStarsCount] = React.useState<number | null>(null);
-    const [latestReleaseVersion, setLatestReleaseVersion] = React.useState<string | null>(null);
-    const [latestReleaseDate, setLatestReleaseDate] = React.useState<string | null>(null);
+    let starsCount;
+    let latestReleaseVersion;
+    let latestReleaseDate;
 
-    React.useEffect(() => {
-        if (githubId) {
-            const githubStarsKey = `${LOCAL_STORAGE_PREFIX}${githubId}`;
-            const localStorageValue = localStorage.getItem(githubStarsKey);
-
-            let cachedValue: number | null = null;
-
-            if (localStorageValue) {
-                try {
-                    const parsedLocalStorageValue = JSON.parse(localStorageValue);
-                    if (
-                        new Date().valueOf() - parsedLocalStorageValue.time <
-                        LOCAL_STORAGE_CACHE_LIVE_TIME
-                    ) {
-                        cachedValue = parsedLocalStorageValue.value as number;
-                    }
-                } catch {}
-            }
-
-            if (cachedValue) {
-                setStarsCount(cachedValue);
-            } else {
-                fetch(`${githubApiUrl}${githubId}`)
-                    .then((response) => response.json())
-                    .then((response) => {
-                        const value = response?.stargazers_count;
-                        if (value) {
-                            setStarsCount(value);
-                            localStorage.setItem(
-                                githubStarsKey,
-                                JSON.stringify({
-                                    time: new Date().valueOf(),
-                                    value,
-                                }),
-                            );
-                        }
-                    })
-                    .catch((err) => {
-                        // eslint-disable-next-line no-console
-                        console.error(err);
-                    });
-            }
+    if (githubId) {
+        const libStars = stars.find((elem) => elem.title === githubId);
+        if (libStars) {
+            starsCount = libStars.stars;
         }
-
-        if (npmId) {
-            const version = versions.find((elem) => elem.title === npmId);
-            if (version) {
-                setLatestReleaseVersion(version.version);
-                setLatestReleaseDate(version.date);
-            }
+    }
+    if (npmId) {
+        const version = versions.find((elem) => elem.title === npmId);
+        if (version) {
+            latestReleaseVersion = version.version;
+            latestReleaseDate = version.date;
         }
-    }, []);
+    }
 
     const Tag = githubId ? 'a' : 'div';
     const tagProps = githubId ? {href: `${githubUrl}${githubId}`, target: '_blank'} : {};

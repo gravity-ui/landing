@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 * * * *'
   workflow_dispatch:
 jobs:
   deploy:
@@ -27,6 +27,8 @@ jobs:
       # Build frontend
       - name: Build
         run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
       # Deploy
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
