@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.4dba6958.css",
-    "main.js": "/static/js/main.d6ff7069.js",
+    "main.js": "/static/js/main.ba49b340.js",
     "static/media/background.jpg": "/static/media/background.b486f3ed24ef43afdba1.jpg",
     "static/media/companies-mobile.svg": "/static/media/companies-mobile.190eb38d6fd4a8e60c3588a4430c9da5.svg",
     "static/media/companies-tablet.svg": "/static/media/companies-tablet.a62b90262de69b5d68e96000f70e736f.svg",
@@ -14,6 +14,6 @@
   },
   "entrypoints": [
     "static/css/main.4dba6958.css",
-    "static/js/main.d6ff7069.js"
+    "static/js/main.ba49b340.js"
   ]
 }
