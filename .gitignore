@@ -24,3 +24,5 @@ yarn-error.log*
 
 /src/versions.json
 /src/stars.json
+
+.env

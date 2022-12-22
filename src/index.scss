@@ -1,6 +1,40 @@
 @import '~@gravity-ui/page-constructor/styles/styles.scss';
 
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./fonts/inter/Inter-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./fonts/inter/Inter-Italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('./fonts/inter/Inter-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url('./fonts/inter/Inter-SemiBoldItalic.woff2') format('woff2');
+}
+
 .yc-root {
+    --yc-font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
+
     --yc-color-base-background: #160d1b;
     --yc-text-display-4-font-size: 56px;
     --yc-text-display-4-line-height: 64px;

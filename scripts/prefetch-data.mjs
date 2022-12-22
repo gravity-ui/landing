@@ -1,8 +1,11 @@
+import * as dotenv from 'dotenv';
 import {request} from 'undici';
 import {libs} from '../src/libs.mjs';
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
+
+dotenv.config();
 
 function fetchVersions() {
     const npmApiUrl = 'https://registry.npmjs.org/';
