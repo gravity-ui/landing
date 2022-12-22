@@ -58,7 +58,7 @@ function fetchStars() {
         path.dirname(fileURLToPath(import.meta.url)),
         '../src/stars.json',
     );
-    if (cacheFilePath && !process.env.GITHUB_TOKEN) {
+    if (fs.existsSync(cacheFilePath) && !process.env.GITHUB_TOKEN) {
         console.error(
             `The stars cache file exists. You can delete it manually for refetch.
 Learn more about the limitations of the GitHub API..
