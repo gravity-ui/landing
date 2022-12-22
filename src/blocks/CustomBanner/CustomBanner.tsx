@@ -72,14 +72,16 @@ export const CustomBanner: React.FC<CustomBannerProps> = ({
                         />
                     )}
                     {commands && commands.length > 0 ? (
-                        <div className={b('commands')}>
-                            {commands.map((item, index) => {
-                                return (
-                                    <div key={index} className={b('command')}>
-                                        {item}
-                                    </div>
-                                );
-                            })}
+                        <div className={b('commands-wrapper')}>
+                            <div className={b('commands')}>
+                                {commands.map((item, index) => {
+                                    return (
+                                        <div key={index} className={b('command')}>
+                                            {item}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
                     ) : null}
                     {buttons && buttons.length > 0 ? (

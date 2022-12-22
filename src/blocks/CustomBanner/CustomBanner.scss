@@ -40,6 +40,7 @@ $block: '.#{variables.$ns}custom-banner';
     &__info {
         display: flex;
         flex-direction: column;
+        max-width: 100%;
         align-items: center;
         justify-content: center;
         padding: 32px;
@@ -56,23 +57,30 @@ $block: '.#{variables.$ns}custom-banner';
         }
     }
 
-    &__commands {
+    &__commands-wrapper {
         width: 800px;
+        max-width: 100%;
         margin-top: 32px;
-        padding: 16px;
+        padding: 0 16px;
         background: #160d1b;
         border-radius: 16px;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            width: auto;
+            width: inherit;
         }
     }
 
+    &__commands {
+        max-width: 100%;
+        padding: 16px 0;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
     &__command {
+        @include pcStyles.text-code-2();
+
         margin-top: 8px;
-        font-weight: 400;
-        font-size: 17px;
-        line-height: 24px;
 
         &:first-child {
             margin-top: 0;
