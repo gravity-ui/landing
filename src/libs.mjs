@@ -27,10 +27,10 @@ export const libs = [
         storybookUrl: 'https://preview.yandexcloud.dev/navigation/',
     },
     {
-        title: 'i18n',
-        text: 'Lightweight internationalization helper.',
-        githubId: 'gravity-ui/i18n',
-        npmId: '@gravity-ui/i18n',
+        title: 'yagr',
+        text: 'High-performance HTML5 canvas chart renderer based on uPlot.',
+        githubId: 'gravity-ui/yagr',
+        npmId: '@gravity-ui/yagr',
     },
     {
         title: 'DashKit',
