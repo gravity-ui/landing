@@ -27,7 +27,7 @@ export const libs = [
         storybookUrl: 'https://preview.yandexcloud.dev/navigation/',
     },
     {
-        title: 'yagr',
+        title: 'Yagr',
         text: 'High-performance HTML5 canvas chart renderer based on uPlot.',
         githubId: 'gravity-ui/yagr',
         npmId: '@gravity-ui/yagr',
