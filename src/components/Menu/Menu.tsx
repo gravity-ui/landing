@@ -36,7 +36,7 @@ export const Menu: React.FC<MenuProps> = ({items}) => {
 
                             <nav className={b('desktop-menu')}>
                                 {items.map((item) => (
-                                    <div className={b('desktop-menu-item')}>
+                                    <div key={item.title} className={b('desktop-menu-item')}>
                                         <a className={b('link')} href={item.url} target="_blank">
                                             <span>{item.title}</span>
                                             <Icon
@@ -72,7 +72,7 @@ export const Menu: React.FC<MenuProps> = ({items}) => {
                     <Row>
                         <Col sizes={{sm: 12}}>
                             {items.map((item) => (
-                                <div className={b('mobile-menu-item')}>
+                                <div className={b('mobile-menu-item')} key={item.title}>
                                     <a className={b('link')} href={item.url} target="_blank">
                                         <span>{item.title}</span>
                                         <Icon

@@ -26,7 +26,12 @@ export const Footer: React.FC<FooterProps> = ({text, menu}) => (
                 <footer className={b()}>
                     <div className={b('menu')}>
                         {menu.map((item) => (
-                            <a className={b('menu-link')} href={item.url} target="_blank">
+                            <a
+                                key={item.title}
+                                className={b('menu-link')}
+                                href={item.url}
+                                target="_blank"
+                            >
                                 <Icon className={b('menu-link-icon')} data={item.icon} size={24} />
                                 <div className={b('menu-link-text')}>
                                     <span>{item.title}</span>
