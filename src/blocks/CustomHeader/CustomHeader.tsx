@@ -34,7 +34,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({animated, title, butt
                         {buttons.map((button) => {
                             const {icon, text, ...buttonProps} = button;
                             return (
-                                <div className={b('button')}>
+                                <div key={text} className={b('button')}>
                                     <Button size="xl" {...buttonProps}>
                                         {icon ? (
                                             <Icon
