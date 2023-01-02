@@ -18,7 +18,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "@gravity-ui/eslint-config": "^1.0.2",
+    "@gravity-ui/eslint-config": "^2.0.0",
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
     "@gravity-ui/tsconfig": "^1.0.0",

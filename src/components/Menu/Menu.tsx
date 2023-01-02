@@ -1,11 +1,13 @@
-import React from 'react';
-import {Grid, Row, Col} from '@gravity-ui/page-constructor';
+import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
-import logoIcon from '../../assets/icons/logo.svg';
+import React from 'react';
+
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
-import menuOpenIcon from '../../assets/icons/menu-open.svg';
+import logoIcon from '../../assets/icons/logo.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
+import menuOpenIcon from '../../assets/icons/menu-open.svg';
 import {block} from '../../utils';
+
 import './Menu.scss';
 
 const b = block('menu');

@@ -1,6 +1,6 @@
-import telegramIcon from '../assets/icons/telegram.svg';
-import storybookIcon from '../assets/icons/storybook.svg';
 import githubIcon from '../assets/icons/github.svg';
+import storybookIcon from '../assets/icons/storybook.svg';
+import telegramIcon from '../assets/icons/telegram.svg';
 
 export const menu = [
     {

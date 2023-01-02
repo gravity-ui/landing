@@ -1,22 +1,23 @@
-import React from 'react';
-import block from 'bem-cn-lite';
 import {
+    Lang,
     PageConstructor,
     PageConstructorProvider,
-    configure as configurePageConstructor,
-    Lang,
     Theme,
+    configure as configurePageConstructor,
 } from '@gravity-ui/page-constructor';
 import {configure as configureUiKit} from '@gravity-ui/uikit';
-import {CustomBlock} from '../../blocks/constants';
-import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
-import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/CustomExtendedFeatures';
+import block from 'bem-cn-lite';
+import React from 'react';
+
 import {CustomBanner} from '../../blocks/CustomBanner/CustomBanner';
+import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/CustomExtendedFeatures';
+import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
+import {CustomBlock} from '../../blocks/constants';
 import {content} from '../../content/content';
-import {menu} from '../../content/menu';
 import {footer} from '../../content/footer';
-import {Menu} from '../Menu/Menu';
+import {menu} from '../../content/menu';
 import {Footer} from '../Footer/Footer';
+import {Menu} from '../Menu/Menu';
 
 const lang = Lang.En;
 const theme = Theme.Dark;
