@@ -1,16 +1,18 @@
-import React from 'react';
 import {
-    AnimateBlock,
     Animatable,
-    ThemeSupporting,
+    AnimateBlock,
     HTML,
+    ThemeSupporting,
     YFMWrapper,
 } from '@gravity-ui/page-constructor';
 import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
 import {Button, ButtonProps, Icon} from '@gravity-ui/uikit';
+import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import React from 'react';
+
 import {block, getThemedValue} from '../../utils';
 import {CustomBlock} from '../constants';
+
 import './CustomBanner.scss';
 
 const b = block('custom-banner');

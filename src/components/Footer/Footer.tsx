@@ -1,9 +1,11 @@
-import React from 'react';
-import {Grid, Row, Col} from '@gravity-ui/page-constructor';
+import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import React from 'react';
+
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
 import {block} from '../../utils';
+
 import './Footer.scss';
 
 const b = block('footer');

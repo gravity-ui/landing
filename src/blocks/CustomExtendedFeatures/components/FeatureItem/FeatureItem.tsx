@@ -1,13 +1,15 @@
-import React from 'react';
 import {HTML, Image, ThemedImage} from '@gravity-ui/page-constructor';
-import {Icon, Label, Skeleton} from '@gravity-ui/uikit';
 import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
-import starIcon from '../../../../assets/icons/star.svg';
+import {Icon, Label, Skeleton} from '@gravity-ui/uikit';
+import React from 'react';
+
 import calendarIcon from '../../../../assets/icons/calendar.svg';
-import {block, getThemedValue, getMediaImage} from '../../../../utils';
-import './FeatureItem.scss';
-import versions from '../../../../versions.json';
+import starIcon from '../../../../assets/icons/star.svg';
 import stars from '../../../../stars.json';
+import {block, getMediaImage, getThemedValue} from '../../../../utils';
+import versions from '../../../../versions.json';
+
+import './FeatureItem.scss';
 
 const b = block('custom-extended-features-feature-item');
 

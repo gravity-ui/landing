@@ -1,19 +1,21 @@
-import React from 'react';
 import {
-    AnimateBlock,
     Animatable,
-    TitleProps,
-    GridColumnSizesType,
+    AnimateBlock,
     BlockHeader,
-    Row,
     Col,
+    GridColumnSizesType,
+    Row,
     ThemedImage,
+    TitleProps,
 } from '@gravity-ui/page-constructor';
 import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
+import React from 'react';
+
 import {block, getThemedValue} from '../../utils';
 import {CustomBlock} from '../constants';
-import {FeatureItem} from './components/FeatureItem/FeatureItem';
+
 import './CustomExtendedFeatures.scss';
+import {FeatureItem} from './components/FeatureItem/FeatureItem';
 
 const b = block('custom-extended-features');
 

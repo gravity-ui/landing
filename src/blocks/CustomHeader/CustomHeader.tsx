@@ -1,9 +1,11 @@
-import React from 'react';
-import {AnimateBlock, Animatable, HTML} from '@gravity-ui/page-constructor';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
 import {Button, ButtonProps, Icon} from '@gravity-ui/uikit';
+import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import React from 'react';
+
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
+
 import './CustomHeader.scss';
 
 const b = block('custom-header');

@@ -1,16 +1,17 @@
-import {PageContent, Block, BlockType} from '@gravity-ui/page-constructor';
+import {Block, BlockType, PageContent} from '@gravity-ui/page-constructor';
+
 import backgroundAsset from '../assets/background.jpg';
-import featureUnionAsset from '../assets/feature-union.svg';
-import featureStarAsset from '../assets/feature-star.svg';
-import featureShieldAsset from '../assets/feature-shield.svg';
 import bannerAsset from '../assets/banner.svg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
-import companiesTabletAsset from '../assets/companies-tablet.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
+import companiesTabletAsset from '../assets/companies-tablet.svg';
+import featureShieldAsset from '../assets/feature-shield.svg';
+import featureStarAsset from '../assets/feature-star.svg';
+import featureUnionAsset from '../assets/feature-union.svg';
 import githubIcon from '../assets/icons/github.svg';
 import storybookIcon from '../assets/icons/storybook.svg';
-import {CustomBlockModel} from '../blocks/types';
 import {CustomBlock} from '../blocks/constants';
+import {CustomBlockModel} from '../blocks/types';
 import {libs} from '../libs.mjs';
 
 interface CustomPageContent {

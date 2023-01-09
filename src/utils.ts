@@ -1,5 +1,5 @@
-import bemBlock from 'bem-cn-lite';
 import {ImageProps} from '@gravity-ui/page-constructor';
+import bemBlock from 'bem-cn-lite';
 
 export type CnBlock = ReturnType<typeof bemBlock>;
 
