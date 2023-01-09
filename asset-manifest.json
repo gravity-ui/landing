@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.25dbddf9.css",
-    "main.js": "/static/js/main.8f49a148.js",
+    "main.js": "/static/js/main.a5cf3acf.js",
     "static/media/Inter-SemiBoldItalic.woff2": "/static/media/Inter-SemiBoldItalic.d9467ee321a8f38aefff.woff2",
     "static/media/Inter-Italic.woff2": "/static/media/Inter-Italic.cb10ffd7684cd9836a05.woff2",
     "static/media/Inter-SemiBold.woff2": "/static/media/Inter-SemiBold.b5f0f109bc88052d4000.woff2",
@@ -18,6 +18,6 @@
   },
   "entrypoints": [
     "static/css/main.25dbddf9.css",
-    "static/js/main.8f49a148.js"
+    "static/js/main.a5cf3acf.js"
   ]
 }
