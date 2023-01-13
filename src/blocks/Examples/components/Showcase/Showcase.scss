@@ -1,0 +1,231 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$root: '.yc-root';
+$block: '.#{variables.$ns}examples-showcase';
+
+#{$block} {
+    padding: 40px;
+    border-radius: 24px;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        padding: 20px;
+    }
+
+    &__row {
+        display: flex;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            flex-direction: column;
+        }
+    }
+
+    &__col {
+        margin-right: 36px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &_stretch {
+            flex: 1;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            margin-right: 0;
+            margin-bottom: 36px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__sub-row {
+        display: flex;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+        }
+    }
+
+    &__sub-col {
+        margin-right: 36px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &_stretch {
+            flex: 1;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin-right: 0;
+            margin-bottom: 36px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__col-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__col-item-elem {
+        display: flex;
+        align-items: center;
+        margin-right: 32px;
+
+        &_sm-gap {
+            margin-right: 16px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__table-wrapper {
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .yc-radio-group_direction_horizontal {
+        display: flex;
+        align-items: center;
+    }
+
+    .yc-table {
+        &__table {
+            min-width: 100%;
+        }
+    }
+
+    .yc-label_theme_info {
+        color: var(--yc-color-private-brand-1000-solid);
+        background-color: var(--yc-color-private-brand-200);
+    }
+
+    .yc-user-avatar {
+        display: block;
+    }
+}
+
+@function opaque-color($desired-color, $background-color: #fff) {
+    $r1: red($background-color);
+    $g1: green($background-color);
+    $b1: blue($background-color);
+
+    $r2: red($desired-color);
+    $g2: green($desired-color);
+    $b2: blue($desired-color);
+    $a2: alpha($desired-color);
+
+    $r: round($r1 + ($r2 - $r1) * $a2);
+    $g: round($g1 + ($g2 - $g1) * $a2);
+    $b: round($b1 + ($b2 - $b1) * $a2);
+
+    @return rgb($r, $g, $b);
+}
+
+@mixin brand-vars($brand-color, $bg-color) {
+    @for $i from 0 through 10 {
+        $alpha: 1;
+
+        @if $i == 10 {
+            $alpha: 0.05;
+        } @else {
+            $alpha: 1 - 0.1 * $i;
+        }
+
+        $color: change-color($brand-color, $alpha: $alpha);
+        $solid-color: opaque-color($color, $bg-color);
+
+        --yc-color-private-brand-#{$alpha * 1000}: #{$color};
+        --yc-color-private-brand-#{$alpha * 1000}-solid: #{$solid-color};
+    }
+}
+
+#{$root} {
+    &_theme_light {
+        --yc-my-color-brand-normal: var(--yc-color-private-brand-1000-solid);
+        --yc-my-color-brand-normal-hover: var(--yc-color-private-brand-900-solid);
+        --yc-my-color-brand-light: var(--yc-color-private-brand-300);
+        --yc-my-color-brand-selection: var(--yc-color-private-brand-50);
+        --yc-my-color-brand-selection-hover: var(--yc-color-private-brand-100);
+        --yc-my-color-brand-link: var(--yc-my-color-brand-normal);
+        --yc-my-color-brand-link-hover: var(--yc-color-private-brand-1000-solid);
+        --yc-my-color-brand-text-contrast: var(--yc-color-text-light-primary);
+    }
+
+    &_theme_dark {
+        --yc-my-color-brand-normal: var(--yc-color-private-brand-1000-solid);
+        --yc-my-color-brand-normal-hover: var(--yc-color-private-brand-800-solid);
+        --yc-my-color-brand-light: var(--yc-color-private-brand-300);
+        --yc-my-color-brand-selection: var(--yc-color-private-brand-100);
+        --yc-my-color-brand-selection-hover: var(--yc-color-private-brand-200);
+        --yc-my-color-brand-link: var(--yc-my-color-brand-normal);
+        --yc-my-color-brand-link-hover: var(--yc-color-private-brand-1000-solid);
+        --yc-my-color-brand-text-contrast: var(--yc-color-text-light-primary);
+
+        --yc-color-base-background: #251b25;
+    }
+}
+
+#{$block}_color_yellow#{$root} {
+    &_theme_light {
+        @include brand-vars(#ffbe5c, #fff);
+
+        --yc-my-color-brand-text-contrast: var(--yc-color-text-dark-primary);
+    }
+
+    &_theme_dark {
+        @include brand-vars(#ffbe5c, #251b25);
+
+        --yc-my-color-brand-text-contrast: var(--yc-color-text-dark-primary);
+    }
+}
+
+#{$block}_color_red#{$root} {
+    &_theme_light {
+        @include brand-vars(#ff5958, #fff);
+    }
+
+    &_theme_dark {
+        @include brand-vars(#ff5958, #251b25);
+    }
+}
+
+#{$block}_color_green#{$root} {
+    &_theme_light {
+        @include brand-vars(#3bbc50, #fff);
+    }
+
+    &_theme_dark {
+        @include brand-vars(#3bbc50, #251b25);
+    }
+}
+
+#{$block}_color_blue#{$root} {
+    &_theme_light {
+        @include brand-vars(#5282ff, #fff);
+    }
+
+    &_theme_dark {
+        @include brand-vars(#5282ff, #251b25);
+    }
+}

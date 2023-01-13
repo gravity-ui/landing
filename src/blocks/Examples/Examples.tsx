@@ -1,0 +1,101 @@
+import {Animatable, AnimateBlock, BlockHeader} from '@gravity-ui/page-constructor';
+import {Icon, RadioButton, Select, SelectOption, Theme} from '@gravity-ui/uikit';
+import React from 'react';
+
+import darkThemeIcon from '../../assets/icons/dark-theme.svg';
+import lightThemeIcon from '../../assets/icons/light-theme.svg';
+import {block} from '../../utils';
+import {CustomBlock} from '../constants';
+
+import './Examples.scss';
+import {Showcase} from './components/Showcase/Showcase';
+
+const b = block('examples');
+
+export type ExamplesProps = Animatable & {
+    title: string;
+    description?: string;
+    colors: {
+        title: string;
+        value: string;
+    }[];
+};
+
+export type ExamplesModel = ExamplesProps & {
+    type: CustomBlock.Examples;
+};
+
+const themes = [
+    {
+        value: 'dark' as const,
+        icon: <Icon className={b('theme-icon')} data={darkThemeIcon} size={16} />,
+    },
+    {
+        value: 'light' as const,
+        icon: <Icon className={b('theme-icon')} data={lightThemeIcon} size={16} />,
+    },
+];
+
+export const Examples: React.FC<ExamplesProps> = ({animated, title, description, colors}) => {
+    const [color, setColor] = React.useState(colors[0].value);
+    const [theme, setTheme] = React.useState<Theme>(themes[0].value);
+
+    const renderOption = React.useCallback((option: SelectOption) => {
+        return (
+            <div key={option.value} className={b('color-option')}>
+                <div className={b('color-option-icon', {color: option.value})} />
+                {option.content}
+            </div>
+        );
+    }, []);
+
+    return (
+        <AnimateBlock className={b()} animate={animated}>
+            <div className={b('header-wrapper')}>
+                <BlockHeader title={title} description={description} className={b('header')} />
+                <div className={b('controls')}>
+                    <div className={b('control', {type: 'color'})}>
+                        <Select
+                            value={[color]}
+                            renderOption={renderOption}
+                            renderSelectedOption={renderOption}
+                            onUpdate={([newValue]) => setColor(newValue)}
+                            size="l"
+                            width="max"
+                        >
+                            {colors.map((item) => {
+                                return (
+                                    <Select.Option
+                                        key={item.value}
+                                        value={item.value}
+                                        content={item.title}
+                                    />
+                                );
+                            })}
+                        </Select>
+                    </div>
+
+                    <div className={b('control', {type: 'theme'})}>
+                        <RadioButton
+                            options={themes.map((item) => ({
+                                content: item.icon,
+                                value: item.value,
+                            }))}
+                            value={theme}
+                            onUpdate={(newValue) => {
+                                setTheme(newValue);
+                            }}
+                            size="l"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className={b('showcase-wrapper')}>
+                <Showcase color={color} theme={theme} />
+            </div>
+        </AnimateBlock>
+    );
+};
+
+export default Examples;

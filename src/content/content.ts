@@ -76,6 +76,28 @@ const typedContent: CustomPageContent = {
             ],
         },
         {
+            type: CustomBlock.Examples,
+            title: 'Examples',
+            colors: [
+                {
+                    title: 'Yellow',
+                    value: 'yellow',
+                },
+                {
+                    title: 'Red',
+                    value: 'red',
+                },
+                {
+                    title: 'Green',
+                    value: 'green',
+                },
+                {
+                    title: 'Blue',
+                    value: 'blue',
+                },
+            ],
+        },
+        {
             type: CustomBlock.CustomExtendedFeatures,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: 'Our libraries',
