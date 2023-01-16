@@ -1,0 +1,120 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}examples';
+
+#{$block} {
+    @include pcStyles.animate();
+
+    --yc-border-radius-l: 8px;
+
+    &__header-wrapper {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+
+    &__header {
+        flex: 1;
+        margin-right: 20px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin-right: 0;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin-top: 32px;
+        }
+    }
+
+    &__control {
+        margin-right: 16px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        &_type_color {
+            width: 184px;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+                width: 140px;
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                width: auto;
+            }
+        }
+
+        &_type_theme {
+            --yc-color-base-background: rgba(37, 27, 37, 0.8);
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+                .yc-radio-button_size_l .yc-radio-button__option-text {
+                    margin: 0 8px;
+                }
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                .yc-radio-button_size_l {
+                    width: 100%;
+                }
+
+                .yc-radio-button__option {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex: 1;
+        }
+    }
+
+    &__color-option {
+        display: flex;
+        align-items: center;
+    }
+
+    &__color-option-icon {
+        width: 14px;
+        height: 14px;
+        border-radius: 3px;
+        margin-right: 12px;
+
+        &_color_yellow {
+            background-color: #ffbe5c;
+        }
+
+        &_color_red {
+            background-color: #ff5958;
+        }
+
+        &_color_green {
+            background-color: #3bbc50;
+        }
+
+        &_color_blue {
+            background-color: #5282ff;
+        }
+    }
+
+    &__theme-icon {
+        margin: 0 10px;
+    }
+
+    &__showcase-wrapper {
+        margin-top: 32px;
+    }
+}

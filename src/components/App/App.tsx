@@ -12,6 +12,7 @@ import React from 'react';
 import {CustomBanner} from '../../blocks/CustomBanner/CustomBanner';
 import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/CustomExtendedFeatures';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
+import {Examples} from '../../blocks/Examples/Examples';
 import {CustomBlock} from '../../blocks/constants';
 import {content} from '../../content/content';
 import {footer} from '../../content/footer';
@@ -40,6 +41,7 @@ export const App: React.FC = () => {
                             [CustomBlock.CustomHeader]: CustomHeader,
                             [CustomBlock.CustomExtendedFeatures]: CustomExtendedFeatures,
                             [CustomBlock.CustomBanner]: CustomBanner,
+                            [CustomBlock.Examples]: Examples,
                         },
                     }}
                 />
