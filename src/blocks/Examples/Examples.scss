@@ -13,9 +13,9 @@ $block: '.#{variables.$ns}examples';
         display: flex;
         align-items: center;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             flex-direction: column;
-            align-items: flex-start;
+            align-items: stretch;
         }
     }
 
@@ -23,7 +23,7 @@ $block: '.#{variables.$ns}examples';
         flex: 1;
         margin-right: 20px;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             margin-right: 0;
         }
     }
@@ -32,7 +32,7 @@ $block: '.#{variables.$ns}examples';
         display: flex;
         align-items: center;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             margin-top: 32px;
         }
     }
@@ -41,7 +41,7 @@ $block: '.#{variables.$ns}examples';
         margin-right: 16px;
 
         &:last-child {
-            margin-left: 0;
+            margin-right: 0;
         }
 
         &_type_color {
@@ -50,16 +50,35 @@ $block: '.#{variables.$ns}examples';
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
                 width: 140px;
             }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                width: auto;
+            }
         }
 
         &_type_theme {
-            --yc-color-base-background: #2d2c33;
+            --yc-color-base-background: rgba(37, 27, 37, 0.8);
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
                 .yc-radio-button_size_l .yc-radio-button__option-text {
                     margin: 0 8px;
                 }
             }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                .yc-radio-button_size_l {
+                    width: 100%;
+                }
+
+                .yc-radio-button__option {
+                    display: flex;
+                    justify-content: center;
+                }
+            }
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex: 1;
         }
     }
 

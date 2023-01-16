@@ -20,7 +20,6 @@ import React from 'react';
 import avatar1Asset from '../../../../assets/avatar-1.png';
 import avatar2Asset from '../../../../assets/avatar-2.png';
 import avatar3Asset from '../../../../assets/avatar-3.png';
-import gearIcon from '../../../../assets/icons/gear.svg';
 import starFilledIcon from '../../../../assets/icons/star-filled.svg';
 import starIcon from '../../../../assets/icons/star.svg';
 import {block} from '../../../../utils';
@@ -41,7 +40,7 @@ const tableColumns = [
     {id: 'createdBy', name: 'Created by'},
     {id: 'updated', name: 'Updated'},
     {id: 'created', name: 'Created'},
-    {id: 'settings', name: () => <Icon data={gearIcon} size={16} />},
+    {id: 'favorite', name: ''},
 ];
 
 export type ShowcaseProps = {
@@ -50,8 +49,21 @@ export type ShowcaseProps = {
 };
 
 export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
-    const [tableSelectedIds, setTableSelectedIds] = React.useState(['1']);
     const [activeTab, setActiveTab] = React.useState(tabs[0].id);
+
+    const [tableSelectedIds, setTableSelectedIds] = React.useState(['1']);
+
+    const [tableFavoriteIds, setTableFavoriteIds] = React.useState(['1']);
+    const handleStarClick = React.useCallback(
+        (tabId: string) => {
+            if (tableFavoriteIds.includes(tabId)) {
+                setTableFavoriteIds(tableFavoriteIds.filter((item) => item !== tabId));
+            } else {
+                setTableFavoriteIds([...tableFavoriteIds, tabId]);
+            }
+        },
+        [tableFavoriteIds],
+    );
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color})}`}>
@@ -66,8 +78,8 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                     </Button>
                                 </div>
                                 <div className={b('col-item-elem', {'sm-gap': true})}>
-                                    <Button size="xl" view="flat">
-                                        Link
+                                    <Button size="xl" view="outlined">
+                                        Normal
                                     </Button>
                                 </div>
                             </div>
@@ -103,7 +115,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                 />
                             </div>
                             <div className={b('col-item')}>
-                                <RadioButton name="group2" defaultValue="all">
+                                <RadioButton name="group2" defaultValue="all" size="l">
                                     <RadioButton.Option content="All" value="all" />
                                     <RadioButton.Option content="My" value="my" />
                                 </RadioButton>
@@ -126,15 +138,22 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                     createdBy: <UserAvatar imgUrl={avatar1Asset} />,
                                     updated: '28.06.2022',
                                     created: '26.06.2022',
-                                    settings: (
-                                        <Icon
-                                            data={
-                                                tableSelectedIds.includes('0')
-                                                    ? starFilledIcon
-                                                    : starIcon
-                                            }
-                                            size={16}
-                                        />
+                                    favorite: (
+                                        <div
+                                            className={b('star')}
+                                            onClick={() => {
+                                                handleStarClick('0');
+                                            }}
+                                        >
+                                            <Icon
+                                                data={
+                                                    tableFavoriteIds.includes('0')
+                                                        ? starFilledIcon
+                                                        : starIcon
+                                                }
+                                                size={16}
+                                            />
+                                        </div>
                                     ),
                                 },
                                 {
@@ -142,15 +161,22 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                     createdBy: <UserAvatar imgUrl={avatar2Asset} />,
                                     updated: '7.06.2022',
                                     created: '16.06.2022',
-                                    settings: (
-                                        <Icon
-                                            data={
-                                                tableSelectedIds.includes('1')
-                                                    ? starFilledIcon
-                                                    : starIcon
-                                            }
-                                            size={16}
-                                        />
+                                    favorite: (
+                                        <div
+                                            className={b('star')}
+                                            onClick={() => {
+                                                handleStarClick('1');
+                                            }}
+                                        >
+                                            <Icon
+                                                data={
+                                                    tableFavoriteIds.includes('1')
+                                                        ? starFilledIcon
+                                                        : starIcon
+                                                }
+                                                size={16}
+                                            />
+                                        </div>
                                     ),
                                 },
                                 {
@@ -158,15 +184,22 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                     createdBy: <UserAvatar imgUrl={avatar3Asset} />,
                                     updated: '7.06.2022',
                                     created: '20.06.2022',
-                                    settings: (
-                                        <Icon
-                                            data={
-                                                tableSelectedIds.includes('2')
-                                                    ? starFilledIcon
-                                                    : starIcon
-                                            }
-                                            size={16}
-                                        />
+                                    favorite: (
+                                        <div
+                                            className={b('star')}
+                                            onClick={() => {
+                                                handleStarClick('2');
+                                            }}
+                                        >
+                                            <Icon
+                                                data={
+                                                    tableFavoriteIds.includes('2')
+                                                        ? starFilledIcon
+                                                        : starIcon
+                                                }
+                                                size={16}
+                                            />
+                                        </div>
                                     ),
                                 },
                             ]}
