@@ -47,6 +47,24 @@ const typedContent: CustomPageContent = {
                     target: '_blank',
                 },
             ],
+            // news: {
+            //     title: 'Recent updates',
+            //     items: [
+            //         {
+            //             date: '2022-05-10T00:00:00.030Z',
+            //             content: 'A new <a href="#">gravity-icons</a> library has been released',
+            //         },
+            //         {
+            //             date: '2022-01-20T00:00:00.030Z',
+            //             content: 'We have 150 stars at <a href="#">github</a>',
+            //         },
+            //         {
+            //             date: '2020-03-04T00:00:00.030Z',
+            //             content:
+            //                 'A <a href="#">new library</a> has been released, come to the chat',
+            //         },
+            //     ],
+            // },
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
