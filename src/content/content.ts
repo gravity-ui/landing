@@ -43,7 +43,7 @@ const typedContent: CustomPageContent = {
                     text: 'Storybook',
                     view: 'outlined',
                     icon: storybookIcon,
-                    href: 'https://preview.yandexcloud.dev/uikit/',
+                    href: 'https://preview.gravity-ui.com/uikit/',
                     target: '_blank',
                 },
             ],
