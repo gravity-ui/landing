@@ -47,24 +47,26 @@ const typedContent: CustomPageContent = {
                     target: '_blank',
                 },
             ],
-            // news: {
-            //     title: 'Recent updates',
-            //     items: [
-            //         {
-            //             date: '2022-05-10T00:00:00.030Z',
-            //             content: 'A new <a href="#">gravity-icons</a> library has been released',
-            //         },
-            //         {
-            //             date: '2022-01-20T00:00:00.030Z',
-            //             content: 'We have 150 stars at <a href="#">github</a>',
-            //         },
-            //         {
-            //             date: '2020-03-04T00:00:00.030Z',
-            //             content:
-            //                 'A <a href="#">new library</a> has been released, come to the chat',
-            //         },
-            //     ],
-            // },
+            news: {
+                title: 'Recent updates',
+                items: [
+                    {
+                        date: '2023-01-26T15:00:00.000Z',
+                        content:
+                            '<a href="https://github.com/gravity-ui/uikit/releases/tag/v4.0.0" target="_blank" rel="noopener">UIKit v4</a>: featuring React 18 support',
+                    },
+                    {
+                        date: '2023-01-25T00:00:00.000Z',
+                        content:
+                            '<a href="https://github.com/gravity-ui/icons" target="_blank" rel="noopener">Gravity Icons</a>: set of SVG icons for your project',
+                    },
+                    {
+                        date: '2022-12-20T00:00:00.000Z',
+                        content:
+                            '<a href="https://github.com/gravity-ui" target="_blank" rel="noopener">Gravity ecosystem</a> is now open to the public',
+                    },
+                ],
+            },
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
