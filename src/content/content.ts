@@ -58,7 +58,7 @@ const typedContent: CustomPageContent = {
                     {
                         date: '2023-01-25T00:00:00.000Z',
                         content:
-                            '<a href="https://github.com/gravity-ui/uikit" target="_blank" rel="noopener">Gravity Icons</a>: set of SVG icons for your project',
+                            '<a href="https://github.com/gravity-ui/icons" target="_blank" rel="noopener">Gravity Icons</a>: set of SVG icons for your project',
                     },
                     {
                         date: '2022-12-20T00:00:00.000Z',
