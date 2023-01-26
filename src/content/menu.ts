@@ -10,7 +10,7 @@ export const menu = [
     },
     {
         title: 'Storybook',
-        url: 'https://preview.yandexcloud.dev/uikit/',
+        url: 'https://preview.gravity-ui.com/uikit/',
         icon: storybookIcon,
     },
     {
