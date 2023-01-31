@@ -45,6 +45,11 @@ $block: '.#{variables.$ns}custom-header';
     &__news-list {
         max-height: 184px;
         overflow-y: auto;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            max-height: none;
+            overflow-y: hidden;
+        }
     }
 
     &__news-item {
