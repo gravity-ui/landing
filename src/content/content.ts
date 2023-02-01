@@ -134,7 +134,7 @@ const typedContent: CustomPageContent = {
             color: '#23151e',
             image: bannerAsset,
             commands: [
-                'git clone git@github.com:gravity-ui/uikit-example-cra.git my-project',
+                'git clone git@github.com:gravity-ui/uikit-example-cra.git my-project && cd my-project',
                 'npm i',
                 'npm run start',
             ],
