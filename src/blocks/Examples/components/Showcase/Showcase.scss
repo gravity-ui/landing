@@ -227,7 +227,7 @@ $block: '.#{variables.$ns}examples-showcase';
     }
 }
 
-#{$root} {
+#{$block}#{$root} {
     &_theme_light {
         --yc-my-color-brand-normal: var(--yc-color-private-brand-1000-solid);
         --yc-my-color-brand-normal-hover: var(--yc-color-private-brand-900-solid);
