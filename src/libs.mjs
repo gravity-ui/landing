@@ -1,7 +1,7 @@
 export const libs = [
     {
         title: 'UIKit',
-        text: 'A library with a wide range of easy-to-use components for creating interfaces of any complexity.',
+        text: 'A wide range of easy-to-use components for creating interfaces of any complexity.',
         githubId: 'gravity-ui/uikit',
         npmId: '@gravity-ui/uikit',
         storybookUrl: 'https://preview.gravity-ui.com/uikit/',
@@ -15,26 +15,26 @@ export const libs = [
     },
     {
         title: 'ChartKit',
-        text: 'A library for data visualization, integrated with our design system.',
+        text: 'A data visualization suite integrated with our design system.',
         githubId: 'gravity-ui/chartkit',
         npmId: '@gravity-ui/chartkit',
     },
     {
         title: 'Navigation',
-        text: 'Compact and extensible navigation panel for complex services.',
+        text: 'A compact and extensible navigation panel for complex services.',
         githubId: 'gravity-ui/navigation',
         npmId: '@gravity-ui/navigation',
         storybookUrl: 'https://preview.gravity-ui.com/navigation/',
     },
     {
         title: 'Yagr',
-        text: 'High-performance HTML5 canvas chart renderer based on uPlot.',
+        text: 'A high-performance renderer of HTML5 canvas charts, based on uPlot.',
         githubId: 'gravity-ui/yagr',
         npmId: '@gravity-ui/yagr',
     },
     {
         title: 'DashKit',
-        text: 'Grid component for building interactive dashboards.',
+        text: 'A grid component for building interactive dashboards.',
         githubId: 'gravity-ui/dashkit',
         npmId: '@gravity-ui/dashkit',
     },

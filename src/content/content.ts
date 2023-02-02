@@ -53,17 +53,17 @@ const typedContent: CustomPageContent = {
                     {
                         date: '2023-01-26T15:00:00.000Z',
                         content:
-                            '<a href="https://github.com/gravity-ui/uikit/releases/tag/v4.0.0" target="_blank" rel="noopener">UIKit v4</a>: featuring React 18 support',
+                            'New <a href="https://github.com/gravity-ui/uikit/releases/tag/v4.0.0" target="_blank" rel="noopener">UIKit v4</a> features support for React 18',
                     },
                     {
                         date: '2023-01-25T00:00:00.000Z',
                         content:
-                            '<a href="https://github.com/gravity-ui/icons" target="_blank" rel="noopener">Gravity Icons</a>: set of SVG icons for your project',
+                            'New set of SVG icons now available for your project: <a href="https://github.com/gravity-ui/icons" target="_blank" rel="noopener">Gravity Icons</a>',
                     },
                     {
                         date: '2022-12-20T00:00:00.000Z',
                         content:
-                            '<a href="https://github.com/gravity-ui" target="_blank" rel="noopener">Gravity ecosystem</a> is now open to the public',
+                            '<a href="https://github.com/gravity-ui" target="_blank" rel="noopener">Gravity ecosystem</a> now open to the public',
                     },
                 ],
             },
@@ -79,18 +79,18 @@ const typedContent: CustomPageContent = {
             },
             items: [
                 {
-                    title: 'Proven in real life',
-                    text: "We use Gravity ourselves to build a diverse set of complex services. Our libraries are based on developers' real needs and usage cases.",
+                    title: 'Built on real-life experience',
+                    text: "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community.",
                     icon: featureUnionAsset,
                 },
                 {
                     title: 'First class design',
-                    text: 'Experienced designers curate the look of our libraries, so our components are stylish, consistent, and support dark mode and high-contrast themes.',
+                    text: 'Experienced designers curate the look of our libraries, ensuring that components are stylish and consistent, with support for dark mode and high-contrast themes.',
                     icon: featureStarAsset,
                 },
                 {
                     title: 'An evolving ecosystem',
-                    text: 'Our community of developers provide regular feedback that improves our libraries, and we break compatibility only when necessary.',
+                    text: 'Regular feedback from our community of developers allows us to continuously improve our libraries, and break compatibility only when necessary.',
                     icon: featureShieldAsset,
                 },
             ],
@@ -141,7 +141,7 @@ const typedContent: CustomPageContent = {
         },
         {
             type: BlockType.CompaniesBlock,
-            title: 'Used by',
+            title: 'Trusted by',
             images: {
                 desktop: companiesDesktopAsset,
                 tablet: companiesTabletAsset,
