@@ -78,20 +78,19 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                 {news.title ? (
                                     <div className={b('news-title')}>{news.title}</div>
                                 ) : null}
-                                <div className={b('news-list')}>
-                                    {news.items.map((newsItem, index) =>
-                                        newsItem.content ? (
-                                            <div key={index} className={b('news-item')}>
-                                                <div className={b('news-item-date')}>
-                                                    <TimeAgo date={newsItem.date} />
-                                                </div>
-                                                <div className={b('news-item-content')}>
-                                                    <HTML>{newsItem.content}</HTML>
-                                                </div>
+
+                                {news.items.map((newsItem, index) =>
+                                    newsItem.content ? (
+                                        <div key={index} className={b('news-item')}>
+                                            <div className={b('news-item-date')}>
+                                                <TimeAgo date={newsItem.date} />
                                             </div>
-                                        ) : null,
-                                    )}
-                                </div>
+                                            <div className={b('news-item-content')}>
+                                                <HTML>{newsItem.content}</HTML>
+                                            </div>
+                                        </div>
+                                    ) : null,
+                                )}
                             </div>
                         </Col>
                     ) : null}
