@@ -24,7 +24,7 @@ interface CustomPageContent {
 const typedContent: CustomPageContent = {
     background: {
         image: {
-            src: backgroundAsset,
+            src: backgroundAsset.src,
         },
     },
     blocks: [
