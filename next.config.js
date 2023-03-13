@@ -4,8 +4,6 @@ const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')(['@gravity-ui/page-constructor']);
 
-// const cspHeaders = require('./csp');
-
 const plugins = [
     [
         withTM,
@@ -15,13 +13,22 @@ const plugins = [
 
                 config.module.rules.push({
                     test: /\.svg$/,
-                    include: join(__dirname, 'src/assets'),
-                    use: ['url-loader'],
+                    exclude: join(__dirname, 'src/assets/icons'),
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                context: '',
+                                outputPath: 'static',
+                                publicPath: '_next/static',
+                                name: '[path][name].[hash].[ext]',
+                            },
+                        },
+                    ],
                 });
 
                 config.module.rules.push({
-                    test: /\.svg$/,
-                    exclude: join(__dirname, 'src/assets'),
+                    test: /icons\/.*\.svg$/,
                     use: ['@svgr/webpack'],
                 });
 
@@ -39,25 +46,4 @@ const plugins = [
 module.exports = withPlugins(plugins, {
     reactStrictMode: true,
     output: 'export',
-    // async headers() {
-    //     return [
-    //         {
-    //             source: '/:path*',
-    //             headers: [
-    //                 {
-    //                     key: 'Content-Security-Policy',
-    //                     value: cspHeaders,
-    //                 },
-    //             ],
-    //         },
-    //     ];
-    // },
-    // async rewrites() {
-    //     return [
-    //         {
-    //             source: '/robots.txt',
-    //             destination: '/api/robots',
-    //         },
-    //     ];
-    // },
 });
