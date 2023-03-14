@@ -6,7 +6,6 @@ import {
     configure as configurePageConstructor,
 } from '@gravity-ui/page-constructor';
 import {configure as configureUiKit} from '@gravity-ui/uikit';
-import block from 'bem-cn-lite';
 import React from 'react';
 
 import {CustomBanner} from '../../blocks/CustomBanner/CustomBanner';
@@ -25,9 +24,6 @@ const theme = Theme.Dark;
 
 configureUiKit({lang});
 configurePageConstructor({lang});
-
-const b = block('yc-root');
-document.body.classList.add(...b({theme}).split(' '));
 
 export const App: React.FC = () => {
     return (
