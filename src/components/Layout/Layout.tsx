@@ -1,12 +1,16 @@
 import Head from 'next/head';
+import React from 'react';
 
-import {App} from '../components/App/App';
+export type LayoutProps = {
+    title?: string;
+    children: React.ReactNode;
+};
 
-const Home = () => {
+export const Layout: React.FC<LayoutProps> = ({title, children}) => {
     return (
-        <>
+        <React.Fragment>
             <Head>
-                <title>Gravity&nbsp;UI</title>
+                <title>Gravity&nbsp;UI{title ? ` – ${title}` : ''}</title>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="theme-color" content="#160d1b" />
@@ -56,9 +60,7 @@ const Home = () => {
                 <link rel="manifest" href="/manifest.json" />
             </Head>
 
-            <App />
-        </>
+            {children}
+        </React.Fragment>
     );
 };
-
-export default Home;

@@ -4,7 +4,7 @@ import {Head, Html, Main, NextScript} from 'next/document';
 const theme = Theme.Dark;
 const b = block('yc-root');
 
-export default function Document() {
+export const Document = () => {
     return (
         <Html>
             <Head />
@@ -14,4 +14,6 @@ export default function Document() {
             </body>
         </Html>
     );
-}
+};
+
+export default Document;
