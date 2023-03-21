@@ -25,6 +25,7 @@ const typedContent: CustomPageContent = {
     background: {
         image: {
             src: backgroundAsset.src,
+            disableCompress: true,
         },
     },
     blocks: [
