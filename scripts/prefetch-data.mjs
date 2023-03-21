@@ -9,9 +9,9 @@ import {libs} from '../src/libs.mjs';
 
 dotenv.config();
 
-const librariesInfoFilePath = path.join(
+const libsFetchedData = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
-    '../src/libraries-info.json',
+    '../src/libs-data.json',
 );
 
 const fetchNpmInfo = () => {
@@ -64,88 +64,39 @@ const fetchReadmeInfo = () => {
     );
 };
 
-if (fs.existsSync(librariesInfoFilePath) && !process.env.GITHUB_TOKEN) {
+const fetchChangelogInfo = () => {
+    return Promise.all(
+        libs.map(async (item) => {
+            const headers = {'User-Agent': 'request'};
+            if (process.env.GITHUB_TOKEN) {
+                headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+            }
+
+            let data = '';
+
+            if (item.readmeUrl) {
+                const {body} = await request(item.changelogUrl, {
+                    headers,
+                });
+                data = await body.text();
+            }
+
+            return [item.id, data];
+        }),
+    );
+};
+
+if (fs.existsSync(libsFetchedData) && !process.env.GITHUB_TOKEN) {
     console.error(
-        `The libraries-info.json file exists. You can delete it manually for refetch.
+        `The libs-data.json file exists. You can delete it manually for refetch.
 Learn more about the limitations of the GitHub API..
 https://docs.github.com/ru/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28#rate-limiting`,
     );
     process.exit(0);
 }
 
-Promise.all([fetchNpmInfo(), fetchGithubInfo(), fetchReadmeInfo()])
-    .then(([npmInfo, githubInfo, readmeInfo]) => {
-        // Versions
-        const versions = [];
-
-        npmInfo.forEach(([id, data]) => {
-            const libMeta = libs.find((item) => item.id === id);
-
-            const latestVersion = data?.['dist-tags']?.latest;
-            let latestReleaseVersion;
-            let latestReleaseDate;
-            if (latestVersion) {
-                latestReleaseVersion = latestVersion;
-                if (data?.time?.[latestVersion]) {
-                    try {
-                        const date = new Date(data?.time?.[latestVersion]);
-                        const day = date.getUTCDate();
-                        const month = date.getUTCMonth() + 1;
-                        latestReleaseDate = `${day < 10 ? `0${day}` : day}.${
-                            month < 10 ? `0${month}` : month
-                        }.${date.getUTCFullYear()}`;
-                    } catch (error) {
-                        console.log(error);
-                        process.exit(1);
-                    }
-                }
-            } else {
-                throw Error(`No latest version for ${id}`);
-            }
-            versions.push({
-                title: libMeta.npmId,
-                version: latestReleaseVersion,
-                date: latestReleaseDate,
-            });
-        });
-
-        fs.writeFileSync(
-            path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/versions.json'),
-            JSON.stringify(versions),
-            'utf8',
-        );
-
-        // Stars
-        const stars = [];
-
-        githubInfo.forEach(([id, data]) => {
-            const libMeta = libs.find((item) => item.id === id);
-
-            const value = data?.stargazers_count;
-
-            if (value) {
-                stars.push({
-                    title: libMeta.githubId,
-                    stars: value,
-                });
-            } else {
-                throw Error(JSON.stringify(data));
-            }
-        });
-
-        if (stars.length === 0) {
-            console.error('Empty stars');
-            process.exit(1);
-        }
-
-        fs.writeFileSync(
-            path.join(path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/stars.json')),
-            JSON.stringify(stars),
-            'utf8',
-        );
-
-        // Total info
-
+Promise.all([fetchNpmInfo(), fetchGithubInfo(), fetchReadmeInfo(), fetchChangelogInfo()])
+    .then(([npmInfo, githubInfo, readmeInfo, changelogInfo]) => {
         const result = {};
         npmInfo.forEach(([id, data]) => {
             result[id] = {npmInfo: data};
@@ -156,8 +107,49 @@ Promise.all([fetchNpmInfo(), fetchGithubInfo(), fetchReadmeInfo()])
         readmeInfo.forEach(([id, data]) => {
             result[id] = {...result[id], readmeInfo: data};
         });
+        changelogInfo.forEach(([id, data]) => {
+            result[id] = {...result[id], changelogInfo: data};
+        });
 
-        fs.writeFileSync(librariesInfoFilePath, JSON.stringify(result), 'utf8');
+        const praparedResult = {};
+        Object.keys(result).forEach((id) => {
+            const libGithubInfo = result[id].githubInfo;
+            const libNpmInfo = result[id].npmInfo;
+
+            const latestVersion = libNpmInfo?.['dist-tags']?.latest;
+            let latestReleaseVersion = '';
+            let latestReleaseDate = '';
+
+            if (latestVersion) {
+                latestReleaseVersion = latestVersion;
+                if (libNpmInfo?.time?.[latestVersion]) {
+                    try {
+                        const date = new Date(libNpmInfo?.time?.[latestVersion]);
+                        const day = date.getUTCDate();
+                        const month = date.getUTCMonth() + 1;
+                        latestReleaseDate = `${day < 10 ? `0${day}` : day}.${
+                            month < 10 ? `0${month}` : month
+                        }.${date.getUTCFullYear()}`;
+                    } catch (error) {
+                        console.log(error);
+                        process.exit(1);
+                    }
+                }
+            }
+
+            praparedResult[id] = {
+                stars: libGithubInfo?.stargazers_count ?? 0,
+                version: latestReleaseVersion,
+                lastUpdate: latestReleaseDate,
+                license: libGithubInfo?.license?.name ?? '',
+                issues: libGithubInfo?.open_issues_count ?? 0,
+                readme: result[id].readmeInfo,
+                changelog: result[id].changelogInfo,
+                // debug: result[id],
+            };
+        });
+
+        fs.writeFileSync(libsFetchedData, JSON.stringify(praparedResult), 'utf8');
     })
     .catch((err) => {
         console.error(err.message);

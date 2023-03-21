@@ -1,0 +1,14 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}layout';
+
+#{$block} {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+    &__content {
+        flex: 1;
+    }
+}

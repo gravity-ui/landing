@@ -21,7 +21,7 @@ interface CustomPageContent {
     footnotes?: PageContent['footnotes'];
 }
 
-const typedContent: CustomPageContent = {
+const typedLanding: CustomPageContent = {
     background: {
         image: {
             src: backgroundAsset.src,
@@ -80,17 +80,20 @@ const typedContent: CustomPageContent = {
             items: [
                 {
                     title: 'Built on real-life experience',
-                    text: "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community.",
+                    description:
+                        "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community.",
                     icon: featureUnionAsset,
                 },
                 {
                     title: 'First class design',
-                    text: 'Experienced designers curate the look of our libraries, ensuring that components are stylish and consistent, with support for dark mode and high-contrast themes.',
+                    description:
+                        'Experienced designers curate the look of our libraries, ensuring that components are stylish and consistent, with support for dark mode and high-contrast themes.',
                     icon: featureStarAsset,
                 },
                 {
                     title: 'An evolving ecosystem',
-                    text: 'Regular feedback from our community of developers allows us to continuously improve our libraries, and break compatibility only when necessary.',
+                    description:
+                        'Regular feedback from our community of developers allows us to continuously improve our libraries, and break compatibility only when necessary.',
                     icon: featureShieldAsset,
                 },
             ],
@@ -121,6 +124,10 @@ const typedContent: CustomPageContent = {
             type: CustomBlock.CustomExtendedFeatures,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: 'Our libraries',
+            button: {
+                text: 'All libraries',
+                href: '/libraries',
+            },
             colSizes: {
                 all: 12,
                 md: 6,
@@ -151,6 +158,6 @@ const typedContent: CustomPageContent = {
     ],
 };
 
-const content = typedContent as PageContent;
+const landing = typedLanding as PageContent;
 
-export {content};
+export {landing};

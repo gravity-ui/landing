@@ -1,15 +1,12 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
-import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
 
 import {Layout} from '../../components/Layout/Layout';
-import librariesInfo from '../../libraries-info.json';
-import '../../styles.scss';
-import '../../vendors.scss';
+import {Library} from '../../components/Library/Library';
+import {libs} from '../../libs.mjs';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
-        paths: Object.keys(librariesInfo).map((id) => ({params: {id}})),
+        paths: libs.map((item) => ({params: {id: item.id}})),
         fallback: false, // can also be true or 'blocking'
     };
 };
@@ -20,17 +17,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
 };
 
-export const Library = ({id}: {id: string}) => {
-    const libraryInfo = librariesInfo[id] as unknown as any;
+export const LibraryPage = ({id}: {id: string}) => {
+    const libConfig = libs.find((item) => item.id === id);
+
     return (
-        <Layout title={`Library – ${id}`}>
-            <div>
-                <Link href="/libraries">Back to libraries</Link>
-            </div>
-            <div>LIBRARY – {id}</div>
-            <ReactMarkdown children={libraryInfo?.readmeInfo} />
+        <Layout title={libConfig?.title}>
+            <Library id={id} />
         </Layout>
     );
 };
 
-export default Library;
+export default LibraryPage;

@@ -1,33 +1,23 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
 import React from 'react';
 
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
+import {footer} from '../../content/footer';
+import {socialLinks} from '../../content/social-links';
 import {block} from '../../utils';
 
 import './Footer.scss';
 
 const b = block('footer');
 
-type MenuItem = {
-    title: string;
-    url: string;
-    icon: SVGIconData;
-};
-
-export type FooterProps = {
-    text: string;
-    menu: MenuItem[];
-};
-
-export const Footer: React.FC<FooterProps> = ({text, menu}) => (
+export const Footer: React.FC = () => (
     <Grid>
         <Row>
             <Col sizes={{sm: 12}}>
                 <footer className={b()}>
                     <div className={b('menu')}>
-                        {menu.map((item) => (
+                        {socialLinks.map((item) => (
                             <a
                                 key={item.title}
                                 className={b('menu-link')}
@@ -46,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({text, menu}) => (
                             </a>
                         ))}
                     </div>
-                    <div className={b('text')}>{text}</div>
+                    <div className={b('text')}>{footer.text}</div>
                 </footer>
             </Col>
         </Row>

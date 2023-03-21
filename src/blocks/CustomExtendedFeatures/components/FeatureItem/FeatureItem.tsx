@@ -5,9 +5,8 @@ import React from 'react';
 
 import calendarIcon from '../../../../assets/icons/calendar.svg';
 import starIcon from '../../../../assets/icons/star.svg';
-import stars from '../../../../stars.json';
+import libsData from '../../../../libs-data.json';
 import {block, getMediaImage, getThemedValue} from '../../../../utils';
-import versions from '../../../../versions.json';
 
 import './FeatureItem.scss';
 
@@ -16,8 +15,9 @@ const b = block('custom-extended-features-feature-item');
 const githubUrl = 'https://github.com/';
 
 export type FeatureItemProps = {
+    id?: string;
     title?: string;
-    text: string;
+    description?: string;
     icon?: ThemedImage;
     contentStyle: Record<string, unknown>;
     githubId?: string;
@@ -25,9 +25,11 @@ export type FeatureItemProps = {
     storybookUrl?: string;
 };
 
+// eslint-disable-next-line complexity
 export const FeatureItem: React.FC<FeatureItemProps> = ({
+    id,
     title,
-    text,
+    description,
     icon,
     contentStyle,
     githubId,
@@ -43,17 +45,13 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     let latestReleaseVersion;
     let latestReleaseDate;
 
-    if (githubId) {
-        const libStars = stars.find((elem) => elem.title === githubId);
-        if (libStars) {
-            starsCount = libStars.stars;
-        }
-    }
-    if (npmId) {
-        const version = versions.find((elem) => elem.title === npmId);
-        if (version) {
-            latestReleaseVersion = version.version;
-            latestReleaseDate = version.date;
+    if (id) {
+        const libData = (libsData as unknown as any)[id];
+
+        if (libData) {
+            starsCount = libData.stars ?? 0;
+            latestReleaseVersion = libData?.version ?? '–';
+            latestReleaseDate = libData.lastUpdate ?? '–';
         }
     }
 
@@ -82,7 +80,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                 ) : null}
             </div>
 
-            <div className={b('text')}>{text}</div>
+            <div className={b('text')}>{description}</div>
 
             {npmId ? (
                 <div className={b('release-info')}>

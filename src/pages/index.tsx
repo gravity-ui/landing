@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
-import {App} from '../components/App/App';
+import {Landing} from '../components/Landing/Landing';
+import {Layout} from '../components/Layout/Layout';
 
 const Home = () => {
     return (
@@ -56,7 +57,9 @@ const Home = () => {
                 <link rel="manifest" href="/manifest.json" />
             </Head>
 
-            <App />
+            <Layout>
+                <Landing />
+            </Layout>
         </>
     );
 };

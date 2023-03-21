@@ -1,24 +1,12 @@
-import Link from 'next/link';
-
 import {Layout} from '../../components/Layout/Layout';
-import librariesInfo from '../../libraries-info.json';
-import '../../styles.scss';
-import '../../vendors.scss';
+import {Libraries} from '../../components/Libraries/Libraries';
 
-export const Libraries = () => {
+export const LibrariesPage = () => {
     return (
         <Layout title="Libraries">
-            <Link href="/">Back to home</Link>
-            <div>LIBRARIES:</div>
-            {Object.keys(librariesInfo).map((id) => {
-                return (
-                    <div key={id}>
-                        <Link href={`/libraries/${id}`}>{id}</Link>
-                    </div>
-                );
-            })}
+            <Libraries />
         </Layout>
     );
 };
 
-export default Libraries;
+export default LibrariesPage;

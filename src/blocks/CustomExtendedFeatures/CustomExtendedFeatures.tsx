@@ -2,6 +2,7 @@ import {
     Animatable,
     AnimateBlock,
     BlockHeader,
+    Button,
     Col,
     GridColumnSizesType,
     Row,
@@ -9,6 +10,7 @@ import {
     TitleProps,
 } from '@gravity-ui/page-constructor';
 import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
+import Link from 'next/link';
 import React from 'react';
 
 import {block, getThemedValue} from '../../utils';
@@ -26,18 +28,27 @@ const DEFAULT_SIZES = {
 };
 
 type Item = {
-    title?: string;
-    text: string;
-    icon?: ThemedImage;
+    id?: string;
     githubId?: string;
     npmId?: string;
+    title?: string;
+    description?: string;
+    icon?: ThemedImage;
     storybookUrl?: string;
+    readmeUrl?: string;
+    changelogUrl?: string;
+};
+
+type CustomButton = {
+    text: string;
+    href: string;
 };
 
 export type CustomExtendedFeaturesProps = Animatable & {
-    items: Item[];
     title?: TitleProps | string;
     description?: string;
+    button?: CustomButton;
+    items: Item[];
     colSizes?: GridColumnSizesType;
     backgroundColor?: string;
     backdropFilter?: string;
@@ -50,6 +61,7 @@ export type CustomExtendedFeaturesModel = CustomExtendedFeaturesProps & {
 export const CustomExtendedFeatures = ({
     title,
     description,
+    button,
     items,
     colSizes = DEFAULT_SIZES,
     animated,
@@ -70,26 +82,59 @@ export const CustomExtendedFeatures = ({
 
     return (
         <AnimateBlock className={b()} animate={animated}>
-            <BlockHeader title={title} description={description} className={b('header')} />
+            <div className={b('header')}>
+                <div className={b('header-title')}>
+                    <BlockHeader title={title} description={description} />
+                </div>
+                {button && (
+                    <div className={b('button-desktop')}>
+                        <Link href={button.href}>
+                            <a>
+                                <Button size="xl" theme="outlined" text={button.text} />
+                            </a>
+                        </Link>
+                    </div>
+                )}
+            </div>
             <div className={b('items')}>
                 <Row>
-                    {items.map(({title: itemTitle, text, icon, githubId, npmId, storybookUrl}) => {
-                        return (
-                            <Col className={b('item')} key={text || itemTitle} sizes={colSizes}>
-                                <FeatureItem
-                                    title={itemTitle}
-                                    text={text}
-                                    icon={icon}
-                                    contentStyle={contentStyle}
-                                    githubId={githubId}
-                                    npmId={npmId}
-                                    storybookUrl={storybookUrl}
-                                />
-                            </Col>
-                        );
-                    })}
+                    {items.map(
+                        ({
+                            id,
+                            title: itemTitle,
+                            description: itemDescription,
+                            icon,
+                            githubId,
+                            npmId,
+                            storybookUrl,
+                        }) => {
+                            return (
+                                <Col className={b('item')} key={id} sizes={colSizes}>
+                                    <FeatureItem
+                                        id={id}
+                                        title={itemTitle}
+                                        description={itemDescription}
+                                        icon={icon}
+                                        contentStyle={contentStyle}
+                                        githubId={githubId}
+                                        npmId={npmId}
+                                        storybookUrl={storybookUrl}
+                                    />
+                                </Col>
+                            );
+                        },
+                    )}
                 </Row>
             </div>
+            {button && (
+                <div className={b('button-mobile')}>
+                    <Link href={button.href}>
+                        <a>
+                            <Button size="xl" theme="outlined" text={button.text} />
+                        </a>
+                    </Link>
+                </div>
+            )}
         </AnimateBlock>
     );
 };
