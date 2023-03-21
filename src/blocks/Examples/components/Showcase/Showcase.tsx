@@ -135,7 +135,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                             data={[
                                 {
                                     title: 'Weekly Sync',
-                                    createdBy: <UserAvatar imgUrl={avatar1Asset} />,
+                                    createdBy: <UserAvatar imgUrl={avatar1Asset.src} />,
                                     updated: '28.06.2022',
                                     created: '26.06.2022',
                                     favorite: (
@@ -158,7 +158,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                 },
                                 {
                                     title: 'Campaign brainstorm',
-                                    createdBy: <UserAvatar imgUrl={avatar2Asset} />,
+                                    createdBy: <UserAvatar imgUrl={avatar2Asset.src} />,
                                     updated: '7.06.2022',
                                     created: '16.06.2022',
                                     favorite: (
@@ -181,7 +181,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                 },
                                 {
                                     title: 'Logo redesign',
-                                    createdBy: <UserAvatar imgUrl={avatar3Asset} />,
+                                    createdBy: <UserAvatar imgUrl={avatar3Asset.src} />,
                                     updated: '7.06.2022',
                                     created: '20.06.2022',
                                     favorite: (
