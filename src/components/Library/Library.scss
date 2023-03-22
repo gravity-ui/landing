@@ -4,10 +4,10 @@
 $block: '.#{variables.$ns}library';
 
 #{$block} {
-    margin: 56px 0;
+    margin: 24px 0 0;
 
     &__breadcrumbs {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     &__title {
@@ -17,18 +17,105 @@ $block: '.#{variables.$ns}library';
         font-weight: 500;
     }
 
+    &__description {
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 400;
+    }
+
+    &__header {
+        padding: 32px;
+        border-radius: 24px;
+        color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(37, 27, 37, 0.5);
+        margin-bottom: 24px;
+
+        &_primary {
+            // background-image: url('../../assets/primary-lib-background-lg.svg');
+            background-size: cover;
+        }
+    }
+
     &__block {
         padding: 32px;
         border-radius: 24px;
         color: rgba(255, 255, 255, 0.7);
         background-color: rgba(37, 27, 37, 0.5);
+    }
 
-        &_header {
-            margin-bottom: 24px;
+    &__content {
+        margin-top: 40px;
+        overflow-x: auto;
+
+        a {
+            color: #fff;
+        }
+
+        pre {
+            padding: 16px;
+            border-radius: 12px;
+            background-color: #160d1b;
         }
     }
 
     &__link {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        margin-top: 24px;
+    }
+
+    &__button {
+        margin-left: 16px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    &__info-title {
+        margin-bottom: 16px;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 500;
+    }
+
+    &__info-item {
+        display: flex;
+        margin-top: 20px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__info-item-content {
+        margin-left: 16px;
+    }
+
+    &__info-item-title {
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        opacity: 0.6;
+    }
+
+    &__info-item-value {
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    &__info-link {
         color: #fff;
         text-decoration: none;
 

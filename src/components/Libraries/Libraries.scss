@@ -1,10 +1,11 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}libraries';
 
 #{$block} {
-    margin: 56px 0;
+    margin: 56px 0 0;
 
     &__title {
         margin: 0 0 24px;
@@ -30,5 +31,141 @@ $block: '.#{variables.$ns}libraries';
         font-size: 20px;
         line-height: 20px;
         font-weight: 400;
+    }
+
+    &__library {
+        display: block;
+        flex: 1;
+        padding: 32px;
+        margin-top: pcVariables.$indentM;
+        border-radius: 24px;
+        text-decoration: none;
+        background-color: rgba(37, 27, 37, 0.5);
+        color: rgba(255, 255, 255, 0.7);
+
+        &_primary {
+            // background-image: url('../../assets/primary-lib-background.svg');
+            background-size: cover;
+        }
+
+        &_active {
+            transition: transform 0.2s ease-in-out;
+
+            #{$block}__button {
+                opacity: 0;
+                transform: translateY(50%);
+                transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+            }
+
+            &:hover {
+                transform: translateY(-8px);
+
+                #{$block}__button {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+                #{$block}__button {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                &:hover {
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+
+    &__library-header {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__library-title {
+        flex: 1;
+
+        @include pcStyles.heading4();
+
+        display: flex;
+        position: relative;
+        margin-bottom: pcVariables.$indentXXXS;
+
+        a {
+            @include pcStyles.link();
+        }
+    }
+
+    &__stars {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+    }
+
+    &__stars-count {
+        margin-left: 6px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    &__text {
+        @include pcStyles.text-size(body-2);
+
+        a {
+            @include pcStyles.link();
+        }
+    }
+
+    &__release-info {
+        display: flex;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    & &__release-label {
+        margin-right: 8px;
+        background-color: #ffbe5c;
+        color: rgba(0, 0, 0, 0.85);
+    }
+
+    &__release-date {
+        margin-left: 8px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    & &__release-skeleton {
+        height: 20px;
+        width: 120px;
+        border-radius: 8px;
+    }
+
+    &__buttons {
+        display: flex;
+        margin-top: 32px;
+    }
+
+    &__button {
+        display: block;
+        margin-right: 16px;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 20px;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7);
+
+        &:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
