@@ -55,6 +55,11 @@ $block: '.#{variables.$ns}library';
         line-height: 56px;
         font-weight: 600;
         color: #fff;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            font-size: 40px;
+            line-height: 48px;
+        }
     }
 
     &__description {
@@ -97,7 +102,17 @@ $block: '.#{variables.$ns}library';
         margin-top: 40px;
         overflow-x: auto;
         font-size: 14px;
+        line-height: 1.5em;
         color: rgba(255, 255, 255, 0.85);
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.5em;
+        }
 
         a {
             color: #ffbe5c;

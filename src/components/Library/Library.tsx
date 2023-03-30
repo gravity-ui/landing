@@ -34,9 +34,19 @@ type Props = {
 export const Library: React.FC<Props> = ({id}) => {
     const lib = getLibById(id);
 
-    const [activeTab, setActiveTab] = React.useState(Tab.Readme);
+    const contentTabs = [
+        {
+            id: Tab.Readme,
+            title: 'Readme',
+        },
+    ];
 
-    const [isVisibleInfoListMobile, setIsVisibleInfoListMobile] = React.useState(false);
+    if (lib.data.changelog) {
+        contentTabs.push({
+            id: Tab.Changelog,
+            title: 'Changelog',
+        });
+    }
 
     const infoList = [
         {
@@ -84,6 +94,10 @@ export const Library: React.FC<Props> = ({id}) => {
         //     icon: issuesIcon,
         // },
     ];
+
+    const [activeTab, setActiveTab] = React.useState(contentTabs[0].id);
+
+    const [isVisibleInfoListMobile, setIsVisibleInfoListMobile] = React.useState(false);
 
     const isPrimary = lib.config.primary;
 
@@ -163,16 +177,7 @@ export const Library: React.FC<Props> = ({id}) => {
                         <div className={b('block')}>
                             <Tabs
                                 size="xl"
-                                items={[
-                                    {
-                                        id: Tab.Readme,
-                                        title: 'Readme',
-                                    },
-                                    {
-                                        id: Tab.Changelog,
-                                        title: 'Changelog',
-                                    },
-                                ]}
+                                items={contentTabs}
                                 activeTab={activeTab}
                                 onSelectTab={(selectedTab) => {
                                     setActiveTab(selectedTab as Tab);
@@ -180,6 +185,7 @@ export const Library: React.FC<Props> = ({id}) => {
                             />
                             <div className={b('content')}>
                                 <ReactMarkdown
+                                    skipHtml
                                     children={
                                         activeTab === Tab.Readme
                                             ? lib.data.readme

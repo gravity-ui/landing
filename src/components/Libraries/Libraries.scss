@@ -12,6 +12,7 @@ $block: '.#{variables.$ns}libraries';
         font-size: 48px;
         line-height: 56px;
         font-weight: 600;
+        color: #fff;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             font-size: 32px;
@@ -78,6 +79,7 @@ $block: '.#{variables.$ns}libraries';
         display: flex;
         position: relative;
         margin-bottom: pcVariables.$indentXXXS;
+        color: #fff;
 
         a {
             @include pcStyles.link();
