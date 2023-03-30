@@ -19,9 +19,15 @@ const fetchNpmInfo = () => {
     return Promise.all(
         libs.map(async (item) => {
             if (item.npmId) {
-                const {body} = await request(`${npmApiUrl}${item.npmId}`);
-                const data = await body.json();
-                return [item.id, data];
+                try {
+                    const {statusCode, body} = await request(`${npmApiUrl}${item.npmId}`);
+                    if (statusCode >= 200 && statusCode < 300) {
+                        const data = await body.json();
+                        return [item.id, data];
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
             }
             return [item.id, null];
         }),
@@ -33,15 +39,21 @@ const fetchGithubInfo = () => {
     return Promise.all(
         libs.map(async (item) => {
             if (item.githubId) {
-                const headers = {'User-Agent': 'request'};
-                if (process.env.GITHUB_TOKEN) {
-                    headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+                try {
+                    const headers = {'User-Agent': 'request'};
+                    if (process.env.GITHUB_TOKEN) {
+                        headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+                    }
+                    const {statusCode, body} = await request(`${githubApiUrl}${item.githubId}`, {
+                        headers,
+                    });
+                    if (statusCode >= 200 && statusCode < 300) {
+                        const data = await body.json();
+                        return [item.id, data];
+                    }
+                } catch (err) {
+                    console.error(err);
                 }
-                const {body} = await request(`${githubApiUrl}${item.githubId}`, {
-                    headers,
-                });
-                const data = await body.json();
-                return [item.id, data];
             }
             return [item.id, null];
         }),
@@ -59,10 +71,16 @@ const fetchReadmeInfo = () => {
             let data = '';
 
             if (item.readmeUrl) {
-                const {body} = await request(item.readmeUrl, {
-                    headers,
-                });
-                data = await body.text();
+                try {
+                    const {statusCode, body} = await request(item.readmeUrl, {
+                        headers,
+                    });
+                    if (statusCode >= 200 && statusCode < 300) {
+                        data = await body.text();
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
             }
 
             return [item.id, data];
@@ -81,10 +99,16 @@ const fetchChangelogInfo = () => {
             let data = '';
 
             if (item.changelogUrl) {
-                const {body} = await request(item.changelogUrl, {
-                    headers,
-                });
-                data = await body.text();
+                try {
+                    const {statusCode, body} = await request(item.changelogUrl, {
+                        headers,
+                    });
+                    if (statusCode >= 200 && statusCode < 300) {
+                        data = await body.text();
+                    }
+                } catch (err) {
+                    console.error(err);
+                }
             }
 
             return [item.id, data];

@@ -58,13 +58,13 @@ export const Library: React.FC<Props> = ({id}) => {
         {
             id: 'version',
             title: 'Version',
-            value: lib.data.version,
+            value: lib.data.version || '–',
             icon: versionIcon,
         },
         {
             id: 'lastUpdate',
             title: 'Last update',
-            value: lib.data.lastUpdate,
+            value: lib.data.lastUpdate || '–',
             icon: lastUpdateIcon,
         },
         {
@@ -84,7 +84,7 @@ export const Library: React.FC<Props> = ({id}) => {
         {
             id: 'license',
             title: 'License',
-            value: lib.data.license,
+            value: lib.data.license || '–',
             icon: licenseIcon,
         },
         // {
@@ -222,7 +222,7 @@ export const Library: React.FC<Props> = ({id}) => {
                                     {infoList.map((item) => (
                                         <div key={item.id} className={b('info-item')}>
                                             <div className={b('info-item-icon')}>
-                                                <Icon data={item.icon} size={22} />
+                                                <Icon data={item.icon} width={24} height={22} />
                                             </div>
                                             <div className={b('info-item-content')}>
                                                 <div className={b('info-item-title')}>
