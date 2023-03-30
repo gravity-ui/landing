@@ -68,6 +68,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         }
 
         &_active {
+            border-top: 4px solid transparent;
             border-bottom: 4px solid #ffbe5c;
         }
     }
