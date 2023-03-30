@@ -1,14 +1,13 @@
 import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
-import {Icon, Label, TextInput} from '@gravity-ui/uikit';
+import {Icon, TextInput} from '@gravity-ui/uikit';
 import Link from 'next/link';
 import React from 'react';
 
 import calendarIcon from '../../assets/icons/calendar.svg';
 import starIcon from '../../assets/icons/star.svg';
+import versionIcon from '../../assets/icons/version.svg';
 import primaryLibBackround from '../../assets/primary-lib-background.svg';
-import libsData from '../../libs-data.json';
-import {libs} from '../../libs.mjs';
-import {block} from '../../utils';
+import {block, getLibsList} from '../../utils';
 
 import './Libraries.scss';
 import {TagItem, Tags} from './Tags/Tags';
@@ -34,10 +33,25 @@ const tags: TagItem[] = [
     },
 ];
 
-const githubUrl = 'https://github.com/';
-
 export const Libraries = () => {
     const [activeTag, setActivaTag] = React.useState(tags[0].value);
+    const [filterString, setFilterString] = React.useState('');
+
+    const libs = getLibsList();
+
+    let filteredLibs =
+        activeTag === 'all' ? libs : libs.filter((item) => item.config.tags.includes(activeTag));
+
+    if (filterString) {
+        const lowerCaseFilterString = filterString.toLowerCase();
+        filteredLibs = filteredLibs.filter(
+            (item) =>
+                item.config.title.toLowerCase().includes(lowerCaseFilterString) ||
+                item.config.description.toLowerCase().includes(lowerCaseFilterString),
+        );
+    }
+
+    const filtersIsActive = Boolean(filterString) || activeTag !== 'all';
 
     return (
         <div className={b()}>
@@ -48,112 +62,93 @@ export const Libraries = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col sizes={9}>
+                    <Col sizes={{all: 12, md: 8, lg: 9}}>
                         <Tags items={tags} value={activeTag} onChange={setActivaTag} />
                     </Col>
-                    <Col sizes={3}>
-                        <TextInput size="xl" placeholder="Search by name or description" />
+                    <Col sizes={{all: 12, md: 4, lg: 3}}>
+                        <div className={b('search')}>
+                            <TextInput
+                                value={filterString}
+                                onUpdate={setFilterString}
+                                size="xl"
+                                placeholder="Search by name or description"
+                            />
+                        </div>
                     </Col>
                 </Row>
-                <Row>
-                    {libs.map((libConfig) => {
-                        const libData = (libsData as unknown as any)[libConfig.id];
-                        const isPrimary = Boolean(
-                            libConfig.id === 'uikit' || libConfig.id === 'page-constructor',
-                        );
-                        return (
-                            <Col sizes={4} key={libConfig.id}>
-                                <Link href={`/libraries/${libConfig.id}`}>
-                                    <a
-                                        className={b('library', {
-                                            active: Boolean(
-                                                libConfig.githubId || libConfig.storybookUrl,
-                                            ),
-                                            primary: isPrimary,
-                                        })}
-                                        style={
-                                            isPrimary
-                                                ? {
-                                                      backgroundImage: `url(/${primaryLibBackround})`,
-                                                  }
-                                                : {}
-                                        }
-                                    >
-                                        <div className={b('library-header')}>
-                                            <h5 className={b('library-title')}>
-                                                <HTML>{libConfig.title}</HTML>
-                                            </h5>
-                                            {libData.stars ? (
-                                                <div className={b('stars')}>
-                                                    <Icon data={starIcon} size={19} />
-                                                    <div className={b('stars-count')}>
-                                                        {libData.stars}
+                {filteredLibs.length === 0 ? (
+                    <div className={b('empty')}>Nothing found</div>
+                ) : (
+                    <Row>
+                        {filteredLibs.map((lib) => {
+                            const isPrimary = lib.config.primary;
+
+                            let lgSize = 4;
+                            if (isPrimary) lgSize = 8;
+                            if (filtersIsActive) lgSize = 12;
+
+                            return (
+                                <Col
+                                    key={lib.config.id}
+                                    className={b('col')}
+                                    sizes={{all: 12, lg: lgSize}}
+                                >
+                                    <Link href={`/libraries/${lib.config.id}`}>
+                                        <a
+                                            className={b('library', {
+                                                primary: isPrimary,
+                                            })}
+                                            style={
+                                                isPrimary
+                                                    ? {
+                                                          backgroundImage: `url(/${primaryLibBackround})`,
+                                                      }
+                                                    : {}
+                                            }
+                                        >
+                                            <div className={b('library-header')}>
+                                                <h5 className={b('library-title')}>
+                                                    <HTML>{lib.config.title}</HTML>
+                                                </h5>
+                                                {lib.data.stars ? (
+                                                    <div className={b('stars')}>
+                                                        <Icon data={starIcon} size={19} />
+                                                        <div className={b('stars-count')}>
+                                                            {lib.data.stars}
+                                                        </div>
                                                     </div>
+                                                ) : null}
+                                            </div>
+
+                                            <div className={b('description')}>
+                                                {lib.config.description}
+                                            </div>
+
+                                            {lib.config.npmId && lib.data.version ? (
+                                                <div className={b('release-info')}>
+                                                    <div className={b('release-info-block')}>
+                                                        <Icon data={versionIcon} size={16} />
+                                                        <div className={b('release-version')}>
+                                                            v{lib.data.version}
+                                                        </div>
+                                                    </div>
+                                                    {lib.data.lastUpdate ? (
+                                                        <div className={b('release-info-block')}>
+                                                            <Icon data={calendarIcon} size={16} />
+                                                            <div className={b('release-date')}>
+                                                                {lib.data.lastUpdate}
+                                                            </div>
+                                                        </div>
+                                                    ) : null}
                                                 </div>
                                             ) : null}
-                                        </div>
-
-                                        <div className={b('text')}>{libConfig.description}</div>
-
-                                        {libConfig.npmId ? (
-                                            <div className={b('release-info')}>
-                                                {libData.version && (
-                                                    <React.Fragment>
-                                                        <Label className={b('release-label')}>
-                                                            v{libData.version}
-                                                        </Label>
-                                                        {libData.lastUpdate ? (
-                                                            <React.Fragment>
-                                                                <Icon
-                                                                    data={calendarIcon}
-                                                                    size={16}
-                                                                />
-                                                                <div className={b('release-date')}>
-                                                                    {libData.lastUpdate}
-                                                                </div>
-                                                            </React.Fragment>
-                                                        ) : null}
-                                                    </React.Fragment>
-                                                )}
-                                            </div>
-                                        ) : null}
-
-                                        {libConfig.githubId || libConfig.storybookUrl ? (
-                                            <div className={b('buttons')}>
-                                                {libConfig.githubId ? (
-                                                    <a
-                                                        key="github"
-                                                        className={b('button')}
-                                                        href={`${githubUrl}${libConfig.githubId}`}
-                                                        target="_blank"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                        }}
-                                                    >
-                                                        Github
-                                                    </a>
-                                                ) : null}
-                                                {libConfig.storybookUrl ? (
-                                                    <a
-                                                        key="storybook"
-                                                        className={b('button')}
-                                                        href={libConfig.storybookUrl}
-                                                        target="_blank"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                        }}
-                                                    >
-                                                        Storybook
-                                                    </a>
-                                                ) : null}
-                                            </div>
-                                        ) : null}
-                                    </a>
-                                </Link>
-                            </Col>
-                        );
-                    })}
-                </Row>
+                                        </a>
+                                    </Link>
+                                </Col>
+                            );
+                        })}
+                    </Row>
+                )}
             </Grid>
         </div>
     );

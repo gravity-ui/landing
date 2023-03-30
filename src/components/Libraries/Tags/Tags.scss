@@ -5,6 +5,9 @@ $block: '.#{variables.$ns}tags';
 
 #{$block} {
     display: flex;
+    overflow-x: auto;
+
+    --yc-scrollbar-width: 0;
 
     &__tag {
         padding: 11px 24px;

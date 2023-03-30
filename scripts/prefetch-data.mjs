@@ -18,9 +18,12 @@ const fetchNpmInfo = () => {
     const npmApiUrl = 'https://registry.npmjs.org/';
     return Promise.all(
         libs.map(async (item) => {
-            const {body} = await request(`${npmApiUrl}${item.npmId}`);
-            const data = await body.json();
-            return [item.id, data];
+            if (item.npmId) {
+                const {body} = await request(`${npmApiUrl}${item.npmId}`);
+                const data = await body.json();
+                return [item.id, data];
+            }
+            return [item.id, null];
         }),
     );
 };
@@ -29,15 +32,18 @@ const fetchGithubInfo = () => {
     const githubApiUrl = 'https://api.github.com/repos/';
     return Promise.all(
         libs.map(async (item) => {
-            const headers = {'User-Agent': 'request'};
-            if (process.env.GITHUB_TOKEN) {
-                headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+            if (item.githubId) {
+                const headers = {'User-Agent': 'request'};
+                if (process.env.GITHUB_TOKEN) {
+                    headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+                }
+                const {body} = await request(`${githubApiUrl}${item.githubId}`, {
+                    headers,
+                });
+                const data = await body.json();
+                return [item.id, data];
             }
-            const {body} = await request(`${githubApiUrl}${item.githubId}`, {
-                headers,
-            });
-            const data = await body.json();
-            return [item.id, data];
+            return [item.id, null];
         }),
     );
 };
@@ -74,7 +80,7 @@ const fetchChangelogInfo = () => {
 
             let data = '';
 
-            if (item.readmeUrl) {
+            if (item.changelogUrl) {
                 const {body} = await request(item.changelogUrl, {
                     headers,
                 });

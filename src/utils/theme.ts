@@ -1,16 +1,3 @@
-import {ImageProps} from '@gravity-ui/page-constructor';
-import bemBlock from 'bem-cn-lite';
-
-export type CnBlock = ReturnType<typeof bemBlock>;
-
-export type CnMods = Record<string, string | boolean | undefined>;
-
-export const NAMESPACE = 'gravity-ui-landing-';
-
-export function block(name: string): CnBlock {
-    return bemBlock(`${NAMESPACE}${name}`);
-}
-
 const DEFAULT_THEME = 'light';
 
 export interface ThemedValue<T> extends Partial<Record<string, T>> {
@@ -29,8 +16,4 @@ export function getThemedValue<T>(value: ThemeSupporting<T>, theme = DEFAULT_THE
     } else {
         return value;
     }
-}
-
-export function getMediaImage(image: ImageProps) {
-    return typeof image === 'string' ? {src: image} : image;
 }

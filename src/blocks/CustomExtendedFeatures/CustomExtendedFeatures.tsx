@@ -29,14 +29,9 @@ const DEFAULT_SIZES = {
 
 type Item = {
     id?: string;
-    githubId?: string;
-    npmId?: string;
-    title?: string;
+    title: string;
     description?: string;
     icon?: ThemedImage;
-    storybookUrl?: string;
-    readmeUrl?: string;
-    changelogUrl?: string;
 };
 
 type CustomButton = {
@@ -98,32 +93,19 @@ export const CustomExtendedFeatures = ({
             </div>
             <div className={b('items')}>
                 <Row>
-                    {items.map(
-                        ({
-                            id,
-                            title: itemTitle,
-                            description: itemDescription,
-                            icon,
-                            githubId,
-                            npmId,
-                            storybookUrl,
-                        }) => {
-                            return (
-                                <Col className={b('item')} key={id} sizes={colSizes}>
-                                    <FeatureItem
-                                        id={id}
-                                        title={itemTitle}
-                                        description={itemDescription}
-                                        icon={icon}
-                                        contentStyle={contentStyle}
-                                        githubId={githubId}
-                                        npmId={npmId}
-                                        storybookUrl={storybookUrl}
-                                    />
-                                </Col>
-                            );
-                        },
-                    )}
+                    {items.map(({id, title: itemTitle, description: itemDescription, icon}) => {
+                        return (
+                            <Col className={b('item')} key={id} sizes={colSizes}>
+                                <FeatureItem
+                                    id={id}
+                                    title={itemTitle}
+                                    description={itemDescription}
+                                    icon={icon}
+                                    contentStyle={contentStyle}
+                                />
+                            </Col>
+                        );
+                    })}
                 </Row>
             </div>
             {button && (

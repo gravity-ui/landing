@@ -16,27 +16,11 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
     &_active {
         transition: transform 0.2s ease-in-out;
 
-        #{$block}__button {
-            opacity: 0;
-            transform: translateY(50%);
-            transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
-        }
-
         &:hover {
             transform: translateY(-8px);
-
-            #{$block}__button {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            #{$block}__button {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
             &:hover {
                 transform: translateY(0);
             }
@@ -95,48 +79,24 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
         display: flex;
         align-items: center;
         margin-top: 12px;
-    }
-
-    & &__release-label {
-        margin-right: 8px;
-        background-color: #ffbe5c;
-        color: rgba(0, 0, 0, 0.85);
-    }
-
-    &__release-date {
-        margin-left: 8px;
+        color: rgba(255, 255, 255, 0.7);
         font-size: 15px;
         line-height: 20px;
         font-weight: 400;
-        color: rgba(255, 255, 255, 0.7);
     }
 
-    & &__release-skeleton {
-        height: 20px;
-        width: 120px;
-        border-radius: 8px;
-    }
-
-    &__buttons {
+    &__release-info-block {
         display: flex;
-        margin-top: 32px;
+        align-items: center;
+        margin-left: 18px;
+
+        &:first-child {
+            margin-left: 0;
+        }
     }
 
-    &__button {
-        display: block;
-        margin-right: 16px;
-        font-size: 15px;
-        font-weight: 400;
-        line-height: 20px;
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.7);
-
-        &:hover {
-            color: rgba(255, 255, 255, 1);
-        }
-
-        &:last-child {
-            margin-right: 0;
-        }
+    &__release-version,
+    &__release-date {
+        margin-left: 6px;
     }
 }

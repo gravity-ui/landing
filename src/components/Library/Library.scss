@@ -6,56 +6,38 @@ $block: '.#{variables.$ns}library';
 #{$block} {
     margin: 24px 0 0;
 
-    &__breadcrumbs {
-        margin-bottom: 30px;
-    }
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        margin: 0;
 
-    &__title {
-        margin: 0 0 24px;
-        font-size: 48px;
-        line-height: 56px;
-        font-weight: 500;
-    }
-
-    &__description {
-        font-size: 17px;
-        line-height: 24px;
-        font-weight: 400;
+        & &__header-grid {
+            .container-fluid {
+                padding: 0;
+                .col {
+                    padding: 0;
+                }
+            }
+        }
     }
 
     &__header {
-        padding: 32px;
+        padding: 28px 32px 40px;
         border-radius: 24px;
-        color: rgba(255, 255, 255, 0.7);
+        color: #fff;
         background-color: rgba(37, 27, 37, 0.5);
-        margin-bottom: 24px;
 
         &_primary {
             // background-image: url('../../assets/primary-lib-background-lg.svg');
             background-size: cover;
         }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            border-radius: 0;
+        }
     }
 
-    &__block {
-        padding: 32px;
-        border-radius: 24px;
+    &__breadcrumbs {
+        margin-bottom: 30px;
         color: rgba(255, 255, 255, 0.7);
-        background-color: rgba(37, 27, 37, 0.5);
-    }
-
-    &__content {
-        margin-top: 40px;
-        overflow-x: auto;
-
-        a {
-            color: #fff;
-        }
-
-        pre {
-            padding: 16px;
-            border-radius: 12px;
-            background-color: #160d1b;
-        }
     }
 
     &__link {
@@ -65,6 +47,20 @@ $block: '.#{variables.$ns}library';
         &:hover {
             opacity: 0.8;
         }
+    }
+
+    &__title {
+        margin: 0 0 24px;
+        font-size: 48px;
+        line-height: 56px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    &__description {
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 400;
     }
 
     &__buttons {
@@ -81,11 +77,94 @@ $block: '.#{variables.$ns}library';
         }
     }
 
+    &__block {
+        padding: 32px;
+        margin-top: 24px;
+        border-radius: 24px;
+        color: #fff;
+        background-color: rgba(37, 27, 37, 0.5);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            padding: 20px;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            margin-top: 20px;
+        }
+    }
+
+    &__content {
+        margin-top: 40px;
+        overflow-x: auto;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.85);
+
+        a {
+            color: #ffbe5c;
+            text-decoration: none;
+
+            &:visited {
+                color: #ffbe5c;
+            }
+
+            &:hover {
+                color: #f3cb8f;
+            }
+        }
+
+        pre {
+            padding: 16px;
+            border-radius: 12px;
+            background-color: #160d1b;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin-top: 20px;
+        }
+    }
+
     &__info-title {
-        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
         font-size: 20px;
         line-height: 24px;
-        font-weight: 500;
+        font-weight: 600;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            cursor: pointer;
+        }
+    }
+
+    &__info-title-text {
+        flex: 1;
+    }
+
+    &__info-title-icon {
+        display: none;
+        align-items: center;
+        transition: transform 0.4s ease-in-out;
+
+        &_mobile-visible {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            display: flex;
+        }
+    }
+
+    &__info-list {
+        display: block;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-in-out;
+
+            &_mobile-visible {
+                max-height: 1000px;
+            }
+        }
     }
 
     &__info-item {
@@ -93,12 +172,24 @@ $block: '.#{variables.$ns}library';
         margin-top: 20px;
 
         &:first-child {
-            margin-top: 0;
+            margin-top: 26px;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin-top: 14px;
+
+            &:first-child {
+                margin-top: 20px;
+            }
         }
     }
 
     &__info-item-content {
         margin-left: 16px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin-left: 10px;
+        }
     }
 
     &__info-item-title {

@@ -23,6 +23,7 @@ export const Tags: React.FC<Props> = ({value, items, onChange}) => {
             {items.map((item) => {
                 return (
                     <div
+                        key={item.value}
                         tabIndex={0}
                         onClick={() => {
                             onChange(item.value);

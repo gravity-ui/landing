@@ -20,7 +20,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         z-index: 15;
         display: flex;
         align-items: center;
-        padding: 24px 48px 24px 0;
+        padding: 24px 34px 24px 0;
         font-size: 24px;
         line-height: 28px;
         font-weight: 700;
@@ -40,7 +40,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         flex: 1;
         align-self: stretch;
         justify-self: stretch;
-        padding: 0 48px;
+        padding: 0 34px;
         border-right: 1px solid $border-color;
         border-left: 1px solid $border-color;
 
@@ -52,10 +52,12 @@ $border-color: rgba(255, 255, 255, 0.2);
     &__desktop-menu-items {
         display: flex;
         flex: 1;
-        align-items: center;
+        align-items: stretch;
     }
 
     &__desktop-menu-item {
+        display: flex;
+        align-items: center;
         margin-left: 32px;
         font-size: 20px;
         line-height: 20px;
@@ -64,12 +66,16 @@ $border-color: rgba(255, 255, 255, 0.2);
         &:first-child {
             margin-left: 0;
         }
+
+        &_active {
+            border-bottom: 4px solid #ffbe5c;
+        }
     }
 
     &__desktop-social-links {
         display: flex;
         margin: 0;
-        padding: 0 0 0 48px;
+        padding: 0 0 0 34px;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             display: none;
@@ -98,12 +104,15 @@ $border-color: rgba(255, 255, 255, 0.2);
         z-index: 20;
         align-items: center;
         justify-content: center;
-        border: 2px solid rgba(255, 255, 255, 0.5);
         width: 44px;
         height: 44px;
-        border-radius: 22px;
         cursor: pointer;
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+        &_open {
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 22px;
+        }
     }
 
     &__mobile-menu {
@@ -127,13 +136,13 @@ $border-color: rgba(255, 255, 255, 0.2);
     }
 
     &__mobile-menu-items {
-        margin: 10px 0 30px;
+        margin: 20px 0 30px;
         padding-bottom: 30px;
         border-bottom: 1px solid $border-color;
     }
 
     &__mobile-menu-item {
-        margin-top: 18px;
+        margin-top: 36px;
 
         &:first-child {
             margin-top: 0;
@@ -156,14 +165,43 @@ $border-color: rgba(255, 255, 255, 0.2);
         font-weight: 700;
         line-height: 20px;
 
+        &:hover {
+            opacity: 0.8;
+        }
+
         &_lg {
             font-size: 20px;
             line-height: 20px;
             font-weight: 400;
         }
 
-        &:hover {
-            opacity: 0.8;
+        &_disabled {
+            cursor: default;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__comming-soon {
+        position: relative;
+    }
+
+    &__comming-soon-text {
+        opacity: 0.5;
+    }
+
+    &__comming-soon-label {
+        position: absolute;
+        top: -14px;
+        right: 0;
+        font-size: 10px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            top: -18px;
+            right: auto;
+            left: 0;
         }
     }
 

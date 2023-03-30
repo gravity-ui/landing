@@ -1,6 +1,7 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
@@ -17,7 +18,11 @@ const b = block('menu');
 
 const LINK_ICON_SIZE = 8;
 
+const COMING_SOON_TEXT = 'Coming soon';
+
 export const Menu: React.FC = () => {
+    const router = useRouter();
+
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
     return (
@@ -37,12 +42,35 @@ export const Menu: React.FC = () => {
                             <div className={b('desktop-menu')}>
                                 <div className={b('desktop-menu-items')}>
                                     {menu.map((item) => (
-                                        <div key={item.title} className={b('desktop-menu-item')}>
-                                            <Link href={item.url}>
-                                                <a className={b('link', {lg: true})}>
-                                                    {item.title}
-                                                </a>
-                                            </Link>
+                                        <div
+                                            key={item.title}
+                                            className={b('desktop-menu-item', {
+                                                active: router.pathname.startsWith(item.url),
+                                            })}
+                                        >
+                                            {item.isComingSoon ? (
+                                                <div
+                                                    className={b('link', {
+                                                        lg: true,
+                                                        disabled: true,
+                                                    })}
+                                                >
+                                                    <div className={b('comming-soon')}>
+                                                        <span className={b('comming-soon-text')}>
+                                                            {item.title}
+                                                        </span>
+                                                        <span className={b('comming-soon-label')}>
+                                                            {COMING_SOON_TEXT}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <Link href={item.url}>
+                                                    <a className={b('link', {lg: true})}>
+                                                        {item.title}
+                                                    </a>
+                                                </Link>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
@@ -68,7 +96,7 @@ export const Menu: React.FC = () => {
 
                             <div className={b('mobile-menu-button-wrapper')}>
                                 <div
-                                    className={b('mobile-menu-button')}
+                                    className={b('mobile-menu-button', {open: mobileMenuOpen})}
                                     onClick={() => {
                                         setMobileMenuOpen(!mobileMenuOpen);
                                     }}
@@ -91,9 +119,24 @@ export const Menu: React.FC = () => {
                             <div className={b('mobile-menu-items')}>
                                 {menu.map((item) => (
                                     <div className={b('mobile-menu-item')} key={item.title}>
-                                        <Link href={item.url} key={item.title}>
-                                            <a className={b('link', {lg: true})}>{item.title}</a>
-                                        </Link>
+                                        {item.isComingSoon ? (
+                                            <div className={b('link', {lg: true, disabled: true})}>
+                                                <div className={b('comming-soon')}>
+                                                    <span className={b('comming-soon-text')}>
+                                                        {item.title}
+                                                    </span>
+                                                    <span className={b('comming-soon-label')}>
+                                                        {COMING_SOON_TEXT}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <Link href={item.url} key={item.title}>
+                                                <a className={b('link', {lg: true})}>
+                                                    {item.title}
+                                                </a>
+                                            </Link>
+                                        )}
                                     </div>
                                 ))}
                             </div>

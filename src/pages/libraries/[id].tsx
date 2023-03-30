@@ -2,12 +2,14 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 
 import {Layout} from '../../components/Layout/Layout';
 import {Library} from '../../components/Library/Library';
-import {libs} from '../../libs.mjs';
+import {getLibsList} from '../../utils';
+
+const libs = getLibsList();
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
-        paths: libs.map((item) => ({params: {id: item.id}})),
-        fallback: false, // can also be true or 'blocking'
+        paths: libs.map((item) => ({params: {id: item.config.id}})),
+        fallback: false,
     };
 };
 
@@ -18,10 +20,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const LibraryPage = ({id}: {id: string}) => {
-    const libConfig = libs.find((item) => item.id === id);
+    const lib = libs.find((item) => item.config.id === id);
 
     return (
-        <Layout title={libConfig?.title}>
+        <Layout title={lib?.config.title ?? ''}>
             <Library id={id} />
         </Layout>
     );

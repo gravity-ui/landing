@@ -134,7 +134,13 @@ const typedLanding: CustomPageContent = {
                 md: 6,
                 lg: 4,
             },
-            items: libs,
+            items: libs
+                .filter((lib) => lib.landing)
+                .map((lib) => ({
+                    id: lib.id,
+                    title: lib.title,
+                    description: lib.description,
+                })),
         },
         {
             type: CustomBlock.CustomBanner,
