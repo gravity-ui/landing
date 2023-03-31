@@ -3,6 +3,7 @@ import {Button, Icon, Tabs} from '@gravity-ui/uikit';
 import Link from 'next/link';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // import issuesIcon from '../../assets/icons/about/issues.svg';
 import lastUpdateIcon from '../../assets/icons/about/last-update.svg';
@@ -186,6 +187,7 @@ export const Library: React.FC<Props> = ({id}) => {
                             <div className={b('content')}>
                                 <ReactMarkdown
                                     skipHtml
+                                    remarkPlugins={[remarkGfm]}
                                     children={
                                         activeTab === Tab.Readme
                                             ? lib.data.readme

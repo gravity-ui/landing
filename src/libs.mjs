@@ -70,7 +70,7 @@ export const libs = [
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md',
     },
     {
-        id: 'date-utils ',
+        id: 'date-utils',
         githubId: 'gravity-ui/date-utils',
         npmId: '@gravity-ui/date-utils',
         title: 'Date Utils',
@@ -253,9 +253,9 @@ export const libs = [
         description: 'Package provides production version of browserslist.',
         storybookUrl: '',
         readmeUrl:
-            'https://raw.githubusercontent.com/gravity-ui/browserslist-config/main/README.md',
+            'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/README.md',
         changelogUrl:
-            'https://raw.githubusercontent.com/gravity-ui/browserslist-config/main/CHANGELOG.md',
+            'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/CHANGELOG.md',
     },
     {
         id: 'react-data-table',
