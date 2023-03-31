@@ -14,7 +14,6 @@ import versionIcon from '../../assets/icons/about/version.svg';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
-import primaryLibBackroundLg from '../../assets/primary-lib-background-lg.svg';
 import {block, getLibById} from '../../utils';
 
 import './Library.scss';
@@ -107,16 +106,7 @@ export const Library: React.FC<Props> = ({id}) => {
             <Grid className={b('header-grid')}>
                 <Row>
                     <Col sizes={12}>
-                        <div
-                            className={b('header', {primary: isPrimary})}
-                            style={
-                                isPrimary
-                                    ? {
-                                          backgroundImage: `url(/${primaryLibBackroundLg})`,
-                                      }
-                                    : {}
-                            }
-                        >
+                        <div className={b('header', {primary: isPrimary})}>
                             <div className={b('breadcrumbs')}>
                                 <Link href="/libraries">
                                     <a className={b('link')}>Libraries</a>

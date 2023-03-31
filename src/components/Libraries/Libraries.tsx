@@ -6,7 +6,6 @@ import React from 'react';
 import calendarIcon from '../../assets/icons/calendar.svg';
 import starIcon from '../../assets/icons/star.svg';
 import versionIcon from '../../assets/icons/version.svg';
-import primaryLibBackround from '../../assets/primary-lib-background.svg';
 import {block, getLibsList} from '../../utils';
 
 import './Libraries.scss';
@@ -98,13 +97,6 @@ export const Libraries = () => {
                                             className={b('library', {
                                                 primary: isPrimary,
                                             })}
-                                            style={
-                                                isPrimary
-                                                    ? {
-                                                          backgroundImage: `url(/${primaryLibBackround})`,
-                                                      }
-                                                    : {}
-                                            }
                                         >
                                             <div className={b('library-header')}>
                                                 <h5 className={b('library-title')}>

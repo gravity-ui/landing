@@ -12,6 +12,7 @@ const plugins = [
                 patchWebpackConfig(config, options);
 
                 config.module.rules.push({
+                    issuer: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
                     test: /\.svg$/,
                     exclude: join(__dirname, 'src/assets/icons'),
                     use: [
@@ -19,15 +20,16 @@ const plugins = [
                             loader: 'file-loader',
                             options: {
                                 context: '',
-                                outputPath: 'static',
-                                publicPath: '_next/static',
-                                name: '[path][name].[hash].[ext]',
+                                outputPath: 'static/media',
+                                publicPath: '_next/static/media',
+                                name: '[name].[hash:8].[ext]',
                             },
                         },
                     ],
                 });
 
                 config.module.rules.push({
+                    issuer: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
                     test: /icons\/.*\.svg$/,
                     use: ['@svgr/webpack'],
                 });
