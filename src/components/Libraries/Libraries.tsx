@@ -51,7 +51,7 @@ export const Libraries = () => {
         );
     }
 
-    const filtersIsActive = Boolean(filterString) || activeTag !== 'all';
+    // const filtersIsActive = Boolean(filterString) || activeTag !== 'all';
 
     return (
         <div className={b()}>
@@ -83,9 +83,9 @@ export const Libraries = () => {
                         {filteredLibs.map((lib) => {
                             const isPrimary = lib.config.primary;
 
-                            let lgSize = 4;
-                            if (isPrimary) lgSize = 8;
-                            if (filtersIsActive) lgSize = 12;
+                            const lgSize = 4;
+                            // if (isPrimary) lgSize = 8;
+                            // if (filtersIsActive) lgSize = 12;
 
                             return (
                                 <Col
