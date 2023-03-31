@@ -128,7 +128,8 @@ $block: '.#{variables.$ns}library';
         }
 
         pre {
-            white-space: pre-wrap;
+            max-width: 100%;
+            overflow-x: auto;
             padding: 16px;
             border-radius: 12px;
             background-color: #160d1b;
