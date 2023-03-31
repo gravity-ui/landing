@@ -52,19 +52,19 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
+                        date: '2023-03-21T15:00:00.000Z',
+                        content:
+                            'New experimental <a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout-unstable--playground" target="_blank" rel="noopener">layout components</a> are now available in UIKit',
+                    },
+                    {
+                        date: '2023-03-20T15:00:00.000Z',
+                        content:
+                            '<a href="https://ytsaurus.tech/" target="_blank" rel="noopener">YTSaurus</a>: open source platform for distributed storage and processing with UI based on Gravity',
+                    },
+                    {
                         date: '2023-01-26T15:00:00.000Z',
                         content:
                             'New <a href="https://github.com/gravity-ui/uikit/releases/tag/v4.0.0" target="_blank" rel="noopener">UIKit v4</a> features support for React 18',
-                    },
-                    {
-                        date: '2023-01-25T00:00:00.000Z',
-                        content:
-                            'New set of SVG icons now available for your project: <a href="https://github.com/gravity-ui/icons" target="_blank" rel="noopener">Gravity Icons</a>',
-                    },
-                    {
-                        date: '2022-12-20T00:00:00.000Z',
-                        content:
-                            '<a href="https://github.com/gravity-ui" target="_blank" rel="noopener">Gravity ecosystem</a> now open to the public',
                     },
                 ],
             },
