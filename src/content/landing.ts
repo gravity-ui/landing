@@ -52,6 +52,11 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
+                        date: '2023-04-10T12:00:00.000Z',
+                        content:
+                            '<a href="https://github.com/gravity-ui/dynamic-forms" target="_blank" rel="noopener">Dynamic Forms</a>: library for rendering neat and functional forms described by JSON schema',
+                    },
+                    {
                         date: '2023-03-21T15:00:00.000Z',
                         content:
                             'New experimental <a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout-unstable--playground" target="_blank" rel="noopener">layout components</a> are now available in UIKit',
@@ -60,11 +65,6 @@ const typedLanding: CustomPageContent = {
                         date: '2023-03-20T15:00:00.000Z',
                         content:
                             '<a href="https://ytsaurus.tech/" target="_blank" rel="noopener">YTSaurus</a>: open source platform for distributed storage and processing with UI based on Gravity',
-                    },
-                    {
-                        date: '2023-01-26T15:00:00.000Z',
-                        content:
-                            'New <a href="https://github.com/gravity-ui/uikit/releases/tag/v4.0.0" target="_blank" rel="noopener">UIKit v4</a> features support for React 18',
                     },
                 ],
             },
