@@ -70,15 +70,8 @@ export const Library: React.FC<Props> = ({id}) => {
         {
             id: 'repository',
             title: 'Repository',
-            value: (
-                <a
-                    href={`https://github.com/${lib.config.githubId}`}
-                    target="_blank"
-                    className={b('info-link')}
-                >
-                    github.com/{lib.config.githubId}
-                </a>
-            ),
+            link: `https://github.com/${lib.config.githubId}`,
+            value: `github.com/${lib.config.githubId}`,
             icon: linkIcon,
         },
         {
@@ -109,9 +102,9 @@ export const Library: React.FC<Props> = ({id}) => {
                         <div className={b('header', {primary: isPrimary})}>
                             <div className={b('breadcrumbs')}>
                                 <Link href="/libraries">
-                                    <a className={b('link')}>Libraries</a>
+                                    <a className={b('breadcrumbs-link')}>Libraries</a>
                                 </Link>{' '}
-                                / <HTML>{lib.config.title}</HTML>
+                                / <HTML className={b('breadcrumbs-item')}>{lib.config.title}</HTML>
                             </div>
 
                             <h1 className={b('title')}>
@@ -188,7 +181,7 @@ export const Library: React.FC<Props> = ({id}) => {
                         </div>
                     </Col>
                     <Col sizes={{all: 12, lg: 4}} orders={{all: 1, lg: 2}}>
-                        <div className={b('block')}>
+                        <div className={b('block', {about: true})}>
                             <div className={b('info')}>
                                 <div
                                     className={b('info-title')}
@@ -211,21 +204,51 @@ export const Library: React.FC<Props> = ({id}) => {
                                         'mobile-visible': isVisibleInfoListMobile,
                                     })}
                                 >
-                                    {infoList.map((item) => (
-                                        <div key={item.id} className={b('info-item')}>
-                                            <div className={b('info-item-icon')}>
-                                                <Icon data={item.icon} width={24} height={22} />
-                                            </div>
-                                            <div className={b('info-item-content')}>
-                                                <div className={b('info-item-title')}>
-                                                    {item.title}
+                                    {infoList.map((item) => {
+                                        const content = (
+                                            <React.Fragment>
+                                                <div className={b('info-item-icon')}>
+                                                    <Icon data={item.icon} width={20} height={20} />
                                                 </div>
-                                                <div className={b('info-item-value')}>
-                                                    {item.value}
+                                                <div className={b('info-item-content')}>
+                                                    <div className={b('info-item-title')}>
+                                                        {item.title}
+                                                    </div>
+                                                    <div className={b('info-item-value')}>
+                                                        {item.value}
+                                                    </div>
                                                 </div>
+                                            </React.Fragment>
+                                        );
+
+                                        if (item.link) {
+                                            return (
+                                                <a
+                                                    key={item.id}
+                                                    className={b('info-item', {link: true})}
+                                                    target="_blank"
+                                                    href={item.link}
+                                                >
+                                                    {content}
+                                                    <div className={b('info-item-arrow-wrapper')}>
+                                                        <div className={b('info-item-arrow')}>
+                                                            <Icon
+                                                                data={arrowIcon}
+                                                                width={10}
+                                                                height={6}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            );
+                                        }
+
+                                        return (
+                                            <div key={item.id} className={b('info-item')}>
+                                                {content}
                                             </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>

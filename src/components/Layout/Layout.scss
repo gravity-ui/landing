@@ -8,6 +8,20 @@ $block: '.#{variables.$ns}layout';
     height: 100%;
     flex-direction: column;
 
+    &__menu {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 5;
+    }
+
+    &__menu-placeholder {
+        position: static;
+        z-index: 4;
+        opacity: 0;
+        pointer-events: none;
+    }
+
     &__content {
         flex: 1;
     }

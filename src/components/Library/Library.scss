@@ -23,7 +23,7 @@ $block: '.#{variables.$ns}library';
         padding: 28px 32px 40px;
         border-radius: 24px;
         color: #fff;
-        background-color: rgba(37, 27, 37, 0.5);
+        background: #251b25;
 
         &_primary {
             background-image: url('../../assets/primary-lib-background-lg.svg');
@@ -38,27 +38,35 @@ $block: '.#{variables.$ns}library';
     &__breadcrumbs {
         margin-bottom: 30px;
         color: rgba(255, 255, 255, 0.7);
-    }
 
-    &__link {
-        color: #fff;
-        text-decoration: none;
-
-        &:hover {
-            opacity: 0.8;
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            margin-bottom: 16px;
         }
     }
 
+    &__breadcrumbs-link {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    &__breadcrumbs-item {
+        color: #fff;
+    }
+
     &__title {
-        margin: 0 0 24px;
-        font-size: 48px;
-        line-height: 56px;
+        margin: 0 0 8px;
+        font-size: 32px;
+        line-height: 40px;
         font-weight: 600;
         color: #fff;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            font-size: 40px;
-            line-height: 48px;
+            font-size: 28px;
+            line-height: 36px;
         }
     }
 
@@ -84,26 +92,30 @@ $block: '.#{variables.$ns}library';
 
     &__block {
         padding: 32px;
-        margin-top: 24px;
+        margin-top: 16px;
         border-radius: 24px;
         color: #fff;
-        background-color: rgba(37, 27, 37, 0.5);
+        background: #251b25;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             padding: 20px;
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            margin-top: 20px;
+        &_about {
+            padding: 24px 16px;
         }
     }
 
     &__content {
-        margin-top: 40px;
+        margin-top: 24px;
         overflow-x: auto;
         font-size: 14px;
         line-height: 1.5em;
         color: rgba(255, 255, 255, 0.85);
+
+        & > h1:first-child {
+            display: none;
+        }
 
         h1,
         h2,
@@ -112,6 +124,18 @@ $block: '.#{variables.$ns}library';
         h5,
         h6 {
             line-height: 1.5em;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 4px;
         }
 
         a {
@@ -143,6 +167,7 @@ $block: '.#{variables.$ns}library';
     &__info-title {
         display: flex;
         align-items: center;
+        padding: 0 16px;
         font-size: 20px;
         line-height: 24px;
         font-weight: 600;
@@ -186,41 +211,65 @@ $block: '.#{variables.$ns}library';
 
     &__info-item {
         display: flex;
-        margin-top: 20px;
+        padding: 12px 16px;
+        color: #fff;
+        text-decoration: none;
 
         &:first-child {
-            margin-top: 26px;
+            margin-top: 16px;
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin-top: 14px;
+        &_link {
+            border-radius: 8px;
+            transition: background-color 0.2s ease-in-out;
 
-            &:first-child {
-                margin-top: 20px;
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.08);
+
+                #{$block}__info-item-arrow {
+                    opacity: 1;
+                }
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+                background-color: rgba(255, 255, 255, 0.08);
+
+                #{$block}__info-item-arrow {
+                    opacity: 1;
+                }
             }
         }
     }
 
     &__info-item-content {
-        margin-left: 16px;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin-left: 10px;
-        }
+        flex: 1;
+        margin-left: 12px;
     }
 
     &__info-item-title {
-        font-size: 15px;
-        line-height: 20px;
+        font-size: 13px;
+        line-height: 18px;
         font-weight: 400;
-        opacity: 0.6;
+        color: rgba(255, 255, 255, 0.6);
     }
 
     &__info-item-value {
-        font-size: 17px;
-        line-height: 24px;
+        margin-top: 2px;
+        font-size: 15px;
+        line-height: 20px;
         font-weight: 400;
         color: #fff;
+    }
+
+    &__info-item-arrow-wrapper {
+        align-self: center;
+        padding-left: 10px;
+    }
+
+    &__info-item-arrow {
+        transform: rotate(-90deg);
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
     }
 
     &__info-link {

@@ -9,7 +9,7 @@ export const menu = [
         isComingSoon: true,
     },
     {
-        title: 'Design system',
+        title: 'Design',
         url: '#',
         isComingSoon: true,
     },

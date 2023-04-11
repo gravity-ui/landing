@@ -18,7 +18,7 @@ const b = block('menu');
 
 const LINK_ICON_SIZE = 8;
 
-const COMING_SOON_TEXT = 'Coming soon';
+const COMING_SOON_TEXT = 'soon';
 
 export const Menu: React.FC = () => {
     const router = useRouter();
@@ -27,90 +27,80 @@ export const Menu: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Grid>
-                <Row>
-                    <Col sizes={{sm: 12}}>
-                        <div className={b('wrapper')}>
-                            <div className={b('logo')}>
-                                <Link href="/">
-                                    <a>
-                                        <Icon data={logoIcon} className={b('logo-icon')} />
-                                    </a>
-                                </Link>
-                            </div>
+            <div className={b('wrapper')}>
+                <div className={b('logo')}>
+                    <Link href="/">
+                        <a>
+                            <Icon data={logoIcon} className={b('logo-icon')} />
+                        </a>
+                    </Link>
+                </div>
 
-                            <div className={b('desktop-menu')}>
-                                <div className={b('desktop-menu-items')}>
-                                    {menu.map((item) => (
-                                        <div
-                                            key={item.title}
-                                            className={b('desktop-menu-item', {
-                                                active: router.pathname.startsWith(item.url),
-                                            })}
-                                        >
-                                            {item.isComingSoon ? (
-                                                <div
-                                                    className={b('link', {
-                                                        lg: true,
-                                                        disabled: true,
-                                                    })}
-                                                >
-                                                    <div className={b('comming-soon')}>
-                                                        <span className={b('comming-soon-text')}>
-                                                            {item.title}
-                                                        </span>
-                                                        <span className={b('comming-soon-label')}>
-                                                            {COMING_SOON_TEXT}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            ) : (
-                                                <Link href={item.url}>
-                                                    <a className={b('link', {lg: true})}>
-                                                        {item.title}
-                                                    </a>
-                                                </Link>
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <nav className={b('desktop-social-links')}>
-                                {socialLinks.map((item) => (
+                <div className={b('desktop-menu')}>
+                    <div className={b('desktop-menu-items')}>
+                        {menu.map((item) => (
+                            <div
+                                key={item.title}
+                                className={b('desktop-menu-item', {
+                                    active: router.pathname.startsWith(item.url),
+                                })}
+                            >
+                                {item.isComingSoon ? (
                                     <div
-                                        key={item.title}
-                                        className={b('desktop-social-links-item')}
+                                        className={b('link', {
+                                            lg: true,
+                                            disabled: true,
+                                        })}
                                     >
-                                        <a className={b('link')} href={item.url} target="_blank">
-                                            <span>{item.title}</span>
-                                            <Icon
-                                                className={b('link-icon')}
-                                                data={linkArrowIcon}
-                                                size={LINK_ICON_SIZE}
-                                            />
-                                        </a>
+                                        <div className={b('comming-soon')}>
+                                            <div className={b('comming-soon-text')}>
+                                                {item.title}
+                                            </div>
+                                            <div className={b('comming-soon-label')}>
+                                                {COMING_SOON_TEXT}
+                                            </div>
+                                        </div>
                                     </div>
-                                ))}
-                            </nav>
-
-                            <div className={b('mobile-menu-button-wrapper')}>
-                                <div
-                                    className={b('mobile-menu-button', {open: mobileMenuOpen})}
-                                    onClick={() => {
-                                        setMobileMenuOpen(!mobileMenuOpen);
-                                    }}
-                                >
-                                    <Icon
-                                        data={mobileMenuOpen ? menuCloseIcon : menuOpenIcon}
-                                        size={16}
-                                    />
-                                </div>
+                                ) : (
+                                    <Link href={item.url}>
+                                        <a className={b('link', {lg: true})}>{item.title}</a>
+                                    </Link>
+                                )}
                             </div>
+                        ))}
+                    </div>
+                </div>
+
+                <nav className={b('desktop-social-links')}>
+                    {socialLinks.map((item) => (
+                        <div key={item.title} className={b('desktop-social-links-item')}>
+                            <a
+                                className={b('link', {social: true})}
+                                href={item.url}
+                                target="_blank"
+                            >
+                                <span>{item.title}</span>
+                                <Icon
+                                    className={b('link-icon')}
+                                    data={linkArrowIcon}
+                                    size={LINK_ICON_SIZE}
+                                />
+                            </a>
                         </div>
-                    </Col>
-                </Row>
-            </Grid>
+                    ))}
+                </nav>
+
+                <div className={b('mobile-menu-button-wrapper')}>
+                    <div
+                        className={b('mobile-menu-button', {open: mobileMenuOpen})}
+                        onClick={() => {
+                            setMobileMenuOpen(!mobileMenuOpen);
+                        }}
+                    >
+                        <Icon data={mobileMenuOpen ? menuCloseIcon : menuOpenIcon} size={16} />
+                    </div>
+                </div>
+            </div>
 
             <div className={b('mobile-menu', {open: mobileMenuOpen})}>
                 <Grid>
@@ -122,12 +112,12 @@ export const Menu: React.FC = () => {
                                         {item.isComingSoon ? (
                                             <div className={b('link', {lg: true, disabled: true})}>
                                                 <div className={b('comming-soon')}>
-                                                    <span className={b('comming-soon-text')}>
+                                                    <div className={b('comming-soon-text')}>
                                                         {item.title}
-                                                    </span>
-                                                    <span className={b('comming-soon-label')}>
+                                                    </div>
+                                                    <div className={b('comming-soon-label')}>
                                                         {COMING_SOON_TEXT}
-                                                    </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ) : (
@@ -143,7 +133,11 @@ export const Menu: React.FC = () => {
                             <div className={b('mobile-social-links')}>
                                 {socialLinks.map((item) => (
                                     <div className={b('mobile-social-link')} key={item.title}>
-                                        <a className={b('link')} href={item.url} target="_blank">
+                                        <a
+                                            className={b('link', {social: true})}
+                                            href={item.url}
+                                            target="_blank"
+                                        >
                                             <span>{item.title}</span>
                                             <Icon
                                                 className={b('link-icon')}

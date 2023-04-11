@@ -50,8 +50,6 @@ export const Libraries = () => {
         );
     }
 
-    // const filtersIsActive = Boolean(filterString) || activeTag !== 'all';
-
     return (
         <div className={b()}>
             <Grid>
@@ -60,7 +58,7 @@ export const Libraries = () => {
                         <h1 className={b('title')}>Our libraries</h1>
                     </Col>
                 </Row>
-                <Row>
+                <Row className={b('filters')}>
                     <Col sizes={{all: 12, md: 8, lg: 9}}>
                         <Tags items={tags} value={activeTag} onChange={setActivaTag} />
                     </Col>
@@ -80,22 +78,16 @@ export const Libraries = () => {
                 ) : (
                     <Row>
                         {filteredLibs.map((lib) => {
-                            const isPrimary = lib.config.primary;
-
-                            const lgSize = 4;
-                            // if (isPrimary) lgSize = 8;
-                            // if (filtersIsActive) lgSize = 12;
-
                             return (
                                 <Col
                                     key={lib.config.id}
                                     className={b('col')}
-                                    sizes={{all: 12, lg: lgSize}}
+                                    sizes={{all: 12, md: 6, lg: 4}}
                                 >
                                     <Link href={`/libraries/${lib.config.id}`}>
                                         <a
                                             className={b('library', {
-                                                primary: isPrimary,
+                                                primary: lib.config.primary,
                                             })}
                                         >
                                             <div className={b('library-header')}>

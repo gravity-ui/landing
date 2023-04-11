@@ -8,7 +8,7 @@ $block: '.#{variables.$ns}custom-extended-features';
     @include pcStyles.animate();
 
     &__items {
-        margin-top: -(pcVariables.$indentM);
+        margin-top: 16px;
     }
 
     &__header {
@@ -42,10 +42,6 @@ $block: '.#{variables.$ns}custom-extended-features';
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             display: flex;
         }
-    }
-
-    &__header + &__items {
-        margin-top: 0;
     }
 
     &__item {

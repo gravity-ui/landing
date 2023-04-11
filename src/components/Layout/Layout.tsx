@@ -38,7 +38,12 @@ export const Layout: React.FC<LayoutProps> = ({title, children}) => {
 
             <PageConstructorProvider theme={theme}>
                 <div className={b()}>
-                    <Menu />
+                    <div className={b('menu-placeholder')}>
+                        <Menu />
+                    </div>
+                    <div className={b('menu')}>
+                        <Menu />
+                    </div>
                     <div className={b('content')}>{children}</div>
                     <Footer />
                 </div>

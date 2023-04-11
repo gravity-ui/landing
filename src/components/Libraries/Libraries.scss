@@ -7,6 +7,10 @@ $block: '.#{variables.$ns}libraries';
 #{$block} {
     margin: 56px 0 0;
 
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        margin: 32px 0 0;
+    }
+
     &__title {
         margin: 0 0 24px;
         font-size: 48px;
@@ -39,19 +43,25 @@ $block: '.#{variables.$ns}libraries';
         display: flex;
     }
 
+    &__filters {
+        margin-bottom: 16px;
+    }
+
     &__library {
-        display: block;
+        display: flex;
+        flex-direction: column;
         flex: 1;
         padding: 32px;
-        margin-top: 32px;
+        min-height: 240px;
+        margin-top: 16px;
         border-radius: 24px;
         text-decoration: none;
-        background-color: rgba(37, 27, 37, 0.5);
+        background: #251b25;
         color: rgba(255, 255, 255, 0.7);
         transition: transform 0.2s ease-in-out;
 
         &:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
         }
 
         &_primary {
@@ -101,6 +111,8 @@ $block: '.#{variables.$ns}libraries';
     }
 
     &__description {
+        flex: 1;
+
         @include pcStyles.text-size(body-2);
 
         a {

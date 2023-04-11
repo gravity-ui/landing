@@ -9,10 +9,16 @@ $border-color: rgba(255, 255, 255, 0.2);
     position: relative;
     z-index: 10;
     border-bottom: 1px solid $border-color;
+    background: var(--yc-color-base-background);
 
     &__wrapper {
         display: flex;
         align-items: center;
+        padding: 0 48px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            padding: 0 24px;
+        }
     }
 
     &__logo {
@@ -23,10 +29,11 @@ $border-color: rgba(255, 255, 255, 0.2);
         padding: 24px 34px 24px 0;
         font-size: 24px;
         line-height: 28px;
-        font-weight: 700;
+        font-weight: 600;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             flex: 1;
+            padding: 20px 34px 20px 0;
         }
     }
 
@@ -161,9 +168,9 @@ $border-color: rgba(255, 255, 255, 0.2);
     &__link {
         white-space: nowrap;
         text-decoration: none;
-        color: #fff;
+        color: var(--yc-color-text-primary);
         font-size: 15px;
-        font-weight: 700;
+        font-weight: 400;
         line-height: 20px;
 
         &:hover {
@@ -176,8 +183,17 @@ $border-color: rgba(255, 255, 255, 0.2);
             font-weight: 400;
         }
 
+        &_social {
+            opacity: 0.7;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+
         &_disabled {
             cursor: default;
+            color: var(--yc-color-text-secondary);
 
             &:hover {
                 opacity: 1;
@@ -187,22 +203,42 @@ $border-color: rgba(255, 255, 255, 0.2);
 
     &__comming-soon {
         position: relative;
+        display: flex;
+        align-items: center;
     }
 
     &__comming-soon-text {
         opacity: 0.5;
+        margin-right: 8px;
     }
 
     &__comming-soon-label {
-        position: absolute;
-        top: -14px;
-        right: 0;
-        font-size: 10px;
+        display: inline-block;
+        position: relative;
+        padding: 2px 4px;
+        font-size: 11px;
+        line-height: 14px;
+        font-weight: 600;
+        background: #bab6bb;
+        color: rgba(0, 0, 0, 0.85);
+        border-radius: 4px;
+        text-transform: uppercase;
+        pointer-events: none;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: -2px;
+            display: block;
+            width: 5px;
+            height: 5px;
+            transform: rotate(45deg);
+            background: #bab6bb;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            top: -18px;
-            right: auto;
-            left: 0;
+            margin-top: 2px;
         }
     }
 

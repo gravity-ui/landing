@@ -8,7 +8,7 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
     display: block;
     flex: 1;
     padding: 32px;
-    margin-top: pcVariables.$indentM;
+    margin-top: 16px;
     border-radius: 24px;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.7);
@@ -17,7 +17,7 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
         transition: transform 0.2s ease-in-out;
 
         &:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
