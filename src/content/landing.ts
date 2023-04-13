@@ -52,14 +52,14 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
-                        date: '2023-04-10T12:00:00.000Z',
+                        date: '2023-04-13T16:00:00.000Z',
                         content:
-                            '<a href="https://github.com/gravity-ui/dynamic-forms" target="_blank" rel="noopener">Dynamic Forms</a>: library for rendering neat and functional forms described by JSON schema',
+                            'Explore all Gravity projects with a new <a href="/libraries">Libraries</a> section',
                     },
                     {
-                        date: '2023-03-21T15:00:00.000Z',
+                        date: '2023-04-10T12:00:00.000Z',
                         content:
-                            'New experimental <a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout-unstable--playground" target="_blank" rel="noopener">layout components</a> are now available in UIKit',
+                            '<a href="/libraries/dynamic-forms">Dynamic Forms</a>: library for rendering neat and functional forms described by JSON schema',
                     },
                     {
                         date: '2023-03-20T15:00:00.000Z',
