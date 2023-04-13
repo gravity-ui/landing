@@ -37,14 +37,19 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     let starsCount;
     let latestReleaseVersion;
     let latestReleaseDate;
+    let isPrimary = false;
 
     if (id) {
-        const {data: libData} = getLibById(id);
+        const {data: libData, config: libConfig} = getLibById(id);
 
         if (libData) {
             starsCount = libData.stars ?? 0;
             latestReleaseVersion = libData?.version ?? '';
             latestReleaseDate = libData.lastUpdate ?? '';
+        }
+
+        if (libConfig) {
+            isPrimary = libConfig.primary;
         }
     }
 
@@ -54,7 +59,10 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
 
     return (
         <Tag {...tagProps}>
-            <InnerTag className={b({library: Boolean(id)})} style={contentStyle}>
+            <InnerTag
+                className={b({library: Boolean(id), primary: Boolean(id) && isPrimary})}
+                style={contentStyle}
+            >
                 {iconData && <Image {...iconData} className={b('icon')} />}
 
                 <div className={b('header')}>

@@ -29,6 +29,11 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
         }
     }
 
+    &_primary {
+        background-image: url('../../../../assets/primary-lib-background.svg');
+        background-size: cover;
+    }
+
     &__icon {
         @include pcStyles.icon();
 
