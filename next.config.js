@@ -31,7 +31,21 @@ const plugins = [
                 config.module.rules.push({
                     issuer: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
                     test: /icons\/.*\.svg$/,
-                    use: ['@svgr/webpack'],
+                    use: [
+                        {
+                            loader: '@svgr/webpack',
+                            options: {
+                                svgoConfig: {
+                                    plugins: [
+                                        {
+                                            name: 'removeViewBox',
+                                            active: false,
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                    ],
                 });
 
                 if (!options.isServer) {

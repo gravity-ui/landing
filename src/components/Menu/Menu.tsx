@@ -5,9 +5,9 @@ import {useRouter} from 'next/router';
 import React from 'react';
 
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
-import logoIcon from '../../assets/icons/logo.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import menuOpenIcon from '../../assets/icons/menu-open.svg';
+import soonLabelIcon from '../../assets/icons/soon-label.svg';
 import {menu} from '../../content/menu';
 import {socialLinks} from '../../content/social-links';
 import {block} from '../../utils';
@@ -18,8 +18,6 @@ const b = block('menu');
 
 const LINK_ICON_SIZE = 8;
 
-const COMING_SOON_TEXT = 'soon';
-
 export const Menu: React.FC = () => {
     const router = useRouter();
 
@@ -27,11 +25,11 @@ export const Menu: React.FC = () => {
 
     return (
         <div className={b()}>
-            <div className={b('wrapper')}>
+            <div className={b('wrapper', {open: mobileMenuOpen})}>
                 <div className={b('logo')}>
                     <Link href="/">
                         <a>
-                            <Icon data={logoIcon} className={b('logo-icon')} />
+                            <div className={b('logo-image')} />
                         </a>
                     </Link>
                 </div>
@@ -57,7 +55,7 @@ export const Menu: React.FC = () => {
                                                 {item.title}
                                             </div>
                                             <div className={b('comming-soon-label')}>
-                                                {COMING_SOON_TEXT}
+                                                <Icon data={soonLabelIcon} width={46} height={20} />
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +114,11 @@ export const Menu: React.FC = () => {
                                                         {item.title}
                                                     </div>
                                                     <div className={b('comming-soon-label')}>
-                                                        {COMING_SOON_TEXT}
+                                                        <Icon
+                                                            data={soonLabelIcon}
+                                                            width={46}
+                                                            height={20}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

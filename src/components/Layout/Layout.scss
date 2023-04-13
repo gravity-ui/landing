@@ -12,12 +12,12 @@ $block: '.#{variables.$ns}layout';
         position: fixed;
         right: 0;
         left: 0;
-        z-index: 5;
+        z-index: 10;
     }
 
     &__menu-placeholder {
         position: static;
-        z-index: 4;
+        z-index: 5;
         opacity: 0;
         pointer-events: none;
     }

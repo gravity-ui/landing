@@ -7,23 +7,30 @@ $border-color: rgba(255, 255, 255, 0.2);
 
 #{$block} {
     position: relative;
-    z-index: 10;
-    border-bottom: 1px solid $border-color;
-    background: var(--yc-color-base-background);
 
     &__wrapper {
+        position: relative;
+        z-index: 25;
         display: flex;
         align-items: center;
         padding: 0 48px;
+        background: rgba(22, 13, 27, 0.4);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid $border-color;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             padding: 0 24px;
         }
+
+        &_open {
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+                background: none;
+                border-bottom: 0;
+            }
+        }
     }
 
     &__logo {
-        position: relative;
-        z-index: 15;
         display: flex;
         align-items: center;
         padding: 24px 34px 24px 0;
@@ -37,9 +44,18 @@ $border-color: rgba(255, 255, 255, 0.2);
         }
     }
 
-    & &__logo-icon {
-        width: 150px;
+    &__logo-image {
+        width: 160px;
         height: 32px;
+        background-image: url('../../assets/logo.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            width: 120px;
+            height: 24px;
+        }
     }
 
     &__desktop-menu {
@@ -108,8 +124,6 @@ $border-color: rgba(255, 255, 255, 0.2);
 
     &__mobile-menu-button {
         display: flex;
-        position: relative;
-        z-index: 20;
         align-items: center;
         justify-content: center;
         width: 44px;
@@ -128,7 +142,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 10;
+        z-index: 20;
         width: 100%;
         padding: 86px 0 38px;
         background: rgba(22, 13, 27, 0.42);
@@ -202,44 +216,16 @@ $border-color: rgba(255, 255, 255, 0.2);
     }
 
     &__comming-soon {
-        position: relative;
         display: flex;
         align-items: center;
     }
 
     &__comming-soon-text {
         opacity: 0.5;
-        margin-right: 8px;
     }
 
     &__comming-soon-label {
-        display: inline-block;
-        position: relative;
-        padding: 2px 4px;
-        font-size: 11px;
-        line-height: 14px;
-        font-weight: 600;
-        background: #bab6bb;
-        color: rgba(0, 0, 0, 0.85);
-        border-radius: 4px;
-        text-transform: uppercase;
-        pointer-events: none;
-
-        &::before {
-            content: '';
-            position: absolute;
-            top: 7px;
-            left: -2px;
-            display: block;
-            width: 5px;
-            height: 5px;
-            transform: rotate(45deg);
-            background: #bab6bb;
-        }
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            margin-top: 2px;
-        }
+        margin-left: 4px;
     }
 
     &__link-icon {

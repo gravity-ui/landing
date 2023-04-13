@@ -5,7 +5,8 @@
 $block: '.#{variables.$ns}custom-extended-features-feature-item';
 
 #{$block} {
-    display: block;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     padding: 32px;
     margin-top: 16px;
@@ -13,7 +14,8 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
     text-decoration: none;
     color: rgba(255, 255, 255, 0.7);
 
-    &_active {
+    &_library {
+        min-height: 240px;
         transition: transform 0.2s ease-in-out;
 
         &:hover {
@@ -68,6 +70,8 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
     }
 
     &__text {
+        flex: 1;
+
         @include pcStyles.text-size(body-2);
 
         a {

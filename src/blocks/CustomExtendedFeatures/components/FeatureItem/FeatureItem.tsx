@@ -54,7 +54,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
 
     return (
         <Tag {...tagProps}>
-            <InnerTag className={b({active: Boolean(id)})} style={contentStyle}>
+            <InnerTag className={b({library: Boolean(id)})} style={contentStyle}>
                 {iconData && <Image {...iconData} className={b('icon')} />}
 
                 <div className={b('header')}>

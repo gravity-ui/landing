@@ -5,15 +5,15 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-// import issuesIcon from '../../assets/icons/about/issues.svg';
-import lastUpdateIcon from '../../assets/icons/about/last-update.svg';
-import licenseIcon from '../../assets/icons/about/license.svg';
-import linkIcon from '../../assets/icons/about/link.svg';
-import starIcon from '../../assets/icons/about/star.svg';
-import versionIcon from '../../assets/icons/about/version.svg';
+// import issuesIcon from '../../assets/icons/issues.svg';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import githubIcon from '../../assets/icons/github.svg';
+import lastUpdateIcon from '../../assets/icons/last-update.svg';
+import licenseIcon from '../../assets/icons/license.svg';
+import linkIcon from '../../assets/icons/link.svg';
+import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
+import versionIcon from '../../assets/icons/version.svg';
 import {block, getLibById} from '../../utils';
 
 import './Library.scss';
@@ -208,7 +208,7 @@ export const Library: React.FC<Props> = ({id}) => {
                                         const content = (
                                             <React.Fragment>
                                                 <div className={b('info-item-icon')}>
-                                                    <Icon data={item.icon} width={20} height={20} />
+                                                    <Icon data={item.icon} size={20} />
                                                 </div>
                                                 <div className={b('info-item-content')}>
                                                     <div className={b('info-item-title')}>
