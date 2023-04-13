@@ -24,10 +24,11 @@ $block: '.#{variables.$ns}library';
         border-radius: 24px;
         color: #fff;
         background: #251b25;
+        background-size: cover;
+        background-image: url('../../assets/secondary-lib-background-lg.svg');
 
         &_primary {
             background-image: url('../../assets/primary-lib-background-lg.svg');
-            background-size: cover;
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
