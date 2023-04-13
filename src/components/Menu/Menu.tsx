@@ -1,11 +1,15 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
+import Link from 'next/link';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
-import logoIcon from '../../assets/icons/logo.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import menuOpenIcon from '../../assets/icons/menu-open.svg';
+import soonLabelIcon from '../../assets/icons/soon-label.svg';
+import {menu} from '../../content/menu';
+import {socialLinks} from '../../content/social-links';
 import {block} from '../../utils';
 
 import './Menu.scss';
@@ -14,32 +18,128 @@ const b = block('menu');
 
 const LINK_ICON_SIZE = 8;
 
-type MenuItem = {
-    title: string;
-    url: string;
-};
+export const Menu: React.FC = () => {
+    const router = useRouter();
 
-export type MenuProps = {
-    items: MenuItem[];
-};
-
-export const Menu: React.FC<MenuProps> = ({items}) => {
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
     return (
         <div className={b()}>
-            <Grid>
-                <Row>
-                    <Col sizes={{sm: 12}}>
-                        <div className={b('wrapper')}>
-                            <div className={b('logo')}>
-                                <Icon data={logoIcon} className={b('logo-icon')} />
-                            </div>
+            <div className={b('wrapper', {open: mobileMenuOpen})}>
+                <div className={b('logo')}>
+                    <Link href="/">
+                        <a>
+                            <div className={b('logo-image')} />
+                        </a>
+                    </Link>
+                </div>
 
-                            <nav className={b('desktop-menu')}>
-                                {items.map((item) => (
-                                    <div key={item.title} className={b('desktop-menu-item')}>
-                                        <a className={b('link')} href={item.url} target="_blank">
+                <div className={b('desktop-menu')}>
+                    <div className={b('desktop-menu-items')}>
+                        {menu.map((item) => (
+                            <div
+                                key={item.title}
+                                className={b('desktop-menu-item', {
+                                    active: router.pathname.startsWith(item.url),
+                                })}
+                            >
+                                {item.isComingSoon ? (
+                                    <div
+                                        className={b('link', {
+                                            lg: true,
+                                            disabled: true,
+                                        })}
+                                    >
+                                        <div className={b('comming-soon')}>
+                                            <div className={b('comming-soon-text')}>
+                                                {item.title}
+                                            </div>
+                                            <div className={b('comming-soon-label')}>
+                                                <Icon data={soonLabelIcon} width={46} height={20} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <Link href={item.url}>
+                                        <a className={b('link', {lg: true})}>{item.title}</a>
+                                    </Link>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <nav className={b('desktop-social-links')}>
+                    {socialLinks.map((item) => (
+                        <div key={item.title} className={b('desktop-social-links-item')}>
+                            <a
+                                className={b('link', {social: true})}
+                                href={item.url}
+                                target="_blank"
+                            >
+                                <span>{item.title}</span>
+                                <Icon
+                                    className={b('link-icon')}
+                                    data={linkArrowIcon}
+                                    size={LINK_ICON_SIZE}
+                                />
+                            </a>
+                        </div>
+                    ))}
+                </nav>
+
+                <div className={b('mobile-menu-button-wrapper')}>
+                    <div
+                        className={b('mobile-menu-button', {open: mobileMenuOpen})}
+                        onClick={() => {
+                            setMobileMenuOpen(!mobileMenuOpen);
+                        }}
+                    >
+                        <Icon data={mobileMenuOpen ? menuCloseIcon : menuOpenIcon} size={16} />
+                    </div>
+                </div>
+            </div>
+
+            <div className={b('mobile-menu', {open: mobileMenuOpen})}>
+                <Grid>
+                    <Row>
+                        <Col sizes={{sm: 12}}>
+                            <div className={b('mobile-menu-items')}>
+                                {menu.map((item) => (
+                                    <div className={b('mobile-menu-item')} key={item.title}>
+                                        {item.isComingSoon ? (
+                                            <div className={b('link', {lg: true, disabled: true})}>
+                                                <div className={b('comming-soon')}>
+                                                    <div className={b('comming-soon-text')}>
+                                                        {item.title}
+                                                    </div>
+                                                    <div className={b('comming-soon-label')}>
+                                                        <Icon
+                                                            data={soonLabelIcon}
+                                                            width={46}
+                                                            height={20}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <Link href={item.url} key={item.title}>
+                                                <a className={b('link', {lg: true})}>
+                                                    {item.title}
+                                                </a>
+                                            </Link>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                            <div className={b('mobile-social-links')}>
+                                {socialLinks.map((item) => (
+                                    <div className={b('mobile-social-link')} key={item.title}>
+                                        <a
+                                            className={b('link', {social: true})}
+                                            href={item.url}
+                                            target="_blank"
+                                        >
                                             <span>{item.title}</span>
                                             <Icon
                                                 className={b('link-icon')}
@@ -49,42 +149,7 @@ export const Menu: React.FC<MenuProps> = ({items}) => {
                                         </a>
                                     </div>
                                 ))}
-                            </nav>
-
-                            <nav className={b('mobile-menu')}>
-                                <div
-                                    className={b('mobile-menu-button')}
-                                    onClick={() => {
-                                        setMobileMenuOpen(!mobileMenuOpen);
-                                    }}
-                                >
-                                    <Icon
-                                        data={mobileMenuOpen ? menuCloseIcon : menuOpenIcon}
-                                        size={16}
-                                    />
-                                </div>
-                            </nav>
-                        </div>
-                    </Col>
-                </Row>
-            </Grid>
-
-            <div className={b('mobile-menu-items', {open: mobileMenuOpen})}>
-                <Grid>
-                    <Row>
-                        <Col sizes={{sm: 12}}>
-                            {items.map((item) => (
-                                <div className={b('mobile-menu-item')} key={item.title}>
-                                    <a className={b('link')} href={item.url} target="_blank">
-                                        <span>{item.title}</span>
-                                        <Icon
-                                            className={b('link-icon')}
-                                            data={linkArrowIcon}
-                                            size={LINK_ICON_SIZE}
-                                        />
-                                    </a>
-                                </div>
-                            ))}
+                            </div>
                         </Col>
                     </Row>
                 </Grid>

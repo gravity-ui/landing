@@ -1,0 +1,32 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}tags';
+
+#{$block} {
+    display: flex;
+    overflow-x: auto;
+
+    --yc-scrollbar-width: 0;
+
+    &__tag {
+        padding: 11px 24px;
+        margin-left: 8px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        border-radius: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &_active {
+            color: #ffbe5c;
+            background: rgba(255, 190, 92, 0.1);
+            border: 1px solid transparent;
+        }
+    }
+}

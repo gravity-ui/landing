@@ -1,0 +1,284 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}library';
+
+#{$block} {
+    margin: 24px 0 0;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        margin: 0;
+
+        & &__header-grid {
+            .container-fluid {
+                padding: 0;
+                .col {
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    &__header {
+        padding: 28px 32px 40px;
+        border-radius: 24px;
+        color: #fff;
+        background: #251b25;
+        background-size: cover;
+        background-image: url('../../assets/secondary-lib-background-lg.svg');
+
+        &_primary {
+            background-image: url('../../assets/primary-lib-background-lg.svg');
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            border-radius: 0;
+        }
+    }
+
+    &__breadcrumbs {
+        margin-bottom: 30px;
+        color: rgba(255, 255, 255, 0.7);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            margin-bottom: 16px;
+        }
+    }
+
+    &__breadcrumbs-link {
+        color: rgba(255, 255, 255, 0.5);
+        text-decoration: none;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+
+    &__breadcrumbs-item {
+        color: #fff;
+    }
+
+    &__title {
+        margin: 0 0 8px;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 600;
+        color: #fff;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            font-size: 28px;
+            line-height: 36px;
+        }
+    }
+
+    &__description {
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 400;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        margin-top: 24px;
+    }
+
+    &__button {
+        margin-left: 16px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    &__block {
+        padding: 32px;
+        margin-top: 16px;
+        border-radius: 24px;
+        color: #fff;
+        background: #251b25;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            padding: 20px;
+        }
+
+        &_about {
+            padding: 24px 16px;
+        }
+    }
+
+    &__content {
+        margin-top: 24px;
+        overflow-x: auto;
+        font-size: 14px;
+        line-height: 1.5em;
+        color: rgba(255, 255, 255, 0.85);
+
+        & > h1:first-child {
+            display: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: 1.5em;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 4px;
+        }
+
+        a {
+            color: #ffbe5c;
+            text-decoration: none;
+
+            &:visited {
+                color: #ffbe5c;
+            }
+
+            &:hover {
+                color: #f3cb8f;
+            }
+        }
+
+        pre {
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 16px;
+            border-radius: 12px;
+            background-color: #160d1b;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin-top: 20px;
+        }
+    }
+
+    &__info-title {
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 600;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            cursor: pointer;
+        }
+    }
+
+    &__info-title-text {
+        flex: 1;
+    }
+
+    &__info-title-icon {
+        display: none;
+        align-items: center;
+        transition: transform 0.4s ease-in-out;
+
+        &_mobile-visible {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            display: flex;
+        }
+    }
+
+    &__info-list {
+        display: block;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-in-out;
+
+            &_mobile-visible {
+                max-height: 1000px;
+            }
+        }
+    }
+
+    &__info-item {
+        display: flex;
+        padding: 12px 16px;
+        color: #fff;
+        text-decoration: none;
+
+        &:first-child {
+            margin-top: 16px;
+        }
+
+        &_link {
+            border-radius: 8px;
+            transition: background-color 0.2s ease-in-out;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.08);
+
+                #{$block}__info-item-arrow {
+                    opacity: 1;
+                }
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+                background-color: rgba(255, 255, 255, 0.08);
+
+                #{$block}__info-item-arrow {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &__info-item-content {
+        flex: 1;
+        margin-left: 12px;
+    }
+
+    &__info-item-title {
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    &__info-item-value {
+        margin-top: 2px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    &__info-item-arrow-wrapper {
+        align-self: center;
+        padding-left: 10px;
+    }
+
+    &__info-item-arrow {
+        transform: rotate(-90deg);
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    &__info-link {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

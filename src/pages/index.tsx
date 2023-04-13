@@ -1,10 +1,9 @@
 import Head from 'next/head';
 
-import {App as MyApp} from '../components/App/App';
-import '../styles.scss';
-import '../vendors.scss';
+import {Landing} from '../components/Landing/Landing';
+import {Layout} from '../components/Layout/Layout';
 
-function App() {
+const Home = () => {
     return (
         <>
             <Head>
@@ -57,9 +56,12 @@ function App() {
                 <meta property="share:sharing_schema" content="default" />
                 <link rel="manifest" href="/manifest.json" />
             </Head>
-            <MyApp />
+
+            <Layout>
+                <Landing />
+            </Layout>
         </>
     );
-}
+};
 
-export default App;
+export default Home;

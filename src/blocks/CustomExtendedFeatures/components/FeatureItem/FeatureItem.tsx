@@ -1,38 +1,33 @@
 import {HTML, Image, ThemedImage} from '@gravity-ui/page-constructor';
 import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
-import {Icon, Label, Skeleton} from '@gravity-ui/uikit';
+import {Icon} from '@gravity-ui/uikit';
+import Link from 'next/link';
 import React from 'react';
 
 import calendarIcon from '../../../../assets/icons/calendar.svg';
 import starIcon from '../../../../assets/icons/star.svg';
-import stars from '../../../../stars.json';
-import {block, getMediaImage, getThemedValue} from '../../../../utils';
-import versions from '../../../../versions.json';
+import versionIcon from '../../../../assets/icons/version.svg';
+import {block, getLibById, getMediaImage, getThemedValue} from '../../../../utils';
 
 import './FeatureItem.scss';
 
 const b = block('custom-extended-features-feature-item');
 
-const githubUrl = 'https://github.com/';
-
 export type FeatureItemProps = {
-    title?: string;
-    text: string;
+    id?: string;
+    title: string;
+    description?: string;
     icon?: ThemedImage;
     contentStyle: Record<string, unknown>;
-    githubId?: string;
-    npmId?: string;
-    storybookUrl?: string;
 };
 
+// eslint-disable-next-line complexity
 export const FeatureItem: React.FC<FeatureItemProps> = ({
+    id,
     title,
-    text,
+    description,
     icon,
     contentStyle,
-    githubId,
-    npmId,
-    storybookUrl,
 }) => {
     const theme = useThemeValue();
 
@@ -42,96 +37,65 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     let starsCount;
     let latestReleaseVersion;
     let latestReleaseDate;
+    let isPrimary = false;
 
-    if (githubId) {
-        const libStars = stars.find((elem) => elem.title === githubId);
-        if (libStars) {
-            starsCount = libStars.stars;
+    if (id) {
+        const {data: libData, config: libConfig} = getLibById(id);
+
+        if (libData) {
+            starsCount = libData.stars ?? 0;
+            latestReleaseVersion = libData?.version ?? '';
+            latestReleaseDate = libData.lastUpdate ?? '';
+        }
+
+        if (libConfig) {
+            isPrimary = libConfig.primary;
         }
     }
-    if (npmId) {
-        const version = versions.find((elem) => elem.title === npmId);
-        if (version) {
-            latestReleaseVersion = version.version;
-            latestReleaseDate = version.date;
-        }
-    }
 
-    const Tag = githubId ? 'a' : 'div';
-    const tagProps = githubId ? {href: `${githubUrl}${githubId}`, target: '_blank'} : {};
+    const Tag = id ? (Link as any) : React.Fragment;
+    const InnerTag = id ? 'a' : 'div';
+    const tagProps = id ? {href: `/libraries/${id}`} : {};
 
     return (
-        <Tag
-            {...tagProps}
-            className={b({active: Boolean(githubId || storybookUrl)})}
-            style={contentStyle}
-        >
-            {iconData && <Image {...iconData} className={b('icon')} />}
+        <Tag {...tagProps}>
+            <InnerTag
+                className={b({library: Boolean(id), primary: Boolean(id) && isPrimary})}
+                style={contentStyle}
+            >
+                {iconData && <Image {...iconData} className={b('icon')} />}
 
-            <div className={b('header')}>
-                {title ? (
-                    <h5 className={b('title')}>
-                        <HTML>{title}</HTML>
-                    </h5>
-                ) : null}
-                {starsCount ? (
-                    <div className={b('stars')}>
-                        <Icon data={starIcon} size={19} />
-                        <div className={b('stars-count')}>{starsCount}</div>
+                <div className={b('header')}>
+                    {title ? (
+                        <h5 className={b('title')}>
+                            <HTML>{title}</HTML>
+                        </h5>
+                    ) : null}
+                    {starsCount ? (
+                        <div className={b('stars')}>
+                            <Icon data={starIcon} size={19} />
+                            <div className={b('stars-count')}>{starsCount}</div>
+                        </div>
+                    ) : null}
+                </div>
+
+                <div className={b('text')}>{description}</div>
+
+                {id && latestReleaseVersion ? (
+                    <div className={b('release-info')}>
+                        <div className={b('release-info-block')}>
+                            <Icon data={versionIcon} size={16} />
+                            <div className={b('release-version')}>v{latestReleaseVersion}</div>
+                        </div>
+                        {latestReleaseDate ? (
+                            <div className={b('release-info-block')}>
+                                <Icon data={calendarIcon} size={16} />
+                                <div className={b('release-date')}>{latestReleaseDate}</div>
+                            </div>
+                        ) : null}
                     </div>
                 ) : null}
-            </div>
-
-            <div className={b('text')}>{text}</div>
-
-            {npmId ? (
-                <div className={b('release-info')}>
-                    {latestReleaseVersion ? (
-                        <React.Fragment>
-                            <Label className={b('release-label')}>v{latestReleaseVersion}</Label>
-                            {latestReleaseDate ? (
-                                <React.Fragment>
-                                    <Icon data={calendarIcon} size={16} />
-                                    <div className={b('release-date')}>{latestReleaseDate}</div>
-                                </React.Fragment>
-                            ) : null}
-                        </React.Fragment>
-                    ) : (
-                        <Skeleton className={b('release-skeleton')} />
-                    )}
-                </div>
-            ) : null}
-
-            {githubId || storybookUrl ? (
-                <div className={b('buttons')}>
-                    {githubId ? (
-                        <a
-                            key="github"
-                            className={b('button')}
-                            href={`${githubUrl}${githubId}`}
-                            target="_blank"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                            }}
-                        >
-                            Github
-                        </a>
-                    ) : null}
-                    {storybookUrl ? (
-                        <a
-                            key="storybook"
-                            className={b('button')}
-                            href={storybookUrl}
-                            target="_blank"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                            }}
-                        >
-                            Storybook
-                        </a>
-                    ) : null}
-                </div>
-            ) : null}
+            </InnerTag>
         </Tag>
     );
 };
