@@ -26,13 +26,11 @@ export const Menu: React.FC = () => {
     return (
         <div className={b()}>
             <div className={b('wrapper', {open: mobileMenuOpen})}>
-                <div className={b('logo')}>
-                    <Link href="/">
-                        <a>
-                            <div className={b('logo-image')} />
-                        </a>
-                    </Link>
-                </div>
+                <Link href="/">
+                    <a className={b('logo')}>
+                        <div className={b('logo-image')} />
+                    </a>
+                </Link>
 
                 <div className={b('desktop-menu')}>
                     <div className={b('desktop-menu-items')}>

@@ -22,6 +22,10 @@ $border-color: rgba(255, 255, 255, 0.2);
             padding: 0 24px;
         }
 
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            justify-content: space-between;
+        }
+
         &_open {
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
                 background: none;
@@ -39,7 +43,6 @@ $border-color: rgba(255, 255, 255, 0.2);
         font-weight: 600;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            flex: 1;
             padding: 20px 34px 20px 0;
         }
     }
