@@ -28,7 +28,7 @@ export const Menu: React.FC = () => {
             <div className={b('wrapper', {open: mobileMenuOpen})}>
                 <Link href="/">
                     <a className={b('logo')}>
-                        <div className={b('logo-image')} />
+                        <span className={b('logo-image')} />
                     </a>
                 </Link>
 
