@@ -13,7 +13,7 @@ type LibConfig = {
     storybookUrl: string;
     readmeUrl: string;
     changelogUrl: string;
-    test: number;
+    mainBranch: string;
 };
 
 type LibData = {

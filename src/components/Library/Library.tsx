@@ -2,8 +2,6 @@ import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
 import Link from 'next/link';
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
 import arrowIcon from '../../assets/icons/arrow.svg';
@@ -15,6 +13,7 @@ import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {block, getLibById} from '../../utils';
+import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
 
@@ -168,14 +167,13 @@ export const Library: React.FC<Props> = ({id}) => {
                                 }}
                             />
                             <div className={b('content')}>
-                                <ReactMarkdown
-                                    skipHtml
-                                    remarkPlugins={[remarkGfm]}
-                                    children={
+                                <MDXRenderer
+                                    text={
                                         activeTab === Tab.Readme
                                             ? lib.data.readme
                                             : lib.data.changelog
                                     }
+                                    absoluteImgPath={`https://raw.githubusercontent.com/${lib.config.githubId}/${lib.config.mainBranch}/`}
                                 />
                             </div>
                         </div>

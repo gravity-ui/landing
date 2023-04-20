@@ -11,6 +11,7 @@ export const libs = [
         storybookUrl: 'https://preview.gravity-ui.com/uikit/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/uikit/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'components',
@@ -25,6 +26,7 @@ export const libs = [
             'https://preview.gravity-ui.com/components/?path=/story/components-adaptivetabs--default',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/components/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/components/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'icons',
@@ -38,6 +40,7 @@ export const libs = [
         storybookUrl: 'https://preview.gravity-ui.com/icons/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/icons/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/icons/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'dynamic-forms',
@@ -53,6 +56,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'page-constructor',
@@ -68,6 +72,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/page-constructor/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'blog-constructor',
@@ -83,6 +88,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'chartkit',
@@ -96,6 +102,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'dashkit',
@@ -109,6 +116,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/dashkit/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'yagr',
@@ -122,6 +130,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'nodekit',
@@ -135,6 +144,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/nodekit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/nodekit/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'expresskit',
@@ -148,6 +158,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/expresskit/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'app-layout',
@@ -161,6 +172,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/app-layout/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/app-layout/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     // {
     //     id: 'app-builder',
@@ -174,6 +186,7 @@ export const libs = [
     //     storybookUrl: '',
     //     readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/app-builder/main/README.md',
     //     changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/app-builder/main/CHANGELOG.md',
+    //     mainBranch: 'main',
     // },
     {
         id: 'navigation',
@@ -187,6 +200,7 @@ export const libs = [
         storybookUrl: 'https://preview.gravity-ui.com/navigation/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/navigation/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/navigation/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'date-utils',
@@ -200,6 +214,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/date-utils/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'axios-wrapper',
@@ -214,6 +229,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/axios-wrapper/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/axios-wrapper/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'dialog-fields',
@@ -229,6 +245,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'paranoid',
@@ -242,6 +259,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/paranoid/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/paranoid/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'react-data-table',
@@ -256,6 +274,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/react-data-table/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/react-data-table/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'unipika',
@@ -269,6 +288,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/unipika/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/unipika/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'ui-logger',
@@ -282,6 +302,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/ui-logger/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/ui-logger/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'oauth-clients',
@@ -297,6 +318,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/oauth-clients/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/oauth-clients/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'i18n',
@@ -310,6 +332,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/i18n/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/i18n/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'eslint-config',
@@ -324,6 +347,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/eslint-config/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/eslint-config/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'tsconfig',
@@ -337,6 +361,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/tsconfig/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/tsconfig/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'prettier-config',
@@ -351,6 +376,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/prettier-config/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/prettier-config/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'stylelint-config',
@@ -365,6 +391,7 @@ export const libs = [
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'babel-preset',
@@ -378,6 +405,7 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/babel-preset/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/babel-preset/main/CHANGELOG.md',
+        mainBranch: 'main',
     },
     {
         id: 'browserslist-config',
@@ -393,5 +421,6 @@ export const libs = [
             'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/README.md',
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/CHANGELOG.md',
+        mainBranch: 'master',
     },
 ];
