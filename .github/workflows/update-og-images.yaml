@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       # Start dev server
-      - name: Lint
+      - name: Start dev server
         run: npm run start
       # Prepare og:images
       - name: Prepare og:images
