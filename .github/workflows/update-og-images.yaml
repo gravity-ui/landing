@@ -1,0 +1,35 @@
+name: Update og images
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+      # Start dev server
+      - name: Lint
+        run: npm run start
+      # Prepare og:images
+      - name: Prepare og:images
+        run: npm run prepare-og-images
+      # Commit new images
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
+      - run: git add .
+      - run: "git commit -m 'feat: update og:image'"
+      - run: git push
