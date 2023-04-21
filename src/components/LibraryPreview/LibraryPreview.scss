@@ -1,0 +1,112 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}library-preview-layout';
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    &__container {
+        width: 1200px;
+        height: 630px;
+    }
+
+    &__card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        padding: 32px;
+        min-height: 240px;
+        text-decoration: none;
+        background: #251b25;
+        color: rgba(255, 255, 255, 0.7);
+
+        background-image: url('../../assets/primary-lib-background.svg');
+        background-size: cover;
+    }
+
+
+    &__library-header {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__library-title {
+        flex: 1;
+
+        @include pcStyles.heading4();
+
+        display: flex;
+        position: relative;
+        margin-bottom: pcVariables.$indentXXXS;
+        color: #fff;
+
+        a {
+            @include pcStyles.link();
+        }
+    }
+
+    &__stars {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+    }
+
+    &__stars-count {
+        margin-left: 6px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    &__description {
+        flex: 1;
+
+        @include pcStyles.text-size(body-2);
+
+        a {
+            @include pcStyles.link();
+        }
+    }
+
+    &__release-info {
+        display: flex;
+        align-items: flex-end;
+        margin-top: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+    }
+
+    &__release-info-block {
+        display: flex;
+        align-items: center;
+        margin-left: 18px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    &__release-version,
+    &__release-date {
+        margin-left: 6px;
+    }
+
+    &__logo {
+        margin-left: auto;
+        width: 160px;
+        height: 32px;
+        background-image: url('../../assets/logo.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}

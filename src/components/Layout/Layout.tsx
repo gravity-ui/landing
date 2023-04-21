@@ -13,12 +13,13 @@ import {Footer} from '../Footer/Footer';
 import {Menu} from '../Menu/Menu';
 
 import './Layout.scss';
-import {Meta} from './Meta/Meta';
+import {Meta, MetaProps} from './Meta/Meta';
 
 const b = block('layout');
 
 export type LayoutProps = {
     title?: string;
+    meta?: MetaProps;
     children: React.ReactNode;
 };
 
@@ -28,12 +29,12 @@ const theme = Theme.Dark;
 configureUiKit({lang});
 configurePageConstructor({lang});
 
-export const Layout: React.FC<LayoutProps> = ({title, children}) => {
+export const Layout: React.FC<LayoutProps> = ({title, children, meta}) => {
     return (
         <React.Fragment>
             <Head>
                 <title>Gravity&nbsp;UI{title ? ` – ${title}` : ''}</title>
-                <Meta />
+                <Meta {...meta} />
             </Head>
 
             <PageConstructorProvider theme={theme}>

@@ -1,6 +1,21 @@
 import React from 'react';
 
-export const Meta: React.FC = () => {
+const DEFAULT_META = {
+    name: 'Gravity&nbsp;UI',
+    description: 'Build modern interfaces with the Gravity design system and libraries',
+    image: 'https://gravity-ui.com/index-social.png',
+};
+
+export type MetaProps = {
+    name?: string;
+    description?: string;
+    image?: string;
+};
+export const Meta: React.FC = ({
+    name = DEFAULT_META.name,
+    description = DEFAULT_META.description,
+    image = DEFAULT_META.image,
+}: MetaProps) => {
     return (
         <React.Fragment>
             <meta charSet="utf-8" />
@@ -14,40 +29,28 @@ export const Meta: React.FC = () => {
 
             <link rel="apple-touch-icon" href="/favicon-192x192.png" />
 
-            <meta
-                name="description"
-                content="Build modern interfaces with the Gravity design system and libraries "
-            />
+            <meta name="description" content={description} />
 
             <link data-react-helmet="true" rel="canonical" href="https://gravity-ui.com/" />
 
-            <meta itemProp="name" content="Gravity&nbsp;UI" />
-            <meta
-                itemProp="description"
-                content="Build modern interfaces with the Gravity design system and libraries"
-            />
-            <meta itemProp="image" content="https://gravity-ui.com/index-social.png" />
+            <meta itemProp="name" content={name} />
+            <meta itemProp="description" content={description} />
+            <meta itemProp="image" content={image} />
 
-            <meta property="og:title" content="Gravity&nbsp;UI" />
-            <meta
-                property="og:description"
-                content="Build modern interfaces with the Gravity design system and libraries"
-            />
+            <meta property="og:title" content={name} />
+            <meta property="og:description" content={description} />
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content="Gravity&nbsp;UI" />
+            <meta property="og:site_name" content={name} />
             <meta property="og:url" content="https://gravity-ui.com/" />
-            <meta property="og:image" content="https://gravity-ui.com/index-social.png" />
+            <meta property="og:image" content={image} />
             <meta property="og:locale" content="en" />
 
-            <meta name="twitter:title" content="Gravity&nbsp;UI" />
-            <meta
-                name="twitter:description"
-                content="Build modern interfaces with the Gravity design system and libraries"
-            />
+            <meta name="twitter:title" content={name} />
+            <meta name="twitter:description" content={description} />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content="https://gravity-ui.com/index-social.png" />
+            <meta name="twitter:image" content={image} />
 
-            <meta property="share:title" content="Gravity&nbsp;UI" />
+            <meta property="share:title" content={name} />
             <meta property="share:sharing_schema" content="default" />
             <link rel="manifest" href="/manifest.json" />
         </React.Fragment>
