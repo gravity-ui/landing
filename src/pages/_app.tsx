@@ -1,5 +1,4 @@
 import {NextComponentType} from 'next';
-import React from 'react';
 
 import '../styles.scss';
 import '../vendors.scss';
