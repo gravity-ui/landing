@@ -27,8 +27,17 @@ export const MDXRenderer: React.FC<Props> = ({text, withComponents = false, abso
                 components={{
                     img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
                         let correctedSrc = props.src;
-                        if (absoluteImgPath && props.src && props.src.startsWith('./')) {
-                            correctedSrc = props.src.replace('./', absoluteImgPath);
+                        if (absoluteImgPath && props.src) {
+                            if (props.src.startsWith('./')) {
+                                correctedSrc = props.src.replace('./', absoluteImgPath);
+                            } else if (
+                                !(
+                                    props.src.startsWith('http://') ||
+                                    props.src.startsWith('https://')
+                                )
+                            ) {
+                                correctedSrc = `${absoluteImgPath}${props.src}`;
+                            }
                         }
                         return <img {...props} src={correctedSrc} />;
                     },
