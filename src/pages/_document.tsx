@@ -3,12 +3,10 @@ import block from 'bem-cn-lite';
 import {Head, Html, Main, NextScript} from 'next/document';
 import Script from 'next/script';
 
-import {IS_PRODUCTION} from '../constants';
+import {GA_ID, IS_PRODUCTION} from '../constants';
 
 const theme = Theme.Dark;
 const b = block('yc-root');
-
-const GA_ID = 'GTM-KHT6KD7';
 
 export const Document = () => {
     return (
