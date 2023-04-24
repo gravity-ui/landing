@@ -110,58 +110,13 @@ $block: '.#{variables.$ns}library';
     &__content {
         margin-top: 24px;
         overflow-x: auto;
-        font-size: 14px;
-        line-height: 1.5em;
-        color: rgba(255, 255, 255, 0.85);
-
-        & > h1:first-child {
-            display: none;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            line-height: 1.5em;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 4px;
-        }
-
-        a {
-            color: #ffbe5c;
-            text-decoration: none;
-
-            &:visited {
-                color: #ffbe5c;
-            }
-
-            &:hover {
-                color: #f3cb8f;
-            }
-        }
-
-        pre {
-            max-width: 100%;
-            overflow-x: auto;
-            padding: 16px;
-            border-radius: 12px;
-            background-color: #160d1b;
-        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             margin-top: 20px;
+        }
+
+        & .markdown-body > h1:first-child {
+            display: none;
         }
     }
 

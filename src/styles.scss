@@ -58,4 +58,35 @@ body.yc-root {
     background-color: var(--yc-color-base-background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    .markdown-body {
+        background-color: transparent;
+
+        img {
+            background-color: transparent;
+        }
+
+        table tr,
+        table tr:nth-child(2n) {
+            background-color: transparent;
+        }
+
+        a {
+            color: var(--yc-color-base-special);
+            text-decoration: none;
+
+            &:visited {
+                color: var(--yc-color-base-special);
+            }
+
+            &:hover {
+                color: var(--yc-color-base-special-hover);
+                text-decoration: none;
+            }
+        }
+
+        pre {
+            background-color: var(--yc-color-base-background);
+        }
+    }
 }
