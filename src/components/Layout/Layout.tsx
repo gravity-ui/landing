@@ -29,7 +29,7 @@ const theme = Theme.Dark;
 configureUiKit({lang});
 configurePageConstructor({lang});
 
-export const Layout: React.FC<LayoutProps> = ({title, children, meta}) => {
+export const Layout: React.FC<LayoutProps> = ({title, children, meta = {}}) => {
     return (
         <React.Fragment>
             <Head>
