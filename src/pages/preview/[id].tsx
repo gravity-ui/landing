@@ -18,9 +18,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    return {
-        props: {id: context.params?.id},
-    };
+    if (process.env.CI || !process.env.IS_PRODUCTION) {
+        return {
+            props: {id: context.params?.id},
+        };
+    }
+
+    // https://nextjs.org/docs/api-reference/data-fetching/get-static-props#notfound
+    return {notFound: true};
 };
 
 /**
