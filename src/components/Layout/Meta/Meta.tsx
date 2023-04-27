@@ -11,11 +11,12 @@ export type MetaProps = {
     description?: string;
     image?: string;
 };
-export const Meta: React.FC = ({
+
+export const Meta: React.FC<MetaProps> = ({
     name = DEFAULT_META.name,
     description = DEFAULT_META.description,
     image = DEFAULT_META.image,
-}: MetaProps) => {
+}) => {
     return (
         <React.Fragment>
             <meta charSet="utf-8" />
