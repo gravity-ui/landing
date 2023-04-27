@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-    if (process.env.CI || !process.env.IS_PRODUCTION) {
+    if (process.env.CI || process.env.NODE_ENV !== 'production') {
         return {
             props: {id: context.params?.id},
         };

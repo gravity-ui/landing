@@ -62,11 +62,4 @@ const plugins = [
 module.exports = withPlugins(plugins, {
     reactStrictMode: true,
     output: 'export',
-    async redirects() {
-        return process.env.CI || !process.env.IS_PRODUCTION ? [] : [{
-            source: '/preview/:id*',
-            destination: '/',
-            permanent: true,
-        }]
-    }
 });
