@@ -1,0 +1,45 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}example-block';
+
+#{$block} {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-around;
+        padding: 40px;
+
+        &_theme_dark {
+            background: #251b25;
+        }
+
+        &_theme_light {
+            background: #fff;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        background: #251B25;
+        border-top: 2px solid #160D1B;
+    }
+
+    &__control {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        cursor: pointer;
+    }
+}

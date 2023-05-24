@@ -1,0 +1,54 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}components-layout';
+
+#{$block} {
+    margin: 24px 0 0;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        margin: 0;
+
+        & &__header-grid {
+            .container-fluid {
+                padding: 0;
+                .col {
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    &__navigation {
+        margin-top: 16px;
+    }
+
+    &__library-title {
+        padding: 16px 20px;
+        border-radius: 12px;
+        background: #251b25;
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    &__component {
+        display: block;
+        padding: 12px 20px;
+        font-size: 15px;
+        line-height: 20px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+
+        &:first-child {
+            margin-top: 8px;
+        }
+
+        &_active {
+            background: rgba(255, 190, 92, 0.1);
+            border-radius: 12px;
+            color: #ffbe5c;
+        }
+    }
+}

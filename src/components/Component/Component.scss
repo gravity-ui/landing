@@ -1,0 +1,25 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}component';
+
+#{$block} {
+    &__title {
+        margin-top: 0;
+        padding: 0 32px;
+        color: #fff;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 500;
+    }
+
+    &__content {
+        padding: 0 32px;
+    }
+
+    #{$block} &__content {
+        .markdown-body pre {
+            background: #251b25;
+        }
+    }
+}

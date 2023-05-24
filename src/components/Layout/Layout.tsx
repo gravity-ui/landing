@@ -19,7 +19,7 @@ const b = block('layout');
 
 export type LayoutProps = {
     title?: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 const lang = Lang.En;

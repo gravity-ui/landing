@@ -1,5 +1,5 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, Tabs} from '@gravity-ui/uikit';
+import {Button, Icon, Link, Tabs, Text} from '@gravity-ui/uikit';
 import {EvaluateOptions, evaluate} from '@mdx-js/mdx';
 import * as provider from '@mdx-js/react';
 import type {MDXComponents, MDXContent} from 'mdx/types';
@@ -7,13 +7,17 @@ import React from 'react';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 
+import {ExampleBlock} from './ExampleBlock/ExampleBlock';
 import {getCustomImg} from './utils';
 
 const componentsAvailableInMDX: MDXComponents = {
     Grid,
     Row,
     Col,
+    ExampleBlock,
     Button,
+    Link,
+    Text,
     Icon,
     Tabs,
 };

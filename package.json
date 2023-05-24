@@ -43,6 +43,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^10.0.0",
     "prettier": "^2.7.1",
+    "raw-loader": "^4.0.2",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
     "stylelint": "^14.15.0",

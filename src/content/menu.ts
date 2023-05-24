@@ -5,8 +5,7 @@ export const menu = [
     },
     {
         title: 'Components',
-        url: '#',
-        isComingSoon: true,
+        url: '/components',
     },
     {
         title: 'Design',
