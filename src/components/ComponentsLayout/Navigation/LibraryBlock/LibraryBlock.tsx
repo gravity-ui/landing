@@ -53,7 +53,7 @@ export const LibraryBlock: React.FC<ComponentsLayoutProps> = ({
                         Overview
                     </a>
                 </Link>
-                {data.components.map((component) => {
+                {data.components.map((component: any) => {
                     const componentUrl = `${overviewUrl}/${component.id}`;
 
                     return (
