@@ -1,0 +1,14 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}components-layout-navigation';
+
+#{$block} {
+    &__empty {
+        margin-top: 16px;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 600;
+        text-align: center;
+    }
+}

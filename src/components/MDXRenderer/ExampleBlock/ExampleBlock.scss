@@ -24,6 +24,23 @@ $block: '.#{variables.$ns}example-block';
         &_theme_light {
             background: #fff;
         }
+
+        & > * {
+            margin: 0 8px;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            flex-direction: column;
+            align-items: center;
+
+            & > * {
+                margin-top: 16px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
     }
 
     &__controls {
@@ -31,8 +48,8 @@ $block: '.#{variables.$ns}example-block';
         align-items: center;
         justify-content: center;
         padding: 14px;
-        background: #251B25;
-        border-top: 2px solid #160D1B;
+        background: #251b25;
+        border-top: 2px solid #160d1b;
     }
 
     &__control {

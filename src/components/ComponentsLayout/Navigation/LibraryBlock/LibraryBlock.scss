@@ -1,0 +1,75 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}components-layout-navigation-library-block';
+
+#{$block} {
+    &__header {
+        display: flex;
+        padding: 16px 20px;
+        margin-top: 16px;
+        border-radius: 12px;
+        background: #251b25;
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    &__title {
+        flex: 1;
+    }
+
+    &__arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 16px;
+        transition: transform 0.2s ease-in-out;
+
+        &_open {
+            transform: rotate(-180deg);
+        }
+    }
+
+    &__components {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.4s ease-in-out;
+
+        &_open {
+            max-height: 5000px;
+        }
+    }
+
+    &__component {
+        display: block;
+        padding: 12px 20px;
+        margin-top: 4px;
+        border-radius: 12px;
+        font-size: 15px;
+        line-height: 20px;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: background-color 0.2s ease-in-out;
+
+        &:first-child {
+            margin-top: 8px;
+        }
+
+        &:hover {
+            background: #251b25;
+        }
+
+        &_active {
+            background: rgba(255, 190, 92, 0.1);
+            color: #ffbe5c;
+
+            &:hover {
+                background: rgba(255, 190, 92, 0.1);
+                color: #ffbe5c;
+            }
+        }
+    }
+}

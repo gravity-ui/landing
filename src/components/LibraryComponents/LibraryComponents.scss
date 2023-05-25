@@ -42,6 +42,10 @@ $block: '.#{variables.$ns}library-components';
 
     &__components {
         margin-top: 8px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin: 0 20px;
+        }
     }
 
     &__col {
@@ -62,6 +66,12 @@ $block: '.#{variables.$ns}library-components';
 
         &:hover {
             transform: translateY(-6px);
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            &:hover {
+                transform: translateY(0);
+            }
         }
     }
 

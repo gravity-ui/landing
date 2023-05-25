@@ -9,7 +9,7 @@ $block: '.#{variables.$ns}components-layout';
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
         margin: 0;
 
-        & &__header-grid {
+        & &__layout-grid {
             .container-fluid {
                 padding: 0;
                 .col {
@@ -19,36 +19,93 @@ $block: '.#{variables.$ns}components-layout';
         }
     }
 
-    &__navigation {
-        margin-top: 16px;
+    &__mobile-navigation-control {
+        display: none;
+        justify-content: center;
+        padding: 12px 20px;
+        margin: 6px 0 24px;
+        border-radius: 16px;
+        background: #251b25;
+        font-size: 15px;
+        line-height: 20px;
+        cursor: pointer;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            display: flex;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            margin: 6px 20px;
+        }
     }
 
-    &__library-title {
-        padding: 16px 20px;
-        border-radius: 12px;
-        background: #251b25;
-        font-size: 17px;
-        line-height: 24px;
-        font-weight: 600;
+    &__mobile-navigation-control-label {
+        flex: 1;
+    }
+
+    &__mobile-navigation-control-arrow {
+        transform: rotate(-90deg);
+    }
+
+    &__mobile-navigation-control-library {
         color: #fff;
     }
 
-    &__component {
-        display: block;
-        padding: 12px 20px;
-        font-size: 15px;
-        line-height: 20px;
-        color: rgba(255, 255, 255, 0.7);
-        text-decoration: none;
+    &__mobile-navigation-control-component {
+        color: rgba(255, 255, 255, 0.5);
+    }
 
-        &:first-child {
-            margin-top: 8px;
+    &__mobile-navigation-header {
+        display: none;
+        padding: 20px 0;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            display: flex;
         }
+    }
 
-        &_active {
-            background: rgba(255, 190, 92, 0.1);
-            border-radius: 12px;
-            color: #ffbe5c;
+    &__mobile-navigation-header-title {
+        flex: 1;
+        font-size: 24px;
+        line-height: 28px;
+        font-weight: 600;
+    }
+
+    &__mobile-navigation-header-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        margin-left: 16px;
+        cursor: pointer;
+    }
+
+    &__navigation {
+        display: block;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            display: none;
+
+            &_mobile-open {
+                display: block;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 30;
+                padding: 0 20px 20px;
+                overflow-y: auto;
+                background: #160d1b;
+            }
+        }
+    }
+
+    &__content {
+        padding-left: 16px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            padding-left: 0;
         }
     }
 }

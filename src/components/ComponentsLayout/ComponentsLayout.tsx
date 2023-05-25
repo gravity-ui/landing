@@ -1,12 +1,14 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {TextInput} from '@gravity-ui/uikit';
-import Link from 'next/link';
+import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
+import arrowIcon from '../../assets/icons/arrow.svg';
+import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import {libComponents} from '../../content/components';
 import {block} from '../../utils';
 
 import './ComponentsLayout.scss';
+import {Navigation} from './Navigation/Navigation';
 
 const b = block('components-layout');
 
@@ -21,63 +23,61 @@ export const ComponentsLayout: React.FC<ComponentsLayoutProps> = ({
     componentId,
     children,
 }) => {
-    const [filterString, setFilterString] = React.useState('');
+    const [isOpenMobileNavigation, setIsOpenMobileNavigation] = React.useState(false);
+
+    const curLib = libComponents.find((item) => item.id === libId);
+    const curComponent = curLib?.components.find((item) => item.id === componentId);
 
     return (
         <div className={b()}>
-            <Grid className={b('header-grid')}>
+            <Grid className={b('layout-grid')}>
                 <Row>
-                    <Col sizes={3}>
-                        <TextInput
-                            value={filterString}
-                            onUpdate={setFilterString}
-                            size="xl"
-                            placeholder="Search by component name"
-                        />
-
-                        <div className={b('navigation')}>
-                            {libComponents.map((lib) => {
-                                const overviewUrl = `/components/${lib.id}`;
-
-                                return (
-                                    <div key={lib.id} className={b('library')}>
-                                        <div className={b('library-title')}>{lib.title}</div>
-                                        <div className={b('library-components')}>
-                                            <Link key="__overview" href={overviewUrl}>
-                                                <a
-                                                    className={b('component', {
-                                                        active:
-                                                            libId === lib.id &&
-                                                            componentId === undefined,
-                                                    })}
-                                                >
-                                                    Overview
-                                                </a>
-                                            </Link>
-                                            {lib.components.map((component) => {
-                                                const componentUrl = `${overviewUrl}/${component.id}`;
-
-                                                return (
-                                                    <Link key={component.id} href={componentUrl}>
-                                                        <a
-                                                            className={b('component', {
-                                                                active:
-                                                                    libId === lib.id &&
-                                                                    componentId === component.id,
-                                                            })}
-                                                        >
-                                                            {component.title}
-                                                        </a>
-                                                    </Link>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                    <Col sizes={{all: 12, lg: 3}}>
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className={b('mobile-navigation-control')}
+                            onClick={() => {
+                                setIsOpenMobileNavigation(true);
+                            }}
+                        >
+                            <div className={b('mobile-navigation-control-label')}>
+                                <span className={b('mobile-navigation-control-library')}>
+                                    {curLib?.title}
+                                </span>
+                                {curComponent ? (
+                                    <span className={b('mobile-navigation-control-component')}>
+                                        {' '}
+                                        • {curComponent.title}
+                                    </span>
+                                ) : null}
+                            </div>
+                            <div className={b('mobile-navigation-control-arrow')}>
+                                <Icon data={arrowIcon} width={10} height={6} />
+                            </div>
+                        </div>
+                        <div className={b('navigation', {'mobile-open': isOpenMobileNavigation})}>
+                            <div className={b('mobile-navigation-header')}>
+                                <div className={b('mobile-navigation-header-title')}>
+                                    Components
+                                </div>
+                                <div
+                                    tabIndex={0}
+                                    role="button"
+                                    className={b('mobile-navigation-header-close')}
+                                    onClick={() => {
+                                        setIsOpenMobileNavigation(false);
+                                    }}
+                                >
+                                    <Icon data={menuCloseIcon} width={16} />
+                                </div>
+                            </div>
+                            <Navigation libId={libId} componentId={componentId} />
                         </div>
                     </Col>
-                    <Col sizes={9}>{children}</Col>
+                    <Col sizes={{all: 12, lg: 9}}>
+                        <div className={b('content')}>{children}</div>
+                    </Col>
                 </Row>
             </Grid>
         </div>

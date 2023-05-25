@@ -35,7 +35,7 @@ export const LibraryComponents: React.FC<Props> = ({id}) => {
                                 <Col
                                     key={component.id}
                                     className={b('col')}
-                                    sizes={{all: 12, md: 6, lg: 4}}
+                                    sizes={{all: 12, lg: 6, xl: 4}}
                                 >
                                     <Link
                                         href={`/components/${libComponentsInfo.id}/${component.id}`}

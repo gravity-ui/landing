@@ -184,6 +184,7 @@ export const Library: React.FC<Props> = ({id}) => {
                                 <div
                                     className={b('info-title')}
                                     tabIndex={0}
+                                    role="button"
                                     onClick={() => {
                                         setIsVisibleInfoListMobile(!isVisibleInfoListMobile);
                                     }}

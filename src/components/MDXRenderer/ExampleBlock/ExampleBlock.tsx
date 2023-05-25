@@ -28,11 +28,12 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({background, children}
                 </div>
             </ThemeProvider>
             <div className={b('controls')}>
-                <div tabIndex={0} className={b('control')}>
+                <div tabIndex={0} role="button" className={b('control')}>
                     <Icon data={codeIcon} size={16} />
                 </div>
                 <div
                     tabIndex={0}
+                    role="button"
                     className={b('control')}
                     onClick={() => {
                         setTheme(theme === 'dark' ? 'light' : 'dark');
