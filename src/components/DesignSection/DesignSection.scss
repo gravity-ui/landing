@@ -1,0 +1,70 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}design-section';
+
+#{$block} {
+    &__header {
+        padding: 56px 24px 72px;
+        border-radius: 24px;
+        color: #fff;
+        background: #251b25;
+        background-size: cover;
+        background-image: url('../../assets/secondary-lib-background-lg.svg');
+
+        &_primary {
+            background-image: url('../../assets/primary-lib-background-lg.svg');
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            border-radius: 0;
+        }
+    }
+
+    &__title {
+        margin: 0 0 8px;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 600;
+        color: #fff;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            font-size: 28px;
+            line-height: 36px;
+        }
+    }
+
+    &__description {
+        font-size: 17px;
+        line-height: 24px;
+        font-weight: 400;
+    }
+
+    &__articles {
+        margin-top: 20px;
+    }
+
+    &__article-wrapper {
+        margin-top: 10px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__article {
+        color: var(--yc-color-base-special);
+        text-decoration: none;
+        font-size: 20px;
+        line-height: 24px;
+
+        &:visited {
+            color: var(--yc-color-base-special);
+        }
+
+        &:hover {
+            color: var(--yc-color-base-special-hover);
+            text-decoration: none;
+        }
+    }
+}

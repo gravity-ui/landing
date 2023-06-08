@@ -22,7 +22,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     return {
-        props: {libId: context.params?.libId, componentId: context.params?.componentId},
+        props: {
+            libId: context.params?.libId,
+            componentId: context.params?.componentId,
+        },
     };
 };
 

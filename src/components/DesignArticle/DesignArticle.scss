@@ -1,7 +1,7 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../variables.scss';
 
-$block: '.#{variables.$ns}component';
+$block: '.#{variables.$ns}design-article';
 
 #{$block} {
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
@@ -14,10 +14,6 @@ $block: '.#{variables.$ns}component';
         font-size: 32px;
         line-height: 40px;
         font-weight: 500;
-    }
-
-    &__tabs {
-        margin-bottom: 24px;
     }
 
     #{$block} &__content {

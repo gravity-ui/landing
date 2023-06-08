@@ -9,7 +9,7 @@ export const menu = [
     },
     {
         title: 'Design',
-        url: '#',
-        isComingSoon: true,
+        url: '/design',
+        // isComingSoon: true,
     },
 ];
