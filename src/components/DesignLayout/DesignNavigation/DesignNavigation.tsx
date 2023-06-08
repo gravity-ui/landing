@@ -67,21 +67,21 @@ export const DesignNavigation: React.FC<ComponentsLayoutProps> = ({sectionId, ar
                 const filterStringLower = newValue.toLowerCase();
 
                 const filteredSections = filterStringLower
-                    ? allSections.reduce<any[]>((acc, lib) => {
-                          if (lib.title.toLowerCase().includes(filterStringLower)) {
-                              newOpenState[lib.id] = true;
+                    ? allSections.reduce<any[]>((acc, section) => {
+                          if (section.title.toLowerCase().includes(filterStringLower)) {
+                              newOpenState[section.id] = true;
 
-                              const articles = lib.articles.filter((article) =>
+                              const articles = section.articles.filter((article: any) =>
                                   article.title.toLowerCase().includes(filterStringLower),
                               );
-                              acc.push({...lib, articles});
+                              acc.push({...section, articles});
                           } else {
-                              const articles = lib.articles.filter((article) =>
+                              const articles = section.articles.filter((article: any) =>
                                   article.title.toLowerCase().includes(filterStringLower),
                               );
                               if (articles.length > 0) {
-                                  newOpenState[lib.id] = true;
-                                  acc.push({...lib, articles});
+                                  newOpenState[section.id] = true;
+                                  acc.push({...section, articles});
                               }
                           }
 

@@ -10,6 +10,6 @@ export const menu = [
     {
         title: 'Design',
         url: '/design',
-        // isComingSoon: true,
+        isComingSoon: false,
     },
 ];
