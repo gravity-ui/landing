@@ -2,47 +2,43 @@ import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import Link from 'next/link';
 import React from 'react';
 
-import {libComponents} from '../../content/components';
-import {block, getLibById} from '../../utils';
+import {libs} from '../../content/components';
+import {block} from '../../utils';
 
-import './LibraryComponents.scss';
+import './ComponentsLibrary.scss';
 
-const b = block('library-components');
+const b = block('components-library');
 
 type Props = {
-    id: string;
+    libId: string;
 };
 
-export const LibraryComponents: React.FC<Props> = ({id}) => {
-    const lib = getLibById(id);
+export const ComponentsLibrary: React.FC<Props> = ({libId}) => {
+    const lib = libs.find((item) => item.id === libId);
 
-    const libComponentsInfo = libComponents.find((item) => item.id === id);
-
-    if (!libComponentsInfo) return null;
+    if (!lib) return null;
 
     return (
         <div className={b()}>
-            <div className={b('header', {primary: lib.config.primary})}>
-                <h1 className={b('title')}>{libComponentsInfo.title}</h1>
-                <div className={b('description')}>{libComponentsInfo.description}</div>
+            <div className={b('header', {primary: lib.primary})}>
+                <h1 className={b('title')}>{lib.title}</h1>
+                <div className={b('description')}>{lib.description}</div>
             </div>
 
             <div className={b('components')}>
                 <Grid>
                     <Row>
-                        {libComponentsInfo.components.map((component) => {
+                        {lib.components.map((component) => {
                             return (
                                 <Col
                                     key={component.id}
                                     className={b('col')}
                                     sizes={{all: 12, lg: 6, xl: 4}}
                                 >
-                                    <Link
-                                        href={`/components/${libComponentsInfo.id}/${component.id}`}
-                                    >
+                                    <Link href={`/components/${lib.id}/${component.id}`}>
                                         <a
                                             className={b('component', {
-                                                primary: lib.config.primary,
+                                                primary: lib.primary,
                                             })}
                                         >
                                             <div className={b('component-image')} />

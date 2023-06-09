@@ -3,7 +3,7 @@ import {Button, Icon, Link, Tabs, Text} from '@gravity-ui/uikit';
 import {EvaluateOptions, evaluate} from '@mdx-js/mdx';
 import * as provider from '@mdx-js/react';
 import type {MDXComponents, MDXContent} from 'mdx/types';
-import React from 'react';
+import React, {memo} from 'react';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 
@@ -28,7 +28,7 @@ type Props = {
     absoluteImgPath?: string;
 };
 
-export const MDXRenderer = React.memo<Props>(({text, withComponents = false, absoluteImgPath}) => {
+export const MDXRenderer = memo<Props>(({text, withComponents = false, absoluteImgPath}) => {
     const [isEvaluated, setIsEvaluated] = React.useState(false);
     const resultRef = React.useRef<MDXContent | null>(null);
 

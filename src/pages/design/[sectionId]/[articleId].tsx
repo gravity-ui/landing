@@ -30,8 +30,12 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     const section = sections.find((item) => item.id === sectionId);
     const article = section?.articles.find((item) => item.id === articleId);
 
+    if (!section || !article) {
+        return null;
+    }
+
     return (
-        <Layout title={`${section?.title} – ${article?.title}`}>
+        <Layout title={`${section.title} – ${article.title}`}>
             <DesignLayout sectionId={sectionId} articleId={articleId}>
                 <DesignArticle sectionId={sectionId} articleId={articleId} />
             </DesignLayout>

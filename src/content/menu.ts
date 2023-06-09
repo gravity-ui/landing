@@ -1,4 +1,10 @@
-export const menu = [
+export type MenuItem = {
+    title: string;
+    url: string;
+    isComingSoon?: boolean;
+};
+
+export const menu: MenuItem[] = [
     {
         title: 'Libraries',
         url: '/libraries',
@@ -10,6 +16,5 @@ export const menu = [
     {
         title: 'Design',
         url: '/design',
-        isComingSoon: false,
     },
 ];

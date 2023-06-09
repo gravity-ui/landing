@@ -3,19 +3,16 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
-import {libComponents} from '../../../content/components';
+import {libs} from '../../../content/components';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
-        paths: libComponents.reduce<{params: {libId: string; componentId: string}}[]>(
-            (acc, lib) => {
-                lib.components.forEach((component) => {
-                    acc.push({params: {libId: lib.id, componentId: component.id}});
-                });
-                return acc;
-            },
-            [],
-        ),
+        paths: libs.reduce<{params: {libId: string; componentId: string}}[]>((acc, lib) => {
+            lib.components.forEach((component) => {
+                acc.push({params: {libId: lib.id, componentId: component.id}});
+            });
+            return acc;
+        }, []),
         fallback: false,
     };
 };
@@ -30,10 +27,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const ComponentPage = ({libId, componentId}: {libId: string; componentId: string}) => {
-    const lib = libComponents.find((item) => item.id === componentId);
+    const lib = libs.find((item) => item.id === libId);
+    const component = lib?.components.find((item) => item.id === componentId);
+
+    if (!lib || !component) {
+        return null;
+    }
 
     return (
-        <Layout title={lib?.title}>
+        <Layout title={`${lib.title} – ${component.title}`}>
             <ComponentsLayout libId={libId} componentId={componentId}>
                 <Component libId={libId} componentId={componentId} />
             </ComponentsLayout>

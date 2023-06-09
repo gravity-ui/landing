@@ -1,7 +1,7 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../variables.scss';
 
-$block: '.#{variables.$ns}design-layout';
+$block: '.#{variables.$ns}navigation-layout';
 
 #{$block} {
     margin: 24px 0 0;
@@ -47,11 +47,11 @@ $block: '.#{variables.$ns}design-layout';
         transform: rotate(-90deg);
     }
 
-    &__mobile-navigation-control-library {
+    &__mobile-navigation-control-section {
         color: #fff;
     }
 
-    &__mobile-navigation-control-component {
+    &__mobile-navigation-control-sub-section {
         color: rgba(255, 255, 255, 0.5);
     }
 

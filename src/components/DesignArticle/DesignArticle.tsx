@@ -10,7 +10,7 @@ const b = block('design-article');
 
 export type DesignArticleProps = {
     sectionId: string;
-    articleId?: string;
+    articleId: string;
 };
 
 export const DesignArticle: React.FC<DesignArticleProps> = ({sectionId, articleId}) => {

@@ -1,7 +1,7 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../variables.scss';
 
-$block: '.#{variables.$ns}library-components';
+$block: '.#{variables.$ns}components-library';
 
 #{$block} {
     &__header {

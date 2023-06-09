@@ -1,13 +1,13 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
+import {ComponentsLibrary} from '../../../components/ComponentsLibrary/ComponentsLibrary';
 import {Layout} from '../../../components/Layout/Layout';
-import {LibraryComponents} from '../../../components/LibraryComponents/LibraryComponents';
-import {libComponents} from '../../../content/components';
+import {libs} from '../../../content/components';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
-        paths: libComponents.map((item) => ({params: {libId: item.id}})),
+        paths: libs.map((item) => ({params: {libId: item.id}})),
         fallback: false,
     };
 };
@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const LibraryComponentsPage = ({libId}: {libId: string}) => {
-    const lib = libComponents.find((item) => item.id === libId);
+    const lib = libs.find((item) => item.id === libId);
 
     if (!lib) {
         return null;
@@ -28,7 +28,7 @@ export const LibraryComponentsPage = ({libId}: {libId: string}) => {
     return (
         <Layout title={lib.title}>
             <ComponentsLayout libId={libId}>
-                <LibraryComponents id={libId} />
+                <ComponentsLibrary libId={libId} />
             </ComponentsLayout>
         </Layout>
     );

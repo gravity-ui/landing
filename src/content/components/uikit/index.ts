@@ -1,49 +1,44 @@
 import {getLibById} from '../../../utils';
+import {Lib} from '../types';
 
-import buttonDesignContent from './content/button-design.mdx';
-import buttonContent from './content/button.mdx';
-import linkDesignContent from './content/link-design.mdx';
-import linkContent from './content/link.mdx';
+import buttonDesign from './content/button/design.mdx';
+import buttonOverview from './content/button/overview.mdx';
+import linkDesign from './content/link/design.mdx';
+import linkOverview from './content/link/overview.mdx';
 
 const {config} = getLibById('uikit');
 
-export const uikit = {
+export const uikit: Lib = {
     id: config.id,
     title: config.title,
+    primary: config.primary,
     description: config.description,
-    content: '#UIKit',
     components: [
         {
             id: 'button',
             title: 'Button',
             description: 'Button bla bla bla',
-            content: buttonContent,
-            design: buttonDesignContent,
+            content: {
+                overview: buttonOverview,
+                design: buttonDesign,
+            },
         },
         {
             id: 'link',
             title: 'Link',
             description: 'Link bla bla bla',
-            content: linkContent,
-            design: linkDesignContent,
+            content: {
+                overview: linkOverview,
+                design: linkDesign,
+            },
         },
         {
             id: 'button2',
             title: 'Button without design',
             description: 'Button bla bla bla',
-            content: buttonContent,
+            content: {
+                overview: buttonOverview,
+            },
         },
-        // {
-        //     id: 'button3',
-        //     title: 'Button3',
-        //     description: 'Button bla bla bla',
-        //     content: buttonContent,
-        // },
-        // {
-        //     id: 'button4',
-        //     title: 'Button4',
-        //     description: 'Button bla bla bla',
-        //     content: buttonContent,
-        // },
     ],
 };

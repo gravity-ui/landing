@@ -2,30 +2,29 @@ import {Icon} from '@gravity-ui/uikit';
 import Link from 'next/link';
 import React from 'react';
 
-import arrowIcon from '../../../../assets/icons/arrow.svg';
-import {block} from '../../../../utils';
+import arrowIcon from '../../../assets/icons/arrow.svg';
+import {block} from '../../../utils';
+import {Section} from '../types';
 
 import './SectionBlock.scss';
 
-const b = block('components-layout-navigation-section-block');
+const b = block('navigation-layout-section-block');
 
 export type SectionBlockProps = {
-    data: any;
+    data: Section;
     isOpen: boolean;
-    setIsOpen: (newValue: boolean) => void;
-    sectionId: string;
-    articleId?: string;
+    setIsOpen: (val: boolean) => void;
+    curSectionId: string;
+    curSubSectionId?: string;
 };
 
 export const SectionBlock: React.FC<SectionBlockProps> = ({
     data,
     isOpen,
     setIsOpen,
-    sectionId,
-    articleId,
+    curSectionId,
+    curSubSectionId,
 }) => {
-    const overviewUrl = `/design/${data.id}`;
-
     return (
         <div className={b()}>
             <div
@@ -43,29 +42,30 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                     <Icon data={arrowIcon} width={10} height={6} />
                 </div>
             </div>
-            <div className={b('components', {open: isOpen})}>
-                {data.id === '__components' ? null : (
-                    <Link key="__overview" href={overviewUrl}>
+            <div className={b('sub-sections', {open: isOpen})}>
+                {data.url ? (
+                    <Link key="__overview" href={data.url}>
                         <a
-                            className={b('component', {
-                                active: sectionId === data.id && articleId === undefined,
+                            className={b('sub-section', {
+                                active: curSectionId === data.id && curSubSectionId === undefined,
                             })}
                         >
                             Overview
                         </a>
                     </Link>
-                )}
-                {data.articles.map((article: any) => {
-                    const componentUrl = `${overviewUrl}/${article.id}`;
+                ) : null}
 
+                {data.subSections.map((subSection) => {
                     return (
-                        <Link key={article.id} href={article.link ? article.link : componentUrl}>
+                        <Link key={subSection.id} href={subSection.url}>
                             <a
-                                className={b('component', {
-                                    active: sectionId === data.id && articleId === article.id,
+                                className={b('sub-section', {
+                                    active:
+                                        curSectionId === data.id &&
+                                        curSubSectionId === subSection.id,
                                 })}
                             >
-                                {article.title}
+                                {subSection.title}
                             </a>
                         </Link>
                     );

@@ -1,3 +1,4 @@
 import {guides} from './guides';
+import {Section} from './types';
 
-export const sections = [guides];
+export const sections: Section[] = [guides];

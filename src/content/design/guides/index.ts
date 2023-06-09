@@ -1,11 +1,12 @@
+import {Section} from '../types';
+
 import guide1Content from './content/guide1.mdx';
 import guide2Content from './content/guide2.mdx';
 
-export const guides = {
+export const guides: Section = {
     id: 'guides',
     title: 'Design guides',
     description: 'Design guides description',
-    content: '#Design',
     articles: [
         {
             id: 'guide1',

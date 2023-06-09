@@ -3,46 +3,46 @@ import {useRouter} from 'next/router';
 import React from 'react';
 
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
-import {libComponents} from '../../content/components';
+import {libs} from '../../content/components';
 import {block} from '../../utils';
 
 import './Component.scss';
 
 const b = block('component');
 
-export type ComponentProps = {
-    libId: string;
-    componentId?: string;
-};
-
 enum Tab {
     Overview = 'overview',
     Design = 'design',
 }
 
+const tabs = [
+    {
+        id: Tab.Overview,
+        title: 'Overview',
+    },
+    {
+        id: Tab.Design,
+        title: 'Design',
+    },
+];
+
+export type ComponentProps = {
+    libId: string;
+    componentId?: string;
+};
+
 export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
     const router = useRouter();
     const {tabId} = router.query;
 
-    const tabs = [
-        {
-            id: Tab.Overview,
-            title: 'Overview',
-        },
-        {
-            id: Tab.Design,
-            title: 'Design',
-        },
-    ];
-
     const [activeTab, setActiveTab] = React.useState(
-        tabId === 'design' ? Tab.Design : Tab.Overview,
+        tabId === Tab.Design ? Tab.Design : Tab.Overview,
     );
     React.useEffect(() => {
-        setActiveTab(tabId === 'design' ? Tab.Design : Tab.Overview);
+        setActiveTab(tabId === Tab.Design ? Tab.Design : Tab.Overview);
     }, [tabId]);
 
-    const lib = libComponents.find((item) => item.id === libId);
+    const lib = libs.find((item) => item.id === libId);
     const component = lib?.components.find((item) => item.id === componentId);
 
     if (!lib || !component) {
@@ -52,7 +52,8 @@ export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
     return (
         <div className={b()}>
             <h1 className={b('title')}>{component.title}</h1>
-            {component.design ? (
+
+            {component.content.design ? (
                 <div className={b('tabs')}>
                     <Tabs
                         size="xl"
@@ -63,7 +64,7 @@ export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
                                 pathname: router.pathname,
                                 query: {
                                     ...router.query,
-                                    tabId: selectedTab === Tab.Design ? 'design' : undefined,
+                                    tabId: selectedTab === Tab.Design ? Tab.Design : undefined,
                                 },
                             });
                         }}
@@ -72,10 +73,10 @@ export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
             ) : null}
 
             <div className={b('content')}>
-                {tabId === 'design' && component.design ? (
-                    <MDXRenderer key="design" text={component.design} />
+                {tabId === Tab.Design && component.content.design ? (
+                    <MDXRenderer key="design" text={component.content.design} />
                 ) : (
-                    <MDXRenderer key="content" text={component.content} withComponents />
+                    <MDXRenderer key="overview" text={component.content.overview} withComponents />
                 )}
             </div>
         </div>

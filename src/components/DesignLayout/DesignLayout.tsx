@@ -1,16 +1,8 @@
-import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Icon} from '@gravity-ui/uikit';
-import React from 'react';
+import React, {useMemo} from 'react';
 
-import arrowIcon from '../../assets/icons/arrow.svg';
-import menuCloseIcon from '../../assets/icons/menu-close.svg';
-import {sections} from '../../content/design';
-import {block} from '../../utils';
-
-import './DesignLayout.scss';
-import {DesignNavigation} from './DesignNavigation/DesignNavigation';
-
-const b = block('design-layout');
+import {libs} from '../../content/components';
+import {sections as designSections} from '../../content/design';
+import {NavigationLayout, Section, SubSection} from '../NavigationLayout/NavigationLayout';
 
 export type DesignLayoutProps = {
     sectionId: string;
@@ -19,63 +11,51 @@ export type DesignLayoutProps = {
 };
 
 export const DesignLayout: React.FC<DesignLayoutProps> = ({sectionId, articleId, children}) => {
-    const [isOpenMobileNavigation, setIsOpenMobileNavigation] = React.useState(false);
+    const sections = useMemo<Section[]>(() => {
+        const result: Section[] = designSections.map((section) => ({
+            id: section.id,
+            title: section.title,
+            url: `/design/${section.id}`,
+            subSections: section.articles.map((article) => ({
+                id: article.id,
+                title: article.title,
+                url: `/design/${section.id}/${article.id}`,
+            })),
+        }));
 
-    const curSection = sections.find((item) => item.id === sectionId);
-    const curArticle = curSection?.articles.find((item) => item.id === articleId);
+        const componentsSubSections = libs.reduce<SubSection[]>((acc, lib) => {
+            acc.push(
+                ...lib.components
+                    .filter((component) => Boolean(component.content.design))
+                    .map((component) => ({
+                        id: component.id,
+                        title: component.title,
+                        url: `/components/${lib.id}/${component.id}?tabId=design`,
+                    })),
+            );
+            return acc;
+        }, []);
+
+        if (componentsSubSections.length > 0) {
+            result.push({
+                id: '__components',
+                title: 'Components',
+                subSections: componentsSubSections,
+            });
+        }
+
+        return result;
+    }, []);
 
     return (
-        <div className={b()}>
-            <Grid className={b('layout-grid')}>
-                <Row>
-                    <Col sizes={{all: 12, lg: 3}}>
-                        <div
-                            tabIndex={0}
-                            role="button"
-                            className={b('mobile-navigation-control')}
-                            onClick={() => {
-                                setIsOpenMobileNavigation(true);
-                            }}
-                        >
-                            <div className={b('mobile-navigation-control-label')}>
-                                <span className={b('mobile-navigation-control-library')}>
-                                    {curSection?.title}
-                                </span>
-                                {curArticle ? (
-                                    <span className={b('mobile-navigation-control-component')}>
-                                        {' '}
-                                        • {curArticle.title}
-                                    </span>
-                                ) : null}
-                            </div>
-                            <div className={b('mobile-navigation-control-arrow')}>
-                                <Icon data={arrowIcon} width={10} height={6} />
-                            </div>
-                        </div>
-                        <div className={b('navigation', {'mobile-open': isOpenMobileNavigation})}>
-                            <div className={b('mobile-navigation-header')}>
-                                <div className={b('mobile-navigation-header-title')}>
-                                    Components
-                                </div>
-                                <div
-                                    tabIndex={0}
-                                    role="button"
-                                    className={b('mobile-navigation-header-close')}
-                                    onClick={() => {
-                                        setIsOpenMobileNavigation(false);
-                                    }}
-                                >
-                                    <Icon data={menuCloseIcon} width={16} />
-                                </div>
-                            </div>
-                            <DesignNavigation sectionId={sectionId} articleId={articleId} />
-                        </div>
-                    </Col>
-                    <Col sizes={{all: 12, lg: 9}}>
-                        <div className={b('content')}>{children}</div>
-                    </Col>
-                </Row>
-            </Grid>
-        </div>
+        <NavigationLayout
+            sections={sections}
+            mobileTitle="Design"
+            searchPlaceholder="Search by articles"
+            sectionId={sectionId}
+            subSectionId={articleId}
+        >
+            {children}
+        </NavigationLayout>
     );
 };

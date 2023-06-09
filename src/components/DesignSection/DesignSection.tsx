@@ -9,11 +9,11 @@ import './DesignSection.scss';
 const b = block('design-section');
 
 type Props = {
-    id: string;
+    sectionId: string;
 };
 
-export const DesignSection: React.FC<Props> = ({id}) => {
-    const section = sections.find((item) => item.id === id);
+export const DesignSection: React.FC<Props> = ({sectionId}) => {
+    const section = sections.find((item) => item.id === sectionId);
 
     if (!section) return null;
 

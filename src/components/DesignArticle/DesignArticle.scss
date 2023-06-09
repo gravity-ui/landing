@@ -15,10 +15,4 @@ $block: '.#{variables.$ns}design-article';
         line-height: 40px;
         font-weight: 500;
     }
-
-    #{$block} &__content {
-        .markdown-body pre {
-            background: #251b25;
-        }
-    }
 }

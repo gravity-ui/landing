@@ -1,7 +1,7 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
-@use '../../../../variables.scss';
+@use '../../../variables.scss';
 
-$block: '.#{variables.$ns}components-layout-navigation-library-block';
+$block: '.#{variables.$ns}navigation-layout-section-block';
 
 #{$block} {
     &__header {
@@ -33,7 +33,7 @@ $block: '.#{variables.$ns}components-layout-navigation-library-block';
         }
     }
 
-    &__components {
+    &__sub-sections {
         overflow: hidden;
         max-height: 0;
         transition: max-height 0.4s ease-in-out;
@@ -43,7 +43,7 @@ $block: '.#{variables.$ns}components-layout-navigation-library-block';
         }
     }
 
-    &__component {
+    &__sub-section {
         display: block;
         padding: 12px 20px;
         margin-top: 4px;

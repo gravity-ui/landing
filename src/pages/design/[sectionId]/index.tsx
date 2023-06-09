@@ -28,7 +28,7 @@ export const DesignSectionPage = ({sectionId}: {sectionId: string}) => {
     return (
         <Layout title={section.title}>
             <DesignLayout sectionId={sectionId}>
-                <DesignSection id={sectionId} />
+                <DesignSection sectionId={sectionId} />
             </DesignLayout>
         </Layout>
     );
