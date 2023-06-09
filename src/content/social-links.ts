@@ -1,4 +1,4 @@
-import React from 'react';
+import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
 
 import githubIcon from '../assets/icons/github.svg';
 import storybookIcon from '../assets/icons/storybook.svg';
@@ -7,7 +7,7 @@ import telegramIcon from '../assets/icons/telegram.svg';
 export type SocialLinkItem = {
     title: string;
     url: string;
-    icon: React.ReactNode;
+    icon: SVGIconData;
 };
 
 export const socialLinks: SocialLinkItem[] = [
