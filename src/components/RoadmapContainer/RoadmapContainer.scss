@@ -1,0 +1,27 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}roadmap-container';
+
+#{$block} {
+    margin: 56px 0 0;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        margin: 32px 0 0;
+    }
+
+    &__title {
+        margin: 0 0 40px;
+        font-size: 48px;
+        line-height: 56px;
+        font-weight: 600;
+        color: #fff;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            font-size: 32px;
+            line-height: 48px;
+            margin-bottom: 32px;
+        }
+    }
+}
