@@ -4,18 +4,18 @@ import {block} from '../../utils';
 
 import './Roadmap.scss';
 import {RoadmapItem} from './RoadmapItem/RoadmapItem';
-import {RoadmapEvent} from './types';
+import {RoadmapTask} from './types';
 
 const b = block('roadmap');
 
 interface RoadmapProps {
-    events: RoadmapEvent[];
+    tasks: RoadmapTask[];
 }
 
-export const Roadmap: React.FC<RoadmapProps> = ({events}) => (
+export const Roadmap: React.FC<RoadmapProps> = ({tasks}) => (
     <ul className={b()}>
-        {events.map((event, idx) => (
-            <RoadmapItem key={idx} event={event} />
+        {tasks.map((task, idx) => (
+            <RoadmapItem key={idx} task={task} />
         ))}
     </ul>
 );

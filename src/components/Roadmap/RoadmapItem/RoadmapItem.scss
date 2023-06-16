@@ -23,7 +23,7 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         flex-direction: column;
         align-items: center;
         padding-top: pcVariables.$indentXS;
-        width: var(--yc-roadmap-separator-width);
+        width: var(--roadmap-separator-width);
         flex-shrink: 0;
         position: relative;
 
@@ -38,7 +38,7 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         &:has(+ #{$block}_completed) {
             #{$block}__separator {
                 &::after {
-                    color: var(--yc-roadmap-completed-event-color);
+                    color: var(--roadmap-completed-task-color);
                     border-left: 4px solid;
                 }
             }

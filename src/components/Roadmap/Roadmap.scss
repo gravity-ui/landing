@@ -4,15 +4,15 @@
 $block: '.#{variables.$ns}roadmap';
 
 #{$block} {
-    --yc-roadmap-separator-width: 88px;
-    --yc-roadmap-background-color: var(--yc-color-base-background);
-    --yc-roadmap-tail-color: rgba(255, 255, 255, 0.72);
-    --yc-roadmap-default-event-color: rgba(255, 255, 255, 0.5);
-    --yc-roadmap-completed-event-color: var(--yc-color-base-special);
-    --yc-roadmap-progress-event-color: rgba(255, 255, 255, 0.7);
+    --roadmap-separator-width: 88px;
+    --roadmap-background-color: var(--yc-color-base-background);
+    --roadmap-tail-color: rgba(255, 255, 255, 0.72);
+    --roadmap-default-task-color: rgba(255, 255, 255, 0.5);
+    --roadmap-completed-task-color: var(--yc-color-base-special);
+    --roadmap-progress-task-color: rgba(255, 255, 255, 0.7);
 
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-        --yc-roadmap-separator-width: 40px;
+        --roadmap-separator-width: 40px;
     }
 
     display: flex;
@@ -26,8 +26,8 @@ $block: '.#{variables.$ns}roadmap';
         content: ' ';
         position: absolute;
         top: pcVariables.$indentXS;
-        left: calc(var(--yc-roadmap-separator-width) / 2 - 0.5px);
-        background-image: linear-gradient(var(--yc-roadmap-tail-color) 33%, transparent 0%);
+        left: calc(var(--roadmap-separator-width) / 2 - 0.5px);
+        background-image: linear-gradient(var(--roadmap-tail-color) 33%, transparent 0%);
         background-size: 1px 3px;
         background-position: 50% 50%;
         background-repeat: repeat-y;

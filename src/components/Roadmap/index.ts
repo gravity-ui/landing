@@ -1,4 +1,4 @@
-export {RoadmapEventStatus} from './types';
-export type {RoadmapEvent} from './types';
+export {RoadmapTaskStatus} from './types';
+export type {RoadmapTask} from './types';
 
 export {Roadmap} from './Roadmap';

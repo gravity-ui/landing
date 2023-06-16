@@ -11,22 +11,22 @@ $block: '.#{variables.$ns}roadmap-icon';
     height: 30px;
     width: 30px;
     border-radius: 100%;
-    background-color: var(--yc-roadmap-background-color);
+    background-color: var(--roadmap-background-color);
     z-index: 1;
 
     &__icon {
-        color: var(--yc-roadmap-default-event-color);
+        color: var(--roadmap-default-task-color);
     }
 
     &_completed {
         #{$block}__icon {
-            color: var(--yc-roadmap-completed-event-color);
+            color: var(--roadmap-completed-task-color);
         }
     }
 
     &_progress {
         #{$block}__icon {
-            color: var(--yc-roadmap-progress-event-color);
+            color: var(--roadmap-progress-task-color);
         }
     }
 }

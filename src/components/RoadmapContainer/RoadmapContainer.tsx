@@ -1,6 +1,6 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 
-import {roadmapEvents} from '../../content/roadmap';
+import {roadmapTasks} from '../../content/roadmap';
 import {block} from '../../utils';
 import {Roadmap} from '../Roadmap';
 
@@ -17,7 +17,7 @@ export const RoadmapContainer = () => (
         </Row>
         <Row>
             <Col sizes={12}>
-                <Roadmap events={roadmapEvents} />
+                <Roadmap tasks={roadmapTasks} />
             </Col>
         </Row>
     </Grid>

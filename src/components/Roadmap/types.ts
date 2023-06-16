@@ -1,12 +1,12 @@
-export enum RoadmapEventStatus {
-    IN_PROGRESS = 'IN_PROGRESS',
-    COMPLETED = 'COMPLETED',
-    PLANNED = 'PLANNED',
+export enum RoadmapTaskStatus {
+    InProgress = 'InProgress',
+    Completed = 'Completed',
+    Planned = 'Planned',
 }
 
-export type RoadmapEvent = {
+export type RoadmapTask = {
     title: string;
-    status: RoadmapEventStatus;
+    status: RoadmapTaskStatus;
     url?: string;
     completedDate?: string;
 };

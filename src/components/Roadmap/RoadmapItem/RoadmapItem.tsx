@@ -6,34 +6,34 @@ import TimeAgo from 'react-timeago';
 
 import {block} from '../../../utils';
 import {RoadmapIcon} from '../RoadmapIcon/RoadmapIcon';
-import {RoadmapEvent, RoadmapEventStatus} from '../types';
+import {RoadmapTask, RoadmapTaskStatus} from '../types';
 
 import './RoadmapItem.scss';
 
 const b = block('roadmap-item');
 
 interface RoadmapItemProps {
-    event: RoadmapEvent;
+    task: RoadmapTask;
 }
 
-export const RoadmapItem: React.FC<RoadmapItemProps> = ({event}) => {
-    const inProgress = event.status === RoadmapEventStatus.IN_PROGRESS;
-    const completed = event.status === RoadmapEventStatus.COMPLETED;
+export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
+    const inProgress = task.status === RoadmapTaskStatus.InProgress;
+    const completed = task.status === RoadmapTaskStatus.Completed;
 
-    const showStatus = inProgress || (completed && event.completedDate);
+    const showStatus = inProgress || (completed && task.completedDate);
 
-    const eventContent = (
+    const taskContent = (
         <div className={b('wrapper')}>
             <div className={b('content')}>
-                <HTML>{event.title}</HTML>
+                <HTML>{task.title}</HTML>
                 {showStatus && (
                     <span className={b('status')}>
                         {inProgress && 'In progress'}
-                        {completed && event.completedDate && <TimeAgo date={event.completedDate} />}
+                        {completed && task.completedDate && <TimeAgo date={task.completedDate} />}
                     </span>
                 )}
             </div>
-            {event.url && <Icon className={b('arrow')} data={ChevronRight} size={16} />}
+            {task.url && <Icon className={b('arrow')} data={ChevronRight} size={16} />}
         </div>
     );
 
@@ -42,18 +42,18 @@ export const RoadmapItem: React.FC<RoadmapItemProps> = ({event}) => {
             className={b({
                 completed,
                 progress: inProgress,
-                planned: event.status === RoadmapEventStatus.PLANNED,
+                planned: task.status === RoadmapTaskStatus.Planned,
             })}
         >
             <div className={b('separator')}>
-                <RoadmapIcon status={event.status} />
+                <RoadmapIcon status={task.status} />
             </div>
-            {event.url ? (
-                <Link href={event.url} className={b('link')} target="_blank">
-                    {eventContent}
+            {task.url ? (
+                <Link href={task.url} className={b('link')} target="_blank">
+                    {taskContent}
                 </Link>
             ) : (
-                eventContent
+                taskContent
             )}
         </li>
     );

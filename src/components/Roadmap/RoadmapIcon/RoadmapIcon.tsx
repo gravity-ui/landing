@@ -4,20 +4,20 @@ import React from 'react';
 
 import RoadmapCicle from '../../../assets/icons/roadmap-circle.svg';
 import {block} from '../../../utils';
-import {RoadmapEventStatus} from '../types';
+import {RoadmapTaskStatus} from '../types';
 
 import './RoadmapIcon.scss';
 
 const b = block('roadmap-icon');
 
 interface RoadmapIconProps {
-    status: RoadmapEventStatus;
+    status: RoadmapTaskStatus;
 }
 
-const statusToIcon: Record<RoadmapEventStatus, IconProps['data']> = {
-    [RoadmapEventStatus.COMPLETED]: CircleCheck,
-    [RoadmapEventStatus.IN_PROGRESS]: Clock,
-    [RoadmapEventStatus.PLANNED]: RoadmapCicle,
+const statusToIcon: Record<RoadmapTaskStatus, IconProps['data']> = {
+    [RoadmapTaskStatus.Completed]: CircleCheck,
+    [RoadmapTaskStatus.InProgress]: Clock,
+    [RoadmapTaskStatus.Planned]: RoadmapCicle,
 };
 
 const ICON_HEIGHT = 28;
@@ -25,8 +25,8 @@ const ICON_HEIGHT = 28;
 export const RoadmapIcon: React.FC<RoadmapIconProps> = ({status}) => (
     <div
         className={b({
-            completed: status === RoadmapEventStatus.COMPLETED,
-            progress: status === RoadmapEventStatus.IN_PROGRESS,
+            completed: status === RoadmapTaskStatus.Completed,
+            progress: status === RoadmapTaskStatus.InProgress,
         })}
     >
         <Icon data={statusToIcon[status]} size={ICON_HEIGHT} className={b('icon')} />
