@@ -14,6 +14,8 @@ import {CustomBlock} from '../blocks/constants';
 import {CustomBlockModel} from '../blocks/types';
 import {libs} from '../libs.mjs';
 
+import {roadmapTasks} from './roadmap';
+
 interface CustomPageContent {
     blocks: (Block | CustomBlockModel)[];
     menu?: PageContent['menu'];
@@ -141,6 +143,11 @@ const typedLanding: CustomPageContent = {
                     title: lib.title,
                     description: lib.description,
                 })),
+        },
+        {
+            type: CustomBlock.Roadmap,
+            title: 'Roadmap',
+            tasks: roadmapTasks,
         },
         {
             type: CustomBlock.CustomBanner,

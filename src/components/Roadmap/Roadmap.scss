@@ -4,16 +4,12 @@
 $block: '.#{variables.$ns}roadmap';
 
 #{$block} {
-    --roadmap-separator-width: 88px;
+    --roadmap-separator-width: 28px;
     --roadmap-background-color: var(--yc-color-base-background);
     --roadmap-tail-color: rgba(255, 255, 255, 0.72);
     --roadmap-default-task-color: rgba(255, 255, 255, 0.5);
     --roadmap-completed-task-color: var(--yc-color-base-special);
     --roadmap-progress-task-color: rgba(255, 255, 255, 0.7);
-
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-        --roadmap-separator-width: 40px;
-    }
 
     display: flex;
     flex-direction: column;
