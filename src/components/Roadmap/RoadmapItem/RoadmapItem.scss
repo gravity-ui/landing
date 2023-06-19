@@ -63,9 +63,10 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         padding-right: 52px;
         border-radius: 16px;
         position: relative;
+        margin-left: pcVariables.$indentSM;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            margin-left: pcVariables.$indentXXXS;
+            margin-left: pcVariables.$indentXXS;
         }
     }
 
