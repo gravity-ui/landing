@@ -4,6 +4,10 @@ export const menu = [
         url: '/libraries',
     },
     {
+        title: 'Roadmap',
+        url: '/#roadmap',
+    },
+    {
         title: 'Components',
         url: '#',
         isComingSoon: true,

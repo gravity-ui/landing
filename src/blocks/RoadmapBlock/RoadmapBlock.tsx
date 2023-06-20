@@ -21,7 +21,7 @@ export type RoadmapModel = RoadmapProps & {
 export const RoadmapBlock: React.FC<RoadmapProps> = ({animated, title, tasks}) => {
     return (
         <AnimateBlock className={b()} animate={animated}>
-            <h2 className={b('title')}>
+            <h2 className={b('title')} data-section="roadmap">
                 <HTML>{title}</HTML>
             </h2>
             <Roadmap tasks={tasks} />
