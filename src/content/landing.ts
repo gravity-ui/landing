@@ -54,6 +54,11 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
+                        date: '2023-06-20T10:00:00.000Z',
+                        content:
+                            'Follow Gravity UI improvements with roadmap section on our <a href="/#roadmap">website</a>',
+                    },
+                    {
                         date: '2023-06-14T11:00:00.000Z',
                         content:
                             '<a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout--docs">Layout components</a> are stable now',
