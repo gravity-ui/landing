@@ -1,0 +1,12 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}icon-button';
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 62px;
+    width: 62px;
+}

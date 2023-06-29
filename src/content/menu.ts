@@ -13,4 +13,8 @@ export const menu = [
         url: '#',
         isComingSoon: true,
     },
+    {
+        title: 'Icons',
+        url: '/icons',
+    },
 ];
