@@ -1,5 +1,5 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
-@use '../../variables.scss';
+@use '../../../variables.scss';
 
 $block: '.#{variables.$ns}icon-collection';
 

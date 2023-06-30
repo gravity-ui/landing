@@ -1,0 +1,12 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}icon-dialog-actions';
+
+#{$block} {
+    display: flex;
+    padding: 28px 32px;
+    justify-content: flex-end;
+    gap: 16px;
+}

@@ -41,6 +41,14 @@ $block: '.#{variables.$ns}icons';
     &__actions {
         display: flex;
         gap: pcVariables.$indentXXXS;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            width: 100%;
+
+            button {
+                width: 50%;
+            }
+        }
     }
 
     &__col {
@@ -58,5 +66,10 @@ $block: '.#{variables.$ns}icons';
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             margin-bottom: pcVariables.$indentXXXS;
         }
+    }
+
+    &__search-icon {
+        padding: 0 12px;
+        color: rgba(255, 255, 255, 0.5);
     }
 }
