@@ -10,16 +10,35 @@ import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
-import {allIcons} from './constants';
+import {allIcons, iconsLibrary, iconsLibraryGithubUrl} from './constants';
 import type {IconItem} from './types';
 
 const b = block('icons');
 
-interface IconsProps {}
+interface IconsProps {
+    currentIcon?: string;
+    onChangeCurrentIcon?: (iconName?: string) => void;
+}
 
-export const Icons: React.FC<IconsProps> = () => {
+export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) => {
     const [filterString, setFilterString] = React.useState('');
     const [iconForDialog, setIconForDialog] = React.useState<IconItem>();
+
+    const pageTitleRef = React.useRef<HTMLHeadingElement>(null);
+
+    React.useEffect(() => {
+        if (currentIcon && currentIcon !== iconForDialog?.name) {
+            const iconToShow = allIcons.find((icon) => icon.name === currentIcon);
+
+            if (iconToShow) {
+                setIconForDialog(iconToShow);
+            }
+        }
+    }, [currentIcon]);
+
+    React.useEffect(() => {
+        onChangeCurrentIcon?.(iconForDialog?.name);
+    }, [onChangeCurrentIcon, iconForDialog]);
 
     const handleSelectIcon = React.useCallback((item: IconItem) => {
         setIconForDialog(item);
@@ -32,6 +51,11 @@ export const Icons: React.FC<IconsProps> = () => {
     const handleClickToKeyword = React.useCallback((keyword: string) => {
         setFilterString(keyword);
         handleCloseDialog();
+
+        // note: the scroll must be done after the modal is hidden
+        setTimeout(() => {
+            pageTitleRef.current?.scrollIntoView({behavior: 'smooth'});
+        }, 100);
     }, []);
 
     const icons = React.useMemo(() => {
@@ -55,13 +79,27 @@ export const Icons: React.FC<IconsProps> = () => {
         <Grid className={b()}>
             <Row>
                 <Col sizes={12} className={b('heading')}>
-                    <h1 className={b('title')}>Icons</h1>
+                    <h1 className={b('title')} ref={pageTitleRef}>
+                        Icons
+                    </h1>
                     <div className={b('actions')}>
-                        <Button size="xl" view="outlined-contrast">
+                        <Button
+                            className={b('library-button')}
+                            size="xl"
+                            view="outlined-contrast"
+                            href={iconsLibraryGithubUrl}
+                            target="_blank"
+                        >
                             Go to library
                             <Icon data={ArrowUpRightFromSquare} size={16} />
                         </Button>
-                        <Button size="xl" view="outlined-contrast">
+                        <Button
+                            className={b('figma-button')}
+                            size="xl"
+                            view="outlined-contrast"
+                            href={iconsLibrary.config.storybookUrl}
+                            target="_blank"
+                        >
                             <Icon data={figmaIcon} size={16} />
                             Open in Figma
                         </Button>
@@ -81,7 +119,6 @@ export const Icons: React.FC<IconsProps> = () => {
                                 <Icon data={Magnifier} size={20} />
                             </div>
                         }
-                        autoFocus
                         hasClear
                     />
                 </Col>

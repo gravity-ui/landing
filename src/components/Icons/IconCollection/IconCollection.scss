@@ -6,9 +6,6 @@ $block: '.#{variables.$ns}icon-collection';
 #{$block} {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: pcVariables.$indentXS;
-
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-        justify-content: center;
-    }
 }

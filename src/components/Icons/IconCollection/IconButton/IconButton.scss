@@ -11,6 +11,7 @@ $block: '.#{variables.$ns}icon-button';
     width: 62px;
     border-radius: 16px;
     cursor: pointer;
+    transition: background-color 0.1s ease-in-out;
 
     &:hover {
         background-color: rgba(255, 255, 255, 0.16);
@@ -19,6 +20,6 @@ $block: '.#{variables.$ns}icon-button';
     &:active {
         border: 2px solid var(--yc-color-base-special);
         color: var(--yc-color-base-special);
-        background: transparent;
+        background-color: transparent;
     }
 }

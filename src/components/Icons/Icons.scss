@@ -45,8 +45,23 @@ $block: '.#{variables.$ns}icons';
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             width: 100%;
 
-            button {
+            #{$block}__library-button,
+            #{$block}__figma-button {
                 width: 50%;
+            }
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            #{$block}__library-button {
+                flex-grow: 1;
+            }
+
+            #{$block}__figma-button {
+                width: 44px;
+
+                .yc-button__text {
+                    display: none;
+                }
             }
         }
     }

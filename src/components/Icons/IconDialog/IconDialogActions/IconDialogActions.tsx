@@ -4,6 +4,7 @@ import React from 'react';
 
 import {block} from '../../../../utils';
 import {downloadFile} from '../../../../utils/browser';
+import {iconsLibrary} from '../../constants';
 import type {IconItem} from '../../types';
 
 import './IconDialogActions.scss';
@@ -16,15 +17,16 @@ interface IconDialogActionsProps {
 }
 
 const buildSvgUrl = (svgName: string) =>
-    `https://raw.githubusercontent.com/gravity-ui/icons/main/svgs/${svgName}.svg`;
+    `https://raw.githubusercontent.com/${iconsLibrary.config.githubId}/main/svgs/${svgName}.svg`;
+
+const buildIconUrl = (iconName: string) => `${window.location.origin}/icons?icon=${iconName}`;
 
 export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobile}) => {
     const actionsRef = React.useRef<HTMLDivElement>(null);
 
     const [isDownloadInProgress, setDownloadInProgress] = React.useState(false);
 
-    // TODO
-    const iconUrl = '/todo';
+    const iconUrl = React.useMemo(() => buildIconUrl(icon.name), [icon]);
 
     const downloadSvg = React.useCallback(async () => {
         setDownloadInProgress(true);
@@ -37,10 +39,16 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
     }, [icon]);
 
     const shareIcon = React.useCallback(async () => {
-        if (navigator.canShare()) {
-            navigator.share({url: iconUrl});
+        const shareData = {url: iconUrl, title: 'Gravity UI'};
+
+        if (navigator.share && navigator.canShare?.(shareData)) {
+            try {
+                await navigator.share(shareData);
+            } catch (_) {
+                // note: ignore the exception because only AbortError can be raised
+            }
         } else {
-            // TODO copy
+            await navigator.clipboard.writeText(iconUrl);
         }
     }, [iconUrl]);
 
