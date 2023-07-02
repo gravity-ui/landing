@@ -2,7 +2,7 @@ import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import type {IconItem} from '../../IconCollection/types';
+import type {IconItem} from '../../types';
 import {ClipboardButton} from '../ClipboardButton/ClipboardButton';
 
 import './IconContent.scss';
@@ -34,23 +34,22 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                     <span className={b('name')}>{icon.name}</span>
                     <ClipboardButton copyText={icon.name} />
                 </div>
-                <div className={b('keywords')}>
-                    <div className={b('keywords-title')}>Keywords</div>
-                    <div className={b('keywords-items')}>
-                        <div
-                            className={b('keywords-item')}
-                            onClick={createKeywordClickHandler('home')}
-                        >
-                            home
-                        </div>
-                        <div
-                            className={b('keywords-item')}
-                            onClick={createKeywordClickHandler('building')}
-                        >
-                            building
+                {icon.meta.keywords.length ? (
+                    <div className={b('keywords')}>
+                        <div className={b('keywords-title')}>Keywords</div>
+                        <div className={b('keywords-items')}>
+                            {icon.meta.keywords.map((keyword) => (
+                                <div
+                                    key={keyword}
+                                    className={b('keywords-item')}
+                                    onClick={createKeywordClickHandler(keyword)}
+                                >
+                                    {keyword}
+                                </div>
+                            ))}
                         </div>
                     </div>
-                </div>
+                ) : null}
             </div>
         </div>
     );

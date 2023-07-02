@@ -10,6 +10,7 @@ $block: '.#{variables.$ns}icons-not-found';
     align-items: center;
     justify-content: center;
     padding: 20px 0;
+    text-align: center;
 
     &__title {
         @include pcStyles.text-size(header-2);

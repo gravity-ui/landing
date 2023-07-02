@@ -3,7 +3,7 @@ import React from 'react';
 
 import {useIsMobile} from '../../../hooks/useIsMobile';
 import {block} from '../../../utils';
-import type {IconItem} from '../IconCollection/types';
+import type {IconItem} from '../types';
 
 import {IconBody} from './IconBody/IconBody';
 import './IconDialog.scss';

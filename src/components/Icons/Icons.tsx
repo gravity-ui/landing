@@ -7,11 +7,11 @@ import figmaIcon from '../../assets/icons/figma.svg';
 import {block} from '../../utils';
 
 import {IconCollection} from './IconCollection';
-import type {IconItem} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
 import {allIcons} from './constants';
+import type {IconItem} from './types';
 
 const b = block('icons');
 
@@ -40,7 +40,15 @@ export const Icons: React.FC<IconsProps> = () => {
         }
 
         const searchLower = filterString.toLowerCase();
-        return allIcons.filter(({name}) => name.toLowerCase().includes(searchLower));
+
+        return allIcons.filter(
+            ({meta}) =>
+                meta.name.toLowerCase().includes(searchLower) ||
+                meta.componentName.toLowerCase().includes(searchLower) ||
+                meta.keywords.some((keyword: string) =>
+                    keyword.toLowerCase().includes(searchLower),
+                ),
+        );
     }, [filterString]);
 
     return (
@@ -73,6 +81,7 @@ export const Icons: React.FC<IconsProps> = () => {
                                 <Icon data={Magnifier} size={20} />
                             </div>
                         }
+                        autoFocus
                         hasClear
                     />
                 </Col>

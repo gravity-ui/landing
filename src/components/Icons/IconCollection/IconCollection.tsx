@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {block} from '../../../utils';
+import type {IconItem} from '../types';
 
 import {IconButton} from './IconButton/IconButton';
 import './IconCollection.scss';
-import {IconItem} from './types';
 
 const b = block('icon-collection');
 

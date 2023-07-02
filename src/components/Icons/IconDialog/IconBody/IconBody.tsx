@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {block} from '../../../../utils';
-import type {IconItem} from '../../IconCollection/types';
+import type {IconItem} from '../../types';
 import {IconContent} from '../IconContent/IconContent';
 import {UsageExample} from '../UsageExample/UsageExample';
 

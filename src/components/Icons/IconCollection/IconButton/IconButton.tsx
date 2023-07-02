@@ -2,7 +2,7 @@ import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import type {IconItem} from '../types';
+import type {IconItem} from '../../types';
 
 import './IconButton.scss';
 
