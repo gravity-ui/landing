@@ -1,3 +1,4 @@
+import {useRouter} from 'next/router';
 import React, {useMemo} from 'react';
 
 import {libs} from '../../content/components';
@@ -14,6 +15,9 @@ export const ComponentsLayout: React.FC<ComponentsLayoutProps> = ({
     componentId,
     children,
 }) => {
+    const router = useRouter();
+    const {tabId} = router.query;
+
     const sections = useMemo<Section[]>(() => {
         return libs.map((lib) => ({
             id: lib.id,
@@ -22,10 +26,10 @@ export const ComponentsLayout: React.FC<ComponentsLayoutProps> = ({
             subSections: lib.components.map((component) => ({
                 id: component.id,
                 title: component.title,
-                url: `/components/${lib.id}/${component.id}`,
+                url: `/components/${lib.id}/${component.id}${tabId ? `?tabId=${tabId}` : ''}`,
             })),
         }));
-    }, []);
+    }, [tabId]);
 
     return (
         <NavigationLayout

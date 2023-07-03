@@ -8,5 +8,5 @@ export type Section = {
     id: string;
     title: string;
     url?: string;
-    subSections: SubSection[];
+    subSections?: SubSection[];
 };

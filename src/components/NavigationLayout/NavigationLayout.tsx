@@ -34,7 +34,7 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
     const [isOpenMobileNavigation, setIsOpenMobileNavigation] = React.useState(false);
 
     const section = sections.find((item) => item.id === sectionId);
-    const subSection = section?.subSections.find((item) => item.id === subSectionId);
+    const subSection = section?.subSections?.find((item) => item.id === subSectionId);
 
     if (!section) {
         return null;

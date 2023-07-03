@@ -30,6 +30,9 @@ export const Navigation = memo<NavigationProps>(
         });
 
         const [filteredSections, setFilteredSections] = React.useState(sections);
+        React.useEffect(() => {
+            setFilteredSections(sections);
+        }, [sections]);
 
         const filterStringUpdateHandle = React.useCallback(
             (newValue: string) => {
@@ -44,15 +47,15 @@ export const Navigation = memo<NavigationProps>(
                               if (section.title.toLowerCase().includes(filterStringLower)) {
                                   newOpenState[section.id] = true;
 
-                                  const subSections = section.subSections.filter((subSection) =>
+                                  const subSections = section.subSections?.filter((subSection) =>
                                       subSection.title.toLowerCase().includes(filterStringLower),
                                   );
                                   acc.push({...section, subSections});
                               } else {
-                                  const subSections = section.subSections.filter((subSection) =>
+                                  const subSections = section.subSections?.filter((subSection) =>
                                       subSection.title.toLowerCase().includes(filterStringLower),
                                   );
-                                  if (subSections.length > 0) {
+                                  if (subSections && subSections.length > 0) {
                                       newOpenState[section.id] = true;
                                       acc.push({...section, subSections});
                                   }

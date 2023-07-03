@@ -67,4 +67,54 @@ $block: '.#{variables.$ns}design-section';
             text-decoration: none;
         }
     }
+
+    &__col {
+        display: flex;
+    }
+
+    &__component {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 20px 24px;
+        margin-top: 16px;
+        background: #251b25;
+        border-radius: 16px;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7);
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateY(-6px);
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            &:hover {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    &__component-image {
+        align-self: center;
+        width: 206px;
+        height: 144px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        background-image: url('../../assets/component-placeholder.svg');
+    }
+
+    &__component-title {
+        margin-top: 24px;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 20px;
+        color: #fff;
+    }
+
+    &__component-description {
+        margin-top: 4px;
+        font-size: 13px;
+        line-height: 16px;
+    }
 }

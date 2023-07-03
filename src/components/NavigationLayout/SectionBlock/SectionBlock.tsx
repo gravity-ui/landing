@@ -25,52 +25,71 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
     curSectionId,
     curSubSectionId,
 }) => {
-    return (
-        <div className={b()}>
-            <div
-                className={b('header')}
-                onClick={() => {
-                    setIsOpen(!isOpen);
-                }}
-            >
-                <div className={b('title')}>{data.title}</div>
-                <div
-                    className={b('arrow', {
-                        open: isOpen,
+    let content: React.ReactNode = null;
+
+    if (data.url && (!data.subSections || data.subSections?.length === 0)) {
+        content = (
+            <Link href={data.url}>
+                <a
+                    className={b('header', {
+                        active: curSectionId === data.id && !curSubSectionId,
                     })}
                 >
-                    <Icon data={arrowIcon} width={10} height={6} />
+                    <div className={b('title')}>{data.title}</div>
+                </a>
+            </Link>
+        );
+    } else {
+        content = (
+            <React.Fragment>
+                <div
+                    className={b('header')}
+                    onClick={() => {
+                        setIsOpen(!isOpen);
+                    }}
+                >
+                    <div className={b('title')}>{data.title}</div>
+                    <div
+                        className={b('arrow', {
+                            open: isOpen,
+                        })}
+                    >
+                        <Icon data={arrowIcon} width={10} height={6} />
+                    </div>
                 </div>
-            </div>
-            <div className={b('sub-sections', {open: isOpen})}>
-                {data.url ? (
-                    <Link key="__overview" href={data.url}>
-                        <a
-                            className={b('sub-section', {
-                                active: curSectionId === data.id && curSubSectionId === undefined,
-                            })}
-                        >
-                            Overview
-                        </a>
-                    </Link>
-                ) : null}
-
-                {data.subSections.map((subSection) => {
-                    return (
-                        <Link key={subSection.id} href={subSection.url}>
+                <div className={b('sub-sections', {open: isOpen})}>
+                    {data.url ? (
+                        <Link key="__overview" href={data.url}>
                             <a
                                 className={b('sub-section', {
                                     active:
-                                        curSectionId === data.id &&
-                                        curSubSectionId === subSection.id,
+                                        curSectionId === data.id && curSubSectionId === undefined,
                                 })}
                             >
-                                {subSection.title}
+                                Overview
                             </a>
                         </Link>
-                    );
-                })}
-            </div>
-        </div>
-    );
+                    ) : null}
+
+                    {data.subSections?.map((subSection) => {
+                        return (
+                            <Link key={subSection.id} href={subSection.url}>
+                                <a
+                                    className={b('sub-section', {
+                                        active:
+                                            curSectionId === data.id &&
+                                            curSubSectionId === subSection.id,
+                                    })}
+                                >
+                                    {subSection.title}
+                                </a>
+                            </Link>
+                        );
+                    })}
+                </div>
+            </React.Fragment>
+        );
+    }
+
+    return <div className={b()}>{content}</div>;
 };

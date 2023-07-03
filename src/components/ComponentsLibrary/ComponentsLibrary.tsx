@@ -1,5 +1,6 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import Link from 'next/link';
+import {useRouter} from 'next/router';
 import React from 'react';
 
 import {libs} from '../../content/components';
@@ -14,6 +15,9 @@ type Props = {
 };
 
 export const ComponentsLibrary: React.FC<Props> = ({libId}) => {
+    const router = useRouter();
+    const {tabId} = router.query;
+
     const lib = libs.find((item) => item.id === libId);
 
     if (!lib) return null;
@@ -35,7 +39,11 @@ export const ComponentsLibrary: React.FC<Props> = ({libId}) => {
                                     className={b('col')}
                                     sizes={{all: 12, lg: 6, xl: 4}}
                                 >
-                                    <Link href={`/components/${lib.id}/${component.id}`}>
+                                    <Link
+                                        href={`/components/${lib.id}/${component.id}${
+                                            tabId ? `?tabId=${tabId}` : ''
+                                        }`}
+                                    >
                                         <a
                                             className={b('component', {
                                                 primary: lib.primary,

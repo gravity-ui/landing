@@ -14,7 +14,13 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         line-height: 24px;
         font-weight: 600;
         color: #fff;
+        text-decoration: none;
         cursor: pointer;
+
+        &_active {
+            background: rgba(255, 190, 92, 0.1);
+            color: #ffbe5c;
+        }
     }
 
     &__title {
