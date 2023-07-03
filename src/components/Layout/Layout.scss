@@ -9,17 +9,15 @@ $block: '.#{variables.$ns}layout';
     flex-direction: column;
 
     &__menu {
-        position: fixed;
+        position: sticky;
+        top: 0;
         right: 0;
         left: 0;
         z-index: 10;
     }
 
-    &__menu-placeholder {
-        position: static;
-        z-index: 5;
-        opacity: 0;
-        pointer-events: none;
+    &__wrapper {
+        overflow: auto;
     }
 
     &__content {

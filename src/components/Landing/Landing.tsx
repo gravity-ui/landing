@@ -5,8 +5,10 @@ import {CustomBanner} from '../../blocks/CustomBanner/CustomBanner';
 import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/CustomExtendedFeatures';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {Examples} from '../../blocks/Examples/Examples';
+import {RoadmapBlock} from '../../blocks/RoadmapBlock/RoadmapBlock';
 import {CustomBlock} from '../../blocks/constants';
 import {landing} from '../../content/landing';
+import {useSectionScroll} from '../../hooks/useSectionScroll';
 import {block} from '../../utils';
 
 import './Landing.scss';
@@ -14,6 +16,8 @@ import './Landing.scss';
 const b = block('landing');
 
 export const Landing: React.FC = () => {
+    useSectionScroll();
+
     return (
         <div className={b()}>
             <PageConstructor
@@ -24,6 +28,7 @@ export const Landing: React.FC = () => {
                         [CustomBlock.CustomExtendedFeatures]: CustomExtendedFeatures,
                         [CustomBlock.CustomBanner]: CustomBanner,
                         [CustomBlock.Examples]: Examples,
+                        [CustomBlock.Roadmap]: RoadmapBlock,
                     },
                 }}
             />

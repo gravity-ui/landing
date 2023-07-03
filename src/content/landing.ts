@@ -14,6 +14,8 @@ import {CustomBlock} from '../blocks/constants';
 import {CustomBlockModel} from '../blocks/types';
 import {libs} from '../libs.mjs';
 
+import {roadmapTasks} from './roadmap';
+
 interface CustomPageContent {
     blocks: (Block | CustomBlockModel)[];
     menu?: PageContent['menu'];
@@ -52,19 +54,24 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
+                        date: '2023-06-20T10:00:00.000Z',
+                        content:
+                            'Follow Gravity UI improvements with roadmap section on our <a href="/#roadmap">website</a>',
+                    },
+                    {
+                        date: '2023-06-14T11:00:00.000Z',
+                        content:
+                            '<a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout--docs">Layout components</a> are stable now',
+                    },
+                    {
+                        date: '2023-06-08T10:00:00.000Z',
+                        content:
+                            'A new version of <a href="https://github.com/gravity-ui/icons">icons pack</a> has arrived, 80+ new icons with a total of more than 500',
+                    },
+                    {
                         date: '2023-04-13T16:00:00.000Z',
                         content:
                             'Explore all Gravity projects with a new <a href="/libraries">Libraries</a> section',
-                    },
-                    {
-                        date: '2023-04-10T12:00:00.000Z',
-                        content:
-                            '<a href="/libraries/dynamic-forms">Dynamic Forms</a>: library for rendering neat and functional forms described by JSON schema',
-                    },
-                    {
-                        date: '2023-03-20T15:00:00.000Z',
-                        content:
-                            '<a href="https://ytsaurus.tech/" target="_blank" rel="noopener">YTSaurus</a>: open source platform for distributed storage and processing with UI based on Gravity',
                     },
                 ],
             },
@@ -141,6 +148,11 @@ const typedLanding: CustomPageContent = {
                     title: lib.title,
                     description: lib.description,
                 })),
+        },
+        {
+            type: CustomBlock.Roadmap,
+            title: 'Roadmap',
+            tasks: roadmapTasks,
         },
         {
             type: CustomBlock.CustomBanner,
