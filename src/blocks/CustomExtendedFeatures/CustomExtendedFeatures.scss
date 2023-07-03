@@ -22,6 +22,7 @@ $block: '.#{variables.$ns}custom-extended-features';
     }
 
     &__header-title {
+        @include pcStyles.heading2();
         flex: 1;
     }
 

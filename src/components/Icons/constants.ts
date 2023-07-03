@@ -1,8 +1,6 @@
 import * as gravityIcons from '@gravity-ui/icons';
 import iconsMetadata from '@gravity-ui/icons/metadata.json';
 
-import {getLibById, getLibraryGithubUrl} from '../../utils';
-
 import type {IconItem, IconMeta} from './types';
 
 const iconsMetadataByName = (iconsMetadata.icons as IconMeta[]).reduce(
@@ -13,7 +11,3 @@ const iconsMetadataByName = (iconsMetadata.icons as IconMeta[]).reduce(
 export const allIcons: IconItem[] = Object.entries(gravityIcons)
     .map(([name, data]) => ({name, data, meta: iconsMetadataByName[name]}))
     .sort((a, b) => a.name.localeCompare(b.name));
-
-export const iconsLibrary = getLibById('icons');
-
-export const iconsLibraryGithubUrl = getLibraryGithubUrl(iconsLibrary);

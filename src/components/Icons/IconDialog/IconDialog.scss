@@ -5,11 +5,11 @@
 $block: '.#{variables.$ns}icon-dialog';
 
 #{$block} {
-    --yc-color-base-float: #251B25;
+    --yc-color-base-float: #251b25;
     padding-top: 64px;
 
     &__sheet-content {
-        padding: 16px 0 0 0;
+        padding: 16px 0 0;
     }
 
     .yc-dialog-btn-close__btn {

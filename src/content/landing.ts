@@ -20,7 +20,6 @@ interface CustomPageContent {
     blocks: (Block | CustomBlockModel)[];
     menu?: PageContent['menu'];
     background?: PageContent['background'];
-    footnotes?: PageContent['footnotes'];
 }
 
 const typedLanding: CustomPageContent = {

@@ -18,8 +18,6 @@ $block: '.#{variables.$ns}icons';
         margin-bottom: pcVariables.$indentXS;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            align-items: flex-start;
-            flex-direction: column;
             margin-bottom: pcVariables.$indentXXXS;
         }
     }
@@ -41,29 +39,6 @@ $block: '.#{variables.$ns}icons';
     &__actions {
         display: flex;
         gap: pcVariables.$indentXXXS;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            width: 100%;
-
-            #{$block}__library-button,
-            #{$block}__figma-button {
-                width: 50%;
-            }
-        }
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            #{$block}__library-button {
-                flex-grow: 1;
-            }
-
-            #{$block}__figma-button {
-                width: 44px;
-
-                .yc-button__text {
-                    display: none;
-                }
-            }
-        }
     }
 
     &__col {

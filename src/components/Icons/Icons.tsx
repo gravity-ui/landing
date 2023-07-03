@@ -1,16 +1,16 @@
 import {ArrowUpRightFromSquare, Magnifier} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, TextInput} from '@gravity-ui/uikit';
+import Link from 'next/link';
 import React from 'react';
 
-import figmaIcon from '../../assets/icons/figma.svg';
 import {block} from '../../utils';
 
 import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
-import {allIcons, iconsLibrary, iconsLibraryGithubUrl} from './constants';
+import {allIcons} from './constants';
 import type {IconItem} from './types';
 
 const b = block('icons');
@@ -83,26 +83,16 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                         Icons
                     </h1>
                     <div className={b('actions')}>
-                        <Button
-                            className={b('library-button')}
-                            size="xl"
-                            view="outlined-contrast"
-                            href={iconsLibraryGithubUrl}
-                            target="_blank"
-                        >
-                            Go to library
-                            <Icon data={ArrowUpRightFromSquare} size={16} />
-                        </Button>
-                        <Button
-                            className={b('figma-button')}
-                            size="xl"
-                            view="outlined-contrast"
-                            href={iconsLibrary.config.storybookUrl}
-                            target="_blank"
-                        >
-                            <Icon data={figmaIcon} size={16} />
-                            Open in Figma
-                        </Button>
+                        <Link href="/libraries/icons">
+                            <Button
+                                className={b('library-button')}
+                                size="xl"
+                                view="outlined-contrast"
+                            >
+                                Go to library
+                                <Icon data={ArrowUpRightFromSquare} size={16} />
+                            </Button>
+                        </Link>
                     </div>
                 </Col>
             </Row>

@@ -4,7 +4,6 @@ import React from 'react';
 
 import {block} from '../../../../utils';
 import {downloadFile} from '../../../../utils/browser';
-import {iconsLibrary} from '../../constants';
 import type {IconItem} from '../../types';
 
 import './IconDialogActions.scss';
@@ -17,7 +16,7 @@ interface IconDialogActionsProps {
 }
 
 const buildSvgUrl = (svgName: string) =>
-    `https://raw.githubusercontent.com/${iconsLibrary.config.githubId}/main/svgs/${svgName}.svg`;
+    `https://raw.githubusercontent.com/gravity-ui/icons/main/svgs/${svgName}.svg`;
 
 const buildIconUrl = (iconName: string) => `${window.location.origin}/icons?icon=${iconName}`;
 
