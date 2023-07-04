@@ -21,10 +21,10 @@ $block: '.#{variables.$ns}icon-content';
     }
 
     &__info {
-        display: flex;
+        display: inline-flex;
         flex-direction: column;
+        width: min-content;
         column-gap: 4px;
-        flex-grow: 1;
         overflow: hidden;
     }
 
@@ -32,15 +32,21 @@ $block: '.#{variables.$ns}icon-content';
         padding: 8px 0;
         display: flex;
         align-items: center;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.7);
+        transition: color 0.1s ease-in-out;
+
+        &_copied {
+            color: #fff;
+        }
     }
 
     &__name {
         @include pcStyles.text-size(header-1);
         font-weight: bold;
-        color: #fff;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin-right: 4px;
+        margin-right: 8px;
     }
 
     &__keywords {

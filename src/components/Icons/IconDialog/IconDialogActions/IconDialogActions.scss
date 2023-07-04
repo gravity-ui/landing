@@ -9,4 +9,15 @@ $block: '.#{variables.$ns}icon-dialog-actions';
     padding: 28px 32px;
     justify-content: flex-end;
     gap: 16px;
+
+    &__copy-action {
+        --yc-color-base-light: #fff;
+        width: 140px;
+    }
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        button {
+            width: 100%;
+        }
+    }
 }

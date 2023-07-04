@@ -1,8 +1,10 @@
+import {CopyToClipboardStatus} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
 import type {IconItem} from '../../types';
-import {ClipboardButton} from '../ClipboardButton/ClipboardButton';
+import {ClipboardArea} from '../ClipboardArea/ClipboardArea';
+import {ClipboardIcon} from '../ClipboardIcon/ClipboardIcon';
 
 import './UsageExample.scss';
 import {buildIconImportLine, buildIconSvgPath} from './helpers';
@@ -23,12 +25,22 @@ export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
     return (
         <div className={b()}>
             <div className={b('title')}>{variant === 'react' ? 'React component' : 'SVG'}</div>
-            <div className={b('wrapper')}>
-                <div className={b('code')}>{importCode}</div>
-                <div className={b('copy-button')}>
-                    <ClipboardButton copyText={importCode} />
-                </div>
-            </div>
+            <ClipboardArea textToCopy={importCode}>
+                {(status) => (
+                    <div className={b('wrapper')}>
+                        <div
+                            className={b('code', {
+                                copied: status === CopyToClipboardStatus.Success,
+                            })}
+                        >
+                            {importCode}
+                        </div>
+                        <div className={b('copy-button')}>
+                            <ClipboardIcon status={status} />
+                        </div>
+                    </div>
+                )}
+            </ClipboardArea>
         </div>
     );
 };

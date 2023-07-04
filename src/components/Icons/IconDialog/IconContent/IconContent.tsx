@@ -1,9 +1,10 @@
-import {Icon} from '@gravity-ui/uikit';
+import {CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
 import type {IconItem} from '../../types';
-import {ClipboardButton} from '../ClipboardButton/ClipboardButton';
+import {ClipboardArea} from '../ClipboardArea/ClipboardArea';
+import {ClipboardIcon} from '../ClipboardIcon/ClipboardIcon';
 
 import './IconContent.scss';
 
@@ -30,10 +31,18 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                 <Icon data={icon.data} size={ICON_SIZE} />
             </div>
             <div className={b('info')}>
-                <div className={b('title')}>
-                    <span className={b('name')}>{icon.name}</span>
-                    <ClipboardButton copyText={icon.name} />
-                </div>
+                <ClipboardArea textToCopy={icon.name}>
+                    {(status) => (
+                        <div
+                            className={b('title', {
+                                copied: status === CopyToClipboardStatus.Success,
+                            })}
+                        >
+                            <span className={b('name')}>{icon.name}</span>
+                            <ClipboardIcon status={status} />
+                        </div>
+                    )}
+                </ClipboardArea>
                 {icon.meta.keywords.length ? (
                     <div className={b('keywords')}>
                         <div className={b('keywords-title')}>Keywords</div>
