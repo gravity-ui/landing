@@ -11,7 +11,7 @@ export const roadmapTasks: RoadmapTask[] = [
     },
     {
         title: '<b>Icons:</b> new section of Gravity site with search and preview',
-        status: RoadmapTaskStatus.InProgress,
+        status: RoadmapTaskStatus.Completed,
     },
     {
         title: '<b>Date Components:</b> new library for working with date and time',
