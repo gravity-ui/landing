@@ -1,4 +1,4 @@
-import {Animatable, AnimateBlock, BlockHeader} from '@gravity-ui/page-constructor';
+import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
 import {Icon, RadioButton, Select, SelectOption, Theme} from '@gravity-ui/uikit';
 import React from 'react';
 
@@ -14,7 +14,6 @@ const b = block('examples');
 
 export type ExamplesProps = Animatable & {
     title: string;
-    description?: string;
     colors: {
         title: string;
         value: string;
@@ -36,7 +35,7 @@ const themes = [
     },
 ];
 
-export const Examples: React.FC<ExamplesProps> = ({animated, title, description, colors}) => {
+export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => {
     const [color, setColor] = React.useState(colors[0].value);
     const [theme, setTheme] = React.useState<Theme>(themes[0].value);
 
@@ -52,7 +51,9 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, description,
     return (
         <AnimateBlock className={b()} animate={animated}>
             <div className={b('header-wrapper')}>
-                <BlockHeader title={title} description={description} className={b('header')} />
+                <h2 className={b('header-title')}>
+                    <HTML>{title}</HTML>
+                </h2>
                 <div className={b('controls')}>
                     <div className={b('control', {type: 'color'})}>
                         <Select

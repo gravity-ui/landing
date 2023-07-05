@@ -1,0 +1,30 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}icons-not-found';
+
+#{$block} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    text-align: center;
+
+    &__title {
+        @include pcStyles.text-size(header-2);
+        font-weight: bold;
+        color: #fff;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            @include pcStyles.text-size(header-1);
+        }
+    }
+
+    &__subtitle {
+        @include pcStyles.text-size(body-2);
+        margin-top: pcVariables.$indentXXXS;
+        color: var(--yc-color-text-light-secondary);
+    }
+}

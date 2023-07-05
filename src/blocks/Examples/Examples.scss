@@ -19,9 +19,11 @@ $block: '.#{variables.$ns}examples';
         }
     }
 
-    &__header {
+    &__header-title {
+        @include pcStyles.heading2();
         flex: 1;
         margin-right: 20px;
+        padding: 0;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             margin-right: 0;

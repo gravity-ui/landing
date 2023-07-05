@@ -1,0 +1,17 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}clipboard-icon';
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: color 0.1s ease-in-out;
+
+    &_copied {
+        color: #fff;
+    }
+}

@@ -1,0 +1,79 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}icon-content';
+
+#{$block} {
+    display: flex;
+
+    &__preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 124px;
+        width: 124px;
+        border-radius: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-right: 24px;
+        color: #fff;
+        flex-shrink: 0;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        column-gap: 4px;
+        overflow: hidden;
+    }
+
+    &__title {
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.7);
+        transition: color 0.1s ease-in-out;
+
+        &_copied {
+            color: #fff;
+        }
+
+        &:hover {
+            color: #fff;
+
+            #{$block}__copy-icon {
+                color: #fff;
+            }
+        }
+    }
+
+    &__name {
+        @include pcStyles.text-size(header-1);
+        font-weight: bold;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 8px;
+    }
+
+    &__keywords {
+        @include pcStyles.text-size(body-2);
+
+        &-title {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 4px;
+        }
+
+        &-items {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 4px;
+            column-gap: 8px;
+        }
+
+        &-item {
+            color: var(--yc-color-base-special);
+            cursor: pointer;
+        }
+    }
+}

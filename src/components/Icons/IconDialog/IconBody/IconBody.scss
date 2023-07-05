@@ -1,0 +1,16 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}icon-body';
+
+#{$block} {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 28px 16px;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        padding: 0 20px 32px;
+    }
+}

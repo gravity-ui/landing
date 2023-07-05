@@ -1,0 +1,18 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}icon-dialog';
+
+#{$block} {
+    --yc-color-base-float: #251b25;
+    padding-top: 64px;
+
+    &__sheet-content {
+        padding: 16px 0 0;
+    }
+
+    .yc-dialog-btn-close__btn {
+        color: rgba(255, 255, 255, 0.5);
+    }
+}
