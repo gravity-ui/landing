@@ -4,22 +4,11 @@
 $block: '.#{variables.$ns}icon-button';
 
 #{$block} {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    --yc-button-border-radius: 16px;
     height: 62px;
     width: 62px;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: background-color 0.1s ease-in-out;
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.16);
-    }
-
-    &:active {
-        border: 2px solid var(--yc-color-base-special);
-        color: var(--yc-color-base-special);
-        background-color: transparent;
+        --yc-button-background-color: rgba(255, 255, 255, 0.16);
     }
 }

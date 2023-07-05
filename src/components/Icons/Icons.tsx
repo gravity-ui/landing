@@ -1,9 +1,9 @@
 import {ArrowUpRightFromSquare, Magnifier} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, TextInput} from '@gravity-ui/uikit';
-import Link from 'next/link';
 import React from 'react';
 
+import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
 
 import {IconCollection} from './IconCollection';
@@ -21,10 +21,19 @@ interface IconsProps {
 }
 
 export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) => {
+    const isMobile = useIsMobile();
+
     const [filterString, setFilterString] = React.useState('');
     const [iconForDialog, setIconForDialog] = React.useState<IconItem>();
 
     const pageTitleRef = React.useRef<HTMLHeadingElement>(null);
+    const searchInputRef = React.useRef<HTMLInputElement>(null);
+
+    React.useEffect(() => {
+        if (!isMobile) {
+            searchInputRef.current?.focus();
+        }
+    }, [isMobile]);
 
     React.useEffect(() => {
         if (currentIcon && currentIcon !== iconForDialog?.name) {
@@ -83,22 +92,23 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                         Icons
                     </h1>
                     <div className={b('actions')}>
-                        <Link href="/libraries/icons">
-                            <Button
-                                className={b('library-button')}
-                                size="xl"
-                                view="outlined-contrast"
-                            >
-                                Go to library
-                                <Icon data={ArrowUpRightFromSquare} size={16} />
-                            </Button>
-                        </Link>
+                        <Button
+                            href="/libraries/icons"
+                            target="_blank"
+                            className={b('library-button')}
+                            size="xl"
+                            view="outlined-contrast"
+                        >
+                            Go to library
+                            <Icon data={ArrowUpRightFromSquare} size={16} />
+                        </Button>
                     </div>
                 </Col>
             </Row>
             <Row className={b('search')}>
                 <Col sizes={12}>
                     <TextInput
+                        controlRef={searchInputRef}
                         className={b('search-input')}
                         value={filterString}
                         onUpdate={setFilterString}
@@ -109,6 +119,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                                 <Icon data={Magnifier} size={20} />
                             </div>
                         }
+                        autoFocus={!isMobile}
                         hasClear
                     />
                 </Col>

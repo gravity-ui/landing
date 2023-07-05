@@ -21,9 +21,8 @@ $block: '.#{variables.$ns}icon-content';
     }
 
     &__info {
-        display: inline-flex;
+        display: flex;
         flex-direction: column;
-        width: min-content;
         column-gap: 4px;
         overflow: hidden;
     }
@@ -38,6 +37,14 @@ $block: '.#{variables.$ns}icon-content';
 
         &_copied {
             color: #fff;
+        }
+
+        &:hover {
+            color: #fff;
+
+            #{$block}__copy-icon {
+                color: #fff;
+            }
         }
     }
 

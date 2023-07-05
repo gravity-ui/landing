@@ -25,6 +25,14 @@ $block: '.#{variables.$ns}icon-usage-example';
 
         &:hover {
             cursor: pointer;
+
+            #{$block}__code {
+                color: #fff;
+            }
+
+            #{$block}__copy-icon {
+                color: #fff;
+            }
         }
     }
 

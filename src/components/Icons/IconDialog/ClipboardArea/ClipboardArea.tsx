@@ -1,6 +1,7 @@
-import {CopyToClipboard, CopyToClipboardStatus, Popup} from '@gravity-ui/uikit';
+import {CopyToClipboard, CopyToClipboardStatus, Popover} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {useIsMobile} from '../../../../hooks/useIsMobile';
 import {block} from '../../../../utils';
 
 import './ClipboardArea.scss';
@@ -11,49 +12,28 @@ const TIMEOUT = 1000;
 
 interface ClipboardAreaProps {
     textToCopy: string;
+    tooltipContent?: string;
     children: (status: CopyToClipboardStatus) => React.ReactElement;
 }
 
-export const ClipboardArea: React.FC<ClipboardAreaProps> = ({textToCopy, children}) => {
-    const anchorRef = React.createRef<HTMLDivElement>();
-    const [isCopied, setCopied] = React.useState(false);
-
-    const timerId = React.useRef<number>();
-
-    React.useEffect(
-        () => () => {
-            clearTimeout(timerId.current);
-        },
-        [],
-    );
-
-    const handleSuccessCopy = React.useCallback(() => {
-        setCopied(true);
-        clearTimeout(timerId.current);
-
-        timerId.current = window.setTimeout(() => {
-            setCopied(false);
-        }, TIMEOUT);
-    }, []);
+export const ClipboardArea: React.FC<ClipboardAreaProps> = ({
+    textToCopy,
+    tooltipContent = 'Copy to clipboard',
+    children,
+}) => {
+    const isMobile = useIsMobile();
 
     return (
-        <React.Fragment>
-            <Popup
-                className={b('popup')}
-                open={isCopied}
-                placement="top"
-                anchorRef={anchorRef}
-                hasArrow
-            >
-                Copied
-            </Popup>
-            <CopyToClipboard text={textToCopy} timeout={TIMEOUT} onCopy={handleSuccessCopy}>
-                {(status) => (
-                    <div className={b()} ref={anchorRef}>
-                        {children(status)}
-                    </div>
-                )}
+        <Popover
+            disabled={isMobile}
+            tooltipClassName={b('popup')}
+            content={tooltipContent}
+            placement="top"
+            hasArrow
+        >
+            <CopyToClipboard text={textToCopy} timeout={TIMEOUT}>
+                {(status) => children(status)}
             </CopyToClipboard>
-        </React.Fragment>
+        </Popover>
     );
 };

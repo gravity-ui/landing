@@ -25,7 +25,10 @@ export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
     return (
         <div className={b()}>
             <div className={b('title')}>{variant === 'react' ? 'React component' : 'SVG'}</div>
-            <ClipboardArea textToCopy={importCode}>
+            <ClipboardArea
+                textToCopy={importCode}
+                tooltipContent={variant === 'react' ? 'Copy react component' : 'Copy SVG import'}
+            >
                 {(status) => (
                     <div className={b('wrapper')}>
                         <div
@@ -36,7 +39,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
                             {importCode}
                         </div>
                         <div className={b('copy-button')}>
-                            <ClipboardIcon status={status} />
+                            <ClipboardIcon status={status} className={b('copy-icon')} />
                         </div>
                     </div>
                 )}

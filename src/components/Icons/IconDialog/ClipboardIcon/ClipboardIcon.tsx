@@ -10,13 +10,14 @@ const b = block('clipboard-icon');
 
 interface ClipboardIconProps {
     status: CopyToClipboardStatus;
+    className?: string;
 }
 
-export const ClipboardIcon: React.FC<ClipboardIconProps> = ({status}) => {
+export const ClipboardIcon: React.FC<ClipboardIconProps> = ({status, className}) => {
     const isCopied = status === CopyToClipboardStatus.Success;
 
     return (
-        <div className={b({copied: isCopied})}>
+        <div className={b({copied: isCopied}, className)}>
             <Icon data={isCopied ? CopyCheck : Copy} size={16} />
         </div>
     );

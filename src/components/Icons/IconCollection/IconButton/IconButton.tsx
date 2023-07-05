@@ -1,4 +1,4 @@
-import {Icon} from '@gravity-ui/uikit';
+import {Button, Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -21,8 +21,8 @@ export const IconButton: React.FC<IconsProps> = ({icon, onClick}) => {
     }, [icon, onClick]);
 
     return (
-        <div className={b()} onClick={handleClick}>
+        <Button view="flat" size="xl" className={b()} onClick={handleClick}>
             <Icon data={icon.data} size={ICON_SIZE} />
-        </div>
+        </Button>
     );
 };

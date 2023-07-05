@@ -31,7 +31,7 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                 <Icon data={icon.data} size={ICON_SIZE} />
             </div>
             <div className={b('info')}>
-                <ClipboardArea textToCopy={icon.name}>
+                <ClipboardArea textToCopy={icon.name} tooltipContent="Copy icon name">
                     {(status) => (
                         <div
                             className={b('title', {
@@ -39,7 +39,7 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                             })}
                         >
                             <span className={b('name')}>{icon.name}</span>
-                            <ClipboardIcon status={status} />
+                            <ClipboardIcon status={status} className={b('copy-icon')} />
                         </div>
                     )}
                 </ClipboardArea>
