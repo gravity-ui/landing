@@ -1,6 +1,7 @@
 import {ArrowUpRightFromSquare, Magnifier} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, TextInput} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useIsMobile} from '../../hooks/useIsMobile';
@@ -21,6 +22,8 @@ interface IconsProps {
 }
 
 export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) => {
+    const {t, i18n} = useTranslation();
+
     const isMobile = useIsMobile();
 
     const [filterString, setFilterString] = React.useState('');
@@ -89,17 +92,19 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             <Row>
                 <Col sizes={12} className={b('heading')}>
                     <h1 className={b('title')} ref={pageTitleRef}>
-                        Icons
+                        {t('icons.title')}
                     </h1>
                     <div className={b('actions')}>
                         <Button
-                            href="/libraries/icons"
+                            href={`${
+                                i18n.language === 'en' ? '' : `/${i18n.language}`
+                            }/libraries/icons`}
                             target="_blank"
                             className={b('library-button')}
                             size="xl"
                             view="outlined-contrast"
                         >
-                            Go to library
+                            {t('icons.goToLibrary')}
                             <Icon data={ArrowUpRightFromSquare} size={16} />
                         </Button>
                     </div>
@@ -113,7 +118,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                         value={filterString}
                         onUpdate={setFilterString}
                         size="xl"
-                        placeholder="Filter by icon name"
+                        placeholder={t('icons.filterPlaceholder')}
                         leftContent={
                             <div className={b('search-icon')}>
                                 <Icon data={Magnifier} size={20} />

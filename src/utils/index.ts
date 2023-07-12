@@ -3,3 +3,4 @@ export * from './media';
 export * from './theme';
 export * from './lib';
 export * from './browser';
+export * from './i18next';

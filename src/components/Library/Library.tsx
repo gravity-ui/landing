@@ -1,6 +1,6 @@
 import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
-import Link from 'next/link';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
@@ -13,6 +13,7 @@ import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {block, getLibById} from '../../utils';
+import {Link} from '../Link';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -31,57 +32,61 @@ type Props = {
 };
 
 export const Library: React.FC<Props> = ({id}) => {
+    const {t, i18n} = useTranslation();
+
+    const curLocale = i18n.language as 'en' | 'ru';
+
     const lib = getLibById(id);
 
     const contentTabs = [
         {
             id: Tab.Readme,
-            title: 'Readme',
+            title: t('library.readme'),
         },
     ];
 
     if (lib.data.changelog) {
         contentTabs.push({
             id: Tab.Changelog,
-            title: 'Changelog',
+            title: t('library.changelog'),
         });
     }
 
     const infoList = [
         {
             id: 'stars',
-            title: 'Stars',
+            title: t('library.stars'),
             value: lib.data.stars,
             icon: starIcon,
         },
         {
             id: 'version',
-            title: 'Version',
+            title: t('library.version'),
             value: lib.data.version || '–',
             icon: versionIcon,
         },
         {
             id: 'lastUpdate',
-            title: 'Last update',
+            title: t('library.lastUpdate'),
             value: lib.data.lastUpdate || '–',
             icon: lastUpdateIcon,
         },
         {
             id: 'repository',
-            title: 'Repository',
+            title: t('library.repository'),
             link: `https://github.com/${lib.config.githubId}`,
             value: `github.com/${lib.config.githubId}`,
             icon: linkIcon,
         },
         {
             id: 'license',
-            title: 'License',
+            title: t('library.license'),
             value: lib.data.license || '–',
             icon: licenseIcon,
         },
         // {
         //     id: 'issues',
-        //     title: 'Issues',
+        //     title: t('library.issues'),
         //     value: lib.data.issues,
         //     icon: issuesIcon,
         // },
@@ -100,8 +105,8 @@ export const Library: React.FC<Props> = ({id}) => {
                     <Col sizes={12}>
                         <div className={b('header', {primary: isPrimary})}>
                             <div className={b('breadcrumbs')}>
-                                <Link href="/libraries">
-                                    <a className={b('breadcrumbs-link')}>Libraries</a>
+                                <Link href="/libraries" className={b('breadcrumbs-link')}>
+                                    {t('library.libraries')}
                                 </Link>{' '}
                                 / <HTML className={b('breadcrumbs-item')}>{lib.config.title}</HTML>
                             </div>
@@ -110,7 +115,9 @@ export const Library: React.FC<Props> = ({id}) => {
                                 <HTML>{lib.config.title}</HTML>
                             </h1>
 
-                            <div className={b('description')}>{lib.config.description}</div>
+                            <div className={b('description')}>
+                                {lib.config.description[curLocale]}
+                            </div>
 
                             {lib.config.githubId || lib.config.storybookUrl ? (
                                 <div className={b('buttons')}>
@@ -200,7 +207,7 @@ export const Library: React.FC<Props> = ({id}) => {
                                         setIsVisibleInfoListMobile(!isVisibleInfoListMobile);
                                     }}
                                 >
-                                    <div className={b('info-title-text')}>About library</div>
+                                    <div className={b('info-title-text')}>{t('library.about')}</div>
                                     <div
                                         className={b('info-title-icon', {
                                             'mobile-visible': isVisibleInfoListMobile,

@@ -1,4 +1,5 @@
 import {CopyToClipboard, CopyToClipboardStatus, Popover} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useIsMobile} from '../../../../hooks/useIsMobile';
@@ -18,16 +19,18 @@ interface ClipboardAreaProps {
 
 export const ClipboardArea: React.FC<ClipboardAreaProps> = ({
     textToCopy,
-    tooltipContent = 'Copy to clipboard',
+    tooltipContent,
     children,
 }) => {
+    const {t} = useTranslation();
+
     const isMobile = useIsMobile();
 
     return (
         <Popover
             disabled={isMobile}
             tooltipClassName={b('popup')}
-            content={tooltipContent}
+            content={tooltipContent ?? t('actions.actions.copyToClipboard')}
             placement="top"
             hasArrow
         >

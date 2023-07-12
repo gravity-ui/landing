@@ -1,5 +1,6 @@
 import {ArrowDownToLine, ArrowShapeTurnUpRight, Check, Link} from '@gravity-ui/icons';
 import {Button, CopyToClipboard, CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -21,6 +22,8 @@ const buildSvgUrl = (svgName: string) =>
 const buildIconUrl = (iconName: string) => `${window.location.origin}/icons?icon=${iconName}`;
 
 export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobile}) => {
+    const {t} = useTranslation();
+
     const actionsRef = React.useRef<HTMLDivElement>(null);
 
     const [isDownloadInProgress, setDownloadInProgress] = React.useState(false);
@@ -64,7 +67,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
                             className={b('copy-action')}
                         >
                             <Icon data={isCopied ? Check : Link} size={16} />
-                            {isCopied ? 'Copied' : 'Copy Link'}
+                            {isCopied ? t('icons.actions.copied') : t('icons.actions.copyLink')}
                         </Button>
                     );
                 }}
@@ -78,7 +81,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
             return (
                 <Button view="action" size="xl" onClick={handleShareIcon}>
                     <Icon data={ArrowShapeTurnUpRight} size={16} />
-                    Share
+                    {t('actions.share')}
                 </Button>
             );
         }
@@ -99,7 +102,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
                         loading={isDownloadInProgress}
                     >
                         <Icon data={ArrowDownToLine} size={20} />
-                        Download SVG
+                        {t('icons.actions.downloadSvg')}
                     </Button>
                     {copyLinkAction}
                 </>

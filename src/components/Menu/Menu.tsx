@@ -1,6 +1,6 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
-import Link from 'next/link';
+import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -11,7 +11,9 @@ import soonLabelIcon from '../../assets/icons/soon-label.svg';
 import {menu} from '../../content/menu';
 import {socialLinks} from '../../content/social-links';
 import {block} from '../../utils';
+import {Link} from '../Link';
 
+import {LocalePicker} from './LocalePicker';
 import './Menu.scss';
 
 const b = block('menu');
@@ -19,6 +21,8 @@ const b = block('menu');
 const LINK_ICON_SIZE = 8;
 
 export const Menu: React.FC = () => {
+    const {t} = useTranslation();
+
     const router = useRouter();
 
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -26,17 +30,15 @@ export const Menu: React.FC = () => {
     return (
         <div className={b()}>
             <div className={b('wrapper', {open: mobileMenuOpen})}>
-                <Link href="/">
-                    <a className={b('logo')}>
-                        <span className={b('logo-image')} />
-                    </a>
+                <Link href="/" className={b('logo')}>
+                    <span className={b('logo-image')} />
                 </Link>
 
                 <div className={b('desktop-menu')}>
                     <div className={b('desktop-menu-items')}>
                         {menu.map((item) => (
                             <div
-                                key={item.title}
+                                key={item.titleKey}
                                 className={b('desktop-menu-item', {
                                     active: router.pathname.startsWith(item.url),
                                 })}
@@ -50,7 +52,7 @@ export const Menu: React.FC = () => {
                                     >
                                         <div className={b('comming-soon')}>
                                             <div className={b('comming-soon-text')}>
-                                                {item.title}
+                                                {t(item.titleKey)}
                                             </div>
                                             <div className={b('comming-soon-label')}>
                                                 <Icon data={soonLabelIcon} width={46} height={20} />
@@ -58,12 +60,15 @@ export const Menu: React.FC = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <Link href={item.url}>
-                                        <a className={b('link', {lg: true})}>{item.title}</a>
+                                    <Link href={item.url} className={b('link', {lg: true})}>
+                                        {t(item.titleKey)}
                                     </Link>
                                 )}
                             </div>
                         ))}
+                    </div>
+                    <div className={b('desktop-menu-locale-picker')}>
+                        <LocalePicker />
                     </div>
                 </div>
 
@@ -104,12 +109,12 @@ export const Menu: React.FC = () => {
                         <Col sizes={{sm: 12}}>
                             <div className={b('mobile-menu-items')}>
                                 {menu.map((item) => (
-                                    <div className={b('mobile-menu-item')} key={item.title}>
+                                    <div className={b('mobile-menu-item')} key={item.titleKey}>
                                         {item.isComingSoon ? (
                                             <div className={b('link', {lg: true, disabled: true})}>
                                                 <div className={b('comming-soon')}>
                                                     <div className={b('comming-soon-text')}>
-                                                        {item.title}
+                                                        {t(item.titleKey)}
                                                     </div>
                                                     <div className={b('comming-soon-label')}>
                                                         <Icon
@@ -121,15 +126,18 @@ export const Menu: React.FC = () => {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <Link href={item.url} key={item.title}>
-                                                <a className={b('link', {lg: true})}>
-                                                    {item.title}
-                                                </a>
+                                            <Link
+                                                href={item.url}
+                                                key={item.titleKey}
+                                                className={b('link', {lg: true})}
+                                            >
+                                                {t(item.titleKey)}
                                             </Link>
                                         )}
                                     </div>
                                 ))}
                             </div>
+
                             <div className={b('mobile-social-links')}>
                                 {socialLinks.map((item) => (
                                     <div className={b('mobile-social-link')} key={item.title}>
@@ -147,6 +155,9 @@ export const Menu: React.FC = () => {
                                         </a>
                                     </div>
                                 ))}
+                            </div>
+                            <div className={b('mobile-menu-locale-picker')}>
+                                <LocalePicker />
                             </div>
                         </Col>
                     </Row>

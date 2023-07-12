@@ -1,0 +1,51 @@
+import {GetStaticPaths, GetStaticProps} from 'next';
+import {useRouter} from 'next/router';
+import React from 'react';
+
+import {Icons} from '../../components/Icons';
+import {Layout} from '../../components/Layout/Layout';
+import {getI18nPaths, getI18nProps} from '../../utils/i18next';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    return {
+        paths: getI18nPaths(),
+        fallback: false,
+    };
+};
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+    return {
+        props: {
+            ...(await getI18nProps(ctx)),
+        },
+    };
+};
+
+const ICON_QUERY_KEY = 'icon';
+
+export const IconsPage = () => {
+    const router = useRouter();
+    const {[ICON_QUERY_KEY]: iconFromQuery} = router.query;
+    const currentIcon = typeof iconFromQuery === 'string' ? iconFromQuery : undefined;
+
+    const handleChangeCurrentIcon = React.useCallback((newIcon?: string) => {
+        const query = new URLSearchParams(window.location.search);
+
+        if (newIcon) {
+            query.set(ICON_QUERY_KEY, newIcon);
+        } else {
+            query.delete(ICON_QUERY_KEY);
+        }
+
+        const pathnameWithoutQuery = router.asPath.split('?')[0];
+        router.push({pathname: pathnameWithoutQuery, search: query.toString()});
+    }, []);
+
+    return (
+        <Layout title="Icons">
+            <Icons currentIcon={currentIcon} onChangeCurrentIcon={handleChangeCurrentIcon} />
+        </Layout>
+    );
+};
+
+export default IconsPage;

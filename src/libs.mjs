@@ -7,7 +7,10 @@ export const libs = [
         primary: true,
         landing: true,
         tags: ['ui'],
-        description: 'Base UI components and tokens for building services with Gravity.',
+        description: {
+            en: 'Base UI components and tokens for building services with Gravity.',
+            ru: 'Базовее UI компоненты и токены для построения сервисов с Gravity.',
+        },
         storybookUrl: 'https://preview.gravity-ui.com/uikit/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/uikit/main/CHANGELOG.md',
@@ -21,7 +24,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description: 'A set of complex React components.',
+        description: {
+            en: 'A set of complex React components.',
+            ru: 'A set of complex React components.',
+        },
         storybookUrl:
             'https://preview.gravity-ui.com/components/?path=/story/components-adaptivetabs--default',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/components/main/README.md',
@@ -36,7 +42,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description: 'Set with hundreds of various modern SVG icons for your projects.',
+        description: {
+            en: 'Set with hundreds of various modern SVG icons for your projects.',
+            ru: 'Набор сотен разнообразных современных иконок для ваших проектов.',
+        },
         storybookUrl: 'https://preview.gravity-ui.com/icons/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/icons/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/icons/main/CHANGELOG.md',
@@ -50,8 +59,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description:
-            'Library for rendering neat and functional react forms described by JSON schema',
+        description: {
+            en: 'Library for rendering neat and functional react forms described by JSON schema',
+            ru: 'Library for rendering neat and functional react forms described by JSON schema',
+        },
         storybookUrl: 'https://preview.gravity-ui.com/dynamic-forms/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md',
         changelogUrl:
@@ -66,8 +77,10 @@ export const libs = [
         primary: false,
         landing: true,
         tags: ['ui'],
-        description:
-            'A set of stylish, functional blocks for quickly creating promo and landing pages.',
+        description: {
+            en: 'A set of stylish, functional blocks for quickly creating promo and landing pages.',
+            ru: 'Набор стилизованных, функциональных блоков для быстрого создания промо страниц.',
+        },
         storybookUrl: 'https://preview.gravity-ui.com/page-constructor/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md',
         changelogUrl:
@@ -82,8 +95,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description:
-            'A library based on the Page constructor library for creating blog-like services.',
+        description: {
+            en: 'A library based on the Page constructor library for creating blog-like services.',
+            ru: 'A library based on the Page constructor library for creating blog-like services.',
+        },
         storybookUrl: 'https://preview.yandexcloud.dev/blog-constructor/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md',
         changelogUrl:
@@ -98,7 +113,10 @@ export const libs = [
         primary: false,
         landing: true,
         tags: ['ui'],
-        description: 'A data visualization suite integrated with our design system.',
+        description: {
+            en: 'A data visualization suite integrated with our design system.',
+            ru: 'Пакет визуализации данных, интегрированный с нашей дизайн системой.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md',
@@ -112,7 +130,10 @@ export const libs = [
         primary: false,
         landing: true,
         tags: ['ui'],
-        description: 'A grid component for building interactive dashboards.',
+        description: {
+            en: 'A grid component for building interactive dashboards.',
+            ru: 'Компонент сетка для построения интерактивных дашбордов.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/dashkit/main/CHANGELOG.md',
@@ -126,7 +147,10 @@ export const libs = [
         primary: false,
         landing: true,
         tags: ['ui'],
-        description: 'A high-performance canvas charts renderer, based on uPlot.',
+        description: {
+            en: 'A high-performance canvas charts renderer, based on uPlot.',
+            ru: 'Высокопроизводительная отрисовка canvas графиков, основано на uPlot.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/CHANGELOG.md',
@@ -140,7 +164,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['nodejs'],
-        description: 'A simple toolkit for your Node.js apps, scripts and libraries.',
+        description: {
+            en: 'A simple toolkit for your Node.js apps, scripts and libraries.',
+            ru: 'A simple toolkit for your Node.js apps, scripts and libraries.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/nodekit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/nodekit/main/CHANGELOG.md',
@@ -154,7 +181,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['nodejs'],
-        description: 'Lightweight express.js wrapper that integrates with NodeKit.',
+        description: {
+            en: 'Lightweight express.js wrapper that integrates with NodeKit.',
+            ru: 'Lightweight express.js wrapper that integrates with NodeKit.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/expresskit/main/CHANGELOG.md',
@@ -168,7 +198,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['nodejs'],
-        description: 'HTML layout generator used in our SPA applications.',
+        description: {
+            en: 'HTML layout generator used in our SPA applications.',
+            ru: 'HTML layout generator used in our SPA applications.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/app-layout/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/app-layout/main/CHANGELOG.md',
@@ -182,7 +215,10 @@ export const libs = [
     //     primary: false,
     //     landing: false,
     //     tags: ['infrastructure'],
-    //     description: 'Webpack-based static assets builder used in our SPA applications',
+    //     description: {
+    //         en: 'Webpack-based static assets builder used in our SPA applications',
+    //         ru: 'Webpack-based static assets builder used in our SPA applications',
+    //     },
     //     storybookUrl: '',
     //     readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/app-builder/main/README.md',
     //     changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/app-builder/main/CHANGELOG.md',
@@ -196,7 +232,10 @@ export const libs = [
         primary: false,
         landing: true,
         tags: ['ui'],
-        description: 'A compact and extensible navigation panel for complex services.',
+        description: {
+            en: 'A compact and extensible navigation panel for complex services.',
+            ru: 'Компактная и расширяемая навигационная панель для сложных сервисов.',
+        },
         storybookUrl: 'https://preview.gravity-ui.com/navigation/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/navigation/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/navigation/main/CHANGELOG.md',
@@ -210,7 +249,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui', 'nodejs'],
-        description: 'Helpers for managing Date and Time values.',
+        description: {
+            en: 'Helpers for managing Date and Time values.',
+            ru: 'Helpers for managing Date and Time values.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/date-utils/main/CHANGELOG.md',
@@ -224,7 +266,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui', 'nodejs'],
-        description: 'Axios wrapper that provides automatic cancelling of concurrent requests.',
+        description: {
+            en: 'Axios wrapper that provides automatic cancelling of concurrent requests.',
+            ru: 'Axios wrapper that provides automatic cancelling of concurrent requests.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/axios-wrapper/main/README.md',
         changelogUrl:
@@ -239,8 +284,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description:
-            'A react-final-form wrapper that provides some useful high-level components for building forms',
+        description: {
+            en: 'A react-final-form wrapper that provides some useful high-level components for building forms',
+            ru: 'A react-final-form wrapper that provides some useful high-level components for building forms',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/README.md',
         changelogUrl:
@@ -255,7 +302,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description: 'Cluster topologies visualizator.',
+        description: {
+            en: 'Cluster topologies visualizator.',
+            ru: 'Cluster topologies visualizator.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/paranoid/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/paranoid/main/CHANGELOG.md',
@@ -269,7 +319,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description: 'A react component for rendering big and complex tables.',
+        description: {
+            en: 'A react component for rendering big and complex tables.',
+            ru: 'A react component for rendering big and complex tables.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/react-data-table/main/README.md',
         changelogUrl:
@@ -284,7 +337,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui', 'nodejs'],
-        description: 'Data formatting library.',
+        description: {
+            en: 'Data formatting library.',
+            ru: 'Data formatting library.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/unipika/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/unipika/main/CHANGELOG.md',
@@ -298,7 +354,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description: 'Simple client-side logger',
+        description: {
+            en: 'Simple client-side logger',
+            ru: 'Simple client-side logger',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/ui-logger/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/ui-logger/main/CHANGELOG.md',
@@ -312,8 +371,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description:
-            'Client OAuth library that provides convenient abstraction on top of auth flow',
+        description: {
+            en: 'Client OAuth library that provides convenient abstraction on top of auth flow',
+            ru: 'Client OAuth library that provides convenient abstraction on top of auth flow',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/oauth-clients/main/README.md',
         changelogUrl:
@@ -328,7 +389,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        description: 'Internationalization helpers of Gravity UI projects.',
+        description: {
+            en: 'Internationalization helpers of Gravity UI projects.',
+            ru: 'Internationalization helpers of Gravity UI projects.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/i18n/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/i18n/main/CHANGELOG.md',
@@ -342,7 +406,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['infrastructure'],
-        description: 'ESLint configuration preset for Gravity UI projects.',
+        description: {
+            en: 'ESLint configuration preset for Gravity UI projects.',
+            ru: 'ESLint configuration preset for Gravity UI projects.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/eslint-config/main/README.md',
         changelogUrl:
@@ -357,7 +424,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['infrastructure'],
-        description: 'TypeScript compiler configuration preset for Gravity UI projects',
+        description: {
+            en: 'TypeScript compiler configuration preset for Gravity UI projects',
+            ru: 'TypeScript compiler configuration preset for Gravity UI projects',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/tsconfig/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/tsconfig/main/CHANGELOG.md',
@@ -371,7 +441,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['infrastructure'],
-        description: 'Prettier configuration preset for Gravity UI projects.',
+        description: {
+            en: 'Prettier configuration preset for Gravity UI projects.',
+            ru: 'Prettier configuration preset for Gravity UI projects.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/prettier-config/main/README.md',
         changelogUrl:
@@ -386,7 +459,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['infrastructure'],
-        description: 'Stylelint configuration preset for Gravity UI projects.',
+        description: {
+            en: 'Stylelint configuration preset for Gravity UI projects.',
+            ru: 'Stylelint configuration preset for Gravity UI projects.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/README.md',
         changelogUrl:
@@ -401,7 +477,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['infrastructure'],
-        description: 'Babel configuration preset for Gravity UI projects.',
+        description: {
+            en: 'Babel configuration preset for Gravity UI projects.',
+            ru: 'Babel configuration preset for Gravity UI projects.',
+        },
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/babel-preset/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/babel-preset/main/CHANGELOG.md',
@@ -415,7 +494,10 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['infrastructure'],
-        description: 'Browserslist confugiration preset used in our services.',
+        description: {
+            en: 'Browserslist confugiration preset used in our services.',
+            ru: 'Browserslist confugiration preset used in our services.',
+        },
         storybookUrl: '',
         readmeUrl:
             'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/README.md',

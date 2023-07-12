@@ -1,4 +1,5 @@
 import {CopyToClipboardStatus} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -17,6 +18,8 @@ interface UsageExampleProps {
 }
 
 export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
+    const {t} = useTranslation();
+
     const importCode =
         variant === 'react'
             ? buildIconImportLine(icon.meta.componentName)
@@ -24,10 +27,16 @@ export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
 
     return (
         <div className={b()}>
-            <div className={b('title')}>{variant === 'react' ? 'React component' : 'SVG'}</div>
+            <div className={b('title')}>
+                {variant === 'react' ? t('icons.usage.reactComponent') : t('icons.usage.svg')}
+            </div>
             <ClipboardArea
                 textToCopy={importCode}
-                tooltipContent={variant === 'react' ? 'Copy react component' : 'Copy SVG import'}
+                tooltipContent={
+                    variant === 'react'
+                        ? t('icons.actions.copyReactComponent')
+                        : t('icons.actions.copySvgImport')
+                }
             >
                 {(status) => (
                     <div className={b('wrapper')}>

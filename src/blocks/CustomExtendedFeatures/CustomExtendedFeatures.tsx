@@ -9,9 +9,9 @@ import {
     ThemedImage,
     useTheme,
 } from '@gravity-ui/page-constructor';
-import Link from 'next/link';
 import React from 'react';
 
+import {Link} from '../../components/Link';
 import {block, getThemedValue} from '../../utils';
 import {CustomBlock} from '../constants';
 
@@ -82,9 +82,7 @@ export const CustomExtendedFeatures: React.FC<CustomExtendedFeaturesProps> = ({
                     {button && (
                         <div className={b('button-desktop')}>
                             <Link href={button.href}>
-                                <a>
-                                    <Button size="xl" theme="outlined" text={button.text} />
-                                </a>
+                                <Button size="xl" theme="outlined" text={button.text} />
                             </Link>
                         </div>
                     )}
@@ -110,9 +108,7 @@ export const CustomExtendedFeatures: React.FC<CustomExtendedFeaturesProps> = ({
             {button && (
                 <div className={b('button-mobile')}>
                     <Link href={button.href}>
-                        <a>
-                            <Button size="xl" theme="outlined" text={button.text} />
-                        </a>
+                        <Button size="xl" theme="outlined" text={button.text} />
                     </Link>
                 </div>
             )}

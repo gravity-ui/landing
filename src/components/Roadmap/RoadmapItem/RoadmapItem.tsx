@@ -1,8 +1,8 @@
 import {ChevronRight} from '@gravity-ui/icons';
 import {HTML} from '@gravity-ui/page-constructor';
 import {Icon, Link} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
-import TimeAgo from 'react-timeago';
 
 import {block} from '../../../utils';
 import {RoadmapIcon} from '../RoadmapIcon/RoadmapIcon';
@@ -17,6 +17,8 @@ interface RoadmapItemProps {
 }
 
 export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
+    const {t} = useTranslation();
+
     const inProgress = task.status === RoadmapTaskStatus.InProgress;
     const completed = task.status === RoadmapTaskStatus.Completed;
 
@@ -28,8 +30,8 @@ export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
                 <HTML>{task.title}</HTML>
                 {showStatus && (
                     <span className={b('status')}>
-                        {inProgress && 'In progress'}
-                        {completed && task.completedDate && <TimeAgo date={task.completedDate} />}
+                        {inProgress && t('roadmap.inProgress')}
+                        {completed && task.completedDate}
                     </span>
                 )}
             </div>
