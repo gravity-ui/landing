@@ -1,0 +1,39 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}menu-local-picker';
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__locale {
+        display: flex;
+        margin-left: 10px;
+        font-size: 14px;
+        line-height: 16px;
+        color: #fff;
+        text-decoration: none;
+
+        &::before {
+            content: '|';
+            display: block;
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        &:first-child {
+            margin-left: 0;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        &_disabled {
+            color: rgba(255, 255, 255, 0.6);
+        }
+    }
+}

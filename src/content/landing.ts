@@ -14,7 +14,7 @@ import {CustomBlock} from '../blocks/constants';
 import {CustomBlockModel} from '../blocks/types';
 import {libs} from '../libs.mjs';
 
-import {roadmapTasks} from './roadmap';
+import {roadmapTasksEn, roadmapTasksRu} from './roadmap';
 
 interface CustomPageContent {
     blocks: (Block | CustomBlockModel)[];
@@ -22,13 +22,15 @@ interface CustomPageContent {
     background?: PageContent['background'];
 }
 
-const typedLanding: CustomPageContent = {
-    background: {
-        image: {
-            src: backgroundAsset.src,
-            disableCompress: true,
-        },
+const background = {
+    image: {
+        src: backgroundAsset.src,
+        disableCompress: true,
     },
+};
+
+const typedLandingEn: CustomPageContent = {
+    background,
     blocks: [
         {
             type: CustomBlock.CustomHeader,
@@ -53,17 +55,17 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
-                        date: '2023-07-05T10:00:00.000Z',
+                        date: '05.07.2023',
                         content:
                             'Meet the new <a href="/icons">Icons section</a>, where you can browse and download icons from our pack',
                     },
                     {
-                        date: '2023-06-20T10:00:00.000Z',
+                        date: '20.06.2023',
                         content:
                             'Follow Gravity UI improvements with roadmap section on our <a href="/#roadmap">website</a>',
                     },
                     {
-                        date: '2023-06-14T11:00:00.000Z',
+                        date: '14.06.2023',
                         content:
                             '<a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout--docs">Layout components</a> are stable now',
                     },
@@ -140,13 +142,13 @@ const typedLanding: CustomPageContent = {
                 .map((lib) => ({
                     id: lib.id,
                     title: lib.title,
-                    description: lib.description,
+                    description: lib.description.en,
                 })),
         },
         {
             type: CustomBlock.Roadmap,
             title: 'Roadmap',
-            tasks: roadmapTasks,
+            tasks: roadmapTasksEn,
         },
         {
             type: CustomBlock.CustomBanner,
@@ -171,6 +173,151 @@ const typedLanding: CustomPageContent = {
     ],
 };
 
-const landing = typedLanding as PageContent;
+const typedLandingRu: CustomPageContent = {
+    background,
+    blocks: [
+        {
+            type: CustomBlock.CustomHeader,
+            title: 'Создавайте современные интерфейсы с дизайн системой Gravity',
+            buttons: [
+                {
+                    text: 'GitHub',
+                    view: 'action',
+                    icon: githubIcon,
+                    href: 'https://github.com/gravity-ui',
+                    target: '_blank',
+                },
+                {
+                    text: 'Storybook',
+                    view: 'outlined',
+                    icon: storybookIcon,
+                    href: 'https://preview.gravity-ui.com/uikit/',
+                    target: '_blank',
+                },
+            ],
+            news: {
+                title: 'Последние новости',
+                items: [
+                    {
+                        date: '05.07.2023',
+                        content:
+                            'Мы запустили новый раздел <a href="/ru/icons">Иконки</a>, где вы можете посмотреть и загрузить иконки из нашей коллекции',
+                    },
+                    {
+                        date: '20.06.2023',
+                        content:
+                            'Следите за развитием Gravity UI в разделе Roadmap на нашем <a href="/ru/#roadmap">сайте</a>',
+                    },
+                    {
+                        date: '14.06.2023',
+                        content:
+                            'Выпущена стабильная версия <a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout--docs">Layout components</a>',
+                    },
+                ],
+            },
+        },
+        {
+            type: CustomBlock.CustomExtendedFeatures,
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            backdropFilter: 'blur(60px)',
+            colSizes: {
+                all: 12,
+                md: 12,
+                lg: 4,
+            },
+            items: [
+                {
+                    title: 'Основано на реальном опыте использования',
+                    description:
+                        'Внутреннее решение в ответ на реальные потребности разработчиков, мы выпустили Gravity для open-source сообщества.',
+                    icon: featureUnionAsset,
+                },
+                {
+                    title: 'Отличный дизайн',
+                    description:
+                        'Опытные дизайнеры следят за внешним видом наших библиотек, следя за тем, чтобы компоненты были стильными и согласованными, с поддержкой темного режима и высококонтрастных тем.',
+                    icon: featureStarAsset,
+                },
+                {
+                    title: 'Развивающаяся экосистема',
+                    description:
+                        'Регулярная обратная связь от нашего сообщества разработчиков позволяет нам постоянно улучшать наши библиотеки и нарушать совместимость только при необходимости.',
+                    icon: featureShieldAsset,
+                },
+            ],
+        },
+        {
+            type: CustomBlock.Examples,
+            title: 'Примеры',
+            colors: [
+                {
+                    title: 'Жёлтый',
+                    value: 'yellow',
+                },
+                {
+                    title: 'Красный',
+                    value: 'red',
+                },
+                {
+                    title: 'Зелёный',
+                    value: 'green',
+                },
+                {
+                    title: 'Синий',
+                    value: 'blue',
+                },
+            ],
+        },
+        {
+            type: CustomBlock.CustomExtendedFeatures,
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            title: 'Наши библиотеки',
+            button: {
+                text: 'Все библиотеки',
+                href: '/ru/libraries',
+            },
+            colSizes: {
+                all: 12,
+                md: 6,
+                lg: 4,
+            },
+            items: libs
+                .filter((lib) => lib.landing)
+                .map((lib) => ({
+                    id: lib.id,
+                    title: lib.title,
+                    description: lib.description.ru,
+                })),
+        },
+        {
+            type: CustomBlock.Roadmap,
+            title: 'Roadmap',
+            tasks: roadmapTasksRu,
+        },
+        {
+            type: CustomBlock.CustomBanner,
+            title: 'Начните создавать с Gravity&nbsp;UI',
+            color: '#23151e',
+            image: bannerAsset,
+            commands: [
+                'git clone git@github.com:gravity-ui/uikit-example-cra.git my-project && cd my-project',
+                'npm i',
+                'npm run start',
+            ],
+        },
+        {
+            type: BlockType.CompaniesBlock,
+            title: 'Нам доверяют',
+            images: {
+                desktop: companiesDesktopAsset,
+                tablet: companiesTabletAsset,
+                mobile: companiesMobileAsset,
+            },
+        },
+    ],
+};
 
-export {landing};
+const en = typedLandingEn as PageContent;
+const ru = typedLandingRu as PageContent;
+
+export {en, ru};

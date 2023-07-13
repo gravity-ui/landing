@@ -1,12 +1,2 @@
-import {Layout} from '../../components/Layout/Layout';
-import {Libraries} from '../../components/Libraries/Libraries';
-
-export const LibrariesPage = () => {
-    return (
-        <Layout title="Libraries">
-            <Libraries />
-        </Layout>
-    );
-};
-
-export default LibrariesPage;
+// Support for default locale without path prefix
+export {default, getStaticProps} from '../[locale]/libraries/index';

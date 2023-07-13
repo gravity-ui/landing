@@ -1,4 +1,5 @@
 import {NextComponentType} from 'next';
+import {appWithTranslation} from 'next-i18next';
 
 import '../styles.scss';
 import '../vendors.scss';
@@ -13,4 +14,4 @@ export const App = ({
     return <Component {...pageProps} />;
 };
 
-export default App;
+export default appWithTranslation(App);

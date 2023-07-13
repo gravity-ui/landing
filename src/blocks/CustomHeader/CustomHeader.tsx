@@ -2,7 +2,6 @@ import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-c
 import {Button, ButtonProps, Icon} from '@gravity-ui/uikit';
 import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
 import React from 'react';
-import TimeAgo from 'react-timeago';
 
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
@@ -83,7 +82,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                     newsItem.content ? (
                                         <div key={index} className={b('news-item')}>
                                             <div className={b('news-item-date')}>
-                                                <TimeAgo date={newsItem.date} />
+                                                {newsItem.date}
                                             </div>
                                             <div className={b('news-item-content')}>
                                                 <HTML>{newsItem.content}</HTML>

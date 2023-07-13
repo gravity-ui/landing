@@ -41,6 +41,10 @@ $block: '.#{variables.$ns}icons';
         gap: pcVariables.$indentXXXS;
     }
 
+    &__library-button {
+        margin-left: 20px;
+    }
+
     &__col {
         display: flex;
     }

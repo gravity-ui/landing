@@ -1,20 +1,20 @@
 export const menu = [
     {
-        title: 'Libraries',
+        titleKey: 'menu.libraries',
         url: '/libraries',
     },
     {
-        title: 'Components',
+        titleKey: 'menu.components',
         url: '#',
         isComingSoon: true,
     },
     {
-        title: 'Design',
+        titleKey: 'menu.design',
         url: '#',
         isComingSoon: true,
     },
     {
-        title: 'Icons',
+        titleKey: 'menu.icons',
         url: '/icons',
     },
 ];
