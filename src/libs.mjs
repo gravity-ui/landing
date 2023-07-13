@@ -9,7 +9,7 @@ export const libs = [
         tags: ['ui'],
         description: {
             en: 'Base UI components and tokens for building services with Gravity.',
-            ru: 'Базовее UI компоненты и токены для построения сервисов с Gravity.',
+            ru: 'Базовые UI компоненты и токены для построения сервисов с Gravity.',
         },
         storybookUrl: 'https://preview.gravity-ui.com/uikit/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md',
@@ -26,7 +26,7 @@ export const libs = [
         tags: ['ui'],
         description: {
             en: 'A set of complex React components.',
-            ru: 'A set of complex React components.',
+            ru: 'Набор комлпексных React компонентов.',
         },
         storybookUrl:
             'https://preview.gravity-ui.com/components/?path=/story/components-adaptivetabs--default',
