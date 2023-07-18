@@ -114,10 +114,22 @@ export const Library: React.FC<Props> = ({id}) => {
 
                             {lib.config.githubId || lib.config.storybookUrl ? (
                                 <div className={b('buttons')}>
+                                    {id === 'icons' && (
+                                        <div key="icons" className={b('button')}>
+                                            <Button
+                                                view="action"
+                                                size="xl"
+                                                href="/icons"
+                                                target="_blank"
+                                            >
+                                                Go to icons
+                                            </Button>
+                                        </div>
+                                    )}
                                     {lib.config.githubId ? (
                                         <div key="github" className={b('button')}>
                                             <Button
-                                                view="action"
+                                                view={id === 'icons' ? 'outlined' : 'action'}
                                                 size="xl"
                                                 href={`${GITHUB_URL}${lib.config.githubId}`}
                                                 target="_blank"
@@ -131,7 +143,7 @@ export const Library: React.FC<Props> = ({id}) => {
                                             </Button>
                                         </div>
                                     ) : null}
-                                    {lib.config.storybookUrl ? (
+                                    {id !== 'icons' && lib.config.storybookUrl ? (
                                         <div key="storybook" className={b('button')}>
                                             <Button
                                                 view="outlined"

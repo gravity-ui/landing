@@ -1,15 +1,14 @@
 import {
     Animatable,
     AnimateBlock,
-    BlockHeader,
     Button,
     Col,
     GridColumnSizesType,
+    HTML,
     Row,
     ThemedImage,
-    TitleProps,
+    useTheme,
 } from '@gravity-ui/page-constructor';
-import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
 import Link from 'next/link';
 import React from 'react';
 
@@ -40,8 +39,7 @@ type CustomButton = {
 };
 
 export type CustomExtendedFeaturesProps = Animatable & {
-    title?: TitleProps | string;
-    description?: string;
+    title?: string;
     button?: CustomButton;
     items: Item[];
     colSizes?: GridColumnSizesType;
@@ -53,17 +51,16 @@ export type CustomExtendedFeaturesModel = CustomExtendedFeaturesProps & {
     type: CustomBlock.CustomExtendedFeatures;
 };
 
-export const CustomExtendedFeatures = ({
+export const CustomExtendedFeatures: React.FC<CustomExtendedFeaturesProps> = ({
     title,
-    description,
     button,
     items,
     colSizes = DEFAULT_SIZES,
     animated,
     backgroundColor,
     backdropFilter,
-}: CustomExtendedFeaturesProps) => {
-    const theme = useThemeValue();
+}) => {
+    const [theme] = useTheme();
 
     const contentStyle: Record<string, unknown> = {};
 
@@ -77,20 +74,22 @@ export const CustomExtendedFeatures = ({
 
     return (
         <AnimateBlock className={b()} animate={animated}>
-            <div className={b('header')}>
-                <div className={b('header-title')}>
-                    <BlockHeader title={title} description={description} />
+            {Boolean(title) && (
+                <div className={b('header')}>
+                    <h2 className={b('header-title')}>
+                        <HTML>{title}</HTML>
+                    </h2>
+                    {button && (
+                        <div className={b('button-desktop')}>
+                            <Link href={button.href}>
+                                <a>
+                                    <Button size="xl" theme="outlined" text={button.text} />
+                                </a>
+                            </Link>
+                        </div>
+                    )}
                 </div>
-                {button && (
-                    <div className={b('button-desktop')}>
-                        <Link href={button.href}>
-                            <a>
-                                <Button size="xl" theme="outlined" text={button.text} />
-                            </a>
-                        </Link>
-                    </div>
-                )}
-            </div>
+            )}
             <div className={b('items')}>
                 <Row>
                     {items.map(({id, title: itemTitle, description: itemDescription, icon}) => {

@@ -1,0 +1,11 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}icon-collection';
+
+#{$block} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: pcVariables.$indentXS;
+}

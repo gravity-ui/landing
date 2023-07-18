@@ -1,5 +1,4 @@
-import {HTML, Image, ThemedImage} from '@gravity-ui/page-constructor';
-import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
+import {HTML, Image, ThemedImage, useTheme} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import Link from 'next/link';
 import React from 'react';
@@ -29,7 +28,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     icon,
     contentStyle,
 }) => {
-    const theme = useThemeValue();
+    const [theme] = useTheme();
 
     const iconThemed = icon && getThemedValue(icon, theme);
     const iconData = iconThemed && getMediaImage(iconThemed);

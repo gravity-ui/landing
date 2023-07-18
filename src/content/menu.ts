@@ -17,4 +17,8 @@ export const menu: MenuItem[] = [
         title: 'Design',
         url: '/design',
     },
+    {
+        title: 'Icons',
+        url: '/icons',
+    },
 ];

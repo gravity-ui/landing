@@ -4,8 +4,8 @@ import {
     HTML,
     ThemeSupporting,
     YFMWrapper,
+    useTheme,
 } from '@gravity-ui/page-constructor';
-import {useThemeValue} from '@gravity-ui/page-constructor/build/esm/context/theme/useThemeValue';
 import {Button, ButtonProps, Icon} from '@gravity-ui/uikit';
 import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
 import React from 'react';
@@ -44,7 +44,7 @@ export const CustomBanner: React.FC<CustomBannerProps> = ({
     commands,
     buttons,
 }) => {
-    const theme = useThemeValue();
+    const [theme] = useTheme();
 
     const contentStyle: Record<string, string> = {};
 

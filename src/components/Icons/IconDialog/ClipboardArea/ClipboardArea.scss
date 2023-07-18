@@ -1,0 +1,17 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}clipboard-area';
+
+#{$block} {
+    display: flex;
+
+    &__popup {
+        --yc-popup-background-color: #3e3235;
+        --yc-popup-border-color: #3e3235;
+
+        @include pcStyles.text-size(body-1);
+        padding: 16px;
+    }
+}
