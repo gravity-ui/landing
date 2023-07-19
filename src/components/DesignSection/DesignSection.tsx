@@ -24,7 +24,7 @@ export const DesignSection: React.FC<Props> = ({sectionId}) => {
         const componentsWithDesign = libs.reduce<(Component & {url: string})[]>((acc, lib) => {
             acc.push(
                 ...lib.components
-                    .filter((component) => Boolean(component.content.design))
+                    .filter((component) => Boolean(component.content?.design))
                     .map((component) => ({
                         ...component,
                         url: `/components/${lib.id}/${component.id}?tabId=design`,
