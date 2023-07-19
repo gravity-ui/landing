@@ -2,7 +2,8 @@ export type Component = {
     id: string;
     title: string;
     description?: string;
-    content: {
+    isComingSoon?: boolean;
+    content?: {
         overview: string;
         design?: string;
     };

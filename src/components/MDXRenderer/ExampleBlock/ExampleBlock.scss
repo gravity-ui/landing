@@ -1,3 +1,5 @@
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../../variables.scss';
 
@@ -6,14 +8,39 @@ $block: '.#{variables.$ns}example-block';
 #{$block} {
     margin-bottom: 16px;
     border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
 
     &:last-child {
         margin-bottom: 0;
     }
 
+    &__theme-root.yc-root {
+        background: var(--g-color-base-background);
+        color: var(--g-color-text-primary);
+
+        @include themes.g-theme-common;
+
+        &_theme_light {
+            @include themes.g-theme-light;
+        }
+
+        &_theme_dark {
+            @include themes.g-theme-dark;
+        }
+
+        &_theme_light-hc {
+            @include themes.g-theme-light-hc;
+        }
+
+        &_theme_dark-hc {
+            @include themes.g-theme-dark-hc;
+        }
+    }
+
     &__content {
         display: flex;
+        align-items: center;
         justify-content: space-around;
         padding: 40px;
 
@@ -49,14 +76,45 @@ $block: '.#{variables.$ns}example-block';
         justify-content: center;
         padding: 14px;
         background: #251b25;
-        border-top: 2px solid #160d1b;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     &__control {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 0 16px;
+        padding: 6px;
+        margin: 0 8px;
         cursor: pointer;
+
+        &_code,
+        &_open {
+            background-color: rgba(255, 190, 92, 0.1);
+            border-radius: 5px;
+        }
+    }
+
+    &__code {
+        @include pcStyles.text-code-2();
+
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        white-space: pre;
+        background-color: #2d2d2d;
+        transition: all 0.3s ease-in-out;
+        overflow-x: auto;
+
+        &_open {
+            max-height: 5000px;
+            opacity: 1;
+        }
+    }
+
+    &__code-content {
+        @include pcStyles.text-code-2();
+
+        padding: 14px;
     }
 }

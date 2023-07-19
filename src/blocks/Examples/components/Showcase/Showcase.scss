@@ -1,3 +1,4 @@
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../../../variables.scss';
 
@@ -183,8 +184,8 @@ $block: '.#{variables.$ns}examples-showcase';
     }
 
     .yc-label_theme_info {
-        color: var(--yc-color-private-brand-1000-solid);
-        background-color: var(--yc-color-private-brand-200);
+        color: var(--g-color-private-brand-1000-solid);
+        background-color: var(--g-color-private-brand-200);
     }
 
     .yc-user-avatar {
@@ -222,48 +223,65 @@ $block: '.#{variables.$ns}examples-showcase';
         $color: change-color($brand-color, $alpha: $alpha);
         $solid-color: opaque-color($color, $bg-color);
 
-        --yc-color-private-brand-#{$alpha * 1000}: #{$color};
-        --yc-color-private-brand-#{$alpha * 1000}-solid: #{$solid-color};
+        --g-color-private-brand-#{$alpha * 1000}: #{$color};
+        --g-color-private-brand-#{$alpha * 1000}-solid: #{$solid-color};
     }
 }
 
 #{$block}#{$root} {
+    background: var(--g-color-base-background);
+    color: var(--g-color-text-primary);
+
+    @include themes.g-theme-common;
+
     &_theme_light {
-        --yc-my-color-brand-normal: var(--yc-color-private-brand-1000-solid);
-        --yc-my-color-brand-normal-hover: var(--yc-color-private-brand-900-solid);
-        --yc-my-color-brand-light: var(--yc-color-private-brand-300);
-        --yc-my-color-brand-selection: var(--yc-color-private-brand-50);
-        --yc-my-color-brand-selection-hover: var(--yc-color-private-brand-100);
-        --yc-my-color-brand-link: var(--yc-my-color-brand-normal);
-        --yc-my-color-brand-link-hover: var(--yc-color-private-brand-1000-solid);
-        --yc-my-color-brand-text-contrast: var(--yc-color-text-light-primary);
+        @include themes.g-theme-light;
     }
 
     &_theme_dark {
-        --yc-my-color-brand-normal: var(--yc-color-private-brand-1000-solid);
-        --yc-my-color-brand-normal-hover: var(--yc-color-private-brand-800-solid);
-        --yc-my-color-brand-light: var(--yc-color-private-brand-300);
-        --yc-my-color-brand-selection: var(--yc-color-private-brand-100);
-        --yc-my-color-brand-selection-hover: var(--yc-color-private-brand-200);
-        --yc-my-color-brand-link: var(--yc-my-color-brand-normal);
-        --yc-my-color-brand-link-hover: var(--yc-color-private-brand-1000-solid);
-        --yc-my-color-brand-text-contrast: var(--yc-color-text-light-primary);
+        @include themes.g-theme-dark;
+    }
 
-        --yc-color-base-background: rgba(37, 27, 37, 0.5);
+    &_theme_light-hc {
+        @include themes.g-theme-light-hc;
+    }
+
+    &_theme_dark-hc {
+        @include themes.g-theme-dark-hc;
+    }
+
+    &_theme_light {
+        --g-color-base-brand: var(--g-color-private-brand-1000-solid);
+        --g-color-base-brand-hover: var(--g-color-private-brand-900-solid);
+        --g-color-base-selection: var(--g-color-private-brand-50);
+        --g-color-base-selection-hover: var(--g-color-private-brand-100);
+        --g-color-line-brand: var(--g-color-private-brand-300);
+        --g-color-text-brand: var(--g-color-private-brand-900);
+        --g-color-text-link: var(--g-color-private-brand-600-solid);
+        --g-color-text-link-hover: var(--g-color-private-brand-1000-solid);
+    }
+
+    &_theme_dark {
+        --g-color-base-brand: var(--g-color-private-brand-1000-solid);
+        --g-color-base-brand-hover: var(--g-color-private-brand-800-solid);
+        --g-color-base-selection: var(--g-color-private-brand-100);
+        --g-color-base-selection-hover: var(--g-color-private-brand-200);
+        --g-color-line-brand: var(--g-color-private-brand-400);
+        --g-color-text-brand: var(--g-color-private-brand-800);
+        --g-color-text-link: var(--g-color-private-brand-600-solid);
+        --g-color-text-link-hover: var(--g-color-private-brand-1000-solid);
+
+        --g-color-base-background: rgba(37, 27, 37, 0.5);
     }
 }
 
 #{$block}_color_yellow#{$root} {
     &_theme_light {
         @include brand-vars(#ffbe5c, #fff);
-
-        --yc-my-color-brand-text-contrast: var(--yc-color-text-dark-primary);
     }
 
     &_theme_dark {
         @include brand-vars(#ffbe5c, #251b25);
-
-        --yc-my-color-brand-text-contrast: var(--yc-color-text-dark-primary);
     }
 }
 

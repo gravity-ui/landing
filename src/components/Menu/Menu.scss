@@ -185,7 +185,7 @@ $border-color: rgba(255, 255, 255, 0.2);
     &__link {
         white-space: nowrap;
         text-decoration: none;
-        color: var(--yc-color-text-primary);
+        color: var(--g-color-text-primary);
         font-size: 15px;
         font-weight: 400;
         line-height: 20px;
@@ -210,7 +210,7 @@ $border-color: rgba(255, 255, 255, 0.2);
 
         &_disabled {
             cursor: default;
-            color: var(--yc-color-text-secondary);
+            color: var(--g-color-text-secondary);
 
             &:hover {
                 opacity: 1;

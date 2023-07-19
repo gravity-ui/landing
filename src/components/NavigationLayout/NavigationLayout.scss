@@ -35,7 +35,7 @@ $block: '.#{variables.$ns}navigation-layout';
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin: 6px 20px;
+            margin: 12px 20px;
         }
     }
 

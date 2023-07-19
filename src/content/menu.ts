@@ -16,6 +16,7 @@ export const menu: MenuItem[] = [
     {
         title: 'Design',
         url: '/design',
+        isComingSoon: true,
     },
     {
         title: 'Icons',

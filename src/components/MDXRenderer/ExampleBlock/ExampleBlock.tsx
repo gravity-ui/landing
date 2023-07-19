@@ -10,11 +10,13 @@ import './ExampleBlock.scss';
 const b = block('example-block');
 
 export type ExampleBlockProps = {
+    code?: string;
     background?: string;
     children: React.ReactNode;
 };
 
-export const ExampleBlock: React.FC<ExampleBlockProps> = ({background, children}) => {
+export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, children}) => {
+    const [isOpen, setIsOpen] = React.useState(false);
     const [theme, setTheme] = React.useState<Theme>('dark');
 
     return (
@@ -28,9 +30,18 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({background, children}
                 </div>
             </ThemeProvider>
             <div className={b('controls')}>
-                <div tabIndex={0} role="button" className={b('control')}>
-                    <Icon data={codeIcon} size={16} />
-                </div>
+                {code ? (
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        className={b('control', {code, open: isOpen})}
+                        onClick={() => {
+                            setIsOpen(!isOpen);
+                        }}
+                    >
+                        <Icon data={codeIcon} size={16} />
+                    </div>
+                ) : null}
                 <div
                     tabIndex={0}
                     role="button"
@@ -42,6 +53,11 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({background, children}
                     <Icon data={themeIcon} size={18} />
                 </div>
             </div>
+            {code ? (
+                <div className={b('code', {open: isOpen})}>
+                    <div className={b('code-content')}>{code}</div>
+                </div>
+            ) : null}
         </div>
     );
 };

@@ -32,35 +32,37 @@ export const ComponentsLibrary: React.FC<Props> = ({libId}) => {
             <div className={b('components')}>
                 <Grid>
                     <Row>
-                        {lib.components.map((component) => {
-                            return (
-                                <Col
-                                    key={component.id}
-                                    className={b('col')}
-                                    sizes={{all: 12, lg: 6, xl: 4}}
-                                >
-                                    <Link
-                                        href={`/components/${lib.id}/${component.id}${
-                                            tabId ? `?tabId=${tabId}` : ''
-                                        }`}
+                        {lib.components
+                            .filter((component) => component.isComingSoon !== true)
+                            .map((component) => {
+                                return (
+                                    <Col
+                                        key={component.id}
+                                        className={b('col')}
+                                        sizes={{all: 12, lg: 6, xl: 4}}
                                     >
-                                        <a
-                                            className={b('component', {
-                                                primary: lib.primary,
-                                            })}
+                                        <Link
+                                            href={`/components/${lib.id}/${component.id}${
+                                                tabId ? `?tabId=${tabId}` : ''
+                                            }`}
                                         >
-                                            <div className={b('component-image')} />
-                                            <div className={b('component-title')}>
-                                                {component.title}
-                                            </div>
-                                            <div className={b('component-description')}>
-                                                {component.description}
-                                            </div>
-                                        </a>
-                                    </Link>
-                                </Col>
-                            );
-                        })}
+                                            <a
+                                                className={b('component', {
+                                                    primary: lib.primary,
+                                                })}
+                                            >
+                                                <div className={b('component-image')} />
+                                                <div className={b('component-title')}>
+                                                    {component.title}
+                                                </div>
+                                                <div className={b('component-description')}>
+                                                    {component.description}
+                                                </div>
+                                            </a>
+                                        </Link>
+                                    </Col>
+                                );
+                            })}
                     </Row>
                 </Grid>
             </div>

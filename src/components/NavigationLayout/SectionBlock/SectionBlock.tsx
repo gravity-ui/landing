@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import arrowIcon from '../../../assets/icons/arrow.svg';
+import soonLabelIcon from '../../../assets/icons/soon-label.svg';
 import {block} from '../../../utils';
 import {Section} from '../types';
 
@@ -16,6 +17,7 @@ export type SectionBlockProps = {
     setIsOpen: (val: boolean) => void;
     curSectionId: string;
     curSubSectionId?: string;
+    onClickOnLink: () => void;
 };
 
 export const SectionBlock: React.FC<SectionBlockProps> = ({
@@ -24,6 +26,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
     setIsOpen,
     curSectionId,
     curSubSectionId,
+    onClickOnLink,
 }) => {
     let content: React.ReactNode = null;
 
@@ -65,6 +68,7 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                                     active:
                                         curSectionId === data.id && curSubSectionId === undefined,
                                 })}
+                                onClick={onClickOnLink}
                             >
                                 Overview
                             </a>
@@ -72,6 +76,28 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                     ) : null}
 
                     {data.subSections?.map((subSection) => {
+                        if (subSection.isComingSoon === true) {
+                            return (
+                                <div key={subSection.id}>
+                                    <div
+                                        className={b('sub-section', {
+                                            active:
+                                                curSectionId === data.id &&
+                                                curSubSectionId === subSection.id,
+                                            disabled: subSection.isComingSoon === true,
+                                        })}
+                                    >
+                                        <span className={b('sub-section-text')}>
+                                            {subSection.title}
+                                        </span>
+                                        <span className={b('sub-section-icon')}>
+                                            <Icon data={soonLabelIcon} width={34} height={14} />
+                                        </span>
+                                    </div>
+                                </div>
+                            );
+                        }
+
                         return (
                             <Link key={subSection.id} href={subSection.url}>
                                 <a
@@ -80,8 +106,11 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                                             curSectionId === data.id &&
                                             curSubSectionId === subSection.id,
                                     })}
+                                    onClick={onClickOnLink}
                                 >
-                                    {subSection.title}
+                                    <span className={b('sub-section-text')}>
+                                        {subSection.title}
+                                    </span>
                                 </a>
                             </Link>
                         );

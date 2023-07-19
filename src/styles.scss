@@ -36,26 +36,28 @@ body,
     height: 100%;
 }
 
-body.yc-root {
-    --yc-font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
-    --yc-text-accent-font-weight: 600;
+body.g-root {
+    --g-font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
+    --g-text-accent-font-weight: 600;
 
-    --yc-color-base-background: #160d1b;
-    --yc-text-display-4-font-size: 56px;
-    --yc-text-display-4-line-height: 64px;
+    --g-color-base-background: #160d1b;
+    --g-text-display-4-font-size: 56px;
+    --g-text-display-4-line-height: 64px;
 
-    --yc-border-radius-xl: 32px;
-    --yc-border-radius-l: 32px;
-    --yc-color-line-generic-accent: #fff;
+    --g-border-radius-xl: 32px;
+    --g-border-radius-l: 32px;
+    --g-color-line-generic-accent: #fff;
 
-    --yc-color-base-special: #ffbe5c;
-    --yc-color-base-special-hover: #faae3d;
+    --g-color-base-special: #ffbe5c;
+    --g-color-base-special-hover: #faae3d;
 
-    --yc-my-color-brand-text-contrast: rgba(0, 0, 0, 0.85);
-    --yc-my-color-brand-selection: rgba(37, 27, 37, 0.25);
+    --g-color-text-brand-contrast: rgba(0, 0, 0, 0.85);
+    --g-color-base-selection: rgba(37, 27, 37, 0.25);
 
     --yc-modal-border-radius: 24px;
-    --yc-color-base-modal: #251b25;
+    --g-color-base-modal: #251b25;
+
+    --pc-border-radius: 24px;
 
     .yc-popup-wrapper {
         // fix to make popup visible in sheet
@@ -63,7 +65,7 @@ body.yc-root {
     }
 
     margin: 0;
-    background-color: var(--yc-color-base-background);
+    background-color: var(--g-color-base-background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -80,21 +82,21 @@ body.yc-root {
         }
 
         a {
-            color: var(--yc-color-base-special);
+            color: var(--g-color-base-special);
             text-decoration: none;
 
             &:visited {
-                color: var(--yc-color-base-special);
+                color: var(--g-color-base-special);
             }
 
             &:hover {
-                color: var(--yc-color-base-special-hover);
+                color: var(--g-color-base-special-hover);
                 text-decoration: none;
             }
         }
 
         pre {
-            background-color: var(--yc-color-base-background);
+            background-color: var(--g-color-base-background);
         }
     }
 }

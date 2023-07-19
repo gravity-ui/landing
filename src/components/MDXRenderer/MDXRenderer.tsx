@@ -1,5 +1,5 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, Link, Tabs, Text} from '@gravity-ui/uikit';
+import * as UIKit from '@gravity-ui/uikit';
 import {EvaluateOptions, evaluate} from '@mdx-js/mdx';
 import * as provider from '@mdx-js/react';
 import type {MDXComponents, MDXContent} from 'mdx/types';
@@ -15,11 +15,7 @@ const componentsAvailableInMDX: MDXComponents = {
     Row,
     Col,
     ExampleBlock,
-    Button,
-    Link,
-    Text,
-    Icon,
-    Tabs,
+    UIKit: UIKit as unknown as Record<string, MDXComponents>,
 };
 
 type Props = {

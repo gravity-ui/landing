@@ -8,9 +8,11 @@ import {libs} from '../../../content/components';
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: libs.reduce<{params: {libId: string; componentId: string}}[]>((acc, lib) => {
-            lib.components.forEach((component) => {
-                acc.push({params: {libId: lib.id, componentId: component.id}});
-            });
+            lib.components
+                .filter((component) => component.isComingSoon !== true)
+                .forEach((component) => {
+                    acc.push({params: {libId: lib.id, componentId: component.id}});
+                });
             return acc;
         }, []),
         fallback: false,

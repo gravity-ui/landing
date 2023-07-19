@@ -69,6 +69,7 @@ export const Libraries = () => {
                                 onUpdate={setFilterString}
                                 size="xl"
                                 placeholder="Search by name or description"
+                                hasClear
                             />
                         </div>
                     </Col>

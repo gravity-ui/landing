@@ -36,6 +36,10 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
     const section = sections.find((item) => item.id === sectionId);
     const subSection = section?.subSections?.find((item) => item.id === subSectionId);
 
+    const clickOnLinkHandler = React.useCallback(() => {
+        setIsOpenMobileNavigation(false);
+    }, []);
+
     if (!section) {
         return null;
     }
@@ -90,6 +94,7 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
                                 subSectionId={subSectionId}
                                 searchPlaceholder={searchPlaceholder}
                                 emptySearchPlaceholder={emptySearchPlaceholder}
+                                onClickOnLink={clickOnLinkHandler}
                             />
                         </div>
                     </Col>

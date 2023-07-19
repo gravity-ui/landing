@@ -53,7 +53,7 @@ export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
         <div className={b()}>
             <h1 className={b('title')}>{component.title}</h1>
 
-            {component.content.design ? (
+            {component.content?.design ? (
                 <div className={b('tabs')}>
                     <Tabs
                         size="xl"
@@ -73,10 +73,14 @@ export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
             ) : null}
 
             <div className={b('content')}>
-                {tabId === Tab.Design && component.content.design ? (
-                    <MDXRenderer key="design" text={component.content.design} />
+                {tabId === Tab.Design && component.content?.design ? (
+                    <MDXRenderer key="design" text={component.content?.design} />
                 ) : (
-                    <MDXRenderer key="overview" text={component.content.overview} withComponents />
+                    <MDXRenderer
+                        key="overview"
+                        text={component.content?.overview ?? ''}
+                        withComponents
+                    />
                 )}
             </div>
         </div>

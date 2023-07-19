@@ -15,10 +15,18 @@ export type NavigationProps = {
     subSectionId?: string;
     searchPlaceholder?: string;
     emptySearchPlaceholder?: string;
+    onClickOnLink: () => void;
 };
 
 export const Navigation = memo<NavigationProps>(
-    ({sections, sectionId, subSectionId, searchPlaceholder, emptySearchPlaceholder}) => {
+    ({
+        sections,
+        sectionId,
+        subSectionId,
+        searchPlaceholder,
+        emptySearchPlaceholder,
+        onClickOnLink,
+    }) => {
         const [filterString, setFilterString] = React.useState('');
 
         const [openState, setOpenState] = React.useState(() => {
@@ -81,6 +89,7 @@ export const Navigation = memo<NavigationProps>(
                     onUpdate={filterStringUpdateHandle}
                     size="xl"
                     placeholder={searchPlaceholder}
+                    hasClear
                 />
 
                 <div className={b('items')}>
@@ -96,6 +105,7 @@ export const Navigation = memo<NavigationProps>(
                                     }}
                                     curSectionId={sectionId}
                                     curSubSectionId={subSectionId}
+                                    onClickOnLink={onClickOnLink}
                                 />
                             );
                         })

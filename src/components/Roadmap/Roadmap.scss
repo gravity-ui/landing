@@ -5,7 +5,7 @@ $block: '.#{variables.$ns}roadmap';
 
 #{$block} {
     --roadmap-separator-width: 28px;
-    --roadmap-background-color: var(--yc-color-base-background);
+    --roadmap-background-color: var(--g-color-base-background);
     --roadmap-tail-color: rgba(255, 255, 255, 0.72);
     --roadmap-default-task-color: rgba(255, 255, 255, 0.5);
     --roadmap-completed-task-color: var(--yc-color-base-special);
