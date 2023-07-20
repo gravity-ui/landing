@@ -55,18 +55,21 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                 {buttons.map((button) => {
                                     const {icon, text, ...buttonProps} = button;
                                     return (
-                                        <div key={text} className={b('button')}>
-                                            <Button size="xl" {...buttonProps}>
-                                                {icon ? (
-                                                    <Icon
-                                                        className={b('button-icon')}
-                                                        data={icon}
-                                                        size={16}
-                                                    />
-                                                ) : null}
-                                                {text}
-                                            </Button>
-                                        </div>
+                                        <Button
+                                            key={text}
+                                            className={b('button')}
+                                            size="xl"
+                                            {...buttonProps}
+                                        >
+                                            {icon ? (
+                                                <Icon
+                                                    className={b('button-icon')}
+                                                    data={icon}
+                                                    size={16}
+                                                />
+                                            ) : null}
+                                            {text}
+                                        </Button>
                                     );
                                 })}
                             </div>

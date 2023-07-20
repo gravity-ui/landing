@@ -14,13 +14,18 @@ $block: '.#{variables.$ns}custom-header';
         display: flex;
         align-items: center;
         margin-top: 32px;
+
+        @media (max-width: variables.$extraSmallBreakpoint - 1) {
+            flex-direction: column;
+        }
     }
 
     &__button {
         margin: 0 8px;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin: 0 6px;
+        @media (max-width: variables.$extraSmallBreakpoint - 1) {
+            margin-top: 10px;
+            width: 100%;
         }
     }
 

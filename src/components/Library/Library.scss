@@ -81,6 +81,10 @@ $block: '.#{variables.$ns}library';
         display: flex;
         align-items: center;
         margin-top: 24px;
+
+        @media (max-width: variables.$extraSmallBreakpoint - 1) {
+            flex-direction: column;
+        }
     }
 
     &__button {
@@ -88,6 +92,11 @@ $block: '.#{variables.$ns}library';
 
         &:first-child {
             margin-left: 0;
+        }
+
+        @media (max-width: variables.$extraSmallBreakpoint - 1) {
+            margin: 10px 0 0;
+            width: 100%;
         }
     }
 
