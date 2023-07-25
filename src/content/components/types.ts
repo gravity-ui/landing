@@ -7,6 +7,7 @@ export type Component = {
         overview: string;
         design?: string;
     };
+    sandbox?: {};
 };
 
 export type Lib = {

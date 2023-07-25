@@ -27,6 +27,12 @@ export const uikit: Lib = {
                 overview: labelOverview,
                 // design: labelDesign,
             },
+            sandbox: {
+                props: {
+                    view: 'action',
+                    size: 'l',
+                },
+            },
         },
         {
             id: 'link',
