@@ -15,6 +15,7 @@ export const uikit: Lib = {
         {
             id: 'button',
             title: 'Button',
+            githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Button',
             content: {
                 overview: buttonOverview,
                 // design: buttonDesign,
@@ -23,6 +24,7 @@ export const uikit: Lib = {
         {
             id: 'label',
             title: 'Label',
+            githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Label',
             content: {
                 overview: labelOverview,
                 // design: labelDesign,

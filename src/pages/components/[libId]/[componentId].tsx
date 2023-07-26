@@ -39,7 +39,7 @@ export const ComponentPage = ({libId, componentId}: {libId: string; componentId:
     return (
         <Layout title={`${lib.title} – ${component.title}`}>
             <ComponentsLayout libId={libId} componentId={componentId}>
-                <Component libId={libId} componentId={componentId} />
+                <Component component={component} />
             </ComponentsLayout>
         </Layout>
     );

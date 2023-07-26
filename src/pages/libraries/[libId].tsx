@@ -2,7 +2,7 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 
 import {Layout} from '../../components/Layout/Layout';
 import {Library} from '../../components/Library/Library';
-import {getLibsList} from '../../utils';
+import {getLibById, getLibsList} from '../../utils';
 
 const libs = getLibsList();
 
@@ -20,11 +20,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const LibraryPage = ({libId}: {libId: string}) => {
-    const lib = libs.find((item) => item.config.id === libId);
+    const lib = getLibById(libId);
 
     return (
         <Layout title={lib?.config.title ?? ''}>
-            <Library id={libId} />
+            <Library lib={lib} />
         </Layout>
     );
 };

@@ -37,7 +37,7 @@
 //     return (
 //         <Layout title={`${section.title} – ${article.title}`}>
 //             <DesignLayout sectionId={sectionId} articleId={articleId}>
-//                 <DesignArticle sectionId={sectionId} articleId={articleId} />
+//                 <DesignArticle article={article} />
 //             </DesignLayout>
 //         </Layout>
 //     );

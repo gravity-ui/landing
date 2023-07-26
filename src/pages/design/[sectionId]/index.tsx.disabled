@@ -28,7 +28,7 @@
 //     return (
 //         <Layout title={section.title}>
 //             <DesignLayout sectionId={sectionId}>
-//                 <DesignSection sectionId={sectionId} />
+//                 <DesignSection section={section} />
 //             </DesignLayout>
 //         </Layout>
 //     );

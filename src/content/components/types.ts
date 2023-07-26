@@ -2,6 +2,8 @@ export type Component = {
     id: string;
     title: string;
     description?: string;
+    githubUrl?: string;
+    figmaUrl?: string;
     isComingSoon?: boolean;
     content?: {
         overview: string;

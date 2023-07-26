@@ -4,7 +4,7 @@ import React from 'react';
 
 import {Component} from '../..//content/components/types';
 import {libs} from '../../content/components';
-import {sections} from '../../content/design';
+import {Section} from '../../content/design/types';
 import {block} from '../../utils';
 
 import './DesignSection.scss';
@@ -12,14 +12,10 @@ import './DesignSection.scss';
 const b = block('design-section');
 
 type Props = {
-    sectionId: string;
+    section: Section;
 };
 
-export const DesignSection: React.FC<Props> = ({sectionId}) => {
-    const section = sections.find((item) => item.id === sectionId);
-
-    if (!section) return null;
-
+export const DesignSection: React.FC<Props> = ({section}) => {
     if (section.id === 'components') {
         const componentsWithDesign = libs.reduce<(Component & {url: string})[]>((acc, lib) => {
             acc.push(

@@ -1,9 +1,11 @@
-import {Tabs} from '@gravity-ui/uikit';
+import {Button, Icon, Tabs} from '@gravity-ui/uikit';
 import {useRouter} from 'next/router';
 import React from 'react';
 
+import figmaIcon from '../../assets/icons/figma.svg';
+import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
-import {libs} from '../../content/components';
+import {Component as ComponentType} from '../../content/components/types';
 import {block} from '../../utils';
 
 import './Component.scss';
@@ -27,11 +29,10 @@ const tabs = [
 ];
 
 export type ComponentProps = {
-    libId: string;
-    componentId?: string;
+    component: ComponentType;
 };
 
-export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
+export const Component: React.FC<ComponentProps> = ({component}) => {
     const router = useRouter();
     const {tabId} = router.query;
 
@@ -42,16 +43,41 @@ export const Component: React.FC<ComponentProps> = ({libId, componentId}) => {
         setActiveTab(tabId === Tab.Design ? Tab.Design : Tab.Overview);
     }, [tabId]);
 
-    const lib = libs.find((item) => item.id === libId);
-    const component = lib?.components.find((item) => item.id === componentId);
-
-    if (!lib || !component) {
-        return null;
-    }
-
     return (
         <div className={b()}>
-            <h1 className={b('title')}>{component.title}</h1>
+            <div className={b('header')}>
+                <h1 className={b('title')}>{component.title}</h1>
+                {component.githubUrl || component.figmaUrl ? (
+                    <div className={b('buttons')}>
+                        {component.githubUrl ? (
+                            <Button
+                                key="github"
+                                className={b('button')}
+                                view="outlined"
+                                size="l"
+                                href={component.githubUrl}
+                                target="_blank"
+                            >
+                                <Icon data={githubIcon} size={16} />
+                                <span>Github</span>
+                            </Button>
+                        ) : null}
+                        {component.figmaUrl ? (
+                            <Button
+                                key="figma"
+                                className={b('button')}
+                                view="outlined"
+                                size="l"
+                                href={component.figmaUrl}
+                                target="_blank"
+                            >
+                                <Icon data={figmaIcon} size={16} />
+                                <span>Open in Figma</span>
+                            </Button>
+                        ) : null}
+                    </div>
+                ) : null}
+            </div>
 
             {component.content?.design ? (
                 <div className={b('tabs')}>

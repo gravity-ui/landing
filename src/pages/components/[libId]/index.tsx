@@ -28,7 +28,7 @@ export const LibraryComponentsPage = ({libId}: {libId: string}) => {
     return (
         <Layout title={lib.title}>
             <ComponentsLayout libId={libId}>
-                <ComponentsLibrary libId={libId} />
+                <ComponentsLibrary lib={lib} />
             </ComponentsLayout>
         </Layout>
     );
