@@ -1,11 +1,9 @@
 import dynamic from 'next/dynamic';
-import {ElementType, FC, useEffect, useState} from 'react';
+import {ElementType, FC, ReactNode, useEffect, useState} from 'react';
 
 import {block} from '../../utils';
 
 import './SandboxComponent.scss';
-
-import {EventEmitter} from 'stream';
 
 type ComponenDictType = {
     [key: string]: ElementType;
@@ -21,6 +19,7 @@ const b = block('component');
 export type ComponentProps = {
     libId: string;
     componentId: unknown;
+    children?: ReactNode;
 };
 
 export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}) => {
@@ -44,9 +43,8 @@ export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}
 
     return (
         <div className={b()}>
-            <div className={b('frameBackground')} />
             <div className={b('component')}>
-                <DynamicComponent {...props}>Action</DynamicComponent>
+                <DynamicComponent {...props}>{props.children || 'Action'}</DynamicComponent>
             </div>
         </div>
     );

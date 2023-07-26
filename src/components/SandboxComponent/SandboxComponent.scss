@@ -6,19 +6,7 @@ $block: '.#{variables.$ns}component';
 #{$block} {
     min-height: 100vh;
     min-width: 100vw;
-
-    background: rgba(0,32,51,.08);
-
-    &__frameBackground {
-        bottom: 0;
-        left: 0;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        top: 0;
-
-        background: #000;
-    }
+    background-color: var(--g-color-base-modal);
 
     &__component {
         align-items: center;
