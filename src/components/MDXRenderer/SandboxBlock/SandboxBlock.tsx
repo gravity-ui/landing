@@ -2,7 +2,6 @@ import {ChevronsExpandUpRight} from '@gravity-ui/icons';
 import {Col, Icon, Row, Select, Switch, Text, TextInput, Theme} from '@gravity-ui/uikit';
 import {FC, MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 
-import fullScreenIcon from '../../../assets/icons/fullScreen.svg';
 import themeIcon from '../../../assets/icons/theme.svg';
 import {block} from '../../../utils';
 

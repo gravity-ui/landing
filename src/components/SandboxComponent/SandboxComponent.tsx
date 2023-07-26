@@ -45,8 +45,6 @@ export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}
 
     const theme = props.theme || 'dark';
 
-    console.log('theme: ', theme);
-
     return (
         <div className={b()}>
             <ThemeProvider theme={theme} scoped rootClassName={`${b('theme-root')}`}>
