@@ -1,4 +1,5 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}component';
@@ -15,5 +16,37 @@ $block: '.#{variables.$ns}component';
         justify-content: center;
         position: absolute;
         width: 100%;
+        padding: 0 25px;
+
+        &_theme_dark {
+            background: #251b25;
+        }
+
+        &_theme_light {
+            background: #fff;
+        }
+    }
+
+    &__theme-root.yc-root {
+        background: var(--g-color-base-background);
+        color: var(--g-color-text-primary);
+
+        @include themes.g-theme-common;
+
+        &_theme_light {
+            @include themes.g-theme-light;
+        }
+
+        &_theme_dark {
+            @include themes.g-theme-dark;
+        }
+
+        &_theme_light-hc {
+            @include themes.g-theme-light-hc;
+        }
+
+        &_theme_dark-hc {
+            @include themes.g-theme-dark-hc;
+        }
     }
 }

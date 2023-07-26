@@ -1,3 +1,4 @@
+import {Theme, ThemeProvider} from '@gravity-ui/uikit';
 import dynamic from 'next/dynamic';
 import {ElementType, FC, ReactNode, useEffect, useState} from 'react';
 
@@ -19,7 +20,8 @@ const b = block('component');
 export type ComponentProps = {
     libId: string;
     componentId: unknown;
-    children?: ReactNode;
+    text?: ReactNode;
+    theme?: Theme;
 };
 
 export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}) => {
@@ -41,11 +43,17 @@ export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}
         };
     }, []);
 
+    const theme = props.theme || 'dark';
+
+    console.log('theme: ', theme);
+
     return (
         <div className={b()}>
-            <div className={b('component')}>
-                <DynamicComponent {...props}>{props.children || 'Action'}</DynamicComponent>
-            </div>
+            <ThemeProvider theme={theme} scoped rootClassName={`${b('theme-root')}`}>
+                <div className={b('component', {theme})}>
+                    <DynamicComponent {...props}>{props.text || 'Action'}</DynamicComponent>
+                </div>
+            </ThemeProvider>
         </div>
     );
 };
