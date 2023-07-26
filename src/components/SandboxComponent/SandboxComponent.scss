@@ -1,4 +1,3 @@
-@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 @use '../../variables.scss';
 
@@ -16,7 +15,6 @@ $block: '.#{variables.$ns}component';
         justify-content: center;
         position: absolute;
         width: 100%;
-        padding: 0 25px;
 
         &_theme_dark {
             background: #251b25;

@@ -51,7 +51,9 @@ export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}
         <div className={b()}>
             <ThemeProvider theme={theme} scoped rootClassName={`${b('theme-root')}`}>
                 <div className={b('component', {theme})}>
-                    <DynamicComponent {...props}>{props.text || 'Action'}</DynamicComponent>
+                    <DynamicComponent style={{maxWidth: '90%'}} {...props}>
+                        {props.text || 'Text'}
+                    </DynamicComponent>
                 </div>
             </ThemeProvider>
         </div>

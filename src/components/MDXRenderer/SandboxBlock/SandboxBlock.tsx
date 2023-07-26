@@ -1,6 +1,8 @@
+import {ChevronsExpandUpRight} from '@gravity-ui/icons';
 import {Col, Icon, Row, Select, Switch, Text, TextInput, Theme} from '@gravity-ui/uikit';
 import {FC, MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 
+import fullScreenIcon from '../../../assets/icons/fullScreen.svg';
 import themeIcon from '../../../assets/icons/theme.svg';
 import {block} from '../../../utils';
 
@@ -154,8 +156,8 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
 
     return (
         <div className={b()}>
-            <Row space="5">
-                <Col s="8" l="8" m="8">
+            <Row space="0">
+                <Col s="12" l="8" m="8">
                     <iframe
                         ref={iframeRef}
                         src={`${window.location.origin}/sandbox/uikit/${component}`}
@@ -163,7 +165,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                         className={b('iframe')}
                     />
                 </Col>
-                <Col s="4" l="4" m="4" className={b('right-side')}>
+                <Col s="12" l="4" m="4" className={b('right-side')}>
                     <div className={b('top-actions')}>
                         <div
                             tabIndex={0}
@@ -174,6 +176,16 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                             }}
                         >
                             <Icon data={themeIcon} size={18} />
+                        </div>
+                        <div
+                            tabIndex={0}
+                            role="button"
+                            className={b('control-theme')}
+                            onClick={() => {
+                                setTheme(theme === 'dark' ? 'light' : 'dark');
+                            }}
+                        >
+                            <ChevronsExpandUpRight height={18} />
                         </div>
                     </div>
                     <div className={b('actions')}>

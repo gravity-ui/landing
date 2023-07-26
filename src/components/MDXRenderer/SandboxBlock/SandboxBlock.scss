@@ -5,8 +5,9 @@ $block: '.#{variables.$ns}sandbox-block ';
 
 #{$block} {
     border-radius: 4px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
+    margin-bottom: 20px;
 
     &__iframe {
         width: 100%;
@@ -32,16 +33,21 @@ $block: '.#{variables.$ns}sandbox-block ';
         background-color: var(--g-color-base-background);
         display: flex;
         justify-content: space-between;
-        padding: 10px 10px;
+        padding: 12px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-top: 0;
+        border-right: 0;
     }
 
     &__actions {
         max-height: 350px;
         overflow: auto;
         overflow-x: hidden;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     &__control-theme {
         cursor: pointer;
+        height: 18px;
     }
 }
