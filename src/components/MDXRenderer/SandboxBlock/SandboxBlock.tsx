@@ -1,5 +1,15 @@
 import {ChevronsExpandUpRight} from '@gravity-ui/icons';
-import {Col, Icon, Row, Select, Switch, Text, TextInput, Theme} from '@gravity-ui/uikit';
+import {
+    Col,
+    Icon,
+    RadioButton,
+    Row,
+    Select,
+    Switch,
+    Text,
+    TextInput,
+    Theme,
+} from '@gravity-ui/uikit';
 import {FC, MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 
 import themeIcon from '../../../assets/icons/theme.svg';
@@ -47,10 +57,10 @@ const options: OptionsType = {
                 'outlined-contrast',
                 'flat-contrast',
             ]),
-
-            size: mappingOptions(['xs', 's', 'm', 'l', 'xl']),
-
+        },
+        radioButton: {
             width: mappingOptions(['auto', 'max']),
+            size: mappingOptions(['xs', 's', 'm', 'l', 'xl']),
         },
         switch: {
             state: ['disabled', 'loading'],
@@ -59,49 +69,104 @@ const options: OptionsType = {
             state: ['text'],
         },
     },
+
+    label: {
+        select: {
+            theme: mappingOptions([
+                'normal',
+                'info',
+                'success',
+                'warning',
+                'danger',
+                'unknown',
+                'clear',
+            ]),
+        },
+        radioButton: {
+            size: mappingOptions(['xs', 's', 'm']),
+            type: mappingOptions(['default', 'close', 'copy']),
+        },
+        switch: {
+            state: ['disabled'],
+        },
+        input: {
+            state: ['text', 'value'],
+        },
+    },
 };
 
 const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
     const [props, setProps] = useState({});
-    const [theme, setTheme] = useState<Theme>('dark');
+    const [globalTheme, setTheme] = useState<Theme>('dark');
     const iframeRef = useRef() as MutableRefObject<HTMLIFrameElement | null>;
 
     useEffect(() => {
         iframeRef.current?.contentWindow?.postMessage(
             {
                 ...props,
-                theme,
+                globalTheme,
             },
             '*',
         );
-    }, [props, theme]);
+    }, [props, globalTheme]);
 
     const optionsNode = options[component];
 
     const renderSelects = (): ReactNode[] => {
         const select = optionsNode?.select;
-        return Object.keys(select).map((option: string) => {
-            return (
-                <Row space="0">
-                    <div className={b('content')}>
-                        <Text>{option}</Text>
-                        <Select
-                            key={option}
-                            value={props[option as keyof typeof props]}
-                            placeholder={option}
-                            options={select[option] as OptionType[]}
-                            width="max"
-                            onUpdate={(nextValue) =>
-                                setProps({
-                                    ...props,
-                                    [option]: nextValue,
-                                })
-                            }
-                        />
-                    </div>
-                </Row>
-            );
-        });
+        return (
+            select &&
+            Object.keys(select).map((option: string) => {
+                return (
+                    <Row space="0">
+                        <div className={b('content')}>
+                            <Text>{option}</Text>
+                            <Select
+                                key={option}
+                                value={props[option as keyof typeof props]}
+                                placeholder={option}
+                                options={select[option] as OptionType[]}
+                                width="max"
+                                onUpdate={(nextValue) =>
+                                    setProps({
+                                        ...props,
+                                        [option]: nextValue,
+                                    })
+                                }
+                            />
+                        </div>
+                    </Row>
+                );
+            })
+        );
+    };
+
+    const renderRadioButtons = (): ReactNode[] => {
+        const radioButton = optionsNode?.radioButton;
+        return (
+            radioButton &&
+            Object.keys(radioButton).map((option: string) => {
+                return (
+                    <Row space="0">
+                        <div className={b('content')}>
+                            <Text>{option}</Text>
+                            <RadioButton
+                                key={option}
+                                value={props[option as keyof typeof props]}
+                                options={radioButton[option] as OptionType[]}
+                                width="max"
+                                onUpdate={(nextValue) =>
+                                    setProps({
+                                        ...props,
+                                        [option]: nextValue,
+                                    })
+                                }
+                            />
+                        </div>
+                    </Row>
+                );
+            })
+        );
     };
 
     const renderSwitches = () => {
@@ -171,7 +236,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                             role="button"
                             className={b('control-theme')}
                             onClick={() => {
-                                setTheme(theme === 'dark' ? 'light' : 'dark');
+                                setTheme(globalTheme === 'dark' ? 'light' : 'dark');
                             }}
                         >
                             <Icon data={themeIcon} size={18} />
@@ -181,7 +246,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                             role="button"
                             className={b('control-theme')}
                             onClick={() => {
-                                setTheme(theme === 'dark' ? 'light' : 'dark');
+                                setTheme(globalTheme === 'dark' ? 'light' : 'dark');
                             }}
                         >
                             <ChevronsExpandUpRight height={18} />
@@ -189,6 +254,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                     </div>
                     <div className={b('actions')}>
                         {renderSelects()}
+                        {renderRadioButtons()}
                         {renderSwitches()}
                         {renderInputs()}
                     </div>

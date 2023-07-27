@@ -21,7 +21,7 @@ export type ComponentProps = {
     libId: string;
     componentId: unknown;
     text?: ReactNode;
-    theme?: Theme;
+    globalTheme?: Theme;
 };
 
 export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}) => {
@@ -43,7 +43,7 @@ export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}
         };
     }, []);
 
-    const theme = props.theme || 'dark';
+    const theme = props.globalTheme || 'dark';
 
     return (
         <div className={b()}>
