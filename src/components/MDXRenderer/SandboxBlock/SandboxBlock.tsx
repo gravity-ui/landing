@@ -220,48 +220,50 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
     };
 
     return (
-        <div className={`${b()} ${isFullScreen && b('full-screen')}`}>
-            <Row space="0">
-                <Col s="12" l="8" m="8">
-                    <iframe
-                        ref={iframeRef}
-                        src={`${window.location.origin}/sandbox/uikit/${component}`}
-                        frameBorder={0}
-                        className={b('iframe')}
-                    />
-                </Col>
-                <Col s="12" l="4" m="4">
-                    <div className={b('top-actions')}>
-                        <div
-                            tabIndex={0}
-                            role="button"
-                            className={b('control-theme')}
-                            onClick={() => {
-                                setTheme(globalTheme === 'dark' ? 'light' : 'dark');
-                            }}
-                        >
-                            <Icon data={themeIcon} size={18} />
+        optionsNode && (
+            <div className={`${b()} ${isFullScreen && b('full-screen')}`}>
+                <Row space="0">
+                    <Col s="12" l="8" m="8">
+                        <iframe
+                            ref={iframeRef}
+                            src={`${window.location.origin}/sandbox/uikit/${component}`}
+                            frameBorder={0}
+                            className={b('iframe')}
+                        />
+                    </Col>
+                    <Col s="12" l="4" m="4">
+                        <div className={b('top-actions')}>
+                            <div
+                                tabIndex={0}
+                                role="button"
+                                className={b('control-theme')}
+                                onClick={() => {
+                                    setTheme(globalTheme === 'dark' ? 'light' : 'dark');
+                                }}
+                            >
+                                <Icon data={themeIcon} size={18} />
+                            </div>
+                            <div
+                                tabIndex={0}
+                                role="button"
+                                className={b('control-theme')}
+                                onClick={() => {
+                                    setIsFullScreen(!isFullScreen);
+                                }}
+                            >
+                                <ChevronsExpandUpRight height={18} />
+                            </div>
                         </div>
-                        <div
-                            tabIndex={0}
-                            role="button"
-                            className={b('control-theme')}
-                            onClick={() => {
-                                setIsFullScreen(!isFullScreen);
-                            }}
-                        >
-                            <ChevronsExpandUpRight height={18} />
+                        <div className={b('actions')}>
+                            {renderSelects()}
+                            {renderRadioButtons()}
+                            {renderSwitches()}
+                            {renderInputs()}
                         </div>
-                    </div>
-                    <div className={b('actions')}>
-                        {renderSelects()}
-                        {renderRadioButtons()}
-                        {renderSwitches()}
-                        {renderInputs()}
-                    </div>
-                </Col>
-            </Row>
-        </div>
+                    </Col>
+                </Row>
+            </div>
+        )
     );
 };
 
