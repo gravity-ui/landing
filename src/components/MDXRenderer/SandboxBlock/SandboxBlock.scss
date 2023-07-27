@@ -25,10 +25,6 @@ $block: '.#{variables.$ns}sandbox-block ';
         justify-content: space-between;
     }
 
-    &__right-side {
-        padding-left: 0;
-    }
-
     &__top-actions {
         background-color: var(--g-color-base-background);
         display: flex;

@@ -164,7 +164,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                         className={b('iframe')}
                     />
                 </Col>
-                <Col s="12" l="4" m="4" className={b('right-side')}>
+                <Col s="12" l="4" m="4">
                     <div className={b('top-actions')}>
                         <div
                             tabIndex={0}
