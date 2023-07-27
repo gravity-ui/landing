@@ -97,6 +97,7 @@ const options: OptionsType = {
 
 const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
     const [props, setProps] = useState({});
+    const [isFullScreen, setIsFullScreen] = useState(false);
     const [globalTheme, setTheme] = useState<Theme>('dark');
     const iframeRef = useRef() as MutableRefObject<HTMLIFrameElement | null>;
 
@@ -219,7 +220,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
     };
 
     return (
-        <div className={b()}>
+        <div className={`${b()} ${isFullScreen && b('full-screen')}`}>
             <Row space="0">
                 <Col s="12" l="8" m="8">
                     <iframe
@@ -246,7 +247,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                             role="button"
                             className={b('control-theme')}
                             onClick={() => {
-                                setTheme(globalTheme === 'dark' ? 'light' : 'dark');
+                                setIsFullScreen(!isFullScreen);
                             }}
                         >
                             <ChevronsExpandUpRight height={18} />
