@@ -2,4 +2,17 @@ type SandboxBlockTypes = {
     component: string;
 };
 
-export type {SandboxBlockTypes};
+type OptionType = {
+    value: string;
+    content: string;
+};
+
+type OptionsType = {
+    [key: string]: {
+        [key: string]: {
+            [key: string]: OptionType[] | string[];
+        };
+    };
+};
+
+export type {SandboxBlockTypes, OptionType, OptionsType};

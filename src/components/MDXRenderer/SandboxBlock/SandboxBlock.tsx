@@ -16,84 +16,10 @@ import themeIcon from '../../../assets/icons/theme.svg';
 import {block} from '../../../utils';
 
 import './SandboxBlock.scss';
-import {SandboxBlockTypes} from './types';
+import {configOptions} from './config';
+import type {OptionType, SandboxBlockTypes} from './types';
 
 const b = block('sandbox-block');
-
-type OptionType = {
-    value: string;
-    content: string;
-};
-
-type OptionsType = {
-    [key: string]: {
-        [key: string]: {
-            [key: string]: OptionType[] | string[];
-        };
-    };
-};
-
-const mappingOptions = (arr: string[]) =>
-    arr.map((item) => ({
-        value: item,
-        content: item,
-    }));
-
-const options: OptionsType = {
-    button: {
-        select: {
-            view: mappingOptions([
-                'normal',
-                'action',
-                'raised',
-                'outlined',
-                'outlined-info',
-                'outlined-danger',
-                'flat',
-                'flat-info',
-                'flat-danger',
-                'flat-secondary',
-                'normal-contrast',
-                'outlined-contrast',
-                'flat-contrast',
-            ]),
-        },
-        radioButton: {
-            width: mappingOptions(['auto', 'max']),
-            size: mappingOptions(['xs', 's', 'm', 'l', 'xl']),
-        },
-        switch: {
-            state: ['disabled', 'loading'],
-        },
-        input: {
-            state: ['text'],
-        },
-    },
-
-    label: {
-        select: {
-            theme: mappingOptions([
-                'normal',
-                'info',
-                'success',
-                'warning',
-                'danger',
-                'unknown',
-                'clear',
-            ]),
-        },
-        radioButton: {
-            size: mappingOptions(['xs', 's', 'm']),
-            type: mappingOptions(['default', 'close', 'copy']),
-        },
-        switch: {
-            state: ['disabled'],
-        },
-        input: {
-            state: ['text', 'value'],
-        },
-    },
-};
 
 const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
     const [props, setProps] = useState({});
@@ -111,7 +37,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
         );
     }, [props, globalTheme]);
 
-    const optionsNode = options[component];
+    const optionsNode = configOptions[component];
 
     const renderSelects = (): ReactNode[] => {
         const select = optionsNode?.select;
