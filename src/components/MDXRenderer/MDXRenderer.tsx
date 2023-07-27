@@ -8,7 +8,7 @@ import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 
 import {ExampleBlock} from './ExampleBlock/ExampleBlock';
-import {SandboxBlock} from './SandboxBlock';
+import {SandboxBlock} from '../SandboxBlock';
 import {getCustomImg} from './utils';
 
 const componentsAvailableInMDX: MDXComponents = {

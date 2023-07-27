@@ -5,9 +5,9 @@ import React from 'react';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
-import {SandboxBlock} from '../../components/MDXRenderer/SandboxBlock';
 import {Component as ComponentType} from '../../content/components/types';
 import {block} from '../../utils';
+import {SandboxBlock} from '../SandboxBlock';
 
 import './Component.scss';
 

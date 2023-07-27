@@ -12,8 +12,8 @@ import {
 } from '@gravity-ui/uikit';
 import {FC, MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
 
-import themeIcon from '../../../assets/icons/theme.svg';
-import {block} from '../../../utils';
+import themeIcon from '../../assets/icons/theme.svg';
+import {block} from '../../utils';
 
 import './SandboxBlock.scss';
 import {configOptions} from './config';
