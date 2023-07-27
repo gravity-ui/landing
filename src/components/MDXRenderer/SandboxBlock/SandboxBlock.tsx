@@ -226,7 +226,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                     <Col s="12" l="8" m="8">
                         <iframe
                             ref={iframeRef}
-                            src={`${window.location.origin}/sandbox/uikit/${component}`}
+                            src={window && `${window?.location.origin}/sandbox/uikit/${component}`}
                             frameBorder={0}
                             className={b('iframe')}
                         />

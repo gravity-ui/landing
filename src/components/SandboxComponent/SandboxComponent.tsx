@@ -1,19 +1,10 @@
 import {Theme, ThemeProvider} from '@gravity-ui/uikit';
-import dynamic from 'next/dynamic';
-import {ElementType, FC, ReactNode, useEffect, useState} from 'react';
+import {FC, ReactNode, useEffect, useState} from 'react';
 
 import {block} from '../../utils';
 
 import './SandboxComponent.scss';
-
-type ComponenDictType = {
-    [key: string]: ElementType;
-};
-
-const componenDict: ComponenDictType = {
-    button: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Button)),
-    label: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Label)),
-};
+import componenDict from './imports';
 
 const b = block('component');
 

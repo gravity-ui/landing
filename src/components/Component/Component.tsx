@@ -5,6 +5,7 @@ import React from 'react';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
+import {SandboxBlock} from '../../components/MDXRenderer/SandboxBlock';
 import {Component as ComponentType} from '../../content/components/types';
 import {block} from '../../utils';
 
@@ -102,11 +103,16 @@ export const Component: React.FC<ComponentProps> = ({component}) => {
                 {tabId === Tab.Design && component.content?.design ? (
                     <MDXRenderer key="design" text={component.content?.design} />
                 ) : (
-                    <MDXRenderer
-                        key="overview"
-                        text={component.content?.overview ?? ''}
-                        withComponents
-                    />
+                    <>
+                        {typeof window !== 'undefined' && component.id && (
+                            <SandboxBlock component={component.id} />
+                        )}
+                        <MDXRenderer
+                            key="overview"
+                            text={component.content?.overview ?? ''}
+                            withComponents
+                        />
+                    </>
                 )}
             </div>
         </div>
