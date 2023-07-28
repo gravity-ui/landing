@@ -6,7 +6,6 @@ $block: '.#{variables.$ns}component';
 #{$block} {
     min-height: 100vh;
     min-width: 100vw;
-    background-color: var(--g-color-base-modal);
 
     &__component {
         align-items: center;
@@ -15,10 +14,6 @@ $block: '.#{variables.$ns}component';
         justify-content: center;
         position: absolute;
         width: 100%;
-
-        &_theme_dark {
-            background: #251b25;
-        }
 
         &_theme_light {
             background: #fff;

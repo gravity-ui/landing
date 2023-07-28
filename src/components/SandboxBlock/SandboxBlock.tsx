@@ -1,4 +1,4 @@
-import {ChevronsExpandUpRight} from '@gravity-ui/icons';
+import {ChevronsCollapseUpRight, ChevronsExpandUpRight} from '@gravity-ui/icons';
 import {
     Col,
     Icon,
@@ -10,7 +10,7 @@ import {
     TextInput,
     Theme,
 } from '@gravity-ui/uikit';
-import {FC, MutableRefObject, ReactNode, useEffect, useRef, useState} from 'react';
+import React from 'react';
 
 import themeIcon from '../../assets/icons/theme.svg';
 import {block} from '../../utils';
@@ -21,17 +21,17 @@ import type {OptionType, SandboxBlockTypes} from './types';
 
 const b = block('sandbox-block');
 
-const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
-    const [props, setProps] = useState({});
-    const [isFullScreen, setIsFullScreen] = useState(false);
-    const [globalTheme, setTheme] = useState<Theme>('dark');
-    const iframeRef = useRef() as MutableRefObject<HTMLIFrameElement | null>;
+const SandboxBlock: React.FC<SandboxBlockTypes> = ({component}) => {
+    const [props, setProps] = React.useState({});
+    const [isFullScreen, setIsFullScreen] = React.useState(false);
+    const [globalTheme, setTheme] = React.useState<Theme>('dark');
+    const iframeRef = React.useRef() as React.MutableRefObject<HTMLIFrameElement | null>;
 
-    useEffect(() => {
+    React.useEffect(() => {
         iframeRef.current?.contentWindow?.postMessage(
             {
-                ...props,
-                globalTheme,
+                pageProps: {theme: globalTheme},
+                componentProps: props,
             },
             '*',
         );
@@ -39,7 +39,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
 
     const optionsNode = configOptions[component];
 
-    const renderSelects = (): ReactNode[] => {
+    const renderSelects = (): React.ReactNode[] => {
         const select = optionsNode?.select;
         return (
             select &&
@@ -68,7 +68,7 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
         );
     };
 
-    const renderRadioButtons = (): ReactNode[] => {
+    const renderRadioButtons = (): React.ReactNode[] => {
         const radioButton = optionsNode?.radioButton;
         return (
             radioButton &&
@@ -177,7 +177,11 @@ const SandboxBlock: FC<SandboxBlockTypes> = ({component}) => {
                                     setIsFullScreen(!isFullScreen);
                                 }}
                             >
-                                <ChevronsExpandUpRight height={18} />
+                                {isFullScreen ? (
+                                    <ChevronsCollapseUpRight height={18} />
+                                ) : (
+                                    <ChevronsExpandUpRight height={18} />
+                                )}
                             </div>
                         </div>
                         <div className={b('actions')}>

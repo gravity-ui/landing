@@ -9,21 +9,19 @@ import componenDict from './imports';
 const b = block('component');
 
 export type ComponentProps = {
-    libId: string;
     componentId: unknown;
     text?: ReactNode;
-    globalTheme?: Theme;
+    theme?: Theme;
 };
 
 export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}) => {
-    const [props, setProps] = useState(restProps);
+    const [componentProps, setComponentProps] = useState(restProps);
+    const [pageProps, setPageProps] = useState(restProps);
     const DynamicComponent = componenDict[componentId as string];
 
     const handleListeningMessages = (e: MessageEvent) => {
-        setProps({
-            ...props,
-            ...e.data,
-        });
+        setPageProps({...e.data.pageProps});
+        setComponentProps({...e.data.componentProps});
     };
 
     useEffect(() => {
@@ -34,14 +32,14 @@ export const SandboxComponent: FC<ComponentProps> = ({componentId, ...restProps}
         };
     }, []);
 
-    const theme = props.globalTheme || 'dark';
+    const theme = pageProps.theme || 'dark';
 
     return (
         <div className={b()}>
             <ThemeProvider theme={theme} scoped rootClassName={`${b('theme-root')}`}>
                 <div className={b('component', {theme})}>
-                    <DynamicComponent style={{maxWidth: '90%'}} {...props}>
-                        {props.text || 'Text'}
+                    <DynamicComponent style={{maxWidth: '90%'}} {...componentProps}>
+                        {componentProps.text || 'Text'}
                     </DynamicComponent>
                 </div>
             </ThemeProvider>

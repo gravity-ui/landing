@@ -104,9 +104,7 @@ export const Component: React.FC<ComponentProps> = ({component}) => {
                     <MDXRenderer key="design" text={component.content?.design} />
                 ) : (
                     <>
-                        {typeof window !== 'undefined' && component.id && (
-                            <SandboxBlock component={component.id} />
-                        )}
+                        {typeof window !== 'undefined' && <SandboxBlock component={component.id} />}
                         <MDXRenderer
                             key="overview"
                             text={component.content?.overview ?? ''}

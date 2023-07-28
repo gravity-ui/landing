@@ -18,17 +18,25 @@ $block: '.#{variables.$ns}sandbox-block ';
         right: 0;
         bottom: 0;
         top: 0;
-        width: 100vw;
         border: 0;
         z-index: 99;
 
         .#{variables.$ns}sandbox-block__iframe {
             height: 100vh;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                height: 50vh;
+            }
         }
 
         .#{variables.$ns}sandbox-block__actions {
             max-height: 100vh;
-            height: 100vh
+            height: 100vh;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                height: 50vh;
+                max-height: 50vh;
+            }
         }
     }
 
