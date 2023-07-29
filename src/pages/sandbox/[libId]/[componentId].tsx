@@ -1,5 +1,4 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
-import {FC} from 'react';
 
 import {SandboxComponent} from '../../../components/SandboxComponent';
 import {libs} from '../../../content/components';
@@ -10,7 +9,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
             lib.components
                 .filter((component) => component.isComingSoon !== true)
                 .forEach((component) => {
-                    acc.push({params: {libId: lib.id, componentId: component.id}});
+                    acc.push({
+                        params: {
+                            libId: lib.id,
+                            componentId: component.id,
+                        },
+                    });
                 });
             return acc;
         }, []),
@@ -19,23 +23,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+    const componentId = context.params?.componentId;
+
     return {
         props: {
-            libId: context.params?.libId,
-            componentId: context.params?.componentId,
+            componentId,
         },
     };
 };
 
-export const SandboxPage = ({
-    libId,
-    componentId,
-}: {
-    libId: string;
-    componentId: string;
-    component: FC;
-}) => {
-    return <SandboxComponent libId={libId} componentId={componentId} />;
+export const SandboxPage = ({componentId}: {componentId: string}) => {
+    return <SandboxComponent componentId={componentId} />;
 };
 
 export default SandboxPage;
