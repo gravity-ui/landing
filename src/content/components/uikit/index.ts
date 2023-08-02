@@ -1,8 +1,16 @@
+import dynamic from 'next/dynamic';
+
 import {getLibById} from '../../../utils';
 import {Lib} from '../types';
 
 import buttonOverview from './content/button/overview.mdx';
 import labelOverview from './content/label/overview.mdx';
+
+const mappingOptions = (arr: string[]) =>
+    arr.map((item) => ({
+        value: item,
+        content: item,
+    }));
 
 const {config} = getLibById('uikit');
 
@@ -20,6 +28,46 @@ export const uikit: Lib = {
                 overview: buttonOverview,
                 // design: buttonDesign,
             },
+            sandbox: {
+                component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Button)),
+                props: {
+                    view: {
+                        type: 'select',
+                        values: mappingOptions([
+                            'normal',
+                            'action',
+                            'raised',
+                            'outlined',
+                            'outlined-info',
+                            'outlined-danger',
+                            'flat',
+                            'flat-info',
+                            'flat-danger',
+                            'flat-secondary',
+                            'normal-contrast',
+                            'outlined-contrast',
+                            'flat-contrast',
+                        ]),
+                    },
+                    width: {
+                        type: 'radioButton',
+                        values: mappingOptions(['auto', 'max']),
+                    },
+                    size: {
+                        type: 'radioButton',
+                        values: mappingOptions(['xs', 's', 'm', 'l', 'xl']),
+                    },
+                    disabled: {
+                        type: 'switch',
+                    },
+                    loading: {
+                        type: 'switch',
+                    },
+                    text: {
+                        type: 'input',
+                    },
+                },
+            },
         },
         {
             id: 'label',
@@ -28,6 +76,41 @@ export const uikit: Lib = {
             content: {
                 overview: labelOverview,
                 // design: labelDesign,
+            },
+            sandbox: {
+                component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Label)),
+                props: {
+                    theme: {
+                        type: 'select',
+                        values: mappingOptions([
+                            'normal',
+                            'info',
+                            'success',
+                            'warning',
+                            'danger',
+                            'unknown',
+                            'clear',
+                        ]),
+                    },
+                    size: {
+                        type: 'radioButton',
+                        values: mappingOptions(['xs', 's', 'm']),
+                    },
+                    type: {
+                        type: 'radioButton',
+                        values: mappingOptions(['default', 'close', 'copy']),
+                    },
+
+                    disabled: {
+                        type: 'switch',
+                    },
+                    text: {
+                        type: 'input',
+                    },
+                    value: {
+                        type: 'input',
+                    },
+                },
             },
         },
         {

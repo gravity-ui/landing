@@ -7,6 +7,7 @@ import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
 import {block} from '../../utils';
+import {SandboxBlock} from '../SandboxBlock';
 
 import './Component.scss';
 
@@ -102,11 +103,19 @@ export const Component: React.FC<ComponentProps> = ({component}) => {
                 {tabId === Tab.Design && component.content?.design ? (
                     <MDXRenderer key="design" text={component.content?.design} />
                 ) : (
-                    <MDXRenderer
-                        key="overview"
-                        text={component.content?.overview ?? ''}
-                        withComponents
-                    />
+                    <>
+                        {typeof window !== 'undefined' && (
+                            <SandboxBlock
+                                componentId={component.id}
+                                sandboxConfig={component.sandbox?.props}
+                            />
+                        )}
+                        <MDXRenderer
+                            key="overview"
+                            text={component.content?.overview ?? ''}
+                            withComponents
+                        />
+                    </>
                 )}
             </div>
         </div>
