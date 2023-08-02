@@ -21,11 +21,15 @@ $block: '.#{variables.$ns}sandbox-block';
         border: 0;
         z-index: 99;
 
+        .#{variables.$ns}sandbox-block__wrapper-iframe {
+            height: 50vh;
+        }
+
         .#{variables.$ns}sandbox-block__iframe {
             height: 100vh;
 
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-                height: 50vh;
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+                height: 100%;
             }
         }
 
@@ -33,9 +37,10 @@ $block: '.#{variables.$ns}sandbox-block';
             max-height: 100vh;
             height: 100vh;
 
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
                 height: 50vh;
                 max-height: 50vh;
+                padding-bottom: 50px;
             }
         }
     }

@@ -139,7 +139,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId}) => {
     return (
         <div className={`${b()} ${isFullScreen && b('full-screen')}`}>
             <Row space="0">
-                <Col s="12" l="8" m="8">
+                <Col s="12" l="8" m="8" className={b('wrapper-iframe')}>
                     <iframe
                         ref={iframeRef}
                         src={window && `${window?.location.origin}/sandbox/uikit/${componentId}`}
