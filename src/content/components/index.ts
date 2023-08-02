@@ -1,7 +1,7 @@
 import {Lib} from './types';
 import {uikit} from './uikit';
 
-export type {SandboxType} from './types';
+export type {SandboxType, SandboxProps, Component} from './types';
 
 export {uikit};
 

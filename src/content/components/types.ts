@@ -19,14 +19,16 @@ type OptionType = {
     content: string;
 };
 
+export type SandboxProps = {
+    [key: string]: {
+        type: string;
+        values?: OptionType[];
+    };
+};
+
 export type SandboxType = {
     component: ElementType;
-    props: {
-        [key: string]: {
-            type: string;
-            values?: OptionType[];
-        };
-    };
+    props: SandboxProps;
 };
 
 export type Lib = {

@@ -1,5 +1,8 @@
+import {SandboxProps} from 'src/content/components';
+
 type SandboxBlockTypes = {
     componentId: string;
+    sandboxConfig?: SandboxProps;
 };
 
 type OptionType = {

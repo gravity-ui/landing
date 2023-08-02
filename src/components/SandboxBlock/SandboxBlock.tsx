@@ -13,7 +13,6 @@ import {
 import React from 'react';
 
 import themeIcon from '../../assets/icons/theme.svg';
-import {uikit} from '../../content/components';
 import {block} from '../../utils';
 
 import './SandboxBlock.scss';
@@ -21,14 +20,11 @@ import type {OptionType, SandboxBlockTypes} from './types';
 
 const b = block('sandbox-block');
 
-const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId}) => {
+const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId, sandboxConfig}) => {
     const [props, setProps] = React.useState({});
     const [isFullScreen, setIsFullScreen] = React.useState(false);
     const [globalTheme, setTheme] = React.useState<Theme>('dark');
     const iframeRef = React.useRef() as React.MutableRefObject<HTMLIFrameElement | null>;
-
-    const sandboxConfig = uikit.components.find((component) => component.id === componentId)
-        ?.sandbox?.props;
 
     const renderOptions = () => {
         if (!sandboxConfig) return [];

@@ -24,16 +24,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const componentId = context.params?.componentId;
+    const libId = context.params?.libId;
 
     return {
         props: {
             componentId,
+            libId,
         },
     };
 };
 
-export const SandboxPage = ({componentId}: {componentId: string}) => {
-    return <SandboxComponent componentId={componentId} />;
+export const SandboxPage = ({componentId, libId}: {componentId: string; libId: string}) => {
+    return <SandboxComponent libId={libId} componentId={componentId} />;
 };
 
 export default SandboxPage;

@@ -105,7 +105,10 @@ export const Component: React.FC<ComponentProps> = ({component}) => {
                 ) : (
                     <>
                         {typeof window !== 'undefined' && (
-                            <SandboxBlock componentId={component.id} />
+                            <SandboxBlock
+                                componentId={component.id}
+                                sandboxConfig={component.sandbox?.props}
+                            />
                         )}
                         <MDXRenderer
                             key="overview"
