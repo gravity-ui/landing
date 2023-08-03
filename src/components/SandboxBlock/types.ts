@@ -1,6 +1,7 @@
 import {SandboxProps} from 'src/content/components';
 
 type SandboxBlockTypes = {
+    libId: string;
     componentId: string;
     sandboxConfig?: SandboxProps;
 };

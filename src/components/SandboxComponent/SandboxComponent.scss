@@ -1,7 +1,7 @@
 @use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 @use '../../variables.scss';
 
-$block: '.#{variables.$ns}component';
+$block: '.#{variables.$ns}sandbox-component';
 
 #{$block} {
     min-height: 100vh;
@@ -14,6 +14,8 @@ $block: '.#{variables.$ns}component';
         justify-content: center;
         position: absolute;
         width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
 
         &_theme_light {
             background: #fff;

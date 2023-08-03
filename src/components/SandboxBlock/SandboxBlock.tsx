@@ -5,6 +5,7 @@ import {
     RadioButton,
     Row,
     Select,
+    Spin,
     Switch,
     Text,
     TextInput,
@@ -20,25 +21,26 @@ import type {OptionType, SandboxBlockTypes} from './types';
 
 const b = block('sandbox-block');
 
-const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId, sandboxConfig}) => {
+const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxConfig}) => {
     const [props, setProps] = React.useState({});
+    const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
     const [isFullScreen, setIsFullScreen] = React.useState(false);
-    const [globalTheme, setTheme] = React.useState<Theme>('dark');
+    const [iframeTheme, setIframeTheme] = React.useState<Theme>('dark');
     const iframeRef = React.useRef() as React.MutableRefObject<HTMLIFrameElement | null>;
 
     const renderOptions = () => {
         if (!sandboxConfig) return [];
         const propsKeys = Object.keys(sandboxConfig);
 
-        return propsKeys?.map((prop) => {
+        return propsKeys.map((prop) => {
             const option = sandboxConfig[prop];
 
             switch (option.type) {
                 case 'select':
                     return (
-                        <Row space="0">
-                            <div className={b('content')}>
-                                <Text>{prop}</Text>
+                        <Row key={prop} space="0">
+                            <div className={b('prop')}>
+                                <Text className={b('prop-title')}>{prop}</Text>
                                 <Select
                                     key={prop}
                                     value={props[prop as keyof typeof props]}
@@ -58,9 +60,9 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId, sandboxConfig})
 
                 case 'radioButton':
                     return (
-                        <Row space="0">
-                            <div className={b('content')}>
-                                <Text>{prop}</Text>
+                        <Row key={prop} space="0">
+                            <div className={b('prop')}>
+                                <Text className={b('prop-title')}>{prop}</Text>
                                 <RadioButton
                                     key={prop}
                                     value={props[prop as keyof typeof props]}
@@ -79,13 +81,15 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId, sandboxConfig})
 
                 case 'switch':
                     return (
-                        <Row space="0">
-                            <div className={b('content')}>
-                                <div className={b('content-switch')}>
+                        <Row key={prop} space="0">
+                            <div className={b('prop')}>
+                                <div className={b('prop-switch')}>
                                     <Text variant="body-2">{prop}</Text>
                                     <Switch
                                         key={prop}
+                                        title={prop}
                                         size="m"
+                                        checked={props[prop as keyof typeof props]}
                                         onUpdate={(checked) => {
                                             setProps({
                                                 ...props,
@@ -100,11 +104,12 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId, sandboxConfig})
 
                 case 'input':
                     return (
-                        <Row space="0">
-                            <div className={b('content')}>
-                                <Text>{prop}</Text>
+                        <Row key={prop} space="0">
+                            <div className={b('prop')}>
+                                <Text className={b('prop-title')}>{prop}</Text>
                                 <TextInput
                                     placeholder={prop}
+                                    value={props[prop as keyof typeof props]}
                                     onUpdate={(nextValue) => {
                                         setProps({
                                             ...props,
@@ -122,23 +127,48 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId, sandboxConfig})
         });
     };
 
+    const iframeLoadingHandler = React.useCallback(() => setIsIframeLoaded(true), []);
+
     React.useEffect(() => {
-        iframeRef.current?.contentWindow?.postMessage(
-            {
-                pageProps: {theme: globalTheme},
-                componentProps: props,
-            },
-            '*',
-        );
-    }, [props, globalTheme]);
+        iframeRef.current?.addEventListener('load', iframeLoadingHandler);
+        return () => {
+            iframeRef.current?.removeEventListener('load', iframeLoadingHandler);
+        };
+    }, [iframeRef.current]);
+
+    React.useEffect(() => {
+        if (sandboxConfig) {
+            const defaultProps: Record<string, unknown> = {};
+            const propsKeys = Object.keys(sandboxConfig);
+            propsKeys.forEach((propKey) => {
+                if (typeof sandboxConfig[propKey].defaultValue !== 'undefined') {
+                    defaultProps[propKey] = sandboxConfig[propKey].defaultValue;
+                }
+            });
+            setProps(defaultProps);
+        }
+    }, [sandboxConfig]);
+
+    React.useEffect(() => {
+        if (isIframeLoaded) {
+            iframeRef.current?.contentWindow?.postMessage(
+                {
+                    pageProps: {theme: iframeTheme},
+                    componentProps: props,
+                },
+                '*',
+            );
+        }
+    }, [isIframeLoaded, props, iframeTheme]);
 
     return (
-        <div className={`${b()} ${isFullScreen && b('full-screen')}`}>
+        <div className={b({'full-screen': isFullScreen})}>
             <Row space="0">
                 <Col s="12" l="8" m="8" className={b('wrapper-iframe')}>
+                    <Spin size="s" />
                     <iframe
                         ref={iframeRef}
-                        src={window && `${window?.location.origin}/sandbox/uikit/${componentId}`}
+                        src={window && `${window?.location.origin}/sandbox/${libId}/${componentId}`}
                         frameBorder={0}
                         className={b('iframe')}
                     />
@@ -150,7 +180,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({componentId, sandboxConfig})
                             role="button"
                             className={b('control-theme')}
                             onClick={() => {
-                                setTheme(globalTheme === 'dark' ? 'light' : 'dark');
+                                setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
                             }}
                         >
                             <Icon data={themeIcon} size={18} />

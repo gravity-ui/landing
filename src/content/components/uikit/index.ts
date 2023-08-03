@@ -3,9 +3,6 @@ import dynamic from 'next/dynamic';
 import {getLibById} from '../../../utils';
 import {Lib} from '../types';
 
-import buttonOverview from './content/button/overview.mdx';
-import labelOverview from './content/label/overview.mdx';
-
 const mappingOptions = (arr: string[]) =>
     arr.map((item) => ({
         value: item,
@@ -25,7 +22,8 @@ export const uikit: Lib = {
             title: 'Button',
             githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Button',
             content: {
-                overview: buttonOverview,
+                readmeUrl:
+                    'https://raw.githubusercontent.com/gravity-ui/uikit/docs/update-button-and-label-readme/src/components/Button/README.md',
                 // design: buttonDesign,
             },
             sandbox: {
@@ -35,11 +33,11 @@ export const uikit: Lib = {
                         type: 'select',
                         values: mappingOptions([
                             'normal',
-                            'action',
-                            'raised',
                             'outlined',
+                            'action',
                             'outlined-info',
                             'outlined-danger',
+                            'raised',
                             'flat',
                             'flat-info',
                             'flat-danger',
@@ -48,23 +46,53 @@ export const uikit: Lib = {
                             'outlined-contrast',
                             'flat-contrast',
                         ]),
-                    },
-                    width: {
-                        type: 'radioButton',
-                        values: mappingOptions(['auto', 'max']),
+                        defaultValue: 'normal',
                     },
                     size: {
                         type: 'radioButton',
                         values: mappingOptions(['xs', 's', 'm', 'l', 'xl']),
+                        defaultValue: 'm',
+                    },
+                    pin: {
+                        type: 'select',
+                        values: mappingOptions([
+                            'round-round',
+                            'brick-brick',
+                            'clear-clear',
+                            'round-brick',
+                            'brick-round',
+                            'round-clear',
+                            'clear-round',
+                            'brick-clear',
+                            'clear-brick',
+                            'circle-circle',
+                            'circle-brick',
+                            'brick-circle',
+                            'circle-clear',
+                            'clear-circle',
+                        ]),
+                        defaultValue: 'round-round',
+                    },
+                    selected: {
+                        type: 'switch',
+                        defaultValue: false,
                     },
                     disabled: {
                         type: 'switch',
+                        defaultValue: false,
                     },
                     loading: {
                         type: 'switch',
+                        defaultValue: false,
                     },
-                    text: {
+                    width: {
+                        type: 'radioButton',
+                        values: mappingOptions(['auto', 'max']),
+                        defaultValue: 'auto',
+                    },
+                    children: {
                         type: 'input',
+                        defaultValue: 'Text',
                     },
                 },
             },
@@ -74,7 +102,8 @@ export const uikit: Lib = {
             title: 'Label',
             githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Label',
             content: {
-                overview: labelOverview,
+                readmeUrl:
+                    'https://raw.githubusercontent.com/gravity-ui/uikit/docs/update-button-and-label-readme/src/components/Label/README.md',
                 // design: labelDesign,
             },
             sandbox: {
@@ -91,24 +120,36 @@ export const uikit: Lib = {
                             'unknown',
                             'clear',
                         ]),
-                    },
-                    size: {
-                        type: 'radioButton',
-                        values: mappingOptions(['xs', 's', 'm']),
+                        defaultValue: 'normal',
                     },
                     type: {
                         type: 'radioButton',
                         values: mappingOptions(['default', 'close', 'copy']),
+                        defaultValue: 'default',
                     },
-
+                    size: {
+                        type: 'radioButton',
+                        values: mappingOptions(['xs', 's', 'm']),
+                        defaultValue: 's',
+                    },
                     disabled: {
                         type: 'switch',
+                        defaultValue: false,
                     },
-                    text: {
-                        type: 'input',
+                    interactive: {
+                        type: 'switch',
+                        defaultValue: false,
                     },
                     value: {
                         type: 'input',
+                    },
+                    copyText: {
+                        type: 'input',
+                        defaultValue: 'Text to copy',
+                    },
+                    children: {
+                        type: 'input',
+                        defaultValue: 'Text',
                     },
                 },
             },

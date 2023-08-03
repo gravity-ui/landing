@@ -19,6 +19,8 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
     const [isOpen, setIsOpen] = React.useState(false);
     const [theme, setTheme] = React.useState<Theme>('dark');
 
+    const codePrepared = code?.trim();
+
     return (
         <div className={`${b()}`}>
             <ThemeProvider theme={theme} scoped rootClassName={`${b('theme-root')}`}>
@@ -30,11 +32,11 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
                 </div>
             </ThemeProvider>
             <div className={b('controls')}>
-                {code ? (
+                {codePrepared ? (
                     <div
                         tabIndex={0}
                         role="button"
-                        className={b('control', {code, open: isOpen})}
+                        className={b('control', {open: isOpen})}
                         onClick={() => {
                             setIsOpen(!isOpen);
                         }}
@@ -53,9 +55,9 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
                     <Icon data={themeIcon} size={18} />
                 </div>
             </div>
-            {code ? (
+            {codePrepared ? (
                 <div className={b('code', {open: isOpen})}>
-                    <div className={b('code-content')}>{code}</div>
+                    <div className={b('code-content')}>{codePrepared}</div>
                 </div>
             ) : null}
         </div>

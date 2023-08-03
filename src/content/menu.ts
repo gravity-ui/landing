@@ -11,7 +11,8 @@ export const menu: MenuItem[] = [
     },
     {
         title: 'Components',
-        url: '/components',
+        // url: '/components',
+        url: '/components/uikit/button',
     },
     {
         title: 'Design',

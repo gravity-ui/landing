@@ -18,7 +18,7 @@ export const ComponentsLayout: React.FC<ComponentsLayoutProps> = ({
         return libs.map((lib) => ({
             id: lib.id,
             title: lib.title,
-            url: `/components/${lib.id}`,
+            // url: `/components/${lib.id}`, // "Overview" link
             subSections: lib.components.map((component) => ({
                 id: component.id,
                 title: component.title,

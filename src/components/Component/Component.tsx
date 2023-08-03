@@ -30,10 +30,12 @@ const tabs = [
 ];
 
 export type ComponentProps = {
+    libId: string;
     component: ComponentType;
+    readmeContent: string;
 };
 
-export const Component: React.FC<ComponentProps> = ({component}) => {
+export const Component: React.FC<ComponentProps> = ({libId, component, readmeContent}) => {
     const router = useRouter();
     const {tabId} = router.query;
 
@@ -106,15 +108,13 @@ export const Component: React.FC<ComponentProps> = ({component}) => {
                     <>
                         {typeof window !== 'undefined' && (
                             <SandboxBlock
+                                key={`${libId}-${component.id}`}
+                                libId={libId}
                                 componentId={component.id}
                                 sandboxConfig={component.sandbox?.props}
                             />
                         )}
-                        <MDXRenderer
-                            key="overview"
-                            text={component.content?.overview ?? ''}
-                            withComponents
-                        />
+                        <MDXRenderer key="overview" text={readmeContent} withComponents />
                     </>
                 )}
             </div>

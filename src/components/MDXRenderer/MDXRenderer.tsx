@@ -28,11 +28,16 @@ export const MDXRenderer = memo<Props>(({text, withComponents = false, absoluteI
     const [isEvaluated, setIsEvaluated] = React.useState(false);
     const resultRef = React.useRef<MDXContent | null>(null);
 
+    const preparedText = text
+        .trim()
+        .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1')
+        .replace(/<!--GITHUB_BLOCK(.*?)\/GITHUB_BLOCK-->/gms, '');
+
     React.useEffect(() => {
         resultRef.current = null;
         setIsEvaluated(false);
 
-        evaluate(text, {
+        evaluate(preparedText, {
             ...provider,
             ...runtime,
             development: false,
@@ -46,7 +51,7 @@ export const MDXRenderer = memo<Props>(({text, withComponents = false, absoluteI
                 // eslint-disable-next-line no-console
                 console.error(err);
             });
-    }, [text]);
+    }, [preparedText]);
 
     if (!isEvaluated || !resultRef.current) {
         return null;

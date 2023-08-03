@@ -8,7 +8,7 @@ export type Component = {
     figmaUrl?: string;
     isComingSoon?: boolean;
     content?: {
-        overview: string;
+        readmeUrl: string;
         design?: string;
     };
     sandbox?: SandboxType;
@@ -22,6 +22,7 @@ type OptionType = {
 export type SandboxProps = {
     [key: string]: {
         type: string;
+        defaultValue?: string | number | boolean;
         values?: OptionType[];
     };
 };
