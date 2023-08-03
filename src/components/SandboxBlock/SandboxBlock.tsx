@@ -47,6 +47,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                                     placeholder={prop}
                                     options={option.values as OptionType[]}
                                     width="max"
+                                    disabled={!isIframeLoaded}
                                     onUpdate={(nextValue) =>
                                         setProps({
                                             ...props,
@@ -68,6 +69,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                                     value={props[prop as keyof typeof props]}
                                     options={option.values as OptionType[]}
                                     width="max"
+                                    disabled={!isIframeLoaded}
                                     onUpdate={(nextValue) =>
                                         setProps({
                                             ...props,
@@ -89,6 +91,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                                         key={prop}
                                         title={prop}
                                         size="m"
+                                        disabled={!isIframeLoaded}
                                         checked={props[prop as keyof typeof props]}
                                         onUpdate={(checked) => {
                                             setProps({
@@ -109,6 +112,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                                 <Text className={b('prop-title')}>{prop}</Text>
                                 <TextInput
                                     placeholder={prop}
+                                    disabled={!isIframeLoaded}
                                     value={props[prop as keyof typeof props]}
                                     onUpdate={(nextValue) => {
                                         setProps({

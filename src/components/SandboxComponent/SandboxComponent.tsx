@@ -1,6 +1,5 @@
 import {Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
-import type {ElementType} from 'react';
 
 import type {Component} from '../../content/components';
 import {block, getLibComponents} from '../../utils';
@@ -15,14 +14,16 @@ export type ComponentProps = {
 };
 
 export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId}) => {
-    const [componentProps, setComponentProps] = React.useState({});
+    const [componentProps, setComponentProps] = React.useState<Record<string, unknown>>({});
     const [pageProps, setPageProps] = React.useState<{theme?: Theme}>({});
 
     const components = getLibComponents(libId) as Component[];
 
-    const DynamicComponent: ElementType | undefined = components?.find(
+    const sandboxConfig = components?.find(
         (component: Component) => component.id === componentId,
-    )?.sandbox?.component;
+    )?.sandbox;
+
+    const DynamicComponent = sandboxConfig?.component ?? null;
 
     const handleListeningMessages = React.useCallback((e: MessageEvent) => {
         setPageProps({...e.data.pageProps});
@@ -37,7 +38,24 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
         };
     }, []);
 
+    React.useEffect(() => {
+        if (sandboxConfig) {
+            const defaultProps: Record<string, unknown> = {};
+            const propsKeys = Object.keys(sandboxConfig.props);
+            propsKeys.forEach((propKey) => {
+                if (typeof sandboxConfig.props[propKey].defaultValue !== 'undefined') {
+                    defaultProps[propKey] = sandboxConfig.props[propKey].defaultValue;
+                }
+            });
+            setComponentProps(defaultProps);
+        }
+    }, [sandboxConfig]);
+
     const theme = pageProps.theme || 'dark';
+
+    if (!DynamicComponent) {
+        return null;
+    }
 
     return (
         <div className={b()}>

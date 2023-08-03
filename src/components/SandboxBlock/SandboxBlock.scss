@@ -20,6 +20,7 @@ $block: '.#{variables.$ns}sandbox-block';
         bottom: 0;
         top: 0;
         border: 0;
+        border-radius: 0;
         z-index: 99;
 
         #{$block}__wrapper-iframe {

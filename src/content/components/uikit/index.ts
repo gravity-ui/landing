@@ -11,6 +11,8 @@ const mappingOptions = (arr: string[]) =>
 
 const {config} = getLibById('uikit');
 
+const TARGET_BRANCH = 'main';
+
 export const uikit: Lib = {
     id: config.id,
     title: config.title,
@@ -22,8 +24,7 @@ export const uikit: Lib = {
             title: 'Button',
             githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Button',
             content: {
-                readmeUrl:
-                    'https://raw.githubusercontent.com/gravity-ui/uikit/docs/update-button-and-label-readme/src/components/Button/README.md',
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${TARGET_BRANCH}/src/components/Button/README.md`,
                 // design: buttonDesign,
             },
             sandbox: {
@@ -102,8 +103,7 @@ export const uikit: Lib = {
             title: 'Label',
             githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Label',
             content: {
-                readmeUrl:
-                    'https://raw.githubusercontent.com/gravity-ui/uikit/docs/update-button-and-label-readme/src/components/Label/README.md',
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${TARGET_BRANCH}/src/components/Label/README.md`,
                 // design: labelDesign,
             },
             sandbox: {
@@ -155,26 +155,6 @@ export const uikit: Lib = {
             },
         },
         {
-            id: 'link',
-            title: 'Link',
-            isComingSoon: true,
-        },
-        {
-            id: 'action-tooltip',
-            title: 'ActionTooltip',
-            isComingSoon: true,
-        },
-        {
-            id: 'alert',
-            title: 'Alert',
-            isComingSoon: true,
-        },
-        {
-            id: 'arrow-toggle',
-            title: 'ArrowToggle',
-            isComingSoon: true,
-        },
-        {
             id: 'breadcrumbs',
             title: 'Breadcrumbs',
             isComingSoon: true,
@@ -187,16 +167,6 @@ export const uikit: Lib = {
         {
             id: 'checkbox',
             title: 'Checkbox',
-            isComingSoon: true,
-        },
-        {
-            id: 'clipboard-button',
-            title: 'ClipboardButton',
-            isComingSoon: true,
-        },
-        {
-            id: 'dialog',
-            title: 'Dialog',
             isComingSoon: true,
         },
         {
@@ -215,8 +185,8 @@ export const uikit: Lib = {
             isComingSoon: true,
         },
         {
-            id: 'list',
-            title: 'List',
+            id: 'link',
+            title: 'Link',
             isComingSoon: true,
         },
         {
@@ -232,21 +202,6 @@ export const uikit: Lib = {
         {
             id: 'modal',
             title: 'Modal',
-            isComingSoon: true,
-        },
-        {
-            id: 'pagination',
-            title: 'Pagination',
-            isComingSoon: true,
-        },
-        {
-            id: 'persona',
-            title: 'Persona',
-            isComingSoon: true,
-        },
-        {
-            id: 'popover',
-            title: 'Popover',
             isComingSoon: true,
         },
         {
@@ -280,11 +235,6 @@ export const uikit: Lib = {
             isComingSoon: true,
         },
         {
-            id: 'select',
-            title: 'Select',
-            isComingSoon: true,
-        },
-        {
             id: 'sheet',
             title: 'Sheet',
             isComingSoon: true,
@@ -297,6 +247,11 @@ export const uikit: Lib = {
         {
             id: 'spin',
             title: 'Spin',
+            isComingSoon: true,
+        },
+        {
+            id: 'store-badge',
+            title: 'StoreBadge',
             isComingSoon: true,
         },
         {
@@ -320,33 +275,13 @@ export const uikit: Lib = {
             isComingSoon: true,
         },
         {
-            id: 'text-area',
-            title: 'TextArea',
-            isComingSoon: true,
-        },
-        {
             id: 'text-input',
             title: 'TextInput',
             isComingSoon: true,
         },
         {
-            id: 'toaster',
-            title: 'Toaster',
-            isComingSoon: true,
-        },
-        {
             id: 'tooltip',
             title: 'Tooltip',
-            isComingSoon: true,
-        },
-        {
-            id: 'user',
-            title: 'User',
-            isComingSoon: true,
-        },
-        {
-            id: 'user-avatar',
-            title: 'UserAvatar',
             isComingSoon: true,
         },
     ],
