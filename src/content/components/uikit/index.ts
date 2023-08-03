@@ -93,7 +93,7 @@ export const uikit: Lib = {
                     },
                     children: {
                         type: 'input',
-                        defaultValue: 'Text',
+                        defaultValue: 'Button',
                     },
                 },
             },
@@ -149,7 +149,7 @@ export const uikit: Lib = {
                     },
                     children: {
                         type: 'input',
-                        defaultValue: 'Text',
+                        defaultValue: 'Label',
                     },
                 },
             },
