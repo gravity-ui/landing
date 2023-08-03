@@ -1,0 +1,83 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}component';
+
+#{$block} {
+    padding: 32px 40px;
+    background: #251b25;
+    border-radius: 16px;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        padding: 20px 26px;
+        border-radius: 12px;
+    }
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        margin: 0 20px;
+        padding: 12px 18px;
+        border-radius: 10px;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 26px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        margin-left: 16px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex: 1;
+            flex-direction: column;
+            align-self: stretch;
+            margin: 16px 0 0;
+        }
+    }
+
+    &__button {
+        margin-left: 8px;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            width: 100%;
+            margin: 8px 0 0;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__title {
+        margin: 0;
+        color: #fff;
+        font-size: 40px;
+        line-height: 48px;
+        font-weight: 600;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            font-size: 32px;
+            line-height: 40px;
+        }
+    }
+
+    &__tabs {
+        margin-bottom: 24px;
+    }
+}

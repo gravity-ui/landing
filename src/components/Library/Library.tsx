@@ -12,7 +12,7 @@ import linkIcon from '../../assets/icons/link.svg';
 import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
-import {block, getLibById} from '../../utils';
+import {Lib, block} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -27,12 +27,10 @@ enum Tab {
 const GITHUB_URL = 'https://github.com/';
 
 type Props = {
-    id: string;
+    lib: Lib;
 };
 
-export const Library: React.FC<Props> = ({id}) => {
-    const lib = getLibById(id);
-
+export const Library: React.FC<Props> = ({lib}) => {
     const contentTabs = [
         {
             id: Tab.Readme,
@@ -114,51 +112,51 @@ export const Library: React.FC<Props> = ({id}) => {
 
                             {lib.config.githubId || lib.config.storybookUrl ? (
                                 <div className={b('buttons')}>
-                                    {id === 'icons' && (
-                                        <div key="icons" className={b('button')}>
-                                            <Button
-                                                view="action"
-                                                size="xl"
-                                                href="/icons"
-                                                target="_blank"
-                                            >
-                                                Go to icons
-                                            </Button>
-                                        </div>
+                                    {lib.config.id === 'icons' && (
+                                        <Button
+                                            key="icons"
+                                            className={b('button')}
+                                            view="action"
+                                            size="xl"
+                                            href="/icons"
+                                            target="_blank"
+                                        >
+                                            Go to icons
+                                        </Button>
                                     )}
                                     {lib.config.githubId ? (
-                                        <div key="github" className={b('button')}>
-                                            <Button
-                                                view={id === 'icons' ? 'outlined' : 'action'}
-                                                size="xl"
-                                                href={`${GITHUB_URL}${lib.config.githubId}`}
-                                                target="_blank"
-                                            >
-                                                <Icon
-                                                    className={b('button-icon')}
-                                                    data={githubIcon}
-                                                    size={16}
-                                                />
-                                                <span>Github</span>
-                                            </Button>
-                                        </div>
+                                        <Button
+                                            key="github"
+                                            className={b('button')}
+                                            view={lib.config.id === 'icons' ? 'outlined' : 'action'}
+                                            size="xl"
+                                            href={`${GITHUB_URL}${lib.config.githubId}`}
+                                            target="_blank"
+                                        >
+                                            <Icon
+                                                className={b('button-icon')}
+                                                data={githubIcon}
+                                                size={16}
+                                            />
+                                            <span>Github</span>
+                                        </Button>
                                     ) : null}
-                                    {id !== 'icons' && lib.config.storybookUrl ? (
-                                        <div key="storybook" className={b('button')}>
-                                            <Button
-                                                view="outlined"
-                                                size="xl"
-                                                href={lib.config.storybookUrl}
-                                                target="_blank"
-                                            >
-                                                <Icon
-                                                    className={b('button-icon')}
-                                                    data={storybookIcon}
-                                                    size={16}
-                                                />
-                                                <span>Storybook</span>
-                                            </Button>
-                                        </div>
+                                    {lib.config.id !== 'icons' && lib.config.storybookUrl ? (
+                                        <Button
+                                            key="storybook"
+                                            className={b('button')}
+                                            view="outlined"
+                                            size="xl"
+                                            href={lib.config.storybookUrl}
+                                            target="_blank"
+                                        >
+                                            <Icon
+                                                className={b('button-icon')}
+                                                data={storybookIcon}
+                                                size={16}
+                                            />
+                                            <span>Storybook</span>
+                                        </Button>
                                     ) : null}
                                 </div>
                             ) : null}
@@ -196,6 +194,7 @@ export const Library: React.FC<Props> = ({id}) => {
                                 <div
                                     className={b('info-title')}
                                     tabIndex={0}
+                                    role="button"
                                     onClick={() => {
                                         setIsVisibleInfoListMobile(!isVisibleInfoListMobile);
                                     }}

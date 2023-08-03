@@ -48,6 +48,11 @@ const plugins = [
                     ],
                 });
 
+                config.module.rules.push({
+                    test: /\.(md|mdx)$/,
+                    use: 'raw-loader',
+                });
+
                 if (!options.isServer) {
                     config.resolve.fallback.fs = false;
                 }

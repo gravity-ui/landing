@@ -7,7 +7,7 @@ $block: '.#{variables.$ns}examples';
 #{$block} {
     @include pcStyles.animate();
 
-    --yc-border-radius-l: 8px;
+    --g-border-radius-l: 8px;
 
     &__header-wrapper {
         display: flex;
@@ -59,7 +59,7 @@ $block: '.#{variables.$ns}examples';
         }
 
         &_type_theme {
-            --yc-color-base-background: rgba(37, 27, 37, 0.8);
+            --g-color-base-background: rgba(37, 27, 37, 0.8);
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
                 .yc-radio-button_size_l .yc-radio-button__option-text {

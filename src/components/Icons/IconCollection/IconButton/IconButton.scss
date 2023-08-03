@@ -4,9 +4,12 @@
 $block: '.#{variables.$ns}icon-button';
 
 #{$block} {
-    --yc-button-border-radius: 16px;
-    height: 62px;
-    width: 62px;
+    &.yc-button,
+    &.yc-button:has(.yc-button__icon:only-child) {
+        --yc-button-border-radius: 16px;
+        width: 62px;
+        height: 62px;
+    }
 
     &:hover {
         --yc-button-background-color: rgba(255, 255, 255, 0.16);

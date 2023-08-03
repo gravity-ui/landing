@@ -25,6 +25,7 @@ export const Tags: React.FC<Props> = ({value, items, onChange}) => {
                     <div
                         key={item.value}
                         tabIndex={0}
+                        role="button"
                         onClick={() => {
                             onChange(item.value);
                         }}

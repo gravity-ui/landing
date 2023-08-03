@@ -7,7 +7,7 @@ $block: '.#{variables.$ns}tags';
     display: flex;
     overflow-x: auto;
 
-    --yc-scrollbar-width: 0;
+    --g-scrollbar-width: 0;
 
     &__tag {
         padding: 11px 24px;

@@ -6,7 +6,7 @@ import Script from 'next/script';
 import {GA_ID, IS_PRODUCTION} from '../constants';
 
 const theme = Theme.Dark;
-const b = block('yc-root');
+const b = block('g-root');
 
 export const Document = () => {
     return (

@@ -5,7 +5,7 @@
 $block: '.#{variables.$ns}icon-dialog';
 
 #{$block} {
-    --yc-color-base-float: #251b25;
+    --g-color-base-float: #251b25;
     padding-top: 64px;
 
     &__sheet-content {

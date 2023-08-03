@@ -1,0 +1,47 @@
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}sandbox-component';
+
+#{$block} {
+    min-height: 100vh;
+    min-width: 100vw;
+
+    &__component {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+
+        &_theme_light {
+            background: #fff;
+        }
+    }
+
+    &__theme-root.yc-root {
+        background: var(--g-color-base-background);
+        color: var(--g-color-text-primary);
+
+        @include themes.g-theme-common;
+
+        &_theme_light {
+            @include themes.g-theme-light;
+        }
+
+        &_theme_dark {
+            @include themes.g-theme-dark;
+        }
+
+        &_theme_light-hc {
+            @include themes.g-theme-light-hc;
+        }
+
+        &_theme_dark-hc {
+            @include themes.g-theme-dark-hc;
+        }
+    }
+}

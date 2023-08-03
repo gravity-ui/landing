@@ -1,21 +1,21 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, Tabs} from '@gravity-ui/uikit';
+import * as UIKit from '@gravity-ui/uikit';
 import {EvaluateOptions, evaluate} from '@mdx-js/mdx';
 import * as provider from '@mdx-js/react';
 import type {MDXComponents, MDXContent} from 'mdx/types';
-import React from 'react';
+import React, {memo} from 'react';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 
+import {ExampleBlock} from './ExampleBlock/ExampleBlock';
 import {getCustomImg} from './utils';
 
 const componentsAvailableInMDX: MDXComponents = {
     Grid,
     Row,
     Col,
-    Button,
-    Icon,
-    Tabs,
+    ExampleBlock,
+    UIKit: UIKit as unknown as Record<string, MDXComponents>,
 };
 
 type Props = {
@@ -24,15 +24,20 @@ type Props = {
     absoluteImgPath?: string;
 };
 
-export const MDXRenderer = React.memo<Props>(({text, withComponents = false, absoluteImgPath}) => {
+export const MDXRenderer = memo<Props>(({text, withComponents = false, absoluteImgPath}) => {
     const [isEvaluated, setIsEvaluated] = React.useState(false);
     const resultRef = React.useRef<MDXContent | null>(null);
+
+    const preparedText = text
+        .trim()
+        .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1')
+        .replace(/<!--GITHUB_BLOCK(.*?)\/GITHUB_BLOCK-->/gms, '');
 
     React.useEffect(() => {
         resultRef.current = null;
         setIsEvaluated(false);
 
-        evaluate(text, {
+        evaluate(preparedText, {
             ...provider,
             ...runtime,
             development: false,
@@ -46,7 +51,7 @@ export const MDXRenderer = React.memo<Props>(({text, withComponents = false, abs
                 // eslint-disable-next-line no-console
                 console.error(err);
             });
-    }, [text]);
+    }, [preparedText]);
 
     if (!isEvaluated || !resultRef.current) {
         return null;

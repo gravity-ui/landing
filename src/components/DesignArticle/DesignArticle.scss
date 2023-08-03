@@ -1,0 +1,18 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}design-article';
+
+#{$block} {
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        margin: 0 20px;
+    }
+
+    &__title {
+        margin-top: 0;
+        color: #fff;
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 500;
+    }
+}
