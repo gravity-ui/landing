@@ -53,6 +53,11 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
+                        date: '2023-08-07T14:00:00.000Z',
+                        content:
+                            'New major version of <a href="https://github.com/gravity-ui/uikit/releases">UIKit is here</a>. Introducing new default color theme, updated Button component, some fixes and features.',
+                    },
+                    {
                         date: '2023-07-05T10:00:00.000Z',
                         content:
                             'Meet the new <a href="/icons">Icons section</a>, where you can browse and download icons from our pack',
@@ -61,11 +66,6 @@ const typedLanding: CustomPageContent = {
                         date: '2023-06-20T10:00:00.000Z',
                         content:
                             'Follow Gravity UI improvements with roadmap section on our <a href="/#roadmap">website</a>',
-                    },
-                    {
-                        date: '2023-06-14T11:00:00.000Z',
-                        content:
-                            '<a href="https://preview.gravity-ui.com/uikit/?path=/docs/layout--docs">Layout components</a> are stable now',
                     },
                 ],
             },
