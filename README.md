@@ -2,7 +2,6 @@
 
 https://gravity-ui.com/
 
-
 ## Development
 
 ```bash
