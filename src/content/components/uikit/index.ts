@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
 
+import {TARGET_BRANCH} from '../../../constants';
 import {getLibById} from '../../../utils';
 import {Lib} from '../types';
 
@@ -11,7 +12,7 @@ const mappingOptions = (arr: string[]) =>
 
 const {config} = getLibById('uikit');
 
-const TARGET_BRANCH = 'main';
+const uikitTargetBranch = process.env.UIKIT_TARGET_BRANCH || TARGET_BRANCH;
 
 export const uikit: Lib = {
     id: config.id,
@@ -24,7 +25,7 @@ export const uikit: Lib = {
             title: 'Button',
             githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Button',
             content: {
-                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${TARGET_BRANCH}/src/components/Button/README.md`,
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Button/README.md`,
                 // design: buttonDesign,
             },
             sandbox: {
@@ -103,7 +104,7 @@ export const uikit: Lib = {
             title: 'Label',
             githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Label',
             content: {
-                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${TARGET_BRANCH}/src/components/Label/README.md`,
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Label/README.md`,
                 // design: labelDesign,
             },
             sandbox: {
