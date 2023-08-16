@@ -156,6 +156,43 @@ export const uikit: Lib = {
             },
         },
         {
+            id: 'persona',
+            title: 'Persona',
+            githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Persona',
+            content: {
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Persona/README.md`,
+                // design: labelDesign,
+            },
+            sandbox: {
+                component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Persona)),
+                props: {
+                    text: {
+                        type: 'input',
+                        defaultValue: 'Charles Darwin',
+                    },
+                    image: {
+                        type: 'input',
+                        defaultValue:
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg/193px-Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg',
+                    },
+                    type: {
+                        type: 'radioButton',
+                        values: mappingOptions(['person', 'email', 'empty']),
+                        defaultValue: 'person',
+                    },
+                    size: {
+                        type: 'radioButton',
+                        values: mappingOptions(['s', 'n']),
+                        defaultValue: 's',
+                    },
+                    hasBorder: {
+                        type: 'switch',
+                        defaultValue: true,
+                    },
+                },
+            },
+        },
+        {
             id: 'breadcrumbs',
             title: 'Breadcrumbs',
             isComingSoon: true,
