@@ -2,7 +2,10 @@ const {join} = require('path');
 
 const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
-const withTM = require('next-transpile-modules')(['@gravity-ui/page-constructor']);
+const withTM = require('next-transpile-modules')([
+    '@gravity-ui/page-constructor',
+    '@gravity-ui/components',
+]);
 
 const plugins = [
     [
@@ -67,4 +70,7 @@ const plugins = [
 module.exports = withPlugins(plugins, {
     reactStrictMode: true,
     output: 'export',
+    experimental: {
+        esmExternals: 'loose',
+    },
 });

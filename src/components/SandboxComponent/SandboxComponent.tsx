@@ -14,6 +14,8 @@ export type ComponentProps = {
 };
 
 export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId}) => {
+    const [isMounted, setIsMounted] = React.useState(false);
+
     const [componentProps, setComponentProps] = React.useState<Record<string, unknown>>({});
     const [pageProps, setPageProps] = React.useState<{theme?: Theme}>({});
 
@@ -26,8 +28,12 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
     const DynamicComponent = sandboxConfig?.component ?? null;
 
     const handleListeningMessages = React.useCallback((e: MessageEvent) => {
-        setPageProps({...e.data.pageProps});
-        setComponentProps({...e.data.componentProps});
+        if (e.data.pageProps) {
+            setPageProps({...e.data.pageProps});
+        }
+        if (e.data.componentProps) {
+            setComponentProps({...e.data.componentProps});
+        }
     }, []);
 
     React.useEffect(() => {
@@ -51,9 +57,13 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
         }
     }, [sandboxConfig]);
 
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
     const theme = pageProps.theme || 'dark';
 
-    if (!DynamicComponent) {
+    if (!DynamicComponent || !isMounted) {
         return null;
     }
 

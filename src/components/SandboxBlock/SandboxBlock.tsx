@@ -160,7 +160,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                     pageProps: {theme: iframeTheme},
                     componentProps: props,
                 },
-                '*',
+                window.origin,
             );
         }
     }, [isIframeLoaded, props, iframeTheme]);
