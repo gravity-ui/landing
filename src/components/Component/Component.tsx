@@ -106,14 +106,14 @@ export const Component: React.FC<ComponentProps> = ({libId, component, readmeCon
                     <MDXRenderer key="design" text={component.content?.design} />
                 ) : (
                     <>
-                        {typeof window !== 'undefined' && (
+                        {typeof window !== 'undefined' && component.sandbox ? (
                             <SandboxBlock
                                 key={`${libId}-${component.id}`}
                                 libId={libId}
                                 componentId={component.id}
-                                sandboxConfig={component.sandbox?.props}
+                                sandboxConfig={component.sandbox.props}
                             />
-                        )}
+                        ) : null}
                         <MDXRenderer key="overview" text={readmeContent} withComponents />
                     </>
                 )}
