@@ -3,12 +3,7 @@ import dynamic from 'next/dynamic';
 import {TARGET_BRANCH} from '../../../constants';
 import {getLibById} from '../../../utils';
 import {Lib} from '../types';
-
-const mappingOptions = (arr: string[]) =>
-    arr.map((item) => ({
-        value: item,
-        content: item,
-    }));
+import {mappingOptions} from '../utils';
 
 const {config} = getLibById('uikit');
 

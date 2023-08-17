@@ -5,6 +5,7 @@
   "homepage": "https://gravity-ui.com/",
   "dependencies": {
     "@doc-tools/transform": "^2.16.0",
+    "@gravity-ui/components": "^2.1.0",
     "@gravity-ui/icons": "^2.3.0",
     "@gravity-ui/page-constructor": "^3.9.2",
     "@gravity-ui/uikit": "^5.0.2",
