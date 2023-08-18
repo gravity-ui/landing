@@ -43,12 +43,12 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                                 <Text className={b('prop-title')}>{prop}</Text>
                                 <Select
                                     key={prop}
-                                    value={props[prop as keyof typeof props]}
+                                    value={[props[prop as keyof typeof props]]}
                                     placeholder={prop}
                                     options={option.values as OptionType[]}
                                     width="max"
                                     disabled={!isIframeLoaded}
-                                    onUpdate={(nextValue) =>
+                                    onUpdate={([nextValue]) =>
                                         setProps({
                                             ...props,
                                             [prop]: nextValue,
