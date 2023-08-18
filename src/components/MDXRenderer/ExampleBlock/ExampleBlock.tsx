@@ -57,7 +57,9 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
             </div>
             {codePrepared ? (
                 <div className={b('code', {open: isOpen})}>
-                    <div className={b('code-content')}>{codePrepared}</div>
+                    <pre>
+                        <code className="language-tsx">{codePrepared}</code>
+                    </pre>
                 </div>
             ) : null}
         </div>

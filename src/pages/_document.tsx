@@ -27,6 +27,8 @@ export const Document = () => {
                         }}
                     />
                 )}
+                <script src="/static/js/prism.min.js" defer />
+                <link href="/static/css/prism.min.css" rel="stylesheet" />
             </Head>
             <body className={b({theme})}>
                 {IS_PRODUCTION && (

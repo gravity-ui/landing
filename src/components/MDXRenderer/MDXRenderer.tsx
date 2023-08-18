@@ -55,6 +55,12 @@ export const MDXRenderer = memo<Props>(({text, withComponents = false, absoluteI
             });
     }, [preparedText]);
 
+    React.useEffect(() => {
+        if (isEvaluated) {
+            Prism.highlightAll();
+        }
+    }, [isEvaluated]);
+
     if (!isEvaluated || !resultRef.current) {
         return null;
     }
