@@ -188,7 +188,20 @@ export const uikit: Lib = {
         {
             id: 'loader',
             title: 'Loader',
-            isComingSoon: true,
+            githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Loader',
+            content: {
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Loader/README.md`,
+            },
+            sandbox: {
+                component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Loader)),
+                props: {
+                    size: {
+                        type: 'radioButton',
+                        values: mappingOptions(['s', 'm', 'l']),
+                        defaultValue: 'm',
+                    },
+                },
+            },
         },
         {
             id: 'menu',
@@ -238,12 +251,36 @@ export const uikit: Lib = {
         {
             id: 'skeleton',
             title: 'Skeleton',
-            isComingSoon: true,
+            githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Skeleton',
+            content: {
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Skeleton/README.md`,
+            },
+            sandbox: {
+                component: dynamic(() =>
+                    import('@gravity-ui/uikit').then((mod) =>
+                        mod.Skeleton.bind(null, {style: {height: '80px'}}),
+                    ),
+                ),
+                props: {},
+            },
         },
         {
             id: 'spin',
             title: 'Spin',
-            isComingSoon: true,
+            githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Spin',
+            content: {
+                readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Spin/README.md`,
+            },
+            sandbox: {
+                component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Spin)),
+                props: {
+                    size: {
+                        type: 'radioButton',
+                        values: mappingOptions(['xs', 's', 'm', 'l', 'xl']),
+                        defaultValue: 'm',
+                    },
+                },
+            },
         },
         {
             id: 'store-badge',
