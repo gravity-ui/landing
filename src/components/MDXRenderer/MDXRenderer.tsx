@@ -11,11 +11,14 @@ import remarkGfm from 'remark-gfm';
 import {ExampleBlock} from './ExampleBlock/ExampleBlock';
 import {getCustomImg} from './utils';
 
+import * as UIKitExamples from '../../content/components/uikit/examples/components';
+
 const componentsAvailableInMDX: MDXComponents = {
     Grid,
     Row,
     Col,
     ExampleBlock,
+    UIKitExamples,
     UIKit: UIKit as unknown as Record<string, MDXComponents>,
     Components: Components as unknown as Record<string, MDXComponents>,
 };

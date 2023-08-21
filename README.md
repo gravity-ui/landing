@@ -14,6 +14,6 @@ npm run start
 ```bash
 # .env file
 
-UIKIT_TARGET_BRANCH="your-branch" # default main, target branch for pulling documentation
+UIKIT_TARGET_BRANCH="arrow-toggle-new-doc" # default main, target branch for pulling documentation
 
 ```

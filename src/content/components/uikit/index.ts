@@ -12,6 +12,30 @@ const uikitTargetBranch = process.env.UIKIT_TARGET_BRANCH || TARGET_BRANCH;
 
 const uikitComponents: Component[] = [
     {
+        id: 'arrowToggle',
+        title: 'ArrowToggle',
+        githubUrl: `https://github.com/gravity-ui/uikit/tree/${uikitTargetBranch}/src/components/ArrowToggle`,
+        content: {
+            readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/arrow-toggle-new-doc/src/components/ArrowToggle/README.md`,
+        },
+        sandbox: {
+            component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.ArrowToggle)),
+            props: {
+                direction: {
+                    type: 'select',
+                    values: mappingOptions([
+                        'top', 'left', 'bottom', 'right'
+                    ]),
+                    defaultValue: 'bottom',
+                },
+                size: {
+                    type: 'input',
+                    defaultValue: '16',
+                },
+            },
+        },
+    },
+    {
         id: 'breadcrumbs',
         title: 'Breadcrumbs',
         isComingSoon: true,
