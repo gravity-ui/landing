@@ -14,6 +14,7 @@ import {menuConfig} from './Menu';
 import {personaConfig} from './Persona';
 import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
+import {textConfig} from './Text';
 import {config as toasterConfig} from './Toaster';
 
 const {config} = getLibById('uikit');
@@ -105,11 +106,7 @@ const uikitComponents: Component[] = [
         title: 'Tabs',
         isComingSoon: true,
     },
-    {
-        id: 'text',
-        title: 'Text',
-        isComingSoon: true,
-    },
+    textConfig,
     {
         id: 'text-area',
         title: 'TextArea',
