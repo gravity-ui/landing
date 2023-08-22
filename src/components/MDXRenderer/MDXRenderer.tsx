@@ -8,10 +8,10 @@ import React, {memo} from 'react';
 import * as runtime from 'react/jsx-runtime';
 import remarkGfm from 'remark-gfm';
 
+import * as UIKitExamples from '../../content/components/uikit/examples/components';
+
 import {ExampleBlock} from './ExampleBlock/ExampleBlock';
 import {getCustomImg} from './utils';
-
-import * as UIKitExamples from '../../content/components/uikit/examples/components';
 
 const componentsAvailableInMDX: MDXComponents = {
     Grid,

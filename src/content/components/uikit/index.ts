@@ -23,9 +23,7 @@ const uikitComponents: Component[] = [
             props: {
                 direction: {
                     type: 'select',
-                    values: mappingOptions([
-                        'top', 'left', 'bottom', 'right'
-                    ]),
+                    values: mappingOptions(['top', 'left', 'bottom', 'right']),
                     defaultValue: 'bottom',
                 },
                 size: {
