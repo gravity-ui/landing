@@ -16,7 +16,7 @@ const uikitComponents: Component[] = [
         title: 'ArrowToggle',
         githubUrl: `https://github.com/gravity-ui/uikit/tree/${uikitTargetBranch}/src/components/ArrowToggle`,
         content: {
-            readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/arrow-toggle-new-doc/src/components/ArrowToggle/README.md`,
+            readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/ArrowToggle/README.md`,
         },
         sandbox: {
             component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.ArrowToggle)),
