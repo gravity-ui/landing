@@ -6,6 +6,8 @@ import {getLibById} from '../../../utils';
 import {Component, Lib} from '../types';
 import {mappingOptions} from '../utils';
 
+import {menuConfig} from './Menu/index';
+
 const {config} = getLibById('uikit');
 
 const uikitTargetBranch = process.env.UIKIT_TARGET_BRANCH || TARGET_BRANCH;
@@ -250,11 +252,7 @@ const uikitComponents: Component[] = [
             },
         },
     },
-    {
-        id: 'menu',
-        title: 'Menu',
-        isComingSoon: true,
-    },
+    menuConfig,
     {
         id: 'modal',
         title: 'Modal',
