@@ -1,16 +1,16 @@
 import dynamic from 'next/dynamic';
 
-import {TARGET_BRANCH} from '../../../../constants';
-import {mappingOptions} from '../../utils';
+import {Repos} from '../../../../types/common';
+import {getGithubUrl, getReadmeUrl, mappingOptions} from '../../utils';
 
-const uikitTargetBranch = process.env.UIKIT_TARGET_BRANCH || TARGET_BRANCH;
+const getterOptions = {repoName: Repos.Uikit, componentName: 'Menu'};
 
 export const menuConfig = {
     id: 'menu',
     title: 'Menu',
-    githubUrl: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Menu',
+    githubUrl: getGithubUrl(getterOptions),
     content: {
-        readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Menu/README.md`,
+        readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
         component: dynamic(() => import('./MenuComponent').then((mod) => mod.MenuComponent)),
