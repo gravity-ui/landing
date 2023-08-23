@@ -3,6 +3,7 @@ import {sortBy} from 'lodash';
 import {getLibById} from '../../../utils';
 import {Component, Lib} from '../types';
 
+import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
 import {labelConfig} from './Label';
 import {loaderConfig} from './Loader';
@@ -65,6 +66,7 @@ const uikitComponents: Component[] = [
             },
         },
     },
+    arrowToggleConfig,
     {
         id: 'breadcrumbs',
         title: 'Breadcrumbs',
