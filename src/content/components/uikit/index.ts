@@ -3,6 +3,7 @@ import {sortBy} from 'lodash';
 import {getLibById} from '../../../utils';
 import {Component, Lib} from '../types';
 
+import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
 import {labelConfig} from './Label';
@@ -15,57 +16,7 @@ import {spinConfig} from './Spin';
 const {config} = getLibById('uikit');
 
 const uikitComponents: Component[] = [
-    {
-        id: 'alert',
-        title: 'Alert',
-        content: {
-            readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/Alert/README.md`,
-        },
-        sandbox: {
-            component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Alert)),
-            props: {
-                theme: {
-                    type: 'select',
-                    values: mappingOptions(['normal', 'info', 'positive', 'warning', 'danger']),
-                    defaultValue: 'normal',
-                },
-                view: {
-                    type: 'select',
-                    values: mappingOptions(['filled', 'outlined']),
-                    defaultValue: 'filled',
-                },
-                corners: {
-                    type: 'radioButton',
-                    values: mappingOptions(['rounded', 'square']),
-                    defaultValue: 'rounded',
-                },
-                title: {type: 'input', defaultValue: 'Alert title'},
-                message: {type: 'input', defaultValue: 'Alert message'},
-            },
-        },
-    },
-    {
-        id: 'arrowToggle',
-        title: 'ArrowToggle',
-        githubUrl: `https://github.com/gravity-ui/uikit/tree/${uikitTargetBranch}/src/components/ArrowToggle`,
-        content: {
-            readmeUrl: `https://raw.githubusercontent.com/gravity-ui/uikit/${uikitTargetBranch}/src/components/ArrowToggle/README.md`,
-        },
-        sandbox: {
-            component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.ArrowToggle)),
-            props: {
-                direction: {
-                    type: 'select',
-                    values: mappingOptions(['top', 'left', 'bottom', 'right']),
-                    defaultValue: 'bottom',
-                },
-                size: {
-                    type: 'input',
-                    defaultValue: '16',
-                },
-            },
-        },
-    },
+    alertConfig,
     arrowToggleConfig,
     {
         id: 'breadcrumbs',
