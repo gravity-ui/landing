@@ -6,6 +6,7 @@ import {Component, Lib} from '../types';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
+import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
@@ -39,16 +40,7 @@ const uikitComponents: Component[] = [
         title: 'DropdownMenu',
         isComingSoon: true,
     },
-    {
-        id: 'hotkey',
-        title: 'Hotkey',
-        isComingSoon: true,
-    },
-    {
-        id: 'icon',
-        title: 'Icon',
-        isComingSoon: true,
-    },
+    iconConfig,
     labelConfig,
     {
         id: 'link',
@@ -93,18 +85,8 @@ const uikitComponents: Component[] = [
         title: 'RadioGroup',
         isComingSoon: true,
     },
-    {
-        id: 'sheet',
-        title: 'Sheet',
-        isComingSoon: true,
-    },
     skeletonConfig,
     spinConfig,
-    {
-        id: 'store-badge',
-        title: 'StoreBadge',
-        isComingSoon: true,
-    },
     {
         id: 'switch',
         title: 'Switch',
@@ -123,6 +105,11 @@ const uikitComponents: Component[] = [
     {
         id: 'text',
         title: 'Text',
+        isComingSoon: true,
+    },
+    {
+        id: 'text-area',
+        title: 'TextArea',
         isComingSoon: true,
     },
     {
