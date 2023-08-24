@@ -47,7 +47,7 @@ export const menuConfig = {
             },
             itemHref: {
                 type: 'input',
-                defaultValue: 'https://github.com/gravity-ui/uikit/tree/main/src/components/Menu',
+                defaultValue: '#',
             },
         },
     },
