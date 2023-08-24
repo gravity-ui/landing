@@ -40,11 +40,6 @@ const uikitComponents: Component[] = [
         title: 'DropdownMenu',
         isComingSoon: true,
     },
-    {
-        id: 'hotkey',
-        title: 'Hotkey',
-        isComingSoon: true,
-    },
     iconConfig,
     labelConfig,
     {
@@ -90,18 +85,8 @@ const uikitComponents: Component[] = [
         title: 'RadioGroup',
         isComingSoon: true,
     },
-    {
-        id: 'sheet',
-        title: 'Sheet',
-        isComingSoon: true,
-    },
     skeletonConfig,
     spinConfig,
-    {
-        id: 'store-badge',
-        title: 'StoreBadge',
-        isComingSoon: true,
-    },
     {
         id: 'switch',
         title: 'Switch',
@@ -120,6 +105,11 @@ const uikitComponents: Component[] = [
     {
         id: 'text',
         title: 'Text',
+        isComingSoon: true,
+    },
+    {
+        id: 'text-area',
+        title: 'TextArea',
         isComingSoon: true,
     },
     {
