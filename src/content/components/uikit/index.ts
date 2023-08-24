@@ -6,6 +6,7 @@ import {Component, Lib} from '../types';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
+import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
@@ -44,11 +45,7 @@ const uikitComponents: Component[] = [
         title: 'Hotkey',
         isComingSoon: true,
     },
-    {
-        id: 'icon',
-        title: 'Icon',
-        isComingSoon: true,
-    },
+    iconConfig,
     labelConfig,
     {
         id: 'link',
