@@ -14,6 +14,8 @@ npm run start
 ```bash
 # .env file
 
-UIKIT_TARGET_BRANCH="your-branch" # default main, target branch for pulling documentation
+UIKIT_TARGET_BRANCH="your-branch" # default main, target branch for pulling documentation from uikit
+
+COMPONENTS_TARGET_BRANCH="your-branch" # default main, target branch for pulling documentation from components
 
 ```
