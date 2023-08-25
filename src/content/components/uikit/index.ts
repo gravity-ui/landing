@@ -14,6 +14,7 @@ import {menuConfig} from './Menu';
 import {personaConfig} from './Persona';
 import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
+import {config as toasterConfig} from './Toaster';
 
 const {config} = getLibById('uikit');
 
@@ -124,6 +125,7 @@ const uikitComponents: Component[] = [
         title: 'Tooltip',
         isComingSoon: true,
     },
+    toasterConfig,
 ];
 
 export const uikit: Lib = {
