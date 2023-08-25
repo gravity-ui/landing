@@ -1,8 +1,9 @@
-import {TARGET_BRANCH} from '../../constants';
+import {TARGET_BRANCH, TARGET_PROFILE} from '../../constants';
 import {Repos} from '../../types/common';
 
 const uikitTargetBranch = process.env.UIKIT_TARGET_BRANCH || TARGET_BRANCH;
 const componentsTargetBranch = process.env.COMPONENTS_TARGET_BRANCH || TARGET_BRANCH;
+const githubTargetprofile = process.env.GITHUB_PROFILE || TARGET_PROFILE;
 
 const TARGET_REPOS_BRANCHES = {
     [Repos.Uikit]: uikitTargetBranch,
@@ -20,7 +21,7 @@ export const mappingOptions = (arr: string[]) =>
     }));
 
 export const getReadmeUrl: RepoInfoGetterFunc = ({componentName, repoName}) =>
-    `https://raw.githubusercontent.com/gravity-ui/${repoName}/${TARGET_REPOS_BRANCHES[repoName]}/src/components/${componentName}/README.md`;
+    `https://raw.githubusercontent.com/${githubTargetprofile}/${repoName}/${TARGET_REPOS_BRANCHES[repoName]}/src/components/${componentName}/README.md`;
 
 export const getGithubUrl: RepoInfoGetterFunc = ({componentName, repoName}) =>
-    `https://github.com/gravity-ui/${repoName}/tree/main/src/components/${componentName}`;
+    `https://github.com/${githubTargetprofile}/${repoName}/tree/main/src/components/${componentName}`;

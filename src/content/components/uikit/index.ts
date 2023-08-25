@@ -9,6 +9,7 @@ import {buttonConfig} from './Button';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {listConfig} from './List';
+import {linkConfig} from './Link';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {personaConfig} from './Persona';
@@ -45,12 +46,8 @@ const uikitComponents: Component[] = [
     },
     iconConfig,
     labelConfig,
-    {
-        id: 'link',
-        title: 'Link',
-        isComingSoon: true,
-    },
     listConfig,
+    linkConfig,
     loaderConfig,
     menuConfig,
     {
