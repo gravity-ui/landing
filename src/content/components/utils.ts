@@ -9,7 +9,7 @@ const TARGET_REPOS_BRANCHES = {
     [Repos.Components]: componentsTargetBranch,
 };
 
-type GetterProps = {componentName: string; repoName: Repos};
+export type GetterProps = {componentName: string; repoName: Repos};
 
 type RepoInfoGetterFunc = (props: GetterProps) => string;
 
