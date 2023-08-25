@@ -8,6 +8,7 @@ import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
+import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {personaConfig} from './Persona';
@@ -48,6 +49,7 @@ const uikitComponents: Component[] = [
         title: 'Link',
         isComingSoon: true,
     },
+    listConfig,
     loaderConfig,
     menuConfig,
     {
