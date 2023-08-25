@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+
 import {Repos} from '../../../../types/common';
 import {getGithubUrl, getReadmeUrl} from '../../utils';
 
