@@ -15,3 +15,16 @@ export const getLibComponents = (libId?: string): Component[] => {
 
     return components;
 };
+
+const README_REGEX =
+    /^https:\/\/raw\.githubusercontent\.com\/gravity-ui\/(?<repoName>[^/]+)\/(?<repoBranch>[^/]+)\/src\/components\/(?<componentName>[^/]+)(\/README\.md)?$/;
+
+export function getRouteFromReadmeUrl(readmeUrl: string) {
+    const match = readmeUrl.match(README_REGEX);
+
+    if (!match) {
+        return;
+    }
+
+    return `/components/${match.groups?.repoName}/${match.groups?.componentName.toLowerCase()}`;
+}
