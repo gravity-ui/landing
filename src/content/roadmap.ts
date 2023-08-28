@@ -19,7 +19,7 @@ export const roadmapTasks: RoadmapTask[] = [
     },
     {
         title: '<b>Design:</b> Public Figma templates',
-        status: RoadmapTaskStatus.InProgress,
+        status: RoadmapTaskStatus.Completed,
     },
     {
         title: '<b>UIKit:</b> Extended style customization options and themes support',
