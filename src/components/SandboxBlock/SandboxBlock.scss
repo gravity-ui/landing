@@ -21,7 +21,7 @@ $block: '.#{variables.$ns}sandbox-block';
         top: 0;
         border: 0;
         border-radius: 0;
-        z-index: 99;
+        z-index: 99999;
 
         #{$block}__wrapper-iframe {
             height: 50vh;
