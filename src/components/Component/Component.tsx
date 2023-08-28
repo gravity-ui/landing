@@ -1,4 +1,5 @@
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
+import {URL} from 'next/dist/compiled/@edge-runtime/primitives/url';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -6,7 +7,7 @@ import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
-import {block} from '../../utils';
+import {block, getRouteFromReadmeUrl} from '../../utils';
 import {SandboxBlock} from '../SandboxBlock';
 
 import './Component.scss';
@@ -45,6 +46,25 @@ export const Component: React.FC<ComponentProps> = ({libId, component, readmeCon
     React.useEffect(() => {
         setActiveTab(tabId === Tab.Design ? Tab.Design : Tab.Overview);
     }, [tabId]);
+
+    const rewriteLinks = React.useCallback(
+        (link: string) => {
+            if (!component.content?.readmeUrl) {
+                return link;
+            }
+
+            const readmeUrl = new URL(component.content.readmeUrl);
+            const url = new URL(link, component.content.readmeUrl);
+
+            if (url.origin !== readmeUrl.origin) {
+                return link;
+            }
+
+            const newLink = getRouteFromReadmeUrl(url.toString());
+            return newLink ?? link;
+        },
+        [component.content?.readmeUrl],
+    );
 
     return (
         <div className={b()}>
@@ -114,7 +134,12 @@ export const Component: React.FC<ComponentProps> = ({libId, component, readmeCon
                                 sandboxConfig={component.sandbox.props}
                             />
                         ) : null}
-                        <MDXRenderer key="overview" text={readmeContent} withComponents />
+                        <MDXRenderer
+                            key="overview"
+                            text={readmeContent}
+                            rewriteLinks={rewriteLinks}
+                            withComponents
+                        />
                     </>
                 )}
             </div>
