@@ -55,17 +55,17 @@ const typedLanding: CustomPageContent = {
                     {
                         date: '2023-08-07T14:00:00.000Z',
                         content:
+                            'Our Figma library is finally released and available <a href="https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)">here</a>. Currently it's in Beta so we'd love for you to test it out and share your feedback with us.', 
+                    },
+                    {
+                        date: '2023-08-07T14:00:00.000Z',
+                        content:
                             'New major version of <a href="https://github.com/gravity-ui/uikit/releases">UIKit is here</a>. Introducing new default color theme, updated Button component, some fixes and features.',
                     },
                     {
                         date: '2023-07-05T10:00:00.000Z',
                         content:
                             'Meet the new <a href="/icons">Icons section</a>, where you can browse and download icons from our pack',
-                    },
-                    {
-                        date: '2023-06-20T10:00:00.000Z',
-                        content:
-                            'Follow Gravity UI improvements with roadmap section on our <a href="/#roadmap">website</a>',
                     },
                 ],
             },
