@@ -14,11 +14,11 @@ export const roadmapTasks: RoadmapTask[] = [
         status: RoadmapTaskStatus.Completed,
     },
     {
-        title: '<b>Date Components:</b> new library for working with date and time',
-        status: RoadmapTaskStatus.InProgress,
+        title: '<b>Design:</b> Public Figma templates',
+        status: RoadmapTaskStatus.Completed,
     },
     {
-        title: '<b>Design:</b> Public Figma templates',
+        title: '<b>Date Components:</b> new library for working with date and time',
         status: RoadmapTaskStatus.InProgress,
     },
     {
