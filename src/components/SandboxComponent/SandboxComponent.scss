@@ -4,8 +4,9 @@
 $block: '.#{variables.$ns}sandbox-component';
 
 #{$block} {
-    min-height: 100vh;
-    min-width: 100vw;
+    min-height: 100%;
+    min-width: 100%;
+    position: relative;
 
     &__component {
         align-items: center;

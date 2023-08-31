@@ -40,22 +40,13 @@ body.g-root {
     --g-font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
     --g-text-accent-font-weight: 600;
 
-    --g-color-base-background: #160d1b;
     --g-text-display-4-font-size: 56px;
     --g-text-display-4-line-height: 64px;
 
     --g-border-radius-xl: 32px;
     --g-border-radius-l: 32px;
-    --g-color-line-generic-accent: #fff;
-
-    --g-color-base-special: #ffbe5c;
-    --g-color-base-special-hover: #faae3d;
-
-    --g-color-text-brand-contrast: rgba(0, 0, 0, 0.85);
-    --g-color-base-selection: rgba(37, 27, 37, 0.25);
 
     --yc-modal-border-radius: 24px;
-    --g-color-base-modal: #251b25;
 
     --pc-border-radius: 24px;
 
@@ -65,9 +56,23 @@ body.g-root {
     }
 
     margin: 0;
-    background-color: var(--g-color-base-background);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    // FIXME: use proper way to handle sandbox styles
+    &_theme_dark {
+        --g-color-base-background: #160d1b;
+        --g-color-base-modal: #251b25;
+        --g-color-base-special: #ffbe5c;
+        --g-color-base-special-hover: #faae3d;
+        --g-color-base-selection: rgba(37, 27, 37, 0.25);
+
+        --g-color-line-generic-accent: #fff;
+
+        --g-color-text-brand-contrast: rgba(0, 0, 0, 0.85);
+
+        background-color: var(--g-color-base-background);
+    }
 
     .markdown-body {
         color: #fff;
