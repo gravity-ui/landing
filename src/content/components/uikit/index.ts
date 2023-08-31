@@ -19,6 +19,7 @@ import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
 import {textConfig} from './Text';
 import {config as toasterConfig} from './Toaster';
+import {tooltipConfig} from './Tooltip';
 
 const {config} = getLibById('uikit');
 
@@ -108,11 +109,7 @@ const uikitComponents: Component[] = [
         title: 'TextInput',
         isComingSoon: true,
     },
-    {
-        id: 'tooltip',
-        title: 'Tooltip',
-        isComingSoon: true,
-    },
+    tooltipConfig,
     toasterConfig,
 ];
 
