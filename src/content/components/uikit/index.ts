@@ -13,6 +13,9 @@ import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {personaConfig} from './Persona';
+import {popupConfig} from './Popup';
+import {portalConfig} from './Portal';
+import {progressConfig} from './Progress';
 import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
 import {textConfig} from './Text';
@@ -56,21 +59,9 @@ const uikitComponents: Component[] = [
         isComingSoon: true,
     },
     personaConfig,
-    {
-        id: 'popup',
-        title: 'Popup',
-        isComingSoon: true,
-    },
-    {
-        id: 'portal',
-        title: 'Portal',
-        isComingSoon: true,
-    },
-    {
-        id: 'progress',
-        title: 'Progress',
-        isComingSoon: true,
-    },
+    popupConfig,
+    portalConfig,
+    progressConfig,
     {
         id: 'radio',
         title: 'Radio',
