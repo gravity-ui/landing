@@ -11,6 +11,7 @@ import {labelConfig} from './Label';
 import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
+import {modalConfig} from './Modal';
 import {personaConfig} from './Persona';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
@@ -57,11 +58,7 @@ const uikitComponents: Component[] = [
     listConfig,
     loaderConfig,
     menuConfig,
-    {
-        id: 'modal',
-        title: 'Modal',
-        isComingSoon: true,
-    },
+    modalConfig,
     personaConfig,
     popupConfig,
     portalConfig,
