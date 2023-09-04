@@ -6,6 +6,7 @@ import {Component, Lib} from '../types';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
+import {checkboxConfig} from './Checkbox';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {listConfig} from './List';
@@ -16,8 +17,12 @@ import {personaConfig} from './Persona';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
+import {radioConfig} from './Radio';
+import {radioButtonConfig} from './RadioButton';
+import {radioGroupConfig} from './RadioGroup';
 import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
+import {switchConfig} from './Switch';
 import {textConfig} from './Text';
 import {config as toasterConfig} from './Toaster';
 import {tooltipConfig} from './Tooltip';
@@ -38,11 +43,7 @@ const uikitComponents: Component[] = [
         title: 'Card',
         isComingSoon: true,
     },
-    {
-        id: 'checkbox',
-        title: 'Checkbox',
-        isComingSoon: true,
-    },
+    checkboxConfig,
     {
         id: 'dropdown-menu',
         title: 'DropdownMenu',
@@ -63,28 +64,12 @@ const uikitComponents: Component[] = [
     popupConfig,
     portalConfig,
     progressConfig,
-    {
-        id: 'radio',
-        title: 'Radio',
-        isComingSoon: true,
-    },
-    {
-        id: 'radio-button',
-        title: 'RadioButton',
-        isComingSoon: true,
-    },
-    {
-        id: 'radio-group',
-        title: 'RadioGroup',
-        isComingSoon: true,
-    },
+    radioConfig,
+    radioButtonConfig,
+    radioGroupConfig,
     skeletonConfig,
     spinConfig,
-    {
-        id: 'switch',
-        title: 'Switch',
-        isComingSoon: true,
-    },
+    switchConfig,
     {
         id: 'table',
         title: 'Table',
