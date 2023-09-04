@@ -87,7 +87,7 @@ body.g-root {
             background-color: transparent;
         }
 
-        a {
+        a:not(.yc-link) {
             color: var(--g-color-base-special);
             text-decoration: none;
 

@@ -8,6 +8,7 @@ import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
+import {linkConfig} from './Link';
 import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
@@ -50,12 +51,8 @@ const uikitComponents: Component[] = [
     },
     iconConfig,
     labelConfig,
-    {
-        id: 'link',
-        title: 'Link',
-        isComingSoon: true,
-    },
     listConfig,
+    linkConfig,
     loaderConfig,
     menuConfig,
     modalConfig,
