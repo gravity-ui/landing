@@ -6,6 +6,7 @@ import {Component, Lib} from '../types';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
+import {cardConfig} from './Card';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {linkConfig} from './Link';
@@ -34,11 +35,7 @@ const uikitComponents: Component[] = [
         isComingSoon: true,
     },
     buttonConfig,
-    {
-        id: 'card',
-        title: 'Card',
-        isComingSoon: true,
-    },
+    cardConfig,
     {
         id: 'checkbox',
         title: 'Checkbox',
