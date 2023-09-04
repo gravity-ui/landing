@@ -118,7 +118,6 @@ $block: '.#{variables.$ns}library';
 
     &__content {
         margin-top: 24px;
-        overflow-x: auto;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             margin-top: 20px;

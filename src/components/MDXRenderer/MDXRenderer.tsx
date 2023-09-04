@@ -6,10 +6,13 @@ import * as provider from '@mdx-js/react';
 import type {MDXComponents, MDXContent} from 'mdx/types';
 import React, {memo} from 'react';
 import * as runtime from 'react/jsx-runtime';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 // @ts-ignore
 import remarkLinkRewrite from 'remark-link-rewrite';
 
+import {CONTENT_WRAPPER_ID} from '../../constants';
 import * as UIKitExamples from '../../content/components/uikit/examples/components';
 
 import {ExampleBlock} from './ExampleBlock/ExampleBlock';
@@ -47,6 +50,19 @@ export const MDXRenderer = memo<Props>(
             setIsEvaluated(false);
 
             const remarkPlugins: EvaluateOptions['remarkPlugins'] = [remarkGfm];
+            const rehypePlugins: EvaluateOptions['rehypePlugins'] = [
+                rehypeSlug,
+                [
+                    rehypeAutolinkHeadings,
+                    {
+                        properties: {ariaHidden: true, tabIndex: -1, className: 'anchor-link'},
+                        content: {
+                            type: 'text',
+                            value: '§',
+                        },
+                    },
+                ],
+            ];
 
             if (rewriteLinks) {
                 remarkPlugins.push([remarkLinkRewrite, {replacer: rewriteLinks}]);
@@ -56,6 +72,7 @@ export const MDXRenderer = memo<Props>(
                 ...provider,
                 ...runtime,
                 remarkPlugins,
+                rehypePlugins,
                 development: false,
             } as unknown as EvaluateOptions)
                 .then(({default: Component}) => {
@@ -71,6 +88,21 @@ export const MDXRenderer = memo<Props>(
         React.useEffect(() => {
             if (isEvaluated) {
                 Prism.highlightAll();
+            }
+        }, [isEvaluated]);
+
+        React.useEffect(() => {
+            if (isEvaluated) {
+                const content = document.getElementById(CONTENT_WRAPPER_ID);
+                const sectionId = window.location.hash.split('#')[1];
+                const section = document.querySelector<HTMLElement>('#' + sectionId);
+
+                if (content && section) {
+                    content.scrollTo({
+                        top: section.offsetTop,
+                        behavior: 'smooth',
+                    });
+                }
             }
         }, [isEvaluated]);
 
