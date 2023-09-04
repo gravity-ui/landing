@@ -26,6 +26,7 @@ import {radioGroupConfig} from './RadioGroup';
 import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
 import {switchConfig} from './Switch';
+import {tableConfig} from './Table';
 import {textConfig} from './Text';
 import {config as toasterConfig} from './Toaster';
 import {tooltipConfig} from './Tooltip';
@@ -67,10 +68,11 @@ const uikitComponents: Component[] = [
     spinConfig,
     switchConfig,
     {
-        id: 'table',
-        title: 'Table',
+        id: 'switch',
+        title: 'Switch',
         isComingSoon: true,
     },
+    tableConfig,
     {
         id: 'tabs',
         title: 'Tabs',
