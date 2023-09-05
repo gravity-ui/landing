@@ -8,6 +8,7 @@ import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
+import {hotkeyConfig} from './Hotkey';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {linkConfig} from './Link';
@@ -48,6 +49,7 @@ const uikitComponents: Component[] = [
         title: 'DropdownMenu',
         isComingSoon: true,
     },
+    hotkeyConfig,
     iconConfig,
     labelConfig,
     listConfig,
