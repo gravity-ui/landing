@@ -104,5 +104,32 @@ body.g-root {
         pre {
             background-color: var(--g-color-base-background);
         }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            position: relative;
+
+            a.anchor-link {
+                position: absolute;
+                float: left;
+                margin-left: -26px;
+                width: 26px;
+                padding-right: 6px;
+                padding-left: 4px;
+                text-align: right;
+                opacity: 0;
+                line-height: 1.1;
+            }
+
+            &:hover {
+                a.anchor-link {
+                    opacity: 1;
+                }
+            }
+        }
     }
 }
