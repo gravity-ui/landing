@@ -67,11 +67,6 @@ const uikitComponents: Component[] = [
     skeletonConfig,
     spinConfig,
     switchConfig,
-    {
-        id: 'switch',
-        title: 'Switch',
-        isComingSoon: true,
-    },
     tableConfig,
     {
         id: 'tabs',
