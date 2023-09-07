@@ -35,6 +35,10 @@ export const progressConfig = {
                 values: mappingOptions(['xs', 's', 'm']),
                 defaultValue: 'm',
             },
+            loading: {
+                type: 'switch',
+                defaultValue: false,
+            },
         },
     },
 };
