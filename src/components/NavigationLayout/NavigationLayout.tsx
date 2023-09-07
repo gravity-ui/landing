@@ -4,6 +4,7 @@ import React from 'react';
 
 import arrowIcon from '../../assets/icons/arrow.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
+import {CONTENT_WRAPPER_ID} from '../../constants';
 import {block} from '../../utils';
 
 import {Navigation} from './Navigation/Navigation';
@@ -38,6 +39,14 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
 
     const clickOnLinkHandler = React.useCallback(() => {
         setIsOpenMobileNavigation(false);
+
+        const content = document.getElementById(CONTENT_WRAPPER_ID);
+        if (content) {
+            content.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
     }, []);
 
     if (!section) {
