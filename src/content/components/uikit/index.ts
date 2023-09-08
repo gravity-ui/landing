@@ -8,6 +8,7 @@ import {arrowToggleConfig} from './ArrowToggle';
 import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
+import {dropdownMenuConfig} from './DropdownMenu';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {linkConfig} from './Link';
@@ -27,6 +28,7 @@ import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
 import {switchConfig} from './Switch';
 import {tableConfig} from './Table';
+import {tabsConfig} from './Tabs';
 import {textConfig} from './Text';
 import {config as toasterConfig} from './Toaster';
 import {tooltipConfig} from './Tooltip';
@@ -44,11 +46,7 @@ const uikitComponents: Component[] = [
     buttonConfig,
     cardConfig,
     checkboxConfig,
-    {
-        id: 'dropdown-menu',
-        title: 'DropdownMenu',
-        isComingSoon: true,
-    },
+    dropdownMenuConfig,
     iconConfig,
     labelConfig,
     listConfig,
@@ -68,11 +66,7 @@ const uikitComponents: Component[] = [
     spinConfig,
     switchConfig,
     tableConfig,
-    {
-        id: 'tabs',
-        title: 'Tabs',
-        isComingSoon: true,
-    },
+    tabsConfig,
     textConfig,
     {
         id: 'text-area',
