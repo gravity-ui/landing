@@ -5,6 +5,7 @@ import {Component, Lib} from '../types';
 
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
+import {breadcrumbsConfig} from './Breadcrumbs';
 import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
@@ -38,11 +39,7 @@ const {config} = getLibById('uikit');
 const uikitComponents: Component[] = [
     alertConfig,
     arrowToggleConfig,
-    {
-        id: 'breadcrumbs',
-        title: 'Breadcrumbs',
-        isComingSoon: true,
-    },
+    breadcrumbsConfig,
     buttonConfig,
     cardConfig,
     checkboxConfig,
