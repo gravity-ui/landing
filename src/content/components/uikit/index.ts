@@ -31,6 +31,8 @@ import {switchConfig} from './Switch';
 import {tableConfig} from './Table';
 import {tabsConfig} from './Tabs';
 import {textConfig} from './Text';
+import {textAreaConfig} from './TextArea';
+import {textInputConfig} from './TextInput';
 import {config as toasterConfig} from './Toaster';
 import {tooltipConfig} from './Tooltip';
 
@@ -65,16 +67,8 @@ const uikitComponents: Component[] = [
     tableConfig,
     tabsConfig,
     textConfig,
-    {
-        id: 'text-area',
-        title: 'TextArea',
-        isComingSoon: true,
-    },
-    {
-        id: 'text-input',
-        title: 'TextInput',
-        isComingSoon: true,
-    },
+    textAreaConfig,
+    textInputConfig,
     tooltipConfig,
     toasterConfig,
 ];
