@@ -15,42 +15,15 @@ $block: '.#{variables.$ns}example-block';
         margin-bottom: 0;
     }
 
-    &__theme-root.yc-root {
-        background: var(--g-color-base-background);
-        color: var(--g-color-text-primary);
-
-        @include themes.g-theme-common;
-
-        &_theme_light {
-            @include themes.g-theme-light;
-        }
-
-        &_theme_dark {
-            @include themes.g-theme-dark;
-        }
-
-        &_theme_light-hc {
-            @include themes.g-theme-light-hc;
-        }
-
-        &_theme_dark-hc {
-            @include themes.g-theme-dark-hc;
-        }
+    &__theme-root.g-root_theme_dark {
+        --g-color-base-background: #251b25;
     }
 
     &__content {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-around;
         padding: 40px;
-
-        &_theme_dark {
-            background: #251b25;
-        }
-
-        &_theme_light {
-            background: #fff;
-        }
 
         & > * {
             margin: 0 8px;
