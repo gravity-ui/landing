@@ -26,7 +26,23 @@ export function getRouteFromReadmeUrl(readmeUrl: string) {
         return;
     }
 
-    return `/components/${match.groups?.repoName}/${match.groups?.componentName.toLowerCase()}${
+    return `/components/${match.groups?.repoName}/${toKebabCase(match.groups?.componentName)}${
         match.groups?.hash ?? ''
     }`;
+}
+
+function toKebabCase(input?: string) {
+    if (!input) {
+        return input;
+    }
+
+    return Array.from(input)
+        .map((char, i) => {
+            if (char === char.toUpperCase()) {
+                return (i === 0 ? '' : '-') + char.toLowerCase();
+            } else {
+                return char;
+            }
+        })
+        .join('');
 }
