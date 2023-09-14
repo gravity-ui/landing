@@ -6,7 +6,7 @@ import {getGithubUrl, getReadmeUrl, mappingOptions} from '../../utils';
 const getterOptions = {repoName: Repos.Uikit, componentName: 'RadioGroup'};
 
 export const radioGroupConfig = {
-    id: 'radioGroup',
+    id: 'radio-group',
     title: 'RadioGroup',
     githubUrl: getGithubUrl(getterOptions),
     content: {

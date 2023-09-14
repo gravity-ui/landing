@@ -6,7 +6,7 @@ import {getGithubUrl, getReadmeUrl, mappingOptions} from '../../utils';
 const getterOptions = {repoName: Repos.Uikit, componentName: 'ArrowToggle'};
 
 export const arrowToggleConfig = {
-    id: 'arrowToggle',
+    id: 'arrow-toggle',
     title: 'ArrowToggle',
     githubUrl: getGithubUrl(getterOptions),
     content: {
