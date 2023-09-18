@@ -1,7 +1,10 @@
 import {Section} from '../types';
 
-import guide1Content from './content/guide1.mdx';
-import guide2Content from './content/guide2.mdx';
+import guideClipboardButtonContent from './content/ClipboardButton.mdx';
+import guideLabelContent from './content/Label.mdx';
+import guideRadioButtonContent from './content/RadioButton.mdx';
+import guideToasterContent from './content/Toaster.mdx';
+import guideUserAvatarContent from './content/UserAvatar.mdx';
 
 export const guides: Section = {
     id: 'guides',
@@ -9,16 +12,34 @@ export const guides: Section = {
     description: 'Design guides description',
     articles: [
         {
-            id: 'guide1',
-            title: 'Guide 1',
-            description: 'Lorem ipsum dolor',
-            content: guide1Content,
+            id: 'clipboard-button',
+            title: 'Clipboard Button',
+            description: '',
+            content: guideClipboardButtonContent,
         },
         {
-            id: 'guide2',
-            title: 'Guide 2',
-            description: 'Lorem ipsum dolor',
-            content: guide2Content,
+            id: 'label',
+            title: 'Label',
+            description: '',
+            content: guideLabelContent,
+        },
+        {
+            id: 'radio-button',
+            title: 'Radio Button',
+            description: '',
+            content: guideRadioButtonContent,
+        },
+        {
+            id: 'toaster',
+            title: 'Toaster',
+            description: '',
+            content: guideToasterContent,
+        },
+        {
+            id: 'user-avatar',
+            title: 'User Avatar',
+            description: '',
+            content: guideUserAvatarContent,
         },
     ],
 };

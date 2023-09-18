@@ -14,7 +14,8 @@ export const DesignLayout: React.FC<DesignLayoutProps> = ({sectionId, articleId,
         const result: Section[] = designSections.map((section) => ({
             id: section.id,
             title: section.title,
-            url: `/design/${section.id}`,
+            // Uncomment it to show overview tab
+            // url: `/design/${section.id}`,
             subSections: section.articles.map((article) => ({
                 id: article.id,
                 title: article.title,
