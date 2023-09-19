@@ -25,8 +25,12 @@ export const firstSliderItems = [
 ];
 
 export const secondSliderItems = [
+    SkeletonCard,
     SwitchCard,
     ProgressCard,
+    PopupCard,
+    PersonaCard,
+    TabsCard,
     // todo List,
     // todo Spinner,
     // todo Segment
