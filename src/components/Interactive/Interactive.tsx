@@ -4,11 +4,15 @@ import Slider, {Settings} from 'react-slick';
 import {block} from '../../utils';
 
 import './Interactive.scss';
-import {firstSliderItems} from './constants';
+import {firstSliderItems, thirdSliderItems} from './constants';
 
 const b = block('interactive');
 
-export default function SimpleSlider() {
+interface SimpleSliderProps {
+    items: React.FC[];
+}
+
+const SimpleSlider: React.FC<SimpleSliderProps> = ({items}) => {
     const settings: Settings = {
         dots: false,
         arrows: false,
@@ -24,12 +28,12 @@ export default function SimpleSlider() {
 
     return (
         <Slider {...settings}>
-            {firstSliderItems.map((Comp, index) => (
+            {items.map((Comp, index) => (
                 <Comp key={index} />
             ))}
         </Slider>
     );
-}
+};
 
 export const Interactive = () => {
     return (
@@ -38,9 +42,9 @@ export const Interactive = () => {
                 <span className={b('logo-image')} />
             </div>
             <div className={b('sliders')}>
-                <SimpleSlider />
-                <SimpleSlider />
-                <SimpleSlider />
+                <SimpleSlider items={firstSliderItems} />
+                <SimpleSlider items={firstSliderItems} />
+                <SimpleSlider items={thirdSliderItems} />
             </div>
         </div>
     );

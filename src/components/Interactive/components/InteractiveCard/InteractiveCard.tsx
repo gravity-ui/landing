@@ -9,12 +9,16 @@ const b = block('interactive-card');
 
 interface InteractiveCardProps {
     children: React.ReactNode;
+    onFlip?: () => void;
 }
 
-export const InteractiveCard: React.FC<InteractiveCardProps> = ({children}) => {
+export const InteractiveCard: React.FC<InteractiveCardProps> = ({onFlip, children}) => {
     const [isFlipped, setFlipped] = useState(false);
 
-    const flip = useCallback(() => setFlipped((prev) => !prev), []);
+    const flip = useCallback(() => {
+        setFlipped((prev) => !prev);
+        onFlip?.();
+    }, [onFlip]);
 
     return (
         <div className={b({flipped: isFlipped})} onClick={flip}>

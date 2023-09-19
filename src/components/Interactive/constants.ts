@@ -1,4 +1,15 @@
-import {ButtonsCard, IconsPromoCard, LoaderCard, MenuCard, TableCard, TabsCard} from './components';
+import {
+    ButtonsCard,
+    IconsPromoCard,
+    LoaderCard,
+    MenuCard,
+    PopupCard,
+    ProgressCard,
+    RadioCard,
+    SwitchCard,
+    TableCard,
+    TabsCard,
+} from './components';
 
 export const firstSliderItems = [
     LoaderCard,
@@ -8,3 +19,5 @@ export const firstSliderItems = [
     TableCard,
     IconsPromoCard,
 ];
+
+export const thirdSliderItems = [PopupCard, RadioCard, SwitchCard, ProgressCard];

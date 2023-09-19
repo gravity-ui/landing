@@ -4,3 +4,7 @@ export * from './TableCard';
 export * from './ButtonsCard';
 export * from './TabsCard';
 export * from './MenuCard';
+export * from './PopupCard';
+export * from './RadioCard';
+export * from './SwitchCard';
+export * from './ProgressCard';

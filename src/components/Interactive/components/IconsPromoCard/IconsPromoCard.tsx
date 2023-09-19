@@ -10,54 +10,37 @@ import {
     ThumbsUp,
     Volume,
 } from '@gravity-ui/icons';
-import {Col, Container, Icon, Row, Text} from '@gravity-ui/uikit';
+import {Col, Flex, Icon, Row, Text} from '@gravity-ui/uikit';
 
 import {InteractiveCard} from '../InteractiveCard';
+
+const firstRowIcons = [FaceSmile, Fingerprint, FloppyDisk, ChartDonut, CrownDiamond];
+const secondRowIcons = [ThumbsUp, Palette, Volume, Person, Gift];
 
 export const IconsPromoCard = () => {
     return (
         <InteractiveCard>
-            <Container spaceRow={1} gutters={false}>
-                <Row space={2}>
-                    <Col>
-                        <Icon data={FaceSmile} />
-                    </Col>
-                    <Col>
-                        <Icon data={Fingerprint} />
-                    </Col>
-                    <Col>
-                        <Icon data={FloppyDisk} />
-                    </Col>
-                    <Col>
-                        <Icon data={ChartDonut} />
-                    </Col>
-                    <Col>
-                        <Icon data={CrownDiamond} />
-                    </Col>
+            <Flex direction="column">
+                <Row space={5}>
+                    {firstRowIcons.map((icon, index) => (
+                        <Col key={index}>
+                            <Icon data={icon} size={32} />
+                        </Col>
+                    ))}
                 </Row>
                 <Row space={2}>
                     <Col>
-                        <Text>{'500+ icons'}</Text>
+                        <Text variant="display-3">{'500+ icons'}</Text>
                     </Col>
                 </Row>
-                <Row space={2}>
-                    <Col>
-                        <Icon data={ThumbsUp} />
-                    </Col>
-                    <Col>
-                        <Icon data={Palette} />
-                    </Col>
-                    <Col>
-                        <Icon data={Volume} />
-                    </Col>
-                    <Col>
-                        <Icon data={Person} />
-                    </Col>
-                    <Col>
-                        <Icon data={Gift} />
-                    </Col>
+                <Row space={5}>
+                    {secondRowIcons.map((icon, index) => (
+                        <Col key={index}>
+                            <Icon data={icon} size={32} />
+                        </Col>
+                    ))}
                 </Row>
-            </Container>
+            </Flex>
         </InteractiveCard>
     );
 };

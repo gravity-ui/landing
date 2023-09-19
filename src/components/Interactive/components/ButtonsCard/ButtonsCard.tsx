@@ -1,11 +1,11 @@
-import {Button, Col, Container, Row} from '@gravity-ui/uikit';
+import {Button, Col, Flex, Row} from '@gravity-ui/uikit';
 
 import {InteractiveCard} from '../InteractiveCard';
 
 export const ButtonsCard = () => {
     return (
         <InteractiveCard>
-            <Container spaceRow={1} gutters={false}>
+            <Flex gapRow={1} direction="column">
                 <Row space={2}>
                     <Col>
                         <Button view={'outlined-info'}>{'Work it'}</Button>
@@ -38,7 +38,7 @@ export const ButtonsCard = () => {
                         <Button view={'normal'}>{'Makes us'}</Button>
                     </Col>
                 </Row>
-            </Container>
+            </Flex>
         </InteractiveCard>
     );
 };
