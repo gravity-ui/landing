@@ -12,3 +12,4 @@ export * from './CheckboxCard';
 export * from './SkeletonCard';
 export * from './PersonaCard';
 export * from './LabelsCard';
+export * from './BreadcrumbsCard';
