@@ -4,7 +4,7 @@ import Slider, {Settings} from 'react-slick';
 import {block} from '../../utils';
 
 import './Interactive.scss';
-import {firstSliderItems, thirdSliderItems} from './constants';
+import {firstSliderItems, secondSliderItems, thirdSliderItems} from './constants';
 
 const b = block('interactive');
 
@@ -43,7 +43,7 @@ export const Interactive = () => {
             </div>
             <div className={b('sliders')}>
                 <SimpleSlider items={firstSliderItems} />
-                <SimpleSlider items={firstSliderItems} />
+                <SimpleSlider items={secondSliderItems} />
                 <SimpleSlider items={thirdSliderItems} />
             </div>
         </div>
