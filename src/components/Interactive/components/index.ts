@@ -8,3 +8,7 @@ export * from './PopupCard';
 export * from './RadioCard';
 export * from './SwitchCard';
 export * from './ProgressCard';
+export * from './CheckboxCard';
+export * from './SkeletonCard';
+export * from './PersonaCard';
+export * from './LabelsCard';
