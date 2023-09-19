@@ -15,7 +15,6 @@ import {
 } from '@gravity-ui/icons';
 import {
     Button,
-    Card,
     Checkbox,
     Col,
     Container,
@@ -31,6 +30,7 @@ import {
 import React from 'react';
 
 import {block} from '../../../../utils';
+import {InteractiveCard} from '../InteractiveCard/InteractiveCard';
 
 import './FirstSliderItems.scss';
 
@@ -38,15 +38,15 @@ const b = block('slider-item');
 
 const LoaderCard = () => {
     return (
-        <Card className={b({small: true})}>
+        <InteractiveCard>
             <Loader />
-        </Card>
+        </InteractiveCard>
     );
 };
 
 const ButtonsCard = () => {
     return (
-        <Card className={b({small: true})}>
+        <InteractiveCard>
             <Container spaceRow={1} gutters={false}>
                 <Row space={2}>
                     <Col>
@@ -81,7 +81,7 @@ const ButtonsCard = () => {
                     </Col>
                 </Row>
             </Container>
-        </Card>
+        </InteractiveCard>
     );
 };
 
@@ -117,15 +117,15 @@ const TabsCard = () => {
     ];
 
     return (
-        <Card className={b({small: true})}>
+        <InteractiveCard>
             <Tabs items={tabItems} />
-        </Card>
+        </InteractiveCard>
     );
 };
 
 const MenuCard = () => {
     return (
-        <Card className={b({small: true})}>
+        <InteractiveCard>
             <Menu>
                 <Menu.Item>{'Work it harder'}</Menu.Item>
                 <Menu.Group>
@@ -134,7 +134,7 @@ const MenuCard = () => {
                     <Menu.Item>{'Makes us stronger'}</Menu.Item>
                 </Menu.Group>
             </Menu>
-        </Card>
+        </InteractiveCard>
     );
 };
 
@@ -204,15 +204,15 @@ const TableCard = () => {
     ];
 
     return (
-        <Card className={b({small: true})}>
+        <InteractiveCard>
             <Table columns={columns} data={data} />
-        </Card>
+        </InteractiveCard>
     );
 };
 
 const IconsPromoCard = () => {
     return (
-        <Card className={b({small: true})}>
+        <InteractiveCard>
             <Container spaceRow={1} gutters={false}>
                 <Row space={2}>
                     <Col>
@@ -254,7 +254,7 @@ const IconsPromoCard = () => {
                     </Col>
                 </Row>
             </Container>
-        </Card>
+        </InteractiveCard>
     );
 };
 
