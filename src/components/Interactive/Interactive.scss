@@ -1,0 +1,20 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}interactive';
+
+#{$block} {
+    .slick-track {
+        display: flex;
+        min-width: 100%;
+
+        .slick-slide {
+            height: auto;
+        }
+
+        .slick-slide > div {
+            height: 100%;
+        }
+    }
+}
