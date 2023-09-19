@@ -3,7 +3,7 @@ import {Layout} from '../../components/Layout/Layout';
 
 export const InteractivePage = () => {
     return (
-        <Layout title="InteractivePage">
+        <Layout title="InteractivePage" showOnlyContent>
             <Interactive />
         </Layout>
     );

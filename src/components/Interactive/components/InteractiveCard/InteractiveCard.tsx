@@ -1,4 +1,4 @@
-import {Card, ThemeProvider} from '@gravity-ui/uikit';
+import {ThemeProvider} from '@gravity-ui/uikit';
 import React, {useCallback, useState} from 'react';
 
 import {block} from '../../../../utils';
@@ -21,12 +21,12 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children}) => {
             <div className={b('body')}>
                 <div className={b('side', {front: true})}>
                     <ThemeProvider theme="dark" rootClassName={b('theme-wrapper')} scoped>
-                        <Card className={b('card')}>{children}</Card>
+                        <div className={b('card')}>{children}</div>
                     </ThemeProvider>
                 </div>
                 <div className={b('side', {back: true})}>
                     <ThemeProvider theme="light" rootClassName={b('theme-wrapper')} scoped>
-                        <Card className={b('card')}>{children}</Card>
+                        <div className={b('card')}>{children}</div>
                     </ThemeProvider>
                 </div>
             </div>

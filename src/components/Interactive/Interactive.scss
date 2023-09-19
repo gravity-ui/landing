@@ -5,16 +5,39 @@
 $block: '.#{variables.$ns}interactive';
 
 #{$block} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background-image: url('../../assets/interactive_page_bg.jpg');
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 0;
+    }
+
+    &__logo-image {
+        height: 60px;
+        width: 284px;
+        background-image: url('../../assets/logo.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &__sliders {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .slick-slide {
+        padding: 10px;
+    }
+
     .slick-track {
         display: flex;
         min-width: 100%;
-
-        .slick-slide {
-            height: auto;
-        }
-
-        .slick-slide > div {
-            height: 100%;
-        }
     }
 }
