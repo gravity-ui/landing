@@ -1,7 +1,10 @@
 @use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 @use '../../../../variables.scss';
+@use '../../../../mixins.scss' as baseMixins;
 
+$root: '.yc-root';
 $block: '.#{variables.$ns}interactive-card';
 
 #{$block} {
@@ -61,5 +64,95 @@ $block: '.#{variables.$ns}interactive-card';
     &__theme-wrapper {
         height: 100%;
         background: none;
+        border-radius: var(--g-border-radius-xl);
+
+        &_color {
+            &_yellow#{$root} {
+                &_theme_light {
+                    @include baseMixins.brand-vars(#ffbe5c, #fff);
+                }
+
+                &_theme_dark {
+                    @include baseMixins.brand-vars(#ffbe5c, #251b25);
+                }
+            }
+
+            &_blue#{$root} {
+                &_theme_light {
+                    @include baseMixins.brand-vars(#5282ff, #fff);
+                }
+
+                &_theme_dark {
+                    @include baseMixins.brand-vars(#5282ff, #251b25);
+                }
+            }
+
+            &_green#{$root} {
+                &_theme_light {
+                    @include baseMixins.brand-vars(#3bbc50, #fff);
+                }
+
+                &_theme_dark {
+                    @include baseMixins.brand-vars(#3bbc50, #251b25);
+                }
+            }
+
+            &_red#{$root} {
+                &_theme_light {
+                    @include baseMixins.brand-vars(#ff5958, #fff);
+                }
+
+                &_theme_dark {
+                    @include baseMixins.brand-vars(#ff5958, #251b25);
+                }
+            }
+        }
+    }
+}
+
+#{$block}__theme-wrapper#{$root} {
+    background: var(--g-color-base-background);
+    color: var(--g-color-text-primary);
+
+    @include themes.g-theme-common;
+
+    &_theme_light {
+        @include themes.g-theme-light;
+    }
+
+    &_theme_dark {
+        @include themes.g-theme-dark;
+    }
+
+    &_theme_light-hc {
+        @include themes.g-theme-light-hc;
+    }
+
+    &_theme_dark-hc {
+        @include themes.g-theme-dark-hc;
+    }
+
+    &_theme_light {
+        --g-color-base-brand: var(--g-color-private-brand-1000-solid);
+        --g-color-base-brand-hover: var(--g-color-private-brand-900-solid);
+        --g-color-base-selection: var(--g-color-private-brand-50);
+        --g-color-base-selection-hover: var(--g-color-private-brand-100);
+        --g-color-line-brand: var(--g-color-private-brand-300);
+        --g-color-text-brand: var(--g-color-private-brand-900);
+        --g-color-text-link: var(--g-color-private-brand-600-solid);
+        --g-color-text-link-hover: var(--g-color-private-brand-1000-solid);
+    }
+
+    &_theme_dark {
+        --g-color-base-brand: var(--g-color-private-brand-1000-solid);
+        --g-color-base-brand-hover: var(--g-color-private-brand-800-solid);
+        --g-color-base-selection: var(--g-color-private-brand-100);
+        --g-color-base-selection-hover: var(--g-color-private-brand-200);
+        --g-color-line-brand: var(--g-color-private-brand-400);
+        --g-color-text-brand: var(--g-color-private-brand-800);
+        --g-color-text-link: var(--g-color-private-brand-600-solid);
+        --g-color-text-link-hover: var(--g-color-private-brand-1000-solid);
+
+        --g-color-base-background: rgba(37, 27, 37, 0.5);
     }
 }

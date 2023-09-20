@@ -1,6 +1,7 @@
 @use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../../../variables.scss';
+@use '../../../../mixins.scss' as baseMixins;
 
 $root: '.yc-root';
 $block: '.#{variables.$ns}examples-showcase';
@@ -193,41 +194,6 @@ $block: '.#{variables.$ns}examples-showcase';
     }
 }
 
-@function opaque-color($desired-color, $background-color: #fff) {
-    $r1: red($background-color);
-    $g1: green($background-color);
-    $b1: blue($background-color);
-
-    $r2: red($desired-color);
-    $g2: green($desired-color);
-    $b2: blue($desired-color);
-    $a2: alpha($desired-color);
-
-    $r: round($r1 + ($r2 - $r1) * $a2);
-    $g: round($g1 + ($g2 - $g1) * $a2);
-    $b: round($b1 + ($b2 - $b1) * $a2);
-
-    @return rgb($r, $g, $b);
-}
-
-@mixin brand-vars($brand-color, $bg-color) {
-    @for $i from 0 through 10 {
-        $alpha: 1;
-
-        @if $i == 10 {
-            $alpha: 0.05;
-        } @else {
-            $alpha: 1 - 0.1 * $i;
-        }
-
-        $color: change-color($brand-color, $alpha: $alpha);
-        $solid-color: opaque-color($color, $bg-color);
-
-        --g-color-private-brand-#{$alpha * 1000}: #{$color};
-        --g-color-private-brand-#{$alpha * 1000}-solid: #{$solid-color};
-    }
-}
-
 #{$block}#{$root} {
     background: var(--g-color-base-background);
     color: var(--g-color-text-primary);
@@ -277,40 +243,40 @@ $block: '.#{variables.$ns}examples-showcase';
 
 #{$block}_color_yellow#{$root} {
     &_theme_light {
-        @include brand-vars(#ffbe5c, #fff);
+        @include baseMixins.brand-vars(#ffbe5c, #fff);
     }
 
     &_theme_dark {
-        @include brand-vars(#ffbe5c, #251b25);
+        @include baseMixins.brand-vars(#ffbe5c, #251b25);
     }
 }
 
 #{$block}_color_red#{$root} {
     &_theme_light {
-        @include brand-vars(#ff5958, #fff);
+        @include baseMixins.brand-vars(#ff5958, #fff);
     }
 
     &_theme_dark {
-        @include brand-vars(#ff5958, #251b25);
+        @include baseMixins.brand-vars(#ff5958, #251b25);
     }
 }
 
 #{$block}_color_green#{$root} {
     &_theme_light {
-        @include brand-vars(#3bbc50, #fff);
+        @include baseMixins.brand-vars(#3bbc50, #fff);
     }
 
     &_theme_dark {
-        @include brand-vars(#3bbc50, #251b25);
+        @include baseMixins.brand-vars(#3bbc50, #251b25);
     }
 }
 
 #{$block}_color_blue#{$root} {
     &_theme_light {
-        @include brand-vars(#5282ff, #fff);
+        @include baseMixins.brand-vars(#5282ff, #fff);
     }
 
     &_theme_dark {
-        @include brand-vars(#5282ff, #251b25);
+        @include baseMixins.brand-vars(#5282ff, #251b25);
     }
 }
