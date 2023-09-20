@@ -22,7 +22,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({className}) => {
 
     return (
         <div className={b(null, className)} onClick={switchTheme}>
-            <Icon data={theme === 'dark' ? Moon : Sun} size={32} />
+            <Icon data={theme === 'dark' ? Sun : Moon} size={32} />
         </div>
     );
 };
