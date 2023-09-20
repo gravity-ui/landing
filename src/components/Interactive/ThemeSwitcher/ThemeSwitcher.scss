@@ -1,0 +1,10 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-switcher';
+
+#{$block} {
+    display: flex;
+    cursor: pointer;
+}

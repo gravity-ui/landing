@@ -1,0 +1,46 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}color-picker';
+
+#{$block} {
+    display: flex;
+    gap: 24px;
+
+    &__circle {
+        cursor: pointer;
+        padding: 3px;
+        border: 3px solid transparent;
+
+        &_color {
+            &_yellow {
+                --circle-color: #ffbe5c;
+            }
+
+            &_blue {
+                --circle-color: #5282ff;
+            }
+
+            &_green {
+                --circle-color: #3bbc50;
+            }
+
+            &_red {
+                --circle-color: #ff5958;
+            }
+        }
+
+        &_active {
+            border-radius: 40px;
+            border: 3px solid var(--circle-color);
+        }
+
+        &-inner {
+            width: 36px;
+            height: 36px;
+            background: var(--circle-color);
+            border-radius: 40px;
+        }
+    }
+}

@@ -10,12 +10,14 @@ $block: '.#{variables.$ns}interactive';
     height: 100%;
     overflow: hidden;
     background-image: url('../../assets/interactive_page_bg.jpg');
+    background-size: cover;
 
     &__logo {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 40px 0;
+        padding-top: 63px;
+        padding-bottom: 57px;
     }
 
     &__logo-image {
@@ -30,6 +32,8 @@ $block: '.#{variables.$ns}interactive';
     &__sliders {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
     }
 
     .slick-slide {
@@ -39,5 +43,17 @@ $block: '.#{variables.$ns}interactive';
     .slick-track {
         display: flex;
         min-width: 100%;
+    }
+
+    &__settings {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 40px;
+        padding-bottom: 92px;
+    }
+
+    &__theme-switch {
+        margin-left: 76px;
     }
 }
