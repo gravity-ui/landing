@@ -20,7 +20,7 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({items}) => {
         speed: 500,
         slidesToShow: 1, // for infinite
         slidesToScroll: 1,
-        autoplay: true,
+        autoplay: false,
         variableWidth: true,
         autoplaySpeed: 2000, // TODO make a smooth transition
         className: b('slider'),

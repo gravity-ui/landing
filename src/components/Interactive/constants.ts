@@ -1,16 +1,21 @@
 import {
+    AlertCard,
     BreadcrumbsCard,
     ButtonsCard,
     CheckboxCard,
     IconsPromoCard,
+    InputCard,
     LabelsCard,
+    ListCard,
     LoaderCard,
     MenuCard,
     PersonaCard,
     PopupCard,
     ProgressCard,
     RadioCard,
+    SegmentCard,
     SkeletonCard,
+    SpinnerCard,
     SwitchCard,
     TableCard,
     TabsCard,
@@ -28,15 +33,12 @@ export const firstSliderItems = [
 
 export const secondSliderItems = [
     ProgressCard,
-    // todo ListCard,
+    ListCard,
     SwitchCard,
-    // todo AlertCard,
+    AlertCard,
     SkeletonCard,
-    // todo SegmentCard,
-    // todo InputCard,
-    PopupCard, // todo remove
-    PersonaCard, // todo remove
-    TabsCard, // todo remove
+    SegmentCard,
+    InputCard,
 ];
 
 export const thirdSliderItems = [
@@ -44,7 +46,7 @@ export const thirdSliderItems = [
     LabelsCard,
     PopupCard,
     PersonaCard,
-    // todo SpinnerCard,
+    SpinnerCard,
     BreadcrumbsCard,
     CheckboxCard,
     // todo ToastersCard,
