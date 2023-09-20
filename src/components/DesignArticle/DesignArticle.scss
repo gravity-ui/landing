@@ -4,6 +4,10 @@
 $block: '.#{variables.$ns}design-article';
 
 #{$block} {
+    padding: 32px 40px;
+    background: #251b25;
+    border-radius: 16px;
+
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
         margin: 0 20px;
     }
