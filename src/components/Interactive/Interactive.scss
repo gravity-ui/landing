@@ -70,15 +70,22 @@ $block: '.#{variables.$ns}interactive';
         flex-grow: 1;
         justify-content: center;
         z-index: 1;
+        gap: 20px;
+
+        .slider-simple {
+            width: 100%;
+            max-width: 100%;
+        }
     }
 
-    .slick-slide {
-        padding: 10px;
+    .swiper-slide {
+        /* stylelint-disable */
+        width: auto !important;
+        /* stylelint-enable */ 
     }
 
-    .slick-track {
-        display: flex;
-        min-width: 100%;
+    .swiper-wrapper {
+        transition-timing-function: linear;
     }
 
     &__settings {

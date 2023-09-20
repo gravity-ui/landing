@@ -54,9 +54,9 @@ $block: '.#{variables.$ns}interactive-card';
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
+        height: 220px;
+        padding: 0 40px;
         overflow: hidden;
-        padding: 40px;
         border-radius: var(--g-border-radius-xl);
         background: var(--g-color-base-background);
     }

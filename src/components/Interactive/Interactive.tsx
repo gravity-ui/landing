@@ -1,6 +1,8 @@
 import {Theme} from '@gravity-ui/uikit';
 import React, {useState} from 'react';
-import Slider, {Settings} from 'react-slick';
+import 'swiper/css';
+import {Autoplay} from 'swiper/modules';
+import {Swiper, SwiperClass, SwiperSlide} from 'swiper/react';
 
 import {block} from '../../utils';
 
@@ -14,37 +16,41 @@ const b = block('interactive');
 
 interface SimpleSliderProps {
     items: React.FC[];
-    slidesToScroll?: number;
+    reverseDirection?: boolean;
 }
 
-const SimpleSlider: React.FC<SimpleSliderProps> = ({items, slidesToScroll = 3}) => {
-    const settings: Settings = {
-        dots: false,
-        arrows: false,
-        infinite: true,
-        speed: 20000,
-        slidesToShow: 1, // for infinite
-        slidesToScroll,
-        autoplay: true,
-        variableWidth: true,
-        autoplaySpeed: 0, // TODO make a smooth transition
-        cssEase: 'linear',
-        className: b('slider'),
-        pauseOnFocus: true,
-        pauseOnHover: true,
-    };
+const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
+    ({items, reverseDirection = false}) => {
+        const clonnedComponents = [...items, ...items, ...items, ...items, ...items, ...items];
 
-    return (
-        <Slider {...settings}>
-            {items.map((Comp, index) => (
-                <Comp key={index} />
-            ))}
-            {items.map((Comp, index) => (
-                <Comp key={`${index}_duplicated`} />
-            ))}
-        </Slider>
-    );
-};
+        const handlePauseAutoplay = (swiper: SwiperClass) => {
+            swiper.autoplay.resume();
+        };
+
+        return (
+            <Swiper
+                slidesPerView="auto"
+                loop={true}
+                spaceBetween={20}
+                speed={reverseDirection ? 200000 : 10000}
+                autoplay={{
+                    delay: 0,
+                    disableOnInteraction: true,
+                    reverseDirection,
+                }}
+                modules={[Autoplay]}
+                className="slider-simple"
+                onAutoplayPause={handlePauseAutoplay}
+            >
+                {clonnedComponents.map((Comp, index) => (
+                    <SwiperSlide key={index}>
+                        <Comp />
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+        );
+    },
+);
 
 export const Interactive = () => {
     const [theme, setTheme] = useState<Theme>('dark');
@@ -60,7 +66,7 @@ export const Interactive = () => {
                 </div>
                 <div className={b('sliders')}>
                     <SimpleSlider items={firstSliderItems} />
-                    <SimpleSlider items={secondSliderItems} slidesToScroll={-1} />
+                    <SimpleSlider items={secondSliderItems} />
                     <SimpleSlider items={thirdSliderItems} />
                 </div>
                 <div className={b('settings')}>
