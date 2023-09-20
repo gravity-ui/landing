@@ -39,6 +39,9 @@ const SimpleSlider: React.FC<SimpleSliderProps> = ({items, slidesToScroll = 3}) 
             {items.map((Comp, index) => (
                 <Comp key={index} />
             ))}
+            {items.map((Comp, index) => (
+                <Comp key={`${index}_duplicated`} />
+            ))}
         </Slider>
     );
 };
@@ -51,7 +54,7 @@ export const Interactive = () => {
         <InteractiveContextProvider
             value={{theme, color, changeTheme: setTheme, changeColor: setColor}}
         >
-            <div className={b()}>
+            <div className={b(null, color)}>
                 <div className={b('logo')}>
                     <span className={b('logo-image')} />
                 </div>
