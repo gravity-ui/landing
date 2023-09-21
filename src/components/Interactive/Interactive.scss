@@ -1,0 +1,99 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}interactive';
+
+#{$block} {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background-image: url('../../assets/interactive_page_bg.jpg');
+    background-size: cover;
+    position: relative;
+
+    &.yellow {
+        --bg-tint-color: #ffbe5c;
+    }
+    &.blue {
+        --bg-tint-color: #5282ff;
+    }
+    &.green {
+        --bg-tint-color: #3bbc50;
+    }
+    &.red {
+        --bg-tint-color: #ff5958;
+    }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: linear-gradient(
+                180deg,
+                rgba(22, 13, 27, 0.25) 0%,
+                rgba(22, 13, 27, 0.25) 48.44%,
+                rgba(22, 13, 27, 0.25) 100%
+            ),
+            var(--bg-tint-color);
+        background-blend-mode: multiply, normal;
+        mix-blend-mode: overlay;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        transition: all 0.5s ease;
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 80px;
+        padding-bottom: 57px;
+    }
+
+    &__logo-image {
+        height: 85px;
+        width: 402px;
+        background-image: url('../../assets/logo.svg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &__sliders {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
+        z-index: 1;
+        gap: 20px;
+
+        .slider-simple {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .swiper-slide {
+        /* stylelint-disable */
+        width: auto !important;
+        /* stylelint-enable */ 
+    }
+
+    .swiper-wrapper {
+        transition-timing-function: linear;
+    }
+
+    &__settings {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 40px;
+        padding-bottom: 92px;
+        z-index: 1;
+    }
+}

@@ -28,6 +28,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^3.0.1",
     "remark-link-rewrite": "^1.0.7",
+    "swiper": "^10.2.0",
     "typescript": "^4.5.5",
     "url": "^0.11.0"
   },

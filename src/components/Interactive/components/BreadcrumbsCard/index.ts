@@ -1,0 +1,1 @@
+export {BreadcrumbsCard} from './BreadcrumbsCard';
