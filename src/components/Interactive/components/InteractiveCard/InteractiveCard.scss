@@ -4,7 +4,7 @@
 @use '../../../../variables.scss';
 @use '../../../../mixins.scss' as baseMixins;
 
-$root: '.yc-root';
+$root: '.g-root';
 $block: '.#{variables.$ns}interactive-card';
 
 #{$block} {
