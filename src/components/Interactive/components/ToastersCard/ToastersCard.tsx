@@ -12,7 +12,7 @@ const ToastersCardInner = () => {
             name: 'first',
             title: 'Work it harder',
             content: 'Make it better',
-            autoHiding: false,
+            autoHiding: 3700,
             type: 'warning',
             isClosable: false,
         });
@@ -22,16 +22,38 @@ const ToastersCardInner = () => {
                 name: 'second',
                 title: 'Do it faster',
                 content: 'Makes us stronger',
-                autoHiding: false,
+                autoHiding: 3700,
                 type: 'success',
                 isClosable: false,
             });
         }, 2000);
+
+        setTimeout(() => {
+            add({
+                name: 'third',
+                title: 'Work it harder',
+                content: 'Make it better',
+                autoHiding: 3700,
+                type: 'info',
+                isClosable: false,
+            });
+        }, 4000);
+
+        setTimeout(() => {
+            add({
+                name: 'fourth',
+                title: 'Do it faster',
+                content: 'Makes us stronger',
+                autoHiding: 3700,
+                type: 'error',
+                isClosable: false,
+            });
+        }, 6000);
     }, [add]);
 
     React.useEffect(() => {
         showToasters();
-        intervalRef.current = setInterval(showToasters, 5000);
+        intervalRef.current = setInterval(showToasters, 7000);
 
         return () => {
             clearInterval(intervalRef.current);
@@ -43,7 +65,7 @@ const ToastersCardInner = () => {
 
 export const ToastersCard = () => {
     return (
-        <InteractiveCard>
+        <InteractiveCard style={{width: 300, alignItems: 'flex-end'}}>
             <ToastersCardInner />
         </InteractiveCard>
     );

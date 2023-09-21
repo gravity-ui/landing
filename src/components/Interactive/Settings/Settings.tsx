@@ -17,6 +17,7 @@ const defaultAnimationStatuses = [...allColors.map(() => false), false];
 const getCurrentTime = () => Date.now() / 1000;
 
 const INACTIVE_TIME = 10; // todo change it
+const ANIMATION_TIME = 2300;
 
 export const Settings = () => {
     const {changeColor, color: currentColor, switchTheme, theme} = useInteractiveContext();
@@ -26,36 +27,52 @@ export const Settings = () => {
     const tickRef = useRef<NodeJS.Timer>();
     const isAnimationStarted = useRef(false);
 
+    const enableHandAtIndex = (index: number) =>
+        setAnimationStatuses((prev) => {
+            const newStat = [...prev];
+            newStat[index] = true;
+            return newStat;
+        });
+
+    const disableHandAtIndex = (index: number) =>
+        setAnimationStatuses((prev) => {
+            const newStat = [...prev];
+            newStat[index] = false;
+            return newStat;
+        });
+
     const startAnimation = useCallback(async () => {
-        let currentAnumationIndex = 0;
+        let currentColorIndex = 0;
 
         isAnimationStarted.current = true;
 
-        while (isAnimationStarted.current && currentAnumationIndex < animationsStatuses.length) {
-            // eslint-disable-next-line
-            setAnimationStatuses((prev) => {
-                const newStat = [...prev];
-                newStat[currentAnumationIndex] = true;
-                return newStat;
-            });
+        while (isAnimationStarted.current && currentColorIndex < allColors.length) {
+            // Включаем анимацию для цвета
+            enableHandAtIndex(currentColorIndex);
 
-            await sleep(2300);
-            if (currentAnumationIndex === 4) {
-                switchTheme();
-            } else {
-                changeColor(allColors[currentAnumationIndex]);
-            }
+            await sleep(ANIMATION_TIME);
+            // Анимация закончилась, включаем цвет
+            changeColor(allColors[currentColorIndex]);
 
+            // Выжидаем немного перед тем как убрать руку
             await sleep(200);
 
-            // eslint-disable-next-line
-            setAnimationStatuses((prev) => {
-                const newStat = [...prev];
-                newStat[currentAnumationIndex] = false;
-                return newStat;
-            });
+            // Убираем руку с цвета
+            disableHandAtIndex(currentColorIndex);
+            currentColorIndex++;
 
-            currentAnumationIndex++;
+            await sleep(2000);
+
+            // Показываем руку на переключателе темы
+            enableHandAtIndex(4);
+            await sleep(ANIMATION_TIME);
+            // Анимация закончилась, меняем тему
+            switchTheme();
+            // Выжидаем немного перед тем как убрать руку
+            await sleep(200);
+            // Убираем руку с темы
+            disableHandAtIndex(4);
+
             await sleep(2000);
         }
 

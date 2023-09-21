@@ -51,13 +51,13 @@ $block: '.#{variables.$ns}interactive';
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-top: 63px;
+        padding-top: 80px;
         padding-bottom: 57px;
     }
 
     &__logo-image {
-        height: 60px;
-        width: 284px;
+        height: 85px;
+        width: 402px;
         background-image: url('../../assets/logo.svg');
         background-size: contain;
         background-position: center;

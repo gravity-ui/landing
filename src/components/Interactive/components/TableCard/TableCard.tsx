@@ -77,7 +77,11 @@ export const TableCard = () => {
 
     return (
         <InteractiveCard>
-            <Table columns={columns} data={data} />
+            <Table
+                columns={columns}
+                data={data}
+                getRowClassNames={(_item, index) => (index === 1 ? ['yc-table__row_selected'] : [])}
+            />
         </InteractiveCard>
     );
 };

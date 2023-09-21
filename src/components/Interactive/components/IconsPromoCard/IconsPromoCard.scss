@@ -1,0 +1,14 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}icons-promo';
+
+#{$block} {
+    color: var(--g-color-base-brand);
+
+    &__icons-image {
+        background-image: url('../../../../assets/500icons.svg');
+        background-size: cover;
+    }
+}

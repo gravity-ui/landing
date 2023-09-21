@@ -33,6 +33,7 @@ $block: '.#{variables.$ns}interactive-card';
         width: 100%;
         height: 100%;
         position: relative;
+        pointer-events: none;
     }
 
     &__side {
@@ -112,7 +113,11 @@ $block: '.#{variables.$ns}interactive-card';
     &__toaster {
         display: flex;
         flex-direction: column;
-        max-width: 250px;
+        align-items: flex-end;
+    }
+
+    .yc-toast {
+        width: fit-content;
     }
 }
 

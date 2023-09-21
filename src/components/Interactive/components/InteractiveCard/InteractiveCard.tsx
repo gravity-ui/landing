@@ -10,9 +10,10 @@ const b = block('interactive-card');
 
 interface InteractiveCardProps {
     children: React.ReactNode;
+    style?: any;
 }
 
-export const InteractiveCard: React.FC<InteractiveCardProps> = ({children}) => {
+export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, style}) => {
     const {color, theme: globalTheme} = useInteractiveContext();
     const [localTheme, setLocalTheme] = useState<Theme>('dark');
 
@@ -27,7 +28,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children}) => {
     const isFlipped = localTheme === 'light';
 
     return (
-        <div className={b({flipped: isFlipped})} onClick={flip}>
+        <div className={b({flipped: isFlipped})} onClick={flip} style={style}>
             <div className={b('body')}>
                 <div className={b('side', {front: true})}>
                     <ThemeProvider theme="dark" rootClassName={b('theme-wrapper', {color})} scoped>

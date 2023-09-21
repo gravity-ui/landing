@@ -38,6 +38,7 @@ const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
                     reverseDirection,
                 }}
                 modules={[Autoplay]}
+                grabCursor={false}
                 className="slider-simple"
                 onAutoplayPause={handlePauseAutoplay}
             >
