@@ -35,13 +35,13 @@ TextInput has two types: **Normal** and **Clear**, which have the same set of fu
 - One distinguishing feature of this component is its internal padding and corner radius. These parameters are determined by the element's size and are defined by a specific variable for corner radius (more information [here](/design/branding/corner-radius)), as well as a 1px stroke.
 - Used in forms when free space between components is required, such as padding between form elements.
 
-![Console. Creating a cluster.](/static/images/design/TextArea/Console.png)
+{/* ![Console. Creating a cluster.](/static/images/design/TextArea/Console.png)
 
 Console. Creating a cluster.
 
 ![DataLens. Creating a collection.](/static/images/design/TextArea/Datal.png)
 
-DataLens. Creating a collection.
+DataLens. Creating a collection. */}
 
 **Clear**
 
@@ -49,42 +49,55 @@ DataLens. Creating a collection.
 - Used when the type Normal creates visual noise.
 - When using this type, make sure that the purpose of this component is clear to the user.
 
-![Yandex GPT. Entering instructions.](/static/images/design/TextArea/Chat_GPT.png)
+{/* ![Yandex GPT. Entering instructions.](/static/images/design/TextArea/Chat_GPT.png)
 
-Yandex GPT. Entering instructions.
+Yandex GPT. Entering instructions. */}
 
 ## Structure
 
 ![Structure.png](/static/images/design/TextArea/Structure.png)
 
-1. **Value**
-   - Is a required element.
-   - Can be used as a hint (placeholder) and as entered text.
-   - The entered text replaces the hint.
+**1. Value**
 
-   ![Active.png](/static/images/design/TextArea/Active.png)
+![Active.png](/static/images/design/TextArea/Active.png)
 
-2. **Clear button**
-   - Is an optional component.
-   - Used when the field content needs to be erased.
-   - Displayed when at least one character has been entered in the field.
-   - Displayed even when the focus is outside the field.
-   - Is a Button component of type Flat-secondary that inherits all of its properties. For example, the background of the cross is filled on hover.
-   - When clicking on the clear button, the focus shifts to the field, and the entered value is erased.
-3. **Additional content**
-   - Is an optional element and is embedded at the bottom right.
-   - Used when additional text must be added to the outside.
-   - The text is aligned to the right.
-   - For example, can be used as a counter (character input counter).
+- Is a required element.
+- Can be used as a hint (placeholder) and as entered text.
+- The entered text replaces the hint.
+
+**2. Clear button**
+
+![Clear Button](/static/images/design/TextArea/ClearButton.png)
+
+- Is an optional component.
+- Used when the field content needs to be erased.
+- Displayed when at least one character has been entered in the field.
+- Displayed even when the focus is outside the field.
+- Is a Button component of type Flat-secondary that inherits all of its properties. For example, the background of the cross is filled on hover.
+- When clicking on the clear button, the focus shifts to the field, and the entered value is erased.
+**3. Additional content**
 
 ![Structure2.png](/static/images/design/TextArea/Structure2.png)
 
-1. **Error icon**
-   - Is displayed only in the Inline Error state.
-   - Works together with Tooltip, offering error descriptions upon hovering over an icon, to achieve a more compact layout of the form.
-2. **Error message**
-   - Is displayed only in the Outline Error state.
-   - Is embedded at the bottom left.
+- Is an optional element and is embedded at the bottom right.
+- Used when additional text must be added to the outside.
+- The text is aligned to the right.
+- For example, can be used as a counter (character input counter).
+
+
+**4. Error icon**
+
+![Error icon](/static/images/design/TextArea/8.png)
+
+- Is displayed only in the Inline Error state.
+- Works together with Tooltip, offering error descriptions upon hovering over an icon, to achieve a more compact layout of the form.
+
+**5. Error message**
+
+![Error message](/static/images/design/TextArea/9.png)
+
+- Is displayed only in the Outline Error state.
+- Is embedded at the bottom left.
 
 ## States
 
@@ -117,17 +130,30 @@ The corner radius depends on the size and is set by [variables](/design/branding
 
 ## User guide
 
-1. **Working with the field**
+**1. Working with the field**
+
 - The field may vary in height. [TextInput](/design/guides/text-input) can be used for single-line input.
 - We don't recommend including a **hint** within a field, as the field name will not be visible upon entering a value, unless you have limited space or the purpose of the field is clear to the user.
 - Use the **same size** for all of the complementary components of the form. If you selected size M, all of the other components should be the same size.
-1. **External field header**
-   - A short field name, preferably limited to one line.
-   - The component should be placed in line with the field's value, unless the context is mobile or the Dialog size is S, in which case the component's title is displayed on top of the component.
-2. **Hint with tooltip**
-   - Instructions for filling out the field when hovering over the icon with a question mark.
-   - Used when the title and meaning should be clarified.
-   - Should not include more than two paragraphs of text.
-3. **Additional description**
-   - Can be found at the bottom or to the right of the field.
-   - Used in rare cases when it is unclear how to fill out a field without an additional description or when explanations for previously entered values are required.
+
+**2. External field header**
+
+![External field header](/static/images/design/TextArea/12.png)
+
+- A short field name, preferably limited to one line.
+- The component should be placed in line with the field's value, unless the context is mobile or the Dialog size is S, in which case the component's title is displayed on top of the component.
+
+**3. Hint with tooltip**
+
+![Hint with tooltip](/static/images/design/TextArea/13.png)
+
+- Instructions for filling out the field when hovering over the icon with a question mark.
+- Used when the title and meaning should be clarified.
+- Should not include more than two paragraphs of text.
+
+**4. Additional description**
+
+![Additional description](/static/images/design/TextArea/14.png)
+
+- Can be found at the bottom or to the right of the field.
+- Used in rare cases when it is unclear how to fill out a field without an additional description or when explanations for previously entered values are required.

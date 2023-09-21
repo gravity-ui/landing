@@ -43,70 +43,75 @@ TextInput has two types: **Normal** and **Clear**, which have the same set of fu
 
 ![4.png](/static/images/design/TextInput/4.png)
 
-1. **Left icon**
+**1. Left icon**
 
-   ![5.png](/static/images/design/TextInput/5.png)
+![5.png](/static/images/design/TextInput/5.png)
 
-   - Is an optional component.
-   - The icon can be used for additional field identification.
-   - If this is a search string, for example, a "magnifying glass" icon can be used. Or a "key" icon, if this is a password entry field.
-2. **Inline label.**
+- Is an optional component.
+- The icon can be used for additional field identification.
+- If this is a search string, for example, a "magnifying glass" icon can be used. Or a "key" icon, if this is a password entry field.
 
-   ![6.png](/static/images/design/TextInput/6.png)
+**2. Inline label.**
 
-   - Is an optional component.
-   - Amplifies the value of the field name.
-   - Replaces the external label.
-   - Used as a field name because, when a value is entered, the hint disappears, leaving the purpose of the field unclear to the user.
-3. **Value**
+![6.png](/static/images/design/TextInput/6.png)
 
-   ![7.png](/static/images/design/TextInput/7.png)
+- Is an optional component.
+- Amplifies the value of the field name.
+- Replaces the external label.
+- Used as a field name because, when a value is entered, the hint disappears, leaving the purpose of the field unclear to the user.
 
-   - Is a required element.
-   - Space used for the text of the hint and the entered text.
-   - After one character is entered, the entered text replaces the hint.
-4. **Clear button**
-   - Is an optional component.
-   - Used when the field content needs to be erased.
-   - Displayed when at least one character has been entered in the field.
+**3. Value**
 
-   ![8.png](/static/images/design/TextInput/8.png)
+![7.png](/static/images/design/TextInput/7.png)
 
-   - Displayed even when the focus is outside the field.
+- Is a required element.
+- Space used for the text of the hint and the entered text.
+- After one character is entered, the entered text replaces the hint.
 
-   ![9.png](/static/images/design/TextInput/9.png)
+**4. Clear button**
 
-   - Is a Button component of type Flat-secondary that inherits all of its properties. For example, the background of the cross is filled on hover.
+![Clear button](/static/images/design/TextInput/21.png)
 
-   ![10.png](/static/images/design/TextInput/10.png)
+- Is an optional component.
+- Used when the field content needs to be erased.
+- Displayed when at least one character has been entered in the field.
+- Displayed even when the focus is outside the field.
+- Is a Button component of type Flat-secondary that inherits all of its properties. For example, the background of the cross is filled on hover.
+- When clicking on the clear button, the focus shifts to the field, and the entered value is erased.
 
-   - When clicking on the clear button, the focus shifts to the field, and the entered value is erased.
-5. **Inline buttons**
+**5. Inline buttons**
 
-   ![11.png](/static/images/design/TextInput/11.png)
+![11.png](/static/images/design/TextInput/11.png)
 
-   - Is an optional element and is embedded on the right.
-   - Used to more clearly indicate the relationship between content and actions and can be placed within a component.
-   - The field allows for a maximum of two Button components.
-   - The size of embedded buttons should be one size smaller than the component's own size. For example, if a size S is used, the button should be XS; if a size M is used, the button should be S; and so on.
-   - For example, it can be used to confirm actions, send messages, or add additional filters to a field.
-6. **Additional content**
+- Is an optional element and is embedded on the right.
+- Used to more clearly indicate the relationship between content and actions and can be placed within a component.
+- The field allows for a maximum of two Button components.
+- The size of embedded buttons should be one size smaller than the component's own size. For example, if a size S is used, the button should be XS; if a size M is used, the button should be S; and so on.
+- For example, it can be used to confirm actions, send messages, or add additional filters to a field.
 
-   ![12.png](/static/images/design/TextInput/12.png)
+**6. Additional content**
 
-   - Is an optional element and is embedded on the right.
-   - Used when additional text is required inside.
-   - The text is aligned to the right.
-   - For example, can be used as a counter (counter of entered characters), for counting the number of values found in a search string, or for units of measurement.
+![12.png](/static/images/design/TextInput/12.png)
 
-![13.png](/static/images/design/TextInput/13.png)
+- Is an optional element and is embedded on the right.
+- Used when additional text is required inside.
+- The text is aligned to the right.
+- For example, can be used as a counter (counter of entered characters), for counting the number of values found in a search string, or for units of measurement.
 
-1. **Error icon**
-   - Is displayed only in the Inline Error state.
-   - Works together with Tooltip, offering error descriptions upon hovering over an icon, to achieve a compact layout of the form.
-2. **Error description**
-   - Is displayed only in the Outline Error state.
-   - Is embedded at the bottom left.
+
+**7. Error icon**
+
+![Error icon](/static/images/design/TextInput/24.png)
+
+- Is displayed only in the Inline Error state.
+- Works together with Tooltip, offering error descriptions upon hovering over an icon, to achieve a compact layout of the form.
+
+**8. Error description**
+
+![Error description](/static/images/design/TextInput/25.png)
+
+- Is displayed only in the Outline Error state.
+- Is embedded at the bottom left.
 
 ## States
 
@@ -139,33 +144,39 @@ The corner radius depends on the size and is set by [variables](/design/branding
 
 ## User guide
 
-1. **Working with the field**
+**1. Working with the field**
+
 - The field can contain only one line. For this purpose, we recommend using [TextArea](/design/guides/text-area), a component for multiline text input.
 - We don't recommend including a **hint** within a field, as the field name will not be visible upon entering a value, unless you have limited space or the purpose of the field is clear to the user.
 - **The width of the field** must be the same as the width of the entered value. It informs the user of the expected input.
 - Use the **same size** for all of the complementary components of the form. If you selected size M, all of the other components should be the same size.
-1. **External field header**
-   - A short field name, preferably limited to one line.
-   - In desktop forms, the component should be placed in line with the field's value. If the context is mobile or the Dialog size is S, the component's title is displayed on top of the component.
 
-   ![Formating.png](/static/images/design/TextInput/Formating.png)
+**2. External field header**
 
-2. **Hint with tooltip**
-   - Instructions for filling out the field when hovering over the icon with a question mark.
-   - Used when the title should be clarified.
-   - Should not include more than two paragraphs of text.
+![Formating.png](/static/images/design/TextInput/Formating.png)
 
-   ![Tooltip.png](/static/images/design/TextInput/Tooltip.png)
+- A short field name, preferably limited to one line.
+- In desktop forms, the component should be placed in line with the field's value. If the context is mobile or the Dialog size is S, the component's title is displayed on top of the component.
 
-3. **Additional description**
-   - Can be found at the bottom or to the right of the field.
-   - Used in rare cases when it is unclear how to fill out a field without an additional description or when explanations for previously entered values are required.
+**3. Hint with tooltip**
 
-   ![Description.png](/static/images/design/TextInput/Description.png)
+![Tooltip.png](/static/images/design/TextInput/Tooltip.png)
 
-4. **Units of measurement** can be placed as follows:
-   - In the text description of the field, If there is enough space in the form.
-   - Within the input field, if the description must be shortened.
-   - To the right of the field, if space is needed for other elements inside the field, such as buttons or a clear (reset) icon.
+- Instructions for filling out the field when hovering over the icon with a question mark.
+- Used when the title should be clarified.
+- Should not include more than two paragraphs of text.
+
+**4. Additional description**
+
+![Description.png](/static/images/design/TextInput/Description.png)
+
+- Can be found at the bottom or to the right of the field.
+- Used in rare cases when it is unclear how to fill out a field without an additional description or when explanations for previously entered values are required.
+
+**5. Units of measurement** can be placed as follows:
 
 ![s.png](/static/images/design/TextInput/s.png)
+
+- In the text description of the field, If there is enough space in the form.
+- Within the input field, if the description must be shortened.
+- To the right of the field, if space is needed for other elements inside the field, such as buttons or a clear (reset) icon.
