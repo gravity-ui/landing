@@ -1,12 +1,12 @@
 import {Interactive} from '../../components/Interactive/Interactive';
 import {Layout} from '../../components/Layout/Layout';
 
-export const InteractivePage = () => {
+export const StandPage = () => {
     return (
-        <Layout title="InteractivePage" showOnlyContent>
+        <Layout title="Stand Page" showOnlyContent>
             <Interactive />
         </Layout>
     );
 };
 
-export default InteractivePage;
+export default StandPage;
