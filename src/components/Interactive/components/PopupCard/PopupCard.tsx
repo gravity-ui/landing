@@ -8,7 +8,7 @@ export const PopupCard = () => {
 
     return (
         <InteractiveCard>
-            <div ref={anchorRef} style={{width: 200, marginTop: 80}} />
+            <div ref={anchorRef} style={{width: 220, marginTop: 80}} />
             <Popup
                 placement="top"
                 open={true}
@@ -17,7 +17,7 @@ export const PopupCard = () => {
                 disablePortal
                 modifiers={[{name: 'preventOverflow', enabled: false}]}
             >
-                <div style={{padding: 16, width: 220}}>
+                <div style={{padding: 16, maxWidth: 196}}>
                     Work it harder, make it better Do it faster, makes us stronger
                 </div>
             </Popup>

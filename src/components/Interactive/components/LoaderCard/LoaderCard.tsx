@@ -5,7 +5,7 @@ import {InteractiveCard} from '../InteractiveCard';
 export const LoaderCard = () => {
     return (
         <InteractiveCard>
-            <Loader />
+            <Loader size="l" />
         </InteractiveCard>
     );
 };

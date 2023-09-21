@@ -10,9 +10,6 @@ import './TableCard.scss';
 const b = block('slider-item');
 
 export const TableCard = () => {
-    const AVATAR =
-        'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1160.jpg';
-
     interface DataItem {
         first: JSX.Element;
         second: JSX.Element;
@@ -25,7 +22,7 @@ export const TableCard = () => {
             first: <Checkbox>{'Harder'}</Checkbox>,
             second: (
                 <div className={b('avatar')}>
-                    <img alt={''} src={AVATAR} />
+                    <img alt={''} src="/static/interactive/telepuz1.png" />
                 </div>
             ),
             third: 'Faster',
@@ -39,7 +36,7 @@ export const TableCard = () => {
             first: <Checkbox checked={true}>{'Better'}</Checkbox>,
             second: (
                 <div className={b('avatar')}>
-                    <img alt={''} src={AVATAR} />
+                    <img alt={''} src="/static/interactive/telepuz2.png" />
                 </div>
             ),
             third: 'Stronger',
@@ -54,7 +51,11 @@ export const TableCard = () => {
     const columns: TableColumnConfig<DataItem>[] = [
         {
             id: 'first',
-            name: () => <Checkbox indeterminate={true}>{'Work it'}</Checkbox>,
+            name: () => (
+                <Checkbox indeterminate={true}>
+                    <b>Work it</b>
+                </Checkbox>
+            ),
         },
         {
             id: 'second',
