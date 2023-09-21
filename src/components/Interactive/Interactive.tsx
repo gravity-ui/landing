@@ -60,8 +60,12 @@ export const Interactive = () => {
         setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
     }, []);
 
+    const value = React.useMemo(() => {
+        return {theme, color, switchTheme, changeColor: setColor};
+    }, [theme, color, switchTheme, setColor]);
+
     return (
-        <InteractiveContextProvider value={{theme, color, switchTheme, changeColor: setColor}}>
+        <InteractiveContextProvider value={value}>
             <div className={b(null, color)}>
                 <div className={b('logo')}>
                     <span className={b('logo-image')} />
