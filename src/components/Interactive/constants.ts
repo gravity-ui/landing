@@ -9,6 +9,7 @@ import {
     ListCard,
     LoaderCard,
     MenuCard,
+    PaginationCard,
     PersonaCard,
     PopupCard,
     ProgressCard,
@@ -19,6 +20,7 @@ import {
     SwitchCard,
     TableCard,
     TabsCard,
+    ToastersCard,
 } from './components';
 
 export const firstSliderItems = [
@@ -28,7 +30,7 @@ export const firstSliderItems = [
     MenuCard,
     IconsPromoCard,
     TableCard,
-    // todo PaginationCard
+    PaginationCard,
 ];
 
 export const secondSliderItems = [
@@ -49,7 +51,7 @@ export const thirdSliderItems = [
     SpinnerCard,
     BreadcrumbsCard,
     CheckboxCard,
-    // todo ToastersCard,
+    ToastersCard,
 ];
 
 export enum ColorTheme {

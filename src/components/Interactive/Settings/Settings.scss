@@ -2,7 +2,7 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../../variables.scss';
 
-$block: '.#{variables.$ns}color-picker';
+$block: '.#{variables.$ns}settings';
 
 @keyframes handTap {
     from {
@@ -20,13 +20,17 @@ $block: '.#{variables.$ns}color-picker';
 
 #{$block} {
     display: flex;
+    align-items: center;
     gap: 24px;
 
     &__circle {
         cursor: pointer;
         padding: 3px;
-        border: 3px solid transparent;
+        border: 3px solid;
+        border-color: transparent;
         position: relative;
+        transition: border-color 0.7s ease;
+        border-radius: 40px;
 
         &_color {
             &_yellow {
@@ -47,8 +51,7 @@ $block: '.#{variables.$ns}color-picker';
         }
 
         &_active {
-            border-radius: 40px;
-            border: 3px solid var(--circle-color);
+            border-color: var(--circle-color);
         }
 
         &-inner {
@@ -65,5 +68,25 @@ $block: '.#{variables.$ns}color-picker';
         left: -3px;
         bottom: -70px;
         animation: 2.5s ease 0s normal none running handTap;
+    }
+
+    &__theme-switcher {
+        cursor: pointer;
+        margin-left: 76px;
+        position: relative;
+    }
+
+    &__theme-icon {
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+
+        &_active {
+            opacity: 1;
+        }
+
+        &:last-of-type {
+            position: absolute;
+            left: 0;
+        }
     }
 }

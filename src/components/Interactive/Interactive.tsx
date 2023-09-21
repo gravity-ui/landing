@@ -1,15 +1,14 @@
 import {Theme} from '@gravity-ui/uikit';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import 'swiper/css';
 import {Autoplay} from 'swiper/modules';
 import {Swiper, SwiperClass, SwiperSlide} from 'swiper/react';
 
 import {block} from '../../utils';
 
-import {ColorPicker} from './ColorPicker';
 import './Interactive.scss';
 import {InteractiveContextProvider} from './InteractiveContext';
-import {ThemeSwitcher} from './ThemeSwitcher';
+import {Settings} from './Settings';
 import {ColorTheme, firstSliderItems, secondSliderItems, thirdSliderItems} from './constants';
 
 const b = block('interactive');
@@ -56,10 +55,12 @@ export const Interactive = () => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [color, setColor] = useState<ColorTheme>(ColorTheme.Yellow);
 
+    const switchTheme = useCallback(() => {
+        setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    }, []);
+
     return (
-        <InteractiveContextProvider
-            value={{theme, color, changeTheme: setTheme, changeColor: setColor}}
-        >
+        <InteractiveContextProvider value={{theme, color, switchTheme, changeColor: setColor}}>
             <div className={b(null, color)}>
                 <div className={b('logo')}>
                     <span className={b('logo-image')} />
@@ -70,8 +71,7 @@ export const Interactive = () => {
                     <SimpleSlider items={thirdSliderItems} />
                 </div>
                 <div className={b('settings')}>
-                    <ColorPicker />
-                    <ThemeSwitcher className={b('theme-switch')} />
+                    <Settings />
                 </div>
             </div>
         </InteractiveContextProvider>

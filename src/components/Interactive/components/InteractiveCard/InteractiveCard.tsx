@@ -1,4 +1,4 @@
-import {Theme, ThemeProvider} from '@gravity-ui/uikit';
+import {Theme, ThemeProvider, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
 import React, {useCallback, useEffect, useState} from 'react';
 
 import {block} from '../../../../utils';
@@ -31,12 +31,26 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children}) => {
             <div className={b('body')}>
                 <div className={b('side', {front: true})}>
                     <ThemeProvider theme="dark" rootClassName={b('theme-wrapper', {color})} scoped>
-                        <div className={b('card')}>{children}</div>
+                        <ToasterProvider>
+                            <div className={b('card')}>
+                                {children}
+                                <div className={b('toaster')}>
+                                    <ToasterComponent hasPortal={false} />
+                                </div>
+                            </div>
+                        </ToasterProvider>
                     </ThemeProvider>
                 </div>
                 <div className={b('side', {back: true})}>
                     <ThemeProvider theme="light" rootClassName={b('theme-wrapper', {color})} scoped>
-                        <div className={b('card')}>{children}</div>
+                        <ToasterProvider>
+                            <div className={b('card')}>
+                                {children}
+                                <div className={b('toaster')}>
+                                    <ToasterComponent hasPortal={false} />
+                                </div>
+                            </div>
+                        </ToasterProvider>
                     </ThemeProvider>
                 </div>
             </div>

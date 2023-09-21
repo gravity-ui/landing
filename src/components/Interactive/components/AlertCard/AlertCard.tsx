@@ -9,6 +9,7 @@ export const AlertCard = () => {
         message: 'Work it harder, make it better\nDo it faster, makes us stronger',
         theme: 'info',
         view: 'filled',
+        style: {width: 350},
         actions: (
             <Alert.Actions>
                 <Button>{'Make it'}</Button>

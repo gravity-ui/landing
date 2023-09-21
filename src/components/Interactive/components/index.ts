@@ -18,3 +18,5 @@ export * from './ListCard';
 export * from './SegmentCard';
 export * from './AlertCard';
 export * from './InputCard';
+export * from './PaginationCard';
+export * from './ToastersCard';

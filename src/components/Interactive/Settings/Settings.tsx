@@ -1,4 +1,4 @@
-import {HandPointUp} from '@gravity-ui/icons';
+import {HandPointUp, Moon, Sun} from '@gravity-ui/icons';
 import {Icon} from '@gravity-ui/uikit';
 import {useCallback, useEffect, useRef, useState} from 'react';
 
@@ -6,18 +6,23 @@ import {block} from '../../../utils';
 import {useInteractiveContext} from '../InteractiveContext';
 import {allColors} from '../constants';
 
-import './ColorPicker.scss';
+import './Settings.scss';
 
 const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
 
-const b = block('color-picker');
+const b = block('settings');
 
-export const ColorPicker = () => {
-    const {changeColor, color: currentColor} = useInteractiveContext();
-    const [animationsStatuses, setAnimationStatuses] = useState<boolean[]>(
-        allColors.map(() => false),
-    );
-    const lastClickTime = useRef<number>(Date.now() / 1000);
+const defaultAnimationStatuses = [...allColors.map(() => false), false];
+
+const getCurrentTime = () => Date.now() / 1000;
+
+const INACTIVE_TIME = 10; // todo change it
+
+export const Settings = () => {
+    const {changeColor, color: currentColor, switchTheme, theme} = useInteractiveContext();
+    const [animationsStatuses, setAnimationStatuses] =
+        useState<boolean[]>(defaultAnimationStatuses);
+    const lastClickTime = useRef<number>(getCurrentTime());
     const tickRef = useRef<NodeJS.Timer>();
     const isAnimationStarted = useRef(false);
 
@@ -35,7 +40,12 @@ export const ColorPicker = () => {
             });
 
             await sleep(2300);
-            changeColor(allColors[currentAnumationIndex]);
+            if (currentAnumationIndex === 4) {
+                switchTheme();
+            } else {
+                changeColor(allColors[currentAnumationIndex]);
+            }
+
             await sleep(200);
 
             // eslint-disable-next-line
@@ -53,14 +63,16 @@ export const ColorPicker = () => {
     }, []);
 
     const tick = useCallback(() => {
-        if (!isAnimationStarted.current && Date.now() / 1000 - lastClickTime.current >= 5) {
-            isAnimationStarted.current = true;
+        if (
+            !isAnimationStarted.current &&
+            getCurrentTime() - lastClickTime.current >= INACTIVE_TIME
+        ) {
             startAnimation();
         }
     }, [lastClickTime]);
 
     const handleDocumentClick = useCallback(() => {
-        lastClickTime.current = Date.now() / 1000;
+        lastClickTime.current = getCurrentTime();
 
         // stop animations
         isAnimationStarted.current = false;
@@ -98,6 +110,23 @@ export const ColorPicker = () => {
                     )}
                 </div>
             ))}
+            <div className={b('theme-switcher')} onClick={switchTheme}>
+                <Icon
+                    className={b('theme-icon', {active: theme === 'dark'})}
+                    data={Sun}
+                    size={32}
+                />
+                <Icon
+                    className={b('theme-icon', {active: theme === 'light'})}
+                    data={Moon}
+                    size={32}
+                />
+                {animationsStatuses[4] && (
+                    <span className={b('animated-hand')}>
+                        <Icon data={HandPointUp} size={56} />
+                    </span>
+                )}
+            </div>
         </div>
     );
 };

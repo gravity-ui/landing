@@ -7,14 +7,14 @@ interface InteractiveContextParams {
     color: ColorTheme;
     theme: Theme;
     changeColor: (color: ColorTheme) => void;
-    changeTheme: (theme: Theme) => void;
+    switchTheme: () => void;
 }
 
 const InteractiveContext = createContext<InteractiveContextParams>({
     color: ColorTheme.Yellow,
     theme: 'dark',
     changeColor: () => {},
-    changeTheme: () => {},
+    switchTheme: () => {},
 });
 
 InteractiveContext.displayName = 'InteractiveContext';

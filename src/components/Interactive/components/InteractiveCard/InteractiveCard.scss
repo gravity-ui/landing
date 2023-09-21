@@ -108,6 +108,12 @@ $block: '.#{variables.$ns}interactive-card';
             }
         }
     }
+
+    &__toaster {
+        display: flex;
+        flex-direction: column;
+        max-width: 250px;
+    }
 }
 
 #{$block}__theme-wrapper#{$root} {
