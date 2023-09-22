@@ -68,20 +68,20 @@ export const Settings = () => {
         isAnimationStarted.current = true;
 
         while (isAnimationStarted.current && currentColorIndex < allColors.length) {
-            // Включаем анимацию для цвета
+            // Turning on the animation for the color
             enableHandAtIndex(currentColorIndex);
 
             await sleep(ANIMATION_TIME);
             if (!isAnimationStarted.current) {
                 break;
             }
-            // Анимация закончилась, включаем цвет
+            // Animation is over, turn on the color
             changeColor(allColors[currentColorIndex]);
 
-            // Выжидаем немного перед тем как убрать руку
+            // Wait a little before removing the hand
             await sleep(200);
 
-            // Убираем руку с цвета
+            // Hiding the hand
             disableHandAtIndex(currentColorIndex);
             currentColorIndex++;
 
@@ -90,18 +90,18 @@ export const Settings = () => {
             if (!isAnimationStarted.current) {
                 break;
             }
-            // Показываем руку на переключателе темы
+            // Showing a hand on the theme switch
             enableHandAtIndex(4);
             await sleep(ANIMATION_TIME);
 
             if (!isAnimationStarted.current) {
                 break;
             }
-            // Анимация закончилась, меняем тему
+            // Animation is over, change the theme
             switchTheme();
-            // Выжидаем немного перед тем как убрать руку
+            // Wait a little before removing the hand
             await sleep(200);
-            // Убираем руку с темы
+            // Hiding the hand
             disableHandAtIndex(4);
 
             await sleep(2000);
