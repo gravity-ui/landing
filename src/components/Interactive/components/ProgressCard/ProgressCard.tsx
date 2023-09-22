@@ -9,9 +9,9 @@ import './ProgressCard.scss';
 const b = block('progress-card');
 
 const progressSets = [
-    [10, 20, 30],
-    [30, 60, 80],
-    [100, 100, 100],
+    [20, 100, 50, 100],
+    [50, 20, 100, 20],
+    [20, 50, 20, 50],
 ];
 
 export const ProgressCard = () => {
@@ -21,7 +21,7 @@ export const ProgressCard = () => {
     React.useEffect(() => {
         intervalRef.current = setInterval(() => {
             setCurrentSet((prev) => {
-                if (prev + 1 >= progressSets.length) {
+                if (prev + 1 >= progressSets[0].length) {
                     return 0;
                 }
 
@@ -37,9 +37,9 @@ export const ProgressCard = () => {
     return (
         <InteractiveCard>
             <Flex direction="column" space={6} width={220} className={b()}>
-                <Progress value={progressSets[currentSet][0]} />
-                <Progress value={progressSets[currentSet][1]} />
-                <Progress value={progressSets[currentSet][2]} />
+                <Progress value={progressSets[0][currentSet]} />
+                <Progress value={progressSets[1][currentSet]} />
+                <Progress value={progressSets[2][currentSet]} />
             </Flex>
         </InteractiveCard>
     );

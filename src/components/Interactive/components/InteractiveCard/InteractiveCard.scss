@@ -59,7 +59,6 @@ $block: '.#{variables.$ns}interactive-card';
         padding: 0 40px;
         overflow: hidden;
         border-radius: var(--g-border-radius-xl);
-        background: var(--g-color-base-background);
     }
 
     &__theme-wrapper {
@@ -129,10 +128,14 @@ $block: '.#{variables.$ns}interactive-card';
 
     &_theme_light {
         @include themes.g-theme-light;
+        background: #fff;
+        --interactive-list-bg-color: #fff;
     }
 
     &_theme_dark {
         @include themes.g-theme-dark;
+        background: rgba(37, 27, 37, 0.9);
+        --interactive-list-bg-color: #424147;
     }
 
     &_theme_light-hc {

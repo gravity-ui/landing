@@ -1,7 +1,12 @@
 import {useToaster} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {block} from '../../../../utils';
 import {InteractiveCard} from '../InteractiveCard';
+
+import './ToastersCard.scss';
+
+const b = block('toasters-card');
 
 const ToastersCardInner = () => {
     const {add} = useToaster();
@@ -12,7 +17,7 @@ const ToastersCardInner = () => {
             name: 'first',
             title: 'Work it harder',
             content: 'Make it better',
-            autoHiding: 3700,
+            autoHiding: 3500,
             type: 'warning',
             isClosable: false,
         });
@@ -22,7 +27,7 @@ const ToastersCardInner = () => {
                 name: 'second',
                 title: 'Do it faster',
                 content: 'Makes us stronger',
-                autoHiding: 3700,
+                autoHiding: 3500,
                 type: 'success',
                 isClosable: false,
             });
@@ -33,7 +38,7 @@ const ToastersCardInner = () => {
                 name: 'third',
                 title: 'Work it harder',
                 content: 'Make it better',
-                autoHiding: 3700,
+                autoHiding: 3500,
                 type: 'info',
                 isClosable: false,
             });
@@ -44,7 +49,7 @@ const ToastersCardInner = () => {
                 name: 'fourth',
                 title: 'Do it faster',
                 content: 'Makes us stronger',
-                autoHiding: 3700,
+                autoHiding: 3500,
                 type: 'error',
                 isClosable: false,
             });
@@ -53,7 +58,7 @@ const ToastersCardInner = () => {
 
     React.useEffect(() => {
         showToasters();
-        intervalRef.current = setInterval(showToasters, 7000);
+        intervalRef.current = setInterval(showToasters, 8000);
 
         return () => {
             clearInterval(intervalRef.current);
@@ -65,7 +70,7 @@ const ToastersCardInner = () => {
 
 export const ToastersCard = () => {
     return (
-        <InteractiveCard style={{width: 300, alignItems: 'flex-end'}}>
+        <InteractiveCard className={b()}>
             <ToastersCardInner />
         </InteractiveCard>
     );

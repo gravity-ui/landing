@@ -1,0 +1,10 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}toasters-card';
+
+#{$block} {
+    width: 210px;
+    justify-content: flex-end;
+}
