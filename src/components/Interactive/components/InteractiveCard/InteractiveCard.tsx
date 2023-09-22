@@ -30,7 +30,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, style
     }, [localTheme]);
 
     useEffect(() => {
-        let timeoutId;
+        let timeoutId: ReturnType<typeof setTimeout>;
         if (globalTheme !== localTheme) {
             timeoutId = setTimeout(() => {
                 flip();
