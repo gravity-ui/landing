@@ -72,6 +72,7 @@ const typedLanding: CustomPageContent = {
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
+            animated: false,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             backdropFilter: 'blur(60px)',
             colSizes: {

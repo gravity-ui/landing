@@ -2,11 +2,11 @@ import {Section} from '../types';
 
 import guideAlertContent from './content/Alert.mdx';
 import guideBasicsContent from './content/Basics.mdx';
-// import guideBrandingContent from './content/Branding.mdx';
+import guideBrandingContent from './content/Branding.mdx';
 import guideBreadcrumbsContent from './content/Breadcrumbs.mdx';
 // import guideClipboardButtonContent from './content/ClipboardButton.mdx';
-// import guideColorContent from './content/Color.mdx';
-// import guideCornerRadiusContent from './content/CornerRadius.mdx';
+import guideColorContent from './content/Color.mdx';
+import guideCornerRadiusContent from './content/CornerRadius.mdx';
 import guideLabelContent from './content/Label.mdx';
 // import guideLoaderContent from './content/Loader.mdx';
 import guideRadioButtonContent from './content/RadioButton.mdx';
@@ -14,7 +14,7 @@ import guideResourcesContent from './content/Resources.mdx';
 import guideTextAreaContent from './content/TextArea.mdx';
 import guideTextInputContent from './content/TextInput.mdx';
 // import guideToasterContent from './content/Toaster.mdx';
-// import guideTypographyContent from './content/Typography.mdx';
+import guideTypographyContent from './content/Typography.mdx';
 import guideUserContent from './content/User.mdx';
 import guideUserAvatarContent from './content/UserAvatar.mdx';
 
@@ -35,30 +35,30 @@ export const branding: Section = {
             description: '',
             content: guideBasicsContent,
         },
-        // {
-        //     id: 'color',
-        //     title: 'Color',
-        //     description: '',
-        //     content: guideColorContent,
-        // },
-        // {
-        //     id: 'typography',
-        //     title: 'Typography',
-        //     description: '',
-        //     content: guideTypographyContent,
-        // },
-        // {
-        //     id: 'corner-radius',
-        //     title: 'Corner Radius',
-        //     description: '',
-        //     content: guideCornerRadiusContent,
-        // },
-        // {
-        //     id: 'branding',
-        //     title: 'Branding',
-        //     description: '',
-        //     content: guideBrandingContent,
-        // },
+        {
+            id: 'color',
+            title: 'Color',
+            description: '',
+            content: guideColorContent,
+        },
+        {
+            id: 'typography',
+            title: 'Typography',
+            description: '',
+            content: guideTypographyContent,
+        },
+        {
+            id: 'corner-radius',
+            title: 'Corner Radius',
+            description: '',
+            content: guideCornerRadiusContent,
+        },
+        {
+            id: 'branding',
+            title: 'Branding',
+            description: '',
+            content: guideBrandingContent,
+        },
     ],
 };
 
