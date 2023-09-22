@@ -1,0 +1,45 @@
+Used when you have to choose between several mutually exclusive options.
+
+### When to use a DLQ
+
+Similar to checkbox, Radio doesn't trigger action immediately. To do this, you must click the confirmation button (Save / Apply / Send).
+
+The explanatory text on the label should answer the question, "How?" or "Which?"
+
+**When to not use**
+
+Radio cannot be used to switch between page or menu content. This functionality is supported by the [radio-button](https://www.notion.so/RadioButton-88c25c1e4a82458d8613b490f1c3c85b?pvs=21) and tab components.
+
+### Structure
+
+![Structure](/static/images/design/Radio/radio-content.png)
+
+1 — Radio element, 2 — explanatory label
+
+Radio is always used with a label that explains its meaning.
+
+The first option is selected by default.
+
+You can also leave the toggle controls unselected (when all options are removed).
+
+Once an item within a group has been selected, the user cannot deselect it to return the group to its original state (without refreshing the page).
+
+When using a component, we recommend that you always select the first option in the list.
+
+### Sizes
+
+Comes in two sizes: M and L. The size of the component is determined by the size of the page controls. For example, if the page uses size L for inputs, buttons, and other elements, then the radio should be the same size.
+
+![Sizes](/static/images/design/Radio/radio-content.png)
+
+### States
+
+![States](/static/images/design/Radio/radio-state.png)
+
+Default – when the user does not interact with the element
+
+Hover – when hovering over an element and a text label
+
+Checked – selected state
+
+Disabled – disabled state, when the selected option is not available for interaction
