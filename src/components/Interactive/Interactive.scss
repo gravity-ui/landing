@@ -71,10 +71,13 @@ $block: '.#{variables.$ns}interactive';
         justify-content: center;
         z-index: 1;
         gap: 20px;
+    }
 
-        .slider-simple {
-            width: 100%;
-            max-width: 100%;
+    &__slider-simple {
+        width: 100%;
+        max-width: 100%;
+        &_autoplay .swiper-wrapper {
+            transition-timing-function: linear;
         }
     }
 
@@ -82,10 +85,6 @@ $block: '.#{variables.$ns}interactive';
         /* stylelint-disable */
         width: auto !important;
         /* stylelint-enable */ 
-    }
-
-    .swiper-wrapper {
-        transition-timing-function: linear;
     }
 
     &__settings {

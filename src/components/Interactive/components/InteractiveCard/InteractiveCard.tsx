@@ -29,6 +29,14 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, class
         return localTheme === 'light';
     }, [localTheme]);
 
+    const handleClick = useCallback(
+        (event: React.MouseEvent<HTMLDivElement>) => {
+            event.stopPropagation();
+            flip();
+        },
+        [flip],
+    );
+
     useEffect(() => {
         let timeoutId: NodeJS.Timeout;
         if (globalTheme !== localTheme) {
@@ -45,7 +53,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, class
     }, [localTheme, globalTheme]);
 
     return (
-        <div className={b({flipped: isFlipped})} onClick={flip}>
+        <div className={b({flipped: isFlipped})} onClick={handleClick}>
             <div className={b('body')}>
                 <div className={b('side', {front: true})}>
                     <ThemeProvider theme="dark" rootClassName={b('theme-wrapper', {color})} scoped>

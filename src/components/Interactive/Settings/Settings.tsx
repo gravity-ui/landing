@@ -16,7 +16,7 @@ const defaultAnimationStatuses = [...allColors.map(() => false), false];
 
 const getCurrentTime = () => Date.now() / 1000;
 
-const INACTIVE_TIME = 10; // todo change it
+const INACTIVE_TIME = 30;
 const ANIMATION_TIME = 2300;
 
 export const Settings = () => {
@@ -26,6 +26,23 @@ export const Settings = () => {
     const lastClickTime = useRef<number>(getCurrentTime());
     const tickRef = useRef<NodeJS.Timer>();
     const isAnimationStarted = useRef(false);
+
+    const isHandDisabled = useRef(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') {
+            return;
+        }
+
+        // @ts-ignore
+        window.disableHand = () => {
+            isHandDisabled.current = true;
+        };
+        // @ts-ignore
+        window.enableHand = () => {
+            isHandDisabled.current = false;
+        };
+    }, []);
 
     const enableHandAtIndex = (index: number) =>
         setAnimationStatuses((prev) => {
@@ -42,6 +59,10 @@ export const Settings = () => {
         });
 
     const startAnimation = useCallback(async () => {
+        if (isHandDisabled.current) {
+            return;
+        }
+
         let currentColorIndex = 0;
 
         isAnimationStarted.current = true;
@@ -51,6 +72,9 @@ export const Settings = () => {
             enableHandAtIndex(currentColorIndex);
 
             await sleep(ANIMATION_TIME);
+            if (!isAnimationStarted.current) {
+                break;
+            }
             // Анимация закончилась, включаем цвет
             changeColor(allColors[currentColorIndex]);
 
@@ -63,9 +87,16 @@ export const Settings = () => {
 
             await sleep(2000);
 
+            if (!isAnimationStarted.current) {
+                break;
+            }
             // Показываем руку на переключателе темы
             enableHandAtIndex(4);
             await sleep(ANIMATION_TIME);
+
+            if (!isAnimationStarted.current) {
+                break;
+            }
             // Анимация закончилась, меняем тему
             switchTheme();
             // Выжидаем немного перед тем как убрать руку

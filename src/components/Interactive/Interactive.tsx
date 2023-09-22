@@ -1,5 +1,5 @@
 import {Theme} from '@gravity-ui/uikit';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import 'swiper/css';
 import {Autoplay} from 'swiper/modules';
 import {Swiper, SwiperClass, SwiperSlide} from 'swiper/react';
@@ -16,32 +16,37 @@ const b = block('interactive');
 interface SimpleSliderProps {
     items: React.FC[];
     reverseDirection?: boolean;
+    autoplayDisabled?: boolean;
 }
 
 const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
-    ({items, reverseDirection = false}) => {
+    ({items, reverseDirection = false, autoplayDisabled}) => {
+        const swiperInstance = useRef<SwiperClass>();
         const clonnedComponents = [...items, ...items, ...items, ...items, ...items, ...items];
 
-        const handlePauseAutoplay = (swiper: SwiperClass) => {
+        useEffect(() => {
+            if (autoplayDisabled) {
+                swiperInstance.current?.autoplay.stop();
+            } else {
+                swiperInstance.current?.autoplay.start();
+            }
+        }, [autoplayDisabled]);
+
+        const handleInit = useCallback((swiper: SwiperClass) => {
+            swiperInstance.current = swiper;
+        }, []);
+
+        const handlePauseAutoplay = useCallback((swiper: SwiperClass) => {
             swiper.autoplay.resume();
-            setTimeout(() => {
-                swiper.autoplay.resume();
-            }, 200);
-            setTimeout(() => {
-                swiper.autoplay.resume();
-            }, 400);
-            setTimeout(() => {
-                swiper.autoplay.resume();
-            }, 600);
-        };
+        }, []);
 
         return (
             <Swiper
+                onInit={handleInit}
                 slidesPerView="auto"
                 loop={true}
                 spaceBetween={20}
                 speed={reverseDirection ? 200000 : 10000}
-                swipeHandler={'qwrwqr'}
                 allowTouchMove={false}
                 autoplay={{
                     delay: 0,
@@ -49,8 +54,9 @@ const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
                     reverseDirection,
                 }}
                 modules={[Autoplay]}
+                noSwipingClass="gravity-ui-landing-interactive-card"
                 grabCursor={false}
-                className="slider-simple"
+                className={b('slider-simple', {autoplay: !autoplayDisabled})}
                 onAutoplayPause={handlePauseAutoplay}
             >
                 {clonnedComponents.map((Comp, index) => (
@@ -66,6 +72,22 @@ const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
 export const Interactive = () => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [color, setColor] = useState<ColorTheme>(ColorTheme.Yellow);
+    const [autoplayDisabled, setAutoplayDisabled] = useState(false);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') {
+            return;
+        }
+
+        // @ts-ignore
+        window.enableAutoplay = () => {
+            setAutoplayDisabled(false);
+        };
+        // @ts-ignore
+        window.disableAutoplay = () => {
+            setAutoplayDisabled(true);
+        };
+    }, []);
 
     const switchTheme = useCallback(() => {
         setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -82,9 +104,9 @@ export const Interactive = () => {
                     <span className={b('logo-image')} />
                 </div>
                 <div className={b('sliders')}>
-                    <SimpleSlider items={firstSliderItems} />
-                    <SimpleSlider items={secondSliderItems} />
-                    <SimpleSlider items={thirdSliderItems} />
+                    <SimpleSlider items={firstSliderItems} autoplayDisabled={autoplayDisabled} />
+                    <SimpleSlider items={secondSliderItems} autoplayDisabled={autoplayDisabled} />
+                    <SimpleSlider items={thirdSliderItems} autoplayDisabled={autoplayDisabled} />
                 </div>
                 <div className={b('settings')}>
                     <Settings />
