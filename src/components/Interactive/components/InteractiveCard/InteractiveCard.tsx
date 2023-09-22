@@ -10,10 +10,10 @@ const b = block('interactive-card');
 
 interface InteractiveCardProps {
     children: React.ReactNode;
-    style?: any;
+    className?: string;
 }
 
-export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, style}) => {
+export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, className}) => {
     const {color, theme: globalTheme} = useInteractiveContext();
     const [localTheme, setLocalTheme] = useState<Theme>('dark');
 
@@ -45,12 +45,12 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, style
     }, [localTheme, globalTheme]);
 
     return (
-        <div className={b({flipped: isFlipped})} onClick={flip} style={style}>
+        <div className={b({flipped: isFlipped})} onClick={flip}>
             <div className={b('body')}>
                 <div className={b('side', {front: true})}>
                     <ThemeProvider theme="dark" rootClassName={b('theme-wrapper', {color})} scoped>
                         <ToasterProvider>
-                            <div className={b('card')}>
+                            <div className={b('card', className)}>
                                 {children}
                                 <div className={b('toaster')}>
                                     <ToasterComponent hasPortal={false} />
@@ -62,7 +62,7 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, style
                 <div className={b('side', {back: true})}>
                     <ThemeProvider theme="light" rootClassName={b('theme-wrapper', {color})} scoped>
                         <ToasterProvider>
-                            <div className={b('card')}>
+                            <div className={b('card', className)}>
                                 {children}
                                 <div className={b('toaster')}>
                                     <ToasterComponent hasPortal={false} />

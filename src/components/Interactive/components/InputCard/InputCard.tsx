@@ -15,7 +15,12 @@ const getStringParts = (str: string) => {
     return result;
 };
 
-const parts = getStringParts('Do it harder');
+const groups = [
+    getStringParts('Do it harder'),
+    getStringParts('Make it better'),
+    getStringParts('Do it faster'),
+    getStringParts('Makes us stronger'),
+];
 
 export const InputCard = () => {
     const [inputValue, setInputValue] = React.useState('');
@@ -25,12 +30,14 @@ export const InputCard = () => {
         isRunningInput.current = true;
 
         while (isRunningInput.current) {
-            for (const part of parts) {
-                setInputValue(part);
-                await sleep(150);
-            }
+            for (const group of groups) {
+                for (const part of group) {
+                    setInputValue(part);
+                    await sleep(150);
+                }
 
-            await sleep(6000);
+                await sleep(6000);
+            }
         }
     }, []);
 

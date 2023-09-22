@@ -9,9 +9,9 @@ export const PaginationCard = () => {
             <Pagination
                 onUpdate={() => {}}
                 page={1}
-                pageSize={100}
+                pageSize={10}
                 pageSizeOptions={[20, 50, 100]}
-                total={950}
+                total={30}
             />
         </InteractiveCard>
     );

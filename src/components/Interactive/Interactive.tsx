@@ -24,6 +24,15 @@ const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
 
         const handlePauseAutoplay = (swiper: SwiperClass) => {
             swiper.autoplay.resume();
+            setTimeout(() => {
+                swiper.autoplay.resume();
+            }, 200);
+            setTimeout(() => {
+                swiper.autoplay.resume();
+            }, 400);
+            setTimeout(() => {
+                swiper.autoplay.resume();
+            }, 600);
         };
 
         return (
@@ -32,6 +41,8 @@ const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
                 loop={true}
                 spaceBetween={20}
                 speed={reverseDirection ? 200000 : 10000}
+                swipeHandler={'qwrwqr'}
+                allowTouchMove={false}
                 autoplay={{
                     delay: 0,
                     disableOnInteraction: true,

@@ -1,7 +1,12 @@
 import {List} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {block} from '../../../../utils';
 import {InteractiveCard} from '../InteractiveCard';
+
+import './ListCard.scss';
+
+const b = block('list-card');
 
 export const ListCard = () => {
     const ITEMS = [
@@ -15,12 +20,17 @@ export const ListCard = () => {
 
     return (
         <InteractiveCard>
-            <List
-                items={ITEMS}
-                itemsHeight={(items) => Math.min(5, items.length) * 14}
-                filterPlaceholder="Search"
-                emptyPlaceholder="Nobody left here"
-            />
+            <div className={b()}>
+                <List
+                    className={b('list')}
+                    filterClassName={b('filter')}
+                    itemClassName={b('item')}
+                    items={ITEMS}
+                    itemsHeight={(items) => Math.min(5, items.length) * 14}
+                    filterPlaceholder="Search"
+                    emptyPlaceholder="Nobody left here"
+                />
+            </div>
         </InteractiveCard>
     );
 };
