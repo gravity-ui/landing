@@ -72,7 +72,7 @@
   font-weight: 600;
   padding-bottom: .3em;
   font-size: 2em;
-  border-bottom: 1px solid #21262d;
+  /* border-bottom: 1px solid #21262d; */
 }
 
 .markdown-body mark {
