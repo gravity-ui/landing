@@ -1,5 +1,5 @@
 import {Theme, ThemeProvider, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 
 import {block} from '../../../../utils';
 import {useInteractiveContext} from '../../InteractiveContext';
@@ -25,7 +25,24 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, style
         setLocalTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
     }, []);
 
-    const isFlipped = localTheme === 'light';
+    const isFlipped = useMemo(() => {
+        return localTheme === 'light';
+    }, [localTheme]);
+
+    useEffect(() => {
+        let timeoutId;
+        if (globalTheme !== localTheme) {
+            timeoutId = setTimeout(() => {
+                flip();
+            }, 5000);
+        }
+
+        return () => {
+            if (timeoutId) {
+                clearTimeout(timeoutId);
+            }
+        };
+    }, [localTheme, globalTheme]);
 
     return (
         <div className={b({flipped: isFlipped})} onClick={flip} style={style}>

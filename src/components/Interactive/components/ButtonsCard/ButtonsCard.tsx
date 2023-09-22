@@ -16,7 +16,7 @@ export const ButtonsCard = () => {
                 </Row>
                 <Row space={2}>
                     <Col>
-                        <Button view={'action'}>{'Do it'}</Button>
+                        <Button view={'raised'}>{'Do it'}</Button>
                     </Col>
                     <Col>
                         <Button view={'outlined-danger'}>{'Makes us'}</Button>

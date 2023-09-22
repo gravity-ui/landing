@@ -2,6 +2,8 @@ import {Gear, Star, StarFill} from '@gravity-ui/icons';
 import {Button, Checkbox, Icon, Table, TableColumnConfig} from '@gravity-ui/uikit';
 import React from 'react';
 
+import avatar1Asset from '../../../../assets/avatar-1.png';
+import avatar2Asset from '../../../../assets/avatar-2.png';
 import {block} from '../../../../utils';
 import {InteractiveCard} from '../InteractiveCard';
 
@@ -22,7 +24,7 @@ export const TableCard = () => {
             first: <Checkbox>{'Harder'}</Checkbox>,
             second: (
                 <div className={b('avatar')}>
-                    <img alt={''} src="/static/interactive/telepuz1.png" />
+                    <img alt={''} src={avatar1Asset.src} />
                 </div>
             ),
             third: 'Faster',
@@ -36,7 +38,7 @@ export const TableCard = () => {
             first: <Checkbox checked={true}>{'Better'}</Checkbox>,
             second: (
                 <div className={b('avatar')}>
-                    <img alt={''} src="/static/interactive/telepuz2.png" />
+                    <img alt={''} src={avatar2Asset.src} />
                 </div>
             ),
             third: 'Stronger',
