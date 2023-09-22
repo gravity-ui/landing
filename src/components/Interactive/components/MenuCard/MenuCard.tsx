@@ -5,7 +5,7 @@ import {InteractiveCard} from '../InteractiveCard';
 export const MenuCard = () => {
     return (
         <InteractiveCard>
-            <Menu size="l">
+            <Menu size="l" style={{borderRadius: '12px'}}>
                 <Menu.Item>{'Work it harder'}</Menu.Item>
                 <Menu.Group>
                     <Menu.Item>{'Make it better'}</Menu.Item>
