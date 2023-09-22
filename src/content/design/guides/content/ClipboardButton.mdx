@@ -1,0 +1,39 @@
+Clipboard copy button is a modification of the `Button` `Flat` component with the `ClipboardIcon` icon placed separately.
+
+### Icon
+
+Within the `ClipboardButton` is a `ClipboardIcon` component, which is an animated icon with two states: Success and Error. To customize the copy button, use the standard button component `Button` with the `ClipboardIcon` icon.
+
+### States
+
+![States](/static/images/design/ClipboardButton/States.png)
+
+### Sizes
+
+The component supports standard button sizes `XS`, `S`, `M`, `L`, and `XL`
+
+### Behavior
+
+If content copying is not performed frequently or if the icon reduces readability, the copy button will not appear until the cursor is moved closer.
+
+![In tables, the icon is hidden until the cursor is placed over a cell with content](/static/images/design/ClipboardButton/Behavior.png)
+
+In tables, the icon is hidden until the cursor is placed over a cell with content
+
+### Tooltip
+
+The component has a tooltip that can be disabled. It is used to indicate what content will be copied.
+
+![The task key is copied in the Yandex Tracker service](/static/images/design/ClipboardButton/Tooltip.png)
+
+The task key is copied in the Yandex Tracker service
+
+### Use cases
+
+A block code is copied in the documentation.
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases1.png)
+
+Cell values are copied in tables.
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases2.png)
