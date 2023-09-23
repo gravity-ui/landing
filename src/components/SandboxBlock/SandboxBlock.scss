@@ -86,7 +86,6 @@ $block: '.#{variables.$ns}sandbox-block';
     }
 
     &__top-actions {
-        background-color: var(--g-color-base-background);
         display: flex;
         justify-content: space-between;
         padding: 12px 10px;
@@ -104,7 +103,6 @@ $block: '.#{variables.$ns}sandbox-block';
         overflow: auto;
         overflow-x: hidden;
         border-left: 1px solid rgba(255, 255, 255, 0.2);
-        background: var(--g-color-base-background);
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             height: 277px;
