@@ -104,7 +104,7 @@ $block: '.#{variables.$ns}sandbox-block';
         overflow: auto;
         overflow-x: hidden;
         border-left: 1px solid rgba(255, 255, 255, 0.2);
-        background: #251b25;
+        background: var(--g-color-base-background);
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             height: 277px;

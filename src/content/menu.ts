@@ -12,12 +12,11 @@ export const menu: MenuItem[] = [
     {
         title: 'Components',
         // url: '/components',
-        url: '/components/uikit/button',
+        url: '/components/uikit',
     },
     {
         title: 'Design',
         url: '/design',
-        // isComingSoon: true,
     },
     {
         title: 'Icons',
