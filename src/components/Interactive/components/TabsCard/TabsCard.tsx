@@ -1,6 +1,9 @@
 import {Tabs} from '@gravity-ui/uikit';
+import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';
+
+const TAB_CHANGE_TIMEOUT = 3000;
 
 const TABS = {
     FIRST: 'Harder',
@@ -33,9 +36,27 @@ const tabItems = [
 ];
 
 export const TabsCard = () => {
+    const [activeTab, setActiveTab] = React.useState(tabItems[0].id);
+
+    React.useEffect(() => {
+        let currentTabIndex = 0;
+        const intervalId = setInterval(() => {
+            if (currentTabIndex === 3) {
+                currentTabIndex = 0;
+            } else {
+                currentTabIndex += 1;
+            }
+            setActiveTab(tabItems[currentTabIndex].id);
+        }, TAB_CHANGE_TIMEOUT);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [setActiveTab]);
+
     return (
         <InteractiveCard>
-            <Tabs items={tabItems} />
+            <Tabs activeTab={activeTab} items={tabItems} />
         </InteractiveCard>
     );
 };
