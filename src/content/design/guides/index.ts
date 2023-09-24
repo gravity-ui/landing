@@ -9,14 +9,14 @@ import guideCardContent from './content/Card.mdx';
 import guideClipboardButtonContent from './content/ClipboardButton.mdx';
 import guideColorContent from './content/Color.mdx';
 import guideCornerRadiusContent from './content/CornerRadius.mdx';
-// import guideDialogContent from './content/Dialog.mdx';
+import guideDialogContent from './content/Dialog.mdx';
 import guideDropdownMenuContent from './content/DropdownMenu.mdx';
 import guideGridAndContainerContent from './content/GridAndContainer.mdx';
 import guideHotkeyContent from './content/Hotkey.mdx';
 import guideLabelContent from './content/Label.mdx';
 import guideLinksContent from './content/Links.mdx';
 import guideListItemContent from './content/ListItem.mdx';
-// import guideLoaderContent from './content/Loader.mdx';
+import guideLoaderContent from './content/Loader.mdx';
 import guideModuleContent from './content/Module.mdx';
 import guidePersonaContent from './content/Persona.mdx';
 import guideRadioContent from './content/Radio.mdx';
@@ -28,7 +28,7 @@ import guideSpinContent from './content/Spin.mdx';
 import guideSwitchContent from './content/Switch.mdx';
 import guideTextAreaContent from './content/TextArea.mdx';
 import guideTextInputContent from './content/TextInput.mdx';
-// import guideToasterContent from './content/Toaster.mdx';
+import guideToasterContent from './content/Toaster.mdx';
 import guideTooltipContent from './content/Tooltip.mdx';
 import guideTypographyContent from './content/Typography.mdx';
 import guideUserContent from './content/User.mdx';
@@ -125,12 +125,12 @@ export const guides: Section = {
             description: '',
             content: guideClipboardButtonContent,
         },
-        // {
-        //     id: 'dialog',
-        //     title: 'Dialog',
-        //     description: '',
-        //     content: guideDialogContent,
-        // },
+        {
+            id: 'dialog',
+            title: 'Dialog',
+            description: '',
+            content: guideDialogContent,
+        },
         {
             id: 'dropdown-menu',
             title: 'DropdownMenu',
@@ -161,12 +161,12 @@ export const guides: Section = {
             description: '',
             content: guideListItemContent,
         },
-        // {
-        //     id: 'loader',
-        //     title: 'Loader',
-        //     description: '',
-        //     content: guideLoaderContent,
-        // },
+        {
+            id: 'loader',
+            title: 'Loader',
+            description: '',
+            content: guideLoaderContent,
+        },
         {
             id: 'persona',
             title: 'Persona',
@@ -222,12 +222,12 @@ export const guides: Section = {
             description: '',
             content: guideTextInputContent,
         },
-        // {
-        //     id: 'toaster',
-        //     title: 'Toaster',
-        //     description: '',
-        //     content: guideToasterContent,
-        // },
+        {
+            id: 'toaster',
+            title: 'Toaster',
+            description: '',
+            content: guideToasterContent,
+        },
         {
             id: 'tooltip',
             title: 'Tooltip',
