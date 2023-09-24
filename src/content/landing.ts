@@ -155,7 +155,9 @@ const typedLanding: CustomPageContent = {
             color: '#23151e',
             image: bannerAsset,
             commands: [
-                'npx create-react-app ./my-project --template gravity-ui && cd my-project',
+                'git clone git@github.com:gravity-ui/gravity-ui-cra-template.git my-project',
+                'cd my-project/template',
+                'npm i',
                 'npm run dev',
             ],
         },
