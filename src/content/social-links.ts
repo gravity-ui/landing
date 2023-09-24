@@ -1,7 +1,7 @@
 import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
 
+import figmaFillIcon from '../assets/icons/figma-fill.svg';
 import githubIcon from '../assets/icons/github.svg';
-import storybookIcon from '../assets/icons/storybook.svg';
 import telegramIcon from '../assets/icons/telegram.svg';
 
 export type SocialLinkItem = {
@@ -17,9 +17,9 @@ export const socialLinks: SocialLinkItem[] = [
         icon: telegramIcon,
     },
     {
-        title: 'Storybook',
-        url: 'https://preview.gravity-ui.com/uikit/',
-        icon: storybookIcon,
+        title: 'Figma',
+        url: 'https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)',
+        icon: figmaFillIcon,
     },
     {
         title: 'GitHub',

@@ -1,0 +1,1 @@
+export {PaginationCard} from './PaginationCard';

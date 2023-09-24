@@ -1,0 +1,1 @@
+export {IconsPromoCard} from './IconsPromoCard';

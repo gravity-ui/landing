@@ -8,8 +8,8 @@ import companiesTabletAsset from '../assets/companies-tablet.svg';
 import featureShieldAsset from '../assets/feature-shield.svg';
 import featureStarAsset from '../assets/feature-star.svg';
 import featureUnionAsset from '../assets/feature-union.svg';
+import figmaFillIcon from '../assets/icons/figma-fill.svg';
 import githubIcon from '../assets/icons/github.svg';
-import storybookIcon from '../assets/icons/storybook.svg';
 import {CustomBlock} from '../blocks/constants';
 import {CustomBlockModel} from '../blocks/types';
 import {libs} from '../libs.mjs';
@@ -42,10 +42,10 @@ const typedLanding: CustomPageContent = {
                     target: '_blank',
                 },
                 {
-                    text: 'Storybook',
+                    text: 'Figma',
                     view: 'outlined',
-                    icon: storybookIcon,
-                    href: 'https://preview.gravity-ui.com/uikit/',
+                    icon: figmaFillIcon,
+                    href: 'https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)',
                     target: '_blank',
                 },
             ],

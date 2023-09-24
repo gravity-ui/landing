@@ -1,0 +1,93 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}settings';
+
+@keyframes handTap {
+    from {
+        opacity: 1;
+        left: -3px;
+        bottom: -70px;
+    }
+    to {
+        transform: scale(1.3);
+        left: -3px;
+        bottom: -50px;
+        opacity: 1;
+    }
+}
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    &__circle {
+        cursor: pointer;
+        padding: 3px;
+        border: 3px solid;
+        border-color: transparent;
+        position: relative;
+        transition: border-color 0.7s ease;
+        border-radius: 40px;
+
+        &_color {
+            &_yellow {
+                --circle-color: #ffbe5c;
+            }
+
+            &_blue {
+                --circle-color: #5282ff;
+            }
+
+            &_green {
+                --circle-color: #3bbc50;
+            }
+
+            &_red {
+                --circle-color: #ff5958;
+            }
+        }
+
+        &_active {
+            border-color: var(--circle-color);
+        }
+
+        &-inner {
+            width: 36px;
+            height: 36px;
+            background: var(--circle-color);
+            border-radius: 40px;
+        }
+    }
+
+    &__animated-hand {
+        opacity: 0;
+        position: absolute;
+        left: -3px;
+        bottom: -70px;
+        animation: 2.5s ease 0s normal none running handTap;
+        color: #fff;
+    }
+
+    &__theme-switcher {
+        cursor: pointer;
+        margin-left: 76px;
+        position: relative;
+    }
+
+    &__theme-icon {
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+
+        &_active {
+            opacity: 1;
+        }
+
+        &:last-of-type {
+            position: absolute;
+            left: 0;
+        }
+    }
+}

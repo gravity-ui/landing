@@ -1,0 +1,34 @@
+@function opaque-color($desired-color, $background-color: #fff) {
+    $r1: red($background-color);
+    $g1: green($background-color);
+    $b1: blue($background-color);
+
+    $r2: red($desired-color);
+    $g2: green($desired-color);
+    $b2: blue($desired-color);
+    $a2: alpha($desired-color);
+
+    $r: round($r1 + ($r2 - $r1) * $a2);
+    $g: round($g1 + ($g2 - $g1) * $a2);
+    $b: round($b1 + ($b2 - $b1) * $a2);
+
+    @return rgb($r, $g, $b);
+}
+
+@mixin brand-vars($brand-color, $bg-color) {
+    @for $i from 0 through 10 {
+        $alpha: 1;
+
+        @if $i == 10 {
+            $alpha: 0.05;
+        } @else {
+            $alpha: 1 - 0.1 * $i;
+        }
+
+        $color: change-color($brand-color, $alpha: $alpha);
+        $solid-color: opaque-color($color, $bg-color);
+
+        --g-color-private-brand-#{$alpha * 1000}: #{$color};
+        --g-color-private-brand-#{$alpha * 1000}-solid: #{$solid-color};
+    }
+}

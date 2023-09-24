@@ -21,6 +21,7 @@ const b = block('layout');
 export type LayoutProps = {
     title?: string;
     children?: React.ReactNode;
+    showOnlyContent?: boolean;
 };
 
 const lang = Lang.En;
@@ -29,7 +30,7 @@ const theme = Theme.Dark;
 configureUiKit({lang});
 configurePageConstructor({lang});
 
-export const Layout: React.FC<LayoutProps> = ({title, children}) => {
+export const Layout: React.FC<LayoutProps> = ({title, children, showOnlyContent}) => {
     return (
         <React.Fragment>
             <Head>
@@ -39,12 +40,14 @@ export const Layout: React.FC<LayoutProps> = ({title, children}) => {
 
             <PageConstructorProvider theme={theme}>
                 <div className={b()}>
-                    <div className={b('menu')} id={MENU_ID}>
-                        <Menu />
-                    </div>
+                    {!showOnlyContent && (
+                        <div className={b('menu')} id={MENU_ID}>
+                            <Menu />
+                        </div>
+                    )}
                     <div className={b('wrapper')} id={CONTENT_WRAPPER_ID}>
                         <div className={b('content')}>{children}</div>
-                        <Footer />
+                        {!showOnlyContent && <Footer />}
                     </div>
                 </div>
             </PageConstructorProvider>

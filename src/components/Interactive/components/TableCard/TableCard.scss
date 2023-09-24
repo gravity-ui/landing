@@ -1,0 +1,45 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}slider-item';
+
+#{$block} {
+    &_small {
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+
+        padding: 22px;
+
+        & .yc-col {
+            flex-grow: 0;
+        }
+    }
+
+    &__avatar {
+        $avatarSize: 28px;
+        $transitionDuration: 0.1s;
+        $transitionTimingFunction: ease-in-out;
+
+        width: $avatarSize;
+        height: $avatarSize;
+        display: flex;
+        align-items: center;
+        border-radius: 50%;
+        overflow: hidden;
+        justify-content: center;
+        background-color: var(--g-color-base-generic-accent);
+
+        transition-property: background-color;
+        transition-duration: $transitionDuration;
+        transition-timing-function: $transitionTimingFunction;
+
+        img {
+            width: $avatarSize;
+            height: $avatarSize;
+            object-fit: cover;
+        }
+    }
+}
