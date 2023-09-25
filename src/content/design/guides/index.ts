@@ -36,7 +36,7 @@ import guideUserAvatarContent from './content/UserAvatar.mdx';
 
 export const branding: Section = {
     id: 'branding',
-    title: 'General / Foundation',
+    title: 'General',
     description: 'Design guides description',
     articles: [
         {
@@ -92,7 +92,7 @@ export const branding: Section = {
 
 export const guides: Section = {
     id: 'guides',
-    title: 'Design guides',
+    title: 'Components',
     description: 'Design guides description',
     articles: [
         {
