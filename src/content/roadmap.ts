@@ -26,7 +26,7 @@ export const roadmapTasks: RoadmapTask[] = [
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>UIKit:</b> improvements in digital accessibility with a11y',
+        title: '<b>UIKit:</b> improvements in digital accessibility',
         status: RoadmapTaskStatus.InProgress,
     },
 ];
