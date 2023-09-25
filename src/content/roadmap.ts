@@ -2,10 +2,6 @@ import {RoadmapTask, RoadmapTaskStatus} from '../components/Roadmap';
 
 export const roadmapTasks: RoadmapTask[] = [
     {
-        title: '<b>Icons:</b> New section of Gravity site with search and preview',
-        status: RoadmapTaskStatus.Completed,
-    },
-    {
         title: '<b>Design:</b> Public Figma templates',
         status: RoadmapTaskStatus.Completed,
     },
