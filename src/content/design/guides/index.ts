@@ -5,7 +5,10 @@ import guideAlertContent from './content/Alert.mdx';
 import guideBasicsContent from './content/Basics.mdx';
 import guideBrandingContent from './content/Branding.mdx';
 import guideBreadcrumbsContent from './content/Breadcrumbs.mdx';
+import guideButtonContent from './content/Button.mdx';
 import guideCardContent from './content/Card.mdx';
+import guideChangelogDialogContent from './content/ChangelogDialog.mdx';
+import guideCheckboxContent from './content/Checkbox.mdx';
 import guideClipboardButtonContent from './content/ClipboardButton.mdx';
 import guideColorContent from './content/Color.mdx';
 import guideCornerRadiusContent from './content/CornerRadius.mdx';
@@ -114,10 +117,28 @@ export const guides: Section = {
             content: guideBreadcrumbsContent,
         },
         {
+            id: 'button',
+            title: 'Button',
+            description: '',
+            content: guideButtonContent,
+        },
+        {
             id: 'card',
             title: 'Card',
             description: '',
             content: guideCardContent,
+        },
+        {
+            id: 'changelog-dialog',
+            title: 'Changelog Dialog',
+            description: '',
+            content: guideChangelogDialogContent,
+        },
+        {
+            id: 'checkbox',
+            title: 'Checkbox',
+            description: '',
+            content: guideCheckboxContent,
         },
         {
             id: 'clipboard-button',
