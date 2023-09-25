@@ -23,9 +23,12 @@ import guideRadioContent from './content/Radio.mdx';
 import guideRadioButtonContent from './content/RadioButton.mdx';
 import guideRadioGroupContent from './content/RadioGroup.mdx';
 import guideResourcesContent from './content/Resources.mdx';
+import guideSelectContent from './content/Select.mdx';
 import guideSkeletonContent from './content/Skeleton.mdx';
 import guideSpinContent from './content/Spin.mdx';
 import guideSwitchContent from './content/Switch.mdx';
+import guideTableContent from './content/Table.mdx';
+import guideTabsContent from './content/Tabs.mdx';
 import guideTextAreaContent from './content/TextArea.mdx';
 import guideTextInputContent from './content/TextInput.mdx';
 import guideToasterContent from './content/Toaster.mdx';
@@ -192,6 +195,12 @@ export const guides: Section = {
             content: guideRadioGroupContent,
         },
         {
+            id: 'select',
+            title: 'Select',
+            description: '',
+            content: guideSelectContent,
+        },
+        {
             id: 'skeleton',
             title: 'Skeleton',
             description: '',
@@ -209,7 +218,18 @@ export const guides: Section = {
             description: '',
             content: guideSwitchContent,
         },
-
+        {
+            id: 'table',
+            title: 'Table',
+            description: '',
+            content: guideTableContent,
+        },
+        {
+            id: 'tabs',
+            title: 'Tabs',
+            description: '',
+            content: guideTabsContent,
+        },
         {
             id: 'text-area',
             title: 'Text Area',
