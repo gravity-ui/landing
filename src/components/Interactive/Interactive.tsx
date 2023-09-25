@@ -79,6 +79,9 @@ export const Interactive = () => {
             return;
         }
 
+        // prevent scroll page
+        document.body.style.overflow = 'hidden';
+
         // @ts-ignore
         window.enableAutoplay = () => {
             setAutoplayDisabled(false);
