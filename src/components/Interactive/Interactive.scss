@@ -7,11 +7,13 @@ $block: '.#{variables.$ns}interactive';
 #{$block} {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
     background-image: url('../../assets/interactive_page_bg.jpg');
     background-size: cover;
     position: relative;
+    touch-action: none;
+    user-select: none;
 
     &.yellow {
         --bg-tint-color: #ffbe5c;
