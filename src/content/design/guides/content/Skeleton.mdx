@@ -1,0 +1,35 @@
+Animated placeholder that replaces actual content during content loading until the interface is ready for user interaction. Used if loading time does not exceed 300 ms.
+
+### Structure
+
+Depending on the content, can take the shape of a rectangle, a circle, or a combination of the two.
+
+![IMG - 11.png](/static/images/design/Skeleton/IMG_-_11.png)
+
+### Sizes
+
+The component adapts to the content container that it replaces during loading.
+
+### Use cases
+
+1. Can show the entire page
+![Frame 1.png](/static/images/design/Skeleton/Frame_1.png)
+
+2. Can replace only a portion of the content, allowing interaction with the rest of the interface
+![Frame 2.png](/static/images/design/Skeleton/Frame_2.png)
+
+### Recommendations
+
+**Use**
+
+1. When the content type can be predicted after loading
+2. Loading time is less than 300 ms
+3. If the skeleton is used for asynchronous loading, it should be displayed exactly where the loading happens because loading one block of elements should not block the rest of the interface.
+
+![IMG - 88.png](/static/images/design/Skeleton/IMG_-_88.png)
+
+**Don't use**
+
+1. If loading takes more than three seconds, it’s better to use a spin, or a loader,
+2. If the loading time exceeds 10 seconds and the exact duration is known, a progress bar should be displayed.
+3. When loading is initiated by a button click, using the state of the button as feedback is sufficient, especially in modal windows.
