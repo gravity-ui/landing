@@ -1,7 +1,7 @@
 import {Theme} from '@gravity-ui/uikit';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import 'swiper/css';
-import {Autoplay} from 'swiper/modules';
+import {Autoplay, EffectCreative} from 'swiper/modules';
 import {Swiper, SwiperClass, SwiperSlide} from 'swiper/react';
 
 import {block} from '../../utils';
@@ -69,6 +69,49 @@ const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
     },
 );
 
+const Title = () => (
+    <div className={b('title-wrapper')}>
+        <Swiper
+            slidesPerView={1}
+            loop={true}
+            direction="vertical"
+            className={b('title-slider')}
+            spaceBetween={10}
+            speed={700}
+            allowTouchMove={false}
+            autoplay={{
+                delay: 4000,
+                reverseDirection: true,
+                disableOnInteraction: true,
+            }}
+            creativeEffect={{
+                next: {
+                    translate: [0, '110%', 0],
+                    opacity: 0,
+                },
+                prev: {
+                    translate: [0, '-170%', 0],
+                    opacity: 0,
+                },
+            }}
+            modules={[Autoplay, EffectCreative]}
+            height={64}
+            effect={'creative'}
+            fadeEffect={{crossFade: true}}
+        >
+            <SwiperSlide>
+                <span>Design system</span>
+            </SwiperSlide>
+            <SwiperSlide>
+                <span>Components</span>
+            </SwiperSlide>
+            <SwiperSlide>
+                <span>Libraries</span>
+            </SwiperSlide>
+        </Swiper>
+    </div>
+);
+
 export const Interactive = () => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [color, setColor] = useState<ColorTheme>(ColorTheme.Yellow);
@@ -103,8 +146,9 @@ export const Interactive = () => {
     return (
         <InteractiveContextProvider value={value}>
             <div className={b(null, color)}>
-                <div className={b('logo')}>
+                <div className={b('header')}>
                     <span className={b('logo-image')} />
+                    <Title />
                 </div>
                 <div className={b('sliders')}>
                     <SimpleSlider items={firstSliderItems} autoplayDisabled={autoplayDisabled} />
