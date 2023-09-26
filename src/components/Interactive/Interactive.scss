@@ -49,12 +49,14 @@ $block: '.#{variables.$ns}interactive';
         transition: all 0.5s ease;
     }
 
-    &__logo {
+    &__header {
         display: flex;
         align-items: center;
-        justify-content: center;
-        padding-top: 80px;
-        padding-bottom: 57px;
+        justify-content: flex-start;
+        padding-top: 75px;
+        padding-bottom: 60px;
+        padding-left: 108px;
+        position: relative;
     }
 
     &__logo-image {
@@ -64,6 +66,32 @@ $block: '.#{variables.$ns}interactive';
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
+    }
+
+    &__title-wrapper {
+        margin-left: 72px;
+        position: absolute;
+        left: 500px;
+        top: 82px;
+    }
+
+    &__title-slider {
+        height: 198px;
+
+        span {
+            font-size: 64px;
+            color: rgba(255, 190, 92, 0.6);
+            font-weight: 300;
+            line-height: 100%;
+        }
+
+        .swiper-slide {
+            transition: all 1.2s ease;
+        }
+
+        .swiper-slide-next {
+            opacity: 0;
+        }
     }
 
     &__sliders {
