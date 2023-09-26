@@ -21,7 +21,11 @@ import guideLinksContent from './content/Links.mdx';
 import guideListItemContent from './content/ListItem.mdx';
 import guideLoaderContent from './content/Loader.mdx';
 import guideModuleContent from './content/Module.mdx';
+import guidePaginatorContent from './content/Paginator.mdx';
 import guidePersonaContent from './content/Persona.mdx';
+import guidePopoverContent from './content/Popover.mdx';
+import guidePopupContent from './content/Popup.mdx';
+import guideProgressContent from './content/Progress.mdx';
 import guideRadioContent from './content/Radio.mdx';
 import guideRadioButtonContent from './content/RadioButton.mdx';
 import guideRadioGroupContent from './content/RadioGroup.mdx';
@@ -192,10 +196,34 @@ export const guides: Section = {
             content: guideLoaderContent,
         },
         {
+            id: 'paginator',
+            title: 'Paginator',
+            description: '',
+            content: guidePaginatorContent,
+        },
+        {
             id: 'persona',
             title: 'Persona',
             description: '',
             content: guidePersonaContent,
+        },
+        {
+            id: 'popover',
+            title: 'Popover',
+            description: '',
+            content: guidePopoverContent,
+        },
+        {
+            id: 'popup',
+            title: 'Popup',
+            description: '',
+            content: guidePopupContent,
+        },
+        {
+            id: 'progress',
+            title: 'Progress',
+            description: '',
+            content: guideProgressContent,
         },
         {
             id: 'radio',
