@@ -223,7 +223,7 @@ export const libs = [
         title: 'Date Components',
         primary: false,
         landing: false,
-        tags: ['ui', 'nodejs'],
+        tags: ['ui'],
         description: 'Various date components',
         storybookUrl:
             'https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs',
