@@ -217,6 +217,22 @@ export const libs = [
         mainBranch: 'main',
     },
     {
+        id: 'date-components',
+        githubId: 'gravity-ui/date-components',
+        npmId: '@gravity-ui/date-components',
+        title: 'Date Components',
+        primary: false,
+        landing: false,
+        tags: ['ui'],
+        description: 'Various date components',
+        storybookUrl:
+            'https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs',
+        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/date-components/main/README.md',
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/date-components/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
         id: 'axios-wrapper',
         githubId: 'gravity-ui/axios-wrapper',
         npmId: '@gravity-ui/axios-wrapper',
