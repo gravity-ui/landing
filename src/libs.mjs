@@ -220,7 +220,7 @@ export const libs = [
         id: 'date-components',
         githubId: 'gravity-ui/date-components',
         npmId: '@gravity-ui/date-components',
-        title: 'Date Utils',
+        title: 'Date Components',
         primary: false,
         landing: false,
         tags: ['ui', 'nodejs'],
