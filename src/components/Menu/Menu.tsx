@@ -38,7 +38,7 @@ export const Menu: React.FC = () => {
                             <div
                                 key={item.title}
                                 className={b('desktop-menu-item', {
-                                    active: router.pathname.startsWith(item.url),
+                                    active: router.asPath.startsWith(item.url),
                                 })}
                             >
                                 {item.isComingSoon ? (
