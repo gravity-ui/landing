@@ -3,11 +3,13 @@ import {Repos} from '../../types/common';
 
 const uikitTargetBranch = process.env.UIKIT_TARGET_BRANCH || TARGET_BRANCH;
 const componentsTargetBranch = process.env.COMPONENTS_TARGET_BRANCH || TARGET_BRANCH;
+const dateComponentsTargetBranch = process.env.DATE_COMPONENTS_TARGET_BRANCH || TARGET_BRANCH;
 const githubTargetprofile = process.env.GITHUB_PROFILE || TARGET_PROFILE;
 
 const TARGET_REPOS_BRANCHES = {
     [Repos.Uikit]: uikitTargetBranch,
     [Repos.Components]: componentsTargetBranch,
+    [Repos.DateComponents]: dateComponentsTargetBranch,
 };
 
 export type GetterProps = {componentName: string; repoName: Repos};
