@@ -19,6 +19,8 @@ jobs:
         cache: npm
     - name: Install Packages
       run: npm ci
+    - name: Shape libs-data.json
+      run: npm run fetch-data
     - name: Lint Files
       run: npm run lint
     - name: Typecheck

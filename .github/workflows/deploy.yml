@@ -21,8 +21,6 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: npm ci
-      - name: Shape libs-data.json
-        run: npm run fetch-data
       # Lint
       - name: Lint
         run: npm run lint
