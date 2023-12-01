@@ -5,6 +5,12 @@
 $block: '.#{variables.$ns}custom-header';
 
 #{$block} {
+    margin-top: 76px;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        margin-top: 32px;
+    }
+
     &__title {
         @include pcStyles.heading1();
         max-width: 800px;
