@@ -27,5 +27,6 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/libs-data.json
+/src/packages-versions.json
 
 .env
