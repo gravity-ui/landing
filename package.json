@@ -4,11 +4,11 @@
   "private": true,
   "homepage": "https://gravity-ui.com/",
   "dependencies": {
-    "@doc-tools/transform": "^3.11.0",
-    "@gravity-ui/components": "2.1.0",
-    "@gravity-ui/icons": "^2.8.1",
-    "@gravity-ui/page-constructor": "^4.41.0",
-    "@gravity-ui/uikit": "5.12.1",
+    "@doc-tools/transform": "^2.16.0",
+    "@gravity-ui/components": "^2.1.0",
+    "@gravity-ui/icons": "^2.3.0",
+    "@gravity-ui/page-constructor": "^3.9.2",
+    "@gravity-ui/uikit": "^5.12.1",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@testing-library/jest-dom": "^5.16.5",
@@ -63,7 +63,8 @@
   },
   "overrides": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "@gravity-ui/uikit": "^5.12.1"
   },
   "scripts": {
     "prepare": "husky install",
@@ -71,11 +72,9 @@
     "build": "next build",
     "export": "next export -o build/",
     "fetch-data": "node ./scripts/prefetch-data.mjs",
-    "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
-    "prepare-metadata": "npm run fetch-data && npm run get-packages-versions",
-    "prestart": "npm run prepare-metadata",
-    "prebuild": "npm run prepare-metadata",
-    "pretest": "npm run prepare-metadata",
+    "prestart": "npm run fetch-data",
+    "prebuild": "npm run fetch-data",
+    "pretest": "npm run fetch-data",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
     "lint:prettier": "prettier --check '**/*.md'",

@@ -70,6 +70,11 @@ const plugins = [
 module.exports = withPlugins(plugins, {
     reactStrictMode: true,
     output: 'export',
+    env: {
+        UIKIT_TARGET_BRANCH: process.env.UIKIT_TARGET_BRANCH,
+        COMPONENTS_TARGET_BRANCH: process.env.COMPONENTS_TARGET_BRANCH,
+        DATE_COMPONENTS_TARGET_BRANCH: process.env.DATE_COMPONENTS_TARGET_BRANCH,
+    },
     experimental: {
         esmExternals: 'loose',
     },

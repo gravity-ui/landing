@@ -5,4 +5,6 @@ export const GA_ID = 'GTM-KHT6KD7';
 export const MENU_ID = 'menu';
 export const CONTENT_WRAPPER_ID = 'content';
 
+export const TARGET_BRANCH = 'main';
+
 export const TARGET_PROFILE = 'gravity-ui';
