@@ -36,15 +36,18 @@ body,
     height: 100%;
 }
 
-body.g-root {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-
+body.g-root,
+.g-root {
     &_theme_dark {
         --g-color-base-background: #160d1b;
         background-color: var(--g-color-base-background);
     }
+}
+
+.g-root {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     &:not(.sandbox) {
         --g-font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
@@ -132,5 +135,9 @@ body.g-root {
                 }
             }
         }
+    }
+
+    .pc-page-constructor {
+        background-color: transparent;
     }
 }
