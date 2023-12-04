@@ -1,3 +1,5 @@
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
 import {NextComponentType} from 'next';
 
 import '../styles.scss';
