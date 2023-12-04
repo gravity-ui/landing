@@ -29,6 +29,8 @@ jobs:
         run: npm run build && npm run export
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          UIKIT_TARGET_BRANCH: 'main'
+          DATE_COMPONENTS_TARGET_BRANCH: 'main'
       # Deploy
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
