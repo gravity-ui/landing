@@ -21,6 +21,8 @@ jobs:
       run: npm ci
     - name: Shape libs-data.json
       run: npm run fetch-data
+    - name: Shape packages-versions.json
+      run: npm run get-packages-versions
     - name: Lint Files
       run: npm run lint
     - name: Typecheck
