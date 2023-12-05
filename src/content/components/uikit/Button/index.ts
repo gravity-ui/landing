@@ -13,7 +13,7 @@ export const buttonConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Button)),
+        component: dynamic(() => import('./ButtonWrapper').then((mod) => mod.ButtonWrapper)),
         props: {
             view: {
                 type: 'select',
@@ -74,6 +74,18 @@ export const buttonConfig = {
                 defaultValue: false,
             },
             loading: {
+                type: 'switch',
+                defaultValue: false,
+            },
+            startIcon: {
+                type: 'switch',
+                defaultValue: false,
+            },
+            endIcon: {
+                type: 'switch',
+                defaultValue: false,
+            },
+            onlyIcon: {
                 type: 'switch',
                 defaultValue: false,
             },
