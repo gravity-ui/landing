@@ -25,6 +25,7 @@ import {progressConfig} from './Progress';
 import {radioConfig} from './Radio';
 import {radioButtonConfig} from './RadioButton';
 import {radioGroupConfig} from './RadioGroup';
+import {selectConfig} from './Select';
 import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
 import {switchConfig} from './Switch';
@@ -61,6 +62,7 @@ const uikitComponents: Component[] = [
     radioConfig,
     radioButtonConfig,
     radioGroupConfig,
+    selectConfig,
     skeletonConfig,
     spinConfig,
     switchConfig,
