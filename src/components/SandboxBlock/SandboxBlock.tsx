@@ -86,7 +86,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                         <Row key={prop} space="0">
                             <div className={b('prop')}>
                                 <div className={b('prop-switch')}>
-                                    <Text variant="body-2">{prop}</Text>
+                                    <Text variant="body-1">{prop}</Text>
                                     <Switch
                                         key={prop}
                                         title={prop}
