@@ -1,0 +1,37 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}templates';
+
+#{$block} {
+    background: #251b25;
+    border-radius: pcVariables.$borderRadius;
+    padding: 12px 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__commands-wrapper {
+        width: 100%;
+        padding: 16px;
+        background: #160d1b;
+        border-radius: 16px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            width: inherit;
+        }
+    }
+
+    &__commands {
+        overflow-x: auto;
+        white-space: nowrap;
+        position: relative;
+    }
+
+    &__copy {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

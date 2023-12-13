@@ -4,4 +4,5 @@ export enum CustomBlock {
     CustomBanner = 'custom-banner',
     Examples = 'examples',
     Roadmap = 'roadmap',
+    Templates = 'templates',
 }
