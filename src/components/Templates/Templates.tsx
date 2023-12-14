@@ -23,8 +23,8 @@ const Commands: React.FC<CommandsProps> = ({commands}) => {
                         </Text>
                     );
                 })}
-                <ClipboardButton text={commands.join(' && ')} className={b('copy')} size={16} />
             </div>
+            <ClipboardButton text={commands.join(' && ')} className={b('copy')} size={16} />
         </div>
     );
 };

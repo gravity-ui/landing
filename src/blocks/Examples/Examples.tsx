@@ -90,15 +90,17 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => 
                         />
                     </div>
                 </div>
-                <Button
-                    size="xl"
-                    pin="circle-circle"
-                    view="outlined"
-                    href="https://preview.gravity-ui.com/uikit"
-                    target="_blank"
-                >
-                    Storybook
-                </Button>
+                <div>
+                    <Button
+                        size="xl"
+                        pin="circle-circle"
+                        view="outlined"
+                        href="https://preview.gravity-ui.com/uikit"
+                        target="_blank"
+                    >
+                        Storybook
+                    </Button>
+                </div>
             </div>
 
             <div className={b('showcase-wrapper')}>
