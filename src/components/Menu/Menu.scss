@@ -184,6 +184,7 @@ $border-color: rgba(255, 255, 255, 0.2);
 
     &__link {
         display: flex;
+        gap: 8px;
         align-items: center;
         height: 100%;
         white-space: nowrap;
@@ -235,6 +236,7 @@ $border-color: rgba(255, 255, 255, 0.2);
     }
 
     &__link-icon {
-        margin: 4px 0 0 10px;
+        align-self: baseline;
+        margin-top: 4px;
     }
 }

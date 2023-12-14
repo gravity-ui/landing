@@ -12,6 +12,7 @@ $block: '.#{variables.$ns}examples';
     &__header-wrapper {
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             flex-direction: column;
@@ -21,13 +22,7 @@ $block: '.#{variables.$ns}examples';
 
     &__header-title {
         @include pcStyles.heading2();
-        flex: 1;
-        margin-right: 20px;
         padding: 0;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin-right: 0;
-        }
     }
 
     &__controls {

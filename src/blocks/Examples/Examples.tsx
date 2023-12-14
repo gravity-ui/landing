@@ -1,5 +1,5 @@
 import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
-import {Icon, RadioButton, Select, SelectOption, Theme} from '@gravity-ui/uikit';
+import {Button, Icon, RadioButton, Select, SelectOption, Theme} from '@gravity-ui/uikit';
 import React from 'react';
 
 import darkThemeIcon from '../../assets/icons/dark-theme.svg';
@@ -61,7 +61,7 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => 
                             renderOption={renderOption}
                             renderSelectedOption={renderOption}
                             onUpdate={([newValue]) => setColor(newValue)}
-                            size="l"
+                            size="xl"
                             width="max"
                         >
                             {colors.map((item) => {
@@ -86,10 +86,19 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => 
                             onUpdate={(newValue) => {
                                 setTheme(newValue);
                             }}
-                            size="l"
+                            size="xl"
                         />
                     </div>
                 </div>
+                <Button
+                    size="xl"
+                    pin="circle-circle"
+                    view="outlined"
+                    href="https://preview.gravity-ui.com/uikit"
+                    target="_blank"
+                >
+                    Storybook
+                </Button>
             </div>
 
             <div className={b('showcase-wrapper')}>

@@ -3,6 +3,7 @@ import React from 'react';
 
 import {Templates} from '../../components/Templates';
 import type {Tab} from '../../components/Templates';
+import {SCROLL_TO_TEMPLATES_EVENT} from '../../constants';
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
 
@@ -20,13 +21,26 @@ export type TemplatesModel = TemplatesProps & {
 };
 
 export const TemplatesBlock: React.FC<TemplatesProps> = ({animated, title, tabs}) => {
+    const blockRef = React.useRef<HTMLDivElement>(null);
+    React.useEffect(() => {
+        const scrollTo = () => {
+            blockRef.current?.scrollIntoView({behavior: 'smooth'});
+        };
+        window.addEventListener(SCROLL_TO_TEMPLATES_EVENT, scrollTo);
+        return () => {
+            window.removeEventListener(SCROLL_TO_TEMPLATES_EVENT, scrollTo);
+        };
+    }, []);
     return (
-        <AnimateBlock className={b()} animate={animated}>
-            <h2 className={b('title')} data-section="templates">
-                <HTML>{title}</HTML>
-            </h2>
-            <Templates tabs={tabs} />
-        </AnimateBlock>
+        <React.Fragment>
+            <div ref={blockRef} />
+            <AnimateBlock className={b()} animate={animated}>
+                <h2 className={b('title')} data-section="templates">
+                    <HTML>{title}</HTML>
+                </h2>
+                <Templates tabs={tabs} />
+            </AnimateBlock>
+        </React.Fragment>
     );
 };
 
