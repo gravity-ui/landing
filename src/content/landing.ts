@@ -193,8 +193,7 @@ const typedLanding: CustomPageContent = {
                     title: 'Vite',
                     icon: viteLogo,
                     commands: [
-                        'npx degit gravity-ui/gravity-ui-vite-example#main my-app',
-                        'cd my-app',
+                        'npx degit gravity-ui/gravity-ui-vite-example#main my-app && cd my-app',
                         'npm install',
                         'npm run dev',
                     ],

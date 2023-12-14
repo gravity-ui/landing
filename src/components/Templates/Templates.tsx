@@ -54,9 +54,10 @@ const TabContent: React.FC<TabContentProps> = ({data}) => {
 
 interface TemplatesProps {
     tabs: Tab[];
+    className?: string;
 }
 
-export const Templates: React.FC<TemplatesProps> = ({tabs}) => {
+export const Templates: React.FC<TemplatesProps> = ({tabs, className}) => {
     const [activeTab, setActiveTab] = React.useState(() => tabs[0]?.title);
     const tabsItems = tabs.map(({title, icon}) => ({
         id: title,
@@ -66,7 +67,7 @@ export const Templates: React.FC<TemplatesProps> = ({tabs}) => {
     const activeTabData = tabs.find((el) => el.title === activeTab);
 
     return (
-        <section className={b()}>
+        <section className={b(null, className)}>
             <Tabs size="xl" items={tabsItems} activeTab={activeTab} onSelectTab={setActiveTab} />
             <TabContent data={activeTabData} />
         </section>

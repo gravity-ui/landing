@@ -43,7 +43,7 @@ export const TemplatesBlock: React.FC<TemplatesProps> = ({animated, title, tabs}
                 <h2 className={b('title')} data-section="templates">
                     <HTML>{title}</HTML>
                 </h2>
-                <Templates tabs={tabs} />
+                <Templates tabs={tabs} className={b('templates-wrapper')} />
             </AnimateBlock>
         </React.Fragment>
     );

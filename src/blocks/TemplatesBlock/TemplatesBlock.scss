@@ -6,8 +6,6 @@ $block: '.#{variables.$ns}templates-block';
 
 #{$block} {
     @include pcStyles.animate();
-    z-index: 1;
-    position: relative;
     &__title {
         @include pcStyles.heading2();
         margin-bottom: pcVariables.$indentM;
@@ -21,34 +19,34 @@ $block: '.#{variables.$ns}templates-block';
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 0;
     }
 
     &__circle {
         position: absolute;
-        height: 100%;
+        height: 110%;
         box-shadow: -2px 0 1px -2px var(--g-color-base-special),
             2px 0 1px -2px var(--g-color-base-special);
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             height: 80%;
         }
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            height: 70%;
-        }
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             height: 0%;
         }
     }
     &__circle_large {
-        border-radius: 15% / 60%;
+        border-radius: 14% / 60%;
         width: 90%;
     }
     &__circle_medium {
-        border-radius: 20% / 60%;
+        border-radius: 18% / 55%;
         width: 80%;
     }
     &__circle_small {
-        border-radius: 30% / 50%;
+        border-radius: 24% / 50%;
         width: 70%;
+    }
+    &__templates-wrapper {
+        z-index: 1;
+        position: relative;
     }
 }
