@@ -14,7 +14,7 @@ $block: '.#{variables.$ns}templates';
 
     &__commands-wrapper {
         width: 100%;
-        padding: 16px 32px 16px 16px;
+        padding: 16px 36px 16px 16px;
         background: #160d1b;
         border-radius: 16px;
         position: relative;
@@ -33,5 +33,14 @@ $block: '.#{variables.$ns}templates';
         top: 16px;
         right: 16px;
         position: absolute;
+    }
+    &__tabs {
+        overflow: auto;
+        flex-wrap: nowrap;
+    }
+    &__tabs-wrapper {
+        ::-webkit-scrollbar {
+            display: none;
+        }
     }
 }

@@ -33,17 +33,12 @@ export const TemplatesBlock: React.FC<TemplatesProps> = ({animated, title, tabs}
     }, []);
     return (
         <React.Fragment>
-            <div className={b('background')}>
-                <div className={b('circle', {large: true})}></div>
-                <div className={b('circle', {medium: true})}></div>
-                <div className={b('circle', {small: true})}></div>
-            </div>
             <div ref={blockRef} />
             <AnimateBlock className={b()} animate={animated}>
                 <h2 className={b('title')} data-section="templates">
                     <HTML>{title}</HTML>
                 </h2>
-                <Templates tabs={tabs} className={b('templates-wrapper')} />
+                <Templates tabs={tabs} />
             </AnimateBlock>
         </React.Fragment>
     );
