@@ -1,17 +1,20 @@
 import {Block, BlockType, PageContent} from '@gravity-ui/page-constructor';
 
 import backgroundAsset from '../assets/background.jpg';
-import bannerAsset from '../assets/banner.svg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
 import companiesTabletAsset from '../assets/companies-tablet.svg';
 import featureShieldAsset from '../assets/feature-shield.svg';
 import featureStarAsset from '../assets/feature-star.svg';
 import featureUnionAsset from '../assets/feature-union.svg';
-import figmaFillIcon from '../assets/icons/figma-fill.svg';
+import craLogo from '../assets/icons/cra-logo.svg';
 import githubIcon from '../assets/icons/github.svg';
+import nextLogo from '../assets/icons/next-logo.svg';
+import rocketIcon from '../assets/icons/rocket.svg';
+import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {CustomBlockModel} from '../blocks/types';
+import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 import {libs} from '../libs.mjs';
 
 import {roadmapTasks} from './roadmap';
@@ -35,17 +38,22 @@ const typedLanding: CustomPageContent = {
             title: 'Build modern interfaces with the Gravity design system and libraries',
             buttons: [
                 {
-                    text: 'GitHub',
+                    text: 'How to Start',
                     view: 'action',
-                    icon: githubIcon,
-                    href: 'https://github.com/gravity-ui',
-                    target: '_blank',
+                    icon: rocketIcon,
+                    onClick: () => {
+                        const evt = new Event(SCROLL_TO_TEMPLATES_EVENT, {
+                            bubbles: true,
+                            cancelable: false,
+                        });
+                        document.dispatchEvent(evt);
+                    },
                 },
                 {
-                    text: 'Figma',
+                    text: 'GitHub',
                     view: 'outlined',
-                    icon: figmaFillIcon,
-                    href: 'https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)',
+                    icon: githubIcon,
+                    href: 'https://github.com/gravity-ui',
                     target: '_blank',
                 },
             ],
@@ -150,14 +158,51 @@ const typedLanding: CustomPageContent = {
             tasks: roadmapTasks,
         },
         {
-            type: CustomBlock.CustomBanner,
+            type: CustomBlock.Templates,
             title: 'Start creating with Gravity&nbsp;UI',
-            color: '#23151e',
-            image: bannerAsset,
-            commands: [
-                'git clone git@github.com:gravity-ui/uikit-example-cra.git my-project && cd my-project',
-                'npm i',
-                'npm run start',
+            tabs: [
+                {
+                    title: 'CRA',
+                    icon: craLogo,
+                    commands: [
+                        'npx create-react-app my-app --template gravity-ui-pure',
+                        'cd my-app',
+                        'npm start',
+                    ],
+                    // button: {
+                    //     href: 'ya.ru',
+                    //     target: '_blank',
+                    //     title: 'Open CRA Playground',
+                    // },
+                },
+                {
+                    title: 'Next.js',
+                    icon: nextLogo,
+                    commands: [
+                        'npx create-next-app@latest my-app --example "https://github.com/gravity-ui/gravity-ui-nextjs-example"',
+                        'cd my-app',
+                        'npm run dev',
+                    ],
+                    // button: {
+                    //     href: 'ya.ru',
+                    //     target: '_blank',
+                    //     title: 'Open Next.js Playground',
+                    // },
+                },
+                {
+                    title: 'Vite',
+                    icon: viteLogo,
+                    commands: [
+                        'npx degit gravity-ui/gravity-ui-vite-example#main my-app && cd my-app',
+                        'npm install',
+                        'npm run dev',
+                    ],
+                    // button: {
+                    //     href: 'ya.ru',
+                    //     target: '_blank',
+                    //     title: 'Open Next.js Playground',
+                    // },
+                },
             ],
         },
         {

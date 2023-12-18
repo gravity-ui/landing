@@ -12,30 +12,29 @@ $block: '.#{variables.$ns}examples';
     &__header-wrapper {
         display: flex;
         align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 16px;
+        min-width: 270px;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            flex-direction: column;
-            align-items: stretch;
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            flex-wrap: wrap;
         }
     }
 
     &__header-title {
         @include pcStyles.heading2();
-        flex: 1;
-        margin-right: 20px;
         padding: 0;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin-right: 0;
-        }
     }
 
     &__controls {
         display: flex;
         align-items: center;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        order: 0;
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             margin-top: 32px;
+            order: 3;
+            flex-grow: 1;
         }
     }
 
@@ -47,40 +46,26 @@ $block: '.#{variables.$ns}examples';
         }
 
         &_type_color {
-            width: 184px;
+            min-width: 200px;
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-                width: 140px;
-            }
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
                 width: auto;
+                flex-grow: 1;
+            }
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                min-width: unset;
+                flex-grow: 1;
             }
         }
 
         &_type_theme {
             --g-color-base-background: rgba(37, 27, 37, 0.8);
 
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-                .yc-radio-button_size_l .yc-radio-button__option-text {
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                .yc-radio-button_size_xl .yc-radio-button__option-text {
                     margin: 0 8px;
                 }
             }
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-                .yc-radio-button_size_l {
-                    width: 100%;
-                }
-
-                .yc-radio-button__option {
-                    display: flex;
-                    justify-content: center;
-                }
-            }
-        }
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            flex: 1;
         }
     }
 

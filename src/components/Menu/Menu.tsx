@@ -75,6 +75,7 @@ export const Menu: React.FC = () => {
                                 href={item.url}
                                 target="_blank"
                             >
+                                <Icon data={item.icon} size={20} />
                                 <span>{item.title}</span>
                                 <Icon
                                     className={b('link-icon')}
