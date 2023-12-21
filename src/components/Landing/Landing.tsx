@@ -10,6 +10,9 @@ import {CustomBlock} from '../../blocks/constants';
 import {landing} from '../../content/landing';
 import {useSectionScroll} from '../../hooks/useSectionScroll';
 
+require('prismjs/components/prism-bash');
+require('prismjs/components/prism-jsx');
+
 export const Landing: React.FC = () => {
     useSectionScroll();
 
