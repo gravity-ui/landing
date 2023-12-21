@@ -12,6 +12,12 @@ $block: '.#{variables.$ns}templates';
     flex-direction: column;
     gap: 20px;
 
+    @media (max-width: 329px) {
+        .yc-button__text {
+            padding: 0 10px;
+        }
+    }
+
     &__commands-wrapper {
         width: 100%;
         padding: 16px 36px 16px 16px;

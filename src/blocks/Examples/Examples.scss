@@ -15,7 +15,7 @@ $block: '.#{variables.$ns}examples';
         flex-wrap: nowrap;
         justify-content: space-between;
         gap: 16px;
-        min-width: 270px;
+        min-width: 260px;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             flex-wrap: wrap;
