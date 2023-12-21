@@ -1,5 +1,8 @@
-import {Button, ClipboardButton, Icon, Tabs, Text} from '@gravity-ui/uikit';
+import {Button, ClipboardButton, Icon, Tabs} from '@gravity-ui/uikit';
+import Prism from 'prismjs';
 import React from 'react';
+
+require('prismjs/components/prism-bash');
 
 import {block} from '../../utils';
 
@@ -13,17 +16,12 @@ interface CommandsProps {
 }
 
 const Commands: React.FC<CommandsProps> = ({commands}) => {
+    const html = Prism.highlight(commands.join('\n'), Prism.languages.bash, 'bash');
     return (
         <div className={b('commands-wrapper')}>
-            <div className={b('commands')}>
-                {commands.map((item, index) => {
-                    return (
-                        <Text as="div" key={index} variant="body-3">
-                            {item}
-                        </Text>
-                    );
-                })}
-            </div>
+            <pre>
+                <code className={b('commands')} dangerouslySetInnerHTML={{__html: html}} />
+            </pre>
             <ClipboardButton text={commands.join(' && ')} className={b('copy')} size={16} />
         </div>
     );

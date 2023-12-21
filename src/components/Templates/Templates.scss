@@ -18,17 +18,22 @@ $block: '.#{variables.$ns}templates';
         background: #160d1b;
         border-radius: 16px;
         position: relative;
+        overflow: hidden;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             width: inherit;
         }
+        pre {
+            margin: 0;
+            overflow: auto;
+        }
     }
-
     &__commands {
         overflow-x: auto;
-        white-space: nowrap;
+        font-size: 17px;
+        line-height: 30px;
+        font-family: var(--yc-font-family-monospace);
     }
-
     &__copy {
         top: 16px;
         right: 16px;
