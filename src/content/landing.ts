@@ -169,11 +169,11 @@ const typedLanding: CustomPageContent = {
                         'cd my-app',
                         'npm start',
                     ],
-                    // button: {
-                    //     href: 'ya.ru',
-                    //     target: '_blank',
-                    //     title: 'Open CRA Playground',
-                    // },
+                    button: {
+                        href: 'https://codesandbox.io/p/devbox/gravityui-cra-mpg4q3',
+                        target: '_blank',
+                        title: 'Open CRA Playground',
+                    },
                 },
                 {
                     title: 'Next.js',
@@ -183,11 +183,11 @@ const typedLanding: CustomPageContent = {
                         'cd my-app',
                         'npm run dev',
                     ],
-                    // button: {
-                    //     href: 'ya.ru',
-                    //     target: '_blank',
-                    //     title: 'Open Next.js Playground',
-                    // },
+                    button: {
+                        href: 'https://codesandbox.io/p/devbox/gravityui-next-js-vvq8lf',
+                        target: '_blank',
+                        title: 'Open Next.js Playground',
+                    },
                 },
                 {
                     title: 'Vite',
@@ -197,11 +197,11 @@ const typedLanding: CustomPageContent = {
                         'npm install',
                         'npm run dev',
                     ],
-                    // button: {
-                    //     href: 'ya.ru',
-                    //     target: '_blank',
-                    //     title: 'Open Next.js Playground',
-                    // },
+                    button: {
+                        href: 'https://codesandbox.io/p/devbox/gravityui-vite-36dq3r',
+                        target: '_blank',
+                        title: 'Open Vite Playground',
+                    },
                 },
             ],
         },
