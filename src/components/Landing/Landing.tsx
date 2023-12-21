@@ -12,6 +12,7 @@ import {useSectionScroll} from '../../hooks/useSectionScroll';
 
 require('prismjs/components/prism-bash');
 require('prismjs/components/prism-jsx');
+require('prismjs/components/prism-typescript');
 
 export const Landing: React.FC = () => {
     useSectionScroll();
