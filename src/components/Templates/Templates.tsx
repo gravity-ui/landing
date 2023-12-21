@@ -1,8 +1,7 @@
 import {Button, ClipboardButton, Icon, Tabs} from '@gravity-ui/uikit';
 import Prism from 'prismjs';
+import 'prismjs/components/prism-bash.js';
 import React from 'react';
-
-require('prismjs/components/prism-bash');
 
 import {block} from '../../utils';
 
