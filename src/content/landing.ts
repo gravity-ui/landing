@@ -61,6 +61,11 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
+                        date: '2023-12-22T14:00:00.000Z',
+                        content:
+                            'We added templates for popular frameworks (<a href="https://github.com/gravity-ui/gravity-ui-cra-example">CRA</a>, <a href="https://github.com/gravity-ui/gravity-ui-nextjs-example">Next.js</a>, <a href="https://github.com/gravity-ui/gravity-ui-vite-example">Vite</a>) and redesigned <a href="/#templates">templates section</a>. Now it’s even easier to start using our framework in your project.',
+                    },
+                    {
                         date: '2023-12-14T13:00:00.000Z',
                         content:
                             'We\'ve posted <a href="https://github.com/gravity-ui/uikit/issues/1200">the announce of UIKit 6</a>! Please, be ready for the new version in January 2024!',
@@ -69,11 +74,6 @@ const typedLanding: CustomPageContent = {
                         date: '2023-12-11T14:00:00.000Z',
                         content:
                             'We\'ve published the documentation for our select component. Check it out <a href="/components/uikit/select">here</a>.',
-                    },
-                    {
-                        date: '2023-12-08T14:30:00.000Z',
-                        content:
-                            'GravityUI icon set have been added to the <a href="https://icon-sets.iconify.design/gravity-ui/">iconify framework</a>! 🎉 This means that now it’s even easier to use the beautiful <a href="/icons">icons</a> from GravityUI in your projects.',
                     },
                 ],
             },
