@@ -62,7 +62,6 @@ export const CustomBanner: React.FC<CustomBannerProps> = ({
     }
 
     const textCommands = commands?.join(' && ') || '';
-    // const textCommands = '12312';
 
     return (
         <AnimateBlock className={b()} animate={animated}>
