@@ -1,13 +1,16 @@
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
 import {URL} from 'next/dist/compiled/@edge-runtime/primitives/url';
 import {useRouter} from 'next/router';
-import React from 'react';
+import React, {useMemo} from 'react';
+import {CONTENT_WRAPPER_ID} from 'src/constants';
 
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
 import {block, getRouteFromReadmeUrl} from '../../utils';
+import {ArticleNavigations} from '../ArticleNavigations';
+import {Section} from '../NavigationLayout/types';
 import {SandboxBlock} from '../SandboxBlock';
 
 import './Component.scss';
@@ -34,9 +37,15 @@ export type ComponentProps = {
     libId: string;
     component: ComponentType;
     readmeContent: string;
+    sections: Section[];
 };
 
-export const Component: React.FC<ComponentProps> = ({libId, component, readmeContent}) => {
+export const Component: React.FC<ComponentProps> = ({
+    libId,
+    component,
+    readmeContent,
+    sections,
+}) => {
     const router = useRouter();
     const {tabId} = router.query;
 
@@ -65,6 +74,56 @@ export const Component: React.FC<ComponentProps> = ({libId, component, readmeCon
         },
         [component.content?.readmeUrl],
     );
+
+    const currentSection = useMemo(
+        () => sections.find((item) => item.id === libId),
+        [libId, sections],
+    );
+
+    const currentIndex = useMemo(() => {
+        if (!currentSection) {
+            return null;
+        }
+        return currentSection.subSections.findIndex((item) => item.id === component.id);
+    }, [currentSection, component.id]);
+
+    const nextSection = useMemo(() => {
+        if (!currentSection) {
+            return null;
+        }
+        const nextIndex = (currentIndex + 1) % currentSection.subSections.length;
+        return currentSection.subSections[nextIndex];
+    }, [currentIndex, currentSection]);
+
+    const prevSection = useMemo(() => {
+        if (!currentSection) {
+            return null;
+        }
+        const prevIndex =
+            (currentIndex - 1 + currentSection.subSections.length) %
+            currentSection.subSections.length;
+        return currentSection.subSections[prevIndex];
+    }, [currentIndex, currentSection]);
+
+    const scrollTop = React.useCallback(() => {
+        const content = document.getElementById(CONTENT_WRAPPER_ID);
+        if (content) {
+            content.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    }, []);
+
+    const onNextHandler = () => {
+        router.push(nextSection.url);
+        scrollTop();
+    };
+
+    const onPrevHandler = () => {
+        router.push(prevSection.url);
+        scrollTop();
+    };
 
     return (
         <div className={b()}>
@@ -140,6 +199,16 @@ export const Component: React.FC<ComponentProps> = ({libId, component, readmeCon
                             rewriteLinks={rewriteLinks}
                             withComponents
                         />
+                        {typeof window !== 'undefined' ? (
+                            <div className={b('navigation')}>
+                                <ArticleNavigations
+                                    prevHandler={onPrevHandler}
+                                    nextHandler={onNextHandler}
+                                    previousTitle={prevSection.title}
+                                    nextTitle={nextSection.title}
+                                />
+                            </div>
+                        ) : null}
                     </>
                 )}
             </div>

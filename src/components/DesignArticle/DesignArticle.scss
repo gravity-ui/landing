@@ -19,4 +19,7 @@ $block: '.#{variables.$ns}design-article';
         line-height: 48px;
         font-weight: 600;
     }
+    &__content {
+        margin-bottom: 40px;
+    }
 }
