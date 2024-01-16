@@ -60,14 +60,14 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     );
 
     const currentIndex = useMemo(() => {
-        if (!currentSection) {
+        if (!currentSection || !currentSection.subSections) {
             return null;
         }
         return currentSection.subSections.findIndex((item) => item.id === articleId);
     }, [currentSection, articleId]);
 
     const nextSection = useMemo(() => {
-        if (!currentSection) {
+        if (!currentSection || !currentSection.subSections || !currentIndex) {
             return null;
         }
         const nextIndex = (currentIndex + 1) % currentSection.subSections.length;
@@ -75,7 +75,7 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     }, [currentIndex, currentSection]);
 
     const prevSection = useMemo(() => {
-        if (!currentSection) {
+        if (!currentSection || !currentSection.subSections || !currentIndex) {
             return null;
         }
         const prevIndex =
@@ -95,11 +95,17 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     }, []);
 
     const onNextHandler = () => {
+        if (!nextSection) {
+            return;
+        }
         router.push(nextSection.url);
         scrollTop();
     };
 
     const onPrevHandler = () => {
+        if (!prevSection) {
+            return;
+        }
         router.push(prevSection.url);
         scrollTop();
     };
@@ -112,8 +118,8 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
                     articleId={articleId}
                     prevHandler={onPrevHandler}
                     nextHandler={onNextHandler}
-                    previousTitle={prevSection.title}
-                    nextTitle={nextSection.title}
+                    previousTitle={prevSection ? prevSection.title : ''}
+                    nextTitle={nextSection ? nextSection.title : ''}
                 />
             </DesignLayout>
         </Layout>

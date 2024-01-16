@@ -81,14 +81,14 @@ export const Component: React.FC<ComponentProps> = ({
     );
 
     const currentIndex = useMemo(() => {
-        if (!currentSection) {
+        if (!currentSection || !currentSection.subSections || !currentIndex) {
             return null;
         }
         return currentSection.subSections.findIndex((item) => item.id === component.id);
     }, [currentSection, component.id]);
 
     const nextSection = useMemo(() => {
-        if (!currentSection) {
+        if (!currentSection || !currentSection.subSections || !currentIndex) {
             return null;
         }
         const nextIndex = (currentIndex + 1) % currentSection.subSections.length;
@@ -96,7 +96,7 @@ export const Component: React.FC<ComponentProps> = ({
     }, [currentIndex, currentSection]);
 
     const prevSection = useMemo(() => {
-        if (!currentSection) {
+        if (!currentSection || !currentSection.subSections || !currentIndex) {
             return null;
         }
         const prevIndex =
@@ -116,11 +116,17 @@ export const Component: React.FC<ComponentProps> = ({
     }, []);
 
     const onNextHandler = () => {
+        if (!nextSection) {
+            return;
+        }
         router.push(nextSection.url);
         scrollTop();
     };
 
     const onPrevHandler = () => {
+        if (!prevSection) {
+            return;
+        }
         router.push(prevSection.url);
         scrollTop();
     };
@@ -199,7 +205,7 @@ export const Component: React.FC<ComponentProps> = ({
                             rewriteLinks={rewriteLinks}
                             withComponents
                         />
-                        {typeof window !== 'undefined' ? (
+                        {typeof window !== 'undefined' && prevSection && nextSection ? (
                             <div className={b('navigation')}>
                                 <ArticleNavigations
                                     prevHandler={onPrevHandler}
