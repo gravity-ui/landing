@@ -10,6 +10,7 @@ import featureUnionAsset from '../assets/feature-union.svg';
 import craLogo from '../assets/icons/cra-logo.svg';
 import githubIcon from '../assets/icons/github.svg';
 import nextLogo from '../assets/icons/next-logo.svg';
+import remixLogo from '../assets/icons/remix-logo.svg';
 import rocketIcon from '../assets/icons/rocket.svg';
 import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
@@ -201,6 +202,20 @@ const typedLanding: CustomPageContent = {
                         href: 'https://codesandbox.io/p/devbox/gravityui-vite-36dq3r',
                         target: '_blank',
                         title: 'Open Vite Playground',
+                    },
+                },
+                {
+                    title: 'Remix',
+                    icon: remixLogo,
+                    commands: [
+                        'npx create-remix my-app --template gravity-ui/gravity-ui-remix-example',
+                        'cd my-app',
+                        'npm run dev',
+                    ],
+                    button: {
+                        href: 'https://codesandbox.io/p/devbox/gravityui-remix-template-2y5ykj',
+                        target: '_blank',
+                        title: 'Open Remix Playground',
                     },
                 },
             ],
