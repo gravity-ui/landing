@@ -1,8 +1,6 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
-import {useRouter} from 'next/router';
-import {useCallback, useMemo} from 'react';
+import {useMemo} from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
-import {CONTENT_WRAPPER_ID} from 'src/constants';
 
 import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
 import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
@@ -31,7 +29,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleId: string}) => {
-    const router = useRouter();
     const section = designSections.find((item) => item.id === sectionId);
     const article = section?.articles.find((item) => item.id === articleId);
 
@@ -40,75 +37,19 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     }
 
     const sections = useMemo<Section[]>(() => {
-        const result: Section[] = designSections.map((section) => ({
-            id: section.id,
-            title: section.title,
+        const result: Section[] = designSections.map(({id, title, articles}) => ({
+            id: id,
+            title: title,
             // Uncomment it to show overview tab
             // url: `/design/${section.id}`,
-            subSections: section.articles.map((article) => ({
-                id: article.id,
-                title: article.title,
-                url: `/design/${section.id}/${article.id}`,
+            subSections: articles.map((articleItem) => ({
+                id: articleItem.id,
+                title: articleItem.title,
+                url: `/design/${id}/${articleItem.id}`,
             })),
         }));
         return result;
     }, []);
-
-    const currentSection = useMemo(
-        () => sections.find((item) => item.id === sectionId),
-        [sectionId, sections],
-    );
-
-    const currentIndex = useMemo(() => {
-        if (!currentSection || !currentSection.subSections) {
-            return null;
-        }
-        return currentSection.subSections.findIndex((item) => item.id === articleId);
-    }, [currentSection, articleId]);
-
-    const nextSection = useMemo(() => {
-        if (!currentSection || !currentSection.subSections || !currentIndex) {
-            return null;
-        }
-        const nextIndex = (currentIndex + 1) % currentSection.subSections.length;
-        return currentSection.subSections[nextIndex];
-    }, [currentIndex, currentSection]);
-
-    const prevSection = useMemo(() => {
-        if (!currentSection || !currentSection.subSections || !currentIndex) {
-            return null;
-        }
-        const prevIndex =
-            (currentIndex - 1 + currentSection.subSections.length) %
-            currentSection.subSections.length;
-        return currentSection.subSections[prevIndex];
-    }, [currentIndex, currentSection]);
-
-    const scrollTop = useCallback(() => {
-        const content = document.getElementById(CONTENT_WRAPPER_ID);
-        if (content) {
-            content.scrollTo({
-                top: 0,
-                behavior: 'smooth',
-            });
-        }
-    }, []);
-
-    const onNextHandler = () => {
-        if (!nextSection) {
-            return;
-        }
-        router.push(nextSection.url);
-        scrollTop();
-    };
-
-    const onPrevHandler = () => {
-        if (!prevSection) {
-            return;
-        }
-        router.push(prevSection.url);
-        scrollTop();
-    };
 
     return (
         <Layout title={`${section.title} – ${article.title}`}>
@@ -116,10 +57,8 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
                 <DesignArticle
                     article={article}
                     articleId={articleId}
-                    prevHandler={onPrevHandler}
-                    nextHandler={onNextHandler}
-                    previousTitle={prevSection ? prevSection.title : ''}
-                    nextTitle={nextSection ? nextSection.title : ''}
+                    sectionId={sectionId}
+                    sections={sections}
                 />
             </DesignLayout>
         </Layout>
