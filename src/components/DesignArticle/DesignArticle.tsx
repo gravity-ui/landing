@@ -68,10 +68,10 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({
     return (
         <div className={b()}>
             <h1 className={b('title')}>{article.title}</h1>
-            <div className={b('content')}>
-                <MDXRenderer text={article.content} />
+            <MDXRenderer text={article.content} />
+            <div className={b('navigation')}>
+                <ArticleNavigation prevSection={prevSection} nextSection={nextSection} />
             </div>
-            <ArticleNavigation prevSection={prevSection} nextSection={nextSection} />
         </div>
     );
 };

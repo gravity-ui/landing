@@ -20,7 +20,7 @@ $block: '.#{variables.$ns}component';
     }
 
     &__navigation {
-        margin-top: 40px;
+        margin-top: var(--g-spacing-10);
     }
 
     &__header {

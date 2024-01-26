@@ -33,27 +33,20 @@ $block: '.#{variables.$ns}article-navigation';
         justify-content: space-between;
         &_reverse {
             flex-direction: row-reverse;
-        }
-        &_right {
             margin-left: auto;
             padding-left: var(--g-spacing-5);
         }
-        &_left {
-            margin-right: auto;
-            padding-right: var(--g-spacing-5);
-        }
         &-icon {
             flex: none;
-            width: 56px;
-            height: 100%;
             border-radius: 12px;
             background: var(--g-color-base-generic);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--g-color-text-primary);
+            padding: 0 var(--g-spacing-5);
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-                width: 40px;
+                padding: 0 var(--g-spacing-3);
             }
         }
     }
