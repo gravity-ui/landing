@@ -75,13 +75,10 @@ export const dateFieldConfig: Component = {
                 ]),
                 defaultValue: 'round-round',
             },
-            maxValue: {
-                type: 'input',
-            },
             minValue: {
                 type: 'input',
             },
-            timeZone: {
+            maxValue: {
                 type: 'input',
             },
         },
