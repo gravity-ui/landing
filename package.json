@@ -6,7 +6,7 @@
   "dependencies": {
     "@doc-tools/transform": "^3.11.0",
     "@gravity-ui/components": "2.1.0",
-    "@gravity-ui/date-components": "^1.1.1",
+    "@gravity-ui/date-components": "^1.2.0",
     "@gravity-ui/icons": "^2.8.1",
     "@gravity-ui/page-constructor": "^4.41.0",
     "@gravity-ui/uikit": "5.24.0",
