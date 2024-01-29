@@ -1,4 +1,5 @@
 import * as Components from '@gravity-ui/components';
+import * as DateComponents from '@gravity-ui/date-components';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import * as UIKit from '@gravity-ui/uikit';
 import {EvaluateOptions, evaluate} from '@mdx-js/mdx';
@@ -31,6 +32,7 @@ const componentsAvailableInMDX: MDXComponents = {
     UIKitExamples,
     UIKit: UIKit as unknown as Record<string, MDXComponents>,
     Components: Components as unknown as Record<string, MDXComponents>,
+    DateComponents: DateComponents as unknown as Record<string, MDXComponents>,
 };
 
 type Props = {

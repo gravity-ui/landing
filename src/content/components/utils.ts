@@ -8,7 +8,8 @@ const TARGET_REPOS_VERSIONS = {
     [Repos.Uikit]: process.env.DEV_BRANCH_UIKIT || `v${packagesVersions[Repos.Uikit]}`,
     [Repos.Components]:
         process.env.DEV_BRANCH_COMPONENTS || `v${packagesVersions[Repos.Components]}`,
-    // [Repos.DateComponents]: process.env.DEV_BRANCH_DATE_COMPONENTS || `v${packagesVersions['@gravity-ui/date-components']}`,
+    [Repos.DateComponents]:
+        process.env.DEV_BRANCH_DATE_COMPONENTS || `v${packagesVersions[Repos.DateComponents]}`,
 };
 
 export type GetterProps = {componentName: string; repoName: Repos};

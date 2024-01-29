@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 const packagesMap = {
     '@gravity-ui/uikit': 'uikit',
     '@gravity-ui/components': 'components',
-    // '@gravity-ui/date-components': 'date-components',
+    '@gravity-ui/date-components': 'date-components',
 };
 
 const packageJsonPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../package.json');
