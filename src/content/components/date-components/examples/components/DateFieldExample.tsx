@@ -13,16 +13,12 @@ export const DateFieldExample = ({
     minValue,
     ...restProps
 }: DateFieldExampleProps) => {
-    const parsedDefaultValue = defaultValue ? dateTimeParse(defaultValue) : undefined;
-    const parsedMaxValue = maxValue ? dateTimeParse(maxValue) : undefined;
-    const parsedMinValue = minValue ? dateTimeParse(minValue) : undefined;
-
     return (
         <DateField
             {...restProps}
-            defaultValue={parsedDefaultValue}
-            maxValue={parsedMaxValue}
-            minValue={parsedMinValue}
+            defaultValue={dateTimeParse(defaultValue)}
+            maxValue={dateTimeParse(maxValue)}
+            minValue={dateTimeParse(minValue)}
         />
     );
 };
