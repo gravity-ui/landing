@@ -15,7 +15,7 @@ export const dateFieldConfig: Component = {
     },
     sandbox: {
         component: dynamic(() =>
-            import('@gravity-ui/date-components').then((mod) => mod.DateField),
+            import('../examples/components/index').then((mod) => mod.DateFieldExample),
         ),
         props: {
             view: {

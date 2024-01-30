@@ -19,6 +19,7 @@ import remarkGfm from 'remark-gfm';
 import remarkLinkRewrite from 'remark-link-rewrite';
 
 import {CONTENT_WRAPPER_ID} from '../../constants';
+import * as DateComponentsExamples from '../../content/components/date-components/examples/components';
 import * as UIKitExamples from '../../content/components/uikit/examples/components';
 
 import {ExampleBlock} from './ExampleBlock/ExampleBlock';
@@ -30,6 +31,7 @@ const componentsAvailableInMDX: MDXComponents = {
     Col,
     ExampleBlock,
     UIKitExamples,
+    DateComponentsExamples,
     UIKit: UIKit as unknown as Record<string, MDXComponents>,
     Components: Components as unknown as Record<string, MDXComponents>,
     DateComponents: DateComponents as unknown as Record<string, MDXComponents>,
