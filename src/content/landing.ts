@@ -155,7 +155,7 @@ const typedLanding: CustomPageContent = {
         },
         {
             type: CustomBlock.Roadmap,
-            title: 'Roadmap',
+            title: 'Roadmap 2024',
             tasks: roadmapTasks,
         },
         {
