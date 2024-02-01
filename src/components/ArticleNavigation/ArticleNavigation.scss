@@ -16,6 +16,9 @@ $block: '.#{variables.$ns}article-navigation';
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             padding: var(--g-spacing-3) 0;
         }
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            display: none;
+        }
         &-title {
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
                 display: none;
@@ -32,10 +35,16 @@ $block: '.#{variables.$ns}article-navigation';
         border: 1px solid var(--g-color-sfx-fade);
         padding: var(--g-spacing-1);
         justify-content: space-between;
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            width: unset;
+        }
         &_reverse {
             flex-direction: row-reverse;
             margin-left: auto;
             padding-left: var(--g-spacing-5);
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                padding-left: var(--g-spacing-1);
+            }
         }
         &-icon {
             flex: none;
@@ -48,6 +57,9 @@ $block: '.#{variables.$ns}article-navigation';
             padding: 0 var(--g-spacing-5);
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
                 padding: 0 var(--g-spacing-3);
+            }
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+                padding: var(--g-spacing-3);
             }
         }
     }
