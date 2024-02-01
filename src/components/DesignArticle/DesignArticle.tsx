@@ -12,17 +12,11 @@ const b = block('design-article');
 
 export type DesignArticleProps = {
     article: Article;
-    articleId?: string;
     sectionId?: string;
     sections: Section[];
 };
 
-export const DesignArticle: React.FC<DesignArticleProps> = ({
-    article,
-    articleId,
-    sectionId,
-    sections,
-}) => {
+export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId, sections}) => {
     const currentSection = useMemo(
         () => sections.find((item) => item.id === sectionId),
         [sectionId, sections],
@@ -32,8 +26,8 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({
         if (!currentSection || !currentSection.subSections) {
             return null;
         }
-        return currentSection.subSections.findIndex((item) => item.id === articleId);
-    }, [currentSection, articleId]);
+        return currentSection.subSections.findIndex((item) => item.id === article.id);
+    }, [currentSection, article.id]);
 
     const nextSection = useMemo(() => {
         if (

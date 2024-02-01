@@ -24,6 +24,7 @@ $block: '.#{variables.$ns}article-navigation';
     }
     &__button {
         cursor: pointer;
+        text-decoration: none;
         display: flex;
         gap: var(--g-spacing-3);
         width: 50%;

@@ -54,12 +54,7 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     return (
         <Layout title={`${section.title} – ${article.title}`}>
             <DesignLayout sections={sections} sectionId={sectionId} articleId={articleId}>
-                <DesignArticle
-                    article={article}
-                    articleId={articleId}
-                    sectionId={sectionId}
-                    sections={sections}
-                />
+                <DesignArticle article={article} sectionId={sectionId} sections={sections} />
             </DesignLayout>
         </Layout>
     );
