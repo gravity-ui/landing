@@ -62,6 +62,11 @@ const typedLanding: CustomPageContent = {
                 title: 'Recent updates',
                 items: [
                     {
+                        date: '2024-02-01T10:00:00.000Z',
+                        content:
+                            'If you want to find out our future plans, please check out the recently updated <a href="/#roadmap">roadmap section</a>.',
+                    },
+                    {
                         date: '2024-01-23T12:00:00.000Z',
                         content:
                             'We continue to improve our <a href="/#templates">templates</a> section and have added the <a href="https://github.com/gravity-ui/gravity-ui-remix-example">Remix template</a>. If you need other templates, don’t hesitate to create an <a href="https://github.com/gravity-ui/landing/issues/new">issue</a>. ',
@@ -70,11 +75,6 @@ const typedLanding: CustomPageContent = {
                         date: '2023-12-22T14:00:00.000Z',
                         content:
                             'We added templates for popular frameworks (<a href="https://github.com/gravity-ui/gravity-ui-cra-example">CRA</a>, <a href="https://github.com/gravity-ui/gravity-ui-nextjs-example">Next.js</a>, <a href="https://github.com/gravity-ui/gravity-ui-vite-example">Vite</a>) and redesigned <a href="/#templates">templates section</a>. Now it’s even easier to start using our framework in your project.',
-                    },
-                    {
-                        date: '2023-12-14T13:00:00.000Z',
-                        content:
-                            'We\'ve posted <a href="https://github.com/gravity-ui/uikit/issues/1200">the announce of UIKit 6</a>! Please, be ready for the new version in January 2024!',
                     },
                 ],
             },
