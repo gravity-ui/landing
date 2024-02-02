@@ -72,11 +72,16 @@ export const Component: React.FC<ComponentProps> = ({
         ) {
             return null;
         }
+
         const nextIndex = currentIndex + 1;
+
         if (nextIndex >= currentSection.subSections.length) {
             return null;
         }
-        return currentSection.subSections[nextIndex];
+
+        const nextSubSection = currentSection.subSections[nextIndex];
+
+        return nextSubSection.isComingSoon ? null : nextSubSection;
     }, [currentIndex, currentSection]);
 
     const prevSection = React.useMemo(() => {
@@ -87,11 +92,16 @@ export const Component: React.FC<ComponentProps> = ({
         ) {
             return null;
         }
+
         const prevIndex = currentIndex - 1;
+
         if (prevIndex < 0) {
             return null;
         }
-        return currentSection.subSections[prevIndex];
+
+        const prevSubSection = currentSection.subSections[prevIndex];
+
+        return prevSubSection.isComingSoon ? null : prevSubSection;
     }, [currentIndex, currentSection]);
 
     React.useEffect(() => {
@@ -191,14 +201,11 @@ export const Component: React.FC<ComponentProps> = ({
                             rewriteLinks={rewriteLinks}
                             withComponents
                         />
-                        <div className={b('navigation')}>
-                            <ArticleNavigation
-                                prevSection={prevSection}
-                                nextSection={nextSection}
-                            />
-                        </div>
                     </>
                 )}
+            </div>
+            <div className={b('navigation')}>
+                <ArticleNavigation prevSection={prevSection} nextSection={nextSection} />
             </div>
         </div>
     );

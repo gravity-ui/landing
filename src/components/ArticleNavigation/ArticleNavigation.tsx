@@ -16,7 +16,7 @@ interface ArticleNavigationProps {
     nextSection: SubSection | null;
 }
 
-export const ArticleNavigation = ({prevSection, nextSection}: ArticleNavigationProps) => {
+export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection, nextSection}) => {
     const scrollTop = useCallback(() => {
         const content = document.getElementById(CONTENT_WRAPPER_ID);
         if (content) {

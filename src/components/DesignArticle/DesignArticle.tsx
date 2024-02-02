@@ -37,11 +37,16 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId,
         ) {
             return null;
         }
+
         const nextIndex = currentIndex + 1;
+
         if (nextIndex >= currentSection.subSections.length) {
             return null;
         }
-        return currentSection.subSections[nextIndex];
+
+        const nextSubSection = currentSection.subSections[nextIndex];
+
+        return nextSubSection.isComingSoon ? null : nextSubSection;
     }, [currentIndex, currentSection]);
 
     const prevSection = useMemo(() => {
@@ -52,11 +57,16 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId,
         ) {
             return null;
         }
+
         const prevIndex = currentIndex - 1;
+
         if (prevIndex < 0) {
             return null;
         }
-        return currentSection.subSections[prevIndex];
+
+        const prevSubSection = currentSection.subSections[prevIndex];
+
+        return prevSubSection.isComingSoon ? null : prevSubSection;
     }, [currentIndex, currentSection]);
 
     return (

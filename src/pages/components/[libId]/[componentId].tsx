@@ -65,20 +65,22 @@ export const ComponentPage = ({
     }
 
     const sections = useMemo<Section[]>(() => {
-        return libs.map(({id, title, components}) => ({
-            id: id,
-            title: title,
-            // url: `/components/${lib.id}`, // "Overview" link
-            subSections: components.map((componentItem) => ({
-                id: componentItem.id,
-                title: componentItem.title,
-                url:
-                    componentItem.isComingSoon === true
-                        ? '#'
-                        : `/components/${lib.id}/${componentItem.id}`,
-                isComingSoon: componentItem.isComingSoon,
-            })),
-        }));
+        return libs.map(({id, title, components}) => {
+            return {
+                id: id,
+                title: title,
+                // url: `/components/${lib.id}`, // "Overview" link
+                subSections: components.map((componentConfig) => ({
+                    id: componentConfig.id,
+                    title: componentConfig.title,
+                    url:
+                        componentConfig.isComingSoon === true
+                            ? '#'
+                            : `/components/${id}/${componentConfig.id}`,
+                    isComingSoon: componentConfig.isComingSoon,
+                })),
+            };
+        });
     }, []);
 
     return (
