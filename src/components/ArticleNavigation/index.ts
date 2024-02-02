@@ -1,1 +1,0 @@
-export {ArticleNavigation} from './ArticleNavigation';

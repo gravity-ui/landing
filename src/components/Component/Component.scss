@@ -19,10 +19,6 @@ $block: '.#{variables.$ns}component';
         border-radius: 10px;
     }
 
-    &__navigation {
-        margin-top: var(--g-spacing-10);
-    }
-
     &__header {
         display: flex;
         align-items: center;
