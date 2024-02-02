@@ -1,6 +1,6 @@
 import {RangeCalendar, RangeCalendarProps} from '@gravity-ui/date-components';
 import {RangeValue} from '@gravity-ui/date-components/dist/esm/components/types';
-import {DateTimeInput, dateTime, dateTimeParse} from '@gravity-ui/date-utils';
+import {DateTime, DateTimeInput, dateTime, dateTimeParse} from '@gravity-ui/date-utils';
 import React from 'react';
 
 type RangeCalendarExampleProps = {
@@ -13,6 +13,13 @@ type RangeCalendarExampleProps = {
     RangeCalendarProps,
     'defaultValue' | 'maxValue' | 'minValue' | 'defaultFocusedValue' | 'focusedValue'
 >;
+
+const SelectedRangeText = ({value}: {value?: RangeValue<DateTime>}) => (
+    <div style={{textAlign: 'center'}}>
+        <div>Selected range:</div>
+        <div>{value ? `${value.start?.format('L')} - ${value.end?.format('L')}` : '\u00A0'}</div>
+    </div>
+);
 
 export const RangeCalendarExample = ({
     focusedValue,
@@ -46,10 +53,7 @@ export const RangeCalendarExample = ({
                 onUpdate={setValue}
                 modes={modes}
             />
-            <div>
-                Selected range:{' '}
-                {value ? `${value.start.format('L')} - ${value.end.format('L')}` : ''}
-            </div>
+            <SelectedRangeText value={value} />
         </div>
     );
 };
