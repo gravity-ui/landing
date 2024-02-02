@@ -1,6 +1,6 @@
 import {RangeCalendar, RangeCalendarProps} from '@gravity-ui/date-components';
 import {RangeValue} from '@gravity-ui/date-components/dist/esm/components/types';
-import {DateTimeInput, dateTimeParse} from '@gravity-ui/date-utils';
+import {DateTimeInput, dateTime, dateTimeParse} from '@gravity-ui/date-utils';
 import React from 'react';
 
 type RangeCalendarExampleProps = {
@@ -52,4 +52,17 @@ export const RangeCalendarExample = ({
             </div>
         </div>
     );
+};
+
+type RangeCalendarWithDefaultValueExampleProps = Omit<RangeCalendarExampleProps, 'defaultValue'>;
+
+export const RangeCalendarWithDefaultValueExample = (
+    props: RangeCalendarWithDefaultValueExampleProps,
+) => {
+    const today = dateTime();
+    const defaultValue: RangeValue<string> = {
+        start: today.subtract({days: 2}).toString(),
+        end: today.add({days: 2}).toString(),
+    };
+    return <RangeCalendarExample {...props} defaultValue={defaultValue} />;
 };
