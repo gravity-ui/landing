@@ -16,26 +16,22 @@ interface ArticleNavigationProps {
     nextSection: SubSection | null;
 }
 
+const scrollTop = useCallback(() => {
+    const content = document.getElementById(CONTENT_WRAPPER_ID);
+    if (content) {
+        content.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }
+}, []);
+
 export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection, nextSection}) => {
-    const scrollTop = useCallback(() => {
-        const content = document.getElementById(CONTENT_WRAPPER_ID);
-        if (content) {
-            content.scrollTo({
-                top: 0,
-                behavior: 'smooth',
-            });
-        }
-    }, []);
-
-    const linkClickHandler = () => {
-        scrollTop();
-    };
-
     return (
         <div className={b()}>
             {prevSection && (
                 <Link href={prevSection.url}>
-                    <a className={b('button')} onClick={linkClickHandler}>
+                    <a className={b('button')} onClick={scrollTop}>
                         <div className={b('button-icon')}>
                             <Icon data={ArrowLeft} size={16} />
                         </div>
@@ -57,7 +53,7 @@ export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection
             )}
             {nextSection && (
                 <Link href={nextSection.url}>
-                    <a className={b('button', {reverse: true})} onClick={linkClickHandler}>
+                    <a className={b('button', {reverse: true})} onClick={scrollTop}>
                         <div className={b('button-icon')}>
                             <Icon data={ArrowRight} size={16} />
                         </div>
