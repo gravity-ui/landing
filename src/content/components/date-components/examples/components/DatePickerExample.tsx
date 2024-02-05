@@ -22,3 +22,7 @@ export const DatePickerExample = ({
         />
     );
 };
+
+export const DatePickerSandboxExample = (props: DatePickerExampleProps) => (
+    <DatePickerExample {...props} style={{alignSelf: 'flex-start'}} />
+);

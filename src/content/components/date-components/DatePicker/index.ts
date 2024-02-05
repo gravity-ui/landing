@@ -15,7 +15,7 @@ export const datePickerConfig: Component = {
     },
     sandbox: {
         component: dynamic(() =>
-            import('../examples/components/index').then((mod) => mod.DatePickerExample),
+            import('../examples/components/index').then((mod) => mod.DatePickerSandboxExample),
         ),
         props: {
             view: {
