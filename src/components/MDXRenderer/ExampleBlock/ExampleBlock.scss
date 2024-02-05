@@ -21,9 +21,11 @@ $block: '.#{variables.$ns}example-block';
 
     &__content {
         display: flex;
-        align-items: flex-start;
-        justify-content: space-around;
+        align-items: center;
+        justify-content: center;
         padding: 40px;
+        flex-wrap: wrap;
+        row-gap: 20px;
 
         & > * {
             margin: 0 8px;
