@@ -16,17 +16,17 @@ interface ArticleNavigationProps {
     nextSection: SubSection | null;
 }
 
-const scrollTop = useCallback(() => {
-    const content = document.getElementById(CONTENT_WRAPPER_ID);
-    if (content) {
-        content.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-    }
-}, []);
-
 export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection, nextSection}) => {
+    const scrollTop = useCallback(() => {
+        const content = document.getElementById(CONTENT_WRAPPER_ID);
+        if (content) {
+            content.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    }, []);
+
     return (
         <div className={b()}>
             {prevSection && (
