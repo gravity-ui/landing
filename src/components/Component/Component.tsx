@@ -8,6 +8,8 @@ import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
 import {block, getRouteFromReadmeUrl} from '../../utils';
+import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
+import {Section} from '../NavigationLayout/types';
 import {SandboxBlock} from '../SandboxBlock';
 
 import './Component.scss';
@@ -34,15 +36,74 @@ export type ComponentProps = {
     libId: string;
     component: ComponentType;
     readmeContent: string;
+    sections: Section[];
 };
 
-export const Component: React.FC<ComponentProps> = ({libId, component, readmeContent}) => {
+export const Component: React.FC<ComponentProps> = ({
+    libId,
+    component,
+    readmeContent,
+    sections,
+}) => {
     const router = useRouter();
     const {tabId} = router.query;
 
     const [activeTab, setActiveTab] = React.useState(
         tabId === Tab.Design ? Tab.Design : Tab.Overview,
     );
+
+    const currentSection = React.useMemo(
+        () => sections.find((item) => item.id === libId),
+        [libId, sections],
+    );
+
+    const currentIndex = React.useMemo(() => {
+        if (!currentSection || !currentSection.subSections) {
+            return null;
+        }
+        return currentSection.subSections.findIndex((item) => item.id === component.id);
+    }, [currentSection, component.id]);
+
+    const nextSection = React.useMemo(() => {
+        if (
+            !currentSection ||
+            !currentSection.subSections ||
+            (!currentIndex && currentIndex !== 0)
+        ) {
+            return null;
+        }
+
+        const nextIndex = currentIndex + 1;
+
+        if (nextIndex >= currentSection.subSections.length) {
+            return null;
+        }
+
+        const nextSubSection = currentSection.subSections[nextIndex];
+
+        return nextSubSection.isComingSoon ? null : nextSubSection;
+    }, [currentIndex, currentSection]);
+
+    const prevSection = React.useMemo(() => {
+        if (
+            !currentSection ||
+            !currentSection.subSections ||
+            (!currentIndex && currentIndex !== 0)
+        ) {
+            return null;
+        }
+
+        const prevIndex = currentIndex - 1;
+
+        if (prevIndex < 0) {
+            return null;
+        }
+
+        const prevSubSection = currentSection.subSections[prevIndex];
+
+        return prevSubSection.isComingSoon ? null : prevSubSection;
+    }, [currentIndex, currentSection]);
+
     React.useEffect(() => {
         setActiveTab(tabId === Tab.Design ? Tab.Design : Tab.Overview);
     }, [tabId]);
@@ -142,6 +203,9 @@ export const Component: React.FC<ComponentProps> = ({libId, component, readmeCon
                         />
                     </>
                 )}
+            </div>
+            <div className={b('navigation')}>
+                <ArticleNavigation prevSection={prevSection} nextSection={nextSection} />
             </div>
         </div>
     );

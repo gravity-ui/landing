@@ -1,4 +1,6 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
+import {useMemo} from 'react';
+import {Section} from 'src/components/NavigationLayout/types';
 
 import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
@@ -62,10 +64,34 @@ export const ComponentPage = ({
         return null;
     }
 
+    const sections = useMemo<Section[]>(() => {
+        return libs.map(({id, title, components}) => {
+            return {
+                id: id,
+                title: title,
+                // url: `/components/${lib.id}`, // "Overview" link
+                subSections: components.map((componentConfig) => ({
+                    id: componentConfig.id,
+                    title: componentConfig.title,
+                    url:
+                        componentConfig.isComingSoon === true
+                            ? '#'
+                            : `/components/${id}/${componentConfig.id}`,
+                    isComingSoon: componentConfig.isComingSoon,
+                })),
+            };
+        });
+    }, []);
+
     return (
         <Layout title={`${lib.title} – ${component.title}`}>
-            <ComponentsLayout libId={libId} componentId={componentId}>
-                <Component libId={libId} component={component} readmeContent={readmeContent} />
+            <ComponentsLayout libId={libId} componentId={componentId} sections={sections}>
+                <Component
+                    libId={libId}
+                    component={component}
+                    readmeContent={readmeContent}
+                    sections={sections}
+                />
             </ComponentsLayout>
         </Layout>
     );
