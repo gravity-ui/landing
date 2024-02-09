@@ -15,7 +15,9 @@ export const relativeDateFieldConfig: Component = {
     },
     sandbox: {
         component: dynamic(() =>
-            import('@gravity-ui/date-components').then((mod) => mod.RelativeDateField),
+            import('../examples/components/RelativeDateFieldExample').then(
+                (mod) => mod.RelativeDateFieldExample,
+            ),
         ),
         props: {
             view: {
@@ -37,8 +39,11 @@ export const relativeDateFieldConfig: Component = {
             },
             validationState: {
                 type: 'radioButton',
-                values: mappingOptions(['normal', 'invalid']),
-                defaultValue: 'normal',
+                values: [
+                    {content: 'normal', value: ''},
+                    {content: 'invalid', value: 'invalid'},
+                ],
+                defaultValue: '',
             },
             errorMessage: {
                 type: 'input',
