@@ -1,48 +1,50 @@
+import {TFunction} from 'i18next';
+
 import {RoadmapTask, RoadmapTaskStatus} from '../components/Roadmap';
 
-export const roadmapTasks: RoadmapTask[] = [
+export const getRoadmapTasks = (t: TFunction): RoadmapTask[] => [
     {
-        title: '<b>Date Components:</b> New library for working with date and time',
+        title: t('roadmap.items.item1'),
         status: RoadmapTaskStatus.Completed,
     },
     {
-        title: '<b>UIKit:</b> Right-to-left languages support',
+        title: t('roadmap.items.item2'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>UIKit:</b> improvements in digital accessibility',
+        title: t('roadmap.items.item3'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>Figma:</b> color theme template builder',
+        title: t('roadmap.items.item4'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>Development farm</b>',
+        title: t('roadmap.items.item5'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>Docs:</b> Date Components in Components section',
+        title: t('roadmap.items.item6'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>UIKit:</b> emoji picker, color picker, label input and range input components',
+        title: t('roadmap.items.item7'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>UIKit:</b> Migration to Floating UI',
+        title: t('roadmap.items.item8'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: '<b>Docs:</b> Page constructor in Components section',
+        title: t('roadmap.items.item9'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: '<b>UIKit:</b> Extended mobile support',
+        title: t('roadmap.items.item10'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: '<b>Page constructor:</b> footer block',
+        title: t('roadmap.items.item11'),
         status: RoadmapTaskStatus.Planned,
     },
 ];

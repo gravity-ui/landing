@@ -1,0 +1,65 @@
+{
+    "header": {
+        "title": "Build modern interfaces with the Gravity design system and libraries",
+        "actions": {
+            "howToStart": "How to Start"
+        }
+    },
+    "news": {
+        "title": "Recent updates",
+        "items": {
+            "item1": "If you want to find out our future plans, please check out the recently updated <a href=\"/#roadmap\">roadmap section</a>.",
+            "item2": "We continue to improve our <a href=\"/#templates\">templates</a> section and have added the <a href=\"https://github.com/gravity-ui/gravity-ui-remix-example\">Remix template</a>. If you need other templates, don’t hesitate to create an <a href=\"https://github.com/gravity-ui/landing/issues/new\">issue</a>.",
+            "item3": "We added templates for popular frameworks (<a href=\"https://github.com/gravity-ui/gravity-ui-cra-example\">CRA</a>, <a href=\"https://github.com/gravity-ui/gravity-ui-nextjs-example\">Next.js</a>, <a href=\"https://github.com/gravity-ui/gravity-ui-vite-example\">Vite</a>) and redesigned <a href=\"/#templates\">templates section</a>. Now it’s even easier to start using our framework in your project."
+        }
+    },
+    "features": {
+        "feature1": {
+            "title": "Built on real-life experience",
+            "description": "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community."
+        },
+        "feature2": {
+            "title": "First class design",
+            "description": "Experienced designers curate the look of our libraries, ensuring that components are stylish and consistent, with support for dark mode and high-contrast themes."
+        },
+        "feature3": {
+            "title": "An evolving ecosystem",
+            "description": "Regular feedback from our community of developers allows us to continuously improve our libraries, and break compatibility only when necessary."
+        }
+    },
+    "examples": {
+        "title": "Examples",
+        "colors": {
+            "yellow": "Yellow",
+            "red": "Red",
+            "green": "Green",
+            "blue": "Blue"
+        }
+    },
+    "ourLibraries": {
+        "title": "Our libraries",
+        "allLibraries": "All libraries"
+    },
+    "roadmap": {
+        "title": "Roadmap 2024",
+        "items": {
+            "item1": "<b>Date Components:</b> New library for working with date and time",
+            "item2": "<b>UIKit:</b> Right-to-left languages support",
+            "item3": "<b>UIKit:</b> improvements in digital accessibility",
+            "item4": "<b>Figma:</b> color theme template builder",
+            "item5": "<b>Development farm</b>",
+            "item6": "<b>Docs:</b> Date Components in Components section",
+            "item7": "<b>UIKit:</b> emoji picker, color picker, label input and range input components",
+            "item8": "<b>UIKit:</b> Migration to Floating UI",
+            "item9": "<b>Docs:</b> Page constructor in Components section",
+            "item10": "<b>UIKit:</b> Extended mobile support",
+            "item11": "<b>Page constructor:</b> footer block"
+        }
+    },
+    "templates": {
+        "title": "Start creating with Gravity&nbsp;UI"
+    },
+    "companies": {
+        "title": "Trusted by"
+    }
+}

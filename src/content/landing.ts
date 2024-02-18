@@ -1,4 +1,5 @@
 import {Block, BlockType, PageContent} from '@gravity-ui/page-constructor';
+import {TFunction} from 'next-i18next';
 
 import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
@@ -18,7 +19,7 @@ import {CustomBlockModel} from '../blocks/types';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 import {libs} from '../libs.mjs';
 
-import {roadmapTasks} from './roadmap';
+import {getRoadmapTasks} from './roadmap';
 
 interface CustomPageContent {
     blocks: (Block | CustomBlockModel)[];
@@ -26,7 +27,7 @@ interface CustomPageContent {
     background?: PageContent['background'];
 }
 
-const typedLanding: CustomPageContent = {
+export const getLanding = (t: TFunction): CustomPageContent => ({
     background: {
         image: {
             src: backgroundAsset.src,
@@ -36,10 +37,10 @@ const typedLanding: CustomPageContent = {
     blocks: [
         {
             type: CustomBlock.CustomHeader,
-            title: 'Build modern interfaces with the Gravity design system and libraries',
+            title: t('header.title'),
             buttons: [
                 {
-                    text: 'How to Start',
+                    text: t('header.actions.howToStart'),
                     view: 'action',
                     icon: rocketIcon,
                     onClick: () => {
@@ -59,22 +60,19 @@ const typedLanding: CustomPageContent = {
                 },
             ],
             news: {
-                title: 'Recent updates',
+                title: t('news.title'),
                 items: [
                     {
                         date: '2024-02-01T10:00:00.000Z',
-                        content:
-                            'If you want to find out our future plans, please check out the recently updated <a href="/#roadmap">roadmap section</a>.',
+                        content: t('news.items.item1'),
                     },
                     {
                         date: '2024-01-23T12:00:00.000Z',
-                        content:
-                            'We continue to improve our <a href="/#templates">templates</a> section and have added the <a href="https://github.com/gravity-ui/gravity-ui-remix-example">Remix template</a>. If you need other templates, don’t hesitate to create an <a href="https://github.com/gravity-ui/landing/issues/new">issue</a>. ',
+                        content: t('news.items.item2'),
                     },
                     {
                         date: '2023-12-22T14:00:00.000Z',
-                        content:
-                            'We added templates for popular frameworks (<a href="https://github.com/gravity-ui/gravity-ui-cra-example">CRA</a>, <a href="https://github.com/gravity-ui/gravity-ui-nextjs-example">Next.js</a>, <a href="https://github.com/gravity-ui/gravity-ui-vite-example">Vite</a>) and redesigned <a href="/#templates">templates section</a>. Now it’s even easier to start using our framework in your project.',
+                        content: t('news.items.item3'),
                     },
                 ],
             },
@@ -91,43 +89,40 @@ const typedLanding: CustomPageContent = {
             },
             items: [
                 {
-                    title: 'Built on real-life experience',
-                    description:
-                        "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community.",
+                    title: t('features.feature1.title'),
+                    description: t('features.feature1.description'),
                     icon: featureUnionAsset,
                 },
                 {
-                    title: 'First class design',
-                    description:
-                        'Experienced designers curate the look of our libraries, ensuring that components are stylish and consistent, with support for dark mode and high-contrast themes.',
+                    title: t('features.feature2.title'),
+                    description: t('features.feature2.description'),
                     icon: featureStarAsset,
                 },
                 {
-                    title: 'An evolving ecosystem',
-                    description:
-                        'Regular feedback from our community of developers allows us to continuously improve our libraries, and break compatibility only when necessary.',
+                    title: t('features.feature3.title'),
+                    description: t('features.feature3.description'),
                     icon: featureShieldAsset,
                 },
             ],
         },
         {
             type: CustomBlock.Examples,
-            title: 'Examples',
+            title: t('examples.title'),
             colors: [
                 {
-                    title: 'Yellow',
+                    title: t('examples.colors.yellow'),
                     value: 'yellow',
                 },
                 {
-                    title: 'Red',
+                    title: t('examples.colors.red'),
                     value: 'red',
                 },
                 {
-                    title: 'Green',
+                    title: t('examples.colors.green'),
                     value: 'green',
                 },
                 {
-                    title: 'Blue',
+                    title: t('examples.colors.blue'),
                     value: 'blue',
                 },
             ],
@@ -135,9 +130,9 @@ const typedLanding: CustomPageContent = {
         {
             type: CustomBlock.CustomExtendedFeatures,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            title: 'Our libraries',
+            title: t('ourLibraries.title'),
             button: {
-                text: 'All libraries',
+                text: t('ourLibraries.allLibraries'),
                 href: '/libraries',
             },
             colSizes: {
@@ -155,12 +150,12 @@ const typedLanding: CustomPageContent = {
         },
         {
             type: CustomBlock.Roadmap,
-            title: 'Roadmap 2024',
-            tasks: roadmapTasks,
+            title: t('roadmap.title'),
+            tasks: getRoadmapTasks(t),
         },
         {
             type: CustomBlock.Templates,
-            title: 'Start creating with Gravity&nbsp;UI',
+            title: t('templates.title'),
             tabs: [
                 {
                     title: 'CRA',
@@ -222,7 +217,7 @@ const typedLanding: CustomPageContent = {
         },
         {
             type: BlockType.CompaniesBlock,
-            title: 'Trusted by',
+            title: t('companies.title'),
             images: {
                 desktop: companiesDesktopAsset,
                 tablet: companiesTabletAsset,
@@ -230,8 +225,4 @@ const typedLanding: CustomPageContent = {
             },
         },
     ],
-};
-
-const landing = typedLanding as PageContent;
-
-export {landing};
+});

@@ -1,6 +1,7 @@
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import {NextComponentType} from 'next';
+import {appWithTranslation} from 'next-i18next';
 import 'prismjs/themes/prism-tomorrow.min.css';
 
 import '../styles.scss';
@@ -16,4 +17,4 @@ export const App = ({
     return <Component {...pageProps} />;
 };
 
-export default App;
+export default appWithTranslation(App);

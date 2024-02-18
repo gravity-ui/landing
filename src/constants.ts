@@ -8,3 +8,5 @@ export const CONTENT_WRAPPER_ID = 'content';
 export const TARGET_PROFILE = 'gravity-ui';
 
 export const SCROLL_TO_TEMPLATES_EVENT = 'templates';
+
+export const LOCALE_LOCAL_STORAGE_KEY = 'gravity-landing-locale';

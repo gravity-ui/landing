@@ -1,4 +1,5 @@
-import {PageConstructor} from '@gravity-ui/page-constructor';
+import {PageConstructor, PageContent} from '@gravity-ui/page-constructor';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/CustomExtendedFeatures';
@@ -7,15 +8,16 @@ import {Examples} from '../../blocks/Examples/Examples';
 import {RoadmapBlock} from '../../blocks/RoadmapBlock/RoadmapBlock';
 import TemplatesBlock from '../../blocks/TemplatesBlock/TemplatesBlock';
 import {CustomBlock} from '../../blocks/constants';
-import {landing} from '../../content/landing';
+import {getLanding} from '../../content/landing';
 import {useSectionScroll} from '../../hooks/useSectionScroll';
 
 export const Landing: React.FC = () => {
+    const {t} = useTranslation(['home']);
     useSectionScroll();
 
     return (
         <PageConstructor
-            content={landing}
+            content={getLanding(t) as PageContent}
             custom={{
                 blocks: {
                     [CustomBlock.CustomHeader]: CustomHeader,
