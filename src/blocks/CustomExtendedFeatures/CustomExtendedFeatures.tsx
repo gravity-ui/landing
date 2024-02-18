@@ -82,9 +82,7 @@ export const CustomExtendedFeatures: React.FC<CustomExtendedFeaturesProps> = ({
                     {button && (
                         <div className={b('button-desktop')}>
                             <Link href={button.href}>
-                                <a>
-                                    <Button size="xl" theme="outlined" text={button.text} />
-                                </a>
+                                <Button size="xl" theme="outlined" text={button.text} />
                             </Link>
                         </div>
                     )}
@@ -110,9 +108,7 @@ export const CustomExtendedFeatures: React.FC<CustomExtendedFeaturesProps> = ({
             {button && (
                 <div className={b('button-mobile')}>
                     <Link href={button.href}>
-                        <a>
-                            <Button size="xl" theme="outlined" text={button.text} />
-                        </a>
+                        <Button size="xl" theme="outlined" text={button.text} />
                     </Link>
                 </div>
             )}

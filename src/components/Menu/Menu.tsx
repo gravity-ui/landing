@@ -26,10 +26,8 @@ export const Menu: React.FC = () => {
     return (
         <div className={b()}>
             <div className={b('wrapper', {open: mobileMenuOpen})}>
-                <Link href="/">
-                    <a className={b('logo')}>
-                        <span className={b('logo-image')} />
-                    </a>
+                <Link href="/" className={b('logo')}>
+                    <span className={b('logo-image')} />
                 </Link>
 
                 <div className={b('desktop-menu')}>
@@ -58,8 +56,8 @@ export const Menu: React.FC = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <Link href={item.url}>
-                                        <a className={b('link', {lg: true})}>{item.title}</a>
+                                    <Link href={item.url} className={b('link', {lg: true})}>
+                                        {item.title}
                                     </Link>
                                 )}
                             </div>
@@ -122,10 +120,12 @@ export const Menu: React.FC = () => {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <Link href={item.url} key={item.title}>
-                                                <a className={b('link', {lg: true})}>
-                                                    {item.title}
-                                                </a>
+                                            <Link
+                                                href={item.url}
+                                                key={item.title}
+                                                className={b('link', {lg: true})}
+                                            >
+                                                {item.title}
                                             </Link>
                                         )}
                                     </div>

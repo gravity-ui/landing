@@ -39,16 +39,16 @@ export const DesignSection: React.FC<Props> = ({section}) => {
                                 className={b('col')}
                                 sizes={{all: 12, lg: 6, xl: 4}}
                             >
-                                <Link href={component.url}>
-                                    <a target="_blank" className={b('component')}>
-                                        <div className={b('component-image')} />
-                                        <div className={b('component-title')}>
-                                            {component.title}
-                                        </div>
-                                        <div className={b('component-description')}>
-                                            {component.description}
-                                        </div>
-                                    </a>
+                                <Link
+                                    href={component.url}
+                                    target="_blank"
+                                    className={b('component')}
+                                >
+                                    <div className={b('component-image')} />
+                                    <div className={b('component-title')}>{component.title}</div>
+                                    <div className={b('component-description')}>
+                                        {component.description}
+                                    </div>
                                 </Link>
                             </Col>
                         );
@@ -69,8 +69,11 @@ export const DesignSection: React.FC<Props> = ({section}) => {
                 {section.articles.map((article) => {
                     return (
                         <div key={article.id} className={b('article-wrapper')}>
-                            <Link href={`/design/${section.id}/${article.id}`}>
-                                <a className={b('article')}>{article.title}</a>
+                            <Link
+                                href={`/design/${section.id}/${article.id}`}
+                                className={b('article')}
+                            >
+                                {article.title}
                             </Link>
                         </div>
                     );

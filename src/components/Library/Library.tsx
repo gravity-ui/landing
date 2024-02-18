@@ -98,8 +98,8 @@ export const Library: React.FC<Props> = ({lib}) => {
                     <Col sizes={12}>
                         <div className={b('header', {primary: isPrimary})}>
                             <div className={b('breadcrumbs')}>
-                                <Link href="/libraries">
-                                    <a className={b('breadcrumbs-link')}>Libraries</a>
+                                <Link href="/libraries" className={b('breadcrumbs-link')}>
+                                    Libraries
                                 </Link>{' '}
                                 / <HTML className={b('breadcrumbs-item')}>{lib.config.title}</HTML>
                             </div>

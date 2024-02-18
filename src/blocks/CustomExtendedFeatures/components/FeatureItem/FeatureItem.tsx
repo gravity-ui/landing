@@ -52,14 +52,13 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
         }
     }
 
-    const Tag = id ? (Link as any) : React.Fragment;
-    const InnerTag = id ? 'a' : 'div';
+    const Tag = id ? (Link as any) : 'div';
     const tagProps = id ? {href: `/libraries/${id}`} : {};
 
     return (
-        <Tag {...tagProps}>
-            <InnerTag
-                className={b({library: Boolean(id), primary: Boolean(id) && isPrimary})}
+        <Tag {...tagProps} className={b()}>
+            <div
+                className={b('content', {library: Boolean(id), primary: Boolean(id) && isPrimary})}
                 style={contentStyle}
             >
                 {iconData && <Image {...iconData} className={b('icon')} />}
@@ -94,7 +93,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                         ) : null}
                     </div>
                 ) : null}
-            </InnerTag>
+            </div>
         </Tag>
     );
 };

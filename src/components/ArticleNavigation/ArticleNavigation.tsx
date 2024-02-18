@@ -30,47 +30,47 @@ export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection
     return (
         <div className={b()}>
             {prevSection && (
-                <Link href={prevSection.url}>
-                    <a className={b('button')} onClick={scrollTop}>
-                        <div className={b('button-icon')}>
-                            <Icon data={ArrowLeft} size={16} />
-                        </div>
-                        <Flex direction="column" gap="1" className={b('content')}>
-                            <Text variant="body-short" color="light-complementary">
-                                Previous
-                            </Text>
-                            <Text
-                                className={b('content-title')}
-                                ellipsis={true}
-                                variant="body-2"
-                                color="primary"
-                            >
-                                {prevSection.title}
-                            </Text>
-                        </Flex>
-                    </a>
+                <Link href={prevSection.url} className={b('button')} onClick={scrollTop}>
+                    <div className={b('button-icon')}>
+                        <Icon data={ArrowLeft} size={16} />
+                    </div>
+                    <Flex direction="column" gap="1" className={b('content')}>
+                        <Text variant="body-short" color="light-complementary">
+                            Previous
+                        </Text>
+                        <Text
+                            className={b('content-title')}
+                            ellipsis={true}
+                            variant="body-2"
+                            color="primary"
+                        >
+                            {prevSection.title}
+                        </Text>
+                    </Flex>
                 </Link>
             )}
             {nextSection && (
-                <Link href={nextSection.url}>
-                    <a className={b('button', {reverse: true})} onClick={scrollTop}>
-                        <div className={b('button-icon')}>
-                            <Icon data={ArrowRight} size={16} />
-                        </div>
-                        <Flex direction="column" gap="1" className={b('content')}>
-                            <Text variant="body-short" color="light-complementary">
-                                Next
-                            </Text>
-                            <Text
-                                className={b('content-title')}
-                                ellipsis={true}
-                                variant="body-2"
-                                color="primary"
-                            >
-                                {nextSection.title}
-                            </Text>
-                        </Flex>
-                    </a>
+                <Link
+                    href={nextSection.url}
+                    className={b('button', {reverse: true})}
+                    onClick={scrollTop}
+                >
+                    <div className={b('button-icon')}>
+                        <Icon data={ArrowRight} size={16} />
+                    </div>
+                    <Flex direction="column" gap="1" className={b('content')}>
+                        <Text variant="body-short" color="light-complementary">
+                            Next
+                        </Text>
+                        <Text
+                            className={b('content-title')}
+                            ellipsis={true}
+                            variant="body-2"
+                            color="primary"
+                        >
+                            {nextSection.title}
+                        </Text>
+                    </Flex>
                 </Link>
             )}
         </div>

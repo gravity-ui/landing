@@ -32,14 +32,13 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
 
     if (data.url && (!data.subSections || data.subSections?.length === 0)) {
         content = (
-            <Link href={data.url}>
-                <a
-                    className={b('header', {
-                        active: curSectionId === data.id && !curSubSectionId,
-                    })}
-                >
-                    <div className={b('title')}>{data.title}</div>
-                </a>
+            <Link
+                href={data.url}
+                className={b('header', {
+                    active: curSectionId === data.id && !curSubSectionId,
+                })}
+            >
+                <div className={b('title')}>{data.title}</div>
             </Link>
         );
     } else {
@@ -62,16 +61,15 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                 </div>
                 <div className={b('sub-sections', {open: isOpen})}>
                     {data.url ? (
-                        <Link key="__overview" href={data.url}>
-                            <a
-                                className={b('sub-section', {
-                                    active:
-                                        curSectionId === data.id && curSubSectionId === undefined,
-                                })}
-                                onClick={onClickOnLink}
-                            >
-                                Overview
-                            </a>
+                        <Link
+                            key="__overview"
+                            href={data.url}
+                            className={b('sub-section', {
+                                active: curSectionId === data.id && curSubSectionId === undefined,
+                            })}
+                            onClick={onClickOnLink}
+                        >
+                            Overview
                         </Link>
                     ) : null}
 
@@ -99,19 +97,17 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                         }
 
                         return (
-                            <Link key={subSection.id} href={subSection.url}>
-                                <a
-                                    className={b('sub-section', {
-                                        active:
-                                            curSectionId === data.id &&
-                                            curSubSectionId === subSection.id,
-                                    })}
-                                    onClick={onClickOnLink}
-                                >
-                                    <span className={b('sub-section-text')}>
-                                        {subSection.title}
-                                    </span>
-                                </a>
+                            <Link
+                                key={subSection.id}
+                                href={subSection.url}
+                                className={b('sub-section', {
+                                    active:
+                                        curSectionId === data.id &&
+                                        curSubSectionId === subSection.id,
+                                })}
+                                onClick={onClickOnLink}
+                            >
+                                <span className={b('sub-section-text')}>{subSection.title}</span>
                             </Link>
                         );
                     })}

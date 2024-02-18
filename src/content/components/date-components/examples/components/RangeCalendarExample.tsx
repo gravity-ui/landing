@@ -37,7 +37,8 @@ export const RangeCalendarExample = ({
     };
 
     const parsedDefaultValue: RangeCalendarProps['defaultValue'] = defaultValue
-        ? {start: dateTimeParse(defaultValue.start)!, end: dateTimeParse(defaultValue.end)!}
+        ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          {start: dateTimeParse(defaultValue.start)!, end: dateTimeParse(defaultValue.end)!}
         : undefined;
 
     const [value, setValue] = React.useState(parsedDefaultValue);

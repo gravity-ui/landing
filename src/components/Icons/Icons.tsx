@@ -45,17 +45,18 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         }
     }, [currentIcon]);
 
-    React.useEffect(() => {
-        onChangeCurrentIcon?.(iconForDialog?.name);
-    }, [onChangeCurrentIcon, iconForDialog]);
-
-    const handleSelectIcon = React.useCallback((item: IconItem) => {
-        setIconForDialog(item);
-    }, []);
+    const handleSelectIcon = React.useCallback(
+        (item: IconItem) => {
+            setIconForDialog(item);
+            onChangeCurrentIcon?.(item?.name);
+        },
+        [onChangeCurrentIcon],
+    );
 
     const handleCloseDialog = React.useCallback(() => {
         setIconForDialog(undefined);
-    }, []);
+        onChangeCurrentIcon?.(undefined);
+    }, [onChangeCurrentIcon]);
 
     const handleClickToKeyword = React.useCallback((keyword: string) => {
         setFilterString(keyword);
@@ -133,13 +134,12 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     )}
                 </Col>
             </Row>
-            {iconForDialog ? (
-                <IconDialog
-                    icon={iconForDialog}
-                    onClose={handleCloseDialog}
-                    onClickToKeyword={handleClickToKeyword}
-                />
-            ) : null}
+
+            <IconDialog
+                icon={iconForDialog}
+                onClose={handleCloseDialog}
+                onClickToKeyword={handleClickToKeyword}
+            />
         </Grid>
     );
 };

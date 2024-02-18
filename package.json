@@ -19,11 +19,11 @@
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "lodash": "^4.17.21",
-    "next": "^12.3.4",
+    "next": "^14.1.0",
     "next-global-css": "^1.3.1",
     "prismjs": "^1.29.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-timeago": "^7.1.0",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-slug": "^6.0.0",
@@ -52,7 +52,7 @@
     "file-loader": "^6.2.0",
     "gh-pages": "^4.0.0",
     "next-compose-plugins": "^2.2.1",
-    "next-transpile-modules": "^10.0.0",
+    "next-transpile-modules": "^10.0.1",
     "prettier": "^2.7.1",
     "raw-loader": "^4.0.2",
     "sass": "^1.56.1",
@@ -62,15 +62,10 @@
     "svgo": "^3.0.2",
     "undici": "^5.14.0"
   },
-  "overrides": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
   "scripts": {
     "prepare": "husky install",
     "start": "next dev",
     "build": "next build",
-    "export": "next export -o build/",
     "fetch-data": "node ./scripts/prefetch-data.mjs",
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
     "prepare-metadata": "npm run fetch-data && npm run get-packages-versions",
@@ -81,8 +76,7 @@
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
     "lint:prettier": "prettier --check '**/*.md'",
     "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
-    "predeploy": "npm run build && npm run export",
-    "deploy": "echo 'gravity-ui.com' > ./build/CNAME && gh-pages -d build",
+    "deploy": "echo 'gravity-ui.com' > ./out/CNAME && gh-pages -d build",
     "typecheck": "tsc --noEmit"
   },
   "browserslist": {

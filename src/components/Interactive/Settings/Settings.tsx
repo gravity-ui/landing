@@ -35,10 +35,12 @@ export const Settings = () => {
         }
 
         // @ts-ignore
+        // eslint-disable-next-line consistent-return
         window.disableHand = () => {
             isHandDisabled.current = true;
         };
         // @ts-ignore
+        // eslint-disable-next-line consistent-return
         window.enableHand = () => {
             isHandDisabled.current = false;
         };

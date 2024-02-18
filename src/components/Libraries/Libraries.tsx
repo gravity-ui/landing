@@ -85,49 +85,48 @@ export const Libraries = () => {
                                     className={b('col')}
                                     sizes={{all: 12, md: 6, lg: 4}}
                                 >
-                                    <Link href={`/libraries/${lib.config.id}`}>
-                                        <a
-                                            className={b('library', {
-                                                primary: lib.config.primary,
-                                            })}
-                                        >
-                                            <div className={b('library-header')}>
-                                                <h5 className={b('library-title')}>
-                                                    <HTML>{lib.config.title}</HTML>
-                                                </h5>
-                                                {lib.data.stars ? (
-                                                    <div className={b('stars')}>
-                                                        <Icon data={starIcon} size={19} />
-                                                        <div className={b('stars-count')}>
-                                                            {lib.data.stars}
+                                    <Link
+                                        href={`/libraries/${lib.config.id}`}
+                                        className={b('library', {
+                                            primary: lib.config.primary,
+                                        })}
+                                    >
+                                        <div className={b('library-header')}>
+                                            <h5 className={b('library-title')}>
+                                                <HTML>{lib.config.title}</HTML>
+                                            </h5>
+                                            {lib.data.stars ? (
+                                                <div className={b('stars')}>
+                                                    <Icon data={starIcon} size={19} />
+                                                    <div className={b('stars-count')}>
+                                                        {lib.data.stars}
+                                                    </div>
+                                                </div>
+                                            ) : null}
+                                        </div>
+
+                                        <div className={b('description')}>
+                                            {lib.config.description}
+                                        </div>
+
+                                        {lib.config.npmId && lib.data.version ? (
+                                            <div className={b('release-info')}>
+                                                <div className={b('release-info-block')}>
+                                                    <Icon data={versionIcon} size={16} />
+                                                    <div className={b('release-version')}>
+                                                        v{lib.data.version}
+                                                    </div>
+                                                </div>
+                                                {lib.data.lastUpdate ? (
+                                                    <div className={b('release-info-block')}>
+                                                        <Icon data={calendarIcon} size={16} />
+                                                        <div className={b('release-date')}>
+                                                            {lib.data.lastUpdate}
                                                         </div>
                                                     </div>
                                                 ) : null}
                                             </div>
-
-                                            <div className={b('description')}>
-                                                {lib.config.description}
-                                            </div>
-
-                                            {lib.config.npmId && lib.data.version ? (
-                                                <div className={b('release-info')}>
-                                                    <div className={b('release-info-block')}>
-                                                        <Icon data={versionIcon} size={16} />
-                                                        <div className={b('release-version')}>
-                                                            v{lib.data.version}
-                                                        </div>
-                                                    </div>
-                                                    {lib.data.lastUpdate ? (
-                                                        <div className={b('release-info-block')}>
-                                                            <Icon data={calendarIcon} size={16} />
-                                                            <div className={b('release-date')}>
-                                                                {lib.data.lastUpdate}
-                                                            </div>
-                                                        </div>
-                                                    ) : null}
-                                                </div>
-                                            ) : null}
-                                        </a>
+                                        ) : null}
                                     </Link>
                                 </Col>
                             );

@@ -1,5 +1,4 @@
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
-import {URL} from 'next/dist/compiled/@edge-runtime/primitives/url';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -45,6 +44,12 @@ export const Component: React.FC<ComponentProps> = ({
     readmeContent,
     sections,
 }) => {
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     const router = useRouter();
     const {tabId} = router.query;
 
@@ -184,10 +189,12 @@ export const Component: React.FC<ComponentProps> = ({
 
             <div className={b('content')}>
                 {tabId === Tab.Design && component.content?.design ? (
-                    <MDXRenderer key="design" text={component.content?.design} />
+                    <React.Fragment>
+                        {isClient && <MDXRenderer key="design" text={component.content?.design} />}
+                    </React.Fragment>
                 ) : (
                     <>
-                        {typeof window !== 'undefined' && component.sandbox ? (
+                        {isClient && component.sandbox ? (
                             <SandboxBlock
                                 key={`${libId}-${component.id}`}
                                 libId={libId}
@@ -195,12 +202,14 @@ export const Component: React.FC<ComponentProps> = ({
                                 sandboxConfig={component.sandbox.props}
                             />
                         ) : null}
-                        <MDXRenderer
-                            key="overview"
-                            text={readmeContent}
-                            rewriteLinks={rewriteLinks}
-                            withComponents
-                        />
+                        {isClient && (
+                            <MDXRenderer
+                                key="overview"
+                                text={readmeContent}
+                                rewriteLinks={rewriteLinks}
+                                withComponents
+                            />
+                        )}
                     </>
                 )}
             </div>

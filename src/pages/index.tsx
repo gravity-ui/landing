@@ -1,11 +1,11 @@
 import {Landing} from '../components/Landing/Landing';
-import {Layout} from '../components/Layout/Layout';
+import {MainPageLayout} from '../components/Layout/Layout';
 
 const Home = () => {
     return (
-        <Layout>
+        <MainPageLayout>
             <Landing />
-        </Layout>
+        </MainPageLayout>
     );
 };
 
