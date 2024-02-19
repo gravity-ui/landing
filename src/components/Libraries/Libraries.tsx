@@ -1,38 +1,41 @@
 import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {Icon, TextInput} from '@gravity-ui/uikit';
-import Link from 'next/link';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import calendarIcon from '../../assets/icons/calendar.svg';
 import starIcon from '../../assets/icons/star.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {block, getLibsList} from '../../utils';
+import {Link} from '../Link';
 
 import './Libraries.scss';
 import {TagItem, Tags} from './Tags/Tags';
 
 const b = block('libraries');
 
-const tags: TagItem[] = [
-    {
-        value: 'all',
-        title: 'All',
-    },
-    {
-        value: 'ui',
-        title: 'UI',
-    },
-    {
-        value: 'nodejs',
-        title: 'Node.js',
-    },
-    {
-        value: 'infrastructure',
-        title: 'Infrastructure',
-    },
-];
-
 export const Libraries = () => {
+    const {t} = useTranslation();
+
+    const tags: TagItem[] = [
+        {
+            value: 'all',
+            title: t('libraries:tags.all'),
+        },
+        {
+            value: 'ui',
+            title: t('libraries:tags.ui'),
+        },
+        {
+            value: 'nodejs',
+            title: t('libraries:tags.nodejs'),
+        },
+        {
+            value: 'infrastructure',
+            title: t('libraries:tags.infrastructure'),
+        },
+    ];
+
     const [activeTag, setActivaTag] = React.useState(tags[0].value);
     const [filterString, setFilterString] = React.useState('');
 
@@ -55,7 +58,7 @@ export const Libraries = () => {
             <Grid>
                 <Row>
                     <Col sizes={12}>
-                        <h1 className={b('title')}>Our libraries</h1>
+                        <h1 className={b('title')}>{t('libraries:title')}</h1>
                     </Col>
                 </Row>
                 <Row className={b('filters')}>
@@ -68,14 +71,14 @@ export const Libraries = () => {
                                 value={filterString}
                                 onUpdate={setFilterString}
                                 size="xl"
-                                placeholder="Search by name or description"
+                                placeholder={t('libraries:searchPlaceholder')}
                                 hasClear
                             />
                         </div>
                     </Col>
                 </Row>
                 {filteredLibs.length === 0 ? (
-                    <div className={b('empty')}>Nothing found</div>
+                    <div className={b('empty')}>{t('libraries:empty')}</div>
                 ) : (
                     <Row>
                         {filteredLibs.map((lib) => {

@@ -1,10 +1,10 @@
 import {ArrowLeft, ArrowRight} from '@gravity-ui/icons';
 import {Flex, Icon, Text} from '@gravity-ui/uikit';
-import Link from 'next/link';
 import {useCallback} from 'react';
 import {CONTENT_WRAPPER_ID} from 'src/constants';
 import {block} from 'src/utils';
 
+import {Link} from '../Link';
 import {SubSection} from '../NavigationLayout/types';
 
 const b = block('article-navigation');

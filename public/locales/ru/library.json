@@ -1,0 +1,15 @@
+{
+    "actions": {
+        "goToIcons": "Перейти к иконкам"
+    },
+    "libraries": "Библиотеки",
+    "readme": "Readme",
+    "changelog": "Changelog",
+    "about": "О библиотеке",
+    "stars": "Звёзды",
+    "version": "Версия",
+    "lastUpdate": "Последнее обновление",
+    "repository": "Репозиторий",
+    "license": "Лицензия",
+    "issues": "Issues"
+}

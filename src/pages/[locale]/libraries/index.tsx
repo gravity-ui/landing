@@ -1,4 +1,5 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
+import {useTranslation} from 'next-i18next';
 
 import {Layout} from '../../../components/Layout/Layout';
 import {Libraries} from '../../../components/Libraries/Libraries';
@@ -15,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
     return {
         props: {
-            ...(await getI18nProps(ctx)),
+            ...(await getI18nProps(ctx, ['libraries'])),
         },
     };
 };
@@ -23,8 +24,10 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 export const LibrariesPage = () => {
     useLocaleRedirect();
 
+    const {t} = useTranslation();
+
     return (
-        <Layout title="Libraries">
+        <Layout title={t('libraries:pageTitle')}>
             <Libraries />
         </Layout>
     );

@@ -1,10 +1,10 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import nextI18nextConfig from 'next-i18next.config';
 import {useRouter} from 'next/router';
 import React from 'react';
 
+import nextI18nextConfig from '../../../next-i18next.config';
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import menuOpenIcon from '../../assets/icons/menu-open.svg';

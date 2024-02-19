@@ -1,7 +1,10 @@
 {
     "actions": {
+        "open": "Открыть",
         "copyToClipboard": "Копировать в буфер обмена",
-        "share": "Поделиться"
+        "share": "Поделиться",
+        "github": "GitHub",
+        "storybook": "Storybook"
     },
     "menu": {
         "libraries": "Библиотеки",

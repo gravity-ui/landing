@@ -9,9 +9,9 @@ import {
     ThemedImage,
     useTheme,
 } from '@gravity-ui/page-constructor';
-import Link from 'next/link';
 import React from 'react';
 
+import {Link} from '../../components/Link';
 import {block, getThemedValue} from '../../utils';
 import {CustomBlock} from '../constants';
 

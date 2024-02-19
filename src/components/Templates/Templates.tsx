@@ -55,6 +55,7 @@ interface TemplatesProps {
 
 export const Templates: React.FC<TemplatesProps> = ({tabs}) => {
     const [activeTab, setActiveTab] = React.useState(() => tabs[0]?.title);
+
     const tabsItems = tabs.map(({title, icon}) => ({
         id: title,
         title,

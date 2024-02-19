@@ -1,32 +1,21 @@
-import {GetStaticPaths, GetStaticProps} from 'next';
+import {GetStaticPaths} from 'next';
 
-import {Layout} from '../../components/Layout/Layout';
-import {Library} from '../../components/Library/Library';
-import {getLibById, getLibsList} from '../../utils';
+import {getLibsList} from '../../utils';
+import {LibraryPage, getStaticProps} from '../[locale]/libraries/[libId]';
 
 const libs = getLibsList();
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    const paths = libs.map((libItem) => ({
+        params: {libId: libItem.config.id},
+    }));
+
     return {
-        paths: libs.map((item) => ({params: {libId: item.config.id}})),
+        paths,
         fallback: false,
     };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-    return {
-        props: {libId: context.params?.libId},
-    };
-};
-
-export const LibraryPage = ({libId}: {libId: string}) => {
-    const lib = getLibById(libId);
-
-    return (
-        <Layout title={lib?.config.title ?? ''}>
-            <Library lib={lib} />
-        </Layout>
-    );
-};
+export {LibraryPage, getStaticProps};
 
 export default LibraryPage;

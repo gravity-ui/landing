@@ -176,7 +176,7 @@ export const Component: React.FC<ComponentProps> = ({
                         activeTab={activeTab}
                         onSelectTab={(selectedTab) => {
                             router.replace({
-                                pathname: router.pathname,
+                                pathname: router.asPath.split('?')[0],
                                 query: {
                                     ...router.query,
                                     tabId: selectedTab === Tab.Design ? Tab.Design : undefined,

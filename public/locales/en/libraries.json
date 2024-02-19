@@ -1,0 +1,12 @@
+{
+    "pageTitle": "Libraries",
+    "title": "Our libraries",
+    "searchPlaceholder": "Search by name or description",
+    "empty": "Nothing found",
+    "tags": {
+        "all": "All",
+        "ui": "UI",
+        "nodejs": "Node.js",
+        "infrastructure": "Infrastructure"
+    }
+}

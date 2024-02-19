@@ -1,0 +1,12 @@
+{
+    "pageTitle": "Библиотеки",
+    "title": "Наши библиотеки",
+    "searchPlaceholder": "Поиск по имени и описанию",
+    "empty": "Ничего не найдено",
+    "tags": {
+        "all": "Все",
+        "ui": "UI",
+        "nodejs": "Node.js",
+        "infrastructure": "Инфраструктура"
+    }
+}

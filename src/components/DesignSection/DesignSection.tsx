@@ -1,11 +1,11 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import Link from 'next/link';
 import React from 'react';
 
-import {Component} from '../..//content/components/types';
 import {libs} from '../../content/components';
+import {Component} from '../../content/components/types';
 import {Section} from '../../content/design/types';
 import {block} from '../../utils';
+import {Link} from '../Link';
 
 import './DesignSection.scss';
 

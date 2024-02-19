@@ -12,7 +12,7 @@ import {getLanding} from '../../content/landing';
 import {useSectionScroll} from '../../hooks/useSectionScroll';
 
 export const Landing: React.FC = () => {
-    const {t} = useTranslation(['home']);
+    const {t} = useTranslation();
     useSectionScroll();
 
     return (

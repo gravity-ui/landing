@@ -1,5 +1,6 @@
 import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
 import {Button, Icon, RadioButton, Select, SelectOption, Theme} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import darkThemeIcon from '../../assets/icons/dark-theme.svg';
@@ -36,6 +37,8 @@ const themes = [
 ];
 
 export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => {
+    const {t} = useTranslation();
+
     const [color, setColor] = React.useState(colors[0].value);
     const [theme, setTheme] = React.useState<Theme>(themes[0].value);
 
@@ -98,7 +101,7 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => 
                         href="https://preview.gravity-ui.com/uikit"
                         target="_blank"
                     >
-                        Storybook
+                        {t('actions.storybook')}
                     </Button>
                 </div>
             </div>

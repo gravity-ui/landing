@@ -1,7 +1,10 @@
 {
     "actions": {
+        "open": "Open",
         "copyToClipboard": "Copy to clipboard",
-        "share": "Share"
+        "share": "Share",
+        "github": "GitHub",
+        "storybook": "Storybook"
     },
     "menu": {
         "libraries": "Libraries",

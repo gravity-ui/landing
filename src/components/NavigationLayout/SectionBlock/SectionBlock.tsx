@@ -1,10 +1,10 @@
 import {Icon} from '@gravity-ui/uikit';
-import Link from 'next/link';
 import React from 'react';
 
 import arrowIcon from '../../../assets/icons/arrow.svg';
 import soonLabelIcon from '../../../assets/icons/soon-label.svg';
 import {block} from '../../../utils';
+import {Link} from '../../Link';
 import {Section} from '../types';
 
 import './SectionBlock.scss';
