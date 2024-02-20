@@ -25,6 +25,5 @@ export const dateComponents: Lib = {
     id: config.id,
     title: config.title,
     primary: config.primary,
-    description: config.description,
     components: sortBy(components, 'title'),
 };
