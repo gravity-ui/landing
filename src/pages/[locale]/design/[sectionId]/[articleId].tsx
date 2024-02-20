@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         props: {
             sectionId: ctx.params?.sectionId,
             articleId: ctx.params?.articleId,
-            ...(await getI18nProps(ctx)),
+            ...(await getI18nProps(ctx, ['design-article'])),
         },
     };
 };

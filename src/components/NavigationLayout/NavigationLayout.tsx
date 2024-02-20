@@ -1,5 +1,6 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import arrowIcon from '../../assets/icons/arrow.svg';
@@ -29,9 +30,11 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
     subSectionId,
     mobileTitle,
     searchPlaceholder,
-    emptySearchPlaceholder = 'Nothing found',
+    emptySearchPlaceholder,
     children,
 }) => {
+    const {t} = useTranslation();
+
     const [isOpenMobileNavigation, setIsOpenMobileNavigation] = React.useState(false);
 
     const section = sections.find((item) => item.id === sectionId);
@@ -102,7 +105,9 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
                                 sectionId={sectionId}
                                 subSectionId={subSectionId}
                                 searchPlaceholder={searchPlaceholder}
-                                emptySearchPlaceholder={emptySearchPlaceholder}
+                                emptySearchPlaceholder={
+                                    emptySearchPlaceholder ?? t('emptySearchPlaceholder')
+                                }
                                 onClickOnLink={clickOnLinkHandler}
                             />
                         </div>

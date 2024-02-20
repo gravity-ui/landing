@@ -1,5 +1,6 @@
 import {ArrowLeft, ArrowRight} from '@gravity-ui/icons';
 import {Flex, Icon, Text} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import {useCallback} from 'react';
 import {CONTENT_WRAPPER_ID} from 'src/constants';
 import {block} from 'src/utils';
@@ -17,6 +18,8 @@ interface ArticleNavigationProps {
 }
 
 export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection, nextSection}) => {
+    const {t} = useTranslation();
+
     const scrollTop = useCallback(() => {
         const content = document.getElementById(CONTENT_WRAPPER_ID);
         if (content) {
@@ -36,7 +39,7 @@ export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection
                     </div>
                     <Flex direction="column" gap="1" className={b('content')}>
                         <Text variant="body-short" color="light-complementary">
-                            Previous
+                            {t('navigation.previous')}
                         </Text>
                         <Text
                             className={b('content-title')}
@@ -60,7 +63,7 @@ export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection
                     </div>
                     <Flex direction="column" gap="1" className={b('content')}>
                         <Text variant="body-short" color="light-complementary">
-                            Next
+                            {t('navigation.next')}
                         </Text>
                         <Text
                             className={b('content-title')}

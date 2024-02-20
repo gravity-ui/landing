@@ -181,7 +181,9 @@ $border-color: rgba(255, 255, 255, 0.2);
     }
 
     &__mobile-menu-locale-picker {
-        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
     }
 
     &__mobile-social-link {

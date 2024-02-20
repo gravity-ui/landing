@@ -1,0 +1,22 @@
+{
+    "actions": {
+        "copyIconName": "Копировать название иконки",
+        "copyLink": "Копировать ссылку",
+        "copied": "Скопировано",
+        "copyReactComponent": "Копировать React component",
+        "copySvgImport": "Копировать SVG импорт",
+        "downloadSvg": "Скачать SVG"
+    },
+    "title": "Иконки",
+    "goToLibrary": "К библиотеке",
+    "filterPlaceholder": "Фильтровать по названию",
+    "keywords": "Ключевые слова",
+    "empty": {
+        "title": "По вашему запросу нет результатов",
+        "subTitle": "Пожалуйста проверьте написание или попробуйте другие ключевые слова."
+    },
+    "usage": {
+        "reactComponent": "React component",
+        "svg": "SVG"
+    }
+}

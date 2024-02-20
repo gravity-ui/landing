@@ -1,7 +1,7 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 
 import {Landing} from '../../components/Landing/Landing';
-import {MainPageLayout} from '../../components/Layout/Layout';
+import {Layout} from '../../components/Layout/Layout';
 import {useLocaleRedirect} from '../../hooks/useLocaleRedirect';
 import {getI18nPaths, getI18nProps} from '../../utils/i18next';
 
@@ -24,9 +24,9 @@ const Home = () => {
     useLocaleRedirect();
 
     return (
-        <MainPageLayout>
+        <Layout isPageConstrucor>
             <Landing />
-        </MainPageLayout>
+        </Layout>
     );
 };
 

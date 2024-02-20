@@ -5,6 +5,10 @@ import {
     configure as configurePageConstructor,
 } from '@gravity-ui/page-constructor';
 import {ThemeProvider, configure as configureUiKit} from '@gravity-ui/uikit';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
+import ru from 'javascript-time-ago/locale/ru.json';
+import {useTranslation} from 'next-i18next';
 import Head from 'next/head';
 import React from 'react';
 
@@ -16,53 +20,44 @@ import {Menu} from '../Menu/Menu';
 import './Layout.scss';
 import {Meta} from './Meta/Meta';
 
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru);
+
 const b = block('layout');
 
 export type LayoutProps = {
     title?: string;
     children?: React.ReactNode;
+    isPageConstrucor?: boolean;
     showOnlyContent?: boolean;
 };
 
-const lang = Lang.En;
 const theme = Theme.Dark;
 
-configureUiKit({lang});
-configurePageConstructor({lang});
+export const Layout: React.FC<LayoutProps> = ({
+    title,
+    children,
+    isPageConstrucor,
+    showOnlyContent,
+}) => {
+    const {i18n} = useTranslation();
 
-const getPageTitle = (title?: string) => `Gravity UI${title ? ` – ${title}` : ''}`;
+    const lang = i18n.language as Lang;
 
-export const MainPageLayout: React.FC<LayoutProps> = ({title, children}) => {
+    React.useEffect(() => {
+        configureUiKit({lang});
+        configurePageConstructor({lang});
+    }, [lang]);
+
+    const Provider = isPageConstrucor ? PageConstructorProvider : ThemeProvider;
+
     return (
         <React.Fragment>
             <Head>
-                <title>{getPageTitle(title)}</title>
+                <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
                 <Meta />
             </Head>
-
-            <PageConstructorProvider theme={theme}>
-                <div className={b()}>
-                    <div className={b('menu')} id={MENU_ID}>
-                        <Menu />
-                    </div>
-                    <div className={b('wrapper')} id={CONTENT_WRAPPER_ID}>
-                        <div className={b('content')}>{children}</div>
-                        <Footer />
-                    </div>
-                </div>
-            </PageConstructorProvider>
-        </React.Fragment>
-    );
-};
-
-export const Layout: React.FC<LayoutProps> = ({title, children, showOnlyContent}) => {
-    return (
-        <React.Fragment>
-            <Head>
-                <title>{getPageTitle(title)}</title>
-                <Meta />
-            </Head>
-            <ThemeProvider theme={theme}>
+            <Provider theme={theme}>
                 <div className={b()}>
                     {!showOnlyContent && (
                         <div className={b('menu')} id={MENU_ID}>
@@ -74,7 +69,7 @@ export const Layout: React.FC<LayoutProps> = ({title, children, showOnlyContent}
                         {!showOnlyContent && <Footer />}
                     </div>
                 </div>
-            </ThemeProvider>
+            </Provider>
         </React.Fragment>
     );
 };

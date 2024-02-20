@@ -15,49 +15,9 @@
     "roadmap": {
         "inProgress": "In progress"
     },
-    "libraries": {
-        "title": "Our libraries",
-        "searchPlaceholder": "Search by name or description",
-        "empty": "Nothing found",
-        "tags": {
-            "all": "All",
-            "ui": "UI",
-            "nodejs": "Node.js",
-            "infrastructure": "Infrastructure"
-        }
+    "navigation": {
+        "previous": "Previous",
+        "next": "Next"
     },
-    "library": {
-        "libraries": "Libraries",
-        "readme": "Readme",
-        "changelog": "Changelog",
-        "about": "About library",
-        "stars": "Stars",
-        "version": "Version",
-        "lastUpdate": "Last update",
-        "repository": "Repository",
-        "license": "License",
-        "issues": "Issues"
-    },
-    "icons": {
-        "actions": {
-            "copyIconName": "Copy icon name",
-            "copyLink": "Copy Link",
-            "copied": "Copied",
-            "copyReactComponent": "Copy React component",
-            "copySvgImport": "Copy SVG import",
-            "downloadSvg": "Download SVG"
-        },
-        "title": "Icons",
-        "goToLibrary": "Go to library",
-        "filterPlaceholder": "Filter by icon name",
-        "keywords": "Keywords",
-        "empty": {
-            "title": "No results found for your request",
-            "subTitle": "Please check the spelling or try another keywords."
-        },
-        "usage": {
-            "reactComponent": "React component",
-            "svg": "SVG"
-        }
-    }
+    "emptySearchPlaceholder": "Nothing found"
 }

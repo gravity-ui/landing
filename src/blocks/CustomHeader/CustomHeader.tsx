@@ -1,8 +1,9 @@
 import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {Button, ButtonProps, Icon} from '@gravity-ui/uikit';
 import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
-import TimeAgo from 'react-timeago';
+import ReactTimeAgo from 'react-time-ago';
 
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
@@ -40,6 +41,8 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     buttons = [],
     news,
 }) => {
+    const {i18n} = useTranslation();
+
     const showNewsBlock = news && news.items && news.items.length > 0;
 
     return (
@@ -86,7 +89,10 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                     newsItem.content ? (
                                         <div key={index} className={b('news-item')}>
                                             <div className={b('news-item-date')}>
-                                                <TimeAgo date={newsItem.date} />
+                                                <ReactTimeAgo
+                                                    date={new Date(newsItem.date)}
+                                                    locale={i18n.language}
+                                                />
                                             </div>
                                             <div className={b('news-item-content')}>
                                                 <HTML>{newsItem.content}</HTML>

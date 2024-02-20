@@ -1,4 +1,5 @@
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -44,6 +45,8 @@ export const Component: React.FC<ComponentProps> = ({
     readmeContent,
     sections,
 }) => {
+    const {t} = useTranslation();
+
     const [isClient, setIsClient] = React.useState(false);
 
     React.useEffect(() => {
@@ -148,7 +151,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 target="_blank"
                             >
                                 <Icon data={githubIcon} size={16} />
-                                <span>Github</span>
+                                <span>{t('actions.github')}</span>
                             </Button>
                         ) : null}
                         {component.figmaUrl ? (
@@ -161,7 +164,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 target="_blank"
                             >
                                 <Icon data={figmaIcon} size={16} />
-                                <span>Open in Figma</span>
+                                <span>{t('component:actions.openInFigma')}</span>
                             </Button>
                         ) : null}
                     </div>

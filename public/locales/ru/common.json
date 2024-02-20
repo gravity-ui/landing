@@ -15,49 +15,9 @@
     "roadmap": {
         "inProgress": "В работе"
     },
-    "libraries": {
-        "title": "Наши библиотеки",
-        "searchPlaceholder": "Поиск по имени и описанию",
-        "empty": "Ничего не найдено",
-        "tags": {
-            "all": "Все",
-            "ui": "UI",
-            "nodejs": "Node.js",
-            "infrastructure": "Инфраструктура"
-        }
+    "navigation": {
+        "previous": "Назад",
+        "next": "Вперёд"
     },
-    "library": {
-        "libraries": "Библиотеки",
-        "readme": "Readme",
-        "changelog": "Changelog",
-        "about": "О библиотеке",
-        "stars": "Звёзды",
-        "version": "Версия",
-        "lastUpdate": "Последнее обновление",
-        "repository": "Репозиторий",
-        "license": "Лицензия",
-        "issues": "Issues"
-    },
-    "icons": {
-        "actions": {
-            "copyIconName": "Копировать название иконки",
-            "copyLink": "Копировать ссылку",
-            "copied": "Скопировано",
-            "copyReactComponent": "Копировать React component",
-            "copySvgImport": "Копировать SVG импорт",
-            "downloadSvg": "Скачать SVG"
-        },
-        "title": "Иконки",
-        "goToLibrary": "К библиотеке",
-        "filterPlaceholder": "Фильтровать по названию",
-        "keywords": "Ключевые слова",
-        "empty": {
-            "title": "По вашему запросу нет результатов",
-            "subTitle": "Пожалуйста проверьте написание или попробуйте другие ключевые слова."
-        },
-        "usage": {
-            "reactComponent": "React component",
-            "svg": "SVG"
-        }
-    }
+    "emptySearchPlaceholder": "Ничего не найдено"
 }

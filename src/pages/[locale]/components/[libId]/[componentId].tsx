@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             libId: ctx.params?.libId,
             componentId: ctx.params?.componentId,
             readmeContent,
-            ...(await getI18nProps(ctx)),
+            ...(await getI18nProps(ctx, ['component'])),
         },
     };
 };

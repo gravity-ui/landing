@@ -25,7 +25,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     return {
-        props: {libId: ctx.params?.libId, ...(await getI18nProps(ctx, ['library']))},
+        props: {
+            libId: ctx.params?.libId,
+            ...(await getI18nProps(ctx, ['library', 'libraries-info'])),
+        },
     };
 };
 

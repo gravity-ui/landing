@@ -1,4 +1,5 @@
 import {CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -18,6 +19,8 @@ interface IconContentProps {
 }
 
 export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}) => {
+    const {t} = useTranslation();
+
     const createKeywordClickHandler = React.useCallback(
         (keyword: string) => () => {
             onClickToKeyword?.(keyword);
@@ -31,7 +34,10 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                 <Icon data={icon.data} size={ICON_SIZE} />
             </div>
             <div className={b('info')}>
-                <ClipboardArea textToCopy={icon.name} tooltipContent="Copy icon name">
+                <ClipboardArea
+                    textToCopy={icon.name}
+                    tooltipContent={t('icons:actions.copyIconName')}
+                >
                     {(status) => (
                         <div
                             className={b('title', {
@@ -45,7 +51,7 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                 </ClipboardArea>
                 {icon.meta.keywords.length ? (
                     <div className={b('keywords')}>
-                        <div className={b('keywords-title')}>Keywords</div>
+                        <div className={b('keywords-title')}>{t('icons:keywords')}</div>
                         <div className={b('keywords-items')}>
                             {icon.meta.keywords.map((keyword) => (
                                 <div

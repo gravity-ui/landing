@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
     return {
         props: {
-            ...(await getI18nProps(ctx)),
+            ...(await getI18nProps(ctx, ['icons'])),
         },
     };
 };
