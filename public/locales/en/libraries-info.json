@@ -1,0 +1,33 @@
+{
+    "description": {
+        "uikit": "Base UI components and tokens for building services with Gravity.",
+        "components": "A set of complex React components.",
+        "icons": "Set with hundreds of various modern SVG icons for your projects.",
+        "dynamic-forms": "Library for rendering neat and functional react forms described by JSON schema",
+        "page-constructor": "A set of stylish, functional blocks for quickly creating promo and landing pages.",
+        "blog-constructor": "A library based on the Page constructor library for creating blog-like services.",
+        "chartkit": "A data visualization suite integrated with our design system.",
+        "dashkit": "A grid component for building interactive dashboards.",
+        "yagr": "A high-performance canvas charts renderer, based on uPlot.",
+        "nodekit": "A simple toolkit for your Node.js apps, scripts and libraries.",
+        "expresskit": "Lightweight express.js wrapper that integrates with NodeKit.",
+        "app-layout": "HTML layout generator used in our SPA applications.",
+        "app-builder": "Webpack-based static assets builder used in our SPA applications.",
+        "navigation": "A compact and extensible navigation panel for complex services.",
+        "date-utils": "Helpers for managing Date and Time values.",
+        "date-components": "Various date components.",
+        "axios-wrapper": "Axios wrapper that provides automatic cancelling of concurrent requests.",
+        "dialog-fields": "A react-final-form wrapper that provides some useful high-level components for building forms.",
+        "paranoid": "Cluster topologies visualizator.",
+        "react-data-table": "A react component for rendering big and complex tables.",
+        "unipika": "Data formatting library.",
+        "ui-logger": "Simple client-side logger.",
+        "oauth-clients": "Client OAuth library that provides convenient abstraction on top of auth flow.",
+        "i18n": "Internationalization helpers of Gravity UI projects.",
+        "tsconfig": "TypeScript compiler configuration preset for Gravity UI projects.",
+        "prettier-config": "Prettier configuration preset for Gravity UI projects.",
+        "stylelint-config": "Stylelint configuration preset for Gravity UI projects.",
+        "babel-preset": "Babel configuration preset for Gravity UI projects.",
+        "browserslist-config": "Browserslist confugiration preset used in our services."
+    }
+}

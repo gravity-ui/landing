@@ -49,7 +49,9 @@ export const Libraries = () => {
         filteredLibs = filteredLibs.filter(
             (item) =>
                 item.config.title.toLowerCase().includes(lowerCaseFilterString) ||
-                item.config.description.toLowerCase().includes(lowerCaseFilterString),
+                t(`libraries-info:description.${item.config.id}`)
+                    .toLowerCase()
+                    .includes(lowerCaseFilterString),
         );
     }
 
@@ -58,7 +60,7 @@ export const Libraries = () => {
             <Grid>
                 <Row>
                     <Col sizes={12}>
-                        <h1 className={b('title')}>{t('libraries:title')}</h1>
+                        <h1 className={b('title')}>{t('libraries:header')}</h1>
                     </Col>
                 </Row>
                 <Row className={b('filters')}>
@@ -109,7 +111,7 @@ export const Libraries = () => {
                                         </div>
 
                                         <div className={b('description')}>
-                                            {lib.config.description}
+                                            {t(`libraries-info:description.${lib.config.id}`)}
                                         </div>
 
                                         {lib.config.npmId && lib.data.version ? (

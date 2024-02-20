@@ -15,7 +15,6 @@ import {
     UserAvatar,
     withTableSelection,
 } from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import avatar1Asset from '../../../../assets/avatar-1.png';
@@ -31,27 +30,25 @@ const b = block('examples-showcase');
 
 const SelectionTable = withTableSelection(Table);
 
+const tabs = [
+    {id: 'active', title: 'Active tab'},
+    {id: 'inactive', title: 'Inactive tab'},
+];
+
+const tableColumns = [
+    {id: 'title', name: 'Title'},
+    {id: 'createdBy', name: 'Created by'},
+    {id: 'updated', name: 'Updated'},
+    {id: 'created', name: 'Created'},
+    {id: 'favorite', name: ''},
+];
+
 export type ShowcaseProps = {
     color: string;
     theme: Theme;
 };
 
 export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
-    const {t} = useTranslation();
-
-    const tabs = [
-        {id: 'active', title: t('home:examples.items.activeTab')},
-        {id: 'inactive', title: t('home:examples.items.inactiveTab')},
-    ];
-
-    const tableColumns = [
-        {id: 'title', name: t('home:examples.items.table.title')},
-        {id: 'createdBy', name: t('home:examples.items.table.createdBy')},
-        {id: 'updated', name: t('home:examples.items.table.updated')},
-        {id: 'created', name: t('home:examples.items.table.created')},
-        {id: 'favorite', name: ''},
-    ];
-
     const [activeTab, setActiveTab] = React.useState(tabs[0].id);
 
     const [tableSelectedIds, setTableSelectedIds] = React.useState(['1']);
@@ -77,12 +74,12 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                             <div className={b('col-item')}>
                                 <div className={b('col-item-elem', {'sm-gap': true})}>
                                     <Button size="xl" view="action">
-                                        {t('home:examples.items.actionButton')}
+                                        Action
                                     </Button>
                                 </div>
                                 <div className={b('col-item-elem', {'sm-gap': true})}>
                                     <Button size="xl" view="outlined">
-                                        {t('home:examples.items.normalButton')}
+                                        Normal
                                     </Button>
                                 </div>
                             </div>
@@ -119,19 +116,13 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                             </div>
                             <div className={b('col-item')}>
                                 <RadioButton name="group2" defaultValue="all" size="l">
-                                    <RadioButton.Option
-                                        content={t('home:examples.items.all')}
-                                        value="all"
-                                    />
-                                    <RadioButton.Option
-                                        content={t('home:examples.items.my')}
-                                        value="my"
-                                    />
+                                    <RadioButton.Option content="All" value="all" />
+                                    <RadioButton.Option content="My" value="my" />
                                 </RadioButton>
                             </div>
                             <div className={b('col-item')}>
                                 <Label theme="info" size="m">
-                                    {t('home:examples.items.accent')}
+                                    Accent
                                 </Label>
                             </div>
                         </div>
@@ -143,7 +134,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                             columns={tableColumns}
                             data={[
                                 {
-                                    title: t('home:examples.items.table.rows.row1'),
+                                    title: 'Weekly Sync',
                                     createdBy: <UserAvatar imgUrl={avatar1Asset.src} />,
                                     updated: '28.06.2022',
                                     created: '26.06.2022',
@@ -166,7 +157,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                     ),
                                 },
                                 {
-                                    title: t('home:examples.items.table.rows.row2'),
+                                    title: 'Campaign brainstorm',
                                     createdBy: <UserAvatar imgUrl={avatar2Asset.src} />,
                                     updated: '7.06.2022',
                                     created: '16.06.2022',
@@ -189,7 +180,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                     ),
                                 },
                                 {
-                                    title: t('home:examples.items.table.rows.row3'),
+                                    title: 'Logo redesign',
                                     createdBy: <UserAvatar imgUrl={avatar3Asset.src} />,
                                     updated: '7.06.2022',
                                     created: '20.06.2022',

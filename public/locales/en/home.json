@@ -34,26 +34,6 @@
             "red": "Red",
             "green": "Green",
             "blue": "Blue"
-        },
-        "items": {
-            "actionButton": "Action",
-            "normalButton": "Normal",
-            "activeTab": "Active tab",
-            "inactiveTab": "Inactive tab",
-            "all": "All",
-            "my": "My",
-            "accent": "Accent",
-            "table": {
-                "title": "Title",
-                "createdBy": "Created by",
-                "updated": "Updated",
-                "created": "Created",
-                "rows": {
-                    "row1": "Weekly Sync",
-                    "row2": "Team brainstorm",
-                    "row3": "Logo redesign"
-                }
-            }
         }
     },
     "ourLibraries": {

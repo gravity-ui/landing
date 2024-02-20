@@ -16,7 +16,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (ctx) => {
     return {
         props: {
-            ...(await getI18nProps(ctx, ['libraries'])),
+            ...(await getI18nProps(ctx, ['libraries', 'libraries-info'])),
         },
     };
 };
@@ -27,7 +27,7 @@ export const LibrariesPage = () => {
     const {t} = useTranslation();
 
     return (
-        <Layout title={t('libraries:pageTitle')}>
+        <Layout title={t('libraries:title')}>
             <Libraries />
         </Layout>
     );

@@ -111,7 +111,9 @@ export const Library: React.FC<Props> = ({lib}) => {
                                 <HTML>{lib.config.title}</HTML>
                             </h1>
 
-                            <div className={b('description')}>{lib.config.description}</div>
+                            <div className={b('description')}>
+                                {t(`libraries-info:description.${lib.config.id}`)}
+                            </div>
 
                             {lib.config.githubId || lib.config.storybookUrl ? (
                                 <div className={b('buttons')}>
@@ -203,7 +205,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                         setIsVisibleInfoListMobile(!isVisibleInfoListMobile);
                                     }}
                                 >
-                                    <div className={b('info-title-text')}>About library</div>
+                                    <div className={b('info-title-text')}>{t('library:about')}</div>
                                     <div
                                         className={b('info-title-icon', {
                                             'mobile-visible': isVisibleInfoListMobile,

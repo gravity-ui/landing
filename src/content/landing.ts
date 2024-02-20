@@ -145,7 +145,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                 .map((lib) => ({
                     id: lib.id,
                     title: lib.title,
-                    description: lib.description,
+                    description: t(`libraries-info:description.${lib.id}`),
                 })),
         },
         {
