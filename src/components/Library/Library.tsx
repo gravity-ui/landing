@@ -13,7 +13,7 @@ import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {Link} from '../../components/Link';
-import {Lib, block} from '../../utils';
+import {Lib, block, getLocaleLink} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -32,7 +32,7 @@ type Props = {
 };
 
 export const Library: React.FC<Props> = ({lib}) => {
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
 
     const contentTabs = [
         {
@@ -123,7 +123,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             className={b('button')}
                                             view="action"
                                             size="xl"
-                                            href="/icons"
+                                            href={getLocaleLink('/icons', i18n)}
                                             target="_blank"
                                         >
                                             {t('library:actions.goToIcons')}

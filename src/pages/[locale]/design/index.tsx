@@ -3,10 +3,9 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
-import nextI18nextConfig from '../../../../next-i18next.config';
 import {Layout} from '../../../components/Layout/Layout';
 import {sections} from '../../../content/design';
-import {getI18nPaths, getI18nProps} from '../../../utils/i18next';
+import {getI18nPaths, getI18nProps, getLocaleLink} from '../../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
@@ -28,17 +27,16 @@ export const DesignPage = () => {
     const router = useRouter();
 
     React.useEffect(() => {
-        const localePrefix =
-            i18n.language === nextI18nextConfig.i18n.defaultLocale ? '/' : `/${i18n.language}/`;
-
         const firstSection = sections[0];
         if (firstSection) {
             const firstArticle = firstSection.articles[0];
 
             if (firstArticle) {
-                router.replace(`${localePrefix}design/${firstSection.id}/${firstArticle.id}`);
+                router.replace(
+                    getLocaleLink(`/design/${firstSection.id}/${firstArticle.id}`, i18n),
+                );
             } else {
-                router.replace(`${localePrefix}design/${firstSection.id}`);
+                router.replace(getLocaleLink(`/design/${firstSection.id}`, i18n));
             }
         } else {
             router.replace('/');

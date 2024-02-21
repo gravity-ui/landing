@@ -2,11 +2,10 @@ import {ArrowUpRightFromSquare, Magnifier} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import nextI18nextConfig from 'next-i18next.config';
 import React from 'react';
 
 import {useIsMobile} from '../../hooks/useIsMobile';
-import {block} from '../../utils';
+import {block, getLocaleLink} from '../../utils';
 
 import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
@@ -98,11 +97,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     </h1>
                     <div className={b('actions')}>
                         <Button
-                            href={`${
-                                i18n.language === nextI18nextConfig.i18n.defaultLocale
-                                    ? ''
-                                    : `/${i18n.language}`
-                            }/libraries/icons`}
+                            href={getLocaleLink('/libraries/icons', i18n)}
                             target="_blank"
                             className={b('library-button')}
                             size="xl"

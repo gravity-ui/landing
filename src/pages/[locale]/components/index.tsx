@@ -3,10 +3,9 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
-import nextI18nextConfig from '../../../../next-i18next.config';
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
-import {getI18nPaths, getI18nProps} from '../../../utils/i18next';
+import {getI18nPaths, getI18nProps, getLocaleLink} from '../../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
@@ -28,14 +27,11 @@ export const ComponentsPage = () => {
     const router = useRouter();
 
     React.useEffect(() => {
-        const localePrefix =
-            i18n.language === nextI18nextConfig.i18n.defaultLocale ? '/' : `/${i18n.language}/`;
-
         const firstLib = libs[0];
         if (firstLib) {
-            router.replace(`${localePrefix}components/${firstLib.id}`);
+            router.replace(getLocaleLink(`/components/${firstLib.id}`, i18n));
         } else {
-            router.replace(localePrefix);
+            router.replace(getLocaleLink('/', i18n));
         }
     }, []);
 
