@@ -16,7 +16,7 @@ export const relativeDateFieldConfig: Component = {
     sandbox: {
         component: dynamic(() =>
             import('../examples/components/RelativeDateFieldExample').then(
-                (mod) => mod.RelativeDateFieldExample,
+                (mod) => mod.RelativeDateFieldSandBoxExample,
             ),
         ),
         props: {
