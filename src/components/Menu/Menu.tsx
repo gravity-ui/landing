@@ -85,12 +85,6 @@ export const Menu: React.FC = () => {
                                 target="_blank"
                             >
                                 <Icon data={item.icon} size={20} />
-                                {/* <span>{item.title}</span> */}
-                                {/* <Icon
-                                    className={b('link-icon')}
-                                    data={linkArrowIcon}
-                                    size={LINK_ICON_SIZE}
-                                /> */}
                             </a>
                         </div>
                     ))}
