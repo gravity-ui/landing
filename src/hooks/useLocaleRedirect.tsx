@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 
 import i18nextConfig from '../../next-i18next.config';
 import {LOCALE_LOCAL_STORAGE_KEY} from '../constants';
-import {localeDetector} from '../utils/locale-detector';
+import {localeDetector} from '../utils';
 
 export const useLocaleRedirect = () => {
     const {i18n} = useTranslation();
