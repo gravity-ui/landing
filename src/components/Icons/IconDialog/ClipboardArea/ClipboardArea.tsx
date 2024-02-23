@@ -30,7 +30,7 @@ export const ClipboardArea: React.FC<ClipboardAreaProps> = ({
         <Popover
             disabled={isMobile}
             tooltipClassName={b('popup')}
-            content={tooltipContent ?? t('icons:actions.copyToClipboard')}
+            content={tooltipContent ?? t('actions_copyToClipboard')}
             placement="top"
             hasArrow
         >

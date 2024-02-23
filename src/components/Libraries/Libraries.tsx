@@ -20,19 +20,19 @@ export const Libraries = () => {
     const tags: TagItem[] = [
         {
             value: 'all',
-            title: t('libraries:tags.all'),
+            title: t('libraries:tags_all'),
         },
         {
             value: 'ui',
-            title: t('libraries:tags.ui'),
+            title: t('libraries:tags_ui'),
         },
         {
             value: 'nodejs',
-            title: t('libraries:tags.nodejs'),
+            title: t('libraries:tags_nodejs'),
         },
         {
             value: 'infrastructure',
-            title: t('libraries:tags.infrastructure'),
+            title: t('libraries:tags_infrastructure'),
         },
     ];
 
@@ -49,7 +49,7 @@ export const Libraries = () => {
         filteredLibs = filteredLibs.filter(
             (item) =>
                 item.config.title.toLowerCase().includes(lowerCaseFilterString) ||
-                t(`libraries-info:description.${item.config.id}`)
+                t(`libraries-info:description_${item.config.id}`)
                     .toLowerCase()
                     .includes(lowerCaseFilterString),
         );
@@ -111,7 +111,7 @@ export const Libraries = () => {
                                         </div>
 
                                         <div className={b('description')}>
-                                            {t(`libraries-info:description.${lib.config.id}`)}
+                                            {t(`libraries-info:description_${lib.config.id}`)}
                                         </div>
 
                                         {lib.config.npmId && lib.data.version ? (

@@ -6,20 +6,20 @@ export type MenuItem = {
 
 export const menu: MenuItem[] = [
     {
-        titleKey: 'menu.libraries',
+        titleKey: 'menu_libraries',
         url: '/libraries',
     },
     {
-        titleKey: 'menu.components',
+        titleKey: 'menu_components',
         // url: '/components',
         url: '/components/uikit',
     },
     {
-        titleKey: 'menu.design',
+        titleKey: 'menu_design',
         url: '/design',
     },
     {
-        titleKey: 'menu.icons',
+        titleKey: 'menu_icons',
         url: '/icons',
     },
 ];

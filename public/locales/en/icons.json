@@ -1,22 +1,16 @@
 {
-    "actions": {
-        "copyIconName": "Copy icon name",
-        "copyLink": "Copy Link",
-        "copied": "Copied",
-        "copyReactComponent": "Copy React component",
-        "copySvgImport": "Copy SVG import",
-        "downloadSvg": "Download SVG"
-    },
+    "actions_copyIconName": "Copy icon name",
+    "actions_copyLink": "Copy Link",
+    "actions_copied": "Copied",
+    "actions_copyReactComponent": "Copy React component",
+    "actions_copySvgImport": "Copy SVG import",
+    "actions_downloadSvg": "Download SVG",
     "title": "Icons",
     "goToLibrary": "Go to library",
     "filterPlaceholder": "Filter by icon name",
     "keywords": "Keywords",
-    "empty": {
-        "title": "No results found for your request",
-        "subTitle": "Please check the spelling or try another keywords."
-    },
-    "usage": {
-        "reactComponent": "React component",
-        "svg": "SVG"
-    }
+    "empty_title": "No results found for your request",
+    "empty_subTitle": "Please check the spelling or try another keywords.",
+    "usage_reactComponent": "React component",
+    "usage_svg": "SVG"
 }

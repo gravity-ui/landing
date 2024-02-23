@@ -101,7 +101,7 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => 
                         href="https://preview.gravity-ui.com/uikit"
                         target="_blank"
                     >
-                        {t('actions.storybook')}
+                        {t('actions_storybook')}
                     </Button>
                 </div>
             </div>

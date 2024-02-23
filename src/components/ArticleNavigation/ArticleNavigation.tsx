@@ -39,7 +39,7 @@ export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection
                     </div>
                     <Flex direction="column" gap="1" className={b('content')}>
                         <Text variant="body-short" color="light-complementary">
-                            {t('navigation.previous')}
+                            {t('navigation_previous')}
                         </Text>
                         <Text
                             className={b('content-title')}
@@ -63,7 +63,7 @@ export const ArticleNavigation: React.FC<ArticleNavigationProps> = ({prevSection
                     </div>
                     <Flex direction="column" gap="1" className={b('content')}>
                         <Text variant="body-short" color="light-complementary">
-                            {t('navigation.next')}
+                            {t('navigation_next')}
                         </Text>
                         <Text
                             className={b('content-title')}

@@ -72,7 +72,7 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId,
     return (
         <div className={b()}>
             <h1 className={b('title')}>{article.title}</h1>
-            <MDXRenderer text={article.content} />
+            <MDXRenderer key={`${sectionId}-${article.id}-article`} text={article.content} />
             <div className={b('navigation')}>
                 <ArticleNavigation prevSection={prevSection} nextSection={nextSection} />
             </div>

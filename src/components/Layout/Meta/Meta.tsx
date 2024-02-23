@@ -1,6 +1,8 @@
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 export const Meta: React.FC = () => {
+    const {t} = useTranslation();
     return (
         <React.Fragment>
             <meta charSet="utf-8" />
@@ -14,25 +16,16 @@ export const Meta: React.FC = () => {
 
             <link rel="apple-touch-icon" href="/favicon-192x192.png" />
 
-            <meta
-                name="description"
-                content="Build modern interfaces with the Gravity design system and libraries "
-            />
+            <meta name="description" content={t('project_description')} />
 
             <link data-react-helmet="true" rel="canonical" href="https://gravity-ui.com/" />
 
             <meta itemProp="name" content="Gravity&nbsp;UI" />
-            <meta
-                itemProp="description"
-                content="Build modern interfaces with the Gravity design system and libraries"
-            />
+            <meta itemProp="description" content={t('project_description')} />
             <meta itemProp="image" content="https://gravity-ui.com/index-social.png" />
 
             <meta property="og:title" content="Gravity&nbsp;UI" />
-            <meta
-                property="og:description"
-                content="Build modern interfaces with the Gravity design system and libraries"
-            />
+            <meta property="og:description" content={t('project_description')} />
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content="Gravity&nbsp;UI" />
             <meta property="og:url" content="https://gravity-ui.com/" />
@@ -40,10 +33,7 @@ export const Meta: React.FC = () => {
             <meta property="og:locale" content="en" />
 
             <meta name="twitter:title" content="Gravity&nbsp;UI" />
-            <meta
-                name="twitter:description"
-                content="Build modern interfaces with the Gravity design system and libraries"
-            />
+            <meta name="twitter:description" content={t('project_description')} />
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:image" content="https://gravity-ui.com/index-social.png" />
 

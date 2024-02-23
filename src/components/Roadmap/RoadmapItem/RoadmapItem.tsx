@@ -31,7 +31,7 @@ export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
                 <HTML>{task.title}</HTML>
                 {showStatus && (
                     <span className={b('status')}>
-                        {inProgress && t('roadmap.inProgress')}
+                        {inProgress && t('roadmap_inProgress')}
                         {completed && task.completedDate && (
                             <ReactTimeAgo
                                 date={new Date(task.completedDate)}

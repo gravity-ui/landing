@@ -1,65 +1,34 @@
 {
-    "header": {
-        "title": "Создавайте современные интерфейсы с дизайн системой Gravity",
-        "actions": {
-            "howToStart": "Начать использовать"
-        }
-    },
-    "news": {
-        "title": "Последние новости",
-        "items": {
-            "item1": "Если вас интересуют наши будущие планы, вы можете ознакомиться с <a href=\"/#roadmap\">Roadmap секцией</a>.",
-            "item2": "Мы продолжаем улучшать наши <a href=\"/#templates\">шаблоны</a> и добавили <a href=\"https://github.com/gravity-ui/gravity-ui-remix-example\">Remix шаблон</a>. Если вам нужны другие шаблоны, не стесняйтесь создавать <a href=\"https://github.com/gravity-ui/landing/issues/new\">issue</a>.",
-            "item3": "Мы добавили шаблоны для популярных фреймворков (<a href=\"https://github.com/gravity-ui/gravity-ui-cra-example\">CRA</a>, <a href=\"https://github.com/gravity-ui/gravity-ui-nextjs-example\">Next.js</a>, <a href=\"https://github.com/gravity-ui/gravity-ui-vite-example\">Vite</a>) и сделали редизайн <a href=\"/#templates\">секции с шаблонами</a>. Теперь ещё проще испольщзовать наш фреймворк в ваших проектах."
-        }
-    },
-    "features": {
-        "feature1": {
-            "title": "Основано на реальном опыте использования",
-            "description": "Внутреннее решение в ответ на реальные потребности разработчиков, мы выпустили Gravity для open-source сообщества."
-        },
-        "feature2": {
-            "title": "Отличный дизайн",
-            "description": "Опытные дизайнеры следят за внешним видом наших библиотек, следя за тем, чтобы компоненты были стильными и согласованными, с поддержкой темного режима и высококонтрастных тем."
-        },
-        "feature3": {
-            "title": "Развивающаяся экосистема",
-            "description": "Регулярная обратная связь от нашего сообщества разработчиков позволяет нам постоянно улучшать наши библиотеки и нарушать совместимость только при необходимости."
-        }
-    },
-    "examples": {
-        "title": "Примеры",
-        "colors": {
-            "yellow": "Жёлтый",
-            "red": "Красный",
-            "green": "Зелёный",
-            "blue": "Синий"
-        }
-    },
-    "ourLibraries": {
-        "title": "Наши библиотеки",
-        "allLibraries": "Все библиотеки"
-    },
-    "roadmap": {
-        "title": "Roadmap 2024",
-        "items": {
-            "item1": "<b>Date Components:</b> новая библиотека для работы с датами и временем",
-            "item2": "<b>UIKit:</b> поддержка языков с письмом справа налево",
-            "item3": "<b>UIKit:</b> улучшение доступности",
-            "item4": "<b>Figma:</b> конструктор шаблонов цветовых тем",
-            "item5": "<b>Ферма стендов для разработки</b>",
-            "item6": "<b>Docs:</b> Date Components в разделе Компоненты",
-            "item7": "<b>UIKit:</b> компонент выбора эмодзи, компонент выбора цвета, компоненты ввода лейблов и выбора диапазона",
-            "item8": "<b>UIKit:</b> миграция на Floating UI",
-            "item9": "<b>Docs:</b> Page constructor в разделе Компоненты",
-            "item10": "<b>UIKit:</b> расширенние поддержки мобильной верстки",
-            "item11": "<b>Page constructor:</b> блок футера"
-        }
-    },
-    "templates": {
-        "title": "Начните создавать с Gravity&nbsp;UI"
-    },
-    "companies": {
-        "title": "Нам доверяют"
-    }
+    "header_actions_howToStart": "Начать использовать",
+    "news_title": "Последние новости",
+    "news_items_item1": "Если вас интересуют наши будущие планы, вы можете ознакомиться с <a href=\"/ru#roadmap\">Roadmap секцией</a>.",
+    "news_items_item2": "Мы продолжаем улучшать наши <a href=\"/ru#templates\">шаблоны</a> и добавили <a href=\"https://github.com/gravity-ui/gravity-ui-remix-example\">Remix шаблон</a>. Если вам нужны другие шаблоны, не стесняйтесь создавать <a href=\"https://github.com/gravity-ui/landing/issues/new\">issue</a>.",
+    "news_items_item3": "Мы добавили шаблоны для популярных фреймворков (<a href=\"https://github.com/gravity-ui/gravity-ui-cra-example\">CRA</a>, <a href=\"https://github.com/gravity-ui/gravity-ui-nextjs-example\">Next.js</a>, <a href=\"https://github.com/gravity-ui/gravity-ui-vite-example\">Vite</a>) и сделали редизайн <a href=\"/ru#templates\">секции с шаблонами</a>. Теперь ещё проще использовать наш фреймворк в ваших проектах.",
+    "features_feature1_title": "Основано на реальном опыте использования",
+    "features_feature1_description": "Внутреннее решение в ответ на реальные потребности разработчиков, мы выпустили Gravity для open-source сообщества.",
+    "features_feature2_title": "Отличный дизайн",
+    "features_feature2_description": "Опытные дизайнеры следят за внешним видом наших библиотек, следя за тем, чтобы компоненты были стильными и согласованными, с поддержкой темного режима и высококонтрастных тем.",
+    "features_feature3_title": "Развивающаяся экосистема",
+    "features_feature3_description": "Регулярная обратная связь от нашего сообщества разработчиков позволяет нам постоянно улучшать наши библиотеки и нарушать совместимость только при необходимости.",
+    "examples_title": "Примеры",
+    "examples_colors_yellow": "Жёлтый",
+    "examples_colors_red": "Красный",
+    "examples_colors_green": "Зелёный",
+    "examples_colors_blue": "Синий",
+    "libraries_title": "Наши библиотеки",
+    "libraries_actions_allLibraries": "Все библиотеки",
+    "roadmap_title": "Roadmap 2024",
+    "roadmap_items_item1": "<b>Date Components:</b> новая библиотека для работы с датами и временем",
+    "roadmap_items_item2": "<b>UIKit:</b> поддержка языков с письмом справа налево",
+    "roadmap_items_item3": "<b>UIKit:</b> улучшение доступности",
+    "roadmap_items_item4": "<b>Figma:</b> конструктор шаблонов цветовых тем",
+    "roadmap_items_item5": "<b>Ферма стендов для разработки</b>",
+    "roadmap_items_item6": "<b>Docs:</b> Date Components в разделе Компоненты",
+    "roadmap_items_item7": "<b>UIKit:</b> компонент выбора эмодзи, компонент выбора цвета, компоненты ввода лейблов и выбора диапазона",
+    "roadmap_items_item8": "<b>UIKit:</b> миграция на Floating UI",
+    "roadmap_items_item9": "<b>Docs:</b> Page constructor в разделе Компоненты",
+    "roadmap_items_item10": "<b>UIKit:</b> Расширенная поддержка мобильный устройств",
+    "roadmap_items_item11": "<b>Page constructor:</b> блок футера",
+    "templates_title": "Начните создавать с Gravity&nbsp;UI",
+    "companies_title": "Нам доверяют"
 }

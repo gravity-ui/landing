@@ -67,7 +67,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
                             className={b('copy-action', {lg: i18n.language === 'ru'})}
                         >
                             <Icon data={isCopied ? Check : Link} size={16} />
-                            {isCopied ? t('icons:actions.copied') : t('icons:actions.copyLink')}
+                            {isCopied ? t('icons:actions_copied') : t('icons:actions_copyLink')}
                         </Button>
                     );
                 }}
@@ -81,7 +81,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
             return (
                 <Button view="action" size="xl" onClick={handleShareIcon}>
                     <Icon data={ArrowShapeTurnUpRight} size={16} />
-                    {t('icons:actions.share')}
+                    {t('actions_share')}
                 </Button>
             );
         }
@@ -102,7 +102,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
                         loading={isDownloadInProgress}
                     >
                         <Icon data={ArrowDownToLine} size={20} />
-                        {t('icons:actions.downloadSvg')}
+                        {t('icons:actions_downloadSvg')}
                     </Button>
                     {copyLinkAction}
                 </>

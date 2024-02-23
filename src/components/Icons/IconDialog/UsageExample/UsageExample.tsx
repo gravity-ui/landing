@@ -28,14 +28,14 @@ export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
     return (
         <div className={b()}>
             <div className={b('title')}>
-                {variant === 'react' ? t('icons:usage.reactComponent') : t('icons:usage.svg')}
+                {variant === 'react' ? t('icons:usage_reactComponent') : t('icons:usage_svg')}
             </div>
             <ClipboardArea
                 textToCopy={importCode}
                 tooltipContent={
                     variant === 'react'
-                        ? t('icons:actions.copyReactComponent')
-                        : t('icons:actions.copySvgImport')
+                        ? t('icons:actions_copyReactComponent')
+                        : t('icons:actions_copySvgImport')
                 }
             >
                 {(status) => (

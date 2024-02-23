@@ -1,3 +1,4 @@
+// Support for default locale without path prefix
 import {GetStaticPaths} from 'next';
 
 import {sections as designSections} from '../../../content/design';

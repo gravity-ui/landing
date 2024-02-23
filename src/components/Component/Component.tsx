@@ -151,7 +151,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 target="_blank"
                             >
                                 <Icon data={githubIcon} size={16} />
-                                <span>{t('actions.github')}</span>
+                                <span>{t('actions_github')}</span>
                             </Button>
                         ) : null}
                         {component.figmaUrl ? (
@@ -164,7 +164,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 target="_blank"
                             >
                                 <Icon data={figmaIcon} size={16} />
-                                <span>{t('component:actions.openInFigma')}</span>
+                                <span>{t('component:actions_openInFigma')}</span>
                             </Button>
                         ) : null}
                     </div>
@@ -193,13 +193,18 @@ export const Component: React.FC<ComponentProps> = ({
             <div className={b('content')}>
                 {tabId === Tab.Design && component.content?.design ? (
                     <React.Fragment>
-                        {isClient && <MDXRenderer key="design" text={component.content?.design} />}
+                        {isClient && (
+                            <MDXRenderer
+                                key={`${libId}-${component.id}-design`}
+                                text={component.content?.design}
+                            />
+                        )}
                     </React.Fragment>
                 ) : (
                     <>
                         {isClient && component.sandbox ? (
                             <SandboxBlock
-                                key={`${libId}-${component.id}`}
+                                key={`${libId}-${component.id}-sandbox`}
                                 libId={libId}
                                 componentId={component.id}
                                 sandboxConfig={component.sandbox.props}
@@ -207,7 +212,7 @@ export const Component: React.FC<ComponentProps> = ({
                         ) : null}
                         {isClient && (
                             <MDXRenderer
-                                key="overview"
+                                key={`${libId}-${component.id}-overview`}
                                 text={readmeContent}
                                 rewriteLinks={rewriteLinks}
                                 withComponents

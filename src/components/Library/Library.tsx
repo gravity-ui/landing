@@ -112,7 +112,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                             </h1>
 
                             <div className={b('description')}>
-                                {t(`libraries-info:description.${lib.config.id}`)}
+                                {t(`libraries-info:description_${lib.config.id}`)}
                             </div>
 
                             {lib.config.githubId || lib.config.storybookUrl ? (
@@ -126,7 +126,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             href={getLocaleLink('/icons', i18n)}
                                             target="_blank"
                                         >
-                                            {t('library:actions.goToIcons')}
+                                            {t('library:actions_goToIcons')}
                                         </Button>
                                     )}
                                     {lib.config.githubId ? (
@@ -143,7 +143,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                 data={githubIcon}
                                                 size={16}
                                             />
-                                            <span>{t('actions.github')}</span>
+                                            <span>{t('actions_github')}</span>
                                         </Button>
                                     ) : null}
                                     {lib.config.id !== 'icons' && lib.config.storybookUrl ? (
@@ -160,7 +160,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                 data={storybookIcon}
                                                 size={16}
                                             />
-                                            <span>{t('actions.storybook')}</span>
+                                            <span>{t('actions_storybook')}</span>
                                         </Button>
                                     ) : null}
                                 </div>
@@ -183,7 +183,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                             />
                             <div className={b('content')}>
                                 <MDXRenderer
-                                    key={activeTab}
+                                    key={`${lib.config.id}-${activeTab}`}
                                     text={
                                         activeTab === Tab.Readme
                                             ? lib.data.readme

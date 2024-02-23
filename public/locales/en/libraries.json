@@ -3,10 +3,8 @@
     "header": "Our libraries",
     "searchPlaceholder": "Search by name or description",
     "empty": "Nothing found",
-    "tags": {
-        "all": "All",
-        "ui": "UI",
-        "nodejs": "Node.js",
-        "infrastructure": "Infrastructure"
-    }
+    "tags_all": "All",
+    "tags_ui": "UI",
+    "tags_nodejs": "Node.js",
+    "tags_infrastructure": "Infrastructure"
 }

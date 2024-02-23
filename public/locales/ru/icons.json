@@ -1,22 +1,16 @@
 {
-    "actions": {
-        "copyIconName": "Копировать название иконки",
-        "copyLink": "Копировать ссылку",
-        "copied": "Скопировано",
-        "copyReactComponent": "Копировать React component",
-        "copySvgImport": "Копировать SVG импорт",
-        "downloadSvg": "Скачать SVG"
-    },
+    "actions_copyIconName": "Копировать название иконки",
+    "actions_copyLink": "Копировать ссылку",
+    "actions_copied": "Скопировано",
+    "actions_copyReactComponent": "Копировать React компонент",
+    "actions_copySvgImport": "Копировать SVG импорт",
+    "actions_downloadSvg": "Скачать SVG",
     "title": "Иконки",
     "goToLibrary": "К библиотеке",
     "filterPlaceholder": "Фильтровать по названию",
     "keywords": "Ключевые слова",
-    "empty": {
-        "title": "По вашему запросу нет результатов",
-        "subTitle": "Пожалуйста проверьте написание или попробуйте другие ключевые слова."
-    },
-    "usage": {
-        "reactComponent": "React component",
-        "svg": "SVG"
-    }
+    "empty_title": "По вашему запросу нет результатов",
+    "empty_subTitle": "Пожалуйста проверьте написание или попробуйте другие ключевые слова.",
+    "usage_reactComponent": "React компонент",
+    "usage_svg": "SVG"
 }

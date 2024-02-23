@@ -1,7 +1,5 @@
 {
-    "actions": {
-        "goToIcons": "Go to icons"
-    },
+    "actions_goToIcons": "Go to icons",
     "libraries": "Libraries",
     "readme": "Readme",
     "changelog": "Changelog",

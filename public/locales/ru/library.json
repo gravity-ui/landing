@@ -1,7 +1,5 @@
 {
-    "actions": {
-        "goToIcons": "Перейти к иконкам"
-    },
+    "actions_goToIcons": "Перейти к иконкам",
     "libraries": "Библиотеки",
     "readme": "Readme",
     "changelog": "Changelog",

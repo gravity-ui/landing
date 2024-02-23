@@ -1,23 +1,16 @@
 {
-    "actions": {
-        "open": "Открыть",
-        "copyToClipboard": "Копировать в буфер обмена",
-        "share": "Поделиться",
-        "github": "GitHub",
-        "storybook": "Storybook"
-    },
-    "menu": {
-        "libraries": "Библиотеки",
-        "components": "Компоненты",
-        "design": "Дизайн",
-        "icons": "Иконки"
-    },
-    "roadmap": {
-        "inProgress": "В работе"
-    },
-    "navigation": {
-        "previous": "Назад",
-        "next": "Вперёд"
-    },
+    "project_description": "Создавайте современные интерфейсы с дизайн системой Gravity",
+    "actions_open": "Открыть",
+    "actions_copyToClipboard": "Копировать в буфер обмена",
+    "actions_share": "Поделиться",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "menu_libraries": "Библиотеки",
+    "menu_components": "Компоненты",
+    "menu_design": "Дизайн",
+    "menu_icons": "Иконки",
+    "roadmap_inProgress": "В работе",
+    "navigation_previous": "Назад",
+    "navigation_next": "Вперёд",
     "emptySearchPlaceholder": "Ничего не найдено"
 }

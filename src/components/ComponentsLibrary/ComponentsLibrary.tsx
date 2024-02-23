@@ -1,12 +1,12 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
-import Link from 'next/link';
 import {useRouter} from 'next/router';
 import React from 'react';
 
 import soonLabelIcon from '../../assets/icons/soon-label.svg';
 import {Lib} from '../../content/components/types';
 import {block} from '../../utils';
+import {Link} from '../Link';
 
 import './ComponentsLibrary.scss';
 

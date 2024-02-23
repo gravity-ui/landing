@@ -37,10 +37,10 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
     blocks: [
         {
             type: CustomBlock.CustomHeader,
-            title: t('home:header.title'),
+            title: t('project_description'),
             buttons: [
                 {
-                    text: t('home:header.actions.howToStart'),
+                    text: t('home:header_actions_howToStart'),
                     view: 'action',
                     icon: rocketIcon,
                     onClick: () => {
@@ -52,7 +52,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     },
                 },
                 {
-                    text: t('actions.github'),
+                    text: t('actions_github'),
                     view: 'outlined',
                     icon: githubIcon,
                     href: 'https://github.com/gravity-ui',
@@ -60,19 +60,19 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                 },
             ],
             news: {
-                title: t('home:news.title'),
+                title: t('home:news_title'),
                 items: [
                     {
                         date: '2024-02-01T10:00:00.000Z',
-                        content: t('home:news.items.item1'),
+                        content: t('home:news_items_item1'),
                     },
                     {
                         date: '2024-01-23T12:00:00.000Z',
-                        content: t('home:news.items.item2'),
+                        content: t('home:news_items_item2'),
                     },
                     {
                         date: '2023-12-22T14:00:00.000Z',
-                        content: t('home:news.items.item3'),
+                        content: t('home:news_items_item3'),
                     },
                 ],
             },
@@ -89,40 +89,40 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             },
             items: [
                 {
-                    title: t('home:features.feature1.title'),
-                    description: t('home:features.feature1.description'),
+                    title: t('home:features_feature1_title'),
+                    description: t('home:features_feature1_description'),
                     icon: featureUnionAsset,
                 },
                 {
-                    title: t('home:features.feature2.title'),
-                    description: t('home:features.feature2.description'),
+                    title: t('home:features_feature2_title'),
+                    description: t('home:features_feature2_description'),
                     icon: featureStarAsset,
                 },
                 {
-                    title: t('home:features.feature3.title'),
-                    description: t('home:features.feature3.description'),
+                    title: t('home:features_feature3_title'),
+                    description: t('home:features_feature3_description'),
                     icon: featureShieldAsset,
                 },
             ],
         },
         {
             type: CustomBlock.Examples,
-            title: t('home:examples.title'),
+            title: t('home:examples_title'),
             colors: [
                 {
-                    title: t('home:examples.colors.yellow'),
+                    title: t('home:examples_colors_yellow'),
                     value: 'yellow',
                 },
                 {
-                    title: t('home:examples.colors.red'),
+                    title: t('home:examples_colors_red'),
                     value: 'red',
                 },
                 {
-                    title: t('home:examples.colors.green'),
+                    title: t('home:examples_colors_green'),
                     value: 'green',
                 },
                 {
-                    title: t('home:examples.colors.blue'),
+                    title: t('home:examples_colors_blue'),
                     value: 'blue',
                 },
             ],
@@ -130,9 +130,9 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
         {
             type: CustomBlock.CustomExtendedFeatures,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            title: t('home:ourLibraries.title'),
+            title: t('home:libraries_title'),
             button: {
-                text: t('home:ourLibraries.allLibraries'),
+                text: t('home:libraries_actions_allLibraries'),
                 href: '/libraries',
             },
             colSizes: {
@@ -145,17 +145,17 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                 .map((lib) => ({
                     id: lib.id,
                     title: lib.title,
-                    description: t(`libraries-info:description.${lib.id}`),
+                    description: t(`libraries-info:description_${lib.id}`),
                 })),
         },
         {
             type: CustomBlock.Roadmap,
-            title: t('home:roadmap.title'),
+            title: t('home:roadmap_title'),
             tasks: getRoadmapTasks(t),
         },
         {
             type: CustomBlock.Templates,
-            title: t('home:templates.title'),
+            title: t('home:templates_title'),
             tabs: [
                 {
                     title: 'CRA',
@@ -168,7 +168,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-cra-mpg4q3',
                         target: '_blank',
-                        title: `${t('common:actions.open')} CRA Playground`,
+                        title: `${t('common:actions_open')} CRA Playground`,
                     },
                 },
                 {
@@ -182,7 +182,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-next-js-vvq8lf',
                         target: '_blank',
-                        title: `${t('common:actions.open')} Next.js Playground`,
+                        title: `${t('common:actions_open')} Next.js Playground`,
                     },
                 },
                 {
@@ -196,7 +196,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-vite-36dq3r',
                         target: '_blank',
-                        title: `${t('common:actions.open')} Vite Playground`,
+                        title: `${t('common:actions_open')} Vite Playground`,
                     },
                 },
                 {
@@ -210,14 +210,14 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-remix-template-2y5ykj',
                         target: '_blank',
-                        title: `${t('common:actions.open')} Remix Playground`,
+                        title: `${t('common:actions_open')} Remix Playground`,
                     },
                 },
             ],
         },
         {
             type: BlockType.CompaniesBlock,
-            title: t('home:companies.title'),
+            title: t('home:companies_title'),
             images: {
                 desktop: companiesDesktopAsset,
                 tablet: companiesTabletAsset,

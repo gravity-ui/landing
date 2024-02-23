@@ -36,7 +36,7 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
             <div className={b('info')}>
                 <ClipboardArea
                     textToCopy={icon.name}
-                    tooltipContent={t('icons:actions.copyIconName')}
+                    tooltipContent={t('icons:actions_copyIconName')}
                 >
                     {(status) => (
                         <div

@@ -4,47 +4,47 @@ import {RoadmapTask, RoadmapTaskStatus} from '../components/Roadmap';
 
 export const getRoadmapTasks = (t: TFunction): RoadmapTask[] => [
     {
-        title: t('home:roadmap.items.item1'),
+        title: t('home:roadmap_items_item1'),
         status: RoadmapTaskStatus.Completed,
     },
     {
-        title: t('home:roadmap.items.item2'),
+        title: t('home:roadmap_items_item2'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: t('home:roadmap.items.item3'),
+        title: t('home:roadmap_items_item3'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: t('home:roadmap.items.item4'),
+        title: t('home:roadmap_items_item4'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: t('home:roadmap.items.item5'),
+        title: t('home:roadmap_items_item5'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: t('home:roadmap.items.item6'),
+        title: t('home:roadmap_items_item6'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: t('home:roadmap.items.item7'),
+        title: t('home:roadmap_items_item7'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: t('home:roadmap.items.item8'),
+        title: t('home:roadmap_items_item8'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: t('home:roadmap.items.item9'),
+        title: t('home:roadmap_items_item9'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: t('home:roadmap.items.item10'),
+        title: t('home:roadmap_items_item10'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: t('home:roadmap.items.item11'),
+        title: t('home:roadmap_items_item11'),
         status: RoadmapTaskStatus.Planned,
     },
 ];

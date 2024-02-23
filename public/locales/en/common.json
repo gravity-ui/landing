@@ -1,23 +1,16 @@
 {
-    "actions": {
-        "open": "Open",
-        "copyToClipboard": "Copy to clipboard",
-        "share": "Share",
-        "github": "GitHub",
-        "storybook": "Storybook"
-    },
-    "menu": {
-        "libraries": "Libraries",
-        "components": "Components",
-        "design": "Design",
-        "icons": "Icons"
-    },
-    "roadmap": {
-        "inProgress": "In progress"
-    },
-    "navigation": {
-        "previous": "Previous",
-        "next": "Next"
-    },
+    "project_description": "Build modern interfaces with the Gravity design system and libraries",
+    "actions_open": "Open",
+    "actions_copyToClipboard": "Copy to clipboard",
+    "actions_share": "Share",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "menu_libraries": "Libraries",
+    "menu_components": "Components",
+    "menu_design": "Design",
+    "menu_icons": "Icons",
+    "roadmap_inProgress": "In progress",
+    "navigation_previous": "Previous",
+    "navigation_next": "Next",
     "emptySearchPlaceholder": "Nothing found"
 }

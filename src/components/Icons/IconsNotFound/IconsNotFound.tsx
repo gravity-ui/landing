@@ -12,8 +12,8 @@ export const IconsNotFound = () => {
 
     return (
         <div className={b()}>
-            <div className={b('title')}>{t('icons:empty.title')}</div>
-            <div className={b('subtitle')}>{t('icons:empty.subTitle')}</div>
+            <div className={b('title')}>{t('icons:empty_title')}</div>
+            <div className={b('subtitle')}>{t('icons:empty_subTitle')}</div>
         </div>
     );
 };
