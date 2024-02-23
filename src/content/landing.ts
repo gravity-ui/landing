@@ -37,7 +37,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
     blocks: [
         {
             type: CustomBlock.CustomHeader,
-            title: t('project_description'),
+            title: t('home:header_title'),
             buttons: [
                 {
                     text: t('home:header_actions_howToStart'),
