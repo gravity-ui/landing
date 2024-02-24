@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 
 import i18nextConfig from '../../next-i18next.config';
 import {LOCALE_LOCAL_STORAGE_KEY} from '../constants';
-import {localeDetector} from '../utils';
+import {detectLocale} from '../utils';
 
 export const useLocaleRedirect = () => {
     const {i18n} = useTranslation();
@@ -19,9 +19,7 @@ export const useLocaleRedirect = () => {
 
         const localStorageLocale = localStorage.getItem(LOCALE_LOCAL_STORAGE_KEY);
 
-        const correctLocale = localStorageLocale
-            ? localStorageLocale
-            : localeDetector.detect() ?? i18nextConfig.i18n.defaultLocale;
+        const correctLocale = localStorageLocale ? localStorageLocale : detectLocale();
 
         if (currentLocale !== correctLocale) {
             const currentPath = router.asPath;
