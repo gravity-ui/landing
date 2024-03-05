@@ -63,7 +63,7 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
                     >
                         {(status) => (
                             <div
-                                className={b('title', {
+                                className={b('container', {
                                     copied: status === CopyToClipboardStatus.Success,
                                 })}
                             >
