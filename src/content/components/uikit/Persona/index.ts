@@ -13,7 +13,7 @@ export const personaConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Persona)),
+        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Avatar)),
         props: {
             text: {
                 type: 'input',

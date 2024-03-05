@@ -1,4 +1,4 @@
-import {CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
+import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -35,7 +35,7 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                     {(status) => (
                         <div
                             className={b('title', {
-                                copied: status === CopyToClipboardStatus.Success,
+                                copied: status === 'success',
                             })}
                         >
                             <span className={b('name')}>{icon.name}</span>

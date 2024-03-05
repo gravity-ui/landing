@@ -18,7 +18,7 @@ const ToastersCardInner = () => {
             title: 'Work it harder',
             content: 'Make it better',
             autoHiding: 3500,
-            type: 'warning',
+            theme: 'warning',
             isClosable: false,
         });
 
@@ -28,7 +28,7 @@ const ToastersCardInner = () => {
                 title: 'Do it faster',
                 content: 'Makes us stronger',
                 autoHiding: 3500,
-                type: 'success',
+                theme: 'success',
                 isClosable: false,
             });
         }, 2000);
@@ -39,7 +39,7 @@ const ToastersCardInner = () => {
                 title: 'Work it harder',
                 content: 'Make it better',
                 autoHiding: 3500,
-                type: 'info',
+                theme: 'info',
                 isClosable: false,
             });
         }, 4000);
@@ -50,7 +50,7 @@ const ToastersCardInner = () => {
                 title: 'Do it faster',
                 content: 'Makes us stronger',
                 autoHiding: 3500,
-                type: 'error',
+                theme: 'danger',
                 isClosable: false,
             });
         }, 6000);
