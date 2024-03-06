@@ -1,9 +1,9 @@
+import {dateTime} from '@gravity-ui/date-utils';
 import {ChevronRight} from '@gravity-ui/icons';
 import {HTML} from '@gravity-ui/page-constructor';
 import {Icon, Link} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
-import ReactTimeAgo from 'react-time-ago';
 
 import {block} from '../../../utils';
 import {RoadmapIcon} from '../RoadmapIcon/RoadmapIcon';
@@ -32,12 +32,12 @@ export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
                 {showStatus && (
                     <span className={b('status')}>
                         {inProgress && t('roadmap_inProgress')}
-                        {completed && task.completedDate && (
-                            <ReactTimeAgo
-                                date={new Date(task.completedDate)}
-                                locale={i18n.language}
-                            />
-                        )}
+                        {completed &&
+                            task.completedDate &&
+                            dateTime({
+                                input: new Date(task.completedDate),
+                                lang: i18n.language,
+                            }).fromNow()}
                     </span>
                 )}
             </div>

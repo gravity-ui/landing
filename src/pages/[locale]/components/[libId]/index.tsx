@@ -3,8 +3,6 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
-// import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
-// import {ComponentsLibrary} from '../../../components/ComponentsLibrary/ComponentsLibrary';
 import {Layout} from '../../../../components/Layout/Layout';
 import {libs} from '../../../../content/components';
 import {getI18nPaths, getI18nProps, getLocaleLink} from '../../../../utils';
@@ -53,20 +51,6 @@ export const LibraryComponentsPage = ({libId}: {libId: string}) => {
 
     // Prevent blinking before redirect
     return <Layout title="Components" />;
-
-    // const lib = libs.find((item) => item.id === libId);
-
-    // if (!lib) {
-    //     return null;
-    // }
-
-    // return (
-    //     <Layout title={lib.title}>
-    //         <ComponentsLayout libId={libId}>
-    //             <ComponentsLibrary lib={lib} />
-    //         </ComponentsLayout>
-    //     </Layout>
-    // );
 };
 
 export default LibraryComponentsPage;

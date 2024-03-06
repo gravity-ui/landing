@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 
 import {Article} from '../../content/design/types';
 import {block} from '../../utils';
@@ -17,19 +17,19 @@ export type DesignArticleProps = {
 };
 
 export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId, sections}) => {
-    const currentSection = useMemo(
+    const currentSection = React.useMemo(
         () => sections.find((item) => item.id === sectionId),
         [sectionId, sections],
     );
 
-    const currentIndex = useMemo(() => {
+    const currentIndex = React.useMemo(() => {
         if (!currentSection || !currentSection.subSections) {
             return null;
         }
         return currentSection.subSections.findIndex((item) => item.id === article.id);
     }, [currentSection, article.id]);
 
-    const nextSection = useMemo(() => {
+    const nextSection = React.useMemo(() => {
         if (
             !currentSection ||
             !currentSection.subSections ||
@@ -49,7 +49,7 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId,
         return nextSubSection.isComingSoon ? null : nextSubSection;
     }, [currentIndex, currentSection]);
 
-    const prevSection = useMemo(() => {
+    const prevSection = React.useMemo(() => {
         if (
             !currentSection ||
             !currentSection.subSections ||

@@ -10,7 +10,7 @@ import 'prismjs/components/prism-bash.js';
 import 'prismjs/components/prism-jsx.js';
 import 'prismjs/components/prism-tsx.js';
 import 'prismjs/components/prism-typescript.js';
-import React, {memo} from 'react';
+import React from 'react';
 import * as runtime from 'react/jsx-runtime';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
@@ -44,7 +44,7 @@ type Props = {
     rewriteLinks?: (link: string) => string;
 };
 
-export const MDXRenderer = memo<Props>(
+export const MDXRenderer = React.memo<Props>(
     ({text, withComponents = false, absoluteImgPath, rewriteLinks}) => {
         const [isEvaluated, setIsEvaluated] = React.useState(false);
         const resultRef = React.useRef<MDXContent | null>(null);

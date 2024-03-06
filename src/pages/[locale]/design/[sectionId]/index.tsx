@@ -3,8 +3,6 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
-// import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
-// import {DesignSection} from '../../../components/DesignSection/DesignSection';
 import {Layout} from '../../../../components/Layout/Layout';
 import {sections} from '../../../../content/design';
 import {getI18nPaths, getI18nProps, getLocaleLink} from '../../../../utils';
@@ -51,13 +49,8 @@ export const DesignSectionPage = ({sectionId}: {sectionId: string}) => {
         }
     }, []);
 
-    return (
-        <Layout title={section.title}>
-            {/* <DesignLayout sectionId={sectionId}>
-                <DesignSection section={section} />
-            </DesignLayout> */}
-        </Layout>
-    );
+    // Prevent blinking before redirect
+    return <Layout title={section.title} />;
 };
 
 export default DesignSectionPage;

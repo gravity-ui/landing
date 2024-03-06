@@ -13,6 +13,7 @@ import Head from 'next/head';
 import React from 'react';
 
 import {CONTENT_WRAPPER_ID, MENU_ID} from '../../constants';
+import {EnvironmentContext} from '../../contexts';
 import {block} from '../../utils';
 import {Footer} from '../Footer/Footer';
 import {Menu} from '../Menu/Menu';
@@ -49,10 +50,16 @@ export const Layout: React.FC<LayoutProps> = ({
         configurePageConstructor({lang});
     }, [lang]);
 
+    const [isClient, setIsClient] = React.useState(false);
+
+    React.useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     const Provider = isPageConstrucor ? PageConstructorProvider : ThemeProvider;
 
     return (
-        <React.Fragment>
+        <EnvironmentContext.Provider value={{isClient}}>
             <Head>
                 <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
                 <Meta />
@@ -70,6 +77,6 @@ export const Layout: React.FC<LayoutProps> = ({
                     </div>
                 </div>
             </Provider>
-        </React.Fragment>
+        </EnvironmentContext.Provider>
     );
 };

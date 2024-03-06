@@ -1,6 +1,6 @@
 import {HandPointUp, Moon, Sun} from '@gravity-ui/icons';
 import {Icon} from '@gravity-ui/uikit';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import React from 'react';
 
 import {block} from '../../../utils';
 import {useInteractiveContext} from '../InteractiveContext';
@@ -22,14 +22,14 @@ const ANIMATION_TIME = 2300;
 export const Settings = () => {
     const {changeColor, color: currentColor, switchTheme, theme} = useInteractiveContext();
     const [animationsStatuses, setAnimationStatuses] =
-        useState<boolean[]>(defaultAnimationStatuses);
-    const lastClickTime = useRef<number>(getCurrentTime());
-    const tickRef = useRef<NodeJS.Timer>();
-    const isAnimationStarted = useRef(false);
+        React.useState<boolean[]>(defaultAnimationStatuses);
+    const lastClickTime = React.useRef<number>(getCurrentTime());
+    const tickRef = React.useRef<NodeJS.Timer>();
+    const isAnimationStarted = React.useRef(false);
 
-    const isHandDisabled = useRef(false);
+    const isHandDisabled = React.useRef(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (typeof window === 'undefined') {
             return;
         }
@@ -60,7 +60,7 @@ export const Settings = () => {
             return newStat;
         });
 
-    const startAnimation = useCallback(async () => {
+    const startAnimation = React.useCallback(async () => {
         if (isHandDisabled.current) {
             return;
         }
@@ -112,7 +112,7 @@ export const Settings = () => {
         isAnimationStarted.current = false;
     }, []);
 
-    const tick = useCallback(() => {
+    const tick = React.useCallback(() => {
         if (
             !isAnimationStarted.current &&
             getCurrentTime() - lastClickTime.current >= INACTIVE_TIME
@@ -121,7 +121,7 @@ export const Settings = () => {
         }
     }, [lastClickTime]);
 
-    const handleDocumentClick = useCallback(() => {
+    const handleDocumentClick = React.useCallback(() => {
         lastClickTime.current = getCurrentTime();
 
         // stop animations
@@ -129,7 +129,7 @@ export const Settings = () => {
         setAnimationStatuses(() => allColors.map(() => false));
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (typeof window === 'undefined') {
             return;
         }

@@ -1,6 +1,6 @@
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
-import {useEffect} from 'react';
+import React from 'react';
 
 import i18nextConfig from '../../next-i18next.config';
 import {LOCALE_LOCAL_STORAGE_KEY} from '../constants';
@@ -10,7 +10,7 @@ export const useLocaleRedirect = () => {
     const {i18n} = useTranslation();
     const router = useRouter();
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (router.route === '/404') {
             return;
         }

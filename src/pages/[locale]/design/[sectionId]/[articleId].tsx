@@ -1,5 +1,5 @@
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
-import {useMemo} from 'react';
+import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
 import {DesignArticle} from '../../../../components/DesignArticle/DesignArticle';
@@ -56,7 +56,7 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
         return null;
     }
 
-    const sections = useMemo<Section[]>(() => {
+    const sections = React.useMemo<Section[]>(() => {
         const result: Section[] = designSections.map(({id, title, articles}) => ({
             id: id,
             title: title,

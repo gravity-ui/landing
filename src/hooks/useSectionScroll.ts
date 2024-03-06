@@ -1,5 +1,5 @@
 import {useRouter} from 'next/router';
-import {useEffect, useState} from 'react';
+import React from 'react';
 
 import {CONTENT_WRAPPER_ID, MENU_ID} from '../constants';
 
@@ -7,14 +7,14 @@ const ADDITIONAL_OFFSET = 120;
 
 export const useSectionScroll = () => {
     const router = useRouter();
-    const [sectionId, setSectionId] = useState('');
+    const [sectionId, setSectionId] = React.useState('');
 
-    useEffect(() => {
+    React.useEffect(() => {
         const currentPath = router.asPath;
         setSectionId(currentPath.split('#')[1] || '');
     }, [router]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const handleChangeHash = () => {
             const hash = window.location.hash;
             setSectionId(hash.split('#')[1]);
@@ -27,7 +27,7 @@ export const useSectionScroll = () => {
         };
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         const content = document.getElementById(CONTENT_WRAPPER_ID);
 
         if (!content) {

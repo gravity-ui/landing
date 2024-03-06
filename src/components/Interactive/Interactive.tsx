@@ -4,6 +4,7 @@ import 'swiper/css';
 import {Autoplay, EffectCreative} from 'swiper/modules';
 import {Swiper, SwiperClass, SwiperSlide} from 'swiper/react';
 
+import {EnvironmentContext} from '../../contexts';
 import {block} from '../../utils';
 
 import './Interactive.scss';
@@ -117,11 +118,7 @@ export const Interactive = () => {
     const [color, setColor] = React.useState<ColorTheme>(ColorTheme.Yellow);
     const [autoplayDisabled, setAutoplayDisabled] = React.useState(false);
 
-    const [isClient, setIsClient] = React.useState(false);
-
-    React.useEffect(() => {
-        setIsClient(true);
-    }, []);
+    const {isClient} = React.useContext(EnvironmentContext);
 
     React.useEffect(() => {
         if (typeof window === 'undefined') {

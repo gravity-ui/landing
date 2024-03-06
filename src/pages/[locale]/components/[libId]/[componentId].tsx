@@ -1,5 +1,5 @@
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
-import {useMemo} from 'react';
+import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
 import {Component} from '../../../../components/Component/Component';
@@ -85,7 +85,7 @@ export const ComponentPage = ({
         return null;
     }
 
-    const sections = useMemo<Section[]>(() => {
+    const sections = React.useMemo<Section[]>(() => {
         return libs.map(({id, title, components}) => {
             return {
                 id: id,

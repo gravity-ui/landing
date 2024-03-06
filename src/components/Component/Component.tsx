@@ -7,6 +7,7 @@ import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
+import {EnvironmentContext} from '../../contexts';
 import {block, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {Section} from '../NavigationLayout/types';
@@ -47,11 +48,7 @@ export const Component: React.FC<ComponentProps> = ({
 }) => {
     const {t} = useTranslation();
 
-    const [isClient, setIsClient] = React.useState(false);
-
-    React.useEffect(() => {
-        setIsClient(true);
-    }, []);
+    const {isClient} = React.useContext(EnvironmentContext);
 
     const router = useRouter();
     const {tabId} = router.query;
