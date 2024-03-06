@@ -1,4 +1,4 @@
-import {CopyToClipboardStatus, Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
+import {Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import codeIcon from '../../../assets/icons/code.svg';
@@ -64,7 +64,7 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
                         {(status) => (
                             <div
                                 className={b('container', {
-                                    copied: status === CopyToClipboardStatus.Success,
+                                    copied: status === 'success',
                                 })}
                             >
                                 <pre>
