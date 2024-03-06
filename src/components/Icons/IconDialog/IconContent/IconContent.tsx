@@ -2,9 +2,9 @@ import {CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
+import {ClipboardArea} from '../../../ClipboardArea/ClipboardArea';
+import {ClipboardIcon} from '../../../ClipboardIcon/ClipboardIcon';
 import type {IconItem} from '../../types';
-import {ClipboardArea} from '../ClipboardArea/ClipboardArea';
-import {ClipboardIcon} from '../ClipboardIcon/ClipboardIcon';
 
 import './IconContent.scss';
 

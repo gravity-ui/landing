@@ -1,8 +1,8 @@
 import {CopyToClipboard, CopyToClipboardStatus, Popover} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {useIsMobile} from '../../../../hooks/useIsMobile';
-import {block} from '../../../../utils';
+import {useIsMobile} from '../../hooks/useIsMobile';
+import {block} from '../../utils';
 
 import './ClipboardArea.scss';
 
@@ -14,16 +14,18 @@ interface ClipboardAreaProps {
     textToCopy: string;
     tooltipContent?: string;
     children: (status: CopyToClipboardStatus) => React.ReactElement;
+    isNeedPopup?: boolean;
 }
 
 export const ClipboardArea: React.FC<ClipboardAreaProps> = ({
     textToCopy,
     tooltipContent = 'Copy to clipboard',
     children,
+    isNeedPopup = true,
 }) => {
     const isMobile = useIsMobile();
 
-    return (
+    return isNeedPopup ? (
         <Popover
             disabled={isMobile}
             tooltipClassName={b('popup')}
@@ -35,5 +37,9 @@ export const ClipboardArea: React.FC<ClipboardAreaProps> = ({
                 {(status) => children(status)}
             </CopyToClipboard>
         </Popover>
+    ) : (
+        <CopyToClipboard text={textToCopy} timeout={TIMEOUT}>
+            {(status) => children(status)}
+        </CopyToClipboard>
     );
 };

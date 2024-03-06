@@ -19,6 +19,10 @@ $block: '.#{variables.$ns}example-block';
         --g-color-base-background: #251b25;
     }
 
+    &__container {
+        background-color: var(--g-color-base-background);
+    }
+
     &__content {
         display: flex;
         align-items: center;
@@ -77,6 +81,7 @@ $block: '.#{variables.$ns}example-block';
     }
 
     &__code {
+        position: relative;
         overflow: hidden;
         max-height: 0;
         opacity: 0;
@@ -84,12 +89,21 @@ $block: '.#{variables.$ns}example-block';
         transition: all 0.3s ease-in-out;
 
         pre {
-            margin: 0;
+            margin: 0 50px 0 0;
         }
 
         &_open {
             max-height: 5000px;
             opacity: 1;
         }
+    }
+
+    &__copy-icon {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        padding: 4px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.5);
     }
 }
