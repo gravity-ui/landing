@@ -1,5 +1,5 @@
-import {PageConstructorProvider, Theme} from '@gravity-ui/page-constructor';
-import {Lang, configure as configureUiKit} from '@gravity-ui/uikit';
+import {PageConstructorProvider, Theme as PageConstructorTheme} from '@gravity-ui/page-constructor';
+import {Lang, configure as configureUiKit, useThemeType} from '@gravity-ui/uikit';
 import Head from 'next/head';
 import React from 'react';
 
@@ -19,12 +19,11 @@ export type LayoutProps = {
     showOnlyContent?: boolean;
 };
 
-const lang = Lang.En;
-const theme = Theme.Dark;
-
-configureUiKit({lang});
+configureUiKit({lang: Lang.En});
 
 export const Layout: React.FC<LayoutProps> = ({title, children, showOnlyContent}) => {
+    const theme = useThemeType() as PageConstructorTheme;
+
     return (
         <React.Fragment>
             <Head>
