@@ -1,4 +1,4 @@
-import {Avatar, Flex} from '@gravity-ui/uikit';
+import {Flex, UserLabel} from '@gravity-ui/uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../assets/avatar-1.png';
@@ -10,10 +10,10 @@ export const UserLabelCard = () => {
     return (
         <InteractiveCard>
             <Flex direction="column" space={2}>
-                <Avatar text="Work Harder" imgUrl={avatar1Asset.src} />
-                <Avatar text="Make Better" imgUrl={avatar2Asset.src} />
-                <Avatar text="Do Faster" imgUrl={avatar3Asset.src} />
-                <Avatar text="Makes Stronger" imgUrl={avatar1Asset.src} />
+                <UserLabel avatar={avatar1Asset.src} children="Work Harder" />
+                <UserLabel avatar={avatar2Asset.src} children="Make Better" />
+                <UserLabel avatar={avatar3Asset.src} children="Do Faster" />
+                <UserLabel avatar={avatar1Asset.src} children="Makes Stronger" />
             </Flex>
         </InteractiveCard>
     );
