@@ -6,7 +6,7 @@ import avatar2Asset from '../../../../assets/avatar-2.png';
 import avatar3Asset from '../../../../assets/avatar-3.png';
 import {InteractiveCard} from '../InteractiveCard';
 
-export const PersonaCard = () => {
+export const UserLabelCard = () => {
     return (
         <InteractiveCard>
             <Flex direction="column" space={2}>

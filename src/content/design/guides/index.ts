@@ -22,7 +22,6 @@ import guideListItemContent from './content/ListItem.mdx';
 import guideLoaderContent from './content/Loader.mdx';
 import guideModuleContent from './content/Module.mdx';
 import guidePaginatorContent from './content/Paginator.mdx';
-import guidePersonaContent from './content/Persona.mdx';
 import guidePopoverContent from './content/Popover.mdx';
 import guidePopupContent from './content/Popup.mdx';
 import guideProgressContent from './content/Progress.mdx';
@@ -42,7 +41,7 @@ import guideToasterContent from './content/Toaster.mdx';
 import guideTooltipContent from './content/Tooltip.mdx';
 import guideTypographyContent from './content/Typography.mdx';
 import guideUserContent from './content/User.mdx';
-import guideUserAvatarContent from './content/UserAvatar.mdx';
+import guideUserLabelContent from './content/UserLabel.mdx';
 
 export const branding: Section = {
     id: 'branding',
@@ -202,12 +201,6 @@ export const guides: Section = {
             content: guidePaginatorContent,
         },
         {
-            id: 'persona',
-            title: 'Persona',
-            description: '',
-            content: guidePersonaContent,
-        },
-        {
             id: 'popover',
             title: 'Popover',
             description: '',
@@ -310,10 +303,10 @@ export const guides: Section = {
             content: guideUserContent,
         },
         {
-            id: 'user-avatar',
-            title: 'User Avatar',
+            id: 'user-label',
+            title: 'User Label',
             description: '',
-            content: guideUserAvatarContent,
+            content: guideUserLabelContent,
         },
     ],
 };
