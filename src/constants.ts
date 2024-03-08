@@ -1,10 +1,10 @@
-import {Theme} from '@gravity-ui/page-constructor';
+import type {Theme} from '@gravity-ui/uikit';
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 export const GA_ID = 'GTM-KHT6KD7';
 
-export const DEFAULT_THEME = Theme.Dark;
+export const DEFAULT_THEME: Theme = 'dark';
 
 export const MENU_ID = 'menu';
 
