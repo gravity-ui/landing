@@ -3,7 +3,7 @@
 @use '../../../../variables.scss';
 @use '../../../../mixins.scss' as baseMixins;
 
-$root: '.yc-root';
+$root: '.g-root';
 $block: '.#{variables.$ns}examples-showcase';
 
 #{$block} {
@@ -169,27 +169,27 @@ $block: '.#{variables.$ns}examples-showcase';
         cursor: pointer;
     }
 
-    .yc-radio-group_direction_horizontal {
+    .g-radio-group_direction_horizontal {
         display: flex;
         align-items: center;
     }
 
-    .yc-tabs_direction_horizontal {
+    .g-tabs_direction_horizontal {
         min-width: 150px;
     }
 
-    .yc-table {
+    .g-table {
         &__table {
             min-width: 100%;
         }
     }
 
-    .yc-label_theme_info {
+    .g-label_theme_info {
         color: var(--g-color-private-brand-1000-solid);
         background-color: var(--g-color-private-brand-200);
     }
 
-    .yc-user-avatar {
+    .g-user-avatar {
         display: block;
     }
 }

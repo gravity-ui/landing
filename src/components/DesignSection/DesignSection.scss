@@ -53,17 +53,17 @@ $block: '.#{variables.$ns}design-section';
     }
 
     &__article {
-        color: var(--yc-color-base-special);
+        color: var(--g-color-base-special);
         text-decoration: none;
         font-size: 20px;
         line-height: 24px;
 
         &:visited {
-            color: var(--yc-color-base-special);
+            color: var(--g-color-base-special);
         }
 
         &:hover {
-            color: var(--yc-color-base-special-hover);
+            color: var(--g-color-base-special-hover);
             text-decoration: none;
         }
     }

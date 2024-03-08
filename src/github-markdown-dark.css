@@ -47,7 +47,7 @@
   display: none !important;
 }
 
-.markdown-body a:not(.yc-link) {
+.markdown-body a:not(.g-link) {
   background-color: transparent;
   color: #58a6ff;
   text-decoration: none;
