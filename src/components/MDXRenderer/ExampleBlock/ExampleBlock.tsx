@@ -25,7 +25,8 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
 
     return (
         <div className={b()}>
-            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', 'sandbox')}>
+            {/*Workaround for missing theme class in ThemeProvider*/}
+            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', {theme}, 'sandbox')}>
                 <div className={b('content')} {...(background ? {style: {background}} : {})}>
                     {children}
                 </div>

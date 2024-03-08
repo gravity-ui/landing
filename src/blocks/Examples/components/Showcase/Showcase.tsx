@@ -66,7 +66,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
     );
 
     return (
-        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color})}`}>
+        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color, theme})}`}>
             <div className={b('row')}>
                 <div className={b('col')}>
                     <div className={b('sub-row')}>
