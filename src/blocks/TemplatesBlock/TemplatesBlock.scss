@@ -6,8 +6,10 @@ $block: '.#{variables.$ns}templates-block';
 
 #{$block} {
     @include pcStyles.animate();
+
     &__title {
         @include pcStyles.heading2();
+
         margin-bottom: pcVariables.$indentM;
     }
 }

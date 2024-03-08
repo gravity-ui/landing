@@ -82,7 +82,9 @@ export const TableCard = () => {
             <Table
                 columns={columns}
                 data={data}
-                getRowClassNames={(_item, index) => (index === 1 ? ['yc-table__row_selected'] : [])}
+                getRowDescriptor={(_item, index) =>
+                    index === 1 ? {classNames: ['g-table__row_selected']} : undefined
+                }
             />
         </InteractiveCard>
     );

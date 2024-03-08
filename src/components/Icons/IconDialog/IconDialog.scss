@@ -8,6 +8,12 @@ $block: '.#{variables.$ns}icon-dialog';
     --g-color-base-float: #251b25;
     padding-top: 64px;
 
+    &__modal {
+        .g-modal__content {
+            border-radius: var(--g-modal-border-radius);
+        }
+    }
+
     &__sheet-content {
         padding: 16px 0 0;
     }

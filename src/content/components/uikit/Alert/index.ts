@@ -17,7 +17,7 @@ export const alertConfig = {
         props: {
             theme: {
                 type: 'select',
-                values: mappingOptions(['normal', 'info', 'positive', 'warning', 'danger']),
+                values: mappingOptions(['normal', 'info', 'success', 'warning', 'danger']),
                 defaultValue: 'normal',
             },
             view: {

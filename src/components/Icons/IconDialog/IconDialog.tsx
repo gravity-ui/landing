@@ -35,7 +35,7 @@ export const IconDialog: React.FC<IconDialogProps> = ({icon, onClose, onClickToK
     }
 
     return (
-        <Dialog className={b()} size="s" open={true} onClose={onClose}>
+        <Dialog className={b()} modalClassName={b('modal')} size="s" open={true} onClose={onClose}>
             <IconBody icon={icon} onClickToKeyword={onClickToKeyword} />
             <IconDialogActions icon={icon} />
         </Dialog>
