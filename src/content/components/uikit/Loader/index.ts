@@ -9,6 +9,7 @@ export const loaderConfig = {
     id: 'loader',
     title: 'Loader',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

@@ -9,6 +9,7 @@ export const listConfig = {
     id: 'list',
     title: 'List',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

@@ -9,6 +9,7 @@ export const dropdownMenuConfig = {
     id: 'dropdown-menu',
     title: 'DropdownMenu',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

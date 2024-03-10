@@ -9,6 +9,7 @@ export const checkboxConfig = {
     id: 'checkbox',
     title: 'Checkbox',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

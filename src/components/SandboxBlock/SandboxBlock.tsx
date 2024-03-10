@@ -1,6 +1,8 @@
 import {ChevronsCollapseUpRight, ChevronsExpandUpRight} from '@gravity-ui/icons';
 import {
     Col,
+    ControlGroupOption,
+    Direction,
     Icon,
     RadioButton,
     Row,
@@ -21,11 +23,19 @@ import type {OptionType, SandboxBlockTypes} from './types';
 
 const b = block('sandbox-block');
 
-const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxConfig}) => {
+const SandboxBlock: React.FC<SandboxBlockTypes> = ({
+    libId,
+    componentId,
+    sandboxConfig,
+    isSupportRTL,
+}) => {
     const [props, setProps] = React.useState({});
+
     const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
     const [isFullScreen, setIsFullScreen] = React.useState(false);
     const [iframeTheme, setIframeTheme] = React.useState<Theme>('dark');
+    const [iframeDirection, setIframeDirection] = React.useState<Direction>('ltr');
+
     const iframeRef = React.useRef() as React.MutableRefObject<HTMLIFrameElement | null>;
 
     const renderOptions = () => {
@@ -131,10 +141,33 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
         });
     };
 
+    const renderDirectionSelection = () => {
+        const options: ControlGroupOption<Direction>[] = [{value: 'ltr', content: 'ltr'}];
+
+        if (isSupportRTL) options.push({value: 'rtl', content: 'rtl'});
+
+        return (
+            <Row key="direction" space="0">
+                <div className={b('prop')}>
+                    <Text className={b('prop-title')}>direction</Text>
+                    <RadioButton
+                        key="direction"
+                        value={iframeDirection}
+                        options={options}
+                        width="max"
+                        disabled={!isIframeLoaded}
+                        onUpdate={setIframeDirection}
+                    />
+                </div>
+            </Row>
+        );
+    };
+
     const iframeLoadingHandler = React.useCallback(() => setIsIframeLoaded(true), []);
 
     React.useEffect(() => {
         iframeRef.current?.addEventListener('load', iframeLoadingHandler);
+
         return () => {
             iframeRef.current?.removeEventListener('load', iframeLoadingHandler);
         };
@@ -144,11 +177,13 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
         if (sandboxConfig) {
             const defaultProps: Record<string, unknown> = {};
             const propsKeys = Object.keys(sandboxConfig);
+
             propsKeys.forEach((propKey) => {
                 if (typeof sandboxConfig[propKey].defaultValue !== 'undefined') {
                     defaultProps[propKey] = sandboxConfig[propKey].defaultValue;
                 }
             });
+
             setProps(defaultProps);
         }
     }, [sandboxConfig]);
@@ -157,13 +192,13 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
         if (isIframeLoaded) {
             iframeRef.current?.contentWindow?.postMessage(
                 {
-                    pageProps: {theme: iframeTheme},
+                    pageProps: {theme: iframeTheme, direction: iframeDirection},
                     componentProps: props,
                 },
                 window.origin,
             );
         }
-    }, [isIframeLoaded, props, iframeTheme]);
+    }, [isIframeLoaded, props, iframeTheme, iframeDirection]);
 
     return (
         <div className={b({'full-screen': isFullScreen})}>
@@ -204,7 +239,10 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({libId, componentId, sandboxC
                             )}
                         </div>
                     </div>
-                    <div className={b('actions')}>{renderOptions()}</div>
+                    <div className={b('actions')}>
+                        {renderOptions()}
+                        {renderDirectionSelection()}
+                    </div>
                 </Col>
             </Row>
         </div>

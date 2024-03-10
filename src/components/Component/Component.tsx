@@ -193,6 +193,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 libId={libId}
                                 componentId={component.id}
                                 sandboxConfig={component.sandbox.props}
+                                isSupportRTL={component.isSupportRTL}
                             />
                         ) : null}
                         <MDXRenderer

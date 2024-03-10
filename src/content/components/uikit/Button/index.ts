@@ -9,6 +9,7 @@ export const buttonConfig = {
     id: 'button',
     title: 'Button',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

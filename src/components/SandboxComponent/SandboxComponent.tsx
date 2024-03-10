@@ -1,4 +1,4 @@
-import {Theme, ThemeProvider} from '@gravity-ui/uikit';
+import {Direction, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import type {Component} from '../../content/components';
@@ -17,7 +17,7 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
     const [isMounted, setIsMounted] = React.useState(false);
 
     const [componentProps, setComponentProps] = React.useState<Record<string, unknown>>({});
-    const [pageProps, setPageProps] = React.useState<{theme?: Theme}>({});
+    const [pageProps, setPageProps] = React.useState<{theme?: Theme; direction?: Direction}>({});
 
     const components = getLibComponents(libId) as Component[];
 
@@ -62,13 +62,14 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
     }, []);
 
     const theme = pageProps.theme || 'dark';
+    const direction = pageProps.direction || 'ltr';
 
     if (!DynamicComponent || !isMounted) {
         return null;
     }
 
     return (
-        <ThemeProvider theme={theme} rootClassName={b('wrapper', null, 'sandbox')}>
+        <ThemeProvider theme={theme} direction={direction} rootClassName={b('wrapper', null, 'sandbox')}>
             <div className={b()}>
                 <div className={b('component', {theme})}>
                     {DynamicComponent && <DynamicComponent {...componentProps} />}

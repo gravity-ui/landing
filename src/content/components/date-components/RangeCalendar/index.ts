@@ -10,6 +10,7 @@ export const rangeCalendarConfig: Component = {
     id: 'range-calendar',
     title: 'Range Calendar',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },
