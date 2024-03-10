@@ -32,6 +32,7 @@ const componentsAvailableInMDX: MDXComponents = {
     ExampleBlock,
     UIKitExamples,
     DateComponentsExamples,
+    React: React as unknown as Record<string, MDXComponents>,
     UIKit: UIKit as unknown as Record<string, MDXComponents>,
     Components: Components as unknown as Record<string, MDXComponents>,
     DateComponents: DateComponents as unknown as Record<string, MDXComponents>,

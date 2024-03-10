@@ -4,7 +4,7 @@ import React from 'react';
 export const ProgressComponent = (props: ProgressProps) => {
     return (
         <div style={{width: '30%'}}>
-            <Progress {...props} />
+            <Progress {...props} value={Number(props.value)} />
         </div>
     );
 };
