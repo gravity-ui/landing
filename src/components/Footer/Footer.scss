@@ -20,7 +20,14 @@ $block: '.#{variables.$ns}footer';
     &__menu {
         display: flex;
         flex: 1;
-        margin-right: 20px;
+
+        [dir='ltr'] & {
+            margin-right: 20px;
+        }
+
+        [dir='rtl'] & {
+            margin-left: 20px;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             margin-right: 0;
@@ -29,13 +36,18 @@ $block: '.#{variables.$ns}footer';
     }
 
     &__menu-link-icon {
-        margin-right: 8px;
+        [dir='ltr'] & {
+            margin-right: 8px;
+        }
+
+        [dir='rtl'] & {
+            margin-left: 8px;
+        }
     }
 
     &__menu-link {
         display: flex;
         align-items: center;
-        margin-left: 42px;
         white-space: nowrap;
         text-decoration: none;
         color: #fff;
@@ -43,13 +55,32 @@ $block: '.#{variables.$ns}footer';
         font-weight: 600;
         line-height: 20px;
 
-        &:first-child {
-            margin-left: 0;
+        [dir='ltr'] & {
+            margin-left: 42px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+
+        [dir='rtl'] & {
+            margin-right: 42px;
+
+            &:first-child {
+                margin-right: 0;
+            }
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            margin-left: 0;
             margin-top: 26px;
+
+            [dir='ltr'] & {
+                margin-left: 0;
+            }
+
+            [dir='rtl'] & {
+                margin-right: 42px;
+            }
 
             &:first-child {
                 margin-top: 0;
@@ -58,7 +89,13 @@ $block: '.#{variables.$ns}footer';
     }
 
     &__menu-link-arrow {
-        margin: 4px 0 0 10px;
+        [dir='ltr'] & {
+            margin: 4px 0 0 10px;
+        }
+
+        [dir='rtl'] & {
+            margin: 4px 10px 0 0;
+        }
     }
 
     &__text {

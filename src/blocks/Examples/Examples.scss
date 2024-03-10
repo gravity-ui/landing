@@ -39,10 +39,20 @@ $block: '.#{variables.$ns}examples';
     }
 
     &__control {
-        margin-right: 16px;
+        [dir='ltr'] & {
+            margin-right: 16px;
 
-        &:last-child {
-            margin-right: 0;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        [dir='rtl'] & {
+            margin-left: 16px;
+
+            &:last-child {
+                margin-left: 0;
+            }
         }
 
         &_type_color {
@@ -78,7 +88,14 @@ $block: '.#{variables.$ns}examples';
         width: 14px;
         height: 14px;
         border-radius: 3px;
-        margin-right: 12px;
+
+        [dir='ltr'] & {
+            margin-right: 12px;
+        }
+
+        [dir='rtl'] & {
+            margin-left: 12px;
+        }
 
         &_color_yellow {
             background-color: #ffbe5c;

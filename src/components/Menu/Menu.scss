@@ -37,13 +37,26 @@ $border-color: rgba(255, 255, 255, 0.2);
     &__logo {
         display: flex;
         align-items: center;
-        padding: 24px 34px 24px 0;
         font-size: 24px;
         line-height: 28px;
         font-weight: 600;
 
+        [dir='ltr'] & {
+            padding: 24px 34px 24px 0;
+        }
+
+        [dir='rtl'] & {
+            padding: 20px 0 20px 34px;
+        }
+
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            padding: 20px 34px 20px 0;
+            [dir='ltr'] & {
+                padding: 20px 34px 20px 0;
+            }
+
+            [dir='rtl'] & {
+                padding: 20px 0 20px 34px;
+            }
         }
     }
 
@@ -84,36 +97,64 @@ $border-color: rgba(255, 255, 255, 0.2);
     &__desktop-menu-item {
         display: flex;
         align-items: center;
-        margin-left: 32px;
         font-size: 20px;
         line-height: 20px;
         font-weight: 400;
 
-        &:first-child {
-            margin-left: 0;
-        }
-
         &_active {
             border-top: 4px solid transparent;
             border-bottom: 4px solid #ffbe5c;
+        }
+
+        [dir='ltr'] & {
+            margin-left: 32px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+
+        [dir='rtl'] & {
+            margin-right: 32px;
+
+            &:first-child {
+                margin-right: 0;
+            }
         }
     }
 
     &__desktop-social-links {
         display: flex;
         margin: 0;
-        padding: 0 0 0 34px;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             display: none;
         }
+
+        [dir='ltr'] & {
+            padding: 0 0 0 34px;
+        }
+
+        [dir='rtl'] & {
+            padding: 0 34px 0 0;
+        }
     }
 
     &__desktop-social-links-item {
-        margin-left: 20px;
+        [dir='ltr'] & {
+            margin-left: 20px;
 
-        &:first-child {
-            margin-left: 0;
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+
+        [dir='rtl'] & {
+            margin-right: 20px;
+
+            &:first-child {
+                margin-right: 0;
+            }
         }
     }
 
@@ -232,7 +273,13 @@ $border-color: rgba(255, 255, 255, 0.2);
     }
 
     &__comming-soon-label {
-        margin-left: 4px;
+        [dir='ltr'] & {
+            margin-left: 4px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: 4px;
+        }
     }
 
     &__link-icon {

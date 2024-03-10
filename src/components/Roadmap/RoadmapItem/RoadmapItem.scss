@@ -30,7 +30,7 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         &::after {
             content: ' ';
             position: absolute;
-            height: calc(100% + pcVariables.$indentXS);
+            height: calc(100% + $itemBottomPadding);
         }
     }
 
@@ -39,7 +39,14 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
             #{$block}__separator {
                 &::after {
                     color: var(--roadmap-completed-task-color);
-                    border-left: 4px solid;
+
+                    [dir='ltr'] & {
+                        border-left: 4px solid;
+                    }
+
+                    [dir='rtl'] & {
+                        border-right: 4px solid;
+                    }
                 }
             }
         }
@@ -63,10 +70,23 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         padding-right: 52px;
         border-radius: 16px;
         position: relative;
-        margin-left: pcVariables.$indentSM;
+
+        [dir='ltr'] & {
+            margin-left: pcVariables.$indentSM;
+        }
+
+        [dir='rtl'] & {
+            margin-right: pcVariables.$indentSM;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            margin-left: pcVariables.$indentXXS;
+            [dir='ltr'] & {
+                margin-left: pcVariables.$indentXXS;
+            }
+
+            [dir='rtl'] & {
+                margin-right: pcVariables.$indentXXS;
+            }
         }
     }
 
@@ -89,17 +109,38 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         color: rgba(255, 255, 255, 0.35);
         font-weight: 600;
         flex-shrink: 0;
-        margin-left: pcVariables.$indentXXXS;
+
+        [dir='ltr'] & {
+            margin-left: pcVariables.$indentXXXS;
+        }
+
+        [dir='rtl'] & {
+            margin-right: pcVariables.$indentXXXS;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             margin-top: pcVariables.$indentXXXS;
-            margin-left: 0;
+
+            [dir='ltr'] & {
+                margin-left: 0;
+            }
+
+            [dir='rtl'] & {
+                margin-right: 0;
+            }
         }
     }
 
     &__arrow {
-        right: pcVariables.$indentSM;
         position: absolute;
         color: rgba(255, 255, 255, 0.5);
+
+        [dir='ltr'] & {
+            right: pcVariables.$indentSM;
+        }
+
+        [dir='rtl'] & {
+            left: pcVariables.$indentSM;
+        }
     }
 }
