@@ -1,16 +1,15 @@
-import Link from 'next/link';
+import Link, {LinkProps} from 'next/link';
 import {useRouter} from 'next/router';
 import React from 'react';
 
 import i18nextConfig from '../../../next-i18next.config';
 
-type LinkProps = {
-    href: string;
+type I18nLinkProps = {
     locale?: string;
     children: React.ReactNode;
-} & Record<string, unknown>;
+} & LinkProps;
 
-export const I18nLink: React.FC<LinkProps> = ({href, locale, children, ...rest}) => {
+export const I18nLink: React.FC<I18nLinkProps> = ({href, locale, children, ...rest}) => {
     const router = useRouter();
 
     let resultHref = href;
