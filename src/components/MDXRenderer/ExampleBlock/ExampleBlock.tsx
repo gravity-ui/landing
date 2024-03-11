@@ -4,6 +4,8 @@ import React from 'react';
 import codeIcon from '../../../assets/icons/code.svg';
 import themeIcon from '../../../assets/icons/theme.svg';
 import {block} from '../../../utils';
+import {ClipboardArea} from '../../ClipboardArea/ClipboardArea';
+import {ClipboardIcon} from '../../ClipboardIcon/ClipboardIcon';
 
 import './ExampleBlock.scss';
 
@@ -23,7 +25,8 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
 
     return (
         <div className={b()}>
-            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', 'sandbox')}>
+            {/*Workaround for missing theme class in ThemeProvider*/}
+            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', {theme}, 'sandbox')}>
                 <div className={b('content')} {...(background ? {style: {background}} : {})}>
                     {children}
                 </div>
@@ -54,9 +57,24 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
             </div>
             {codePrepared ? (
                 <div className={b('code', {open: isOpen})}>
-                    <pre>
-                        <code className="language-tsx">{codePrepared}</code>
-                    </pre>
+                    <ClipboardArea
+                        textToCopy={codePrepared}
+                        tooltipContent="Copy icon name"
+                        isNeedPopup={false}
+                    >
+                        {(status) => (
+                            <div
+                                className={b('container', {
+                                    copied: status === 'success',
+                                })}
+                            >
+                                <pre>
+                                    <code className="language-tsx">{codePrepared}</code>
+                                </pre>
+                                <ClipboardIcon status={status} className={b('copy-icon')} />
+                            </div>
+                        )}
+                    </ClipboardArea>
                 </div>
             ) : null}
         </div>

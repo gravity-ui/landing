@@ -4,14 +4,14 @@
 $block: '.#{variables.$ns}icon-button';
 
 #{$block} {
-    &.yc-button,
-    &.yc-button:has(.yc-button__icon:only-child) {
-        --yc-button-border-radius: 16px;
+    &.g-button,
+    &.g-button:has(.g-button__icon:only-child) {
+        --g-button-border-radius: 16px;
         width: 62px;
         height: 62px;
     }
 
     &:hover {
-        --yc-button-background-color: rgba(255, 255, 255, 0.16);
+        --g-button-background-color: rgba(255, 255, 255, 0.16);
     }
 }

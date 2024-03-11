@@ -21,7 +21,7 @@ const Commands: React.FC<CommandsProps> = ({commands}) => {
             <pre>
                 <code className={b('commands')} dangerouslySetInnerHTML={{__html: html}} />
             </pre>
-            <ClipboardButton text={commands.join(' && ')} className={b('copy')} size={16} />
+            <ClipboardButton text={commands.join(' && ')} className={b('copy')} size="m" />
         </div>
     );
 };

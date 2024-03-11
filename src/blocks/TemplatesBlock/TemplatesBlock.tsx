@@ -27,7 +27,9 @@ export const TemplatesBlock: React.FC<TemplatesProps> = ({animated, title, tabs}
         const scrollTo = () => {
             blockRef.current?.scrollIntoView({behavior: 'smooth'});
         };
+
         window.addEventListener(SCROLL_TO_TEMPLATES_EVENT, scrollTo);
+
         return () => {
             window.removeEventListener(SCROLL_TO_TEMPLATES_EVENT, scrollTo);
         };

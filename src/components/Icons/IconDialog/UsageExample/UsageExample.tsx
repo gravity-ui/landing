@@ -1,11 +1,10 @@
-import {CopyToClipboardStatus} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
+import {ClipboardArea} from '../../../ClipboardArea/ClipboardArea';
+import {ClipboardIcon} from '../../../ClipboardIcon/ClipboardIcon';
 import type {IconItem} from '../../types';
-import {ClipboardArea} from '../ClipboardArea/ClipboardArea';
-import {ClipboardIcon} from '../ClipboardIcon/ClipboardIcon';
 
 import './UsageExample.scss';
 import {buildIconImportLine, buildIconSvgPath} from './helpers';
@@ -42,7 +41,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
                     <div className={b('wrapper')}>
                         <div
                             className={b('code', {
-                                copied: status === CopyToClipboardStatus.Success,
+                                copied: status === 'success',
                             })}
                         >
                             {importCode}

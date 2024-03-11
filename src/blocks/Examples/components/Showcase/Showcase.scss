@@ -3,8 +3,11 @@
 @use '../../../../variables.scss';
 @use '../../../../mixins.scss' as baseMixins;
 
-$root: '.yc-root';
+$root: '.g-root';
 $block: '.#{variables.$ns}examples-showcase';
+
+// Workaround for missing theme class in ThemeProvider
+$workaroundBlockDarkTheme: &#{$block}_theme_dark;
 
 #{$block} {
     padding: 40px;
@@ -169,27 +172,27 @@ $block: '.#{variables.$ns}examples-showcase';
         cursor: pointer;
     }
 
-    .yc-radio-group_direction_horizontal {
+    .g-radio-group_direction_horizontal {
         display: flex;
         align-items: center;
     }
 
-    .yc-tabs_direction_horizontal {
+    .g-tabs_direction_horizontal {
         min-width: 150px;
     }
 
-    .yc-table {
+    .g-table {
         &__table {
             min-width: 100%;
         }
     }
 
-    .yc-label_theme_info {
+    .g-label_theme_info {
         color: var(--g-color-private-brand-1000-solid);
         background-color: var(--g-color-private-brand-200);
     }
 
-    .yc-user-avatar {
+    .g-user-avatar {
         display: block;
     }
 }
@@ -204,6 +207,7 @@ $block: '.#{variables.$ns}examples-showcase';
         @include themes.g-theme-light;
     }
 
+    &#{$workaroundBlockDarkTheme},
     &_theme_dark {
         @include themes.g-theme-dark;
     }
@@ -227,6 +231,7 @@ $block: '.#{variables.$ns}examples-showcase';
         --g-color-text-link-hover: var(--g-color-private-brand-1000-solid);
     }
 
+    &#{$workaroundBlockDarkTheme},
     &_theme_dark {
         --g-color-base-brand: var(--g-color-private-brand-1000-solid);
         --g-color-base-brand-hover: var(--g-color-private-brand-800-solid);
@@ -246,6 +251,7 @@ $block: '.#{variables.$ns}examples-showcase';
         @include baseMixins.brand-vars(#ffbe5c, #fff);
     }
 
+    &#{$workaroundBlockDarkTheme},
     &_theme_dark {
         @include baseMixins.brand-vars(#ffbe5c, #251b25);
     }
@@ -256,6 +262,7 @@ $block: '.#{variables.$ns}examples-showcase';
         @include baseMixins.brand-vars(#ff5958, #fff);
     }
 
+    &#{$workaroundBlockDarkTheme},
     &_theme_dark {
         @include baseMixins.brand-vars(#ff5958, #251b25);
     }
@@ -266,6 +273,7 @@ $block: '.#{variables.$ns}examples-showcase';
         @include baseMixins.brand-vars(#3bbc50, #fff);
     }
 
+    &#{$workaroundBlockDarkTheme},
     &_theme_dark {
         @include baseMixins.brand-vars(#3bbc50, #251b25);
     }
@@ -276,6 +284,7 @@ $block: '.#{variables.$ns}examples-showcase';
         @include baseMixins.brand-vars(#5282ff, #fff);
     }
 
+    &#{$workaroundBlockDarkTheme},
     &_theme_dark {
         @include baseMixins.brand-vars(#5282ff, #251b25);
     }

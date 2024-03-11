@@ -1,4 +1,5 @@
 import {
+    Avatar,
     Button,
     Checkbox,
     Icon,
@@ -12,7 +13,6 @@ import {
     Tabs,
     Theme,
     ThemeProvider,
-    UserAvatar,
     withTableSelection,
 } from '@gravity-ui/uikit';
 import React from 'react';
@@ -66,7 +66,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
     );
 
     return (
-        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color})}`}>
+        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color, theme})}`}>
             <div className={b('row')}>
                 <div className={b('col')}>
                     <div className={b('sub-row')}>
@@ -135,7 +135,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                             data={[
                                 {
                                     title: 'Weekly Sync',
-                                    createdBy: <UserAvatar imgUrl={avatar1Asset.src} />,
+                                    createdBy: <Avatar imgUrl={avatar1Asset.src} />,
                                     updated: '28.06.2022',
                                     created: '26.06.2022',
                                     favorite: (
@@ -158,7 +158,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                 },
                                 {
                                     title: 'Campaign brainstorm',
-                                    createdBy: <UserAvatar imgUrl={avatar2Asset.src} />,
+                                    createdBy: <Avatar imgUrl={avatar2Asset.src} />,
                                     updated: '7.06.2022',
                                     created: '16.06.2022',
                                     favorite: (
@@ -181,7 +181,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                 },
                                 {
                                     title: 'Logo redesign',
-                                    createdBy: <UserAvatar imgUrl={avatar3Asset.src} />,
+                                    createdBy: <Avatar imgUrl={avatar3Asset.src} />,
                                     updated: '7.06.2022',
                                     created: '20.06.2022',
                                     favorite: (

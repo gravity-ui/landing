@@ -1,10 +1,5 @@
-import {
-    Lang,
-    PageConstructorProvider,
-    Theme,
-    configure as configurePageConstructor,
-} from '@gravity-ui/page-constructor';
-import {ThemeProvider, configure as configureUiKit} from '@gravity-ui/uikit';
+import {PageConstructorProvider, Theme as PageConstructorTheme} from '@gravity-ui/page-constructor';
+import {Lang, configure as configureUiKit, useThemeType} from '@gravity-ui/uikit';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
@@ -33,8 +28,6 @@ export type LayoutProps = {
     showOnlyContent?: boolean;
 };
 
-const theme = Theme.Dark;
-
 export const Layout: React.FC<LayoutProps> = ({
     title,
     children,
@@ -42,12 +35,12 @@ export const Layout: React.FC<LayoutProps> = ({
     showOnlyContent,
 }) => {
     const {i18n} = useTranslation();
+    const theme = useThemeType();
 
     const lang = i18n.language as Lang;
 
     React.useEffect(() => {
         configureUiKit({lang});
-        configurePageConstructor({lang});
     }, [lang]);
 
     const [isClient, setIsClient] = React.useState(false);
@@ -56,7 +49,19 @@ export const Layout: React.FC<LayoutProps> = ({
         setIsClient(true);
     }, []);
 
-    const Provider = isPageConstrucor ? PageConstructorProvider : ThemeProvider;
+    const pageConent = (
+        <div className={b()}>
+            {!showOnlyContent && (
+                <div className={b('menu')} id={MENU_ID}>
+                    <Menu />
+                </div>
+            )}
+            <div className={b('wrapper')} id={CONTENT_WRAPPER_ID}>
+                <div className={b('content')}>{children}</div>
+                {!showOnlyContent && <Footer />}
+            </div>
+        </div>
+    );
 
     return (
         <EnvironmentContext.Provider value={{isClient}}>
@@ -64,19 +69,13 @@ export const Layout: React.FC<LayoutProps> = ({
                 <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
                 <Meta />
             </Head>
-            <Provider theme={theme}>
-                <div className={b()}>
-                    {!showOnlyContent && (
-                        <div className={b('menu')} id={MENU_ID}>
-                            <Menu />
-                        </div>
-                    )}
-                    <div className={b('wrapper')} id={CONTENT_WRAPPER_ID}>
-                        <div className={b('content')}>{children}</div>
-                        {!showOnlyContent && <Footer />}
-                    </div>
-                </div>
-            </Provider>
+            {isPageConstrucor ? (
+                <PageConstructorProvider theme={theme as PageConstructorTheme}>
+                    {pageConent}
+                </PageConstructorProvider>
+            ) : (
+                pageConent
+            )}
         </EnvironmentContext.Provider>
     );
 };

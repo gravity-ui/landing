@@ -18,7 +18,7 @@ $block: '.#{variables.$ns}icon-usage-example';
         display: flex;
         flex-direction: row;
         width: 100%;
-        background: var(--yc-color-base-background);
+        background: var(--g-color-base-background);
         border-radius: 16px;
         padding: 16px 48px 16px 16px;
         position: relative;
@@ -39,7 +39,7 @@ $block: '.#{variables.$ns}icon-usage-example';
     &__code {
         @include pcStyles.text-size(code-2);
         flex-grow: 1;
-        font-family: var(--yc-font-family-monospace);
+        font-family: var(--g-font-family-monospace);
         color: rgba(255, 255, 255, 0.7);
         margin-right: 12px;
         transition: color 0.1s ease-in-out;

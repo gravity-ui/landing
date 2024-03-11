@@ -10,10 +10,10 @@ import React, {FC} from 'react';
 export interface SandboxProps {
     isMobile: boolean;
     action: string;
-    type: ToastProps['type'] | 'undefined';
+    theme: ToastProps['theme'] | 'undefined';
 }
 
-type Props = Omit<ToastProps, 'type'> & SandboxProps;
+type Props = Omit<ToastProps, 'theme'> & SandboxProps;
 
 const ToasterComponentAPI: FC<ToastProps> = (props) => {
     const toaster = useToaster();
@@ -34,7 +34,7 @@ export const ToasterProxy: FC<Props> = ({
     isMobile,
     action,
     autoHiding,
-    type,
+    theme,
     ...props
 }) => {
     return (
@@ -45,7 +45,7 @@ export const ToasterProxy: FC<Props> = ({
                     name={name}
                     autoHiding={autoHiding === false ? autoHiding : 5000}
                     actions={[{label: action, removeAfterClick: false, onClick() {}}]}
-                    type={type === 'undefined' ? undefined : type}
+                    theme={theme === 'undefined' ? undefined : theme}
                 />
                 <ToasterComponent />
             </ToasterProvider>

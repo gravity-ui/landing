@@ -15,7 +15,7 @@ $block: '.#{variables.$ns}menu-card';
         font-size: 15px;
         line-height: 20px;
 
-        &.yc-menu__item_selected {
+        &.g-menu__item_selected {
             background: var(--g-color-base-selection);
             border-radius: 3px;
         }

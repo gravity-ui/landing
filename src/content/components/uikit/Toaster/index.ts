@@ -6,13 +6,13 @@ import {Repos} from '../../../../types/common';
 import {Component} from '../../types';
 import {type GetterProps, getGithubUrl, getReadmeUrl} from '../../utils';
 
-import type {SandboxProps as ToasterProxySanboxProps} from './ToasterProxy';
+import type {SandboxProps as ToasterProxySandboxProps} from './ToasterProxy';
 
 const getterOptions: GetterProps = {repoName: Repos.Uikit, componentName: 'Toaster'};
 
 type SandboxPropsType = SandboxProps[keyof SandboxProps];
 type ToasterSandboxProps = Record<
-    keyof ToastProps | keyof ToasterProxySanboxProps,
+    keyof ToastProps | keyof ToasterProxySandboxProps,
     SandboxPropsType
 >;
 
@@ -29,9 +29,9 @@ const sandboxProps: Partial<ToasterSandboxProps> = {
         type: 'input',
         defaultValue: 'Okay then',
     },
-    type: {
+    theme: {
         type: 'select',
-        values: [undefined, 'info', 'success', 'warning', 'error'].map((value) => ({
+        values: [undefined, 'info', 'success', 'warning', 'danger'].map((value) => ({
             value: value === undefined ? 'undefined' : value,
             content: value === undefined ? 'none' : value,
         })),

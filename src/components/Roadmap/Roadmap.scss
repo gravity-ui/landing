@@ -8,7 +8,7 @@ $block: '.#{variables.$ns}roadmap';
     --roadmap-background-color: var(--g-color-base-background);
     --roadmap-tail-color: rgba(255, 255, 255, 0.72);
     --roadmap-default-task-color: rgba(255, 255, 255, 0.5);
-    --roadmap-completed-task-color: var(--yc-color-base-special);
+    --roadmap-completed-task-color: var(--g-color-base-special);
     --roadmap-progress-task-color: rgba(255, 255, 255, 0.7);
 
     display: flex;

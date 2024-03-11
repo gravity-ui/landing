@@ -8,6 +8,10 @@ $block: '.#{variables.$ns}sandbox-component';
     min-width: 100%;
     position: relative;
 
+    &__wrapper {
+        height: 100%;
+    }
+
     &__component {
         align-items: center;
         display: flex;

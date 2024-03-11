@@ -1,5 +1,5 @@
 import {ArrowDownToLine, ArrowShapeTurnUpRight, Check, Link} from '@gravity-ui/icons';
-import {Button, CopyToClipboard, CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
+import {Button, CopyToClipboard, Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -58,7 +58,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
         () => (
             <CopyToClipboard text={iconUrl} timeout={1000}>
                 {(state) => {
-                    const isCopied = state === CopyToClipboardStatus.Success;
+                    const isCopied = state === 'success';
 
                     return (
                         <Button

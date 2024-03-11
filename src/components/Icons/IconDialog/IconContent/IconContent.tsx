@@ -1,11 +1,11 @@
-import {CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
+import {Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
+import {ClipboardArea} from '../../../ClipboardArea/ClipboardArea';
+import {ClipboardIcon} from '../../../ClipboardIcon/ClipboardIcon';
 import type {IconItem} from '../../types';
-import {ClipboardArea} from '../ClipboardArea/ClipboardArea';
-import {ClipboardIcon} from '../ClipboardIcon/ClipboardIcon';
 
 import './IconContent.scss';
 
@@ -41,7 +41,7 @@ export const IconContent: React.FC<IconContentProps> = ({icon, onClickToKeyword}
                     {(status) => (
                         <div
                             className={b('title', {
-                                copied: status === CopyToClipboardStatus.Success,
+                                copied: status === 'success',
                             })}
                         >
                             <span className={b('name')}>{icon.name}</span>

@@ -18,7 +18,6 @@ import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {modalConfig} from './Modal';
 import {paginationConfig} from './Pagination';
-import {personaConfig} from './Persona';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
@@ -36,6 +35,7 @@ import {textAreaConfig} from './TextArea';
 import {textInputConfig} from './TextInput';
 import {config as toasterConfig} from './Toaster';
 import {tooltipConfig} from './Tooltip';
+import {userLabelConfig} from './UserLabel';
 
 const {config} = getLibById('uikit');
 
@@ -55,7 +55,6 @@ const uikitComponents: Component[] = [
     menuConfig,
     modalConfig,
     paginationConfig,
-    personaConfig,
     popupConfig,
     portalConfig,
     progressConfig,
@@ -73,6 +72,7 @@ const uikitComponents: Component[] = [
     textInputConfig,
     tooltipConfig,
     toasterConfig,
+    userLabelConfig,
 ];
 
 export const uikit: Lib = {
