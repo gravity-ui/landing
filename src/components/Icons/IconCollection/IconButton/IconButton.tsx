@@ -21,7 +21,7 @@ export const IconButton: React.FC<IconsProps> = ({icon, onClick}) => {
     }, [icon, onClick]);
 
     return (
-        <Button view="flat" size="xl" className={b()} onClick={handleClick}>
+        <Button view="flat" size="xl" pin="round-round" className={b()} onClick={handleClick}>
             <Icon data={icon.data} size={ICON_SIZE} />
         </Button>
     );

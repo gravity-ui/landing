@@ -48,7 +48,12 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, class
         <div className={b({flipped: isFlipped})} onClick={flip}>
             <div className={b('body')}>
                 <div className={b('side', {front: true})}>
-                    <ThemeProvider theme="dark" rootClassName={b('theme-wrapper', {color})} scoped>
+                    {/*Workaround for missing theme class in ThemeProvider*/}
+                    <ThemeProvider
+                        theme="dark"
+                        rootClassName={b('theme-wrapper', {color, theme: 'dark'})}
+                        scoped
+                    >
                         <ToasterProvider>
                             <div className={b('card', className)}>
                                 {children}
@@ -60,7 +65,12 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, class
                     </ThemeProvider>
                 </div>
                 <div className={b('side', {back: true})}>
-                    <ThemeProvider theme="light" rootClassName={b('theme-wrapper', {color})} scoped>
+                    {/*Workaround for missing theme class in ThemeProvider*/}
+                    <ThemeProvider
+                        theme="light"
+                        rootClassName={b('theme-wrapper', {color, theme: 'light'})}
+                        scoped
+                    >
                         <ToasterProvider>
                             <div className={b('card', className)}>
                                 {children}

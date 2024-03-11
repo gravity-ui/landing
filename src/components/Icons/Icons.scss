@@ -50,7 +50,7 @@ $block: '.#{variables.$ns}icons';
         margin-bottom: 24px;
         position: sticky;
         top: 0;
-        background: var(--yc-color-base-background);
+        background: var(--g-color-base-background);
         z-index: 1;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {

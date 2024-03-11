@@ -62,7 +62,7 @@ $block: '.#{variables.$ns}examples';
             --g-color-base-background: rgba(37, 27, 37, 0.8);
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-                .yc-radio-button_size_xl .yc-radio-button__option-text {
+                .g-radio-button_size_xl .g-radio-button__option-text {
                     margin: 0 8px;
                 }
             }

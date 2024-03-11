@@ -1,4 +1,3 @@
-import {CopyToClipboardStatus} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -33,7 +32,7 @@ export const UsageExample: React.FC<UsageExampleProps> = ({icon, variant}) => {
                     <div className={b('wrapper')}>
                         <div
                             className={b('code', {
-                                copied: status === CopyToClipboardStatus.Success,
+                                copied: status === 'success',
                             })}
                         >
                             {importCode}

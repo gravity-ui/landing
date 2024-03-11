@@ -1,11 +1,9 @@
-import {Theme} from '@gravity-ui/page-constructor';
 import block from 'bem-cn-lite';
 import {Head, Html, Main, NextScript} from 'next/document';
 import Script from 'next/script';
 
-import {GA_ID, IS_PRODUCTION} from '../constants';
+import {DEFAULT_THEME, GA_ID, IS_PRODUCTION} from '../constants';
 
-const theme = Theme.Dark;
 const b = block('g-root');
 
 export const Document = () => {
@@ -28,7 +26,7 @@ export const Document = () => {
                     />
                 )}
             </Head>
-            <body className={b({theme})}>
+            <body className={b({theme: DEFAULT_THEME})}>
                 {IS_PRODUCTION && (
                     <noscript
                         dangerouslySetInnerHTML={{

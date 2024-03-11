@@ -5,6 +5,9 @@
 
 $block: '.#{variables.$ns}example-block';
 
+// Workaround for missing theme class in ThemeProvider
+$workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
+
 #{$block} {
     margin-bottom: 16px;
     border-radius: 8px;
@@ -15,6 +18,7 @@ $block: '.#{variables.$ns}example-block';
         margin-bottom: 0;
     }
 
+    #{$workaroundBlockDarkTheme},
     &__theme-root.g-root_theme_dark {
         --g-color-base-background: #251b25;
     }

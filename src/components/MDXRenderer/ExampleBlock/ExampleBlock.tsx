@@ -1,4 +1,4 @@
-import {CopyToClipboardStatus, Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
+import {Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import codeIcon from '../../../assets/icons/code.svg';
@@ -25,7 +25,8 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
 
     return (
         <div className={b()}>
-            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', 'sandbox')}>
+            {/*Workaround for missing theme class in ThemeProvider*/}
+            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', {theme}, 'sandbox')}>
                 <div className={b('content')} {...(background ? {style: {background}} : {})}>
                     {children}
                 </div>
@@ -64,7 +65,7 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
                         {(status) => (
                             <div
                                 className={b('container', {
-                                    copied: status === CopyToClipboardStatus.Success,
+                                    copied: status === 'success',
                                 })}
                             >
                                 <pre>

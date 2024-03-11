@@ -25,6 +25,6 @@ $block: '.#{variables.$ns}icons-not-found';
     &__subtitle {
         @include pcStyles.text-size(body-2);
         margin-top: pcVariables.$indentXXXS;
-        color: var(--yc-color-text-light-secondary);
+        color: var(--g-color-text-light-secondary);
     }
 }

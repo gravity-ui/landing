@@ -10,7 +10,6 @@ import {
     LoaderCard,
     MenuCard,
     PaginationCard,
-    PersonaCard,
     PopupCard,
     ProgressCard,
     RadioCard,
@@ -21,6 +20,7 @@ import {
     TableCard,
     TabsCard,
     ToastersCard,
+    UserLabelCard,
 } from './components';
 
 export const firstSliderItems = [
@@ -47,7 +47,7 @@ export const thirdSliderItems = [
     RadioCard,
     LabelsCard,
     PopupCard,
-    PersonaCard,
+    UserLabelCard,
     SpinnerCard,
     BreadcrumbsCard,
     CheckboxCard,

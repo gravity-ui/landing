@@ -22,15 +22,19 @@ export type TemplatesModel = TemplatesProps & {
 
 export const TemplatesBlock: React.FC<TemplatesProps> = ({animated, title, tabs}) => {
     const blockRef = React.useRef<HTMLDivElement>(null);
+
     React.useEffect(() => {
         const scrollTo = () => {
             blockRef.current?.scrollIntoView({behavior: 'smooth'});
         };
+
         window.addEventListener(SCROLL_TO_TEMPLATES_EVENT, scrollTo);
+
         return () => {
             window.removeEventListener(SCROLL_TO_TEMPLATES_EVENT, scrollTo);
         };
     }, []);
+
     return (
         <React.Fragment>
             <div ref={blockRef} />

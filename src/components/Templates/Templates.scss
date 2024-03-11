@@ -13,7 +13,7 @@ $block: '.#{variables.$ns}templates';
     gap: 20px;
 
     @media (max-width: 329px) {
-        .yc-button__text {
+        .g-button__text {
             padding: 0 10px;
         }
     }
@@ -38,7 +38,7 @@ $block: '.#{variables.$ns}templates';
         overflow-x: auto;
         font-size: 17px;
         line-height: 30px;
-        font-family: var(--yc-font-family-monospace);
+        font-family: var(--g-font-family-monospace);
     }
     &__copy {
         top: 16px;

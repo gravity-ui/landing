@@ -8,8 +8,8 @@ $block: '.#{variables.$ns}clipboard-area';
     display: flex;
 
     &__popup {
-        --yc-popup-background-color: #3e3235;
-        --yc-popup-border-color: #3e3235;
+        --g-popup-background-color: #3e3235;
+        --g-popup-border-color: #3e3235;
 
         @include pcStyles.text-size(body-1);
         padding: 16px;
