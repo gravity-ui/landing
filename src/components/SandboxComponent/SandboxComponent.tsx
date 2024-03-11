@@ -69,7 +69,11 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
     }
 
     return (
-        <ThemeProvider theme={theme} direction={direction} rootClassName={b('wrapper', null, 'sandbox')}>
+        <ThemeProvider
+            theme={theme}
+            direction={direction}
+            rootClassName={b('wrapper', null, 'sandbox')}
+        >
             <div className={b()}>
                 <div className={b('component', {theme})}>
                     {DynamicComponent && <DynamicComponent {...componentProps} />}
