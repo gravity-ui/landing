@@ -46,7 +46,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         }
 
         [dir='rtl'] & {
-            padding: 20px 0 20px 34px;
+            padding: 24px 0 24px 34px;
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
