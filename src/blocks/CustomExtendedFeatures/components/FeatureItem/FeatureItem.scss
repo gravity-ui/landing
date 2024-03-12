@@ -63,15 +63,29 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
     &__stars {
         display: flex;
         align-items: center;
-        margin-left: 20px;
+
+        [dir='ltr'] & {
+            margin-left: 20px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: 20px;
+        }
     }
 
     &__stars-count {
-        margin-left: 6px;
         font-size: 15px;
         line-height: 20px;
         font-weight: 400;
         color: rgba(255, 255, 255, 0.7);
+
+        [dir='ltr'] & {
+            margin-left: 6px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: 6px;
+        }
     }
 
     &__text {
@@ -97,15 +111,32 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
     &__release-info-block {
         display: flex;
         align-items: center;
-        margin-left: 18px;
 
-        &:first-child {
-            margin-left: 0;
+        [dir='ltr'] & {
+            margin-left: 18px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+
+        [dir='rtl'] & {
+            margin-right: 18px;
+
+            &:first-child {
+                margin-right: 0;
+            }
         }
     }
 
     &__release-version,
     &__release-date {
-        margin-left: 6px;
+        [dir='ltr'] & {
+            margin-left: 6px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: 6px;
+        }
     }
 }

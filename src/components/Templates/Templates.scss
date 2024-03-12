@@ -20,11 +20,18 @@ $block: '.#{variables.$ns}templates';
 
     &__commands-wrapper {
         width: 100%;
-        padding: 16px 36px 16px 16px;
         background: #160d1b;
         border-radius: 16px;
         position: relative;
         overflow: hidden;
+
+        [dir='ltr'] & {
+            padding: 16px 36px 16px 16px;
+        }
+
+        [dir='rtl'] & {
+            padding: 16px 16px 16px 36px;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             width: inherit;
@@ -40,15 +47,25 @@ $block: '.#{variables.$ns}templates';
         line-height: 30px;
         font-family: var(--g-font-family-monospace);
     }
+
     &__copy {
         top: 16px;
-        right: 16px;
         position: absolute;
+
+        [dir='ltr'] & {
+            right: 16px;
+        }
+
+        [dir='rtl'] & {
+            left: 16px;
+        }
     }
+
     &__tabs {
         overflow: auto;
         flex-wrap: nowrap;
     }
+
     &__tabs-wrapper {
         ::-webkit-scrollbar {
             display: none;

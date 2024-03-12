@@ -8,7 +8,8 @@ const b = block('g-root');
 
 export const Document = () => {
     return (
-        <Html>
+        // Workaround for missing direction 'ltr' in ThemeProvider
+        <Html dir="ltr">
             <Head>
                 {IS_PRODUCTION && (
                     <Script
