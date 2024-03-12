@@ -79,7 +79,7 @@ $block: '.#{variables.$ns}footer';
             }
 
             [dir='rtl'] & {
-                margin-right: 42px;
+                margin-right: 0;
             }
 
             &:first-child {
