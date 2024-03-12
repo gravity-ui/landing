@@ -10,6 +10,7 @@ export const selectConfig: Component = {
     id: 'select',
     title: 'Select',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

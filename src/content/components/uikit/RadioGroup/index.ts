@@ -9,6 +9,7 @@ export const radioGroupConfig = {
     id: 'radio-group',
     title: 'RadioGroup',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

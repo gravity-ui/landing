@@ -10,6 +10,7 @@ export const relativeDateFieldConfig: Component = {
     id: 'relative-date-field',
     title: 'Relative Date Field',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

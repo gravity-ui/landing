@@ -9,6 +9,7 @@ export const radioConfig = {
     id: 'radio',
     title: 'Radio',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

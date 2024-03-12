@@ -10,6 +10,7 @@ export const dateFieldConfig: Component = {
     id: 'date-field',
     title: 'Date Field',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

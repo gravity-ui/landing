@@ -9,6 +9,7 @@ export const alertConfig = {
     id: 'alert',
     title: 'Alert',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

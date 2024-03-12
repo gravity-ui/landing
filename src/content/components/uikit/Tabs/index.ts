@@ -9,6 +9,7 @@ export const tabsConfig = {
     id: 'tabs',
     title: 'Tabs',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

@@ -4,6 +4,7 @@ type SandboxBlockTypes = {
     libId: string;
     componentId: string;
     sandboxConfig?: SandboxProps;
+    isSupportRTL?: boolean;
 };
 
 type OptionType = {

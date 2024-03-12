@@ -9,6 +9,7 @@ export const labelConfig = {
     id: 'label',
     title: 'Label',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

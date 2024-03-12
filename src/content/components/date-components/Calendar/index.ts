@@ -10,6 +10,7 @@ export const calendarConfig: Component = {
     id: 'calendar',
     title: 'Calendar',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

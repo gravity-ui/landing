@@ -9,6 +9,7 @@ export const paginationConfig = {
     id: 'pagination',
     title: 'Pagination',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

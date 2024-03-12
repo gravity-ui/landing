@@ -9,6 +9,7 @@ export const tableConfig = {
     id: 'table',
     title: 'Table',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },
