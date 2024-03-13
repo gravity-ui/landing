@@ -27,6 +27,8 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     const isMobile = useIsMobile();
 
     const [filterString, setFilterString] = React.useState('');
+
+    const [isOpenIconDialog, setIsOpenIconDialog] = React.useState(false);
     const [iconForDialog, setIconForDialog] = React.useState<IconItem>();
 
     const pageTitleRef = React.useRef<HTMLHeadingElement>(null);
@@ -43,6 +45,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             const iconToShow = allIcons.find((icon) => icon.name === currentIcon);
 
             if (iconToShow) {
+                setIsOpenIconDialog(true);
                 setIconForDialog(iconToShow);
             }
         }
@@ -50,6 +53,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
 
     const handleSelectIcon = React.useCallback(
         (item: IconItem) => {
+            setIsOpenIconDialog(true);
             setIconForDialog(item);
             onChangeCurrentIcon?.(item?.name);
         },
@@ -57,8 +61,11 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     );
 
     const handleCloseDialog = React.useCallback(() => {
-        setIconForDialog(undefined);
-        onChangeCurrentIcon?.(undefined);
+        setIsOpenIconDialog(false);
+        setTimeout(() => {
+            setIconForDialog(undefined);
+            onChangeCurrentIcon?.(undefined);
+        }, 500);
     }, [onChangeCurrentIcon]);
 
     const handleClickToKeyword = React.useCallback((keyword: string) => {
@@ -139,6 +146,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             </Row>
 
             <IconDialog
+                isOpen={isOpenIconDialog}
                 icon={iconForDialog}
                 onClose={handleCloseDialog}
                 onClickToKeyword={handleClickToKeyword}

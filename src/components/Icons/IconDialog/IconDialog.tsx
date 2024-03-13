@@ -12,12 +12,18 @@ import {IconDialogActions} from './IconDialogActions/IconDialogActions';
 const b = block('icon-dialog');
 
 interface IconDialogProps {
+    isOpen: boolean;
     icon?: IconItem;
     onClickToKeyword?: (keyword: string) => void;
     onClose: () => void;
 }
 
-export const IconDialog: React.FC<IconDialogProps> = ({icon, onClose, onClickToKeyword}) => {
+export const IconDialog: React.FC<IconDialogProps> = ({
+    isOpen,
+    icon,
+    onClose,
+    onClickToKeyword,
+}) => {
     const isMobile = useIsMobile();
 
     if (isMobile) {
@@ -25,7 +31,7 @@ export const IconDialog: React.FC<IconDialogProps> = ({icon, onClose, onClickToK
             <Sheet
                 className={b()}
                 contentClassName={b('sheet-content')}
-                visible={Boolean(icon)}
+                visible={isOpen}
                 onClose={onClose}
             >
                 {icon && (
@@ -39,7 +45,7 @@ export const IconDialog: React.FC<IconDialogProps> = ({icon, onClose, onClickToK
     }
 
     return (
-        <Dialog className={b()} size="s" open={Boolean(icon)} onClose={onClose}>
+        <Dialog className={b()} size="s" open={isOpen} onClose={onClose}>
             {icon && (
                 <React.Fragment>
                     <IconBody icon={icon} onClickToKeyword={onClickToKeyword} />
