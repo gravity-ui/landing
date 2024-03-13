@@ -9,6 +9,7 @@ export const breadcrumbsConfig = {
     id: 'breadcrumbs',
     title: 'Breadcrumbs',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

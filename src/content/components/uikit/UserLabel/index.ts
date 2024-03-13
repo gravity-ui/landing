@@ -10,6 +10,7 @@ export const userLabelConfig = {
     title: 'UserLabel',
     githubUrl: getGithubUrl(getterOptions),
     isComingSoon: true,
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

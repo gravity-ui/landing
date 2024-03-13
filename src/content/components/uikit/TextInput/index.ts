@@ -9,6 +9,7 @@ export const textInputConfig = {
     id: 'text-input',
     title: 'TextInput',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

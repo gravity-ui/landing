@@ -11,6 +11,7 @@ import menuOpenIcon from '../../assets/icons/menu-open.svg';
 import soonLabelIcon from '../../assets/icons/soon-label.svg';
 import {menu} from '../../content/menu';
 import {socialLinks} from '../../content/social-links';
+import {EnvironmentContext} from '../../contexts';
 import {block} from '../../utils';
 import {Link} from '../Link';
 
@@ -27,6 +28,8 @@ export const Menu: React.FC = () => {
     const router = useRouter();
 
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+    const {isRtl} = React.useContext(EnvironmentContext);
 
     return (
         <div className={b()}>
@@ -71,9 +74,11 @@ export const Menu: React.FC = () => {
                             </div>
                         ))}
                     </div>
-                    <div className={b('desktop-menu-locale-picker')}>
-                        <LocalePicker />
-                    </div>
+                    {!isRtl && (
+                        <div className={b('desktop-menu-locale-picker')}>
+                            <LocalePicker />
+                        </div>
+                    )}
                 </div>
 
                 <nav className={b('desktop-social-links')}>
@@ -154,9 +159,11 @@ export const Menu: React.FC = () => {
                                     </div>
                                 ))}
                             </div>
-                            <div className={b('mobile-menu-locale-picker')}>
-                                <LocalePicker />
-                            </div>
+                            {!isRtl && (
+                                <div className={b('mobile-menu-locale-picker')}>
+                                    <LocalePicker />
+                                </div>
+                            )}
                         </Col>
                     </Row>
                 </Grid>

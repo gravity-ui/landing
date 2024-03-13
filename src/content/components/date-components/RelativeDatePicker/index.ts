@@ -10,6 +10,7 @@ export const relativeDatePickerConfig: Component = {
     id: 'relative-date-picker',
     title: 'Relative Date Picker',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

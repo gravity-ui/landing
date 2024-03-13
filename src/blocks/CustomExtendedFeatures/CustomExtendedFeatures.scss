@@ -28,7 +28,14 @@ $block: '.#{variables.$ns}custom-extended-features';
 
     &__button-desktop {
         display: block;
-        margin-left: 20px;
+
+        [dir='ltr'] & {
+            margin-left: 20px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: 20px;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             display: none;

@@ -9,6 +9,7 @@ export const progressConfig = {
     id: 'progress',
     title: 'Progress',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

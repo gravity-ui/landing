@@ -9,6 +9,7 @@ export const switchConfig = {
     id: 'switch',
     title: 'Switch',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

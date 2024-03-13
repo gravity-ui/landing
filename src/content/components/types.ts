@@ -7,6 +7,7 @@ export type Component = {
     githubUrl?: string;
     figmaUrl?: string;
     isComingSoon?: boolean;
+    isSupportRTL?: boolean;
     content?: {
         readmeUrl: string;
         design?: string;

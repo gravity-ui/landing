@@ -9,6 +9,7 @@ export const skeletonConfig = {
     id: 'skeleton',
     title: 'Skeleton',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

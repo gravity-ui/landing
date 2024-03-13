@@ -9,6 +9,7 @@ export const textAreaConfig = {
     id: 'text-area',
     title: 'TextArea',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

@@ -5,11 +5,12 @@ import React from 'react';
 import i18nextConfig from '../../../next-i18next.config';
 
 type I18nLinkProps = {
+    className?: string;
     locale?: string;
     children: React.ReactNode;
 } & LinkProps;
 
-export const I18nLink: React.FC<I18nLinkProps> = ({href, locale, children, ...rest}) => {
+export const I18nLink: React.FC<I18nLinkProps> = ({href, className, locale, children, ...rest}) => {
     const router = useRouter();
 
     let resultHref = href;
@@ -23,7 +24,7 @@ export const I18nLink: React.FC<I18nLinkProps> = ({href, locale, children, ...re
     }
 
     return (
-        <Link href={resultHref} {...rest}>
+        <Link href={resultHref} className={className} {...rest}>
             {children}
         </Link>
     );

@@ -9,6 +9,7 @@ export const textConfig = {
     id: 'text',
     title: 'Text',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

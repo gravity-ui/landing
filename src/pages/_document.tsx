@@ -15,7 +15,8 @@ class CustomDocument extends Document {
             i18nextConfig.i18n.defaultLocale;
 
         return (
-            <Html lang={currentLocale}>
+            // Workaround for missing direction 'ltr' in ThemeProvider
+            <Html lang={currentLocale} dir="ltr">
                 <Head>
                     {IS_PRODUCTION && (
                         <Script

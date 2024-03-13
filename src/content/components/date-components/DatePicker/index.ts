@@ -10,6 +10,7 @@ export const datePickerConfig: Component = {
     id: 'date-picker',
     title: 'Date Picker',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },

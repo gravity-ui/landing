@@ -26,10 +26,20 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
     }
 
     &__col {
-        margin-right: 36px;
+        [dir='ltr'] & {
+            margin-right: 36px;
 
-        &:last-child {
-            margin-right: 0;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        [dir='rtl'] & {
+            margin-left: 36px;
+
+            &:last-child {
+                margin-left: 0;
+            }
         }
 
         &_stretch {
@@ -37,8 +47,15 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            margin-right: 0;
             margin-bottom: 36px;
+
+            [dir='ltr'] & {
+                margin-right: 0;
+            }
+
+            [dir='rtl'] & {
+                margin-left: 0;
+            }
 
             &:last-child {
                 margin-bottom: 0;
@@ -67,20 +84,37 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
     }
 
     &__sub-col {
-        margin-right: 40px;
+        [dir='ltr'] & {
+            margin-right: 40px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        [dir='rtl'] & {
+            margin-left: 40px;
+
+            &:last-child {
+                margin-left: 0;
+            }
+        }
 
         &_stretch {
             flex: 1;
         }
 
-        &:last-child {
-            margin-right: 0;
-        }
-
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             display: flex;
-            margin-right: 0;
             margin-bottom: 40px;
+
+            [dir='ltr'] & {
+                margin-right: 0;
+            }
+
+            [dir='rtl'] & {
+                margin-left: 0;
+            }
 
             &:last-child {
                 margin-bottom: 0px;
@@ -88,26 +122,55 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
 
             #{$block}__col-item {
                 margin-bottom: 0px;
-                margin-right: 40px;
 
-                &:last-child {
-                    margin-right: 0;
+                [dir='ltr'] & {
+                    margin-right: 40px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+
+                [dir='rtl'] & {
+                    margin-left: 40px;
+
+                    &:last-child {
+                        margin-left: 0;
+                    }
                 }
             }
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             display: block;
-            margin-right: 36px;
             margin-bottom: 0;
 
-            &:last-child {
-                margin-right: 0px;
+            [dir='ltr'] & {
+                margin-right: 36px;
+
+                &:last-child {
+                    margin-right: 0px;
+                }
+            }
+
+            [dir='rtl'] & {
+                margin-left: 36px;
+
+                &:last-child {
+                    margin-left: 0px;
+                }
             }
 
             #{$block}__col-item {
-                margin-right: 0px;
                 margin-bottom: 36px;
+
+                [dir='ltr'] & {
+                    margin-right: 0;
+                }
+
+                [dir='rtl'] & {
+                    margin-left: 0;
+                }
 
                 &:last-child {
                     margin-bottom: 0px;
@@ -116,20 +179,18 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin-right: 0;
             margin-bottom: 20px;
-
-            &:last-child {
-                margin-bottom: 0px;
-            }
 
             #{$block}__col-item {
                 margin-bottom: 20px;
-                margin-right: 0px;
 
                 &:last-child {
-                    margin-right: 0px;
+                    margin-bottom: 0px;
                 }
+            }
+
+            &:last-child {
+                margin-bottom: 0px;
             }
         }
     }
@@ -147,18 +208,39 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
     &__col-item-elem {
         display: flex;
         align-items: center;
-        margin-right: 32px;
 
-        &_sm-gap {
-            margin-right: 16px;
+        [dir='ltr'] & {
+            margin-right: 32px;
 
             &:last-child {
                 margin-right: 0;
             }
         }
 
-        &:last-child {
-            margin-right: 0;
+        [dir='rtl'] & {
+            margin-left: 32px;
+
+            &:last-child {
+                margin-left: 0;
+            }
+        }
+
+        &_sm-gap {
+            [dir='ltr'] & {
+                margin-right: 16px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            [dir='rtl'] & {
+                margin-left: 16px;
+
+                &:last-child {
+                    margin-left: 0;
+                }
+            }
         }
     }
 

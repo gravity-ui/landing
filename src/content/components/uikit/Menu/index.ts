@@ -9,6 +9,7 @@ export const menuConfig = {
     id: 'menu',
     title: 'Menu',
     githubUrl: getGithubUrl(getterOptions),
+    isSupportRTL: true,
     content: {
         readmeUrl: getReadmeUrl(getterOptions),
     },
