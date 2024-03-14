@@ -7,7 +7,7 @@ export const roadmapTasks: RoadmapTask[] = [
     },
     {
         title: '<b>UIKit:</b> Right-to-left languages support',
-        status: RoadmapTaskStatus.InProgress,
+        status: RoadmapTaskStatus.Completed,
     },
     {
         title: '<b>UIKit:</b> improvements in digital accessibility',
@@ -23,7 +23,7 @@ export const roadmapTasks: RoadmapTask[] = [
     },
     {
         title: '<b>Docs:</b> Date Components in Components section',
-        status: RoadmapTaskStatus.InProgress,
+        status: RoadmapTaskStatus.Completed,
     },
     {
         title: '<b>UIKit:</b> emoji picker, color picker, label input and range input components',
