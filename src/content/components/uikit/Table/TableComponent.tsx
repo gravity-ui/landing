@@ -9,7 +9,7 @@ import {
     withTableSelection,
     withTableSorting,
 } from '@gravity-ui/uikit';
-import {useState} from 'react';
+import React from 'react';
 
 export interface DataItem {
     name: string;
@@ -108,7 +108,7 @@ export const TableComponent = ({
     edgePadding,
     rowActionsSize,
 }: TableProps<DataItem> & WithTableActionsProps<DataItem>) => {
-    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [selectedIds, setSelectedIds] = React.useState<string[]>([]);
 
     return (
         <CustomTable

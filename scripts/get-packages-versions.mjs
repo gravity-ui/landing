@@ -16,8 +16,6 @@ const packagesVersionsPath = path.join(
 
 const getPackagesVersions = () => {
     try {
-        console.log('GET_PACKAGES_VERSIONS_START');
-
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         const dependencies = packageJson.dependencies;
 
@@ -26,15 +24,13 @@ const getPackagesVersions = () => {
             if (dependencies[packageName]) {
                 result[packagesMap[packageName]] = dependencies[packageName].replace(/[\^~]/g, '');
             } else {
-                console.warn('GET_PACKAGES_VERSIONS_MISSED_PACKAGE', packageName);
+                console.warn(`Missed package when getting versions: ${packageName}`);
             }
         });
 
-        console.log('GET_PACKAGES_VERSIONS_RESULT', result);
+        console.log('Package versions: ', result);
 
         fs.writeFileSync(packagesVersionsPath, JSON.stringify(result), 'utf8');
-
-        console.log('GET_PACKAGES_VERSIONS_FINISH');
     } catch (err) {
         console.error(err.message);
         process.exit(1);

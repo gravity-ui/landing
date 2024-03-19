@@ -12,12 +12,18 @@ import {IconDialogActions} from './IconDialogActions/IconDialogActions';
 const b = block('icon-dialog');
 
 interface IconDialogProps {
-    icon: IconItem;
+    isOpen: boolean;
+    icon?: IconItem;
     onClickToKeyword?: (keyword: string) => void;
     onClose: () => void;
 }
 
-export const IconDialog: React.FC<IconDialogProps> = ({icon, onClose, onClickToKeyword}) => {
+export const IconDialog: React.FC<IconDialogProps> = ({
+    isOpen,
+    icon,
+    onClose,
+    onClickToKeyword,
+}) => {
     const isMobile = useIsMobile();
 
     if (isMobile) {
@@ -25,19 +31,27 @@ export const IconDialog: React.FC<IconDialogProps> = ({icon, onClose, onClickToK
             <Sheet
                 className={b()}
                 contentClassName={b('sheet-content')}
-                visible={true}
+                visible={isOpen}
                 onClose={onClose}
             >
-                <IconBody icon={icon} onClickToKeyword={onClickToKeyword} />
-                <IconDialogActions icon={icon} mobile={true} />
+                {icon && (
+                    <React.Fragment>
+                        <IconBody icon={icon} onClickToKeyword={onClickToKeyword} />
+                        <IconDialogActions icon={icon} mobile={true} />
+                    </React.Fragment>
+                )}
             </Sheet>
         );
     }
 
     return (
-        <Dialog className={b()} size="s" open={true} onClose={onClose}>
-            <IconBody icon={icon} onClickToKeyword={onClickToKeyword} />
-            <IconDialogActions icon={icon} />
+        <Dialog className={b()} size="s" open={isOpen} onClose={onClose}>
+            {icon && (
+                <React.Fragment>
+                    <IconBody icon={icon} onClickToKeyword={onClickToKeyword} />
+                    <IconDialogActions icon={icon} />
+                </React.Fragment>
+            )}
         </Dialog>
     );
 };

@@ -123,6 +123,12 @@ $border-color: rgba(255, 255, 255, 0.2);
         }
     }
 
+    &__desktop-menu-locale-picker {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+    }
+
     &__desktop-social-links {
         display: flex;
         margin: 0;
@@ -213,6 +219,12 @@ $border-color: rgba(255, 255, 255, 0.2);
         &:first-child {
             margin-top: 0;
         }
+    }
+
+    &__mobile-menu-locale-picker {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
     }
 
     &__mobile-social-link {

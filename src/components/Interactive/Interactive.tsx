@@ -1,9 +1,10 @@
 import {Theme} from '@gravity-ui/uikit';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React from 'react';
 import 'swiper/css';
 import {Autoplay, EffectCreative} from 'swiper/modules';
 import {Swiper, SwiperClass, SwiperSlide} from 'swiper/react';
 
+import {EnvironmentContext} from '../../contexts';
 import {block} from '../../utils';
 
 import './Interactive.scss';
@@ -21,10 +22,10 @@ interface SimpleSliderProps {
 
 const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
     ({items, reverseDirection = false, autoplayDisabled}) => {
-        const swiperInstance = useRef<SwiperClass>();
+        const swiperInstance = React.useRef<SwiperClass>();
         const clonnedComponents = [...items, ...items, ...items, ...items, ...items, ...items];
 
-        useEffect(() => {
+        React.useEffect(() => {
             if (autoplayDisabled) {
                 swiperInstance.current?.autoplay.stop();
             } else {
@@ -32,11 +33,11 @@ const SimpleSlider: React.FC<SimpleSliderProps> = React.memo(
             }
         }, [autoplayDisabled]);
 
-        const handleInit = useCallback((swiper: SwiperClass) => {
+        const handleInit = React.useCallback((swiper: SwiperClass) => {
             swiperInstance.current = swiper;
         }, []);
 
-        const handlePauseAutoplay = useCallback((swiper: SwiperClass) => {
+        const handlePauseAutoplay = React.useCallback((swiper: SwiperClass) => {
             swiper.autoplay.resume();
         }, []);
 
@@ -113,11 +114,13 @@ const Title = () => (
 );
 
 export const Interactive = () => {
-    const [theme, setTheme] = useState<Theme>('dark');
-    const [color, setColor] = useState<ColorTheme>(ColorTheme.Yellow);
-    const [autoplayDisabled, setAutoplayDisabled] = useState(false);
+    const [theme, setTheme] = React.useState<Theme>('dark');
+    const [color, setColor] = React.useState<ColorTheme>(ColorTheme.Yellow);
+    const [autoplayDisabled, setAutoplayDisabled] = React.useState(false);
 
-    useEffect(() => {
+    const {isClient} = React.useContext(EnvironmentContext);
+
+    React.useEffect(() => {
         if (typeof window === 'undefined') {
             return;
         }
@@ -135,13 +138,17 @@ export const Interactive = () => {
         };
     }, []);
 
-    const switchTheme = useCallback(() => {
+    const switchTheme = React.useCallback(() => {
         setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
     }, []);
 
     const value = React.useMemo(() => {
         return {theme, color, switchTheme, changeColor: setColor};
     }, [theme, color, switchTheme, setColor]);
+
+    if (!isClient) {
+        return null;
+    }
 
     return (
         <InteractiveContextProvider value={value}>

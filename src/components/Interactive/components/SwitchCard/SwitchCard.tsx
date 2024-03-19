@@ -1,15 +1,15 @@
 import {Flex, Switch} from '@gravity-ui/uikit';
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';
 
 const AUTO_SWITCH_TIMEOUT = 1000 * 3;
 
 export const SwitchCard = () => {
-    const [checked, setChecked] = useState(false);
-    const intervalRef = useRef<NodeJS.Timeout>();
+    const [checked, setChecked] = React.useState(false);
+    const intervalRef = React.useRef<NodeJS.Timeout>();
 
-    useEffect(() => {
+    React.useEffect(() => {
         const id = setInterval(() => {
             setChecked((prev) => !prev);
         }, AUTO_SWITCH_TIMEOUT);

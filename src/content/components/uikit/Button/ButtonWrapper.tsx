@@ -10,16 +10,14 @@ export const ButtonWrapper: FC<
     }
 > = (props) => {
     return (
-        <div style={{width: '220px'}}>
-            <Button {...props}>
-                {props.onlyIcon
-                    ? [<Icon data={Gear} />]
-                    : [
-                          props.startIcon && <Icon data={Gear} />,
-                          props.children,
-                          props.endIcon && <Icon data={Gear} />,
-                      ]}
-            </Button>
-        </div>
+        <Button {...props}>
+            {props.onlyIcon
+                ? [<Icon data={Gear} />]
+                : [
+                      props.startIcon && <Icon data={Gear} />,
+                      props.children,
+                      props.endIcon && <Icon data={Gear} />,
+                  ]}
+        </Button>
     );
 };

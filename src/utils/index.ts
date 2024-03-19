@@ -4,3 +4,6 @@ export * from './theme';
 export * from './lib';
 export * from './components';
 export * from './browser';
+export * from './i18next';
+export * from './locale-detection';
+export * from './locale-link';

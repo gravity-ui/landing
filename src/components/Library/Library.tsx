@@ -1,6 +1,6 @@
 import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
-import Link from 'next/link';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
@@ -12,7 +12,8 @@ import linkIcon from '../../assets/icons/link.svg';
 import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
-import {Lib, block} from '../../utils';
+import {Link} from '../../components/Link';
+import {Lib, block, getLocaleLink} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -31,55 +32,57 @@ type Props = {
 };
 
 export const Library: React.FC<Props> = ({lib}) => {
+    const {t, i18n} = useTranslation();
+
     const contentTabs = [
         {
             id: Tab.Readme,
-            title: 'Readme',
+            title: t('library:readme'),
         },
     ];
 
     if (lib.data.changelog) {
         contentTabs.push({
             id: Tab.Changelog,
-            title: 'Changelog',
+            title: t('library:changelog'),
         });
     }
 
     const infoList = [
         {
             id: 'stars',
-            title: 'Stars',
+            title: t('library:stars'),
             value: lib.data.stars,
             icon: starIcon,
         },
         {
             id: 'version',
-            title: 'Version',
+            title: t('library:version'),
             value: lib.data.version || '–',
             icon: versionIcon,
         },
         {
             id: 'lastUpdate',
-            title: 'Last update',
+            title: t('library:lastUpdate'),
             value: lib.data.lastUpdate || '–',
             icon: lastUpdateIcon,
         },
         {
             id: 'repository',
-            title: 'Repository',
+            title: t('library:repository'),
             link: `https://github.com/${lib.config.githubId}`,
             value: `github.com/${lib.config.githubId}`,
             icon: linkIcon,
         },
         {
             id: 'license',
-            title: 'License',
+            title: t('library:license'),
             value: lib.data.license || '–',
             icon: licenseIcon,
         },
         // {
         //     id: 'issues',
-        //     title: 'Issues',
+        //     title: t('library:issues'),
         //     value: lib.data.issues,
         //     icon: issuesIcon,
         // },
@@ -98,8 +101,8 @@ export const Library: React.FC<Props> = ({lib}) => {
                     <Col sizes={12}>
                         <div className={b('header', {primary: isPrimary})}>
                             <div className={b('breadcrumbs')}>
-                                <Link href="/libraries">
-                                    <a className={b('breadcrumbs-link')}>Libraries</a>
+                                <Link href="/libraries" className={b('breadcrumbs-link')}>
+                                    {t('library:libraries')}
                                 </Link>{' '}
                                 / <HTML className={b('breadcrumbs-item')}>{lib.config.title}</HTML>
                             </div>
@@ -108,7 +111,9 @@ export const Library: React.FC<Props> = ({lib}) => {
                                 <HTML>{lib.config.title}</HTML>
                             </h1>
 
-                            <div className={b('description')}>{lib.config.description}</div>
+                            <div className={b('description')}>
+                                {t(`libraries-info:description_${lib.config.id}`)}
+                            </div>
 
                             {lib.config.githubId || lib.config.storybookUrl ? (
                                 <div className={b('buttons')}>
@@ -118,10 +123,10 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             className={b('button')}
                                             view="action"
                                             size="xl"
-                                            href="/icons"
+                                            href={getLocaleLink('/icons', i18n)}
                                             target="_blank"
                                         >
-                                            Go to icons
+                                            {t('library:actions_goToIcons')}
                                         </Button>
                                     )}
                                     {lib.config.githubId ? (
@@ -138,7 +143,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                 data={githubIcon}
                                                 size={16}
                                             />
-                                            <span>Github</span>
+                                            <span>{t('actions_github')}</span>
                                         </Button>
                                     ) : null}
                                     {lib.config.id !== 'icons' && lib.config.storybookUrl ? (
@@ -155,7 +160,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                 data={storybookIcon}
                                                 size={16}
                                             />
-                                            <span>Storybook</span>
+                                            <span>{t('actions_storybook')}</span>
                                         </Button>
                                     ) : null}
                                 </div>
@@ -178,6 +183,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                             />
                             <div className={b('content')}>
                                 <MDXRenderer
+                                    key={`${lib.config.id}-${activeTab}`}
                                     text={
                                         activeTab === Tab.Readme
                                             ? lib.data.readme
@@ -199,7 +205,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                         setIsVisibleInfoListMobile(!isVisibleInfoListMobile);
                                     }}
                                 >
-                                    <div className={b('info-title-text')}>About library</div>
+                                    <div className={b('info-title-text')}>{t('library:about')}</div>
                                     <div
                                         className={b('info-title-icon', {
                                             'mobile-visible': isVisibleInfoListMobile,

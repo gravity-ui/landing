@@ -23,7 +23,7 @@ export function getRouteFromReadmeUrl(readmeUrl: string) {
     const match = readmeUrl.match(README_REGEX);
 
     if (!match) {
-        return;
+        return undefined;
     }
 
     return `/components/${match.groups?.repoName}/${toKebabCase(match.groups?.componentName)}${

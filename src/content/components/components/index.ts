@@ -9,6 +9,5 @@ export const components: Lib = {
     id: config.id,
     title: config.title,
     primary: config.primary,
-    description: config.description,
     components: [storeBadgeConfig],
 };

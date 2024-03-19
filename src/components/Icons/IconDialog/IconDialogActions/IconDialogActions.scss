@@ -13,6 +13,10 @@ $block: '.#{variables.$ns}icon-dialog-actions';
     &__copy-action {
         --g-color-base-light: #fff;
         width: 152px;
+
+        &_lg {
+            width: 224px;
+        }
     }
 
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {

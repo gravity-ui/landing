@@ -1,4 +1,5 @@
-import {PageConstructor} from '@gravity-ui/page-constructor';
+import {PageConstructor, PageContent} from '@gravity-ui/page-constructor';
+import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -8,23 +9,19 @@ import {Examples} from '../../blocks/Examples/Examples';
 import {RoadmapBlock} from '../../blocks/RoadmapBlock/RoadmapBlock';
 import TemplatesBlock from '../../blocks/TemplatesBlock/TemplatesBlock';
 import {CustomBlock} from '../../blocks/constants';
-import {landing} from '../../content/landing';
-import {landingRTL} from '../../content/landing-rtl';
+import {getLanding} from '../../content/landing';
+import {getRtlLanding} from '../../content/landing-rtl';
 import {useSectionScroll} from '../../hooks/useSectionScroll';
 
-const contentByRoute = {
-    '/': landing,
-    '/rtl': landingRTL,
-};
-
 export const Landing: React.FC = () => {
+    const {t} = useTranslation();
     const {pathname} = useRouter();
 
     useSectionScroll();
 
     return (
         <PageConstructor
-            content={contentByRoute[pathname as keyof typeof contentByRoute]}
+            content={(pathname === '/rtl' ? getRtlLanding(t) : getLanding(t)) as PageContent}
             custom={{
                 blocks: {
                     [CustomBlock.CustomHeader]: CustomHeader,

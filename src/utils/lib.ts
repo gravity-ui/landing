@@ -9,7 +9,6 @@ type LibConfig = {
     primary: boolean;
     landing: boolean;
     tags: string[];
-    description: string;
     storybookUrl: string;
     readmeUrl: string;
     changelogUrl: string;

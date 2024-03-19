@@ -1,0 +1,15 @@
+{
+    "actions_open": "Открыть",
+    "actions_copyToClipboard": "Копировать в буфер обмена",
+    "actions_share": "Поделиться",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "menu_libraries": "Библиотеки",
+    "menu_components": "Компоненты",
+    "menu_design": "Дизайн",
+    "menu_icons": "Иконки",
+    "roadmap_inProgress": "В работе",
+    "navigation_previous": "Назад",
+    "navigation_next": "Далее",
+    "emptySearchPlaceholder": "Ничего не найдено"
+}

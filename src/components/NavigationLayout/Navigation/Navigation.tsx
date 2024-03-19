@@ -1,5 +1,5 @@
 import {TextInput} from '@gravity-ui/uikit';
-import React, {memo} from 'react';
+import React from 'react';
 
 import {block} from '../../../utils';
 import {SectionBlock} from '../SectionBlock/SectionBlock';
@@ -18,7 +18,7 @@ export type NavigationProps = {
     onClickOnLink: () => void;
 };
 
-export const Navigation = memo<NavigationProps>(
+export const Navigation = React.memo<NavigationProps>(
     ({
         sections,
         sectionId,

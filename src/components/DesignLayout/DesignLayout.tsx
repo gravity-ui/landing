@@ -1,3 +1,4 @@
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {NavigationLayout, Section} from '../NavigationLayout/NavigationLayout';
@@ -15,11 +16,13 @@ export const DesignLayout: React.FC<DesignLayoutProps> = ({
     children,
     sections,
 }) => {
+    const {t} = useTranslation();
+
     return (
         <NavigationLayout
             sections={sections}
-            mobileTitle="Design"
-            searchPlaceholder="Search by articles"
+            mobileTitle={t('design-article:title')}
+            searchPlaceholder={t('design-article:searchPlaceholder')}
             sectionId={sectionId}
             subSectionId={articleId}
         >

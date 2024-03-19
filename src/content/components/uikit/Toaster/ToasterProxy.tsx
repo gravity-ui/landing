@@ -5,7 +5,7 @@ import {
     ToasterProvider,
     useToaster,
 } from '@gravity-ui/uikit';
-import {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 
 export interface SandboxProps {
     isMobile: boolean;
@@ -18,7 +18,7 @@ type Props = Omit<ToastProps, 'theme'> & SandboxProps;
 const ToasterComponentAPI: FC<ToastProps> = (props) => {
     const toaster = useToaster();
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (toaster.has(props.name)) {
             toaster.update(props.name, props);
         } else {

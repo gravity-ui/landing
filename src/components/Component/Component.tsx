@@ -1,5 +1,5 @@
 import {Button, Icon, Tabs} from '@gravity-ui/uikit';
-import {URL} from 'next/dist/compiled/@edge-runtime/primitives/url';
+import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -7,6 +7,7 @@ import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
+import {EnvironmentContext} from '../../contexts';
 import {block, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {Section} from '../NavigationLayout/types';
@@ -45,6 +46,10 @@ export const Component: React.FC<ComponentProps> = ({
     readmeContent,
     sections,
 }) => {
+    const {t} = useTranslation();
+
+    const {isClient} = React.useContext(EnvironmentContext);
+
     const router = useRouter();
     const {tabId} = router.query;
 
@@ -143,7 +148,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 target="_blank"
                             >
                                 <Icon data={githubIcon} size={16} />
-                                <span>Github</span>
+                                <span>{t('actions_github')}</span>
                             </Button>
                         ) : null}
                         {component.figmaUrl ? (
@@ -156,7 +161,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 target="_blank"
                             >
                                 <Icon data={figmaIcon} size={16} />
-                                <span>Open in Figma</span>
+                                <span>{t('component:actions_openInFigma')}</span>
                             </Button>
                         ) : null}
                     </div>
@@ -171,7 +176,7 @@ export const Component: React.FC<ComponentProps> = ({
                         activeTab={activeTab}
                         onSelectTab={(selectedTab) => {
                             router.replace({
-                                pathname: router.pathname,
+                                pathname: router.asPath.split('?')[0],
                                 query: {
                                     ...router.query,
                                     tabId: selectedTab === Tab.Design ? Tab.Design : undefined,
@@ -184,24 +189,33 @@ export const Component: React.FC<ComponentProps> = ({
 
             <div className={b('content')}>
                 {tabId === Tab.Design && component.content?.design ? (
-                    <MDXRenderer key="design" text={component.content?.design} />
+                    <React.Fragment>
+                        {isClient && (
+                            <MDXRenderer
+                                key={`${libId}-${component.id}-design`}
+                                text={component.content?.design}
+                            />
+                        )}
+                    </React.Fragment>
                 ) : (
                     <>
-                        {typeof window !== 'undefined' && component.sandbox ? (
+                        {isClient && component.sandbox ? (
                             <SandboxBlock
-                                key={`${libId}-${component.id}`}
+                                key={`${libId}-${component.id}-sandbox`}
                                 libId={libId}
                                 componentId={component.id}
                                 sandboxConfig={component.sandbox.props}
                                 isSupportRTL={component.isSupportRTL}
                             />
                         ) : null}
-                        <MDXRenderer
-                            key="overview"
-                            text={readmeContent}
-                            rewriteLinks={rewriteLinks}
-                            withComponents
-                        />
+                        {isClient && (
+                            <MDXRenderer
+                                key={`${libId}-${component.id}-overview`}
+                                text={readmeContent}
+                                rewriteLinks={rewriteLinks}
+                                withComponents
+                            />
+                        )}
                     </>
                 )}
             </div>

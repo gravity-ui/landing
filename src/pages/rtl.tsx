@@ -1,27 +1,28 @@
-import {ThemeProvider, useThemeValue} from '@gravity-ui/uikit';
-import React, {useEffect} from 'react';
+import {GetStaticProps} from 'next';
+import {useTranslation} from 'next-i18next';
+import React from 'react';
 
+import nextI18nextConfig from '../../next-i18next.config';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
+import {getI18nProps} from '../utils/i18next';
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+    return {
+        props: {
+            ...(await getI18nProps(ctx, ['home', 'libraries-info'])),
+        },
+    };
+};
 
 export const RTLPage = () => {
-    const theme = useThemeValue();
-
-    // Workaround for missing direction 'ltr' in ThemeProvider
-    useEffect(() => {
-        document.getElementsByTagName('html')[0].setAttribute('dir', 'rtl');
-
-        return () => {
-            document.getElementsByTagName('html')[0].setAttribute('dir', 'ltr');
-        };
-    }, []);
+    const {i18n} = useTranslation();
+    i18n.changeLanguage(nextI18nextConfig.i18n.defaultLocale);
 
     return (
-        <ThemeProvider theme={theme} direction="rtl">
-            <Layout>
-                <Landing />
-            </Layout>
-        </ThemeProvider>
+        <Layout isPageConstrucor isRtl>
+            <Landing />
+        </Layout>
     );
 };
 

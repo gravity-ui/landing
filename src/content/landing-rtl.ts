@@ -1,4 +1,5 @@
 import {Block, BlockType, PageContent} from '@gravity-ui/page-constructor';
+import {TFunction} from 'next-i18next';
 
 import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
@@ -18,7 +19,7 @@ import {CustomBlockModel} from '../blocks/types';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 import {libs} from '../libs.mjs';
 
-import {roadmapTasks} from './roadmap';
+import {getRoadmapTasks} from './roadmap';
 
 interface CustomPageContent {
     blocks: (Block | CustomBlockModel)[];
@@ -26,7 +27,7 @@ interface CustomPageContent {
     background?: PageContent['background'];
 }
 
-const typedLanding: CustomPageContent = {
+export const getRtlLanding = (t: TFunction): CustomPageContent => ({
     background: {
         image: {
             src: backgroundAsset.src,
@@ -130,13 +131,13 @@ const typedLanding: CustomPageContent = {
                 .map((lib) => ({
                     id: lib.id,
                     title: lib.title,
-                    description: lib.description,
+                    description: t(`libraries-info:description_${lib.id}`),
                 })),
         },
         {
             type: CustomBlock.Roadmap,
             title: 'خارطة الطريق',
-            tasks: roadmapTasks,
+            tasks: getRoadmapTasks(t),
         },
         {
             type: CustomBlock.Templates,
@@ -210,8 +211,4 @@ const typedLanding: CustomPageContent = {
             },
         },
     ],
-};
-
-const landingRTL = typedLanding as PageContent;
-
-export {landingRTL};
+});

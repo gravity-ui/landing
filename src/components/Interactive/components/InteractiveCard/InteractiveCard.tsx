@@ -1,5 +1,5 @@
 import {Theme, ThemeProvider, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React from 'react';
 
 import {block} from '../../../../utils';
 import {useInteractiveContext} from '../../InteractiveContext';
@@ -15,21 +15,21 @@ interface InteractiveCardProps {
 
 export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, className}) => {
     const {color, theme: globalTheme} = useInteractiveContext();
-    const [localTheme, setLocalTheme] = useState<Theme>('dark');
+    const [localTheme, setLocalTheme] = React.useState<Theme>('dark');
 
-    useEffect(() => {
+    React.useEffect(() => {
         setLocalTheme(globalTheme);
     }, [globalTheme]);
 
-    const flip = useCallback(() => {
+    const flip = React.useCallback(() => {
         setLocalTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
     }, []);
 
-    const isFlipped = useMemo(() => {
+    const isFlipped = React.useMemo(() => {
         return localTheme === 'light';
     }, [localTheme]);
 
-    useEffect(() => {
+    React.useEffect(() => {
         let timeoutId: NodeJS.Timeout;
         if (globalTheme !== localTheme) {
             timeoutId = setTimeout(() => {

@@ -1,25 +1,25 @@
 export type MenuItem = {
-    title: string;
+    titleKey: string;
     url: string;
     isComingSoon?: boolean;
 };
 
 export const menu: MenuItem[] = [
     {
-        title: 'Libraries',
+        titleKey: 'menu_libraries',
         url: '/libraries',
     },
     {
-        title: 'Components',
+        titleKey: 'menu_components',
         // url: '/components',
         url: '/components/uikit',
     },
     {
-        title: 'Design',
+        titleKey: 'menu_design',
         url: '/design',
     },
     {
-        title: 'Icons',
+        titleKey: 'menu_icons',
         url: '/icons',
     },
 ];

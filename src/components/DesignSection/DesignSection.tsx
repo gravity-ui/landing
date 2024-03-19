@@ -1,11 +1,11 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import Link from 'next/link';
 import React from 'react';
 
-import {Component} from '../..//content/components/types';
 import {libs} from '../../content/components';
+import {Component} from '../../content/components/types';
 import {Section} from '../../content/design/types';
 import {block} from '../../utils';
+import {Link} from '../Link';
 
 import './DesignSection.scss';
 
@@ -39,16 +39,16 @@ export const DesignSection: React.FC<Props> = ({section}) => {
                                 className={b('col')}
                                 sizes={{all: 12, lg: 6, xl: 4}}
                             >
-                                <Link href={component.url}>
-                                    <a target="_blank" className={b('component')}>
-                                        <div className={b('component-image')} />
-                                        <div className={b('component-title')}>
-                                            {component.title}
-                                        </div>
-                                        <div className={b('component-description')}>
-                                            {component.description}
-                                        </div>
-                                    </a>
+                                <Link
+                                    href={component.url}
+                                    target="_blank"
+                                    className={b('component')}
+                                >
+                                    <div className={b('component-image')} />
+                                    <div className={b('component-title')}>{component.title}</div>
+                                    <div className={b('component-description')}>
+                                        {component.description}
+                                    </div>
                                 </Link>
                             </Col>
                         );
@@ -69,8 +69,11 @@ export const DesignSection: React.FC<Props> = ({section}) => {
                 {section.articles.map((article) => {
                     return (
                         <div key={article.id} className={b('article-wrapper')}>
-                            <Link href={`/design/${section.id}/${article.id}`}>
-                                <a className={b('article')}>{article.title}</a>
+                            <Link
+                                href={`/design/${section.id}/${article.id}`}
+                                className={b('article')}
+                            >
+                                {article.title}
                             </Link>
                         </div>
                     );

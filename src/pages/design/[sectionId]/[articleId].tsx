@@ -1,11 +1,8 @@
-import {GetStaticPaths, GetStaticProps} from 'next';
-import {useMemo} from 'react';
-import {Section} from 'src/components/NavigationLayout/types';
+// Support for default locale without path prefix
+import {GetStaticPaths} from 'next';
 
-import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
-import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
-import {Layout} from '../../../components/Layout/Layout';
 import {sections as designSections} from '../../../content/design';
+import {ArticlePage, getStaticProps} from '../../[locale]/design/[sectionId]/[articleId]';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
@@ -22,42 +19,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-    return {
-        props: {sectionId: context.params?.sectionId, articleId: context.params?.articleId},
-    };
-};
-
-export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleId: string}) => {
-    const section = designSections.find((item) => item.id === sectionId);
-    const article = section?.articles.find((item) => item.id === articleId);
-
-    if (!section || !article) {
-        return null;
-    }
-
-    const sections = useMemo<Section[]>(() => {
-        const result: Section[] = designSections.map(({id, title, articles}) => ({
-            id: id,
-            title: title,
-            // Uncomment it to show overview tab
-            // url: `/design/${section.id}`,
-            subSections: articles.map((articleItem) => ({
-                id: articleItem.id,
-                title: articleItem.title,
-                url: `/design/${id}/${articleItem.id}`,
-            })),
-        }));
-        return result;
-    }, []);
-
-    return (
-        <Layout title={`${section.title} – ${article.title}`}>
-            <DesignLayout sections={sections} sectionId={sectionId} articleId={articleId}>
-                <DesignArticle article={article} sectionId={sectionId} sections={sections} />
-            </DesignLayout>
-        </Layout>
-    );
-};
+export {ArticlePage, getStaticProps};
 
 export default ArticlePage;

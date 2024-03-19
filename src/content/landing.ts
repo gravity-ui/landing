@@ -1,4 +1,5 @@
 import {Block, BlockType, PageContent} from '@gravity-ui/page-constructor';
+import {TFunction} from 'next-i18next';
 
 import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
@@ -18,7 +19,7 @@ import {CustomBlockModel} from '../blocks/types';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 import {libs} from '../libs.mjs';
 
-import {roadmapTasks} from './roadmap';
+import {getRoadmapTasks} from './roadmap';
 
 interface CustomPageContent {
     blocks: (Block | CustomBlockModel)[];
@@ -26,7 +27,7 @@ interface CustomPageContent {
     background?: PageContent['background'];
 }
 
-const typedLanding: CustomPageContent = {
+export const getLanding = (t: TFunction): CustomPageContent => ({
     background: {
         image: {
             src: backgroundAsset.src,
@@ -36,10 +37,10 @@ const typedLanding: CustomPageContent = {
     blocks: [
         {
             type: CustomBlock.CustomHeader,
-            title: 'Build modern interfaces with the Gravity design system and libraries',
+            title: t('home:header_title'),
             buttons: [
                 {
-                    text: 'How to Start',
+                    text: t('home:header_actions_howToStart'),
                     view: 'action',
                     icon: rocketIcon,
                     onClick: () => {
@@ -51,7 +52,7 @@ const typedLanding: CustomPageContent = {
                     },
                 },
                 {
-                    text: 'GitHub',
+                    text: t('actions_github'),
                     view: 'outlined',
                     icon: githubIcon,
                     href: 'https://github.com/gravity-ui',
@@ -59,22 +60,19 @@ const typedLanding: CustomPageContent = {
                 },
             ],
             news: {
-                title: 'Recent updates',
+                title: t('home:news_title'),
                 items: [
                     {
                         date: '2024-03-14T12:00:00.000Z',
-                        content:
-                            '<a href="https://github.com/gravity-ui/uikit">UIKit 6</a> is here! This version has RTL support, improved a11y, and CSS API. Check out this <a href ="/rtl">little demo</a> to see how you can use RTL and new rtl switches in <a href ="/components/uikit/list">components sandbox</a>.',
+                        content: t('home:news_items_item1'),
                     },
                     {
                         date: '2024-02-01T10:00:00.000Z',
-                        content:
-                            'If you want to find out our future plans, please check out the recently updated <a href="/#roadmap">roadmap section</a>.',
+                        content: t('home:news_items_item2'),
                     },
                     {
                         date: '2024-01-23T12:00:00.000Z',
-                        content:
-                            'We continue to improve our <a href="/#templates">templates</a> section and have added the <a href="https://github.com/gravity-ui/gravity-ui-remix-example">Remix template</a>. If you need other templates, don’t hesitate to create an <a href="https://github.com/gravity-ui/landing/issues/new">issue</a>. ',
+                        content: t('home:news_items_item3'),
                     },
                 ],
             },
@@ -91,43 +89,40 @@ const typedLanding: CustomPageContent = {
             },
             items: [
                 {
-                    title: 'Built on real-life experience',
-                    description:
-                        "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community.",
+                    title: t('home:features_feature1_title'),
+                    description: t('home:features_feature1_description'),
                     icon: featureUnionAsset,
                 },
                 {
-                    title: 'First class design',
-                    description:
-                        'Experienced designers curate the look of our libraries, ensuring that components are stylish and consistent, with support for dark mode and high-contrast themes.',
+                    title: t('home:features_feature2_title'),
+                    description: t('home:features_feature2_description'),
                     icon: featureStarAsset,
                 },
                 {
-                    title: 'An evolving ecosystem',
-                    description:
-                        'Regular feedback from our community of developers allows us to continuously improve our libraries, and break compatibility only when necessary.',
+                    title: t('home:features_feature3_title'),
+                    description: t('home:features_feature3_description'),
                     icon: featureShieldAsset,
                 },
             ],
         },
         {
             type: CustomBlock.Examples,
-            title: 'Examples',
+            title: t('home:examples_title'),
             colors: [
                 {
-                    title: 'Yellow',
+                    title: t('home:examples_colors_yellow'),
                     value: 'yellow',
                 },
                 {
-                    title: 'Red',
+                    title: t('home:examples_colors_red'),
                     value: 'red',
                 },
                 {
-                    title: 'Green',
+                    title: t('home:examples_colors_green'),
                     value: 'green',
                 },
                 {
-                    title: 'Blue',
+                    title: t('home:examples_colors_blue'),
                     value: 'blue',
                 },
             ],
@@ -135,9 +130,9 @@ const typedLanding: CustomPageContent = {
         {
             type: CustomBlock.CustomExtendedFeatures,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            title: 'Our libraries',
+            title: t('home:libraries_title'),
             button: {
-                text: 'All libraries',
+                text: t('home:libraries_actions_allLibraries'),
                 href: '/libraries',
             },
             colSizes: {
@@ -150,17 +145,17 @@ const typedLanding: CustomPageContent = {
                 .map((lib) => ({
                     id: lib.id,
                     title: lib.title,
-                    description: lib.description,
+                    description: t(`libraries-info:description_${lib.id}`),
                 })),
         },
         {
             type: CustomBlock.Roadmap,
-            title: 'Roadmap 2024',
-            tasks: roadmapTasks,
+            title: t('home:roadmap_title'),
+            tasks: getRoadmapTasks(t),
         },
         {
             type: CustomBlock.Templates,
-            title: 'Start creating with Gravity&nbsp;UI',
+            title: t('home:templates_title'),
             tabs: [
                 {
                     title: 'CRA',
@@ -173,7 +168,7 @@ const typedLanding: CustomPageContent = {
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-cra-mpg4q3',
                         target: '_blank',
-                        title: 'Open CRA Playground',
+                        title: `${t('common:actions_open')} CRA Playground`,
                     },
                 },
                 {
@@ -187,7 +182,7 @@ const typedLanding: CustomPageContent = {
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-next-js-vvq8lf',
                         target: '_blank',
-                        title: 'Open Next.js Playground',
+                        title: `${t('common:actions_open')} Next.js Playground`,
                     },
                 },
                 {
@@ -201,7 +196,7 @@ const typedLanding: CustomPageContent = {
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-vite-36dq3r',
                         target: '_blank',
-                        title: 'Open Vite Playground',
+                        title: `${t('common:actions_open')} Vite Playground`,
                     },
                 },
                 {
@@ -215,14 +210,14 @@ const typedLanding: CustomPageContent = {
                     button: {
                         href: 'https://codesandbox.io/p/devbox/gravityui-remix-template-2y5ykj',
                         target: '_blank',
-                        title: 'Open Remix Playground',
+                        title: `${t('common:actions_open')} Remix Playground`,
                     },
                 },
             ],
         },
         {
             type: BlockType.CompaniesBlock,
-            title: 'Trusted by',
+            title: t('home:companies_title'),
             images: {
                 desktop: companiesDesktopAsset,
                 tablet: companiesTabletAsset,
@@ -230,8 +225,4 @@ const typedLanding: CustomPageContent = {
             },
         },
     ],
-};
-
-const landing = typedLanding as PageContent;
-
-export {landing};
+});

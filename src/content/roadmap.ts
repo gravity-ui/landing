@@ -1,48 +1,50 @@
+import {TFunction} from 'i18next';
+
 import {RoadmapTask, RoadmapTaskStatus} from '../components/Roadmap';
 
-export const roadmapTasks: RoadmapTask[] = [
+export const getRoadmapTasks = (t: TFunction): RoadmapTask[] => [
     {
-        title: '<b>Date Components:</b> New library for working with date and time',
+        title: t('home:roadmap_items_item1'),
         status: RoadmapTaskStatus.Completed,
     },
     {
-        title: '<b>UIKit:</b> Right-to-left languages support',
+        title: t('home:roadmap_items_item2'),
         status: RoadmapTaskStatus.Completed,
     },
     {
-        title: '<b>UIKit:</b> improvements in digital accessibility',
+        title: t('home:roadmap_items_item3'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>Figma:</b> color theme template builder',
+        title: t('home:roadmap_items_item4'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>Development farm</b>',
+        title: t('home:roadmap_items_item5'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>Docs:</b> Date Components in Components section',
+        title: t('home:roadmap_items_item6'),
         status: RoadmapTaskStatus.Completed,
     },
     {
-        title: '<b>UIKit:</b> emoji picker, color picker, label input and range input components',
+        title: t('home:roadmap_items_item7'),
         status: RoadmapTaskStatus.InProgress,
     },
     {
-        title: '<b>UIKit:</b> Migration to Floating UI',
+        title: t('home:roadmap_items_item8'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: '<b>Docs:</b> Page constructor in Components section',
+        title: t('home:roadmap_items_item9'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: '<b>UIKit:</b> Extended mobile support',
+        title: t('home:roadmap_items_item10'),
         status: RoadmapTaskStatus.Planned,
     },
     {
-        title: '<b>Page constructor:</b> footer block',
+        title: t('home:roadmap_items_item11'),
         status: RoadmapTaskStatus.Planned,
     },
 ];
