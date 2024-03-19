@@ -18,6 +18,7 @@ import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {modalConfig} from './Modal';
 import {paginationConfig} from './Pagination';
+import {paletteConfig} from './Palette';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
@@ -55,6 +56,7 @@ const uikitComponents: Component[] = [
     menuConfig,
     modalConfig,
     paginationConfig,
+    paletteConfig,
     popupConfig,
     portalConfig,
     progressConfig,
