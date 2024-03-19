@@ -2,7 +2,7 @@
     "actions_copyIconName": "Копировать название иконки",
     "actions_copyLink": "Копировать ссылку",
     "actions_copied": "Скопировано",
-    "actions_copyReactComponent": "Копировать компонент React",
+    "actions_copyReactComponent": "Копировать React-компонент",
     "actions_copySvgImport": "Копировать SVG-импорт",
     "actions_downloadSvg": "Скачать SVG",
     "title": "Иконки",
@@ -11,6 +11,6 @@
     "keywords": "Ключевые слова",
     "empty_title": "По вашему запросу нет результатов",
     "empty_subTitle": "Проверьте правильность написания или используйте другие ключевые слова.",
-    "usage_reactComponent": "Компонент React",
+    "usage_reactComponent": "React-компонент",
     "usage_svg": "SVG"
 }
