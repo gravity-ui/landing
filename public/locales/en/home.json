@@ -2,7 +2,7 @@
     "header_title": "Build modern interfaces with the Gravity design system and libraries",
     "header_actions_howToStart": "How to Start",
     "news_title": "Recent updates",
-    "news_items_item1": "<a href=\"https://github.com/gravity-ui/uikit\">UIKit 6</a> уже здесь! В этой версии есть поддержка RTL, улучшенный функционал a11y и CSS API. Посмотрите <a href=\"/rtl\">демо</a> и узнайте, как пользоваться RTL и новыми переключателями RTL в <a href=\"/ru/components/uikit/list\">песочнице компонентов</a>.",
+    "news_items_item1": "<a href=\"https://github.com/gravity-ui/uikit\">UIKit 6</a> is here! This version has RTL support, improved a11y, and CSS API. Check out this <a href=\"/rtl\">little demo</a> to see how you can use RTL and new rtl switches in <a href=\"/components/uikit/list\">components sandbox</a>.",
     "news_items_item2": "If you want to find out our future plans, please check out the recently updated <a href=\"/#roadmap\">roadmap section</a>.",
     "news_items_item3": "We continue to improve our <a href=\"/#templates\">templates</a> section and have added the <a href=\"https://github.com/gravity-ui/gravity-ui-remix-example\">Remix template</a>. If you need other templates, don’t hesitate to create an <a href=\"https://github.com/gravity-ui/landing/issues/new\">issue</a>.",
     "features_feature1_title": "Built on real-life experience",
