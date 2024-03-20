@@ -4,7 +4,7 @@
     "news_title": "Recent updates",
     "news_items_item1": "<a href=\"https://github.com/gravity-ui/uikit\">UIKit 6</a> is here! This version has RTL support, improved a11y, and CSS API. Check out this <a href=\"/rtl\">little demo</a> to see how you can use RTL and new rtl switches in <a href=\"/components/uikit/list\">components sandbox</a>.",
     "news_items_item2": "If you want to find out our future plans, please check out the recently updated <a href=\"/#roadmap\">roadmap section</a>.",
-    "news_items_item3": "We continue to improve our <a href=\"/#templates\">templates</a> section and have added the <a href=\"https://github.com/gravity-ui/gravity-ui-remix-example\">Remix template</a>. If you need other templates, don’t hesitate to create an <a href=\"https://github.com/gravity-ui/landing/issues/new\">issue</a>.",
+    "news_items_item3": "We’ve updated the figma library to support UI Kit 6 features, refactored some components and added some new. Check the newest version <a href=\"https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system\">here</a>.",
     "features_feature1_title": "Built on real-life experience",
     "features_feature1_description": "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community.",
     "features_feature2_title": "First class design",
