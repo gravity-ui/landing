@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import {Repos} from '../../../../types/common';
 import {Component} from '../../types';
-import {getGithubUrl, getReadmeUrl, mappingOptions} from '../../utils';
+import {getGithubUrl, mappingOptions} from '../../utils';
 
 const getterOptions = {repoName: Repos.Uikit, componentName: 'Palette'};
 
@@ -12,7 +12,11 @@ export const paletteConfig: Component = {
     githubUrl: getGithubUrl(getterOptions),
     isSupportRTL: true,
     content: {
-        readmeUrl: getReadmeUrl({repoName: Repos.Uikit, componentName: 'Button'}),
+        // will use this when this PR is merged:
+        // https://github.com/gravity-ui/uikit/pull/1431
+        // readmeUrl: getReadmeUrl(getterOptions),
+        readmeUrl:
+            'https://raw.githubusercontent.com/gravity-ui/uikit/fix/fixed-palette-readme/src/components/Palette/README.md',
     },
     sandbox: {
         component: dynamic(() =>
