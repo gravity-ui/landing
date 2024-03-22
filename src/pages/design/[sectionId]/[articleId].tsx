@@ -1,8 +1,8 @@
 // Support for default locale without path prefix
 import {GetStaticPaths} from 'next';
 
+import {ArticlePage, getStaticProps} from '../../../[locale]/design/[sectionId]/[articleId]';
 import {sections as designSections} from '../../../content/design';
-import {ArticlePage, getStaticProps} from '../../[locale]/design/[sectionId]/[articleId]';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {

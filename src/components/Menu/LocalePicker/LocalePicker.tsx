@@ -13,6 +13,10 @@ export const LocalePicker: React.FC = () => {
     const {i18n} = useTranslation();
     const router = useRouter();
 
+    if (i18nextConfig.i18n.locales.length < 2) {
+        return null;
+    }
+
     return (
         <div className={b()}>
             <RadioButton
