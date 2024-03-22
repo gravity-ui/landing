@@ -1,9 +1,9 @@
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 
-import {Layout} from '../../../components/Layout/Layout';
-import {Library} from '../../../components/Library/Library';
-import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
-import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../utils';
+import {Layout} from '../../components/Layout/Layout';
+import {Library} from '../../components/Library/Library';
+import {useLocaleRedirect} from '../../hooks/useLocaleRedirect';
+import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../utils';
 
 const libs = getLibsList();
 

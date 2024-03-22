@@ -2,12 +2,12 @@ import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
-import {DesignArticle} from '../../../../components/DesignArticle/DesignArticle';
-import {DesignLayout} from '../../../../components/DesignLayout/DesignLayout';
-import {Layout} from '../../../../components/Layout/Layout';
-import {sections as designSections} from '../../../../content/design';
-import {useLocaleRedirect} from '../../../../hooks/useLocaleRedirect';
-import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
+import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
+import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
+import {Layout} from '../../../components/Layout/Layout';
+import {sections as designSections} from '../../../content/design';
+import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
+import {getI18nPaths, getI18nProps} from '../../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {

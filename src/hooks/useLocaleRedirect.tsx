@@ -18,9 +18,10 @@ export const useLocaleRedirect = () => {
 
         const localStorageLocale = localStorage.getItem(LOCALE_LOCAL_STORAGE_KEY);
 
-        const correctLocale = localStorageLocale
-            ? localStorageLocale
-            : i18nextConfig.i18n.defaultLocale;
+        const correctLocale =
+            localStorageLocale && i18nextConfig.i18n.locales.includes(localStorageLocale)
+                ? localStorageLocale
+                : i18nextConfig.i18n.defaultLocale;
 
         if (currentLocale !== correctLocale) {
             const currentPath = router.asPath;
