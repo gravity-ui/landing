@@ -5,6 +5,7 @@ import {Component, Lib} from '../types';
 
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
+import {avatarConfig} from './Avatar';
 import {breadcrumbsConfig} from './Breadcrumbs';
 import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
@@ -18,6 +19,7 @@ import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {modalConfig} from './Modal';
 import {paginationConfig} from './Pagination';
+import {paletteConfig} from './Palette';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
@@ -35,6 +37,7 @@ import {textAreaConfig} from './TextArea';
 import {textInputConfig} from './TextInput';
 import {config as toasterConfig} from './Toaster';
 import {tooltipConfig} from './Tooltip';
+import {userConfig} from './User';
 import {userLabelConfig} from './UserLabel';
 
 const {config} = getLibById('uikit');
@@ -42,6 +45,7 @@ const {config} = getLibById('uikit');
 const uikitComponents: Component[] = [
     alertConfig,
     arrowToggleConfig,
+    avatarConfig,
     breadcrumbsConfig,
     buttonConfig,
     cardConfig,
@@ -55,6 +59,7 @@ const uikitComponents: Component[] = [
     menuConfig,
     modalConfig,
     paginationConfig,
+    paletteConfig,
     popupConfig,
     portalConfig,
     progressConfig,
@@ -72,6 +77,7 @@ const uikitComponents: Component[] = [
     textInputConfig,
     tooltipConfig,
     toasterConfig,
+    userConfig,
     userLabelConfig,
 ];
 
