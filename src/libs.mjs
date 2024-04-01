@@ -40,6 +40,20 @@ export const libs = [
         mainBranch: 'main',
     },
     {
+        id: 'illustrations',
+        githubId: 'gravity-ui/illustrations',
+        npmId: '@gravity-ui/illustrations',
+        title: 'Illustrations',
+        primary: false,
+        landing: false,
+        tags: ['ui'],
+        storybookUrl: 'https://preview.gravity-ui.com/illustrations/',
+        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/illustrations/main/README.md',
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/illustrations/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
         id: 'dynamic-forms',
         githubId: 'gravity-ui/dynamic-forms',
         npmId: '@gravity-ui/dynamic-forms',

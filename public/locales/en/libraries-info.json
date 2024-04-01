@@ -2,6 +2,7 @@
     "description_uikit": "Base UI components and tokens for building services with Gravity.",
     "description_components": "A set of complex React components.",
     "description_icons": "Set with hundreds of various modern SVG icons for your projects.",
+    "description_illustrations": "A set of illustrations for displaying data statuses.",
     "description_dynamic-forms": "Library for rendering neat and functional react forms described by JSON schema",
     "description_page-constructor": "A set of stylish, functional blocks for quickly creating promo and landing pages.",
     "description_blog-constructor": "A library based on the Page constructor library for creating blog-like services.",

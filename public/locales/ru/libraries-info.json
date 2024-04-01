@@ -2,6 +2,7 @@
     "description_uikit": "Базовые UI-компоненты и токены для построения сервисов с Gravity.",
     "description_components": "Набор комплексных React-компонентов.",
     "description_icons": "Сотни стильных иконок для ваших проектов.",
+    "description_illustrations": "Набор иллюстраций для отображения статусов данных.",
     "description_dynamic-forms": "Библиотека для рендеринга лаконичных функциональных форм, описанных JSON-схемой.",
     "description_page-constructor": "Набор стильно выглядящих функциональных блоков для быстрого создания промо-страниц.",
     "description_blog-constructor": "Библиотека, основанная на Page Constructor, для создания блогов.",
