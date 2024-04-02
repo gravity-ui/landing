@@ -103,7 +103,7 @@ export const libs = [
         primary: false,
         landing: true,
         tags: ['ui'],
-        storybookUrl: '',
+        storybookUrl: 'https://preview.gravity-ui.com/chartkit/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md',
         mainBranch: 'main',
