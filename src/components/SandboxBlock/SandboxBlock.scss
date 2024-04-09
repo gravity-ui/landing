@@ -92,6 +92,11 @@ $block: '.#{variables.$ns}sandbox-block';
         border-left: 1px solid rgba(255, 255, 255, 0.2);
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
+        &-wrapper {
+            display: flex;
+            gap: 16px;
+        }
+
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             border-left: 0;
@@ -110,8 +115,15 @@ $block: '.#{variables.$ns}sandbox-block';
         }
     }
 
-    &__control-theme {
+    &__control-icon {
         cursor: pointer;
         height: 18px;
+        &-disabled {
+            svg {
+                path {
+                    fill: var(--g-color-text-secondary);
+                }
+            }
+        }
     }
 }
