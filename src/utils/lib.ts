@@ -67,6 +67,21 @@ export const getLibById = (id: string): Lib => {
         data: data as LibData,
     };
 };
+export const getLibVersion = (id?: string) => {
+    let libraryVersion;
+
+    if (!id) {
+        return undefined;
+    }
+
+    try {
+        libraryVersion = getLibById(id).data.version;
+    } catch {
+        libraryVersion = undefined;
+    }
+
+    return libraryVersion;
+};
 
 export const getLibraryGithubUrl = (library: Lib) =>
     `https://github.com/${library.config.githubId}`;

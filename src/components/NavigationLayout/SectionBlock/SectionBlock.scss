@@ -17,7 +17,7 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         color: #fff;
         text-decoration: none;
         cursor: pointer;
-
+        align-items: center;
         &_active {
             background: rgba(255, 190, 92, 0.1);
             color: #ffbe5c;
@@ -26,6 +26,10 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
 
     &__title {
         flex: 1;
+    }
+
+    &__library-version {
+        margin-left: 20px;
     }
 
     &__arrow {
