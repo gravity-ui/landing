@@ -1,7 +1,6 @@
-import {ChevronsCollapseUpRight, ChevronsExpandUpRight} from '@gravity-ui/icons';
+import {ChevronsCollapseUpRight, ChevronsExpandUpRight, TextAlignRight} from '@gravity-ui/icons';
 import {
     Col,
-    ControlGroupOption,
     Direction,
     Icon,
     RadioButton,
@@ -12,6 +11,7 @@ import {
     Text,
     TextInput,
     Theme,
+    Tooltip,
 } from '@gravity-ui/uikit';
 import React from 'react';
 
@@ -141,28 +141,6 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
         });
     };
 
-    const renderDirectionSelection = () => {
-        const options: ControlGroupOption<Direction>[] = [{value: 'ltr', content: 'ltr'}];
-
-        if (isSupportRTL) options.push({value: 'rtl', content: 'rtl'});
-
-        return (
-            <Row key="direction" space="0">
-                <div className={b('prop')}>
-                    <Text className={b('prop-title')}>direction</Text>
-                    <RadioButton
-                        key="direction"
-                        value={iframeDirection}
-                        options={options}
-                        width="max"
-                        disabled={!isIframeLoaded}
-                        onUpdate={setIframeDirection}
-                    />
-                </div>
-            </Row>
-        );
-    };
-
     const iframeLoadingHandler = React.useCallback(() => setIsIframeLoaded(true), []);
 
     React.useEffect(() => {
@@ -214,20 +192,45 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                 </Col>
                 <Col s="12" l="4" m="4">
                     <div className={b('top-actions')}>
-                        <div
-                            tabIndex={0}
-                            role="button"
-                            className={b('control-theme')}
-                            onClick={() => {
-                                setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
-                            }}
-                        >
-                            <Icon data={themeIcon} size={18} />
+                        <div className={b('top-actions-wrapper')}>
+                            <div
+                                tabIndex={0}
+                                role="button"
+                                className={b('control-icon')}
+                                onClick={() => {
+                                    setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
+                                }}
+                            >
+                                <Icon data={themeIcon} size={18} />
+                            </div>
+                            <div
+                                tabIndex={0}
+                                role="button"
+                                className={
+                                    isSupportRTL ? b('control-icon') : b('control-icon-disabled')
+                                }
+                                onClick={() => {
+                                    if (isSupportRTL) {
+                                        setIframeDirection(
+                                            iframeDirection === 'ltr' ? 'rtl' : 'ltr',
+                                        );
+                                    }
+                                }}
+                            >
+                                {isSupportRTL && (
+                                    <Icon className={b('icon')} data={TextAlignRight} size={18} />
+                                )}
+                                {!isSupportRTL && (
+                                    <Tooltip content={'RTL not supported'}>
+                                        <Icon data={TextAlignRight} size={18} />
+                                    </Tooltip>
+                                )}
+                            </div>
                         </div>
                         <div
                             tabIndex={0}
                             role="button"
-                            className={b('control-theme')}
+                            className={b('control-icon')}
                             onClick={() => {
                                 setIsFullScreen(!isFullScreen);
                             }}
@@ -239,10 +242,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                             )}
                         </div>
                     </div>
-                    <div className={b('actions')}>
-                        {renderOptions()}
-                        {renderDirectionSelection()}
-                    </div>
+                    <div className={b('actions')}>{renderOptions()}</div>
                 </Col>
             </Row>
         </div>
