@@ -118,10 +118,17 @@ $block: '.#{variables.$ns}sandbox-block';
     &__control-icon {
         cursor: pointer;
         height: 18px;
+
+        svg {
+            path {
+                opacity: 0.5;
+            }
+        }
+
         &-disabled {
             svg {
                 path {
-                    fill: var(--g-color-text-secondary);
+                    fill: var(--g-color-text-hint);
                 }
             }
         }
