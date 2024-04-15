@@ -1,6 +1,6 @@
 import libsData from '../libs-data.json';
 import {libs} from '../libs.mjs';
-
+import packagesVersions from '../packages-versions.json';
 type LibConfig = {
     id: string;
     githubId: string;
@@ -67,7 +67,8 @@ export const getLibById = (id: string): Lib => {
         data: data as LibData,
     };
 };
-export const getLibVersion = (id?: string) => {
+
+export const getLibVersion = (id?: 'uikit' | 'components' | 'date-components') => {
     let libraryVersion;
 
     if (!id) {
@@ -75,7 +76,7 @@ export const getLibVersion = (id?: string) => {
     }
 
     try {
-        libraryVersion = getLibById(id).data.version;
+        libraryVersion = packagesVersions[id];
     } catch {
         libraryVersion = undefined;
     }
