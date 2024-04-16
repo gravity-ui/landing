@@ -40,7 +40,10 @@ $block: '.#{variables.$ns}navigation-layout';
     }
 
     &__mobile-navigation-control-label {
+        display: flex;
+        align-items: center;
         flex: 1;
+        gap: 8px;
     }
 
     &__mobile-navigation-control-arrow {

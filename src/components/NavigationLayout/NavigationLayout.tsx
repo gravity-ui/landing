@@ -7,6 +7,7 @@ import arrowIcon from '../../assets/icons/arrow.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import {CONTENT_WRAPPER_ID} from '../../constants';
 import {block} from '../../utils';
+import LibraryVersion from '../LibraryVersion/LibraryVersion';
 
 import {Navigation} from './Navigation/Navigation';
 import './NavigationLayout.scss';
@@ -73,6 +74,7 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
                                 <span className={b('mobile-navigation-control-section')}>
                                     {section.title}
                                 </span>
+                                <LibraryVersion id={section.id} />
                                 {subSection ? (
                                     <span className={b('mobile-navigation-control-sub-section')}>
                                         {' '}

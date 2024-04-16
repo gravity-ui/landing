@@ -1,0 +1,11 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}library-version';
+
+#{$block} {
+    padding: 2px 8px;
+    font-size: 13px;
+    font-weight: 400;
+    max-width: fit-content;
+}

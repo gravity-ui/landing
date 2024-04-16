@@ -1,5 +1,6 @@
 import libsData from '../libs-data.json';
 import {libs} from '../libs.mjs';
+import packagesVersions from '../packages-versions.json';
 
 type LibConfig = {
     id: string;
@@ -66,6 +67,22 @@ export const getLibById = (id: string): Lib => {
         config: config as LibConfig,
         data: data as LibData,
     };
+};
+
+export const getLibVersion = (id?: string) => {
+    let libraryVersion;
+
+    if (!id) {
+        return undefined;
+    }
+
+    try {
+        libraryVersion = (packagesVersions as any)[id];
+    } catch {
+        libraryVersion = undefined;
+    }
+
+    return libraryVersion;
 };
 
 export const getLibraryGithubUrl = (library: Lib) =>

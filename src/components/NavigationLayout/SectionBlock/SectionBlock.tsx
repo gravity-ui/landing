@@ -1,5 +1,6 @@
 import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
+import LibraryVersion from 'src/components/LibraryVersion/LibraryVersion';
 
 import arrowIcon from '../../../assets/icons/arrow.svg';
 import soonLabelIcon from '../../../assets/icons/soon-label.svg';
@@ -51,6 +52,9 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                     }}
                 >
                     <div className={b('title')}>{data.title}</div>
+                    <div className={b('library-version')}>
+                        <LibraryVersion id={data.id} />
+                    </div>
                     <div
                         className={b('arrow', {
                             open: isOpen,
@@ -115,6 +119,5 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
             </React.Fragment>
         );
     }
-
     return <div className={b()}>{content}</div>;
 };
