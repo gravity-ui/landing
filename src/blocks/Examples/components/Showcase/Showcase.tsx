@@ -4,6 +4,7 @@ import {
     Checkbox,
     Icon,
     Label,
+    LayoutProvider,
     Loader,
     RadioButton,
     RadioGroup,
@@ -66,149 +67,151 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
     );
 
     return (
-        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color, theme})}`}>
-            <div className={b('row')}>
-                <div className={b('col')}>
-                    <div className={b('sub-row')}>
-                        <div className={b('sub-col')}>
-                            <div className={b('col-item')}>
-                                <div className={b('col-item-elem', {'sm-gap': true})}>
-                                    <Button size="xl" view="action">
-                                        Action
-                                    </Button>
+        <LayoutProvider>
+            <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color, theme})}`}>
+                <div className={b('row')}>
+                    <div className={b('col')}>
+                        <div className={b('sub-row')}>
+                            <div className={b('sub-col')}>
+                                <div className={b('col-item')}>
+                                    <div className={b('col-item-elem', {'sm-gap': true})}>
+                                        <Button size="xl" view="action">
+                                            Action
+                                        </Button>
+                                    </div>
+                                    <div className={b('col-item-elem', {'sm-gap': true})}>
+                                        <Button size="xl" view="outlined">
+                                            Normal
+                                        </Button>
+                                    </div>
                                 </div>
-                                <div className={b('col-item-elem', {'sm-gap': true})}>
-                                    <Button size="xl" view="outlined">
-                                        Normal
-                                    </Button>
+                                <div className={b('col-item')}>
+                                    <div className={b('col-item-elem')}>
+                                        <Loader size="l" />
+                                    </div>
+                                    <div className={b('col-item-elem')}>
+                                        <Spin />
+                                    </div>
+                                </div>
+                                <div className={b('col-item')}>
+                                    <div className={b('col-item-elem')}>
+                                        <Checkbox size="l" />
+                                    </div>
+                                    <div className={b('col-item-elem')}>
+                                        <RadioGroup size="l" defaultValue="0">
+                                            <RadioGroup.Option value="0" />
+                                            <RadioGroup.Option value="1" />
+                                        </RadioGroup>
+                                    </div>
+                                    <div className={b('col-item-elem')}>
+                                        <Switch />
+                                    </div>
                                 </div>
                             </div>
-                            <div className={b('col-item')}>
-                                <div className={b('col-item-elem')}>
-                                    <Loader size="l" />
+                            <div className={b('sub-col')}>
+                                <div className={b('col-item')}>
+                                    <Tabs
+                                        items={tabs}
+                                        activeTab={activeTab}
+                                        onSelectTab={setActiveTab}
+                                    />
                                 </div>
-                                <div className={b('col-item-elem')}>
-                                    <Spin />
+                                <div className={b('col-item')}>
+                                    <RadioButton name="group2" defaultValue="all" size="l">
+                                        <RadioButton.Option content="All" value="all" />
+                                        <RadioButton.Option content="My" value="my" />
+                                    </RadioButton>
                                 </div>
-                            </div>
-                            <div className={b('col-item')}>
-                                <div className={b('col-item-elem')}>
-                                    <Checkbox size="l" />
-                                </div>
-                                <div className={b('col-item-elem')}>
-                                    <RadioGroup size="l" defaultValue="0">
-                                        <RadioGroup.Option value="0" />
-                                        <RadioGroup.Option value="1" />
-                                    </RadioGroup>
-                                </div>
-                                <div className={b('col-item-elem')}>
-                                    <Switch />
+                                <div className={b('col-item')}>
+                                    <Label theme="info" size="m">
+                                        Accent
+                                    </Label>
                                 </div>
                             </div>
                         </div>
-                        <div className={b('sub-col')}>
-                            <div className={b('col-item')}>
-                                <Tabs
-                                    items={tabs}
-                                    activeTab={activeTab}
-                                    onSelectTab={setActiveTab}
-                                />
-                            </div>
-                            <div className={b('col-item')}>
-                                <RadioButton name="group2" defaultValue="all" size="l">
-                                    <RadioButton.Option content="All" value="all" />
-                                    <RadioButton.Option content="My" value="my" />
-                                </RadioButton>
-                            </div>
-                            <div className={b('col-item')}>
-                                <Label theme="info" size="m">
-                                    Accent
-                                </Label>
-                            </div>
+                    </div>
+                    <div className={b('col', {stretch: true})}>
+                        <div className={b('table-wrapper')}>
+                            <SelectionTable
+                                columns={tableColumns}
+                                data={[
+                                    {
+                                        title: 'Weekly Sync',
+                                        createdBy: <Avatar imgUrl={avatar1Asset.src} />,
+                                        updated: '28.06.2022',
+                                        created: '26.06.2022',
+                                        favorite: (
+                                            <div
+                                                className={b('star')}
+                                                onClick={() => {
+                                                    handleStarClick('0');
+                                                }}
+                                            >
+                                                <Icon
+                                                    data={
+                                                        tableFavoriteIds.includes('0')
+                                                            ? starFilledIcon
+                                                            : starIcon
+                                                    }
+                                                    size={16}
+                                                />
+                                            </div>
+                                        ),
+                                    },
+                                    {
+                                        title: 'Campaign brainstorm',
+                                        createdBy: <Avatar imgUrl={avatar2Asset.src} />,
+                                        updated: '7.06.2022',
+                                        created: '16.06.2022',
+                                        favorite: (
+                                            <div
+                                                className={b('star')}
+                                                onClick={() => {
+                                                    handleStarClick('1');
+                                                }}
+                                            >
+                                                <Icon
+                                                    data={
+                                                        tableFavoriteIds.includes('1')
+                                                            ? starFilledIcon
+                                                            : starIcon
+                                                    }
+                                                    size={16}
+                                                />
+                                            </div>
+                                        ),
+                                    },
+                                    {
+                                        title: 'Logo redesign',
+                                        createdBy: <Avatar imgUrl={avatar3Asset.src} />,
+                                        updated: '7.06.2022',
+                                        created: '20.06.2022',
+                                        favorite: (
+                                            <div
+                                                className={b('star')}
+                                                onClick={() => {
+                                                    handleStarClick('2');
+                                                }}
+                                            >
+                                                <Icon
+                                                    data={
+                                                        tableFavoriteIds.includes('2')
+                                                            ? starFilledIcon
+                                                            : starIcon
+                                                    }
+                                                    size={16}
+                                                />
+                                            </div>
+                                        ),
+                                    },
+                                ]}
+                                selectedIds={tableSelectedIds}
+                                onSelectionChange={setTableSelectedIds}
+                            />
                         </div>
                     </div>
                 </div>
-                <div className={b('col', {stretch: true})}>
-                    <div className={b('table-wrapper')}>
-                        <SelectionTable
-                            columns={tableColumns}
-                            data={[
-                                {
-                                    title: 'Weekly Sync',
-                                    createdBy: <Avatar imgUrl={avatar1Asset.src} />,
-                                    updated: '28.06.2022',
-                                    created: '26.06.2022',
-                                    favorite: (
-                                        <div
-                                            className={b('star')}
-                                            onClick={() => {
-                                                handleStarClick('0');
-                                            }}
-                                        >
-                                            <Icon
-                                                data={
-                                                    tableFavoriteIds.includes('0')
-                                                        ? starFilledIcon
-                                                        : starIcon
-                                                }
-                                                size={16}
-                                            />
-                                        </div>
-                                    ),
-                                },
-                                {
-                                    title: 'Campaign brainstorm',
-                                    createdBy: <Avatar imgUrl={avatar2Asset.src} />,
-                                    updated: '7.06.2022',
-                                    created: '16.06.2022',
-                                    favorite: (
-                                        <div
-                                            className={b('star')}
-                                            onClick={() => {
-                                                handleStarClick('1');
-                                            }}
-                                        >
-                                            <Icon
-                                                data={
-                                                    tableFavoriteIds.includes('1')
-                                                        ? starFilledIcon
-                                                        : starIcon
-                                                }
-                                                size={16}
-                                            />
-                                        </div>
-                                    ),
-                                },
-                                {
-                                    title: 'Logo redesign',
-                                    createdBy: <Avatar imgUrl={avatar3Asset.src} />,
-                                    updated: '7.06.2022',
-                                    created: '20.06.2022',
-                                    favorite: (
-                                        <div
-                                            className={b('star')}
-                                            onClick={() => {
-                                                handleStarClick('2');
-                                            }}
-                                        >
-                                            <Icon
-                                                data={
-                                                    tableFavoriteIds.includes('2')
-                                                        ? starFilledIcon
-                                                        : starIcon
-                                                }
-                                                size={16}
-                                            />
-                                        </div>
-                                    ),
-                                },
-                            ]}
-                            selectedIds={tableSelectedIds}
-                            onSelectionChange={setTableSelectedIds}
-                        />
-                    </div>
-                </div>
-            </div>
-        </ThemeProvider>
+            </ThemeProvider>
+        </LayoutProvider>
     );
 };

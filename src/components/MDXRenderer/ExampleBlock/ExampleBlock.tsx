@@ -1,4 +1,4 @@
-import {Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
+import {Icon, LayoutProvider, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import codeIcon from '../../../assets/icons/code.svg';
@@ -25,12 +25,18 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
 
     return (
         <div className={b()}>
-            {/*Workaround for missing theme class in ThemeProvider*/}
-            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', {theme}, 'sandbox')}>
-                <div className={b('content')} {...(background ? {style: {background}} : {})}>
-                    {children}
-                </div>
-            </ThemeProvider>
+            <LayoutProvider>
+                {/*Workaround for missing theme class in ThemeProvider*/}
+                <ThemeProvider
+                    theme={theme}
+                    scoped
+                    rootClassName={b('theme-root', {theme}, 'sandbox')}
+                >
+                    <div className={b('content')} {...(background ? {style: {background}} : {})}>
+                        {children}
+                    </div>
+                </ThemeProvider>
+            </LayoutProvider>
             <div className={b('controls')}>
                 {codePrepared ? (
                     <div
