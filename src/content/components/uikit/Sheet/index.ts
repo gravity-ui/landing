@@ -4,7 +4,7 @@ import {Repos} from '../../../../types/common';
 import {getGithubUrl, getReadmeUrl} from '../../utils';
 
 const getterOptions = {repoName: Repos.Uikit, componentName: 'Sheet'};
-console.log(getReadmeUrl(getterOptions), 'getReadmeUrl(getterOptions)');
+
 export const sheetConfig = {
     id: 'sheet',
     title: 'Sheet',
