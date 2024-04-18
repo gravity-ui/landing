@@ -27,6 +27,7 @@ import {radioConfig} from './Radio';
 import {radioButtonConfig} from './RadioButton';
 import {radioGroupConfig} from './RadioGroup';
 import {selectConfig} from './Select';
+import {sheetConfig} from './Sheet';
 import {skeletonConfig} from './Skeleton';
 import {spinConfig} from './Spin';
 import {switchConfig} from './Switch';
@@ -79,6 +80,7 @@ const uikitComponents: Component[] = [
     toasterConfig,
     userConfig,
     userLabelConfig,
+    sheetConfig,
 ];
 
 export const uikit: Lib = {
