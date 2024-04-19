@@ -1,10 +1,4 @@
-import {
-    LayoutProvider,
-    Theme,
-    ThemeProvider,
-    ToasterComponent,
-    ToasterProvider,
-} from '@gravity-ui/uikit';
+import {Theme, ThemeProvider, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -55,41 +49,37 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, class
             <div className={b('body')}>
                 <div className={b('side', {front: true})}>
                     {/*Workaround for missing theme class in ThemeProvider*/}
-                    <LayoutProvider>
-                        <ThemeProvider
-                            theme="dark"
-                            rootClassName={b('theme-wrapper', {color, theme: 'dark'})}
-                            scoped
-                        >
-                            <ToasterProvider>
-                                <div className={b('card', className)}>
-                                    {children}
-                                    <div className={b('toaster')}>
-                                        <ToasterComponent hasPortal={false} />
-                                    </div>
+                    <ThemeProvider
+                        theme="dark"
+                        rootClassName={b('theme-wrapper', {color, theme: 'dark'})}
+                        scoped
+                    >
+                        <ToasterProvider>
+                            <div className={b('card', className)}>
+                                {children}
+                                <div className={b('toaster')}>
+                                    <ToasterComponent hasPortal={false} />
                                 </div>
-                            </ToasterProvider>
-                        </ThemeProvider>
-                    </LayoutProvider>
+                            </div>
+                        </ToasterProvider>
+                    </ThemeProvider>
                 </div>
                 <div className={b('side', {back: true})}>
-                    <LayoutProvider>
-                        {/*Workaround for missing theme class in ThemeProvider*/}
-                        <ThemeProvider
-                            theme="light"
-                            rootClassName={b('theme-wrapper', {color, theme: 'light'})}
-                            scoped
-                        >
-                            <ToasterProvider>
-                                <div className={b('card', className)}>
-                                    {children}
-                                    <div className={b('toaster')}>
-                                        <ToasterComponent hasPortal={false} />
-                                    </div>
+                    {/*Workaround for missing theme class in ThemeProvider*/}
+                    <ThemeProvider
+                        theme="light"
+                        rootClassName={b('theme-wrapper', {color, theme: 'light'})}
+                        scoped
+                    >
+                        <ToasterProvider>
+                            <div className={b('card', className)}>
+                                {children}
+                                <div className={b('toaster')}>
+                                    <ToasterComponent hasPortal={false} />
                                 </div>
-                            </ToasterProvider>
-                        </ThemeProvider>
-                    </LayoutProvider>
+                            </div>
+                        </ToasterProvider>
+                    </ThemeProvider>
                 </div>
             </div>
         </div>

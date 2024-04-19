@@ -1,4 +1,4 @@
-import {Direction, LayoutProvider, Theme, ThemeProvider} from '@gravity-ui/uikit';
+import {Direction, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import type {Component} from '../../content/components';
@@ -69,18 +69,16 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
     }
 
     return (
-        <LayoutProvider>
-            <ThemeProvider
-                theme={theme}
-                direction={direction}
-                rootClassName={b('wrapper', null, 'sandbox')}
-            >
-                <div className={b()}>
-                    <div className={b('component', {theme})}>
-                        {DynamicComponent && <DynamicComponent {...componentProps} />}
-                    </div>
+        <ThemeProvider
+            theme={theme}
+            direction={direction}
+            rootClassName={b('wrapper', null, 'sandbox')}
+        >
+            <div className={b()}>
+                <div className={b('component', {theme})}>
+                    {DynamicComponent && <DynamicComponent {...componentProps} />}
                 </div>
-            </ThemeProvider>
-        </LayoutProvider>
+            </div>
+        </ThemeProvider>
     );
 };
