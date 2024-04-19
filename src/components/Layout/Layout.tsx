@@ -1,5 +1,5 @@
 import {PageConstructorProvider, Theme as PageConstructorTheme} from '@gravity-ui/page-constructor';
-import {Lang, ThemeProvider, configure as configureUiKit} from '@gravity-ui/uikit';
+import {Lang, LayoutProvider, ThemeProvider, configure as configureUiKit} from '@gravity-ui/uikit';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
@@ -83,15 +83,17 @@ export const Layout: React.FC<LayoutProps> = ({
                 <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
                 <Meta />
             </Head>
-            <ThemeProvider theme={DEFAULT_THEME} direction={isRtl ? 'rtl' : 'ltr'}>
-                {isPageConstrucor ? (
-                    <PageConstructorProvider theme={DEFAULT_THEME as PageConstructorTheme}>
-                        {pageConent}
-                    </PageConstructorProvider>
-                ) : (
-                    pageConent
-                )}
-            </ThemeProvider>
+            <LayoutProvider>
+                <ThemeProvider theme={DEFAULT_THEME} direction={isRtl ? 'rtl' : 'ltr'}>
+                    {isPageConstrucor ? (
+                        <PageConstructorProvider theme={DEFAULT_THEME as PageConstructorTheme}>
+                            {pageConent}
+                        </PageConstructorProvider>
+                    ) : (
+                        pageConent
+                    )}
+                </ThemeProvider>
+            </LayoutProvider>
         </EnvironmentContext.Provider>
     );
 };
