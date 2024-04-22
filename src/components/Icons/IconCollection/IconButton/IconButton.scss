@@ -7,6 +7,9 @@ $block: '.#{variables.$ns}icon-button';
     &.g-button,
     &.g-button:has(.g-button__icon:only-child) {
         --g-button-border-radius: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 62px;
         height: 62px;
     }

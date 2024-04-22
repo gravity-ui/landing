@@ -15,7 +15,7 @@ interface IconsProps {
     onClick?: (item: IconItem) => void;
 }
 
-export const IconButton: React.FC<IconsProps> = ({icon, onClick}) => {
+export const IconButton = ({icon, onClick}: IconsProps) => {
     const handleClick = React.useCallback(() => {
         onClick?.(icon);
     }, [icon, onClick]);
