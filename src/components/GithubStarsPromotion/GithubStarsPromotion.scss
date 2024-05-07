@@ -1,0 +1,71 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}github-stars-promotion';
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--g-spacing-2);
+
+    border-radius: var(--g-border-radius-m);
+    text-decoration: none;
+    background: #cda2e7;
+
+    @media (min-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        padding: var(--g-spacing-1) var(--g-spacing-2);
+
+        transform: translateX(calc(100% + 2 * var(--g-spacing-2)));
+        animation: blockAnimation 0.35s linear forwards;
+    }
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        padding: var(--g-spacing-2) var(--g-spacing-3);
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 0px var(--g-spacing-2);
+        padding-top: var(--g-spacing-2);
+
+        position: relative;
+        z-index: 10;
+        overflow: hidden;
+
+        @media (min-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            position: absolute;
+            left: 0;
+            right: 0;
+
+            justify-content: flex-end;
+        }
+    }
+
+    &__button {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            display: none;
+        }
+    }
+
+    &__text {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            & > span {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    @keyframes blockAnimation {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(0%);
+        }
+    }
+}
