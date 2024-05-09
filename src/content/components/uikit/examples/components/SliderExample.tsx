@@ -21,7 +21,7 @@ export const SliderExample = ({
     debounceDelay,
     ...restProps
 }: SliderExampleProps) => {
-    const [value, setValue] = React.useState(defaultValue);
+    const [value, setValue] = React.useState(defaultValue || min || 0);
     const maxValue = Number(max) || undefined;
     const minValue = Number(min) || undefined;
     const marksCountValue = Number(marksCount) || undefined;
