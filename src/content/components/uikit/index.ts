@@ -29,6 +29,7 @@ import {radioGroupConfig} from './RadioGroup';
 import {selectConfig} from './Select';
 import {sheetConfig} from './Sheet';
 import {skeletonConfig} from './Skeleton';
+import {sliderConfig} from './Slider';
 import {spinConfig} from './Spin';
 import {switchConfig} from './Switch';
 import {tableConfig} from './Table';
@@ -69,6 +70,7 @@ const uikitComponents: Component[] = [
     radioGroupConfig,
     selectConfig,
     skeletonConfig,
+    sliderConfig,
     spinConfig,
     switchConfig,
     tableConfig,
