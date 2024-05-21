@@ -16,7 +16,7 @@ interface GithubStarsPromotionProps {}
 
 export const GithubStarsPromotion: React.FC<GithubStarsPromotionProps> = () => {
     const {t} = useTranslation();
-    const [hide, setHide] = useState<boolean>();
+    const [hide, setHide] = useState<boolean>(true);
 
     useEffect(() => {
         setHide(Boolean(localStorage.getItem(LOCAL_STORAGE_KEY)));
