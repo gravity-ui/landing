@@ -24,6 +24,7 @@ $block: '.#{variables.$ns}layout';
     }
 
     &__content {
+        position: relative;
         flex: 1;
     }
 }
