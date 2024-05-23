@@ -2,6 +2,7 @@ import {Star} from '@gravity-ui/icons';
 import {Animatable, HTML} from '@gravity-ui/page-constructor';
 import {Button, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
+import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';
 import {GITHUB_UI_KIT_URL} from 'src/constants';
 
@@ -23,6 +24,7 @@ export type GithubStarsModel = GithubStarsBlockProps & {
 
 export const GithubStarsBlock: React.FC<GithubStarsBlockProps> = ({device}) => {
     const {t} = useTranslation();
+    const {pathname} = useRouter();
     const [hide, setHide] = useState<boolean>(true);
 
     useEffect(() => {
@@ -32,6 +34,10 @@ export const GithubStarsBlock: React.FC<GithubStarsBlockProps> = ({device}) => {
     const hideBlock = () => {
         localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     };
+
+    if (pathname !== '/') {
+        return null;
+    }
 
     return (
         <div className={b('wrapper')} data-hide={hide} data-device={device}>

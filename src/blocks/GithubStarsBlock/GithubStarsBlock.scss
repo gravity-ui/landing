@@ -26,9 +26,6 @@ $block: '.#{variables.$ns}github-stars-promotion';
         animation-delay: 500ms;
     }
 
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-    }
-
     &__wrapper {
         display: flex;
         justify-content: flex-end;
