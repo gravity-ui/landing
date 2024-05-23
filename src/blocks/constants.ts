@@ -4,4 +4,5 @@ export enum CustomBlock {
     Examples = 'examples',
     Roadmap = 'roadmap',
     Templates = 'templates',
+    GithubStars = 'github-stars-promotion',
 }

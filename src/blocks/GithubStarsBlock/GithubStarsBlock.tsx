@@ -1,20 +1,27 @@
 import {Star} from '@gravity-ui/icons';
-import {HTML} from '@gravity-ui/page-constructor';
+import {Animatable, HTML} from '@gravity-ui/page-constructor';
 import {Button, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useEffect, useState} from 'react';
 import {GITHUB_UI_KIT_URL} from 'src/constants';
 
 import {block} from '../../utils';
+import {CustomBlock} from '../constants';
 
-import './GithubStarsPromotion.scss';
+import './GithubStarsBlock.scss';
 
 const b = block('github-stars-promotion');
 const LOCAL_STORAGE_KEY = 'gravity-landing-hide-stars-promotion';
 
-interface GithubStarsPromotionProps {}
+type GithubStarsBlockProps = Animatable & {
+    device: 'desktop' | 'mobile';
+};
 
-export const GithubStarsPromotion: React.FC<GithubStarsPromotionProps> = () => {
+export type GithubStarsModel = GithubStarsBlockProps & {
+    type: CustomBlock.GithubStars;
+};
+
+export const GithubStarsBlock: React.FC<GithubStarsBlockProps> = ({device}) => {
     const {t} = useTranslation();
     const [hide, setHide] = useState<boolean>(true);
 
@@ -23,16 +30,11 @@ export const GithubStarsPromotion: React.FC<GithubStarsPromotionProps> = () => {
     }, []);
 
     const hideBlock = () => {
-        setHide(true);
         localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     };
 
-    if (hide) {
-        return null;
-    }
-
     return (
-        <div className={b('wrapper')}>
+        <div className={b('wrapper')} data-hide={hide} data-device={device}>
             <a className={b()} href={GITHUB_UI_KIT_URL} target="_blank" onClick={hideBlock}>
                 <Text color="dark-primary" variant="body-2">
                     <HTML>{t('home:github_stars-text')}</HTML>
@@ -46,3 +48,5 @@ export const GithubStarsPromotion: React.FC<GithubStarsPromotionProps> = () => {
         </div>
     );
 };
+
+export default GithubStarsBlock;

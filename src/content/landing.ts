@@ -36,6 +36,10 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
     },
     blocks: [
         {
+            type: CustomBlock.GithubStars,
+            device: 'mobile',
+        },
+        {
             type: CustomBlock.CustomHeader,
             title: t('home:header_title'),
             buttons: [
