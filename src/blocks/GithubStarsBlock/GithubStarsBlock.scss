@@ -1,0 +1,73 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}github-stars-promotion';
+
+.pc-block-base.pc-block-base.pc-block-base.pc-constructor-block_type_github-stars-promotion {
+    position: unset;
+    margin: 0;
+    padding: 0;
+}
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--g-spacing-2);
+    padding: var(--g-spacing-1) var(--g-spacing-1) var(--g-spacing-1) var(--g-spacing-4);
+    border-radius: var(--g-border-radius-m);
+    text-decoration: none;
+    background: #cda2e7;
+
+    @media (min-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        transform: translateX(calc(100% + 2 * var(--g-spacing-2)));
+        animation: leftBlockAnimation 250ms ease-out forwards;
+        animation-delay: 500ms;
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        padding-top: var(--g-spacing-2);
+
+        @media (min-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            position: absolute;
+            overflow: hidden;
+            left: 0;
+            right: 0;
+            z-index: 9;
+
+            padding-left: var(--g-spacing-2);
+            padding-right: var(--g-spacing-2);
+
+            &[data-hide='true'] {
+                display: none;
+            }
+
+            &[data-device='mobile'] {
+                display: none;
+            }
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            justify-content: center;
+
+            &[data-device='desktop'] {
+                display: none;
+            }
+        }
+    }
+
+    @keyframes leftBlockAnimation {
+        from {
+            transform: translateX(100%);
+        }
+
+        to {
+            transform: translateX(0%);
+        }
+    }
+}
