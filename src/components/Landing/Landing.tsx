@@ -3,6 +3,7 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
+import {ContributorsBlock} from '../../blocks/Contributors/Contributors';
 import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/CustomExtendedFeatures';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {Examples} from '../../blocks/Examples/Examples';
@@ -33,6 +34,7 @@ export const Landing: React.FC = () => {
                         [CustomBlock.Examples]: Examples,
                         [CustomBlock.Roadmap]: RoadmapBlock,
                         [CustomBlock.Templates]: TemplatesBlock,
+                        [CustomBlock.Contributors]: ContributorsBlock,
                     },
                 }}
             />

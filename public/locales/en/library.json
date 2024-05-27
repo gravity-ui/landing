@@ -9,5 +9,7 @@
     "lastUpdate": "Last update",
     "repository": "Repository",
     "license": "License",
-    "issues": "Issues"
+    "issues": "Issues",
+    "maintainers": "Maintainers",
+    "contributors": "Contributors"
 }

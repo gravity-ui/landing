@@ -7,7 +7,7 @@ import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsL
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
 import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
-import {getLibComponents} from '../../../utils';
+import {getLibById, getLibComponents, getMaintainers} from '../../../utils';
 import {getI18nPaths, getI18nProps} from '../../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -85,6 +85,8 @@ export const ComponentPage = ({
         return null;
     }
 
+    const maintainers = getMaintainers(getLibById(libId), `/src/components/${component.title}`);
+
     const sections = React.useMemo<Section[]>(() => {
         return libs.map(({id, title, components}) => {
             return {
@@ -112,6 +114,7 @@ export const ComponentPage = ({
                     component={component}
                     readmeContent={readmeContent}
                     sections={sections}
+                    maintainers={maintainers}
                 />
             </ComponentsLayout>
         </Layout>

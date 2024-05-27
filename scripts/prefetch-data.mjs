@@ -7,6 +7,8 @@ import {request} from 'undici';
 
 import {libs} from '../src/libs.mjs';
 
+import {fetchRepositoryCodeOwners, getRepositoryContributors} from './github.mjs';
+
 dotenv.config();
 
 const libsFetchedData = path.join(
@@ -44,13 +46,32 @@ const fetchGithubInfo = () => {
                     if (process.env.GITHUB_TOKEN) {
                         headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
                     }
-                    const {statusCode, body} = await request(`${githubApiUrl}${item.githubId}`, {
-                        headers,
-                    });
-                    if (statusCode >= 200 && statusCode < 300) {
-                        const data = await body.json();
-                        return [item.id, data];
-                    }
+
+                    const [repoOwner, repo] = item.githubId.split('/');
+                    const [data, contributors, codeOwners] = await Promise.all([
+                        (async () => {
+                            const {statusCode, body} = await request(
+                                `${githubApiUrl}${item.githubId}`,
+                                {
+                                    headers,
+                                },
+                            );
+
+                            if (!(statusCode >= 200 && statusCode < 300)) {
+                                throw new Error(
+                                    `failed to fetch github repo info '${item.githubId}'`,
+                                );
+                            }
+
+                            return await body.json();
+                        })(),
+                        getRepositoryContributors(repoOwner, repo),
+                        fetchRepositoryCodeOwners(repoOwner, repo),
+                    ]);
+
+                    data.contributors = contributors;
+                    data.codeOwners = codeOwners;
+                    return [item.id, data];
                 } catch (err) {
                     console.error(err);
                 }
@@ -141,7 +162,7 @@ Promise.all([fetchNpmInfo(), fetchGithubInfo(), fetchReadmeInfo(), fetchChangelo
             result[id] = {...result[id], changelogInfo: data};
         });
 
-        const praparedResult = {};
+        const preparedResult = {};
         Object.keys(result).forEach((id) => {
             const libGithubInfo = result[id].githubInfo;
             const libNpmInfo = result[id].npmInfo;
@@ -167,7 +188,7 @@ Promise.all([fetchNpmInfo(), fetchGithubInfo(), fetchReadmeInfo(), fetchChangelo
                 }
             }
 
-            praparedResult[id] = {
+            preparedResult[id] = {
                 stars: libGithubInfo?.stargazers_count ?? 0,
                 version: latestReleaseVersion,
                 lastUpdate: latestReleaseDate,
@@ -175,11 +196,13 @@ Promise.all([fetchNpmInfo(), fetchGithubInfo(), fetchReadmeInfo(), fetchChangelo
                 issues: libGithubInfo?.open_issues_count ?? 0,
                 readme: result[id].readmeInfo,
                 changelog: result[id].changelogInfo,
+                contributors: libGithubInfo?.contributors ?? [],
+                codeOwners: libGithubInfo?.codeOwners ?? [],
                 // debug: result[id],
             };
         });
 
-        fs.writeFileSync(libsFetchedData, JSON.stringify(praparedResult), 'utf8');
+        fs.writeFileSync(libsFetchedData, JSON.stringify(preparedResult), 'utf8');
     })
     .catch((err) => {
         console.error(err.message);

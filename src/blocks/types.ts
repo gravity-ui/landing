@@ -1,3 +1,4 @@
+import {ContributorsModel} from './Contributors/Contributors';
 import {CustomExtendedFeaturesModel} from './CustomExtendedFeatures/CustomExtendedFeatures';
 import {CustomHeaderModel} from './CustomHeader/CustomHeader';
 import {ExamplesModel} from './Examples/Examples';
@@ -11,4 +12,5 @@ export type CustomBlockModel =
     | ExamplesModel
     | RoadmapModel
     | TemplatesModel
-    | GithubStarsModel;
+    | GithubStarsModel
+    | ContributorsModel;

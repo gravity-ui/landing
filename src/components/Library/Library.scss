@@ -244,4 +244,22 @@ $block: '.#{variables.$ns}library';
             opacity: 0.8;
         }
     }
+
+    &__contributors-content {
+        display: block;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.4s ease-in-out;
+
+            &_mobile-visible {
+                max-height: 1000px;
+            }
+        }
+
+        .gravity-ui-landing-contributor-list {
+            margin-top: 16px;
+        }
+    }
 }
