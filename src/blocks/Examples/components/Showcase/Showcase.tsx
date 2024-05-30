@@ -22,6 +22,7 @@ import avatar2Asset from '../../../../assets/avatar-2.png';
 import avatar3Asset from '../../../../assets/avatar-3.png';
 import starFilledIcon from '../../../../assets/icons/star-filled.svg';
 import starIcon from '../../../../assets/icons/star.svg';
+import {BaseColorPicker} from '../../../../components/ColorPicker/BaseColorPicker';
 import {block} from '../../../../utils';
 
 import './Showcase.scss';
@@ -103,6 +104,11 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
                                 </div>
                                 <div className={b('col-item-elem')}>
                                     <Switch />
+                                </div>
+                            </div>
+                            <div className={b('col-item')}>
+                                <div className={b('col-item-elem')}>
+                                    <BaseColorPicker defaultValue="#000000" />
                                 </div>
                             </div>
                         </div>
