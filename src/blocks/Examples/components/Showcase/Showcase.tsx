@@ -22,7 +22,7 @@ import avatar2Asset from '../../../../assets/avatar-2.png';
 import avatar3Asset from '../../../../assets/avatar-3.png';
 import starFilledIcon from '../../../../assets/icons/star-filled.svg';
 import starIcon from '../../../../assets/icons/star.svg';
-import {ColorPickerInput} from '../../../../components/ColorPicker/ColorPickerInput';
+import {ColorPickerInput} from '../../../../components/ColorPickerInput/ColorPickerInput';
 import {block} from '../../../../utils';
 
 import './Showcase.scss';

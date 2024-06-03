@@ -1,10 +1,13 @@
 import {Palette} from '@gravity-ui/icons';
-import {Button, Flex, Icon, TextInput} from '@gravity-ui/uikit';
-import React, {ChangeEventHandler, forwardRef, useCallback, useRef, useState} from 'react';
+import {Button, Flex, Icon, TextInput, TextInputProps} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
+import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
 
 import {block} from '../../utils';
 
 import './ColorPickerInput.scss';
+import {ColorPreview} from './ColorPreview';
+import {NativeColorPicker} from './NativeColorPicker';
 import {hexRegexp, parseRgbStringToHex, rgbRegexp, rgbaRegexp} from './utils';
 
 const b = block('color-picker');
@@ -16,33 +19,18 @@ export interface ColorPickerInputProps {
     onChange?: (color: string) => void;
 }
 
-interface NativeColorPickerProps {
-    value: string;
-    onChange: ChangeEventHandler<HTMLInputElement>;
-}
-
-const NativeColorPicker = forwardRef<HTMLInputElement, NativeColorPickerProps>(
-    ({value, onChange}, ref) => {
-        return (
-            <input
-                className={b('input')}
-                type="color"
-                ref={ref}
-                value={value}
-                onChange={onChange}
-            />
-        );
-    },
-);
-
 export const ColorPickerInput = ({
     name,
     value,
     onChange: onChangeExternal,
     defaultValue,
 }: ColorPickerInputProps) => {
+    const {t} = useTranslation('component');
+
     const [color, setColor] = useState<string>(defaultValue);
     const [inputValue, setInputValue] = useState<string>(defaultValue);
+    const [validationError, setValidationError] = useState<TextInputProps['validationState']>();
+
     const colorInputRef = useRef<HTMLInputElement>(null);
 
     const managedValue = value || inputValue;
@@ -52,6 +40,7 @@ export const ColorPickerInput = ({
             const newValue = event.target.value.replaceAll(' ', '');
             onChangeExternal?.(newValue);
             setInputValue(newValue);
+            setValidationError(undefined);
 
             if (
                 !newValue ||
@@ -67,7 +56,10 @@ export const ColorPickerInput = ({
                 const hexColor = parseRgbStringToHex(newValue);
 
                 setColor(hexColor);
+                return;
             }
+
+            setValidationError('invalid');
         },
         [onChangeExternal],
     );
@@ -84,10 +76,13 @@ export const ColorPickerInput = ({
             <TextInput
                 name={name}
                 value={managedValue}
+                errorPlacement="inside"
+                errorMessage={t('color-input_validation-format-error')}
+                validationState={validationError}
                 view="normal"
                 size="l"
                 onChange={onChange}
-                startContent={<div className={b('preview')} style={{backgroundColor: color}} />}
+                startContent={<ColorPreview color={color} />}
                 endContent={
                     <Button
                         view="flat-action"
