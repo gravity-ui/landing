@@ -1,6 +1,5 @@
 import {Palette} from '@gravity-ui/icons';
 import {Button, Flex, Icon, TextInput, TextInputProps} from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
 import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
 
 import {block} from '../../utils';
@@ -17,6 +16,7 @@ export interface ColorPickerInputProps {
     name?: string;
     value?: string;
     onChange?: (color: string) => void;
+    errorMessage?: string;
 }
 
 export const ColorPickerInput = ({
@@ -24,9 +24,8 @@ export const ColorPickerInput = ({
     value,
     onChange: onChangeExternal,
     defaultValue,
+    errorMessage = 'Incorrect format',
 }: ColorPickerInputProps) => {
-    const {t} = useTranslation('component');
-
     const [color, setColor] = useState<string>(defaultValue);
     const [inputValue, setInputValue] = useState<string>(defaultValue);
     const [validationError, setValidationError] = useState<TextInputProps['validationState']>();
@@ -77,7 +76,7 @@ export const ColorPickerInput = ({
                 name={name}
                 value={managedValue}
                 errorPlacement="inside"
-                errorMessage={t('color-input_validation-format-error')}
+                errorMessage={errorMessage}
                 validationState={validationError}
                 view="normal"
                 size="l"
