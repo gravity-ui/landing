@@ -33,6 +33,10 @@ $block: '.#{variables.$ns}github-stars-promotion';
         display: flex;
         align-items: center;
         gap: var(--g-spacing-3);
+
+        & > .g-icon {
+            flex: 1 0 auto;
+        }
     }
 
     &__wrapper {
