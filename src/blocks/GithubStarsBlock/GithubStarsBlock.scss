@@ -29,12 +29,6 @@ $block: '.#{variables.$ns}github-stars-promotion';
         animation-delay: 500ms;
     }
 
-    &__html {
-        & > span {
-            text-decoration: underline;
-        }
-    }
-
     &__text {
         display: flex;
         align-items: center;
