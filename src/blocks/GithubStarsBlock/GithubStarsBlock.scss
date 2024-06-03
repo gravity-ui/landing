@@ -19,9 +19,15 @@ $block: '.#{variables.$ns}github-stars-promotion';
     padding-right: var(--g-spacing-2);
     text-decoration: none;
     background: #cda2e7;
+
+    &:hover {
+        background: #eac7ff;
+    }
+
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
         width: 100%;
     }
+
     @media (min-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
         border-radius: var(--g-border-radius-m);
         transform: translateX(calc(100% + 2 * var(--g-spacing-2)));
@@ -32,7 +38,7 @@ $block: '.#{variables.$ns}github-stars-promotion';
     &__text {
         display: flex;
         align-items: center;
-        gap: var(--g-spacing-3);
+        gap: var(--g-spacing-1);
 
         & > .g-icon {
             flex: 1 0 auto;
