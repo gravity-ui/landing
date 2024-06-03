@@ -21,7 +21,7 @@ $block: '.#{variables.$ns}github-stars-promotion';
     background: #cda2e7;
 
     &:hover {
-        background: #eac7ff;
+        background: #e2bbfa;
     }
 
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
