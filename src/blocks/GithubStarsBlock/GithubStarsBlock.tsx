@@ -1,6 +1,6 @@
-import {Star} from '@gravity-ui/icons';
+import {ChevronRight} from '@gravity-ui/icons';
 import {Animatable, HTML} from '@gravity-ui/page-constructor';
-import {Button, Icon, Text} from '@gravity-ui/uikit';
+import {Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';
@@ -42,14 +42,10 @@ export const GithubStarsBlock: React.FC<GithubStarsBlockProps> = ({device}) => {
     return (
         <div className={b('wrapper')} data-hide={hide} data-device={device}>
             <a className={b()} href={GITHUB_UI_KIT_URL} target="_blank" onClick={hideBlock}>
-                <Text color="dark-primary" variant="body-2">
-                    <HTML>{t('home:github_stars-text')}</HTML>
+                <Text color="dark-primary" variant="body-2" className={b('text')}>
+                    <HTML className={b('html')}>{t('home:github_stars-text')}</HTML>
+                    <Icon data={ChevronRight} size="16" />
                 </Text>
-
-                <Button view="normal-contrast" size="m" tabIndex={-1}>
-                    <Icon data={Star} size={16} />
-                    <Text variant="body-1">{t('home:github_stars-button')}</Text>
-                </Button>
             </a>
         </div>
     );

@@ -15,23 +15,36 @@ $block: '.#{variables.$ns}github-stars-promotion';
     align-items: center;
     justify-content: center;
     gap: var(--g-spacing-2);
-    padding: var(--g-spacing-1) var(--g-spacing-1) var(--g-spacing-1) var(--g-spacing-4);
-    border-radius: var(--g-border-radius-m);
+    padding: var(--g-spacing-2) var(--g-spacing-4);
+    padding-right: var(--g-spacing-2);
     text-decoration: none;
     background: #cda2e7;
-
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        width: 100%;
+    }
     @media (min-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        border-radius: var(--g-border-radius-m);
         transform: translateX(calc(100% + 2 * var(--g-spacing-2)));
         animation: leftBlockAnimation 250ms ease-out forwards;
         animation-delay: 500ms;
+    }
+
+    &__html {
+        & > span {
+            text-decoration: underline;
+        }
+    }
+
+    &__text {
+        display: flex;
+        align-items: center;
+        gap: var(--g-spacing-3);
     }
 
     &__wrapper {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-
-        padding-top: var(--g-spacing-2);
 
         @media (min-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             position: absolute;
@@ -40,8 +53,8 @@ $block: '.#{variables.$ns}github-stars-promotion';
             right: 0;
             z-index: 9;
 
-            padding-left: var(--g-spacing-2);
-            padding-right: var(--g-spacing-2);
+            padding: var(--g-spacing-2);
+            padding-bottom: 0;
 
             &[data-hide='true'] {
                 display: none;
@@ -54,7 +67,7 @@ $block: '.#{variables.$ns}github-stars-promotion';
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             justify-content: center;
-
+            margin: 0 -24px;
             &[data-device='desktop'] {
                 display: none;
             }
