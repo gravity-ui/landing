@@ -5,6 +5,7 @@ import React, {ChangeEventHandler, forwardRef, useCallback, useRef, useState} fr
 import {block} from '../../utils';
 
 import './ColorPickerInput.scss';
+import {hexRegexp, parseRgbStringToHex, rgbRegexp, rgbaRegexp} from './utils';
 
 const b = block('color-picker');
 
@@ -19,10 +20,6 @@ interface NativeColorPickerProps {
     value: string;
     onChange: ChangeEventHandler<HTMLInputElement>;
 }
-
-const hexRegexp = /^#[a-fA-F0-9]{6}$/g;
-const rgbRegexp = /^rgb\((\d{1,3}, ?){2}(\d{1,3})\)$/g;
-const numberRegexp = /\b\d+\b/g;
 
 const NativeColorPicker = forwardRef<HTMLInputElement, NativeColorPickerProps>(
     ({value, onChange}, ref) => {
@@ -46,40 +43,30 @@ export const ColorPickerInput = ({
 }: ColorPickerInputProps) => {
     const [color, setColor] = useState<string>(defaultValue);
     const [inputValue, setInputValue] = useState<string>(defaultValue);
+    const colorInputRef = useRef<HTMLInputElement>(null);
 
     const managedValue = value || inputValue;
 
-    const colorInputRef = useRef<HTMLInputElement>(null);
-
     const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
         (event) => {
-            const newValue = event.target.value.trim();
-
+            const newValue = event.target.value.replaceAll(' ', '');
+            onChangeExternal?.(newValue);
             setInputValue(newValue);
 
-            if (!newValue) {
-                setColor(defaultValue);
-
-                return;
-            }
-
-            if (hexRegexp.test(newValue)) {
+            if (
+                !newValue ||
+                new RegExp(hexRegexp, 'g').test(newValue) ||
+                new RegExp(rgbaRegexp, 'g').test(newValue)
+            ) {
                 setColor(newValue);
-                onChangeExternal?.(newValue);
 
                 return;
             }
 
-            if (rgbRegexp.test(newValue)) {
-                let hexColor = '#';
-                newValue.match(numberRegexp)?.forEach((val) => {
-                    const hex = Number(val).toString(16);
-
-                    hexColor += hex?.length === 1 ? `0${hex}` : hex;
-                });
+            if (new RegExp(rgbRegexp, 'g').test(newValue)) {
+                const hexColor = parseRgbStringToHex(newValue);
 
                 setColor(hexColor);
-                onChangeExternal?.(hexColor);
             }
         },
         [onChangeExternal],
