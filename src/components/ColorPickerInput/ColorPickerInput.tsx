@@ -1,5 +1,6 @@
 import {Palette} from '@gravity-ui/icons';
 import {Button, Flex, Icon, TextInput, TextInputProps} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
 
 import {block} from '../../utils';
@@ -24,8 +25,10 @@ export const ColorPickerInput = ({
     value,
     onChange: onChangeExternal,
     defaultValue,
-    errorMessage = 'Incorrect format',
+    errorMessage,
 }: ColorPickerInputProps) => {
+    const {t} = useTranslation('component');
+
     const [color, setColor] = useState<string>(defaultValue);
     const [inputValue, setInputValue] = useState<string>(defaultValue);
     const [validationError, setValidationError] = useState<TextInputProps['validationState']>();
@@ -57,8 +60,6 @@ export const ColorPickerInput = ({
                 setColor(hexColor);
                 return;
             }
-
-            setValidationError('invalid');
         },
         [onChangeExternal],
     );
@@ -70,13 +71,24 @@ export const ColorPickerInput = ({
         setInputValue(newValue);
     }, []);
 
+    const onBlur = useCallback(() => {
+        if (
+            !managedValue ||
+            (!new RegExp(hexRegexp, 'g').test(managedValue) &&
+                !new RegExp(rgbRegexp, 'g').test(managedValue) &&
+                !new RegExp(rgbaRegexp, 'g').test(managedValue))
+        ) {
+            setValidationError('invalid');
+        }
+    }, [managedValue]);
+
     return (
         <Flex className={b()} direction="column">
             <TextInput
                 name={name}
                 value={managedValue}
                 errorPlacement="inside"
-                errorMessage={errorMessage}
+                errorMessage={errorMessage || t('color-input_validation-format-error')}
                 validationState={validationError}
                 view="normal"
                 size="l"
@@ -85,7 +97,6 @@ export const ColorPickerInput = ({
                 endContent={
                     <Button
                         view="flat-action"
-                        className={b('select-wrapper')}
                         onClick={() => {
                             colorInputRef.current?.click();
                         }}
@@ -93,6 +104,7 @@ export const ColorPickerInput = ({
                         <Icon data={Palette} />
                     </Button>
                 }
+                onBlur={onBlur}
             />
             <NativeColorPicker ref={colorInputRef} value={color} onChange={onNativeInputChange} />
         </Flex>
