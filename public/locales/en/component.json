@@ -1,5 +1,6 @@
 {
     "actions_openInFigma": "Open in Figma",
     "title": "Components",
-    "searchPlaceholder": "Search by component name"
+    "searchPlaceholder": "Search by component name",
+    "color-input_validation-format-error": "Incorrect format"
 }
