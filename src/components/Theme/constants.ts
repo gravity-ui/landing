@@ -1,0 +1,56 @@
+import type {ThemeOptions} from './types';
+
+export const DEFAULT_PALLETE: ThemeOptions['pallette'] = {
+    light: {
+        brand: '#eee',
+        orange: '#FFA629',
+        green: '#63E587',
+        yellow: '#FFBE5C',
+        red: '#FF6B00',
+        blue: '#1DA3EE',
+        'cool-grey': '#808895',
+        purple: '#6100FF',
+    },
+    dark: {
+        brand: '#aaa',
+        orange: 'rgba(200,100,100,.20)',
+        green: 'rgba(200,100,100,.20)',
+        yellow: 'rgba(200,100,100,.20)',
+        red: 'rgba(200,100,100,.20)',
+        blue: 'rgba(200,100,100,.20)',
+        'cool-grey': 'rgba(200,100,100,.20)',
+        purple: 'rgba(200,100,100,.20)',
+    },
+};
+
+export const DEFAULT_THEME: ThemeOptions = {
+    pallette: DEFAULT_PALLETE,
+    colors: {
+        light: {
+            background: 'private.blue.550', // Ссылка на токен
+            hoveredBrand: 'private.yellow.200',
+            brandText: '#63E587', // Просто кастомный цвет
+            hcBrandText: '',
+            brandLine: '',
+            selectionBackground: '',
+            hoveredSelectionBackground: '',
+            link: '',
+            hoveredLink: '',
+            visitedLink: '',
+        },
+        dark: {
+            background: '',
+            hoveredBrand: '',
+            brandText: '',
+            hcBrandText: '',
+            brandLine: '',
+            selectionBackground: '',
+            hoveredSelectionBackground: '',
+            link: '',
+            hoveredLink: '',
+            visitedLink: '',
+        },
+    },
+    borders: {},
+    typography: {},
+};
