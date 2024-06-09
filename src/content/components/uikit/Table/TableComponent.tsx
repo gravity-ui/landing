@@ -1,4 +1,6 @@
+import {Printer, TrashBin} from '@gravity-ui/icons';
 import {
+    Icon,
     Table,
     TableAction,
     TableColumnConfig,
@@ -90,11 +92,13 @@ const getRowActions = (): TableAction<DataItem>[] => {
         {
             text: 'Print',
             handler: () => {},
+            icon: <Icon data={Printer} size={12} />,
         },
         {
             text: 'Remove',
             handler: () => {},
             theme: 'danger',
+            icon: <Icon data={TrashBin} size={12} />,
         },
     ];
 };
