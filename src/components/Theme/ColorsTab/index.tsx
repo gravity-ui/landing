@@ -1,7 +1,9 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import React from 'react';
 
-export const Colors = () => {
+import {BasicPalette} from './BasicPalette/BasicPalette';
+
+export const ColorsTab = () => {
     return (
         <Grid>
             <Row>
@@ -9,6 +11,7 @@ export const Colors = () => {
                     <h1>Colors</h1>
                 </Col>
             </Row>
+            <BasicPalette />
         </Grid>
     );
 };
