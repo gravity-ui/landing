@@ -1,7 +1,12 @@
+import capitalize from 'lodash/capitalize';
 import kebabCase from 'lodash/kebabCase';
 import lowerCase from 'lodash/lowerCase';
 
-import {DEFAULT_NEW_COLOR_TITLE, THEME_COLOR_VARIABLE_PREFIX} from './constants';
+import {
+    DEFAULT_NEW_COLOR_TITLE,
+    DEFAULT_PALETTE_TOKENS,
+    THEME_COLOR_VARIABLE_PREFIX,
+} from './constants';
 import type {
     Palette,
     PaletteTokens,
@@ -16,7 +21,7 @@ function createColorToken(title: string) {
 }
 
 function createTitleFromToken(token: string) {
-    return lowerCase(token);
+    return capitalize(lowerCase(token));
 }
 
 function createPrivateColorToken(mainColorToken: string, privateColorCode: string) {
@@ -25,6 +30,10 @@ function createPrivateColorToken(mainColorToken: string, privateColorCode: strin
 
 function createPrivateColorTitle(mainColorToken: string, privateColorCode: string) {
     return `${THEME_COLOR_VARIABLE_PREFIX}-${mainColorToken}-${privateColorCode}`;
+}
+
+function isManuallyCreatedToken(token: string) {
+    return !DEFAULT_PALETTE_TOKENS.has(token);
 }
 
 function createNewColorTitle(currentPaletteTokens: PaletteTokens) {
@@ -55,7 +64,7 @@ function createPrivateColors(solidColor: string): PrivateColors {
         400: '',
         450: '',
         500: '',
-        solid: solidColor,
+        550: solidColor,
         600: '',
         650: '',
         700: '',
@@ -194,6 +203,7 @@ export function addColorToTheme(
             light: params?.colors?.light ? createPrivateColors(params.colors.light) : undefined,
             dark: params?.colors?.dark ? createPrivateColors(params.colors.dark) : undefined,
         },
+        isCustom: true,
     };
 
     return newThemeState;
@@ -209,6 +219,31 @@ export function removeColorFromTheme(
     delete newThemeState.palette.dark[token];
     delete newThemeState.palette.light[token];
     delete newThemeState.paletteTokens[token];
+
+    return newThemeState;
+}
+
+export function renameColorInTheme(
+    themeState: ThemeWizardState,
+    oldTitle: string,
+    newTitle: string,
+): ThemeWizardState {
+    const newThemeState = {...themeState};
+    const oldToken = createColorToken(oldTitle);
+    const newToken = createColorToken(newTitle);
+
+    if (newThemeState.paletteTokens[oldToken]) {
+        newThemeState.paletteTokens[newToken] = {
+            ...newThemeState.paletteTokens[oldToken],
+            title: newTitle,
+        };
+        newThemeState.palette.dark[newToken] = newThemeState.palette.dark[oldToken];
+        newThemeState.palette.light[newToken] = newThemeState.palette.dark[oldToken];
+    }
+
+    delete newThemeState.palette.dark[oldToken];
+    delete newThemeState.palette.light[oldToken];
+    delete newThemeState.paletteTokens[oldToken];
 
     return newThemeState;
 }
@@ -272,6 +307,7 @@ export function getThemePalette(theme: ThemeWizardState): Palette {
                 light: theme.palette.light[token],
                 dark: theme.palette.dark[token],
             },
+            isCustom: isManuallyCreatedToken(token),
         };
     });
 }
