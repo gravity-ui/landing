@@ -1,12 +1,12 @@
 import React from 'react';
 
 import {Layout} from '../components/Layout/Layout';
-import {Colors} from '../components/Theme/Colors';
+import {Theme} from '../components/Theme/Theme';
 
 export const ThemePage = () => {
     return (
         <Layout title="Theme">
-            <Colors />
+            <Theme />
         </Layout>
     );
 };

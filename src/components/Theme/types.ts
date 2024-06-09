@@ -1,6 +1,6 @@
 export type ThemeVariant = 'light' | 'dark';
 
-export type PalletteOptions = {
+export type PaletteOptions = {
     brand: string;
     [key: string]: string;
 };
@@ -24,7 +24,7 @@ export type TypographyOptions = {};
 
 export interface ThemeOptions {
     /** Параметры solid-цветов, от которых рассчитываются private-цвета */
-    pallette: Record<ThemeVariant, PalletteOptions>;
+    palette: Record<ThemeVariant, PaletteOptions>;
     /** Утилитарные цвета, использующиеся в компонентах (background, link, brand-text и тд) */
     colors: Record<ThemeVariant, ColorsOptions>;
     borders: BordersOptions;
@@ -59,16 +59,21 @@ type PrivateColorVariable = (typeof PRIVATE_COLOR_VARIABLES)[number];
 
 export type PrivateColors = Record<PrivateColorVariable, string>;
 
-type PalleteToken = {
+type PaletteToken = {
     /** Title that will using in UI */
     title: string;
     /** Auto-generated private colors for each theme variant */
     privateColors: Record<ThemeVariant, PrivateColors | undefined>;
 };
 
-export type PalleteTokens = Record<string, PalleteToken>;
+export type PaletteTokens = Record<string, PaletteToken | undefined>;
 
 export interface ThemeWizardState extends ThemeOptions {
     /** Mapping color tokens to their information (title and private colors) */
-    palletteTokens: PalleteTokens;
+    paletteTokens: PaletteTokens;
 }
+
+export type Palette = {
+    title: string;
+    colors: Record<ThemeVariant, string>;
+}[];
