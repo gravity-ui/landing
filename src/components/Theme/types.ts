@@ -23,35 +23,16 @@ export type BordersOptions = {};
 export type TypographyOptions = {};
 
 export interface ThemeOptions {
-    /** Параметры solid-цветов, от которых рассчитываются private-цвета */
+    /** Values of solid colors, from which private colors are calculated */
     palette: Record<ThemeVariant, PaletteOptions>;
-    /** Утилитарные цвета, использующиеся в компонентах (background, link, brand-text и тд) */
+    /** Utility colors that used in components (background, link, brand-text, etc.) */
     colors: Record<ThemeVariant, ColorsOptions>;
     borders: BordersOptions;
     typography: TypographyOptions;
 }
 
-// Про 550 | solid подумать... Нужно ли хранить его тут?
 const PRIVATE_COLOR_VARIABLES = [
-    1000,
-    950,
-    900,
-    850,
-    800,
-    750,
-    700,
-    650,
-    600,
-    'solid',
-    500,
-    450,
-    400,
-    350,
-    300,
-    250,
-    200,
-    150,
-    100,
+    1000, 950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100,
     50,
 ] as const;
 
@@ -62,6 +43,8 @@ export type PrivateColors = Record<PrivateColorVariable, string>;
 type PaletteToken = {
     /** Title that will using in UI */
     title: string;
+    /** Is color manually created */
+    isCustom?: boolean;
     /** Auto-generated private colors for each theme variant */
     privateColors: Record<ThemeVariant, PrivateColors | undefined>;
 };
@@ -75,5 +58,6 @@ export interface ThemeWizardState extends ThemeOptions {
 
 export type Palette = {
     title: string;
+    isCustom?: boolean;
     colors: Record<ThemeVariant, string>;
 }[];

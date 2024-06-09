@@ -7,23 +7,28 @@ import {PaletteColors} from './PaletteColors';
 import {ThemePaletteCard} from './ThemePaletteCard';
 
 export const BasicPalette = () => {
-    const {palette, addColor} = useThemeCreator();
+    const {palette, addColor, removeColor, updateColor, renameColor} = useThemeCreator();
 
     return (
         <Flex gap={8} direction="column">
             <Flex>
                 <h1>Basic Palette</h1>
             </Flex>
-            <Flex>
-                <Flex width={312} style={{marginRight: '104px'}}>
-                    <PaletteColors palette={palette} onAddColorClick={addColor} />
+            <Flex gap={9}>
+                <Flex width={380}>
+                    <PaletteColors
+                        palette={palette}
+                        onAddColorClick={addColor}
+                        onDeleteColor={removeColor}
+                        onUpdateColorTitle={renameColor}
+                    />
                 </Flex>
                 <Flex gap={4} grow={true}>
                     <Col s={6}>
-                        <ThemePaletteCard theme="light" palette={palette} />
+                        <ThemePaletteCard theme="light" palette={palette} onUpdate={updateColor} />
                     </Col>
                     <Col s={6}>
-                        <ThemePaletteCard theme="dark" palette={palette} />
+                        <ThemePaletteCard theme="dark" palette={palette} onUpdate={updateColor} />
                     </Col>
                 </Flex>
             </Flex>

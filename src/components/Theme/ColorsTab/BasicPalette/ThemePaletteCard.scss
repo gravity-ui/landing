@@ -19,4 +19,9 @@ $block: '.#{variables.$ns}theme-palette-card';
     &__title {
         color: var(--g-color-base-background);
     }
+
+    &__theme-root {
+        --g-color-base-background: transparent;
+        --g-button-border-radius: var(--g-spacing-2);
+    }
 }

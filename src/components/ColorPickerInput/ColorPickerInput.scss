@@ -15,6 +15,8 @@ $block: '.#{variables.$ns}color-picker';
         width: 100%;
         height: 0;
         opacity: 0;
-        border: 1px solid transparent;
+        padding: 0;
+        margin: 0;
+        border: 0;
     }
 }

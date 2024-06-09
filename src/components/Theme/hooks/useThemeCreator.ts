@@ -1,14 +1,20 @@
 import React from 'react';
 
 import {ThemeCreatorContext} from '../ThemeCreator';
-import {addColorToTheme, getThemePalette, removeColorFromTheme, updateColorInTheme} from '../utils';
+import {
+    addColorToTheme,
+    getThemePalette,
+    removeColorFromTheme,
+    renameColorInTheme,
+    updateColorInTheme,
+} from '../utils';
 import type {AddColorToThemeParams, UpdateColorInThemeParams} from '../utils';
 
 export const useThemeCreator = () => {
     const {state, updateState} = React.useContext(ThemeCreatorContext);
 
     const addColor = React.useCallback(
-        (params: AddColorToThemeParams) => {
+        (params?: AddColorToThemeParams) => {
             const newState = addColorToTheme(state, params);
             updateState(newState);
         },
@@ -31,12 +37,21 @@ export const useThemeCreator = () => {
         [state],
     );
 
+    const renameColor = React.useCallback(
+        (oldTitle: string, newTitle: string) => {
+            const newState = renameColorInTheme(state, oldTitle, newTitle);
+            updateState(newState);
+        },
+        [state],
+    );
+
     const palette = React.useMemo(() => getThemePalette(state), [state]);
 
     return {
         addColor,
         updateColor,
         removeColor,
+        renameColor,
         palette,
     };
 };
