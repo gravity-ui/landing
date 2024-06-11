@@ -38,7 +38,7 @@ export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palett
                         <ColorPickerInput
                             key={title}
                             value={colors[theme]}
-                            defaultValue="#000" // TODO: What should be the default value here?
+                            defaultValue={colors[theme]}
                             onChange={createChangeHandler(title)}
                         />
                     ))}
