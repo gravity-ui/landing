@@ -16,7 +16,7 @@ export interface ColorPickerInputProps {
     defaultValue: string;
     name?: string;
     value?: string;
-    onChange?: (color: string) => void;
+    onChange: (color: string) => void;
     errorMessage?: string;
 }
 
@@ -40,7 +40,7 @@ export const ColorPickerInput = ({
     const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
         (event) => {
             const newValue = event.target.value.replaceAll(' ', '');
-            onChangeExternal?.(newValue);
+            onChangeExternal(newValue);
             setInputValue(newValue);
             setValidationError(undefined);
 
@@ -64,12 +64,16 @@ export const ColorPickerInput = ({
         [onChangeExternal],
     );
 
-    const onNativeInputChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-        const newValue = e.target.value.toUpperCase();
+    const onNativeInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+        (e) => {
+            const newValue = e.target.value.toUpperCase();
 
-        setColor(newValue);
-        setInputValue(newValue);
-    }, []);
+            setColor(newValue);
+            setInputValue(newValue);
+            onChangeExternal(newValue);
+        },
+        [onChangeExternal],
+    );
 
     const onBlur = useCallback(() => {
         if (

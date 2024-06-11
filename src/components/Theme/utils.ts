@@ -155,6 +155,11 @@ export function updateColorInTheme(
         },
     };
 
+    const isNewToken = !themeState.paletteTokens[token];
+    if (isNewToken) {
+        newThemeState.tokens.push(token);
+    }
+
     return newThemeState;
 }
 
@@ -206,6 +211,8 @@ export function addColorToTheme(
         isCustom: true,
     };
 
+    newThemeState.tokens.push(token);
+
     return newThemeState;
 }
 
@@ -219,6 +226,8 @@ export function removeColorFromTheme(
     delete newThemeState.palette.dark[token];
     delete newThemeState.palette.light[token];
     delete newThemeState.paletteTokens[token];
+
+    newThemeState.tokens = newThemeState.tokens.filter((t) => t !== token);
 
     return newThemeState;
 }
@@ -240,6 +249,10 @@ export function renameColorInTheme(
         newThemeState.palette.dark[newToken] = newThemeState.palette.dark[oldToken];
         newThemeState.palette.light[newToken] = newThemeState.palette.dark[oldToken];
     }
+
+    newThemeState.tokens = newThemeState.tokens.map((token) =>
+        token === oldToken ? newToken : token,
+    );
 
     delete newThemeState.palette.dark[oldToken];
     delete newThemeState.palette.light[oldToken];
@@ -283,7 +296,7 @@ export function getThemeColorOptions({
                     token,
                     title: paletteTokens[token].title,
                     privateColors: Object.entries(
-                        paletteTokens[token].privateColors[themeVariant],
+                        paletteTokens[token].privateColors[themeVariant]!,
                     ).map(([privateColorCode, value]) => ({
                         token: createPrivateColorToken(token, privateColorCode),
                         title: createPrivateColorTitle(token, privateColorCode),
@@ -298,9 +311,7 @@ export function getThemeColorOptions({
 }
 
 export function getThemePalette(theme: ThemeWizardState): Palette {
-    const colorTokens = Object.keys(theme.paletteTokens);
-
-    return colorTokens.map((token) => {
+    return theme.tokens.map((token) => {
         return {
             title: theme.paletteTokens[token]?.title || '',
             colors: {
@@ -313,8 +324,11 @@ export function getThemePalette(theme: ThemeWizardState): Palette {
 }
 
 export function initThemeWizard(theme: ThemeOptions): ThemeWizardState {
+    const paletteTokens = createPalleteTokens(theme.palette);
+
     return {
         ...theme,
-        paletteTokens: createPalleteTokens(theme.palette),
+        paletteTokens,
+        tokens: Object.keys(paletteTokens),
     };
 }
