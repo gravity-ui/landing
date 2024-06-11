@@ -6,16 +6,19 @@ export type PaletteOptions = {
 };
 
 export type ColorsOptions = {
-    background: string;
-    hoveredBrand: string;
-    brandText: string;
-    hcBrandText: string;
-    brandLine: string;
-    selectionBackground: string;
-    hoveredSelectionBackground: string;
-    link: string;
-    hoveredLink: string;
-    visitedLink: string;
+    'base-background': string;
+    'base-brand': string;
+    'base-brand-hover': string;
+    'base-selection': string;
+    'base-selection-hover': string;
+    'line-brand': string;
+    'text-brand': string;
+    'text-brand-heavy': string;
+    'text-brand-contrast': string;
+    'text-link': string;
+    'text-link-hover': string;
+    'text-link-visited': string;
+    'text-link-visited-hover': string;
 };
 
 export type BordersOptions = {};
@@ -36,7 +39,7 @@ const PRIVATE_COLOR_VARIABLES = [
     50,
 ] as const;
 
-type PrivateColorVariable = (typeof PRIVATE_COLOR_VARIABLES)[number];
+type PrivateColorVariable = typeof PRIVATE_COLOR_VARIABLES[number];
 
 export type PrivateColors = Record<PrivateColorVariable, string>;
 
@@ -49,11 +52,13 @@ type PaletteToken = {
     privateColors: Record<ThemeVariant, PrivateColors | undefined>;
 };
 
-export type PaletteTokens = Record<string, PaletteToken | undefined>;
+export type PaletteTokens = Record<string, PaletteToken>;
 
 export interface ThemeWizardState extends ThemeOptions {
     /** Mapping color tokens to their information (title and private colors) */
     paletteTokens: PaletteTokens;
+    /** All available palette tokens in theme */
+    tokens: string[];
 }
 
 export type Palette = {
