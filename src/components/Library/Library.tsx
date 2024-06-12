@@ -12,8 +12,9 @@ import linkIcon from '../../assets/icons/link.svg';
 import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
+import {ContributorList} from '../../components/ContributorList';
 import {Link} from '../../components/Link';
-import {Lib, block, getLocaleLink} from '../../utils';
+import {Lib, block, getLocaleLink, getMaintainers} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -89,10 +90,12 @@ export const Library: React.FC<Props> = ({lib}) => {
     ];
 
     const [activeTab, setActiveTab] = React.useState(contentTabs[0].id);
-
     const [isVisibleInfoListMobile, setIsVisibleInfoListMobile] = React.useState(false);
+    const [isVisibleMaintainersMobile, setIsVisibleMaintainersMobile] = React.useState(false);
+    const [isVisibleContributorsMobile, setIsVisibleContributorsMobile] = React.useState(false);
 
     const isPrimary = lib.config.primary;
+    const maintainers = React.useMemo(() => getMaintainers(lib), []);
 
     return (
         <div className={b()}>
@@ -264,6 +267,77 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             </div>
                                         );
                                     })}
+                                </div>
+                            </div>
+                        </div>
+
+                        {Boolean(maintainers.length) && (
+                            <div className={b('block', {about: true})}>
+                                <div className={b('info')}>
+                                    <div
+                                        className={b('info-title')}
+                                        tabIndex={0}
+                                        role="button"
+                                        onClick={() => {
+                                            setIsVisibleMaintainersMobile(
+                                                !isVisibleMaintainersMobile,
+                                            );
+                                        }}
+                                    >
+                                        <div className={b('info-title-text')}>
+                                            {t('library:maintainers')}
+                                        </div>
+                                        <div
+                                            className={b('info-title-icon', {
+                                                'mobile-visible': isVisibleMaintainersMobile,
+                                            })}
+                                        >
+                                            <Icon data={arrowIcon} width={10} height={6} />
+                                        </div>
+                                    </div>
+                                    <div
+                                        className={b('contributors-content', {
+                                            'mobile-visible': isVisibleMaintainersMobile,
+                                        })}
+                                    >
+                                        <ContributorList lib={lib} contributors={maintainers} />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        <div className={b('block', {about: true})}>
+                            <div className={b('info')}>
+                                <div
+                                    className={b('info-title')}
+                                    tabIndex={0}
+                                    role="button"
+                                    onClick={() => {
+                                        setIsVisibleContributorsMobile(
+                                            !isVisibleContributorsMobile,
+                                        );
+                                    }}
+                                >
+                                    <div className={b('info-title-text')}>
+                                        {t('library:contributors')}
+                                    </div>
+                                    <div
+                                        className={b('info-title-icon', {
+                                            'mobile-visible': isVisibleContributorsMobile,
+                                        })}
+                                    >
+                                        <Icon data={arrowIcon} width={10} height={6} />
+                                    </div>
+                                </div>
+                                <div
+                                    className={b('contributors-content', {
+                                        'mobile-visible': isVisibleContributorsMobile,
+                                    })}
+                                >
+                                    <ContributorList
+                                        lib={lib}
+                                        contributors={lib.data.contributors}
+                                    />
                                 </div>
                             </div>
                         </div>

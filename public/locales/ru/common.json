@@ -11,5 +11,7 @@
     "roadmap_inProgress": "В работе",
     "navigation_previous": "Назад",
     "navigation_next": "Далее",
-    "emptySearchPlaceholder": "Ничего не найдено"
+    "emptySearchPlaceholder": "Ничего не найдено",
+    "show_more": "Показать больше",
+    "show_less": "Показать меньше"
 }

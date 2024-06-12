@@ -1,0 +1,26 @@
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+@use '../../mixins.scss' as baseMixins;
+
+$block: '.#{variables.$ns}base-contributor-list';
+
+#{$block} {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 11px;
+    grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+
+    &__link {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__avatar {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}

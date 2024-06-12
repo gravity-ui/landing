@@ -11,5 +11,7 @@
     "roadmap_inProgress": "In progress",
     "navigation_previous": "Previous",
     "navigation_next": "Next",
-    "emptySearchPlaceholder": "Nothing found"
+    "emptySearchPlaceholder": "Nothing found",
+    "show_more": "Show more",
+    "show_less": "Show less"
 }

@@ -8,8 +8,9 @@ import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
 import {EnvironmentContext} from '../../contexts';
-import {block, getRouteFromReadmeUrl} from '../../utils';
+import {Contributor, block, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
+import {HeaderMaintainerList} from '../HeaderMaintainerList';
 import {Section} from '../NavigationLayout/types';
 import {SandboxBlock} from '../SandboxBlock';
 
@@ -38,6 +39,7 @@ export type ComponentProps = {
     component: ComponentType;
     readmeContent: string;
     sections: Section[];
+    maintainers: Contributor[];
 };
 
 export const Component: React.FC<ComponentProps> = ({
@@ -45,6 +47,7 @@ export const Component: React.FC<ComponentProps> = ({
     component,
     readmeContent,
     sections,
+    maintainers,
 }) => {
     const {t} = useTranslation();
 
@@ -136,8 +139,11 @@ export const Component: React.FC<ComponentProps> = ({
         <div className={b()}>
             <div className={b('header')}>
                 <h1 className={b('title')}>{component.title}</h1>
-                {component.githubUrl || component.figmaUrl ? (
+                {maintainers.length > 0 || component.githubUrl || component.figmaUrl ? (
                     <div className={b('buttons')}>
+                        {maintainers.length > 0 && (
+                            <HeaderMaintainerList maintainers={maintainers} />
+                        )}
                         {component.githubUrl ? (
                             <Button
                                 key="github"

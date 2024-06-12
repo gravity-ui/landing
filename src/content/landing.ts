@@ -18,6 +18,7 @@ import {CustomBlock} from '../blocks/constants';
 import {CustomBlockModel} from '../blocks/types';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 import {libs} from '../libs.mjs';
+import {getAllContributors} from '../utils';
 
 import {getRoadmapTasks} from './roadmap';
 
@@ -218,6 +219,15 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     },
                 },
             ],
+        },
+        {
+            type: CustomBlock.Contributors,
+            title: t('home:contributors_title'),
+            link: {
+                title: t('home:contributors_actions_telegram'),
+                href: 'https://t.me/gravity_ui',
+            },
+            contributors: getAllContributors(),
         },
         {
             type: BlockType.CompaniesBlock,
