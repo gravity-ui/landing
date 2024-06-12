@@ -1,17 +1,17 @@
-import {Col, Grid, Row} from '@gravity-ui/page-constructor';
+import {Grid} from '@gravity-ui/page-constructor';
+import {Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {BasicPalette} from './BasicPalette/BasicPalette';
+import {MainSettings} from './MainSettings/MainSettings';
 
 export const ColorsTab = () => {
     return (
         <Grid>
-            <Row>
-                <Col sizes={12}>
-                    <h1>Colors</h1>
-                </Col>
-            </Row>
-            <BasicPalette />
+            <Flex direction="column" gap={10}>
+                <MainSettings />
+                <BasicPalette />
+            </Flex>
         </Grid>
     );
 };

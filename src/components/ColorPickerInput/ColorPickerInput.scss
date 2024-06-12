@@ -3,6 +3,8 @@
 $block: '.#{variables.$ns}color-picker';
 
 #{$block} {
+    --g-border-radius-xl: 8px;
+
     &__preview {
         width: 16px;
         height: 16px;
