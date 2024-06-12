@@ -34,14 +34,7 @@ export interface ThemeOptions {
     typography: TypographyOptions;
 }
 
-const PRIVATE_COLOR_VARIABLES = [
-    1000, 950, 900, 850, 800, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300, 250, 200, 150, 100,
-    50,
-] as const;
-
-type PrivateColorVariable = typeof PRIVATE_COLOR_VARIABLES[number];
-
-export type PrivateColors = Record<PrivateColorVariable, string>;
+export type PrivateColors = Record<string, string>;
 
 type PaletteToken = {
     /** Title that will using in UI */

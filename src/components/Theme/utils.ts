@@ -7,6 +7,7 @@ import {
     DEFAULT_PALETTE_TOKENS,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
+import {generatePrivateColors} from './privateColors';
 import type {
     Palette,
     PaletteTokens,
@@ -52,32 +53,34 @@ function createNewColorTitle(currentPaletteTokens: PaletteTokens) {
     }
 }
 
-function createPrivateColors(solidColor: string): PrivateColors {
-    return {
-        50: '',
-        100: '',
-        150: '',
-        200: '',
-        250: '',
-        300: '',
-        350: '',
-        400: '',
-        450: '',
-        500: '',
-        550: solidColor,
-        600: '',
-        650: '',
-        700: '',
-        750: '',
-        800: '',
-        850: '',
-        900: '',
-        950: '',
-        1000: '',
-    };
+function createPrivateColors({
+    themeVariant,
+    colorToken,
+    colorValue,
+    theme,
+}: {
+    colorToken: string;
+    colorValue: string;
+    themeVariant: ThemeVariant;
+    theme: ThemeOptions;
+}): PrivateColors {
+    return generatePrivateColors({
+        theme: themeVariant,
+        colorToken,
+        colorValue,
+        lightBg:
+            themeVariant === 'light'
+                ? theme.colors.light['base-background']
+                : theme.colors.dark['base-background'],
+        darkBg:
+            themeVariant === 'dark'
+                ? theme.colors.dark['base-background']
+                : theme.colors.light['base-background'],
+    });
 }
 
-function createPalleteTokens(palette: ThemeOptions['palette']): PaletteTokens {
+function createPalleteTokens(theme: ThemeOptions): PaletteTokens {
+    const {palette} = theme;
     const tokens = Object.keys(palette.light);
 
     return tokens.reduce<PaletteTokens>(
@@ -87,10 +90,20 @@ function createPalleteTokens(palette: ThemeOptions['palette']): PaletteTokens {
                 title: createTitleFromToken(token),
                 privateColors: {
                     light: palette.light[token]
-                        ? createPrivateColors(palette.light[token])
+                        ? createPrivateColors({
+                              colorToken: token,
+                              colorValue: palette.light[token],
+                              theme,
+                              themeVariant: 'light',
+                          })
                         : undefined,
                     dark: palette.dark[token]
-                        ? createPrivateColors(palette.dark[token])
+                        ? createPrivateColors({
+                              colorToken: token,
+                              colorValue: palette.dark[token],
+                              theme,
+                              themeVariant: 'dark',
+                          })
                         : undefined,
                 },
             },
@@ -138,7 +151,12 @@ export function updateColorInTheme(
         newThemeState.palette.dark[token] = params.value;
     }
 
-    const privateColors = createPrivateColors(params.value);
+    const privateColors = createPrivateColors({
+        colorToken: token,
+        colorValue: params.value,
+        theme: newThemeState,
+        themeVariant: params.theme,
+    });
 
     newThemeState.paletteTokens[token] = {
         ...newThemeState.paletteTokens[token],
@@ -205,8 +223,22 @@ export function addColorToTheme(
         ...newThemeState.paletteTokens[token],
         title,
         privateColors: {
-            light: params?.colors?.light ? createPrivateColors(params.colors.light) : undefined,
-            dark: params?.colors?.dark ? createPrivateColors(params.colors.dark) : undefined,
+            light: params?.colors?.light
+                ? createPrivateColors({
+                      colorToken: token,
+                      colorValue: params.colors.light,
+                      theme: newThemeState,
+                      themeVariant: 'light',
+                  })
+                : undefined,
+            dark: params?.colors?.dark
+                ? createPrivateColors({
+                      colorToken: token,
+                      colorValue: params.colors.dark,
+                      theme: newThemeState,
+                      themeVariant: 'dark',
+                  })
+                : undefined,
         },
         isCustom: true,
     };
@@ -324,7 +356,7 @@ export function getThemePalette(theme: ThemeWizardState): Palette {
 }
 
 export function initThemeWizard(theme: ThemeOptions): ThemeWizardState {
-    const paletteTokens = createPalleteTokens(theme.palette);
+    const paletteTokens = createPalleteTokens(theme);
 
     return {
         ...theme,
