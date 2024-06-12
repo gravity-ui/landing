@@ -18,6 +18,7 @@ export interface ColorPickerInputProps {
     value?: string;
     onChange: (color: string) => void;
     errorMessage?: string;
+    size?: TextInputProps['size'];
 }
 
 export const ColorPickerInput = ({
@@ -26,6 +27,7 @@ export const ColorPickerInput = ({
     onChange: onChangeExternal,
     defaultValue,
     errorMessage,
+    size = 'l',
 }: ColorPickerInputProps) => {
     const {t} = useTranslation('component');
 
@@ -95,7 +97,7 @@ export const ColorPickerInput = ({
                 errorMessage={errorMessage || t('color-input_validation-format-error')}
                 validationState={validationError}
                 view="normal"
-                size="l"
+                size={size}
                 onChange={onChange}
                 startContent={<ColorPreview color={color} />}
                 endContent={
