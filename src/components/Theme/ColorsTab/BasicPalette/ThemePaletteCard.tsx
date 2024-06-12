@@ -25,7 +25,7 @@ export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palett
     );
 
     return (
-        <ThemeProvider theme={theme} rootClassName={b('theme-root', 'sandbox')}>
+        <ThemeProvider theme={theme} rootClassName={b('theme-root', 'sandbox')} scoped>
             <Flex className={b({[theme]: true})} gap={6} direction="column">
                 <Flex gap={4} space={6}>
                     <Icon data={theme === 'dark' ? Moon : Sun} size={24} />

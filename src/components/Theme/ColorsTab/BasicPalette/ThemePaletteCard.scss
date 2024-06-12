@@ -4,7 +4,7 @@ $block: '.#{variables.$ns}theme-palette-card';
 
 #{$block} {
     padding: 30px var(--g-spacing-8);
-    border-radius: var(--g-spacing-4);
+    border-radius: 16px;
     border: 1px solid var(--g-color-line-generic);
 
     &_light {
@@ -22,6 +22,6 @@ $block: '.#{variables.$ns}theme-palette-card';
 
     &__theme-root {
         --g-color-base-background: transparent;
-        --g-button-border-radius: var(--g-spacing-2);
+        --g-button-border-radius: 8px;
     }
 }
