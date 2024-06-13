@@ -9,6 +9,7 @@ import {
 } from './constants';
 import {generatePrivateColors} from './privateColors';
 import type {
+    ColorsOptions,
     Palette,
     PaletteTokens,
     PrivateColors,
@@ -27,6 +28,19 @@ function createTitleFromToken(token: string) {
 
 function createPrivateColorToken(mainColorToken: string, privateColorCode: string) {
     return `private.${mainColorToken}.${privateColorCode}`;
+}
+
+export function parsePrivateColorToken(privateColorToken: string) {
+    const parts = privateColorToken.split('.');
+
+    if (parts.length !== 3 || parts[0] !== 'private') {
+        return undefined;
+    }
+
+    return {
+        mainColorToken: parts[1],
+        privateColorCode: parts[2],
+    };
 }
 
 function createPrivateColorTitle(mainColorToken: string, privateColorCode: string) {
@@ -296,10 +310,11 @@ export function renameColorInTheme(
 export type ThemeColorOption = {
     token: string;
     title: string;
+    color: string;
     privateColors: {
         token: string;
         title: string;
-        value: string;
+        color: string;
     }[];
 };
 
@@ -312,27 +327,28 @@ export type ThemeColorOption = {
  * @returns {ThemeColorOption[]} The generated theme color options.
  */
 export function getThemeColorOptions({
-    paletteTokens,
+    themeState,
     themeVariant,
 }: {
-    paletteTokens: PaletteTokens;
+    themeState: ThemeWizardState;
     themeVariant: ThemeVariant;
 }) {
-    const colorTokens = Object.keys(paletteTokens);
+    const {tokens, paletteTokens, palette} = themeState;
 
-    return colorTokens.reduce<ThemeColorOption[]>((acc, token) => {
+    return tokens.reduce<ThemeColorOption[]>((acc, token) => {
         if (paletteTokens[token]?.privateColors[themeVariant]) {
             return [
                 ...acc,
                 {
                     token,
+                    color: palette[themeVariant][token],
                     title: paletteTokens[token].title,
                     privateColors: Object.entries(
                         paletteTokens[token].privateColors[themeVariant]!,
-                    ).map(([privateColorCode, value]) => ({
+                    ).map(([privateColorCode, color]) => ({
                         token: createPrivateColorToken(token, privateColorCode),
                         title: createPrivateColorTitle(token, privateColorCode),
-                        value,
+                        color,
                     })),
                 },
             ];
@@ -340,6 +356,27 @@ export function getThemeColorOptions({
 
         return acc;
     }, []);
+}
+
+export function changeColorInTheme({
+    themeState,
+    themeVariant,
+    name,
+    value,
+}: {
+    themeState: ThemeWizardState;
+    themeVariant: ThemeVariant;
+    name: keyof ColorsOptions;
+    value: string;
+}): ThemeWizardState {
+    const newState = {...themeState};
+    newState.colors[themeVariant][name] = value;
+
+    if (name === 'base-background') {
+        newState.paletteTokens = createPalleteTokens(newState);
+    }
+
+    return newState;
 }
 
 export function getThemePalette(theme: ThemeWizardState): Palette {

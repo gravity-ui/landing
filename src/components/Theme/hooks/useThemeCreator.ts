@@ -1,8 +1,10 @@
 import React from 'react';
 
 import {ThemeCreatorContext} from '../ThemeCreator';
+import {ThemeVariant} from '../types';
 import {
     addColorToTheme,
+    getThemeColorOptions,
     getThemePalette,
     removeColorFromTheme,
     renameColorInTheme,
@@ -47,11 +49,17 @@ export const useThemeCreator = () => {
 
     const palette = React.useMemo(() => getThemePalette(state), [state]);
 
+    const getThemePrivateColorOptions = React.useCallback(
+        (themeVariant: ThemeVariant) => getThemeColorOptions({themeState: state, themeVariant}),
+        [state],
+    );
+
     return {
         addColor,
         updateColor,
         removeColor,
         renameColor,
         palette,
+        getThemePrivateColorOptions,
     };
 };

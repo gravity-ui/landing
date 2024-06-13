@@ -7,7 +7,6 @@ export type PaletteOptions = {
 
 export type ColorsOptions = {
     'base-background': string;
-    'base-brand': string;
     'base-brand-hover': string;
     'base-selection': string;
     'base-selection-hover': string;

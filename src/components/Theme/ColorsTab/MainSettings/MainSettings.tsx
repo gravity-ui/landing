@@ -6,6 +6,7 @@ import {block} from '../../../../utils';
 import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
 import {ThemePicker} from '../../../ThemePicker';
 import {useThemeColor} from '../../hooks/useThemeColor';
+import {useThemePaletteColor} from '../../hooks/useThemePaletteColor';
 import type {ThemeVariant} from '../../types';
 
 import './MainSettings.scss';
@@ -15,7 +16,7 @@ const b = block('main-settings');
 export const MainSettings = () => {
     const [theme, setTheme] = React.useState<ThemeVariant>('light');
     const [backgroundColor, setBackgroundColor] = useThemeColor({name: 'base-background', theme});
-    const [brandColor, setBrandColor] = useThemeColor({name: 'base-brand', theme});
+    const [brandColor, setBrandColor] = useThemePaletteColor({token: 'brand', theme});
 
     return (
         <Flex gap={8} direction="column" className={b()}>
