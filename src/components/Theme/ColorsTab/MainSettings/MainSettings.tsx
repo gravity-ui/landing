@@ -1,5 +1,6 @@
 import {FormRow} from '@gravity-ui/components';
-import {Flex, Text} from '@gravity-ui/uikit';
+import {Sliders} from '@gravity-ui/icons';
+import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -13,7 +14,15 @@ import './MainSettings.scss';
 
 const b = block('main-settings');
 
-export const MainSettings = () => {
+interface MainSettingsProps {
+    advancedModeEnabled: boolean;
+    toggleAdvancedMode: () => void;
+}
+
+export const MainSettings: React.FC<MainSettingsProps> = ({
+    advancedModeEnabled,
+    toggleAdvancedMode,
+}) => {
     const [theme, setTheme] = React.useState<ThemeVariant>('light');
     const [backgroundColor, setBackgroundColor] = useThemeColor({name: 'base-background', theme});
     const [brandColor, setBrandColor] = useThemePaletteColor({token: 'brand', theme});
@@ -47,6 +56,15 @@ export const MainSettings = () => {
                             size="xl"
                         />
                     </FormRow>
+                    <Button
+                        className={b('switch-button')}
+                        onClick={toggleAdvancedMode}
+                        view="outlined-action"
+                        size="xl"
+                    >
+                        <Icon data={Sliders} size={20} />
+                        {advancedModeEnabled ? 'Hide Advanced Settings' : 'Advanced Settings'}
+                    </Button>
                 </Flex>
             </Flex>
         </Flex>
