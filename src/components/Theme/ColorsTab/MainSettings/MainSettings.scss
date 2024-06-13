@@ -3,6 +3,9 @@
 $block: '.#{variables.$ns}main-settings';
 
 #{$block} {
+    --g-button-border-radius: var(--g-spacing-2);
+    --g-text-input-border-radius: var(--g-spacing-2);
+
     &__row {
         --gc-form-row-label-width: 400px;
         --gc-form-row-field-height: 44px;
@@ -11,5 +14,9 @@ $block: '.#{variables.$ns}main-settings';
         .gc-form-row__right {
             width: 400px;
         }
+    }
+
+    &__switch-button {
+        width: min-content;
     }
 }
