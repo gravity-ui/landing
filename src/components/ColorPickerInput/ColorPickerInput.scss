@@ -6,11 +6,8 @@ $block: '.#{variables.$ns}color-picker';
     --g-border-radius-xl: 8px;
 
     &__preview {
-        width: 16px;
-        height: 16px;
         margin-inline-start: var(--g-spacing-2);
         margin-inline-end: var(--g-spacing-1);
-        border-radius: var(--g-border-radius-xs);
     }
 
     &__input {

@@ -6,8 +6,21 @@ import {useThemeCreator} from '../../hooks/useThemeCreator';
 import {PaletteColors} from './PaletteColors';
 import {ThemePaletteCard} from './ThemePaletteCard';
 
+const hiddenColors = new Set(['white', 'black', 'brand']);
+
 export const BasicPalette = () => {
-    const {palette, addColor, removeColor, updateColor, renameColor} = useThemeCreator();
+    const {
+        palette: origPalette,
+        addColor,
+        removeColor,
+        updateColor,
+        renameColor,
+    } = useThemeCreator();
+
+    const palette = React.useMemo(
+        () => origPalette.filter(({title}) => !hiddenColors.has(title.toLowerCase())),
+        [origPalette],
+    );
 
     return (
         <Flex gap={8} direction="column">

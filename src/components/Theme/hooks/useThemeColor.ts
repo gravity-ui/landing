@@ -2,6 +2,7 @@ import React from 'react';
 
 import {ThemeCreatorContext} from '../ThemeCreator';
 import type {ColorsOptions, ThemeVariant} from '../types';
+import {changeColorInTheme} from '../utils';
 
 type UseThemeColorParams = {
     name: keyof ColorsOptions;
@@ -11,12 +12,16 @@ type UseThemeColorParams = {
 export const useThemeColor = ({name, theme}: UseThemeColorParams) => {
     const {state, updateState} = React.useContext(ThemeCreatorContext);
 
-    const value = React.useMemo(() => state.colors[theme][name], [name, theme]);
+    const value = React.useMemo(() => state.colors[theme][name], [state, name, theme]);
 
     const updateValue = React.useCallback(
         (newValue: string) => {
-            const newState = {...state};
-            newState.colors[theme][name] = newValue;
+            const newState = changeColorInTheme({
+                themeState: state,
+                themeVariant: theme,
+                name,
+                value: newValue,
+            });
             updateState(newState);
         },
         [name, theme, state],
