@@ -4,9 +4,9 @@ import {useTranslation} from 'next-i18next';
 import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
 
 import {block} from '../../utils';
+import {ColorPreview} from '../ColorPreview/ColorPreview';
 
 import './ColorPickerInput.scss';
-import {ColorPreview} from './ColorPreview';
 import {NativeColorPicker} from './NativeColorPicker';
 import {hexRegexp, parseRgbStringToHex, rgbRegexp, rgbaRegexp} from './utils';
 
@@ -99,7 +99,7 @@ export const ColorPickerInput = ({
                 view="normal"
                 size={size}
                 onChange={onChange}
-                startContent={<ColorPreview color={color} />}
+                startContent={<ColorPreview className={b('preview')} color={color} />}
                 endContent={
                     <Button
                         view="flat-action"
