@@ -2,5 +2,9 @@
     "actions_openInFigma": "Открыть в Figma",
     "title": "Компоненты",
     "searchPlaceholder": "Поиск по названию",
-    "color-input_validation-format-error": "Неверный формат"
+    "color-input_validation-format-error": "Неверный формат",
+    "maintainers": "Maintainers:",
+    "theme": "Тема",
+    "rtl": "RTL",
+    "rtlNotSupported": "RTL не поддерживается"
 }

@@ -3,5 +3,8 @@
     "title": "Components",
     "searchPlaceholder": "Search by component name",
     "color-input_validation-format-error": "Incorrect format",
-    "maintainers": "Maintainers:"
+    "maintainers": "Maintainers:",
+    "theme": "Theme",
+    "rtl": "RTL",
+    "rtlNotSupported": "RTL not supported"
 }

@@ -1,4 +1,9 @@
-import {ChevronsCollapseUpRight, ChevronsExpandUpRight, TextAlignRight} from '@gravity-ui/icons';
+import {
+    ChevronsCollapseUpRight,
+    ChevronsExpandUpRight,
+    TextAlignLeft,
+    TextAlignRight,
+} from '@gravity-ui/icons';
 import {
     Col,
     Direction,
@@ -13,6 +18,7 @@ import {
     Theme,
     Tooltip,
 } from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import themeIcon from '../../assets/icons/theme.svg';
@@ -29,6 +35,8 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
     sandboxConfig,
     isSupportRTL,
 }) => {
+    const {t} = useTranslation('component');
+
     const [props, setProps] = React.useState({});
 
     const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
@@ -178,6 +186,8 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
         }
     }, [isIframeLoaded, props, iframeTheme, iframeDirection]);
 
+    const rtlIcon = iframeDirection === 'ltr' ? TextAlignLeft : TextAlignRight;
+
     return (
         <div className={b({'full-screen': isFullScreen})}>
             <Row space="0">
@@ -201,7 +211,9 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                                     setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
                                 }}
                             >
-                                <Icon data={themeIcon} size={18} />
+                                <Tooltip content={t('theme')}>
+                                    <Icon data={themeIcon} size={18} />
+                                </Tooltip>
                             </div>
                             <div
                                 tabIndex={0}
@@ -218,11 +230,13 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                                 }}
                             >
                                 {isSupportRTL && (
-                                    <Icon className={b('icon')} data={TextAlignRight} size={18} />
+                                    <Tooltip content={t('rtl')}>
+                                        <Icon className={b('icon')} data={rtlIcon} size={18} />
+                                    </Tooltip>
                                 )}
                                 {!isSupportRTL && (
-                                    <Tooltip content={'RTL not supported'}>
-                                        <Icon data={TextAlignRight} size={18} />
+                                    <Tooltip content={t('rtlNotSupported')}>
+                                        <Icon data={rtlIcon} size={18} />
                                     </Tooltip>
                                 )}
                             </div>
