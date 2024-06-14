@@ -6,7 +6,7 @@ $block: '.#{variables.$ns}main-settings';
     --g-button-border-radius: var(--g-spacing-2);
     --g-text-input-border-radius: var(--g-spacing-2);
 
-    &__row {
+    & &__row {
         --gc-form-row-label-width: 400px;
         --gc-form-row-field-height: 44px;
         margin-block-end: 24px;
