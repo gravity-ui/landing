@@ -1,0 +1,6 @@
+@use '../../../variables';
+
+$block: '.#{variables.$ns}theme-section';
+
+#{$block} {
+}

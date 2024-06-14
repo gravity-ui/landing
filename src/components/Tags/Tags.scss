@@ -1,0 +1,10 @@
+@use '../../../node_modules/@gravity-ui/page-constructor/styles/variables' as pcVariables;
+@use '../../variables';
+
+$block: '.#{variables.$ns}tags';
+
+#{$block} {
+    --g-scrollbar-width: 0;
+
+    overflow-x: auto;
+}

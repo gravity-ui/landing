@@ -1,6 +1,7 @@
+import {Button, Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {block} from '../../../utils';
+import {block} from '../../utils';
 
 import './Tags.scss';
 
@@ -11,30 +12,31 @@ export type TagItem = {
     value: string;
 };
 
-type Props = {
+interface TagsProps {
     value: string;
     items: TagItem[];
     onChange: (newValue: string) => void;
-};
+    className?: string;
+}
 
-export const Tags: React.FC<Props> = ({value, items, onChange}) => {
+export const Tags = ({value, items, onChange, className}: TagsProps) => {
     return (
-        <div className={b()}>
+        <Flex wrap="wrap" gap={2} className={b(null, className)}>
             {items.map((item) => {
                 return (
-                    <div
+                    <Button
                         key={item.value}
                         tabIndex={0}
-                        role="button"
+                        view={item.value === value ? 'action' : 'outlined'}
+                        size="xl"
                         onClick={() => {
                             onChange(item.value);
                         }}
-                        className={b('tag', {active: item.value === value})}
                     >
                         {item.title}
-                    </div>
+                    </Button>
                 );
             })}
-        </div>
+        </Flex>
     );
 };
