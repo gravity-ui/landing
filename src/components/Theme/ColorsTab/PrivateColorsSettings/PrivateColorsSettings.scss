@@ -3,7 +3,7 @@
 $block: '.#{variables.$ns}private-colors-settings';
 
 #{$block} {
-    &__row {
+    & &__row {
         --gc-form-row-label-width: 400px;
         --gc-form-row-field-height: 44px;
         margin-block-end: 24px;
