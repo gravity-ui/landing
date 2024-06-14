@@ -4,6 +4,7 @@ import React from 'react';
 
 import {block} from '../../../../utils';
 import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
+import {useThemeColor} from '../../hooks/useThemeColor';
 import {Palette, ThemeVariant} from '../../types';
 
 import './ThemePaletteCard.scss';
@@ -17,6 +18,8 @@ interface ThemePaletteCardProps {
 }
 
 export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palette, onUpdate}) => {
+    const [backgroundColor] = useThemeColor({name: 'base-background', theme});
+
     const createChangeHandler = React.useCallback(
         (title: string) => (value: string) => {
             onUpdate({title, theme, value});
@@ -26,7 +29,12 @@ export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palett
 
     return (
         <ThemeProvider theme={theme} rootClassName={b('theme-root', 'sandbox')} scoped>
-            <Flex className={b({[theme]: true})} gap={6} direction="column">
+            <Flex
+                className={b({[theme]: true})}
+                gap={6}
+                direction="column"
+                style={{backgroundColor}}
+            >
                 <Flex gap={4} space={6}>
                     <Icon data={theme === 'dark' ? Moon : Sun} size={24} />
                     <Text variant="subheader-3">

@@ -12,10 +12,6 @@ $block: '.#{variables.$ns}theme-palette-card';
         color: var(--g-color-text-brand-contrast);
     }
 
-    &_dark {
-        background: #2c2c2c;
-    }
-
     &__title {
         color: var(--g-color-base-background);
     }

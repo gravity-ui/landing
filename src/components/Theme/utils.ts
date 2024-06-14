@@ -1,4 +1,5 @@
 import capitalize from 'lodash/capitalize';
+import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';
 import lowerCase from 'lodash/lowerCase';
 
@@ -30,6 +31,20 @@ function createPrivateColorToken(mainColorToken: string, privateColorCode: strin
     return `private.${mainColorToken}.${privateColorCode}`;
 }
 
+export function isPrivateColorToken(privateColorToken?: string) {
+    if (!privateColorToken) {
+        return false;
+    }
+
+    const parts = privateColorToken.split('.');
+
+    if (parts.length !== 3 || parts[0] !== 'private') {
+        return false;
+    }
+
+    return true;
+}
+
 export function parsePrivateColorToken(privateColorToken: string) {
     const parts = privateColorToken.split('.');
 
@@ -43,7 +58,7 @@ export function parsePrivateColorToken(privateColorToken: string) {
     };
 }
 
-function createPrivateColorTitle(mainColorToken: string, privateColorCode: string) {
+export function createPrivateColorTitle(mainColorToken: string, privateColorCode: string) {
     return `${THEME_COLOR_VARIABLE_PREFIX}-${mainColorToken}-${privateColorCode}`;
 }
 
@@ -392,7 +407,8 @@ export function getThemePalette(theme: ThemeWizardState): Palette {
     });
 }
 
-export function initThemeWizard(theme: ThemeOptions): ThemeWizardState {
+export function initThemeWizard(inputTheme: ThemeOptions): ThemeWizardState {
+    const theme = cloneDeep(inputTheme);
     const paletteTokens = createPalleteTokens(theme);
 
     return {

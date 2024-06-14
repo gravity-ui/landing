@@ -39,6 +39,10 @@ export const ColorPickerInput = ({
 
     const managedValue = value || inputValue;
 
+    React.useEffect(() => {
+        setColor(defaultValue);
+    }, [defaultValue]);
+
     const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
         (event) => {
             const newValue = event.target.value.replaceAll(' ', '');
