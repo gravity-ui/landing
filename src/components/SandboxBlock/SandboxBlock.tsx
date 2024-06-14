@@ -186,7 +186,9 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
         }
     }, [isIframeLoaded, props, iframeTheme, iframeDirection]);
 
-    const rtlIcon = iframeDirection === 'ltr' ? TextAlignLeft : TextAlignRight;
+    const isRtl = iframeDirection === 'rtl';
+
+    const rtlIcon = isRtl ? TextAlignRight : TextAlignLeft;
 
     return (
         <div className={b({'full-screen': isFullScreen})}>
@@ -223,14 +225,12 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                                 }
                                 onClick={() => {
                                     if (isSupportRTL) {
-                                        setIframeDirection(
-                                            iframeDirection === 'ltr' ? 'rtl' : 'ltr',
-                                        );
+                                        setIframeDirection(isRtl ? 'ltr' : 'rtl');
                                     }
                                 }}
                             >
                                 {isSupportRTL && (
-                                    <Tooltip content={t('rtl')}>
+                                    <Tooltip content={isRtl ? t('rtlOff') : t('rtlOn')}>
                                         <Icon className={b('icon')} data={rtlIcon} size={18} />
                                     </Tooltip>
                                 )}

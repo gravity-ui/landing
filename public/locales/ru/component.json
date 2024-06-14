@@ -4,7 +4,8 @@
     "searchPlaceholder": "Поиск по названию",
     "color-input_validation-format-error": "Неверный формат",
     "maintainers": "Maintainers:",
-    "theme": "Тема",
-    "rtl": "RTL",
+    "theme": "Переключить тему",
+    "rtlOn": "Включить RTL",
+    "rtlOff": "Выключить RTL",
     "rtlNotSupported": "RTL не поддерживается"
 }
