@@ -205,41 +205,44 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                 <Col s="12" l="4" m="4">
                     <div className={b('top-actions')}>
                         <div className={b('top-actions-wrapper')}>
-                            <div
-                                tabIndex={0}
-                                role="button"
-                                className={b('control-icon')}
-                                onClick={() => {
-                                    setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
-                                }}
-                            >
-                                <Tooltip content={t('theme')}>
+                            <Tooltip content={t('theme')}>
+                                <div
+                                    tabIndex={0}
+                                    role="button"
+                                    className={b('control-icon')}
+                                    onClick={() => {
+                                        setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
+                                    }}
+                                >
                                     <Icon data={themeIcon} size={18} />
-                                </Tooltip>
-                            </div>
-                            <div
-                                tabIndex={0}
-                                role="button"
-                                className={
-                                    isSupportRTL ? b('control-icon') : b('control-icon-disabled')
-                                }
-                                onClick={() => {
-                                    if (isSupportRTL) {
-                                        setIframeDirection(isRtl ? 'ltr' : 'rtl');
-                                    }
-                                }}
-                            >
-                                {isSupportRTL && (
-                                    <Tooltip content={isRtl ? t('rtlOff') : t('rtlOn')}>
+                                </div>
+                            </Tooltip>
+
+                            {isSupportRTL && (
+                                <Tooltip content={isRtl ? t('rtlOff') : t('rtlOn')}>
+                                    <div
+                                        tabIndex={0}
+                                        role="button"
+                                        className={b('control-icon')}
+                                        onClick={() => {
+                                            setIframeDirection(isRtl ? 'ltr' : 'rtl');
+                                        }}
+                                    >
                                         <Icon className={b('icon')} data={rtlIcon} size={18} />
-                                    </Tooltip>
-                                )}
-                                {!isSupportRTL && (
-                                    <Tooltip content={t('rtlNotSupported')}>
+                                    </div>
+                                </Tooltip>
+                            )}
+                            {!isSupportRTL && (
+                                <Tooltip content={t('rtlNotSupported')}>
+                                    <div
+                                        tabIndex={0}
+                                        role="button"
+                                        className={b('control-icon-disabled')}
+                                    >
                                         <Icon data={rtlIcon} size={18} />
-                                    </Tooltip>
-                                )}
-                            </div>
+                                    </div>
+                                </Tooltip>
+                            )}
                         </div>
                         <div
                             tabIndex={0}
