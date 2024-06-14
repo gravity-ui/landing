@@ -4,6 +4,7 @@ $block: '.#{variables.$ns}color-picker';
 
 #{$block} {
     --g-border-radius-xl: 8px;
+    flex-grow: 1;
 
     &__preview {
         margin-inline-start: var(--g-spacing-2);

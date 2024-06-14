@@ -6,9 +6,14 @@ $block: '.#{variables.$ns}private-colors-select';
 #{$block} {
     --g-button-border-radius: var(--g-spacing-2);
     --g-text-input-border-radius: var(--g-spacing-2);
+    --g-color-base-selection: var(--g-color-private-yellow-150);
 
     &__preview {
         margin-inline-start: var(--g-spacing-2);
         margin-inline-end: var(--g-spacing-1);
+    }
+
+    &__customize-button {
+        flex-shrink: 0;
     }
 }
