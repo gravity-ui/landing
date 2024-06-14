@@ -5,6 +5,7 @@ import React from 'react';
 import {block} from '../../../../utils';
 import {PrivateColorSelect} from '../../../PrivateColorSelect/PrivateColorSelect';
 import {ThemePicker} from '../../../ThemePicker';
+import {DEFAULT_THEME} from '../../constants';
 import {useThemeColor} from '../../hooks/useThemeColor';
 import {useThemeCreator} from '../../hooks/useThemeCreator';
 import type {ColorsOptions, ThemeVariant} from '../../types';
@@ -26,7 +27,14 @@ const PrivateColorEditor: React.FC<PrivateColorEditorProps> = ({name, theme, col
         theme,
     });
 
-    return <PrivateColorSelect groups={colorGroups} value={color} onChange={setColor} />;
+    return (
+        <PrivateColorSelect
+            groups={colorGroups}
+            defaultValue={DEFAULT_THEME.colors[theme][name]}
+            value={color}
+            onChange={setColor}
+        />
+    );
 };
 
 export type EditableColorOption = {

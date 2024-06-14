@@ -73,6 +73,8 @@ export const PrivateColorSelectPopupContent: React.FC<PrivateColorSelectPopupCon
     groups,
     onChange,
 }) => {
+    const colorsRef = React.useRef<HTMLDivElement>(null);
+
     const [currentGroupToken, setCurrentGroupToken] = React.useState<string | undefined>(() =>
         value ? parsePrivateColorToken(value)?.mainColorToken : undefined,
     );
@@ -87,6 +89,13 @@ export const PrivateColorSelectPopupContent: React.FC<PrivateColorSelectPopupCon
 
     const groupToken = currentGroupToken || groups[0].token;
 
+    React.useEffect(() => {
+        colorsRef.current?.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }, [groupToken]);
+
     const groupPrivateColors = React.useMemo(
         () => groups.find(({token}) => token === groupToken)?.privateColors || [],
         [groups, groupToken],
@@ -97,7 +106,7 @@ export const PrivateColorSelectPopupContent: React.FC<PrivateColorSelectPopupCon
             <div className={b('left')}>
                 <ColorsList colors={groups} value={groupToken} onSelect={setCurrentGroupToken} />
             </div>
-            <div className={b('right')}>
+            <div className={b('right')} ref={colorsRef}>
                 <ColorsList colors={groupPrivateColors} value={value} onSelect={onChange} />
             </div>
         </div>
