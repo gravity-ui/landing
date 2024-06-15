@@ -20,6 +20,8 @@ export type ColorsOptions = {
     'text-link-visited-hover': string;
 };
 
+export type ColorOption = keyof ColorsOptions;
+
 export type BordersOptions = {};
 
 export type TypographyOptions = {};
