@@ -5,6 +5,11 @@ $block: '.#{variables.$ns}color-picker';
 #{$block} {
     --g-border-radius-xl: 8px;
     flex-grow: 1;
+    position: relative;
+
+    &__text-input {
+        z-index: 1;
+    }
 
     &__preview {
         margin-inline-start: var(--g-spacing-2);
@@ -12,11 +17,14 @@ $block: '.#{variables.$ns}color-picker';
     }
 
     &__input {
-        width: 100%;
-        height: 0;
+        width: 35px;
         opacity: 0;
         padding: 0;
         margin: 0;
         border: 0;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 0;
     }
 }

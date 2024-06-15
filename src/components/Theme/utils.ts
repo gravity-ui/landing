@@ -5,11 +5,14 @@ import lowerCase from 'lodash/lowerCase';
 
 import {
     DEFAULT_NEW_COLOR_TITLE,
+    DEFAULT_PALETTE,
     DEFAULT_PALETTE_TOKENS,
+    DEFAULT_THEME,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
 import {generatePrivateColors} from './privateColors';
 import type {
+    ColorOption,
     ColorsOptions,
     Palette,
     PaletteTokens,
@@ -58,8 +61,22 @@ export function parsePrivateColorToken(privateColorToken: string) {
     };
 }
 
-export function createPrivateColorTitle(mainColorToken: string, privateColorCode: string) {
+function createPrivateColorCssVariable(mainColorToken: string, privateColorCode: string) {
     return `${THEME_COLOR_VARIABLE_PREFIX}-${mainColorToken}-${privateColorCode}`;
+}
+
+function createPrivateColorCssVariableFromToken(privateColorToken: string) {
+    const result = parsePrivateColorToken(privateColorToken);
+
+    if (result) {
+        return createPrivateColorCssVariable(result.mainColorToken, result.privateColorCode);
+    }
+
+    return '';
+}
+
+function createUtilityColorCssVariable(colorName: string) {
+    return `${THEME_COLOR_VARIABLE_PREFIX}-${colorName}`;
 }
 
 function isManuallyCreatedToken(token: string) {
@@ -362,7 +379,7 @@ export function getThemeColorOptions({
                         paletteTokens[token].privateColors[themeVariant]!,
                     ).map(([privateColorCode, color]) => ({
                         token: createPrivateColorToken(token, privateColorCode),
-                        title: createPrivateColorTitle(token, privateColorCode),
+                        title: createPrivateColorCssVariable(token, privateColorCode),
                         color,
                     })),
                 },
@@ -416,4 +433,66 @@ export function initThemeWizard(inputTheme: ThemeOptions): ThemeWizardState {
         paletteTokens,
         tokens: Object.keys(paletteTokens),
     };
+}
+
+type ExportType = 'scss' | 'json';
+
+export function exportTheme(themeState: ThemeWizardState, exportType: ExportType = 'scss'): string {
+    if (exportType === 'json') {
+        throw new Error('Not implemented');
+    }
+
+    const {paletteTokens} = themeState;
+
+    const prepareThemeVariables = (themeVariant: ThemeVariant) => {
+        let cssVariables = '';
+        const privateColors: Record<string, string> = {};
+
+        themeState.tokens.forEach((token) => {
+            // Dont export colors that are equals to default
+            if (DEFAULT_PALETTE[themeVariant][token] === themeState.palette[themeVariant][token]) {
+                return;
+            }
+
+            if (paletteTokens[token]?.privateColors[themeVariant]) {
+                Object.entries(paletteTokens[token].privateColors[themeVariant]).forEach(
+                    ([privateColorCode, color]) => {
+                        privateColors[createPrivateColorToken(token, privateColorCode)] = color;
+                        cssVariables += `${createPrivateColorCssVariable(
+                            token,
+                            privateColorCode,
+                        )}: ${color};\n`;
+                    },
+                );
+                cssVariables += '\n';
+            }
+        });
+
+        cssVariables += '\n';
+
+        Object.entries(themeState.colors[themeVariant]).forEach(
+            ([colorName, colorOrPrivateToken]) => {
+                // Dont export colors that are equals to default
+                if (
+                    DEFAULT_THEME.colors[themeVariant][colorName as ColorOption] ===
+                    colorOrPrivateToken
+                ) {
+                    return;
+                }
+
+                const color = isPrivateColorToken(colorOrPrivateToken)
+                    ? `var(${createPrivateColorCssVariableFromToken(colorOrPrivateToken)})`
+                    : colorOrPrivateToken;
+
+                cssVariables += `${createUtilityColorCssVariable(colorName)}: ${color};\n`;
+            },
+        );
+
+        return cssVariables;
+    };
+
+    let result = '';
+    result += '// Light\n' + prepareThemeVariables('light');
+    result += '\n// Dark\n' + prepareThemeVariables('dark');
+    return result;
 }
