@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {ThemeOptions} from '../types';
-import {initThemeWizard} from '../utils';
+import {exportTheme, initThemeWizard} from '../utils';
 
 import {ThemeCreatorContextProvider} from './ThemeCreatorContext';
 
@@ -15,6 +15,10 @@ export const ThemeCreator: React.FC<ThemeCreatorProps> = ({theme, children}) => 
     React.useEffect(() => {
         updateState(initThemeWizard(theme));
     }, [theme]);
+
+    React.useEffect(() => {
+        console.log(exportTheme(state, 'scss'));
+    }, [state]);
 
     return (
         <ThemeCreatorContextProvider

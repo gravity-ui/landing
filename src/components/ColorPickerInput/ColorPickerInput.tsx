@@ -95,6 +95,7 @@ export const ColorPickerInput = ({
     return (
         <Flex className={b()} direction="column">
             <TextInput
+                className={b('text-input')}
                 name={name}
                 value={managedValue}
                 errorPlacement="inside"

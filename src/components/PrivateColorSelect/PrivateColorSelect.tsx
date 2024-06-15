@@ -1,11 +1,11 @@
-import {ChevronDown, DiamondExclamation, PencilToLine} from '@gravity-ui/icons';
-import {ActionTooltip, Button, Flex, Icon, Popup, TextInput} from '@gravity-ui/uikit';
+import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
+import {Button, Flex, Icon, Popup, TextInput} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../utils';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ColorPreview} from '../ColorPreview/ColorPreview';
-import {createPrivateColorTitle, isPrivateColorToken, parsePrivateColorToken} from '../Theme/utils';
+import {isPrivateColorToken} from '../Theme/utils';
 
 import './PrivateColorSelect.scss';
 import {PrivateColorSelectPopupContent} from './PrivateColorSelectPopupContent';
@@ -29,26 +29,6 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
     const containerRef = React.useRef(null);
     const [showPopup, toggleShowPopup] = React.useReducer((prev) => !prev, false);
     const isCustomValue = !isPrivateColorToken(value);
-    const isValueDiffersFromDefault = defaultValue && defaultValue !== value;
-
-    const defaultValueToken = React.useMemo(() => {
-        if (!defaultValue) {
-            return '';
-        }
-
-        const result = parsePrivateColorToken(defaultValue);
-        if (result) {
-            return createPrivateColorTitle(result.mainColorToken, result.privateColorCode);
-        }
-
-        return '';
-    }, [defaultValue]);
-
-    const resetToDefault = React.useCallback(() => {
-        if (defaultValue) {
-            onChange(defaultValue);
-        }
-    }, [onChange, defaultValue]);
 
     const switchMode = React.useCallback(() => {
         if (isCustomValue) {
@@ -85,17 +65,6 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                             <Button view="flat-secondary" onClick={toggleShowPopup}>
                                 <Icon data={ChevronDown} />
                             </Button>
-                            {isValueDiffersFromDefault && (
-                                <ActionTooltip
-                                    title="The value is overriden"
-                                    description={`Effective value is \`var(${defaultValueToken});\``}
-                                    placement="bottom-end"
-                                >
-                                    <Button view="flat-danger" onClick={resetToDefault}>
-                                        <Icon data={DiamondExclamation} />
-                                    </Button>
-                                </ActionTooltip>
-                            )}
                         </Flex>
                     }
                     controlProps={{
