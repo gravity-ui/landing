@@ -48,7 +48,7 @@ type PaletteToken = {
 
 export type PaletteTokens = Record<string, PaletteToken>;
 
-export interface ThemeWizardState extends ThemeOptions {
+export interface ThemeCreatorState extends ThemeOptions {
     /** Mapping color tokens to their information (title and private colors) */
     paletteTokens: PaletteTokens;
     /** All available palette tokens in theme */

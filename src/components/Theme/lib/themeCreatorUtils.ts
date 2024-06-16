@@ -5,21 +5,18 @@ import lowerCase from 'lodash/lowerCase';
 
 import {
     DEFAULT_NEW_COLOR_TITLE,
-    DEFAULT_PALETTE,
     DEFAULT_PALETTE_TOKENS,
-    DEFAULT_THEME,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
 import {generatePrivateColors} from './privateColors';
 import type {
-    ColorOption,
     ColorsOptions,
     Palette,
     PaletteTokens,
     PrivateColors,
+    ThemeCreatorState,
     ThemeOptions,
     ThemeVariant,
-    ThemeWizardState,
 } from './types';
 
 function createColorToken(title: string) {
@@ -30,7 +27,7 @@ function createTitleFromToken(token: string) {
     return capitalize(lowerCase(token));
 }
 
-function createPrivateColorToken(mainColorToken: string, privateColorCode: string) {
+export function createPrivateColorToken(mainColorToken: string, privateColorCode: string) {
     return `private.${mainColorToken}.${privateColorCode}`;
 }
 
@@ -61,11 +58,11 @@ export function parsePrivateColorToken(privateColorToken: string) {
     };
 }
 
-function createPrivateColorCssVariable(mainColorToken: string, privateColorCode: string) {
+export function createPrivateColorCssVariable(mainColorToken: string, privateColorCode: string) {
     return `${THEME_COLOR_VARIABLE_PREFIX}-${mainColorToken}-${privateColorCode}`;
 }
 
-function createPrivateColorCssVariableFromToken(privateColorToken: string) {
+export function createPrivateColorCssVariableFromToken(privateColorToken: string) {
     const result = parsePrivateColorToken(privateColorToken);
 
     if (result) {
@@ -75,7 +72,7 @@ function createPrivateColorCssVariableFromToken(privateColorToken: string) {
     return '';
 }
 
-function createUtilityColorCssVariable(colorName: string) {
+export function createUtilityColorCssVariable(colorName: string) {
     return `${THEME_COLOR_VARIABLE_PREFIX}-${colorName}`;
 }
 
@@ -170,14 +167,14 @@ export type UpdateColorInThemeParams = {
 /**
  * Updates a color in the given theme state.
  *
- * @param {ThemeWizardState} themeState - The current state of the theme.
+ * @param {ThemeCreatorState} themeState - The current state of the theme.
  * @param {UpdateColorInThemeParams} params - The parameters for the color update.
- * @returns {ThemeWizardState} The updated theme state.
+ * @returns {ThemeCreatorState} The updated theme state.
  */
 export function updateColorInTheme(
-    themeState: ThemeWizardState,
+    themeState: ThemeCreatorState,
     params: UpdateColorInThemeParams,
-): ThemeWizardState {
+): ThemeCreatorState {
     const newThemeState = {...themeState};
     const token = createColorToken(params.title);
 
@@ -237,67 +234,83 @@ export type AddColorToThemeParams =
 /**
  * Adds a new color to the given theme state.
  *
- * @param {ThemeWizardState} themeState - The current state of the theme.
+ * @param {ThemeCreatorState} themeState - The current state of the theme.
  * @param {AddColorToThemeParams} params - The parameters of the adding color.
- * @returns {ThemeWizardState} The updated theme state with the new color added.
+ * @returns {ThemeCreatorState} The updated theme state with the new color added.
  */
 export function addColorToTheme(
-    themeState: ThemeWizardState,
+    themeState: ThemeCreatorState,
     params: AddColorToThemeParams,
-): ThemeWizardState {
+): ThemeCreatorState {
     const newThemeState = {...themeState};
     const title = params?.title ?? createNewColorTitle(themeState.paletteTokens);
     const token = createColorToken(title);
 
     if (!themeState.palette.dark[token]) {
-        newThemeState.palette.dark[token] = '';
+        newThemeState.palette.dark = {
+            ...newThemeState.palette.dark,
+            [token]: '',
+        };
     }
 
     if (!themeState.palette.light[token]) {
-        newThemeState.palette.light[token] = '';
+        newThemeState.palette.light = {
+            ...newThemeState.palette.light,
+            [token]: '',
+        };
     }
 
     if (params?.colors?.dark) {
-        newThemeState.palette.dark[token] = params.colors.dark;
+        newThemeState.palette.dark = {
+            ...newThemeState.palette.dark,
+            [token]: params.colors.dark,
+        };
     }
 
     if (params?.colors?.light) {
-        newThemeState.palette.light[token] = params.colors.light;
+        newThemeState.palette.light = {
+            ...newThemeState.palette.light,
+            [token]: params.colors.light,
+        };
     }
 
-    newThemeState.paletteTokens[token] = {
-        ...newThemeState.paletteTokens[token],
-        title,
-        privateColors: {
-            light: params?.colors?.light
-                ? createPrivateColors({
-                      colorToken: token,
-                      colorValue: params.colors.light,
-                      theme: newThemeState,
-                      themeVariant: 'light',
-                  })
-                : undefined,
-            dark: params?.colors?.dark
-                ? createPrivateColors({
-                      colorToken: token,
-                      colorValue: params.colors.dark,
-                      theme: newThemeState,
-                      themeVariant: 'dark',
-                  })
-                : undefined,
+    newThemeState.paletteTokens = {
+        ...newThemeState.paletteTokens,
+        [token]: {
+            ...newThemeState.paletteTokens[token],
+            title,
+            privateColors: {
+                light: params?.colors?.light
+                    ? createPrivateColors({
+                          colorToken: token,
+                          colorValue: params.colors.light,
+                          theme: newThemeState,
+                          themeVariant: 'light',
+                      })
+                    : undefined,
+                dark: params?.colors?.dark
+                    ? createPrivateColors({
+                          colorToken: token,
+                          colorValue: params.colors.dark,
+                          theme: newThemeState,
+                          themeVariant: 'dark',
+                      })
+                    : undefined,
+            },
+            isCustom: true,
         },
-        isCustom: true,
     };
 
-    newThemeState.tokens.push(token);
+    newThemeState.tokens = [...newThemeState.tokens, token];
 
     return newThemeState;
 }
 
 export function removeColorFromTheme(
-    themeState: ThemeWizardState,
+    themeState: ThemeCreatorState,
     colorTitle: string,
-): ThemeWizardState {
+): ThemeCreatorState {
+    console.log('call remove color', colorTitle);
     const newThemeState = {...themeState};
     const token = createColorToken(colorTitle);
 
@@ -310,11 +323,15 @@ export function removeColorFromTheme(
     return newThemeState;
 }
 
+export type RenameColorInThemeParams = {
+    oldTitle: string;
+    newTitle: string;
+};
+
 export function renameColorInTheme(
-    themeState: ThemeWizardState,
-    oldTitle: string,
-    newTitle: string,
-): ThemeWizardState {
+    themeState: ThemeCreatorState,
+    {oldTitle, newTitle}: RenameColorInThemeParams,
+): ThemeCreatorState {
     const newThemeState = {...themeState};
     const oldToken = createColorToken(oldTitle);
     const newToken = createColorToken(newTitle);
@@ -362,7 +379,7 @@ export function getThemeColorOptions({
     themeState,
     themeVariant,
 }: {
-    themeState: ThemeWizardState;
+    themeState: ThemeCreatorState;
     themeVariant: ThemeVariant;
 }) {
     const {tokens, paletteTokens, palette} = themeState;
@@ -390,17 +407,16 @@ export function getThemeColorOptions({
     }, []);
 }
 
-export function changeColorInTheme({
-    themeState,
-    themeVariant,
-    name,
-    value,
-}: {
-    themeState: ThemeWizardState;
+export type ChangeUtilityColorInThemeParams = {
     themeVariant: ThemeVariant;
     name: keyof ColorsOptions;
     value: string;
-}): ThemeWizardState {
+};
+
+export function changeUtilityColorInTheme(
+    themeState: ThemeCreatorState,
+    {themeVariant, name, value}: ChangeUtilityColorInThemeParams,
+): ThemeCreatorState {
     const newState = {...themeState};
     newState.colors[themeVariant][name] = value;
 
@@ -411,7 +427,7 @@ export function changeColorInTheme({
     return newState;
 }
 
-export function getThemePalette(theme: ThemeWizardState): Palette {
+export function getThemePalette(theme: ThemeCreatorState): Palette {
     return theme.tokens.map((token) => {
         return {
             title: theme.paletteTokens[token]?.title || '',
@@ -424,7 +440,7 @@ export function getThemePalette(theme: ThemeWizardState): Palette {
     });
 }
 
-export function initThemeWizard(inputTheme: ThemeOptions): ThemeWizardState {
+export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
     const theme = cloneDeep(inputTheme);
     const paletteTokens = createPalleteTokens(theme);
 
@@ -433,66 +449,4 @@ export function initThemeWizard(inputTheme: ThemeOptions): ThemeWizardState {
         paletteTokens,
         tokens: Object.keys(paletteTokens),
     };
-}
-
-type ExportType = 'scss' | 'json';
-
-export function exportTheme(themeState: ThemeWizardState, exportType: ExportType = 'scss'): string {
-    if (exportType === 'json') {
-        throw new Error('Not implemented');
-    }
-
-    const {paletteTokens} = themeState;
-
-    const prepareThemeVariables = (themeVariant: ThemeVariant) => {
-        let cssVariables = '';
-        const privateColors: Record<string, string> = {};
-
-        themeState.tokens.forEach((token) => {
-            // Dont export colors that are equals to default
-            if (DEFAULT_PALETTE[themeVariant][token] === themeState.palette[themeVariant][token]) {
-                return;
-            }
-
-            if (paletteTokens[token]?.privateColors[themeVariant]) {
-                Object.entries(paletteTokens[token].privateColors[themeVariant]).forEach(
-                    ([privateColorCode, color]) => {
-                        privateColors[createPrivateColorToken(token, privateColorCode)] = color;
-                        cssVariables += `${createPrivateColorCssVariable(
-                            token,
-                            privateColorCode,
-                        )}: ${color};\n`;
-                    },
-                );
-                cssVariables += '\n';
-            }
-        });
-
-        cssVariables += '\n';
-
-        Object.entries(themeState.colors[themeVariant]).forEach(
-            ([colorName, colorOrPrivateToken]) => {
-                // Dont export colors that are equals to default
-                if (
-                    DEFAULT_THEME.colors[themeVariant][colorName as ColorOption] ===
-                    colorOrPrivateToken
-                ) {
-                    return;
-                }
-
-                const color = isPrivateColorToken(colorOrPrivateToken)
-                    ? `var(${createPrivateColorCssVariableFromToken(colorOrPrivateToken)})`
-                    : colorOrPrivateToken;
-
-                cssVariables += `${createUtilityColorCssVariable(colorName)}: ${color};\n`;
-            },
-        );
-
-        return cssVariables;
-    };
-
-    let result = '';
-    result += '// Light\n' + prepareThemeVariables('light');
-    result += '\n// Dark\n' + prepareThemeVariables('dark');
-    return result;
 }

@@ -2,13 +2,12 @@ import {Moon, Sun} from '@gravity-ui/icons';
 import {Flex, Icon, RadioButton, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {block} from '../../utils';
+import {block} from '../../../../utils';
+import type {ThemeVariant} from '../../lib/types';
 
 import './ThemePicker.scss';
 
 const b = block('theme-picker');
-
-type ThemeVariant = 'light' | 'dark';
 
 interface ThemePickerProps {
     value: ThemeVariant;

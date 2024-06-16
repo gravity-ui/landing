@@ -4,7 +4,7 @@ import debounce from 'lodash/debounce';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {Palette} from '../../types';
+import {Palette} from '../../lib/types';
 
 import './PaletteColors.scss';
 
@@ -68,7 +68,7 @@ interface PaletteColorsProps {
     palette: Palette;
     onAddColorClick: () => void;
     onDeleteColor: (title: string) => void;
-    onUpdateColorTitle: (oldTitle: string, newTitle: string) => void;
+    onUpdateColorTitle: (params: {oldTitle: string; newTitle: string}) => void;
 }
 
 export const PaletteColors: React.FC<PaletteColorsProps> = ({
