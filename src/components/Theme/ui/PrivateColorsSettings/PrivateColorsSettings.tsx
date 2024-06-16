@@ -3,13 +3,12 @@ import {Flex, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {PrivateColorSelect} from '../../../PrivateColorSelect/PrivateColorSelect';
-import {ThemePicker} from '../../../ThemePicker';
-import {DEFAULT_THEME} from '../../constants';
-import {useThemeColor} from '../../hooks/useThemeColor';
-import {useThemeCreator} from '../../hooks/useThemeCreator';
-import type {ColorsOptions, ThemeVariant} from '../../types';
-import {ThemeColorOption} from '../../utils';
+import {useThemePrivateColorOptions, useThemeUtilityColor} from '../../hooks';
+import {DEFAULT_THEME} from '../../lib/constants';
+import {ThemeColorOption} from '../../lib/themeCreatorUtils';
+import type {ColorsOptions, ThemeVariant} from '../../lib/types';
+import {PrivateColorSelect} from '../PrivateColorSelect';
+import {ThemePicker} from '../ThemePicker';
 
 import './PrivateColorsSettings.scss';
 
@@ -22,7 +21,7 @@ interface PrivateColorEditorProps {
 }
 
 const PrivateColorEditor: React.FC<PrivateColorEditorProps> = ({name, theme, colorGroups}) => {
-    const [color, setColor] = useThemeColor({
+    const [color, setColor] = useThemeUtilityColor({
         name,
         theme,
     });
@@ -49,12 +48,7 @@ interface PrivateColorsSettingsProps {
 
 export const PrivateColorsSettings: React.FC<PrivateColorsSettingsProps> = ({title, options}) => {
     const [theme, setTheme] = React.useState<ThemeVariant>('light');
-    const {getThemePrivateColorOptions} = useThemeCreator();
-
-    const colorGroups = React.useMemo(
-        () => getThemePrivateColorOptions(theme),
-        [getThemePrivateColorOptions, theme],
-    );
+    const themePrivateColorOptions = useThemePrivateColorOptions(theme);
 
     return (
         <Flex gap={8} direction="column" className={b()}>
@@ -75,7 +69,7 @@ export const PrivateColorsSettings: React.FC<PrivateColorsSettingsProps> = ({tit
                             <PrivateColorEditor
                                 name={option.name}
                                 theme={theme}
-                                colorGroups={colorGroups}
+                                colorGroups={themePrivateColorOptions}
                             />
                         </FormRow>
                     ))}

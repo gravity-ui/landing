@@ -2,12 +2,9 @@ import {Grid} from '@gravity-ui/page-constructor';
 import {Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {BasicPalette} from './BasicPalette/BasicPalette';
-import {MainSettings} from './MainSettings/MainSettings';
-import {
-    EditableColorOption,
-    PrivateColorsSettings,
-} from './PrivateColorsSettings/PrivateColorsSettings';
+import {BasicPalette} from '../BasicPalette/BasicPalette';
+import {MainSettings} from '../MainSettings/MainSettings';
+import {EditableColorOption, PrivateColorsSettings} from '../PrivateColorsSettings';
 
 const ADVANCED_COLORS_OPTIONS: EditableColorOption[] = [
     {

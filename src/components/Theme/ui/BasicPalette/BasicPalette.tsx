@@ -1,7 +1,7 @@
 import {Col, Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {useThemeCreator} from '../../hooks/useThemeCreator';
+import {useThemeCreatorMethods, useThemePalette} from '../../hooks';
 
 import {PaletteColors} from './PaletteColors';
 import {ThemePaletteCard} from './ThemePaletteCard';
@@ -9,13 +9,8 @@ import {ThemePaletteCard} from './ThemePaletteCard';
 const hiddenColors = new Set(['white', 'black', 'brand']);
 
 export const BasicPalette = () => {
-    const {
-        palette: origPalette,
-        addColor,
-        removeColor,
-        updateColor,
-        renameColor,
-    } = useThemeCreator();
+    const {addColor, removeColor, updateColor, renameColor} = useThemeCreatorMethods();
+    const origPalette = useThemePalette();
 
     const palette = React.useMemo(
         () => origPalette.filter(({title}) => !hiddenColors.has(title.toLowerCase())),

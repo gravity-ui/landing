@@ -4,8 +4,8 @@ import React from 'react';
 
 import {block} from '../../../../utils';
 import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
-import {useThemeColor} from '../../hooks/useThemeColor';
-import {Palette, ThemeVariant} from '../../types';
+import {useThemeUtilityColor} from '../../hooks';
+import {Palette, ThemeVariant} from '../../lib/types';
 
 import './ThemePaletteCard.scss';
 
@@ -18,7 +18,7 @@ interface ThemePaletteCardProps {
 }
 
 export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palette, onUpdate}) => {
-    const [backgroundColor] = useThemeColor({name: 'base-background', theme});
+    const [backgroundColor] = useThemeUtilityColor({name: 'base-background', theme});
 
     const createChangeHandler = React.useCallback(
         (title: string) => (value: string) => {

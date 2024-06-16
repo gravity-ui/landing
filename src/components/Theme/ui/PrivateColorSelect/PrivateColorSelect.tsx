@@ -2,10 +2,10 @@ import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Popup, TextInput} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {block} from '../../utils';
-import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
-import {ColorPreview} from '../ColorPreview/ColorPreview';
-import {isPrivateColorToken} from '../Theme/utils';
+import {block} from '../../../../utils';
+import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
+import {ColorPreview} from '../../../ColorPreview/ColorPreview';
+import {isPrivateColorToken} from '../../lib/themeCreatorUtils';
 
 import './PrivateColorSelect.scss';
 import {PrivateColorSelectPopupContent} from './PrivateColorSelectPopupContent';
