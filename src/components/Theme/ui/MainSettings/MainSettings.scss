@@ -3,8 +3,8 @@
 $block: '.#{variables.$ns}main-settings';
 
 #{$block} {
-    --g-button-border-radius: var(--g-spacing-2);
-    --g-text-input-border-radius: var(--g-spacing-2);
+    --g-button-border-radius: 8px;
+    --g-text-input-border-radius: 8px;
 
     & &__row {
         --gc-form-row-label-width: 400px;

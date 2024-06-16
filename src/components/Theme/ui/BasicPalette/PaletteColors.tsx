@@ -12,7 +12,7 @@ const b = block('palette-colors');
 
 interface PaletteColorEditorProps {
     paletteColorData: Palette[0];
-    onUpdateTitle: (oldTitle: string, newTitle: string) => void;
+    onUpdateTitle: (params: {oldTitle: string; newTitle: string}) => void;
     onDelete: (title: string) => void;
 }
 
@@ -32,7 +32,7 @@ const PaletteColorEditor: React.FC<PaletteColorEditorProps> = ({
     const handleDelete = React.useCallback(() => onDelete(title), [onDelete, title]);
 
     const updateTitle = React.useCallback(
-        (newTitle: string) => onUpdateTitle(title, newTitle),
+        (newTitle: string) => onUpdateTitle({oldTitle: title, newTitle}),
         [title, onUpdateTitle],
     );
 
