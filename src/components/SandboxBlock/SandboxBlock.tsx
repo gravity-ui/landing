@@ -1,4 +1,9 @@
-import {ChevronsCollapseUpRight, ChevronsExpandUpRight, TextAlignRight} from '@gravity-ui/icons';
+import {
+    ChevronsCollapseUpRight,
+    ChevronsExpandUpRight,
+    TextAlignLeft,
+    TextAlignRight,
+} from '@gravity-ui/icons';
 import {
     Col,
     Direction,
@@ -13,6 +18,7 @@ import {
     Theme,
     Tooltip,
 } from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import themeIcon from '../../assets/icons/theme.svg';
@@ -29,6 +35,8 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
     sandboxConfig,
     isSupportRTL,
 }) => {
+    const {t} = useTranslation('component');
+
     const [props, setProps] = React.useState({});
 
     const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
@@ -178,6 +186,10 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
         }
     }, [isIframeLoaded, props, iframeTheme, iframeDirection]);
 
+    const isRtl = iframeDirection === 'rtl';
+
+    const rtlIcon = isRtl ? TextAlignRight : TextAlignLeft;
+
     return (
         <div className={b({'full-screen': isFullScreen})}>
             <Row space="0">
@@ -193,39 +205,44 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                 <Col s="12" l="4" m="4">
                     <div className={b('top-actions')}>
                         <div className={b('top-actions-wrapper')}>
-                            <div
-                                tabIndex={0}
-                                role="button"
-                                className={b('control-icon')}
-                                onClick={() => {
-                                    setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
-                                }}
-                            >
-                                <Icon data={themeIcon} size={18} />
-                            </div>
-                            <div
-                                tabIndex={0}
-                                role="button"
-                                className={
-                                    isSupportRTL ? b('control-icon') : b('control-icon-disabled')
-                                }
-                                onClick={() => {
-                                    if (isSupportRTL) {
-                                        setIframeDirection(
-                                            iframeDirection === 'ltr' ? 'rtl' : 'ltr',
-                                        );
-                                    }
-                                }}
-                            >
-                                {isSupportRTL && (
-                                    <Icon className={b('icon')} data={TextAlignRight} size={18} />
-                                )}
-                                {!isSupportRTL && (
-                                    <Tooltip content={'RTL not supported'}>
-                                        <Icon data={TextAlignRight} size={18} />
-                                    </Tooltip>
-                                )}
-                            </div>
+                            <Tooltip content={t('theme')}>
+                                <div
+                                    tabIndex={0}
+                                    role="button"
+                                    className={b('control-icon')}
+                                    onClick={() => {
+                                        setIframeTheme(iframeTheme === 'dark' ? 'light' : 'dark');
+                                    }}
+                                >
+                                    <Icon data={themeIcon} size={18} />
+                                </div>
+                            </Tooltip>
+
+                            {isSupportRTL && (
+                                <Tooltip content={isRtl ? t('rtlOff') : t('rtlOn')}>
+                                    <div
+                                        tabIndex={0}
+                                        role="button"
+                                        className={b('control-icon')}
+                                        onClick={() => {
+                                            setIframeDirection(isRtl ? 'ltr' : 'rtl');
+                                        }}
+                                    >
+                                        <Icon className={b('icon')} data={rtlIcon} size={18} />
+                                    </div>
+                                </Tooltip>
+                            )}
+                            {!isSupportRTL && (
+                                <Tooltip content={t('rtlNotSupported')}>
+                                    <div
+                                        tabIndex={0}
+                                        role="button"
+                                        className={b('control-icon-disabled')}
+                                    >
+                                        <Icon data={rtlIcon} size={18} />
+                                    </div>
+                                </Tooltip>
+                            )}
                         </div>
                         <div
                             tabIndex={0}

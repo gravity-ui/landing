@@ -3,18 +3,28 @@
 $block: '.#{variables.$ns}color-picker';
 
 #{$block} {
+    --g-border-radius-xl: 8px;
+    flex-grow: 1;
+    position: relative;
+
+    &__text-input {
+        z-index: 1;
+    }
+
     &__preview {
-        width: 16px;
-        height: 16px;
         margin-inline-start: var(--g-spacing-2);
         margin-inline-end: var(--g-spacing-1);
-        border-radius: var(--g-border-radius-xs);
     }
 
     &__input {
-        width: 100%;
-        height: 0;
+        width: 35px;
         opacity: 0;
-        border: 1px solid transparent;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 0;
     }
 }
