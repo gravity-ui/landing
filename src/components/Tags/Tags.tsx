@@ -7,19 +7,19 @@ import './Tags.scss';
 
 const b = block('tags');
 
-export type TagItem = {
+export type TagItem<T extends string = string> = {
     title: string;
-    value: string;
+    value: T;
 };
 
-interface TagsProps {
-    value: string;
-    items: TagItem[];
-    onChange: (newValue: string) => void;
+interface TagsProps<T extends string = string> {
+    value: T;
+    items: TagItem<T>[];
+    onChange: (newValue: T) => void;
     className?: string;
 }
 
-export const Tags = ({value, items, onChange, className}: TagsProps) => {
+export function Tags<T extends string = string>({value, items, onChange, className}: TagsProps<T>) {
     return (
         <Flex wrap="wrap" gap={2} className={b(null, className)}>
             {items.map((item) => {
@@ -39,4 +39,4 @@ export const Tags = ({value, items, onChange, className}: TagsProps) => {
             })}
         </Flex>
     );
-};
+}
