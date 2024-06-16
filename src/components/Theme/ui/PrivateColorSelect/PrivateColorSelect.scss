@@ -4,8 +4,8 @@
 $block: '.#{variables.$ns}private-colors-select';
 
 #{$block} {
-    --g-button-border-radius: var(--g-spacing-2);
-    --g-text-input-border-radius: var(--g-spacing-2);
+    --g-button-border-radius: 8px;
+    --g-text-input-border-radius: 8px;
     --g-color-base-selection: var(--g-color-private-yellow-150);
 
     &__preview {
