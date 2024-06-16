@@ -31,7 +31,7 @@ export function exportTheme(
             }
 
             if (paletteTokens[token]?.privateColors[themeVariant]) {
-                Object.entries(paletteTokens[token].privateColors[themeVariant]).forEach(
+                Object.entries(paletteTokens[token].privateColors[themeVariant]!).forEach(
                     ([privateColorCode, color]) => {
                         privateColors[createPrivateColorToken(token, privateColorCode)] = color;
                         cssVariables += `${createPrivateColorCssVariable(
