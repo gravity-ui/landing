@@ -5,10 +5,9 @@ import React from 'react';
 
 import {block} from '../../../../utils';
 import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
-import {ThemePicker} from '../../../ThemePicker';
-import {useThemeColor} from '../../hooks/useThemeColor';
-import {useThemePaletteColor} from '../../hooks/useThemePaletteColor';
-import type {ThemeVariant} from '../../types';
+import {useThemePaletteColor, useThemeUtilityColor} from '../../hooks';
+import type {ThemeVariant} from '../../lib/types';
+import {ThemePicker} from '../ThemePicker';
 
 import './MainSettings.scss';
 
@@ -24,7 +23,10 @@ export const MainSettings: React.FC<MainSettingsProps> = ({
     toggleAdvancedMode,
 }) => {
     const [theme, setTheme] = React.useState<ThemeVariant>('light');
-    const [backgroundColor, setBackgroundColor] = useThemeColor({name: 'base-background', theme});
+    const [backgroundColor, setBackgroundColor] = useThemeUtilityColor({
+        name: 'base-background',
+        theme,
+    });
     const [brandColor, setBrandColor] = useThemePaletteColor({token: 'brand', theme});
 
     return (

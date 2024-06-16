@@ -1,13 +1,13 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import React from 'react';
 
-import {ColorsTab} from './ColorsTab';
-import {ThemeCreator} from './ThemeCreator';
-import {DEFAULT_THEME} from './constants';
+import {DEFAULT_THEME} from './lib/constants';
+import {ColorsTab} from './ui/ColorsTab';
+import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 
 export const Theme = () => {
     return (
-        <ThemeCreator theme={DEFAULT_THEME}>
+        <ThemeCreatorContextProvider initialTheme={DEFAULT_THEME}>
             <Grid>
                 <Row>
                     <Col sizes={12}>
@@ -15,6 +15,6 @@ export const Theme = () => {
                     </Col>
                 </Row>
             </Grid>
-        </ThemeCreator>
+        </ThemeCreatorContextProvider>
     );
 };
