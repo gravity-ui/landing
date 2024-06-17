@@ -5,11 +5,12 @@ $block: '.#{variables.$ns}private-colors-settings';
 #{$block} {
     & &__row {
         --gc-form-row-label-width: 400px;
-        --gc-form-row-field-height: 44px;
-        margin-block-end: 24px;
+        --gc-form-row-field-height: 36px;
+        margin-block-end: 16px;
 
         .gc-form-row__right {
             width: 400px;
+            flex-grow: 0;
         }
     }
 }

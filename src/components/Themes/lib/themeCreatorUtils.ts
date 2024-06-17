@@ -59,7 +59,7 @@ export function parsePrivateColorToken(privateColorToken: string) {
 }
 
 export function createPrivateColorCssVariable(mainColorToken: string, privateColorCode: string) {
-    return `${THEME_COLOR_VARIABLE_PREFIX}-${mainColorToken}-${privateColorCode}`;
+    return `${THEME_COLOR_VARIABLE_PREFIX}-private-${mainColorToken}-${privateColorCode}`;
 }
 
 export function createPrivateColorCssVariableFromToken(privateColorToken: string) {

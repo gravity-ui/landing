@@ -9,6 +9,7 @@ import {ThemeColorOption} from '../../lib/themeCreatorUtils';
 import type {ColorsOptions, ThemeVariant} from '../../lib/types';
 import {PrivateColorSelect} from '../PrivateColorSelect';
 import {ThemePicker} from '../ThemePicker';
+import {ThemeSection} from '../ThemeSection';
 
 import './PrivateColorsSettings.scss';
 
@@ -51,30 +52,25 @@ export const PrivateColorsSettings: React.FC<PrivateColorsSettingsProps> = ({tit
     const themePrivateColorOptions = useThemePrivateColorOptions(theme);
 
     return (
-        <Flex gap={8} direction="column" className={b()}>
-            <Flex>
-                <h1>{title}</h1>
-            </Flex>
-            <Flex gap={9}>
-                <Flex direction="column">
-                    <FormRow label={<Text variant="body-3">Theme</Text>} className={b('row')}>
-                        <ThemePicker value={theme} onUpdate={setTheme} />
+        <ThemeSection className={b()} title={title}>
+            <Flex direction="column">
+                <FormRow label={<Text variant="body-3">Theme</Text>} className={b('row')}>
+                    <ThemePicker value={theme} onUpdate={setTheme} />
+                </FormRow>
+                {options.map((option) => (
+                    <FormRow
+                        key={option.name}
+                        label={<Text variant="body-2">{option.title}</Text>}
+                        className={b('row')}
+                    >
+                        <PrivateColorEditor
+                            name={option.name}
+                            theme={theme}
+                            colorGroups={themePrivateColorOptions}
+                        />
                     </FormRow>
-                    {options.map((option) => (
-                        <FormRow
-                            key={option.name}
-                            label={<Text variant="body-3">{option.title}</Text>}
-                            className={b('row')}
-                        >
-                            <PrivateColorEditor
-                                name={option.name}
-                                theme={theme}
-                                colorGroups={themePrivateColorOptions}
-                            />
-                        </FormRow>
-                    ))}
-                </Flex>
+                ))}
             </Flex>
-        </Flex>
+        </ThemeSection>
     );
 };
