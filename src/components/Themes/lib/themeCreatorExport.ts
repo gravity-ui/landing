@@ -10,15 +10,22 @@ import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
 
 type ExportType = 'scss' | 'json';
 
-export function exportTheme(
-    themeState: ThemeCreatorState,
-    exportType: ExportType = 'scss',
-): string {
+type ExportThemeParams = {
+    themeState: ThemeCreatorState;
+    exportType?: ExportType;
+    ignoreDefaultValues?: boolean;
+};
+
+export function exportTheme({
+    themeState,
+    exportType = 'scss',
+    ignoreDefaultValues = true,
+}: ExportThemeParams) {
     if (exportType === 'json') {
         throw new Error('Not implemented');
     }
 
-    const {paletteTokens} = themeState;
+    const {paletteTokens, palette} = themeState;
 
     const prepareThemeVariables = (themeVariant: ThemeVariant) => {
         let cssVariables = '';
@@ -26,7 +33,10 @@ export function exportTheme(
 
         themeState.tokens.forEach((token) => {
             // Dont export colors that are equals to default
-            if (DEFAULT_PALETTE[themeVariant][token] === themeState.palette[themeVariant][token]) {
+            if (
+                ignoreDefaultValues &&
+                DEFAULT_PALETTE[themeVariant][token] === themeState.palette[themeVariant][token]
+            ) {
                 return;
             }
 
@@ -37,7 +47,7 @@ export function exportTheme(
                         cssVariables += `${createPrivateColorCssVariable(
                             token,
                             privateColorCode,
-                        )}: ${color};\n`;
+                        )}: ${color} !important;\n`;
                     },
                 );
                 cssVariables += '\n';
@@ -46,12 +56,17 @@ export function exportTheme(
 
         cssVariables += '\n';
 
+        cssVariables += `${createUtilityColorCssVariable('base-brand')}: ${
+            palette[themeVariant].brand
+        } !important;\n`;
+
         Object.entries(themeState.colors[themeVariant]).forEach(
             ([colorName, colorOrPrivateToken]) => {
                 // Dont export colors that are equals to default
                 if (
+                    ignoreDefaultValues &&
                     DEFAULT_THEME.colors[themeVariant][colorName as ColorOption] ===
-                    colorOrPrivateToken
+                        colorOrPrivateToken
                 ) {
                     return;
                 }
@@ -60,15 +75,17 @@ export function exportTheme(
                     ? `var(${createPrivateColorCssVariableFromToken(colorOrPrivateToken)})`
                     : colorOrPrivateToken;
 
-                cssVariables += `${createUtilityColorCssVariable(colorName)}: ${color};\n`;
+                cssVariables += `${createUtilityColorCssVariable(
+                    colorName,
+                )}: ${color} !important;\n`;
             },
         );
 
         return cssVariables;
     };
 
-    let result = '';
-    result += '// Light\n' + prepareThemeVariables('light');
-    result += '\n// Dark\n' + prepareThemeVariables('dark');
-    return result;
+    return {
+        light: prepareThemeVariables('light'),
+        dark: prepareThemeVariables('dark'),
+    };
 }

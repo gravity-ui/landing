@@ -1,10 +1,17 @@
-import {Grid} from '@gravity-ui/page-constructor';
 import {Flex} from '@gravity-ui/uikit';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
+import {block} from '../../../../utils';
 import {BasicPalette} from '../BasicPalette/BasicPalette';
+import {ComponentPreview} from '../ComponentPreview/ComponentPreview';
+import {ExportThemeSection} from '../ExportThemeSection/ExportThemeSection';
 import {MainSettings} from '../MainSettings/MainSettings';
 import {EditableColorOption, PrivateColorsSettings} from '../PrivateColorsSettings';
+
+import './ColorsTab.scss';
+
+const b = block('colors-tab');
 
 const ADVANCED_COLORS_OPTIONS: EditableColorOption[] = [
     {
@@ -53,32 +60,34 @@ const ADDITIONAL_COLORS_OPTIONS: EditableColorOption[] = [
 ];
 
 export const ColorsTab = () => {
+    const {t} = useTranslation('themes');
+
     const [advancedModeEnabled, toggleAdvancedMode] = React.useReducer(
         (enabled) => !enabled,
         false,
     );
 
     return (
-        <Grid>
-            <Flex direction="column" gap={10}>
-                <MainSettings
-                    advancedModeEnabled={advancedModeEnabled}
-                    toggleAdvancedMode={toggleAdvancedMode}
-                />
-                {advancedModeEnabled && (
-                    <React.Fragment>
-                        <BasicPalette />
-                        <PrivateColorsSettings
-                            title="Advanced Brand Palette"
-                            options={ADVANCED_COLORS_OPTIONS}
-                        />
-                        <PrivateColorsSettings
-                            title="Additional Colors"
-                            options={ADDITIONAL_COLORS_OPTIONS}
-                        />
-                    </React.Fragment>
-                )}
-            </Flex>
-        </Grid>
+        <Flex direction="column" className={b()}>
+            <MainSettings
+                advancedModeEnabled={advancedModeEnabled}
+                toggleAdvancedMode={toggleAdvancedMode}
+            />
+            {advancedModeEnabled && (
+                <React.Fragment>
+                    <BasicPalette />
+                    <PrivateColorsSettings
+                        title={t('advanced_brand_palette')}
+                        options={ADVANCED_COLORS_OPTIONS}
+                    />
+                    <PrivateColorsSettings
+                        title={t('additional_colors')}
+                        options={ADDITIONAL_COLORS_OPTIONS}
+                    />
+                </React.Fragment>
+            )}
+            <ComponentPreview />
+            <ExportThemeSection />
+        </Flex>
     );
 };

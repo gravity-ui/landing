@@ -1,7 +1,9 @@
 import {Col, Flex} from '@gravity-ui/uikit';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 import {useThemeCreatorMethods, useThemePalette} from '../../hooks';
+import {ThemeSection} from '../ThemeSection';
 
 import {PaletteColors} from './PaletteColors';
 import {ThemePaletteCard} from './ThemePaletteCard';
@@ -9,6 +11,8 @@ import {ThemePaletteCard} from './ThemePaletteCard';
 const hiddenColors = new Set(['white', 'black', 'brand']);
 
 export const BasicPalette = () => {
+    const {t} = useTranslation('themes');
+
     const {addColor, removeColor, updateColor, renameColor} = useThemeCreatorMethods();
     const origPalette = useThemePalette();
 
@@ -18,10 +22,7 @@ export const BasicPalette = () => {
     );
 
     return (
-        <Flex gap={8} direction="column">
-            <Flex>
-                <h1>Basic Palette</h1>
-            </Flex>
+        <ThemeSection title={t('basic_palette')}>
             <Flex gap={9}>
                 <Flex width={380}>
                     <PaletteColors
@@ -40,6 +41,6 @@ export const BasicPalette = () => {
                     </Col>
                 </Flex>
             </Flex>
-        </Flex>
+        </ThemeSection>
     );
 };
