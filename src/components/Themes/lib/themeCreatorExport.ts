@@ -1,5 +1,7 @@
 import {DEFAULT_PALETTE, DEFAULT_THEME} from './constants';
 import {
+    createBorderRadiusClassesForCards,
+    createBorderRadiusCssVariable,
     createPrivateColorCssVariable,
     createPrivateColorCssVariableFromToken,
     createPrivateColorToken,
@@ -7,6 +9,7 @@ import {
     isPrivateColorToken,
 } from './themeCreatorUtils';
 import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
+import {RadiusPresetName} from './types';
 
 const SCSS_TEMPLATE = `
 @use '@gravity-ui/uikit/styles/themes';
@@ -100,6 +103,18 @@ export function exportTheme({
                 };\n`;
             },
         );
+
+        // Don't export radiuses that are equals to default
+        if (!ignoreDefaultValues || themeState.borders.preset !== RadiusPresetName.Regular) {
+            Object.entries(themeState.borders.values).forEach(([radiusName, radiusValue]) => {
+                if (radiusValue) {
+                    cssVariables += `${createBorderRadiusCssVariable(
+                        radiusName,
+                    )}: ${radiusValue}px ${forPreview ? ' !important' : ''};\n`;
+                }
+            });
+            cssVariables += createBorderRadiusClassesForCards(themeState.borders.values);
+        }
 
         return cssVariables.trim();
     };

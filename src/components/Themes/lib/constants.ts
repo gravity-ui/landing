@@ -1,6 +1,8 @@
-import type {ThemeOptions} from './types';
+import {RadiusPresetName, RadiusValue, type ThemeOptions} from './types';
 
 export const THEME_COLOR_VARIABLE_PREFIX = '--g-color';
+
+export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
 export const DEFAULT_NEW_COLOR_TITLE = 'New color';
 
@@ -32,6 +34,36 @@ export const DEFAULT_PALETTE: ThemeOptions['palette'] = {
 };
 
 export const DEFAULT_PALETTE_TOKENS = new Set(Object.keys(DEFAULT_PALETTE.light));
+
+export const DEFAULT_RADIUS: RadiusValue = {
+    xs: '3',
+    s: '5',
+    m: '6',
+    l: '8',
+    xl: '10',
+    xxl: '16',
+};
+
+export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
+    [RadiusPresetName.Regular]: DEFAULT_RADIUS,
+    [RadiusPresetName.Circled]: {
+        xs: '100',
+        s: '100',
+        m: '100',
+        l: '100',
+        xl: '100',
+        xxl: '100',
+    },
+    [RadiusPresetName.Squared]: {
+        xs: '0',
+        s: '0',
+        m: '0',
+        l: '0',
+        xl: '0',
+        xxl: '0',
+    },
+    [RadiusPresetName.Custom]: DEFAULT_RADIUS,
+};
 
 export const DEFAULT_THEME: ThemeOptions = {
     palette: DEFAULT_PALETTE,
@@ -65,6 +97,9 @@ export const DEFAULT_THEME: ThemeOptions = {
             'text-link-visited-hover': 'private.purple.850-solid',
         },
     },
-    borders: {},
+    borders: {
+        preset: RadiusPresetName.Regular,
+        values: RADIUS_PRESETS[RadiusPresetName.Regular],
+    },
     typography: {},
 };

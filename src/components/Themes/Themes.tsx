@@ -9,6 +9,7 @@ import {TagItem, Tags} from '../Tags/Tags';
 
 import './Themes.scss';
 import {DEFAULT_THEME} from './lib/constants';
+import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {PreviewTab} from './ui/PreviewTab/PreviewTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
@@ -26,7 +27,7 @@ enum ThemeTab {
 const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
     [ThemeTab.Colors]: ColorsTab,
     [ThemeTab.Typography]: () => <div>TODO Typography</div>,
-    [ThemeTab.BorderRadius]: () => <div>TODO borders</div>,
+    [ThemeTab.BorderRadius]: BorderRadiusTab,
     [ThemeTab.Preview]: PreviewTab,
 };
 
