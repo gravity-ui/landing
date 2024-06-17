@@ -20,7 +20,7 @@ $block: '.#{variables.$ns}themes';
     }
 
     &__header-actions {
-        margin-block-end: calc(var(--g-spacing-base) * 12);
+        margin-block-end: calc(var(--g-spacing-base) * 8);
         justify-content: space-between;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
@@ -37,15 +37,11 @@ $block: '.#{variables.$ns}themes';
         }
     }
 
-    &__tabs {
-        margin-block-end: var(--g-spacing-9);
-    }
-
     &__export-theme-btn {
         border-radius: var(--g-border-radius-m);
     }
 
     &__content {
-        margin-block-start: calc(var(--g-spacing-base) * 20);
+        padding: calc(var(--g-spacing-base) * 12) 0;
     }
 }

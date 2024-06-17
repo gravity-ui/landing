@@ -1,6 +1,7 @@
 import {Moon, Sun} from '@gravity-ui/icons';
 import {Flex, Icon, Text, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
@@ -18,6 +19,7 @@ interface ThemePaletteCardProps {
 }
 
 export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palette, onUpdate}) => {
+    const {t} = useTranslation('themes');
     const [backgroundColor] = useThemeUtilityColor({name: 'base-background', theme});
 
     const createChangeHandler = React.useCallback(
@@ -38,7 +40,7 @@ export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palett
                 <Flex gap={4} space={6}>
                     <Icon data={theme === 'dark' ? Moon : Sun} size={24} />
                     <Text variant="subheader-3">
-                        {theme === 'dark' ? 'Dark theme' : 'Light theme'}
+                        {theme === 'dark' ? t('dark_theme') : t('light_theme')}
                     </Text>
                 </Flex>
                 <Flex gap={4} direction="column">

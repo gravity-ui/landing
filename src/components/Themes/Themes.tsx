@@ -9,7 +9,7 @@ import {TagItem, Tags} from '../Tags/Tags';
 
 import './Themes.scss';
 import {DEFAULT_THEME} from './lib/constants';
-import {ColorsTab} from './ui/ColorsTab';
+import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 
 const b = block('themes');
