@@ -1,0 +1,23 @@
+{
+  "title": "Themes",
+  "tags_colors": "Colors",
+  "tags_typography": "Typography",
+  "tags_borderRadius": "Border Radius",
+  "tags_preview": "Preview",
+  "btn_export_theme": "Export theme",
+  "custom_brand_palette": "Custom Brand Palette",
+  "page_background": "Page Background",
+  "brand_color": "Brand Color",
+  "hide_advanced_settings": "Hide Advanced Settings",
+  "advanced_settings": "Advanced Settings",
+  "theme": "Theme",
+  "basic_palette": "Basic Palette",
+  "add_color": "Add color",
+  "palette_colors_description": "Support Colors for various cases and <br /> states",
+  "dark_theme": "Dark theme",
+  "light_theme": "Light theme",
+  "advanced_brand_palette": "Advanced Brand Palette",
+  "additional_colors": "Additional Colors",
+  "component_preview": "Component preview",
+  "is_everything_set": "Is everything set?"
+}

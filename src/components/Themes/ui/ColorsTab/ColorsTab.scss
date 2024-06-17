@@ -1,0 +1,7 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}colors-tab';
+
+#{$block} {
+    gap: calc(var(--g-spacing-base) * 24);
+}

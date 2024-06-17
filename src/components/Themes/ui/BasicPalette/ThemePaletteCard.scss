@@ -1,0 +1,23 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-palette-card';
+
+#{$block} {
+    padding: 30px var(--g-spacing-8);
+    border-radius: 16px;
+    border: 1px solid var(--g-color-line-generic);
+
+    &_light {
+        background: #fff;
+        color: var(--g-color-text-brand-contrast);
+    }
+
+    &__title {
+        color: var(--g-color-base-background);
+    }
+
+    &__theme-root {
+        --g-color-base-background: transparent;
+        --g-button-border-radius: 8px;
+    }
+}

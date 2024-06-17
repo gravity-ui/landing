@@ -1,0 +1,47 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}themes';
+
+#{$block} {
+    margin-block-start: calc(var(--g-spacing-base) * 16);
+
+    &__title {
+        margin-block-end: var(--g-spacing-6);
+
+        &__text {
+            @include ukitMixins.text-display-4();
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                @include ukitMixins.text-display-2();
+            }
+        }
+    }
+
+    &__header-actions {
+        margin-block-end: calc(var(--g-spacing-base) * 8);
+        justify-content: space-between;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+    }
+
+    &__export-theme-btn {
+        width: fit-content;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            width: 100%;
+        }
+    }
+
+    &__export-theme-btn {
+        border-radius: var(--g-border-radius-m);
+    }
+
+    &__content {
+        padding: calc(var(--g-spacing-base) * 12) 0;
+    }
+}

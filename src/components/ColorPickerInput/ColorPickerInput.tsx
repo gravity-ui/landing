@@ -4,9 +4,9 @@ import {useTranslation} from 'next-i18next';
 import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
 
 import {block} from '../../utils';
+import {ColorPreview} from '../ColorPreview/ColorPreview';
 
 import './ColorPickerInput.scss';
-import {ColorPreview} from './ColorPreview';
 import {NativeColorPicker} from './NativeColorPicker';
 import {hexRegexp, parseRgbStringToHex, rgbRegexp, rgbaRegexp} from './utils';
 
@@ -16,8 +16,9 @@ export interface ColorPickerInputProps {
     defaultValue: string;
     name?: string;
     value?: string;
-    onChange?: (color: string) => void;
+    onChange: (color: string) => void;
     errorMessage?: string;
+    size?: TextInputProps['size'];
 }
 
 export const ColorPickerInput = ({
@@ -26,6 +27,7 @@ export const ColorPickerInput = ({
     onChange: onChangeExternal,
     defaultValue,
     errorMessage,
+    size = 'l',
 }: ColorPickerInputProps) => {
     const {t} = useTranslation('component');
 
@@ -37,10 +39,14 @@ export const ColorPickerInput = ({
 
     const managedValue = value || inputValue;
 
+    React.useEffect(() => {
+        setColor(defaultValue);
+    }, [defaultValue]);
+
     const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
         (event) => {
             const newValue = event.target.value.replaceAll(' ', '');
-            onChangeExternal?.(newValue);
+            onChangeExternal(newValue);
             setInputValue(newValue);
             setValidationError(undefined);
 
@@ -64,12 +70,16 @@ export const ColorPickerInput = ({
         [onChangeExternal],
     );
 
-    const onNativeInputChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-        const newValue = e.target.value.toUpperCase();
+    const onNativeInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+        (e) => {
+            const newValue = e.target.value.toUpperCase();
 
-        setColor(newValue);
-        setInputValue(newValue);
-    }, []);
+            setColor(newValue);
+            setInputValue(newValue);
+            onChangeExternal(newValue);
+        },
+        [onChangeExternal],
+    );
 
     const onBlur = useCallback(() => {
         if (
@@ -85,15 +95,16 @@ export const ColorPickerInput = ({
     return (
         <Flex className={b()} direction="column">
             <TextInput
+                className={b('text-input')}
                 name={name}
                 value={managedValue}
                 errorPlacement="inside"
                 errorMessage={errorMessage || t('color-input_validation-format-error')}
                 validationState={validationError}
                 view="normal"
-                size="l"
+                size={size}
                 onChange={onChange}
-                startContent={<ColorPreview color={color} />}
+                startContent={<ColorPreview className={b('preview')} color={color} />}
                 endContent={
                     <Button
                         view="flat-action"
