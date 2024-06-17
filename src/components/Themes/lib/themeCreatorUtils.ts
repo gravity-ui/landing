@@ -6,6 +6,8 @@ import lowerCase from 'lodash/lowerCase';
 import {
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
+    RADIUS_PRESETS,
+    THEME_BORDER_RADIUS_VARIABLE_PREFIX,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
 import {generatePrivateColors} from './privateColors';
@@ -14,10 +16,12 @@ import type {
     Palette,
     PaletteTokens,
     PrivateColors,
+    RadiusValue,
     ThemeCreatorState,
     ThemeOptions,
     ThemeVariant,
 } from './types';
+import {RadiusPresetName} from './types';
 
 function createColorToken(title: string) {
     return kebabCase(title);
@@ -449,4 +453,49 @@ export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
         paletteTokens,
         tokens: Object.keys(paletteTokens),
     };
+}
+
+export type ChangeRadiusPresetInThemeParams = {
+    radiusPresetName: RadiusPresetName;
+};
+
+export function changeRadiusPresetInTheme(
+    themeState: ThemeCreatorState,
+    {radiusPresetName}: ChangeRadiusPresetInThemeParams,
+): ThemeCreatorState {
+    const newBorderValue = {
+        preset: radiusPresetName,
+        values: {...RADIUS_PRESETS[radiusPresetName]},
+    };
+
+    return {...themeState, borders: newBorderValue};
+}
+
+export type UpdateCustomRadiusPresetInThemeParams = {radiusValue: Partial<RadiusValue>};
+
+export function updateCustomRadiusPresetInTheme(
+    themeState: ThemeCreatorState,
+    {radiusValue}: UpdateCustomRadiusPresetInThemeParams,
+): ThemeCreatorState {
+    const previousRadiusValues = themeState.borders.values;
+    const newCustomPresetValues = {
+        preset: RadiusPresetName.Custom,
+        values: {...previousRadiusValues, ...radiusValue},
+    };
+
+    return {...themeState, borders: newCustomPresetValues};
+}
+
+export function createBorderRadiusCssVariable(radiusSize: string) {
+    return `${THEME_BORDER_RADIUS_VARIABLE_PREFIX}-${radiusSize}`;
+}
+
+export function createBorderRadiusClassesForCards(values: RadiusValue) {
+    const cardSizeM = values.l
+        ? `.g-card_size_m {--_--border-radius: ${values.l}px !important;}\n`
+        : '';
+    const cardSizeL = values.xxl
+        ? `.g-card_size_l {--_--border-radius: ${values.xxl}px !important;}\n`
+        : '';
+    return cardSizeM && cardSizeL ? '\n' + cardSizeM + cardSizeL : '';
 }

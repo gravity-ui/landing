@@ -5,9 +5,11 @@ import {DEFAULT_THEME} from './constants';
 import {initThemeCreator} from './themeCreatorUtils';
 import type {
     AddColorToThemeParams,
+    ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
     UpdateColorInThemeParams,
+    UpdateCustomRadiusPresetInThemeParams,
 } from './themeCreatorUtils';
 import type {ThemeCreatorState} from './types';
 
@@ -21,6 +23,8 @@ export interface ThemeCreatorMethodsContextType {
     removeColor: (title: string) => void;
     renameColor: (params: RenameColorInThemeParams) => void;
     changeUtilityColor: (params: ChangeUtilityColorInThemeParams) => void;
+    changeRadiusPreset: (params: ChangeRadiusPresetInThemeParams) => void;
+    updateCustomRadiusPreset: (params: UpdateCustomRadiusPresetInThemeParams) => void;
 }
 
 export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsContextType>({
@@ -29,4 +33,6 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     removeColor: noop,
     renameColor: noop,
     changeUtilityColor: noop,
+    changeRadiusPreset: noop,
+    updateCustomRadiusPreset: noop,
 });
