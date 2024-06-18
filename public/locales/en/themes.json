@@ -19,5 +19,13 @@
   "advanced_brand_palette": "Advanced Brand Palette",
   "additional_colors": "Additional Colors",
   "component_preview": "Component preview",
-  "is_everything_set": "Is everything set?"
+  "is_everything_set": "Is everything set?",
+  "radius": "Radius",
+  "radius_regular": "Regular",
+  "radius_circled": "Circled",
+  "radius_squared": "Squared",
+  "radius_custom": "Custom radius",
+  "choose_border_radius": "Choose border radius",
+  "label": "Label",
+  "input_placeholder": "Content"
 }

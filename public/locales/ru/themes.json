@@ -19,5 +19,13 @@
   "advanced_brand_palette": "Расширенная брендовая палитра",
   "additional_colors": "Дополнительные цвета",
   "component_preview": "Предпросмотр компонентов",
-  "is_everything_set": "Все настроили?"
+  "is_everything_set": "Все настроили?",
+  "radius": "Радиус",
+  "radius_regular": "Стандартный",
+  "radius_circled": "Круглый",
+  "radius_squared": "Без скругления",
+  "radius_custom": "Настроить скругление",
+  "choose_border_radius": "Выберите радиус скругления",
+  "label": "Ярлык",
+  "input_placeholder": "Контент"
 }
