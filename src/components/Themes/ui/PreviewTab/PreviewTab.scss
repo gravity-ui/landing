@@ -1,0 +1,37 @@
+@use '../../../../variables';
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}themes-preview-layout';
+
+#{$block} {
+    height: 800px;
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--g-color-line-generic);
+
+    &__aside-header {
+        --gn-aside-header-item-icon-color: var(--g-color-base-brand);
+
+        --gn-aside-header-item-current-background-color: var(--g-color-base-brand);
+        --gn-aside-header-item-current-icon-color: var(--g-color-base-background);
+
+        border-radius: 16px;
+
+        & .gn-aside-header__pane-container .gn-aside-header__aside {
+            border-radius: 16px;
+        }
+
+        & .gn-aside-header__pane-container,
+        & .gn-aside-header__pane-container .gn-aside-header__aside {
+            height: 100%;
+        }
+    }
+
+    &_theme_dark {
+        @include themes.g-theme-dark;
+    }
+
+    &_theme_light {
+        @include themes.g-theme-light;
+    }
+}
