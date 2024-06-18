@@ -10,6 +10,7 @@ import {TagItem, Tags} from '../Tags/Tags';
 import './Themes.scss';
 import {DEFAULT_THEME} from './lib/constants';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
+import {PreviewTab} from './ui/PreviewTab/PreviewTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 import {ThemeExportDialog} from './ui/ThemeExportDialog/ThemeExportDialog';
 
@@ -26,7 +27,7 @@ const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
     [ThemeTab.Colors]: ColorsTab,
     [ThemeTab.Typography]: () => <div>TODO Typography</div>,
     [ThemeTab.BorderRadius]: () => <div>TODO borders</div>,
-    [ThemeTab.Preview]: () => <div>TODO preview</div>,
+    [ThemeTab.Preview]: PreviewTab,
 };
 
 export const Themes = () => {
