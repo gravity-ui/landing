@@ -68,3 +68,49 @@ export const DEFAULT_THEME: ThemeOptions = {
     borders: {},
     typography: {},
 };
+
+export enum RadiusSize {
+    xs = 'border-radius-xs',
+    s = 'border-radius-s',
+    m = 'border-radius-m',
+    l = 'border-radius-l',
+    xl = 'border-radius-xl',
+    xxl = 'border-radius-xxl',
+}
+
+export const DEFAULT_RADIUS = {
+    [RadiusSize.xs]: '3px',
+    [RadiusSize.s]: '5px',
+    [RadiusSize.m]: '6px',
+    [RadiusSize.l]: '8px',
+    [RadiusSize.xl]: '10px',
+    [RadiusSize.xxl]: '16px',
+};
+
+export enum RadiusPresetName {
+    Regular = 'radius_regular',
+    Circled = 'radius_circled',
+    Squared = 'radius_squared',
+    Custom = 'radius_custom',
+}
+
+export const RADIUS_PRESETS = {
+    [RadiusPresetName.Regular]: DEFAULT_RADIUS,
+    [RadiusPresetName.Circled]: {
+        [RadiusSize.xs]: '100px',
+        [RadiusSize.s]: '100px',
+        [RadiusSize.m]: '100px',
+        [RadiusSize.l]: '100px',
+        [RadiusSize.xl]: '100px',
+        [RadiusSize.xxl]: '100px',
+    },
+    [RadiusPresetName.Squared]: {
+        [RadiusSize.xs]: '0',
+        [RadiusSize.s]: '0',
+        [RadiusSize.m]: '0',
+        [RadiusSize.l]: '0',
+        [RadiusSize.xl]: '0',
+        [RadiusSize.xxl]: '0',
+    },
+    [RadiusPresetName.Custom]: DEFAULT_RADIUS,
+};
