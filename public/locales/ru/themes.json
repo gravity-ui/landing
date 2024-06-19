@@ -19,5 +19,7 @@
   "advanced_brand_palette": "Расширенная брендовая палитра",
   "additional_colors": "Дополнительные цвета",
   "component_preview": "Предпросмотр компонентов",
-  "is_everything_set": "Все настроили?"
+  "is_everything_set": "Все настроили?",
+  "cancel": "Закрыть",
+  "export_theme_config": "Экспорт конфигурации темы"
 }

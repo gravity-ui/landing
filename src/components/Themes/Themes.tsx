@@ -2,7 +2,7 @@ import {ArrowUpFromSquare} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 
 import {block} from '../../utils';
 import {TagItem, Tags} from '../Tags/Tags';
@@ -11,6 +11,7 @@ import './Themes.scss';
 import {DEFAULT_THEME} from './lib/constants';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
+import {ThemeExportDialog} from './ui/ThemeExportDialog/ThemeExportDialog';
 
 const b = block('themes');
 
@@ -30,6 +31,11 @@ const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
 
 export const Themes = () => {
     const {t} = useTranslation('themes');
+
+    const [isExportDialogVisible, toggleExportDialog] = React.useReducer(
+        (isOpen) => !isOpen,
+        false,
+    );
 
     const tags: TagItem<ThemeTab>[] = useMemo(
         () => [
@@ -55,10 +61,6 @@ export const Themes = () => {
 
     const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.Colors);
 
-    const onExportButtonClick = useCallback(() => {
-        //TODO add logic here
-    }, []);
-
     const TabComponent = tabToComponent[activeTab];
 
     return (
@@ -81,7 +83,7 @@ export const Themes = () => {
                         className={b('export-theme-btn')}
                         view="action"
                         size="xl"
-                        onClick={onExportButtonClick}
+                        onClick={toggleExportDialog}
                     >
                         <Icon data={ArrowUpFromSquare} />
                         <Text>{t('btn_export_theme')}</Text>
@@ -92,6 +94,7 @@ export const Themes = () => {
                     <Col sizes={12}>{TabComponent ? <TabComponent /> : null}</Col>
                 </Row>
             </Grid>
+            <ThemeExportDialog isOpen={isExportDialogVisible} onClose={toggleExportDialog} />
         </ThemeCreatorContextProvider>
     );
 };
