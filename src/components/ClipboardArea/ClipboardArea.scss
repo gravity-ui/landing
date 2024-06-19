@@ -7,6 +7,14 @@ $block: '.#{variables.$ns}clipboard-area';
 #{$block} {
     display: flex;
 
+    &__popover {
+        width: 100%;
+
+        .g-popover__handler {
+            width: 100%;
+        }
+    }
+
     &__popup {
         --g-popup-background-color: #3e3235;
         --g-popup-border-color: #3e3235;

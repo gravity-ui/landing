@@ -19,5 +19,7 @@
   "advanced_brand_palette": "Advanced Brand Palette",
   "additional_colors": "Additional Colors",
   "component_preview": "Component preview",
-  "is_everything_set": "Is everything set?"
+  "is_everything_set": "Is everything set?",
+  "cancel": "Cancel",
+  "export_theme_config": "Export theme config"
 }

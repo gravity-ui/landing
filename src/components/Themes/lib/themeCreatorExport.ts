@@ -8,20 +8,40 @@ import {
 } from './themeCreatorUtils';
 import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
 
-type ExportType = 'scss' | 'json';
+const SCSS_TEMPLATE = `
+@use '@gravity-ui/uikit/styles/themes';
+
+.g-root {
+    &_theme_light {
+        @include themes.g-theme-light;
+
+        %LIGHT_THEME_VARIABLES%
+    }
+
+    &_theme_dark {
+        @include themes.g-theme-dark;
+
+        %DARK_THEME_VARIABLES%
+    }
+}
+`.trim();
+
+export type ExportFormat = 'scss' | 'json';
 
 type ExportThemeParams = {
     themeState: ThemeCreatorState;
-    exportType?: ExportType;
+    format?: ExportFormat;
     ignoreDefaultValues?: boolean;
+    forPreview?: boolean;
 };
 
 export function exportTheme({
     themeState,
-    exportType = 'scss',
+    format = 'scss',
     ignoreDefaultValues = true,
+    forPreview = true,
 }: ExportThemeParams) {
-    if (exportType === 'json') {
+    if (format === 'json') {
         throw new Error('Not implemented');
     }
 
@@ -47,7 +67,7 @@ export function exportTheme({
                         cssVariables += `${createPrivateColorCssVariable(
                             token,
                             privateColorCode,
-                        )}: ${color} !important;\n`;
+                        )}: ${color}${forPreview ? ' !important' : ''};\n`;
                     },
                 );
                 cssVariables += '\n';
@@ -58,7 +78,7 @@ export function exportTheme({
 
         cssVariables += `${createUtilityColorCssVariable('base-brand')}: ${
             palette[themeVariant].brand
-        } !important;\n`;
+        }${forPreview ? ' !important' : ''};\n`;
 
         Object.entries(themeState.colors[themeVariant]).forEach(
             ([colorName, colorOrPrivateToken]) => {
@@ -75,17 +95,32 @@ export function exportTheme({
                     ? `var(${createPrivateColorCssVariableFromToken(colorOrPrivateToken)})`
                     : colorOrPrivateToken;
 
-                cssVariables += `${createUtilityColorCssVariable(
-                    colorName,
-                )}: ${color} !important;\n`;
+                cssVariables += `${createUtilityColorCssVariable(colorName)}: ${color}${
+                    forPreview ? ' !important' : ''
+                };\n`;
             },
         );
 
-        return cssVariables;
+        return cssVariables.trim();
     };
 
     return {
         light: prepareThemeVariables('light'),
         dark: prepareThemeVariables('dark'),
     };
+}
+
+type ExportThemeForDialogParams = Pick<ExportThemeParams, 'themeState' | 'format'>;
+
+export function exportThemeForDialog({themeState, format = 'scss'}: ExportThemeForDialogParams) {
+    if (format === 'json') {
+        return 'not implemented';
+    }
+
+    const {light, dark} = exportTheme({themeState, format, forPreview: false});
+
+    return SCSS_TEMPLATE.replace(
+        '%LIGHT_THEME_VARIABLES%',
+        light.replaceAll('\n', '\n'.padEnd(9)),
+    ).replace('%DARK_THEME_VARIABLES%', dark.replaceAll('\n', '\n'.padEnd(9)));
 }
