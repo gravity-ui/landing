@@ -74,7 +74,7 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         }
 
         &:hover {
-            background: #251b25;
+            background: var(--g-color-base-generic-hover);
         }
 
         &_active {
