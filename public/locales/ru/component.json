@@ -3,7 +3,10 @@
     "title": "Компоненты",
     "searchPlaceholder": "Поиск по названию",
     "color-input_validation-format-error": "Неверный формат",
-    "maintainers": "Maintainers:",
+    "maintainers": {
+        "key_one": "Maintainer:",
+        "key_other": "Maintainers:"
+    },
     "theme": "Переключить тему",
     "rtlOn": "Включить RTL",
     "rtlOff": "Выключить RTL",

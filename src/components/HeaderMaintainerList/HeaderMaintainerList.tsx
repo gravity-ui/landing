@@ -18,7 +18,9 @@ export const HeaderMaintainerList: React.FC<HeaderMaintainerListProps> = ({maint
 
     return (
         <div className={b()}>
-            <span className={b('title')}>{t('component:maintainers')}</span>
+            <span className={b('title')}>
+                {t('component:maintainers', {count: limitedMaintainers.length})}
+            </span>
             {limitedMaintainers.map(({login, avatarUrl, url}) => (
                 <Link
                     className={b('maintainer')}

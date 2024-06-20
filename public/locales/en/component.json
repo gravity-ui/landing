@@ -3,7 +3,10 @@
     "title": "Components",
     "searchPlaceholder": "Search by component name",
     "color-input_validation-format-error": "Incorrect format",
-    "maintainers": "Maintainers:",
+    "maintainers": {
+        "key_one": "Maintainer:",
+        "key_other": "Maintainers:"
+    },
     "theme": "Switch theme",
     "rtlOn": "Switch RTL on",
     "rtlOff": "Switch RTL off",
