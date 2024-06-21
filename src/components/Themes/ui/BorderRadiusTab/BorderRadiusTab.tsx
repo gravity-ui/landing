@@ -8,6 +8,7 @@ import {ExportThemeSection} from '../ExportThemeSection/ExportThemeSection';
 
 import {BorderOptions} from './BorderOptions/BorderOptions';
 import './BorderRadiusTab.scss';
+import {ComponentPreview} from './ComponentPreview/ComponentPreview';
 
 const b = block('border-radius-tab');
 
@@ -19,6 +20,7 @@ export const BorderRadiusTab = () => {
     return (
         <Flex direction="column" className={b()}>
             <BorderOptions />
+            <ComponentPreview />
             <ExportThemeSection />
         </Flex>
     );

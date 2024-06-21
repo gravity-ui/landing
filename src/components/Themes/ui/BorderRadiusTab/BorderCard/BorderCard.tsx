@@ -4,7 +4,7 @@ import React, {useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
 import {RADIUS_PRESETS, RadiusPresetName, RadiusSize} from 'src/components/Themes/lib/constants';
 
-import {block} from '../../../../../../utils';
+import {block} from '../../../../../utils';
 
 import './BorderCard.scss';
 

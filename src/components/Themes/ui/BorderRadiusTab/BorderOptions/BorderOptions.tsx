@@ -5,8 +5,7 @@ import {RadiusPresetName} from 'src/components/Themes/lib/constants';
 
 import {block} from '../../../../../utils';
 import {ThemeSection} from '../../ThemeSection';
-
-import {BorderCard, BorderCardProps} from './BorderCard/BorderCard';
+import {BorderCard, BorderCardProps} from '../BorderCard/BorderCard';
 
 const b = block('border-options');
 
