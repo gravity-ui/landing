@@ -14,7 +14,7 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
     border-radius: 24px;
 
     &__column-transform {
-        @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'sm') - 1)) {
+        @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'md') - 1)) {
             flex-direction: column;
             width: 100%;
         }
