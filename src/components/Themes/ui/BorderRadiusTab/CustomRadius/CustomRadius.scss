@@ -1,0 +1,28 @@
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../../variables.scss';
+@use '../../../../../mixins.scss' as baseMixins;
+
+$root: '.g-root';
+$block: '.#{variables.$ns}custom-radius';
+
+// Workaround for missing theme class in ThemeProvider
+$workaroundBlockDarkTheme: &#{$block}_theme_dark;
+
+#{$block} {
+    &__text-input-block {
+        flex-grow: 1;
+        @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'lg') - 1)) {
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+
+    &__px {
+        margin-inline: 8px;
+    }
+
+    &__radius-input-row {
+        align-items: center;
+    }
+}

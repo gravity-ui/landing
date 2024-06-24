@@ -20,9 +20,11 @@ export type ColorsOptions = {
     'text-link-visited-hover': string;
 };
 
+export type RadiusSizeName = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+
 export type ColorOption = keyof ColorsOptions;
 
-export type BordersOptions = {};
+export type BordersOptions = Record<string, string>;
 
 export type TypographyOptions = {};
 
