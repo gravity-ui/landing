@@ -1,37 +1,69 @@
 @use '../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 
-$block: '.#{variables.$ns}themes-preview-layout';
+$block: '.#{variables.$ns}themes-preview';
 
 #{$block} {
-    height: 800px;
-    width: 100%;
-    border-radius: 16px;
-    border: 1px solid var(--g-color-line-generic);
-
-    &__aside-header {
-        --gn-aside-header-item-icon-color: var(--g-color-base-brand);
-
-        --gn-aside-header-item-current-background-color: var(--g-color-base-brand);
-        --gn-aside-header-item-current-icon-color: var(--g-color-base-background);
-
+    &__layout {
+        height: 800px;
+        width: 100%;
         border-radius: 16px;
+        border: 1px solid var(--g-color-line-generic);
 
-        & .gn-aside-header__pane-container .gn-aside-header__aside {
+        &__aside-header {
+            --gn-aside-header-item-icon-color: var(--g-color-base-brand);
+
+            --gn-aside-header-item-current-background-color: var(--g-color-base-brand);
+            --gn-aside-header-item-current-icon-color: var(--g-color-base-background);
+
             border-radius: 16px;
+
+            & .gn-aside-header__pane-container .gn-aside-header__aside {
+                border-radius: 16px;
+            }
+
+            & .gn-aside-header__pane-container,
+            & .gn-aside-header__pane-container .gn-aside-header__aside {
+                height: 100%;
+            }
         }
 
-        & .gn-aside-header__pane-container,
-        & .gn-aside-header__pane-container .gn-aside-header__aside {
-            height: 100%;
+        &__content {
+            width: 100%;
+            padding: var(--g-spacing-6) calc(var(--g-spacing-1) * 24);
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+                padding: var(--g-spacing-6) calc(var(--g-spacing-10));
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                padding: var(--g-spacing-6) calc(var(--g-spacing-6));
+            }
+        }
+
+        &_theme_dark {
+            @include themes.g-theme-dark;
+        }
+
+        &_theme_light {
+            @include themes.g-theme-light;
         }
     }
 
-    &_theme_dark {
-        @include themes.g-theme-dark;
-    }
+    &__table-preview {
+        width: 900px;
 
-    &_theme_light {
-        @include themes.g-theme-light;
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+            width: 700px;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+            width: 550px;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            display: none;
+        }
     }
 }
