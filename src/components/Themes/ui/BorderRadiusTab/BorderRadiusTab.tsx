@@ -6,7 +6,7 @@ import {block} from '../../../../utils';
 // import {useThemeCreator} from '../../hooks';
 import {ExportThemeSection} from '../ExportThemeSection/ExportThemeSection';
 
-import {BorderOptions} from './BorderOptions/BorderOptions';
+import {BorderPresets} from './BorderPresets/BorderPresets';
 import './BorderRadiusTab.scss';
 import {ComponentPreview} from './ComponentPreview/ComponentPreview';
 import {CustomRadius} from './CustomRadius/CustomRadius';
@@ -20,7 +20,7 @@ export const BorderRadiusTab = () => {
 
     return (
         <Flex direction="column" className={b()}>
-            <BorderOptions />
+            <BorderPresets />
             <CustomRadius />
             <ComponentPreview />
             <ExportThemeSection />
