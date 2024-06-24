@@ -454,23 +454,32 @@ export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
     };
 }
 
+export type ChangeRadiusPresetInThemeParams = {
+    radiusPresetName: RadiusPresetName;
+};
+
 export function changeRadiusPresetInTheme(
     themeState: ThemeCreatorState,
-    newPresetName: RadiusPresetName,
+    {radiusPresetName}: ChangeRadiusPresetInThemeParams,
 ): ThemeCreatorState {
-    const newBorderValue = {preset: newPresetName, values: {...RADIUS_PRESETS[newPresetName]}};
+    const newBorderValue = {
+        preset: radiusPresetName,
+        values: {...RADIUS_PRESETS[radiusPresetName]},
+    };
 
     return {...themeState, borders: newBorderValue};
 }
 
+export type UpdateCustomRadiusPresetInThemeParams = {radiusValue: Partial<RadiusValue>};
+
 export function updateCustomRadiusPresetInTheme(
     themeState: ThemeCreatorState,
-    newRaduisSizes: RadiusValue,
+    {radiusValue}: UpdateCustomRadiusPresetInThemeParams,
 ): ThemeCreatorState {
     const previousRadiusValues = themeState.borders.values;
     const newCustomPresetValues = {
         preset: RadiusPresetName.Custom,
-        values: {...previousRadiusValues, ...newRaduisSizes},
+        values: {...previousRadiusValues, ...radiusValue},
     };
 
     return {...themeState, borders: newCustomPresetValues};

@@ -1,6 +1,7 @@
 import {Col, Row} from '@gravity-ui/uikit';
-import React, {useState} from 'react';
+import React, {useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
+import {ChangeRadiusPresetInThemeParams} from 'src/components/Themes/lib/themeCreatorUtils';
 import {RadiusPresetName} from 'src/components/Themes/lib/types';
 
 import {ThemeSection} from '../../ThemeSection';
@@ -19,9 +20,17 @@ const PRESETS_ORDER = [
     RadiusPresetName.Custom,
 ];
 
-export const BorderPresets = () => {
+export type BorderPresetsProps = {
+    selectedPreset: RadiusPresetName;
+    onClick: (preset: ChangeRadiusPresetInThemeParams) => void;
+};
+
+export const BorderPresets = ({selectedPreset, onClick}: BorderPresetsProps) => {
     const {t} = useTranslation('themes');
-    const [selectedPreset, setSelectedPreset] = useState(RadiusPresetName.Regular);
+
+    const handleClick = useCallback((preset: RadiusPresetName) => {
+        onClick({radiusPresetName: preset});
+    }, []);
 
     return (
         <ThemeSection title={t('tags_borderRadius')}>
@@ -29,7 +38,7 @@ export const BorderPresets = () => {
                 {PRESETS_ORDER.map((preset) => (
                     <ColCard
                         key={preset}
-                        onClick={setSelectedPreset}
+                        onClick={handleClick}
                         preset={preset}
                         selected={selectedPreset === preset}
                     />

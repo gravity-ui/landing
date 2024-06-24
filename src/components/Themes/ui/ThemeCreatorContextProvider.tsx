@@ -4,9 +4,11 @@ import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreat
 import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
 import type {
     AddColorToThemeParams,
+    ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
     UpdateColorInThemeParams,
+    UpdateCustomRadiusPresetInThemeParams,
 } from '../lib/themeCreatorUtils';
 import {
     addColorToTheme,
@@ -18,7 +20,7 @@ import {
     updateColorInTheme,
     updateCustomRadiusPresetInTheme,
 } from '../lib/themeCreatorUtils';
-import type {RadiusPresetName, RadiusValue, ThemeCreatorState, ThemeOptions} from '../lib/types';
+import type {ThemeCreatorState, ThemeOptions} from '../lib/types';
 
 type ThemeCreatorAction =
     | {
@@ -43,11 +45,11 @@ type ThemeCreatorAction =
       }
     | {
           type: 'changeRadiusPreset';
-          payload: RadiusPresetName;
+          payload: ChangeRadiusPresetInThemeParams;
       }
     | {
           type: 'updateCustomRadiusPreset';
-          payload: RadiusValue;
+          payload: UpdateCustomRadiusPresetInThemeParams;
       }
     | {
           type: 'reinitialize';

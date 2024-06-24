@@ -1,6 +1,8 @@
-import {Col, Flex, Row, Text, TextInput, TextInputProps} from '@gravity-ui/uikit';
-import React from 'react';
+import {Col, Flex, Row, Text, TextInput} from '@gravity-ui/uikit';
+import React, {useCallback, useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
+import {UpdateCustomRadiusPresetInThemeParams} from 'src/components/Themes/lib/themeCreatorUtils';
+import {RadiusSizeName, RadiusValue} from 'src/components/Themes/lib/types';
 
 import {block} from '../../../../../utils';
 import {ThemeSection} from '../../ThemeSection';
@@ -10,39 +12,61 @@ import './CustomRadius.scss';
 const b = block('custom-radius');
 
 type RadiusInputProps = {
-    radiusSizeName: string;
-} & TextInputProps;
+    radiusSizeName: RadiusSizeName;
+    onUpdate: (param: UpdateCustomRadiusPresetInThemeParams) => void;
+    value?: string;
+};
 
-const RadiusInputRow = ({radiusSizeName: radiusName, ...textInputProps}: RadiusInputProps) => (
-    <Row space={4} className={b('radius-input-row')}>
-        <Col m="6" l="4">
-            <Text variant="body-3">{radiusName}</Text>
-        </Col>
-        <Col m="6" l="4">
-            <TextInput
-                {...textInputProps}
-                size="xl"
-                endContent={
-                    <Text variant="caption-2" color="secondary" className={b('px')}>
-                        px
-                    </Text>
-                }
-            />
-        </Col>
-    </Row>
-);
+const RadiusInputRow = ({radiusSizeName, onUpdate, value}: RadiusInputProps) => {
+    const {t} = useTranslation('themes');
 
-export const CustomRadius = () => {
+    const text = useMemo(() => t('radius') + ` ${radiusSizeName.toUpperCase()}`, [radiusSizeName]);
+
+    const handleUpdate = useCallback(
+        (newValue: string) => {
+            onUpdate({radiusValue: {[radiusSizeName]: newValue || '0'}});
+        },
+        [radiusSizeName],
+    );
+
+    return (
+        <Row space={4} className={b('radius-input-row')}>
+            <Col m="6" l="4">
+                <Text variant="body-3">{text}</Text>
+            </Col>
+            <Col m="6" l="4">
+                <TextInput
+                    value={value}
+                    size="xl"
+                    onUpdate={handleUpdate}
+                    endContent={
+                        <Text variant="caption-2" color="secondary" className={b('px')}>
+                            px
+                        </Text>
+                    }
+                />
+            </Col>
+        </Row>
+    );
+};
+
+type CustomRadiusProps = {
+    values: RadiusValue;
+    onUpdate: (param: UpdateCustomRadiusPresetInThemeParams) => void;
+};
+
+export const CustomRadius = ({onUpdate, values}: CustomRadiusProps) => {
     const {t} = useTranslation('themes');
 
     return (
         <ThemeSection className={b()} title={t('choose_border_radius')}>
             <Flex direction="column" gap={6}>
-                <RadiusInputRow radiusSizeName={t('radius') + ' XS'} />
-                <RadiusInputRow radiusSizeName={t('radius') + ' M'} />
-                <RadiusInputRow radiusSizeName={t('radius') + ' L'} />
-                <RadiusInputRow radiusSizeName={t('radius') + ' XL'} />
-                <RadiusInputRow radiusSizeName={t('radius') + ' 2XL'} />
+                <RadiusInputRow onUpdate={onUpdate} radiusSizeName="xs" value={values.xs} />
+                <RadiusInputRow onUpdate={onUpdate} radiusSizeName="s" value={values.s} />
+                <RadiusInputRow onUpdate={onUpdate} radiusSizeName="m" value={values.m} />
+                <RadiusInputRow onUpdate={onUpdate} radiusSizeName="l" value={values.l} />
+                <RadiusInputRow onUpdate={onUpdate} radiusSizeName="xl" value={values.xl} />
+                <RadiusInputRow onUpdate={onUpdate} radiusSizeName="xxl" value={values.xxl} />
             </Flex>
         </ThemeSection>
     );
