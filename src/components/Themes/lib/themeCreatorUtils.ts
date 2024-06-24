@@ -6,6 +6,7 @@ import lowerCase from 'lodash/lowerCase';
 import {
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
+    RADIUS_PRESETS,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
 import {generatePrivateColors} from './privateColors';
@@ -14,10 +15,12 @@ import type {
     Palette,
     PaletteTokens,
     PrivateColors,
+    RadiusValue,
     ThemeCreatorState,
     ThemeOptions,
     ThemeVariant,
 } from './types';
+import {RadiusPresetName} from './types';
 
 function createColorToken(title: string) {
     return kebabCase(title);
@@ -449,4 +452,26 @@ export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
         paletteTokens,
         tokens: Object.keys(paletteTokens),
     };
+}
+
+export function changeRadiusPresetInTheme(
+    themeState: ThemeCreatorState,
+    newPresetName: RadiusPresetName,
+): ThemeCreatorState {
+    const newBorderValue = {preset: newPresetName, values: {...RADIUS_PRESETS[newPresetName]}};
+
+    return {...themeState, borders: newBorderValue};
+}
+
+export function updateCustomRadiusPresetInTheme(
+    themeState: ThemeCreatorState,
+    newRaduisSizes: RadiusValue,
+): ThemeCreatorState {
+    const previousRadiusValues = themeState.borders.values;
+    const newCustomPresetValues = {
+        preset: RadiusPresetName.Custom,
+        values: {...previousRadiusValues, ...newRaduisSizes},
+    };
+
+    return {...themeState, borders: newCustomPresetValues};
 }

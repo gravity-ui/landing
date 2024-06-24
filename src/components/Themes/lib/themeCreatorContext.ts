@@ -9,7 +9,7 @@ import type {
     RenameColorInThemeParams,
     UpdateColorInThemeParams,
 } from './themeCreatorUtils';
-import type {ThemeCreatorState} from './types';
+import type {RadiusPresetName, RadiusValue, ThemeCreatorState} from './types';
 
 export const ThemeCreatorContext = createContext<ThemeCreatorState>(
     initThemeCreator(DEFAULT_THEME),
@@ -21,6 +21,8 @@ export interface ThemeCreatorMethodsContextType {
     removeColor: (title: string) => void;
     renameColor: (params: RenameColorInThemeParams) => void;
     changeUtilityColor: (params: ChangeUtilityColorInThemeParams) => void;
+    changeRadiusPreset: (params: RadiusPresetName) => void;
+    updateCustomRadiusPreset: (params: RadiusValue) => void;
 }
 
 export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsContextType>({
@@ -29,4 +31,6 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     removeColor: noop,
     renameColor: noop,
     changeUtilityColor: noop,
+    changeRadiusPreset: noop,
+    updateCustomRadiusPreset: noop,
 });
