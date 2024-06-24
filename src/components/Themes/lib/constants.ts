@@ -1,6 +1,8 @@
-import type {RadiusSizeName, ThemeOptions} from './types';
+import {RadiusPresetName, RadiusSize, type ThemeOptions} from './types';
 
 export const THEME_COLOR_VARIABLE_PREFIX = '--g-color';
+
+export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
 export const DEFAULT_NEW_COLOR_TITLE = 'New color';
 
@@ -33,48 +35,32 @@ export const DEFAULT_PALETTE: ThemeOptions['palette'] = {
 
 export const DEFAULT_PALETTE_TOKENS = new Set(Object.keys(DEFAULT_PALETTE.light));
 
-export const RadiusSize: Record<RadiusSizeName, string> = {
-    xs: 'border-radius-xs',
-    s: 'border-radius-s',
-    m: 'border-radius-m',
-    l: 'border-radius-l',
-    xl: 'border-radius-xl',
-    xxl: 'border-radius-xxl',
+export const DEFAULT_RADIUS: RadiusSize = {
+    xs: '3px',
+    s: '5px',
+    m: '6px',
+    l: '8px',
+    xl: '10px',
+    xxl: '16px',
 };
 
-export const DEFAULT_RADIUS = {
-    [RadiusSize.xs]: '3px',
-    [RadiusSize.s]: '5px',
-    [RadiusSize.m]: '6px',
-    [RadiusSize.l]: '8px',
-    [RadiusSize.xl]: '10px',
-    [RadiusSize.xxl]: '16px',
-};
-
-export enum RadiusPresetName {
-    Regular = 'radius_regular',
-    Circled = 'radius_circled',
-    Squared = 'radius_squared',
-    Custom = 'radius_custom',
-}
-
-export const RADIUS_PRESETS = {
+export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusSize> = {
     [RadiusPresetName.Regular]: DEFAULT_RADIUS,
     [RadiusPresetName.Circled]: {
-        [RadiusSize.xs]: '100px',
-        [RadiusSize.s]: '100px',
-        [RadiusSize.m]: '100px',
-        [RadiusSize.l]: '100px',
-        [RadiusSize.xl]: '100px',
-        [RadiusSize.xxl]: '100px',
+        xs: '100px',
+        s: '100px',
+        m: '100px',
+        l: '100px',
+        xl: '100px',
+        xxl: '100px',
     },
     [RadiusPresetName.Squared]: {
-        [RadiusSize.xs]: '0',
-        [RadiusSize.s]: '0',
-        [RadiusSize.m]: '0',
-        [RadiusSize.l]: '0',
-        [RadiusSize.xl]: '0',
-        [RadiusSize.xxl]: '0',
+        xs: '0',
+        s: '0',
+        m: '0',
+        l: '0',
+        xl: '0',
+        xxl: '0',
     },
     [RadiusPresetName.Custom]: DEFAULT_RADIUS,
 };
@@ -111,6 +97,9 @@ export const DEFAULT_THEME: ThemeOptions = {
             'text-link-visited-hover': 'private.purple.850-solid',
         },
     },
-    borders: RADIUS_PRESETS[RadiusPresetName.Regular],
+    borders: {
+        preset: RadiusPresetName.Regular,
+        values: RADIUS_PRESETS[RadiusPresetName.Regular],
+    },
     typography: {},
 };

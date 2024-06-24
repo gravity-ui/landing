@@ -2,7 +2,8 @@ import {CircleCheckFill} from '@gravity-ui/icons';
 import {Card, Text} from '@gravity-ui/uikit';
 import React, {useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
-import {RADIUS_PRESETS, RadiusPresetName, RadiusSize} from 'src/components/Themes/lib/constants';
+import {RADIUS_PRESETS} from 'src/components/Themes/lib/constants';
+import {RadiusPresetName} from 'src/components/Themes/lib/types';
 
 import {block} from '../../../../../utils';
 
@@ -17,10 +18,7 @@ export type BorderCardProps = {
 };
 
 const FakeButton = ({preset, text}: {preset: RadiusPresetName; text: string}) => (
-    <div
-        className={b('fake-button')}
-        style={{borderRadius: RADIUS_PRESETS[preset]?.[RadiusSize.m]}}
-    >
+    <div className={b('fake-button')} style={{borderRadius: RADIUS_PRESETS[preset]?.m}}>
         <Text color="inverted-primary">{text}</Text>
     </div>
 );

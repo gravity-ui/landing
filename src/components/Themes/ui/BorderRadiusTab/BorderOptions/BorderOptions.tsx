@@ -1,7 +1,7 @@
 import {Col, Row} from '@gravity-ui/uikit';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {RadiusPresetName} from 'src/components/Themes/lib/constants';
+import {RadiusPresetName} from 'src/components/Themes/lib/types';
 
 import {block} from '../../../../../utils';
 import {ThemeSection} from '../../ThemeSection';

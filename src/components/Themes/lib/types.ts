@@ -22,9 +22,21 @@ export type ColorsOptions = {
 
 export type RadiusSizeName = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
 
+export enum RadiusPresetName {
+    Regular = 'radius_regular',
+    Circled = 'radius_circled',
+    Squared = 'radius_squared',
+    Custom = 'radius_custom',
+}
+
+export type RadiusSize = Record<RadiusSizeName, string>;
+
 export type ColorOption = keyof ColorsOptions;
 
-export type BordersOptions = Record<string, string>;
+export type BordersOption = {
+    preset: RadiusPresetName;
+    values: RadiusSize;
+};
 
 export type TypographyOptions = {};
 
@@ -33,7 +45,7 @@ export interface ThemeOptions {
     palette: Record<ThemeVariant, PaletteOptions>;
     /** Utility colors that used in components (background, link, brand-text, etc.) */
     colors: Record<ThemeVariant, ColorsOptions>;
-    borders: BordersOptions;
+    borders: BordersOption;
     typography: TypographyOptions;
 }
 
