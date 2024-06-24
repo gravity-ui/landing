@@ -29,13 +29,13 @@ export enum RadiusPresetName {
     Custom = 'radius_custom',
 }
 
-export type RadiusSize = Record<RadiusSizeName, string>;
+export type RadiusValue = Record<RadiusSizeName, string>;
 
 export type ColorOption = keyof ColorsOptions;
 
 export type BordersOption = {
     preset: RadiusPresetName;
-    values: RadiusSize;
+    values: RadiusValue;
 };
 
 export type TypographyOptions = {};

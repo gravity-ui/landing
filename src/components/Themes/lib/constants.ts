@@ -1,4 +1,4 @@
-import {RadiusPresetName, RadiusSize, type ThemeOptions} from './types';
+import {RadiusPresetName, RadiusValue, type ThemeOptions} from './types';
 
 export const THEME_COLOR_VARIABLE_PREFIX = '--g-color';
 
@@ -35,7 +35,7 @@ export const DEFAULT_PALETTE: ThemeOptions['palette'] = {
 
 export const DEFAULT_PALETTE_TOKENS = new Set(Object.keys(DEFAULT_PALETTE.light));
 
-export const DEFAULT_RADIUS: RadiusSize = {
+export const DEFAULT_RADIUS: RadiusValue = {
     xs: '3px',
     s: '5px',
     m: '6px',
@@ -44,7 +44,7 @@ export const DEFAULT_RADIUS: RadiusSize = {
     xxl: '16px',
 };
 
-export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusSize> = {
+export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
     [RadiusPresetName.Regular]: DEFAULT_RADIUS,
     [RadiusPresetName.Circled]: {
         xs: '100px',
