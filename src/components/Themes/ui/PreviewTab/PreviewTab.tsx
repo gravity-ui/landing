@@ -20,6 +20,7 @@ import {block} from '../../../../utils';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme} from '../../lib/themeCreatorExport';
 
+import {CardsPreview} from './CardsPreview';
 import {FormPreview} from './FormPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview';
@@ -202,10 +203,6 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
 
 const DashboardPreview = () => {
     return <span>dashboard</span>;
-};
-
-const CardsPreview = () => {
-    return <span>card</span>;
 };
 
 const previewComponents = [

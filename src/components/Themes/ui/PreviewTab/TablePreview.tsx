@@ -115,7 +115,12 @@ export const TablePreview = ({justify}: {justify: string}) => {
     };
 
     return (
-        <Flex direction="column" alignItems={justify} gap={4}>
+        <Flex
+            direction="column"
+            alignItems={justify}
+            gap={4}
+            className={b('table-preview-wrapper')}
+        >
             <Text variant="header-1">Table</Text>
             <Flex justifyContent="space-between" width="100%">
                 <Flex gap={2}>
@@ -140,14 +145,16 @@ export const TablePreview = ({justify}: {justify: string}) => {
                     <Text variant="body-1">Add new user</Text>
                 </Button>
             </Flex>
-            <SelectionTable
-                className={b('table-preview')}
-                columns={tableColumns as TableColumnConfig<TableDataItem>[]}
-                data={data}
-                selectedIds={tableSelectedIds}
-                getRowActions={getRowActions}
-                onSelectionChange={setTableSelectedIds}
-            />
+            <div className={b('table-wrapper')}>
+                <SelectionTable
+                    className={b('table-preview')}
+                    columns={tableColumns as TableColumnConfig<TableDataItem>[]}
+                    data={data}
+                    selectedIds={tableSelectedIds}
+                    getRowActions={getRowActions}
+                    onSelectionChange={setTableSelectedIds}
+                />
+            </div>
             <Pagination {...state} compact={false} onUpdate={handleUpdate} />
         </Flex>
     );

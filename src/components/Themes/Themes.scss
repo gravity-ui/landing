@@ -32,6 +32,10 @@ $block: '.#{variables.$ns}themes';
     &__export-theme-btn {
         width: fit-content;
 
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            margin-top: var(--g-spacing-6);
+        }
+
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             width: 100%;
         }
