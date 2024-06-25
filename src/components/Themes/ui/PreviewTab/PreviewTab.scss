@@ -31,6 +31,8 @@ $block: '.#{variables.$ns}themes-preview';
 
         &__content {
             width: 100%;
+            height: calc(100% - 40px);
+            overflow: hidden;
             padding: var(--g-spacing-6) calc(var(--g-spacing-1) * 24);
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
@@ -51,19 +53,38 @@ $block: '.#{variables.$ns}themes-preview';
         }
     }
 
+    &__table-preview-wrapper {
+        overflow-x: hidden;
+    }
+
     &__table-preview {
         width: 900px;
+    }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
-            width: 700px;
-        }
+    &__table-wrapper {
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
-            width: 550px;
-        }
+    &__cards-preview {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-            display: none;
+        &__card {
+            width: 295px;
+            height: 430px;
+            padding: var(--g-spacing-1) var(--g-spacing-1) 0;
+
+            &__content {
+                padding: var(--g-spacing-5) var(--g-spacing-4);
+                height: 100%;
+
+                &__footer {
+                    margin-block-start: auto;
+                }
+            }
         }
     }
 }
