@@ -54,7 +54,7 @@ export const Themes = () => {
         [t],
     );
 
-    const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.BorderRadius);
+    const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.Colors);
 
     const onExportButtonClick = useCallback(() => {
         //TODO add logic here

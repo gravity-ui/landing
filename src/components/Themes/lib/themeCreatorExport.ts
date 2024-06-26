@@ -1,12 +1,19 @@
 import {DEFAULT_PALETTE, DEFAULT_THEME} from './constants';
 import {
+    createBorderRadiusClassesForCards,
+    createBorderRadiusCssVariable,
     createPrivateColorCssVariable,
     createPrivateColorCssVariableFromToken,
     createPrivateColorToken,
     createUtilityColorCssVariable,
     isPrivateColorToken,
 } from './themeCreatorUtils';
-import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
+import {
+    type ColorOption,
+    RadiusPresetName,
+    type ThemeCreatorState,
+    type ThemeVariant,
+} from './types';
 
 type ExportType = 'scss' | 'json';
 
@@ -80,6 +87,16 @@ export function exportTheme({
                 )}: ${color} !important;\n`;
             },
         );
+
+        // Don't export radiuses that are equals to default
+        if (!ignoreDefaultValues || themeState.borders.preset !== RadiusPresetName.Regular) {
+            Object.entries(themeState.borders.values).forEach(([radiusName, radiusValue]) => {
+                cssVariables += `${createBorderRadiusCssVariable(
+                    radiusName,
+                )}: ${radiusValue}px !important;\n`;
+            });
+            cssVariables += createBorderRadiusClassesForCards(themeState.borders.values);
+        }
 
         return cssVariables;
     };

@@ -98,14 +98,18 @@ const TextInputBlock = (props: ShowcaseBlockProps) => (
     </BlockWrapper>
 );
 
+const borderRadiusShowcaseCn = b();
+
 export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
     const {t} = useTranslation('themes');
 
     return (
-        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color, theme})}`}>
-            {style ? (
-                <style>{`.gravity-ui-landing-examples-showcase_theme_${theme} {${style}}`}</style>
-            ) : null}
+        <ThemeProvider
+            theme={theme}
+            scoped
+            rootClassName={`${borderRadiusShowcaseCn} ${b({color, theme})}`}
+        >
+            {style ? <style>{`.${borderRadiusShowcaseCn}_theme_${theme} {${style}}`}</style> : null}
             <Flex className={b('container')} wrap gapRow={10}>
                 <Flex direction="column" gap={10}>
                     <LabelBlock text={t('label')} className={b('column-transform')} />

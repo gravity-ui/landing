@@ -7,6 +7,7 @@ import {
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
     RADIUS_PRESETS,
+    THEME_BORDER_RADIUS_VARIABLE_PREFIX,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
 import {generatePrivateColors} from './privateColors';
@@ -483,4 +484,14 @@ export function updateCustomRadiusPresetInTheme(
     };
 
     return {...themeState, borders: newCustomPresetValues};
+}
+
+export function createBorderRadiusCssVariable(radiusSize: string) {
+    return `${THEME_BORDER_RADIUS_VARIABLE_PREFIX}-${radiusSize}`;
+}
+
+export function createBorderRadiusClassesForCards(values: RadiusValue) {
+    const cardSizeM = `.g-card_size_m {--_--border-radius: ${values.l}px !important;}\n`;
+    const cardSizeL = `.g-card_size_l {--_--border-radius: ${values.xxl}px !important;}\n`;
+    return '\n' + cardSizeM + cardSizeL;
 }

@@ -36,23 +36,23 @@ export const DEFAULT_PALETTE: ThemeOptions['palette'] = {
 export const DEFAULT_PALETTE_TOKENS = new Set(Object.keys(DEFAULT_PALETTE.light));
 
 export const DEFAULT_RADIUS: RadiusValue = {
-    xs: '3px',
-    s: '5px',
-    m: '6px',
-    l: '8px',
-    xl: '10px',
-    xxl: '16px',
+    xs: '3',
+    s: '5',
+    m: '6',
+    l: '8',
+    xl: '10',
+    xxl: '16',
 };
 
 export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
     [RadiusPresetName.Regular]: DEFAULT_RADIUS,
     [RadiusPresetName.Circled]: {
-        xs: '100px',
-        s: '100px',
-        m: '100px',
-        l: '100px',
-        xl: '100px',
-        xxl: '100px',
+        xs: '100',
+        s: '100',
+        m: '100',
+        l: '100',
+        xl: '100',
+        xxl: '100',
     },
     [RadiusPresetName.Squared]: {
         xs: '0',

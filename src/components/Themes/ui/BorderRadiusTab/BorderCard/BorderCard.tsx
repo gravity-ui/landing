@@ -18,7 +18,7 @@ export type BorderCardProps = {
 };
 
 const FakeButton = ({preset, text}: {preset: RadiusPresetName; text: string}) => (
-    <div className={b('fake-button')} style={{borderRadius: RADIUS_PRESETS[preset]?.m}}>
+    <div className={b('fake-button')} style={{borderRadius: RADIUS_PRESETS[preset]?.m + 'px'}}>
         <Text color="inverted-primary">{text}</Text>
     </div>
 );
