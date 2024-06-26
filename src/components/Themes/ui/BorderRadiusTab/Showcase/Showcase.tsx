@@ -1,3 +1,4 @@
+import {PencilToLine} from '@gravity-ui/icons';
 import {
     Button,
     Card,
@@ -9,6 +10,7 @@ import {
     Theme,
     ThemeProvider,
 } from '@gravity-ui/uikit';
+import type {ButtonProps} from '@gravity-ui/uikit';
 import React, {useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 
@@ -52,23 +54,36 @@ const CardBlock = (props: ShowcaseBlockProps) => (
     </BlockWrapper>
 );
 
+const getIconSize = (size: ButtonProps['size']) => {
+    switch (size) {
+        case 'xs':
+            return 12;
+        case 'xl':
+            return 20;
+        default:
+            return 16;
+    }
+};
+
+const ShowcaseButton = ({size, children}: Pick<ButtonProps, 'size' | 'children'>) => {
+    const iconSize = getIconSize(size);
+    return (
+        <Button view="action" size={size}>
+            <Button.Icon>
+                <PencilToLine height={iconSize} width={iconSize} />
+            </Button.Icon>
+            {children}
+        </Button>
+    );
+};
+
 const ButtonBlock = (props: ShowcaseBlockProps) => (
     <BlockWrapper {...props}>
-        <Button view="action" size="xs">
-            {props.text}
-        </Button>
-        <Button view="action" size="s">
-            {props.text}
-        </Button>
-        <Button view="action" size="m">
-            {props.text}
-        </Button>
-        <Button view="action" size="l">
-            {props.text}
-        </Button>
-        <Button view="action" size="xl">
-            {props.text}
-        </Button>
+        <ShowcaseButton size="xs">{props.text}</ShowcaseButton>
+        <ShowcaseButton size="s">{props.text}</ShowcaseButton>
+        <ShowcaseButton size="m">{props.text}</ShowcaseButton>
+        <ShowcaseButton size="l">{props.text}</ShowcaseButton>
+        <ShowcaseButton size="xl">{props.text}</ShowcaseButton>
     </BlockWrapper>
 );
 

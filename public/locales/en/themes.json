@@ -27,5 +27,6 @@
   "radius_custom": "Custom radius",
   "choose_border_radius": "Choose border radius",
   "label": "Label",
-  "input_placeholder": "Content"
+  "input_placeholder": "Content",
+  "button": "Button"
 }

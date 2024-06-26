@@ -27,5 +27,6 @@
   "radius_custom": "Настроить скругление",
   "choose_border_radius": "Выберите радиус скругления",
   "label": "Ярлык",
-  "input_placeholder": "Контент"
+  "input_placeholder": "Контент",
+  "button": "Кнопка"
 }
