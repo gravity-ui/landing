@@ -91,9 +91,11 @@ export function exportTheme({
         // Don't export radiuses that are equals to default
         if (!ignoreDefaultValues || themeState.borders.preset !== RadiusPresetName.Regular) {
             Object.entries(themeState.borders.values).forEach(([radiusName, radiusValue]) => {
-                cssVariables += `${createBorderRadiusCssVariable(
-                    radiusName,
-                )}: ${radiusValue}px !important;\n`;
+                if (radiusValue) {
+                    cssVariables += `${createBorderRadiusCssVariable(
+                        radiusName,
+                    )}: ${radiusValue}px !important;\n`;
+                }
             });
             cssVariables += createBorderRadiusClassesForCards(themeState.borders.values);
         }

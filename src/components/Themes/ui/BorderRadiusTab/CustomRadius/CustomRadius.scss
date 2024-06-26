@@ -10,19 +10,19 @@ $block: '.#{variables.$ns}custom-radius';
 $workaroundBlockDarkTheme: &#{$block}_theme_dark;
 
 #{$block} {
-    &__text-input-block {
-        flex-grow: 1;
-        @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'lg') - 1)) {
-            flex-direction: column;
-            width: 100%;
-        }
-    }
-
     &__px {
         margin-inline: 8px;
     }
 
     &__radius-input-row {
         align-items: center;
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+        input[type='number'] {
+            appearance: textfield;
+        }
     }
 }

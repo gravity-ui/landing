@@ -24,7 +24,7 @@ const RadiusInputRow = ({radiusSizeName, onUpdate, value}: RadiusInputProps) => 
 
     const handleUpdate = useCallback(
         (newValue: string) => {
-            onUpdate({radiusValue: {[radiusSizeName]: newValue || '0'}});
+            onUpdate({radiusValue: {[radiusSizeName]: newValue}});
         },
         [radiusSizeName],
     );
@@ -39,6 +39,8 @@ const RadiusInputRow = ({radiusSizeName, onUpdate, value}: RadiusInputProps) => 
                     value={value}
                     size="xl"
                     onUpdate={handleUpdate}
+                    type="number"
+                    controlProps={{min: 0}}
                     endContent={
                         <Text variant="caption-2" color="secondary" className={b('px')}>
                             px

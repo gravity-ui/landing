@@ -491,7 +491,11 @@ export function createBorderRadiusCssVariable(radiusSize: string) {
 }
 
 export function createBorderRadiusClassesForCards(values: RadiusValue) {
-    const cardSizeM = `.g-card_size_m {--_--border-radius: ${values.l}px !important;}\n`;
-    const cardSizeL = `.g-card_size_l {--_--border-radius: ${values.xxl}px !important;}\n`;
-    return '\n' + cardSizeM + cardSizeL;
+    const cardSizeM = values.l
+        ? `.g-card_size_m {--_--border-radius: ${values.l}px !important;}\n`
+        : '';
+    const cardSizeL = values.xxl
+        ? `.g-card_size_l {--_--border-radius: ${values.xxl}px !important;}\n`
+        : '';
+    return cardSizeM && cardSizeL ? '\n' + cardSizeM + cardSizeL : '';
 }
