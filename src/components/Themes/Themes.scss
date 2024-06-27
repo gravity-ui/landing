@@ -30,6 +30,7 @@ $block: '.#{variables.$ns}themes';
     }
 
     &__export-theme-btn {
+        --g-button-border-radius: 8px;
         width: fit-content;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {

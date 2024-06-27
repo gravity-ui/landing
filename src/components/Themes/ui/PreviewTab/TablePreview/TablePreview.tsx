@@ -1,4 +1,3 @@
-import {dateTime} from '@gravity-ui/date-utils';
 import {Copy, Pencil, Plus, TrashBin} from '@gravity-ui/icons';
 import {
     Button,
@@ -22,13 +21,11 @@ import {
 import {TableAction} from '@gravity-ui/uikit/build/esm/components/Table/hoc/withTableActions/withTableActions';
 import React from 'react';
 
-import avatar1Asset from '../../../../assets/avatar-1.png';
+import avatar1Asset from '../../../../../assets/avatar-1.png';
+import {block} from '../../../../../utils';
+import {labels, projects, tableData} from '../constants';
 
-import {b} from './PreviewTab';
-import './PreviewTab.scss';
-import {labels, projects, users} from './constants';
-
-const SelectionTable = withTableSelection(withTableSorting(withTableActions(Table)));
+import './TablePreview.scss';
 
 type TableData = {
     user: string;
@@ -72,17 +69,6 @@ const tableColumns: TableColumnConfig<TableData>[] = [
     },
 ];
 
-const data = new Array(10).fill(0).map((_, index) => {
-    return {
-        user: users[(index + 1) % 7],
-        project: projects[(index + 1) % 10],
-        updated: dateTime()
-            .add(Math.round(Math.random() * 30), 'days')
-            .format('DD.MM.YYYY hh:mm'),
-        status: labels[(index + 1) % 4],
-    };
-});
-
 const getRowActions = (): TableAction<Record<string, any>>[] => {
     return [
         {
@@ -106,6 +92,10 @@ const getRowActions = (): TableAction<Record<string, any>>[] => {
     ];
 };
 
+const b = block('table-preview');
+
+const SelectionTable = withTableSelection(withTableSorting(withTableActions(Table)));
+
 export const TablePreview = ({justify}: {justify: string}) => {
     const [tableSelectedIds, setTableSelectedIds] = React.useState(['1']);
     const [state, setState] = React.useState({page: 1, pageSize: 10, total: 1000});
@@ -115,16 +105,11 @@ export const TablePreview = ({justify}: {justify: string}) => {
     };
 
     return (
-        <Flex
-            direction="column"
-            alignItems={justify}
-            gap={4}
-            className={b('table-preview-wrapper')}
-        >
+        <Flex direction="column" alignItems={justify} gap={4} className={b('wrapper')}>
             <Text variant="header-1">Table</Text>
-            <Flex justifyContent="space-between" width="100%">
-                <Flex gap={2}>
-                    <TextInput placeholder="Search" />
+            <Flex justifyContent="space-between" width="100%" wrap="wrap" gap={2}>
+                <Flex gap={2} wrap="wrap">
+                    <TextInput placeholder="Search" style={{width: 'fit-content'}} />
                     <Select
                         placeholder="Choose from the list"
                         options={projects.map((pr) => ({
@@ -147,9 +132,9 @@ export const TablePreview = ({justify}: {justify: string}) => {
             </Flex>
             <div className={b('table-wrapper')}>
                 <SelectionTable
-                    className={b('table-preview')}
+                    className={b()}
                     columns={tableColumns as TableColumnConfig<TableDataItem>[]}
-                    data={data}
+                    data={tableData}
                     selectedIds={tableSelectedIds}
                     getRowActions={getRowActions}
                     onSelectionChange={setTableSelectedIds}

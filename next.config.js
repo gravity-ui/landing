@@ -5,6 +5,8 @@ const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')([
     '@gravity-ui/page-constructor',
     '@gravity-ui/components',
+    '@gravity-ui/chartkit',
+    '@gravity-ui/yagr',
 ]);
 
 const plugins = [

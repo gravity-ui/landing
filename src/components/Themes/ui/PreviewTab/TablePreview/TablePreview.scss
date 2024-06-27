@@ -1,0 +1,19 @@
+@use '../../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}table-preview';
+
+#{$block} {
+    width: 900px;
+
+    &__wrapper {
+        overflow-x: hidden;
+    }
+
+    &__table-wrapper {
+        max-width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

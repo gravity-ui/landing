@@ -3,17 +3,22 @@ import {ArrowLeft} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Select, Text, TextArea} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {labels, projects, users} from './constants';
+import {block} from '../../../../../utils';
+import {labels, projects, users} from '../constants';
+
+import './FormPreview.scss';
+
+const b = block('form-preview');
 
 export const FormPreview = ({justify}: {justify: string}) => {
     return (
-        <Flex direction="column" alignItems={justify} gap={4}>
+        <Flex direction="column" alignItems={justify} gap={4} className={b()}>
             <Button view="flat">
                 <Icon data={ArrowLeft} />
                 <Text variant="body-1">Go back</Text>
             </Button>
             <Text variant="header-1">User edit</Text>
-            <Flex direction="column" width="600px">
+            <Flex direction="column" className={b('wrapper')}>
                 <FormRow required direction="row" fieldId="user" label="User">
                     <Select
                         width="max"
