@@ -7,4 +7,10 @@ $block: '.#{variables.$ns}tags';
     --g-scrollbar-width: 0;
 
     overflow-x: auto;
+
+    &__tag {
+        &_selected {
+            --g-color-base-selection: var(--g-color-base-warning-light);
+        }
+    }
 }

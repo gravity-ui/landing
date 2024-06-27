@@ -20,10 +20,11 @@ import {block} from '../../../../utils';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme} from '../../lib/themeCreatorExport';
 
-import {CardsPreview} from './CardsPreview';
-import {FormPreview} from './FormPreview';
+import {CardsPreview} from './CardsPreview/CardsPreview';
+import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
+import {FormPreview} from './FormPreview/FormPreview';
 import './PreviewTab.scss';
-import {TablePreview} from './TablePreview';
+import {TablePreview} from './TablePreview/TablePreview';
 
 export const b = block('themes-preview');
 
@@ -70,7 +71,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                         </ActionBar.Group>
 
                         <ActionBar.Group pull="right">
-                            <ActionBar.Item>
+                            <ActionBar.Item className={b('layout__header-actions')}>
                                 <RadioButton
                                     name="alignment"
                                     defaultValue="left"
@@ -92,7 +93,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                                     ]}
                                 />
                             </ActionBar.Item>
-                            <ActionBar.Item>
+                            <ActionBar.Item className={b('layout__header-actions')}>
                                 <RadioButton
                                     name="theme"
                                     defaultValue="light"
@@ -199,10 +200,6 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
             </div>
         </ThemeProvider>
     );
-};
-
-const DashboardPreview = () => {
-    return <span>dashboard</span>;
 };
 
 const previewComponents = [

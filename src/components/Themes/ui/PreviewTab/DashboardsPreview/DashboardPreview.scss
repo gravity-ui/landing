@@ -1,0 +1,22 @@
+@use '../../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}dashboards-preview';
+
+#{$block} {
+    overflow-y: auto;
+
+    &__card {
+        flex: 1;
+        padding: var(--g-spacing-5);
+    }
+
+    &__dashboard-wrapper {
+        height: 230px;
+
+        & .yagr {
+            --yagr-font-family: var(--g-font-family-sans);
+        }
+    }
+}
