@@ -127,7 +127,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
             {style ? <style>{`.${borderRadiusShowcaseCn}_theme_${theme} {${style}}`}</style> : null}
             <Flex className={b('container')} wrap gapRow={10}>
                 <Flex direction="column" gap={10}>
-                    <LabelBlock text={t('label')} className={b('column-transform')} />
+                    <LabelBlock text={t('label')} />
                     <ButtonBlock text={t('button')} className={b('column-transform')} />
                     <RadioButtonBlock text={t('label')} className={b('column-transform')} />
                 </Flex>
