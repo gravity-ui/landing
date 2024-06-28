@@ -44,11 +44,12 @@ const tableColumns = [
 ];
 
 export type ShowcaseProps = {
-    color: string;
+    color?: string;
     theme: Theme;
+    style?: string;
 };
 
-export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
+export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
     const [activeTab, setActiveTab] = React.useState(tabs[0].id);
 
     const [tableSelectedIds, setTableSelectedIds] = React.useState(['1']);
@@ -67,6 +68,9 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme}) => {
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color, theme})}`}>
+            {style ? (
+                <style>{`.gravity-ui-landing-examples-showcase_theme_${theme} {${style}}`}</style>
+            ) : null}
             <div className={b('row')}>
                 <div className={b('col')}>
                     <div className={b('sub-row')}>

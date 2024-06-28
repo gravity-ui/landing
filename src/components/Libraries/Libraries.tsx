@@ -8,9 +8,9 @@ import starIcon from '../../assets/icons/star.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {block, getLibsList} from '../../utils';
 import {Link} from '../Link';
+import {TagItem, Tags} from '../Tags/Tags';
 
 import './Libraries.scss';
-import {TagItem, Tags} from './Tags/Tags';
 
 const b = block('libraries');
 

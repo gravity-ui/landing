@@ -1,0 +1,57 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}code-example';
+
+#{$block} {
+    --code-example-max-height: 300px;
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background: var(--g-color-base-background);
+    border-radius: 16px;
+    padding: 16px 0 16px 16px;
+
+    &__inner {
+        width: 100%;
+        max-height: var(--code-example-max-height);
+        overflow: auto;
+        position: relative;
+        display: flex;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        #{$block}__code {
+            color: #fff;
+        }
+
+        #{$block}__copy-icon {
+            color: #fff;
+        }
+    }
+
+    &__code {
+        @include pcStyles.text-size(code-2);
+        padding-right: 24px;
+        flex-grow: 1;
+        font-family: var(--g-font-family-monospace);
+        color: rgba(255, 255, 255, 0.7);
+        margin-right: 12px;
+        white-space: pre-wrap;
+        transition: color 0.1s ease-in-out;
+
+        &_copied {
+            color: #fff;
+        }
+    }
+
+    &__copy-button {
+        position: sticky;
+        right: 16px;
+        top: 0;
+    }
+}

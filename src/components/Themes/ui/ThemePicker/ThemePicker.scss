@@ -1,0 +1,12 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-picker';
+
+#{$block} {
+    --g-border-radius-xl: 8px;
+
+    &__option {
+        margin-top: 13px;
+    }
+}

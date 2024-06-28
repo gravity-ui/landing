@@ -30,6 +30,7 @@ export const ClipboardArea: React.FC<ClipboardAreaProps> = ({
 
     return isNeedPopup ? (
         <Popover
+            className={b('popover')}
             disabled={isMobile}
             tooltipClassName={b('popup')}
             content={tooltipContent ?? t('actions_copyToClipboard')}
