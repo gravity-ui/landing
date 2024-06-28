@@ -1,0 +1,32 @@
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}selectable-card';
+
+#{$block} {
+    position: relative;
+    display: flex;
+    padding: 26px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &__icon {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        color: var(--g-color-base-brand);
+    }
+
+    &__fake-button {
+        width: 69px;
+        height: 28px;
+        background-color: var(--g-color-base-brand);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        user-select: none;
+        user-select: none;
+    }
+}
