@@ -51,10 +51,12 @@ $block: '.#{variables.$ns}themes-preview';
         }
 
         &_theme_dark {
+            scrollbar-color: var(--g-color-scroll-handle) var(--g-color-scroll-track);
             @include themes.g-theme-dark;
         }
 
         &_theme_light {
+            scrollbar-color: var(--g-color-scroll-handle) var(--g-color-scroll-track);
             @include themes.g-theme-light;
         }
     }

@@ -87,7 +87,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                                             content: <Icon data={TextAlignCenter} />,
                                         },
                                         {
-                                            value: 'stretch',
+                                            value: 'space-between',
                                             content: <Icon data={TextAlignJustify} />,
                                         },
                                     ]}
