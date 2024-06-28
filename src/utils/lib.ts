@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import mm from 'micromatch';
 
-import allContributors from '../contributors.json';
-import libsData from '../libs-data.json';
+import allContributors from '../data/contributors.json';
+import libsData from '../data/libs-data.json';
+import packagesVersions from '../data/packages-versions.json';
 import {libs} from '../libs.mjs';
-import packagesVersions from '../packages-versions.json';
 
 type LibConfig = {
     id: string;

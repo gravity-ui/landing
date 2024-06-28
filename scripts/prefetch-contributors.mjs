@@ -17,14 +17,14 @@ const CONTRIB_FILENAME = 'contributors.json';
 
 const contribDataPath = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
-    '../src',
+    '../src/data',
     CONTRIB_FILENAME,
 );
 
 const readLibsData = async () => {
     const libsDataPath = path.resolve(
         path.dirname(fileURLToPath(import.meta.url)),
-        '../src',
+        '../src/data',
         LIBS_DATA_FILENAME,
     );
 

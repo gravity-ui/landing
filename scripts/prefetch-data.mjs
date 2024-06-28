@@ -13,7 +13,7 @@ dotenv.config();
 
 const libsFetchedData = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
-    '../src/libs-data.json',
+    '../src/data/libs-data.json',
 );
 
 const fetchNpmInfo = () => {
