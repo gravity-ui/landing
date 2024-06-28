@@ -26,7 +26,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/src/libs-data.json
-/src/packages-versions.json
+/src/data/*.json
 
 .env
