@@ -41,7 +41,6 @@ export const DEFAULT_RADIUS: RadiusValue = {
     m: '6',
     l: '8',
     xl: '10',
-    xxl: '16',
 };
 
 export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
@@ -52,7 +51,6 @@ export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
         m: '100',
         l: '100',
         xl: '100',
-        xxl: '100',
     },
     [RadiusPresetName.Squared]: {
         xs: '0',
@@ -60,7 +58,6 @@ export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
         m: '0',
         l: '0',
         xl: '0',
-        xxl: '0',
     },
     [RadiusPresetName.Custom]: DEFAULT_RADIUS,
 };

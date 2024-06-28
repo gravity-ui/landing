@@ -22,7 +22,7 @@ export type ColorsOptions = {
 
 export type ColorOption = keyof ColorsOptions;
 
-export type RadiusSizeName = 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl';
+export type RadiusSizeName = 'xs' | 's' | 'm' | 'l' | 'xl';
 
 export enum RadiusPresetName {
     Regular = 'radius_regular',

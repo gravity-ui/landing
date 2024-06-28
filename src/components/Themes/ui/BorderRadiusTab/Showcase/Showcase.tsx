@@ -1,7 +1,6 @@
 import {PencilToLine} from '@gravity-ui/icons';
 import {
     Button,
-    Card,
     Flex,
     FlexProps,
     Label,
@@ -40,17 +39,6 @@ const LabelBlock = (props: ShowcaseBlockProps) => (
         <Label size="xs">{props.text}</Label>
         <Label size="s">{props.text}</Label>
         <Label size="m">{props.text}</Label>
-    </BlockWrapper>
-);
-
-const CardBlock = (props: ShowcaseBlockProps) => (
-    <BlockWrapper {...props}>
-        <Card size="m" className={b('card')} type="selection" selected>
-            {props.text}
-        </Card>
-        <Card size="l" className={b('card')} type="selection" selected>
-            {props.text}
-        </Card>
     </BlockWrapper>
 );
 
@@ -131,8 +119,6 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
                     <ButtonBlock text={t('button')} className={b('column-transform')} />
                     <RadioButtonBlock text={t('label')} className={b('column-transform')} />
                 </Flex>
-
-                <CardBlock text={'\u00A0'} className={b('card-block')} />
 
                 <TextInputBlock text={t('input_placeholder')} className={b('text-input-block')} />
             </Flex>
