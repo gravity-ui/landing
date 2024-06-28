@@ -491,20 +491,6 @@ function createBorderRadiusCssVariable(radiusSize: string) {
     return `${THEME_BORDER_RADIUS_VARIABLE_PREFIX}-${radiusSize}`;
 }
 
-function createBorderRadiusClassesForCards(values: RadiusValue, forPreview: boolean) {
-    const cardSizeM = values.l
-        ? `.g-card_size_m {
-    --_--border-radius: ${values.l}px${forPreview ? ' !important' : ''};
-}\n`
-        : '';
-    const cardSizeL = values.xxl
-        ? `.g-card_size_l {
-    --_--border-radius: ${values.xxl}px${forPreview ? ' !important' : ''};
-}\n`
-        : '';
-    return cardSizeM && cardSizeL ? '\n' + cardSizeM + cardSizeL : '';
-}
-
 /**
  * Generates ready-to-use in css string with borders variables
  * @returns string
@@ -530,6 +516,5 @@ export function createBorderRadiusPresetForExport({
             };\n`;
         }
     });
-    cssString += createBorderRadiusClassesForCards(borders.values, forPreview);
     return cssString;
 }

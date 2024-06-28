@@ -68,7 +68,6 @@ export const CustomRadius = ({onUpdate, values}: CustomRadiusProps) => {
                 <RadiusInputRow onUpdate={onUpdate} radiusSizeName="m" value={values.m} />
                 <RadiusInputRow onUpdate={onUpdate} radiusSizeName="l" value={values.l} />
                 <RadiusInputRow onUpdate={onUpdate} radiusSizeName="xl" value={values.xl} />
-                <RadiusInputRow onUpdate={onUpdate} radiusSizeName="xxl" value={values.xxl} />
             </Flex>
         </ThemeSection>
     );

@@ -6,9 +6,6 @@
 $root: '.g-root';
 $block: '.#{variables.$ns}border-radius-showcase';
 
-// Workaround for missing theme class in ThemeProvider
-$workaroundBlockDarkTheme: &#{$block}_theme_dark;
-
 #{$block} {
     padding: 40px;
     border-radius: 24px;
@@ -18,20 +15,6 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
             flex-direction: column;
             width: 100%;
         }
-    }
-
-    &__card-block {
-        flex-grow: 1;
-        margin-inline-start: calc(var(--g-spacing-base) * 11);
-        @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'lg') - 1)) {
-            order: 1;
-            margin-inline-start: 0;
-        }
-    }
-
-    &__card {
-        height: 196px;
-        flex-grow: 1;
     }
 
     &__text-input-block {
