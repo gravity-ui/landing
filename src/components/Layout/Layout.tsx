@@ -1,8 +1,8 @@
 import {PageConstructorProvider, Theme as PageConstructorTheme} from '@gravity-ui/page-constructor';
-import {Lang, ThemeProvider, configure as configureUiKit} from '@gravity-ui/uikit';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import ru from 'javascript-time-ago/locale/ru.json';
+import {Lang, ThemeProvider, configure as configureUiKit} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import Head from 'next/head';
 import React from 'react';

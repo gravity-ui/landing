@@ -1,5 +1,5 @@
-import {ArrowDownToLine, ArrowShapeTurnUpRight, Check, Link} from '@gravity-ui/icons';
-import {Button, CopyToClipboard, Icon} from '@gravity-ui/uikit';
+import {ArrowDownToLine, ArrowShapeTurnUpRight, Check, Link} from 'landing-icons';
+import {Button, CopyToClipboard, Icon} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

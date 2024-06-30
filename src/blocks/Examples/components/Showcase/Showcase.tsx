@@ -14,7 +14,7 @@ import {
     Theme,
     ThemeProvider,
     withTableSelection,
-} from '@gravity-ui/uikit';
+} from 'landing-uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../assets/avatar-1.png';

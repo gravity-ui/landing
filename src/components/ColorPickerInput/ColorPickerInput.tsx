@@ -1,5 +1,5 @@
-import {Palette} from '@gravity-ui/icons';
-import {Button, Flex, Icon, TextInput, TextInputProps} from '@gravity-ui/uikit';
+import {Palette} from 'landing-icons';
+import {Button, Flex, Icon, TextInput, TextInputProps} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
 

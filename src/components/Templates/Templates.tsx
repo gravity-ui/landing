@@ -1,4 +1,4 @@
-import {Button, ClipboardButton, Icon, Tabs} from '@gravity-ui/uikit';
+import {Button, ClipboardButton, Icon, Tabs} from 'landing-uikit';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash.js';
 import React from 'react';

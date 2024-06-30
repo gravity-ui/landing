@@ -1,4 +1,4 @@
-import {RadioButton, RadioButtonOption} from '@gravity-ui/uikit';
+import {RadioButton, RadioButtonOption} from 'landing-uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

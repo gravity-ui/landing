@@ -1,4 +1,4 @@
-import {useToaster} from '@gravity-ui/uikit';
+import {useToaster} from 'landing-uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';

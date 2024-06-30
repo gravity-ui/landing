@@ -1,5 +1,5 @@
 import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
-import {Button} from '@gravity-ui/uikit';
+import {Button} from 'landing-uikit';
 import React from 'react';
 
 import {ExpandableContributorList} from '../../components/ExpandableContributorList';

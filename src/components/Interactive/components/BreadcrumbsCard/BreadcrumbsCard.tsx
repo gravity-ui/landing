@@ -1,4 +1,4 @@
-import {Breadcrumbs, Flex} from '@gravity-ui/uikit';
+import {Breadcrumbs, Flex} from 'landing-uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

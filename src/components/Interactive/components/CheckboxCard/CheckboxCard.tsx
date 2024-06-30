@@ -1,4 +1,4 @@
-import {Checkbox, Flex} from '@gravity-ui/uikit';
+import {Checkbox, Flex} from 'landing-uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

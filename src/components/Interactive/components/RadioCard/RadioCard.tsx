@@ -1,4 +1,4 @@
-import {RadioGroup, RadioGroupOption} from '@gravity-ui/uikit';
+import {RadioGroup, RadioGroupOption} from 'landing-uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

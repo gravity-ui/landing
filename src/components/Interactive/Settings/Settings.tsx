@@ -1,5 +1,5 @@
-import {HandPointUp, Moon, Sun} from '@gravity-ui/icons';
-import {Icon} from '@gravity-ui/uikit';
+import {HandPointUp, Moon, Sun} from 'landing-icons';
+import {Icon} from 'landing-uikit';
 import React from 'react';
 
 import {block} from '../../../utils';
