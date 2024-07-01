@@ -418,4 +418,19 @@ export const libs = [
             'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/CHANGELOG.md',
         mainBranch: 'master',
     },
+    {
+        id: 'markdown-editor',
+        githubId: 'gravity-ui/markdown-editor',
+        npmId: '@gravity-ui/markdown-editor',
+        title: 'Markdown editor',
+        primary: false,
+        landing: false,
+        tags: ['markdown', 'prosemirror', 'wysiwyg', 'codemirror', 'yfm', 'diplodoc', 'gfm', 'react'],
+        storybookUrl: 'https://preview.gravity-ui.com/md-editor/',
+        readmeUrl:
+            'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/README.md',
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
 ];
