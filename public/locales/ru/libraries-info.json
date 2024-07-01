@@ -28,5 +28,6 @@
     "description_prettier-config": "Пресет настройки Prettier для проектов Gravity UI.",
     "description_stylelint-config": "Пресет настройки Stylelint для проектов Gravity UI.",
     "description_babel-preset": "Пресет настройки Babel для проектов Gravity UI.",
-    "description_browserslist-config": "Пресет настройки Browserslist для проектов Gravity UI."
+    "description_browserslist-config": "Пресет настройки Browserslist для проектов Gravity UI.",
+    "description_markdown-editor": "Мощный инструмент для работы с Markdown, который сочетает в себе режимы WYSIWYG и разметки."
 }

@@ -28,5 +28,6 @@
     "description_prettier-config": "Prettier configuration preset for Gravity UI projects.",
     "description_stylelint-config": "Stylelint configuration preset for Gravity UI projects.",
     "description_babel-preset": "Babel configuration preset for Gravity UI projects.",
-    "description_browserslist-config": "Browserslist confugiration preset used in our services."
+    "description_browserslist-config": "Browserslist confugiration preset used in our services.",
+    "description_markdown-editor": "A powerful tool for working with Markdown, which combines WYSIWYG and Markup modes."
 }
