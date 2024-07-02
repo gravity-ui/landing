@@ -1,5 +1,6 @@
 import {DEFAULT_PALETTE, DEFAULT_THEME} from './constants';
 import {
+    createBorderRadiusPresetForExport,
     createPrivateColorCssVariable,
     createPrivateColorCssVariableFromToken,
     createPrivateColorToken,
@@ -8,10 +9,13 @@ import {
 } from './themeCreatorUtils';
 import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
 
+const COMMON_VARIABLES_TEMPLATE_NAME = '%COMMON_VARIABLES%';
+
 const SCSS_TEMPLATE = `
 @use '@gravity-ui/uikit/styles/themes';
 
 .g-root {
+    ${COMMON_VARIABLES_TEMPLATE_NAME}
     &_theme_light {
         @include themes.g-theme-light;
 
@@ -101,10 +105,23 @@ export function exportTheme({
             },
         );
 
+        if (forPreview) {
+            cssVariables += createBorderRadiusPresetForExport({
+                borders: themeState.borders,
+                forPreview,
+                ignoreDefaultValues,
+            });
+        }
+
         return cssVariables.trim();
     };
 
     return {
+        common: createBorderRadiusPresetForExport({
+            borders: themeState.borders,
+            forPreview,
+            ignoreDefaultValues,
+        }),
         light: prepareThemeVariables('light'),
         dark: prepareThemeVariables('dark'),
     };
@@ -117,10 +134,12 @@ export function exportThemeForDialog({themeState, format = 'scss'}: ExportThemeF
         return 'not implemented';
     }
 
-    const {light, dark} = exportTheme({themeState, format, forPreview: false});
+    const {common, light, dark} = exportTheme({themeState, format, forPreview: false});
 
     return SCSS_TEMPLATE.replace(
-        '%LIGHT_THEME_VARIABLES%',
-        light.replaceAll('\n', '\n'.padEnd(9)),
-    ).replace('%DARK_THEME_VARIABLES%', dark.replaceAll('\n', '\n'.padEnd(9)));
+        COMMON_VARIABLES_TEMPLATE_NAME,
+        common.replaceAll('\n', '\n'.padEnd(5)),
+    )
+        .replace('%LIGHT_THEME_VARIABLES%', light.replaceAll('\n', '\n'.padEnd(9)))
+        .replace('%DARK_THEME_VARIABLES%', dark.replaceAll('\n', '\n'.padEnd(9)));
 }
