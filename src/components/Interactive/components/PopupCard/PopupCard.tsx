@@ -1,4 +1,4 @@
-import {Popup} from '@gravity-ui/uikit';
+import {Popup} from 'landing-uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

@@ -1,4 +1,4 @@
-import {RadioButton} from '@gravity-ui/uikit';
+import {RadioButton} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';

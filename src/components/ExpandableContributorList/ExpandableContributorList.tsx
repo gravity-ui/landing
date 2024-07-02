@@ -1,4 +1,4 @@
-import {Button} from '@gravity-ui/uikit';
+import {Button} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useState} from 'react';
 

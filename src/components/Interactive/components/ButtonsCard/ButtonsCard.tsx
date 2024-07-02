@@ -1,4 +1,4 @@
-import {Button, Col, Flex, Row} from '@gravity-ui/uikit';
+import {Button, Col, Flex, Row} from 'landing-uikit';
 
 import {InteractiveCard} from '../InteractiveCard';
 

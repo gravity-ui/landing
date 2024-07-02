@@ -1,4 +1,4 @@
-import {CopyToClipboard, CopyToClipboardStatus, Popover} from '@gravity-ui/uikit';
+import {CopyToClipboard, CopyToClipboardStatus, Popover} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

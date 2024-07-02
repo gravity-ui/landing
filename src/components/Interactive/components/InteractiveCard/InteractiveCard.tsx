@@ -1,4 +1,4 @@
-import {Theme, ThemeProvider, ToasterComponent, ToasterProvider} from '@gravity-ui/uikit';
+import {Theme, ThemeProvider, ToasterComponent, ToasterProvider} from 'landing-uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';

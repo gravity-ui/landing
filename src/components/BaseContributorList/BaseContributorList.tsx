@@ -1,4 +1,4 @@
-import {Avatar, AvatarSize, Link} from '@gravity-ui/uikit';
+import {Avatar, AvatarSize, Link} from 'landing-uikit';
 import React from 'react';
 
 import {Contributor, block} from '../../utils';

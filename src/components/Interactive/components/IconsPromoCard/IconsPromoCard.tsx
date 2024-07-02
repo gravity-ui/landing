@@ -9,8 +9,8 @@ import {
     Person,
     ThumbsUp,
     Volume,
-} from '@gravity-ui/icons';
-import {Col, Flex, Icon, Row} from '@gravity-ui/uikit';
+} from 'landing-icons';
+import {Col, Flex, Icon, Row} from 'landing-uikit';
 
 import {block} from '../../../../utils';
 import {InteractiveCard} from '../InteractiveCard';

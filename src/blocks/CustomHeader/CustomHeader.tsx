@@ -1,6 +1,6 @@
 import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
-import {Button, ButtonProps, Icon} from '@gravity-ui/uikit';
 import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import {Button, ButtonProps, Icon} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';

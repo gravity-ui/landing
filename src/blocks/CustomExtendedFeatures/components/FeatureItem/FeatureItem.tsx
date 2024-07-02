@@ -1,5 +1,5 @@
 import {HTML, Image, ThemedImage, useTheme} from '@gravity-ui/page-constructor';
-import {Icon} from '@gravity-ui/uikit';
+import {Icon} from 'landing-uikit';
 import Link from 'next/link';
 import React from 'react';
 

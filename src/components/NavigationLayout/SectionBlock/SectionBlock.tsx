@@ -1,4 +1,4 @@
-import {Icon} from '@gravity-ui/uikit';
+import {Icon} from 'landing-uikit';
 import React from 'react';
 import LibraryVersion from 'src/components/LibraryVersion/LibraryVersion';
 

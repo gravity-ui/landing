@@ -1,4 +1,4 @@
-import {Icon} from '@gravity-ui/uikit';
+import {Icon} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

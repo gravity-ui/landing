@@ -1,4 +1,4 @@
-import {Loader} from '@gravity-ui/uikit';
+import {Loader} from 'landing-uikit';
 
 import {InteractiveCard} from '../InteractiveCard';
 

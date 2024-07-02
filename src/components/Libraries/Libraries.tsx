@@ -1,5 +1,5 @@
 import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
-import {Icon, TextInput} from '@gravity-ui/uikit';
+import {Icon, TextInput} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

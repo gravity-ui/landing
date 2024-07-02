@@ -1,4 +1,4 @@
-import {Tabs} from '@gravity-ui/uikit';
+import {Tabs} from 'landing-uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

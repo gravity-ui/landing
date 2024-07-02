@@ -1,4 +1,4 @@
-import {Card, Text} from '@gravity-ui/uikit';
+import {Card, Text} from 'landing-uikit';
 import React, {FC} from 'react';
 import {block, getLibVersion} from 'src/utils';
 

@@ -1,4 +1,4 @@
-import {Theme} from '@gravity-ui/uikit';
+import {Theme} from 'landing-uikit';
 import React from 'react';
 
 import {ColorTheme} from '../constants';

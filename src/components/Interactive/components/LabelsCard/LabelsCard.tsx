@@ -1,5 +1,5 @@
-import {ArrowDown, ArrowLeft, ArrowRight, ArrowUp} from '@gravity-ui/icons';
-import {Flex, Icon, Label} from '@gravity-ui/uikit';
+import {ArrowDown, ArrowLeft, ArrowRight, ArrowUp} from 'landing-icons';
+import {Flex, Icon, Label} from 'landing-uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

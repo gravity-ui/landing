@@ -1,5 +1,5 @@
-import {Copy, CopyCheck} from '@gravity-ui/icons';
-import {type CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
+import {Copy, CopyCheck} from 'landing-icons';
+import {type CopyToClipboardStatus, Icon} from 'landing-uikit';
 import React from 'react';
 
 import {block} from '../../utils';
