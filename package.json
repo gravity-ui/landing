@@ -11,7 +11,7 @@
     "@gravity-ui/icons": "^2.8.1",
     "@gravity-ui/navigation": "^2.15.0",
     "@gravity-ui/page-constructor": "^5.2.0",
-    "@gravity-ui/uikit": "^6.17.0",
+    "@gravity-ui/uikit": "^6.20.1",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@octokit/rest": "^20.1.1",

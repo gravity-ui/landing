@@ -18,6 +18,7 @@ export const BorderCard = ({selected, preset, onClick}: BorderCardProps) => {
     }, [preset]);
 
     const displayName = t(preset);
+    const borderRadiusStyle = {borderRadius: RADIUS_PRESETS[preset]?.m + 'px'};
 
     return (
         <SelectableCard
@@ -25,7 +26,7 @@ export const BorderCard = ({selected, preset, onClick}: BorderCardProps) => {
             onClick={handleClick}
             selected={selected}
             pureText={preset === RadiusPresetName.Custom}
-            contentStyle={{borderRadius: RADIUS_PRESETS[preset]?.m + 'px'}}
+            textProps={{style: borderRadiusStyle}}
         />
     );
 };
