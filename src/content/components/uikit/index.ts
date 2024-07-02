@@ -18,6 +18,7 @@ import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {modalConfig} from './Modal';
+import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
 import {pinInputConfig} from './PinInput';
@@ -61,6 +62,7 @@ const uikitComponents: Component[] = [
     loaderConfig,
     menuConfig,
     modalConfig,
+    overlayConfig,
     paginationConfig,
     paletteConfig,
     pinInputConfig,
