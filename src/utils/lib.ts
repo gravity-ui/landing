@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import mm from 'micromatch';
 
-import libsData from '../libs-data.json';
+import allContributors from '../data/contributors.json';
+import libsData from '../data/libs-data.json';
+import packagesVersions from '../data/packages-versions.json';
 import {libs} from '../libs.mjs';
-import packagesVersions from '../packages-versions.json';
 
 type LibConfig = {
     id: string;
@@ -106,25 +107,7 @@ export const getLibVersion = (id?: string) => {
 export const getLibraryGithubUrl = (library: Lib) =>
     `https://github.com/${library.config.githubId}`;
 
-export const getAllContributors = () => {
-    const libraries = getLibsList();
-
-    const contributors: Record<string, Contributor> = {};
-
-    for (const {data} of libraries) {
-        for (const contributor of data.contributors) {
-            const {login, contributions} = contributor;
-
-            if (contributors[login]) {
-                contributors[login].contributions += contributions;
-            } else {
-                contributors[login] = contributor;
-            }
-        }
-    }
-
-    return Object.values(contributors).sort((a, b) => b.contributions - a.contributions);
-};
+export const getAllContributors = () => allContributors;
 
 export const getMaintainers = (lib: Lib, path = '/'): Contributor[] => {
     const {contributors, codeOwners} = lib.data;

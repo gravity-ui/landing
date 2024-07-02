@@ -11,7 +11,7 @@ const packagesMap = {
 const packageJsonPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../package.json');
 const packagesVersionsPath = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
-    '../src/packages-versions.json',
+    '../src/data/packages-versions.json',
 );
 
 const getPackagesVersions = () => {
