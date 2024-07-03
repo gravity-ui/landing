@@ -1,4 +1,4 @@
-import {Flex, UserLabel} from '@gravity-ui/uikit';
+import {Flex, UserLabel} from 'landing-uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../assets/avatar-1.png';

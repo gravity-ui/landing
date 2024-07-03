@@ -1,5 +1,5 @@
 import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
-import {Button, Icon, RadioButton, Select, SelectOption, Theme} from '@gravity-ui/uikit';
+import {Button, Icon, RadioButton, Select, SelectOption, Theme} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

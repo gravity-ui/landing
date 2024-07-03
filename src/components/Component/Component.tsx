@@ -1,4 +1,4 @@
-import {Button, Icon, Tabs} from '@gravity-ui/uikit';
+import {Button, Icon, Tabs} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';

@@ -1,4 +1,4 @@
-import {Avatar, Link} from '@gravity-ui/uikit';
+import {Avatar, Link} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 
 import {Contributor, block} from '../../utils';

@@ -3,7 +3,7 @@ import {
     ChevronsExpandUpRight,
     TextAlignLeft,
     TextAlignRight,
-} from '@gravity-ui/icons';
+} from 'landing-icons';
 import {
     Col,
     Direction,
@@ -17,7 +17,7 @@ import {
     TextInput,
     Theme,
     Tooltip,
-} from '@gravity-ui/uikit';
+} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
