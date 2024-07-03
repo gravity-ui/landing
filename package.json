@@ -5,9 +5,11 @@
   "homepage": "https://gravity-ui.com/",
   "dependencies": {
     "@diplodoc/transform": "^4.11.0",
+    "@gravity-ui/chartkit": "^5.8.0",
     "@gravity-ui/components": "^3.0.0",
     "@gravity-ui/date-components": "^2.0.1",
     "@gravity-ui/icons": "^2.8.1",
+    "@gravity-ui/navigation": "^2.15.0",
     "@gravity-ui/page-constructor": "^5.2.0",
     "@gravity-ui/uikit": "^6.17.0",
     "@mdx-js/mdx": "^2.3.0",

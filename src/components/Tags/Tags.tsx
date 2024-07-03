@@ -25,9 +25,11 @@ export function Tags<T extends string = string>({value, items, onChange, classNa
             {items.map((item) => {
                 return (
                     <Button
+                        className={b('tag', {selected: item.value === value})}
                         key={item.value}
                         tabIndex={0}
-                        view={item.value === value ? 'action' : 'outlined'}
+                        selected={item.value === value}
+                        view={'outlined'}
                         size="xl"
                         onClick={() => {
                             onChange(item.value);
