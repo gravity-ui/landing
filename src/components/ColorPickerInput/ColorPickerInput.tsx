@@ -1,14 +1,14 @@
 import {Palette} from 'landing-icons';
 import {Button, Flex, Icon, TextInput, TextInputProps} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
-import React, {ChangeEventHandler, useCallback, useRef, useState} from 'react';
+import React, {ChangeEventHandler, useCallback, useEffect, useRef, useState} from 'react';
 
 import {block} from '../../utils';
 import {ColorPreview} from '../ColorPreview/ColorPreview';
 
 import './ColorPickerInput.scss';
 import {NativeColorPicker} from './NativeColorPicker';
-import {hexRegexp, parseRgbStringToHex, rgbRegexp, rgbaRegexp} from './utils';
+import {getValidColor, hexRegexp, rgbRegexp, rgbaRegexp} from './utils';
 
 const b = block('color-picker');
 
@@ -31,7 +31,12 @@ export const ColorPickerInput = ({
 }: ColorPickerInputProps) => {
     const {t} = useTranslation('component');
 
-    const [color, setColor] = useState<string>(defaultValue);
+    const [color, setColor] = useState<string>(() => {
+        const validColor = getValidColor(defaultValue);
+
+        return validColor ?? '';
+    });
+
     const [inputValue, setInputValue] = useState<string>(defaultValue);
     const [validationError, setValidationError] = useState<TextInputProps['validationState']>();
 
@@ -39,33 +44,27 @@ export const ColorPickerInput = ({
 
     const managedValue = value || inputValue;
 
-    React.useEffect(() => {
-        setColor(defaultValue);
+    useEffect(() => {
+        const validColor = getValidColor(defaultValue);
+
+        setColor(validColor ?? '');
     }, [defaultValue]);
 
     const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
         (event) => {
-            const newValue = event.target.value.replaceAll(' ', '');
+            const newValue = event.target.value;
+
             onChangeExternal(newValue);
             setInputValue(newValue);
             setValidationError(undefined);
 
-            if (
-                !newValue ||
-                new RegExp(hexRegexp, 'g').test(newValue) ||
-                new RegExp(rgbaRegexp, 'g').test(newValue)
-            ) {
-                setColor(newValue);
+            const validColor = getValidColor(newValue);
 
+            if (validColor === undefined) {
                 return;
             }
 
-            if (new RegExp(rgbRegexp, 'g').test(newValue)) {
-                const hexColor = parseRgbStringToHex(newValue);
-
-                setColor(hexColor);
-                return;
-            }
+            setColor(validColor);
         },
         [onChangeExternal],
     );

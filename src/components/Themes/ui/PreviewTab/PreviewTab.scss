@@ -1,0 +1,61 @@
+@use '../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}themes-preview-layout';
+
+#{$block} {
+    height: 800px;
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--g-color-line-generic);
+
+    &__aside-header {
+        --gn-aside-header-item-icon-color: var(--g-color-base-brand);
+
+        --gn-aside-header-item-current-background-color: var(--g-color-base-brand);
+        --gn-aside-header-item-current-icon-color: var(--g-color-base-background);
+
+        border-radius: 16px;
+
+        & .gn-aside-header__pane-container .gn-aside-header__aside {
+            border-radius: 16px;
+        }
+
+        & .gn-aside-header__pane-container,
+        & .gn-aside-header__pane-container .gn-aside-header__aside {
+            height: 100%;
+        }
+    }
+
+    &__header-actions {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            display: none;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        height: calc(100% - 40px);
+        overflow: hidden;
+        padding: var(--g-spacing-6) calc(var(--g-spacing-1) * 24);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+            padding: var(--g-spacing-6) calc(var(--g-spacing-10));
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+            padding: var(--g-spacing-6) calc(var(--g-spacing-6));
+        }
+    }
+
+    &_theme_dark {
+        scrollbar-color: var(--g-color-scroll-handle) var(--g-color-scroll-track);
+        @include themes.g-theme-dark;
+    }
+
+    &_theme_light {
+        scrollbar-color: var(--g-color-scroll-handle) var(--g-color-scroll-track);
+        @include themes.g-theme-light;
+    }
+}
