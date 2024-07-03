@@ -12,7 +12,7 @@ import {
     TextAlignLeft,
 } from '@gravity-ui/icons';
 import {ActionBar, AsideHeader, FooterItem} from '@gravity-ui/navigation';
-import {Breadcrumbs, Flex, Icon, RadioButton, Text, ThemeProvider} from '@gravity-ui/uikit';
+import {Breadcrumbs, Flex, Icon, RadioButton, Text, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React, {CSSProperties, Fragment, useState} from 'react';
 
 import gravityUi from '../../../../assets/icons/gravity-ui.svg';
@@ -26,7 +26,7 @@ import {FormPreview} from './FormPreview/FormPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
 
-export const b = block('themes-preview');
+const b = block('themes-preview-layout');
 
 interface PreviewLayoutProps {
     title: string;
@@ -37,7 +37,7 @@ interface PreviewLayoutProps {
 }
 
 const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutProps) => {
-    const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+    const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
     const [isCompact, setCompact] = useState<boolean>(true);
 
@@ -71,7 +71,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                         </ActionBar.Group>
 
                         <ActionBar.Group pull="right">
-                            <ActionBar.Item className={b('layout__header-actions')}>
+                            <ActionBar.Item className={b('header-actions')}>
                                 <RadioButton
                                     name="alignment"
                                     defaultValue="left"
@@ -93,7 +93,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                                     ]}
                                 />
                             </ActionBar.Item>
-                            <ActionBar.Item className={b('layout__header-actions')}>
+                            <ActionBar.Item className={b('header-actions')}>
                                 <RadioButton
                                     name="theme"
                                     defaultValue="light"
@@ -114,7 +114,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                         </ActionBar.Group>
                     </ActionBar.Section>
                 </ActionBar>
-                <Flex justifyContent={justify} className={b('layout__content')}>
+                <Flex justifyContent={justify} className={b('content')}>
                     {children({justify})}
                 </Flex>
             </Fragment>
@@ -122,16 +122,14 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
     };
 
     return (
-        <ThemeProvider
-            theme={theme}
-            scoped
-            rootClassName={`${b('layout')} ${b('layout', {theme})}`}
-        >
+        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
             {styles ? (
-                <style>{`.gravity-ui-landing-themes-preview__layout_theme_${theme} {${styles[theme]}}`}</style>
+                <style>{`.gravity-ui-landing-themes-preview-layout_theme_${theme} {${
+                    styles[theme as 'light' | 'dark']
+                }}`}</style>
             ) : null}
 
-            <div className={b('layout')}>
+            <div className={b()}>
                 <AsideHeader
                     menuItems={[
                         {
@@ -163,7 +161,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                             current: id === 'cards',
                         },
                     ]}
-                    className={b('layout__aside-header')}
+                    className={b('aside-header')}
                     logo={{
                         text: 'Gravity UI',
                         href: '#',
