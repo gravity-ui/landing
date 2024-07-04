@@ -6,18 +6,23 @@ import lowerCase from 'lodash/lowerCase';
 import {
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
+    RADIUS_PRESETS,
+    THEME_BORDER_RADIUS_VARIABLE_PREFIX,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
 import {generatePrivateColors} from './privateColors';
 import type {
+    BordersOption,
     ColorsOptions,
     Palette,
     PaletteTokens,
     PrivateColors,
+    RadiusValue,
     ThemeCreatorState,
     ThemeOptions,
     ThemeVariant,
 } from './types';
+import {RadiusPresetName} from './types';
 
 function createColorToken(title: string) {
     return kebabCase(title);
@@ -449,4 +454,67 @@ export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
         paletteTokens,
         tokens: Object.keys(paletteTokens),
     };
+}
+
+export type ChangeRadiusPresetInThemeParams = {
+    radiusPresetName: RadiusPresetName;
+};
+
+export function changeRadiusPresetInTheme(
+    themeState: ThemeCreatorState,
+    {radiusPresetName}: ChangeRadiusPresetInThemeParams,
+): ThemeCreatorState {
+    const newBorderValue = {
+        preset: radiusPresetName,
+        values: {...RADIUS_PRESETS[radiusPresetName]},
+    };
+
+    return {...themeState, borders: newBorderValue};
+}
+
+export type UpdateCustomRadiusPresetInThemeParams = {radiusValue: Partial<RadiusValue>};
+
+export function updateCustomRadiusPresetInTheme(
+    themeState: ThemeCreatorState,
+    {radiusValue}: UpdateCustomRadiusPresetInThemeParams,
+): ThemeCreatorState {
+    const previousRadiusValues = themeState.borders.values;
+    const newCustomPresetValues = {
+        preset: RadiusPresetName.Custom,
+        values: {...previousRadiusValues, ...radiusValue},
+    };
+
+    return {...themeState, borders: newCustomPresetValues};
+}
+
+function createBorderRadiusCssVariable(radiusSize: string) {
+    return `${THEME_BORDER_RADIUS_VARIABLE_PREFIX}-${radiusSize}`;
+}
+
+/**
+ * Generates ready-to-use in css string with borders variables
+ * @returns string
+ */
+export function createBorderRadiusPresetForExport({
+    borders,
+    forPreview,
+    ignoreDefaultValues,
+}: {
+    borders: BordersOption;
+    ignoreDefaultValues: boolean;
+    forPreview: boolean;
+}) {
+    // Don't export radius preset that are equals to default
+    if (ignoreDefaultValues && borders.preset === RadiusPresetName.Regular) {
+        return '';
+    }
+    let cssString = '';
+    Object.entries(borders.values).forEach(([radiusName, radiusValue]) => {
+        if (radiusValue) {
+            cssString += `${createBorderRadiusCssVariable(radiusName)}: ${radiusValue}px${
+                forPreview ? ' !important' : ''
+            };\n`;
+        }
+    });
+    return cssString;
 }

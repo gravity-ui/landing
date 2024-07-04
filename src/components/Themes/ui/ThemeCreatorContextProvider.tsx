@@ -4,17 +4,21 @@ import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreat
 import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
 import type {
     AddColorToThemeParams,
+    ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
     UpdateColorInThemeParams,
+    UpdateCustomRadiusPresetInThemeParams,
 } from '../lib/themeCreatorUtils';
 import {
     addColorToTheme,
+    changeRadiusPresetInTheme,
     changeUtilityColorInTheme,
     initThemeCreator,
     removeColorFromTheme,
     renameColorInTheme,
     updateColorInTheme,
+    updateCustomRadiusPresetInTheme,
 } from '../lib/themeCreatorUtils';
 import type {ThemeCreatorState, ThemeOptions} from '../lib/types';
 
@@ -40,6 +44,14 @@ type ThemeCreatorAction =
           payload: ChangeUtilityColorInThemeParams;
       }
     | {
+          type: 'changeRadiusPreset';
+          payload: ChangeRadiusPresetInThemeParams;
+      }
+    | {
+          type: 'updateCustomRadiusPreset';
+          payload: UpdateCustomRadiusPresetInThemeParams;
+      }
+    | {
           type: 'reinitialize';
           payload: ThemeOptions;
       };
@@ -59,6 +71,10 @@ const themeCreatorReducer = (
             return updateColorInTheme(prevState, action.payload);
         case 'changeUtilityColor':
             return changeUtilityColorInTheme(prevState, action.payload);
+        case 'changeRadiusPreset':
+            return changeRadiusPresetInTheme(prevState, action.payload);
+        case 'updateCustomRadiusPreset':
+            return updateCustomRadiusPresetInTheme(prevState, action.payload);
         case 'reinitialize':
             return initThemeCreator(action.payload);
         default:
@@ -133,9 +149,43 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const changeRadiusPreset = React.useCallback<
+        ThemeCreatorMethodsContextType['changeRadiusPreset']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'changeRadiusPreset',
+            payload,
+        });
+    }, []);
+
+    const updateCustomRadiusPreset = React.useCallback<
+        ThemeCreatorMethodsContextType['updateCustomRadiusPreset']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'updateCustomRadiusPreset',
+            payload,
+        });
+    }, []);
+
     const methods = React.useMemo(
-        () => ({addColor, renameColor, removeColor, updateColor, changeUtilityColor}),
-        [addColor, renameColor, removeColor, updateColor, changeUtilityColor],
+        () => ({
+            addColor,
+            renameColor,
+            removeColor,
+            updateColor,
+            changeUtilityColor,
+            changeRadiusPreset,
+            updateCustomRadiusPreset,
+        }),
+        [
+            addColor,
+            renameColor,
+            removeColor,
+            updateColor,
+            changeUtilityColor,
+            changeRadiusPreset,
+            updateCustomRadiusPreset,
+        ],
     );
 
     return (
