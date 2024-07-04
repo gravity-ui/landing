@@ -21,10 +21,6 @@ export type SelecableCardProps = {
      * Props for inner Text component
      */
     textProps?: TextProps;
-    /**
-     * Style object to customize decorated text. Has an impact when pureText has falsie values
-     */
-    contentStyle?: React.CSSProperties;
 } & Pick<CardProps, 'selected' | 'onClick'> &
     Pick<DOMProps, 'className'>;
 
@@ -32,12 +28,10 @@ const CardContent = ({
     text,
     pureText,
     textProps,
-    contentStyle,
-}: Pick<SelecableCardProps, 'text' | 'pureText' | 'textProps' | 'contentStyle'>) => {
+}: Pick<SelecableCardProps, 'text' | 'pureText' | 'textProps'>) => {
     const props: Record<string, unknown> = pureText
         ? {variant: 'body-2'}
         : {color: 'inverted-primary', className: b('fake-button')};
-    props.style = contentStyle;
     return (
         <Text {...props} {...textProps}>
             {text}
@@ -52,17 +46,9 @@ export const SelectableCard = ({
     onClick,
     className,
     textProps,
-    contentStyle,
-}: SelecableCardProps) => {
-    return (
-        <Card className={b(null, className)} type="selection" selected={selected} onClick={onClick}>
-            <CardContent
-                text={text}
-                pureText={pureText}
-                textProps={textProps}
-                contentStyle={contentStyle}
-            />
-            {selected && <CircleCheckFill className={b('icon')} />}
-        </Card>
-    );
-};
+}: SelecableCardProps) => (
+    <Card className={b(null, className)} type="selection" selected={selected} onClick={onClick}>
+        <CardContent text={text} pureText={pureText} textProps={textProps} />
+        {selected && <CircleCheckFill className={b('icon')} />}
+    </Card>
+);
