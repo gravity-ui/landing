@@ -21,5 +21,14 @@
   "component_preview": "Component preview",
   "is_everything_set": "Is everything set?",
   "cancel": "Cancel",
-  "export_theme_config": "Export theme config"
+  "export_theme_config": "Export theme config",
+  "radius": "Radius",
+  "radius_regular": "Regular",
+  "radius_circled": "Circled",
+  "radius_squared": "Squared",
+  "radius_custom": "Custom radius",
+  "choose_border_radius": "Choose border radius",
+  "label": "Label",
+  "input_placeholder": "Content",
+  "button": "Button"
 }
