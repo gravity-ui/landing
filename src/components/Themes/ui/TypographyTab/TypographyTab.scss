@@ -14,5 +14,44 @@ $block: '.#{variables.$ns}typography-tab';
 
     &__preview {
         border-radius: 16px;
+
+        &__variant-title {
+            --g-text-subheader-3-line-height: 24px;
+            --g-text-subheader-3-font-size: 17px;
+            --g-text-subheader-font-weight: 600;
+        }
+    }
+
+    &__advance-settings {
+        &__wrapper {
+            width: 100%;
+            gap: calc(var(--g-spacing-1) * 24);
+        }
+
+        &__raw-wrapper {
+            width: 100%;
+        }
+
+        &__settings-card {
+            --g-color-base-background: rgb(34, 29, 34);
+            background-color: var(--g-color-base-background);
+
+            flex: 1 1 66%;
+
+            padding: var(--g-spacing-10) calc(var(--g-spacing-10) * 2);
+            width: 100%;
+        }
+
+        &__font-select {
+            --g-border-radius-xl: 8px;
+        }
+
+        &__input-setting-end-content {
+            margin-inline: var(--g-spacing-2);
+        }
+
+        &__setting-input {
+            width: 225px;
+        }
     }
 }
