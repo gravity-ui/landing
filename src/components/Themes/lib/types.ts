@@ -1,3 +1,7 @@
+import {TextProps} from '@gravity-ui/uikit';
+
+import {DefaultFontFamilyType, TextVariants} from './typography/constants';
+
 export type ThemeVariant = 'light' | 'dark';
 
 export type PaletteOptions = {
@@ -38,7 +42,40 @@ export type BordersOption = {
     values: RadiusValue;
 };
 
-export type TypographyOptions = {};
+export type TypographyOptions = {
+    baseSetting: {
+        availableFontFamilyType: {
+            value: DefaultFontFamilyType;
+            content: string;
+        }[];
+        fontFamily: Record<
+            DefaultFontFamilyType,
+            {
+                title: string;
+                key: string;
+                link: string;
+            }
+        >;
+    };
+    advanced: Record<
+        TextVariants,
+        {
+            title: string;
+            fontWeight: number;
+            selectedFontFamilyType: DefaultFontFamilyType;
+            sizes: Partial<
+                Record<
+                    Exclude<TextProps['variant'], undefined>,
+                    {
+                        title: string;
+                        fontSize: number;
+                        lineHeight: number;
+                    }
+                >
+            >;
+        }
+    >;
+};
 
 export interface ThemeOptions {
     /** Values of solid colors, from which private colors are calculated */

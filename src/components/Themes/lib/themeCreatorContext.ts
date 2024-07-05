@@ -2,7 +2,11 @@ import noop from 'lodash/noop';
 import {createContext} from 'react';
 
 import {DEFAULT_THEME} from './constants';
-import {initThemeCreator} from './themeCreatorUtils';
+import {
+    UpdateAdvancedTypographySettingsParams,
+    UpdateFontFamilyParams,
+    initThemeCreator,
+} from './themeCreatorUtils';
 import type {
     AddColorToThemeParams,
     ChangeRadiusPresetInThemeParams,
@@ -25,6 +29,9 @@ export interface ThemeCreatorMethodsContextType {
     changeUtilityColor: (params: ChangeUtilityColorInThemeParams) => void;
     changeRadiusPreset: (params: ChangeRadiusPresetInThemeParams) => void;
     updateCustomRadiusPreset: (params: UpdateCustomRadiusPresetInThemeParams) => void;
+    updateFontFamily: (params: UpdateFontFamilyParams) => void;
+    addFontFamilyType: () => void;
+    updateAdvancedTypographySettings: (params: UpdateAdvancedTypographySettingsParams) => void;
 }
 
 export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsContextType>({
@@ -35,4 +42,7 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     changeUtilityColor: noop,
     changeRadiusPreset: noop,
     updateCustomRadiusPreset: noop,
+    updateFontFamily: noop,
+    addFontFamilyType: noop,
+    updateAdvancedTypographySettings: noop,
 });

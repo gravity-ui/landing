@@ -1,3 +1,4 @@
+import {TextProps} from '@gravity-ui/uikit';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';
@@ -22,7 +23,16 @@ import type {
     ThemeOptions,
     ThemeVariant,
 } from './types';
-import {RadiusPresetName} from './types';
+import {RadiusPresetName, TypographyOptions} from './types';
+import {DefaultFontFamilyType, TextVariants} from './typography/constants';
+import {
+    createFontFamilyVariable,
+    createFontLinkImport,
+    createTextFontFamilyVariable,
+    createTextFontSizeVariable,
+    createTextFontWeightVariable,
+    createTextLineHeightVariable,
+} from './typography/utils';
 
 function createColorToken(title: string) {
     return kebabCase(title);
@@ -518,3 +528,169 @@ export function createBorderRadiusPresetForExport({
     });
     return cssString;
 }
+
+export type UpdateFontFamilyParams = {
+    fontType: DefaultFontFamilyType | string;
+    value: {
+        title: string;
+        key: string;
+        link: string;
+    };
+};
+
+export function updateFontFamilyInTheme(
+    themeState: ThemeCreatorState,
+    {fontType, value}: UpdateFontFamilyParams,
+): ThemeCreatorState {
+    const previousFontFamilySettings = themeState.typography.baseSetting.fontFamily;
+
+    const newFontFamilySettings = {
+        ...previousFontFamilySettings,
+        [fontType]: value,
+    };
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                fontFamily: newFontFamilySettings,
+            },
+        },
+    };
+}
+
+export function addFontFamilyTypeInTheme(themeState: ThemeCreatorState) {
+    //TODO add logic here
+
+    return {
+        ...themeState,
+    };
+}
+
+export type UpdateAdvancedTypographySettingsParams = {
+    key: TextVariants;
+    fontWeight?: number;
+    selectedFontFamilyType?: DefaultFontFamilyType;
+    sizeKey?: Exclude<TextProps['variant'], undefined>;
+    fontSize?: number;
+    lineHeight?: number;
+};
+
+export function updateAdvancedTypographySettingsInTheme(
+    themeState: ThemeCreatorState,
+    {
+        key,
+        fontSize,
+        selectedFontFamilyType,
+        sizeKey,
+        fontWeight,
+        lineHeight,
+    }: UpdateAdvancedTypographySettingsParams,
+): ThemeCreatorState {
+    const previousTypographyAdvancedSettings = themeState.typography.advanced;
+
+    const newSizes = sizeKey
+        ? {
+              [sizeKey]: {
+                  ...previousTypographyAdvancedSettings[key].sizes[sizeKey],
+                  fontSize:
+                      fontSize ?? previousTypographyAdvancedSettings[key].sizes[sizeKey]?.fontSize,
+                  lineHeight:
+                      lineHeight ??
+                      previousTypographyAdvancedSettings[key].sizes[sizeKey]?.lineHeight,
+              },
+          }
+        : {};
+
+    const newTypographyAdvancedSettings = {
+        ...previousTypographyAdvancedSettings,
+        [key]: {
+            ...previousTypographyAdvancedSettings[key],
+            fontWeight: fontWeight ?? previousTypographyAdvancedSettings[key].fontWeight,
+            selectedFontFamilyType:
+                selectedFontFamilyType ??
+                previousTypographyAdvancedSettings[key].selectedFontFamilyType,
+            sizes: {
+                ...previousTypographyAdvancedSettings[key].sizes,
+                ...newSizes,
+            },
+        },
+    };
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            advanced: {
+                ...newTypographyAdvancedSettings,
+            },
+        },
+    };
+}
+
+export const createFontImportsForExport = (
+    fontFamily: TypographyOptions['baseSetting']['fontFamily'],
+) => {
+    let cssString = '';
+
+    Object.entries(fontFamily).forEach(([, value]) => {
+        cssString += `${createFontLinkImport(value.link)}\n`;
+    });
+
+    return cssString;
+};
+
+export const createTypographyPresetForExport = ({
+    typography,
+    forPreview,
+}: {
+    typography: TypographyOptions;
+    ignoreDefaultValues: boolean;
+    forPreview: boolean;
+}) => {
+    const {baseSetting, advanced} = typography;
+    let cssString = '';
+
+    Object.entries(baseSetting.fontFamily).forEach(([key, value]) => {
+        cssString += `${createFontFamilyVariable(
+            key as DefaultFontFamilyType,
+            value.title,
+            forPreview,
+        )}\n`;
+    });
+
+    cssString += '\n';
+
+    Object.entries(advanced).forEach(([key, data]) => {
+        cssString += `${createTextFontFamilyVariable(
+            key as TextVariants,
+            data.selectedFontFamilyType,
+            forPreview,
+        )}\n`;
+        cssString += `${createTextFontWeightVariable(
+            key as TextVariants,
+            data.fontWeight,
+            forPreview,
+        )}\n`;
+
+        cssString += '\n';
+
+        Object.entries(data.sizes).forEach(([sizeKey, sizeData]) => {
+            cssString += `${createTextFontSizeVariable(
+                sizeKey as TextProps['variant'],
+                sizeData.fontSize,
+                forPreview,
+            )}\n`;
+            cssString += `${createTextLineHeightVariable(
+                sizeKey as TextProps['variant'],
+                sizeData.lineHeight,
+                forPreview,
+            )}\n`;
+            cssString += '\n';
+        });
+    });
+
+    return cssString;
+};

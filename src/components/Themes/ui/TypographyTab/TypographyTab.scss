@@ -1,0 +1,18 @@
+@use '../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}typography-tab';
+
+#{$block} {
+    --g-text-input-border-radius: 8px;
+    --g-button-border-radius: 8px;
+
+    &__font-card {
+        width: 195px;
+    }
+
+    &__preview {
+        border-radius: 16px;
+    }
+}

@@ -1,4 +1,5 @@
 import {RadiusPresetName, RadiusValue, type ThemeOptions} from './types';
+import {defaultTypographyPreset} from './typography/constants';
 
 export const THEME_COLOR_VARIABLE_PREFIX = '--g-color';
 
@@ -98,5 +99,5 @@ export const DEFAULT_THEME: ThemeOptions = {
         preset: RadiusPresetName.Regular,
         values: RADIUS_PRESETS[RadiusPresetName.Regular],
     },
-    typography: {},
+    typography: defaultTypographyPreset,
 };

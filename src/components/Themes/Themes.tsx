@@ -14,6 +14,7 @@ import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {PreviewTab} from './ui/PreviewTab/PreviewTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 import {ThemeExportDialog} from './ui/ThemeExportDialog/ThemeExportDialog';
+import {TypographyTab} from './ui/TypographyTab/TypographyTab';
 
 const b = block('themes');
 
@@ -26,7 +27,7 @@ enum ThemeTab {
 
 const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
     [ThemeTab.Colors]: ColorsTab,
-    [ThemeTab.Typography]: () => <div>TODO Typography</div>,
+    [ThemeTab.Typography]: TypographyTab,
     [ThemeTab.BorderRadius]: BorderRadiusTab,
     [ThemeTab.Preview]: PreviewTab,
 };

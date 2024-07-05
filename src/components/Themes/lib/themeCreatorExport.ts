@@ -1,21 +1,31 @@
 import {DEFAULT_PALETTE, DEFAULT_THEME} from './constants';
 import {
     createBorderRadiusPresetForExport,
+    createFontImportsForExport,
     createPrivateColorCssVariable,
     createPrivateColorCssVariableFromToken,
     createPrivateColorToken,
+    createTypographyPresetForExport,
     createUtilityColorCssVariable,
     isPrivateColorToken,
 } from './themeCreatorUtils';
 import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
 
-const COMMON_VARIABLES_TEMPLATE_NAME = '%COMMON_VARIABLES%';
+const BORDER_RADIUS_VARIABLES_TEMPLATE_NAME = '%BORDER_RADIUS_VARIABLES%';
+const TYPOGRAPHY_VARIABLES_TEMPLATE_NAME = '%TYPOGRAPHY_VARIABLES%';
+const FONTS_TEMPLATE_NAME = '%IMPORT_FONTS%';
 
 const SCSS_TEMPLATE = `
 @use '@gravity-ui/uikit/styles/themes';
 
+${FONTS_TEMPLATE_NAME}
+
 .g-root {
-    ${COMMON_VARIABLES_TEMPLATE_NAME}
+    @include themes.g-theme-common;
+    
+    ${BORDER_RADIUS_VARIABLES_TEMPLATE_NAME}
+    ${TYPOGRAPHY_VARIABLES_TEMPLATE_NAME}
+    
     &_theme_light {
         @include themes.g-theme-light;
 
@@ -122,6 +132,12 @@ export function exportTheme({
             forPreview,
             ignoreDefaultValues,
         }),
+        fontImports: createFontImportsForExport(themeState.typography.baseSetting.fontFamily),
+        typography: createTypographyPresetForExport({
+            typography: themeState.typography,
+            ignoreDefaultValues,
+            forPreview,
+        }),
         light: prepareThemeVariables('light'),
         dark: prepareThemeVariables('dark'),
     };
@@ -134,12 +150,15 @@ export function exportThemeForDialog({themeState, format = 'scss'}: ExportThemeF
         return 'not implemented';
     }
 
-    const {common, light, dark} = exportTheme({themeState, format, forPreview: false});
+    const {common, light, dark, fontImports, typography} = exportTheme({
+        themeState,
+        format,
+        forPreview: false,
+    });
 
-    return SCSS_TEMPLATE.replace(
-        COMMON_VARIABLES_TEMPLATE_NAME,
-        common.replaceAll('\n', '\n'.padEnd(5)),
-    )
+    return SCSS_TEMPLATE.replace(FONTS_TEMPLATE_NAME, fontImports)
+        .replace(BORDER_RADIUS_VARIABLES_TEMPLATE_NAME, common.replaceAll('\n', '\n'.padEnd(5)))
+        .replace(TYPOGRAPHY_VARIABLES_TEMPLATE_NAME, typography.replaceAll('\n', '\n'.padEnd(5)))
         .replace('%LIGHT_THEME_VARIABLES%', light.replaceAll('\n', '\n'.padEnd(9)))
         .replace('%DARK_THEME_VARIABLES%', dark.replaceAll('\n', '\n'.padEnd(9)));
 }
