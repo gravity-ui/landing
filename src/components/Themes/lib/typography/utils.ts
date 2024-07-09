@@ -11,7 +11,7 @@ import {
 } from './constants';
 
 export const createFontLinkImport = (fontLink: string) => {
-    return `@import(${fontLink});`;
+    return `@import url('${fontLink}');`;
 };
 
 export const createFontFamilyVariable = (

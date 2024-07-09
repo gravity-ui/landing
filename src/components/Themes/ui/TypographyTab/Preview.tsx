@@ -144,7 +144,7 @@ export const Preview = () => {
                 <ThemeProvider theme="dark" scoped rootClassName={`${b()} ${b({theme: 'dark'})}`}>
                     {themeStyles ? (
                         <style>
-                            {`.gravity-ui-landing-typography-tab__preview_theme_dark {${themeStyles.dark}}`}
+                            {`${themeStyles.fontImports}\n.gravity-ui-landing-typography-tab__preview_theme_dark {${themeStyles.dark}}`}
                         </style>
                     ) : null}
                     <Flex gap={10} style={{padding: 80}} justifyContent="center">
