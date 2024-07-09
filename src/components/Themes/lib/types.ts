@@ -44,12 +44,16 @@ export type BordersOption = {
 
 export type TypographyOptions = {
     baseSetting: {
-        availableFontFamilyType: {
+        defaultFontFamilyType: {
             value: DefaultFontFamilyType;
             content: string;
         }[];
-        fontFamily: Record<
-            DefaultFontFamilyType,
+        customFontFamilyType: {
+            value: string;
+            content: string;
+        }[];
+        fontFamilies: Record<
+            string,
             {
                 title: string;
                 key: string;

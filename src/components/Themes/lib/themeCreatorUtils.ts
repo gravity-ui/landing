@@ -3,6 +3,7 @@ import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';
 import lowerCase from 'lodash/lowerCase';
+import {v4 as uuidv4} from 'uuid';
 
 import {
     DEFAULT_NEW_COLOR_TITLE,
@@ -32,6 +33,7 @@ import {
     createTextFontSizeVariable,
     createTextFontWeightVariable,
     createTextLineHeightVariable,
+    getCustomFontTypeKey,
 } from './typography/utils';
 
 function createColorToken(title: string) {
@@ -542,7 +544,7 @@ export function updateFontFamilyInTheme(
     themeState: ThemeCreatorState,
     {fontType, value}: UpdateFontFamilyParams,
 ): ThemeCreatorState {
-    const previousFontFamilySettings = themeState.typography.baseSetting.fontFamily;
+    const previousFontFamilySettings = themeState.typography.baseSetting.fontFamilies;
 
     const newFontFamilySettings = {
         ...previousFontFamilySettings,
@@ -555,24 +557,104 @@ export function updateFontFamilyInTheme(
             ...themeState.typography,
             baseSetting: {
                 ...themeState.typography.baseSetting,
-                fontFamily: newFontFamilySettings,
+                fontFamilies: newFontFamilySettings,
             },
         },
     };
 }
 
-export function addFontFamilyTypeInTheme(themeState: ThemeCreatorState) {
-    //TODO add logic here
+export type AddFontFamilyTypeParams = {
+    title: string;
+};
+
+export function addFontFamilyTypeInTheme(
+    themeState: ThemeCreatorState,
+    {title}: AddFontFamilyTypeParams,
+): ThemeCreatorState {
+    const {customFontFamilyType} = themeState.typography.baseSetting;
+    const newFontType = `custom-font-type-${uuidv4()}`;
+
+    const newCustomFontFamily = [
+        ...customFontFamilyType,
+        {
+            value: newFontType,
+            content: title,
+        },
+    ];
 
     return {
         ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                customFontFamilyType: newCustomFontFamily,
+            },
+        },
+    };
+}
+
+export type UpdateFontFamilyTypeTitleParams = {
+    title: string;
+    familyType: string;
+};
+
+export function updateFontFamilyTypeTitleInTheme(
+    themeState: ThemeCreatorState,
+    {title, familyType}: UpdateFontFamilyTypeTitleParams,
+): ThemeCreatorState {
+    const {customFontFamilyType} = themeState.typography.baseSetting;
+
+    const newCustomFontFamily = customFontFamilyType.map((fontFamilyType) => {
+        return fontFamilyType.value === familyType
+            ? {
+                  content: title,
+                  value: familyType,
+              }
+            : fontFamilyType;
+    });
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                customFontFamilyType: newCustomFontFamily,
+            },
+        },
+    };
+}
+
+export function removeFontFamilyTypeFromTheme(
+    themeState: ThemeCreatorState,
+    {fontType}: {fontType: string},
+): ThemeCreatorState {
+    const {customFontFamilyType, fontFamilies} = themeState.typography.baseSetting;
+
+    const {[fontType]: _, ...restFontFamilies} = fontFamilies;
+
+    const newCustomFontFamilyType = customFontFamilyType.filter(
+        (fontFamily) => fontFamily.value !== fontType,
+    );
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                fontFamilies: restFontFamilies,
+                customFontFamilyType: newCustomFontFamilyType,
+            },
+        },
     };
 }
 
 export type UpdateAdvancedTypographySettingsParams = {
     key: TextVariants;
     fontWeight?: number;
-    selectedFontFamilyType?: DefaultFontFamilyType;
+    selectedFontFamilyType?: string;
     sizeKey?: Exclude<TextProps['variant'], undefined>;
     fontSize?: number;
     lineHeight?: number;
@@ -631,7 +713,7 @@ export function updateAdvancedTypographySettingsInTheme(
 }
 
 export const createFontImportsForExport = (
-    fontFamily: TypographyOptions['baseSetting']['fontFamily'],
+    fontFamily: TypographyOptions['baseSetting']['fontFamilies'],
 ) => {
     let cssString = '';
 
@@ -653,9 +735,11 @@ export const createTypographyPresetForExport = ({
     const {baseSetting, advanced} = typography;
     let cssString = '';
 
-    Object.entries(baseSetting.fontFamily).forEach(([key, value]) => {
+    Object.entries(baseSetting.fontFamilies).forEach(([key, value]) => {
+        const customFontKey = getCustomFontTypeKey(key, baseSetting.customFontFamilyType);
+
         cssString += `${createFontFamilyVariable(
-            key as DefaultFontFamilyType,
+            customFontKey ? kebabCase(customFontKey) : key,
             value.title,
             forPreview,
         )}\n`;
@@ -664,9 +748,14 @@ export const createTypographyPresetForExport = ({
     cssString += '\n';
 
     Object.entries(advanced).forEach(([key, data]) => {
+        const customFontTypeKey = getCustomFontTypeKey(
+            data.selectedFontFamilyType,
+            baseSetting.customFontFamilyType,
+        );
+
         cssString += `${createTextFontFamilyVariable(
             key as TextVariants,
-            data.selectedFontFamilyType,
+            customFontTypeKey ? kebabCase(customFontTypeKey) : data.selectedFontFamilyType,
             forPreview,
         )}\n`;
         cssString += `${createTextFontWeightVariable(

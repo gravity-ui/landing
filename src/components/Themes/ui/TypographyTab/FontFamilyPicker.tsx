@@ -1,13 +1,43 @@
-import {Plus} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
-import React from 'react';
+import {Plus, TrashBin} from '@gravity-ui/icons';
+import {
+    Button,
+    Flex,
+    Icon,
+    RadioButton,
+    RadioButtonOption,
+    Text,
+    TextInput,
+    TextInputProps,
+} from '@gravity-ui/uikit';
+import React, {useCallback, useState} from 'react';
 
 import {block} from '../../../../utils';
 import {SelectableCard} from '../../../SelectableCard/SelectableCard';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
-import {DefaultFontFamilyType} from '../../lib/typography/constants';
+import {
+    DefaultFontFamilyType,
+    GOOGLE_FONTS_FONT_PREVIEW_HOST,
+} from '../../lib/typography/constants';
+import {generateGoogleFontDownloadLink} from '../../lib/typography/utils';
 
 import './TypographyTab.scss';
+
+enum CustomFontSelectType {
+    GoogleFonts = 'google-fonts',
+    Manual = 'manual',
+}
+
+const customFontType: RadioButtonOption[] = [
+    {
+        value: CustomFontSelectType.GoogleFonts,
+        content: 'Import From Google Fonts',
+    },
+    {
+        value: CustomFontSelectType.Manual,
+        content: 'Manual',
+        disabled: true,
+    },
+];
 
 const FONT_FAMILIES_OPTION: {
     name: string;
@@ -58,73 +88,242 @@ const FONT_FAMILIES_OPTION: {
     },
 ];
 
-const b = block('typography-tab');
+const b = block('typography-tab__font');
 
-export const FontFamilyPicker = () => {
-    const {
-        typography: {
-            baseSetting: {fontFamily},
-        },
-    } = useThemeCreator();
+const CustomFontFamily = ({
+    fontType,
+    withExtraContent,
+    ExtraContent,
+}: {
+    fontType: string;
+    withExtraContent?: boolean;
+    ExtraContent?: React.ReactNode;
+}) => {
+    const [validationState, setValidationState] =
+        useState<TextInputProps['validationState']>(undefined);
+
+    const [customType, setCustomType] = useState<CustomFontSelectType>(
+        CustomFontSelectType.GoogleFonts,
+    );
 
     const {updateFontFamily} = useThemeCreatorMethods();
 
+    const renderFieldsByType = useCallback(() => {
+        switch (customType) {
+            case CustomFontSelectType.GoogleFonts: {
+                return (
+                    <TextInput
+                        size="xl"
+                        label="Link to font:"
+                        validationState={validationState}
+                        errorPlacement="inside"
+                        errorMessage={`Invalid link. Link should start from ${GOOGLE_FONTS_FONT_PREVIEW_HOST}`}
+                        placeholder={`${GOOGLE_FONTS_FONT_PREVIEW_HOST}Fira+Mono`}
+                        onChange={(event) => {
+                            const value = event.target.value;
+
+                            if (!value.startsWith(GOOGLE_FONTS_FONT_PREVIEW_HOST)) {
+                                setValidationState('invalid');
+                                return;
+                            } else {
+                                setValidationState(undefined);
+                            }
+
+                            const dirtyFontName = value.split('/').at(-1);
+
+                            if (!dirtyFontName) {
+                                return;
+                            }
+
+                            const extraDataIndex = dirtyFontName.indexOf('?');
+
+                            const fontName = dirtyFontName.slice(
+                                0,
+                                extraDataIndex === -1 ? dirtyFontName.length : extraDataIndex,
+                            );
+
+                            const link = generateGoogleFontDownloadLink(fontName);
+
+                            updateFontFamily({
+                                fontType,
+                                value: {
+                                    title: fontName.replaceAll('+', ' '),
+                                    key: fontName.replaceAll('+', '-').toLowerCase(),
+                                    link,
+                                },
+                            });
+                        }}
+                    />
+                );
+            }
+            case CustomFontSelectType.Manual: {
+                return <div></div>;
+            }
+            default: {
+                return null;
+            }
+        }
+    }, [customType, validationState]);
+
     return (
-        <Flex direction="column" alignItems="flex-start" gap={5} width="100%">
-            <Text variant="display-2">Font Families</Text>
+        <Flex direction="column" gap={6} width="100%" style={{marginBlockEnd: 52}}>
+            <Flex justifyContent="space-between">
+                <RadioButton
+                    size="xl"
+                    className={b('custom-font-radio-button')}
+                    options={customFontType}
+                    value={customType}
+                    onUpdate={(value) => {
+                        setCustomType(value as CustomFontSelectType);
+                    }}
+                />
+                {withExtraContent && ExtraContent}
+            </Flex>
+            {renderFieldsByType()}
+        </Flex>
+    );
+};
+
+export const FontFamilyPicker = () => {
+    const [isCustom, setIsCustom] = useState({
+        [DefaultFontFamilyType.Sans]: false,
+        [DefaultFontFamilyType.Monospace]: false,
+    });
+
+    const {
+        typography: {
+            baseSetting: {fontFamilies, customFontFamilyType},
+            advanced,
+        },
+    } = useThemeCreator();
+
+    console.log('fontFamily', fontFamilies);
+    console.log('customFontFamilyType', customFontFamilyType);
+
+    const {updateFontFamily, addFontFamilyType, removeFontFamilyType, updateFontFamilyTypeTitle} =
+        useThemeCreatorMethods();
+
+    return (
+        <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
+            <Text variant="display-2">Fonts</Text>
             {FONT_FAMILIES_OPTION.map((option) => (
                 <Flex direction="column" gap={5} style={{width: '100%'}} key={option.variableName}>
-                    <Flex justifyContent="space-between" alignItems="center" width="100%">
-                        <Text variant="body-3">{option.name}</Text>
+                    <Flex alignItems="flex-start" width="100%">
+                        <Text variant="body-3" style={{width: '400px'}}>
+                            {option.name}
+                        </Text>
 
-                        <Flex gap={4}>
-                            {option.fonts.map((font) => (
+                        <Flex direction="column" gap={5}>
+                            <Flex gap={4}>
+                                {option.fonts.map((font) => (
+                                    <SelectableCard
+                                        key={font.key}
+                                        className={b('font-card')}
+                                        selected={
+                                            fontFamilies[option.variableName].title ===
+                                                font.title && !isCustom[option.variableName]
+                                        }
+                                        text={font.title}
+                                        textProps={{
+                                            variant: 'header-1',
+                                            style: {
+                                                fontFamily: font.title,
+                                            },
+                                        }}
+                                        pureText
+                                        onClick={() => {
+                                            setIsCustom((prevState) => ({
+                                                ...prevState,
+                                                [option.variableName]: false,
+                                            }));
+
+                                            updateFontFamily({
+                                                fontType: option.variableName,
+                                                value: {
+                                                    title: font.title,
+                                                    key: font.key,
+                                                    link: font.link,
+                                                },
+                                            });
+                                        }}
+                                    />
+                                ))}
                                 <SelectableCard
-                                    key={font.key}
+                                    key={'custom'}
                                     className={b('font-card')}
-                                    selected={fontFamily[option.variableName].title === font.title}
-                                    text={font.title}
+                                    selected={isCustom[option.variableName]}
+                                    text="Custom"
                                     textProps={{
-                                        variant: 'header-1',
-                                        style: {
-                                            fontFamily: font.title,
-                                        },
+                                        variant: 'body-3',
                                     }}
                                     pureText
                                     onClick={() => {
-                                        updateFontFamily({
-                                            fontType: option.variableName,
-                                            value: {
-                                                title: font.title,
-                                                key: font.key,
-                                                link: font.link,
-                                            },
+                                        setIsCustom((prevState) => {
+                                            return {
+                                                ...prevState,
+                                                [option.variableName]:
+                                                    !prevState[option.variableName],
+                                            };
                                         });
                                     }}
                                 />
-                            ))}
-                            <SelectableCard
-                                key={'custom'}
-                                className={b('font-card')}
-                                selected={false}
-                                text="Custom (disable)"
-                                textProps={{
-                                    variant: 'body-3',
-                                }}
-                                pureText
-                                onClick={() => {
-                                    //TODO add logic
-                                }}
-                            />
+                            </Flex>
+                            {isCustom[option.variableName] && (
+                                <CustomFontFamily fontType={option.variableName} />
+                            )}
                         </Flex>
                     </Flex>
-                    {/*//TODO add logic*/}
-                    {/*{selectedFonts[option.variableName] === 'Custom' && (*/}
-                    {/*    <Flex>custom font settings</Flex>*/}
-                    {/*)}*/}
                 </Flex>
             ))}
-            <Button size="xl" view="outlined-action" disabled>
+            {customFontFamilyType.map((fType) => (
+                <Flex gap={4} width="100%" key={fType.value}>
+                    <TextInput
+                        size="xl"
+                        value={fType.content}
+                        label="Alias:"
+                        onChange={(event) => {
+                            const value = event.target.value;
+
+                            updateFontFamilyTypeTitle({title: value, familyType: fType.value});
+                        }}
+                        placeholder="Enter font alias"
+                        style={{
+                            minWidth: '380px',
+                            width: '380px',
+                        }}
+                    />
+
+                    <CustomFontFamily
+                        fontType={fType.value}
+                        withExtraContent
+                        ExtraContent={
+                            <Button
+                                size="xl"
+                                disabled={Object.entries(advanced).some(
+                                    ([, textVariantSetting]) =>
+                                        textVariantSetting.selectedFontFamilyType === fType.value,
+                                )}
+                                onClick={() => {
+                                    removeFontFamilyType({
+                                        fontType: fType.value,
+                                    });
+                                }}
+                            >
+                                <Icon data={TrashBin} />
+                            </Button>
+                        }
+                    />
+                </Flex>
+            ))}
+            <Button
+                size="xl"
+                view="outlined-action"
+                onClick={() => {
+                    addFontFamilyType({
+                        title: `Additional Font ${customFontFamilyType.length + 1}`,
+                    });
+                }}
+            >
                 <Icon data={Plus} />
                 Add Font Family
             </Button>

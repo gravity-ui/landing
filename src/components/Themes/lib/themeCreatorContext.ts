@@ -2,18 +2,18 @@ import noop from 'lodash/noop';
 import {createContext} from 'react';
 
 import {DEFAULT_THEME} from './constants';
-import {
-    UpdateAdvancedTypographySettingsParams,
-    UpdateFontFamilyParams,
-    initThemeCreator,
-} from './themeCreatorUtils';
+import {initThemeCreator} from './themeCreatorUtils';
 import type {
     AddColorToThemeParams,
+    AddFontFamilyTypeParams,
     ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
+    UpdateAdvancedTypographySettingsParams,
     UpdateColorInThemeParams,
     UpdateCustomRadiusPresetInThemeParams,
+    UpdateFontFamilyParams,
+    UpdateFontFamilyTypeTitleParams,
 } from './themeCreatorUtils';
 import type {ThemeCreatorState} from './types';
 
@@ -30,7 +30,9 @@ export interface ThemeCreatorMethodsContextType {
     changeRadiusPreset: (params: ChangeRadiusPresetInThemeParams) => void;
     updateCustomRadiusPreset: (params: UpdateCustomRadiusPresetInThemeParams) => void;
     updateFontFamily: (params: UpdateFontFamilyParams) => void;
-    addFontFamilyType: () => void;
+    addFontFamilyType: (params: AddFontFamilyTypeParams) => void;
+    updateFontFamilyTypeTitle: (params: UpdateFontFamilyTypeTitleParams) => void;
+    removeFontFamilyType: ({fontType}: {fontType: string}) => void;
     updateAdvancedTypographySettings: (params: UpdateAdvancedTypographySettingsParams) => void;
 }
 
@@ -44,5 +46,7 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     updateCustomRadiusPreset: noop,
     updateFontFamily: noop,
     addFontFamilyType: noop,
+    updateFontFamilyTypeTitle: noop,
+    removeFontFamilyType: noop,
     updateAdvancedTypographySettings: noop,
 });

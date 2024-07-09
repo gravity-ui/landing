@@ -1,6 +1,6 @@
 import {FormRow} from '@gravity-ui/components';
 import {Card, Flex, Select, Slider, Text, TextInput, TextProps} from '@gravity-ui/uikit';
-import React from 'react';
+import React, {useMemo} from 'react';
 
 import {block} from '../../../../utils';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
@@ -22,6 +22,11 @@ export const AdvanceTypographySettings = () => {
     } = useThemeCreator();
 
     const {updateAdvancedTypographySettings} = useThemeCreatorMethods();
+
+    const fontTypeOptions = useMemo(
+        () => [...baseSetting.defaultFontFamilyType, ...baseSetting.customFontFamilyType],
+        [baseSetting],
+    );
 
     return (
         <Flex direction="column" className={b('wrapper')}>
@@ -50,7 +55,7 @@ export const AdvanceTypographySettings = () => {
                                 name={`font-family-${key}`}
                                 id={`font-family-${key}`}
                                 placeholder="Choose font-family"
-                                options={baseSetting.availableFontFamilyType}
+                                options={fontTypeOptions}
                             />
                         </FormRow>
                         <FormRow direction="column" label="Font Weight">

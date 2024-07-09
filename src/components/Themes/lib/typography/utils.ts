@@ -1,8 +1,10 @@
 import {TextProps} from '@gravity-ui/uikit';
 
+import {TypographyOptions} from '../types';
+
 import {
     DEFAULT_FONTS,
-    DefaultFontFamilyType,
+    GOOGLE_FONTS_DOWNLOAD_HOST,
     THEME_FONT_FAMILY_PREFIX,
     THEME_TEXT_PREFIX,
     TextVariants,
@@ -13,13 +15,15 @@ export const createFontLinkImport = (fontLink: string) => {
 };
 
 export const createFontFamilyVariable = (
-    fontFamilyType: DefaultFontFamilyType,
+    fontFamilyType: string,
     value: string,
     forPreview: boolean,
 ) => {
-    return `${THEME_FONT_FAMILY_PREFIX}-${fontFamilyType}: '${value}', ${
-        DEFAULT_FONTS[fontFamilyType]
-    } ${forPreview ? '!important' : ''};`;
+    const additionalFonts = DEFAULT_FONTS[fontFamilyType];
+
+    return `${THEME_FONT_FAMILY_PREFIX}-${fontFamilyType}: '${value}'${
+        additionalFonts ? `, ${additionalFonts}` : ''
+    }${forPreview ? '!important' : ''};`;
 };
 
 export const createTextFontWeightVariable = (
@@ -27,17 +31,17 @@ export const createTextFontWeightVariable = (
     value: number,
     forPreview: boolean,
 ) => {
-    return `${THEME_TEXT_PREFIX}-${textVariant}-font-weight: ${value} ${
+    return `${THEME_TEXT_PREFIX}-${textVariant}-font-weight: ${value}${
         forPreview ? '!important' : ''
     };`;
 };
 
 export const createTextFontFamilyVariable = (
     textVariant: TextVariants,
-    value: DefaultFontFamilyType,
+    value: string,
     forPreview: boolean,
 ) => {
-    return `${THEME_TEXT_PREFIX}-${textVariant}-font-family: var(${THEME_FONT_FAMILY_PREFIX}-${value}) ${
+    return `${THEME_TEXT_PREFIX}-${textVariant}-font-family: var(${THEME_FONT_FAMILY_PREFIX}-${value})${
         forPreview ? '!important' : ''
     };`;
 };
@@ -47,7 +51,7 @@ export const createTextFontSizeVariable = (
     value: number,
     forPreview: boolean,
 ) => {
-    return `${THEME_TEXT_PREFIX}-${variant}-font-size: ${value}px ${
+    return `${THEME_TEXT_PREFIX}-${variant}-font-size: ${value}px${
         forPreview ? '!important' : ''
     };`;
 };
@@ -57,7 +61,18 @@ export const createTextLineHeightVariable = (
     value: number,
     forPreview: boolean,
 ) => {
-    return `${THEME_TEXT_PREFIX}-${variant}-line-height: ${value}px ${
+    return `${THEME_TEXT_PREFIX}-${variant}-line-height: ${value}px${
         forPreview ? '!important' : ''
     };`;
+};
+
+export const generateGoogleFontDownloadLink = (fontName: string) => {
+    return `${GOOGLE_FONTS_DOWNLOAD_HOST}?family=${fontName}&display=swap`;
+};
+
+export const getCustomFontTypeKey = (
+    key: string,
+    customFontFamilyType: TypographyOptions['baseSetting']['customFontFamilyType'],
+) => {
+    return customFontFamilyType.find((setting) => setting.value === key)?.content.toLowerCase();
 };

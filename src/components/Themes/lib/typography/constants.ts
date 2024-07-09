@@ -19,7 +19,10 @@ export enum TextVariants {
 
 export const FONT_WEIGHTS = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-export const DEFAULT_FONTS = {
+export const GOOGLE_FONTS_DOWNLOAD_HOST = 'https://fonts.googleapis.com/css2';
+export const GOOGLE_FONTS_FONT_PREVIEW_HOST = 'https://fonts.google.com/specimen/';
+
+export const DEFAULT_FONTS: Record<string, string[]> = {
     sans: ["'Helvetica Neue'", "'Helvetica'", "'Arial'", 'sans-serif'],
     monospace: [
         "'Menlo'",
@@ -36,11 +39,12 @@ export const DEFAULT_FONTS = {
 
 export const defaultTypographyPreset: TypographyOptions = {
     baseSetting: {
-        availableFontFamilyType: [
+        customFontFamilyType: [],
+        defaultFontFamilyType: [
             {value: DefaultFontFamilyType.Sans, content: 'Sans Font Family'},
             {value: DefaultFontFamilyType.Monospace, content: 'Monospace Font Family'},
         ],
-        fontFamily: {
+        fontFamilies: {
             [DefaultFontFamilyType.Sans]: {
                 title: 'Inter',
                 key: 'inter',

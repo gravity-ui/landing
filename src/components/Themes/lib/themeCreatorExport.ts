@@ -149,7 +149,7 @@ export function exportTheme({
     };
 
     return {
-        fontImports: createFontImportsForExport(themeState.typography.baseSetting.fontFamily),
+        fontImports: createFontImportsForExport(themeState.typography.baseSetting.fontFamilies),
         common: prepareCommonThemeVariables(),
         light: prepareThemeVariables('light'),
         dark: prepareThemeVariables('dark'),

@@ -9,7 +9,6 @@ import {AdvanceTypographySettings} from './AdvanceTypographySettings';
 import {FontFamilyPicker} from './FontFamilyPicker';
 import {Preview} from './Preview';
 import './TypographyTab.scss';
-import './base-fonts.scss';
 
 const b = block('typography-tab');
 

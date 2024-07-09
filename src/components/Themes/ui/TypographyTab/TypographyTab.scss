@@ -8,8 +8,15 @@ $block: '.#{variables.$ns}typography-tab';
     --g-text-input-border-radius: 8px;
     --g-button-border-radius: 8px;
 
-    &__font-card {
-        width: 195px;
+    &__font {
+        &__font-card {
+            width: 195px;
+        }
+
+        &__custom-font-radio-button {
+            --g-border-radius-xl: 8px;
+            align-self: flex-start;
+        }
     }
 
     &__preview {
