@@ -46,11 +46,11 @@ export const DEFAULT_RADIUS: RadiusValue = {
 export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
     [RadiusPresetName.Regular]: DEFAULT_RADIUS,
     [RadiusPresetName.Circled]: {
-        xs: '100',
-        s: '100',
-        m: '100',
-        l: '100',
-        xl: '100',
+        xs: '10',
+        s: '12',
+        m: '14',
+        l: '18',
+        xl: '22',
     },
     [RadiusPresetName.Squared]: {
         xs: '0',
