@@ -23,6 +23,7 @@ $block: '.#{variables.$ns}typography-tab';
         border-radius: 16px;
 
         &__variant-title {
+            --g-color-text-brand: rgb(233, 174, 86);
             --g-text-subheader-3-line-height: 24px;
             --g-text-subheader-3-font-size: 17px;
             --g-text-subheader-font-weight: 600;

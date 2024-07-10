@@ -533,7 +533,10 @@ export function createBorderRadiusPresetForExport({
 
 export type UpdateFontFamilyParams = {
     fontType: DefaultFontFamilyType | string;
-    value: {
+    isCustom?: boolean;
+    fontWebsite?: string;
+
+    value?: {
         title: string;
         key: string;
         link: string;
@@ -542,13 +545,18 @@ export type UpdateFontFamilyParams = {
 
 export function updateFontFamilyInTheme(
     themeState: ThemeCreatorState,
-    {fontType, value}: UpdateFontFamilyParams,
+    {fontType, value, isCustom, fontWebsite}: UpdateFontFamilyParams,
 ): ThemeCreatorState {
     const previousFontFamilySettings = themeState.typography.baseSetting.fontFamilies;
 
     const newFontFamilySettings = {
         ...previousFontFamilySettings,
-        [fontType]: value,
+        [fontType]: {
+            ...previousFontFamilySettings[fontType],
+            ...(value || {}),
+            isCustom,
+            fontWebsite,
+        },
     };
 
     return {

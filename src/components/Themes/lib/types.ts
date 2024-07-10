@@ -58,6 +58,8 @@ export type TypographyOptions = {
                 title: string;
                 key: string;
                 link: string;
+                isCustom?: boolean;
+                fontWebsite?: string;
             }
         >;
     };

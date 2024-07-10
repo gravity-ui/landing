@@ -99,6 +99,12 @@ const CustomFontFamily = ({
     withExtraContent?: boolean;
     ExtraContent?: React.ReactNode;
 }) => {
+    const {
+        typography: {
+            baseSetting: {fontFamilies},
+        },
+    } = useThemeCreator();
+
     const [validationState, setValidationState] =
         useState<TextInputProps['validationState']>(undefined);
 
@@ -114,6 +120,7 @@ const CustomFontFamily = ({
                 return (
                     <TextInput
                         size="xl"
+                        value={fontFamilies[fontType].fontWebsite}
                         label="Link to font:"
                         validationState={validationState}
                         errorPlacement="inside"
@@ -122,11 +129,11 @@ const CustomFontFamily = ({
                         onChange={(event) => {
                             const value = event.target.value;
 
-                            if (!value.startsWith(GOOGLE_FONTS_FONT_PREVIEW_HOST)) {
+                            if (value.startsWith(GOOGLE_FONTS_FONT_PREVIEW_HOST)) {
+                                setValidationState(undefined);
+                            } else {
                                 setValidationState('invalid');
                                 return;
-                            } else {
-                                setValidationState(undefined);
                             }
 
                             const dirtyFontName = value.split('/').at(-1);
@@ -146,6 +153,8 @@ const CustomFontFamily = ({
 
                             updateFontFamily({
                                 fontType,
+                                fontWebsite: value,
+                                isCustom: true,
                                 value: {
                                     title: fontName.replaceAll('+', ' '),
                                     key: fontName.replaceAll('+', '-').toLowerCase(),
@@ -156,6 +165,7 @@ const CustomFontFamily = ({
                     />
                 );
             }
+            // TODO add logic
             case CustomFontSelectType.Manual: {
                 return <div></div>;
             }
@@ -185,20 +195,12 @@ const CustomFontFamily = ({
 };
 
 export const FontFamilyPicker = () => {
-    const [isCustom, setIsCustom] = useState({
-        [DefaultFontFamilyType.Sans]: false,
-        [DefaultFontFamilyType.Monospace]: false,
-    });
-
     const {
         typography: {
             baseSetting: {fontFamilies, customFontFamilyType},
             advanced,
         },
     } = useThemeCreator();
-
-    console.log('fontFamily', fontFamilies);
-    console.log('customFontFamilyType', customFontFamilyType);
 
     const {updateFontFamily, addFontFamilyType, removeFontFamilyType, updateFontFamilyTypeTitle} =
         useThemeCreatorMethods();
@@ -221,7 +223,8 @@ export const FontFamilyPicker = () => {
                                         className={b('font-card')}
                                         selected={
                                             fontFamilies[option.variableName].title ===
-                                                font.title && !isCustom[option.variableName]
+                                                font.title &&
+                                            !fontFamilies[option.variableName].isCustom
                                         }
                                         text={font.title}
                                         textProps={{
@@ -232,13 +235,9 @@ export const FontFamilyPicker = () => {
                                         }}
                                         pureText
                                         onClick={() => {
-                                            setIsCustom((prevState) => ({
-                                                ...prevState,
-                                                [option.variableName]: false,
-                                            }));
-
                                             updateFontFamily({
                                                 fontType: option.variableName,
+                                                isCustom: false,
                                                 value: {
                                                     title: font.title,
                                                     key: font.key,
@@ -251,24 +250,21 @@ export const FontFamilyPicker = () => {
                                 <SelectableCard
                                     key={'custom'}
                                     className={b('font-card')}
-                                    selected={isCustom[option.variableName]}
+                                    selected={fontFamilies[option.variableName].isCustom}
                                     text="Custom"
                                     textProps={{
                                         variant: 'body-3',
                                     }}
                                     pureText
                                     onClick={() => {
-                                        setIsCustom((prevState) => {
-                                            return {
-                                                ...prevState,
-                                                [option.variableName]:
-                                                    !prevState[option.variableName],
-                                            };
+                                        updateFontFamily({
+                                            fontType: option.variableName,
+                                            isCustom: true,
                                         });
                                     }}
                                 />
                             </Flex>
-                            {isCustom[option.variableName] && (
+                            {fontFamilies[option.variableName].isCustom && (
                                 <CustomFontFamily fontType={option.variableName} />
                             )}
                         </Flex>
