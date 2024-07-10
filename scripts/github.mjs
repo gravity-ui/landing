@@ -2,7 +2,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {Octokit} from '@octokit/rest';
 
-const octokit = new Octokit();
+const octokit = new Octokit({
+    auth: process.env.GITHUB_TOKEN,
+});
 
 const CONTRIBUTOR_IGNORE_LIST = ['dependabot', 'dependabot[bot]', 'gravity-ui-bot', 'yc-ui-bot'];
 
@@ -27,6 +29,15 @@ export async function getRepositoryContributors(repoOwner, repo) {
         }));
 
     return contributors;
+}
+
+export async function getOrganizationRepositories(org) {
+    return await octokit.paginate('GET /orgs/{org}/repos', {
+        org,
+        headers: {
+            'X-GitHub-Api-Version': '2022-11-28',
+        },
+    });
 }
 
 export async function fetchRepositoryCodeOwners(repoOwner, repo) {

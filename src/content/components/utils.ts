@@ -1,5 +1,5 @@
 import {TARGET_PROFILE} from '../../constants';
-import packagesVersions from '../../packages-versions.json';
+import packagesVersions from '../../data/packages-versions.json';
 import {Repos} from '../../types/common';
 
 const githubTargetProfile = process.env.GITHUB_PROFILE || TARGET_PROFILE;
