@@ -120,7 +120,7 @@ const CustomFontFamily = ({
                 return (
                     <TextInput
                         size="xl"
-                        value={fontFamilies[fontType].fontWebsite}
+                        value={fontFamilies[fontType]?.fontWebsite}
                         label="Link to font:"
                         validationState={validationState}
                         errorPlacement="inside"
