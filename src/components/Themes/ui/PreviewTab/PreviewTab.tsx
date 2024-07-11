@@ -124,7 +124,9 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
             {styles ? (
-                <style>{`.gravity-ui-landing-themes-preview-layout_theme_${theme} {${
+                <style>{`${
+                    styles.fontImports
+                }\n.gravity-ui-landing-themes-preview-layout_theme_${theme} {${
                     styles[theme as 'light' | 'dark']
                 }}`}</style>
             ) : null}

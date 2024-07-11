@@ -1,7 +1,9 @@
+import {TextProps} from '@gravity-ui/uikit';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';
 import lowerCase from 'lodash/lowerCase';
+import {v4 as uuidv4} from 'uuid';
 
 import {
     DEFAULT_NEW_COLOR_TITLE,
@@ -22,7 +24,17 @@ import type {
     ThemeOptions,
     ThemeVariant,
 } from './types';
-import {RadiusPresetName} from './types';
+import {RadiusPresetName, TypographyOptions} from './types';
+import {DefaultFontFamilyType, TextVariants} from './typography/constants';
+import {
+    createFontFamilyVariable,
+    createFontLinkImport,
+    createTextFontFamilyVariable,
+    createTextFontSizeVariable,
+    createTextFontWeightVariable,
+    createTextLineHeightVariable,
+    getCustomFontTypeKey,
+} from './typography/utils';
 
 function createColorToken(title: string) {
     return kebabCase(title);
@@ -518,3 +530,264 @@ export function createBorderRadiusPresetForExport({
     });
     return cssString;
 }
+
+export type UpdateFontFamilyParams = {
+    fontType: DefaultFontFamilyType | string;
+    isCustom?: boolean;
+    fontWebsite?: string;
+
+    value?: {
+        title: string;
+        key: string;
+        link: string;
+    };
+};
+
+export function updateFontFamilyInTheme(
+    themeState: ThemeCreatorState,
+    {fontType, value, isCustom, fontWebsite}: UpdateFontFamilyParams,
+): ThemeCreatorState {
+    const previousFontFamilySettings = themeState.typography.baseSetting.fontFamilies;
+
+    const newFontFamilySettings = {
+        ...previousFontFamilySettings,
+        [fontType]: {
+            ...previousFontFamilySettings[fontType],
+            ...(value || {}),
+            isCustom,
+            fontWebsite,
+        },
+    };
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                fontFamilies: newFontFamilySettings,
+            },
+        },
+    };
+}
+
+export type AddFontFamilyTypeParams = {
+    title: string;
+};
+
+export function addFontFamilyTypeInTheme(
+    themeState: ThemeCreatorState,
+    {title}: AddFontFamilyTypeParams,
+): ThemeCreatorState {
+    const {customFontFamilyType} = themeState.typography.baseSetting;
+    const newFontType = `custom-font-type-${uuidv4()}`;
+
+    const newCustomFontFamily = [
+        ...customFontFamilyType,
+        {
+            value: newFontType,
+            content: title,
+        },
+    ];
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                customFontFamilyType: newCustomFontFamily,
+            },
+        },
+    };
+}
+
+export type UpdateFontFamilyTypeTitleParams = {
+    title: string;
+    familyType: string;
+};
+
+export function updateFontFamilyTypeTitleInTheme(
+    themeState: ThemeCreatorState,
+    {title, familyType}: UpdateFontFamilyTypeTitleParams,
+): ThemeCreatorState {
+    const {customFontFamilyType} = themeState.typography.baseSetting;
+
+    const newCustomFontFamily = customFontFamilyType.map((fontFamilyType) => {
+        return fontFamilyType.value === familyType
+            ? {
+                  content: title,
+                  value: familyType,
+              }
+            : fontFamilyType;
+    });
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                customFontFamilyType: newCustomFontFamily,
+            },
+        },
+    };
+}
+
+export function removeFontFamilyTypeFromTheme(
+    themeState: ThemeCreatorState,
+    {fontType}: {fontType: string},
+): ThemeCreatorState {
+    const {customFontFamilyType, fontFamilies} = themeState.typography.baseSetting;
+
+    const {[fontType]: _, ...restFontFamilies} = fontFamilies;
+
+    const newCustomFontFamilyType = customFontFamilyType.filter(
+        (fontFamily) => fontFamily.value !== fontType,
+    );
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            baseSetting: {
+                ...themeState.typography.baseSetting,
+                fontFamilies: restFontFamilies,
+                customFontFamilyType: newCustomFontFamilyType,
+            },
+        },
+    };
+}
+
+export type UpdateAdvancedTypographySettingsParams = {
+    key: TextVariants;
+    fontWeight?: number;
+    selectedFontFamilyType?: string;
+    sizeKey?: Exclude<TextProps['variant'], undefined>;
+    fontSize?: number;
+    lineHeight?: number;
+};
+
+export function updateAdvancedTypographySettingsInTheme(
+    themeState: ThemeCreatorState,
+    {
+        key,
+        fontSize,
+        selectedFontFamilyType,
+        sizeKey,
+        fontWeight,
+        lineHeight,
+    }: UpdateAdvancedTypographySettingsParams,
+): ThemeCreatorState {
+    const previousTypographyAdvancedSettings = themeState.typography.advanced;
+
+    const newSizes = sizeKey
+        ? {
+              [sizeKey]: {
+                  ...previousTypographyAdvancedSettings[key].sizes[sizeKey],
+                  fontSize:
+                      fontSize ?? previousTypographyAdvancedSettings[key].sizes[sizeKey]?.fontSize,
+                  lineHeight:
+                      lineHeight ??
+                      previousTypographyAdvancedSettings[key].sizes[sizeKey]?.lineHeight,
+              },
+          }
+        : {};
+
+    const newTypographyAdvancedSettings = {
+        ...previousTypographyAdvancedSettings,
+        [key]: {
+            ...previousTypographyAdvancedSettings[key],
+            fontWeight: fontWeight ?? previousTypographyAdvancedSettings[key].fontWeight,
+            selectedFontFamilyType:
+                selectedFontFamilyType ??
+                previousTypographyAdvancedSettings[key].selectedFontFamilyType,
+            sizes: {
+                ...previousTypographyAdvancedSettings[key].sizes,
+                ...newSizes,
+            },
+        },
+    };
+
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            advanced: {
+                ...newTypographyAdvancedSettings,
+            },
+        },
+    };
+}
+
+export const createFontImportsForExport = (
+    fontFamily: TypographyOptions['baseSetting']['fontFamilies'],
+) => {
+    let cssString = '';
+
+    Object.entries(fontFamily).forEach(([, value]) => {
+        cssString += `${createFontLinkImport(value.link)}\n`;
+    });
+
+    return cssString;
+};
+
+export const createTypographyPresetForExport = ({
+    typography,
+    forPreview,
+}: {
+    typography: TypographyOptions;
+    ignoreDefaultValues: boolean;
+    forPreview: boolean;
+}) => {
+    const {baseSetting, advanced} = typography;
+    let cssString = '';
+
+    Object.entries(baseSetting.fontFamilies).forEach(([key, value]) => {
+        const customFontKey = getCustomFontTypeKey(key, baseSetting.customFontFamilyType);
+
+        cssString += `${createFontFamilyVariable(
+            customFontKey ? kebabCase(customFontKey) : key,
+            value.title,
+            forPreview,
+        )}\n`;
+    });
+
+    cssString += '\n';
+
+    Object.entries(advanced).forEach(([key, data]) => {
+        const customFontTypeKey = getCustomFontTypeKey(
+            data.selectedFontFamilyType,
+            baseSetting.customFontFamilyType,
+        );
+
+        cssString += `${createTextFontFamilyVariable(
+            key as TextVariants,
+            customFontTypeKey ? kebabCase(customFontTypeKey) : data.selectedFontFamilyType,
+            forPreview,
+        )}\n`;
+        cssString += `${createTextFontWeightVariable(
+            key as TextVariants,
+            data.fontWeight,
+            forPreview,
+        )}\n`;
+
+        cssString += '\n';
+
+        Object.entries(data.sizes).forEach(([sizeKey, sizeData]) => {
+            cssString += `${createTextFontSizeVariable(
+                sizeKey as TextProps['variant'],
+                sizeData.fontSize,
+                forPreview,
+            )}\n`;
+            cssString += `${createTextLineHeightVariable(
+                sizeKey as TextProps['variant'],
+                sizeData.lineHeight,
+                forPreview,
+            )}\n`;
+            cssString += '\n';
+        });
+    });
+
+    return cssString;
+};
