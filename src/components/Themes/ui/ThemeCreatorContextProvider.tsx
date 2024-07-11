@@ -11,14 +11,23 @@ import type {
     UpdateCustomRadiusPresetInThemeParams,
 } from '../lib/themeCreatorUtils';
 import {
+    AddFontFamilyTypeParams,
+    UpdateAdvancedTypographySettingsParams,
+    UpdateFontFamilyParams,
+    UpdateFontFamilyTypeTitleParams,
     addColorToTheme,
+    addFontFamilyTypeInTheme,
     changeRadiusPresetInTheme,
     changeUtilityColorInTheme,
     initThemeCreator,
     removeColorFromTheme,
+    removeFontFamilyTypeFromTheme,
     renameColorInTheme,
+    updateAdvancedTypographySettingsInTheme,
     updateColorInTheme,
     updateCustomRadiusPresetInTheme,
+    updateFontFamilyInTheme,
+    updateFontFamilyTypeTitleInTheme,
 } from '../lib/themeCreatorUtils';
 import type {ThemeCreatorState, ThemeOptions} from '../lib/types';
 
@@ -52,6 +61,26 @@ type ThemeCreatorAction =
           payload: UpdateCustomRadiusPresetInThemeParams;
       }
     | {
+          type: 'updateFontFamily';
+          payload: UpdateFontFamilyParams;
+      }
+    | {
+          type: 'addFontFamilyType';
+          payload: AddFontFamilyTypeParams;
+      }
+    | {
+          type: 'removeFontFamilyType';
+          payload: {fontType: string};
+      }
+    | {
+          type: 'updateFontFamilyTypeTitle';
+          payload: UpdateFontFamilyTypeTitleParams;
+      }
+    | {
+          type: 'updateAdvancedTypographySettings';
+          payload: UpdateAdvancedTypographySettingsParams;
+      }
+    | {
           type: 'reinitialize';
           payload: ThemeOptions;
       };
@@ -75,6 +104,16 @@ const themeCreatorReducer = (
             return changeRadiusPresetInTheme(prevState, action.payload);
         case 'updateCustomRadiusPreset':
             return updateCustomRadiusPresetInTheme(prevState, action.payload);
+        case 'addFontFamilyType':
+            return addFontFamilyTypeInTheme(prevState, action.payload);
+        case 'removeFontFamilyType':
+            return removeFontFamilyTypeFromTheme(prevState, action.payload);
+        case 'updateFontFamilyTypeTitle':
+            return updateFontFamilyTypeTitleInTheme(prevState, action.payload);
+        case 'updateFontFamily':
+            return updateFontFamilyInTheme(prevState, action.payload);
+        case 'updateAdvancedTypographySettings':
+            return updateAdvancedTypographySettingsInTheme(prevState, action.payload);
         case 'reinitialize':
             return initThemeCreator(action.payload);
         default:
@@ -167,6 +206,52 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const updateFontFamily = React.useCallback<ThemeCreatorMethodsContextType['updateFontFamily']>(
+        (payload) => {
+            dispatchThemeCreator({
+                type: 'updateFontFamily',
+                payload,
+            });
+        },
+        [],
+    );
+
+    const addFontFamilyType = React.useCallback<
+        ThemeCreatorMethodsContextType['addFontFamilyType']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'addFontFamilyType',
+            payload,
+        });
+    }, []);
+
+    const updateFontFamilyTypeTitle = React.useCallback<
+        ThemeCreatorMethodsContextType['updateFontFamilyTypeTitle']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'updateFontFamilyTypeTitle',
+            payload,
+        });
+    }, []);
+
+    const removeFontFamilyType = React.useCallback<
+        ThemeCreatorMethodsContextType['removeFontFamilyType']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'removeFontFamilyType',
+            payload,
+        });
+    }, []);
+
+    const updateAdvancedTypographySettings = React.useCallback<
+        ThemeCreatorMethodsContextType['updateAdvancedTypographySettings']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'updateAdvancedTypographySettings',
+            payload,
+        });
+    }, []);
+
     const methods = React.useMemo(
         () => ({
             addColor,
@@ -176,6 +261,11 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             changeUtilityColor,
             changeRadiusPreset,
             updateCustomRadiusPreset,
+            addFontFamilyType,
+            removeFontFamilyType,
+            updateAdvancedTypographySettings,
+            updateFontFamilyTypeTitle,
+            updateFontFamily,
         }),
         [
             addColor,
@@ -185,6 +275,11 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             changeUtilityColor,
             changeRadiusPreset,
             updateCustomRadiusPreset,
+            removeFontFamilyType,
+            addFontFamilyType,
+            updateAdvancedTypographySettings,
+            updateFontFamily,
+            updateFontFamilyTypeTitle,
         ],
     );
 
