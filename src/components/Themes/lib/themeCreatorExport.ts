@@ -1,31 +1,41 @@
 import {DEFAULT_PALETTE, DEFAULT_THEME} from './constants';
 import {
     createBorderRadiusPresetForExport,
+    createFontImportsForExport,
     createPrivateColorCssVariable,
     createPrivateColorCssVariableFromToken,
     createPrivateColorToken,
+    createTypographyPresetForExport,
     createUtilityColorCssVariable,
     isPrivateColorToken,
 } from './themeCreatorUtils';
 import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
 
 const COMMON_VARIABLES_TEMPLATE_NAME = '%COMMON_VARIABLES%';
+const LIGHT_THEME_VARIABLES_TEMPLATE_NAME = '%LIGHT_THEME_VARIABLES%';
+const DARK_THEME_VARIABLES_TEMPLATE_NAME = '%DARK_THEME_VARIABLES%';
+const FONTS_TEMPLATE_NAME = '%IMPORT_FONTS%';
 
 const SCSS_TEMPLATE = `
 @use '@gravity-ui/uikit/styles/themes';
 
+${FONTS_TEMPLATE_NAME}
+
 .g-root {
+    @include themes.g-theme-common;
+    
     ${COMMON_VARIABLES_TEMPLATE_NAME}
+    
     &_theme_light {
         @include themes.g-theme-light;
 
-        %LIGHT_THEME_VARIABLES%
+        ${LIGHT_THEME_VARIABLES_TEMPLATE_NAME}
     }
 
     &_theme_dark {
         @include themes.g-theme-dark;
 
-        %DARK_THEME_VARIABLES%
+       ${DARK_THEME_VARIABLES_TEMPLATE_NAME}
     }
 }
 `.trim();
@@ -111,17 +121,36 @@ export function exportTheme({
                 forPreview,
                 ignoreDefaultValues,
             });
+
+            cssVariables += createTypographyPresetForExport({
+                typography: themeState.typography,
+                ignoreDefaultValues,
+                forPreview,
+            });
         }
 
         return cssVariables.trim();
     };
 
-    return {
-        common: createBorderRadiusPresetForExport({
+    const prepareCommonThemeVariables = () => {
+        const borderRadiusVariabels = createBorderRadiusPresetForExport({
             borders: themeState.borders,
             forPreview,
             ignoreDefaultValues,
-        }),
+        });
+
+        const typographyVariables = createTypographyPresetForExport({
+            typography: themeState.typography,
+            ignoreDefaultValues,
+            forPreview,
+        });
+
+        return borderRadiusVariabels + '\n' + typographyVariables;
+    };
+
+    return {
+        fontImports: createFontImportsForExport(themeState.typography.baseSetting.fontFamilies),
+        common: prepareCommonThemeVariables(),
         light: prepareThemeVariables('light'),
         dark: prepareThemeVariables('dark'),
     };
@@ -134,12 +163,14 @@ export function exportThemeForDialog({themeState, format = 'scss'}: ExportThemeF
         return 'not implemented';
     }
 
-    const {common, light, dark} = exportTheme({themeState, format, forPreview: false});
+    const {common, light, dark, fontImports} = exportTheme({
+        themeState,
+        format,
+        forPreview: false,
+    });
 
-    return SCSS_TEMPLATE.replace(
-        COMMON_VARIABLES_TEMPLATE_NAME,
-        common.replaceAll('\n', '\n'.padEnd(5)),
-    )
-        .replace('%LIGHT_THEME_VARIABLES%', light.replaceAll('\n', '\n'.padEnd(9)))
-        .replace('%DARK_THEME_VARIABLES%', dark.replaceAll('\n', '\n'.padEnd(9)));
+    return SCSS_TEMPLATE.replace(FONTS_TEMPLATE_NAME, fontImports)
+        .replace(COMMON_VARIABLES_TEMPLATE_NAME, common.replaceAll('\n', '\n'.padEnd(5)))
+        .replace(LIGHT_THEME_VARIABLES_TEMPLATE_NAME, light.replaceAll('\n', '\n'.padEnd(9)))
+        .replace(DARK_THEME_VARIABLES_TEMPLATE_NAME, dark.replaceAll('\n', '\n'.padEnd(9)));
 }

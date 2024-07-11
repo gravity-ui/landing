@@ -5,11 +5,15 @@ import {DEFAULT_THEME} from './constants';
 import {initThemeCreator} from './themeCreatorUtils';
 import type {
     AddColorToThemeParams,
+    AddFontFamilyTypeParams,
     ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
+    UpdateAdvancedTypographySettingsParams,
     UpdateColorInThemeParams,
     UpdateCustomRadiusPresetInThemeParams,
+    UpdateFontFamilyParams,
+    UpdateFontFamilyTypeTitleParams,
 } from './themeCreatorUtils';
 import type {ThemeCreatorState} from './types';
 
@@ -25,6 +29,11 @@ export interface ThemeCreatorMethodsContextType {
     changeUtilityColor: (params: ChangeUtilityColorInThemeParams) => void;
     changeRadiusPreset: (params: ChangeRadiusPresetInThemeParams) => void;
     updateCustomRadiusPreset: (params: UpdateCustomRadiusPresetInThemeParams) => void;
+    updateFontFamily: (params: UpdateFontFamilyParams) => void;
+    addFontFamilyType: (params: AddFontFamilyTypeParams) => void;
+    updateFontFamilyTypeTitle: (params: UpdateFontFamilyTypeTitleParams) => void;
+    removeFontFamilyType: ({fontType}: {fontType: string}) => void;
+    updateAdvancedTypographySettings: (params: UpdateAdvancedTypographySettingsParams) => void;
 }
 
 export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsContextType>({
@@ -35,4 +44,9 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     changeUtilityColor: noop,
     changeRadiusPreset: noop,
     updateCustomRadiusPreset: noop,
+    updateFontFamily: noop,
+    addFontFamilyType: noop,
+    updateFontFamilyTypeTitle: noop,
+    removeFontFamilyType: noop,
+    updateAdvancedTypographySettings: noop,
 });
