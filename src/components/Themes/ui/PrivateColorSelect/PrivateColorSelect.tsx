@@ -30,6 +30,14 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
     const [showPopup, toggleShowPopup] = React.useReducer((prev) => !prev, false);
     const isCustomValue = !isPrivateColorToken(value);
 
+    const handleChange = React.useCallback(
+        (newVal: string) => {
+            onChange(newVal);
+            toggleShowPopup();
+        },
+        [onChange],
+    );
+
     const switchMode = React.useCallback(() => {
         if (isCustomValue) {
             onChange(defaultValue);
@@ -88,7 +96,11 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                 modifiers={[{name: 'preventOverflow', enabled: false}]}
                 onClose={toggleShowPopup}
             >
-                <PrivateColorSelectPopupContent groups={groups} value={value} onChange={onChange} />
+                <PrivateColorSelectPopupContent
+                    groups={groups}
+                    value={value}
+                    onChange={handleChange}
+                />
             </Popup>
         </Flex>
     );
