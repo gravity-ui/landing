@@ -110,6 +110,8 @@ export interface ThemeCreatorState extends ThemeOptions {
     paletteTokens: PaletteTokens;
     /** All available palette tokens in theme */
     tokens: string[];
+    showMainSettings: boolean;
+    advancedModeEnabled: boolean;
 }
 
 export type Palette = {

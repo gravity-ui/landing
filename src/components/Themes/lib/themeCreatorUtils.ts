@@ -128,14 +128,8 @@ function createPrivateColors({
         theme: themeVariant,
         colorToken,
         colorValue,
-        lightBg:
-            themeVariant === 'light'
-                ? theme.colors.light['base-background']
-                : theme.colors.dark['base-background'],
-        darkBg:
-            themeVariant === 'dark'
-                ? theme.colors.dark['base-background']
-                : theme.colors.light['base-background'],
+        lightBg: theme.colors.light['base-background'],
+        darkBg: theme.colors.dark['base-background'],
     });
 }
 
@@ -327,7 +321,6 @@ export function removeColorFromTheme(
     themeState: ThemeCreatorState,
     colorTitle: string,
 ): ThemeCreatorState {
-    console.log('call remove color', colorTitle);
     const newThemeState = {...themeState};
     const token = createColorToken(colorTitle);
 
@@ -465,6 +458,8 @@ export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
         ...theme,
         paletteTokens,
         tokens: Object.keys(paletteTokens),
+        showMainSettings: false,
+        advancedModeEnabled: false,
     };
 }
 

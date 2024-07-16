@@ -3,7 +3,9 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
+import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
 import {BasicPalette} from '../BasicPalette/BasicPalette';
+import {BrandColors} from '../BrandColors/BrandColors';
 import {ComponentPreview} from '../ComponentPreview/ComponentPreview';
 import {ExportThemeSection} from '../ExportThemeSection/ExportThemeSection';
 import {MainSettings} from '../MainSettings/MainSettings';
@@ -24,7 +26,7 @@ const ADVANCED_COLORS_OPTIONS: EditableColorOption[] = [
     },
     {
         title: 'Higher Contrast Brand Text',
-        name: 'text-brand-contrast',
+        name: 'text-brand-heavy',
     },
     {
         title: 'Brand Line Color',
@@ -62,17 +64,32 @@ const ADDITIONAL_COLORS_OPTIONS: EditableColorOption[] = [
 export const ColorsTab = () => {
     const {t} = useTranslation('themes');
 
-    const [advancedModeEnabled, toggleAdvancedMode] = React.useReducer(
-        (enabled) => !enabled,
-        false,
+    const {advancedModeEnabled, showMainSettings} = useThemeCreator();
+    const {setAdvancedMode, openMainSettings} = useThemeCreatorMethods();
+
+    const toggleAdvancedMode = React.useCallback(
+        () => setAdvancedMode(!advancedModeEnabled),
+        [setAdvancedMode, advancedModeEnabled],
     );
+
+    const handleSelectCustomColor = React.useCallback(() => {
+        openMainSettings();
+        setAdvancedMode(true);
+    }, [openMainSettings, setAdvancedMode]);
 
     return (
         <Flex direction="column" className={b()}>
-            <MainSettings
-                advancedModeEnabled={advancedModeEnabled}
-                toggleAdvancedMode={toggleAdvancedMode}
+            <BrandColors
+                showThemeEditButton={!showMainSettings}
+                onEditThemeClick={openMainSettings}
+                onSelectCustomColor={handleSelectCustomColor}
             />
+            {showMainSettings && (
+                <MainSettings
+                    advancedModeEnabled={advancedModeEnabled}
+                    toggleAdvancedMode={toggleAdvancedMode}
+                />
+            )}
             {advancedModeEnabled && (
                 <React.Fragment>
                     <BasicPalette />

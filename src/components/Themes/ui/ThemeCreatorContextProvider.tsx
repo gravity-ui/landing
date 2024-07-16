@@ -4,17 +4,17 @@ import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreat
 import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
 import type {
     AddColorToThemeParams,
+    AddFontFamilyTypeParams,
     ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
+    UpdateAdvancedTypographySettingsParams,
     UpdateColorInThemeParams,
     UpdateCustomRadiusPresetInThemeParams,
-} from '../lib/themeCreatorUtils';
-import {
-    AddFontFamilyTypeParams,
-    UpdateAdvancedTypographySettingsParams,
     UpdateFontFamilyParams,
     UpdateFontFamilyTypeTitleParams,
+} from '../lib/themeCreatorUtils';
+import {
     addColorToTheme,
     addFontFamilyTypeInTheme,
     changeRadiusPresetInTheme,
@@ -83,6 +83,13 @@ type ThemeCreatorAction =
     | {
           type: 'reinitialize';
           payload: ThemeOptions;
+      }
+    | {
+          type: 'openMainSettings';
+      }
+    | {
+          type: 'setAdvancedMode';
+          payload: boolean;
       };
 
 const themeCreatorReducer = (
@@ -114,6 +121,16 @@ const themeCreatorReducer = (
             return updateFontFamilyInTheme(prevState, action.payload);
         case 'updateAdvancedTypographySettings':
             return updateAdvancedTypographySettingsInTheme(prevState, action.payload);
+        case 'openMainSettings':
+            return {
+                ...prevState,
+                showMainSettings: true,
+            };
+        case 'setAdvancedMode':
+            return {
+                ...prevState,
+                advancedModeEnabled: action.payload,
+            };
         case 'reinitialize':
             return initThemeCreator(action.payload);
         default:
@@ -252,6 +269,19 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const openMainSettings = React.useCallback(() => {
+        dispatchThemeCreator({
+            type: 'openMainSettings',
+        });
+    }, []);
+
+    const setAdvancedMode = React.useCallback((enabled: boolean) => {
+        dispatchThemeCreator({
+            type: 'setAdvancedMode',
+            payload: enabled,
+        });
+    }, []);
+
     const methods = React.useMemo(
         () => ({
             addColor,
@@ -266,6 +296,8 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateAdvancedTypographySettings,
             updateFontFamilyTypeTitle,
             updateFontFamily,
+            openMainSettings,
+            setAdvancedMode,
         }),
         [
             addColor,
@@ -280,6 +312,8 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateAdvancedTypographySettings,
             updateFontFamily,
             updateFontFamilyTypeTitle,
+            openMainSettings,
+            setAdvancedMode,
         ],
     );
 
