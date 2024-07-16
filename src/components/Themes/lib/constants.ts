@@ -7,11 +7,20 @@ export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
 export const DEFAULT_NEW_COLOR_TITLE = 'New color';
 
+export const DEFAULT_BRAND_COLORS = [
+    'rgb(203, 255, 92)',
+    'rgb(0, 41, 255)',
+    'rgb(49, 78, 60)',
+    'rgb(108, 145, 201)',
+    'rgb(255, 190, 92)',
+    'rgb(255, 92, 92)',
+];
+
 export const DEFAULT_PALETTE: ThemeOptions['palette'] = {
     light: {
         white: 'rgb(255, 255, 255)',
         black: 'rgb(0, 0, 0)',
-        brand: 'rgb(82, 130, 255)',
+        brand: DEFAULT_BRAND_COLORS[0],
         orange: 'rgb(255, 119, 0)',
         green: 'rgb(59, 201, 53)',
         yellow: 'rgb(255, 219, 77)',
@@ -23,7 +32,7 @@ export const DEFAULT_PALETTE: ThemeOptions['palette'] = {
     dark: {
         white: 'rgb(255, 255, 255)',
         black: 'rgb(0, 0, 0)',
-        brand: 'rgb(75, 113, 214)',
+        brand: DEFAULT_BRAND_COLORS[0],
         orange: 'rgb(200, 99, 12)',
         green: 'rgb(91, 181, 87)',
         yellow: 'rgb(255, 203, 0)',
