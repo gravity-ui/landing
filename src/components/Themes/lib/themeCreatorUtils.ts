@@ -25,7 +25,7 @@ import type {
     ThemeVariant,
 } from './types';
 import {CustomFontSelectType, RadiusPresetName, TypographyOptions} from './types';
-import {DefaultFontFamilyType, TextVariants} from './typography/constants';
+import {DefaultFontFamilyType, TextVariants, defaultTypographyPreset} from './typography/constants';
 import {
     createFontFamilyVariable,
     createFontLinkImport,
@@ -762,39 +762,53 @@ export const createTypographyPresetForExport = ({
         )}\n`;
     });
 
-    cssString += '\n';
-
     Object.entries(advanced).forEach(([key, data]) => {
-        const customFontTypeKey = getCustomFontTypeKey(
-            data.selectedFontFamilyType,
-            baseSetting.customFontFamilyType,
-        );
+        const defaultAdvancedSetting = defaultTypographyPreset.advanced[key as TextVariants];
 
-        cssString += `${createTextFontFamilyVariable(
-            key as TextVariants,
-            customFontTypeKey ? kebabCase(customFontTypeKey) : data.selectedFontFamilyType,
-            forPreview,
-        )}\n`;
-        cssString += `${createTextFontWeightVariable(
-            key as TextVariants,
-            data.fontWeight,
-            forPreview,
-        )}\n`;
+        if (defaultAdvancedSetting.selectedFontFamilyType !== data.selectedFontFamilyType) {
+            const customFontTypeKey = getCustomFontTypeKey(
+                data.selectedFontFamilyType,
+                baseSetting.customFontFamilyType,
+            );
 
-        cssString += '\n';
-
-        Object.entries(data.sizes).forEach(([sizeKey, sizeData]) => {
-            cssString += `${createTextFontSizeVariable(
-                sizeKey as TextProps['variant'],
-                sizeData.fontSize,
+            cssString += `${createTextFontFamilyVariable(
+                key as TextVariants,
+                customFontTypeKey ? kebabCase(customFontTypeKey) : data.selectedFontFamilyType,
                 forPreview,
             )}\n`;
-            cssString += `${createTextLineHeightVariable(
-                sizeKey as TextProps['variant'],
-                sizeData.lineHeight,
+        }
+        if (defaultAdvancedSetting.fontWeight !== data.fontWeight) {
+            cssString += `${createTextFontWeightVariable(
+                key as TextVariants,
+                data.fontWeight,
                 forPreview,
             )}\n`;
             cssString += '\n';
+        }
+
+        Object.entries(data.sizes).forEach(([sizeKey, sizeData]) => {
+            if (
+                defaultAdvancedSetting.sizes[sizeKey as Exclude<TextProps['variant'], undefined>]
+                    ?.fontSize !== sizeData.fontSize
+            ) {
+                cssString += `${createTextFontSizeVariable(
+                    sizeKey as TextProps['variant'],
+                    sizeData.fontSize,
+                    forPreview,
+                )}\n`;
+            }
+
+            if (
+                defaultAdvancedSetting.sizes[sizeKey as Exclude<TextProps['variant'], undefined>]
+                    ?.lineHeight !== sizeData.lineHeight
+            ) {
+                cssString += `${createTextLineHeightVariable(
+                    sizeKey as TextProps['variant'],
+                    sizeData.lineHeight,
+                    forPreview,
+                )}\n`;
+                cssString += '\n';
+            }
         });
     });
 

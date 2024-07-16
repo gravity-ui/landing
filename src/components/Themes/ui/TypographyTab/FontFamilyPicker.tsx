@@ -282,8 +282,6 @@ export const FontFamilyPicker = () => {
     const {updateFontFamily, addFontFamilyType, removeFontFamilyType, updateFontFamilyTypeTitle} =
         useThemeCreatorMethods();
 
-    console.log('fontFamilies', fontFamilies);
-
     return (
         <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
             <Text variant="display-2">Fonts</Text>
