@@ -10,6 +10,7 @@ $block: '.#{variables.$ns}main-settings';
         --gc-form-row-label-width: 400px;
         --gc-form-row-field-height: 44px;
         margin-block-end: 24px;
+        align-items: center;
 
         .gc-form-row__right {
             width: 400px;
@@ -20,5 +21,9 @@ $block: '.#{variables.$ns}main-settings';
     &__switch-button {
         margin-top: var(--g-spacing-3);
         width: min-content;
+    }
+
+    &__text-card {
+        width: 50%;
     }
 }

@@ -2,7 +2,7 @@ import {Plus, TrashBin} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Text, TextInput, sp} from '@gravity-ui/uikit';
 import debounce from 'lodash/debounce';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
+import {Trans, useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {Palette} from '../../lib/types';
@@ -83,7 +83,9 @@ export const PaletteColors: React.FC<PaletteColorsProps> = ({
     return (
         <Flex direction="column" className={b()} grow={true}>
             <Text variant="subheader-3" className={b('title')}>
-                {t('palette_colors_description')}
+                <Trans i18nKey="palette_colors_description" t={t}>
+                    <br />
+                </Trans>
             </Text>
             <Flex direction="column" gap={4}>
                 {palette.map((paletteColorData) => (

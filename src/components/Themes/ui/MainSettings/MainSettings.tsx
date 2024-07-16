@@ -6,7 +6,9 @@ import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
+import {SelectableCard} from '../../../SelectableCard/SelectableCard';
 import {useThemePaletteColor, useThemeUtilityColor} from '../../hooks';
+import {TEXT_CONTRAST_COLORS} from '../../lib/constants';
 import type {ThemeVariant} from '../../lib/types';
 import {ThemePicker} from '../ThemePicker';
 import {ThemeSection} from '../ThemeSection';
@@ -14,6 +16,13 @@ import {ThemeSection} from '../ThemeSection';
 import './MainSettings.scss';
 
 const b = block('main-settings');
+
+const BASE_CARD_BUTTON_STYLES = {
+    borderRadius: '8px',
+    padding: '10px 16px',
+    height: 'auto',
+    width: 'auto',
+};
 
 interface MainSettingsProps {
     advancedModeEnabled: boolean;
@@ -29,6 +38,10 @@ export const MainSettings: React.FC<MainSettingsProps> = ({
     const [theme, setTheme] = React.useState<ThemeVariant>('light');
     const [backgroundColor, setBackgroundColor] = useThemeUtilityColor({
         name: 'base-background',
+        theme,
+    });
+    const [brandTextColor, setBrandTextColor] = useThemeUtilityColor({
+        name: 'text-brand-contrast',
         theme,
     });
     const [brandColor, setBrandColor] = useThemePaletteColor({token: 'brand', theme});
@@ -60,6 +73,34 @@ export const MainSettings: React.FC<MainSettingsProps> = ({
                         onChange={setBrandColor}
                         size="xl"
                     />
+                </FormRow>
+                <FormRow label={<Text variant="body-3">Text on Brand</Text>} className={b('row')}>
+                    <Flex gap={4}>
+                        <SelectableCard
+                            className={b('text-card')}
+                            text="Black text"
+                            selected={brandTextColor === TEXT_CONTRAST_COLORS[theme].black}
+                            onClick={() => setBrandTextColor(TEXT_CONTRAST_COLORS[theme].black)}
+                            textProps={{
+                                style: {
+                                    ...BASE_CARD_BUTTON_STYLES,
+                                    color: TEXT_CONTRAST_COLORS[theme].black,
+                                },
+                            }}
+                        />
+                        <SelectableCard
+                            className={b('text-card')}
+                            text="White text"
+                            selected={brandTextColor === TEXT_CONTRAST_COLORS[theme].white}
+                            onClick={() => setBrandTextColor(TEXT_CONTRAST_COLORS[theme].white)}
+                            textProps={{
+                                style: {
+                                    ...BASE_CARD_BUTTON_STYLES,
+                                    color: TEXT_CONTRAST_COLORS[theme].white,
+                                },
+                            }}
+                        />
+                    </Flex>
                 </FormRow>
                 <Button
                     className={b('switch-button')}

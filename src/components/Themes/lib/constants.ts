@@ -1,4 +1,4 @@
-import {RadiusPresetName, RadiusValue, type ThemeOptions} from './types';
+import {RadiusPresetName, RadiusValue, type ThemeOptions, type ThemeVariant} from './types';
 import {defaultTypographyPreset} from './typography/constants';
 
 export const THEME_COLOR_VARIABLE_PREFIX = '--g-color';
@@ -15,6 +15,17 @@ export const DEFAULT_BRAND_COLORS = [
     'rgb(255, 190, 92)',
     'rgb(255, 92, 92)',
 ];
+
+export const TEXT_CONTRAST_COLORS: Record<ThemeVariant, {white: string; black: string}> = {
+    dark: {
+        white: 'rgb(255, 255, 255)',
+        black: 'rgba(0, 0, 0, 0.9)', // --g-color-private-black-900
+    },
+    light: {
+        white: 'rgb(255, 255, 255)',
+        black: 'rgba(0, 0, 0, 0.85)', // --g-color-private-black-850
+    },
+};
 
 export const DEFAULT_PALETTE: ThemeOptions['palette'] = {
     light: {
@@ -78,28 +89,28 @@ export const DEFAULT_THEME: ThemeOptions = {
         light: {
             'base-background': 'rgb(255,255,255)',
             'base-brand-hover': 'private.brand.600-solid',
-            'base-selection': 'private.yellow.200',
-            'base-selection-hover': 'private.yellow.300',
+            'base-selection': 'private.brand.200',
+            'base-selection-hover': 'private.brand.300',
             'line-brand': 'private.brand.600-solid',
             'text-brand': 'private.brand.700-solid',
             'text-brand-heavy': 'private.brand.700-solid',
-            'text-brand-contrast': 'private.black.850',
-            'text-link': 'private.yellow.650-solid',
-            'text-link-hover': 'private.orange.650-solid',
+            'text-brand-contrast': TEXT_CONTRAST_COLORS.light.black,
+            'text-link': 'private.brand.600-solid',
+            'text-link-hover': 'private.orange.800-solid',
             'text-link-visited': 'private.purple.550-solid',
             'text-link-visited-hover': 'private.purple.800-solid',
         },
         dark: {
             'base-background': 'rgb(34, 29, 34)',
             'base-brand-hover': 'private.brand.650-solid',
-            'base-selection': 'private.yellow.150',
-            'base-selection-hover': 'private.yellow.200',
+            'base-selection': 'private.brand.150',
+            'base-selection-hover': 'private.brand.200',
             'line-brand': 'private.brand.600-solid',
             'text-brand': 'private.brand.600-solid',
             'text-brand-heavy': 'private.brand.700-solid',
-            'text-brand-contrast': 'private.black.900',
-            'text-link': 'private.yellow.550-solid',
-            'text-link-hover': 'private.orange.550-solid',
+            'text-brand-contrast': TEXT_CONTRAST_COLORS.dark.black,
+            'text-link': 'private.brand.550-solid',
+            'text-link-hover': 'private.brand.700-solid',
             'text-link-visited': 'private.purple.700-solid',
             'text-link-visited-hover': 'private.purple.850-solid',
         },
