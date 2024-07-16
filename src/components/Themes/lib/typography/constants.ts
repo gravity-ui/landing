@@ -67,6 +67,11 @@ export const defaultTypographyPreset: TypographyOptions = {
             fontWeight: 400,
             selectedFontFamilyType: DefaultFontFamilyType.Sans,
             sizes: {
+                'body-short': {
+                    title: 'Body 1 Short',
+                    fontSize: 13,
+                    lineHeight: 16,
+                },
                 'body-1': {
                     title: 'Body 1',
                     fontSize: 13,
@@ -81,11 +86,6 @@ export const defaultTypographyPreset: TypographyOptions = {
                     title: 'Body 3',
                     fontSize: 17,
                     lineHeight: 24,
-                },
-                'body-short': {
-                    title: 'Body 1 Short',
-                    fontSize: 13,
-                    lineHeight: 16,
                 },
             },
         },
@@ -182,25 +182,25 @@ export const defaultTypographyPreset: TypographyOptions = {
                     fontSize: 12,
                     lineHeight: 18,
                 },
-                'code-2': {
-                    title: 'Code 2',
-                    fontSize: 14,
-                    lineHeight: 20,
-                },
-                'code-3': {
-                    title: 'Code 3',
-                    fontSize: 16,
-                    lineHeight: 24,
-                },
                 'code-inline-1': {
                     title: 'Code Inline 1',
                     fontSize: 12,
                     lineHeight: 14,
                 },
+                'code-2': {
+                    title: 'Code 2',
+                    fontSize: 14,
+                    lineHeight: 20,
+                },
                 'code-inline-2': {
                     title: 'Code Inline 2',
                     fontSize: 14,
                     lineHeight: 16,
+                },
+                'code-3': {
+                    title: 'Code 3',
+                    fontSize: 16,
+                    lineHeight: 24,
                 },
                 'code-inline-3': {
                     title: 'Code Inline 3',
