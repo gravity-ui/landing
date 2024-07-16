@@ -1,3 +1,4 @@
+import {FormRow} from '@gravity-ui/components';
 import {Plus, TrashBin} from '@gravity-ui/icons';
 import {
     Button,
@@ -6,6 +7,7 @@ import {
     RadioButton,
     RadioButtonOption,
     Text,
+    TextArea,
     TextInput,
     TextInputProps,
 } from '@gravity-ui/uikit';
@@ -14,18 +16,15 @@ import React, {useCallback, useState} from 'react';
 import {block} from '../../../../utils';
 import {SelectableCard} from '../../../SelectableCard/SelectableCard';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
+import {CustomFontSelectType} from '../../lib/types';
 import {
+    DEFAULT_FONTS,
     DefaultFontFamilyType,
     GOOGLE_FONTS_FONT_PREVIEW_HOST,
 } from '../../lib/typography/constants';
 import {generateGoogleFontDownloadLink} from '../../lib/typography/utils';
 
 import './TypographyTab.scss';
-
-enum CustomFontSelectType {
-    GoogleFonts = 'google-fonts',
-    Manual = 'manual',
-}
 
 const customFontType: RadioButtonOption[] = [
     {
@@ -35,7 +34,6 @@ const customFontType: RadioButtonOption[] = [
     {
         value: CustomFontSelectType.Manual,
         content: 'Manual',
-        disabled: true,
     },
 ];
 
@@ -107,73 +105,43 @@ const CustomFontFamily = ({
 
     const [validationState, setValidationState] =
         useState<TextInputProps['validationState']>(undefined);
-
-    const [customType, setCustomType] = useState<CustomFontSelectType>(
-        CustomFontSelectType.GoogleFonts,
-    );
-
     const {updateFontFamily} = useThemeCreatorMethods();
 
-    const renderFieldsByType = useCallback(() => {
-        switch (customType) {
-            case CustomFontSelectType.GoogleFonts: {
-                return (
-                    <TextInput
-                        size="xl"
-                        value={fontFamilies[fontType]?.fontWebsite}
-                        label="Link to font:"
-                        validationState={validationState}
-                        errorPlacement="inside"
-                        errorMessage={`Invalid link. Link should start from ${GOOGLE_FONTS_FONT_PREVIEW_HOST}`}
-                        placeholder={`${GOOGLE_FONTS_FONT_PREVIEW_HOST}Fira+Mono`}
-                        onChange={(event) => {
-                            const value = event.target.value;
+    const onGoogleFontInputChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            const value = event.target.value;
 
-                            if (value.startsWith(GOOGLE_FONTS_FONT_PREVIEW_HOST)) {
-                                setValidationState(undefined);
-                            } else {
-                                setValidationState('invalid');
-                                return;
-                            }
-
-                            const dirtyFontName = value.split('/').at(-1);
-
-                            if (!dirtyFontName) {
-                                return;
-                            }
-
-                            const extraDataIndex = dirtyFontName.indexOf('?');
-
-                            const fontName = dirtyFontName.slice(
-                                0,
-                                extraDataIndex === -1 ? dirtyFontName.length : extraDataIndex,
-                            );
-
-                            const link = generateGoogleFontDownloadLink(fontName);
-
-                            updateFontFamily({
-                                fontType,
-                                fontWebsite: value,
-                                isCustom: true,
-                                value: {
-                                    title: fontName.replaceAll('+', ' '),
-                                    key: fontName.replaceAll('+', '-').toLowerCase(),
-                                    link,
-                                },
-                            });
-                        }}
-                    />
-                );
+            if (value.startsWith(GOOGLE_FONTS_FONT_PREVIEW_HOST)) {
+                setValidationState(undefined);
+            } else {
+                setValidationState('invalid');
             }
-            // TODO add logic
-            case CustomFontSelectType.Manual: {
-                return <div></div>;
-            }
-            default: {
-                return null;
-            }
-        }
-    }, [customType, validationState]);
+
+            const dirtyFontName = value.split('/').at(-1);
+
+            const extraDataIndex = dirtyFontName?.indexOf('?');
+
+            const fontName =
+                (extraDataIndex === -1 ? dirtyFontName : dirtyFontName?.slice(0, extraDataIndex)) ??
+                '';
+
+            const link = generateGoogleFontDownloadLink(fontName);
+
+            updateFontFamily({
+                fontType,
+                fontWebsite: value,
+                isCustom: true,
+                customType: CustomFontSelectType.GoogleFonts,
+                value: {
+                    title: fontName.replaceAll('+', ' '),
+                    key: fontName.replaceAll('+', '-').toLowerCase(),
+                    link,
+                    alternatives: fontFamilies[fontType].alternatives,
+                },
+            });
+        },
+        [fontType],
+    );
 
     return (
         <Flex direction="column" gap={6} width="100%" style={{marginBlockEnd: 52}}>
@@ -182,14 +150,123 @@ const CustomFontFamily = ({
                     size="xl"
                     className={b('custom-font-radio-button')}
                     options={customFontType}
-                    value={customType}
+                    value={fontFamilies[fontType]?.customType || CustomFontSelectType.GoogleFonts}
                     onUpdate={(value) => {
-                        setCustomType(value as CustomFontSelectType);
+                        updateFontFamily({
+                            fontType,
+                            isCustom: true,
+                            customType: value,
+                            fontWebsite: '',
+                            value: {
+                                title: '',
+                                key: '',
+                                link: '',
+                                alternatives: [],
+                            },
+                        });
                     }}
                 />
                 {withExtraContent && ExtraContent}
             </Flex>
-            {renderFieldsByType()}
+            {fontFamilies[fontType].customType === CustomFontSelectType.GoogleFonts && (
+                <TextInput
+                    size="xl"
+                    value={fontFamilies[fontType]?.fontWebsite || ''}
+                    label="Link to font:"
+                    validationState={validationState}
+                    errorPlacement="inside"
+                    errorMessage={`Invalid link. Link should start from ${GOOGLE_FONTS_FONT_PREVIEW_HOST}`}
+                    placeholder={`${GOOGLE_FONTS_FONT_PREVIEW_HOST}Fira+Mono`}
+                    onChange={onGoogleFontInputChange}
+                />
+            )}
+
+            {fontFamilies[fontType].customType === CustomFontSelectType.Manual && (
+                <Flex direction="column" gap={6}>
+                    <TextInput
+                        label="Font Name:"
+                        value={fontFamilies[fontType].title}
+                        size="xl"
+                        type="text"
+                        placeholder="Enter font name"
+                        onChange={(event) => {
+                            const fontName = event.target.value;
+
+                            updateFontFamily({
+                                fontType,
+                                isCustom: true,
+                                value: {
+                                    title: fontName,
+                                    key: fontName.replaceAll(' ', '-').toLowerCase(),
+                                    link: fontFamilies[fontType].link,
+                                    alternatives: fontFamilies[fontType].alternatives,
+                                },
+                            });
+                        }}
+                    />
+
+                    <FormRow
+                        direction="column"
+                        className={b('custom-font-textarea-wrapper')}
+                        label={<Text variant="subheader-2">Alternatives</Text>}
+                    >
+                        <TextArea
+                            size="xl"
+                            className={b('custom-font-textarea')}
+                            value={fontFamilies[fontType].alternatives.join(', ')}
+                            rows={3}
+                            maxRows={4}
+                            onChange={(event) => {
+                                const alternatives = event.target.value;
+
+                                updateFontFamily({
+                                    fontType,
+                                    isCustom: true,
+                                    value: {
+                                        alternatives: alternatives
+                                            .split(',')
+                                            .map((alternative) =>
+                                                alternative.trim().replaceAll(';', ''),
+                                            ),
+                                        title: fontFamilies[fontType].title,
+                                        key: fontFamilies[fontType].key,
+                                        link: fontFamilies[fontType].link,
+                                    },
+                                });
+                            }}
+                            placeholder="'Mono', 'Consolas', 'Ubuntu Mono', monospace;"
+                        />
+                    </FormRow>
+                    <FormRow
+                        direction="column"
+                        className={b('custom-font-textarea-wrapper')}
+                        label={<Text variant="subheader-2">Font Link</Text>}
+                    >
+                        <TextArea
+                            className={b('custom-font-textarea')}
+                            size="xl"
+                            value={fontFamilies[fontType].link}
+                            rows={3}
+                            maxRows={4}
+                            placeholder="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+                            onChange={(event) => {
+                                const link = event.target.value;
+
+                                updateFontFamily({
+                                    fontType,
+                                    isCustom: true,
+                                    value: {
+                                        link,
+                                        alternatives: fontFamilies[fontType].alternatives,
+                                        title: fontFamilies[fontType].title,
+                                        key: fontFamilies[fontType].key,
+                                    },
+                                });
+                            }}
+                        />
+                    </FormRow>
+                </Flex>
+            )}
         </Flex>
     );
 };
@@ -204,6 +281,8 @@ export const FontFamilyPicker = () => {
 
     const {updateFontFamily, addFontFamilyType, removeFontFamilyType, updateFontFamilyTypeTitle} =
         useThemeCreatorMethods();
+
+    console.log('fontFamilies', fontFamilies);
 
     return (
         <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
@@ -242,6 +321,8 @@ export const FontFamilyPicker = () => {
                                                     title: font.title,
                                                     key: font.key,
                                                     link: font.link,
+                                                    alternatives:
+                                                        DEFAULT_FONTS[option.variableName],
                                                 },
                                             });
                                         }}
@@ -259,7 +340,14 @@ export const FontFamilyPicker = () => {
                                     onClick={() => {
                                         updateFontFamily({
                                             fontType: option.variableName,
+                                            customType: CustomFontSelectType.GoogleFonts,
                                             isCustom: true,
+                                            value: {
+                                                title: '',
+                                                key: '',
+                                                link: '',
+                                                alternatives: [],
+                                            },
                                         });
                                     }}
                                 />

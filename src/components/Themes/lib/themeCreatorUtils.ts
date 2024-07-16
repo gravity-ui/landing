@@ -24,7 +24,7 @@ import type {
     ThemeOptions,
     ThemeVariant,
 } from './types';
-import {RadiusPresetName, TypographyOptions} from './types';
+import {CustomFontSelectType, RadiusPresetName, TypographyOptions} from './types';
 import {DefaultFontFamilyType, TextVariants} from './typography/constants';
 import {
     createFontFamilyVariable,
@@ -528,19 +528,20 @@ export function createBorderRadiusPresetForExport({
 
 export type UpdateFontFamilyParams = {
     fontType: DefaultFontFamilyType | string;
-    isCustom?: boolean;
     fontWebsite?: string;
-
+    isCustom?: boolean;
+    customType?: string;
     value?: {
         title: string;
         key: string;
         link: string;
+        alternatives: string[];
     };
 };
 
 export function updateFontFamilyInTheme(
     themeState: ThemeCreatorState,
-    {fontType, value, isCustom, fontWebsite}: UpdateFontFamilyParams,
+    {fontType, value, isCustom, fontWebsite, customType}: UpdateFontFamilyParams,
 ): ThemeCreatorState {
     const previousFontFamilySettings = themeState.typography.baseSetting.fontFamilies;
 
@@ -550,6 +551,7 @@ export function updateFontFamilyInTheme(
             ...previousFontFamilySettings[fontType],
             ...(value || {}),
             isCustom,
+            customType: customType || previousFontFamilySettings[fontType].customType,
             fontWebsite,
         },
     };
@@ -591,6 +593,17 @@ export function addFontFamilyTypeInTheme(
             ...themeState.typography,
             baseSetting: {
                 ...themeState.typography.baseSetting,
+                fontFamilies: {
+                    ...themeState.typography.baseSetting.fontFamilies,
+                    [newFontType]: {
+                        isCustom: true,
+                        customType: CustomFontSelectType.GoogleFonts,
+                        title: '',
+                        key: '',
+                        link: '',
+                        alternatives: [],
+                    },
+                },
                 customFontFamilyType: newCustomFontFamily,
             },
         },
@@ -744,6 +757,7 @@ export const createTypographyPresetForExport = ({
         cssString += `${createFontFamilyVariable(
             customFontKey ? kebabCase(customFontKey) : key,
             value.title,
+            value.alternatives,
             forPreview,
         )}\n`;
     });

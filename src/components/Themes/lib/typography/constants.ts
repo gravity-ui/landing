@@ -1,4 +1,4 @@
-import {TypographyOptions} from '../types';
+import {CustomFontSelectType, TypographyOptions} from '../types';
 
 export const THEME_FONT_FAMILY_PREFIX = '--g-font-family';
 export const THEME_TEXT_PREFIX = '--g-text';
@@ -49,11 +49,15 @@ export const defaultTypographyPreset: TypographyOptions = {
                 title: 'Inter',
                 key: 'inter',
                 link: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap',
+                customType: CustomFontSelectType.GoogleFonts,
+                alternatives: DEFAULT_FONTS[DefaultFontFamilyType.Sans],
             },
             [DefaultFontFamilyType.Monospace]: {
                 title: 'Roboto Mono',
                 key: 'roboto_mono',
                 link: 'https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap',
+                customType: CustomFontSelectType.GoogleFonts,
+                alternatives: DEFAULT_FONTS[DefaultFontFamilyType.Monospace],
             },
         },
     },
