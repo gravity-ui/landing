@@ -6,9 +6,9 @@ import {Library} from '../../../components/Library/Library';
 import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
 import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../utils';
 
-function getOgImageUrl(id?: string) {
-    return id ? `https://storage.yandexcloud.net/gravity-assets/og/${id}.jpg` : undefined;
-}
+// function getOgImageUrl(id?: string) {
+//     return id ? `https://storage.yandexcloud.net/gravity-assets/og/${id}.jpg` : undefined;
+// }
 
 const libs = getLibsList();
 
@@ -49,7 +49,8 @@ export const LibraryPage = ({libId}: {libId: string}) => {
             meta={{
                 name: lib?.config.title,
                 description: t(`libraries-info:description_${lib.config.id}`),
-                image: getOgImageUrl(lib?.config.id),
+                // TODO telegine@: temporary disabled untill images are ready
+                // image: getOgImageUrl(lib?.config.id),
             }}
         >
             <Library lib={lib} />
