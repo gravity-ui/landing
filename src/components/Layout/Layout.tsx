@@ -14,7 +14,7 @@ import {Footer} from '../Footer/Footer';
 import {Menu} from '../Menu/Menu';
 
 import './Layout.scss';
-import {Meta} from './Meta/Meta';
+import {Meta, MetaProps} from './Meta/Meta';
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -27,6 +27,7 @@ export type LayoutProps = {
     isPageConstrucor?: boolean;
     isRtl?: boolean;
     showOnlyContent?: boolean;
+    meta?: MetaProps;
 };
 
 export const Layout: React.FC<LayoutProps> = ({
@@ -35,6 +36,7 @@ export const Layout: React.FC<LayoutProps> = ({
     isPageConstrucor = false,
     isRtl = false,
     showOnlyContent = false,
+    meta = {},
 }) => {
     const {i18n} = useTranslation();
 
@@ -81,7 +83,7 @@ export const Layout: React.FC<LayoutProps> = ({
         <EnvironmentContext.Provider value={{isClient, isRtl}}>
             <Head>
                 <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
-                <Meta />
+                <Meta {...meta} />
             </Head>
             <ThemeProvider theme={DEFAULT_THEME} direction={isRtl ? 'rtl' : 'ltr'}>
                 {isPageConstrucor ? (
