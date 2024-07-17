@@ -42,6 +42,7 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.614.0",
     "@gravity-ui/eslint-config": "^2.0.0",
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
@@ -62,6 +63,7 @@
     "gh-pages": "^4.0.0",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^10.0.1",
+    "playwright": "^1.45.2",
     "prettier": "^2.7.1",
     "raw-loader": "^4.0.2",
     "sass": "^1.56.1",
@@ -79,6 +81,7 @@
     "fetch-contributors": "node ./scripts/prefetch-contributors.mjs",
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
     "prepare-metadata": "npm run fetch-data && npm run fetch-contributors && npm run get-packages-versions",
+    "update-og-images": "node ./scripts/update-og-images.mjs",
     "prestart": "npm run prepare-metadata",
     "prebuild": "npm run prepare-metadata",
     "pretest": "npm run prepare-metadata",
