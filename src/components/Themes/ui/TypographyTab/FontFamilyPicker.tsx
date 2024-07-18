@@ -332,7 +332,7 @@ export const FontFamilyPicker = () => {
                                     selected={fontFamilies[option.variableName].isCustom}
                                     text="Custom"
                                     textProps={{
-                                        variant: 'body-3',
+                                        variant: 'header-1',
                                     }}
                                     pureText
                                     onClick={() => {

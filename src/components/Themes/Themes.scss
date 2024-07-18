@@ -1,8 +1,8 @@
-@import './base-fonts.scss';
-
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
 @use '../../variables.scss';
+
+@use './base-fonts.scss';
 
 $block: '.#{variables.$ns}themes';
 
