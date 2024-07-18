@@ -150,7 +150,7 @@ export const Preview = () => {
                     <Flex gap={10} style={{padding: 80}} justifyContent="center">
                         {TYPOGRAPHY_STYLES_PREVIEW.map(({title, variants}) => {
                             return (
-                                <Flex direction="column" gap={10} key={title}>
+                                <Flex direction="column" gap={10} width="100%" key={title}>
                                     <Text
                                         variant="subheader-3"
                                         color="brand"

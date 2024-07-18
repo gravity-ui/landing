@@ -1,4 +1,4 @@
-import {TypographyOptions} from '../types';
+import {CustomFontSelectType, TypographyOptions} from '../types';
 
 export const THEME_FONT_FAMILY_PREFIX = '--g-font-family';
 export const THEME_TEXT_PREFIX = '--g-text';
@@ -49,11 +49,15 @@ export const defaultTypographyPreset: TypographyOptions = {
                 title: 'Inter',
                 key: 'inter',
                 link: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap',
+                customType: CustomFontSelectType.GoogleFonts,
+                alternatives: DEFAULT_FONTS[DefaultFontFamilyType.Sans],
             },
             [DefaultFontFamilyType.Monospace]: {
                 title: 'Roboto Mono',
                 key: 'roboto_mono',
                 link: 'https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap',
+                customType: CustomFontSelectType.GoogleFonts,
+                alternatives: DEFAULT_FONTS[DefaultFontFamilyType.Monospace],
             },
         },
     },
@@ -63,6 +67,11 @@ export const defaultTypographyPreset: TypographyOptions = {
             fontWeight: 400,
             selectedFontFamilyType: DefaultFontFamilyType.Sans,
             sizes: {
+                'body-short': {
+                    title: 'Body 1 Short',
+                    fontSize: 13,
+                    lineHeight: 16,
+                },
                 'body-1': {
                     title: 'Body 1',
                     fontSize: 13,
@@ -77,11 +86,6 @@ export const defaultTypographyPreset: TypographyOptions = {
                     title: 'Body 3',
                     fontSize: 17,
                     lineHeight: 24,
-                },
-                'body-short': {
-                    title: 'Body 1 Short',
-                    fontSize: 13,
-                    lineHeight: 16,
                 },
             },
         },
@@ -178,25 +182,25 @@ export const defaultTypographyPreset: TypographyOptions = {
                     fontSize: 12,
                     lineHeight: 18,
                 },
-                'code-2': {
-                    title: 'Code 2',
-                    fontSize: 14,
-                    lineHeight: 20,
-                },
-                'code-3': {
-                    title: 'Code 3',
-                    fontSize: 16,
-                    lineHeight: 24,
-                },
                 'code-inline-1': {
                     title: 'Code Inline 1',
                     fontSize: 12,
                     lineHeight: 14,
                 },
+                'code-2': {
+                    title: 'Code 2',
+                    fontSize: 14,
+                    lineHeight: 20,
+                },
                 'code-inline-2': {
                     title: 'Code Inline 2',
                     fontSize: 14,
                     lineHeight: 16,
+                },
+                'code-3': {
+                    title: 'Code 3',
+                    fontSize: 16,
+                    lineHeight: 24,
                 },
                 'code-inline-3': {
                     title: 'Code Inline 3',
