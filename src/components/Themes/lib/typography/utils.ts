@@ -3,7 +3,6 @@ import {TextProps} from '@gravity-ui/uikit';
 import {TypographyOptions} from '../types';
 
 import {
-    DEFAULT_FONTS,
     GOOGLE_FONTS_DOWNLOAD_HOST,
     THEME_FONT_FAMILY_PREFIX,
     THEME_TEXT_PREFIX,
@@ -17,12 +16,11 @@ export const createFontLinkImport = (fontLink: string) => {
 export const createFontFamilyVariable = (
     fontFamilyType: string,
     value: string,
+    alternatives: string[],
     forPreview: boolean,
 ) => {
-    const additionalFonts = DEFAULT_FONTS[fontFamilyType];
-
     return `${THEME_FONT_FAMILY_PREFIX}-${fontFamilyType}: '${value}'${
-        additionalFonts ? `, ${additionalFonts}` : ''
+        alternatives.length ? `, ${alternatives.join(', ')}` : ''
     }${forPreview ? '!important' : ''};`;
 };
 
@@ -66,7 +64,11 @@ export const createTextLineHeightVariable = (
     };`;
 };
 
-export const generateGoogleFontDownloadLink = (fontName: string) => {
+export const generateGoogleFontDownloadLink = (fontName?: string) => {
+    if (!fontName) {
+        return '';
+    }
+
     return `${GOOGLE_FONTS_DOWNLOAD_HOST}?family=${fontName}&display=swap`;
 };
 

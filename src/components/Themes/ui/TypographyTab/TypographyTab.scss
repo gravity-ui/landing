@@ -17,6 +17,14 @@ $block: '.#{variables.$ns}typography-tab';
             --g-border-radius-xl: 8px;
             align-self: flex-start;
         }
+
+        &__custom-font-textarea {
+            --g-border-radius-xl: 8px;
+        }
+
+        &__custom-font-textarea-wrapper {
+            margin-block-end: 0;
+        }
     }
 
     &__preview {
