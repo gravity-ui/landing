@@ -42,6 +42,11 @@ export type BordersOption = {
     values: RadiusValue;
 };
 
+export enum CustomFontSelectType {
+    GoogleFonts = 'google-fonts',
+    Manual = 'manual',
+}
+
 export type TypographyOptions = {
     baseSetting: {
         defaultFontFamilyType: {
@@ -58,7 +63,9 @@ export type TypographyOptions = {
                 title: string;
                 key: string;
                 link: string;
+                alternatives: string[];
                 isCustom?: boolean;
+                customType?: string;
                 fontWebsite?: string;
             }
         >;
