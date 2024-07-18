@@ -20,7 +20,7 @@ export const createFontFamilyVariable = (
     forPreview: boolean,
 ) => {
     return `${THEME_FONT_FAMILY_PREFIX}-${fontFamilyType}: '${value}'${
-        alternatives ? `, ${alternatives.join(', ')}` : ''
+        alternatives.length ? `, ${alternatives.join(', ')}` : ''
     }${forPreview ? '!important' : ''};`;
 };
 

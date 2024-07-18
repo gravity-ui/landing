@@ -8,7 +8,6 @@ import {block} from '../../utils';
 import {TagItem, Tags} from '../Tags/Tags';
 
 import './Themes.scss';
-import './base-fonts.scss';
 import {DEFAULT_THEME} from './lib/constants';
 import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
