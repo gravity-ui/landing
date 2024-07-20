@@ -49,7 +49,7 @@ const FONT_FAMILIES_OPTION: {
             {
                 title: 'Inter',
                 key: 'inter',
-                link: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap',
+                link: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap',
             },
             {
                 title: 'Merriweather',
@@ -306,9 +306,7 @@ export const FontFamilyPicker = () => {
                                         text={font.title}
                                         textProps={{
                                             variant: 'header-1',
-                                            style: {
-                                                fontFamily: font.title,
-                                            },
+                                            className: b('font-card__text', {fontType: font.key}),
                                         }}
                                         pureText
                                         onClick={() => {

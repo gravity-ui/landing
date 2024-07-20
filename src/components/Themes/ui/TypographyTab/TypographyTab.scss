@@ -11,6 +11,32 @@ $block: '.#{variables.$ns}typography-tab';
     &__font {
         &__font-card {
             width: 195px;
+
+            &__text {
+                &_fontType_inter {
+                    font-family: Inter, sans-serif;
+                }
+
+                &_fontType_merriweather {
+                    font-family: Merriweather, sans-serif;
+                }
+
+                &_fontType_titillium_web {
+                    font-family: 'Titillium Web', sans-serif;
+                }
+
+                &_fontType_roboto_mono {
+                    font-family: 'Roboto Mono', monospace;
+                }
+
+                &_fontType_ubuntu_mono {
+                    font-family: 'Ubuntu Mono', monospace;
+                }
+
+                &_fontType_ibm_plex_mono {
+                    font-family: 'IBM Plex Mono', monospace;
+                }
+            }
         }
 
         &__custom-font-radio-button {
