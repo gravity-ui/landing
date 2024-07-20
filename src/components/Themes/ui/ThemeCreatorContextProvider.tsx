@@ -24,6 +24,7 @@ import {
     removeColorFromTheme,
     removeFontFamilyTypeFromTheme,
     renameColorInTheme,
+    updateAdvancedTypographyInTheme,
     updateAdvancedTypographySettingsInTheme,
     updateColorInTheme,
     updateCustomRadiusPresetInTheme,
@@ -82,6 +83,9 @@ type ThemeCreatorAction =
           payload: UpdateAdvancedTypographySettingsParams;
       }
     | {
+          type: 'updateAdvancedTypography';
+      }
+    | {
           type: 'reinitialize';
           payload: ThemeOptions;
       }
@@ -122,6 +126,8 @@ const themeCreatorReducer = (
             return updateFontFamilyInTheme(prevState, action.payload);
         case 'updateAdvancedTypographySettings':
             return updateAdvancedTypographySettingsInTheme(prevState, action.payload);
+        case 'updateAdvancedTypography':
+            return updateAdvancedTypographyInTheme(prevState);
         case 'openMainSettings':
             return {
                 ...prevState,
@@ -270,6 +276,14 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const updateAdvancedTypography = React.useCallback<
+        ThemeCreatorMethodsContextType['updateAdvancedTypography']
+    >(() => {
+        dispatchThemeCreator({
+            type: 'updateAdvancedTypography',
+        });
+    }, []);
+
     const openMainSettings = React.useCallback(() => {
         dispatchThemeCreator({
             type: 'openMainSettings',
@@ -296,6 +310,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             removeFontFamilyType,
             updateAdvancedTypographySettings,
             updateFontFamilyTypeTitle,
+            updateAdvancedTypography,
             updateFontFamily,
             openMainSettings,
             setAdvancedMode,
@@ -311,6 +326,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             addFontFamilyType,
             removeFontFamilyType,
             updateAdvancedTypographySettings,
+            updateAdvancedTypography,
             updateFontFamily,
             updateFontFamilyTypeTitle,
             openMainSettings,
