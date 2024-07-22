@@ -1,9 +1,14 @@
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
+import {useTranslation} from 'next-i18next';
 
-import {Layout} from '../../components/Layout/Layout';
-import {Library} from '../../components/Library/Library';
-import {useLocaleRedirect} from '../../hooks/useLocaleRedirect';
-import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../utils';
+import {Layout} from '../../../components/Layout/Layout';
+import {Library} from '../../../components/Library/Library';
+import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
+import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../utils';
+
+// function getOgImageUrl(id?: string) {
+//     return id ? `https://storage.yandexcloud.net/gravity-assets/og/${id}.jpg` : undefined;
+// }
 
 const libs = getLibsList();
 
@@ -33,12 +38,21 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 };
 
 export const LibraryPage = ({libId}: {libId: string}) => {
+    const {t} = useTranslation();
     useLocaleRedirect();
 
     const lib = getLibById(libId);
 
     return (
-        <Layout title={lib?.config.title ?? ''}>
+        <Layout
+            title={lib?.config.title ?? ''}
+            meta={{
+                name: lib?.config.title,
+                description: t(`libraries-info:description_${lib.config.id}`),
+                // TODO telegine@: temporary disabled untill images are ready
+                // image: getOgImageUrl(lib?.config.id),
+            }}
+        >
             <Library lib={lib} />
         </Layout>
     );
