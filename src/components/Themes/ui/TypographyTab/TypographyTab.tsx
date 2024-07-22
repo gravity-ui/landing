@@ -1,8 +1,9 @@
 import {Sliders} from '@gravity-ui/icons';
 import {Button, Flex, Icon} from '@gravity-ui/uikit';
-import React, {useState} from 'react';
+import React from 'react';
 
 import {block} from '../../../../utils';
+import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
 import {ExportThemeSection} from '../ExportThemeSection/ExportThemeSection';
 
 import {AdvanceTypographySettings} from './AdvanceTypographySettings';
@@ -13,21 +14,21 @@ import './TypographyTab.scss';
 const b = block('typography-tab');
 
 export const TypographyTab = () => {
-    const [withAdvancedSettings, toggleAdvancedSettings] = useState<boolean>(false);
+    const {
+        typography: {isAdvancedActive},
+    } = useThemeCreator();
+
+    const {updateAdvancedTypography} = useThemeCreatorMethods();
 
     return (
         <Flex direction="column" alignItems="flex-start" gap={10} className={b()}>
             <FontFamilyPicker />
             <Preview />
-            <Button
-                size="xl"
-                view="outlined-action"
-                onClick={() => toggleAdvancedSettings((prevState) => !prevState)}
-            >
+            <Button size="xl" view="outlined-action" onClick={() => updateAdvancedTypography()}>
                 <Icon data={Sliders} />
-                {withAdvancedSettings ? 'Hide Advanced Settings' : 'Advanced Settings'}
+                {isAdvancedActive ? 'Hide Advanced Settings' : 'Advanced Settings'}
             </Button>
-            {withAdvancedSettings && <AdvanceTypographySettings />}
+            {isAdvancedActive && <AdvanceTypographySettings />}
             <ExportThemeSection />
         </Flex>
     );

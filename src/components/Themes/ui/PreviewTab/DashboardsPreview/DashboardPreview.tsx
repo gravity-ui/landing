@@ -1,21 +1,22 @@
 import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {YagrPlugin} from '@gravity-ui/chartkit/yagr';
-import {Card, Flex, Text} from '@gravity-ui/uikit';
+import {D3Plugin} from '@gravity-ui/chartkit/d3';
+import {Card, Col, Container, Flex, Row, Text} from '@gravity-ui/uikit';
 import React, {PropsWithChildren} from 'react';
 
 import {block} from '../../../../../utils';
 import {
     areaDashboardData,
-    columnDashboardData,
+    barXDashboardData,
     dotsDashboardData,
-    lineDashboardData,
+    linesDashboardData,
+    pieDashboardData,
 } from '../constants';
 
 import './DashboardPreview.scss';
 
 interface StyleCardProps extends PropsWithChildren {}
 
-settings.set({plugins: [YagrPlugin]});
+settings.set({plugins: [D3Plugin]});
 
 const b = block('dashboards-preview');
 
@@ -47,23 +48,32 @@ export const DashboardPreview = ({justify}: {justify: string}) => {
                         </Text>
                     </Flex>
                 </StyledCard>
-                <Flex gap={5} wrap="wrap">
-                    {[lineDashboardData, areaDashboardData, columnDashboardData].map(
-                        (data, index) => (
-                            <StyledCard key={index}>
-                                <div className={b('dashboard-wrapper')}>
-                                    <ChartKit type="yagr" data={data} />
-                                </div>
-                            </StyledCard>
-                        ),
-                    )}
-                </Flex>
-
-                <StyledCard>
-                    <div className={b('dashboard-wrapper')}>
-                        <ChartKit type="yagr" data={dotsDashboardData} />
-                    </div>
-                </StyledCard>
+                <Container style={{width: '100%', padding: 0}} spaceRow={5}>
+                    <Row space={5}>
+                        {[barXDashboardData, linesDashboardData, areaDashboardData].map(
+                            (data, index) => (
+                                <Col s="12" m="6" l="4">
+                                    <StyledCard key={index}>
+                                        <div className={b('dashboard-wrapper')}>
+                                            <ChartKit type="d3" data={data} />
+                                        </div>
+                                    </StyledCard>
+                                </Col>
+                            ),
+                        )}
+                    </Row>
+                    <Row space={5}>
+                        {[pieDashboardData, dotsDashboardData].map((data, index) => (
+                            <Col s="12" m="6">
+                                <StyledCard key={index}>
+                                    <div className={b('dashboard-wrapper')}>
+                                        <ChartKit type="d3" data={data} />
+                                    </div>
+                                </StyledCard>
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
             </Flex>
         </Flex>
     );

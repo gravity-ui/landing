@@ -70,6 +70,7 @@ export type TypographyOptions = {
             }
         >;
     };
+    isAdvancedActive: boolean;
     advanced: Record<
         TextVariants,
         {
