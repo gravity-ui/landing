@@ -14,9 +14,5 @@ $block: '.#{variables.$ns}dashboards-preview';
 
     &__dashboard-wrapper {
         height: 230px;
-
-        & .yagr {
-            --yagr-font-family: var(--g-font-family-sans);
-        }
     }
 }

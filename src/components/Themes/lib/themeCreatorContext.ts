@@ -34,6 +34,7 @@ export interface ThemeCreatorMethodsContextType {
     updateFontFamilyTypeTitle: (params: UpdateFontFamilyTypeTitleParams) => void;
     removeFontFamilyType: ({fontType}: {fontType: string}) => void;
     updateAdvancedTypographySettings: (params: UpdateAdvancedTypographySettingsParams) => void;
+    updateAdvancedTypography: () => void;
     openMainSettings: () => void;
     setAdvancedMode: (enabled: boolean) => void;
 }
@@ -51,6 +52,7 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     updateFontFamilyTypeTitle: noop,
     removeFontFamilyType: noop,
     updateAdvancedTypographySettings: noop,
+    updateAdvancedTypography: noop,
     openMainSettings: noop,
     setAdvancedMode: noop,
 });

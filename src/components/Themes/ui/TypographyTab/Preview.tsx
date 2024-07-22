@@ -1,4 +1,4 @@
-import {Card, Flex, Text, TextProps, ThemeProvider} from '@gravity-ui/uikit';
+import {Card, Col, Flex, Row, Text, TextProps, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -147,26 +147,32 @@ export const Preview = () => {
                             {`${themeStyles.fontImports}\n.gravity-ui-landing-typography-tab__preview_theme_dark {${themeStyles.dark}}`}
                         </style>
                     ) : null}
-                    <Flex gap={10} style={{padding: 80}} justifyContent="center">
+                    <Row
+                        space={{l: 0, m: 0, s: 0}}
+                        spaceRow={{l: 0, s: 10}}
+                        className={b('wrapper')}
+                    >
                         {TYPOGRAPHY_STYLES_PREVIEW.map(({title, variants}) => {
                             return (
-                                <Flex direction="column" gap={10} width="100%" key={title}>
-                                    <Text
-                                        variant="subheader-3"
-                                        color="brand"
-                                        className={b('variant-title')}
-                                    >
-                                        {title}
-                                    </Text>
-                                    {variants.map((variant) => (
-                                        <Text variant={variant.variant} key={variant.variant}>
-                                            {variant.title}
+                                <Col l="2" m="4" s="12">
+                                    <Flex direction="column" gap={10} width="100%" key={title}>
+                                        <Text
+                                            variant="subheader-3"
+                                            color="brand"
+                                            className={b('variant-title')}
+                                        >
+                                            {title}
                                         </Text>
-                                    ))}
-                                </Flex>
+                                        {variants.map((variant) => (
+                                            <Text variant={variant.variant} key={variant.variant}>
+                                                {variant.title}
+                                            </Text>
+                                        ))}
+                                    </Flex>
+                                </Col>
                             );
                         })}
-                    </Flex>
+                    </Row>
                 </ThemeProvider>
             </Card>
         </Flex>

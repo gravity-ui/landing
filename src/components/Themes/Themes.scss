@@ -2,8 +2,6 @@
 @use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
 @use '../../variables.scss';
 
-@use './base-fonts.scss';
-
 $block: '.#{variables.$ns}themes';
 
 #{$block} {

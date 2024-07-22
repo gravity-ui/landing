@@ -61,6 +61,7 @@ export const defaultTypographyPreset: TypographyOptions = {
             },
         },
     },
+    isAdvancedActive: false,
     advanced: {
         [TextVariants.Body]: {
             title: 'Body Text',

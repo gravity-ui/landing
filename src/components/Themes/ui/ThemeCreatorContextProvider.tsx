@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React from 'react';
 
 import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreatorContext';
@@ -23,6 +24,7 @@ import {
     removeColorFromTheme,
     removeFontFamilyTypeFromTheme,
     renameColorInTheme,
+    updateAdvancedTypographyInTheme,
     updateAdvancedTypographySettingsInTheme,
     updateColorInTheme,
     updateCustomRadiusPresetInTheme,
@@ -81,6 +83,9 @@ type ThemeCreatorAction =
           payload: UpdateAdvancedTypographySettingsParams;
       }
     | {
+          type: 'updateAdvancedTypography';
+      }
+    | {
           type: 'reinitialize';
           payload: ThemeOptions;
       }
@@ -121,6 +126,8 @@ const themeCreatorReducer = (
             return updateFontFamilyInTheme(prevState, action.payload);
         case 'updateAdvancedTypographySettings':
             return updateAdvancedTypographySettingsInTheme(prevState, action.payload);
+        case 'updateAdvancedTypography':
+            return updateAdvancedTypographyInTheme(prevState);
         case 'openMainSettings':
             return {
                 ...prevState,
@@ -269,6 +276,14 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const updateAdvancedTypography = React.useCallback<
+        ThemeCreatorMethodsContextType['updateAdvancedTypography']
+    >(() => {
+        dispatchThemeCreator({
+            type: 'updateAdvancedTypography',
+        });
+    }, []);
+
     const openMainSettings = React.useCallback(() => {
         dispatchThemeCreator({
             type: 'openMainSettings',
@@ -295,6 +310,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             removeFontFamilyType,
             updateAdvancedTypographySettings,
             updateFontFamilyTypeTitle,
+            updateAdvancedTypography,
             updateFontFamily,
             openMainSettings,
             setAdvancedMode,
@@ -310,6 +326,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             addFontFamilyType,
             removeFontFamilyType,
             updateAdvancedTypographySettings,
+            updateAdvancedTypography,
             updateFontFamily,
             updateFontFamilyTypeTitle,
             openMainSettings,
@@ -319,6 +336,13 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
 
     return (
         <ThemeCreatorContext.Provider value={themeCreator}>
+            <Head>
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+                />
+            </Head>
+
             <ThemeCreatorMethodsContext.Provider value={methods}>
                 {children}
             </ThemeCreatorMethodsContext.Provider>

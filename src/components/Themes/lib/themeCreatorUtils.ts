@@ -728,6 +728,18 @@ export function updateAdvancedTypographySettingsInTheme(
     };
 }
 
+export const updateAdvancedTypographyInTheme = (
+    themeState: ThemeCreatorState,
+): ThemeCreatorState => {
+    return {
+        ...themeState,
+        typography: {
+            ...themeState.typography,
+            isAdvancedActive: !themeState.typography.isAdvancedActive,
+        },
+    };
+};
+
 export const createFontImportsForExport = (
     fontFamily: TypographyOptions['baseSetting']['fontFamilies'],
 ) => {
