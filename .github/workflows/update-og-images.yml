@@ -15,6 +15,8 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: npm ci
+      - name: Install playwright dependencies
+        run: npx playwright install
       - name: Update og images
         env:
           S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
