@@ -2,7 +2,7 @@ name: Update og images
 
 on: workflow_dispatch
 jobs:
-  deploy:
+  update_og_images:
     runs-on: ubuntu-latest
     strategy:
       matrix:
