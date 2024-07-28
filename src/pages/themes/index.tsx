@@ -10,7 +10,7 @@ import {getI18nProps} from '../../utils';
 export const getStaticProps: GetStaticProps = async (ctx) => {
     return {
         props: {
-            ...(await getI18nProps(ctx, ['common', 'themes'])),
+            ...(await getI18nProps(ctx, ['themes'])),
         },
     };
 };

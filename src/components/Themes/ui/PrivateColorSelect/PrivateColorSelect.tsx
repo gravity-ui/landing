@@ -43,8 +43,11 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
             onChange(defaultValue);
         } else {
             onChange('');
+            if (showPopup) {
+                toggleShowPopup();
+            }
         }
-    }, [isCustomValue, onChange, defaultValue]);
+    }, [isCustomValue, onChange, defaultValue, showPopup]);
 
     const privateColor = React.useMemo(() => {
         const colorGroup = value
@@ -56,12 +59,21 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
             : undefined;
     }, [groups, value]);
 
+    const handleClickArrowButton = React.useCallback(
+        (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+            event.stopPropagation();
+            toggleShowPopup();
+        },
+        [],
+    );
+
     return (
         <Flex className={b()} ref={containerRef} gap={1}>
             {isCustomValue ? (
                 <ColorPickerInput value={value} defaultValue={value || ''} onChange={onChange} />
             ) : (
                 <TextInput
+                    className={b('input')}
                     value={privateColor?.title || ''}
                     view="normal"
                     size="l"
@@ -70,7 +82,11 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                     }
                     endContent={
                         <Flex gap={1}>
-                            <Button view="flat-secondary" onClick={toggleShowPopup}>
+                            <Button
+                                className={b('arrow-button')}
+                                view="flat-secondary"
+                                onClick={handleClickArrowButton}
+                            >
                                 <Icon data={ChevronDown} />
                             </Button>
                         </Flex>

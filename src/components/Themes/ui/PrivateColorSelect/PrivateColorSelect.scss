@@ -13,6 +13,18 @@ $block: '.#{variables.$ns}private-colors-select';
         margin-inline-end: var(--g-spacing-1);
     }
 
+    &__input {
+        cursor: pointer;
+
+        input {
+            cursor: pointer;
+        }
+    }
+
+    &__arrow-button {
+        --g-button-background-color-hover: transparent;
+    }
+
     &__customize-button {
         flex-shrink: 0;
     }
