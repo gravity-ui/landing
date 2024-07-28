@@ -3,9 +3,9 @@ import {Button, Flex, Icon, Popup, TextInput} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
-import {ColorPreview} from '../../../ColorPreview/ColorPreview';
 import {isPrivateColorToken} from '../../lib/themeCreatorUtils';
+import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
+import {ColorPreview} from '../ColorPreview/ColorPreview';
 
 import './PrivateColorSelect.scss';
 import {PrivateColorSelectPopupContent} from './PrivateColorSelectPopupContent';

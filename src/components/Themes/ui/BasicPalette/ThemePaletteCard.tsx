@@ -4,9 +4,9 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
-import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
 import {useThemeUtilityColor} from '../../hooks';
 import {Palette, ThemeVariant} from '../../lib/types';
+import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 
 import './ThemePaletteCard.scss';
 
