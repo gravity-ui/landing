@@ -1,4 +1,4 @@
-import {Plus, TrashBin} from '@gravity-ui/icons';
+import {TrashBin} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Text, TextInput, sp} from '@gravity-ui/uikit';
 import debounce from 'lodash/debounce';
 import React from 'react';
@@ -7,6 +7,7 @@ import {Trans, useTranslation} from 'react-i18next';
 import {block} from '../../../../utils';
 import {Palette} from '../../lib/types';
 
+import {AddColorButton} from './AddColorButton';
 import './PaletteColors.scss';
 
 const b = block('palette-colors');
@@ -17,7 +18,7 @@ interface PaletteColorEditorProps {
     onDelete: (title: string) => void;
 }
 
-const PaletteColorEditor: React.FC<PaletteColorEditorProps> = ({
+export const PaletteColorEditor: React.FC<PaletteColorEditorProps> = ({
     onDelete,
     onUpdateTitle,
     paletteColorData,
@@ -96,14 +97,7 @@ export const PaletteColors: React.FC<PaletteColorsProps> = ({
                         onUpdateTitle={onUpdateColorTitle}
                     />
                 ))}
-                <Button
-                    className={b('add-button')}
-                    onClick={onAddColorClick}
-                    view="outlined-action"
-                    size="xl"
-                >
-                    <Icon data={Plus} size={20} /> {t('add_color')}
-                </Button>
+                <AddColorButton onClick={onAddColorClick} />
             </Flex>
         </Flex>
     );

@@ -17,7 +17,15 @@ $block: '.#{variables.$ns}theme-palette-card';
     }
 
     &__theme-root {
-        --g-color-base-background: transparent;
+        background: transparent;
         --g-button-border-radius: 8px;
+    }
+
+    &__palette-row {
+        &_with-editor {
+            display: grid;
+            gap: var(--g-spacing-4);
+            grid-template-columns: 100px auto;
+        }
     }
 }

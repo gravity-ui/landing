@@ -11,10 +11,17 @@ const b = block('theme-picker');
 
 interface ThemePickerProps {
     value: ThemeVariant;
+    lightThemeTitle?: string;
+    darkThemeTitle?: string;
     onUpdate: (value: ThemeVariant) => void;
 }
 
-export const ThemePicker: React.FC<ThemePickerProps> = ({value, onUpdate}) => {
+export const ThemePicker: React.FC<ThemePickerProps> = ({
+    value,
+    onUpdate,
+    lightThemeTitle = 'Light',
+    darkThemeTitle = 'Dark',
+}) => {
     return (
         <RadioButton<ThemeVariant> className={b()} size="xl" value={value} onUpdate={onUpdate}>
             <RadioButton.Option
@@ -22,7 +29,7 @@ export const ThemePicker: React.FC<ThemePickerProps> = ({value, onUpdate}) => {
                 content={
                     <Flex className={b('option')} alignItems="center" gap={1}>
                         <Icon data={Sun} />
-                        <Text>Light</Text>
+                        <Text>{lightThemeTitle}</Text>
                     </Flex>
                 }
             />
@@ -31,7 +38,7 @@ export const ThemePicker: React.FC<ThemePickerProps> = ({value, onUpdate}) => {
                 content={
                     <Flex className={b('option')} alignItems="center" gap={1}>
                         <Icon data={Moon} />
-                        <Text>Dark</Text>
+                        <Text>{darkThemeTitle}</Text>
                     </Flex>
                 }
             />
