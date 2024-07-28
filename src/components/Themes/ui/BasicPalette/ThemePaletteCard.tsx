@@ -7,6 +7,7 @@ import {block} from '../../../../utils';
 import {useThemeUtilityColor} from '../../hooks';
 import {Palette, ThemeVariant} from '../../lib/types';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
+import {ThemePicker} from '../ThemePicker';
 
 import './ThemePaletteCard.scss';
 
@@ -16,9 +17,21 @@ interface ThemePaletteCardProps {
     theme: ThemeVariant;
     palette: Palette;
     onUpdate: (params: {title: string; theme: ThemeVariant; value: string}) => void;
+    onChangeTheme?: (newTheme: ThemeVariant) => void;
+    showTitle?: boolean;
+    onDeleteColor?: (title: string) => void;
+    onUpdateColorTitle?: (params: {oldTitle: string; newTitle: string}) => void;
+    renderEditor?: (paletteColorData: Palette[0]) => React.ReactNode;
 }
 
-export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palette, onUpdate}) => {
+export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({
+    theme,
+    palette,
+    onUpdate,
+    onChangeTheme,
+    renderEditor,
+    showTitle = true,
+}) => {
     const {t} = useTranslation('themes');
     const [backgroundColor] = useThemeUtilityColor({name: 'base-background', theme});
 
@@ -37,21 +50,41 @@ export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({theme, palett
                 direction="column"
                 style={{backgroundColor}}
             >
-                <Flex gap={4} space={6}>
-                    <Icon data={theme === 'dark' ? Moon : Sun} size={24} />
-                    <Text variant="subheader-3">
-                        {theme === 'dark' ? t('dark_theme') : t('light_theme')}
-                    </Text>
-                </Flex>
+                {showTitle && (
+                    <Flex gap={4} space={6}>
+                        <Icon data={theme === 'dark' ? Moon : Sun} size={24} />
+                        <Text variant="subheader-3">
+                            {theme === 'dark' ? t('dark_theme') : t('light_theme')}
+                        </Text>
+                    </Flex>
+                )}
+                {onChangeTheme && (
+                    <ThemePicker
+                        value={theme}
+                        onUpdate={onChangeTheme}
+                        lightThemeTitle={t('light_theme')}
+                        darkThemeTitle={t('dark_theme')}
+                    />
+                )}
                 <Flex gap={4} direction="column">
-                    {palette.map(({title, colors}) => (
-                        <ColorPickerInput
-                            key={title}
-                            value={colors[theme]}
-                            defaultValue={colors[theme]}
-                            onChange={createChangeHandler(title)}
-                        />
-                    ))}
+                    {palette.map((paletteColorData) => {
+                        const {colors, title} = paletteColorData;
+
+                        return (
+                            <div
+                                key={paletteColorData.title}
+                                className={b('palette-row', {'with-editor': Boolean(renderEditor)})}
+                            >
+                                {renderEditor ? renderEditor(paletteColorData) : null}
+                                <ColorPickerInput
+                                    key={title}
+                                    value={colors[theme]}
+                                    defaultValue={colors[theme]}
+                                    onChange={createChangeHandler(title)}
+                                />
+                            </div>
+                        );
+                    })}
                 </Flex>
             </Flex>
         </ThemeProvider>
