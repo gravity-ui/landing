@@ -5,6 +5,7 @@
     "color-input_validation-format-error": "Неверный формат",
     "maintainers_one": "Maintainer:",
     "maintainers_other": "Maintainers:",
+    "maintainers": "Maintainers:",
     "theme": "Переключить тему",
     "rtlOn": "Включить RTL",
     "rtlOff": "Выключить RTL",

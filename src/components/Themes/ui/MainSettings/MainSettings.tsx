@@ -5,11 +5,11 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
-import {ColorPickerInput} from '../../../ColorPickerInput/ColorPickerInput';
 import {SelectableCard} from '../../../SelectableCard/SelectableCard';
 import {useThemePaletteColor, useThemeUtilityColor} from '../../hooks';
 import {TEXT_CONTRAST_COLORS} from '../../lib/constants';
 import type {ThemeVariant} from '../../lib/types';
+import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ThemePicker} from '../ThemePicker';
 import {ThemeSection} from '../ThemeSection';
 

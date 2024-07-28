@@ -17,6 +17,15 @@ export const parseRgbStringToHex = (rgbString: string) => {
     return hexColor;
 };
 
+export const isValidColor = (textColor: string) => {
+    try {
+        chroma(textColor);
+        return true;
+    } catch (_err) {
+        return false;
+    }
+};
+
 export const getValidColor = (textColor: string) => {
     const testColor = textColor.replaceAll(' ', '');
 

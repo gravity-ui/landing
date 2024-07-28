@@ -2,8 +2,8 @@ import {List, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {ColorPreview} from '../../../ColorPreview/ColorPreview';
 import {parsePrivateColorToken} from '../../lib/themeCreatorUtils';
+import {ColorPreview} from '../ColorPreview/ColorPreview';
 
 import './PrivateColorSelectPopupContent.scss';
 import type {BaseColor, ColorGroup} from './types';

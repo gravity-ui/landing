@@ -1,6 +1,6 @@
 import React, {ChangeEventHandler, forwardRef} from 'react';
 
-import {block} from '../../utils';
+import {block} from '../../../../utils';
 
 import './ColorPickerInput.scss';
 
