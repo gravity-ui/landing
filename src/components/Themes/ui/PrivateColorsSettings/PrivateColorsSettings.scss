@@ -1,4 +1,5 @@
 @use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
 $block: '.#{variables.$ns}private-colors-settings';
 
@@ -11,6 +12,20 @@ $block: '.#{variables.$ns}private-colors-settings';
         .gc-form-row__right {
             width: 400px;
             flex-grow: 0;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+            --gc-form-row-label-width: 329px;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            --gc-form-row-label-width: auto;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .gc-form-row__right {
+                width: 100%;
+            }
         }
     }
 }

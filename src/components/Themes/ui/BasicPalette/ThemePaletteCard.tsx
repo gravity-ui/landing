@@ -58,14 +58,7 @@ export const ThemePaletteCard: React.FC<ThemePaletteCardProps> = ({
                         </Text>
                     </Flex>
                 )}
-                {onChangeTheme && (
-                    <ThemePicker
-                        value={theme}
-                        onUpdate={onChangeTheme}
-                        lightThemeTitle={t('light_theme')}
-                        darkThemeTitle={t('dark_theme')}
-                    />
-                )}
+                {onChangeTheme && <ThemePicker value={theme} onUpdate={onChangeTheme} />}
                 <Flex gap={4} direction="column">
                     {palette.map((paletteColorData) => {
                         const {colors, title} = paletteColorData;

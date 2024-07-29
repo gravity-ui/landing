@@ -1,6 +1,12 @@
 import {Flex, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {block} from '../../../utils';
+
+import './ThemeSection.scss';
+
+const b = block('theme-section');
+
 interface ThemeSectionProps {
     title: string;
     children?: React.ReactNode;
@@ -9,11 +15,11 @@ interface ThemeSectionProps {
 
 export const ThemeSection: React.FC<ThemeSectionProps> = ({title, className, children}) => {
     return (
-        <Flex gap={8} direction="column" className={className}>
+        <div className={b(null, className)}>
             <Flex>
-                <Text variant="display-2">{title}</Text>
+                <Text className={b('title')}>{title}</Text>
             </Flex>
             {children}
-        </Flex>
+        </div>
     );
 };
