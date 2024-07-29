@@ -1,0 +1,24 @@
+@use '../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
+
+$block: '.#{variables.$ns}theme-section';
+
+#{$block} {
+    display: flex;
+    flex-direction: column;
+
+    gap: calc(var(--g-spacing-base) * 12);
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        gap: calc(var(--g-spacing-base) * 8);
+    }
+
+    &__title {
+        @include ukitMixins.text-display-2();
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+            @include ukitMixins.text-header-2();
+        }
+    }
+}

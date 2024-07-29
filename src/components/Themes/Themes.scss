@@ -48,5 +48,9 @@ $block: '.#{variables.$ns}themes';
 
     &__content {
         padding: calc(var(--g-spacing-base) * 12) 0;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            padding: calc(var(--g-spacing-base) * 6) 0;
+        }
     }
 }
