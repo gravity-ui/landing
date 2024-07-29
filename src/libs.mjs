@@ -13,6 +13,21 @@ export const libs = [
         mainBranch: 'main',
     },
     {
+        id: 'markdown-editor',
+        githubId: 'gravity-ui/markdown-editor',
+        npmId: '@gravity-ui/markdown-editor',
+        title: 'Markdown editor',
+        primary: false,
+        landing: false,
+        tags: ['markdown', 'prosemirror', 'wysiwyg', 'codemirror', 'yfm', 'diplodoc', 'gfm', 'react'],
+        storybookUrl: 'https://preview.gravity-ui.com/md-editor/',
+        readmeUrl:
+            'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/README.md',
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
         id: 'components',
         githubId: 'gravity-ui/components',
         npmId: '@gravity-ui/components',
@@ -132,21 +147,6 @@ export const libs = [
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md',
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/CHANGELOG.md',
-        mainBranch: 'main',
-    },
-    {
-        id: 'markdown-editor',
-        githubId: 'gravity-ui/markdown-editor',
-        npmId: '@gravity-ui/markdown-editor',
-        title: 'Markdown editor',
-        primary: false,
-        landing: false,
-        tags: ['markdown', 'prosemirror', 'wysiwyg', 'codemirror', 'yfm', 'diplodoc', 'gfm', 'react'],
-        storybookUrl: 'https://preview.gravity-ui.com/md-editor/',
-        readmeUrl:
-            'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/README.md',
-        changelogUrl:
-            'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/CHANGELOG.md',
         mainBranch: 'main',
     },
     {
