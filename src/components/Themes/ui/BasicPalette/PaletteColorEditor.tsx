@@ -2,15 +2,8 @@ import {TrashBin} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Text, TextInput, sp} from '@gravity-ui/uikit';
 import debounce from 'lodash/debounce';
 import React from 'react';
-import {Trans, useTranslation} from 'react-i18next';
 
-import {block} from '../../../../utils';
 import {Palette} from '../../lib/types';
-
-import {AddColorButton} from './AddColorButton';
-import './PaletteColors.scss';
-
-const b = block('palette-colors');
 
 interface PaletteColorEditorProps {
     paletteColorData: Palette[0];
@@ -62,43 +55,6 @@ export const PaletteColorEditor: React.FC<PaletteColorEditorProps> = ({
             <Button size="l" onClick={handleDelete}>
                 <Icon data={TrashBin} size={16} />
             </Button>
-        </Flex>
-    );
-};
-
-interface PaletteColorsProps {
-    palette: Palette;
-    onAddColorClick: () => void;
-    onDeleteColor: (title: string) => void;
-    onUpdateColorTitle: (params: {oldTitle: string; newTitle: string}) => void;
-}
-
-export const PaletteColors: React.FC<PaletteColorsProps> = ({
-    palette,
-    onAddColorClick,
-    onDeleteColor,
-    onUpdateColorTitle,
-}) => {
-    const {t} = useTranslation('themes');
-
-    return (
-        <Flex direction="column" className={b()} grow={true}>
-            <Text variant="subheader-3" className={b('title')}>
-                <Trans i18nKey="palette_colors_description" t={t}>
-                    <br />
-                </Trans>
-            </Text>
-            <Flex direction="column" gap={4}>
-                {palette.map((paletteColorData) => (
-                    <PaletteColorEditor
-                        key={paletteColorData.title}
-                        paletteColorData={paletteColorData}
-                        onDelete={onDeleteColor}
-                        onUpdateTitle={onUpdateColorTitle}
-                    />
-                ))}
-                <AddColorButton onClick={onAddColorClick} />
-            </Flex>
         </Flex>
     );
 };

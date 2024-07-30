@@ -1,7 +1,7 @@
 @use '../../../../variables.scss';
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
-$block: '.#{variables.$ns}palette-colors';
+$block: '.#{variables.$ns}themable-settings-rows';
 
 #{$block} {
     --g-button-border-radius: var(--g-spacing-2);
