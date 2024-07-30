@@ -1,6 +1,7 @@
 @use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
-$block: '.#{variables.$ns}theme-palette-card';
+$block: '.#{variables.$ns}themable-card';
 
 #{$block} {
     padding: 30px var(--g-spacing-8);
@@ -21,11 +22,21 @@ $block: '.#{variables.$ns}theme-palette-card';
         --g-button-border-radius: 8px;
     }
 
-    &__palette-row {
-        &_with-editor {
+    &__row {
+        &-title {
+            display: none;
+            padding: var(--g-spacing-2) 0;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             display: grid;
             gap: var(--g-spacing-4);
             grid-template-columns: 100px auto;
+            align-items: center;
+
+            &-title {
+                display: inline;
+            }
         }
     }
 }

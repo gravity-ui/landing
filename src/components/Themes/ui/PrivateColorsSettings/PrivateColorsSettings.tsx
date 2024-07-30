@@ -1,6 +1,5 @@
-import {FormRow} from '@gravity-ui/components';
-import {Flex, Text} from '@gravity-ui/uikit';
 import React from 'react';
+import {Trans, useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {useThemePrivateColorOptions, useThemeUtilityColor} from '../../hooks';
@@ -8,7 +7,8 @@ import {DEFAULT_THEME} from '../../lib/constants';
 import {ThemeColorOption} from '../../lib/themeCreatorUtils';
 import type {ColorsOptions, ThemeVariant} from '../../lib/types';
 import {PrivateColorSelect} from '../PrivateColorSelect';
-import {ThemePicker} from '../ThemePicker';
+import {ThemableSettings} from '../ThemableSettings/ThemableSettings';
+import {ThemableRow} from '../ThemableSettings/types';
 import {ThemeSection} from '../ThemeSection';
 
 import './PrivateColorsSettings.scss';
@@ -48,29 +48,39 @@ interface PrivateColorsSettingsProps {
 }
 
 export const PrivateColorsSettings: React.FC<PrivateColorsSettingsProps> = ({title, options}) => {
-    const [theme, setTheme] = React.useState<ThemeVariant>('light');
-    const themePrivateColorOptions = useThemePrivateColorOptions(theme);
+    const {t} = useTranslation('themes');
+
+    const themePrivateColorLightOptions = useThemePrivateColorOptions('light');
+    const themePrivateColorDarkOptions = useThemePrivateColorOptions('dark');
+
+    const rows = React.useMemo<ThemableRow[]>(() => {
+        return options.map((option) => ({
+            id: option.name,
+            title: option.title,
+            render: (theme) => (
+                <PrivateColorEditor
+                    name={option.name}
+                    theme={theme}
+                    colorGroups={
+                        theme === 'light'
+                            ? themePrivateColorLightOptions
+                            : themePrivateColorDarkOptions
+                    }
+                />
+            ),
+        }));
+    }, [options, themePrivateColorLightOptions, themePrivateColorDarkOptions]);
 
     return (
         <ThemeSection className={b()} title={title}>
-            <Flex direction="column">
-                <FormRow label={<Text variant="body-3">Theme</Text>} className={b('row')}>
-                    <ThemePicker value={theme} onUpdate={setTheme} />
-                </FormRow>
-                {options.map((option) => (
-                    <FormRow
-                        key={option.name}
-                        label={<Text variant="body-2">{option.title}</Text>}
-                        className={b('row')}
-                    >
-                        <PrivateColorEditor
-                            name={option.name}
-                            theme={theme}
-                            colorGroups={themePrivateColorOptions}
-                        />
-                    </FormRow>
-                ))}
-            </Flex>
+            <ThemableSettings
+                title={
+                    <Trans i18nKey="palette_colors_description" t={t}>
+                        <br />
+                    </Trans>
+                }
+                rows={rows}
+            />
         </ThemeSection>
     );
 };
