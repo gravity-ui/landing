@@ -5,11 +5,12 @@ $block: '.#{variables.$ns}selectable-card';
 #{$block} {
     position: relative;
     display: flex;
-    padding: 22px 16px;
+    padding: 22px 12px;
     height: 80px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    text-align: center;
 
     &__icon {
         position: absolute;

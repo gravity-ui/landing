@@ -21,7 +21,7 @@ export const TypographyTab = () => {
     const {updateAdvancedTypography} = useThemeCreatorMethods();
 
     return (
-        <Flex direction="column" alignItems="flex-start" gap={10} className={b()}>
+        <Flex direction="column" alignItems="flex-start" className={b()}>
             <FontFamilyPicker />
             <Preview />
             <Button size="xl" view="outlined-action" onClick={() => updateAdvancedTypography()}>

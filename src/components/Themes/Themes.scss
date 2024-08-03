@@ -29,6 +29,19 @@ $block: '.#{variables.$ns}themes';
         }
     }
 
+    & &__tabs {
+        display: flex;
+        overflow: auto;
+        flex-wrap: wrap;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            /* stylelint-disable */
+            flex-wrap: nowrap !important;
+            margin: 0 -24px;
+            padding: 0 24px;
+        }
+    }
+
     &__export-theme-btn {
         --g-button-border-radius: 8px;
         width: fit-content;

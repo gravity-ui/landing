@@ -9,18 +9,20 @@ import {ThemableRow} from './types';
 const b = block('themable-settings-rows');
 
 interface ThemableSettingsRowsProps {
+    className?: string;
     rows: ThemableRow[];
     title: React.ReactNode;
     appendNode?: React.ReactNode;
 }
 
 export const ThemableSettingsRows: React.FC<ThemableSettingsRowsProps> = ({
+    className,
     rows,
     title,
     appendNode,
 }) => {
     return (
-        <Flex direction="column" className={b()} grow={true}>
+        <Flex direction="column" className={b(null, className)} grow={true}>
             <Text variant="subheader-3" className={b('title')}>
                 {title}
             </Text>

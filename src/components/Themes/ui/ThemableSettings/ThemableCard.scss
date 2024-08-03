@@ -23,20 +23,34 @@ $block: '.#{variables.$ns}themable-card';
     }
 
     &__row {
+        display: flex;
+        flex-direction: column;
+
         &-title {
             display: none;
             padding: var(--g-spacing-2) 0;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                display: inline;
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                padding: var(--g-spacing-1) 0;
+            }
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+            display: grid;
+            gap: var(--g-spacing-4);
+            grid-template-columns: 150px auto;
+            align-items: center;
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-            display: grid;
-            gap: var(--g-spacing-4);
-            grid-template-columns: 100px auto;
-            align-items: center;
-
-            &-title {
-                display: inline;
-            }
+            display: flex;
+            flex-direction: column;
+            gap: var(--g-spacing-2);
+            align-items: normal;
         }
     }
 }

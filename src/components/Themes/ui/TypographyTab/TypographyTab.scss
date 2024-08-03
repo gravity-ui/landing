@@ -9,6 +9,12 @@ $block: '.#{variables.$ns}typography-tab';
     --g-text-input-border-radius: 8px;
     --g-button-border-radius: 8px;
 
+    gap: calc(var(--g-spacing-base) * 24);
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        gap: calc(var(--g-spacing-base) * 12);
+    }
+
     &__font {
         &__additional-font-input {
             width: 380px;
@@ -25,16 +31,6 @@ $block: '.#{variables.$ns}typography-tab';
         }
 
         &__font-card {
-            width: 192px;
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
-                width: 156px;
-            }
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-                width: 179px;
-            }
-
             &__text {
                 @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
                     @include ukitMixins.text-body-3();

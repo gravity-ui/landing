@@ -14,6 +14,10 @@ $block: '.#{variables.$ns}color-picker';
     &__preview {
         margin-inline-start: var(--g-spacing-2);
         margin-inline-end: var(--g-spacing-1);
+
+        &_with-border {
+            border: 1px solid var(--g-color-line-generic);
+        }
     }
 
     &__input {

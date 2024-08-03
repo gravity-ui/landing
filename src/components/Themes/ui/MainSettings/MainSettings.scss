@@ -1,4 +1,5 @@
 @use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
 $block: '.#{variables.$ns}main-settings';
 
@@ -19,5 +20,9 @@ $block: '.#{variables.$ns}main-settings';
         height: 80px;
         display: flex;
         align-items: center;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+            height: auto;
+        }
     }
 }
