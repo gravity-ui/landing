@@ -1,4 +1,5 @@
 @use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../../../variables.scss';
 
 $block: '.#{variables.$ns}border-radius-tab';
@@ -6,5 +7,9 @@ $block: '.#{variables.$ns}border-radius-tab';
 #{$block} {
     @include themes.g-theme-common; //restore default uikit styles for components
 
-    gap: calc(var(--g-spacing-base) * 20);
+    gap: calc(var(--g-spacing-base) * 24);
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        gap: calc(var(--g-spacing-base) * 12);
+    }
 }

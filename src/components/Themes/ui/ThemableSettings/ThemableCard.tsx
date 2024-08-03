@@ -29,16 +29,23 @@ export const ThemableCard: React.FC<ThemableCardProps> = ({
     const {t} = useTranslation('themes');
     const [backgroundColor] = useThemeUtilityColor({name: 'base-background', theme});
 
-    const renderRow = React.useCallback((row: ThemableRow) => {
-        return (
-            <div key={row.id} className={b('row')}>
-                <div className={b('row-title')}>
-                    <Text variant="body-2">{row.title}</Text>
+    const renderRow = React.useCallback(
+        (row: ThemableRow) => {
+            return (
+                <div key={row.id} className={b('row')}>
+                    <div className={b('row-title')}>
+                        {row.renderTitle ? (
+                            row.renderTitle()
+                        ) : (
+                            <Text variant="body-2">{row.title}</Text>
+                        )}
+                    </div>
+                    {row.render(theme)}
                 </div>
-                {row.render(theme)}
-            </div>
-        );
-    }, []);
+            );
+        },
+        [theme],
+    );
 
     return (
         <ThemeProvider theme={theme} rootClassName={b('theme-root', 'sandbox')} scoped>

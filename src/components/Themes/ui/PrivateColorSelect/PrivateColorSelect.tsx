@@ -1,5 +1,5 @@
 import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Popup, TextInput} from '@gravity-ui/uikit';
+import {Button, Flex, Icon, Popup, TextInput, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -106,18 +106,20 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
             >
                 <Icon data={PencilToLine} />
             </Button>
-            <Popup
-                anchorRef={containerRef}
-                open={showPopup}
-                modifiers={[{name: 'preventOverflow', enabled: false}]}
-                onClose={toggleShowPopup}
-            >
-                <PrivateColorSelectPopupContent
-                    groups={groups}
-                    value={value}
-                    onChange={handleChange}
-                />
-            </Popup>
+            <ThemeProvider theme="dark">
+                <Popup
+                    anchorRef={containerRef}
+                    open={showPopup}
+                    modifiers={[{name: 'preventOverflow', enabled: false}]}
+                    onClose={toggleShowPopup}
+                >
+                    <PrivateColorSelectPopupContent
+                        groups={groups}
+                        value={value}
+                        onChange={handleChange}
+                    />
+                </Popup>
+            </ThemeProvider>
         </Flex>
     );
 };

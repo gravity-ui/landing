@@ -20,6 +20,7 @@ export interface ColorPickerInputProps {
     onChange: (color: string) => void;
     errorMessage?: string;
     size?: TextInputProps['size'];
+    withBorderInPreview?: boolean;
 }
 
 export const ColorPickerInput = ({
@@ -29,6 +30,7 @@ export const ColorPickerInput = ({
     defaultValue,
     errorMessage,
     size = 'l',
+    withBorderInPreview,
 }: ColorPickerInputProps) => {
     const {t} = useTranslation('themes');
 
@@ -108,7 +110,12 @@ export const ColorPickerInput = ({
                 view="normal"
                 size={size}
                 onChange={onChange}
-                startContent={<ColorPreview className={b('preview')} color={color} />}
+                startContent={
+                    <ColorPreview
+                        className={b('preview', {'with-border': withBorderInPreview})}
+                        color={color}
+                    />
+                }
                 endContent={
                     <Button
                         view="flat-action"

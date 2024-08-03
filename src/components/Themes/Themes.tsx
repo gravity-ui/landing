@@ -81,7 +81,6 @@ export const Themes = () => {
                         value={activeTab}
                         onChange={setActiveTab}
                     />
-
                     <Button
                         className={b('export-theme-btn')}
                         view="action"

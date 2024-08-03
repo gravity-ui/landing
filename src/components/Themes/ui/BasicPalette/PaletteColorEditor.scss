@@ -1,0 +1,56 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}theme-palette-color-editor';
+
+#{$block} {
+    display: flex;
+    gap: var(--g-spacing-2);
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        flex-direction: column-reverse;
+    }
+
+    &__default-title {
+        padding: var(--g-spacing-2) 0;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            padding: 0;
+        }
+    }
+
+    & &__input {
+        padding-inline-start: 9px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            padding-inline-start: 3px;
+        }
+    }
+
+    &__input-title {
+        display: none;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            display: block;
+            padding-left: var(--g-spacing-2);
+            padding-top: 1px;
+        }
+    }
+
+    &__header {
+        display: flex;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__title {
+        display: none;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            display: block;
+        }
+    }
+}

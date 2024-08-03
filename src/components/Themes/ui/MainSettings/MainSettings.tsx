@@ -35,7 +35,15 @@ const ThemeUtilityColorEditor: React.FC<ThemeUtilityColorEditorProps> = ({name, 
         theme,
     });
 
-    return <ColorPickerInput value={color} defaultValue={color} onChange={setColor} />;
+    return (
+        <ColorPickerInput
+            value={color}
+            defaultValue={color}
+            onChange={setColor}
+            // Цвет фона применяется к карточке, в которой он отображается. Чтобы можно было увидеть preview оборачиваем блок в border
+            withBorderInPreview={name === 'base-background'}
+        />
+    );
 };
 
 const BrandColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {

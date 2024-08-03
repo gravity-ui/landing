@@ -1,9 +1,14 @@
 import {TrashBin} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Text, TextInput, sp} from '@gravity-ui/uikit';
+import {Button, Icon, Text, TextInput} from '@gravity-ui/uikit';
 import debounce from 'lodash/debounce';
 import React from 'react';
 
+import {block} from '../../../../utils';
 import {Palette} from '../../lib/types';
+
+import './PaletteColorEditor.scss';
+
+const b = block('theme-palette-color-editor');
 
 interface PaletteColorEditorProps {
     paletteColorData: Palette[0];
@@ -43,18 +48,36 @@ export const PaletteColorEditor: React.FC<PaletteColorEditorProps> = ({
 
     if (!isCustom) {
         return (
-            <div className={sp({py: 2})}>
+            <div className={b('default-title')}>
                 <Text variant="body-2">{title}</Text>
             </div>
         );
     }
 
     return (
-        <Flex gap={2}>
-            <TextInput size="l" view="normal" value={localTitle} onUpdate={handleUpdateTitle} />
-            <Button size="l" onClick={handleDelete}>
-                <Icon data={TrashBin} size={16} />
-            </Button>
-        </Flex>
+        <div className={b()}>
+            <TextInput
+                controlProps={{
+                    className: b('input'),
+                }}
+                size="l"
+                view="normal"
+                value={localTitle}
+                onUpdate={handleUpdateTitle}
+                startContent={
+                    <Text variant="subheader-1" className={b('input-title')}>
+                        Name:
+                    </Text>
+                }
+            />
+            <div className={b('header')}>
+                <Text className={b('title')} variant="subheader-2">
+                    New color
+                </Text>
+                <Button size="l" onClick={handleDelete}>
+                    <Icon data={TrashBin} size={16} />
+                </Button>
+            </div>
+        </div>
     );
 };
