@@ -128,8 +128,14 @@ function createPrivateColors({
         theme: themeVariant,
         colorToken,
         colorValue,
-        lightBg: theme.colors.light['base-background'],
-        darkBg: theme.colors.dark['base-background'],
+        lightBg:
+            themeVariant === 'light'
+                ? theme.colors.light['base-background']
+                : theme.colors.dark['base-background'],
+        darkBg:
+            themeVariant === 'light'
+                ? theme.colors.dark['base-background']
+                : theme.colors.light['base-background'],
     });
 }
 

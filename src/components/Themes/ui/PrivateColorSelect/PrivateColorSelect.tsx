@@ -1,7 +1,8 @@
 import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Popup, TextInput, ThemeProvider} from '@gravity-ui/uikit';
+import {Button, Flex, Icon, Popup, Sheet, TextInput, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {useIsMobile} from '../../../../hooks/useIsMobile';
 import {block} from '../../../../utils';
 import {isPrivateColorToken} from '../../lib/themeCreatorUtils';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
@@ -26,14 +27,16 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
     defaultValue,
     onChange,
 }) => {
+    const isMobile = useIsMobile();
+
     const containerRef = React.useRef(null);
-    const [showPopup, toggleShowPopup] = React.useReducer((prev) => !prev, false);
+    const [showPopup, setShowPopup] = React.useState(false);
     const isCustomValue = !isPrivateColorToken(value);
 
     const handleChange = React.useCallback(
         (newVal: string) => {
             onChange(newVal);
-            toggleShowPopup();
+            setShowPopup(false);
         },
         [onChange],
     );
@@ -43,9 +46,7 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
             onChange(defaultValue);
         } else {
             onChange('');
-            if (showPopup) {
-                toggleShowPopup();
-            }
+            setShowPopup(false);
         }
     }, [isCustomValue, onChange, defaultValue, showPopup]);
 
@@ -59,12 +60,15 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
             : undefined;
     }, [groups, value]);
 
+    const toggleShowPopup = React.useCallback(() => setShowPopup((prev) => !prev), []);
+    const closePopup = React.useCallback(() => setShowPopup(false), []);
+
     const handleClickArrowButton = React.useCallback(
         (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
             event.stopPropagation();
             toggleShowPopup();
         },
-        [],
+        [toggleShowPopup],
     );
 
     return (
@@ -107,18 +111,34 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                 <Icon data={PencilToLine} />
             </Button>
             <ThemeProvider theme="dark">
-                <Popup
-                    anchorRef={containerRef}
-                    open={showPopup}
-                    modifiers={[{name: 'preventOverflow', enabled: false}]}
-                    onClose={toggleShowPopup}
-                >
-                    <PrivateColorSelectPopupContent
-                        groups={groups}
-                        value={value}
-                        onChange={handleChange}
-                    />
-                </Popup>
+                {isMobile ? (
+                    <Sheet
+                        title="Pick color"
+                        contentClassName={b('sheet-content')}
+                        visible={showPopup}
+                        onClose={closePopup}
+                    >
+                        <PrivateColorSelectPopupContent
+                            groups={groups}
+                            value={value}
+                            onChange={handleChange}
+                            version="mobile"
+                        />
+                    </Sheet>
+                ) : (
+                    <Popup
+                        anchorRef={containerRef}
+                        open={showPopup}
+                        modifiers={[{name: 'preventOverflow', enabled: false}]}
+                        onClose={toggleShowPopup}
+                    >
+                        <PrivateColorSelectPopupContent
+                            groups={groups}
+                            value={value}
+                            onChange={handleChange}
+                        />
+                    </Popup>
+                )}
             </ThemeProvider>
         </Flex>
     );

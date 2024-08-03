@@ -71,7 +71,8 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                         </ActionBar.Group>
 
                         <ActionBar.Group pull="right">
-                            <ActionBar.Item className={b('header-actions')}>
+                            {/* Hide alignment in MVP */}
+                            <ActionBar.Item className={b('header-actions', {hidden: true})}>
                                 <RadioButton
                                     name="alignment"
                                     defaultValue="left"

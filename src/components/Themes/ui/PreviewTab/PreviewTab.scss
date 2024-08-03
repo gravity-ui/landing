@@ -29,6 +29,10 @@ $block: '.#{variables.$ns}themes-preview-layout';
     }
 
     &__header-actions {
+        &_hidden {
+            display: none;
+        }
+
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             display: none;
         }

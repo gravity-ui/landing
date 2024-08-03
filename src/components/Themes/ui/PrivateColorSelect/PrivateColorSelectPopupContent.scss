@@ -5,11 +5,31 @@ $block: '.#{variables.$ns}private-colors-select-popup';
 
 #{$block} {
     display: flex;
-    width: 465px;
-    height: 472px;
-    border-radius: 8px;
-
     background-color: #383438;
+
+    &_version {
+        &_desktop {
+            width: 465px;
+            height: 472px;
+            border-radius: 8px;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+                height: 370px;
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                height: 300px;
+            }
+        }
+
+        &_mobile {
+            flex-direction: column;
+
+            #{$block}__left {
+                border-right: none;
+            }
+        }
+    }
 
     &__left,
     &__right {
@@ -41,5 +61,11 @@ $block: '.#{variables.$ns}private-colors-select-popup';
         align-items: center;
         gap: var(--g-spacing-1);
         padding: 5px var(--g-spacing-2);
+    }
+
+    &__colors-select {
+        width: 100%;
+        --g-border-radius-xl: 8px;
+        padding-bottom: var(--g-spacing-3);
     }
 }
