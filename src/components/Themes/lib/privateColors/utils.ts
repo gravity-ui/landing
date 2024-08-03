@@ -91,7 +91,7 @@ export const generatePrivateColors = ({
 
     if (theme === 'dark' && colorToken === 'white') {
         const updatedColor = chroma(pallete[150][0]).alpha(0.95).css();
-        privateColors['white-opaque-150'] = chroma(updatedColor).css();
+        privateColors['opaque-150'] = chroma(updatedColor).css();
     }
 
     return privateColors;

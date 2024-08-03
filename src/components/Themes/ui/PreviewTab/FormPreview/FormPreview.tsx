@@ -29,6 +29,7 @@ export const FormPreview = ({justify}: {justify: string}) => {
                             value: pr,
                             content: pr,
                         }))}
+                        disablePortal={true}
                     />
                 </FormRow>
                 <FormRow required direction="row" fieldId="project" label="Project">
@@ -42,6 +43,7 @@ export const FormPreview = ({justify}: {justify: string}) => {
                                 value: pr,
                                 content: pr,
                             }))}
+                            disablePortal={true}
                         />
                         <Text variant="body-1">or</Text>
                         <Button view="normal" onClick={() => {}}>
@@ -58,6 +60,7 @@ export const FormPreview = ({justify}: {justify: string}) => {
                             value: label.title,
                             content: label.title,
                         }))}
+                        disablePortal={true}
                     />
                 </FormRow>
                 <FormRow direction="row" fieldId="comment" label="Comment (optional)">
