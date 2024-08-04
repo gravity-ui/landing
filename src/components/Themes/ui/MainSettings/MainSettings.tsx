@@ -60,6 +60,8 @@ const TextContrastColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {
         theme,
     });
 
+    const [brandColor] = useThemePaletteColor({token: 'brand', theme});
+
     return (
         <Flex gap={4}>
             <SelectableCard
@@ -71,6 +73,7 @@ const TextContrastColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {
                     style: {
                         ...BASE_CARD_BUTTON_STYLES,
                         color: TEXT_CONTRAST_COLORS[theme].black,
+                        backgroundColor: brandColor,
                     },
                 }}
             />
@@ -83,6 +86,7 @@ const TextContrastColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {
                     style: {
                         ...BASE_CARD_BUTTON_STYLES,
                         color: TEXT_CONTRAST_COLORS[theme].white,
+                        backgroundColor: brandColor,
                     },
                 }}
             />
@@ -135,18 +139,18 @@ export const MainSettings: React.FC<MainSettingsProps> = ({
                     </Trans>
                 }
                 rows={rows}
+                addButton={
+                    <Button
+                        className={b('switch-button')}
+                        onClick={toggleAdvancedMode}
+                        view="outlined-action"
+                        size="xl"
+                    >
+                        <Icon data={Sliders} size={20} />
+                        {advancedModeEnabled ? t('hide_advanced_settings') : t('advanced_settings')}
+                    </Button>
+                }
             />
-            <Flex direction="column">
-                <Button
-                    className={b('switch-button')}
-                    onClick={toggleAdvancedMode}
-                    view="outlined-action"
-                    size="xl"
-                >
-                    <Icon data={Sliders} size={20} />
-                    {advancedModeEnabled ? t('hide_advanced_settings') : t('advanced_settings')}
-                </Button>
-            </Flex>
         </ThemeSection>
     );
 };

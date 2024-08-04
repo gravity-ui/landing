@@ -28,14 +28,9 @@ $block: '.#{variables.$ns}themable-card';
 
         &-title {
             display: none;
-            padding: var(--g-spacing-2) 0;
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
                 display: inline;
-            }
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-                padding: var(--g-spacing-1) 0;
             }
         }
 

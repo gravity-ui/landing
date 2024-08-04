@@ -8,7 +8,7 @@ $block: '.#{variables.$ns}theme-section';
     display: flex;
     flex-direction: column;
 
-    gap: calc(var(--g-spacing-base) * 12);
+    gap: calc(var(--g-spacing-base) * 8);
 
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
         gap: calc(var(--g-spacing-base) * 8);

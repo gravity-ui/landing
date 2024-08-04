@@ -35,7 +35,7 @@ export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({isOpen, onC
                     <CodeExample code={themeStyles} className={b('code')} />
                 </Flex>
             </Dialog.Body>
-            <Dialog.Footer onClickButtonCancel={onClose} textButtonCancel={t('cancel')} />
+            <div style={{height: '20px'}} />
         </Dialog>
     );
 };

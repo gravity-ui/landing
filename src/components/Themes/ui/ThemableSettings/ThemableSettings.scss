@@ -17,4 +17,12 @@ $block: '.#{variables.$ns}themable-settings';
             max-width: 328px;
         }
     }
+
+    &__dark-card {
+        display: block;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+            display: none;
+        }
+    }
 }

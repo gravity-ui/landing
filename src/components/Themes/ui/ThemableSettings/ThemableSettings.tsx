@@ -43,11 +43,9 @@ export const ThemableSettings: React.FC<ThemableSettingsProps> = ({title, rows, 
                     />
                     {isMobile && addButton}
                 </Col>
-                {!isTabletOrMobile && (
-                    <Col l={6}>
-                        <ThemableCard rows={rows} theme="dark" />
-                    </Col>
-                )}
+                <Col className={b('dark-card')} l={6}>
+                    <ThemableCard rows={rows} theme="dark" />
+                </Col>
             </Flex>
         </Flex>
     );

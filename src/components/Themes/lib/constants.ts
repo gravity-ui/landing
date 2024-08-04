@@ -101,7 +101,7 @@ export const DEFAULT_THEME: ThemeOptions = {
             'text-link-visited-hover': 'private.purple.800-solid',
         },
         dark: {
-            'base-background': 'rgb(34, 29, 34)',
+            'base-background': 'rgb(34,29,34)',
             'base-brand-hover': 'private.brand.650-solid',
             'base-selection': 'private.brand.150',
             'base-selection-hover': 'private.brand.200',
