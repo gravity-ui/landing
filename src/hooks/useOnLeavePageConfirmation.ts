@@ -8,22 +8,26 @@ export const useOnLeavePageConfirmation = (unsavedChanges: boolean) => {
             if (unsavedChanges) {
                 return 'You have unsaved changes. Do you really want to leave?';
             }
+
+            return null;
         };
 
-        // For changing in-app route.
-        if (unsavedChanges) {
-            const routeChangeStart = () => {
+        const routeChangeStart = () => {
+            if (unsavedChanges) {
                 const ok = confirm('You have unsaved changes. Do you really want to leave?');
                 if (!ok) {
                     Router.events.emit('routeChangeError');
+                    // eslint-disable-next-line no-throw-literal
                     throw 'Abort route change. Please ignore this error.';
                 }
-            };
+            }
+        };
 
-            Router.events.on('routeChangeStart', routeChangeStart);
-            return () => {
-                Router.events.off('routeChangeStart', routeChangeStart);
-            };
-        }
+        Router.events.on('routeChangeStart', routeChangeStart);
+
+        return () => {
+            Router.events.off('routeChangeStart', routeChangeStart);
+            window.onbeforeunload = null;
+        };
     }, [unsavedChanges]);
 };

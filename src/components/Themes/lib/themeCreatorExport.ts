@@ -49,6 +49,14 @@ type ExportThemeParams = {
     forPreview?: boolean;
 };
 
+const isBackgroundColorChanged = (themeState: ThemeCreatorState) => {
+    return (
+        DEFAULT_THEME.colors.dark['base-background'] !==
+            themeState.colors.dark['base-background'] ||
+        DEFAULT_THEME.colors.light['base-background'] !== themeState.colors.light['base-background']
+    );
+};
+
 export function exportTheme({
     themeState,
     format = 'scss',
@@ -60,17 +68,29 @@ export function exportTheme({
     }
 
     const {paletteTokens, palette} = themeState;
+    const backgroundColorChanged = isBackgroundColorChanged(themeState);
 
     const prepareThemeVariables = (themeVariant: ThemeVariant) => {
         let cssVariables = '';
         const privateColors: Record<string, string> = {};
 
         themeState.tokens.forEach((token) => {
-            // Dont export colors that are equals to default
-            if (
-                ignoreDefaultValues &&
-                DEFAULT_PALETTE[themeVariant][token] === themeState.palette[themeVariant][token]
-            ) {
+            // Dont export colors that are equals to default (except brand color)
+            // Private colors recalculate when background color changes
+            const valueEqualsToDefault =
+                DEFAULT_PALETTE[themeVariant][token] === themeState.palette[themeVariant][token] &&
+                token !== 'brand' &&
+                !backgroundColorChanged;
+
+            if (valueEqualsToDefault && ignoreDefaultValues) {
+                return;
+            }
+
+            const needExportColor =
+                (backgroundColorChanged || token === 'brand' || !valueEqualsToDefault) &&
+                !['white', 'black'].includes(token);
+
+            if (!needExportColor) {
                 return;
             }
 
@@ -96,7 +116,6 @@ export function exportTheme({
 
         Object.entries(themeState.colors[themeVariant]).forEach(
             ([colorName, colorOrPrivateToken]) => {
-                // Dont export colors that are equals to default
                 if (
                     ignoreDefaultValues &&
                     DEFAULT_THEME.colors[themeVariant][colorName as ColorOption] ===
