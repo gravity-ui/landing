@@ -87,8 +87,7 @@ export function exportTheme({
             }
 
             const needExportColor =
-                (backgroundColorChanged || token === 'brand' || !valueEqualsToDefault) &&
-                !['white', 'black'].includes(token);
+                backgroundColorChanged || token === 'brand' || !valueEqualsToDefault;
 
             if (!needExportColor) {
                 return;
