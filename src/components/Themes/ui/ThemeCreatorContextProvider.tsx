@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 
+import {BrandPreset} from '../lib/constants';
 import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreatorContext';
 import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
 import type {
@@ -18,6 +19,7 @@ import type {
 import {
     addColorToTheme,
     addFontFamilyTypeInTheme,
+    applyBrandPresetToTheme,
     changeRadiusPresetInTheme,
     changeUtilityColorInTheme,
     initThemeCreator,
@@ -53,6 +55,10 @@ type ThemeCreatorAction =
     | {
           type: 'changeUtilityColor';
           payload: ChangeUtilityColorInThemeParams;
+      }
+    | {
+          type: 'applyBrandPreset';
+          payload: BrandPreset;
       }
     | {
           type: 'changeRadiusPreset';
@@ -112,6 +118,8 @@ const themeCreatorReducer = (
             return updateColorInTheme(prevState, action.payload);
         case 'changeUtilityColor':
             return changeUtilityColorInTheme(prevState, action.payload);
+        case 'applyBrandPreset':
+            return applyBrandPresetToTheme(prevState, action.payload);
         case 'changeRadiusPreset':
             return changeRadiusPresetInTheme(prevState, action.payload);
         case 'updateCustomRadiusPreset':
@@ -212,6 +220,16 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const applyBrandPreset = React.useCallback<ThemeCreatorMethodsContextType['applyBrandPreset']>(
+        (payload) => {
+            dispatchThemeCreator({
+                type: 'applyBrandPreset',
+                payload,
+            });
+        },
+        [],
+    );
+
     const changeRadiusPreset = React.useCallback<
         ThemeCreatorMethodsContextType['changeRadiusPreset']
     >((payload) => {
@@ -304,6 +322,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             removeColor,
             updateColor,
             changeUtilityColor,
+            applyBrandPreset,
             changeRadiusPreset,
             updateCustomRadiusPreset,
             addFontFamilyType,
@@ -321,6 +340,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             removeColor,
             updateColor,
             changeUtilityColor,
+            applyBrandPreset,
             changeRadiusPreset,
             updateCustomRadiusPreset,
             addFontFamilyType,

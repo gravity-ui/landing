@@ -3,8 +3,8 @@ import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {useThemePaletteColor} from '../../hooks';
-import {DEFAULT_BRAND_COLORS} from '../../lib/constants';
+import {useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
+import {BRAND_COLORS_PRESETS} from '../../lib/constants';
 import {ThemeSection} from '../ThemeSection';
 
 import './BrandColors.scss';
@@ -24,22 +24,24 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
 }) => {
     const [customModeEnabled, setCustomMode] = React.useState(false);
 
-    const [lightBrandColor, setLightBrandColor] = useThemePaletteColor({
+    const [lightBrandColor] = useThemePaletteColor({
         token: 'brand',
         theme: 'light',
     });
-    const [darkBrandColor, setDarkBrandColor] = useThemePaletteColor({
+    const [darkBrandColor] = useThemePaletteColor({
         token: 'brand',
         theme: 'dark',
     });
 
+    const {applyBrandPreset} = useThemeCreatorMethods();
+
     const activeColorIndex = React.useMemo(() => {
-        return DEFAULT_BRAND_COLORS.findIndex(
-            (value) => value === lightBrandColor && value === darkBrandColor,
+        return BRAND_COLORS_PRESETS.findIndex(
+            (value) => value.brandColor === lightBrandColor && value.brandColor === darkBrandColor,
         );
     }, [lightBrandColor, darkBrandColor]);
 
-    const changeBrandColor = React.useCallback(
+    const setBrandPreset = React.useCallback(
         (index: number) => {
             setCustomMode(false);
 
@@ -47,10 +49,9 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
                 return;
             }
 
-            setLightBrandColor(DEFAULT_BRAND_COLORS[index]);
-            setDarkBrandColor(DEFAULT_BRAND_COLORS[index]);
+            applyBrandPreset(BRAND_COLORS_PRESETS[index]);
         },
-        [activeColorIndex],
+        [activeColorIndex, applyBrandPreset],
     );
 
     const handleSelectCustomColor = React.useCallback(() => {
@@ -62,14 +63,14 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
         <ThemeSection className={b()} title="Brand colors">
             <Flex direction="column">
                 <div className={b('brand-color-picker')}>
-                    {DEFAULT_BRAND_COLORS.map((value, index) => (
+                    {BRAND_COLORS_PRESETS.map((value, index) => (
                         <div
                             className={b('color', {
                                 selected: !customModeEnabled && index === activeColorIndex,
                             })}
                             // @ts-ignore
-                            style={{'--color-value': value}}
-                            onClick={() => changeBrandColor(index)}
+                            style={{'--color-value': value.brandColor}}
+                            onClick={() => setBrandPreset(index)}
                         >
                             <div className={b('color-inner')} />
                         </div>
