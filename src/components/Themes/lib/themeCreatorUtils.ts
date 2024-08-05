@@ -6,6 +6,7 @@ import lowerCase from 'lodash/lowerCase';
 import {v4 as uuidv4} from 'uuid';
 
 import {
+    BrandPreset,
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
     RADIUS_PRESETS,
@@ -15,6 +16,7 @@ import {
 import {generatePrivateColors} from './privateColors';
 import type {
     BordersOption,
+    ColorOption,
     ColorsOptions,
     Palette,
     PaletteTokens,
@@ -358,7 +360,7 @@ export function renameColorInTheme(
             title: newTitle,
         };
         newThemeState.palette.dark[newToken] = newThemeState.palette.dark[oldToken];
-        newThemeState.palette.light[newToken] = newThemeState.palette.dark[oldToken];
+        newThemeState.palette.light[newToken] = newThemeState.palette.light[oldToken];
     }
 
     newThemeState.tokens = newThemeState.tokens.map((token) =>
@@ -439,6 +441,33 @@ export function changeUtilityColorInTheme(
     if (name === 'base-background') {
         newState.paletteTokens = createPalleteTokens(newState);
     }
+
+    return newState;
+}
+
+export function applyBrandPresetToTheme(
+    themeState: ThemeCreatorState,
+    {brandColor, colors}: BrandPreset,
+): ThemeCreatorState {
+    let newState = {...themeState};
+
+    (['light', 'dark'] as const).forEach((theme) => {
+        newState = updateColorInTheme(newState, {
+            theme,
+            title: 'brand',
+            value: brandColor,
+        });
+    });
+
+    (Object.keys(colors.light) as ColorOption[]).forEach((utilityColorName) => {
+        (['light', 'dark'] as const).forEach((theme) => {
+            newState = changeUtilityColorInTheme(newState, {
+                themeVariant: theme,
+                name: utilityColorName,
+                value: colors[theme][utilityColorName],
+            });
+        });
+    });
 
     return newState;
 }

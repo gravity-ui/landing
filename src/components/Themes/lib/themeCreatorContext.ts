@@ -1,7 +1,7 @@
 import noop from 'lodash/noop';
 import {createContext} from 'react';
 
-import {DEFAULT_THEME} from './constants';
+import {BrandPreset, DEFAULT_THEME} from './constants';
 import {initThemeCreator} from './themeCreatorUtils';
 import type {
     AddColorToThemeParams,
@@ -27,6 +27,7 @@ export interface ThemeCreatorMethodsContextType {
     removeColor: (title: string) => void;
     renameColor: (params: RenameColorInThemeParams) => void;
     changeUtilityColor: (params: ChangeUtilityColorInThemeParams) => void;
+    applyBrandPreset: (preset: BrandPreset) => void;
     changeRadiusPreset: (params: ChangeRadiusPresetInThemeParams) => void;
     updateCustomRadiusPreset: (params: UpdateCustomRadiusPresetInThemeParams) => void;
     updateFontFamily: (params: UpdateFontFamilyParams) => void;
@@ -45,6 +46,7 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     removeColor: noop,
     renameColor: noop,
     changeUtilityColor: noop,
+    applyBrandPreset: noop,
     changeRadiusPreset: noop,
     updateCustomRadiusPreset: noop,
     updateFontFamily: noop,
