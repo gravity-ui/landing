@@ -15,5 +15,6 @@ $block: '.#{variables.$ns}themable-settings-rows';
 
     &__title {
         margin-bottom: var(--g-spacing-4);
+        min-height: 48px;
     }
 }

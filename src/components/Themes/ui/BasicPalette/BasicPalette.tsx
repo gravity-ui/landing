@@ -1,5 +1,5 @@
 import React from 'react';
-import {Trans, useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import {useThemeCreatorMethods, useThemePalette} from '../../hooks';
 import {ThemeVariant} from '../../lib/types';
@@ -52,11 +52,7 @@ export const BasicPalette = () => {
     return (
         <ThemeSection title={t('basic_palette')}>
             <ThemableSettings
-                title={
-                    <Trans i18nKey="palette_colors_description" t={t}>
-                        <br />
-                    </Trans>
-                }
+                title="The colors to generate the palette"
                 rows={rows}
                 addButton={<AddColorButton onClick={addColor} />}
             />

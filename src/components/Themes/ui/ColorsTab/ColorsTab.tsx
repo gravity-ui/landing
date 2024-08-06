@@ -1,6 +1,6 @@
 import {Flex} from '@gravity-ui/uikit';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
+import {Trans, useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
@@ -95,10 +95,16 @@ export const ColorsTab = () => {
                     <BasicPalette />
                     <PrivateColorsSettings
                         title={t('advanced_brand_palette')}
+                        cardsTitle={
+                            <Trans i18nKey="palette_colors_description" t={t}>
+                                <br />
+                            </Trans>
+                        }
                         options={ADVANCED_COLORS_OPTIONS}
                     />
                     <PrivateColorsSettings
                         title={t('additional_colors')}
+                        cardsTitle="Link Colors"
                         options={ADDITIONAL_COLORS_OPTIONS}
                     />
                 </React.Fragment>
