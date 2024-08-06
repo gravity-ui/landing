@@ -1,7 +1,7 @@
 import {Sliders} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import React from 'react';
-import {Trans, useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {SelectableCard} from '../../../SelectableCard/SelectableCard';
@@ -131,13 +131,9 @@ export const MainSettings: React.FC<MainSettingsProps> = ({
     }, [t]);
 
     return (
-        <ThemeSection className={b()} title={t('custom_brand_palette')}>
+        <ThemeSection className={b()} title="Brand Palette Foundations">
             <ThemableSettings
-                title={
-                    <Trans i18nKey="palette_colors_description" t={t}>
-                        <br />
-                    </Trans>
-                }
+                title="Basic brand colors"
                 rows={rows}
                 addButton={
                     <Button

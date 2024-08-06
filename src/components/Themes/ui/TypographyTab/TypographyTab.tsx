@@ -23,11 +23,18 @@ export const TypographyTab = () => {
     return (
         <Flex direction="column" alignItems="flex-start" className={b()}>
             <FontFamilyPicker />
-            <Preview />
-            <Button size="xl" view="outlined-action" onClick={() => updateAdvancedTypography()}>
-                <Icon data={Sliders} />
-                {isAdvancedActive ? 'Hide Advanced Settings' : 'Advanced Settings'}
-            </Button>
+            <Flex direction="column" gap={6} width={'100%'}>
+                <Preview />
+                <Button
+                    className={b('advanced-button')}
+                    size="xl"
+                    view="outlined-action"
+                    onClick={() => updateAdvancedTypography()}
+                >
+                    <Icon data={Sliders} />
+                    {isAdvancedActive ? 'Hide Advanced Settings' : 'Advanced Settings'}
+                </Button>
+            </Flex>
             {isAdvancedActive && <AdvanceTypographySettings />}
             <ExportThemeSection />
         </Flex>

@@ -147,4 +147,8 @@ $block: '.#{variables.$ns}typography-tab';
             }
         }
     }
+
+    &__advanced-button {
+        width: min-content;
+    }
 }

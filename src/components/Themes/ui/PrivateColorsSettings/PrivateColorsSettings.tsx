@@ -1,5 +1,4 @@
 import React from 'react';
-import {Trans, useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {useThemePrivateColorOptions, useThemeUtilityColor} from '../../hooks';
@@ -44,12 +43,15 @@ export type EditableColorOption = {
 
 interface PrivateColorsSettingsProps {
     title: string;
+    cardsTitle: React.ReactNode;
     options: EditableColorOption[];
 }
 
-export const PrivateColorsSettings: React.FC<PrivateColorsSettingsProps> = ({title, options}) => {
-    const {t} = useTranslation('themes');
-
+export const PrivateColorsSettings: React.FC<PrivateColorsSettingsProps> = ({
+    title,
+    cardsTitle,
+    options,
+}) => {
     const themePrivateColorLightOptions = useThemePrivateColorOptions('light');
     const themePrivateColorDarkOptions = useThemePrivateColorOptions('dark');
 
@@ -73,14 +75,7 @@ export const PrivateColorsSettings: React.FC<PrivateColorsSettingsProps> = ({tit
 
     return (
         <ThemeSection className={b()} title={title}>
-            <ThemableSettings
-                title={
-                    <Trans i18nKey="palette_colors_description" t={t}>
-                        <br />
-                    </Trans>
-                }
-                rows={rows}
-            />
+            <ThemableSettings title={cardsTitle} rows={rows} />
         </ThemeSection>
     );
 };
