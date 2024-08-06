@@ -5,6 +5,7 @@ import {
     Col,
     Flex,
     Icon,
+    Popover,
     RadioButton,
     RadioButtonOption,
     Row,
@@ -284,6 +285,18 @@ export const FontFamilyPicker = () => {
     const {updateFontFamily, addFontFamilyType, removeFontFamilyType, updateFontFamilyTypeTitle} =
         useThemeCreatorMethods();
 
+    const getFontUsages = React.useCallback(
+        (fontType: string) => {
+            return Object.entries(advanced)
+                .filter(
+                    ([, textVariantSetting]) =>
+                        textVariantSetting.selectedFontFamilyType === fontType,
+                )
+                .map(([, textVariantSetting]) => textVariantSetting.title);
+        },
+        [advanced],
+    );
+
     return (
         <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
             <Text variant="display-2">Fonts</Text>
@@ -385,21 +398,41 @@ export const FontFamilyPicker = () => {
                             fontType={fType.value}
                             withExtraContent
                             ExtraContent={
-                                <Button
-                                    size="xl"
-                                    disabled={Object.entries(advanced).some(
-                                        ([, textVariantSetting]) =>
-                                            textVariantSetting.selectedFontFamilyType ===
-                                            fType.value,
-                                    )}
-                                    onClick={() => {
-                                        removeFontFamilyType({
-                                            fontType: fType.value,
-                                        });
-                                    }}
+                                <Popover
+                                    content={
+                                        <Flex direction="column" gap={2}>
+                                            <span>
+                                                This font is currently in use in blocks:{' '}
+                                                <b>{getFontUsages(fType.value).join(', ')}</b>. If
+                                                you delete it, we'll replace it with a default font.
+                                            </span>
+                                            <Button
+                                                view="action"
+                                                width="max"
+                                                onClick={() => {
+                                                    removeFontFamilyType({
+                                                        fontType: fType.value,
+                                                    });
+                                                }}
+                                            >
+                                                Continue
+                                            </Button>
+                                        </Flex>
+                                    }
+                                    disabled={getFontUsages(fType.value).length === 0}
                                 >
-                                    <Icon data={TrashBin} />
-                                </Button>
+                                    <Button
+                                        size="xl"
+                                        disabled={getFontUsages(fType.value).length > 0}
+                                        onClick={() => {
+                                            removeFontFamilyType({
+                                                fontType: fType.value,
+                                            });
+                                        }}
+                                    >
+                                        <Icon data={TrashBin} />
+                                    </Button>
+                                </Popover>
                             }
                         />
                     </Col>

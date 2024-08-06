@@ -154,7 +154,7 @@ export const Preview = () => {
                     >
                         {TYPOGRAPHY_STYLES_PREVIEW.map(({title, variants}) => {
                             return (
-                                <Col l="2" m="4" s="12">
+                                <Col l="2" m="4" s="12" key={title}>
                                     <Flex direction="column" gap={10} width="100%" key={title}>
                                         <Text
                                             variant="subheader-3"
