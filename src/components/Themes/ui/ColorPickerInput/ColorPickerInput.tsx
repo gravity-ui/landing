@@ -95,6 +95,11 @@ export const ColorPickerInput = ({
     }, [inputValue, validateAndChangeExternal]);
 
     useEffect(() => {
+        // Dont validate if not initial value
+        if (!value && !defaultValue) {
+            return;
+        }
+
         validateAndChangeExternal(value ?? defaultValue);
     }, [value, defaultValue]);
 
