@@ -65,6 +65,7 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
                 <div className={b('brand-color-picker')}>
                     {BRAND_COLORS_PRESETS.map((value, index) => (
                         <div
+                            key={index}
                             className={b('color', {
                                 selected: !customModeEnabled && index === activeColorIndex,
                             })}

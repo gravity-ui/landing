@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 
+import {useOnLeavePageConfirmation} from '../../../hooks/useOnLeavePageConfirmation';
 import {BrandPreset} from '../lib/constants';
 import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreatorContext';
 import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
@@ -107,43 +108,48 @@ const themeCreatorReducer = (
     prevState: ThemeCreatorState,
     action: ThemeCreatorAction,
 ): ThemeCreatorState => {
+    const newState = {
+        ...prevState,
+        changesExist: true,
+    };
+
     switch (action.type) {
         case 'addColor':
-            return addColorToTheme(prevState, action.payload);
+            return addColorToTheme(newState, action.payload);
         case 'removeColor':
-            return removeColorFromTheme(prevState, action.payload);
+            return removeColorFromTheme(newState, action.payload);
         case 'renameColor':
-            return renameColorInTheme(prevState, action.payload);
+            return renameColorInTheme(newState, action.payload);
         case 'updateColor':
-            return updateColorInTheme(prevState, action.payload);
+            return updateColorInTheme(newState, action.payload);
         case 'changeUtilityColor':
-            return changeUtilityColorInTheme(prevState, action.payload);
+            return changeUtilityColorInTheme(newState, action.payload);
         case 'applyBrandPreset':
-            return applyBrandPresetToTheme(prevState, action.payload);
+            return applyBrandPresetToTheme(newState, action.payload);
         case 'changeRadiusPreset':
-            return changeRadiusPresetInTheme(prevState, action.payload);
+            return changeRadiusPresetInTheme(newState, action.payload);
         case 'updateCustomRadiusPreset':
-            return updateCustomRadiusPresetInTheme(prevState, action.payload);
+            return updateCustomRadiusPresetInTheme(newState, action.payload);
         case 'addFontFamilyType':
-            return addFontFamilyTypeInTheme(prevState, action.payload);
+            return addFontFamilyTypeInTheme(newState, action.payload);
         case 'removeFontFamilyType':
-            return removeFontFamilyTypeFromTheme(prevState, action.payload);
+            return removeFontFamilyTypeFromTheme(newState, action.payload);
         case 'updateFontFamilyTypeTitle':
-            return updateFontFamilyTypeTitleInTheme(prevState, action.payload);
+            return updateFontFamilyTypeTitleInTheme(newState, action.payload);
         case 'updateFontFamily':
-            return updateFontFamilyInTheme(prevState, action.payload);
+            return updateFontFamilyInTheme(newState, action.payload);
         case 'updateAdvancedTypographySettings':
-            return updateAdvancedTypographySettingsInTheme(prevState, action.payload);
+            return updateAdvancedTypographySettingsInTheme(newState, action.payload);
         case 'updateAdvancedTypography':
-            return updateAdvancedTypographyInTheme(prevState);
+            return updateAdvancedTypographyInTheme(newState);
         case 'openMainSettings':
             return {
-                ...prevState,
+                ...newState,
                 showMainSettings: true,
             };
         case 'setAdvancedMode':
             return {
-                ...prevState,
+                ...newState,
                 advancedModeEnabled: action.payload,
             };
         case 'reinitialize':
@@ -161,6 +167,8 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
     initialTheme,
     children,
 }) => {
+    const prevInitialTheme = React.useRef(initialTheme);
+
     const [themeCreator, dispatchThemeCreator] = React.useReducer(
         themeCreatorReducer,
         undefined,
@@ -168,10 +176,13 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
     );
 
     React.useEffect(() => {
-        dispatchThemeCreator({
-            type: 'reinitialize',
-            payload: initialTheme,
-        });
+        if (prevInitialTheme.current !== initialTheme) {
+            prevInitialTheme.current = initialTheme;
+            dispatchThemeCreator({
+                type: 'reinitialize',
+                payload: initialTheme,
+            });
+        }
     }, [initialTheme]);
 
     const addColor = React.useCallback<ThemeCreatorMethodsContextType['addColor']>((payload) => {
@@ -353,6 +364,8 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             setAdvancedMode,
         ],
     );
+
+    useOnLeavePageConfirmation(themeCreator.changesExist);
 
     return (
         <ThemeCreatorContext.Provider value={themeCreator}>

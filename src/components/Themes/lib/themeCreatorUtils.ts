@@ -16,7 +16,6 @@ import {
 import {generatePrivateColors} from './privateColors';
 import type {
     BordersOption,
-    ColorOption,
     ColorsOptions,
     Palette,
     PaletteTokens,
@@ -459,15 +458,8 @@ export function applyBrandPresetToTheme(
         });
     });
 
-    (Object.keys(colors.light) as ColorOption[]).forEach((utilityColorName) => {
-        (['light', 'dark'] as const).forEach((theme) => {
-            newState = changeUtilityColorInTheme(newState, {
-                themeVariant: theme,
-                name: utilityColorName,
-                value: colors[theme][utilityColorName],
-            });
-        });
-    });
+    newState.colors.light = {...colors.light};
+    newState.colors.dark = {...colors.dark};
 
     return newState;
 }
@@ -495,6 +487,7 @@ export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
         tokens: Object.keys(paletteTokens),
         showMainSettings: false,
         advancedModeEnabled: false,
+        changesExist: false,
     };
 }
 
@@ -689,10 +682,23 @@ export function removeFontFamilyTypeFromTheme(
         (fontFamily) => fontFamily.value !== fontType,
     );
 
+    const newAdvanced = cloneDeep(themeState.typography.advanced);
+
+    // Reset selected font to default
+    Object.entries(newAdvanced).forEach(([textVariant, settings]) => {
+        if (settings.selectedFontFamilyType === fontType) {
+            newAdvanced[textVariant as TextVariants].selectedFontFamilyType =
+                defaultTypographyPreset.advanced[
+                    textVariant as TextVariants
+                ].selectedFontFamilyType;
+        }
+    });
+
     return {
         ...themeState,
         typography: {
             ...themeState.typography,
+            advanced: newAdvanced,
             baseSetting: {
                 ...themeState.typography.baseSetting,
                 fontFamilies: restFontFamilies,

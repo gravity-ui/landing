@@ -120,6 +120,7 @@ export interface ThemeCreatorState extends ThemeOptions {
     tokens: string[];
     showMainSettings: boolean;
     advancedModeEnabled: boolean;
+    changesExist: boolean;
 }
 
 export type Palette = {
