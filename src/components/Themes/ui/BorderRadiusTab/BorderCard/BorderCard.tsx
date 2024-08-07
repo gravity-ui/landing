@@ -1,5 +1,5 @@
+import {useTranslation} from 'next-i18next';
 import React, {useCallback} from 'react';
-import {useTranslation} from 'react-i18next';
 import {SelectableCard} from 'src/components/SelectableCard/SelectableCard';
 import {RADIUS_PRESETS} from 'src/components/Themes/lib/constants';
 import {RadiusPresetName} from 'src/components/Themes/lib/types';

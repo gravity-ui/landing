@@ -1,6 +1,6 @@
 import {Col, Flex, Row, Text, TextInput} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React, {useCallback, useMemo} from 'react';
-import {useTranslation} from 'react-i18next';
 import {UpdateCustomRadiusPresetInThemeParams} from 'src/components/Themes/lib/themeCreatorUtils';
 import {RadiusSizeName, RadiusValue} from 'src/components/Themes/lib/types';
 

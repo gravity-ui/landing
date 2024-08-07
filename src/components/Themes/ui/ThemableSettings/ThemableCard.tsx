@@ -1,7 +1,7 @@
 import {Moon, Sun} from 'landing-icons';
 import {Flex, Icon, Text, ThemeProvider} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {useThemeUtilityColor} from '../../hooks';

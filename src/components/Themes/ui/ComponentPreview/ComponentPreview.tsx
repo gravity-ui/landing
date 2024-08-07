@@ -1,6 +1,6 @@
 import {Flex} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 
 import {Showcase} from '../../../../blocks/Examples/components/Showcase/Showcase';
 import {useThemeCreator} from '../../hooks';

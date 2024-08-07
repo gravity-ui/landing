@@ -1,6 +1,6 @@
 import {Dialog, Flex} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {CodeExample} from '../../../CodeExample/CodeExample';
