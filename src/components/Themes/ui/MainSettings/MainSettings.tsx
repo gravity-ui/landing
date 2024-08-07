@@ -40,7 +40,7 @@ const ThemeUtilityColorEditor: React.FC<ThemeUtilityColorEditorProps> = ({name, 
             value={color}
             defaultValue={color}
             onChange={setColor}
-            // Цвет фона применяется к карточке, в которой он отображается. Чтобы можно было увидеть preview оборачиваем блок в border
+            // The background color is applied to the card in which it is displayed. To see the preview, we wrap the block in border
             withBorderInPreview={name === 'base-background'}
         />
     );
