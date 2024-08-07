@@ -1,3 +1,5 @@
+import {ActionBar, AsideHeader, FooterItem} from '@gravity-ui/navigation';
+import {Breadcrumbs, Flex, Icon, RadioButton, Text, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import {
     ChartAreaStackedNormalized,
     Gear,
@@ -10,9 +12,7 @@ import {
     TextAlignCenter,
     TextAlignJustify,
     TextAlignLeft,
-} from '@gravity-ui/icons';
-import {ActionBar, AsideHeader, FooterItem} from '@gravity-ui/navigation';
-import {Breadcrumbs, Flex, Icon, RadioButton, Text, Theme, ThemeProvider} from '@gravity-ui/uikit';
+} from 'landing-icons';
 import React, {CSSProperties, Fragment, useState} from 'react';
 
 import gravityUi from '../../../../assets/icons/gravity-ui.svg';

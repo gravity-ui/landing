@@ -1,5 +1,5 @@
 import {FormRow} from '@gravity-ui/components';
-import {Plus, TrashBin} from '@gravity-ui/icons';
+import {Plus, TrashBin} from 'landing-icons';
 import {
     Button,
     Col,
@@ -13,7 +13,7 @@ import {
     TextArea,
     TextInput,
     TextInputProps,
-} from '@gravity-ui/uikit';
+} from 'landing-uikit';
 import React, {useCallback, useState} from 'react';
 
 import {block} from '../../../../utils';

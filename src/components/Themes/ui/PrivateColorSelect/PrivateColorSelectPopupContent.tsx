@@ -1,4 +1,4 @@
-import {List, Select, SelectOption, Text} from '@gravity-ui/uikit';
+import {List, Select, SelectOption, Text} from 'landing-uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';

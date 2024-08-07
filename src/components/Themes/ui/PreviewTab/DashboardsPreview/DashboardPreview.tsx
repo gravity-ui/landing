@@ -1,6 +1,6 @@
 import ChartKit, {settings} from '@gravity-ui/chartkit';
 import {D3Plugin} from '@gravity-ui/chartkit/d3';
-import {Card, Col, Container, Flex, Row, Text} from '@gravity-ui/uikit';
+import {Card, Col, Container, Flex, Row, Text} from 'landing-uikit';
 import React, {PropsWithChildren} from 'react';
 
 import {block} from '../../../../../utils';

@@ -1,5 +1,5 @@
-import {Plus} from '@gravity-ui/icons';
-import {Button, Icon} from '@gravity-ui/uikit';
+import {Plus} from 'landing-icons';
+import {Button, Icon} from 'landing-uikit';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 

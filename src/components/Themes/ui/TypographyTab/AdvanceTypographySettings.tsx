@@ -1,5 +1,5 @@
 import {FormRow} from '@gravity-ui/components';
-import {Card, Col, Flex, Row, Select, Slider, Text, TextInput, TextProps} from '@gravity-ui/uikit';
+import {Card, Col, Flex, Row, Select, Slider, Text, TextInput, TextProps} from 'landing-uikit';
 import React, {useMemo} from 'react';
 
 import {block} from '../../../../utils';

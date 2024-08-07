@@ -1,4 +1,4 @@
-import {TextProps} from '@gravity-ui/uikit';
+import {TextProps} from 'landing-uikit';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';

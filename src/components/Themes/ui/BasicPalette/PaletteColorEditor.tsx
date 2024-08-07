@@ -1,5 +1,5 @@
-import {TrashBin} from '@gravity-ui/icons';
-import {Button, Icon, Text, TextInput} from '@gravity-ui/uikit';
+import {TrashBin} from 'landing-icons';
+import {Button, Icon, Text, TextInput} from 'landing-uikit';
 import debounce from 'lodash/debounce';
 import React from 'react';
 

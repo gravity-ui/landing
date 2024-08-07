@@ -1,5 +1,5 @@
-import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Popup, Sheet, TextInput, ThemeProvider} from '@gravity-ui/uikit';
+import {ChevronDown, PencilToLine} from 'landing-icons';
+import {Button, Flex, Icon, Popup, Sheet, TextInput, ThemeProvider} from 'landing-uikit';
 import React from 'react';
 
 import {useIsMobile} from '../../../../hooks/useIsMobile';
