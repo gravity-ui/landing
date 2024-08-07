@@ -1,14 +1,22 @@
 import {Flex} from 'landing-uikit';
+import dynamic from 'next/dynamic';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 
-import {Showcase} from '../../../../blocks/Examples/components/Showcase/Showcase';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme} from '../../lib/themeCreatorExport';
 import {ThemeSection} from '../ThemeSection';
 
+const Showcase = dynamic(
+    () =>
+        import('../../../../blocks/Examples/components/Showcase/Showcase').then(
+            (res) => res.Showcase,
+        ),
+    {
+        ssr: false,
+    },
+);
+
 export const ComponentPreview = () => {
-    const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
@@ -17,7 +25,7 @@ export const ComponentPreview = () => {
     );
 
     return (
-        <ThemeSection title={t('component_preview')}>
+        <ThemeSection title="Component preview">
             <Flex direction="column" gap={4}>
                 <Showcase style={themeStyles.dark} theme="dark" />
                 <Showcase style={themeStyles.light} theme="light" />

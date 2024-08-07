@@ -16,7 +16,7 @@ export const ExportThemeSection = () => {
     const [isDialogVisible, toggleDialog] = React.useReducer((isOpen) => !isOpen, false);
 
     return (
-        <ThemeSection title={t('is_everything_set')} className={b()}>
+        <ThemeSection title="Is everything set?" className={b()}>
             <Button view="action" size="xl" className={b('export-button')} onClick={toggleDialog}>
                 <Icon data={ArrowUpFromSquare} />
                 {t('btn_export_theme')}
