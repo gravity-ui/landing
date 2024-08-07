@@ -18,6 +18,7 @@ const Showcase = dynamic(
 );
 
 export const ComponentPreview = () => {
+    const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
@@ -26,7 +27,7 @@ export const ComponentPreview = () => {
     );
 
     return (
-        <ThemeSection title="Component preview">
+        <ThemeSection title={t('component_preview')}>
             <Flex direction="column" gap={4}>
                 <Showcase style={themeStyles.dark} theme="dark" />
                 <Showcase style={themeStyles.light} theme="light" />
