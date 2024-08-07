@@ -25,6 +25,5 @@ export const menu: MenuItem[] = [
     {
         titleKey: 'menu_themes',
         url: '/themes',
-        isComingSoon: true,
     },
 ];
