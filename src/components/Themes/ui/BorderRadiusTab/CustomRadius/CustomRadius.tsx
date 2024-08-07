@@ -1,4 +1,4 @@
-import {Col, Flex, Row, Text, TextInput} from '@gravity-ui/uikit';
+import {Col, Flex, Row, Text, TextInput} from 'landing-uikit';
 import React, {useCallback, useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 import {UpdateCustomRadiusPresetInThemeParams} from 'src/components/Themes/lib/themeCreatorUtils';

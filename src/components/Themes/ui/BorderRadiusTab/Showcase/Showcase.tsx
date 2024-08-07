@@ -1,4 +1,4 @@
-import {PencilToLine} from '@gravity-ui/icons';
+import {PencilToLine} from 'landing-icons';
 import {
     Button,
     Flex,
@@ -8,8 +8,8 @@ import {
     TextInput,
     Theme,
     ThemeProvider,
-} from '@gravity-ui/uikit';
-import type {ButtonProps} from '@gravity-ui/uikit';
+} from 'landing-uikit';
+import type {ButtonProps} from 'landing-uikit';
 import React, {useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 

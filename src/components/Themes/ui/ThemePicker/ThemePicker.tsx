@@ -1,5 +1,5 @@
-import {Moon, Sun} from '@gravity-ui/icons';
-import {Flex, Icon, RadioButton, Text} from '@gravity-ui/uikit';
+import {Moon, Sun} from 'landing-icons';
+import {Flex, Icon, RadioButton, Text} from 'landing-uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';

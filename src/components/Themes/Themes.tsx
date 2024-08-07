@@ -1,6 +1,6 @@
-import {ArrowUpFromSquare} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
+import {ArrowUpFromSquare} from 'landing-icons';
+import {Button, Flex, Icon, Text} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useMemo, useState} from 'react';
 

@@ -1,4 +1,4 @@
-import {TextProps} from '@gravity-ui/uikit';
+import {TextProps} from 'landing-uikit';
 
 import {DefaultFontFamilyType, TextVariants} from './typography/constants';
 

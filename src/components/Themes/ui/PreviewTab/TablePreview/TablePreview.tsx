@@ -1,4 +1,4 @@
-import {Copy, Pencil, Plus, TrashBin} from '@gravity-ui/icons';
+import {Copy, Pencil, Plus, TrashBin} from 'landing-icons';
 import {
     Button,
     Flex,
@@ -9,6 +9,7 @@ import {
     PaginationProps,
     Select,
     Table,
+    TableAction,
     TableColumnConfig,
     TableDataItem,
     Text,
@@ -17,8 +18,7 @@ import {
     withTableActions,
     withTableSelection,
     withTableSorting,
-} from '@gravity-ui/uikit';
-import {TableAction} from '@gravity-ui/uikit/build/esm/components/Table/hoc/withTableActions/withTableActions';
+} from 'landing-uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../../assets/avatar-1.png';

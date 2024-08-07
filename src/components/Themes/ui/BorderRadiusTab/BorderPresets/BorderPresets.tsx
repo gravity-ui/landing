@@ -1,4 +1,4 @@
-import {Col, Row} from '@gravity-ui/uikit';
+import {Col, Row} from 'landing-uikit';
 import React, {useCallback} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ChangeRadiusPresetInThemeParams} from 'src/components/Themes/lib/themeCreatorUtils';

@@ -1,4 +1,4 @@
-import {Dialog, Flex} from '@gravity-ui/uikit';
+import {Dialog, Flex} from 'landing-uikit';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
