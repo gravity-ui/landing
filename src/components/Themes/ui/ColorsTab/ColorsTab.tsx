@@ -1,6 +1,6 @@
 import {Flex} from 'landing-uikit';
+import {Trans, useTranslation} from 'next-i18next';
 import React from 'react';
-import {Trans, useTranslation} from 'react-i18next';
 
 import {block} from '../../../../utils';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';

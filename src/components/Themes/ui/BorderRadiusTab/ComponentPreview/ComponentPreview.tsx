@@ -1,5 +1,5 @@
+import {useTranslation} from 'next-i18next';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 
 import {useThemeCreator} from '../../../hooks';
 import {exportTheme} from '../../../lib/themeCreatorExport';
