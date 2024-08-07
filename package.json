@@ -4,11 +4,11 @@
   "private": true,
   "homepage": "https://gravity-ui.com/",
   "dependencies": {
-    "@diplodoc/transform": "^4.11.0",
+    "@diplodoc/transform": "^4.26.0",
+    "@gravity-ui/chartkit": "^5.10.1",
     "@gravity-ui/components": "^3.7.0",
     "@gravity-ui/date-components": "^2.8.0",
     "@gravity-ui/icons": "^2.10.0",
-    "@gravity-ui/chartkit": "^5.8.0",
     "@gravity-ui/navigation": "^2.21.0",
     "@gravity-ui/page-constructor": "^5.2.0",
     "@gravity-ui/uikit": "^6.23.0",
@@ -33,7 +33,7 @@
     "next-i18next": "^15.2.0",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-i18next": "^14.0.5",
     "react-time-ago": "^7.2.1",
     "rehype-autolink-headings": "^6.1.1",
@@ -78,6 +78,12 @@
     "svg-inline-loader": "^0.8.2",
     "svgo": "^3.0.2",
     "undici": "^5.14.0"
+  },
+  "overrides": {
+    "react-split-pane": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    }
   },
   "scripts": {
     "prepare": "husky install",
