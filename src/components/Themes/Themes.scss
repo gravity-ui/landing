@@ -37,8 +37,8 @@ $block: '.#{variables.$ns}themes';
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             /* stylelint-disable */
             flex-wrap: nowrap !important;
-            margin: 0 -24px;
-            padding: 0 24px;
+            margin: 0 -16px;
+            padding: 0 16px;
         }
     }
 
