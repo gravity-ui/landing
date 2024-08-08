@@ -1,0 +1,31 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}private-colors-select';
+
+#{$block} {
+    --g-button-border-radius: 8px;
+    --g-text-input-border-radius: 8px;
+    --g-color-base-selection: var(--g-color-private-yellow-150);
+
+    &__preview {
+        margin-inline-start: var(--g-spacing-2);
+        margin-inline-end: var(--g-spacing-1);
+    }
+
+    &__input {
+        cursor: pointer;
+
+        input {
+            cursor: pointer;
+        }
+    }
+
+    &__arrow-button {
+        --g-button-background-color-hover: transparent;
+    }
+
+    &__customize-button {
+        flex-shrink: 0;
+    }
+}

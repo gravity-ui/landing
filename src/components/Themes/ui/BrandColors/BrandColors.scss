@@ -1,0 +1,65 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}brand-colors';
+
+#{$block} {
+    gap: 32px;
+
+    &__brand-color-picker {
+        display: flex;
+        gap: 2px;
+        overflow: auto;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            margin: 0 -24px;
+            padding: 0 24px;
+        }
+    }
+
+    &__color {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        padding: 6px;
+        cursor: pointer;
+
+        &_custom {
+            --color-value: conic-gradient(
+                from 180deg at 50% 50%,
+                #fa00ff -47.18deg,
+                #ffd028 46.82deg,
+                #00e6bd 138.38deg,
+                #6932de 223.7deg,
+                #fa00ff 312.82deg,
+                #ffd028 406.82deg
+            );
+
+            gap: 8px;
+            padding-right: 18px;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        &_selected {
+            border-color: var(--color-value);
+
+            &#{$block}__color_custom {
+                border-color: rgba(255, 197, 108, 1);
+            }
+        }
+
+        &-inner {
+            background: var(--color-value);
+            border-radius: 5px;
+            height: 32px;
+            width: 32px;
+        }
+    }
+
+    &__switch-button {
+        --g-button-border-radius: 8px;
+        width: min-content;
+    }
+}

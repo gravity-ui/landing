@@ -22,4 +22,8 @@ export const menu: MenuItem[] = [
         titleKey: 'menu_icons',
         url: '/icons',
     },
+    {
+        titleKey: 'menu_themes',
+        url: '/themes',
+    },
 ];

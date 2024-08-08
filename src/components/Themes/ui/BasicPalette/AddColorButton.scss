@@ -1,0 +1,14 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}theme-palette-add-color-button';
+
+#{$block} {
+    --g-button-border-radius: var(--g-spacing-2);
+    margin-top: var(--g-spacing-4);
+    width: min-content;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        width: 100%;
+    }
+}

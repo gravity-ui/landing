@@ -1,0 +1,12 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}colors-tab';
+
+#{$block} {
+    gap: calc(var(--g-spacing-base) * 24);
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        gap: calc(var(--g-spacing-base) * 12);
+    }
+}

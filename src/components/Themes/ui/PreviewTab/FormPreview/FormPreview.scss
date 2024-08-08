@@ -1,0 +1,13 @@
+@use '../../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}form-preview';
+
+#{$block} {
+    overflow: auto;
+
+    &__wrapper {
+        width: 600px;
+    }
+}

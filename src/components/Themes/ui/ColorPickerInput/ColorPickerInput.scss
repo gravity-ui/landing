@@ -1,0 +1,34 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}color-picker';
+
+#{$block} {
+    --g-border-radius-xl: 8px;
+    flex-grow: 1;
+    position: relative;
+
+    &__text-input {
+        z-index: 1;
+    }
+
+    &__preview {
+        margin-inline-start: var(--g-spacing-2);
+        margin-inline-end: var(--g-spacing-1);
+
+        &_with-border {
+            border: 1px solid var(--g-color-line-generic);
+        }
+    }
+
+    &__input {
+        width: 35px;
+        opacity: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 0;
+    }
+}

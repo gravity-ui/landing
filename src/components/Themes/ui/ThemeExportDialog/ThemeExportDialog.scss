@@ -1,0 +1,9 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-export-dialog';
+
+#{$block} {
+    &__code {
+        --code-example-max-height: max(100px, calc(100vh - 60px - 54px - 92px - 56px));
+    }
+}

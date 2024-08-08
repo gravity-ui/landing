@@ -1,0 +1,28 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}themable-settings';
+
+#{$block} {
+    &__columns {
+        width: 380px;
+        max-width: 380px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+            display: none;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+            width: 328px;
+            max-width: 328px;
+        }
+    }
+
+    &__dark-card {
+        display: block;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+            display: none;
+        }
+    }
+}

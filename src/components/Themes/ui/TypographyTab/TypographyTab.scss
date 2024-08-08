@@ -1,0 +1,154 @@
+@use '../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
+
+$block: '.#{variables.$ns}typography-tab';
+
+#{$block} {
+    --g-text-input-border-radius: 8px;
+    --g-button-border-radius: 8px;
+
+    gap: calc(var(--g-spacing-base) * 24);
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        gap: calc(var(--g-spacing-base) * 12);
+    }
+
+    &__font {
+        &__additional-font-input {
+            width: 380px;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+                width: 100%;
+            }
+        }
+
+        &__additional-font-add-btn {
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                width: 100%;
+            }
+        }
+
+        &__font-card {
+            &__text {
+                @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                    @include ukitMixins.text-body-3();
+                }
+
+                &_fontType_inter {
+                    font-family: Inter, sans-serif;
+                }
+
+                &_fontType_merriweather {
+                    font-family: Merriweather, sans-serif;
+                }
+
+                &_fontType_titillium_web {
+                    font-family: 'Titillium Web', sans-serif;
+                }
+
+                &_fontType_roboto_mono {
+                    font-family: 'Roboto Mono', monospace;
+                }
+
+                &_fontType_ubuntu_mono {
+                    font-family: 'Ubuntu Mono', monospace;
+                }
+
+                &_fontType_ibm_plex_mono {
+                    font-family: 'IBM Plex Mono', monospace;
+                }
+            }
+        }
+
+        &__custom-font-radio-button {
+            --g-border-radius-xl: 8px;
+            align-self: flex-start;
+        }
+
+        &__custom-font-textarea {
+            --g-border-radius-xl: 8px;
+        }
+
+        &__custom-font-textarea-wrapper {
+            margin-block-end: 0;
+        }
+    }
+
+    &__preview {
+        border-radius: 16px;
+        /* stylelint-disable */
+        --g-text-display-4-font-size: 48px !important;
+        --g-text-display-4-line-height: 52px !important;
+
+        &__wrapper {
+            padding: 80px;
+            margin-block-start: 0 !important;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+                padding: 0 var(--g-spacing-10)  var(--g-spacing-10)  var(--g-spacing-10);
+            }
+        }
+
+        &__variant-title {
+            --g-color-text-brand: rgb(233, 174, 86);
+            --g-text-subheader-3-line-height: 24px;
+            --g-text-subheader-3-font-size: 17px;
+            --g-text-subheader-font-weight: 600;
+        }
+    }
+
+    &__advance-settings {
+        &__wrapper {
+            width: 100%;
+            gap: calc(var(--g-spacing-1) * 24);
+        }
+
+        &__raw-wrapper {
+            width: 100%;
+        }
+
+        &__settings-card {
+            --g-color-base-background: rgb(34, 29, 34);
+            background-color: var(--g-color-base-background);
+
+            flex: 1 1 66%;
+
+            padding: var(--g-spacing-10) calc(var(--g-spacing-10) * 2);
+            width: 100%;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+                padding: var(--g-spacing-8);
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                padding: var(--g-spacing-5);
+            }
+        }
+
+        &__font-select {
+            --g-border-radius-xl: 8px;
+        }
+
+        &__input-setting-end-content {
+            margin-inline: var(--g-spacing-2);
+        }
+
+        &__setting-input {
+            width: 225px;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                width: 210px;
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                width: 100%;
+            }
+        }
+    }
+
+    &__advanced-button {
+        width: min-content;
+    }
+}

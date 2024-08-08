@@ -1,0 +1,20 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}themable-settings-rows';
+
+#{$block} {
+    --g-button-border-radius: var(--g-spacing-2);
+    --g-text-input-border-radius: 8px;
+
+    padding-top: var(--g-spacing-9);
+
+    @media (min-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+        padding-top: var(--g-spacing-4);
+    }
+
+    &__title {
+        margin-bottom: var(--g-spacing-4);
+        min-height: 48px;
+    }
+}
