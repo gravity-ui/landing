@@ -9,7 +9,7 @@ import {
     createUtilityColorCssVariable,
     isPrivateColorToken,
 } from './themeCreatorUtils';
-import type {ColorOption, ThemeCreatorState, ThemeVariant} from './types';
+import type {ThemeCreatorState, ThemeVariant} from './types';
 
 const COMMON_VARIABLES_TEMPLATE_NAME = '%COMMON_VARIABLES%';
 const LIGHT_THEME_VARIABLES_TEMPLATE_NAME = '%LIGHT_THEME_VARIABLES%';
@@ -115,14 +115,6 @@ export function exportTheme({
 
         Object.entries(themeState.colors[themeVariant]).forEach(
             ([colorName, colorOrPrivateToken]) => {
-                if (
-                    ignoreDefaultValues &&
-                    DEFAULT_THEME.colors[themeVariant][colorName as ColorOption] ===
-                        colorOrPrivateToken
-                ) {
-                    return;
-                }
-
                 const color = isPrivateColorToken(colorOrPrivateToken)
                     ? `var(${createPrivateColorCssVariableFromToken(colorOrPrivateToken)})`
                     : colorOrPrivateToken;
