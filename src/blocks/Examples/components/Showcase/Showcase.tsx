@@ -69,7 +69,9 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({color, theme})}`}>
             {style ? (
-                <style>{`.gravity-ui-landing-examples-showcase_theme_${theme} {${style}}`}</style>
+                <style
+                    suppressHydrationWarning={true}
+                >{`.gravity-ui-landing-examples-showcase_theme_${theme} {${style}}`}</style>
             ) : null}
             <div className={b('row')}>
                 <div className={b('col')}>

@@ -1,21 +1,11 @@
 import {Flex} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
-import dynamic from 'next/dynamic';
 import React from 'react';
 
+import {Showcase} from '../../../../blocks/Examples/components/Showcase/Showcase';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme} from '../../lib/themeCreatorExport';
 import {ThemeSection} from '../ThemeSection';
-
-const Showcase = dynamic(
-    () =>
-        import('../../../../blocks/Examples/components/Showcase/Showcase').then(
-            (res) => res.Showcase,
-        ),
-    {
-        ssr: false,
-    },
-);
 
 export const ComponentPreview = () => {
     const {t} = useTranslation('themes');
