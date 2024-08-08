@@ -23,7 +23,7 @@ export const menu: MenuItem[] = [
         url: '/icons',
     },
     {
-        titleKey: 'menu_themes',
-        url: '/themes',
+        titleKey: 'menu_themer',
+        url: '/themer',
     },
 ];
