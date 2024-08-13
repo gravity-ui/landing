@@ -1,6 +1,9 @@
 /* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {Octokit} from '@octokit/rest';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
