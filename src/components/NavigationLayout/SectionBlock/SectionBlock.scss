@@ -1,16 +1,16 @@
-@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../mixins.scss' as baseMixins;
 @use '../../../variables.scss';
 
 $block: '.#{variables.$ns}navigation-layout-section-block';
 
 #{$block} {
-    background: #251b25;
     border-radius: 12px;
 
     &__header {
+        position: sticky;
+        top: 64px;
         display: flex;
-        padding: 16px 20px;
-        margin-top: 16px;
+        padding: 14px 0 13px;
         font-size: 17px;
         line-height: 24px;
         font-weight: 600;
@@ -18,6 +18,10 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         text-decoration: none;
         cursor: pointer;
         align-items: center;
+        background: var(--g-color-base-modal);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        box-sizing: content-box;
+
         &_active {
             background: rgba(255, 190, 92, 0.1);
             color: #ffbe5c;
@@ -48,7 +52,6 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         overflow: hidden;
         max-height: 0;
         opacity: 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
         transition: all 0.3s ease-in-out;
 
         &_open {
@@ -61,17 +64,12 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         display: flex;
         align-items: center;
         padding: 12px 20px;
-        margin-top: 4px;
         border-radius: 12px;
         font-size: 15px;
         line-height: 20px;
         color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
         transition: background-color 0.2s ease-in-out;
-
-        &:first-child {
-            margin-top: 8px;
-        }
 
         &:hover {
             background: var(--g-color-base-generic-hover);
@@ -105,5 +103,31 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         display: flex;
         align-items: center;
         margin-left: 8px;
+    }
+
+    @include baseMixins.window-breakpoint('lg') {
+        background: var(--g-color-base-modal);
+
+        &__header {
+            position: static;
+            top: initial;
+            padding: 16px 20px;
+            margin-top: 16px;
+            background: none;
+            border: none;
+            box-sizing: inherit;
+        }
+
+        &__sub-sections {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        &__sub-section {
+            margin-top: 4px;
+
+            &:first-child {
+                margin-top: 8px;
+            }
+        }
     }
 }

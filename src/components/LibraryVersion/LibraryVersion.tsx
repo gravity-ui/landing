@@ -18,9 +18,11 @@ const LibraryVersion: FC<Props> = ({id}) => {
     }
 
     return (
-        <Card className={b()} theme="warning" view="outlined">
-            <Text color="warning">{libraryVersion}</Text>
-        </Card>
+        <>
+            <Card className={b()} theme="warning" view="outlined">
+                <Text color="warning">{libraryVersion}</Text>
+            </Card>
+        </>
     );
 };
 

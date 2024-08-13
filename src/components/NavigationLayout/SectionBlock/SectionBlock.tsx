@@ -6,7 +6,7 @@ import arrowIcon from '../../../assets/icons/arrow.svg';
 import soonLabelIcon from '../../../assets/icons/soon-label.svg';
 import {block} from '../../../utils';
 import {Link} from '../../Link';
-import {Section} from '../types';
+import {Section, SubSection} from '../types';
 
 import './SectionBlock.scss';
 
@@ -29,10 +29,12 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
     curSubSectionId,
     onClickOnLink,
 }) => {
-    let content: React.ReactNode = null;
+    const renderUrlSection = () => {
+        if (!data.url) {
+            return null;
+        }
 
-    if (data.url && (!data.subSections || data.subSections?.length === 0)) {
-        content = (
+        return (
             <Link
                 href={data.url}
                 className={b('header', {
@@ -42,82 +44,94 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
                 <div className={b('title')}>{data.title}</div>
             </Link>
         );
-    } else {
-        content = (
-            <React.Fragment>
+    };
+
+    const renderHeader = () => {
+        return (
+            <div
+                className={b('header', {open: isOpen})}
+                onClick={() => {
+                    setIsOpen(!isOpen);
+                }}
+            >
+                <div className={b('title')}>{data.title}</div>
+                <div className={b('library-version')}>
+                    <LibraryVersion id={data.id} />
+                </div>
                 <div
-                    className={b('header')}
-                    onClick={() => {
-                        setIsOpen(!isOpen);
-                    }}
+                    className={b('arrow', {
+                        open: isOpen,
+                    })}
                 >
-                    <div className={b('title')}>{data.title}</div>
-                    <div className={b('library-version')}>
-                        <LibraryVersion id={data.id} />
-                    </div>
+                    <Icon data={arrowIcon} width={10} height={6} />
+                </div>
+            </div>
+        );
+    };
+
+    const renderSubSection = (subSection: SubSection) => {
+        if (subSection.isComingSoon === true) {
+            return (
+                <div key={subSection.id}>
                     <div
-                        className={b('arrow', {
-                            open: isOpen,
+                        className={b('sub-section', {
+                            active: curSectionId === data.id && curSubSectionId === subSection.id,
+                            disabled: subSection.isComingSoon === true,
                         })}
                     >
-                        <Icon data={arrowIcon} width={10} height={6} />
+                        <span className={b('sub-section-text')}>{subSection.title}</span>
+                        <span className={b('sub-section-icon')}>
+                            <Icon data={soonLabelIcon} width={34} height={14} />
+                        </span>
                     </div>
                 </div>
-                <div className={b('sub-sections', {open: isOpen})}>
-                    {data.url ? (
-                        <Link
-                            key="__overview"
-                            href={data.url}
-                            className={b('sub-section', {
-                                active: curSectionId === data.id && curSubSectionId === undefined,
-                            })}
-                            onClick={onClickOnLink}
-                        >
-                            Overview
-                        </Link>
-                    ) : null}
+            );
+        }
 
-                    {data.subSections?.map((subSection) => {
-                        if (subSection.isComingSoon === true) {
-                            return (
-                                <div key={subSection.id}>
-                                    <div
-                                        className={b('sub-section', {
-                                            active:
-                                                curSectionId === data.id &&
-                                                curSubSectionId === subSection.id,
-                                            disabled: subSection.isComingSoon === true,
-                                        })}
-                                    >
-                                        <span className={b('sub-section-text')}>
-                                            {subSection.title}
-                                        </span>
-                                        <span className={b('sub-section-icon')}>
-                                            <Icon data={soonLabelIcon} width={34} height={14} />
-                                        </span>
-                                    </div>
-                                </div>
-                            );
-                        }
-
-                        return (
-                            <Link
-                                key={subSection.id}
-                                href={subSection.url}
-                                className={b('sub-section', {
-                                    active:
-                                        curSectionId === data.id &&
-                                        curSubSectionId === subSection.id,
-                                })}
-                                onClick={onClickOnLink}
-                            >
-                                <span className={b('sub-section-text')}>{subSection.title}</span>
-                            </Link>
-                        );
-                    })}
-                </div>
-            </React.Fragment>
+        return (
+            <Link
+                key={subSection.id}
+                href={subSection.url}
+                className={b('sub-section', {
+                    active: curSectionId === data.id && curSubSectionId === subSection.id,
+                })}
+                onClick={onClickOnLink}
+            >
+                <span className={b('sub-section-text')}>{subSection.title}</span>
+            </Link>
         );
-    }
-    return <div className={b()}>{content}</div>;
+    };
+
+    const renderSubSectionsContainer = () => {
+        return (
+            <div className={b('sub-sections', {open: isOpen})}>
+                {data.url ? (
+                    <Link
+                        key="__overview"
+                        href={data.url}
+                        className={b('sub-section', {
+                            active: curSectionId === data.id && curSubSectionId === undefined,
+                        })}
+                        onClick={onClickOnLink}
+                    >
+                        Overview
+                    </Link>
+                ) : null}
+                {data.subSections?.map(renderSubSection)}
+            </div>
+        );
+    };
+
+    return (
+        <div className={b()}>
+            {data.url && !data.subSections?.length ? (
+                renderUrlSection()
+            ) : (
+                <>
+                    {renderHeader()}
+                    {renderSubSectionsContainer()}
+                </>
+            )}
+        </div>
+    );
 };

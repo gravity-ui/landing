@@ -27,6 +27,8 @@ export type LayoutProps = {
     isPageConstrucor?: boolean;
     isRtl?: boolean;
     showOnlyContent?: boolean;
+    hideFooter?: boolean;
+    noScroll?: boolean;
     meta?: MetaProps;
 };
 
@@ -36,6 +38,8 @@ export const Layout: React.FC<LayoutProps> = ({
     isPageConstrucor = false,
     isRtl = false,
     showOnlyContent = false,
+    hideFooter = false,
+    noScroll = false,
     meta = {},
 }) => {
     const {i18n} = useTranslation();
@@ -73,8 +77,8 @@ export const Layout: React.FC<LayoutProps> = ({
                 </div>
             )}
             <div className={b('wrapper')} id={CONTENT_WRAPPER_ID}>
-                <div className={b('content')}>{children}</div>
-                {!showOnlyContent && <Footer />}
+                <div className={b('content', {'no-scroll': noScroll})}>{children}</div>
+                {!showOnlyContent && !hideFooter && <Footer />}
             </div>
         </div>
     );

@@ -1,3 +1,4 @@
+import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
@@ -81,6 +82,9 @@ export const ComponentPage = ({
     const lib = libs.find((item) => item.id === libId);
     const component = lib?.components.find((item) => item.id === componentId);
 
+    const windowBreakpoint = useWindowBreakpoint();
+    const isMobile = windowBreakpoint < BREAKPOINTS.lg;
+
     if (!lib || !component) {
         return null;
     }
@@ -107,7 +111,7 @@ export const ComponentPage = ({
     }, []);
 
     return (
-        <Layout title={`${lib.title} – ${component.title}`}>
+        <Layout title={`${lib.title} – ${component.title}`} hideFooter noScroll={!isMobile}>
             <ComponentsLayout libId={libId} componentId={componentId} sections={sections}>
                 <Component
                     libId={libId}
