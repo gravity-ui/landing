@@ -8,9 +8,10 @@ $block: '.#{variables.$ns}navigation-layout-navigation';
         position: sticky;
         top: 0;
         z-index: 1;
+        height: 64px;
         padding-top: 20px;
-        padding-bottom: 8px;
         background: var(--g-color-base-modal);
+        box-sizing: border-box;
     }
 
     &__empty {
@@ -24,6 +25,7 @@ $block: '.#{variables.$ns}navigation-layout-navigation';
     @include baseMixins.window-breakpoint('lg') {
         &__search-input {
             position: static;
+            height: auto;
             padding: 0;
             background: none;
         }
