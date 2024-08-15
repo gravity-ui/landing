@@ -295,7 +295,14 @@ $border-color: rgba(255, 255, 255, 0.2);
     }
 
     &__new-label {
-        margin-inline-start: -4px;
+        [dir='ltr'] & {
+            margin-left: -4px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: -4px;
+        }
+
         color: var(--g-color-text-brand);
     }
 
