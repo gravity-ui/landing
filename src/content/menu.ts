@@ -2,6 +2,7 @@ export type MenuItem = {
     titleKey: string;
     url: string;
     isComingSoon?: boolean;
+    isNew?: boolean;
 };
 
 export const menu: MenuItem[] = [
@@ -25,5 +26,6 @@ export const menu: MenuItem[] = [
     {
         titleKey: 'menu_themer',
         url: '/themer',
+        isNew: true,
     },
 ];

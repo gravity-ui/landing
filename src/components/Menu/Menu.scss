@@ -294,6 +294,18 @@ $border-color: rgba(255, 255, 255, 0.2);
         }
     }
 
+    &__new-label {
+        [dir='ltr'] & {
+            margin-left: -4px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: -4px;
+        }
+
+        color: var(--g-color-text-brand);
+    }
+
     &__link-icon {
         align-self: baseline;
         margin-top: 4px;
