@@ -10,6 +10,8 @@ const TARGET_REPOS_VERSIONS = {
         process.env.DEV_BRANCH_COMPONENTS || `v${packagesVersions[Repos.Components]}`,
     [Repos.DateComponents]:
         process.env.DEV_BRANCH_DATE_COMPONENTS || `v${packagesVersions[Repos.DateComponents]}`,
+    [Repos.Navigation]:
+        process.env.DEV_BRANCH_NAVIGATION || `v${packagesVersions[Repos.Navigation]}`,
 };
 
 export type GetterProps = {componentName: string; repoName: Repos};
