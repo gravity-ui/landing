@@ -31,6 +31,7 @@ export type SandboxProps = {
 export type SandboxType = {
     component: ElementType;
     props: SandboxProps;
+    expandedContainer?: boolean;
 };
 
 export type Lib = {

@@ -1,6 +1,7 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 
 import {SandboxComponent} from '../../../components/SandboxComponent';
+import type {ComponentProps} from '../../../components/SandboxComponent/SandboxComponent';
 import {libs} from '../../../content/components';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -34,7 +35,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
 };
 
-export const SandboxPage = ({componentId, libId}: {componentId: string; libId: string}) => {
+export const SandboxPage = ({componentId, libId}: ComponentProps) => {
     return <SandboxComponent libId={libId} componentId={componentId} />;
 };
 

@@ -13,6 +13,7 @@ export const asideHeaderConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
+        expandedContainer: true,
         component: dynamic(() =>
             import('./AsideHeaderComponent').then((mod) => mod.AsideHeaderComponent),
         ),
