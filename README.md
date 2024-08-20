@@ -4,16 +4,29 @@ https://gravity-ui.com/
 
 ## Development
 
-```bash
+Add `.env` file to the root of project with the following content:
+
+```sh
+GITHUB_TOKEN=<TOKEN>
+```
+
+`<TOKEN>` is your [GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+
+Install dependencies:
+
+```sh
 npm ci
+```
+
+Start dev server:
+
+```sh
 npm run start
 ```
 
-#### ENV
+#### Optional env variables
 
-```bash
-# .env file
-
+```sh
 GITHUB_PROFILE="your profile" # default gravity-ui, target profile for pulling documentation from components
 
 # Dev branches for testing component documentation

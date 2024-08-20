@@ -43,6 +43,16 @@ const start = async () => {
         return;
     }
 
+    if (!process.env.GITHUB_TOKEN) {
+        console.warn(
+            `The ${CONTRIB_FILENAME} cannot be filled with real data. You need to put your GitHub PAT in the "GITHUB_TOKEN" environment variable to get the actual list of contributors.`,
+        );
+
+        fs.writeFileSync(contribDataPath, JSON.stringify([], null, 4), 'utf8');
+
+        return;
+    }
+
     const libsData = await readLibsData();
     const repos = await getOrganizationRepositories('gravity-ui');
 
