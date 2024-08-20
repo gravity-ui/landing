@@ -76,7 +76,7 @@ export const Layout: React.FC<LayoutProps> = ({
                     <Menu />
                 </div>
             )}
-            <div className={b('wrapper')} id={CONTENT_WRAPPER_ID}>
+            <div className={b('wrapper')} id={noScroll ? undefined : CONTENT_WRAPPER_ID}>
                 <div className={b('content', {'no-scroll': noScroll})}>{children}</div>
                 {!showOnlyContent && !hideFooter && <Footer />}
             </div>

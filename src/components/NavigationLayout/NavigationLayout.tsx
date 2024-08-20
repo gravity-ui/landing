@@ -110,7 +110,7 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
                     />
                 </div>
             </div>
-            <div className={b('content-wrap')}>
+            <div className={b('content-wrap')} id={CONTENT_WRAPPER_ID}>
                 <div className={b('content')}>
                     {children}
                     <Footer containerClass={b('footer')} />
