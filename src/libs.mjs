@@ -454,4 +454,19 @@ export const libs = [
             'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/CHANGELOG.md',
         mainBranch: 'master',
     },
+    {
+        id: 'webpack-i18n-assets-plugin',
+        githubId: 'gravity-ui/webpack-i18n-assets-plugin',
+        npmId: '@gravity-ui/webpack-i18n-assets-plugin',
+        title: 'Webpack i18n plugin',
+        primary: false,
+        landing: false,
+        tags: ['ui', 'infrastructure'],
+        storybookUrl: '',
+        readmeUrl:
+            'https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/README.md',
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
 ];
