@@ -22,7 +22,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm i @gravity-ui/uikit@latest @gravity-ui/components@latest @gravity-ui/date-components@latest @gravity-ui/icons
+          npm i @gravity-ui/uikit@latest @gravity-ui/components@latest @gravity-ui/date-components@latest @gravity-ui/icons@latest @gravity-ui/navigation@latest
           git config user.email ""
           git config user.name "Upgrade sandbox packages action"
           git checkout -b upgrade-sandbox-packages

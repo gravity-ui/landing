@@ -33,4 +33,5 @@ GITHUB_PROFILE="your profile" # default gravity-ui, target profile for pulling d
 DEV_BRANCH_UIKIT="dev-branch-name"
 DEV_BRANCH_COMPONENTS="dev-branch-name"
 DEV_BRANCH_DATE_COMPONENTS="dev-branch-name"
+DEV_BRANCH_NAVIGATION="dev-branch-name"
 ```

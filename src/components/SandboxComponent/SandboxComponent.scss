@@ -25,5 +25,9 @@ $block: '.#{variables.$ns}sandbox-component';
         &_theme_light {
             background: #fff;
         }
+
+        &_expanded {
+            padding: 0px;
+        }
     }
 }
