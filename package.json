@@ -9,7 +9,7 @@
     "@gravity-ui/components": "^3.7.0",
     "@gravity-ui/date-components": "^2.8.2",
     "@gravity-ui/icons": "^2.10.0",
-    "@gravity-ui/navigation": "^2.21.0",
+    "@gravity-ui/navigation": "^2.21.1",
     "@gravity-ui/page-constructor": "^5.2.0",
     "@gravity-ui/uikit": "^6.23.1",
     "@mdx-js/mdx": "^2.3.0",
