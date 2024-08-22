@@ -1,3 +1,4 @@
+import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
@@ -52,6 +53,9 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     const section = designSections.find((item) => item.id === sectionId);
     const article = section?.articles.find((item) => item.id === articleId);
 
+    const windowBreakpoint = useWindowBreakpoint();
+    const isMobile = windowBreakpoint < BREAKPOINTS.lg;
+
     if (!section || !article) {
         return null;
     }
@@ -72,7 +76,7 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     }, []);
 
     return (
-        <Layout title={`${section.title} – ${article.title}`}>
+        <Layout title={`${section.title} – ${article.title}`} hideFooter noScroll={!isMobile}>
             <DesignLayout sections={sections} sectionId={sectionId} articleId={articleId}>
                 <DesignArticle article={article} sectionId={sectionId} sections={sections} />
             </DesignLayout>

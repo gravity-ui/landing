@@ -1,3 +1,5 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
 @function opaque-color($desired-color, $background-color: #fff) {
     $r1: red($background-color);
     $g1: green($background-color);
@@ -30,5 +32,25 @@
 
         --g-color-private-brand-#{$alpha * 1000}: #{$color};
         --g-color-private-brand-#{$alpha * 1000}-solid: #{$solid-color};
+    }
+}
+
+@mixin window-breakpoint($breakpoint, $mode: 'l') {
+    @if $mode == 'ge' {
+        @media (min-width: map-get(pcVariables.$gridBreakpoints, $breakpoint)) {
+            @content;
+        }
+    } @else if $mode == 'g' {
+        @media (min-width: map-get(pcVariables.$gridBreakpoints, $breakpoint) + 1) {
+            @content;
+        }
+    } @else if $mode == 'le' {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, $breakpoint)) {
+            @content;
+        }
+    } @else {
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, $breakpoint) - 1) {
+            @content;
+        }
     }
 }

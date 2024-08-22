@@ -1,3 +1,4 @@
+import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {TextInput} from 'landing-uikit';
 import React from 'react';
 
@@ -36,6 +37,9 @@ export const Navigation = React.memo<NavigationProps>(
                 return acc;
             }, {});
         });
+
+        const windowBreakpoint = useWindowBreakpoint();
+        const isMobile = windowBreakpoint < BREAKPOINTS.lg;
 
         const [filteredSections, setFilteredSections] = React.useState(sections);
         React.useEffect(() => {
@@ -84,14 +88,15 @@ export const Navigation = React.memo<NavigationProps>(
 
         return (
             <div className={b()}>
-                <TextInput
-                    value={filterString}
-                    onUpdate={filterStringUpdateHandle}
-                    size="xl"
-                    placeholder={searchPlaceholder}
-                    hasClear
-                />
-
+                <div className={b('search-input')}>
+                    <TextInput
+                        value={filterString}
+                        onUpdate={filterStringUpdateHandle}
+                        size={isMobile ? 'xl' : 'l'}
+                        placeholder={searchPlaceholder}
+                        hasClear
+                    />
+                </div>
                 <div className={b('items')}>
                     {filteredSections.length > 0 ? (
                         filteredSections.map((section) => {

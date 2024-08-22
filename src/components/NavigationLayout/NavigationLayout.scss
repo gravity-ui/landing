@@ -1,23 +1,15 @@
-@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../mixins.scss' as baseMixins;
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}navigation-layout';
 
 #{$block} {
-    margin: 24px 0 0;
-
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-        margin: 0;
-
-        & &__layout-grid {
-            .container-fluid {
-                padding: 0;
-                .col {
-                    padding: 0;
-                }
-            }
-        }
-    }
+    display: flex;
+    margin-left: auto;
+    padding-left: 48px;
+    max-width: calc(1232px + (100vw - 1232px) / 2);
+    height: 100%;
+    box-sizing: content-box;
 
     &__mobile-navigation-control {
         display: none;
@@ -29,14 +21,6 @@ $block: '.#{variables.$ns}navigation-layout';
         font-size: 15px;
         line-height: 20px;
         cursor: pointer;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            display: flex;
-        }
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
-            margin: 12px 20px;
-        }
     }
 
     &__mobile-navigation-control-label {
@@ -61,10 +45,6 @@ $block: '.#{variables.$ns}navigation-layout';
     &__mobile-navigation-header {
         display: none;
         padding: 20px 0;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            display: flex;
-        }
     }
 
     &__mobile-navigation-header-title {
@@ -83,10 +63,69 @@ $block: '.#{variables.$ns}navigation-layout';
         cursor: pointer;
     }
 
+    &__navigation-wrap {
+        flex-basis: 24%;
+        max-width: 296px;
+        max-height: 100%;
+        padding: 0 21px 48px 16px;
+        background: var(--g-color-base-modal);
+        overflow: auto;
+    }
+
     &__navigation {
         display: block;
+    }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+    &__content-wrap {
+        flex-grow: 1;
+        overflow: auto;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-width: 904px;
+        min-height: calc(100% - 40px);
+        margin-right: auto;
+        padding-top: 40px;
+        padding-right: 48px;
+        padding-left: 32px;
+        box-sizing: content-box;
+    }
+
+    & &__footer {
+        padding: 0;
+
+        & .col {
+            padding: 0;
+        }
+    }
+
+    @include baseMixins.window-breakpoint('lg') {
+        flex-direction: column;
+        max-width: none;
+        height: auto;
+        min-height: 100%;
+        padding: 24px 40px 0;
+        box-sizing: border-box;
+
+        &__mobile-navigation-control {
+            display: flex;
+        }
+
+        &__mobile-navigation-header {
+            display: flex;
+        }
+
+        &__navigation-wrap {
+            flex-basis: auto;
+            max-width: initial;
+            padding: 0 8px;
+            background: none;
+        }
+
+        &__navigation {
             display: none;
 
             &_mobile-open {
@@ -102,13 +141,46 @@ $block: '.#{variables.$ns}navigation-layout';
                 background: #160d1b;
             }
         }
+
+        &__content-wrap {
+            display: flex;
+            flex-direction: column;
+            padding: 0 8px;
+            overflow: visible;
+        }
+
+        &__content {
+            flex-grow: 1;
+            max-width: none;
+            height: 100%;
+            min-height: initial;
+            margin: 0;
+            padding: 0;
+        }
     }
 
-    &__content {
-        padding-left: 16px;
+    @include baseMixins.window-breakpoint('sm') {
+        padding: 0;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            padding-left: 0;
+        &__navigation-wrap {
+            padding: 0;
+        }
+
+        &__content-wrap {
+            padding: 0;
+        }
+
+        &__mobile-navigation-control {
+            margin: 12px 20px;
+        }
+
+        & &__footer {
+            box-sizing: border-box;
+            padding: 0 16px;
+
+            & .col {
+                padding: 0 8px;
+            }
         }
     }
 }

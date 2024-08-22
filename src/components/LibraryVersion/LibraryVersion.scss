@@ -4,6 +4,7 @@
 $block: '.#{variables.$ns}library-version';
 
 #{$block} {
+    display: flex;
     padding: 2px 8px;
     font-size: 13px;
     font-weight: 400;

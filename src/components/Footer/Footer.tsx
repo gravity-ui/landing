@@ -1,4 +1,4 @@
-import {Col, Grid, Row} from '@gravity-ui/page-constructor';
+import {Col, Grid, GridProps, Row} from '@gravity-ui/page-constructor';
 import {Icon} from 'landing-uikit';
 import React from 'react';
 
@@ -11,8 +11,11 @@ import './Footer.scss';
 
 const b = block('footer');
 
-export const Footer: React.FC = () => (
-    <Grid>
+export const Footer: React.FC<Pick<GridProps, 'className' | 'containerClass'>> = ({
+    className,
+    containerClass,
+}) => (
+    <Grid className={className} containerClass={containerClass}>
         <Row>
             <Col sizes={{sm: 12}}>
                 <footer className={b()}>
