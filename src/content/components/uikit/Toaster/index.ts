@@ -31,7 +31,7 @@ const sandboxProps: Partial<ToasterSandboxProps> = {
     },
     theme: {
         type: 'select',
-        values: [undefined, 'info', 'success', 'warning', 'danger'].map((value) => ({
+        values: [undefined, 'info', 'success', 'warning', 'danger', 'utility'].map((value) => ({
             value: value === undefined ? 'undefined' : value,
             content: value === undefined ? 'none' : value,
         })),

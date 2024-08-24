@@ -17,7 +17,14 @@ export const cardConfig = {
         props: {
             theme: {
                 type: 'select',
-                values: mappingOptions(['normal', 'info', 'success', 'warning', 'danger']),
+                values: mappingOptions([
+                    'normal',
+                    'info',
+                    'success',
+                    'warning',
+                    'danger',
+                    'utility',
+                ]),
                 defaultValue: 'normal',
             },
             type: {
