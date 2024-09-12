@@ -28,4 +28,9 @@ export const menu: MenuItem[] = [
         url: '/themer',
         isNew: true,
     },
+    {
+        titleKey: 'menu_editor',
+        url: '/markdown-editor',
+        isNew: true,
+    },
 ];

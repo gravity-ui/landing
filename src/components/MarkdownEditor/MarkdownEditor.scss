@@ -1,0 +1,50 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}markdown-editor';
+
+#{$block} {
+    margin-block-start: calc(var(--g-spacing-base) * 8);
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: pcVariables.$indentXS;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            margin-bottom: pcVariables.$indentXXXS;
+        }
+    }
+
+    &__title {
+        font-size: 48px;
+        line-height: 56px;
+        font-weight: 600;
+        color: #fff;
+        margin: 0;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            font-size: 32px;
+            line-height: 48px;
+            margin-bottom: pcVariables.$indentXXXS;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        min-height: 300px;
+    }
+}
+
+.g-md-editor-component__editor-wrapper {
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px 20px 20px;
+    margin-bottom: 20px;
+}
+
+.yfm-editor {
+    color: var(--g-color-text-primary);
+}
