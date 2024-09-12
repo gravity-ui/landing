@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     return result;
 };
 
-export const ThemesPage = () => {
+export const MarkdownEditorPage = () => {
     useLocaleRedirect();
 
     const {t} = useTranslation();
@@ -35,4 +35,4 @@ export const ThemesPage = () => {
     );
 };
 
-export default ThemesPage;
+export default MarkdownEditorPage;
