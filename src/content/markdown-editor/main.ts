@@ -1,5 +1,6 @@
 /* eslint-disable */
 export const main = `
+Welcome to the editor! Start typing the character \`/\`
 
 ![](/static/images/markdown-editor/main.png =800x)
 
