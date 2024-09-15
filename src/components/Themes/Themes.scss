@@ -5,6 +5,8 @@
 $block: '.#{variables.$ns}themes';
 
 #{$block} {
+    position: relative;
+    z-index: 1;
     margin-block-start: calc(var(--g-spacing-base) * 16);
 
     &__title {
