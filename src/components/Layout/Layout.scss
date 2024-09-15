@@ -26,7 +26,6 @@ $block: '.#{variables.$ns}layout';
     &__content {
         position: relative;
         flex: 1;
-        z-index: 1;
 
         &_no-scroll {
             overflow: hidden;
