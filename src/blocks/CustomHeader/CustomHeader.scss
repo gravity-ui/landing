@@ -51,6 +51,10 @@ $block: '.#{variables.$ns}custom-header';
         border-radius: 24px;
         background-color: rgba(37, 27, 37, 0.5);
         backdrop-filter: blur(60px);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            margin-top: 32px;
+        }
     }
     &__banner-image {
         width: 100%;

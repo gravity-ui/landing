@@ -167,8 +167,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             <span>{t('actions_storybook')}</span>
                                         </Button>
                                     ) : null}
-                                    {lib.config.id !== 'icons' &&
-                                    availablePlaygrounds.includes(lib.config.id) ? (
+                                    {availablePlaygrounds.includes(lib.config.id) ? (
                                         <Button
                                             key="playground"
                                             className={b('button')}
