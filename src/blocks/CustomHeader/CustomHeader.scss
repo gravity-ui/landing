@@ -46,6 +46,19 @@ $block: '.#{variables.$ns}custom-header';
         }
     }
 
+    &__custom-news {
+        overflow: hidden;
+        border-radius: 24px;
+        background-color: rgba(37, 27, 37, 0.5);
+        backdrop-filter: blur(60px);
+    }
+    &__custom-news-banner {
+        width: 100%;
+    }
+    &__custom-news-text {
+        padding: 16px;
+    }
+
     &__news-title {
         @include pcStyles.heading4();
 

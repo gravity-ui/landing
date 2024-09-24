@@ -4,6 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
+import {availablePlaygrounds} from '../../[locale]/libraries/[libId]/playground';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import lastUpdateIcon from '../../assets/icons/last-update.svg';
@@ -164,6 +165,18 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                 size={16}
                                             />
                                             <span>{t('actions_storybook')}</span>
+                                        </Button>
+                                    ) : null}
+                                    {lib.config.id !== 'icons' &&
+                                    availablePlaygrounds.includes(lib.config.id) ? (
+                                        <Button
+                                            key="playground"
+                                            className={b('button')}
+                                            view="outlined"
+                                            size="xl"
+                                            href={`/libraries/${lib.config.id}/playground`}
+                                        >
+                                            <span>{t('actions_playground')}</span>
                                         </Button>
                                     ) : null}
                                 </div>

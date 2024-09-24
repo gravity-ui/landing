@@ -1,17 +1,17 @@
 import {MarkdownEditorView, useMarkdownEditor, wToolbarConfig} from '@gravity-ui/markdown-editor';
 import {mToolbarConfig} from '@gravity-ui/markdown-editor/_/bundle/config/markup.js';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, ThemeProvider} from '@gravity-ui/uikit';
+import {Button, ThemeProvider} from '@gravity-ui/uikit';
 import {toaster} from '@gravity-ui/uikit/toaster-singleton-react-18';
-import {ArrowUpRightFromSquare} from 'landing-icons';
 import {useTranslation} from 'next-i18next';
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 
 import {main} from '../../content/markdown-editor/main';
 import {EnvironmentContext} from '../../contexts';
 import {block, getLocaleLink} from '../../utils';
 
 import './MarkdownEditor.scss';
+import {useSticky} from './hooks';
 import './yfm.scss';
 
 const b = block('markdown-editor');
@@ -26,12 +26,23 @@ function Editor() {
         initialMarkup: main,
     });
 
+    // FIXME: This is a temporary solution, will be fixed after
+    // https://github.com/gravity-ui/markdown-editor/pull/369 */
+    const toolbarRef = useRef<HTMLElement | null>(null);
+    useEffect(() => {
+        const element = document.querySelector<HTMLElement>('.g-md-editor-component__toolbar');
+        if (element) {
+            toolbarRef.current = element;
+        }
+    }, []);
+    const sticky = useSticky(toolbarRef);
+
     return (
         <MarkdownEditorView
             autofocus
             toaster={toaster}
-            className={b()}
-            stickyToolbar
+            className={b({sticky})}
+            stickyToolbar={false}
             wysiwygToolbarConfig={wToolbarConfig}
             markupToolbarConfig={mToolbarConfig}
             settingsVisible
@@ -52,13 +63,11 @@ export const MarkdownEditor = () => {
                     <div className={b('actions')}>
                         <Button
                             href={getLocaleLink('/libraries/markdown-editor', i18n)}
-                            target="_blank"
                             className={b('library-button')}
                             size="xl"
                             view="outlined-contrast"
                         >
                             {t('goToLibrary')}
-                            <Icon data={ArrowUpRightFromSquare} size={16} />
                         </Button>
                     </div>
                 </Col>
