@@ -30,33 +30,40 @@ export type CustomHeaderProps = Animatable & {
         title?: string;
         items: NewsItem[];
     };
-    showCustomNewsBlock?: boolean;
+    banner?: BannerBlockProps;
 };
 
 export type CustomHeaderModel = CustomHeaderProps & {
     type: CustomBlock.CustomHeader;
 };
 
-interface CustomNewsBlockProps {
-    news?: {
-        title?: string;
-        items: NewsItem[];
-    };
+interface BannerImage {
+    href: string;
+    src: string;
+    alt: string;
+    title: string;
+}
+interface BannerBlockProps {
+    image: BannerImage;
+    title?: string;
+    content?: string;
 }
 
-const CustomNewsBlock: React.FC<CustomNewsBlockProps> = ({news}) => {
+const Banner: React.FC<BannerBlockProps> = ({image, title, content}) => {
+    const img = (
+        <img className={b('banner-image')} src={image.src} alt={image.alt} title={image.title} />
+    );
+
     return (
-        <div className={b('custom-news')}>
-            <a href="/libraries/markdown-editor/playground">
-                <img
-                    className={b('custom-news-banner')}
-                    src="./static/images/markdown-editor/banner.png"
-                    alt="markdown-editor"
-                />
-            </a>
-            <div className={b('custom-news-text')}>
-                <h2>{news?.items[0].title}</h2>
-                <p>{news?.items[0].content}</p>
+        <div className={b('banner')}>
+            {image.href ? <a href={image.href}>{img}</a> : img}
+            <div className={b('banner-text')}>
+                {title && <div className={b('banner-title')}>{title}</div>}
+                {content && (
+                    <div className={b('banner-content')}>
+                        <HTML>{content}</HTML>
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -67,17 +74,17 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     title,
     buttons = [],
     news,
-    showCustomNewsBlock = true,
+    banner,
 }) => {
     const {i18n} = useTranslation();
 
-    const showNewsBlock = !showCustomNewsBlock && news && news.items && news.items.length > 0;
+    const showNewsBlock = !banner && news && news.items && news.items.length > 0;
 
     return (
         <AnimateBlock className={b()} animate={animated}>
             <Grid>
                 <Row>
-                    <Col sizes={{all: 12, lg: showCustomNewsBlock || showNewsBlock ? 8 : 12}}>
+                    <Col sizes={{all: 12, lg: banner || showNewsBlock ? 8 : 12}}>
                         <h1 className={b('title')}>
                             <HTML>{title}</HTML>
                         </h1>
@@ -131,9 +138,9 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                             </div>
                         </Col>
                     )}
-                    {showCustomNewsBlock && (
+                    {banner && (
                         <Col sizes={{md: 12, lg: 4}}>
-                            <CustomNewsBlock news={news} />
+                            <Banner {...banner} />
                         </Col>
                     )}
                 </Row>

@@ -1,5 +1,9 @@
-import {MarkdownEditorView, useMarkdownEditor, wToolbarConfig} from '@gravity-ui/markdown-editor';
-import {mToolbarConfig} from '@gravity-ui/markdown-editor/_/bundle/config/markup.js';
+import {
+    MarkdownEditorView,
+    markupToolbarConfigs,
+    useMarkdownEditor,
+    wToolbarConfig,
+} from '@gravity-ui/markdown-editor';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, ThemeProvider} from '@gravity-ui/uikit';
 import {toaster} from '@gravity-ui/uikit/toaster-singleton-react-18';
@@ -44,7 +48,7 @@ function Editor() {
             className={b({sticky})}
             stickyToolbar={false}
             wysiwygToolbarConfig={wToolbarConfig}
-            markupToolbarConfig={mToolbarConfig}
+            markupToolbarConfig={markupToolbarConfigs.mToolbarConfig}
             settingsVisible
             editor={editor}
         />
