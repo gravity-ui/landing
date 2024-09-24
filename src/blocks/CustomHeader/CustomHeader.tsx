@@ -18,6 +18,7 @@ type CustomButton = ButtonProps & {
 };
 
 type NewsItem = {
+    title?: string;
     date: string;
     content: string;
 };
@@ -29,10 +30,43 @@ export type CustomHeaderProps = Animatable & {
         title?: string;
         items: NewsItem[];
     };
+    banner?: BannerBlockProps;
 };
 
 export type CustomHeaderModel = CustomHeaderProps & {
     type: CustomBlock.CustomHeader;
+};
+
+interface BannerImage {
+    href: string;
+    src: string;
+    alt: string;
+    title: string;
+}
+interface BannerBlockProps {
+    image: BannerImage;
+    title?: string;
+    content?: string;
+}
+
+const Banner: React.FC<BannerBlockProps> = ({image, title, content}) => {
+    const img = (
+        <img className={b('banner-image')} src={image.src} alt={image.alt} title={image.title} />
+    );
+
+    return (
+        <div className={b('banner')}>
+            {image.href ? <a href={image.href}>{img}</a> : img}
+            <div className={b('banner-text')}>
+                {title && <div className={b('banner-title')}>{title}</div>}
+                {content && (
+                    <div className={b('banner-content')}>
+                        <HTML>{content}</HTML>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export const CustomHeader: React.FC<CustomHeaderProps> = ({
@@ -40,16 +74,17 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     title,
     buttons = [],
     news,
+    banner,
 }) => {
     const {i18n} = useTranslation();
 
-    const showNewsBlock = news && news.items && news.items.length > 0;
+    const showNewsBlock = !banner && news && news.items && news.items.length > 0;
 
     return (
         <AnimateBlock className={b()} animate={animated}>
             <Grid>
                 <Row>
-                    <Col sizes={{all: 12, lg: showNewsBlock ? 8 : 12}}>
+                    <Col sizes={{all: 12, lg: banner || showNewsBlock ? 8 : 12}}>
                         <h1 className={b('title')}>
                             <HTML>{title}</HTML>
                         </h1>
@@ -78,7 +113,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                             </div>
                         ) : null}
                     </Col>
-                    {showNewsBlock ? (
+                    {showNewsBlock && (
                         <Col sizes={{md: 12, lg: 4}}>
                             <div className={b('news')}>
                                 {news.title ? (
@@ -102,7 +137,12 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                 )}
                             </div>
                         </Col>
-                    ) : null}
+                    )}
+                    {banner && (
+                        <Col sizes={{md: 12, lg: 4}}>
+                            <Banner {...banner} />
+                        </Col>
+                    )}
                 </Row>
             </Grid>
         </AnimateBlock>

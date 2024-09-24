@@ -26,6 +26,5 @@ export const menu: MenuItem[] = [
     {
         titleKey: 'menu_themer',
         url: '/themer',
-        isNew: true,
     },
 ];

@@ -46,6 +46,43 @@ $block: '.#{variables.$ns}custom-header';
         }
     }
 
+    &__banner {
+        overflow: hidden;
+        border-radius: 24px;
+        background-color: rgba(37, 27, 37, 0.5);
+        backdrop-filter: blur(60px);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            margin-top: 32px;
+        }
+    }
+    &__banner-image {
+        width: 100%;
+    }
+    &__banner-text {
+        padding: 12px 32px 32px;
+    }
+    &__banner-title {
+        @include pcStyles.heading4();
+        margin-bottom: 16px;
+    }
+    &__banner-content {
+        @include pcStyles.text-size(body-2);
+
+        a {
+            color: #ffbe5c;
+            text-decoration: none;
+
+            &:visited {
+                color: #ffbe5c;
+            }
+
+            &:hover {
+                color: #f3cb8f;
+            }
+        }
+    }
+
     &__news-title {
         @include pcStyles.heading4();
 
