@@ -11,7 +11,6 @@ import {useTranslation} from 'next-i18next';
 import React, {useEffect, useRef} from 'react';
 
 import {main} from '../../content/markdown-editor/main';
-import {EnvironmentContext} from '../../contexts';
 import {block, getLocaleLink} from '../../utils';
 
 import './MarkdownEditor.scss';
@@ -57,7 +56,6 @@ function Editor() {
 
 export const MarkdownEditor = () => {
     const {t, i18n} = useTranslation('markdown-editor');
-    const {isClient} = React.useContext(EnvironmentContext);
 
     return (
         <Grid className={b()}>
@@ -78,11 +76,9 @@ export const MarkdownEditor = () => {
             </Row>
             <Row>
                 <Col sizes={12}>
-                    {isClient && (
-                        <ThemeProvider theme="dark">
-                            <Editor />
-                        </ThemeProvider>
-                    )}
+                    <ThemeProvider theme="dark">
+                        <Editor />
+                    </ThemeProvider>
                 </Col>
             </Row>
         </Grid>
