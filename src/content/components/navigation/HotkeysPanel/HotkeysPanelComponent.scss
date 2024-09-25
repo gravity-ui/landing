@@ -1,0 +1,16 @@
+@use '../../../../variables';
+
+$block: '.#{variables.$ns}hotkeys-panel';
+
+#{$block} {
+    &__title {
+        display: flex;
+        gap: var(--g-spacing-2);
+        align-items: baseline;
+    }
+
+    &__empty {
+        margin: var(--g-spacing-10) auto 0;
+        color: var(--g-color-text-primary);
+    }
+}
