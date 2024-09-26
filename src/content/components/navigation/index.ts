@@ -7,6 +7,7 @@ import {actionBarConfig} from './ActionBar';
 import {allPagesPanelConfig} from './AllPagesPanel';
 import {asideHeaderConfig} from './AsideHeader';
 import {drawerConfig} from './Drawer';
+import {footerConfig} from './Footer';
 import {hotkeysPanelConfig} from './HotkeysPanel';
 import {mobileHeaderConfig} from './MobileHeader';
 import {settingsConfig} from './Settings';
@@ -21,6 +22,7 @@ const components: Component[] = [
     hotkeysPanelConfig,
     mobileHeaderConfig,
     settingsConfig,
+    footerConfig,
 ];
 
 export const navigationComponents: Lib = {
