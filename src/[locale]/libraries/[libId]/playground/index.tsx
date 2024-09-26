@@ -48,9 +48,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
 };
 
-// TODO: open with article
-// export const availablePlaygrounds = ['markdown-editor'];
-export const availablePlaygrounds = [] as string[];
+export const availablePlaygrounds = ['markdown-editor'];
 
 export const PlaygroundPage = ({libId}: {libId: string}) => {
     const hasPlayground = availablePlaygrounds.includes(libId);
