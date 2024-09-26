@@ -46,7 +46,7 @@ Or write your extension using a [convenient api](https://github.com/gravity-ui/m
 
 Easily connect to your React app with a hook:
 
-\`\`\`
+\`\`\`plaintext
 import React from 'react';
 import { useMarkdownEditor, MarkdownEditorView } from '@gravity-ui/markdown-editor';
 import { toaster } from '@gravity-ui/uikit/toaster-singleton-react-18';

@@ -1,13 +1,23 @@
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import {useTranslation} from 'next-i18next';
+import dynamic from 'next/dynamic';
 import React from 'react';
 import {useLocaleRedirect} from 'src/hooks/useLocaleRedirect';
 
 import {Layout} from '../../../../components/Layout/Layout';
-import {MarkdownEditor} from '../../../../components/MarkdownEditor/MarkdownEditor';
 import {getI18nPaths, getI18nProps, getLibsList} from '../../../../utils';
 
 const libs = getLibsList();
+
+const MarkdownEditor = dynamic(
+    () =>
+        import('../../../../components/MarkdownEditor/MarkdownEditor').then(
+            (mod) => mod.MarkdownEditor,
+        ),
+    {
+        ssr: false,
+    },
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {
