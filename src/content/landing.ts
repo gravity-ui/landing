@@ -81,17 +81,16 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     },
                 ],
             },
-            // TODO: open with article
-            // banner: {
-            //     image: {
-            //         src: './static/images/markdown-editor/banner.png',
-            //         href: '/libraries/markdown-editor/playground',
-            //         alt: 'markdown-editor',
-            //         title: 'markdown-editor',
-            //     },
-            //     title: t('home:banner_title'),
-            //     content: t('home:banner_content'),
-            // },
+            banner: {
+                image: {
+                    src: './static/images/markdown-editor/banner.png',
+                    href: '/libraries/markdown-editor/playground',
+                    alt: 'markdown-editor',
+                    title: 'markdown-editor',
+                },
+                title: t('home:banner_title'),
+                content: t('home:banner_content'),
+            },
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
