@@ -25,12 +25,22 @@ const options: PaletteOption[] = [
     {content: '🥶', value: 'value-20', title: 'cold-face'},
 ];
 
-export const PaletteComponent = ({size, columns, disabled, multiple}: PaletteComponentProps) => (
-    <Palette
-        size={size}
-        columns={columns}
-        disabled={disabled}
-        multiple={multiple}
-        options={options}
-    />
-);
+export const PaletteComponent = (props: PaletteComponentProps) => {
+    const {size, disabled, multiple} = props;
+    const propsColumns = Number(props.columns);
+    let columns = 1;
+
+    if (!Number.isNaN(propsColumns) && propsColumns > 1) {
+        columns = propsColumns;
+    }
+
+    return (
+        <Palette
+            size={size}
+            columns={columns}
+            disabled={disabled}
+            multiple={multiple}
+            options={options}
+        />
+    );
+};
