@@ -96,7 +96,7 @@ export const DEFAULT_COLORS: ThemeOptions['colors'] = {
         'text-brand-heavy': 'private.brand.700-solid',
         'text-brand-contrast': TEXT_CONTRAST_COLORS.light.black,
         'text-link': 'private.brand.600-solid',
-        'text-link-hover': 'private.orange.800-solid',
+        'text-link-hover': 'private.brand.800-solid',
         'text-link-visited': 'private.purple.550-solid',
         'text-link-visited-hover': 'private.purple.800-solid',
     },

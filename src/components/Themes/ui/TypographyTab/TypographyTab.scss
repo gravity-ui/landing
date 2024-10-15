@@ -17,8 +17,6 @@ $block: '.#{variables.$ns}typography-tab';
 
     &__font {
         &__additional-font-input {
-            width: 380px;
-
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
                 width: 100%;
             }
@@ -136,12 +134,6 @@ $block: '.#{variables.$ns}typography-tab';
         }
 
         &__setting-input {
-            width: 225px;
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
-                width: 210px;
-            }
-
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
                 width: 100%;
             }
