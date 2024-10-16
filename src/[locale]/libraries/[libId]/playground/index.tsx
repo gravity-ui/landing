@@ -18,6 +18,15 @@ const MarkdownEditor = dynamic(
         ssr: false,
     },
 );
+const GraphPlayround = dynamic(
+    () =>
+        import('../../../../components/GraphPlayground/GraphPlayground').then(
+            (mod) => mod.GraphPlayround,
+        ),
+    {
+        ssr: false,
+    },
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {
@@ -48,7 +57,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
 };
 
-export const availablePlaygrounds = ['markdown-editor'];
+export const availablePlaygrounds = ['markdown-editor', 'graph'];
 
 export const PlaygroundPage = ({libId}: {libId: string}) => {
     const hasPlayground = availablePlaygrounds.includes(libId);
@@ -62,6 +71,7 @@ export const PlaygroundPage = ({libId}: {libId: string}) => {
                 <>
                     <Layout title={availablePlaygrounds.includes(libId) ? t(libId) : ''}>
                         {libId === 'markdown-editor' && <MarkdownEditor />}
+                        {libId === 'graph' && <GraphPlayround />}
                     </Layout>
                 </>
             )}
