@@ -23,6 +23,7 @@
   "is_everything_set": "Все настроили?",
   "cancel": "Закрыть",
   "export_theme_config": "Экспорт конфигурации темы",
+  "export_theme_apply-theme-alert-title": "Как применить выбранную тему",
   "radius": "Радиус",
   "radius_regular": "Стандартный",
   "radius_circled": "Круглый",
