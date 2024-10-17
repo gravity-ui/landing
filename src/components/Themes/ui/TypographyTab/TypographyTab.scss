@@ -138,6 +138,10 @@ $block: '.#{variables.$ns}typography-tab';
                 width: 100%;
             }
         }
+
+        &__row {
+            width: calc(100% + var(--g-spacing-8));
+        }
     }
 
     &__advanced-button {
