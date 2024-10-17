@@ -4,6 +4,8 @@
 $block: '.#{variables.$ns}themable-settings';
 
 #{$block} {
+    width: calc(100% + var(--g-spacing-4));
+
     &__columns {
         width: 400px;
         max-width: 400px;

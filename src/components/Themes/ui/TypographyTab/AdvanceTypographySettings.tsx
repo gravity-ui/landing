@@ -31,7 +31,7 @@ export const AdvanceTypographySettings = () => {
     return (
         <Flex direction="column" className={b('wrapper')}>
             {Object.entries(advanced).map(([key, setting]) => (
-                <Row space={8} spaceRow={0} style={{width: '100%'}}>
+                <Row space={8} spaceRow={0} className={b('row')}>
                     <Col s="12" l="4">
                         <Row spaceRow={8} space={0}>
                             <Col s="12">

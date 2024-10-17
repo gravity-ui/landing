@@ -301,7 +301,7 @@ export const FontFamilyPicker = () => {
         <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
             <Text variant="display-2">Fonts</Text>
             {FONT_FAMILIES_OPTION.map((option) => (
-                <Row space={5} style={{width: '100%', alignItems: 'center'}}>
+                <Row space={0} spaceRow={2} style={{width: '100%', alignItems: 'center'}}>
                     <Col s="12" l="4">
                         <Text variant="body-3">{option.name}</Text>
                     </Col>
@@ -378,7 +378,7 @@ export const FontFamilyPicker = () => {
                 </Row>
             ))}
             {customFontFamilyType.map((fType) => (
-                <Row space={4} style={{width: '100%'}}>
+                <Row space={0} style={{width: '100%'}}>
                     <Col s="12" l="4">
                         <TextInput
                             size="xl"
