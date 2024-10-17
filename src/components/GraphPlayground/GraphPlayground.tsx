@@ -1,19 +1,16 @@
-import {LayoutColumns, LayoutSideContentRight} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, Text} from '@gravity-ui/uikit';
+import {Button, ThemeProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import {useState} from 'react';
 
 import {block, getLocaleLink} from '../../utils';
 
 import './GraphPlayground.scss';
+import {GraphPlayground} from './Playground/GraphPlayground';
 
 const b = block('graph');
 
 export const GraphPlayround = () => {
     const {t, i18n} = useTranslation('graph');
-
-    const [JSONVisible, setJSONVisible] = useState(true);
 
     return (
         <Grid className={b()} containerClass={b('container')}>
@@ -33,23 +30,9 @@ export const GraphPlayround = () => {
                 </Col>
             </Row>
             <Row className={b('playground')}>
-                <Button
-                    onClick={() => setJSONVisible((visible) => !visible)}
-                    view="flat"
-                    className={b('json-switcher')}
-                >
-                    <Icon data={JSONVisible ? LayoutSideContentRight : LayoutColumns} />
-                </Button>
-                <Col className={b('editor-wrap')}>
-                    <Text variant="header-1">Graph viewer</Text>
-                    <div className={b('editor')}></div>
-                </Col>
-                {JSONVisible && (
-                    <Col className={b('editor-wrap')}>
-                        <Text variant="header-1">JSON Editor</Text>
-                        <div className={b('editor')}></div>
-                    </Col>
-                )}
+                <ThemeProvider theme="dark">
+                    <GraphPlayground className={b('graph-viewer')} />
+                </ThemeProvider>
             </Row>
         </Grid>
     );

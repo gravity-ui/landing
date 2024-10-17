@@ -30,7 +30,7 @@
     "description_babel-preset": "Babel configuration preset for Gravity UI projects.",
     "description_browserslist-config": "Browserslist confugiration preset used in our services.",
     "description_markdown-editor": "A powerful tool for working with Markdown, which combines WYSIWYG and Markup modes.",
-    "description_graph": "Graph description",
+    "description_graph": "High-performance graph renderer with dynamic scale-aware detailization",
     "description_data-source": "A wrapper around data fetching.",
     "description_webpack-i18n-assets-plugin": "A plugin for Webpack that replaces calls to localization functions (i18n) with target texts."
 }

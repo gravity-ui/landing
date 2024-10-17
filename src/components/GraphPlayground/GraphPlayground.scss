@@ -50,9 +50,16 @@ $block: '.#{variables.$ns}graph';
         background: rgba(37, 27, 37, 1);
         border-radius: 24px;
         flex: 1;
-        min-height: 648px;
+        flex-direction: column;
+        min-height: 80vh;
+        max-height: 80vh;
         gap: 24px;
         position: relative;
+    }
+
+    &__graph-viewer {
+        flex: 1;
+        min-height: 100%;
     }
 
     &__json-switcher {

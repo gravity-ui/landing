@@ -30,14 +30,13 @@ export const libs = [
         id: 'graph',
         githubId: 'gravity-ui/graph',
         npmId: '@gravity-ui/graph',
-        title: 'Graph viewer',
+        title: 'Graph',
         primary: false,
         landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/graph/',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/graph/main/README.md',
-        changelogUrl:
-            'https://raw.githubusercontent.com/gravity-ui/graph/main/CHANGELOG.md',
+        changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/graph/main/CHANGELOG.md',
         mainBranch: 'main',
     },
     {
