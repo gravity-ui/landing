@@ -1,0 +1,11 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
+@use '../../../variables.scss';
+
+$settings: '.#{variables.$ns}graph-settings';
+
+#{$settings} {
+    &__popup {
+        padding: 16px;
+    }
+}

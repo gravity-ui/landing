@@ -51,6 +51,7 @@ $block: '.#{variables.$ns}graph';
         border-radius: 24px;
         flex: 1;
         min-height: 648px;
+        max-height: 648px;
         gap: 24px;
         position: relative;
     }
