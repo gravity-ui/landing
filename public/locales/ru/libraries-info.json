@@ -31,5 +31,6 @@
     "description_browserslist-config": "Пресет настройки Browserslist для проектов Gravity UI.",
     "description_markdown-editor": "Мощный инструмент для работы с Markdown, который сочетает в себе режимы WYSIWYG и разметки.",
     "description_data-source": "Библиотека-обертка над загрузкой данных.",
-    "description_webpack-i18n-assets-plugin": "Плагин для Webpack, который заменяет вызовы функций локализации (i18n) на целевые тексты."
+    "description_webpack-i18n-assets-plugin": "Плагин для Webpack, который заменяет вызовы функций локализации (i18n) на целевые тексты.",
+    "description_table": "Библиотека для отображения таблиц."
 }
