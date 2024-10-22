@@ -3,12 +3,12 @@ import {Database} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {block} from '../../../../utils';
+import {block as blockBem} from '../../../../utils';
 import {TGravityActionBlock} from '../generateLayout';
 
 import './ActionBlock.scss';
 
-const b = block('block');
+const b = blockBem('block');
 
 export function ActionBlockHtml({graph, block}: {graph: Graph; block: TGravityActionBlock}) {
     return (

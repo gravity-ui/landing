@@ -122,10 +122,10 @@ export function GraphPlayground({className}: {className: string}) {
     const [editorOpened, setEditorOpened] = useState(true);
 
     const updateVisibleConfig = useFn(() => {
-        const config = graph.rootStore.getAsConfig();
+        const currentConfig = graph.rootStore.getAsConfig();
         editorRef.current?.setContent({
-            blocks: config.blocks || [],
-            connections: config.connections || [],
+            blocks: currentConfig.blocks || [],
+            connections: currentConfig.connections || [],
         });
     });
 
@@ -137,10 +137,12 @@ export function GraphPlayground({className}: {className: string}) {
     useGraphEvent(graph, 'blocks-selection-change', ({changes}) => {
         editorRef.current?.updateBlocks([
             ...changes.add.map((id) => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 ...graph.rootStore.blocksList.getBlock(id)!,
                 selected: true,
             })),
             ...changes.removed.map((id) => ({
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 ...graph.rootStore.blocksList.getBlock(id)!,
                 selected: false,
             })),
@@ -280,18 +282,18 @@ export function GraphPlayground({className}: {className: string}) {
     });
 
     const updateGraphSize = async (value: string) => {
-        let config;
+        let nextConfig;
         switch (value) {
             case graphSizeOptions[0].value: {
-                config = generatePlaygroundActionBlocks(0, 5);
+                nextConfig = generatePlaygroundActionBlocks(0, 5);
                 break;
             }
             case graphSizeOptions[1].value: {
-                config = generatePlaygroundActionBlocks(10, 100);
+                nextConfig = generatePlaygroundActionBlocks(10, 100);
                 break;
             }
             case graphSizeOptions[2].value: {
-                config = generatePlaygroundActionBlocks(23, 150);
+                nextConfig = generatePlaygroundActionBlocks(23, 150);
                 setEditorOpened(false);
                 break;
             }
@@ -300,14 +302,13 @@ export function GraphPlayground({className}: {className: string}) {
                     useBezierConnections: false,
                 });
                 setEditorOpened(false);
-                config = generatePlaygroundActionBlocks(50, 150);
+                nextConfig = generatePlaygroundActionBlocks(50, 150);
                 break;
             }
         }
-        if (config) {
-            // await update editiorOpened
+        if (nextConfig) {
             await new Promise((resolve) => setTimeout(resolve, 200));
-            setEntities({blocks: config?.blocks, connections: config?.connections});
+            setEntities({blocks: nextConfig?.blocks, connections: nextConfig?.connections});
             graph.zoomTo('center', {transition: 500});
             updateVisibleConfig();
         }

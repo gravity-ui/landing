@@ -18,7 +18,6 @@ export function TextBlockHtml({graph, block}: {graph: Graph; block: TGravityText
                 <Text className={b('text')} ellipsis variant="body-1">
                     {block.meta?.text}
                 </Text>
-                {/* <Icon className="icon" data={Xmark}  size={18}/> */}
             </Flex>
         </GraphBlock>
     );

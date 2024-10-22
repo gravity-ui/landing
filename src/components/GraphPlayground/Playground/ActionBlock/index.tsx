@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import {CanvasBlock, EAnchorType, TAnchor, TBlockId, TPoint, layoutText} from '@gravity-ui/graph';
 import {EventedComponent} from '@gravity-ui/graph/build/mixins/withEvents';
 import React from 'react';

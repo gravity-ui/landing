@@ -1,7 +1,3 @@
-// import { TBlock } from "../../components/canvas/blocks/Block";
-// import { TGraphConfig } from "../../graph";
-// import { EAnchorType } from "../../store/anchor/Anchor";
-
 import {EAnchorType, type TBlock, TConnection} from '@gravity-ui/graph';
 
 export const GravityActionBlockIS = 'block-action';
