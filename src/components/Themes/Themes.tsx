@@ -92,9 +92,7 @@ export const Themes = () => {
                     </Button>
                 </Flex>
 
-                <Row className={b('content')}>
-                    <Col sizes={12}>{TabComponent ? <TabComponent /> : null}</Col>
-                </Row>
+                <div className={b('content')}>{TabComponent ? <TabComponent /> : null}</div>
             </Grid>
             <ThemeExportDialog isOpen={isExportDialogVisible} onClose={toggleExportDialog} />
         </ThemeCreatorContextProvider>

@@ -23,6 +23,7 @@
   "is_everything_set": "Is everything set?",
   "cancel": "Cancel",
   "export_theme_config": "Export theme config",
+  "export_theme_apply-theme-alert-title": "How to apply the theme",
   "radius": "Radius",
   "radius_regular": "Regular",
   "radius_circled": "Circled",

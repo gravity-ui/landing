@@ -94,6 +94,15 @@ export const ColorPickerInput = ({
         validateAndChangeExternal(inputValue);
     }, [inputValue, validateAndChangeExternal]);
 
+    const onKeyPress = useCallback(
+        (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (event.key === 'Enter') {
+                validateAndChangeExternal(inputValue);
+            }
+        },
+        [inputValue, validateAndChangeExternal],
+    );
+
     useEffect(() => {
         // Dont validate if not initial value
         if (!value && !defaultValue) {
@@ -109,6 +118,7 @@ export const ColorPickerInput = ({
                 className={b('text-input')}
                 name={name}
                 value={inputValue}
+                onKeyPress={onKeyPress}
                 errorPlacement="inside"
                 errorMessage={errorMessage || t('color-input_validation-format-error')}
                 validationState={validationError}
