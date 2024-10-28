@@ -1,0 +1,77 @@
+Your service team can use the changelog to inform users about changes.
+
+The changelog is displayed once when the user opens the service page. We do not provide an option to reopen the changelog page. Implement it independently if needed.
+
+Because the changelog is displayed in a modal window, it follows the rules for closing and scaling modal windows.
+
+## Elements
+
+The changelog is a modal window of size M with chronologically arranged posts. Each post has:
+
+1. Publication date
+2. "New" [label](https://gravity-ui.com/design/guides/label) (optional)
+3. Post header
+4. Post image (optional)
+5. Post text
+6. Action [button](https://gravity-ui.com/design/guides/button) (optional).
+
+![Elements](/static/images/design/ChangelogDialog/ChangelogDialog1.png)
+
+### Publication date
+
+From the publication date, the user can understand when a particular change to the service occurred. By default, the date is in the DD Mon YYYY format. You can also use other date formats to match the service locale.
+
+### Label
+
+Use the "New" label for new posts. The service determines which posts to consider new and mark with this label. In the text, you can use other wordings, different from "New".
+
+### Post header
+
+The post header is used for a brief description of the service change. The header can have any length. We do not recommend:
+
+- To use headers that take up more than one line (contain more than 70 characters), as this worsens the readability of the text.
+- To copy news text to the header.
+
+The header uses the text-subheader-3 style. We do not provide other text styles for headers.
+
+### Image
+
+The image is optional and has fixed dimensions of 516x240px. You can use JPG and PNG files as images (GIF images and video files are not supported). Use images when you need to illustrate the post subject. One image is used for both light and dark interface themes.
+
+If you upload an image larger than 516x240px, it will be scaled and centered on the larger side.
+
+Considering retina displays, we recommend uploading images scaled up twice on each side, i.e., 1032x480px.
+
+### Post text
+
+The post text follows the image and can be of any length. We do not recommend:
+
+- To use very long texts (more than 500 characters). If you cannot shorten the text to the recommended length, you can add links to the documentation within the text or provide a button after the text to navigate to the full text.
+- To create subheaders. Given that the recommended text length is concise, you do not need to split text into sections using subheaders.
+
+The text uses the 'text-body-1' style. We do not provide other text styles, but you can add formatting, i.e., create bulleted and numbered lists, add strike-through, underline, bold, and italic.
+
+### Action button
+
+The action button is optional and is located below the post text. Use it to navigate to the full text of the post.
+
+Only buttons of size M are supported. The button can be of any type, with or without an icon. Stick to a single button type.
+
+We do not support multiple buttons.
+
+### Other elements
+
+Moreover, under the modal window header, you can add a "View full changelog" link to a changelog page (this can be a separate service page, a storybook, or an external documentation service).
+
+## Usage recommendations
+
+Use changelog:
+
+- When you need to inform the user about significant changes in the service.
+- When you need to keep the user abreast of minor changes. In this case, consider showing the changelog periodically and telling about any minor changes since the latest changelog entry.
+- When you need to remind the user about changes in the service and increase their awareness of previous releases.
+
+We do not recommend:
+
+- To use the changelog for onboarding users.
+- To use the changelog to inform the user about every minor change in the service.

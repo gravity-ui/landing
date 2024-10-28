@@ -1,0 +1,175 @@
+A component for selecting one value or a set of values from a specified list. When the user clicks the control, a drop-down list opens with a set of values for the user to choose from.
+
+## Use cases
+
+![1.png](/static/images/design/Select/select-0001.png)
+
+**When to use?**
+
+- When you expect the user to select values from a specified list.
+
+**When to avoid?**
+
+- When you want to show all values to select from. For such use cases, use [Radio](/design/guides/radio), [Checkbox](/design/guides/checkbox), or Radio Button.
+
+## Options
+
+**Single selection**
+
+![2.png](/static/images/design/Select/select-0002.png)
+
+- Use for selecting a single value from a list.
+- After the user selects a value, the drop-down list is closed.
+- The control shows the selected value.
+
+**Multiple selection**
+
+![3.png](/static/images/design/Select/select-0003.png)
+
+- Use when you expect the user to select more than one value from a list.
+- In the list, the selected value is marked with a checkmark on the left.
+- The control shows the selected values separated by commas.
+- To close the drop-down list and apply the selected values, the user clicks the blank space outside or the confirmation button in the list (if provided).
+
+## Types
+
+The control comes in two types: **Normal** and **Clear**, both having the same set of functions but looking different and applied depending on the context.
+
+![4.png](/static/images/design/Select/select-0004.png)
+
+**Normal**
+
+- The most frequently used type.
+- The distinctive feature is that the component has a 1 px border, and elements inside (text and chevron) have margins from the edges.
+- Use this component in forms where you need to separate form elements using margins.
+
+**Clear**
+
+- The distinctive feature is that the component has no border, and elements inside (text and chevron) are flush with the input field edges.
+- Use it when the Normal type creates visual noise.
+- Using this type, make sure that the component meaning remains clear to the user.
+
+## Structure
+
+![5.png](/static/images/design/Select/select-0005.png)
+
+1. Inline label
+2. Value
+3. Clear icon
+4. Chevron
+5. Error icon
+6. Error description
+
+### Inline label
+
+   ![6.png](/static/images/design/Select/select-0006.png)
+
+   - An optional element.
+   - Adds an explanation to the select field name.
+   - It can replace the external label in the form.
+
+### Value
+
+   ![7.png](/static/images/design/Select/select-0007.png)
+
+   - A mandatory element.
+   - By default, it is a hint to help the user understand what can be selected from the list of values.
+   - The place where the selected value or values are displayed.
+
+### Clear icon
+
+   ![8.png](/static/images/design/Select/select-0008.png)
+
+   - An optional element.
+   - Use it to quickly clear the component of selected values or value options without invoking the dropdown list.
+   - It can show up when at least one value has been selected.
+   - After clearing, the focus remains in the component.
+   - It changes color on hover.
+
+### Chevron
+
+   ![9.png](/static/images/design/Select/select-0009.png)
+
+   - A mandatory element.
+   - Use it to differentiate the component from other visually similar components (for example, [TextInput](/design/guides/text-input)), to identify the component in the form.
+   - The component can only be with a chevron, for instance, when you need a compact view.
+   - Despite the presence of a chevron, the entire component area is clickable.
+
+### Error icon
+
+   ![10.png](/static/images/design/Select/select-0010.png)
+
+   - It is displayed only in the Inline Error state
+   - It works together with an error description Tooltip shown on icon hover. It helps to keep the user informed but save space.
+
+### Error description
+
+   ![11.png](/static/images/design/Select/select-0011.png)
+
+   - It shows up only in the Outline Error state.
+   - The error description is placed at the bottom left of the field when you need to immediately display the error cause.
+
+## States
+
+It has several states: **Suggest, Default, Hover, Disabled, Active, Inline Error, Outline Error.**
+
+![12.png](/static/images/design/Select/select-0012.png)
+
+1. **Suggest.** Inactive state, when the user is not interacting with the component directly and has selected nothing in it. In this state, it can hint the user what they can select.
+2. **Default.** Inactive state, when the user is not interacting with the component directly and already selected something in it. In this state, the hint value changes to the selection from the dropdown list.
+3. **Hover.** Active state when the user moves the cursor over the component area.
+4. **Disabled.** Inactive state of the component when the user cannot interact with it.
+5. **Active.** Active state enabled when the user has clicked the control. A dropdown list opens on click.
+6. **Outline error.** A component state triggered by a validation error, which is displayed at the bottom of the field with an explanation of what has happened.
+7. **Inline error.** A component state triggered by a validation error, but the error explanation does not show up, only a special icon. When you hover over the icon, a Tooltip with the error appears.
+
+## Sizes
+
+![13.png](/static/images/design/Select/select-0013.png)
+
+There are four component sizes: **S, M, L, XL**.
+
+| Size | Height | Text style | Rounding |
+| --- | --- | --- | --- |
+| S | 24 | Body 1 | 5 |
+| M | 28 | Body 1 | 6 |
+| L | 36 | Body 1 | 8 |
+| XL | 44 | Body 2 | 10 |
+
+The size choice determines the height and rounding corners of the control, its paddings, and text size.
+
+The corner radius depends on the size and is set by variables.
+
+1. **S.** Use it where the standard control is too large (tables, small cards).
+2. **M.** This is the main size, use it in most forms and filters.
+3. **L.** Very rarely used.
+4. **XL.** Use it in communication environments, i.e., websites and landing pages.
+
+## Usage recommendations
+
+1. **Working with the field**
+   - Choose the **field width** depending on the content size. For instance, you can make the element wider for long values or multiple selection.
+   - Use **one size** with other complementary components in the form. If you chose to work with M, the other components should be of the same size.
+   - Use the **cross icon for clearing** multiple selection: this is more convenient and fast.
+   - You cannot change the height of the control. We only provide the **fixed field size**.
+
+2. **Outline label**
+
+   ![14.png](/static/images/design/Select/select-0014.png)
+
+   - A brief field name (should not exceed one line).
+   - When using it in forms, align it with the value inside the field.
+
+3. **Hint with a tooltip**
+
+   ![15.png](/static/images/design/Select/select-0015.png)
+
+   - Additional hint about the choice, shown when hovering over the question mark icon.
+   - Use it when you need to explain the label.
+
+4. **Description**
+
+   ![16.png](/static/images/design/Select/select-0016.png)
+
+   - It can be located below the field or to the right of the field.
+   - Use it in special cases to make additional clarifications about the choice or give explanations for the chosen values.

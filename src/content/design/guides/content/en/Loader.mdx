@@ -1,0 +1,52 @@
+{/* ![Example](/static/images/design/Loader/Example.gif) */}
+
+An indicator that shows the progress of a task, such as loading, unloading, processing, and so on, until the interface is ready for user interaction. The indicator does not show measurable progress; rather, it indicates that the process has not yet been completed and is still ongoing.
+
+### **Application**
+
+✅ **When to use**
+
+1. When loading takes more than 300 ms. The loader should not be displayed for extremely short intervals, as this causes blinking that might be uncomfortable for the user. If you choose to show the loader, avoid the blinking effect. If the loading takes less than 300 ms, don't display anything.
+2. When the type of content cannot be predicted.
+3. When using a loader for asynchronous loading, it should be displayed exactly where the loading is taking place. The loading of a single element should not block the rest of the interface.
+
+{/* ![Application](/static/images/design/Loader/Application.png) */}
+
+
+🚫 **When not to use**
+
+1. If the loading time exceeds 10 seconds and the exact duration is known, a progress bar should be displayed.
+2. If the type of content can be predicted, consider using a skeleton.
+3. When loading is initiated by a button click, using the state of the button as feedback is sufficient, especially in modal windows.
+
+### Sizes
+
+![Sizes](/static/images/design/Loader/Sizes.png)
+
+1. **S** — Basic size. Used in input fields, pop-up windows, table cells, and other limited-space areas.
+2. **M** — medium size size, used in cards and tables
+3. **L** — large size, used on entire pages and large modal windows (dialog)
+
+### Examples of applications
+
+1. When the content has not yet been displayed.
+
+   ![Example](/static/images/design/Loader/Example5.png)
+
+2. Over the content if it's being updated or modified. Here’s how to use the loader over the content:
+
+   ![Content transparency 30%](/static/images/design/Loader/Example1.png)
+
+   Content transparency 30%
+
+   {/* ![Loader on a background layer](/static/images/design/Loader/Example2.png)
+
+   Loader on a background layer */}
+
+3. Try to avoid layering the loader on the content if there is space for this.
+
+   ![Example](/static/images/design/Loader/Example3.png)
+
+4. If the hint provides useful information, such as an explanation of the ongoing process, it may be included. Since the loader already shows the user that loading is in progress, no additional disclosures are needed.
+
+   ![Example](/static/images/design/Loader/Example4.png)
