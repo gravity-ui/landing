@@ -28,13 +28,8 @@ export const ThemableSettings: React.FC<ThemableSettingsProps> = ({title, rows, 
     return (
         <Flex gap={9} className={b()}>
             <Row space={4} style={{width: '100%'}}>
-                <Col l={4}>
-                    <ThemableSettingsRows
-                        className={b('columns')}
-                        title={title}
-                        rows={rows}
-                        appendNode={addButton}
-                    />
+                <Col l={4} className={b('columns')}>
+                    <ThemableSettingsRows title={title} rows={rows} appendNode={addButton} />
                 </Col>
 
                 <Col l={4}>

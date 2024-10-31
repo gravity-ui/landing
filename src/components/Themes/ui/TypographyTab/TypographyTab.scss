@@ -28,6 +28,30 @@ $block: '.#{variables.$ns}typography-tab';
             }
         }
 
+        &__additional-font-label {
+            padding-inline-end: var(--g-spacing-4);
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+                padding-inline-end: 0;
+                margin-block-end: var(--g-spacing-4);
+            }
+        }
+
+        &__additional-font-delete-btn {
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                display: none;
+            }
+
+            &_mobile {
+                @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+                    display: none;
+                }
+                @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                    display: block;
+                }
+            }
+        }
+
         &__font-card {
             &__text {
                 @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
@@ -63,6 +87,10 @@ $block: '.#{variables.$ns}typography-tab';
         &__custom-font-radio-button {
             --g-border-radius-xl: 8px;
             align-self: flex-start;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                width: 100%;
+            }
         }
 
         &__custom-font-textarea {
@@ -81,7 +109,7 @@ $block: '.#{variables.$ns}typography-tab';
         --g-text-display-4-line-height: 52px !important;
 
         &__wrapper {
-            padding: 80px;
+            padding: 60px;
             margin-block-start: 0 !important;
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
