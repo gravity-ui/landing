@@ -1,3 +1,4 @@
+import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {Alert, Dialog, Flex, Text} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
@@ -23,6 +24,7 @@ interface ThemeExportDialogProps {
 export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({isOpen, onClose}) => {
     const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
+    const breakpoint = useWindowBreakpoint();
 
     const [format] = React.useState<ExportFormat>('scss');
 
@@ -32,7 +34,12 @@ export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({isOpen, onC
     );
 
     return (
-        <Dialog className={b()} open={isOpen} onClose={onClose} size="l">
+        <Dialog
+            className={b()}
+            open={isOpen}
+            onClose={onClose}
+            size={breakpoint >= BREAKPOINTS.lg ? 'l' : 'm'}
+        >
             <Dialog.Header caption={t('export_theme_config')} />
             <Dialog.Body>
                 <Flex direction="column" gap={4}>

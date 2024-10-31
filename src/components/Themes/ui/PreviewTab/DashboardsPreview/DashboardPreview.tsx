@@ -52,7 +52,7 @@ export const DashboardPreview = ({justify}: {justify: string}) => {
                     <Row space={5}>
                         {[barXDashboardData, linesDashboardData, areaDashboardData].map(
                             (data, index) => (
-                                <Col s="12" m="6" l="4">
+                                <Col s="12" m="6" l="4" key={index}>
                                     <StyledCard key={index}>
                                         <div className={b('dashboard-wrapper')}>
                                             <ChartKit type="d3" data={data} />
@@ -64,7 +64,7 @@ export const DashboardPreview = ({justify}: {justify: string}) => {
                     </Row>
                     <Row space={5}>
                         {[pieDashboardData, dotsDashboardData].map((data, index) => (
-                            <Col s="12" m="6">
+                            <Col s="12" m="6" key={index}>
                                 <StyledCard key={index}>
                                     <div className={b('dashboard-wrapper')}>
                                         <ChartKit type="d3" data={data} />

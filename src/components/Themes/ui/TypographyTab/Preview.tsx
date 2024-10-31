@@ -164,7 +164,11 @@ export const Preview = () => {
                                             {title}
                                         </Text>
                                         {variants.map((variant) => (
-                                            <Text variant={variant.variant} key={variant.variant}>
+                                            <Text
+                                                variant={variant.variant}
+                                                key={variant.variant}
+                                                style={{whiteSpace: 'nowrap'}}
+                                            >
                                                 {variant.title}
                                             </Text>
                                         ))}
