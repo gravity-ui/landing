@@ -24,6 +24,7 @@
     "description_ui-logger": "Simple client-side logger.",
     "description_oauth-clients": "Client OAuth library that provides convenient abstraction on top of auth flow.",
     "description_i18n": "Internationalization helpers of Gravity UI projects.",
+    "description_eslint-config": "ESLint configuration preset for Gravity UI projects.",
     "description_tsconfig": "TypeScript compiler configuration preset for Gravity UI projects.",
     "description_prettier-config": "Prettier configuration preset for Gravity UI projects.",
     "description_stylelint-config": "Stylelint configuration preset for Gravity UI projects.",
