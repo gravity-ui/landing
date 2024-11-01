@@ -4,7 +4,7 @@
     "news_title": "Recent updates",
     "banner_title": "Introducing MarkdownEditor",
     "banner_content": "Markdown-editor combines two modes.<br />It allows you to create and edit content in a convenient visual form while retaining full control over the underlying markup.<br /><br /><a href=\"/libraries/markdown-editor/playground\">Test it on the playground ✨</a>.",
-    "news_items_item1": "⁉️ We are planning to hold our first webinar (firstly in Russian). We would greatly appreciate your <a href=\"https://clck.ru/3EKYsq\">assistance with questions</a>.",
+    "news_items_item1": "We are planning to hold our first webinar (firstly in Russian). We would greatly appreciate your <a href=\"https://clck.ru/3EKYsq\">assistance with questions</a>.",
     "news_items_item2": "Meet our new major library, Graph! A really <a href=\"/libraries/graph/playground\">high-performance renderer</a> with dynamic, scale-aware detail.",
     "news_items_item3": "<a href=\"/libraries/markdown-editor/playground\">Introducing MarkdownEditor.</a> It allows you to create and edit content in a convenient visual form while retaining full control over the underlying markup.",
     "features_feature1_title": "Built on real-life experience",
