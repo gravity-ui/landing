@@ -1,0 +1,39 @@
+Кнопка копирования в буфер обмена является модификацией компонента `Button` типа `Flat` с иконкой `ClipboardIcon`, вынесенной отдельно.
+
+### Иконка
+
+Внутри `ClipboardButton` находится компонент `ClipboardIcon` — иконка с анимацией и двумя состояниями: `Success` и `Error`. Если кнопку копирования нужно стилизовать, используется стандартный компонент кнопки `Button` с иконкой `ClipboardIcon`.
+
+### Состояния
+
+![States](/static/images/design/ClipboardButton/States.png)
+
+### Размеры
+
+Компонент поддерживает стандартные размеры кнопок: `XS`, `S`, `M`, `L` и `XL`.
+
+### Поведение
+
+Если копирование контента не частотное действие и иконка ухудшает читаемость, кнопка копирования скрыта и становится видимой только при приближении курсора
+
+![In tables, the icon is hidden until the cursor is placed over a cell with content](/static/images/design/ClipboardButton/Use-cases2.png)
+
+В таблицах иконка скрыта и показывается, когда курсор находится в ячейке с контентом
+
+### Тултип
+
+У компонента есть отключаемый тултип. Используется, чтобы подсказать, какой контент будет скопирован.
+
+![The task key is copied in the Yandex Tracker service](/static/images/design/ClipboardButton/Tooltip.png)
+
+В сервисе Yandex Tracker копируется ключ задачи.
+
+### Примеры использования
+
+В документации копируется блок кода:
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases1.png)
+
+В таблицах копируются значения ячеек:
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases2.png)
