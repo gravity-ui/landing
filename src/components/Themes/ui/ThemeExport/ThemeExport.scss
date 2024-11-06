@@ -1,0 +1,32 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-export';
+
+#{$block} {
+    &__dialog {
+        --g-border-radius-l: 8px;
+    }
+
+    &__sheet {
+        --g-sheet-content-padding: var(--g-spacing-5);
+
+        &__save-btn {
+            --g-border-radius-xl: 8px;
+            left: 0;
+            right: 0;
+            margin-inline: auto;
+            width: calc(100% - var(--g-spacing-4));
+            position: absolute;
+            bottom: var(--g-spacing-2);
+        }
+    }
+
+    &__code {
+        --code-example-max-height: 620px;
+        border-radius: 8px;
+    }
+
+    &__apply-theme-message {
+        white-space: pre-line;
+    }
+}

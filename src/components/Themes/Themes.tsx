@@ -3,6 +3,7 @@ import {ArrowUpFromSquare} from 'landing-icons';
 import {Button, Flex, Icon, Text} from 'landing-uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
 import {block} from '../../utils';
 import {TagItem, Tags} from '../Tags/Tags';
@@ -13,7 +14,6 @@ import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {PreviewTab} from './ui/PreviewTab/PreviewTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
-import {ThemeExportDialog} from './ui/ThemeExportDialog/ThemeExportDialog';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
 
 const b = block('themes');
@@ -75,13 +75,13 @@ export const Themes = () => {
         }
 
         const onScroll = () => {
-            console.log('headerRef?.current?.offsetTop', headerRef?.current?.offsetTop);
             if (headerRef?.current?.offsetTop && headerRef.current.offsetTop > 136) {
                 headerRef.current?.classList.add(b('header-actions-wrapper_sticky'));
             } else {
                 headerRef.current?.classList.remove(b('header-actions-wrapper_sticky'));
             }
         };
+
         contentEl.addEventListener('scroll', onScroll);
 
         return () => {
@@ -134,7 +134,7 @@ export const Themes = () => {
                 <div className={b('grid__content')}>{TabComponent ? <TabComponent /> : null}</div>
             </Grid>
 
-            <ThemeExportDialog isOpen={isExportDialogVisible} onClose={toggleExportDialog} />
+            <ThemeExport isOpen={isExportDialogVisible} onClose={toggleExportDialog} />
         </ThemeCreatorContextProvider>
     );
 };
