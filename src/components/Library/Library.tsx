@@ -15,7 +15,7 @@ import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {ContributorList} from '../../components/ContributorList';
 import {Link} from '../../components/Link';
-import {Lib, block, getLocaleLink, getMaintainers} from '../../utils';
+import {Lib, block, getAnchor, getLocaleLink, getMaintainers} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -103,7 +103,11 @@ export const Library: React.FC<Props> = ({lib}) => {
 
     const rewriteLinks = React.useCallback(
         (link: string) => {
-            if (ABSOLUTE_LINK_REG_EXP.test(link) || HASH_REG_EXP.test(link)) {
+            if (HASH_REG_EXP.test(link)) {
+                return `#${getAnchor(link)}`;
+            }
+
+            if (ABSOLUTE_LINK_REG_EXP.test(link)) {
                 return link;
             }
 
