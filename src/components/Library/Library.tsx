@@ -103,17 +103,13 @@ export const Library: React.FC<Props> = ({lib}) => {
 
     const rewriteLinks = React.useCallback(
         (link: string) => {
-            if (ABSOLUTE_LINK_REG_EXP.test(link)) {
+            if (ABSOLUTE_LINK_REG_EXP.test(link) || HASH_REG_EXP.test(link)) {
                 return link;
             }
 
             const githubId = lib.config?.githubId || null;
             if (!githubId) {
                 return link;
-            }
-
-            if (HASH_REG_EXP.test(link)) {
-                return `${GITHUB_URL}${githubId}?tab=readme-ov-file${link}`;
             }
 
             const githubRepoUrl = `${GITHUB_URL}${githubId}/blob/main/`;
