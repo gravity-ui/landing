@@ -1,4 +1,5 @@
 @use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
 $block: '.#{variables.$ns}theme-export';
 
@@ -23,6 +24,11 @@ $block: '.#{variables.$ns}theme-export';
 
     &__code {
         --code-example-max-height: 620px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            --code-example-max-height: auto;
+        }
+
         border-radius: 8px;
     }
 
