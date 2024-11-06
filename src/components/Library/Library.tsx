@@ -33,6 +33,9 @@ type Props = {
     lib: Lib;
 };
 
+const ABSOLUTE_LINK_REG_EXP = /^http/;
+const HASH_REG_EXP = /^#/;
+
 export const Library: React.FC<Props> = ({lib}) => {
     const {t, i18n} = useTranslation();
 
@@ -97,6 +100,24 @@ export const Library: React.FC<Props> = ({lib}) => {
 
     const isPrimary = lib.config.primary;
     const maintainers = React.useMemo(() => getMaintainers(lib), []);
+
+    const rewriteLinks = React.useCallback(
+        (link: string) => {
+            if (ABSOLUTE_LINK_REG_EXP.test(link) || HASH_REG_EXP.test(link)) {
+                return link;
+            }
+
+            const githubId = lib.config?.githubId || null;
+            if (!githubId) {
+                return link;
+            }
+
+            const githubRepoUrl = `${GITHUB_URL}${githubId}/blob/main/`;
+            const absoluteUrl = new URL(link, githubRepoUrl);
+            return absoluteUrl.toString();
+        },
+        [lib.config?.githubId],
+    );
 
     return (
         <div className={b()}>
@@ -205,6 +226,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             : lib.data.changelog
                                     }
                                     absoluteImgPath={`https://raw.githubusercontent.com/${lib.config.githubId}/${lib.config.mainBranch}/`}
+                                    rewriteLinks={rewriteLinks}
                                 />
                             </div>
                         </div>
