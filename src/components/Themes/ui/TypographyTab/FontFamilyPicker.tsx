@@ -274,6 +274,57 @@ const CustomFontFamily = ({
     );
 };
 
+const DeleteAdditionalFontButton = ({
+    getFontUsages,
+    removeFontFamilyType,
+    fType,
+    mobile,
+}: {
+    getFontUsages: (fontType: string) => string[];
+    fType: {value: string; content: string};
+    removeFontFamilyType: ReturnType<typeof useThemeCreatorMethods>['removeFontFamilyType'];
+    mobile?: boolean;
+}) => {
+    return (
+        <Popover
+            content={
+                <Flex direction="column" gap={2}>
+                    <span>
+                        This font is currently in use in blocks:{' '}
+                        <b>{getFontUsages(fType.value).join(', ')}</b>. If you delete it, we'll
+                        replace it with a default font.
+                    </span>
+                    <Button
+                        view="action"
+                        width="max"
+                        onClick={() => {
+                            removeFontFamilyType({
+                                fontType: fType.value,
+                            });
+                        }}
+                    >
+                        Continue
+                    </Button>
+                </Flex>
+            }
+            disabled={getFontUsages(fType.value).length === 0}
+        >
+            <Button
+                size="xl"
+                className={b('additional-font-delete-btn', {mobile})}
+                disabled={getFontUsages(fType.value).length > 0}
+                onClick={() => {
+                    removeFontFamilyType({
+                        fontType: fType.value,
+                    });
+                }}
+            >
+                <Icon data={TrashBin} />
+            </Button>
+        </Popover>
+    );
+};
+
 export const FontFamilyPicker = () => {
     const {
         typography: {
@@ -301,7 +352,12 @@ export const FontFamilyPicker = () => {
         <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
             <Text variant="display-2">Fonts</Text>
             {FONT_FAMILIES_OPTION.map((option) => (
-                <Row space={5} style={{width: '100%', alignItems: 'center'}}>
+                <Row
+                    space={0}
+                    spaceRow={2}
+                    key={option.name}
+                    style={{width: '100%', alignItems: 'center'}}
+                >
                     <Col s="12" l="4">
                         <Text variant="body-3">{option.name}</Text>
                     </Col>
@@ -378,61 +434,42 @@ export const FontFamilyPicker = () => {
                 </Row>
             ))}
             {customFontFamilyType.map((fType) => (
-                <Row space={4} style={{width: '100%'}}>
-                    <Col s="12" l="4">
-                        <TextInput
-                            size="xl"
-                            value={fType.content}
-                            label="Alias:"
-                            onChange={(event) => {
-                                const value = event.target.value;
+                <Row space={0} style={{width: '100%'}} key={fType.value}>
+                    <Col s="12" l="4" className={b('additional-font-label')}>
+                        <Flex gap={2}>
+                            <TextInput
+                                size="xl"
+                                value={fType.content}
+                                label="Alias:"
+                                onChange={(event) => {
+                                    const value = event.target.value;
 
-                                updateFontFamilyTypeTitle({title: value, familyType: fType.value});
-                            }}
-                            placeholder="Enter font alias"
-                            className={b('additional-font-input')}
-                        />
+                                    updateFontFamilyTypeTitle({
+                                        title: value,
+                                        familyType: fType.value,
+                                    });
+                                }}
+                                placeholder="Enter font alias"
+                                className={b('additional-font-input')}
+                            />
+                            <DeleteAdditionalFontButton
+                                removeFontFamilyType={removeFontFamilyType}
+                                getFontUsages={getFontUsages}
+                                fType={fType}
+                                mobile={true}
+                            />
+                        </Flex>
                     </Col>
                     <Col s="12" l="8">
                         <CustomFontFamily
                             fontType={fType.value}
                             withExtraContent
                             ExtraContent={
-                                <Popover
-                                    content={
-                                        <Flex direction="column" gap={2}>
-                                            <span>
-                                                This font is currently in use in blocks:{' '}
-                                                <b>{getFontUsages(fType.value).join(', ')}</b>. If
-                                                you delete it, we'll replace it with a default font.
-                                            </span>
-                                            <Button
-                                                view="action"
-                                                width="max"
-                                                onClick={() => {
-                                                    removeFontFamilyType({
-                                                        fontType: fType.value,
-                                                    });
-                                                }}
-                                            >
-                                                Continue
-                                            </Button>
-                                        </Flex>
-                                    }
-                                    disabled={getFontUsages(fType.value).length === 0}
-                                >
-                                    <Button
-                                        size="xl"
-                                        disabled={getFontUsages(fType.value).length > 0}
-                                        onClick={() => {
-                                            removeFontFamilyType({
-                                                fontType: fType.value,
-                                            });
-                                        }}
-                                    >
-                                        <Icon data={TrashBin} />
-                                    </Button>
-                                </Popover>
+                                <DeleteAdditionalFontButton
+                                    removeFontFamilyType={removeFontFamilyType}
+                                    getFontUsages={getFontUsages}
+                                    fType={fType}
+                                />
                             }
                         />
                     </Col>

@@ -1,5 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {Col, Flex} from 'landing-uikit';
+import {Col, Flex, Row} from 'landing-uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -27,14 +27,12 @@ export const ThemableSettings: React.FC<ThemableSettingsProps> = ({title, rows, 
 
     return (
         <Flex gap={9} className={b()}>
-            <ThemableSettingsRows
-                className={b('columns')}
-                title={title}
-                rows={rows}
-                appendNode={addButton}
-            />
-            <Flex gap={4} grow={true}>
-                <Col l={6}>
+            <Row space={4} style={{width: '100%'}}>
+                <Col l={4} className={b('columns')}>
+                    <ThemableSettingsRows title={title} rows={rows} appendNode={addButton} />
+                </Col>
+
+                <Col l={4}>
                     <ThemableCard
                         rows={rows}
                         theme={isTabletOrMobile ? theme : 'light'}
@@ -43,10 +41,10 @@ export const ThemableSettings: React.FC<ThemableSettingsProps> = ({title, rows, 
                     />
                     {isMobile && addButton}
                 </Col>
-                <Col className={b('dark-card')} l={6}>
+                <Col className={b('dark-card')} l={4}>
                     <ThemableCard rows={rows} theme="dark" />
                 </Col>
-            </Flex>
+            </Row>
         </Flex>
     );
 };
