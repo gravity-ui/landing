@@ -30,7 +30,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
     const breakpoint = useWindowBreakpoint();
 
     //TODO: add more formats to import
-    const [format] = useState<ExportFormat>('scss');
+    const [format] = useState<ExportFormat>('css');
 
     const themeStyles = useMemo(
         () => exportThemeForDialog({themeState, format}),
@@ -44,7 +44,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
 
         const link = document.createElement('a');
         link.setAttribute('href', url);
-        link.setAttribute('download', 'styles.scss');
+        link.setAttribute('download', 'custom.css');
 
         link.click();
     }, [themeStyles]);
