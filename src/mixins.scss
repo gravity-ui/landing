@@ -36,20 +36,22 @@
 }
 
 @mixin window-breakpoint($breakpoint, $mode: 'l') {
+    $breakpoint-width: map-get(pcVariables.$gridBreakpoints, $breakpoint);
+
     @if $mode == 'ge' {
-        @media (min-width: map-get(pcVariables.$gridBreakpoints, $breakpoint)) {
+        @media (min-width: $breakpoint-width) {
             @content;
         }
     } @else if $mode == 'g' {
-        @media (min-width: map-get(pcVariables.$gridBreakpoints, $breakpoint) + 1) {
+        @media (min-width: $breakpoint-width + 1) {
             @content;
         }
     } @else if $mode == 'le' {
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, $breakpoint)) {
+        @media (max-width: $breakpoint-width) {
             @content;
         }
     } @else {
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, $breakpoint) - 1) {
+        @media (max-width: $breakpoint-width - 1) {
             @content;
         }
     }
