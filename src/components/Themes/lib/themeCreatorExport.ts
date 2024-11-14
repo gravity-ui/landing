@@ -17,40 +17,29 @@ const DARK_THEME_VARIABLES_TEMPLATE_NAME = '%DARK_THEME_VARIABLES%';
 const FONTS_TEMPLATE_NAME = '%IMPORT_FONTS%';
 
 const SCSS_TEMPLATE = `
-@use '@gravity-ui/uikit/styles/themes';
-
 ${FONTS_TEMPLATE_NAME}
-
-.g-root {
-    @include themes.g-theme-common;
-    
+.g-root_theme_light {
     ${COMMON_VARIABLES_TEMPLATE_NAME}
-    
-    &_theme_light {
-        @include themes.g-theme-light;
+    ${LIGHT_THEME_VARIABLES_TEMPLATE_NAME}
+}
 
-        ${LIGHT_THEME_VARIABLES_TEMPLATE_NAME}
-    }
-
-    &_theme_dark {
-        @include themes.g-theme-dark;
-
-       ${DARK_THEME_VARIABLES_TEMPLATE_NAME}
-    }
+.g-root_theme_dark {
+    ${COMMON_VARIABLES_TEMPLATE_NAME}
+    ${DARK_THEME_VARIABLES_TEMPLATE_NAME}
 }
 `.trim();
 
 export const APPLY_THEME_TEMPLATE = `
-    Create custom.scss file with the styles created in the Themer (from the section below) and import it after the default UIKit styles.
+    Create styles.css file with the styles created in the Themer (from the section below) and import it after the default UIKit styles.
     
     // Import default UIKit styles
     import '@gravity-ui/uikit/styles/styles.css';
 
     // Styles from the Themer
-    import './custom.scss';
+    import './styles.css';
 `;
 
-export type ExportFormat = 'scss' | 'json';
+export type ExportFormat = 'css' | 'json';
 
 type ExportThemeParams = {
     themeState: ThemeCreatorState;
@@ -69,7 +58,7 @@ const isBackgroundColorChanged = (themeState: ThemeCreatorState) => {
 
 export function exportTheme({
     themeState,
-    format = 'scss',
+    format = 'css',
     ignoreDefaultValues = true,
     forPreview = true,
 }: ExportThemeParams) {
@@ -178,7 +167,7 @@ export function exportTheme({
 
 type ExportThemeForDialogParams = Pick<ExportThemeParams, 'themeState' | 'format'>;
 
-export function exportThemeForDialog({themeState, format = 'scss'}: ExportThemeForDialogParams) {
+export function exportThemeForDialog({themeState, format = 'css'}: ExportThemeForDialogParams) {
     if (format === 'json') {
         return 'not implemented';
     }
@@ -190,7 +179,7 @@ export function exportThemeForDialog({themeState, format = 'scss'}: ExportThemeF
     });
 
     return SCSS_TEMPLATE.replace(FONTS_TEMPLATE_NAME, fontImports)
-        .replace(COMMON_VARIABLES_TEMPLATE_NAME, common.replaceAll('\n', '\n'.padEnd(5)))
+        .replaceAll(COMMON_VARIABLES_TEMPLATE_NAME, common.replaceAll('\n', '\n'.padEnd(5)))
         .replace(LIGHT_THEME_VARIABLES_TEMPLATE_NAME, light.replaceAll('\n', '\n'.padEnd(9)))
         .replace(DARK_THEME_VARIABLES_TEMPLATE_NAME, dark.replaceAll('\n', '\n'.padEnd(9)));
 }
