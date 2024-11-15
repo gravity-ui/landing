@@ -1,5 +1,8 @@
 @use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/page-constructor/styles/mixins.scss' as pcMixins;
+@use '~@gravity-ui/uikit/styles/mixins.scss' as uikitMixins;
+@use '../../mixins.scss' as baseMixins;
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}custom-header';
@@ -7,7 +10,7 @@ $block: '.#{variables.$ns}custom-header';
 #{$block} {
     margin-top: 76px;
 
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+    @include baseMixins.window-breakpoint('sm') {
         margin-top: 32px;
     }
 
@@ -35,52 +38,22 @@ $block: '.#{variables.$ns}custom-header';
         }
     }
 
+    &__extra {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+
+        @include baseMixins.window-breakpoint('lg') {
+            margin-top: 30px;
+        }
+    }
+
     &__news {
         padding: 32px 16px;
         border-radius: 24px;
         background-color: rgba(37, 27, 37, 0.5);
         backdrop-filter: blur(60px);
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            margin-top: 32px;
-        }
-    }
-
-    &__banner {
-        overflow: hidden;
-        border-radius: 24px;
-        background-color: rgba(37, 27, 37, 0.5);
-        backdrop-filter: blur(60px);
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-            margin-top: 32px;
-        }
-    }
-    &__banner-image {
-        width: 100%;
-    }
-    &__banner-text {
-        padding: 12px 32px 32px;
-    }
-    &__banner-title {
-        @include pcStyles.heading4();
-        margin-bottom: 16px;
-    }
-    &__banner-content {
-        @include pcStyles.text-size(body-2);
-
-        a {
-            color: #ffbe5c;
-            text-decoration: none;
-
-            &:visited {
-                color: #ffbe5c;
-            }
-
-            &:hover {
-                color: #f3cb8f;
-            }
-        }
     }
 
     &__news-title {
@@ -123,6 +96,29 @@ $block: '.#{variables.$ns}custom-header';
             &:hover {
                 color: #f3cb8f;
             }
+        }
+    }
+
+    &__banner {
+        @include pcMixins.reset-link-style();
+        @include uikitMixins.text-body-2();
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 24px 32px;
+        color: var(--g-color-text-brand-contrast);
+        background-color: var(--g-color-base-brand);
+        border-radius: 24px;
+        transition: background-color 0.15s linear;
+
+        &-icon {
+            flex-shrink: 0;
+        }
+
+        &:hover {
+            background-color: var(--g-color-base-brand-hover);
         }
     }
 }

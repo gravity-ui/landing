@@ -1,3 +1,4 @@
+import {ChevronRight} from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
 import {Button, ButtonProps, Icon} from 'landing-uikit';
@@ -5,6 +6,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';
 
+import {Link} from '../../components/Link';
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
 
@@ -37,35 +39,17 @@ export type CustomHeaderModel = CustomHeaderProps & {
     type: CustomBlock.CustomHeader;
 };
 
-interface BannerImage {
-    href: string;
-    src: string;
-    alt: string;
-    title: string;
-}
 interface BannerBlockProps {
-    image: BannerImage;
-    title?: string;
-    content?: string;
+    content: string;
+    href?: string;
 }
 
-const Banner: React.FC<BannerBlockProps> = ({image, title, content}) => {
-    const img = (
-        <img className={b('banner-image')} src={image.src} alt={image.alt} title={image.title} />
-    );
-
+const Banner: React.FC<BannerBlockProps> = ({content, href}) => {
     return (
-        <div className={b('banner')}>
-            {image.href ? <a href={image.href}>{img}</a> : img}
-            <div className={b('banner-text')}>
-                {title && <div className={b('banner-title')}>{title}</div>}
-                {content && (
-                    <div className={b('banner-content')}>
-                        <HTML>{content}</HTML>
-                    </div>
-                )}
-            </div>
-        </div>
+        <Link className={b('banner')} href={href ?? ''}>
+            <span className={b('banner-content')}>{content}</span>
+            {href && <ChevronRight className={b('banner-icon')} />}
+        </Link>
     );
 };
 
@@ -78,13 +62,15 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
 }) => {
     const {i18n} = useTranslation();
 
-    const showNewsBlock = !banner && news && news.items && news.items.length > 0;
+    const showNewsBlock = news && news.items && news.items.length > 0;
+    const showBannerBlock = banner?.content;
+    const hasExtra = Boolean(showNewsBlock) || Boolean(showBannerBlock);
 
     return (
         <AnimateBlock className={b()} animate={animated}>
             <Grid>
                 <Row>
-                    <Col sizes={{all: 12, lg: banner || showNewsBlock ? 8 : 12}}>
+                    <Col sizes={{all: 12, lg: hasExtra ? 8 : 12}}>
                         <h1 className={b('title')}>
                             <HTML>{title}</HTML>
                         </h1>
@@ -113,34 +99,32 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                             </div>
                         ) : null}
                     </Col>
-                    {showNewsBlock && (
-                        <Col sizes={{md: 12, lg: 4}}>
-                            <div className={b('news')}>
-                                {news.title ? (
-                                    <div className={b('news-title')}>{news.title}</div>
-                                ) : null}
+                    {hasExtra && (
+                        <Col className={b('extra')} sizes={{md: 12, lg: 4}}>
+                            {showBannerBlock && <Banner {...banner} />}
+                            {showNewsBlock && (
+                                <div className={b('news')}>
+                                    {news.title ? (
+                                        <div className={b('news-title')}>{news.title}</div>
+                                    ) : null}
 
-                                {news.items.map((newsItem, index) =>
-                                    newsItem.content ? (
-                                        <div key={index} className={b('news-item')}>
-                                            <div className={b('news-item-date')}>
-                                                <ReactTimeAgo
-                                                    date={new Date(newsItem.date)}
-                                                    locale={i18n.language}
-                                                />
+                                    {news.items.map((newsItem, index) =>
+                                        newsItem.content ? (
+                                            <div key={index} className={b('news-item')}>
+                                                <div className={b('news-item-date')}>
+                                                    <ReactTimeAgo
+                                                        date={new Date(newsItem.date)}
+                                                        locale={i18n.language}
+                                                    />
+                                                </div>
+                                                <div className={b('news-item-content')}>
+                                                    <HTML>{newsItem.content}</HTML>
+                                                </div>
                                             </div>
-                                            <div className={b('news-item-content')}>
-                                                <HTML>{newsItem.content}</HTML>
-                                            </div>
-                                        </div>
-                                    ) : null,
-                                )}
-                            </div>
-                        </Col>
-                    )}
-                    {banner && (
-                        <Col sizes={{md: 12, lg: 4}}>
-                            <Banner {...banner} />
+                                        ) : null,
+                                    )}
+                                </div>
+                            )}
                         </Col>
                     )}
                 </Row>

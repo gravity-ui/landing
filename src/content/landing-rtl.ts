@@ -1,4 +1,4 @@
-import {Block, BlockType, PageContent} from '@gravity-ui/page-constructor';
+import {BlockType} from '@gravity-ui/page-constructor';
 import {TFunction} from 'next-i18next';
 
 import backgroundAsset from '../assets/background.jpg';
@@ -15,18 +15,12 @@ import remixLogo from '../assets/icons/remix-logo.svg';
 import rocketIcon from '../assets/icons/rocket.svg';
 import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
-import {CustomBlockModel} from '../blocks/types';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 import {libs} from '../libs.mjs';
 import {getAllContributors} from '../utils';
 
 import {getRoadmapTasks} from './roadmap';
-
-interface CustomPageContent {
-    blocks: (Block | CustomBlockModel)[];
-    menu?: PageContent['menu'];
-    background?: PageContent['background'];
-}
+import {CustomPageContent} from './types';
 
 export const getRtlLanding = (t: TFunction): CustomPageContent => ({
     background: {
