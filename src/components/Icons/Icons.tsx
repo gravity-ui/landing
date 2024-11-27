@@ -40,12 +40,15 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         }
     }, [isMobile]);
 
+    const closeTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
+
     React.useEffect(() => {
         if (currentIcon && currentIcon !== iconForDialog?.name) {
             const iconToShow = allIcons.find((icon) => icon.name === currentIcon);
 
             if (iconToShow) {
                 setIsOpenIconDialog(true);
+                clearTimeout(closeTimeoutRef.current);
                 setIconForDialog(iconToShow);
             }
         }
@@ -54,6 +57,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     const handleSelectIcon = React.useCallback(
         (item: IconItem) => {
             setIsOpenIconDialog(true);
+            clearTimeout(closeTimeoutRef.current);
             setIconForDialog(item);
             onChangeCurrentIcon?.(item?.name);
         },
@@ -62,7 +66,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
 
     const handleCloseDialog = React.useCallback(() => {
         setIsOpenIconDialog(false);
-        setTimeout(() => {
+        closeTimeoutRef.current = setTimeout(() => {
             setIconForDialog(undefined);
             onChangeCurrentIcon?.(undefined);
         }, 500);
