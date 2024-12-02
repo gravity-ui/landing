@@ -73,7 +73,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             },
             banner: {
                 content: t('home:banner_content'),
-                href: 'https://clck.ru/3EKYsq',
+                href: 'https://disk.yandex.ru/d/TSMeaU8yvEeVrw',
             },
         },
         {
