@@ -77,6 +77,13 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             },
         },
         {
+            type: CustomBlock.Iframe,
+            width: 560,
+            height: 315,
+            src: 'https://runtime.strm.yandex.ru/player/episode/vplevcaac3o4sk3jl724?autoplay=0&mute=1',
+            allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
+        },
+        {
             type: CustomBlock.CustomExtendedFeatures,
             animated: false,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',

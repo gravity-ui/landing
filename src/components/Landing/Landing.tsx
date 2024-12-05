@@ -9,6 +9,7 @@ import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/Custom
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {Examples} from '../../blocks/Examples/Examples';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
+import {IFrameBlock} from '../../blocks/IFrameBlock/IFrameBlock';
 import {RoadmapBlock} from '../../blocks/RoadmapBlock/RoadmapBlock';
 import TemplatesBlock from '../../blocks/TemplatesBlock/TemplatesBlock';
 import {CustomBlock} from '../../blocks/constants';
@@ -60,6 +61,7 @@ export const Landing: React.FC = () => {
                         [CustomBlock.Roadmap]: RoadmapBlock,
                         [CustomBlock.Templates]: TemplatesBlock,
                         [CustomBlock.Contributors]: ContributorsBlock,
+                        [CustomBlock.Iframe]: IFrameBlock,
                     },
                 }}
             />
