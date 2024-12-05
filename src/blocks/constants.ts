@@ -6,4 +6,5 @@ export enum CustomBlock {
     Templates = 'templates',
     GithubStars = 'github-stars-promotion',
     Contributors = 'contributors',
+    Iframe = 'iframe',
 }
