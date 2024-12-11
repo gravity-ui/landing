@@ -62,6 +62,10 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                 title: t('home:news_title'),
                 items: [
                     {
+                        date: '2024-12-11T08:00:00.000Z',
+                        content: t('home:news_items_item1'),
+                    },
+                    {
                         date: '2024-11-21T08:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
@@ -71,18 +75,18 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     },
                 ],
             },
-            banner: {
-                content: t('home:banner_content'),
-                href: 'https://disk.yandex.ru/d/TSMeaU8yvEeVrw',
-            },
+            // banner: {
+            //     content: t('home:banner_content'),
+            //     href: 'https://disk.yandex.ru/d/TSMeaU8yvEeVrw',
+            // },
         },
-        {
-            type: CustomBlock.Iframe,
-            width: 560,
-            height: 315,
-            src: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7?autoplay=0&mute=1',
-            allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
-        },
+        // {
+        //     type: CustomBlock.Iframe,
+        //     width: 560,
+        //     height: 315,
+        //     src: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7?autoplay=0&mute=1',
+        //     allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
+        // },
         {
             type: CustomBlock.CustomExtendedFeatures,
             animated: false,
