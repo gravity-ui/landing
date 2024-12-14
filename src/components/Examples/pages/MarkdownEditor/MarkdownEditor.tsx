@@ -1,5 +1,6 @@
-import {Link, Text} from '@gravity-ui/uikit';
+import {Button, Flex, Icon, Link, Text} from '@gravity-ui/uikit';
 
+import figmaIcon from '../../../../assets/icons/figma-fill.svg';
 import {block} from '../../../../utils';
 
 const b = block('examples-markdown-editor');
@@ -14,15 +15,22 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = () => {
         <div className={b()}>
             <main className={b('main')}>
                 <Text variant="code-3">
-                    @todo-opensourcenight make{' '}
-                    <Link
-                        href={
-                            'https://www.figma.com/design/MnKaEyxPs9Zeyhg6pmf4uX/OS-Night-Design-(Published)?node-id=1-20237&t=FG0f1VDEd9kPubhh-4'
-                        }
-                        target="_blank"
-                    >
-                        markdown-editor component
-                    </Link>
+                    <Flex direction="row" justifyContent="space-between">
+                        <span>@todo-opensourcenight markdown-editor component</span>
+                        <Button
+                            key="figma"
+                            className={b('button')}
+                            view="action"
+                            size="xl"
+                            href={
+                                'https://www.figma.com/design/MnKaEyxPs9Zeyhg6pmf4uX/OS-Night-Design-(Published)?node-id=1-20237&t=FG0f1VDEd9kPubhh-4'
+                            }
+                            target="_blank"
+                        >
+                            <Icon className={b('button-icon')} data={figmaIcon} size={16} />
+                            <span>Open Figma</span>
+                        </Button>
+                    </Flex>
                 </Text>
             </main>
             <footer className={b('footer')}>
