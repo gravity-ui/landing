@@ -2,6 +2,7 @@ import {Magnifier} from '@gravity-ui/icons';
 import {Footer} from '@gravity-ui/navigation';
 import {Flex, Icon, Tabs, TextInput, ThemeProvider, User} from '@gravity-ui/uikit';
 
+import avatar from '../assets/avatar.png';
 import {TaskDetails} from '../components/TaskDetails';
 import {TasksList} from '../components/TasksList';
 
@@ -18,7 +19,7 @@ export function TaskTrackerPage() {
                             size="m"
                             name="Blake's Tasks - Apollo Enterprises"
                             avatar={{
-                                imgUrl: 'https://loremflickr.com/640/480/cats?lock=8610182282084352',
+                                imgUrl: avatar.src,
                             }}
                         />
                         <div>

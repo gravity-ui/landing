@@ -2,6 +2,8 @@ import {Plus} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Label, Text, User} from '@gravity-ui/uikit';
 import {Switch} from 'landing-uikit';
 
+import avatar from '../../../assets/avatar.png';
+
 import {TaskInfo, TaskInfoItem} from './Info';
 import './TaskDetailsBody.scss';
 
@@ -14,7 +16,7 @@ export function TaskDetailsBody() {
                     <User
                         name="Blake"
                         avatar={{
-                            imgUrl: 'https://loremflickr.com/640/480/cats?lock=8610182282084352',
+                            imgUrl: avatar.src,
                         }}
                     />
                 </TaskInfoItem>
