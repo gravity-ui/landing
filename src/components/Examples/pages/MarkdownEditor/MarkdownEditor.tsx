@@ -22,7 +22,6 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = () => {
                 <Text variant="code-3">
                     <Flex direction="row" justifyContent="space-between">
                         <span>@todo-opensourcenight markdown-editor component</span>
-                        <Editor />
                         <Button
                             key="figma"
                             className={b('button')}
@@ -37,6 +36,7 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = () => {
                             <span>Open Figma</span>
                         </Button>
                     </Flex>
+                    <Editor />
                 </Text>
             </main>
             <footer className={b('footer')}>
