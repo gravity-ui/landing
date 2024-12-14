@@ -35,14 +35,14 @@ export const Menu: React.FC = () => {
     const renderItem = (item: MenuItem) => {
         if (item.isComingSoon) {
             return (
-                <div className={b('link', {lg: true, disabled: true})}>
+                <Link href={item.url} className={b('link', {lg: true})}>
                     <div className={b('comming-soon')}>
                         <div className={b('comming-soon-text')}>{t(item.titleKey)}</div>
                         <div className={b('comming-soon-label')}>
                             <Icon data={soonLabelIcon} width={46} height={20} />
                         </div>
                     </div>
-                </div>
+                </Link>
             );
         }
 
