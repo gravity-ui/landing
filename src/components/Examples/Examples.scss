@@ -1,0 +1,50 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}examples';
+
+#{$block} {
+    margin: 56px 0 0;
+
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        margin: 32px 0 0;
+    }
+
+    &__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: pcVariables.$indentXS;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            margin-bottom: pcVariables.$indentXXXS;
+        }
+    }
+
+    &__title {
+        font-size: 48px;
+        line-height: 56px;
+        font-weight: 600;
+        color: #fff;
+        margin: 0;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            font-size: 32px;
+            line-height: 48px;
+            margin-bottom: pcVariables.$indentXXXS;
+        }
+    }
+
+    &__tags {
+        margin-block-end: var(--g-spacing-6);
+    }
+
+    &__example-wrapper {
+        overflow: auto;
+        height: 800px;
+        width: 100%;
+        border-radius: 16px;
+        border: 1px solid var(--g-color-line-generic);
+    }
+}

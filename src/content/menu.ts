@@ -27,4 +27,9 @@ export const menu: MenuItem[] = [
         titleKey: 'menu_themer',
         url: '/themer',
     },
+    {
+        titleKey: 'menu_examples',
+        url: '/examples',
+        isComingSoon: true,
+    },
 ];
