@@ -1,0 +1,27 @@
+.task-list-item {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    display: flex;
+    align-items: center;
+
+    &--active {
+        background: rgba(255, 190, 92, 0.3);
+    }
+
+    &:not(&--active) {
+        cursor: pointer;
+    }
+
+    &:not(&--last) .task-list-item__inner {
+        border-bottom: 1px solid var(--g-color-line-generic-solid);
+    }
+}
+
+.task-list-item__inner {
+    height: 44px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
