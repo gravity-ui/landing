@@ -7,6 +7,7 @@ import {block} from '../../utils';
 import {TagItem, Tags} from '../Tags/Tags';
 
 import './Examples.scss';
+import {Dashboard} from './pages/Dashboard/Dashboard';
 import {Email} from './pages/Email/Email';
 import {HotelDetails} from './pages/HotelDetails/HotelDetails';
 import {Overview} from './pages/Overview/Overview';
@@ -28,7 +29,7 @@ const tabToComponent: Record<ExampleTab, React.ComponentType | undefined> = {
     [ExampleTab.Email]: Email,
     [ExampleTab.HotelDetails]: HotelDetails,
     [ExampleTab.TaskTracker]: TaskTracker,
-    [ExampleTab.Dashboard]: undefined,
+    [ExampleTab.Dashboard]: Dashboard,
     [ExampleTab.LandingPage]: undefined,
 };
 
