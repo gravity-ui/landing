@@ -1,6 +1,6 @@
 @use '../../../../variables.scss';
 
-$block: '.#{variables.$ns}examples-overview';
+$block: '.#{variables.$ns}examples-vm-overview';
 
 #{$block} {
     box-sizing: border-box;

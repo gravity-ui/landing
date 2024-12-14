@@ -11,13 +11,13 @@ import {Dashboard} from './pages/Dashboard/Dashboard';
 import {Email} from './pages/Email/Email';
 import {HotelDetails} from './pages/HotelDetails/HotelDetails';
 import {Landing} from './pages/Landing/Landing';
-import {Overview} from './pages/Overview/Overview';
 import {TaskTracker} from './pages/TaskTracker/TaskTracker';
+import {VmOverview} from './pages/VmOverview/VmOverview';
 
 const b = block('examples');
 
 enum ExampleTab {
-    Overview = 'overview',
+    VmOverview = 'vmOverview',
     Email = 'email',
     HotelDetails = 'hotelDetails',
     TaskTracker = 'taskTracker',
@@ -26,7 +26,7 @@ enum ExampleTab {
 }
 
 const tabToComponent: Record<ExampleTab, React.ComponentType | undefined> = {
-    [ExampleTab.Overview]: Overview,
+    [ExampleTab.VmOverview]: VmOverview,
     [ExampleTab.Email]: Email,
     [ExampleTab.HotelDetails]: HotelDetails,
     [ExampleTab.TaskTracker]: TaskTracker,
@@ -38,13 +38,13 @@ interface ExamplesProps {}
 
 export const Examples: React.FC<ExamplesProps> = () => {
     const {t} = useTranslation('examples');
-    const [activeTab, setActiveTab] = useState<ExampleTab>(ExampleTab.Overview);
+    const [activeTab, setActiveTab] = useState<ExampleTab>(ExampleTab.VmOverview);
 
     const tags: TagItem<ExampleTab>[] = useMemo(
         () => [
             {
-                value: ExampleTab.Overview,
-                title: t('examples_overview'),
+                value: ExampleTab.VmOverview,
+                title: t('examples_vm-overview'),
             },
             {
                 value: ExampleTab.Email,

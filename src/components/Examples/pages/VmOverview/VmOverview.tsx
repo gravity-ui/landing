@@ -2,14 +2,14 @@ import {Link, Text} from '@gravity-ui/uikit';
 
 import {block} from '../../../../utils';
 
-const b = block('examples-overview');
-import './Overview.scss';
+const b = block('examples-vm-overview');
+import './VmOverview.scss';
 
-type OverviewProps = {};
+type VmOverviewProps = {};
 
-// @todo-opensourcenight Make overview page
+// @todo-opensourcenight Make vm-overview page
 // https://www.figma.com/design/MnKaEyxPs9Zeyhg6pmf4uX/OS-Night-Design-(Published)?node-id=1-19953&t=cBOGiZgT0jwhnCOY-4
-export const Overview: React.FC<OverviewProps> = () => {
+export const VmOverview: React.FC<VmOverviewProps> = () => {
     return (
         <div className={b()}>
             <main className={b('main')}>
@@ -21,19 +21,13 @@ export const Overview: React.FC<OverviewProps> = () => {
                         }
                         target="_blank"
                     >
-                        overview page
+                        vm-overview page
                     </Link>
                 </Text>
-                {/* can imagine that page height is too big */}
-                {new Array(100).fill(1).map((item) => (
-                    <div key={item}>
-                        <Text variant="code-1">can imagine that page height is too big</Text>
-                    </div>
-                ))}
             </main>
             <footer className={b('footer')}>
                 <Link href={'/examples'}>Open in Examples page</Link>
-                <Link href={'/examples/overview'}>Open in Separate page</Link>
+                <Link href={'/examples/vm-overview'}>Open in Separate page</Link>
             </footer>
         </div>
     );

@@ -24,12 +24,6 @@ export const Landing: React.FC<LandingProps> = () => {
                         landing page
                     </Link>
                 </Text>
-                {/* can imagine that page height is too big */}
-                {new Array(100).fill(1).map((item) => (
-                    <div key={item}>
-                        <Text variant="code-1">can imagine that page height is too big</Text>
-                    </div>
-                ))}
             </main>
             <footer className={b('footer')}>
                 <Link href={'/examples'}>Open in Examples page</Link>
