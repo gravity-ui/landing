@@ -10,6 +10,7 @@ import './Examples.scss';
 import {Dashboard} from './pages/Dashboard/Dashboard';
 import {Email} from './pages/Email/Email';
 import {HotelDetails} from './pages/HotelDetails/HotelDetails';
+import {Landing} from './pages/Landing/Landing';
 import {Overview} from './pages/Overview/Overview';
 import {TaskTracker} from './pages/TaskTracker/TaskTracker';
 
@@ -30,7 +31,7 @@ const tabToComponent: Record<ExampleTab, React.ComponentType | undefined> = {
     [ExampleTab.HotelDetails]: HotelDetails,
     [ExampleTab.TaskTracker]: TaskTracker,
     [ExampleTab.Dashboard]: Dashboard,
-    [ExampleTab.LandingPage]: undefined,
+    [ExampleTab.LandingPage]: Landing,
 };
 
 interface ExamplesProps {}
