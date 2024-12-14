@@ -8,6 +8,7 @@ import {TagItem, Tags} from '../Tags/Tags';
 
 import './Examples.scss';
 import {Email} from './pages/Email/Email';
+import {HotelDetails} from './pages/HotelDetails/HotelDetails';
 import {Overview} from './pages/Overview/Overview';
 
 const b = block('examples');
@@ -24,7 +25,7 @@ enum ExampleTab {
 const tabToComponent: Record<ExampleTab, React.ComponentType | undefined> = {
     [ExampleTab.Overview]: Overview,
     [ExampleTab.Email]: Email,
-    [ExampleTab.HotelDetails]: undefined,
+    [ExampleTab.HotelDetails]: HotelDetails,
     [ExampleTab.TaskTracker]: undefined,
     [ExampleTab.Dashboard]: undefined,
     [ExampleTab.LandingPage]: undefined,
