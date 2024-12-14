@@ -7,7 +7,6 @@ export const Editor: React.FC<EditorProps> = () => {
     return (
         <div>
             <Tasks />
-            <>Add Editor here</>
         </div>
     );
 };
