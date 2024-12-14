@@ -10,6 +10,7 @@ import './Examples.scss';
 import {Email} from './pages/Email/Email';
 import {HotelDetails} from './pages/HotelDetails/HotelDetails';
 import {Overview} from './pages/Overview/Overview';
+import {TaskTracker} from './pages/TaskTracker/TaskTracker';
 
 const b = block('examples');
 
@@ -26,7 +27,7 @@ const tabToComponent: Record<ExampleTab, React.ComponentType | undefined> = {
     [ExampleTab.Overview]: Overview,
     [ExampleTab.Email]: Email,
     [ExampleTab.HotelDetails]: HotelDetails,
-    [ExampleTab.TaskTracker]: undefined,
+    [ExampleTab.TaskTracker]: TaskTracker,
     [ExampleTab.Dashboard]: undefined,
     [ExampleTab.LandingPage]: undefined,
 };
