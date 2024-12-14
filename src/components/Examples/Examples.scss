@@ -37,6 +37,9 @@ $block: '.#{variables.$ns}examples';
     }
 
     &__tags {
+        display: flex;
+        overflow: hidden;
+
         margin-block-end: var(--g-spacing-6);
     }
 

@@ -11,6 +11,7 @@ import {Dashboard} from './pages/Dashboard/Dashboard';
 import {Email} from './pages/Email/Email';
 import {HotelDetails} from './pages/HotelDetails/HotelDetails';
 import {Landing} from './pages/Landing/Landing';
+import {MarkdownEditor} from './pages/MarkdownEditor/MarkdownEditor';
 import {TaskTracker} from './pages/TaskTracker/TaskTracker';
 import {VmOverview} from './pages/VmOverview/VmOverview';
 
@@ -23,6 +24,7 @@ enum ExampleTab {
     TaskTracker = 'taskTracker',
     Dashboard = 'Dashboard',
     LandingPage = 'LandingPage',
+    MarkdownEditor = 'MarkdownEditor',
 }
 
 const tabToComponent: Record<ExampleTab, React.ComponentType | undefined> = {
@@ -32,6 +34,7 @@ const tabToComponent: Record<ExampleTab, React.ComponentType | undefined> = {
     [ExampleTab.TaskTracker]: TaskTracker,
     [ExampleTab.Dashboard]: Dashboard,
     [ExampleTab.LandingPage]: Landing,
+    [ExampleTab.MarkdownEditor]: MarkdownEditor,
 };
 
 interface ExamplesProps {}
@@ -65,6 +68,10 @@ export const Examples: React.FC<ExamplesProps> = () => {
             {
                 value: ExampleTab.LandingPage,
                 title: t('examples_landing-page'),
+            },
+            {
+                value: ExampleTab.MarkdownEditor,
+                title: t('examples_markdown-editor'),
             },
         ],
         [t],
