@@ -22,7 +22,7 @@ $block: '.#{variables.$ns}examples-email';
     }
 
     &__container {
-        height: 30vh;
+        height: 80vh;
         margin: 2rem 0;
     }
 
@@ -40,7 +40,27 @@ $block: '.#{variables.$ns}examples-email';
         border: #4e3d2e 1px solid;
     }
 
+    &__icons {
+        height: 52px;
+        border: #4e3d2e 1px solid;
+    }
+
     &__left-icons {
         width: 152px;
+    }
+
+    &__name-container {
+        border: #4e3d2e 1px solid;
+        height: 64px;
+    }
+
+    &__mail-text {
+        border: #4e3d2e 1px solid;
+        height: 300px;
+    }
+
+    &__markdown-panel {
+        border: #4e3d2e 1px solid;
+        height: 400px;
     }
 }
