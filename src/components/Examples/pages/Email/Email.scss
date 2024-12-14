@@ -20,4 +20,27 @@ $block: '.#{variables.$ns}examples-email';
         border-top: 1px solid var(--g-color-line-generic);
         gap: var(--g-spacing-5);
     }
+
+    &__container {
+        height: 30vh;
+        margin: 2rem 0;
+    }
+
+    &__navigation {
+        //flex: 2;
+        border: #4e3d2e 1px solid;
+    }
+    &__mail-list {
+        //flex: 3;
+        border: #4e3d2e 1px solid;
+    }
+
+    &__mail-content {
+        // /flex: 3;
+        border: #4e3d2e 1px solid;
+    }
+
+    &__left-icons {
+        width: 152px;
+    }
 }
