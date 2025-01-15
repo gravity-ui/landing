@@ -1,13 +1,12 @@
 export type Article = {
     id: string;
-    title: string;
-    description?: string;
-    content: string;
+    content: {
+        en: string;
+        ru: string;
+    };
 };
 
 export type Section = {
     id: string;
-    title: string;
-    description: string;
     articles: Article[];
 };

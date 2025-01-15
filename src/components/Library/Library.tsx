@@ -4,7 +4,6 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
-import {availablePlaygrounds} from '../../[locale]/libraries/[libId]/playground';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import lastUpdateIcon from '../../assets/icons/last-update.svg';
@@ -15,7 +14,8 @@ import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {ContributorList} from '../../components/ContributorList';
 import {Link} from '../../components/Link';
-import {Lib, block, getAnchor, getLocaleLink, getMaintainers} from '../../utils';
+import {availablePlaygrounds} from '../../pages/[locale]/libraries/[libId]/playground';
+import {Lib, block, getAnchor, getLocale, getLocaleLink, getMaintainers} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -38,6 +38,8 @@ const HASH_REG_EXP = /^#/;
 
 export const Library: React.FC<Props> = ({lib}) => {
     const {t, i18n} = useTranslation();
+
+    const locale = getLocale(i18n.language);
 
     const contentTabs = [
         {
@@ -123,6 +125,8 @@ export const Library: React.FC<Props> = ({lib}) => {
         [lib.config?.githubId],
     );
 
+    const readmeContent = lib.data.readme[locale] || lib.data.readme.en;
+
     return (
         <div className={b()}>
             <Grid className={b('header-grid')}>
@@ -198,7 +202,10 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             className={b('button')}
                                             view="outlined"
                                             size="xl"
-                                            href={`/libraries/${lib.config.id}/playground`}
+                                            href={getLocaleLink(
+                                                `/libraries/${lib.config.id}/playground`,
+                                                i18n,
+                                            )}
                                         >
                                             <span>{t('actions_playground')}</span>
                                         </Button>
@@ -223,10 +230,10 @@ export const Library: React.FC<Props> = ({lib}) => {
                             />
                             <div className={b('content')}>
                                 <MDXRenderer
-                                    key={`${lib.config.id}-${activeTab}`}
+                                    key={`${lib.config.id}-${i18n.language}-${activeTab}`}
                                     text={
                                         activeTab === Tab.Readme
-                                            ? lib.data.readme
+                                            ? readmeContent
                                             : lib.data.changelog
                                     }
                                     absoluteImgPath={`https://raw.githubusercontent.com/${lib.config.githubId}/${lib.config.mainBranch}/`}

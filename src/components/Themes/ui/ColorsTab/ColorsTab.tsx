@@ -15,54 +15,60 @@ import './ColorsTab.scss';
 
 const b = block('colors-tab');
 
-const ADVANCED_COLORS_OPTIONS: EditableColorOption[] = [
-    {
-        title: 'Hovered Brand Color',
-        name: 'base-brand-hover',
-    },
-    {
-        title: 'Brand Text',
-        name: 'text-brand',
-    },
-    {
-        title: 'Higher Contrast Brand Text',
-        name: 'text-brand-heavy',
-    },
-    {
-        title: 'Brand Line Color',
-        name: 'line-brand',
-    },
-    {
-        title: 'Selection Background',
-        name: 'base-selection',
-    },
-    {
-        title: 'Hovered Selection Background',
-        name: 'base-selection-hover',
-    },
-];
-
-const ADDITIONAL_COLORS_OPTIONS: EditableColorOption[] = [
-    {
-        title: 'Link',
-        name: 'text-link',
-    },
-    {
-        title: 'Hovered Link',
-        name: 'text-link-hover',
-    },
-    {
-        title: 'Visited Link',
-        name: 'text-link-visited',
-    },
-    {
-        title: 'Hovered Visited Link',
-        name: 'text-link-visited-hover',
-    },
-];
-
 export const ColorsTab = () => {
-    const {t} = useTranslation('themes');
+    const {t, i18n} = useTranslation('themes');
+
+    const advancedColorsOptions = React.useMemo<EditableColorOption[]>(
+        () => [
+            {
+                title: t('label_advanced-colors_base-brand-hover'),
+                name: 'base-brand-hover',
+            },
+            {
+                title: t('label_advanced-colors_text-brand'),
+                name: 'text-brand',
+            },
+            {
+                title: t('label_advanced-colors_text-brand-heavy'),
+                name: 'text-brand-heavy',
+            },
+            {
+                title: t('label_advanced-colors_line-brand'),
+                name: 'line-brand',
+            },
+            {
+                title: t('label_advanced-colors_base-selection'),
+                name: 'base-selection',
+            },
+            {
+                title: t('label_advanced-colors_base-selection-hover'),
+                name: 'base-selection-hover',
+            },
+        ],
+        [i18n.language],
+    );
+
+    const additionalColorsOptions = React.useMemo<EditableColorOption[]>(
+        () => [
+            {
+                title: t('label_additional-colors_text-link'),
+                name: 'text-link',
+            },
+            {
+                title: t('label_additional-colors_text-link-hover'),
+                name: 'text-link-hover',
+            },
+            {
+                title: t('label_additional-colors_text-link-visited'),
+                name: 'text-link-visited',
+            },
+            {
+                title: t('label_additional-colors_text-link-visited-hover'),
+                name: 'text-link-visited-hover',
+            },
+        ],
+        [i18n.language],
+    );
 
     const {advancedModeEnabled, showMainSettings} = useThemeCreator();
     const {setAdvancedMode, openMainSettings} = useThemeCreatorMethods();
@@ -100,12 +106,12 @@ export const ColorsTab = () => {
                                 <br />
                             </Trans>
                         }
-                        options={ADVANCED_COLORS_OPTIONS}
+                        options={advancedColorsOptions}
                     />
                     <PrivateColorsSettings
                         title={t('additional_colors')}
-                        cardsTitle="Link Colors"
-                        options={ADDITIONAL_COLORS_OPTIONS}
+                        cardsTitle={t('label_links-color')}
+                        options={additionalColorsOptions}
                     />
                 </React.Fragment>
             )}

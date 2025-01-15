@@ -29,15 +29,26 @@ ${FONTS_TEMPLATE_NAME}
 }
 `.trim();
 
-export const APPLY_THEME_TEMPLATE = `
-    Create styles.css file with the styles created in the Themer (from the section below) and import it after the default UIKit styles.
-    
-    // Import default UIKit styles
-    import '@gravity-ui/uikit/styles/styles.css';
+export const APPLY_THEME_TEMPLATE = {
+    en: `
+        Create styles.css file with the styles created in the Themer (from the section below) and import it after the default UIKit styles.
+        
+        // Import default UIKit styles
+        import '@gravity-ui/uikit/styles/styles.css';
 
-    // Styles from the Themer
-    import './styles.css';
-`;
+        // Styles from the Themer
+        import './styles.css';
+    `,
+    ru: `
+        Создайте файл styles.css со стилями, созданными в Темизаторе (из секции ниже), и импортируйте его после стилей UIKit по умолчанию.
+
+        // Импорт стилей UIKit по умолчанию
+        import '@gravity-ui/uikit/styles/styles.css';
+
+        // Стили из Темизатора
+        import './styles.css';
+    `,
+};
 
 export type ExportFormat = 'css' | 'json';
 

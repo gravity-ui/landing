@@ -1,3 +1,8 @@
+const getReadmeUrls = (branchUrl) => ({
+    en: `${branchUrl}/README.md`,
+    ru: `${branchUrl}/README-ru.md`,
+});
+
 export const libs = [
     {
         id: 'uikit',
@@ -8,7 +13,7 @@ export const libs = [
         landing: true,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/uikit/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/uikit/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/uikit/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -21,7 +26,9 @@ export const libs = [
         landing: true,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/md-editor/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -35,7 +42,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/graph/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/graph/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/graph/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/graph/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -49,7 +56,7 @@ export const libs = [
         tags: ['ui'],
         storybookUrl:
             'https://preview.gravity-ui.com/components/?path=/story/components-adaptivetabs--default',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/components/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/components/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/components/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -62,7 +69,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/icons/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/icons/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/icons/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/icons/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -75,7 +82,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/illustrations/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/illustrations/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/illustrations/main'),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/illustrations/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -89,7 +96,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/dynamic-forms/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main'),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -103,7 +110,9 @@ export const libs = [
         landing: true,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/page-constructor/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/page-constructor/main',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/page-constructor/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -117,7 +126,9 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.yandexcloud.dev/blog-constructor/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -131,7 +142,7 @@ export const libs = [
         landing: true,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/chartkit/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/chartkit/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -144,7 +155,7 @@ export const libs = [
         landing: true,
         tags: ['ui'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/table/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/table/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/table/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -157,7 +168,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/dashkit/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/dashkit/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -170,7 +181,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/yagr/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/yagr/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -183,7 +194,7 @@ export const libs = [
         landing: false,
         tags: ['nodejs'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/nodekit/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/nodekit/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/nodekit/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -196,7 +207,7 @@ export const libs = [
         landing: false,
         tags: ['nodejs'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/expresskit/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/expresskit/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -209,7 +220,7 @@ export const libs = [
         landing: false,
         tags: ['nodejs'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/app-layout/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/app-layout/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/app-layout/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -222,7 +233,7 @@ export const libs = [
     //     landing: false,
     //     tags: ['infrastructure'],
     //     storybookUrl: '',
-    //     readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/app-builder/main/README.md',
+    //     readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/app-builder/main'),
     //     changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/app-builder/main/CHANGELOG.md',
     //     mainBranch: 'main',
     // },
@@ -235,7 +246,7 @@ export const libs = [
         landing: true,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/navigation/',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/navigation/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/navigation/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/navigation/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -248,7 +259,7 @@ export const libs = [
         landing: false,
         tags: ['ui', 'nodejs'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/date-utils/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/date-utils/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -262,7 +273,9 @@ export const libs = [
         tags: ['ui'],
         storybookUrl:
             'https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/date-components/main/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/date-components/main',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/date-components/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -276,7 +289,7 @@ export const libs = [
         landing: false,
         tags: ['ui', 'nodejs'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/axios-wrapper/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/axios-wrapper/main'),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/axios-wrapper/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -290,7 +303,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/dialog-fields/main'),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -304,7 +317,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/i18n/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/i18n/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/i18n/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -317,7 +330,7 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/data-source/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/data-source/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/data-source/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -330,7 +343,7 @@ export const libs = [
         landing: false,
         tags: ['infrastructure'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/eslint-config/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/eslint-config/main'),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/eslint-config/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -344,7 +357,7 @@ export const libs = [
         landing: false,
         tags: ['infrastructure'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/tsconfig/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/tsconfig/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/tsconfig/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -357,7 +370,9 @@ export const libs = [
         landing: false,
         tags: ['infrastructure'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/prettier-config/main/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/prettier-config/main',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/prettier-config/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -371,7 +386,9 @@ export const libs = [
         landing: false,
         tags: ['infrastructure'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/stylelint-config/main',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/CHANGELOG.md',
         mainBranch: 'main',
@@ -385,7 +402,7 @@ export const libs = [
         landing: false,
         tags: ['infrastructure'],
         storybookUrl: '',
-        readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/babel-preset/main/README.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/babel-preset/main'),
         changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/babel-preset/main/CHANGELOG.md',
         mainBranch: 'main',
     },
@@ -398,8 +415,9 @@ export const libs = [
         landing: false,
         tags: ['infrastructure'],
         storybookUrl: '',
-        readmeUrl:
-            'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/CHANGELOG.md',
         mainBranch: 'master',
@@ -413,8 +431,9 @@ export const libs = [
         landing: false,
         tags: ['ui', 'infrastructure'],
         storybookUrl: '',
-        readmeUrl:
-            'https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/README.md',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main',
+        ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/CHANGELOG.md',
         mainBranch: 'main',

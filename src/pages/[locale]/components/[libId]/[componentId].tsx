@@ -1,15 +1,16 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
+import {i18n} from 'next-i18next.config';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
-import {Component} from '../../../components/Component/Component';
-import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
-import {Layout} from '../../../components/Layout/Layout';
-import {libs} from '../../../content/components';
-import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
-import {getLibById, getLibComponents, getMaintainers} from '../../../utils';
-import {getI18nPaths, getI18nProps} from '../../../utils/i18next';
+import {Component} from '../../../../components/Component/Component';
+import {ComponentsLayout} from '../../../../components/ComponentsLayout/ComponentsLayout';
+import {Layout} from '../../../../components/Layout/Layout';
+import {libs} from '../../../../content/components';
+import {useLocaleRedirect} from '../../../../hooks/useLocaleRedirect';
+import {getLibById, getLibComponents, getLocale, getMaintainers} from '../../../../utils';
+import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {
@@ -53,9 +54,27 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
     let readmeContent = '';
 
+    const localeParam = ctx?.params?.locale;
+    const locale = getLocale(typeof localeParam === 'string' ? localeParam : 'en');
+
     try {
-        const res = await fetch(component.content.readmeUrl);
-        readmeContent = await res.text();
+        const headers: Record<string, string> = {'User-Agent': 'request'};
+        if (process.env.GITHUB_TOKEN) {
+            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+        }
+
+        // TODO: Preload content
+        const res = await fetch(component.content.readmeUrl[locale]);
+        if (res.status >= 200 && res.status < 300) {
+            readmeContent = await res.text();
+        } else if (locale !== i18n.defaultLocale) {
+            const fallbackRes = await fetch(
+                component.content.readmeUrl[i18n.defaultLocale as 'en'],
+            );
+            if (fallbackRes.status >= 200 && fallbackRes.status < 300) {
+                readmeContent = await fallbackRes.text();
+            }
+        }
     } catch {}
 
     return {

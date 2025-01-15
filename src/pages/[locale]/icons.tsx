@@ -2,10 +2,10 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
-import {Icons} from '../components/Icons';
-import {Layout} from '../components/Layout/Layout';
-import {useLocaleRedirect} from '../hooks/useLocaleRedirect';
-import {getI18nPaths, getI18nProps} from '../utils/i18next';
+import {Icons} from '../../components/Icons';
+import {Layout} from '../../components/Layout/Layout';
+import {useLocaleRedirect} from '../../hooks/useLocaleRedirect';
+import {getI18nPaths, getI18nProps} from '../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {

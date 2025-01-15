@@ -89,22 +89,28 @@ const fetchReadmeInfo = () => {
                 headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
             }
 
-            let data = '';
-
-            if (item.readmeUrl) {
-                try {
-                    const {statusCode, body} = await request(item.readmeUrl, {
-                        headers,
-                    });
-                    if (statusCode >= 200 && statusCode < 300) {
-                        data = await body.text();
+            const fetchReadmeContent = async (url) => {
+                if (url) {
+                    try {
+                        const {statusCode, body} = await request(url, {
+                            headers,
+                        });
+                        if (statusCode >= 200 && statusCode < 300) {
+                            return await body.text();
+                        }
+                    } catch (err) {
+                        console.error(err);
                     }
-                } catch (err) {
-                    console.error(err);
                 }
-            }
+                return '';
+            };
 
-            return [item.id, data];
+            const [en, ru] = await Promise.all([
+                fetchReadmeContent(item.readmeUrl.en),
+                fetchReadmeContent(item.readmeUrl.ru),
+            ]);
+
+            return [item.id, {en, ru}];
         }),
     );
 };

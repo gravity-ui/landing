@@ -119,11 +119,11 @@ export const MainSettings: React.FC<MainSettingsProps> = ({
             },
             {
                 id: 'text-brand-contrast',
-                title: 'Text on Brand',
+                title: t('label_text-on-brand'),
                 render: (theme) => <TextContrastColorEditor theme={theme} />,
                 renderTitle: () => (
                     <div className={b('text-contrast-title')}>
-                        <Text variant="body-2">Text on Brand</Text>
+                        <Text variant="body-2">{t('label_text-on-brand')}</Text>
                     </div>
                 ),
             },
@@ -131,9 +131,9 @@ export const MainSettings: React.FC<MainSettingsProps> = ({
     }, [t]);
 
     return (
-        <ThemeSection className={b()} title="Brand Palette Foundations">
+        <ThemeSection className={b()} title={t('title_brand-palette-foundations')}>
             <ThemableSettings
-                title="Basic brand colors"
+                title={t('label_basic-brand-colors')}
                 rows={rows}
                 addButton={
                     <Button

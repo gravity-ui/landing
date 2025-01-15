@@ -1,10 +1,10 @@
 import {GetStaticPaths, GetStaticProps} from 'next';
 import {useTranslation} from 'next-i18next';
 
-import {Layout} from '../../components/Layout/Layout';
-import {Libraries} from '../../components/Libraries/Libraries';
-import {useLocaleRedirect} from '../../hooks/useLocaleRedirect';
-import {getI18nPaths, getI18nProps} from '../../utils/i18next';
+import {Layout} from '../../../components/Layout/Layout';
+import {Libraries} from '../../../components/Libraries/Libraries';
+import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
+import {getI18nPaths, getI18nProps} from '../../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {

@@ -1,7 +1,7 @@
 import {GetStaticPaths} from 'next';
-import {LibraryPreviewPage, getStaticProps} from 'src/[locale]/libraries/[libId]/preview';
 
 import {getLibsList} from '../../../../utils';
+import {LibraryPreviewPage, getStaticProps} from '../../../[locale]/libraries/[libId]/preview';
 
 const libs = getLibsList();
 

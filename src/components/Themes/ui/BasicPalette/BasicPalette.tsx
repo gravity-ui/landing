@@ -52,7 +52,7 @@ export const BasicPalette = () => {
     return (
         <ThemeSection title={t('basic_palette')}>
             <ThemableSettings
-                title="The colors to generate the palette"
+                title={t('label_colors-to-generate-palette')}
                 rows={rows}
                 addButton={<AddColorButton onClick={addColor} />}
             />

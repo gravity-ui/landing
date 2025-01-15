@@ -13,6 +13,7 @@ import {
     TextAlignJustify,
     TextAlignLeft,
 } from 'landing-icons';
+import {useTranslation} from 'next-i18next';
 import React, {CSSProperties, Fragment, useState} from 'react';
 
 import gravityUi from '../../../../assets/icons/gravity-ui.svg';
@@ -221,6 +222,7 @@ const previewComponents = [
 ];
 
 export const PreviewTab = () => {
+    const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
@@ -229,7 +231,7 @@ export const PreviewTab = () => {
     );
     return (
         <Flex direction="column" gap={8}>
-            <Text variant="display-2">UI Samples</Text>
+            <Text variant="display-2">{t('title_ui-samples')}</Text>
 
             {previewComponents.map(({Component, title, breadCrumbsItems, id}, index) => {
                 return (
