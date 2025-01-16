@@ -21,7 +21,7 @@ export const useLocaleRedirect = () => {
         const correctLocale =
             localStorageLocale && i18nextConfig.i18n.locales.includes(localStorageLocale)
                 ? localStorageLocale
-                : i18nextConfig.i18n.defaultLocale;
+                : currentLocale;
 
         if (currentLocale !== correctLocale) {
             const currentPath = router.asPath;
