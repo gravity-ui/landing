@@ -2,7 +2,6 @@ import {PageConstructorProvider, Theme} from '@gravity-ui/page-constructor';
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import Head from 'next/head';
 import React from 'react';
-import {useLocaleRedirect} from 'src/hooks/useLocaleRedirect';
 
 import {LibraryPreview} from '../../../../../components/LibraryPreview/LibraryPreview';
 import {getI18nPaths, getI18nProps, getLibsList} from '../../../../../utils';
@@ -38,7 +37,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export const LibraryPreviewPage = ({id}: {id: string}) => {
     const lib = libs.find((item) => item.config.id === id)!;
-    useLocaleRedirect();
 
     return (
         <React.Fragment>

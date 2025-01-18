@@ -7,7 +7,6 @@ import {DesignArticle} from '../../../../components/DesignArticle/DesignArticle'
 import {DesignLayout} from '../../../../components/DesignLayout/DesignLayout';
 import {Layout} from '../../../../components/Layout/Layout';
 import {sections as designSections} from '../../../../content/design';
-import {useLocaleRedirect} from '../../../../hooks/useLocaleRedirect';
 import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -48,8 +47,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 };
 
 export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleId: string}) => {
-    useLocaleRedirect();
-
     const {i18n} = useTranslation();
 
     const section = designSections.find((item) => item.id === sectionId);

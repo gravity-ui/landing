@@ -5,4 +5,5 @@ module.exports = {
         defaultNS: 'common',
         ignoreJSONStructure: false,
     },
+    routesWithoutRedirect: ['/404', '/sandbox', '/rtl', '/__stand'],
 };

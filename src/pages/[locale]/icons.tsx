@@ -4,7 +4,6 @@ import React from 'react';
 
 import {Icons} from '../../components/Icons';
 import {Layout} from '../../components/Layout/Layout';
-import {useLocaleRedirect} from '../../hooks/useLocaleRedirect';
 import {getI18nPaths, getI18nProps} from '../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -25,8 +24,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 const ICON_QUERY_KEY = 'icon';
 
 export const IconsPage = () => {
-    useLocaleRedirect();
-
     const router = useRouter();
     const {[ICON_QUERY_KEY]: iconFromQuery} = router.query;
     const currentIcon = typeof iconFromQuery === 'string' ? iconFromQuery : undefined;

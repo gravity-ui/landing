@@ -8,7 +8,6 @@ import {Component} from '../../../../components/Component/Component';
 import {ComponentsLayout} from '../../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../../components/Layout/Layout';
 import {libs} from '../../../../content/components';
-import {useLocaleRedirect} from '../../../../hooks/useLocaleRedirect';
 import {getLibById, getLibComponents, getLocale, getMaintainers} from '../../../../utils';
 import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
 
@@ -96,8 +95,6 @@ export const ComponentPage = ({
     componentId: string;
     readmeContent: string;
 }) => {
-    useLocaleRedirect();
-
     const lib = libs.find((item) => item.id === libId);
     const component = lib?.components.find((item) => item.id === componentId);
 

@@ -2,7 +2,6 @@ import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import dynamic from 'next/dynamic';
 import React from 'react';
-import {useLocaleRedirect} from 'src/hooks/useLocaleRedirect';
 
 import {Layout} from '../../../../../components/Layout/Layout';
 import {getI18nPaths, getI18nProps, getLibsList} from '../../../../../utils';
@@ -62,7 +61,6 @@ export const availablePlaygrounds = ['markdown-editor', 'graph'];
 export const PlaygroundPage = ({libId}: {libId: string}) => {
     const hasPlayground = availablePlaygrounds.includes(libId);
 
-    useLocaleRedirect();
     const {t} = useTranslation();
 
     return (

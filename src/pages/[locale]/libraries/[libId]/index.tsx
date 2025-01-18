@@ -3,7 +3,6 @@ import {useTranslation} from 'next-i18next';
 
 import {Layout} from '../../../../components/Layout/Layout';
 import {Library} from '../../../../components/Library/Library';
-import {useLocaleRedirect} from '../../../../hooks/useLocaleRedirect';
 import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../../utils';
 
 function getOgImageUrl(id?: string) {
@@ -39,7 +38,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const LibraryPage = ({libId}: {libId: string}) => {
     const {t} = useTranslation();
-    useLocaleRedirect();
 
     const lib = getLibById(libId);
 
