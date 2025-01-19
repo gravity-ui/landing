@@ -49,7 +49,7 @@ class CustomDocument extends Document {
 
                                 var savedLocale = localStorage.getItem('${LOCALE_LOCAL_STORAGE_KEY}');
                                 var pathLocale = path.split('/')[1];
-                                pathLocale = locales.includes(pathLocale) ? pathLocale : 'en';
+                                pathLocale = locales.includes(pathLocale) ? pathLocale : defaultLocale;
 
                                 if (savedLocale && savedLocale !== pathLocale && !routesWithoutRedirect.some((item) => path.startsWith(item))) {
                                     var redirectPath;
