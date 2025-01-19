@@ -1,2 +1,2 @@
 // Support for default locale without path prefix
-export {default, getStaticProps} from '../../[locale]/libraries';
+export {default, getStaticProps} from '../[locale]/libraries';

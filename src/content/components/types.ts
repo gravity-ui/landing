@@ -9,7 +9,10 @@ export type Component = {
     isComingSoon?: boolean;
     isSupportRTL?: boolean;
     content?: {
-        readmeUrl: string;
+        readmeUrl: {
+            en: string;
+            ru: string;
+        };
         design?: string;
     };
     sandbox?: SandboxType;

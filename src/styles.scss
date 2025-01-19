@@ -17,6 +17,19 @@ body.g-root,
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+    &__global-loader {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 9999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--g-color-base-background);
+    }
+
     &:not(.sandbox) {
         --g-font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
         // --g-text-body-font-family: var(--g-font-family-sans);

@@ -1,10 +1,9 @@
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import {useTranslation} from 'next-i18next';
 
-import {Layout} from '../../../components/Layout/Layout';
-import {Library} from '../../../components/Library/Library';
-import {useLocaleRedirect} from '../../../hooks/useLocaleRedirect';
-import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../utils';
+import {Layout} from '../../../../components/Layout/Layout';
+import {Library} from '../../../../components/Library/Library';
+import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../../utils';
 
 function getOgImageUrl(id?: string) {
     return id ? `https://storage.yandexcloud.net/gravity-assets/og/${id}.jpg` : undefined;
@@ -39,7 +38,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
 export const LibraryPage = ({libId}: {libId: string}) => {
     const {t} = useTranslation();
-    useLocaleRedirect();
 
     const lib = getLibById(libId);
 

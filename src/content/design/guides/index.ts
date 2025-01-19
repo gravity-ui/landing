@@ -42,271 +42,355 @@ import guideTooltipContent from './content/Tooltip.mdx';
 import guideTypographyContent from './content/Typography.mdx';
 import guideUserContent from './content/User.mdx';
 import guideUserLabelContent from './content/UserLabel.mdx';
+import guideActionTooltipContentRu from './content/ru/ActionTooltip.mdx';
+import guideAlertContentRu from './content/ru/Alert.mdx';
+import guideBasicsContentRu from './content/ru/Basics.mdx';
+import guideBrandingContentRu from './content/ru/Branding.mdx';
+import guideBreadcrumbsContentRu from './content/ru/Breadcrumbs.mdx';
+import guideButtonContentRu from './content/ru/Button.mdx';
+import guideCardContentRu from './content/ru/Card.mdx';
+import guideChangelogDialogContentRu from './content/ru/ChangelogDialog.mdx';
+import guideCheckboxContentRu from './content/ru/Checkbox.mdx';
+import guideClipboardButtonContentRu from './content/ru/ClipboardButton.mdx';
+import guideColorContentRu from './content/ru/Color.mdx';
+import guideCornerRadiusContentRu from './content/ru/CornerRadius.mdx';
+import guideDialogContentRu from './content/ru/Dialog.mdx';
+import guideDropdownMenuContentRu from './content/ru/DropdownMenu.mdx';
+import guideGridAndContainerContentRu from './content/ru/GridAndContainer.mdx';
+import guideHotkeyContentRu from './content/ru/Hotkey.mdx';
+import guideLabelContentRu from './content/ru/Label.mdx';
+import guideLinksContentRu from './content/ru/Links.mdx';
+import guideListItemContentRu from './content/ru/ListItem.mdx';
+import guideLoaderContentRu from './content/ru/Loader.mdx';
+import guideModuleContentRu from './content/ru/Module.mdx';
+import guidePaginatorContentRu from './content/ru/Paginator.mdx';
+import guidePopoverContentRu from './content/ru/Popover.mdx';
+import guidePopupContentRu from './content/ru/Popup.mdx';
+import guideProgressContentRu from './content/ru/Progress.mdx';
+import guideRadioContentRu from './content/ru/Radio.mdx';
+import guideRadioButtonContentRu from './content/ru/RadioButton.mdx';
+import guideRadioGroupContentRu from './content/ru/RadioGroup.mdx';
+import guideResourcesContentRu from './content/ru/Resources.mdx';
+import guideSelectContentRu from './content/ru/Select.mdx';
+import guideSkeletonContentRu from './content/ru/Skeleton.mdx';
+import guideSpinContentRu from './content/ru/Spin.mdx';
+import guideSwitchContentRu from './content/ru/Switch.mdx';
+import guideTableContentRu from './content/ru/Table.mdx';
+import guideTabsContentRu from './content/ru/Tabs.mdx';
+import guideTextAreaContentRu from './content/ru/TextArea.mdx';
+import guideTextInputContentRu from './content/ru/TextInput.mdx';
+import guideToasterContentRu from './content/ru/Toaster.mdx';
+import guideTooltipContentRu from './content/ru/Tooltip.mdx';
+import guideTypographyContentRu from './content/ru/Typography.mdx';
+import guideUserContentRu from './content/ru/User.mdx';
+import guideUserLabelContentRu from './content/ru/UserLabel.mdx';
+
+const inferString = (content: unknown) => {
+    return content as string;
+};
 
 export const branding: Section = {
     id: 'branding',
-    title: 'General',
-    description: 'Design guides description',
     articles: [
         {
             id: 'resources',
-            title: 'Resources',
-            description: '',
-            content: guideResourcesContent,
+            content: {
+                en: inferString(guideResourcesContent),
+                ru: inferString(guideResourcesContentRu),
+            },
         },
         {
             id: 'basics',
-            title: 'Basics',
-            description: '',
-            content: guideBasicsContent,
+            content: {
+                en: inferString(guideBasicsContent),
+                ru: inferString(guideBasicsContentRu),
+            },
         },
         {
             id: 'color',
-            title: 'Color',
-            description: '',
-            content: guideColorContent,
+            content: {
+                en: inferString(guideColorContent),
+                ru: inferString(guideColorContentRu),
+            },
         },
         {
             id: 'typography',
-            title: 'Typography',
-            description: '',
-            content: guideTypographyContent,
+            content: {
+                en: inferString(guideTypographyContent),
+                ru: inferString(guideTypographyContentRu),
+            },
         },
         {
             id: 'corner-radius',
-            title: 'Corner Radius',
-            description: '',
-            content: guideCornerRadiusContent,
+            content: {
+                en: inferString(guideCornerRadiusContent),
+                ru: inferString(guideCornerRadiusContentRu),
+            },
         },
         {
             id: 'branding',
-            title: 'Branding',
-            description: '',
-            content: guideBrandingContent,
+            content: {
+                en: inferString(guideBrandingContent),
+                ru: inferString(guideBrandingContentRu),
+            },
         },
         {
             id: 'grid-and-container',
-            title: 'Grid and container',
-            description: '',
-            content: guideGridAndContainerContent,
+            content: {
+                en: inferString(guideGridAndContainerContent),
+                ru: inferString(guideGridAndContainerContentRu),
+            },
         },
         {
             id: 'module',
-            title: 'Module and spacing system',
-            description: '',
-            content: guideModuleContent,
+            content: {
+                en: inferString(guideModuleContent),
+                ru: inferString(guideModuleContentRu),
+            },
         },
     ],
 };
 
 export const guides: Section = {
     id: 'guides',
-    title: 'Components',
-    description: 'Design guides description',
     articles: [
         {
             id: 'action-tooltip',
-            title: 'Action Tooltip',
-            description: '',
-            content: guideActionTooltipContent,
+            content: {
+                en: inferString(guideActionTooltipContent),
+                ru: inferString(guideActionTooltipContentRu),
+            },
         },
         {
             id: 'alert',
-            title: 'Alert',
-            description: '',
-            content: guideAlertContent,
+            content: {
+                en: inferString(guideAlertContent),
+                ru: inferString(guideAlertContentRu),
+            },
         },
         {
             id: 'breadcrumbs',
-            title: 'Breadcrumbs',
-            description: '',
-            content: guideBreadcrumbsContent,
+            content: {
+                en: inferString(guideBreadcrumbsContent),
+                ru: inferString(guideBreadcrumbsContentRu),
+            },
         },
         {
             id: 'button',
-            title: 'Button',
-            description: '',
-            content: guideButtonContent,
+            content: {
+                en: inferString(guideButtonContent),
+                ru: inferString(guideButtonContentRu),
+            },
         },
         {
             id: 'card',
-            title: 'Card',
-            description: '',
-            content: guideCardContent,
+            content: {
+                en: inferString(guideCardContent),
+                ru: inferString(guideCardContentRu),
+            },
         },
         {
             id: 'changelog-dialog',
-            title: 'Changelog Dialog',
-            description: '',
-            content: guideChangelogDialogContent,
+            content: {
+                en: inferString(guideChangelogDialogContent),
+                ru: inferString(guideChangelogDialogContentRu),
+            },
         },
         {
             id: 'checkbox',
-            title: 'Checkbox',
-            description: '',
-            content: guideCheckboxContent,
+            content: {
+                en: inferString(guideCheckboxContent),
+                ru: inferString(guideCheckboxContentRu),
+            },
         },
         {
             id: 'clipboard-button',
-            title: 'Clipboard Button',
-            description: '',
-            content: guideClipboardButtonContent,
+            content: {
+                en: inferString(guideClipboardButtonContent),
+                ru: inferString(guideClipboardButtonContentRu),
+            },
         },
         {
             id: 'dialog',
-            title: 'Dialog',
-            description: '',
-            content: guideDialogContent,
+            content: {
+                en: inferString(guideDialogContent),
+                ru: inferString(guideDialogContentRu),
+            },
         },
         {
             id: 'dropdown-menu',
-            title: 'DropdownMenu',
-            description: '',
-            content: guideDropdownMenuContent,
+            content: {
+                en: inferString(guideDropdownMenuContent),
+                ru: inferString(guideDropdownMenuContentRu),
+            },
         },
         {
             id: 'hotkey',
-            title: 'Hotkey',
-            description: '',
-            content: guideHotkeyContent,
+            content: {
+                en: inferString(guideHotkeyContent),
+                ru: inferString(guideHotkeyContentRu),
+            },
         },
         {
             id: 'label',
-            title: 'Label',
-            description: '',
-            content: guideLabelContent,
+            content: {
+                en: inferString(guideLabelContent),
+                ru: inferString(guideLabelContentRu),
+            },
         },
         {
             id: 'links',
-            title: 'Links',
-            description: '',
-            content: guideLinksContent,
+            content: {
+                en: inferString(guideLinksContent),
+                ru: inferString(guideLinksContentRu),
+            },
         },
         {
             id: 'list-item',
-            title: 'List and list-item',
-            description: '',
-            content: guideListItemContent,
+            content: {
+                en: inferString(guideListItemContent),
+                ru: inferString(guideListItemContentRu),
+            },
         },
         {
             id: 'loader',
-            title: 'Loader',
-            description: '',
-            content: guideLoaderContent,
+            content: {
+                en: inferString(guideLoaderContent),
+                ru: inferString(guideLoaderContentRu),
+            },
         },
         {
             id: 'paginator',
-            title: 'Paginator',
-            description: '',
-            content: guidePaginatorContent,
+            content: {
+                en: inferString(guidePaginatorContent),
+                ru: inferString(guidePaginatorContentRu),
+            },
         },
         {
             id: 'popover',
-            title: 'Popover',
-            description: '',
-            content: guidePopoverContent,
+            content: {
+                en: inferString(guidePopoverContent),
+                ru: inferString(guidePopoverContentRu),
+            },
         },
         {
             id: 'popup',
-            title: 'Popup',
-            description: '',
-            content: guidePopupContent,
+            content: {
+                en: inferString(guidePopupContent),
+                ru: inferString(guidePopupContentRu),
+            },
         },
         {
             id: 'progress',
-            title: 'Progress',
-            description: '',
-            content: guideProgressContent,
+            content: {
+                en: inferString(guideProgressContent),
+                ru: inferString(guideProgressContentRu),
+            },
         },
         {
             id: 'radio',
-            title: 'Radio',
-            description: '',
-            content: guideRadioContent,
+            content: {
+                en: inferString(guideRadioContent),
+                ru: inferString(guideRadioContentRu),
+            },
         },
         {
             id: 'radio-button',
-            title: 'Radio Button',
-            description: '',
-            content: guideRadioButtonContent,
+            content: {
+                en: inferString(guideRadioButtonContent),
+                ru: inferString(guideRadioButtonContentRu),
+            },
         },
         {
             id: 'radio-group',
-            title: 'Radio Group',
-            description: '',
-            content: guideRadioGroupContent,
+            content: {
+                en: inferString(guideRadioGroupContent),
+                ru: inferString(guideRadioGroupContentRu),
+            },
         },
         {
             id: 'select',
-            title: 'Select',
-            description: '',
-            content: guideSelectContent,
+            content: {
+                en: inferString(guideSelectContent),
+                ru: inferString(guideSelectContentRu),
+            },
         },
         {
             id: 'skeleton',
-            title: 'Skeleton',
-            description: '',
-            content: guideSkeletonContent,
+            content: {
+                en: inferString(guideSkeletonContent),
+                ru: inferString(guideSkeletonContentRu),
+            },
         },
         {
             id: 'spin',
-            title: 'Spin',
-            description: '',
-            content: guideSpinContent,
+            content: {
+                en: inferString(guideSpinContent),
+                ru: inferString(guideSpinContentRu),
+            },
         },
         {
             id: 'switch',
-            title: 'Switch',
-            description: '',
-            content: guideSwitchContent,
+            content: {
+                en: inferString(guideSwitchContent),
+                ru: inferString(guideSwitchContentRu),
+            },
         },
         {
             id: 'table',
-            title: 'Table',
-            description: '',
-            content: guideTableContent,
+            content: {
+                en: inferString(guideTableContent),
+                ru: inferString(guideTableContentRu),
+            },
         },
         {
             id: 'tabs',
-            title: 'Tabs',
-            description: '',
-            content: guideTabsContent,
+            content: {
+                en: inferString(guideTabsContent),
+                ru: inferString(guideTabsContentRu),
+            },
         },
         {
             id: 'text-area',
-            title: 'Text Area',
-            description: '',
-            content: guideTextAreaContent,
+            content: {
+                en: inferString(guideTextAreaContent),
+                ru: inferString(guideTextAreaContentRu),
+            },
         },
         {
             id: 'text-input',
-            title: 'Text Input',
-            description: '',
-            content: guideTextInputContent,
+            content: {
+                en: inferString(guideTextInputContent),
+                ru: inferString(guideTextInputContentRu),
+            },
         },
         {
             id: 'toaster',
-            title: 'Toaster',
-            description: '',
-            content: guideToasterContent,
+            content: {
+                en: inferString(guideToasterContent),
+                ru: inferString(guideToasterContentRu),
+            },
         },
         {
             id: 'tooltip',
-            title: 'Tooltip',
-            description: '',
-            content: guideTooltipContent,
+            content: {
+                en: inferString(guideTooltipContent),
+                ru: inferString(guideTooltipContentRu),
+            },
         },
         {
             id: 'user',
-            title: 'User',
-            description: '',
-            content: guideUserContent,
+            content: {
+                en: inferString(guideUserContent),
+                ru: inferString(guideUserContentRu),
+            },
         },
         {
             id: 'user-label',
-            title: 'User Label',
-            description: '',
-            content: guideUserLabelContent,
+            content: {
+                en: inferString(guideUserLabelContent),
+                ru: inferString(guideUserLabelContentRu),
+            },
         },
     ],
 };

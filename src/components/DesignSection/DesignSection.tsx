@@ -1,4 +1,5 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {libs} from '../../content/components';
@@ -16,6 +17,8 @@ type Props = {
 };
 
 export const DesignSection: React.FC<Props> = ({section}) => {
+    const {t} = useTranslation();
+
     if (section.id === 'components') {
         const componentsWithDesign = libs.reduce<(Component & {url: string})[]>((acc, lib) => {
             acc.push(
@@ -61,8 +64,8 @@ export const DesignSection: React.FC<Props> = ({section}) => {
     return (
         <div className={b()}>
             <div className={b('header')}>
-                <h1 className={b('title')}>{section.title}</h1>
-                <div className={b('description')}>{section.description}</div>
+                <h1 className={b('title')}>{t(`section_${section.id}_title`)}</h1>
+                <div className={b('description')}>{t(`section_${section.id}_description`)}</div>
             </div>
 
             <div className={b('articles')}>
@@ -73,7 +76,7 @@ export const DesignSection: React.FC<Props> = ({section}) => {
                                 href={`/design/${section.id}/${article.id}`}
                                 className={b('article')}
                             >
-                                {article.title}
+                                {t(`section_${section.id}_article_${article.id}_title`)}
                             </Link>
                         </div>
                     );

@@ -3,9 +3,9 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
-import {Layout} from '../../components/Layout/Layout';
-import {sections} from '../../content/design';
-import {getI18nPaths, getI18nProps, getLocaleLink} from '../../utils';
+import {Layout} from '../../../components/Layout/Layout';
+import {sections} from '../../../content/design';
+import {getI18nPaths, getI18nProps, getLocaleLink} from '../../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {

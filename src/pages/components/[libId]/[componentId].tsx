@@ -1,8 +1,8 @@
 // Support for default locale without path prefix
 import {GetStaticPaths} from 'next';
 
-import {ComponentPage, getStaticProps} from '../../../[locale]/components/[libId]/[componentId]';
 import {libs} from '../../../content/components';
+import {ComponentPage, getStaticProps} from '../../[locale]/components/[libId]/[componentId]';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {

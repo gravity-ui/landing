@@ -1,8 +1,8 @@
 // Support for default locale without path prefix
 import {GetStaticPaths} from 'next';
 
-import {LibraryPage, getStaticProps} from '../../../[locale]/libraries/[libId]';
 import {getLibsList} from '../../../utils';
+import {LibraryPage, getStaticProps} from '../../[locale]/libraries/[libId]';
 
 const libs = getLibsList();
 

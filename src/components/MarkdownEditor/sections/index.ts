@@ -1,9 +1,8 @@
 import guideBasicsContent from '../../../content/design/guides/content/Basics.mdx';
 import guideResourcesContent from '../../../content/design/guides/content/Resources.mdx';
 import guideTypographyContent from '../../../content/design/guides/content/Typography.mdx';
-import {Section} from '../../../content/design/types';
 
-export const settings: Section = {
+export const settings = {
     id: 'settings',
     title: 'Editor settings',
     description: 'Configure your editor',
@@ -29,7 +28,7 @@ export const settings: Section = {
     ],
 };
 
-export const presets: Section = {
+export const presets = {
     id: 'presets',
     title: 'Presets',
     description: 'Set presets',

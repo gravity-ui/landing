@@ -2,10 +2,9 @@ import {GetStaticPaths, GetStaticProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import {Layout} from '../../components/Layout/Layout';
-import {Themes} from '../../components/Themes/Themes';
-import {useLocaleRedirect} from '../../hooks/useLocaleRedirect';
-import {getI18nPaths, getI18nProps} from '../../utils/i18next';
+import {Layout} from '../../../components/Layout/Layout';
+import {Themes} from '../../../components/Themes/Themes';
+import {getI18nPaths, getI18nProps} from '../../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
@@ -24,8 +23,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 };
 
 export const ThemesPage = () => {
-    useLocaleRedirect();
-
     const {t} = useTranslation();
 
     return (

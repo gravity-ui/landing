@@ -90,13 +90,15 @@ export const Layout: React.FC<LayoutProps> = ({
                 <Meta {...meta} />
             </Head>
             <ThemeProvider theme={DEFAULT_THEME} direction={isRtl ? 'rtl' : 'ltr'}>
-                {isPageConstrucor ? (
-                    <PageConstructorProvider theme={DEFAULT_THEME as PageConstructorTheme}>
-                        {pageConent}
-                    </PageConstructorProvider>
-                ) : (
-                    pageConent
-                )}
+                <React.Fragment>
+                    {isPageConstrucor ? (
+                        <PageConstructorProvider theme={DEFAULT_THEME as PageConstructorTheme}>
+                            {pageConent}
+                        </PageConstructorProvider>
+                    ) : (
+                        pageConent
+                    )}
+                </React.Fragment>
             </ThemeProvider>
         </EnvironmentContext.Provider>
     );

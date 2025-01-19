@@ -24,7 +24,7 @@ export interface ThemeExportProps {
 }
 
 export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
-    const {t} = useTranslation('themes');
+    const {t, i18n} = useTranslation('themes');
 
     const themeState = useThemeCreator();
     const breakpoint = useWindowBreakpoint();
@@ -57,7 +57,9 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
                     title={t('export_theme_apply-theme-alert-title')}
                     message={
                         <Text variant="code-1" className={b('apply-theme-message')}>
-                            {APPLY_THEME_TEMPLATE}
+                            {i18n.language === 'ru'
+                                ? APPLY_THEME_TEMPLATE.ru
+                                : APPLY_THEME_TEMPLATE.en}
                         </Text>
                     }
                 />

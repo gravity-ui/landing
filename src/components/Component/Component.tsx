@@ -8,7 +8,7 @@ import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
 import {EnvironmentContext} from '../../contexts';
-import {Contributor, block, getRouteFromReadmeUrl} from '../../utils';
+import {Contributor, block, getLocale, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';
 import {Section} from '../NavigationLayout/types';
@@ -49,7 +49,9 @@ export const Component: React.FC<ComponentProps> = ({
     sections,
     maintainers,
 }) => {
-    const {t} = useTranslation();
+    const {t, i18n} = useTranslation();
+
+    const locale = getLocale(i18n.language);
 
     const {isClient} = React.useContext(EnvironmentContext);
 
@@ -122,8 +124,8 @@ export const Component: React.FC<ComponentProps> = ({
                 return link;
             }
 
-            const readmeUrl = new URL(component.content.readmeUrl);
-            const url = new URL(link, component.content.readmeUrl);
+            const readmeUrl = new URL(component.content.readmeUrl[locale]);
+            const url = new URL(link, component.content.readmeUrl[locale]);
 
             if (url.origin !== readmeUrl.origin) {
                 return link;
@@ -132,7 +134,7 @@ export const Component: React.FC<ComponentProps> = ({
             const newLink = getRouteFromReadmeUrl(url.toString());
             return newLink ?? link;
         },
-        [component.content?.readmeUrl],
+        [component.content?.readmeUrl[locale]],
     );
 
     return (
@@ -198,7 +200,7 @@ export const Component: React.FC<ComponentProps> = ({
                     <React.Fragment>
                         {isClient && (
                             <MDXRenderer
-                                key={`${libId}-${component.id}-design`}
+                                key={`${libId}-${component.id}-${locale}-design`}
                                 text={component.content?.design}
                             />
                         )}
@@ -216,7 +218,7 @@ export const Component: React.FC<ComponentProps> = ({
                         ) : null}
                         {isClient && (
                             <MDXRenderer
-                                key={`${libId}-${component.id}-overview`}
+                                key={`${libId}-${component.id}-${locale}-overview`}
                                 text={readmeContent}
                                 rewriteLinks={rewriteLinks}
                                 withComponents

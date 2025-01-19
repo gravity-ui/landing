@@ -1,5 +1,6 @@
 import {Sliders} from 'landing-icons';
 import {Button, Flex, Icon, Text} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -22,6 +23,8 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
     onEditThemeClick,
     onSelectCustomColor,
 }) => {
+    const {t} = useTranslation('themes');
+
     const [customModeEnabled, setCustomMode] = React.useState(false);
 
     const [lightBrandColor] = useThemePaletteColor({
@@ -60,7 +63,7 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
     }, [onSelectCustomColor]);
 
     return (
-        <ThemeSection className={b()} title="Brand colors">
+        <ThemeSection className={b()} title={t('title_brand-colors')}>
             <Flex direction="column">
                 <div className={b('brand-color-picker')}>
                     {BRAND_COLORS_PRESETS.map((value, index) => (
@@ -84,7 +87,7 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
                         onClick={handleSelectCustomColor}
                     >
                         <div className={b('color-inner')} />
-                        <Text variant="body-2">Custom</Text>
+                        <Text variant="body-2">{t('label_custom-color')}</Text>
                     </div>
                 </div>
             </Flex>
@@ -96,7 +99,7 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
                     size="xl"
                 >
                     <Icon data={Sliders} size={20} />
-                    Edit Theme
+                    {t('action_edit-theme')}
                 </Button>
             )}
         </ThemeSection>

@@ -35,7 +35,7 @@ export const GithubStarsBlock: React.FC<GithubStarsBlockProps> = ({device}) => {
         localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     };
 
-    if (pathname !== '/') {
+    if (pathname !== '/' && pathname !== '/[locale]') {
         return null;
     }
 
