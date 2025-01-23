@@ -138,18 +138,10 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             ],
         },
         {
-            type: CustomBlock.CustomExtendedFeatures,
+            type: CustomBlock.Libraries,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: t('home:libraries_title'),
-            button: {
-                text: t('home:libraries_actions_allLibraries'),
-                href: '/libraries',
-            },
-            colSizes: {
-                all: 12,
-                md: 6,
-                lg: 4,
-            },
+
             items: libs
                 .filter((lib) => lib.landing)
                 .map((lib) => ({

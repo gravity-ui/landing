@@ -1,0 +1,119 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}libraries-library-preview';
+
+#{$block} {
+    text-decoration: none;
+
+    &__content {
+        height: 292px;
+        width: 100%;
+        border-radius: 24px;
+        color: rgba(255, 255, 255, 0.7);
+        background-size: cover;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        transition: transform 0.2s ease-in-out;
+
+        &:hover {
+            transform: translateY(-6px);
+
+            #{$block}__text {
+                position: relative;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            &:hover {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    &__content_primary {
+        height: 600px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            height: 292px;
+        }
+
+        #{$block}__text {
+            position: relative;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__title {
+        flex: 1;
+
+        @include pcStyles.heading4();
+    }
+
+    &__stars {
+        display: flex;
+        align-items: center;
+
+        [dir='ltr'] & {
+            margin-left: 20px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: 20px;
+        }
+    }
+
+    &__stars-count {
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.7);
+
+        [dir='ltr'] & {
+            margin-left: 6px;
+        }
+
+        [dir='rtl'] & {
+            margin-right: 6px;
+        }
+    }
+
+    &__text {
+        flex: 1;
+
+        @include pcStyles.text-size(body-2);
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+
+        color: rgba(255, 255, 255, 0.85);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            position: relative;
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    &__description {
+        display: flex;
+        flex-direction: column;
+        padding: 16px 32px;
+        background-color: rgba(54, 41, 61);
+        border-radius: 0 0 24px 24px;
+        gap: 8px;
+    }
+}

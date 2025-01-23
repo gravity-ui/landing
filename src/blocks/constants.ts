@@ -1,6 +1,7 @@
 export enum CustomBlock {
     CustomHeader = 'custom-header',
     CustomExtendedFeatures = 'custom-extended-features',
+    Libraries = 'libraries',
     Examples = 'examples',
     Roadmap = 'roadmap',
     Templates = 'templates',

@@ -109,7 +109,7 @@ export const getRtlLanding = (t: TFunction): CustomPageContent => ({
             ],
         },
         {
-            type: CustomBlock.CustomExtendedFeatures,
+            type: CustomBlock.Libraries,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: 'مكتباتنا',
             button: {

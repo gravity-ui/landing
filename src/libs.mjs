@@ -141,7 +141,7 @@ export const libs = [
         npmId: '@gravity-ui/table',
         title: 'Table',
         primary: false,
-        landing: true,
+        landing: false,
         tags: ['ui'],
         storybookUrl: '',
         readmeUrl: 'https://raw.githubusercontent.com/gravity-ui/table/main/README.md',
@@ -258,7 +258,7 @@ export const libs = [
         npmId: '@gravity-ui/date-components',
         title: 'Date Components',
         primary: false,
-        landing: false,
+        landing: true,
         tags: ['ui'],
         storybookUrl:
             'https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs',
