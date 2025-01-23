@@ -1,5 +1,6 @@
 import {Sliders} from 'landing-icons';
 import {Button, Flex, Icon} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -14,6 +15,8 @@ import './TypographyTab.scss';
 const b = block('typography-tab');
 
 export const TypographyTab = () => {
+    const {t} = useTranslation('themes');
+
     const {
         typography: {isAdvancedActive},
     } = useThemeCreator();
@@ -32,7 +35,9 @@ export const TypographyTab = () => {
                     onClick={() => updateAdvancedTypography()}
                 >
                     <Icon data={Sliders} />
-                    {isAdvancedActive ? 'Hide Advanced Settings' : 'Advanced Settings'}
+                    {isAdvancedActive
+                        ? t('action_hide-advanced-settings')
+                        : t('action_open-advanced-settings')}
                 </Button>
             </Flex>
             {isAdvancedActive && <AdvanceTypographySettings />}

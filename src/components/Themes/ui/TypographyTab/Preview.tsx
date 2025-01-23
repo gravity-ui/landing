@@ -1,4 +1,5 @@
 import {Card, Col, Flex, Row, Text, TextProps, ThemeProvider} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -130,6 +131,8 @@ const TYPOGRAPHY_STYLES_PREVIEW: {
 const b = block('typography-tab__preview');
 
 export const Preview = () => {
+    const {t} = useTranslation('themes');
+
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
@@ -139,7 +142,7 @@ export const Preview = () => {
 
     return (
         <Flex direction="column" gap={10} style={{width: '100%'}}>
-            <Text variant="display-2">Typography Styles</Text>
+            <Text variant="display-2">{t('title_typography-styles')}</Text>
             <Card size="l">
                 <ThemeProvider theme="dark" scoped rootClassName={`${b()} ${b({theme: 'dark'})}`}>
                     {themeStyles ? (
