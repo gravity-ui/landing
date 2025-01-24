@@ -18,14 +18,24 @@ export type GetterProps = {componentName: string; repoName: Repos};
 
 type RepoInfoGetterFunc = (props: GetterProps) => string;
 
+export const getGithubUrl: RepoInfoGetterFunc = ({componentName, repoName}) =>
+    `https://github.com/${githubTargetProfile}/${repoName}/tree/main/src/components/${componentName}`;
+
+type ReadmeInfoGetterFunc = (props: GetterProps) => {
+    en: string;
+    ru: string;
+};
+
+export const getReadmeUrl: ReadmeInfoGetterFunc = ({componentName, repoName}) => {
+    const url = `https://raw.githubusercontent.com/${githubTargetProfile}/${repoName}/${TARGET_REPOS_VERSIONS[repoName]}/src/components/${componentName}`;
+    return {
+        en: `${url}/README.md`,
+        ru: `${url}/README-ru.md`,
+    };
+};
+
 export const mappingOptions = (arr: string[]) =>
     arr.map((item) => ({
         value: item,
         content: item,
     }));
-
-export const getReadmeUrl: RepoInfoGetterFunc = ({componentName, repoName}) =>
-    `https://raw.githubusercontent.com/${githubTargetProfile}/${repoName}/${TARGET_REPOS_VERSIONS[repoName]}/src/components/${componentName}/README.md`;
-
-export const getGithubUrl: RepoInfoGetterFunc = ({componentName, repoName}) =>
-    `https://github.com/${githubTargetProfile}/${repoName}/tree/main/src/components/${componentName}`;

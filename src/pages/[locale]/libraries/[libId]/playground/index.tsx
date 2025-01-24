@@ -2,16 +2,15 @@ import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import dynamic from 'next/dynamic';
 import React from 'react';
-import {useLocaleRedirect} from 'src/hooks/useLocaleRedirect';
 
-import {Layout} from '../../../../components/Layout/Layout';
-import {getI18nPaths, getI18nProps, getLibsList} from '../../../../utils';
+import {Layout} from '../../../../../components/Layout/Layout';
+import {getI18nPaths, getI18nProps, getLibsList} from '../../../../../utils';
 
 const libs = getLibsList();
 
 const MarkdownEditor = dynamic(
     () =>
-        import('../../../../components/MarkdownEditor/MarkdownEditor').then(
+        import('../../../../../components/MarkdownEditor/MarkdownEditor').then(
             (mod) => mod.MarkdownEditor,
         ),
     {
@@ -20,7 +19,7 @@ const MarkdownEditor = dynamic(
 );
 const GraphPlayround = dynamic(
     () =>
-        import('../../../../components/GraphPlayground/GraphPlayground').then(
+        import('../../../../../components/GraphPlayground/GraphPlayground').then(
             (mod) => mod.GraphPlayround,
         ),
     {
@@ -62,7 +61,6 @@ export const availablePlaygrounds = ['markdown-editor', 'graph'];
 export const PlaygroundPage = ({libId}: {libId: string}) => {
     const hasPlayground = availablePlaygrounds.includes(libId);
 
-    useLocaleRedirect();
     const {t} = useTranslation();
 
     return (

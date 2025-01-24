@@ -14,6 +14,7 @@ import {
     TextInput,
     TextInputProps,
 } from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import React, {useCallback, useState} from 'react';
 
 import {block} from '../../../../utils';
@@ -28,17 +29,6 @@ import {
 import {generateGoogleFontDownloadLink} from '../../lib/typography/utils';
 
 import './TypographyTab.scss';
-
-const customFontType: RadioButtonOption[] = [
-    {
-        value: CustomFontSelectType.GoogleFonts,
-        content: 'Import From Google Fonts',
-    },
-    {
-        value: CustomFontSelectType.Manual,
-        content: 'Manual',
-    },
-];
 
 const FONT_FAMILIES_OPTION: {
     name: string;
@@ -100,6 +90,8 @@ const CustomFontFamily = ({
     withExtraContent?: boolean;
     ExtraContent?: React.ReactNode;
 }) => {
+    const {t} = useTranslation('themes');
+
     const {
         typography: {
             baseSetting: {fontFamilies},
@@ -146,6 +138,17 @@ const CustomFontFamily = ({
         [fontType],
     );
 
+    const customFontType: RadioButtonOption[] = [
+        {
+            value: CustomFontSelectType.GoogleFonts,
+            content: t('label_import-from-google-fonts'),
+        },
+        {
+            value: CustomFontSelectType.Manual,
+            content: t('label_import-manual'),
+        },
+    ];
+
     return (
         <Flex direction="column" gap={6} width="100%" style={{marginBlockEnd: 52}}>
             <Flex justifyContent="space-between">
@@ -175,10 +178,12 @@ const CustomFontFamily = ({
                 <TextInput
                     size="xl"
                     value={fontFamilies[fontType]?.fontWebsite || ''}
-                    label="Link to font:"
+                    label={`${t('label_link-to-font')}:`}
                     validationState={validationState}
                     errorPlacement="inside"
-                    errorMessage={`Invalid link. Link should start from ${GOOGLE_FONTS_FONT_PREVIEW_HOST}`}
+                    errorMessage={`${t(
+                        'label_invalid-font-link',
+                    )} ${GOOGLE_FONTS_FONT_PREVIEW_HOST}`}
                     placeholder={`${GOOGLE_FONTS_FONT_PREVIEW_HOST}Fira+Mono`}
                     onChange={onGoogleFontInputChange}
                 />
@@ -187,11 +192,11 @@ const CustomFontFamily = ({
             {fontFamilies[fontType].customType === CustomFontSelectType.Manual && (
                 <Flex direction="column" gap={6}>
                     <TextInput
-                        label="Font Name:"
+                        label={`${t('label_font-name')}:`}
                         value={fontFamilies[fontType].title}
                         size="xl"
                         type="text"
-                        placeholder="Enter font name"
+                        placeholder={t('label_font-name-placeholder')}
                         onChange={(event) => {
                             const fontName = event.target.value;
 
@@ -211,7 +216,7 @@ const CustomFontFamily = ({
                     <FormRow
                         direction="column"
                         className={b('custom-font-textarea-wrapper')}
-                        label={<Text variant="subheader-2">Alternatives</Text>}
+                        label={<Text variant="subheader-2">{t('label_alternatives')}</Text>}
                     >
                         <TextArea
                             size="xl"
@@ -243,7 +248,7 @@ const CustomFontFamily = ({
                     <FormRow
                         direction="column"
                         className={b('custom-font-textarea-wrapper')}
-                        label={<Text variant="subheader-2">Font Link</Text>}
+                        label={<Text variant="subheader-2">{t('label_font-link')}</Text>}
                     >
                         <TextArea
                             className={b('custom-font-textarea')}
@@ -285,14 +290,16 @@ const DeleteAdditionalFontButton = ({
     removeFontFamilyType: ReturnType<typeof useThemeCreatorMethods>['removeFontFamilyType'];
     mobile?: boolean;
 }) => {
+    const {t} = useTranslation('themes');
+
     return (
         <Popover
             content={
                 <Flex direction="column" gap={2}>
                     <span>
-                        This font is currently in use in blocks:{' '}
-                        <b>{getFontUsages(fType.value).join(', ')}</b>. If you delete it, we'll
-                        replace it with a default font.
+                        {t('label_delete-additional-font-message-1')}{' '}
+                        <b>{getFontUsages(fType.value).join(', ')}</b>.{' '}
+                        {t('label_delete-additional-font-message-2')}
                     </span>
                     <Button
                         view="action"
@@ -303,7 +310,7 @@ const DeleteAdditionalFontButton = ({
                             });
                         }}
                     >
-                        Continue
+                        {t('action_continue')}
                     </Button>
                 </Flex>
             }
@@ -326,6 +333,8 @@ const DeleteAdditionalFontButton = ({
 };
 
 export const FontFamilyPicker = () => {
+    const {t} = useTranslation('themes');
+
     const {
         typography: {
             baseSetting: {fontFamilies, customFontFamilyType},
@@ -350,7 +359,7 @@ export const FontFamilyPicker = () => {
 
     return (
         <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
-            <Text variant="display-2">Fonts</Text>
+            <Text variant="display-2">{t('title_fonts')}</Text>
             {FONT_FAMILIES_OPTION.map((option) => (
                 <Row
                     space={0}
@@ -440,7 +449,7 @@ export const FontFamilyPicker = () => {
                             <TextInput
                                 size="xl"
                                 value={fType.content}
-                                label="Alias:"
+                                label={`${t('label_alias')}:`}
                                 onChange={(event) => {
                                     const value = event.target.value;
 
@@ -449,7 +458,7 @@ export const FontFamilyPicker = () => {
                                         familyType: fType.value,
                                     });
                                 }}
-                                placeholder="Enter font alias"
+                                placeholder={t('label_alias-placeholder')}
                                 className={b('additional-font-input')}
                             />
                             <DeleteAdditionalFontButton
@@ -481,12 +490,12 @@ export const FontFamilyPicker = () => {
                 className={b('additional-font-add-btn')}
                 onClick={() => {
                     addFontFamilyType({
-                        title: `Additional Font ${customFontFamilyType.length + 1}`,
+                        title: `${t('label_additional-font')} ${customFontFamilyType.length + 1}`,
                     });
                 }}
             >
                 <Icon data={Plus} />
-                Add Font Family
+                {t('action_add-font-family')}
             </Button>
         </Flex>
     );

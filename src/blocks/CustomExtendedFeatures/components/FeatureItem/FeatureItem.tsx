@@ -1,12 +1,13 @@
 import {HTML, Image, ThemedImage, useTheme} from '@gravity-ui/page-constructor';
 import {Icon} from 'landing-uikit';
+import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';
 
 import calendarIcon from '../../../../assets/icons/calendar.svg';
 import starIcon from '../../../../assets/icons/star.svg';
 import versionIcon from '../../../../assets/icons/version.svg';
-import {block, getLibById, getMediaImage, getThemedValue} from '../../../../utils';
+import {block, getLibById, getLocaleLink, getMediaImage, getThemedValue} from '../../../../utils';
 
 import './FeatureItem.scss';
 
@@ -28,6 +29,8 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     icon,
     contentStyle,
 }) => {
+    const {i18n} = useTranslation();
+
     const [theme] = useTheme();
 
     const iconThemed = icon && getThemedValue(icon, theme);
@@ -53,7 +56,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     }
 
     const Tag = id ? (Link as any) : 'div';
-    const tagProps = id ? {href: `/libraries/${id}`} : {};
+    const tagProps = id ? {href: getLocaleLink(`/libraries/${id}`, i18n)} : {};
 
     return (
         <Tag {...tagProps} className={b()}>

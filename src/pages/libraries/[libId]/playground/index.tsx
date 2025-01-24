@@ -1,11 +1,11 @@
 import {GetStaticPaths} from 'next';
+
+import {getLibsList} from '../../../../utils';
 import {
     PlaygroundPage,
     availablePlaygrounds,
     getStaticProps,
-} from 'src/[locale]/libraries/[libId]/playground';
-
-import {getLibsList} from '../../../../utils';
+} from '../../../[locale]/libraries/[libId]/playground';
 
 const libs = getLibsList();
 

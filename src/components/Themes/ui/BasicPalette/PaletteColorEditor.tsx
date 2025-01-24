@@ -1,6 +1,7 @@
 import {TrashBin} from 'landing-icons';
 import {Button, Icon, Text, TextInput} from 'landing-uikit';
 import debounce from 'lodash/debounce';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -21,6 +22,8 @@ export const PaletteColorEditor: React.FC<PaletteColorEditorProps> = ({
     onUpdateTitle,
     paletteColorData,
 }) => {
+    const {t} = useTranslation('themes');
+
     const {title, isCustom} = paletteColorData;
 
     const [localTitle, setLocalTitle] = React.useState(title);
@@ -66,13 +69,13 @@ export const PaletteColorEditor: React.FC<PaletteColorEditorProps> = ({
                 onUpdate={handleUpdateTitle}
                 startContent={
                     <Text variant="subheader-1" className={b('input-title')}>
-                        Name:
+                        {t('label_name')}:
                     </Text>
                 }
             />
             <div className={b('header')}>
                 <Text className={b('title')} variant="subheader-2">
-                    New color
+                    {t('label_new-color')}
                 </Text>
                 <Button size="l" onClick={handleDelete}>
                     <Icon data={TrashBin} size={16} />

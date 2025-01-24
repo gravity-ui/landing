@@ -5,5 +5,5 @@ export * from './lib';
 export * from './components';
 export * from './browser';
 export * from './i18next';
-export * from './locale-link';
+export * from './locale';
 export * from './anchor';

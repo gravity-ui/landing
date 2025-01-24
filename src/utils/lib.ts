@@ -15,7 +15,10 @@ type LibConfig = {
     landing: boolean;
     tags: string[];
     storybookUrl: string;
-    readmeUrl: string;
+    readmeUrl: {
+        en: string;
+        ru: string;
+    };
     changelogUrl: string;
     mainBranch: string;
 };
@@ -39,7 +42,10 @@ type LibData = {
     lastUpdate: string;
     license: string;
     issues: number;
-    readme: string;
+    readme: {
+        en: string;
+        ru: string;
+    };
     changelog: string;
     contributors: Contributor[];
     codeOwners: CodeOwners[];

@@ -20,8 +20,9 @@ $block: '.#{variables.$ns}selectable-card';
     }
 
     &__fake-button {
-        width: 69px;
         height: 28px;
+        padding-left: 8px;
+        padding-right: 8px;
         background-color: var(--g-color-base-brand);
         display: flex;
         align-items: center;
