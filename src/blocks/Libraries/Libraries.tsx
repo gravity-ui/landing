@@ -8,7 +8,7 @@ import {CustomBlock} from '../constants';
 import './Libraries.scss';
 import {LibraryPreview} from './components/LibraryPreview/LibraryPreview';
 
-const b = block('libraries');
+const b = block('libraries-block');
 
 type Item = {
     id?: string;

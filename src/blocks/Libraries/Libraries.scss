@@ -2,7 +2,7 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../variables.scss';
 
-$block: '.#{variables.$ns}libraries';
+$block: '.#{variables.$ns}libraries-block';
 
 #{$block} {
     @include pcStyles.animate();
@@ -17,4 +17,12 @@ $block: '.#{variables.$ns}libraries';
         flex-direction: column;
         gap: 16px;
     }
+}
+
+html[dir='rtl'] .slick-arrow.slick-prev {
+    left: 0;
+}
+
+html[dir='rtl'] .slick-arrow {
+    left: 58px;
 }
