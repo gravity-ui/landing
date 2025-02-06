@@ -56,6 +56,18 @@ export const getRtlLanding = (t: TFunction): CustomPageContent => ({
             ],
         },
         {
+            type: CustomBlock.Libraries,
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            title: 'مكتباتنا',
+            items: libs
+                .filter((lib) => lib.landing)
+                .map((lib) => ({
+                    id: lib.id,
+                    title: lib.title,
+                    description: t(`libraries-info:description_${lib.id}`),
+                })),
+        },
+        {
             type: CustomBlock.CustomExtendedFeatures,
             animated: false,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
@@ -85,18 +97,6 @@ export const getRtlLanding = (t: TFunction): CustomPageContent => ({
                     icon: featureShieldAsset,
                 },
             ],
-        },
-        {
-            type: CustomBlock.Libraries,
-            backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            title: 'مكتباتنا',
-            items: libs
-                .filter((lib) => lib.landing)
-                .map((lib) => ({
-                    id: lib.id,
-                    title: lib.title,
-                    description: t(`libraries-info:description_${lib.id}`),
-                })),
         },
         {
             type: CustomBlock.Examples,

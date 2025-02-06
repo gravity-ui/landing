@@ -88,6 +88,19 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
         //     allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
         // },
         {
+            type: CustomBlock.Libraries,
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            title: t('home:libraries_title'),
+
+            items: libs
+                .filter((lib) => lib.landing)
+                .map((lib) => ({
+                    id: lib.id,
+                    title: lib.title,
+                    description: t(`libraries-info:description_${lib.id}`),
+                })),
+        },
+        {
             type: CustomBlock.CustomExtendedFeatures,
             animated: false,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
@@ -114,19 +127,6 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     icon: featureShieldAsset,
                 },
             ],
-        },
-        {
-            type: CustomBlock.Libraries,
-            backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            title: t('home:libraries_title'),
-
-            items: libs
-                .filter((lib) => lib.landing)
-                .map((lib) => ({
-                    id: lib.id,
-                    title: lib.title,
-                    description: t(`libraries-info:description_${lib.id}`),
-                })),
         },
         {
             type: CustomBlock.Examples,
