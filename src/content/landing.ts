@@ -116,6 +116,19 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             ],
         },
         {
+            type: CustomBlock.Libraries,
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            title: t('home:libraries_title'),
+
+            items: libs
+                .filter((lib) => lib.landing)
+                .map((lib) => ({
+                    id: lib.id,
+                    title: lib.title,
+                    description: t(`libraries-info:description_${lib.id}`),
+                })),
+        },
+        {
             type: CustomBlock.Examples,
             title: t('home:examples_title'),
             colors: [
@@ -136,27 +149,6 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     value: 'blue',
                 },
             ],
-        },
-        {
-            type: CustomBlock.CustomExtendedFeatures,
-            backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            title: t('home:libraries_title'),
-            button: {
-                text: t('home:libraries_actions_allLibraries'),
-                href: '/libraries',
-            },
-            colSizes: {
-                all: 12,
-                md: 6,
-                lg: 4,
-            },
-            items: libs
-                .filter((lib) => lib.landing)
-                .map((lib) => ({
-                    id: lib.id,
-                    title: lib.title,
-                    description: t(`libraries-info:description_${lib.id}`),
-                })),
         },
         {
             type: CustomBlock.Roadmap,

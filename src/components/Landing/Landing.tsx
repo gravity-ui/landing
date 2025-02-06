@@ -10,6 +10,7 @@ import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {Examples} from '../../blocks/Examples/Examples';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
 import {IFrameBlock} from '../../blocks/IFrameBlock/IFrameBlock';
+import {Libraries} from '../../blocks/Libraries/Libraries';
 import {RoadmapBlock} from '../../blocks/RoadmapBlock/RoadmapBlock';
 import TemplatesBlock from '../../blocks/TemplatesBlock/TemplatesBlock';
 import {CustomBlock} from '../../blocks/constants';
@@ -57,6 +58,7 @@ export const Landing: React.FC = () => {
                         [CustomBlock.GithubStars]: GithubStarsBlock,
                         [CustomBlock.CustomHeader]: CustomHeader,
                         [CustomBlock.CustomExtendedFeatures]: CustomExtendedFeatures,
+                        [CustomBlock.Libraries]: Libraries,
                         [CustomBlock.Examples]: Examples,
                         [CustomBlock.Roadmap]: RoadmapBlock,
                         [CustomBlock.Templates]: TemplatesBlock,
