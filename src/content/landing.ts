@@ -94,6 +94,18 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
 
             items: libs
                 .filter((lib) => lib.landing)
+                .sort((lib1, lib2) => {
+                    const order = [
+                        'uikit',
+                        'navigation',
+                        'date-components',
+                        'markdown-editor',
+                        'page-constructor',
+                        'chartkit',
+                        'dashkit',
+                    ];
+                    return order.indexOf(lib1.id) - order.indexOf(lib2.id);
+                })
                 .map((lib) => ({
                     id: lib.id,
                     title: lib.title,
