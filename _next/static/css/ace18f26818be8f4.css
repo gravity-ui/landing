@@ -1,0 +1,1 @@
+.g-tooltip[class]{--g-popup-border-width:0}.g-tooltip[class]>div{padding:4px 8px;max-width:360px;box-sizing:border-box;box-shadow:0 1px 5px 0 #00000026;animation-duration:1ms}.g-tooltip__content{display:-webkit-box;-webkit-box-orient:vertical;-ms-box-orient:vertical;-webkit-line-clamp:20;-moz-line-clamp:20;-ms-line-clamp:20;overflow:hidden;text-overflow:ellipsis}
