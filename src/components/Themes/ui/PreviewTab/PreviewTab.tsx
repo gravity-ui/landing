@@ -35,10 +35,11 @@ interface PreviewLayoutProps {
     id: string;
     breadCrumbsItems: string[];
     styles: ReturnType<typeof exportTheme>;
+    fullWidth?: boolean;
     children: (props: any) => React.ReactNode;
 }
 
-const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutProps) => {
+const PreviewLayout = ({breadCrumbsItems, children, styles, id, fullWidth}: PreviewLayoutProps) => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
     const [isCompact, setCompact] = useState<boolean>(true);
@@ -63,7 +64,10 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
         if (id === 'osn') {
             return (
                 <Fragment>
-                    <Flex justifyContent={justify} className={b('content')}>
+                    <Flex
+                        justifyContent={justify}
+                        className={b('content', {'full-width': fullWidth})}
+                    >
                         {children({justify})}
                     </Flex>
                 </Fragment>
@@ -241,7 +245,7 @@ const previewComponents = [
         breadCrumbsItems: ['Dashboard'],
     },
     {id: 'cards', Component: CardsPreview, title: 'Cards', breadCrumbsItems: ['Cards']},
-    {id: 'osn', Component: OsnPreview, title: 'Osn', breadCrumbsItems: []},
+    {id: 'osn', Component: OsnPreview, title: 'Osn', breadCrumbsItems: [], fullWidth: true},
 ];
 
 export const PreviewTab = () => {
@@ -256,7 +260,7 @@ export const PreviewTab = () => {
         <Flex direction="column" gap={8}>
             <Text variant="display-2">{t('title_ui-samples')}</Text>
 
-            {previewComponents.map(({Component, title, breadCrumbsItems, id}, index) => {
+            {previewComponents.map(({Component, title, breadCrumbsItems, id, fullWidth}, index) => {
                 return (
                     <PreviewLayout
                         key={index}
@@ -264,6 +268,7 @@ export const PreviewTab = () => {
                         title={title}
                         breadCrumbsItems={breadCrumbsItems}
                         styles={themeStyles}
+                        fullWidth={fullWidth}
                     >
                         {(props) => <Component {...props} />}
                     </PreviewLayout>

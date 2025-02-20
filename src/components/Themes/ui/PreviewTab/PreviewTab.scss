@@ -43,13 +43,31 @@ $block: '.#{variables.$ns}themes-preview-layout';
         height: calc(100% - 40px);
         overflow: hidden;
         padding: var(--g-spacing-6) calc(var(--g-spacing-1) * 24);
+        border-radius: 16px;
+
+        .pc-Grid .container-fluid,
+        .pc-Grid .container {
+            padding: 0 40px;
+        }
+
+        &_full-width {
+            padding: 0;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
             padding: var(--g-spacing-6) calc(var(--g-spacing-10));
+
+            &_full-width {
+                padding: 0;
+            }
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
             padding: var(--g-spacing-6) calc(var(--g-spacing-6));
+
+            &_full-width {
+                padding: 0;
+            }
         }
     }
 

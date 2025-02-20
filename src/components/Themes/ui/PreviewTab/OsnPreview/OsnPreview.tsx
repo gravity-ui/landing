@@ -6,10 +6,11 @@ import './OsnPreview.scss';
 import {osnContent} from './blocks/osnContent';
 import {osnNavigation} from './blocks/osnNavigation';
 
+const b = block('osn-preview');
+
 export function OsnPreview() {
     const navigation = osnNavigation();
     const content = osnContent();
-    const b = block('osn-preview');
     return (
         <div className={b()}>
             <PageConstructor

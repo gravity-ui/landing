@@ -25,10 +25,11 @@ export function osnContent() {
                 title: 'Sample Service',
                 description:
                     '<p>The service does good and provides you with a lot of opportunities and features. With the highest tech in mind we created a solution that could you suit you the best way possible</p>',
-                width: 's',
-                verticalOffset: 'l',
-                offset: 'default',
-                resetPaddings: true,
+                // width: 's',
+                // verticalOffset: 'l',
+                // offset: 'default',
+                // fullWidth: true,
+                // resetPaddings: true,
                 background: {
                     color: '#F0F1F6',
                     fullWidth: true,
