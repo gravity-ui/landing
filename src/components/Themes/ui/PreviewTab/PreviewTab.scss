@@ -51,14 +51,27 @@ $block: '.#{variables.$ns}themes-preview-layout';
         }
 
         &_full-width {
-            padding: 0;
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        &_full-height {
+            padding-top: 0;
+            padding-bottom: 0;
+            height: calc(100% - 10px);
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
             padding: var(--g-spacing-6) calc(var(--g-spacing-10));
 
             &_full-width {
-                padding: 0;
+                padding-right: 0;
+                padding-left: 0;
+            }
+
+            &_full-height {
+                padding-top: 0;
+                padding-bottom: 0;
             }
         }
 
@@ -66,7 +79,13 @@ $block: '.#{variables.$ns}themes-preview-layout';
             padding: var(--g-spacing-6) calc(var(--g-spacing-6));
 
             &_full-width {
-                padding: 0;
+                padding-right: 0;
+                padding-left: 0;
+            }
+
+            &_full-height {
+                padding-top: 0;
+                padding-bottom: 0;
             }
         }
     }

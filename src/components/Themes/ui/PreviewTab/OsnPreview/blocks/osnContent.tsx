@@ -157,7 +157,7 @@ export function osnContent() {
                 description:
                     '<p>They represent both the areas we are profficient at and some of the case studies regarding the projects we participated at. Usually it’s a good starting point for a conversation</p>',
                 colSizes: {
-                    all: 7,
+                    all: 12,
                     lg: 3,
                     md: 4,
                     sm: 6,

@@ -36,10 +36,18 @@ interface PreviewLayoutProps {
     breadCrumbsItems: string[];
     styles: ReturnType<typeof exportTheme>;
     fullWidth?: boolean;
+    fullHeight?: boolean;
     children: (props: any) => React.ReactNode;
 }
 
-const PreviewLayout = ({breadCrumbsItems, children, styles, id, fullWidth}: PreviewLayoutProps) => {
+const PreviewLayout = ({
+    breadCrumbsItems,
+    children,
+    styles,
+    id,
+    fullWidth,
+    fullHeight,
+}: PreviewLayoutProps) => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
     const [isCompact, setCompact] = useState<boolean>(true);
@@ -61,12 +69,15 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id, fullWidth}: Prev
     const themeProviderTheme = id === 'osn' ? 'light' : theme;
 
     const renderContent = () => {
-        if (id === 'osn') {
+        if (fullHeight) {
             return (
                 <Fragment>
                     <Flex
                         justifyContent={justify}
-                        className={b('content', {'full-width': fullWidth})}
+                        className={b('content', {
+                            'full-width': fullWidth,
+                            'full-height': fullHeight,
+                        })}
                     >
                         {children({justify})}
                     </Flex>
@@ -139,7 +150,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id, fullWidth}: Prev
                         </ActionBar.Group>
                     </ActionBar.Section>
                 </ActionBar>
-                <Flex justifyContent={justify} className={b('content')}>
+                <Flex justifyContent={justify} className={b('content', {'full-width': fullWidth})}>
                     {children({justify})}
                 </Flex>
             </Fragment>
@@ -157,8 +168,8 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id, fullWidth}: Prev
             ) : null}
 
             <div className={b()}>
-                {id === 'osn' && renderContent()}
-                {id !== 'osn' && (
+                {fullWidth && renderContent()}
+                {!fullWidth && (
                     <AsideHeader
                         menuItems={[
                             {
@@ -245,7 +256,14 @@ const previewComponents = [
         breadCrumbsItems: ['Dashboard'],
     },
     {id: 'cards', Component: CardsPreview, title: 'Cards', breadCrumbsItems: ['Cards']},
-    {id: 'osn', Component: OsnPreview, title: 'Osn', breadCrumbsItems: [], fullWidth: true},
+    {
+        id: 'osn',
+        Component: OsnPreview,
+        title: 'Osn',
+        breadCrumbsItems: [],
+        fullWidth: true,
+        fullHeight: true,
+    },
 ];
 
 export const PreviewTab = () => {
@@ -260,20 +278,23 @@ export const PreviewTab = () => {
         <Flex direction="column" gap={8}>
             <Text variant="display-2">{t('title_ui-samples')}</Text>
 
-            {previewComponents.map(({Component, title, breadCrumbsItems, id, fullWidth}, index) => {
-                return (
-                    <PreviewLayout
-                        key={index}
-                        id={id}
-                        title={title}
-                        breadCrumbsItems={breadCrumbsItems}
-                        styles={themeStyles}
-                        fullWidth={fullWidth}
-                    >
-                        {(props) => <Component {...props} />}
-                    </PreviewLayout>
-                );
-            })}
+            {previewComponents.map(
+                ({Component, title, breadCrumbsItems, id, fullWidth, fullHeight}, index) => {
+                    return (
+                        <PreviewLayout
+                            key={index}
+                            id={id}
+                            title={title}
+                            breadCrumbsItems={breadCrumbsItems}
+                            styles={themeStyles}
+                            fullWidth={fullWidth}
+                            fullHeight={fullHeight}
+                        >
+                            {(props) => <Component {...props} />}
+                        </PreviewLayout>
+                    );
+                },
+            )}
         </Flex>
     );
 };
