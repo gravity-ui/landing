@@ -29,7 +29,7 @@ import {block} from '../../../../utils';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme} from '../../lib/themeCreatorExport';
 
-import {ApartmentCardPreview, AppartmentActions} from './ApartmentCardPreview/ApartmentCardPreview';
+import {ApartmentCardPreview} from './ApartmentCardPreview/ApartmentCardPreview';
 import {CardsPreview} from './CardsPreview/CardsPreview';
 import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
@@ -246,11 +246,7 @@ const previewComponents = [
         id: 'apartment',
         Component: ApartmentCardPreview,
         title: 'Apartment',
-        breadCrumbsItems: [],
-        hideAsideMenu: true,
-        scrollableContent: true,
-        noPadding: true,
-        rightActions: <AppartmentActions />,
+        blank: true,
     },
 ];
 
@@ -267,30 +263,16 @@ export const PreviewTab = () => {
             <Text variant="display-2">{t('title_ui-samples')}</Text>
 
             {previewComponents.map(
-                (
-                    {
-                        Component,
-                        title,
-                        breadCrumbsItems,
-                        id,
-                        hideAsideMenu,
-                        scrollableContent,
-                        noPadding,
-                        rightActions,
-                    },
-                    index,
-                ) => {
-                    return (
+                ({Component, title, breadCrumbsItems = [], id, blank}, index) => {
+                    return blank ? (
+                        <Component styles={themeStyles} />
+                    ) : (
                         <PreviewLayout
                             key={index}
                             id={id}
                             title={title}
                             breadCrumbsItems={breadCrumbsItems}
                             styles={themeStyles}
-                            hideAsideMenu={hideAsideMenu}
-                            scrollableContent={scrollableContent}
-                            noPadding={noPadding}
-                            rightActions={rightActions}
                         >
                             {(props) => <Component {...props} />}
                         </PreviewLayout>
