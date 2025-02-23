@@ -35,6 +35,7 @@ import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
+import {TasksPreview} from './TasksPreview/TasksPreview';
 
 const b = block('themes-preview-layout');
 
@@ -246,6 +247,12 @@ const previewComponents = [
         id: 'apartment',
         Component: ApartmentCardPreview,
         title: 'Apartment',
+        blank: true,
+    },
+    {
+        id: 'tasks',
+        Component: TasksPreview,
+        title: 'Tasks',
         blank: true,
     },
 ];
