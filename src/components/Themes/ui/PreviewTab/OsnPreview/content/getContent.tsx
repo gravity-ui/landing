@@ -17,7 +17,7 @@ import TimeLineSixth from '../../../../../../assets/osn-landing/timeline-6.svg';
 import UsersIcon from '../../../../../../assets/osn-landing/users-icon.svg';
 import YandexIcon from '../../../../../../assets/osn-landing/yandex-icon.svg';
 
-export function osnContent() {
+export function getContent() {
     return {
         blocks: [
             {
@@ -25,11 +25,8 @@ export function osnContent() {
                 title: 'Sample Service',
                 description:
                     '<p>The service does good and provides you with a lot of opportunities and features. With the highest tech in mind we created a solution that could you suit you the best way possible</p>',
-                // width: 's',
-                // verticalOffset: 'l',
-                // offset: 'default',
-                // fullWidth: true,
-                // resetPaddings: true,
+                width: 's',
+                verticalOffset: 'l',
                 background: {
                     color: '#F0F1F6',
                     fullWidth: true,

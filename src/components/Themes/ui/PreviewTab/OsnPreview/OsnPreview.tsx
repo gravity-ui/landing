@@ -3,14 +3,14 @@ import {PageConstructor, PageConstructorProps} from '@gravity-ui/page-constructo
 import {block} from '../../../../../utils';
 
 import './OsnPreview.scss';
-import {osnContent} from './blocks/osnContent';
-import {osnNavigation} from './blocks/osnNavigation';
+import {getContent} from './content/getContent';
+import {getNavigation} from './content/getNavigation';
 
 const b = block('osn-preview');
 
 export function OsnPreview() {
-    const navigation = osnNavigation();
-    const content = osnContent();
+    const navigation = getNavigation();
+    const content = getContent();
     return (
         <div className={b()}>
             <PageConstructor

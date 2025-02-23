@@ -1,6 +1,6 @@
 import gravityUiLogo from '../../../../../../assets/osn-landing/gravity-ui-logo.svg';
 
-export function osnNavigation() {
+export function getNavigation() {
     return {
         logo: {
             icon: gravityUiLogo,
