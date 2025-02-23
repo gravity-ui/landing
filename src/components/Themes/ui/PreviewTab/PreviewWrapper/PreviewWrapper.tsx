@@ -26,7 +26,7 @@ export function PreviewWrapper({styles, ...props}: PreviewWrapperProps) {
                     styles[theme as 'light' | 'dark']
                 }}`}</style>
             ) : null}
-            <div className={b()}>
+            <div className={b('content')}>
                 <Content {...props} theme={theme} onThemeUpdate={setTheme} />
             </div>
         </ThemeProvider>
