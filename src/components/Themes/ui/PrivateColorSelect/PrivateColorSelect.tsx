@@ -1,5 +1,5 @@
-import {ChevronDown, PencilToLine} from 'landing-icons';
-import {Button, Flex, Icon, Popup, Sheet, TextInput, ThemeProvider} from 'landing-uikit';
+import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
+import {Button, Flex, Icon, Popup, Sheet, TextInput, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {useIsMobile} from '../../../../hooks/useIsMobile';
@@ -29,7 +29,7 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
 }) => {
     const isMobile = useIsMobile();
 
-    const containerRef = React.useRef(null);
+    const [containerElement, setContainerElement] = React.useState<HTMLDivElement | null>(null);
     const [showPopup, setShowPopup] = React.useState(false);
     const isCustomValue = !isPrivateColorToken(value);
 
@@ -72,7 +72,7 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
     );
 
     return (
-        <Flex className={b()} ref={containerRef} gap={1}>
+        <Flex className={b()} ref={setContainerElement} gap={1}>
             {isCustomValue ? (
                 <ColorPickerInput value={value} defaultValue={value || ''} onChange={onChange} />
             ) : (
@@ -127,10 +127,13 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                     </Sheet>
                 ) : (
                     <Popup
-                        anchorRef={containerRef}
+                        anchorElement={containerElement}
                         open={showPopup}
-                        modifiers={[{name: 'preventOverflow', enabled: false}]}
-                        onClose={toggleShowPopup}
+                        onOpenChange={(open) => {
+                            if (!open) {
+                                toggleShowPopup();
+                            }
+                        }}
                     >
                         <PrivateColorSelectPopupContent
                             groups={groups}

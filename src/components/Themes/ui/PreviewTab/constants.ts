@@ -1,4 +1,4 @@
-import {ChartKitWidgetData} from '@gravity-ui/chartkit';
+import {ChartData} from '@gravity-ui/charts';
 import {dateTime} from '@gravity-ui/date-utils';
 
 import previewCard1 from '../../../../assets/preview-card-1.png';
@@ -112,7 +112,7 @@ export const cardData = [
     },
 ];
 
-export const barXDashboardData: ChartKitWidgetData = {
+export const barXDashboardData: ChartData = {
     series: {
         data: [
             {
@@ -262,7 +262,7 @@ export const barXDashboardData: ChartKitWidgetData = {
     },
 };
 
-export const linesDashboardData: ChartKitWidgetData = {
+export const linesDashboardData: ChartData = {
     legend: {
         enabled: false,
     },
@@ -1089,7 +1089,7 @@ export const linesDashboardData: ChartKitWidgetData = {
     yAxis: [{}, {}],
 };
 
-export const areaDashboardData: ChartKitWidgetData = {
+export const areaDashboardData: ChartData = {
     series: {
         data: [
             {
@@ -1278,7 +1278,7 @@ export const areaDashboardData: ChartKitWidgetData = {
     },
 };
 
-export const pieDashboardData: ChartKitWidgetData = {
+export const pieDashboardData: ChartData = {
     series: {
         data: [
             {
@@ -1323,7 +1323,7 @@ export const pieDashboardData: ChartKitWidgetData = {
     },
 };
 
-export const dotsDashboardData: ChartKitWidgetData = {
+export const dotsDashboardData: ChartData = {
     legend: {
         enabled: false,
     },

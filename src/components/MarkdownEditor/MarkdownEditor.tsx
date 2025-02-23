@@ -5,8 +5,8 @@ import {
     wToolbarConfig,
 } from '@gravity-ui/markdown-editor';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, ThemeProvider} from '@gravity-ui/uikit';
-import {toaster} from '@gravity-ui/uikit/toaster-singleton-react-18';
+import {Button, ThemeProvider, ToasterProvider} from '@gravity-ui/uikit';
+import {toaster} from '@gravity-ui/uikit/toaster-singleton';
 import {useTranslation} from 'next-i18next';
 import React, {useEffect, useRef} from 'react';
 
@@ -21,12 +21,16 @@ const b = block('markdown-editor');
 
 function Editor() {
     const editor = useMarkdownEditor({
-        initialEditorMode: 'wysiwyg',
-        initialToolbarVisible: true,
-        allowHTML: false,
-        linkify: true,
-        breaks: true,
-        initialMarkup: main,
+        initial: {
+            mode: 'wysiwyg',
+            toolbarVisible: true,
+            markup: main,
+        },
+        md: {
+            html: true,
+            linkify: true,
+            breaks: true,
+        },
     });
 
     // FIXME: This is a temporary solution, will be fixed after
@@ -43,7 +47,6 @@ function Editor() {
     return (
         <MarkdownEditorView
             autofocus
-            toaster={toaster}
             className={b({sticky})}
             stickyToolbar={false}
             wysiwygToolbarConfig={wToolbarConfig}
@@ -77,7 +80,9 @@ export const MarkdownEditor = () => {
             <Row>
                 <Col sizes={12}>
                     <ThemeProvider theme="dark">
-                        <Editor />
+                        <ToasterProvider toaster={toaster}>
+                            <Editor />
+                        </ToasterProvider>
                     </ThemeProvider>
                 </Col>
             </Row>

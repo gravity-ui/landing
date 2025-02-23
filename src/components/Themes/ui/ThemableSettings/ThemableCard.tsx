@@ -1,5 +1,5 @@
-import {Moon, Sun} from 'landing-icons';
-import {Flex, Icon, Text, ThemeProvider} from 'landing-uikit';
+import {Moon, Sun} from '@gravity-ui/icons';
+import {Flex, Icon, Text, ThemeProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

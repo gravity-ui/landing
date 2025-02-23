@@ -1,4 +1,4 @@
-import {Flex, Switch} from 'landing-uikit';
+import {Flex, Switch} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

@@ -1,10 +1,10 @@
-import {RadioButton, RadioButtonOption} from 'landing-uikit';
+import {SegmentedRadioGroup, SegmentedRadioGroupOptionProps} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';
 
 export const SegmentCard = () => {
-    const options: RadioButtonOption[] = [
+    const options: SegmentedRadioGroupOptionProps[] = [
         {value: 'Harder', content: 'Harder'},
         {value: 'Better', content: 'Better'},
         {value: 'Faster', content: 'Faster'},
@@ -13,7 +13,7 @@ export const SegmentCard = () => {
 
     return (
         <InteractiveCard>
-            <RadioButton defaultValue={options[0].value} options={options} />
+            <SegmentedRadioGroup defaultValue={options[0].value} options={options} />
         </InteractiveCard>
     );
 };

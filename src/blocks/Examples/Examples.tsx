@@ -1,5 +1,5 @@
 import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
-import {Button, Icon, RadioButton, Select, SelectOption, Theme} from 'landing-uikit';
+import {Button, Icon, SegmentedRadioGroup, Select, SelectOption, Theme} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -80,7 +80,7 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => 
                     </div>
 
                     <div className={b('control', {type: 'theme'})}>
-                        <RadioButton
+                        <SegmentedRadioGroup
                             options={themes.map((item) => ({
                                 content: item.icon,
                                 value: item.value,

@@ -16,16 +16,23 @@ $block: '.#{variables.$ns}themes-preview-layout';
         --gn-aside-header-item-current-background-color: var(--g-color-base-brand);
         --gn-aside-header-item-current-icon-color: var(--g-color-base-background);
 
-        border-radius: 16px;
+        border-top-left-radius: 16px;
+        border-bottom-left-radius: 16px;
 
         & .gn-aside-header__pane-container .gn-aside-header__aside {
-            border-radius: 16px;
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
         }
 
         & .gn-aside-header__pane-container,
         & .gn-aside-header__pane-container .gn-aside-header__aside {
             height: 100%;
         }
+    }
+
+    &__breadcrumbs {
+        width: 100%;
+        box-sizing: content-box;
     }
 
     &__header-actions {

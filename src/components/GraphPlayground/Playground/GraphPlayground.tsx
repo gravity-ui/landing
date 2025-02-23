@@ -11,7 +11,14 @@ import {
     useGraphEvent,
 } from '@gravity-ui/graph';
 import {LayoutColumns, LayoutSideContentRight} from '@gravity-ui/icons';
-import {Button, Flex, Icon, RadioButton, RadioButtonOption, Text} from '@gravity-ui/uikit';
+import {
+    Button,
+    Flex,
+    Icon,
+    SegmentedRadioGroup,
+    SegmentedRadioGroupOptionProps,
+    Text,
+} from '@gravity-ui/uikit';
 import random from 'lodash/random';
 import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 
@@ -98,7 +105,7 @@ const config: HookGraphParams = {
     },
 };
 
-const graphSizeOptions: RadioButtonOption[] = [
+const graphSizeOptions: SegmentedRadioGroupOptionProps[] = [
     {value: '1', content: '1'},
     {value: '100', content: '100'},
     {value: '1000', content: '1 000'},
@@ -324,12 +331,13 @@ export function GraphPlayground({className}: {className: string}) {
                     <Text variant="header-1" className={b('title')}>
                         Blocks
                     </Text>
-                    <RadioButton
+                    <SegmentedRadioGroup
                         className={radioB()}
                         options={graphSizeOptions}
+                        defaultValue={graphSizeOptions[0].value}
                         onUpdate={updateGraphSize}
                         size="l"
-                    ></RadioButton>
+                    />
                 </Flex>
                 <Flex grow={1} className={b('view', {'graph-editor': true})}>
                     <Flex className={b('graph-tools')} direction="column">

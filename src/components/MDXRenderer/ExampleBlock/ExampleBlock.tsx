@@ -57,11 +57,7 @@ export const ExampleBlock: React.FC<ExampleBlockProps> = ({code, background, chi
             </div>
             {codePrepared ? (
                 <div className={b('code', {open: isOpen})}>
-                    <ClipboardArea
-                        textToCopy={codePrepared}
-                        tooltipContent="Copy icon name"
-                        isNeedPopup={false}
-                    >
+                    <ClipboardArea textToCopy={codePrepared} isNeedPopup={false}>
                         {(status) => (
                             <div
                                 className={b('container', {

@@ -13,5 +13,11 @@ const options: RadioGroupOption[] = [
 ];
 
 export const RadioGroupComponent = ({size, direction, disabled}: RadioGroupComponentProps) => (
-    <RadioGroup size={size} direction={direction} disabled={disabled} options={options} />
+    <RadioGroup
+        size={size}
+        direction={direction}
+        disabled={disabled}
+        options={options}
+        defaultValue={options[0].value}
+    />
 );

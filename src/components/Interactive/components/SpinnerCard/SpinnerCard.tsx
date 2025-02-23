@@ -1,4 +1,4 @@
-import {Spin} from 'landing-uikit';
+import {Spin} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

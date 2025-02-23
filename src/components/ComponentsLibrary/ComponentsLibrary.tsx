@@ -1,5 +1,5 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Icon} from 'landing-uikit';
+import {Icon} from '@gravity-ui/uikit';
 import {useRouter} from 'next/router';
 import React from 'react';
 
