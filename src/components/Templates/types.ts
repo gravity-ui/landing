@@ -1,8 +1,8 @@
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import {IconData} from '@gravity-ui/uikit';
 
 export interface TabType {
     title: string;
-    icon?: SVGIconData;
+    icon?: IconData;
     commands?: string[];
     button?: {
         title: string;

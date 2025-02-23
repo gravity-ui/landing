@@ -52,7 +52,7 @@ export const DashboardPreview = ({justify}: {justify: string}) => {
                 <Container style={{width: '100%', padding: 0}} spaceRow={5}>
                     <Row space={5}>
                         {[barXDashboardData, linesDashboardData, areaDashboardData].map(
-                            (data, index) => (
+                            (_data, index) => (
                                 <Col s="12" m="6" l="4" key={index}>
                                     <StyledCard key={index}>
                                         <div className={b('dashboard-wrapper')}>
@@ -64,7 +64,7 @@ export const DashboardPreview = ({justify}: {justify: string}) => {
                         )}
                     </Row>
                     <Row space={5}>
-                        {[pieDashboardData, dotsDashboardData].map((data, index) => (
+                        {[pieDashboardData, dotsDashboardData].map((_data, index) => (
                             <Col s="12" m="6" key={index}>
                                 <StyledCard key={index}>
                                     <div className={b('dashboard-wrapper')}>

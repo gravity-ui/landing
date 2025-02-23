@@ -1,5 +1,4 @@
-import {RangeCalendar, RangeCalendarProps} from '@gravity-ui/date-components';
-import {RangeValue} from '@gravity-ui/date-components/dist/esm/components/types';
+import {RangeCalendar, RangeCalendarProps, RangeValue} from '@gravity-ui/date-components';
 import {DateTime, DateTimeInput, dateTime, dateTimeParse} from '@gravity-ui/date-utils';
 import React from 'react';
 

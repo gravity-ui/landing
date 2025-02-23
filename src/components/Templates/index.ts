@@ -1,3 +1,3 @@
-export type {Tab} from './types';
+export type {TabType} from './types';
 
 export {Templates} from './Templates';

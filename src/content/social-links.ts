@@ -1,4 +1,4 @@
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import {IconData} from '@gravity-ui/uikit';
 
 import figmaFillIcon from '../assets/icons/figma-fill.svg';
 import githubIcon from '../assets/icons/github.svg';
@@ -7,7 +7,7 @@ import telegramIcon from '../assets/icons/telegram.svg';
 export type SocialLinkItem = {
     title: string;
     url: string;
-    icon: SVGIconData;
+    icon: IconData;
 };
 
 export const socialLinks: SocialLinkItem[] = [
