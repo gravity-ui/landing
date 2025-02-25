@@ -4,12 +4,13 @@ import React from 'react';
 
 import i18nextConfig from '../../../next-i18next.config';
 
-type I18nLinkProps = {
+type I18nLinkProps = LinkProps & {
     className?: string;
     target?: string;
     locale?: string;
     children: React.ReactNode;
-} & LinkProps;
+    href: string;
+};
 
 export const I18nLink: React.FC<I18nLinkProps> = ({href, locale, children, ...rest}) => {
     const router = useRouter();
@@ -20,7 +21,11 @@ export const I18nLink: React.FC<I18nLinkProps> = ({href, locale, children, ...re
     const resultLocale =
         typeof propsLocale === 'string' ? propsLocale : i18nextConfig.i18n.defaultLocale;
 
-    if (resultLocale !== i18nextConfig.i18n.defaultLocale) {
+    if (
+        resultLocale !== i18nextConfig.i18n.defaultLocale &&
+        !resultHref.startsWith('http://') &&
+        !resultHref.startsWith('https://')
+    ) {
         resultHref = `/${resultLocale}${resultHref}`;
     }
 

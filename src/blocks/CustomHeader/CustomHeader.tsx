@@ -46,7 +46,7 @@ interface BannerBlockProps {
 
 const Banner: React.FC<BannerBlockProps> = ({content, href}) => {
     return (
-        <Link className={b('banner')} href={href ?? ''}>
+        <Link className={b('banner')} href={href ?? ''} target="_blank">
             <span className={b('banner-content')}>{content}</span>
             {href && <ChevronRight className={b('banner-icon')} />}
         </Link>
