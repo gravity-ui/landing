@@ -5,7 +5,7 @@ import {RoadmapTask, RoadmapTaskStatus} from '../components/Roadmap';
 export const getRoadmapTasks = (t: TFunction): RoadmapTask[] => [
     {
         title: t('home:roadmap_items_item1'),
-        status: RoadmapTaskStatus.InProgress,
+        status: RoadmapTaskStatus.Completed,
     },
     {
         title: t('home:roadmap_items_item2'),
