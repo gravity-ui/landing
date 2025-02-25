@@ -1,4 +1,4 @@
-import {List} from 'landing-uikit';
+import {List} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';

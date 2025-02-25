@@ -1,5 +1,5 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, ThemeProvider} from '@gravity-ui/uikit';
+import {Button} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 
 import {block, getLocaleLink} from '../../utils';
@@ -30,9 +30,7 @@ export const GraphPlayround = () => {
                 </Col>
             </Row>
             <Row className={b('playground')}>
-                <ThemeProvider theme="dark">
-                    <GraphPlayground className={b('graph-viewer')} />
-                </ThemeProvider>
+                <GraphPlayground className={b('graph-viewer')} />
             </Row>
         </Grid>
     );

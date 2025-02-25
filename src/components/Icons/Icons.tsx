@@ -1,6 +1,6 @@
+import {ArrowUpRightFromSquare, Magnifier} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {ArrowUpRightFromSquare, Magnifier} from 'landing-icons';
-import {Button, Icon, TextInput} from 'landing-uikit';
+import {Button, Icon, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -129,7 +129,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                         onUpdate={setFilterString}
                         size="xl"
                         placeholder={t('icons:filterPlaceholder')}
-                        leftContent={
+                        startContent={
                             <div className={b('search-icon')}>
                                 <Icon data={Magnifier} size={20} />
                             </div>

@@ -1,4 +1,4 @@
-import {Button, Flex, Sheet, Text} from 'landing-uikit';
+import {Button, Flex, Sheet, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {type PropsWithChildren} from 'react';
 

@@ -1,5 +1,5 @@
-import {ArrowLeft, ArrowRight} from 'landing-icons';
-import {Flex, Icon, Text} from 'landing-uikit';
+import {ArrowLeft, ArrowRight} from '@gravity-ui/icons';
+import {Flex, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 import {CONTENT_WRAPPER_ID} from 'src/constants';

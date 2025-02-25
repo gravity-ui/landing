@@ -1,5 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {TextInput} from 'landing-uikit';
+import {TextInput} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../utils';

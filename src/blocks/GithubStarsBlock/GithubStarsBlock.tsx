@@ -1,6 +1,6 @@
+import {ChevronRight} from '@gravity-ui/icons';
 import {Animatable, HTML} from '@gravity-ui/page-constructor';
-import {ChevronRight} from 'landing-icons';
-import {Icon, Text} from 'landing-uikit';
+import {Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React, {useEffect, useState} from 'react';

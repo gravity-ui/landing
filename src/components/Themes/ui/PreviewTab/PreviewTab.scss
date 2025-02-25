@@ -19,13 +19,19 @@ $block: '.#{variables.$ns}themes-preview-layout';
         border-radius: 16px;
 
         & .gn-aside-header__pane-container .gn-aside-header__aside {
-            border-radius: 16px;
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
         }
 
         & .gn-aside-header__pane-container,
         & .gn-aside-header__pane-container .gn-aside-header__aside {
             height: 100%;
         }
+    }
+
+    &__breadcrumbs {
+        width: 100%;
+        box-sizing: content-box;
     }
 
     &__header-actions {

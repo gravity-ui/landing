@@ -26,9 +26,9 @@ import guidePopoverContent from './content/Popover.mdx';
 import guidePopupContent from './content/Popup.mdx';
 import guideProgressContent from './content/Progress.mdx';
 import guideRadioContent from './content/Radio.mdx';
-import guideRadioButtonContent from './content/RadioButton.mdx';
 import guideRadioGroupContent from './content/RadioGroup.mdx';
 import guideResourcesContent from './content/Resources.mdx';
+import guideSegmentedRadioGroupContent from './content/SegmentedRadioGroup.mdx';
 import guideSelectContent from './content/Select.mdx';
 import guideSkeletonContent from './content/Skeleton.mdx';
 import guideSpinContent from './content/Spin.mdx';
@@ -68,9 +68,9 @@ import guidePopoverContentRu from './content/ru/Popover.mdx';
 import guidePopupContentRu from './content/ru/Popup.mdx';
 import guideProgressContentRu from './content/ru/Progress.mdx';
 import guideRadioContentRu from './content/ru/Radio.mdx';
-import guideRadioButtonContentRu from './content/ru/RadioButton.mdx';
 import guideRadioGroupContentRu from './content/ru/RadioGroup.mdx';
 import guideResourcesContentRu from './content/ru/Resources.mdx';
+import guideSegmentedRadioGroupContentRu from './content/ru/SegmentedRadioGroup.mdx';
 import guideSelectContentRu from './content/ru/Select.mdx';
 import guideSkeletonContentRu from './content/ru/Skeleton.mdx';
 import guideSpinContentRu from './content/ru/Spin.mdx';
@@ -295,10 +295,10 @@ export const guides: Section = {
             },
         },
         {
-            id: 'radio-button',
+            id: 'segmented-radio-group',
             content: {
-                en: inferString(guideRadioButtonContent),
-                ru: inferString(guideRadioButtonContentRu),
+                en: inferString(guideSegmentedRadioGroupContent),
+                ru: inferString(guideSegmentedRadioGroupContentRu),
             },
         },
         {

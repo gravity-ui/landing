@@ -3,13 +3,13 @@ import {
     ChevronsExpandUpRight,
     TextAlignLeft,
     TextAlignRight,
-} from 'landing-icons';
+} from '@gravity-ui/icons';
 import {
     Col,
     Direction,
     Icon,
-    RadioButton,
     Row,
+    SegmentedRadioGroup,
     Select,
     Spin,
     Switch,
@@ -17,7 +17,7 @@ import {
     TextInput,
     Theme,
     Tooltip,
-} from 'landing-uikit';
+} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -82,7 +82,7 @@ const SandboxBlock: React.FC<SandboxBlockTypes> = ({
                         <Row key={prop} space="0">
                             <div className={b('prop')}>
                                 <Text className={b('prop-title')}>{prop}</Text>
-                                <RadioButton
+                                <SegmentedRadioGroup
                                     key={prop}
                                     value={props[prop as keyof typeof props]}
                                     options={option.values as OptionType[]}

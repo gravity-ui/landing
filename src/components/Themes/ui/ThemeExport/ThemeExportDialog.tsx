@@ -1,5 +1,5 @@
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Dialog, DialogFooter} from 'landing-uikit';
+import {Dialog, DialogFooter} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {PropsWithChildren} from 'react';
 

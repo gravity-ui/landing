@@ -1,5 +1,5 @@
-import {Moon, Sun} from 'landing-icons';
-import {Flex, Icon, RadioButton, Text} from 'landing-uikit';
+import {Moon, Sun} from '@gravity-ui/icons';
+import {Flex, Icon, SegmentedRadioGroup, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -23,8 +23,13 @@ export const ThemePicker: React.FC<ThemePickerProps> = ({
     darkThemeTitle = 'Dark',
 }) => {
     return (
-        <RadioButton<ThemeVariant> className={b()} size="xl" value={value} onUpdate={onUpdate}>
-            <RadioButton.Option
+        <SegmentedRadioGroup<ThemeVariant>
+            className={b()}
+            size="xl"
+            value={value}
+            onUpdate={onUpdate}
+        >
+            <SegmentedRadioGroup.Option
                 value="light"
                 content={
                     <Flex className={b('option')} alignItems="center" gap={1}>
@@ -33,7 +38,7 @@ export const ThemePicker: React.FC<ThemePickerProps> = ({
                     </Flex>
                 }
             />
-            <RadioButton.Option
+            <SegmentedRadioGroup.Option
                 value="dark"
                 content={
                     <Flex className={b('option')} alignItems="center" gap={1}>
@@ -42,6 +47,6 @@ export const ThemePicker: React.FC<ThemePickerProps> = ({
                     </Flex>
                 }
             />
-        </RadioButton>
+        </SegmentedRadioGroup>
     );
 };

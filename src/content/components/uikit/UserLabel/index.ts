@@ -32,7 +32,7 @@ export const userLabelConfig: Component = {
                 defaultValue:
                     'https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg/193px-Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg',
             },
-            children: {
+            text: {
                 type: 'input',
                 defaultValue: 'Charles Darwin',
             },

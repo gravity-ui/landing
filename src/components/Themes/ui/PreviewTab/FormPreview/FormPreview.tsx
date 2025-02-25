@@ -1,6 +1,6 @@
 import {FormRow} from '@gravity-ui/components';
-import {ArrowLeft} from 'landing-icons';
-import {Button, Flex, Icon, Select, Text, TextArea} from 'landing-uikit';
+import {ArrowLeft} from '@gravity-ui/icons';
+import {Button, Flex, Icon, Select, Text, TextArea} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../../utils';

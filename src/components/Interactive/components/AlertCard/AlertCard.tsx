@@ -1,4 +1,4 @@
-import {Alert, AlertProps, Button} from 'landing-uikit';
+import {Alert, AlertProps, Button} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

@@ -1,5 +1,3 @@
-import {ActionBar, AsideHeader, FooterItem} from '@gravity-ui/navigation';
-import {Breadcrumbs, Flex, Icon, RadioButton, Text, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import {
     ChartAreaStackedNormalized,
     Gear,
@@ -12,7 +10,17 @@ import {
     TextAlignCenter,
     TextAlignJustify,
     TextAlignLeft,
-} from 'landing-icons';
+} from '@gravity-ui/icons';
+import {ActionBar, AsideHeader, FooterItem} from '@gravity-ui/navigation';
+import {
+    Breadcrumbs,
+    Flex,
+    Icon,
+    SegmentedRadioGroup,
+    Text,
+    Theme,
+    ThemeProvider,
+} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {CSSProperties, Fragment, useState} from 'react';
 
@@ -55,26 +63,20 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
             <Fragment>
                 <ActionBar aria-label="Actions bar">
                     <ActionBar.Section type="primary">
-                        <ActionBar.Group pull="left">
-                            <ActionBar.Item>
-                                <Breadcrumbs
-                                    lastDisplayedItemsCount={2}
-                                    items={[
-                                        {
-                                            text: 'Gravity UI',
-                                            action() {},
-                                        },
-                                        ...breadCrumbsItems.map((text) => ({text, action() {}})),
-                                    ]}
-                                    firstDisplayedItemsCount={1}
-                                />
-                            </ActionBar.Item>
+                        <ActionBar.Group pull="left-grow">
+                            <Breadcrumbs showRoot className={b('breadcrumbs')}>
+                                {['Gravity UI', ...breadCrumbsItems].map((item, index) => (
+                                    <Breadcrumbs.Item key={`${index}-${item}`}>
+                                        {item}
+                                    </Breadcrumbs.Item>
+                                ))}
+                            </Breadcrumbs>
                         </ActionBar.Group>
 
                         <ActionBar.Group pull="right">
                             {/* Hide alignment in MVP */}
                             <ActionBar.Item className={b('header-actions', {hidden: true})}>
-                                <RadioButton
+                                <SegmentedRadioGroup
                                     name="alignment"
                                     defaultValue="left"
                                     value={justify}
@@ -96,7 +98,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                                 />
                             </ActionBar.Item>
                             <ActionBar.Item className={b('header-actions')}>
-                                <RadioButton
+                                <SegmentedRadioGroup
                                     name="theme"
                                     defaultValue="light"
                                     value={theme}

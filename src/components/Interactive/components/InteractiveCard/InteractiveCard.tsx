@@ -1,4 +1,4 @@
-import {Theme, ThemeProvider, ToasterComponent, ToasterProvider} from 'landing-uikit';
+import {Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -9,11 +9,16 @@ import './InteractiveCard.scss';
 const b = block('interactive-card');
 
 interface InteractiveCardProps {
-    children: React.ReactNode;
     className?: string;
+    children?: React.ReactNode;
+    renderContent?: () => React.ReactNode;
 }
 
-export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, className}) => {
+export const InteractiveCard: React.FC<InteractiveCardProps> = ({
+    className,
+    children,
+    renderContent,
+}) => {
     const {color, theme: globalTheme} = useInteractiveContext();
     const [localTheme, setLocalTheme] = React.useState<Theme>('dark');
 
@@ -54,14 +59,9 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, class
                         rootClassName={b('theme-wrapper', {color, theme: 'dark'})}
                         scoped
                     >
-                        <ToasterProvider>
-                            <div className={b('card', className)}>
-                                {children}
-                                <div className={b('toaster')}>
-                                    <ToasterComponent hasPortal={false} />
-                                </div>
-                            </div>
-                        </ToasterProvider>
+                        <div className={b('card', className)}>
+                            {renderContent ? renderContent() : children}
+                        </div>
                     </ThemeProvider>
                 </div>
                 <div className={b('side', {back: true})}>
@@ -71,14 +71,9 @@ export const InteractiveCard: React.FC<InteractiveCardProps> = ({children, class
                         rootClassName={b('theme-wrapper', {color, theme: 'light'})}
                         scoped
                     >
-                        <ToasterProvider>
-                            <div className={b('card', className)}>
-                                {children}
-                                <div className={b('toaster')}>
-                                    <ToasterComponent hasPortal={false} />
-                                </div>
-                            </div>
-                        </ToasterProvider>
+                        <div className={b('card', className)}>
+                            {renderContent ? renderContent() : children}
+                        </div>
                     </ThemeProvider>
                 </div>
             </div>

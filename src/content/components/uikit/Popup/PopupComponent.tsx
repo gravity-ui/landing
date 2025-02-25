@@ -8,12 +8,12 @@ type PopupComponentProps = {
 };
 
 export const PopupComponent = ({open, placement, hasArrow}: PopupComponentProps) => {
-    const anchorRef = React.useRef(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLDivElement | null>(null);
 
     return (
         <React.Fragment>
             <div
-                ref={anchorRef}
+                ref={setAnchorElement}
                 style={{
                     width: 100,
                     height: 100,
@@ -21,7 +21,12 @@ export const PopupComponent = ({open, placement, hasArrow}: PopupComponentProps)
                     color: 'var(--g-color-text-secondary)',
                 }}
             />
-            <Popup anchorRef={anchorRef} open={open} placement={placement} hasArrow={hasArrow}>
+            <Popup
+                anchorElement={anchorElement}
+                open={open}
+                placement={placement}
+                hasArrow={hasArrow}
+            >
                 <div style={{padding: 5}}>Content</div>
             </Popup>
         </React.Fragment>

@@ -2,7 +2,7 @@ import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
 import React from 'react';
 
 import {Templates} from '../../components/Templates';
-import type {Tab} from '../../components/Templates';
+import type {TabType} from '../../components/Templates';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../../constants';
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
@@ -13,7 +13,7 @@ const b = block('templates-block');
 
 export type TemplatesProps = Animatable & {
     title: string;
-    tabs: Tab[];
+    tabs: TabType[];
 };
 
 export type TemplatesModel = TemplatesProps & {

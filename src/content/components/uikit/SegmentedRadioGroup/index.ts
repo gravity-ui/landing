@@ -3,11 +3,11 @@ import dynamic from 'next/dynamic';
 import {Repos} from '../../../../types/common';
 import {getGithubUrl, getReadmeUrl, mappingOptions} from '../../utils';
 
-const getterOptions = {repoName: Repos.Uikit, componentName: 'RadioButton'};
+const getterOptions = {repoName: Repos.Uikit, componentName: 'SegmentedRadioGroup'};
 
-export const radioButtonConfig = {
-    id: 'radio-button',
-    title: 'RadioButton',
+export const segmentedRadioGroupConfig = {
+    id: 'segmented-radio-group',
+    title: 'SegmentedRadioGroup',
     githubUrl: getGithubUrl(getterOptions),
     isSupportRTL: true,
     content: {
@@ -15,7 +15,9 @@ export const radioButtonConfig = {
     },
     sandbox: {
         component: dynamic(() =>
-            import('./RadioButtonComponent').then((mod) => mod.RadioButtonComponent),
+            import('./SegmentedRadioGroupComponent').then(
+                (mod) => mod.SegmentedRadioGroupComponent,
+            ),
         ),
         props: {
             size: {

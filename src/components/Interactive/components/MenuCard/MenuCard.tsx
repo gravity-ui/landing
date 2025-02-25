@@ -1,4 +1,4 @@
-import {Menu} from 'landing-uikit';
+import {Menu} from '@gravity-ui/uikit';
 
 import {block} from '../../../../utils';
 import {InteractiveCard} from '../InteractiveCard';

@@ -15,9 +15,10 @@ export const sliderConfig = {
     sandbox: {
         component: dynamic(() => import('../examples/components').then((mod) => mod.SliderExample)),
         props: {
-            hasTooltip: {
-                type: 'switch',
-                defaultValue: false,
+            tooltipDisplay: {
+                type: 'radioButton',
+                values: mappingOptions(['auto', 'on', 'off']),
+                defaultValue: 'auto',
             },
             disabled: {
                 type: 'switch',
@@ -49,11 +50,7 @@ export const sliderConfig = {
                 type: 'input',
                 defaultValue: 1,
             },
-            debounceDelay: {
-                type: 'input',
-                defaultValue: 0,
-            },
-            marksCount: {
+            marks: {
                 type: 'input',
                 defaultValue: 2,
             },

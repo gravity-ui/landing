@@ -1,6 +1,6 @@
+import {ArrowUpFromSquare} from '@gravity-ui/icons';
 import {BREAKPOINTS, Grid, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {ArrowUpFromSquare} from 'landing-icons';
-import {Button, Flex, Icon, Text} from 'landing-uikit';
+import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';

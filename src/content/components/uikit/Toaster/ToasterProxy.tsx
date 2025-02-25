@@ -5,6 +5,7 @@ import {
     ToasterProvider,
     useToaster,
 } from '@gravity-ui/uikit';
+import {toaster} from '@gravity-ui/uikit/toaster-singleton';
 import React, {FC} from 'react';
 
 export interface SandboxProps {
@@ -16,13 +17,13 @@ export interface SandboxProps {
 type Props = Omit<ToastProps, 'theme'> & SandboxProps;
 
 const ToasterComponentAPI: FC<ToastProps> = (props) => {
-    const toaster = useToaster();
+    const toasterInstance = useToaster();
 
     React.useEffect(() => {
-        if (toaster.has(props.name)) {
-            toaster.update(props.name, props);
+        if (toasterInstance.has(props.name)) {
+            toasterInstance.update(props.name, props);
         } else {
-            toaster.add(props);
+            toasterInstance.add(props);
         }
     }, [props]);
 
@@ -39,7 +40,7 @@ export const ToasterProxy: FC<Props> = ({
 }) => {
     return (
         <MobileProvider mobile={isMobile} key={String(isMobile)}>
-            <ToasterProvider>
+            <ToasterProvider toaster={toaster}>
                 <ToasterComponentAPI
                     {...props}
                     name={name}

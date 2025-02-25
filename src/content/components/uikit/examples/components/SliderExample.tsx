@@ -16,17 +16,15 @@ export const SliderExample = ({
     defaultValue,
     max,
     min,
-    marksCount,
+    marks,
     step,
-    debounceDelay,
     ...restProps
 }: SliderExampleProps) => {
     const [value, setValue] = React.useState(defaultValue || min || 0);
     const maxValue = Number(max) || undefined;
     const minValue = Number(min) || undefined;
-    const marksCountValue = Number(marksCount) || undefined;
+    const marksValue = Number(marks) || undefined;
     const stepValue = Number(step) || undefined;
-    const debounceDelayValue = Number(debounceDelay) || undefined;
 
     return (
         <div style={{width: '100%', maxWidth: 300}}>
@@ -35,9 +33,8 @@ export const SliderExample = ({
                 onUpdate={setValue}
                 min={minValue}
                 max={maxValue}
-                marksCount={marksCountValue}
+                marks={marksValue}
                 step={stepValue}
-                debounceDelay={debounceDelayValue}
                 defaultValue={defaultValue}
             />
             <div style={{textAlign: 'center'}}>{`Selected value: ${

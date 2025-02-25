@@ -1,5 +1,5 @@
 import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, Tabs} from 'landing-uikit';
+import {Button, Icon, Tab, TabList, TabProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -22,7 +22,7 @@ import './Library.scss';
 
 const b = block('library');
 
-enum Tab {
+enum TabType {
     Readme = 'readme',
     Changelog = 'changelog',
 }
@@ -43,14 +43,14 @@ export const Library: React.FC<Props> = ({lib}) => {
 
     const contentTabs = [
         {
-            id: Tab.Readme,
+            id: TabType.Readme,
             title: t('library:readme'),
         },
     ];
 
     if (lib.data.changelog) {
         contentTabs.push({
-            id: Tab.Changelog,
+            id: TabType.Changelog,
             title: t('library:changelog'),
         });
     }
@@ -220,19 +220,25 @@ export const Library: React.FC<Props> = ({lib}) => {
                 <Row>
                     <Col sizes={{all: 12, lg: 8}} orders={{all: 2, lg: 1}}>
                         <div className={b('block')}>
-                            <Tabs
-                                size="xl"
-                                items={contentTabs}
-                                activeTab={activeTab}
-                                onSelectTab={(selectedTab) => {
-                                    setActiveTab(selectedTab as Tab);
+                            <TabProvider
+                                value={activeTab}
+                                onUpdate={(selectedTab) => {
+                                    setActiveTab(selectedTab as TabType);
                                 }}
-                            />
+                            >
+                                <TabList size="xl">
+                                    {contentTabs.map((item) => (
+                                        <Tab key={item.id} value={item.id}>
+                                            {item.title}
+                                        </Tab>
+                                    ))}
+                                </TabList>
+                            </TabProvider>
                             <div className={b('content')}>
                                 <MDXRenderer
                                     key={`${lib.config.id}-${i18n.language}-${activeTab}`}
                                     text={
-                                        activeTab === Tab.Readme
+                                        activeTab === TabType.Readme
                                             ? readmeContent
                                             : lib.data.changelog
                                     }

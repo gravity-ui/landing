@@ -1,5 +1,5 @@
 import {HTML} from '@gravity-ui/page-constructor';
-import {Icon} from 'landing-uikit';
+import {Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';

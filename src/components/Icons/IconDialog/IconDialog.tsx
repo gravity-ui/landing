@@ -1,4 +1,4 @@
-import {Dialog, Sheet} from 'landing-uikit';
+import {Dialog, Sheet} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {useIsMobile} from '../../../hooks/useIsMobile';

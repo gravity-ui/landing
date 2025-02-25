@@ -1,19 +1,19 @@
 import {FormRow} from '@gravity-ui/components';
-import {Plus, TrashBin} from 'landing-icons';
+import {Plus, TrashBin} from '@gravity-ui/icons';
 import {
     Button,
     Col,
     Flex,
     Icon,
     Popover,
-    RadioButton,
-    RadioButtonOption,
     Row,
+    SegmentedRadioGroup,
+    SegmentedRadioGroupOptionProps,
     Text,
     TextArea,
     TextInput,
     TextInputProps,
-} from 'landing-uikit';
+} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useState} from 'react';
 
@@ -138,7 +138,7 @@ const CustomFontFamily = ({
         [fontType],
     );
 
-    const customFontType: RadioButtonOption[] = [
+    const customFontType: SegmentedRadioGroupOptionProps[] = [
         {
             value: CustomFontSelectType.GoogleFonts,
             content: t('label_import-from-google-fonts'),
@@ -152,7 +152,7 @@ const CustomFontFamily = ({
     return (
         <Flex direction="column" gap={6} width="100%" style={{marginBlockEnd: 52}}>
             <Flex justifyContent="space-between">
-                <RadioButton
+                <SegmentedRadioGroup
                     size="xl"
                     className={b('custom-font-radio-button')}
                     options={customFontType}
@@ -295,7 +295,7 @@ const DeleteAdditionalFontButton = ({
     return (
         <Popover
             content={
-                <Flex direction="column" gap={2}>
+                <Flex direction="column" gap={2} className={b('delete-font-popover-content')}>
                     <span>
                         {t('label_delete-additional-font-message-1')}{' '}
                         <b>{getFontUsages(fType.value).join(', ')}</b>.{' '}
@@ -314,20 +314,23 @@ const DeleteAdditionalFontButton = ({
                     </Button>
                 </Flex>
             }
+            hasArrow
             disabled={getFontUsages(fType.value).length === 0}
         >
-            <Button
-                size="xl"
-                className={b('additional-font-delete-btn', {mobile})}
-                disabled={getFontUsages(fType.value).length > 0}
-                onClick={() => {
-                    removeFontFamilyType({
-                        fontType: fType.value,
-                    });
-                }}
-            >
-                <Icon data={TrashBin} />
-            </Button>
+            <div>
+                <Button
+                    size="xl"
+                    className={b('additional-font-delete-btn', {mobile})}
+                    disabled={getFontUsages(fType.value).length > 0}
+                    onClick={() => {
+                        removeFontFamilyType({
+                            fontType: fType.value,
+                        });
+                    }}
+                >
+                    <Icon data={TrashBin} />
+                </Button>
+            </div>
         </Popover>
     );
 };

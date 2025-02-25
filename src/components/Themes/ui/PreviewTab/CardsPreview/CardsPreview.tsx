@@ -1,4 +1,4 @@
-import {Card, Flex, Text, User} from 'landing-uikit';
+import {Card, Flex, Text, User} from '@gravity-ui/uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../../assets/avatar-1.png';

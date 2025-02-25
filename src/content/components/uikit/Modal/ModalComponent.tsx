@@ -2,16 +2,10 @@ import {Button, Link, Modal} from '@gravity-ui/uikit';
 import React from 'react';
 
 type ModalComponentProps = {
-    autoFocus?: boolean;
-    focusTrap?: boolean;
     disableBodyScrollLock?: boolean;
 };
 
-export const ModalComponent = ({
-    disableBodyScrollLock,
-    autoFocus,
-    focusTrap,
-}: ModalComponentProps) => {
+export const ModalComponent = ({disableBodyScrollLock}: ModalComponentProps) => {
     const [open, setOpen] = React.useState(false);
     const handleClose = React.useCallback(() => {
         setOpen(false);
@@ -22,9 +16,11 @@ export const ModalComponent = ({
             <Button onClick={() => setOpen(true)}>Open Modal</Button>
             <Modal
                 open={open}
-                onClose={handleClose}
-                autoFocus={autoFocus}
-                focusTrap={focusTrap}
+                onOpenChange={(open) => {
+                    if (!open) {
+                        handleClose();
+                    }
+                }}
                 disableBodyScrollLock={disableBodyScrollLock}
             >
                 <div style={{padding: '20px 30px'}}>

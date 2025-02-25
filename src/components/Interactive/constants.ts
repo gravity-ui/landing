@@ -10,7 +10,7 @@ import {
     LoaderCard,
     MenuCard,
     PaginationCard,
-    PopupCard,
+    // PopupCard,
     ProgressCard,
     RadioCard,
     SegmentCard,
@@ -46,7 +46,8 @@ export const secondSliderItems = [
 export const thirdSliderItems = [
     RadioCard,
     LabelsCard,
-    PopupCard,
+    // TODO: fix
+    // PopupCard,
     UserLabelCard,
     SpinnerCard,
     BreadcrumbsCard,

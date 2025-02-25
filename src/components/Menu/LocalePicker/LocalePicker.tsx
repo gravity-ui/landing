@@ -1,4 +1,4 @@
-import {RadioButton} from 'landing-uikit';
+import {SegmentedRadioGroup} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
@@ -19,9 +19,13 @@ export const LocalePicker: React.FC = () => {
 
     return (
         <div className={b()}>
-            <RadioButton
+            <SegmentedRadioGroup
                 value={i18n.language}
                 onUpdate={(locale) => {
+                    if (i18n.language === locale) {
+                        return;
+                    }
+
                     localStorage.setItem(LOCALE_LOCAL_STORAGE_KEY, locale);
 
                     const path = router.asPath;
@@ -35,15 +39,14 @@ export const LocalePicker: React.FC = () => {
                 {i18nextConfig.i18n.locales.map((locale) => {
                     const localeUpperCase = locale.toUpperCase();
                     return (
-                        <RadioButton.Option
+                        <SegmentedRadioGroup.Option
                             key={locale}
                             value={locale}
                             content={localeUpperCase}
-                            disabled={locale === i18n.language}
                         />
                     );
                 })}
-            </RadioButton>
+            </SegmentedRadioGroup>
         </div>
     );
 };

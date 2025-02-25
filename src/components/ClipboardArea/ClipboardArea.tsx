@@ -1,4 +1,4 @@
-import {CopyToClipboard, CopyToClipboardStatus, Popover} from 'landing-uikit';
+import {CopyToClipboard, CopyToClipboardStatus, Popover} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -32,14 +32,15 @@ export const ClipboardArea: React.FC<ClipboardAreaProps> = ({
         <Popover
             className={b('popover')}
             disabled={isMobile}
-            tooltipClassName={b('popup')}
             content={tooltipContent ?? t('actions_copyToClipboard')}
             placement="top"
             hasArrow
         >
-            <CopyToClipboard text={textToCopy} timeout={TIMEOUT}>
-                {(status) => children(status)}
-            </CopyToClipboard>
+            <div>
+                <CopyToClipboard text={textToCopy} timeout={TIMEOUT}>
+                    {(status) => children(status)}
+                </CopyToClipboard>
+            </div>
         </Popover>
     ) : (
         <CopyToClipboard text={textToCopy} timeout={TIMEOUT}>

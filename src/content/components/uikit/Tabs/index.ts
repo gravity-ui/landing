@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import {Repos} from '../../../../types/common';
 import {getGithubUrl, getReadmeUrl, mappingOptions} from '../../utils';
 
-const getterOptions = {repoName: Repos.Uikit, componentName: 'Tabs'};
+const getterOptions = {repoName: Repos.Uikit, componentName: 'tabs'};
 
 export const tabsConfig = {
     id: 'tabs',

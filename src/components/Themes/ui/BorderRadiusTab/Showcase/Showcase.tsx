@@ -1,15 +1,15 @@
-import {PencilToLine} from 'landing-icons';
+import {PencilToLine} from '@gravity-ui/icons';
 import {
     Button,
     Flex,
     FlexProps,
     Label,
-    RadioButton,
+    SegmentedRadioGroup,
     TextInput,
     Theme,
     ThemeProvider,
-} from 'landing-uikit';
-import type {ButtonProps} from 'landing-uikit';
+} from '@gravity-ui/uikit';
+import type {ButtonProps} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useMemo} from 'react';
 
@@ -75,8 +75,8 @@ const ButtonBlock = (props: ShowcaseBlockProps) => (
     </BlockWrapper>
 );
 
-const RadioButtonBlock = (props: ShowcaseBlockProps) => {
-    const radioButtonOptions = useMemo(
+const SegmentedRadioGroupBlock = (props: ShowcaseBlockProps) => {
+    const segmentedRadioGroupOptions = useMemo(
         () => [
             {value: '1', content: props.text},
             {value: '2', content: props.text},
@@ -85,10 +85,26 @@ const RadioButtonBlock = (props: ShowcaseBlockProps) => {
     );
     return (
         <BlockWrapper {...props}>
-            <RadioButton size="s" options={radioButtonOptions} />
-            <RadioButton size="m" options={radioButtonOptions} />
-            <RadioButton size="l" options={radioButtonOptions} />
-            <RadioButton size="xl" options={radioButtonOptions} />
+            <SegmentedRadioGroup
+                size="s"
+                options={segmentedRadioGroupOptions}
+                defaultValue={segmentedRadioGroupOptions[0].value}
+            />
+            <SegmentedRadioGroup
+                size="m"
+                options={segmentedRadioGroupOptions}
+                defaultValue={segmentedRadioGroupOptions[0].value}
+            />
+            <SegmentedRadioGroup
+                size="l"
+                options={segmentedRadioGroupOptions}
+                defaultValue={segmentedRadioGroupOptions[0].value}
+            />
+            <SegmentedRadioGroup
+                size="xl"
+                options={segmentedRadioGroupOptions}
+                defaultValue={segmentedRadioGroupOptions[0].value}
+            />
         </BlockWrapper>
     );
 };
@@ -117,7 +133,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
                 <Flex direction="column" gap={10}>
                     <LabelBlock text={t('label')} />
                     <ButtonBlock text={t('button')} className={b('column-transform')} />
-                    <RadioButtonBlock text={t('label')} className={b('column-transform')} />
+                    <SegmentedRadioGroupBlock text={t('label')} className={b('column-transform')} />
                 </Flex>
 
                 <TextInputBlock text={t('input_placeholder')} className={b('text-input-block')} />

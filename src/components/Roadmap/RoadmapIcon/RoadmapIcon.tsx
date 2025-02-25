@@ -1,5 +1,5 @@
-import {CircleCheck, Clock} from 'landing-icons';
-import {Icon, IconProps} from 'landing-uikit';
+import {CircleCheck, Clock} from '@gravity-ui/icons';
+import {Icon, IconProps} from '@gravity-ui/uikit';
 import React from 'react';
 
 import RoadmapCicle from '../../../assets/icons/roadmap-circle.svg';
