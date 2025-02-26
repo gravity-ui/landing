@@ -1,5 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {Alert, Flex, Text} from 'landing-uikit';
+import {Alert, Flex, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useMemo, useState} from 'react';
 

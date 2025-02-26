@@ -26,8 +26,8 @@ import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
 import {radioConfig} from './Radio';
-import {radioButtonConfig} from './RadioButton';
 import {radioGroupConfig} from './RadioGroup';
+import {segmentedRadioGroupConfig} from './SegmentedRadioGroup';
 import {selectConfig} from './Select';
 import {sheetConfig} from './Sheet';
 import {skeletonConfig} from './Skeleton';
@@ -70,7 +70,7 @@ const uikitComponents: Component[] = [
     portalConfig,
     progressConfig,
     radioConfig,
-    radioButtonConfig,
+    segmentedRadioGroupConfig,
     radioGroupConfig,
     selectConfig,
     skeletonConfig,

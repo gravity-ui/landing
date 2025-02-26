@@ -1,7 +1,6 @@
 import {ChevronRight} from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
-import {Button, ButtonProps, Icon} from 'landing-uikit';
+import {Button, ButtonProps, Icon, IconData} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';
@@ -16,7 +15,7 @@ const b = block('custom-header');
 
 type CustomButton = ButtonProps & {
     text: string;
-    icon?: SVGIconData;
+    icon?: IconData;
 };
 
 type NewsItem = {

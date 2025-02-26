@@ -1,7 +1,7 @@
 import {dateTime} from '@gravity-ui/date-utils';
+import {ChevronRight} from '@gravity-ui/icons';
 import {HTML} from '@gravity-ui/page-constructor';
-import {ChevronRight} from 'landing-icons';
-import {Icon, Link} from 'landing-uikit';
+import {Icon, Link} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

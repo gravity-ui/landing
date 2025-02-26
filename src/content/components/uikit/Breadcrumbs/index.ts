@@ -18,33 +18,13 @@ export const breadcrumbsConfig = {
             import('./BreadcrumbsWrapper').then((mod) => mod.BreadcrumbsWrapper),
         ),
         props: {
-            firstDisplayedItemsCount: {
-                type: 'radioButton',
-                values: [
-                    {
-                        value: 0,
-                        content: '0',
-                    },
-                    {
-                        value: 1,
-                        content: '1',
-                    },
-                ],
-                defaultValue: 0,
+            showRoot: {
+                type: 'switch',
+                defaultValue: false,
             },
-            lastDisplayedItemsCount: {
-                type: 'radioButton',
-                values: [
-                    {
-                        value: 1,
-                        content: '1',
-                    },
-                    {
-                        value: 2,
-                        content: '2',
-                    },
-                ],
-                defaultValue: 1,
+            maxItems: {
+                type: 'input',
+                defaultValue: 5,
             },
         },
     },

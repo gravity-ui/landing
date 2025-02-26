@@ -1,5 +1,5 @@
-import {TrashBin} from 'landing-icons';
-import {Button, Icon, Text, TextInput} from 'landing-uikit';
+import {TrashBin} from '@gravity-ui/icons';
+import {Button, Icon, Text, TextInput} from '@gravity-ui/uikit';
 import debounce from 'lodash/debounce';
 import {useTranslation} from 'next-i18next';
 import React from 'react';

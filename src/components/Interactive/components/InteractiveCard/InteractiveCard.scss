@@ -115,16 +115,6 @@ $workaroundBlockDarkTheme: &#{$block}__theme-wrapper_theme_dark;
             }
         }
     }
-
-    &__toaster {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    .g-toast {
-        width: fit-content;
-    }
 }
 
 #{$block}__theme-wrapper#{$root} {

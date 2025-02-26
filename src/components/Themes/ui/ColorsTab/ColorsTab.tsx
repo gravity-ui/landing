@@ -1,4 +1,4 @@
-import {Flex} from 'landing-uikit';
+import {Flex} from '@gravity-ui/uikit';
 import {Trans, useTranslation} from 'next-i18next';
 import React from 'react';
 

@@ -1,4 +1,4 @@
-import type {Theme} from 'landing-uikit';
+import type {Theme} from '@gravity-ui/uikit';
 
 export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 

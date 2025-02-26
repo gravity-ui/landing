@@ -1,4 +1,4 @@
-import {Button, Icon, Tabs} from 'landing-uikit';
+import {Button, Icon, Tab, TabList, TabProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
@@ -18,18 +18,18 @@ import './Component.scss';
 
 const b = block('component');
 
-enum Tab {
+enum TabType {
     Overview = 'overview',
     Design = 'design',
 }
 
 const tabs = [
     {
-        id: Tab.Overview,
+        id: TabType.Overview,
         title: 'Overview',
     },
     {
-        id: Tab.Design,
+        id: TabType.Design,
         title: 'Design',
     },
 ];
@@ -59,7 +59,7 @@ export const Component: React.FC<ComponentProps> = ({
     const {tabId} = router.query;
 
     const [activeTab, setActiveTab] = React.useState(
-        tabId === Tab.Design ? Tab.Design : Tab.Overview,
+        tabId === TabType.Design ? TabType.Design : TabType.Overview,
     );
 
     const currentSection = React.useMemo(
@@ -115,7 +115,7 @@ export const Component: React.FC<ComponentProps> = ({
     }, [currentIndex, currentSection]);
 
     React.useEffect(() => {
-        setActiveTab(tabId === Tab.Design ? Tab.Design : Tab.Overview);
+        setActiveTab(tabId === TabType.Design ? TabType.Design : TabType.Overview);
     }, [tabId]);
 
     const rewriteLinks = React.useCallback(
@@ -178,25 +178,32 @@ export const Component: React.FC<ComponentProps> = ({
 
             {component.content?.design ? (
                 <div className={b('tabs')}>
-                    <Tabs
-                        size="xl"
-                        items={tabs}
-                        activeTab={activeTab}
-                        onSelectTab={(selectedTab) => {
+                    <TabProvider
+                        value={activeTab}
+                        onUpdate={(selectedTab) => {
                             router.replace({
                                 pathname: router.asPath.split('?')[0],
                                 query: {
                                     ...router.query,
-                                    tabId: selectedTab === Tab.Design ? Tab.Design : undefined,
+                                    tabId:
+                                        selectedTab === TabType.Design ? TabType.Design : undefined,
                                 },
                             });
                         }}
-                    />
+                    >
+                        <TabList size="xl">
+                            {tabs.map((item) => (
+                                <Tab key={item.id} value={item.id}>
+                                    {item.title}
+                                </Tab>
+                            ))}
+                        </TabList>
+                    </TabProvider>
                 </div>
             ) : null}
 
             <div className={b('content')}>
-                {tabId === Tab.Design && component.content?.design ? (
+                {tabId === TabType.Design && component.content?.design ? (
                     <React.Fragment>
                         {isClient && (
                             <MDXRenderer

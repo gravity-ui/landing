@@ -1,25 +1,31 @@
-import {Tabs, TabsProps} from '@gravity-ui/uikit';
+import {Tab, TabList, TabListProps, TabProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 type TabsComponentProps = {
-    size?: TabsProps['size'];
+    size?: TabListProps['size'];
     disabled?: boolean;
 };
 
 export const TabsComponent = ({size, disabled = false}: TabsComponentProps) => {
     const [activeTab, setActiveTab] = React.useState('first');
     return (
-        <Tabs
-            size={size}
-            activeTab={activeTab}
-            onSelectTab={(newActiveTab) => {
+        <TabProvider
+            value={activeTab}
+            onUpdate={(newActiveTab) => {
                 setActiveTab(newActiveTab);
             }}
-            items={[
-                {id: 'first', title: 'First Tab', disabled},
-                {id: 'second', title: 'Second Tab', disabled},
-                {id: 'third', title: 'Third Tab', disabled},
-            ]}
-        />
+        >
+            <TabList size={size}>
+                {[
+                    {id: 'first', title: 'First Tab'},
+                    {id: 'second', title: 'Second Tab'},
+                    {id: 'third', title: 'Third Tab'},
+                ].map((item) => (
+                    <Tab key={item.id} value={item.id} disabled={disabled}>
+                        {item.title}
+                    </Tab>
+                ))}
+            </TabList>
+        </TabProvider>
     );
 };

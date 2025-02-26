@@ -1,4 +1,4 @@
-import {Card, Col, Flex, Row, Text, TextProps, ThemeProvider} from 'landing-uikit';
+import {Card, Col, Flex, Row, Text, TextProps, ThemeProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

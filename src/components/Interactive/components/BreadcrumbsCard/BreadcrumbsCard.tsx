@@ -1,52 +1,16 @@
-import {Breadcrumbs, Flex} from 'landing-uikit';
+import {Breadcrumbs, Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {block} from '../../../../utils';
 import {InteractiveCard} from '../InteractiveCard';
 
-const firstItems = [
-    {
-        text: 'Harder',
-        action: () => {},
-    },
-    {
-        text: 'Better',
-        action: () => {},
-    },
-];
+import './BreadcrumbsCard.scss';
 
-const secondItems = [
-    {
-        text: 'Harder',
-        action: () => {},
-    },
-    {
-        text: 'Better',
-        action: () => {},
-    },
-    {
-        text: 'Faster',
-        action: () => {},
-    },
-];
+const b = block('breadcrumbs-card');
 
-const thirdItems = [
-    {
-        text: 'Harder',
-        action: () => {},
-    },
-    {
-        text: 'Better',
-        action: () => {},
-    },
-    {
-        text: 'Faster',
-        action: () => {},
-    },
-    {
-        text: 'Stronger',
-        action: () => {},
-    },
-];
+const firstItems = ['Harder', 'Better'];
+const secondItems = ['Harder', 'Better', 'Faster'];
+const thirdItems = ['Harder', 'Better', 'Faster', 'Stronger'];
 
 export const BreadcrumbsCard = () => {
     if (typeof window === 'undefined') {
@@ -55,23 +19,25 @@ export const BreadcrumbsCard = () => {
 
     return (
         <InteractiveCard>
-            <Flex direction="column" space={3} width={290}>
-                <Breadcrumbs
-                    firstDisplayedItemsCount={1}
-                    lastDisplayedItemsCount={2}
-                    items={firstItems}
-                />
-                <Breadcrumbs
-                    firstDisplayedItemsCount={1}
-                    lastDisplayedItemsCount={2}
-                    items={secondItems}
-                />
-                <Breadcrumbs
-                    firstDisplayedItemsCount={1}
-                    lastDisplayedItemsCount={2}
-                    items={thirdItems}
-                />
-            </Flex>
+            <div className={b()}>
+                <Flex className={b('wrapper')} direction="column" space={3} width={290}>
+                    <Breadcrumbs showRoot>
+                        {firstItems.map((item, index) => (
+                            <Breadcrumbs.Item key={`${index}-${item}`}>{item}</Breadcrumbs.Item>
+                        ))}
+                    </Breadcrumbs>
+                    <Breadcrumbs showRoot>
+                        {secondItems.map((item, index) => (
+                            <Breadcrumbs.Item key={`${index}-${item}`}>{item}</Breadcrumbs.Item>
+                        ))}
+                    </Breadcrumbs>
+                    <Breadcrumbs showRoot>
+                        {thirdItems.map((item, index) => (
+                            <Breadcrumbs.Item key={`${index}-${item}`}>{item}</Breadcrumbs.Item>
+                        ))}
+                    </Breadcrumbs>
+                </Flex>
+            </div>
         </InteractiveCard>
     );
 };

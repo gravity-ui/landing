@@ -1,5 +1,5 @@
 import {Col, Grid, GridProps, Row} from '@gravity-ui/page-constructor';
-import {Icon} from 'landing-uikit';
+import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
 import linkArrowIcon from '../../assets/icons/link-arrow.svg';

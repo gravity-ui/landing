@@ -1,4 +1,4 @@
-import {Copy, Pencil, Plus, TrashBin} from 'landing-icons';
+import {Copy, Pencil, Plus, TrashBin} from '@gravity-ui/icons';
 import {
     Button,
     Flex,
@@ -18,7 +18,7 @@ import {
     withTableActions,
     withTableSelection,
     withTableSorting,
-} from 'landing-uikit';
+} from '@gravity-ui/uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../../assets/avatar-1.png';

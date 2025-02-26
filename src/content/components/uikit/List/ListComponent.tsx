@@ -1,5 +1,4 @@
-import {List, ListProps} from '@gravity-ui/uikit';
-import {ListItemData} from '@gravity-ui/uikit/build/esm/components/List/types';
+import {List, ListItemData, ListProps} from '@gravity-ui/uikit';
 
 const LIST_ITEMS = [
     'one',

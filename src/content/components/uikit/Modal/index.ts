@@ -15,14 +15,6 @@ export const modalConfig = {
     sandbox: {
         component: dynamic(() => import('./ModalComponent').then((mod) => mod.ModalComponent)),
         props: {
-            autoFocus: {
-                type: 'switch',
-                defaultValue: true,
-            },
-            focusTrap: {
-                type: 'switch',
-                defaultValue: true,
-            },
             disableBodyScrollLock: {
                 type: 'switch',
                 defaultValue: false,
