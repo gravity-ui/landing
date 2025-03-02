@@ -3,6 +3,7 @@ import {dateTime} from '@gravity-ui/date-utils';
 import {
     ArrowShapeTurnUpRight,
     BookOpen,
+    ChevronDown,
     ChevronLeft,
     CircleRuble,
     Cubes3,
@@ -22,17 +23,16 @@ import {
 import {ActionBar} from '@gravity-ui/navigation';
 import {
     Alert,
+    Box,
     Breadcrumbs,
-    BreadcrumbsProps,
     Button,
     Card,
     Col,
     Divider,
-    FirstDisplayedItemsCount,
     Flex,
     Icon,
+    IconData,
     Label,
-    LastDisplayedItemsCount,
     Link,
     Progress,
     Row,
@@ -43,8 +43,6 @@ import {
     User,
     spacing,
 } from '@gravity-ui/uikit';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
-import {ChevronDown} from 'landing-icons';
 import {chunk} from 'lodash';
 import {Fragment, useState} from 'react';
 
@@ -102,11 +100,11 @@ const APARTMENT_MAIN_INFO: {
         title: string;
     }>;
     objectsPostingItems: Array<{
-        icon: SVGIconData;
+        icon: IconData;
         title: string;
     }>;
     basicAmenitiesItems: Array<{
-        icon: SVGIconData;
+        icon: IconData;
         title: string;
     }>;
     ratingItems: Array<{
@@ -338,7 +336,7 @@ const GUESTS_OPTIONS: SelectOption[] = [
     },
 ];
 
-const BREADCRUMBS: BreadcrumbsProps['items'] = [
+const BREADCRUMBS = [
     {
         text: 'Country',
         action: () => {},
@@ -374,16 +372,9 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                 <ActionBar.Section type="primary">
                                     <ActionBar.Group pull="left">
                                         <ActionBar.Item>
-                                            <Breadcrumbs
-                                                lastDisplayedItemsCount={2}
-                                                items={[
-                                                    {
-                                                        text: 'Gravity UI',
-                                                        action() {},
-                                                    },
-                                                ]}
-                                                firstDisplayedItemsCount={1}
-                                            />
+                                            <Breadcrumbs maxItems={1}>
+                                                <Breadcrumbs.Item>Gravity UI</Breadcrumbs.Item>
+                                            </Breadcrumbs>
                                         </ActionBar.Item>
                                     </ActionBar.Group>
                                     <ActionBar.Group pull="right">
@@ -454,11 +445,17 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                     <Button view="flat-secondary">
                                         <Icon data={ChevronLeft} />
                                     </Button>
-                                    <Breadcrumbs
-                                        items={BREADCRUMBS}
-                                        firstDisplayedItemsCount={FirstDisplayedItemsCount.One}
-                                        lastDisplayedItemsCount={LastDisplayedItemsCount.One}
-                                    />
+                                    <Box width="100%">
+                                        <Breadcrumbs>
+                                            {BREADCRUMBS.map((item, index) => {
+                                                return (
+                                                    <Breadcrumbs.Item key={index}>
+                                                        {item.text}
+                                                    </Breadcrumbs.Item>
+                                                );
+                                            })}
+                                        </Breadcrumbs>
+                                    </Box>
                                 </Flex>
 
                                 <Flex

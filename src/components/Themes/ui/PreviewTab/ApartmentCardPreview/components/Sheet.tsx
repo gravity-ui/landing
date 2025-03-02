@@ -1,5 +1,4 @@
-import {Card, CardProps, Flex, Icon, Text, spacing} from '@gravity-ui/uikit';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import {Card, CardProps, Flex, Icon, IconData, Text, spacing} from '@gravity-ui/uikit';
 import {chunk} from 'lodash';
 import {PropsWithChildren} from 'react';
 
@@ -79,7 +78,7 @@ export function SheetList({
     itemsPerColumn: number;
     items: Array<{
         title: string;
-        icon: SVGIconData;
+        icon: IconData;
     }>;
     addBottomMargin?: boolean;
 }) {
