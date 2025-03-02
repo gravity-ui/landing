@@ -1,6 +1,13 @@
 import {Moon, Sun} from '@gravity-ui/icons';
-import {Icon, RadioButton, Theme, ThemeProvider} from '@gravity-ui/uikit';
-import React, {Fragment, ReactNode, useState} from 'react';
+import {
+    Icon,
+    SegmentedRadioGroup,
+    Theme,
+    ThemeProvider,
+    Toaster,
+    ToasterProvider,
+} from '@gravity-ui/uikit';
+import React, {ReactNode, useState} from 'react';
 
 import {block} from '../../../../../utils';
 import {exportTheme} from '../../../lib/themeCreatorExport';
@@ -42,7 +49,7 @@ function Content({
     onThemeUpdate: (value: Theme) => void;
 }) {
     const themeSwitcher = (
-        <RadioButton
+        <SegmentedRadioGroup
             name="theme"
             defaultValue="light"
             value={theme}
@@ -61,13 +68,26 @@ function Content({
             ]}
         />
     );
+
+    const [toaster, setToaster] = React.useState<Toaster>();
+
+    React.useEffect(() => {
+        if (!toaster) {
+            setToaster(new Toaster());
+        }
+    }, [toaster]);
+
+    if (!toaster) {
+        return null;
+    }
+
     return (
-        <Fragment>
+        <ToasterProvider toaster={toaster}>
             {children({
                 themeSwitcher,
                 theme,
                 isLightTheme: theme.includes('light'),
             })}
-        </Fragment>
+        </ToasterProvider>
     );
 }

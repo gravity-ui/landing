@@ -33,17 +33,17 @@ import {
     Divider,
     Flex,
     Icon,
+    IconData,
     Label,
     LabelProps,
     Switch,
-    Tabs,
-    TabsItemProps,
+    Tab,
+    TabList,
     Text,
     TextInput,
     User,
+    spacing,
 } from '@gravity-ui/uikit';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
-import {spacing} from 'landing-uikit';
 import {Fragment} from 'react';
 
 import gravityUi from '../../../../../assets/icons/gravity-ui.svg';
@@ -53,7 +53,7 @@ import {PreviewWrapper, PreviewWrapperProps} from '../PreviewWrapper/PreviewWrap
 interface MenuItem {
     id: string;
     title: string;
-    icon: SVGIconData;
+    icon: IconData;
     current?: boolean;
 }
 
@@ -107,7 +107,7 @@ const LOGO_PROPS: LogoProps = {
 };
 
 const ACTIVE_TAB = 'list';
-const TAB_ITEMS: TabsItemProps[] = [
+const TAB_ITEMS = [
     {id: 'list', title: 'List', counter: 25},
     {id: 'calendar', title: 'Calendar', counter: 2},
     {id: 'files', title: 'Files', counter: 200},
@@ -312,11 +312,15 @@ const TASKS: Array<{
 
 export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
     const editor = useMarkdownEditor({
-        initialEditorMode: 'wysiwyg',
-        initialToolbarVisible: true,
-        allowHTML: false,
-        linkify: true,
-        breaks: true,
+        initial: {
+            mode: 'wysiwyg',
+            toolbarVisible: true,
+        },
+        md: {
+            html: true,
+            linkify: true,
+            breaks: true,
+        },
     });
 
     return (
@@ -450,11 +454,15 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                     </Flex>
                                 </Flex>
                                 <Flex>
-                                    <Tabs
-                                        activeTab={ACTIVE_TAB}
-                                        items={TAB_ITEMS}
-                                        className={spacing({px: 5})}
-                                    />
+                                    <TabList value={ACTIVE_TAB} className={spacing({px: 5})}>
+                                        {TAB_ITEMS.map((tab) => {
+                                            return (
+                                                <Tab key={tab.id} value={tab.id} counter={25}>
+                                                    {tab.title}
+                                                </Tab>
+                                            );
+                                        })}
+                                    </TabList>
 
                                     <Flex grow={1}></Flex>
                                 </Flex>
@@ -512,14 +520,14 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                                 </div>
                                             </Flex>
                                         </Flex>
-                                        <Tabs
-                                            className={spacing({px: 5, mt: 3})}
-                                            activeTab="active"
-                                            items={[
-                                                {id: 'active', title: 'Active', counter: 25},
-                                                {id: 'closed', title: 'Closed', counter: 2},
-                                            ]}
-                                        />
+                                        <TabList value="active">
+                                            <Tab value="active" counter={25}>
+                                                Active
+                                            </Tab>
+                                            <Tab value="closed" counter={2}>
+                                                Closed
+                                            </Tab>
+                                        </TabList>
                                         <div
                                             style={{overflow: 'auto'}}
                                             className={spacing({mt: 1})}
@@ -734,17 +742,7 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                                 spacing={{mx: 5, mt: 5, px: 2, py: 2}}
                                                 style={{flexGrow: 1}}
                                             >
-                                                <MarkdownEditorView
-                                                    toaster={{
-                                                        add: () => null,
-                                                        remove: () => null,
-                                                        removeAll: () => null,
-                                                        update: () => null,
-                                                        has: () => false,
-                                                    }}
-                                                    stickyToolbar
-                                                    editor={editor}
-                                                />
+                                                <MarkdownEditorView stickyToolbar editor={editor} />
                                             </Card>
 
                                             <Flex
