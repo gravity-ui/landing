@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[1032],{51032:function(e,s,r){r.r(s),r.d(s,{ProgressComponent:function(){return t}});var n=r(85893),u=r(24501);r(67294);let t=e=>(0,n.jsx)("div",{style:{width:"30%"},children:(0,n.jsx)(u.Progress,{...e,value:Number(e.value)})})}}]);

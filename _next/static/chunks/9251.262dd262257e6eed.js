@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[9251],{49251:function(n,t,c){c.r(t),c.d(t,{ButtonWrapper:function(){return r}});var a=c(85893),e=c(852),o=c(24501);let r=n=>(0,a.jsx)(o.Button,{...n,children:n.onlyIcon?[(0,a.jsx)(o.Icon,{data:e.Z})]:[n.startIcon&&(0,a.jsx)(o.Icon,{data:e.Z}),n.children,n.endIcon&&(0,a.jsx)(o.Icon,{data:e.Z})]})}}]);
