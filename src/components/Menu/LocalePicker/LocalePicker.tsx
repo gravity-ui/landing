@@ -31,8 +31,10 @@ export const LocalePicker: React.FC = () => {
                     const path = router.asPath;
                     if (locale === i18nextConfig.i18n.defaultLocale) {
                         router.replace(path.replace(`/${i18n.language}`, '') || '/');
-                    } else {
+                    } else if (i18n.language === i18nextConfig.i18n.defaultLocale) {
                         router.replace(`/${locale}${path}`);
+                    } else {
+                        router.replace(path.replace(`/${i18n.language}`, `/${locale}`));
                     }
                 }}
             >

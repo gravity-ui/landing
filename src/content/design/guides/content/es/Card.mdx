@@ -1,0 +1,85 @@
+El componente Card se utiliza para dividir el contenido en bloques semánticos. En esencia, es un contenedor para agrupar contenido, con la opción de colapsarlo.
+
+## Uso
+
+El componente viene en cuatro tipos.
+
+![Uso](/static/images/design/Card/Placement.png)
+
+## **Con temas**
+
+![Colocación](/static/images/design/Card/Placement1.png)
+
+Las tarjetas con temas pueden cambiar el color de fondo o de trazo. A menudo se utilizan para describir el error/éxito de un bloque o una advertencia de usuario. Esta tarjeta se utiliza más comúnmente para combinar contenido en su color predeterminado (normal). El parámetro theme especifica el tema de la tarjeta, mientras que el parámetro View determina si la tarjeta tiene trazo o está rellena.
+
+Tienes las siguientes opciones para tarjetas de este tipo (container):
+
+**View**: Outlined / Filled
+
+**Theme**: Normal, Info, Success, Warning, Danger (color)
+
+![tema](/static/images/design/Card/theme.png)
+
+- Normal - el estado básico de la tarjeta con un trazo, utilizado en la mayoría de los casos.
+- Info — se utiliza para proporcionar información al usuario
+- Success — se utiliza para indicar eventos con resultados positivos.
+- Warning — se utiliza para mostrar una advertencia
+- Danger es un contenedor diseñado para llamar más la atención del usuario; puede ser activado por pérdida de datos, interrupción del servicio, etc.
+
+## **Tarjeta seleccionable**
+
+![Seleccionable](/static/images/design/Card/Selectable.png)
+
+Las tarjetas en esta categoría requieren que elijas una de las opciones disponibles. La tarjeta tiene tres estados: normal, seleccionado y hover.
+
+Tienes las siguientes opciones para tarjetas de este tipo (type = selection):
+
+**selected**: true / false
+
+**disabled**: true / false
+
+## **Elevada**
+
+Se utiliza para agrupar contenido, similar a **Normal** en el grupo Con temas. La principal diferencia es que este tipo de tarjeta tiene una sombra. Recomendamos usarla en situaciones donde la tarjeta necesita ser destacada. Por ejemplo, con widgets:
+
+![Elevada](/static/images/design/Card/Raised.png)
+
+Recuerda dejar suficiente espacio entre estas tarjetas para que la sombra no caiga sobre la tarjeta contigua.
+
+En el tamaño L, la tarjeta tiene una 'sombra más aérea', por lo que al usar este tamaño, se recomienda elegir un espaciado ligeramente mayor entre tarjetas en comparación con el tamaño M.
+
+**type**: container;
+
+**view**: raised
+
+## **Elevada con acción**
+
+Similar a la tarjeta anterior, pero requiere hacer clic en la tarjeta. A diferencia de la tarjeta **Elevada**, hay un estado de hover pero no un estado de "opción seleccionada", como en la tarjeta Seleccionable. Recomendamos usarla cuando necesites proporcionar al usuario una opción de selección que contenga descripciones detalladas.
+
+Ten en cuenta que al hacer clic en ella redirigirá al usuario a una página anidada. Por lo tanto, los usuarios deben esperar este comportamiento de la tarjeta. (debe quedar claro desde el diseño de la tarjeta)
+
+![ConAcciones](/static/images/design/Card/WithActions.png)
+
+Tienes las siguientes opciones para tarjetas de este tipo (type = action):
+
+**disabled**: true / false
+
+## Tamaño 
+
+![Tamaños M y L, usando el ejemplo de tarjetas con sombra (Elevada)](/static/images/design/Card/Size.png)
+
+Tamaños M y L, usando el ejemplo de tarjetas con sombra (Elevada)
+
+Dos tamaños disponibles: M y L. El radio de esquina depende del tamaño: radio L (8px) y radio 2XL (16px). La elección del tamaño depende de la ubicación, el padding y el tamaño de los controles de la página. Por ejemplo, si la página utiliza el tamaño L para inputs, botones y otros elementos, la tarjeta también debe ser de tamaño L.
+
+El ancho y la altura del componente están determinados por su contenido. El tamaño mínimo se puede seleccionar con un ligero padding desde el contenido. El tamaño máximo puede ser igual al 100% del ancho de la página.
+
+### Casos de uso
+
+![Caso de uso](/static/images/design/Card/Usecase.png)
+
+Ejemplo de uso de tarjeta:
+
+1 - temas con relleno para informar al usuario,
+
+2 - tarjeta con contorno para agrupar contenido

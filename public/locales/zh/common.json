@@ -1,0 +1,20 @@
+{
+    "actions_open": "打开",
+    "actions_copyToClipboard": "复制到剪贴板",
+    "actions_share": "分享",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "actions_playground": "Playground",
+    "menu_libraries": "库",
+    "menu_components": "组件",
+    "menu_design": "设计",
+    "menu_editor": "编辑器",
+    "menu_icons": "图标",
+    "menu_themer": "主题器",
+    "roadmap_inProgress": "进行中",
+    "navigation_previous": "上一个",
+    "navigation_next": "下一个",
+    "emptySearchPlaceholder": "未找到任何内容",
+    "show_more": "显示更多",
+    "show_less": "显示更少"
+}

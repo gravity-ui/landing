@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     let readmeContent = '';
 
     const localeParam = ctx?.params?.locale;
-    const locale = getLocale(typeof localeParam === 'string' ? localeParam : 'en');
+    const locale = getLocale(typeof localeParam === 'string' ? localeParam : 'en') as 'ru' | 'en'; // TODO: temp;
 
     try {
         const headers: Record<string, string> = {'User-Agent': 'request'};

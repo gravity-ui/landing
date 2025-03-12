@@ -1,0 +1,16 @@
+{
+    "actions_copyIconName": "复制图标名称",
+    "actions_copyLink": "复制链接",
+    "actions_copied": "已复制",
+    "actions_copyReactComponent": "复制React组件",
+    "actions_copySvgImport": "复制SVG导入",
+    "actions_downloadSvg": "下载SVG",
+    "title": "图标",
+    "goToLibrary": "前往库",
+    "filterPlaceholder": "按图标名称筛选",
+    "keywords": "关键词",
+    "empty_title": "未找到符合您请求的结果",
+    "empty_subTitle": "请检查拼写或尝试其他关键词。",
+    "usage_reactComponent": "React组件",
+    "usage_svg": "SVG"
+}

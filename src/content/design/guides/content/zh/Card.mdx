@@ -1,0 +1,85 @@
+Card组件用于将内容划分为语义块。本质上，它是一个用于分组内容的容器，具有折叠选项。
+
+## 用法
+
+该组件有四种类型。
+
+![用法](/static/images/design/Card/Placement.png)
+
+## **带主题的**
+
+![放置](/static/images/design/Card/Placement1.png)
+
+带主题的卡片可以更改背景或描边颜色。通常用于描述块的错误/成功或用户警告。这种卡片最常用于在其默认颜色（normal）中组合内容。theme参数指定卡片的主题，而View参数确定卡片是描边还是填充。
+
+这种类型的卡片（container）有以下选项：
+
+**View**: Outlined / Filled
+
+**Theme**: Normal, Info, Success, Warning, Danger (颜色)
+
+![主题](/static/images/design/Card/theme.png)
+
+- Normal - 带描边的卡片的基本状态，在大多数情况下使用。
+- Info — 用于向用户提供信息
+- Success — 用于指示具有积极结果的事件。
+- Warning — 用于显示警告
+- Danger 是一个旨在引起用户最多注意的容器；它可能由数据丢失、服务中断等触发。
+
+## **可选择卡片**
+
+![可选择](/static/images/design/Card/Selectable.png)
+
+此类别中的卡片要求您从可用选项中选择一个。卡片有三种状态：正常、选中和悬停。
+
+这种类型的卡片（type = selection）有以下选项：
+
+**selected**: true / false
+
+**disabled**: true / false
+
+## **凸起的**
+
+用于分组内容，类似于"带主题"组中的**Normal**。主要区别是这种卡片类型有阴影。我们建议在需要突出显示卡片的情况下使用它。例如，与小部件一起使用：
+
+![凸起的](/static/images/design/Card/Raised.png)
+
+记得在这些卡片之间留出足够的空间，以便阴影不会落在旁边的卡片上。
+
+在L尺寸中，卡片有一个更"空灵的阴影"，因此在使用这个尺寸时，建议选择比M尺寸稍大的卡片间距。
+
+**type**: container;
+
+**view**: raised
+
+## **带操作的凸起卡片**
+
+与前一张卡片类似，但需要点击卡片。与**凸起的**卡片不同，它有悬停状态但没有"选定选项"状态，就像在可选择卡片中一样。我们建议在需要为用户提供包含详细描述的选择选项时使用它。
+
+请记住，点击它将重定向用户到嵌套页面。因此，用户应该预期这种卡片行为。（应该从卡片的设计中清楚）
+
+![带操作](/static/images/design/Card/WithActions.png)
+
+这种类型的卡片（type = action）有以下选项：
+
+**disabled**: true / false
+
+## 尺寸 
+
+![尺寸M和L，以带阴影的卡片（凸起）为例](/static/images/design/Card/Size.png)
+
+尺寸M和L，以带阴影的卡片（凸起）为例
+
+有两种可用尺寸：M和L。圆角半径取决于尺寸：L半径（8px）和2XL半径（16px）。尺寸的选择取决于位置、内边距和页面控件的大小。例如，如果页面对输入框、按钮和其他元素使用L尺寸，卡片也应该是L尺寸。
+
+组件的宽度和高度由其内容决定。最小尺寸可以选择与内容略微内边距。最大尺寸可以等于页面宽度的100%。
+
+### 使用案例
+
+![使用案例](/static/images/design/Card/Usecase.png)
+
+卡片使用示例：
+
+1 - 带填充的主题，用于通知用户，
+
+2 - 带轮廓的卡片，用于分组内容

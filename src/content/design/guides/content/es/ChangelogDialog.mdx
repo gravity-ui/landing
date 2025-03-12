@@ -1,0 +1,77 @@
+El equipo de servicio puede utilizar el registro de cambios para informar a los usuarios sobre los cambios.
+
+El registro de cambios se muestra una vez cuando el usuario abre la página del servicio. No proporcionamos una opción para reabrir la página del registro de cambios. Impleméntela de forma independiente si es necesario.
+
+Debido a que el registro de cambios se muestra en una ventana modal, sigue las reglas para cerrar y escalar ventanas modales.
+
+## Elementos
+
+El registro de cambios es una ventana modal de tamaño M con publicaciones organizadas cronológicamente. Cada publicación tiene:
+
+1. Fecha de publicación
+2. Etiqueta "Nuevo" [label](https://gravity-ui.com/design/guides/label) (opcional)
+3. Encabezado de la publicación
+4. Imagen de la publicación (opcional)
+5. Texto de la publicación
+6. Botón de acción [button](https://gravity-ui.com/design/guides/button) (opcional).
+
+![Elementos](/static/images/design/ChangelogDialog/ChangelogDialog1.png)
+
+### Fecha de publicación
+
+A partir de la fecha de publicación, el usuario puede entender cuándo ocurrió un cambio particular en el servicio. Por defecto, la fecha está en el formato DD Mon AAAA. También puede utilizar otros formatos de fecha para que coincidan con la configuración regional del servicio.
+
+### Etiqueta
+
+Utilice la etiqueta "Nuevo" para nuevas publicaciones. El servicio determina qué publicaciones considerar nuevas y marcar con esta etiqueta. En el texto, puede utilizar otras formulaciones, diferentes de "Nuevo".
+
+### Encabezado de la publicación
+
+El encabezado de la publicación se utiliza para una breve descripción del cambio del servicio. El encabezado puede tener cualquier longitud. No recomendamos:
+
+- Utilizar encabezados que ocupen más de una línea (contienen más de 70 caracteres), ya que esto empeora la legibilidad del texto.
+- Copiar texto de noticias al encabezado.
+
+El encabezado utiliza el estilo text-subheader-3. No proporcionamos otros estilos de texto para encabezados.
+
+### Imagen
+
+La imagen es opcional y tiene dimensiones fijas de 516x240px. Puede utilizar archivos JPG y PNG como imágenes (no se admiten imágenes GIF ni archivos de video). Utilice imágenes cuando necesite ilustrar el tema de la publicación. Se utiliza una imagen para ambos temas de interfaz, claro y oscuro.
+
+Si carga una imagen más grande que 516x240px, se escalará y centrará en el lado más grande.
+
+Considerando las pantallas retina, recomendamos cargar imágenes escaladas al doble en cada lado, es decir, 1032x480px.
+
+### Texto de la publicación
+
+El texto de la publicación sigue a la imagen y puede tener cualquier longitud. No recomendamos:
+
+- Utilizar textos muy largos (más de 500 caracteres). Si no puede acortar el texto a la longitud recomendada, puede agregar enlaces a la documentación dentro del texto o proporcionar un botón después del texto para navegar al texto completo.
+- Crear subencabezados. Dado que la longitud de texto recomendada es concisa, no necesita dividir el texto en secciones utilizando subencabezados.
+
+El texto utiliza el estilo 'text-body-1'. No proporcionamos otros estilos de texto, pero puede agregar formato, es decir, crear listas con viñetas y numeradas, agregar tachado, subrayado, negrita y cursiva.
+
+### Botón de acción
+
+El botón de acción es opcional y se encuentra debajo del texto de la publicación. Utilícelo para navegar al texto completo de la publicación.
+
+Solo se admiten botones de tamaño M. El botón puede ser de cualquier tipo, con o sin icono. Manténgase con un solo tipo de botón.
+
+No admitimos múltiples botones.
+
+### Otros elementos
+
+Además, bajo el encabezado de la ventana modal, puede agregar un enlace "Ver registro de cambios completo" a una página de registro de cambios (esto puede ser una página de servicio separada, un storybook o un servicio de documentación externo).
+
+## Recomendaciones de uso
+
+Utilice el registro de cambios:
+
+- Cuando necesite informar al usuario sobre cambios significativos en el servicio.
+- Cuando necesite mantener al usuario al tanto de cambios menores. En este caso, considere mostrar el registro de cambios periódicamente y contar sobre cualquier cambio menor desde la última entrada del registro de cambios.
+- Cuando necesite recordar al usuario sobre cambios en el servicio y aumentar su conocimiento de versiones anteriores.
+
+No recomendamos:
+
+- Utilizar el registro de cambios para incorporar usuarios.
+- Utilizar el registro de cambios para informar al usuario sobre cada cambio menor en el servicio.

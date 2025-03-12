@@ -51,7 +51,7 @@ export const Component: React.FC<ComponentProps> = ({
 }) => {
     const {t, i18n} = useTranslation();
 
-    const locale = getLocale(i18n.language);
+    const locale = getLocale(i18n.language) as 'ru' | 'en'; // TODO: temp
 
     const {isClient} = React.useContext(EnvironmentContext);
 

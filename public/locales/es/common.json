@@ -1,0 +1,20 @@
+{
+    "actions_open": "Abrir",
+    "actions_copyToClipboard": "Copiar al portapapeles",
+    "actions_share": "Compartir",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "actions_playground": "Playground",
+    "menu_libraries": "Bibliotecas",
+    "menu_components": "Componentes",
+    "menu_design": "Diseño",
+    "menu_editor": "Editor",
+    "menu_icons": "Iconos",
+    "menu_themer": "Tematizador",
+    "roadmap_inProgress": "En progreso",
+    "navigation_previous": "Anterior",
+    "navigation_next": "Siguiente",
+    "emptySearchPlaceholder": "No se encontró nada",
+    "show_more": "Mostrar más",
+    "show_less": "Mostrar menos"
+}
