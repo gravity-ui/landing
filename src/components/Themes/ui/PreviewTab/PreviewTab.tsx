@@ -23,6 +23,7 @@ import {
 } from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {CSSProperties, Fragment, useState} from 'react';
+import {Dashboard} from 'src/blocks/Examples/Dashboard/PageLayout';
 
 import gravityUi from '../../../../assets/icons/gravity-ui.svg';
 import {block} from '../../../../utils';
@@ -248,6 +249,7 @@ export const PreviewTab = () => {
                     </PreviewLayout>
                 );
             })}
+            <Dashboard />
         </Flex>
     );
 };
