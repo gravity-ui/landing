@@ -272,7 +272,7 @@ export const PreviewTab = () => {
             {previewComponents.map(
                 ({Component, title, breadCrumbsItems = [], id, blank}, index) => {
                     return blank ? (
-                        <Component styles={themeStyles} />
+                        <Component key={index} styles={themeStyles} />
                     ) : (
                         <PreviewLayout
                             key={index}

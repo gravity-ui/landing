@@ -5,7 +5,6 @@ import {
     BookOpen,
     ChevronDown,
     ChevronLeft,
-    CircleRuble,
     Cubes3,
     FaceFun,
     FaceNeutralDashed,
@@ -13,14 +12,13 @@ import {
     Ghost,
     Heart,
     HeartFill,
-    House,
     MagicWand,
-    Person,
     ThumbsDown,
     ThumbsUp,
     ThumbsUpFill,
 } from '@gravity-ui/icons';
 import {ActionBar} from '@gravity-ui/navigation';
+import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {
     Alert,
     Box,
@@ -47,17 +45,27 @@ import {chunk} from 'lodash';
 import {Fragment, useState} from 'react';
 
 import apple from '../../../../../assets/preview-apartments/apple.png';
-import photo1 from '../../../../../assets/preview-apartments/photo-1.png';
-import photo2 from '../../../../../assets/preview-apartments/photo-2.png';
-import photo3 from '../../../../../assets/preview-apartments/photo-3.png';
-import photo4 from '../../../../../assets/preview-apartments/photo-4.png';
-import photo5 from '../../../../../assets/preview-apartments/photo-5.png';
-import photo6 from '../../../../../assets/preview-apartments/photo-6.png';
-import photo7 from '../../../../../assets/preview-apartments/photo-7.png';
+import photo1sm from '../../../../../assets/preview-apartments/photo-1-sm.jpg';
+import photo1 from '../../../../../assets/preview-apartments/photo-1.jpg';
+import photo2sm from '../../../../../assets/preview-apartments/photo-2-sm.jpg';
+import photo2 from '../../../../../assets/preview-apartments/photo-2.jpg';
+import photo3sm from '../../../../../assets/preview-apartments/photo-3-sm.jpg';
+import photo3 from '../../../../../assets/preview-apartments/photo-3.jpg';
+import photo4sm from '../../../../../assets/preview-apartments/photo-4-sm.jpg';
+import photo4 from '../../../../../assets/preview-apartments/photo-4.jpg';
+import photo5sm from '../../../../../assets/preview-apartments/photo-5-sm.jpg';
+import photo5 from '../../../../../assets/preview-apartments/photo-5.jpg';
+import photo6sm from '../../../../../assets/preview-apartments/photo-6-sm.jpg';
+import photo6 from '../../../../../assets/preview-apartments/photo-6.jpg';
+import photo7sm from '../../../../../assets/preview-apartments/photo-7-sm.jpg';
+import photo7 from '../../../../../assets/preview-apartments/photo-7.jpg';
+import photo8sm from '../../../../../assets/preview-apartments/photo-8-sm.jpg';
+import photo8 from '../../../../../assets/preview-apartments/photo-8.jpg';
 import playstore from '../../../../../assets/preview-apartments/playstore.png';
 import user1 from '../../../../../assets/preview-apartments/user-1.png';
 import {PreviewWrapper, PreviewWrapperProps} from '../PreviewWrapper/PreviewWrapper';
 
+import {Actions} from './components/Actions';
 import {CollapsibleText} from './components/CollapsibleText';
 import {Gallery} from './components/Gallery';
 import {Rank} from './components/Rank';
@@ -73,14 +81,16 @@ import {
 
 const PHOTOS: Array<{
     src: string;
+    srcSm: string;
 }> = [
-    {src: photo1.src},
-    {src: photo2.src},
-    {src: photo3.src},
-    {src: photo4.src},
-    {src: photo5.src},
-    {src: photo6.src},
-    {src: photo7.src},
+    {src: photo1.src, srcSm: photo1sm.src},
+    {src: photo2.src, srcSm: photo2sm.src},
+    {src: photo3.src, srcSm: photo3sm.src},
+    {src: photo4.src, srcSm: photo4sm.src},
+    {src: photo5.src, srcSm: photo5sm.src},
+    {src: photo6.src, srcSm: photo6sm.src},
+    {src: photo7.src, srcSm: photo7sm.src},
+    {src: photo8.src, srcSm: photo8sm.src},
 ];
 
 const HORIZONTAL_SPACING = 10 as const;
@@ -358,6 +368,9 @@ const BREADCRUMBS = [
 export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
     const [isFavorite, setIsFavorite] = useState(false);
 
+    const currentBreakpoint = useWindowBreakpoint();
+    const isCompactActionsBar = currentBreakpoint < BREAKPOINTS.lg;
+
     return (
         <PreviewWrapper {...props}>
             {({themeSwitcher, isLightTheme}) => {
@@ -380,38 +393,7 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                     <ActionBar.Group pull="right">
                                         <ActionBar.Item>
                                             <Flex gap={2} className={spacing({mr: 4})}>
-                                                <Button view="flat">
-                                                    <Icon data={House} />
-                                                    Rent out housing
-                                                </Button>
-                                                <Button view="flat">
-                                                    <Icon data={BookOpen} />
-                                                    Bookings
-                                                </Button>
-                                                <Button view="flat">
-                                                    <Icon data={Heart} />
-                                                    Favorites
-                                                </Button>
-                                                <Divider
-                                                    orientation="vertical"
-                                                    className={spacing({my: 1})}
-                                                />
-                                                <Button view="flat">
-                                                    <Icon data={Person} />
-                                                    Login
-                                                </Button>
-                                                <Divider
-                                                    orientation="vertical"
-                                                    className={spacing({my: 1})}
-                                                />
-                                                <Button view="flat">
-                                                    <Icon data={CircleRuble} />
-                                                    RUB
-                                                </Button>
-                                                <Divider
-                                                    orientation="vertical"
-                                                    className={spacing({my: 1})}
-                                                />
+                                                <Actions isCompact={isCompactActionsBar} />
                                                 <Text
                                                     style={{alignSelf: 'center'}}
                                                     variant="body-1"
@@ -420,7 +402,6 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                                 </Text>
                                             </Flex>
                                         </ActionBar.Item>
-
                                         {themeSwitcher}
                                     </ActionBar.Group>
                                 </ActionBar.Section>
@@ -790,11 +771,11 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                                                                                 width: '60px',
                                                                                             }}
                                                                                             overflow="hidden"
+                                                                                            key={
+                                                                                                imageIndex
+                                                                                            }
                                                                                         >
                                                                                             <img
-                                                                                                key={
-                                                                                                    imageIndex
-                                                                                                }
                                                                                                 src={
                                                                                                     image.src
                                                                                                 }

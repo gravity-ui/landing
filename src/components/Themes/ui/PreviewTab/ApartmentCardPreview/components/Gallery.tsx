@@ -3,7 +3,7 @@ import {Button, Card, Flex, Icon, spacing} from '@gravity-ui/uikit';
 import {useState} from 'react';
 
 interface GalleryProps {
-    photos: Array<{src: string}>;
+    photos: Array<{src: string; srcSm: string}>;
     className?: string;
 }
 
@@ -45,7 +45,10 @@ export function Gallery({photos, className}: GalleryProps) {
                                     setCurrentPhotoIndex(index);
                                 }}
                             >
-                                <img style={{height: '100%', objectFit: 'fill'}} src={photo.src} />
+                                <img
+                                    style={{height: '100%', objectFit: 'fill'}}
+                                    src={photo.srcSm}
+                                />
                             </Card>
                         );
                     })}
