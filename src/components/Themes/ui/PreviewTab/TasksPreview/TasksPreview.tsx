@@ -331,7 +331,7 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                     : 'rgba(255,255,255,0.1)';
 
                 return (
-                    <Flex height="100%" maxHeight="100%">
+                    <Flex height="100%" maxHeight="100%" minWidth="1080px">
                         {/* Sidebar */}
                         <Flex
                             direction="column"
@@ -355,9 +355,8 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
 
                                 {COLLAPSIBLE_MENUS.map((menu, index) => {
                                     return (
-                                        <Fragment>
+                                        <Fragment key={index}>
                                             <Disclosure
-                                                key={index}
                                                 expanded={menu.expanded}
                                                 defaultExpanded={menu.defaultExpanded}
                                                 summary={
@@ -793,6 +792,7 @@ function Menu({items}: {items: MenuItem[]}) {
             {items.map((menuItem) => {
                 return (
                     <Button
+                        key={menuItem.id}
                         width="max"
                         view="flat"
                         selected={menuItem.current}
@@ -832,7 +832,7 @@ function TasksList() {
                         }}
                     >
                         <Checkbox />
-                        <Text style={{flexGrow: 1}} color={isActive ? 'brand' : undefined}>
+                        <Text ellipsis style={{flexGrow: 1}} color={isActive ? 'brand' : undefined}>
                             {task.title}
                         </Text>
                         <Flex
