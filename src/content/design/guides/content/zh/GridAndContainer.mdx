@@ -1,0 +1,27 @@
+![网格](/static/images/design/GridAndContainer/grid.png)
+
+空间模块允许我们为尺寸和间距计算定义严格的规则，而网格则帮助将内容结构化为视觉上有组织的块。我们使用12列、8列和4列网格，可以将选定区域分为二分之一、三分之一和四分之一。
+
+# 网格结构
+
+![网格结构](/static/images/design/GridAndContainer/structure.png)
+
+列 ➊ 定义水平对齐的边界；空间 ➋ 提供网格列之间的内边距；外部边距 ➌ 确保容器 ➍ 的内边距和居中对齐。网格列宽由百分比值确定，默认列间距设置为20px。
+
+# 容器
+
+![容器](/static/images/design/GridAndContainer/container.png)
+
+容器是系统设计的基本组件，它在给定视口内包含和组织内容。我们使用两种类型的容器：固定宽度的固定容器（这意味着其固定的最大宽度可以在每个断点处更改）和可变宽度的流体容器，占据可用空间的100%（S、XS和2XS尺寸除外）。
+
+# 断点
+
+媒体查询断点，或称为断点，是预定义的视口宽度，允许您管理各种网格设置。
+
+![断点](/static/images/design/GridAndContainer/breakpoints.png)
+
+# 排除区域
+
+![排除区域](/static/images/design/GridAndContainer/zones.png)
+
+在UI设计布局中，用户期望某些元素位于特定区域。我们将这些区域称为"排除区域"，并且不将它们包含在我们的网格系统中。当灵活或导航面板展开时，内容和网格要么被压缩以适应浏览器内部，要么延伸到浏览器之外。覆盖面板覆盖内容而不影响主容器。

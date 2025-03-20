@@ -1,0 +1,67 @@
+Una casilla de verificación es un elemento de interfaz de usuario que permite a los usuarios seleccionar una o más opciones de las proporcionadas.
+
+## Casos de uso
+
+![Casos](/static/images/design/Checkbox/Checkbox1.png)
+
+Cuando se activa, la casilla de verificación no desencadena una acción instantáneamente. Los usuarios deben hacer clic en un botón de confirmación (por ejemplo, Guardar, Aplicar, Enviar) para aplicarla. En la mayoría de los casos, la casilla de verificación se utiliza junto con una etiqueta explicativa. Sin embargo, en algunos escenarios, las casillas de verificación pueden usarse sin etiquetas, como en tablas o donde incluir una etiqueta "habilitar" junto a cada casilla de verificación es redundante. Comience su texto con palabras positivas, por ejemplo, use "Habilitar" en lugar de "Deshabilitar", para evitar que el usuario resuelva un rompecabezas lógico.
+
+## Anatomía
+
+La casilla de verificación consta de:
+
+![Anatomía](/static/images/design/Checkbox/Checkbox2.png)
+
+1. **Contenedor**: Área rectangular visual que rodea la casilla de verificación. El contenedor indica los límites y activa la casilla de verificación.
+2. **Marca de verificación**: Símbolo que aparece dentro del contenedor cuando el usuario habilita la casilla de verificación. Este símbolo confirma visualmente que el usuario seleccionó la casilla de verificación.
+3. **Etiqueta de texto (opcional)**: Texto colocado a la derecha de la casilla de verificación. La etiqueta de texto explica el significado o propósito de la casilla de verificación.
+
+## Tamaños
+
+El componente de casilla de verificación tiene dos tamaños principales:
+
+![Tamaños](/static/images/design/Checkbox/Checkbox3.png)
+
+**M** es el tamaño predeterminado, con dimensiones estándar adecuadas en la mayoría de los casos. En este tamaño, el contenedor es de 14x14 px y la etiqueta de texto utiliza una fuente de 13 px.
+
+**L** se utiliza cuando la casilla de verificación necesita destacar entre otros elementos de la interfaz o si la interfaz requiere elementos más grandes para un uso más fácil. En este tamaño, el contenedor es de 17x17 px, y la etiqueta de texto utiliza una fuente de 15 px.
+
+## Estados
+
+![Estados](/static/images/design/Checkbox/Checkbox4.png)
+
+**Default** es el estado principal de la casilla de verificación que el usuario puede habilitar o deshabilitar con un clic.
+
+**Hover** es el estado cuando el usuario mueve el cursor sobre el área de la casilla de verificación (casilla + etiqueta).
+
+**Disable** es el estado cuando el usuario no puede interactuar con la casilla de verificación por alguna razón.
+
+**Indeterminate** es el estado del encabezado en un grupo de casillas de verificación cuando se selecciona uno de varios elementos (generalmente ocurre en tablas con selección de múltiples filas).
+
+## Recomendaciones
+
+### Usar
+
+- **Selección de opciones** si desea que el usuario seleccione una o más opciones de una lista.
+
+- **Habilitación/deshabilitación de funciones** si desea que el usuario habilite o deshabilite ciertas funciones en la interfaz. Por ejemplo, los usuarios pueden habilitar o deshabilitar notificaciones o reproducción automática y otras funciones. En tales casos, las casillas de verificación proporcionan una interacción clara e intuitiva.
+
+- **Selección múltiple en tablas o listas** si desea que el usuario seleccione varios elementos para operaciones masivas, como eliminación o exportación. Esto simplifica las operaciones de datos y facilita las acciones masivas.
+
+- **Filtrado de contenido o resultados** si desea que el usuario seleccione parámetros para filtrar contenido o resultados de búsqueda.
+
+### Evitar
+
+- **Selección de una sola opción**. Si espera que el usuario seleccione una opción de un conjunto mutuamente excluyente, use botones de radio.
+
+- **Habilitación/deshabilitación de dos posiciones (acción instantánea)**. Si la opción solo tiene dos estados, habilitado y deshabilitado, y los cambios surten efecto instantáneamente, sin un botón "Aplicar", use interruptores. Los interruptores presentan tales opciones de manera más clara y compacta, y los cambios se aplican inmediatamente después de cambiar.
+
+- **Selección segmentada**. Si ofrece varias opciones mutuamente excluyentes que los usuarios pueden seleccionar simultáneamente en diferentes categorías, use controles de segmento. Permiten al usuario seleccionar opciones en diferentes segmentos o categorías.
+
+- **Selección de numerosas opciones**. Si proporciona una larga lista de opciones de las cuales elegir una sola, use una lista desplegable (select). Esto ahorra espacio en pantalla y facilita la elección de un gran conjunto de opciones.
+
+### Escritura de textos
+
+- Busque la brevedad en las descripciones de texto. Evite frases largas o oraciones complejas.
+- Use verbos activos que indiquen claramente la acción asociada con la elección. Por ejemplo, "Suscribirse al boletín" en lugar de "Suscripción al boletín".
+- Dé a los usuarios una comprensión completa de lo que sucederá cuando seleccionen la casilla de verificación. Por ejemplo, "Recibir notificaciones sobre nuevos artículos" en lugar de "Notificaciones".

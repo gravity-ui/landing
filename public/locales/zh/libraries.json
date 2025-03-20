@@ -1,0 +1,10 @@
+{
+    "title": "库",
+    "header": "我们的库",
+    "searchPlaceholder": "按名称或描述搜索",
+    "empty": "未找到任何内容",
+    "tags_all": "全部",
+    "tags_ui": "UI",
+    "tags_nodejs": "Node.js",
+    "tags_infrastructure": "基础设施"
+}
