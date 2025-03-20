@@ -69,24 +69,24 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                         date: '2025-02-14T16:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
-                    // {
-                    //     date: '2025-02-06T14:00:00.000Z',
-                    //     content: t('home:news_items_item3'),
-                    // },
+                    {
+                        date: '2025-02-06T14:00:00.000Z',
+                        content: t('home:news_items_item3'),
+                    },
                 ],
             },
-            banner: {
-                content: t('home:banner_content'),
-                href: 'https://forms.yandex.ru/surveys/13733147.8993c47ecb24841f51ca79b039326a5ce301538e',
-            },
+            // banner: {
+            //     content: t('home:banner_content'),
+            //     href: 'https://forms.yandex.ru/surveys/13733147.8993c47ecb24841f51ca79b039326a5ce301538e',
+            // },
         },
-        // {
-        //     type: CustomBlock.Iframe,
-        //     width: 560,
-        //     height: 315,
-        //     src: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7?autoplay=0&mute=1',
-        //     allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
-        // },
+        {
+            type: CustomBlock.Iframe,
+            width: 560,
+            height: 315,
+            src: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew?autoplay=0&mute=1',
+            allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
+        },
         {
             type: CustomBlock.Libraries,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
