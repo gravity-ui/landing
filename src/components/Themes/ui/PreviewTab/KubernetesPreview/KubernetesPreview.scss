@@ -1,0 +1,24 @@
+@use '../../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}kubernetes-preview';
+
+#{$block} {
+    &__header-group {
+        .gn-action-bar-item:first-of-type {
+            margin-inline-start: auto;
+        }
+    }
+
+    &__grow {
+        flex-grow: 1;
+    }
+
+    &__widget-card {
+        box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.05);
+
+        min-width: 265px;
+        padding: var(--g-spacing-5);
+    }
+}

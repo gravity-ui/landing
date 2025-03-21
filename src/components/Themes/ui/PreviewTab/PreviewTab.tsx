@@ -32,6 +32,7 @@ import {exportTheme} from '../../lib/themeCreatorExport';
 import {CardsPreview} from './CardsPreview/CardsPreview';
 import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
+import {KubernetesPreview} from './KubernetesPreview/KubernetesPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
 
@@ -221,6 +222,12 @@ const previewComponents = [
         breadCrumbsItems: ['Dashboard'],
     },
     {id: 'cards', Component: CardsPreview, title: 'Cards', breadCrumbsItems: ['Cards']},
+    {
+        id: 'kubernetes',
+        Component: KubernetesPreview,
+        title: 'Kubernetes preview',
+        breadCrumbsItems: [],
+    },
 ];
 
 export const PreviewTab = () => {
