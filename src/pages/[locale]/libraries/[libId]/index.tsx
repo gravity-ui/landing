@@ -6,7 +6,7 @@ import {Library} from '../../../../components/Library/Library';
 import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../../utils';
 
 function getOgImageUrl(id?: string) {
-    return id ? `https://storage.yandexcloud.net/gravity-assets/og/${id}.jpg` : undefined;
+    return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
 }
 
 const libs = getLibsList();
