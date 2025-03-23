@@ -3,6 +3,7 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
+import i18nextConfig from '../../../next-i18next.config';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
@@ -51,7 +52,7 @@ export const Component: React.FC<ComponentProps> = ({
 }) => {
     const {t, i18n} = useTranslation();
 
-    const locale = getLocale(i18n.language) as 'ru' | 'en'; // TODO: temp
+    const locale = getLocale(i18n.language);
 
     const {isClient} = React.useContext(EnvironmentContext);
 
@@ -118,14 +119,16 @@ export const Component: React.FC<ComponentProps> = ({
         setActiveTab(tabId === TabType.Design ? TabType.Design : TabType.Overview);
     }, [tabId]);
 
+    const contentReadmeUrl = component.content?.readmeUrl[i18nextConfig.i18n.defaultLocale as 'en'];
+
     const rewriteLinks = React.useCallback(
         (link: string) => {
-            if (!component.content?.readmeUrl) {
+            if (!contentReadmeUrl) {
                 return link;
             }
 
-            const readmeUrl = new URL(component.content.readmeUrl[locale]);
-            const url = new URL(link, component.content.readmeUrl[locale]);
+            const readmeUrl = new URL(contentReadmeUrl);
+            const url = new URL(link, contentReadmeUrl);
 
             if (url.origin !== readmeUrl.origin) {
                 return link;
@@ -134,7 +137,7 @@ export const Component: React.FC<ComponentProps> = ({
             const newLink = getRouteFromReadmeUrl(url.toString());
             return newLink ?? link;
         },
-        [component.content?.readmeUrl[locale]],
+        [contentReadmeUrl],
     );
 
     return (

@@ -62,11 +62,25 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
         }
 
-        // TODO: Preload content
-        const res = await fetch(component.content.readmeUrl[locale]);
-        if (res.status >= 200 && res.status < 300) {
-            readmeContent = await res.text();
-        } else if (locale !== i18n.defaultLocale) {
+        if (locale !== 'en' && locale !== 'ru') {
+            try {
+                readmeContent = await import(
+                    `../../../../content/local-docs/components/${ctx.params?.libId}/${component.id}/README-${locale}.md`
+                ).then((module) => module.default);
+            } catch (err) {
+                console.warn(
+                    `Can't find local docs for "${component.id}", library "${ctx.params?.libId}", lang "${locale}"`,
+                );
+            }
+        } else {
+            // TODO: Preload content
+            const res = await fetch(component.content.readmeUrl[locale]);
+            if (res.status >= 200 && res.status < 300) {
+                readmeContent = await res.text();
+            }
+        }
+
+        if (!readmeContent && locale !== i18n.defaultLocale) {
             const fallbackRes = await fetch(
                 component.content.readmeUrl[i18n.defaultLocale as 'en'],
             );
@@ -74,7 +88,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
                 readmeContent = await fallbackRes.text();
             }
         }
-    } catch {}
+    } catch (err) {
+        console.warn(err);
+    }
 
     return {
         props: {

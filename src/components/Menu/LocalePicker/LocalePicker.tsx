@@ -7,7 +7,16 @@ import i18nextConfig from '../../../../next-i18next.config';
 import {LOCALE_LOCAL_STORAGE_KEY} from '../../../constants';
 import {block} from '../../../utils';
 
+import './LocalePicker.scss';
+
 const b = block('menu-local-picker');
+
+const FLAGS: Record<string, string> = {
+    en: '🇬🇧',
+    ru: '🇷🇺',
+    es: '🇪🇸',
+    zh: '🇨🇳',
+};
 
 export const LocalePicker: React.FC = () => {
     const {i18n} = useTranslation();
@@ -44,7 +53,14 @@ export const LocalePicker: React.FC = () => {
                         <SegmentedRadioGroup.Option
                             key={locale}
                             value={locale}
-                            content={localeUpperCase}
+                            content={
+                                <div className={b('locale-item')}>
+                                    {locale in FLAGS ? FLAGS[locale] : localeUpperCase}
+                                    {i18nextConfig.aiTranslatedLocales.includes(locale) ? (
+                                        <span className={b('ai-label')}>AI</span>
+                                    ) : null}
+                                </div>
+                            }
                         />
                     );
                 })}

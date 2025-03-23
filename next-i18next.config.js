@@ -5,5 +5,6 @@ module.exports = {
         defaultNS: 'common',
         ignoreJSONStructure: false,
     },
+    aiTranslatedLocales: ['es', 'zh'],
     routesWithoutRedirect: ['/404', '/sandbox', '/rtl', '/__stand'],
 };
