@@ -203,7 +203,6 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     title: 'Remix',
                     icon: remixLogo,
                     commands: [
-                        '# probably you do not need it, since CRA is deprecated https://github.com/facebook/create-react-app?tab=readme-ov-file#deprecated',
                         'npx create-remix my-app --template gravity-ui/gravity-ui-remix-example',
                         'cd my-app',
                         'npm run dev',
@@ -218,6 +217,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     title: 'CRA',
                     icon: craLogo,
                     commands: [
+                        '# probably you do not need it, since CRA is deprecated https://github.com/facebook/create-react-app?tab=readme-ov-file#deprecated',
                         'npx create-react-app my-app --template gravity-ui-pure',
                         'cd my-app',
                         'npm start',
