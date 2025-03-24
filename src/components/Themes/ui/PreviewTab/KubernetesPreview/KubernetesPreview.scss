@@ -5,6 +5,8 @@
 $block: '.#{variables.$ns}kubernetes-preview';
 
 #{$block} {
+    overflow-y: auto;
+
     &__header-group {
         .gn-action-bar-item:first-of-type {
             margin-inline-start: auto;

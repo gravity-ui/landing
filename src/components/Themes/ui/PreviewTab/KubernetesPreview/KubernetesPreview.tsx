@@ -1,4 +1,13 @@
-import {CirclePlay, Cpu, Globe, HardDrive} from '@gravity-ui/icons';
+import {
+    ChartColumn,
+    CirclePlay,
+    Copy,
+    Cpu,
+    Globe,
+    HardDrive,
+    Terminal,
+    TrashBin,
+} from '@gravity-ui/icons';
 import {ActionBar} from '@gravity-ui/navigation';
 import {
     Alert,
@@ -11,6 +20,8 @@ import {
     Icon,
     Label,
     Menu,
+    Table,
+    TableColumnConfig,
     Text,
 } from '@gravity-ui/uikit';
 import {DropdownMenuComponent} from 'src/content/components/uikit/DropdownMenu/DropdownMenuComponent';
@@ -22,9 +33,64 @@ const b = block('kubernetes-preview');
 
 const breadCrumbItems = ['All services', 'Personal VM', 'Gravity-vm-sunset-1234'];
 
+const environmentsData = [
+    {name: 'ENV_PROCESS_GROUP', value: 'app'},
+    {name: 'ENV_PROCESS_NAME', value: 'Value'},
+    {name: 'PRIMARY_REGION', value: 'msk'},
+];
+
+const environmentColumns: TableColumnConfig<unknown>[] = [
+    {name: 'Name', id: 'name', width: '25%'},
+    {name: 'Value', id: 'value', align: 'center', width: '50%'},
+    {
+        name: '',
+        id: 'actions',
+        align: 'end',
+        width: '24px',
+        template: () => <DropdownMenuComponent initialOpen={false} />,
+    },
+];
+
+const functionsData = [
+    {
+        handler: '/api/get-folders',
+        node: 'Node.js 20.x',
+        region: 'Moscow-1a',
+        copy: true,
+    },
+    {
+        handler: '/api/get-images',
+        node: 'Node.js 20.x',
+        region: 'Moscow-1a',
+        copy: false,
+    },
+    {
+        handler: '/api/update-images',
+        node: 'Node.js 20.x',
+        region: 'Moscow-1a',
+        copy: false,
+    },
+];
+
+const functionsColumns: TableColumnConfig<typeof functionsData[0]>[] = [
+    {
+        name: 'Handler',
+        id: 'handler',
+        width: '33%',
+        template: (item) => (
+            <Flex alignItems="center" gap="1">
+                <Text>{item.handler}</Text>
+                {item.copy && <ClipboardButton size="s" text={item.handler} />}
+            </Flex>
+        ),
+    },
+    {name: 'Node', id: 'node', align: 'start', width: '33%'},
+    {name: 'Region', id: 'region', align: 'start', width: '33%'},
+];
+
 export const KubernetesPreview = () => {
     return (
-        <Flex direction="column" grow gap="10">
+        <Flex direction="column" grow gap="10" className={b()}>
             <ActionBar>
                 <ActionBar.Section type="primary">
                     <ActionBar.Group>
@@ -101,16 +167,37 @@ export const KubernetesPreview = () => {
                     <Card className={b('widget-card')}>
                         <Flex direction="column" gap="5">
                             <Flex
-                                direction="column"
+                                justifyContent="space-between"
+                                alignItems="center"
                                 style={{
                                     borderBottom: '1px solid var(--g-color-line-generic-solid)',
                                     paddingBlockEnd: '20px',
                                 }}
                             >
-                                <Text variant="subheader-3">Gravity-vm-sunset-1234</Text>
-                                <Text>
-                                    Description and general information about the application
-                                </Text>
+                                <Flex direction="column">
+                                    <Text variant="subheader-3">Gravity-vm-sunset-1234</Text>
+                                    <Text>
+                                        Description and general information about the application
+                                    </Text>
+                                </Flex>
+                                <Flex gap="2">
+                                    <Button iconOnly>
+                                        <Icon data={TrashBin} size={16} />
+                                    </Button>
+                                    <Button>
+                                        <Icon data={Copy} size={16} />
+                                    </Button>
+                                    <Button>
+                                        <Icon data={ChartColumn} size={16} />
+                                    </Button>
+                                    <Button>
+                                        <Icon data={Terminal} size={16} />
+                                    </Button>
+                                    <Button view="action">
+                                        <Icon data={CirclePlay} size={16} />
+                                        Run
+                                    </Button>
+                                </Flex>
                             </Flex>
                             <Flex justifyContent="space-between">
                                 <Col s="3">
@@ -210,6 +297,38 @@ export const KubernetesPreview = () => {
                                 </Col>
                             </Flex>
                         </Flex>
+                    </Card>
+                    <Card className={b('widget-card')}>
+                        <Flex
+                            justifyContent="space-between"
+                            alignItems="center"
+                            style={{
+                                borderBottom: '1px solid var(--g-color-line-generic-solid)',
+                                paddingBlockEnd: '20px',
+                            }}
+                        >
+                            <Flex direction="column">
+                                <Text variant="subheader-3">Environments</Text>
+                                <Text>Environment variables fro this machine</Text>
+                            </Flex>
+                            <Button view="action">Create new</Button>
+                        </Flex>
+
+                        <Table width="max" data={environmentsData} columns={environmentColumns} />
+                    </Card>
+
+                    <Card className={b('widget-card')}>
+                        <Flex
+                            direction="column"
+                            style={{
+                                borderBottom: '1px solid var(--g-color-line-generic-solid)',
+                                paddingBlockEnd: '20px',
+                            }}
+                        >
+                            <Text variant="subheader-3">Functions</Text>
+                            <Text>Functions used for this machine</Text>
+                        </Flex>
+                        <Table width="max" data={functionsData} columns={functionsColumns} />
                     </Card>
                 </Flex>
             </Flex>
