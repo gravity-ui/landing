@@ -172,20 +172,6 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             title: t('home:templates_title'),
             tabs: [
                 {
-                    title: 'CRA',
-                    icon: craLogo,
-                    commands: [
-                        'npx create-react-app my-app --template gravity-ui-pure',
-                        'cd my-app',
-                        'npm start',
-                    ],
-                    button: {
-                        href: 'https://codesandbox.io/p/devbox/gravityui-cra-mpg4q3',
-                        target: '_blank',
-                        title: `${t('common:actions_open')} CRA Playground`,
-                    },
-                },
-                {
                     title: 'Next.js',
                     icon: nextLogo,
                     commands: [
@@ -225,6 +211,21 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                         href: 'https://codesandbox.io/p/devbox/gravityui-remix-template-2y5ykj',
                         target: '_blank',
                         title: `${t('common:actions_open')} Remix Playground`,
+                    },
+                },
+                {
+                    title: 'CRA',
+                    icon: craLogo,
+                    commands: [
+                        '# probably you do not need it, since CRA is deprecated https://github.com/facebook/create-react-app?tab=readme-ov-file#deprecated',
+                        'npx create-react-app my-app --template gravity-ui-pure',
+                        'cd my-app',
+                        'npm start',
+                    ],
+                    button: {
+                        href: 'https://codesandbox.io/p/devbox/gravityui-cra-mpg4q3',
+                        target: '_blank',
+                        title: `${t('common:actions_open')} CRA Playground`,
                     },
                 },
             ],
