@@ -50,7 +50,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.614.0",
+    "@aws-sdk/client-s3": "^3.775.0",
     "@gravity-ui/eslint-config": "^2.0.0",
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
