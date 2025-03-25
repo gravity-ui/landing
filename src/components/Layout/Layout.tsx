@@ -69,6 +69,42 @@ export const Layout: React.FC<LayoutProps> = ({
         };
     }, [isRtl]);
 
+    // Gravity animation 1th april
+    React.useEffect(() => {
+        const wordTriggerEn = 'gravity';
+        const wordTriggerRu = 'пкфмшен'; // если набрали на русской QERTY  hfcrkflrt
+        const typingDebounceTime = 1_500;
+        const animatedClassName = 'g-fun-gravity';
+
+        let lastTypingTime = 0;
+        let typedString = '';
+
+        document.addEventListener('keydown', (event) => {
+            if (lastTypingTime && Date.now() - lastTypingTime >= typingDebounceTime) {
+                lastTypingTime = Date.now();
+                typedString = '';
+            } else {
+                lastTypingTime = Date.now();
+            }
+
+            if (
+                wordTriggerEn.includes(event.key.toLowerCase()) ||
+                wordTriggerRu.includes(event.key.toLowerCase())
+            ) {
+                typedString += event.key.toLowerCase();
+            }
+
+            if (typedString === wordTriggerEn || typedString === wordTriggerRu) {
+                document.querySelector('html')?.classList.toggle(animatedClassName);
+                typedString = '';
+                lastTypingTime = 0;
+            } else if (typedString.length > wordTriggerEn?.length) {
+                typedString = '';
+                lastTypingTime = 0;
+            }
+        });
+    });
+
     const pageConent = (
         <div className={b()}>
             {!showOnlyContent && (

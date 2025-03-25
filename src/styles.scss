@@ -124,3 +124,56 @@ body.g-root,
         background-color: transparent;
     }
 }
+
+.g-fun-gravity {
+    @keyframes gravity-1 {
+        0%,
+        100% {
+            transform: translate(0px, 0px);
+        }
+        20% {
+            transform: translate(2px, 2px);
+        }
+        40% {
+            transform: translate(-2px, 2px);
+        }
+        60% {
+            transform: translate(-2px, -2px);
+        }
+        80% {
+            transform: translate(2px, 2px);
+        }
+    }
+
+    @keyframes gravity-2 {
+        0%,
+        100% {
+            transform: translate(0px, 0px);
+        }
+        20% {
+            transform: translate(4px, 2px);
+        }
+        40% {
+            transform: translate(-2px, 4px);
+        }
+        60% {
+            transform: translate(-4px, -2px);
+        }
+        80% {
+            transform: translate(2px, 4px);
+        }
+    }
+
+    *:nth-child(2n) {
+        animation: gravity-1 14s ease-in-out infinite;
+    }
+    *:nth-child(3n) {
+        animation: gravity-2 12s ease-in-out infinite;
+        animation-delay: 2s;
+    }
+
+    /* Пауза при наведении */
+    *:hover {
+        animation-play-state: paused;
+    }
+}
