@@ -62,16 +62,16 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                 title: t('home:news_title'),
                 items: [
                     {
-                        date: '2025-02-21T11:00:00.000Z',
+                        date: '2025-03-25T09:00:00.000Z',
                         content: t('home:news_items_item1'),
                     },
                     {
-                        date: '2025-02-14T16:00:00.000Z',
+                        date: '2025-03-24T19:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
                     {
-                        date: '2025-02-06T14:00:00.000Z',
-                        content: t('home:news_items_item3'),
+                        date: '2025-02-21T11:00:00.000Z',
+                        content: t('home:news_items_item1'),
                     },
                 ],
             },
