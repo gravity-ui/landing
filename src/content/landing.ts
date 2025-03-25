@@ -80,13 +80,13 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             //     href: 'https://forms.yandex.ru/surveys/13733147.8993c47ecb24841f51ca79b039326a5ce301538e',
             // },
         },
-        {
-            type: CustomBlock.Iframe,
-            width: 560,
-            height: 315,
-            src: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew?autoplay=0&mute=1',
-            allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
-        },
+        // {
+        //     type: CustomBlock.Iframe,
+        //     width: 560,
+        //     height: 315,
+        //     src: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew?autoplay=0&mute=1',
+        //     allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
+        // },
         {
             type: CustomBlock.Libraries,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
