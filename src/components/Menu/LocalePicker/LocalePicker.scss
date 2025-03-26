@@ -24,8 +24,13 @@ $block: '.#{variables.$ns}menu-local-picker';
         }
     }
 
-    &__locale-ai-label {
+    &__locale-ai-icon {
         font-size: 14px;
         margin-left: 6px;
+    }
+
+    &__locale-ai-label {
+        font-size: 10px;
+        margin-left: 2px;
     }
 }

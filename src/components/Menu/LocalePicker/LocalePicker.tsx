@@ -30,7 +30,10 @@ export const LocalePicker: React.FC = () => {
                 {FLAGS[locale] ? <span className={b('locale-flag')}>{FLAGS[locale]}</span> : null}
                 <span className={b('locale-code')}>{localeUpperCase}</span>
                 {i18nextConfig.aiTranslatedLocales.includes(locale) ? (
-                    <span className={b('locale-ai-label')}>✨ AI</span>
+                    <React.Fragment>
+                        <span className={b('locale-ai-icon')}>✨</span>
+                        <span className={b('locale-ai-label')}>AI</span>
+                    </React.Fragment>
                 ) : null}
             </div>
         );
