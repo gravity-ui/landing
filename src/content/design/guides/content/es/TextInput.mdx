@@ -1,0 +1,182 @@
+Un componente para ingresar texto arbitrario, valores numéricos y simbólicos en una sola línea. Puede utilizarse en formularios de página y cuadros de diálogo, así como en formularios de inicio de sesión, búsqueda y filtros.
+
+## **Aplicación**
+
+A diferencia de [TextArea](/design/guides/text-area), no cambia de altura durante la entrada y se utiliza para datos simples de formato libre con cualquier combinación de letras, números o símbolos.
+
+![1.png](/static/images/design/TextInput/1.png)
+
+Al ingresar texto que excede el ancho del campo, puede desplazarse por el contenido hacia la izquierda y la derecha.
+
+![2.png](/static/images/design/TextInput/2.png)
+
+✅ **Cuándo usar**
+
+1. Cuando solo se requiere una línea de texto.
+2. Cuando no es posible seleccionar una opción de una lista predeterminada.
+3. Cuando hay suficiente espacio para la entrada de datos y no hay necesidad de interfaces de entrada más complejas.
+
+🚫 **Cuándo no usar**
+
+1. Cuando un parámetro solo puede ingresarse desde una lista predefinida, ya que esto puede resultar en un error. Para este propósito, considere usar otros componentes con una selección específica de opciones de valor, como Select, Radio Button, Radio y Checkbox.
+2. Cuando se debe ingresar una gran cantidad de caracteres (más de 5 palabras). Para este propósito, recomendamos usar [TextArea](/design/guides/text-area), un componente para entrada de texto de múltiples líneas.
+
+## Tipos
+
+TextInput tiene dos tipos: **Normal** y **Clear**, que tienen el mismo conjunto de funciones pero se ven y se utilizan de manera diferente según el contexto.
+
+![3.png](/static/images/design/TextInput/3.png)
+
+**Normal**
+
+- El tipo más comúnmente utilizado.
+- Una característica distintiva de este componente es su relleno interno y radio de esquina. Estos parámetros están determinados por el tamaño del elemento y un trazo de 1px.
+- Se utiliza en formularios cuando se requiere espacio libre entre componentes, como el relleno entre elementos del formulario.
+
+**Clear**
+
+- La característica definitoria de este componente es la ausencia de un borde, con elementos posicionados dentro de los márgenes del campo de entrada.
+- Se utiliza cuando el tipo Normal crea ruido visual.
+- Al usar este tipo, asegúrese de que el propósito de este componente sea claro para el usuario.
+
+## Estructura
+
+![4.png](/static/images/design/TextInput/4.png)
+
+**1. Icono izquierdo**
+
+![5.png](/static/images/design/TextInput/5.png)
+
+- Es un componente opcional.
+- El icono puede utilizarse para identificación adicional del campo.
+- Si se trata de una cadena de búsqueda, por ejemplo, se puede utilizar un icono de "lupa". O un icono de "llave", si se trata de un campo de entrada de contraseña.
+
+**2. Etiqueta en línea.**
+
+![6.png](/static/images/design/TextInput/6.png)
+
+- Es un componente opcional.
+- Amplifica el valor del nombre del campo.
+- Reemplaza la etiqueta externa.
+- Se utiliza como nombre de campo porque, cuando se ingresa un valor, la sugerencia desaparece, dejando poco claro para el usuario el propósito del campo.
+
+**3. Valor**
+
+![7.png](/static/images/design/TextInput/7.png)
+
+- Es un elemento requerido.
+- Espacio utilizado para el texto de la sugerencia y el texto ingresado.
+- Después de ingresar un carácter, el texto ingresado reemplaza la sugerencia.
+
+**4. Botón de borrar**
+
+![Botón de borrar](/static/images/design/TextInput/21.png)
+
+- Es un componente opcional.
+- Se utiliza cuando es necesario borrar el contenido del campo.
+- Se muestra cuando se ha ingresado al menos un carácter en el campo.
+- Se muestra incluso cuando el foco está fuera del campo.
+- Es un componente Button de tipo Flat-secondary que hereda todas sus propiedades. Por ejemplo, el fondo de la cruz se rellena al pasar el cursor.
+- Al hacer clic en el botón de borrar, el foco se desplaza al campo y se borra el valor ingresado.
+
+**5. Botones en línea**
+
+![11.png](/static/images/design/TextInput/11.png)
+
+- Es un elemento opcional y está incrustado a la derecha.
+- Se utiliza para indicar más claramente la relación entre el contenido y las acciones y puede colocarse dentro de un componente.
+- El campo permite un máximo de dos componentes Button.
+- El tamaño de los botones incrustados debe ser un tamaño más pequeño que el tamaño propio del componente. Por ejemplo, si se utiliza un tamaño S, el botón debe ser XS; si se utiliza un tamaño M, el botón debe ser S; y así sucesivamente.
+- Por ejemplo, puede utilizarse para confirmar acciones, enviar mensajes o agregar filtros adicionales a un campo.
+
+**6. Contenido adicional**
+
+![12.png](/static/images/design/TextInput/12.png)
+
+- Es un elemento opcional y está incrustado a la derecha.
+- Se utiliza cuando se requiere texto adicional dentro.
+- El texto está alineado a la derecha.
+- Por ejemplo, puede utilizarse como contador (contador de caracteres ingresados), para contar el número de valores encontrados en una cadena de búsqueda o para unidades de medida.
+
+
+**7. Icono de error**
+
+![Icono de error](/static/images/design/TextInput/24.png)
+
+- Se muestra solo en el estado Inline Error.
+- Funciona junto con Tooltip, ofreciendo descripciones de error al pasar el cursor sobre un icono, para lograr un diseño compacto del formulario.
+
+**8. Descripción del error**
+
+![Descripción del error](/static/images/design/TextInput/25.png)
+
+- Se muestra solo en el estado Outline Error.
+- Está incrustado en la parte inferior izquierda.
+
+## Estados
+
+Tiene los siguientes estados: **Suggest, Default, Hover, Active, Disabled, Inline Error y Outline Error.**
+
+![14.png](/static/images/design/TextInput/14.png)
+
+1. **Suggest.** Estado inactivo cuando no hay interacción directa con el componente y no se han ingresado datos. En este estado, el valor puede servir como sugerencia, indicando al usuario qué tipo de información debe ingresarse en el campo.
+2. **Default.** Estado inactivo cuando no hay interacción directa con el componente y ya se han ingresado datos. En este estado, el valor de sugerencia cambia según la entrada del usuario.
+3. **Hover.** Estado activo cuando el cursor se desplaza sobre el área del componente.
+4. **Active.** Estado activo, activado por la transición desde el componente anterior o haciendo clic con el cursor. El estado se restablece al pasar a un componente diferente o hacer clic con el cursor en un área vacía.
+5. **Disabled.** Estado inactivo de un componente cuando no es posible interactuar con él.
+6. **Outline error.** Estado activo del componente cuando ocurre un error durante la validación y se muestra en la parte inferior del campo junto con una explicación.
+7. **Inline error.** Estado activo del componente cuando ocurre un error de validación de campo, pero el error no se muestra. En su lugar, el error está representado por un icono especial que, al pasar el cursor, muestra un Tooltip de error.
+
+## Tamaños
+
+![16.png](/static/images/design/TextInput/16.png)
+
+El componente viene en cuatro tamaños: **S, M, L y XL.**
+
+La altura y el radio de esquina del campo, así como el relleno dentro del campo y el tamaño del texto, varían según el tamaño del componente.
+
+El radio de esquina depende del tamaño y se establece mediante [variables](/design/branding/corner-radius).
+
+1. **S** (-g-border-radius-s: 5px;) – se utiliza cuando la entrada estándar es demasiado grande (por ejemplo, tablas, tarjetas pequeñas).
+2. **M** (-g-border-radius-m: 6px;) – tamaño básico, utilizado en la mayoría de los formularios y filtros.
+3. **L** (-g-border-radius-l: 8px;) – se utiliza para búsqueda (por ejemplo, búsqueda de servicios).
+4. **ХL** (-g-border-radius-xl: 10px;) – se utiliza en el entorno de comunicación (por ejemplo, sitio web y páginas de destino).
+
+## Guía del usuario
+
+**1. Trabajando con el campo**
+
+- El campo puede contener solo una línea. Para este propósito, recomendamos usar [TextArea](/design/guides/text-area), un componente para entrada de texto de múltiples líneas.
+- No recomendamos incluir una **sugerencia** dentro de un campo, ya que el nombre del campo no será visible al ingresar un valor, a menos que tenga espacio limitado o el propósito del campo sea claro para el usuario.
+- **El ancho del campo** debe ser el mismo que el ancho del valor ingresado. Informa al usuario de la entrada esperada.
+- Use el **mismo tamaño** para todos los componentes complementarios del formulario. Si seleccionó el tamaño M, todos los demás componentes deberían ser del mismo tamaño.
+
+**2. Encabezado de campo externo**
+
+![Formating.png](/static/images/design/TextInput/Formating.png)
+
+- Un nombre de campo corto, preferiblemente limitado a una línea.
+- En formularios de escritorio, el componente debe colocarse en línea con el valor del campo. Si el contexto es móvil o el tamaño del Diálogo es S, el título del componente se muestra encima del componente.
+
+**3. Sugerencia con tooltip**
+
+![Tooltip.png](/static/images/design/TextInput/Tooltip.png)
+
+- Instrucciones para completar el campo al pasar el cursor sobre el icono con un signo de interrogación.
+- Se utiliza cuando el título debe aclararse.
+- No debe incluir más de dos párrafos de texto.
+
+**4. Descripción adicional**
+
+![Description.png](/static/images/design/TextInput/Description.png)
+
+- Puede encontrarse en la parte inferior o a la derecha del campo.
+- Se utiliza en casos raros cuando no está claro cómo completar un campo sin una descripción adicional o cuando se requieren explicaciones para valores previamente ingresados.
+
+**5. Unidades de medida** pueden colocarse de la siguiente manera:
+
+![s.png](/static/images/design/TextInput/s.png)
+
+- En la descripción de texto del campo, si hay suficiente espacio en el formulario.
+- Dentro del campo de entrada, si la descripción debe acortarse.
+- A la derecha del campo, si se necesita espacio para otros elementos dentro del campo, como botones o un icono de borrar (restablecer).

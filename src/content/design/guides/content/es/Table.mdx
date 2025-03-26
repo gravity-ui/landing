@@ -1,0 +1,153 @@
+La tabla se utiliza para mostrar de manera intuitiva datos estructurados de cualquier tamaño.
+
+Un elemento atómico de la tabla es una celda. Las celdas forman columnas y filas en la tabla. La tabla siempre tiene un encabezado.
+
+## **Celda de tabla**
+
+Una celda es un contenedor en la intersección de una fila y una columna de la tabla, en el que puede colocar otros componentes:
+
+- Texto
+- Iconos
+- [Botones](/design/guides/button)
+- [Etiquetas](/design/guides/label)
+- [Avatar de usuario](/design/guides/user-avatar)
+- [Barra de progreso](/design/guides/progress-bar)
+- Checkbox
+- [Select](/design/guides/select)
+- [Input](/design/guides/text-input) y otros componentes
+
+Una sola celda puede contener un solo componente (por ejemplo, texto) o una combinación de componentes (por ejemplo, un checkbox, texto e icono).
+
+![1.png](/static/images/design/Table/table-0001.png)
+
+Una celda puede estar vacía si no hay datos para mostrar en ella. Además, el contenido de la celda puede estar oculto en su estado normal y hacerse visible cuando se pasa el cursor sobre la celda o la fila.
+
+### **Recomendaciones para usar componentes**
+
+- No utilice más de tres componentes diferentes en una celda: esto hace que los datos en la columna con tales celdas sean más difíciles de comparar y hace que la tabla sea menos legible. En tales casos, puede crear una columna separada para la propiedad que describe cada componente.
+- Elija los tamaños de los componentes en la tabla según su tarea actual. Para datos de texto simple, es mejor usar el estilo text-body-1 sin decoración, y para otros elementos, use el tamaño M.
+- Recomendamos usar componentes del mismo tamaño dentro de una celda, por ejemplo, etiquetas y botones de tamaño M.
+
+### Altura y ancho de celda
+
+El tamaño de la celda está determinado por el tamaño de su contenido y los rellenos de la celda.
+
+La altura estándar de celda con texto de una sola línea, con estilo text-subheader-1 (espaciado de línea 18px), es de 40px. Tanto los rellenos superior como inferior de la celda en este caso son de 11px.
+
+Para una celda con texto de dos líneas, la altura de la celda es de 58px.
+
+![2.png](/static/images/design/Table/table-0002.png)
+
+Puede usar cualquier relleno en la parte superior, inferior, izquierda y derecha, pero recomendamos un sistema de rellenos que sean múltiplos de 4px. Los rellenos superior e inferior suelen ser iguales, pero puede hacerlos diferentes. Lo mismo se aplica a los rellenos izquierdo y derecho (para más detalles, consulte la descripción de las filas y columnas en la tabla). Los rellenos superior e inferior no tienen que ser iguales a los de izquierda y derecha.
+
+### Separador
+
+Cada celda tiene un separador horizontal de 1px de altura. Este separador está alineado con el borde inferior de la celda, su ancho es igual al ancho de la celda. Puede omitir el separador para las celdas de la última fila de la tabla.
+
+### Alineación
+
+El contenido dentro de una celda puede estar alineado a la izquierda o a la derecha (para más detalles sobre la alineación del texto, consulte las descripciones de columnas).
+
+## **Encabezado de tabla**
+
+El encabezado de la tabla se encuentra en la parte superior de la tabla y contiene nombres de columnas. Además de los nombres, el encabezado también puede contener checkboxes y botones.
+
+![3.png](/static/images/design/Table/table-0003.png)
+
+Evite nombres de columnas de dos líneas para evitar saltos de línea. Cuando el nombre se envuelve a la segunda y otras líneas, la altura del encabezado aumenta. Otros nombres y botones permanecen alineados en la parte superior en este caso.
+
+![4.png](/static/images/design/Table/table-0004.png)
+
+## **Columnas de tabla**
+
+Una columna es un grupo de celdas dispuestas verticalmente. Dependiendo del tipo de contenido en las celdas, los datos en la columna pueden ser:
+
+- Ordenados
+- Alineados a la derecha
+
+### Ordenación
+
+Si los datos en la columna se pueden ordenar (por ejemplo, alfabéticamente, por tiempo o por tamaño), se coloca un icono de flecha junto al nombre de la columna. Cuando el usuario hace clic en el nombre del icono, las filas se ordenan por esta columna.
+
+![5.png](/static/images/design/Table/table-0005.png)
+
+La ordenación es una funcionalidad opcional en la tabla. Está disponible en casos de uso específicos.
+
+No puede ordenar la tabla por dos columnas en paralelo.
+
+Típicamente, si los datos en una columna se pueden ordenar, dichos datos deben tener la misma unidad de medida. Para evitar especificar la unidad en cada celda de columna, agréguela al nombre de la columna con una coma.
+
+### Contenido alineado a la derecha
+
+Esta característica solo está disponible para datos de texto y se utiliza para comparar datos (por ejemplo, tiempo empleado o recursos consumidos). Dichos datos a menudo tienen la misma unidad y puede ordenarlos. Para datos de columna alineados a la derecha con una flecha de ordenación, coloque primero la flecha, seguida del texto.
+
+![6.png](/static/images/design/Table/table-0006.png)
+
+### Bloqueo de columnas al desplazarse
+
+Si la tabla no cabe dentro de los bordes de la pantalla, aparece una barra de desplazamiento horizontal. En tales casos, puede bloquear ciertas columnas de la tabla para que siempre permanezcan en la pantalla. Puede bloquear las primeras o últimas columnas de la tabla. Puede usar cualquier número de columnas bloqueadas, pero asegúrese de que haya suficiente espacio para las columnas de desplazamiento, considerando el ancho mínimo de viewport soportado.
+
+Cuando están bloqueadas, estas celdas de columna obtienen un separador adicional: se coloca a la derecha si la columna está bloqueada a la izquierda y a la izquierda si la columna está bloqueada a la derecha. Este separador limitará el desplazamiento de otras celdas.
+
+![7.png](/static/images/design/Table/table-0007.png)
+
+En la columna más a la derecha, puede agregar acciones para una fila. Se puede acceder a estas acciones bajo un icono de tres puntos, que se expande en una lista. Bloquee esta columna al desplazarse para que el usuario siempre pueda acceder a las acciones. Coloque el icono de engranaje, que abre las configuraciones de columna de la tabla cuando se hace clic, en el encabezado de dicha columna.
+
+![8.png](/static/images/design/Table/table-0008.png)
+
+### Configuración de columna
+
+Los usuarios pueden personalizar el número y orden de las columnas. Para esto, agregue un icono de engranaje en el encabezado de la última columna de la tabla. Cuando el usuario hace clic en el icono de engranaje, aparece un popup de configuración.
+
+![9.png](/static/images/design/Table/table-0009.png)
+
+## **Filas de tabla**
+
+Una fila es un grupo de celdas dispuestas horizontalmente.
+
+### Filas clickeables
+
+Cuando los usuarios hacen clic en una fila de tabla, pueden ser dirigidos a otra página, una ventana modal o una barra lateral. Al pasar el cursor sobre dichas filas, el color de fondo cambia a --g-color-base-simple-hover.
+
+![10.png](/static/images/design/Table/table-0010.png)
+
+Para una visualización más ordenada al pasar el cursor sobre una fila de tabla clickeable, puede agregar pequeños márgenes a la izquierda y derecha. Con estos márgenes, el contenido ya no se alinea con la cuadrícula. Por lo tanto, no recomendamos estos márgenes en casos sin hover.
+
+### Filas con operaciones masivas
+
+Puede aplicar acciones masivas a filas donde la primera celda contiene un checkbox. Un conjunto de acciones grupales a menudo coincide con el conjunto de acciones individuales con una fila de tabla.
+
+Si se selecciona una fila, su color de fondo cambia a --g-color-base-selection, y aparece una barra de acción con una lista de acciones grupales en la parte inferior de la página.
+
+![11.png](/static/images/design/Table/table-0011.png)
+
+Si hay diferentes acciones disponibles para diferentes filas de tabla, recomendamos mostrar solo aquellas acciones en la barra de acción que estén disponibles para todas las filas seleccionadas. Otros comportamientos pueden habilitarse a discreción del diseñador.
+
+### Alineación de contenido
+
+Para filas donde la altura de la celda es más de 40px, el contenido puede estar alineado en la parte superior o centrado en las celdas.
+
+La alineación superior es preferible porque mejora la legibilidad de los datos. En este caso, todos los componentes que contienen texto deben estar alineados con la primera línea.
+
+![12.png](/static/images/design/Table/table-0012.png)
+
+Si una fila alineada en la parte superior contiene iconos, avatares de usuario, botones de icono, checkboxes, barras de progreso y otros elementos no textuales, establezca sus rellenos superiores para que su eje horizontal coincida con el eje del texto en una celda de una línea.
+
+![13.png](/static/images/design/Table/table-0013.png)
+
+Puede usar la alineación central cuando es difícil ajustar con precisión los márgenes superiores de la celda para todos los tipos de contenido en una fila, o cuando la alineación no afecta la legibilidad del contenido.
+
+## Recomendaciones de uso
+
+Use tablas:
+
+- Para organizar un gran volumen de datos homogéneos que describen las propiedades de un objeto.
+- Para ordenar y comparar datos en su página.
+- Para encontrar rápidamente valores mediante la ordenación, el filtrado y el escaneo del contenido de la tabla.
+
+No recomendamos:
+
+- Usar tablas para describir objetos con una sola propiedad. Una lista es una mejor opción para tales casos.
+   Por ejemplo, debe usar una lista para presentar información sobre el nombre del color y su codificación HEX.
+- Usar tablas para describir objetos que tienen propiedades heterogéneas distintas. Mejor describa cada objeto individualmente en este caso.
+   Digamos, por ejemplo, que su tarea es describir los dispositivos utilizados por un empleado. Tales dispositivos pueden incluir una laptop (propiedades: SO, capacidad de almacenamiento, tamaño de pantalla), un mouse de computadora (propiedades: con cable o inalámbrico) y una lámpara de escritorio (propiedades: fabricante, tipo de montaje). No agregue todos estos datos en una sola tabla e intente idear un método de visualización diferente.

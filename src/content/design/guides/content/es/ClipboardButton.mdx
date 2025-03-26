@@ -1,0 +1,39 @@
+El botón de copia al portapapeles es una modificación del componente `Button` `Flat` con el icono `ClipboardIcon` colocado por separado.
+
+### Icono
+
+Dentro del `ClipboardButton` hay un componente `ClipboardIcon`, que es un icono animado con dos estados: Éxito y Error. Para personalizar el botón de copia, use el componente de botón estándar `Button` con el icono `ClipboardIcon`.
+
+### Estados
+
+![Estados](/static/images/design/ClipboardButton/States.png)
+
+### Tamaños
+
+El componente admite tamaños de botón estándar `XS`, `S`, `M`, `L` y `XL`
+
+### Comportamiento
+
+Si la copia de contenido no se realiza con frecuencia o si el icono reduce la legibilidad, el botón de copia no aparecerá hasta que el cursor se acerque.
+
+![En las tablas, el icono está oculto hasta que el cursor se coloca sobre una celda con contenido](/static/images/design/ClipboardButton/Use-cases2.png)
+
+En las tablas, el icono está oculto hasta que el cursor se coloca sobre una celda con contenido
+
+### Tooltip
+
+El componente tiene un tooltip que se puede desactivar. Se utiliza para indicar qué contenido se copiará.
+
+![La clave de tarea se copia en el servicio Yandex Tracker](/static/images/design/ClipboardButton/Tooltip.png)
+
+La clave de tarea se copia en el servicio Yandex Tracker
+
+### Casos de uso
+
+Un bloque de código se copia en la documentación.
+
+![Casos de uso](/static/images/design/ClipboardButton/Use-cases1.png)
+
+Los valores de las celdas se copian en las tablas.
+
+![Casos de uso](/static/images/design/ClipboardButton/Use-cases2.png)

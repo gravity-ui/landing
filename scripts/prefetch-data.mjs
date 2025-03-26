@@ -105,12 +105,31 @@ const fetchReadmeInfo = () => {
                 return '';
             };
 
-            const [en, ru] = await Promise.all([
+            const getLocalDocsReadPromise = (locale) =>
+                fs.promises.readFile(
+                    path.join(
+                        path.dirname(fileURLToPath(import.meta.url)),
+                        `../src/content/local-docs/libs/${item.id}/README-${locale}.md`,
+                    ),
+                    'utf8',
+                );
+
+            const [en, ru, es, zh] = await Promise.all([
                 fetchReadmeContent(item.readmeUrl.en),
                 fetchReadmeContent(item.readmeUrl.ru),
+                getLocalDocsReadPromise('es'),
+                getLocalDocsReadPromise('zh'),
             ]);
 
-            return [item.id, {en, ru}];
+            return [
+                item.id,
+                {
+                    en,
+                    ru,
+                    es,
+                    zh,
+                },
+            ];
         }),
     );
 };

@@ -1,0 +1,29 @@
+包含分配给界面操作的热键组合的修改标签。
+
+## 平台 /. **platform**
+
+![Group 2087325957.png](/static/images/design/Hotkey/Group_2087325957.png)
+
+1. **Mac** – 适用于iOS设备键盘
+2. **PC** – 适用于其他键盘
+
+### 结构
+
+1. **按键** — 键盘上必须按下以执行快速操作的符号。可以是字母、数字、特殊键盘符号或描述操作的单词（例如，点击）。确保符号与键盘上的符号匹配。
+   文本样式：Text/Body1，颜色：Text/Light Complementary。
+2. **加号** — 用于字符通信和在必要时保持正确的按键顺序。
+   文本样式：Text/Body1，颜色：Text/Light Hint。
+
+![8.png](/static/images/design/Hotkey/8.png)
+
+## 使用案例
+
+- **在[ActionTooltip](/design/guides/action-tooltip)中**，指示分配给特定按钮操作的热键
+
+![示例](/static/images/design/Hotkey/example1.png)
+
+- **在单独的热键面板中**，列出服务中所有可用的选项
+
+![示例](/static/images/design/Hotkey/example2.png)
+
+- 在操作按钮的[列表](/design/guides/list-item)中，如果其中任何一个分配了热键

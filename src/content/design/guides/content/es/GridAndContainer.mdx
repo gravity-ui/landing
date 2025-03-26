@@ -1,0 +1,27 @@
+![Grid](/static/images/design/GridAndContainer/grid.png)
+
+El módulo de espacio nos permite definir reglas estrictas para cálculos de tamaño y espaciado, mientras que la cuadrícula ayuda a estructurar el contenido en bloques visualmente organizados. Utilizamos una cuadrícula de 12, 8 y 4 columnas que hace posible dividir el área seleccionada en mitades, tercios y cuartos.
+
+# Estructura de la cuadrícula
+
+![Estructura de la cuadrícula](/static/images/design/GridAndContainer/structure.png)
+
+Las columnas ➊ definen los límites para la alineación horizontal; los espacios ➋ proporcionan relleno entre las columnas de la cuadrícula; los márgenes externos ➌ aseguran el relleno y la alineación central del contenedor ➍. El ancho de la columna de la cuadrícula está determinado por un valor porcentual, y el espaciado de columna predeterminado se establece en 20px.
+
+# Contenedor
+
+![Contenedor](/static/images/design/GridAndContainer/container.png)
+
+Un contenedor es un componente fundamental del diseño del sistema que contiene y organiza el contenido dentro de un viewport dado. Utilizamos dos tipos de contenedores: Fijo con un ancho fijo (lo que significa que su ancho máximo fijo puede cambiar en cada punto de ruptura) y Fluido con un ancho variable, que ocupa el 100% del espacio disponible (excepto para los tamaños S, XS y 2XS).
+
+# Puntos de ruptura
+
+Los puntos de ruptura de consulta de medios, o breakpoints, son anchos de viewport predefinidos que permiten gestionar varias configuraciones de cuadrícula.
+
+![Puntos de ruptura](/static/images/design/GridAndContainer/breakpoints.png)
+
+# Zonas de exclusión
+
+![Zonas de exclusión](/static/images/design/GridAndContainer/zones.png)
+
+En los diseños de interfaz de usuario, los usuarios esperan que ciertos elementos estén posicionados en áreas específicas. Nos referimos a estas áreas como "zonas de exclusión", y no las incluimos en nuestro sistema de cuadrícula. Cuando los paneles flexibles o de navegación se expanden, el contenido y la cuadrícula se comprimen para ajustarse dentro del navegador o se extienden más allá de él. Los paneles superpuestos cubren el contenido sin afectar al contenedor principal.

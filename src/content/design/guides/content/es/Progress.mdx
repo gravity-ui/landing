@@ -1,0 +1,72 @@
+Este es un componente para incrustar una barra de gráfico horizontal en varias interfaces. Puede mostrar distribución de datos, participación o progreso.
+
+## Casos de uso
+
+✅ **Cuándo usar**
+Úselo cuando necesite mostrar el nivel de finalización o llenado de una entidad, como espacio libre en el disco, el número de tareas completadas, etc.
+
+🚫**Cuándo no usar**
+Cuando necesite mostrar un valor único sin comparación. Por ejemplo, puede usar Progress para mostrar 15/60, pero no 15 solo.
+
+## Estructura
+
+![Estructura](/static/images/design/Progress/progress-0001.png)
+
+1. Color del indicador. Parte requerida
+2. Texto. Usar solo con tamaño M, parte opcional.
+3. Fondo. Parte requerida
+
+## Tamaños
+
+![Tamaños](/static/images/design/Progress/progress-0002.png)
+
+1. **M** es el único tamaño que tiene texto. Usar en secciones con gran cantidad de espacio, en páginas donde el indicador de progreso es el elemento clave.
+2. **S** se utiliza en tablas, tarjetas y por separado donde el progreso no es el único componente clave en la página
+3. **XS** se utiliza en lugares estrechos, donde necesita mantener su contenido compacto.
+
+## Temas
+
+![Temas](/static/images/design/Progress/progress-0003.png)
+
+**Default** se utiliza con más frecuencia para casos neutrales, cuando no necesita llamar la atención extra sobre el progreso, por ejemplo, cuando la página incluye elementos más importantes
+
+**Info** también se utiliza para casos neutrales, donde necesita poner más énfasis en el progreso, o para mostrar que la operación está en curso
+
+**Success** se utiliza para procesos completados con éxito o para indicar que el sistema está funcionando sin problemas
+
+**Warning** se utiliza en situaciones inusuales para advertir al usuario sobre algo, por ejemplo, para llamar la atención del usuario sobre un problema inminente.
+
+**Danger** se utiliza para atraer la máxima atención, cuando ha ocurrido un error y el usuario necesita tomar acciones para resolver el problema: el espacio en disco se ha agotado, el sistema ha fallado, etc.
+
+**Misc** se utiliza en casos neutrales, cuando no quiere usar Default.
+
+## Alcance
+
+1. **Cambiar el color dependiendo del valor de progreso**. Puede configurar este componente para cambiar de color dependiendo del valor de progreso, por ejemplo, la indicación estándar es azul (info), y 100% es verde (success).
+
+   ![Alcance](/static/images/design/Progress/progress-0004.png)
+
+2. **Animación de carga. Úsela** para mostrar el progreso en tiempo real al usuario, por ejemplo, al cargar archivos desde una computadora.
+
+   ![Alcance](/static/images/design/Progress/progress-0005.png)
+
+3. **Colores personalizados.** Puede usar su conjunto de colores Progress cuando todas las demás opciones no encajan: use un color personalizado y combine múltiples colores.
+
+   ![Alcance](/static/images/design/Progress/progress-0006.png)
+
+
+## Casos de uso
+
+Puede combinar este componente con texto, incrustarlo en otros componentes, por ejemplo, envolver Progress en una tarjeta o tabla, combinarlo con texto explicativo, acción, etc.
+
+1. En secciones con carga/descarga de archivos
+
+   ![Progreso](/static/images/design/Progress/progress-0007.png)
+
+2. En tarjetas, por ejemplo, en una lista de verificación con problemas
+
+   ![Progreso](/static/images/design/Progress/progress-0008.png)
+
+3. En tablas, por ejemplo, para mostrar el uso del disco.
+
+   ![Progreso](/static/images/design/Progress/progress-0009.png)

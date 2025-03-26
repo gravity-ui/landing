@@ -1,0 +1,40 @@
+## Descripción
+
+Este componente es un control interactivo que puede cambiar entre dos estados: habilitado (on) y deshabilitado (off). Se utiliza para habilitar o deshabilitar ciertas características, opciones o configuraciones.
+
+![Descripción](/static/images/design/Switch/description.png)
+
+## Dimensiones
+
+Switch tiene dos tamaños principales:
+
+![Tamaños](/static/images/design/Switch/Sizes.png)
+
+- **M (Medio)**: Para casos de uso estándar. Ofrece a la mayoría de los usuarios una experiencia visual intuitiva.
+- **L (Grande)**: Se utiliza cuando el elemento necesita ser destacado o cuando es preferible un tamaño de fuente más grande.
+
+## Estados
+
+Switch tiene cuatro estados principales:
+
+![Estados](/static/images/design/Switch/States.png)
+
+1. **Off**: un estado inactivo en el que la opción o característica está deshabilitada.
+2. **On**: un estado activo en el que la opción o característica está habilitada.
+3. **Hover**: cuando un usuario pasa el cursor sobre el elemento, responde visualmente para indicar que se puede interactuar con él.
+4. **Disabled**: un estado en el que el elemento está inactivo y no se puede interactuar con él.
+
+## Propiedades
+
+El componente puede habilitar/deshabilitar la etiqueta. La etiqueta está deshabilitada por defecto, pero puede habilitarse utilizando la propiedad "Label".
+
+Tenga en cuenta que si el elemento se redimensiona, el tamaño de la etiqueta se ajustará en consecuencia:
+
+![Etiquetas](/static/images/design/Switch/Labels.png)
+
+- 13px es el tamaño de fuente para etiquetas de tamaño M
+- 15px es el tamaño de fuente para etiquetas de tamaño L
+
+## Guía de usuario
+
+Para mantener la cohesión visual y la consistencia de la interfaz, use un switch si activarlo/desactivarlo causa cambios inmediatos en ciertas opciones o en el estado general de la página. No recomendamos usar el switch y el botón de confirmación de acción juntos. En estas situaciones, es mejor usar un checkbox.

@@ -1,0 +1,29 @@
+Una etiqueta modificada que contiene una combinación de teclas rápidas asignadas a una acción de la interfaz.
+
+## Plataformas /. **platform**
+
+![Group 2087325957.png](/static/images/design/Hotkey/Group_2087325957.png)
+
+1. **Mac** – para teclados de dispositivos iOS
+2. **PC** – para otros teclados
+
+### Estructura
+
+1. **Tecla** — un símbolo en el teclado que debe presionarse para realizar una acción rápida. Puede ser una letra, número, símbolo especial del teclado o una palabra que describe una acción (por ejemplo, Clic). Asegúrese de que los símbolos coincidan con los símbolos en el teclado.
+   Estilo de texto: Text/Body1, color: Text/Light Complementary.
+2. **Plus** — se utiliza para la comunicación de caracteres y mantener el orden correcto de pulsaciones de teclas si es necesario.
+   Estilo de texto: Text/Body1, color: Text/Light Hint.
+
+![8.png](/static/images/design/Hotkey/8.png)
+
+## Casos de uso
+
+- **en [ActionTooltip](/design/guides/action-tooltip)**, para indicar teclas rápidas asignadas a la acción de un botón específico
+
+![ejemplo](/static/images/design/Hotkey/example1.png)
+
+- **en un panel de teclas rápidas separado** que enumera todas las opciones disponibles en el servicio
+
+![ejemplo](/static/images/design/Hotkey/example2.png)
+
+- en la [Lista](/design/guides/list-item) de botones de acción, si alguno de ellos tiene teclas rápidas asignadas

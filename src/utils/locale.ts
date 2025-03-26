@@ -4,7 +4,7 @@ import nextI18nextConfig from '../../next-i18next.config';
 
 export const getLocale = (language: string) => {
     if (nextI18nextConfig.i18n.locales.includes(language)) {
-        return language as 'en' | 'ru';
+        return language as 'en' | 'ru' | 'es' | 'zh';
     }
     return nextI18nextConfig.i18n.defaultLocale as 'en';
 };
