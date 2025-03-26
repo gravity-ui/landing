@@ -22,7 +22,7 @@ import {
     ThemeProvider,
 } from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import React, {CSSProperties, Fragment, useState} from 'react';
+import React, {CSSProperties, Fragment, useEffect, useState} from 'react';
 
 import gravityUi from '../../../../assets/icons/gravity-ui.svg';
 import {block} from '../../../../utils';
@@ -32,6 +32,7 @@ import {exportTheme} from '../../lib/themeCreatorExport';
 import {CardsPreview} from './CardsPreview/CardsPreview';
 import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
+import {OsnPreview} from './OsnPreview/OsnPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
 
@@ -42,10 +43,19 @@ interface PreviewLayoutProps {
     id: string;
     breadCrumbsItems: string[];
     styles: ReturnType<typeof exportTheme>;
+    fullWidth?: boolean;
+    fullHeight?: boolean;
     children: (props: any) => React.ReactNode;
 }
 
-const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutProps) => {
+const PreviewLayout = ({
+    breadCrumbsItems,
+    children,
+    styles,
+    id,
+    fullWidth,
+    fullHeight,
+}: PreviewLayoutProps) => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
     const [isCompact, setCompact] = useState<boolean>(true);
@@ -58,7 +68,31 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
         setTheme(event.target.value as 'light' | 'dark');
     };
 
+    useEffect(() => {
+        if (id === 'osn' && theme !== 'light') {
+            setTheme('light');
+        }
+    }, [id, theme]);
+
+    const themeProviderTheme = id === 'osn' ? 'light' : theme;
+
     const renderContent = () => {
+        if (fullHeight) {
+            return (
+                <Fragment>
+                    <Flex
+                        justifyContent={justify}
+                        className={b('content', {
+                            'full-width': fullWidth,
+                            'full-height': fullHeight,
+                        })}
+                    >
+                        {children({justify})}
+                    </Flex>
+                </Fragment>
+            );
+        }
+
         return (
             <Fragment>
                 <ActionBar aria-label="Actions bar">
@@ -118,7 +152,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                         </ActionBar.Group>
                     </ActionBar.Section>
                 </ActionBar>
-                <Flex justifyContent={justify} className={b('content')}>
+                <Flex justifyContent={justify} className={b('content', {'full-width': fullWidth})}>
                     {children({justify})}
                 </Flex>
             </Fragment>
@@ -126,7 +160,7 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
     };
 
     return (
-        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
+        <ThemeProvider theme={themeProviderTheme} scoped rootClassName={`${b()} ${b({theme})}`}>
             {styles ? (
                 <style>{`${
                     styles.fontImports
@@ -136,71 +170,74 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
             ) : null}
 
             <div className={b()}>
-                <AsideHeader
-                    menuItems={[
-                        {
-                            id: 'table',
-                            title: 'Table',
-                            icon: LayoutList,
-                            iconSize: 18,
-                            current: id === 'table',
-                        },
-                        {
-                            id: 'form',
-                            title: 'Form',
-                            icon: SquareChartBar,
-                            iconSize: 18,
-                            current: id === 'form',
-                        },
-                        {
-                            id: 'dashboard',
-                            title: 'Dashboard',
-                            icon: ChartAreaStackedNormalized,
-                            iconSize: 18,
-                            current: id === 'dashboard',
-                        },
-                        {
-                            id: 'cards',
-                            title: 'Cards',
-                            icon: SquareBars,
-                            iconSize: 18,
-                            current: id === 'cards',
-                        },
-                    ]}
-                    className={b('aside-header')}
-                    logo={{
-                        text: 'Gravity UI',
-                        href: '#',
-                        icon: gravityUi,
-                        iconSize: 38,
-                    }}
-                    compact={isCompact}
-                    onChangeCompact={setCompact}
-                    renderContent={renderContent}
-                    renderFooter={({compact}) => (
-                        <React.Fragment>
-                            <FooterItem
-                                item={{
-                                    id: 'user-settings',
-                                    icon: Gear,
-                                    title: 'User Settings',
-                                    tooltipText: 'User Settings',
-                                    onItemClick: () => {},
-                                }}
-                                compact={compact}
-                            />
-                            <FooterItem
-                                compact={compact}
-                                item={{
-                                    id: 'user-account',
-                                    title: 'User',
-                                    itemWrapper: (p, makeItem) =>
-                                        makeItem({...p, icon: <Person />}),
-                                }}
-                            />
-                        </React.Fragment>
-                    )}
-                />
+                {fullWidth && renderContent()}
+                {!fullWidth && (
+                    <AsideHeader
+                        menuItems={[
+                            {
+                                id: 'table',
+                                title: 'Table',
+                                icon: LayoutList,
+                                iconSize: 18,
+                                current: id === 'table',
+                            },
+                            {
+                                id: 'form',
+                                title: 'Form',
+                                icon: SquareChartBar,
+                                iconSize: 18,
+                                current: id === 'form',
+                            },
+                            {
+                                id: 'dashboard',
+                                title: 'Dashboard',
+                                icon: ChartAreaStackedNormalized,
+                                iconSize: 18,
+                                current: id === 'dashboard',
+                            },
+                            {
+                                id: 'cards',
+                                title: 'Cards',
+                                icon: SquareBars,
+                                iconSize: 18,
+                                current: id === 'cards',
+                            },
+                        ]}
+                        className={b('aside-header')}
+                        logo={{
+                            text: 'Gravity UI',
+                            href: '#',
+                            icon: gravityUi,
+                            iconSize: 38,
+                        }}
+                        compact={isCompact}
+                        onChangeCompact={setCompact}
+                        renderContent={renderContent}
+                        renderFooter={({compact}) => (
+                            <React.Fragment>
+                                <FooterItem
+                                    item={{
+                                        id: 'user-settings',
+                                        icon: Gear,
+                                        title: 'User Settings',
+                                        tooltipText: 'User Settings',
+                                        onItemClick: () => {},
+                                    }}
+                                    compact={compact}
+                                />
+                                <FooterItem
+                                    compact={compact}
+                                    item={{
+                                        id: 'user-account',
+                                        title: 'User',
+                                        itemWrapper: (p, makeItem) =>
+                                            makeItem({...p, icon: <Person />}),
+                                    }}
+                                />
+                            </React.Fragment>
+                        )}
+                    />
+                )}
             </div>
         </ThemeProvider>
     );
@@ -221,6 +258,14 @@ const previewComponents = [
         breadCrumbsItems: ['Dashboard'],
     },
     {id: 'cards', Component: CardsPreview, title: 'Cards', breadCrumbsItems: ['Cards']},
+    {
+        id: 'osn',
+        Component: OsnPreview,
+        title: 'Osn',
+        breadCrumbsItems: [],
+        fullWidth: true,
+        fullHeight: true,
+    },
 ];
 
 export const PreviewTab = () => {
@@ -235,19 +280,23 @@ export const PreviewTab = () => {
         <Flex direction="column" gap={8}>
             <Text variant="display-2">{t('title_ui-samples')}</Text>
 
-            {previewComponents.map(({Component, title, breadCrumbsItems, id}, index) => {
-                return (
-                    <PreviewLayout
-                        key={index}
-                        id={id}
-                        title={title}
-                        breadCrumbsItems={breadCrumbsItems}
-                        styles={themeStyles}
-                    >
-                        {(props) => <Component {...props} />}
-                    </PreviewLayout>
-                );
-            })}
+            {previewComponents.map(
+                ({Component, title, breadCrumbsItems, id, fullWidth, fullHeight}, index) => {
+                    return (
+                        <PreviewLayout
+                            key={index}
+                            id={id}
+                            title={title}
+                            breadCrumbsItems={breadCrumbsItems}
+                            styles={themeStyles}
+                            fullWidth={fullWidth}
+                            fullHeight={fullHeight}
+                        >
+                            {(props) => <Component {...props} />}
+                        </PreviewLayout>
+                    );
+                },
+            )}
         </Flex>
     );
 };
