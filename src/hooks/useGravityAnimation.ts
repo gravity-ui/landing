@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const useGravitiAnimation = () => {
+export const useGravityAnimation = () => {
     React.useEffect(() => {
         const wordTriggers = [
             'gravity',

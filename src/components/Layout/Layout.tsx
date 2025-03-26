@@ -6,7 +6,7 @@ import ru from 'javascript-time-ago/locale/ru.json';
 import {useTranslation} from 'next-i18next';
 import Head from 'next/head';
 import React from 'react';
-import {useGravitiAnimation} from 'src/hooks/useGravityAnimation';
+import {useGravityAnimation} from 'src/hooks/useGravityAnimation';
 
 import {CONTENT_WRAPPER_ID, DEFAULT_THEME, MENU_ID} from '../../constants';
 import {EnvironmentContext} from '../../contexts';
@@ -44,7 +44,7 @@ export const Layout: React.FC<LayoutProps> = ({
     meta = {},
 }) => {
     const {i18n} = useTranslation();
-    useGravitiAnimation();
+    useGravityAnimation();
 
     const lang = i18n.language as Lang;
 
