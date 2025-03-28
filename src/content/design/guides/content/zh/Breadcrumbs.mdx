@@ -1,62 +1,62 @@
-**面包屑导航**是一系列链接，代表从根页面到当前页面的服务结构路径，允许用户导航到中间的任何页面。它们帮助用户确定他们在服务的哪个部分，并快速导航回一个或多个级别。
+**Breadcrumb** s 是一系列链接，代表服务结构中从根页面到当前页面的路径，允许用户导航到介于两者之间的任何页面。它们帮助用户确定他们所处的服务的哪个部分，并快速浏览一个或多个关卡。
 
-![示例](/static/images/design/Breadcrumbs/Example.png)
+![Example](/static/images/design/Breadcrumbs/Example.png)
 
-## 何时使用DLQ
+## 何时使用 DLQ
 
-- 对嵌套页面使用面包屑组件。
-- 在主页上不需要使用面包屑。
-- 面包屑通常放置在页面最顶部的操作栏中。
+- 对嵌套页面使用 Breadcrumbs 组件。
+- 无需在主页上使用面包屑。
+- 面包屑通常放在页面最顶部的操作栏中。
 
 ## 结构
 
-![结构](/static/images/design/Breadcrumbs/Structure.png)
+![Structure](/static/images/design/Breadcrumbs/Structure.png)
 
-1 - **当前页面。**
+1- **当前页面。**
 
-2 - **上一页。** 如果容器宽度允许，最好先显示。
+2- **上一页。** 如果容器的宽度允许，最好先显示。
 
-3 - **服务的根页面。**
+3-服务的 **根页面。**
 
-4 - **分隔符。** 默认使用"/"，但">"也是可接受的。
+4- **分频器。** 默认使用 “/”，但是 “>” 也是可以接受的。
 
-5 - **溢出图标。** 当页面标题不适合容器宽度时出现。占用比可用空间更多的页面通过下拉菜单访问，点击省略号即可显示。
+5- **溢出图标。** 当页面标题不在容器的宽度内时出现。占用空间超过可用空间的页面可通过下拉菜单进行访问，单击省略号即可显示该下拉菜单。
 
-## 尺寸
+## 尺码
 
-面包屑中的基本字体大小是body-1。图标大小为16x16 px。
+面包屑中的基本字体大小为 body-1。图标大小为 16x16 像素。
 
-![尺寸](/static/images/design/Breadcrumbs/Sizes.png)
+![Sizes](/static/images/design/Breadcrumbs/Sizes.png)
 
-## 状态
+## 国家
 
-![状态](/static/images/design/Breadcrumbs/States.png)
+![States](/static/images/design/Breadcrumbs/States.png)
 
-**Default** - 默认状态。
+**默认** -默认状态。
 
-**Hover** - 鼠标悬停在页面标题上。
+**悬停** -将鼠标悬停在页面标题上。
 
-**Disable** - 不可点击。可用于当前页面或没有链接的页面。
+**禁用** -不可点击。可用于当前页面或未链接的页面。
 
-**Loading** - 组件可以通过renderItemContent参数传递函数来显示元素的内容。例如，如果面包屑元素的数据尚未加载，则显示Skeleton。
+**加载** -组件可以通过传递一个函数来通过 renderItemContent 参数来显示元素的内容。例如，如果尚未加载 crumbs 元素的数据，则显示骨架。
 
 ## 修改
 
-![修改](/static/images/design/Breadcrumbs/Modifications1.png)
+![Modifications](/static/images/design/Breadcrumbs/Modifications1.png)
 
-面包屑可能包含以下附加元素：
+面包屑可能包含以下其他元素：
 
-1. **操作图标 -** 如添加到收藏夹、复制页面标题或上下文菜单。
-2. **[标签](/design/guides/label) —** 与页面相关的状态或其他属性。
-3. **选择 —** 点击元素使您能够在各种选项之间进行选择。
-4. **附加文本**—ID、数量计数器和其他页面属性
+1.**操作图标-** 例如添加到收藏夹、复制页面标题或快捷菜单。
+2.**[标签](/design/guides/label) —** 与页面相关的状态或其他属性。
+3.**选择 —** 单击该元素可让您在各种选项之间进行选择。
+4.**其他文本**—ID、数量计数器和其他页面属性
 
-可以使用房子图标代替"主页"一词来表示返回主页。
+可以使用房屋图标代替 “Main” 一词来表示返回主页。
 
-![修改](/static/images/design/Breadcrumbs/Modifications1.png)
+![Modifications](/static/images/design/Breadcrumbs/Modifications1.png)
 
-## 自定义
+## 定制
 
-您可以更改颜色、分隔符和悬停样式。记住在当前页面上保持更亮的高亮显示，并在元素之间保持足够的对比度。
+您可以更改颜色、分隔线和悬停样式。记住要在当前页面上保持更亮的亮点，并在元素之间保持足够的对比度。
 
-![自定义](/static/images/design/Breadcrumbs/Customization.png)
+![Customization](/static/images/design/Breadcrumbs/Customization.png)
