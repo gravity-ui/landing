@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[7678],{27678:function(e,r,n){n.r(r),n.d(r,{UserSandbox:function(){return u}});var t=n(85893),a=n(91469);n(67294);let s={text:"Charles Darwin",theme:"brand"},u=e=>{let{name:r,description:n,size:u}=e;return(0,t.jsx)(a.User,{avatar:s,name:r,description:n,size:u})}}}]);
