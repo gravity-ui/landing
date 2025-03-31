@@ -1,6 +1,6 @@
 <!--GITHUB_BLOCK-->
 
-# Text
+# Texto
 
 <!--/GITHUB_BLOCK-->
 
@@ -8,9 +8,9 @@
 import {Text} from '@gravity-ui/uikit';
 ```
 
-## Variante (`variant`)
+## Variante
 
-Estas son las fuentes predeterminadas que pueden ser sobrescritas en el proyecto. Puede ver una lista de todas las fuentes disponibles [aquí](https://preview.gravity-ui.com/uikit/?path=/story/typography--variants).
+Estas son las fuentes predeterminadas que se pueden anular en el proyecto. Puedes ver una lista de todas las fuentes disponibles [aquí](https://preview.gravity-ui.com/uikit/?path=/story/typography--variants).
 
 <!--LANDING_BLOCK
 
@@ -39,11 +39,11 @@ LANDING_BLOCK-->
 
 ### Elipsis
 
-Esta propiedad le permite ocultar el texto que desborda:
+Esta propiedad permite ocultar el texto que se desborda:
 
-`false`: Usado por defecto.
+`false`: Se usa de forma predeterminada.
 
-`true`: El contenido desbordado oculto será reemplazado con una elipsis (`…`).
+`true`: El contenido adicional oculto se reemplazará por puntos suspensivos ()`…`.
 
 <!--LANDING_BLOCK
 
@@ -71,9 +71,9 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Espacio en Blanco
+### Espacio en blanco
 
-Esto representa la propiedad CSS `white-space`. Puede ser `nowrap` o `break-spaces`.
+Esto significa la propiedad `white-space` CSS. Puede ser cualquiera `nowrap` de los dos `break-spaces`.
 
 <!--LANDING_BLOCK
 
@@ -100,9 +100,9 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Salto de Palabra
+### Interrupción de palabras
 
-Esto representa la propiedad CSS `word-break`. El único valor disponible es `break-all` | `break-word`.
+Esto significa la propiedad `word-break` CSS. El único valor disponible es `break-all`. | `break-word`.
 
 <!--LANDING_BLOCK
 
@@ -133,7 +133,7 @@ LANDING_BLOCK-->
 ### Color
 
 Especifica el color del texto. Los colores disponibles son:
-`primary`, `complementary`, `secondary`, `hint`, `info`, `info-heavy`, `positive`, `positive-heavy`, `warning`, `warning-heavy`, `danger`, `danger-heavy`, `utility`, `utility-heavy`, `misc`, `misc-heavy`, `brand`, `link`, `link-hover`, `link-visited`, `link-visited-hover`, `dark-primary`, `dark-complementary`, `dark-secondary`, `light-primary`, `light-complementary`, `light-secondary`, `light-hint`, `inverted-primary`, `inverted-complementary`, `inverted-secondary` y `inverted-hint`.
+`primary`, `complementary`, `secondary`, `hint`, `info`, `info-heavy`, `positive`, `positive-heavy`, `warning`, `warning-heavy`, `danger`, `danger-heavy`, , `utility`, `utility-heavy`, `misc`, `misc-heavy`, `brand`, `link`, `link-hover`, `link-visited`, `link-visited-hover`, `dark-primary`, `dark-complementary`, `dark-secondary`, `light-primary`, `light-complementary`, `light-secondary`, `light-hint`, `inverted-primary`, , `inverted-complementary`, `inverted-secondary`, y `inverted-hint`.
 
 <!--LANDING_BLOCK
 
@@ -162,17 +162,17 @@ LANDING_BLOCK-->
 
 ## Propiedades
 
-| Nombre        | Descripción                                                                          |                        Tipo                        | Valor predeterminado |
-| :------------ | :----------------------------------------------------------------------------------- | :------------------------------------------------: | :------------------: |
-| children      | Contenido de texto                                                                   |                 `React.ReactNode`                  |                      |
-| className     | Atributo HTML `class`                                                                |                      `string`                      |                      |
-| id            | Atributo HTML `id`                                                                   |                      `string`                      |                      |
-| as            | Permite sobrescribir la etiqueta HTML predeterminada                                 |              `React.ElementType<any>`              |                      |
-| style         | Atributo HTML `style`                                                                |               `React.CSSProperties`                |                      |
-| variant       | Fuente del texto                                                                     |                      `string`                      |      `"body-1"`      |
-| ellipsis      | El contenido desbordado oculto será reemplazado con una elipsis                      |                     `boolean`                      |                      |
-| ellipsisLines | El número de líneas completas de texto después de las cuales se cortará el contenido |                      `number`                      |                      |
-| whiteSpace    | Propiedad CSS `white-space`                                                          |            `"nowrap"` `"break-spaces"`             |                      |
-| wordBreak     | Propiedad CSS `word-break`                                                           |            `"break-all"` `"break-word"`            |                      |
-| color         | Color del texto                                                                      | `string` (ver los valores en la sección **Color**) |                      |
-| qa            | Atributo HTML `data-qa`, usado para pruebas                                          |                      `string`                      |                      |
+| Nombre         | Descripción                                                                        |                          Tipo                           | Predeterminado |
+| :------------- | :--------------------------------------------------------------------------------- | :-----------------------------------------------------: | :------------: |
+| niños          | Contenido de texto                                                                 |                    `React.ReactNode`                    |                |
+| className      | `class` Atributo HTML                                                              |                        `string`                         |                |
+| identificación | `id` Atributo HTML                                                                 |                        `string`                         |                |
+| tan            | Permite anular la etiqueta HTML predeterminada                                     |           `Tipo de elemento de reacción<any>`           |                |
+| estilo         | `style` Atributo HTML                                                              |                  `React.CSSProperties`                  |                |
+| variante       | Tipo de letra de texto                                                             |                        `string`                         |   `"body-1"`   |
+| elipsis        | El contenido adicional oculto se reemplazará por puntos suspensivos                |                        `boolean`                        |                |
+| ellipsisLines  | El número de líneas enteras de texto después de las cuales se cortará el contenido |                        `number`                         |                |
+| whiteSpace     | `white-space` Propiedad CSS                                                        |               `"nowrap"` `"break-spaces"`               |                |
+| wordBreak      | `word-break` Propiedad CSS                                                         |              `"break-all"` `"break-word"`               |                |
+| color          | Color del texto                                                                    | `string` (consulte los valores en la **sección** Color) |                |
+| qa             | `data-qa` Atributo HTML, usado para realizar pruebas                               |                        `string`                         |                |

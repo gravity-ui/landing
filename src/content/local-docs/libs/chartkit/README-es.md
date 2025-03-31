@@ -1,14 +1,14 @@
 # @gravity-ui/chartkit &middot; [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Componente React utilizado para renderizar gráficos basados en cualquier fuente que necesites
+Componente React utilizado para renderizar gráficos basados en cualquier fuente que necesite
 
-## Instalación
+## Instalar
 
 ```shell
 npm i --save-dev @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
-Asegúrate de tener los estilos de `@gravity-ui/uikit` habilitados en tu proyecto.
+Asegúrese de tener `@gravity-ui/uikit` los estilos habilitados en su proyecto.
 
 ```typescript
 import '@gravity-ui/uikit/styles/styles.scss';

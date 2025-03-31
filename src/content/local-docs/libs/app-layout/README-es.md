@@ -1,6 +1,6 @@
 # @gravity-ui/app-layout &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
 
-## Instalación
+## Instalar
 
 ```shell
 npm install --save-dev @gravity-ui/app-layout
@@ -37,57 +37,57 @@ donde
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // Cualquier dato compatible con json, se establecerá en window.__DATA__ en la página
+  // Any json compatible data, will be set to window.__DATA__ on the page
   data?: Data;
   // favicon
   icon?: Icon;
-  // nonce para establecer en las etiquetas apropiadas
+  // nonce to be set on the appropriate tags
   nonce?: string;
 
-  // opciones comunes
-  // Título de la página
+  // common options
+  // Page title
   title: string;
-  // idioma de la página, se establecerá en la etiqueta html
+  // language of page, will be set to html tag
   lang?: string;
   isMobile?: boolean;
 
-  // atributos html
+  // html attributes
   htmlAttributes?: string;
-  // contenido de la etiqueta header
-  // etiquetas meta
+  // header tag content
+  // meta tags
   meta?: Meta[];
-  // etiquetas link
+  // link tags
   links?: Link[];
-  // etiquetas script
+  // script tags
   scripts?: Script[];
-  // etiquetas style
+  // style tags
   styleSheets?: Stylesheet[];
-  // etiquetas script con código en línea
+  // script tags with inlined code
   inlineScripts?: string[];
-  // etiquetas style con estilos en línea
+  // style tags with inlined styles
   inlineStyleSheets?: string[];
 
-  // contenido de la etiqueta body
+  // content of body tag
   bodyContent?: {
-    // nombre de clase para la etiqueta body
+    // class name for body tag
     className?: string;
-    // atributos del body
+    // body attributes
     attributes?: string;
-    // contenido del body antes de la etiqueta div con id root
+    // body content before div tag with id root
     beforeRoot?: string;
-    // contenido innerHtml de la etiqueta div con id root
+    // innerHtml content of div tag with id root
     root?: string;
-    // contenido del body después de la etiqueta div con id root
+    // body content after div tag with id root
     afterRoot?: string;
   };
-  // opciones de plugins
+  // plugins options
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
 ### Meta
 
-Describe la etiqueta `meta`:
+Describe la `meta` etiqueta:
 
 ```typescript
 interface Meta {
@@ -114,7 +114,7 @@ Se renderizará como:
 <meta property="og:title" content="Some title" />
 ```
 
-### Icon
+### Icono
 
 Describe el favicon de la página:
 
@@ -136,9 +136,9 @@ const icon = {
 };
 ```
 
-### Links
+### Vínculos
 
-Describe la etiqueta `link`:
+Describe la `link` etiqueta:
 
 ```typescript
 interface Link {
@@ -170,9 +170,9 @@ se renderizará como:
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
 ```
 
-### Scripts
+### Guiones
 
-Describe el enlace a un script con precarga:
+Describe el enlace al script con precarga:
 
 ```typescript
 interface Script {
@@ -203,9 +203,9 @@ se renderizará como:
 <script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
 ```
 
-#### Style sheets
+#### Hojas de estilo
 
-Describe el enlace a estilos:
+Describa el enlace a los estilos:
 
 ```typescript
 interface Stylesheet {
@@ -229,14 +229,14 @@ se renderizará como:
 
 ## Plugins
 
-La función de renderizado puede extenderse mediante plugins. El plugin puede reescribir el contenido de renderizado definido por el usuario.
-El plugin es un objeto con propiedades `name` y `apply`:
+La función de renderizado se puede ampliar mediante complementos. El complemento puede reescribir el contenido de renderizado definido por el usuario.
+El complemento es un objeto con `name` `apply` propiedades:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // pasado a través de la función `renderLayout` en el parámetro `pluginsOptions`.
+    options: Options | undefined; // passed through `renderLayout` function in `pluginsOptions` parameter.
     commonOptions: CommonOptions;
     renderContent: RenderContent;
     /** @deprecated use `renderContent.helpers` instead */
@@ -285,11 +285,11 @@ export interface RenderHelpers {
 }
 ```
 
-Hay algunos plugins en este paquete:
+Hay algunos complementos en este paquete:
 
 ### Google analytics
 
-Añade el contador de Google Analytics en la página.
+Añade el contador de Google Analytics a la página.
 
 Uso:
 
@@ -304,7 +304,7 @@ app.get((req, res) => {
       title: 'Home page',
       pluginsOptions: {
         googleAnalytics: {
-          useBeaconTransport: true, // habilita el uso de navigator.sendBeacon
+          useBeaconTransport: true, // enables use of navigator.sendBeacon
           counter: {
             id: 'some id',
           },
@@ -328,9 +328,9 @@ interface GoogleAnalyticsOptions {
 }
 ```
 
-### Yandex Metrika
+### Yandex Metric
 
-Añade contadores de Yandex Metrika en la página.
+Añade contadores de métricas de Yandex a la página.
 
 Uso:
 
@@ -388,9 +388,9 @@ export type MetrikaOptions = {
 };
 ```
 
-### Layout
+### Disposición
 
-Añade script y estilos desde el archivo de manifiesto de assets de webpack.
+Agrega scripts y estilos del archivo de manifiesto de activos del paquete web.
 
 Uso:
 
@@ -426,7 +426,7 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-Añade atributos al body.
+Añade atributos de cuerpo.
 
 Uso:
 
@@ -459,9 +459,9 @@ interface UikitPluginOptions {
 }
 ```
 
-### Helpers
+### Ayudantes
 
-Hay un helper para crear todos los plugins:
+Hay un ayudante para crear todos los complementos:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -490,7 +490,7 @@ app.get((req, res) => {
 
 ## Uso alternativo
 
-Con renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` a través de streaming html:
+Con renderizadores de piezas `generateRenderContent` `renderHeadContent`, `renderBodyContent` mediante transmisión de HTML:
 
 ```js
 import express from 'express';

@@ -8,15 +8,15 @@ npm install --save-dev @gravity-ui/illustrations
 
 ## Uso
 
-### React
+### Reacciona
 
 #### Preparación
 
-Configura el tema de ilustraciones. Ejecuta cualquiera de los siguientes pasos:
+Configurar el tema de las ilustraciones. Ejecute cualquiera de los pasos siguientes:
 
-##### Definir tokens CSS con paleta de colores propia
+##### Definición de fichas CSS con su propia paleta de colores
 
-Define los siguientes tokens CSS en la aplicación:
+Defina los siguientes css-tokens en la aplicación:
 
 ```scss
 --gil-color-object-base: rgb(255, 190, 92);
@@ -29,9 +29,9 @@ Define los siguientes tokens CSS en la aplicación:
 --gil-color-object-danger: rgb(255, 0, 61);
 ```
 
-##### Usar mixins con el tema predeterminado de gravity en SCSS
+##### Uso de mezclas con el tema de gravedad predeterminado en scss
 
-Utiliza los siguientes mixins para estilizar ilustraciones en diferentes temas
+Usa los siguientes mixins para diseñar ilustraciones en diferentes temas
 
 ```scss
 @import '@gravity-ui/illustrations/styles/theme.scss';
@@ -55,14 +55,14 @@ Utiliza los siguientes mixins para estilizar ilustraciones en diferentes temas
 }
 ```
 
-##### Alternativa para proyectos con el tema gravity preinstalado
+##### Alternativa para proyectos con tema de gravedad preinstalado
 
-Alternativamente, si `@gravity-ui/uikit` ya está instalado en el proyecto y se utiliza el tema predeterminado, puedes simplemente importar `styles.scss` al archivo raíz con estilos en tu proyecto:
+Alternativamente, si ya `@gravity-ui/uikit` está instalado en el proyecto y se usa el tema predeterminado, puedes simplemente importarlo `styles.scss` al archivo raíz con los estilos de tu proyecto:
 
 ```scss
-// definición de estilos gravity existentes
+// existing gravity styles definition
 import '@gravity-ui/uikit/styles/styles.css';
-// simplemente añade una importación más abajo
+// just add one more import below
 import '@gravity-ui/illustrations/styles/styles.scss';
 ```
 
@@ -80,7 +80,7 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> Es posible que necesites un cargador apropiado para esto
+> Es posible que necesite un cargador adecuado para esto
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
@@ -88,7 +88,7 @@ import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 
 ### Desarrollo
 
-Para actualizar ilustraciones de acuerdo con el nuevo diseño, cambia el contenido de los SVG en el tema claro (`<raíz-de-este-repositorio>/svgs/<nombre-de-ilustración>-light.svg`) y luego ejecuta el comando:
+Para actualizar las ilustraciones de acuerdo con el nuevo diseño, cambie el contenido de svg-s en el tema light (`archivos`<this-repository-root>/svgs/<illustration-name>-light.svg) y, a continuación, ejecute el comando:
 
 ```shell
 npm run generate

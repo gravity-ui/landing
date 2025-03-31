@@ -1,6 +1,6 @@
-# Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
+# Fuente de datos & middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version) (https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github) (https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** es un simple envoltorio para la obtención de datos. Es una especie de "puerto" en la [arquitectura limpia](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Te permite crear envoltorios para elementos relacionados con la obtención de datos según tus casos de uso. **Data Source** utiliza [react-query](https://tanstack.com/query/latest) internamente.
+**Data Source** es un sencillo envoltorio para la obtención de datos. Es una especie de «puerto» en una [arquitectura limpia](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Te permite crear envoltorios para cosas relacionadas con la obtención de datos según tus casos de uso. **Data Source** usa [react-query de](https://tanstack.com/query/latest) forma oculta.
 
 ## Instalación
 
@@ -8,11 +8,11 @@
 npm install @gravity-ui/data-source @tanstack/react-query
 ```
 
-`@tanstack/react-query` es una dependencia peer.
+`@tanstack/react-query` es una dependencia de los compañeros.
 
-## Primeros pasos
+## Cómo empezar
 
-Primero, define un tipo de error y crea tus constructores para fuentes de datos y tu error basado en constructores predeterminados (makePlainQueryDataSource / makeInfiniteQueryDataSource). Por ejemplo:
+En primer lugar, defina un tipo de error y cree sus constructores para las fuentes de datos y su error se base en los constructores predeterminados (MakePlainQueryDataSource /MakeInfiniteQueryDataSource). Por ejemplo:
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -30,7 +30,7 @@ export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TE
 };
 ```
 
-Escribe un componente `DataLoader` basado en el predeterminado. Esto es conveniente para definir tu visualización del estado de carga y errores. Por ejemplo:
+Escriba un `DataLoader` componente según el valor predeterminado. Esto resulta práctico para definir la visualización del estado de carga y los errores. Por ejemplo:
 
 ```tsx
 import {
@@ -54,18 +54,18 @@ export const DataLoader: React.FC<DataLoaderProps> = ({
 };
 ```
 
-Define tu primera fuente de datos:
+Defina su primera fuente de datos:
 
 ```ts
 export const objectDataSource = makePlainQueryDataSource({
-  // Las claves deben ser únicas. Quizás deberías crear un helper para hacer nombres de fuentes de datos
+  // Keys have to be unique. Maybe you should create a helper for making names of data sources
   name: 'object',
-  // skipContext es solo un helper para omitir los 2 primeros parámetros en la función (context y fetchContext)
+  // skipContext is just a helper to skip 2 first parameters in the function (context and fetchContext)
   fetch: skipContext(objectFetch),
 });
 ```
 
-Úsalo en la aplicación:
+Utilízalo en la aplicación:
 
 ```tsx
 import {useQueryData} from '@gravity-ui/data-source';

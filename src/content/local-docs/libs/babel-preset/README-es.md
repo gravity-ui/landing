@@ -1,8 +1,8 @@
 # @gravity-ui/babel-preset
 
-Preset de Babel para proyectos de Gravity UI
+Preajuste de Babel para proyectos de Gravity UI
 
-## Instalación
+## Instalar
 
 ```
 npm install --save-dev @gravity-ui/babel-preset
@@ -10,17 +10,17 @@ npm install --save-dev @gravity-ui/babel-preset
 
 ## Uso
 
-### A través de `.babelrc`
+### Vía `.babelrc`
 
 ```json5
 {
   presets: [
     '@gravity-ui/babel-preset',
     {
-      env: {modules: false}, // por defecto es {}
-      runtime: {useESModules: true}, // por defecto es {}
-      typescript: true, // por defecto es false
-      react: {runtime: 'automatic'}, // por defecto es {}
+      env: {modules: false}, // defaults to {}
+      runtime: {useESModules: true}, // defaults to {}
+      typescript: true, // defaults to false
+      react: {runtime: 'automatic'}, // defaults to {}
     },
   ],
 }

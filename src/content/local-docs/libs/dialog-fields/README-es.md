@@ -1,46 +1,46 @@
 ## Descripción breve
 
-El propósito del componente `DFDialog` es facilitar la creación de formularios, utiliza react-final-form internamente.
-Admite varios tipos predefinidos de campos, pero el usuario puede ampliarlo registrando nuevos mediante el uso de `registerDialogControl`.
+El propósito del `DFDialog` componente es facilitar la creación de formularios, se usa internamente en forma final de reacción.
+Admite varios tipos de campos predefinidos, pero el usuario puede ampliarlo registrando otros nuevos mediante el uso de `registerDialogControl`.
 
 ### Controles
 
 - [Controles básicos](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-00-base-controls)
-  - `plain` - texto estático
-  - `text` - texto editable
-  - `multi-text` - array de cadenas definido por el usuario
-  - `checkbox` - casilla de verificación
-  - `tumbler` - interruptor
-  - `radio` - botón de radio
-  - `editable-list` - lista de cadenas eliminables
-  - `multi-editable-list` - multi lista de cadenas eliminables
-  - `text area` - área de texto
-  - `select` - selector
-  - `block` - permite añadir ReactNode
+  - `plain`- texto estático
+  - `text`- texto editable
+  - `multi-text`- matriz de cadenas definida por el usuario
+  - `checkbox`- casilla de verificación
+  - `tumbler`- vaso
+  - `radio`- botón de radio
+  - `editable-list`- lista de cadenas extraíbles
+  - `multi-editable-list`- lista múltiple de cadenas extraíbles
+  - `text area`- área de texto
+  - `select`- seleccionar
+  - `block`- permite añadir ReactNode
 - [Registro de control personalizado](https://preview.yandexcloud.dev/dialog-fields/?path=/story/tutorials-custom-control-registration)
 
 ### Características
 
-- Vista en el lugar y modal
-- [Formularios de una pestaña](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) y [varias pestañas](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
+- Vista modal e in situ
+- [Una pestaña](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) y [varios formularios de pestañas](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
 - [Pestañas verticales/horizontales](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
 - [Campos y pestañas ocultos](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
-- [Campos vinculados por valores](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
+- [Campos enlazados por valores](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
 - [Validación a nivel de campo](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
 - [Validación a nivel de formulario](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
 - [Pestañas virtualizadas](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)
-- [Pestañas clonables](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-cloneable-tabs-)
+- [Pestañas que se pueden clonar](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-cloneable-tabs-)
 - [Campos agrupados](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-03-sections)
 
-## Instalación
+## Instalar
 
 ```bash
 $ npm install @gravity-ui/dialog-fields
-# Usa la versión requerida de react/react-dom en caso de que aún no los hayas instalado
+# Use required version of react/react-dom in case you haven't installed them yet
 $ npm install @gravity-ui/dialog-fields react@18 react-dom@18
 ```
 
-Dependiendo de tu gestor de paquetes, es posible que necesites instalar `peerDependencies` manualmente.
+En función de su gestor de paquetes, es posible que deba realizar la instalación `peerDependencies` manualmente.
 
 ## Uso
 
@@ -82,4 +82,4 @@ function MyForm() {
 }
 ```
 
-Ver más ejemplos en [storybook](https://preview.yandexcloud.dev/dialog-fields).
+Vea más ejemplos en el [libro de cuentos](https://preview.yandexcloud.dev/dialog-fields).

@@ -8,13 +8,13 @@
 import {Avatar} from '@gravity-ui/uikit';
 ```
 
-Este componente está destinado a renderizar avatares. Tiene tres tipos básicos de avatar: imagen, icono y texto (iniciales del nombre). Todos estos tipos tienen propiedades especiales para configurar el comportamiento y la apariencia.
+Este componente está diseñado para renderizar avatares. Tiene tres tipos básicos de avatar: imagen, icono y texto (iniciales del nombre). Todos estos tipos tienen propiedades especiales para configurar el comportamiento y la apariencia.
 
 ## Tipos
 
 ### Imagen
 
-Este componente puede usarse para renderizar avatares usando imágenes. Para proporcionar una imagen, use la propiedad `imgUrl`.
+Este componente se puede usar para renderizar avatares con imágenes. Para proporcionar una imagen, usa la `imgUrl` propiedad.
 
 <!--LANDING_BLOCK
 
@@ -28,7 +28,7 @@ Este componente puede usarse para renderizar avatares usando imágenes. Para pro
 
 LANDING_BLOCK-->
 
-También puede proporcionar la propiedad `srcSet` para cargar imágenes de diferentes tamaños.
+También puede proporcionar la `srcSet` propiedad para cargar imágenes de diferentes tamaños.
 
 <!--LANDING_BLOCK
 
@@ -42,7 +42,7 @@ También puede proporcionar la propiedad `srcSet` para cargar imágenes de difer
 
 LANDING_BLOCK-->
 
-El componente `Avatar` tiene la propiedad `fallbackImgUrl` que le permite proporcionar la imagen que se muestra cuando ocurre un error de carga de imagen a través del enlace `imgUrl` (error CSP o no hay imagen original).
+El `Avatar` componente tiene la `fallbackImgUrl` propiedad que permite proporcionar la imagen que se muestra cuando se produce un error al cargar la imagen, a través del `imgUrl` enlace (error de CSP o falta de imagen original).
 
 <!--LANDING_BLOCK
 
@@ -58,7 +58,7 @@ LANDING_BLOCK-->
 
 ### Icono
 
-Este componente puede usarse para renderizar avatares usando iconos. Use la propiedad `icon` para proporcionar un icono, tal como lo haría en el caso del componente `Icon`.
+Este componente se puede usar para renderizar avatares mediante iconos. Utilice la `icon` propiedad para proporcionar un icono, tal como lo haría en el caso del `Icon` componente.
 
 <!--LANDING_BLOCK
 
@@ -76,7 +76,7 @@ LANDING_BLOCK-->
 
 ### Texto
 
-Este componente puede usarse para renderizar avatares usando texto. Use la propiedad `text` para eso. El texto se renderiza como iniciales (primeras letras de dos palabras) o simplemente las dos primeras letras de una sola palabra.
+Este componente se puede usar para representar avatares usando texto. Usa la `text` propiedad para eso. El texto se representa como iniciales (primeras letras de dos palabras) o solo dos primeras letras de una sola palabra.
 
 <!--LANDING_BLOCK
 
@@ -96,7 +96,7 @@ LANDING_BLOCK-->
 
 ### Tema y vista
 
-El componente `Avatar` tiene temas predefinidos (`normal`, `brand`) y vistas (`filled`, `outlined`).
+El `Avatar` componente tiene temas (`normal`, `brand`) y vistas (`filled`, `outlined` predefinidos.
 
 El tema predeterminado es `normal` y la vista predeterminada es `filled`.
 
@@ -122,7 +122,7 @@ LANDING_BLOCK-->
 
 ### Colores personalizados
 
-También puede proporcionar colores personalizados a través de las propiedades `backgroundColor`, `borderColor` y `color` (esta última funciona solo para avatares de icono y texto). Estos colores tienen una prioridad más alta que los colores del tema.
+También puede proporcionar colores personalizados a través de las `color` propiedades `backgroundColor` `borderColor`, y (esta última solo funciona para avatares de iconos y texto). Estos colores tienen una prioridad mayor que los colores del tema.
 
 <!--LANDING_BLOCK
 
@@ -140,7 +140,7 @@ LANDING_BLOCK-->
 
 ### Tamaño
 
-Use la propiedad `size` para gestionar el tamaño del `Avatar`. El tamaño predeterminado es `m`. Los valores posibles son `3xs`, `2xs`, `xs`, `s`, `m`, `l` y `xl`.
+Usa la `size` propiedad para administrar el `Avatar` tamaño. El tamaño predeterminado es `m`. Los valores posibles son `3xs` `2xs`, `xs`, `s` `m`, `l`, y `xl`.
 
 <!--LANDING_BLOCK
 
@@ -168,59 +168,59 @@ LANDING_BLOCK-->
 
 ## Propiedades
 
-### Comunes
+### Común
 
-| Nombre           | Descripción                                   |                      Tipo                       | Predeterminado |
-| :--------------- | :-------------------------------------------- | :---------------------------------------------: | :------------: |
-| size             | Tamaño del avatar                             | `'3xs'` `'2xs'` `'xs'` `'s'` `'m'` `'l'` `'xl'` |      `m`       |
-| theme            | Tema del avatar                               |              `'normal'` `'brand'`               |    `normal`    |
-| view             | Opciones de relleno y contorno del avatar     |             `'filled'` `'outlined'`             |    `filled`    |
-| backgroundColor  | Color de fondo personalizado                  |                    `string`                     |                |
-| borderColor      | Color de borde personalizado                  |                    `string`                     |                |
-| title            | Atributo HTML `title`                         |                    `string`                     |                |
-| aria-label       | `aria-label` para la sección del avatar       |                    `string`                     |                |
-| aria-labelledby  | `aria-labelledby` para la sección del avatar  |                    `string`                     |                |
-| aria-describedby | `aria-describedby` para el bloque del avatar  |                    `string`                     |                |
-| aria-details     | `aria-details` para el bloque del avatar      |                    `string`                     |                |
-| className        | Clase CSS personalizada para el elemento raíz |                    `string`                     |                |
-| style            | Atributo HTML `style`                         |              `React.CSSProperties`              |                |
-| qa               | Atributo HTML `data-qa`, usado para pruebas   |                    `string`                     |                |
+| Nombre                | Descripción                                          |          Tipo           | Predeterminado |
+| :-------------------- | :--------------------------------------------------- | :---------------------: | :------------: |
+| tamaño                | Tamaño del avatar                                    |     `'3xs'` `'xl'`      |      `m`       |
+| canción               | Tema Avatar                                          |  `'normal'` `'brand'`   |    `normal`    |
+| vista                 | Opciones de rellenado y delineado de avatares        | `'filled'` `'outlined'` |    `filled`    |
+| backgroundColor       | Color de fondo personalizado                         |        `string`         |                |
+| borderColor           | Color de borde personalizado                         |        `string`         |                |
+| título                | `title` Atributo HTML                                |        `string`         |                |
+| etiqueta aria         | `aria-label` para la sección de avatares             |        `string`         |                |
+| aria - etiquetada por | `aria-labelledby` para la sección de avatares        |        `string`         |                |
+| aria, descrita por    | `aria-describedby` para bloque de avatares           |        `string`         |                |
+| detalles de aria      | `aria-details` para bloque de avatares               |        `string`         |                |
+| className             | Clase CSS personalizada para el elemento raíz        |        `string`         |                |
+| estilo                | `style` Atributo HTML                                |  `React.CSSProperties`  |                |
+| qa                    | `data-qa` Atributo HTML, usado para realizar pruebas |        `string`         |                |
 
-### Específicas de imagen
+### Específico de la imagen
 
-| Nombre         | Descripción                                    |        Tipo        | Predeterminado |
-| :------------- | :--------------------------------------------- | :----------------: | :------------: |
-| imgUrl         | Atributo HTML `src` de `img`                   |      `string`      |                |
-| fallbackImgUrl | Imagen de respaldo mostrada si ocurre un error |      `string`      |                |
-| sizes          | Atributo HTML `sizes` de `img`                 |      `string`      |                |
-| srcSet         | Atributo HTML `srcSet` de `img`                |      `string`      |                |
-| alt            | Atributo HTML `alt` de `img`                   |      `string`      |  props.title   |
-| loading        | Atributo HTML `loading` de `img`               | `'eager'` `'lazy'` |                |
+| Nombre         | Descripción                                                   |        Tipo        | Predeterminado |
+| :------------- | :------------------------------------------------------------ | :----------------: | :------------: |
+| imgUrl         | `img` `src` Atributo HTML                                     |      `string`      |                |
+| fallbackImgUrl | Se muestra una imagen alternativa si se ha producido un error |      `string`      |                |
+| tamaños        | `img` `sizes` Atributo HTML                                   |      `string`      |                |
+| srcSet         | `img` `srcSet` Atributo HTML                                  |      `string`      |                |
+| alt            | `img` `alt` Atributo HTML                                     |      `string`      |  props.title   |
+| cargando       | `img` `loading` Atributo HTML                                 | `'eager'` `'lazy'` |                |
 
-### Específicas de icono
+### Específico para cada icono
 
 | Nombre | Descripción                  |    Tipo    | Predeterminado |
 | :----- | :--------------------------- | :--------: | :------------: |
-| icon   | Fuente del icono SVG         | `IconData` |                |
+| icono  | Fuente del icono SVG         | `IconData` |                |
 | color  | Color de icono personalizado |  `string`  |                |
 
-### Específicas de texto
+### Texto específico
 
-| Nombre | Descripción                  |   Tipo   | Predeterminado |
-| :----- | :--------------------------- | :------: | :------------: |
-| text   | Texto del avatar             | `string` |                |
-| color  | Color de texto personalizado | `string` |                |
+| Nombre  | Descripción                  |   Tipo   | Predeterminado |
+| :------ | :--------------------------- | :------: | :------------: |
+| mensaje | Texto de avatar              | `string` |                |
+| color   | Color de texto personalizado | `string` |                |
 
 ## API CSS
 
-| Nombre                          | Descripción                   |
-| :------------------------------ | :---------------------------- |
-| `--g-avatar-size`               | Tamaño (ancho y alto)         |
-| `--g-avatar-border-width`       | Ancho del borde               |
-| `--g-avatar-inner-border-width` | Ancho del borde interno       |
-| `--g-avatar-border-color`       | Color del borde               |
-| `--g-avatar-background-color`   | Color de fondo                |
-| `--g-avatar-text-color`         | Color de icono y texto        |
-| `--g-avatar-font-weight`        | Peso de la fuente del texto   |
-| `--g-avatar-font-size`          | Tamaño de la fuente del texto |
-| `--g-avatar-line-height`        | Altura de línea del texto     |
+| Nombre                          | Descripción                 |
+| :------------------------------ | :-------------------------- |
+| `--g-avatar-size`               | Tamaño (ancho y alto)       |
+| `--g-avatar-border-width`       | Ancho del borde             |
+| `--g-avatar-inner-border-width` | Ancho del borde interior    |
+| `--g-avatar-border-color`       | Color del borde             |
+| `--g-avatar-background-color`   | Color de fondo              |
+| `--g-avatar-text-color`         | Color del icono y del texto |
+| `--g-avatar-font-weight`        | Peso de la fuente del texto |
+| `--g-avatar-font-size`          | Tamaño de fuente del texto  |
+| `--g-avatar-line-height`        | Altura de línea de texto    |

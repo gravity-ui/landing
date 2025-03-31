@@ -1,6 +1,6 @@
 <!--GITHUB_BLOCK-->
 
-# Button
+# Botón
 
 <!--/GITHUB_BLOCK-->
 
@@ -8,21 +8,36 @@
 import {Button} from '@gravity-ui/uikit';
 ```
 
-Los botones actúan como disparadores para ciertas acciones. Si bien este es su propósito principal, en algunos casos muy raros, pueden usarse como enlaces para navegar a otras páginas.
+Los botones actúan como desencadenantes de ciertas acciones. Si bien este es su propósito principal, en algunos casos muy raros, pueden usarse como enlaces para navegar a otras páginas.
 
 ## Apariencia
 
-Hay cuatro tipos de `Button` en términos de apariencia: básico, con contorno, plano y de contraste.
-La apariencia del `Button` está determinada por la propiedad `view`.
+Hay cuatro `Button` tipos en términos de apariencia: básica, delineada, plana y de contraste.
+La `Button` apariencia está determinada por la `view` propiedad.
 
 ### Básico
 
-`action`: El tipo de `Button` más distintivo. Se utiliza para la acción principal en una pantalla que requiere la mayor atención.
+`action`: El tipo más distintivo de `Button`. Se usa para la acción principal en una pantalla que requiere más atención.
 Recomendamos usar solo un botón de este tipo por página.
 
-`normal`: Tipo predeterminado de `Button` diseñado para acciones secundarias o para mantener la importancia de una acción sin llamar demasiado la atención.
+`normal`: Tipo predeterminado: `Button` diseñado para acciones secundarias o para mantener la importancia de una acción sin llamar demasiado la atención sobre ella.
 
-`raised`: Colocado sobre el contenido como un elemento flotante, generalmente con una ubicación fija.
+`raised`: Se coloca por encima del contenido como un elemento flotante, normalmente con una ubicación fija.
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    code={`
+<Button view="action" size="l">Action</Button>
+<Button view="normal" size="l">Normal</Button>
+<Button view="raised" size="l">Raised</Button>
+`}>
+    <UIKit.Button view="action" size="l">Action</UIKit.Button>
+    <UIKit.Button view="normal" size="l">Normal</UIKit.Button>
+    <UIKit.Button view="raised" size="l">Raised</UIKit.Button>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -34,13 +49,36 @@ Recomendamos usar solo un botón de este tipo por página.
 
 <!--/GITHUB_BLOCK-->
 
-### Con contorno
+### Esbozado
 
-`outlined`: Se utiliza para acciones secundarias que requieren menos atención. Se puede usar con o sin un botón principal; en el primer caso, debe ser uno enfatizado.
+`outlined`: Se usa para acciones secundarias que requieren menos atención. Se puede usar con o sin botón principal; en el primer caso, debe ser uno enfatizado.
 
-`outlined-action`: Generalmente se usa como un enlace a otra página o recurso externo.
+`outlined-action`: Suele utilizarse como enlace a otra página o recurso externo.
 
-Este tipo también tiene variaciones semánticas que se pueden usar cuando se necesita semántica adicional: `outlined-info`, `outlined-success`, `outlined-warning` y `outlined-danger`.
+Este tipo también tiene variaciones semánticas que se pueden usar cuando se necesita semántica adicional: `outlined-info`, `outlined-success` `outlined-warning`, y. `outlined-danger`
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    code={`
+<Button view="outlined" size="l">Outlined</Button>
+<Button view="outlined-action" size="l">Outlined Action</Button>
+<Button view="outlined-info" size="l">Outlined Info</Button>
+<Button view="outlined-success" size="l">Outlined Success</Button>
+<Button view="outlined-warning" size="l">Outlined Warning</Button>
+<Button view="outlined-danger" size="l">Outlined Danger</Button>
+<Button view="outlined-utility" size="l">Outlined Utility</Button>
+`}>
+    <UIKit.Button view="outlined" size="l">Outlined</UIKit.Button>
+    <UIKit.Button view="outlined-action" size="l">Outlined Action</UIKit.Button>
+    <UIKit.Button view="outlined-info" size="l">Outlined Info</UIKit.Button>
+    <UIKit.Button view="outlined-success" size="l">Outlined Success</UIKit.Button>
+    <UIKit.Button view="outlined-warning" size="l">Outlined Warning</UIKit.Button>
+    <UIKit.Button view="outlined-danger" size="l">Outlined Danger</UIKit.Button>
+    <UIKit.Button view="outlined-utility" size="l">Outlined Utility</UIKit.Button>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -58,13 +96,38 @@ Este tipo también tiene variaciones semánticas que se pueden usar cuando se ne
 
 ### Plano
 
-`flat`: Se utiliza para acciones auxiliares que requieren la menor atención. A menudo se usa en una lista de botones o iconos de acción (sin texto) en un editor.
+`flat`: Se usa para acciones auxiliares que requieren la menor atención. Se utiliza a menudo en una lista de botones o iconos de acción (sin texto) de un editor.
 
-`flat-secondary`: Menos enfatizado que el botón `flat`. A menudo se usa como botón secundario en cuadros de diálogo y ventanas modales.
+`flat-secondary`: Menos enfatizado que el `flat` botón. Suele utilizarse como botón secundario en cuadros de diálogo y ventanas modales.
 
-`flat-action`: Generalmente se usa como un enlace a otra página o recurso externo.
+`flat-action`: Suele utilizarse como enlace a otra página o recurso externo.
 
-También tiene variaciones semánticas que se pueden usar donde se necesita semántica adicional: `outlined-info`, `outlined-success`, `outlined-warning` y `outlined-danger`.
+También tiene variaciones semánticas que se pueden usar cuando se necesita una semántica adicional: `outlined-info`, , `outlined-success` `outlined-warning`, y. `outlined-danger`
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    code={`
+<Button view="flat" size="l">Flat</Button>
+<Button view="flat-secondary" size="l">Flat Secondary</Button>
+<Button view="flat-action" size="l">Flat Action</Button>
+<Button view="flat-info" size="l">Flat Info</Button>
+<Button view="flat-success" size="l">Flat Success</Button>
+<Button view="flat-warning" size="l">Flat Warning</Button>
+<Button view="flat-danger" size="l">Flat Danger</Button>
+<Button view="flat-utility" size="l">Flat Utility</Button>
+`}
+>
+    <UIKit.Button view="flat" size="l">Flat</UIKit.Button>
+    <UIKit.Button view="flat-action" size="l">Flat Action</UIKit.Button>
+    <UIKit.Button view="flat-info" size="l">Flat Info</UIKit.Button>
+    <UIKit.Button view="flat-success" size="l">Flat Success</UIKit.Button>
+    <UIKit.Button view="flat-warning" size="l">Flat Warning</UIKit.Button>
+    <UIKit.Button view="flat-danger" size="l">Flat Danger</UIKit.Button>
+    <UIKit.Button view="flat-utility" size="l">Flat Utility</UIKit.Button>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -83,7 +146,24 @@ También tiene variaciones semánticas que se pueden usar donde se necesita sem�
 
 ### Contraste
 
-Los botones `normal-contrast`, `outline-contrast` y `flat-contrast` resaltan acciones contra fondos complejos, por ejemplo, en un banner o contra un fondo inverso.
+Los `flat-contrast` botones `normal-contrast` `outline-contrast`, y resaltan las acciones sobre un fondo complejo, por ejemplo, en un banner o sobre un fondo inverso.
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    background='rgb(68, 38, 204)'
+    code={`
+<Button view="normal-contrast" size="l">Normal Contrast</Button>
+<Button view="outlined-contrast" size="l">Outlined Contrast</Button>
+<Button view="flat-contrast" size="l">Flat Contrast</Button>
+`}
+>
+    <UIKit.Button view="normal-contrast" size="l">Normal Contrast</UIKit.Button>
+    <UIKit.Button view="outlined-contrast" size="l">Outlined Contrast</UIKit.Button>
+    <UIKit.Button view="flat-contrast" size="l">Flat Contrast</UIKit.Button>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -97,7 +177,62 @@ Los botones `normal-contrast`, `outline-contrast` y `flat-contrast` resaltan acc
 
 ## Iconos
 
-Para agregar un icono a un `Button`, use el componente [`Icon`](../Icon), que es un envoltorio especial para SVGs.
+Para añadir un icono a un `Button`, utilice el [`Icon`](../Icon) componente, que es un contenedor especial para SVG.
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    code={`
+<Button view="outlined" size="l">
+    <Icon data={Gear} size={18} />
+    Start
+</Button>
+<Button view="outlined" size="l">
+    End
+    <Icon data={Gear} size={18} />
+</Button>
+<Button view="outlined" size="l">
+    <Icon data={Gear} size={18} />
+    Both
+    <Icon data={Gear} size={18} />
+</Button>
+<Button view="outlined" size="l">
+    <Icon data={Gear} size={18} />
+</Button>
+`}
+>
+    <UIKit.Button view="outlined" size="l">
+        <UIKit.Icon data={() => (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M7.199 2H8.8a.2.2 0 0 1 .2.2c0 1.808 1.958 2.939 3.524 2.034a.199.199 0 0 1 .271.073l.802 1.388a.199.199 0 0 1-.073.272c-1.566.904-1.566 3.164 0 4.069a.199.199 0 0 1 .073.271l-.802 1.388a.199.199 0 0 1-.271.073C10.958 10.863 9 11.993 9 13.8a.2.2 0 0 1-.199.2H7.2a.199.199 0 0 1-.2-.2c0-1.808-1.958-2.938-3.524-2.034a.199.199 0 0 1-.272-.073l-.8-1.388a.199.199 0 0 1 .072-.271c1.566-.905 1.566-3.165 0-4.07a.199.199 0 0 1-.073-.271l.801-1.388a.199.199 0 0 1 .272-.073C5.042 5.138 7 4.007 7 2.2c0-.11.089-.199.199-.199ZM5.5 2.2c0-.94.76-1.7 1.699-1.7H8.8c.94 0 1.7.76 1.7 1.7a.85.85 0 0 0 1.274.735 1.699 1.699 0 0 1 2.32.622l.802 1.388c.469.813.19 1.851-.622 2.32a.85.85 0 0 0 0 1.472 1.7 1.7 0 0 1 .622 2.32l-.802 1.388a1.699 1.699 0 0 1-2.32.622.85.85 0 0 0-1.274.735c0 .939-.76 1.7-1.699 1.7H7.2a1.7 1.7 0 0 1-1.699-1.7.85.85 0 0 0-1.274-.735 1.698 1.698 0 0 1-2.32-.622l-.802-1.388a1.699 1.699 0 0 1 .622-2.32.85.85 0 0 0 0-1.471 1.699 1.699 0 0 1-.622-2.321l.801-1.388a1.699 1.699 0 0 1 2.32-.622A.85.85 0 0 0 5.5 2.2Zm4 5.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clipRule="evenodd"></path></svg>
+        )} size={18} />
+        Start
+    </UIKit.Button>
+    <UIKit.Button view="outlined" size="l">
+        End
+        <UIKit.Icon data={() => (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M7.199 2H8.8a.2.2 0 0 1 .2.2c0 1.808 1.958 2.939 3.524 2.034a.199.199 0 0 1 .271.073l.802 1.388a.199.199 0 0 1-.073.272c-1.566.904-1.566 3.164 0 4.069a.199.199 0 0 1 .073.271l-.802 1.388a.199.199 0 0 1-.271.073C10.958 10.863 9 11.993 9 13.8a.2.2 0 0 1-.199.2H7.2a.199.199 0 0 1-.2-.2c0-1.808-1.958-2.938-3.524-2.034a.199.199 0 0 1-.272-.073l-.8-1.388a.199.199 0 0 1 .072-.271c1.566-.905 1.566-3.165 0-4.07a.199.199 0 0 1-.073-.271l.801-1.388a.199.199 0 0 1 .272-.073C5.042 5.138 7 4.007 7 2.2c0-.11.089-.199.199-.199ZM5.5 2.2c0-.94.76-1.7 1.699-1.7H8.8c.94 0 1.7.76 1.7 1.7a.85.85 0 0 0 1.274.735 1.699 1.699 0 0 1 2.32.622l.802 1.388c.469.813.19 1.851-.622 2.32a.85.85 0 0 0 0 1.472 1.7 1.7 0 0 1 .622 2.32l-.802 1.388a1.699 1.699 0 0 1-2.32.622.85.85 0 0 0-1.274.735c0 .939-.76 1.7-1.699 1.7H7.2a1.7 1.7 0 0 1-1.699-1.7.85.85 0 0 0-1.274-.735 1.698 1.698 0 0 1-2.32-.622l-.802-1.388a1.699 1.699 0 0 1 .622-2.32.85.85 0 0 0 0-1.471 1.699 1.699 0 0 1-.622-2.321l.801-1.388a1.699 1.699 0 0 1 2.32-.622A.85.85 0 0 0 5.5 2.2Zm4 5.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clipRule="evenodd"></path></svg>
+        )} size={18} />
+    </UIKit.Button>
+    <UIKit.Button view="outlined" size="l">
+        <UIKit.Icon data={() => (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M7.199 2H8.8a.2.2 0 0 1 .2.2c0 1.808 1.958 2.939 3.524 2.034a.199.199 0 0 1 .271.073l.802 1.388a.199.199 0 0 1-.073.272c-1.566.904-1.566 3.164 0 4.069a.199.199 0 0 1 .073.271l-.802 1.388a.199.199 0 0 1-.271.073C10.958 10.863 9 11.993 9 13.8a.2.2 0 0 1-.199.2H7.2a.199.199 0 0 1-.2-.2c0-1.808-1.958-2.938-3.524-2.034a.199.199 0 0 1-.272-.073l-.8-1.388a.199.199 0 0 1 .072-.271c1.566-.905 1.566-3.165 0-4.07a.199.199 0 0 1-.073-.271l.801-1.388a.199.199 0 0 1 .272-.073C5.042 5.138 7 4.007 7 2.2c0-.11.089-.199.199-.199ZM5.5 2.2c0-.94.76-1.7 1.699-1.7H8.8c.94 0 1.7.76 1.7 1.7a.85.85 0 0 0 1.274.735 1.699 1.699 0 0 1 2.32.622l.802 1.388c.469.813.19 1.851-.622 2.32a.85.85 0 0 0 0 1.472 1.7 1.7 0 0 1 .622 2.32l-.802 1.388a1.699 1.699 0 0 1-2.32.622.85.85 0 0 0-1.274.735c0 .939-.76 1.7-1.699 1.7H7.2a1.7 1.7 0 0 1-1.699-1.7.85.85 0 0 0-1.274-.735 1.698 1.698 0 0 1-2.32-.622l-.802-1.388a1.699 1.699 0 0 1 .622-2.32.85.85 0 0 0 0-1.471 1.699 1.699 0 0 1-.622-2.321l.801-1.388a1.699 1.699 0 0 1 2.32-.622A.85.85 0 0 0 5.5 2.2Zm4 5.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clipRule="evenodd"></path></svg>
+        )} size={18} />
+        Both
+        <UIKit.Icon data={() => (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M7.199 2H8.8a.2.2 0 0 1 .2.2c0 1.808 1.958 2.939 3.524 2.034a.199.199 0 0 1 .271.073l.802 1.388a.199.199 0 0 1-.073.272c-1.566.904-1.566 3.164 0 4.069a.199.199 0 0 1 .073.271l-.802 1.388a.199.199 0 0 1-.271.073C10.958 10.863 9 11.993 9 13.8a.2.2 0 0 1-.199.2H7.2a.199.199 0 0 1-.2-.2c0-1.808-1.958-2.938-3.524-2.034a.199.199 0 0 1-.272-.073l-.8-1.388a.199.199 0 0 1 .072-.271c1.566-.905 1.566-3.165 0-4.07a.199.199 0 0 1-.073-.271l.801-1.388a.199.199 0 0 1 .272-.073C5.042 5.138 7 4.007 7 2.2c0-.11.089-.199.199-.199ZM5.5 2.2c0-.94.76-1.7 1.699-1.7H8.8c.94 0 1.7.76 1.7 1.7a.85.85 0 0 0 1.274.735 1.699 1.699 0 0 1 2.32.622l.802 1.388c.469.813.19 1.851-.622 2.32a.85.85 0 0 0 0 1.472 1.7 1.7 0 0 1 .622 2.32l-.802 1.388a1.699 1.699 0 0 1-2.32.622.85.85 0 0 0-1.274.735c0 .939-.76 1.7-1.699 1.7H7.2a1.7 1.7 0 0 1-1.699-1.7.85.85 0 0 0-1.274-.735 1.698 1.698 0 0 1-2.32-.622l-.802-1.388a1.699 1.699 0 0 1 .622-2.32.85.85 0 0 0 0-1.471 1.699 1.699 0 0 1-.622-2.321l.801-1.388a1.699 1.699 0 0 1 2.32-.622A.85.85 0 0 0 5.5 2.2Zm4 5.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clipRule="evenodd"></path></svg>
+        )} size={18} />
+    </UIKit.Button>
+    <div style={{display: 'flex', gap: '16px', alignItems: 'center'}}>
+        <span>No text:</span>
+        <UIKit.Button view="outlined" size="l">
+            <UIKit.Icon data={() => (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16"><path fill="currentColor" fillRule="evenodd" d="M7.199 2H8.8a.2.2 0 0 1 .2.2c0 1.808 1.958 2.939 3.524 2.034a.199.199 0 0 1 .271.073l.802 1.388a.199.199 0 0 1-.073.272c-1.566.904-1.566 3.164 0 4.069a.199.199 0 0 1 .073.271l-.802 1.388a.199.199 0 0 1-.271.073C10.958 10.863 9 11.993 9 13.8a.2.2 0 0 1-.199.2H7.2a.199.199 0 0 1-.2-.2c0-1.808-1.958-2.938-3.524-2.034a.199.199 0 0 1-.272-.073l-.8-1.388a.199.199 0 0 1 .072-.271c1.566-.905 1.566-3.165 0-4.07a.199.199 0 0 1-.073-.271l.801-1.388a.199.199 0 0 1 .272-.073C5.042 5.138 7 4.007 7 2.2c0-.11.089-.199.199-.199ZM5.5 2.2c0-.94.76-1.7 1.699-1.7H8.8c.94 0 1.7.76 1.7 1.7a.85.85 0 0 0 1.274.735 1.699 1.699 0 0 1 2.32.622l.802 1.388c.469.813.19 1.851-.622 2.32a.85.85 0 0 0 0 1.472 1.7 1.7 0 0 1 .622 2.32l-.802 1.388a1.699 1.699 0 0 1-2.32.622.85.85 0 0 0-1.274.735c0 .939-.76 1.7-1.699 1.7H7.2a1.7 1.7 0 0 1-1.699-1.7.85.85 0 0 0-1.274-.735 1.698 1.698 0 0 1-2.32-.622l-.802-1.388a1.699 1.699 0 0 1 .622-2.32.85.85 0 0 0 0-1.471 1.699 1.699 0 0 1-.622-2.321l.801-1.388a1.699 1.699 0 0 1 2.32-.622A.85.85 0 0 0 5.5 2.2Zm4 5.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" clipRule="evenodd"></path></svg>
+        )} size={18} />
+        </UIKit.Button>
+    </div>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -125,13 +260,29 @@ Para agregar un icono a un `Button`, use el componente [`Icon`](../Icon), que es
 
 ## Estados
 
-Un `Button` puede tener diferentes estados:
+A `Button` puede tener diferentes estados:
 
-`disabled`: Cuando el botón no está disponible por alguna razón.
+`disabled`: Cuando el botón no está disponible por algún motivo.
 
-`loading`: Cuando algunos procesos asíncronos están ejecutándose en segundo plano.
+`loading`: Cuando algunos procesos asincrónicos se ejecutan en segundo plano.
 
-`selected`: Cuando el usuario puede **Activar** y **Desactivar** el botón.
+`selected`: Cuando el usuario puede **activar** y **desactivar** el botón.
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    code={`
+<Button size="l" disabled>Disabled</Button>
+<Button size="l" loading>Loading</Button>
+<Button size="l" selected>Selected</Button>
+`}
+>
+    <UIKit.Button size="l" disabled>Disabled</UIKit.Button>
+    <UIKit.Button size="l" loading>Loading</UIKit.Button>
+    <UIKit.Button size="l" selected>Selected</UIKit.Button>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -145,7 +296,27 @@ Un `Button` puede tener diferentes estados:
 
 ## Tamaño
 
-Use la propiedad `size` para gestionar el tamaño del `Button`. El tamaño predeterminado es `m`.
+Usa la `size` propiedad para administrar el `Button` tamaño. El tamaño predeterminado es `m`.
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    code={`
+<Button size="xs">XS Size</Button>
+<Button size="s">S Size</Button>
+<Button size="m">M Size</Button>
+<Button size="l">L Size</Button>
+<Button size="xl">XL Size</Button>
+`}
+>
+    <UIKit.Button size="xs">XS Size</UIKit.Button>
+    <UIKit.Button size="s">S Size</UIKit.Button>
+    <UIKit.Button size="m">M Size</UIKit.Button>
+    <UIKit.Button size="l">L Size</UIKit.Button>
+    <UIKit.Button size="xl">XL Size</UIKit.Button>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -159,19 +330,99 @@ Use la propiedad `size` para gestionar el tamaño del `Button`. El tamaño prede
 
 <!--/GITHUB_BLOCK-->
 
-## Ancho
+## Anchura
 
-Use la propiedad `width` para gestionar la forma en que el `Button` se comporta dentro del contenedor:
+Usa la `width` propiedad para administrar la forma en que `Button` se comporta dentro del contenedor:
 
-`auto`: Limita el ancho máximo del `Button` ocultando el contenido que desborda con puntos suspensivos.
+`auto`: Limita el ancho máximo del `Button` ocultando el contenido desbordante con puntos suspensivos.
 
-`max`: Ajusta el ancho del `Button` al ancho del contenedor padre, también ocultando el contenido que desborda con puntos suspensivos.
+`max`: Hace coincidir el `Button` ancho con el ancho del contenedor principal y también oculta el contenido desbordante con puntos suspensivos.
 
-## Pin
+<!--LANDING_BLOCK
 
-La propiedad `pin` le permite gestionar la forma de los bordes _inicio_ y _fin_ y generalmente se usa para combinar múltiples botones en una sola unidad.
-El valor de la propiedad `pin` consiste en los nombres de estilo de _inicio_ y _fin_ separados por un guión, por ejemplo, `round-brick`.
-Los estilos de borde son: `round` (predeterminado), `circle`, `brick` y `clear`.
+<ExampleBlock
+    code={`
+<Button>Default</Button>
+<Button width="auto">Auto</Button>
+<Button width="max">Max</Button>
+`}
+>
+    <div style={{width: 100, border: '2px dashed gray'}}>
+        <h4 style={{textAlign: 'center'}}>Default</h4>
+        <p>
+            <UIKit.Button>Text</UIKit.Button>
+        </p>
+        <p>
+            <UIKit.Button>Very Long Text</UIKit.Button>
+        </p>
+    </div>
+    <div style={{width: 100, border: '2px dashed gray'}}>
+        <h4 style={{textAlign: 'center'}}>Auto</h4>
+        <p>
+            <UIKit.Button width="auto">Text</UIKit.Button>
+        </p>
+        <p>
+            <UIKit.Button width="auto">Very Long Text</UIKit.Button>
+        </p>
+    </div>
+    <div style={{width: 100, border: '2px dashed gray'}}>
+        <h4 style={{textAlign: 'center'}}>Max</h4>
+        <p>
+            <UIKit.Button width="max">Text</UIKit.Button>
+        </p>
+        <p>
+            <UIKit.Button width="max">Very Long Text</UIKit.Button>
+        </p>
+    </div>
+</ExampleBlock>
+
+LANDING_BLOCK-->
+
+## Alfiler
+
+La `pin` propiedad permite gestionar la forma de los _bordes_ inicial _y_ final y, por lo general, se utiliza para combinar varios botones en una sola unidad.
+El valor de la `pin` propiedad consiste en los nombres de _estilo_ inicial _y_ final separados por un guión, p. ej., `round-brick`.
+Los estilos de arista son: `round` (predeterminado) `circle` `brick`, y `clear`.
+
+<!--LANDING_BLOCK
+
+<ExampleBlock
+    code={`
+<div>
+    <Button view="action" size="l" pin="round-clear">Create</Button>
+    <Button view="action" size="l" pin="brick-round">...</Button>
+</div>
+<div>
+    <Button view="normal" size="l" pin="circle-clear">Start</Button>
+    <Button view="normal" size="l" pin="brick-brick" selected>Center</Button>
+    <Button view="normal" size="l" pin="clear-circle">End</Button>
+</div>
+<div>
+    <Button view="outlined" pin="brick-clear">1</Button>
+    <Button view="outlined" pin="clear-clear">2</Button>
+    <Button view="outlined" pin="clear-clear">3</Button>
+    <Button view="outlined" pin="clear-brick">4</Button>
+</div>
+`}
+>
+    <div>
+        <UIKit.Button view="action" size="l" pin="round-clear">Create</UIKit.Button>
+        <UIKit.Button view="action" size="l" pin="brick-round">...</UIKit.Button>
+    </div>
+    <div>
+        <UIKit.Button view="normal" size="l" pin="circle-clear">Start</UIKit.Button>
+        <UIKit.Button view="normal" size="l" pin="brick-brick" selected>Center</UIKit.Button>
+        <UIKit.Button view="normal" size="l" pin="clear-circle">End</UIKit.Button>
+    </div>
+    <div>
+        <UIKit.Button view="outlined" pin="brick-clear">1</UIKit.Button>
+        <UIKit.Button view="outlined" pin="clear-clear">2</UIKit.Button>
+        <UIKit.Button view="outlined" pin="clear-clear">3</UIKit.Button>
+        <UIKit.Button view="outlined" pin="clear-brick">4</UIKit.Button>
+    </div>
+</ExampleBlock>
+
+LANDING_BLOCK-->
 
 <!--GITHUB_BLOCK-->
 
@@ -197,40 +448,40 @@ Los estilos de borde son: `round` (predeterminado), `circle`, `brick` y `clear`.
 
 ## Propiedades
 
-`Button` acepta cualquier propiedad válida de los elementos `button` o `a` además de estas:
+`Button` acepta cualquier accesorio válido `button` o de `a` elemento además de estos:
 
-| Nombre    | Descripción                                                                  |              Tipo               | Predeterminado  |
-| :-------- | :--------------------------------------------------------------------------- | :-----------------------------: | :-------------: |
-| children  | Contenido del `Button`. Puede usar tanto texto como el componente `<Icon/>`. |        `React.ReactNode`        |                 |
-| component | Anula el componente raíz                                                     |       `React.ElementType`       |                 |
-| disabled  | Activa o desactiva el estado `disabled`                                      |            `boolean`            |     `false`     |
-| href      | Pase esto para hacer que el componente raíz sea un enlace                    |            `string`             |                 |
-| loading   | Activa o desactiva el estado `loading`                                       |            `boolean`            |     `false`     |
-| pin       | Establece el estilo de borde del `Button`                                    |            `string`             | `"round-round"` |
-| qa        | Atributo HTML `data-qa`, usado para pruebas                                  |            `string`             |                 |
-| selected  | Activa o desactiva el estado `selected`                                      |            `boolean`            |                 |
-| size      | Establece el tamaño del `Button`                                             | `"xs"` `"s"` `"m"` `"l"` `"xl"` |      `"m"`      |
-| view      | Establece la apariencia del `Button`                                         |          `ButtonView`           |   `"normal"`    |
-| width     | Controla cómo el `Button` usa el espacio del padre                           |        `"auto"` `"max"`         |                 |
+| Nombre       | Descripción                                                                 |        Tipo         | Predeterminado  |
+| :----------- | :-------------------------------------------------------------------------- | :-----------------: | :-------------: |
+| niños        | `Button` contenido. Puede usar tanto el texto como el `<Icon/>` componente. |  `React.ReactNode`  |                 |
+| componente   | Anula el componente raíz                                                    | `React.ElementType` |                 |
+| inhabilitado | Alterna el estado `disabled`                                                |      `boolean`      |     `false`     |
+| href         | Pase esto para convertir el componente raíz en un enlace                    |      `string`       |                 |
+| cargando     | Alterna el estado `loading`                                                 |      `boolean`      |     `false`     |
+| alfiler      | Establece el estilo `Button` del borde                                      |      `string`       | `"round-round"` |
+| qa           | `data-qa` Atributo HTML, usado para realizar pruebas                        |      `string`       |                 |
+| seleccionado | Alterna el estado `selected`                                                |      `boolean`      |                 |
+| tamaño       | Establece el`Button` tamaño                                                 |    `"xs"` `"xl"`    |      `"m"`      |
+| vista        | Establece la `Button` apariencia                                            |    `ButtonView`     |   `"normal"`    |
+| anchura      | Controla cómo `Button` usa el espacio de los padres                         |  `"auto"` `"max"`   |                 |
 
 ## API CSS
 
-| Nombre                              | Descripción                            |
-| :---------------------------------- | :------------------------------------- |
-| `--g-button-text-color`             | Color del texto                        |
-| `--g-button-text-color-hover`       | Color del texto al pasar el cursor     |
-| `--g-button-background-color`       | Color de fondo                         |
-| `--g-button-background-color-hover` | Color de fondo al pasar el cursor      |
-| `--g-button-border-width`           | Ancho del borde                        |
-| `--g-button-border-color`           | Color del borde                        |
-| `--g-button-border-style`           | Estilo del borde                       |
-| `--g-button-focus-outline-width`    | Ancho del contorno de enfoque          |
-| `--g-button-focus-outline-color`    | Color del contorno de enfoque          |
-| `--g-button-focus-outline-style`    | Estilo del contorno de enfoque         |
-| `--g-button-focus-outline-offset`   | Desplazamiento del contorno de enfoque |
-| `--g-button-height`                 | Altura (altura de línea)               |
-| `--g-button-padding`                | Relleno lateral                        |
-| `--g-button-border-radius`          | Radio del borde                        |
-| `--g-button-font-size`              | Tamaño de fuente del texto             |
-| `--g-button-icon-space`             | Espacio disponible para el icono       |
-| `--g-button-icon-offset`            | Desplazamiento del icono               |
+| Nombre                              | Descripción                       |
+| :---------------------------------- | :-------------------------------- |
+| `--g-button-text-color`             | Color del texto                   |
+| `--g-button-text-color-hover`       | Color del texto al pasar el ratón |
+| `--g-button-background-color`       | Color de fondo                    |
+| `--g-button-background-color-hover` | Color de fondo al pasar el ratón  |
+| `--g-button-border-width`           | Ancho del borde                   |
+| `--g-button-border-color`           | Color del borde                   |
+| `--g-button-border-style`           | Estilo fronterizo                 |
+| `--g-button-focus-outline-width`    | Anchura del contorno del foco     |
+| `--g-button-focus-outline-color`    | Color del contorno del foco       |
+| `--g-button-focus-outline-style`    | Estilo de esquema de enfoque      |
+| `--g-button-focus-outline-offset`   | Desfase del contorno del enfoque  |
+| `--g-button-height`                 | Altura (altura de línea)          |
+| `--g-button-padding`                | Acolchados laterales              |
+| `--g-button-border-radius`          | Radio de borde                    |
+| `--g-button-font-size`              | Tamaño de fuente del texto        |
+| `--g-button-icon-space`             | Espacio disponible para iconos    |
+| `--g-button-icon-offset`            | Compensación de iconos            |

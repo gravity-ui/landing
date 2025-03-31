@@ -2,27 +2,27 @@
 
 ## Utilidades I18N
 
-Las utilidades en el paquete I18N están diseñadas para la internacionalización de los servicios de Gravity UI.
+Las utilidades del paquete I18N están diseñadas para la internacionalización de los servicios de Gravity UI.
 
-### Instalación
+### Instalar
 
 `npm install --save @gravity-ui/i18n`
 
 ### API
 
-#### constructor(options)
+#### constructor (opciones)
 
-Acepta un objeto `options` con un `logger` opcional que se utilizaría para registrar advertencias de la biblioteca.
+Acepta `options` objetos con opciones `logger` que se usarían para registrar las advertencias de la biblioteca.
 
-##### logger
+##### leñador
 
-El logger debe tener un método explícito `log` con la siguiente firma:
+El registrador debe tener un `log` método explícito con la siguiente firma:
 
-- `message` - cadena de mensaje que se registrará
-- `options` - objeto de opciones de registro:
-  - `level` - nivel para el mensaje de registro, siempre `'info'`
-  - `logger` - dónde registrar los mensajes de la biblioteca
-  - `extra` - objeto de opciones adicionales, con un único `type` string, que siempre es `i18n`
+- `message`- cadena de mensaje que se registraría
+- `options`- objeto de las opciones de registro:
+  - `level`- nivel de registro de mensajes, siempre `'info'`
+  - `logger`- dónde registrar los mensajes de la biblioteca
+  - `extra`- objeto de opciones adicional, con una sola `type` cadena, que es siempre `i18n`
 
 ### Ejemplos de uso
 
@@ -64,22 +64,22 @@ console.log(i18n.i18n('wizard', 'label_error-widget-no-access')); // -> "Нет 
 i18n.setLang('en');
 console.log(i18n.i18n('wizard', 'label_error-widget-no-access')); // -> "No access to the chart
 
-// Keyset permite una recuperación de traducciones más simple
+// Keyset allows for a simpler translations retrieval
 const keyset = i18n.keyset('wizard');
 console.log(keyset('label_error-widget-no-access')); // -> "No access to the chart"
 
 i18n.setLang('ru');
 console.log(keyset('label_error-widget-no-access')); // -> "Нет доступа к чарту"
 
-// Comprobando si un keyset tiene una clave
+// Checking if keyset has a key
 if (i18n.has('wizard', 'label_error-widget-no-access')) {
   i18n.i18n('wizard', 'label_error-widget-no-access');
 }
 ```
 
-### Plantillas
+### Creación de plantillas
 
-La biblioteca admite plantillas. Las variables de plantilla están encerradas entre dobles llaves, y los valores se pasan a la función i18n como un diccionario de clave-valor:
+La biblioteca admite la creación de plantillas. Las variables de plantilla se incluyen entre corchetes dobles y los valores se pasan a la función i18n como un diccionario clave-valor:
 
 #### `keysets.json`
 
@@ -97,18 +97,18 @@ i18n('label_template', {inputValue: 'something', folderName: 'somewhere'}); // =
 
 ### Pluralización
 
-La pluralización se puede utilizar para facilitar la localización de claves que dependen de valores numéricos. La biblioteca actual utiliza [Reglas de plurales CLDR](https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html) a través de [API Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules).
+La pluralización se puede utilizar para localizar fácilmente las claves que dependen de valores numéricos. La biblioteca actual usa [CLDR Plural Rules a través de la API [Intl.PluralRules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules)](https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html).
 
-Es posible que necesites un [polyfill](https://github.com/eemeli/intl-pluralrules) para la [API Intl.Plural Rules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) si no está disponible en el navegador.
+Es posible que tengas que [rellenar de](https://github.com/eemeli/intl-pluralrules) forma múltiple la [API Intl.Plural Rules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) si no está disponible en el navegador.
 
-Hay 6 formas plurales (ver [resolvedOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules/resolvedOptions)):
+Hay 6 formas plurales (consulte [ResolvedOptions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules/resolvedOptions)):
 
-- zero (también se usará cuando count = 0 incluso si la forma no es compatible con el idioma)
-- one (singular)
-- two (dual)
-- few (paucal)
-- many (también se usa para fracciones si tienen una clase separada)
-- other (forma requerida para todos los idiomas — forma plural general — también se usa si el idioma solo tiene una forma)
+- cero (también se usará cuando count = 0 incluso si el formulario no es compatible con el idioma)
+- uno (singular)
+- dos (doble)
+- pocos (paucal)
+- muchos (también se usan para fracciones si tienen una clase separada)
+- otro (formulario obligatorio para todos los idiomas; forma plural general; también se usa si el idioma solo tiene una forma única)
 
 #### Ejemplo de `keysets.json` con clave plural
 
@@ -134,7 +134,7 @@ i18n('label_seconds', {count: 0}); // => No time left
 
 #### [Obsoleto] Formato antiguo de plurales
 
-El formato antiguo se eliminará en v2.
+El formato anterior se eliminará en la versión 2.
 
 ```json
 {
@@ -147,7 +147,7 @@ El formato antiguo se eliminará en v2.
 }
 ```
 
-Una clave pluralizada contiene 4 valores, cada uno correspondiente a un valor de enumeración `PluralForm`. Los valores de enumeración son: `One`, `Few`, `Many` y `None`, respectivamente. El nombre de la variable de plantilla para la pluralización es `count`.
+Una clave pluralizada contiene 4 valores, cada uno |correspondiente a un valor `PluralForm` de enumeración. Los valores de enumeración son: `One`, `Few` `Many`, y `None`, respectivamente. El nombre de la variable de plantilla para la pluralización es `count`.
 
 #### [Obsoleto] Pluralización personalizada
 
@@ -155,7 +155,7 @@ Dado que cada idioma tiene su propia forma de pluralización, la biblioteca prop
 
 La función de configuración acepta un objeto con idiomas como claves y funciones de pluralización como valores.
 
-Una función de pluralización acepta un número y la enumeración `PluralForm`, y se espera que devuelva uno de los valores de enumeración dependiendo del número proporcionado.
+Una función de pluralización acepta un número y la `PluralForm` enumeración, y se espera que devuelva uno de los valores de enumeración según el número proporcionado.
 
 ```js
 const {I18N} = require('@gravity-ui/i18n');
@@ -171,20 +171,20 @@ i18n.configurePluralization({
 });
 ```
 
-#### [Obsoleto] Conjuntos de reglas de pluralización proporcionados
+#### [Obsoleto] Se proporcionaron conjuntos de reglas de pluralización
 
-Los dos idiomas compatibles de forma predeterminada son inglés y ruso.
+Los dos idiomas disponibles de fábrica son el inglés y el ruso.
 
 ##### Inglés
 
 Clave de idioma: `en`.
 
 - `One` corresponde a 1 y -1.
-- `Few` no se utiliza.
+- `Few` no se usa.
 - `Many` corresponde a cualquier otro número, excepto 0.
 - `None` corresponde a 0.
 
-##### Ruso
+##### rusa
 
 Clave de idioma: `ru`.
 
@@ -195,9 +195,9 @@ Clave de idioma: `ru`.
 
 ##### Predeterminado
 
-El conjunto de reglas en inglés se utiliza por defecto, para cualquier idioma sin una función de pluralización configurada.
+El conjunto de reglas en inglés se usa de forma predeterminada para cualquier idioma sin una función de pluralización configurada.
 
-### Anidamiento
+### Anidación
 
 <!--GITHUB_BLOCK-->
 <span style="color:red">
@@ -207,14 +207,14 @@ El conjunto de reglas en inglés se utiliza por defecto, para cualquier idioma s
 <span style={{color: 'red'}}>
 LANDING_BLOCK-->
 
-La profundidad máxima de anidamiento está limitada - solo 1 nivel (para glosario)
+Profundidad máxima de anidación limitada: solo 1 nivel (para glosario)
 </span>
 
-El anidamiento te permite hacer referencia a otras claves en una traducción. Puede ser útil para construir términos de glosario.
+El anidamiento permite hacer referencia a otras claves en una traducción. Podría ser útil para crear términos de glosario.
 
 #### Básico
 
-claves
+llaves
 
 ```json
 {
@@ -223,13 +223,13 @@ claves
 }
 ```
 
-ejemplo
+muestra
 
 ```ts
 i18n('nesting1'); // -> "1 2"
 ```
 
-Puedes hacer referencia a claves de otro keyset anteponiendo el nombre del keyset:
+Puede hacer referencia a claves de otro conjunto de claves anteponiendo el nombre del conjunto de claves:
 
 ```json
 // global/en.json
@@ -243,13 +243,13 @@ Puedes hacer referencia a claves de otro keyset anteponiendo el nombre del keyse
 }
 ```
 
-### Tipado
+### Escribiendo
 
-Para tipar la función `i18nInstance.i18n`, sigue estos pasos:
+Para escribir la `i18nInstance.i18n` función, sigue estos pasos:
 
 #### Preparación
 
-Prepara un archivo JSON de keyset para que el procedimiento de tipado pueda obtener datos. Donde obtienes los keysets, añade la creación de un archivo adicional `data.json`. Para reducir el tamaño del archivo y acelerar el análisis del IDE, puedes reemplazar todos los valores por `'str'`.
+Prepare un archivo de conjunto de claves JSON para que el procedimiento de escritura pueda obtener datos. Desde donde obtenga los conjuntos de claves, añada la creación de un archivo adicional `data.json`. Para reducir el tamaño del archivo y acelerar el análisis del IDE, puede reemplazar todos los valores por `'str'`.
 
 ```ts
 async function createFiles(keysets: Record<Lang, LangKeysets>) {
@@ -261,7 +261,7 @@ async function createFiles(keysets: Record<Lang, LangKeysets>) {
     const hash = getContentHash(content);
     const filePath = path.resolve(DEST_PATH, `${lang}.${hash.slice(0, 8)}.js`);
 
-    // <Nuevas líneas>
+    // <New lines>
     let typesPromise;
 
     if (lang === 'ru') {
@@ -269,7 +269,7 @@ async function createFiles(keysets: Record<Lang, LangKeysets>) {
       Object.keys(keyset).forEach((keysetName) => {
         const keyPhrases = keyset[keysetName];
         Object.keys(keyPhrases).forEach((keyName) => {
-          // ¡mutar objeto!
+          // mutate object!
           keyPhrases[keyName] = 'str';
         });
       });
@@ -277,7 +277,7 @@ async function createFiles(keysets: Record<Lang, LangKeysets>) {
       const JSONForTypes = JSON.stringify(keyset, null, 4);
       typesPromise = writeFile(path.resolve(DEST_PATH, `data.json`), JSONForTypes, 'utf-8');
     }
-    // </Nuevas líneas>
+    // </New lines>
 
     return Promise.all([typesPromise, writeFile(filePath, content, 'utf-8')]);
   });
@@ -288,11 +288,11 @@ async function createFiles(keysets: Record<Lang, LangKeysets>) {
 
 #### Conexión
 
-En tus directorios `ui/utils/i18n` (donde configuras i18n y lo exportas para ser utilizado por todas las interfaces), importa la función de tipado `I18NFn` con tus `Keysets`. Después de que tu i18n haya sido configurado, devuelve la función convertida
+En sus `ui/utils/i18n` directorios (donde configura i18n y lo exporta para que lo utilicen todas las interfaces), importe la función de escritura `I18NFn` con su. `Keysets` Después de configurar su i18n, devuelva la función casted
 
 ```ts
 import {I18NFn} from '@gravity-ui/i18n';
-// ¡Esta debe ser una importación tipada!
+// This must be a typed import!
 import type Keysets from '../../../dist/public/build/i18n/data.json';
 
 const i18nInstance = new I18N();
@@ -303,11 +303,11 @@ export const cui18n = (i18nInstance.i18n as TypedI18n).bind(i18nInstance, 'commo
 export const i18n = i18nInstance.i18n.bind(i18nInstance) as TypedI18n;
 ```
 
-#### Problemas adicionales
+#### Cuestiones adicionales
 
-**Lógica de tipado**
+**Lógica de escritura**
 
-Hay varios casos de uso de tipado:
+Hay varios casos de uso de escritura:
 
 - Llamar a una función con claves pasadas como literales de cadena
 
@@ -317,7 +317,7 @@ i18n('dcommon', 'label_dsubnet'); // error: Argument of type '"dcommon"' is not 
 i18n('common', 'label_dsubnet'); // error: Argument of type '"label_dsubnet"' is not assignable to parameter of type ...
 ```
 
-- Llamar a una función, pasándole cadenas que no pueden convertirse en literales (si ts no puede derivar el tipo de cadena, no arroja un error)
+- Llamar a una función, pasarle cadenas que no se pueden convertir en literales (si ts no puede derivar el tipo de cadena, no arroja ningún error)
 
 ```ts
 const someUncomputebleString = `label_random-index-${Math.floor(Math.random() * 4)}`;
@@ -328,7 +328,7 @@ for (let i = 0; i < 4; i++) {
 }
 ```
 
-- Llamar a una función, pasándole cadenas que pueden convertirse en literales
+- Llamar a una función, pasarle cadenas que se pueden convertir en literales
 
 ```ts
 const labelColors = ['red', 'green', 'yelllow', 'white'] as const;
@@ -342,18 +342,18 @@ for (let i = 0; i < 4; i++) {
 }
 ```
 
-**Por qué no se admite el tipado a través de una clase**
+**Por qué no se admite la escritura a través de una clase**
 
-Esta función puede romper o complicar algunos escenarios de i18n, por lo que se agregó como una extensión funcional. Si resulta efectiva, probablemente la agregaríamos a una clase para evitar convertir funciones exportadas.
+Esta función puede romper o complicar algunos escenarios de i18n, por lo que se agregó como una extensión funcional. Si resulta efectivo, probablemente lo agreguemos a una clase para evitar convertir funciones exportadas.
 
-**Por qué los métodos integrados pueden fallar**
+**Por qué pueden fallar los métodos integrados**
 
-La implementación del recorrido de estructuras anidadas y tipos condicionales utilizando métodos de función integrados tipados es una tarea lo suficientemente compleja. Es por eso que el tipado funciona solo cuando se usa una llamada de función directa y una llamada `bind` hasta el tercer argumento.
+La implementación del recorrido de estructuras anidadas y tipos condicionales mediante métodos de funciones integradas mecanografiados es una tarea bastante compleja. Es por eso que la escritura solo funciona cuando se usa una llamada directa a una función y una `bind` llamada al tercer argumento.
 
-**¿Por qué no puedo generar un archivo ts directamente para convertir también los valores clave?**
+**¿Por qué no puedo generar un archivo ts directamente para escribir también los valores clave?**
 
-Puedes hacerlo pasando el tipo de resultado a I18NFn. Sin embargo, con tamaños de archivo grandes, ts comienza a consumir enormes cantidades de recursos, ralentizando dramáticamente el IDE, pero con el archivo JSON este no es el caso.
+Puede hacerlo pasando el tipo de resultado a I18nfn. Sin embargo, con archivos de gran tamaño, ts comienza a consumir enormes cantidades de recursos, lo que ralentiza drásticamente el IDE, pero con los archivos JSON este no es el caso.
 
-**¿Por qué no se han tipado otros métodos de la clase I18N?**
+**¿Por qué no se han escrito otros métodos de la clase I18N?**
 
-Pueden ser tipados, agradeceremos si ayudas a implementarlo. El caso es que otros métodos se utilizan en el 1% de los casos.
+Se pueden escribir, te agradeceremos que nos ayudes a implementarlo. El caso es que se utilizan otros métodos en el 1% de los casos.
