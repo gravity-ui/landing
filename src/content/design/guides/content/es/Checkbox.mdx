@@ -1,67 +1,67 @@
-Una casilla de verificación es un elemento de interfaz de usuario que permite a los usuarios seleccionar una o más opciones de las proporcionadas.
+Una casilla de verificación es un elemento de la interfaz de usuario que permite a los usuarios seleccionar una o más opciones de las que se proporcionan.
 
 ## Casos de uso
 
-![Casos](/static/images/design/Checkbox/Checkbox1.png)
+![Cases](/static/images/design/Checkbox/Checkbox1.png)
 
-Cuando se activa, la casilla de verificación no desencadena una acción instantáneamente. Los usuarios deben hacer clic en un botón de confirmación (por ejemplo, Guardar, Aplicar, Enviar) para aplicarla. En la mayoría de los casos, la casilla de verificación se utiliza junto con una etiqueta explicativa. Sin embargo, en algunos escenarios, las casillas de verificación pueden usarse sin etiquetas, como en tablas o donde incluir una etiqueta "habilitar" junto a cada casilla de verificación es redundante. Comience su texto con palabras positivas, por ejemplo, use "Habilitar" en lugar de "Deshabilitar", para evitar que el usuario resuelva un rompecabezas lógico.
+Cuando está activada, la casilla de verificación no desencadena una acción al instante. Los usuarios deben hacer clic en un botón de confirmación (por ejemplo, Guardar, Aplicar, Enviar) para aplicarlo. En la mayoría de los casos, la casilla de verificación se utiliza junto con una etiqueta explicativa. Sin embargo, en algunos casos, las casillas de verificación se pueden usar sin etiquetas, como en las tablas o cuando es redundante incluir una etiqueta que diga «habilitar» junto a cada casilla de verificación. Comience el texto con una redacción positiva, por ejemplo, utilice «Activar» en lugar de «Desactivar», para evitar que el usuario resuelva un acertijo lógico.
 
 ## Anatomía
 
-La casilla de verificación consta de:
+La casilla de verificación se compone de:
 
-![Anatomía](/static/images/design/Checkbox/Checkbox2.png)
+![Anatomy](/static/images/design/Checkbox/Checkbox2.png)
 
 1. **Contenedor**: Área rectangular visual que rodea la casilla de verificación. El contenedor indica los límites y activa la casilla de verificación.
-2. **Marca de verificación**: Símbolo que aparece dentro del contenedor cuando el usuario habilita la casilla de verificación. Este símbolo confirma visualmente que el usuario seleccionó la casilla de verificación.
-3. **Etiqueta de texto (opcional)**: Texto colocado a la derecha de la casilla de verificación. La etiqueta de texto explica el significado o propósito de la casilla de verificación.
+2. **Marca de verificación**: Símbolo que aparece en el contenedor cuando el usuario activa la casilla de verificación. Este símbolo confirma visualmente que el usuario ha seleccionado la casilla de verificación.
+3. **Etiqueta de texto (opcional)**: Texto colocado a la derecha de la casilla de verificación. La etiqueta de texto explica el significado o el propósito de la casilla de verificación.
 
-## Tamaños
+## Tallas
 
 El componente de casilla de verificación tiene dos tamaños principales:
 
-![Tamaños](/static/images/design/Checkbox/Checkbox3.png)
+![Sizes](/static/images/design/Checkbox/Checkbox3.png)
 
-**M** es el tamaño predeterminado, con dimensiones estándar adecuadas en la mayoría de los casos. En este tamaño, el contenedor es de 14x14 px y la etiqueta de texto utiliza una fuente de 13 px.
+**M** es el tamaño predeterminado, con dimensiones estándar adecuadas en la mayoría de los casos. En este tamaño, el contenedor mide 14x14 px y la etiqueta de texto usa una fuente de 13 px.
 
-**L** se utiliza cuando la casilla de verificación necesita destacar entre otros elementos de la interfaz o si la interfaz requiere elementos más grandes para un uso más fácil. En este tamaño, el contenedor es de 17x17 px, y la etiqueta de texto utiliza una fuente de 15 px.
+**La L** se usa cuando la casilla de verificación debe destacarse entre otros elementos de la interfaz o si la interfaz requiere elementos más grandes para facilitar su uso. En este tamaño, el contenedor mide 17x17 px y la etiqueta de texto usa una fuente de 15 px.
 
 ## Estados
 
-![Estados](/static/images/design/Checkbox/Checkbox4.png)
+![States](/static/images/design/Checkbox/Checkbox4.png)
 
-**Default** es el estado principal de la casilla de verificación que el usuario puede habilitar o deshabilitar con un clic.
+**El valor predeterminado** es el estado de la casilla de verificación principal que el usuario puede activar o desactivar con un clic.
 
-**Hover** es el estado cuando el usuario mueve el cursor sobre el área de la casilla de verificación (casilla + etiqueta).
+**El cursor** es el estado en el que el usuario mueve el cursor sobre el área de la casilla de verificación (casilla de verificación + etiqueta).
 
-**Disable** es el estado cuando el usuario no puede interactuar con la casilla de verificación por alguna razón.
+**Desactivar** es el estado en el que el usuario no puede interactuar con la casilla de verificación por algún motivo.
 
-**Indeterminate** es el estado del encabezado en un grupo de casillas de verificación cuando se selecciona uno de varios elementos (generalmente ocurre en tablas con selección de múltiples filas).
+**Indeterminado** es el estado del encabezado de un grupo de casillas de verificación cuando se selecciona uno de varios elementos (normalmente ocurre en tablas con una selección de varias filas).
 
 ## Recomendaciones
 
-### Usar
+### Utilice
 
 - **Selección de opciones** si desea que el usuario seleccione una o más opciones de una lista.
 
-- **Habilitación/deshabilitación de funciones** si desea que el usuario habilite o deshabilite ciertas funciones en la interfaz. Por ejemplo, los usuarios pueden habilitar o deshabilitar notificaciones o reproducción automática y otras funciones. En tales casos, las casillas de verificación proporcionan una interacción clara e intuitiva.
+- **Habilitar o deshabilitar funciones** si desea que el usuario habilite o deshabilite ciertas funciones de la interfaz. Por ejemplo, los usuarios pueden activar o desactivar las notificaciones o la reproducción automática y otras funciones. En estos casos, las casillas de verificación proporcionan una interacción clara e intuitiva.
 
-- **Selección múltiple en tablas o listas** si desea que el usuario seleccione varios elementos para operaciones masivas, como eliminación o exportación. Esto simplifica las operaciones de datos y facilita las acciones masivas.
+- **Selección múltiple en tablas o listas** si desea que el usuario seleccione varios elementos para operaciones masivas, como la eliminación o la exportación. Esto simplifica las operaciones de datos y facilita las acciones masivas.
 
-- **Filtrado de contenido o resultados** si desea que el usuario seleccione parámetros para filtrar contenido o resultados de búsqueda.
+- **Filtrado de contenido o resultados** si desea que el usuario seleccione parámetros para filtrar el contenido o los resultados de la búsqueda.
 
 ### Evitar
 
-- **Selección de una sola opción**. Si espera que el usuario seleccione una opción de un conjunto mutuamente excluyente, use botones de radio.
+- **Selección de una sola opción**. Si espera que el usuario seleccione una opción de un conjunto que se excluya mutuamente, utilice los botones de opción.
 
-- **Habilitación/deshabilitación de dos posiciones (acción instantánea)**. Si la opción solo tiene dos estados, habilitado y deshabilitado, y los cambios surten efecto instantáneamente, sin un botón "Aplicar", use interruptores. Los interruptores presentan tales opciones de manera más clara y compacta, y los cambios se aplican inmediatamente después de cambiar.
+- **Activación/desactivación en dos posiciones (acción instantánea).** Si la opción solo tiene dos estados, habilitada y deshabilitada, y los cambios surten efecto al instante, sin el botón «Aplicar», utilice los interruptores. Los conmutadores presentan estas opciones de forma más clara y compacta, y los cambios se aplican inmediatamente después de la conmutación.
 
-- **Selección segmentada**. Si ofrece varias opciones mutuamente excluyentes que los usuarios pueden seleccionar simultáneamente en diferentes categorías, use controles de segmento. Permiten al usuario seleccionar opciones en diferentes segmentos o categorías.
+- **Selección** segmentada. Si ofrece varias opciones que se excluyen mutuamente y que los usuarios pueden seleccionar simultáneamente en diferentes categorías, utilice los controles de segmentos. Permiten al usuario seleccionar opciones en diferentes segmentos o categorías.
 
-- **Selección de numerosas opciones**. Si proporciona una larga lista de opciones de las cuales elegir una sola, use una lista desplegable (select). Esto ahorra espacio en pantalla y facilita la elección de un gran conjunto de opciones.
+- **Selección entre numerosas opciones**. Si proporciona una lista larga de opciones entre las que elegir una sola, utilice una lista desplegable (seleccione). Esto ahorra espacio en la pantalla y facilita la elección entre un amplio conjunto de opciones.
 
-### Escritura de textos
+### Redacción de textos
 
-- Busque la brevedad en las descripciones de texto. Evite frases largas o oraciones complejas.
-- Use verbos activos que indiquen claramente la acción asociada con la elección. Por ejemplo, "Suscribirse al boletín" en lugar de "Suscripción al boletín".
-- Dé a los usuarios una comprensión completa de lo que sucederá cuando seleccionen la casilla de verificación. Por ejemplo, "Recibir notificaciones sobre nuevos artículos" en lugar de "Notificaciones".
+- Esfuércese por la brevedad en las descripciones de los textos. Evite frases largas u oraciones complejas.
+- Usa verbos activos que indiquen claramente la acción asociada a la elección. Por ejemplo, «Suscríbete al boletín» en lugar de «Suscripción al boletín».
+- Brinde a los usuarios una comprensión completa de lo que sucederá cuando seleccionen la casilla de verificación. Por ejemplo, «Recibir notificaciones sobre nuevos artículos» en lugar de «Notificaciones».

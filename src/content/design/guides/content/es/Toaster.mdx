@@ -1,74 +1,74 @@
-Toaster es una pequeña notificación que aparece en la pantalla para proporcionar información importante o una advertencia. Puede utilizarse para notificar al usuario de un evento o acción, como cuando se envía un formulario o se descarga un archivo.
+La tostadora es una pequeña notificación que aparece en la pantalla para proporcionar información importante o una advertencia. Se puede usar para notificar al usuario sobre un evento o una acción, como cuando se envía un formulario o se descarga un archivo.
 
 ### Tipos principales
 
-**Default**
+**Predeterminado**
 
-Se utiliza cuando no hay necesidad de acción inmediata o cuando el mensaje no está relacionado con acciones o eventos específicos.
+Se usa cuando no hay necesidad de una acción inmediata o cuando el mensaje no está relacionado con ninguna acción o evento específico.
 
 ![Default](/static/images/design/Toaster/Default.png)
 
-**Info**
+**Información**
 
-Se utiliza para informar al usuario sobre un proceso, evento o acción. Por ejemplo, en caso de una transferencia de datos exitosa o carga de página.
+Se usa para informar al usuario sobre un proceso, evento o acción. Por ejemplo, en caso de que la transferencia de datos o la carga de la página se realicen correctamente.
 
 ![Info](/static/images/design/Toaster/Info.png)
 
-**Success**
+**Éxito**
 
-Indica que una operación o acción se ha completado con éxito. Por ejemplo, cuando los datos se guardan correctamente o cuando el usuario está autorizado.
+Indica que una operación o acción se ha completado correctamente. Por ejemplo, cuando los datos se guardan correctamente o cuando el usuario está autorizado.
 
 ![Success](/static/images/design/Toaster/Success.png)
 
-**Warning**
+**Advertencia**
 
-Informa al usuario sobre un problema potencial o error. Por ejemplo, si necesitan completar un campo obligatorio en un formulario o si no hay conexión a Internet.
+Informa al usuario sobre un posible problema o error. Por ejemplo, si necesitan rellenar un campo obligatorio en un formulario o si no hay conexión a Internet.
 
 ![Warning](/static/images/design/Toaster/Warning.png)
 
 **Error**
 
-Se utiliza para indicar un error y que se requiere la atención del usuario para solucionarlo. Por ejemplo, si los datos se ingresan incorrectamente o hay un error del servidor. Este estado funciona mejor con un botón de acción que permite corregir un error u obtener más información.
+Se usa para indicar un error y que se requiere la atención del usuario para solucionarlo. Por ejemplo, si los datos se han introducido de forma incorrecta o si hay un error en el servidor. Este estado se combina mejor con un botón de acción que te permita corregir un error u obtener más información.
 
 ![Error](/static/images/design/Toaster/Error.png)
 
 ### Modificaciones
 
-Toast se compone de cinco componentes principales:
+La tostada se compone de cinco componentes principales:
 
 ![Modifications](/static/images/design/Toaster/Modifications.png)
 
-1. Icono de tipo de Toast. Un componente puede usarse con o sin icono. Un icono es un elemento opcional.
+1. Icono de tipo tostada. Un componente se puede usar con o sin un icono. Un icono es un elemento opcional.
 2. El encabezado informa al usuario sobre la acción que se está realizando. Si se incluye la descripción, el uso del encabezado es opcional.
-3. La descripción aclara el título y puede usarse de forma independiente.
-4. Botones. Toast puede tener uno o dos botones; se recomienda que el primer botón se use como botón de acción. Los botones son elementos opcionales.
-5. Icono de salida. El icono de salida es un elemento opcional. El botón de cierre es obligatorio si no hay una duración de ocultamiento establecida en el toast.
+3. La descripción aclara el título y se puede utilizar de forma independiente.
+4. Botones. Toast puede tener uno o dos botones; se recomienda utilizar el primer botón como botón de acción. Los botones son elementos opcionales.
+5. Icono de salida. El icono de salida es un elemento opcional. El botón de cierre es obligatorio si no hay una duración de ocultación establecida en la tostada.
 
 ### Cuándo usar un DLQ
 
-Se recomienda el uso de Toasters en los siguientes escenarios:
+Se recomienda el uso de tostadoras en los siguientes escenarios:
 
-- Al enviar un formulario o realizar una acción, si desea que el usuario vea el progreso. Como un mensaje que indica que los datos se enviaron correctamente o que hubo un error.
-- Cuando no desea interrumpir el flujo de trabajo del usuario o bloquear la pantalla. Los Toasters se muestran en la esquina y no cubren toda la pantalla, lo que permite al usuario seguir utilizando la interfaz.
-- Cuando se requiere más información sobre una acción específica. Los Toasts pueden incluir enlaces a contenido o información adicional que ayudará al usuario a entender lo que sucedió.
+- Al enviar un formulario o realizar una acción, si quieres que el usuario vea el progreso. Por ejemplo, un mensaje que indica que los datos se enviaron correctamente o que hubo un error.
+- Cuando no desea interrumpir el flujo de trabajo del usuario o bloquear la pantalla. Las tostadoras se muestran en la esquina y no cubren toda la pantalla, lo que permite al usuario seguir utilizando la interfaz.
+- Cuando se requiere más información sobre una acción específica. Los brindis pueden incluir enlaces a contenido o información adicional que ayudarán al usuario a entender lo sucedido.
 
 ### Cuándo no usar
 
-No se recomienda el uso de Toasters en los siguientes escenarios:
+No se recomienda el uso de tostadoras en los siguientes escenarios:
 
 - Cuando se requiere una respuesta inmediata del usuario.
-- Cuando la acción que se está realizando en el momento de mostrar el toaster puede causar problemas o consecuencias no deseadas.
+- Cuando la acción que se está realizando en el momento de mostrar la tostadora puede ocasionar problemas o consecuencias no deseadas.
 - Cuando el mensaje requiere una gran cantidad de información o una explicación más detallada.
-- Cuando la información ya se muestra en la pantalla en otra forma.
+- Cuando la información ya se muestra en la pantalla en otro formulario.
 
 ### Posición en la pantalla
 
-Toaster se muestra en la esquina inferior derecha.
+La tostadora se muestra en la esquina inferior derecha.
 
-Sus márgenes externos son: inferior M (8px), derecha XL (20px).
+Sus márgenes externos son: M inferior (8px), XL derecho (20px).
 
 ![Position](/static/images/design/Toaster/Position.png)
 
 ### Personalización
 
-El contenido del Toast puede diferir del estándar; puede incluir cualquier componente disponible de la biblioteca, si el caso de uso lo requiere.
+El contenido de Toast puede diferir del estándar; puede incluir cualquier componente disponible en la biblioteca, si el caso de uso lo requiere.

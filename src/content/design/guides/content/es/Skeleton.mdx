@@ -1,4 +1,4 @@
-Marcador de posición animado que reemplaza el contenido real durante la carga de contenido hasta que la interfaz está lista para la interacción del usuario. Se utiliza si el tiempo de carga no excede los 300 ms.
+Marcador de posición animado que reemplaza el contenido real durante la carga del contenido hasta que la interfaz esté lista para la interacción del usuario. Se utiliza si el tiempo de carga no supera los 300 ms.
 
 ### Estructura
 
@@ -6,30 +6,30 @@ Dependiendo del contenido, puede tomar la forma de un rectángulo, un círculo o
 
 ![IMG - 11.png](/static/images/design/Skeleton/IMG_-_11.png)
 
-### Tamaños
+### Tallas
 
-El componente se adapta al contenedor de contenido que reemplaza durante la carga.
+El componente se adapta al contenedor de contenido al que sustituye durante la carga.
 
 ### Casos de uso
 
-1. Puede mostrar la página completa
+1. Puede mostrar toda la página
 ![Frame 1.png](/static/images/design/Skeleton/Frame_1.png)
 
-2. Puede reemplazar solo una parte del contenido, permitiendo la interacción con el resto de la interfaz
+2. Puede reemplazar solo una parte del contenido, lo que permite la interacción con el resto de la interfaz
 ![Frame 2.png](/static/images/design/Skeleton/Frame_2.png)
 
 ### Recomendaciones
 
-**Usar**
+**Utilice**
 
-1. Cuando el tipo de contenido puede predecirse después de la carga
-2. El tiempo de carga es menor a 300 ms
-3. Si el skeleton se utiliza para carga asíncrona, debe mostrarse exactamente donde ocurre la carga porque la carga de un bloque de elementos no debe bloquear el resto de la interfaz.
+1. Cuándo se puede predecir el tipo de contenido después de la carga
+2. El tiempo de carga es inferior a 300 ms
+3. Si el esqueleto se usa para la carga asincrónica, debe mostrarse exactamente donde se realiza la carga, ya que cargar un bloque de elementos no debe bloquear el resto de la interfaz.
 
 ![IMG - 88.png](/static/images/design/Skeleton/IMG_-_88.png)
 
 **No usar**
 
-1. Si la carga toma más de tres segundos, es mejor usar un spin, o un loader,
-2. Si el tiempo de carga excede los 10 segundos y se conoce la duración exacta, se debe mostrar una barra de progreso.
-3. Cuando la carga se inicia con un clic en un botón, usar el estado del botón como retroalimentación es suficiente, especialmente en ventanas modales.
+1. Si la carga tarda más de tres segundos, es mejor usar un giro o un cargador,
+2. Si el tiempo de carga supera los 10 segundos y se conoce la duración exacta, se mostrará una barra de progreso.
+3. Cuando la carga se inicia haciendo clic en un botón, basta con utilizar el estado del botón como comentario, especialmente en las ventanas modales.
