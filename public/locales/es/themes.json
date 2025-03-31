@@ -14,7 +14,7 @@
   "basic_palette": "Paleta básica",
   "add_color": "Añadir color",
   "color-input_validation-format-error": "Formato incorrecto",
-  "palette_colors_description": "Colores compatibles para varios casos y >estados< br/",
+  "palette_colors_description": "Colores de soporte para varios casos y <br/> estados",
   "dark_theme": "Tema oscuro",
   "light_theme": "Tema ligero",
   "advanced_brand_palette": "Paleta de marca avanzada",
