@@ -312,7 +312,9 @@ El Replacer también realiza lo siguiente:
      some_key: 'string value with {{param}}',
    };
 
-   i18nK('some_key', {param: getSomeParam()})// After the replacements, we will get:
+   i18nK('some_key', {
+     param: getSomeParam(),
+   }) // After the replacements, we will get:
    `string value with ${getSomeParam()}`;
    ```
 
