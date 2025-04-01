@@ -1,30 +1,30 @@
-# 🌍 webpack-i18n-assets-plugin
+# 🌍 complemento de activos webpack-i18n
 
-Un plugin para Webpack que reemplaza las llamadas a funciones de localización (i18n) con textos de destino.
+Un complemento para Webpack que reemplaza las llamadas a las funciones de localización (i18n) por textos de destino.
 
 ### Características
 
-- Integra textos i18n en el bundle (mientras sustituye parámetros en la cadena final)
-- Genera activos para todos los idiomas en una sola compilación
-- ¡El plugin funciona solo para compilaciones de producción!
-- Soporta solo literales como claves en el argumento de la función de localización (no se permiten cadenas de plantilla ni variables)
+- Inserta textos i18n en el paquete (mientras sustituye los parámetros en la cadena final)
+- Genera activos para todos los lugares en una sola construcción
+- ¡El complemento solo funciona para compilaciones de producción!
+- Solo admite literales como claves en el argumento de la función de localización (no se permiten cadenas ni variables de plantilla)
 
 ## 📝 Cómo usar
 
-1. Instala el paquete:
+1. Instale el paquete:
 
    ```sh
    npm i -D @gravity-ui/webpack-i18n-assets-plugin
    ```
 
-2. Conecta el plugin a Webpack (ejemplo para `@gravity-ui/app-builder`):
+2. Conecta el complemento a Webpack (ejemplo para `@gravity-ui/app-builder`):
 
-   Ejemplo para la configuración de webpack (`webpack.config.js`):
+   Ejemplo de webpack config (`webpack.config.js`):
 
    ```js
    const {I18nAssetsPlugin} = require('@gravity-ui/webpack-i18n-assets-plugin');
 
-   // Por ejemplo. Lee todos los archivos con textos localizados y guárdalos en este mapeo
+   // For example. Read all files with localized texts and store in this mapping
    const locales = {
      en: {},
      ru: {},
@@ -33,7 +33,7 @@ Un plugin para Webpack que reemplaza las llamadas a funciones de localización (
 
    module.exports = {
      output: {
-       filename: '[name].[locale].js', // [locale] es requerido en el nombre del archivo
+       filename: '[name].[locale].js', // [locale] is required in filename
      },
 
      plugins: [
@@ -44,7 +44,7 @@ Un plugin para Webpack que reemplaza las llamadas a funciones de localización (
    };
    ```
 
-   Ejemplo si quieres crear manifiestos de activos para cada idioma (`webpack.config.js`):
+   Por ejemplo, si quieres crear manifiestos de activos para cada configuración regional (`webpack.config.js`):
 
    ```js
    const {applyPluginToWebpackConfig} = require('@gravity-ui/webpack-i18n-assets-plugin');
@@ -55,18 +55,18 @@ Un plugin para Webpack que reemplaza las llamadas a funciones de localización (
        tr: {},
    };
 
-   // Alguna configuración existente de webpack
+   // Some exist webpack config
    const webpackConfig = {
        plugins: [ ... ],
        ...
    };
 
-   // Al usar applyPluginToWebpackConfig, también se conectará el plugin WebpackAssetsManifest,
-   // que generará manifiestos de activos para cada idioma.
+   // When using applyPluginToWebpackConfig, the WebpackAssetsManifest plugin will also be connected,
+   // which will generate assets manifests for each locale.
    module.exports = applyPluginToWebpackConfig(webpackConfig, {locales});
    ```
 
-   Ejemplo si usas `@gravity-ui/app-builder`:
+   Por ejemplo, si usas `@gravity-ui/app-builder`:
 
    ```typescript
    import type {ServiceConfig} from '@gravity-ui/app-builder';
@@ -78,8 +78,8 @@ Un plugin para Webpack que reemplaza las llamadas a funciones de localización (
      tr: {},
    };
 
-   // Al usar applyPluginToWebpackConfig, también se conectará el plugin WebpackAssetsManifest,
-   // que generará manifiestos de activos para cada idioma.
+   // When using applyPluginToWebpackConfig, the WebpackAssetsManifest plugin will also be connected,
+   // which will generate assets manifests for each locale.
    const config: ServiceConfig = {
      client: {
        webpack: (originalConfig) => applyPluginToWebpackConfig(originalConfig, {locales}),
@@ -87,7 +87,7 @@ Un plugin para Webpack que reemplaza las llamadas a funciones de localización (
    };
    ```
 
-3. Configura estáticos dinámicos desde el manifiesto de activos en el servidor (ejemplo con `@gravity-ui/app-layout`):
+3. Configure la estática dinámica desde el manifiesto de activos del servidor (por ejemplo, con `@gravity-ui/app-layout`):
 
    ```typescript
    import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -115,17 +115,17 @@ Un plugin para Webpack que reemplaza las llamadas a funciones de localización (
    });
    ```
 
-## 🔧 Configuración
+## 🔧 Ajustes
 
-Por defecto, el plugin está configurado para trabajar con la biblioteca [`@gravity-ui/i18n`](./frameworks/gravity-i18n.ts), pero puedes personalizar el procesamiento para cualquier otra biblioteca i18n.
+De forma predeterminada, el complemento está configurado para funcionar con la [`@gravity-ui/i18n`](./frameworks/gravity-i18n.ts) biblioteca, pero puedes personalizar el procesamiento para cualquier otra biblioteca de i18n.
 
 ### importResolver
 
 Tipo: [`ImportResolver`](./src/types.ts#18)
 
-La función que procesa las importaciones y marca cuáles de las importaciones deben considerarse como funciones de localización (posteriormente, las llamadas a los identificadores marcados son procesadas por el replacer).
+La función que procesa las importaciones y marca cuáles de las importaciones deben considerarse funciones de localización (posteriormente, el reemplazante procesa las llamadas a los identificadores marcados).
 
-La firma es similar al [importSpecifier](https://webpack.js.org/api/parser/#importspecifier) original de webpack.
+La firma es similar al [ImportSpecifier](https://webpack.js.org/api/parser/#importspecifier) original de webpack.
 
 Ejemplo:
 
@@ -136,12 +136,12 @@ const importResolver = (
   _identifierName: string,
   module: string,
 ) => {
-  // Si necesitas ignorar el procesamiento de módulos basados en rutas específicas, puedes manejar tal caso de esta manera.
+  // If you need to ignore processing modules based on specific paths, you can handle such a case this way.
   if (module.startsWith('src/units/compute')) {
     return undefined;
   }
 
-  // Procesamiento de la importación por defecto de una función global
+  // Processing the default import of a global function
   // import i18n from 'ui/utils/i18n'
   if (source === 'ui/utils/i18n' && exportName === 'default') {
     return {
@@ -150,7 +150,7 @@ const importResolver = (
     };
   }
 
-  // Procesamiento de la importación de una función auxiliar y especificando que pertenece al keyset común (namespace).
+  // Processing the import of a helper function and specifying that it belongs to the common keyset (namespace).
   // import {ci18n} from 'ui/utils/i18n'
   if (source === 'ui/utils/i18n' && exportName === 'ci18n') {
     return {
@@ -167,7 +167,7 @@ const importResolver = (
 
 Tipo: [`DeclarationResolver`](./src/types.ts#30)
 
-La función que procesa las declaraciones de variables y marca qué variables deben considerarse como funciones de localización (posteriormente, las llamadas a los identificadores marcados son procesadas por la función replacer).
+La función que procesa las declaraciones de variables y marca qué variables deben considerarse funciones de localización (posteriormente, la función de reemplazo procesa las llamadas a los identificadores marcados).
 
 Ejemplo:
 
@@ -175,12 +175,12 @@ Ejemplo:
 import type {VariableDeclarator} from 'estree';
 
 const declarationResolver = (declarator: VariableDeclarator, module: string) => {
-  // Si necesitas ignorar el procesamiento de módulos basados en rutas específicas, puedes manejar tal caso de esta manera.
+  // If you need to ignore processing modules based on specific paths, you can handle such a case this way.
   if (module.startsWith('src/units/compute')) {
     return undefined;
   }
 
-  // Procesamiento de declaraciones de funciones como const i18nK = i18n.bind(null, 'keyset');
+  // Processing function declarations like const i18nK = i18n.bind(null, 'keyset');
   if (
     declarator.id.type === 'Identifier' &&
     declarator.id.name.startsWith('i18n') &&
@@ -197,11 +197,11 @@ const declarationResolver = (declarator: VariableDeclarator, module: string) => 
 };
 ```
 
-### replacer
+### sustituto
 
 Tipo: [`Replacer`](./src/types.ts#55)
 
-Una función que procesa las llamadas a funciones de localización y devuelve un reemplazo como una cadena.
+Función que procesa las llamadas a funciones de localización y devuelve un reemplazo en forma de cadena.
 
 Ejemplo:
 
@@ -225,24 +225,24 @@ function replacer(
         throw new Error('Incorrect argument type in localizer call');
     };
 
-    // Procesamiento de una llamada con un argumento i18nK('key')
+    // Processing a call with one argument i18nK('key')
     if (callNode.arguments.length === 1) {
         key = getStringValue(callNode.arguments[0]);
     } else if (callNode.arguments.length === 2) {
-        // Procesamiento i18n('keyset', 'key') o i18nK('key', {params})
+        // Processing i18n('keyset', 'key') or i18nK('key', {params})
         const [firstArg, secondArg] = callNode.arguments;
 
-        // Llamada i18n('keyset', 'key')
+        // Call i18n('keyset', 'key')
         if (secondArg.type === 'Literal') {
             keyset = getStringValue(firstArg);
             key = getStringValue(secondArg);
         } else {
-            // Llamada i18nK('key', {params})
+            // Call i18nK('key', {params})
             key = getStringValue(firstArg);
             params = secondArg;
         }
     } else if (callNode.arguments.length === 3) {
-        // Llamada i18n(namespace, key, params)
+        // Call i18n(namespace, key, params)
         const [firstArg, secondArg, thirdArg] = callNode.arguments;
         keyset = getStringValue(firstArg);
         key = getStringValue(secondArg);
@@ -251,9 +251,9 @@ function replacer(
         throw new Error('Incorrect count of arguments in localizer call');
     }
 
-    // Asegúrate de procesar la clave obtenida del argumento de la llamada a la función.
-    // Si la función está relacionada con un keyset, después de modificar el código, el keyset puede insertarse en la clave (esta es una característica del plugin).
-    // Si usas la clave de ReplacerArgs, viene sin el keyset y no necesita ser procesada.
+    // Be sure to process the key obtained from the function call argument.
+    // If the function is related to a keyset, after modifying the code, the keyset can be inserted into the key (this is a plugin feature).
+    // If you use the key from ReplacerArgs, it comes without the keyset and does not need to be processed.
     const keyParts = key.split('::');
     if (keyParts.length === 2) {
         key = keyParts[1];
@@ -261,8 +261,8 @@ function replacer(
 
     const value = this.resolveKey(key, keyset);
 
-    // Implementa opciones de reemplazo según tus necesidades aquí.
-    // Por ejemplo, si la clave es plural, devuelve una llamada a función, etc.
+    // Implement replacement options based on your needs here.
+    // For example, if the key is plural, return a function call, etc.
 
     return JSON.stringify(value);
 };
@@ -270,31 +270,31 @@ function replacer(
 
 ### collectUnusedKeys
 
-Tipo: [`Boolean`] (por defecto - false)
+Tipo: [`Boolean`] (predeterminado: falso)
 
-Habilita el modo para recopilar claves no utilizadas en el proyecto. Después de la compilación, crea un archivo llamado `unused-keys.json`.
+Activa el modo de recopilación de claves no utilizadas en el proyecto. Tras la construcción, crea un archivo denominado `unused-keys.json`.
 
-Para garantizar un funcionamiento adecuado, siempre es necesario devolver un formato detallado en la función `Replacer`. Esto es importante porque durante el reemplazo, existe la posibilidad de modificar claves y keysets determinados automáticamente.
+Para garantizar una funcionalidad adecuada, siempre es necesario devolver un formato detallado en la `Replacer` función. Esto es importante porque, durante la sustitución, existe la posibilidad de modificar las claves y los conjuntos de claves determinados automáticamente.
 
-## Configuración de frameworks
+## Configuración de Frameworks
 
-### Gravity i18n
+### Gravedad i18n
 
-Funciones para manejar llamadas a funciones de localización de la biblioteca [`@gravity-ui/i18n`](https://github.com/gravity-ui/i18n).
+Funciones para gestionar las llamadas a funciones de localización desde la biblioteca [`@gravity-ui/i18n`](https://github.com/gravity-ui/i18n).
 
-Las funciones listas para usar se encuentran [`aquí`](./src/frameworks/gravity-i18n.ts).
+Se encuentran las funciones listas para usar [`here`](./src/frameworks/gravity-i18n.ts).
 
 Un ejemplo del código con el que funcionarán las funciones:
 
 ```typescript
-// El importResolver solo considera la importación por defecto en la ruta ui/utils/i18n.
+// The importResolver only considers the default import at the path ui/utils/i18n.
 import i18n from 'ui/utils/i18n';
 
-// El declarationResolver maneja variables cuyo valor es una llamada a i18n.bind.
+// The declarationResolver handles variables whose value is a call to i18n.bind.
 const i18nK = i18n.bind(null, 'component.navigation');
 
-// El replacer maneja llamadas a identificadores encontrados por el importResolver y declarationResolver
-// Esto significa que se procesarán las siguientes llamadas:
+// The replacer handles calls to identifiers found by the importResolver and declarationResolver
+// This means the following calls will be processed:
 i18nK('some_key');
 i18nK('some_plural_key', {count: 123});
 i18nK('some_key_with_param', {someParam: 'hello'});
@@ -303,20 +303,22 @@ i18n('component.navigation', 'some_plural_key', {count: 123});
 i18n('component.navigation', 'some_key_with_param', {someParam: 'hello'});
 ```
 
-El Replacer adicionalmente realiza lo siguiente:
+El Replacer también realiza lo siguiente:
 
-1. Integra los parámetros en una cadena. Por ejemplo, si el valor de la clave es el siguiente:
+1. Inserte los parámetros en una cadena. Por ejemplo, si el valor de la clave es el siguiente:
 
    ```typescript
    const keyset = {
      some_key: 'string value with {{param}}',
    };
 
-   i18nK('some_key', {param: getSomeParam()})// Después de los reemplazos, obtendremos:
+   i18nK('some_key', {
+     param: getSomeParam(),
+   }) // After the replacements, we will get:
    `string value with ${getSomeParam()}`;
    ```
 
-2. Sustituye una función auto-invocada para claves plurales:
+2. Sustituye las teclas plurales por una función de autoinvocación:
 
    ```typescript
    const keyset = {
@@ -329,7 +331,7 @@ El Replacer adicionalmente realiza lo siguiente:
    };
 
    i18nK('pural_key', {count: getSomeCount()})(
-     // Después de los reemplazos, obtendremos:
+     // After the replacements, we will get:
      function (f, c) {
        const v = f[!c ? 'zero' : new Intl.PluralRules('${locale}').select(c)];
        return v && v.replaceAll('{{count}}', c);
@@ -345,14 +347,14 @@ El Replacer adicionalmente realiza lo siguiente:
    );
    ```
 
-## ℹ️ FAQ
+## ℹ️ PREGUNTAS FRECUENTES
 
-### ¿En qué se diferencia de [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin)?
+### ¿Cómo se compara esto con [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin)?
 
-Para implementar este plugin, se utilizó una idea del paquete webpack-localize-assets-plugins (¡por lo cual muchas gracias al creador del paquete!).
+Para implementar este complemento, se utilizó una idea del paquete webpack-localize-assets-plugins (¡por lo que muchas gracias al creador del paquete!).
 
 Las diferencias son las siguientes:
 
-- Una API más conveniente que te permite trabajar con cualquier tipo de funciones de internacionalización (incluidos ayudantes de espacios de nombres como useTranslation de i18next, funciones importadas de otros módulos, etc.)
-- Generación correcta de mapas de origen relativos al código fuente
-- Solo hay soporte para webpack 5. Se ha eliminado el soporte para Webpack 4.
+- Una API más cómoda que te permite trabajar con cualquier tipo de funciones de internacionalización (incluidos los espacios de nombres ayudantes como UseTranslation de i18next, las funciones importadas de otros módulos, etc.)
+- Generación correcta de mapas fuente en relación con el código fuente
+- Solo hay soporte para el paquete web 5. Se ha eliminado la compatibilidad con Webpack 4.

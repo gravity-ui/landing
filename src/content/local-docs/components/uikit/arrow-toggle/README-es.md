@@ -4,11 +4,11 @@
 
 <!--/GITHUB_BLOCK-->
 
-`ArrowToggle` es un componente para mostrar el icono de chevron. Puede rotar en cuatro direcciones y puede usarse para mostrar listas desplegables, componentes plegados, etc.
+`ArrowToggle` es un componente para mostrar el icono de cheurón. Puede girar en cuatro direcciones y se puede usar para mostrar listas desplegables, cortar componentes, etc.
 
 ## Apariencia
 
-`ArrowToggle` tiene cuatro posibles direcciones: `top` (arriba), `right` (derecha), `bottom` (abajo) y `left` (izquierda).
+`ArrowToggle` tiene cuatro direcciones posibles: `top` `right`, `bottom`, y `left`.
 
 <!--LANDING_BLOCK
 
@@ -74,9 +74,9 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-## Uso como elemento interactivo
+## Utilízalo como elemento interactivo
 
-Aquí hay un ejemplo de uso de ArrowToggle con un icono que cambia:
+Este es un ejemplo del uso de ArrowToggle con un icono de alternancia:
 
 <!--LANDING_BLOCK
 
@@ -115,9 +115,9 @@ return (
 
 ## Propiedades
 
-| Nombre    | Descripción                                          |   Tipo   | Valor predeterminado |
-| :-------- | :--------------------------------------------------- | :------: | :------------------: |
-| className | Atributo HTML `class`                                | `string` |                      |
-| direction | Usado para establecer la dirección del `arrowToggle` | `string` |      `"bottom"`      |
-| size      | Tamaño del `arrowToggle` (en píxeles)                | `number` |         `16`         |
-| qa        | Atributo HTML `data-qa`, usado para pruebas          | `string` |                      |
+| Nombre    | Descripción                                          |   Tipo   | Predeterminado |
+| :-------- | :--------------------------------------------------- | :------: | :------------: |
+| className | `class` Atributo HTML                                | `string` |                |
+| dirección | Se usa para establecer la `arrowToggle` dirección    | `string` |   `"bottom"`   |
+| tamaño    | `arrowToggle` tamaño (en píxeles)                    | `number` |      `16`      |
+| qa        | `data-qa` Atributo HTML, usado para realizar pruebas | `string` |                |

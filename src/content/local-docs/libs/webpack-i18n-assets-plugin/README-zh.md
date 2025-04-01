@@ -312,7 +312,9 @@ Replacer 额外执行以下操作：
      some_key: 'string value with {{param}}',
    };
 
-   i18nK('some_key', {param: getSomeParam()})// 替换后，我们将得到：
+   i18nK('some_key', {
+     param: getSomeParam(),
+   }) // 替换后，我们将得到：
    `string value with ${getSomeParam()}`;
    ```
 

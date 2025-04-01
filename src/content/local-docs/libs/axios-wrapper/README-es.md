@@ -1,8 +1,9 @@
-# Axios Wrapper
+# Envoltorio Axios
 
-Esta biblioteca proporciona un envoltorio conveniente alrededor de Axios, añadiendo la cancelación automática de solicitudes concurrentes a sus características.
+Esta biblioteca proporciona un práctico envoltorio para Axios, añadiendo la cancelación automática de solicitudes simultáneas.
+a sus características.
 
-## Instalación
+## Instalar
 
 ```shell
 npm install --save-dev @gravity-ui/axios-wrapper
@@ -12,13 +13,13 @@ npm install --save-dev @gravity-ui/axios-wrapper
 
 ### Parámetros del constructor
 
-##### config [opcional]
+##### configuración [opcional]
 
-La configuración de una instancia de `axios`.
+La configuración de una `axios` instancia.
 
-##### collector [opcional]
+##### colector [opcional]
 
-La configuración del recolector de solicitudes es un objeto:
+La configuración del recopilador de solicitudes es un objeto:
 
 ```json
 {
@@ -29,40 +30,48 @@ La configuración del recolector de solicitudes es un objeto:
 
 ### Métodos básicos
 
-El wrapper proporciona métodos HTTP `get`, `head`, `put`, `post`, `delete`.
+Wrapper proporciona métodos http `get`, ,,, `head`. `put` `post` `delete`
 
-Los métodos `get` y `head` tienen la firma `(url, params, options)`; mientras que los métodos `put`, `post` y `delete` tienen la firma `(url, data, params, options)`.
+Métodos `get` y `head` tienen la firma `(url, params, options)`; `put`, `post`, mientras que el `delete` método
+tiene `(url, data, params, options)` firma.
 
-El argumento `params` representa los parámetros de la cadena de consulta, mientras que `options` son las configuraciones de la solicitud.
+El `params` argumento representa los parámetros de la cadena de consulta, mientras que `options` es una configuración de solicitud.
 
 Actualmente se admiten 4 configuraciones de solicitud:
 
-- `concurrentId (string)`: id de solicitud opcional
-- `collectRequest (bool)`: bandera opcional que indica si la solicitud debe ser registrada (por defecto `true`)
+- `concurrentId (string)`: identificador de solicitud opcional
+- `collectRequest (bool)`: indicador opcional, que indica si la solicitud debe ser de registro (predeterminado `true`)
 - `requestConfig (object)`: configuración opcional con los parámetros de solicitud personalizados
 - `headers (object)`: objeto opcional con encabezados de solicitud personalizados.
 - `timeout (number)`: tiempo de espera de solicitud opcional
-- `onDownloadProgress (function)`: callback opcional para procesar el progreso de descarga de archivos
+- `onDownloadProgress (function)`: llamada opcional para procesar el progreso de la descarga del archivo
 
-### Encabezados
+### Cabeceras
 
-El método `setDefaultHeader({name (string), value (string), methods (array)})` permite añadir un encabezado de solicitud predeterminado.
+El `setDefaultHeader({name (string), value (string), methods (array)})` método permite añadir un valor predeterminado
+encabezado de solicitud.
 
-Los argumentos `name` y `value` son obligatorios, el argumento opcional `methods` especifica todos los métodos que obtendrán esos encabezados predeterminados (por defecto, todos los métodos obtendrán esos encabezados).
+Los argumentos `name` y `value` son obligatorios, el argumento opcional `methods` especifica todos los métodos que los obtienen
+encabezados predeterminados (de forma predeterminada, todos los métodos obtendrán esos encabezados).
 
 ### CSRF
 
-El método `setCSRFToken` permite especificar el token CSRF, que se añadirá a todas las solicitudes `put`, `post` y `delete`.
+El `setCSRFToken` método permite especificar el token CSRF, que se agregará a todos, y `put` `post` `delete`
+solicitudes.
 
-### Solicitudes concurrentes
+### Solicitudes simultáneas
 
-A veces es mejor cancelar la solicitud en vuelo si sus resultados ya no son necesarios. Para que esto suceda, se debe pasar a las `options` de la solicitud el `concurrentId`. Cuando ocurre la siguiente solicitud con el mismo `concurrentId`, la solicitud anterior con ese id será cancelada.
+A veces es mejor cancelar la solicitud en vuelo si sus resultados ya no son necesarios. Para hacer esto
+sucede, uno debe pasar para solicitar `options` la `concurrentId` identificación. Cuando la próxima solicitud con el mismo
+`concurrentId` Si ocurre, la solicitud anterior con ese identificador se cancelará.
 
-También se puede cancelar una solicitud manualmente invocando el método `cancelRequest(concurrentId)`.
+También se cancela una solicitud manualmente invocando el `cancelRequest(concurrentId)` método.
 
-### Recolección de solicitudes
+### Recopilación de solicitudes
 
-Es posible configurar la recolección de solicitudes en el almacenamiento local utilizando la opción `collector`. Almacena todas las solicitudes y errores por separado. La siguiente `apiInstance` mantendrá las últimas 10 solicitudes (tanto exitosas como no) y los últimos 10 errores de solicitudes.
+Es posible configurar la recopilación de solicitudes en el almacenamiento local mediante la `collector` opción. Almacena
+todas las solicitudes y errores por separado. Lo siguiente `apiInstance` mantendrá las 10 últimas solicitudes (ambas exitosas)
+y no) y 10 últimas solicitudes erróneas.
 
 ```javascript
 const apiInstance = new API({
@@ -73,11 +82,12 @@ const apiInstance = new API({
 });
 ```
 
-Para obtener las solicitudes guardadas, hay que invocar el método `getCollectedRequests` que devuelve el objeto `{errors: [...], requests: [...]}`.
+Para obtener las solicitudes guardadas, hay que invocar el `getCollectedRequests` método que devuelve el objeto
+`{errors: [...], requests: [...]}`.
 
 ### Uso
 
-El uso sugerido es subclasificar la clase base `AxiosWrapper`:
+El uso sugerido es subclasificar la `AxiosWrapper` clase base:
 
 ```javascript
 export class API extends AxiosWrapper {
@@ -96,7 +106,7 @@ export class API extends AxiosWrapper {
 }
 ```
 
-Cuando el parámetro `baseURL` se pasa a la configuración de `axios`, todos los nombres de ruta solicitados se añadirán a él.
+Cuando el `baseURL` parámetro se pase a la `axios` configuración, se le añadirán todos los nombres de ruta solicitados.
 
 ```javascript
 const apiInstance = new API({

@@ -1,7 +1,7 @@
-{
+﻿{
     "title": "Bibliotecas",
     "header": "Nuestras bibliotecas",
-    "searchPlaceholder": "Buscar por nombre o descripción",
+    "searchPlaceholder": "Búsqueda por nombre o descripción",
     "empty": "No se encontró nada",
     "tags_all": "Todas",
     "tags_ui": "UI",

@@ -1,8 +1,8 @@
 # @gravity-ui/date-utils
 
-Ayudantes para gestionar Fecha y Hora.
+Ayudantes para gestionar la fecha y la hora.
 
-## Instalación
+## Instalar
 
 ```shell
 npm i @gravity-ui/date-utils
@@ -13,12 +13,12 @@ npm i @gravity-ui/date-utils
 ```typescript
 import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
 
-// Fecha actual: 2021-08-07T12:10:00
-// Zona horaria del usuario: Europe/Istanbul
+// Current date: 2021-08-07T12:10:00
+// User's time zone: Europe/Istanbul
 
 const FORMAT = 'YYYY-MM-DDTHH:mm:ssZ';
 
-// analizar fecha absoluta
+// parse absolute date
 dateTimeParse({year: 2021, month: 7, day: 7})?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse([2021, 7, 7])?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse('2021-08-07')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
@@ -26,7 +26,7 @@ dateTimeParse(1621708204063)?.format(FORMAT); // "2021-05-22T21:30:04+03:00"
 dateTimeParse('')?.format(FORMAT); // undefined
 dateTimeParse('incorrect-date')?.format(FORMAT); // undefined
 
-// analizar fecha relativa
+// parse relative date
 dateTimeParse('now')?.format(FORMAT); // "2021-08-07T12:10:00+03:00"
 dateTimeParse('now-1d')?.format(FORMAT); // "2021-08-06T12:10:00+03:00"
 dateTimeParse('now-1d+1M')?.format(FORMAT); // "2021-09-06T12:10:00+03:00"
@@ -34,7 +34,7 @@ dateTimeParse('now/d')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse('now+1d/d')?.format(FORMAT); // "2021-08-08T00:00:00+03:00"
 dateTimeParse('now-1f')?.format(FORMAT); // undefined
 
-// crear dateTime
+// create dateTime
 dateTime().format(FORMAT); // "2021-08-07T12:10:00+03:00"
 dateTime({input: '2021-08-07'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTime({input: '2021-08-07', format: 'YYYY-MM-DD'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
@@ -43,18 +43,18 @@ dateTime({input: ''}).format(FORMAT); // "Invalid Date"
 dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid Date"
 ```
 
-## Configuración
+## Ajustes
 
 ```typescript
 import {settings} from '@gravity-ui/date-utils';
 
-// Gestión de locales
-settings.getLocale(); // locale predeterminado "en"
+// Locales management
+settings.getLocale(); // default locale "en"
 settings.loadLocale('de').then(() => {
   settings.setLocale('de');
   settings.getLocale(); // "de"
 });
 
-// Personalización
-settings.updateLocale({weekStart: 0}); // cambiar el primer día de la semana
+// Customization
+settings.updateLocale({weekStart: 0}); // change first day of week
 ```

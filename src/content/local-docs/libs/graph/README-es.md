@@ -1,8 +1,8 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-Renderizador de gráficos de alto rendimiento con detallado sensible a la escala
+Renderizador de gráficos de alto rendimiento con detalle sensible a la escala
 
-[Storybook](https://preview.gravity-ui.com/graph/)
+[Libro de cuentos](https://preview.gravity-ui.com/graph/)
 
 ## Instalación y configuración
 
@@ -12,11 +12,11 @@ npm install @gravity-ui/graph
 
 ## Ejemplos
 
-- [Ejemplo básico de storybook](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
-- [Ejemplo básico grande de storybook](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
+- [Ejemplo de libro de cuentos básico](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
+- [Ejemplo de libro de cuentos de Large Basic](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
 - [Vista de bloques personalizados](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
-- [Conexión Bezier](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
-- [Personalización de conexión](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
+- [Conexión Bézier](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
+- [Conexión de personalización](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
 ```jsx
 import {GraphCanvas, GraphState, TRenderBlockFn, GraphBlock, useGraph} from '@gravity-ui/graph';
@@ -85,9 +85,9 @@ export function GraphEditor() {
 }
 ```
 
-### Documentación
+### Documentos
 
-- [API Pública](docs/public_api.md)
-- [Eventos del Gráfico](docs/events.md)
+- [API pública](docs/public_api.md)
+- [Graficar eventos](docs/events.md)
 - [Capas](docs/layers.md)
 - [Grupos](docs/groups.md)

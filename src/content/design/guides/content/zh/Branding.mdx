@@ -1,195 +1,195 @@
-# 快速主题创建
+# 快速创建主题
 
-快速品牌化允许您快速切换主题并立即看到可以使用或进一步优化的结果。只需选择几种颜色，所有控件将相应调整。对所有支持的主题重复此操作，您就准备好了。
+快速品牌推广允许您在主题之间快速切换，并立即看到可以进一步使用或优化的结果。只需选择几种颜色，所有控件都会相应地进行调整。对所有支持的主题重复此操作，一切就绪。
 
-### 开始之前
+### 在你开始之前
 
-1. 我们建议下载最新版本的Figma库
-2. 值在变量管理界面中配置。打开Color Styles集合并选择Branding组
+1.我们建议下载最新版本的 Figma 库
+2.值是在变量管理接口中配置的。打开颜色样式集合并选择品牌群组
 
-   ![品牌化](/static/images/design/Branding/Branding.png)
+   ![Branding](/static/images/design/Branding/Branding.png)
 
-3. 结果可以在Figma的Branding页面上方便地查看。它包含使用品牌变量的组件，这将让您了解最终的外观。
-4. 记住在组件中使用颜色样式。
-5. 每个颜色样式的值由相应的变量表示
+3.在 Figma 的品牌推广页面上可以方便地查看结果。它包含使用品牌变量的组件，这将使您了解所有内容最终会是什么样子。
+4.记得在组件中使用颜色样式。
+5.每种颜色样式的值由相应的变量表示
 
-### 1. 基础品牌颜色
+### 1.基本品牌颜色
 
-**--g-color-base-background**
+**--g 颜色基础背景**
 
-页面背景色。浅色主题最常见的颜色是白色，但您可以使用任何喜欢的颜色。深色主题有更多选择，从中性灰色调到暖色或冷色。
+页面背景颜色。浅色主题最常见的颜色是白色，但你可以使用任何你喜欢的颜色。深色主题有更多选择，从中性灰色调到暖色或冷色。
 
-![背景](/static/images/design/Branding/background.png)
+![background](/static/images/design/Branding/background.png)
 
 **--g-color-base-brand**
 
-主要品牌颜色。主按钮、复选框、单选按钮、开关和特殊工具提示主题的背景
+主要品牌颜色。主按钮、复选框、单选框、开关和特殊工具提示主题的背景
 
-![主要品牌颜色](/static/images/design/Branding/PrimaryBrandColor.png)
+![Primary brand color](/static/images/design/Branding/PrimaryBrandColor.png)
 
-**--g-color-base-brand-hover**
+**--g-color-base-base-band-hover**
 
-主要品牌颜色的悬停颜色。我们使用较深的色调，但较浅或完全不同的颜色也是可接受的。
+将鼠标悬停在主要品牌颜色的颜色上。我们使用的是较深的色调，但也可以使用较浅或完全不同的颜色。
 
-![悬停](/static/images/design/Branding/Hover.png)
+![Hover](/static/images/design/Branding/Hover.png)
 
-**--g-color-base-brand-selection**
+**--g-color-base-base-品牌选择**
 
-具有"已选择"语义的元素的底层
+具有 “选定” 语义的元素的下划线
 
-![选择](/static/images/design/Branding/Selection.png)
+![Selection](/static/images/design/Branding/Selection.png)
 
-**--g-color-base-brand-selection-hover**
+**--g-color-base-base-品牌选择-悬停**
 
-已选择元素的悬停颜色。在典型任务中使用较少，在为新组件或原型设计准备所有状态时使用较多。
+选定元素的悬停颜色。它在典型任务中的使用频率较低，在为新组件或原型设计准备所有状态时更频繁地使用。
 
-![选择悬停](/static/images/design/Branding/SelectionHover.png)
+![Selection Hover](/static/images/design/Branding/SelectionHover.png)
 
-**--g-color-line-brand**
+**--g-color-line-br**
 
-品牌色线条。卡片、标签页中的选中状态；加载器颜色
+品牌色线条卡片、选项卡中的选定状态；微调器颜色
 
-![线条](/static/images/design/Branding/Lines.png)
+![Lines](/static/images/design/Branding/Lines.png)
 
 **--g-color-text-brand**
 
-不使用底层时的品牌色文本
+不带下划线时使用品牌彩色文本
 
-![文本](/static/images/design/Branding/Text.png)
+![Text](/static/images/design/Branding/Text.png)
 
 **--g-color-text-brand-heavy**
 
-底层上方的品牌色文本。补偿因使用底层而导致的对比度损失。
+底层顶部有品牌彩色文字。补偿因使用底层而造成的对比度损失。
 
-![文本加重](/static/images/design/Branding/Heavy.png)
+![Text Heavy](/static/images/design/Branding/Heavy.png)
 
-**--g-color-text-brand-contrast**
+**--g-color-text-品牌对比度**
 
-一旦您决定了主控件的品牌颜色，为它们选择一个对比色。对比度必须在所有主题中保持。
+确定为主控件打上品牌的颜色后，为它们选择一种对比色。必须保持所有主题的对比度。
 
-如果切换主题时品牌颜色的亮度没有显著变化，您可以尝试具有恒定亮度的颜色：--g-color-text-light-primary和--g-color-text-dark-primary。如果品牌颜色的亮度发生变化，请尝试--g-color-text-primary
-或--g-color-text-inverted-primary。
+如果切换主题时品牌颜色的亮度没有显著变化，你可以尝试使用恒定亮度的颜色：--g-color-text-light-primary 和--g-color-text-dark-primary。如果品牌颜色的亮度发生变化，请尝试--g-color-text-primary
+或--g-color-text-inverted-primary
 
-![对比](/static/images/design/Branding/Contrast.png)
+![Contrast](/static/images/design/Branding/Contrast.png)
 
 **--g-color-text-link**
 
 链接颜色
 
-![链接颜色](/static/images/design/Branding/LinkColor.png)
+![Link color](/static/images/design/Branding/LinkColor.png)
 
 **--g-color-text-link-hover**
 
 悬停链接颜色
 
-![悬停链接颜色](/static/images/design/Branding/HoverLinkColor.png)
+![Hover link color](/static/images/design/Branding/HoverLinkColor.png)
 
-**--g-color-text-link-visited**
+**--g-color-text-link-已访问**
 
-已访问链接颜色
+访问过的链接颜色
 
-![已访问链接颜色](/static/images/design/Branding/VisitedLinkColor.png)
+![Visited link color](/static/images/design/Branding/VisitedLinkColor.png)
 
 **--g-color-text-link-visited-hover**
 
-已访问链接悬停颜色
+访问过的链接悬停颜色
 
-![已访问链接悬停颜色](/static/images/design/Branding/VisitedLinkHoverColor.png)
+![Visited link hover color](/static/images/design/Branding/VisitedLinkHoverColor.png)
 
-### 2. 排版
+### 2.排版
 
-所有文本样式都列在库的右列，在Local Styles部分下。如果没有选择对象，则显示此部分。在这种情况下，显示的是所选对象的属性，而不是库。
+所有文本样式都列在库右栏的 “本地样式” 部分下。如果未选择任何对象，则显示此部分。在这种情况下，显示的是选定对象的属性，而不是库的属性。
 
-![排版](/static/images/design/Branding/Typography1.png)
+![Typography](/static/images/design/Branding/Typography1.png)
 
-要访问文本样式编辑界面，请点击样式名称右侧的设置图标。
+要访问文本样式编辑界面，请单击样式名称右侧的设置图标。
 
-![排版](/static/images/design/Branding/Typography2.png)
+![Typography](/static/images/design/Branding/Typography2.png)
 
 样式分为三组。
 
-![排版](/static/images/design/Branding/Typography3.png)
+![Typography](/static/images/design/Branding/Typography3.png)
 
-1. **Header.** 包含标题、副标题和显示样式。
-2. **Text.** 用于排版文本和标题的样式
-3. **Misc.** 用于显示代码和常规排版文本中嵌入的代码（内联样式）的样式。
+1.**标题。** 包含标题、副标题和显示样式。
+2.**文本。** 键入的文本和标题的样式
+3.**杂项。** 用于在常规键入的文本中显示代码和代码的样式（内联样式）。
 
-对于Header和Text组，您可以使用一种具有不同权重的字体。标题通常比排版字体具有更高的字体权重。
+对于标题和文本组，您可以使用一种不同权重的字体。标题的字体权重通常高于排版字体。
 
-对于Misc组，您可以设置等宽字体。确保内联样式在嵌入到排版文本中时正确显示，并且排版的基线不会移位。否则，建议为Line Height参数选择合适的值。
+对于 Misc 组，您可以设置等宽字体。确保嵌入到键入的文本中时行内样式正确显示，并且排版的基线没有偏移。否则，建议为线高参数选择合适的值。
 
-对于样式，允许对Font Size和Line Height参数进行微小更改。在不同的字体中，字符的高度和宽度可能会有很大差异，在某些情况下，需要补偿这种差异。请记住，某些文本样式在特定组件大小内使用，对样式参数的重大更改可能导致组件显示不正确。因此，在对Font Size和Line Height进行任何更改时，重要的是检查组件在不同大小下的显示情况。
+对于样式，允许对字体大小和行高参数进行细微的更改。在不同的字体中，字符的高度和宽度可能会有很大差异，在某些情况下，这种变化需要得到补偿。请记住，某些文本样式是在特定的组件大小内使用的，样式参数的重大更改可能会导致组件显示不正确。因此，在对字体大小和行高进行任何更改时，检查组件如何以不同大小显示非常重要。
 
-### 3. 圆角半径
+### 3.拐角半径
 
-此参数可以在变量管理界面中配置。值可以在Border Radius集合中找到。此属性由两组变量设置：主要和技术。
+可以在变量管理接口中配置此参数。这些值可以在边框半径集合中找到。此属性由两组变量设置：主要变量和技术变量。
 
-![圆角半径](/static/images/design/Branding/CornerRadius.png)
+![Corner radius](/static/images/design/Branding/CornerRadius.png)
 
-### 主要集合
+### 主套装
 
-这组变量与代码变量匹配。这些值应用于相应大小的控件。
+这组变量与代码变量相匹配这些值应用于相应大小的控件。
 
-- --g-border-radius-s: 3px
-- --g-border-radius-s: 5px
-- --g-border-radius-l: 6px
-- --g-border-radius-l: 8px
-- --g-border-radius-xl: 10px
-- --g-border-radius-2xl: 16px
+- --g-border-radius-s:3 px
+- --g-border-radius-s:5 px
+- --g-border-radius-l:6 px
+- --g-border-radius-l:8 px
+- --g-border-radius-xl：10 px
+- --g-border-radius-2xl：16 px
 
-### 技术集合
+### 技术套装
 
-仅在Figma中用于计算Check Button组件中内部元素的圆角半径。这些是标记为Inner的变量，其值应链接到主要变量集的值。要计算Inner变量的值，取相同大小的主变量值并减去3。
+仅在 Figma 中用于计算复选按钮组件中内部元素的圆角半径。这些是标记为 Inner 的变量，它们的值应链接到主要变量集的值。要计算内部变量的值，请取大小相同的主变量的值并减去 3。
 
-例如，如果--g-border-radius-m设置为6px，则Inner M半径计算为6 - 3 = 3px。
+例如，如果将--g-border-radius-m 设置为 6px，则内部 M 半径计算为 6-3 = 3px。
 
-### 4. 技术颜色
+### 4.技术色彩
 
-该组包含设计系统支持的滚动条颜色。为确保在各种浏览器的深色主题中正确显示滚动条，建议相应地配置它们。
+该组包含设计系统支持的滚动条的颜色。为确保滚动条在各种浏览器上以深色主题正确显示，建议进行相应的配置。
 
-此组中的变量：
+该组中的变量：
 
 - --g-color-scroll-track
 - --g-color-scroll-handle
-- --g-color-scroll-handle-hover
-- --g-color-scroll-corner
+- --g-color-scroll-hodle-hover
+- --g-color-scroll-corl-
 
 # 高级主题设置
 
-### 私有颜色调整
+### 私人色彩调整
 
-如果您想调整特定的颜色色调以使其与品牌颜色一致，请使用私有调色板。私有颜色在Private Colors集合下的变量管理界面中配置。
+如果您想调整特定的色调以使其与品牌颜色保持一致，请使用私人调色板。私有颜色是在私有颜色集合下的变量管理界面中配置的。
 
-![私有颜色调整](/static/images/design/Branding/PrivateColorTuning.png)
+![Private color tuning](/static/images/design/Branding/PrivateColorTuning.png)
 
 基本色彩：
 
-- Blue
-- Green
-- Red
-- Yellow
-- Orange
-- Cold gray
-- Purple
+- 蓝色
+- 绿色
+- 红色
+- 黄色
+- 橙子
+- 冷灰色
+- 紫色
 
-其中任何一个（或同时所有）可能需要调整以匹配品牌颜色。要准备好交付给开发的调色板，请使用[脚本](https://preview.gravity-ui.com/uikit/?path=/docs/branding-palette-generator--docs)。您需要将脚本的输出转移到Figma中。
+其中任何一个（或一次全部调整）都可能需要调整以匹配品牌颜色。要准备准备移交给开发的调色板，请使用 [脚本](https://preview.gravity-ui.com/uikit/?path=/docs/branding-palette-generator--docs)。你需要将脚本的输出传输到 Figma 中。
 
-如果页面背景（或对比主题中的背景）已被修改，请为黑色和白色生成新的实色阴影。
+如果页面背景（或对比主题中的背景）已修改，请为黑白生成新的纯色阴影。
 
 当对私有调色板进行更改时，语义颜色也会自动更新。
 
 ### 语义颜色调整
 
-如果私有变量的值与品牌的视觉语言不一致，您可以调整语义颜色的值。它们在Color Styles集合的变量界面中配置。
+如果私有变量的值与品牌的视觉语言不一致，则可以调整语义颜色的值。它们是在颜色样式集合的变量接口中配置的。
 
-![语义颜色调整](/static/images/design/Branding/SemanticColorTuning.png)
+![Semantic color tuning](/static/images/design/Branding/SemanticColorTuning.png)
 
 请注意以下几点：
 
-1. 确保使用与相应主题匹配的私有颜色。
-2. 用实色替换带有alpha通道的私有颜色（反之亦然）可能会导致问题。
-3. 对语义变量的更改将自动应用于使用它们的颜色样式和组件。
+1.确保使用与相应主题相匹配的私有颜色。
+2.用纯色的 Alpha 通道替换私有颜色（反之亦然）可能会导致问题。
+3.对语义变量的更改将自动应用于颜色样式和使用它们的组件。
 
 # 与开发同步
 
-目前，Figma库和代码之间的主题同步是手动完成的。在交付给开发之前，必须根据[说明](https://preview.gravity-ui.com/uikit/?path=/docs/branding-overview--docs)准备CSS变量。
+目前，Figma 库和代码之间的主题同步是手动完成的。[在开发移交之前，必须根据说明准备 CSS 变量。](https://preview.gravity-ui.com/uikit/?path=/docs/branding-overview--docs)

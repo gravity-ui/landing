@@ -1,6 +1,6 @@
 # @gravity-ui/tsconfig
 
-## Instalación
+## Instalar
 
 ```
 npm install --save-dev @gravity-ui/tsconfig
@@ -8,7 +8,7 @@ npm install --save-dev @gravity-ui/tsconfig
 
 ## Uso
 
-Añade un archivo `tsconfig.json` en la raíz del proyecto con el siguiente contenido:
+Agregue `tsconfig.json` un archivo en la raíz del proyecto con el siguiente contenido:
 
 ```json
 {

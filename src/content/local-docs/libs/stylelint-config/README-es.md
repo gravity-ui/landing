@@ -1,6 +1,6 @@
 # @gravity-ui/stylelint-config
 
-## Instalación
+## Instalar
 
 ```
 npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
@@ -8,7 +8,7 @@ npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 
 ## Uso
 
-Añade un archivo `.stylelintrc` en la raíz del proyecto con el siguiente contenido:
+Agregue `.stylelintrc` un archivo en la raíz del proyecto con el siguiente contenido:
 
 ```json
 {
@@ -16,9 +16,9 @@ Añade un archivo `.stylelintrc` en la raíz del proyecto con el siguiente conte
 }
 ```
 
-### Prettier
+### Más bonita
 
-Si estás usando Prettier, extiende la configuración raíz con las reglas adicionales:
+Si está utilizando Prettier, amplíe la configuración raíz con las reglas adicionales:
 
 ```json
 {
@@ -26,9 +26,9 @@ Si estás usando Prettier, extiende la configuración raíz con las reglas adici
 }
 ```
 
-### Order
+### Pedido
 
-Si quieres ordenar las propiedades en tus archivos CSS, extiende la configuración raíz con las reglas adicionales:
+Si desea ordenar las propiedades en sus archivos css, amplíe la configuración raíz con las reglas adicionales:
 
 ```json
 {

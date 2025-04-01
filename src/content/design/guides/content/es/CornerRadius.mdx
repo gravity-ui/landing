@@ -1,22 +1,22 @@
-El radio de esquina de los controles puede ser modificado. Para hacer esto, utilice las siguientes variables:
+El radio de las esquinas de los controles se puede anular. Para ello, utilice las siguientes variables:
 
-- --g-border-radius-xs: 3px;
-- --g-border-radius-s: 5px;
-- --g-border-radius-m: 6px;
-- --g-border-radius-l: 8px;
-- --g-border-radius-xl: 10px;
-- --g-border-radius-2xl: 16px;
+- --g-border-radius-xs: 3 px;
+- --g-border-radius-s: 5 px;
+- --g-border-radius-m: 6 px;
+- --g-border-radius-l: 8 px;
+- --g-border-radius-xl: 10 px;
+- --g-border-radius-2xl: 16 px;
 
-![Radio de esquina](/static/images/design/CornerRadius/1.png)
+![Corner radius](/static/images/design/CornerRadius/1.png)
 
-Puede modificar los valores en **Variables**
+Puede anular los valores de Variables. ****
 
-Las variables se utilizan en controles de tamaños correspondientes. Si cambia el valor de la variable, el radio de esquina de todos los controles del mismo tamaño cambiará en consecuencia. Los controles afectados por esta variable se enumeran en la página de Branding de la biblioteca de Figma. Dado que diferentes controles tienen diferentes rangos de tamaño, los conjuntos de controles pueden no coincidir. Las etiquetas, por ejemplo, no vienen en tamaños mayores que L, por lo que las variables que comienzan con --g-border-radius-l no se utilizan en este componente y no tienen efecto en su apariencia.
+Las variables se utilizan en los controles de los tamaños correspondientes. Si cambias el valor de la variable, el radio de las esquinas de todos los controles del mismo tamaño cambiará en consecuencia. Los controles afectados por esta variable aparecen en la página de personalización de marca de la biblioteca de Figma. Dado que los distintos controles tienen diferentes rangos de tamaño, es posible que los conjuntos de controles no coincidan. Las etiquetas, por ejemplo, no vienen en tamaños superiores a L, por lo que las variables que comienzan por --g-border-radius-l no se utilizan en este componente y no afectan a su apariencia.
 
-![Radio de esquina](/static/images/design/CornerRadius/2.png)
+![Corner radius](/static/images/design/CornerRadius/2.png)
 
-El radio de esquina del elemento anidado para el botón de verificación está determinado por los tokens y se calcula utilizando la fórmula "valor del token - 3" (donde 3 es la distancia entre los elementos internos y externos). En la versión actual, debe realizar los cálculos manualmente e ingresar los resultados en los siguientes tokens:
+El radio de la esquina del elemento anidado del botón de verificación viene determinado por las fichas y se calcula mediante la fórmula «valor de la ficha: 3» (donde 3 es la distancia entre los elementos internos y externos). En la versión actual, debe realizar los cálculos manualmente e introducir los resultados en los siguientes símbolos:
 
-![Radio de esquina](/static/images/design/CornerRadius/3.png)
+![Corner radius](/static/images/design/CornerRadius/3.png)
 
-![Radio de esquina](/static/images/design/CornerRadius/4.png)
+![Corner radius](/static/images/design/CornerRadius/4.png)

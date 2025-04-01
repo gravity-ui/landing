@@ -1,4 +1,4 @@
-{
+﻿{
     "actions_openInFigma": "Abrir en Figma",
     "title": "Componentes",
     "searchPlaceholder": "Buscar por nombre de componente",
@@ -6,8 +6,8 @@
     "maintainers_one": "Mantenedor:",
     "maintainers_other": "Mantenedores:",
     "maintainers": "Mantenedores:",
-    "theme": "Cambiar tema",
-    "rtlOn": "Activar RTL",
+    "theme": "Tema Switch",
+    "rtlOn": "Activa RTL",
     "rtlOff": "Desactivar RTL",
-    "rtlNotSupported": "RTL no soportado"
+    "rtlNotSupported": "RTL no es compatible"
 }

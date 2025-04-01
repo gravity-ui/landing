@@ -1,6 +1,6 @@
 <!--GITHUB_BLOCK-->
 
-# Alert
+# Alerta
 
 <!--/GITHUB_BLOCK-->
 
@@ -8,19 +8,19 @@
 import {Alert} from '@gravity-ui/uikit';
 ```
 
-### Tema (`theme`)
+### Tema
 
 `normal`: Tema principal (usado por defecto).
 
-`info`: Usado para cualquier tipo de información regular.
+`info`: Se utiliza para cualquier tipo de información regular.
 
-`success`: Usado para información positiva.
+`success`: Se usa para información positiva.
 
-`warning`: Usado para información que necesita atención.
+`warning`: Se usa para información que necesita atención.
 
-`danger`: Usado para errores críticos.
+`danger`: Se usa para errores críticos.
 
-`utility`: Usado para consejos útiles.
+`utility`: Se usa para consejos útiles.
 
 <!--LANDING_BLOCK
 <ExampleBlock
@@ -54,11 +54,11 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Vista (`view`)
+### Ver
 
-`filled`: Usado para ajustar el color de fondo de la alerta (usado por defecto).
+`filled`: Se usa para ajustar el color de fondo de la alerta (se usa de forma predeterminada).
 
-`outlined`: Usado para ajustar el color del borde de la alerta.
+`outlined`: Se usa para ajustar el color del borde de la alerta.
 
 <!--LANDING_BLOCK
 <ExampleBlock
@@ -81,11 +81,11 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Disposición (`layout`)
+### Disposición
 
-`vertical`: Usado para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones. Permite mostrar botones debajo del texto (usado por defecto).
+`vertical`: Se usa para dirigir a los usuarios al contenido si hay una `actions` propiedad con botones. Permite mostrar los botones debajo del texto (se utilizan de forma predeterminada).
 
-`horizontal`: Usado para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones. Permite mostrar botones a la derecha del texto.
+`horizontal`: Se usa para dirigir a los usuarios al contenido si hay una `actions` propiedad con botones. Permite mostrar los botones a la derecha del texto.
 
 <!--LANDING_BLOCK
 <ExampleBlock
@@ -107,11 +107,11 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Esquinas (`corners`)
+### Esquinas
 
-`rounded`: Habilita esquinas redondeadas en la ventana de alerta (usado por defecto).
+`rounded`: Activa las esquinas redondeadas de la ventana de alerta (se usa de forma predeterminada).
 
-`square`: Habilita esquinas cuadradas en la ventana de alerta.
+`square`: Activa las esquinas cuadradas de la ventana de alerta.
 
 <!--LANDING_BLOCK
 <ExampleBlock
@@ -134,9 +134,9 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-## Título de alerta
+## Título de la alerta
 
-`title`: Título de la alerta. Tiene una prioridad menor que `Alert.Title`.
+`title`: Título de la alerta. Tiene una prioridad inferior a `Alert.Title`.
 
 <!--LANDING_BLOCK
 <ExampleBlock
@@ -158,11 +158,11 @@ LANDING_BLOCK-->
 
 ## Mensaje de alerta
 
-`message`: Mensaje de la alerta. Debe ser lo suficientemente significativo para explicar completamente de qué trata la alerta.
+`message`: Mensaje de alerta. Debe ser lo suficientemente significativo como para explicar completamente de qué se trata la alerta.
 
 ## `onClose`
 
-`onClose`: Función de callback llamada cuando un usuario hace clic en el botón de cierre de la alerta. Cuando esta propiedad está definida, el botón de cierre será visible.
+`onClose`: La función de devolución de llamada se activa cuando un usuario hace clic en el botón de cierre de la alerta. Cuando se defina esta propiedad, aparecerá el botón de cierre.
 
 <!--LANDING_BLOCK
 <ExampleBlock
@@ -186,13 +186,13 @@ LANDING_BLOCK-->
 
 <!--/GITHUB_BLOCK-->
 
-### Alineación (`align`)
+### Alinear
 
-Determina cómo se alinea verticalmente el contenido dentro del componente `Alert`.
+Determina cómo se alinea verticalmente el contenido del `Alert` componente.
 
 `baseline`: Alineación predeterminada.
 
-`center`: El contenido está centrado verticalmente dentro del componente `Alert`. Puede ser útil si las acciones ocupan más espacio que el texto, o si el icono debe estar en el medio del contenido.
+`center`: El contenido está centrado verticalmente dentro del `Alert` componente. Puede resultar útil si las acciones ocupan más espacio que el texto o si el icono debe estar en el centro del contenido.
 
 <!--LANDING_BLOCK
 <ExampleBlock
@@ -216,18 +216,18 @@ LANDING_BLOCK-->
 
 ## Propiedades
 
-| Nombre    | Descripción                                                                                |                                Tipo                                | Valor predeterminado |
-| :-------- | :----------------------------------------------------------------------------------------- | :----------------------------------------------------------------: | :------------------: |
-| theme     | Apariencia de la alerta                                                                    | `"normal"` `"info"` `"success"` `"warning"` `"danger"` `"utility"` |      `"normal"`      |
-| view      | Habilitar/deshabilitar el color de fondo de la alerta                                      |                      `"filled"` `"outlined"`                       |      `"filled"`      |
-| layout    | Usado para dirigir a los usuarios al contenido si hay propiedad `actions` con botones      |                    `"vertical"` `"horizontal"`                     |     `"vertical"`     |
-| corners   | Usado para esquinas redondeadas/cuadradas de la ventana de alerta                          |                       `"rounded"` `"square"`                       |     `"rounded"`      |
-| title     | Título de la alerta                                                                        |                              `string`                              |                      |
-| message   | Mensaje de la alerta                                                                       |                         `React.ReactNode`                          |                      |
-| onClose   | Función de callback llamada cuando el usuario hace clic en el botón de cierre de la alerta |                             `Function`                             |                      |
-| actions   | Array de botones o componentes personalizados completos                                    |                 `React.ReactNode` `"AlertAction"`                  |                      |
-| align     | Determina cómo se alinea verticalmente el contenido dentro del componente `Alert`          |                      `"center"` `"baseline"`                       |     `"baseline"`     |
-| style     | Atributo de estilo HTML                                                                    |                       `React.CSSProperties`                        |                      |
-| className | Nombre de la clase de alerta                                                               |                              `string`                              |                      |
-| icon      | Sobrescribir el icono predeterminado                                                       |                         `React.ReactNode`                          |                      |
-| qa        | Atributo HTML `data-qa`, usado en pruebas                                                  |                              `string`                              |                      |
+| Nombre    | Descripción                                                                                                       |               Tipo                | Predeterminado |
+| :-------- | :---------------------------------------------------------------------------------------------------------------- | :-------------------------------: | :------------: |
+| canción   | Apariencia de alertas                                                                                             |      `"normal"` `"utility"`       |   `"normal"`   |
+| vista     | Activar/desactivar el color de fondo de la alerta                                                                 |      `"filled"` `"outlined"`      |   `"filled"`   |
+| diseño    | Se usa para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones                        |    `"vertical"` `"horizontal"`    |  `"vertical"`  |
+| arrincona | Se utiliza para las esquinas redondas/cuadradas de la ventana de alerta                                           |      `"rounded"` `"square"`       |  `"rounded"`   |
+| título    | Título de la alerta                                                                                               |             `string`              |                |
+| mensaje   | Mensaje de la alerta                                                                                              |         `React.ReactNode`         |                |
+| onClose   | Una función de devolución de llamada que se invoca cuando el usuario hace clic en el botón de cierre de la alerta |            `Function`             |                |
+| acciones  | Conjunto de botones o componentes totalmente personalizados                                                       | `React.ReactNode` `"AlertAction"` |                |
+| alinear   | Determina cómo se alinea verticalmente el contenido del componente de alerta                                      |      `"center"` `"baseline"`      |  `"baseline"`  |
+| estilo    | Atributo de estilo HTML                                                                                           |       `React.CSSProperties`       |                |
+| className | Nombre de la clase de alerta                                                                                      |             `string`              |                |
+| icono     | Anular el icono predeterminado                                                                                    |         `React.ReactNode`         |                |
+| qa        | `data-qa` Atributo HTML, usado en las pruebas.                                                                    |             `string`              |                |

@@ -1,6 +1,6 @@
 # @gravity-ui/eslint-config
 
-## Instalación
+## Instalar
 
 ```
 npm install --save-dev eslint @gravity-ui/eslint-config
@@ -8,7 +8,7 @@ npm install --save-dev eslint @gravity-ui/eslint-config
 
 ## Uso
 
-Añade un archivo `.eslintrc` en la raíz del proyecto con el siguiente contenido:
+Agregue `.eslintrc` un archivo en la raíz del proyecto con el siguiente contenido:
 
 ```json
 {
@@ -17,7 +17,7 @@ Añade un archivo `.eslintrc` en la raíz del proyecto con el siguiente contenid
 }
 ```
 
-Añade archivos de configuración para cliente y servidor en los directorios correspondientes:
+Agregue los archivos de configuración del cliente y del servidor en los directorios correspondientes:
 
 ```json
 {
@@ -31,9 +31,9 @@ Añade archivos de configuración para cliente y servidor en los directorios cor
 }
 ```
 
-### Prettier
+### Más bonita
 
-Si estás usando Prettier, extiende la configuración raíz con las reglas adicionales:
+Si está utilizando Prettier, amplíe la configuración raíz con las reglas adicionales:
 
 ```json
 {
@@ -44,7 +44,7 @@ Si estás usando Prettier, extiende la configuración raíz con las reglas adici
 
 ### a11y
 
-Si quieres detectar problemas de accesibilidad, extiende la configuración raíz con las reglas adicionales:
+Si desea detectar problemas de accesibilidad, amplíe la configuración raíz con las reglas adicionales:
 
 ```json
 {
@@ -53,9 +53,9 @@ Si quieres detectar problemas de accesibilidad, extiende la configuración raíz
 }
 ```
 
-### Order
+### Pedido
 
-Si quieres imponer una convención en el orden de importación de módulos, extiende la configuración raíz con las reglas adicionales:
+si desea hacer cumplir una convención en el orden de importación de los módulos, extienda la configuración raíz con las reglas adicionales:
 
 ```json
 {

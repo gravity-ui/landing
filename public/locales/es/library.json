@@ -1,5 +1,5 @@
-{
-    "actions_goToIcons": "Ir a iconos",
+﻿{
+    "actions_goToIcons": "Ir a los iconos",
     "libraries": "Bibliotecas",
     "readme": "Léeme",
     "changelog": "Registro de cambios",
@@ -9,7 +9,7 @@
     "lastUpdate": "Última actualización",
     "repository": "Repositorio",
     "license": "Licencia",
-    "issues": "Problemas",
+    "issues": "Cuestiones",
     "maintainers": "Mantenedores",
     "contributors": "Colaboradores"
 }
