@@ -1,3 +1,9 @@
-# https://www.robotstxt.org/robotstxt.html
+# *
 User-agent: *
-Disallow:
+Allow: /
+
+# Host
+Host: https://gravity-ui.com
+
+# Sitemaps
+Sitemap: https://gravity-ui.com/sitemap.xml
