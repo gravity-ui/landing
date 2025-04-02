@@ -3,6 +3,8 @@ export type Article = {
     content: {
         en: string;
         ru: string;
+        es: string;
+        zh: string;
     };
 };
 

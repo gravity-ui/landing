@@ -1,0 +1,62 @@
+**Las migas de navegación** son una cadena de enlaces que representan la ruta en la estructura del servicio desde la página raíz hasta la página actual, lo que permite a los usuarios navegar a cualquier página intermedia. Ayudan al usuario a determinar en qué parte del servicio se encuentra y a navegar rápidamente uno o más niveles hacia atrás.
+
+![Example](/static/images/design/Breadcrumbs/Example.png)
+
+## Cuándo usar
+
+- Utilice el componente Breadcrumbs para las páginas anidadas.
+- No es necesario utilizar migas de pan en la página de inicio.
+- Las migas de pan se suelen colocar en la barra de acciones situada en la parte superior de la página.
+
+## Estructura
+
+![Structure](/static/images/design/Breadcrumbs/Structure.png)
+
+1 - Página **actual.**
+
+2 - Página **anterior.** Es mejor mostrarlo primero, si el ancho del contenedor lo permite.
+
+3 - Página **raíz del servicio.**
+
+4 - **Separador.** Se usa «/» de forma predeterminada, pero también se acepta> "».
+
+5 - Icono de **desbordamiento.** Aparece cuando los títulos de las páginas no caben en el ancho del contenedor. Se accede a las páginas que ocupan más espacio del disponible a través de un menú desplegable, que se muestra al hacer clic en los puntos suspensivos.
+
+## Tallas
+
+El tamaño de fuente básico en breadcrumbs es body-1. El tamaño del icono es de 16x16 px.
+
+![Sizes](/static/images/design/Breadcrumbs/Sizes.png)
+
+## Estados
+
+![States](/static/images/design/Breadcrumbs/States.png)
+
+**Predeterminado**: estado predeterminado.
+
+**Pase el ratón**: pasa el ratón sobre el título de la página.
+
+**Desactivar**: no se puede hacer clic en él. Se puede usar para la página actual o para las páginas que no están vinculadas.
+
+**Carga**: el componente puede mostrar el contenido del elemento pasando una función a través del parámetro renderItemContent. Por ejemplo, muestre Skeleton si los datos del elemento crumbs aún no se han cargado.
+
+## Modificaciones
+
+![Modifications](/static/images/design/Breadcrumbs/Modifications1.png)
+
+El pan rallado puede contener los siguientes elementos adicionales:
+
+1. **Icono de acción:** como añadir a favoritos, copiar el título de la página o el menú contextual.
+2. **[Etiqueta](/design/guides/label):** un estado u otro atributo asociado a la página.
+3. **Seleccionar: al** hacer clic en el elemento, puede elegir entre varias opciones.
+4. **Texto adicional**: ID, contador de cantidades y otros atributos de página
+
+Se puede usar el icono de una casa en lugar de la palabra «Principal» para indicar que se ha regresado a la página de inicio.
+
+![Modifications](/static/images/design/Breadcrumbs/Modifications1.png)
+
+## Personalización
+
+Puedes cambiar los colores, los separadores y los estilos del cursor. Recuerda tener un resaltado más brillante en la página actual y un contraste suficiente entre los elementos.
+
+![Customization](/static/images/design/Breadcrumbs/Customization.png)

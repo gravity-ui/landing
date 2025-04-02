@@ -2,7 +2,9 @@ import {PageConstructorProvider, Theme as PageConstructorTheme} from '@gravity-u
 import {Lang, ThemeProvider, configure as configureUiKit} from '@gravity-ui/uikit';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
+import es from 'javascript-time-ago/locale/es.json';
 import ru from 'javascript-time-ago/locale/ru.json';
+import zh from 'javascript-time-ago/locale/zh.json';
 import {useTranslation} from 'next-i18next';
 import Head from 'next/head';
 import React from 'react';
@@ -19,6 +21,8 @@ import {Meta, MetaProps} from './Meta/Meta';
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
+TimeAgo.addLocale(es);
+TimeAgo.addLocale(zh);
 
 const b = block('layout');
 
