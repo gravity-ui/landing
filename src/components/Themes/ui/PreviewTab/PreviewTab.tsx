@@ -48,7 +48,6 @@ interface PreviewLayoutProps {
     hideAsideMenu?: boolean;
     scrollableContent?: boolean;
     noPadding?: boolean;
-    rightActions?: React.ReactNode;
 }
 
 const PreviewLayout = ({
@@ -59,7 +58,6 @@ const PreviewLayout = ({
     hideAsideMenu,
     scrollableContent,
     noPadding,
-    rightActions,
 }: PreviewLayoutProps) => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
@@ -88,8 +86,6 @@ const PreviewLayout = ({
                             </Breadcrumbs>
                         </ActionBar.Group>
                         <ActionBar.Group pull="right">
-                            {rightActions}
-
                             {/* Hide alignment in MVP */}
                             <ActionBar.Item className={b('header-actions', {hidden: true})}>
                                 <SegmentedRadioGroup

@@ -427,7 +427,7 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                         <Icon data={ChevronLeft} />
                                     </Button>
                                     <Box width="100%">
-                                        <Breadcrumbs>
+                                        <Breadcrumbs style={{boxSizing: 'content-box'}}>
                                             {BREADCRUMBS.map((item, index) => {
                                                 return (
                                                     <Breadcrumbs.Item key={index}>
@@ -1116,7 +1116,10 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                                                 }}
                                                             />
 
-                                                            <Flex direction="column">
+                                                            <Flex
+                                                                direction="column"
+                                                                style={{color: 'white'}}
+                                                            >
                                                                 <Text variant="caption-1">
                                                                     GET IT ON
                                                                 </Text>
@@ -1137,7 +1140,7 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                 <div>
                                     <Flex justifyContent="space-between" alignItems="center">
                                         <Text variant="body-1" color="secondary">
-                                            © 2011—2024 Copyrite
+                                            © 2011—{new Date().getFullYear()} Copyright
                                         </Text>
 
                                         <Flex gap={4} alignItems="center">

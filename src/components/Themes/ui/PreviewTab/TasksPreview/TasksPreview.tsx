@@ -519,14 +519,18 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                                 </div>
                                             </Flex>
                                         </Flex>
-                                        <TabList value="active">
-                                            <Tab value="active" counter={25}>
-                                                Active
-                                            </Tab>
-                                            <Tab value="closed" counter={2}>
-                                                Closed
-                                            </Tab>
-                                        </TabList>
+
+                                        <div>
+                                            <TabList value="active" className={spacing({mx: 5})}>
+                                                <Tab value="active" counter={25}>
+                                                    Active
+                                                </Tab>
+                                                <Tab value="closed" counter={2}>
+                                                    Closed
+                                                </Tab>
+                                            </TabList>
+                                        </div>
+
                                         <div
                                             style={{overflow: 'auto'}}
                                             className={spacing({mt: 1})}
@@ -534,7 +538,7 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                             <TasksList />
                                         </div>
 
-                                        <Flex spacing={{px: 5, pb: 5, mt: 10}}>
+                                        <Flex grow={1} spacing={{px: 5, pb: 5, mt: 10}}>
                                             <Button>
                                                 More
                                                 <Icon data={ChevronDown} />
@@ -771,7 +775,9 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                 alignItems="center"
                                 justifyContent="space-between"
                             >
-                                <Text color="secondary">© 2011—2024 Copyrite</Text>
+                                <Text color="secondary">
+                                    © 2011—{new Date().getFullYear()} Copyright
+                                </Text>
 
                                 <Flex gap={4} alignItems="center">
                                     <Text>Privacy Policy</Text>
