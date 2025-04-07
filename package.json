@@ -24,7 +24,6 @@
     "@testing-library/user-event": "^13.5.0",
     "bem-cn-lite": "^4.1.0",
     "chroma-js": "^2.4.2",
-    "highcharts": "^12.1.2",
     "highlight.js": "^11.8.0",
     "husky": "^8.0.3",
     "i18next": "^23.8.3",

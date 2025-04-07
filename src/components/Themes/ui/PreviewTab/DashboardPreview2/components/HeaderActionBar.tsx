@@ -3,9 +3,9 @@ import {ActionBar} from '@gravity-ui/navigation';
 import {Avatar, AvatarStack, Button, Hotkey, Icon, TextInput} from '@gravity-ui/uikit';
 import {block} from 'src/utils';
 
-import avatar1 from '../avatars/avatar1.png';
-import avatar2 from '../avatars/avatar2.png';
-import avatar3 from '../avatars/avatar3.png';
+import avatar1Asset from '../../../../assets/avatar-1.png';
+import avatar2Asset from '../../../../assets/avatar-2.png';
+import avatar3Asset from '../../../../assets/avatar-3.png';
 
 import './HeaderActionBar.scss';
 
@@ -30,9 +30,9 @@ export const HeaderActionBar = () => {
                 <ActionBar.Group>
                     <ActionBar.Item className={b('centered', {margin: true})}>
                         <AvatarStack className={b('users')} max={3}>
-                            <Avatar imgUrl={avatar1.src} />
-                            <Avatar imgUrl={avatar2.src} />
-                            <Avatar imgUrl={avatar3.src} />
+                            <Avatar imgUrl={avatar1Asset.src} />
+                            <Avatar imgUrl={avatar2Asset.src} />
+                            <Avatar imgUrl={avatar3Asset.src} />
                         </AvatarStack>
                         <Button size="m" view="outlined">
                             <Icon size={16} data={Plus} />
