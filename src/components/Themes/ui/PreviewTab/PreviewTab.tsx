@@ -23,18 +23,19 @@ import {
 } from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {CSSProperties, Fragment, useState} from 'react';
-import {Dashboard} from 'src/blocks/Examples/Dashboard/PageLayout';
 
 import gravityUi from '../../../../assets/icons/gravity-ui.svg';
 import {block} from '../../../../utils';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme} from '../../lib/themeCreatorExport';
 
+import {ApartmentCardPreview} from './ApartmentCardPreview/ApartmentCardPreview';
 import {CardsPreview} from './CardsPreview/CardsPreview';
 import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
+import {TasksPreview} from './TasksPreview/TasksPreview';
 
 const b = block('themes-preview-layout');
 
@@ -44,9 +45,20 @@ interface PreviewLayoutProps {
     breadCrumbsItems: string[];
     styles: ReturnType<typeof exportTheme>;
     children: (props: any) => React.ReactNode;
+    hideAsideMenu?: boolean;
+    scrollableContent?: boolean;
+    noPadding?: boolean;
 }
 
-const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutProps) => {
+const PreviewLayout = ({
+    breadCrumbsItems,
+    children,
+    styles,
+    id,
+    hideAsideMenu,
+    scrollableContent,
+    noPadding,
+}: PreviewLayoutProps) => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
     const [isCompact, setCompact] = useState<boolean>(true);
@@ -73,7 +85,6 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                                 ))}
                             </Breadcrumbs>
                         </ActionBar.Group>
-
                         <ActionBar.Group pull="right">
                             {/* Hide alignment in MVP */}
                             <ActionBar.Item className={b('header-actions', {hidden: true})}>
@@ -136,7 +147,13 @@ const PreviewLayout = ({breadCrumbsItems, children, styles, id}: PreviewLayoutPr
                 }}`}</style>
             ) : null}
 
-            <div className={b()}>
+            <div
+                className={b({
+                    'hide-aside': hideAsideMenu,
+                    'scrollable-content': scrollableContent,
+                    'no-padding': noPadding,
+                })}
+            >
                 <AsideHeader
                     menuItems={[
                         {
@@ -222,6 +239,18 @@ const previewComponents = [
         breadCrumbsItems: ['Dashboard'],
     },
     {id: 'cards', Component: CardsPreview, title: 'Cards', breadCrumbsItems: ['Cards']},
+    {
+        id: 'apartment',
+        Component: ApartmentCardPreview,
+        title: 'Apartment',
+        blank: true,
+    },
+    {
+        id: 'tasks',
+        Component: TasksPreview,
+        title: 'Tasks',
+        blank: true,
+    },
 ];
 
 export const PreviewTab = () => {
@@ -236,20 +265,23 @@ export const PreviewTab = () => {
         <Flex direction="column" gap={8}>
             <Text variant="display-2">{t('title_ui-samples')}</Text>
 
-            {previewComponents.map(({Component, title, breadCrumbsItems, id}, index) => {
-                return (
-                    <PreviewLayout
-                        key={index}
-                        id={id}
-                        title={title}
-                        breadCrumbsItems={breadCrumbsItems}
-                        styles={themeStyles}
-                    >
-                        {(props) => <Component {...props} />}
-                    </PreviewLayout>
-                );
-            })}
-            <Dashboard />
+            {previewComponents.map(
+                ({Component, title, breadCrumbsItems = [], id, blank}, index) => {
+                    return blank ? (
+                        <Component key={index} styles={themeStyles} />
+                    ) : (
+                        <PreviewLayout
+                            key={index}
+                            id={id}
+                            title={title}
+                            breadCrumbsItems={breadCrumbsItems}
+                            styles={themeStyles}
+                        >
+                            {(props) => <Component {...props} />}
+                        </PreviewLayout>
+                    );
+                },
+            )}
         </Flex>
     );
 };

@@ -18,6 +18,10 @@ class CustomDocument extends Document {
             // Workaround for missing direction 'ltr' in ThemeProvider
             <Html lang={currentLocale} dir="ltr">
                 <Head>
+                    <meta
+                        name="google-site-verification"
+                        content="QhqdVzck0x0Hw82h7fl_l9ebRsYpSqlC_JhyDRXBnew"
+                    />
                     {IS_PRODUCTION && (
                         <Script
                             id="google-analytics"

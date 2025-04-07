@@ -1,0 +1,153 @@
+La tabla se utiliza para la visualización intuitiva de datos estructurados de cualquier tamaño.
+
+Un elemento atómico de la tabla es una célula. Las celdas forman columnas y filas en la tabla. La tabla siempre tiene un encabezado.
+
+## **Celda de tabla**
+
+Una celda es un contenedor en la intersección de una fila y una columna de la tabla, en el que puede colocar otros componentes:
+
+- Texto
+- Iconos
+- [Botones](/design/guides/button)
+- [Etiquetas](/design/guides/label)
+- [Avatar de usuario](/design/guides/user-avatar)
+- [Barra de progreso](/design/guides/progress-bar)
+- Casilla de verificación
+- [Seleccione](/design/guides/select)
+- [Entrada](/design/guides/text-input) y otros componentes
+
+Una sola celda puede contener un solo componente (por ejemplo, texto) o una combinación de componentes (por ejemplo, una casilla de verificación, texto e icono).
+
+![1.png](/static/images/design/Table/table-0001.png)
+
+Una celda puede estar vacía si no hay datos que mostrar en ella. Además, el contenido de la celda puede ocultarse en su estado normal y hacerse visible al pasar el cursor sobre la celda o fila.
+
+### **Recomendaciones para el uso de componentes**
+
+- No utilice más de tres componentes diferentes en una celda: esto dificulta la comparación de los datos de la columna con esas celdas y hace que la tabla sea menos legible. En estos casos, puede crear una columna independiente para la propiedad que describe cada componente.
+- Elija los tamaños de los componentes en la tabla en función de la tarea actual. Para datos de texto sin formato, es mejor usar el estilo text-body-1 sin decoración, y para otros elementos, usar el tamaño M.
+- Se recomienda utilizar componentes del mismo tamaño en una celda, por ejemplo, etiquetas y botones de tamaño M.
+
+### Altura y ancho de la celda
+
+El tamaño de la celda está determinado por el tamaño de su contenido y el relleno de las celdas.
+
+La altura de celda estándar con texto de una sola línea, con el estilo text-subheader-1 (interlineado de 18 px), es de 40 px. Tanto el relleno de las celdas superior como el inferior en este caso son de 11 píxeles.
+
+Para una celda con texto de dos líneas, la altura de la celda es de 58 píxeles.
+
+![2.png](/static/images/design/Table/table-0002.png)
+
+Puedes usar cualquier relleno en la parte superior, inferior, izquierda y derecha, pero te recomendamos un sistema de rellenos que sean múltiplos de 4 píxeles. Los acolchados superior e inferior suelen ser los mismos, pero puedes hacerlos diferentes. Lo mismo se aplica a los rellenos izquierdo y derecho (para obtener más información, consulte la descripción de las filas y columnas de la tabla). Los acolchados superior e inferior no tienen que ser iguales a los de la izquierda y la derecha.
+
+### Separador
+
+Cada celda tiene un separador horizontal de 1 px de altura. Este separador está alineado con el borde inferior de la celda, su ancho es igual al ancho de la celda. Puede omitir el separador de las celdas de la última fila de la tabla.
+
+### Alineación
+
+El contenido de una celda se puede alinear a la izquierda o a la derecha (para obtener más información sobre la alineación del texto, consulte las descripciones de las columnas).
+
+## **** Encabezado de tabla
+
+El encabezado de la tabla se encuentra en la parte superior de la tabla y contiene los nombres de las columnas. Además de los nombres, el encabezado también puede contener casillas de verificación y botones.
+
+![3.png](/static/images/design/Table/table-0003.png)
+
+Evite los nombres de columna de dos líneas para evitar saltos de línea. Cuando el nombre se ajusta a la segunda y otras líneas, la altura del encabezado aumenta. En este caso, los demás nombres y botones permanecen alineados con la parte superior.
+
+![4.png](/static/images/design/Table/table-0004.png)
+
+## **Columnas de tabla**
+
+Una columna es un grupo de celdas dispuestas verticalmente. Según el tipo de contenido de las celdas, los datos de la columna pueden ser:
+
+- Ordenado
+- alineado a la derecha
+
+### Clasificación
+
+Si los datos de la columna se pueden ordenar (por ejemplo, alfabéticamente, por hora o por tamaño), se coloca un icono de flecha junto al nombre de la columna. Cuando el usuario hace clic en el nombre del icono, las filas se ordenan según esta columna.
+
+![5.png](/static/images/design/Table/table-0005.png)
+
+La clasificación es una funcionalidad opcional de la tabla. Está disponible en casos de uso específicos.
+
+No puede ordenar la tabla por dos columnas en paralelo.
+
+Normalmente, si los datos de una columna se pueden ordenar, dichos datos deben tener la misma unidad de medida. Para evitar especificar la unidad en cada celda de la columna, agréguela al nombre de la columna con una coma.
+
+### Contenido alineado a la derecha
+
+Esta función solo está disponible para datos de texto y se usa para comparar datos (por ejemplo, el tiempo empleado o los recursos consumidos). Estos datos suelen tener la misma unidad y puede ordenarlos. Para los datos de columna alineados a la derecha con una flecha de clasificación, coloque la flecha primero, seguida del texto.
+
+![6.png](/static/images/design/Table/table-0006.png)
+
+### Bloqueo de columnas al desplazarse
+
+Si la tabla no cabe dentro de los bordes de la pantalla, aparece una barra de desplazamiento horizontal. En estos casos, puede bloquear determinadas columnas de la tabla para que permanezcan siempre en la pantalla. Puede bloquear la primera o la última columna de la tabla. Puede usar cualquier número de columnas bloqueadas, pero asegúrese de que haya suficiente espacio para las columnas que se desplazan, teniendo en cuenta el ancho mínimo admitido de la ventana gráfica.
+
+Cuando están bloqueadas, estas celdas de columna reciben un separador adicional: se coloca a la derecha si la columna está bloqueada a la izquierda y a la izquierda si la columna está bloqueada a la derecha. Este separador limitará el desplazamiento de otras celdas.
+
+![7.png](/static/images/design/Table/table-0007.png)
+
+En la columna situada más a la derecha, puedes añadir acciones para una fila. Se puede acceder a estas acciones mediante un icono de tres puntos, que se expande en una lista. Bloquee esta columna al desplazarse para que el usuario siempre pueda acceder a las acciones. Coloque el icono con forma de engranaje, que abre las configuraciones de las columnas de la tabla al hacer clic en él, en el encabezado de dicha columna.
+
+![8.png](/static/images/design/Table/table-0008.png)
+
+### Configuración de columnas
+
+Los usuarios pueden personalizar el número y el orden de las columnas. Para ello, añada un icono de engranaje en el encabezado de la última columna de la tabla. Cuando el usuario hace clic en el icono del engranaje, aparece una ventana emergente de configuración.
+
+![9.png](/static/images/design/Table/table-0009.png)
+
+## **Filas de tablas**
+
+Una fila es un grupo de celdas dispuestas horizontalmente.
+
+### Filas seleccionables
+
+Cuando los usuarios hacen clic en una fila de la tabla, se les puede dirigir a otra página, una ventana modal o una barra lateral. Al pasar el ratón por encima de esas filas, el color de fondo cambia a --g-color-base-simple-hover.
+
+![10.png](/static/images/design/Table/table-0010.png)
+
+Para una visualización más nítida del ratón sobre una fila de la tabla en la que se puede hacer clic, puedes añadir pequeños márgenes a la izquierda y a la derecha. Con estos márgenes, el contenido ya no se alinea con la cuadrícula. Por lo tanto, no recomendamos estos márgenes en los casos en los que no pase el ratón por el ratón.
+
+### Filas con operaciones masivas
+
+Puede aplicar acciones masivas a las filas en las que la primera celda contenga una casilla de verificación. Un conjunto de acciones grupales suele coincidir con el conjunto de acciones individuales de una fila de la tabla.
+
+Si se selecciona una fila, su color de fondo cambia a --g-color-base-selection y aparece una barra de acciones con una lista de acciones de grupo en la parte inferior de la página.
+
+![11.png](/static/images/design/Table/table-0011.png)
+
+Si hay diferentes acciones disponibles para diferentes filas de la tabla, se recomienda mostrar solo las acciones en la barra de acciones que estén disponibles para todas las filas seleccionadas. Se pueden habilitar otros comportamientos a discreción del diseñador.
+
+### Alineación de contenido
+
+Para las filas en las que la altura de la celda es superior a 40 píxeles, el contenido se puede alinear en la parte superior o centrarse en las celdas.
+
+La alineación superior es preferible porque mejora la legibilidad de los datos. En este caso, todos los componentes que contienen texto deben alinearse con la primera línea.
+
+![12.png](/static/images/design/Table/table-0012.png)
+
+Si una fila alineada en la parte superior contiene iconos, avatares de usuario, botones de iconos, casillas de verificación, barras de progreso y otros elementos no textuales, configure sus rellenos superiores de forma que su eje horizontal coincida con el eje del texto de una celda de una línea.
+
+![13.png](/static/images/design/Table/table-0013.png)
+
+Puede utilizar la alineación central cuando sea difícil ajustar los márgenes superiores de las celdas para todos los tipos de contenido de una fila o cuando la alineación no afecte a la legibilidad del contenido.
+
+## Recomendaciones de uso
+
+Usa tablas:
+
+- Organizar un gran volumen de datos homogéneos que describen las propiedades de un objeto.
+- Para ordenar y comparar los datos de tu página.
+- Para encontrar valores rápidamente ordenando, filtrando y escaneando el contenido de la tabla.
+
+No recomendamos:
+
+- Utilizar tablas para describir objetos con una sola propiedad. Una lista es una mejor opción para estos casos.
+   Por ejemplo, debe usar una lista para presentar información sobre el nombre del color y su codificación HEX.
+- Usar tablas para describir objetos que tienen propiedades heterogéneas distintas. En este caso, describe mejor cada objeto de forma individual.
+   Supongamos, por ejemplo, que su tarea consiste en describir los dispositivos que utiliza un empleado. Dichos dispositivos pueden incluir una computadora portátil (propiedades: Sistema operativo, capacidad de almacenamiento, tamaño de la pantalla), un ratón de ordenador (propiedades: cableado o inalámbrico) y una lámpara de escritorio (propiedades: fabricante, tipo de soporte). No añada todos estos datos en una sola tabla e intente encontrar un método de visualización diferente.
