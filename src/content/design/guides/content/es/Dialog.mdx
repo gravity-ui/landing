@@ -1,0 +1,124 @@
+Un **cuadro de diálogo** se utiliza para mostrar contenido adicional, así como para llamar la atención del usuario sobre una acción o un escenario específicos. El cuadro de diálogo impide que el usuario interactúe con la página principal hasta que se cierre o se ejecute la acción especificada en esta ventana.
+
+### Punto de entrada
+
+El punto de entrada al cuadro de diálogo puede ser hacer clic en un activador específico (por ejemplo, un botón de la interfaz) o determinadas acciones o condiciones de la interfaz (por ejemplo, intentar salir de una página sin guardar datos o cambiar una cuenta en otra pestaña).
+
+### Tallas
+
+El tamaño del cuadro de diálogo viene determinado por su contenido.
+
+![Sizes](/static/images/design/Dialog/sizes.png)
+
+
+**Talla S - 480 px**: Se utiliza para pequeñas notificaciones/confirmaciones y formularios.
+
+**Tamaño M — 720 px**: Se utiliza para formas pequeñas y medianas
+
+**Tamaño L — 900 px**: Se utiliza para grandes cantidades de datos y flujos dentro de una ventana modal.
+
+**Tamaño personalizado**: Se usa cuando ninguna de las tres opciones (S, M o L) es adecuada.
+
+### Área de contenido
+
+La ventana de diálogo puede contener cualquier tipo de contenido. El diseño se elige en función de los requisitos del usuario.
+
+Si el cuadro de diálogo contiene un formulario, se recomienda uno de los dos diseños de elementos:
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      **Vertical.** 
+      
+      Ideal para cuadros de texto simples y de tamaño S
+      
+      ![vertical](/static/images/design/Dialog/vertical.png)
+   </div>
+   <div className="col-12 col-md-6">
+      **Horizontal.** 
+      
+      Adecuado para formularios más complejos
+
+      ![horizontal](/static/images/design/Dialog/horizontal.png)
+   </div>
+</div>
+
+### Botones
+
+El botón de acción es obligatorio en la mayoría de los casos. Si el usuario no completa las acciones especificadas en el cuadro de diálogo, el botón está desactivado.
+En el lado izquierdo, hay una sección de controles personalizados, donde puedes colocar botones y enlaces secundarios. Por ejemplo, referencias.
+
+![Group 507124116.png](/static/images/design/Dialog/Group_507124116.png)
+
+En algunos casos, se puede usar un botón de peligro en lugar de un botón de acción (por ejemplo, en un cuadro de diálogo para eliminar una entidad).
+
+![Group 2087325976.png](/static/images/design/Dialog/Group_2087325976.png)
+
+El botón de acción no es necesario si no hay ninguna acción objetivo y el cuadro de diálogo tiene únicamente fines informativos. En este caso, puede usar el botón Cerrar de estilo Normal.
+
+![Frame 2087326371.png](/static/images/design/Dialog/Frame_2087326371.png)
+
+El botón secundario siempre se usa como botón de cancelación. Se puede usar para realizar acciones adicionales (por ejemplo, continuar sin cambios).
+
+![Group 2087326024.png](/static/images/design/Dialog/Group_2087326024.png)
+
+Puede que no haya ningún botón. Por lo general, la selección debe realizarse dentro del área de contenido en sí; de lo contrario, la interfaz principal no estará disponible.
+
+![Frame 2087325516.png](/static/images/design/Dialog/Frame_2087325516.png)
+
+### Navegación en cuadro de diálogo
+
+Si el cuadro de diálogo incluye varios pasos, utilice el botón Atrás para volver al paso anterior.
+
+![Group 2087326025.png](/static/images/design/Dialog/Group_2087326025.png)
+
+Si el cuadro de diálogo está anidado pero los pasos no son lineales, puede utilizar rutas de navegación en el área de contenido de la ventana.
+
+![breadcrumbs](/static/images/design/Dialog/breadcrumbs.png)
+
+### Colocación del cuadro de diálogo en la página
+
+El cuadro de diálogo está alineado con el centro de la pantalla tanto vertical como horizontalmente.
+
+Al escalar la ventana gráfica, su posición permanece inalterada y el tamaño de la ventana de diálogo se puede reducir siempre que no afecte al contenido.
+
+El espacio mínimo permitido desde los bordes superior e izquierdo de la pantalla es de 20 píxeles.
+
+![position](/static/images/design/Dialog/position.png)
+
+En los casos en los que la ventana no cabe en la ventana gráfica, el espaciado superior e izquierdo permanece inalterado, mientras que los bordes derecho e inferior de la ventana de diálogo se extienden más allá de los bordes de la pantalla. Sin embargo, esto no se recomienda. Por eso, el cuadro de diálogo debe diseñarse de manera que quepa dentro de la ventana gráfica y que el espaciado en todos los lados sea de al menos 20 píxeles desde el borde de la pantalla.
+
+### Cerrar una ventana
+
+Además de la acción objetivo, la ventana modal se puede cerrar de las siguientes maneras**:**
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      1. Botón Cancelar
+
+      ![cancel_btn](/static/images/design/Dialog/cancel_btn.png)
+   </div>
+   <div className="col-12 col-md-6">
+      2. Botón «X»
+
+      ![x_btn](/static/images/design/Dialog/x_btn.png)
+   </div>
+</div>
+
+Si la ventana no es modal, se puede cerrar mediante uno de los siguientes métodos:
+
+- Al hacer clic fuera de la ventana modal
+- Pulsando el botón Esc
+
+Los botones «cancelar» y «X» son elementos familiares, ya que se utilizan ampliamente en los cuadros de diálogo. Al hacer clic fuera de la ventana modal, al usuario le resulta más fácil cerrarla, ya que no tiene que apuntar el cursor del ratón a un elemento específico. Al pulsar la tecla Esc se puede cerrar la ventana sin necesidad de utilizar el ratón.
+
+Como solo se espera interactuar con el cuadro de diálogo, el contenido de la página principal no debe desplazarse.
+
+### Prevención de la pérdida de datos de los usuarios
+
+Dado que es fácil cerrar una ventana modal, siempre existe la posibilidad de hacerlo por accidente. Si el usuario selecciona solo las casillas de verificación en la ventana modal, es más fácil recuperar los datos perdidos que si el usuario dedicara un tiempo considerable a escribir el código o a volver a escribir el código VIN de 12 dígitos del vehículo. Así que es mejor evitar este tipo de situaciones. Sin embargo, no debemos impedir que el usuario cierre la ventana modal de la forma habitual.
+
+**Para evitar el riesgo de pérdida de datos, recomendamos utilizar** una ventana de confirmación adicional para la eliminación de datos. En este caso, la acción debe ser confirmada por el usuario.
+
+![Pop-up S.png](/static/images/design/Dialog/Pop-up_S%202.png)
+
+Al cerrar la ventana modal, utilice el sentido común para determinar si se requiere otra ventana de confirmación. Es importante lograr un equilibrio entre la seguridad y hacer demasiadas preguntas que puedan molestar al usuario.  El propósito de la confirmación es evitar perder la entrada del usuario y, al mismo tiempo, permitirle ejecutar el script.

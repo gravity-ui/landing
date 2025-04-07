@@ -15,7 +15,7 @@ const s3Client = new S3({
     region: 'ru-central1-a',
 });
 
-const BUCKET_NAME = 'gravity-assets';
+const BUCKET_NAME = 'gravity-ui-assets';
 
 try {
     const browser = await chromium.launch();

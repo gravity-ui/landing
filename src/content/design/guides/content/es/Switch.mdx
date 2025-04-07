@@ -1,0 +1,40 @@
+## Descripción
+
+Este componente es un control interactivo que puede cambiar entre dos estados: activado (activado) y desactivado (desactivado). Se utiliza para activar o desactivar determinadas funciones, opciones o ajustes.
+
+![Description](/static/images/design/Switch/description.png)
+
+## Dimensiones
+
+Switch tiene dos tamaños principales:
+
+![Sizes](/static/images/design/Switch/Sizes.png)
+
+- **M (mediana)**: Para casos de uso estándar. Ofrece a la mayoría de los usuarios una experiencia visual intuitiva.
+- **L (grande)**: Se usa cuando es necesario resaltar el elemento o cuando es preferible un tamaño de fuente mayor.
+
+## Estados
+
+Switch tiene cuatro estados principales:
+
+![States](/static/images/design/Switch/States.png)
+
+1. **Desactivado**: un estado inactivo en el que la opción o función está deshabilitada.
+2. **** Activado: un estado activo en el que la opción o función está habilitada.
+3. **Pasar el ratón**: cuando un usuario pasa el ratón sobre el elemento, este responde visualmente para indicar que se puede interactuar con él.
+4. **Desactivado**: estado en el que el elemento está inactivo y no se puede interactuar con él.
+
+## Propiedades
+
+El componente puede activar o desactivar la etiqueta. La etiqueta está desactivada de forma predeterminada, pero se puede activar mediante la propiedad «Etiqueta».
+
+Tenga en cuenta que si se cambia el tamaño del elemento, el tamaño de la etiqueta se ajustará en consecuencia:
+
+![Labels](/static/images/design/Switch/Labels.png)
+
+- 13px es el tamaño de fuente para las etiquetas de tamaño M
+- 15px es el tamaño de fuente para las etiquetas de tamaño L
+
+## Guía del usuario
+
+Para mantener la cohesión visual y la coherencia de la interfaz, utilice un interruptor si al activarla o desactivarla se producen cambios inmediatos en determinadas opciones o en el estado general de la página. No recomendamos usar el interruptor y el botón de confirmación de la acción al mismo tiempo. En estas situaciones, es mejor usar una casilla de verificación.

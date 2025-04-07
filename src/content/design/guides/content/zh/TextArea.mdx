@@ -1,0 +1,159 @@
+用于在多行中输入任意文本、数字和符号值的组件。最常用于创建实体或在表单和对话框中输入消息时的描述。
+
+## **应用程序**
+
+与 [TextInput 不同，](/design/guides/text-input) 它具有行和的高度，用于以任意字母、数字或符号组合的自由形式输入数据。
+
+最小高度为一行，但我们建议使用具有两行或更多行的组件。
+
+![Rows](/static/images/design/TextArea/Rows.png)
+
+如果未指定行数，则根据内容量自动计算高度。
+
+![Auto](/static/images/design/TextArea/Auto.png)
+
+✅ **何时使用**
+
+1.当需要多行文本时。
+2.当文本必须是冗长的描述或包含大量字符的消息时。
+3.当它被添加到必须填写字段的表单中时。
+
+🚫 **何时不使用**
+
+1.当需要筛选器、授权表单字段或搜索字符串时。
+2.当需要少量字符（少于 5 个单词）时。为此，我们建议使用 [TextInput](/design/guides/text-input) ，这是一个用于单行文本输入的组件。
+
+## 类型
+
+TextInput 有两种类型：**Nor** mal 和 C **lear** ，它们具有相同的功能集，但外观和使用方式因上下文而异。
+
+![Normal, Clear](/static/images/design/TextArea/Normal_Clear.png)
+
+**正常**
+
+- 最常用的类型。
+- 该组件的一个显著特征是其内部边距和圆角半径。这些参数由元素的大小决定，并由角半径的特定变量（ [此处](/design/branding/corner-radius)有更多信息）以及 1px 笔画定义。
+- 在组件之间需要自由空间时在表单中使用，例如表单元素之间的填充。
+
+{/* ![Console. Creating a cluster.](/static/images/design/TextArea/Console.png)
+
+控制台。创建集群。
+
+![DataLens. Creating a collection.](/static/images/design/TextArea/Datal.png)
+
+DataLens。创建收藏夹。*/}
+
+**清除**
+
+- 该组件的决定性特征是没有边框，元素位于输入字段的边界内。
+- 当 “正常” 类型产生视觉噪点时使用。
+- 使用此类型时，请确保用户清楚该组件的用途。
+
+{/* ![Yandex GPT. Entering instructions.](/static/images/design/TextArea/Chat_GPT.png)
+
+Yandex GPT。输入指令。*/}
+
+## 结构
+
+![Structure.png](/static/images/design/TextArea/Structure.png)
+
+**1.价值**
+
+![Active.png](/static/images/design/TextArea/Active.png)
+
+- 是必需的元素。
+- 可用作提示（占位符）和输入的文本。
+- 输入的文本取代了提示。
+
+**2.“清除” 按钮**
+
+![Clear Button](/static/images/design/TextArea/ClearButton.png)
+
+- 是可选组件。
+- 在需要删除字段内容时使用。
+- 在字段中输入至少一个字符时显示。
+- 即使焦点在场外也能显示。
+- 是一个 Flat-secondary 类型的按钮组件，它继承了其所有属性。例如，悬停时会填充十字架的背景。
+- 单击 “清除” 按钮时，焦点会转移到该字段，输入的值将被删除。
+**3.其他内容**
+
+![Structure2.png](/static/images/design/TextArea/Structure2.png)
+
+- 是一个可选元素，嵌入在右下角。
+- 当必须向外部添加其他文本时使用。
+- 文本向右对齐。
+- 例如，可以用作计数器（字符输入计数器）。
+
+
+**4.错误图标**
+
+![Error icon](/static/images/design/TextArea/8.png)
+
+- 仅在 “行内错误” 状态下显示。
+- 与 Tooltip 配合使用，将鼠标悬停在图标上时提供错误描述，以实现更紧凑的表单布局。
+
+**5.错误消息**
+
+![Error message](/static/images/design/TextArea/9.png)
+
+- 仅在 “大纲错误” 状态下显示。
+- 嵌入在左下角。
+
+## 国家
+
+![States.png](/static/images/design/TextArea/States.png)
+
+具有以下状态：**建议、默认、悬停、活动、禁用、行内错误和大纲错误。**
+
+1.**建议。** 当与组件没有直接交互且未输入任何数据时，处于非活动状态。在这种状态下，该值可以用作提示，向用户指示应在该字段中输入什么样的信息。
+2.**默认。** 当与组件没有直接交互并且已经输入数据时，处于非活动状态。在此状态下，提示值根据用户的输入而变化。
+3.**徘徊。** 光标悬停在组件区域上方时的活动状态。
+4.**活跃。** 活动状态，通过从前一个组件转换或通过单击光标来触发。过渡到其他组件或在空白区域上单击光标时，状态会重置。
+5.**已禁用。** 无法与组件交互时组件处于非活动状态。
+6.**大纲错误。** 验证期间发生错误时组件的活动状态，显示在字段底部并附有说明。
+7.**行内错误。** 出现字段验证错误但未显示错误时组件的活动状态。相反，错误由一个特殊图标表示，当鼠标悬停在上方时，会显示错误工具提示。
+
+## 尺码
+
+![Sizes.png](/static/images/design/TextArea/Sizes.png)
+
+该组件有四种尺寸：**S、M、L 和 XL。**
+
+字段的高度和圆角半径，以及字段内部的边距和文本的大小因组件的大小而异。
+
+圆角半径取决于大小，由 [变量](/design/branding/corner-radius)设置。
+
+1.**S** (-g-border-radius-s: 5px;) — 当标准输入过大（例如桌子、小牌）时使用。
+2.**M** (-g-border-radius-m: 6px;) — 基本尺寸，用于大多数表单和过滤器。
+3.**L** (-g-border-radius-l: 8px;) — 用于搜索（例如服务搜索）。
+4.**L** (-g-border-radius-xl: 10px;) — 用于通信环境（例如网站和登录页面）。
+
+## 用户指南
+
+**1.在实地工作**
+
+- 该字段的高度可能有所不同。[TextInput](/design/guides/text-input) 可用于单行输入。
+- 我们不建议在字段 **中包含** 提示，因为字段名称在输入值时将不可见，除非空间有限或用户明确该字段的用途。
+- 表单的所有互补组件使用 **相同的大小**。如果选择尺寸 M，则所有其他组件的大小应相同。
+
+**2.外部字段标题**
+
+![External field header](/static/images/design/TextArea/12.png)
+
+- 简短的字段名称，最好限于一行。
+- 组件应与字段的值保持一致，除非上下文是移动的，或者对话框大小为 S，在这种情况下，组件的标题显示在组件的顶部。
+
+**3.使用工具提示进行提示**
+
+![Hint with tooltip](/static/images/design/TextArea/13.png)
+
+- 将鼠标悬停在带有问号的图标上时填写字段的说明。
+- 在应澄清标题和含义时使用。
+- 不应包含超过两段的案文。
+
+**4.其他描述**
+
+![Additional description](/static/images/design/TextArea/14.png)
+
+- 可以在字段的底部或右侧找到。
+- 在极少数情况下，当不清楚如何填写没有附加描述的字段时，或者需要对先前输入的值进行解释时使用。

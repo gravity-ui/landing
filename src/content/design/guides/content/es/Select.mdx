@@ -1,0 +1,175 @@
+Un componente para seleccionar un valor o un conjunto de valores de una lista especificada. Cuando el usuario hace clic en el control, se abre una lista desplegable con un conjunto de valores entre los que puede elegir el usuario.
+
+## Casos de uso
+
+![1.png](/static/images/design/Select/select-0001.png)
+
+**¿Cuándo usar?**
+
+- Cuando espera que el usuario seleccione valores de una lista especificada.
+
+**¿Cuándo evitarlo?**
+
+- Cuando desee mostrar todos los valores entre los que seleccionar. Para estos casos de uso, utilice [Radio](/design/guides/radio), [Checkbox](/design/guides/checkbox) o Radio Button.
+
+## Opciones
+
+**Selección única**
+
+![2.png](/static/images/design/Select/select-0002.png)
+
+- Se usa para seleccionar un único valor de una lista.
+- Cuando el usuario selecciona un valor, se cierra la lista desplegable.
+- El control muestra el valor seleccionado.
+
+**Selección múltiple**
+
+![3.png](/static/images/design/Select/select-0003.png)
+
+- Utilícelo cuando espere que el usuario seleccione más de un valor de una lista.
+- En la lista, el valor seleccionado está marcado con una marca de verificación a la izquierda.
+- El control muestra los valores seleccionados separados por comas.
+- Para cerrar la lista desplegable y aplicar los valores seleccionados, el usuario hace clic en el espacio en blanco exterior o en el botón de confirmación de la lista (si se proporciona).
+
+## Tipos
+
+El control se presenta en dos tipos: **Normal** y **Clear**, ambos tienen el mismo conjunto de funciones pero tienen un aspecto diferente y se aplican según el contexto.
+
+![4.png](/static/images/design/Select/select-0004.png)
+
+**Normal**
+
+- El tipo que se usa con más frecuencia.
+- La característica distintiva es que el componente tiene un borde de 1 px y los elementos del interior (texto y cheurones) tienen márgenes en los bordes.
+- Utilice este componente en los formularios en los que necesite separar los elementos del formulario mediante márgenes.
+
+**Borrar**
+
+- La característica distintiva es que el componente no tiene borde y los elementos del interior (texto y comillas) están alineados con los bordes del campo de entrada.
+- Se usa cuando el tipo Normal crea ruido visual.
+- Al usar este tipo, asegúrese de que el significado del componente quede claro para el usuario.
+
+## Estructura
+
+![5.png](/static/images/design/Select/select-0005.png)
+
+1. Etiqueta en línea
+2. Valor
+3. Borrar icono
+4. Chevrón
+5. Icono de error
+6. Descripción del error
+
+### Etiqueta en línea
+
+   ![6.png](/static/images/design/Select/select-0006.png)
+
+   - Un elemento opcional.
+   - Añade una explicación al nombre del campo de selección.
+   - Puede reemplazar la etiqueta externa del formulario.
+
+### Valor
+
+   ![7.png](/static/images/design/Select/select-0007.png)
+
+   - Un elemento obligatorio.
+   - De forma predeterminada, es una sugerencia para ayudar al usuario a comprender qué se puede seleccionar de la lista de valores.
+   - El lugar donde se muestran el valor o los valores seleccionados.
+
+### Borrar icono
+
+   ![8.png](/static/images/design/Select/select-0008.png)
+
+   - Un elemento opcional.
+   - Se usa para borrar rápidamente el componente de los valores u opciones de valor seleccionados sin invocar la lista desplegable.
+   - Puede aparecer cuando se ha seleccionado al menos un valor.
+   - Una vez borrado, el foco permanece en el componente.
+   - Cambia de color al pasar el ratón.
+
+### Chevrón
+
+   ![9.png](/static/images/design/Select/select-0009.png)
+
+   - Un elemento obligatorio.
+   - Se usa para diferenciar el componente de otros componentes visualmente similares (por ejemplo, [TextInput](/design/guides/text-input)), para identificar el componente en el formulario.
+   - El componente solo puede estar con un cheurón, por ejemplo, cuando se necesita una vista compacta.
+   - A pesar de la presencia de un cheurón, se puede hacer clic en toda el área del componente.
+
+### Icono de error
+
+   ![10.png](/static/images/design/Select/select-0010.png)
+
+   - Se muestra solo en el estado de error en línea
+   - Funciona junto con una descripción del error. La información sobre herramientas se muestra al pasar el icono al pasar el ratón. Ayuda a mantener informado al usuario pero ahorra espacio.
+
+### Descripción del error
+
+   ![11.png](/static/images/design/Select/select-0011.png)
+
+   - Solo aparece en el estado Error de esquema.
+   - La descripción del error se coloca en la parte inferior izquierda del campo cuando necesita mostrar inmediatamente la causa del error.
+
+## Estados
+
+Cuenta con varios estados: **Sugerir, Predeterminado, Pasar el ratón, Desactivado, Activo, Error en línea, Error de esquema.**
+
+![12.png](/static/images/design/Select/select-0012.png)
+
+1. **Sugerir.** Estado inactivo: cuando el usuario no interactúa directamente con el componente y no ha seleccionado nada en él. En este estado, puede indicar al usuario lo que puede seleccionar.
+2. **Predeterminado.** Estado inactivo, cuando el usuario no interactúa directamente con el componente y ya ha seleccionado algo en él. En este estado, el valor de la sugerencia cambia a la selección de la lista desplegable.
+3. **Flotar.** Estado activo cuando el usuario mueve el cursor sobre el área del componente.
+4. **Discapacitado.** Estado inactivo del componente cuando el usuario no puede interactuar con él.
+5. **Activo.** El estado activo se habilita cuando el usuario hace clic en el control. Al hacer clic, se abre una lista desplegable.
+6. **Error de esquema.** Estado de un componente provocado por un error de validación, que se muestra en la parte inferior del campo con una explicación de lo que ha ocurrido.
+7. **Error en línea.** El estado de un componente se desencadena por un error de validación, pero no aparece la explicación del error, solo un icono especial. Al pasar el ratón sobre el icono, aparece una descripción emergente con el error.
+
+## Tallas
+
+![13.png](/static/images/design/Select/select-0013.png)
+
+Hay cuatro tamaños de componentes: **S, M, L, XL**.
+
+| Tamaño | Altura | Estilo de texto | Redondeo |
+| --- | --- | --- | --- |
+| S | 24 | Cuerpo 1 | 5 |
+| M | 28 | Cuerpo 1 | 6 |
+| L | 36 | Cuerpo 1 | 8 |
+| XL | 44 | Cuerpo 2 | 10 |
+
+La elección de tamaño determina la altura y las esquinas redondeadas del control, sus rellenos y el tamaño del texto.
+
+El radio de la esquina depende del tamaño y se establece mediante variables.
+
+1. **S.** Utilízalo cuando el control estándar sea demasiado grande (mesas, cartas pequeñas).
+2. **M.** Este es el tamaño principal, úsalo en la mayoría de los formularios y filtros.
+3. **L. Se utiliza** muy poco.
+4. **XL.** Úselo en entornos de comunicación, es decir, sitios web y páginas de destino.
+
+## Recomendaciones de uso
+
+1. **Trabajando con el campo**
+   - Elige el ancho del **campo en** función del tamaño del contenido. Por ejemplo, puede hacer que el elemento sea más ancho para valores largos o para la selección múltiple.
+   - Usa **una talla** con otros componentes complementarios en el formulario. Si opta por trabajar con M, los demás componentes deben ser del mismo tamaño.
+   - Usa el icono de la **cruz para borrar la selección** múltiple: esto es más cómodo y rápido.
+   - No puede cambiar la altura del control. Solo proporcionamos el tamaño de campo **fijo**.
+
+2. **Etiqueta de esquema**
+
+   ![14.png](/static/images/design/Select/select-0014.png)
+
+   - Un nombre de campo breve (no debe superar una línea).
+   - Cuando lo use en formularios, alinéelo con el valor dentro del campo.
+
+3. **Sugerencia con información sobre herramientas**
+
+   ![15.png](/static/images/design/Select/select-0015.png)
+
+   - Sugerencia adicional sobre la elección, que se muestra al pasar el cursor sobre el icono del signo de interrogación.
+   - Úselo cuando necesite explicar la etiqueta.
+
+4. **Descripción**
+
+   ![16.png](/static/images/design/Select/select-0016.png)
+
+   - Puede estar ubicado debajo del campo o a la derecha del campo.
+   - Úselo en casos especiales para hacer aclaraciones adicionales sobre la elección o dar explicaciones sobre los valores elegidos.
