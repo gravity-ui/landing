@@ -1,0 +1,49 @@
+@use '../../../../../variables.scss';
+
+$block: '.#{variables.$ns}dashboard-preview-example';
+
+#{$block} {
+    &__wrapper {
+        height: fit-content;
+    }
+    --gn-aside-header-collapsed-background-color: transparent;
+
+    &_light_true {
+        --g-color-base-background: rgba(0, 0, 0, 0.05);
+
+        #{$block}__content {
+            background-color: rgb(255, 255, 255, 1);
+        }
+    }
+
+    &_light_false {
+        --g-color-base-background: rgba(255, 255, 255, 0.1);
+
+        #{$block}__content {
+            background-color: rgba(34, 29, 34, 1);
+        }
+    }
+
+    &__logo-icon {
+        width: 32px;
+        height: 32px;
+
+        color: var(--g-color-base-brand);
+    }
+
+    &__content {
+        &,
+        &-wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        &-wrapper {
+            padding: var(--g-spacing-3) var(--g-spacing-4);
+        }
+    }
+}
+
+.gravity-ui-landing-themes-preview-wrapper__content {
+    height: fit-content;
+}

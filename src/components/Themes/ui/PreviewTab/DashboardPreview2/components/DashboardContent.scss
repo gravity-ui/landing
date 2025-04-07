@@ -1,4 +1,4 @@
-@use '../../../../variables.scss';
+@use '../../../../../../variables.scss';
 
 $block: '.#{variables.$ns}dashboard-example-content';
 
@@ -10,6 +10,7 @@ $block: '.#{variables.$ns}dashboard-example-content';
 
     &__card {
         padding: var(--g-spacing-2) var(--g-spacing-3);
+        height: 100%;
     }
 
     &__info {
@@ -18,5 +19,29 @@ $block: '.#{variables.$ns}dashboard-example-content';
 
     &__dashboard-title {
         margin-block-end: var(--g-spacing-3);
+    }
+
+    &__col {
+        position: relative;
+        height: 242px;
+    }
+
+    &__graph,
+    &__graph-performance,
+    &__graph-items {
+        position: absolute;
+        left: var(--g-spacing-5);
+        width: calc(100% - var(--g-spacing-10));
+        height: 180px;
+    }
+
+    &__graph-performance {
+        left: 0;
+        width: calc(100% - var(--g-spacing-5));
+    }
+
+    &__graph-items {
+        left: var(--g-spacing-2);
+        height: 70%;
     }
 }

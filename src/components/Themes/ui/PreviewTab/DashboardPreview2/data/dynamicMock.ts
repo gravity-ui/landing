@@ -1,10 +1,11 @@
-import {HighchartsWidgetData} from '@gravity-ui/chartkit/highcharts';
+import type {ChartData} from '@gravity-ui/charts';
 
-export const dynamicMock: HighchartsWidgetData = {
-    data: {
-        graphs: [
+export const dynamicMock: ChartData = {
+    series: {
+        data: [
             {
-                title: 'Dynamic',
+                type: 'line',
+                name: 'Line series',
                 data: [
                     {
                         x: 1643662800000,
@@ -111,61 +112,18 @@ export const dynamicMock: HighchartsWidgetData = {
                         y: 9,
                     },
                 ],
-                connectNulls: false,
-                yAxis: 0,
-                color: '#4DA2F1',
-                dashStyle: 'Solid',
-                type: 'line',
             },
         ],
     },
-    config: {
-        precision: 2,
-        hideHolidaysBands: true,
-        enableSum: true,
-        hideHolidays: false,
-        normalizeDiv: false,
-        normalizeSub: false,
-        tooltip: {
-            pin: {
-                enabled: false,
-            },
-        },
-    },
-    libraryConfig: {
-        chart: {
-            type: 'line',
-        },
-        legend: {
-            symbolWidth: 38,
-        },
-        xAxis: {
-            endOnTick: false,
-
-            type: 'datetime',
-            dateTimeLabelFormats: {
-                month: '%b %y',
-            },
-        },
-        yAxis: {
-            opposite: false,
+    xAxis: {type: 'datetime'},
+    yAxis: [
+        {
             labels: {
-                y: 3,
+                enabled: true,
             },
-            type: 'linear',
-        },
-        tooltip: {
-            enabled: false,
-        },
-        plotOptions: {
-            series: {
-                dataGrouping: {
-                    enabled: false,
-                },
-                dataLabels: {
-                    allowOverlap: false,
-                },
+            ticks: {
+                pixelInterval: 10,
             },
         },
-    },
+    ],
 };

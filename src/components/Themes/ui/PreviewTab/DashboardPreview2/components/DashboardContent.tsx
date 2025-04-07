@@ -1,35 +1,19 @@
 'use client';
-import {settings} from '@gravity-ui/chartkit';
-import {HighchartsPlugin} from '@gravity-ui/chartkit/highcharts';
 import {Funnel, Plus} from '@gravity-ui/icons';
-import {
-    Button,
-    Card,
-    Col,
-    Container,
-    Flex,
-    HelpMark,
-    Icon,
-    Loader,
-    Row,
-    Text,
-} from '@gravity-ui/uikit';
+import {Button, Card, Col, Container, Flex, HelpMark, Icon, Row, Text} from '@gravity-ui/uikit';
 import dynamic from 'next/dynamic';
 import {block} from 'src/utils';
 
-import {distributionMock} from '../__mocks__/distributionMock';
-import {dynamicMock} from '../__mocks__/dynamicMock';
-import {topItemsMock} from '../__mocks__/topItemsMock';
+import {distributionMock} from '../data/distributionMock';
+import {dynamicMock} from '../data/dynamicMock';
+import {performanceMock} from '../data/performanceMock';
+import {topItemsMock} from '../data/topItemsMock';
 
 import './DashboardContent.scss';
 
 const b = block('dashboard-example-content');
 
-settings.set({plugins: [HighchartsPlugin]});
-const ChartKit = dynamic(() => import('@gravity-ui/chartkit'), {
-    loading: () => <Loader />,
-    ssr: false,
-});
+const Chart = dynamic(() => import('@gravity-ui/charts').then((mod) => mod.Chart), {ssr: false});
 
 const activeUsersInfo: {type: 'Monthly' | 'Weekly' | 'Daily'; info?: string; count: string}[] = [
     {type: 'Monthly', info: 'Average active users in month', count: '120 001'},
@@ -76,30 +60,46 @@ export const DashboardContent = () => {
                     ))}
                 </Row>
                 <Row space={2}>
-                    <Col style={{maxWidth: '60%'}}>
+                    <Col style={{maxWidth: '60%'}} className={b('col')}>
                         <Card className={b('card')}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Dynamic
                             </Text>
-                            <ChartKit id="1" type="highcharts" data={dynamicMock} />
+                            <div className={b('graph')}>
+                                <Chart data={dynamicMock} />
+                            </div>
                         </Card>
                     </Col>
-                    <Col style={{maxWidth: '40%'}}>
+                    <Col style={{maxWidth: '40%'}} className={b('col')}>
                         <Card className={b('card')}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
-                                Top items
+                                Performance
                             </Text>
-                            <ChartKit id="2" type="highcharts" data={topItemsMock} />
+                            <div className={b('graph-performance')}>
+                                <Chart data={performanceMock} />
+                            </div>
                         </Card>
                     </Col>
                 </Row>
-                <Row space={1}>
-                    <Col style={{flexBasis: '60%'}}>
+                <Row space={2}>
+                    <Col style={{flexBasis: '40%'}} className={b('col')}>
+                        <Card className={b('card')}>
+                            <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
+                                Top Items
+                            </Text>
+                            <div className={b('graph-items')}>
+                                <Chart data={topItemsMock} />
+                            </div>
+                        </Card>
+                    </Col>
+                    <Col style={{flexBasis: '60%'}} className={b('col')}>
                         <Card className={b('card')}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Distribution
                             </Text>
-                            <ChartKit id="3" type="highcharts" data={distributionMock} />
+                            <div className={b('graph')}>
+                                <Chart data={distributionMock} />
+                            </div>
                         </Card>
                     </Col>
                 </Row>

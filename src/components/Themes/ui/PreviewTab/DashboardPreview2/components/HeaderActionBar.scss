@@ -1,4 +1,4 @@
-@use '../../../../variables.scss';
+@use '../../../../../../variables.scss';
 
 $block: '.#{variables.$ns}dashboard-example-header';
 
@@ -39,5 +39,9 @@ section#{$block} {
 
     &__export {
         --g-button-border-radius: var(--g-border-radius-s);
+    }
+
+    &__grow {
+        flex-grow: 1;
     }
 }
