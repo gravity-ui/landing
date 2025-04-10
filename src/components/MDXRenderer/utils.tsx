@@ -11,5 +11,16 @@ export const getCustomImg =
                 correctedSrc = `${absoluteImgPath}${props.src}`;
             }
         }
-        return <img {...props} src={correctedSrc} />;
+        // Add default width and height if not provided to prevent layout shifts
+        const imgProps = {
+            ...props,
+            src: correctedSrc,
+            width: props.width || props.style?.width || 'auto',
+            height: props.height || props.style?.height || 'auto',
+            style: {
+                ...props.style,
+                aspectRatio: 'auto',
+            },
+        };
+        return <img {...imgProps} />;
     };

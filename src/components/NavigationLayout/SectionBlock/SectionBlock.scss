@@ -52,11 +52,14 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         overflow: hidden;
         max-height: 0;
         opacity: 0;
-        transition: all 0.3s ease-in-out;
+        visibility: hidden;
+        transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
 
         &_open {
             max-height: 5000px;
             opacity: 1;
+            visibility: visible;
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0s linear;
         }
     }
 
@@ -68,6 +71,8 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         border-radius: 12px;
         font-size: 15px;
         line-height: 20px;
+        height: 44px;
+        box-sizing: border-box;
         color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
         transition: background-color 0.2s ease-in-out;

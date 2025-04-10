@@ -54,8 +54,8 @@ export const MDXRenderer = React.memo<Props>(
 
         const preparedText = text
             .trim()
-            .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1')
-            .replace(/<!--GITHUB_BLOCK(.*?)\/GITHUB_BLOCK-->/gms, '');
+            .replace(/<!--LANDING_BLOCK([\s\S]*?)LANDING_BLOCK-->/gm, '$1')
+            .replace(/<!--GITHUB_BLOCK([\s\S]*?)\/GITHUB_BLOCK-->/gm, '');
 
         React.useEffect(() => {
             resultRef.current = null;
@@ -118,11 +118,12 @@ export const MDXRenderer = React.memo<Props>(
             }
         }, [isEvaluated]);
 
-        if (!isEvaluated || !resultRef.current) {
-            return null;
-        }
-
         const CustomImg = getCustomImg({absoluteImgPath});
+
+        // Create a placeholder with min-height when content is loading
+        if (!isEvaluated || !resultRef.current) {
+            return <div className="markdown-body" style={{minHeight: '200px'}}></div>;
+        }
 
         const Content = resultRef.current;
 

@@ -8,17 +8,20 @@ $block: '.#{variables.$ns}design-article';
     background: #251b25;
     border-radius: 16px;
 
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+    @media (max-width: #{map-get(pcVariables.$gridBreakpoints, 'sm') - 1}) {
         margin: 0 20px;
     }
 
     &__title {
         margin-top: 0;
+        margin-bottom: 26px;
         color: #fff;
         font-size: 40px;
         line-height: 48px;
         font-weight: 600;
+        min-height: 48px;
     }
+
     &__navigation {
         margin-top: var(--g-spacing-10);
     }
