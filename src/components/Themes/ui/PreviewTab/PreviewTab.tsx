@@ -31,6 +31,7 @@ import {exportTheme} from '../../lib/themeCreatorExport';
 
 import {ApartmentCardPreview} from './ApartmentCardPreview/ApartmentCardPreview';
 import {CardsPreview} from './CardsPreview/CardsPreview';
+import {DashboardPreview2} from './DashboardPreview2/DashboardPreview2';
 import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
 import './PreviewTab.scss';
@@ -249,6 +250,12 @@ const previewComponents = [
         id: 'tasks',
         Component: TasksPreview,
         title: 'Tasks',
+        blank: true,
+    },
+    {
+        id: 'dashboard2',
+        Component: DashboardPreview2,
+        title: 'Dashboard',
         blank: true,
     },
 ];
