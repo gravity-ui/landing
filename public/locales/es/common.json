@@ -1,4 +1,7 @@
 ﻿{
+    "pageNotFound": "Página No Encontrada",
+    "pageNotFoundDescription": "La página que estás buscando no existe o ha sido movida.",
+    "backToHome": "Volver al Inicio",
     "actions_open": "Abrir",
     "actions_copyToClipboard": "Copiar al portapapeles",
     "actions_share": "Compartir",

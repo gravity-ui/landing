@@ -16,5 +16,8 @@
     "navigation_next": "Next",
     "emptySearchPlaceholder": "Nothing found",
     "show_more": "Show more",
-    "show_less": "Show less"
+    "show_less": "Show less",
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundDescription": "The page you are looking for doesn't exist or has been moved.",
+    "backToHome": "Back to Home"
 }
