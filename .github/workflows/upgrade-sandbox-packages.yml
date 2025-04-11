@@ -30,4 +30,4 @@ jobs:
           export COMMIT_MESSAGE="chore(sandbox): upgrade sandbox packages"
           git commit -m "$COMMIT_MESSAGE"
           git push --set-upstream origin upgrade-sandbox-packages --force
-          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "imsitnikov" -a "amje" -a "korvin89" || gh pr edit --title "$COMMIT_MESSAGE" --body ""
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "imsitnikov" -a "amje" -a "korvin89" -a "vvtimofeev" || gh pr edit --title "$COMMIT_MESSAGE" --body ""
