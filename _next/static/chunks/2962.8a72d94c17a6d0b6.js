@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[2962],{2962:function(e,t,n){n.r(t),n.d(t,{TextComponent:function(){return i}});var r=n(85893),c=n(70589);let i=e=>{let{text:t,variant:n,ellipsis:i,whiteSpace:l,wordBreak:s,color:u}=e;return(0,r.jsx)(c.Text,{variant:n,ellipsis:i,whiteSpace:l,wordBreak:s,color:u,children:t})}}}]);
