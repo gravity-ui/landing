@@ -34,6 +34,7 @@ import {CardsPreview} from './CardsPreview/CardsPreview';
 import {DashboardPreview2} from './DashboardPreview2/DashboardPreview2';
 import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
+import {KubernetesPreview} from './KubernetesPreview/KubernetesPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
 import {TasksPreview} from './TasksPreview/TasksPreview';
@@ -250,6 +251,12 @@ const previewComponents = [
         id: 'tasks',
         Component: TasksPreview,
         title: 'Tasks',
+        blank: true,
+    },
+    {
+        id: 'kubernetes',
+        Component: KubernetesPreview,
+        title: 'Kubernetes',
         blank: true,
     },
     {
