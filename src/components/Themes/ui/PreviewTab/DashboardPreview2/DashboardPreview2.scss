@@ -3,10 +3,10 @@
 $block: '.#{variables.$ns}dashboard-preview-example';
 
 #{$block} {
-    &__wrapper {
-        height: fit-content;
-    }
+    overflow: hidden scroll;
+
     --gn-aside-header-collapsed-background-color: transparent;
+    --gn-aside-header-expanded-background-color: transparent;
 
     &_light_true {
         --g-color-base-background: rgba(0, 0, 0, 0.05);
@@ -45,5 +45,5 @@ $block: '.#{variables.$ns}dashboard-preview-example';
 }
 
 .gravity-ui-landing-themes-preview-wrapper__content {
-    height: fit-content;
+    height: 100vh;
 }

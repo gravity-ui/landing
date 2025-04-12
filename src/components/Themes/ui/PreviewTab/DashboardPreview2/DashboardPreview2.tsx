@@ -1,7 +1,7 @@
 import {CircleFill, Comment as Feedback, Gear} from '@gravity-ui/icons';
 import {AsideHeader, AsideHeaderProps, FooterItem, PageLayout} from '@gravity-ui/navigation';
 import {Card, Text} from '@gravity-ui/uikit';
-import {Fragment, useState} from 'react';
+import {Fragment, useCallback, useState} from 'react';
 import {block} from 'src/utils';
 
 import {PreviewWrapper, PreviewWrapperProps} from '../PreviewWrapper/PreviewWrapper';
@@ -44,6 +44,11 @@ export const DashboardPreview2 = (props: Pick<PreviewWrapperProps, 'styles'>) =>
     const [sidebarOpened, toggleSidebarOpened] = useState(true);
     const menuItems = useMenuItems();
 
+    const handleChangeCompact = useCallback((compact: boolean) => {
+        window.dispatchEvent(new Event('resize'));
+        toggleSidebarOpened(compact);
+    }, []);
+
     return (
         <PreviewWrapper {...props}>
             {({isLightTheme, themeSwitcher}) => {
@@ -65,7 +70,7 @@ export const DashboardPreview2 = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                     </Card>
                                 </div>
                             )}
-                            onChangeCompact={toggleSidebarOpened}
+                            onChangeCompact={handleChangeCompact}
                         />
                     </PageLayout>
                 );
