@@ -31,6 +31,7 @@ import {exportTheme} from '../../lib/themeCreatorExport';
 
 import {ApartmentCardPreview} from './ApartmentCardPreview/ApartmentCardPreview';
 import {CardsPreview} from './CardsPreview/CardsPreview';
+import {DashboardPreview2} from './DashboardPreview2/DashboardPreview2';
 import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
 import {KubernetesPreview} from './KubernetesPreview/KubernetesPreview';
@@ -256,6 +257,12 @@ const previewComponents = [
         id: 'kubernetes',
         Component: KubernetesPreview,
         title: 'Kubernetes',
+        blank: true,
+    },
+    {
+        id: 'dashboard2',
+        Component: DashboardPreview2,
+        title: 'Dashboard',
         blank: true,
     },
 ];
