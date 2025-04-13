@@ -3,10 +3,11 @@ import Document, {Head, Html, Main, NextScript} from 'next/document';
 import Script from 'next/script';
 
 import i18nextConfig from '../../next-i18next.config';
+import sitemapConfig from '../../next-sitemap.config';
 import {DEFAULT_THEME, GA_ID, IS_PRODUCTION, LOCALE_LOCAL_STORAGE_KEY} from '../constants';
 
 // Site URL from next-sitemap.config.js
-const SITE_URL = 'https://gravity-ui.com';
+const SITE_URL = sitemapConfig.siteUrl;
 
 // Function to check if a route should be excluded from alternates
 const shouldExcludeRoute = (path: string) => {
@@ -121,11 +122,13 @@ class CustomDocument extends Document {
                             id="google-analytics"
                             strategy="beforeInteractive"
                             dangerouslySetInnerHTML={{
-                                __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','${GA_ID}');`,
+                                __html: `
+                                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                                })(window,document,'script','dataLayer','${GA_ID}');
+                            `,
                             }}
                         />
                     )}
@@ -133,29 +136,33 @@ class CustomDocument extends Document {
                         id="locale-detection"
                         strategy="beforeInteractive"
                         dangerouslySetInnerHTML={{
-                            __html: `var path = window.location.pathname;
-var search = window.location.search;
+                            __html: `
+                                var path = window.location.pathname;
+                                var search = window.location.search;
 
-var defaultLocale = '${i18nextConfig.i18n.defaultLocale}';
-var locales = ${JSON.stringify(i18nextConfig.i18n.locales)};
-var routesWithoutRedirect = ${JSON.stringify(i18nextConfig.routesWithoutRedirect)};
+                                var defaultLocale = '${i18nextConfig.i18n.defaultLocale}';
+                                var locales = ${JSON.stringify(i18nextConfig.i18n.locales)};
+                                var routesWithoutRedirect = ${JSON.stringify(
+                                    i18nextConfig.routesWithoutRedirect,
+                                )};
 
-var savedLocale = localStorage.getItem('${LOCALE_LOCAL_STORAGE_KEY}');
-var pathLocale = path.split('/')[1];
-pathLocale = locales.includes(pathLocale) ? pathLocale : defaultLocale;
+                                var savedLocale = localStorage.getItem('${LOCALE_LOCAL_STORAGE_KEY}');
+                                var pathLocale = path.split('/')[1];
+                                pathLocale = locales.includes(pathLocale) ? pathLocale : defaultLocale;
 
-if (savedLocale && savedLocale !== pathLocale && !routesWithoutRedirect.some((item) => path.startsWith(item))) {
-    var redirectPath;
-    if (savedLocale === defaultLocale) {
-        redirectPath = path.replace('/' + pathLocale, '');
-        redirectPath = redirectPath ? redirectPath : '/';
-    } else if (pathLocale === defaultLocale) {
-        redirectPath = path.replace('/', '/' + savedLocale + (path === '/' ? '' : '/'));
-    } else {
-        redirectPath = path.replace('/' + pathLocale, '/' + savedLocale);
-    }
-    window.location.href = redirectPath + search;
-}`,
+                                if (savedLocale && savedLocale !== pathLocale && !routesWithoutRedirect.some((item) => path.startsWith(item))) {
+                                    var redirectPath;
+                                    if (savedLocale === defaultLocale) {
+                                        redirectPath = path.replace('/' + pathLocale, '');
+                                        redirectPath = redirectPath ? redirectPath : '/';
+                                    } else if (pathLocale === defaultLocale) {
+                                        redirectPath = path.replace('/', '/' + savedLocale + (path === '/' ? '' : '/'));
+                                    } else {
+                                        redirectPath = path.replace('/' + pathLocale, '/' + savedLocale);
+                                    }
+                                    window.location.href = redirectPath + search;
+                                }
+                            `,
                         }}
                     />
                 </Head>
