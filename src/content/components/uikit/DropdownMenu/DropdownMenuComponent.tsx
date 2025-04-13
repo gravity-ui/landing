@@ -3,11 +3,16 @@ import {DropdownMenu, DropdownMenuProps} from '@gravity-ui/uikit';
 type DropdownMenuMenuComponentProps = {
     size?: DropdownMenuProps<unknown>['size'];
     disabled?: DropdownMenuProps<unknown>['disabled'];
+    initialOpen?: boolean;
 };
 
-export const DropdownMenuComponent = ({size, disabled}: DropdownMenuMenuComponentProps) => (
+export const DropdownMenuComponent = ({
+    size,
+    disabled,
+    initialOpen = true,
+}: DropdownMenuMenuComponentProps) => (
     <DropdownMenu
-        open
+        open={initialOpen}
         size={size}
         disabled={disabled}
         items={[

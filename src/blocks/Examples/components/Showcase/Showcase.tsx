@@ -5,16 +5,18 @@ import {
     Icon,
     Label,
     Loader,
-    RadioButton,
     RadioGroup,
+    SegmentedRadioGroup,
     Spin,
     Switch,
+    Tab,
+    TabList,
+    TabProvider,
     Table,
-    Tabs,
     Theme,
     ThemeProvider,
     withTableSelection,
-} from 'landing-uikit';
+} from '@gravity-ui/uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../assets/avatar-1.png';
@@ -114,17 +116,21 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
                         </div>
                         <div className={b('sub-col')}>
                             <div className={b('col-item')}>
-                                <Tabs
-                                    items={tabs}
-                                    activeTab={activeTab}
-                                    onSelectTab={setActiveTab}
-                                />
+                                <TabProvider value={activeTab} onUpdate={setActiveTab}>
+                                    <TabList>
+                                        {tabs.map((item) => (
+                                            <Tab key={item.id} value={item.id}>
+                                                {item.title}
+                                            </Tab>
+                                        ))}
+                                    </TabList>
+                                </TabProvider>
                             </div>
                             <div className={b('col-item')}>
-                                <RadioButton name="group2" defaultValue="all" size="l">
-                                    <RadioButton.Option content="All" value="all" />
-                                    <RadioButton.Option content="My" value="my" />
-                                </RadioButton>
+                                <SegmentedRadioGroup name="group2" defaultValue="all" size="l">
+                                    <SegmentedRadioGroup.Option content="All" value="all" />
+                                    <SegmentedRadioGroup.Option content="My" value="my" />
+                                </SegmentedRadioGroup>
                             </div>
                             <div className={b('col-item')}>
                                 <Label theme="info" size="m">

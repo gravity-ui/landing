@@ -1,4 +1,4 @@
-import type {IconProps} from 'landing-uikit';
+import type {IconProps} from '@gravity-ui/uikit';
 
 export type IconMeta = {
     name: string;

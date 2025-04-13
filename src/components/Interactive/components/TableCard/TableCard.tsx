@@ -1,5 +1,5 @@
-import {Gear, Star, StarFill} from 'landing-icons';
-import {Button, Checkbox, Icon, Table, TableColumnConfig} from 'landing-uikit';
+import {Gear, Star, StarFill} from '@gravity-ui/icons';
+import {Button, Checkbox, Icon, Table, TableColumnConfig} from '@gravity-ui/uikit';
 import React from 'react';
 
 import avatar1Asset from '../../../../assets/avatar-1.png';

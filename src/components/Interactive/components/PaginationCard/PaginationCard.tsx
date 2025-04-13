@@ -1,4 +1,4 @@
-import {Pagination} from 'landing-uikit';
+import {Pagination} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

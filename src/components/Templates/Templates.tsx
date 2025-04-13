@@ -1,4 +1,4 @@
-import {Button, ClipboardButton, Icon, Tabs} from 'landing-uikit';
+import {Button, ClipboardButton, Icon, Tab, TabList, TabProvider} from '@gravity-ui/uikit';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash.js';
 import React from 'react';
@@ -6,7 +6,7 @@ import React from 'react';
 import {block} from '../../utils';
 
 import './Templates.scss';
-import type {Tab} from './types';
+import type {TabType} from './types';
 
 const b = block('templates');
 
@@ -27,7 +27,7 @@ const Commands: React.FC<CommandsProps> = ({commands}) => {
 };
 
 interface TabContentProps {
-    data?: Pick<Tab, 'button' | 'commands'>;
+    data?: Pick<TabType, 'button' | 'commands'>;
 }
 
 const TabContent: React.FC<TabContentProps> = ({data}) => {
@@ -50,7 +50,7 @@ const TabContent: React.FC<TabContentProps> = ({data}) => {
 };
 
 interface TemplatesProps {
-    tabs: Tab[];
+    tabs: TabType[];
 }
 
 export const Templates: React.FC<TemplatesProps> = ({tabs}) => {
@@ -66,13 +66,15 @@ export const Templates: React.FC<TemplatesProps> = ({tabs}) => {
     return (
         <section className={b(null)}>
             <div className={b('tabs-wrapper')}>
-                <Tabs
-                    size="xl"
-                    items={tabsItems}
-                    activeTab={activeTab}
-                    onSelectTab={setActiveTab}
-                    className={b('tabs')}
-                />
+                <TabProvider value={activeTab} onUpdate={setActiveTab}>
+                    <TabList size="xl" className={b('tabs')}>
+                        {tabsItems.map((item) => (
+                            <Tab key={item.id} value={item.id}>
+                                {item.title}
+                            </Tab>
+                        ))}
+                    </TabList>
+                </TabProvider>
             </div>
             <TabContent data={activeTabData} />
         </section>

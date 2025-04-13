@@ -45,6 +45,8 @@ type LibData = {
     readme: {
         en: string;
         ru: string;
+        es: string;
+        zh: string;
     };
     changelog: string;
     contributors: Contributor[];

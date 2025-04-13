@@ -81,10 +81,10 @@ export const relativeDateFieldConfig: Component = {
                 ]),
                 defaultValue: 'round-round',
             },
-            leftContent: {
+            startContent: {
                 type: 'input',
             },
-            rightContent: {
+            endContent: {
                 type: 'input',
             },
         },

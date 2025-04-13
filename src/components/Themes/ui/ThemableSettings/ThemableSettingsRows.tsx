@@ -1,4 +1,4 @@
-import {Flex, Text, sp} from 'landing-uikit';
+import {Flex, Text, sp} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';

@@ -1,0 +1,39 @@
+剪贴板复制按钮是对 `Button` `Flat` 组件的修改， `ClipboardIcon` 图标单独放置。
+
+### 图标
+
+其中有一个 `ClipboardIcon` 组件，它是一个具有两种状态的动画图标： `ClipboardButton`成功与错误。要自定义复制按钮，请使用 `Button` 带有 `ClipboardIcon` 图标的标准按钮组件。
+
+### 国家
+
+![States](/static/images/design/ClipboardButton/States.png)
+
+### 尺码
+
+该组件支持标准按钮大小 `XS` `S` `M` 、 `L` 、和 `XL`
+
+### 行为
+
+如果不经常执行内容复制或图标降低了可读性，则只有将光标移近后才会出现复制按钮。
+
+![In tables, the icon is hidden until the cursor is placed over a cell with content](/static/images/design/ClipboardButton/Use-cases2.png)
+
+在表格中，该图标一直处于隐藏状态，直到光标置于包含内容的单元格上方
+
+### 工具提示
+
+该组件有一个可以禁用的工具提示。它用于指明将要复制的内容。
+
+![The task key is copied in the Yandex Tracker service](/static/images/design/ClipboardButton/Tooltip.png)
+
+任务密钥在 Yandex Tracker 服务中复制
+
+### 用例
+
+在文档中复制了区块代码。
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases1.png)
+
+单元格值在表格中复制。
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases2.png)

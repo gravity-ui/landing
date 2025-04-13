@@ -1,4 +1,4 @@
-import {TextInput} from 'landing-uikit';
+import {TextInput} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';

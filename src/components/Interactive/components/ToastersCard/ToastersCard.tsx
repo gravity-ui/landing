@@ -1,4 +1,4 @@
-import {useToaster} from 'landing-uikit';
+import {Toaster, ToasterComponent, ToasterProvider, useToaster} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -65,13 +65,33 @@ const ToastersCardInner = () => {
         };
     }, []);
 
-    return null;
+    return (
+        <div className={b('toaster')}>
+            <ToasterComponent hasPortal={false} />
+        </div>
+    );
+};
+
+const ToasterWithInstance = () => {
+    const [toaster, setToaster] = React.useState<Toaster>();
+
+    React.useEffect(() => {
+        if (!toaster) {
+            setToaster(new Toaster());
+        }
+    }, [toaster]);
+
+    if (!toaster) {
+        return null;
+    }
+
+    return (
+        <ToasterProvider toaster={toaster}>
+            <ToastersCardInner />
+        </ToasterProvider>
+    );
 };
 
 export const ToastersCard = () => {
-    return (
-        <InteractiveCard className={b()}>
-            <ToastersCardInner />
-        </InteractiveCard>
-    );
+    return <InteractiveCard className={b()} renderContent={() => <ToasterWithInstance />} />;
 };

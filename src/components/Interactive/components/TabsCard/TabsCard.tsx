@@ -1,4 +1,4 @@
-import {Tabs} from 'landing-uikit';
+import {Tab, TabList, TabProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {InteractiveCard} from '../InteractiveCard';
@@ -15,22 +15,18 @@ const TABS = {
 const tabItems = [
     {
         id: TABS.FIRST,
-        hint: TABS.FIRST,
         title: TABS.FIRST,
     },
     {
         id: TABS.SECOND,
-        hint: TABS.SECOND,
         title: TABS.SECOND,
     },
     {
         id: TABS.THIRD,
-        hint: TABS.THIRD,
         title: TABS.THIRD,
     },
     {
         id: TABS.FOURTH,
-        hint: TABS.FOURTH,
         title: TABS.FOURTH,
     },
 ];
@@ -56,7 +52,15 @@ export const TabsCard = () => {
 
     return (
         <InteractiveCard>
-            <Tabs activeTab={activeTab} items={tabItems} />
+            <TabProvider value={activeTab}>
+                <TabList>
+                    {tabItems.map((item) => (
+                        <Tab key={item.id} value={item.id}>
+                            {item.title}
+                        </Tab>
+                    ))}
+                </TabList>
+            </TabProvider>
         </InteractiveCard>
     );
 };

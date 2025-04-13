@@ -1,5 +1,5 @@
 import {FormRow} from '@gravity-ui/components';
-import {Card, Col, Flex, Row, Select, Slider, Text, TextInput, TextProps} from 'landing-uikit';
+import {Card, Col, Flex, Row, Select, Slider, Text, TextInput, TextProps} from '@gravity-ui/uikit';
 import React, {useMemo} from 'react';
 
 import {block} from '../../../../utils';
@@ -67,7 +67,7 @@ export const AdvanceTypographySettings = () => {
                                     <Slider
                                         min={FONT_WEIGHTS[0]}
                                         max={FONT_WEIGHTS[FONT_WEIGHTS.length - 1]}
-                                        availableValues={FONT_WEIGHTS}
+                                        marks={FONT_WEIGHTS}
                                         value={setting.fontWeight}
                                         onUpdate={(fontWeight) => {
                                             updateAdvancedTypographySettings({

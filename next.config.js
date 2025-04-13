@@ -3,11 +3,15 @@ const {join} = require('path');
 const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')([
+    '@gravity-ui/uikit',
     '@gravity-ui/page-constructor',
     '@gravity-ui/components',
     '@gravity-ui/date-components',
+    '@gravity-ui/navigation',
     '@gravity-ui/chartkit',
+    '@gravity-ui/charts',
     '@gravity-ui/yagr',
+    '@gravity-ui/markdown-editor',
 ]);
 
 const plugins = [

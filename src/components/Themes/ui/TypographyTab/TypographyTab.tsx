@@ -1,5 +1,5 @@
-import {Sliders} from 'landing-icons';
-import {Button, Flex, Icon} from 'landing-uikit';
+import {Sliders} from '@gravity-ui/icons';
+import {Button, Flex, Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 

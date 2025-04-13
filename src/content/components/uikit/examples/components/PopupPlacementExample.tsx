@@ -1,39 +1,29 @@
-import {Popup, PopupAnchorRef, PopupPlacement} from '@gravity-ui/uikit';
+import {Popup, PopupAnchorElement, PopupPlacement} from '@gravity-ui/uikit';
 import React from 'react';
 
 function PopupInstance({
     placement,
-    anchorRef,
-    container,
+    anchorElement,
     children,
 }: {
     placement: PopupPlacement;
-    anchorRef: PopupAnchorRef;
-    container: HTMLElement | null;
+    anchorElement: PopupAnchorElement | null;
     children: React.ReactNode;
 }) {
     return (
-        <Popup
-            open
-            anchorRef={anchorRef}
-            placement={placement}
-            container={container ?? undefined}
-            disablePortal
-            modifiers={[{name: 'preventOverflow', enabled: false}]}
-        >
+        <Popup open anchorElement={anchorElement} placement={placement} disablePortal>
             <div style={{padding: 5}}>{children}</div>
         </Popup>
     );
 }
 
 export const PopupPlacementExample = () => {
-    const containerRef = React.useRef(null);
-    const boxRef = React.useRef(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLDivElement | null>(null);
 
     return (
-        <div ref={containerRef} style={{position: 'relative'}}>
+        <div style={{position: 'relative'}}>
             <div
-                ref={boxRef}
+                ref={setAnchorElement}
                 style={{
                     margin: '40px 100px',
                     width: 320,
@@ -47,67 +37,42 @@ export const PopupPlacementExample = () => {
             >
                 Anchor
             </div>
-            <PopupInstance
-                anchorRef={boxRef}
-                container={containerRef.current}
-                placement="top-start"
-            >
+            <PopupInstance anchorElement={anchorElement} placement="top-start">
                 Top Start
             </PopupInstance>
-            <PopupInstance anchorRef={boxRef} container={containerRef.current} placement="top">
+            <PopupInstance anchorElement={anchorElement} placement="top">
                 Top
             </PopupInstance>
-            <PopupInstance anchorRef={boxRef} container={containerRef.current} placement="top-end">
+            <PopupInstance anchorElement={anchorElement} placement="top-end">
                 Top End
             </PopupInstance>
-            <PopupInstance
-                anchorRef={boxRef}
-                container={containerRef.current}
-                placement="right-start"
-            >
+            <PopupInstance anchorElement={anchorElement} placement="right-start">
                 Right Start
             </PopupInstance>
-            <PopupInstance anchorRef={boxRef} container={containerRef.current} placement="right">
+            <PopupInstance anchorElement={anchorElement} placement="right">
                 Right
             </PopupInstance>
-            <PopupInstance
-                anchorRef={boxRef}
-                container={containerRef.current}
-                placement="right-end"
-            >
+            <PopupInstance anchorElement={anchorElement} placement="right-end">
                 Right End
             </PopupInstance>
-            <PopupInstance
-                anchorRef={boxRef}
-                container={containerRef.current}
-                placement="bottom-end"
-            >
+            <PopupInstance anchorElement={anchorElement} placement="bottom-end">
                 Bottom End
             </PopupInstance>
-            <PopupInstance anchorRef={boxRef} container={containerRef.current} placement="bottom">
+            <PopupInstance anchorElement={anchorElement} placement="bottom">
                 Bottom
             </PopupInstance>
-            <PopupInstance
-                anchorRef={boxRef}
-                container={containerRef.current}
-                placement="bottom-start"
-            >
+            <PopupInstance anchorElement={anchorElement} placement="bottom-start">
                 Bottom Start
             </PopupInstance>
-            <PopupInstance anchorRef={boxRef} container={containerRef.current} placement="left-end">
+            <PopupInstance anchorElement={anchorElement} placement="left-end">
                 Left End
             </PopupInstance>
-            <PopupInstance anchorRef={boxRef} container={containerRef.current} placement="left">
+            <PopupInstance anchorElement={anchorElement} placement="left">
                 Left
             </PopupInstance>
-            <PopupInstance
-                anchorRef={boxRef}
-                container={containerRef.current}
-                placement="left-start"
-            >
+            <PopupInstance anchorElement={anchorElement} placement="left-start">
                 Left Start
             </PopupInstance>
         </div>
     );
 };
-PopupPlacementExample.storyName = 'PopupPlacementExample';

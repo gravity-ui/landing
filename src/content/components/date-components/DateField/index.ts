@@ -82,10 +82,10 @@ export const dateFieldConfig: Component = {
             maxValue: {
                 type: 'input',
             },
-            leftContent: {
+            startContent: {
                 type: 'input',
             },
-            rightContent: {
+            endContent: {
                 type: 'input',
             },
         },
