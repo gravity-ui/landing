@@ -5,6 +5,11 @@ $block: '.#{variables.$ns}dashboard-preview-example';
 #{$block} {
     overflow: hidden scroll;
 
+    & .gn-aside-header__pane-container,
+    & .gn-aside-header__pane-container .gn-aside-header__aside {
+        height: 100%;
+    }
+
     --gn-aside-header-collapsed-background-color: transparent;
     --gn-aside-header-expanded-background-color: transparent;
 
@@ -32,18 +37,8 @@ $block: '.#{variables.$ns}dashboard-preview-example';
     }
 
     &__content {
-        &,
-        &-wrapper {
-            width: 100%;
-            height: 100%;
-        }
-
         &-wrapper {
             padding: var(--g-spacing-3) var(--g-spacing-4);
         }
     }
-}
-
-.gravity-ui-landing-themes-preview-wrapper__content {
-    height: 100vh;
 }
