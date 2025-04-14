@@ -12,9 +12,9 @@ import {libs} from '../../../../content/components';
 import {
     getLibById,
     getLibComponents,
+    getLibraryMeta,
     getLocale,
     getMaintainers,
-    getOgImageUrl,
 } from '../../../../utils';
 import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
 
@@ -155,11 +155,7 @@ export const ComponentPage = ({
             title={`${lib.title} – ${component.title}`}
             hideFooter
             noScroll={!isMobile}
-            meta={{
-                name: `${lib.title} – ${component.title}`,
-                description: t(`libraries-info:description_${lib.id}`),
-                image: getOgImageUrl(lib.id),
-            }}
+            meta={getLibraryMeta({id: lib.id, title: lib.title}, t, component.title)}
         >
             <ComponentsLayout libId={libId} componentId={componentId} sections={sections}>
                 <Component

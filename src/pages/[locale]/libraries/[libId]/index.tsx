@@ -7,8 +7,8 @@ import {
     getI18nPaths,
     getI18nProps,
     getLibById,
+    getLibraryMeta,
     getLibsList,
-    getOgImageUrl,
 } from '../../../../utils';
 
 const libs = getLibsList();
@@ -46,11 +46,7 @@ export const LibraryPage = ({libId}: {libId: string}) => {
     return (
         <Layout
             title={lib?.config.title ?? ''}
-            meta={{
-                name: lib?.config.title,
-                description: t(`libraries-info:description_${lib.config.id}`),
-                image: getOgImageUrl(lib?.config.id),
-            }}
+            meta={getLibraryMeta({id: lib.config.id, title: lib.config.title}, t)}
         >
             <Library lib={lib} />
         </Layout>
