@@ -3,11 +3,13 @@ import {useTranslation} from 'next-i18next';
 
 import {Layout} from '../../../../components/Layout/Layout';
 import {Library} from '../../../../components/Library/Library';
-import {getI18nPaths, getI18nProps, getLibById, getLibsList} from '../../../../utils';
-
-function getOgImageUrl(id?: string) {
-    return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
-}
+import {
+    getI18nPaths,
+    getI18nProps,
+    getLibById,
+    getLibsList,
+    getOgImageUrl,
+} from '../../../../utils';
 
 const libs = getLibsList();
 

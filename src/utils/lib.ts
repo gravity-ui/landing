@@ -150,3 +150,7 @@ export const getMaintainers = (lib: Lib, path = '/'): Contributor[] => {
         })
         .sort((a, b) => b.contributions - a.contributions);
 };
+
+export const getOgImageUrl = (id?: string) => {
+    return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
+};
