@@ -1,0 +1,9 @@
+@use '../variables';
+
+$block: '.#{variables.$children-prefix}email-list';
+
+#{$block} {
+    padding: 0 calc(var(--g-spacing-base) * 5) calc(var(--g-spacing-base) * 3);
+    gap: calc(var(--g-spacing-base) * 2);
+    scrollbar-width: thin;
+}

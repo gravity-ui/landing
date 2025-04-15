@@ -1,0 +1,8 @@
+@use '../variables';
+
+$block: '.#{variables.$children-prefix}header';
+
+#{$block} {
+    padding: 14px 20px;
+    height: 52px;
+}
