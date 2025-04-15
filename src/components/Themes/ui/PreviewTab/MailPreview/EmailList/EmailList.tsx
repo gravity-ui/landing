@@ -4,7 +4,7 @@ import {
     unstable_TreeListProps as TreeListProps,
     unstable_useList as useList,
 } from '@gravity-ui/uikit/unstable';
-import {useCallback, useState} from 'react';
+import {useCallback, useRef, useState} from 'react';
 import {block} from 'src/utils';
 
 import {Header} from '../Header/Header';
@@ -13,6 +13,7 @@ import {Email} from '../types';
 
 import {EmailCard, EmailCardProps} from './EmailCard/EmailCard';
 import './EmailList.scss';
+import {Filter} from './Filter/Filter';
 
 export const mapItemDataToContentProps: TreeListProps<Email>['mapItemDataToContentProps'] = (
     email: Email,
@@ -48,14 +49,37 @@ export const EmailList = ({
     selectedFolder,
     selectedEmailId,
 }: EmailListProps) => {
-    const [selectedOption, setSelectedOption] = useState<OptionValue>('All mail');
+    const filterRef = useRef<{option: OptionValue; textFilter: string}>({
+        textFilter: '',
+        option: 'All mail',
+    });
+    const [listItems, setListItems] = useState(emailList);
     const list = useList({
-        items: emailList,
+        items: listItems,
         controlledState: {
             selectedById: {[selectedEmailId]: true},
             activeItemId: selectedEmailId,
         },
     });
+
+    const handleOptionChange = useCallback(
+        (newOption: OptionValue) => {
+            filterRef.current.option = newOption;
+            setListItems(
+                filterItems(filterRef.current.option, filterRef.current.textFilter, emailList),
+            );
+        },
+        [emailList],
+    );
+    const handleFilterChange = useCallback(
+        (newValue: string) => {
+            filterRef.current.textFilter = newValue;
+            setListItems(
+                filterItems(filterRef.current.option, filterRef.current.textFilter, emailList),
+            );
+        },
+        [emailList],
+    );
 
     const handleItemClick = useCallback<EmailCardProps['onClick']>(
         (email) => {
@@ -72,11 +96,12 @@ export const EmailList = ({
                 <Text variant="subheader-3">{selectedFolder}</Text>
                 <SegmentedRadioGroup
                     options={RADIO_OPTIONS}
-                    value={selectedOption}
-                    onUpdate={setSelectedOption}
+                    onUpdate={handleOptionChange}
+                    defaultValue="All mail"
                 />
             </Header>
             <Divider />
+            <Filter onUpdate={handleFilterChange} />
             <TreeList
                 list={list}
                 mapItemDataToContentProps={mapItemDataToContentProps}
@@ -86,3 +111,19 @@ export const EmailList = ({
         </Flex>
     );
 };
+
+function filterItems(option: OptionValue, textFilter: string, items: Email[]) {
+    if (option === 'All mail' && !textFilter) {
+        return items;
+    }
+    return items.filter(({read, fromEmail, fromTitle, subject, body}) => {
+        const optionCondition = option === 'Unread' ? !read : true;
+        const textCondition = textFilter
+            ? fromEmail.toLowerCase().includes(textFilter) ||
+              fromTitle.toLowerCase().includes(textFilter) ||
+              subject.toLowerCase().includes(textFilter) ||
+              body.toLowerCase().includes(textFilter)
+            : true;
+        return optionCondition && textCondition;
+    });
+}
