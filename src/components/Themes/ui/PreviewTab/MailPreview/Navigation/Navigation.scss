@@ -1,0 +1,20 @@
+@use '../variables';
+
+$block: '.#{variables.$children-prefix}navigation';
+
+#{$block} {
+    padding: calc(var(--g-spacing-base) * 3) calc(var(--g-spacing-base) * 5);
+    width: 280px;
+    margin-block-end: auto;
+
+    &__divider {
+        padding-inline: calc(var(--g-spacing-base) * 4);
+    }
+
+    &__inbox-list-item {
+        &_active {
+            padding-inline: 18px;
+            gap: 18px;
+        }
+    }
+}
