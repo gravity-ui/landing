@@ -3,14 +3,22 @@
 $block: '.#{variables.$ns}dashboard-example-content';
 
 #{$block} {
-    margin-block: var(--g-spacing-3);
+    margin-block-start: var(--g-spacing-4);
     padding-inline: var(--g-spacing-4);
+    padding-block-end: var(--g-spacing-7);
 
     --g-button-border-radius: var(--g-border-radius-s);
 
     &__card {
         padding: var(--g-spacing-2) var(--g-spacing-3);
-        height: 100%;
+
+        &_small {
+            height: 110px;
+        }
+
+        &_big {
+            height: 242px;
+        }
     }
 
     &__info {

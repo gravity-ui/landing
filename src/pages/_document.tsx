@@ -110,7 +110,7 @@ class CustomDocument extends Document {
 
         return (
             // Workaround for missing direction 'ltr' in ThemeProvider
-            <Html lang={currentLocale} dir="ltr">
+            <Html lang={currentLocale} dir="ltr" prefix="og: https://ogp.me/ns#">
                 <Head>
                     <meta
                         name="google-site-verification"

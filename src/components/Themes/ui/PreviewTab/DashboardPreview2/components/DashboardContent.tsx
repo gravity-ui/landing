@@ -39,18 +39,18 @@ export const DashboardContent = () => {
                 </Flex>
             </Flex>
 
-            <Container style={{width: '100%', padding: 0, marginBlockStart: 16}} spaceRow={3}>
+            <Container style={{width: '100%', padding: 0, marginBlockStart: 20}} spaceRow={3}>
                 <Row space={3}>
                     {activeUsersInfo.map((data, index) => (
                         <Col key={index}>
-                            <Card className={b('card')}>
+                            <Card className={b('card', {small: true})}>
                                 <Flex direction="column" gap="2">
-                                    <div>
+                                    <Flex alignItems="center">
                                         <Text variant="subheader-1">{data.type}</Text>
                                         {data.info ? (
                                             <HelpMark className={b('info')}>{data.info}</HelpMark>
                                         ) : null}
-                                    </div>
+                                    </Flex>
                                     <Text variant="display-4" color="info">
                                         {data.count}
                                     </Text>
@@ -61,7 +61,7 @@ export const DashboardContent = () => {
                 </Row>
                 <Row space={2}>
                     <Col style={{maxWidth: '60%'}} className={b('col')}>
-                        <Card className={b('card')}>
+                        <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Dynamic
                             </Text>
@@ -71,7 +71,7 @@ export const DashboardContent = () => {
                         </Card>
                     </Col>
                     <Col style={{maxWidth: '40%'}} className={b('col')}>
-                        <Card className={b('card')}>
+                        <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Performance
                             </Text>
@@ -83,7 +83,7 @@ export const DashboardContent = () => {
                 </Row>
                 <Row space={2}>
                     <Col style={{flexBasis: '40%'}} className={b('col')}>
-                        <Card className={b('card')}>
+                        <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Top Items
                             </Text>
@@ -93,7 +93,7 @@ export const DashboardContent = () => {
                         </Card>
                     </Col>
                     <Col style={{flexBasis: '60%'}} className={b('col')}>
-                        <Card className={b('card')}>
+                        <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Distribution
                             </Text>
