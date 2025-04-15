@@ -12,7 +12,11 @@ $block: '.#{variables.$children-prefix}navigation';
     }
 
     &__inbox-list-item {
-        &_active {
+        cursor: pointer;
+        height: 36px;
+        padding-inline: calc(var(--g-spacing-base) * 4);
+        gap: calc(var(--g-spacing-base) * 3);
+        &_selected {
             padding-inline: 18px;
             gap: 18px;
         }

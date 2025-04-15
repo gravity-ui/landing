@@ -48,6 +48,7 @@ const MailboxFolderList = ({
 
     return (
         <TreeList
+            size="l"
             list={list}
             mapItemDataToContentProps={mapItemDataToContentProps}
             onItemClick={handleUpdate}
@@ -57,31 +58,58 @@ const MailboxFolderList = ({
 
 const b = block(getBlockName('navigation'));
 
+const InboxListItem = ({
+    selected,
+    data,
+    onClick,
+}: {
+    selected?: boolean;
+    data: ItemForList;
+    onClick: (id: string) => void;
+}) => {
+    const handleClick = useCallback(() => {
+        if (!selected) {
+            onClick(data.id);
+        }
+    }, [data.id, selected]);
+
+    return (
+        <Flex
+            className={b('inbox-list-item', {selected})}
+            alignItems={'center'}
+            onClick={handleClick}
+        >
+            <Flex alignItems="center">{data.icon}</Flex>
+            <Flex grow>
+                <Text>{data.title}</Text>
+            </Flex>
+            {selected ? (
+                <Label size="xs" theme="clear">
+                    {data.count}
+                </Label>
+            ) : (
+                <Text>{data.count}</Text>
+            )}
+        </Flex>
+    );
+};
+
 const InboxList = () => {
-    const list = useList({items: INBOX_LIST});
-    const handleItemClick = ({id}: {id: string}) => {
+    const initialState = useMemo(() => ({selectedById: {[INBOX_LIST[0].id]: true}}), []);
+    const list = useList({
+        items: INBOX_LIST,
+        initialState,
+    });
+    const handleItemClick = (id: string) => {
         list.state.setSelected({[id]: true});
     };
     return (
         <TreeList
             list={list}
             mapItemDataToContentProps={mapItemDataToContentProps}
-            renderItem={({props: {active}, data}) => (
-                <Flex className={b('inbox-list-item', {active})} alignItems={'center'}>
-                    <div>{data.icon}</div>
-                    <Flex grow>
-                        <Text>{data.title}</Text>
-                    </Flex>
-                    {active ? (
-                        <Label size="xs" theme="clear">
-                            {data.count}
-                        </Label>
-                    ) : (
-                        <Text>{data.count}</Text>
-                    )}
-                </Flex>
+            renderItem={({props: {selected}, data}) => (
+                <InboxListItem selected={selected} data={data} onClick={handleItemClick} />
             )}
-            onItemClick={handleItemClick}
         />
     );
 };
