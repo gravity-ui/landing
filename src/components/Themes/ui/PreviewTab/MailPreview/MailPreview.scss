@@ -11,4 +11,9 @@ $block: '.#{variables.$main-block}';
     &__divider {
         flex-shrink: 0;
     }
+
+    &__breadcrumbs {
+        width: 100%;
+        box-sizing: content-box;
+    }
 }
