@@ -14,14 +14,22 @@ export const EmailHeader = ({
     fromEmail,
     fromTitle,
     subject,
-}: Pick<Email, 'created' | 'fromEmail' | 'fromTitle' | 'subject'>) => (
-    <Flex className={b()} justifyContent="space-between">
-        <User
-            size="m"
-            description={subject}
-            name={<span title={fromEmail}>{fromTitle}</span>}
-            avatar={{text: fromTitle, theme: 'brand'}}
-        />
-        {created && <Text color="secondary">{humanReadableDate(created)}</Text>}
-    </Flex>
-);
+}: Pick<Email, 'created' | 'fromEmail' | 'fromTitle' | 'subject'>) => {
+    const createdText = humanReadableDate(created);
+    return (
+        <Flex className={b()} justifyContent="space-between">
+            <User
+                size="m"
+                description={subject}
+                name={<span title={fromEmail}>{fromTitle}</span>}
+                avatar={{text: fromTitle, theme: 'brand'}}
+                className={b('user')}
+            />
+            {created && (
+                <Text color="secondary" className={b('created')} title={createdText}>
+                    {createdText}
+                </Text>
+            )}
+        </Flex>
+    );
+};
