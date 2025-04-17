@@ -1,5 +1,5 @@
 import {Divider} from '@gravity-ui/uikit';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {block} from 'src/utils';
 
 import {CurrentEmail} from '../CurrentEmail/CurrentEmail';
@@ -16,11 +16,17 @@ export const Mail = () => {
     const [selectedAccount, setSelectedAccount] = useState([ACCOUNT_LIST[0]]);
     const [selectedFolder, setSelectedFolder] = useState(MAILBOX_FOLDER_LIST[0].id);
     const [selectedEmail, setSelectedEmail] = useState(MAIL_DATA[selectedAccount[0]][0]);
+
+    const handleAccountChange = useCallback((newAccount: string[]) => {
+        setSelectedAccount(newAccount);
+        setSelectedFolder(MAILBOX_FOLDER_LIST[0].id);
+        setSelectedEmail(MAIL_DATA[newAccount[0]][0]);
+    }, []);
     return (
         <div className={b()}>
             <Navigation
                 accounts={ACCOUNT_LIST}
-                onUpdateAccount={setSelectedAccount}
+                onUpdateAccount={handleAccountChange}
                 onUpdateFolder={setSelectedFolder}
                 selectedAccount={selectedAccount}
                 selectedFolder={selectedFolder}

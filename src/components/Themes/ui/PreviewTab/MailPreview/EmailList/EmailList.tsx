@@ -4,7 +4,7 @@ import {
     unstable_TreeListProps as TreeListProps,
     unstable_useList as useList,
 } from '@gravity-ui/uikit/unstable';
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {block} from 'src/utils';
 
 import {Header} from '../Header/Header';
@@ -53,7 +53,15 @@ export const EmailList = ({
         textFilter: '',
         option: 'All mail',
     });
+
     const [listItems, setListItems] = useState(emailList);
+
+    useEffect(() => {
+        setListItems(
+            filterItems(filterRef.current.option, filterRef.current.textFilter, emailList),
+        );
+    }, [emailList]);
+
     const list = useList({
         items: listItems,
         controlledState: {
