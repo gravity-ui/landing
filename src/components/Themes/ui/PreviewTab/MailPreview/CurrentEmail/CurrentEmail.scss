@@ -4,4 +4,10 @@ $block: '.#{variables.$children-prefix}current-email';
 
 #{$block} {
     width: 488px;
+    &__email-body {
+        padding: 20px;
+        white-space: pre-wrap;
+        flex-grow: 1;
+        overflow: auto;
+    }
 }

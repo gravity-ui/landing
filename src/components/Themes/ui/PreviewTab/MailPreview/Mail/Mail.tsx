@@ -33,7 +33,7 @@ export const Mail = () => {
                 selectedEmailId={selectedEmail.id}
             />
             <Divider orientation="vertical" />
-            <CurrentEmail />
+            <CurrentEmail {...selectedEmail} />
         </div>
     );
 };

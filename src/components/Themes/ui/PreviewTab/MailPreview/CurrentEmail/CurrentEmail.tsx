@@ -8,13 +8,17 @@ import {
     LayoutTabs,
     TrashBin,
 } from '@gravity-ui/icons';
-import {Divider, Flex} from '@gravity-ui/uikit';
+import {Divider, Flex, Text} from '@gravity-ui/uikit';
 import {block} from 'src/utils';
 
 import {Header} from '../Header/Header';
 import {getBlockName} from '../cn';
+import {Email} from '../types';
 
 import {ActionGroup} from './ActionGroup/ActionGroup';
+import './CurrentEmail.scss';
+import {EmailHeader} from './EmailHeader/EmailHeader';
+import {ReplyEditor} from './ReplyEditor/ReplyEditor';
 
 const b = block(getBlockName('current-email'));
 
@@ -38,11 +42,23 @@ const ActionBar = () => (
     </Header>
 );
 
-export const CurrentEmail = () => {
+export const CurrentEmail = ({body, created, fromEmail, fromTitle, subject, reply}: Email) => {
     return (
         <Flex direction="column" className={b()}>
             <ActionBar />
             <Divider />
+            <EmailHeader
+                created={created}
+                fromEmail={fromEmail}
+                fromTitle={fromTitle}
+                subject={subject}
+            />
+            <Divider />
+            <Text variant="body-short" className={b('email-body')}>
+                {body}
+            </Text>
+            <Divider />
+            <ReplyEditor reply={reply} />
         </Flex>
     );
 };
