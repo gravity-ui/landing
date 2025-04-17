@@ -33,6 +33,7 @@ import {sheetConfig} from './Sheet';
 import {skeletonConfig} from './Skeleton';
 import {sliderConfig} from './Slider';
 import {spinConfig} from './Spin';
+import {stepperConfig} from './Stepper';
 import {switchConfig} from './Switch';
 import {tableConfig} from './Table';
 import {tabsConfig} from './Tabs';
@@ -87,6 +88,7 @@ const uikitComponents: Component[] = [
     userConfig,
     userLabelConfig,
     sheetConfig,
+    stepperConfig,
 ];
 
 export const uikit: Lib = {
