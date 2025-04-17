@@ -118,6 +118,13 @@ body.g-root,
                 }
             }
         }
+        li + li {
+            margin-top: 0;
+        }
+
+        ol.g-breadcrumbs {
+            box-sizing: border-box;
+        }
     }
 
     .pc-page-constructor {
