@@ -1,0 +1,19 @@
+@use './variables';
+
+$block: '.#{variables.$main-block}';
+
+#{$block} {
+    height: 100%;
+    &__wrapper-header {
+        padding: calc(var(--g-spacing-base) * 2) calc(var(--g-spacing-base) * 5);
+    }
+
+    &__divider {
+        flex-shrink: 0;
+    }
+
+    &__breadcrumbs {
+        width: 100%;
+        box-sizing: content-box;
+    }
+}

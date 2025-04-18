@@ -1,0 +1,10 @@
+@use '../../variables';
+
+$block: '.#{variables.$children-prefix}reply-editor';
+
+#{$block} {
+    height: 250px;
+    &__editor {
+        overflow-y: auto;
+    }
+}

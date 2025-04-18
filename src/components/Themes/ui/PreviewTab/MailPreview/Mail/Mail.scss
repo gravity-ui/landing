@@ -1,0 +1,10 @@
+@use '../variables';
+
+$block: '.#{variables.$children-prefix}mail';
+
+#{$block} {
+    display: grid;
+    grid-template-columns: 280px min-content auto min-content 488px;
+    height: 100%;
+    overflow: hidden;
+}

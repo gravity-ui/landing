@@ -1,0 +1,11 @@
+@use '../../variables';
+
+$block: '.#{variables.$children-prefix}filter';
+
+#{$block} {
+    padding: calc(var(--g-spacing-base) * 3) calc(var(--g-spacing-base) * 5);
+
+    &__icon {
+        margin-inline-start: calc(var(--g-spacing-base) * 3);
+    }
+}
