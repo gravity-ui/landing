@@ -1,0 +1,13 @@
+﻿{
+    "actions_openInFigma": "在 Figma 中打开",
+    "title": "组件",
+    "searchPlaceholder": "按组件名称搜索",
+    "color-input_validation-format-error": "格式不正确",
+    "maintainers_one": "维护者：",
+    "maintainers_other": "维护者：",
+    "maintainers": "维护者：",
+    "theme": "切换主题",
+    "rtlOn": "开启 RTL",
+    "rtlOff": "关闭 RTL",
+    "rtlNotSupported": "不支持 RTL"
+}

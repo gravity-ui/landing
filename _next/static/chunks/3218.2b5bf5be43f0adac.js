@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[3218],{63218:function(e,n,t){t.r(n),t.d(n,{RadioComponent:function(){return c}});var u=t(85893),a=t(71469);let c=e=>{let{size:n,content:t,checked:c,disabled:s}=e;return(0,u.jsx)(a.Radio,{value:"Value 1",size:n,content:t,checked:c,disabled:s})}}}]);
