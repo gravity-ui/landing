@@ -13,7 +13,7 @@ const b = block(getBlockName('reply-editor'));
 export const ReplyEditor = ({reply}: {reply: string}) => {
     const editor = useMarkdownEditor({
         initial: {
-            mode: 'wysiwyg',
+            mode: 'markup',
             toolbarVisible: true,
             markup: reply,
         },
