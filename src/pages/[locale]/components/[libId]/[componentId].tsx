@@ -1,5 +1,6 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
+import {useTranslation} from 'next-i18next';
 import {i18n} from 'next-i18next.config';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
@@ -8,7 +9,13 @@ import {Component} from '../../../../components/Component/Component';
 import {ComponentsLayout} from '../../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../../components/Layout/Layout';
 import {libs} from '../../../../content/components';
-import {getLibById, getLibComponents, getLocale, getMaintainers} from '../../../../utils';
+import {
+    getLibById,
+    getLibComponents,
+    getLibraryMeta,
+    getLocale,
+    getMaintainers,
+} from '../../../../utils';
 import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -97,7 +104,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
             libId: ctx.params?.libId,
             componentId: ctx.params?.componentId,
             readmeContent,
-            ...(await getI18nProps(ctx, ['component'])),
+            ...(await getI18nProps(ctx, ['component', 'libraries-info'])),
         },
     };
 };
@@ -111,6 +118,7 @@ export const ComponentPage = ({
     componentId: string;
     readmeContent: string;
 }) => {
+    const {t} = useTranslation();
     const lib = libs.find((item) => item.id === libId);
     const component = lib?.components.find((item) => item.id === componentId);
 
@@ -143,7 +151,12 @@ export const ComponentPage = ({
     }, []);
 
     return (
-        <Layout title={`${lib.title} – ${component.title}`} hideFooter noScroll={!isMobile}>
+        <Layout
+            title={`${lib.title} – ${component.title}`}
+            hideFooter
+            noScroll={!isMobile}
+            meta={getLibraryMeta({id: lib.id, title: lib.title}, t, component.title)}
+        >
             <ComponentsLayout libId={libId} componentId={componentId} sections={sections}>
                 <Component
                     libId={libId}

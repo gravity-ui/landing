@@ -1,0 +1,13 @@
+@use '../../variables';
+
+$block: '.#{variables.$children-prefix}email-header';
+
+#{$block} {
+    padding: 16px 20px;
+    &__user {
+        overflow: hidden;
+    }
+    &__created {
+        flex-shrink: 0;
+    }
+}

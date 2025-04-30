@@ -21,11 +21,10 @@ export const HeaderActionBar = ({themeSwitcher}: {themeSwitcher: ReactNode}) => 
                         placeholder="Search"
                         size="l"
                         type="search"
-                        className={b('input')}
                         startContent={
                             <Icon size={16} data={Magnifier} className={b('search-icon')} />
                         }
-                        endContent={<Hotkey value="mod+f" />}
+                        endContent={<Hotkey className={b('hotkey')} value="mod+f" />}
                     />
                 </ActionBar.Item>
                 <ActionBar.Group className={b('grow')}>

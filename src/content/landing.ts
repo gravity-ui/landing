@@ -69,16 +69,16 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                         date: '2025-03-25T09:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
-                    {
-                        date: '2025-03-24T19:00:00.000Z',
-                        content: t('home:news_items_item3'),
-                    },
+                    // {
+                    //     date: '2025-03-24T19:00:00.000Z',
+                    //     content: t('home:news_items_item3'),
+                    // },
                 ],
             },
-            // banner: {
-            //     content: t('home:banner_content'),
-            //     href: 'https://forms.yandex.ru/surveys/13733147.8993c47ecb24841f51ca79b039326a5ce301538e',
-            // },
+            banner: {
+                content: t('home:banner_content'),
+                href: 'https://clck.ru/3LedZA',
+            },
         },
         // {
         //     type: CustomBlock.Iframe,
