@@ -2,41 +2,53 @@ import CkeckMark from '../../../../../../assets/osn-landing/check-mark-icon.svg'
 import Code from '../../../../../../assets/osn-landing/code-bg.svg';
 import Cube from '../../../../../../assets/osn-landing/cube-bg.svg';
 import Cubes from '../../../../../../assets/osn-landing/cubes-bg.svg';
+import HeaderLandingDark from '../../../../../../assets/osn-landing/header-landing-dark.png';
 import HeaderLanding from '../../../../../../assets/osn-landing/header-landing.png';
 import LayoutImage from '../../../../../../assets/osn-landing/layout-image.png';
 import Mail from '../../../../../../assets/osn-landing/mail-bg.svg';
 import RandomNumbers from '../../../../../../assets/osn-landing/random-numbers-bg.svg';
 import Result from '../../../../../../assets/osn-landing/result.svg';
 import Store from '../../../../../../assets/osn-landing/store-bg.svg';
+import TimeLineFirstDark from '../../../../../../assets/osn-landing/timeline-1-dark.svg';
 import TimeLineFirst from '../../../../../../assets/osn-landing/timeline-1.svg';
+import TimeLineSecondDark from '../../../../../../assets/osn-landing/timeline-2-dark.svg';
 import TimeLineSecond from '../../../../../../assets/osn-landing/timeline-2.svg';
+import TimeLineThirdDark from '../../../../../../assets/osn-landing/timeline-3-dark.svg';
 import TimeLineThird from '../../../../../../assets/osn-landing/timeline-3.svg';
+import TimeLineFourthDark from '../../../../../../assets/osn-landing/timeline-4-dark.svg';
 import TimeLineFourth from '../../../../../../assets/osn-landing/timeline-4.svg';
+import TimeLineFifthDark from '../../../../../../assets/osn-landing/timeline-5-dark.svg';
 import TimeLineFifth from '../../../../../../assets/osn-landing/timeline-5.svg';
+import TimeLineSixthDark from '../../../../../../assets/osn-landing/timeline-6-dark.svg';
 import TimeLineSixth from '../../../../../../assets/osn-landing/timeline-6.svg';
 import UsersIcon from '../../../../../../assets/osn-landing/users-icon.svg';
 import YandexIcon from '../../../../../../assets/osn-landing/yandex-icon.svg';
 
-export function getContent() {
+export function getContent(theme: 'light' | 'dark' = 'light') {
     return {
         blocks: [
             {
                 type: 'header-block',
                 title: 'Sample Service',
+                theme: theme,
                 description:
                     '<p>The service does good and provides you with a lot of opportunities and features. With the highest tech in mind we created a solution that could you suit you the best way possible</p>',
                 width: 's',
                 verticalOffset: 'l',
                 background: {
-                    color: '#F0F1F6',
-                    fullWidth: true,
-                    image: HeaderLanding,
+                    dark: {
+                        image: HeaderLandingDark,
+                    },
+                    light: {
+                        image: HeaderLanding,
+                    },
                 },
             },
             {
                 type: 'extended-features-block',
                 title: {
                     text: 'Why this solution is good',
+                    color: 'red',
                 },
                 items: [
                     {
@@ -93,7 +105,12 @@ export function getContent() {
                             text: '<p>The very first step when you get all the information you possibly need</p>',
                         },
                         media: {
-                            image: TimeLineFirst,
+                            dark: {
+                                image: TimeLineFirstDark,
+                            },
+                            light: {
+                                image: TimeLineFirst,
+                            },
                         },
                     },
                     {
@@ -103,7 +120,12 @@ export function getContent() {
                             text: '<p>After you’re done with the information collection, proceed to the application</p>',
                         },
                         media: {
-                            image: TimeLineSecond,
+                            dark: {
+                                image: TimeLineSecondDark,
+                            },
+                            light: {
+                                image: TimeLineSecond,
+                            },
                         },
                     },
                     {
@@ -113,7 +135,12 @@ export function getContent() {
                             text: '<p>In order to continue you’ll need to prepare everything according with the roadmap we’ll give you</p>',
                         },
                         media: {
-                            image: TimeLineThird,
+                            dark: {
+                                image: TimeLineThirdDark,
+                            },
+                            light: {
+                                image: TimeLineThird,
+                            },
                         },
                     },
                     {
@@ -123,7 +150,12 @@ export function getContent() {
                             text: '<p>A couple more questions for you and a couple more answers for us</p>',
                         },
                         media: {
-                            image: TimeLineFourth,
+                            dark: {
+                                image: TimeLineFourthDark,
+                            },
+                            light: {
+                                image: TimeLineFourth,
+                            },
                         },
                     },
                     {
@@ -133,7 +165,12 @@ export function getContent() {
                             text: '<p>Our managers will guide you throughout the entire process</p>',
                         },
                         media: {
-                            image: TimeLineFifth,
+                            dark: {
+                                image: TimeLineFifthDark,
+                            },
+                            light: {
+                                image: TimeLineFifth,
+                            },
                         },
                     },
                     {
@@ -143,7 +180,12 @@ export function getContent() {
                             text: '<p>Now everything is ready</p>',
                         },
                         media: {
-                            image: TimeLineSixth,
+                            dark: {
+                                image: TimeLineSixthDark,
+                            },
+                            light: {
+                                image: TimeLineSixth,
+                            },
                         },
                     },
                 ],
@@ -236,9 +278,9 @@ export function getContent() {
                         type: 'background-card',
                         title: 'That’s not all',
                         text: 'Click the button to learn more',
-                        backgroundColor: 'white',
+                        backgroundColor: theme === 'light' ? 'white' : '#383438',
                         paddingBottom: 'm',
-                        theme: 'light',
+                        theme: theme,
                         buttons: [
                             {
                                 text: 'Learn more',
@@ -259,7 +301,7 @@ export function getContent() {
                     text: 'Фильм',
                 },
                 title: 'Discover our latest webinar',
-                description:
+                additionalInfo:
                     'Our managers and engineers share their expertise on the best practices',
                 media: {
                     image: Result,

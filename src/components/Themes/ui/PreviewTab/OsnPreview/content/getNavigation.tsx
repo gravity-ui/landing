@@ -1,9 +1,15 @@
+import gravityUiLogoDark from '../../../../../../assets/osn-landing/gravity-ui-logo-dark.svg';
 import gravityUiLogo from '../../../../../../assets/osn-landing/gravity-ui-logo.svg';
 
 export function getNavigation() {
     return {
         logo: {
-            icon: gravityUiLogo,
+            light: {
+                icon: gravityUiLogo,
+            },
+            dark: {
+                icon: gravityUiLogoDark,
+            },
         },
         header: {
             leftItems: [

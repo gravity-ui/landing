@@ -22,7 +22,7 @@ import {
     ThemeProvider,
 } from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import React, {CSSProperties, Fragment, useEffect, useState} from 'react';
+import React, {CSSProperties, Fragment, useState} from 'react';
 
 import gravityUi from '../../../../assets/icons/gravity-ui.svg';
 import {block} from '../../../../utils';
@@ -36,6 +36,7 @@ import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
 import {KubernetesPreview} from './KubernetesPreview/KubernetesPreview';
 import {MailPreview} from './MailPreview/MailPreview';
+import {OsnPreview} from './OsnPreview/OsnPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
 import {TasksPreview} from './TasksPreview/TasksPreview';
@@ -75,12 +76,6 @@ const PreviewLayout = ({
     const onThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTheme(event.target.value as 'light' | 'dark');
     };
-
-    useEffect(() => {
-        if (id === 'osn' && theme !== 'light') {
-            setTheme('light');
-        }
-    }, [id, theme]);
 
     const themeProviderTheme = id === 'osn' ? 'light' : theme;
 
@@ -280,6 +275,12 @@ const previewComponents = [
         id: 'mail',
         Component: MailPreview,
         title: 'Mail',
+        blank: true,
+    },
+    {
+        id: 'osn',
+        Component: OsnPreview,
+        title: 'Osn',
         blank: true,
     },
 ];
