@@ -36,6 +36,7 @@ import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
 import {KubernetesPreview} from './KubernetesPreview/KubernetesPreview';
 import {MailPreview} from './MailPreview/MailPreview';
+import {OsnPreview} from './OsnPreview/OsnPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
 import {TasksPreview} from './TasksPreview/TasksPreview';
@@ -47,6 +48,8 @@ interface PreviewLayoutProps {
     id: string;
     breadCrumbsItems: string[];
     styles: ReturnType<typeof exportTheme>;
+    fullWidth?: boolean;
+    fullHeight?: boolean;
     children: (props: any) => React.ReactNode;
     hideAsideMenu?: boolean;
     scrollableContent?: boolean;
@@ -73,6 +76,8 @@ const PreviewLayout = ({
     const onThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTheme(event.target.value as 'light' | 'dark');
     };
+
+    const themeProviderTheme = id === 'osn' ? 'light' : theme;
 
     const renderContent = () => {
         return (
@@ -141,7 +146,7 @@ const PreviewLayout = ({
     };
 
     return (
-        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
+        <ThemeProvider theme={themeProviderTheme} scoped rootClassName={`${b()} ${b({theme})}`}>
             {styles ? (
                 <style>{`${
                     styles.fontImports
@@ -270,6 +275,12 @@ const previewComponents = [
         id: 'mail',
         Component: MailPreview,
         title: 'Mail',
+        blank: true,
+    },
+    {
+        id: 'osn',
+        Component: OsnPreview,
+        title: 'Osn',
         blank: true,
     },
 ];
