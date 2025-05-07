@@ -9,4 +9,6 @@ $block: '.#{variables.$ns}library-version';
     font-size: 13px;
     font-weight: 400;
     max-width: fit-content;
+    min-width: 24px;
+    min-height: 24px;
 }
