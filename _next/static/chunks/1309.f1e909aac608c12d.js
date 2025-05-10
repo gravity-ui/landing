@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[1309],{71309:function(e,t,l){l.r(t),l.d(t,{RelativeDateFieldSandBoxExample:function(){return i}});var a=l(85893),n=l(95513);l(67294);let i=e=>(0,a.jsx)(n.RelativeDateField,{...e,style:{alignSelf:"flex-start"}})}}]);

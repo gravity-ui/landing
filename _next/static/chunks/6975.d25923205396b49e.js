@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[6975],{16975:function(e,t,n){n.r(t),n.d(t,{TextAreaComponent:function(){return i}});var r=n(85893),s=n(71469);n(67294);let i=e=>(0,r.jsx)("div",{style:{width:"100%",maxWidth:300},children:(0,r.jsx)(s.TextArea,{...e})})}}]);
