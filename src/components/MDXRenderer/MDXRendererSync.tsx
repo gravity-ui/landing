@@ -26,7 +26,7 @@ type Props = {
     rewriteLinks?: (link: string) => string;
 };
 
-export const MDXRenderer = React.memo<Props>(
+export const MDXRendererSync = React.memo<Props>(
     ({text, withComponents = false, absoluteImgPath, rewriteLinks}) => {
         const [isEvaluated, setIsEvaluated] = React.useState(false);
         const resultRef = React.useRef<MDXContent | null>(null);
@@ -119,4 +119,4 @@ export const MDXRenderer = React.memo<Props>(
     },
 );
 
-MDXRenderer.displayName = 'MDXRenderer';
+MDXRendererSync.displayName = 'MDXRendererSync';

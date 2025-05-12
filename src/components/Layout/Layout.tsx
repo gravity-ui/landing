@@ -7,7 +7,7 @@ import ru from 'javascript-time-ago/locale/ru.json';
 import zh from 'javascript-time-ago/locale/zh.json';
 import {useTranslation} from 'next-i18next';
 import Head from 'next/head';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useGravityAnimation} from 'src/hooks/useGravityAnimation';
 
 import {CONTENT_WRAPPER_ID, DEFAULT_THEME, MENU_ID} from '../../constants';
@@ -89,8 +89,10 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
     );
 
+    const value = useMemo(() => ({isClient, isRtl}), [isClient, isRtl]);
+
     return (
-        <EnvironmentContext.Provider value={{isClient, isRtl}}>
+        <EnvironmentContext.Provider value={value}>
             <Head>
                 <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
                 <Meta {...meta} />
