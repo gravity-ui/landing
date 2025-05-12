@@ -4,7 +4,7 @@ import React from 'react';
 import {Article} from '../../content/design/types';
 import {block, getLocale} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
-import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
+import {MDXRendererSync} from '../MDXRenderer/MDXRendererSync';
 import {Section} from '../NavigationLayout/types';
 
 import './DesignArticle.scss';
@@ -78,7 +78,7 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId,
             <h1 className={b('title')}>
                 {t(`design-articles-info:section_${sectionId}_article_${article.id}_title`)}
             </h1>
-            <MDXRenderer
+            <MDXRendererSync
                 key={`${sectionId}-${article.id}-${locale}-article`}
                 text={article.content[locale]}
             />

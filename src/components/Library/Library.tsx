@@ -16,7 +16,7 @@ import {ContributorList} from '../../components/ContributorList';
 import {Link} from '../../components/Link';
 import {availablePlaygrounds} from '../../pages/[locale]/libraries/[libId]/playground';
 import {Lib, block, getAnchor, getLocale, getLocaleLink, getMaintainers} from '../../utils';
-import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
+import {MDXRendererSync} from '../MDXRenderer/MDXRendererSync';
 
 import './Library.scss';
 
@@ -235,7 +235,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                 </TabList>
                             </TabProvider>
                             <div className={b('content')}>
-                                <MDXRenderer
+                                <MDXRendererSync
                                     key={`${lib.config.id}-${i18n.language}-${activeTab}`}
                                     text={
                                         activeTab === TabType.Readme

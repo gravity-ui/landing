@@ -6,12 +6,12 @@ import React from 'react';
 import i18nextConfig from '../../../next-i18next.config';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
-import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
 import {EnvironmentContext} from '../../contexts';
 import {Contributor, block, getLocale, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';
+import {MDXRendererSync} from '../MDXRenderer/MDXRendererSync';
 import {Section} from '../NavigationLayout/types';
 import {SandboxBlock} from '../SandboxBlock';
 
@@ -208,12 +208,10 @@ export const Component: React.FC<ComponentProps> = ({
             <div className={b('content')}>
                 {tabId === TabType.Design && component.content?.design ? (
                     <React.Fragment>
-                        {isClient && (
-                            <MDXRenderer
-                                key={`${libId}-${component.id}-${locale}-design`}
-                                text={component.content?.design}
-                            />
-                        )}
+                        <MDXRendererSync
+                            key={`${libId}-${component.id}-${locale}-design`}
+                            text={component.content?.design}
+                        />
                     </React.Fragment>
                 ) : (
                     <>
@@ -226,14 +224,12 @@ export const Component: React.FC<ComponentProps> = ({
                                 isSupportRTL={component.isSupportRTL}
                             />
                         ) : null}
-                        {isClient && (
-                            <MDXRenderer
-                                key={`${libId}-${component.id}-${locale}-overview`}
-                                text={readmeContent}
-                                rewriteLinks={rewriteLinks}
-                                withComponents
-                            />
-                        )}
+                        <MDXRendererSync
+                            key={`${libId}-${component.id}-${locale}-overview`}
+                            text={readmeContent}
+                            rewriteLinks={rewriteLinks}
+                            withComponents
+                        />
                     </>
                 )}
             </div>
