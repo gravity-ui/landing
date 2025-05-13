@@ -36,7 +36,19 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
         const {t} = useTranslation('component');
         const {isClient} = React.useContext(EnvironmentContext);
 
-        const [props, setProps] = React.useState({});
+        const [props, setProps] = React.useState(() => {
+            const defaultProps: Record<string, string | number | boolean | undefined> = {};
+            if (sandboxConfig) {
+                const propsKeys = Object.keys(sandboxConfig);
+
+                propsKeys.forEach((propKey) => {
+                    if (typeof sandboxConfig[propKey].defaultValue !== 'undefined') {
+                        defaultProps[propKey] = sandboxConfig[propKey].defaultValue;
+                    }
+                });
+            }
+            return defaultProps;
+        });
 
         const [isIframeLoaded, setIsIframeLoaded] = React.useState(false);
         const [isFullScreen, setIsFullScreen] = React.useState(false);
@@ -60,7 +72,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                                     <Text className={b('prop-title')}>{prop}</Text>
                                     <Select
                                         key={prop}
-                                        value={[props[prop as keyof typeof props]]}
+                                        value={[props[prop as keyof typeof props] as string]}
                                         placeholder={prop}
                                         options={option.values as OptionType[]}
                                         width="max"
@@ -83,7 +95,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                                     <Text className={b('prop-title')}>{prop}</Text>
                                     <SegmentedRadioGroup
                                         key={prop}
-                                        value={props[prop as keyof typeof props]}
+                                        value={props[prop as keyof typeof props] as string}
                                         options={option.values as OptionType[]}
                                         width="max"
                                         disabled={!isIframeLoaded}
@@ -109,7 +121,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                                             title={prop}
                                             size="m"
                                             disabled={!isIframeLoaded}
-                                            checked={props[prop as keyof typeof props]}
+                                            checked={props[prop as keyof typeof props] as boolean}
                                             onUpdate={(checked) => {
                                                 setProps({
                                                     ...props,
@@ -130,7 +142,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                                     <TextInput
                                         placeholder={prop}
                                         disabled={!isIframeLoaded}
-                                        value={props[prop as keyof typeof props]}
+                                        value={props[prop as keyof typeof props] as string}
                                         onUpdate={(nextValue) => {
                                             setProps({
                                                 ...props,
@@ -148,30 +160,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
             });
         }, [sandboxConfig, props, isIframeLoaded]);
 
-        const iframeLoadingHandler = React.useCallback(() => setIsIframeLoaded(true), []);
-
-        React.useEffect(() => {
-            iframeRef.current?.addEventListener('load', iframeLoadingHandler);
-
-            return () => {
-                iframeRef.current?.removeEventListener('load', iframeLoadingHandler);
-            };
-        }, [iframeRef.current]);
-
-        React.useEffect(() => {
-            if (sandboxConfig) {
-                const defaultProps: Record<string, unknown> = {};
-                const propsKeys = Object.keys(sandboxConfig);
-
-                propsKeys.forEach((propKey) => {
-                    if (typeof sandboxConfig[propKey].defaultValue !== 'undefined') {
-                        defaultProps[propKey] = sandboxConfig[propKey].defaultValue;
-                    }
-                });
-
-                setProps(defaultProps);
-            }
-        }, [sandboxConfig]);
+        const handleIframeLoad = React.useCallback(() => setIsIframeLoaded(true), []);
 
         React.useEffect(() => {
             if (isIframeLoaded) {
@@ -215,6 +204,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                                 }
                                 frameBorder={0}
                                 className={b('iframe')}
+                                onLoad={handleIframeLoad}
                             />
                         ) : (
                             <Skeleton className={b('iframe')} />
