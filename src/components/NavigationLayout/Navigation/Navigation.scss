@@ -12,6 +12,7 @@ $block: '.#{variables.$ns}navigation-layout-navigation';
         padding-top: 20px;
         background: var(--g-color-base-modal);
         box-sizing: border-box;
+        min-height: 64px;
     }
 
     &__empty {
