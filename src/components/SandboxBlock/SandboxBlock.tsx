@@ -193,7 +193,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
         return (
             <div className={b({'full-screen': isFullScreen})}>
                 <Row space="0">
-                    <Col s="8" l="8" m="8" className={b('wrapper-iframe')}>
+                    <Col s="12" l="8" m="8" className={b('wrapper-iframe')}>
                         <Spin size="s" />
                         {isClient ? (
                             <iframe
@@ -210,7 +210,7 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                             <Skeleton className={b('iframe')} />
                         )}
                     </Col>
-                    <Col s="4" l="4" m="4">
+                    <Col s="12" l="4" m="4">
                         <div className={b('top-actions')}>
                             <div className={b('top-actions-wrapper')}>
                                 <Tooltip content={t('theme')}>
