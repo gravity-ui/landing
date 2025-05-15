@@ -1,0 +1,13 @@
+@use '../../../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}osn-preview';
+
+#{$block} {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 0 var(--g-spacing-6);
+    position: relative;
+}

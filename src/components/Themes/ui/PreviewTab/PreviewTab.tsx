@@ -36,6 +36,7 @@ import {DashboardPreview} from './DashboardsPreview/DashboardPreview';
 import {FormPreview} from './FormPreview/FormPreview';
 import {KubernetesPreview} from './KubernetesPreview/KubernetesPreview';
 import {MailPreview} from './MailPreview/MailPreview';
+import {OsnPreview} from './OsnPreview/OsnPreview';
 import './PreviewTab.scss';
 import {TablePreview} from './TablePreview/TablePreview';
 import {TasksPreview} from './TasksPreview/TasksPreview';
@@ -270,6 +271,12 @@ const previewComponents = [
         id: 'mail',
         Component: MailPreview,
         title: 'Mail',
+        blank: true,
+    },
+    {
+        id: 'osn',
+        Component: OsnPreview,
+        title: 'Osn',
         blank: true,
     },
 ];
