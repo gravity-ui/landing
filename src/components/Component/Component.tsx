@@ -10,7 +10,7 @@ import {Component as ComponentType} from '../../content/components/types';
 import {Contributor, block, getLocale, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';
-import {MDXRendererSync} from '../MDXRenderer/MDXRendererSync';
+import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 import {Section} from '../NavigationLayout/types';
 import {SandboxBlock} from '../SandboxBlock';
 
@@ -205,7 +205,7 @@ export const Component: React.FC<ComponentProps> = ({
             <div className={b('content')}>
                 {tabId === TabType.Design && component.content?.design ? (
                     <React.Fragment>
-                        <MDXRendererSync
+                        <MDXRenderer
                             key={`${libId}-${component.id}-${locale}-design`}
                             text={component.content?.design}
                         />
@@ -221,7 +221,7 @@ export const Component: React.FC<ComponentProps> = ({
                                 isSupportRTL={component.isSupportRTL}
                             />
                         ) : null}
-                        <MDXRendererSync
+                        <MDXRenderer
                             key={`${libId}-${component.id}-${locale}-overview`}
                             text={readmeContent}
                             rewriteLinks={rewriteLinks}
