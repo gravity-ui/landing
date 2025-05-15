@@ -48,8 +48,6 @@ interface PreviewLayoutProps {
     id: string;
     breadCrumbsItems: string[];
     styles: ReturnType<typeof exportTheme>;
-    fullWidth?: boolean;
-    fullHeight?: boolean;
     children: (props: any) => React.ReactNode;
     hideAsideMenu?: boolean;
     scrollableContent?: boolean;
@@ -76,8 +74,6 @@ const PreviewLayout = ({
     const onThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTheme(event.target.value as 'light' | 'dark');
     };
-
-    const themeProviderTheme = id === 'osn' ? 'light' : theme;
 
     const renderContent = () => {
         return (
@@ -146,7 +142,7 @@ const PreviewLayout = ({
     };
 
     return (
-        <ThemeProvider theme={themeProviderTheme} scoped rootClassName={`${b()} ${b({theme})}`}>
+        <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
             {styles ? (
                 <style>{`${
                     styles.fontImports
