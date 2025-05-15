@@ -1,11 +1,6 @@
-import * as Components from '@gravity-ui/components';
-import * as DateComponents from '@gravity-ui/date-components';
-import * as Navigation from '@gravity-ui/navigation';
-import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import * as UIKit from '@gravity-ui/uikit';
-import {EvaluateOptions, evaluate} from '@mdx-js/mdx';
+import {EvaluateOptions, evaluateSync} from '@mdx-js/mdx';
 import * as provider from '@mdx-js/react';
-import type {MDXComponents, MDXContent} from 'mdx/types';
+import type {MDXContent} from 'mdx/types';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash.js';
 import 'prismjs/components/prism-jsx.js';
@@ -16,29 +11,12 @@ import * as runtime from 'react/jsx-runtime';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
-// @ts-ignore
-import remarkLinkRewrite from 'remark-link-rewrite';
 
 import {CONTENT_WRAPPER_ID} from '../../constants';
-import * as DateComponentsExamples from '../../content/components/date-components/examples/components';
-import * as UIKitExamples from '../../content/components/uikit/examples/components';
 
-import {ExampleBlock} from './ExampleBlock/ExampleBlock';
+import {componentsAvailableInMDX} from './constants';
+import RemarkLinkRewriteSync from './remark-plugins/remark-link-rewrite-sync';
 import {getCustomImg} from './utils';
-
-const componentsAvailableInMDX: MDXComponents = {
-    Grid,
-    Row,
-    Col,
-    ExampleBlock,
-    UIKitExamples,
-    DateComponentsExamples,
-    React: React as unknown as Record<string, MDXComponents>,
-    UIKit: UIKit as unknown as Record<string, MDXComponents>,
-    Components: Components as unknown as Record<string, MDXComponents>,
-    DateComponents: DateComponents as unknown as Record<string, MDXComponents>,
-    Navigation: Navigation as unknown as Record<string, MDXComponents>,
-};
 
 type Props = {
     text: string;
@@ -49,19 +27,17 @@ type Props = {
 
 export const MDXRenderer = React.memo<Props>(
     ({text, withComponents = false, absoluteImgPath, rewriteLinks}) => {
-        const [isEvaluated, setIsEvaluated] = React.useState(false);
-        const resultRef = React.useRef<MDXContent | null>(null);
-
-        const preparedText = text
-            .trim()
-            .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1')
-            .replace(/<!--GITHUB_BLOCK(.*?)\/GITHUB_BLOCK-->/gms, '');
-
-        React.useEffect(() => {
-            resultRef.current = null;
-            setIsEvaluated(false);
+        const Content = React.useMemo<MDXContent | null>(() => {
+            const preparedText = text
+                .trim()
+                .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1')
+                .replace(/<!--GITHUB_BLOCK(.*?)\/GITHUB_BLOCK-->/gms, '');
 
             const remarkPlugins: EvaluateOptions['remarkPlugins'] = [remarkGfm];
+            if (rewriteLinks) {
+                remarkPlugins.push([RemarkLinkRewriteSync, {replacer: rewriteLinks}]);
+            }
+
             const rehypePlugins: EvaluateOptions['rehypePlugins'] = [
                 rehypeSlug,
                 [
@@ -76,65 +52,54 @@ export const MDXRenderer = React.memo<Props>(
                 ],
             ];
 
-            if (rewriteLinks) {
-                remarkPlugins.push([remarkLinkRewrite, {replacer: rewriteLinks}]);
+            try {
+                const {default: ContentLocal} = evaluateSync(preparedText, {
+                    ...provider,
+                    ...runtime,
+                    remarkPlugins,
+                    rehypePlugins,
+                    development: false,
+                } as unknown as EvaluateOptions);
+                return ContentLocal;
+            } catch (err) {
+                console.error(err);
             }
+            return null;
+        }, [text, withComponents, absoluteImgPath, rewriteLinks]);
 
-            evaluate(preparedText, {
-                ...provider,
-                ...runtime,
-                remarkPlugins,
-                rehypePlugins,
-                development: false,
-            } as unknown as EvaluateOptions)
-                .then(({default: Component}) => {
-                    resultRef.current = Component;
-                    setIsEvaluated(true);
-                })
-                .catch((err) => {
-                    // eslint-disable-next-line no-console
-                    console.error(err);
+        const contentComponents = React.useMemo(() => {
+            const CustomImg = getCustomImg({absoluteImgPath});
+            return {
+                img: CustomImg,
+                Img: CustomImg,
+                ...(withComponents ? componentsAvailableInMDX : {}),
+            };
+        }, [withComponents, absoluteImgPath]);
+
+        React.useEffect(() => {
+            Prism.highlightAll();
+        }, []);
+
+        React.useEffect(() => {
+            const content = document.getElementById(CONTENT_WRAPPER_ID);
+            const sectionId = window.location.hash.split('#')[1];
+            const section = document.querySelector<HTMLElement>('#' + sectionId);
+
+            if (content && section) {
+                content.scrollTo({
+                    top: section.offsetTop,
+                    behavior: 'smooth',
                 });
-        }, [preparedText, rewriteLinks]);
-
-        React.useEffect(() => {
-            if (isEvaluated) {
-                Prism.highlightAll();
             }
-        }, [isEvaluated]);
+        }, []);
 
-        React.useEffect(() => {
-            if (isEvaluated) {
-                const content = document.getElementById(CONTENT_WRAPPER_ID);
-                const sectionId = window.location.hash.split('#')[1];
-                const section = document.querySelector<HTMLElement>('#' + sectionId);
-
-                if (content && section) {
-                    content.scrollTo({
-                        top: section.offsetTop,
-                        behavior: 'smooth',
-                    });
-                }
-            }
-        }, [isEvaluated]);
-
-        if (!isEvaluated || !resultRef.current) {
+        if (!Content) {
             return null;
         }
 
-        const CustomImg = getCustomImg({absoluteImgPath});
-
-        const Content = resultRef.current;
-
         return (
             <div className="markdown-body">
-                <Content
-                    components={{
-                        img: CustomImg, // markdown
-                        Img: CustomImg, // html
-                        ...(withComponents ? componentsAvailableInMDX : {}),
-                    }}
-                />
+                <Content components={contentComponents} />
             </div>
         );
     },

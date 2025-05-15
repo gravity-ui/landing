@@ -89,8 +89,10 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
     );
 
+    const environmentValue = React.useMemo(() => ({isClient, isRtl}), [isClient, isRtl]);
+
     return (
-        <EnvironmentContext.Provider value={{isClient, isRtl}}>
+        <EnvironmentContext.Provider value={environmentValue}>
             <Head>
                 <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
                 <Meta {...meta} />
