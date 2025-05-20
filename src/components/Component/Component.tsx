@@ -6,12 +6,11 @@ import React from 'react';
 import i18nextConfig from '../../../next-i18next.config';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
-import {MDXRenderer} from '../../components/MDXRenderer/MDXRenderer';
 import {Component as ComponentType} from '../../content/components/types';
-import {EnvironmentContext} from '../../contexts';
 import {Contributor, block, getLocale, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';
+import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 import {Section} from '../NavigationLayout/types';
 import {SandboxBlock} from '../SandboxBlock';
 
@@ -53,8 +52,6 @@ export const Component: React.FC<ComponentProps> = ({
     const {t, i18n} = useTranslation();
 
     const locale = getLocale(i18n.language);
-
-    const {isClient} = React.useContext(EnvironmentContext);
 
     const router = useRouter();
     const {tabId} = router.query;
@@ -208,16 +205,14 @@ export const Component: React.FC<ComponentProps> = ({
             <div className={b('content')}>
                 {tabId === TabType.Design && component.content?.design ? (
                     <React.Fragment>
-                        {isClient && (
-                            <MDXRenderer
-                                key={`${libId}-${component.id}-${locale}-design`}
-                                text={component.content?.design}
-                            />
-                        )}
+                        <MDXRenderer
+                            key={`${libId}-${component.id}-${locale}-design`}
+                            text={component.content?.design}
+                        />
                     </React.Fragment>
                 ) : (
                     <>
-                        {isClient && component.sandbox ? (
+                        {component.sandbox ? (
                             <SandboxBlock
                                 key={`${libId}-${component.id}-sandbox`}
                                 libId={libId}
@@ -226,14 +221,12 @@ export const Component: React.FC<ComponentProps> = ({
                                 isSupportRTL={component.isSupportRTL}
                             />
                         ) : null}
-                        {isClient && (
-                            <MDXRenderer
-                                key={`${libId}-${component.id}-${locale}-overview`}
-                                text={readmeContent}
-                                rewriteLinks={rewriteLinks}
-                                withComponents
-                            />
-                        )}
+                        <MDXRenderer
+                            key={`${libId}-${component.id}-${locale}-overview`}
+                            text={readmeContent}
+                            rewriteLinks={rewriteLinks}
+                            withComponents
+                        />
                     </>
                 )}
             </div>
