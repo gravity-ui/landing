@@ -5,7 +5,6 @@ import {
     TextAlignRight,
 } from '@gravity-ui/icons';
 import {
-    Col,
     Direction,
     Icon,
     Row,
@@ -192,8 +191,8 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
 
         return (
             <div className={b({'full-screen': isFullScreen})}>
-                <Row space="0">
-                    <Col s={isClient ? 12 : 8} l="8" m="8" className={b('wrapper-iframe')}>
+                <div className={b('row')}>
+                    <div className={b('wrapper-iframe')}>
                         <Spin size="s" />
                         {isClient ? (
                             <iframe
@@ -209,8 +208,8 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                         ) : (
                             <Skeleton className={b('iframe')} />
                         )}
-                    </Col>
-                    <Col s={isClient ? 12 : 4} l="4" m="4">
+                    </div>
+                    <div className={b('frame-controls')}>
                         <div className={b('top-actions')}>
                             <div className={b('top-actions-wrapper')}>
                                 <Tooltip content={t('theme')}>
@@ -262,8 +261,8 @@ const SandboxBlock = React.memo<SandboxBlockTypes>(
                             </div>
                         </div>
                         <div className={b('actions')}>{options}</div>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             </div>
         );
     },
