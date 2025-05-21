@@ -11,7 +11,7 @@ import {useTranslation} from 'next-i18next';
 import React, {useEffect, useRef} from 'react';
 
 import {main} from '../../content/markdown-editor/main';
-import {block, getLocaleLink} from '../../utils';
+import {block} from '../../utils';
 
 import './MarkdownEditor.scss';
 import {useSticky} from './hooks';
@@ -58,7 +58,7 @@ function Editor() {
 }
 
 export const MarkdownEditor = () => {
-    const {t, i18n} = useTranslation('markdown-editor');
+    const {t} = useTranslation('markdown-editor');
 
     return (
         <Grid className={b()}>
@@ -67,7 +67,7 @@ export const MarkdownEditor = () => {
                     <h1 className={b('title')}>{t('title')}</h1>
                     <div className={b('actions')}>
                         <Button
-                            href={getLocaleLink('/libraries/markdown-editor', i18n)}
+                            href={'/libraries/markdown-editor'}
                             className={b('library-button')}
                             size="xl"
                             view="outlined-contrast"

@@ -1,2 +1,23 @@
-// Support for default locale without path prefix
-export {default, getServerSideProps} from './[locale]/index';
+import {GetServerSideProps} from 'next';
+
+import {Landing} from '../components/Landing/Landing';
+import {Layout} from '../components/Layout/Layout';
+import {getI18nProps} from '../utils/i18next';
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    return {
+        props: {
+            ...(await getI18nProps(ctx, ['home', 'libraries-info'])),
+        },
+    };
+};
+
+const Home = () => {
+    return (
+        <Layout isPageConstrucor>
+            <Landing />
+        </Layout>
+    );
+};
+
+export default Home;

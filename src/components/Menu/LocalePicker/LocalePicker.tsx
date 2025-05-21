@@ -1,5 +1,4 @@
 import {Select, SelectOption} from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -19,7 +18,6 @@ const FLAGS: Record<string, string> = {
 };
 
 export const LocalePicker: React.FC = () => {
-    const {i18n} = useTranslation();
     const router = useRouter();
 
     const renderOption = React.useCallback((option: SelectOption<string>) => {
@@ -48,27 +46,20 @@ export const LocalePicker: React.FC = () => {
             <Select
                 size="xl"
                 width="max"
-                value={[i18n.language]}
+                value={[router.locale ?? i18nextConfig.i18n.defaultLocale]}
                 options={i18nextConfig.i18n.locales.map((locale) => ({
                     value: locale,
                 }))}
                 renderOption={renderOption}
                 renderSelectedOption={renderOption}
                 onUpdate={([locale]) => {
-                    if (i18n.language === locale) {
+                    if (router.locale === locale) {
                         return;
                     }
 
                     localStorage.setItem(LOCALE_LOCAL_STORAGE_KEY, locale);
 
-                    const path = router.asPath;
-                    if (locale === i18nextConfig.i18n.defaultLocale) {
-                        router.replace(path.replace(`/${i18n.language}`, '') || '/');
-                    } else if (i18n.language === i18nextConfig.i18n.defaultLocale) {
-                        router.replace(`/${locale}${path}`);
-                    } else {
-                        router.replace(path.replace(`/${i18n.language}`, `/${locale}`));
-                    }
+                    router.push(router.pathname, router.asPath, {locale});
                 }}
             />
         </div>

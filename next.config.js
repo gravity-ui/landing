@@ -78,7 +78,10 @@ const plugins = [
 /** @type {import('next').NextConfig} */
 module.exports = withPlugins(plugins, {
     reactStrictMode: true,
-    i18n,
+    i18n: {
+        locales: i18n.locales,
+        defaultLocale: i18n.defaultLocale,
+    },
     experimental: {
         esmExternals: 'loose',
     },

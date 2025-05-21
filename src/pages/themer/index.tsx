@@ -2,9 +2,9 @@ import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import {Layout} from '../../../components/Layout/Layout';
-import {Themes} from '../../../components/Themes/Themes';
-import {getI18nProps} from '../../../utils/i18next';
+import {Layout} from '../../components/Layout/Layout';
+import {Themes} from '../../components/Themes/Themes';
+import {getI18nProps} from '../../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const result = {

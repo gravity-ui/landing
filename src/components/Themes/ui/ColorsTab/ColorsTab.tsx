@@ -2,6 +2,7 @@ import {Flex} from '@gravity-ui/uikit';
 import {Trans, useTranslation} from 'next-i18next';
 import React from 'react';
 
+import {useLocale} from '../../../../hooks/useLocale';
 import {block} from '../../../../utils';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
 import {BasicPalette} from '../BasicPalette/BasicPalette';
@@ -16,7 +17,8 @@ import './ColorsTab.scss';
 const b = block('colors-tab');
 
 export const ColorsTab = () => {
-    const {t, i18n} = useTranslation('themes');
+    const {t} = useTranslation('themes');
+    const locale = useLocale();
 
     const advancedColorsOptions = React.useMemo<EditableColorOption[]>(
         () => [
@@ -45,7 +47,7 @@ export const ColorsTab = () => {
                 name: 'base-selection-hover',
             },
         ],
-        [i18n.language],
+        [locale],
     );
 
     const additionalColorsOptions = React.useMemo<EditableColorOption[]>(
@@ -67,7 +69,7 @@ export const ColorsTab = () => {
                 name: 'text-link-visited-hover',
             },
         ],
-        [i18n.language],
+        [locale],
     );
 
     const {advancedModeEnabled, showMainSettings} = useThemeCreator();

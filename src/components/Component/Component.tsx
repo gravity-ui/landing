@@ -2,12 +2,13 @@ import {Button, Icon, Tab, TabList, TabProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
+import {useLocale} from 'src/hooks/useLocale';
 
 import i18nextConfig from '../../../next-i18next.config';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {Component as ComponentType} from '../../content/components/types';
-import {Contributor, block, getLocale, getRouteFromReadmeUrl} from '../../utils';
+import {Contributor, block, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
@@ -49,9 +50,8 @@ export const Component: React.FC<ComponentProps> = ({
     sections,
     maintainers,
 }) => {
-    const {t, i18n} = useTranslation();
-
-    const locale = getLocale(i18n.language);
+    const {t} = useTranslation();
+    const locale = useLocale();
 
     const router = useRouter();
     const {tabId} = router.query;

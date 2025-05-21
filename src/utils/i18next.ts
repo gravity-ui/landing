@@ -15,10 +15,7 @@ export const getI18nPaths = () =>
 export async function getI18nProps(ctx: GetServerSidePropsContext, ns?: string[]) {
     const namespaces = ns ? ['common', ...ns] : ['common'];
 
-    const localeParam = ctx?.params?.locale;
-    const locale =
-        (typeof localeParam === 'string' ? localeParam : undefined) ??
-        i18nextConfig.i18n.defaultLocale;
+    const locale = ctx.locale ?? i18nextConfig.i18n.defaultLocale;
 
     const props = {
         ...(await serverSideTranslations(locale, namespaces)),

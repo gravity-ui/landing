@@ -1,6 +1,5 @@
 import {HTML} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';
 
@@ -20,7 +19,7 @@ import uikitAsset from '../../../../assets/libs/img-lib-uikit.jpg';
 import wysiwygAssetMobile from '../../../../assets/libs/img-lib-wysiwyg-mobile.jpg';
 import wysiwygAsset from '../../../../assets/libs/img-lib-wysiwyg.jpg';
 import {useIsMobile} from '../../../../hooks/useIsMobile';
-import {block, getLibById, getLocaleLink} from '../../../../utils';
+import {block, getLibById} from '../../../../utils';
 
 import './LibraryPreview.scss';
 
@@ -69,7 +68,6 @@ export const LibraryPreview: React.FC<FeatureItemProps> = ({
     contentStyle,
 }) => {
     const isMobile = useIsMobile();
-    const {i18n} = useTranslation();
 
     let starsCount;
     let isPrimary = false;
@@ -87,7 +85,7 @@ export const LibraryPreview: React.FC<FeatureItemProps> = ({
     }
 
     const Tag = id ? (Link as any) : 'div';
-    const tagProps = id ? {href: getLocaleLink(`/libraries/${id}`, i18n)} : {};
+    const tagProps = id ? {href: `/libraries/${id}`} : {};
 
     return (
         <Tag {...tagProps} className={b()}>
