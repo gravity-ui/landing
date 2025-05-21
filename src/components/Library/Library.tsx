@@ -4,7 +4,6 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
-import {useLocale} from '../..//hooks/useLocale';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import lastUpdateIcon from '../../assets/icons/last-update.svg';
@@ -15,6 +14,7 @@ import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {ContributorList} from '../../components/ContributorList';
 import {Link} from '../../components/Link';
+import {useLocale} from '../../hooks/useLocale';
 import {availablePlaygrounds} from '../../pages/libraries/[libId]/playground';
 import {Lib, block, getAnchor, getMaintainers} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';

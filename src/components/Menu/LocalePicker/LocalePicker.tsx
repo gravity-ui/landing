@@ -4,6 +4,7 @@ import React from 'react';
 
 import i18nextConfig from '../../../../next-i18next.config';
 import {LOCALE_LOCAL_STORAGE_KEY} from '../../../constants';
+import {useLocale} from '../../../hooks/useLocale';
 import {block} from '../../../utils';
 
 import './LocalePicker.scss';
@@ -19,6 +20,8 @@ const FLAGS: Record<string, string> = {
 
 export const LocalePicker: React.FC = () => {
     const router = useRouter();
+
+    const appLocale = useLocale();
 
     const renderOption = React.useCallback((option: SelectOption<string>) => {
         const locale = option.value;
@@ -46,14 +49,14 @@ export const LocalePicker: React.FC = () => {
             <Select
                 size="xl"
                 width="max"
-                value={[router.locale ?? i18nextConfig.i18n.defaultLocale]}
+                value={[appLocale]}
                 options={i18nextConfig.i18n.locales.map((locale) => ({
                     value: locale,
                 }))}
                 renderOption={renderOption}
                 renderSelectedOption={renderOption}
                 onUpdate={([locale]) => {
-                    if (router.locale === locale) {
+                    if (appLocale === locale) {
                         return;
                     }
 
