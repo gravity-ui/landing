@@ -1,5 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import {i18n} from 'next-i18next.config';
 import React from 'react';
@@ -16,39 +16,9 @@ import {
     getLocale,
     getMaintainers,
 } from '../../../../utils';
-import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
+import {getI18nProps} from '../../../../utils/i18next';
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {
-        acc.push(
-            ...libs.reduce<{params: {locale: string; libId: string; componentId: string}}[]>(
-                (libsAcc, lib) => {
-                    lib.components
-                        .filter((component) => component.isComingSoon !== true)
-                        .forEach((component) => {
-                            libsAcc.push({
-                                params: {
-                                    locale: localeItem.params.locale,
-                                    libId: lib.id,
-                                    componentId: component.id,
-                                },
-                            });
-                        });
-                    return libsAcc;
-                },
-                [],
-            ),
-        );
-        return acc;
-    }, []);
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const components = getLibComponents(ctx.params?.libId as string);
     const component = components.find((item) => item.id === ctx.params?.componentId);
 

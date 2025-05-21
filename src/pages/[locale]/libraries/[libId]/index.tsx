@@ -1,35 +1,11 @@
-import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 
 import {Layout} from '../../../../components/Layout/Layout';
 import {Library} from '../../../../components/Library/Library';
-import {
-    getI18nPaths,
-    getI18nProps,
-    getLibById,
-    getLibraryMeta,
-    getLibsList,
-} from '../../../../utils';
+import {getI18nProps, getLibById, getLibraryMeta} from '../../../../utils';
 
-const libs = getLibsList();
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {
-        acc.push(
-            ...libs.map((libItem) => ({
-                params: {locale: localeItem.params.locale, libId: libItem.config.id},
-            })),
-        );
-        return acc;
-    }, []);
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
         props: {
             libId: ctx.params?.libId,

@@ -1,5 +1,5 @@
 import {Link} from '@gravity-ui/uikit';
-import {GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {useEffect} from 'react';
@@ -8,7 +8,7 @@ import nextI18nextConfig from '../../next-i18next.config';
 import {Layout} from '../components/Layout/Layout';
 import {LOCALE_LOCAL_STORAGE_KEY} from '../constants';
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
     // Load all translations for all locales at build time
     const locales = nextI18nextConfig.i18n.locales;
     const allTranslations: Record<string, any> = {};

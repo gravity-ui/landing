@@ -1,17 +1,10 @@
-import {GetStaticPaths, GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 
 import {Landing} from '../../components/Landing/Landing';
 import {Layout} from '../../components/Layout/Layout';
-import {getI18nPaths, getI18nProps} from '../../utils/i18next';
+import {getI18nProps} from '../../utils/i18next';
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    return {
-        paths: getI18nPaths(),
-        fallback: false,
-    };
-};
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
         props: {
             ...(await getI18nProps(ctx, ['home', 'libraries-info'])),

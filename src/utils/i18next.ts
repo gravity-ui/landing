@@ -1,4 +1,4 @@
-import {GetStaticPropsContext} from 'next';
+import {GetServerSidePropsContext} from 'next';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 import i18nextConfig from '../../next-i18next.config';
@@ -12,7 +12,7 @@ export const getI18nPaths = () =>
             },
         }));
 
-export async function getI18nProps(ctx: GetStaticPropsContext, ns?: string[]) {
+export async function getI18nProps(ctx: GetServerSidePropsContext, ns?: string[]) {
     const namespaces = ns ? ['common', ...ns] : ['common'];
 
     const localeParam = ctx?.params?.locale;

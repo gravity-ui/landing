@@ -1,12 +1,10 @@
-import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
 import {Layout} from '../../../../../components/Layout/Layout';
-import {getI18nPaths, getI18nProps, getLibsList} from '../../../../../utils';
-
-const libs = getLibsList();
+import {getI18nProps} from '../../../../../utils';
 
 const MarkdownEditor = dynamic(
     () =>
@@ -27,23 +25,7 @@ const GraphPlayround = dynamic(
     },
 );
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {
-        acc.push(
-            ...libs.map((libItem) => ({
-                params: {locale: localeItem.params.locale, libId: libItem.config.id},
-            })),
-        );
-        return acc;
-    }, []);
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const libId = Array.isArray(context.params?.libId)
         ? context.params?.libId[0]
         : context.params?.libId;

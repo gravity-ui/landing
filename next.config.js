@@ -14,6 +14,8 @@ const withTM = require('next-transpile-modules')([
     '@gravity-ui/markdown-editor',
 ]);
 
+const {i18n} = require('./next-i18next.config');
+
 const plugins = [
     [
         withTM,
@@ -76,7 +78,7 @@ const plugins = [
 /** @type {import('next').NextConfig} */
 module.exports = withPlugins(plugins, {
     reactStrictMode: true,
-    output: 'export',
+    i18n,
     experimental: {
         esmExternals: 'loose',
     },

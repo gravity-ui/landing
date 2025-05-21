@@ -1,20 +1,6 @@
 // Support for default locale without path prefix
-import {GetStaticPaths} from 'next';
+import {LibraryComponentsPage, getServerSideProps} from '../../[locale]/components/[libId]';
 
-import {libs} from '../../../content/components';
-import {LibraryComponentsPage, getStaticProps} from '../../[locale]/components/[libId]';
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = libs.map((libItem) => ({
-        params: {libId: libItem.id},
-    }));
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
-
-export {LibraryComponentsPage, getStaticProps};
+export {LibraryComponentsPage, getServerSideProps};
 
 export default LibraryComponentsPage;

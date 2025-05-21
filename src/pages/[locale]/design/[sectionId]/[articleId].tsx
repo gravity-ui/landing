@@ -1,5 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {GetStaticPaths, GetStaticPathsResult, GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -7,36 +7,9 @@ import {DesignArticle} from '../../../../components/DesignArticle/DesignArticle'
 import {DesignLayout} from '../../../../components/DesignLayout/DesignLayout';
 import {Layout} from '../../../../components/Layout/Layout';
 import {sections as designSections} from '../../../../content/design';
-import {getI18nPaths, getI18nProps} from '../../../../utils/i18next';
+import {getI18nProps} from '../../../../utils/i18next';
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = getI18nPaths().reduce<GetStaticPathsResult['paths']>((acc, localeItem) => {
-        acc.push(
-            ...designSections.reduce<
-                {params: {locale: string; sectionId: string; articleId: string}}[]
-            >((designSectionsAcc, section) => {
-                section.articles.forEach((article) => {
-                    designSectionsAcc.push({
-                        params: {
-                            locale: localeItem.params.locale,
-                            sectionId: section.id,
-                            articleId: article.id,
-                        },
-                    });
-                });
-                return designSectionsAcc;
-            }, []),
-        );
-        return acc;
-    }, []);
-
-    return {
-        paths,
-        fallback: false,
-    };
-};
-
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
         props: {
             sectionId: ctx.params?.sectionId,
