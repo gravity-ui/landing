@@ -62,23 +62,23 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                 title: t('home:news_title'),
                 items: [
                     {
-                        date: '2025-04-09T14:00:00.000Z',
+                        date: '2025-05-28T14:00:00.000Z',
                         content: t('home:news_items_item1'),
                     },
                     {
-                        date: '2025-03-25T09:00:00.000Z',
+                        date: '2025-04-09T14:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
-                    // {
-                    //     date: '2025-03-24T19:00:00.000Z',
-                    //     content: t('home:news_items_item3'),
-                    // },
+                    {
+                        date: '2025-03-25T09:00:00.000Z',
+                        content: t('home:news_items_item3'),
+                    },
                 ],
             },
-            banner: {
-                content: t('home:banner_content'),
-                href: 'https://clck.ru/3LedZA',
-            },
+            // banner: {
+            //     content: t('home:banner_content'),
+            //     href: 'https://clck.ru/3LedZA',
+            // },
         },
         // {
         //     type: CustomBlock.Iframe,
