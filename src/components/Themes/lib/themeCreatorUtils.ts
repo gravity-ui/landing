@@ -1,4 +1,5 @@
 import {TextProps} from '@gravity-ui/uikit';
+import {generatePrivateColors} from '@gravity-ui/uikit-themer';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';
@@ -13,7 +14,6 @@ import {
     THEME_BORDER_RADIUS_VARIABLE_PREFIX,
     THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
-import {generatePrivateColors} from './privateColors';
 import type {
     BordersOption,
     ColorsOptions,
@@ -129,14 +129,8 @@ function createPrivateColors({
         theme: themeVariant,
         colorToken,
         colorValue,
-        lightBg:
-            themeVariant === 'light'
-                ? theme.colors.light['base-background']
-                : theme.colors.dark['base-background'],
-        darkBg:
-            themeVariant === 'light'
-                ? theme.colors.dark['base-background']
-                : theme.colors.light['base-background'],
+        lightBg: theme.colors.light['base-background'],
+        darkBg: theme.colors.dark['base-background'],
     });
 }
 

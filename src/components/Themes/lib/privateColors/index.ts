@@ -1,1 +1,0 @@
-export {generatePrivateColors} from './utils';
