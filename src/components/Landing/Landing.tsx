@@ -2,12 +2,12 @@ import {PageConstructor, PageContent} from '@gravity-ui/page-constructor';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
+import {UISamplesBlock} from 'src/blocks/UISamples/UISamples';
 import {CustomPageContent} from 'src/content/types';
 
 import {ContributorsBlock} from '../../blocks/Contributors/Contributors';
 import {CustomExtendedFeatures} from '../../blocks/CustomExtendedFeatures/CustomExtendedFeatures';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
-import {Examples} from '../../blocks/Examples/Examples';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
 import {IFrameBlock} from '../../blocks/IFrameBlock/IFrameBlock';
 import {Libraries} from '../../blocks/Libraries/Libraries';
@@ -59,7 +59,7 @@ export const Landing: React.FC = () => {
                         [CustomBlock.CustomHeader]: CustomHeader,
                         [CustomBlock.CustomExtendedFeatures]: CustomExtendedFeatures,
                         [CustomBlock.Libraries]: Libraries,
-                        [CustomBlock.Examples]: Examples,
+                        [CustomBlock.UISamples]: UISamplesBlock,
                         [CustomBlock.Roadmap]: RoadmapBlock,
                         [CustomBlock.Templates]: TemplatesBlock,
                         [CustomBlock.Contributors]: ContributorsBlock,

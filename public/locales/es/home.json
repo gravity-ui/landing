@@ -28,5 +28,12 @@
     "github_stars-text": "¿&nbsp;Tienes 💖 Gravity UI? &nbsp;Danos&nbsp;un&nbsp;⭐&nbsp;en&nbsp;Github",
     "contributors_title": "Colaboradores",
     "contributors_actions_telegram": "Únete a Telegram",
-    "companies_title": "Con la confianza de"
+    "companies_title": "Con la confianza de",
+    "ui_samples_table_tab": "",
+    "ui_samples_dashboard_tab": "",
+    "ui_samples_kubernetes_tab": "",
+    "ui_samples_osn_tab": "",
+    "ui_samples_mail_tab": "",
+    "ui_samples_task_tracker_tab": "",
+    "ui_samples_apartment_tab": ""
 }

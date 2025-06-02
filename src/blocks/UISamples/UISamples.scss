@@ -1,0 +1,8 @@
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}ui-samples-block';
+
+#{$block} {
+    @include pcStyles.animate();
+}

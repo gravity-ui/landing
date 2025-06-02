@@ -1,0 +1,9 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}ui-samples-mobile';
+
+#{$block} {
+    &__card {
+        pointer-events: none;
+    }
+}

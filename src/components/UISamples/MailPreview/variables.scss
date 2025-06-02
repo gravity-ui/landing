@@ -1,0 +1,4 @@
+@use '../../../variables';
+
+$main-block: '#{variables.$ns}mail-preview';
+$children-prefix: '#{$main-block}-';

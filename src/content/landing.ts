@@ -163,6 +163,10 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             ],
         },
         {
+            type: CustomBlock.UISamples,
+            title: t('home:examples_title'),
+        },
+        {
             type: CustomBlock.Roadmap,
             title: t('home:roadmap_title'),
             tasks: getRoadmapTasks(t),
