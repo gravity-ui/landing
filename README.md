@@ -1,6 +1,5 @@
 # Gravity UI landing page
 
-test
 https://gravity-ui.com/
 
 ## Development
