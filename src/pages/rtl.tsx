@@ -1,4 +1,4 @@
-import {GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -7,7 +7,7 @@ import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
 import {getI18nProps} from '../utils/i18next';
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
         props: {
             ...(await getI18nProps(ctx, ['home', 'libraries-info'])),

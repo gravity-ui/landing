@@ -5,7 +5,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useIsMobile} from '../../hooks/useIsMobile';
-import {block, getLocaleLink} from '../../utils';
+import {block} from '../../utils';
 
 import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
@@ -22,7 +22,7 @@ interface IconsProps {
 }
 
 export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
 
     const isMobile = useIsMobile();
 
@@ -108,7 +108,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     </h1>
                     <div className={b('actions')}>
                         <Button
-                            href={getLocaleLink('/libraries/icons', i18n)}
+                            href={'/libraries/icons'}
                             target="_blank"
                             className={b('library-button')}
                             size="xl"

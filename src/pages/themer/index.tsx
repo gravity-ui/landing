@@ -1,26 +1,28 @@
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
+import React from 'react';
 
 import {Layout} from '../../components/Layout/Layout';
-import {Libraries} from '../../components/Libraries/Libraries';
+import {Themes} from '../../components/Themes/Themes';
 import {getI18nProps} from '../../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    return {
+    const result = {
         props: {
-            ...(await getI18nProps(ctx, ['libraries', 'libraries-info'])),
+            ...(await getI18nProps(ctx, ['themes'])),
         },
     };
+    return result;
 };
 
-export const LibrariesPage = () => {
+export const ThemesPage = () => {
     const {t} = useTranslation();
 
     return (
-        <Layout title={t('libraries:title')}>
-            <Libraries />
+        <Layout title={t('themes:title')}>
+            <Themes />
         </Layout>
     );
 };
 
-export default LibrariesPage;
+export default ThemesPage;

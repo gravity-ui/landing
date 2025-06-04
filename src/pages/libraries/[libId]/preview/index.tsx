@@ -1,17 +1,37 @@
-import {GetStaticPaths} from 'next';
+import {PageConstructorProvider, Theme} from '@gravity-ui/page-constructor';
+import {GetServerSideProps} from 'next';
+import Head from 'next/head';
+import React from 'react';
 
-import {getLibsList} from '../../../../utils';
-import {LibraryPreviewPage, getStaticProps} from '../../../[locale]/libraries/[libId]/preview';
+import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
+import {getI18nProps, getLibsList} from '../../../../utils';
+
+const theme = Theme.Dark;
 
 const libs = getLibsList();
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
-        paths: libs.map((item) => ({params: {libId: item.config.id}})),
-        fallback: false,
+        props: {
+            id: context.params?.libId,
+            ...(await getI18nProps(context, ['library', 'libraries-info'])),
+        },
     };
 };
 
-export {LibraryPreviewPage, getStaticProps};
+export const LibraryPreviewPage = ({id}: {id: string}) => {
+    const lib = libs.find((item) => item.config.id === id)!;
+
+    return (
+        <React.Fragment>
+            <Head>
+                <title>{lib?.config.title ?? ''} — og:image</title>
+            </Head>
+            <PageConstructorProvider theme={theme}>
+                <LibraryPreview lib={lib} />
+            </PageConstructorProvider>
+        </React.Fragment>
+    );
+};
 
 export default LibraryPreviewPage;

@@ -1,22 +1,32 @@
-// Support for default locale without path prefix
-import {GetStaticPaths} from 'next';
+import {GetServerSideProps} from 'next';
+import {useTranslation} from 'next-i18next';
 
-import {getLibsList} from '../../../utils';
-import {LibraryPage, getStaticProps} from '../../[locale]/libraries/[libId]';
+import {Layout} from '../../../components/Layout/Layout';
+import {Library} from '../../../components/Library/Library';
+import {getI18nProps, getLibById, getLibraryMeta} from '../../../utils';
 
-const libs = getLibsList();
-
-export const getStaticPaths: GetStaticPaths = async () => {
-    const paths = libs.map((libItem) => ({
-        params: {libId: libItem.config.id},
-    }));
-
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
-        paths,
-        fallback: false,
+        props: {
+            libId: ctx.params?.libId,
+            ...(await getI18nProps(ctx, ['library', 'libraries-info'])),
+        },
     };
 };
 
-export {LibraryPage, getStaticProps};
+export const LibraryPage = ({libId}: {libId: string}) => {
+    const {t} = useTranslation();
+
+    const lib = getLibById(libId);
+
+    return (
+        <Layout
+            title={lib?.config.title ?? ''}
+            meta={getLibraryMeta({id: lib.config.id, title: lib.config.title}, t)}
+        >
+            <Library lib={lib} />
+        </Layout>
+    );
+};
 
 export default LibraryPage;
