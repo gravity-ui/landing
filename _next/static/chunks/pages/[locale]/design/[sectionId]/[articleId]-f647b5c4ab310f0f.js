@@ -1,0 +1,1 @@
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[3573],{36114:function(n,_,e){(window.__NEXT_P=window.__NEXT_P||[]).push(["/[locale]/design/[sectionId]/[articleId]",function(){return e(96886)}])}},function(n){n.O(0,[3662,630,6342,4906,9772,5880,3288,5016,6395,4524,5513,5786,3904,9085,9969,6843,4457,6886,2888,9774,179],function(){return n(n.s=36114)}),_N_E=n.O()}]);
