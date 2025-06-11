@@ -13,6 +13,7 @@ import soonLabelIcon from '../../assets/icons/soon-label.svg';
 import {MenuItem, menu} from '../../content/menu';
 import {socialLinks} from '../../content/social-links';
 import {EnvironmentContext} from '../../contexts';
+import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
 import {Link} from '../Link';
 
@@ -24,7 +25,8 @@ const b = block('menu');
 const LINK_ICON_SIZE = 8;
 
 export const Menu: React.FC = () => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
+    const locale = useLocale();
 
     const router = useRouter();
 
@@ -71,9 +73,9 @@ export const Menu: React.FC = () => {
                             <div
                                 key={item.titleKey}
                                 className={b('desktop-menu-item', {
-                                    active: (i18n.language === nextI18nextConfig.i18n.defaultLocale
+                                    active: (locale === nextI18nextConfig.i18n.defaultLocale
                                         ? router.asPath
-                                        : router.asPath.replace(`/${i18n.language}`, '')
+                                        : router.asPath.replace(`/${locale}`, '')
                                     ).startsWith(item.url),
                                 })}
                             >
