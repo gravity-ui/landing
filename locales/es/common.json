@@ -1,0 +1,23 @@
+﻿{
+    "pageNotFound": "Página No Encontrada",
+    "pageNotFoundDescription": "La página que estás buscando no existe o ha sido movida.",
+    "backToHome": "Volver al Inicio",
+    "actions_open": "Abrir",
+    "actions_copyToClipboard": "Copiar al portapapeles",
+    "actions_share": "Compartir",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "actions_playground": "Parque infantil",
+    "menu_libraries": "Bibliotecas",
+    "menu_components": "Componentes",
+    "menu_design": "Diseño",
+    "menu_editor": "Redactor",
+    "menu_icons": "Iconos",
+    "menu_themer": "Temer",
+    "roadmap_inProgress": "En progreso",
+    "navigation_previous": "Anterior",
+    "navigation_next": "Próxima",
+    "emptySearchPlaceholder": "No se encontró nada",
+    "show_more": "Mostrar más",
+    "show_less": "Mostrar menos"
+}
