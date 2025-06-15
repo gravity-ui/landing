@@ -1,0 +1,23 @@
+﻿{
+    "pageNotFound": "页面未找到",
+    "pageNotFoundDescription": "您正在寻找的页面不存在或已被移动。",
+    "backToHome": "返回首页",
+    "actions_open": "打开",
+    "actions_copyToClipboard": "复制到剪贴板",
+    "actions_share": "分享",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "actions_playground": "游乐场",
+    "menu_libraries": "图书馆",
+    "menu_components": "组件",
+    "menu_design": "设计",
+    "menu_editor": "编辑器",
+    "menu_icons": "图标",
+    "menu_themer": "主题",
+    "roadmap_inProgress": "进行中",
+    "navigation_previous": "以前",
+    "navigation_next": "下一步",
+    "emptySearchPlaceholder": "什么都没找到",
+    "show_more": "显示更多",
+    "show_less": "少显示"
+}
