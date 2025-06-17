@@ -20,7 +20,7 @@ export const RTLPage = () => {
     i18n.changeLanguage(nextI18nextConfig.i18n.defaultLocale);
 
     return (
-        <Layout isPageConstrucor isRtl>
+        <Layout isPageConstructor isRtl hideLocalePicker>
             <Landing />
         </Layout>
     );

@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 const Home = () => {
     return (
-        <Layout isPageConstrucor>
+        <Layout isPageConstructor>
             <Landing />
         </Layout>
     );

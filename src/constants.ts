@@ -14,6 +14,6 @@ export const TARGET_PROFILE = 'gravity-ui';
 
 export const SCROLL_TO_TEMPLATES_EVENT = 'templates';
 
-export const LOCALE_LOCAL_STORAGE_KEY = 'gravity-landing-locale-v4';
-
 export const GITHUB_UI_KIT_URL = 'https://github.com/gravity-ui/uikit';
+
+export const NEXT_LOCALE_COOKIE = 'NEXT_LOCALE';

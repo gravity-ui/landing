@@ -29,22 +29,24 @@ const b = block('layout');
 export type LayoutProps = {
     title?: string;
     children?: React.ReactNode;
-    isPageConstrucor?: boolean;
+    isPageConstructor?: boolean;
     isRtl?: boolean;
     showOnlyContent?: boolean;
     hideFooter?: boolean;
     noScroll?: boolean;
     meta?: MetaProps;
+    hideLocalePicker?: boolean;
 };
 
 export const Layout: React.FC<LayoutProps> = ({
     title,
     children,
-    isPageConstrucor = false,
+    isPageConstructor = false,
     isRtl = false,
     showOnlyContent = false,
     hideFooter = false,
     noScroll = false,
+    hideLocalePicker = false,
     meta = {},
 }) => {
     const locale = useLocale();
@@ -90,7 +92,10 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
     );
 
-    const environmentValue = React.useMemo(() => ({isClient, isRtl}), [isClient, isRtl]);
+    const environmentValue = React.useMemo(
+        () => ({isClient, isRtl, hideLocalePicker}),
+        [isClient, isRtl, hideLocalePicker],
+    );
 
     return (
         <EnvironmentContext.Provider value={environmentValue}>
@@ -100,7 +105,7 @@ export const Layout: React.FC<LayoutProps> = ({
             </Head>
             <ThemeProvider theme={DEFAULT_THEME} direction={isRtl ? 'rtl' : 'ltr'}>
                 <React.Fragment>
-                    {isPageConstrucor ? (
+                    {isPageConstructor ? (
                         <PageConstructorProvider theme={DEFAULT_THEME as PageConstructorTheme}>
                             {pageConent}
                         </PageConstructorProvider>

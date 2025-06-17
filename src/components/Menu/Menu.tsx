@@ -32,7 +32,7 @@ export const Menu: React.FC = () => {
 
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
-    const {isRtl} = React.useContext(EnvironmentContext);
+    const {hideLocalePicker} = React.useContext(EnvironmentContext);
 
     const renderItem = (item: MenuItem) => {
         if (item.isComingSoon) {
@@ -83,7 +83,7 @@ export const Menu: React.FC = () => {
                             </div>
                         ))}
                     </div>
-                    {!isRtl && (
+                    {!hideLocalePicker && (
                         <div className={b('desktop-menu-locale-picker')}>
                             <LocalePicker />
                         </div>
@@ -145,7 +145,7 @@ export const Menu: React.FC = () => {
                                     </div>
                                 ))}
                             </div>
-                            {!isRtl && (
+                            {!hideLocalePicker && (
                                 <div className={b('mobile-menu-locale-picker')}>
                                     <LocalePicker />
                                 </div>

@@ -3,9 +3,9 @@ import {useRouter} from 'next/router';
 import React from 'react';
 
 import i18nextConfig from '../../../../next-i18next.config';
-import {LOCALE_LOCAL_STORAGE_KEY} from '../../../constants';
+import {NEXT_LOCALE_COOKIE} from '../../../constants';
 import {useLocale} from '../../../hooks/useLocale';
-import {block} from '../../../utils';
+import {block, setCookie} from '../../../utils';
 
 import './LocalePicker.scss';
 
@@ -60,7 +60,7 @@ export const LocalePicker: React.FC = () => {
                         return;
                     }
 
-                    localStorage.setItem(LOCALE_LOCAL_STORAGE_KEY, locale);
+                    setCookie({name: NEXT_LOCALE_COOKIE, value: locale});
 
                     router.push(router.pathname, router.asPath, {locale});
                 }}
