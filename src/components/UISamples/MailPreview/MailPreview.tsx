@@ -1,4 +1,4 @@
-import {Breadcrumbs, Divider, Flex} from '@gravity-ui/uikit';
+import {Breadcrumbs, Flex} from '@gravity-ui/uikit';
 import {block} from 'src/utils';
 
 import {PreviewWrapper, PreviewWrapperProps} from '../PreviewWrapper/PreviewWrapper';
@@ -25,7 +25,6 @@ export const MailPreview = (props: Pick<PreviewWrapperProps, 'styles'>) => (
                         </Breadcrumbs>
                         {themeSwitcher}
                     </Flex>
-                    <Divider className={b('divider')} />
                     <Mail />
                 </Flex>
             );

@@ -30,10 +30,14 @@ export function OsnPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                             <div style={{flexShrink: 0}}>
                                 <ActionBar aria-label="Actions bar">
                                     <ActionBar.Section type="primary">
-                                        <ActionBar.Group pull="left">
-                                            <ActionBar.Item>
-                                                <Breadcrumbs maxItems={1}>
+                                        <ActionBar.Group pull="left" style={{flexGrow: 1}}>
+                                            <ActionBar.Item style={{width: '100%'}}>
+                                                <Breadcrumbs
+                                                    showRoot
+                                                    style={{alignItems: 'center'}}
+                                                >
                                                     <Breadcrumbs.Item>Gravity UI</Breadcrumbs.Item>
+                                                    <Breadcrumbs.Item>Landing</Breadcrumbs.Item>
                                                 </Breadcrumbs>
                                             </ActionBar.Item>
                                         </ActionBar.Group>

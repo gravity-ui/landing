@@ -96,7 +96,7 @@ const b = block('table-preview');
 
 const SelectionTable = withTableSelection(withTableSorting(withTableActions(Table)));
 
-export const TablePreview = ({justify}: {justify: string}) => {
+export const TablePreview = ({justify}: {justify?: string}) => {
     const [tableSelectedIds, setTableSelectedIds] = React.useState(['1']);
     const [state, setState] = React.useState({page: 1, pageSize: 10, total: 1000});
 

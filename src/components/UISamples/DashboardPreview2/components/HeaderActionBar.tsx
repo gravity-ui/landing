@@ -14,12 +14,12 @@ const b = block('dashboard-example-header');
 
 export const HeaderActionBar = ({themeSwitcher}: {themeSwitcher: ReactNode}) => {
     return (
-        <ActionBar className={b()}>
+        <ActionBar aria-label="Actions bar" className={b()}>
             <ActionBar.Section type="primary">
                 <ActionBar.Item className={b('centered')}>
                     <TextInput
                         placeholder="Search"
-                        size="l"
+                        size="m"
                         type="search"
                         startContent={
                             <Icon size={16} data={Magnifier} className={b('search-icon')} />
@@ -47,7 +47,7 @@ export const HeaderActionBar = ({themeSwitcher}: {themeSwitcher: ReactNode}) => 
             </ActionBar.Section>
             <ActionBar.Section type="secondary">
                 <ActionBar.Item className={b('centered')}>
-                    <Button className={b('export')} view="action" size="l">
+                    <Button className={b('export')} view="action" size="m">
                         <Icon size={16} data={ArrowUpFromSquare} />
                         Export
                     </Button>

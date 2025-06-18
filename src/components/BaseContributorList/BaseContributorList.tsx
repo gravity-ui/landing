@@ -31,7 +31,12 @@ export const BaseContributorList: React.FC<BaseContributorListProps> = ({
                     target="_blank"
                     title={`@${login}`}
                 >
-                    <Avatar className={b('avatar')} text={login} imgUrl={avatarUrl} />
+                    <Avatar
+                        className={b('avatar')}
+                        text={login}
+                        imgUrl={avatarUrl}
+                        loading="lazy"
+                    />
                 </Link>
             ))}
 

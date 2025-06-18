@@ -10,4 +10,8 @@ $block: '.#{variables.$ns}osn-preview';
     overflow: auto;
     padding: 0 var(--g-spacing-6);
     position: relative;
+
+    & .pc-Grid .row .row {
+        margin: 0;
+    }
 }

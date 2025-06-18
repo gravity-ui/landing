@@ -36,9 +36,7 @@ $block: '.#{variables.$ns}dashboard-preview-example';
         color: var(--g-color-base-brand);
     }
 
-    &__content {
-        &-wrapper {
-            padding: var(--g-spacing-3) var(--g-spacing-4);
-        }
+    &__content-wrapper {
+        padding: var(--g-spacing-3) var(--g-spacing-4);
     }
 }

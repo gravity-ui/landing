@@ -430,7 +430,7 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                     gap={2}
                                     justifyContent="space-between"
                                     alignItems="center"
-                                    spacing={{px: 5, pt: 2}}
+                                    spacing={{px: 5, pt: 1, pb: 1}}
                                 >
                                     <User
                                         name="Blake's Tasks - Apollo Enterprises"

@@ -2,13 +2,7 @@ import {Flex} from '@gravity-ui/uikit';
 import React from 'react';
 import {block} from 'src/utils';
 
-import dashboardImage from '../../../../assets/ui-samples/card-dashboard.jpg';
-import hotelBookingImage from '../../../../assets/ui-samples/card-hotel-booking.jpg';
-import kubernetesImage from '../../../../assets/ui-samples/card-kubernetes.jpg';
-import listingImage from '../../../../assets/ui-samples/card-listing.jpg';
-import mailImage from '../../../../assets/ui-samples/card-mail.jpg';
-import osnImage from '../../../../assets/ui-samples/card-osn.jpg';
-import taskTrackerImage from '../../../../assets/ui-samples/card-task-tracker.jpg';
+import {useSampleComponents} from '../../samples';
 
 import './UISamplesMobile.scss';
 
@@ -19,45 +13,16 @@ type UISampleCardProps = {
 };
 
 const UISampleCard: React.FC<UISampleCardProps> = ({imageSrc}) => {
-    return <img className={b('card')} src={imageSrc} />;
+    return <img className={b('card')} src={imageSrc} loading="lazy" />;
 };
 
-const CARDS = [
-    {
-        type: 'dashboard',
-        src: dashboardImage.src,
-    },
-    {
-        type: 'hotel-booking',
-        src: hotelBookingImage.src,
-    },
-    {
-        type: 'listing',
-        src: listingImage.src,
-    },
-    {
-        type: 'task-tracker',
-        src: taskTrackerImage.src,
-    },
-    {
-        type: 'kubernetes',
-        src: kubernetesImage.src,
-    },
-    {
-        type: 'osn',
-        src: osnImage.src,
-    },
-    {
-        type: 'mail',
-        src: mailImage.src,
-    },
-];
-
 export const UISamplesMobile: React.FC = () => {
+    const samples = useSampleComponents();
+
     return (
-        <Flex direction="column" gap={4}>
-            {CARDS.map(({type, src}) => (
-                <UISampleCard key={type} imageSrc={src} />
+        <Flex direction="column" gap={4} className={b()}>
+            {samples.map(({type, imagePreviewSrc}) => (
+                <UISampleCard key={type} imageSrc={imagePreviewSrc} />
             ))}
         </Flex>
     );
