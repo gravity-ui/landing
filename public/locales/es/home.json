@@ -29,11 +29,11 @@
     "contributors_title": "Colaboradores",
     "contributors_actions_telegram": "Únete a Telegram",
     "companies_title": "Con la confianza de",
-    "ui_samples_table_tab": "",
-    "ui_samples_dashboard_tab": "",
-    "ui_samples_kubernetes_tab": "",
-    "ui_samples_osn_tab": "",
-    "ui_samples_mail_tab": "",
-    "ui_samples_task_tracker_tab": "",
-    "ui_samples_apartment_tab": ""
+    "ui_samples_table_tab": "Listado",
+    "ui_samples_dashboard_tab": "Panel de control",
+    "ui_samples_kubernetes_tab": "Resumen de contenedorización",
+    "ui_samples_osn_tab": "Página de aterrizaje",
+    "ui_samples_mail_tab": "Correo",
+    "ui_samples_task_tracker_tab": "Rastreador de tareas",
+    "ui_samples_apartment_tab": "Página de reservas"
 }
