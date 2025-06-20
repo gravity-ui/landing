@@ -1,6 +1,6 @@
 import {sortBy} from 'lodash';
 
-import {getLibById} from '../../../utils';
+import {getLibConfigById} from '../../../utils';
 import {Component, Lib} from '../types';
 
 import {calendarConfig} from './Calendar';
@@ -10,7 +10,7 @@ import {rangeCalendarConfig} from './RangeCalendar';
 import {relativeDateFieldConfig} from './RelativeDateField';
 import {relativeDatePickerConfig} from './RelativeDatePicker';
 
-const {config} = getLibById('date-components');
+const config = getLibConfigById('date-components');
 
 const components: Component[] = [
     calendarConfig,

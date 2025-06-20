@@ -2,7 +2,8 @@ import {Animatable, AnimateBlock, SliderBlock, useTheme} from '@gravity-ui/page-
 import React from 'react';
 
 import {useIsMobile} from '../../hooks/useIsMobile';
-import {block, getLibById, getThemedValue} from '../../utils';
+import {Lib} from '../../services/lib';
+import {block, getThemedValue} from '../../utils';
 import {CustomBlock} from '../constants';
 
 import './Libraries.scss';
@@ -10,15 +11,9 @@ import {LibraryPreview} from './components/LibraryPreview/LibraryPreview';
 
 const b = block('libraries-block');
 
-type Item = {
-    id?: string;
-    title: string;
-    description?: string;
-};
-
 export type LibrariesProps = Animatable & {
     title?: string;
-    items: Item[];
+    items: Lib[];
     backgroundColor?: string;
     backdropFilter?: string;
 };
@@ -61,29 +56,22 @@ export const Libraries: React.FC<LibrariesProps> = ({
             for (let j = i; j < end; j++) {
                 let rowsToTake = 1;
                 const item = items[j];
-                const {id, title: itemTitle, description: itemDescription} = item;
-                if (id) {
-                    const {config: libConfig} = getLibById(id);
-                    if (libConfig?.primary) {
-                        rowsToTake = primaryItemHeight;
-                    }
+                const {primary} = item.config;
+
+                if (primary) {
+                    rowsToTake = primaryItemHeight;
                 }
+
                 if (rowsTaken + rowsToTake > itemsInBlock) {
                     break;
                 }
                 blockComponents.push(
-                    <LibraryPreview
-                        key={itemTitle}
-                        id={id}
-                        title={itemTitle}
-                        description={itemDescription}
-                        contentStyle={contentStyle}
-                    />,
+                    <LibraryPreview key={item.config.id} lib={item} contentStyle={contentStyle} />,
                 );
                 rowsTaken += rowsToTake;
             }
             components.push(
-                <div className={b('slider-item-wrapper')} key={`block-${items[i].title}`}>
+                <div className={b('slider-item-wrapper')} key={`block-${items[i].config.id}`}>
                     {blockComponents}
                 </div>,
             );

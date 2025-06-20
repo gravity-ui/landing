@@ -16,13 +16,20 @@ import rocketIcon from '../assets/icons/rocket.svg';
 import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
-import {libs} from '../libs.mjs';
-import {getAllContributors} from '../utils';
+import {Contributor, Lib} from '../services/lib';
 
 import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
 
-export const getRtlLanding = (t: TFunction): CustomPageContent => ({
+export const getRtlLanding = ({
+    t,
+    libs,
+    contributors,
+}: {
+    t: TFunction;
+    libs: Lib[];
+    contributors: Contributor[];
+}): CustomPageContent => ({
     background: {
         image: {
             src: backgroundAsset.src,
@@ -59,13 +66,7 @@ export const getRtlLanding = (t: TFunction): CustomPageContent => ({
             type: CustomBlock.Libraries,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: 'مكتباتنا',
-            items: libs
-                .filter((lib) => lib.landing)
-                .map((lib) => ({
-                    id: lib.id,
-                    title: lib.title,
-                    description: t(`libraries-info:description_${lib.id}`),
-                })),
+            items: libs,
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
@@ -194,7 +195,7 @@ export const getRtlLanding = (t: TFunction): CustomPageContent => ({
                 title: t('home:contributors_actions_telegram'),
                 href: 'https://t.me/gravity_ui',
             },
-            contributors: getAllContributors(),
+            contributors,
         },
         {
             type: BlockType.CompaniesBlock,

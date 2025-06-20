@@ -17,26 +17,6 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
         margin-top: 16px;
         border-radius: 24px;
         color: rgba(255, 255, 255, 0.7);
-
-        &_library {
-            min-height: 240px;
-            transition: transform 0.2s ease-in-out;
-
-            &:hover {
-                transform: translateY(-6px);
-            }
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
-                &:hover {
-                    transform: translateY(0);
-                }
-            }
-        }
-
-        &_primary {
-            background-image: url('../../../../assets/primary-lib-background.svg');
-            background-size: cover;
-        }
     }
 
     &__icon {
@@ -65,34 +45,6 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
         }
     }
 
-    &__stars {
-        display: flex;
-        align-items: center;
-
-        [dir='ltr'] & {
-            margin-left: 20px;
-        }
-
-        [dir='rtl'] & {
-            margin-right: 20px;
-        }
-    }
-
-    &__stars-count {
-        font-size: 15px;
-        line-height: 20px;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 0.7);
-
-        [dir='ltr'] & {
-            margin-left: 6px;
-        }
-
-        [dir='rtl'] & {
-            margin-right: 6px;
-        }
-    }
-
     &__text {
         flex: 1;
 
@@ -100,48 +52,6 @@ $block: '.#{variables.$ns}custom-extended-features-feature-item';
 
         a {
             @include pcStyles.link();
-        }
-    }
-
-    &__release-info {
-        display: flex;
-        align-items: center;
-        margin-top: 12px;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 15px;
-        line-height: 20px;
-        font-weight: 400;
-    }
-
-    &__release-info-block {
-        display: flex;
-        align-items: center;
-
-        [dir='ltr'] & {
-            margin-left: 18px;
-
-            &:first-child {
-                margin-left: 0;
-            }
-        }
-
-        [dir='rtl'] & {
-            margin-right: 18px;
-
-            &:first-child {
-                margin-right: 0;
-            }
-        }
-    }
-
-    &__release-version,
-    &__release-date {
-        [dir='ltr'] & {
-            margin-left: 6px;
-        }
-
-        [dir='rtl'] & {
-            margin-right: 6px;
         }
     }
 }

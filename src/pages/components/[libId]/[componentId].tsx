@@ -4,13 +4,14 @@ import {useTranslation} from 'next-i18next';
 import {i18n} from 'next-i18next.config';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
+import {type Lib, fetchLibById} from 'src/services/lib';
 
 import i18nextConfig from '../../../../next-i18next.config';
 import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
-import {getLibById, getLibComponents, getLibraryMeta, getMaintainers} from '../../../utils';
+import {getLibComponents, getLibraryMeta, getMaintainers} from '../../../utils';
 import {getI18nProps} from '../../../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -26,6 +27,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     let readmeContent = '';
 
     const locale = ctx.locale ?? i18nextConfig.i18n.defaultLocale;
+
+    const libId = ctx.params?.libId as string;
+
+    const libPromise = fetchLibById(libId);
+    const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info']);
 
     try {
         const headers: Record<string, string> = {'User-Agent': 'request'};
@@ -63,28 +69,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         console.warn(err);
     }
 
+    const [lib, i18nProps] = await Promise.all([libPromise, i18nPropsPromise]);
+
     return {
         props: {
-            libId: ctx.params?.libId,
+            lib,
             componentId: ctx.params?.componentId,
             readmeContent,
-            ...(await getI18nProps(ctx, ['component', 'libraries-info'])),
+            ...i18nProps,
         },
     };
 };
 
 export const ComponentPage = ({
-    libId,
+    lib,
     componentId,
     readmeContent,
 }: {
-    libId: string;
+    lib: Lib;
     componentId: string;
     readmeContent: string;
 }) => {
     const {t} = useTranslation();
-    const lib = libs.find((item) => item.id === libId);
-    const component = lib?.components.find((item) => item.id === componentId);
+    const componentsLib = libs.find((item) => item.id === lib.config.id);
+    const component = componentsLib?.components.find((item) => item.id === componentId);
 
     const windowBreakpoint = useWindowBreakpoint();
     const isMobile = windowBreakpoint < BREAKPOINTS.lg;
@@ -93,7 +101,7 @@ export const ComponentPage = ({
         return null;
     }
 
-    const maintainers = getMaintainers(getLibById(libId), `/src/components/${component.title}`);
+    const maintainers = getMaintainers(lib, `/src/components/${component.title}`);
 
     const sections = React.useMemo<Section[]>(() => {
         return libs.map(({id, title, components}) => {
@@ -116,14 +124,14 @@ export const ComponentPage = ({
 
     return (
         <Layout
-            title={`${lib.title} – ${component.title}`}
+            title={`${lib.config.title} – ${component.title}`}
             hideFooter
             noScroll={!isMobile}
-            meta={getLibraryMeta({id: lib.id, title: lib.title}, t, component.title)}
+            meta={getLibraryMeta({id: lib.config.id, title: lib.config.title}, t, component.title)}
         >
-            <ComponentsLayout libId={libId} componentId={componentId} sections={sections}>
+            <ComponentsLayout libId={lib.config.id} componentId={componentId} sections={sections}>
                 <Component
-                    libId={libId}
+                    libId={lib.config.id}
                     component={component}
                     readmeContent={readmeContent}
                     sections={sections}

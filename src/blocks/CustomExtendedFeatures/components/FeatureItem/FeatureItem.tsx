@@ -1,12 +1,7 @@
 import {HTML, Image, ThemedImage, useTheme} from '@gravity-ui/page-constructor';
-import {Icon} from '@gravity-ui/uikit';
-import Link from 'next/link';
 import React from 'react';
 
-import calendarIcon from '../../../../assets/icons/calendar.svg';
-import starIcon from '../../../../assets/icons/star.svg';
-import versionIcon from '../../../../assets/icons/version.svg';
-import {block, getLibById, getMediaImage, getThemedValue} from '../../../../utils';
+import {block, getMediaImage, getThemedValue} from '../../../../utils';
 
 import './FeatureItem.scss';
 
@@ -20,9 +15,7 @@ export type FeatureItemProps = {
     contentStyle: Record<string, unknown>;
 };
 
-// eslint-disable-next-line complexity
 export const FeatureItem: React.FC<FeatureItemProps> = ({
-    id,
     title,
     description,
     icon,
@@ -33,34 +26,9 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
     const iconThemed = icon && getThemedValue(icon, theme);
     const iconData = iconThemed && getMediaImage(iconThemed);
 
-    let starsCount;
-    let latestReleaseVersion;
-    let latestReleaseDate;
-    let isPrimary = false;
-
-    if (id) {
-        const {data: libData, config: libConfig} = getLibById(id);
-
-        if (libData) {
-            starsCount = libData.stars ?? 0;
-            latestReleaseVersion = libData?.version ?? '';
-            latestReleaseDate = libData.lastUpdate ?? '';
-        }
-
-        if (libConfig) {
-            isPrimary = libConfig.primary;
-        }
-    }
-
-    const Tag = id ? (Link as any) : 'div';
-    const tagProps = id ? {href: `/libraries/${id}`} : {};
-
     return (
-        <Tag {...tagProps} className={b()}>
-            <div
-                className={b('content', {library: Boolean(id), primary: Boolean(id) && isPrimary})}
-                style={contentStyle}
-            >
+        <div className={b()}>
+            <div className={b('content')} style={contentStyle}>
                 {iconData && <Image {...iconData} className={b('icon')} />}
 
                 <div className={b('header')}>
@@ -69,31 +37,10 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
                             <HTML>{title}</HTML>
                         </h5>
                     ) : null}
-                    {starsCount ? (
-                        <div className={b('stars')}>
-                            <Icon data={starIcon} size={19} />
-                            <div className={b('stars-count')}>{starsCount}</div>
-                        </div>
-                    ) : null}
                 </div>
 
                 <div className={b('text')}>{description}</div>
-
-                {id && latestReleaseVersion ? (
-                    <div className={b('release-info')}>
-                        <div className={b('release-info-block')}>
-                            <Icon data={versionIcon} size={16} />
-                            <div className={b('release-version')}>v{latestReleaseVersion}</div>
-                        </div>
-                        {latestReleaseDate ? (
-                            <div className={b('release-info-block')}>
-                                <Icon data={calendarIcon} size={16} />
-                                <div className={b('release-date')}>{latestReleaseDate}</div>
-                            </div>
-                        ) : null}
-                    </div>
-                ) : null}
             </div>
-        </Tag>
+        </div>
     );
 };

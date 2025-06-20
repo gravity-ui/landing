@@ -1,9 +1,4 @@
-/* eslint-disable camelcase */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import {Octokit} from '@octokit/rest';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
@@ -11,12 +6,22 @@ const octokit = new Octokit({
 
 const CONTRIBUTOR_IGNORE_LIST = ['dependabot', 'dependabot[bot]', 'gravity-ui-bot', 'yc-ui-bot'];
 
-/**
- * @param {string} repoOwner
- * @param {string} repo
- * @return {Promise<Contributor[]>}
- */
-export async function getRepositoryContributors(repoOwner, repo) {
+export type Contributor = {
+    login: string;
+    url: string;
+    avatarUrl: string;
+    contributions: number;
+};
+
+export type CodeOwners = {
+    pattern: string;
+    owners: string[];
+};
+
+export const getRepositoryContributors = async (
+    repoOwner: string,
+    repo: string,
+): Promise<Contributor[]> => {
     const items = await octokit.paginate(octokit.rest.repos.listContributors, {
         owner: repoOwner,
         repo,
@@ -24,26 +29,20 @@ export async function getRepositoryContributors(repoOwner, repo) {
 
     const contributors = items
         .filter(({login}) => login && !CONTRIBUTOR_IGNORE_LIST.includes(login))
-        .map(({login, avatar_url, html_url, contributions}) => ({
-            login,
-            avatarUrl: avatar_url,
-            url: html_url,
+        .map(({login, avatar_url: avatarUrl, html_url: url, contributions}) => ({
+            login: login!,
+            avatarUrl: avatarUrl!,
+            url: url!,
             contributions,
         }));
 
     return contributors;
-}
+};
 
-export async function getOrganizationRepositories(org) {
-    return await octokit.paginate('GET /orgs/{org}/repos', {
-        org,
-        headers: {
-            'X-GitHub-Api-Version': '2022-11-28',
-        },
-    });
-}
-
-export async function fetchRepositoryCodeOwners(repoOwner, repo) {
+export const fetchRepositoryCodeOwners = async (
+    repoOwner: string,
+    repo: string,
+): Promise<CodeOwners[]> => {
     const url = `https://raw.githubusercontent.com/${repoOwner}/${repo}/main/CODEOWNERS`;
     const res = await fetch(url);
 
@@ -53,7 +52,7 @@ export async function fetchRepositoryCodeOwners(repoOwner, repo) {
 
     const codeOwnersText = await res.text();
     const lines = codeOwnersText.split('\n');
-    const codeOwners = [];
+    const codeOwners: CodeOwners[] = [];
 
     for (const line of lines) {
         const trimmed = line.trim();
@@ -80,4 +79,13 @@ export async function fetchRepositoryCodeOwners(repoOwner, repo) {
     }
 
     return codeOwners;
-}
+};
+
+export const getOrganizationRepositories = async (org: string) => {
+    return await octokit.paginate(octokit.rest.repos.listForOrg, {
+        org,
+        headers: {
+            'X-GitHub-Api-Version': '2022-11-28',
+        },
+    });
+};

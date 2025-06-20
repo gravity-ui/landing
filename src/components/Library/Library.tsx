@@ -16,7 +16,8 @@ import {ContributorList} from '../../components/ContributorList';
 import {Link} from '../../components/Link';
 import {useLocale} from '../../hooks/useLocale';
 import {availablePlaygrounds} from '../../pages/libraries/[libId]/playground';
-import {Lib, block, getAnchor, getMaintainers} from '../../utils';
+import type {Lib} from '../../services/lib';
+import {block, getAnchor, getMaintainers} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';

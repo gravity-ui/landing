@@ -17,6 +17,7 @@ import {CustomBlock} from '../../blocks/constants';
 import {getLanding} from '../../content/landing';
 import {getRtlLanding} from '../../content/landing-rtl';
 import {useSectionScroll} from '../../hooks/useSectionScroll';
+import type {Contributor, Lib} from '../../services/lib';
 
 const filterBlocks = ({blocks, ...rest}: CustomPageContent): CustomPageContent => {
     const hasCustomHeaderWithBanner = Boolean(
@@ -38,7 +39,12 @@ const filterBlocks = ({blocks, ...rest}: CustomPageContent): CustomPageContent =
     };
 };
 
-export const Landing: React.FC = () => {
+type Props = {
+    libs: Lib[];
+    contributors: Contributor[];
+};
+
+export const Landing: React.FC<Props> = ({libs, contributors}) => {
     const {t} = useTranslation();
     const {pathname} = useRouter();
 
@@ -50,7 +56,9 @@ export const Landing: React.FC = () => {
             <PageConstructor
                 content={
                     filterBlocks(
-                        pathname === '/rtl' ? getRtlLanding(t) : getLanding(t),
+                        pathname === '/rtl'
+                            ? getRtlLanding({t, libs, contributors})
+                            : getLanding({t, libs, contributors}),
                     ) as PageContent
                 }
                 custom={{

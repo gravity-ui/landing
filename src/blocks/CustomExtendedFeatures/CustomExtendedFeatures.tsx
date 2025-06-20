@@ -94,7 +94,6 @@ export const CustomExtendedFeatures: React.FC<CustomExtendedFeaturesProps> = ({
                         return (
                             <Col className={b('item')} key={id ?? itemTitle} sizes={colSizes}>
                                 <FeatureItem
-                                    id={id}
                                     title={itemTitle}
                                     description={itemDescription}
                                     icon={icon}

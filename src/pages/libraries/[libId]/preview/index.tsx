@@ -2,26 +2,30 @@ import {PageConstructorProvider, Theme} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 import React from 'react';
+import {type Lib, fetchLibById} from 'src/services/lib';
 
 import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
-import {getI18nProps, getLibsList} from '../../../../utils';
+import {getI18nProps} from '../../../../utils';
 
 const theme = Theme.Dark;
 
-const libs = getLibsList();
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const libId = ctx.params?.libId as string;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+    const [lib, i18nProps] = await Promise.all([
+        fetchLibById(libId),
+        getI18nProps(ctx, ['library', 'libraries-info']),
+    ]);
+
     return {
         props: {
-            id: context.params?.libId,
-            ...(await getI18nProps(context, ['library', 'libraries-info'])),
+            lib,
+            ...i18nProps,
         },
     };
 };
 
-export const LibraryPreviewPage = ({id}: {id: string}) => {
-    const lib = libs.find((item) => item.config.id === id)!;
-
+export const LibraryPreviewPage = ({lib}: {lib: Lib}) => {
     return (
         <React.Fragment>
             <Head>

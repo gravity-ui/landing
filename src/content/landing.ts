@@ -16,13 +16,20 @@ import rocketIcon from '../assets/icons/rocket.svg';
 import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
-import {libs} from '../libs.mjs';
-import {getAllContributors} from '../utils';
+import type {Contributor, Lib} from '../services/lib';
 
 import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
 
-export const getLanding = (t: TFunction): CustomPageContent => ({
+export const getLanding = ({
+    t,
+    libs,
+    contributors,
+}: {
+    t: TFunction;
+    libs: Lib[];
+    contributors: Contributor[];
+}): CustomPageContent => ({
     background: {
         image: {
             src: backgroundAsset.src,
@@ -92,25 +99,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: t('home:libraries_title'),
 
-            items: libs
-                .filter((lib) => lib.landing)
-                .sort((lib1, lib2) => {
-                    const order = [
-                        'uikit',
-                        'navigation',
-                        'date-components',
-                        'markdown-editor',
-                        'page-constructor',
-                        'chartkit',
-                        'dashkit',
-                    ];
-                    return order.indexOf(lib1.id) - order.indexOf(lib2.id);
-                })
-                .map((lib) => ({
-                    id: lib.id,
-                    title: lib.title,
-                    description: t(`libraries-info:description_${lib.id}`),
-                })),
+            items: libs,
         },
         {
             type: CustomBlock.CustomExtendedFeatures,
@@ -237,7 +226,7 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                 title: t('home:contributors_actions_telegram'),
                 href: 'https://t.me/gravity_ui',
             },
-            contributors: getAllContributors(),
+            contributors,
         },
         {
             type: BlockType.CompaniesBlock,

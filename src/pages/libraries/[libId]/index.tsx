@@ -1,23 +1,30 @@
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
+import {type Lib, fetchLibById} from 'src/services/lib';
 
 import {Layout} from '../../../components/Layout/Layout';
 import {Library} from '../../../components/Library/Library';
-import {getI18nProps, getLibById, getLibraryMeta} from '../../../utils';
+import {getI18nProps, getLibraryMeta} from '../../../utils';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const libId = ctx.params?.libId as string;
+
+    const [lib, i18nProps] = await Promise.all([
+        fetchLibById(libId),
+        getI18nProps(ctx, ['library', 'libraries-info']),
+    ]);
+
     return {
         props: {
             libId: ctx.params?.libId,
-            ...(await getI18nProps(ctx, ['library', 'libraries-info'])),
+            lib,
+            ...i18nProps,
         },
     };
 };
 
-export const LibraryPage = ({libId}: {libId: string}) => {
+export const LibraryPage = ({lib}: {lib: Lib}) => {
     const {t} = useTranslation();
-
-    const lib = getLibById(libId);
 
     return (
         <Layout
