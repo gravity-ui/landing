@@ -1,10 +1,10 @@
 import type {LibConfig} from '../../libs';
-import type {CodeOwners, Contributor} from '../services/github';
 
 import {fetchChangelogInfo} from './fetch-lib-changelog-info';
 import {fetchLibGithubInfo} from './fetch-lib-github-info';
 import {fetchNpmInfo} from './fetch-lib-npm-info';
 import {fetchLibReadmeInfo} from './fetch-lib-readme-info';
+import type {CodeOwners, Contributor} from './github';
 
 export type LibData = {
     stars: number;

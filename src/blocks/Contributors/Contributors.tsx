@@ -3,7 +3,8 @@ import {Button} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {ExpandableContributorList} from '../../components/ExpandableContributorList';
-import {Contributor, block} from '../../utils';
+import {Contributor} from '../../services/lib';
+import {block} from '../../utils';
 import {CustomBlock} from '../constants';
 
 import './Contributors.scss';
