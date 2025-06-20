@@ -128,7 +128,7 @@ export const Showcase: React.FC<ShowcaseProps> = ({color, theme, style}) => {
             scoped
             rootClassName={`${borderRadiusShowcaseCn} ${b({color, theme})}`}
         >
-            {style ? <style>{`.${borderRadiusShowcaseCn}_theme_${theme} {${style}}`}</style> : null}
+            <style>{style}</style>
             <Flex className={b('container')} wrap gapRow={10}>
                 <Flex direction="column" gap={10}>
                     <LabelBlock text={t('label')} />

@@ -1,9 +1,9 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {Col, Flex, Row} from '@gravity-ui/uikit';
+import type {Theme} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {ThemeVariant} from '../../lib/types';
 
 import {ThemableCard} from './ThemableCard';
 import './ThemableSettings.scss';
@@ -19,7 +19,7 @@ interface ThemableSettingsProps {
 }
 
 export const ThemableSettings: React.FC<ThemableSettingsProps> = ({title, rows, addButton}) => {
-    const [theme, setTheme] = React.useState<ThemeVariant>('light');
+    const [theme, setTheme] = React.useState<Theme>('light');
 
     const breakpoint = useWindowBreakpoint();
     const isTabletOrMobile = breakpoint < BREAKPOINTS.lg;

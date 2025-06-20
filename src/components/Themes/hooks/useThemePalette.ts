@@ -1,7 +1,7 @@
+import type {Theme} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {getThemePalette} from '../lib/themeCreatorUtils';
-import type {ThemeVariant} from '../lib/types';
 
 import {useThemeCreator, useThemeCreatorMethods} from './useThemeCreator';
 
@@ -12,14 +12,17 @@ export const useThemePalette = () => {
 
 type UseThemePaletteColorParams = {
     token: string;
-    theme: ThemeVariant;
+    theme: Theme;
 };
 
 export const useThemePaletteColor = ({token, theme}: UseThemePaletteColorParams) => {
     const themeState = useThemeCreator();
     const {updateColor} = useThemeCreatorMethods();
 
-    const value = React.useMemo(() => themeState.palette[theme][token], [themeState, token, theme]);
+    const value = React.useMemo(
+        () => themeState.gravityTheme.baseColors[token][theme],
+        [themeState, token, theme],
+    );
 
     const updateValue = React.useCallback(
         (newValue: string) => {

@@ -12,15 +12,20 @@ export const ComponentPreview = () => {
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
-        () => exportTheme({themeState, ignoreDefaultValues: false}),
+        () =>
+            exportTheme({
+                themeState,
+                ignoreDefaultValues: false,
+                customRootClassName: 'gravity-ui-landing-examples-showcase',
+            }),
         [themeState],
     );
 
     return (
         <ThemeSection title={t('component_preview')}>
             <Flex direction="column" gap={4}>
-                <Showcase style={themeStyles.dark} theme="dark" />
-                <Showcase style={themeStyles.light} theme="light" />
+                <Showcase style={themeStyles} theme="dark" />
+                <Showcase style={themeStyles} theme="light" />
             </Flex>
         </ThemeSection>
     );

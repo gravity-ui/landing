@@ -1,22 +1,25 @@
+import type {Theme, UtilityColor} from '@gravity-ui/uikit-themer';
 import React from 'react';
-
-import type {ColorsOptions, ThemeVariant} from '../lib/types';
 
 import {useThemeCreator, useThemeCreatorMethods} from './useThemeCreator';
 
 type UseThemeColorParams = {
-    name: keyof ColorsOptions;
-    theme: ThemeVariant;
+    name: UtilityColor;
+    theme: Theme;
 };
 
 export const useThemeUtilityColor = ({name, theme}: UseThemeColorParams) => {
     const themeState = useThemeCreator();
     const {changeUtilityColor} = useThemeCreatorMethods();
 
-    const value = React.useMemo(() => themeState.colors[theme][name], [themeState, name, theme]);
+    const value = React.useMemo(
+        () => themeState.gravityTheme.utilityColors[name][theme].value,
+        [themeState, name, theme],
+    );
 
     const updateValue = React.useCallback(
         (newValue: string) => {
+            console.log('updateValue', name, newValue);
             changeUtilityColor({
                 themeVariant: theme,
                 name,

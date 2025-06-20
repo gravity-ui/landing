@@ -76,7 +76,12 @@ export const PreviewTab = () => {
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
-        () => exportTheme({themeState, ignoreDefaultValues: false}),
+        () =>
+            exportTheme({
+                themeState,
+                ignoreDefaultValues: false,
+                customRootClassName: 'gravity-ui-landing-themes-preview-layout',
+            }),
         [themeState],
     );
     return (

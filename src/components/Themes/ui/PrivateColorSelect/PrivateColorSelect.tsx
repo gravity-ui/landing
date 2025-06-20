@@ -1,10 +1,10 @@
 import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Popup, Sheet, TextInput, ThemeProvider} from '@gravity-ui/uikit';
+import {isInternalPrivateColorReference} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {useIsMobile} from '../../../../hooks/useIsMobile';
 import {block} from '../../../../utils';
-import {isPrivateColorToken} from '../../lib/themeCreatorUtils';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ColorPreview} from '../ColorPreview/ColorPreview';
 
@@ -31,7 +31,7 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
 
     const [containerElement, setContainerElement] = React.useState<HTMLDivElement | null>(null);
     const [showPopup, setShowPopup] = React.useState(false);
-    const isCustomValue = !isPrivateColorToken(value);
+    const isCustomValue = !isInternalPrivateColorReference(value);
 
     const handleChange = React.useCallback(
         (newVal: string) => {

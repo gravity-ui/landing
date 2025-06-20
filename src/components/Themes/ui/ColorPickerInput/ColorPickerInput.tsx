@@ -70,9 +70,12 @@ export const ColorPickerInput = ({
 
             setInputValue(formattedValue);
             setColor(formattedValue);
-            debouncedExternalChange(formattedValue);
+
+            if (value !== newValue) {
+                debouncedExternalChange(formattedValue);
+            }
         },
-        [debouncedExternalChange],
+        [debouncedExternalChange, value],
     );
 
     const onChange: ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
