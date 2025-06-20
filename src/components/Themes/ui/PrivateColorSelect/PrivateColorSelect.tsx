@@ -129,9 +129,10 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                     <Popup
                         anchorElement={containerElement}
                         open={showPopup}
+                        returnFocus={false}
                         onOpenChange={(open) => {
                             if (!open) {
-                                toggleShowPopup();
+                                closePopup();
                             }
                         }}
                     >
