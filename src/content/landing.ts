@@ -5,9 +5,6 @@ import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
 import companiesTabletAsset from '../assets/companies-tablet.svg';
-import featureShieldAsset from '../assets/feature-shield.svg';
-import featureStarAsset from '../assets/feature-star.svg';
-import featureUnionAsset from '../assets/feature-union.svg';
 import craLogo from '../assets/icons/cra-logo.svg';
 import githubIcon from '../assets/icons/github.svg';
 import nextLogo from '../assets/icons/next-logo.svg';
@@ -88,6 +85,10 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
         //     allow: 'autoplay; fullscreen; accelerometer; gyroscope; picture-in-picture; encrypted-media',
         // },
         {
+            type: CustomBlock.UISamples,
+            title: t('home:examples_title'),
+        },
+        {
             type: CustomBlock.Libraries,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: t('home:libraries_title'),
@@ -111,56 +112,6 @@ export const getLanding = (t: TFunction): CustomPageContent => ({
                     title: lib.title,
                     description: t(`libraries-info:description_${lib.id}`),
                 })),
-        },
-        {
-            type: CustomBlock.CustomExtendedFeatures,
-            animated: false,
-            backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            backdropFilter: 'blur(60px)',
-            colSizes: {
-                all: 12,
-                md: 12,
-                lg: 4,
-            },
-            items: [
-                {
-                    title: t('home:features_feature1_title'),
-                    description: t('home:features_feature1_description'),
-                    icon: featureUnionAsset,
-                },
-                {
-                    title: t('home:features_feature2_title'),
-                    description: t('home:features_feature2_description'),
-                    icon: featureStarAsset,
-                },
-                {
-                    title: t('home:features_feature3_title'),
-                    description: t('home:features_feature3_description'),
-                    icon: featureShieldAsset,
-                },
-            ],
-        },
-        {
-            type: CustomBlock.Examples,
-            title: t('home:examples_title'),
-            colors: [
-                {
-                    title: t('home:examples_colors_yellow'),
-                    value: 'yellow',
-                },
-                {
-                    title: t('home:examples_colors_red'),
-                    value: 'red',
-                },
-                {
-                    title: t('home:examples_colors_green'),
-                    value: 'green',
-                },
-                {
-                    title: t('home:examples_colors_blue'),
-                    value: 'blue',
-                },
-            ],
         },
         {
             type: CustomBlock.Roadmap,

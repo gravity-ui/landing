@@ -1,4 +1,4 @@
-import {Button, Flex} from '@gravity-ui/uikit';
+import {Button, CSSProperties, Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../utils';
@@ -17,11 +17,18 @@ interface TagsProps<T extends string = string> {
     items: TagItem<T>[];
     onChange: (newValue: T) => void;
     className?: string;
+    wrap?: CSSProperties['flexWrap'];
 }
 
-export function Tags<T extends string = string>({value, items, onChange, className}: TagsProps<T>) {
+export function Tags<T extends string = string>({
+    value,
+    items,
+    onChange,
+    className,
+    wrap = 'wrap',
+}: TagsProps<T>) {
     return (
-        <Flex wrap="wrap" gap={2} className={b(null, className)}>
+        <Flex wrap={wrap} gap={2} className={b(null, className)}>
             {items.map((item) => {
                 return (
                     <Button

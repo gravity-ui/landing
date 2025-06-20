@@ -28,5 +28,12 @@
     "github_stars-text": "&nbsp;你是 💖 Gravity UI 吗？&nbsp;在&nbsp;Github 上给&nbsp;我们&nbsp;一个&nbsp;⭐",
     "contributors_title": "贡献者",
     "contributors_actions_telegram": "加入电报",
-    "companies_title": "深受信赖"
+    "companies_title": "深受信赖",
+    "ui_samples_table_tab": "列表",
+    "ui_samples_dashboard_tab": "仪表板",
+    "ui_samples_kubernetes_tab": "容器化概览",
+    "ui_samples_osn_tab": "着陆页",
+    "ui_samples_mail_tab": "邮件",
+    "ui_samples_task_tracker_tab": "任务跟踪器",
+    "ui_samples_apartment_tab": "预订页面"
 }

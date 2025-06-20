@@ -28,5 +28,12 @@
     "github_stars-text": "Вам нравится 💖 Gravity UI? Поставьте&nbsp;нам&nbsp;⭐&nbsp;на&nbsp;Github",
     "contributors_title": "Участники",
     "contributors_actions_telegram": "Telegram",
-    "companies_title": "Нам доверяют"
+    "companies_title": "Нам доверяют",
+    "ui_samples_table_tab": "Листинг",
+    "ui_samples_dashboard_tab": "Панель управления",
+    "ui_samples_kubernetes_tab": "Управление контейнерами",
+    "ui_samples_osn_tab": "Лендинг",
+    "ui_samples_mail_tab": "Почта",
+    "ui_samples_task_tracker_tab": "Трекер задач",
+    "ui_samples_apartment_tab": "Страница бронирования"
 }
