@@ -22,10 +22,6 @@ jobs:
         cache: npm
     - name: Install Packages
       run: npm ci
-    - name: Shape libs-data.json
-      run: npm run fetch-data
-    - name: Shape contributors.json
-      run: npm run fetch-contributors
     - name: Shape packages-versions.json
       run: npm run get-packages-versions
     - name: Lint Files
