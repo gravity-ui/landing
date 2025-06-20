@@ -81,6 +81,7 @@ export const useSampleComponents = () => {
                 imagePreviewSrc: mailImage.src,
                 Component: MailPreview,
                 title: t('ui_samples_mail_tab'),
+                blank: true,
             },
         ],
         [],
