@@ -4,7 +4,7 @@ import Script from 'next/script';
 
 import i18nextConfig from '../../next-i18next.config';
 import sitemapConfig from '../../next-sitemap.config';
-import {DEFAULT_THEME, GA_ID, IS_PRODUCTION, LOCALE_LOCAL_STORAGE_KEY} from '../constants';
+import {DEFAULT_THEME, GA_ID, IS_PRODUCTION} from '../constants';
 
 // Site URL from next-sitemap.config.js
 const SITE_URL = sitemapConfig.siteUrl;
@@ -132,39 +132,6 @@ class CustomDocument extends Document {
                             }}
                         />
                     )}
-                    <Script
-                        id="locale-detection"
-                        strategy="beforeInteractive"
-                        dangerouslySetInnerHTML={{
-                            __html: `
-                                var path = window.location.pathname;
-                                var search = window.location.search;
-
-                                var defaultLocale = '${i18nextConfig.i18n.defaultLocale}';
-                                var locales = ${JSON.stringify(i18nextConfig.i18n.locales)};
-                                var routesWithoutRedirect = ${JSON.stringify(
-                                    i18nextConfig.routesWithoutRedirect,
-                                )};
-
-                                var savedLocale = localStorage.getItem('${LOCALE_LOCAL_STORAGE_KEY}');
-                                var pathLocale = path.split('/')[1];
-                                pathLocale = locales.includes(pathLocale) ? pathLocale : defaultLocale;
-
-                                if (savedLocale && savedLocale !== pathLocale && !routesWithoutRedirect.some((item) => path.startsWith(item))) {
-                                    var redirectPath;
-                                    if (savedLocale === defaultLocale) {
-                                        redirectPath = path.replace('/' + pathLocale, '');
-                                        redirectPath = redirectPath ? redirectPath : '/';
-                                    } else if (pathLocale === defaultLocale) {
-                                        redirectPath = path.replace('/', '/' + savedLocale + (path === '/' ? '' : '/'));
-                                    } else {
-                                        redirectPath = path.replace('/' + pathLocale, '/' + savedLocale);
-                                    }
-                                    window.location.href = redirectPath + search;
-                                }
-                            `,
-                        }}
-                    />
                 </Head>
                 <body className={b({theme: DEFAULT_THEME})}>
                     {IS_PRODUCTION && (

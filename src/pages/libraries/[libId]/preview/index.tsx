@@ -1,17 +1,41 @@
-import {GetStaticPaths} from 'next';
+import {PageConstructorProvider, Theme} from '@gravity-ui/page-constructor';
+import {GetServerSideProps} from 'next';
+import Head from 'next/head';
+import React from 'react';
+import {type Lib, fetchLibById} from 'src/services/lib';
 
-import {getLibsList} from '../../../../utils';
-import {LibraryPreviewPage, getStaticProps} from '../../../[locale]/libraries/[libId]/preview';
+import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
+import {getI18nProps} from '../../../../utils';
 
-const libs = getLibsList();
+const theme = Theme.Dark;
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const libId = ctx.params?.libId as string;
+
+    const [lib, i18nProps] = await Promise.all([
+        fetchLibById(libId),
+        getI18nProps(ctx, ['library', 'libraries-info']),
+    ]);
+
     return {
-        paths: libs.map((item) => ({params: {libId: item.config.id}})),
-        fallback: false,
+        props: {
+            lib,
+            ...i18nProps,
+        },
     };
 };
 
-export {LibraryPreviewPage, getStaticProps};
+export const LibraryPreviewPage = ({lib}: {lib: Lib}) => {
+    return (
+        <React.Fragment>
+            <Head>
+                <title>{lib?.config.title ?? ''} — og:image</title>
+            </Head>
+            <PageConstructorProvider theme={theme}>
+                <LibraryPreview lib={lib} />
+            </PageConstructorProvider>
+        </React.Fragment>
+    );
+};
 
 export default LibraryPreviewPage;

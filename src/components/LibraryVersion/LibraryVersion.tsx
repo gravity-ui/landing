@@ -1,6 +1,8 @@
 import {Card, Text} from '@gravity-ui/uikit';
 import React, {FC} from 'react';
-import {block, getLibVersion} from 'src/utils';
+import {block} from 'src/utils';
+
+import {getLibVersion} from '../../utils';
 
 import './LibraryVersion.scss';
 
