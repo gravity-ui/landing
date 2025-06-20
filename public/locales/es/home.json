@@ -3,9 +3,9 @@
     "header_actions_howToStart": "Cómo empezar",
     "news_title": "Actualizaciones recientes",
     "banner_content": "Estamos recogiendo preguntas para el webinar sobre el Markdown editor. ¡Por favor, complete el formulario!",
-    "news_items_item1": "Hemos añadido dos hermosas plantillas a la sección <a href=\"/themer\">Vista previa de Themer</a>. ¡Más por venir!",
-    "news_items_item2": "Hemos lanzado el componente Stepper. Los pasos muestran el progreso a través de una secuencia de pasos lógicos y numerados. ¡Compruébalo en la nueva <a href=\"/libraries/uikit\">versión</a>!",
-    "news_items_item3": "Si tiene alguna pregunta sobre la biblioteca de navegación, ¡le recomendamos que vea nuestro <a href=\"https://youtu.be/9J3tuiLq6rA?si=wjv9DhgBYRcNiRb8\">seminario web</a>!",
+    "news_items_item1": "Hemos lanzado versiones principales de las bibliotecas <a href=\"/libraries/page-constructor\">Page constructor</a> y <a href=\"/libraries/blog-constructor\">Blog Constructor</a>. Cambios clave: Slider ahora usa swiperjs; todos los componentes que anteriormente usaban contenido html ahora soportan YFM.",
+    "news_items_item2": "Hemos lanzado un nuevo <a href=\"https://preview.gravity-ui.com/uikit/?path=/story/lab-menu--full-featured\">componente de menú</a>, el sucesor de Menu y DropdownMenu. Se ha rediseñado la apariencia; se admite completamente la navegación con teclado; se ha mejorado la accesibilidad.",
+    "news_items_item3": "Hemos añadido dos nuevos ejemplos de interfaz a la sección <a href=\"/themer\">vista previa del temizador</a>. ¡Aún más en camino!",
     "features_feature1_title": "Basado en la experiencia de la vida real",
     "features_feature1_description": "Concebido como una solución interna en respuesta a las necesidades reales de los desarrolladores, lanzamos Gravity a la comunidad de código abierto.",
     "features_feature2_title": "Diseño de primera clase",
@@ -28,5 +28,12 @@
     "github_stars-text": "¿&nbsp;Tienes 💖 Gravity UI? &nbsp;Danos&nbsp;un&nbsp;⭐&nbsp;en&nbsp;Github",
     "contributors_title": "Colaboradores",
     "contributors_actions_telegram": "Únete a Telegram",
-    "companies_title": "Con la confianza de"
+    "companies_title": "Con la confianza de",
+    "ui_samples_table_tab": "Listado",
+    "ui_samples_dashboard_tab": "Panel de control",
+    "ui_samples_kubernetes_tab": "Resumen de contenedorización",
+    "ui_samples_osn_tab": "Página de aterrizaje",
+    "ui_samples_mail_tab": "Correo",
+    "ui_samples_task_tracker_tab": "Rastreador de tareas",
+    "ui_samples_apartment_tab": "Página de reservas"
 }

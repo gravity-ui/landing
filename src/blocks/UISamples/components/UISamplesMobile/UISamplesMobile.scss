@@ -1,0 +1,16 @@
+@use '../../../../variables.scss';
+@use '../../../../mixins.scss' as baseMixins;
+
+$block: '.#{variables.$ns}ui-samples-mobile';
+
+#{$block} {
+    display: none;
+
+    @include baseMixins.window-breakpoint('sm') {
+        display: flex;
+    }
+
+    &__card {
+        pointer-events: none;
+    }
+}

@@ -1,0 +1,10 @@
+@use '../../../../mixins.scss' as baseMixins;
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}ui-samples-block-desktop';
+
+#{$block} {
+    @include baseMixins.window-breakpoint('sm') {
+        display: none;
+    }
+}

@@ -1,0 +1,48 @@
+@use '../../../variables';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
+
+$block: '.#{variables.$ns}kubernetes-preview';
+
+#{$block} {
+    overflow: auto;
+    max-height: 100%;
+
+    &__header {
+        position: sticky;
+        min-height: 40px;
+        top: 0;
+        background-color: var(--g-color-base-background);
+        z-index: 1;
+    }
+
+    &__header-group {
+        .gn-action-bar-item:first-of-type {
+            margin-inline-start: auto;
+        }
+    }
+
+    &__grow {
+        flex-grow: 1;
+    }
+
+    &__widget-card {
+        position: relative;
+        box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.05);
+
+        min-width: 265px;
+        padding: var(--g-spacing-5);
+    }
+
+    .gcharts-d3 {
+        overflow: visible;
+    }
+
+    .g-menu {
+        background: none;
+    }
+
+    .g-menu__item_selected {
+        border-radius: var(--g-border-radius-xl);
+    }
+}

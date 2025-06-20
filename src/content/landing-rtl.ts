@@ -5,9 +5,6 @@ import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
 import companiesTabletAsset from '../assets/companies-tablet.svg';
-import featureShieldAsset from '../assets/feature-shield.svg';
-import featureStarAsset from '../assets/feature-star.svg';
-import featureUnionAsset from '../assets/feature-union.svg';
 import craLogo from '../assets/icons/cra-logo.svg';
 import githubIcon from '../assets/icons/github.svg';
 import nextLogo from '../assets/icons/next-logo.svg';
@@ -67,37 +64,6 @@ export const getRtlLanding = ({
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: 'مكتباتنا',
             items: libs,
-        },
-        {
-            type: CustomBlock.CustomExtendedFeatures,
-            animated: false,
-            backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            backdropFilter: 'blur(60px)',
-            colSizes: {
-                all: 12,
-                md: 12,
-                lg: 4,
-            },
-            items: [
-                {
-                    title: 'قائم على تجربة واقعية',
-                    description:
-                        '«تم تصميمه كحل داخلي استجابة لاحتياجات المطورين الحقيقية، حيث قمنا بإصدار Gravity لمجتمع المصادر المفتوحة.»،',
-                    icon: featureUnionAsset,
-                },
-                {
-                    title: 'تصميم من الفئة الأولى',
-                    description:
-                        'يقوم المصممون ذوو الخبرة بتصميم شكل مكتباتنا، مما يضمن أن تكون المكونات أنيقة ومتسقة، مع إتاحة الوضع الداكن والسمات عالية التباين.',
-                    icon: featureStarAsset,
-                },
-                {
-                    title: 'منظومة متطورة',
-                    description:
-                        'تسمح لنا التعليقات المنتظمة من مجتمع المطورين لدينا بتحسين مكتباتنا بشكل مستمر، وكسر التوافق فقط عند الضرورة.',
-                    icon: featureShieldAsset,
-                },
-            ],
         },
         {
             type: CustomBlock.Examples,

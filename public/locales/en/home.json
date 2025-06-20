@@ -3,9 +3,9 @@
     "header_actions_howToStart": "How to Start",
     "news_title": "Recent updates",
     "banner_content": "We are collecting questions for the Markdown editor webinar, please fill out the form!",
-    "news_items_item1": "We've added two beautiful templates to the <a href=\"/themer\">Themer Preview</a> section. More to come!",
-    "news_items_item2": "We've released the Stepper component. Steppers display progress through a sequence of logical and numbered steps. Check it out in the new <a href=\"/libraries/uikit\">version</a>!",
-    "news_items_item3": "If you have any questions about the Navigation library, we recommend watching our <a href=\"https://youtu.be/9J3tuiLq6rA?si=wjv9DhgBYRcNiRb8\">webinar</a>!",
+    "news_items_item1": "We've released major versions of <a href=\"/libraries/page-constructor\">Page constructor</a> and <a href=\"/libraries/blog-constructor\">Blog Constructor</a> libraries. Key changes: Slider now uses swiperjs; all components that previously used html content now support YFM.",
+    "news_items_item2": "We've released a new <a href=\"https://preview.gravity-ui.com/uikit/?path=/story/lab-menu--full-featured\">menu component</a>, the successor to Menu and DropdownMenu. The appearance has been redesigned; full keyboard navigation is supported; accessibility has been improved.",
+    "news_items_item3": "We've added two new interface examples to the <a href=\"/themer\">themer preview</a> section. Even more coming soon!",
     "features_feature1_title": "Built on real-life experience",
     "features_feature1_description": "Conceived as an in-house solution in response to real developers' needs, we released Gravity to the open-source community.",
     "features_feature2_title": "First class design",
@@ -28,5 +28,12 @@
     "github_stars-text": "Do&nbsp;you 💖 Gravity UI? Give&nbsp;us&nbsp;a&nbsp;⭐&nbsp;on&nbsp;Github",
     "contributors_title": "Contributors",
     "contributors_actions_telegram": "Join Telegram",
-    "companies_title": "Trusted by"
+    "companies_title": "Trusted by",
+    "ui_samples_table_tab": "Listing",
+    "ui_samples_dashboard_tab": "Dashboard",
+    "ui_samples_kubernetes_tab": "Containerization overview",
+    "ui_samples_osn_tab": "Landing",
+    "ui_samples_mail_tab": "Mail",
+    "ui_samples_task_tracker_tab": "Task tracker",
+    "ui_samples_apartment_tab": "Booking page"
 }

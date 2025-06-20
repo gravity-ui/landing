@@ -1,0 +1,39 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}dashboard-example-header';
+
+#{$block} {
+    .gn-action-bar-section_type_secondary {
+        padding-right: var(--g-spacing-5);
+    }
+
+    &__hotkey {
+        height: 28px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__search-icon {
+        margin-inline-start: var(--g-spacing-2);
+        color: var(--g-color-text-secondary);
+    }
+
+    &__centered {
+        display: flex;
+        align-items: center;
+        gap: var(--g-spacing-3);
+    }
+
+    & &__centered_margin {
+        margin-inline-start: auto;
+        margin-inline-end: var(--g-spacing-8);
+    }
+
+    &__export {
+        --g-button-border-radius: var(--g-border-radius-s);
+    }
+
+    &__grow {
+        flex-grow: 1;
+    }
+}

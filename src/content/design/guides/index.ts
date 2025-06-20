@@ -21,7 +21,7 @@ import guideLinksContent from './content/en/Links.mdx';
 import guideListItemContent from './content/en/ListItem.mdx';
 import guideLoaderContent from './content/en/Loader.mdx';
 import guideModuleContent from './content/en/Module.mdx';
-import guidePaginatorContent from './content/en/Paginator.mdx';
+import guidePaginationContent from './content/en/Pagination.mdx';
 import guidePopoverContent from './content/en/Popover.mdx';
 import guidePopupContent from './content/en/Popup.mdx';
 import guideProgressContent from './content/en/Progress.mdx';
@@ -63,7 +63,7 @@ import guideLinksContentEs from './content/es/Links.mdx';
 import guideListItemContentEs from './content/es/ListItem.mdx';
 import guideLoaderContentEs from './content/es/Loader.mdx';
 import guideModuleContentEs from './content/es/Module.mdx';
-import guidePaginatorContentEs from './content/es/Paginator.mdx';
+import guidePaginationContentEs from './content/es/Pagination.mdx';
 import guidePopoverContentEs from './content/es/Popover.mdx';
 import guidePopupContentEs from './content/es/Popup.mdx';
 import guideProgressContentEs from './content/es/Progress.mdx';
@@ -105,7 +105,7 @@ import guideLinksContentRu from './content/ru/Links.mdx';
 import guideListItemContentRu from './content/ru/ListItem.mdx';
 import guideLoaderContentRu from './content/ru/Loader.mdx';
 import guideModuleContentRu from './content/ru/Module.mdx';
-import guidePaginatorContentRu from './content/ru/Paginator.mdx';
+import guidePaginationContentRu from './content/ru/Pagination.mdx';
 import guidePopoverContentRu from './content/ru/Popover.mdx';
 import guidePopupContentRu from './content/ru/Popup.mdx';
 import guideProgressContentRu from './content/ru/Progress.mdx';
@@ -147,7 +147,7 @@ import guideLinksContentZh from './content/zh/Links.mdx';
 import guideListItemContentZh from './content/zh/ListItem.mdx';
 import guideLoaderContentZh from './content/zh/Loader.mdx';
 import guideModuleContentZh from './content/zh/Module.mdx';
-import guidePaginatorContentZh from './content/zh/Paginator.mdx';
+import guidePaginationContentZh from './content/zh/Pagination.mdx';
 import guidePopoverContentZh from './content/zh/Popover.mdx';
 import guidePopupContentZh from './content/zh/Popup.mdx';
 import guideProgressContentZh from './content/zh/Progress.mdx';
@@ -390,12 +390,12 @@ export const guides: Section = {
             },
         },
         {
-            id: 'paginator',
+            id: 'pagination',
             content: {
-                en: inferString(guidePaginatorContent),
-                ru: inferString(guidePaginatorContentRu),
-                es: inferString(guidePaginatorContentEs),
-                zh: inferString(guidePaginatorContentZh),
+                en: inferString(guidePaginationContent),
+                ru: inferString(guidePaginationContentRu),
+                es: inferString(guidePaginationContentEs),
+                zh: inferString(guidePaginationContentZh),
             },
         },
         {
