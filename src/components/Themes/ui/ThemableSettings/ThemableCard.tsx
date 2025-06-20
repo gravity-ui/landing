@@ -1,11 +1,11 @@
 import {Moon, Sun} from '@gravity-ui/icons';
 import {Flex, Icon, Text, ThemeProvider} from '@gravity-ui/uikit';
+import type {Theme} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
 import {useThemeUtilityColor} from '../../hooks';
-import {ThemeVariant} from '../../lib/types';
 import {ThemePicker} from '../ThemePicker';
 
 import './ThemableCard.scss';
@@ -15,8 +15,8 @@ const b = block('themable-card');
 
 interface ThemableCardProps {
     rows: ThemableRow[];
-    theme: ThemeVariant;
-    onChangeTheme?: (newTheme: ThemeVariant) => void;
+    theme: Theme;
+    onChangeTheme?: (newTheme: Theme) => void;
     showTitle?: boolean;
 }
 

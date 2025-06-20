@@ -1,19 +1,19 @@
 import {Moon, Sun} from '@gravity-ui/icons';
 import {Flex, Icon, SegmentedRadioGroup, Text} from '@gravity-ui/uikit';
+import type {Theme} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import type {ThemeVariant} from '../../lib/types';
 
 import './ThemePicker.scss';
 
 const b = block('theme-picker');
 
 interface ThemePickerProps {
-    value: ThemeVariant;
+    value: Theme;
     lightThemeTitle?: string;
     darkThemeTitle?: string;
-    onUpdate: (value: ThemeVariant) => void;
+    onUpdate: (value: Theme) => void;
 }
 
 export const ThemePicker: React.FC<ThemePickerProps> = ({
@@ -23,12 +23,7 @@ export const ThemePicker: React.FC<ThemePickerProps> = ({
     darkThemeTitle = 'Dark',
 }) => {
     return (
-        <SegmentedRadioGroup<ThemeVariant>
-            className={b()}
-            size="xl"
-            value={value}
-            onUpdate={onUpdate}
-        >
+        <SegmentedRadioGroup<Theme> className={b()} size="xl" value={value} onUpdate={onUpdate}>
             <SegmentedRadioGroup.Option
                 value="light"
                 content={

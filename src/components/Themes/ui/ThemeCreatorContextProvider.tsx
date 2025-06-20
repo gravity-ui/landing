@@ -1,3 +1,4 @@
+import type {GravityTheme} from '@gravity-ui/uikit-themer';
 import Head from 'next/head';
 import React from 'react';
 
@@ -34,7 +35,7 @@ import {
     updateFontFamilyInTheme,
     updateFontFamilyTypeTitleInTheme,
 } from '../lib/themeCreatorUtils';
-import type {ThemeCreatorState, ThemeOptions} from '../lib/types';
+import type {ThemeCreatorState} from '../lib/types';
 
 type ThemeCreatorAction =
     | {
@@ -94,7 +95,7 @@ type ThemeCreatorAction =
       }
     | {
           type: 'reinitialize';
-          payload: ThemeOptions;
+          payload: GravityTheme;
       }
     | {
           type: 'openMainSettings';
@@ -160,7 +161,7 @@ const themeCreatorReducer = (
 };
 
 interface ThemeCreatorProps extends React.PropsWithChildren {
-    initialTheme: ThemeOptions;
+    initialTheme: GravityTheme;
 }
 
 export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({

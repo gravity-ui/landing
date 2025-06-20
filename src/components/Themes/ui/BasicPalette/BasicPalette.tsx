@@ -1,8 +1,8 @@
+import type {Theme} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useThemeCreatorMethods, useThemePalette} from '../../hooks';
-import {ThemeVariant} from '../../lib/types';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ThemableSettings} from '../ThemableSettings/ThemableSettings';
 import {ThemableRow} from '../ThemableSettings/types';
@@ -36,7 +36,7 @@ export const BasicPalette = () => {
                         onUpdateTitle={renameColor}
                     />
                 ),
-                render: (currentTheme: ThemeVariant) => (
+                render: (currentTheme: Theme) => (
                     <ColorPickerInput
                         value={paletteColorData.colors[currentTheme]}
                         defaultValue={paletteColorData.colors[currentTheme]}

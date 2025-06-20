@@ -1,5 +1,6 @@
 import {Sliders} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
+import type {Theme, UtilityColor} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -7,7 +8,6 @@ import {block} from '../../../../utils';
 import {SelectableCard} from '../../../SelectableCard/SelectableCard';
 import {useThemePaletteColor, useThemeUtilityColor} from '../../hooks';
 import {TEXT_CONTRAST_COLORS} from '../../lib/constants';
-import type {ColorsOptions, ThemeVariant} from '../../lib/types';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ThemableSettings} from '../ThemableSettings/ThemableSettings';
 import {ThemableRow} from '../ThemableSettings/types';
@@ -25,11 +25,11 @@ const BASE_CARD_BUTTON_STYLES = {
 };
 
 interface ThemeUtilityColorEditorProps {
-    name: keyof ColorsOptions;
-    theme: ThemeVariant;
+    name: UtilityColor;
+    theme: Theme;
 }
 
-const ThemeUtilityColorEditor: React.FC<ThemeUtilityColorEditorProps> = ({name, theme}) => {
+const ThemeUtilityColorEditor = React.memo(({name, theme}: ThemeUtilityColorEditorProps) => {
     const [color, setColor] = useThemeUtilityColor({
         name,
         theme,
@@ -37,6 +37,7 @@ const ThemeUtilityColorEditor: React.FC<ThemeUtilityColorEditorProps> = ({name, 
 
     return (
         <ColorPickerInput
+            name={name}
             value={color}
             defaultValue={color}
             onChange={setColor}
@@ -44,17 +45,23 @@ const ThemeUtilityColorEditor: React.FC<ThemeUtilityColorEditorProps> = ({name, 
             withBorderInPreview={name === 'base-background'}
         />
     );
-};
+});
 
-const BrandColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {
+ThemeUtilityColorEditor.displayName = 'ThemeUtilityColorEditor';
+
+const BrandColorEditor: React.FC<{theme: Theme}> = ({theme}) => {
     const [brandColor, setBrandColor] = useThemePaletteColor({token: 'brand', theme});
 
     return (
-        <ColorPickerInput value={brandColor} defaultValue={brandColor} onChange={setBrandColor} />
+        <ColorPickerInput
+            value={brandColor.value}
+            defaultValue={brandColor.value}
+            onChange={setBrandColor}
+        />
     );
 };
 
-const TextContrastColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {
+const TextContrastColorEditor: React.FC<{theme: Theme}> = ({theme}) => {
     const [brandTextColor, setBrandTextColor] = useThemeUtilityColor({
         name: 'text-brand-contrast',
         theme,
@@ -73,7 +80,7 @@ const TextContrastColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {
                     style: {
                         ...BASE_CARD_BUTTON_STYLES,
                         color: TEXT_CONTRAST_COLORS[theme].black,
-                        backgroundColor: brandColor,
+                        backgroundColor: brandColor.value,
                     },
                 }}
             />
@@ -86,7 +93,7 @@ const TextContrastColorEditor: React.FC<{theme: ThemeVariant}> = ({theme}) => {
                     style: {
                         ...BASE_CARD_BUTTON_STYLES,
                         color: TEXT_CONTRAST_COLORS[theme].white,
-                        backgroundColor: brandColor,
+                        backgroundColor: brandColor.value,
                     },
                 }}
             />
@@ -99,54 +106,59 @@ interface MainSettingsProps {
     toggleAdvancedMode: () => void;
 }
 
-export const MainSettings: React.FC<MainSettingsProps> = ({
-    advancedModeEnabled,
-    toggleAdvancedMode,
-}) => {
-    const {t} = useTranslation('themes');
+export const MainSettings = React.memo(
+    ({advancedModeEnabled, toggleAdvancedMode}: MainSettingsProps) => {
+        const {t} = useTranslation('themes');
 
-    const rows = React.useMemo<ThemableRow[]>(() => {
-        return [
-            {
-                id: 'base-background',
-                title: t('page_background'),
-                render: (theme) => <ThemeUtilityColorEditor theme={theme} name="base-background" />,
-            },
-            {
-                id: 'brand',
-                title: t('brand_color'),
-                render: (theme) => <BrandColorEditor theme={theme} />,
-            },
-            {
-                id: 'text-brand-contrast',
-                title: t('label_text-on-brand'),
-                render: (theme) => <TextContrastColorEditor theme={theme} />,
-                renderTitle: () => (
-                    <div className={b('text-contrast-title')}>
-                        <Text variant="body-2">{t('label_text-on-brand')}</Text>
-                    </div>
-                ),
-            },
-        ];
-    }, [t]);
+        const rows = React.useMemo<ThemableRow[]>(() => {
+            return [
+                {
+                    id: 'base-background',
+                    title: t('page_background'),
+                    render: (theme) => (
+                        <ThemeUtilityColorEditor theme={theme} name="base-background" />
+                    ),
+                },
+                {
+                    id: 'brand',
+                    title: t('brand_color'),
+                    render: (theme) => <BrandColorEditor theme={theme} />,
+                },
+                {
+                    id: 'text-brand-contrast',
+                    title: t('label_text-on-brand'),
+                    render: (theme) => <TextContrastColorEditor theme={theme} />,
+                    renderTitle: () => (
+                        <div className={b('text-contrast-title')}>
+                            <Text variant="body-2">{t('label_text-on-brand')}</Text>
+                        </div>
+                    ),
+                },
+            ];
+        }, [t]);
 
-    return (
-        <ThemeSection className={b()} title={t('title_brand-palette-foundations')}>
-            <ThemableSettings
-                title={t('label_basic-brand-colors')}
-                rows={rows}
-                addButton={
-                    <Button
-                        className={b('switch-button')}
-                        onClick={toggleAdvancedMode}
-                        view="outlined-action"
-                        size="xl"
-                    >
-                        <Icon data={Sliders} size={20} />
-                        {advancedModeEnabled ? t('hide_advanced_settings') : t('advanced_settings')}
-                    </Button>
-                }
-            />
-        </ThemeSection>
-    );
-};
+        return (
+            <ThemeSection className={b()} title={t('title_brand-palette-foundations')}>
+                <ThemableSettings
+                    title={t('label_basic-brand-colors')}
+                    rows={rows}
+                    addButton={
+                        <Button
+                            className={b('switch-button')}
+                            onClick={toggleAdvancedMode}
+                            view="outlined-action"
+                            size="xl"
+                        >
+                            <Icon data={Sliders} size={20} />
+                            {advancedModeEnabled
+                                ? t('hide_advanced_settings')
+                                : t('advanced_settings')}
+                        </Button>
+                    }
+                />
+            </ThemeSection>
+        );
+    },
+);
+
+MainSettings.displayName = 'MainSettings';

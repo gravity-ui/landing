@@ -26,13 +26,7 @@ export function PreviewWrapper({styles, ...props}: PreviewWrapperProps) {
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
-            {styles ? (
-                <style>{`${
-                    styles.fontImports
-                }\n.gravity-ui-landing-themes-preview-wrapper_theme_${theme} {${
-                    styles[theme as 'light' | 'dark']
-                }}`}</style>
-            ) : null}
+            {styles ? <style>{styles}</style> : null}
             <div className={b('content')}>
                 <Content {...props} theme={theme} onThemeUpdate={setTheme} />
             </div>

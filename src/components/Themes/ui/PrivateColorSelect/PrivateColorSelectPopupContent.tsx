@@ -1,8 +1,8 @@
 import {List, Select, SelectOption, Text} from '@gravity-ui/uikit';
+import {parseInternalPrivateColorReference} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {parsePrivateColorToken} from '../../lib/themeCreatorUtils';
 import {ColorPreview} from '../ColorPreview/ColorPreview';
 
 import './PrivateColorSelectPopupContent.scss';
@@ -116,11 +116,13 @@ export const PrivateColorSelectPopupContent: React.FC<PrivateColorSelectPopupCon
     const colorsRef = React.useRef<HTMLDivElement>(null);
 
     const [currentGroupToken, setCurrentGroupToken] = React.useState<string | undefined>(() =>
-        value ? parsePrivateColorToken(value)?.mainColorToken : undefined,
+        value ? parseInternalPrivateColorReference(value)?.mainColorToken : undefined,
     );
 
     React.useEffect(() => {
-        const mainColorToken = value ? parsePrivateColorToken(value)?.mainColorToken : undefined;
+        const mainColorToken = value
+            ? parseInternalPrivateColorReference(value)?.mainColorToken
+            : undefined;
 
         if (mainColorToken) {
             setCurrentGroupToken(mainColorToken);

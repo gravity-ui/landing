@@ -143,13 +143,7 @@ const PreviewLayout = ({
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
-            {styles ? (
-                <style>{`${
-                    styles.fontImports
-                }\n.gravity-ui-landing-themes-preview-layout_theme_${theme} {${
-                    styles[theme as 'light' | 'dark']
-                }}`}</style>
-            ) : null}
+            <style>{styles}</style>
 
             <div
                 className={b({
@@ -286,7 +280,12 @@ export const PreviewTab = () => {
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
-        () => exportTheme({themeState, ignoreDefaultValues: false}),
+        () =>
+            exportTheme({
+                themeState,
+                ignoreDefaultValues: false,
+                customRootClassName: 'gravity-ui-landing-themes-preview-layout',
+            }),
         [themeState],
     );
     return (
