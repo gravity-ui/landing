@@ -9,7 +9,7 @@ import {availablePlaygrounds} from './libraries/[libId]/playground';
 
 const BASE_URL = 'https://gravity-ui.com';
 
-const generateAdditionalPaths = () => {
+const generatePaths = () => {
     const paths: {path: string; notLocalized?: boolean}[] = [
         {path: ''},
         {path: '/themer'},
@@ -71,29 +71,29 @@ const generateAdditionalPaths = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const a = generateAdditionalPaths();
+    const paths = generatePaths();
 
-    const fields = a.map((post) => {
+    const fields = paths.map((path) => {
         return {
-            loc: `${BASE_URL}${post}`,
+            loc: `${BASE_URL}${path}`,
             // lastmod: new Date().toISOString(),
             changefreq: 'daily' as const,
             priority: 0.7,
             alternateRefs: [
                 {
-                    href: `${BASE_URL}${post}`,
+                    href: `${BASE_URL}${path}`,
                     hreflang: 'en',
                 },
                 {
-                    href: `${BASE_URL}/ru${post}`,
+                    href: `${BASE_URL}/ru${path}`,
                     hreflang: 'ru',
                 },
                 {
-                    href: `${BASE_URL}/zh${post}`,
+                    href: `${BASE_URL}/zh${path}`,
                     hreflang: 'zh',
                 },
                 {
-                    href: `${BASE_URL}/es${post}`,
+                    href: `${BASE_URL}/es${path}`,
                     hreflang: 'es',
                 },
             ],
