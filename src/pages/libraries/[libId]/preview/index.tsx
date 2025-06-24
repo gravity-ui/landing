@@ -5,12 +5,18 @@ import React from 'react';
 import {type Lib, fetchLibById} from 'src/services/lib';
 
 import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
-import {getI18nProps} from '../../../../utils';
+import {getI18nProps, isValidLibId} from '../../../../utils';
 
 const theme = Theme.Dark;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const libId = ctx.params?.libId as string;
+
+    if (!isValidLibId(libId)) {
+        return {
+            notFound: true,
+        };
+    }
 
     const [lib, i18nProps] = await Promise.all([
         fetchLibById(libId),

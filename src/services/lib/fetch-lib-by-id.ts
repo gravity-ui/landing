@@ -7,7 +7,30 @@ export type Lib = {
     data: LibData;
 };
 
+type Cache = {
+    timestamp: number;
+    libs: Record<string, Lib>;
+};
+
+let libsCache: Cache | null = null;
+const CACHE_TTL = 60 * 60 * 1000;
+
 export const fetchLibById = async (id: string): Promise<Lib> => {
+    const now = Date.now();
+
+    if (!libsCache || now - libsCache.timestamp > CACHE_TTL) {
+        libsCache = {
+            timestamp: now,
+            libs: {},
+        };
+
+        Promise.all(libs.map((lib) => fetchLibById(lib.id))).catch();
+    }
+
+    if (libsCache.libs[id]) {
+        return libsCache.libs[id];
+    }
+
     const config = libs.find((lib) => lib.id === id);
 
     if (!config) {
@@ -16,8 +39,12 @@ export const fetchLibById = async (id: string): Promise<Lib> => {
 
     const data = await fetchLibData(config);
 
-    return {
+    const lib = {
         config,
         data,
     };
+
+    libsCache.libs[id] = lib;
+
+    return lib;
 };

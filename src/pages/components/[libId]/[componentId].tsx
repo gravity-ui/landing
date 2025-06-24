@@ -18,7 +18,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const components = getLibComponents(ctx.params?.libId as string);
     const component = components.find((item) => item.id === ctx.params?.componentId);
 
-    if (!component?.content?.readmeUrl) {
+    if (!component) {
+        return {
+            notFound: true,
+        };
+    }
+
+    if (!component.content?.readmeUrl) {
         throw new Error(
             `Component "${ctx.params?.componentId}" in library "${ctx.params?.libId}" doesn't have url for readme file`,
         );

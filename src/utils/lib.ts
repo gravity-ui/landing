@@ -22,8 +22,18 @@ type LibConfig = {
     mainBranch: string;
 };
 
-export const getLibConfigById = (id: string): LibConfig => {
+export const getLibConfigByIdSafe = (id: string): LibConfig | undefined => {
     const config = libs.find((lib) => lib.id === id);
+
+    return config;
+};
+
+export const isValidLibId = (id: string): boolean => {
+    return getLibConfigByIdSafe(id) !== undefined;
+};
+
+export const getLibConfigById = (id: string): LibConfig => {
+    const config = getLibConfigByIdSafe(id);
 
     if (!config) {
         throw new Error(`Can't find config for lib with id – ${id}`);

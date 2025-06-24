@@ -25,10 +25,18 @@ const GraphPlayround = dynamic(
     },
 );
 
+export const availablePlaygrounds = ['markdown-editor', 'graph'];
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const libId = Array.isArray(context.params?.libId)
         ? context.params?.libId[0]
         : context.params?.libId;
+
+    if (!libId || !availablePlaygrounds.includes(libId)) {
+        return {
+            notFound: true,
+        };
+    }
 
     return {
         props: {
@@ -38,24 +46,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
 };
 
-export const availablePlaygrounds = ['markdown-editor', 'graph'];
-
 export const PlaygroundPage = ({libId}: {libId: string}) => {
-    const hasPlayground = availablePlaygrounds.includes(libId);
-
     const {t} = useTranslation();
 
     return (
-        <>
-            {hasPlayground && (
-                <>
-                    <Layout title={availablePlaygrounds.includes(libId) ? t(libId) : ''}>
-                        {libId === 'markdown-editor' && <MarkdownEditor />}
-                        {libId === 'graph' && <GraphPlayround />}
-                    </Layout>
-                </>
-            )}
-        </>
+        <Layout title={availablePlaygrounds.includes(libId) ? t(libId) : ''}>
+            {libId === 'markdown-editor' && <MarkdownEditor />}
+            {libId === 'graph' && <GraphPlayround />}
+        </Layout>
     );
 };
 

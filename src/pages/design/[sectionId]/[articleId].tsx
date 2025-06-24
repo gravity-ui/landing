@@ -1,6 +1,7 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
+import Error from 'next/error';
 import React from 'react';
 
 import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
@@ -29,7 +30,7 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
     const isMobile = windowBreakpoint < BREAKPOINTS.lg;
 
     if (!section || !article) {
-        return null;
+        return <Error statusCode={404} />;
     }
 
     const sections = designSections.map((item) => {

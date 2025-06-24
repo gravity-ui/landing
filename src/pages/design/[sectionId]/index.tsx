@@ -19,12 +19,8 @@ export const DesignSectionPage = ({sectionId}: {sectionId: string}) => {
 
     const section = sections.find((item) => item.id === sectionId);
 
-    if (!section) {
-        return null;
-    }
-
     React.useEffect(() => {
-        const firstArticle = section.articles[0];
+        const firstArticle = section?.articles[0];
 
         if (firstArticle) {
             router.replace(`/design/${section.id}/${firstArticle.id}`);
