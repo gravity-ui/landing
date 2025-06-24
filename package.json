@@ -95,8 +95,9 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "start": "next dev",
+    "dev": "next dev",
     "build": "next build",
+    "start": "next start",
     "postbuild": "next-sitemap",
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
     "prepare-metadata": "npm run get-packages-versions",
