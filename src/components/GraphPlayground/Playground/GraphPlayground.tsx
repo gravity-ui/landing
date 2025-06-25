@@ -1,15 +1,18 @@
 import {
+    ConnectionLayer,
     EAnchorType,
     ECanChangeBlockGeometry,
     Graph,
+    GraphState,
+    TBlock,
+} from '@gravity-ui/graph';
+import {
     GraphBlock,
     GraphCanvas,
-    GraphState,
     HookGraphParams,
-    TBlock,
     useGraph,
     useGraphEvent,
-} from '@gravity-ui/graph';
+} from '@gravity-ui/graph/react';
 import {LayoutColumns, LayoutSideContentRight} from '@gravity-ui/icons';
 import {
     Button,
@@ -20,7 +23,7 @@ import {
     Text,
 } from '@gravity-ui/uikit';
 import random from 'lodash/random';
-import {useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
+import {memo, useCallback, useEffect, useLayoutEffect, useRef, useState} from 'react';
 
 import {block} from '../../../utils';
 
@@ -92,7 +95,7 @@ const config: HookGraphParams = {
         canZoomCamera: true,
         canDuplicateBlocks: false,
         canChangeBlockGeometry: ECanChangeBlockGeometry.ALL,
-        canCreateNewConnections: false,
+        canCreateNewConnections: true,
         showConnectionArrows: false,
         scaleFontSize: 1,
         useBezierConnections: true,
@@ -103,6 +106,26 @@ const config: HookGraphParams = {
             [GravityTextBlockIS]: TextBlock,
         },
     },
+    layers: [
+        [
+            ConnectionLayer,
+            {
+                // @ts-expect-error TODO: Layer types do not propagate through the graph configuration
+                drawLine: (start: {x: number; y: number}, end: {x: number; y: number}) => {
+                    const path = new Path2D();
+                    path.moveTo(start.x, start.y);
+                    path.lineTo(end.x, end.y);
+                    return {
+                        path,
+                        style: {
+                            color: 'rgba(234, 201, 74, 1)',
+                            dash: [5, 5], // Dashed line
+                        },
+                    };
+                },
+            },
+        ],
+    ],
 };
 
 const graphSizeOptions: SegmentedRadioGroupOptionProps[] = [
@@ -122,7 +145,7 @@ function useFn<ARG extends Array<unknown>, RT>(handler: (...args: ARG) => RT) {
     }, []);
 }
 
-export function GraphPlayground({className}: {className: string}) {
+export const GraphPlayground = memo(({className}: {className: string}) => {
     const {graph, setEntities, updateEntities, start} = useGraph(config);
     const editorRef = useRef<ConfigEditorController>(null);
 
@@ -266,7 +289,7 @@ export function GraphPlayground({className}: {className: string}) {
         }
         return (
             <GraphBlock graph={graph} block={block}>
-                Unknown block <>{block.id}</>
+                Unknown block <>{block.id.toString()}</>
             </GraphBlock>
         );
     });
@@ -373,4 +396,4 @@ export function GraphPlayground({className}: {className: string}) {
             </Flex>
         </Flex>
     );
-}
+});

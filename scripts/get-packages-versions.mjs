@@ -7,6 +7,7 @@ const packagesMap = {
     '@gravity-ui/components': 'components',
     '@gravity-ui/date-components': 'date-components',
     '@gravity-ui/navigation': 'navigation',
+    '@gravity-ui/graph': 'graph',
 };
 
 const packageJsonPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../package.json');
