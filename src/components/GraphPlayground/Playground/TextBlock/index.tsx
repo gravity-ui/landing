@@ -1,5 +1,4 @@
 import {CanvasBlock, TBlockId, layoutText} from '@gravity-ui/graph';
-import {EventedComponent} from '@gravity-ui/graph/build/mixins/withEvents';
 import React from 'react';
 
 import {TGravityTextBlock} from '../generateLayout';
@@ -33,18 +32,15 @@ export class TextBlock extends CanvasBlock<TGravityTextBlock> {
     }
 
     protected subscribe(id: TBlockId) {
-        const subs = super.subscribe(id);
-        subs.push(
-            (this as unknown as EventedComponent).addEventListener('mouseenter', () => {
-                this.hovered = true;
-                (this as unknown as EventedComponent).performRender();
-            }),
-            (this as unknown as EventedComponent).addEventListener('mouseleave', () => {
-                this.hovered = false;
-                (this as unknown as EventedComponent).performRender();
-            }),
-        );
-        return subs;
+        this.addEventListener('mouseenter', () => {
+            this.hovered = true;
+            this.performRender();
+        });
+        this.addEventListener('mouseleave', () => {
+            this.hovered = false;
+            this.performRender();
+        });
+        return super.subscribe(id);
     }
 
     protected renderName(ctx: CanvasRenderingContext2D) {
