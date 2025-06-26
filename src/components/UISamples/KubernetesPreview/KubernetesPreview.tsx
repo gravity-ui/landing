@@ -92,7 +92,7 @@ const functionsData = [
     },
 ];
 
-const functionsColumns: TableColumnConfig<typeof functionsData[0]>[] = [
+const functionsColumns: TableColumnConfig<(typeof functionsData)[0]>[] = [
     {
         name: 'Handler',
         id: 'handler',

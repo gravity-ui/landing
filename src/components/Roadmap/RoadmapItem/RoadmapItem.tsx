@@ -5,6 +5,7 @@ import {Icon, Link} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
+import {useLocale} from '../../../hooks/useLocale';
 import {block} from '../../../utils';
 import {RoadmapIcon} from '../RoadmapIcon/RoadmapIcon';
 import {RoadmapTask, RoadmapTaskStatus} from '../types';
@@ -18,7 +19,8 @@ interface RoadmapItemProps {
 }
 
 export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
+    const locale = useLocale();
 
     const inProgress = task.status === RoadmapTaskStatus.InProgress;
     const completed = task.status === RoadmapTaskStatus.Completed;
@@ -36,7 +38,7 @@ export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
                             task.completedDate &&
                             dateTime({
                                 input: new Date(task.completedDate),
-                                lang: i18n.language,
+                                lang: locale,
                             }).fromNow()}
                     </span>
                 )}

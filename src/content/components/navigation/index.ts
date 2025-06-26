@@ -1,6 +1,6 @@
 import {sortBy} from 'lodash';
 
-import {getLibById} from '../../../utils';
+import {getLibConfigById} from '../../../utils';
 import {Component, Lib} from '../types';
 
 import {actionBarConfig} from './ActionBar';
@@ -12,7 +12,7 @@ import {hotkeysPanelConfig} from './HotkeysPanel';
 import {mobileHeaderConfig} from './MobileHeader';
 import {settingsConfig} from './Settings';
 
-const {config} = getLibById('navigation');
+const config = getLibConfigById('navigation');
 
 const components: Component[] = [
     actionBarConfig,

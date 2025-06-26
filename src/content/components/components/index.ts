@@ -1,9 +1,9 @@
-import {getLibById} from '../../../utils';
+import {getLibConfigById} from '../../../utils';
 import {Lib} from '../types';
 
 import {storeBadgeConfig} from './StoreBadge';
 
-const {config} = getLibById('components');
+const config = getLibConfigById('components');
 
 export const components: Lib = {
     id: config.id,
