@@ -85,4 +85,5 @@ module.exports = withPlugins(plugins, {
     experimental: {
         esmExternals: 'loose',
     },
+    assetPrefix: process.env.ASSET_PREFIX,
 });
