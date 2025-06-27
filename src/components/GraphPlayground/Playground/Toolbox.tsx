@@ -1,4 +1,5 @@
-import {Graph, useGraphEvent} from '@gravity-ui/graph';
+import {Graph} from '@gravity-ui/graph';
+import {useGraphEvent} from '@gravity-ui/graph/react';
 import {MagnifierMinus, MagnifierPlus, SquareDashed} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Tooltip} from '@gravity-ui/uikit';
 import React, {useState} from 'react';
