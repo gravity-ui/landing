@@ -84,6 +84,6 @@ export const useSampleComponents = () => {
                 blank: true,
             },
         ],
-        [],
+        [t],
     );
 };
