@@ -19,10 +19,10 @@ ENV AWS_EC2_METADATA_DISABLED=true
 ENV AWS_REQUEST_CHECKSUM_CALCULATION=when_required
 ENV AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
 
-RUN --mount=type=secret,id=aws_access_key_id \
-    --mount=type=secret,id=aws_secret_access_key \
-    export AWS_ACCESS_KEY_ID=$(cat /run/secrets/aws_access_key_id) && \
-    export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/aws_secret_access_key) && \
+RUN --mount=type=secret,id=s3_access_key_id \
+    --mount=type=secret,id=s3_secret_access_key \
+    export AWS_ACCESS_KEY_ID=$(cat /run/secrets/s3_access_key_id) && \
+    export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/s3_secret_access_key) && \
     aws s3 sync .next/static s3://landing-static/_next/static/ \
     --endpoint-url=https://storage.yandexcloud.net/ && \
     unset AWS_ACCESS_KEY_ID && \
