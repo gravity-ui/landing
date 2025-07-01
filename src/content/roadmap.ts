@@ -9,11 +9,11 @@ export const getRoadmapTasks = (t: TFunction): RoadmapTask[] => [
     },
     {
         title: t('home:roadmap_items_item2'),
-        status: RoadmapTaskStatus.InProgress,
+        status: RoadmapTaskStatus.Completed,
     },
     {
         title: t('home:roadmap_items_item3'),
-        status: RoadmapTaskStatus.Planned,
+        status: RoadmapTaskStatus.InProgress,
     },
     {
         title: t('home:roadmap_items_item4'),
