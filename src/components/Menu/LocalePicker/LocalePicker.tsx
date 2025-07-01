@@ -12,10 +12,10 @@ import './LocalePicker.scss';
 const b = block('menu-local-picker');
 
 const FLAGS: Record<string, string> = {
-    en: '🇺🇸',
-    ru: '🇷🇺',
-    es: '🇪🇸',
-    zh: '🇨🇳',
+    en: 'us',
+    ru: 'ru',
+    es: 'es',
+    zh: 'cn',
 };
 
 export const LocalePicker: React.FC = () => {
@@ -27,7 +27,7 @@ export const LocalePicker: React.FC = () => {
         const localeUpperCase = option.value.toUpperCase();
         return (
             <div className={b('locale-item')}>
-                {FLAGS[locale] ? <span className={b('locale-flag')}>{FLAGS[locale]}</span> : null}
+                {FLAGS[locale] ? <span className={`fi fi-${FLAGS[locale]}`}></span> : null}
                 <span className={b('locale-code')}>{localeUpperCase}</span>
                 {i18nextConfig.aiTranslatedLocales.includes(locale) ? (
                     <React.Fragment>
