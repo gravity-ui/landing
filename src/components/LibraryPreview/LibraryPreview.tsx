@@ -5,7 +5,8 @@ import React from 'react';
 import calendarIcon from '../../assets/icons/preview-calendar.svg';
 import starIcon from '../../assets/icons/preview-star.svg';
 import versionIcon from '../../assets/icons/preview-version.svg';
-import {Lib, block} from '../../utils';
+import {Lib} from '../../services/lib';
+import {block} from '../../utils';
 
 import './LibraryPreview.scss';
 

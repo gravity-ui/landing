@@ -3,6 +3,7 @@ import {Button, CopyToClipboard, Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
+import {useLocale} from '../../../../hooks/useLocale';
 import {block} from '../../../../utils';
 import {downloadFile} from '../../../../utils/browser';
 import type {IconItem} from '../../types';
@@ -22,7 +23,8 @@ const buildSvgUrl = (svgName: string) =>
 const buildIconUrl = (iconName: string) => `${window.location.origin}/icons?icon=${iconName}`;
 
 export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobile}) => {
-    const {t, i18n} = useTranslation();
+    const {t} = useTranslation();
+    const locale = useLocale();
 
     const actionsRef = React.useRef<HTMLDivElement>(null);
 
@@ -64,7 +66,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
                         <Button
                             view={isCopied ? 'normal-contrast' : 'action'}
                             size="xl"
-                            className={b('copy-action', {lg: i18n.language === 'ru'})}
+                            className={b('copy-action', {lg: locale === 'ru'})}
                         >
                             <Icon data={isCopied ? Check : Link} size={16} />
                             {isCopied ? t('icons:actions_copied') : t('icons:actions_copyLink')}

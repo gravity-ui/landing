@@ -1,0 +1,17 @@
+.next
+node_modules
+.env
+
+.idea
+.DS_Store
+.vscode
+.history
+
+.git
+.github
+.eslintrc
+.prettierrc
+.stylelintrc
+.husky
+
+Dockerfile

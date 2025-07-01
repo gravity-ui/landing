@@ -127,7 +127,7 @@ export const DEFAULT_THEME: ThemeOptions = {
 };
 
 export type BrandPreset = {
-    brandColor: typeof DEFAULT_BRAND_COLORS[number];
+    brandColor: (typeof DEFAULT_BRAND_COLORS)[number];
     colors: ThemeOptions['colors'];
 };
 

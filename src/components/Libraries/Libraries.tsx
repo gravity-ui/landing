@@ -6,7 +6,8 @@ import React from 'react';
 import calendarIcon from '../../assets/icons/calendar.svg';
 import starIcon from '../../assets/icons/star.svg';
 import versionIcon from '../../assets/icons/version.svg';
-import {block, getLibsList} from '../../utils';
+import type {Lib} from '../../services/lib';
+import {block} from '../../utils';
 import {Link} from '../Link';
 import {TagItem, Tags} from '../Tags/Tags';
 
@@ -14,7 +15,11 @@ import './Libraries.scss';
 
 const b = block('libraries');
 
-export const Libraries = () => {
+type Props = {
+    libs: Lib[];
+};
+
+export const Libraries = ({libs}: Props) => {
     const {t} = useTranslation();
 
     const tags: TagItem[] = [
@@ -38,8 +43,6 @@ export const Libraries = () => {
 
     const [activeTag, setActivaTag] = React.useState(tags[0].value);
     const [filterString, setFilterString] = React.useState('');
-
-    const libs = getLibsList();
 
     let filteredLibs =
         activeTag === 'all' ? libs : libs.filter((item) => item.config.tags.includes(activeTag));
