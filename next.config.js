@@ -86,4 +86,5 @@ module.exports = withPlugins(plugins, {
         esmExternals: 'loose',
     },
     assetPrefix: process.env.ASSET_PREFIX,
+    crossOrigin: 'anonymous',
 });
