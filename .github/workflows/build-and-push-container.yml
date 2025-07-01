@@ -46,5 +46,5 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           secrets: |
-            s3_access_key_id=${{ secrets.S3_ACCESS_KEY_ID }}
-            s3_secret_access_key=${{ secrets.S3_SECRET_ACCESS_KEY }}
+            s3_access_key_id=${{ secrets.STATIC_S3_KEY_ID }}
+            s3_secret_access_key=${{ secrets.STATIC_S3_SECRET_KEY }}
