@@ -1,6 +1,6 @@
 output "load_balancer_ip" {
   description = "Public IP address of the load balancer"
-  value       = yandex_lb_network_load_balancer.landing_lb.listener.*.external_address_spec[0].*.address
+  value       = yandex_alb_load_balancer.landing_alb.listener.0.endpoint.0.address.0.external_ipv4_address.0.address
 }
 
 output "instance_group_id" {
