@@ -29,7 +29,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
       subnet_ids         = [
         yandex_vpc_subnet.subnet_a.id,
         yandex_vpc_subnet.subnet_b.id,
-        yandex_vpc_subnet.subnet_c.id
+        yandex_vpc_subnet.subnet_d.id
       ]
       nat                = true
       security_group_ids = [yandex_vpc_security_group.landing_sg.id]
@@ -81,7 +81,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
   }
   
   allocation_policy {
-    zones = ["ru-central1-a", "ru-central1-b", "ru-central1-c"]
+    zones = ["ru-central1-a", "ru-central1-b", "ru-central1-d"]
   }
   
   deploy_policy {
