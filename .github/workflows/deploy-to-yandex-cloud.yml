@@ -2,7 +2,7 @@ name: Deploy to Yandex Cloud
 
 on:
   workflow_run:
-    workflows: ['Build and Push Docker Image']
+    workflows: ["Build and Push Docker Image"]
     types:
       - completed
     branches:
