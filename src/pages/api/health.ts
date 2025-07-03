@@ -1,7 +1,7 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
 export default function handler(
-    req: NextApiRequest,
+    _: NextApiRequest,
     res: NextApiResponse<{
         status: string;
         timestamp: string;
