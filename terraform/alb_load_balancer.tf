@@ -1,13 +1,22 @@
 resource "yandex_alb_target_group" "landing_tg" {
   name = "landing-target-group"
-
-  dynamic "target" {
-    for_each = yandex_compute_instance_group.landing_ig.instances
-    content {
-      subnet_id  = target.value.network_interface.0.subnet_id
-      ip_address = target.value.network_interface.0.ip_address
-    }
+  
+  target {
+    subnet_id  = yandex_vpc_subnet.subnet_a.id
+    ip_address = "10.1.0.10"
   }
+  
+  target {
+    subnet_id  = yandex_vpc_subnet.subnet_b.id
+    ip_address = "10.2.0.10"
+  }
+  
+  target {
+    subnet_id  = yandex_vpc_subnet.subnet_d.id
+    ip_address = "10.3.0.10"
+  }
+  
+  depends_on = [yandex_compute_instance_group.landing_ig]
 }
 
 resource "yandex_alb_backend_group" "landing_bg" {
