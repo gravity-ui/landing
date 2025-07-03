@@ -29,8 +29,7 @@ jobs:
       - name: Get Docker image tag
         id: get_tag
         run: |
-          SHA_SHORT=$(echo "sha-75ebe1a" | cut -c1-7)
-          echo "tag=${SHA_SHORT}" >> $GITHUB_OUTPUT
+          echo "tag=sha-75ebe1a" >> $GITHUB_OUTPUT
 
       - name: Terraform Init
         run: |
