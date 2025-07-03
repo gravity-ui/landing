@@ -6,6 +6,7 @@ on:
       - Build and Push Docker Image
     types:
       - completed
+  workflow_dispatch:
 
 jobs:
   deploy:
