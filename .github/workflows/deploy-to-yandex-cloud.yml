@@ -11,6 +11,9 @@ jobs:
   deploy:
     name: Deploy to Yandex Cloud
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
