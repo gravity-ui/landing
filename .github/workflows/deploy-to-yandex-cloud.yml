@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-to-yc:
     name: Deploy to Yandex Cloud
     runs-on: ubuntu-latest
     permissions:
