@@ -1,22 +1,18 @@
+data "yandex_compute_instance_group" "landing_ig_data" {
+  instance_group_id = yandex_compute_instance_group.landing_ig.id
+  depends_on        = [yandex_compute_instance_group.landing_ig]
+}
+
 resource "yandex_alb_target_group" "landing_tg" {
   name = "landing-target-group"
-  
-  target {
-    subnet_id  = yandex_vpc_subnet.subnet_a.id
-    ip_address = "10.1.0.10"
+
+  dynamic "target" {
+    for_each = data.yandex_compute_instance_group.landing_ig_data.instances
+    content {
+      subnet_id  = target.value.network_interface[0].subnet_id
+      ip_address = target.value.network_interface[0].ip_address
+    }
   }
-  
-  target {
-    subnet_id  = yandex_vpc_subnet.subnet_b.id
-    ip_address = "10.2.0.10"
-  }
-  
-  target {
-    subnet_id  = yandex_vpc_subnet.subnet_d.id
-    ip_address = "10.3.0.10"
-  }
-  
-  depends_on = [yandex_compute_instance_group.landing_ig]
 }
 
 resource "yandex_alb_backend_group" "landing_bg" {
@@ -29,7 +25,7 @@ resource "yandex_alb_backend_group" "landing_bg" {
     target_group_ids = [yandex_alb_target_group.landing_tg.id]
     load_balancing_config {
       panic_threshold = 50
-    }    
+    }
     healthcheck {
       timeout             = "5s"
       interval            = "10s"
@@ -38,6 +34,7 @@ resource "yandex_alb_backend_group" "landing_bg" {
       http_healthcheck {
         path = "/api/health"
       }
+      healthcheck_port = 3000
     }
   }
 }
@@ -49,7 +46,7 @@ resource "yandex_alb_http_router" "landing_router" {
 resource "yandex_alb_virtual_host" "landing_virtual_host" {
   name           = "landing-virtual-host"
   http_router_id = yandex_alb_http_router.landing_router.id
-  
+
   route {
     name = "landing-route"
     http_route {
@@ -65,7 +62,7 @@ resource "yandex_alb_load_balancer" "landing_alb" {
   name = "landing-application-load-balancer"
 
   network_id = yandex_vpc_network.network.id
-  
+
   allocation_policy {
     location {
       zone_id   = "ru-central1-a"
