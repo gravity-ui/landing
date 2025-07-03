@@ -1,12 +1,10 @@
 name: Deploy to Yandex Cloud
 
 on:
-  workflow_run:
-    workflows:
-      - Build and Push Docker Image
-    types:
-      - completed
-  workflow_dispatch:
+  push:
+    branches:
+      - enable-ssr
+
 
 jobs:
   deploy-to-yc:
