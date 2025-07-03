@@ -1,18 +1,18 @@
 name: Deploy to Yandex Cloud
 
 on:
-  push:
+  workflow_run:
+    workflows: ['Build and Push Docker Image']
+    types:
+      - completed
     branches:
       - enable-ssr
 
-
 jobs:
-  deploy-to-yc:
+  deploy:
     name: Deploy to Yandex Cloud
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      actions: read
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - name: Checkout repository
@@ -24,11 +24,10 @@ jobs:
           terraform_version: 1.0.0
 
       - name: Configure AWS credentials for Terraform backend
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.STATIC_S3_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.STATIC_S3_SECRET_KEY }}
-          aws-region: ru-central1
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.STATIC_S3_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.STATIC_S3_SECRET_KEY }}" >> $GITHUB_ENV
+          echo "AWS_REGION=ru-central1" >> $GITHUB_ENV
 
       - name: Get Docker image tag
         id: get_tag
@@ -56,3 +55,13 @@ jobs:
           TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
           TF_VAR_container_image: 'ghcr.io/${{ github.repository }}:${{ steps.get_tag.outputs.tag }}'
           TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Terraform Apply
+      #   run: |
+      #     cd terraform
+      #     terraform apply -auto-approve tfplan
+      #   env:
+      #     TF_VAR_yc_token: ${{ secrets.YC_TOKEN }}
+      #     TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
+      #     TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
+      #     TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
