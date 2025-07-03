@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - enable-ssr
+  workflow_dispatch:
 
 jobs:
   deploy:
