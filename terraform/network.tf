@@ -30,6 +30,13 @@ resource "yandex_vpc_security_group" "landing_sg" {
 
   ingress {
     protocol       = "TCP"
+    description    = "Allow SSH"
+    port           = 22
+    v4_cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    protocol       = "TCP"
     description    = "Allow HTTP"
     port           = 80
     v4_cidr_blocks = ["0.0.0.0/0"]
