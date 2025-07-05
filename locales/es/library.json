@@ -1,0 +1,15 @@
+﻿{
+    "actions_goToIcons": "Ir a los iconos",
+    "libraries": "Bibliotecas",
+    "readme": "Léeme",
+    "changelog": "Registro de cambios",
+    "about": "Acerca de la biblioteca",
+    "stars": "Estrellas",
+    "version": "Versión",
+    "lastUpdate": "Última actualización",
+    "repository": "Repositorio",
+    "license": "Licencia",
+    "issues": "Cuestiones",
+    "maintainers": "Mantenedores",
+    "contributors": "Colaboradores"
+}

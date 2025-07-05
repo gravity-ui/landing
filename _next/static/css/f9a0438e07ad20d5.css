@@ -1,0 +1,1 @@
+.g-arrow-toggle{display:inline-block;vertical-align:middle;transition:transform .1s ease-out}.g-arrow-toggle_direction_bottom{transform:matrix(1,0,0,1,0,0)}.g-arrow-toggle_direction_left{transform:matrix(0,1,-1,0,0,0)}.g-arrow-toggle_direction_top{transform:matrix(-1,0,0,-1,0,0)}.g-arrow-toggle_direction_right{transform:matrix(0,-1,1,0,0,0)}
