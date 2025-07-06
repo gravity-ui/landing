@@ -71,34 +71,51 @@ const previewComponents = [
     },
 ];
 
+const replaceRootToCustom = (fullStyles: string, customRootClassName: string) => {
+    return fullStyles
+        .replace('.g-root {', `.g-root.${customRootClassName} {`)
+        .replace('.g-root_theme_dark', `.g-root_theme_dark.${customRootClassName}_theme_dark`)
+        .replace('.g-root_theme_light', `.g-root_theme_light.${customRootClassName}_theme_light`);
+};
+
 export const PreviewTab = () => {
     const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
 
-    const themeStyles = React.useMemo(
-        () =>
-            exportTheme({
-                themeState,
-                ignoreDefaultValues: false,
-                customRootClassName: 'gravity-ui-landing-themes-preview-layout',
-            }),
-        [themeState],
-    );
+    const themeStyles = React.useMemo(() => {
+        const fullStyles = exportTheme({
+            themeState,
+            ignoreDefaultValues: false,
+        });
+
+        return {
+            previewWrapperStyles: replaceRootToCustom(
+                fullStyles,
+                'gravity-ui-landing-themes-preview-wrapper',
+            ),
+            previewLayoutStyles: replaceRootToCustom(
+                fullStyles,
+                'gravity-ui-landing-themes-preview-layout',
+            ),
+        };
+    }, [themeState]);
+
     return (
         <Flex direction="column" gap={8}>
             <Text variant="display-2">{t('title_ui-samples')}</Text>
+            <style>{themeStyles.previewLayoutStyles}</style>
+            <style>{themeStyles.previewWrapperStyles}</style>
 
             {previewComponents.map(
                 ({Component, title, breadCrumbsItems = [], id, blank}, index) => {
                     return blank ? (
-                        <Component key={index} styles={themeStyles} />
+                        <Component key={index} />
                     ) : (
                         <PreviewLayout
                             key={index}
                             id={id}
                             title={title}
                             breadCrumbsItems={breadCrumbsItems}
-                            styles={themeStyles}
                         >
                             {(props) => <Component {...props} />}
                         </PreviewLayout>

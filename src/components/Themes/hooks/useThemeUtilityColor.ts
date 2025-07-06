@@ -19,7 +19,6 @@ export const useThemeUtilityColor = ({name, theme}: UseThemeColorParams) => {
 
     const updateValue = React.useCallback(
         (newValue: string) => {
-            console.log('updateValue', name, newValue);
             changeUtilityColor({
                 themeVariant: theme,
                 name,
