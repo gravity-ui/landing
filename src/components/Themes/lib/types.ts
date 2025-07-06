@@ -1,5 +1,5 @@
 import {TextProps} from '@gravity-ui/uikit';
-import type {GravityTheme, Theme} from '@gravity-ui/uikit-themer';
+import type {BordersOptions, GravityTheme, Theme} from '@gravity-ui/uikit-themer';
 
 import {DefaultFontFamilyType, TextVariants} from './typography/constants';
 
@@ -8,11 +8,6 @@ export type PaletteOptions = {
     [key: string]: string;
 };
 
-// TODO: add export BordersOptions from uikit-themer
-export type BordersOptions = GravityTheme['borders'];
-
-export type RadiusSizeName = keyof BordersOptions;
-
 export enum RadiusPresetName {
     Regular = 'radius_regular',
     Circled = 'radius_circled',
@@ -20,11 +15,9 @@ export enum RadiusPresetName {
     Custom = 'radius_custom',
 }
 
-export type RadiusValue = Record<RadiusSizeName, string>;
-
 export type BordersOption = {
     preset: RadiusPresetName;
-    values: RadiusValue;
+    values: BordersOptions;
 };
 
 export enum CustomFontSelectType {
