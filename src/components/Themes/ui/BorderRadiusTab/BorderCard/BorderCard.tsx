@@ -18,7 +18,7 @@ export const BorderCard = ({selected, preset, onClick}: BorderCardProps) => {
     }, [preset]);
 
     const displayName = t(preset);
-    const borderRadiusStyle = {borderRadius: RADIUS_PRESETS[preset]?.m + 'px'};
+    const borderRadiusStyle = {borderRadius: RADIUS_PRESETS[preset]?.m};
 
     return (
         <SelectableCard

@@ -15,7 +15,7 @@ export const ComponentPreview = () => {
             exportTheme({
                 themeState,
                 ignoreDefaultValues: false,
-                customRootClassName: 'gravity-ui-border-radius-showcase',
+                customRootClassName: 'gravity-ui-landing-border-radius-showcase',
             }),
         [themeState],
     );
