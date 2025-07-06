@@ -1,5 +1,6 @@
 import {TextProps} from '@gravity-ui/uikit';
 import {
+    BordersOptions,
     GravityTheme,
     createInternalPrivateColorReference,
     createPrivateColorCssVariable,
@@ -22,7 +23,7 @@ import {
     DEFAULT_PALETTE_TOKENS,
     RADIUS_PRESETS,
 } from './constants';
-import type {Palette, PaletteTokens, RadiusValue, ThemeCreatorState} from './types';
+import type {Palette, PaletteTokens, ThemeCreatorState} from './types';
 import {CustomFontSelectType, RadiusPresetName, TypographyOptions} from './types';
 import {DefaultFontFamilyType, TextVariants, defaultTypographyPreset} from './typography/constants';
 import {
@@ -203,9 +204,12 @@ export function renameColorInTheme(
         newThemeState.gravityTheme.baseColors[newToken] = {
             ...newThemeState.gravityTheme.baseColors[oldToken],
         };
+        newThemeState.gravityTheme.privateColors[newToken] =
+            newThemeState.gravityTheme.privateColors[oldToken];
     }
 
     delete newThemeState.gravityTheme.baseColors[oldToken];
+    delete newThemeState.gravityTheme.privateColors[oldToken];
     delete newThemeState.paletteTokens[oldToken];
 
     return newThemeState;
@@ -276,8 +280,6 @@ export function changeUtilityColorInTheme(
     themeState: ThemeCreatorState,
     {themeVariant, name, value}: ChangeUtilityColorInThemeParams,
 ): ThemeCreatorState {
-    console.log('changeUtilityColorInTheme', name, value);
-
     const updatedGravityTheme = updateUtilityColor({
         theme: themeState.gravityTheme,
         themeVariant,
@@ -379,7 +381,7 @@ export function changeRadiusPresetInTheme(
     return newThemeState;
 }
 
-export type UpdateCustomRadiusPresetInThemeParams = {radiusValue: Partial<RadiusValue>};
+export type UpdateCustomRadiusPresetInThemeParams = {radiusValue: Partial<BordersOptions>};
 
 export function updateCustomRadiusPresetInTheme(
     themeState: ThemeCreatorState,

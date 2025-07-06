@@ -1,8 +1,8 @@
 import {Col, Flex, Row, Text, TextInput} from '@gravity-ui/uikit';
+import type {BorderSize, BordersOptions} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useMemo} from 'react';
 import {UpdateCustomRadiusPresetInThemeParams} from 'src/components/Themes/lib/themeCreatorUtils';
-import {RadiusSizeName, RadiusValue} from 'src/components/Themes/lib/types';
 
 import {block} from '../../../../../utils';
 import {ThemeSection} from '../../ThemeSection';
@@ -12,7 +12,7 @@ import './CustomRadius.scss';
 const b = block('custom-radius');
 
 type RadiusInputProps = {
-    radiusSizeName: RadiusSizeName;
+    radiusSizeName: BorderSize;
     onUpdate: (param: UpdateCustomRadiusPresetInThemeParams) => void;
     value?: string;
 };
@@ -24,10 +24,19 @@ const RadiusInputRow = ({radiusSizeName, onUpdate, value}: RadiusInputProps) => 
 
     const handleUpdate = useCallback(
         (newValue: string) => {
-            onUpdate({radiusValue: {[radiusSizeName]: newValue}});
+            onUpdate({radiusValue: {[radiusSizeName]: `${newValue}px`}});
         },
         [radiusSizeName],
     );
+
+    const numberValue = useMemo(() => {
+        if (!value) {
+            return undefined;
+        }
+
+        const number = parseInt(value, 10);
+        return Number.isNaN(number) ? undefined : number.toString();
+    }, [value]);
 
     return (
         <Row space={4} className={b('radius-input-row')}>
@@ -36,7 +45,7 @@ const RadiusInputRow = ({radiusSizeName, onUpdate, value}: RadiusInputProps) => 
             </Col>
             <Col m="6" l="4">
                 <TextInput
-                    value={value}
+                    value={numberValue}
                     size="xl"
                     onUpdate={handleUpdate}
                     type="number"
@@ -53,7 +62,7 @@ const RadiusInputRow = ({radiusSizeName, onUpdate, value}: RadiusInputProps) => 
 };
 
 type CustomRadiusProps = {
-    values: RadiusValue;
+    values: BordersOptions;
     onUpdate: (param: UpdateCustomRadiusPresetInThemeParams) => void;
 };
 

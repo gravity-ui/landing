@@ -1,10 +1,10 @@
-import type {GravityTheme, Theme} from '@gravity-ui/uikit-themer';
+import type {BordersOptions, GravityTheme, Theme} from '@gravity-ui/uikit-themer';
 import {
     DEFAULT_THEME as DEFAULT_GRAVITY_THEME,
     createInternalPrivateColorReference,
 } from '@gravity-ui/uikit-themer';
 
-import {BordersOptions, RadiusPresetName, RadiusValue} from './types';
+import {RadiusPresetName} from './types';
 
 export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
@@ -45,28 +45,28 @@ export const DEFAULT_PALETTE: GravityTheme['baseColors'] = {
 export const DEFAULT_PALETTE_TOKENS = new Set(Object.keys(DEFAULT_PALETTE));
 
 export const DEFAULT_RADIUS: BordersOptions = {
-    xs: '3',
-    s: '5',
-    m: '6',
-    l: '8',
-    xl: '10',
+    xs: '3px',
+    s: '5px',
+    m: '6px',
+    l: '8px',
+    xl: '10px',
 };
 
-export const RADIUS_PRESETS: Record<RadiusPresetName, RadiusValue> = {
+export const RADIUS_PRESETS: Record<RadiusPresetName, BordersOptions> = {
     [RadiusPresetName.Regular]: DEFAULT_RADIUS,
     [RadiusPresetName.Circled]: {
-        xs: '10',
-        s: '12',
-        m: '14',
-        l: '18',
-        xl: '22',
+        xs: '10px',
+        s: '12px',
+        m: '14px',
+        l: '18px',
+        xl: '22px',
     },
     [RadiusPresetName.Squared]: {
-        xs: '0',
-        s: '0',
-        m: '0',
-        l: '0',
-        xl: '0',
+        xs: '0px',
+        s: '0px',
+        m: '0px',
+        l: '0px',
+        xl: '0px',
     },
     [RadiusPresetName.Custom]: DEFAULT_RADIUS,
 };
