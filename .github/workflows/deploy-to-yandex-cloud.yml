@@ -1,0 +1,68 @@
+name: Deploy to Yandex Cloud
+
+on:
+  push:
+    branches:
+      - enable-ssr
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Yandex Cloud
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.0
+
+      - name: Configure AWS credentials for Terraform backend
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.STATIC_S3_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.STATIC_S3_SECRET_KEY }}" >> $GITHUB_ENV
+          echo "AWS_REGION=ru-central1" >> $GITHUB_ENV
+
+      - name: Get Docker image tag
+        id: get_tag
+        run: |
+          echo "tag=sha-75ebe1a" >> $GITHUB_OUTPUT
+
+      - name: Terraform Init
+        run: |
+          cd terraform
+          terraform init
+        env:
+          TF_VAR_yc_token: ${{ secrets.YC_TOKEN }}
+          TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
+          TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
+          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
+
+
+      - name: Terraform Plan
+        run: |
+          cd terraform
+          terraform plan -out=tfplan
+        env:
+          TF_VAR_yc_token: ${{ secrets.YC_TOKEN }}
+          TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
+          TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
+          TF_VAR_container_image: 'ghcr.io/${{ github.repository }}:${{ steps.get_tag.outputs.tag }}'
+          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
+
+
+      - name: Terraform Apply
+        run: |
+          cd terraform
+          terraform apply -auto-approve tfplan
+        env:
+          TF_VAR_yc_token: ${{ secrets.YC_TOKEN }}
+          TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
+          TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
+          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}

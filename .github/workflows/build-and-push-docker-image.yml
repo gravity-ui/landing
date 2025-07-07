@@ -1,4 +1,4 @@
-name: Build and push container
+name: Build and Push Docker Image
 
 on:
   push:
@@ -12,6 +12,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      actions: write
 
     steps:
       - name: Checkout repository
@@ -33,7 +34,7 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: |
-            type=raw,value=landing
+            type=raw,value=latest
             type=sha,format=short
 
       - name: Build and push Docker image

@@ -87,4 +87,5 @@ module.exports = withPlugins(plugins, {
     },
     assetPrefix: process.env.ASSET_PREFIX,
     crossOrigin: 'anonymous',
+    output: 'standalone',
 });

@@ -2,7 +2,7 @@ import {NextRequest, NextResponse} from 'next/server';
 
 import nextI18nextConfig from '../next-i18next.config';
 
-export function middleware(request: NextRequest) {
+export const middleware = (request: NextRequest) => {
     const {pathname, locale} = request.nextUrl;
 
     if (
@@ -15,4 +15,4 @@ export function middleware(request: NextRequest) {
     }
 
     return NextResponse.next();
-}
+};
