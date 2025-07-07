@@ -1,15 +1,15 @@
 import {GetServerSideProps} from 'next';
-import {fetchAllContributors, fetchLandingLibs} from 'src/services/lib';
 
+import type {Contributor, Lib} from '../api';
+import {Api} from '../api';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
-import type {Contributor, Lib} from '../services/lib';
 import {getI18nProps} from '../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const [contributors, libs, i18nProps] = await Promise.all([
-        fetchAllContributors(),
-        fetchLandingLibs(),
+        Api.instance.fetchAllContributorsWithCache(),
+        Api.instance.fetchLandingLibs(),
         getI18nProps(ctx, ['home', 'libraries-info']),
     ]);
 

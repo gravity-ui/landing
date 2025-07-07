@@ -1,8 +1,8 @@
 import {Animatable, AnimateBlock, SliderBlock, useTheme} from '@gravity-ui/page-constructor';
 import React from 'react';
 
+import {Lib} from '../../api';
 import {useIsMobile} from '../../hooks/useIsMobile';
-import {Lib} from '../../services/lib';
 import {block, getThemedValue} from '../../utils';
 import {CustomBlock} from '../constants';
 

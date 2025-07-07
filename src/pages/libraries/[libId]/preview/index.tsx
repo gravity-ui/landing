@@ -2,8 +2,8 @@ import {PageConstructorProvider, Theme} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 import React from 'react';
-import {type Lib, fetchLibById} from 'src/services/lib';
 
+import {Api, type Lib} from '../../../../api';
 import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
 import {getI18nProps, isValidLibId} from '../../../../utils';
 
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
 
     const [lib, i18nProps] = await Promise.all([
-        fetchLibById(libId),
+        Api.instance.fetchLibByIdWithCache(libId),
         getI18nProps(ctx, ['library', 'libraries-info']),
     ]);
 

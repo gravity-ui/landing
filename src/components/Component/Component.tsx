@@ -5,10 +5,10 @@ import React from 'react';
 import {useLocale} from 'src/hooks/useLocale';
 
 import i18nextConfig from '../../../next-i18next.config';
+import {Contributor} from '../../api';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {Component as ComponentType} from '../../content/components/types';
-import {Contributor} from '../../services/lib';
 import {block, getRouteFromReadmeUrl} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';

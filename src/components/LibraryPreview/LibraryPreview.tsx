@@ -2,10 +2,10 @@ import {HTML} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {Lib} from '../../api';
 import calendarIcon from '../../assets/icons/preview-calendar.svg';
 import starIcon from '../../assets/icons/preview-star.svg';
 import versionIcon from '../../assets/icons/preview-version.svg';
-import {Lib} from '../../services/lib';
 import {block} from '../../utils';
 
 import './LibraryPreview.scss';

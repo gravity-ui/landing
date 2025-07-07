@@ -1,6 +1,7 @@
 import {BlockType} from '@gravity-ui/page-constructor';
 import {TFunction} from 'next-i18next';
 
+import {Contributor, Lib} from '../api';
 import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
@@ -13,7 +14,6 @@ import rocketIcon from '../assets/icons/rocket.svg';
 import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
-import {Contributor, Lib} from '../services/lib';
 
 import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';

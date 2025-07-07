@@ -3,10 +3,10 @@ import {Icon, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
+import type {Lib} from '../../api';
 import calendarIcon from '../../assets/icons/calendar.svg';
 import starIcon from '../../assets/icons/star.svg';
 import versionIcon from '../../assets/icons/version.svg';
-import type {Lib} from '../../services/lib';
 import {block} from '../../utils';
 import {Link} from '../Link';
 import {TagItem, Tags} from '../Tags/Tags';

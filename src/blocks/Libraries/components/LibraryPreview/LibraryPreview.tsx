@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
+import type {Lib} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';
 import chartkitAssetMobile from '../../../../assets/libs/img-lib-chartkit-mobile.jpg';
 import chartkitAsset from '../../../../assets/libs/img-lib-chartkit.jpg';
@@ -20,7 +21,6 @@ import uikitAsset from '../../../../assets/libs/img-lib-uikit.jpg';
 import wysiwygAssetMobile from '../../../../assets/libs/img-lib-wysiwyg-mobile.jpg';
 import wysiwygAsset from '../../../../assets/libs/img-lib-wysiwyg.jpg';
 import {useIsMobile} from '../../../../hooks/useIsMobile';
-import type {Lib} from '../../../../services/lib';
 import {block} from '../../../../utils';
 
 import './LibraryPreview.scss';

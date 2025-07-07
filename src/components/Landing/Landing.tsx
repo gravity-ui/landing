@@ -6,6 +6,7 @@ import Examples from 'src/blocks/Examples/Examples';
 import {UISamplesBlock} from 'src/blocks/UISamples/UISamples';
 import {CustomPageContent} from 'src/content/types';
 
+import type {Contributor, Lib} from '../../api';
 import {ContributorsBlock} from '../../blocks/Contributors/Contributors';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
@@ -17,7 +18,6 @@ import {CustomBlock} from '../../blocks/constants';
 import {getLanding} from '../../content/landing';
 import {getRtlLanding} from '../../content/landing-rtl';
 import {useSectionScroll} from '../../hooks/useSectionScroll';
-import type {Contributor, Lib} from '../../services/lib';
 
 const filterBlocks = ({blocks, ...rest}: CustomPageContent): CustomPageContent => {
     const hasCustomHeaderWithBanner = Boolean(

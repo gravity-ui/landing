@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import mm from 'micromatch';
 
+import type {Contributor, Lib} from '../api';
 import packagesVersions from '../data/packages-versions.json';
 import {libs} from '../libs';
-import type {Contributor, Lib} from '../services/lib';
 
 type LibConfig = {
     id: string;

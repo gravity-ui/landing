@@ -1,0 +1,470 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+
+import {Octokit} from '@octokit/rest';
+import _ from 'lodash';
+
+import {type LibConfig, libs as libsConfigs} from '../libs';
+
+export type Contributor = {
+    login: string;
+    url: string;
+    avatarUrl: string;
+    contributions: number;
+};
+
+export type CodeOwners = {
+    pattern: string;
+    owners: string[];
+};
+
+export type LibData = {
+    stars: number;
+    version: string;
+    lastUpdate: string;
+    license: string;
+    issues: number;
+    readme: {
+        en: string;
+        ru: string;
+        es: string;
+        zh: string;
+    };
+    changelog: string;
+    contributors: Contributor[];
+    codeOwners: CodeOwners[];
+};
+
+export type Lib = {
+    config: LibConfig;
+    data: LibData;
+};
+
+export type NpmInfo = {
+    'dist-tags'?: {
+        latest?: string;
+    };
+    time?: {
+        [version: string]: string;
+    };
+};
+
+export type GithubInfo = {
+    stargazers_count?: number;
+    license?: {
+        name?: string;
+    };
+    open_issues_count?: number;
+    contributors: Contributor[];
+    codeOwners: CodeOwners[];
+};
+
+export class Api {
+    private static _instance: Api;
+
+    private octokit: Octokit;
+    private contributorsCache: {data: Contributor[]; timestamp: number} | null = null;
+    private libsByIdCache: Record<string, {timestamp: number; lib: Lib}> = {};
+
+    private readonly CONTRIBUTORS_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+    private readonly LIBS_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+    private readonly CONTRIBUTOR_IGNORE_LIST = [
+        'dependabot',
+        'dependabot[bot]',
+        'gravity-ui-bot',
+        'yc-ui-bot',
+    ];
+
+    static get instance(): Api {
+        if (!Api._instance) {
+            Api._instance = new Api();
+        }
+
+        return Api._instance;
+    }
+
+    constructor() {
+        this.octokit = new Octokit({
+            auth: process.env.GITHUB_TOKEN,
+        });
+    }
+
+    async getRepositoryContributors(repoOwner: string, repo: string): Promise<Contributor[]> {
+        const items = await this.octokit.paginate(this.octokit.rest.repos.listContributors, {
+            owner: repoOwner,
+            repo,
+        });
+
+        const contributors = items
+            .filter(({login}) => login && !this.CONTRIBUTOR_IGNORE_LIST.includes(login))
+            .map(({login, avatar_url: avatarUrl, html_url: url, contributions}) => ({
+                login: login!,
+                avatarUrl: avatarUrl!,
+                url: url!,
+                contributions,
+            }));
+
+        return contributors;
+    }
+
+    async fetchRepositoryCodeOwners(repoOwner: string, repo: string): Promise<CodeOwners[]> {
+        const url = `https://raw.githubusercontent.com/${repoOwner}/${repo}/main/CODEOWNERS`;
+        const res = await fetch(url);
+
+        if (!res.ok) {
+            return [];
+        }
+
+        const codeOwnersText = await res.text();
+        const lines = codeOwnersText.split('\n');
+        const codeOwners: CodeOwners[] = [];
+
+        for (const line of lines) {
+            const trimmed = line.trim();
+
+            if (!trimmed) {
+                continue;
+            }
+
+            if (trimmed[0] === '#') {
+                continue;
+            }
+
+            const [pattern, ...owners] = trimmed.split(' ').filter(Boolean);
+            const normalizedOwners = owners
+                .filter((owner) => owner.length > 1 && owner[0] === '@')
+                .map((owner) => owner.slice(1));
+
+            if (normalizedOwners.length) {
+                codeOwners.push({
+                    pattern,
+                    owners: normalizedOwners,
+                });
+            }
+        }
+
+        return codeOwners;
+    }
+
+    async getOrganizationRepositories(org: string) {
+        return await this.octokit.paginate(this.octokit.rest.repos.listForOrg, {
+            org,
+            headers: {
+                'X-GitHub-Api-Version': '2022-11-28',
+            },
+        });
+    }
+
+    async fetchAllContributors(): Promise<Contributor[]> {
+        if (!process.env.GITHUB_TOKEN) {
+            console.warn(
+                'Cannot fetch contributors. You need to put your GitHub PAT in the "GITHUB_TOKEN" environment variable to get the actual list of contributors.',
+            );
+            return [];
+        }
+
+        try {
+            const repos = await this.getOrganizationRepositories('gravity-ui');
+
+            const rawContributors = await Promise.all(
+                repos.map(async (repo) =>
+                    this.getRepositoryContributors(repo.owner.login, repo.name),
+                ),
+            );
+
+            const contributors: Record<string, Contributor> = {};
+
+            for (const list of rawContributors) {
+                for (const contributor of list) {
+                    const {login, contributions} = contributor;
+
+                    if (contributors[login]) {
+                        contributors[login].contributions += contributions;
+                    } else {
+                        contributors[login] = contributor;
+                    }
+                }
+            }
+
+            const sortedContributors = Object.values(contributors).sort(
+                (a, b) => b.contributions - a.contributions,
+            );
+
+            return sortedContributors;
+        } catch (error) {
+            console.error('Error fetching contributors:', error);
+            return [];
+        }
+    }
+
+    async fetchAllContributorsWithCache(): Promise<Contributor[]> {
+        const now = Date.now();
+
+        if (this.contributorsCache) {
+            const isCacheOutdated =
+                now - this.contributorsCache.timestamp > this.CONTRIBUTORS_CACHE_TTL;
+
+            if (isCacheOutdated) {
+                this.fetchAllContributors()
+                    .then((contributors) => {
+                        this.contributorsCache = {
+                            data: contributors,
+                            timestamp: Date.now(),
+                        };
+                    })
+                    .catch((error) => {
+                        console.error('Error updating contributors cache:', error);
+                    });
+            }
+
+            return this.contributorsCache.data;
+        }
+
+        const contributors = await this.fetchAllContributors();
+
+        this.contributorsCache = {
+            data: contributors,
+            timestamp: now,
+        };
+
+        return contributors;
+    }
+
+    async fetchNpmInfo(npmId: string): Promise<NpmInfo | null> {
+        try {
+            const npmApiUrl = 'https://registry.npmjs.org/';
+            const response = await fetch(`${npmApiUrl}${npmId}`);
+
+            if (response.ok) {
+                return (await response.json()) as NpmInfo;
+            }
+        } catch (err) {
+            console.error(err);
+        }
+
+        return null;
+    }
+
+    async fetchLibGithubInfo(githubId: string): Promise<GithubInfo | null> {
+        try {
+            const headers: Record<string, string> = {'User-Agent': 'request'};
+            if (process.env.GITHUB_TOKEN) {
+                headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+            }
+
+            const [repoOwner, repo] = githubId.split('/');
+            const [data, contributors, codeOwners] = await Promise.all([
+                (async () => {
+                    const githubApiUrl = 'https://api.github.com/repos/';
+                    const response = await fetch(`${githubApiUrl}${githubId}`, {
+                        headers,
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`failed to fetch github repo info '${githubId}'`);
+                    }
+
+                    return (await response.json()) as Record<string, any>;
+                })(),
+                this.getRepositoryContributors(repoOwner, repo),
+                this.fetchRepositoryCodeOwners(repoOwner, repo),
+            ]);
+
+            const result: GithubInfo = {
+                ...data,
+                contributors,
+                codeOwners,
+            };
+
+            return result;
+        } catch (err) {
+            console.error(err);
+        }
+
+        return null;
+    }
+
+    async fetchChangelogInfo(changelogUrl: string): Promise<string> {
+        if (!changelogUrl) return '';
+
+        const headers: Record<string, string> = {'User-Agent': 'request'};
+        if (process.env.GITHUB_TOKEN) {
+            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+        }
+
+        try {
+            const response = await fetch(changelogUrl, {
+                headers,
+            });
+            if (response.ok) {
+                return await response.text();
+            }
+        } catch (err) {
+            console.error(err);
+        }
+
+        return '';
+    }
+
+    async fetchLibReadmeInfo({
+        readmeUrl,
+        id,
+    }: LibConfig): Promise<{en: string; ru: string; es: string; zh: string}> {
+        const headers: Record<string, string> = {'User-Agent': 'request'};
+        if (process.env.GITHUB_TOKEN) {
+            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+        }
+
+        const fetchReadmeContent = async (url: string) => {
+            try {
+                const response = await fetch(url, {
+                    headers,
+                });
+                if (response.ok) {
+                    return await response.text();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+
+            return '';
+        };
+
+        const getLocalDocsReadPromise = (locale: string) =>
+            fs.promises.readFile(
+                path.join(
+                    path.dirname(fileURLToPath(import.meta.url)),
+                    `../../src/content/local-docs/libs/${id}/README-${locale}.md`,
+                ),
+                'utf8',
+            );
+
+        const [en, ru, es, zh] = await Promise.all([
+            fetchReadmeContent(readmeUrl.en),
+            fetchReadmeContent(readmeUrl.ru),
+            getLocalDocsReadPromise('es'),
+            getLocalDocsReadPromise('zh'),
+        ]);
+
+        return {
+            en,
+            ru,
+            es,
+            zh,
+        };
+    }
+
+    async fetchLibData(libConfig: LibConfig): Promise<LibData> {
+        const [npmInfo, githubInfo, readmeInfo, changelogInfo] = await Promise.all([
+            libConfig.npmId ? this.fetchNpmInfo(libConfig.npmId) : null,
+            libConfig.githubId ? this.fetchLibGithubInfo(libConfig.githubId) : null,
+            this.fetchLibReadmeInfo(libConfig),
+            libConfig.changelogUrl ? this.fetchChangelogInfo(libConfig.changelogUrl) : '',
+        ]);
+
+        const latestVersion = npmInfo?.['dist-tags']?.latest || '';
+        let latestReleaseDate = '';
+
+        if (latestVersion && npmInfo?.time?.[latestVersion]) {
+            try {
+                const date = new Date(npmInfo.time[latestVersion]);
+                const day = date.getUTCDate();
+                const month = date.getUTCMonth() + 1;
+                latestReleaseDate = `${day < 10 ? `0${day}` : day}.${
+                    month < 10 ? `0${month}` : month
+                }.${date.getUTCFullYear()}`;
+            } catch (error) {
+                console.error('Error parsing date:', error);
+            }
+        }
+
+        return {
+            stars: githubInfo?.stargazers_count ?? 0,
+            version: latestVersion,
+            lastUpdate: latestReleaseDate,
+            license: githubInfo?.license?.name ?? '',
+            issues: githubInfo?.open_issues_count ?? 0,
+            readme: readmeInfo,
+            changelog: changelogInfo,
+            contributors: githubInfo?.contributors ?? [],
+            codeOwners: githubInfo?.codeOwners ?? [],
+        };
+    }
+
+    async fetchLibById(id: string): Promise<Lib> {
+        const config = libsConfigs.find((lib) => lib.id === id);
+
+        if (!config) {
+            throw new Error(`Can't find config for lib with id – ${id}`);
+        }
+
+        const data = await this.fetchLibData(config);
+
+        const lib = {
+            config,
+            data,
+        };
+
+        return lib;
+    }
+
+    async fetchLibByIdWithCache(id: string): Promise<Lib> {
+        const now = Date.now();
+
+        if (this.libsByIdCache[id]) {
+            const isCacheOutdated = now - this.libsByIdCache[id].timestamp > this.LIBS_CACHE_TTL;
+
+            if (isCacheOutdated) {
+                this.fetchLibById(id)
+                    .then((lib) => {
+                        this.libsByIdCache[id] = {
+                            timestamp: Date.now(),
+                            lib,
+                        };
+                    })
+                    .catch((error) => {
+                        console.error(`Error updating lib cache for ${id}:`, error);
+                    });
+            }
+
+            return this.libsByIdCache[id].lib;
+        }
+
+        const lib = await this.fetchLibById(id);
+        this.libsByIdCache[id] = {
+            timestamp: now,
+            lib,
+        };
+
+        return lib;
+    }
+
+    async fetchAllLibs(): Promise<Lib[]> {
+        const libs = await Promise.all(libsConfigs.map(({id}) => this.fetchLibByIdWithCache(id)));
+
+        return libs;
+    }
+
+    async fetchLandingLibs(): Promise<Lib[]> {
+        const libs = await Promise.all(
+            libsConfigs
+                .filter(({landing}) => landing)
+                .map(({id}) => this.fetchLibByIdWithCache(id)),
+        );
+
+        return libs.sort((lib1, lib2) => {
+            const order = [
+                'uikit',
+                'navigation',
+                'date-components',
+                'markdown-editor',
+                'page-constructor',
+                'chartkit',
+                'dashkit',
+            ];
+
+            return order.indexOf(lib1.config.id) - order.indexOf(lib2.config.id);
+        });
+    }
+}

@@ -3,15 +3,15 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import nextI18nextConfig from '../../next-i18next.config';
+import {Api, Contributor, Lib} from '../api';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
-import {Contributor, Lib, fetchAllContributors, fetchLandingLibs} from '../services/lib';
 import {getI18nProps} from '../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const [contributors, libs, i18nProps] = await Promise.all([
-        fetchAllContributors(),
-        fetchLandingLibs(),
+        Api.instance.fetchAllContributorsWithCache(),
+        Api.instance.fetchLandingLibs(),
         getI18nProps(ctx, ['home', 'libraries-info']),
     ]);
 

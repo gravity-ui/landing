@@ -4,9 +4,9 @@ import {useTranslation} from 'next-i18next';
 import {i18n} from 'next-i18next.config';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
-import {type Lib, fetchLibById} from 'src/services/lib';
 
 import i18nextConfig from '../../../../next-i18next.config';
+import {Api, type Lib} from '../../../api';
 import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const libId = ctx.params?.libId as string;
 
-    const libPromise = fetchLibById(libId);
+    const libPromise = Api.instance.fetchLibByIdWithCache(libId);
     const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info']);
 
     try {
