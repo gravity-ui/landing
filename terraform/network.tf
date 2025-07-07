@@ -50,10 +50,24 @@ resource "yandex_vpc_security_group" "landing_sg" {
   }
 
   ingress {
-    protocol       = "TCP"
-    description    = "Allow health checks from load balancer"
-    port           = 3000
-    v4_cidr_blocks = ["198.18.235.0/24", "198.18.248.0/24"]
+    predefined_target = "self_security_group"
+    protocol          = "ANY"
+  }
+  
+  ingress {
+    port              = 3000
+    predefined_target = "loadbalancer_healthchecks"
+    protocol          = "TCP"
+  }
+  
+  ingress {
+    port     = 3000
+    protocol = "TCP"
+    v4_cidr_blocks = [
+      "10.1.0.0/24",
+      "10.2.0.0/24",
+      "10.3.0.0/24",
+    ]
   }
 
   egress {
