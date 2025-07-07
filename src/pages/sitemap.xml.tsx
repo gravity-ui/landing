@@ -76,7 +76,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const fields = paths.map((path) => {
         return {
             loc: `${BASE_URL}${path}`,
-            // lastmod: new Date().toISOString(),
             changefreq: 'daily' as const,
             priority: 0.7,
             alternateRefs: [
