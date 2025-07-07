@@ -1,6 +1,9 @@
 name: Deploy to Yandex Cloud
 
 on:
+  push:
+    branches:
+      - enable-ssr
   workflow_dispatch:
 
 jobs:
