@@ -68,9 +68,19 @@ resource "yandex_compute_instance_group" "landing_ig" {
       })
       ssh-keys  = "ubuntu:${var.ssh_public_key}"
       user-data = <<-EOT
-        #cloud-config
         runcmd:
           - docker pull ${var.container_image}
+          - curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+          - echo 'export PATH=$PATH:/root/yandex-cloud/bin' >> /etc/profile.d/yc.sh
+          - chmod +x /etc/profile.d/yc.sh
+          - mkdir -p /root/.config/yandex-cloud
+          - echo '
+            current: default
+            profiles:
+              default:
+                folder-id: ${var.yc_folder_id}
+                cloud-id: ${var.yc_cloud_id}
+            ' > /root/.config/yandex-cloud/config.yaml
       EOT
     }
   }
