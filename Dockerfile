@@ -42,6 +42,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static/media ./.next/static/media
 COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/src/content/local-docs ./src/content/local-docs
 COPY --from=builder /app/public ./public
