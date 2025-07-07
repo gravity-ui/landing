@@ -1,4 +1,5 @@
-import {Graph, GraphBlock} from '@gravity-ui/graph';
+import {Graph} from '@gravity-ui/graph';
+import {GraphBlock} from '@gravity-ui/graph/react';
 import {CircleInfo} from '@gravity-ui/icons';
 import {Flex, Icon, Text} from '@gravity-ui/uikit';
 import React from 'react';

@@ -1,6 +1,7 @@
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
+import {memo} from 'react';
 
 import {block} from '../../utils';
 
@@ -9,7 +10,7 @@ import {GraphPlayground} from './Playground/GraphPlayground';
 
 const b = block('graph');
 
-export const GraphPlayround = () => {
+export const GraphPlayround = memo(() => {
     const {t} = useTranslation('graph');
 
     return (
@@ -30,8 +31,8 @@ export const GraphPlayround = () => {
                 </Col>
             </Row>
             <Row className={b('playground')}>
-                <GraphPlayground className={b('graph-viewer')} />
+                <GraphPlayground className={b('graph-viewer')} key={Date.now()} />
             </Row>
         </Grid>
     );
-};
+});
