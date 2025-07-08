@@ -75,8 +75,8 @@ resource "yandex_compute_instance_group" "landing_ig" {
     }
     interval            = 3
     timeout             = 2
-    healthy_threshold   = 2
-    unhealthy_threshold = 3
+    healthy_threshold   = 4
+    unhealthy_threshold = 2
   }
 
   load_balancer {
