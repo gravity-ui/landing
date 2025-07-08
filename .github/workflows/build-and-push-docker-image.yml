@@ -51,27 +51,18 @@ jobs:
           secrets: |
             s3_access_key_id=${{ secrets.STATIC_S3_KEY_ID }}
             s3_secret_access_key=${{ secrets.STATIC_S3_SECRET_KEY }}
-            
-      - name: Get image tag
-        id: get_image_tag
-        run: |
-          echo "All tags: ${{ steps.meta.outputs.tags }}"
-          
-          SHA_TAG=$(echo "${{ steps.meta.outputs.tags }}" | grep -o "sha-[a-f0-9]*" | head -n 1)
-          echo "tag=$SHA_TAG" >> $GITHUB_OUTPUT
-          echo "Image tag: $SHA_TAG"
-          
+
       - name: Trigger deploy workflow
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.WORKFLOW_PAT }}
-          script: |            
+          script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'deploy-to-yandex-cloud.yml',
               ref: context.ref,
               inputs: {
-                image_tag: '${{ steps.get_image_tag.outputs.tag }}'
+                image_tag: 'latest'
               }
             });
