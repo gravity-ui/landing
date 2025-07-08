@@ -39,6 +39,13 @@ jobs:
             type=raw,value=latest
             type=sha,format=short
 
+      - name: Get SHA tag
+        id: get_sha_tag
+        run: |
+          SHA_TAG=$(echo '${{ steps.meta.outputs.tags }}' | grep -o 'ghcr.io/.*/.*:sha-.*' | cut -d':' -f2)
+          echo "sha_tag=$SHA_TAG" >> $GITHUB_OUTPUT
+          echo "Using SHA tag: $SHA_TAG"
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -63,6 +70,6 @@ jobs:
               workflow_id: 'deploy-to-yandex-cloud.yml',
               ref: context.ref,
               inputs: {
-                image_tag: 'latest'
+                image_tag: '${{ steps.get_sha_tag.outputs.sha_tag }}'
               }
             });
