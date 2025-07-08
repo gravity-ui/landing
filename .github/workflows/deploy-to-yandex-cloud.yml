@@ -1,9 +1,9 @@
 name: Deploy to Yandex Cloud
 
 on:
-  # push:
-  #   branches:
-  #     - enable-ssr
+  push:
+    branches:
+      - enable-ssr
   workflow_dispatch:
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
       - name: Get Docker image tag
         id: get_tag
         run: |
-          echo "tag=sha-8954c3c" >> $GITHUB_OUTPUT
+          echo "tag=sha-2284cc2" >> $GITHUB_OUTPUT
 
       - name: Terraform Init
         run: |
@@ -39,7 +39,6 @@ jobs:
           TF_VAR_yc_token: ${{ secrets.YC_TOKEN }}
           TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
           TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
 
 
@@ -52,7 +51,6 @@ jobs:
           TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
           TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
           TF_VAR_container_image: 'ghcr.io/${{ github.repository }}:${{ steps.get_tag.outputs.tag }}'
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
 
 
@@ -64,5 +62,4 @@ jobs:
           TF_VAR_yc_token: ${{ secrets.YC_TOKEN }}
           TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
           TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
