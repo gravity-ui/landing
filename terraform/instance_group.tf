@@ -8,7 +8,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
   service_account_id = yandex_iam_service_account.ig_sa.id
 
   instance_template {
-    platform_id = "standard-v3"
+    platform_id        = "standard-v3"
     service_account_id = yandex_iam_service_account.instance_sa.id
 
     resources {
@@ -46,20 +46,6 @@ resource "yandex_compute_instance_group" "landing_ig" {
               containerPort = 3000
               hostPort      = 3000
             }]
-            env = [
-              {
-                name  = "NODE_ENV"
-                value = "production"
-              },
-              {
-                name  = "PORT"
-                value = "3000"
-              },
-              {
-                name  = "HOSTNAME"
-                value = "0.0.0.0"
-              }
-            ]
           }]
         }
       })
