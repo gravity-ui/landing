@@ -1,9 +1,7 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    branches:
-      - enable-ssr
+  workflow_dispatch:
 
 jobs:
   build-and-push:

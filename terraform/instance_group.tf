@@ -9,6 +9,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
 
   instance_template {
     platform_id = "standard-v3"
+    service_account_id = yandex_iam_service_account.instance_sa.id
 
     resources {
       cores         = var.vm_resources.cores
@@ -114,4 +115,15 @@ resource "yandex_resourcemanager_folder_iam_member" "ig_sa_roles" {
   folder_id = var.yc_folder_id
   role      = "editor"
   member    = "serviceAccount:${yandex_iam_service_account.ig_sa.id}"
+}
+
+resource "yandex_iam_service_account" "instance_sa" {
+  name        = "landing-instance-sa"
+  description = "Service account for vm instance"
+}
+
+resource "yandex_resourcemanager_folder_iam_member" "instance_sa_role" {
+  folder_id = var.yc_folder_id
+  role      = "lockbox.payloadViewer"
+  member    = "serviceAccount:${yandex_iam_service_account.instance_sa.id}"
 }
