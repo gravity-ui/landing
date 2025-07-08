@@ -47,9 +47,13 @@ COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/src/content/local-docs ./src/content/local-docs
 COPY --from=builder /app/public ./public
 
+RUN apk add --no-cache curl bash
+
 RUN addgroup -g 1001 app && \
     adduser -u 1001 -G app -S appuser && \
-    chown -R appuser:app /app
+    chown -R appuser:app /app && \
+    chmod +x /app/scripts/start.sh
+
 USER appuser
 
 EXPOSE 3000
@@ -57,4 +61,4 @@ EXPOSE 3000
 ENV PORT=3000
 
 ENV HOSTNAME="0.0.0.0"
-CMD ["node", "server.js"]
+CMD ["/app/scripts/start.sh"]
