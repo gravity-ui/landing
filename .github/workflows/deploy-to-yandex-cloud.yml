@@ -1,10 +1,12 @@
 name: Deploy to Yandex Cloud
 
 on:
-  push:
-    branches:
-      - enable-ssr
   workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Docker image tag to deploy'
+        required: true
+        type: string
 
 jobs:
   deploy:
@@ -29,7 +31,7 @@ jobs:
       - name: Get Docker image tag
         id: get_tag
         run: |
-          echo "tag=sha-95bb85d" >> $GITHUB_OUTPUT
+          echo "tag=${{ github.event.inputs.image_tag }}" >> $GITHUB_OUTPUT
 
       - name: Terraform Init
         run: |
@@ -41,7 +43,6 @@ jobs:
           TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
           TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
 
-
       - name: Terraform Plan
         run: |
           cd terraform
@@ -52,7 +53,6 @@ jobs:
           TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
           TF_VAR_container_image: 'ghcr.io/${{ github.repository }}:${{ steps.get_tag.outputs.tag }}'
           TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
-
 
       - name: Terraform Apply
         run: |
