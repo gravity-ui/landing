@@ -1,7 +1,6 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
-import {i18n} from 'next-i18next.config';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
@@ -30,52 +29,25 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         );
     }
 
-    let readmeContent = '';
-
     const locale = ctx.locale ?? i18nextConfig.i18n.defaultLocale;
 
     const libId = ctx.params?.libId as string;
+    const componentId = ctx.params?.componentId as string;
 
     const libPromise = Api.instance.fetchLibByIdWithCache(libId);
     const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info']);
+    const readmePromise = Api.instance.fetchComponentReadmeWithCache(
+        component.content.readmeUrl,
+        libId,
+        componentId,
+        locale,
+    );
 
-    try {
-        const headers: Record<string, string> = {'User-Agent': 'request'};
-        if (process.env.GITHUB_TOKEN) {
-            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-        }
-
-        if (locale !== 'en' && locale !== 'ru') {
-            try {
-                readmeContent = await import(
-                    `../../../content/local-docs/components/${ctx.params?.libId}/${component.id}/README-${locale}.md`
-                ).then((module) => module.default);
-            } catch (err) {
-                console.warn(
-                    `Can't find local docs for "${component.id}", library "${ctx.params?.libId}", lang "${locale}"`,
-                );
-            }
-        } else {
-            // TODO: Preload content
-            const res = await fetch(component.content.readmeUrl[locale]);
-            if (res.status >= 200 && res.status < 300) {
-                readmeContent = await res.text();
-            }
-        }
-
-        if (!readmeContent && locale !== i18n.defaultLocale) {
-            const fallbackRes = await fetch(
-                component.content.readmeUrl[i18n.defaultLocale as 'en'],
-            );
-            if (fallbackRes.status >= 200 && fallbackRes.status < 300) {
-                readmeContent = await fallbackRes.text();
-            }
-        }
-    } catch (err) {
-        console.warn(err);
-    }
-
-    const [lib, i18nProps] = await Promise.all([libPromise, i18nPropsPromise]);
+    const [lib, i18nProps, readmeContent] = await Promise.all([
+        libPromise,
+        i18nPropsPromise,
+        readmePromise,
+    ]);
 
     return {
         props: {

@@ -4,6 +4,7 @@ import {fileURLToPath} from 'url';
 
 import {Octokit} from '@octokit/rest';
 import _ from 'lodash';
+import {i18n} from 'next-i18next.config';
 
 import {type LibConfig, libs as libsConfigs} from '../libs';
 
@@ -64,11 +65,16 @@ export class Api {
     private static _instance: Api;
 
     private octokit: Octokit;
-    private contributorsCache: {data: Contributor[]; timestamp: number} | null = null;
-    private libsByIdCache: Record<string, {timestamp: number; lib: Lib}> = {};
 
     private readonly CONTRIBUTORS_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
+    private contributorsCache: {data: Contributor[]; timestamp: number} | null = null;
+
     private readonly LIBS_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+    private libsByIdCache: Record<string, {timestamp: number; lib: Lib}> = {};
+
+    private readonly COMPONENT_README_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+    private componentReadmeCache: Record<string, {content: string; timestamp: number}> = {};
+
     private readonly CONTRIBUTOR_IGNORE_LIST = [
         'dependabot',
         'dependabot[bot]',
@@ -466,5 +472,88 @@ export class Api {
 
             return order.indexOf(lib1.config.id) - order.indexOf(lib2.config.id);
         });
+    }
+
+    async fetchComponentReadme(
+        readmeUrl: Record<string, string>,
+        libId: string,
+        componentId: string,
+        locale: string,
+    ): Promise<string> {
+        let readmeContent = '';
+
+        const headers: Record<string, string> = {'User-Agent': 'request'};
+        if (process.env.GITHUB_TOKEN) {
+            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+        }
+
+        try {
+            if (locale !== 'en' && locale !== 'ru') {
+                try {
+                    readmeContent = await import(
+                        `../content/local-docs/components/${libId}/${componentId}/README-${locale}.md`
+                    ).then((module) => module.default);
+                } catch (err) {
+                    console.warn(
+                        `Can't find local docs for "${componentId}", library "${libId}", lang "${locale}"`,
+                    );
+                }
+            } else {
+                const res = await fetch(readmeUrl[locale], {headers});
+                if (res.status >= 200 && res.status < 300) {
+                    readmeContent = await res.text();
+                }
+            }
+
+            if (!readmeContent && locale !== i18n.defaultLocale) {
+                const fallbackRes = await fetch(readmeUrl[i18n.defaultLocale], {headers});
+                if (fallbackRes.status >= 200 && fallbackRes.status < 300) {
+                    readmeContent = await fallbackRes.text();
+                }
+            }
+        } catch (err) {
+            console.warn('Error fetching component README:', err);
+        }
+
+        return readmeContent;
+    }
+
+    async fetchComponentReadmeWithCache(
+        readmeUrl: Record<string, string>,
+        libId: string,
+        componentId: string,
+        locale: string,
+    ): Promise<string> {
+        const cacheKey = `${libId}:${componentId}:${locale}`;
+        const now = Date.now();
+
+        if (this.componentReadmeCache[cacheKey]) {
+            const isCacheOutdated =
+                now - this.componentReadmeCache[cacheKey].timestamp >
+                this.COMPONENT_README_CACHE_TTL;
+
+            if (isCacheOutdated) {
+                this.fetchComponentReadme(readmeUrl, libId, componentId, locale)
+                    .then((content) => {
+                        this.componentReadmeCache[cacheKey] = {
+                            content,
+                            timestamp: Date.now(),
+                        };
+                    })
+                    .catch((error) => {
+                        console.error(`Error updating README cache for ${cacheKey}:`, error);
+                    });
+            }
+
+            return this.componentReadmeCache[cacheKey].content;
+        }
+
+        const content = await this.fetchComponentReadme(readmeUrl, libId, componentId, locale);
+        this.componentReadmeCache[cacheKey] = {
+            content,
+            timestamp: now,
+        };
+
+        return content;
     }
 }
