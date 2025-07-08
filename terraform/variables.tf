@@ -34,13 +34,6 @@ variable "vm_resources" {
   }
 }
 
-variable "github_token" {
-  description = "GitHub token for container authentication"
-  type        = string
-  sensitive   = true
-  default     = ""
-}
-
 variable "ssh_public_key" {
   description = "Public SSH key for VM access"
   type        = string

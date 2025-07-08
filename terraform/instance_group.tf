@@ -58,10 +58,6 @@ resource "yandex_compute_instance_group" "landing_ig" {
               {
                 name  = "HOSTNAME"
                 value = "0.0.0.0"
-              },
-              {
-                name  = "GITHUB_TOKEN"
-                value = var.github_token
               }
             ]
           }]
