@@ -16,6 +16,7 @@ COPY . .
 
 ENV ASSET_PREFIX=https://storage.yandexcloud.net/landing-static
 ENV NODE_ENV=production
+ENV IS_CONTAINER_BUILD=true
 
 RUN npm run build
 

@@ -32,7 +32,7 @@ resource "yandex_alb_backend_group" "landing_bg" {
       healthy_threshold   = 2
       unhealthy_threshold = 3
       http_healthcheck {
-        path = "/api/health"
+        path = "/health"
       }
       healthcheck_port = 3000
     }

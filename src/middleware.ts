@@ -7,7 +7,7 @@ export const middleware = async (request: NextRequest) => {
 
     if (
         locale !== nextI18nextConfig.i18n.defaultLocale &&
-        (pathname === '/rtl' || pathname.startsWith('__stand'))
+        (pathname === '/rtl' || pathname.startsWith('__stand') || pathname === '/health')
     ) {
         const url = request.nextUrl.clone();
         url.locale = nextI18nextConfig.i18n.defaultLocale;

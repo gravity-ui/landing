@@ -71,7 +71,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
   health_check {
     http_options {
       port = 3000
-      path = "/api/health"
+      path = "/health"
     }
     interval            = 3
     timeout             = 2
