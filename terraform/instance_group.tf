@@ -64,8 +64,11 @@ resource "yandex_compute_instance_group" "landing_ig" {
   }
 
   deploy_policy {
-    max_unavailable = 1
+    max_unavailable = 0
     max_expansion   = 3
+    max_deleting    = 1
+    max_creating    = 3
+    strategy        = "proactive"
   }
 
   health_check {
@@ -73,10 +76,10 @@ resource "yandex_compute_instance_group" "landing_ig" {
       port = 3000
       path = "/health"
     }
-    interval            = 3
-    timeout             = 2
-    healthy_threshold   = 4
-    unhealthy_threshold = 2
+    interval            = 5
+    timeout             = 4
+    healthy_threshold   = 2
+    unhealthy_threshold = 3
   }
 
   load_balancer {
