@@ -50,10 +50,6 @@ resource "yandex_compute_instance_group" "landing_ig" {
         }
       })
       ssh-keys  = "ubuntu:${var.ssh_public_key}"
-      user-data = <<-EOT
-        runcmd:
-          - docker pull ${var.container_image}
-      EOT
     }
   }
 
