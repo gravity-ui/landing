@@ -1,9 +1,9 @@
 name: Deploy to Yandex Cloud
 
 on:
-  # push:
-  #   branches:
-  #     - enable-ssr
+  push:
+    branches:
+      - enable-ssr
   workflow_dispatch:
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
       - name: Get Docker image tag
         id: get_tag
         run: |
-          echo "tag=sha-131bc96" >> $GITHUB_OUTPUT
+          echo "tag=sha-8954c3c" >> $GITHUB_OUTPUT
 
       - name: Terraform Init
         run: |
