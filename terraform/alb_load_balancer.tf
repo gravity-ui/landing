@@ -10,8 +10,8 @@ resource "yandex_alb_backend_group" "landing_bg" {
       panic_threshold = 50
     }
     healthcheck {
-      timeout             = "2s"
       interval            = "3s"
+      timeout             = "2s"
       healthy_threshold   = 2
       unhealthy_threshold = 3
       http_healthcheck {
