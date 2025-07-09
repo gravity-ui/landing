@@ -64,7 +64,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
   }
 
   deploy_policy {
-    max_unavailable = 1
+    max_unavailable = 0
     max_expansion   = 3
   }
 
@@ -79,7 +79,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
     unhealthy_threshold = 2
   }
 
-  load_balancer {
+  application_load_balancer {
     target_group_name = "landing-target-group"
   }
 }

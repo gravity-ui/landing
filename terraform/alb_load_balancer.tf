@@ -1,20 +1,3 @@
-data "yandex_compute_instance_group" "landing_ig_data" {
-  instance_group_id = yandex_compute_instance_group.landing_ig.id
-  depends_on        = [yandex_compute_instance_group.landing_ig]
-}
-
-resource "yandex_alb_target_group" "landing_tg" {
-  name = "landing-target-group"
-
-  dynamic "target" {
-    for_each = data.yandex_compute_instance_group.landing_ig_data.instances
-    content {
-      subnet_id  = target.value.network_interface[0].subnet_id
-      ip_address = target.value.network_interface[0].ip_address
-    }
-  }
-}
-
 resource "yandex_alb_backend_group" "landing_bg" {
   name = "landing-backend-group"
 
@@ -22,7 +5,7 @@ resource "yandex_alb_backend_group" "landing_bg" {
     name             = "landing-http-backend"
     weight           = 1
     port             = 3000
-    target_group_ids = [yandex_alb_target_group.landing_tg.id]
+    target_group_ids = [yandex_compute_instance_group.application_load_balancer.target_group_id]
     load_balancing_config {
       panic_threshold = 50
     }
