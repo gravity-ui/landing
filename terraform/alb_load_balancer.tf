@@ -5,7 +5,7 @@ resource "yandex_alb_backend_group" "landing_bg" {
     name             = "landing-http-backend"
     weight           = 1
     port             = 3000
-    target_group_ids = [yandex_compute_instance_group.application_load_balancer.target_group_id]
+    target_group_ids = [yandex_compute_instance_group.landing_ig.application_load_balancer[0].target_group_id]
     load_balancing_config {
       panic_threshold = 50
     }
