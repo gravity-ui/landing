@@ -474,12 +474,17 @@ export class Api {
         });
     }
 
-    async fetchComponentReadme(
-        readmeUrl: Record<string, string>,
-        libId: string,
-        componentId: string,
-        locale: string,
-    ): Promise<string> {
+    async fetchComponentReadme({
+        readmeUrl,
+        libId,
+        componentId,
+        locale,
+    }: {
+        readmeUrl: Record<string, string>;
+        libId: string;
+        componentId: string;
+        locale: string;
+    }): Promise<string> {
         let readmeContent = '';
 
         const headers: Record<string, string> = {'User-Agent': 'request'};
@@ -518,12 +523,17 @@ export class Api {
         return readmeContent;
     }
 
-    async fetchComponentReadmeWithCache(
-        readmeUrl: Record<string, string>,
-        libId: string,
-        componentId: string,
-        locale: string,
-    ): Promise<string> {
+    async fetchComponentReadmeWithCache({
+        readmeUrl,
+        libId,
+        componentId,
+        locale,
+    }: {
+        readmeUrl: Record<string, string>;
+        libId: string;
+        componentId: string;
+        locale: string;
+    }): Promise<string> {
         const cacheKey = `${libId}:${componentId}:${locale}`;
         const now = Date.now();
 
@@ -533,7 +543,7 @@ export class Api {
                 this.COMPONENT_README_CACHE_TTL;
 
             if (isCacheOutdated) {
-                this.fetchComponentReadme(readmeUrl, libId, componentId, locale)
+                this.fetchComponentReadme({readmeUrl, libId, componentId, locale})
                     .then((content) => {
                         this.componentReadmeCache[cacheKey] = {
                             content,
@@ -548,7 +558,7 @@ export class Api {
             return this.componentReadmeCache[cacheKey].content;
         }
 
-        const content = await this.fetchComponentReadme(readmeUrl, libId, componentId, locale);
+        const content = await this.fetchComponentReadme({readmeUrl, libId, componentId, locale});
         this.componentReadmeCache[cacheKey] = {
             content,
             timestamp: now,

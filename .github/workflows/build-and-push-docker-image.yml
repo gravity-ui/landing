@@ -1,9 +1,9 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    branches:
-      - enable-ssr
+  # push:
+  #   branches:
+  #     - enable-ssr
 
 jobs:
   build-and-push:

@@ -32,16 +32,15 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const locale = ctx.locale ?? i18nextConfig.i18n.defaultLocale;
 
     const libId = ctx.params?.libId as string;
-    const componentId = ctx.params?.componentId as string;
 
     const libPromise = Api.instance.fetchLibByIdWithCache(libId);
     const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info']);
-    const readmePromise = Api.instance.fetchComponentReadmeWithCache(
-        component.content.readmeUrl,
+    const readmePromise = Api.instance.fetchComponentReadmeWithCache({
+        readmeUrl: component.content.readmeUrl,
+        componentId: component.id,
         libId,
-        componentId,
         locale,
-    );
+    });
 
     const [lib, i18nProps, readmeContent] = await Promise.all([
         libPromise,
