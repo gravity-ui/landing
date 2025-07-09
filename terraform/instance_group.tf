@@ -37,6 +37,7 @@ resource "yandex_compute_instance_group" "landing_ig" {
     }
 
     metadata = {
+      enable-oslogin = true
       docker-container-declaration = yamlencode({
         spec = {
           containers = [{
