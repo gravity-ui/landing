@@ -37,10 +37,6 @@ const generatePaths = () => {
             }
 
             paths.push({path: `/components/${lib.id}/${component.id}`});
-
-            if (component.sandbox) {
-                paths.push({path: `/sandbox/${lib.id}/${component.id}`, notLocalized: true});
-            }
         });
     });
 
