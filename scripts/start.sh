@@ -7,9 +7,15 @@ curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 
 export PATH=$PATH:$HOME/yandex-cloud/bin
 
-SECRET_ID="e6qp8gufihlh6vcsoa5a"
+SECRET_ID="e6qpac1o03r843adh3sp"
 
-GITHUB_TOKEN=$(yc lockbox payload get --id $SECRET_ID --key github_token)
+GITHUB_APP_ID=$(yc lockbox payload get --id $SECRET_ID --key app_id)
+GITHUB_APP_INSTALLATION_ID=$(yc lockbox payload get --id $SECRET_ID --key installation_id)
+GITHUB_APP_PRIVATE_KEY=$(yc lockbox payload get --id $SECRET_ID --key private_key)
+
+export GITHUB_APP_ID
+export GITHUB_APP_INSTALLATION_ID
+export GITHUB_APP_PRIVATE_KEY
 
 echo "Starting server..."
-GITHUB_TOKEN=$GITHUB_TOKEN exec node server.js
+exec node server.js
