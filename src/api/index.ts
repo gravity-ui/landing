@@ -173,13 +173,6 @@ export class Api {
     }
 
     async fetchAllContributors(): Promise<Contributor[]> {
-        if (!process.env.GITHUB_TOKEN) {
-            console.warn(
-                'Cannot fetch contributors. You need to put your GitHub PAT in the "GITHUB_TOKEN" environment variable to get the actual list of contributors.',
-            );
-            return [];
-        }
-
         try {
             const repos = await this.getOrganizationRepositories('gravity-ui');
 
@@ -295,9 +288,6 @@ export class Api {
         if (!changelogUrl) return '';
 
         const headers: Record<string, string> = {'User-Agent': 'request'};
-        if (process.env.GITHUB_TOKEN) {
-            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-        }
 
         try {
             const response = await fetch(changelogUrl, {
@@ -318,9 +308,6 @@ export class Api {
         id,
     }: LibConfig): Promise<{en: string; ru: string; es: string; zh: string}> {
         const headers: Record<string, string> = {'User-Agent': 'request'};
-        if (process.env.GITHUB_TOKEN) {
-            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-        }
 
         const fetchReadmeContent = async (url: string) => {
             try {
@@ -488,9 +475,6 @@ export class Api {
         let readmeContent = '';
 
         const headers: Record<string, string> = {'User-Agent': 'request'};
-        if (process.env.GITHUB_TOKEN) {
-            headers.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-        }
 
         try {
             if (locale !== 'en' && locale !== 'ru') {
