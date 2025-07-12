@@ -1,13 +1,9 @@
 import {TextProps} from '@gravity-ui/uikit';
+import {TextGroup} from '@gravity-ui/uikit-themer';
 
 import {TypographyOptions} from '../types';
 
-import {
-    GOOGLE_FONTS_DOWNLOAD_HOST,
-    THEME_FONT_FAMILY_PREFIX,
-    THEME_TEXT_PREFIX,
-    TextVariants,
-} from './constants';
+import {GOOGLE_FONTS_DOWNLOAD_HOST, THEME_FONT_FAMILY_PREFIX, THEME_TEXT_PREFIX} from './constants';
 
 export const createFontLinkImport = (fontLink: string) => {
     return `@import url('${fontLink}');`;
@@ -25,7 +21,7 @@ export const createFontFamilyVariable = (
 };
 
 export const createTextFontWeightVariable = (
-    textVariant: TextVariants,
+    textVariant: TextGroup,
     value: number,
     forPreview: boolean,
 ) => {
@@ -35,7 +31,7 @@ export const createTextFontWeightVariable = (
 };
 
 export const createTextFontFamilyVariable = (
-    textVariant: TextVariants,
+    textVariant: TextGroup,
     value: string,
     forPreview: boolean,
 ) => {
