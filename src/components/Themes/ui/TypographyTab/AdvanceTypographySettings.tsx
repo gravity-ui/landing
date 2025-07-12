@@ -1,10 +1,11 @@
 import {FormRow} from '@gravity-ui/components';
 import {Card, Col, Flex, Row, Select, Slider, Text, TextInput, TextProps} from '@gravity-ui/uikit';
+import {TextGroup} from '@gravity-ui/uikit-themer';
 import React, {useMemo} from 'react';
 
 import {block} from '../../../../utils';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
-import {DefaultFontFamilyType, FONT_WEIGHTS, TextVariants} from '../../lib/typography/constants';
+import {DefaultFontFamilyType, FONT_WEIGHTS} from '../../lib/typography/constants';
 
 import './TypographyTab.scss';
 
@@ -49,7 +50,7 @@ export const AdvanceTypographySettings = () => {
                                         value={[setting.selectedFontFamilyType]}
                                         onUpdate={(fontFamilyType) => {
                                             updateAdvancedTypographySettings({
-                                                key: key as TextVariants,
+                                                key: key as TextGroup,
                                                 selectedFontFamilyType:
                                                     fontFamilyType[0] as DefaultFontFamilyType,
                                             });
@@ -71,7 +72,7 @@ export const AdvanceTypographySettings = () => {
                                         value={setting.fontWeight}
                                         onUpdate={(fontWeight) => {
                                             updateAdvancedTypographySettings({
-                                                key: key as TextVariants,
+                                                key: key as TextGroup,
                                                 fontWeight: fontWeight as number,
                                             });
                                         }}
@@ -116,7 +117,7 @@ export const AdvanceTypographySettings = () => {
                                                                     : Number(fontSize);
 
                                                             updateAdvancedTypographySettings({
-                                                                key: key as TextVariants,
+                                                                key: key as TextGroup,
                                                                 sizeKey:
                                                                     sizeKey as TextProps['variant'],
                                                                 fontSize: calculatedFontSize,
@@ -141,7 +142,7 @@ export const AdvanceTypographySettings = () => {
                                                                     : Number(lineHeight);
 
                                                             updateAdvancedTypographySettings({
-                                                                key: key as TextVariants,
+                                                                key: key as TextGroup,
                                                                 sizeKey:
                                                                     sizeKey as TextProps['variant'],
                                                                 lineHeight: calculatedLineHeight,

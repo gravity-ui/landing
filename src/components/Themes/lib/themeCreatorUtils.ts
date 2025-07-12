@@ -9,7 +9,7 @@ import {
     updateBaseColor,
     updateUtilityColor,
 } from '@gravity-ui/uikit-themer';
-import type {AnyPrivateColorToken, Theme, UtilityColor} from '@gravity-ui/uikit-themer';
+import type {AnyPrivateColorToken, TextGroup, Theme, UtilityColor} from '@gravity-ui/uikit-themer';
 import {generatePrivateColorsForBaseColors} from '@gravity-ui/uikit-themer/dist/utils';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
@@ -25,7 +25,7 @@ import {
 } from './constants';
 import type {Palette, PaletteTokens, ThemeCreatorState} from './types';
 import {CustomFontSelectType, RadiusPresetName, TypographyOptions} from './types';
-import {DefaultFontFamilyType, TextVariants, defaultTypographyPreset} from './typography/constants';
+import {DefaultFontFamilyType, defaultTypographyPreset} from './typography/constants';
 import {
     createFontFamilyVariable,
     createFontLinkImport,
@@ -536,10 +536,8 @@ export function removeFontFamilyTypeFromTheme(
     // Reset selected font to default
     Object.entries(newAdvanced).forEach(([textVariant, settings]) => {
         if (settings.selectedFontFamilyType === fontType) {
-            newAdvanced[textVariant as TextVariants].selectedFontFamilyType =
-                defaultTypographyPreset.advanced[
-                    textVariant as TextVariants
-                ].selectedFontFamilyType;
+            newAdvanced[textVariant as TextGroup].selectedFontFamilyType =
+                defaultTypographyPreset.advanced[textVariant as TextGroup].selectedFontFamilyType;
         }
     });
 
@@ -558,7 +556,7 @@ export function removeFontFamilyTypeFromTheme(
 }
 
 export type UpdateAdvancedTypographySettingsParams = {
-    key: TextVariants;
+    key: TextGroup;
     fontWeight?: number;
     selectedFontFamilyType?: string;
     sizeKey?: Exclude<TextProps['variant'], undefined>;
@@ -665,7 +663,7 @@ export const createTypographyPresetForExport = ({
     });
 
     Object.entries(advanced).forEach(([key, data]) => {
-        const defaultAdvancedSetting = defaultTypographyPreset.advanced[key as TextVariants];
+        const defaultAdvancedSetting = defaultTypographyPreset.advanced[key as TextGroup];
 
         if (defaultAdvancedSetting.selectedFontFamilyType !== data.selectedFontFamilyType) {
             const customFontTypeKey = getCustomFontTypeKey(
@@ -674,14 +672,14 @@ export const createTypographyPresetForExport = ({
             );
 
             cssString += `${createTextFontFamilyVariable(
-                key as TextVariants,
+                key as TextGroup,
                 customFontTypeKey ? kebabCase(customFontTypeKey) : data.selectedFontFamilyType,
                 forPreview,
             )}\n`;
         }
         if (defaultAdvancedSetting.fontWeight !== data.fontWeight) {
             cssString += `${createTextFontWeightVariable(
-                key as TextVariants,
+                key as TextGroup,
                 data.fontWeight,
                 forPreview,
             )}\n`;

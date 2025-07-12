@@ -8,15 +8,6 @@ export enum DefaultFontFamilyType {
     Monospace = 'monospace',
 }
 
-export enum TextVariants {
-    Body = 'body',
-    Caption = 'caption',
-    Header = 'header',
-    Subheader = 'subheader',
-    Display = 'display',
-    Code = 'code',
-}
-
 export const FONT_WEIGHTS = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 export const GOOGLE_FONTS_DOWNLOAD_HOST = 'https://fonts.googleapis.com/css2';
@@ -63,7 +54,7 @@ export const defaultTypographyPreset: TypographyOptions = {
     },
     isAdvancedActive: false,
     advanced: {
-        [TextVariants.Body]: {
+        body: {
             title: 'Body Text',
             fontWeight: 400,
             selectedFontFamilyType: DefaultFontFamilyType.Sans,
@@ -90,7 +81,7 @@ export const defaultTypographyPreset: TypographyOptions = {
                 },
             },
         },
-        [TextVariants.Caption]: {
+        caption: {
             title: 'Caption',
             fontWeight: 400,
             selectedFontFamilyType: DefaultFontFamilyType.Sans,
@@ -107,7 +98,7 @@ export const defaultTypographyPreset: TypographyOptions = {
                 },
             },
         },
-        [TextVariants.Header]: {
+        header: {
             title: 'Header',
             fontWeight: 600,
             selectedFontFamilyType: DefaultFontFamilyType.Sans,
@@ -124,7 +115,7 @@ export const defaultTypographyPreset: TypographyOptions = {
                 },
             },
         },
-        [TextVariants.Subheader]: {
+        subheader: {
             title: 'Subheader',
             fontWeight: 600,
             selectedFontFamilyType: DefaultFontFamilyType.Sans,
@@ -146,7 +137,7 @@ export const defaultTypographyPreset: TypographyOptions = {
                 },
             },
         },
-        [TextVariants.Display]: {
+        display: {
             title: 'Display',
             fontWeight: 600,
             selectedFontFamilyType: DefaultFontFamilyType.Sans,
@@ -173,7 +164,7 @@ export const defaultTypographyPreset: TypographyOptions = {
                 },
             },
         },
-        [TextVariants.Code]: {
+        code: {
             title: 'Code',
             fontWeight: 600,
             selectedFontFamilyType: DefaultFontFamilyType.Monospace,

@@ -1,7 +1,7 @@
 import {TextProps} from '@gravity-ui/uikit';
-import type {BordersOptions, GravityTheme, Theme} from '@gravity-ui/uikit-themer';
+import type {BordersOptions, GravityTheme, TextGroup, Theme} from '@gravity-ui/uikit-themer';
 
-import {DefaultFontFamilyType, TextVariants} from './typography/constants';
+import {DefaultFontFamilyType} from './typography/constants';
 
 export type PaletteOptions = {
     brand: string;
@@ -50,7 +50,7 @@ export type TypographyOptions = {
     };
     isAdvancedActive: boolean;
     advanced: Record<
-        TextVariants,
+        TextGroup,
         {
             title: string;
             fontWeight: number;
