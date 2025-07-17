@@ -14,7 +14,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV ASSET_PREFIX=https://storage.yandexcloud.net/landing-static
+ENV ASSET_PREFIX=https://storage.yandexcloud.net/gravity-landing-static
 ENV NODE_ENV=production
 ENV IS_CONTAINER_BUILD=true
 
@@ -31,7 +31,7 @@ RUN --mount=type=secret,id=s3_access_key_id \
     --mount=type=secret,id=s3_secret_access_key \
     export AWS_ACCESS_KEY_ID=$(cat /run/secrets/s3_access_key_id) && \
     export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/s3_secret_access_key) && \
-    aws s3 sync .next/static s3://landing-static/_next/static/ \
+    aws s3 sync .next/static s3://gravity-landing-static/_next/static/ \
     --endpoint-url=https://storage.yandexcloud.net/ && \
     unset AWS_ACCESS_KEY_ID && \
     unset AWS_SECRET_ACCESS_KEY

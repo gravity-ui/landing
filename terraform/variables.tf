@@ -1,5 +1,5 @@
-variable "yc_token" {
-  description = "Yandex Cloud API token"
+variable "yc_service_account_key_file" {
+  description = "Path to Yandex Cloud service account key file"
   type        = string
   sensitive   = true
 }
