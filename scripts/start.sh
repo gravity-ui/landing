@@ -7,7 +7,7 @@ curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 
 export PATH=$PATH:$HOME/yandex-cloud/bin
 
-SECRET_ID="e6qpac1o03r843adh3sp"
+SECRET_ID="e6q2afdufj7scuv328to"
 
 GITHUB_APP_ID=$(yc lockbox payload get --id $SECRET_ID --key app_id)
 GITHUB_APP_INSTALLATION_ID=$(yc lockbox payload get --id $SECRET_ID --key installation_id)
