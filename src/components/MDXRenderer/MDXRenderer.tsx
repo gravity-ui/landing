@@ -27,6 +27,12 @@ type Props = {
 
 export const MDXRenderer = React.memo<Props>(
     ({text, withComponents = false, absoluteImgPath, rewriteLinks}) => {
+        const [isMounted, setIsMounted] = React.useState(false);
+
+        React.useEffect(() => {
+            setIsMounted(true);
+        }, []);
+
         const Content = React.useMemo<MDXContent | null>(() => {
             const preparedText = text
                 .trim()
@@ -81,17 +87,19 @@ export const MDXRenderer = React.memo<Props>(
         }, []);
 
         React.useEffect(() => {
-            const content = document.getElementById(CONTENT_WRAPPER_ID);
-            const sectionId = window.location.hash.split('#')[1];
-            const section = document.querySelector<HTMLElement>('#' + sectionId);
+            if (isMounted) {
+                const content = document.getElementById(CONTENT_WRAPPER_ID);
+                const sectionId = window.location.hash.split('#')[1];
+                const section = document.querySelector<HTMLElement>('#' + sectionId);
 
-            if (content && section) {
-                content.scrollTo({
-                    top: section.offsetTop,
-                    behavior: 'smooth',
-                });
+                if (content && section) {
+                    content.scrollTo({
+                        top: section.offsetTop,
+                        behavior: 'smooth',
+                    });
+                }
             }
-        }, []);
+        }, [isMounted]);
 
         if (!Content) {
             return null;
