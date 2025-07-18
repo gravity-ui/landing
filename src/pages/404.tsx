@@ -6,7 +6,8 @@ import {useEffect} from 'react';
 
 import nextI18nextConfig from '../../next-i18next.config';
 import {Layout} from '../components/Layout/Layout';
-import {LOCALE_LOCAL_STORAGE_KEY} from '../constants';
+import {NEXT_LOCALE_COOKIE} from '../constants';
+import {getCookie} from '../utils';
 
 export const getStaticProps: GetStaticProps = async () => {
     // Load all translations for all locales at build time
@@ -38,7 +39,7 @@ export default function Custom404({allTranslations}: Custom404Props) {
         // Determine locale from URL or localStorage
         const pathLocale = window.location.pathname.split('/')[1];
         const isValidLocale = nextI18nextConfig.i18n.locales.includes(pathLocale);
-        const savedLocale = localStorage.getItem(LOCALE_LOCAL_STORAGE_KEY);
+        const savedLocale = getCookie(NEXT_LOCALE_COOKIE);
         const detectedLocale = isValidLocale
             ? pathLocale
             : savedLocale && nextI18nextConfig.i18n.locales.includes(savedLocale)
@@ -60,7 +61,7 @@ export default function Custom404({allTranslations}: Custom404Props) {
     }, [allTranslations, i18n]);
 
     return (
-        <Layout title={t('pageNotFound')}>
+        <Layout title={t('pageNotFound')} hideLocalePicker>
             <div
                 style={{
                     display: 'flex',

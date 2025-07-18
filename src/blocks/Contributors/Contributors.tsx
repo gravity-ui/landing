@@ -2,8 +2,9 @@ import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
 import {Button} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {Contributor} from '../../api';
 import {ExpandableContributorList} from '../../components/ExpandableContributorList';
-import {Contributor, block} from '../../utils';
+import {block} from '../../utils';
 import {CustomBlock} from '../constants';
 
 import './Contributors.scss';

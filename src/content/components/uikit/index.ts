@@ -1,6 +1,6 @@
 import {sortBy} from 'lodash';
 
-import {getLibById} from '../../../utils';
+import {getLibConfigById} from '../../../utils';
 import {Component, Lib} from '../types';
 
 import {alertConfig} from './Alert';
@@ -45,7 +45,7 @@ import {tooltipConfig} from './Tooltip';
 import {userConfig} from './User';
 import {userLabelConfig} from './UserLabel';
 
-const {config} = getLibById('uikit');
+const config = getLibConfigById('uikit');
 
 const uikitComponents: Component[] = [
     alertConfig,

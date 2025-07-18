@@ -1,10 +1,9 @@
 import _ from 'lodash';
 import mm from 'micromatch';
 
-import allContributors from '../data/contributors.json';
-import libsData from '../data/libs-data.json';
+import type {Contributor, Lib} from '../api';
 import packagesVersions from '../data/packages-versions.json';
-import {libs} from '../libs.mjs';
+import {libs} from '../libs';
 
 type LibConfig = {
     id: string;
@@ -23,77 +22,24 @@ type LibConfig = {
     mainBranch: string;
 };
 
-export type Contributor = {
-    [x: string]: any;
-    login: string;
-    url: string;
-    avatarUrl: string;
-    contributions: number;
-};
-
-export type CodeOwners = {
-    pattern: string;
-    owners: string[];
-};
-
-type LibData = {
-    stars: number;
-    version: string;
-    lastUpdate: string;
-    license: string;
-    issues: number;
-    readme: {
-        en: string;
-        ru: string;
-        es: string;
-        zh: string;
-    };
-    changelog: string;
-    contributors: Contributor[];
-    codeOwners: CodeOwners[];
-};
-
-export type Lib = {
-    config: LibConfig;
-    data: LibData;
-};
-
-export const getLibsList = (): Lib[] => {
-    const result: Lib[] = [];
-
-    libs.forEach((config) => {
-        const data = (libsData as any)[config.id];
-
-        if (!data) {
-            throw new Error(`Can't find fetched data for lib with id – ${config.id}`);
-        }
-
-        result.push({
-            config: config as LibConfig,
-            data: data as LibData,
-        });
-    });
-
-    return result;
-};
-
-export const getLibById = (id: string): Lib => {
+export const getLibConfigByIdSafe = (id: string): LibConfig | undefined => {
     const config = libs.find((lib) => lib.id === id);
+
+    return config;
+};
+
+export const isValidLibId = (id: string): boolean => {
+    return getLibConfigByIdSafe(id) !== undefined;
+};
+
+export const getLibConfigById = (id: string): LibConfig => {
+    const config = getLibConfigByIdSafe(id);
 
     if (!config) {
         throw new Error(`Can't find config for lib with id – ${id}`);
     }
 
-    const data = (libsData as any)[id];
-
-    if (!data) {
-        throw new Error(`Can't find fetched data for lib with id – ${id}`);
-    }
-
-    return {
-        config: config as LibConfig,
-        data: data as LibData,
-    };
+    return config;
 };
 
 export const getLibVersion = (id?: string) => {
@@ -112,10 +58,27 @@ export const getLibVersion = (id?: string) => {
     return libraryVersion;
 };
 
-export const getLibraryGithubUrl = (library: Lib) =>
-    `https://github.com/${library.config.githubId}`;
+const getOgImageUrl = (id?: string) => {
+    return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
+};
 
-export const getAllContributors = () => allContributors;
+export type MetaProps = {
+    name: string;
+    description: string;
+    image?: string;
+};
+
+export const getLibraryMeta = (
+    lib: {id: string; title: string},
+    t: (key: string) => string,
+    componentTitle?: string,
+): MetaProps => {
+    return {
+        name: componentTitle ? `${lib.title} – ${componentTitle}` : lib.title,
+        description: t(`libraries-info:description_${lib.id}`),
+        image: getOgImageUrl(lib.id),
+    };
+};
 
 export const getMaintainers = (lib: Lib, path = '/'): Contributor[] => {
     const {contributors, codeOwners} = lib.data;
@@ -149,26 +112,4 @@ export const getMaintainers = (lib: Lib, path = '/'): Contributor[] => {
             return maintainer;
         })
         .sort((a, b) => b.contributions - a.contributions);
-};
-
-const getOgImageUrl = (id?: string) => {
-    return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
-};
-
-export type MetaProps = {
-    name: string;
-    description: string;
-    image?: string;
-};
-
-export const getLibraryMeta = (
-    lib: {id: string; title: string},
-    t: (key: string) => string,
-    componentTitle?: string,
-): MetaProps => {
-    return {
-        name: componentTitle ? `${lib.title} – ${componentTitle}` : lib.title,
-        description: t(`libraries-info:description_${lib.id}`),
-        image: getOgImageUrl(lib.id),
-    };
 };

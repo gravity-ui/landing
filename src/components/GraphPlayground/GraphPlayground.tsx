@@ -3,7 +3,7 @@ import {Button} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {memo} from 'react';
 
-import {block, getLocaleLink} from '../../utils';
+import {block} from '../../utils';
 
 import './GraphPlayground.scss';
 import {GraphPlayground} from './Playground/GraphPlayground';
@@ -11,7 +11,7 @@ import {GraphPlayground} from './Playground/GraphPlayground';
 const b = block('graph');
 
 export const GraphPlayround = memo(() => {
-    const {t, i18n} = useTranslation('graph');
+    const {t} = useTranslation('graph');
 
     return (
         <Grid className={b()} containerClass={b('container')}>
@@ -20,7 +20,7 @@ export const GraphPlayround = memo(() => {
                     <h1 className={b('title')}>{t('title')}</h1>
                     <div className={b('actions')}>
                         <Button
-                            href={getLocaleLink('/libraries/graph', i18n)}
+                            href={'/libraries/graph'}
                             className={b('library-button')}
                             size="xl"
                             view="outlined-contrast"

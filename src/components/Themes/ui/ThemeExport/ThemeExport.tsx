@@ -3,6 +3,7 @@ import {Alert, Flex, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useMemo, useState} from 'react';
 
+import {useLocale} from '../../../../hooks/useLocale';
 import {block} from '../../../../utils';
 import {CodeExample} from '../../../CodeExample/CodeExample';
 import {useThemeCreator} from '../../hooks';
@@ -24,7 +25,8 @@ export interface ThemeExportProps {
 }
 
 export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
-    const {t, i18n} = useTranslation('themes');
+    const {t} = useTranslation('themes');
+    const locale = useLocale();
 
     const themeState = useThemeCreator();
     const breakpoint = useWindowBreakpoint();
@@ -57,9 +59,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
                     title={t('export_theme_apply-theme-alert-title')}
                     message={
                         <Text variant="code-1" className={b('apply-theme-message')}>
-                            {i18n.language === 'ru'
-                                ? APPLY_THEME_TEMPLATE.ru
-                                : APPLY_THEME_TEMPLATE.en}
+                            {locale === 'ru' ? APPLY_THEME_TEMPLATE.ru : APPLY_THEME_TEMPLATE.en}
                         </Text>
                     }
                 />

@@ -1,0 +1,70 @@
+name: Deploy to Yandex Cloud
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Docker image tag to deploy'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    name: Deploy to Yandex Cloud
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.0.0
+
+      - name: Configure AWS credentials for Terraform backend
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.STATIC_S3_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.STATIC_S3_SECRET_KEY }}" >> $GITHUB_ENV
+          echo "AWS_REGION=ru-central1" >> $GITHUB_ENV
+          
+      - name: Set up Yandex Cloud service account key
+        run: |
+          echo '${{ secrets.YC_SERVICE_ACCOUNT_KEY_JSON }}' > yc-sa-key.json
+          echo "YC_SERVICE_ACCOUNT_KEY_FILE=$(pwd)/yc-sa-key.json" >> $GITHUB_ENV
+
+      - name: Get Docker image tag
+        id: get_tag
+        run: |
+          echo "tag=${{ github.event.inputs.image_tag }}" >> $GITHUB_OUTPUT
+
+      - name: Terraform Init
+        run: |
+          cd terraform
+          terraform init
+        env:
+          TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
+          TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
+          TF_VAR_yc_service_account_key_file: ${{ env.YC_SERVICE_ACCOUNT_KEY_FILE }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
+
+      - name: Terraform Plan
+        run: |
+          cd terraform
+          terraform plan -out=tfplan
+        env:
+          TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
+          TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
+          TF_VAR_yc_service_account_key_file: ${{ env.YC_SERVICE_ACCOUNT_KEY_FILE }}
+          TF_VAR_container_image: 'ghcr.io/${{ github.repository }}:${{ steps.get_tag.outputs.tag }}'
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}
+
+      - name: Terraform Apply
+        run: |
+          cd terraform
+          terraform apply -auto-approve tfplan
+        env:
+          TF_VAR_yc_cloud_id: ${{ secrets.YC_CLOUD_ID }}
+          TF_VAR_yc_folder_id: ${{ secrets.YC_FOLDER_ID }}
+          TF_VAR_yc_service_account_key_file: ${{ env.YC_SERVICE_ACCOUNT_KEY_FILE }}
+          TF_VAR_ssh_public_key: ${{ secrets.SSH_KEY }}

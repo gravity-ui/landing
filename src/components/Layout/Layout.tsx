@@ -5,13 +5,13 @@ import en from 'javascript-time-ago/locale/en.json';
 import es from 'javascript-time-ago/locale/es.json';
 import ru from 'javascript-time-ago/locale/ru.json';
 import zh from 'javascript-time-ago/locale/zh.json';
-import {useTranslation} from 'next-i18next';
 import Head from 'next/head';
 import React from 'react';
 import {useGravityAnimation} from 'src/hooks/useGravityAnimation';
 
 import {CONTENT_WRAPPER_ID, DEFAULT_THEME, MENU_ID} from '../../constants';
 import {EnvironmentContext} from '../../contexts';
+import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
 import {Footer} from '../Footer/Footer';
 import {Menu} from '../Menu/Menu';
@@ -29,28 +29,31 @@ const b = block('layout');
 export type LayoutProps = {
     title?: string;
     children?: React.ReactNode;
-    isPageConstrucor?: boolean;
+    isPageConstructor?: boolean;
     isRtl?: boolean;
     showOnlyContent?: boolean;
     hideFooter?: boolean;
     noScroll?: boolean;
     meta?: MetaProps;
+    hideLocalePicker?: boolean;
 };
 
 export const Layout: React.FC<LayoutProps> = ({
     title,
     children,
-    isPageConstrucor = false,
+    isPageConstructor = false,
     isRtl = false,
     showOnlyContent = false,
     hideFooter = false,
     noScroll = false,
+    hideLocalePicker = false,
     meta = {},
 }) => {
-    const {i18n} = useTranslation();
+    const locale = useLocale();
+
     useGravityAnimation();
 
-    const lang = i18n.language as Lang;
+    const lang = locale as Lang;
 
     React.useEffect(() => {
         configureUiKit({lang});
@@ -89,7 +92,10 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
     );
 
-    const environmentValue = React.useMemo(() => ({isClient, isRtl}), [isClient, isRtl]);
+    const environmentValue = React.useMemo(
+        () => ({isClient, isRtl, hideLocalePicker}),
+        [isClient, isRtl, hideLocalePicker],
+    );
 
     return (
         <EnvironmentContext.Provider value={environmentValue}>
@@ -99,7 +105,7 @@ export const Layout: React.FC<LayoutProps> = ({
             </Head>
             <ThemeProvider theme={DEFAULT_THEME} direction={isRtl ? 'rtl' : 'ltr'}>
                 <React.Fragment>
-                    {isPageConstrucor ? (
+                    {isPageConstructor ? (
                         <PageConstructorProvider theme={DEFAULT_THEME as PageConstructorTheme}>
                             {pageConent}
                         </PageConstructorProvider>

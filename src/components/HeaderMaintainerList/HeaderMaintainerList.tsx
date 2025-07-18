@@ -1,7 +1,8 @@
 import {Avatar, Link} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 
-import {Contributor, block} from '../../utils';
+import {Contributor} from '../../api';
+import {block} from '../../utils';
 
 import './HeaderMaintainerList.scss';
 

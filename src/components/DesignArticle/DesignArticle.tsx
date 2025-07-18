@@ -2,7 +2,8 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {Article} from '../../content/design/types';
-import {block, getLocale} from '../../utils';
+import {useLocale} from '../../hooks/useLocale';
+import {block} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 import {Section} from '../NavigationLayout/types';
@@ -18,8 +19,8 @@ export type DesignArticleProps = {
 };
 
 export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId, sections}) => {
-    const {i18n, t} = useTranslation();
-    const locale = getLocale(i18n.language);
+    const {t} = useTranslation();
+    const locale = useLocale();
 
     const currentSection = React.useMemo(
         () => sections.find((item) => item.id === sectionId),

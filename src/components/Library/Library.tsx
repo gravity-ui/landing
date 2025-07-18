@@ -4,6 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
+import type {Lib} from '../../api';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import lastUpdateIcon from '../../assets/icons/last-update.svg';
@@ -14,8 +15,9 @@ import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {ContributorList} from '../../components/ContributorList';
 import {Link} from '../../components/Link';
-import {availablePlaygrounds} from '../../pages/[locale]/libraries/[libId]/playground';
-import {Lib, block, getAnchor, getLocale, getLocaleLink, getMaintainers} from '../../utils';
+import {useLocale} from '../../hooks/useLocale';
+import {availablePlaygrounds} from '../../pages/libraries/[libId]/playground';
+import {block, getAnchor, getMaintainers} from '../../utils';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
 
 import './Library.scss';
@@ -37,9 +39,8 @@ const ABSOLUTE_LINK_REG_EXP = /^http/;
 const HASH_REG_EXP = /^#/;
 
 export const Library: React.FC<Props> = ({lib}) => {
-    const {t, i18n} = useTranslation();
-
-    const locale = getLocale(i18n.language);
+    const {t} = useTranslation();
+    const locale = useLocale();
 
     const contentTabs = [
         {
@@ -156,7 +157,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             className={b('button')}
                                             view="action"
                                             size="xl"
-                                            href={getLocaleLink('/icons', i18n)}
+                                            href={'/icons'}
                                             target="_blank"
                                         >
                                             {t('library:actions_goToIcons')}
@@ -202,10 +203,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                             className={b('button')}
                                             view="outlined"
                                             size="xl"
-                                            href={getLocaleLink(
-                                                `/libraries/${lib.config.id}/playground`,
-                                                i18n,
-                                            )}
+                                            href={`/libraries/${lib.config.id}/playground`}
                                         >
                                             <span>{t('actions_playground')}</span>
                                         </Button>
@@ -236,7 +234,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                             </TabProvider>
                             <div className={b('content')}>
                                 <MDXRenderer
-                                    key={`${lib.config.id}-${i18n.language}-${activeTab}`}
+                                    key={`${lib.config.id}-${locale}-${activeTab}`}
                                     text={
                                         activeTab === TabType.Readme
                                             ? readmeContent

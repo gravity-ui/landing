@@ -1,0 +1,75 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      actions: write
+    outputs:
+      image_tag: ${{ steps.get_image_tag.outputs.tag }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,value=latest
+            type=sha,format=short
+
+      - name: Get SHA tag
+        id: get_sha_tag
+        run: |
+          SHA_TAG=$(echo '${{ steps.meta.outputs.tags }}' | grep -o 'ghcr.io/.*/.*:sha-.*' | cut -d':' -f2)
+          echo "sha_tag=$SHA_TAG" >> $GITHUB_OUTPUT
+          echo "Using SHA tag: $SHA_TAG"
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          secrets: |
+            s3_access_key_id=${{ secrets.STATIC_S3_KEY_ID }}
+            s3_secret_access_key=${{ secrets.STATIC_S3_SECRET_KEY }}
+
+      - name: Trigger deploy workflow
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-to-yandex-cloud.yml',
+              ref: context.ref,
+              inputs: {
+                image_tag: '${{ steps.get_sha_tag.outputs.sha_tag }}'
+              }
+            });

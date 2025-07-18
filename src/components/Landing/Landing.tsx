@@ -6,6 +6,7 @@ import Examples from 'src/blocks/Examples/Examples';
 import {UISamplesBlock} from 'src/blocks/UISamples/UISamples';
 import {CustomPageContent} from 'src/content/types';
 
+import type {Contributor, Lib} from '../../api';
 import {ContributorsBlock} from '../../blocks/Contributors/Contributors';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
@@ -38,7 +39,12 @@ const filterBlocks = ({blocks, ...rest}: CustomPageContent): CustomPageContent =
     };
 };
 
-export const Landing: React.FC = () => {
+type Props = {
+    libs: Lib[];
+    contributors: Contributor[];
+};
+
+export const Landing: React.FC<Props> = ({libs, contributors}) => {
     const {t} = useTranslation();
     const {pathname} = useRouter();
 
@@ -50,7 +56,9 @@ export const Landing: React.FC = () => {
             <PageConstructor
                 content={
                     filterBlocks(
-                        pathname === '/rtl' ? getRtlLanding(t) : getLanding(t),
+                        pathname === '/rtl'
+                            ? getRtlLanding({t, libs, contributors})
+                            : getLanding({t, libs, contributors}),
                     ) as PageContent
                 }
                 custom={{

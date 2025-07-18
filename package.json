@@ -18,6 +18,7 @@
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@monaco-editor/react": "^4.6.0",
+    "@octokit/auth-app": "^8.0.1",
     "@octokit/rest": "^20.1.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -79,14 +80,13 @@
     "next-sitemap": "^4.2.3",
     "next-transpile-modules": "^10.0.1",
     "playwright": "^1.45.2",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
     "stylelint": "^14.15.0",
     "svg-inline-loader": "^0.8.2",
-    "svgo": "^3.0.2",
-    "undici": "^5.14.0"
+    "svgo": "^3.0.2"
   },
   "overrides": {
     "react-split-pane": {
@@ -96,13 +96,12 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "start": "next dev",
+    "dev": "next dev",
     "build": "next build",
+    "start": "next start",
     "postbuild": "next-sitemap",
-    "fetch-data": "node ./scripts/prefetch-data.mjs",
-    "fetch-contributors": "node ./scripts/prefetch-contributors.mjs",
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
-    "prepare-metadata": "npm run fetch-data && npm run fetch-contributors && npm run get-packages-versions",
+    "prepare-metadata": "npm run get-packages-versions",
     "update-og-images": "node ./scripts/update-og-images.mjs",
     "prestart": "npm run prepare-metadata",
     "prebuild": "npm run prepare-metadata",

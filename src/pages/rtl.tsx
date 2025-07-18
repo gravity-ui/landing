@@ -1,27 +1,36 @@
-import {GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import nextI18nextConfig from '../../next-i18next.config';
+import {Api, Contributor, Lib} from '../api';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
 import {getI18nProps} from '../utils/i18next';
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const [contributors, libs, i18nProps] = await Promise.all([
+        Api.instance.fetchAllContributorsWithCache(),
+        Api.instance.fetchLandingLibs(),
+        getI18nProps(ctx, ['home', 'libraries-info']),
+    ]);
+
     return {
         props: {
-            ...(await getI18nProps(ctx, ['home', 'libraries-info'])),
+            contributors,
+            libs,
+            ...i18nProps,
         },
     };
 };
 
-export const RTLPage = () => {
+export const RTLPage = ({libs, contributors}: {libs: Lib[]; contributors: Contributor[]}) => {
     const {i18n} = useTranslation();
     i18n.changeLanguage(nextI18nextConfig.i18n.defaultLocale);
 
     return (
-        <Layout isPageConstrucor isRtl>
-            <Landing />
+        <Layout isPageConstructor isRtl hideLocalePicker>
+            <Landing libs={libs} contributors={contributors} />
         </Layout>
     );
 };

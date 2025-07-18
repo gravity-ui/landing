@@ -1,11 +1,11 @@
 import {ChevronRight} from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {Button, ButtonProps, Icon, IconData} from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';
 
 import {Link} from '../../components/Link';
+import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
 
@@ -59,7 +59,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     news,
     banner,
 }) => {
-    const {i18n} = useTranslation();
+    const locale = useLocale();
 
     const showNewsBlock = news && news.items && news.items.length > 0;
     const showBannerBlock = banner?.content;
@@ -113,7 +113,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                                 <div className={b('news-item-date')}>
                                                     <ReactTimeAgo
                                                         date={new Date(newsItem.date)}
-                                                        locale={i18n.language}
+                                                        locale={locale}
                                                     />
                                                 </div>
                                                 <div className={b('news-item-content')}>

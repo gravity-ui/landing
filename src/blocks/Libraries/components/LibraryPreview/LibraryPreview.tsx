@@ -1,9 +1,10 @@
 import {HTML} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
+import type {Lib} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';
 import chartkitAssetMobile from '../../../../assets/libs/img-lib-chartkit-mobile.jpg';
 import chartkitAsset from '../../../../assets/libs/img-lib-chartkit.jpg';
@@ -20,16 +21,14 @@ import uikitAsset from '../../../../assets/libs/img-lib-uikit.jpg';
 import wysiwygAssetMobile from '../../../../assets/libs/img-lib-wysiwyg-mobile.jpg';
 import wysiwygAsset from '../../../../assets/libs/img-lib-wysiwyg.jpg';
 import {useIsMobile} from '../../../../hooks/useIsMobile';
-import {block, getLibById, getLocaleLink} from '../../../../utils';
+import {block} from '../../../../utils';
 
 import './LibraryPreview.scss';
 
 const b = block('libraries-library-preview');
 
-export type FeatureItemProps = {
-    id?: string;
-    title: string;
-    description?: string;
+export type LibraryPreviewProps = {
+    lib: Lib;
     contentStyle: Record<string, unknown>;
 };
 
@@ -53,47 +52,27 @@ const libIdToAssetMobile: Record<string, {src: string}> = {
     'date-components': datecomponentsAssetMobile,
 };
 
-function getBackgroundImage(id?: string, isMobile?: boolean) {
+function getBackgroundImage(id: string, isMobile?: boolean) {
     const assetsMap = isMobile ? libIdToAssetMobile : libIdToAsset;
-    const asset = id ? assetsMap[id] : undefined;
+    const asset = assetsMap[id];
     if (asset) {
         return `url(${asset.src})`;
     }
     return undefined;
 }
 
-export const LibraryPreview: React.FC<FeatureItemProps> = ({
-    id,
-    title,
-    description,
-    contentStyle,
-}) => {
+export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle}) => {
     const isMobile = useIsMobile();
-    const {i18n} = useTranslation();
+    const {t} = useTranslation();
 
-    let starsCount;
-    let isPrimary = false;
-
-    if (id) {
-        const {data: libData, config: libConfig} = getLibById(id);
-
-        if (libData) {
-            starsCount = libData.stars ?? 0;
-        }
-
-        if (libConfig) {
-            isPrimary = libConfig.primary;
-        }
-    }
-
-    const Tag = id ? (Link as any) : 'div';
-    const tagProps = id ? {href: getLocaleLink(`/libraries/${id}`, i18n)} : {};
+    const {id, title, primary} = lib.config;
+    const {stars} = lib.data;
 
     return (
-        <Tag {...tagProps} className={b()}>
+        <Link href={`/libraries/${id}`} className={b()}>
             <div
                 className={b('content', {
-                    primary: isPrimary,
+                    primary,
                 })}
                 style={{
                     ...contentStyle,
@@ -107,17 +86,17 @@ export const LibraryPreview: React.FC<FeatureItemProps> = ({
                                 <HTML>{title}</HTML>
                             </h5>
                         ) : null}
-                        {starsCount ? (
+                        {stars ? (
                             <div className={b('stars')}>
                                 <Icon data={starIcon} size={17} />
-                                <div className={b('stars-count')}>{starsCount}</div>
+                                <div className={b('stars-count')}>{stars}</div>
                             </div>
                         ) : null}
                     </div>
 
-                    <div className={b('text')}>{description}</div>
+                    <div className={b('text')}>{t(`libraries-info:description_${id}`)}</div>
                 </div>
             </div>
-        </Tag>
+        </Link>
     );
 };

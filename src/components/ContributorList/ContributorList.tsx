@@ -2,7 +2,8 @@ import {Button} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import {Contributor, Lib, block} from '../../utils';
+import type {Contributor, Lib} from '../../api';
+import {block} from '../../utils';
 import {BaseContributorList} from '../BaseContributorList/BaseContributorList';
 
 import './ContributorList.scss';

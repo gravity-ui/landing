@@ -1,7 +1,8 @@
 import {Avatar, AvatarSize, Link} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {Contributor, block} from '../../utils';
+import type {Contributor} from '../../api';
+import {block} from '../../utils';
 
 import './BaseContributorList.scss';
 
