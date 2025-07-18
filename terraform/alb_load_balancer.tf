@@ -30,6 +30,8 @@ resource "yandex_alb_virtual_host" "landing_virtual_host" {
   name           = "landing-virtual-host"
   http_router_id = yandex_alb_http_router.landing_router.id
 
+  authority = ["gravity-ui.com"]
+
   route {
     name = "landing-route"
     http_route {
@@ -38,6 +40,22 @@ resource "yandex_alb_virtual_host" "landing_virtual_host" {
         timeout          = "60s"
       }
     }
+  }
+}
+
+resource "yandex_cm_certificate" "gravity_ui_cert" {
+  name    = "gravity-ui-certificate"
+  domains = ["gravity-ui.com"]
+
+  managed {
+    challenge_type = "DNS_CNAME"
+  }
+}
+
+resource "yandex_vpc_address" "landing_alb_ip" {
+  name = "landing-alb-ip"
+  external_ipv4_address {
+    zone_id = "ru-central1-d"
   }
 }
 
@@ -62,17 +80,38 @@ resource "yandex_alb_load_balancer" "landing_alb" {
   }
 
   listener {
-    name = "landing-listener"
+    name = "landing-http-listener"
     endpoint {
       address {
         external_ipv4_address {
+          address = yandex_vpc_address.landing_alb_ip.external_ipv4_address[0].address
         }
       }
       ports = [80]
     }
     http {
-      handler {
-        http_router_id = yandex_alb_http_router.landing_router.id
+      redirects {
+        http_to_https = true
+      }
+    }
+  }
+
+  listener {
+    name = "landing-https-listener"
+    endpoint {
+      address {
+        external_ipv4_address {
+          address = yandex_vpc_address.landing_alb_ip.external_ipv4_address[0].address
+        }
+      }
+      ports = [443]
+    }
+    tls {
+      default_handler {
+        http_handler {
+          http_router_id = yandex_alb_http_router.landing_router.id
+        }
+        certificate_ids = [yandex_cm_certificate.gravity_ui_cert.id]
       }
     }
   }
