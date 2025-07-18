@@ -100,17 +100,13 @@ const b = block('g-root');
 class CustomDocument extends Document {
     render() {
         const {page, query} = this.props.__NEXT_DATA__;
-        const queryLocale = query.locale;
-        const currentLocale =
-            (typeof queryLocale === 'string' ? queryLocale : undefined) ??
-            i18nextConfig.i18n.defaultLocale;
 
         // Generate static links for SSG
         const staticLinks = generateAlternateLinks(page, query);
 
         return (
             // Workaround for missing direction 'ltr' in ThemeProvider
-            <Html lang={currentLocale} dir="ltr" prefix="og: https://ogp.me/ns#">
+            <Html dir="ltr" prefix="og: https://ogp.me/ns#">
                 <Head>
                     <meta
                         name="google-site-verification"
