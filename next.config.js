@@ -81,6 +81,7 @@ module.exports = withPlugins(plugins, {
     i18n: {
         locales: i18n.locales,
         defaultLocale: i18n.defaultLocale,
+        localeDetection: false,
     },
     experimental: {
         esmExternals: 'loose',
