@@ -92,16 +92,16 @@ export class Api {
     }
 
     constructor() {
-        const octokitParams = process.env.GITHUB_TOKEN
-            ? {auth: process.env.GITHUB_TOKEN}
-            : {
+        const octokitParams = process.env.GITHUB_APP_ID
+            ? {
                   authStrategy: createAppAuth,
                   auth: {
                       appId: process.env.GITHUB_APP_ID,
                       installationId: process.env.GITHUB_APP_INSTALLATION_ID,
                       privateKey: process.env.GITHUB_APP_PRIVATE_KEY,
                   },
-              };
+              }
+            : {auth: process.env.GITHUB_TOKEN};
 
         this.octokit = new Octokit(octokitParams);
     }

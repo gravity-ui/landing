@@ -6,5 +6,12 @@ module.exports = {
         ignoreJSONStructure: false,
     },
     aiTranslatedLocales: ['es', 'zh'],
-    routesWithoutRedirect: ['/sandbox', '/rtl', '/__stand', '/health', '/sitemap.xml'],
+    routesWithoutRedirect: [
+        '/sandbox',
+        '/rtl',
+        '/__stand',
+        '/health',
+        '/sitemap.xml',
+        '/robots.txt',
+    ],
 };
