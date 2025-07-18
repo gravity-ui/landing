@@ -1,0 +1,1 @@
+.g-palette{display:inline-flex;flex-flow:column wrap;gap:8px}.g-palette:focus{border:none;outline:none}.g-palette__row{display:inline-flex;gap:8px}.g-palette_size_xs .g-palette__option{font-size:12px}.g-palette_size_l .g-palette__option,.g-palette_size_m .g-palette__option,.g-palette_size_s .g-palette__option{font-size:16px}.g-palette_size_xl .g-palette__option{font-size:20px}

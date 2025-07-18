@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://gravity-ui.com
+
+# Sitemaps
+Sitemap: https://gravity-ui.com/sitemap.xml
