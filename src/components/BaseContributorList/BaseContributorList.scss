@@ -6,21 +6,21 @@
 $block: '.#{variables.$ns}base-contributor-list';
 
 #{$block} {
-    position: relative;
-    overflow: hidden;
     display: grid;
     gap: 11px;
     grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
 
     &__link {
-        display: inline-block;
-        padding: 0;
+        position: relative;
+        padding: 100% 0 0;
         margin: 0;
     }
 
     &__avatar {
-        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: auto;
+        height: 100%;
     }
 }
