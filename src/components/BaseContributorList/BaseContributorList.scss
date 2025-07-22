@@ -6,6 +6,8 @@
 $block: '.#{variables.$ns}base-contributor-list';
 
 #{$block} {
+    position: relative;
+    overflow: hidden;
     display: grid;
     gap: 11px;
     grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
