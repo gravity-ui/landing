@@ -1,6 +1,6 @@
 import {ChevronRight} from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
-import {Button, ButtonProps, Icon, IconData} from '@gravity-ui/uikit';
+import {Button, ButtonProps, Flex, Icon, IconData, Text} from '@gravity-ui/uikit';
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';
 
@@ -32,6 +32,7 @@ export type CustomHeaderProps = Animatable & {
         items: NewsItem[];
     };
     banner?: BannerBlockProps;
+    badges?: {name: string; status: string}[];
 };
 
 export type CustomHeaderModel = CustomHeaderProps & {
@@ -57,6 +58,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     title,
     buttons = [],
     news,
+    badges,
     banner,
 }) => {
     const locale = useLocale();
@@ -64,39 +66,67 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     const showNewsBlock = news && news.items && news.items.length > 0;
     const showBannerBlock = banner?.content;
     const hasExtra = Boolean(showNewsBlock) || Boolean(showBannerBlock);
+    const showBadges = badges && badges.length > 0;
 
     return (
         <AnimateBlock className={b()} animate={animated}>
             <Grid>
                 <Row>
                     <Col sizes={{all: 12, lg: hasExtra ? 8 : 12}}>
-                        <h1 className={b('title')}>
-                            <HTML>{title}</HTML>
-                        </h1>
-                        {buttons?.length > 0 ? (
-                            <div className={b('buttons')}>
-                                {buttons.map((button) => {
-                                    const {icon, text, ...buttonProps} = button;
-                                    return (
-                                        <Button
-                                            key={text}
-                                            className={b('button')}
-                                            size="xl"
-                                            {...buttonProps}
-                                        >
-                                            {icon ? (
-                                                <Icon
-                                                    className={b('button-icon')}
-                                                    data={icon}
-                                                    size={16}
-                                                />
-                                            ) : null}
-                                            {text}
-                                        </Button>
-                                    );
-                                })}
+                        <Flex gap={8} className={b('title-with-badges')}>
+                            {showBadges && (
+                                <div className={b('badges-col')}>
+                                    <Flex className={b('badges-wrapper')}>
+                                        {badges.map((badge) => {
+                                            return (
+                                                <Flex
+                                                    key={badge.name}
+                                                    direction="column"
+                                                    alignItems="center"
+                                                    className={b('badge')}
+                                                >
+                                                    <Text color="brand" variant="subheader-2">
+                                                        {badge.name}
+                                                    </Text>
+                                                    <Text variant="caption-1" color="brand">
+                                                        {badge.status}
+                                                    </Text>
+                                                </Flex>
+                                            );
+                                        })}
+                                    </Flex>
+                                </div>
+                            )}
+                            <div className={b('title-col')}>
+                                <h1 className={b('title')}>
+                                    <HTML>{title}</HTML>
+                                </h1>
+                                {buttons?.length > 0 ? (
+                                    <div className={b('buttons')}>
+                                        {buttons.map((button) => {
+                                            const {icon, text, ...buttonProps} = button;
+                                            return (
+                                                <Button
+                                                    key={text}
+                                                    className={b('button')}
+                                                    size="xl"
+                                                    {...buttonProps}
+                                                >
+                                                    {icon ? (
+                                                        <Icon
+                                                            className={b('button-icon')}
+                                                            data={icon}
+                                                            size={16}
+                                                        />
+                                                    ) : null}
+                                                    {text}
+                                                </Button>
+                                            );
+                                        })}
+                                    </div>
+                                ) : null}
                             </div>
-                        ) : null}
+                        </Flex>
                     </Col>
                     {hasExtra && (
                         <Col className={b('extra')} sizes={{md: 12, lg: 4}}>

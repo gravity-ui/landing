@@ -62,6 +62,13 @@ export const getLanding = ({
                     target: '_blank',
                 },
             ],
+            badges: [
+                {name: 'AI', status: 'Ready'},
+                {name: 'A11Y', status: 'Ready'},
+                {name: 'Touch', status: 'Ready'},
+                {name: 'i18n', status: 'Ready'},
+                {name: 'RTL', status: 'Ready'},
+            ],
             news: {
                 title: t('home:news_title'),
                 items: [
