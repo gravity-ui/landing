@@ -74,8 +74,8 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                 <Row>
                     <Col sizes={{all: 12, lg: hasExtra ? 8 : 12}}>
                         <Flex gap={8} className={b('title-with-badges')}>
-                            <div className={b('badges-col')}>
-                                {showBadges ? (
+                            {showBadges && (
+                                <div className={b('badges-col')}>
                                     <Flex className={b('badges-wrapper')}>
                                         {badges.map((badge) => {
                                             return (
@@ -83,6 +83,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                                     key={badge.name}
                                                     direction="column"
                                                     alignItems="center"
+                                                    className={b('badge')}
                                                 >
                                                     <Text color="brand" variant="subheader-2">
                                                         {badge.name}
@@ -94,8 +95,8 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                             );
                                         })}
                                     </Flex>
-                                ) : null}
-                            </div>
+                                </div>
+                            )}
                             <div className={b('title-col')}>
                                 <h1 className={b('title')}>
                                     <HTML>{title}</HTML>

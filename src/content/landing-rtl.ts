@@ -37,6 +37,13 @@ export const getRtlLanding = ({
         {
             type: CustomBlock.CustomHeader,
             title: 'بناء واجهات حديثة باستخدام نظام التصميم Gravity والمكتبات',
+            badges: [
+                {name: 'AI', status: 'Ready'},
+                {name: 'A11Y', status: 'Ready'},
+                {name: 'Touch', status: 'Ready'},
+                {name: 'i18n', status: 'Ready'},
+                {name: 'RTL', status: 'Ready'},
+            ],
             buttons: [
                 {
                     text: 'كيف تبدأ',
