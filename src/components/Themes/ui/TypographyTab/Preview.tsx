@@ -140,7 +140,7 @@ export const Preview = () => {
             exportTheme({
                 themeState,
                 ignoreDefaultValues: false,
-                customRootClassName: 'gravity-ui-typography-tab__preview',
+                customRootClassName: 'gravity-ui-landing-typography-tab__preview',
             }),
         [themeState],
     );
