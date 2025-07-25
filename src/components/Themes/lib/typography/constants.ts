@@ -1,5 +1,6 @@
-import {CustomFontSelectType, TypographyOptions} from '../types';
+import {DEFAULT_THEME} from '@gravity-ui/uikit-themer';
 
+import {CustomFontSelectType, TypographyOptions} from '../types';
 export const THEME_FONT_FAMILY_PREFIX = '--g-font-family';
 export const THEME_TEXT_PREFIX = '--g-text';
 
@@ -7,6 +8,10 @@ export enum DefaultFontFamilyType {
     Sans = 'sans',
     Monospace = 'monospace',
 }
+
+// TODO: add export to uikit-themer
+export const DEFAULT_FONT_FAMILIES = ['sans', 'monospace'] as const;
+export type DefaultFontFamily = typeof DEFAULT_FONT_FAMILIES[number];
 
 export const FONT_WEIGHTS = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 

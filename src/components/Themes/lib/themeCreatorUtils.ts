@@ -1,6 +1,7 @@
 import {TextProps} from '@gravity-ui/uikit';
 import {
     BordersOptions,
+    DEFAULT_THEME,
     GravityTheme,
     createInternalPrivateColorReference,
     createPrivateColorCssVariable,
@@ -9,7 +10,13 @@ import {
     updateBaseColor,
     updateUtilityColor,
 } from '@gravity-ui/uikit-themer';
-import type {AnyPrivateColorToken, TextGroup, Theme, UtilityColor} from '@gravity-ui/uikit-themer';
+import type {
+    AnyPrivateColorToken,
+    TextGroup,
+    TextVariant,
+    Theme,
+    UtilityColor,
+} from '@gravity-ui/uikit-themer';
 import {generatePrivateColorsForBaseColors} from '@gravity-ui/uikit-themer/dist/utils';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
@@ -25,7 +32,11 @@ import {
 } from './constants';
 import type {Palette, PaletteTokens, ThemeCreatorState} from './types';
 import {CustomFontSelectType, RadiusPresetName, TypographyOptions} from './types';
-import {DefaultFontFamilyType, defaultTypographyPreset} from './typography/constants';
+import {
+    DefaultFontFamily,
+    DefaultFontFamilyType,
+    defaultTypographyPreset,
+} from './typography/constants';
 import {
     createFontFamilyVariable,
     createFontLinkImport,
@@ -404,23 +415,21 @@ export function updateCustomRadiusPresetInTheme(
 }
 
 export type UpdateFontFamilyParams = {
-    fontType: DefaultFontFamilyType | string;
+    fontType: DefaultFontFamily | string;
     fontWebsite?: string;
     isCustom?: boolean;
     customType?: string;
     value?: {
-        title: string;
-        key: string;
-        link: string;
-        alternatives: string[];
+        mainFont: string;
+        fallbackFonts: string[];
     };
 };
 
 export function updateFontFamilyInTheme(
     themeState: ThemeCreatorState,
-    {fontType, value, isCustom, fontWebsite, customType}: UpdateFontFamilyParams,
+    {fontType, value, isCustom}: UpdateFontFamilyParams,
 ): ThemeCreatorState {
-    const previousFontFamilySettings = themeState.typography.baseSetting.fontFamilies;
+    const previousFontFamilySettings = themeState.gravityTheme.typography.fontFamilies;
 
     const newFontFamilySettings = {
         ...previousFontFamilySettings,
@@ -428,17 +437,15 @@ export function updateFontFamilyInTheme(
             ...previousFontFamilySettings[fontType],
             ...(value || {}),
             isCustom,
-            customType: customType || previousFontFamilySettings[fontType].customType,
-            fontWebsite,
         },
     };
 
     return {
         ...themeState,
-        typography: {
-            ...themeState.typography,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
+        gravityTheme: {
+            ...themeState.gravityTheme,
+            typography: {
+                ...themeState.gravityTheme.typography,
                 fontFamilies: newFontFamilySettings,
             },
         },
@@ -453,36 +460,27 @@ export function addFontFamilyTypeInTheme(
     themeState: ThemeCreatorState,
     {title}: AddFontFamilyTypeParams,
 ): ThemeCreatorState {
-    const {customFontFamilyType} = themeState.typography.baseSetting;
-    const newFontType = `custom-font-type-${uuidv4()}`;
+    const {gravityTheme} = themeState;
+    const typography = cloneDeep(gravityTheme.typography);
 
-    const newCustomFontFamily = [
-        ...customFontFamilyType,
-        {
-            value: newFontType,
-            content: title,
-        },
-    ];
+    const customFontPrefix = 'custom-font-';
+
+    const countCustomFonts = Object.keys(gravityTheme.typography.fontFamilies).filter((name) =>
+        name.startsWith(customFontPrefix),
+    ).length;
+
+    const newFontKey = `${customFontPrefix}${countCustomFonts + 1}`;
+
+    typography.fontFamilies[newFontKey] = {
+        mainFont: '',
+        fallbackFonts: [],
+    };
 
     return {
         ...themeState,
-        typography: {
-            ...themeState.typography,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
-                fontFamilies: {
-                    ...themeState.typography.baseSetting.fontFamilies,
-                    [newFontType]: {
-                        isCustom: true,
-                        customType: CustomFontSelectType.GoogleFonts,
-                        title: '',
-                        key: '',
-                        link: '',
-                        alternatives: [],
-                    },
-                },
-                customFontFamilyType: newCustomFontFamily,
-            },
+        gravityTheme: {
+            ...gravityTheme,
+            typography,
         },
     };
 }
@@ -523,34 +521,22 @@ export function removeFontFamilyTypeFromTheme(
     themeState: ThemeCreatorState,
     {fontType}: {fontType: string},
 ): ThemeCreatorState {
-    const {customFontFamilyType, fontFamilies} = themeState.typography.baseSetting;
-
-    const {[fontType]: _, ...restFontFamilies} = fontFamilies;
-
-    const newCustomFontFamilyType = customFontFamilyType.filter(
-        (fontFamily) => fontFamily.value !== fontType,
-    );
-
-    const newAdvanced = cloneDeep(themeState.typography.advanced);
+    const newTypography = cloneDeep(themeState.gravityTheme.typography);
+    delete newTypography.fontFamilies[fontType];
 
     // Reset selected font to default
-    Object.entries(newAdvanced).forEach(([textVariant, settings]) => {
-        if (settings.selectedFontFamilyType === fontType) {
-            newAdvanced[textVariant as TextGroup].selectedFontFamilyType =
-                defaultTypographyPreset.advanced[textVariant as TextGroup].selectedFontFamilyType;
+    Object.entries(newTypography.groups).forEach(([group, settings]) => {
+        if (settings['font-family'] === fontType) {
+            newTypography.groups[group as TextGroup]['font-family'] =
+                DEFAULT_THEME.typography.groups[group as TextGroup]['font-family'];
         }
     });
 
     return {
         ...themeState,
-        typography: {
-            ...themeState.typography,
-            advanced: newAdvanced,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
-                fontFamilies: restFontFamilies,
-                customFontFamilyType: newCustomFontFamilyType,
-            },
+        gravityTheme: {
+            ...themeState.gravityTheme,
+            typography: newTypography,
         },
     };
 }
@@ -559,9 +545,9 @@ export type UpdateAdvancedTypographySettingsParams = {
     key: TextGroup;
     fontWeight?: number;
     selectedFontFamilyType?: string;
-    sizeKey?: Exclude<TextProps['variant'], undefined>;
-    fontSize?: number;
-    lineHeight?: number;
+    sizeKey?: TextVariant;
+    fontSize?: string;
+    lineHeight?: string;
 };
 
 export function updateAdvancedTypographySettingsInTheme(
@@ -575,42 +561,29 @@ export function updateAdvancedTypographySettingsInTheme(
         lineHeight,
     }: UpdateAdvancedTypographySettingsParams,
 ): ThemeCreatorState {
-    const previousTypographyAdvancedSettings = themeState.typography.advanced;
+    const {groups, variants} = themeState.gravityTheme.typography;
 
-    const newSizes = sizeKey
-        ? {
-              [sizeKey]: {
-                  ...previousTypographyAdvancedSettings[key].sizes[sizeKey],
-                  fontSize:
-                      fontSize ?? previousTypographyAdvancedSettings[key].sizes[sizeKey]?.fontSize,
-                  lineHeight:
-                      lineHeight ??
-                      previousTypographyAdvancedSettings[key].sizes[sizeKey]?.lineHeight,
-              },
-          }
-        : {};
+    const newGroups = {...groups};
+    const newVariants = {...variants};
 
-    const newTypographyAdvancedSettings = {
-        ...previousTypographyAdvancedSettings,
-        [key]: {
-            ...previousTypographyAdvancedSettings[key],
-            fontWeight: fontWeight ?? previousTypographyAdvancedSettings[key].fontWeight,
-            selectedFontFamilyType:
-                selectedFontFamilyType ??
-                previousTypographyAdvancedSettings[key].selectedFontFamilyType,
-            sizes: {
-                ...previousTypographyAdvancedSettings[key].sizes,
-                ...newSizes,
-            },
-        },
-    };
+    if (key) {
+        newGroups[key]['font-family'] = selectedFontFamilyType ?? newGroups[key]['font-family'];
+        newGroups[key]['font-weight'] = fontWeight ?? newGroups[key]['font-weight'];
+    }
+
+    if (sizeKey) {
+        newVariants[sizeKey]['font-size'] = fontSize ?? newVariants[sizeKey]['font-size'];
+        newVariants[sizeKey]['line-height'] = lineHeight ?? newVariants[sizeKey]['line-height'];
+    }
 
     return {
         ...themeState,
-        typography: {
-            ...themeState.typography,
-            advanced: {
-                ...newTypographyAdvancedSettings,
+        gravityTheme: {
+            ...themeState.gravityTheme,
+            typography: {
+                ...themeState.gravityTheme.typography,
+                variants: newVariants,
+                groups: newGroups,
             },
         },
     };
