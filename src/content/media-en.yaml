@@ -1,0 +1,137 @@
+background:
+  image: ""
+blocks:
+  - title: Update Figma library
+    description: We released a major update to the Figma library — version 2.0.0.
+    additionalInfo: ""
+    links: []
+    buttons: []
+    list:
+      - text: ✅ Поддержка UI Kit 7
+      - text: ✅ Новые компоненты
+      - text: ✅ Новые стили и поддержка код-синтаксиса в переменных
+      - text: ✅ Обновление существующих компонентов
+      - text: >-
+          ✅ Добавление экспериментальных компонентов для улучшения
+          быстродействия
+    media:
+      image: >-
+        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg
+    type: media-block
+    button:
+      text: To library
+      url: >-
+        https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
+      theme: accent
+  - type: card-layout-block
+    children:
+      - type: background-card
+        title: "Дизайн-система Gravity UI: как легко построить свой интерфейс"
+        text: >-
+          Рассказ, зачем мы сделали Gravity UI, как его используем, в чём
+          особенности и преимущества нашего подхода и как мы планируем развивать
+          его дальше. А ещё — как настроить разные цветовые схемы в своих
+          проектах и почему у нас четыре темы вместо двух стандартных.
+        theme: default
+        additionalInfo: ""
+        url: https://habr.com/en/companies/yandex/articles/773870/
+      - type: background-card
+        title: Как мы делали Yandex Cloud на дизайн-системе Gravity UI доступнее
+        text: Как построить доступный интерефейс, используя библиотеки GravityUI.
+        url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
+      - type: background-card
+        title: "Markdown Editor: WYSIWYG и markup-редактор на базе Gravity UI"
+        text: >-
+          Поговорим об истории создания пользовательского интерфейса,
+          архитектурных особенностях и технических деталях интеграции и
+          разработки собственных расширений, а потом — почему всё это доступно в
+          опенсорсе.
+        url: https://habr.com/en/companies/yandex/articles/845802/
+    title: Статьи
+    description: ""
+  - allTag: false
+  - type: filter-block
+    title: Вебинары
+    description: >
+      Если удобнее посмотреть видео
+    tags:
+      - id: youtube
+        label: YouTube
+      - id: cloudvideo
+        label: Cloud Video
+    items:
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:
+            dark:
+              youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
+              previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"
+            light:
+              youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
+              previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"
+          content:
+            title: "Navigation"
+            text: >-
+              Вводный вебинар по библиотеке Navigation
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:
+            dark:
+              youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
+              previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+            light:
+              youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
+              previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+          content:
+            title: Вводный вебинар
+            text: >-
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            dark:
+              image: >-
+                https://storage.yandexcloud.net/temp-assets/w_Navigation.png
+            light:
+              image: >-
+                https://storage.yandexcloud.net/temp-assets/w_Navigation.png
+          content:
+            title: "Navigation"
+            text: >-
+              <a href=\"https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7?autoplay=0&mute=1\">Вводный вебинар по библиотеке Navigation</a>
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            dark:
+              image: >-
+                https://storage.yandexcloud.net/temp-assets/zastavka.png
+            light:
+              image: >-
+                https://storage.yandexcloud.net/temp-assets/zastavka.png
+          content:
+            title: Вводный вебинар
+            text: <a href=\"https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7?autoplay=0&mute=1\">Посмотреть</a>
+    allTag: false
+  - type: content-layout-block
+    textWidth: s
+    centered: true
+    background:
+      src: ""
+      style:
+        backgroundColor: "#23151E"
+        color: ""
+    textContent:
+      title: Остались вопросы?
+      text: Напишите нам
+      buttons:
+        - text: Написать нам в telegram
+          theme: action
+          url: https://t.me/gravity_ui_chat
+    theme: dark

@@ -1,4 +1,5 @@
 const {join} = require('path');
+const path = require('path');
 
 const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
@@ -56,6 +57,16 @@ const plugins = [
                                     ],
                                 },
                             },
+                        },
+                    ],
+                });
+
+                config.module.rules.push({
+                    test: /\.(yml|yaml)$/,
+                    type: 'javascript/auto',
+                    use: [
+                        {
+                            loader: path.resolve('./scripts/yaml-static-loader.mjs'),
                         },
                     ],
                 });
