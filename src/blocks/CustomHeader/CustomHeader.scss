@@ -122,6 +122,7 @@ $block: '.#{variables.$ns}custom-header';
         }
     }
     &__badges-wrapper {
+        width: 68px;
         padding: var(--g-spacing-4) 0;
         border-inline-end: 1px solid var(--g-color-line-generic);
         flex-direction: column;
@@ -134,6 +135,7 @@ $block: '.#{variables.$ns}custom-header';
             flex-direction: row;
             gap: var(--g-spacing-2);
             justify-content: space-evenly;
+            width: unset;
         }
     }
     &__badges-col {
