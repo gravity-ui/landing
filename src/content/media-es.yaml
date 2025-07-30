@@ -1,0 +1,131 @@
+background:
+  image: ""
+blocks:
+  - type: media-block
+    title: Actualización de la biblioteca de Figma
+    description: Hemos lanzado una actualización importante de nuestra biblioteca de Figma — versión 2.0.0.
+    additionalInfo: ""
+    links: []
+    buttons: []
+    list:
+      - text: ✅ Soporte para UI Kit 7
+      - text: ✅ Nuevos componentes
+      - text: ✅ Nuevos estilos y soporte para sintaxis de código en variables
+      - text: ✅ Actualización de componentes existentes
+      - text: >-
+          ✅ Adición de componentes experimentales para mejorar
+          el rendimiento
+    media:
+      image: >-
+        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
+    button:
+      text: To library
+      url: >-
+        https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
+      theme: accent
+  - type: slider-block
+    dots: true
+    title: Artículos
+    autoplay: 5000
+    children:
+      - type: basic-card
+        title: "Comparación de rendimiento"
+        text: >-
+          En este artículo propusimos un método para medir el rendimiento de los componentes del sistema de diseño.
+          Recopilamos comentarios y sugerencias para mejorar el rendimiento.
+        url: https://habr.com/ru/companies/yandex/posts/931702/
+      - type: basic-card
+        title: "Sistema de diseño Gravity UI: cómo construir fácilmente tu interfaz"
+        text: >-
+          Explicamos por qué creamos Gravity UI, cómo lo usamos, cuáles son
+          las características y ventajas de nuestro enfoque y cómo planeamos desarrollarlo
+          en el futuro.
+        url: https://habr.com/en/companies/yandex/articles/773870/
+      - type: basic-card
+        title: Cómo hicimos Yandex Cloud más accesible con el sistema de diseño Gravity UI
+        text: Cómo construir una interfaz accesible usando las bibliotecas de GravityUI.
+        url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
+      - type: basic-card
+        title: "Markdown Editor: Editor WYSIWYG y de marcado basado en Gravity UI"
+        text: >-
+          Hablemos sobre la historia de la creación de la interfaz de usuario,
+          las características arquitectónicas y los detalles técnicos de integración y
+          desarrollo de extensiones personalizadas, y después — por qué todo esto está disponible en
+          código abierto.
+        url: https://habr.com/en/companies/yandex/articles/845802/
+  - type: filter-block
+    title: Seminarios web
+    description: >
+      Si prefieres ver videos
+    tags:
+      - id: youtube
+        label: YouTube
+      - id: cloudvideo
+        label: Cloud Video
+    items:
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:     
+            youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"            
+          border: true
+          fullscreen: true    
+          content:
+            title: "Navigation"
+            text: >-
+              Seminario web introductorio sobre la biblioteca Navigation
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:           
+            youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+          border: true
+          fullscreen: true    
+          content:
+            title: Seminario web introductorio
+            text: >-
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/w_Navigation.png'
+          border: true
+          fullscreen: true  
+          content:
+            title: "Navigation"
+            text: >-
+              Seminario web introductorio sobre la biblioteca Navigation
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/zastavka.png'
+          border: true
+          fullscreen: true
+          content:
+            title: Seminario web introductorio
+    allTag: false
+  - type: content-layout-block
+    textWidth: s
+    centered: true
+    background:
+      src: ""
+      style:
+        backgroundColor: "#23151E"
+        color: ""
+    textContent:
+      title: ¿Tienes preguntas?
+      #text: Escríbenos
+      buttons:
+        - text: Únete a nuestra comunidad de Telegram
+          theme: action
+          url: https://t.me/gravity_ui_chat
+    

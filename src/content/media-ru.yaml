@@ -1,0 +1,131 @@
+background:
+  image: ""
+blocks:
+  - type: media-block
+    title: Обновление библиотеки Figma
+    description: Мы выпустили большое обновление библиотеки в Фигме — версию 2.0.0.
+    additionalInfo: ""
+    links: []
+    buttons: []
+    list:
+      - text: ✅ Поддержка UI Kit 7
+      - text: ✅ Новые компоненты
+      - text: ✅ Новые стили и поддержка код-синтаксиса в переменных
+      - text: ✅ Обновление существующих компонентов
+      - text: >-
+          ✅ Добавление экспериментальных компонентов для улучшения
+          быстродействия
+    media:
+      image: >-
+        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
+    button:
+      text: To library
+      url: >-
+        https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
+      theme: accent
+  - type: slider-block
+    dots: true
+    title: Статьи
+    autoplay: 5000
+    children:
+      - type: basic-card
+        title: "Сравнение производительности"
+        text: >-
+          В посте мы предложили способ замера производительности компонентов дизайн-системы.
+          Собираем обратную связь и прдложения по улучшению производительности.
+        url: https://habr.com/ru/companies/yandex/posts/931702/
+      - type: basic-card
+        title: "Дизайн-система Gravity UI: как легко построить свой интерфейс"
+        text: >-
+          Рассказ, зачем мы сделали Gravity UI, как его используем, в чём
+          особенности и преимущества нашего подхода и как мы планируем развивать
+          его дальше.
+        url: https://habr.com/en/companies/yandex/articles/773870/
+      - type: basic-card
+        title: Как мы делали Yandex Cloud на дизайн-системе Gravity UI доступнее
+        text: Как построить доступный интерефейс, используя библиотеки GravityUI.
+        url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
+      - type: basic-card
+        title: "Markdown Editor: WYSIWYG и markup-редактор на базе Gravity UI"
+        text: >-
+          Поговорим об истории создания пользовательского интерфейса,
+          архитектурных особенностях и технических деталях интеграции и
+          разработки собственных расширений, а потом — почему всё это доступно в
+          опенсорсе.
+        url: https://habr.com/en/companies/yandex/articles/845802/
+  - type: filter-block
+    title: Вебинары
+    description: >
+      Если удобнее посмотреть видео
+    tags:
+      - id: youtube
+        label: YouTube
+      - id: cloudvideo
+        label: Cloud Video
+    items:
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:     
+            youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"            
+          border: true
+          fullscreen: true    
+          content:
+            title: "Navigation"
+            text: >-
+              Вводный вебинар по библиотеке Navigation
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:           
+            youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+          border: true
+          fullscreen: true    
+          content:
+            title: Вводный вебинар
+            text: >-
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/w_Navigation.png'
+          border: true
+          fullscreen: true  
+          content:
+            title: "Navigation"
+            text: >-
+              Вводный вебинар по библиотеке Navigation
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/zastavka.png'
+          border: true
+          fullscreen: true
+          content:
+            title: Вводный вебинар
+    allTag: false
+  - type: content-layout-block
+    textWidth: s
+    centered: true
+    background:
+      src: ""
+      style:
+        backgroundColor: "#23151E"
+        color: ""
+    textContent:
+      title: Остались вопросы?
+      #text: Напишите нам
+      buttons:
+        - text: Вступайте в сообщество telegram
+          theme: action
+          url: https://t.me/gravity_ui_chat
+    

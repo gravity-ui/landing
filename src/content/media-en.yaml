@@ -1,0 +1,130 @@
+background:
+  image: ""
+blocks:
+  - type: media-block
+    title: Figma Library Update
+    description: We've released a major update to our Figma library — version 2.0.0.
+    additionalInfo: ""
+    links: []
+    buttons: []
+    list:
+      - text: ✅ UI Kit 7 support
+      - text: ✅ New components
+      - text: ✅ New styles and code syntax support in variables
+      - text: ✅ Updated existing components
+      - text: >-
+          ✅ Added experimental components for improved
+          performance
+    media:
+      image: >-
+        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
+    button:
+      text: To library
+      url: >-
+        https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
+      theme: accent
+  - type: slider-block
+    dots: true
+    title: Articles
+    autoplay: 2000
+    children:
+      - type: background-card
+        title: "Performance Comparison"
+        text: >-
+          In this post, we proposed a method for measuring the performance of design system components.
+          We're collecting feedback and suggestions for performance improvements.
+        url: https://habr.com/ru/companies/yandex/posts/931702/
+      - type: background-card
+        title: "Gravity UI Design System: How to Easily Build Your Interface"
+        text: >-
+          We explain why we created Gravity UI, how we use it, what the
+          features and advantages of our approach are, and how we plan to develop
+          it further.
+        url: https://habr.com/en/companies/yandex/articles/773870/
+      - type: background-card
+        title: How We Made Yandex Cloud More Accessible with Gravity UI Design System
+        text: How to build an accessible interface using GravityUI libraries.
+        url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
+      - type: background-card
+        title: "Markdown Editor: WYSIWYG and Markup Editor Based on Gravity UI"
+        text: >-
+          Let's talk about the history of creating the user interface,
+          architectural features and technical details of integration and
+          development of custom extensions, and then — why all this is available in
+          open source.
+        url: https://habr.com/en/companies/yandex/articles/845802/
+  - type: filter-block
+    title: Webinars
+    description: >
+      If you prefer to watch videos
+    tags:
+      - id: youtube
+        label: YouTube
+      - id: cloudvideo
+        label: Cloud Video
+    items:
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:     
+            youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"            
+          border: true
+          fullscreen: true    
+          content:
+            title: "Navigation"
+            text: >-
+              Introductory webinar on Navigation library
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:           
+            youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+          border: true
+          fullscreen: true    
+          content:
+            title: Introductory Webinar
+            text: >-
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/w_Navigation.png'
+          border: true
+          fullscreen: true  
+          content:
+            title: "Navigation"
+            text: >-
+              Introductory webinar on Navigation library
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/zastavka.png'
+          border: true
+          fullscreen: true
+          content:
+            title: Introductory Webinar
+    allTag: false
+  - type: content-layout-block
+    textWidth: s
+    centered: true
+    background:
+      src: ""
+      style:
+        backgroundColor: "#23151E"
+        color: ""
+    textContent:
+      title: Have Questions?
+      #text: Write to us
+      buttons:
+        - text: Join our Telegram community
+          theme: action
+          url: https://t.me/gravity_ui_chat
