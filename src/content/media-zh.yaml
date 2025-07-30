@@ -2,19 +2,19 @@ background:
   image: ""
 blocks:
   - type: media-block
-    title: Figma Library Update
-    description: We've released a major update to our Figma library — version 2.0.0.
+    title: Figma 库更新
+    description: 我们发布了 Figma 库的重大更新 — 版本 2.0.0。
     additionalInfo: ""
     links: []
     buttons: []
     list:
-      - text: ✅ UI Kit 7 support
-      - text: ✅ New components
-      - text: ✅ New styles and code syntax support in variables
-      - text: ✅ Updated existing components
+      - text: ✅ 支持 UI Kit 7
+      - text: ✅ 新组件
+      - text: ✅ 新样式和变量中的代码语法支持
+      - text: ✅ 更新现有组件
       - text: >-
-          ✅ Added experimental components for improved
-          performance
+          ✅ 添加实验性组件以提高
+          性能
     media:
       image: >-
         https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
@@ -25,38 +25,38 @@ blocks:
       theme: accent
   - type: slider-block
     dots: true
-    title: Articles
-    autoplay: 2000
+    title: 文章
+    autoplay: 5000
     children:
-      - type: background-card
-        title: "Performance Comparison"
+      - type: basic-card
+        title: "性能比较"
         text: >-
-          In this post, we proposed a method for measuring the performance of design system components.
-          We're collecting feedback and suggestions for performance improvements.
+          在这篇文章中，我们提出了一种测量设计系统组件性能的方法。
+          我们正在收集反馈和改进性能的建议。
         url: https://habr.com/ru/companies/yandex/posts/931702/
-      - type: background-card
-        title: "Gravity UI Design System: How to Easily Build Your Interface"
+      - type: basic-card
+        title: "Gravity UI 设计系统：如何轻松构建您的界面"
         text: >-
-          We explain why we created Gravity UI, how we use it, what the
-          features and advantages of our approach are, and how we plan to develop
-          it further.
+          我们解释为什么创建 Gravity UI，如何使用它，我们方法的
+          特点和优势是什么，以及我们计划如何进一步发展
+          它。
         url: https://habr.com/en/companies/yandex/articles/773870/
-      - type: background-card
-        title: How We Made Yandex Cloud More Accessible with Gravity UI Design System
-        text: How to build an accessible interface using GravityUI libraries.
+      - type: basic-card
+        title: 我们如何使用 Gravity UI 设计系统让 Yandex Cloud 更易访问
+        text: 如何使用 GravityUI 库构建无障碍界面。
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
-      - type: background-card
-        title: "Markdown Editor: WYSIWYG and Markup Editor Based on Gravity UI"
+      - type: basic-card
+        title: "Markdown Editor：基于 Gravity UI 的所见即所得和标记编辑器"
         text: >-
-          Let's talk about the history of creating the user interface,
-          architectural features and technical details of integration and
-          development of custom extensions, and then — why all this is available in
-          open source.
+          让我们谈论用户界面创建的历史、
+          架构特点和集成的技术细节以及
+          自定义扩展的开发，然后 — 为什么所有这些都可以在
+          开源中获得。
         url: https://habr.com/en/companies/yandex/articles/845802/
   - type: filter-block
-    title: Webinars
+    title: 网络研讨会
     description: >
-      If you prefer to watch videos
+      如果您更喜欢观看视频
     tags:
       - id: youtube
         label: YouTube
@@ -75,7 +75,7 @@ blocks:
           content:
             title: "Navigation"
             text: >-
-              Introductory webinar on Navigation library
+              Navigation 库介绍性网络研讨会
       - tags:
           - youtube
         card:
@@ -86,7 +86,7 @@ blocks:
           border: true
           fullscreen: true    
           content:
-            title: Introductory Webinar
+            title: 介绍性网络研讨会
             text: >-
       - tags:
           - cloudvideo
@@ -100,7 +100,7 @@ blocks:
           content:
             title: "Navigation"
             text: >-
-              Introductory webinar on Navigation library
+              Navigation 库介绍性网络研讨会
       - tags:
           - cloudvideo
         card:
@@ -111,7 +111,7 @@ blocks:
           border: true
           fullscreen: true
           content:
-            title: Introductory Webinar
+            title: 介绍性网络研讨会
     allTag: false
   - type: content-layout-block
     textWidth: s
@@ -122,9 +122,10 @@ blocks:
         backgroundColor: "#23151E"
         color: ""
     textContent:
-      title: Have Questions?
-      #text: Write to us
+      title: 有问题吗？
+      #text: 写信给我们
       buttons:
-        - text: Join our Telegram community
+        - text: 加入我们的 Telegram 社区
           theme: action
           url: https://t.me/gravity_ui_chat
+    
