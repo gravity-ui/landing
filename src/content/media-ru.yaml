@@ -1,7 +1,8 @@
 background:
   image: ""
 blocks:
-  - title: Обновление библиотеки Figma
+  - type: media-block
+    title: Обновление библиотеки Figma
     description: Мы выпустили большое обновление библиотеки в Фигме — версию 2.0.0.
     additionalInfo: ""
     links: []
@@ -16,30 +17,35 @@ blocks:
           быстродействия
     media:
       image: >-
-        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg
-    type: media-block
+        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
     button:
       text: To library
       url: >-
         https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
       theme: accent
-  - type: card-layout-block
+  - type: slider-block
+    dots: true
+    title: Статьи
+    autoplay: 5000
     children:
-      - type: background-card
+      - type: basic-card
+        title: "Сравнение производительности"
+        text: >-
+          В посте мы предложили способ замера производительности компонентов дизайн-системы.
+          Собираем обратную связь и прдложения по улучшению производительности.
+        url: https://habr.com/ru/companies/yandex/posts/931702/
+      - type: basic-card
         title: "Дизайн-система Gravity UI: как легко построить свой интерфейс"
         text: >-
           Рассказ, зачем мы сделали Gravity UI, как его используем, в чём
           особенности и преимущества нашего подхода и как мы планируем развивать
-          его дальше. А ещё — как настроить разные цветовые схемы в своих
-          проектах и почему у нас четыре темы вместо двух стандартных.
-        theme: default
-        additionalInfo: ""
+          его дальше.
         url: https://habr.com/en/companies/yandex/articles/773870/
-      - type: background-card
+      - type: basic-card
         title: Как мы делали Yandex Cloud на дизайн-системе Gravity UI доступнее
         text: Как построить доступный интерефейс, используя библиотеки GravityUI.
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
-      - type: background-card
+      - type: basic-card
         title: "Markdown Editor: WYSIWYG и markup-редактор на базе Gravity UI"
         text: >-
           Поговорим об истории создания пользовательского интерфейса,
@@ -47,9 +53,6 @@ blocks:
           разработки собственных расширений, а потом — почему всё это доступно в
           опенсорсе.
         url: https://habr.com/en/companies/yandex/articles/845802/
-    title: Статьи
-    description: ""
-  - allTag: false
   - type: filter-block
     title: Вебинары
     description: >
@@ -64,13 +67,11 @@ blocks:
           - youtube
         card:
           type: layout-item
-          media:
-            dark:
-              youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
-              previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"
-            light:
-              youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
-              previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"
+          media:     
+            youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"            
+          border: true
+          fullscreen: true    
           content:
             title: "Navigation"
             text: >-
@@ -79,13 +80,11 @@ blocks:
           - youtube
         card:
           type: layout-item
-          media:
-            dark:
-              youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
-              previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
-            light:
-              youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
-              previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+          media:           
+            youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
+            previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+          border: true
+          fullscreen: true    
           content:
             title: Вводный вебинар
             text: >-
@@ -94,30 +93,25 @@ blocks:
         card:
           type: layout-item
           media:
-            dark:
-              image: >-
-                https://storage.yandexcloud.net/temp-assets/w_Navigation.png
-            light:
-              image: >-
-                https://storage.yandexcloud.net/temp-assets/w_Navigation.png
+            videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/w_Navigation.png'
+          border: true
+          fullscreen: true  
           content:
             title: "Navigation"
             text: >-
-              <a href=\"https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7?autoplay=0&mute=1\">Вводный вебинар по библиотеке Navigation</a>
+              Вводный вебинар по библиотеке Navigation
       - tags:
           - cloudvideo
         card:
           type: layout-item
           media:
-            dark:
-              image: >-
-                https://storage.yandexcloud.net/temp-assets/zastavka.png
-            light:
-              image: >-
-                https://storage.yandexcloud.net/temp-assets/zastavka.png
+            videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
+            previewImg: 'https://storage.yandexcloud.net/temp-assets/zastavka.png'
+          border: true
+          fullscreen: true
           content:
             title: Вводный вебинар
-            text: <a href=\"https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7?autoplay=0&mute=1\">Посмотреть</a>
     allTag: false
   - type: content-layout-block
     textWidth: s
@@ -129,9 +123,9 @@ blocks:
         color: ""
     textContent:
       title: Остались вопросы?
-      text: Напишите нам
+      #text: Напишите нам
       buttons:
-        - text: Написать нам в telegram
+        - text: Вступайте в сообщество telegram
           theme: action
           url: https://t.me/gravity_ui_chat
-    theme: dark
+    
