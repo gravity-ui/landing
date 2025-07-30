@@ -1,22 +1,21 @@
-import {GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
 import {useTranslation} from 'react-i18next';
 import {Layout} from 'src/components/Layout/Layout';
 import {Media} from 'src/components/Media/Media';
 import {getI18nProps} from 'src/utils';
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-    const result = {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    return {
         props: {
-            ...(await getI18nProps(ctx, ['themes'])),
+            ...(await getI18nProps(ctx)),
         },
     };
-    return result;
 };
 
 export default function MediaPage() {
     const {t} = useTranslation();
     return (
-        <Layout title={t('media:title')}>
+        <Layout title={t('media:title')} isPageConstructor>
             <Media />
         </Layout>
     );

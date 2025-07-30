@@ -1,1 +1,1 @@
-export {default, getStaticProps} from '../[locale]/media';
+export {default, getServerSideProps} from '../[locale]/media';
