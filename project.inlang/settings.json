@@ -1,0 +1,27 @@
+{
+  "$schema": "https://inlang.com/schema/project-settings",
+  "sourceLanguageTag": "en",
+  "languageTags": [
+    "en",
+    "ru",
+    "zh",
+    "es"
+  ],
+  "modules": ["https://cdn.jsdelivr.net/npm/@inlang/plugin-i18next@4/dist/index.js"],
+  "plugin.inlang.i18next": {
+    "pathPattern": {
+      "common": "./public/locales/{languageTag}/common.json",
+      "component": "./public/locales/{languageTag}/component.json",
+      "design-article": "./public/locales/{languageTag}/design-article.json",
+      "design-articles-info": "./public/locales/{languageTag}/design-articles-info.json",
+      "graph": "./public/locales/{languageTag}/graph.json",
+      "icons": "./public/locales/{languageTag}/icons.json",
+      "libraries-info": "./public/locales/{languageTag}/libraries-info.json",
+      "libraries": "./public/locales/{languageTag}/libraries.json",
+      "library": "./public/locales/{languageTag}/library.json",
+      "markdown-editor": "./public/locales/{languageTag}/markdown-editor.json",
+      "themes": "./public/locales/{languageTag}/themes.json",
+      "home": "./public/locales/{languageTag}/home.json"
+    }
+  }
+}

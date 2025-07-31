@@ -59,6 +59,7 @@
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
     "@gravity-ui/tsconfig": "^1.0.0",
+    "@inlang/cli": "^2.18.1",
     "@svgr/webpack": "^6.5.1",
     "@types/chroma-js": "^2.4.4",
     "@types/jest": "^29.2.4",
@@ -108,7 +109,7 @@
     "pretest": "npm run prepare-metadata",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
-    "lint:prettier": "prettier --check '**/*.md'",
+    "lint:prettier": "prettier --check '**/*.{md,json}'",
     "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
     "deploy": "echo 'gravity-ui.com' > ./out/CNAME && gh-pages -d build",
     "typecheck": "tsc --noEmit"
@@ -133,7 +134,7 @@
       "eslint --fix --quiet",
       "prettier --write"
     ],
-    "*.md": [
+    "*.{md,json}": [
       "prettier --write"
     ]
   }
