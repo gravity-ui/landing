@@ -1,0 +1,120 @@
+background:
+  image: ""
+blocks:
+  - type: header-block
+    title: Nuestros Medios
+  - type: media-block
+    title: Comparación de rendimiento de componentes React - Gravity UI y otras bibliotecas
+    description: Un desarrollador principal de Gravity UI investigó el rendimiento de los componentes de la biblioteca en comparación con @adobe/react-spectrum, @mui/material y antd.
+    list:
+      - text: se utilizaron Playwright y PerformanceObserver API;
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
+      - text: las pruebas se repitieron 50 veces con diferentes números de nodos (10, 100, 1000).      
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
+    media:
+      image: >-
+        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png 
+    button:
+      text: Leer la publicación
+      url: >-
+        https://habr.com/ru/companies/yandex/posts/931702/
+      theme: accent
+  - type: slider-block
+    dots: true
+    title: Artículos
+    autoplay: 5000
+    children:  
+      - type: basic-card
+        title: "Sistema de diseño Gravity UI: cómo construir fácilmente tu interfaz"
+        text: >-
+          Una historia sobre por qué creamos Gravity UI, cómo lo usamos, cuáles son
+          las características y ventajas de nuestro enfoque y cómo planeamos desarrollarlo
+          en el futuro.
+        url: https://medium.com/p/32985f939f1c
+      - type: basic-card
+        title: Cómo hicimos Yandex Cloud más accesible con el sistema de diseño Gravity UI
+        text: Cómo construir una interfaz accesible utilizando las bibliotecas GravityUI.
+        url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
+      - type: basic-card
+        title: "Markdown Editor: Editor WYSIWYG y de markup basado en Gravity UI"
+        text: >-
+          Hablemos sobre la historia de la creación de la interfaz de usuario,
+          las características arquitectónicas y los detalles técnicos de la integración y
+          desarrollo de extensiones personalizadas, y luego, por qué todo esto está disponible en
+          código abierto.
+        url: https://habr.com/en/companies/yandex/articles/845802/
+  - type: filter-block
+    title: Webinars
+    description: >
+      Si es más conveniente ver videos
+    tags:
+      - id: youtube
+        label: YouTube
+      - id: cloudvideo
+        label: Cloud Video
+    items:
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:     
+            youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png"            
+          border: true
+          fullscreen: false  
+          content:
+            title: "Navigation"
+            text: >-
+              Webinar introductorio sobre la biblioteca Navigation
+      - tags:
+          - youtube
+        card:
+          type: layout-item
+          media:           
+            youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png"
+          border: true
+          fullscreen: false
+          content:
+            title: Webinar introductorio
+            text: >-
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
+          border: true
+          fullscreen: false
+          content:
+            title: "Navigation"
+            text: >-
+              Webinar introductorio sobre la biblioteca Navigation
+      - tags:
+          - cloudvideo
+        card:
+          type: layout-item
+          media:
+            videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
+          border: true
+          fullscreen: false
+          content:
+            title: Webinar introductorio
+    allTag: false
+  - type: content-layout-block
+    textWidth: s
+    centered: true
+    background:
+      src: ""
+      style:
+        backgroundColor: "#23151E"
+        color: ""
+    textContent:
+      title: ¿Tienes preguntas?
+      #text: Escríbenos
+      buttons:
+        - text: Únete a la comunidad de telegram
+          theme: action
+          url: https://t.me/gravity_ui_chat
