@@ -1,39 +1,29 @@
 background:
   image: ""
 blocks:
+  - type: header-block
+    title: Наши медиа
   - type: media-block
-    title: Обновление библиотеки Figma
-    description: Мы выпустили большое обновление библиотеки в Фигме — версию 2.0.0.
-    additionalInfo: ""
-    links: []
-    buttons: []
+    title: Сравнение производительности React-компонентов - Gravity UI и другие библиотеки
+    description: Core-разработчик Gravity UI исследовал производительность компонентов библиотеки в сравнении с @adobe/react-spectrum, @mui/material и antd.
     list:
-      - text: ✅ Поддержка UI Kit 7
-      - text: ✅ Новые компоненты
-      - text: ✅ Новые стили и поддержка код-синтаксиса в переменных
-      - text: ✅ Обновление существующих компонентов
-      - text: >-
-          ✅ Добавление экспериментальных компонентов для улучшения
-          быстродействия
+      - text: использовались Playwright и PerformanceObserver API;
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
+      - text: тесты повторялись 50 раз с разным количеством нод (10, 100, 1000).      
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
     media:
       image: >-
-        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
+        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png 
     button:
-      text: To library
+      text: Прочитать пост
       url: >-
-        https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
+        https://habr.com/ru/companies/yandex/posts/931702/
       theme: accent
   - type: slider-block
     dots: true
     title: Статьи
     autoplay: 5000
-    children:
-      - type: basic-card
-        title: "Сравнение производительности"
-        text: >-
-          В посте мы предложили способ замера производительности компонентов дизайн-системы.
-          Собираем обратную связь и прдложения по улучшению производительности.
-        url: https://habr.com/ru/companies/yandex/posts/931702/
+    children:  
       - type: basic-card
         title: "Дизайн-система Gravity UI: как легко построить свой интерфейс"
         text: >-
@@ -58,10 +48,10 @@ blocks:
     description: >
       Если удобнее посмотреть видео
     tags:
-      - id: youtube
-        label: YouTube
       - id: cloudvideo
         label: Cloud Video
+      - id: youtube
+        label: YouTube    
     items:
       - tags:
           - youtube
@@ -69,7 +59,7 @@ blocks:
           type: layout-item
           media:     
             youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
-            previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"            
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png"            
           border: true
           fullscreen: true    
           content:
@@ -82,7 +72,7 @@ blocks:
           type: layout-item
           media:           
             youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
-            previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png"
           border: true
           fullscreen: true    
           content:
@@ -94,7 +84,7 @@ blocks:
           type: layout-item
           media:
             videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
-            previewImg: 'https://storage.yandexcloud.net/temp-assets/w_Navigation.png'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
           fullscreen: true  
           content:
@@ -107,7 +97,7 @@ blocks:
           type: layout-item
           media:
             videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
-            previewImg: 'https://storage.yandexcloud.net/temp-assets/zastavka.png'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
           fullscreen: true
           content:
@@ -128,4 +118,3 @@ blocks:
         - text: Вступайте в сообщество telegram
           theme: action
           url: https://t.me/gravity_ui_chat
-    

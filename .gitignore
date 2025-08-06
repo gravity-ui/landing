@@ -32,3 +32,4 @@ yarn-error.log*
 /src/data/*.json
 
 .env
+.codeassistant/mcp.json

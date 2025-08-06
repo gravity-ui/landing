@@ -1,62 +1,52 @@
 background:
   image: ""
 blocks:
+  - type: header-block
+    title: Our Media
   - type: media-block
-    title: Figma Library Update
-    description: We've released a major update to our Figma library — version 2.0.0.
-    additionalInfo: ""
-    links: []
-    buttons: []
+    title: React Components Performance Comparison - Gravity UI and Other Libraries
+    description: A core developer of Gravity UI investigated the performance of library components in comparison with @adobe/react-spectrum, @mui/material and antd.
     list:
-      - text: ✅ UI Kit 7 support
-      - text: ✅ New components
-      - text: ✅ New styles and code syntax support in variables
-      - text: ✅ Updated existing components
-      - text: >-
-          ✅ Added experimental components for improved
-          performance
+      - text: Playwright and PerformanceObserver API were used;
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
+      - text: tests were repeated 50 times with different number of nodes (10, 100, 1000).      
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
     media:
       image: >-
-        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
+        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png 
     button:
-      text: To library
+      text: Read the post
       url: >-
-        https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
+        https://habr.com/ru/companies/yandex/posts/931702/
       theme: accent
   - type: slider-block
     dots: true
     title: Articles
-    autoplay: 2000
-    children:
-      - type: background-card
-        title: "Performance Comparison"
-        text: >-
-          In this post, we proposed a method for measuring the performance of design system components.
-          We're collecting feedback and suggestions for performance improvements.
-        url: https://habr.com/ru/companies/yandex/posts/931702/
-      - type: background-card
+    autoplay: 5000
+    children:  
+      - type: basic-card
         title: "Gravity UI Design System: How to Easily Build Your Interface"
         text: >-
-          We explain why we created Gravity UI, how we use it, what the
-          features and advantages of our approach are, and how we plan to develop
+          A story about why we created Gravity UI, how we use it, what are
+          the features and advantages of our approach and how we plan to develop
           it further.
-        url: https://habr.com/en/companies/yandex/articles/773870/
-      - type: background-card
+        url: https://medium.com/p/32985f939f1c
+      - type: basic-card
         title: How We Made Yandex Cloud More Accessible with Gravity UI Design System
         text: How to build an accessible interface using GravityUI libraries.
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
-      - type: background-card
+      - type: basic-card
         title: "Markdown Editor: WYSIWYG and Markup Editor Based on Gravity UI"
         text: >-
-          Let's talk about the history of creating the user interface,
+          Let's talk about the history of user interface creation,
           architectural features and technical details of integration and
-          development of custom extensions, and then — why all this is available in
+          development of custom extensions, and then - why all this is available in
           open source.
         url: https://habr.com/en/companies/yandex/articles/845802/
   - type: filter-block
     title: Webinars
     description: >
-      If you prefer to watch videos
+      If it's more convenient to watch videos
     tags:
       - id: youtube
         label: YouTube
@@ -69,7 +59,7 @@ blocks:
           type: layout-item
           media:     
             youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
-            previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"            
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png"            
           border: true
           fullscreen: true    
           content:
@@ -82,11 +72,11 @@ blocks:
           type: layout-item
           media:           
             youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
-            previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png"
           border: true
           fullscreen: true    
           content:
-            title: Introductory Webinar
+            title: Introductory webinar
             text: >-
       - tags:
           - cloudvideo
@@ -94,7 +84,7 @@ blocks:
           type: layout-item
           media:
             videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
-            previewImg: 'https://storage.yandexcloud.net/temp-assets/w_Navigation.png'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
           fullscreen: true  
           content:
@@ -107,11 +97,11 @@ blocks:
           type: layout-item
           media:
             videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
-            previewImg: 'https://storage.yandexcloud.net/temp-assets/zastavka.png'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
           fullscreen: true
           content:
-            title: Introductory Webinar
+            title: Introductory webinar
     allTag: false
   - type: content-layout-block
     textWidth: s
@@ -122,9 +112,9 @@ blocks:
         backgroundColor: "#23151E"
         color: ""
     textContent:
-      title: Have Questions?
+      title: Have questions?
       #text: Write to us
       buttons:
-        - text: Join our Telegram community
+        - text: Join the telegram community
           theme: action
           url: https://t.me/gravity_ui_chat
