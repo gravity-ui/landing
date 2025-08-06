@@ -1,62 +1,50 @@
 background:
   image: ""
 blocks:
+  - type: header-block
+    title: 我们的媒体
   - type: media-block
-    title: Figma 库更新
-    description: 我们发布了 Figma 库的重大更新 — 版本 2.0.0。
-    additionalInfo: ""
-    links: []
-    buttons: []
+    title: React组件性能比较 - Gravity UI和其他库
+    description: Gravity UI的核心开发者研究了库组件的性能，并与@adobe/react-spectrum、@mui/material和antd进行了比较。
     list:
-      - text: ✅ 支持 UI Kit 7
-      - text: ✅ 新组件
-      - text: ✅ 新样式和变量中的代码语法支持
-      - text: ✅ 更新现有组件
-      - text: >-
-          ✅ 添加实验性组件以提高
-          性能
+      - text: 使用了Playwright和PerformanceObserver API；
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
+      - text: 测试重复进行了50次，使用不同数量的节点（10、100、1000）。      
+        icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
     media:
       image: >-
-        https://storage.yandexcloud.net/temp-assets/photo_2025-07-03%2010.19.57.jpeg   
+        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png 
     button:
-      text: To library
+      text: 阅读文章
       url: >-
-        https://www.figma.com/community/file/1271150067798118027/gravity-ui-design-system
+        https://habr.com/ru/companies/yandex/posts/931702/
       theme: accent
   - type: slider-block
     dots: true
     title: 文章
     autoplay: 5000
-    children:
+    children:  
       - type: basic-card
-        title: "性能比较"
+        title: "Gravity UI设计系统：如何轻松构建您的界面"
         text: >-
-          在这篇文章中，我们提出了一种测量设计系统组件性能的方法。
-          我们正在收集反馈和改进性能的建议。
-        url: https://habr.com/ru/companies/yandex/posts/931702/
+          关于我们为什么创建Gravity UI、如何使用它、我们方法的特点和优势
+          以及我们计划如何进一步发展它的故事。
+        url: https://medium.com/p/32985f939f1c
       - type: basic-card
-        title: "Gravity UI 设计系统：如何轻松构建您的界面"
-        text: >-
-          我们解释为什么创建 Gravity UI，如何使用它，我们方法的
-          特点和优势是什么，以及我们计划如何进一步发展
-          它。
-        url: https://habr.com/en/companies/yandex/articles/773870/
-      - type: basic-card
-        title: 我们如何使用 Gravity UI 设计系统让 Yandex Cloud 更易访问
-        text: 如何使用 GravityUI 库构建无障碍界面。
+        title: 我们如何使用Gravity UI设计系统让Yandex Cloud更易用
+        text: 如何使用GravityUI库构建可访问的界面。
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
       - type: basic-card
-        title: "Markdown Editor：基于 Gravity UI 的所见即所得和标记编辑器"
+        title: "Markdown编辑器：基于Gravity UI的WYSIWYG和标记编辑器"
         text: >-
-          让我们谈论用户界面创建的历史、
-          架构特点和集成的技术细节以及
-          自定义扩展的开发，然后 — 为什么所有这些都可以在
-          开源中获得。
+          让我们谈论用户界面创建的历史、架构特性和集成的技术细节
+          以及自定义扩展的开发，然后 - 为什么所有这些都可以在
+          开源中使用。
         url: https://habr.com/en/companies/yandex/articles/845802/
   - type: filter-block
     title: 网络研讨会
     description: >
-      如果您更喜欢观看视频
+      如果观看视频更方便
     tags:
       - id: youtube
         label: YouTube
@@ -69,24 +57,24 @@ blocks:
           type: layout-item
           media:     
             youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
-            previewImg: "https://storage.yandexcloud.net/temp-assets/w_Navigation.png"            
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png"            
           border: true
           fullscreen: true    
           content:
             title: "Navigation"
             text: >-
-              Navigation 库介绍性网络研讨会
+              Navigation库介绍网络研讨会
       - tags:
           - youtube
         card:
           type: layout-item
           media:           
             youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
-            previewImg: "https://storage.yandexcloud.net/temp-assets/zastavka.png"
+            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png"
           border: true
           fullscreen: true    
           content:
-            title: 介绍性网络研讨会
+            title: 介绍网络研讨会
             text: >-
       - tags:
           - cloudvideo
@@ -94,24 +82,24 @@ blocks:
           type: layout-item
           media:
             videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
-            previewImg: 'https://storage.yandexcloud.net/temp-assets/w_Navigation.png'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
           fullscreen: true  
           content:
             title: "Navigation"
             text: >-
-              Navigation 库介绍性网络研讨会
+              Navigation库介绍网络研讨会
       - tags:
           - cloudvideo
         card:
           type: layout-item
           media:
             videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
-            previewImg: 'https://storage.yandexcloud.net/temp-assets/zastavka.png'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
           fullscreen: true
           content:
-            title: 介绍性网络研讨会
+            title: 介绍网络研讨会
     allTag: false
   - type: content-layout-block
     textWidth: s
@@ -123,9 +111,8 @@ blocks:
         color: ""
     textContent:
       title: 有问题吗？
-      #text: 写信给我们
+      #text: 联系我们
       buttons:
-        - text: 加入我们的 Telegram 社区
+        - text: 加入telegram社区
           theme: action
           url: https://t.me/gravity_ui_chat
-    
