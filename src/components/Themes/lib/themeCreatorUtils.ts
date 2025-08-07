@@ -1,4 +1,3 @@
-import {TextProps} from '@gravity-ui/uikit';
 import {
     BordersOptions,
     DEFAULT_THEME,
@@ -22,7 +21,6 @@ import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';
 import lowerCase from 'lodash/lowerCase';
-import {v4 as uuidv4} from 'uuid';
 
 import {
     BrandPreset,
@@ -31,21 +29,9 @@ import {
     RADIUS_PRESETS,
 } from './constants';
 import type {Palette, PaletteTokens, ThemeCreatorState} from './types';
-import {CustomFontSelectType, RadiusPresetName, TypographyOptions} from './types';
-import {
-    DefaultFontFamily,
-    DefaultFontFamilyType,
-    defaultTypographyPreset,
-} from './typography/constants';
-import {
-    createFontFamilyVariable,
-    createFontLinkImport,
-    createTextFontFamilyVariable,
-    createTextFontSizeVariable,
-    createTextFontWeightVariable,
-    createTextLineHeightVariable,
-    getCustomFontTypeKey,
-} from './typography/utils';
+import {RadiusPresetName, TypographyOptions} from './types';
+import {DefaultFontFamily, defaultTypographyPreset} from './typography/constants';
+import {createFontLinkImport} from './typography/utils';
 
 function createColorToken(title: string) {
     return kebabCase(title);
@@ -361,8 +347,6 @@ export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
         showMainSettings: false,
         advancedModeEnabled: false,
         changesExist: false,
-
-        // TODO: собирать border и typography из gravityTheme
         borders: {
             preset: RadiusPresetName.Regular,
             values: RADIUS_PRESETS[RadiusPresetName.Regular],
@@ -417,26 +401,41 @@ export function updateCustomRadiusPresetInTheme(
 export type UpdateFontFamilyParams = {
     fontType: DefaultFontFamily | string;
     fontWebsite?: string;
-    isCustom?: boolean;
     customType?: string;
     value?: {
-        mainFont: string;
-        fallbackFonts: string[];
+        title?: string;
+        mainFont?: string;
+        fallbackFonts?: string[];
+        link?: string;
     };
 };
 
 export function updateFontFamilyInTheme(
     themeState: ThemeCreatorState,
-    {fontType, value, isCustom}: UpdateFontFamilyParams,
+    {fontType, value, customType, fontWebsite}: UpdateFontFamilyParams,
 ): ThemeCreatorState {
-    const previousFontFamilySettings = themeState.gravityTheme.typography.fontFamilies;
+    const previousGravityFontFamilySettings = themeState.gravityTheme.typography.fontFamilies;
+
+    const newGravityFontFamilySettings = {
+        ...previousGravityFontFamilySettings,
+        [fontType]: {
+            ...previousGravityFontFamilySettings[fontType],
+            mainFont: value?.mainFont ?? previousGravityFontFamilySettings[fontType].mainFont,
+            fallbackFonts:
+                value?.fallbackFonts ?? previousGravityFontFamilySettings[fontType].fallbackFonts,
+        },
+    };
+
+    const previousFontFamilySettings = themeState.typography.fontFamilies;
 
     const newFontFamilySettings = {
         ...previousFontFamilySettings,
         [fontType]: {
             ...previousFontFamilySettings[fontType],
-            ...(value || {}),
-            isCustom,
+            title: value?.title ?? previousFontFamilySettings[fontType].title,
+            customType: customType ?? previousFontFamilySettings[fontType].customType,
+            fontWebsite,
+            link: value?.link ?? previousFontFamilySettings[fontType].link,
         },
     };
 
@@ -446,21 +445,27 @@ export function updateFontFamilyInTheme(
             ...themeState.gravityTheme,
             typography: {
                 ...themeState.gravityTheme.typography,
-                fontFamilies: newFontFamilySettings,
+                fontFamilies: newGravityFontFamilySettings,
             },
+        },
+        typography: {
+            ...themeState.typography,
+            fontFamilies: newFontFamilySettings,
         },
     };
 }
 
 export type AddFontFamilyTypeParams = {
     title: string;
+    customType: string;
 };
 
 export function addFontFamilyTypeInTheme(
     themeState: ThemeCreatorState,
-    {title}: AddFontFamilyTypeParams,
+    {title, customType}: AddFontFamilyTypeParams,
 ): ThemeCreatorState {
     const {gravityTheme} = themeState;
+
     const typography = cloneDeep(gravityTheme.typography);
 
     const customFontPrefix = 'custom-font-';
@@ -476,8 +481,20 @@ export function addFontFamilyTypeInTheme(
         fallbackFonts: [],
     };
 
+    const newFontFamilySettings = cloneDeep(themeState.typography.fontFamilies);
+    newFontFamilySettings[newFontKey] = {
+        title,
+        link: '',
+        customType,
+        fontWebsite: '',
+    };
+
     return {
         ...themeState,
+        typography: {
+            ...themeState.typography,
+            fontFamilies: newFontFamilySettings,
+        },
         gravityTheme: {
             ...gravityTheme,
             typography,
@@ -494,25 +511,21 @@ export function updateFontFamilyTypeTitleInTheme(
     themeState: ThemeCreatorState,
     {title, familyType}: UpdateFontFamilyTypeTitleParams,
 ): ThemeCreatorState {
-    const {customFontFamilyType} = themeState.typography.baseSetting;
+    const {fontFamilies} = themeState.typography;
 
-    const newCustomFontFamily = customFontFamilyType.map((fontFamilyType) => {
-        return fontFamilyType.value === familyType
-            ? {
-                  content: title,
-                  value: familyType,
-              }
-            : fontFamilyType;
-    });
+    const newFontFamilies = {
+        ...fontFamilies,
+        [familyType]: {
+            ...fontFamilies[familyType],
+            title,
+        },
+    };
 
     return {
         ...themeState,
         typography: {
             ...themeState.typography,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
-                customFontFamilyType: newCustomFontFamily,
-            },
+            fontFamilies: newFontFamilies,
         },
     };
 }
@@ -532,8 +545,15 @@ export function removeFontFamilyTypeFromTheme(
         }
     });
 
+    const newFontFamilies = cloneDeep(themeState.typography.fontFamilies);
+    delete newFontFamilies[fontType];
+
     return {
         ...themeState,
+        typography: {
+            ...themeState.typography,
+            fontFamilies: newFontFamilies,
+        },
         gravityTheme: {
             ...themeState.gravityTheme,
             typography: newTypography,
@@ -601,88 +621,13 @@ export const updateAdvancedTypographyInTheme = (
     };
 };
 
-export const createFontImportsForExport = (
-    fontFamily: TypographyOptions['baseSetting']['fontFamilies'],
-) => {
+export const createFontImportsForExport = (fontFamily: TypographyOptions['fontFamilies']) => {
     let cssString = '';
 
     Object.entries(fontFamily).forEach(([, value]) => {
-        cssString += `${createFontLinkImport(value.link)}\n`;
-    });
-
-    return cssString;
-};
-
-export const createTypographyPresetForExport = ({
-    typography,
-    forPreview,
-}: {
-    typography: TypographyOptions;
-    ignoreDefaultValues: boolean;
-    forPreview: boolean;
-}) => {
-    const {baseSetting, advanced} = typography;
-    let cssString = '';
-
-    Object.entries(baseSetting.fontFamilies).forEach(([key, value]) => {
-        const customFontKey = getCustomFontTypeKey(key, baseSetting.customFontFamilyType);
-
-        cssString += `${createFontFamilyVariable(
-            customFontKey ? kebabCase(customFontKey) : key,
-            value.title,
-            value.alternatives,
-            forPreview,
-        )}\n`;
-    });
-
-    Object.entries(advanced).forEach(([key, data]) => {
-        const defaultAdvancedSetting = defaultTypographyPreset.advanced[key as TextGroup];
-
-        if (defaultAdvancedSetting.selectedFontFamilyType !== data.selectedFontFamilyType) {
-            const customFontTypeKey = getCustomFontTypeKey(
-                data.selectedFontFamilyType,
-                baseSetting.customFontFamilyType,
-            );
-
-            cssString += `${createTextFontFamilyVariable(
-                key as TextGroup,
-                customFontTypeKey ? kebabCase(customFontTypeKey) : data.selectedFontFamilyType,
-                forPreview,
-            )}\n`;
+        if (value.link) {
+            cssString += `${createFontLinkImport(value.link)}\n`;
         }
-        if (defaultAdvancedSetting.fontWeight !== data.fontWeight) {
-            cssString += `${createTextFontWeightVariable(
-                key as TextGroup,
-                data.fontWeight,
-                forPreview,
-            )}\n`;
-            cssString += '\n';
-        }
-
-        Object.entries(data.sizes).forEach(([sizeKey, sizeData]) => {
-            if (
-                defaultAdvancedSetting.sizes[sizeKey as Exclude<TextProps['variant'], undefined>]
-                    ?.fontSize !== sizeData.fontSize
-            ) {
-                cssString += `${createTextFontSizeVariable(
-                    sizeKey as TextProps['variant'],
-                    sizeData.fontSize,
-                    forPreview,
-                )}\n`;
-            }
-
-            if (
-                defaultAdvancedSetting.sizes[sizeKey as Exclude<TextProps['variant'], undefined>]
-                    ?.lineHeight !== sizeData.lineHeight
-            ) {
-                cssString += `${createTextLineHeightVariable(
-                    sizeKey as TextProps['variant'],
-                    sizeData.lineHeight,
-                    forPreview,
-                )}\n`;
-                cssString += '\n';
-            }
-        });
     });
 
     return cssString;

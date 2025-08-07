@@ -61,7 +61,7 @@ export function exportTheme({
             );
     }
 
-    const fontImports = createFontImportsForExport(themeState.typography.baseSetting.fontFamilies);
+    const fontImports = createFontImportsForExport(themeState.typography.fontFamilies);
 
     return `${fontImports}\n\n${css}`;
 }

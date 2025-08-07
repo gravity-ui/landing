@@ -1,7 +1,4 @@
-import {TextProps} from '@gravity-ui/uikit';
-import type {BordersOptions, GravityTheme, TextGroup, Theme} from '@gravity-ui/uikit-themer';
-
-import {DefaultFontFamilyType} from './typography/constants';
+import type {BordersOptions, GravityTheme, Theme} from '@gravity-ui/uikit-themer';
 
 export type PaletteOptions = {
     brand: string;
@@ -26,47 +23,16 @@ export enum CustomFontSelectType {
 }
 
 export type TypographyOptions = {
-    baseSetting: {
-        defaultFontFamilyType: {
-            value: DefaultFontFamilyType;
-            content: string;
-        }[];
-        customFontFamilyType: {
-            value: string;
-            content: string;
-        }[];
-        fontFamilies: Record<
-            string,
-            {
-                title: string;
-                key: string;
-                link: string;
-                alternatives: string[];
-                isCustom?: boolean;
-                customType?: string;
-                fontWebsite?: string;
-            }
-        >;
-    };
-    isAdvancedActive: boolean;
-    advanced: Record<
-        TextGroup,
+    fontFamilies: Record<
+        string,
         {
             title: string;
-            fontWeight: number;
-            selectedFontFamilyType: DefaultFontFamilyType;
-            sizes: Partial<
-                Record<
-                    Exclude<TextProps['variant'], undefined>,
-                    {
-                        title: string;
-                        fontSize: number;
-                        lineHeight: number;
-                    }
-                >
-            >;
+            link: string;
+            customType?: string;
+            fontWebsite?: string;
         }
     >;
+    isAdvancedActive: boolean;
 };
 
 export type PrivateColors = Record<string, string>;

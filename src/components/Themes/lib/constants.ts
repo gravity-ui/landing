@@ -5,6 +5,7 @@ import {
 } from '@gravity-ui/uikit-themer';
 
 import {RadiusPresetName} from './types';
+import {DEFAULT_FONT_FAMILY_SETTINGS} from './typography/constants';
 
 export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
@@ -185,6 +186,10 @@ export const DEFAULT_THEME: GravityTheme = {
     ...DEFAULT_GRAVITY_THEME,
     baseColors: DEFAULT_PALETTE,
     utilityColors: DEFAULT_COLORS,
+    typography: {
+        ...DEFAULT_GRAVITY_THEME.typography,
+        fontFamilies: DEFAULT_FONT_FAMILY_SETTINGS,
+    },
 };
 
 export type BrandPreset = {

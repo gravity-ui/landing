@@ -14,6 +14,7 @@ import {
     TextInput,
     TextInputProps,
 } from '@gravity-ui/uikit';
+import {TextGroup} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useState} from 'react';
 
@@ -22,11 +23,11 @@ import {SelectableCard} from '../../../SelectableCard/SelectableCard';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
 import {CustomFontSelectType} from '../../lib/types';
 import {
-    DEFAULT_FONTS,
     DEFAULT_FONT_FAMILIES,
+    DEFAULT_FONT_FAMILY_SETTINGS,
     DefaultFontFamily,
-    DefaultFontFamilyType,
     GOOGLE_FONTS_FONT_PREVIEW_HOST,
+    TEXT_GROUP_NAMES,
 } from '../../lib/typography/constants';
 import {generateGoogleFontDownloadLink} from '../../lib/typography/utils';
 
@@ -37,7 +38,7 @@ type DefaultFontFamilyOption = {
     fontSuggestions: {title: string; key: string; link: string}[];
 };
 
-const DEFAULT_FONT_FAMILY_SETTINGS: Record<DefaultFontFamily, DefaultFontFamilyOption> = {
+const DEFAULT_FONT_FAMILY_SUGGESTIONS: Record<DefaultFontFamily, DefaultFontFamilyOption> = {
     sans: {
         name: 'Sans Font Family',
         fontSuggestions: [
@@ -94,8 +95,9 @@ const CustomFontFamily = ({
     const {t} = useTranslation('themes');
 
     const {
-        typography: {
-            baseSetting: {fontFamilies},
+        typography: {fontFamilies},
+        gravityTheme: {
+            typography: {fontFamilies: gravityFontFamilies},
         },
     } = useThemeCreator();
 
@@ -126,13 +128,13 @@ const CustomFontFamily = ({
             updateFontFamily({
                 fontType,
                 fontWebsite: value,
-                isCustom: true,
                 customType: CustomFontSelectType.GoogleFonts,
                 value: {
-                    title: fontName.replaceAll('+', ' '),
-                    key: fontName.replaceAll('+', '-').toLowerCase(),
                     link,
-                    alternatives: fontFamilies[fontType].alternatives,
+                    mainFont: fontName.replaceAll('+', ' '),
+                    fallbackFonts:
+                        DEFAULT_FONT_FAMILY_SETTINGS[fontType as DefaultFontFamily]
+                            ?.fallbackFonts || [],
                 },
             });
         },
@@ -161,14 +163,10 @@ const CustomFontFamily = ({
                     onUpdate={(value) => {
                         updateFontFamily({
                             fontType,
-                            isCustom: true,
                             customType: value,
                             fontWebsite: '',
                             value: {
-                                title: '',
-                                key: '',
                                 link: '',
-                                alternatives: [],
                             },
                         });
                     }}
@@ -194,7 +192,7 @@ const CustomFontFamily = ({
                 <Flex direction="column" gap={6}>
                     <TextInput
                         label={`${t('label_font-name')}:`}
-                        value={fontFamilies[fontType].title}
+                        value={gravityFontFamilies[fontType].mainFont}
                         size="xl"
                         type="text"
                         placeholder={t('label_font-name-placeholder')}
@@ -203,12 +201,8 @@ const CustomFontFamily = ({
 
                             updateFontFamily({
                                 fontType,
-                                isCustom: true,
                                 value: {
-                                    title: fontName,
-                                    key: fontName.replaceAll(' ', '-').toLowerCase(),
-                                    link: fontFamilies[fontType].link,
-                                    alternatives: fontFamilies[fontType].alternatives,
+                                    mainFont: fontName,
                                 },
                             });
                         }}
@@ -222,7 +216,7 @@ const CustomFontFamily = ({
                         <TextArea
                             size="xl"
                             className={b('custom-font-textarea')}
-                            value={fontFamilies[fontType].alternatives.join(', ')}
+                            value={gravityFontFamilies[fontType]?.fallbackFonts?.join(', ') || ''}
                             rows={3}
                             maxRows={4}
                             onChange={(event) => {
@@ -230,7 +224,6 @@ const CustomFontFamily = ({
 
                                 updateFontFamily({
                                     fontType,
-                                    isCustom: true,
                                     value: {
                                         fallbackFonts: alternatives
                                             .split(',')
@@ -238,7 +231,6 @@ const CustomFontFamily = ({
                                                 alternative.trim().replaceAll(';', ''),
                                             ),
                                         title: fontFamilies[fontType].title,
-                                        key: fontFamilies[fontType].key,
                                         link: fontFamilies[fontType].link,
                                     },
                                 });
@@ -263,12 +255,9 @@ const CustomFontFamily = ({
 
                                 updateFontFamily({
                                     fontType,
-                                    isCustom: true,
                                     value: {
                                         link,
-                                        alternatives: fontFamilies[fontType].alternatives,
                                         title: fontFamilies[fontType].title,
-                                        key: fontFamilies[fontType].key,
                                     },
                                 });
                             }}
@@ -283,31 +272,34 @@ const CustomFontFamily = ({
 const DeleteAdditionalFontButton = ({
     getFontUsages,
     removeFontFamilyType,
-    fType,
+    fontType,
     mobile,
 }: {
     getFontUsages: (fontType: string) => string[];
-    fType: {value: string; content: string};
+    fontType: string;
     removeFontFamilyType: ReturnType<typeof useThemeCreatorMethods>['removeFontFamilyType'];
     mobile?: boolean;
 }) => {
     const {t} = useTranslation('themes');
+
+    const fontUsages = React.useMemo(() => {
+        return getFontUsages(fontType);
+    }, [getFontUsages, fontType]);
 
     return (
         <Popover
             content={
                 <Flex direction="column" gap={2} className={b('delete-font-popover-content')}>
                     <span>
-                        {t('label_delete-additional-font-message-1')}{' '}
-                        <b>{getFontUsages(fType.value).join(', ')}</b>.{' '}
-                        {t('label_delete-additional-font-message-2')}
+                        {t('label_delete-additional-font-message-1')} <b>{fontUsages.join(', ')}</b>
+                        . {t('label_delete-additional-font-message-2')}
                     </span>
                     <Button
                         view="action"
                         width="max"
                         onClick={() => {
                             removeFontFamilyType({
-                                fontType: fType.value,
+                                fontType,
                             });
                         }}
                     >
@@ -316,16 +308,16 @@ const DeleteAdditionalFontButton = ({
                 </Flex>
             }
             hasArrow
-            disabled={getFontUsages(fType.value).length === 0}
+            disabled={fontUsages.length === 0}
         >
             <div>
                 <Button
                     size="xl"
                     className={b('additional-font-delete-btn', {mobile})}
-                    disabled={getFontUsages(fType.value).length > 0}
+                    disabled={fontUsages.length > 0}
                     onClick={() => {
                         removeFontFamilyType({
-                            fontType: fType.value,
+                            fontType,
                         });
                     }}
                 >
@@ -347,7 +339,7 @@ const DefaultFontFamilyOptions = ({type}: DefaultFontFamilyOptionsProps) => {
 
     const {updateFontFamily} = useThemeCreatorMethods();
 
-    const {name, fontSuggestions} = DEFAULT_FONT_FAMILY_SETTINGS[type];
+    const {name, fontSuggestions} = DEFAULT_FONT_FAMILY_SUGGESTIONS[type];
     const fontFamilyOptions = typography.fontFamilies[type];
 
     const isCustomFontSelected = React.useMemo(() => {
@@ -383,7 +375,9 @@ const DefaultFontFamilyOptions = ({type}: DefaultFontFamilyOptionsProps) => {
                                         fontType: type,
                                         value: {
                                             mainFont: font.title,
-                                            fallbackFonts: [],
+                                            link: font.link,
+                                            fallbackFonts:
+                                                DEFAULT_FONT_FAMILY_SETTINGS[type]?.fallbackFonts,
                                         },
                                     });
                                 }}
@@ -405,7 +399,6 @@ const DefaultFontFamilyOptions = ({type}: DefaultFontFamilyOptionsProps) => {
                                 updateFontFamily({
                                     fontType: type,
                                     customType: CustomFontSelectType.GoogleFonts,
-                                    isCustom: true,
                                     value: {
                                         mainFont: '',
                                         fallbackFonts: [],
@@ -425,10 +418,7 @@ export const FontFamilyPicker = () => {
     const {t} = useTranslation('themes');
 
     const {
-        typography: {
-            baseSetting: {customFontFamilyType},
-            advanced,
-        },
+        typography: {fontFamilies},
         gravityTheme,
     } = useThemeCreator();
 
@@ -437,14 +427,11 @@ export const FontFamilyPicker = () => {
 
     const getFontUsages = React.useCallback(
         (fontType: string) => {
-            return Object.entries(advanced)
-                .filter(
-                    ([, textVariantSetting]) =>
-                        textVariantSetting.selectedFontFamilyType === fontType,
-                )
-                .map(([, textVariantSetting]) => textVariantSetting.title);
+            return Object.entries(gravityTheme.typography.groups)
+                .filter(([, textVariantSetting]) => textVariantSetting['font-family'] === fontType)
+                .map(([group]) => TEXT_GROUP_NAMES[group as TextGroup]);
         },
-        [advanced],
+        [gravityTheme.typography.groups],
     );
 
     const customFontFamilies = React.useMemo(() => {
@@ -459,20 +446,20 @@ export const FontFamilyPicker = () => {
             {DEFAULT_FONT_FAMILIES.map((type) => (
                 <DefaultFontFamilyOptions key={type} type={type} />
             ))}
-            {customFontFamilyType.map((fType) => (
-                <Row space={0} style={{width: '100%'}} key={fType.value}>
+            {customFontFamilies.map((type) => (
+                <Row space={0} style={{width: '100%'}} key={type}>
                     <Col s="12" l="4" className={b('additional-font-label')}>
                         <Flex gap={2}>
                             <TextInput
                                 size="xl"
-                                value={fType.content}
+                                value={fontFamilies[type].title}
                                 label={`${t('label_alias')}:`}
                                 onChange={(event) => {
                                     const value = event.target.value;
 
                                     updateFontFamilyTypeTitle({
                                         title: value,
-                                        familyType: fType.value,
+                                        familyType: type,
                                     });
                                 }}
                                 placeholder={t('label_alias-placeholder')}
@@ -481,20 +468,20 @@ export const FontFamilyPicker = () => {
                             <DeleteAdditionalFontButton
                                 removeFontFamilyType={removeFontFamilyType}
                                 getFontUsages={getFontUsages}
-                                fType={fType}
+                                fontType={type}
                                 mobile={true}
                             />
                         </Flex>
                     </Col>
                     <Col s="12" l="8">
                         <CustomFontFamily
-                            fontType={fType.value}
+                            fontType={type}
                             withExtraContent
                             ExtraContent={
                                 <DeleteAdditionalFontButton
                                     removeFontFamilyType={removeFontFamilyType}
                                     getFontUsages={getFontUsages}
-                                    fType={fType}
+                                    fontType={type}
                                 />
                             }
                         />
@@ -507,7 +494,8 @@ export const FontFamilyPicker = () => {
                 className={b('additional-font-add-btn')}
                 onClick={() => {
                     addFontFamilyType({
-                        title: `${t('label_additional-font')} ${customFontFamilyType.length + 1}`,
+                        title: `${t('label_additional-font')} ${customFontFamilies.length + 1}`,
+                        customType: CustomFontSelectType.GoogleFonts,
                     });
                 }}
             >

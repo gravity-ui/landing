@@ -9,7 +9,6 @@ import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
 import {
     DEFAULT_FONT_FAMILIES,
     DefaultFontFamily,
-    DefaultFontFamilyType,
     FONT_WEIGHTS,
 } from '../../lib/typography/constants';
 
@@ -28,6 +27,7 @@ export const AdvanceTypographySettings = () => {
         gravityTheme: {
             typography: {groups, variants, fontFamilies},
         },
+        typography: {fontFamilies: fontFamiliesSettings},
     } = useThemeCreator();
 
     const {updateAdvancedTypographySettings} = useThemeCreatorMethods();
@@ -37,6 +37,8 @@ export const AdvanceTypographySettings = () => {
             let content = key.replaceAll('-', ' ');
             if (DEFAULT_FONT_FAMILIES.includes(key as DefaultFontFamily)) {
                 content = `${content} Font Family`;
+            } else if (fontFamiliesSettings[key]?.title) {
+                content = fontFamiliesSettings[key].title;
             }
 
             return {
@@ -68,8 +70,7 @@ export const AdvanceTypographySettings = () => {
                                         onUpdate={(fontFamilyType) => {
                                             updateAdvancedTypographySettings({
                                                 key: group as TextGroup,
-                                                selectedFontFamilyType:
-                                                    fontFamilyType[0] as DefaultFontFamilyType,
+                                                selectedFontFamilyType: fontFamilyType[0],
                                             });
                                         }}
                                         width="max"
