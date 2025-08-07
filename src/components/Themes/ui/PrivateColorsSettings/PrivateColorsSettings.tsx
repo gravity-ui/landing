@@ -1,5 +1,10 @@
 import type {Theme, UtilityColor} from '@gravity-ui/uikit-themer';
-import {DEFAULT_THEME} from '@gravity-ui/uikit-themer';
+import {
+    DEFAULT_THEME,
+    createInternalPrivateColorReference,
+    isPrivateColorCssVariable,
+    parsePrivateColorCssVariable,
+} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -26,10 +31,24 @@ const PrivateColorEditor: React.FC<PrivateColorEditorProps> = ({name, theme, col
         theme,
     });
 
+    const defaultValue = React.useMemo(() => {
+        const ref = DEFAULT_THEME.utilityColors[name][theme].ref;
+        if (ref) {
+            if (isPrivateColorCssVariable(ref)) {
+                const {mainColorToken, privateColorToken} = parsePrivateColorCssVariable(ref);
+                return createInternalPrivateColorReference(mainColorToken, privateColorToken);
+            }
+
+            return ref;
+        }
+
+        return DEFAULT_THEME.utilityColors[name][theme].value;
+    }, [name, theme]);
+
     return (
         <PrivateColorSelect
             groups={colorGroups}
-            defaultValue={DEFAULT_THEME.utilityColors[name][theme].value}
+            defaultValue={defaultValue}
             value={color}
             onChange={setColor}
         />
