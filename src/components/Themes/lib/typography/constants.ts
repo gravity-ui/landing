@@ -4,7 +4,7 @@ import {CustomFontSelectType, TypographyOptions} from '../types';
 
 // TODO: add export to uikit-themer
 export const DEFAULT_FONT_FAMILIES = ['sans', 'monospace'] as const;
-export type DefaultFontFamily = typeof DEFAULT_FONT_FAMILIES[number];
+export type DefaultFontFamily = (typeof DEFAULT_FONT_FAMILIES)[number];
 
 export const TEXT_GROUP_NAMES: Record<TextGroup, string> = {
     body: 'Body Text',

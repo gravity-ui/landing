@@ -11,6 +11,7 @@ import {
 } from '@gravity-ui/uikit-themer';
 import type {
     AnyPrivateColorToken,
+    FontFamilies,
     TextGroup,
     TextVariant,
     Theme,
@@ -416,13 +417,16 @@ export function updateFontFamilyInTheme(
 ): ThemeCreatorState {
     const previousGravityFontFamilySettings = themeState.gravityTheme.typography.fontFamilies;
 
-    const newGravityFontFamilySettings = {
+    const newGravityFontFamilySettings: FontFamilies = {
         ...previousGravityFontFamilySettings,
         [fontType]: {
             ...previousGravityFontFamilySettings[fontType],
-            mainFont: value?.mainFont ?? previousGravityFontFamilySettings[fontType].mainFont,
+            mainFont:
+                value?.mainFont ?? previousGravityFontFamilySettings[fontType]?.mainFont ?? '',
             fallbackFonts:
-                value?.fallbackFonts ?? previousGravityFontFamilySettings[fontType].fallbackFonts,
+                value?.fallbackFonts ??
+                previousGravityFontFamilySettings[fontType]?.fallbackFonts ??
+                [],
         },
     };
 

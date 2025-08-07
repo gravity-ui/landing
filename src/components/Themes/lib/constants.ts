@@ -193,7 +193,7 @@ export const DEFAULT_THEME: GravityTheme = {
 };
 
 export type BrandPreset = {
-    brandColor: typeof DEFAULT_BRAND_COLORS[number];
+    brandColor: (typeof DEFAULT_BRAND_COLORS)[number];
     utilityColors: Partial<GravityTheme['utilityColors']>;
 };
 

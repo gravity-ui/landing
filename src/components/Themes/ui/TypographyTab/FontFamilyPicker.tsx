@@ -192,7 +192,7 @@ const CustomFontFamily = ({
                 <Flex direction="column" gap={6}>
                     <TextInput
                         label={`${t('label_font-name')}:`}
-                        value={gravityFontFamilies[fontType].mainFont}
+                        value={gravityFontFamilies[fontType]?.mainFont || ''}
                         size="xl"
                         type="text"
                         placeholder={t('label_font-name-placeholder')}
