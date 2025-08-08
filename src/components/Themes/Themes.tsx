@@ -93,19 +93,24 @@ export const Themes = () => {
 
     const TabComponent = tabToComponent[activeTab];
 
-    const ExportBtn = useCallback(
+    const ThemeActionsButtons = useCallback(
         () => (
-            <Button
-                className={b('export-theme-btn')}
-                view="action"
-                size="xl"
-                onClick={toggleExportDialog}
-            >
-                <Icon data={ArrowUpFromSquare} />
-                <Text>{t('btn_export_theme')}</Text>
-            </Button>
+            <Flex direction="row" gap={2}>
+                <Button className={b('theme-action-btn')} view="outlined-action" size="xl">
+                    <Text>Импортировать тему</Text>
+                </Button>
+                <Button
+                    className={b('theme-action-btn')}
+                    view="action"
+                    size="xl"
+                    onClick={toggleExportDialog}
+                >
+                    <Icon data={ArrowUpFromSquare} />
+                    <Text>{t('btn_export_theme')}</Text>
+                </Button>
+            </Flex>
         ),
-        [toggleExportDialog],
+        [],
     );
 
     return (
@@ -121,13 +126,13 @@ export const Themes = () => {
                         value={activeTab}
                         onChange={setActiveTab}
                     />
-                    {breakpoint >= BREAKPOINTS.md && <ExportBtn />}
+                    {breakpoint >= BREAKPOINTS.md && <ThemeActionsButtons />}
                 </Flex>
             </div>
 
             {breakpoint < BREAKPOINTS.md && (
                 <div className={b('header-action-buttons')}>
-                    <ExportBtn />
+                    <ThemeActionsButtons />
                 </div>
             )}
             <Grid className={b('grid')}>

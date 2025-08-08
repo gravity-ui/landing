@@ -1,4 +1,4 @@
-import {generateCSS} from '@gravity-ui/uikit-themer';
+import {generateCSS, generateJSON} from '@gravity-ui/uikit-themer';
 
 import {createFontImportsForExport} from './themeCreatorUtils';
 import type {ThemeCreatorState} from './types';
@@ -42,7 +42,12 @@ export function exportTheme({
     customRootClassName,
 }: ExportThemeParams) {
     if (format === 'json') {
-        throw new Error('Not implemented');
+        const json = generateJSON({
+            theme: themeState.gravityTheme,
+            ignoreDefaultValues,
+            forPreview,
+        });
+        return JSON.stringify(json, null, 2);
     }
 
     let css = generateCSS({
@@ -69,10 +74,6 @@ export function exportTheme({
 type ExportThemeForDialogParams = Pick<ExportThemeParams, 'themeState' | 'format'>;
 
 export function exportThemeForDialog({themeState, format = 'css'}: ExportThemeForDialogParams) {
-    if (format === 'json') {
-        return 'not implemented';
-    }
-
     return exportTheme({
         themeState,
         format,
