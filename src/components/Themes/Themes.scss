@@ -103,7 +103,7 @@ $block: '.#{variables.$ns}themes';
         }
     }
 
-    &__export-theme-btn {
+    &__theme-action-btn {
         --g-button-border-radius: 8px;
         border-radius: var(--g-border-radius-m);
         width: fit-content;
