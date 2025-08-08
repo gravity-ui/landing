@@ -1,17 +1,13 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {Alert, Flex, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useMemo} from 'react';
 
 import {useLocale} from '../../../../hooks/useLocale';
 import {block} from '../../../../utils';
 import {CodeExample} from '../../../CodeExample/CodeExample';
 import {useThemeCreator} from '../../hooks';
-import {
-    APPLY_THEME_TEMPLATE,
-    type ExportFormat,
-    exportThemeForDialog,
-} from '../../lib/themeCreatorExport';
+import {APPLY_THEME_TEMPLATE, exportThemeForDialog} from '../../lib/themeCreatorExport';
 
 import './ThemeExport.scss';
 import {ThemeExportDialog} from './ThemeExportDialog';
@@ -31,16 +27,13 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
     const themeState = useThemeCreator();
     const breakpoint = useWindowBreakpoint();
 
-    //TODO: add more formats to import
-    const [format] = useState<ExportFormat>('css');
-
-    const themeStyles = useMemo(
-        () => exportThemeForDialog({themeState, format}),
-        [themeState, format],
+    const themeStylesCSS = useMemo(
+        () => exportThemeForDialog({themeState, format: 'css'}),
+        [themeState],
     );
 
-    const onSaveThemeClick = useCallback(() => {
-        const blob = new Blob([themeStyles]);
+    const onSaveThemeCSSClick = useCallback(() => {
+        const blob = new Blob([themeStylesCSS]);
 
         const url = URL.createObjectURL(blob);
 
@@ -49,7 +42,20 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
         link.setAttribute('download', 'custom.css');
 
         link.click();
-    }, [themeStyles]);
+    }, [themeStylesCSS]);
+
+    const onSaveThemeJSONClick = useCallback(() => {
+        const themeStylesJSONString = exportThemeForDialog({themeState, format: 'json'});
+        const blob = new Blob([themeStylesJSONString]);
+
+        const url = URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'custom-theme.json');
+
+        link.click();
+    }, []);
 
     const ExportContent = useCallback(() => {
         return (
@@ -63,22 +69,28 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
                         </Text>
                     }
                 />
-                <CodeExample code={themeStyles} className={b('code')} />
+                <CodeExample code={themeStylesCSS} className={b('code')} />
             </Flex>
         );
-    }, [themeStyles]);
+    }, [themeStylesCSS]);
 
     return breakpoint >= BREAKPOINTS.sm ? (
         <ThemeExportDialog
             onClose={onClose}
             isOpen={isOpen}
-            onSaveThemeClick={onSaveThemeClick}
+            onSaveThemeCSSClick={onSaveThemeCSSClick}
+            onSaveThemeJSONClick={onSaveThemeJSONClick}
             breakpoint={breakpoint}
         >
             <ExportContent />
         </ThemeExportDialog>
     ) : (
-        <ThemeExportSheet onClose={onClose} isOpen={isOpen} onSaveThemeClick={onSaveThemeClick}>
+        <ThemeExportSheet
+            onClose={onClose}
+            isOpen={isOpen}
+            onSaveThemeCSSClick={onSaveThemeCSSClick}
+            onSaveThemeJSONClick={onSaveThemeJSONClick}
+        >
             <ExportContent />
         </ThemeExportSheet>
     );
