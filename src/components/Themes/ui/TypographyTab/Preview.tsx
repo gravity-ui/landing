@@ -136,7 +136,12 @@ export const Preview = () => {
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
-        () => exportTheme({themeState, ignoreDefaultValues: false}),
+        () =>
+            exportTheme({
+                themeState,
+                ignoreDefaultValues: false,
+                customRootClassName: 'gravity-ui-landing-typography-tab__preview',
+            }),
         [themeState],
     );
 
@@ -145,11 +150,7 @@ export const Preview = () => {
             <Text variant="display-2">{t('title_typography-styles')}</Text>
             <Card size="l">
                 <ThemeProvider theme="dark" scoped rootClassName={`${b()} ${b({theme: 'dark'})}`}>
-                    {themeStyles ? (
-                        <style>
-                            {`${themeStyles.fontImports}\n.gravity-ui-landing-typography-tab__preview_theme_dark {${themeStyles.dark}}`}
-                        </style>
-                    ) : null}
+                    {themeStyles ? <style>{themeStyles}</style> : null}
                     <Row
                         space={{l: 0, m: 0, s: 0}}
                         spaceRow={{l: 0, s: 10}}

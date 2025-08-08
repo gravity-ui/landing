@@ -130,13 +130,7 @@ export const PreviewLayout = ({
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
-            {styles ? (
-                <style>{`${
-                    styles.fontImports
-                }\n.gravity-ui-landing-themes-preview-layout_theme_${theme} {${
-                    styles[theme as 'light' | 'dark']
-                }}`}</style>
-            ) : null}
+            {styles ? <style>{styles}</style> : null}
 
             <div
                 className={b({

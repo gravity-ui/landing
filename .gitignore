@@ -27,6 +27,7 @@ nginx.conf
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.tsbuildinfo
 
 /src/data/*.json
 

@@ -8,14 +8,13 @@ import {
     ToasterProvider,
 } from '@gravity-ui/uikit';
 import React, {ReactNode, useState} from 'react';
-import {exportTheme} from 'src/components/Themes/lib/themeCreatorExport';
 
 import {block} from '../../../utils';
 
 import './PreviewWrapper.scss';
 
 export interface PreviewWrapperProps {
-    styles?: ReturnType<typeof exportTheme>;
+    styles?: string;
     children: (arg: {themeSwitcher: ReactNode; theme: Theme; isLightTheme: boolean}) => ReactNode;
 }
 
@@ -26,13 +25,7 @@ export function PreviewWrapper({styles, ...props}: PreviewWrapperProps) {
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
-            {styles ? (
-                <style>{`${
-                    styles.fontImports
-                }\n.gravity-ui-landing-themes-preview-wrapper_theme_${theme} {${
-                    styles[theme as 'light' | 'dark']
-                }}`}</style>
-            ) : null}
+            {styles ? <style>{styles}</style> : undefined}
             <div className={b('content')}>
                 <Content {...props} theme={theme} onThemeUpdate={setTheme} />
             </div>

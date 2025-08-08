@@ -11,13 +11,18 @@ export const ComponentPreview = () => {
     const themeState = useThemeCreator();
 
     const themeStyles = React.useMemo(
-        () => exportTheme({themeState, ignoreDefaultValues: false}),
+        () =>
+            exportTheme({
+                themeState,
+                ignoreDefaultValues: false,
+                customRootClassName: 'gravity-ui-landing-border-radius-showcase',
+            }),
         [themeState],
     );
 
     return (
         <ThemeSection title={t('component_preview')}>
-            <Showcase style={themeStyles.dark} theme="dark" />
+            <Showcase style={themeStyles} theme="dark" />
         </ThemeSection>
     );
 };

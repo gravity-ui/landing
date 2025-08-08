@@ -1,10 +1,16 @@
 import {FormRow} from '@gravity-ui/components';
-import {Card, Col, Flex, Row, Select, Slider, Text, TextInput, TextProps} from '@gravity-ui/uikit';
+import {Card, Col, Flex, Row, Select, Slider, Text, TextInput} from '@gravity-ui/uikit';
+import {TEXT_VARIANTS, TextGroup} from '@gravity-ui/uikit-themer';
+import capitalize from 'lodash/upperFirst';
 import React, {useMemo} from 'react';
 
 import {block} from '../../../../utils';
 import {useThemeCreator, useThemeCreatorMethods} from '../../hooks';
-import {DefaultFontFamilyType, FONT_WEIGHTS, TextVariants} from '../../lib/typography/constants';
+import {
+    DEFAULT_FONT_FAMILIES,
+    DefaultFontFamily,
+    FONT_WEIGHTS,
+} from '../../lib/typography/constants';
 
 import './TypographyTab.scss';
 
@@ -18,45 +24,58 @@ const EndContent = () => (
 
 export const AdvanceTypographySettings = () => {
     const {
-        typography: {advanced, baseSetting},
+        gravityTheme: {
+            typography: {groups, variants, fontFamilies},
+        },
+        typography: {fontFamilies: fontFamiliesSettings},
     } = useThemeCreator();
 
     const {updateAdvancedTypographySettings} = useThemeCreatorMethods();
 
-    const fontTypeOptions = useMemo(
-        () => [...baseSetting.defaultFontFamilyType, ...baseSetting.customFontFamilyType],
-        [baseSetting],
-    );
+    const fontTypeOptions = useMemo(() => {
+        return Object.keys(fontFamilies).map((key) => {
+            let content = key.replaceAll('-', ' ');
+            if (DEFAULT_FONT_FAMILIES.includes(key as DefaultFontFamily)) {
+                content = `${content} Font Family`;
+            } else if (fontFamiliesSettings[key]?.title) {
+                content = fontFamiliesSettings[key].title;
+            }
+
+            return {
+                value: key,
+                content: capitalize(content),
+            };
+        });
+    }, [fontFamilies]);
 
     return (
         <Flex direction="column" className={b('wrapper')}>
-            {Object.entries(advanced).map(([key, setting]) => (
-                <Row space={8} spaceRow={0} key={key} className={b('row')}>
+            {Object.entries(groups).map(([group, setting]) => (
+                <Row space={8} spaceRow={0} key={group} className={b('row')}>
                     <Col s="12" l="4">
                         <Row spaceRow={8} space={0}>
                             <Col s="12">
-                                <Text variant="display-2">{setting.title}</Text>
+                                <Text variant="display-2">{capitalize(group)}</Text>
                             </Col>
                             <Col s="12">
                                 <FormRow
                                     direction="column"
-                                    fieldId={`font-family-${key}`}
+                                    fieldId={`font-family-${group}`}
                                     label="Font Family"
                                 >
                                     <Select
                                         className={b('font-select')}
                                         size="xl"
-                                        value={[setting.selectedFontFamilyType]}
+                                        value={[setting['font-family']]}
                                         onUpdate={(fontFamilyType) => {
                                             updateAdvancedTypographySettings({
-                                                key: key as TextVariants,
-                                                selectedFontFamilyType:
-                                                    fontFamilyType[0] as DefaultFontFamilyType,
+                                                key: group as TextGroup,
+                                                selectedFontFamilyType: fontFamilyType[0],
                                             });
                                         }}
                                         width="max"
-                                        name={`font-family-${key}`}
-                                        id={`font-family-${key}`}
+                                        name={`font-family-${group}`}
+                                        id={`font-family-${group}`}
                                         placeholder="Choose font-family"
                                         options={fontTypeOptions}
                                     />
@@ -68,10 +87,15 @@ export const AdvanceTypographySettings = () => {
                                         min={FONT_WEIGHTS[0]}
                                         max={FONT_WEIGHTS[FONT_WEIGHTS.length - 1]}
                                         marks={FONT_WEIGHTS}
-                                        value={setting.fontWeight}
+                                        step={100}
+                                        value={
+                                            typeof setting['font-weight'] === 'string'
+                                                ? parseInt(setting['font-weight'], 10)
+                                                : setting['font-weight']
+                                        }
                                         onUpdate={(fontWeight) => {
                                             updateAdvancedTypographySettings({
-                                                key: key as TextVariants,
+                                                key: group as TextGroup,
                                                 fontWeight: fontWeight as number,
                                             });
                                         }}
@@ -89,7 +113,7 @@ export const AdvanceTypographySettings = () => {
                                 width="100%"
                                 height="100%"
                             >
-                                {Object.entries(setting.sizes).map(([sizeKey, sizeData]) => (
+                                {Object.values(TEXT_VARIANTS[group as TextGroup]).map((sizeKey) => (
                                     <Row
                                         key={sizeKey}
                                         space={4}
@@ -97,7 +121,9 @@ export const AdvanceTypographySettings = () => {
                                         style={{alignItems: 'center'}}
                                     >
                                         <Col s="12" m="3">
-                                            <Text variant="body-2">{sizeData.title}</Text>
+                                            <Text variant="body-2">
+                                                {capitalize(sizeKey.replaceAll('-', ' '))}
+                                            </Text>
                                         </Col>
                                         <Col s="12" m="9">
                                             <Row space={4}>
@@ -105,7 +131,9 @@ export const AdvanceTypographySettings = () => {
                                                     <TextInput
                                                         className={b('setting-input')}
                                                         label="Font Size:"
-                                                        value={sizeData.fontSize.toString()}
+                                                        value={variants[sizeKey][
+                                                            'font-size'
+                                                        ].replace('px', '')}
                                                         size="xl"
                                                         onUpdate={(fontSize) => {
                                                             const calculatedFontSize =
@@ -116,10 +144,9 @@ export const AdvanceTypographySettings = () => {
                                                                     : Number(fontSize);
 
                                                             updateAdvancedTypographySettings({
-                                                                key: key as TextVariants,
-                                                                sizeKey:
-                                                                    sizeKey as TextProps['variant'],
-                                                                fontSize: calculatedFontSize,
+                                                                key: group as TextGroup,
+                                                                sizeKey: sizeKey,
+                                                                fontSize: `${calculatedFontSize}px`,
                                                             });
                                                         }}
                                                         type="number"
@@ -129,7 +156,9 @@ export const AdvanceTypographySettings = () => {
                                                 <Col s="12" m="6">
                                                     <TextInput
                                                         label="Line Height:"
-                                                        value={sizeData.lineHeight.toString()}
+                                                        value={variants[sizeKey][
+                                                            'line-height'
+                                                        ].replace('px', '')}
                                                         size="xl"
                                                         className={b('setting-input')}
                                                         onUpdate={(lineHeight) => {
@@ -141,10 +170,9 @@ export const AdvanceTypographySettings = () => {
                                                                     : Number(lineHeight);
 
                                                             updateAdvancedTypographySettings({
-                                                                key: key as TextVariants,
-                                                                sizeKey:
-                                                                    sizeKey as TextProps['variant'],
-                                                                lineHeight: calculatedLineHeight,
+                                                                key: group as TextGroup,
+                                                                sizeKey: sizeKey,
+                                                                lineHeight: `${calculatedLineHeight}px`,
                                                             });
                                                         }}
                                                         type="number"

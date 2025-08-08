@@ -40,7 +40,9 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
 
     const activeColorIndex = React.useMemo(() => {
         return BRAND_COLORS_PRESETS.findIndex(
-            (value) => value.brandColor === lightBrandColor && value.brandColor === darkBrandColor,
+            (value) =>
+                value.brandColor === lightBrandColor.value &&
+                value.brandColor === darkBrandColor.value,
         );
     }, [lightBrandColor, darkBrandColor]);
 

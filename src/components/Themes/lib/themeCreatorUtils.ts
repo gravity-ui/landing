@@ -1,41 +1,38 @@
-import {TextProps} from '@gravity-ui/uikit';
+import {
+    BordersOptions,
+    DEFAULT_THEME,
+    GravityTheme,
+    createInternalPrivateColorReference,
+    createPrivateColorCssVariable,
+    parseInternalPrivateColorReference,
+    removeBaseColor,
+    updateBaseColor,
+    updateUtilityColor,
+} from '@gravity-ui/uikit-themer';
+import type {
+    AnyPrivateColorToken,
+    FontFamilies,
+    TextGroup,
+    TextVariant,
+    Theme,
+    UtilityColor,
+} from '@gravity-ui/uikit-themer';
+import {generatePrivateColorsForBaseColors} from '@gravity-ui/uikit-themer/dist/utils';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
 import kebabCase from 'lodash/kebabCase';
 import lowerCase from 'lodash/lowerCase';
-import {v4 as uuidv4} from 'uuid';
 
 import {
     BrandPreset,
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
     RADIUS_PRESETS,
-    THEME_BORDER_RADIUS_VARIABLE_PREFIX,
-    THEME_COLOR_VARIABLE_PREFIX,
 } from './constants';
-import {generatePrivateColors} from './privateColors';
-import type {
-    BordersOption,
-    ColorsOptions,
-    Palette,
-    PaletteTokens,
-    PrivateColors,
-    RadiusValue,
-    ThemeCreatorState,
-    ThemeOptions,
-    ThemeVariant,
-} from './types';
-import {CustomFontSelectType, RadiusPresetName, TypographyOptions} from './types';
-import {DefaultFontFamilyType, TextVariants, defaultTypographyPreset} from './typography/constants';
-import {
-    createFontFamilyVariable,
-    createFontLinkImport,
-    createTextFontFamilyVariable,
-    createTextFontSizeVariable,
-    createTextFontWeightVariable,
-    createTextLineHeightVariable,
-    getCustomFontTypeKey,
-} from './typography/utils';
+import type {Palette, PaletteTokens, ThemeCreatorState} from './types';
+import {RadiusPresetName, TypographyOptions} from './types';
+import {DefaultFontFamily, defaultTypographyPreset} from './typography/constants';
+import {createFontLinkImport} from './typography/utils';
 
 function createColorToken(title: string) {
     return kebabCase(title);
@@ -45,53 +42,14 @@ function createTitleFromToken(token: string) {
     return capitalize(lowerCase(token));
 }
 
-export function createPrivateColorToken(mainColorToken: string, privateColorCode: string) {
-    return `private.${mainColorToken}.${privateColorCode}`;
-}
-
-export function isPrivateColorToken(privateColorToken?: string) {
-    if (!privateColorToken) {
-        return false;
-    }
-
-    const parts = privateColorToken.split('.');
-
-    if (parts.length !== 3 || parts[0] !== 'private') {
-        return false;
-    }
-
-    return true;
-}
-
-export function parsePrivateColorToken(privateColorToken: string) {
-    const parts = privateColorToken.split('.');
-
-    if (parts.length !== 3 || parts[0] !== 'private') {
-        return undefined;
-    }
-
-    return {
-        mainColorToken: parts[1],
-        privateColorCode: parts[2],
-    };
-}
-
-export function createPrivateColorCssVariable(mainColorToken: string, privateColorCode: string) {
-    return `${THEME_COLOR_VARIABLE_PREFIX}-private-${mainColorToken}-${privateColorCode}`;
-}
-
 export function createPrivateColorCssVariableFromToken(privateColorToken: string) {
-    const result = parsePrivateColorToken(privateColorToken);
+    const result = parseInternalPrivateColorReference(privateColorToken);
 
     if (result) {
         return createPrivateColorCssVariable(result.mainColorToken, result.privateColorCode);
     }
 
     return '';
-}
-
-export function createUtilityColorCssVariable(colorName: string) {
-    return `${THEME_COLOR_VARIABLE_PREFIX}-${colorName}`;
 }
 
 function isManuallyCreatedToken(token: string) {
@@ -114,59 +72,14 @@ function createNewColorTitle(currentPaletteTokens: PaletteTokens) {
     }
 }
 
-function createPrivateColors({
-    themeVariant,
-    colorToken,
-    colorValue,
-    theme,
-}: {
-    colorToken: string;
-    colorValue: string;
-    themeVariant: ThemeVariant;
-    theme: ThemeOptions;
-}): PrivateColors {
-    return generatePrivateColors({
-        theme: themeVariant,
-        colorToken,
-        colorValue,
-        lightBg:
-            themeVariant === 'light'
-                ? theme.colors.light['base-background']
-                : theme.colors.dark['base-background'],
-        darkBg:
-            themeVariant === 'light'
-                ? theme.colors.dark['base-background']
-                : theme.colors.light['base-background'],
-    });
-}
+function createPalleteTokens(theme: GravityTheme): PaletteTokens {
+    const {baseColors} = theme;
 
-function createPalleteTokens(theme: ThemeOptions): PaletteTokens {
-    const {palette} = theme;
-    const tokens = Object.keys(palette.light);
-
-    return tokens.reduce<PaletteTokens>(
+    return Object.keys(baseColors).reduce<PaletteTokens>(
         (acc, token) => ({
             ...acc,
             [token]: {
                 title: createTitleFromToken(token),
-                privateColors: {
-                    light: palette.light[token]
-                        ? createPrivateColors({
-                              colorToken: token,
-                              colorValue: palette.light[token],
-                              theme,
-                              themeVariant: 'light',
-                          })
-                        : undefined,
-                    dark: palette.dark[token]
-                        ? createPrivateColors({
-                              colorToken: token,
-                              colorValue: palette.dark[token],
-                              theme,
-                              themeVariant: 'dark',
-                          })
-                        : undefined,
-                },
             },
         }),
         {},
@@ -177,7 +90,7 @@ export type UpdateColorInThemeParams = {
     /** The title of the color to update. */
     title: string;
     /** The theme variant to update. */
-    theme: ThemeVariant;
+    theme: Theme;
     /** The new value of the color. */
     value: string;
 };
@@ -193,51 +106,21 @@ export function updateColorInTheme(
     themeState: ThemeCreatorState,
     params: UpdateColorInThemeParams,
 ): ThemeCreatorState {
-    const newThemeState = {...themeState};
     const token = createColorToken(params.title);
 
-    if (params.theme === 'light') {
-        if (!newThemeState.palette.light[token]) {
-            newThemeState.palette.light[token] = '';
-        }
-
-        newThemeState.palette.light[token] = params.value;
-    }
-
-    if (params.theme === 'dark') {
-        if (!newThemeState.palette.dark[token]) {
-            newThemeState.palette.dark[token] = '';
-        }
-
-        newThemeState.palette.dark[token] = params.value;
-    }
-
-    const privateColors = createPrivateColors({
+    const updatedGravityTheme = updateBaseColor({
+        theme: themeState.gravityTheme,
         colorToken: token,
-        colorValue: params.value,
-        theme: newThemeState,
         themeVariant: params.theme,
+        value: params.value,
     });
+
+    const newThemeState = {...themeState, gravityTheme: updatedGravityTheme};
 
     newThemeState.paletteTokens[token] = {
         ...newThemeState.paletteTokens[token],
         title: params.title,
-        privateColors: {
-            light:
-                params.theme === 'light'
-                    ? privateColors
-                    : newThemeState.paletteTokens[token]?.privateColors?.light,
-            dark:
-                params.theme === 'dark'
-                    ? privateColors
-                    : newThemeState.paletteTokens[token]?.privateColors?.dark,
-        },
     };
-
-    const isNewToken = !themeState.paletteTokens[token];
-    if (isNewToken) {
-        newThemeState.tokens.push(token);
-    }
 
     return newThemeState;
 }
@@ -245,7 +128,7 @@ export function updateColorInTheme(
 export type AddColorToThemeParams =
     | {
           title?: string;
-          colors?: Partial<Record<ThemeVariant, string>>;
+          colors?: Partial<Record<Theme, string>>;
       }
     | undefined;
 
@@ -260,66 +143,27 @@ export function addColorToTheme(
     themeState: ThemeCreatorState,
     params: AddColorToThemeParams,
 ): ThemeCreatorState {
-    const newThemeState = {...themeState};
     const title = params?.title ?? createNewColorTitle(themeState.paletteTokens);
     const token = createColorToken(title);
 
-    if (!themeState.palette.dark[token]) {
-        newThemeState.palette.dark = {
-            ...newThemeState.palette.dark,
-            [token]: '',
-        };
-    }
+    const updatedGravityTheme = updateBaseColor({
+        theme: themeState.gravityTheme,
+        colorToken: token,
+        value: {
+            light: params?.colors?.light ?? '#ffffff',
+            dark: params?.colors?.dark ?? '#ffffff',
+        },
+    });
 
-    if (!themeState.palette.light[token]) {
-        newThemeState.palette.light = {
-            ...newThemeState.palette.light,
-            [token]: '',
-        };
-    }
-
-    if (params?.colors?.dark) {
-        newThemeState.palette.dark = {
-            ...newThemeState.palette.dark,
-            [token]: params.colors.dark,
-        };
-    }
-
-    if (params?.colors?.light) {
-        newThemeState.palette.light = {
-            ...newThemeState.palette.light,
-            [token]: params.colors.light,
-        };
-    }
+    const newThemeState = {...themeState, gravityTheme: updatedGravityTheme};
 
     newThemeState.paletteTokens = {
         ...newThemeState.paletteTokens,
         [token]: {
-            ...newThemeState.paletteTokens[token],
             title,
-            privateColors: {
-                light: params?.colors?.light
-                    ? createPrivateColors({
-                          colorToken: token,
-                          colorValue: params.colors.light,
-                          theme: newThemeState,
-                          themeVariant: 'light',
-                      })
-                    : undefined,
-                dark: params?.colors?.dark
-                    ? createPrivateColors({
-                          colorToken: token,
-                          colorValue: params.colors.dark,
-                          theme: newThemeState,
-                          themeVariant: 'dark',
-                      })
-                    : undefined,
-            },
             isCustom: true,
         },
     };
-
-    newThemeState.tokens = [...newThemeState.tokens, token];
 
     return newThemeState;
 }
@@ -328,14 +172,11 @@ export function removeColorFromTheme(
     themeState: ThemeCreatorState,
     colorTitle: string,
 ): ThemeCreatorState {
-    const newThemeState = {...themeState};
     const token = createColorToken(colorTitle);
 
-    delete newThemeState.palette.dark[token];
-    delete newThemeState.palette.light[token];
+    const updatedGravityTheme = removeBaseColor(themeState.gravityTheme, token);
+    const newThemeState = {...themeState, gravityTheme: updatedGravityTheme};
     delete newThemeState.paletteTokens[token];
-
-    newThemeState.tokens = newThemeState.tokens.filter((t) => t !== token);
 
     return newThemeState;
 }
@@ -358,16 +199,15 @@ export function renameColorInTheme(
             ...newThemeState.paletteTokens[oldToken],
             title: newTitle,
         };
-        newThemeState.palette.dark[newToken] = newThemeState.palette.dark[oldToken];
-        newThemeState.palette.light[newToken] = newThemeState.palette.light[oldToken];
+        newThemeState.gravityTheme.baseColors[newToken] = {
+            ...newThemeState.gravityTheme.baseColors[oldToken],
+        };
+        newThemeState.gravityTheme.privateColors[newToken] =
+            newThemeState.gravityTheme.privateColors[oldToken];
     }
 
-    newThemeState.tokens = newThemeState.tokens.map((token) =>
-        token === oldToken ? newToken : token,
-    );
-
-    delete newThemeState.palette.dark[oldToken];
-    delete newThemeState.palette.light[oldToken];
+    delete newThemeState.gravityTheme.baseColors[oldToken];
+    delete newThemeState.gravityTheme.privateColors[oldToken];
     delete newThemeState.paletteTokens[oldToken];
 
     return newThemeState;
@@ -389,7 +229,7 @@ export type ThemeColorOption = {
  *
  * @param {Object} params - The parameters for generating theme color options.
  * @param {PaletteTokens} params.paletteTokens - The palette tokens to generate options from.
- * @param {ThemeVariant} params.themeVariant - The theme variant to filter private colors (light, dark).
+ * @param {Theme} params.themeVariant - The theme variant to filter private colors (light, dark).
  * @returns {ThemeColorOption[]} The generated theme color options.
  */
 export function getThemeColorOptions({
@@ -397,25 +237,29 @@ export function getThemeColorOptions({
     themeVariant,
 }: {
     themeState: ThemeCreatorState;
-    themeVariant: ThemeVariant;
+    themeVariant: Theme;
 }) {
-    const {tokens, paletteTokens, palette} = themeState;
+    const {paletteTokens, gravityTheme} = themeState;
+    const {baseColors, privateColors} = gravityTheme;
 
-    return tokens.reduce<ThemeColorOption[]>((acc, token) => {
-        if (paletteTokens[token]?.privateColors[themeVariant]) {
+    return Object.keys(baseColors).reduce<ThemeColorOption[]>((acc, token) => {
+        if (privateColors[token]?.[themeVariant]) {
             return [
                 ...acc,
                 {
                     token,
-                    color: palette[themeVariant][token],
+                    color: baseColors[token][themeVariant].value,
                     title: paletteTokens[token].title,
-                    privateColors: Object.entries(
-                        paletteTokens[token].privateColors[themeVariant]!,
-                    ).map(([privateColorCode, color]) => ({
-                        token: createPrivateColorToken(token, privateColorCode),
-                        title: createPrivateColorCssVariable(token, privateColorCode),
-                        color,
-                    })),
+                    privateColors: Object.entries(privateColors[token][themeVariant]).map(
+                        ([privateColorCode, color]) => ({
+                            token: createInternalPrivateColorReference(token, privateColorCode),
+                            title: createPrivateColorCssVariable(
+                                token,
+                                privateColorCode as AnyPrivateColorToken,
+                            ),
+                            color: color.value,
+                        }),
+                    ),
                 },
             ];
         }
@@ -425,8 +269,8 @@ export function getThemeColorOptions({
 }
 
 export type ChangeUtilityColorInThemeParams = {
-    themeVariant: ThemeVariant;
-    name: keyof ColorsOptions;
+    themeVariant: Theme;
+    name: UtilityColor;
     value: string;
 };
 
@@ -434,19 +278,19 @@ export function changeUtilityColorInTheme(
     themeState: ThemeCreatorState,
     {themeVariant, name, value}: ChangeUtilityColorInThemeParams,
 ): ThemeCreatorState {
-    const newState = {...themeState};
-    newState.colors[themeVariant][name] = value;
+    const updatedGravityTheme = updateUtilityColor({
+        theme: themeState.gravityTheme,
+        themeVariant,
+        colorToken: name,
+        value,
+    });
 
-    if (name === 'base-background') {
-        newState.paletteTokens = createPalleteTokens(newState);
-    }
-
-    return newState;
+    return {...themeState, gravityTheme: updatedGravityTheme};
 }
 
 export function applyBrandPresetToTheme(
     themeState: ThemeCreatorState,
-    {brandColor, colors}: BrandPreset,
+    {brandColor, utilityColors}: BrandPreset,
 ): ThemeCreatorState {
     let newState = {...themeState};
 
@@ -458,36 +302,57 @@ export function applyBrandPresetToTheme(
         });
     });
 
-    newState.colors.light = {...colors.light};
-    newState.colors.dark = {...colors.dark};
+    // TODO use updateUtilityColor from uikit-themer
+    newState.gravityTheme.utilityColors = {
+        ...newState.gravityTheme.utilityColors,
+        ...utilityColors,
+    };
 
     return newState;
 }
 
 export function getThemePalette(theme: ThemeCreatorState): Palette {
-    return theme.tokens.map((token) => {
+    const {gravityTheme} = theme;
+    const {baseColors} = gravityTheme;
+
+    return Object.keys(baseColors).map((token) => {
         return {
             title: theme.paletteTokens[token]?.title || '',
             colors: {
-                light: theme.palette.light[token],
-                dark: theme.palette.dark[token],
+                light: baseColors[token].light.value,
+                dark: baseColors[token].dark.value,
             },
             isCustom: isManuallyCreatedToken(token),
         };
     });
 }
 
-export function initThemeCreator(inputTheme: ThemeOptions): ThemeCreatorState {
-    const theme = cloneDeep(inputTheme);
-    const paletteTokens = createPalleteTokens(theme);
+export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
+    const gravityTheme = cloneDeep(inputTheme);
+    gravityTheme.privateColors = {
+        ...gravityTheme.privateColors,
+        ...generatePrivateColorsForBaseColors(
+            {
+                brand: gravityTheme.baseColors.brand,
+            },
+            gravityTheme.utilityColors['base-background'].light.value,
+            gravityTheme.utilityColors['base-background'].dark.value,
+        ),
+    };
+
+    const paletteTokens = createPalleteTokens(gravityTheme);
 
     return {
-        ...theme,
+        gravityTheme,
         paletteTokens,
-        tokens: Object.keys(paletteTokens),
         showMainSettings: false,
         advancedModeEnabled: false,
         changesExist: false,
+        borders: {
+            preset: RadiusPresetName.Regular,
+            values: RADIUS_PRESETS[RadiusPresetName.Regular],
+        },
+        typography: defaultTypographyPreset,
     };
 }
 
@@ -499,141 +364,144 @@ export function changeRadiusPresetInTheme(
     themeState: ThemeCreatorState,
     {radiusPresetName}: ChangeRadiusPresetInThemeParams,
 ): ThemeCreatorState {
-    const newBorderValue = {
+    const newThemeState = {...themeState};
+    const newBordersValue = {...RADIUS_PRESETS[radiusPresetName]};
+
+    newThemeState.gravityTheme.borders = newBordersValue;
+
+    newThemeState.borders = {
         preset: radiusPresetName,
-        values: {...RADIUS_PRESETS[radiusPresetName]},
+        values: newBordersValue,
     };
 
-    return {...themeState, borders: newBorderValue};
+    return newThemeState;
 }
 
-export type UpdateCustomRadiusPresetInThemeParams = {radiusValue: Partial<RadiusValue>};
+export type UpdateCustomRadiusPresetInThemeParams = {radiusValue: Partial<BordersOptions>};
 
 export function updateCustomRadiusPresetInTheme(
     themeState: ThemeCreatorState,
     {radiusValue}: UpdateCustomRadiusPresetInThemeParams,
 ): ThemeCreatorState {
+    const newThemeState = {...themeState};
     const previousRadiusValues = themeState.borders.values;
-    const newCustomPresetValues = {
+
+    newThemeState.borders = {
         preset: RadiusPresetName.Custom,
         values: {...previousRadiusValues, ...radiusValue},
     };
 
-    return {...themeState, borders: newCustomPresetValues};
-}
+    newThemeState.gravityTheme.borders = {
+        ...newThemeState.gravityTheme.borders,
+        ...radiusValue,
+    };
 
-function createBorderRadiusCssVariable(radiusSize: string) {
-    return `${THEME_BORDER_RADIUS_VARIABLE_PREFIX}-${radiusSize}`;
-}
-
-/**
- * Generates ready-to-use in css string with borders variables
- * @returns string
- */
-export function createBorderRadiusPresetForExport({
-    borders,
-    forPreview,
-    ignoreDefaultValues,
-}: {
-    borders: BordersOption;
-    ignoreDefaultValues: boolean;
-    forPreview: boolean;
-}) {
-    // Don't export radius preset that are equals to default
-    if (ignoreDefaultValues && borders.preset === RadiusPresetName.Regular) {
-        return '';
-    }
-    let cssString = '';
-    Object.entries(borders.values).forEach(([radiusName, radiusValue]) => {
-        if (radiusValue) {
-            cssString += `${createBorderRadiusCssVariable(radiusName)}: ${radiusValue}px${
-                forPreview ? ' !important' : ''
-            };\n`;
-        }
-    });
-    return cssString;
+    return newThemeState;
 }
 
 export type UpdateFontFamilyParams = {
-    fontType: DefaultFontFamilyType | string;
+    fontType: DefaultFontFamily | string;
     fontWebsite?: string;
-    isCustom?: boolean;
     customType?: string;
     value?: {
-        title: string;
-        key: string;
-        link: string;
-        alternatives: string[];
+        title?: string;
+        mainFont?: string;
+        fallbackFonts?: string[];
+        link?: string;
     };
 };
 
 export function updateFontFamilyInTheme(
     themeState: ThemeCreatorState,
-    {fontType, value, isCustom, fontWebsite, customType}: UpdateFontFamilyParams,
+    {fontType, value, customType, fontWebsite}: UpdateFontFamilyParams,
 ): ThemeCreatorState {
-    const previousFontFamilySettings = themeState.typography.baseSetting.fontFamilies;
+    const previousGravityFontFamilySettings = themeState.gravityTheme.typography.fontFamilies;
+
+    const newGravityFontFamilySettings: FontFamilies = {
+        ...previousGravityFontFamilySettings,
+        [fontType]: {
+            ...previousGravityFontFamilySettings[fontType],
+            mainFont:
+                value?.mainFont ?? previousGravityFontFamilySettings[fontType]?.mainFont ?? '',
+            fallbackFonts:
+                value?.fallbackFonts ??
+                previousGravityFontFamilySettings[fontType]?.fallbackFonts ??
+                [],
+        },
+    };
+
+    const previousFontFamilySettings = themeState.typography.fontFamilies;
 
     const newFontFamilySettings = {
         ...previousFontFamilySettings,
         [fontType]: {
             ...previousFontFamilySettings[fontType],
-            ...(value || {}),
-            isCustom,
-            customType: customType || previousFontFamilySettings[fontType].customType,
+            title: value?.title ?? previousFontFamilySettings[fontType].title,
+            customType: customType ?? previousFontFamilySettings[fontType].customType,
             fontWebsite,
+            link: value?.link ?? previousFontFamilySettings[fontType].link,
         },
     };
 
     return {
         ...themeState,
+        gravityTheme: {
+            ...themeState.gravityTheme,
+            typography: {
+                ...themeState.gravityTheme.typography,
+                fontFamilies: newGravityFontFamilySettings,
+            },
+        },
         typography: {
             ...themeState.typography,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
-                fontFamilies: newFontFamilySettings,
-            },
+            fontFamilies: newFontFamilySettings,
         },
     };
 }
 
 export type AddFontFamilyTypeParams = {
     title: string;
+    customType: string;
 };
 
 export function addFontFamilyTypeInTheme(
     themeState: ThemeCreatorState,
-    {title}: AddFontFamilyTypeParams,
+    {title, customType}: AddFontFamilyTypeParams,
 ): ThemeCreatorState {
-    const {customFontFamilyType} = themeState.typography.baseSetting;
-    const newFontType = `custom-font-type-${uuidv4()}`;
+    const {gravityTheme} = themeState;
 
-    const newCustomFontFamily = [
-        ...customFontFamilyType,
-        {
-            value: newFontType,
-            content: title,
-        },
-    ];
+    const typography = cloneDeep(gravityTheme.typography);
+
+    const customFontPrefix = 'custom-font-';
+
+    const countCustomFonts = Object.keys(gravityTheme.typography.fontFamilies).filter((name) =>
+        name.startsWith(customFontPrefix),
+    ).length;
+
+    const newFontKey = `${customFontPrefix}${countCustomFonts + 1}`;
+
+    typography.fontFamilies[newFontKey] = {
+        mainFont: '',
+        fallbackFonts: [],
+    };
+
+    const newFontFamilySettings = cloneDeep(themeState.typography.fontFamilies);
+    newFontFamilySettings[newFontKey] = {
+        title,
+        link: '',
+        customType,
+        fontWebsite: '',
+    };
 
     return {
         ...themeState,
         typography: {
             ...themeState.typography,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
-                fontFamilies: {
-                    ...themeState.typography.baseSetting.fontFamilies,
-                    [newFontType]: {
-                        isCustom: true,
-                        customType: CustomFontSelectType.GoogleFonts,
-                        title: '',
-                        key: '',
-                        link: '',
-                        alternatives: [],
-                    },
-                },
-                customFontFamilyType: newCustomFontFamily,
-            },
+            fontFamilies: newFontFamilySettings,
+        },
+        gravityTheme: {
+            ...gravityTheme,
+            typography,
         },
     };
 }
@@ -647,25 +515,21 @@ export function updateFontFamilyTypeTitleInTheme(
     themeState: ThemeCreatorState,
     {title, familyType}: UpdateFontFamilyTypeTitleParams,
 ): ThemeCreatorState {
-    const {customFontFamilyType} = themeState.typography.baseSetting;
+    const {fontFamilies} = themeState.typography;
 
-    const newCustomFontFamily = customFontFamilyType.map((fontFamilyType) => {
-        return fontFamilyType.value === familyType
-            ? {
-                  content: title,
-                  value: familyType,
-              }
-            : fontFamilyType;
-    });
+    const newFontFamilies = {
+        ...fontFamilies,
+        [familyType]: {
+            ...fontFamilies[familyType],
+            title,
+        },
+    };
 
     return {
         ...themeState,
         typography: {
             ...themeState.typography,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
-                customFontFamilyType: newCustomFontFamily,
-            },
+            fontFamilies: newFontFamilies,
         },
     };
 }
@@ -674,47 +538,40 @@ export function removeFontFamilyTypeFromTheme(
     themeState: ThemeCreatorState,
     {fontType}: {fontType: string},
 ): ThemeCreatorState {
-    const {customFontFamilyType, fontFamilies} = themeState.typography.baseSetting;
-
-    const {[fontType]: _, ...restFontFamilies} = fontFamilies;
-
-    const newCustomFontFamilyType = customFontFamilyType.filter(
-        (fontFamily) => fontFamily.value !== fontType,
-    );
-
-    const newAdvanced = cloneDeep(themeState.typography.advanced);
+    const newTypography = cloneDeep(themeState.gravityTheme.typography);
+    delete newTypography.fontFamilies[fontType];
 
     // Reset selected font to default
-    Object.entries(newAdvanced).forEach(([textVariant, settings]) => {
-        if (settings.selectedFontFamilyType === fontType) {
-            newAdvanced[textVariant as TextVariants].selectedFontFamilyType =
-                defaultTypographyPreset.advanced[
-                    textVariant as TextVariants
-                ].selectedFontFamilyType;
+    Object.entries(newTypography.groups).forEach(([group, settings]) => {
+        if (settings['font-family'] === fontType) {
+            newTypography.groups[group as TextGroup]['font-family'] =
+                DEFAULT_THEME.typography.groups[group as TextGroup]['font-family'];
         }
     });
+
+    const newFontFamilies = cloneDeep(themeState.typography.fontFamilies);
+    delete newFontFamilies[fontType];
 
     return {
         ...themeState,
         typography: {
             ...themeState.typography,
-            advanced: newAdvanced,
-            baseSetting: {
-                ...themeState.typography.baseSetting,
-                fontFamilies: restFontFamilies,
-                customFontFamilyType: newCustomFontFamilyType,
-            },
+            fontFamilies: newFontFamilies,
+        },
+        gravityTheme: {
+            ...themeState.gravityTheme,
+            typography: newTypography,
         },
     };
 }
 
 export type UpdateAdvancedTypographySettingsParams = {
-    key: TextVariants;
+    key: TextGroup;
     fontWeight?: number;
     selectedFontFamilyType?: string;
-    sizeKey?: Exclude<TextProps['variant'], undefined>;
-    fontSize?: number;
-    lineHeight?: number;
+    sizeKey?: TextVariant;
+    fontSize?: string;
+    lineHeight?: string;
 };
 
 export function updateAdvancedTypographySettingsInTheme(
@@ -728,42 +585,29 @@ export function updateAdvancedTypographySettingsInTheme(
         lineHeight,
     }: UpdateAdvancedTypographySettingsParams,
 ): ThemeCreatorState {
-    const previousTypographyAdvancedSettings = themeState.typography.advanced;
+    const {groups, variants} = themeState.gravityTheme.typography;
 
-    const newSizes = sizeKey
-        ? {
-              [sizeKey]: {
-                  ...previousTypographyAdvancedSettings[key].sizes[sizeKey],
-                  fontSize:
-                      fontSize ?? previousTypographyAdvancedSettings[key].sizes[sizeKey]?.fontSize,
-                  lineHeight:
-                      lineHeight ??
-                      previousTypographyAdvancedSettings[key].sizes[sizeKey]?.lineHeight,
-              },
-          }
-        : {};
+    const newGroups = {...groups};
+    const newVariants = {...variants};
 
-    const newTypographyAdvancedSettings = {
-        ...previousTypographyAdvancedSettings,
-        [key]: {
-            ...previousTypographyAdvancedSettings[key],
-            fontWeight: fontWeight ?? previousTypographyAdvancedSettings[key].fontWeight,
-            selectedFontFamilyType:
-                selectedFontFamilyType ??
-                previousTypographyAdvancedSettings[key].selectedFontFamilyType,
-            sizes: {
-                ...previousTypographyAdvancedSettings[key].sizes,
-                ...newSizes,
-            },
-        },
-    };
+    if (key) {
+        newGroups[key]['font-family'] = selectedFontFamilyType ?? newGroups[key]['font-family'];
+        newGroups[key]['font-weight'] = fontWeight ?? newGroups[key]['font-weight'];
+    }
+
+    if (sizeKey) {
+        newVariants[sizeKey]['font-size'] = fontSize ?? newVariants[sizeKey]['font-size'];
+        newVariants[sizeKey]['line-height'] = lineHeight ?? newVariants[sizeKey]['line-height'];
+    }
 
     return {
         ...themeState,
-        typography: {
-            ...themeState.typography,
-            advanced: {
-                ...newTypographyAdvancedSettings,
+        gravityTheme: {
+            ...themeState.gravityTheme,
+            typography: {
+                ...themeState.gravityTheme.typography,
+                variants: newVariants,
+                groups: newGroups,
             },
         },
     };
@@ -781,88 +625,13 @@ export const updateAdvancedTypographyInTheme = (
     };
 };
 
-export const createFontImportsForExport = (
-    fontFamily: TypographyOptions['baseSetting']['fontFamilies'],
-) => {
+export const createFontImportsForExport = (fontFamily: TypographyOptions['fontFamilies']) => {
     let cssString = '';
 
     Object.entries(fontFamily).forEach(([, value]) => {
-        cssString += `${createFontLinkImport(value.link)}\n`;
-    });
-
-    return cssString;
-};
-
-export const createTypographyPresetForExport = ({
-    typography,
-    forPreview,
-}: {
-    typography: TypographyOptions;
-    ignoreDefaultValues: boolean;
-    forPreview: boolean;
-}) => {
-    const {baseSetting, advanced} = typography;
-    let cssString = '';
-
-    Object.entries(baseSetting.fontFamilies).forEach(([key, value]) => {
-        const customFontKey = getCustomFontTypeKey(key, baseSetting.customFontFamilyType);
-
-        cssString += `${createFontFamilyVariable(
-            customFontKey ? kebabCase(customFontKey) : key,
-            value.title,
-            value.alternatives,
-            forPreview,
-        )}\n`;
-    });
-
-    Object.entries(advanced).forEach(([key, data]) => {
-        const defaultAdvancedSetting = defaultTypographyPreset.advanced[key as TextVariants];
-
-        if (defaultAdvancedSetting.selectedFontFamilyType !== data.selectedFontFamilyType) {
-            const customFontTypeKey = getCustomFontTypeKey(
-                data.selectedFontFamilyType,
-                baseSetting.customFontFamilyType,
-            );
-
-            cssString += `${createTextFontFamilyVariable(
-                key as TextVariants,
-                customFontTypeKey ? kebabCase(customFontTypeKey) : data.selectedFontFamilyType,
-                forPreview,
-            )}\n`;
+        if (value.link) {
+            cssString += `${createFontLinkImport(value.link)}\n`;
         }
-        if (defaultAdvancedSetting.fontWeight !== data.fontWeight) {
-            cssString += `${createTextFontWeightVariable(
-                key as TextVariants,
-                data.fontWeight,
-                forPreview,
-            )}\n`;
-            cssString += '\n';
-        }
-
-        Object.entries(data.sizes).forEach(([sizeKey, sizeData]) => {
-            if (
-                defaultAdvancedSetting.sizes[sizeKey as Exclude<TextProps['variant'], undefined>]
-                    ?.fontSize !== sizeData.fontSize
-            ) {
-                cssString += `${createTextFontSizeVariable(
-                    sizeKey as TextProps['variant'],
-                    sizeData.fontSize,
-                    forPreview,
-                )}\n`;
-            }
-
-            if (
-                defaultAdvancedSetting.sizes[sizeKey as Exclude<TextProps['variant'], undefined>]
-                    ?.lineHeight !== sizeData.lineHeight
-            ) {
-                cssString += `${createTextLineHeightVariable(
-                    sizeKey as TextProps['variant'],
-                    sizeData.lineHeight,
-                    forPreview,
-                )}\n`;
-                cssString += '\n';
-            }
-        });
     });
 
     return cssString;

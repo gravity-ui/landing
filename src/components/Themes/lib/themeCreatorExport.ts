@@ -1,33 +1,7 @@
-import {DEFAULT_PALETTE, DEFAULT_THEME} from './constants';
-import {
-    createBorderRadiusPresetForExport,
-    createFontImportsForExport,
-    createPrivateColorCssVariable,
-    createPrivateColorCssVariableFromToken,
-    createPrivateColorToken,
-    createTypographyPresetForExport,
-    createUtilityColorCssVariable,
-    isPrivateColorToken,
-} from './themeCreatorUtils';
-import type {ThemeCreatorState, ThemeVariant} from './types';
+import {generateCSS} from '@gravity-ui/uikit-themer';
 
-const COMMON_VARIABLES_TEMPLATE_NAME = '%COMMON_VARIABLES%';
-const LIGHT_THEME_VARIABLES_TEMPLATE_NAME = '%LIGHT_THEME_VARIABLES%';
-const DARK_THEME_VARIABLES_TEMPLATE_NAME = '%DARK_THEME_VARIABLES%';
-const FONTS_TEMPLATE_NAME = '%IMPORT_FONTS%';
-
-const SCSS_TEMPLATE = `
-${FONTS_TEMPLATE_NAME}
-.g-root_theme_light {
-    ${COMMON_VARIABLES_TEMPLATE_NAME}
-    ${LIGHT_THEME_VARIABLES_TEMPLATE_NAME}
-}
-
-.g-root_theme_dark {
-    ${COMMON_VARIABLES_TEMPLATE_NAME}
-    ${DARK_THEME_VARIABLES_TEMPLATE_NAME}
-}
-`.trim();
+import {createFontImportsForExport} from './themeCreatorUtils';
+import type {ThemeCreatorState} from './types';
 
 export const APPLY_THEME_TEMPLATE = {
     en: `
@@ -57,14 +31,7 @@ type ExportThemeParams = {
     format?: ExportFormat;
     ignoreDefaultValues?: boolean;
     forPreview?: boolean;
-};
-
-const isBackgroundColorChanged = (themeState: ThemeCreatorState) => {
-    return (
-        DEFAULT_THEME.colors.dark['base-background'] !==
-            themeState.colors.dark['base-background'] ||
-        DEFAULT_THEME.colors.light['base-background'] !== themeState.colors.light['base-background']
-    );
+    customRootClassName?: string;
 };
 
 export function exportTheme({
@@ -72,108 +39,31 @@ export function exportTheme({
     format = 'css',
     ignoreDefaultValues = true,
     forPreview = true,
+    customRootClassName,
 }: ExportThemeParams) {
     if (format === 'json') {
         throw new Error('Not implemented');
     }
 
-    const {paletteTokens, palette} = themeState;
-    const backgroundColorChanged = isBackgroundColorChanged(themeState);
+    let css = generateCSS({
+        theme: themeState.gravityTheme,
+        ignoreDefaultValues,
+        forPreview,
+    });
 
-    const prepareThemeVariables = (themeVariant: ThemeVariant) => {
-        let cssVariables = '';
-        const privateColors: Record<string, string> = {};
+    if (customRootClassName) {
+        css = css
+            .replace('.g-root {', `.g-root.${customRootClassName} {`)
+            .replace('.g-root_theme_dark', `.g-root_theme_dark.${customRootClassName}_theme_dark`)
+            .replace(
+                '.g-root_theme_light',
+                `.g-root_theme_light.${customRootClassName}_theme_light`,
+            );
+    }
 
-        themeState.tokens.forEach((token) => {
-            // Dont export colors that are equals to default (except brand color)
-            // Private colors recalculate when background color changes
-            const valueEqualsToDefault =
-                DEFAULT_PALETTE[themeVariant][token] === themeState.palette[themeVariant][token] &&
-                token !== 'brand' &&
-                !backgroundColorChanged;
+    const fontImports = createFontImportsForExport(themeState.typography.fontFamilies);
 
-            if (valueEqualsToDefault && ignoreDefaultValues) {
-                return;
-            }
-
-            const needExportColor =
-                backgroundColorChanged || token === 'brand' || !valueEqualsToDefault;
-
-            if (!needExportColor) {
-                return;
-            }
-
-            if (paletteTokens[token]?.privateColors[themeVariant]) {
-                Object.entries(paletteTokens[token].privateColors[themeVariant]!).forEach(
-                    ([privateColorCode, color]) => {
-                        privateColors[createPrivateColorToken(token, privateColorCode)] = color;
-                        cssVariables += `${createPrivateColorCssVariable(
-                            token,
-                            privateColorCode,
-                        )}: ${color}${forPreview ? ' !important' : ''};\n`;
-                    },
-                );
-                cssVariables += '\n';
-            }
-        });
-
-        cssVariables += '\n';
-
-        cssVariables += `${createUtilityColorCssVariable('base-brand')}: ${
-            palette[themeVariant].brand
-        }${forPreview ? ' !important' : ''};\n`;
-
-        Object.entries(themeState.colors[themeVariant]).forEach(
-            ([colorName, colorOrPrivateToken]) => {
-                const color = isPrivateColorToken(colorOrPrivateToken)
-                    ? `var(${createPrivateColorCssVariableFromToken(colorOrPrivateToken)})`
-                    : colorOrPrivateToken;
-
-                cssVariables += `${createUtilityColorCssVariable(colorName)}: ${color}${
-                    forPreview ? ' !important' : ''
-                };\n`;
-            },
-        );
-
-        if (forPreview) {
-            cssVariables += createBorderRadiusPresetForExport({
-                borders: themeState.borders,
-                forPreview,
-                ignoreDefaultValues,
-            });
-
-            cssVariables += createTypographyPresetForExport({
-                typography: themeState.typography,
-                ignoreDefaultValues,
-                forPreview,
-            });
-        }
-
-        return cssVariables.trim();
-    };
-
-    const prepareCommonThemeVariables = () => {
-        const borderRadiusVariabels = createBorderRadiusPresetForExport({
-            borders: themeState.borders,
-            forPreview,
-            ignoreDefaultValues,
-        });
-
-        const typographyVariables = createTypographyPresetForExport({
-            typography: themeState.typography,
-            ignoreDefaultValues,
-            forPreview,
-        });
-
-        return borderRadiusVariabels + '\n' + typographyVariables;
-    };
-
-    return {
-        fontImports: createFontImportsForExport(themeState.typography.baseSetting.fontFamilies),
-        common: prepareCommonThemeVariables(),
-        light: prepareThemeVariables('light'),
-        dark: prepareThemeVariables('dark'),
-    };
+    return `${fontImports}\n\n${css}`;
 }
 
 type ExportThemeForDialogParams = Pick<ExportThemeParams, 'themeState' | 'format'>;
@@ -183,14 +73,9 @@ export function exportThemeForDialog({themeState, format = 'css'}: ExportThemeFo
         return 'not implemented';
     }
 
-    const {common, light, dark, fontImports} = exportTheme({
+    return exportTheme({
         themeState,
         format,
         forPreview: false,
     });
-
-    return SCSS_TEMPLATE.replace(FONTS_TEMPLATE_NAME, fontImports)
-        .replaceAll(COMMON_VARIABLES_TEMPLATE_NAME, common.replaceAll('\n', '\n'.padEnd(5)))
-        .replace(LIGHT_THEME_VARIABLES_TEMPLATE_NAME, light.replaceAll('\n', '\n'.padEnd(9)))
-        .replace(DARK_THEME_VARIABLES_TEMPLATE_NAME, dark.replaceAll('\n', '\n'.padEnd(9)));
 }

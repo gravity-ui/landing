@@ -1,10 +1,15 @@
+import type {Theme, UtilityColor} from '@gravity-ui/uikit-themer';
+import {
+    DEFAULT_THEME,
+    createInternalPrivateColorReference,
+    isPrivateColorCssVariable,
+    parsePrivateColorCssVariable,
+} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {block} from '../../../../utils';
 import {useThemePrivateColorOptions, useThemeUtilityColor} from '../../hooks';
-import {DEFAULT_THEME} from '../../lib/constants';
 import {ThemeColorOption} from '../../lib/themeCreatorUtils';
-import type {ColorsOptions, ThemeVariant} from '../../lib/types';
 import {PrivateColorSelect} from '../PrivateColorSelect';
 import {ThemableSettings} from '../ThemableSettings/ThemableSettings';
 import {ThemableRow} from '../ThemableSettings/types';
@@ -15,8 +20,8 @@ import './PrivateColorsSettings.scss';
 const b = block('private-colors-settings');
 
 interface PrivateColorEditorProps {
-    name: keyof ColorsOptions;
-    theme: ThemeVariant;
+    name: UtilityColor;
+    theme: Theme;
     colorGroups: ThemeColorOption[];
 }
 
@@ -26,10 +31,24 @@ const PrivateColorEditor: React.FC<PrivateColorEditorProps> = ({name, theme, col
         theme,
     });
 
+    const defaultValue = React.useMemo(() => {
+        const ref = DEFAULT_THEME.utilityColors[name][theme].ref;
+        if (ref) {
+            if (isPrivateColorCssVariable(ref)) {
+                const {mainColorToken, privateColorToken} = parsePrivateColorCssVariable(ref);
+                return createInternalPrivateColorReference(mainColorToken, privateColorToken);
+            }
+
+            return ref;
+        }
+
+        return DEFAULT_THEME.utilityColors[name][theme].value;
+    }, [name, theme]);
+
     return (
         <PrivateColorSelect
             groups={colorGroups}
-            defaultValue={DEFAULT_THEME.colors[theme][name]}
+            defaultValue={defaultValue}
             value={color}
             onChange={setColor}
         />
@@ -38,7 +57,7 @@ const PrivateColorEditor: React.FC<PrivateColorEditorProps> = ({name, theme, col
 
 export type EditableColorOption = {
     title: string;
-    name: keyof ColorsOptions;
+    name: UtilityColor;
 };
 
 interface PrivateColorsSettingsProps {
