@@ -2,3 +2,9 @@ build
 public/static
 CONTRIBUTING.md
 *.mdx
+.next
+.vscode
+out
+src/data
+src/content
+project.inlang
