@@ -32,6 +32,12 @@ blocks:
           en el futuro.
         url: https://medium.com/p/32985f939f1c
       - type: basic-card
+        title: "Biblioteca de visualización de grafos: cómo resolvimos el dilema Canvas vs HTML en Gravity UI"
+        text: >-
+          Una publicación sobre los desafíos arquitectónicos que surgieron durante la creación de la
+          biblioteca Gravity UI Graph, que revela cómo se formó la implementación actual de la biblioteca.
+        url: https://habr.com/ru/companies/yandex/articles/934562/   
+      - type: basic-card
         title: Cómo hicimos Yandex Cloud más accesible con el sistema de diseño Gravity UI
         text: Cómo construir una interfaz accesible utilizando las bibliotecas GravityUI.
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/

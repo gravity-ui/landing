@@ -32,6 +32,12 @@ blocks:
           it further.
         url: https://medium.com/p/32985f939f1c
       - type: basic-card
+        title: "Graph Visualization Library: How We Solved the Canvas vs HTML Dilemma in Gravity UI"
+        text: >-
+          A post about the architectural challenges that arose during the creation of the
+          Gravity UI Graph library, which reveals how the current implementation of the library was formed.
+        url: https://habr.com/ru/companies/yandex/articles/934562/   
+      - type: basic-card
         title: How We Made Yandex Cloud More Accessible with Gravity UI Design System
         text: How to build an accessible interface using GravityUI libraries.
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/

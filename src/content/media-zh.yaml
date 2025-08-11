@@ -31,6 +31,12 @@ blocks:
           以及我们计划如何进一步发展它的故事。
         url: https://medium.com/p/32985f939f1c
       - type: basic-card
+        title: "图形可视化库：我们如何在Gravity UI中解决Canvas vs HTML的难题"
+        text: >-
+          一篇关于在创建Gravity UI Graph库过程中出现的架构挑战的文章，
+          其中揭示了库的当前实现是如何形成的。
+        url: https://habr.com/ru/companies/yandex/articles/934562/   
+      - type: basic-card
         title: 我们如何使用Gravity UI设计系统让Yandex Cloud更易用
         text: 如何使用GravityUI库构建可访问的界面。
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
