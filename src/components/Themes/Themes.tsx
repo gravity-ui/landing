@@ -14,6 +14,7 @@ import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {PreviewTab} from './ui/PreviewTab/PreviewTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
+import {ThemeImport} from './ui/ThemeImport/ThemeImport';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
 
 const b = block('themes');
@@ -38,10 +39,21 @@ export const Themes = () => {
 
     const headerRef = useRef<HTMLDivElement>(null);
 
-    const [isExportDialogVisible, toggleExportDialog] = React.useReducer(
-        (isOpen) => !isOpen,
-        false,
-    );
+    const [isExportDialogVisible, setIsExportDialogVisible] = React.useState(false);
+    const [isImportDialogVisible, setIsImportDialogVisible] = React.useState(false);
+
+    const openExportDialog = React.useCallback(() => {
+        setIsExportDialogVisible(true);
+    }, []);
+    const closeExportDialog = React.useCallback(() => {
+        setIsExportDialogVisible(false);
+    }, []);
+    const openImportDialog = React.useCallback(() => {
+        setIsImportDialogVisible(true);
+    }, []);
+    const closeImportDialog = React.useCallback(() => {
+        setIsImportDialogVisible(false);
+    }, []);
 
     const tags: TagItem<ThemeTab>[] = useMemo(
         () => [
@@ -96,14 +108,19 @@ export const Themes = () => {
     const ThemeActionsButtons = useCallback(
         () => (
             <Flex direction="row" gap={2}>
-                <Button className={b('theme-action-btn')} view="outlined-action" size="xl">
+                <Button
+                    className={b('theme-action-btn')}
+                    view="outlined-action"
+                    size="xl"
+                    onClick={openImportDialog}
+                >
                     <Text>Импортировать тему</Text>
                 </Button>
                 <Button
                     className={b('theme-action-btn')}
                     view="action"
                     size="xl"
-                    onClick={toggleExportDialog}
+                    onClick={openExportDialog}
                 >
                     <Icon data={ArrowUpFromSquare} />
                     <Text>{t('btn_export_theme')}</Text>
@@ -139,7 +156,8 @@ export const Themes = () => {
                 <div className={b('grid__content')}>{TabComponent ? <TabComponent /> : null}</div>
             </Grid>
 
-            <ThemeExport isOpen={isExportDialogVisible} onClose={toggleExportDialog} />
+            <ThemeExport isOpen={isExportDialogVisible} onClose={closeExportDialog} />
+            <ThemeImport isOpen={isImportDialogVisible} onClose={closeImportDialog} />
         </ThemeCreatorContextProvider>
     );
 };

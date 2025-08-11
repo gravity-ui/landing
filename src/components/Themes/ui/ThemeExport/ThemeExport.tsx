@@ -55,7 +55,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
         link.setAttribute('download', 'custom-theme.json');
 
         link.click();
-    }, []);
+    }, [themeState]);
 
     const ExportContent = useCallback(() => {
         return (

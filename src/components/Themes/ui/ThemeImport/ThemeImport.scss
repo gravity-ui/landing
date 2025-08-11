@@ -1,0 +1,39 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+
+$block: '.#{variables.$ns}theme-import';
+
+#{$block} {
+    &__dialog-buttons {
+        width: 100%;
+    }
+
+    &__textarea {
+        --g-text-area-border-radius: 8px;
+
+        height: max(calc(50vh - 300px), 50vh);
+
+        border-radius: var(--g-border-radius-m);
+    }
+
+    &__action-button {
+        --g-button-border-radius: 8px;
+        border-radius: var(--g-border-radius-m);
+    }
+
+    &__sheet {
+        &__import-button-wrapper {
+            height: 60px;
+        }
+
+        &__content {
+            margin-bottom: 80px;
+        }
+
+        &__import-button {
+            margin: 0 var(--g-spacing-2);
+            width: calc(100% - 2 * var(--g-spacing-2));
+        }
+    }
+}
