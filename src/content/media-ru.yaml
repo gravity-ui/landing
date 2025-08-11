@@ -32,6 +32,12 @@ blocks:
           его дальше.
         url: https://habr.com/en/companies/yandex/articles/773870/
       - type: basic-card
+        title: "Библиотека визуализации графов: как мы решили дилемму Canvas vs HTML в Gravity UI"
+        text: >-
+          Пост про архитектурные вызовы, которые возникали при создании библиотеки 
+          Gravity UI Graph, в нём раскрыто, как формировалась текущая реализации библиотеки.
+        url: https://habr.com/ru/companies/yandex/articles/934562/ 
+      - type: basic-card
         title: Как мы делали Yandex Cloud на дизайн-системе Gravity UI доступнее
         text: Как построить доступный интерефейс, используя библиотеки GravityUI.
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
