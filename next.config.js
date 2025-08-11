@@ -17,6 +17,8 @@ const withTM = require('next-transpile-modules')([
 
 const {i18n} = require('./next-i18next.config');
 
+const ASSET_PREFIX = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
+
 const plugins = [
     [
         withTM,
@@ -34,7 +36,7 @@ const plugins = [
                             options: {
                                 context: '',
                                 outputPath: 'static/media',
-                                publicPath: '_next/static/media',
+                                publicPath: `${ASSET_PREFIX}/_next/static/media`,
                                 name: '[name].[hash:8].[ext]',
                             },
                         },
