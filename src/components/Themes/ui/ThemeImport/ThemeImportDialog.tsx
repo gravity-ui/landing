@@ -1,4 +1,4 @@
-import {Button, Flex, Link} from '@gravity-ui/uikit';
+import {Button, Flex} from '@gravity-ui/uikit';
 import React, {PropsWithChildren} from 'react';
 
 import {block} from '../../../../utils';
@@ -30,29 +30,22 @@ export const ThemeImportDialog = ({
             children={children}
             bottomContent={
                 <Flex
-                    justifyContent="space-between"
+                    justifyContent="flex-end"
                     alignItems="center"
+                    gap={4}
                     className={b('dialog-buttons')}
                 >
-                    <Link href="#">Learn more</Link>
-                    <Flex gap={4} alignItems="center">
-                        <Button
-                            className={b('action-button')}
-                            view="flat"
-                            size="l"
-                            onClick={onClose}
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            className={b('action-button')}
-                            view="action"
-                            size="l"
-                            onClick={onImportThemeJSONClick}
-                        >
-                            Import
-                        </Button>
-                    </Flex>
+                    <Button className={b('action-button')} view="flat" size="l" onClick={onClose}>
+                        Cancel
+                    </Button>
+                    <Button
+                        className={b('action-button')}
+                        view="action"
+                        size="l"
+                        onClick={onImportThemeJSONClick}
+                    >
+                        Import
+                    </Button>
                 </Flex>
             }
         />
