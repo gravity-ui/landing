@@ -1,6 +1,6 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {TextArea} from '@gravity-ui/uikit';
-import React, {useCallback} from 'react';
+import {Alert, Flex, Text, TextArea} from '@gravity-ui/uikit';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import {block} from '../../../../utils';
 import {useImportTheme} from '../../lib/themeCreatorImport';
@@ -19,23 +19,49 @@ export interface ThemeImportProps {
 export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
     const breakpoint = useWindowBreakpoint();
     const [textareaValue, setTextareaValue] = React.useState('');
-    const {importThemeFromJson} = useImportTheme();
+    const [isImportError, setIsImportError] = useState(false);
 
-    const handleImportThemeJSONClick = useCallback(() => {
-        importThemeFromJson(textareaValue);
+    const handleImportError = useCallback(() => {
         onClose();
         setTextareaValue('');
-    }, [textareaValue, onClose, importThemeFromJson]);
+    }, [onClose]);
 
-    const textarea = (
-        <TextArea
-            size="xl"
-            rows={1}
-            placeholder="Paste your theme JSON here"
-            className={b('textarea')}
-            onUpdate={setTextareaValue}
-            value={textareaValue}
-        />
+    const {importThemeFromUserInput} = useImportTheme({onImportError: handleImportError});
+    const handleImportThemeJSONClick = useCallback(() => {
+        importThemeFromUserInput(textareaValue);
+        onClose();
+        setTextareaValue('');
+    }, [textareaValue, onClose, importThemeFromUserInput]);
+
+    useEffect(() => {
+        if (!isOpen) {
+            setIsImportError(false);
+        }
+    }, [isOpen]);
+
+    const content = (
+        <Flex direction="column" gap={2}>
+            <Flex direction="column" gap={4}>
+                <Alert
+                    theme="info"
+                    title="Here, you can import your styles in either CSS or JSON format."
+                />
+            </Flex>
+            <TextArea
+                size="xl"
+                rows={1}
+                placeholder="Paste your theme JSON here"
+                className={b('textarea')}
+                onUpdate={setTextareaValue}
+                value={textareaValue}
+                validationState={isImportError ? 'invalid' : undefined}
+            />
+            {isImportError && (
+                <Text variant="body-2" color="danger">
+                    Invalid theme value
+                </Text>
+            )}
+        </Flex>
     );
 
     return breakpoint >= BREAKPOINTS.sm ? (
@@ -45,7 +71,7 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
             onImportThemeJSONClick={handleImportThemeJSONClick}
             breakpoint={breakpoint}
         >
-            {textarea}
+            {content}
         </ThemeImportDialog>
     ) : (
         <ThemeImportSheet
@@ -53,7 +79,7 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
             isOpen={isOpen}
             onImportThemeJSONClick={handleImportThemeJSONClick}
         >
-            {textarea}
+            {content}
         </ThemeImportSheet>
     );
 };

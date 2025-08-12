@@ -1,5 +1,5 @@
-import { BREAKPOINTS } from '@gravity-ui/page-constructor';
-import { Dialog, Flex } from '@gravity-ui/uikit';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
+import {Dialog, Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
 const breakpointToSize = {
@@ -14,7 +14,7 @@ export interface ThemeActionDialogProps {
     open: boolean;
     onClose: () => void;
     breakpoint: number;
-    children: React.ReactNode;        
+    children: React.ReactNode;
     bottomContent: React.ReactNode;
 }
 
@@ -27,11 +27,7 @@ export const ThemeActionDialog: React.FC<ThemeActionDialogProps> = ({
     bottomContent,
 }) => {
     return (
-        <Dialog
-            open={open}
-            onClose={onClose}
-            size={breakpointToSize[breakpoint]}
-        >
+        <Dialog open={open} onClose={onClose} size={breakpointToSize[breakpoint]}>
             <Dialog.Header caption={title} />
             <Dialog.Body>
                 <Flex direction="column" gap={4}>

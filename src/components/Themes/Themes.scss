@@ -85,6 +85,22 @@ $block: '.#{variables.$ns}themes';
     &__header-action-buttons {
         padding-inline: 40px;
 
+        &.desktop {
+            display: block;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                display: none;
+            }
+        }
+
+        &.mobile {
+            display: none;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                display: block;
+            }
+        }
+
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             padding-inline: 16px;
         }

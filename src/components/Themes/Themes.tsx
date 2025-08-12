@@ -1,5 +1,5 @@
 import {ArrowUpFromSquare} from '@gravity-ui/icons';
-import {BREAKPOINTS, Grid, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {Grid} from '@gravity-ui/page-constructor';
 import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
@@ -35,7 +35,6 @@ const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
 
 export const Themes = () => {
     const {t} = useTranslation('themes');
-    const breakpoint = useWindowBreakpoint();
 
     const headerRef = useRef<HTMLDivElement>(null);
 
@@ -143,15 +142,15 @@ export const Themes = () => {
                         value={activeTab}
                         onChange={setActiveTab}
                     />
-                    {breakpoint >= BREAKPOINTS.md && <ThemeActionsButtons />}
+                    <div className={b('header-action-buttons', 'desktop')}>
+                        <ThemeActionsButtons />
+                    </div>
                 </Flex>
             </div>
 
-            {breakpoint < BREAKPOINTS.md && (
-                <div className={b('header-action-buttons')}>
-                    <ThemeActionsButtons />
-                </div>
-            )}
+            <div className={b('header-action-buttons', 'mobile')}>
+                <ThemeActionsButtons />
+            </div>
             <Grid className={b('grid')}>
                 <div className={b('grid__content')}>{TabComponent ? <TabComponent /> : null}</div>
             </Grid>

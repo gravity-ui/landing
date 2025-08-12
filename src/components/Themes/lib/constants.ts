@@ -182,7 +182,6 @@ export const DEFAULT_COLORS: GravityTheme['utilityColors'] = {
     },
 };
 
-console.log({DEFAULT_GRAVITY_THEME});
 export const DEFAULT_THEME: GravityTheme = {
     ...DEFAULT_GRAVITY_THEME,
     baseColors: DEFAULT_PALETTE,
