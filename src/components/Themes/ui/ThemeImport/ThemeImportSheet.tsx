@@ -31,7 +31,7 @@ export const ThemeImportSheet = ({
                 <Button
                     size="xl"
                     onClick={onImportThemeJSONClick}
-                    view="outlined-action"
+                    view="action"
                     className={b('import-button')}
                 >
                     Import
