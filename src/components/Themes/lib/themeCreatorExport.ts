@@ -3,6 +3,9 @@ import {generateCSS, generateJSON} from '@gravity-ui/uikit-themer';
 import {createFontImportsForExport} from './themeCreatorUtils';
 import type {ThemeCreatorState} from './types';
 
+export const FIGMA_GRAVITY_THEMER_LINK =
+    'https://www.figma.com/community/plugin/1517138252177518072/gravity-themer';
+
 export const APPLY_THEME_TEMPLATE = {
     en: `
         Create styles.css file with the styles created in the Themer (from the section below) and import it after the default UIKit styles.
@@ -12,7 +15,8 @@ export const APPLY_THEME_TEMPLATE = {
 
         // Styles from the Themer
         import './styles.css';
-    `,
+
+        Import the resulting styles into Figma using the`,
     ru: `
         Создайте файл styles.css со стилями, созданными в Темизаторе (из секции ниже), и импортируйте его после стилей UIKit по умолчанию.
 
@@ -21,7 +25,8 @@ export const APPLY_THEME_TEMPLATE = {
 
         // Стили из Темизатора
         import './styles.css';
-    `,
+
+        Импортируйте получившиеся стили в Figma при помощи`,
 };
 
 export type ExportFormat = 'css' | 'json';

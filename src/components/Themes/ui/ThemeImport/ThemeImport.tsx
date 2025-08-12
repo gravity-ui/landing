@@ -1,5 +1,6 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {Alert, Flex, Text, TextArea} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React, {useCallback, useEffect, useState} from 'react';
 
 import {block} from '../../../../utils';
@@ -17,6 +18,7 @@ export interface ThemeImportProps {
 }
 
 export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
+    const {t} = useTranslation('themes');
     const breakpoint = useWindowBreakpoint();
     const [textareaValue, setTextareaValue] = React.useState('');
     const [isImportError, setIsImportError] = useState(false);
@@ -42,10 +44,7 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
     const content = (
         <Flex direction="column" gap={2}>
             <Flex direction="column" gap={4}>
-                <Alert
-                    theme="info"
-                    title="Here, you can import your styles in either CSS or JSON format."
-                />
+                <Alert theme="info" title={t('title_theme-import')} />
             </Flex>
             <TextArea
                 size="xl"
@@ -58,7 +57,7 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
             />
             {isImportError && (
                 <Text variant="body-2" color="danger">
-                    Invalid theme value
+                    {t('label_import-error')}
                 </Text>
             )}
         </Flex>

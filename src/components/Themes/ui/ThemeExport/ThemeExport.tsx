@@ -1,5 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {Alert, Flex, Text} from '@gravity-ui/uikit';
+import {Alert, Flex, Link, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useMemo} from 'react';
 
@@ -7,7 +7,11 @@ import {useLocale} from '../../../../hooks/useLocale';
 import {block} from '../../../../utils';
 import {CodeExample} from '../../../CodeExample/CodeExample';
 import {useThemeCreator} from '../../hooks';
-import {APPLY_THEME_TEMPLATE, exportThemeForDialog} from '../../lib/themeCreatorExport';
+import {
+    APPLY_THEME_TEMPLATE,
+    FIGMA_GRAVITY_THEMER_LINK,
+    exportThemeForDialog,
+} from '../../lib/themeCreatorExport';
 
 import './ThemeExport.scss';
 import {ThemeExportDialog} from './ThemeExportDialog';
@@ -39,7 +43,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
 
         const link = document.createElement('a');
         link.setAttribute('href', url);
-        link.setAttribute('download', 'custom.css');
+        link.setAttribute('download', 'styles.css');
 
         link.click();
     }, [themeStylesCSS]);
@@ -52,7 +56,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
 
         const link = document.createElement('a');
         link.setAttribute('href', url);
-        link.setAttribute('download', 'custom-theme.json');
+        link.setAttribute('download', 'styles.json');
 
         link.click();
     }, [themeState]);
@@ -64,9 +68,16 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
                     theme="info"
                     title={t('export_theme_apply-theme-alert-title')}
                     message={
-                        <Text variant="code-1" className={b('apply-theme-message')}>
-                            {locale === 'ru' ? APPLY_THEME_TEMPLATE.ru : APPLY_THEME_TEMPLATE.en}
-                        </Text>
+                        <div>
+                            <Text variant="code-1" className={b('apply-theme-message')}>
+                                {locale === 'ru'
+                                    ? APPLY_THEME_TEMPLATE.ru
+                                    : APPLY_THEME_TEMPLATE.en}
+                            </Text>
+                            <Link href={FIGMA_GRAVITY_THEMER_LINK} className={b('figma-link')}>
+                                Gravity Themer Plugin
+                            </Link>
+                        </div>
                     }
                 />
                 <CodeExample code={themeStylesCSS} className={b('code')} />

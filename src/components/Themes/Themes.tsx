@@ -113,7 +113,7 @@ export const Themes = () => {
                     size="xl"
                     onClick={openImportDialog}
                 >
-                    <Text>Импортировать тему</Text>
+                    <Text>{t('btn_import_theme')}</Text>
                 </Button>
                 <Button
                     className={b('theme-action-btn')}

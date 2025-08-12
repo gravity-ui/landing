@@ -1,4 +1,5 @@
 import {Button} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React, {PropsWithChildren} from 'react';
 
 import {block} from '../../../../utils';
@@ -19,6 +20,8 @@ export const ThemeImportSheet = ({
     children,
     onImportThemeJSONClick,
 }: ThemeImportSheetProps) => {
+    const {t} = useTranslation('themes');
+
     return (
         <ThemeActionSheet
             open={isOpen}
@@ -34,7 +37,7 @@ export const ThemeImportSheet = ({
                     view="action"
                     className={b('import-button')}
                 >
-                    Import
+                    {t('btn_import_theme')}
                 </Button>
             }
         />
