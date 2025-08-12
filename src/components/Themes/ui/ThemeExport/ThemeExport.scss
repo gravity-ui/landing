@@ -43,4 +43,8 @@ $block: '.#{variables.$ns}theme-export';
         --g-button-border-radius: 8px;
         border-radius: var(--g-border-radius-m);
     }
+
+    &__figma-link {
+        padding-left: var(--g-spacing-1);
+    }
 }

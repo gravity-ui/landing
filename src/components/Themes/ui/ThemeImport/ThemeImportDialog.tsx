@@ -1,4 +1,5 @@
 import {Button, Flex} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React, {PropsWithChildren} from 'react';
 
 import {block} from '../../../../utils';
@@ -21,6 +22,8 @@ export const ThemeImportDialog = ({
     breakpoint,
     children,
 }: ThemeImportDialogProps) => {
+    const {t} = useTranslation('themes');
+
     return (
         <ThemeActionDialog
             open={isOpen}
@@ -36,7 +39,7 @@ export const ThemeImportDialog = ({
                     className={b('dialog-buttons')}
                 >
                     <Button className={b('action-button')} view="flat" size="l" onClick={onClose}>
-                        Cancel
+                        {t('cancel')}
                     </Button>
                     <Button
                         className={b('action-button')}
@@ -44,7 +47,7 @@ export const ThemeImportDialog = ({
                         size="l"
                         onClick={onImportThemeJSONClick}
                     >
-                        Import
+                        {t('btn_import_theme')}
                     </Button>
                 </Flex>
             }

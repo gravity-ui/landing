@@ -46,7 +46,7 @@ export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({
                         view="action"
                         size="xl"
                     >
-                        <Text>{t('export_theme_apply_btn')}</Text>
+                        <Text>{t('export_theme_apply_btn_css')}</Text>
                     </Button>
                     <Button
                         className={b('theme-action-btn')}
@@ -54,7 +54,7 @@ export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({
                         view="outlined-action"
                         size="xl"
                     >
-                        <Text>Save as JSON</Text>
+                        <Text>{t('export_theme_apply_btn_json')}</Text>
                     </Button>
                 </Flex>
             }

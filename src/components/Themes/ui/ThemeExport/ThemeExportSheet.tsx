@@ -35,10 +35,10 @@ export const ThemeExportSheet = ({
             bottomContent={
                 <React.Fragment>
                     <Button size="xl" onClick={onSaveThemeJSONClick} view="outlined-action">
-                        <Text>Save as JSON</Text>
+                        <Text>{t('export_theme_apply_btn_json')}</Text>
                     </Button>
                     <Button size="xl" onClick={onSaveThemeCSSClick} view="action">
-                        <Text>{t('export_theme_apply_btn')}</Text>
+                        <Text>{t('export_theme_apply_btn_css')}</Text>
                     </Button>
                 </React.Fragment>
             }
