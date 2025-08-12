@@ -1,5 +1,5 @@
 background:
-  image: ""
+  image: ''
 blocks:
   - type: header-block
     title: Our Media
@@ -9,46 +9,51 @@ blocks:
     list:
       - text: Playwright and PerformanceObserver API were used;
         icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
-      - text: tests were repeated 50 times with different number of nodes (10, 100, 1000).      
+      - text: tests were repeated 50 times with different number of nodes (10, 100, 1000).
         icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
     media:
       image: >-
-        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png 
+        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png
     button:
       text: Read the post
       url: >-
         https://habr.com/ru/companies/yandex/posts/931702/
+      target: _blank
       theme: accent
   - type: slider-block
     dots: true
     title: Articles
     autoplay: 5000
-    children:  
+    children:
       - type: basic-card
-        title: "Gravity UI Design System: How to Easily Build Your Interface"
+        title: 'Gravity UI Design System: How to Easily Build Your Interface'
         text: >-
           A story about why we created Gravity UI, how we use it, what are
           the features and advantages of our approach and how we plan to develop
           it further.
         url: https://medium.com/p/32985f939f1c
+        target: _blank
       - type: basic-card
-        title: "Graph Visualization Library: How We Solved the Canvas vs HTML Dilemma in Gravity UI"
+        title: 'Graph Visualization Library: How We Solved the Canvas vs HTML Dilemma in Gravity UI'
         text: >-
           A post about the architectural challenges that arose during the creation of the
           Gravity UI Graph library, which reveals how the current implementation of the library was formed.
-        url: https://habr.com/ru/companies/yandex/articles/934562/   
+        url: https://habr.com/ru/companies/yandex/articles/934562/
+        target: _blank
       - type: basic-card
         title: How We Made Yandex Cloud More Accessible with Gravity UI Design System
         text: How to build an accessible interface using GravityUI libraries.
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
+        target: _blank
       - type: basic-card
-        title: "Markdown Editor: WYSIWYG and Markup Editor Based on Gravity UI"
+        title: 'Markdown Editor: WYSIWYG and Markup Editor Based on Gravity UI'
         text: >-
           Let's talk about the history of user interface creation,
           architectural features and technical details of integration and
           development of custom extensions, and then - why all this is available in
           open source.
-        url: https://habr.com/en/companies/yandex/articles/845802/
+        url: https://medium.com/yandex/markdown-editor-wysiwyg-and-markup-editor-based-on-gravity-ui-43e97183ac8d
+        target: _blank
   - type: filter-block
     title: Webinars
     description: >
@@ -63,24 +68,24 @@ blocks:
           - youtube
         card:
           type: layout-item
-          media:     
-            youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
-            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png"            
+          media:
+            youtube: 'https://www.youtube.com/watch?v=9J3tuiLq6rA'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
-          fullscreen: false   
+          fullscreen: true
           content:
-            title: "Navigation"
+            title: 'Navigation'
             text: >-
               Introductory webinar on Navigation library
       - tags:
           - youtube
         card:
           type: layout-item
-          media:           
-            youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
-            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png"
+          media:
+            youtube: 'https://www.youtube.com/watch?v=e77kbTjqZX8'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
-          fullscreen: false   
+          fullscreen: true
           content:
             title: Introductory webinar
             text: >-
@@ -92,9 +97,9 @@ blocks:
             videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
-          fullscreen: false 
+          fullscreen: true
           content:
-            title: "Navigation"
+            title: 'Navigation'
             text: >-
               Introductory webinar on Navigation library
       - tags:
@@ -105,7 +110,7 @@ blocks:
             videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
-          fullscreen: false
+          fullscreen: true
           content:
             title: Introductory webinar
     allTag: false
@@ -113,10 +118,10 @@ blocks:
     textWidth: s
     centered: true
     background:
-      src: ""
+      src: ''
       style:
-        backgroundColor: "#23151E"
-        color: ""
+        backgroundColor: '#23151E'
+        color: ''
     textContent:
       title: Have questions?
       #text: Write to us

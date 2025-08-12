@@ -1,5 +1,5 @@
 background:
-  image: ""
+  image: ''
 blocks:
   - type: header-block
     title: 我们的媒体
@@ -9,44 +9,49 @@ blocks:
     list:
       - text: 使用了Playwright和PerformanceObserver API；
         icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
-      - text: 测试重复进行了50次，使用不同数量的节点（10、100、1000）。      
+      - text: 测试重复进行了50次，使用不同数量的节点（10、100、1000）。
         icon: https://storage.yandexcloud.net/gravity-landing-static/assets/icon_1_dark.svg
     media:
       image: >-
-        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png 
+        https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png
     button:
       text: 阅读文章
       url: >-
         https://habr.com/ru/companies/yandex/posts/931702/
+      target: _blank
       theme: accent
   - type: slider-block
     dots: true
     title: 文章
     autoplay: 5000
-    children:  
+    children:
       - type: basic-card
-        title: "Gravity UI设计系统：如何轻松构建您的界面"
+        title: 'Gravity UI设计系统：如何轻松构建您的界面'
         text: >-
           关于我们为什么创建Gravity UI、如何使用它、我们方法的特点和优势
           以及我们计划如何进一步发展它的故事。
         url: https://medium.com/p/32985f939f1c
+        target: _blank
       - type: basic-card
-        title: "图形可视化库：我们如何在Gravity UI中解决Canvas vs HTML的难题"
+        title: '图形可视化库：我们如何在Gravity UI中解决Canvas vs HTML的难题'
         text: >-
           一篇关于在创建Gravity UI Graph库过程中出现的架构挑战的文章，
           其中揭示了库的当前实现是如何形成的。
-        url: https://habr.com/ru/companies/yandex/articles/934562/   
+        url: https://habr.com/ru/companies/yandex/articles/934562/
+        target: _blank
       - type: basic-card
         title: 我们如何使用Gravity UI设计系统让Yandex Cloud更易用
         text: 如何使用GravityUI库构建可访问的界面。
         url: https://habr.com/en/companies/yandex_cloud_and_infra/articles/853382/
+        target: _blank
       - type: basic-card
-        title: "Markdown编辑器：基于Gravity UI的WYSIWYG和标记编辑器"
+        title: 'Markdown编辑器：基于Gravity UI的WYSIWYG和标记编辑器'
         text: >-
           让我们谈论用户界面创建的历史、架构特性和集成的技术细节
           以及自定义扩展的开发，然后 - 为什么所有这些都可以在
           开源中使用。
-        url: https://habr.com/en/companies/yandex/articles/845802/
+        url: https://medium.com/yandex/markdown-editor-wysiwyg-and-markup-editor-based-on-gravity-ui-43e97183ac8d
+        target: _blank
   - type: filter-block
     title: 网络研讨会
     description: >
@@ -61,24 +66,24 @@ blocks:
           - youtube
         card:
           type: layout-item
-          media:     
-            youtube: "https://www.youtube.com/watch?v=9J3tuiLq6rA"
-            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png"            
+          media:
+            youtube: 'https://www.youtube.com/watch?v=9J3tuiLq6rA'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
-          fullscreen: false   
+          fullscreen: true
           content:
-            title: "Navigation"
+            title: 'Navigation'
             text: >-
               Navigation库介绍网络研讨会
       - tags:
           - youtube
         card:
           type: layout-item
-          media:           
-            youtube: "https://www.youtube.com/watch?v=e77kbTjqZX8"
-            previewImg: "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png"
+          media:
+            youtube: 'https://www.youtube.com/watch?v=e77kbTjqZX8'
+            previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
-          fullscreen: false 
+          fullscreen: true
           content:
             title: 介绍网络研讨会
             text: >-
@@ -90,9 +95,9 @@ blocks:
             videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
-          fullscreen: false
+          fullscreen: true
           content:
-            title: "Navigation"
+            title: 'Navigation'
             text: >-
               Navigation库介绍网络研讨会
       - tags:
@@ -103,7 +108,7 @@ blocks:
             videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
-          fullscreen: false
+          fullscreen: true
           content:
             title: 介绍网络研讨会
     allTag: false
@@ -111,10 +116,10 @@ blocks:
     textWidth: s
     centered: true
     background:
-      src: ""
+      src: ''
       style:
-        backgroundColor: "#23151E"
-        color: ""
+        backgroundColor: '#23151E'
+        color: ''
     textContent:
       title: 有问题吗？
       #text: 联系我们
