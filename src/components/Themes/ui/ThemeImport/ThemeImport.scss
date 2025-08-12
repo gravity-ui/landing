@@ -1,7 +1,6 @@
 @use '../../../../variables.scss';
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
-
 $block: '.#{variables.$ns}theme-import';
 
 #{$block} {
