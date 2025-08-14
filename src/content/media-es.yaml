@@ -72,7 +72,7 @@ blocks:
             youtube: 'https://www.youtube.com/watch?v=9J3tuiLq6rA'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
-          fullscreen: true
+          fullscreen: false
           content:
             title: 'Navigation'
             text: >-
@@ -85,7 +85,7 @@ blocks:
             youtube: 'https://www.youtube.com/watch?v=e77kbTjqZX8'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
-          fullscreen: true
+          fullscreen: false
           content:
             title: Webinar introductorio
             text: >-
@@ -97,7 +97,7 @@ blocks:
             videoIframe: 'https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png'
           border: true
-          fullscreen: true
+          fullscreen: false
           content:
             title: 'Navigation'
             text: >-
@@ -110,7 +110,7 @@ blocks:
             videoIframe: 'https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7'
             previewImg: 'https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png'
           border: true
-          fullscreen: true
+          fullscreen: false
           content:
             title: Webinar introductorio
     allTag: false
