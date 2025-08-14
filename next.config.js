@@ -1,6 +1,7 @@
 const {join} = require('path');
 const path = require('path');
 
+const bundleAnalyzer = require('@next/bundle-analyzer');
 const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')([
@@ -80,6 +81,11 @@ const plugins = [
 
                 if (!options.isServer) {
                     config.resolve.fallback.fs = false;
+                    config.optimization.splitChunks = {
+                        cacheGroups: {
+                            default: false,
+                        },
+                    };
                 }
 
                 return config;
@@ -88,18 +94,24 @@ const plugins = [
     ],
 ];
 
-/** @type {import('next').NextConfig} */
-module.exports = withPlugins(plugins, {
-    reactStrictMode: true,
-    i18n: {
-        locales: i18n.locales,
-        defaultLocale: i18n.defaultLocale,
-        localeDetection: false,
-    },
-    experimental: {
-        esmExternals: 'loose',
-    },
-    assetPrefix: process.env.ASSET_PREFIX,
-    crossOrigin: 'anonymous',
-    output: process.env.IS_CONTAINER_BUILD ? 'standalone' : undefined,
+const withBundleAnalyzer = bundleAnalyzer({
+    enabled: process.env.ANALYZE === 'true',
 });
+
+/** @type {import('next').NextConfig} */
+module.exports = withBundleAnalyzer(
+    withPlugins(plugins, {
+        reactStrictMode: true,
+        i18n: {
+            locales: i18n.locales,
+            defaultLocale: i18n.defaultLocale,
+            localeDetection: false,
+        },
+        experimental: {
+            esmExternals: 'loose',
+        },
+        assetPrefix: process.env.ASSET_PREFIX,
+        crossOrigin: 'anonymous',
+        output: process.env.IS_CONTAINER_BUILD ? 'standalone' : undefined,
+    }),
+);
