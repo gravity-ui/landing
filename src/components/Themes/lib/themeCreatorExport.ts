@@ -1,7 +1,10 @@
-import {generateCSS} from '@gravity-ui/uikit-themer';
+import {generateCSS, generateJSON} from '@gravity-ui/uikit-themer';
 
 import {createFontImportsForExport} from './themeCreatorUtils';
 import type {ThemeCreatorState} from './types';
+
+export const FIGMA_GRAVITY_THEMER_LINK =
+    'https://www.figma.com/community/plugin/1517138252177518072/gravity-themer';
 
 export const APPLY_THEME_TEMPLATE = {
     en: `
@@ -12,7 +15,8 @@ export const APPLY_THEME_TEMPLATE = {
 
         // Styles from the Themer
         import './styles.css';
-    `,
+
+        Import the resulting styles into Figma using the`,
     ru: `
         Создайте файл styles.css со стилями, созданными в Темизаторе (из секции ниже), и импортируйте его после стилей UIKit по умолчанию.
 
@@ -21,7 +25,8 @@ export const APPLY_THEME_TEMPLATE = {
 
         // Стили из Темизатора
         import './styles.css';
-    `,
+
+        Импортируйте получившиеся стили в Figma при помощи`,
 };
 
 export type ExportFormat = 'css' | 'json';
@@ -42,7 +47,12 @@ export function exportTheme({
     customRootClassName,
 }: ExportThemeParams) {
     if (format === 'json') {
-        throw new Error('Not implemented');
+        const json = generateJSON({
+            theme: themeState.gravityTheme,
+            ignoreDefaultValues,
+            forPreview,
+        });
+        return JSON.stringify(json, null, 2);
     }
 
     let css = generateCSS({
@@ -69,10 +79,6 @@ export function exportTheme({
 type ExportThemeForDialogParams = Pick<ExportThemeParams, 'themeState' | 'format'>;
 
 export function exportThemeForDialog({themeState, format = 'css'}: ExportThemeForDialogParams) {
-    if (format === 'json') {
-        return 'not implemented';
-    }
-
     return exportTheme({
         themeState,
         format,

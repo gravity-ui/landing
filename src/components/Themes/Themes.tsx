@@ -1,5 +1,5 @@
 import {ArrowUpFromSquare} from '@gravity-ui/icons';
-import {BREAKPOINTS, Grid, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {Grid} from '@gravity-ui/page-constructor';
 import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
@@ -14,6 +14,7 @@ import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {PreviewTab} from './ui/PreviewTab/PreviewTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
+import {ThemeImport} from './ui/ThemeImport/ThemeImport';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
 
 const b = block('themes');
@@ -34,14 +35,24 @@ const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
 
 export const Themes = () => {
     const {t} = useTranslation('themes');
-    const breakpoint = useWindowBreakpoint();
 
     const headerRef = useRef<HTMLDivElement>(null);
 
-    const [isExportDialogVisible, toggleExportDialog] = React.useReducer(
-        (isOpen) => !isOpen,
-        false,
-    );
+    const [isExportDialogVisible, setIsExportDialogVisible] = React.useState(false);
+    const [isImportDialogVisible, setIsImportDialogVisible] = React.useState(false);
+
+    const openExportDialog = React.useCallback(() => {
+        setIsExportDialogVisible(true);
+    }, []);
+    const closeExportDialog = React.useCallback(() => {
+        setIsExportDialogVisible(false);
+    }, []);
+    const openImportDialog = React.useCallback(() => {
+        setIsImportDialogVisible(true);
+    }, []);
+    const closeImportDialog = React.useCallback(() => {
+        setIsImportDialogVisible(false);
+    }, []);
 
     const tags: TagItem<ThemeTab>[] = useMemo(
         () => [
@@ -93,19 +104,29 @@ export const Themes = () => {
 
     const TabComponent = tabToComponent[activeTab];
 
-    const ExportBtn = useCallback(
+    const ThemeActionsButtons = useCallback(
         () => (
-            <Button
-                className={b('export-theme-btn')}
-                view="action"
-                size="xl"
-                onClick={toggleExportDialog}
-            >
-                <Icon data={ArrowUpFromSquare} />
-                <Text>{t('btn_export_theme')}</Text>
-            </Button>
+            <Flex direction="row" gap={2}>
+                <Button
+                    className={b('theme-action-btn')}
+                    view="outlined-action"
+                    size="xl"
+                    onClick={openImportDialog}
+                >
+                    <Text>{t('btn_import_theme')}</Text>
+                </Button>
+                <Button
+                    className={b('theme-action-btn')}
+                    view="action"
+                    size="xl"
+                    onClick={openExportDialog}
+                >
+                    <Icon data={ArrowUpFromSquare} />
+                    <Text>{t('btn_export_theme')}</Text>
+                </Button>
+            </Flex>
         ),
-        [toggleExportDialog],
+        [],
     );
 
     return (
@@ -121,20 +142,21 @@ export const Themes = () => {
                         value={activeTab}
                         onChange={setActiveTab}
                     />
-                    {breakpoint >= BREAKPOINTS.md && <ExportBtn />}
+                    <div className={b('header-action-buttons', 'desktop')}>
+                        <ThemeActionsButtons />
+                    </div>
                 </Flex>
             </div>
 
-            {breakpoint < BREAKPOINTS.md && (
-                <div className={b('header-action-buttons')}>
-                    <ExportBtn />
-                </div>
-            )}
+            <div className={b('header-action-buttons', 'mobile')}>
+                <ThemeActionsButtons />
+            </div>
             <Grid className={b('grid')}>
                 <div className={b('grid__content')}>{TabComponent ? <TabComponent /> : null}</div>
             </Grid>
 
-            <ThemeExport isOpen={isExportDialogVisible} onClose={toggleExportDialog} />
+            <ThemeExport isOpen={isExportDialogVisible} onClose={closeExportDialog} />
+            <ThemeImport isOpen={isImportDialogVisible} onClose={closeImportDialog} />
         </ThemeCreatorContextProvider>
     );
 };
