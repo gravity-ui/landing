@@ -106,7 +106,7 @@ const MyTimelineComponent = () => {
 - `events`:事件配置数组
 - `markers`:标记配置数组
 
-2.**ViewConfiguration**:管理视觉表现和交互设置
+  2.**ViewConfiguration**:管理视觉表现和交互设置
 
 - 控制外观、缩放级别和交互行为
 - 可以自定义或使用默认值
