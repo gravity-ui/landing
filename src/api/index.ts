@@ -452,8 +452,8 @@ export class Api {
                 'navigation',
                 'date-components',
                 'markdown-editor',
+                'graph',
                 'page-constructor',
-                'chartkit',
                 'dashkit',
             ];
 

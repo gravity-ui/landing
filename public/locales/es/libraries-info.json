@@ -34,5 +34,7 @@
     "description_graph": "Renderizador de gráficos de alto rendimiento con detalle dinámico compatible con la escala",
     "description_data-source": "Un envoltorio sobre la obtención de datos.",
     "description_webpack-i18n-assets-plugin": "Un complemento para Webpack que reemplaza las llamadas a las funciones de localización (i18n) por textos de destino.",
-    "description_table": "Biblioteca para visualizar datos en formato tabular."
+    "description_table": "Biblioteca para visualizar datos en formato tabular.",
+    "description_timeline": "Una biblioteca basada en React para construir visualizaciones interactivas de línea de tiempo con renderizado de canvas.",
+    "description_page-constructor-builder": "Una poderosa utilidad de línea de comandos para construir páginas estáticas desde configuraciones YAML"
 }

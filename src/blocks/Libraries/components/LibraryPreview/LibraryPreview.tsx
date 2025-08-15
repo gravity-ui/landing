@@ -6,12 +6,12 @@ import {useTranslation} from 'react-i18next';
 
 import type {Lib} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';
-import chartkitAssetMobile from '../../../../assets/libs/img-lib-chartkit-mobile.jpg';
-import chartkitAsset from '../../../../assets/libs/img-lib-chartkit.jpg';
 import dashkitAssetMobile from '../../../../assets/libs/img-lib-dashkit-mobile.jpg';
 import dashkitAsset from '../../../../assets/libs/img-lib-dashkit.jpg';
 import datecomponentsAssetMobile from '../../../../assets/libs/img-lib-datecomponents-mobile.jpg';
 import datecomponentsAsset from '../../../../assets/libs/img-lib-datecomponents.jpg';
+import graphAssetMobile from '../../../../assets/libs/img-lib-graph-mobile.jpg';
+import graphAsset from '../../../../assets/libs/img-lib-graph.jpg';
 import navigationAssetMobile from '../../../../assets/libs/img-lib-navigation-mobile.jpg';
 import navigationAsset from '../../../../assets/libs/img-lib-navigation.jpg';
 import pageconstructorAssetMobile from '../../../../assets/libs/img-lib-pageconstructor-mobile.jpg';
@@ -38,7 +38,7 @@ const libIdToAsset: Record<string, {src: string}> = {
     navigation: navigationAsset,
     'markdown-editor': wysiwygAsset,
     dashkit: dashkitAsset,
-    chartkit: chartkitAsset,
+    graph: graphAsset,
     'date-components': datecomponentsAsset,
 };
 
@@ -48,7 +48,7 @@ const libIdToAssetMobile: Record<string, {src: string}> = {
     navigation: navigationAssetMobile,
     'markdown-editor': wysiwygAssetMobile,
     dashkit: dashkitAssetMobile,
-    chartkit: chartkitAssetMobile,
+    graph: graphAssetMobile,
     'date-components': datecomponentsAssetMobile,
 };
 
