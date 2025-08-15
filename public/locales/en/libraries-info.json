@@ -34,5 +34,7 @@
     "description_graph": "High-performance graph renderer with dynamic scale-aware detailization",
     "description_data-source": "A wrapper around data fetching.",
     "description_webpack-i18n-assets-plugin": "A plugin for Webpack that replaces calls to localization functions (i18n) with target texts.",
-    "description_table": "Library for visualizing data in tabular format."
+    "description_table": "Library for visualizing data in tabular format.",
+    "description_timeline": "A React-based library for building interactive timeline visualizations with canvas rendering.",
+    "description_page-constructor-builder": "A powerful command-line utility for building static pages from YAML configurations"
 }

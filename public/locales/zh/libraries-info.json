@@ -34,5 +34,7 @@
     "description_graph": "具有动态比例感知细节的高性能图形渲染器",
     "description_data-source": "围绕数据获取的封装工具。",
     "description_webpack-i18n-assets-plugin": "一个 Webpack 插件，用目标文本替换对本地化函数 (i18n) 的调用。",
-    "description_table": "用于以表格格式可视化数据的库。"
+    "description_table": "用于以表格格式可视化数据的库。",
+    "description_timeline": "一个基于React的库，用于构建具有画布渲染功能的交互式时间轴可视化。",
+    "description_page-constructor-builder": "一个强大的命令行实用工具，用于从YAML配置构建静态页面"
 }
