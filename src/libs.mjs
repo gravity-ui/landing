@@ -39,7 +39,7 @@ export const libs = [
         npmId: '@gravity-ui/graph',
         title: 'Graph',
         primary: false,
-        landing: false,
+        landing: true,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/graph/',
         readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/graph/main'),
@@ -139,7 +139,7 @@ export const libs = [
         npmId: '@gravity-ui/chartkit',
         title: 'ChartKit',
         primary: false,
-        landing: true,
+        landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/chartkit/',
         readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/chartkit/main'),
@@ -436,6 +436,38 @@ export const libs = [
         ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
+        id: 'timeline',
+        githubId: 'gravity-ui/timeline',
+        npmId: '@gravity-ui/timeline',
+        title: 'Timeline',
+        primary: false,
+        landing: false,
+        tags: ['ui'],
+        storybookUrl: '',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/timeline/main',
+        ),
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/timeline/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
+        id: 'page-constructor-builder',
+        githubId: 'gravity-ui/page-constructor-builder',
+        npmId: '@gravity-ui/page-constructor-builder',
+        title: 'Page-constructor-builder',
+        primary: false,
+        landing: false,
+        tags: ['ui'],
+        storybookUrl: '',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/page-constructor-builder/main',
+        ),
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/page-constructor-builder/main/CHANGELOG.md',
         mainBranch: 'main',
     },
 ];
