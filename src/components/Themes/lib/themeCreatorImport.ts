@@ -3,6 +3,8 @@ import React from 'react';
 
 import {useThemeCreatorMethods} from '../hooks';
 
+import {initThemeCreator} from './themeCreatorUtils';
+
 const getThemeFromJson = (userString: string) => {
     const parsedUserInput = JSON.parse(userString);
     return parseJSON(parsedUserInput);
@@ -16,10 +18,11 @@ const IMPORT_STRATEGIES = [getThemeFromJson, getThemeFromCss];
 
 type UseImportThemeParams = {
     onImportError?: () => void;
+    onImportSuccess?: () => void;
 };
 
-export function useImportTheme({onImportError}: UseImportThemeParams) {
-    const {importTheme} = useThemeCreatorMethods();
+export function useImportTheme({onImportError, onImportSuccess}: UseImportThemeParams) {
+    const {importThemeCreatorState} = useThemeCreatorMethods();
 
     const importThemeFromUserInput = React.useCallback(
         (userInput: string) => {
@@ -29,7 +32,8 @@ export function useImportTheme({onImportError}: UseImportThemeParams) {
             while (!isSuccess && IMPORT_STRATEGIES[strategyIndex]) {
                 try {
                     const theme = IMPORT_STRATEGIES[strategyIndex](userInput);
-                    importTheme(theme);
+                    const themeCreatorState = initThemeCreator(theme);
+                    importThemeCreatorState(themeCreatorState);
                     isSuccess = true;
                 } catch {
                     strategyIndex++;
@@ -38,9 +42,12 @@ export function useImportTheme({onImportError}: UseImportThemeParams) {
 
             if (!isSuccess) {
                 onImportError?.();
+                return;
             }
+
+            onImportSuccess?.();
         },
-        [onImportError],
+        [onImportError, onImportSuccess, importThemeCreatorState],
     );
 
     return {importThemeFromUserInput};

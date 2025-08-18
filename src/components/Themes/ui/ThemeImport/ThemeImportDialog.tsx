@@ -11,15 +11,17 @@ import './ThemeImport.scss';
 const b = block('theme-import');
 
 interface ThemeImportDialogProps extends PropsWithChildren, ThemeImportProps {
-    onImportThemeJSONClick: () => void;
+    onImportThemeClick: () => void;
     breakpoint: number;
+    isImportButtonDisabled: boolean;
 }
 
 export const ThemeImportDialog = ({
     isOpen,
     onClose,
-    onImportThemeJSONClick,
+    onImportThemeClick,
     breakpoint,
+    isImportButtonDisabled,
     children,
 }: ThemeImportDialogProps) => {
     const {t} = useTranslation('themes');
@@ -45,7 +47,8 @@ export const ThemeImportDialog = ({
                         className={b('action-button')}
                         view="action"
                         size="l"
-                        onClick={onImportThemeJSONClick}
+                        onClick={onImportThemeClick}
+                        disabled={isImportButtonDisabled}
                     >
                         {t('btn_import_theme')}
                     </Button>

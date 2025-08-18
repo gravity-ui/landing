@@ -103,6 +103,10 @@ type ThemeCreatorAction =
     | {
           type: 'setAdvancedMode';
           payload: boolean;
+      }
+    | {
+          type: 'import';
+          payload: ThemeCreatorState;
       };
 
 const themeCreatorReducer = (
@@ -155,6 +159,8 @@ const themeCreatorReducer = (
             };
         case 'reinitialize':
             return initThemeCreator(action.payload);
+        case 'import':
+            return action.payload;
         default:
             return prevState;
     }
@@ -327,10 +333,10 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
-    const importTheme = React.useCallback((theme: GravityTheme) => {
+    const importThemeCreatorState = React.useCallback((themeCreatorState: ThemeCreatorState) => {
         dispatchThemeCreator({
-            type: 'reinitialize',
-            payload: theme,
+            type: 'import',
+            payload: themeCreatorState,
         });
     }, []);
 
@@ -352,7 +358,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateFontFamily,
             openMainSettings,
             setAdvancedMode,
-            importTheme,
+            importThemeCreatorState,
         }),
         [
             addColor,
@@ -371,7 +377,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateFontFamilyTypeTitle,
             openMainSettings,
             setAdvancedMode,
-            importTheme,
+            importThemeCreatorState,
         ],
     );
 

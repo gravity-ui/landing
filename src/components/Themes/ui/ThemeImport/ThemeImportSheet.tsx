@@ -11,14 +11,16 @@ import './ThemeImport.scss';
 const b = block('theme-import__sheet');
 
 export interface ThemeImportSheetProps extends ThemeImportProps, PropsWithChildren {
-    onImportThemeJSONClick: () => void;
+    onImportThemeClick: () => void;
+    isImportButtonDisabled: boolean;
 }
 
 export const ThemeImportSheet = ({
     isOpen,
     onClose,
     children,
-    onImportThemeJSONClick,
+    onImportThemeClick,
+    isImportButtonDisabled,
 }: ThemeImportSheetProps) => {
     const {t} = useTranslation('themes');
 
@@ -33,9 +35,10 @@ export const ThemeImportSheet = ({
             bottomContent={
                 <Button
                     size="xl"
-                    onClick={onImportThemeJSONClick}
+                    onClick={onImportThemeClick}
                     view="action"
                     className={b('import-button')}
+                    disabled={isImportButtonDisabled}
                 >
                     {t('btn_import_theme')}
                 </Button>

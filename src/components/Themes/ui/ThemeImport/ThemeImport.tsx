@@ -24,20 +24,23 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
     const [isImportError, setIsImportError] = useState(false);
 
     const handleImportError = useCallback(() => {
-        onClose();
-        setTextareaValue('');
-    }, [onClose]);
+        setIsImportError(true);
+    }, []);
 
-    const {importThemeFromUserInput} = useImportTheme({onImportError: handleImportError});
-    const handleImportThemeJSONClick = useCallback(() => {
+    const {importThemeFromUserInput} = useImportTheme({
+        onImportError: handleImportError,
+        onImportSuccess: onClose,
+    });
+    const handleImportThemeClick = useCallback(() => {
         importThemeFromUserInput(textareaValue);
-        onClose();
-        setTextareaValue('');
-    }, [textareaValue, onClose, importThemeFromUserInput]);
+    }, [textareaValue, importThemeFromUserInput]);
+
+    const isImportButtonDisabled = !textareaValue.trim();
 
     useEffect(() => {
         if (!isOpen) {
             setIsImportError(false);
+            setTextareaValue('');
         }
     }, [isOpen]);
 
@@ -67,8 +70,9 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
         <ThemeImportDialog
             onClose={onClose}
             isOpen={isOpen}
-            onImportThemeJSONClick={handleImportThemeJSONClick}
+            onImportThemeClick={handleImportThemeClick}
             breakpoint={breakpoint}
+            isImportButtonDisabled={isImportButtonDisabled}
         >
             {content}
         </ThemeImportDialog>
@@ -76,7 +80,8 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
         <ThemeImportSheet
             onClose={onClose}
             isOpen={isOpen}
-            onImportThemeJSONClick={handleImportThemeJSONClick}
+            onImportThemeClick={handleImportThemeClick}
+            isImportButtonDisabled={isImportButtonDisabled}
         >
             {content}
         </ThemeImportSheet>
