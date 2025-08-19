@@ -1,9 +1,9 @@
-import {parseCSS, parseJSON} from '@gravity-ui/uikit-themer';
+import {parseCSS, parseJSON, updateBaseColor} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {useThemeCreatorMethods} from '../hooks';
 
-import {initThemeCreator} from './themeCreatorUtils';
+import {DEFAULT_BRAND_COLORS} from './constants';
 
 const getThemeFromJson = (userString: string) => {
     const parsedUserInput = JSON.parse(userString);
@@ -22,7 +22,7 @@ type UseImportThemeParams = {
 };
 
 export function useImportTheme({onImportError, onImportSuccess}: UseImportThemeParams) {
-    const {importThemeCreatorState} = useThemeCreatorMethods();
+    const {importTheme} = useThemeCreatorMethods();
 
     const importThemeFromUserInput = React.useCallback(
         (userInput: string) => {
@@ -31,9 +31,20 @@ export function useImportTheme({onImportError, onImportSuccess}: UseImportThemeP
 
             while (!isSuccess && IMPORT_STRATEGIES[strategyIndex]) {
                 try {
-                    const theme = IMPORT_STRATEGIES[strategyIndex](userInput);
-                    const themeCreatorState = initThemeCreator(theme);
-                    importThemeCreatorState(themeCreatorState);
+                    let theme = IMPORT_STRATEGIES[strategyIndex](userInput);
+
+                    if (!theme.baseColors.brand) {
+                        theme = updateBaseColor({
+                            theme,
+                            colorToken: 'brand',
+                            value: {
+                                light: DEFAULT_BRAND_COLORS[0],
+                                dark: DEFAULT_BRAND_COLORS[0],
+                            },
+                        });
+                    }
+
+                    importTheme(theme);
                     isSuccess = true;
                 } catch {
                     strategyIndex++;
@@ -47,7 +58,7 @@ export function useImportTheme({onImportError, onImportSuccess}: UseImportThemeP
 
             onImportSuccess?.();
         },
-        [onImportError, onImportSuccess, importThemeCreatorState],
+        [onImportError, onImportSuccess, importTheme],
     );
 
     return {importThemeFromUserInput};

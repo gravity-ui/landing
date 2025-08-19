@@ -1,3 +1,4 @@
+import {GravityTheme} from '@gravity-ui/uikit-themer';
 import noop from 'lodash/noop';
 import {createContext} from 'react';
 
@@ -38,7 +39,7 @@ export interface ThemeCreatorMethodsContextType {
     updateAdvancedTypography: () => void;
     openMainSettings: () => void;
     setAdvancedMode: (enabled: boolean) => void;
-    importThemeCreatorState: (themeCreatorState: ThemeCreatorState) => void;
+    importTheme: (theme: GravityTheme) => void;
 }
 
 export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsContextType>({
@@ -58,5 +59,5 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     updateAdvancedTypography: noop,
     openMainSettings: noop,
     setAdvancedMode: noop,
-    importThemeCreatorState: noop,
+    importTheme: noop,
 });
