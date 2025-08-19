@@ -327,6 +327,13 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const importTheme = React.useCallback((gravityTheme: GravityTheme) => {
+        dispatchThemeCreator({
+            type: 'reinitialize',
+            payload: gravityTheme,
+        });
+    }, []);
+
     const methods = React.useMemo(
         () => ({
             addColor,
@@ -345,6 +352,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateFontFamily,
             openMainSettings,
             setAdvancedMode,
+            importTheme,
         }),
         [
             addColor,
@@ -363,6 +371,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateFontFamilyTypeTitle,
             openMainSettings,
             setAdvancedMode,
+            importTheme,
         ],
     );
 

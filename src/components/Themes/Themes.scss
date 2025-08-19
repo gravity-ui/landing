@@ -83,7 +83,23 @@ $block: '.#{variables.$ns}themes';
     }
 
     &__header-action-buttons {
-        padding-inline: 40px;
+        padding-right: 40px;
+
+        &.desktop {
+            display: block;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                display: none;
+            }
+        }
+
+        &.mobile {
+            display: none;
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
+                display: block;
+            }
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             padding-inline: 16px;
@@ -103,7 +119,7 @@ $block: '.#{variables.$ns}themes';
         }
     }
 
-    &__export-theme-btn {
+    &__theme-action-btn {
         --g-button-border-radius: 8px;
         border-radius: var(--g-border-radius-m);
         width: fit-content;

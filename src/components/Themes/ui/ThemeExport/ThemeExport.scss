@@ -6,24 +6,26 @@ $block: '.#{variables.$ns}theme-export';
 #{$block} {
     &__dialog {
         --g-border-radius-l: 8px;
+
+        max-height: calc(100vh - 100px);
     }
 
     &__sheet {
-        --g-sheet-content-padding: var(--g-spacing-5);
+        &__save-buttons {
+            height: 60px;
+        }
 
-        &__save-btn {
-            --g-border-radius-xl: 8px;
-            left: 0;
-            right: 0;
-            margin-inline: auto;
-            width: calc(100% - var(--g-spacing-4));
-            position: absolute;
-            bottom: var(--g-spacing-2);
+        &__save-button {
+            flex-grow: 1;
+        }
+
+        &__sheet-content {
+            margin-bottom: 60px;
         }
     }
 
     &__code {
-        --code-example-max-height: 620px;
+        --code-example-max-height: max(calc(50vh - 300px), 30vh);
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             --code-example-max-height: auto;
@@ -34,5 +36,19 @@ $block: '.#{variables.$ns}theme-export';
 
     &__apply-theme-message {
         white-space: pre-line;
+    }
+
+    &__dialog-footer {
+        width: 100%;
+        padding-bottom: 22px;
+    }
+
+    &__theme-action-btn {
+        --g-button-border-radius: 8px;
+        border-radius: var(--g-border-radius-m);
+    }
+
+    &__figma-link {
+        padding-left: var(--g-spacing-1);
     }
 }

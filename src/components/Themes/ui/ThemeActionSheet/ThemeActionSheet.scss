@@ -1,0 +1,27 @@
+@use '../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}theme-action-sheet';
+
+#{$block} {
+    --g-sheet-content-padding: var(--g-spacing-5);
+
+    &__bottom-buttons {
+        --g-border-radius-xl: 8px;
+
+        position: absolute;
+        right: 0;
+        left: 0;
+        bottom: 0;
+
+        width: 100%;
+        padding: 0 var(--g-spacing-2);
+
+        background-color: var(--g-color-base-modal);
+        border-top: 1px var(--g-color-line-generic);
+    }
+
+    &__sheet-content {
+        margin-bottom: 60px;
+    }
+}

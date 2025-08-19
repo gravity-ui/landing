@@ -20,6 +20,7 @@ import type {
 import {generatePrivateColorsForBaseColors} from '@gravity-ui/uikit-themer/dist/utils';
 import capitalize from 'lodash/capitalize';
 import cloneDeep from 'lodash/cloneDeep';
+import isEqual from 'lodash/isEqual';
 import kebabCase from 'lodash/kebabCase';
 import lowerCase from 'lodash/lowerCase';
 
@@ -341,6 +342,10 @@ export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
     };
 
     const paletteTokens = createPalleteTokens(gravityTheme);
+    const detectedBordersPreset = Object.keys(RADIUS_PRESETS).find((presetName) => {
+        return isEqual(gravityTheme.borders, RADIUS_PRESETS[presetName as RadiusPresetName]);
+    }) as RadiusPresetName | undefined;
+    const bordersPreset = detectedBordersPreset ?? RadiusPresetName.Custom;
 
     return {
         gravityTheme,
@@ -349,8 +354,8 @@ export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
         advancedModeEnabled: false,
         changesExist: false,
         borders: {
-            preset: RadiusPresetName.Regular,
-            values: RADIUS_PRESETS[RadiusPresetName.Regular],
+            preset: bordersPreset,
+            values: RADIUS_PRESETS[bordersPreset],
         },
         typography: defaultTypographyPreset,
     };

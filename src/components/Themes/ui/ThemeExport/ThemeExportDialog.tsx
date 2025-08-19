@@ -1,9 +1,9 @@
-import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Dialog, DialogFooter} from '@gravity-ui/uikit';
+import {Button, Flex, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {PropsWithChildren} from 'react';
 
 import {block} from '../../../../utils';
+import {ThemeActionDialog} from '../ThemeActionDialog/ThemeActionDialog';
 
 import type {ThemeExportProps} from './ThemeExport';
 import './ThemeExport.scss';
@@ -11,41 +11,53 @@ import './ThemeExport.scss';
 const b = block('theme-export');
 
 interface ThemeExportDialogProps extends PropsWithChildren, ThemeExportProps {
-    onSaveThemeClick: () => void;
+    onSaveThemeCSSClick: () => void;
+    onSaveThemeJSONClick: () => void;
     breakpoint: number;
 }
-
-const breakpointToSize = {
-    [BREAKPOINTS.xl]: 'l' as const,
-    [BREAKPOINTS.lg]: 'l' as const,
-    [BREAKPOINTS.md]: 'm' as const,
-    [BREAKPOINTS.sm]: 's' as const,
-};
-
 export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({
     isOpen,
     onClose,
-    onSaveThemeClick,
+    onSaveThemeCSSClick,
+    onSaveThemeJSONClick,
     breakpoint,
     children,
 }) => {
     const {t} = useTranslation('themes');
 
     return (
-        <Dialog
-            className={b('dialog')}
+        <ThemeActionDialog
             open={isOpen}
             onClose={onClose}
-            size={breakpointToSize[breakpoint]}
-        >
-            <Dialog.Header caption={t('export_theme_config')} />
-            <Dialog.Body>{children}</Dialog.Body>
-            <DialogFooter
-                textButtonCancel={t('export_theme_cancel_btn')}
-                textButtonApply={t('export_theme_apply_btn')}
-                onClickButtonApply={onSaveThemeClick}
-                onClickButtonCancel={onClose}
-            />
-        </Dialog>
+            breakpoint={breakpoint}
+            title={t('export_theme_config')}
+            children={children}
+            bottomContent={
+                <Flex
+                    direction="row"
+                    gap={2}
+                    width="100%"
+                    justifyContent="flex-start"
+                    className={b('dialog-footer')}
+                >
+                    <Button
+                        className={b('theme-action-btn')}
+                        onClick={onSaveThemeCSSClick}
+                        view="action"
+                        size="xl"
+                    >
+                        <Text>{t('export_theme_apply_btn_css')}</Text>
+                    </Button>
+                    <Button
+                        className={b('theme-action-btn')}
+                        onClick={onSaveThemeJSONClick}
+                        view="outlined-action"
+                        size="xl"
+                    >
+                        <Text>{t('export_theme_apply_btn_json')}</Text>
+                    </Button>
+                </Flex>
+            }
+        />
     );
 };
