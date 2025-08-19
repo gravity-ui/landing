@@ -52,7 +52,7 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
             <TextArea
                 size="xl"
                 rows={1}
-                placeholder="Paste your theme JSON here"
+                placeholder={t('paste_theme_placeholder')}
                 className={b('textarea')}
                 onUpdate={setTextareaValue}
                 value={textareaValue}

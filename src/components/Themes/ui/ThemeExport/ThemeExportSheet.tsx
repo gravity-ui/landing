@@ -34,11 +34,21 @@ export const ThemeExportSheet = ({
             children={children}
             bottomContent={
                 <React.Fragment>
-                    <Button size="xl" onClick={onSaveThemeJSONClick} view="outlined-action">
-                        <Text>{t('export_theme_apply_btn_json')}</Text>
+                    <Button
+                        size="xl"
+                        onClick={onSaveThemeJSONClick}
+                        view="outlined-action"
+                        className={b('save-button')}
+                    >
+                        <Text>Save as JSON</Text>
                     </Button>
-                    <Button size="xl" onClick={onSaveThemeCSSClick} view="action">
-                        <Text>{t('export_theme_apply_btn_css')}</Text>
+                    <Button
+                        size="xl"
+                        onClick={onSaveThemeCSSClick}
+                        view="action"
+                        className={b('save-button')}
+                    >
+                        <Text>Save as CSS</Text>
                     </Button>
                 </React.Fragment>
             }

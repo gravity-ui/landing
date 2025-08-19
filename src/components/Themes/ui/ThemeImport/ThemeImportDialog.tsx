@@ -35,18 +35,15 @@ export const ThemeImportDialog = ({
             children={children}
             bottomContent={
                 <Flex
-                    justifyContent="flex-end"
+                    justifyContent="flex-start"
                     alignItems="center"
                     gap={4}
                     className={b('dialog-buttons')}
                 >
-                    <Button className={b('action-button')} view="flat" size="l" onClick={onClose}>
-                        {t('cancel')}
-                    </Button>
                     <Button
                         className={b('action-button')}
                         view="action"
-                        size="l"
+                        size="xl"
                         onClick={onImportThemeClick}
                         disabled={isImportButtonDisabled}
                     >

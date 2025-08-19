@@ -15,6 +15,7 @@ $block: '.#{variables.$ns}theme-action-sheet';
         bottom: 0;
 
         width: 100%;
+        padding: 0 var(--g-spacing-2);
 
         background-color: var(--g-color-base-modal);
         border-top: 1px var(--g-color-line-generic);

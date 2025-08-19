@@ -15,6 +15,10 @@ $block: '.#{variables.$ns}theme-export';
             height: 60px;
         }
 
+        &__save-button {
+            flex-grow: 1;
+        }
+
         &__sheet-content {
             margin-bottom: 60px;
         }
@@ -36,7 +40,7 @@ $block: '.#{variables.$ns}theme-export';
 
     &__dialog-footer {
         width: 100%;
-        padding: 28px var(--_--side-padding);
+        padding-bottom: 22px;
     }
 
     &__theme-action-btn {
