@@ -96,8 +96,15 @@ $block: '.#{variables.$ns}themes';
         &.mobile {
             display: none;
 
+            padding-right: 0;
+            padding-left: 40px;
+
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
                 display: block;
+            }
+
+            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+                padding: 0 var(--g-spacing-4);
             }
         }
 
