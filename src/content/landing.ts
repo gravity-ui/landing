@@ -1,7 +1,7 @@
 import {BlockType} from '@gravity-ui/page-constructor';
 import {TFunction} from 'next-i18next';
 
-import type {Contributor, Lib} from '../api';
+import type {Contributor, LibWithMetadata} from '../api';
 import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
@@ -24,7 +24,7 @@ export const getLanding = ({
     contributors,
 }: {
     t: TFunction;
-    libs: Lib[];
+    libs: LibWithMetadata[];
     contributors: Contributor[];
 }): CustomPageContent => ({
     background: {

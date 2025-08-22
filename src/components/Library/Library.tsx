@@ -4,7 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
-import type {Lib} from '../../api';
+import type {LibWithFullData} from '../../api';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import lastUpdateIcon from '../../assets/icons/last-update.svg';
@@ -32,7 +32,7 @@ enum TabType {
 const GITHUB_URL = 'https://github.com/';
 
 type Props = {
-    lib: Lib;
+    lib: LibWithFullData;
 };
 
 const ABSOLUTE_LINK_REG_EXP = /^http/;
@@ -60,19 +60,19 @@ export const Library: React.FC<Props> = ({lib}) => {
         {
             id: 'stars',
             title: t('library:stars'),
-            value: lib.data.stars,
+            value: lib.metadata.stars,
             icon: starIcon,
         },
         {
             id: 'version',
             title: t('library:version'),
-            value: lib.data.version || '–',
+            value: lib.metadata.version || '–',
             icon: versionIcon,
         },
         {
             id: 'lastUpdate',
             title: t('library:lastUpdate'),
-            value: lib.data.lastUpdate || '–',
+            value: lib.metadata.lastUpdate || '–',
             icon: lastUpdateIcon,
         },
         {
@@ -85,13 +85,13 @@ export const Library: React.FC<Props> = ({lib}) => {
         {
             id: 'license',
             title: t('library:license'),
-            value: lib.data.license || '–',
+            value: lib.metadata.license || '–',
             icon: licenseIcon,
         },
         // {
         //     id: 'issues',
         //     title: t('library:issues'),
-        //     value: lib.data.issues,
+        //     value: lib.metadata.issues,
         //     icon: issuesIcon,
         // },
     ];

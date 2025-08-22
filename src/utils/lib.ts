@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import mm from 'micromatch';
 
-import type {Contributor, Lib} from '../api';
+import type {Contributor, LibWithFullData} from '../api';
 import packagesVersions from '../data/packages-versions.json';
 import {libs} from '../libs';
 
@@ -80,7 +80,7 @@ export const getLibraryMeta = (
     };
 };
 
-export const getMaintainers = (lib: Lib, path = '/'): Contributor[] => {
+export const getMaintainers = (lib: LibWithFullData, path = '/'): Contributor[] => {
     const {contributors, codeOwners} = lib.data;
 
     const allCodeOwners = codeOwners.reduce<string[]>((acc, {pattern, owners}) => {

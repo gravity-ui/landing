@@ -3,7 +3,7 @@ import {Icon, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import type {Lib} from '../../api';
+import type {LibWithMetadata} from '../../api';
 import calendarIcon from '../../assets/icons/calendar.svg';
 import starIcon from '../../assets/icons/star.svg';
 import versionIcon from '../../assets/icons/version.svg';
@@ -16,7 +16,7 @@ import './Libraries.scss';
 const b = block('libraries');
 
 type Props = {
-    libs: Lib[];
+    libs: LibWithMetadata[];
 };
 
 export const Libraries = ({libs}: Props) => {
@@ -103,11 +103,11 @@ export const Libraries = ({libs}: Props) => {
                                             <h5 className={b('library-title')}>
                                                 <HTML>{lib.config.title}</HTML>
                                             </h5>
-                                            {lib.data.stars ? (
+                                            {lib.metadata.stars ? (
                                                 <div className={b('stars')}>
                                                     <Icon data={starIcon} size={19} />
                                                     <div className={b('stars-count')}>
-                                                        {lib.data.stars}
+                                                        {lib.metadata.stars}
                                                     </div>
                                                 </div>
                                             ) : null}
@@ -117,19 +117,19 @@ export const Libraries = ({libs}: Props) => {
                                             {t(`libraries-info:description_${lib.config.id}`)}
                                         </div>
 
-                                        {lib.config.npmId && lib.data.version ? (
+                                        {lib.config.npmId && lib.metadata.version ? (
                                             <div className={b('release-info')}>
                                                 <div className={b('release-info-block')}>
                                                     <Icon data={versionIcon} size={16} />
                                                     <div className={b('release-version')}>
-                                                        v{lib.data.version}
+                                                        v{lib.metadata.version}
                                                     </div>
                                                 </div>
-                                                {lib.data.lastUpdate ? (
+                                                {lib.metadata.lastUpdate ? (
                                                     <div className={b('release-info-block')}>
                                                         <Icon data={calendarIcon} size={16} />
                                                         <div className={b('release-date')}>
-                                                            {lib.data.lastUpdate}
+                                                            {lib.metadata.lastUpdate}
                                                         </div>
                                                     </div>
                                                 ) : null}
