@@ -6,7 +6,7 @@ import Examples from 'src/blocks/Examples/Examples';
 import {UISamplesBlock} from 'src/blocks/UISamples/UISamples';
 import {CustomPageContent} from 'src/content/types';
 
-import type {Contributor, Lib} from '../../api';
+import type {Contributor, LibWithMetadata} from '../../api';
 import {ContributorsBlock} from '../../blocks/Contributors/Contributors';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
@@ -40,7 +40,7 @@ const filterBlocks = ({blocks, ...rest}: CustomPageContent): CustomPageContent =
 };
 
 type Props = {
-    libs: Lib[];
+    libs: LibWithMetadata[];
     contributors: Contributor[];
 };
 

@@ -1,6 +1,6 @@
 import {GetServerSideProps} from 'next';
 
-import type {Contributor, Lib} from '../api';
+import type {Contributor, LibWithMetadata} from '../api';
 import {Api} from '../api';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
 };
 
-const Home = ({libs, contributors}: {libs: Lib[]; contributors: Contributor[]}) => {
+const Home = ({libs, contributors}: {libs: LibWithMetadata[]; contributors: Contributor[]}) => {
     return (
         <Layout isPageConstructor>
             <Landing libs={libs} contributors={contributors} />

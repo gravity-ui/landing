@@ -118,6 +118,7 @@ module.exports = withPlugins(plugins, {
     },
     experimental: {
         esmExternals: 'loose',
+        optimizePackageImports: ['@gravity-ui/uikit'],
     },
     assetPrefix: process.env.ASSET_PREFIX,
     crossOrigin: 'anonymous',

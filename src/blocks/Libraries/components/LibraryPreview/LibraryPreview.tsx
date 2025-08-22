@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import type {Lib} from '../../../../api';
+import type {LibWithMetadata} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';
 import dashkitAssetMobile from '../../../../assets/libs/img-lib-dashkit-mobile.jpg';
 import dashkitAsset from '../../../../assets/libs/img-lib-dashkit.jpg';
@@ -28,7 +28,7 @@ import './LibraryPreview.scss';
 const b = block('libraries-library-preview');
 
 export type LibraryPreviewProps = {
-    lib: Lib;
+    lib: LibWithMetadata;
     contentStyle: Record<string, unknown>;
 };
 
@@ -66,7 +66,7 @@ export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle
     const {t} = useTranslation();
 
     const {id, title, primary} = lib.config;
-    const {stars} = lib.data;
+    const {stars} = lib.metadata;
 
     return (
         <Link href={`/libraries/${id}`} className={b()}>

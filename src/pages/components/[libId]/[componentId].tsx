@@ -5,7 +5,7 @@ import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
 import i18nextConfig from '../../../../next-i18next.config';
-import {Api, type Lib} from '../../../api';
+import {Api, type LibWithFullData} from '../../../api';
 import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
@@ -63,7 +63,7 @@ export const ComponentPage = ({
     componentId,
     readmeContent,
 }: {
-    lib: Lib;
+    lib: LibWithFullData;
     componentId: string;
     readmeContent: string;
 }) => {
