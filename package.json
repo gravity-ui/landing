@@ -62,6 +62,8 @@
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
     "@gravity-ui/tsconfig": "^1.0.0",
+    "@rsdoctor/cli": "^1.2.3",
+    "@rsdoctor/webpack-plugin": "^1.2.3",
     "@svgr/webpack": "^6.5.1",
     "@types/chroma-js": "^2.4.4",
     "@types/jest": "^29.2.4",
@@ -101,6 +103,7 @@
     "prepare": "husky install",
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE_BUNDLE=true next build",
     "start": "next start",
     "postbuild": "next-sitemap",
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
@@ -114,7 +117,9 @@
     "lint:prettier": "prettier --check '**/*.md'",
     "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
     "deploy": "echo 'gravity-ui.com' > ./out/CNAME && gh-pages -d build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "client:rsd": "rsdoctor analyze --profile .next/.rsdoctor/manifest.json",
+    "server:rsd": "rsdoctor analyze --profile .next/server/.rsdoctor/manifest.json"
   },
   "browserslist": {
     "production": [
@@ -139,5 +144,6 @@
     "*.md": [
       "prettier --write"
     ]
-  }
+  },
+  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
 }

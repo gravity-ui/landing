@@ -1,6 +1,7 @@
 const {join} = require('path');
 const path = require('path');
 
+const {RsdoctorWebpackPlugin} = require('@rsdoctor/webpack-plugin');
 const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')([
@@ -80,6 +81,25 @@ const plugins = [
 
                 if (!options.isServer) {
                     config.resolve.fallback.fs = false;
+                }
+
+                if (process.env.ANALYZE_BUNDLE) {
+                    if (config.name === 'client') {
+                        config.plugins.push(
+                            new RsdoctorWebpackPlugin({
+                                disableClientServer: true,
+                            }),
+                        );
+                    } else if (config.name === 'server') {
+                        config.plugins.push(
+                            new RsdoctorWebpackPlugin({
+                                disableClientServer: true,
+                                output: {
+                                    reportDir: './.next/server',
+                                },
+                            }),
+                        );
+                    }
                 }
 
                 return config;
