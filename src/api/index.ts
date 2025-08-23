@@ -4,7 +4,6 @@ import {fileURLToPath} from 'url';
 
 import {createAppAuth} from '@octokit/auth-app';
 import {Octokit} from '@octokit/rest';
-import _ from 'lodash';
 import {i18n} from 'next-i18next.config';
 
 import {type LibConfig, libs as libsConfigs} from '../libs';

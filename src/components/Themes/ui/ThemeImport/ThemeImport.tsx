@@ -3,19 +3,19 @@ import {Alert, Flex, Text, TextArea} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useEffect, useState} from 'react';
 
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 import {useImportTheme} from '../../lib/themeCreatorImport';
 
 import './ThemeImport.scss';
 import {ThemeImportDialog} from './ThemeImportDialog';
+// eslint-disable-next-line import/order
 import {ThemeImportSheet} from './ThemeImportSheet';
 
 const b = block('theme-import');
 
-export interface ThemeImportProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
+import type {ThemeImportProps} from './types';
+
+export type {ThemeImportProps} from './types';
 
 export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
     const {t} = useTranslation('themes');

@@ -1,7 +1,7 @@
 import {Theme} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {ColorTheme} from '../constants';
+import {ColorTheme} from '../types';
 
 interface InteractiveContextParams {
     color: ColorTheme;
