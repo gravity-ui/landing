@@ -4,7 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React, {useCallback, useMemo} from 'react';
 
 import {useLocale} from '../../../../hooks/useLocale';
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 import {CodeExample} from '../../../CodeExample/CodeExample';
 import {useThemeCreator} from '../../hooks';
 import {
@@ -16,13 +16,11 @@ import {
 import './ThemeExport.scss';
 import {ThemeExportDialog} from './ThemeExportDialog';
 import {ThemeExportSheet} from './ThemeExportSheet';
+import type {ThemeExportProps} from './types';
 
 const b = block('theme-export');
 
-export interface ThemeExportProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
+export type {ThemeExportProps} from './types';
 
 export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
     const {t} = useTranslation('themes');

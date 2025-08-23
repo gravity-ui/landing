@@ -1,0 +1,23 @@
+{
+  "fileExtensions": ["js", "jsx", "ts", "tsx"],
+  "excludeRegExp": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "out",
+    "coverage",
+    "\\.test\\.",
+    "\\.spec\\.",
+    "__tests__",
+    "__mocks__"
+  ],
+  "tsConfig": {
+    "compilerOptions": {
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "baseUrl": ".",
+      "jsx": "preserve"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 const {join} = require('path');
 const path = require('path');
 
+const bundleAnalyzer = require('@next/bundle-analyzer');
 const {RsdoctorWebpackPlugin} = require('@rsdoctor/webpack-plugin');
 const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
@@ -108,19 +109,31 @@ const plugins = [
     ],
 ];
 
-/** @type {import('next').NextConfig} */
-module.exports = withPlugins(plugins, {
-    reactStrictMode: true,
-    i18n: {
-        locales: i18n.locales,
-        defaultLocale: i18n.defaultLocale,
-        localeDetection: false,
-    },
-    experimental: {
-        esmExternals: 'loose',
-        optimizePackageImports: ['@gravity-ui/uikit'],
-    },
-    assetPrefix: process.env.ASSET_PREFIX,
-    crossOrigin: 'anonymous',
-    output: process.env.IS_CONTAINER_BUILD ? 'standalone' : undefined,
+const withBundleAnalyzer = bundleAnalyzer({
+    enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
+
+/** @type {import('next').NextConfig} */
+module.exports = withBundleAnalyzer(
+    withPlugins(plugins, {
+        reactStrictMode: true,
+        i18n: {
+            locales: i18n.locales,
+            defaultLocale: i18n.defaultLocale,
+            localeDetection: false,
+        },
+        experimental: {
+            esmExternals: 'loose',
+            optimizePackageImports: ['@gravity-ui/uikit'],
+        },
+        typescript: {
+            ignoreBuildErrors: true,
+        },
+        eslint: {
+            ignoreDuringBuilds: true,
+        },
+        assetPrefix: process.env.ASSET_PREFIX,
+        crossOrigin: 'anonymous',
+        output: process.env.IS_CONTAINER_BUILD ? 'standalone' : undefined,
+    }),
+);

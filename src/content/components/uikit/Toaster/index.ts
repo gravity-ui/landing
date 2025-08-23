@@ -1,9 +1,8 @@
 import {ToastProps} from '@gravity-ui/uikit';
 import dynamic from 'next/dynamic';
 
-import {SandboxProps} from '../..';
 import {Repos} from '../../../../types/common';
-import {Component} from '../../types';
+import {Component, SandboxProps} from '../../types';
 import {type GetterProps, getGithubUrl, getReadmeUrl} from '../../utils';
 
 import type {SandboxProps as ToasterProxySandboxProps} from './ToasterProxy';
