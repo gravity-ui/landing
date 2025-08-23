@@ -42,9 +42,10 @@ const filterBlocks = ({blocks, ...rest}: CustomPageContent): CustomPageContent =
 type Props = {
     libs: LibWithMetadata[];
     contributors: Contributor[];
+    backgroundImageSrc: string;
 };
 
-export const Landing: React.FC<Props> = ({libs, contributors}) => {
+export const Landing: React.FC<Props> = ({libs, contributors, backgroundImageSrc}) => {
     const {t} = useTranslation();
     const {pathname} = useRouter();
 
@@ -57,8 +58,8 @@ export const Landing: React.FC<Props> = ({libs, contributors}) => {
                 content={
                     filterBlocks(
                         pathname === '/rtl'
-                            ? getRtlLanding({t, libs, contributors})
-                            : getLanding({t, libs, contributors}),
+                            ? getRtlLanding({t, libs, contributors, backgroundImageSrc})
+                            : getLanding({t, libs, contributors, backgroundImageSrc}),
                     ) as PageContent
                 }
                 custom={{
