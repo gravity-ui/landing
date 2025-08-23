@@ -92,6 +92,9 @@ const generateAlternateLinks = (path: string, query: Record<string, any>) => {
     const canonicalPath = resolvedPath.startsWith('/') ? resolvedPath : `/${resolvedPath}`;
     links.push(<link key="canonical" rel="canonical" href={`${SITE_URL}${canonicalPath}`} />);
 
+    // CDN assets for improve performance
+    links.push(<link key="cdn-assets" rel="preconnect" href="https://storage.yandexcloud.net" />);
+
     return links;
 };
 

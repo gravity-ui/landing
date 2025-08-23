@@ -2,7 +2,6 @@ import {BlockType} from '@gravity-ui/page-constructor';
 import {TFunction} from 'next-i18next';
 
 import {Contributor, LibWithMetadata} from '../api';
-import backgroundAsset from '../assets/background.jpg';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
 import companiesTabletAsset from '../assets/companies-tablet.svg';
@@ -22,14 +21,16 @@ export const getRtlLanding = ({
     t,
     libs,
     contributors,
+    backgroundImageSrc,
 }: {
     t: TFunction;
     libs: LibWithMetadata[];
     contributors: Contributor[];
+    backgroundImageSrc: string;
 }): CustomPageContent => ({
     background: {
         image: {
-            src: backgroundAsset.src,
+            src: backgroundImageSrc,
             disableCompress: true,
         },
     },
@@ -177,6 +178,7 @@ export const getRtlLanding = ({
                 desktop: companiesDesktopAsset,
                 tablet: companiesTabletAsset,
                 mobile: companiesMobileAsset,
+                loading: 'lazy',
             },
         },
     ],
