@@ -1,5 +1,6 @@
 import {HTML} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
@@ -54,11 +55,7 @@ const libIdToAssetMobile: Record<string, {src: string}> = {
 
 function getBackgroundImage(id: string, isMobile?: boolean) {
     const assetsMap = isMobile ? libIdToAssetMobile : libIdToAsset;
-    const asset = assetsMap[id];
-    if (asset) {
-        return `url(${asset.src})`;
-    }
-    return undefined;
+    return assetsMap[id].src;
 }
 
 export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle}) => {
@@ -74,11 +71,16 @@ export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle
                 className={b('content', {
                     primary,
                 })}
-                style={{
-                    ...contentStyle,
-                    backgroundImage: getBackgroundImage(id, isMobile),
-                }}
+                style={contentStyle}
             >
+                <Image
+                    src={getBackgroundImage(id, isMobile)}
+                    alt={title}
+                    loading="lazy"
+                    className={b('image')}
+                    quality={100}
+                    fill={true}
+                />
                 <div className={b('description ')}>
                     <div className={b('header')}>
                         {title ? (
