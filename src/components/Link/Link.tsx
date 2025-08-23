@@ -4,6 +4,18 @@ import React from 'react';
 
 import i18nextConfig from '../../../next-i18next.config';
 
+type HoverPrefetchLinkProps = LinkProps & {
+    children: React.ReactNode;
+};
+
+const HoverPrefetchLink = (props: HoverPrefetchLinkProps) => {
+    const [active, setActive] = React.useState(false);
+
+    return (
+        <Link prefetch={active ? null : false} onMouseEnter={() => setActive(true)} {...props} />
+    );
+};
+
 type I18nLinkProps = LinkProps & {
     className?: string;
     target?: string;
@@ -30,9 +42,9 @@ export const I18nLink: React.FC<I18nLinkProps> = ({href, locale, children, ...re
     }
 
     return (
-        <Link href={resultHref} {...rest}>
+        <HoverPrefetchLink href={resultHref} {...rest}>
             {children}
-        </Link>
+        </HoverPrefetchLink>
     );
 };
 
