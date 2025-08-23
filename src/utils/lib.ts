@@ -1,46 +1,11 @@
-import _ from 'lodash';
+import uniq from 'lodash/uniq';
 import mm from 'micromatch';
 
-import type {Contributor, Lib} from '../api';
+import type {Contributor, LibWithFullData} from '../api';
 import packagesVersions from '../data/packages-versions.json';
-import {libs} from '../libs';
 
-type LibConfig = {
-    id: string;
-    githubId: string;
-    npmId: string;
-    title: string;
-    primary: boolean;
-    landing: boolean;
-    tags: string[];
-    storybookUrl: string;
-    readmeUrl: {
-        en: string;
-        ru: string;
-    };
-    changelogUrl: string;
-    mainBranch: string;
-};
-
-export const getLibConfigByIdSafe = (id: string): LibConfig | undefined => {
-    const config = libs.find((lib) => lib.id === id);
-
-    return config;
-};
-
-export const isValidLibId = (id: string): boolean => {
-    return getLibConfigByIdSafe(id) !== undefined;
-};
-
-export const getLibConfigById = (id: string): LibConfig => {
-    const config = getLibConfigByIdSafe(id);
-
-    if (!config) {
-        throw new Error(`Can't find config for lib with id – ${id}`);
-    }
-
-    return config;
-};
+// Re-export lib config functions from dedicated module
+export {getLibConfigByIdSafe, isValidLibId, getLibConfigById, type LibConfig} from '../libs/config';
 
 export const getLibVersion = (id?: string) => {
     let libraryVersion;
@@ -80,7 +45,7 @@ export const getLibraryMeta = (
     };
 };
 
-export const getMaintainers = (lib: Lib, path = '/'): Contributor[] => {
+export const getMaintainers = (lib: LibWithFullData, path = '/'): Contributor[] => {
     const {contributors, codeOwners} = lib.data;
 
     const allCodeOwners = codeOwners.reduce<string[]>((acc, {pattern, owners}) => {
@@ -91,7 +56,7 @@ export const getMaintainers = (lib: Lib, path = '/'): Contributor[] => {
         return acc;
     }, []);
 
-    const uniqueCodeOwners = _.uniq(allCodeOwners);
+    const uniqueCodeOwners = uniq(allCodeOwners);
 
     return uniqueCodeOwners
         .map<Contributor>((owner) => {

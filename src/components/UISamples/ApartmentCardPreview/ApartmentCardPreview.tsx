@@ -41,7 +41,7 @@ import {
     User,
     spacing,
 } from '@gravity-ui/uikit';
-import {chunk} from 'lodash';
+import chunk from 'lodash/chunk';
 import {Fragment, useState} from 'react';
 
 import apple from '../../../assets/preview-apartments/apple.png';

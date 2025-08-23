@@ -1,7 +1,7 @@
 import {Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 import {useInteractiveContext} from '../../InteractiveContext';
 
 import './InteractiveCard.scss';

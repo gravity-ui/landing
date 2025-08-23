@@ -11,12 +11,14 @@ $block: '.#{variables.$ns}libraries-library-preview';
         height: 292px;
         width: 100%;
         border-radius: 24px;
+        overflow: hidden;
         color: rgba(255, 255, 255, 0.7);
         background-size: cover;
 
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
+        position: relative;
 
         transition: transform 0.2s ease-in-out;
 
@@ -51,6 +53,16 @@ $block: '.#{variables.$ns}libraries-library-preview';
             overflow: hidden;
             max-height: 100px;
         }
+    }
+
+    &__image {
+        position: absolute;
+        height: 100%;
+        margin: 0 auto;
+        object-fit: cover;
+        object-position: top;
+        width: 100%;
+        border-radius: 0 0 24px 24px;
     }
 
     &__header {
@@ -118,6 +130,7 @@ $block: '.#{variables.$ns}libraries-library-preview';
         background-color: rgba(54, 41, 61);
         border-radius: 0 0 24px 24px;
         gap: 8px;
+        z-index: 1;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             padding: 18px 24px;

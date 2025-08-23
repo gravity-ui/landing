@@ -21,7 +21,6 @@ import {
     ThumbsUp,
     Xmark,
 } from '@gravity-ui/icons';
-import {MarkdownEditorView, useMarkdownEditor} from '@gravity-ui/markdown-editor';
 import {Logo, LogoProps} from '@gravity-ui/navigation';
 import {
     Alert,
@@ -45,6 +44,7 @@ import {
     spacing,
 } from '@gravity-ui/uikit';
 import {Fragment} from 'react';
+import {MarkdownEditorViewAsync} from 'src/components/MarkdownEditorViewAsync';
 
 import gravityUi from '../../../assets/icons/gravity-ui.svg';
 import user1 from '../../../assets/preview-apartments/user-1.png';
@@ -311,18 +311,6 @@ const TASKS: Array<{
 ];
 
 export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
-    const editor = useMarkdownEditor({
-        initial: {
-            mode: 'wysiwyg',
-            toolbarVisible: true,
-        },
-        md: {
-            html: true,
-            linkify: true,
-            breaks: true,
-        },
-    });
-
     return (
         <PreviewWrapper {...props}>
             {({isLightTheme, themeSwitcher}) => {
@@ -745,7 +733,20 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                                 spacing={{mx: 5, mt: 5, px: 2, py: 2}}
                                                 style={{flexGrow: 1}}
                                             >
-                                                <MarkdownEditorView stickyToolbar editor={editor} />
+                                                <MarkdownEditorViewAsync
+                                                    markdownEditorProps={{
+                                                        initial: {
+                                                            mode: 'wysiwyg',
+                                                            toolbarVisible: true,
+                                                        },
+                                                        md: {
+                                                            html: true,
+                                                            linkify: true,
+                                                            breaks: true,
+                                                        },
+                                                    }}
+                                                    stickyToolbar
+                                                />
                                             </Card>
 
                                             <Flex

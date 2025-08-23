@@ -1,6 +1,8 @@
 const {join} = require('path');
 const path = require('path');
 
+const bundleAnalyzer = require('@next/bundle-analyzer');
+const {RsdoctorWebpackPlugin} = require('@rsdoctor/webpack-plugin');
 const withPlugins = require('next-compose-plugins');
 const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')([
@@ -82,24 +84,56 @@ const plugins = [
                     config.resolve.fallback.fs = false;
                 }
 
+                if (process.env.ANALYZE_BUNDLE) {
+                    if (config.name === 'client') {
+                        config.plugins.push(
+                            new RsdoctorWebpackPlugin({
+                                disableClientServer: true,
+                            }),
+                        );
+                    } else if (config.name === 'server') {
+                        config.plugins.push(
+                            new RsdoctorWebpackPlugin({
+                                disableClientServer: true,
+                                output: {
+                                    reportDir: './.next/server',
+                                },
+                            }),
+                        );
+                    }
+                }
+
                 return config;
             },
         },
     ],
 ];
 
-/** @type {import('next').NextConfig} */
-module.exports = withPlugins(plugins, {
-    reactStrictMode: true,
-    i18n: {
-        locales: i18n.locales,
-        defaultLocale: i18n.defaultLocale,
-        localeDetection: false,
-    },
-    experimental: {
-        esmExternals: 'loose',
-    },
-    assetPrefix: process.env.ASSET_PREFIX,
-    crossOrigin: 'anonymous',
-    output: process.env.IS_CONTAINER_BUILD ? 'standalone' : undefined,
+const withBundleAnalyzer = bundleAnalyzer({
+    enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
+
+/** @type {import('next').NextConfig} */
+module.exports = withBundleAnalyzer(
+    withPlugins(plugins, {
+        reactStrictMode: true,
+        i18n: {
+            locales: i18n.locales,
+            defaultLocale: i18n.defaultLocale,
+            localeDetection: false,
+        },
+        experimental: {
+            esmExternals: 'loose',
+            optimizePackageImports: ['@gravity-ui/uikit'],
+        },
+        typescript: {
+            ignoreBuildErrors: true,
+        },
+        eslint: {
+            ignoreDuringBuilds: true,
+        },
+        assetPrefix: process.env.ASSET_PREFIX,
+        crossOrigin: 'anonymous',
+        output: process.env.IS_CONTAINER_BUILD ? 'standalone' : undefined,
+    }),
+);

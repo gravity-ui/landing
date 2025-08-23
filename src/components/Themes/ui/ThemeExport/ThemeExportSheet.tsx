@@ -2,11 +2,11 @@ import {Button, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {type PropsWithChildren} from 'react';
 
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 import {ThemeActionSheet} from '../ThemeActionSheet/ThemeActionSheet';
 
-import type {ThemeExportProps} from './ThemeExport';
 import './ThemeExport.scss';
+import type {ThemeExportProps} from './types';
 
 export interface ThemeExportSheetProps extends ThemeExportProps, PropsWithChildren {
     onSaveThemeCSSClick: () => void;

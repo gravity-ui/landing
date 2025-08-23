@@ -2,7 +2,7 @@ import {HTML} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {Lib} from '../../api';
+import {LibWithMetadata} from '../../api';
 import calendarIcon from '../../assets/icons/preview-calendar.svg';
 import starIcon from '../../assets/icons/preview-star.svg';
 import versionIcon from '../../assets/icons/preview-version.svg';
@@ -13,7 +13,7 @@ import './LibraryPreview.scss';
 const b = block('library-preview-layout');
 
 type LibraryPreviewProps = {
-    lib: Lib;
+    lib: LibWithMetadata;
 };
 
 export const LibraryPreview = ({lib}: LibraryPreviewProps) => {
@@ -29,36 +29,36 @@ export const LibraryPreview = ({lib}: LibraryPreviewProps) => {
                     </div>
 
                     <div className={b('meta')}>
-                        {lib.config.npmId && lib.data.version ? (
+                        {lib.config.npmId && lib.metadata.version ? (
                             <div className={b('info')}>
-                                {lib.data.stars ? (
+                                {lib.metadata.stars ? (
                                     <div className={b('info-block')}>
                                         <Icon data={starIcon} size={52} fill="#ffffff" />
                                         <div className={b('info-block-meta')}>
                                             <div className={b('info-block-title')}>
-                                                {lib.data.stars}
+                                                {lib.metadata.stars}
                                             </div>
                                             <div className={b('info-block-subtitle')}>Stars</div>
                                         </div>
                                     </div>
                                 ) : null}
-                                {lib.data.version ? (
+                                {lib.metadata.version ? (
                                     <div className={b('info-block')}>
                                         <Icon data={versionIcon} size={52} fill="#ffffff" />
                                         <div className={b('info-block-meta')}>
                                             <div className={b('info-block-title')}>
-                                                {lib.data.version}
+                                                {lib.metadata.version}
                                             </div>
                                             <div className={b('info-block-subtitle')}>Version</div>
                                         </div>
                                     </div>
                                 ) : null}
-                                {lib.data.lastUpdate ? (
+                                {lib.metadata.lastUpdate ? (
                                     <div className={b('info-block')}>
                                         <Icon data={calendarIcon} size={52} fill="#ffffff" />
                                         <div className={b('info-block-meta')}>
                                             <div className={b('info-block-title')}>
-                                                {lib.data.lastUpdate}
+                                                {lib.metadata.lastUpdate}
                                             </div>
                                             <div className={b('info-block-subtitle')}>
                                                 Last update

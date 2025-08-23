@@ -1,9 +1,11 @@
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
+import Head from 'next/head';
 import React from 'react';
 
 import nextI18nextConfig from '../../next-i18next.config';
-import {Api, Contributor, Lib} from '../api';
+import {Api, Contributor, LibWithMetadata} from '../api';
+import backgroundAsset from '../assets/background.jpg';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
 import {getI18nProps} from '../utils/i18next';
@@ -24,14 +26,30 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
 };
 
-export const RTLPage = ({libs, contributors}: {libs: Lib[]; contributors: Contributor[]}) => {
+export const RTLPage = ({
+    libs,
+    contributors,
+}: {
+    libs: LibWithMetadata[];
+    contributors: Contributor[];
+}) => {
     const {i18n} = useTranslation();
     i18n.changeLanguage(nextI18nextConfig.i18n.defaultLocale);
 
     return (
-        <Layout isPageConstructor isRtl hideLocalePicker>
-            <Landing libs={libs} contributors={contributors} />
-        </Layout>
+        <>
+            <Head>
+                {/* Preload background image for improve LCP */}
+                <link rel="preload" as="image" href={backgroundAsset.src} type="image/jpeg" />
+            </Head>
+            <Layout isPageConstructor isRtl hideLocalePicker>
+                <Landing
+                    libs={libs}
+                    contributors={contributors}
+                    backgroundImageSrc={backgroundAsset.src}
+                />
+            </Layout>
+        </>
     );
 };
 
