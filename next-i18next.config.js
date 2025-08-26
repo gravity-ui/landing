@@ -13,5 +13,6 @@ module.exports = {
         '/health',
         '/sitemap.xml',
         '/robots.txt',
+        '/analytics.txt',
     ],
 };
