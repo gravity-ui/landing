@@ -33,6 +33,7 @@ const ThemeUtilityColorEditor = React.memo(({name, theme}: ThemeUtilityColorEdit
     const [color, setColor] = useThemeUtilityColor({
         name,
         theme,
+        withoutRef: name === 'base-background',
     });
 
     return (

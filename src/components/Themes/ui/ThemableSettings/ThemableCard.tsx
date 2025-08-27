@@ -27,7 +27,11 @@ export const ThemableCard: React.FC<ThemableCardProps> = ({
     showTitle = true,
 }) => {
     const {t} = useTranslation('themes');
-    const [backgroundColor] = useThemeUtilityColor({name: 'base-background', theme});
+    const [backgroundColor] = useThemeUtilityColor({
+        name: 'base-background',
+        theme,
+        withoutRef: true,
+    });
 
     const renderRow = React.useCallback(
         (row: ThemableRow) => {

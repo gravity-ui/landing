@@ -47,6 +47,9 @@ export const Themes = () => {
     const closeExportDialog = React.useCallback(() => {
         setIsExportDialogVisible(false);
     }, []);
+    const openImportDialog = React.useCallback(() => {
+        setIsImportDialogVisible(true);
+    }, []);
     const closeImportDialog = React.useCallback(() => {
         setIsImportDialogVisible(false);
     }, []);
@@ -104,6 +107,14 @@ export const Themes = () => {
     const ThemeActionsButtons = useCallback(
         () => (
             <Flex direction="row" gap={2}>
+                <Button
+                    className={b('theme-action-btn')}
+                    view="outlined-action"
+                    size="xl"
+                    onClick={openImportDialog}
+                >
+                    <Text>{t('btn_import_theme')}</Text>
+                </Button>
                 <Button
                     className={b('theme-action-btn')}
                     view="action"
