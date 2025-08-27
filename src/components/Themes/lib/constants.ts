@@ -12,22 +12,22 @@ export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 export const DEFAULT_NEW_COLOR_TITLE = 'New color';
 
 export const DEFAULT_BRAND_COLORS = [
-    'rgb(203,255,92)',
-    'rgb(0,41,255)',
-    'rgb(49,78,60)',
-    'rgb(108,145,201)',
-    'rgb(255,190,92)',
-    'rgb(255,92,92)',
+    'rgb(203 255 92)',
+    'rgb(0 41 255)',
+    'rgb(49 78 60)',
+    'rgb(108 145 201)',
+    'rgb(255 190 92)',
+    'rgb(255 92 92)',
 ] as const;
 
 export const TEXT_CONTRAST_COLORS: Record<Theme, {white: string; black: string}> = {
     dark: {
-        white: 'rgb(255, 255, 255)',
-        black: 'rgba(0, 0, 0, 0.9)', // --g-color-private-black-900
+        white: 'rgb(255 255 255)',
+        black: 'rgba(0 0 0 / 0.9)', // --g-color-private-black-900
     },
     light: {
-        white: 'rgb(255, 255, 255)',
-        black: 'rgba(0, 0, 0, 0.85)', // --g-color-private-black-850
+        white: 'rgb(255 255 255)',
+        black: 'rgba(0 0 0 / 0.85)', // --g-color-private-black-850
     },
 };
 
@@ -86,10 +86,10 @@ export const DEFAULT_COLORS: GravityTheme['utilityColors'] = {
     },
     'base-background': {
         light: {
-            value: 'rgb(255,255,255)',
+            value: 'rgb(255 255 255)',
         },
         dark: {
-            value: 'rgb(34,29,34)',
+            value: 'rgb(34 29 34)',
         },
     },
     'base-brand-hover': {
@@ -199,14 +199,14 @@ export type BrandPreset = {
 
 export const BRAND_COLORS_PRESETS: BrandPreset[] = [
     {
-        brandColor: 'rgb(203,255,92)',
+        brandColor: 'rgb(203 255 92)',
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255,255,255)',
+                    value: 'rgb(255 255 255)',
                 },
                 dark: {
-                    value: 'rgb(34,29,34)',
+                    value: 'rgb(34 29 34)',
                 },
             },
             'base-brand': {
@@ -308,14 +308,14 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         },
     },
     {
-        brandColor: 'rgb(0,41,255)',
+        brandColor: 'rgb(0 41 255)',
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255,255,255)',
+                    value: 'rgb(255 255 255)',
                 },
                 dark: {
-                    value: 'rgb(34,29,34)',
+                    value: 'rgb(34 29 34)',
                 },
             },
             'base-brand': {
@@ -417,14 +417,14 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         },
     },
     {
-        brandColor: 'rgb(49,78,60)',
+        brandColor: 'rgb(49 78 60)',
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255,255,255)',
+                    value: 'rgb(255 255 255)',
                 },
                 dark: {
-                    value: 'rgb(34,29,34)',
+                    value: 'rgb(34 29 34)',
                 },
             },
             'base-brand': {
@@ -526,14 +526,14 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         },
     },
     {
-        brandColor: 'rgb(108,145,201)',
+        brandColor: 'rgb(108 145 201)',
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255,255,255)',
+                    value: 'rgb(255 255 255)',
                 },
                 dark: {
-                    value: 'rgb(34,29,34)',
+                    value: 'rgb(34 29 34)',
                 },
             },
             'base-brand': {
@@ -635,14 +635,14 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         },
     },
     {
-        brandColor: 'rgb(255,190,92)',
+        brandColor: 'rgb(255 190 92)',
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255,255,255)',
+                    value: 'rgb(255 255 255)',
                 },
                 dark: {
-                    value: 'rgb(34,29,34)',
+                    value: 'rgb(34 29 34)',
                 },
             },
             'base-brand': {
@@ -744,14 +744,14 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         },
     },
     {
-        brandColor: 'rgb(255,92,92)',
+        brandColor: 'rgb(255 92 92)',
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255,255,255)',
+                    value: 'rgb(255 255 255)',
                 },
                 dark: {
-                    value: 'rgb(34,29,34)',
+                    value: 'rgb(34 29 34)',
                 },
             },
             'base-brand': {
