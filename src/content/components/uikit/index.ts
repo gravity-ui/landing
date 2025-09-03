@@ -3,6 +3,7 @@ import {sortBy} from 'lodash';
 import {getLibConfigById} from '../../../utils';
 import {Component, Lib} from '../types';
 
+import {accordionConfig} from './Accordion';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {avatarConfig} from './Avatar';
@@ -48,6 +49,7 @@ import {userLabelConfig} from './UserLabel';
 const config = getLibConfigById('uikit');
 
 const uikitComponents: Component[] = [
+    accordionConfig,
     alertConfig,
     arrowToggleConfig,
     avatarConfig,
