@@ -1,5 +1,5 @@
 import {Card, CardProps, Flex, Icon, IconData, Text, spacing} from '@gravity-ui/uikit';
-import {chunk} from 'lodash';
+import chunk from 'lodash/chunk';
 import {PropsWithChildren} from 'react';
 
 export function Sheet({

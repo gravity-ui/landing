@@ -1,7 +1,7 @@
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 
-import {Api, type Lib} from '../../../api';
+import {Api, type LibWithFullData} from '../../../api';
 import {Layout} from '../../../components/Layout/Layout';
 import {Library} from '../../../components/Library/Library';
 import {getI18nProps, getLibraryMeta, isValidLibId} from '../../../utils';
@@ -29,7 +29,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
 };
 
-export const LibraryPage = ({lib}: {lib: Lib}) => {
+export const LibraryPage = ({lib}: {lib: LibWithFullData}) => {
     const {t} = useTranslation();
 
     return (

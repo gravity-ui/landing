@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://gravity-ui.com/",
+  "sideEffects": false,
   "dependencies": {
     "@diplodoc/transform": "^4.18.0",
     "@gravity-ui/chartkit": "^6.1.1",
@@ -19,6 +20,7 @@
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@monaco-editor/react": "^4.6.0",
+    "@next/bundle-analyzer": "^15.5.0",
     "@octokit/auth-app": "^8.0.1",
     "@octokit/rest": "^20.1.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -62,6 +64,8 @@
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
     "@gravity-ui/tsconfig": "^1.0.0",
+    "@rsdoctor/cli": "^1.2.3",
+    "@rsdoctor/webpack-plugin": "^1.2.3",
     "@svgr/webpack": "^6.5.1",
     "@types/chroma-js": "^2.4.4",
     "@types/jest": "^29.2.4",
@@ -79,6 +83,7 @@
     "eslint-plugin-testing-library": "^5.9.1",
     "file-loader": "^6.2.0",
     "gh-pages": "^6.2.0",
+    "madge": "^8.0.0",
     "next-compose-plugins": "^2.2.1",
     "next-sitemap": "^4.2.3",
     "next-transpile-modules": "^10.0.1",
@@ -101,6 +106,7 @@
     "prepare": "husky install",
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "ANALYZE_BUNDLE=true next build",
     "start": "next start",
     "postbuild": "next-sitemap",
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
@@ -112,9 +118,12 @@
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
     "lint:prettier": "prettier --check '**/*.md'",
-    "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
+    "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier && npm run circular:check",
     "deploy": "echo 'gravity-ui.com' > ./out/CNAME && gh-pages -d build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "circular:check": "madge --circular --ts-config ./tsconfig.json src/",
+    "client:rsd": "rsdoctor analyze --profile .next/.rsdoctor/manifest.json",
+    "server:rsd": "rsdoctor analyze --profile .next/server/.rsdoctor/manifest.json"
   },
   "browserslist": {
     "production": [

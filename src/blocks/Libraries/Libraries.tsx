@@ -1,7 +1,7 @@
 import {Animatable, AnimateBlock, SliderBlock, useTheme} from '@gravity-ui/page-constructor';
 import React from 'react';
 
-import {Lib} from '../../api';
+import {LibWithMetadata} from '../../api';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {block, getThemedValue} from '../../utils';
 import {CustomBlock} from '../constants';
@@ -13,7 +13,7 @@ const b = block('libraries-block');
 
 export type LibrariesProps = Animatable & {
     title?: string;
-    items: Lib[];
+    items: LibWithMetadata[];
     backgroundColor?: string;
     backdropFilter?: string;
 };

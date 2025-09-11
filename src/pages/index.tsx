@@ -1,7 +1,9 @@
 import {GetServerSideProps} from 'next';
+import Head from 'next/head';
 
-import type {Contributor, Lib} from '../api';
+import type {Contributor, LibWithMetadata} from '../api';
 import {Api} from '../api';
+import backgroundAsset from '../assets/background.jpg';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
 import {getI18nProps} from '../utils/i18next';
@@ -22,11 +24,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
 };
 
-const Home = ({libs, contributors}: {libs: Lib[]; contributors: Contributor[]}) => {
+const Home = ({libs, contributors}: {libs: LibWithMetadata[]; contributors: Contributor[]}) => {
     return (
-        <Layout isPageConstructor>
-            <Landing libs={libs} contributors={contributors} />
-        </Layout>
+        <>
+            <Head>
+                {/* Preload background image for improve LCP */}
+                <link rel="preload" as="image" href={backgroundAsset.src} type="image/jpeg" />
+            </Head>
+            <Layout isPageConstructor>
+                <Landing
+                    libs={libs}
+                    contributors={contributors}
+                    backgroundImageSrc={backgroundAsset.src}
+                />
+            </Layout>
+        </>
     );
 };
 

@@ -1,10 +1,11 @@
 import {HTML} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 
-import type {Lib} from '../../../../api';
+import type {LibWithMetadata} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';
 import dashkitAssetMobile from '../../../../assets/libs/img-lib-dashkit-mobile.jpg';
 import dashkitAsset from '../../../../assets/libs/img-lib-dashkit.jpg';
@@ -28,7 +29,7 @@ import './LibraryPreview.scss';
 const b = block('libraries-library-preview');
 
 export type LibraryPreviewProps = {
-    lib: Lib;
+    lib: LibWithMetadata;
     contentStyle: Record<string, unknown>;
 };
 
@@ -54,11 +55,7 @@ const libIdToAssetMobile: Record<string, {src: string}> = {
 
 function getBackgroundImage(id: string, isMobile?: boolean) {
     const assetsMap = isMobile ? libIdToAssetMobile : libIdToAsset;
-    const asset = assetsMap[id];
-    if (asset) {
-        return `url(${asset.src})`;
-    }
-    return undefined;
+    return assetsMap[id].src;
 }
 
 export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle}) => {
@@ -66,7 +63,7 @@ export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle
     const {t} = useTranslation();
 
     const {id, title, primary} = lib.config;
-    const {stars} = lib.data;
+    const {stars} = lib.metadata;
 
     return (
         <Link href={`/libraries/${id}`} className={b()}>
@@ -74,11 +71,16 @@ export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle
                 className={b('content', {
                     primary,
                 })}
-                style={{
-                    ...contentStyle,
-                    backgroundImage: getBackgroundImage(id, isMobile),
-                }}
+                style={contentStyle}
             >
+                <Image
+                    src={getBackgroundImage(id, isMobile)}
+                    alt={title}
+                    loading="lazy"
+                    className={b('image')}
+                    quality={100}
+                    fill={true}
+                />
                 <div className={b('description ')}>
                     <div className={b('header')}>
                         {title ? (

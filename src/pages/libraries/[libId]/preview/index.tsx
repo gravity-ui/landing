@@ -3,7 +3,7 @@ import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 import React from 'react';
 
-import {Api, type Lib} from '../../../../api';
+import {Api, type LibWithMetadata} from '../../../../api';
 import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
 import {getI18nProps, isValidLibId} from '../../../../utils';
 
@@ -25,13 +25,16 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return {
         props: {
-            lib,
+            lib: {
+                config: lib.config,
+                metadata: lib.metadata,
+            },
             ...i18nProps,
         },
     };
 };
 
-export const LibraryPreviewPage = ({lib}: {lib: Lib}) => {
+export const LibraryPreviewPage = ({lib}: {lib: LibWithMetadata}) => {
     return (
         <React.Fragment>
             <Head>

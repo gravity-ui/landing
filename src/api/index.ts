@@ -4,7 +4,6 @@ import {fileURLToPath} from 'url';
 
 import {createAppAuth} from '@octokit/auth-app';
 import {Octokit} from '@octokit/rest';
-import _ from 'lodash';
 import {i18n} from 'next-i18next.config';
 
 import {type LibConfig, libs as libsConfigs} from '../libs';
@@ -21,12 +20,15 @@ export type CodeOwners = {
     owners: string[];
 };
 
-export type LibData = {
+export type LibMetadata = {
     stars: number;
     version: string;
     lastUpdate: string;
     license: string;
     issues: number;
+};
+
+export type LibData = {
     readme: {
         en: string;
         ru: string;
@@ -38,10 +40,15 @@ export type LibData = {
     codeOwners: CodeOwners[];
 };
 
-export type Lib = {
+export type LibBase = {
     config: LibConfig;
-    data: LibData;
 };
+
+export type LibWithMetadata = LibBase & {
+    metadata: LibMetadata;
+};
+
+export type LibWithFullData = LibBase & LibWithMetadata & {data: LibData};
 
 export type NpmInfo = {
     'dist-tags'?: {
@@ -71,7 +78,7 @@ export class Api {
     private contributorsCache: {data: Contributor[]; timestamp: number} | null = null;
 
     private readonly LIBS_CACHE_TTL = 60 * 60 * 1000; // 1 hour
-    private libsByIdCache: Record<string, {timestamp: number; lib: Lib}> = {};
+    private libsByIdCache: Record<string, {timestamp: number; lib: LibWithFullData}> = {};
 
     private readonly COMPONENT_README_CACHE_TTL = 60 * 60 * 1000; // 1 hour
     private componentReadmeCache: Record<string, {content: string; timestamp: number}> = {};
@@ -348,7 +355,7 @@ export class Api {
         };
     }
 
-    async fetchLibData(libConfig: LibConfig): Promise<LibData> {
+    async fetchLibData(libConfig: LibConfig): Promise<Omit<LibWithFullData, 'config'>> {
         const [npmInfo, githubInfo, readmeInfo, changelogInfo] = await Promise.all([
             libConfig.npmId ? this.fetchNpmInfo(libConfig.npmId) : null,
             libConfig.githubId ? this.fetchLibGithubInfo(libConfig.githubId) : null,
@@ -373,36 +380,39 @@ export class Api {
         }
 
         return {
-            stars: githubInfo?.stargazers_count ?? 0,
-            version: latestVersion,
-            lastUpdate: latestReleaseDate,
-            license: githubInfo?.license?.name ?? '',
-            issues: githubInfo?.open_issues_count ?? 0,
-            readme: readmeInfo,
-            changelog: changelogInfo,
-            contributors: githubInfo?.contributors ?? [],
-            codeOwners: githubInfo?.codeOwners ?? [],
+            metadata: {
+                stars: githubInfo?.stargazers_count ?? 0,
+                version: latestVersion,
+                lastUpdate: latestReleaseDate,
+                license: githubInfo?.license?.name ?? '',
+                issues: githubInfo?.open_issues_count ?? 0,
+            },
+            data: {
+                readme: readmeInfo,
+                changelog: changelogInfo,
+                contributors: githubInfo?.contributors ?? [],
+                codeOwners: githubInfo?.codeOwners ?? [],
+            },
         };
     }
 
-    async fetchLibById(id: string): Promise<Lib> {
+    async fetchLibById(id: string): Promise<LibWithFullData> {
         const config = libsConfigs.find((lib) => lib.id === id);
 
         if (!config) {
             throw new Error(`Can't find config for lib with id – ${id}`);
         }
 
-        const data = await this.fetchLibData(config);
+        const {metadata, data} = await this.fetchLibData(config);
 
-        const lib = {
+        return {
             config,
+            metadata,
             data,
         };
-
-        return lib;
     }
 
-    async fetchLibByIdWithCache(id: string): Promise<Lib> {
+    async fetchLibByIdWithCache(id: string): Promise<LibWithFullData> {
         const now = Date.now();
 
         if (this.libsByIdCache[id]) {
@@ -433,17 +443,31 @@ export class Api {
         return lib;
     }
 
-    async fetchAllLibs(): Promise<Lib[]> {
-        const libs = await Promise.all(libsConfigs.map(({id}) => this.fetchLibByIdWithCache(id)));
-
-        return libs;
+    fetchAllLibs(): Promise<LibWithFullData[]> {
+        return Promise.all(libsConfigs.map(({id}) => this.fetchLibByIdWithCache(id)));
     }
 
-    async fetchLandingLibs(): Promise<Lib[]> {
+    fetchAllLibsOnlyWithMetadata(): Promise<LibWithMetadata[]> {
+        return Promise.all(
+            libsConfigs.map(({id}) =>
+                this.fetchLibByIdWithCache(id).then(({config, metadata}) => ({
+                    config,
+                    metadata,
+                })),
+            ),
+        );
+    }
+
+    async fetchLandingLibs(): Promise<LibWithMetadata[]> {
         const libs = await Promise.all(
             libsConfigs
                 .filter(({landing}) => landing)
-                .map(({id}) => this.fetchLibByIdWithCache(id)),
+                .map(({id}) =>
+                    this.fetchLibByIdWithCache(id).then(({config, metadata}) => ({
+                        config,
+                        metadata,
+                    })),
+                ),
         );
 
         return libs.sort((lib1, lib2) => {

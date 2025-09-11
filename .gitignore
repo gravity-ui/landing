@@ -33,3 +33,6 @@ yarn-error.log*
 
 .env
 .codeassistant/mcp.json
+
+# Circular dependency graphs
+circular-deps*.svg

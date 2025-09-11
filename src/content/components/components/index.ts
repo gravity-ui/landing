@@ -1,4 +1,4 @@
-import {getLibConfigById} from '../../../utils';
+import {getLibConfigById} from '../../../libs/config';
 import {Lib} from '../types';
 
 import {storeBadgeConfig} from './StoreBadge';

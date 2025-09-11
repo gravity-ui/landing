@@ -2,11 +2,11 @@ import {Button, Flex, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {PropsWithChildren} from 'react';
 
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 import {ThemeActionDialog} from '../ThemeActionDialog/ThemeActionDialog';
 
-import type {ThemeExportProps} from './ThemeExport';
 import './ThemeExport.scss';
+import type {ThemeExportProps} from './types';
 
 const b = block('theme-export');
 

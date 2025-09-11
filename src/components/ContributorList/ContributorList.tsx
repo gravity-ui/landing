@@ -2,7 +2,7 @@ import {Button} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import type {Contributor, Lib} from '../../api';
+import type {Contributor, LibWithFullData} from '../../api';
 import {block} from '../../utils';
 import {BaseContributorList} from '../BaseContributorList/BaseContributorList';
 
@@ -12,7 +12,7 @@ const b = block('contributor-list');
 const DISPLAY_CONTRIBUTORS_COUNT = 16;
 
 export type ContributorListProps = {
-    lib: Lib;
+    lib: LibWithFullData;
     contributors: Contributor[];
 };
 

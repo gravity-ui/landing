@@ -1,6 +1,6 @@
-import {sortBy} from 'lodash';
+import sortBy from 'lodash/sortBy';
 
-import {getLibConfigById} from '../../../utils';
+import {getLibConfigById} from '../../../libs/config';
 import {Component, Lib} from '../types';
 
 import {accordionConfig} from './Accordion';

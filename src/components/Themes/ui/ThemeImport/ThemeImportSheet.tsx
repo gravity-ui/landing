@@ -2,11 +2,11 @@ import {Button} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {PropsWithChildren} from 'react';
 
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 import {ThemeActionSheet} from '../ThemeActionSheet/ThemeActionSheet';
 
-import {ThemeImportProps} from './ThemeImport';
 import './ThemeImport.scss';
+import type {ThemeImportProps} from './types';
 
 const b = block('theme-import__sheet');
 
