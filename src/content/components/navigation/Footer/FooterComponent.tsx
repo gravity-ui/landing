@@ -1,7 +1,7 @@
 import {Footer, FooterProps, MobileFooter} from '@gravity-ui/navigation';
 import React from 'react';
 
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 
 import './FooterComponent.scss';
 import {logo, menuItems} from './constants';

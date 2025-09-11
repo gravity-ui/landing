@@ -122,12 +122,6 @@
     "deploy": "echo 'gravity-ui.com' > ./out/CNAME && gh-pages -d build",
     "typecheck": "tsc --noEmit",
     "circular:check": "madge --circular --ts-config ./tsconfig.json src/",
-    "circular:summary": "madge --summary --ts-config ./tsconfig.json src/",
-    "circular:graph": "madge --image circular-deps.svg --ts-config ./tsconfig.json src/",
-    "circular:graph-only": "madge --circular --image circular-deps-only.svg --ts-config ./tsconfig.json src/",
-    "circular:detailed": "madge --circular --warning --ts-config ./tsconfig.json src/",
-    "circular:json": "madge --json --ts-config ./tsconfig.json src/",
-    "circular:orphans": "madge --orphans --ts-config ./tsconfig.json src/",
     "client:rsd": "rsdoctor analyze --profile .next/.rsdoctor/manifest.json",
     "server:rsd": "rsdoctor analyze --profile .next/server/.rsdoctor/manifest.json"
   },

@@ -2,7 +2,7 @@ import {HotkeysPanel} from '@gravity-ui/navigation';
 import {Hotkey, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {block} from '../../../../utils';
+import {block} from '../../../../utils/block';
 
 import './HotkeysPanelComponent.scss';
 import {hotkeys} from './constants';
