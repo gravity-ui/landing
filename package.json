@@ -13,7 +13,7 @@
     "@gravity-ui/graph": "^1.0.0",
     "@gravity-ui/icons": "^2.16.0",
     "@gravity-ui/markdown-editor": "^15.1.0",
-    "@gravity-ui/navigation": "^3.6.4",
+    "@gravity-ui/navigation": "^3.7.0",
     "@gravity-ui/page-constructor": "^6.0.0-beta.6",
     "@gravity-ui/uikit": "^7.22.0",
     "@gravity-ui/uikit-themer": "^1.4.1",
