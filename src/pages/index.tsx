@@ -9,22 +9,20 @@ import {Layout} from '../components/Layout/Layout';
 import {getI18nProps} from '../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const [contributors, libs, i18nProps] = await Promise.all([
-        Api.instance.fetchAllContributorsWithCache(),
+    const [libs, i18nProps] = await Promise.all([
         Api.instance.fetchLandingLibs(),
         getI18nProps(ctx, ['home', 'libraries-info']),
     ]);
 
     return {
         props: {
-            contributors,
             libs,
             ...i18nProps,
         },
     };
 };
 
-const Home = ({libs, contributors}: {libs: LibWithMetadata[]; contributors: Contributor[]}) => {
+const Home = ({libs}: {libs: LibWithMetadata[]; contributors: Contributor[]}) => {
     return (
         <>
             <Head>
@@ -32,11 +30,7 @@ const Home = ({libs, contributors}: {libs: LibWithMetadata[]; contributors: Cont
                 <link rel="preload" as="image" href={backgroundAsset.src} type="image/jpeg" />
             </Head>
             <Layout isPageConstructor>
-                <Landing
-                    libs={libs}
-                    contributors={contributors}
-                    backgroundImageSrc={backgroundAsset.src}
-                />
+                <Landing libs={libs} backgroundImageSrc={backgroundAsset.src} />
             </Layout>
         </>
     );

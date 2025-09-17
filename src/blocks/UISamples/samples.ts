@@ -1,13 +1,13 @@
 import {useTranslation} from 'next-i18next';
 import {useMemo} from 'react';
 import {
-    ApartmentCardPreview,
-    DashboardPreview2,
-    KubernetesPreview,
-    MailPreview,
-    OsnPreview,
-    TablePreview,
-    TasksPreview,
+    LazyApartmentCardPreview,
+    LazyDashboardPreview2,
+    LazyKubernetesPreview,
+    LazyMailPreview,
+    LazyOsnPreview,
+    LazyTablePreview,
+    LazyTasksPreview,
 } from 'src/components/UISamples';
 
 import dashboardImage from '../../assets/ui-samples/card-dashboard.jpg';
@@ -36,7 +36,7 @@ export const useSampleComponents = () => {
             {
                 type: SampleComponent.Dashboard,
                 imagePreviewSrc: dashboardImage.src,
-                Component: DashboardPreview2,
+                Component: LazyDashboardPreview2,
                 title: t('ui_samples_dashboard_tab'),
                 breadCrumbsItems: ['Dashboard'],
                 blank: true,
@@ -44,42 +44,42 @@ export const useSampleComponents = () => {
             {
                 type: SampleComponent.HotelBooking,
                 imagePreviewSrc: hotelBookingImage.src,
-                Component: ApartmentCardPreview,
+                Component: LazyApartmentCardPreview,
                 title: t('ui_samples_apartment_tab'),
                 blank: true,
             },
             {
                 type: SampleComponent.Listing,
                 imagePreviewSrc: listingImage.src,
-                Component: TablePreview,
+                Component: LazyTablePreview,
                 title: t('ui_samples_table_tab'),
                 breadCrumbsItems: ['Table'],
             },
             {
                 type: SampleComponent.TaskTracker,
                 imagePreviewSrc: taskTrackerImage.src,
-                Component: TasksPreview,
+                Component: LazyTasksPreview,
                 title: t('ui_samples_task_tracker_tab'),
                 blank: true,
             },
             {
                 type: SampleComponent.Kubernetes,
                 imagePreviewSrc: kubernetesImage.src,
-                Component: KubernetesPreview,
+                Component: LazyKubernetesPreview,
                 title: t('ui_samples_kubernetes_tab'),
                 blank: true,
             },
             {
                 type: SampleComponent.Osn,
                 imagePreviewSrc: osnImage.src,
-                Component: OsnPreview,
+                Component: LazyOsnPreview,
                 title: t('ui_samples_osn_tab'),
                 blank: true,
             },
             {
                 type: SampleComponent.Mail,
                 imagePreviewSrc: mailImage.src,
-                Component: MailPreview,
+                Component: LazyMailPreview,
                 title: t('ui_samples_mail_tab'),
                 blank: true,
             },
