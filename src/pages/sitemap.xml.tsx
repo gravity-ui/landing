@@ -50,48 +50,29 @@ const generatePaths = () => {
         });
     });
 
-    const localizedPaths: string[] = [];
-    const supportedLocales = ['', 'ru', 'es', 'zh'];
-
-    paths.forEach((item) => {
-        supportedLocales.forEach((locale) => {
-            if (!locale) {
-                localizedPaths.push(item.path);
-            } else if (locale && !item.notLocalized) {
-                localizedPaths.push(`/${locale}${item.path}`);
-            }
-        });
-    });
-
-    return localizedPaths;
+    return paths;
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const paths = generatePaths();
+    const basePaths = generatePaths();
+    const supportedLocales = ['', 'ru', 'es', 'zh'];
 
-    const fields = paths.map((path) => {
+    const fields = basePaths.map((pathItem) => {
+        const {path, notLocalized} = pathItem;
+
+        // Generate alternate refs for this path
+        const alternateRefs = supportedLocales
+            .filter((locale) => !locale || !notLocalized) // Include default locale always, other locales only if path is localizable
+            .map((locale) => ({
+                href: locale ? `${BASE_URL}/${locale}${path}` : `${BASE_URL}${path}`,
+                hreflang: locale || 'en',
+            }));
+
         return {
-            loc: `${BASE_URL}${path}`,
+            loc: `${BASE_URL}${path}`, // Always use the canonical (English) URL as the main loc
             changefreq: 'daily' as const,
             priority: 0.7,
-            alternateRefs: [
-                {
-                    href: `${BASE_URL}${path}`,
-                    hreflang: 'en',
-                },
-                {
-                    href: `${BASE_URL}/ru${path}`,
-                    hreflang: 'ru',
-                },
-                {
-                    href: `${BASE_URL}/zh${path}`,
-                    hreflang: 'zh',
-                },
-                {
-                    href: `${BASE_URL}/es${path}`,
-                    hreflang: 'es',
-                },
-            ],
+            alternateRefs,
         };
     });
 
