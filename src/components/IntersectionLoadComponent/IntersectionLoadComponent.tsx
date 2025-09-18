@@ -11,23 +11,11 @@ type Props<Component extends React.ComponentType> = {
     intersectionOptions?: IntersectionObserverInit;
     onIntersect?: () => void;
     onLoad?: NoInfer<(component: Component, props: React.ComponentProps<Component>) => void>;
+    wrapperClassName?: string;
 };
 
 const cache = new Map();
 
-/**
- * HOC for lazy loading component when it reaches viewport
- * @param {string} cacheKey
- * @param {function(): Promise<Component>} getComponent component import function
- * @param {function(): Promise<React.ComponentProps<Component>>} getComponentProps async function for component props; async for loading data from server by demand
- * @param {IntersectionObserverInit} intersectionOptions IntersectionObserver options
- * @param {JSX.Element} loader displaying while component is being loaded
- * @param {function(): void} onIntersect callback, fires when component reaches viewport
- * @param {function(Component, React.ComponentProps<Component>): void} onLoad callback, fires when component is loaded
- * @returns {JSX.Element} loaded component or loader
- */
-// unknown/{}/object doesn't work
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const IntersectionLoadComponent = <Component extends React.ComponentType<any>>({
     cacheKey,
     getComponent,
@@ -36,6 +24,7 @@ export const IntersectionLoadComponent = <Component extends React.ComponentType<
     intersectionOptions,
     onIntersect,
     onLoad,
+    wrapperClassName,
 }: Props<Component>) => {
     const [waitingLoad, setWaitingLoad] = React.useState(!cache.has(cacheKey));
     const [intersectionElementRef, setIntersectionElementRef] =
@@ -73,12 +62,16 @@ export const IntersectionLoadComponent = <Component extends React.ComponentType<
     if (cache.has(cacheKey)) {
         const {Component, props} = cache.get(cacheKey);
 
-        return <Component key={cacheKey} {...props} />;
+        return (
+            <div className={wrapperClassName} key={cacheKey}>
+                <Component {...props} />
+            </div>
+        );
     }
 
     if (waitingLoad) {
         return (
-            <div key={cacheKey}>
+            <div className={wrapperClassName} key={cacheKey}>
                 <div ref={setIntersectionElementRef} />
                 {loader}
             </div>
@@ -86,8 +79,8 @@ export const IntersectionLoadComponent = <Component extends React.ComponentType<
     }
 
     return (
-        <div key={cacheKey}>
-            <React.Suspense fallback={loader}>
+        <div className={wrapperClassName} key={cacheKey}>
+            <React.Suspense key={cacheKey} fallback={loader}>
                 <LazyComponent />
             </React.Suspense>
         </div>
