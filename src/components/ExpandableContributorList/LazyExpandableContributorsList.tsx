@@ -11,6 +11,8 @@ type Props = Omit<
     'cacheKey' | 'getComponent' | 'getComponentProps' | 'loader'
 >;
 
+import './ExpandableContributorList.scss';
+
 const b = block('expandable-contributor-list');
 
 const getComponent = async () => {
