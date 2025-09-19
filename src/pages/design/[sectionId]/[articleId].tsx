@@ -9,18 +9,66 @@ import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {sections as designSections} from '../../../content/design';
 import {getI18nProps} from '../../../utils/i18next';
+import {type MetaProps, getDesignArticleMeta} from '../../../utils/lib';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const sectionId = ctx.params?.sectionId as string;
+    const articleId = ctx.params?.articleId as string;
+    const locale = ctx.locale || 'en';
+
+    // Find the section and article
+    const section = designSections.find((item) => item.id === sectionId);
+    const article = section?.articles.find((item) => item.id === articleId);
+
+    if (!section || !article) {
+        return {
+            notFound: true,
+        };
+    }
+
+    // Get localized content for the article
+    const articleContent =
+        article.content[locale as keyof typeof article.content] || article.content.en;
+
+    // Get i18n props to access translations
+    const i18nProps = await getI18nProps(ctx, ['design-article', 'design-articles-info']);
+
+    // Create a temporary t function for title extraction
+    const translations =
+        i18nProps._nextI18Next?.initialI18nStore?.[locale]?.['design-articles-info'] || {};
+    const getTitle = (key: string) => translations[key] || key;
+
+    // Get localized titles
+    const sectionTitle = getTitle(`section_${sectionId}_title`);
+    const articleTitle = getTitle(`section_${sectionId}_article_${articleId}_title`);
+
+    // Generate dynamic meta description
+    const articleMeta = getDesignArticleMeta(
+        sectionTitle,
+        articleTitle,
+        articleContent,
+        `${articleTitle} design guide from Gravity UI`,
+    );
+
     return {
         props: {
-            sectionId: ctx.params?.sectionId,
-            articleId: ctx.params?.articleId,
-            ...(await getI18nProps(ctx, ['design-article', 'design-articles-info'])),
+            sectionId,
+            articleId,
+            articleMeta,
+            ...i18nProps,
         },
     };
 };
 
-export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleId: string}) => {
+export const ArticlePage = ({
+    sectionId,
+    articleId,
+    articleMeta,
+}: {
+    sectionId: string;
+    articleId: string;
+    articleMeta: MetaProps;
+}) => {
     const {i18n} = useTranslation();
 
     const section = designSections.find((item) => item.id === sectionId);
@@ -56,6 +104,7 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
             )}`}
             hideFooter
             noScroll={!isMobile}
+            meta={articleMeta}
         >
             <DesignLayout sections={sections} sectionId={sectionId} articleId={articleId}>
                 <DesignArticle article={article} sectionId={sectionId} sections={sections} />

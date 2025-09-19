@@ -13,9 +13,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default function MediaPage() {
-    const {t} = useTranslation();
+    const {t} = useTranslation(['media']);
     return (
-        <Layout title={t('media:title')} isPageConstructor>
+        <Layout
+            title={t('media:title')}
+            isPageConstructor
+            meta={{
+                description: t('media:meta_description'),
+                name: `Gravity UI – ${t('media:title')}`,
+                image: 'https://gravity-ui.com/index-social.png',
+            }}
+        >
             <Media />
         </Layout>
     );

@@ -1,6 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
-import {useTranslation} from 'next-i18next';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
@@ -10,7 +9,7 @@ import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
-import {getLibComponents, getLibraryMeta, getMaintainers} from '../../../utils';
+import {type MetaProps, getComponentMeta, getLibComponents, getMaintainers} from '../../../utils';
 import {getI18nProps} from '../../../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -48,11 +47,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         readmePromise,
     ]);
 
+    // Generate dynamic meta description from component content
+    const componentMeta = getComponentMeta(
+        {id: lib.config.id, title: lib.config.title},
+        component.title,
+        readmeContent,
+        // Fallback to component title if no description extracted
+        `${component.title} component from ${lib.config.title}`,
+    );
+
     return {
         props: {
             lib,
             componentId: ctx.params?.componentId,
             readmeContent,
+            componentMeta,
             ...i18nProps,
         },
     };
@@ -62,12 +71,13 @@ export const ComponentPage = ({
     lib,
     componentId,
     readmeContent,
+    componentMeta,
 }: {
     lib: LibWithFullData;
     componentId: string;
     readmeContent: string;
+    componentMeta: MetaProps;
 }) => {
-    const {t} = useTranslation();
     const componentsLib = libs.find((item) => item.id === lib.config.id);
     const component = componentsLib?.components.find((item) => item.id === componentId);
 
@@ -104,7 +114,7 @@ export const ComponentPage = ({
             title={`${lib.config.title} – ${component.title}`}
             hideFooter
             noScroll={!isMobile}
-            meta={getLibraryMeta({id: lib.config.id, title: lib.config.title}, t, component.title)}
+            meta={componentMeta}
         >
             <ComponentsLayout libId={lib.config.id} componentId={componentId} sections={sections}>
                 <Component
