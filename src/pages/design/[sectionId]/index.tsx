@@ -5,15 +5,55 @@ import React from 'react';
 
 import {Layout} from '../../../components/Layout/Layout';
 import {sections} from '../../../content/design';
-import {getI18nProps} from '../../../utils';
+import {type MetaProps, getDesignSectionMeta, getI18nProps} from '../../../utils';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const sectionId = ctx.params?.sectionId as string;
+    const locale = ctx.locale || 'en';
+
+    // Find the section
+    const section = sections.find((item) => item.id === sectionId);
+
+    if (!section) {
+        return {
+            notFound: true,
+        };
+    }
+
+    // Get i18n props to access translations
+    const i18nProps = await getI18nProps(ctx, ['design-articles-info']);
+
+    // Create a temporary t function for title extraction
+    const translations =
+        i18nProps._nextI18Next?.initialI18nStore?.[locale]?.['design-articles-info'] || {};
+    const getTitle = (key: string) => translations[key] || key;
+
+    // Get localized section title
+    const sectionTitle = getTitle(`section_${sectionId}_title`);
+
+    // Generate dynamic meta description for section
+    const sectionMeta = getDesignSectionMeta(
+        sectionTitle,
+        (key: string) => getTitle(key.replace('design-articles-info:', '')),
+        `${sectionTitle} design guides and principles from Gravity UI`,
+    );
+
     return {
-        props: {sectionId: ctx.params?.sectionId, ...(await getI18nProps(ctx))},
+        props: {
+            sectionId,
+            sectionMeta,
+            ...i18nProps,
+        },
     };
 };
 
-export const DesignSectionPage = ({sectionId}: {sectionId: string}) => {
+export const DesignSectionPage = ({
+    sectionId,
+    sectionMeta,
+}: {
+    sectionId: string;
+    sectionMeta: MetaProps;
+}) => {
     const {i18n} = useTranslation();
     const router = useRouter();
 
@@ -30,7 +70,7 @@ export const DesignSectionPage = ({sectionId}: {sectionId: string}) => {
     }, []);
 
     // Prevent blinking before redirect
-    return <Layout title={i18n.t(`section_${sectionId}_title`)} />;
+    return <Layout title={i18n.t(`section_${sectionId}_title`)} meta={sectionMeta} />;
 };
 
 export default DesignSectionPage;

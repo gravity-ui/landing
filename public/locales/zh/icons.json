@@ -6,6 +6,7 @@
     "actions_copySvgImport": "复制 SVG 导入",
     "actions_downloadSvg": "下载 SVG",
     "title": "图标",
+    "meta_description": "浏览、搜索和下载来自Gravity UI图标库的数百个现代SVG图标",
     "goToLibrary": "去图书馆",
     "filterPlaceholder": "按图标名称筛选",
     "keywords": "关键词",
