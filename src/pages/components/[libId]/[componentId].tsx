@@ -47,12 +47,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         readmePromise,
     ]);
 
-    // Generate dynamic meta description from component content
-    const componentMeta = getComponentMeta(
+    // Generate meta description from static config
+    const componentMeta = await getComponentMeta(
         {id: lib.config.id, title: lib.config.title},
         component.title,
-        readmeContent,
-        // Fallback to component title if no description extracted
+        component.id,
+        locale,
+        // Fallback to component title if no description found
         `${component.title} component from ${lib.config.title}`,
     );
 

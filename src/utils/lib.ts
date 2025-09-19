@@ -33,65 +33,6 @@ export type MetaProps = {
     image?: string;
 };
 
-/**
- * Extracts the first sentence from markdown content for meta descriptions
- * Supports multiple languages and their punctuation patterns
- * @param markdownContent - The markdown text to extract the first sentence from
- * @returns The first sentence extracted from the markdown content, truncated if too long
- */
-export const extractFirstSentence = (markdownContent: string): string => {
-    if (!markdownContent) {
-        return '';
-    }
-
-    // Remove markdown formatting (headers, links, code blocks, etc.)
-    const cleanText = markdownContent
-        // Remove GitHub blocks and comments
-        .replace(/<!--[\s\S]*?-->/g, '')
-        // Remove code blocks
-        .replace(/```[\s\S]*?```/g, '')
-        .replace(/`[^`]*`/g, '')
-        // Remove headers completely (don't include header text in description)
-        .replace(/#{1,6}\s+[^\n]*\n?/g, '')
-        // Remove links but keep text
-        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-        // Remove bold/italic formatting
-        .replace(/\*\*([^*]+)\*\*/g, '$1')
-        .replace(/\*([^*]+)\*/g, '$1')
-        .replace(/__([^_]+)__/g, '$1')
-        .replace(/_([^_]+)_/g, '$1')
-        // Remove HTML tags
-        .replace(/<[^>]*>/g, '')
-        // Remove extra whitespace and newlines
-        .replace(/\s+/g, ' ')
-        .trim();
-
-    if (!cleanText) {
-        return '';
-    }
-
-    // Find the first sentence with international punctuation support
-    // Supports: . ! ? (Latin), 。！？(Chinese), ।(Hindi), ؟(Arabic), etc.
-    const sentenceMatch = cleanText.match(/^[^.!?。！？।؟]*[.!?。！？।؟]/);
-    if (sentenceMatch) {
-        let firstSentence = sentenceMatch[0].trim();
-
-        // Ensure the sentence is not too long for meta description
-        if (firstSentence.length > 155) {
-            firstSentence = firstSentence.substring(0, 152) + '...';
-        }
-
-        return firstSentence;
-    }
-
-    // If no sentence ending found, take first 150 characters and add ellipsis
-    if (cleanText.length > 155) {
-        return cleanText.substring(0, 152).trim() + '...';
-    }
-
-    return cleanText;
-};
-
 export const getLibraryMeta = (
     lib: {id: string; title: string},
     t: (key: string) => string,
@@ -104,36 +45,101 @@ export const getLibraryMeta = (
     };
 };
 
-export const getComponentMeta = (
+export const getComponentMeta = async (
     lib: {id: string; title: string},
     componentTitle: string,
-    readmeContent: string,
+    componentId: string,
+    locale = 'en',
     fallbackDescription?: string,
-): MetaProps => {
-    const dynamicDescription = extractFirstSentence(readmeContent);
+): Promise<MetaProps> => {
+    let staticDescription = '';
+
+    try {
+        const fs = require('fs');
+        const path = require('path');
+        const filePath = path.join(
+            process.cwd(),
+            'public',
+            'locales',
+            locale,
+            'component-meta.json',
+        );
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const componentMeta = JSON.parse(fileContent);
+        staticDescription = componentMeta[lib.id]?.[componentId] || '';
+
+        // Fallback to English if not found in current locale
+        if (!staticDescription && locale !== 'en') {
+            const enFilePath = path.join(
+                process.cwd(),
+                'public',
+                'locales',
+                'en',
+                'component-meta.json',
+            );
+            const enFileContent = fs.readFileSync(enFilePath, 'utf8');
+            const enComponentMeta = JSON.parse(enFileContent);
+            staticDescription = enComponentMeta[lib.id]?.[componentId] || '';
+        }
+    } catch (error) {
+        console.warn(
+            `Failed to load component meta for ${lib.id}/${componentId} in locale ${locale}:`,
+            error,
+        );
+    }
 
     return {
         name: `${lib.title} – ${componentTitle}`,
         description:
-            dynamicDescription ||
+            staticDescription ||
             fallbackDescription ||
             `${componentTitle} component from ${lib.title}`,
         image: getOgImageUrl(lib.id),
     };
 };
 
-export const getDesignArticleMeta = (
+export const getDesignArticleMeta = async (
+    sectionId: string,
     sectionTitle: string,
+    articleId: string,
     articleTitle: string,
-    articleContent: string,
+    locale = 'en',
     fallbackDescription?: string,
-): MetaProps => {
-    const dynamicDescription = extractFirstSentence(articleContent);
+): Promise<MetaProps> => {
+    let staticDescription = '';
+
+    try {
+        const fs = require('fs');
+        const path = require('path');
+        const filePath = path.join(process.cwd(), 'public', 'locales', locale, 'design-meta.json');
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const designMeta = JSON.parse(fileContent);
+        staticDescription = designMeta[sectionId]?.[articleId] || '';
+
+        // Fallback to English if not found in current locale
+        if (!staticDescription && locale !== 'en') {
+            const enFilePath = path.join(
+                process.cwd(),
+                'public',
+                'locales',
+                'en',
+                'design-meta.json',
+            );
+            const enFileContent = fs.readFileSync(enFilePath, 'utf8');
+            const enDesignMeta = JSON.parse(enFileContent);
+            staticDescription = enDesignMeta[sectionId]?.[articleId] || '';
+        }
+    } catch (error) {
+        console.warn(
+            `Failed to load design meta for ${sectionId}/${articleId} in locale ${locale}:`,
+            error,
+        );
+    }
 
     return {
         name: `Gravity UI – ${sectionTitle} – ${articleTitle}`,
         description:
-            dynamicDescription ||
+            staticDescription ||
             fallbackDescription ||
             `${articleTitle} design guide from Gravity UI`,
         image: 'https://gravity-ui.com/index-social.png',
