@@ -1,11 +1,11 @@
-import {GetServerSideProps} from 'next';
-import {useTranslation} from 'next-i18next';
-import {useRouter} from 'next/router';
+import { GetServerSideProps } from 'next';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import React from 'react';
 
-import {Icons} from '../components/Icons';
-import {Layout} from '../components/Layout/Layout';
-import {getI18nProps} from '../utils/i18next';
+import { Icons } from '../components/Icons';
+import { Layout } from '../components/Layout/Layout';
+import { getI18nProps } from '../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
@@ -18,9 +18,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 const ICON_QUERY_KEY = 'icon';
 
 export const IconsPage = () => {
-    const {t} = useTranslation('icons');
+    const { t } = useTranslation('icons');
     const router = useRouter();
-    const {[ICON_QUERY_KEY]: iconFromQuery} = router.query;
+    const { [ICON_QUERY_KEY]: iconFromQuery } = router.query;
     const currentIcon = typeof iconFromQuery === 'string' ? iconFromQuery : undefined;
 
     const handleChangeCurrentIcon = React.useCallback(
@@ -33,7 +33,7 @@ export const IconsPage = () => {
                 query.delete(ICON_QUERY_KEY);
             }
 
-            router.push({pathname: router.asPath.split('?')[0], search: query.toString()});
+            router.push({ pathname: router.asPath.split('?')[0], search: query.toString() });
         },
         [router],
     );
