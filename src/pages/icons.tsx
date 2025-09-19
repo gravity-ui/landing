@@ -42,7 +42,7 @@ export const IconsPage = () => {
         <Layout
             title="Icons"
             meta={{
-                description: t('meta_description'),
+                description: t('icons:meta_description'),
                 name: 'Gravity UI – Icons',
                 image: 'https://gravity-ui.com/index-social.png',
             }}
