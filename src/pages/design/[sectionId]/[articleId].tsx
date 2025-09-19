@@ -26,10 +26,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         };
     }
 
-    // Get localized content for the article
-    const articleContent =
-        article.content[locale as keyof typeof article.content] || article.content.en;
-
     // Get i18n props to access translations
     const i18nProps = await getI18nProps(ctx, ['design-article', 'design-articles-info']);
 
@@ -42,11 +38,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const sectionTitle = getTitle(`section_${sectionId}_title`);
     const articleTitle = getTitle(`section_${sectionId}_article_${articleId}_title`);
 
-    // Generate dynamic meta description
-    const articleMeta = getDesignArticleMeta(
+    // Generate meta description from static config
+    const articleMeta = await getDesignArticleMeta(
+        sectionId,
         sectionTitle,
+        articleId,
         articleTitle,
-        articleContent,
+        locale,
         `${articleTitle} design guide from Gravity UI`,
     );
 
