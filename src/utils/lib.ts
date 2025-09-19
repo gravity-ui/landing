@@ -184,7 +184,7 @@ export const getMaintainers = (lib: LibWithFullData, path = '/'): Contributor[] 
             const maintainer = contributors.find((contributor) => contributor.login === owner);
 
             if (!maintainer) {
-                // Note: Code owner is not found in contributors list
+                console.warn(`code owner ${owner} is not a contributor`);
 
                 return {
                     login: owner,
