@@ -1,8 +1,8 @@
-import { GetServerSideProps } from 'next';
-import { useTranslation } from 'next-i18next';
-import { Layout } from 'src/components/Layout/Layout';
-import { Media } from 'src/components/Media/Media';
-import { getI18nProps } from 'src/utils';
+import {GetServerSideProps} from 'next';
+import {useTranslation} from 'next-i18next';
+import {Layout} from 'src/components/Layout/Layout';
+import {Media} from 'src/components/Media/Media';
+import {getI18nProps} from 'src/utils';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default function MediaPage() {
-    const { t } = useTranslation(['media']);
+    const {t} = useTranslation(['media']);
     return (
         <Layout
             title={t('media:title')}

@@ -15,7 +15,7 @@ export const getLibVersion = (id?: string) => {
     }
 
     try {
-        libraryVersion = (packagesVersions as any)[id];
+        libraryVersion = (packagesVersions as Record<string, string>)[id];
     } catch {
         libraryVersion = undefined;
     }
@@ -36,6 +36,8 @@ export type MetaProps = {
 /**
  * Extracts the first sentence from markdown content for meta descriptions
  * Supports multiple languages and their punctuation patterns
+ * @param markdownContent - The markdown text to extract the first sentence from
+ * @returns The first sentence extracted from the markdown content, truncated if too long
  */
 export const extractFirstSentence = (markdownContent: string): string => {
     if (!markdownContent) {
@@ -150,15 +152,16 @@ export const getDesignSectionMeta = (
             .replace(/\s+/g, '_')}`,
     );
 
+    const translationKey = `design-articles-info:section_description_${sectionTitle
+        .toLowerCase()
+        .replace(/\s+/g, '_')}`;
+    const hasValidTranslation = localizedDescription !== translationKey;
+
     return {
         name: `Gravity UI – ${sectionTitle}`,
-        description:
-            localizedDescription !==
-            `design-articles-info:section_description_${sectionTitle
-                .toLowerCase()
-                .replace(/\s+/g, '_')}`
-                ? localizedDescription
-                : fallbackDescription || `${sectionTitle} design guides and principles`,
+        description: hasValidTranslation
+            ? localizedDescription
+            : fallbackDescription || `${sectionTitle} design guides and principles`,
         image: 'https://gravity-ui.com/index-social.png',
     };
 };
@@ -181,7 +184,7 @@ export const getMaintainers = (lib: LibWithFullData, path = '/'): Contributor[] 
             const maintainer = contributors.find((contributor) => contributor.login === owner);
 
             if (!maintainer) {
-                console.warn(`code owner ${owner} is not a contributor`);
+                // Note: Code owner is not found in contributors list
 
                 return {
                     login: owner,
