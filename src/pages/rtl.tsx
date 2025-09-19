@@ -26,13 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
 };
 
-export const RTLPage = ({
-    libs,
-    contributors,
-}: {
-    libs: LibWithMetadata[];
-    contributors: Contributor[];
-}) => {
+export const RTLPage = ({libs}: {libs: LibWithMetadata[]; contributors: Contributor[]}) => {
     const {i18n} = useTranslation();
     i18n.changeLanguage(nextI18nextConfig.i18n.defaultLocale);
 
@@ -43,11 +37,7 @@ export const RTLPage = ({
                 <link rel="preload" as="image" href={backgroundAsset.src} type="image/jpeg" />
             </Head>
             <Layout isPageConstructor isRtl hideLocalePicker>
-                <Landing
-                    libs={libs}
-                    contributors={contributors}
-                    backgroundImageSrc={backgroundAsset.src}
-                />
+                <Landing libs={libs} backgroundImageSrc={backgroundAsset.src} />
             </Layout>
         </>
     );
