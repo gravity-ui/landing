@@ -20,7 +20,7 @@ const getComponent = async () => {
 };
 
 const getComponentProps = async () => {
-    const contributors = await Api.instance.fetchAllContributorsWithCache();
+    const contributors = await Api.instance.fetchAllContributorsFromClient();
 
     return {contributors};
 };

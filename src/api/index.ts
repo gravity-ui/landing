@@ -250,6 +250,11 @@ export class Api {
         return contributors;
     }
 
+    async fetchAllContributorsFromClient(): Promise<Contributor[]> {
+        const res = await fetch('api/contributors');
+        return (await res.json()).contributors;
+    }
+
     async fetchNpmInfo(npmId: string): Promise<NpmInfo | null> {
         try {
             const npmApiUrl = 'https://registry.npmjs.org/';
