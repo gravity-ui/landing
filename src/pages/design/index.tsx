@@ -33,7 +33,17 @@ export const DesignPage = () => {
     }, []);
 
     // Prevent blinking before redirect
-    return <Layout title="Design" />;
+    return (
+        <Layout
+            title="Design"
+            meta={{
+                description:
+                    'Explore Gravity UI design principles, guidelines, and best practices for building modern interfaces',
+                name: 'Gravity UI – Design System',
+                image: 'https://gravity-ui.com/index-social.png',
+            }}
+        />
+    );
 };
 
 export default DesignPage;
