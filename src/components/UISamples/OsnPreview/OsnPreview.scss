@@ -15,3 +15,7 @@ $block: '.#{variables.$ns}osn-preview';
         margin: 0;
     }
 }
+
+#{$block} [class*='pc-'] {
+    --g-color-base-background: inherit;
+}

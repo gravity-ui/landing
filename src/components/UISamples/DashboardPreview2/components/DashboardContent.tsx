@@ -59,7 +59,7 @@ export const DashboardContent = () => {
                         </Col>
                     ))}
                 </Row>
-                <Row space={2}>
+                <Row space={3}>
                     <Col style={{maxWidth: '60%'}} className={b('col')}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
@@ -81,7 +81,7 @@ export const DashboardContent = () => {
                         </Card>
                     </Col>
                 </Row>
-                <Row space={2}>
+                <Row space={3}>
                     <Col style={{flexBasis: '40%'}} className={b('col')}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
