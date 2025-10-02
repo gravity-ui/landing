@@ -1,0 +1,72 @@
+name: Update translations
+
+on:
+  workflow_dispatch:
+
+permissions: write-all
+
+env:
+  LANGUAGES: 'ko es de zh fr' # Supported languages separated by space (spaces are important)
+
+jobs:
+  prepare-inputs:
+    runs-on: ubuntu-latest
+    outputs:
+      namespaces: ${{ steps.extract-namespaces.outputs.namespaces }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract namespaces
+        id: extract-namespaces
+        run: |
+          FILES=$(ls public/locales/en/ | sed 's/\.json$//')
+          NAMESPACES_ARRAY=$(echo "$FILES" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "namespaces=$NAMESPACES_ARRAY" >> $GITHUB_OUTPUT
+
+  translations:
+    needs: prepare-inputs
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        namespace: ${{ fromJson(needs.prepare-inputs.outputs.namespaces) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Prepare inputs for ${{ matrix.namespace }}
+        id: prepare-inputs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NAMESPACE: ${{ matrix.namespace }}
+        run: |
+          INPUT_FILE="public/locales/en/${NAMESPACE}.json"
+
+          echo "Processing namespace: $NAMESPACE"
+          echo "INPUT file: $INPUT_FILE"
+
+          OUTPUT_FILES=""
+          for LANGUAGE in ${{ env.LANGUAGES }}; do
+              OUTPUT_FILES="$OUTPUT_FILES public/locales/${LANGUAGE}/${NAMESPACE}.json"
+          done
+
+          echo "Output files: $OUTPUT_FILES"
+
+          echo "input_files=$INPUT_FILE" >> $GITHUB_OUTPUT
+          echo "output_files=$OUTPUT_FILES" >> $GITHUB_OUTPUT
+      - name: Run translations
+        uses: dgaponov/gpt-translate@master
+        with:
+          provider: 'openrouter'
+          apikey: ${{ secrets.OPENROUTER_API_KEY }}
+          model: 'x-ai/grok-4-fast:free'
+          inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
+          outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
+          languages: ${{ env.LANGUAGES }}
+          commitMessage: 'i18n: translations for namespace ${{ matrix.namespace }}'
+          pullRequestTitle: 'i18n: translations for namespace ${{ matrix.namespace }}'
+          prompt: |
+            Please translate the json source file to {targetLanguage}. \
+            Make the translation sound as natural as possible. \
+            Do not translate the library name in the source file if it looks like the name of the library. \
+            For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
