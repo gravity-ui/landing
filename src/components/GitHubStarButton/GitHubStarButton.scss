@@ -1,0 +1,39 @@
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}github-star-button';
+
+#{$block} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: opacity 0.2s ease;
+    background: rgba(255, 255, 255, 1);
+    color: var(--g-color-text-dark-primary);
+    height: 36px;
+    width: 136px;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 8px;
+        border: none;
+        color: var(--g-color-text-dark-primary);
+    }
+
+    &__divider {
+        width: 1px;
+        background: rgba(217, 217, 217, 1);
+        height: 20px;
+    }
+
+    &__count {
+        padding: 5px 8px;
+    }
+}

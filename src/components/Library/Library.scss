@@ -12,6 +12,7 @@ $block: '.#{variables.$ns}library';
         & &__header-grid {
             .container-fluid {
                 padding: 0;
+
                 .col {
                     padding: 0;
                 }
@@ -243,6 +244,48 @@ $block: '.#{variables.$ns}library';
         &:hover {
             opacity: 0.8;
         }
+    }
+
+    &__info-item_github-star {
+        padding: 16px;
+
+        &:first-child {
+            margin-top: 16px;
+        }
+    }
+
+    &__github-star-content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    &__github-star-text {
+        display: flex;
+        width: 100%;
+    }
+
+    &__github-star-mobile {
+        display: none;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+            display: flex;
+            justify-content: center;
+            padding-right: 16px;
+
+            &_mobile-invisible {
+                display: none;
+            }
+        }
+    }
+
+    &__github-star-title {
+        font-size: 13px;
+        line-height: 18px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
     }
 
     &__contributors-content {
