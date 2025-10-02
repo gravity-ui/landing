@@ -1,0 +1,41 @@
+name: Update packages readme
+
+on:
+  workflow_dispatch:
+#  schedule:
+#    - cron: 5,10,15,20,25,30,35,40,45,50,55 * * * *
+
+jobs:
+  update-packages-readme:
+    permissions:
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    outputs:
+      modified_readme_files: ${{ steps.update-readme.outputs.modified_readme_files }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Update packages readme
+        id: update-readme
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run update-packages-readme
+
+          MODIFIED_README_FILES=$(git diff --name-only | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
+          echo "modified_readme_files=$(echo "$MODIFIED_README_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+
+          git config user.email ""
+          git config user.name "Update packages readme action"
+          git checkout -b update-packages-readme
+          git add src/content/local-docs/libs/*/README.md
+
+          export COMMIT_MESSAGE="docs: update packages readme"
+          git commit -m "$COMMIT_MESSAGE"
+          git push --set-upstream origin update-packages-readme --force
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov"
