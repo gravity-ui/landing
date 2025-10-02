@@ -14,4 +14,8 @@ $block: '.#{variables.$ns}osn-preview';
     & .pc-Grid .row .row {
         margin: 0;
     }
+
+    & [class*='pc-'] {
+        --g-color-base-background: inherit;
+    }
 }
