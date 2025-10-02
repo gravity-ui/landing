@@ -3,7 +3,6 @@
 > [Migration Guide from 0.x to 1.x →](docs/migration-guides/v0-to-v1.md)
 
 A graph visualization library that combines the best of both worlds:
-
 - Canvas for high performance when viewing the full graph
 - HTML/React for rich interactions when zoomed in
 
@@ -17,7 +16,6 @@ Modern web applications often require complex visualization and interactivity, b
 - **HTML DOM** is convenient for interfaces but less efficient for complex graphics or large numbers of elements.
 
 @gravity-ui/graph solves this by automatically switching between Canvas and HTML based on zoom level:
-
 - **Zoomed Out**: Uses Canvas for efficient rendering of the full graph
 - **Medium Zoom**: Shows schematic view with basic interactivity
 - **Zoomed In**: Switches to HTML/React components for rich interactions
@@ -40,7 +38,12 @@ const MyGraph = () => {
   return (
     <GraphCanvas
       graph={graph}
-      renderBlock={(graph, block) => <MyCustomBlockComponent graph={graph} block={block} />}
+      renderBlock={(graph, block) => (
+        <MyCustomBlockComponent 
+          graph={graph} 
+          block={block}
+        />
+      )}
     />
   );
 };
@@ -61,82 +64,78 @@ npm install @gravity-ui/graph
 [Detailed React Components Documentation](docs/react/usage.md)
 
 ```typescript
-import {EAnchorType, Graph, GraphState} from '@gravity-ui/graph';
-import {GraphCanvas, GraphBlock, useGraph} from '@gravity-ui/graph/react';
-import React from 'react';
+import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+import React from "react";
 
 const config = {};
 
 export function GraphEditor() {
-  const {graph, setEntities, start} = useGraph(config);
+  const { graph, setEntities, start } = useGraph(config);
 
   useEffect(() => {
     setEntities({
       blocks: [
         {
-          is: 'block-action',
-          id: 'action_1',
+          is: "block-action",
+          id: "action_1",
           x: -100,
           y: -450,
           width: 126,
           height: 126,
           selected: true,
-          name: 'Block #1',
+          name: "Block #1",
           anchors: [
             {
-              id: 'out1',
-              blockId: 'action_1',
+              id: "out1",
+              blockId: "action_1",
               type: EAnchorType.OUT,
-              index: 0,
-            },
+              index: 0
+            }
           ],
         },
         {
-          id: 'action_2',
-          is: 'block-action',
+          id: "action_2",
+          is: "block-action",
           x: 253,
           y: 176,
           width: 126,
           height: 126,
           selected: false,
-          name: 'Block #2',
+          name: "Block #2",
           anchors: [
             {
-              id: 'in1',
-              blockId: 'action_2',
+              id: "in1",
+              blockId: "action_2",
               type: EAnchorType.IN,
-              index: 0,
-            },
+              index: 0
+            }
           ],
-        },
+        }
       ],
       connections: [
         {
-          sourceBlockId: 'action_1',
-          sourceAnchorId: 'out1',
-          targetBlockId: 'action_2',
-          targetAnchorId: 'in1',
-        },
-      ],
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        }
+      ]
     });
   }, [setEntities]);
 
   const renderBlockFn = (graph, block) => {
-    return (
-      <GraphBlock graph={graph} block={block}>
-        {block.id}
-      </GraphBlock>
-    );
+    return <GraphBlock graph={graph} block={block}>{block.id}</GraphBlock>;
   };
 
   return (
     <GraphCanvas
       graph={graph}
       renderBlock={renderBlockFn}
-      onStateChanged={({state}) => {
+      onStateChanged={({ state }) => {
         if (state === GraphState.ATTACHED) {
           start();
-          graph.zoomTo('center', {padding: 300});
+          graph.zoomTo("center", { padding: 300 });
         }
       }}
     />
@@ -147,7 +146,7 @@ export function GraphEditor() {
 ### Vanilla JavaScript Example
 
 ```javascript
-import {Graph} from '@gravity-ui/graph';
+import { Graph } from "@gravity-ui/graph";
 
 // Create container element
 const container = document.createElement('div');
@@ -157,74 +156,71 @@ container.style.overflow = 'hidden';
 document.body.appendChild(container);
 
 // Initialize graph with configuration
-const graph = new Graph(
-  {
-    configurationName: 'example',
+const graph = new Graph({
+    configurationName: "example",
     blocks: [],
     connections: [],
     settings: {
-      canDragCamera: true,
-      canZoomCamera: true,
-      useBezierConnections: true,
-      showConnectionArrows: true,
-    },
-  },
-  container,
-);
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
 
 // Add blocks and connections
 graph.setEntities({
-  blocks: [
-    {
-      is: 'block-action',
-      id: 'block1',
-      x: 100,
-      y: 100,
-      width: 120,
-      height: 120,
-      name: 'Block #1',
-      anchors: [
+    blocks: [
         {
-          id: 'out1',
-          blockId: 'block1',
-          type: EAnchorType.OUT,
-          index: 0,
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
         },
-      ],
-    },
-    {
-      is: 'block-action',
-      id: 'block2',
-      x: 300,
-      y: 300,
-      width: 120,
-      height: 120,
-      name: 'Block #2',
-      anchors: [
         {
-          id: 'in1',
-          blockId: 'block2',
-          type: EAnchorType.IN,
-          index: 0,
-        },
-      ],
-    },
-  ],
-  connections: [
-    {
-      sourceBlockId: 'block1',
-      sourceAnchorId: 'out1',
-      targetBlockId: 'block2',
-      targetAnchorId: 'in1',
-    },
-  ],
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
 });
 
 // Start rendering
 graph.start();
 
 // Center the view
-graph.zoomTo('center', {padding: 100});
+graph.zoomTo("center", { padding: 100 });
 ```
 
 ## Live Examples
@@ -240,7 +236,6 @@ graph.zoomTo('center', {padding: 100});
 ### Table of Contents
 
 1. System
-
    - [Component Lifecycle](docs/system/component-lifecycle.md)
    - [Events](docs/system/events.md)
    - [Graph Settings](docs/system/graph-settings.md)
@@ -248,13 +243,11 @@ graph.zoomTo('center', {padding: 100});
    - [Scheduler System](docs/system/scheduler-system.md)
 
 2. Components
-
    - [Canvas Graph Component](docs/components/canvas-graph-component.md)
    - [Block Component](docs/components/block-component.md)
    - [Anchors](docs/components/anchors.md)
 
 3. Rendering
-
    - [Rendering Mechanism](docs/rendering/rendering-mechanism.md)
    - [Layers](docs/rendering/layers.md)
 

@@ -608,12 +608,15 @@ const ConditionalDataComponent: React.FC<{
   shouldLoadPosts: boolean;
 }> = ({userId, shouldLoadPosts}) => {
   // Load user only if userId is defined
-  const user = useQueryData(userDataSource, userId ? {userId} : idle);
+  const user = useQueryData(
+    userDataSource,
+    userId ? {userId} : idle
+  );
 
   // Load posts only if user is loaded and flag is enabled
   const posts = useQueryData(
     userPostsDataSource,
-    user.data && shouldLoadPosts ? {userId: user.data.id} : idle,
+    user.data && shouldLoadPosts ? {userId: user.data.id} : idle
   );
 
   const combined = useQueryResponses([user, posts]);
@@ -688,7 +691,11 @@ const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
   <div className="error">
     <h3>Error {error?.code}</h3>
     <p>{error?.message}</p>
-    {action && <button onClick={action.handler}>{action.children || 'Retry'}</button>}
+    {action && (
+      <button onClick={action.handler}>
+        {action.children || 'Retry'}
+      </button>
+    )}
   </div>
 );
 ```

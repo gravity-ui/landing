@@ -25,12 +25,12 @@ Plugins are required to create custom widgets.
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-  layout: Layouts;
-  oldItem: Layout;
-  newItem: Layout;
-  placeholder: Layout;
-  e: MouseEvent;
-  element: HTMLElement;
+    layout: Layouts;
+    oldItem: Layout;
+    newItem: Layout;
+    placeholder: Layout;
+    e: MouseEvent;
+    element: HTMLElement;
 }) => void;
 
 interface DashKitProps {
@@ -382,9 +382,9 @@ type MenuItem = {
 };
 
 // use array of menu items in settings
-<Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />;
+<Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
 
-[deprecated];
+[deprecated]
 // overlayMenuItems property has greater priority over setSettings menu
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
@@ -406,10 +406,7 @@ interface DashKitDnDWrapperProps {
   dragImageSrc?: string;
   onDragStart?: (dragProps: ItemDragProps) => void;
   onDragEnd?: () => void;
-  onDropDragOver?: (
-    draggedItem: DraggedOverItem,
-    sharedItem: DraggedOverItem | null,
-  ) => void | boolean;
+  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean;
 }
 ```
 
@@ -419,24 +416,24 @@ interface DashKitDnDWrapperProps {
 
 ```ts
 type ItemDragProps = {
-  type: string; // Plugin type
-  layout?: {
-    // Optional. Layout item size for preview and init
-    w?: number;
-    h?: number;
-  };
-  extra?: any; // Custom user context
+    type: string; // Plugin type
+    layout?: { // Optional. Layout item size for preview and init
+        w?: number;
+        h?: number;
+    };
+    extra?: any; // Custom user context
 };
 ```
 
 ```ts
 type ItemDropProps = {
-  commit: () => void; // Callback should be called after all config operations are made
-  dragProps: ItemDragProps; // Item drag props
-  itemLayout: ConfigLayout; // Calculated item layout dimensions
-  newLayout: ConfigLayout[]; // New layout after element is dropped
+    commit: () => void; // Callback should be called after all config operations are made
+    dragProps: ItemDragProps; // Item drag props
+    itemLayout: ConfigLayout; // Calculated item layout dimensions
+    newLayout: ConfigLayout[]; // New layout after element is dropped
 };
 ```
+
 
 #### Example:
 
@@ -447,22 +444,21 @@ const overlayMenuItems = [
     icon: <Icon data={ChartColumn} />,
     title: 'Chart',
     qa: 'chart',
-    dragProps: {
-      // ItemDragProps
-      type: 'custom', // Registered plugin type
+    dragProps: { // ItemDragProps
+        type: 'custom', // Registered plugin type
     },
-  },
-];
+  }
+]
 
 const onDrop = (dropProps: ItemDropProps) => {
   // ... add element to your config
   dropProps.commit();
-};
+}
 
 <DashKitDnDWrapper>
   <DashKit editMode={true} config={config} onChange={onChange} onDrop={onDrop} />
   <ActionPanel items={overlayMenuItems} />
-</DashKitDnDWrapper>;
+</DashKitDnDWrapper>
 ```
 
 ### CSS API
@@ -530,6 +526,7 @@ const CustomThemeWrapper = (props: {
 
 By default, storybook runs on `http://localhost:7120/`.
 New changes from a project aren't always picked up when storybook is running, so it's better to rebuild a project manually and restart storybook.
+
 
 ### Example of an nginx config for development on a dev machine
 

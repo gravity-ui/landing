@@ -13,107 +13,107 @@ A plugin for Webpack that replaces calls to localization functions (i18n) with t
 
 1. Install the package:
 
-   ```sh
-   npm i -D @gravity-ui/webpack-i18n-assets-plugin
-   ```
+    ```sh
+    npm i -D @gravity-ui/webpack-i18n-assets-plugin
+    ```
 
 2. Connect the plugin to Webpack (example for `@gravity-ui/app-builder`):
 
-   Example for webpack config (`webpack.config.js`):
+    Example for webpack config (`webpack.config.js`):
 
-   ```js
-   const {I18nAssetsPlugin} = require('@gravity-ui/webpack-i18n-assets-plugin');
+    ```js
+    const {I18nAssetsPlugin} = require('@gravity-ui/webpack-i18n-assets-plugin');
 
-   // For example. Read all files with localized texts and store in this mapping
-   const locales = {
-     en: {},
-     ru: {},
-     tr: {},
-   };
+    // For example. Read all files with localized texts and store in this mapping
+    const locales = {
+        en: {},
+        ru: {},
+        tr: {},
+    };
 
-   module.exports = {
-     output: {
-       filename: '[name].[locale].js', // [locale] is required in filename
-     },
+    module.exports = {
+        output: {
+            filename: '[name].[locale].js', // [locale] is required in filename
+        },
 
-     plugins: [
-       new I18nAssetsPlugin({
-         locales,
-       }),
-     ],
-   };
-   ```
+        plugins: [
+            new I18nAssetsPlugin({
+                locales
+            })
+        ]
+    }
+    ```
 
-   Example if you want create assets manifests for each locale (`webpack.config.js`):
+    Example if you want create assets manifests for each locale (`webpack.config.js`):
 
-   ```js
-   const {applyPluginToWebpackConfig} = require('@gravity-ui/webpack-i18n-assets-plugin');
+    ```js
+    const {applyPluginToWebpackConfig} = require('@gravity-ui/webpack-i18n-assets-plugin');
 
-   const locales = {
-       en: {},
-       ru: {},
-       tr: {},
-   };
+    const locales = {
+        en: {},
+        ru: {},
+        tr: {},
+    };
 
-   // Some exist webpack config
-   const webpackConfig = {
-       plugins: [ ... ],
-       ...
-   };
+    // Some exist webpack config
+    const webpackConfig = {
+        plugins: [ ... ],
+        ...
+    };
 
-   // When using applyPluginToWebpackConfig, the WebpackAssetsManifest plugin will also be connected,
-   // which will generate assets manifests for each locale.
-   module.exports = applyPluginToWebpackConfig(webpackConfig, {locales});
-   ```
+    // When using applyPluginToWebpackConfig, the WebpackAssetsManifest plugin will also be connected,
+    // which will generate assets manifests for each locale.
+    module.exports = applyPluginToWebpackConfig(webpackConfig, {locales});
+    ```
 
-   Example if you use `@gravity-ui/app-builder`:
+    Example if you use `@gravity-ui/app-builder`:
 
-   ```typescript
-   import type {ServiceConfig} from '@gravity-ui/app-builder';
-   import {applyPluginToWebpackConfig, Options} from '@gravity-ui/webpack-i18n-assets-plugin';
+    ```typescript
+    import type {ServiceConfig} from '@gravity-ui/app-builder';
+    import {applyPluginToWebpackConfig, Options} from '@gravity-ui/webpack-i18n-assets-plugin';
 
-   const locales = {
-     en: {},
-     ru: {},
-     tr: {},
-   };
+    const locales = {
+        en: {},
+        ru: {},
+        tr: {},
+    };
 
-   // When using applyPluginToWebpackConfig, the WebpackAssetsManifest plugin will also be connected,
-   // which will generate assets manifests for each locale.
-   const config: ServiceConfig = {
-     client: {
-       webpack: (originalConfig) => applyPluginToWebpackConfig(originalConfig, {locales}),
-     },
-   };
-   ```
+    // When using applyPluginToWebpackConfig, the WebpackAssetsManifest plugin will also be connected,
+    // which will generate assets manifests for each locale.
+    const config: ServiceConfig = {
+        client: {
+            webpack: (originalConfig) => applyPluginToWebpackConfig(originalConfig, {locales}),
+        },
+    }
+    ```
 
 3. Configure dynamic statics from the asset manifest on the server (example with `@gravity-ui/app-layout`):
 
-   ```typescript
-   import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
+    ```typescript
+    import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-   const renderLayout = createRenderFunction([
-     createLayoutPlugin({
-       manifest: ({lang = 'en'}) => {
-         return `assets-manifest.${lang}.json`;
-       },
-       publicPath: '/build/',
-     }),
-   ]);
+    const renderLayout = createRenderFunction([
+        createLayoutPlugin({
+            manifest: ({lang = 'en'}) => {
+                return `assets-manifest.${lang}.json`;
+            },
+            publicPath: '/build/',
+        }),
+    ]);
 
-   app.get((req, res) => {
-     res.send(
-       renderLayout({
-         title: 'Home page',
-         pluginsOptions: {
-           layout: {
-             name: 'home',
-           },
-         },
-       }),
-     );
-   });
-   ```
+    app.get((req, res) => {
+        res.send(
+            renderLayout({
+                title: 'Home page',
+                pluginsOptions: {
+                    layout: {
+                        name: 'home',
+                    },
+                },
+            }),
+        );
+    });
+    ```
 
 ## 🔧 Settings
 
@@ -130,37 +130,33 @@ The signature is similar to the original [importSpecifier](https://webpack.js.or
 Example:
 
 ```typescript
-const importResolver = (
-  source: string,
-  exportName: string,
-  _identifierName: string,
-  module: string,
-) => {
-  // If you need to ignore processing modules based on specific paths, you can handle such a case this way.
-  if (module.startsWith('src/units/compute')) {
+const importResolver = (source: string, exportName: string, _identifierName: string, module: string) => {
+    // If you need to ignore processing modules based on specific paths, you can handle such a case this way.
+    if (module.startsWith('src/units/compute')) {
+        return undefined;
+    }
+
+    // Processing the default import of a global function
+    // import i18n from 'ui/utils/i18n'
+    if (source === 'ui/utils/i18n' && exportName === 'default') {
+        return {
+            resolved: true,
+            keyset: undefined,
+        };
+    }
+
+    // Processing the import of a helper function and specifying that it belongs to the common keyset (namespace).
+    // import {ci18n} from 'ui/utils/i18n'
+    if (source === 'ui/utils/i18n' && exportName === 'ci18n') {
+        return {
+            resolved: true,
+            keyset: 'common',
+        };
+    }
+
     return undefined;
-  }
-
-  // Processing the default import of a global function
-  // import i18n from 'ui/utils/i18n'
-  if (source === 'ui/utils/i18n' && exportName === 'default') {
-    return {
-      resolved: true,
-      keyset: undefined,
-    };
-  }
-
-  // Processing the import of a helper function and specifying that it belongs to the common keyset (namespace).
-  // import {ci18n} from 'ui/utils/i18n'
-  if (source === 'ui/utils/i18n' && exportName === 'ci18n') {
-    return {
-      resolved: true,
-      keyset: 'common',
-    };
-  }
-
-  return undefined;
 };
+
 ```
 
 ### declarationResolver
@@ -175,25 +171,25 @@ Example:
 import type {VariableDeclarator} from 'estree';
 
 const declarationResolver = (declarator: VariableDeclarator, module: string) => {
-  // If you need to ignore processing modules based on specific paths, you can handle such a case this way.
-  if (module.startsWith('src/units/compute')) {
+    // If you need to ignore processing modules based on specific paths, you can handle such a case this way.
+    if (module.startsWith('src/units/compute')) {
+        return undefined;
+    }
+
+    // Processing function declarations like const i18nK = i18n.bind(null, 'keyset');
+    if (
+        declarator.id.type === 'Identifier' &&
+        declarator.id.name.startsWith('i18n') &&
+        declarator.init &&
+        isI18nBind(declarator.init)
+    ) {
+        return {
+            functionName: declarator.id.name,
+            keyset: getKeysetFromBind(declarator.init),
+        };
+    }
+
     return undefined;
-  }
-
-  // Processing function declarations like const i18nK = i18n.bind(null, 'keyset');
-  if (
-    declarator.id.type === 'Identifier' &&
-    declarator.id.name.startsWith('i18n') &&
-    declarator.init &&
-    isI18nBind(declarator.init)
-  ) {
-    return {
-      functionName: declarator.id.name,
-      keyset: getKeysetFromBind(declarator.init),
-    };
-  }
-
-  return undefined;
 };
 ```
 
@@ -296,54 +292,52 @@ const i18nK = i18n.bind(null, 'component.navigation');
 // The replacer handles calls to identifiers found by the importResolver and declarationResolver
 // This means the following calls will be processed:
 i18nK('some_key');
-i18nK('some_plural_key', {count: 123});
-i18nK('some_key_with_param', {someParam: 'hello'});
+i18nK('some_plural_key', { count: 123 });
+i18nK('some_key_with_param', { someParam: 'hello' });
 i18n('component.navigation', 'some_key');
-i18n('component.navigation', 'some_plural_key', {count: 123});
-i18n('component.navigation', 'some_key_with_param', {someParam: 'hello'});
+i18n('component.navigation', 'some_plural_key', { count: 123 });
+i18n('component.navigation', 'some_key_with_param', { someParam: 'hello' });
 ```
 
 The Replacer additionally performs the following:
 
 1. Inline the parameters into a string. For example, if the key value is as follows:
 
-   ```typescript
-   const keyset = {
-     some_key: 'string value with {{param}}',
-   };
+    ```typescript
+    const keyset = {
+        some_key: 'string value with {{param}}'
+    };
 
-   i18nK('some_key', {param: getSomeParam()})// After the replacements, we will get:
-   `string value with ${getSomeParam()}`;
-   ```
+    i18nK('some_key', {param: getSomeParam()})
+    // After the replacements, we will get:
+    `string value with ${getSomeParam()}`
+    ```
 
 2. Substitutes a self-invoking function for plural keys:
 
-   ```typescript
-   const keyset = {
-     pural_key: [
-       'one_form {{count}}',
-       'few_form {{count}}',
-       'many_form {{count}}',
-       'other_form {{count}}',
-     ],
-   };
+    ```typescript
+    const keyset = {
+        pural_key: [
+            'one_form {{count}}',
+            'few_form {{count}}',
+            'many_form {{count}}',
+            'other_form {{count}}',
+        ],
+    };
 
-   i18nK('pural_key', {count: getSomeCount()})(
-     // After the replacements, we will get:
-     function (f, c) {
-       const v = f[!c ? 'zero' : new Intl.PluralRules('${locale}').select(c)];
-       return v && v.replaceAll('{{count}}', c);
-     },
-   )(
-     {
-       one: 'one_form {{count}}',
-       few: 'few_form {{count}}',
-       many: 'many_form {{count}}',
-       other: 'other_form {{count}}',
-     },
-     getSomeCount(),
-   );
-   ```
+    i18nK('pural_key', {count: getSomeCount()})
+
+    // After the replacements, we will get:
+    (function(f,c){
+        const v=f[!c ? "zero" : new Intl.PluralRules("${locale}").select(c)];
+        return v && v.replaceAll("{{count}}",c);
+    })({
+        "one": "one_form {{count}}",
+        "few": "few_form {{count}}",
+        "many": "many_form {{count}}",
+        "other": "other_form {{count}}"
+    }, getSomeCount())
+    ```
 
 ## ℹ️ FAQ
 

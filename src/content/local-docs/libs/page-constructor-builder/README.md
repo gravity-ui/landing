@@ -154,7 +154,11 @@ interface CustomBlockProps {
   className?: string;
 }
 
-export const CustomBlock: React.FC<CustomBlockProps> = ({title, content, className = ''}) => {
+export const CustomBlock: React.FC<CustomBlockProps> = ({
+  title,
+  content,
+  className = ''
+}) => {
   return (
     <div className={`custom-block ${className}`}>
       <h2>{title}</h2>

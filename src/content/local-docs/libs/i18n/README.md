@@ -18,11 +18,11 @@ Accepts `options` object with optional `logger` that would be used for logging l
 
 Logger should have explicit `log` method with following signature:
 
-- `message` - string of message that would be logged
-- `options` - object of logging options:
-  - `level` - level for logging message, always `'info'`
-  - `logger` - where to log library messages
-  - `extra` - additional options object, with a single `type` string, that is always `i18n`
+ * `message` - string of message that would be logged
+ * `options` - object of logging options:
+   * `level` - level for logging message, always `'info'`
+   * `logger` - where to log library messages
+   * `extra` - additional options object, with a single `type` string, that is always `i18n`
 
 ### Use examples
 
@@ -59,21 +59,30 @@ i18n.registerKeysets('ru', ru);
 i18n.registerKeysets('en', en);
 
 i18n.setLang('ru');
-console.log(i18n.i18n('wizard', 'label_error-widget-no-access')); // -> "Нет доступа к чарту"
+console.log(
+    i18n.i18n('wizard', 'label_error-widget-no-access')
+); // -> "Нет доступа к чарту"
 
 i18n.setLang('en');
-console.log(i18n.i18n('wizard', 'label_error-widget-no-access')); // -> "No access to the chart
+console.log(
+    i18n.i18n('wizard', 'label_error-widget-no-access')
+); // -> "No access to the chart
 
 // Keyset allows for a simpler translations retrieval
 const keyset = i18n.keyset('wizard');
-console.log(keyset('label_error-widget-no-access')); // -> "No access to the chart"
+console.log(
+    keyset('label_error-widget-no-access')
+); // -> "No access to the chart"
+
 
 i18n.setLang('ru');
-console.log(keyset('label_error-widget-no-access')); // -> "Нет доступа к чарту"
+console.log(
+    keyset('label_error-widget-no-access')
+); // -> "Нет доступа к чарту"
 
 // Checking if keyset has a key
 if (i18n.has('wizard', 'label_error-widget-no-access')) {
-  i18n.i18n('wizard', 'label_error-widget-no-access');
+    i18n.i18n('wizard', 'label_error-widget-no-access')
 }
 ```
 
@@ -92,7 +101,7 @@ The library supports templating. Templated variables are enclosed in double curl
 #### `index.js`
 
 ```js
-i18n('label_template', {inputValue: 'something', folderName: 'somewhere'}); // => No matches found for "something" in "somewhere"
+i18n('label_template', {inputValue: 'something', folderName: 'somewhere'});  // => No matches found for "something" in "somewhere"
 ```
 
 ### Pluralization
@@ -116,7 +125,7 @@ There are 6 plural forms (see [resolvedOptions](https://developer.mozilla.org/en
 {
   "label_seconds": {
     "one": "{{count}} second is left",
-    "other": "{{count}} seconds are left",
+    "other":"{{count}} seconds are left",
     "zero": "No time left"
   }
 }
@@ -125,11 +134,11 @@ There are 6 plural forms (see [resolvedOptions](https://developer.mozilla.org/en
 #### Usage in JS
 
 ```js
-i18n('label_seconds', {count: 1}); // => 1 second
-i18n('label_seconds', {count: 3}); // => 3 seconds
-i18n('label_seconds', {count: 7}); // => 7 seconds
+i18n('label_seconds', {count: 1});  // => 1 second
+i18n('label_seconds', {count: 3});  // => 3 seconds
+i18n('label_seconds', {count: 7});  // => 7 seconds
 i18n('label_seconds', {count: 10}); // => 10 seconds
-i18n('label_seconds', {count: 0}); // => No time left
+i18n('label_seconds', {count: 0});  // => No time left
 ```
 
 #### [Deprecated] Old plurals format
@@ -138,12 +147,7 @@ Old format will be removed in v2.
 
 ```json
 {
-  "label_seconds": [
-    "{{count}} second is left",
-    "{{count}} seconds are left",
-    "{{count}} seconds are left",
-    "No time left"
-  ]
+  "label_seconds": ["{{count}} second is left", "{{count}} seconds are left", "{{count}} seconds are left", "No time left"]
 }
 ```
 
@@ -178,20 +182,18 @@ The two languages supported out of the box are English and Russian.
 ##### English
 
 Language key: `en`.
-
-- `One` corresponds to 1 and -1.
-- `Few` is not used.
-- `Many` corresponds to any other number, except 0.
-- `None` corresponds to 0.
+* `One` corresponds to 1 and -1.
+* `Few` is not used.
+* `Many` corresponds to any other number, except 0.
+* `None` corresponds to 0.
 
 ##### Russian
 
 Language key: `ru`.
-
-- `One` corresponds to any number ending in 1, except ±11.
-- `Few` corresponds to any number ending in 2, 3 or 4, except ±12, ±13 and ±14.
-- `Many` corresponds to any other number, except 0.
-- `None` corresponds to 0.
+* `One` corresponds to any number ending in 1, except ±11.
+* `Few` corresponds to any number ending in 2, 3 or 4, except ±12, ±13 and ±14.
+* `Many` corresponds to any other number, except 0.
+* `None` corresponds to 0.
 
 ##### Default
 
@@ -219,7 +221,7 @@ keys
 ```json
 {
   "nesting1": "1 $t{nesting2}",
-  "nesting2": "2"
+  "nesting2": "2",
 }
 ```
 
@@ -229,8 +231,7 @@ sample
 i18n('nesting1'); // -> "1 2"
 ```
 
-You can reference keys from other keyset by prepending the keysetName:
-
+You can reference keys from other keyset by prepending the keysetName: 
 ```json
 // global/en.json
 {
@@ -253,36 +254,36 @@ Prepare a JSON keyset file so that the typing procedure can fetch data. Where yo
 
 ```ts
 async function createFiles(keysets: Record<Lang, LangKeysets>) {
-  await mkdirp(DEST_PATH);
+    await mkdirp(DEST_PATH);
 
-  const createFilePromises = Object.keys(keysets).map((lang) => {
-    const keysetsJSON = JSON.stringify(keysets[lang as Lang], null, 4);
-    const content = umdTemplate(keysetsJSON);
-    const hash = getContentHash(content);
-    const filePath = path.resolve(DEST_PATH, `${lang}.${hash.slice(0, 8)}.js`);
+    const createFilePromises = Object.keys(keysets).map((lang) => {
+        const keysetsJSON = JSON.stringify(keysets[lang as Lang], null, 4);
+        const content = umdTemplate(keysetsJSON);
+        const hash = getContentHash(content);
+        const filePath = path.resolve(DEST_PATH, `${lang}.${hash.slice(0, 8)}.js`);
 
-    // <New lines>
-    let typesPromise;
+        // <New lines>
+        let typesPromise;
 
-    if (lang === 'ru') {
-      const keyset = keysets[lang as Lang];
-      Object.keys(keyset).forEach((keysetName) => {
-        const keyPhrases = keyset[keysetName];
-        Object.keys(keyPhrases).forEach((keyName) => {
-          // mutate object!
-          keyPhrases[keyName] = 'str';
-        });
-      });
+        if (lang === 'ru') {
+            const keyset = keysets[lang as Lang];
+            Object.keys(keyset).forEach((keysetName) => {
+                const keyPhrases = keyset[keysetName];
+                Object.keys(keyPhrases).forEach((keyName) => {
+                    // mutate object!
+                    keyPhrases[keyName] = 'str';
+                });
+            });
 
-      const JSONForTypes = JSON.stringify(keyset, null, 4);
-      typesPromise = writeFile(path.resolve(DEST_PATH, `data.json`), JSONForTypes, 'utf-8');
-    }
-    // </New lines>
+            const JSONForTypes = JSON.stringify(keyset, null, 4);
+            typesPromise = writeFile(path.resolve(DEST_PATH, `data.json`), JSONForTypes, 'utf-8');
+        }
+        // </New lines>
 
-    return Promise.all([typesPromise, writeFile(filePath, content, 'utf-8')]);
-  });
+        return Promise.all([typesPromise, writeFile(filePath, content, 'utf-8')]);
+    });
 
-  await Promise.all(createFilePromises);
+    await Promise.all(createFilePromises);
 }
 ```
 
@@ -324,7 +325,7 @@ const someUncomputebleString = `label_random-index-${Math.floor(Math.random() * 
 i18n('some_service', someUncomputebleString); // ok
 
 for (let i = 0; i < 4; i++) {
-  i18n('some_service', `label_random-index-${i}`); // ok
+    i18n('some_service', `label_random-index-${i}`); // ok
 }
 ```
 
@@ -333,12 +334,12 @@ for (let i = 0; i < 4; i++) {
 ```ts
 const labelColors = ['red', 'green', 'yelllow', 'white'] as const;
 for (let i = 0; i < 4; i++) {
-  i18n('some_service', `label_color-${labelColors[i]}`); // ok
+    i18n('some_service', `label_color-${labelColors[i]}`); // ok
 }
 
 const labelWrongColors = ['red', 'not-existing', 'yelllow', 'white'] as const;
 for (let i = 0; i < 4; i++) {
-  i18n('some_service', `label_color-${labelWrongColors[i]}`); // error: Argument of type '"not-existing"' is not assignable to parameter of type ...
+    i18n('some_service', `label_color-${labelWrongColors[i]}`); // error: Argument of type '"not-existing"' is not assignable to parameter of type ...
 }
 ```
 
@@ -357,3 +358,4 @@ You can do that by passing the result type to I18NFn. However, with large file s
 **Why other methods of the I18N class haven't been typed?**
 
 They can be typed, we'll appreciate if you help implementing it. The case is that other methods are used in 1% of cases.
+

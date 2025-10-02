@@ -50,9 +50,7 @@ function Editor({onSubmit}) {
   return <MarkdownEditorView stickyToolbar autofocus editor={editor} />;
 }
 ```
-
 Read more:
-
 - [How to connect the editor in the Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
 - [How to add preview for markup mode](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
 - [How to add HTML extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
@@ -63,12 +61,12 @@ Read more:
 - [How to add text binding extension in markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Development
-
 To start the dev storybook
 
 ```shell
 npm start
 ```
+
 
 ### i18n
 

@@ -28,20 +28,20 @@ npm install @gravity-ui/timeline
 The timeline component can be used in React applications with the following basic setup:
 
 ```tsx
-import {TimelineCanvas, useTimeline} from '@gravity-ui/timeline/react';
+import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
 
 const MyTimelineComponent = () => {
-  const {timeline, api, start, stop} = useTimeline({
+  const { timeline, api, start, stop } = useTimeline({
     settings: {
       start: Date.now(),
       end: Date.now() + 3600000, // 1 hour from now
       axes: [],
       events: [],
-      markers: [],
+      markers: []
     },
     viewConfiguration: {
       // Optional view configuration
-    },
+    }
   });
 
   // timeline - Timeline instance
@@ -50,7 +50,7 @@ const MyTimelineComponent = () => {
   // stop - function to destroy timeline
 
   return (
-    <div style={{width: '100%', height: '100%'}}>
+    <div style={{ width: '100%', height: '100%' }}>
       <TimelineCanvas timeline={timeline} />
     </div>
   );
@@ -63,16 +63,16 @@ Each marker requires the following structure:
 
 ```typescript
 type TimelineMarker = {
-  time: number; // Timestamp for the marker position
-  color: string; // Color of the marker line
-  activeColor: string; // Color when marker is selected (required)
-  hoverColor: string; // Color when marker is hovered (required)
-  lineWidth?: number; // Optional width of the marker line
-  label?: string; // Optional label text
-  labelColor?: string; // Optional label color
+  time: number;           // Timestamp for the marker position
+  color: string;          // Color of the marker line
+  activeColor: string;    // Color when marker is selected (required)
+  hoverColor: string;     // Color when marker is hovered (required)
+  lineWidth?: number;     // Optional width of the marker line
+  label?: string;         // Optional label text
+  labelColor?: string;    // Optional label color
   renderer?: AbstractMarkerRenderer; // Optional custom renderer
-  nonSelectable?: boolean; // Whether marker can be selected
-  group?: boolean; // Whether marker represents a group
+  nonSelectable?: boolean;// Whether marker can be selected
+  group?: boolean;        // Whether marker represents a group
 };
 ```
 
@@ -82,7 +82,7 @@ The timeline automatically groups markers that are close together and provides z
 
 ```tsx
 const MyTimelineComponent = () => {
-  const {timeline} = useTimeline({
+  const { timeline } = useTimeline({
     settings: {
       start: Date.now(),
       end: Date.now() + 3600000,
@@ -90,37 +90,19 @@ const MyTimelineComponent = () => {
       events: [],
       markers: [
         // These markers will be grouped together
-        {
-          time: Date.now(),
-          color: '#ff0000',
-          activeColor: '#ff5252',
-          hoverColor: '#ff1744',
-          label: 'Event 1',
-        },
-        {
-          time: Date.now() + 1000,
-          color: '#ff0000',
-          activeColor: '#ff5252',
-          hoverColor: '#ff1744',
-          label: 'Event 2',
-        },
-        {
-          time: Date.now() + 2000,
-          color: '#ff0000',
-          activeColor: '#ff5252',
-          hoverColor: '#ff1744',
-          label: 'Event 3',
-        },
-      ],
+        { time: Date.now(), color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 1' },
+        { time: Date.now() + 1000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 2' },
+        { time: Date.now() + 2000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 3' },
+      ]
     },
     viewConfiguration: {
       markers: {
-        collapseMinDistance: 8, // Group markers within 8 pixels
-        groupZoomEnabled: true, // Enable zoom on group click
-        groupZoomPadding: 0.3, // 30% padding around group
-        groupZoomMaxFactor: 0.3, // Max zoom factor
-      },
-    },
+        collapseMinDistance: 8,        // Group markers within 8 pixels
+        groupZoomEnabled: true,        // Enable zoom on group click
+        groupZoomPadding: 0.3,        // 30% padding around group
+        groupZoomMaxFactor: 0.3,      // Max zoom factor
+      }
+    }
   });
 
   // Listen for group zoom events
@@ -141,7 +123,6 @@ The timeline component is built using React and provides a flexible way to creat
 The timeline is implemented as a React component that can be configured through two main objects:
 
 1. **TimelineSettings**: Controls the core timeline behavior and appearance
-
    - `start`: Start time of the timeline
    - `end`: End time of the timeline
    - `axes`: Array of axis configurations
@@ -165,12 +146,10 @@ The timeline component supports several interactive events:
 Example of event handling:
 
 ```tsx
-import {useTimelineEvent} from '@gravity-ui/timeline/react';
+import { useTimelineEvent } from '@gravity-ui/timeline/react';
 
 const MyTimelineComponent = () => {
-  const {timeline} = useTimeline({
-    /* ... */
-  });
+  const { timeline } = useTimeline({ /* ... */ });
 
   useTimelineEvent(timeline, 'on-click', (data) => {
     console.log('Timeline clicked:', data);
@@ -189,7 +168,6 @@ const MyTimelineComponent = () => {
 The component uses custom hooks for timeline management:
 
 - `useTimeline`: Manages the timeline instance and its lifecycle
-
   - Creates and initializes the timeline
   - Handles cleanup on component unmount
   - Provides access to the timeline instance
@@ -206,13 +184,13 @@ Events in the timeline follow this structure:
 
 ```typescript
 type TimelineEvent = {
-  id: string; // Unique identifier
-  from: number; // Start timestamp
-  to?: number; // End timestamp (optional for point events)
-  axisId: string; // ID of the axis this event belongs to
-  trackIndex: number; // Index in the axis track
+  id: string;             // Unique identifier
+  from: number;           // Start timestamp
+  to?: number;            // End timestamp (optional for point events)
+  axisId: string;         // ID of the axis this event belongs to
+  trackIndex: number;     // Index in the axis track
   renderer?: AbstractEventRenderer; // Optional custom renderer
-  color?: string; // Optional event color
+  color?: string;         // Optional event color
   selectedColor?: string; // Optional selected state color
 };
 ```
@@ -222,7 +200,7 @@ type TimelineEvent = {
 The Timeline class can be used directly in TypeScript without React. This is useful for integrating with other frameworks or vanilla JavaScript applications:
 
 ```typescript
-import {Timeline} from '@gravity-ui/timeline';
+import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
@@ -235,17 +213,17 @@ const timeline = new Timeline({
       {
         id: 'main',
         label: 'Main Axis',
-        color: '#000000',
-      },
+        color: '#000000'
+      }
     ],
     events: [
       {
         id: 'event1',
         from: timestamp + 1800000, // 30 minutes from now
-        to: timestamp + 2400000, // 40 minutes from now
+        to: timestamp + 2400000,   // 40 minutes from now
         label: 'Sample Event',
-        axisId: 'main',
-      },
+        axisId: 'main'
+      }
     ],
     markers: [
       {
@@ -254,16 +232,16 @@ const timeline = new Timeline({
         label: 'Important Point',
         color: '#ff0000',
         activeColor: '#ff5252',
-        hoverColor: '#ff1744',
-      },
-    ],
+        hoverColor: '#ff1744'
+      }
+    ]
   },
   viewConfiguration: {
     // Optional: customize view settings
     zoomLevels: [1, 2, 4, 8, 16],
     hideRuler: false,
-    showGrid: true,
-  },
+    showGrid: true
+  }
 });
 
 // Initialize with a canvas element
@@ -288,7 +266,6 @@ timeline.destroy();
 The Timeline class provides a rich API for managing the timeline:
 
 - **Event Management**:
-
   ```typescript
   // Add event listener
   timeline.on('eventClick', (detail) => {
@@ -301,11 +278,10 @@ The Timeline class provides a rich API for managing the timeline:
   timeline.off('eventClick', handler);
 
   // Emit custom events
-  timeline.emit('customEvent', {data: 'custom data'});
+  timeline.emit('customEvent', { data: 'custom data' });
   ```
 
 - **Timeline Control**:
-
   ```typescript
   // Update timeline data
   timeline.api.setEvents([
@@ -315,8 +291,8 @@ The Timeline class provides a rich API for managing the timeline:
       to: Date.now() + 3600000,
       label: 'New Event',
       axisId: 'main',
-      trackIndex: 0,
-    },
+      trackIndex: 0
+    }
   ]);
 
   // Update axes
@@ -324,8 +300,8 @@ The Timeline class provides a rich API for managing the timeline:
     {
       id: 'newAxis',
       label: 'New Axis',
-      color: '#0000ff',
-    },
+      color: '#0000ff'
+    }
   ]);
 
   // Update markers
@@ -336,8 +312,8 @@ The Timeline class provides a rich API for managing the timeline:
       label: 'New Marker',
       color: '#00ff00',
       activeColor: '#4caf50',
-      hoverColor: '#2e7d32',
-    },
+      hoverColor: '#2e7d32'
+    }
   ]);
   ```
 
@@ -349,6 +325,7 @@ Explore interactive examples in our [Storybook](https://preview.gravity-ui.com/t
 - [Endless Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Endless timeline with events and axes
 - [Markers](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline with vertical markers and labels
 - [Custom Events](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline with custom event rendering
+
 
 ## Development
 

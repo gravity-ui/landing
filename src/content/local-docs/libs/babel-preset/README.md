@@ -3,7 +3,6 @@
 Babel preset for Gravity UI projects
 
 ## Install
-
 ```
 npm install --save-dev @gravity-ui/babel-preset
 ```
@@ -14,14 +13,14 @@ npm install --save-dev @gravity-ui/babel-preset
 
 ```json5
 {
-  presets: [
-    '@gravity-ui/babel-preset',
-    {
-      env: {modules: false}, // defaults to {}
-      runtime: {useESModules: true}, // defaults to {}
-      typescript: true, // defaults to false
-      react: {runtime: 'automatic'}, // defaults to {}
-    },
-  ],
+  "presets": [
+      "@gravity-ui/babel-preset",
+      {
+        "env": {modules: false}, // defaults to {}
+        "runtime": {useESModules: true}, // defaults to {}
+        "typescript": true, // defaults to false
+        "react": {runtime: "automatic"} // defaults to {}
+      }
+  ]
 }
 ```

@@ -14,15 +14,20 @@ Add config to `package.json` in `browserslist` section:
 
 ```json
 {
-  "browserslist": ["extends @gravity-ui/browserslist-config"]
+  "browserslist": [
+    "extends @gravity-ui/browserslist-config"
+  ]
 }
 ```
 
 You can specify additional browsers based on your audience, like:
-
 ```json
 {
-  "browserslist": ["extends @gravity-ui/browserslist-config", "Chrome >= 100", "Firefox >= 100"]
+  "browserslist": [
+    "extends @gravity-ui/browserslist-config",
+    "Chrome >= 100",
+    "Firefox >= 100"
+  ]
 }
 ```
 
