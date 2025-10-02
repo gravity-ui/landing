@@ -11,6 +11,8 @@ jobs:
       pull-requests: write
       contents: write
     runs-on: ubuntu-latest
+    outputs:
+      modified_readme_files: ${{ steps.update-readme.outputs.modified_readme_files }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -19,18 +21,21 @@ jobs:
         with:
           node-version: 20
       - name: Update packages readme
+        id: update-readme
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm run update-packages-readme
+
+          MODIFIED_README_FILES=$(git diff --name-only | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
+          echo "modified_readme_files=$(echo "$MODIFIED_README_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+
           git config user.email ""
           git config user.name "Update packages readme action"
           git checkout -b update-packages-readme
-          git add package.json package-lock.json
+          git add src/content/local-docs/libs/*/README.md
+
           export COMMIT_MESSAGE="docs: update packages readme"
           git commit -m "$COMMIT_MESSAGE"
           git push --set-upstream origin update-packages-readme --force
-          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" || gh pr edit --title "$COMMIT_MESSAGE" --body ""
-      - name: Wait LLM translations
-        run: |
-          gh workflow run gpt-translate.yml -f environment=production
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov"

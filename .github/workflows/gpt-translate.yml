@@ -1,0 +1,69 @@
+name: GPT Translate
+
+on:
+  pull_request:
+    paths:
+      - 'src/content/local-docs/libs/**/README.md'
+
+permissions: write-all
+
+jobs:
+  translations:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        language: ['es', 'de', 'zh', 'fr']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get modified files
+        id: get-modified-files
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          MODIFIED_FILES=$(git diff --name-only | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
+          echo "modified_files=$(echo "$MODIFIED_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+      - name: Prepare inputs for ${{ matrix.language }}
+        id: prepare-inputs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODIFIED_FILES: ${{ steps.get-modified-files.outputs.modified_files }}
+          LANGUAGE: ${{ matrix.language }}
+        run: |
+          OUTPUT_FILES=$(echo "$MODIFIED_FILES" | sed "s/README\.md/README-$LANGUAGE.md/g")
+
+          echo "Files to translate to $LANGUAGE:"
+          echo "$MODIFIED_FILES" | tr ',' '\n'
+
+          echo "Resulting files after translation to $LANGUAGE:"
+          echo "$OUTPUT_FILES" | tr ',' '\n'
+
+          echo "input_files=$(echo "$MODIFIED_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+          echo "output_files=$(echo "$OUTPUT_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+      - name: Run translations
+        uses: dgaponov/gpt-translate@master
+        with:
+          provider: 'openrouter'
+          apikey: ${{ secrets.OPENROUTER_API_KEY }}
+          model: 'deepseek/deepseek-r1-0528:free'
+          inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
+          outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
+          languages: ${{ matrix.language }}
+          prompt: |
+            Please translate the README source file to {targetLanguage}. \
+              Make the translation sound as natural as possible. \
+              Keep the HTML snippet with the language options in the same place as in the source file. \
+              ONLY {targetLanguage} should be shown in plaintext (between span tags). \
+              All other languages should be shown as links using the Language Culture Name, e.g. "README-de.md" for German. \
+              Exception: English is the default language and always points to "README.md". \
+              For example, the HTML snippet of the German README should look something like this:
+              <p align="center">
+                <a href="README.md">English</a> |
+                <a href="README-zh.md">简体中文</a> |
+                <span>Deutsch</span> |
+                <a href="README-fr.md">Français</a>
+              </p>
+              Do NOT add ``` tags to the HTML snippet. \
+              Make sure than any links to English README.md files are updated to point to the corresponding {targetLanguage} README file. \
+              For example, when translating to German, any link to <directory>/README.md should be updated to <directory>/README-de.md
