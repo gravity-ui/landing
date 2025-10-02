@@ -1,13 +1,16 @@
 @use '../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 
 $block: '.#{variables.$ns}dashboard-preview-example';
 
 #{$block} {
-    overflow: hidden scroll;
-
     & .gn-aside-header__pane-container,
     & .gn-aside-header__pane-container .gn-aside-header__aside {
         height: 100%;
+    }
+
+    & .gn-aside-header__aside {
+        position: relative;
     }
 
     --gn-aside-header-collapsed-background-color: transparent;
@@ -27,5 +30,11 @@ $block: '.#{variables.$ns}dashboard-preview-example';
 
     &__content {
         height: 100%;
+    }
+
+    @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'md') - 1)) {
+        & .gn-aside-header {
+            width: auto;
+        }
     }
 }
