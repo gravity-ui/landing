@@ -39,3 +39,6 @@ jobs:
           git commit -m "$COMMIT_MESSAGE"
           git push --set-upstream origin update-packages-readme --force
           gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov"
+
+# Merge PR automatically (disabled for now)
+# gh pr merge --auto --squash
