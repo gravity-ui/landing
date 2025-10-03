@@ -319,7 +319,7 @@ export function getContent(theme: 'light' | 'dark' = 'light') {
                     buttons: [
                         {
                             text: 'Built with GravityUI',
-                            theme: 'monochrome',
+                            theme: 'normal',
                             img: 'https://storage.yandexcloud.net/cloud-www-assets/pages/open-source/open-source-gravity-ui-button.svg',
                             url: 'https://gravity-ui.com/',
                         },
