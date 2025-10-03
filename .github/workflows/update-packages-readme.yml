@@ -2,13 +2,13 @@ name: Update packages readme
 
 on:
   workflow_dispatch:
-#  schedule:
-#    - cron: 5,10,15,20,25,30,35,40,45,50,55 * * * *
+  schedule:
+    - cron: 0 * * * *
 
 permissions: write-all
 
 env:
-  LANGUAGES: 'ru ko es de zh fr' # Supported languages separated by space (spaces are important)
+  LANGUAGES: 'ko es de zh fr' # Supported languages separated by space (spaces are important)
 
 jobs:
   update-packages-readme:

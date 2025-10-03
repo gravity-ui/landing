@@ -68,5 +68,5 @@ jobs:
           prompt: |
             Please translate the json source file to {targetLanguage}. \
             Make the translation sound as natural as possible. \
-            Do not translate the library name in the source file if it looks like the name of the library. \
+            Do not translate the library name in the source file if it looks like the name of the library (the exception is Themer, it can be translated). \
             For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
