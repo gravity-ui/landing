@@ -112,6 +112,7 @@
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
     "prepare-metadata": "npm run get-packages-versions",
     "update-og-images": "node ./scripts/update-og-images.mjs",
+    "update-packages-readme": "node ./scripts/update-packages-readme.mjs",
     "prestart": "npm run prepare-metadata",
     "prebuild": "npm run prepare-metadata",
     "pretest": "npm run prepare-metadata",
