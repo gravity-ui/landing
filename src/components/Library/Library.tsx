@@ -14,6 +14,7 @@ import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {ContributorList} from '../../components/ContributorList';
+import {GitHubStarButton} from '../../components/GitHubStarButton';
 import {Link} from '../../components/Link';
 import {useLocale} from '../../hooks/useLocale';
 import {availablePlaygrounds} from '../../pages/libraries/[libId]/playground';
@@ -60,7 +61,6 @@ export const Library: React.FC<Props> = ({lib}) => {
         {
             id: 'stars',
             title: t('library:stars'),
-            value: lib.metadata.stars,
             icon: starIcon,
         },
         {
@@ -258,6 +258,18 @@ export const Library: React.FC<Props> = ({lib}) => {
                                     }}
                                 >
                                     <div className={b('info-title-text')}>{t('library:about')}</div>
+
+                                    <div
+                                        className={b('github-star-mobile', {
+                                            'mobile-invisible': isVisibleInfoListMobile,
+                                        })}
+                                    >
+                                        <GitHubStarButton
+                                            githubId={lib.config.githubId}
+                                            starCount={lib.metadata.stars}
+                                        />
+                                    </div>
+
                                     <div
                                         className={b('info-title-icon', {
                                             'mobile-visible': isVisibleInfoListMobile,
@@ -307,6 +319,29 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                         </div>
                                                     </div>
                                                 </a>
+                                            );
+                                        }
+
+                                        if (item.id === 'stars') {
+                                            return (
+                                                <div
+                                                    key={item.id}
+                                                    className={b('info-item', {
+                                                        'github-star': true,
+                                                    })}
+                                                >
+                                                    <div className={b('github-star-content')}>
+                                                        <div className={b('github-star-text')}>
+                                                            {content}
+                                                        </div>
+                                                        {isVisibleInfoListMobile && (
+                                                            <GitHubStarButton
+                                                                githubId={lib.config.githubId}
+                                                                starCount={lib.metadata.stars}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                </div>
                                             );
                                         }
 
