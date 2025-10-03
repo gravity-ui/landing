@@ -44,7 +44,7 @@ jobs:
           export COMMIT_MESSAGE="docs: update packages readme"
           git commit -m "$COMMIT_MESSAGE"
           git push --set-upstream origin update-packages-readme --force
-          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" 2>/dev/null || true
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
           PR_NUMBER=$(gh pr view --json number -q ".number")
 
           echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
@@ -122,10 +122,10 @@ jobs:
           commitMessage: 'translations: for package ${{ matrix.library }}'
           prompt: |
             Please translate the README source file to {targetLanguage}. \
-              Make the translation sound as natural as possible. \
-              Keep the HTML snippet with the language options in the same place as in the source file. \
-              Do not translate the first line in the source file if it looks like the name of the library. \
-              For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
+            Make the translation sound as natural as possible. \
+            Keep the HTML snippet with the language options in the same place as in the source file. \
+            Do not translate the first line in the source file if it looks like the name of the library. \
+            For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
 
   merge-pr:
     needs:
@@ -133,6 +133,10 @@ jobs:
       - translations
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ needs.update-packages-readme.outputs.pr_number }}/head
+          fetch-depth: 2
       - name: Merge PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
