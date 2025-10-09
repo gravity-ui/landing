@@ -1,0 +1,18 @@
+```json
+{
+    "actions_copyIconName": "아이콘 이름 복사",
+    "actions_copyLink": "링크 복사",
+    "actions_copied": "복사됨",
+    "actions_copyReactComponent": "React 컴포넌트 복사",
+    "actions_copySvgImport": "SVG 가져오기 복사",
+    "actions_downloadSvg": "SVG 다운로드",
+    "title": "아이콘",
+    "goToLibrary": "라이브러리로 이동",
+    "filterPlaceholder": "아이콘 이름으로 필터링",
+    "keywords": "키워드",
+    "empty_title": "요청하신 결과가 없습니다.",
+    "empty_subTitle": "철자를 확인하거나 다른 키워드를 사용해 보세요.",
+    "usage_reactComponent": "React 컴포넌트",
+    "usage_svg": "SVG"
+}
+```
