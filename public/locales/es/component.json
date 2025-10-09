@@ -1,13 +1,13 @@
-﻿{
+{
     "actions_openInFigma": "Abrir en Figma",
     "title": "Componentes",
     "searchPlaceholder": "Buscar por nombre de componente",
     "color-input_validation-format-error": "Formato incorrecto",
-    "maintainers_one": "Mantenedor:",
-    "maintainers_other": "Mantenedores:",
-    "maintainers": "Mantenedores:",
-    "theme": "Tema Switch",
-    "rtlOn": "Activa RTL",
+    "maintainers_one": "Responsable:",
+    "maintainers_other": "Responsables:",
+    "maintainers": "Responsables:",
+    "theme": "Cambiar tema",
+    "rtlOn": "Activar RTL",
     "rtlOff": "Desactivar RTL",
-    "rtlNotSupported": "RTL no es compatible"
+    "rtlNotSupported": "RTL no soportado"
 }
