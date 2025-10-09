@@ -1,6 +1,6 @@
 # @gravity-ui/date-utils
 
-用于管理日期和时间的辅助工具。
+用于管理日期和时间的辅助函数。
 
 ## 安装
 
@@ -8,7 +8,7 @@
 npm i @gravity-ui/date-utils
 ```
 
-## 使用方法
+## 用法
 
 ```typescript
 import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
@@ -48,13 +48,13 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```typescript
 import {settings} from '@gravity-ui/date-utils';
 
-// 语言环境管理
-settings.getLocale(); // 默认语言环境 "en"
+// 区域设置管理
+settings.getLocale(); // 默认区域设置 "en"
 settings.loadLocale('de').then(() => {
   settings.setLocale('de');
   settings.getLocale(); // "de"
 });
 
 // 自定义
-settings.updateLocale({weekStart: 0}); // 更改一周的第一天
+settings.updateLocale({weekStart: 0}); // 更改每周的开始日期
 ```
