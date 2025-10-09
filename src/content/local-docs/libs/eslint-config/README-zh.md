@@ -6,60 +6,70 @@
 npm install --save-dev eslint @gravity-ui/eslint-config
 ```
 
-## 使用方法
+## 使用
 
-在项目根目录中添加 `.eslintrc` 文件，内容如下：
+在你的项目中添加 `eslint.config.js` 文件，内容如下：
 
-```json
-{
-  "extends": "@gravity-ui/eslint-config",
-  "root": true
-}
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+
+export default [
+  ...baseConfig,
+  {
+    // ...其他配置
+  },
+];
 ```
 
-在相应的目录中添加客户端和服务器配置文件：
-
-```json
-{
-  "extends": "@gravity-ui/eslint-config/server"
-}
-```
-
-```json
-{
-  "extends": "@gravity-ui/eslint-config/client"
-}
-```
+基础配置也包含了 TypeScript 规则。
 
 ### Prettier
 
-如果您使用 Prettier，请使用附加规则扩展根配置：
+如果你正在使用 Prettier，请添加相应的配置：
 
-```json
-{
-  "extends": ["@gravity-ui/eslint-config", "@gravity-ui/eslint-config/prettier"],
-  "root": true
-}
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import prettierConfig from '@gravity-ui/eslint-config/prettier';
+
+export default [
+  ...baseConfig,
+  ...prettierConfig,
+  {
+    // ...其他配置
+  },
+];
 ```
 
 ### a11y
 
-如果您想发现可访问性问题，请使用附加规则扩展根配置：
+如果你想检测可访问性问题，请添加相应的配置：
 
-```json
-{
-  "extends": ["@gravity-ui/eslint-config", "@gravity-ui/eslint-config/a11y"],
-  "root": true
-}
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import a11yConfig from '@gravity-ui/eslint-config/a11y';
+
+export default [
+  ...baseConfig,
+  ...a11yConfig,
+  {
+    // ...其他配置
+  },
+];
 ```
 
 ### Order
 
-如果您想在模块导入顺序中强制执行约定，请使用附加规则扩展根配置：
+如果你想强制执行模块导入顺序约定，请添加相应的配置：
 
-```json
-{
-  "extends": ["@gravity-ui/eslint-config", "@gravity-ui/eslint-config/import-order"],
-  "root": true
-}
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import importOrderConfig from '@gravity-ui/eslint-config/import-order';
+
+export default [
+  ...baseConfig,
+  ...importOrderConfig,
+  {
+    // ...其他配置
+  },
+];
 ```

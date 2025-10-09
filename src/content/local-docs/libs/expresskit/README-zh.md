@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit 是一个轻量级的 [express.js](https://expressjs.com/) 封装器，它与 [NodeKit](https://github.com/gravity-ui/nodekit) 集成，并提供一些有用的功能，如请求日志记录、跟踪支持、异步控制器和中间件以及详细的路由描述。
+ExpressKit 是一个轻量级的 [express.js](https://expressjs.com/) 封装库，它集成了 [NodeKit](https://github.com/gravity-ui/nodekit)，并提供了一些有用的功能，例如请求日志记录、追踪支持、异步控制器和中间件以及详细的路由描述。
 
 安装：
 

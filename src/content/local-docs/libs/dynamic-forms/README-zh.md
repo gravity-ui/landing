@@ -8,7 +8,7 @@
 npm install --save-dev @gravity-ui/dynamic-forms
 ```
 
-## 使用方法
+## 用法
 
 ```jsx
 import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
@@ -22,9 +22,9 @@ import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
 <DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
 ```
 
-### 国际化
+### 国际化 (I18N)
 
-某些组件包含文本标记（单词和短语），这些标记有两种语言版本：`en`（默认）和 `ru`。要设置语言，请使用 `configure` 函数：
+某些组件包含两种语言的文本标记（单词和短语）：`en`（默认）和 `ru`。要设置语言，请使用 `configure` 函数：
 
 ```js
 // index.js
@@ -36,7 +36,7 @@ configure({lang: Lang.Ru});
 
 ## 开发
 
-要使用 storybook 启动开发服务器，请执行以下命令：
+要启动带有 storybook 的开发服务器，请执行以下命令：
 
 ```shell
 npm ci
