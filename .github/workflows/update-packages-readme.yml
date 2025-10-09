@@ -125,7 +125,9 @@ jobs:
             Make the translation sound as natural as possible. \
             Keep the HTML snippet with the language options in the same place as in the source file. \
             Do not translate the first line in the source file if it looks like the name of the library. \
-            For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
+            For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place. \
+            Don't add html snippet with language options to the output. \
+            Don't convert markdown code blocks to html!
 
   merge-pr:
     needs:
