@@ -1,4 +1,5 @@
 build
 public/static
 CONTRIBUTING.md
+src/content/local-docs/libs/**/README*
 *.mdx
