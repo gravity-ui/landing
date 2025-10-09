@@ -1,0 +1,16 @@
+{
+    "actions_copyIconName": "Copier le nom de l'icône",
+    "actions_copyLink": "Copier le lien",
+    "actions_copied": "Copié",
+    "actions_copyReactComponent": "Copier le composant React",
+    "actions_copySvgImport": "Copier l'importation SVG",
+    "actions_downloadSvg": "Télécharger le SVG",
+    "title": "Icônes",
+    "goToLibrary": "Aller à la bibliothèque",
+    "filterPlaceholder": "Filtrer par nom d'icône",
+    "keywords": "Mots-clés",
+    "empty_title": "Aucun résultat trouvé pour votre recherche",
+    "empty_subTitle": "Veuillez vérifier l'orthographe ou essayer d'autres mots-clés.",
+    "usage_reactComponent": "Composant React",
+    "usage_svg": "SVG"
+}
