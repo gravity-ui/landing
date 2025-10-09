@@ -1,14 +1,14 @@
-﻿{
-    "actions_goToIcons": "转到图标",
-    "libraries": "图书馆",
+{
+    "actions_goToIcons": "前往图标",
+    "libraries": "库",
     "readme": "自述文件",
-    "changelog": "变更日志",
-    "about": "关于图书馆",
-    "stars": "明星",
+    "changelog": "更新日志",
+    "about": "关于库",
+    "stars": "星标",
     "version": "版本",
-    "lastUpdate": "上次更新",
-    "repository": "存储库",
-    "license": "执照",
+    "lastUpdate": "最后更新",
+    "repository": "代码仓库",
+    "license": "许可证",
     "issues": "问题",
     "maintainers": "维护者",
     "contributors": "贡献者"
