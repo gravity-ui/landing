@@ -1,0 +1,10 @@
+{
+    "title": "Bibliotheken",
+    "header": "Unsere Bibliotheken",
+    "searchPlaceholder": "Suche nach Name oder Beschreibung",
+    "empty": "Nichts gefunden",
+    "tags_all": "Alle",
+    "tags_ui": "UI",
+    "tags_nodejs": "Node.js",
+    "tags_infrastructure": "Infrastruktur"
+}
