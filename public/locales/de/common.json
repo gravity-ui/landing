@@ -1,0 +1,26 @@
+```json
+{
+    "actions_open": "Öffnen",
+    "actions_copyToClipboard": "In Zwischenablage kopieren",
+    "actions_share": "Teilen",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "actions_playground": "Playground",
+    "menu_libraries": "Bibliotheken",
+    "menu_components": "Komponenten",
+    "menu_design": "Design",
+    "menu_editor": "Editor",
+    "menu_icons": "Icons",
+    "menu_themer": "Themer",
+    "menu_media": "Medien",
+    "roadmap_inProgress": "In Bearbeitung",
+    "navigation_previous": "Vorheriger",
+    "navigation_next": "Nächster",
+    "emptySearchPlaceholder": "Nichts gefunden",
+    "show_more": "Mehr anzeigen",
+    "show_less": "Weniger anzeigen",
+    "pageNotFound": "Seite nicht gefunden",
+    "pageNotFoundDescription": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backToHome": "Zurück zur Startseite"
+}
+```

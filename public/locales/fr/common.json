@@ -1,0 +1,26 @@
+```json
+{
+    "actions_open": "Ouvrir",
+    "actions_copyToClipboard": "Copier dans le presse-papiers",
+    "actions_share": "Partager",
+    "actions_github": "GitHub",
+    "actions_storybook": "Storybook",
+    "actions_playground": "Playground",
+    "menu_libraries": "Bibliothèques",
+    "menu_components": "Composants",
+    "menu_design": "Design",
+    "menu_editor": "Éditeur",
+    "menu_icons": "Icônes",
+    "menu_themer": "Thèmes",
+    "menu_media": "Média",
+    "roadmap_inProgress": "En cours",
+    "navigation_previous": "Précédent",
+    "navigation_next": "Suivant",
+    "emptySearchPlaceholder": "Aucun résultat trouvé",
+    "show_more": "Afficher plus",
+    "show_less": "Afficher moins",
+    "pageNotFound": "Page introuvable",
+    "pageNotFoundDescription": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backToHome": "Retour à l'accueil"
+}
+```
