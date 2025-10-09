@@ -1,37 +1,37 @@
 # @gravity-ui/navigation &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/navigation)](https://www.npmjs.com/package/@gravity-ui/navigation) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/navigation/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/navigation/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/navigation/)
 
-### 侧边栏头部导航 &middot; [预览 →](https://preview.yandexcloud.dev/navigation/)
+### Aside Header Navigation &middot; [미리보기 →](https://preview.yandexcloud.dev/navigation/)
 
 ![](docs/images/showcase.png)
 
-## 安装
+## 설치
 
 ```bash
 npm install @gravity-ui/navigation
 ```
 
-请确保您的项目中已安装对等依赖项
+프로젝트에 피어 의존성이 설치되어 있는지 확인하세요.
 
 ```bash
 npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
 ```
 
-## Sandboxes
+## 샌드박스
 
-基础示例
+기본
 https://codesandbox.io/p/devbox/navigation-demo-simple-x9k5sd
 
-高级示例
+고급
 https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
-## 2025 年路线图
+## 로드맵 2025
 
-1. 支持 SSR
-2. 向 [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) 添加更多文档和示例
-3. 支持 UIKit 主题中的导航
-4. 统一 subheaderItem、menuItem、footerItem 的 API
+1. SSR 지원
+2. [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)에 더 많은 문서 및 예제 추가
+3. UIKit 테마에서 Navigation 지원
+4. subheaderItem, menuItem, footerItem API 통합
 
-## 组件
+## 컴포넌트
 
 - [AsideHeader](https://github.com/gravity-ui/navigation/tree/main/src/components/AsideHeader/README.md)
   - [AllPagesPanel](https://github.com/gravity-ui/navigation/tree/main/src/components/AllPagesPanel/README.md)
@@ -53,4 +53,4 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## CSS API
 
-用于导航组件的主题化
+Navigation 컴포넌트의 테마 지정을 위해 사용됩니다.
