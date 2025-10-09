@@ -310,10 +310,15 @@ export class Api {
         return '';
     }
 
-    async fetchLibReadmeInfo({
-        readmeUrl,
-        id,
-    }: LibConfig): Promise<{en: string; ru: string; es: string; zh: string}> {
+    async fetchLibReadmeInfo({readmeUrl, id}: LibConfig): Promise<{
+        en: string;
+        ru: string;
+        es: string;
+        zh: string;
+        fr: string;
+        de: string;
+        ko: string;
+    }> {
         const headers: Record<string, string> = {'User-Agent': 'request'};
 
         const fetchReadmeContent = async (url: string) => {
@@ -340,11 +345,14 @@ export class Api {
                 'utf8',
             );
 
-        const [en, ru, es, zh] = await Promise.all([
+        const [en, ru, es, zh, fr, de, ko] = await Promise.all([
             fetchReadmeContent(readmeUrl.en),
             fetchReadmeContent(readmeUrl.ru),
             getLocalDocsReadPromise('es'),
             getLocalDocsReadPromise('zh'),
+            getLocalDocsReadPromise('fr'),
+            getLocalDocsReadPromise('de'),
+            getLocalDocsReadPromise('ko'),
         ]);
 
         return {
@@ -352,6 +360,9 @@ export class Api {
             ru,
             es,
             zh,
+            fr,
+            de,
+            ko,
         };
     }
 

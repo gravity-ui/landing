@@ -1,11 +1,11 @@
 module.exports = {
     i18n: {
-        locales: ['en', 'ru', 'es', 'zh'],
+        locales: ['en', 'ru', 'es', 'zh', 'fr', 'de', 'ko'],
         defaultLocale: 'en',
         defaultNS: 'common',
         ignoreJSONStructure: false,
     },
-    aiTranslatedLocales: ['es', 'zh'],
+    aiTranslatedLocales: ['es', 'zh', 'fr', 'de', 'ko'],
     routesWithoutRedirect: [
         '/sandbox',
         '/rtl',
