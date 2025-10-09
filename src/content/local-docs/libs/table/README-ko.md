@@ -1,12 +1,12 @@
 # @gravity-ui/table &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/table)](https://www.npmjs.com/package/@gravity-ui/table) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/table/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/table/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/table/)
 
-## Instalación
+## 설치
 
 ```shell
 npm install --save @gravity-ui/table
 ```
 
-## Uso
+## 사용법
 
 ```tsx
 import React from 'react';
@@ -20,8 +20,8 @@ interface Person {
 }
 
 const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Nombre', size: 100},
-  {accessorKey: 'age', header: 'Edad', size: 100},
+  {accessorKey: 'name', header: '이름', size: 100},
+  {accessorKey: 'age', header: '나이', size: 100},
 ];
 
 const data: Person[] = [
@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## Componentes
+## 컴포넌트
 
-Hay dos componentes `Table` que puedes usar:
+두 가지 Table 컴포넌트를 사용할 수 있습니다.
 
-- `BaseTable` - un componente con estilos básicos únicamente;
-- `Table` - un componente con estilos basados en Gravity UI.
+- `BaseTable` - 기본적인 스타일만 적용된 컴포넌트입니다.
+- `Table` - Gravity UI 기반 스타일이 적용된 컴포넌트입니다.
 
-### Selección de filas
+### 행 선택
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -54,7 +54,7 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...otras columnas
+  // ...다른 컬럼들
 ];
 
 const data: Person[] = [
@@ -79,9 +79,9 @@ const RowSelectionExample = () => {
 };
 ```
 
-### Ordenación
+### 정렬
 
-Aprende sobre las propiedades de las columnas en la documentación de react-table [aquí](https://tanstack.com/table/v8/docs/guide/sorting).
+react-table [문서](https://tanstack.com/table/v8/docs/guide/sorting)에서 컬럼 속성에 대해 알아보세요.
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -97,7 +97,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Tu columna DEBE tener accessorFn para que la ordenación esté habilitada
+  // 정렬을 활성화하려면 컬럼에 accessorFn이 반드시 있어야 합니다.
 
   const table = useTable({
     columns,
@@ -114,7 +114,7 @@ const SortingExample = () => {
 };
 ```
 
-Si quieres ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
+요소를 수동으로 정렬하려면 `manualSorting` 속성을 전달하세요.
 
 ```tsx
 const table = useTable({
@@ -123,7 +123,7 @@ const table = useTable({
 });
 ```
 
-### Agrupación
+### 그룹화
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -143,14 +143,14 @@ interface PersonGroup {
 type Item = PersonGroup | Person;
 
 const columns: ColumnDef<Item>[] = [
-  {accessorKey: 'name', header: 'Nombre', size: 200},
-  {accessorKey: 'age', header: 'Edad', size: 100},
+  {accessorKey: 'name', header: '이름', size: 200},
+  {accessorKey: 'age', header: '나이', size: 100},
 ];
 
 const data: Item[] = [
   {
     id: 'friends',
-    name: 'Amigos',
+    name: '친구들',
     items: [
       {id: 'nick', name: 'Nick', age: 25},
       {id: 'tom', name: 'Tom', age: 21},
@@ -158,7 +158,7 @@ const data: Item[] = [
   },
   {
     id: 'relatives',
-    name: 'Familiares',
+    name: '친척들',
     items: [
       {id: 'john', name: 'John', age: 23},
       {id: 'michael', name: 'Michael', age: 27},
@@ -186,11 +186,11 @@ const GroupingExample = () => {
 };
 ```
 
-Para habilitar los estilos de anidamiento, pasa `withNestingStyles = true` en la configuración de la columna.
+중첩 스타일을 활성화하려면 컬럼 설정에서 `withNestingStyles = true`를 전달하세요.
 
-Los indicadores de anidamiento se pueden deshabilitar pasando `showTreeDepthIndicators = false`.
+중첩 표시기는 `showTreeDepthIndicators = false`를 전달하여 비활성화할 수 있습니다.
 
-Para añadir un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu propio componente similar:
+행을 확장/축소하는 컨트롤을 추가하려면 셀 내용을 `TreeExpandableCell` 컴포넌트 또는 유사한 사용자 정의 컴포넌트로 감싸세요.
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -198,7 +198,7 @@ import {TreeExpandableCell} from '@gravity-ui/table';
 const columns: ColumnDef<Item>[] = [
   {
     accessorKey: 'name',
-    header: 'Nombre',
+    header: '이름',
     size: 200,
     showTreeDepthIndicators: false,
     withNestingStyles: true,
@@ -206,11 +206,11 @@ const columns: ColumnDef<Item>[] = [
       <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
     ),
   },
-  // ...otras columnas
+  // ...다른 컬럼들
 ];
 ```
 
-### Reordenación
+### 재정렬
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -218,7 +218,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...otras columnas
+  // ...다른 컬럼들
 ];
 
 const data: Person[] = [
@@ -251,45 +251,35 @@ const ReorderingExample = () => {
 ```
 
 ```html
-<div class="language-selector">
-  <a href="/en/docs/components/table/readme.md">English</a>
-  <a href="/es/docs/components/table/readme.md">Español</a>
-</div>
+<p>
+  <a href="/@gravity-ui/table/examples/virtualization">Virtualization</a>
+  <a href="/@gravity-ui/table/examples/window-virtualization">Window virtualization</a>
+  <a href="/@gravity-ui/table/examples/resizing">Resizing</a>
+  <a href="/@gravity-ui/table/examples/column-settings">Column settings</a>
+</p>
 ```
-
-### Reordenamiento
-
-Si quieres usar la funcionalidad de reordenamiento, necesitas envolver tu tabla en `ReorderingProvider`.
 
 ```tsx
 import { ReorderingProvider, useTable } from '@gravity-ui/table';
 import React from 'react';
 
-const ReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
+// ... other imports
 
-  const handleReorder = (newOrder: any[]) => {
-    // Handle reordering logic
-  };
-
+const TableWithReordering = ({ table, onReorder }) => {
   return (
-    <ReorderingProvider table={table} onReorder={handleReorder}>
+    <ReorderingProvider table={table} onReorder={onReorder}>
       <Table table={table} />
     </ReorderingProvider>
   );
 };
 ```
 
-### Virtualización
+### 가상화 (Virtualization)
 
-Úsala si quieres emplear el contenedor de la cuadrícula como elemento de desplazamiento (si quieres usar la ventana, consulta la sección de virtualización de ventana). Asegúrate de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
+그리드 컨테이너를 스크롤 요소로 사용하고 싶을 때 사용합니다 (창을 스크롤 요소로 사용하려면 창 가상화 섹션을 참조하세요). 컨테이너에 고정된 높이를 설정해야 합니다. 그렇지 않으면 가상화가 작동하지 않습니다.
 
 ```tsx
-import {useRowVirtualizer} from '@gravity-ui/table';
+import { useRowVirtualizer } from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   /* ... */
@@ -316,17 +306,17 @@ const VirtualizationExample = () => {
   });
 
   return (
-    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
+    <div ref={containerRef} style={{ height: '500px', overflow: 'auto' }}>
       <Table table={table} rowVirtualizer={rowVirtualizer} />
     </div>
   );
 };
 ```
 
-Si usas virtualización con la función de reordenamiento, también necesitas pasar la opción `rangeExtractor`:
+재정렬 기능과 함께 가상화를 사용하는 경우 `rangeExtractor` 옵션도 전달해야 합니다.
 
 ```tsx
-import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
+import { getVirtualRowRangeExtractor } from '@gravity-ui/table';
 
 // ...
 
@@ -347,12 +337,12 @@ return (
 );
 ```
 
-### Virtualización de ventana
+### 창 가상화 (Window Virtualization)
 
-Úsala si quieres emplear la ventana como elemento de desplazamiento.
+창을 스크롤 요소로 사용하고 싶을 때 사용합니다.
 
 ```tsx
-import {useWindowRowVirtualizer} from '@gravity-ui/table';
+import { useWindowRowVirtualizer } from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   /* ... */
@@ -382,7 +372,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Redimensionamiento
+### 크기 조절 (Resizing)
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -405,19 +395,19 @@ const ResizingDemo = () => {
 };
 ```
 
-### Configuración de columnas
+### 열 설정 (Column Settings)
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
-  // ...otras columnas
+  // ...other columns
   {
     id: 'settings_column_id',
-    header: ({table}) => <TableSettings table={table} />,
+    header: ({ table }) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // Opcional. Permite ocultar esta columna del popover de configuración
-      titleInSettings: 'ReactNode', // Opcional. Sobrescribe el campo header para el popover de configuración (si necesitas contenido diferente para el header y el popover de configuración)
+      hideInSettings: false, // 선택 사항. 설정 팝오버에서 이 열을 숨길 수 있습니다.
+      titleInSettings: 'ReactNode', // 선택 사항. 설정 팝오버의 헤더 필드를 재정의합니다 (헤더와 설정 팝오버에 다른 콘텐츠가 필요한 경우).
     },
-  }, // o puedes usar la función getSettingsColumn
+  }, // 또는 getSettingsColumn 함수를 사용할 수 있습니다.
 ];
 
 const data: Person[] = [
@@ -426,14 +416,14 @@ const data: Person[] = [
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // para control externo y estado inicial
-    column_id: false, // para ocultar por defecto
+    // 외부 제어 및 초기 상태용
+    column_id: false, // 기본적으로 숨김 처리
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* ids de columnas hoja */
-  ]); // para control externo y estado inicial
+    /* leaf columns ids */
+  ]); // 외부 제어 및 초기 상태용
 
-  // Variante alternativa para obtener el estado, callbacks y establecer callbacks de aplicación de configuración - usando el hook useTableSettings:
+  // useTableSettings 훅을 사용하여 상태, 콜백을 가져오고 설정 적용 콜백을 설정하는 대안:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -451,4 +441,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Obtén más información sobre la tabla y las propiedades de redimensionamiento de columnas en la [documentación](https://tanstack.com/table/v8/docs/api/features/column-sizing) de react-table.
+react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 열 크기 조절 속성에 대해 자세히 알아보세요.
