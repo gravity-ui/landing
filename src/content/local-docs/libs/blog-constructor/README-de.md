@@ -1,6 +1,6 @@
 # @gravity-ui/blog-constructor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/blog-constructor)](https://www.npmjs.com/package/@gravity-ui/blog-constructor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/blog-constructor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/blog-constructor/actions/workflows/ci.yml?query=branch:main) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/blog-constructor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/blog-constructor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/blog-constructor/)
 
-## 安装
+## Installation
 
 ```shell
 npm install @gravity-ui/blog-constructor
@@ -8,18 +8,18 @@ npm install @gravity-ui/blog-constructor
 
 ## Blog-constructor
 
-`Blog-constructor` 是一个基于 [Page-constructor](https://github.com/gravity-ui/page-constructor) 库构建的、用于创建博客格式网页的库。Blog-constructor 使用 page-constructor 的 [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) 属性来添加博客所需的组件。
+`Blog-constructor` ist eine Bibliothek, die auf der [Page-constructor](https://github.com/gravity-ui/page-constructor)-Bibliothek basiert und zur Erstellung von Webseiten im Blog-Format dient. Blog-constructor verwendet die [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks)-Prop von page-constructor, um die für den Blog benötigten Komponenten hinzuzufügen.
 
-### 文档 - [storybook](https://preview.gravity-ui.com/blog-constructor/)
+### Dokumentation - [storybook](https://preview.gravity-ui.com/blog-constructor/)
 
-### 入门指南
+### Erste Schritte
 
-Blog-constructor 同时提供客户端组件和服务器端组件供导入。博客页面作为 React 组件导入。为了确保其正常运行，请将其包裹在 `BlogConstructorProvider` 中：
+Der blog-constructor verfügt sowohl über Client- als auch über Server-Komponenten zum Importieren. Die Blog-Seiten werden als React-Komponente importiert. Um sicherzustellen, dass sie ordnungsgemäß funktionieren, wrappen Sie sie in `BlogConstructorProvider`:
 
 ```jsx
 import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
-// 主博客页面
+// Haupt-Blogseite
 <BlogConstructorProvider {...providerProps}>
     <BlogPage
         content={content}
@@ -34,7 +34,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
 import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
-// 博文页面
+// Beitragsseite
 <BlogConstructorProvider {...providerProps}>
     <BlogPostPage
         content={content}
@@ -47,9 +47,9 @@ import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructo
 
 ```
 
-关于 [providerProps](./src/constructor/README.md) 的文档。
+Dokumentation zu [providerProps](./src/constructor/README.md).
 
-此外，blog-constructor 还提供了服务器端组件，以帮助您在需要时转换数据：
+Außerdem verfügt blog-constructor über Server-Komponenten, die Ihnen bei der Transformation Ihrer Daten helfen, falls erforderlich:
 
 ```jsx
 import {
@@ -60,7 +60,7 @@ import {
 } from '@gravity-ui/blog-constructor/server';
 ```
 
-`blog-constructor` 是一个基于 `uikit` 的库，我们使用了 uikit 的 `i18n` 实例。要设置国际化，您只需使用 uikit 的 `configure` 方法：
+Der `blog-constructor` ist eine `uikit-basierte` Bibliothek, und wir verwenden eine Instanz von `i18n` aus uikit. Um die Internationalisierung einzurichten, müssen Sie lediglich `configure` aus uikit verwenden:
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';
@@ -70,7 +70,7 @@ configure({
 });
 ```
 
-## 开发
+## Entwicklung
 
 ```bash
 npm ci
