@@ -1,4 +1,6 @@
-﻿{
+```json
+{
     "title": "设计",
-    "searchPlaceholder": "按文章搜索"
+    "searchPlaceholder": "搜索文章"
 }
+```
