@@ -1,12 +1,12 @@
 # @gravity-ui/tsconfig
 
-## 安装
+## 설치
 ```
 npm install --save-dev @gravity-ui/tsconfig
 ```
 
-## 使用方法
-在项目根目录下添加 `tsconfig.json` 文件，内容如下：
+## 사용법
+프로젝트 루트에 `tsconfig.json` 파일을 다음과 같이 추가하세요:
 
 ```json
 {
