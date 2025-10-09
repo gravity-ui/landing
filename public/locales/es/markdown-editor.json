@@ -1,4 +1,6 @@
-﻿{
+```json
+{
   "goToLibrary": "Ir a la biblioteca",
-  "title": "Redactor"
+  "title": "Editor"
 }
+```
