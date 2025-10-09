@@ -1,20 +1,20 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** 是一个简单的数据获取封装库。它类似于 [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) 中的“端口”。它允许你根据用例为数据获取相关的操作创建封装。**Data Source** 在底层使用了 [react-query](https://tanstack.com/query/latest)。
+**Data Source** ist ein einfacher Wrapper für das Abrufen von Daten. Es ist eine Art "Port" in der [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Es ermöglicht Ihnen, Wrapper für Dinge rund um das Abrufen von Daten zu erstellen, je nach Ihren Anwendungsfällen. **Data Source** verwendet intern [react-query](https://tanstack.com/query/latest).
 
-## 安装
+## Installation
 
 ```bash
 npm install @gravity-ui/data-source @tanstack/react-query
 ```
 
-`@tanstack/react-query` 是一个对等依赖。
+`@tanstack/react-query` ist eine Peer-Abhängigkeit.
 
-## 快速入门
+## Schnellstart
 
-### 1. 设置 DataManager
+### 1. DataManager einrichten
 
-首先，在你的应用中创建并提供一个 `DataManager`：
+Erstellen und stellen Sie zuerst einen `DataManager` in Ihrer Anwendung bereit:
 
 ```tsx
 import React from 'react';
@@ -23,10 +23,10 @@ import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
 const dataManager = new ClientDataManager({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 分钟
+      staleTime: 5 * 60 * 1000, // 5 Minuten
       retry: 3,
     },
-    // ... 其他 react-query 选项
+    // ... weitere react-query-Optionen
   },
 });
 
@@ -39,9 +39,9 @@ function App() {
 }
 ```
 
-### 2. 定义错误类型和封装器
+### 2. Fehlertypen und Wrapper definieren
 
-定义错误类型，并基于默认构造函数创建你的数据源构造函数：
+Definieren Sie einen Fehlertyp und erstellen Sie Ihre Konstruktoren für Datenquellen basierend auf den Standardkonstruktoren:
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -59,9 +59,9 @@ export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TE
 };
 ```
 
-### 3. 创建自定义 DataLoader 组件
+### 3. Benutzerdefinierten DataLoader-Komponenten erstellen
 
-基于默认的 `DataLoader` 组件编写你自己的版本，以定义加载状态和错误的显示方式：
+Schreiben Sie eine `DataLoader`-Komponente, die auf der Standardkomponente basiert, um Ihre Anzeige des Ladezustands und von Fehlern zu definieren:
 
 ```tsx
 import {
@@ -77,33 +77,33 @@ export interface DataLoaderProps
 }
 
 export const DataLoader: React.FC<DataLoaderProps> = ({
-  LoadingView = YourLoader, // 你可以使用自己的加载组件
-  ErrorView = YourError, // 你可以使用自己的错误组件
+  LoadingView = YourLoader, // Sie können Ihre eigene Loader-Komponente verwenden
+  ErrorView = YourError, // Sie können Ihre eigene Fehlerkomponente verwenden
   ...restProps
 }) => {
   return <DataLoaderBase LoadingView={LoadingView} ErrorView={ErrorView} {...restProps} />;
 };
 ```
 
-### 4. 定义你的第一个数据源
+### 4. Ihre erste Datenquelle definieren
 
 ```ts
 import {skipContext} from '@gravity-ui/data-source';
 
-// 你的 API 函数
+// Ihre API-Funktion
 import {fetchUser} from './api';
 
 export const userDataSource = makePlainQueryDataSource({
-  // Key 必须是唯一的。也许你应该创建一个辅助函数来生成数据源的名称
+  // Schlüssel müssen eindeutig sein. Vielleicht sollten Sie einen Helfer für die Benennung von Datenquellen erstellen
   name: 'user',
-  // skipContext 是一个辅助函数，用于跳过函数的前两个参数（context 和 fetchContext）
+  // skipContext ist ein Helfer, um die ersten 2 Parameter der Funktion zu überspringen (context und fetchContext)
   fetch: skipContext(fetchUser),
-  // 可选：生成标签以进行高级缓存失效
+  // Optional: Tags für fortgeschrittene Cache-Invalidierung generieren
   tags: (params) => [`user:${params.userId}`, 'users'],
 });
 ```
 
-### 5. 在组件中使用
+### 5. In Komponenten verwenden
 
 ```tsx
 import {useQueryData} from '@gravity-ui/data-source';
@@ -119,15 +119,15 @@ export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 };
 ```
 
-## 核心概念
+## Kernkonzepte
 
-### 数据源类型
+### Datenquellentypen
 
-该库提供了两种主要的数据源类型：
+Die Bibliothek bietet zwei Haupttypen von Datenquellen:
 
-#### Plain Query Data Source (普通查询数据源)
+#### Plain Query Data Source
 
-适用于简单的请求/响应模式：
+Für einfache Anfrage/Antwort-Muster:
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -139,9 +139,9 @@ const userDataSource = makePlainQueryDataSource({
 });
 ```
 
-#### Infinite Query Data Source (无限查询数据源)
+#### Infinite Query Data Source
 
-适用于分页和无限滚动：
+Für Paginierung und unendliches Scrollen:
 
 ```ts
 const postsDataSource = makeInfiniteQueryDataSource({
@@ -159,23 +159,23 @@ const postsDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### 状态管理
+### Statusverwaltung
 
-该库将查询状态规范化为三种简单状态：
+Die Bibliothek normalisiert Abfragestati in drei einfache Status:
 
-- `loading` - 正在实际加载数据。与 React Query 中的 `isLoading` 相同。
-- `success` - 数据可用（可能通过 `idle` 跳过）。
-- `error` - 数据获取失败。
+- `loading` - Aktuelles Laden der Daten. Das Gleiche wie `isLoading` in React Query.
+- `success` - Daten verfügbar (kann mit `idle` übersprungen werden).
+- `error` - Fehler beim Abrufen der Daten.
 
-### Idle 概念
+### Idle-Konzept
 
-该库提供了一个特殊的 `idle` 符号，用于跳过查询执行：
+Die Bibliothek stellt ein spezielles `idle`-Symbol bereit, um die Abfrageausführung zu überspringen:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
 const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
-  // 如果 userId 未定义，则查询不会执行
+  // Die Abfrage wird nicht ausgeführt, wenn userId nicht definiert ist
   const {data, status} = useQueryData(userDataSource, userId ? {userId} : idle);
 
   return (
@@ -186,29 +186,50 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 };
 ```
 
-当参数等于 `idle` 时：
+Wenn die Parameter gleich `idle` sind:
 
-- 查询不会执行。
-- 状态保持为 `success`。
-- 数据保持为 `undefined`。
-- 组件可以安全地渲染而无需加载。
+- Die Abfrage wird nicht ausgeführt.
+- Der Status bleibt `success`.
+- Die Daten bleiben `undefined`.
+- Die Komponente kann sicher ohne Ladeanzeige gerendert werden.
 
-**`idle` 的优势：**
+**Vorteile von `idle`:**
 
-1. **类型安全** - TypeScript 正确推断条件参数的类型。
-2. **性能** - 避免不必要的服务器请求。
-3. **逻辑简化** - 无需管理额外的 `enabled` 状态。
-4. **一致性** - 所有条件查询的统一方法。
+1. **Typsicherheit** - TypeScript leitet Typen für bedingte Parameter korrekt ab.
+2. **Performance** - Vermeidet unnötige Serveranfragen.
+3. **Logische Einfachheit** - Keine Notwendigkeit, einen zusätzlichen `enabled`-Status zu verwalten.
+4. **Konsistenz** - Einheitlicher Ansatz für alle bedingten Abfragen.
 
-这对于条件查询特别有用，当你想在特定条件下加载数据，同时保持类型安全时。
+Dies ist besonders nützlich für bedingte Abfragen, wenn Sie Daten nur unter bestimmten Bedingungen laden möchten, während die Typsicherheit erhalten bleibt.
 
-## API 参考
+## API-Referenz
 
-### 创建数据源
+### Datenquellen erstellen
 
 #### `makePlainQueryDataSource(config)`
 
-为简单的请求/响应模式创建普通查询数据源。
+Erstellt eine Plain Query Data Source für einfache Anfrage/Antwort-Muster.
+
+```html
+<ul>
+  <li><a href="/en/README.md">English</a></li>
+  <li><a href="/de/README.md">Deutsch</a></li>
+</ul>
+```
+
+# @gravity/data-manager
+
+Ein Framework, das die Datenverwaltung in React-Anwendungen vereinfacht. Es bietet eine einheitliche Schnittstelle für das Abrufen, Zwischenspeichern und Verwalten von Daten, die auf [React Query](https://react-query.tanstack.com/) basiert.
+
+## Kernkonzepte
+
+### Datenquellen
+
+Datenquellen sind die Bausteine für die Datenverwaltung. Sie definieren, wie Daten abgerufen und transformiert werden.
+
+#### `makePlainQueryDataSource(config)`
+
+Erstellt eine Datenquelle für einfache Abfragemuster.
 
 ```ts
 const dataSource = makePlainQueryDataSource({
@@ -220,23 +241,23 @@ const dataSource = makePlainQueryDataSource({
   options: {
     staleTime: 60000,
     retry: 3,
-    // ... other react-query options
+    // ... weitere react-query-Optionen
   },
 });
 ```
 
-**参数:**
+**Parameter:**
 
-- `name` - 数据源的唯一标识符
-- `fetch` - 执行实际数据获取的函数
-- `transformParams` (可选) - 在请求前转换输入参数
-- `transformResponse` (可选) - 转换响应数据
-- `tags` (可选) - 生成用于失效缓存的标签
-- `options` (可选) - React Query 选项
+- `name` - Eindeutiger Bezeichner für die Datenquelle
+- `fetch` - Funktion, die den eigentlichen Datenabruf durchführt
+- `transformParams` (optional) - Transformiert Eingabeparameter vor der Anfrage
+- `transformResponse` (optional) - Transformiert Antwortdaten
+- `tags` (optional) - Generiert Cache-Tags für die Invalidierung
+- `options` (optional) - React Query-Optionen
 
 #### `makeInfiniteQueryDataSource(config)`
 
-为分页和无限滚动模式创建无限查询数据源。
+Erstellt eine Datenquelle für unendliche Abfragen, die für Paginierungs- und unendliche Scrollmuster verwendet wird.
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -244,20 +265,20 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
   fetch: skipContext(fetchFunction),
   next: (lastPage, allPages) => nextPageParam || undefined,
   prev: (firstPage, allPages) => prevPageParam || undefined,
-  // ... other options same as plain
+  // ... weitere Optionen wie bei "plain"
 });
 ```
 
-**附加参数:**
+**Zusätzliche Parameter:**
 
-- `next` - 确定下一页参数的函数
-- `prev` (可选) - 确定上一页参数的函数
+- `next` - Funktion zur Bestimmung der Parameter für die nächste Seite
+- `prev` (optional) - Funktion zur Bestimmung der Parameter für die vorherige Seite
 
 ### React Hooks
 
 #### `useQueryData(dataSource, params, options?)`
 
-用于使用数据源获取数据的核心 Hook。
+Der Haupt-Hook zum Abrufen von Daten mit einer Datenquelle.
 
 ```ts
 const {data, status, error, refetch, ...rest} = useQueryData(
@@ -270,17 +291,17 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 );
 ```
 
-**返回值:**
+**Gibt zurück:**
 
-- `data` - 获取到的数据
-- `status` - 当前状态 ('loading' | 'success' | 'error')
-- `error` - 请求失败时的错误对象
-- `refetch` - 手动重新获取数据的函数
-- 其他 React Query 属性
+- `data` - Die abgerufenen Daten
+- `status` - Aktueller Status ('loading' | 'success' | 'error')
+- `error` - Fehlerobjekt, wenn die Anfrage fehlgeschlagen ist
+- `refetch` - Funktion zum manuellen erneuten Abrufen von Daten
+- Weitere React Query-Eigenschaften
 
 #### `useQueryResponses(responses)`
 
-将多个查询响应合并为单个状态。
+Kombiniert mehrere Abfrageergebnisse in einen einzigen Zustand.
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -289,34 +310,34 @@ const posts = useQueryData(postsDataSource, {userId});
 const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]);
 ```
 
-**返回值:**
+**Gibt zurück:**
 
-- `status` - 所有查询的合并状态
-- `error` - 遇到的第一个错误
-- `refetch` - 重新获取所有查询的函数
-- `refetchErrored` - 只重新获取失败查询的函数
+- `status` - Kombinierter Status aller Abfragen
+- `error` - Erster aufgetretener Fehler
+- `refetch` - Funktion zum erneuten Abrufen aller Abfragen
+- `refetchErrored` - Funktion zum erneuten Abrufen nur fehlgeschlagener Abfragen
 
 #### `useRefetchAll(states)`
 
-创建一个用于重新获取多个查询的回调函数。
+Erstellt eine Callback-Funktion zum erneuten Abrufen mehrerer Abfragen.
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
-// refetchAll() 将触发所有查询的重新获取
+// refetchAll() löst das erneute Abrufen aller Abfragen aus
 ```
 
 #### `useRefetchErrored(states)`
 
-创建一个用于只重新获取失败查询的回调函数。
+Erstellt eine Callback-Funktion zum erneuten Abrufen nur fehlgeschlagener Abfragen.
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
-// refetchErrored() 只会重新获取有错误的查询
+// refetchErrored() ruft nur Abfragen mit Fehlern erneut ab
 ```
 
 #### `useDataManager()`
 
-从上下文中获取 DataManager。
+Gibt den DataManager aus dem Kontext zurück.
 
 ```ts
 const dataManager = useDataManager();
@@ -325,13 +346,13 @@ await dataManager.invalidateTag('users');
 
 #### `useQueryContext()`
 
-返回查询上下文（用于构建基于 react-query 的自定义数据 Hook）。
+Gibt den Abfragekontext zurück (zum Erstellen benutzerdefinierter Daten-Hooks basierend auf react-query).
 
-### React Components
+### React Komponenten
 
 #### `<DataLoader />`
 
-用于处理加载状态和错误的组件。
+Komponente zur Handhabung von Ladezuständen und Fehlern.
 
 ```tsx
 <DataLoader
@@ -349,17 +370,17 @@ await dataManager.invalidateTag('users');
 
 **Props:**
 
-- `status` - 当前加载状态
-- `error` - 错误对象
-- `errorAction` - 用于错误重试的函数或操作配置
-- `LoadingView` - 加载期间显示的组件
-- `ErrorView` - 发生错误时显示的组件
-- `loadingViewProps` - 传递给 LoadingView 的 props
-- `errorViewProps` - 传递给 ErrorView 的 props
+- `status` - Aktueller Ladezustand
+- `error` - Fehlerobjekt
+- `errorAction` - Funktion oder Aktionskonfiguration für den Fehler-Retry
+- `LoadingView` - Komponente, die während des Ladens angezeigt wird
+- `ErrorView` - Komponente, die bei einem Fehler angezeigt wird
+- `loadingViewProps` - An `LoadingView` übergebene Props
+- `errorViewProps` - An `ErrorView` übergebene Props
 
 #### `<DataInfiniteLoader />`
 
-专为无限查询设计的组件。
+Spezialisierte Komponente für unendliche Abfragen.
 
 ```tsx
 <DataInfiniteLoader
@@ -378,35 +399,35 @@ await dataManager.invalidateTag('users');
 </DataInfiniteLoader>
 ```
 
-**附加 Props:**
+**Zusätzliche Props:**
 
-- `hasNextPage` - 是否还有更多页面可用
-- `fetchNextPage` - 获取下一页的函数
-- `isFetchingNextPage` - 是否正在获取下一页
-- `MoreView` - "加载更多" 按钮的组件
+- `hasNextPage` - Gibt an, ob weitere Seiten verfügbar sind
+- `fetchNextPage` - Funktion zum Abrufen der nächsten Seite
+- `isFetchingNextPage` - Gibt an, ob die nächste Seite abgerufen wird
+- `MoreView` - Komponente für den "Mehr laden"-Button
 
 #### `withDataManager(Component)`
 
-一个 HOC，将 DataManager 作为 prop 注入。
+HOC, das den DataManager als Prop injiziert.
 
 ```tsx
 const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
-  // 组件可以访问 dataManager
+  // Die Komponente hat Zugriff auf dataManager
   return <div>...</div>;
 });
 ```
 
-### Data Management
+### Datenverwaltung
 
 #### `ClientDataManager`
 
-数据管理的核心类。
+Hauptklasse für die Datenverwaltung.
 
 ```ts
 const dataManager = new ClientDataManager({
   defaultOptions: {
     queries: {
-      staleTime: 300000, // 5 分钟
+      staleTime: 300000, // 5 Minuten
       retry: 3,
       refetchOnWindowFocus: false,
     },
@@ -414,22 +435,22 @@ const dataManager = new ClientDataManager({
 });
 ```
 
-**Methods:**
+**Methoden:**
 
 ##### `invalidateTag(tag, options?)`
 
-使具有特定标签的所有查询失效。
+Invalidiert alle Abfragen mit einem bestimmten Tag.
 
 ```ts
 await dataManager.invalidateTag('users');
 await dataManager.invalidateTag('posts', {
-  repeat: {count: 3, interval: 1000}, // 重试失效
+  repeat: {count: 3, interval: 1000}, // Retry-Invalidierung
 });
 ```
 
 ##### `invalidateTags(tags, options?)`
 
-使包含所有指定标签的查询失效。
+Invalidiert Abfragen, die alle angegebenen Tags haben.
 
 ```ts
 await dataManager.invalidateTags(['user', 'profile']);
@@ -437,7 +458,7 @@ await dataManager.invalidateTags(['user', 'profile']);
 
 ##### `invalidateSource(dataSource, options?)`
 
-使数据源的所有查询失效。
+Invalidiert alle Abfragen für eine Datenquelle.
 
 ```ts
 await dataManager.invalidateSource(userDataSource);
@@ -445,7 +466,7 @@ await dataManager.invalidateSource(userDataSource);
 
 ##### `invalidateParams(dataSource, params, options?)`
 
-使具有精确参数的特定查询失效。
+Invalidiert eine bestimmte Abfrage mit exakten Parametern.
 
 ```ts
 await dataManager.invalidateParams(userDataSource, {userId: 123});
@@ -453,7 +474,7 @@ await dataManager.invalidateParams(userDataSource, {userId: 123});
 
 ##### `resetSource(dataSource)`
 
-重置（清除）数据源的所有缓存数据。
+Setzt (leert) alle zwischengespeicherten Daten für eine Datenquelle zurück.
 
 ```ts
 await dataManager.resetSource(userDataSource);
@@ -461,7 +482,7 @@ await dataManager.resetSource(userDataSource);
 
 ##### `resetParams(dataSource, params)`
 
-重置特定参数的缓存数据。
+Setzt zwischengespeicherte Daten für spezifische Parameter zurück.
 
 ```ts
 await dataManager.resetParams(userDataSource, {userId: 123});
@@ -469,41 +490,34 @@ await dataManager.resetParams(userDataSource, {userId: 123});
 
 ##### `invalidateSourceTags(dataSource, params, options?)`
 
-根据数据源生成的标签使查询失效。
+Invalidiert Abfragen basierend auf Tags, die von einer Datenquelle generiert wurden.
 
 ```ts
 await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 ```
 
-### Utilities
+### Hilfsprogramme
 
 #### `skipContext(fetchFunction)`
 
-用于将现有 fetch 函数适配到数据源接口的工具函数。
+Hilfsprogramm zum Anpassen vorhandener Fetch-Funktionen an die Datenquellen-Schnittstelle.
 
 ```ts
-// Existing function
+// Bestehende Funktion
 async function fetchUser(params: {userId: number}) {
   // ...
 }
 
-// Adapted for data source
+// Angepasst für Datenquelle
 const dataSource = makePlainQueryDataSource({
   name: 'user',
-  fetch: skipContext(fetchUser), // Skips context and fetchContext params
+  fetch: skipContext(fetchUser), // Überspringt Kontext- und fetchContext-Parameter
 });
 ```
 
 #### `withCatch(fetchFunction, errorHandler)`
 
-```html
-<div class="language-selector">
-  <a href="/en/readme.html">English</a>
-  <a href="/zh/readme.html">中文</a>
-</div>
-```
-
-为 fetch 函数添加标准化的错误处理。
+Fügt standardisierte Fehlerbehandlung zu Fetch-Funktionen hinzu.
 
 ```ts
 const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.message}));
@@ -511,22 +525,22 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 #### `withCancellation(fetchFunction)`
 
-为 fetch 函数添加取消支持。
+Fügt Abbruchunterstützung zu Fetch-Funktionen hinzu.
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
-// 自动处理来自 React Query 的 AbortSignal
+// Behandelt AbortSignal von React Query automatisch
 ```
 
 #### `getProgressiveRefetch(options)`
 
-创建一个渐进式重试间隔函数。
+Erstellt eine Funktion für progressive Nachladeintervalle.
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
-  minInterval: 1000, // 从 1 秒开始
-  maxInterval: 30000, // 最多 30 秒
-  multiplier: 2, // 每次翻倍
+  minInterval: 1000, // Start mit 1 Sekunde
+  maxInterval: 30000, // Maximal 30 Sekunden
+  multiplier: 2, // Verdoppelt sich jedes Mal
 });
 
 const dataSource = makePlainQueryDataSource({
@@ -540,72 +554,72 @@ const dataSource = makePlainQueryDataSource({
 
 #### `normalizeStatus(status, fetchStatus)`
 
-将 React Query 的状态转换为 DataLoader 的状态。
+Konvertiert React Query-Status in DataLoader-Status.
 
 ```ts
 const status = normalizeStatus('pending', 'fetching'); // 'loading'
 ```
 
-#### 状态和错误工具
+#### Status- und Fehler-Dienstprogramme
 
 ```ts
-// 从多个状态获取合并后的状态
+// Ermittelt den kombinierten Status aus mehreren Zuständen
 const status = getStatus([user, posts, comments]);
 
-// 从多个状态获取第一个错误
+// Ermittelt den ersten Fehler aus mehreren Zuständen
 const error = getError([user, posts, comments]);
 
-// 合并多个状态
+// Kombiniert mehrere Status
 const combinedStatus = mergeStatuses(['loading', 'success', 'error']); // 'error'
 
-// 检查查询键是否包含标签
+// Prüft, ob ein Query-Schlüssel ein Tag hat
 const hasUserTag = hasTag(queryKey, 'users');
 ```
 
-#### 键组合工具
+#### Dienstprogramme zur Schlüsselkomposition
 
 ```ts
-// 为数据源组合缓存键
+// Komponiert den Cache-Schlüssel für eine Datenquelle
 const key = composeKey(userDataSource, {userId: 123});
 
-// 组合包含标签的完整键
+// Komponiert den vollständigen Schlüssel einschließlich Tags
 const fullKey = composeFullKey(userDataSource, {userId: 123});
 ```
 
-#### 常量
+#### Konstanten
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
-// 用于跳过查询执行的特殊符号
+// Spezielles Symbol zum Überspringen der Query-Ausführung
 const params = shouldFetch ? {userId: 123} : idle;
 
-// 类型安全的 `enabled: false` 的替代方案
-// 而不是：
+// Typsichere Alternative zu enabled: false
+// Anstatt:
 const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Boolean(userId)});
 
-// 使用：
+// Verwenden Sie:
 const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
-// TypeScript 会正确推断两个分支的类型
+// TypeScript leitet Typen für beide Zweige korrekt ab
 ```
 
-#### 查询选项组合
+#### Komposition von Query-Optionen
 
 ```ts
-// 为普通查询组合 React Query 选项
+// Komponiert React Query-Optionen für einfache Abfragen
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// 为无限查询组合 React Query 选项
+// Komponiert React Query-Optionen für unendliche Abfragen
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
-**注意：** 这些函数主要用于创建自定义数据源实现时的内部使用。
+**Hinweis:** Diese Funktionen sind hauptsächlich für die interne Verwendung bei der Erstellung benutzerdefinierter Datenquellenimplementierungen bestimmt.
 
-## 高级模式
+## Fortgeschrittene Muster
 
-### 使用 `idle` 进行条件查询
+### Bedingte Abfragen mit `idle`
 
-使用 `idle` 来创建条件查询：
+Verwenden Sie `idle`, um bedingte Abfragen zu erstellen:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -614,13 +628,13 @@ const ConditionalDataComponent: React.FC<{
   userId?: number;
   shouldLoadPosts: boolean;
 }> = ({userId, shouldLoadPosts}) => {
-  // 仅当 userId 定义时加载用户
+  // Lädt den Benutzer nur, wenn userId definiert ist
   const user = useQueryData(
     userDataSource,
     userId ? {userId} : idle
   );
 
-  // 仅当用户已加载且标志已启用时加载帖子
+  // Lädt Beiträge nur, wenn der Benutzer geladen ist und das Flag aktiviert ist
   const posts = useQueryData(
     userPostsDataSource,
     user.data && shouldLoadPosts ? {userId: user.data.id} : idle
@@ -639,9 +653,9 @@ const ConditionalDataComponent: React.FC<{
 };
 ```
 
-### 数据转换
+### Datentransformation
 
-转换请求参数和响应数据：
+Transformiert Anfrageparameter und Antwortdaten:
 
 ```ts
 const apiDataSource = makePlainQueryDataSource({
@@ -659,9 +673,9 @@ const apiDataSource = makePlainQueryDataSource({
 });
 ```
 
-### 基于标签的缓存失效
+### Tag-basierte Cache-Invalidierung
 
-使用标签进行复杂的缓存管理：
+Verwenden Sie Tags für eine ausgefeilte Cache-Verwaltung:
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -676,16 +690,16 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// 使特定用户的全部数据失效
+// Ungültigmachen aller Daten für einen bestimmten Benutzer
 await dataManager.invalidateTag('user:123');
 
-// 使所有与用户相关的数据失效
+// Ungültigmachen aller benutzerbezogenen Daten
 await dataManager.invalidateTag('users');
 ```
 
-### 带类型的错误处理
+### Fehlerbehandlung mit Typen
 
-创建类型安全的错误处理：
+Erstellt typsichere Fehlerbehandlung:
 
 ```ts
 interface ApiError {
@@ -696,20 +710,20 @@ interface ApiError {
 
 const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
   <div className="error">
-    <h3>错误 {error?.code}</h3>
+    <h3>Fehler {error?.code}</h3>
     <p>{error?.message}</p>
     {action && (
       <button onClick={action.handler}>
-        {action.children || '重试'}
+        {action.children || 'Erneut versuchen'}
       </button>
     )}
   </div>
 );
 ```
 
-### 带复杂分页的无限查询
+### Unendliche Abfragen mit komplexer Paginierung
 
-处理复杂的分页场景：
+Behandelt komplexe Paginierungsszenarien:
 
 ```ts
 interface PaginationParams {
@@ -739,9 +753,9 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### 组合多个数据源
+### Kombinieren mehrerer Datenquellen
 
-组合来自多个源的数据：
+Kombiniert Daten aus mehreren Quellen:
 
 ```ts
 const UserProfile: React.FC<{userId: number}> = ({userId}) => {
@@ -754,8 +768,8 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 
 ```html
 <div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/zh/README.md">中文</a>
+  <a href="/en/README.md" class="language-link">English</a>
+  <a href="/de/README.md" class="language-link">Deutsch</a>
 </div>
 ```
 
@@ -764,7 +778,7 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
     <DataLoader
       status={combined.status}
       error={combined.error}
-      errorAction={combined.refetchErrored} // Only retry failed requests
+      errorAction={combined.refetchErrored} // Nur fehlgeschlagene Anfragen erneut versuchen
       LoadingView={ProfileSkeleton}
       ErrorView={ProfileError}
     >
@@ -780,27 +794,27 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 };
 ```
 
-## TypeScript 支持
+## TypeScript-Unterstützung
 
-该库采用 TypeScript 优先的方法构建，并提供完整的类型推断：
+Die Bibliothek wurde mit einem TypeScript-First-Ansatz entwickelt und bietet vollständige Typinferenz:
 
 ```ts
-// 类型会自动推断
+// Typen werden automatisch abgeleitet
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // 返回类型被推断为 User
+    // Rückgabetyp wird als User abgeleitet
   }),
 });
 
-// Hook 的返回类型会自动进行类型化
+// Hook-Rückgabetyp ist automatisch typisiert
 const {data} = useQueryData(userDataSource, {userId: 123});
-// data 被类型化为 User | undefined
+// data ist als User | undefined typisiert
 ```
 
-### 自定义错误类型
+### Benutzerdefinierte Fehlertypen
 
-定义并使用自定义错误类型：
+Definieren und verwenden Sie benutzerdefinierte Fehlertypen:
 
 ```ts
 interface ValidationError {
@@ -815,21 +829,21 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Params 类型
-  {id: number}, // Request 类型
-  ApiResponse, // Response 类型
-  User, // Data 类型
-  ApiError // Error 类型
+  {id: number}, // Parametertyp
+  {id: number}, // Anfragetyp
+  ApiResponse, // Antworttyp
+  User, // Datentyp
+  ApiError // Fehlertyp
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
 });
 ```
 
-## 贡献
+## Mitwirkung
 
-请阅读 [CONTRIBUTING.md](CONTRIBUTING.md) 以了解我们的行为准则以及提交拉取请求的流程。
+Bitte lesen Sie [CONTRIBUTING.md](CONTRIBUTING.md) für Details zu unserem Verhaltenskodex und dem Prozess für das Einreichen von Pull-Requests.
 
-## 许可证
+## Lizenz
 
-MIT 许可证。有关详细信息，请参阅 [LICENSE](LICENSE) 文件。
+MIT-Lizenz. Details finden Sie in der Datei [LICENSE](LICENSE).
