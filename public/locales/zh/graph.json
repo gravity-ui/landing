@@ -1,4 +1,6 @@
-﻿{
-  "goToLibrary": "去图书馆",
-  "title": "游乐场"
+```json
+{
+  "goToLibrary": "前往库",
+  "title": "Playground"
 }
+```
