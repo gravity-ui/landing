@@ -1,30 +1,30 @@
 # @gravity-ui/dynamic-forms &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/dynamic-forms)](https://www.npmjs.com/package/@gravity-ui/dynamic-forms) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/dynamic-forms/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/dynamic-forms/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/dynamic-forms/)
 
-Una biblioteca basada en JSON Schema para renderizar formularios y valores de formularios.
+Die JSON Schema-basierte Bibliothek zum Rendern von Formularen und Formularwerten.
 
-## Instalación
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/dynamic-forms
 ```
 
-## Uso
+## Verwendung
 
 ```jsx
 import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
 
-// Para incrustar en un final-form
+// Zum Einbetten in ein final-form
 <DynamicField name={name} spec={spec} config={config} />;
 
 import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
 
-// Para obtener una vista general de los valores
+// Um eine Übersicht über die Werte zu erhalten
 <DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
 ```
 
-### Internacionalización (I18N)
+### I18N
 
-Ciertos componentes incluyen tokens de texto (palabras y frases) que están disponibles en dos idiomas: `en` (el predeterminado) y `ru`. Para establecer el idioma, utiliza la función `configure`:
+Bestimmte Komponenten enthalten Text-Tokens (Wörter und Phrasen), die in zwei Sprachen verfügbar sind: `en` (Standard) und `ru`. Um die Sprache festzulegen, verwenden Sie die Funktion `configure`:
 
 ```js
 // index.js
@@ -34,9 +34,9 @@ import {configure, Lang} from '@gravity-ui/dynamic-forms';
 configure({lang: Lang.Ru});
 ```
 
-## Desarrollo
+## Entwicklung
 
-Para iniciar el servidor de desarrollo con storybook, ejecuta el siguiente comando:
+Um den Entwicklungsserver mit Storybook zu starten, führen Sie den folgenden Befehl aus:
 
 ```shell
 npm ci
