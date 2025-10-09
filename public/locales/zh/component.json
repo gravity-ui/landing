@@ -1,4 +1,5 @@
-﻿{
+```json
+{
     "actions_openInFigma": "在 Figma 中打开",
     "title": "组件",
     "searchPlaceholder": "按组件名称搜索",
@@ -11,3 +12,4 @@
     "rtlOff": "关闭 RTL",
     "rtlNotSupported": "不支持 RTL"
 }
+```

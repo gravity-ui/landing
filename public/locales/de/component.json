@@ -1,0 +1,15 @@
+```json
+{
+    "actions_openInFigma": "In Figma öffnen",
+    "title": "Komponenten",
+    "searchPlaceholder": "Nach Komponentennamen suchen",
+    "color-input_validation-format-error": "Falsches Format",
+    "maintainers_one": "Betreuer:",
+    "maintainers_other": "Betreuer:",
+    "maintainers": "Betreuer:",
+    "theme": "Thema wechseln",
+    "rtlOn": "RTL aktivieren",
+    "rtlOff": "RTL deaktivieren",
+    "rtlNotSupported": "RTL wird nicht unterstützt"
+}
+```
