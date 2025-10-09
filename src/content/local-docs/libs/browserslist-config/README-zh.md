@@ -1,4 +1,4 @@
-# Gravity UI 包系列的 Browserslist 配置
+# Browserslist 配置 - Gravity UI 包家族
 
 ## 兼容的浏览器
 
@@ -14,18 +14,23 @@ npm i --save-dev @gravity-ui/browserslist-config
 
 ```json
 {
-  "browserslist": ["extends @gravity-ui/browserslist-config"]
+  "browserslist": [
+    "extends @gravity-ui/browserslist-config"
+  ]
 }
 ```
 
-您可以根据您的受众指定额外的浏览器，例如：
-
+您可以根据您的目标用户指定额外的浏览器，例如：
 ```json
 {
-  "browserslist": ["extends @gravity-ui/browserslist-config", "Chrome >= 100", "Firefox >= 100"]
+  "browserslist": [
+    "extends @gravity-ui/browserslist-config",
+    "Chrome >= 100",
+    "Firefox >= 100"
+  ]
 }
 ```
 
-## 使用
+## 用法
 
-该包提供了 browserslist 的生产版本。
+该包提供了生产环境的 browserslist 配置。
