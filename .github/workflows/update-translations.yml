@@ -68,5 +68,13 @@ jobs:
           prompt: |
             Please translate the json source file to {targetLanguage}. \
             Make the translation sound as natural as possible. \
+            Don't convert keys to json, you only need to translate values. \
+            You should output valid json without any other formatting or comments. \
+            For example, this is the correct json output: \
+            {
+                "actions_openInFigma": "Open in Figma",
+                "title": "Components",
+            } \
+            Return only the json, no other text. Remove formatting like markdown ```json```. \
             Do not translate the library name in the source file if it looks like the name of the library (the exception is Themer, it can be translated). \
             For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
