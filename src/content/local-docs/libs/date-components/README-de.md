@@ -1,12 +1,12 @@
 # @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
 
-## Instalación
+## Installation
 
 ```shell
 npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
 ```
 
-## Uso
+## Verwendung
 
 ```jsx
 import {createRoot} from 'react-dom/client';
@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Fecha:</label>
+        <label forHtml="date-picker">Datum:</label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -31,21 +31,21 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-### Localización
+### Lokalisierung
 
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Carga los locales de fecha que se usarán en la aplicación.
+// Lade die Datum-Lokalisierungen, die in der Anwendung verwendet werden sollen.
 settings.loadLocale('ru');
 
 function App() {
   return (
-    // Establece el idioma a usar con los componentes.
+    // Setze die Sprache, die mit den Komponenten verwendet werden soll.
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Fecha:</label>
+        <label forHtml="date-picker">Datum:</label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -53,17 +53,17 @@ function App() {
 }
 ```
 
-Si la aplicación admite el cambio de idioma, precarga todos los locales compatibles al cargar la aplicación por primera vez, o carga los locales antes de cambiar el idioma:
+Wenn die App Sprachwechsel unterstützt, lade alle unterstützten Lokalisierungen vor, wenn die App zum ersten Mal geladen wird, oder lade die Lokalisierungen vor dem Sprachwechsel:
 
 ```jsx
-// Precarga de locales
+// Lokalisierungen vorladen
 settings.loadLocale('ru');
 settings.loadLocale('nl');
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// o carga de locales bajo demanda.
+// oder Lokalisierungen bei Bedarf laden.
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -78,25 +78,25 @@ function App() {
 }
 ```
 
-Los componentes tienen traducciones al inglés y al ruso. Para añadir traducciones a otros idiomas, utiliza `addLanguageKeysets` de `@gravity-ui/uikit`:
+Die Komponenten verfügen über Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwende `addLanguageKeysets` aus `@gravity-ui/uikit`:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// Usa el tipo Keyset para especificar las traducciones de todos los componentes disponibles
+// Verwende den Keyset-Typ, um Übersetzungen für alle verfügbaren Komponenten anzugeben
 addLanguageKeysets<Keysets>(lang, {...});
 
-// o usa el tipo PartialKeysets para especificar solo los que necesitas
+// oder verwende den PartialKeysets-Typ, um nur die benötigten anzugeben
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// Para especificar traducciones para algunos componentes
+// Um Übersetzungen für einige Komponenten anzugeben
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
-## Desarrollo
+## Entwicklung
 
-Para iniciar el servidor de desarrollo con storybook, ejecuta lo siguiente:
+Um den Entwicklungsserver mit Storybook zu starten, führe Folgendes aus:
 
 ```shell
 npm start
