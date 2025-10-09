@@ -1,0 +1,12 @@
+```json
+{
+    "title": "라이브러리",
+    "header": "저희 라이브러리",
+    "searchPlaceholder": "이름 또는 설명으로 검색",
+    "empty": "찾을 수 없음",
+    "tags_all": "전체",
+    "tags_ui": "UI",
+    "tags_nodejs": "Node.js",
+    "tags_infrastructure": "인프라"
+}
+```
