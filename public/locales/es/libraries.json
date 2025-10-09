@@ -1,8 +1,8 @@
-﻿{
+{
     "title": "Bibliotecas",
     "header": "Nuestras bibliotecas",
-    "searchPlaceholder": "Búsqueda por nombre o descripción",
-    "empty": "No se encontró nada",
+    "searchPlaceholder": "Buscar por nombre o descripción",
+    "empty": "Nada encontrado",
     "tags_all": "Todas",
     "tags_ui": "UI",
     "tags_nodejs": "Node.js",
