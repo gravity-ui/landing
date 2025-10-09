@@ -1,6 +1,6 @@
 # @gravity-ui/chartkit &middot; [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-用于渲染基于任何您需要的数据源的图表的 React 组件
+用于渲染图表的 React 组件，可以基于您需要的任何数据源
 
 ## 安装
 
@@ -8,7 +8,7 @@
 npm i --save-dev @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
-确保您的项目中启用了 `@gravity-ui/uikit` 样式。
+请确保您的项目中已启用 `@gravity-ui/uikit` 的样式。
 
 ```typescript
 import '@gravity-ui/uikit/styles/styles.scss';

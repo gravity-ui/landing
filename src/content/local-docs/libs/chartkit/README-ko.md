@@ -1,20 +1,20 @@
 # @gravity-ui/chartkit &middot; [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Componente React para renderizar gráficos a partir de cualquier fuente que necesites.
+필요한 모든 소스를 기반으로 차트를 렌더링하는 React 컴포넌트
 
-## Instalación
+## 설치
 
 ```shell
 npm i --save-dev @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
-Asegúrate de tener los estilos de `@gravity-ui/uikit` habilitados en tu proyecto.
+프로젝트에 `@gravity-ui/uikit` 스타일이 활성화되어 있는지 확인하세요.
 
 ```typescript
 import '@gravity-ui/uikit/styles/styles.scss';
 ```
 
-## Uso
+## 사용법
 
 ```typescript
 import {ThemeProvider} from '@gravity-ui/uikit';
@@ -54,7 +54,7 @@ const data: YagrWidgetData = {
       },
     },
     title: {
-      text: 'línea: 10 puntos aleatorios',
+      text: 'line: random 10 pts',
     },
   },
 };

@@ -1,20 +1,20 @@
 # @gravity-ui/chartkit &middot; [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Componente React para renderizar gráficos a partir de cualquier fuente que necesites.
+React-Komponente zum Rendern von Diagrammen basierend auf beliebigen Quellen
 
-## Instalación
+## Installation
 
 ```shell
 npm i --save-dev @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
-Asegúrate de tener los estilos de `@gravity-ui/uikit` habilitados en tu proyecto.
+Stellen Sie sicher, dass die Stile von `@gravity-ui/uikit` in Ihrem Projekt aktiviert sind.
 
 ```typescript
 import '@gravity-ui/uikit/styles/styles.scss';
 ```
 
-## Uso
+## Verwendung
 
 ```typescript
 import {ThemeProvider} from '@gravity-ui/uikit';
@@ -54,7 +54,7 @@ const data: YagrWidgetData = {
       },
     },
     title: {
-      text: 'línea: 10 puntos aleatorios',
+      text: 'line: random 10 pts',
     },
   },
 };
