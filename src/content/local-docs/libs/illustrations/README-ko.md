@@ -1,22 +1,22 @@
 # @gravity-ui/illustrations &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/illustrations)](https://www.npmjs.com/package/@gravity-ui/illustrations) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/illustrations/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/illustrations/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/illustrations/)
 
-## 安装
+## 설치
 
 ```shell
 npm install --save-dev @gravity-ui/illustrations
 ```
 
-## 用法
+## 사용법
 
 ### React
 
-#### 准备工作
+#### 준비
 
-设置插画主题。执行以下任一步骤：
+일러스트레이션 테마를 설정합니다. 다음 단계 중 하나를 실행하세요:
 
-##### 使用自定义颜色调色板定义 CSS 变量
+##### 자체 색상 팔레트로 CSS 토큰 정의
 
-在应用中定义以下 CSS 变量：
+앱에서 다음 CSS 토큰을 정의합니다:
 
 ```scss
 --gil-color-object-base: rgb(255, 190, 92);
@@ -29,9 +29,9 @@ npm install --save-dev @gravity-ui/illustrations
 --gil-color-object-danger: rgb(255, 0, 61);
 ```
 
-##### 在 SCSS 中使用带有默认 gravity-theme 的 mixin
+##### SCSS에서 기본 gravity-theme 믹스인 사용
 
-使用以下 mixin 为不同主题的插画设置样式：
+다양한 테마에서 일러스트레이션 스타일링을 위해 다음 믹스인을 사용합니다.
 
 ```scss
 @import '@gravity-ui/illustrations/styles/theme.scss';
@@ -55,24 +55,24 @@ npm install --save-dev @gravity-ui/illustrations
 }
 ```
 
-##### 对于已安装 gravity 主题的项目，有另一种选择
+##### 미리 설치된 gravity 테마가 있는 프로젝트의 대안
 
-或者，如果项目中已安装 `@gravity-ui/uikit` 并使用默认主题，您可以直接在项目根样式文件中导入 `styles.scss`：
+또는, 프로젝트에 `@gravity-ui/uikit`이 이미 설치되어 있고 기본 테마를 사용하는 경우, 프로젝트의 루트 스타일 파일에 `styles.scss`를 가져오기만 하면 됩니다:
 
-```scss
-// 现有的 gravity 样式定义
+```js
+// 기존 gravity 스타일 정의
 import '@gravity-ui/uikit/styles/styles.css';
-// 只需在下方添加另一个导入
+// 바로 아래에 한 줄 더 추가
 import '@gravity-ui/illustrations/styles/styles.scss';
 ```
 
-#### 组件用法
+#### 컴포넌트 사용법
 
 ```js
 import NotFound from '@gravity-ui/illustrations/NotFound';
 ```
 
-或者
+또는
 
 ```js
 import {NotFound} from '@gravity-ui/illustrations';
@@ -80,15 +80,15 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> 您可能需要相应的加载器来处理此文件
+> 이를 위해 적절한 로더가 필요할 수 있습니다.
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 ```
 
-### 开发
+### 개발
 
-要根据新设计更新插画，请更改 light 主题下的 SVG 文件内容（位于 `<此仓库根目录>/svgs/<插画名称>-light.svg` 文件中），然后运行以下命令：
+새로운 디자인에 맞춰 일러스트레이션을 업데이트하려면, 라이트 테마의 SVG 콘텐츠를 변경합니다 (`<이-저장소-루트>/svgs/<일러스트레이션-이름>-light.svg` 파일) 그런 다음 명령을 실행합니다:
 
 ```shell
 npm run generate
