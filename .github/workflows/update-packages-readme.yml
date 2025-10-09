@@ -114,7 +114,7 @@ jobs:
         with:
           provider: 'openrouter'
           apikey: ${{ secrets.OPENROUTER_API_KEY }}
-          model: 'x-ai/grok-4-fast:free'
+          model: 'google/gemini-2.5-flash-lite'
           inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
           outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
           pullRequestNumber: ${{ needs.update-packages-readme.outputs.pr_number }}
