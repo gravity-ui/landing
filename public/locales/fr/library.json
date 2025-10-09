@@ -1,0 +1,15 @@
+{
+    "actions_goToIcons": "Aller aux icônes",
+    "libraries": "Bibliothèques",
+    "readme": "Lire la documentation",
+    "changelog": "Journal des modifications",
+    "about": "À propos de la bibliothèque",
+    "stars": "Étoiles",
+    "version": "Version",
+    "lastUpdate": "Dernière mise à jour",
+    "repository": "Dépôt",
+    "license": "Licence",
+    "issues": "Problèmes",
+    "maintainers": "Mainteneurs",
+    "contributors": "Contributeurs"
+}
