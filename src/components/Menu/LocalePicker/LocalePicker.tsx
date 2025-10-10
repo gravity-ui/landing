@@ -4,14 +4,14 @@ import React from 'react';
 
 import i18nextConfig from '../../../../next-i18next.config';
 import {NEXT_LOCALE_COOKIE} from '../../../constants';
-import {useLocale} from '../../../hooks/useLocale';
+import {Locale, useLocale} from '../../../hooks/useLocale';
 import {block, setCookie} from '../../../utils';
 
 import './LocalePicker.scss';
 
 const b = block('menu-local-picker');
 
-const FLAGS: Record<string, string> = {
+const FLAGS: Record<Locale, string> = {
     en: 'us',
     ru: 'ru',
     es: 'es',
@@ -31,14 +31,10 @@ export const LocalePicker: React.FC = () => {
         const localeUpperCase = option.value.toUpperCase();
         return (
             <div className={b('locale-item')}>
-                {FLAGS[locale] ? <span className={`fi fi-${FLAGS[locale]}`}></span> : null}
-                <span className={b('locale-code')}>{localeUpperCase}</span>
-                {i18nextConfig.aiTranslatedLocales.includes(locale) ? (
-                    <React.Fragment>
-                        <span className={b('locale-ai-icon')}>✨</span>
-                        <span className={b('locale-ai-label')}>AI</span>
-                    </React.Fragment>
+                {FLAGS[locale as Locale] ? (
+                    <span className={`fi fi-${FLAGS[locale as Locale]}`}></span>
                 ) : null}
+                <span className={b('locale-code')}>{localeUpperCase}</span>
             </div>
         );
     }, []);
