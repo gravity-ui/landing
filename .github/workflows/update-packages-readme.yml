@@ -36,6 +36,11 @@ jobs:
           MODIFIED_README_FILES=$(git diff --name-only | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
           echo "modified_readme_files=$(echo "$MODIFIED_README_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
 
+          if [ -z "$MODIFIED_README_FILES" ]; then
+            echo "No README files changed — skipping commit and PR creation."
+            exit 0
+          fi
+
           git config user.email ""
           git config user.name "Update packages readme action"
           git checkout -b update-packages-readme
@@ -52,6 +57,7 @@ jobs:
   prepare-inputs:
     needs: update-packages-readme
     runs-on: ubuntu-latest
+    if: ${{ needs.update-packages-readme.outputs.pr_number != '' && needs.update-packages-readme.outputs.pr_number != null }}
     outputs:
       modified_library_readmes: ${{ steps.get-modified-files.outputs.modified_library_readmes }}
     steps:
@@ -80,6 +86,7 @@ jobs:
       - update-packages-readme
       - prepare-inputs
     runs-on: ubuntu-latest
+    if: ${{ needs.update-packages-readme.outputs.pr_number != '' && needs.update-packages-readme.outputs.pr_number != null }}
     strategy:
       max-parallel: 1
       matrix:
@@ -123,7 +130,6 @@ jobs:
           prompt: |
             Please translate the README source file to {targetLanguage}. \
             Make the translation sound as natural as possible. \
-            Keep the HTML snippet with the language options in the same place as in the source file. \
             Do not translate the first line in the source file if it looks like the name of the library. \
             For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place. \
             Don't add html snippet with language options to the output. \
@@ -134,6 +140,7 @@ jobs:
       - update-packages-readme
       - translations
     runs-on: ubuntu-latest
+    if: ${{ needs.update-packages-readme.outputs.pr_number != '' && needs.update-packages-readme.outputs.pr_number != null }}
     steps:
       - uses: actions/checkout@v4
         with:
