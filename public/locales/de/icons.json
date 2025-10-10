@@ -1,0 +1,16 @@
+{
+    "actions_copyIconName": "Icon-Namen kopieren",
+    "actions_copyLink": "Link kopieren",
+    "actions_copied": "Kopiert",
+    "actions_copyReactComponent": "React-Komponente kopieren",
+    "actions_copySvgImport": "SVG-Import kopieren",
+    "actions_downloadSvg": "SVG herunterladen",
+    "title": "Icons",
+    "goToLibrary": "Zur Bibliothek wechseln",
+    "filterPlaceholder": "Nach Icon-Namen filtern",
+    "keywords": "Schlagwörter",
+    "empty_title": "Keine Ergebnisse für Ihre Anfrage gefunden",
+    "empty_subTitle": "Bitte überprüfen Sie die Schreibweise oder versuchen Sie es mit anderen Schlagwörtern.",
+    "usage_reactComponent": "React-Komponente",
+    "usage_svg": "SVG"
+}
