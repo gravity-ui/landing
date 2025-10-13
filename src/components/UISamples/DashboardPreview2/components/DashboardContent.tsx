@@ -2,6 +2,7 @@
 import {Funnel, Plus} from '@gravity-ui/icons';
 import {Button, Card, Col, Container, Flex, HelpMark, Icon, Row, Text} from '@gravity-ui/uikit';
 import dynamic from 'next/dynamic';
+import {useIsMobile} from 'src/hooks/useIsMobile';
 import {block} from 'src/utils';
 
 import {distributionMock} from '../data/distributionMock';
@@ -22,6 +23,8 @@ const activeUsersInfo: {type: 'Monthly' | 'Weekly' | 'Daily'; info?: string; cou
 ];
 
 export const DashboardContent = () => {
+    const isMobile = useIsMobile();
+
     return (
         <div className={b()}>
             <Flex direction="row">
@@ -51,7 +54,10 @@ export const DashboardContent = () => {
                                             <HelpMark className={b('info')}>{data.info}</HelpMark>
                                         ) : null}
                                     </Flex>
-                                    <Text variant="display-4" color="info">
+                                    <Text
+                                        variant={isMobile ? 'display-1' : 'display-3'}
+                                        color="info"
+                                    >
                                         {data.count}
                                     </Text>
                                 </Flex>
@@ -59,7 +65,7 @@ export const DashboardContent = () => {
                         </Col>
                     ))}
                 </Row>
-                <Row space={2}>
+                <Row space={3}>
                     <Col style={{maxWidth: '60%'}} className={b('col')}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
@@ -81,7 +87,7 @@ export const DashboardContent = () => {
                         </Card>
                     </Col>
                 </Row>
-                <Row space={2}>
+                <Row space={3}>
                     <Col style={{flexBasis: '40%'}} className={b('col')}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">

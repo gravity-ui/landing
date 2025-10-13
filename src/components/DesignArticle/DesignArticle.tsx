@@ -1,7 +1,7 @@
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import {Article} from '../../content/design/types';
+import {Article, ArticleSupportedLocale} from '../../content/design/types';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
@@ -74,6 +74,11 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId,
         return prevSubSection.isComingSoon ? null : prevSubSection;
     }, [currentIndex, currentSection]);
 
+    const articleContent =
+        locale in article.content
+            ? article.content[locale as ArticleSupportedLocale]
+            : article.content.en;
+
     return (
         <div className={b()}>
             <h1 className={b('title')}>
@@ -81,7 +86,7 @@ export const DesignArticle: React.FC<DesignArticleProps> = ({article, sectionId,
             </h1>
             <MDXRenderer
                 key={`${sectionId}-${article.id}-${locale}-article`}
-                text={article.content[locale]}
+                text={articleContent}
             />
             <div className={b('navigation')}>
                 <ArticleNavigation prevSection={prevSection} nextSection={nextSection} />

@@ -1,4 +1,4 @@
-﻿{
+{
     "actions_copyIconName": "复制图标名称",
     "actions_copyLink": "复制链接",
     "actions_copied": "已复制",
@@ -10,8 +10,8 @@
     "goToLibrary": "去图书馆",
     "filterPlaceholder": "按图标名称筛选",
     "keywords": "关键词",
-    "empty_title": "未找到与您的请求相匹配的结果",
-    "empty_subTitle": "请检查拼写或尝试其他关键字。",
+    "empty_title": "未找到您请求的结果",
+    "empty_subTitle": "请检查拼写或尝试其他关键词。",
     "usage_reactComponent": "React 组件",
     "usage_svg": "SVG"
 }

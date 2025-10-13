@@ -6,7 +6,7 @@
 npm install --save @gravity-ui/table
 ```
 
-## 使用方法
+## 用法
 
 ```tsx
 import React from 'react';
@@ -41,10 +41,10 @@ const BasicExample = () => {
 
 ## 组件
 
-有两个表格组件可供使用：
+您可以使用两个 Table 组件：
 
-- `BaseTable` - 仅具有基本样式的组件；
-- `Table` - 基于 Gravity UI 样式的组件。
+- `BaseTable` - 仅包含基本样式的组件；
+- `Table` - 包含基于 Gravity UI 样式的组件。
 
 ### 行选择
 
@@ -79,9 +79,140 @@ const RowSelectionExample = () => {
 };
 ```
 
+### 自定义范围选择列
+
+`useToggleRangeSelectionHandler` hook 返回一个更改处理程序，该处理程序监听 Shift+click 事件并执行范围行选择。它需要一个 `CellContext` 实例才能访问表格和行的内部状态。
+
+```tsx
+import React, {type ChangeEvent, useCallback, useState} from 'react';
+
+import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
+import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
+import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
+
+type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
+  cellContext: CellContext<unknown, unknown>;
+};
+
+const CustomRangedSelectionCheckbox = ({
+  className,
+  cellContext,
+  ...restProps
+}: CustomRangedSelectionCheckboxProps) => {
+  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      rowToggleRangedSelectionHandler(event);
+    },
+    [rowToggleRangedSelectionHandler],
+  );
+
+  return <Checkbox {...restProps} onChange={handleChange} />;
+};
+
+const customSelectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <Checkbox
+      size="l"
+      checked={table.getIsAllRowsSelected()}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <CustomRangedSelectionCheckbox
+      size="l"
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  size: 41,
+  maxSize: 41,
+  minSize: 41,
+  enableResizing: false,
+  enableSorting: false,
+};
+
+const columns: ColumnDef<Person>[] = [
+  customSelectionColumn as ColumnDef<Person>,
+  // ...其他列
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const RowRangedSelectionExample = () => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+还有一个 `RangedSelectionCheckbox` 组件，它在内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件提供了向自定义选择列添加范围选择功能的快捷方式。
+
+```tsx
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
+
+export const selectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <SelectionCheckbox
+      checked={table.getIsAllRowsSelected()}
+      disabled={!table.options.enableRowSelection}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <RangedSelectionCheckbox
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  meta: {
+    hideInSettings: true,
+  },
+  size: 32,
+  minSize: 32,
+};
+```
+
+默认情况下，使用 `selectionColumn` 生成的选择列包含范围选择功能。
+
+```tsx
+import {selectionColumn} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...其他列
+];
+```
+
+**注意**: 如果表格包含嵌套行，则范围选择将不起作用。目前，这被视为未定义行为。
+
 ### 排序
 
-在 react-table 的[文档](https://tanstack.com/table/v8/docs/guide/sorting)中了解有关列属性的信息
+请参阅 react-table [文档](https://tanstack.com/table/v8/docs/guide/sorting) 中关于列属性的说明。
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -96,6 +227,8 @@ const data: Person[] = [
 
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  // Your column MUST have accessorFn for sorting to be enabled
 
   const table = useTable({
     columns,
@@ -112,7 +245,7 @@ const SortingExample = () => {
 };
 ```
 
-如果您想手动排序元素，请传递 `manualSorting` 属性：
+If you want to sort the elements manually pass `manualSorting` property:
 
 ```tsx
 const table = useTable({
@@ -121,7 +254,7 @@ const table = useTable({
 });
 ```
 
-### 分组
+### Grouping
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -184,7 +317,31 @@ const GroupingExample = () => {
 };
 ```
 
-### 重新排序
+To enable nesting styles, pass `withNestingStyles = true` in the column configuration.
+
+Nesting indicators can be disabled by passing `showTreeDepthIndicators = false`.
+
+To add a control for expanding/collapsing rows, wrap the cell content with the `TreeExpandableCell` component or with your similar custom component:
+
+```tsx
+import {TreeExpandableCell} from '@gravity-ui/table';
+
+const columns: ColumnDef<Item>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    size: 200,
+    showTreeDepthIndicators: false,
+    withNestingStyles: true,
+    cell: ({row, info}) => (
+      <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
+    ),
+  },
+  // ...other columns
+];
+```
+
+### Reordering
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -192,7 +349,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...其他列
+  // ...other columns
 ];
 
 const data: Person[] = [
@@ -231,9 +388,9 @@ const ReorderingExample = () => {
 };
 ```
 
-### 虚拟化
+### Virtualization
 
-如果您想使用网格容器作为滚动元素，请使用此选项（如果您想使用窗口，请参阅窗口虚拟化部分）。
+Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -270,7 +427,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-如果您将虚拟化与重新排序功能一起使用，还需要传递 `rangeExtractor` 选项：
+If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -294,9 +451,9 @@ return (
 );
 ```
 
-### 窗口虚拟化
+### Window virtualization
 
-如果您想使用窗口作为滚动元素，请使用此选项
+Use if you want to use window as the scroll element
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -329,7 +486,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### 调整大小
+### Resizing
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -361,10 +518,10 @@ const columns: ColumnDef<Person>[] = [
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // 可选。允许从设置弹出窗口中隐藏此列
-      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的标题字段（如果您需要标题和设置弹出窗口的不同内容）
+      hideInSettings: false, // 可选。允许在设置弹出窗口中隐藏此列
+      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的 header 字段（如果您需要与 header 不同的内容）
     },
-  }, // 或者您可以使用函数 getSettingsColumn
+  }, // 或者您可以使用 getSettingsColumn 函数
 ];
 
 const data: Person[] = [
@@ -374,13 +531,13 @@ const data: Person[] = [
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // 用于外部控制和初始状态
-    column_id: false, // 用于默认隐藏
+    column_id: false, // 默认隐藏
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* 叶列 ID */
+    /* 叶子列 ID */
   ]); // 用于外部控制和初始状态
 
-  // 获取状态、回调和设置应用回调的替代方案 - 使用 useTableSettings 钩子：
+  // 获取状态、回调以及在设置应用回调时设置的替代方案 - 使用 useTableSettings hook：
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -398,4 +555,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-在 react-table 的[文档](https://tanstack.com/table/v8/docs/api/features/column-sizing)中了解有关表格和列调整大小属性的更多信息
+在 [react-table 文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解有关表格和列调整大小属性的更多信息

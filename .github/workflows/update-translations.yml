@@ -1,0 +1,166 @@
+name: Update translations
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/locales/en/**'
+  workflow_dispatch:
+
+permissions: write-all
+
+env:
+  LANGUAGES: 'ko es de zh fr' # Supported languages separated by space (spaces are important)
+
+jobs:
+  prepare-inputs:
+    runs-on: ubuntu-latest
+    outputs:
+      namespaces: ${{ steps.extract-namespaces.outputs.namespaces }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Extract namespaces
+        id: extract-namespaces
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'public/locales/en/.+\.json$' || echo "")
+            NAMESPACES_ARRAY=$(echo "$MODIFIED_FILES" | awk 'NF' | jq -R -c -s '
+              split("\n") |
+              map(select(length > 0)) |
+              map(capture("public/locales/en/(?<namespace>[^/]+)\\.json").namespace)
+            ')
+          else
+            FILES=$(ls public/locales/en/ | sed 's/\.json$//')
+            NAMESPACES_ARRAY=$(echo "$FILES" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          fi
+
+          echo "namespaces=$NAMESPACES_ARRAY" >> $GITHUB_OUTPUT
+
+  create-pr:
+    permissions:
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    needs: prepare-inputs
+    if: ${{ fromJson(needs.prepare-inputs.outputs.namespaces)[0] != null }}
+    outputs:
+      pr_number: ${{ steps.create-pr.outputs.pr_number }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Create pull request
+        id: create-pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "temporary file" > temporary-file.txt
+
+          git config user.email ""
+          git config user.name "Update translations action"
+          git checkout -b update-translations
+          git add temporary-file.txt
+
+          export COMMIT_MESSAGE="initial commit"
+          git commit -m "$COMMIT_MESSAGE"
+          git push --set-upstream origin update-translations --force
+          gh pr create --title "i18n: update translations" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
+          PR_NUMBER=$(gh pr view --json number -q ".number")
+
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
+  translations:
+    needs:
+      - prepare-inputs
+      - create-pr
+    runs-on: ubuntu-latest
+    if: ${{ fromJson(needs.prepare-inputs.outputs.namespaces)[0] != null }}
+    strategy:
+      max-parallel: 1
+      matrix:
+        namespace: ${{ fromJson(needs.prepare-inputs.outputs.namespaces) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ needs.create-pr.outputs.pr_number }}/head
+          fetch-depth: 0
+      - name: Prepare inputs for ${{ matrix.namespace }}
+        id: prepare-inputs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NAMESPACE: ${{ matrix.namespace }}
+        run: |
+          INPUT_FILE="public/locales/en/${NAMESPACE}.json"
+
+          echo "Processing namespace: $NAMESPACE"
+          echo "INPUT file: $INPUT_FILE"
+
+          OUTPUT_FILES=""
+          for LANGUAGE in ${{ env.LANGUAGES }}; do
+              OUTPUT_FILES="$OUTPUT_FILES public/locales/${LANGUAGE}/${NAMESPACE}.json"
+          done
+
+          echo "Output files: $OUTPUT_FILES"
+
+          echo "input_files=$INPUT_FILE" >> $GITHUB_OUTPUT
+          echo "output_files=$OUTPUT_FILES" >> $GITHUB_OUTPUT
+      - name: Run translations
+        uses: dgaponov/gpt-translate@master
+        with:
+          provider: 'openrouter'
+          apikey: ${{ secrets.OPENROUTER_API_KEY }}
+          model: 'google/gemini-2.5-flash-lite'
+          inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
+          outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
+          languages: ${{ env.LANGUAGES }}
+          commitMessage: 'i18n: translations for namespace ${{ matrix.namespace }}'
+          pullRequestNumber: ${{ needs.create-pr.outputs.pr_number }}
+          prompt: |
+            Please translate the json source file to {targetLanguage}. \
+            Make the translation sound as natural as possible. \
+            Don't convert keys to json, you only need to translate values. \
+            You should output valid json without any other formatting or comments. \
+            For example, this is the correct json output: \
+            {
+                "actions_openInFigma": "Open in Figma",
+                "title": "Components",
+            } \
+            Return only the json, no other text. \
+            Remove formatting like markdown ```json```. \
+            Do NOT add ``` tags to the result json. \
+            Do not translate the library name in the source file if it looks like the name of the library (the exception is Themer, it can be translated). \
+            For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
+
+  merge-pr:
+    needs:
+      - create-pr
+      - translations
+    runs-on: ubuntu-latest
+    if: ${{ needs.create-pr.outputs.pr_number != '' && needs.create-pr.outputs.pr_number != null }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ needs.create-pr.outputs.pr_number }}/head
+          fetch-depth: 2
+      - name: Merge PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git checkout update-translations
+          git config user.email ""
+          git config user.name "Update translations action"
+          git checkout -b update-translations
+          rm -rf temporary-file.txt
+          git add .
+
+          export COMMIT_MESSAGE="remove temporary file"
+          git commit -m "$COMMIT_MESSAGE"
+          git push --set-upstream origin update-translations --force
+          gh pr merge ${{ needs.create-pr.outputs.pr_number }} --auto --squash
