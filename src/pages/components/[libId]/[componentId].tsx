@@ -1,5 +1,6 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
@@ -9,8 +10,9 @@ import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
-import {type MetaProps, getComponentMeta, getLibComponents, getMaintainers} from '../../../utils';
+import {getLibComponents, getMaintainers} from '../../../utils';
 import {getI18nProps} from '../../../utils/i18next';
+import {getComponentMeta} from '../../../utils/meta';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const components = getLibComponents(ctx.params?.libId as string);
@@ -33,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const libId = ctx.params?.libId as string;
 
     const libPromise = Api.instance.fetchLibByIdWithCache(libId);
-    const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info']);
+    const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info', 'component-meta']);
     const readmePromise = Api.instance.fetchComponentReadmeWithCache({
         readmeUrl: component.content.readmeUrl,
         componentId: component.id,
@@ -47,22 +49,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         readmePromise,
     ]);
 
-    // Generate meta description from static config
-    const componentMeta = await getComponentMeta(
-        {id: lib.config.id, title: lib.config.title},
-        component.title,
-        component.id,
-        locale,
-        // Fallback to component title if no description found
-        `${component.title} component from ${lib.config.title}`,
-    );
-
     return {
         props: {
             lib,
             componentId: ctx.params?.componentId,
             readmeContent,
-            componentMeta,
             ...i18nProps,
         },
     };
@@ -72,13 +63,12 @@ export const ComponentPage = ({
     lib,
     componentId,
     readmeContent,
-    componentMeta,
 }: {
     lib: LibWithFullData;
     componentId: string;
     readmeContent: string;
-    componentMeta: MetaProps;
 }) => {
+    const {t} = useTranslation(['component-meta', 'common']);
     const componentsLib = libs.find((item) => item.id === lib.config.id);
     const component = componentsLib?.components.find((item) => item.id === componentId);
 
@@ -88,6 +78,15 @@ export const ComponentPage = ({
     if (!lib || !component) {
         return null;
     }
+
+    // Generate meta description using translation function
+    const componentMeta = getComponentMeta({
+        libId: lib.config.id,
+        libTitle: lib.config.title,
+        componentId: component.id,
+        componentTitle: component.title,
+        t,
+    });
 
     const maintainers = getMaintainers(lib, `/src/components/${component.title}`);
 
