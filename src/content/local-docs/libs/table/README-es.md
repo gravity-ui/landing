@@ -79,9 +79,140 @@ const RowSelectionExample = () => {
 };
 ```
 
+### Columna de selección de rango personalizada
+
+El hook `useToggleRangeSelectionHandler` devuelve un manejador de cambios que escucha eventos Shift+click y realiza la selección de filas por rango. Necesita recibir una instancia de `CellContext` para tener acceso a los estados internos de la tabla y de la fila.
+
+```tsx
+import React, {type ChangeEvent, useCallback, useState} from 'react';
+
+import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
+import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
+import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
+
+type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
+  cellContext: CellContext<unknown, unknown>;
+};
+
+const CustomRangedSelectionCheckbox = ({
+  className,
+  cellContext,
+  ...restProps
+}: CustomRangedSelectionCheckboxProps) => {
+  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      rowToggleRangedSelectionHandler(event);
+    },
+    [rowToggleRangedSelectionHandler],
+  );
+
+  return <Checkbox {...restProps} onChange={handleChange} />;
+};
+
+const customSelectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <Checkbox
+      size="l"
+      checked={table.getIsAllRowsSelected()}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <CustomRangedSelectionCheckbox
+      size="l"
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  size: 41,
+  maxSize: 41,
+  minSize: 41,
+  enableResizing: false,
+  enableSorting: false,
+};
+
+const columns: ColumnDef<Person>[] = [
+  customSelectionColumn as ColumnDef<Person>,
+  // ...otras columnas
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const RowRangedSelectionExample = () => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+También existe el componente `RangedSelectionCheckbox`, que utiliza el hook internamente y acepta una instancia de `CellContext` como prop. Este componente proporciona una forma abreviada de añadir funcionalidad de selección por rango a las columnas de selección personalizadas.
+
+```tsx
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
+
+export const selectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <SelectionCheckbox
+      checked={table.getIsAllRowsSelected()}
+      disabled={!table.options.enableRowSelection}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <RangedSelectionCheckbox
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  meta: {
+    hideInSettings: true,
+  },
+  size: 32,
+  minSize: 32,
+};
+```
+
+Por defecto, la columna de selección generada con `selectionColumn` incluye la funcionalidad de selección por rango.
+
+```tsx
+import {selectionColumn} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...otras columnas
+];
+```
+
+**Nota**: Si la tabla contiene filas anidadas, la selección por rango no funcionará. Actualmente, esto se considera un comportamiento indefinido.
+
 ### Ordenación
 
-Aprende sobre las propiedades de las columnas en la documentación de react-table [aquí](https://tanstack.com/table/v8/docs/guide/sorting).
+Obtén información sobre las propiedades de las columnas en la [documentación](https://tanstack.com/table/v8/docs/guide/sorting) de react-table.
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -190,7 +321,7 @@ Para habilitar los estilos de anidamiento, pasa `withNestingStyles = true` en la
 
 Los indicadores de anidamiento se pueden deshabilitar pasando `showTreeDepthIndicators = false`.
 
-Para añadir un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu propio componente similar:
+Para añadir un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu componente personalizado similar:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -248,33 +379,6 @@ const ReorderingExample = () => {
     },
     [],
   );
-```
-
-```html
-<div class="language-selector">
-  <a href="/en/docs/components/table/readme.md">English</a>
-  <a href="/es/docs/components/table/readme.md">Español</a>
-</div>
-```
-
-### Reordenamiento
-
-Si quieres usar la funcionalidad de reordenamiento, necesitas envolver tu tabla en `ReorderingProvider`.
-
-```tsx
-import { ReorderingProvider, useTable } from '@gravity-ui/table';
-import React from 'react';
-
-const ReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const handleReorder = (newOrder: any[]) => {
-    // Handle reordering logic
-  };
 
   return (
     <ReorderingProvider table={table} onReorder={handleReorder}>
@@ -286,7 +390,7 @@ const ReorderingExample = () => {
 
 ### Virtualización
 
-Úsala si quieres emplear el contenedor de la cuadrícula como elemento de desplazamiento (si quieres usar la ventana, consulta la sección de virtualización de ventana). Asegúrate de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
+Úsalo si quieres usar el contenedor de la cuadrícula como elemento de desplazamiento (si quieres usar la ventana, consulta la sección de virtualización de ventana). Asegúrate de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -323,7 +427,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-Si usas virtualización con la función de reordenamiento, también necesitas pasar la opción `rangeExtractor`:
+Si usas virtualización con la función de reordenación, también necesitas pasar la opción `rangeExtractor`:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -349,7 +453,7 @@ return (
 
 ### Virtualización de ventana
 
-Úsala si quieres emplear la ventana como elemento de desplazamiento.
+Úsalo si quieres usar la ventana como elemento de desplazamiento
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -430,7 +534,7 @@ const TableSettingsDemo = () => {
     column_id: false, // para ocultar por defecto
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* ids de columnas hoja */
+    /* ids de las columnas hoja */
   ]); // para control externo y estado inicial
 
   // Variante alternativa para obtener el estado, callbacks y establecer callbacks de aplicación de configuración - usando el hook useTableSettings:

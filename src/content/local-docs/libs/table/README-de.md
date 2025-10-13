@@ -44,7 +44,7 @@ const BasicExample = () => {
 Es gibt zwei Tabellenkomponenten, die Sie verwenden können:
 
 - `BaseTable` - eine Komponente mit nur grundlegenden Stilen;
-- `Table` - eine Komponente mit Gravity UI-basierten Stilen.
+- `Table` - eine Komponente mit Stilen basierend auf Gravity UI.
 
 ### Zeilenauswahl
 
@@ -79,6 +79,137 @@ const RowSelectionExample = () => {
 };
 ```
 
+### Benutzerdefinierte Bereichsauswahlspalte
+
+Der Hook `useToggleRangeSelectionHandler` gibt einen Änderungs-Handler zurück, der auf Shift+Klick-Ereignisse hört und eine Bereichsauswahl von Zeilen durchführt. Er benötigt eine `CellContext`-Instanz, um Zugriff auf die internen Zustände der Tabelle und der Zeile zu haben.
+
+```tsx
+import React, {type ChangeEvent, useCallback, useState} from 'react';
+
+import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
+import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
+import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
+
+type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
+  cellContext: CellContext<unknown, unknown>;
+};
+
+const CustomRangedSelectionCheckbox = ({
+  className,
+  cellContext,
+  ...restProps
+}: CustomRangedSelectionCheckboxProps) => {
+  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      rowToggleRangedSelectionHandler(event);
+    },
+    [rowToggleRangedSelectionHandler],
+  );
+
+  return <Checkbox {...restProps} onChange={handleChange} />;
+};
+
+const customSelectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <Checkbox
+      size="l"
+      checked={table.getIsAllRowsSelected()}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <CustomRangedSelectionCheckbox
+      size="l"
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  size: 41,
+  maxSize: 41,
+  minSize: 41,
+  enableResizing: false,
+  enableSorting: false,
+};
+
+const columns: ColumnDef<Person>[] = [
+  customSelectionColumn as ColumnDef<Person>,
+  // ...weitere Spalten
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const RowRangedSelectionExample = () => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+Es gibt auch die Komponente `RangedSelectionCheckbox`, die intern den Hook verwendet und eine `CellContext`-Instanz als Prop akzeptiert. Diese Komponente bietet eine Abkürzung, um die Funktionalität der Bereichsauswahl zu benutzerdefinierten Auswahlspalten hinzuzufügen.
+
+```tsx
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
+
+export const selectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <SelectionCheckbox
+      checked={table.getIsAllRowsSelected()}
+      disabled={!table.options.enableRowSelection}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <RangedSelectionCheckbox
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  meta: {
+    hideInSettings: true,
+  },
+  size: 32,
+  minSize: 32,
+};
+```
+
+Standardmäßig enthält die mit `selectionColumn` generierte Auswahlspalte die Funktionalität für die Bereichsauswahl.
+
+```tsx
+import {selectionColumn} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...weitere Spalten
+];
+```
+
+**Hinweis**: Wenn die Tabelle verschachtelte Zeilen enthält, funktioniert die Bereichsauswahl nicht. Dies wird derzeit als undefiniertes Verhalten betrachtet.
+
 ### Sortierung
 
 Erfahren Sie mehr über die Spalteneigenschaften in der [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting) von react-table.
@@ -97,7 +228,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Ihre Spalte MUSS eine accessorFn haben, damit die Sortierung aktiviert wird.
+  // Ihre Spalten MÜSSEN accessorFn für aktivierte Sortierung haben
 
   const table = useTable({
     columns,
@@ -188,7 +319,7 @@ const GroupingExample = () => {
 
 Um Verschachtelungsstile zu aktivieren, übergeben Sie `withNestingStyles = true` in der Spaltenkonfiguration.
 
-Nesting-Indikatoren können durch Übergabe von `showTreeDepthIndicators = false` deaktiviert werden.
+Verschachtelungsindikatoren können durch Übergabe von `showTreeDepthIndicators = false` deaktiviert werden.
 
 Um eine Steuerung zum Erweitern/Zusammenklappen von Zeilen hinzuzufügen, umschließen Sie den Zellinhalt mit der Komponente `TreeExpandableCell` oder einer ähnlichen benutzerdefinierten Komponente:
 
@@ -206,7 +337,7 @@ const columns: ColumnDef<Item>[] = [
       <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
     ),
   },
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 ```
 
@@ -218,7 +349,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 
 const data: Person[] = [
@@ -248,31 +379,6 @@ const ReorderingExample = () => {
     },
     [],
   );
-```
-
-```html
-<div class="language-selector">
-  <a href="/en/docs/table/features/reordering" class="language-selector__link">English</a>
-  <a href="/de/docs/table/features/reordering" class="language-selector__link language-selector__link--active">Deutsch</a>
-</div>
-```
-
-```tsx
-import { ReorderingProvider, useTable, Table, VisibilityState } from '@gravity-ui/table';
-import React from 'react';
-
-// ...
-
-const ReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const handleReorder = (fromIndex: number, toIndex: number) => {
-    // Handle reordering logic
-  };
 
   return (
     <ReorderingProvider table={table} onReorder={handleReorder}>
@@ -284,7 +390,7 @@ const ReorderingExample = () => {
 
 ### Virtualisierung
 
-Verwenden Sie dies, wenn Sie einen Grid-Container als Scroll-Element verwenden möchten (wenn Sie das Fenster verwenden möchten, siehe Abschnitt Fenster-Virtualisierung). Stellen Sie sicher, dass Sie dem Container eine feste Höhe zuweisen, da die Virtualisierung sonst nicht funktioniert.
+Verwenden Sie dies, wenn Sie den Grid-Container als Scroll-Element verwenden möchten (wenn Sie das Fenster verwenden möchten, siehe Abschnitt Fenster-Virtualisierung). Stellen Sie sicher, dass Sie dem Container eine feste Höhe zuweisen, andernfalls funktioniert die Virtualisierung nicht.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -321,7 +427,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-Wenn Sie Virtualisierung mit der Reordering-Funktion verwenden, müssen Sie auch die Option `rangeExtractor` übergeben:
+Wenn Sie Virtualisierung mit der Neuordnungsfunktion verwenden, müssen Sie auch die Option `rangeExtractor` übergeben:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -347,7 +453,7 @@ return (
 
 ### Fenster-Virtualisierung
 
-Verwenden Sie dies, wenn Sie das Fenster als Scroll-Element verwenden möchten.
+Verwenden Sie dies, wenn Sie das Fenster als Scroll-Element verwenden möchten
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -412,8 +518,8 @@ const columns: ColumnDef<Person>[] = [
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // Optional. Ermöglicht das Ausblenden dieser Spalte aus dem Einstellungen-Popover
-      titleInSettings: 'ReactNode', // Optional. Überschreibt das Header-Feld für das Einstellungen-Popover (wenn Sie unterschiedliche Inhalte für Header und Einstellungen-Popover benötigen)
+      hideInSettings: false, // Optional. Ermöglicht das Ausblenden dieser Spalte aus dem Einstellungs-Popover
+      titleInSettings: 'ReactNode', // Optional. Überschreibt das Header-Feld für das Einstellungs-Popover (falls Sie unterschiedliche Inhalte für Header und Einstellungs-Popover benötigen)
     },
   }, // oder Sie können die Funktion getSettingsColumn verwenden
 ];
@@ -431,7 +537,7 @@ const TableSettingsDemo = () => {
     /* leaf columns ids */
   ]); // für externe Steuerung und Anfangszustand
 
-  // Alternative Variante, um Zustand, Callbacks und Einstellungen beim Anwenden von Callbacks zu erhalten - Verwendung des useTableSettings Hooks:
+  // Alternative Variante, um Zustand, Rückrufe und das Festlegen von Rückrufen bei der Anwendungsänderung von Einstellungen zu erhalten - Verwendung des Hooks useTableSettings:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -449,4 +555,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Erfahren Sie mehr über die Eigenschaften von Tabellen- und Spaltengrößenänderungen in der [Dokumentation](https://tanstack.com/table/v8/docs/api/features/column-sizing) von react-table.
+Erfahren Sie mehr über die Tabellen- und Spaltengrößenänderungseigenschaften in der [Dokumentation](https://tanstack.com/table/v8/docs/api/features/column-sizing) von react-table.
