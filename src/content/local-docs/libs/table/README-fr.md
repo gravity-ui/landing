@@ -1,17 +1,4 @@
-```html
-<p>
-  <a href="https://github.com/gravity-ui/table">@gravity-ui/table</a> &middot;
-  <a href="https://www.npmjs.com/package/@gravity-ui/table">
-    <img src="https://img.shields.io/npm/v/@gravity-ui/table.svg?style=flat" alt="npm package">
-  </a>
-  <a href="https://github.com/gravity-ui/table/actions/workflows/ci.yml">
-    <img src="https://img.shields.io/github/actions/workflow/status/gravity-ui/table/.github/workflows/ci.yml?label=CI&logo=github&style=flat" alt="CI">
-  </a>
-  <a href="https://preview.gravity-ui.com/table/">
-    <img src="https://img.shields.io/badge/Storybook-deployed-ff4685?style=flat" alt="storybook">
-  </a>
-</p>
-```
+# @gravity-ui/table &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/table)](https://www.npmjs.com/package/@gravity-ui/table) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/table/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/table/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/table/)
 
 ## Installation
 
@@ -54,10 +41,10 @@ const BasicExample = () => {
 
 ## Composants
 
-Vous pouvez utiliser deux composants `Table` :
+Deux composants `Table` sont disponibles :
 
 - `BaseTable` : un composant avec des styles de base uniquement ;
-- `Table` : un composant avec des styles basés sur Gravity UI.
+- `Table` : un composant avec les styles basés sur Gravity UI.
 
 ### Sélection de lignes
 
@@ -92,40 +79,140 @@ const RowSelectionExample = () => {
 };
 ```
 
-### Tri
+### Colonne de sélection personnalisée par plage
 
-Découvrez les propriétés des colonnes dans la documentation de react-table : [docs](https://tanstack.com/table/v8/docs/guide/sorting)
+Le hook `useToggleRangeSelectionHandler` renvoie un gestionnaire de changement qui écoute les événements Shift+clic et effectue une sélection de lignes par plage. Il nécessite une instance de `CellContext` pour avoir accès aux états internes de la table et de la ligne.
 
 ```tsx
-import type {SortingState} from '@gravity-ui/table/tanstack';
+import React, {type ChangeEvent, useCallback, useState} from 'react';
+
+import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
+import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
+import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
+
+type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
+  cellContext: CellContext<unknown, unknown>;
+};
+
+const CustomRangedSelectionCheckbox = ({
+  className,
+  cellContext,
+  ...restProps
+}: CustomRangedSelectionCheckboxProps) => {
+  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      rowToggleRangedSelectionHandler(event);
+    },
+    [rowToggleRangedSelectionHandler],
+  );
+
+  return <Checkbox {...restProps} onChange={handleChange} />;
+};
+
+const customSelectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <Checkbox
+      size="l"
+      checked={table.getIsAllRowsSelected()}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <CustomRangedSelectionCheckbox
+      size="l"
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  size: 41,
+  maxSize: 41,
+  minSize: 41,
+  enableResizing: false,
+  enableSorting: false,
+};
 
 const columns: ColumnDef<Person>[] = [
-  /* ... */
+  customSelectionColumn as ColumnDef<Person>,
+  // ...autres colonnes
 ];
 
 const data: Person[] = [
   /* ... */
 ];
 
-const SortingExample = () => {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-
-  // Votre colonne DOIT avoir un accessorFn pour que le tri soit activé
+const RowRangedSelectionExample = () => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const table = useTable({
     columns,
     data,
-    enableSorting: true,
-    getRowId: (item) => item.id,
-    onSortingChange: setSorting,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
     state: {
-      sorting,
+      rowSelection,
     },
   });
 
   return <Table table={table} />;
 };
 ```
+
+Il existe également un composant `RangedSelectionCheckbox` qui utilise le hook en interne et accepte une instance de `CellContext` comme prop. Ce composant offre un raccourci pour ajouter la fonctionnalité de sélection par plage aux colonnes de sélection personnalisées.
+
+```tsx
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
+
+export const selectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <SelectionCheckbox
+      checked={table.getIsAllRowsSelected()}
+      disabled={!table.options.enableRowSelection}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <RangedSelectionCheckbox
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  meta: {
+    hideInSettings: true,
+  },
+  size: 32,
+  minSize: 32,
+};
+```
+
+Par défaut, la colonne de sélection générée avec `selectionColumn` inclut la fonctionnalité de sélection par plage.
+
+```tsx
+import {selectionColumn} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...autres colonnes
+];
+```
+
+**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. À l'heure actuelle, cela est considéré comme un comportement indéfini.
+
+### Tri
+
+Découvrez les propriétés des colonnes dans la [documentation](https://tanstack.com/table/v8/docs/guide/sorting) de react-table.
 
 Si vous souhaitez trier les éléments manuellement, passez la propriété `manualSorting` :
 
@@ -203,7 +290,7 @@ Pour activer les styles d'imbrication, passez `withNestingStyles = true` dans la
 
 Les indicateurs d'imbrication peuvent être désactivés en passant `showTreeDepthIndicators = false`.
 
-Pour ajouter un contrôle pour développer/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou avec votre composant personnalisé similaire :
+Pour ajouter un contrôle pour développer/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou votre composant personnalisé similaire :
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -261,24 +348,9 @@ const ReorderingExample = () => {
     },
     [],
   );
-```
 
-```html
-<div class="language-selector">
-  <a href="/en/docs/table/features/reordering" class="language-selector__link">English</a>
-  <a href="/fr/docs/table/features/reordering" class="language-selector__link language-selector__link--active">Français</a>
-</div>
-```
-
-```tsx
-import { ReorderingProvider, useTable } from '@gravity-ui/table';
-import React from 'react';
-
-// ...
-
-const TableWithReordering = ({ table, onReorder }) => {
   return (
-    <ReorderingProvider table={table} onReorder={onReorder}>
+    <ReorderingProvider table={table} onReorder={handleReorder}>
       <Table table={table} />
     </ReorderingProvider>
   );
@@ -287,10 +359,10 @@ const TableWithReordering = ({ table, onReorder }) => {
 
 ### Virtualisation
 
-Utilisez cette option si vous souhaitez que le conteneur de la grille soit l'élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section Virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur ; sinon, la virtualisation ne fonctionnera pas.
+Utilisez si vous souhaitez utiliser le conteneur de grille comme élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section de virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur ; sinon, la virtualisation ne fonctionnera pas.
 
 ```tsx
-import { useRowVirtualizer } from '@gravity-ui/table';
+import {useRowVirtualizer} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   /* ... */
@@ -317,7 +389,7 @@ const VirtualizationExample = () => {
   });
 
   return (
-    <div ref={containerRef} style={{ height: '500px', overflow: 'auto' }}>
+    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
       <Table table={table} rowVirtualizer={rowVirtualizer} />
     </div>
   );
@@ -327,7 +399,7 @@ const VirtualizationExample = () => {
 Si vous utilisez la virtualisation avec la fonctionnalité de réorganisation, vous devez également passer l'option `rangeExtractor` :
 
 ```tsx
-import { getVirtualRowRangeExtractor } from '@gravity-ui/table';
+import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
 
 // ...
 
@@ -350,10 +422,10 @@ return (
 
 ### Virtualisation de fenêtre
 
-Utilisez cette option si vous souhaitez que la fenêtre soit l'élément de défilement.
+Utilisez si vous souhaitez utiliser la fenêtre comme élément de défilement
 
 ```tsx
-import { useWindowRowVirtualizer } from '@gravity-ui/table';
+import {useWindowRowVirtualizer} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   /* ... */
@@ -413,10 +485,10 @@ const columns: ColumnDef<Person>[] = [
   // ...autres colonnes
   {
     id: 'settings_column_id',
-    header: ({ table }) => <TableSettings table={table} />,
+    header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // Optionnel. Permet de masquer cette colonne dans le popover des paramètres
-      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ d'en-tête pour le popover des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et le popover des paramètres)
+      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ header pour le popover des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et le popover des paramètres)
     },
   }, // ou vous pouvez utiliser la fonction getSettingsColumn
 ];
@@ -452,4 +524,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Apprenez-en davantage sur le tableau et les propriétés de redimensionnement des colonnes dans la documentation de react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing).
+Apprenez-en davantage sur la table et les propriétés de redimensionnement des colonnes dans la [documentation](https://tanstack.com/table/v8/docs/api/features/column-sizing) de react-table.
