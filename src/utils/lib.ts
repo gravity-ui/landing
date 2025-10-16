@@ -7,6 +7,9 @@ import packagesVersions from '../data/packages-versions.json';
 // Re-export lib config functions from dedicated module
 export {getLibConfigByIdSafe, isValidLibId, getLibConfigById, type LibConfig} from '../libs/config';
 
+// Re-export meta functions from meta module
+export {type MetaProps, getLibraryMeta, getDesignSectionMeta} from './meta';
+
 export const getLibVersion = (id?: string) => {
     let libraryVersion;
 
@@ -15,34 +18,12 @@ export const getLibVersion = (id?: string) => {
     }
 
     try {
-        libraryVersion = (packagesVersions as any)[id];
+        libraryVersion = (packagesVersions as Record<string, string>)[id];
     } catch {
         libraryVersion = undefined;
     }
 
     return libraryVersion;
-};
-
-const getOgImageUrl = (id?: string) => {
-    return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
-};
-
-export type MetaProps = {
-    name: string;
-    description: string;
-    image?: string;
-};
-
-export const getLibraryMeta = (
-    lib: {id: string; title: string},
-    t: (key: string) => string,
-    componentTitle?: string,
-): MetaProps => {
-    return {
-        name: componentTitle ? `${lib.title} – ${componentTitle}` : lib.title,
-        description: t(`libraries-info:description_${lib.id}`),
-        image: getOgImageUrl(lib.id),
-    };
 };
 
 export const getMaintainers = (lib: LibWithFullData, path = '/'): Contributor[] => {
