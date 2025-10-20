@@ -134,20 +134,3 @@ jobs:
             For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place. \
             Don't add html snippet with language options to the output. \
             Don't convert markdown code blocks to html!
-
-  merge-pr:
-    needs:
-      - update-packages-readme
-      - translations
-    runs-on: ubuntu-latest
-    if: ${{ needs.update-packages-readme.outputs.pr_number != '' && needs.update-packages-readme.outputs.pr_number != null }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: refs/pull/${{ needs.update-packages-readme.outputs.pr_number }}/head
-          fetch-depth: 2
-      - name: Merge PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr merge ${{ needs.update-packages-readme.outputs.pr_number }} --auto --squash
