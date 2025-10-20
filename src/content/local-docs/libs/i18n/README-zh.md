@@ -8,15 +8,15 @@
 
 ## 库
 
-| 名称                                                    | 描述                                                         | 最新版本                                                |
+| 名称                                                    | 描述                                                         | 版本                                                |
 |-------------------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------|
-| [i18n-core](./packages/i18n-core/README.md)                 | 核心 i18n 库。FormatJS 的封装。                          |  |
-| [i18n-react](./packages/i18n-react/README.md)               | 适用于 React 客户端应用的 i18n 库。              |  |
-| [i18n-node](./packages/i18n-node/README.md)                 | 适用于服务器应用的 i18n 库。                        |  |
-| [eslint-plugin-i18n](./packages/eslint-plugin-i18n/README.md) | ESLint 检查规则。                                       |  |
-| [i18n-cli](./packages/i18n-cli/README.md)                   | 用于处理语言文件的工具。                   |  |
-| [i18n-babel-plugin](./packages/i18n-babel-plugin/README.md) | 用于优化语言文件交付的 Babel 插件。           |  |
-| [i18n-optimize-plugin](./packages/i18n-optimize-plugin/README.md) | 用于优化语言文件交付的 Webpack/Rspack 插件。 |  |
+| [i18n](./packages/i18n/README.md)                 | 轻量级的 i18n 库。                  |  <a href="https://npmjs.com/package/@gravity-ui/i18n-core"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-react](./packages/i18n-react/README.md)               | 适用于 React 客户端应用的 i18n 库 (ICU 消息语法)。              |  <a href="https://npmjs.com/package/@gravity-ui/i18n-react"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-react?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-node](./packages/i18n-node/README.md)                 | 适用于服务器应用的 i18n 库 (ICU 消息语法)。                        |  <a href="https://npmjs.com/package/@gravity-ui/i18n-node"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-node?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [eslint-plugin-i18n](./packages/eslint-plugin-i18n/README.md) | i18n 的 ESLint 规则。                                       |  <a href="https://npmjs.com/package/@gravity-ui/eslint-plugin-i18n"><img src="https://img.shields.io/npm/v/@gravity-ui/eslint-plugin-i18n?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-cli](./packages/i18n-cli/README.md)                   | 用于处理语言文件的工具。                   |  <a href="https://npmjs.com/package/@gravity-ui/i18n-cli"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-cli?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-babel-plugin](./packages/i18n-babel-plugin/README.md) | 用于优化语言文件交付的 Babel 插件。           |  <a href="https://npmjs.com/package/@gravity-ui/i18n-babel-plugin"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-babel-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-optimize-plugin](./packages/i18n-optimize-plugin/README.md) | 用于优化语言文件交付的 Webpack/Rspack 插件。 |  <a href="https://npmjs.com/package/@gravity-ui/i18n-optimize-plugin"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-optimize-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
 | [vscode-extension](./packages/vscode-extension/README.md) | 用于创建本地化文件的 VS Code 扩展 | |
 
 ## 开发
