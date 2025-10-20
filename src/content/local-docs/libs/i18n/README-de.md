@@ -1,6 +1,6 @@
 # 🌍 Gravity-UI i18n Tools
 
-Dieses Repository enthält allgemeine Dienstprogramme, Bibliotheken und Plugins, die für i18n in Gravity-UI verwendet werden.
+Dieses Repository enthält gängige Hilfsprogramme, Bibliotheken und Plugins, die für i18n in Gravity-UI verwendet werden.
 
 ## Nützliche Links
 
@@ -8,40 +8,40 @@ Dieses Repository enthält allgemeine Dienstprogramme, Bibliotheken und Plugins,
 
 ## Bibliotheken
 
-| Name                                                    | Beschreibung                                                         | Neueste Version                                                |
+| Name                                                    | Beschreibung                                                         | Version                                                |
 |-------------------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------|
-| [i18n-core](./packages/i18n-core/README.md)                 | Kern-i18n-Bibliothek. Wrapper um FormatJS.                  |  |
-| [i18n-react](./packages/i18n-react/README.md)               | i18n-Bibliothek für React-Clientanwendungen.              |  |
-| [i18n-node](./packages/i18n-node/README.md)                 | i18n-Bibliothek für Serveranwendungen.                        |  |
-| [eslint-plugin-i18n](./packages/eslint-plugin-i18n/README.md) | ESLint-Linting-Regeln.                                       |  |
-| [i18n-cli](./packages/i18n-cli/README.md)                   | Werkzeug für Operationen mit Sprachdateien.                   |  |
-| [i18n-babel-plugin](./packages/i18n-babel-plugin/README.md) | Babel-Plugin zur Optimierung der Auslieferung von Sprachdateien.           |  |
-| [i18n-optimize-plugin](./packages/i18n-optimize-plugin/README.md) | Webpack/Rspack-Plugin zur Optimierung der Auslieferung von Sprachdateien. |  |
+| [i18n](./packages/i18n/README.md)                 | Leichtgewichtige i18n-Bibliothek.                  |  <a href="https://npmjs.com/package/@gravity-ui/i18n-core"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-react](./packages/i18n-react/README.md)               | i18n-Bibliothek für React-Clientanwendungen (ICU Message Syntax).              |  <a href="https://npmjs.com/package/@gravity-ui/i18n-react"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-react?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-node](./packages/i18n-node/README.md)                 | i18n-Bibliothek für Serveranwendungen (ICU Message Syntax).                        |  <a href="https://npmjs.com/package/@gravity-ui/i18n-node"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-node?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [eslint-plugin-i18n](./packages/eslint-plugin-i18n/README.md) | ESLint-Regeln für i18n.                                       |  <a href="https://npmjs.com/package/@gravity-ui/eslint-plugin-i18n"><img src="https://img.shields.io/npm/v/@gravity-ui/eslint-plugin-i18n?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-cli](./packages/i18n-cli/README.md)                   | Werkzeug für Operationen mit Sprachdateien.                   |  <a href="https://npmjs.com/package/@gravity-ui/i18n-cli"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-cli?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-babel-plugin](./packages/i18n-babel-plugin/README.md) | Babel-Plugin zur Optimierung der Auslieferung von Sprachdateien.           |  <a href="https://npmjs.com/package/@gravity-ui/i18n-babel-plugin"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-babel-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-optimize-plugin](./packages/i18n-optimize-plugin/README.md) | Webpack/Rspack-Plugin zur Optimierung der Auslieferung von Sprachdateien. |  <a href="https://npmjs.com/package/@gravity-ui/i18n-optimize-plugin"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-optimize-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
 | [vscode-extension](./packages/vscode-extension/README.md) | VS Code-Erweiterung zum Erstellen von Lokalisierungsdateien | |
 
 ## Entwicklung
 
-1. pnpm installieren
+1. Installiere pnpm
 
     ```bash
     npm i -g pnpm@9.12.3
     ```
 
-1. Abhängigkeiten installieren
+1. Installiere Abhängigkeiten
 
     ```bash
     pnpm i
     ```
 
-1. Befehle mit `nx` ausführen
+1. Führe Befehle mit `nx` aus
 
     ```bash
-    # Das i18n-cli-Paket bauen
+    # Baue das i18n-cli-Paket
     pnpm nx build @gravity-ui/i18n-cli
 
-    # Typüberprüfung für das i18n-cli-Paket ausführen
+    # Führe Typecheck für das i18n-cli-Paket aus
     pnpm nx typecheck @gravity-ui/i18n-cli
 
-    # Linting für alle Pakete ausführen
+    # Führe Lint für alle Pakete aus
     pnpm nx run-many --target=lint --parallel
     ```

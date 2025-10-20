@@ -8,15 +8,15 @@ This repository contains common utilities, libraries, and plugins used for i18n 
 
 ## Libraries
 
-| Name                                                    | Description                                                         | Latest Version                                                |
+| Name                                                    | Description                                                         | Version                                                |
 |-------------------------------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------|
-| [i18n-core](./packages/i18n-core/README.md)                 | Core i18n library. Wrapper around FormatJS.                  |  |
-| [i18n-react](./packages/i18n-react/README.md)               | i18n library for React client applications.              |  |
-| [i18n-node](./packages/i18n-node/README.md)                 | i18n library for server applications.                        |  |
-| [eslint-plugin-i18n](./packages/eslint-plugin-i18n/README.md) | ESLint linting rules.                                       |  |
-| [i18n-cli](./packages/i18n-cli/README.md)                   | Tool for operations with language files.                   |  |
-| [i18n-babel-plugin](./packages/i18n-babel-plugin/README.md) | Babel plugin for optimizing language file delivery.           |  |
-| [i18n-optimize-plugin](./packages/i18n-optimize-plugin/README.md) | Webpack/Rspack plugin for optimizing language file delivery. |  |
+| [i18n](./packages/i18n/README.md)                 | Lightweight i18n library.                  |  <a href="https://npmjs.com/package/@gravity-ui/i18n-core"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-react](./packages/i18n-react/README.md)               | i18n library for React client applications (ICU Message Syntax).              |  <a href="https://npmjs.com/package/@gravity-ui/i18n-react"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-react?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-node](./packages/i18n-node/README.md)                 | i18n library for server applications (ICU Message Syntax).                        |  <a href="https://npmjs.com/package/@gravity-ui/i18n-node"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-node?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [eslint-plugin-i18n](./packages/eslint-plugin-i18n/README.md) | ESLint rules for i18n.                                       |  <a href="https://npmjs.com/package/@gravity-ui/eslint-plugin-i18n"><img src="https://img.shields.io/npm/v/@gravity-ui/eslint-plugin-i18n?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-cli](./packages/i18n-cli/README.md)                   | Tool for operations with language files.                   |  <a href="https://npmjs.com/package/@gravity-ui/i18n-cli"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-cli?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-babel-plugin](./packages/i18n-babel-plugin/README.md) | Babel plugin for optimizing language files delivery.           |  <a href="https://npmjs.com/package/@gravity-ui/i18n-babel-plugin"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-babel-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
+| [i18n-optimize-plugin](./packages/i18n-optimize-plugin/README.md) | Webpack/Rspack plugin for optimizing language files delivery. |  <a href="https://npmjs.com/package/@gravity-ui/i18n-optimize-plugin"><img src="https://img.shields.io/npm/v/@gravity-ui/i18n-optimize-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a> |
 | [vscode-extension](./packages/vscode-extension/README.md) | VS Code extension for creating localization files | |
 
 ## Development
@@ -33,7 +33,7 @@ This repository contains common utilities, libraries, and plugins used for i18n 
     pnpm i
     ```
 
-1. Run commands with `nx` 
+1. Run commands with `nx`
 
     ```bash
     # Build the i18n-cli package
