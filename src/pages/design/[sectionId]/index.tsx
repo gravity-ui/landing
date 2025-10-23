@@ -31,11 +31,18 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     // Get localized section title
     const sectionTitle = getTitle(`section_${sectionId}_title`);
 
+    // Create a TFunction-compatible function for server-side use
+    const serverT = ((key: string) => {
+        // Handle namespaced keys
+        const cleanKey = key.replace('design-articles-info:', '');
+        return getTitle(cleanKey);
+    }) as any; // Type assertion to bypass TFunction brand check
+
     // Generate dynamic meta description for section
     const sectionMeta = getDesignSectionMeta(
         sectionId,
         sectionTitle,
-        (key: string) => getTitle(key.replace('design-articles-info:', '')),
+        serverT,
         `${sectionTitle} design guides and principles from Gravity UI`,
     );
 
