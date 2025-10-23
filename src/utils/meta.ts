@@ -1,3 +1,5 @@
+import {TFunction} from 'i18next';
+
 export type MetaProps = {
     name: string;
     description: string;
@@ -10,7 +12,7 @@ const getOgImageUrl = (id?: string) => {
 
 export const getLibraryMeta = (
     lib: {id: string; title: string},
-    t: (key: string) => string,
+    t: TFunction,
     componentTitle?: string,
 ): MetaProps => {
     return {
@@ -25,7 +27,7 @@ export const getComponentMeta = (params: {
     libTitle: string;
     componentId: string;
     componentTitle: string;
-    t: any; // Use any to allow for options parameter
+    t: TFunction;
 }): MetaProps => {
     const {libId, libTitle, componentId, componentTitle, t} = params;
 
@@ -53,7 +55,7 @@ export const getDesignArticleMeta = (params: {
     sectionTitle: string;
     articleId: string;
     articleTitle: string;
-    t: (key: string) => string;
+    t: TFunction;
 }): MetaProps => {
     const {sectionId, sectionTitle, articleId, articleTitle, t} = params;
 
@@ -73,7 +75,7 @@ export const getDesignArticleMeta = (params: {
 
 export const getDesignSectionMeta = (
     sectionTitle: string,
-    t: (key: string) => string,
+    t: TFunction,
     fallbackDescription?: string,
 ): MetaProps => {
     // Try to get localized section description
