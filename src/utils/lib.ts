@@ -7,9 +7,6 @@ import packagesVersions from '../data/packages-versions.json';
 // Re-export lib config functions from dedicated module
 export {getLibConfigByIdSafe, isValidLibId, getLibConfigById, type LibConfig} from '../libs/config';
 
-// Re-export meta functions from meta module
-export {type MetaProps, getLibraryMeta, getDesignSectionMeta} from './meta';
-
 export const getLibVersion = (id?: string) => {
     let libraryVersion;
 

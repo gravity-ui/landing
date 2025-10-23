@@ -7,3 +7,4 @@ export * from './browser';
 export * from './i18next';
 export * from './anchor';
 export * from './cookie';
+export * from './meta';
