@@ -19,7 +19,14 @@ export const ThemesPage = () => {
     const {t} = useTranslation();
 
     return (
-        <Layout title={t('themes:title')}>
+        <Layout
+            title={t('themes:title')}
+            meta={{
+                description: t('themes:meta_description'),
+                name: `Gravity UI – ${t('themes:title')}`,
+                image: 'https://gravity-ui.com/index-social.png',
+            }}
+        >
             <Themes />
         </Layout>
     );

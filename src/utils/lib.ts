@@ -15,34 +15,12 @@ export const getLibVersion = (id?: string) => {
     }
 
     try {
-        libraryVersion = (packagesVersions as any)[id];
+        libraryVersion = (packagesVersions as Record<string, string>)[id];
     } catch {
         libraryVersion = undefined;
     }
 
     return libraryVersion;
-};
-
-const getOgImageUrl = (id?: string) => {
-    return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
-};
-
-export type MetaProps = {
-    name: string;
-    description: string;
-    image?: string;
-};
-
-export const getLibraryMeta = (
-    lib: {id: string; title: string},
-    t: (key: string) => string,
-    componentTitle?: string,
-): MetaProps => {
-    return {
-        name: componentTitle ? `${lib.title} – ${componentTitle}` : lib.title,
-        description: t(`libraries-info:description_${lib.id}`),
-        image: getOgImageUrl(lib.id),
-    };
 };
 
 export const getMaintainers = (lib: LibWithFullData, path = '/'): Contributor[] => {

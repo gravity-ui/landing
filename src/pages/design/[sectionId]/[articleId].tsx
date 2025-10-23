@@ -1,37 +1,62 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
-import Error from 'next/error';
 import React from 'react';
+import {Article, Section} from 'src/content/design/types';
 
 import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
 import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {sections as designSections} from '../../../content/design';
 import {getI18nProps} from '../../../utils/i18next';
+import {getDesignArticleMeta} from '../../../utils/meta';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const sectionId = ctx.params?.sectionId as string;
+    const articleId = ctx.params?.articleId as string;
+
+    // Find the section and article
+    const section = designSections.find((item) => item.id === sectionId);
+    const article = section?.articles.find((item) => item.id === articleId);
+
+    if (!section || !article) {
+        return {
+            notFound: true,
+        };
+    }
+
+    // Get i18n props to access translations
+    const i18nProps = await getI18nProps(ctx, ['design-article', 'design-articles-info']);
+
     return {
         props: {
-            sectionId: ctx.params?.sectionId,
-            articleId: ctx.params?.articleId,
-            ...(await getI18nProps(ctx, ['design-article', 'design-articles-info'])),
+            section,
+            article,
+            ...i18nProps,
         },
     };
 };
 
-export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleId: string}) => {
-    const {i18n} = useTranslation();
+export const ArticlePage = ({section, article}: {section: Section; article: Article}) => {
+    const {i18n, t} = useTranslation();
 
-    const section = designSections.find((item) => item.id === sectionId);
-    const article = section?.articles.find((item) => item.id === articleId);
+    const sectionId = section.id;
+    const articleId = article.id;
 
     const windowBreakpoint = useWindowBreakpoint();
     const isMobile = windowBreakpoint < BREAKPOINTS.lg;
+    // Get localized titles
+    const sectionTitle = t(`design-articles-info:section_${sectionId}_title`);
+    const articleTitle = t(`design-articles-info:section_${sectionId}_article_${articleId}_title`);
 
-    if (!section || !article) {
-        return <Error statusCode={404} />;
-    }
+    // Generate meta description using translation function
+    const articleMeta = getDesignArticleMeta({
+        sectionId,
+        sectionTitle,
+        articleId,
+        articleTitle,
+        t,
+    });
 
     const sections = designSections.map((item) => {
         return {
@@ -51,11 +76,10 @@ export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleI
 
     return (
         <Layout
-            title={`${i18n.t(`design-articles-info:section_${sectionId}_title`)} – ${i18n.t(
-                `design-articles-info:section_${sectionId}_article_${articleId}_title`,
-            )}`}
+            title={`${sectionTitle} – ${articleTitle}`}
             hideFooter
             noScroll={!isMobile}
+            meta={articleMeta}
         >
             <DesignLayout sections={sections} sectionId={sectionId} articleId={articleId}>
                 <DesignArticle article={article} sectionId={sectionId} sections={sections} />
