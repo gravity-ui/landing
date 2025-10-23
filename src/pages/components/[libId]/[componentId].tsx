@@ -68,7 +68,7 @@ export const ComponentPage = ({
     componentId: string;
     readmeContent: string;
 }) => {
-    const {t} = useTranslation(['component-meta', 'common']);
+    const {t} = useTranslation();
     const componentsLib = libs.find((item) => item.id === lib.config.id);
     const component = componentsLib?.components.find((item) => item.id === componentId);
 

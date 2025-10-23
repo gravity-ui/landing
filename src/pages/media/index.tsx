@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export default function MediaPage() {
-    const {t} = useTranslation(['media']);
+    const {t} = useTranslation();
     return (
         <Layout
             title={t('media:title')}

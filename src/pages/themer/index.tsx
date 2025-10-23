@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export const ThemesPage = () => {
-    const {t} = useTranslation(['themes']);
+    const {t} = useTranslation();
 
     return (
         <Layout
