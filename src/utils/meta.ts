@@ -32,10 +32,6 @@ export const getComponentMeta = (params: {
     // Get the meta description from translations using flat structure
     const metaKey = `${libId}_${componentId}`;
 
-    // First test if basic namespace loading works with libraries-info
-    const testLibraryDesc = t(`libraries-info:description_${libId}`);
-    console.log('🚀 Library desc works:', testLibraryDesc);
-
     // Try accessing our component-meta namespace
     const description = t(`component-meta:${metaKey}`);
     console.log('🚀 Component meta attempt:', description, 'for key:', `component-meta:${metaKey}`);
