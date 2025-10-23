@@ -33,6 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     // Generate dynamic meta description for section
     const sectionMeta = getDesignSectionMeta(
+        sectionId,
         sectionTitle,
         (key: string) => getTitle(key.replace('design-articles-info:', '')),
         `${sectionTitle} design guides and principles from Gravity UI`,

@@ -74,20 +74,15 @@ export const getDesignArticleMeta = (params: {
 };
 
 export const getDesignSectionMeta = (
+    sectionId: string,
     sectionTitle: string,
     t: TFunction,
     fallbackDescription?: string,
 ): MetaProps => {
-    // Try to get localized section description
-    const localizedDescription = t(
-        `design-articles-info:section_description_${sectionTitle
-            .toLowerCase()
-            .replace(/\s+/g, '_')}`,
-    );
+    // Try to get localized section description using sectionId
+    const localizedDescription = t(`design-articles-info:section_${sectionId}_description`);
 
-    const translationKey = `design-articles-info:section_description_${sectionTitle
-        .toLowerCase()
-        .replace(/\s+/g, '_')}`;
+    const translationKey = `design-articles-info:section_${sectionId}_description`;
     const hasValidTranslation = localizedDescription !== translationKey;
 
     return {
