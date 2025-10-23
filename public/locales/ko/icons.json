@@ -6,6 +6,7 @@
     "actions_copySvgImport": "SVG 가져오기 복사",
     "actions_downloadSvg": "SVG 다운로드",
     "title": "아이콘",
+    "meta_description": "Gravity UI 아이콘 라이브러리에서 수백 개의 최신 SVG 아이콘을 찾아보고 검색하고 다운로드하세요.",
     "goToLibrary": "라이브러리로 이동",
     "filterPlaceholder": "아이콘 이름으로 필터링",
     "keywords": "키워드",
