@@ -36,12 +36,10 @@ export const getComponentMeta = (params: {
 
     // Try accessing our component-meta namespace
     const description = t(`component-meta:${metaKey}`);
-    console.log('🚀 Component meta attempt:', description, 'for key:', `component-meta:${metaKey}`);
 
     // Check if translation was found
     const hasTranslation =
         description && description !== `component-meta:${metaKey}` && description !== metaKey;
-    console.log('🚀 Has translation:', hasTranslation);
 
     return {
         name: `${libTitle} – ${componentTitle}`,
