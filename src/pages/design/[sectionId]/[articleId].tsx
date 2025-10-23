@@ -2,6 +2,7 @@ import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
+import {Article, Section} from 'src/content/design/types';
 
 import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
 import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
@@ -29,26 +30,21 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return {
         props: {
-            sectionId,
-            articleId,
+            section,
+            article,
             ...i18nProps,
         },
     };
 };
 
-export const ArticlePage = ({sectionId, articleId}: {sectionId: string; articleId: string}) => {
+export const ArticlePage = ({section, article}: {section: Section; article: Article}) => {
     const {i18n, t} = useTranslation();
 
-    const section = designSections.find((item) => item.id === sectionId);
-    const article = section?.articles.find((item) => item.id === articleId);
+    const sectionId = section.id;
+    const articleId = article.id;
 
     const windowBreakpoint = useWindowBreakpoint();
     const isMobile = windowBreakpoint < BREAKPOINTS.lg;
-
-    if (!section || !article) {
-        return null;
-    }
-
     // Get localized titles
     const sectionTitle = t(`design-articles-info:section_${sectionId}_title`);
     const articleTitle = t(`design-articles-info:section_${sectionId}_article_${articleId}_title`);
