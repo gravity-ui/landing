@@ -138,7 +138,7 @@ jobs:
             Do not translate the library name in the source file if it looks like the name of the library (the exception is Themer, it can be translated). \
             For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
 
-  merge-pr:
+  fix-ai-translations:
     needs:
       - create-pr
       - translations
@@ -148,19 +148,20 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: refs/pull/${{ needs.create-pr.outputs.pr_number }}/head
-          fetch-depth: 2
-      - name: Merge PR
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Fix AI translations
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git checkout update-translations
+          node scripts/fix-ai-translations.mjs
+
           git config user.email ""
           git config user.name "Update translations action"
-          git checkout -b update-translations
           rm -rf temporary-file.txt
           git add .
 
-          export COMMIT_MESSAGE="remove temporary file"
-          git commit -m "$COMMIT_MESSAGE"
-          git push --set-upstream origin update-translations --force
-          gh pr merge ${{ needs.create-pr.outputs.pr_number }} --auto --squash
+          git commit -m "remove temporary files and fix AI translations"
+          git push origin HEAD
