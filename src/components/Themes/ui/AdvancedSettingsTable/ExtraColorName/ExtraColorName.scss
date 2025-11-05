@@ -1,0 +1,9 @@
+@use '../../../../../variables.scss';
+
+$block: '.#{variables.$ns}extra-color-name';
+
+#{$block} {
+    &__delete-icon {
+        color: var(--g-color-text-danger);
+    }
+}

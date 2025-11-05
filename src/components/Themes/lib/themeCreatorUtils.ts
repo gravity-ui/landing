@@ -26,6 +26,7 @@ import lowerCase from 'lodash/lowerCase';
 
 import {
     BrandPreset,
+    DEFAULT_ADVANCED_COLORS,
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
     RADIUS_PRESETS,
@@ -35,11 +36,11 @@ import {RadiusPresetName, TypographyOptions} from './types';
 import {DefaultFontFamily, defaultTypographyPreset} from './typography/constants';
 import {createFontLinkImport} from './typography/utils';
 
-function createColorToken(title: string) {
+export function createColorToken(title: string) {
     return kebabCase(title);
 }
 
-function createTitleFromToken(token: string) {
+export function createTitleFromToken(token: string) {
     return capitalize(lowerCase(token));
 }
 
@@ -53,7 +54,7 @@ export function createPrivateColorCssVariableFromToken(privateColorToken: string
     return '';
 }
 
-function isManuallyCreatedToken(token: string) {
+export function isManuallyCreatedPaletteToken(token: string) {
     return !DEFAULT_PALETTE_TOKENS.has(token);
 }
 
@@ -323,7 +324,7 @@ export function getThemePalette(theme: ThemeCreatorState): Palette {
                 light: baseColors[token].light.value,
                 dark: baseColors[token].dark.value,
             },
-            isCustom: isManuallyCreatedToken(token),
+            isCustom: isManuallyCreatedPaletteToken(token),
         };
     });
 }
@@ -358,6 +359,8 @@ export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
             values: RADIUS_PRESETS[bordersPreset],
         },
         typography: defaultTypographyPreset,
+        colorsSettingsType: 'basic',
+        advancedColors: DEFAULT_ADVANCED_COLORS,
     };
 }
 

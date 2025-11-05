@@ -1,16 +1,30 @@
 import {ChevronDown, PencilToLine} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Popup, Sheet, TextInput, ThemeProvider} from '@gravity-ui/uikit';
-import {isInternalPrivateColorReference} from '@gravity-ui/uikit-themer';
+import {
+    Button,
+    Flex,
+    Icon,
+    Popup,
+    Sheet,
+    TextInput,
+    type TextInputProps,
+    ThemeProvider,
+} from '@gravity-ui/uikit';
+import {
+    isInternalPrivateColorReference,
+    isInternalUtilityColorReference,
+} from '@gravity-ui/uikit-themer';
+import {parseInternalUtilityColorReference} from '@gravity-ui/uikit-themer/dist/utils';
 import React from 'react';
 
 import {useIsMobile} from '../../../../hooks/useIsMobile';
 import {block} from '../../../../utils';
+import type {SemanticColorGroup} from '../../hooks/useThemeSemanticColorOption';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ColorPreview} from '../ColorPreview/ColorPreview';
 
 import './PrivateColorSelect.scss';
 import {PrivateColorSelectPopupContent} from './PrivateColorSelectPopupContent';
-import type {ColorGroup} from './types';
+import type {BaseColor, ColorGroup} from './types';
 
 const b = block('private-colors-select');
 
@@ -18,20 +32,25 @@ interface PrivateColorSelectProps {
     value?: string;
     defaultValue: string;
     onChange: (color: string) => void;
-    groups: ColorGroup[];
+    privateGroups: ColorGroup[];
+    semanticGroups?: SemanticColorGroup[];
+    inputView?: TextInputProps['view'];
 }
 
 export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
-    groups,
+    privateGroups,
+    semanticGroups,
     value,
     defaultValue,
     onChange,
+    inputView = 'normal',
 }) => {
     const isMobile = useIsMobile();
 
     const [containerElement, setContainerElement] = React.useState<HTMLDivElement | null>(null);
     const [showPopup, setShowPopup] = React.useState(false);
-    const isCustomValue = !isInternalPrivateColorReference(value);
+    const isCustomValue =
+        !isInternalPrivateColorReference(value) && !isInternalUtilityColorReference(value);
 
     const handleChange = React.useCallback(
         (newVal: string) => {
@@ -50,15 +69,37 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
         }
     }, [isCustomValue, onChange, defaultValue, showPopup]);
 
-    const privateColor = React.useMemo(() => {
+    const selectedColor = React.useMemo(() => {
+        const isUtilityColor = isInternalUtilityColorReference(value);
+
+        if (isUtilityColor && value) {
+            const tokenName = parseInternalUtilityColorReference(value);
+            let semanticItem: BaseColor | undefined;
+
+            semanticGroups?.forEach((group) =>
+                group.groups.forEach((nestedGroup) =>
+                    nestedGroup.items.forEach((item) => {
+                        if (item.name === tokenName) {
+                            semanticItem = item;
+                            return;
+                        }
+                    }),
+                ),
+            );
+
+            return semanticItem;
+        }
+
         const colorGroup = value
-            ? groups.find((group) => group.privateColors.some((color) => color.token === value))
+            ? privateGroups.find((group) =>
+                  group.privateColors.some((color) => color.token === value),
+              )
             : undefined;
 
         return value
             ? colorGroup?.privateColors?.find((color) => color.token === value)
             : undefined;
-    }, [groups, value]);
+    }, [privateGroups, value]);
 
     const toggleShowPopup = React.useCallback(() => setShowPopup((prev) => !prev), []);
     const closePopup = React.useCallback(() => setShowPopup(false), []);
@@ -74,15 +115,20 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
     return (
         <Flex className={b()} ref={setContainerElement} gap={1}>
             {isCustomValue ? (
-                <ColorPickerInput value={value} defaultValue={value || ''} onChange={onChange} />
+                <ColorPickerInput
+                    value={value}
+                    defaultValue={value || ''}
+                    onChange={onChange}
+                    view={inputView}
+                />
             ) : (
                 <TextInput
                     className={b('input')}
-                    value={privateColor?.title || ''}
-                    view="normal"
+                    value={selectedColor?.title || ''}
+                    view={inputView}
                     size="l"
                     startContent={
-                        <ColorPreview className={b('preview')} color={privateColor?.color} />
+                        <ColorPreview className={b('preview')} color={selectedColor?.color} />
                     }
                     endContent={
                         <Flex gap={1}>
@@ -119,7 +165,7 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                         onClose={closePopup}
                     >
                         <PrivateColorSelectPopupContent
-                            groups={groups}
+                            privateGroups={privateGroups}
                             value={value}
                             onChange={handleChange}
                             version="mobile"
@@ -137,7 +183,8 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                         }}
                     >
                         <PrivateColorSelectPopupContent
-                            groups={groups}
+                            privateGroups={privateGroups}
+                            semanticGroups={semanticGroups}
                             value={value}
                             onChange={handleChange}
                         />

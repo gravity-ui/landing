@@ -47,7 +47,7 @@ const PrivateColorEditor: React.FC<PrivateColorEditorProps> = ({name, theme, col
 
     return (
         <PrivateColorSelect
-            groups={colorGroups}
+            privateGroups={colorGroups}
             defaultValue={defaultValue}
             value={color}
             onChange={setColor}
