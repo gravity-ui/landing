@@ -1,5 +1,5 @@
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {Alert, Flex, Text, TextArea} from '@gravity-ui/uikit';
+import {Alert, Flex, TextArea} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {useCallback, useEffect, useState} from 'react';
 
@@ -22,8 +22,10 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
     const breakpoint = useWindowBreakpoint();
     const [textareaValue, setTextareaValue] = React.useState('');
     const [isImportError, setIsImportError] = useState(false);
+    const [importErrorMessage, setImportErrorMessage] = useState<string>();
 
-    const handleImportError = useCallback(() => {
+    const handleImportError = useCallback((errorMessage?: string) => {
+        setImportErrorMessage(errorMessage);
         setIsImportError(true);
     }, []);
 
@@ -59,9 +61,11 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
                 validationState={isImportError ? 'invalid' : undefined}
             />
             {isImportError && (
-                <Text variant="body-2" color="danger">
-                    {t('label_import-error')}
-                </Text>
+                <Alert
+                    theme="danger"
+                    title={t('label_import-error')}
+                    message={importErrorMessage}
+                />
             )}
         </Flex>
     );

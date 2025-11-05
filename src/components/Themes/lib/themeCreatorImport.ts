@@ -14,10 +14,17 @@ const getThemeFromCss = (userString: string) => {
     return parseCSS(userString);
 };
 
-const IMPORT_STRATEGIES = [getThemeFromJson, getThemeFromCss];
+const isJSON = (userInput: string) => {
+    try {
+        JSON.parse(userInput);
+        return true;
+    } catch {
+        return false;
+    }
+};
 
 type UseImportThemeParams = {
-    onImportError?: () => void;
+    onImportError?: (errorMessage?: string) => void;
     onImportSuccess?: () => void;
 };
 
@@ -26,33 +33,25 @@ export function useImportTheme({onImportError, onImportSuccess}: UseImportThemeP
 
     const importThemeFromUserInput = React.useCallback(
         (userInput: string) => {
-            let strategyIndex = 0;
-            let isSuccess = false;
+            const importStrategy = isJSON(userInput) ? getThemeFromJson : getThemeFromCss;
 
-            while (!isSuccess && IMPORT_STRATEGIES[strategyIndex]) {
-                try {
-                    let theme = IMPORT_STRATEGIES[strategyIndex](userInput);
+            try {
+                let theme = importStrategy(userInput);
 
-                    if (!theme.baseColors.brand) {
-                        theme = updateBaseColor({
-                            theme,
-                            colorToken: 'brand',
-                            value: {
-                                light: DEFAULT_BRAND_COLORS[0],
-                                dark: DEFAULT_BRAND_COLORS[0],
-                            },
-                        });
-                    }
-
-                    importTheme(theme);
-                    isSuccess = true;
-                } catch {
-                    strategyIndex++;
+                if (!theme.baseColors.brand) {
+                    theme = updateBaseColor({
+                        theme,
+                        colorToken: 'brand',
+                        value: {
+                            light: DEFAULT_BRAND_COLORS[0],
+                            dark: DEFAULT_BRAND_COLORS[0],
+                        },
+                    });
                 }
-            }
 
-            if (!isSuccess) {
-                onImportError?.();
+                importTheme(theme);
+            } catch (error) {
+                onImportError?.(error instanceof Error ? error.message : undefined);
                 return;
             }
 

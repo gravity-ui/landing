@@ -21,6 +21,7 @@ export interface ColorPickerInputProps {
     errorMessage?: string;
     size?: TextInputProps['size'];
     withBorderInPreview?: boolean;
+    view?: TextInputProps['view'];
 }
 
 export const ColorPickerInput = ({
@@ -31,6 +32,7 @@ export const ColorPickerInput = ({
     errorMessage,
     size = 'l',
     withBorderInPreview,
+    view = 'normal',
 }: ColorPickerInputProps) => {
     const {t} = useTranslation('themes');
 
@@ -125,12 +127,13 @@ export const ColorPickerInput = ({
                 errorPlacement="inside"
                 errorMessage={errorMessage || t('color-input_validation-format-error')}
                 validationState={validationError}
-                view="normal"
+                view={view}
                 size={size}
                 onChange={onChange}
                 startContent={
                     <ColorPreview
-                        className={b('preview', {'with-border': withBorderInPreview})}
+                        className={b('preview')}
+                        withBorders={withBorderInPreview}
                         color={color}
                     />
                 }
