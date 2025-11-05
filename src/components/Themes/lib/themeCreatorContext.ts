@@ -16,7 +16,7 @@ import type {
     UpdateFontFamilyParams,
     UpdateFontFamilyTypeTitleParams,
 } from './themeCreatorUtils';
-import type {ThemeCreatorState} from './types';
+import type {AdvanceColors, ColorsSettingsType, ThemeCreatorState} from './types';
 
 export const ThemeCreatorContext = createContext<ThemeCreatorState>(
     initThemeCreator(DEFAULT_THEME),
@@ -40,6 +40,8 @@ export interface ThemeCreatorMethodsContextType {
     openMainSettings: () => void;
     setAdvancedMode: (enabled: boolean) => void;
     importTheme: (theme: GravityTheme) => void;
+    setColorsSettingsType: (type: ColorsSettingsType) => void;
+    updateAdvancedColors: (colors: AdvanceColors) => void;
 }
 
 export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsContextType>({
@@ -60,4 +62,6 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     openMainSettings: noop,
     setAdvancedMode: noop,
     importTheme: noop,
+    setColorsSettingsType: noop,
+    updateAdvancedColors: noop,
 });

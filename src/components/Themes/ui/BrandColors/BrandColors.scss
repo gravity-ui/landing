@@ -58,8 +58,7 @@ $block: '.#{variables.$ns}brand-colors';
         }
     }
 
-    &__switch-button {
-        --g-button-border-radius: 8px;
-        width: min-content;
+    &__colors-settings-type-radio-group {
+        --g-border-radius-xl: 8px;
     }
 }
