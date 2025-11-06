@@ -10,6 +10,7 @@
     "@gravity-ui/charts": "^0.8.0",
     "@gravity-ui/components": "^4.16.0",
     "@gravity-ui/date-components": "^3.4.0",
+    "@gravity-ui/date-utils": "^2.6.0",
     "@gravity-ui/graph": "^1.0.0",
     "@gravity-ui/icons": "^2.16.0",
     "@gravity-ui/markdown-editor": "^15.1.0",
