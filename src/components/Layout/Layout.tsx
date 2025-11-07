@@ -1,10 +1,5 @@
 import {PageConstructorProvider, Theme as PageConstructorTheme} from '@gravity-ui/page-constructor';
 import {Lang, ThemeProvider, configure as configureUiKit} from '@gravity-ui/uikit';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
-import es from 'javascript-time-ago/locale/es.json';
-import ru from 'javascript-time-ago/locale/ru.json';
-import zh from 'javascript-time-ago/locale/zh.json';
 import Head from 'next/head';
 import React from 'react';
 import {useGravityAnimation} from 'src/hooks/useGravityAnimation';
@@ -18,11 +13,10 @@ import {Menu} from '../Menu/Menu';
 
 import './Layout.scss';
 import {Meta, MetaProps} from './Meta/Meta';
+import {initDateUtils, initTimeAgo} from './utils';
 
-TimeAgo.addDefaultLocale(en);
-TimeAgo.addLocale(ru);
-TimeAgo.addLocale(es);
-TimeAgo.addLocale(zh);
+initTimeAgo();
+initDateUtils();
 
 const b = block('layout');
 
