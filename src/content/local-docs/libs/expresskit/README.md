@@ -128,3 +128,32 @@ const app = new ExpressKit(nodekit, {
   },
 });
 ```
+
+## Caching Control
+
+By default, ExpressKit sets `no-cache` headers on all responses. You can control this behavior globally or per-route.
+
+### Global configuration
+
+```typescript
+const config: Partial<AppConfig> = {
+  expressEnableCaching: true, // Allow caching by default
+};
+```
+
+### Per-route configuration
+
+```typescript
+const app = new ExpressKit(nodekit, {
+  'GET /api/cached': {
+    enableCaching: true, // Allow caching for this route
+    handler: (req, res) => res.json({data: 'cacheable'}),
+  },
+  'GET /api/fresh': {
+    enableCaching: false, // Force no-cache
+    handler: (req, res) => res.json({data: 'always fresh'}),
+  },
+});
+```
+
+Route-level `enableCaching` overrides the global setting. The caching state is available in `req.routeInfo.enableCaching`.

@@ -60,7 +60,7 @@ ExpressKit 提供内置的跨站请求伪造 (CSRF) 防护功能，以保护您�
 
 ### 基本配置
 
-要启用 CSRF 防护，请在您的配置中设置 secret key：
+要启用 CSRF 防护，请在您的配置中设置密钥：
 
 ```typescript
 import type {AppConfig} from '@gravity-ui/nodekit';
@@ -77,8 +77,8 @@ export default config;
 
 | 选项              | 类型                 | 默认值                              | 描述                                                                                     |
 | ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `appCsrfSecret`     | `string \| string[]` | -                                    | **必需。** 用于 HMAC 令牌生成的 secret key。多个 secret 允许进行密钥轮换。 |
-| `appCsrfLifetime`   | `number`             | `2592000` (30 天)                  | 令牌的有效期（秒）。设置为 `0` 表示无过期时间。                                        |
+| `appCsrfSecret`     | `string \| string[]` | -                                    | **必需。** 用于 HMAC 令牌生成的密钥。多个密钥允许进行密钥轮换。 |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 天)                  | 令牌有效期（秒）。设置为 `0` 表示无过期时间。                                        |
 | `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | 用于令牌验证的 HTTP 标头名称。                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | 需要 CSRF 验证的 HTTP 方法。                                                      |
 
@@ -128,3 +128,32 @@ const app = new ExpressKit(nodekit, {
   },
 });
 ```
+
+## 缓存控制
+
+默认情况下，ExpressKit 会为所有响应设置 `no-cache` 标头。您可以全局或按路由控制此行为。
+
+### 全局配置
+
+```typescript
+const config: Partial<AppConfig> = {
+  expressEnableCaching: true, // 默认允许缓存
+};
+```
+
+### 按路由配置
+
+```typescript
+const app = new ExpressKit(nodekit, {
+  'GET /api/cached': {
+    enableCaching: true, // 为此路由允许缓存
+    handler: (req, res) => res.json({data: 'cacheable'}),
+  },
+  'GET /api/fresh': {
+    enableCaching: false, // 强制不缓存
+    handler: (req, res) => res.json({data: 'always fresh'}),
+  },
+});
+```
+
+路由级别的 `enableCaching` 会覆盖全局设置。缓存状态可在 `req.routeInfo.enableCaching` 中获取。
