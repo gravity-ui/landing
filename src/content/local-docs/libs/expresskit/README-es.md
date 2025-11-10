@@ -58,7 +58,7 @@ export default config;
 
 ExpressKit proporciona protección integrada contra Cross-Site Request Forgery (CSRF) para asegurar tus aplicaciones contra solicitudes maliciosas de origen cruzado. El middleware CSRF genera y valida automáticamente tokens para solicitudes HTTP que cambian el estado.
 
-### Configuración Básica
+### Configuración básica
 
 Para habilitar la protección CSRF, configura la clave secreta en tu configuración:
 
@@ -73,12 +73,12 @@ const config: Partial<AppConfig> = {
 export default config;
 ```
 
-### Opciones de Configuración
+### Opciones de configuración
 
 | Opción              | Tipo                 | Predeterminado                       | Descripción                                                                                     |
 | ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | `appCsrfSecret`     | `string \| string[]` | -                                    | **Requerido.** Clave(s) secreta(s) para la generación de tokens HMAC. Múltiples secretos permiten la rotación de claves. |
-| `appCsrfLifetime`   | `number`             | `2592000` (30 días)                  | Vida útil del token en segundos. Establecer a `0` para que no expire.                                        |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 días)                  | Duración del token en segundos. Establecer a `0` para que no expire.                                        |
 | `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | Nombre de la cabecera HTTP para la validación del token.                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | Métodos HTTP que requieren validación CSRF.                                                      |
 
@@ -95,7 +95,7 @@ const nodekit = new NodeKit({
     appCsrfSecret: 'tu-clave-secreta',
     appAuthPolicy: AuthPolicy.required,
 
-    // Asegúrate de que tu middleware establezca el ID de usuario en el originalContext, de lo contrario, la generación del token CSRF fallará
+    // Asegúrate de que tu middleware establezca el ID de usuario en originalContext, de lo contrario, la generación del token CSRF fallará
     appAuthHandler: tuManejadorDeAutenticacion,
   },
 });
@@ -113,7 +113,7 @@ const app = new ExpressKit(nodekit, {
 });
 ```
 
-### Configuración por Ruta
+### Configuración por ruta
 
 Puedes deshabilitar la protección CSRF para rutas específicas:
 
@@ -128,3 +128,32 @@ const app = new ExpressKit(nodekit, {
   },
 });
 ```
+
+## Control de caché
+
+Por defecto, ExpressKit establece cabeceras `no-cache` en todas las respuestas. Puedes controlar este comportamiento globalmente o por ruta.
+
+### Configuración global
+
+```typescript
+const config: Partial<AppConfig> = {
+  expressEnableCaching: true, // Permite la caché por defecto
+};
+```
+
+### Configuración por ruta
+
+```typescript
+const app = new ExpressKit(nodekit, {
+  'GET /api/cached': {
+    enableCaching: true, // Permite la caché para esta ruta
+    handler: (req, res) => res.json({data: 'cacheable'}),
+  },
+  'GET /api/fresh': {
+    enableCaching: false, // Fuerza no-cache
+    handler: (req, res) => res.json({data: 'siempre fresco'}),
+  },
+});
+```
+
+El `enableCaching` a nivel de ruta anula la configuración global. El estado de la caché está disponible en `req.routeInfo.enableCaching`.

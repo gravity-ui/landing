@@ -77,7 +77,7 @@ export default config;
 
 | Option              | Typ                 | Standard                              | Beschreibung                                                                                     |
 | ------------------- | ------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| `appCsrfSecret`     | `string \| string[]` | -                                     | **Erforderlich.** Geheimer Schlüssel (oder Schlüssel) für die HMAC-Token-Generierung. Mehrere Schlüssel ermöglichen die Schlüsselrotation. |
+| `appCsrfSecret`     | `string \| string[]` | -                                     | **Erforderlich.** Geheimer Schlüssel/Schlüssel für die HMAC-Token-Generierung. Mehrere Schlüssel ermöglichen die Schlüsselrotation. |
 | `appCsrfLifetime`   | `number`            | `2592000` (30 Tage)                   | Token-Lebensdauer in Sekunden. Setzen Sie auf `0` für kein Ablaufdatum.                                        |
 | `appCsrfHeaderName` | `string`            | `'x-csrf-token'`                      | Name des HTTP-Headers für die Token-Validierung.                                                          |
 | `appCsrfMethods`    | `string[]`          | `['POST', 'PUT', 'DELETE', 'PATCH']` | HTTP-Methoden, die eine CSRF-Validierung erfordern.                                                      |
@@ -129,3 +129,32 @@ const app = new ExpressKit(nodekit, {
   },
 });
 ```
+
+## Caching-Steuerung
+
+Standardmäßig setzt ExpressKit `no-cache`-Header auf alle Antworten. Sie können dieses Verhalten global oder pro Route steuern.
+
+### Globale Konfiguration
+
+```typescript
+const config: Partial<AppConfig> = {
+  expressEnableCaching: true, // Caching standardmäßig erlauben
+};
+```
+
+### Routenspezifische Konfiguration
+
+```typescript
+const app = new ExpressKit(nodekit, {
+  'GET /api/cached': {
+    enableCaching: true, // Caching für diese Route erlauben
+    handler: (req, res) => res.json({data: 'cacheable'}),
+  },
+  'GET /api/fresh': {
+    enableCaching: false, // no-cache erzwingen
+    handler: (req, res) => res.json({data: 'always fresh'}),
+  },
+});
+```
+
+`enableCaching` auf Routenebene überschreibt die globale Einstellung. Der Caching-Status ist in `req.routeInfo.enableCaching` verfügbar.
