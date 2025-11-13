@@ -119,9 +119,11 @@ export const Library: React.FC<Props> = ({lib}) => {
                 return link;
             }
 
-            const githubRepoUrl = `${GITHUB_URL}${githubId}/blob/main/`;
-            const absoluteUrl = new URL(link, githubRepoUrl);
-            return absoluteUrl.toString();
+            const githubRepoUrl = `${GITHUB_URL}${githubId}/blob/main/${
+                link && link.startsWith('/') ? link.slice(1) : link
+            }`;
+
+            return githubRepoUrl;
         },
         [lib.config?.githubId],
     );
