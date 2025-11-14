@@ -15,6 +15,7 @@ const withTM = require('next-transpile-modules')([
     '@gravity-ui/charts',
     '@gravity-ui/yagr',
     '@gravity-ui/markdown-editor',
+    'swiper',
 ]);
 
 const {i18n} = require('./next-i18next.config');
