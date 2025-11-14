@@ -1,9 +1,9 @@
 import {HTML} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import {useTranslation} from 'react-i18next';
 
 import type {LibWithMetadata} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';

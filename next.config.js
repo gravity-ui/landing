@@ -17,6 +17,7 @@ const withTM = require('next-transpile-modules')([
     '@gravity-ui/markdown-editor',
     '@gravity-ui/timeline',
     '@gravity-ui/aikit',
+    'swiper',
 ]);
 
 const {i18n} = require('./next-i18next.config');
