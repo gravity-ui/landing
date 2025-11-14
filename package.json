@@ -10,6 +10,7 @@
   "dependencies": {
     "@diplodoc/transform": "^4.18.0",
     "@gravity-ui/aikit": "^1.1.0",
+    "@gravity-ui/blog-constructor": "^8.5.0",
     "@gravity-ui/chartkit": "^6.1.1",
     "@gravity-ui/charts": "^0.8.0",
     "@gravity-ui/components": "^4.18.0",
