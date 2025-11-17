@@ -1,4 +1,4 @@
-import {HTML} from '@gravity-ui/page-constructor';
+import {YFMWrapper} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import React from 'react';
 
@@ -24,7 +24,10 @@ export const LibraryPreview = ({lib}: LibraryPreviewProps) => {
                     <div className={b('library-header')}>
                         <h2 className={b('library-subtitle')}>GravityUI</h2>
                         <h1 className={b('library-title')}>
-                            <HTML>{lib.config.title}</HTML>
+                            <YFMWrapper
+                                content={lib.config.title}
+                                modifiers={{constructor: true}}
+                            />
                         </h1>
                     </div>
 
