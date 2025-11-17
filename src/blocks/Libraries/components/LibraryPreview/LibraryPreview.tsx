@@ -1,4 +1,4 @@
-import {HTML} from '@gravity-ui/page-constructor';
+import {YFMWrapper} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import Image from 'next/image';
@@ -85,7 +85,7 @@ export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle
                     <div className={b('header')}>
                         {title ? (
                             <h5 className={b('title')}>
-                                <HTML>{title}</HTML>
+                                <YFMWrapper content={title} modifiers={{constructor: true}} />
                             </h5>
                         ) : null}
                         {stars ? (

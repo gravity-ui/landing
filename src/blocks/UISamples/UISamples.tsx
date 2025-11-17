@@ -1,4 +1,4 @@
-import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
+import {Animatable, AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
 import React from 'react';
 import {block} from 'src/utils';
 
@@ -22,7 +22,7 @@ export const UISamplesBlock: React.FC<UISamplesProps> = ({title}) => {
     return (
         <AnimateBlock className={b()} animate={false}>
             <h2 className={b('title')} data-section="ui-samples">
-                <HTML>{title}</HTML>
+                <YFMWrapper content={title} modifiers={{constructor: true}} />
             </h2>
             <UISamplesMobile />
             <UISamplesDesktop />
