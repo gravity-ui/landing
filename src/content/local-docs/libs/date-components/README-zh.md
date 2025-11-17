@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date:</label>
+        <label htmlFor="date-picker">Date: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -36,8 +36,8 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// 加载应用程序将使用的日期区域设置。
-settings.loadLocale('ru');
+// 加载将在应用程序中使用的日期区域设置。
+await settings.loadLocale('ru');
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">日期:</label>
+        <label htmlFor="date-picker">日期: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -53,17 +53,16 @@ function App() {
 }
 ```
 
-如果您的应用程序支持语言切换，请在应用程序首次加载时预加载所有支持的区域设置，或者在切换语言之前加载区域设置：
+如果应用支持语言切换，请在应用首次加载时预加载所有支持的区域设置，或在切换语言之前加载区域设置：
 
 ```jsx
 // 预加载区域设置
-settings.loadLocale('ru');
-settings.loadLocale('nl');
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// 或者按需加载。
+// 或者按需加载区域设置。
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -78,7 +77,7 @@ function App() {
 }
 ```
 
-这些组件提供英语和俄语的翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
+组件提供英语和俄语的翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
@@ -90,7 +89,7 @@ addLanguageKeysets<Keysets>(lang, {...});
 // 或者使用 PartialKeysets 类型仅指定您需要的翻译
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// 指定某些组件的翻译
+// 为某些组件指定翻译
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 

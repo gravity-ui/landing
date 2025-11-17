@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date :</label>
+        <label htmlFor="date-picker">Date : </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -36,16 +36,16 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Chargez les locales de date qui seront utilisées dans l'application.
-settings.loadLocale('ru');
+// Charger les locales de date qui seront utilisées dans l'application.
+await settings.loadLocale('ru');
 
 function App() {
   return (
-    // Définissez la langue à utiliser avec les composants.
+    // Définir la langue à utiliser avec les composants.
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date :</label>
+        <label htmlFor="date-picker">Date : </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -56,14 +56,13 @@ function App() {
 Si l'application prend en charge le changement de langue, préchargez toutes les locales prises en charge au premier chargement de l'application, ou chargez les locales avant de changer de langue :
 
 ```jsx
-// Préchargez les locales
-settings.loadLocale('ru');
-settings.loadLocale('nl');
+// Précharger les locales
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// ou chargez les locales à la demande.
+// ou charger les locales à la demande.
 
 function App() {
   const [lang, setLang] = React.useState('en');
