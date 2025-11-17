@@ -1,4 +1,4 @@
-import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
+import {Animatable, AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
 import React from 'react';
 
 import {Roadmap, RoadmapTask} from '../../components/Roadmap';
@@ -22,7 +22,7 @@ export const RoadmapBlock: React.FC<RoadmapProps> = ({animated, title, tasks}) =
     return (
         <AnimateBlock className={b()} animate={animated}>
             <h2 className={b('title')} data-section="roadmap">
-                <HTML>{title}</HTML>
+                <YFMWrapper content={title} modifiers={{constructor: true}} />
             </h2>
             <Roadmap tasks={tasks} />
         </AnimateBlock>

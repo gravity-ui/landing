@@ -1,4 +1,4 @@
-import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
+import {Col, Grid, Row, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button, Icon, Tab, TabList, TabProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
@@ -140,11 +140,18 @@ export const Library: React.FC<Props> = ({lib}) => {
                                 <Link href="/libraries" className={b('breadcrumbs-link')}>
                                     {t('library:libraries')}
                                 </Link>{' '}
-                                / <HTML className={b('breadcrumbs-item')}>{lib.config.title}</HTML>
+                                /{' '}
+                                <YFMWrapper
+                                    content={lib.config.title}
+                                    modifiers={{constructor: true}}
+                                />
                             </div>
 
                             <h1 className={b('title')}>
-                                <HTML>{lib.config.title}</HTML>
+                                <YFMWrapper
+                                    content={lib.config.title}
+                                    modifiers={{constructor: true}}
+                                />
                             </h1>
 
                             <div className={b('description')}>
