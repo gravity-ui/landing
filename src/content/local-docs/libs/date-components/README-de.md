@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Datum:</label>
+        <label htmlFor="date-picker">Datum: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -36,8 +36,8 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Lade die Datum-Lokalisierungen, die in der Anwendung verwendet werden sollen.
-settings.loadLocale('ru');
+// Lade die Datum-Locales, die in der Anwendung verwendet werden sollen.
+await settings.loadLocale('ru');
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Datum:</label>
+        <label htmlFor="date-picker">Datum: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -53,17 +53,16 @@ function App() {
 }
 ```
 
-Wenn die App Sprachwechsel unterstützt, lade alle unterstützten Lokalisierungen vor, wenn die App zum ersten Mal geladen wird, oder lade die Lokalisierungen vor dem Sprachwechsel:
+Wenn die App Sprachwechsel unterstützt, lade alle unterstützten Locales vor, wenn die App zum ersten Mal geladen wird, oder lade die Locales vor dem Sprachwechsel:
 
 ```jsx
-// Lokalisierungen vorladen
-settings.loadLocale('ru');
-settings.loadLocale('nl');
+// Locales vorladen
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// oder Lokalisierungen bei Bedarf laden.
+// oder Locales bei Bedarf laden.
 
 function App() {
   const [lang, setLang] = React.useState('en');

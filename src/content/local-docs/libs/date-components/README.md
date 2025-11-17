@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date:</label>
+        <label htmlFor="date-picker">Date: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -37,7 +37,7 @@ root.render(<App />);
 import {settings} from '@gravity-ui/date-utils';
 
 // Load date locales that will be used in an application.
-settings.loadLocale('ru');
+await settings.loadLocale('ru');
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Дата:</label>
+        <label htmlFor="date-picker">Дата: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -57,8 +57,7 @@ If the app supports language switching, preload all supported locales when the a
 
 ```jsx
 // Preload locales
-settings.loadLocale('ru');
-settings.loadLocale('nl');
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
