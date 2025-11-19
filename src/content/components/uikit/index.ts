@@ -23,6 +23,7 @@ import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
 import {pinInputConfig} from './PinInput';
+import {popoverConfig} from './Popover';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
@@ -69,6 +70,7 @@ const uikitComponents: Component[] = [
     paginationConfig,
     paletteConfig,
     pinInputConfig,
+    popoverConfig,
     popupConfig,
     portalConfig,
     progressConfig,
