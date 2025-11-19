@@ -1,5 +1,5 @@
 import {Loader} from '@gravity-ui/uikit';
-import {Api} from 'src/api';
+import {ClientApi} from 'src/api/client';
 import {block} from 'src/utils';
 
 import {IntersectionLoadComponent} from '../IntersectionLoadComponent/IntersectionLoadComponent';
@@ -20,7 +20,7 @@ const getComponent = async () => {
 };
 
 const getComponentProps = async () => {
-    const contributors = await Api.instance.fetchAllContributorsFromClient();
+    const contributors = await ClientApi.instance.fetchAllContributors();
 
     return {contributors};
 };

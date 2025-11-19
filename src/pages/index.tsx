@@ -1,8 +1,8 @@
 import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 
-import type {Contributor, LibWithMetadata} from '../api';
-import {Api} from '../api';
+import type {LibWithMetadata} from '../api';
+import {ServerApi} from '../api';
 import backgroundAsset from '../assets/background.jpg';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
@@ -10,7 +10,7 @@ import {getI18nProps} from '../utils/i18next';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const [libs, i18nProps] = await Promise.all([
-        Api.instance.fetchLandingLibs(),
+        ServerApi.instance.fetchLandingLibs(),
         getI18nProps(ctx, ['home', 'libraries-info']),
     ]);
 
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
 };
 
-const Home = ({libs}: {libs: LibWithMetadata[]; contributors: Contributor[]}) => {
+const Home = ({libs}: {libs: LibWithMetadata[]}) => {
     return (
         <>
             <Head>

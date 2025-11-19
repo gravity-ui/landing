@@ -8,72 +8,17 @@ import {i18n} from 'next-i18next.config';
 
 import {type LibConfig, libs as libsConfigs} from '../libs';
 
-export type Contributor = {
-    login: string;
-    url: string;
-    avatarUrl: string;
-    contributions: number;
-};
+import type {
+    CodeOwners,
+    Contributor,
+    GithubInfo,
+    LibWithFullData,
+    LibWithMetadata,
+    NpmInfo,
+} from './types';
 
-export type CodeOwners = {
-    pattern: string;
-    owners: string[];
-};
-
-export type LibMetadata = {
-    stars: number;
-    version: string;
-    lastUpdate: string;
-    license: string;
-    issues: number;
-};
-
-export type LibData = {
-    readme: {
-        en: string;
-        ru: string;
-        es: string;
-        zh: string;
-        fr: string;
-        de: string;
-        ko: string;
-    };
-    changelog: string;
-    contributors: Contributor[];
-    codeOwners: CodeOwners[];
-};
-
-export type LibBase = {
-    config: LibConfig;
-};
-
-export type LibWithMetadata = LibBase & {
-    metadata: LibMetadata;
-};
-
-export type LibWithFullData = LibBase & LibWithMetadata & {data: LibData};
-
-export type NpmInfo = {
-    'dist-tags'?: {
-        latest?: string;
-    };
-    time?: {
-        [version: string]: string;
-    };
-};
-
-export type GithubInfo = {
-    stargazers_count?: number;
-    license?: {
-        name?: string;
-    } | null;
-    open_issues_count?: number;
-    contributors: Contributor[];
-    codeOwners: CodeOwners[];
-};
-
-export class Api {
-    private static _instance: Api;
+export class ServerApi {
+    private static _instance: ServerApi;
 
     private octokit: Octokit;
 
@@ -93,12 +38,12 @@ export class Api {
         'yc-ui-bot',
     ];
 
-    static get instance(): Api {
-        if (!Api._instance) {
-            Api._instance = new Api();
+    static get instance(): ServerApi {
+        if (!ServerApi._instance) {
+            ServerApi._instance = new ServerApi();
         }
 
-        return Api._instance;
+        return ServerApi._instance;
     }
 
     constructor() {
@@ -218,6 +163,9 @@ export class Api {
     }
 
     async fetchAllContributorsWithCache(): Promise<Contributor[]> {
+        console.log('--------------------------------------------------------------');
+        console.log('contributors:', this.contributorsCache);
+        console.log('--------------------------------------------------------------');
         const now = Date.now();
 
         if (this.contributorsCache) {
@@ -248,11 +196,6 @@ export class Api {
         };
 
         return contributors;
-    }
-
-    async fetchAllContributorsFromClient(): Promise<Contributor[]> {
-        const res = await fetch('api/contributors');
-        return (await res.json()).contributors;
     }
 
     async fetchNpmInfo(npmId: string): Promise<NpmInfo | null> {
@@ -318,15 +261,10 @@ export class Api {
         return '';
     }
 
-    async fetchLibReadmeInfo({readmeUrl, id}: LibConfig): Promise<{
-        en: string;
-        ru: string;
-        es: string;
-        zh: string;
-        fr: string;
-        de: string;
-        ko: string;
-    }> {
+    async fetchLibReadmeInfo({
+        readmeUrl,
+        id,
+    }: LibConfig): Promise<{en: string; ru: string; es: string; zh: string}> {
         const headers: Record<string, string> = {'User-Agent': 'request'};
 
         const fetchReadmeContent = async (url: string) => {
@@ -353,14 +291,11 @@ export class Api {
                 'utf8',
             );
 
-        const [en, ru, es, zh, fr, de, ko] = await Promise.all([
+        const [en, ru, es, zh] = await Promise.all([
             fetchReadmeContent(readmeUrl.en),
             fetchReadmeContent(readmeUrl.ru),
             getLocalDocsReadPromise('es'),
             getLocalDocsReadPromise('zh'),
-            getLocalDocsReadPromise('fr'),
-            getLocalDocsReadPromise('de'),
-            getLocalDocsReadPromise('ko'),
         ]);
 
         return {
@@ -368,9 +303,6 @@ export class Api {
             ru,
             es,
             zh,
-            fr,
-            de,
-            ko,
         };
     }
 
@@ -492,11 +424,10 @@ export class Api {
         return libs.sort((lib1, lib2) => {
             const order = [
                 'uikit',
-                'aikit',
+                'navigation',
                 'date-components',
                 'markdown-editor',
                 'graph',
-                'navigation',
                 'page-constructor',
                 'dashkit',
             ];
@@ -595,17 +526,3 @@ export class Api {
         return content;
     }
 }
-export type {
-    Contributor,
-    CodeOwners,
-    LibMetadata,
-    LibData,
-    LibBase,
-    LibWithMetadata,
-    LibWithFullData,
-    NpmInfo,
-    GithubInfo,
-} from './types';
-
-export {ServerApi} from './server';
-export {ClientApi} from './client';

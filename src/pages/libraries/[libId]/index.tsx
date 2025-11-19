@@ -1,7 +1,7 @@
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 
-import {Api, type LibWithFullData} from '../../../api';
+import {type LibWithFullData, ServerApi} from '../../../api';
 import {Layout} from '../../../components/Layout/Layout';
 import {Library} from '../../../components/Library/Library';
 import {getI18nProps, getLibraryMeta, isValidLibId} from '../../../utils';
@@ -16,7 +16,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
 
     const [lib, i18nProps] = await Promise.all([
-        Api.instance.fetchLibByIdWithCache(libId),
+        ServerApi.instance.fetchLibByIdWithCache(libId),
         getI18nProps(ctx, ['library', 'libraries-info']),
     ]);
 
