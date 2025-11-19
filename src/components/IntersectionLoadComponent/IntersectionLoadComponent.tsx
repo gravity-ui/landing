@@ -42,13 +42,17 @@ export const IntersectionLoadComponent = <Component extends React.ComponentType<
         return {Component, props};
     }, [getComponent]);
 
-    const LazyComponent = React.lazy(async () => {
-        const {Component, props} = await getComponentWithPropsCached();
+    const LazyComponent = React.useMemo(
+        () =>
+            React.lazy(async () => {
+                const {Component, props} = await getComponentWithPropsCached();
 
-        onLoad?.(Component, props);
+                onLoad?.(Component, props);
 
-        return {default: () => <Component key={cacheKey} {...props} />};
-    });
+                return {default: () => <Component key={cacheKey} {...props} />};
+            }),
+        [getComponentWithPropsCached, onLoad],
+    );
 
     useIntersection({
         element: intersectionElementRef,

@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {Api} from 'src/api';
+import {ServerApi} from 'src/api';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'GET') {
@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
 
-    const contributors = await Api.instance.fetchAllContributorsWithCache();
+    const contributors = await ServerApi.instance.fetchAllContributorsWithCache();
 
     res.status(200).json({contributors});
 }
