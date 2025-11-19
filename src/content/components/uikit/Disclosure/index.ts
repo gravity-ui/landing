@@ -27,8 +27,8 @@ export const disclosureConfig = {
             },
             arrowPosition: {
                 type: 'radioButton',
-                values: mappingOptions(['left', 'right', 'start', 'end']),
-                defaultValue: 'left',
+                values: mappingOptions(['start', 'end']),
+                defaultValue: 'start',
             },
             summary: {type: 'input', defaultValue: 'Disclosure summary'},
             children: {type: 'input', defaultValue: 'Disclosure content'},
