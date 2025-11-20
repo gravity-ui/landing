@@ -4,6 +4,7 @@ import {getLibConfigById} from '../../../libs/config';
 import {Component, Lib} from '../types';
 
 import {accordionConfig} from './Accordion';
+import {actionTooltipConfig} from './ActionTooltip';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {avatarConfig} from './Avatar';
@@ -54,6 +55,7 @@ const uikitComponents: Component[] = [
     alertConfig,
     arrowToggleConfig,
     avatarConfig,
+    actionTooltipConfig,
     breadcrumbsConfig,
     buttonConfig,
     cardConfig,
