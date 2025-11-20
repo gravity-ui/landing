@@ -12,6 +12,7 @@ import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
 import {dropdownMenuConfig} from './DropdownMenu';
+import {helpMarkConfig} from './HelpMark';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {linkConfig} from './Link';
@@ -93,6 +94,7 @@ const uikitComponents: Component[] = [
     userLabelConfig,
     sheetConfig,
     stepperConfig,
+    helpMarkConfig,
 ];
 
 export const uikit: Lib = {

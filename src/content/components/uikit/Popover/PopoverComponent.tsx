@@ -2,13 +2,7 @@ import {Button, Popover} from '@gravity-ui/uikit';
 import type {PopoverProps} from '@gravity-ui/uikit';
 import React from 'react';
 
-type PopupComponentProps = {
-    open?: boolean;
-    placement?: PopoverProps['placement'];
-    hasArrow?: boolean;
-    disabled?: boolean;
-    trigger?: PopoverProps['trigger'];
-};
+type PopupComponentProps = Pick<PopoverProps, 'placement' | 'hasArrow' | 'disabled' | 'trigger'>;
 
 export const PopoverComponent = ({disabled, trigger, placement, hasArrow}: PopupComponentProps) => {
     return (
