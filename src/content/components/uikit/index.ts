@@ -4,6 +4,7 @@ import {getLibConfigById} from '../../../libs/config';
 import {Component, Lib} from '../types';
 
 import {accordionConfig} from './Accordion';
+import {actionTooltipConfig} from './ActionTooltip';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {avatarConfig} from './Avatar';
@@ -13,6 +14,7 @@ import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
 import {disclosureConfig} from './Disclosure';
 import {dropdownMenuConfig} from './DropdownMenu';
+import {helpMarkConfig} from './HelpMark';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {linkConfig} from './Link';
@@ -24,6 +26,7 @@ import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
 import {pinInputConfig} from './PinInput';
+import {popoverConfig} from './Popover';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
@@ -54,6 +57,7 @@ const uikitComponents: Component[] = [
     alertConfig,
     arrowToggleConfig,
     avatarConfig,
+    actionTooltipConfig,
     breadcrumbsConfig,
     buttonConfig,
     cardConfig,
@@ -71,6 +75,7 @@ const uikitComponents: Component[] = [
     paginationConfig,
     paletteConfig,
     pinInputConfig,
+    popoverConfig,
     popupConfig,
     portalConfig,
     progressConfig,
@@ -93,6 +98,7 @@ const uikitComponents: Component[] = [
     userLabelConfig,
     sheetConfig,
     stepperConfig,
+    helpMarkConfig,
 ];
 
 export const uikit: Lib = {
