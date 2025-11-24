@@ -48,6 +48,7 @@ import {textConfig} from './Text';
 import {textAreaConfig} from './TextArea';
 import {textInputConfig} from './TextInput';
 import {config as toasterConfig} from './Toaster';
+import {tocConfig} from './Toc';
 import {tooltipConfig} from './Tooltip';
 import {userConfig} from './User';
 import {userLabelConfig} from './UserLabel';
@@ -97,6 +98,7 @@ const uikitComponents: Component[] = [
     textInputConfig,
     tooltipConfig,
     toasterConfig,
+    tocConfig,
     userConfig,
     userLabelConfig,
     sheetConfig,
