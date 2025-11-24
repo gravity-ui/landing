@@ -15,6 +15,7 @@ import {checkboxConfig} from './Checkbox';
 import {disclosureConfig} from './Disclosure';
 import {dropdownMenuConfig} from './DropdownMenu';
 import {helpMarkConfig} from './HelpMark';
+import {hotkeyConfig} from './Hotkey';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {linkConfig} from './Link';
@@ -99,6 +100,7 @@ const uikitComponents: Component[] = [
     sheetConfig,
     stepperConfig,
     helpMarkConfig,
+    hotkeyConfig,
 ];
 
 export const uikit: Lib = {
