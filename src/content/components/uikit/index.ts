@@ -13,6 +13,7 @@ import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
 import {disclosureConfig} from './Disclosure';
+import {dividerConfig} from './Divider';
 import {dropdownMenuConfig} from './DropdownMenu';
 import {helpMarkConfig} from './HelpMark';
 import {iconConfig} from './Icon';
@@ -63,6 +64,7 @@ const uikitComponents: Component[] = [
     cardConfig,
     checkboxConfig,
     disclosureConfig,
+    dividerConfig,
     dropdownMenuConfig,
     iconConfig,
     labelConfig,
