@@ -22,29 +22,29 @@ import type {SemanticColorGroup} from '../../hooks/useThemeSemanticColorOption';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ColorPreview} from '../ColorPreview/ColorPreview';
 
-import './PrivateColorSelect.scss';
-import {PrivateColorSelectPopupContent} from './PrivateColorSelectPopupContent';
+import {ColorSelectPopupContent} from './ColorSelectPopupContent';
+import './GravityColorSelect.scss';
 import type {BaseColor, ColorGroup} from './types';
 
 const b = block('private-colors-select');
 
-interface PrivateColorSelectProps {
+interface GravityColorSelectProps {
     value?: string;
     defaultValue: string;
-    onChange: (color: string) => void;
+    onChange: (color: string, ref?: string) => void;
     privateGroups: ColorGroup[];
     semanticGroups?: SemanticColorGroup[];
     inputView?: TextInputProps['view'];
 }
 
-export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
+export const GravityColorSelect = ({
     privateGroups,
     semanticGroups,
     value,
     defaultValue,
     onChange,
     inputView = 'normal',
-}) => {
+}: GravityColorSelectProps) => {
     const isMobile = useIsMobile();
 
     const [containerElement, setContainerElement] = React.useState<HTMLDivElement | null>(null);
@@ -53,8 +53,8 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
         !isInternalPrivateColorReference(value) && !isInternalUtilityColorReference(value);
 
     const handleChange = React.useCallback(
-        (newVal: string) => {
-            onChange(newVal);
+        (newVal: string, newRef?: string) => {
+            onChange(newVal, newRef);
             setShowPopup(false);
         },
         [onChange],
@@ -164,7 +164,7 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                         visible={showPopup}
                         onClose={closePopup}
                     >
-                        <PrivateColorSelectPopupContent
+                        <ColorSelectPopupContent
                             privateGroups={privateGroups}
                             value={value}
                             onChange={handleChange}
@@ -182,7 +182,7 @@ export const PrivateColorSelect: React.FC<PrivateColorSelectProps> = ({
                             }
                         }}
                     >
-                        <PrivateColorSelectPopupContent
+                        <ColorSelectPopupContent
                             privateGroups={privateGroups}
                             semanticGroups={semanticGroups}
                             value={value}

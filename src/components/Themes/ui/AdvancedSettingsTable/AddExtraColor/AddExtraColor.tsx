@@ -1,6 +1,6 @@
 import {Plus} from '@gravity-ui/icons';
 import {Button, Icon} from '@gravity-ui/uikit';
-// import {useTranslation} from 'next-i18next';
+import {useTranslation} from 'next-i18next';
 import {useCallback} from 'react';
 
 import {block} from '../../../../../utils';
@@ -11,7 +11,7 @@ import './AddExtraColor.scss';
 const b = block('add-extra-color');
 
 export const AddExtraColor = () => {
-    // const {t} = useTranslation('themes');
+    const {t} = useTranslation('themes');
 
     const {addColor} = useThemeCreatorMethods();
 
@@ -28,7 +28,7 @@ export const AddExtraColor = () => {
         <div className={b()}>
             <Button view="flat" size="l" className={b('button')} onClick={handleAddColor}>
                 <Icon data={Plus} size={12} />
-                Add Extra Color
+                {t('action_add-extra-color')}
             </Button>
         </div>
     );

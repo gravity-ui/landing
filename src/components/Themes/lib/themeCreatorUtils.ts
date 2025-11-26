@@ -274,17 +274,19 @@ export type ChangeUtilityColorInThemeParams = {
     themeVariant: Theme;
     name: UtilityColor;
     value: string;
+    ref?: string;
 };
 
 export function changeUtilityColorInTheme(
     themeState: ThemeCreatorState,
-    {themeVariant, name, value}: ChangeUtilityColorInThemeParams,
+    {themeVariant, name, value, ref}: ChangeUtilityColorInThemeParams,
 ): ThemeCreatorState {
     const updatedGravityTheme = updateUtilityColor({
         theme: themeState.gravityTheme,
         themeVariant,
         colorToken: name,
         value,
+        ref,
     });
 
     return {...themeState, gravityTheme: updatedGravityTheme};

@@ -20,13 +20,20 @@ import {
     isUtilityColorToken,
     parseInternalUtilityColorReference,
 } from '@gravity-ui/uikit-themer/dist/utils';
+import {useTranslation} from 'next-i18next';
 import {useMemo} from 'react';
 
 import {DEFAULT_ADVANCED_COLORS} from '../lib/constants';
 import type {AdvancedColorType} from '../lib/types';
-import type {BaseColor} from '../ui/PrivateColorSelect/types';
+import type {BaseColor} from '../ui/GravityColorSelect/types';
 
 import {useThemeCreator} from './useThemeCreator';
+
+export type SemanticColorGroupItem = BaseColor & {
+    name?: string;
+    ref?: string;
+    disabled?: boolean;
+};
 
 export type SemanticColorGroup = {
     icon: React.ReactNode;
@@ -34,7 +41,7 @@ export type SemanticColorGroup = {
     title: string;
     groups: {
         title: string;
-        items: (BaseColor & {name?: string; ref?: string})[];
+        items: SemanticColorGroupItem[];
     }[];
 };
 
@@ -55,27 +62,46 @@ const getIconByGroup = (group: Exclude<AdvancedColorType, 'basic-palette'>) => {
     }
 };
 
-const resolveUtilityColor = (state: GravityTheme['utilityColors'], themeVariant: Theme) => {
-    const traverse = (colorObject: ColorOptions): string => {
+const resolveUtilityColor = (
+    state: GravityTheme['utilityColors'],
+    themeVariant: Theme,
+    updatedColorToken: string,
+) => {
+    let disabled = false;
+    console.log('updatedColorToken', updatedColorToken);
+
+    const traverse = (
+        colorObject: ColorOptions & {token?: string},
+    ): {color: string; disabled: boolean} => {
+        if (colorObject.token === updatedColorToken) {
+            disabled = true;
+        }
+
         if (colorObject.ref && isInternalUtilityColorReference(colorObject.ref)) {
             const nextUtilityColorToken = parseInternalUtilityColorReference(colorObject.ref);
+
+            if (colorObject.ref === updatedColorToken) {
+                disabled = true;
+            }
 
             if (nextUtilityColorToken) {
                 const nextUtilityColor = state[nextUtilityColorToken];
 
                 return traverse(nextUtilityColor[themeVariant]);
             }
-
-            return colorObject.value;
         }
 
-        return colorObject.value;
+        return {color: colorObject.value, disabled};
     };
 
     return traverse;
 };
 
-export const useThemeSemanticColorOption = (themeVariant: Theme): SemanticColorGroup[] => {
+export const useThemeSemanticColorOption = (
+    themeVariant: Theme,
+    updatedColorToken: string,
+): SemanticColorGroup[] => {
+    const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
     const {gravityTheme} = themeState;
 
@@ -88,42 +114,51 @@ export const useThemeSemanticColorOption = (themeVariant: Theme): SemanticColorG
                     icon: getIconByGroup(
                         advanceColorGroupName as Exclude<AdvancedColorType, 'basic-palette'>,
                     ),
-                    title: advanceColorGroupName,
+                    title: t(`title_advance-color-settings-${advanceColorGroupName}`),
                     groups: Object.entries(advanceColorSubGroups).map(
                         ([advanceColorSubGroupName, advanceColorSubGroupItems]) => {
                             return {
-                                title: advanceColorSubGroupName,
+                                title: t(
+                                    `title_advance-color-settings-group-${advanceColorSubGroupName}`,
+                                ),
                                 items: advanceColorSubGroupItems.map(({colorName}) => {
                                     const isUtilityColor = isUtilityColorToken(colorName);
 
-                                    const colorObject = isUtilityColor
-                                        ? gravityTheme.utilityColors[colorName as UtilityColor][
-                                              themeVariant
-                                          ]
-                                        : gravityTheme.baseColors[colorName]?.[themeVariant];
+                                    if (isUtilityColor) {
+                                        const colorObject =
+                                            gravityTheme.utilityColors[colorName as UtilityColor][
+                                                themeVariant
+                                            ];
+                                        const token =
+                                            createInternalUtilityColorReference(colorName);
 
-                                    const resolvedValue = isUtilityColor
-                                        ? resolveUtilityColor(
-                                              gravityTheme.utilityColors,
-                                              themeVariant,
-                                          )(
-                                              gravityTheme.utilityColors[colorName as UtilityColor][
-                                                  themeVariant
-                                              ],
-                                          )
-                                        : colorObject.value;
+                                        const {color, disabled} = resolveUtilityColor(
+                                            gravityTheme.utilityColors,
+                                            themeVariant,
+                                            updatedColorToken,
+                                        )({...colorObject, token});
 
-                                    return {
-                                        name: colorName,
-                                        title: isUtilityColor
-                                            ? createUtilityColorCssVariable(colorName)
-                                            : colorName,
-                                        color: resolvedValue,
-                                        ref: colorObject.ref,
-                                        token: isUtilityColor
-                                            ? createInternalUtilityColorReference(colorName)
-                                            : colorName,
-                                    };
+                                        return {
+                                            color,
+                                            disabled,
+                                            token,
+                                            name: colorName,
+                                            title: createUtilityColorCssVariable(colorName),
+                                            ref: colorObject.ref,
+                                        };
+                                    } else {
+                                        const colorObject =
+                                            gravityTheme.baseColors[colorName]?.[themeVariant];
+
+                                        return {
+                                            name: colorName,
+                                            title: colorName,
+                                            color: colorObject.value,
+                                            ref: colorObject.ref,
+                                            disabled: false,
+                                            token: colorName,
+                                        };
+                                    }
                                 }),
                             };
                         },

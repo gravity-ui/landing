@@ -10,7 +10,7 @@ import React from 'react';
 import {block} from '../../../../utils';
 import {useThemePrivateColorOptions, useThemeUtilityColor} from '../../hooks';
 import {ThemeColorOption} from '../../lib/themeCreatorUtils';
-import {PrivateColorSelect} from '../PrivateColorSelect';
+import {GravityColorSelect} from '../GravityColorSelect';
 import {ThemableSettings} from '../ThemableSettings/ThemableSettings';
 import {ThemableRow} from '../ThemableSettings/types';
 import {ThemeSection} from '../ThemeSection';
@@ -46,7 +46,7 @@ const PrivateColorEditor: React.FC<PrivateColorEditorProps> = ({name, theme, col
     }, [name, theme]);
 
     return (
-        <PrivateColorSelect
+        <GravityColorSelect
             privateGroups={colorGroups}
             defaultValue={defaultValue}
             value={color}

@@ -61,11 +61,20 @@ $block: '.#{variables.$ns}private-colors-select-popup';
         align-items: center;
         gap: var(--g-spacing-1);
         padding: 3px var(--g-spacing-2);
+
+        &_disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 
     &__colors-select {
         width: 100%;
         --g-border-radius-xl: 8px;
         padding-bottom: var(--g-spacing-3);
+    }
+
+    &__divider {
+        margin: var(--g-spacing-2) 0;
     }
 }

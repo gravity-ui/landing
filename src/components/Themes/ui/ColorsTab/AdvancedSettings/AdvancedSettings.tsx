@@ -19,31 +19,31 @@ export const AdvancedSettings = () => {
         () => [
             {
                 value: 'basic-palette',
-                title: 'Basic palette',
+                title: t('title_advance-color-settings-basic-palette'),
             },
             {
                 value: 'brand-summary',
-                title: 'Brand summary',
+                title: t('title_advance-color-settings-brand-summary'),
             },
             {
                 value: 'texts',
-                title: 'Texts',
+                title: t('title_advance-color-settings-texts'),
             },
             {
                 value: 'backgrounds',
-                title: 'Backgrounds',
+                title: t('title_advance-color-settings-backgrounds'),
             },
             {
                 value: 'lines',
-                title: 'Lines',
+                title: t('title_advance-color-settings-lines'),
             },
             {
                 value: 'effects',
-                title: 'Effects',
+                title: t('title_advance-color-settings-effects'),
             },
             {
                 value: 'misc',
-                title: 'Misc',
+                title: t('title_advance-color-settings-misc'),
             },
         ],
         [t],
@@ -55,7 +55,7 @@ export const AdvancedSettings = () => {
             titleActions={
                 <Button size="xl" className={b('learn-more-button')} disabled>
                     <Icon data={CircleQuestion} />
-                    Learn More
+                    {t('action_learn-more')}
                 </Button>
             }
         >

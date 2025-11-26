@@ -4,7 +4,6 @@ import {useCallback, useRef, useState} from 'react';
 
 import {block} from '../../../../../utils';
 import {useThemeCreatorMethods} from '../../../hooks';
-import {PRIVATE_COLOR_PREFIX} from '../../../lib/constants';
 import {createColorToken, createTitleFromToken} from '../../../lib/themeCreatorUtils';
 
 import './ExtraColorName.scss';
@@ -43,11 +42,8 @@ export const ExtraColorName = ({token}: ExtraColorNameProps) => {
     return (
         <Flex gap={2} justifyContent="space-between" alignItems="center">
             {mode === 'view' ? (
-                <Text variant="body-1" color="secondary">
-                    {PRIVATE_COLOR_PREFIX}
-                    <Text variant="body-1" color="primary">
-                        {token}
-                    </Text>
+                <Text variant="body-1" color="primary">
+                    {token}
                 </Text>
             ) : (
                 <TextInput
