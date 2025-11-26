@@ -79,9 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
+Para usar la agrupación con selección, utiliza el hook `useRowSelectionFixedHandler`. Sin él, el estado de la casilla de verificación de la fila principal será incorrecto. https://github.com/TanStack/table/issues/4878
+
 ### Columna de selección de rango personalizada
 
-El hook `useToggleRangeSelectionHandler` devuelve un manejador de cambios que escucha eventos Shift+click y realiza la selección de filas por rango. Necesita recibir una instancia de `CellContext` para tener acceso a los estados internos de la tabla y de la fila.
+El hook `useToggleRangeSelectionHandler` devuelve un manejador de cambios que escucha los eventos Shift+click y realiza la selección de filas por rango. Necesita recibir una instancia de `CellContext` para poder acceder a los estados internos de la tabla y de la fila.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -208,7 +210,7 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**Nota**: Si la tabla contiene filas anidadas, la selección por rango no funcionará. Actualmente, esto se considera un comportamiento indefinido.
+**Nota**: Si la tabla contiene filas anidadas, la selección por rango no funcionará. En este momento, se considera un comportamiento indefinido.
 
 ### Ordenación
 
@@ -245,7 +247,7 @@ const SortingExample = () => {
 };
 ```
 
-Si quieres ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
+Si deseas ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
 
 ```tsx
 const table = useTable({
@@ -317,11 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
+Para usar la agrupación con selección, utiliza el hook `useRowSelectionFixedHandler`. Sin él, el estado de la casilla de verificación de la fila principal será incorrecto. https://github.com/TanStack/table/issues/4878
+
 Para habilitar los estilos de anidamiento, pasa `withNestingStyles = true` en la configuración de la columna.
 
 Los indicadores de anidamiento se pueden deshabilitar pasando `showTreeDepthIndicators = false`.
 
-Para añadir un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu componente personalizado similar:
+Para agregar un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu componente personalizado similar:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -390,7 +394,7 @@ const ReorderingExample = () => {
 
 ### Virtualización
 
-Úsalo si quieres usar el contenedor de la cuadrícula como elemento de desplazamiento (si quieres usar la ventana, consulta la sección de virtualización de ventana). Asegúrate de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
+Úsalo si deseas usar el contenedor de la cuadrícula como elemento de desplazamiento (si deseas usar la ventana, consulta la sección de virtualización de ventana). Asegúrate de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -453,7 +457,7 @@ return (
 
 ### Virtualización de ventana
 
-Úsalo si quieres usar la ventana como elemento de desplazamiento
+Úsalo si deseas usar la ventana como elemento de desplazamiento.
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -474,8 +478,10 @@ const WindowVirtualizationExample = () => {
   });
 
   const bodyRef = React.useRef<HTMLTableSectionElement>(null);
+```
 
-  const rowVirtualizer = useWindowRowVirtualizer({
+```tsx
+const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
     overscan: 5,
@@ -537,7 +543,7 @@ const TableSettingsDemo = () => {
     /* ids de las columnas hoja */
   ]); // para control externo y estado inicial
 
-  // Variante alternativa para obtener el estado, callbacks y establecer callbacks de aplicación de configuración - usando el hook useTableSettings:
+  // Variante alternativa para obtener el estado, callbacks y establecer callbacks al aplicar la configuración - usando el hook useTableSettings:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({

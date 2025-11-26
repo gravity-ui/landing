@@ -79,6 +79,8 @@ const RowSelectionExample = () => {
 };
 ```
 
+To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
+
 ### Custom Ranged Selection Column
 
 The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
@@ -316,6 +318,8 @@ const GroupingExample = () => {
   return <Table table={table} getGroupTitle={getGroupTitle} />;
 };
 ```
+
+To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
 
 To enable nesting styles, pass `withNestingStyles = true` in the column configuration.
 

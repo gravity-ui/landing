@@ -54,7 +54,7 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 
 const data: Person[] = [
@@ -78,6 +78,8 @@ const RowSelectionExample = () => {
   return <Table table={table} />;
 };
 ```
+
+Um Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne diesen Hook ist der Status der Checkbox der übergeordneten Zeile falsch. https://github.com/TanStack/table/issues/4878
 
 ### Benutzerdefinierte Bereichsauswahlspalte
 
@@ -139,7 +141,7 @@ const customSelectionColumn: ColumnDef<unknown> = {
 
 const columns: ColumnDef<Person>[] = [
   customSelectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 
 const data: Person[] = [
@@ -196,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-Standardmäßig enthält die mit `selectionColumn` generierte Auswahlspalte die Funktionalität für die Bereichsauswahl.
+Standardmäßig enthält die mit `selectionColumn` generierte Auswahlspalte die Funktionalität der Bereichsauswahl.
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -204,7 +206,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 ```
 
@@ -212,7 +214,7 @@ const columns: ColumnDef<Person>[] = [
 
 ### Sortierung
 
-Erfahren Sie mehr über die Spalteneigenschaften in der [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting) von react-table.
+Erfahren Sie mehr über die Spalteneigenschaften in der react-table [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -228,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Ihre Spalten MÜSSEN accessorFn für aktivierte Sortierung haben
+  // Ihre Spalte MUSS accessorFn für aktivierte Sortierung haben
 
   const table = useTable({
     columns,
@@ -317,11 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
+Um die Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne diesen Hook ist der Status der Checkbox der übergeordneten Zeile falsch. https://github.com/TanStack/table/issues/4878
+
 Um Verschachtelungsstile zu aktivieren, übergeben Sie `withNestingStyles = true` in der Spaltenkonfiguration.
 
-Verschachtelungsindikatoren können durch Übergabe von `showTreeDepthIndicators = false` deaktiviert werden.
+Verschachtelungsindikatoren können deaktiviert werden, indem `showTreeDepthIndicators = false` übergeben wird.
 
-Um eine Steuerung zum Erweitern/Zusammenklappen von Zeilen hinzuzufügen, umschließen Sie den Zellinhalt mit der Komponente `TreeExpandableCell` oder einer ähnlichen benutzerdefinierten Komponente:
+Um eine Steuerung zum Erweitern/Einklappen von Zeilen hinzuzufügen, umschließen Sie den Zellinhalt mit der Komponente `TreeExpandableCell` oder einer ähnlichen benutzerdefinierten Komponente:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -390,7 +394,7 @@ const ReorderingExample = () => {
 
 ### Virtualisierung
 
-Verwenden Sie dies, wenn Sie den Grid-Container als Scroll-Element verwenden möchten (wenn Sie das Fenster verwenden möchten, siehe Abschnitt Fenster-Virtualisierung). Stellen Sie sicher, dass Sie dem Container eine feste Höhe zuweisen, andernfalls funktioniert die Virtualisierung nicht.
+Verwenden Sie dies, wenn Sie den Grid-Container als Scroll-Element verwenden möchten (wenn Sie das Fenster verwenden möchten, siehe Abschnitt Fenster-Virtualisierung). Stellen Sie sicher, dass Sie dem Container eine feste Höhe zuweisen, da die Virtualisierung sonst nicht funktioniert.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -475,7 +479,8 @@ const WindowVirtualizationExample = () => {
 
   const bodyRef = React.useRef<HTMLTableSectionElement>(null);
 
-  const rowVirtualizer = useWindowRowVirtualizer({
+```tsx
+const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
     overscan: 5,
@@ -537,7 +542,7 @@ const TableSettingsDemo = () => {
     /* leaf columns ids */
   ]); // für externe Steuerung und Anfangszustand
 
-  // Alternative Variante, um Zustand, Rückrufe und das Festlegen von Rückrufen bei der Anwendungsänderung von Einstellungen zu erhalten - Verwendung des Hooks useTableSettings:
+  // Alternative Variante, um Zustand, Rückruffunktionen und Einstellungen beim Anwenden von Rückruffunktionen zu erhalten - Verwendung des Hooks useTableSettings:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({

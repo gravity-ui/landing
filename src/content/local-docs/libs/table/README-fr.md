@@ -41,10 +41,10 @@ const BasicExample = () => {
 
 ## Composants
 
-Deux composants `Table` sont disponibles :
+Vous pouvez utiliser deux composants `Table` :
 
-- `BaseTable` : un composant avec des styles de base uniquement ;
-- `Table` : un composant avec les styles basés sur Gravity UI.
+- `BaseTable` - un composant avec uniquement les styles de base ;
+- `Table` - un composant avec les styles basés sur Gravity UI.
 
 ### Sélection de lignes
 
@@ -79,9 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
+Pour utiliser le regroupement avec la sélection, utilisez le hook `useRowSelectionFixedHandler`. Sans lui, l'état de la case à cocher de la ligne parente sera incorrect. https://github.com/TanStack/table/issues/4878
+
 ### Colonne de sélection personnalisée par plage
 
-Le hook `useToggleRangeSelectionHandler` renvoie un gestionnaire de changement qui écoute les événements Shift+clic et effectue une sélection de lignes par plage. Il nécessite une instance de `CellContext` pour avoir accès aux états internes de la table et de la ligne.
+Le hook `useToggleRangeSelectionHandler` renvoie un gestionnaire de changement qui écoute les événements Shift+clic et effectue une sélection de lignes par plage. Il doit recevoir une instance de `CellContext` pour avoir accès aux états internes de la table et de la ligne.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -208,11 +210,42 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. À l'heure actuelle, cela est considéré comme un comportement indéfini.
+**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. Pour le moment, cela est considéré comme un comportement indéfini.
 
 ### Tri
 
-Découvrez les propriétés des colonnes dans la [documentation](https://tanstack.com/table/v8/docs/guide/sorting) de react-table.
+Apprenez-en davantage sur les propriétés des colonnes dans la documentation de react-table [ici](https://tanstack.com/table/v8/docs/guide/sorting).
+
+```tsx
+import type {SortingState} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const SortingExample = () => {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  // Votre colonne DOIT avoir accessorFn pour que le tri soit activé
+
+  const table = useTable({
+    columns,
+    data,
+    enableSorting: true,
+    getRowId: (item) => item.id,
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
 
 Si vous souhaitez trier les éléments manuellement, passez la propriété `manualSorting` :
 
@@ -286,11 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
+Pour utiliser le groupement avec la sélection, utilisez le hook `useRowSelectionFixedHandler`. Sans cela, l'état de la case à cocher de la ligne parente sera incorrect. https://github.com/TanStack/table/issues/4878
+
 Pour activer les styles d'imbrication, passez `withNestingStyles = true` dans la configuration de la colonne.
 
 Les indicateurs d'imbrication peuvent être désactivés en passant `showTreeDepthIndicators = false`.
 
-Pour ajouter un contrôle pour développer/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou votre composant personnalisé similaire :
+Pour ajouter un contrôle pour développer/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou avec votre composant personnalisé similaire :
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -443,7 +478,9 @@ const WindowVirtualizationExample = () => {
   });
 
   const bodyRef = React.useRef<HTMLTableSectionElement>(null);
+```
 
+```tsx
   const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
