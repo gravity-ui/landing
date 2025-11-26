@@ -1,0 +1,308 @@
+{
+  "id": 909,
+  "name": "blog/posts/2022/04/review",
+  "createdAt": "2022-08-15T13:14:12.386Z",
+  "updatedAt": "2022-08-15T13:14:12.386Z",
+  "type": "default",
+  "isDeleted": false,
+  "pageId": 909,
+  "locale": "ru",
+  "publishedVersionId": 16381,
+  "lastVersionId": 16496,
+  "content": {
+    "blocks": [
+      {
+        "type": "blog-header-block",
+        "resetPaddings": true,
+        "width": "s",
+        "verticalOffset": "m",
+        "theme": "dark",
+        "background": {
+          "url": "https://storage.yandexcloud.net/cloud-www-assets/constructor/storybook/images/img_8-12_dark.png",
+          "disableCompress": true,
+          "color": "#CCDAFF",
+          "fullWidth": false
+        },
+        "buttons": [
+          {
+            "text": "button 1",
+            "url": "http://example.com/",
+            "theme": "action"
+          }
+        ]
+      },
+      {
+        "type": "blog-layout-block",
+        "resetPaddings": true,
+        "mobileOrder": "reverse",
+        "children": [
+          {
+            "type": "blog-author-block",
+            "column": "right",
+            "resetPaddings": true,
+            "authorId": 386
+          },
+          {
+            "type": "blog-author-block",
+            "column": "right",
+            "resetPaddings": true,
+            "authorId": 292
+          },
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-banner-block",
+            "resetPaddings": true,
+            "title": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            "text": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "color": "#555",
+            "theme": "dark",
+            "image": "https://storage.yandexcloud.net/cloud-www-assets/constructor/storybook/images/img_8-12_dark.png",
+            "buttons": [
+              {
+                "text": "Get",
+                "url": "http://example.com/",
+                "theme": "normal-contrast"
+              }
+            ],
+            "fullWidth": false,
+            "column": "left"
+          }
+        ]
+      },
+      {
+        "type": "blog-layout-block",
+        "resetPaddings": true,
+        "mobileOrder": "reverse",
+        "children": [
+          {
+            "type": "blog-yfm-block",
+            "column": "right",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-media-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+            "image": "https://storage.yandexcloud.net/cloud-www-assets/constructor/storybook/images/img_8-12_dark.png",
+            "fullWidth": false
+          },
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-media-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+            "youtube": "https://youtu.be/0Qd3T6skprA",
+            "fullWidth": false
+          },
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-colored-text-block",
+            "column": "left",
+            "resetPaddings": true,
+            "background": {
+              "color": "#EFF2F8"
+            },
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-colored-text-block",
+            "column": "left",
+            "resetPaddings": true,
+            "background": {
+              "image": "https://storage.yandexcloud.net/cloud-www-assets/constructor/storybook/images/img_8-12_light.png",
+              "altText": "alt text from bo"
+            },
+            "title": "Lorem ipsum ",
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          },
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          }
+        ]
+      },
+      {
+        "type": "blog-layout-block",
+        "resetPaddings": true,
+        "mobileOrder": "reverse",
+        "children": [
+          {
+            "type": "blog-yfm-block",
+            "column": "left",
+            "resetPaddings": true,
+            "text": "<p><strong>Lorem ipsum dolor sit amet</strong> <a href=\"https://example.com\">consectetur adipiscing elit</a> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          }
+        ]
+      },
+      {
+        "type": "blog-layout-block",
+        "resetPaddings": true,
+        "fullWidth": false,
+        "paddingBottom": "xl",
+        "children": [
+          {
+            "type": "blog-cta-block",
+            "resetPaddings": true,
+            "items": [
+              {
+                "title": "Lorem ipsum dolor",
+                "text": "sit amet",
+                "links": [
+                  {
+                    "text": "sed do",
+                    "url": "http://example.com/",
+                    "arrow": true,
+                    "theme": "normal"
+                  }
+                ],
+                "size": "s",
+                "colSizes": {
+                  "all": 12,
+                  "md": 12
+                },
+                "theme": "default"
+              },
+              {
+                "title": "Lorem ipsum dolor",
+                "text": "sit amet",
+                "links": [
+                  {
+                    "text": "sed do",
+                    "url": "http://example.com/",
+                    "arrow": true,
+                    "theme": "normal"
+                  }
+                ],
+                "size": "s",
+                "colSizes": {
+                  "all": 12,
+                  "md": 12
+                },
+                "theme": "default"
+              },
+              {
+                "title": "Lorem ipsum dolor",
+                "text": "sit amet",
+                "links": [
+                  {
+                    "text": "sed do",
+                    "url": "http://example.com/",
+                    "arrow": true,
+                    "theme": "normal"
+                  }
+                ],
+                "size": "s",
+                "colSizes": {
+                  "all": 12,
+                  "md": 12
+                },
+                "theme": "default"
+              }
+            ],
+            "column": "left"
+          }
+        ]
+      },
+      {
+        "type": "blog-layout-block",
+        "resetPaddings": true,
+        "fullWidth": false,
+        "children": [
+          {
+            "type": "blog-form-block",
+            "column": "left",
+            "resetPaddings": true,
+            "formData": {
+              "hubspot": {
+                "region": "eu1",
+                "portalId": "25764979",
+                "formId": "a3eb06a6-e8ce-45d4-81bd-7fadb7dab313"
+              }
+            }
+          },
+          {
+            "type": "blog-form-block",
+            "column": "left",
+            "border": "line",
+            "resetPaddings": true,
+            "formData": {
+              "yandex": {
+                "theme": "default",
+                "id": "61a4e639d4d24e0dbba36f5c",
+                "customFormSection": "cloud"
+              }
+            }
+          },
+          {
+            "type": "blog-meta-block",
+            "column": "left",
+            "resetPaddings": true
+          }
+        ]
+      },
+
+      {
+        "type": "blog-suggest-block",
+        "resetPaddings": true,
+        "fullWidth": false
+      }
+    ]
+  },
+  "title": "Lorem ipsum dolor sit amet",
+  "noIndex": false,
+  "shareTitle": "Lorem ipsum dolor sit amet share title",
+  "shareDescription": "Lorem ipsum dolor sit amet share description",
+  "shareImage": "",
+  "pageLocaleId": 1141,
+  "author": "author",
+  "metaDescription": "Lorem ipsum dolor sit amet meta description",
+  "keywords": ["keywords"],
+  "shareGenImage": null,
+  "tempTitle": "Lorem ipsum dolor sit amet &reg;",
+  "tempMetaDescription": null,
+  "tempKeywords": "{\"keywords\"}",
+  "tempShareGenImage": null,
+  "tempShareImage": "",
+  "tempShareTitle": "",
+  "tempShareDescription": "",
+  "service": null,
+  "solution": null
+}
