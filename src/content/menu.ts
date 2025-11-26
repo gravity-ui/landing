@@ -31,4 +31,8 @@ export const menu: MenuItem[] = [
         titleKey: 'menu_media',
         url: '/media',
     },
+    {
+        titleKey: 'menu_blog',
+        url: '/blog',
+    },
 ];
