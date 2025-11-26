@@ -8,6 +8,7 @@ const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')([
     '@gravity-ui/uikit',
     '@gravity-ui/page-constructor',
+    '@gravity-ui/blog-constructor',
     '@gravity-ui/components',
     '@gravity-ui/date-components',
     '@gravity-ui/navigation',
