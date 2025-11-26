@@ -13,5 +13,6 @@ module.exports = {
         '/sitemap.xml',
         '/robots.txt',
         '/analytics.txt',
+        '/index-social.png',
     ],
 };
