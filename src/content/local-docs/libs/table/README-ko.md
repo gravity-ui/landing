@@ -43,7 +43,7 @@ const BasicExample = () => {
 
 두 가지 Table 컴포넌트를 사용할 수 있습니다.
 
-- `BaseTable` - 기본 스타일만 적용된 컴포넌트입니다.
+- `BaseTable` - 기본적인 스타일만 적용된 컴포넌트입니다.
 - `Table` - Gravity UI 기반 스타일이 적용된 컴포넌트입니다.
 
 ### 행 선택
@@ -79,9 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
+선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행 체크박스의 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
+
 ### 사용자 정의 범위 선택 컬럼
 
-`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 행 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 액세스하려면 `CellContext` 인스턴스를 전달해야 합니다.
+`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 접근하려면 `CellContext` 인스턴스를 전달해야 합니다.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -164,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-`RangedSelectionCheckbox` 컴포넌트도 있으며, 내부적으로 훅을 사용하고 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 데 편리합니다.
+`RangedSelectionCheckbox` 컴포넌트도 제공됩니다. 이 컴포넌트는 내부적으로 훅을 사용하며 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 데 편리합니다.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -196,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-`selectionColumn`으로 생성된 기본 선택 컬럼에는 범위 선택 기능이 포함되어 있습니다.
+기본적으로 `selectionColumn`으로 생성된 선택 컬럼은 범위 선택 기능을 포함합니다.
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -208,11 +210,11 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**참고**: 테이블에 중첩된 행이 포함된 경우 범위 선택이 작동하지 않습니다. 현재는 정의되지 않은 동작으로 간주됩니다.
+**참고**: 테이블에 중첩된 행이 포함된 경우 범위 선택이 작동하지 않습니다. 현재로서는 정의되지 않은 동작으로 간주됩니다.
 
 ### 정렬
 
-react-table [문서](https://tanstack.com/table/v8/docs/guide/sorting)에서 컬럼 속성에 대해 알아보세요.
+`react-table`의 컬럼 속성에 대해 [문서](https://tanstack.com/table/v8/docs/guide/sorting)에서 알아보세요.
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -228,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // 정렬 기능을 사용하려면 accessorFn이 반드시 필요합니다.
+  // 정렬을 활성화하려면 컬럼에 accessorFn이 반드시 있어야 합니다.
 
   const table = useTable({
     columns,
@@ -245,7 +247,7 @@ const SortingExample = () => {
 };
 ```
 
-요소를 수동으로 정렬하려면 `manualSorting` 속성을 전달하세요:
+요소를 수동으로 정렬하려면 `manualSorting` 속성을 전달하세요.
 
 ```tsx
 const table = useTable({
@@ -317,11 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
-중첩 스타일을 활성화하려면 열 구성에서 `withNestingStyles = true`를 전달하세요.
+선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행의 체크박스 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
+
+중첩 스타일을 활성화하려면 컬럼 설정에서 `withNestingStyles = true`를 전달하세요.
 
 중첩 표시기는 `showTreeDepthIndicators = false`를 전달하여 비활성화할 수 있습니다.
 
-행을 확장/축소하는 컨트롤을 추가하려면 셀 내용을 `TreeExpandableCell` 컴포넌트 또는 유사한 사용자 정의 컴포넌트로 감싸세요:
+행을 확장/축소하는 컨트롤을 추가하려면 셀 내용을 `TreeExpandableCell` 컴포넌트 또는 유사한 사용자 정의 컴포넌트로 감싸세요.
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -337,7 +341,7 @@ const columns: ColumnDef<Item>[] = [
       <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
     ),
   },
-  // ...다른 열
+  // ...다른 컬럼들
 ];
 ```
 
@@ -349,7 +353,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...다른 열
+  // ...다른 컬럼들
 ];
 
 const data: Person[] = [
@@ -390,7 +394,7 @@ const ReorderingExample = () => {
 
 ### 가상화
 
-그리드 컨테이너를 스크롤 요소로 사용하려는 경우 사용하세요 (창을 사용하려면 창 가상화 섹션을 참조하세요). 가상화가 작동하려면 컨테이너에 고정 높이를 설정해야 합니다.
+그리드 컨테이너를 스크롤 요소로 사용하려는 경우 (창 가상화 섹션에서 창을 사용하려는 경우) 사용하세요. 가상화가 작동하려면 컨테이너에 고정된 높이를 설정해야 합니다.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -427,7 +431,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-재정렬 기능과 함께 가상화를 사용하는 경우 `rangeExtractor` 옵션도 전달해야 합니다:
+재정렬 기능과 함께 가상화를 사용하는 경우 `rangeExtractor` 옵션도 전달해야 합니다.
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -453,7 +457,7 @@ return (
 
 ### 창 가상화
 
-창을 스크롤 요소로 사용하려는 경우 사용하세요
+창을 스크롤 요소로 사용하려는 경우 사용하세요.
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -474,8 +478,10 @@ const WindowVirtualizationExample = () => {
   });
 
   const bodyRef = React.useRef<HTMLTableSectionElement>(null);
+```
 
-  const rowVirtualizer = useWindowRowVirtualizer({
+```tsx
+const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
     overscan: 5,
@@ -486,7 +492,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### 크기 조정
+### 크기 조절
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -537,7 +543,7 @@ const TableSettingsDemo = () => {
     /* 리프 컬럼 ID */
   ]); // 외부 제어 및 초기 상태용
 
-  // 상태, 콜백, 설정 적용 시 콜백을 사용하는 대체 방법 - useTableSettings 훅 사용:
+  // useTableSettings 훅을 사용하여 상태, 콜백, 설정 적용 시 콜백을 가져오는 대체 방법:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -555,4 +561,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 컬럼 크기 조정 속성에 대해 자세히 알아보세요.
+react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 컬럼 크기 조절 속성에 대해 자세히 알아보세요.
