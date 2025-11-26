@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export type {
     Contributor,
     CodeOwners,
@@ -13,7 +12,6 @@ export type {
 
 export {ServerApi} from './server';
 export {ClientApi} from './client';
-=======
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
@@ -887,4 +885,3 @@ export class Api {
         }
     }
 }
->>>>>>> 69832e7021 (feat: add mock blog)
