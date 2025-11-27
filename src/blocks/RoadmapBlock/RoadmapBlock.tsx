@@ -22,7 +22,11 @@ export const RoadmapBlock: React.FC<RoadmapProps> = ({animated, title, tasks}) =
     return (
         <AnimateBlock className={b()} animate={animated}>
             <h2 className={b('title')} data-section="roadmap">
-                <YFMWrapper content={title} modifiers={{constructor: true}} />
+                <YFMWrapper
+                    content={title}
+                    modifiers={{constructor: true}}
+                    contentClassName={b('title-content')}
+                />
             </h2>
             <Roadmap tasks={tasks} />
         </AnimateBlock>

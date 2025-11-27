@@ -40,7 +40,11 @@ export const TemplatesBlock: React.FC<TemplatesProps> = ({animated, title, tabs}
             <div ref={blockRef} />
             <AnimateBlock className={b()} animate={animated}>
                 <h2 className={b('title')} data-section="templates">
-                    <YFMWrapper content={title} modifiers={{constructor: true}} />
+                    <YFMWrapper
+                        content={title}
+                        modifiers={{constructor: true}}
+                        contentClassName={b('title-content')}
+                    />
                 </h2>
                 <Templates tabs={tabs} />
             </AnimateBlock>

@@ -99,7 +99,11 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                             )}
                             <div className={b('title-col')}>
                                 <h1 className={b('title')}>
-                                    <YFMWrapper content={title} modifiers={{constructor: true}} />
+                                    <YFMWrapper
+                                        content={title}
+                                        modifiers={{constructor: true}}
+                                        contentClassName={b('title-content')}
+                                    />
                                 </h1>
                                 {buttons?.length > 0 ? (
                                     <div className={b('buttons')}>

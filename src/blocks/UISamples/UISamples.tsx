@@ -22,7 +22,11 @@ export const UISamplesBlock: React.FC<UISamplesProps> = ({title}) => {
     return (
         <AnimateBlock className={b()} animate={false}>
             <h2 className={b('title')} data-section="ui-samples">
-                <YFMWrapper content={title} modifiers={{constructor: true}} />
+                <YFMWrapper
+                    content={title}
+                    modifiers={{constructor: true}}
+                    contentClassName={b('title-content')}
+                />
             </h2>
             <UISamplesMobile />
             <UISamplesDesktop />

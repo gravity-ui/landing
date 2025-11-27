@@ -144,6 +144,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                 <YFMWrapper
                                     content={lib.config.title}
                                     modifiers={{constructor: true}}
+                                    contentClassName={b('breadcrumbs-title')}
                                 />
                             </div>
 
@@ -151,6 +152,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                 <YFMWrapper
                                     content={lib.config.title}
                                     modifiers={{constructor: true}}
+                                    contentClassName={b('title-content')}
                                 />
                             </h1>
 
