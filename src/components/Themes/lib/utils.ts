@@ -1,5 +1,8 @@
-import {DEFAULT_THEME as DEFAULT_GRAVITY_THEME, type UtilityColor} from '@gravity-ui/uikit-themer';
-import {isUtilityColorToken} from '@gravity-ui/uikit-themer/dist/utils';
+import {
+    DEFAULT_THEME as DEFAULT_GRAVITY_THEME,
+    type UtilityColor,
+    isUtilityColorToken,
+} from '@gravity-ui/uikit-themer';
 import capitalize from 'lodash/capitalize';
 
 import {UTILITY_COLOR_PREFIX} from './constants';

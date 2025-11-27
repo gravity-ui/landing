@@ -1,5 +1,7 @@
-import {parseInternalPrivateColorReference} from '@gravity-ui/uikit-themer';
-import {parseInternalUtilityColorReference} from '@gravity-ui/uikit-themer/dist/utils';
+import {
+    parseInternalPrivateColorReference,
+    parseInternalUtilityColorReference,
+} from '@gravity-ui/uikit-themer';
 
 import type {SemanticColorGroup} from '../../hooks/useThemeSemanticColorOption';
 

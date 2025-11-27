@@ -3,8 +3,8 @@ import {
     type UtilityColor,
     isInternalUtilityColorReference,
     parseInternalPrivateColorReference,
+    parseInternalUtilityColorReference,
 } from '@gravity-ui/uikit-themer';
-import {parseInternalUtilityColorReference} from '@gravity-ui/uikit-themer/dist/utils';
 import React, {Fragment} from 'react';
 
 import {block} from '../../../../utils';

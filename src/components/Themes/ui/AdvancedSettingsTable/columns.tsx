@@ -2,12 +2,10 @@ import {Flex, HelpMark, Text} from '@gravity-ui/uikit';
 import {
     type Theme,
     type UtilityColor,
-    createUtilityColorCssVariable,
-} from '@gravity-ui/uikit-themer';
-import {
     createInternalUtilityColorReference,
+    createUtilityColorCssVariable,
     isUtilityColorToken,
-} from '@gravity-ui/uikit-themer/dist/utils';
+} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 
 import {useThemePaletteColor, useThemePrivateColorOptions, useThemeUtilityColor} from '../../hooks';

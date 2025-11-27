@@ -12,14 +12,12 @@ import {
     type GravityTheme,
     type Theme,
     type UtilityColor,
+    createInternalUtilityColorReference,
     createUtilityColorCssVariable,
     isInternalUtilityColorReference,
-} from '@gravity-ui/uikit-themer';
-import {
-    createInternalUtilityColorReference,
     isUtilityColorToken,
     parseInternalUtilityColorReference,
-} from '@gravity-ui/uikit-themer/dist/utils';
+} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import {useMemo} from 'react';
 
@@ -68,7 +66,6 @@ const resolveUtilityColor = (
     updatedColorToken: string,
 ) => {
     let disabled = false;
-    console.log('updatedColorToken', updatedColorToken);
 
     const traverse = (
         colorObject: ColorOptions & {token?: string},

@@ -12,8 +12,8 @@ import {
 import {
     isInternalPrivateColorReference,
     isInternalUtilityColorReference,
+    parseInternalUtilityColorReference,
 } from '@gravity-ui/uikit-themer';
-import {parseInternalUtilityColorReference} from '@gravity-ui/uikit-themer/dist/utils';
 import React from 'react';
 
 import {useIsMobile} from '../../../../hooks/useIsMobile';

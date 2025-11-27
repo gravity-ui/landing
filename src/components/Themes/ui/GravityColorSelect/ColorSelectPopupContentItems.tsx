@@ -3,8 +3,8 @@ import {
     type UtilityColor,
     isInternalPrivateColorReference,
     isInternalUtilityColorReference,
+    parseInternalUtilityColorReference,
 } from '@gravity-ui/uikit-themer';
-import {parseInternalUtilityColorReference} from '@gravity-ui/uikit-themer/dist/utils';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -39,7 +39,7 @@ const ColorItem: React.FC<ColorItemProps> = ({title, color, disabled}) => {
 interface PrivateColorsListProps {
     colors: BaseColor[];
     value?: string;
-    onSelect: (value: string) => void;
+    onSelect: (value: string, ref?: string) => void;
     view?: 'select' | 'list';
 }
 
@@ -56,7 +56,7 @@ export const PrivateColorsList = ({
 
     const handleSelect = React.useCallback(
         (item: BaseColor) => {
-            onSelect(item.token);
+            onSelect(item.color, item.token);
         },
         [onSelect],
     );
