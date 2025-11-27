@@ -36,7 +36,11 @@ export const ContributorsBlock: React.FC<ContributorsProps> = ({
         <AnimateBlock className={b()} animate={animated}>
             <div className={b('header-wrapper')}>
                 <h2 className={b('header-title')}>
-                    <YFMWrapper content={title} modifiers={{constructor: true}} />
+                    <YFMWrapper
+                        content={title}
+                        modifiers={{constructor: true}}
+                        contentClassName={b('header-title-content')}
+                    />
                 </h2>
                 <div className={b('header-count')}>{contributors.length}</div>
                 <div>
