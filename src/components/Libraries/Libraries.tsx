@@ -104,6 +104,7 @@ export const Libraries = ({libs}: Props) => {
                                                 <YFMWrapper
                                                     content={lib.config.title}
                                                     modifiers={{constructor: true}}
+                                                    contentClassName={b('library-title-content')}
                                                 />
                                             </h5>
                                             {lib.metadata.stars ? (
