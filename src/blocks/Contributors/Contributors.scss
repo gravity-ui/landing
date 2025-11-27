@@ -21,8 +21,11 @@ $block: '.#{variables.$ns}contributors';
     }
 
     &__header-title {
-        @include pcStyles.heading2();
         padding: 0;
+    }
+
+    &__header-title-content {
+        @include pcStyles.heading2();
     }
 
     &__header-count {
