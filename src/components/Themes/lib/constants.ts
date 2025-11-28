@@ -4,10 +4,12 @@ import {
     createInternalPrivateColorReference,
 } from '@gravity-ui/uikit-themer';
 
-import {RadiusPresetName} from './types';
+import {type AdvanceColors, RadiusPresetName} from './types';
 import {DEFAULT_FONT_FAMILY_SETTINGS} from './typography/constants';
+import {getDefaultAdvancedColorValue} from './utils';
 
 export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
+export const UTILITY_COLOR_PREFIX = '--g-color-';
 
 export const DEFAULT_NEW_COLOR_TITLE = 'New color';
 
@@ -72,6 +74,212 @@ export const RADIUS_PRESETS: Record<RadiusPresetName, BordersOptions> = {
     [RadiusPresetName.Custom]: DEFAULT_RADIUS,
 };
 
+export const DEFAULT_ADVANCED_COLORS: AdvanceColors = {
+    texts: {
+        base: [
+            getDefaultAdvancedColorValue('text-primary'),
+            getDefaultAdvancedColorValue('text-complementary'),
+            getDefaultAdvancedColorValue('text-secondary'),
+            getDefaultAdvancedColorValue('text-hint'),
+        ],
+        semantic: [
+            getDefaultAdvancedColorValue('text-info'),
+            getDefaultAdvancedColorValue('text-info-heavy'),
+            getDefaultAdvancedColorValue('text-positive'),
+            getDefaultAdvancedColorValue('text-positive-heavy'),
+            getDefaultAdvancedColorValue('text-warning'),
+            getDefaultAdvancedColorValue('text-warning-heavy'),
+            getDefaultAdvancedColorValue('text-danger'),
+            getDefaultAdvancedColorValue('text-danger-heavy'),
+            getDefaultAdvancedColorValue('text-utility'),
+            getDefaultAdvancedColorValue('text-utility-heavy'),
+            getDefaultAdvancedColorValue('text-misc'),
+            getDefaultAdvancedColorValue('text-misc-heavy'),
+        ],
+        brand: [
+            getDefaultAdvancedColorValue('text-brand'),
+            getDefaultAdvancedColorValue('text-link'),
+            getDefaultAdvancedColorValue('text-link-hover'),
+            getDefaultAdvancedColorValue('text-link-visited'),
+            getDefaultAdvancedColorValue('text-link-visited-hover'),
+        ],
+
+        'always-dark': [
+            getDefaultAdvancedColorValue('text-dark-primary'),
+            getDefaultAdvancedColorValue('text-dark-complementary'),
+            getDefaultAdvancedColorValue('text-dark-secondary'),
+            getDefaultAdvancedColorValue('text-dark-hint'),
+        ],
+        'always-light': [
+            getDefaultAdvancedColorValue('text-light-primary'),
+            getDefaultAdvancedColorValue('text-light-complementary'),
+            getDefaultAdvancedColorValue('text-light-secondary'),
+            getDefaultAdvancedColorValue('text-light-hint'),
+        ],
+        'main-inversion': [
+            getDefaultAdvancedColorValue('text-inverted-primary'),
+            getDefaultAdvancedColorValue('text-inverted-complementary'),
+            getDefaultAdvancedColorValue('text-inverted-secondary'),
+            getDefaultAdvancedColorValue('text-inverted-hint'),
+        ],
+    },
+    backgrounds: {
+        basic: [
+            getDefaultAdvancedColorValue('base-background'),
+            getDefaultAdvancedColorValue('base-generic'),
+            getDefaultAdvancedColorValue('base-generic-hover'),
+            getDefaultAdvancedColorValue('base-generic-medium'),
+            getDefaultAdvancedColorValue('base-generic-medium-hover'),
+            getDefaultAdvancedColorValue('base-generic-accent'),
+            getDefaultAdvancedColorValue('base-generic-accent-disabled'),
+            getDefaultAdvancedColorValue('base-generic-ultralight'),
+            getDefaultAdvancedColorValue('base-simple-hover'),
+            getDefaultAdvancedColorValue('base-simple-hover-solid'),
+        ],
+        brand: [
+            getDefaultAdvancedColorValue('base-brand'),
+            getDefaultAdvancedColorValue('base-brand-hover'),
+            getDefaultAdvancedColorValue('base-selection'),
+            getDefaultAdvancedColorValue('base-selection-hover'),
+        ],
+        'light-semantic': [
+            getDefaultAdvancedColorValue('base-info-light'),
+            getDefaultAdvancedColorValue('base-info-light-hover'),
+            getDefaultAdvancedColorValue('base-positive-light'),
+            getDefaultAdvancedColorValue('base-positive-light-hover'),
+            getDefaultAdvancedColorValue('base-warning-light'),
+            getDefaultAdvancedColorValue('base-warning-light-hover'),
+            getDefaultAdvancedColorValue('base-danger-light'),
+            getDefaultAdvancedColorValue('base-danger-light-hover'),
+            getDefaultAdvancedColorValue('base-utility-light'),
+            getDefaultAdvancedColorValue('base-utility-light-hover'),
+            getDefaultAdvancedColorValue('base-neutral-light'),
+            getDefaultAdvancedColorValue('base-neutral-light-hover'),
+            getDefaultAdvancedColorValue('base-misc-light'),
+            getDefaultAdvancedColorValue('base-misc-light-hover'),
+        ],
+        'medium-semantic': [
+            getDefaultAdvancedColorValue('base-info-medium'),
+            getDefaultAdvancedColorValue('base-info-medium-hover'),
+            getDefaultAdvancedColorValue('base-positive-medium'),
+            getDefaultAdvancedColorValue('base-positive-medium-hover'),
+            getDefaultAdvancedColorValue('base-warning-medium'),
+            getDefaultAdvancedColorValue('base-warning-medium-hover'),
+            getDefaultAdvancedColorValue('base-danger-medium'),
+            getDefaultAdvancedColorValue('base-danger-medium-hover'),
+            getDefaultAdvancedColorValue('base-utility-medium'),
+            getDefaultAdvancedColorValue('base-utility-medium-hover'),
+            getDefaultAdvancedColorValue('base-neutral-medium'),
+            getDefaultAdvancedColorValue('base-neutral-medium-hover'),
+            getDefaultAdvancedColorValue('base-misc-medium'),
+            getDefaultAdvancedColorValue('base-misc-medium-hover'),
+        ],
+        'heavy-semantic': [
+            getDefaultAdvancedColorValue('base-info-heavy'),
+            getDefaultAdvancedColorValue('base-info-heavy-hover'),
+            getDefaultAdvancedColorValue('base-positive-heavy'),
+            getDefaultAdvancedColorValue('base-positive-heavy-hover'),
+            getDefaultAdvancedColorValue('base-warning-heavy'),
+            getDefaultAdvancedColorValue('base-warning-heavy-hover'),
+            getDefaultAdvancedColorValue('base-danger-heavy'),
+            getDefaultAdvancedColorValue('base-danger-heavy-hover'),
+            getDefaultAdvancedColorValue('base-utility-heavy'),
+            getDefaultAdvancedColorValue('base-utility-heavy-hover'),
+            getDefaultAdvancedColorValue('base-neutral-heavy'),
+            getDefaultAdvancedColorValue('base-neutral-heavy-hover'),
+            getDefaultAdvancedColorValue('base-misc-heavy'),
+            getDefaultAdvancedColorValue('base-misc-heavy-hover'),
+        ],
+        'always-light': [
+            getDefaultAdvancedColorValue('base-light'),
+            getDefaultAdvancedColorValue('base-light-hover'),
+            getDefaultAdvancedColorValue('base-light-simple-hover'),
+            getDefaultAdvancedColorValue('base-light-disabled'),
+            getDefaultAdvancedColorValue('base-light-accent-disabled'),
+        ],
+        floats: [
+            getDefaultAdvancedColorValue('base-float'),
+            getDefaultAdvancedColorValue('base-float-hover'),
+            getDefaultAdvancedColorValue('base-float-medium'),
+            getDefaultAdvancedColorValue('base-float-heavy'),
+            getDefaultAdvancedColorValue('base-float-accent'),
+            getDefaultAdvancedColorValue('base-float-accent-hover'),
+            getDefaultAdvancedColorValue('base-modal'),
+        ],
+    },
+    lines: {
+        general: [
+            getDefaultAdvancedColorValue('line-generic'),
+            getDefaultAdvancedColorValue('line-generic-hover'),
+            getDefaultAdvancedColorValue('line-generic-active'),
+            getDefaultAdvancedColorValue('line-generic-accent'),
+            getDefaultAdvancedColorValue('line-generic-accent-hover'),
+            getDefaultAdvancedColorValue('line-generic-solid'),
+        ],
+        semantic: [
+            getDefaultAdvancedColorValue('line-info'),
+            getDefaultAdvancedColorValue('line-positive'),
+            getDefaultAdvancedColorValue('line-warning'),
+            getDefaultAdvancedColorValue('line-danger'),
+            getDefaultAdvancedColorValue('line-utility'),
+            getDefaultAdvancedColorValue('line-misc'),
+        ],
+        'always-light': [getDefaultAdvancedColorValue('line-light')],
+    },
+    effects: {
+        other: [
+            getDefaultAdvancedColorValue('sfx-veil'),
+            getDefaultAdvancedColorValue('sfx-shadow'),
+            getDefaultAdvancedColorValue('sfx-shadow-heavy'),
+            getDefaultAdvancedColorValue('sfx-shadow-light'),
+            getDefaultAdvancedColorValue('sfx-fade'),
+        ],
+    },
+    misc: {
+        scroll: [
+            getDefaultAdvancedColorValue('scroll-track'),
+            getDefaultAdvancedColorValue('scroll-handle'),
+            getDefaultAdvancedColorValue('scroll-handle-hover'),
+            getDefaultAdvancedColorValue('scroll-corner'),
+        ],
+        axes: [getDefaultAdvancedColorValue('infographics-axis')],
+        tooltips: [getDefaultAdvancedColorValue('infographics-tooltip-bg')],
+    },
+    'basic-palette': {
+        'base-color': [
+            ...Object.entries(DEFAULT_GRAVITY_THEME.baseColors).map(([colorName, colorValue]) => ({
+                colorName,
+                ...colorValue,
+            })),
+        ],
+        'extra-color': [],
+    },
+    'brand-summary': {
+        'brand-palette': [
+            getDefaultAdvancedColorValue('base-background'),
+            getDefaultAdvancedColorValue('text-brand-contrast'),
+            {
+                colorName: 'brand',
+                ...DEFAULT_GRAVITY_THEME.baseColors.brand,
+            },
+        ],
+        'advanced-brand-palette': [
+            getDefaultAdvancedColorValue('base-brand-hover'),
+            getDefaultAdvancedColorValue('text-brand'),
+            getDefaultAdvancedColorValue('text-brand-heavy'),
+            getDefaultAdvancedColorValue('line-brand'),
+            getDefaultAdvancedColorValue('base-selection'),
+            getDefaultAdvancedColorValue('base-selection-hover'),
+        ],
+        'additional-colors': [
+            getDefaultAdvancedColorValue('text-link'),
+            getDefaultAdvancedColorValue('text-link-hover'),
+            getDefaultAdvancedColorValue('text-link-visited'),
+            getDefaultAdvancedColorValue('text-link-visited-hover'),
+        ],
+    },
+};
+
 // Default colors mappings (values from gravity-ui styles)
 // https://github.com/gravity-ui/uikit/tree/main/styles/themes
 export const DEFAULT_COLORS: GravityTheme['utilityColors'] = {
@@ -86,10 +294,10 @@ export const DEFAULT_COLORS: GravityTheme['utilityColors'] = {
     },
     'base-background': {
         light: {
-            value: 'rgb(255 255 255)',
+            value: 'rgb(255, 255, 255)',
         },
         dark: {
-            value: 'rgb(34 29 34)',
+            value: 'rgb(34, 29, 34)',
         },
     },
     'base-brand-hover': {
@@ -203,10 +411,10 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255 255 255)',
+                    value: 'rgb(255, 255, 255)',
                 },
                 dark: {
-                    value: 'rgb(34 29 34)',
+                    value: 'rgb(34, 29, 34)',
                 },
             },
             'base-brand': {
@@ -312,10 +520,10 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255 255 255)',
+                    value: 'rgb(255, 255, 255)',
                 },
                 dark: {
-                    value: 'rgb(34 29 34)',
+                    value: 'rgb(34, 29, 34)',
                 },
             },
             'base-brand': {
@@ -421,10 +629,10 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
         utilityColors: {
             'base-background': {
                 light: {
-                    value: 'rgb(255 255 255)',
+                    value: 'rgb(255, 255, 255)',
                 },
                 dark: {
-                    value: 'rgb(34 29 34)',
+                    value: 'rgb(34, 29, 34)',
                 },
             },
             'base-brand': {
