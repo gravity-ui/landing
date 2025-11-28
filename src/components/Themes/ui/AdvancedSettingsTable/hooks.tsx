@@ -1,14 +1,13 @@
-import {Moon, Sun} from '@gravity-ui/icons';
 import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
-import {Icon, SegmentedRadioGroup} from '@gravity-ui/uikit';
 import type {BaseColors, Theme} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import {type ReactElement, useMemo, useState} from 'react';
 
 import {useThemeCreator} from '../../hooks';
 import {isManuallyCreatedPaletteToken} from '../../lib/themeCreatorUtils';
+import type {AdvancedColorType} from '../../lib/types';
 
-import {ThemeValueColumn, TitleColumn, VariableColumn} from './columns';
+import {ThemeToggleTitleColumn, ThemeValueColumn, TitleColumn, VariableColumn} from './columns';
 
 export const useExtraColors = () => {
     const {gravityTheme} = useThemeCreator();
@@ -34,7 +33,7 @@ type Column = {
     }) => ReactElement;
 };
 
-export const useColumns = (): Column[] => {
+export const useColumns = ({colorType}: {colorType: AdvancedColorType}): Column[] => {
     const [theme, toggleTheme] = useState<Theme>('light');
     const {t} = useTranslation('themes');
 
@@ -43,7 +42,15 @@ export const useColumns = (): Column[] => {
 
     const variableColumn: Column = useMemo(
         () => ({
-            title: () => <TitleColumn value={t('title_advance-settings-table_title-variable')} />,
+            title: () => (
+                <TitleColumn
+                    value={
+                        colorType === 'basic-palette'
+                            ? t('title_advance-settings-table_title-color')
+                            : t('title_advance-settings-table_title-variable')
+                    }
+                />
+            ),
             key: 'variable',
             render: ({colorName, extraVariable = false}) => (
                 <VariableColumn name={colorName} extraVariable={extraVariable} />
@@ -52,44 +59,25 @@ export const useColumns = (): Column[] => {
         [t],
     );
 
-    if (isTablet) {
-        return useMemo(
-            () => [
-                variableColumn,
-                {
-                    title: () => (
-                        <SegmentedRadioGroup
-                            size="xl"
-                            defaultValue={theme}
-                            onChange={(e) => {
-                                toggleTheme(e.target.value as Theme);
-                            }}
-                        >
-                            <SegmentedRadioGroup.Option value="light">
-                                <Icon data={Sun} />
-                                {t('theme_name_light')}
-                            </SegmentedRadioGroup.Option>
-                            <SegmentedRadioGroup.Option value="dark">
-                                <Icon data={Moon} />
-                                {t('theme_name_dark')}
-                            </SegmentedRadioGroup.Option>
-                        </SegmentedRadioGroup>
-                    ),
-                    key: 'themeToggle',
-                    render: ({colorName, light, dark}) => (
-                        <ThemeValueColumn
-                            theme={theme}
-                            colorName={colorName}
-                            value={theme === 'light' ? light : dark}
-                        />
-                    ),
-                },
-            ],
-            [theme, t],
-        );
-    }
+    const tabletColumns: Column[] = useMemo(
+        () => [
+            variableColumn,
+            {
+                title: () => <ThemeToggleTitleColumn theme={theme} toggleTheme={toggleTheme} />,
+                key: 'themeToggle',
+                render: ({colorName, light, dark}) => (
+                    <ThemeValueColumn
+                        theme={theme}
+                        colorName={colorName}
+                        value={theme === 'light' ? light : dark}
+                    />
+                ),
+            },
+        ],
+        [variableColumn, theme],
+    );
 
-    return useMemo(
+    const desktopColumns: Column[] = useMemo(
         () => [
             variableColumn,
             {
@@ -107,6 +95,12 @@ export const useColumns = (): Column[] => {
                 ),
             },
         ],
-        [t],
+        [variableColumn, t],
     );
+
+    if (isTablet) {
+        return tabletColumns;
+    }
+
+    return desktopColumns;
 };

@@ -39,7 +39,7 @@ const ColorItem: React.FC<ColorItemProps> = ({title, color, disabled}) => {
 interface PrivateColorsListProps {
     colors: BaseColor[];
     value?: string;
-    onSelect: (value: string, ref?: string) => void;
+    onSelect: (item: BaseColor) => void;
     view?: 'select' | 'list';
 }
 
@@ -56,7 +56,7 @@ export const PrivateColorsList = ({
 
     const handleSelect = React.useCallback(
         (item: BaseColor) => {
-            onSelect(item.color, item.token);
+            onSelect(item);
         },
         [onSelect],
     );
@@ -172,7 +172,7 @@ export const SemanticGroupColorsList = ({
                     />
                     {item.disabled && (
                         <HelpMark iconSize="s">
-                            <Text variant="caption-1" color="secondary">
+                            <Text variant="body-1" color="secondary">
                                 {t('text_utility-color_disabled_description')}
                             </Text>
                         </HelpMark>

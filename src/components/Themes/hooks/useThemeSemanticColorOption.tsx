@@ -57,6 +57,8 @@ const getIconByGroup = (group: Exclude<AdvancedColorType, 'basic-palette'>) => {
             return <Icon data={MagicWand} />;
         case 'misc':
             return <Icon data={Cube} />;
+        default:
+            return <Icon data={Cube} />;
     }
 };
 
@@ -162,5 +164,5 @@ export const useThemeSemanticColorOption = (
                     ),
                 };
             });
-    }, [themeState, themeVariant]);
+    }, [gravityTheme, themeVariant, updatedColorToken, t]);
 };

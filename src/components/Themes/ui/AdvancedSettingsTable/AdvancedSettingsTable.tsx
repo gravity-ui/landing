@@ -1,3 +1,4 @@
+import {Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {Fragment} from 'react';
 
@@ -18,7 +19,7 @@ export interface AdvancedSettingsTableProps {
 export const AdvancedSettingsTable = ({colorType}: AdvancedSettingsTableProps) => {
     const {t} = useTranslation('themes');
     const extraColors = useExtraColors();
-    const columns = useColumns();
+    const columns = useColumns({colorType});
 
     return (
         <table className={b()}>
@@ -41,9 +42,13 @@ export const AdvancedSettingsTable = ({colorType}: AdvancedSettingsTableProps) =
                                         className={b('cell', {group: true})}
                                         key={`${group}-${key}`}
                                     >
-                                        {key === 'variable'
-                                            ? t(`title_advance-color-settings-group-${group}`)
-                                            : ''}
+                                        {key === 'variable' ? (
+                                            <Text variant="subheader-1">
+                                                {t(`title_advance-color-settings-group-${group}`)}
+                                            </Text>
+                                        ) : (
+                                            ''
+                                        )}
                                     </td>
                                 ))}
                             </tr>

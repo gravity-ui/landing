@@ -24,5 +24,9 @@ export const getColorName = (colorToken: string) => {
         return capitalize(colorToken);
     }
 
+    if (colorToken === 'brand') {
+        return 'Brand Color';
+    }
+
     return colorToken;
 };

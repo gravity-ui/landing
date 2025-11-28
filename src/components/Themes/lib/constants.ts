@@ -257,6 +257,7 @@ export const DEFAULT_ADVANCED_COLORS: AdvanceColors = {
     'brand-summary': {
         'brand-palette': [
             getDefaultAdvancedColorValue('base-background'),
+            getDefaultAdvancedColorValue('text-brand-contrast'),
             {
                 colorName: 'brand',
                 ...DEFAULT_GRAVITY_THEME.baseColors.brand,

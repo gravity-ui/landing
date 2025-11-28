@@ -90,8 +90,8 @@ export const ColorSelectPopupContent = ({
                 <PrivateColorsList
                     colors={privateGroups}
                     value={groupToken}
-                    onSelect={(val) => {
-                        setCurrentGroupToken(val);
+                    onSelect={(item) => {
+                        setCurrentGroupToken(item.token);
                         setSelectedGroupType('private');
                     }}
                     view={version === 'mobile' ? 'select' : 'list'}
@@ -128,7 +128,7 @@ export const ColorSelectPopupContent = ({
                     <PrivateColorsList
                         colors={groupPrivateColors}
                         value={value}
-                        onSelect={onChange}
+                        onSelect={(item) => onChange(item.color, item.token)}
                     />
                 )}
             </div>
