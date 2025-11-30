@@ -1,13 +1,13 @@
 import {GetServerSideProps} from 'next';
-import {Api} from 'src/api';
+import {ClientApi, ServerApi} from 'src/api';
 
 let cachePromise: Promise<unknown> | null = null;
 
 export const getServerSideProps: GetServerSideProps = async ({res}) => {
     if (!cachePromise) {
         cachePromise = Promise.all([
-            Api.instance.fetchAllContributorsWithCache(),
-            Api.instance.fetchAllLibs(),
+            ClientApi.instance.fetchAllContributors(),
+            ServerApi.instance.fetchAllLibs(),
         ]).catch(() => {
             cachePromise = null;
         });
