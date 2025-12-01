@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit ist ein leichtgewichtiger [express.js](https://expressjs.com/)-Wrapper, der sich in [NodeKit](https://github.com/gravity-ui/nodekit) integriert und einige nützliche Funktionen wie Request-Logging, Tracing-Unterstützung, asynchrone Controller & Middleware und detaillierte Routenbeschreibungen bietet.
+ExpressKit ist ein leichtgewichtiger [express.js](https://expressjs.com/)-Wrapper, der sich in [NodeKit](https://github.com/gravity-ui/nodekit) integriert und einige nützliche Funktionen bietet, wie z. B. Request-Logging, Tracing-Unterstützung, asynchrone Controller & Middleware und eine detaillierte Routenbeschreibung.
 
 Installation:
 
@@ -103,7 +103,7 @@ const nodekit = new NodeKit({
 
 const app = new ExpressKit(nodekit, {
   'GET /api/form': (req, res) => {
-    // Das Token ist im Request-Kontext verfügbar
+    // Token ist im Request-Kontext verfügbar
     res.json({csrfToken: req.originalContext.get('csrfToken')});
   },
 
@@ -138,7 +138,7 @@ Standardmäßig setzt ExpressKit `no-cache`-Header auf alle Antworten. Sie könn
 
 ```typescript
 const config: Partial<AppConfig> = {
-  expressEnableCaching: true, // Caching standardmäßig erlauben
+  expressEnableCaching: true, // Caching standardmäßig zulassen
 };
 ```
 
@@ -147,7 +147,7 @@ const config: Partial<AppConfig> = {
 ```typescript
 const app = new ExpressKit(nodekit, {
   'GET /api/cached': {
-    enableCaching: true, // Caching für diese Route erlauben
+    enableCaching: true, // Caching für diese Route zulassen
     handler: (req, res) => res.json({data: 'cacheable'}),
   },
   'GET /api/fresh': {
@@ -158,3 +158,7 @@ const app = new ExpressKit(nodekit, {
 ```
 
 `enableCaching` auf Routenebene überschreibt die globale Einstellung. Der Caching-Status ist in `req.routeInfo.enableCaching` verfügbar.
+
+## Validierung und Antwortserialisierung
+
+- [Request Validation and Response Serialization](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - Verwenden Sie Zod-Schemas für automatische Request-Validierung und Antwortserialisierung.
