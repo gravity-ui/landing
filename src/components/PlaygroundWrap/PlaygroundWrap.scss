@@ -5,12 +5,11 @@
 $block: '.#{variables.$ns}playground-wrap';
 
 #{$block} {
-    min-height: 100%;
     height: 100%;
     margin-block-start: calc(var(--g-spacing-base) * 8);
 
     &__container {
-        min-height: 100%;
+        height: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -40,11 +39,6 @@ $block: '.#{variables.$ns}playground-wrap';
         }
     }
 
-    &__content {
-        width: 100%;
-        min-height: 300px;
-    }
-
     &__playground {
         padding: 24px 32px;
         background: rgba(37, 27, 37, 1);
@@ -55,29 +49,5 @@ $block: '.#{variables.$ns}playground-wrap';
         max-height: 80vh;
         gap: 24px;
         position: relative;
-    }
-
-    &__graph-viewer {
-        flex: 1;
-        min-height: 100%;
-    }
-
-    &__json-switcher {
-        position: absolute;
-        top: 24px;
-        right: 32px;
-        z-index: 2;
-    }
-
-    &__editor-wrap {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    &__editor {
-        flex: 1;
-        border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 }

@@ -1,0 +1,10 @@
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}timeline-canvas-wrap';
+
+#{$block} {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
