@@ -78,13 +78,13 @@ export default config;
 | 옵션              | 타입                 | 기본값                              | 설명                                                                                     |
 | ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | `appCsrfSecret`     | `string \| string[]` | -                                    | **필수.** HMAC 토큰 생성을 위한 비밀 키. 여러 개의 비밀 키를 사용하여 키 로테이션이 가능합니다. |
-| `appCsrfLifetime`   | `number`             | `2592000` (30일)                  | 토큰 수명(초). 만료 없음으로 설정하려면 `0`으로 설정합니다.                                        |
-| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | 토큰 검증을 위한 HTTP 헤더 이름입니다.                                                          |
-| `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | CSRF 검증이 필요한 HTTP 메서드입니다.                                                      |
+| `appCsrfLifetime`   | `number`             | `2592000` (30일)                  | 토큰 유효 시간(초). 만료 없음으로 설정하려면 `0`으로 설정하십시오.                                        |
+| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | 토큰 검증을 위한 HTTP 헤더 이름.                                                          |
+| `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | CSRF 검증이 필요한 HTTP 메서드.                                                      |
 
 ### 사용법
 
-설정 후에는 지정된 HTTP 메서드를 사용하는 모든 라우트에 CSRF 보호가 자동으로 적용됩니다.
+구성 후에는 지정된 HTTP 메서드를 사용하는 모든 라우트에 CSRF 보호가 자동으로 적용됩니다.
 
 ```typescript
 import {ExpressKit, AuthPolicy} from '@gravity-ui/expresskit';
@@ -157,3 +157,7 @@ const app = new ExpressKit(nodekit, {
 ```
 
 라우트 레벨의 `enableCaching`은 전역 설정을 재정의합니다. 캐싱 상태는 `req.routeInfo.enableCaching`에서 사용할 수 있습니다.
+
+## 유효성 검사 및 응답 직렬화
+
+- [요청 유효성 검사 및 응답 직렬화](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - Zod 스키마를 사용하여 자동 요청 유효성 검사 및 응답 직렬화를 수행합니다.

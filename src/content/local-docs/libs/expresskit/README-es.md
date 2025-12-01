@@ -75,11 +75,11 @@ export default config;
 
 ### Opciones de configuración
 
-| Opción              | Tipo                 | Predeterminado                       | Descripción                                                                                     |
-| ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `appCsrfSecret`     | `string \| string[]` | -                                    | **Requerido.** Clave(s) secreta(s) para la generación de tokens HMAC. Múltiples secretos permiten la rotación de claves. |
-| `appCsrfLifetime`   | `number`             | `2592000` (30 días)                  | Duración del token en segundos. Establecer a `0` para que no expire.                                        |
-| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | Nombre de la cabecera HTTP para la validación del token.                                                          |
+| Opción              | Tipo                 | Predeterminado                           | Descripción                                                                                     |
+| ------------------- | -------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `appCsrfSecret`     | `string \| string[]` | -                                        | **Requerido.** Clave(s) secreta(s) para la generación de tokens HMAC. Múltiples secretos permiten la rotación de claves. |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 días)                      | Vida útil del token en segundos. Establecer a `0` para que no expire.                                        |
+| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                         | Nombre de la cabecera HTTP para la validación del token.                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | Métodos HTTP que requieren validación CSRF.                                                      |
 
 ### Uso
@@ -157,3 +157,7 @@ const app = new ExpressKit(nodekit, {
 ```
 
 El `enableCaching` a nivel de ruta anula la configuración global. El estado de la caché está disponible en `req.routeInfo.enableCaching`.
+
+## Validación y serialización de respuestas
+
+- [Validación de solicitudes y serialización de respuestas](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utiliza esquemas Zod para la validación automática de solicitudes y la serialización de respuestas.
