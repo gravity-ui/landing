@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit est un wrapper léger pour [express.js](https://expressjs.com/) qui s'intègre à [NodeKit](https://github.com/gravity-ui/nodekit) et offre des fonctionnalités utiles telles que la journalisation des requêtes, la prise en charge du traçage, les contrôleurs et middlewares asynchrones, ainsi qu'une description détaillée des routes.
+ExpressKit est un wrapper léger pour [express.js](https://expressjs.com/) qui s'intègre à [NodeKit](https://github.com/gravity-ui/nodekit) et offre des fonctionnalités utiles telles que la journalisation des requêtes, le support du traçage, les contrôleurs et middlewares asynchrones, ainsi qu'une description détaillée des routes.
 
 Installation :
 
@@ -157,3 +157,7 @@ const app = new ExpressKit(nodekit, {
 ```
 
 Le paramètre `enableCaching` au niveau de la route remplace le réglage global. L'état de la mise en cache est disponible dans `req.routeInfo.enableCaching`.
+
+## Validation et Sérialisation des réponses
+
+- [Validation des requêtes et sérialisation des réponses](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utilisez les schémas Zod pour la validation automatique des requêtes et la sérialisation des réponses.
