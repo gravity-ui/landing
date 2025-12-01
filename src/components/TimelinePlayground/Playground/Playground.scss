@@ -1,0 +1,21 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
+@use '../../../variables.scss';
+
+$pg: '.#{variables.$ns}timeline-playground';
+
+#{$pg} {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+
+    &__content {
+        height: 100%;
+        width: calc(50% - 32px / 2);
+        min-height: 0;
+        overflow: hidden;
+    }
+}
