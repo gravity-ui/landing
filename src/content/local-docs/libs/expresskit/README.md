@@ -157,3 +157,7 @@ const app = new ExpressKit(nodekit, {
 ```
 
 Route-level `enableCaching` overrides the global setting. The caching state is available in `req.routeInfo.enableCaching`.
+
+## Validation and Response Serialization
+
+- [Request Validation and Response Serialization](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - use Zod schemas for automatic request validation and response serialization.
