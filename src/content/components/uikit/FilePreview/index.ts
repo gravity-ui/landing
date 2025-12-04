@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 import {Repos} from '../../../../types/common';
-import {getGithubUrl, getReadmeUrl} from '../../utils';
+import {getGithubUrl, getReadmeUrl, mappingOptions} from '../../utils';
 
 const getterOptions = {repoName: Repos.Uikit, componentName: 'FilePreview'};
 
@@ -18,9 +18,20 @@ export const filePreviewConfig = {
             import('./FilePreviewComponent').then((mod) => mod.FilePreviewComponent),
         ),
         props: {
-            slected: {
+            view: {
+                type: 'radioButton',
+                values: mappingOptions(['default', 'compact']),
+                defaultValue: 'default',
+            },
+            selected: {
                 type: 'switch',
                 defaultValue: false,
+            },
+            imageSrc: {
+                type: 'input',
+            },
+            description: {
+                type: 'input',
             },
         },
     },
