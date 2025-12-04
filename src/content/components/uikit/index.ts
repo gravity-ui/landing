@@ -15,6 +15,7 @@ import {checkboxConfig} from './Checkbox';
 import {disclosureConfig} from './Disclosure';
 import {dividerConfig} from './Divider';
 import {dropdownMenuConfig} from './DropdownMenu';
+import {filePreviewConfig} from './FilePreview';
 import {helpMarkConfig} from './HelpMark';
 import {hotkeyConfig} from './Hotkey';
 import {iconConfig} from './Icon';
@@ -105,6 +106,7 @@ const uikitComponents: Component[] = [
     stepperConfig,
     helpMarkConfig,
     hotkeyConfig,
+    filePreviewConfig,
 ];
 
 export const uikit: Lib = {
