@@ -26,6 +26,9 @@ export const LocalePicker: React.FC = () => {
 
     const appLocale = useLocale();
 
+    // Check if we're on a blog page - blog is only available for en and ru
+    const isBlogPage = router.asPath.includes('/blog');
+
     const renderOption = React.useCallback((option: SelectOption<string>) => {
         const locale = option.value;
         const localeUpperCase = option.value.toUpperCase();
@@ -43,19 +46,34 @@ export const LocalePicker: React.FC = () => {
         return null;
     }
 
+    // Filter locales for blog pages - only en and ru are available
+    const availableLocales = React.useMemo(() => {
+        if (isBlogPage) {
+            return i18nextConfig.i18n.locales.filter(
+                (locale) => locale === 'en' || locale === 'ru',
+            );
+        }
+        return i18nextConfig.i18n.locales;
+    }, [isBlogPage]);
+
     return (
         <div className={b()}>
             <Select
                 size="xl"
                 width="max"
                 value={[appLocale]}
-                options={i18nextConfig.i18n.locales.map((locale) => ({
+                options={availableLocales.map((locale) => ({
                     value: locale,
                 }))}
                 renderOption={renderOption}
                 renderSelectedOption={renderOption}
                 onUpdate={([locale]) => {
                     if (appLocale === locale) {
+                        return;
+                    }
+
+                    // For blog pages, only allow en and ru
+                    if (isBlogPage && locale !== 'en' && locale !== 'ru') {
                         return;
                     }
 

@@ -1,4 +1,5 @@
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}library';
@@ -54,21 +55,23 @@ $block: '.#{variables.$ns}library';
         }
     }
 
-    &__breadcrumbs-item {
+    &__breadcrumbs-title {
+        @include pcStyles.text-size(caption-3);
         color: #fff;
     }
 
     &__title {
         margin: 0 0 8px;
-        font-size: 32px;
-        line-height: 40px;
-        font-weight: 600;
-        color: #fff;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             font-size: 28px;
             line-height: 36px;
         }
+    }
+
+    &__title-content {
+        @include pcStyles.heading2();
+        color: #fff;
     }
 
     &__description {

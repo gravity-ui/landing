@@ -20,6 +20,142 @@ export type CodeOwners = {
     owners: string[];
 };
 
+// Blog types
+export type BlogTag = {
+    id: number;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    icon: string | null;
+    isDeleted: boolean;
+    name: string;
+    locale: string;
+    blogTagId: number;
+    count: number;
+};
+
+export type BlogService = {
+    id: number;
+    name: string;
+    slug: string;
+};
+
+export type BlogAuthor = {
+    id: number;
+    firstName: string;
+    secondName: string;
+    description: string;
+    fullDescription?: string;
+    shortDescription: string;
+    avatar: string;
+    createdAt: string;
+    updatedAt: string;
+};
+
+export type BlogPostListItem = {
+    id: number;
+    slug: string;
+    date: string;
+    postDate: string;
+    blogPostId: number;
+    image: string;
+    readingTime: number;
+    keywords: string[];
+    shareTitle: string | null;
+    likes: number;
+    hasUserLike: boolean;
+    services: BlogService[];
+    url: string;
+    tags: BlogTag[];
+    textTitle: string;
+    htmlTitle: string;
+    metaTitle: string;
+    description: string;
+    content: string;
+};
+
+export type BlogPost = {
+    id: number;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+    isDeleted: boolean;
+    pageId: number;
+    postDate: string;
+    isPinned: boolean;
+    migrated: boolean;
+    date: string;
+    title: string;
+    shareTitle: string | null;
+    description: string;
+    author: string | null;
+    sharedImage: string;
+    content: string;
+    locale: string;
+    isPublished: boolean;
+    blogPostId: number;
+    image: string;
+    metaDescription: string | null;
+    keywords: string[] | null;
+    metaTitle: string | null;
+    readingTime: number;
+    likes: number;
+    hasUserLike: boolean;
+    tags: BlogTag[];
+    authors: BlogAuthor[];
+    shareOptions?: string[];
+    textTitle?: string;
+    htmlTitle?: string;
+};
+
+export type BlogPostsResponse = {
+    posts: BlogPostListItem[];
+    totalCount: number;
+    count: number;
+    pinnedPost: BlogPostListItem | null;
+};
+
+export type BlogPageContent = {
+    blocks: Array<Record<string, any>>;
+};
+
+export type BlogPage = {
+    id: number;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    type: string;
+    isDeleted: boolean;
+    pageId: number;
+    locale: string;
+    publishedVersionId: number;
+    lastVersionId: number;
+    content: BlogPageContent;
+    title: string;
+    noIndex: boolean;
+    shareTitle: string | null;
+    shareDescription: string | null;
+    shareImage: string | null;
+    pageLocaleId: number;
+    author: string;
+    metaDescription: string | null;
+    keywords: string[];
+    shareGenImage: string | null;
+    shareGenTitle: string | null;
+    solution: string | null;
+    service: string | null;
+    regions?: string[];
+    locales?: Array<{locale: string; publishedVersionId: number | null}>;
+};
+
+export type BlogPostsQuery = {
+    page?: number;
+    pageSize?: number;
+    search?: string;
+    tags?: string[];
+    services?: string[];
+};
+
 export type LibMetadata = {
     stars: number;
     version: string;
@@ -587,5 +723,151 @@ export class Api {
         };
 
         return content;
+    }
+
+    // Blog API methods
+    // Currently returning mock data. Will be replaced with real API calls later.
+
+    /**
+     * Get blog post by slug
+     * @param locale - Current locale (not used for now, same data for all locales)
+     * @param slug - Full post slug (e.g., "posts/2022/09/review")
+     * @returns Blog post with page content
+     *
+     * TODO: When connecting to real API, parse slug to extract date and post slug
+     * Example: "posts/2022/09/review" -> { year: 2022, month: 09, slug: "review" }
+     */
+    async getBlogPost(locale: string, slug: string): Promise<{post: BlogPost; page: BlogPage}> {
+        try {
+            // Use postPageMockData utility from mocks and page.json for full page data
+            const {postPageMockData} = await import('./.mocks/utils');
+            const pageMock = await import('./.mocks/page.json');
+
+            // Transform mock data to add locale if missing
+            const post = {
+                ...postPageMockData.post,
+                locale: postPageMockData.post.locale || locale,
+            };
+
+            return {
+                post,
+                page: {
+                    ...pageMock.default,
+                    content: postPageMockData.content,
+                } as unknown as BlogPage,
+            };
+        } catch (error) {
+            console.error('Error fetching blog post:', error);
+            throw new Error(`Failed to fetch blog post: ${slug}`);
+        }
+    }
+
+    /**
+     * Get list of blog tags
+     * @param _locale - Current locale (not used for now, same data for all locales)
+     * @returns Array of blog tags
+     *
+     * TODO: When connecting to real API, filter tags by locale
+     */
+    async getBlogTags(_locale: string): Promise<BlogTag[]> {
+        try {
+            const tagsMock = await import('./.mocks/tags.json');
+            return tagsMock.default;
+        } catch (error) {
+            console.error('Error fetching blog tags:', error);
+            return [];
+        }
+    }
+
+    /**
+     * Get list of blog posts with filtering
+     * @param locale - Current locale (not used for now, same data for all locales)
+     * @param _query - Query parameters for filtering and pagination
+     * @returns Blog posts response with pagination info
+     *
+     * TODO: When connecting to real API, implement actual filtering and pagination
+     */
+    async getBlogPosts(
+        locale: string,
+        _query?: BlogPostsQuery,
+    ): Promise<BlogPostsResponse & {page: BlogPage}> {
+        try {
+            const postsMock = await import('./.mocks/posts.json');
+            const blogPageMock = await import('./.mocks/blogPage.json');
+
+            // Transform mock data to match BlogPostListItem type with required fields
+            const transformedPosts = postsMock.default.posts.map((post: any) => ({
+                ...post,
+                locale,
+                title: post.textTitle || post.htmlTitle || post.title || 'Untitled',
+                description: post.description || 'No description available',
+            })) as unknown as BlogPostListItem[];
+
+            const transformedPinnedPost = postsMock.default.pinnedPost
+                ? ({
+                      ...postsMock.default.pinnedPost,
+                      locale,
+                      title:
+                          (postsMock.default.pinnedPost as any).title ||
+                          (postsMock.default.pinnedPost as any).textTitle ||
+                          'Untitled',
+                  } as unknown as BlogPostListItem)
+                : null;
+
+            // For now, return all mock data without filtering
+            // TODO: Implement filtering by tags, services, search when connecting to real API
+            return {
+                posts: transformedPosts,
+                count: postsMock.default.count,
+                totalCount: postsMock.default.totalCount,
+                pinnedPost: transformedPinnedPost,
+                page: blogPageMock.default as unknown as BlogPage,
+            };
+        } catch (error) {
+            console.error('Error fetching blog posts:', error);
+            throw new Error('Failed to fetch blog posts');
+        }
+    }
+
+    /**
+     * Get list of services for blog filtering
+     * @param _locale - Current locale (not used for now, same data for all locales)
+     * @returns Array of blog services
+     *
+     * TODO: When connecting to real API, filter services by locale if needed
+     */
+    async getServiceList(_locale: string): Promise<BlogService[]> {
+        try {
+            const servicesMock = await import('./.mocks/services.json');
+            return servicesMock.default;
+        } catch (error) {
+            console.error('Error fetching services:', error);
+            return [];
+        }
+    }
+
+    /**
+     * Get suggested posts for a blog post
+     * @param locale - Current locale (not used for now, same data for all locales)
+     * @param _postId - Current post ID (not used for now, returns mock data)
+     * @returns Array of suggested posts
+     *
+     * TODO: When connecting to real API, get related posts based on postId
+     */
+    async getSuggestedPosts(locale: string, _postId?: number): Promise<BlogPostListItem[]> {
+        try {
+            // Use postPageMockData utility from mocks
+            const {postPageMockData} = await import('./.mocks/utils');
+
+            // Transform mock data to add required locale and title fields
+            return postPageMockData.suggestedPosts.map((post: any) => ({
+                ...post,
+                locale,
+                title: post.title || post.textTitle || 'Untitled',
+            })) as unknown as BlogPostListItem[];
+        } catch (error) {
+            console.error('Error fetching suggested posts:', error);
+            return [];
+        }
     }
 }

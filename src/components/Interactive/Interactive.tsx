@@ -1,11 +1,10 @@
 import {Theme} from '@gravity-ui/uikit';
 import React from 'react';
-import 'swiper/css';
-import {Autoplay, EffectCreative} from 'swiper/modules';
-import {Swiper, SwiperClass, SwiperSlide} from 'swiper/react';
 
 import {EnvironmentContext} from '../../contexts';
 import {block} from '../../utils';
+import {Autoplay, EffectCreative, Swiper, SwiperSlide} from '../../utils/swiper';
+import type {SwiperClass} from '../../utils/swiper';
 
 import './Interactive.scss';
 import {InteractiveContextProvider} from './InteractiveContext';
