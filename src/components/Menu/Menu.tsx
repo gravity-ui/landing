@@ -34,6 +34,14 @@ export const Menu: React.FC = () => {
 
     const {hideLocalePicker} = React.useContext(EnvironmentContext);
 
+    // Filter menu items based on locale - blog is only available for en and ru
+    const filteredMenu = React.useMemo(() => {
+        if (locale === 'en' || locale === 'ru') {
+            return menu;
+        }
+        return menu.filter((item) => item.url !== '/blog');
+    }, [locale]);
+
     const renderItem = (item: MenuItem) => {
         if (item.isComingSoon) {
             return (
@@ -69,7 +77,7 @@ export const Menu: React.FC = () => {
 
                 <div className={b('desktop-menu')}>
                     <div className={b('desktop-menu-items')}>
-                        {menu.map((item) => (
+                        {filteredMenu.map((item) => (
                             <div
                                 key={item.titleKey}
                                 className={b('desktop-menu-item', {
@@ -121,7 +129,7 @@ export const Menu: React.FC = () => {
                     <Row>
                         <Col sizes={{sm: 12}}>
                             <div className={b('mobile-menu-items')}>
-                                {menu.map((item) => (
+                                {filteredMenu.map((item) => (
                                     <div className={b('mobile-menu-item')} key={item.titleKey}>
                                         {renderItem(item)}
                                     </div>
