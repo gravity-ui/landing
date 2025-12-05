@@ -444,9 +444,9 @@ export const libs = [
         npmId: '@gravity-ui/timeline',
         title: 'Timeline',
         primary: false,
-        landing: false,
+        landing: true,
         tags: ['ui'],
-        storybookUrl: '',
+        storybookUrl: 'https://preview.gravity-ui.com/timeline/',
         readmeUrl: getReadmeUrls(
             'https://raw.githubusercontent.com/gravity-ui/timeline/main',
         ),
