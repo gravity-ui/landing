@@ -1,7 +1,7 @@
 import {BlockType} from '@gravity-ui/page-constructor';
 import {TFunction} from 'next-i18next';
 
-import {Contributor, LibWithMetadata} from '../api';
+import {LibWithMetadata} from '../api';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
 import companiesTabletAsset from '../assets/companies-tablet.svg';
@@ -20,12 +20,10 @@ import {CustomPageContent} from './types';
 export const getRtlLanding = ({
     t,
     libs,
-    contributors,
     backgroundImageSrc,
 }: {
     t: TFunction;
     libs: LibWithMetadata[];
-    contributors: Contributor[];
     backgroundImageSrc: string;
 }): CustomPageContent => ({
     background: {
@@ -169,7 +167,6 @@ export const getRtlLanding = ({
                 title: t('home:contributors_actions_telegram'),
                 href: 'https://t.me/gravity_ui',
             },
-            contributors,
         },
         {
             type: BlockType.CompaniesBlock,
