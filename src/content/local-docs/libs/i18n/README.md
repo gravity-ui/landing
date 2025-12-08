@@ -24,7 +24,7 @@ This repository contains common utilities, libraries, and plugins used for i18n 
 1. Install pnpm
 
     ```bash
-    npm i -g pnpm@9.12.3
+    npm run install:global
     ```
 
 1. Install dependencies
