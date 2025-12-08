@@ -24,7 +24,7 @@
 1. 安装 pnpm
 
     ```bash
-    npm i -g pnpm@9.12.3
+    npm run install:global
     ```
 
 1. 安装依赖

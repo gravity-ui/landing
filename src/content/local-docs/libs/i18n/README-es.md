@@ -24,10 +24,10 @@ Este repositorio contiene utilidades, bibliotecas y plugins comunes utilizados p
 1. Instala pnpm
 
     ```bash
-    npm i -g pnpm@9.12.3
+    npm run install:global
     ```
 
-1. Instala las dependencias
+1. Instala dependencias
 
     ```bash
     pnpm i
