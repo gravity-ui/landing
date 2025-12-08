@@ -1,6 +1,6 @@
 # 🌍 Gravity-UI i18n Tools
 
-Dieses Repository enthält gängige Hilfsprogramme, Bibliotheken und Plugins, die für i18n in Gravity-UI verwendet werden.
+Dieses Repository enthält allgemeine Dienstprogramme, Bibliotheken und Plugins, die für i18n in Gravity-UI verwendet werden.
 
 ## Nützliche Links
 
@@ -24,7 +24,7 @@ Dieses Repository enthält gängige Hilfsprogramme, Bibliotheken und Plugins, di
 1. Installiere pnpm
 
     ```bash
-    npm i -g pnpm@9.12.3
+    npm run install:global
     ```
 
 1. Installiere Abhängigkeiten

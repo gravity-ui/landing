@@ -1,6 +1,6 @@
 # 🌍 Gravity-UI i18n Tools
 
-이 저장소에는 Gravity-UI의 i18n(국제화)에 사용되는 공통 유틸리티, 라이브러리 및 플러그인이 포함되어 있습니다.
+이 저장소에는 Gravity-UI의 i18n(국제화)에 사용되는 일반적인 유틸리티, 라이브러리 및 플러그인이 포함되어 있습니다.
 
 ## 유용한 링크
 
@@ -24,7 +24,7 @@
 1. pnpm 설치
 
     ```bash
-    npm i -g pnpm@9.12.3
+    npm run install:global
     ```
 
 1. 종속성 설치
@@ -42,6 +42,6 @@
     # i18n-cli 패키지에 대한 타입 검사 실행
     pnpm nx typecheck @gravity-ui/i18n-cli
 
-    # 모든 패키지에 대한 린트 실행
+    # 모든 패키지에 대한 lint 실행
     pnpm nx run-many --target=lint --parallel
     ```
