@@ -26,7 +26,6 @@ import lowerCase from 'lodash/lowerCase';
 
 import {
     BrandPreset,
-    DEFAULT_ADVANCED_COLORS,
     DEFAULT_NEW_COLOR_TITLE,
     DEFAULT_PALETTE_TOKENS,
     RADIUS_PRESETS,
@@ -362,7 +361,6 @@ export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
         },
         typography: defaultTypographyPreset,
         colorsSettingsType: 'basic',
-        advancedColors: DEFAULT_ADVANCED_COLORS,
     };
 }
 
