@@ -9,7 +9,6 @@ import {DEFAULT_FONT_FAMILY_SETTINGS} from './typography/constants';
 import {getDefaultAdvancedColorValue} from './utils';
 
 export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
-export const UTILITY_COLOR_PREFIX = '--g-color-';
 
 export const DEFAULT_NEW_COLOR_TITLE = 'New color';
 

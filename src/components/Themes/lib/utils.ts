@@ -5,7 +5,7 @@ import {
 } from '@gravity-ui/uikit-themer';
 import capitalize from 'lodash/capitalize';
 
-import {UTILITY_COLOR_PREFIX} from './constants';
+export const UTILITY_COLOR_PREFIX = '--g-color-';
 
 export const getDefaultAdvancedColorValue = (colorName: UtilityColor) => {
     return {colorName: colorName, ...DEFAULT_GRAVITY_THEME['utilityColors'][colorName]};
