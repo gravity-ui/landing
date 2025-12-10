@@ -12,6 +12,7 @@ import {breadcrumbsConfig} from './Breadcrumbs';
 import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
+import {clipboardButtonConfig} from './ClipboardButton';
 import {disclosureConfig} from './Disclosure';
 import {dividerConfig} from './Divider';
 import {dropdownMenuConfig} from './DropdownMenu';
@@ -66,6 +67,7 @@ const uikitComponents: Component[] = [
     buttonConfig,
     cardConfig,
     checkboxConfig,
+    clipboardButtonConfig,
     disclosureConfig,
     dividerConfig,
     dropdownMenuConfig,
