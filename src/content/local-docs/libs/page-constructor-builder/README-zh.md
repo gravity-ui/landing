@@ -97,18 +97,18 @@ page-builder build [options]
 input: ./pages
 output: ./dist
 assets: ./assets
-favicon: logo.svg # Favicon file from assets or external URL
+favicon: logo.svg # 来自 assets 或外部 URL 的图标文件
 theme: light
 baseUrl: https://mysite.com
 minify: true
-sourceMaps: false # Generate source maps for debugging (increases bundle size)
+sourceMaps: false # 为调试生成源映射（会增加包大小）
 css:
   - ./styles/main.css
   - ./styles/components.scss
 components: ./components
 navigation: ./navigation.yml
 webpack:
-  # Custom webpack configuration
+  # 自定义 webpack 配置
 ```
 
 ### 页面配置
@@ -135,7 +135,7 @@ blocks:
 
       You can use **markdown** formatting here.
 
-  - type: CustomBlock # Your custom component
+  - type: CustomBlock # 你的自定义组件
     title: Custom Component
     content: This uses a custom component
 ```
@@ -198,10 +198,10 @@ Page constructor builder 会自动处理图片、图标和其他文件等静态�
 # page-builder.config.yml
 input: ./pages
 output: ./dist
-assets: ./assets # Assets directory to copy
+assets: ./assets # 要复制的资源目录
 ```
 
-**Assets 目录结构：**
+**资源目录结构：**
 
 ```
 assets/
@@ -240,13 +240,13 @@ Page constructor builder 支持为你的静态页面添加 favicon。你可以�
 
 #### 配置
 
-在你的配置文件中添加 `favicon` 选项：
+在配置文件中添加 `favicon` 选项：
 
 ```yaml
 # page-builder.config.yml
-favicon: logo.svg # Local file from assets directory
-# or
-favicon: https://cdn.example.com/favicon.ico # External URL
+favicon: logo.svg # 来自 assets 目录的本地文件
+# 或者
+favicon: https://cdn.example.com/favicon.ico # 外部 URL
 ```
 
 #### 本地 Favicon 文件
@@ -271,13 +271,13 @@ favicon: https://cdn.example.com/favicon.ico # External URL
 # page-builder.config.yml
 favicon: logo.svg                    # assets/ 目录下的文件
 favicon: icons/favicon.ico           # assets/icons/ 子目录下的文件
-favicon: ./custom/path/favicon.png   # 相对于项目的自定义路径
+favicon: ./custom/path/favicon.png   # 相对于项目根目录的自定义路径
 favicon: /absolute/path/favicon.ico  # 绝对路径
 ```
 
 #### 外部 Favicon URL
 
-您也可以使用来自 CDN 或其他域的外部 Favicon URL：
+您也可以使用来自 CDN 或其他域的外部 favicon URL：
 
 ```yaml
 # page-builder.config.yml
@@ -287,13 +287,13 @@ favicon: https://mysite.com/assets/logo.svg
 
 #### 生成的 HTML
 
-构建器会根据 Favicon 类型自动生成相应的 HTML 标签：
+构建器会根据 favicon 类型自动生成相应的 HTML 标签：
 
 ```html
-<!-- 对于 SVG Favicon -->
+<!-- 对于 SVG favicons -->
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
 
-<!-- 对于 ICO Favicon (包括对旧版浏览器的支持) -->
+<!-- 对于 ICO favicons (包括对旧版浏览器的支持) -->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="shortcut icon" href="assets/favicon.ico" />
 
@@ -303,11 +303,11 @@ favicon: https://mysite.com/assets/logo.svg
 
 ### 导航
 
-页面构建器支持出现在所有页面上的全局导航配置。导航通过单独的 YAML 文件进行配置。
+页面构建器支持全局导航配置，该配置会显示在所有页面上。导航通过一个单独的 YAML 文件进行配置。
 
 #### 导航配置
 
-在项目根目录创建一个 `navigation.yml` 文件（或在您的配置中指定自定义路径）：
+在项目根目录创建一个 `navigation.yml` 文件（或在您的配置文件中指定自定义路径）：
 
 ```yaml
 # navigation.yml
@@ -367,4 +367,23 @@ navigation:
 blocks:
   - type: header-block
     title: 此页面具有自定义导航
+```
+
+### 分析配置
+
+将 `analytics` 字段添加到您的 `page-builder.config.yml`：
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js`:
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
 ```
