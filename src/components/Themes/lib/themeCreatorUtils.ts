@@ -35,11 +35,11 @@ import {RadiusPresetName, TypographyOptions} from './types';
 import {DefaultFontFamily, defaultTypographyPreset} from './typography/constants';
 import {createFontLinkImport} from './typography/utils';
 
-function createColorToken(title: string) {
+export function createColorToken(title: string) {
     return kebabCase(title);
 }
 
-function createTitleFromToken(token: string) {
+export function createTitleFromToken(token: string) {
     return capitalize(lowerCase(token));
 }
 
@@ -53,7 +53,7 @@ export function createPrivateColorCssVariableFromToken(privateColorToken: string
     return '';
 }
 
-function isManuallyCreatedToken(token: string) {
+export function isManuallyCreatedPaletteToken(token: string) {
     return !DEFAULT_PALETTE_TOKENS.has(token);
 }
 
@@ -273,17 +273,19 @@ export type ChangeUtilityColorInThemeParams = {
     themeVariant: Theme;
     name: UtilityColor;
     value: string;
+    ref?: string;
 };
 
 export function changeUtilityColorInTheme(
     themeState: ThemeCreatorState,
-    {themeVariant, name, value}: ChangeUtilityColorInThemeParams,
+    {themeVariant, name, value, ref}: ChangeUtilityColorInThemeParams,
 ): ThemeCreatorState {
     const updatedGravityTheme = updateUtilityColor({
         theme: themeState.gravityTheme,
         themeVariant,
         colorToken: name,
         value,
+        ref,
     });
 
     return {...themeState, gravityTheme: updatedGravityTheme};
@@ -323,7 +325,7 @@ export function getThemePalette(theme: ThemeCreatorState): Palette {
                 light: baseColors[token].light.value,
                 dark: baseColors[token].dark.value,
             },
-            isCustom: isManuallyCreatedToken(token),
+            isCustom: isManuallyCreatedPaletteToken(token),
         };
     });
 }
@@ -358,6 +360,7 @@ export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
             values: RADIUS_PRESETS[bordersPreset],
         },
         typography: defaultTypographyPreset,
+        colorsSettingsType: 'basic',
     };
 }
 

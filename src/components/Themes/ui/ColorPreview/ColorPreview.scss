@@ -32,4 +32,8 @@ $block: '.#{variables.$ns}color-preview';
             background: var(--opacity-pattern);
         }
     }
+
+    &_with-borders {
+        border: 1px solid var(--g-color-line-generic);
+    }
 }
