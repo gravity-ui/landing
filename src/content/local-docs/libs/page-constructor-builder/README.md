@@ -368,3 +368,22 @@ blocks:
   - type: header-block
     title: This page has custom navigation
 ```
+
+### Analytics Configuration
+
+Add the `analytics` field to your `page-builder.config.yml`:
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js`:
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
+```

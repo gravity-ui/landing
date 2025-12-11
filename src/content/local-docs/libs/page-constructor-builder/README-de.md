@@ -37,12 +37,12 @@ minify: true
 
 ```yaml
 meta:
-  title: Hello, World
+  title: Hallo, Welt
   description: Eine einfache Seite des Seitenkonstruktors
 
 blocks:
   - type: header-block
-    title: Hello, World
+    title: Hallo, Welt
     description: |
       Erstellen Sie schöne statische Seiten aus **YAML-Konfigurationen** mit der Leistung von
       [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor).
@@ -81,9 +81,9 @@ page-builder build [optionen]
 - `-c, --config <pfad>`: Pfad zur Konfigurationsdatei (Standard: "./page-builder.config.yml")
 - `--css <dateien...>`: Benutzerdefinierte CSS-Dateien, die eingeschlossen werden sollen
 - `--components <pfad>`: Verzeichnis für benutzerdefinierte Komponenten
-- `--navigation <pfad>`: Datei für Navigationsdaten
-- `--assets <pfad>`: Verzeichnis für statische Assets, die kopiert werden sollen
-- `--theme <thema>`: Thema (light|dark) (Standard: "light")
+- `--navigation <pfad>`: Datei mit Navigationsdaten
+- `--assets <pfad>`: Verzeichnis mit statischen Assets, die kopiert werden sollen
+- `--theme <theme>`: Thema (light|dark) (Standard: "light")
 - `--base-url <url>`: Basis-URL für die Website
 - `--minify`: Minifizierung aktivieren
 - `--source-maps`: Source Maps generieren
@@ -293,7 +293,7 @@ Der Builder generiert automatisch die entsprechenden HTML-Tags basierend auf dem
 <!-- Für SVG-Favicons -->
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
 
-<!-- Für ICO-Favicons (beinhaltet Unterstützung für ältere Browser) -->
+<!-- Für ICO-Favicons (einschließlich Unterstützung für ältere Browser) -->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <link rel="shortcut icon" href="assets/favicon.ico" />
 
@@ -303,11 +303,11 @@ Der Builder generiert automatisch die entsprechenden HTML-Tags basierend auf dem
 
 ### Navigation
 
-Der Page Constructor Builder unterstützt die globale Navigationskonfiguration, die auf allen Seiten angezeigt wird. Die Navigation wird über eine separate YAML-Datei konfiguriert.
+Der Page-Constructor-Builder unterstützt die globale Konfiguration der Navigation, die auf allen Seiten angezeigt wird. Die Navigation wird über eine separate YAML-Datei konfiguriert.
 
 #### Navigationskonfiguration
 
-Erstellen Sie eine `navigation.yml`-Datei im Stammverzeichnis Ihres Projekts (oder geben Sie einen benutzerdefinierten Pfad in Ihrer Konfiguration an):
+Erstellen Sie eine `navigation.yml`-Datei in Ihrem Projektstammverzeichnis (oder geben Sie einen benutzerdefinierten Pfad in Ihrer Konfiguration an):
 
 ```yaml
 # navigation.yml
@@ -321,23 +321,23 @@ header:
     - text: Home
       url: 'index.html'
       type: 'link'
-    - text: About
+    - text: Über uns
       url: 'about.html'
       type: 'link'
-    - text: Documentation
+    - text: Dokumentation
       url: 'https://external-site.com/docs'
       type: 'link'
   rightItems:
     - text: GitHub
       url: 'https://github.com/your-repo'
       type: 'link'
-    - text: Contact
+    - text: Kontakt
       url: 'contact.html'
       type: 'link'
 
 footer:
   leftItems:
-    - text: Privacy Policy
+    - text: Datenschutzrichtlinie
       url: 'privacy.html'
       type: 'link'
   rightItems:
@@ -345,7 +345,7 @@ footer:
       type: 'text'
 ```
 
-#### Seitenindividuelle Navigationsüberschreibung
+#### Überschreiben der Navigation pro Seite
 
 Sie können die Navigation für bestimmte Seiten überschreiben, indem Sie einen `navigation`-Abschnitt direkt in Ihrer Seiten-YAML hinzufügen:
 
@@ -367,4 +367,23 @@ navigation:
 blocks:
   - type: header-block
     title: Diese Seite hat eine benutzerdefinierte Navigation
+```
+
+### Analysekonfiguration
+
+Fügen Sie das Feld `analytics` zu Ihrer `page-builder.config.yml` hinzu:
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js`:
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
 ```

@@ -1,13 +1,6 @@
-```html
-<div class="language-selector">
-  <a href="/README.md">English</a>
-  <a href="/README.es.md">Español</a>
-</div>
-```
-
 # Page Constructor Builder
 
-Una potente utilidad de línea de comandos para construir páginas estáticas a partir de configuraciones YAML utilizando el paquete [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor). Consulta [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/) para obtener detalles de la configuración.
+Una potente utilidad de línea de comandos para construir páginas estáticas a partir de configuraciones YAML utilizando el paquete [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor). Consulta [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/) para obtener detalles de configuración.
 
 ## Inicio Rápido
 
@@ -17,7 +10,7 @@ Una potente utilidad de línea de comandos para construir páginas estáticas a 
 npm install @gravity-ui/page-constructor-builder
 ```
 
-2. **Añadir comando de compilación a package.json:**
+2. **Añadir comando de construcción a package.json:**
 
 ```json
 {
@@ -45,19 +38,19 @@ minify: true
 ```yaml
 meta:
   title: Hola, Mundo
-  description: Una página simple del constructor de páginas
+  description: Una página simple de constructor de páginas
 
 blocks:
   - type: header-block
     title: Hola, Mundo
     description: |
-      Crea páginas estáticas hermosas a partir de **configuraciones YAML** con el poder de
+      Crea páginas estáticas atractivas a partir de **configuraciones YAML** utilizando la potencia de
       [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor).
     background:
       color: '#f8f9fa'
 ```
 
-4. **Compilar tus páginas:**
+4. **Construir tus páginas:**
 
 ```bash
 npm run build
@@ -75,22 +68,22 @@ open dist/index.html
 
 #### `page-builder build`
 
-Compila páginas a partir de configuraciones YAML.
+Construye páginas a partir de configuraciones YAML.
 
 ```bash
-page-builder build [options]
+page-builder build [opciones]
 ```
 
 **Opciones:**
 
-- `-i, --input <path>`: Directorio de entrada que contiene archivos YAML (por defecto: "./pages")
-- `-o, --output <path>`: Directorio de salida para los archivos compilados (por defecto: "./dist")
-- `-c, --config <path>`: Ruta del archivo de configuración (por defecto: "./page-builder.config.yml")
-- `--css <files...>`: Archivos CSS personalizados para incluir
-- `--components <path>`: Directorio de componentes personalizados
-- `--navigation <path>`: Archivo de datos de navegación
-- `--assets <path>`: Directorio de activos estáticos para copiar
-- `--theme <theme>`: Tema (light|dark) (por defecto: "light")
+- `-i, --input <ruta>`: Directorio de entrada que contiene archivos YAML (por defecto: "./pages")
+- `-o, --output <ruta>`: Directorio de salida para los archivos construidos (por defecto: "./dist")
+- `-c, --config <ruta>`: Ruta del archivo de configuración (por defecto: "./page-builder.config.yml")
+- `--css <archivos...>`: Archivos CSS personalizados para incluir
+- `--components <ruta>`: Directorio de componentes personalizados
+- `--navigation <ruta>`: Archivo de datos de navegación
+- `--assets <ruta>`: Directorio de activos estáticos para copiar
+- `--theme <tema>`: Tema (light|dark) (por defecto: "light")
 - `--base-url <url>`: URL base para el sitio
 - `--minify`: Habilitar minificación
 - `--source-maps`: Generar mapas de origen
@@ -149,7 +142,7 @@ blocks:
 
 ### Componentes Personalizados
 
-Crea componentes de React en tu directorio de componentes:
+Crea componentes React en tu directorio de componentes:
 
 ```typescript
 // components/CustomBlock.tsx
@@ -222,7 +215,7 @@ assets/
     └── brochure.pdf
 ```
 
-**Uso de Activos en Tus Páginas:**
+**Uso de Activos en tus Páginas:**
 
 ```yaml
 # pages/index.yml
@@ -262,7 +255,7 @@ Para archivos favicon locales, el constructor:
 
 - Detectará automáticamente el archivo en tu directorio de activos
 - Lo copiará al directorio de salida
-- Generará etiquetas `<link>` HTML adecuadas con los tipos MIME correctos
+- Generará etiquetas `<link>` HTML correctas con los tipos MIME adecuados
 
 **Formatos de archivo compatibles:**
 
@@ -273,7 +266,6 @@ Para archivos favicon locales, el constructor:
 - **GIF** (animado) - `image/gif`
 
 **Ejemplos:**
-```
 
 ```yaml
 # page-builder.config.yml
@@ -375,4 +367,23 @@ navigation:
 blocks:
   - type: header-block
     title: Esta página tiene navegación personalizada
+```
+
+### Configuración de Analíticas
+
+Añade el campo `analytics` a tu `page-builder.config.yml`:
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js`:
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
 ```
