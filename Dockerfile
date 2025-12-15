@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:24-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -36,7 +36,7 @@ RUN --mount=type=secret,id=s3_access_key_id \
     unset AWS_ACCESS_KEY_ID && \
     unset AWS_SECRET_ACCESS_KEY
 
-FROM node:18-alpine AS runner
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
