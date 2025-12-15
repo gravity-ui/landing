@@ -14,7 +14,7 @@
       {
         "type": "blog-feed-block",
         "resetPaddings": true,
-        "image": "https://storage.yandexcloud.net/cloud-www-assets/constructor/storybook/images/img_8-12_light.png",
+        "image": "https://storage.yandexcloud.net/yandex-opensource/blog-cover-bg.png",
         "title": "Blog"
       }
     ]
