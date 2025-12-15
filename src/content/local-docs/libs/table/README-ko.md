@@ -83,7 +83,7 @@ const RowSelectionExample = () => {
 
 ### 사용자 정의 범위 선택 컬럼
 
-`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 접근하려면 `CellContext` 인스턴스를 전달해야 합니다.
+`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 행 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 액세스하려면 `CellContext` 인스턴스를 전달해야 합니다.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-`RangedSelectionCheckbox` 컴포넌트도 제공됩니다. 이 컴포넌트는 내부적으로 훅을 사용하며 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 데 편리합니다.
+`CellContext` 인스턴스를 prop으로 받는 `RangedSelectionCheckbox` 컴포넌트도 있습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 바로 가기를 제공합니다.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -198,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-기본적으로 `selectionColumn`으로 생성된 선택 컬럼은 범위 선택 기능을 포함합니다.
+기본적으로 `selectionColumn`으로 생성된 선택 컬럼에는 범위 선택 기능이 포함됩니다.
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -214,7 +214,7 @@ const columns: ColumnDef<Person>[] = [
 
 ### 정렬
 
-`react-table`의 컬럼 속성에 대해 [문서](https://tanstack.com/table/v8/docs/guide/sorting)에서 알아보세요.
+react-table의 컬럼 속성에 대해 알아보세요. [문서](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -319,11 +319,11 @@ const GroupingExample = () => {
 };
 ```
 
-선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행의 체크박스 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
+선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행 체크박스의 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
 
-중첩 스타일을 활성화하려면 컬럼 설정에서 `withNestingStyles = true`를 전달하세요.
+중첩 스타일을 활성화하려면 컬럼 구성에서 `withNestingStyles = true`를 전달하세요.
 
-중첩 표시기는 `showTreeDepthIndicators = false`를 전달하여 비활성화할 수 있습니다.
+`showTreeDepthIndicators = false`를 전달하여 중첩 표시기를 비활성화할 수 있습니다.
 
 행을 확장/축소하는 컨트롤을 추가하려면 셀 내용을 `TreeExpandableCell` 컴포넌트 또는 유사한 사용자 정의 컴포넌트로 감싸세요.
 
@@ -394,7 +394,7 @@ const ReorderingExample = () => {
 
 ### 가상화
 
-그리드 컨테이너를 스크롤 요소로 사용하려는 경우 (창 가상화 섹션에서 창을 사용하려는 경우) 사용하세요. 가상화가 작동하려면 컨테이너에 고정된 높이를 설정해야 합니다.
+그리드 컨테이너를 스크롤 요소로 사용하려는 경우 사용하세요 (창 가상화 섹션에서 창을 사용하려는 경우). 가상화가 작동하려면 컨테이너에 고정 높이를 설정해야 합니다.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -481,7 +481,7 @@ const WindowVirtualizationExample = () => {
 ```
 
 ```tsx
-const rowVirtualizer = useWindowRowVirtualizer({
+  const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
     overscan: 5,
@@ -492,7 +492,7 @@ const rowVirtualizer = useWindowRowVirtualizer({
 };
 ```
 
-### 크기 조절
+### 크기 조정
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -519,7 +519,7 @@ const ResizingDemo = () => {
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
-  // ...다른 컬럼들
+  // ...other columns
   {
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
@@ -540,10 +540,10 @@ const TableSettingsDemo = () => {
     column_id: false, // 기본적으로 숨김 처리
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* 리프 컬럼 ID */
+    /* leaf columns ids */
   ]); // 외부 제어 및 초기 상태용
 
-  // useTableSettings 훅을 사용하여 상태, 콜백, 설정 적용 시 콜백을 가져오는 대체 방법:
+  // useTableSettings 훅을 사용하여 상태, 콜백, 설정 적용 시 콜백을 가져오는 대안:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -561,4 +561,59 @@ const TableSettingsDemo = () => {
 };
 ```
 
-react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 컬럼 크기 조절 속성에 대해 자세히 알아보세요.
+react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 컬럼 크기 조정 속성에 대해 자세히 알아보세요.
+
+## 알려진 문제 및 호환성
+
+### React 19 + React Compiler 호환성
+
+**⚠️ 알려진 문제:** `@gravity-ui/table`(TanStack Table 기반)을 사용할 때 React 19 및 React Compiler와 호환성 문제가 있습니다. 데이터가 변경되어도 테이블이 다시 렌더링되지 않을 수 있습니다. 자세한 내용은 [TanStack Table 이슈 #5567](https://github.com/TanStack/table/issues/5567)을 참조하세요.
+
+**해결 방법:**
+
+React 19와 React Compiler를 사용하고 있으며 테이블 다시 렌더링 문제로 어려움을 겪고 있다면, 컴포넌트 코드에서 `'use no memo'` 지시문을 사용할 수 있습니다.
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  'use no memo'; // 이 컴포넌트에 대한 React Compiler 메모이제이션 비활성화
+
+  const [data, setData] = React.useState<Person[]>([]);
+
+  const table = useTable({
+    data,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**대안:**
+
+테이블 인스턴스 또는 데이터를 명시적으로 메모이제이션하여 적절한 다시 렌더링을 보장할 수도 있습니다.
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
+  // 다시 렌더링을 보장하기 위해 데이터를 명시적으로 메모이제이션
+  const memoizedData = React.useMemo(() => data, [data]);
+
+  const table = useTable({
+    data: memoizedData,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**참고:** 이 문제는 기본 TanStack Table 라이브러리에 있으며 해당 라이브러리에서 수정되어야 합니다. 위의 해결 방법은 수정이 제공될 때까지 도움이 될 것입니다.
