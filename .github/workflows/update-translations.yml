@@ -55,7 +55,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 24
       - name: Create pull request
         id: create-pr
         env:
