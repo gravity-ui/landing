@@ -17,7 +17,12 @@ import {useMemo, useState} from 'react';
 import {Api} from '../../api';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
+import {block} from '../../utils';
 import {getI18nProps} from '../../utils/i18next';
+
+import './index.scss';
+
+const b = block('blog-page');
 
 interface BlogIndexProps {
     postsData: PostsProps;
@@ -146,35 +151,37 @@ export default function BlogIndex({
                 image: 'https://gravity-ui.com/index-social.png',
             }}
         >
-            <BlogConstructorProvider
-                isMobile={isMobile}
-                theme={Theme.Dark}
-                router={routerData}
-                locale={locale as unknown as Locale}
-                analytics={analytics}
-                settings={BLOG_CONSTRUCTOR_SETTINGS}
-            >
-                <BlogPage
-                    content={pageContent}
-                    posts={posts}
-                    tags={tags}
-                    services={services}
-                    getPosts={handleGetPosts}
-                    settings={{
-                        isMobile,
-                        theme: Theme.Dark,
-                        projectSettings: {
-                            disableCompress: false,
-                        },
-                        analytics,
-                    }}
-                    // TODO: Uncomment when authentication functionality is implemented
-                    // hasLikes={enableSavePost}
-                    // toggleLike={enableSavePost ? setLikeStatus : undefined}
-                    // isSignedInUser={isSignedInUser}
-                    // onClickSignIn={openSignInURL}
-                />
-            </BlogConstructorProvider>
+            <div className={b()}>
+                <BlogConstructorProvider
+                    isMobile={isMobile}
+                    theme={Theme.Dark}
+                    router={routerData}
+                    locale={locale as unknown as Locale}
+                    analytics={analytics}
+                    settings={BLOG_CONSTRUCTOR_SETTINGS}
+                >
+                    <BlogPage
+                        content={pageContent}
+                        posts={posts}
+                        tags={tags}
+                        services={services}
+                        getPosts={handleGetPosts}
+                        settings={{
+                            isMobile,
+                            theme: Theme.Dark,
+                            projectSettings: {
+                                disableCompress: false,
+                            },
+                            analytics,
+                        }}
+                        // TODO: Uncomment when authentication functionality is implemented
+                        // hasLikes={enableSavePost}
+                        // toggleLike={enableSavePost ? setLikeStatus : undefined}
+                        // isSignedInUser={isSignedInUser}
+                        // onClickSignIn={openSignInURL}
+                    />
+                </BlogConstructorProvider>
+            </div>
         </Layout>
     );
 }
