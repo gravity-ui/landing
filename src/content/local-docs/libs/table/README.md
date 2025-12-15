@@ -560,3 +560,58 @@ const TableSettingsDemo = () => {
 ```
 
 Learn more about the table and the column resizing properties in the react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
+
+## Known Issues and Compatibility
+
+### React 19 + React Compiler Compatibility
+
+**⚠️ Known Issue:** There is a known compatibility issue with React 19 and React Compiler when using `@gravity-ui/table` (which is built on top of TanStack Table). The table may not re-render when data changes. See [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567) for details.
+
+**Workaround:**
+
+If you're using React 19 with React Compiler and experiencing issues with table re-rendering, you can use the `'use no memo'` directive in your component code:
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  'use no memo'; // Disable React Compiler memoization for this component
+
+  const [data, setData] = React.useState<Person[]>([]);
+
+  const table = useTable({
+    data,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**Alternative Solution:**
+
+You can also explicitly memoize the table instance or data to ensure proper re-renders:
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
+  // Explicitly memoize data to ensure re-renders
+  const memoizedData = React.useMemo(() => data, [data]);
+
+  const table = useTable({
+    data: memoizedData,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**Note:** This issue is in the underlying TanStack Table library and will need to be fixed there. The workarounds above should help until a fix is available.
