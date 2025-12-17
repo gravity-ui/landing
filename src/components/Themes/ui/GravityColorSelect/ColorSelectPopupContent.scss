@@ -10,7 +10,7 @@ $block: '.#{variables.$ns}private-colors-select-popup';
     &_version {
         &_desktop {
             width: 465px;
-            height: 472px;
+            height: 496px;
             border-radius: 8px;
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
@@ -33,7 +33,7 @@ $block: '.#{variables.$ns}private-colors-select-popup';
 
     &__left,
     &__right {
-        padding: var(--g-spacing-2) var(--g-spacing-2) 0;
+        padding: var(--g-spacing-2) var(--g-spacing-2);
         height: 100%;
         overflow: auto;
     }
@@ -60,12 +60,21 @@ $block: '.#{variables.$ns}private-colors-select-popup';
         display: flex;
         align-items: center;
         gap: var(--g-spacing-1);
-        padding: 5px var(--g-spacing-2);
+        padding: 3px var(--g-spacing-2);
+
+        &_disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     }
 
     &__colors-select {
         width: 100%;
         --g-border-radius-xl: 8px;
         padding-bottom: var(--g-spacing-3);
+    }
+
+    &__divider {
+        margin: var(--g-spacing-2) 0;
     }
 }

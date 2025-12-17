@@ -1,0 +1,19 @@
+@use '../../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}basic-color-settings';
+
+#{$block} {
+    &__wrapper {
+        gap: calc(var(--g-spacing-base) * 24);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            gap: calc(var(--g-spacing-base) * 12);
+        }
+    }
+
+    &__switch-button {
+        --g-button-border-radius: 8px;
+        width: fit-content;
+    }
+}

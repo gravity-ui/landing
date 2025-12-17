@@ -1,1 +1,0 @@
-export {PrivateColorSelect} from './PrivateColorSelect';
