@@ -14,6 +14,7 @@
     "description_app-layout": "SPA 애플리케이션에서 사용되는 HTML 레이아웃 생성기.",
     "description_app-builder": "SPA 애플리케이션에서 사용되는 Webpack 기반 정적 에셋 빌더.",
     "description_navigation": "복잡한 서비스를 위한 작고 확장 가능한 탐색 패널.",
+    "description_aikit": "Atomic Design 원칙에 기반한 SDK 독립적인 UI 라이브러리로 AI 채팅을 구축합니다.",
     "description_date-utils": "날짜 및 시간 값 관리를 위한 도우미.",
     "description_date-components": "다양한 날짜 컴포넌트.",
     "description_axios-wrapper": "동시 요청의 자동 취소를 제공하는 Axios 래퍼.",

@@ -14,6 +14,7 @@
     "description_app-layout": "在我们的 SPA 应用中使用的 HTML 布局生成器。",
     "description_app-builder": "在我们的 SPA 应用中使用的基于 Webpack 的静态资源构建器。",
     "description_navigation": "用于复杂服务的紧凑且可扩展的导航面板。",
+    "description_aikit": "基于原子设计原则构建的 SDK 无关 UI 库，用于创建 AI 聊天。",
     "description_date-utils": "用于管理日期和时间值的辅助函数。",
     "description_date-components": "各种日期组件。",
     "description_axios-wrapper": "Axios 包装器，提供并发请求的自动取消功能。",

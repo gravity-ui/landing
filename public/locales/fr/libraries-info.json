@@ -14,6 +14,7 @@
     "description_app-layout": "Générateur de mise en page HTML utilisé dans nos applications SPA.",
     "description_app-builder": "Constructeur d'actifs statiques basé sur Webpack utilisé dans nos applications SPA.",
     "description_navigation": "Un panneau de navigation compact et extensible pour les services complexes.",
+    "description_aikit": "Bibliothèque UI indépendante du SDK pour créer des chats IA avec les principes de l'Atomic Design.",
     "description_date-utils": "Utilitaires pour la gestion des valeurs de date et d'heure.",
     "description_date-components": "Divers composants de date.",
     "description_axios-wrapper": "Wrapper Axios qui permet l'annulation automatique des requêtes concurrentes.",

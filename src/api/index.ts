@@ -487,7 +487,7 @@ export class Api {
         return libs.sort((lib1, lib2) => {
             const order = [
                 'uikit',
-                'navigation',
+                'aikit',
                 'date-components',
                 'markdown-editor',
                 'graph',
