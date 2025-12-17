@@ -491,6 +491,7 @@ export class Api {
                 'date-components',
                 'markdown-editor',
                 'graph',
+                'navigation',
                 'page-constructor',
                 'dashkit',
             ];
