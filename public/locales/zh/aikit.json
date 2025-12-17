@@ -1,0 +1,17 @@
+{
+  "goToLibrary": "前往库",
+  "title": "AIKit 演示",
+  "chat": {
+    "title": "AI 聊天",
+    "emptyTitle": "开始对话",
+    "emptyDescription": "向我询问关于AI、编程或任何其他主题的问题！",
+    "placeholder": "输入您的消息..."
+  },
+  "welcome": {
+    "title": "欢迎使用 AI 聊天",
+    "description": "输入消息开始对话。"
+  },
+  "error": {
+    "apiError": "抱歉，发生了错误。请重试。"
+  }
+}
