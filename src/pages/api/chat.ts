@@ -2,17 +2,17 @@ import type {NextApiRequest, NextApiResponse} from 'next';
 import OpenAI from 'openai';
 
 /**
- * Конфигурация API route для поддержки streaming
+ * API route configuration to support streaming
  */
 export const config = {
     api: {
-        // Отключаем буферизацию ответа
+        // Disable response buffering
         responseLimit: false,
     },
 };
 
 /**
- * Тип сообщения в чате
+ * Chat message type
  */
 export type ChatMessage = {
     role: 'user' | 'assistant' | 'system';
@@ -20,11 +20,10 @@ export type ChatMessage = {
 };
 
 /**
- * Тело запроса к API чата
+ * Chat API request body
  */
 type ChatRequestBody = {
     messages: ChatMessage[];
-    model?: string;
 };
 
 const YANDEX_CLOUD_FOLDER = process.env.YANDEX_CLOUD_FOLDER;
@@ -36,22 +35,19 @@ const SYSTEM_PROMPT =
     'You are a helpful AI assistant. Respond in the same language as the user message.';
 
 /**
- * API endpoint для взаимодействия с Yandex Cloud AI
- * Использует OpenAI-совместимый API со streaming
+ * API endpoint for Yandex Cloud AI interaction
+ * Uses OpenAI-compatible API with streaming
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    // Разрешаем только POST запросы
+    // Only allow POST requests
     if (req.method !== 'POST') {
         return res.status(405).json({error: 'Method not allowed'});
     }
 
     try {
-        // eslint-disable-next-line no-console
-        console.log('MODEL', MODEL);
+        const {messages} = req.body as ChatRequestBody;
 
-        const {messages, model = MODEL} = req.body as ChatRequestBody;
-
-        // Проверяем наличие сообщений
+        // Validate messages
         if (!messages || !Array.isArray(messages) || messages.length === 0) {
             return res.status(400).json({error: 'Messages are required'});
         }
@@ -64,54 +60,54 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             },
         });
 
-        // Настраиваем заголовки для SSE
+        // Set SSE headers
         res.setHeader('Content-Type', 'text/event-stream');
         res.setHeader('Cache-Control', 'no-cache');
         res.setHeader('Connection', 'keep-alive');
         res.flushHeaders();
 
-        // Фильтруем системные сообщения из input (они идут в instructions)
+        // Filter system messages from input (they go to instructions)
         const inputMessages = messages.filter((msg) => msg.role !== 'system');
 
-        // Создаём streaming запрос через Responses API
+        // Create streaming request via Responses API
         const events = await openai.responses.create({
-            model,
+            model: MODEL,
             input: inputMessages,
             instructions: SYSTEM_PROMPT,
             stream: true,
         });
 
-        // Обрабатываем поток событий
+        // Process event stream
         for await (const event of events) {
-            // Отправляем все события клиенту
+            // Send all events to client
             const data = JSON.stringify({
                 event: event.type,
                 data: event,
             });
             res.write(`data: ${data}\n\n`);
 
-            // Принудительно сбрасываем буфер (если доступен метод flush)
+            // Force flush buffer if flush method is available
             const resWithFlush = res as unknown as {flush?: () => void};
             if (typeof resWithFlush.flush === 'function') {
                 resWithFlush.flush();
             }
         }
 
-        // Сигнализируем о завершении потока
+        // Signal stream completion
         res.write('data: [DONE]\n\n');
         return res.end();
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error in chat API:', error);
 
-        // Если заголовки ещё не отправлены, отправляем JSON ошибку
+        // If headers not sent yet, send JSON error
         if (!res.headersSent) {
             return res.status(500).json({
                 error: error instanceof Error ? error.message : 'Unknown error',
             });
         }
 
-        // Если streaming уже начался, отправляем ошибку через SSE
+        // If streaming already started, send error via SSE
         res.write(
             `data: ${JSON.stringify({
                 error: error instanceof Error ? error.message : 'Unknown error',

@@ -17,7 +17,7 @@ import './AikitPlayground.scss';
 const b = block('aikit-playground');
 
 /**
- * Тип сообщения для API
+ * API message type
  */
 type ApiMessage = {
     role: 'user' | 'assistant' | 'system';
@@ -25,7 +25,7 @@ type ApiMessage = {
 };
 
 /**
- * Тип события из Responses API
+ * Responses API event type
  */
 type ResponseEvent = {
     event: string;
@@ -40,7 +40,7 @@ type ResponseEvent = {
 };
 
 /**
- * Парсит данные из SSE потока
+ * Parses data from SSE stream
  */
 function parseStreamData(line: string): ResponseEvent | null {
     try {
@@ -51,10 +51,10 @@ function parseStreamData(line: string): ResponseEvent | null {
 }
 
 /**
- * Извлекает текст из события Responses API
+ * Extracts text from Responses API event
  */
 function extractTextFromEvent(event: ResponseEvent): string | null {
-    // Обрабатываем события с текстовыми дельтами
+    // Handle text delta events
     const isOutputTextDelta =
         event.event === 'response.output_text.delta' ||
         event.data?.type === 'response.output_text.delta';
@@ -63,7 +63,7 @@ function extractTextFromEvent(event: ResponseEvent): string | null {
         return event.data?.delta || null;
     }
 
-    // Обрабатываем события контента
+    // Handle content part events
     const isContentPartDelta =
         event.event === 'response.content_part.delta' ||
         event.data?.type === 'response.content_part.delta';
@@ -72,7 +72,7 @@ function extractTextFromEvent(event: ResponseEvent): string | null {
         return event.data?.delta || null;
     }
 
-    // Fallback для старого формата
+    // Fallback for legacy format
     if (event.event === 'content' && event.data?.content) {
         return event.data.content;
     }
@@ -81,14 +81,14 @@ function extractTextFromEvent(event: ResponseEvent): string | null {
 }
 
 /**
- * Извлекает текстовое содержимое из сообщения чата
+ * Extracts text content from chat message
  */
 function getMessageContent(message: TChatMessage): string {
     if (message.role === 'user') {
         return message.content;
     }
 
-    // Для assistant сообщений content может быть разных типов
+    // For assistant messages, content can be of different types
     const {content} = message;
 
     if (typeof content === 'string') {
@@ -115,8 +115,8 @@ function getMessageContent(message: TChatMessage): string {
 }
 
 /**
- * Компонент Playground для демонстрации AIKit
- * Использует API endpoint /api/chat для взаимодействия с OpenAI
+ * AIKit Playground component
+ * Uses /api/chat endpoint for OpenAI interaction
  */
 export const AikitPlayground = memo(() => {
     const {t} = useTranslation('aikit');
@@ -126,12 +126,12 @@ export const AikitPlayground = memo(() => {
     const [controller, setController] = useState<AbortController | null>(null);
 
     /**
-     * Обработчик отправки сообщения
-     * Поддерживает streaming ответов от API
+     * Message send handler
+     * Supports streaming responses from API
      */
     const handleSendMessage = useCallback(
         async (data: TSubmitData) => {
-            // Добавляем сообщение пользователя
+            // Add user message
             const userMessage: TUserMessage = {
                 id: Date.now().toString(),
                 role: 'user',
@@ -139,13 +139,13 @@ export const AikitPlayground = memo(() => {
             };
             setMessages((prev) => [...prev, userMessage]);
 
-            // Запускаем streaming
+            // Start streaming
             setStatus('submitted');
             const abortController = new AbortController();
             setController(abortController);
 
             try {
-                // Формируем историю сообщений для API
+                // Build message history for API
                 const apiMessages: ApiMessage[] = [
                     {
                         role: 'system',
@@ -180,10 +180,10 @@ export const AikitPlayground = memo(() => {
 
                 const decoder = new TextDecoder();
 
-                // ID сообщения ассистента для обновления
+                // Assistant message ID for updates
                 const assistantMessageId = (Date.now() + 1).toString();
 
-                // Добавляем пустое сообщение ассистента
+                // Add empty assistant message
                 setMessages((prev) => [
                     ...prev,
                     {
@@ -194,11 +194,11 @@ export const AikitPlayground = memo(() => {
                 ]);
 
                 let buffer = '';
-                // Локальная переменная для накопления текста
+                // Local variable for text accumulation
                 let accumulatedContent = '';
 
                 setStatus('streaming');
-                // Читаем поток данных
+                // Read data stream
                 // eslint-disable-next-line no-constant-condition
                 while (true) {
                     const {done, value} = await reader.read();
@@ -231,9 +231,9 @@ export const AikitPlayground = memo(() => {
 
                         const textContent = extractTextFromEvent(parsedEvent);
                         if (textContent) {
-                            // Накапливаем текст в локальной переменной
+                            // Accumulate text in local variable
                             accumulatedContent += textContent;
-                            // Копируем значение для замыкания
+                            // Copy value for closure
                             const newContent = accumulatedContent;
 
                             setMessages((prev) => {
@@ -255,7 +255,7 @@ export const AikitPlayground = memo(() => {
                     // eslint-disable-next-line no-console
                     console.error('Chat error:', error);
 
-                    // Добавляем сообщение об ошибке
+                    // Add error message
                     const errorMessage: TAssistantMessage = {
                         id: (Date.now() + 2).toString(),
                         role: 'assistant',
@@ -263,7 +263,7 @@ export const AikitPlayground = memo(() => {
                     };
 
                     setMessages((prev) => {
-                        // Удаляем пустое сообщение ассистента, если оно есть
+                        // Remove empty assistant message if exists
                         const filtered = prev.filter(
                             (msg) => msg.role !== 'assistant' || msg.content !== '',
                         );
@@ -279,7 +279,7 @@ export const AikitPlayground = memo(() => {
     );
 
     /**
-     * Обработчик отмены запроса
+     * Request cancellation handler
      */
     const handleCancel = useCallback(async () => {
         controller?.abort();
