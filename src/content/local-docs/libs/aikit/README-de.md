@@ -1,22 +1,32 @@
-# @gravity-ui/aikit
+# AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-[![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
+UI-Komponentenbibliothek für KI-Chats, aufgebaut nach den Prinzipien des Atomic Design.
 
----
+<!--GITHUB_BLOCK-->
 
-UI-Komponentenbibliothek für KI-Chats, die auf Atomic Design-Prinzipien basiert.
+![Cover image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
+
+## Ressourcen
+
+### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Website](https://gravity-ui.com/libraries/aikit)
+
+### ![Storybook Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Storybook Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/aikit/)
+
+### ![Community Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Community Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Community](https://t.me/gravity_ui)
+
+<!--/GITHUB_BLOCK-->
 
 ## Beschreibung
 
-**@gravity-ui/aikit** ist eine flexible und erweiterbare React-Komponentenbibliothek zum Erstellen von KI-Chats beliebiger Komplexität. Die Bibliothek bietet eine Reihe von fertigen Komponenten, die so wie sie sind verwendet oder an Ihre Bedürfnisse angepasst werden können.
+**@gravity-ui/aikit** ist eine flexible und erweiterbare React-Komponentenbibliothek zum Erstellen von KI-Chats jeder Komplexität. Die Bibliothek bietet eine Reihe von fertigen Komponenten, die entweder direkt verwendet oder an Ihre Bedürfnisse angepasst werden können.
 
 ### Hauptmerkmale
 
 - 🎨 **Atomic Design** — klare Komponentenhierarchie von Atomen bis zu Seiten
 - 🔧 **SDK-unabhängig** — unabhängig von spezifischen KI-SDKs
-- 🎭 **Zwei-Ebenen-Ansatz** — fertige Komponenten + Hooks zur Anpassung
-- 🎨 **CSS-Variablen** — einfache Thematisierung ohne Komponentenüberschreibung
-- 📦 **TypeScript** — vollständige Typsicherheit von Anfang an
+- 🎭 **Zweistufiger Ansatz** — fertige Komponenten + Hooks zur Anpassung
+- 🎨 **CSS-Variablen** — einfaches Theming ohne Komponenten-Overrides
+- 📦 **TypeScript** — volle Typsicherheit von Haus aus
 - 🔌 **Erweiterbar** — System zur Registrierung benutzerdefinierter Nachrichtentypen
 
 ## Projektstruktur
@@ -24,15 +34,15 @@ UI-Komponentenbibliothek für KI-Chats, die auf Atomic Design-Prinzipien basiert
 ```
 src/
 ├── components/
-│   ├── atoms/          # Grundlegende unteilbare UI-Elemente
-│   ├── molecules/      # Einfache Gruppen von Atomen
+│   ├── atoms/          # Grundlegende, unteilbare UI-Elemente
+│   ├── molecules/      # Einfache Gruppierungen von Atomen
 │   ├── organisms/      # Komplexe Komponenten mit Logik
 │   ├── templates/      # Vollständige Layouts
 │   └── pages/          # Vollständige Integrationen mit Daten
 ├── hooks/              # Allgemeine Hooks
 ├── types/              # TypeScript-Typen
 ├── utils/              # Hilfsfunktionen
-└── themes/             # CSS-Themen und Variablen
+└── themes/             # CSS-Themes und Variablen
 ```
 
 ## Installation
@@ -41,7 +51,7 @@ src/
 npm install @gravity-ui/aikit
 ```
 
-## Schnellstart
+## Erste Schritte
 
 ```typescript
 import { ChatContainer } from '@gravity-ui/aikit';
@@ -75,60 +85,60 @@ function App() {
 
 ## Architektur
 
-Die Bibliothek basiert auf **Atomic Design**-Prinzipien:
+Die Bibliothek basiert auf den Prinzipien des **Atomic Design**:
 
 ### 🔹 Atome
 
-Grundlegende unteilbare UI-Elemente ohne Geschäftslogik:
+Grundlegende, unteilbare UI-Elemente ohne Geschäftslogik:
 
-- `ActionButton` — Button mit integriertem Tooltip
-- `Alert` — Warnmeldungen mit Varianten
+- `ActionButton` — Schaltfläche mit integriertem Tooltip
+- `Alert` — Benachrichtigungsnachrichten mit Varianten
 - `ChatDate` — Datumsformatierung mit relativen Daten
-- `ContextIndicator` — Indikator für Token-Kontextnutzung
-- `ContextItem` — Kontextlabel mit Entfernungsaktion
+- `ContextIndicator` — Anzeige der Nutzung von Token-Kontext
+- `ContextItem` — Kontext-Label mit Entfernen-Aktion
 - `DiffStat` — Anzeige von Code-Änderungsstatistiken
-- `Disclaimer` — Haftungsausschluss-Textkomponente
+- `Disclaimer` — Komponente für Haftungsausschlüsse
 - `InlineCitation` — Textzitate
-- `Loader` — Ladeindikator
+- `Loader` — Ladeanzeige
 - `MarkdownRenderer` — Yandex Flavored Markdown Renderer
 - `MessageBalloon` — Nachrichten-Wrapper
 - `Shimmer` — Ladeanimations-Effekt
-- `SubmitButton` — Sende-Button mit Zuständen
-- `ToolIndicator` — Indikator für Tool-Ausführungsstatus
+- `SubmitButton` — Senden-Schaltfläche mit Zuständen
+- `ToolIndicator` — Anzeige des Status der Werkzeugausführung
 
 ### 🔸 Moleküle
 
 Einfache Kombinationen von Atomen:
 
 - `BaseMessage` — Basis-Wrapper für alle Nachrichtentypen
-- `ButtonGroup` — Button-Gruppe mit Orientierungsunterstützung
+- `ButtonGroup` — Schaltflächengruppe mit Ausrichtungsunterstützung
 - `InputContext` — Kontextverwaltung
-- `PromptInputBody` — Textarea mit automatischem Wachstum
-- `PromptInputFooter` — Footer mit Aktions-Icons und Sende-Button
-- `PromptInputHeader` — Header mit Kontextelementen und Indikator
+- `PromptInputBody` — Textbereich mit automatischer Größenanpassung
+- `PromptInputFooter` — Fußzeile mit Aktionssymbolen und Senden-Schaltfläche
+- `PromptInputHeader` — Kopfzeile mit Kontext-Elementen und Indikator
 - `PromptInputPanel` — Panel-Container für benutzerdefinierten Inhalt
-- `Suggestions` — anklickbare Vorschlags-Buttons
-- `Tabs` — Navigations-Tabs mit Löschfunktionalität
-- `ToolFooter` — Tool-Nachrichten-Footer mit Aktionen
-- `ToolHeader` — Tool-Nachrichten-Header mit Icon und Aktionen
+- `Suggestions` — klickbare Vorschlags-Schaltflächen
+- `Tabs` — Navigations-Tabs mit Löschfunktion
+- `ToolFooter` — Fußzeile für Werkzeugnachrichten mit Aktionen
+- `ToolHeader` — Kopfzeile für Werkzeugnachrichten mit Symbol und Aktionen
 
 ### 🔶 Organismen
 
 Komplexe Komponenten mit interner Logik:
 
-- `AssistantMessage` — KI-Assistenten-Nachricht
-- `Header` — Chat-Header
+- `AssistantMessage` — Nachricht des KI-Assistenten
+- `Header` — Chat-Kopfzeile
 - `MessageList` — Nachrichtenliste
-- `PromptInput` — Nachrichteneingabefeld
-- `ThinkingMessage` — KI-Denkprozess
-- `ToolMessage` — Tool-Ausführung
+- `PromptInput` — Eingabefeld für Nachrichten
+- `ThinkingMessage` — Denkprozess der KI
+- `ToolMessage` — Ausführung von Werkzeugen
 - `UserMessage` — Benutzernachricht
 
-### 📄 Templates
+### 📄 Vorlagen
 
 Vollständige Layouts:
 
-- `ChatContent` — Haupt-Chat-Inhalt
+- `ChatContent` — Hauptinhalt des Chats
 - `EmptyContainer` — Leerer Zustand
 - `History` — Chat-Verlauf
 
@@ -136,19 +146,19 @@ Vollständige Layouts:
 
 Vollständige Integrationen:
 
-- `ChatContainer` — vollständig zusammengestellter Chat
+- `ChatContainer` — vollständig zusammengesetzter Chat
 
 ## Dokumentation
 
 - [Schnellstart-Anleitung](./docs/GETTING_STARTED.md)
 - [Architektur](./docs/ARCHITECTURE.md)
 - [Projektstruktur](./docs/PROJECT_STRUCTURE.md)
-- [Test-Anleitung](./docs/TESTING.md)
+- [Testanleitung](./docs/TESTING.md)
 - [Playwright-Anleitung](./playwright/README.md)
 
 ## Tests
 
-Das Projekt verwendet Playwright Component Testing für visuelle Regressions-Tests.
+Das Projekt verwendet Playwright Component Testing für visuelle Regressionstests.
 
 ### Tests ausführen
 
@@ -170,7 +180,7 @@ npm run playwright:docker:clear-cache
 
 ### Lokale Tests (nur Linux)
 
-Wenn Sie auf Linux sind, können Sie Tests lokal ausführen:
+Wenn Sie unter Linux arbeiten, können Sie Tests lokal ausführen:
 
 ```bash
 # Playwright-Browser installieren (einmal ausführen)
@@ -183,13 +193,12 @@ npm run playwright
 npm run playwright:update
 ```
 
-Für detaillierte Testdokumentation siehe [Playwright-Anleitung](./playwright/README.md).
+Detaillierte Testdokumentation finden Sie in der [Playwright-Anleitung](./playwright/README.md).
 
 ## Entwicklung
 
-Entwicklungs- und Beitragsanweisungen sind in [CONTRIBUTING.md](./CONTRIBUTING.md) verfügbar.
+Anweisungen zur Entwicklung und Mitarbeit finden Sie in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Lizenz
 
 MIT
-
