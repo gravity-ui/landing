@@ -8,12 +8,13 @@ curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 export PATH=$PATH:$HOME/yandex-cloud/bin
 
 SECRET_ID="e6q2afdufj7scuv328to"
+OPENAI_SECRET_ID="e6qu1j3jn6msvmv7lqj6"
 
 GITHUB_APP_ID=$(yc lockbox payload get --id $SECRET_ID --key app_id)
 GITHUB_APP_INSTALLATION_ID=$(yc lockbox payload get --id $SECRET_ID --key installation_id)
 GITHUB_APP_PRIVATE_KEY=$(yc lockbox payload get --id $SECRET_ID --key private_key)
-OPENAI_API_KEY=$(yc lockbox payload get --id $SECRET_ID --key openai_api_key)
-OPENAI_MODEL=$(yc lockbox payload get --id $SECRET_ID --key openai_model)
+OPENAI_API_KEY=$(yc lockbox payload get --id $OPENAI_SECRET_ID --key openai_api_key)
+OPENAI_MODEL=$(yc lockbox payload get --id $OPENAI_SECRET_ID --key openai_model)
 
 export GITHUB_APP_ID
 export GITHUB_APP_INSTALLATION_ID
