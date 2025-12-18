@@ -26,11 +26,9 @@ type ChatRequestBody = {
     messages: ChatMessage[];
 };
 
-const YANDEX_CLOUD_FOLDER = process.env.YANDEX_CLOUD_FOLDER;
-const YANDEX_CLOUD_API_KEY = process.env.YANDEX_CLOUD_API_KEY;
+const API_KEY = process.env.OPENAI_API_KEY;
 
-const YANDEX_CLOUD_MODEL = 'aliceai-llm/latest';
-const MODEL = `gpt://${YANDEX_CLOUD_FOLDER}/${YANDEX_CLOUD_MODEL}`;
+const MODEL = process.env.OPENAI_MODEL;
 const SYSTEM_PROMPT =
     'You are a helpful AI assistant. Respond in the same language as the user message.';
 
@@ -53,11 +51,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         const openai = new OpenAI({
-            apiKey: YANDEX_CLOUD_API_KEY,
+            apiKey: API_KEY,
             baseURL: 'https://rest-assistant.api.cloud.yandex.net/v1',
-            defaultHeaders: {
-                'OpenAI-Project': YANDEX_CLOUD_FOLDER,
-            },
         });
 
         // Set SSE headers
