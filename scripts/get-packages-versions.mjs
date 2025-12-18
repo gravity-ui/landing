@@ -3,6 +3,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const packagesMap = {
+    '@gravity-ui/aikit': 'aikit',
     '@gravity-ui/uikit': 'uikit',
     '@gravity-ui/components': 'components',
     '@gravity-ui/date-components': 'date-components',

@@ -447,11 +447,8 @@ export const libs = [
         landing: false,
         tags: ['ui'],
         storybookUrl: 'https://preview.gravity-ui.com/timeline/',
-        readmeUrl: getReadmeUrls(
-            'https://raw.githubusercontent.com/gravity-ui/timeline/main',
-        ),
-        changelogUrl:
-            'https://raw.githubusercontent.com/gravity-ui/timeline/main/CHANGELOG.md',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/timeline/main'),
+        changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/timeline/main/CHANGELOG.md',
         mainBranch: 'main',
     },
     {
@@ -468,6 +465,19 @@ export const libs = [
         ),
         changelogUrl:
             'https://raw.githubusercontent.com/gravity-ui/page-constructor-builder/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
+        id: 'aikit',
+        githubId: 'gravity-ui/aikit',
+        npmId: '@gravity-ui/aikit',
+        title: 'AIKit',
+        primary: false,
+        landing: true,
+        tags: ['ui', 'ai'],
+        storybookUrl: 'https://preview.gravity-ui.com/aikit/',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/aikit/main'),
+        changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/aikit/main/CHANGELOG.md',
         mainBranch: 'main',
     },
 ];
