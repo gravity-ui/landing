@@ -31,6 +31,7 @@ import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
 import {pinInputConfig} from './PinInput';
+import {placeholderContainerConfig} from './PlaceholderContainer';
 import {popoverConfig} from './Popover';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
@@ -84,6 +85,7 @@ const uikitComponents: Component[] = [
     paginationConfig,
     paletteConfig,
     pinInputConfig,
+    placeholderContainerConfig,
     popoverConfig,
     popupConfig,
     portalConfig,
