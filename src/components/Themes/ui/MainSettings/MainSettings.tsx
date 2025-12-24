@@ -1,12 +1,17 @@
 import {Sliders} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
-import {DEFAULT_THEME, type Theme, type UtilityColor} from '@gravity-ui/uikit-themer';
+import {
+    type Theme,
+    type UtilityColor,
+    createInternalUtilityColorReference,
+} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
 import {SelectableCard} from '../../../SelectableCard/SelectableCard';
 import {useThemePaletteColor, useThemeUtilityColor} from '../../hooks';
+import {TEXT_BRAND_CONTRAST_DEFAULTS} from '../../lib/constants';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
 import {ThemableSettings} from '../ThemableSettings/ThemableSettings';
 import {ThemableRow} from '../ThemableSettings/types';
@@ -61,10 +66,8 @@ const BrandColorEditor: React.FC<{theme: Theme}> = ({theme}) => {
     );
 };
 
-const textBrandContrastDefaults = {
-    light: DEFAULT_THEME.utilityColors['text-brand-contrast'].light,
-    dark: DEFAULT_THEME.utilityColors['text-brand-contrast'].dark,
-};
+const blackRef = createInternalUtilityColorReference('text-dark-primary');
+const whiteRef = createInternalUtilityColorReference('text-light-primary');
 
 const TextContrastColorEditor: React.FC<{theme: Theme}> = ({theme}) => {
     const [brandTextColor, setBrandTextColor] = useThemeUtilityColor({
@@ -79,17 +82,14 @@ const TextContrastColorEditor: React.FC<{theme: Theme}> = ({theme}) => {
             <SelectableCard
                 className={b('text-card')}
                 text="Black text"
-                selected={brandTextColor === textBrandContrastDefaults.light.ref}
+                selected={brandTextColor === blackRef}
                 onClick={() =>
-                    setBrandTextColor(
-                        textBrandContrastDefaults.light.value,
-                        textBrandContrastDefaults.light.ref,
-                    )
+                    setBrandTextColor(TEXT_BRAND_CONTRAST_DEFAULTS[theme].black, blackRef)
                 }
                 textProps={{
                     style: {
                         ...BASE_CARD_BUTTON_STYLES,
-                        color: textBrandContrastDefaults.light.value,
+                        color: TEXT_BRAND_CONTRAST_DEFAULTS[theme].black,
                         backgroundColor: brandColor.value,
                     },
                 }}
@@ -97,17 +97,14 @@ const TextContrastColorEditor: React.FC<{theme: Theme}> = ({theme}) => {
             <SelectableCard
                 className={b('text-card')}
                 text="White text"
-                selected={brandTextColor === textBrandContrastDefaults.dark.ref}
+                selected={brandTextColor === whiteRef}
                 onClick={() =>
-                    setBrandTextColor(
-                        textBrandContrastDefaults.dark.value,
-                        textBrandContrastDefaults.dark.ref,
-                    )
+                    setBrandTextColor(TEXT_BRAND_CONTRAST_DEFAULTS[theme].white, whiteRef)
                 }
                 textProps={{
                     style: {
                         ...BASE_CARD_BUTTON_STYLES,
-                        color: textBrandContrastDefaults.dark.value,
+                        color: TEXT_BRAND_CONTRAST_DEFAULTS[theme].white,
                         backgroundColor: brandColor.value,
                     },
                 }}

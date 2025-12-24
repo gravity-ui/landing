@@ -2,6 +2,7 @@ import type {BordersOptions, GravityTheme} from '@gravity-ui/uikit-themer';
 import {
     DEFAULT_THEME as DEFAULT_GRAVITY_THEME,
     createInternalPrivateColorReference,
+    createInternalUtilityColorReference,
 } from '@gravity-ui/uikit-themer';
 
 import {type AdvanceColors, RadiusPresetName} from './types';
@@ -11,6 +12,17 @@ import {getDefaultAdvancedColorValue} from './utils';
 export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
 export const DEFAULT_NEW_COLOR_TITLE = 'New color';
+
+export const TEXT_BRAND_CONTRAST_DEFAULTS = {
+    light: {
+        white: DEFAULT_GRAVITY_THEME.utilityColors['text-light-primary'].dark.value,
+        black: DEFAULT_GRAVITY_THEME.utilityColors['text-dark-primary'].dark.value,
+    },
+    dark: {
+        white: DEFAULT_GRAVITY_THEME.utilityColors['text-light-primary'].light.value,
+        black: DEFAULT_GRAVITY_THEME.utilityColors['text-dark-primary'].light.value,
+    },
+};
 
 export const DEFAULT_BRAND_COLORS = [
     'rgb(203 255 92)',
@@ -368,6 +380,16 @@ export const DEFAULT_COLORS: GravityTheme['utilityColors'] = {
             value: createInternalPrivateColorReference('purple', '850-solid'),
         },
     },
+    'text-brand-contrast': {
+        light: {
+            value: TEXT_BRAND_CONTRAST_DEFAULTS.light.black,
+            ref: createInternalUtilityColorReference('text-dark-primary'),
+        },
+        dark: {
+            value: TEXT_BRAND_CONTRAST_DEFAULTS.dark.black,
+            ref: createInternalUtilityColorReference('text-dark-primary'),
+        },
+    },
 };
 
 export const DEFAULT_THEME: GravityTheme = {
@@ -485,6 +507,16 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
                     value: createInternalPrivateColorReference('purple', '850-solid'),
                 },
             },
+            'text-brand-contrast': {
+                light: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.light.black,
+                    ref: createInternalUtilityColorReference('text-dark-primary'),
+                },
+                dark: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.dark.black,
+                    ref: createInternalUtilityColorReference('text-dark-primary'),
+                },
+            },
         },
     },
     {
@@ -584,6 +616,16 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
                 },
                 dark: {
                     value: createInternalPrivateColorReference('purple', '850-solid'),
+                },
+            },
+            'text-brand-contrast': {
+                light: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.light.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
+                },
+                dark: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.dark.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
                 },
             },
         },
@@ -687,6 +729,16 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
                     value: createInternalPrivateColorReference('purple', '850-solid'),
                 },
             },
+            'text-brand-contrast': {
+                light: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.light.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
+                },
+                dark: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.dark.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
+                },
+            },
         },
     },
     {
@@ -756,14 +808,16 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
                     value: createInternalPrivateColorReference('brand', '700-solid'),
                 },
             },
-            // 'text-brand-contrast': {
-            //     light: {
-            //         value: TEXT_CONTRAST_COLORS.light.white,
-            //     },
-            //     dark: {
-            //         value: TEXT_CONTRAST_COLORS.dark.white,
-            //     },
-            // },
+            'text-brand-contrast': {
+                light: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.light.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
+                },
+                dark: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.dark.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
+                },
+            },
             'text-link': {
                 light: {
                     value: createInternalPrivateColorReference('brand', '600-solid'),
@@ -897,6 +951,16 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
                     value: createInternalPrivateColorReference('purple', '850-solid'),
                 },
             },
+            'text-brand-contrast': {
+                light: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.light.black,
+                    ref: createInternalUtilityColorReference('text-dark-primary'),
+                },
+                dark: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.dark.black,
+                    ref: createInternalUtilityColorReference('text-dark-primary'),
+                },
+            },
         },
     },
     {
@@ -996,6 +1060,16 @@ export const BRAND_COLORS_PRESETS: BrandPreset[] = [
                 },
                 dark: {
                     value: createInternalPrivateColorReference('purple', '850-solid'),
+                },
+            },
+            'text-brand-contrast': {
+                light: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.light.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
+                },
+                dark: {
+                    value: TEXT_BRAND_CONTRAST_DEFAULTS.dark.white,
+                    ref: createInternalUtilityColorReference('text-light-primary'),
                 },
             },
         },
