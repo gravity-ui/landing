@@ -29,12 +29,18 @@ ENV AWS_RESPONSE_CHECKSUM_VALIDATION=when_required
 
 RUN --mount=type=secret,id=s3_access_key_id \
     --mount=type=secret,id=s3_secret_access_key \
+    --mount=type=secret,id=openai_api_key \
+    --mount=type=secret,id=openai_model \
     export AWS_ACCESS_KEY_ID=$(cat /run/secrets/s3_access_key_id) && \
     export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/s3_secret_access_key) && \
+    export OPENAI_API_KEY=$(cat /run/secrets/openai_api_key) && \
+    export OPENAI_MODEL=$(cat /run/secrets/openai_model) && \
     aws s3 sync .next/static s3://gravity-landing-static/_next/static/ \
     --endpoint-url=https://storage.yandexcloud.net/ && \
     unset AWS_ACCESS_KEY_ID && \
-    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SECRET_ACCESS_KEY && \
+    unset OPENAI_API_KEY && \
+    unset OPENAI_MODEL
 
 FROM node:24-alpine AS runner
 

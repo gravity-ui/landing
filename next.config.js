@@ -16,6 +16,7 @@ const withTM = require('next-transpile-modules')([
     '@gravity-ui/yagr',
     '@gravity-ui/markdown-editor',
     '@gravity-ui/timeline',
+    '@gravity-ui/aikit',
 ]);
 
 const {i18n} = require('./next-i18next.config');

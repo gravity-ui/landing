@@ -27,10 +27,12 @@ import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {modalConfig} from './Modal';
+import {numberInputConfig} from './NumberInput';
 import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
 import {pinInputConfig} from './PinInput';
+import {placeholderContainerConfig} from './PlaceholderContainer';
 import {popoverConfig} from './Popover';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
@@ -80,10 +82,12 @@ const uikitComponents: Component[] = [
     loaderConfig,
     menuConfig,
     modalConfig,
+    numberInputConfig,
     overlayConfig,
     paginationConfig,
     paletteConfig,
     pinInputConfig,
+    placeholderContainerConfig,
     popoverConfig,
     popupConfig,
     portalConfig,
