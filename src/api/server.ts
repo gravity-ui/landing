@@ -163,9 +163,6 @@ export class ServerApi {
     }
 
     async fetchAllContributorsWithCache(): Promise<Contributor[]> {
-        console.log('--------------------------------------------------------------');
-        console.log('contributors:', this.contributorsCache);
-        console.log('--------------------------------------------------------------');
         const now = Date.now();
 
         if (this.contributorsCache) {
@@ -261,10 +258,15 @@ export class ServerApi {
         return '';
     }
 
-    async fetchLibReadmeInfo({
-        readmeUrl,
-        id,
-    }: LibConfig): Promise<{en: string; ru: string; es: string; zh: string}> {
+    async fetchLibReadmeInfo({readmeUrl, id}: LibConfig): Promise<{
+        en: string;
+        ru: string;
+        es: string;
+        zh: string;
+        fr: string;
+        de: string;
+        ko: string;
+    }> {
         const headers: Record<string, string> = {'User-Agent': 'request'};
 
         const fetchReadmeContent = async (url: string) => {
@@ -291,11 +293,14 @@ export class ServerApi {
                 'utf8',
             );
 
-        const [en, ru, es, zh] = await Promise.all([
+        const [en, ru, es, zh, fr, de, ko] = await Promise.all([
             fetchReadmeContent(readmeUrl.en),
             fetchReadmeContent(readmeUrl.ru),
             getLocalDocsReadPromise('es'),
             getLocalDocsReadPromise('zh'),
+            getLocalDocsReadPromise('fr'),
+            getLocalDocsReadPromise('de'),
+            getLocalDocsReadPromise('ko'),
         ]);
 
         return {
@@ -303,6 +308,9 @@ export class ServerApi {
             ru,
             es,
             zh,
+            fr,
+            de,
+            ko,
         };
     }
 
@@ -424,10 +432,11 @@ export class ServerApi {
         return libs.sort((lib1, lib2) => {
             const order = [
                 'uikit',
-                'navigation',
+                'aikit',
                 'date-components',
                 'markdown-editor',
                 'graph',
+                'navigation',
                 'page-constructor',
                 'dashkit',
             ];

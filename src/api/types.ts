@@ -26,6 +26,9 @@ export type LibData = {
         ru: string;
         es: string;
         zh: string;
+        fr: string;
+        de: string;
+        ko: string;
     };
     changelog: string;
     contributors: Contributor[];
