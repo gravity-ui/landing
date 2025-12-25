@@ -18,6 +18,8 @@ import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {getI18nProps} from '../../utils/i18next';
 
+import {localeEn, localeRu} from './constants';
+
 interface BlogPostPageProps {
     post: PostData;
     pageContent: PageContent;
@@ -51,9 +53,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const fullSlug = slug.join('/');
 
     try {
-        const [postResponse, suggestedPosts, i18nProps] = await Promise.all([
+        const [postResponse, i18nProps] = await Promise.all([
             Api.instance.getBlogPost(locale, fullSlug),
-            Api.instance.getSuggestedPosts(locale),
             getI18nProps(ctx, ['blog']),
         ]);
 
@@ -64,7 +65,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 post: postResponse.post as unknown as PostData,
                 pageContent: postResponse.page.content,
                 pageUpdatedAt: postResponse.page.updatedAt || null,
-                suggestedPosts: suggestedPosts as unknown as PostData[],
                 hostname,
                 ...i18nProps,
             },
@@ -80,7 +80,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 export default function BlogPostPage({
     post,
     pageContent,
-    suggestedPosts,
     pageUpdatedAt,
     hostname,
 }: BlogPostPageProps) {
@@ -88,19 +87,20 @@ export default function BlogPostPage({
     const router = useRouter();
     const isMobile = useIsMobile();
     const locale = router.locale || 'en';
+    const localeValue = locale === 'ru' ? localeRu : localeEn;
 
     // Router data for blog-constructor
     const routerData = useMemo(
         () => ({
             pathname: router.pathname,
-            locale: (router.locale || 'en') as unknown as Locale,
+            locale: localeValue as unknown as Locale,
             as: router.asPath,
             hostname,
             updateQueryCallback: () => {
                 // Query update logic can be added here if needed
             },
         }),
-        [router.pathname, router.locale, router.asPath, hostname],
+        [router.pathname, router.asPath, hostname, localeValue],
     );
 
     // Share options for the post
@@ -113,15 +113,26 @@ export default function BlogPostPage({
     ];
 
     // Breadcrumbs for navigation
+    const pathPrefix = localeValue.pathPrefix ? `/${localeValue.pathPrefix}` : '';
+    const blogUrl = `${pathPrefix}/blog`;
+
+    // Ensure post URL has pathPrefix
+    let postUrl = router.asPath;
+    if (pathPrefix && !postUrl.startsWith(pathPrefix)) {
+        // Remove any existing locale prefix and add the correct one
+        const urlWithoutLocale = postUrl.replace(/^\/(en|ru)/, '');
+        postUrl = `${pathPrefix}${urlWithoutLocale}`;
+    }
+
     const breadcrumbs = {
         items: [
             {
                 text: t('meta_title'),
-                url: '/blog',
+                url: blogUrl,
             },
             {
                 text: post.title,
-                url: router.asPath,
+                url: postUrl,
             },
         ],
     };
@@ -176,7 +187,7 @@ export default function BlogPostPage({
                     isMobile={isMobile}
                     theme={Theme.Dark}
                     router={routerData}
-                    locale={locale as unknown as Locale}
+                    locale={localeValue as unknown as Locale}
                     analytics={analytics}
                     settings={BLOG_CONSTRUCTOR_SETTINGS}
                 >
@@ -185,7 +196,7 @@ export default function BlogPostPage({
                         post={post}
                         // TODO: Uncomment when authentication functionality is implemented
                         // likes={likes}
-                        suggestedPosts={suggestedPosts}
+                        suggestedPosts={[]}
                         settings={{
                             isMobile,
                             theme: Theme.Dark,
@@ -206,8 +217,6 @@ export default function BlogPostPage({
                                   }
                                 : undefined
                         }
-                        // TODO: Add custom subBlocks if needed
-                        // custom={{subBlocks}}
                     />
                 </BlogConstructorProvider>
             </Layout>
