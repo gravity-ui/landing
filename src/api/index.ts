@@ -2,6 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
+import type {MarkdownItPluginCb} from '@diplodoc/transform/lib/plugins/typings';
+import {
+    createReadableContent,
+    transformPageContent,
+    transformPost,
+} from '@gravity-ui/blog-constructor/server';
 import {createAppAuth} from '@octokit/auth-app';
 import {Octokit} from '@octokit/rest';
 import {i18n} from 'next-i18next.config';
@@ -739,21 +745,41 @@ export class Api {
      */
     async getBlogPost(locale: string, slug: string): Promise<{post: BlogPost; page: BlogPage}> {
         try {
-            // Use postPageMockData utility from mocks and page.json for full page data
-            const {postPageMockData} = await import('./.mocks/utils');
+            const postMock = await import('./.mocks/post.json');
             const pageMock = await import('./.mocks/page.json');
 
-            // Transform mock data to add locale if missing
-            const post = {
-                ...postPageMockData.post,
-                locale: postPageMockData.post.locale || locale,
-            };
+            // Determine lang and region from locale
+            const lang = locale.split('-')[0] as 'en' | 'ru';
+            const region = locale.includes('-') ? locale : `${locale}-${locale}`;
+
+            // Plugins for markdown transformation (empty array for now)
+            const plugins: MarkdownItPluginCb[] = [];
+
+            // Transform post using transformPost from blog-constructor
+            const transformedPost = transformPost({
+                postData: postMock.default,
+                lang,
+                region,
+                plugins,
+            }) as unknown as BlogPost;
+
+            // Transform page content using transformPageContent from blog-constructor
+            const transformedPageContent: Parameters<typeof createReadableContent>[number] =
+                transformPageContent({
+                    content: pageMock.default.content,
+                    lang,
+                    region,
+                    plugins: plugins as MarkdownItPluginCb[],
+                });
 
             return {
-                post,
+                post: {
+                    ...transformedPost,
+                    locale,
+                },
                 page: {
                     ...pageMock.default,
-                    content: postPageMockData.content,
+                    content: transformedPageContent,
                 } as unknown as BlogPage,
             };
         } catch (error) {
@@ -764,15 +790,15 @@ export class Api {
 
     /**
      * Get list of blog tags
-     * @param _locale - Current locale (not used for now, same data for all locales)
+     * @param locale - Current locale (not used for now, same data for all locales)
      * @returns Array of blog tags
      *
      * TODO: When connecting to real API, filter tags by locale
      */
-    async getBlogTags(_locale: string): Promise<BlogTag[]> {
+    async getBlogTags(locale: string): Promise<BlogTag[]> {
         try {
             const tagsMock = await import('./.mocks/tags.json');
-            return tagsMock.default;
+            return tagsMock.default.filter((tag: BlogTag) => tag.locale === locale);
         } catch (error) {
             console.error('Error fetching blog tags:', error);
             return [];
@@ -792,26 +818,51 @@ export class Api {
         _query?: BlogPostsQuery,
     ): Promise<BlogPostsResponse & {page: BlogPage}> {
         try {
-            const postsMock = await import('./.mocks/posts.json');
+            const postsMock = (await import('./.mocks/posts.json')) as {
+                default: BlogPostsResponse;
+            };
             const blogPageMock = await import('./.mocks/blogPage.json');
+            const {preparePost} = await import('../utils/blog');
 
-            // Transform mock data to match BlogPostListItem type with required fields
-            const transformedPosts = postsMock.default.posts.map((post: any) => ({
-                ...post,
-                locale,
-                title: post.textTitle || post.htmlTitle || post.title || 'Untitled',
-                description: post.description || 'No description available',
-            })) as unknown as BlogPostListItem[];
+            // Transform locale string to object with lang property
+            const localeObj = {lang: locale};
+
+            // Transform mock data using preparePost
+            const transformedPosts = postsMock.default.posts.map((post: any) => {
+                const preparedPost = preparePost({
+                    postData: {
+                        ...post,
+                        title: post.textTitle || post.htmlTitle || post.title || 'Untitled',
+                    },
+                    locale: localeObj,
+                    withContent: false,
+                });
+
+                return {
+                    ...preparedPost,
+                    locale,
+                } as unknown as BlogPostListItem;
+            });
 
             const transformedPinnedPost = postsMock.default.pinnedPost
-                ? ({
-                      ...postsMock.default.pinnedPost,
-                      locale,
-                      title:
-                          (postsMock.default.pinnedPost as any).title ||
-                          (postsMock.default.pinnedPost as any).textTitle ||
-                          'Untitled',
-                  } as unknown as BlogPostListItem)
+                ? (() => {
+                      const preparedPost = preparePost({
+                          postData: {
+                              ...postsMock.default.pinnedPost,
+                              title:
+                                  (postsMock.default.pinnedPost as any).title ||
+                                  (postsMock.default.pinnedPost as any).textTitle ||
+                                  'Untitled',
+                          },
+                          locale: localeObj,
+                          withContent: false,
+                      });
+
+                      return {
+                          ...preparedPost,
+                          locale,
+                      } as unknown as BlogPostListItem;
+                  })()
                 : null;
 
             // For now, return all mock data without filtering
@@ -830,23 +881,6 @@ export class Api {
     }
 
     /**
-     * Get list of services for blog filtering
-     * @param _locale - Current locale (not used for now, same data for all locales)
-     * @returns Array of blog services
-     *
-     * TODO: When connecting to real API, filter services by locale if needed
-     */
-    async getServiceList(_locale: string): Promise<BlogService[]> {
-        try {
-            const servicesMock = await import('./.mocks/services.json');
-            return servicesMock.default;
-        } catch (error) {
-            console.error('Error fetching services:', error);
-            return [];
-        }
-    }
-
-    /**
      * Get suggested posts for a blog post
      * @param locale - Current locale (not used for now, same data for all locales)
      * @param _postId - Current post ID (not used for now, returns mock data)
@@ -854,17 +888,8 @@ export class Api {
      *
      * TODO: When connecting to real API, get related posts based on postId
      */
-    async getSuggestedPosts(locale: string, _postId?: number): Promise<BlogPostListItem[]> {
+    async getSuggestedPosts(_locale: string, _postId?: number): Promise<BlogPostListItem[]> {
         try {
-            // Use postPageMockData utility from mocks
-            const {postPageMockData} = await import('./.mocks/utils');
-
-            // Transform mock data to add required locale and title fields
-            return postPageMockData.suggestedPosts.map((post: any) => ({
-                ...post,
-                locale,
-                title: post.title || post.textTitle || 'Untitled',
-            })) as unknown as BlogPostListItem[];
         } catch (error) {
             console.error('Error fetching suggested posts:', error);
             return [];
