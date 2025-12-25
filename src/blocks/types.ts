@@ -1,4 +1,4 @@
-import {ContributorsModel} from './Contributors/Contributors';
+import {ContributorsModel} from './Contributors/types';
 import {CustomHeaderModel} from './CustomHeader/CustomHeader';
 import {ExamplesModel} from './Examples/Examples';
 import {GithubStarsModel} from './GithubStarsBlock/GithubStarsBlock';
