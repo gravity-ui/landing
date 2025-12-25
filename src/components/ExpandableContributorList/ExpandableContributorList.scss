@@ -19,6 +19,14 @@ $block: '.#{variables.$ns}expandable-contributor-list';
         grid-template-rows: unset;
     }
 
+    &__loader {
+        width: 100%;
+        height: 276px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     &__inset-shadow {
         position: absolute;
         bottom: 0;

@@ -72,7 +72,7 @@ export const Layout: React.FC<LayoutProps> = ({
         };
     }, [isRtl]);
 
-    const pageConent = (
+    const pageContent = (
         <div className={b()}>
             {!showOnlyContent && (
                 <div className={b('menu')} id={MENU_ID}>
@@ -101,10 +101,10 @@ export const Layout: React.FC<LayoutProps> = ({
                 <React.Fragment>
                     {isPageConstructor ? (
                         <PageConstructorProvider theme={DEFAULT_THEME as PageConstructorTheme}>
-                            {pageConent}
+                            {pageContent}
                         </PageConstructorProvider>
                     ) : (
-                        pageConent
+                        pageContent
                     )}
                 </React.Fragment>
             </ThemeProvider>

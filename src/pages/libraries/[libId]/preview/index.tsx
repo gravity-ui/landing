@@ -3,7 +3,7 @@ import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 import React from 'react';
 
-import {Api, type LibWithMetadata} from '../../../../api';
+import {type LibWithMetadata, ServerApi} from '../../../../api';
 import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
 import {getI18nProps, isValidLibId} from '../../../../utils';
 
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
 
     const [lib, i18nProps] = await Promise.all([
-        Api.instance.fetchLibByIdWithCache(libId),
+        ServerApi.instance.fetchLibByIdWithCache(libId),
         getI18nProps(ctx, ['library', 'libraries-info']),
     ]);
 
