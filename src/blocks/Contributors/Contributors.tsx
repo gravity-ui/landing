@@ -11,7 +11,7 @@ import {ContributorsProps} from './types';
 const b = block('contributors');
 
 export const ContributorsBlock: React.FC<ContributorsProps> = ({animated, title, link}) => {
-    const [contributorsAmount, setContributorsAmount] = React.useState('');
+    const [contributorsCount, setContributorsCount] = React.useState('');
 
     return (
         <AnimateBlock className={b()} animate={animated}>
@@ -19,7 +19,7 @@ export const ContributorsBlock: React.FC<ContributorsProps> = ({animated, title,
                 <h2 className={b('header-title')}>
                     <HTML>{title}</HTML>
                 </h2>
-                <div className={b('header-count')}>{contributorsAmount}</div>
+                <div className={b('header-count')}>{contributorsCount}</div>
                 <div>
                     <Button
                         size="xl"
@@ -36,7 +36,7 @@ export const ContributorsBlock: React.FC<ContributorsProps> = ({animated, title,
             <section className={b('section')}>
                 <LazyExpandableContributorsList
                     onLoad={(_, props) => {
-                        setContributorsAmount(String(props.contributors.length) || '0');
+                        setContributorsCount(String(props.contributors.length) || '0');
                     }}
                 />
             </section>
