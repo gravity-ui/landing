@@ -40,7 +40,7 @@ const resolveDynamicPath = (path: string, query: Record<string, any>): string =>
 };
 
 // Function to generate alternate links for SSG
-const generateAlternateLinks = (path: string, query: Record<string, any>) => {
+const generateAlternateLinks = (path: string, query: Record<string, any>, locale?: string) => {
     const {locales, defaultLocale} = i18nextConfig.i18n;
 
     // Skip routes that don't need alternates
@@ -67,15 +67,15 @@ const generateAlternateLinks = (path: string, query: Record<string, any>) => {
     }
 
     // Create links for all locales
-    const links = locales.map((locale) => {
+    const links = locales.map((localeItem) => {
         let href;
-        if (locale === defaultLocale) {
+        if (localeItem === defaultLocale) {
             href = `${SITE_URL}${pathWithoutLocale}`;
         } else {
-            href = `${SITE_URL}/${locale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
+            href = `${SITE_URL}/${localeItem}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`;
         }
 
-        return <link key={locale} rel="alternate" hrefLang={locale} href={href} />;
+        return <link key={localeItem} rel="alternate" hrefLang={localeItem} href={href} />;
     });
 
     // Add x-default link (points to default locale)
@@ -88,9 +88,13 @@ const generateAlternateLinks = (path: string, query: Record<string, any>) => {
         />,
     );
 
-    // Add canonical link
-    const canonicalPath = resolvedPath.startsWith('/') ? resolvedPath : `/${resolvedPath}`;
-    links.push(<link key="canonical" rel="canonical" href={`${SITE_URL}${canonicalPath}`} />);
+    // Add canonical link - each locale should canonical to itself
+    const currentLocale = locale || defaultLocale;
+    const localePrefix = currentLocale === defaultLocale ? '' : `/${currentLocale}`;
+    const pathPart = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
+    const canonicalUrl = `${SITE_URL}${localePrefix}${pathPart}`;
+
+    links.push(<link key="canonical" rel="canonical" href={canonicalUrl} />);
 
     // CDN assets for improve performance
     links.push(<link key="cdn-assets" rel="preconnect" href="https://storage.yandexcloud.net" />);
@@ -102,10 +106,10 @@ const b = block('g-root');
 
 class CustomDocument extends Document {
     render() {
-        const {page, query} = this.props.__NEXT_DATA__;
+        const {page, query, locale} = this.props.__NEXT_DATA__;
 
         // Generate static links for SSG
-        const staticLinks = generateAlternateLinks(page, query);
+        const staticLinks = generateAlternateLinks(page, query, locale);
 
         return (
             // Workaround for missing direction 'ltr' in ThemeProvider
