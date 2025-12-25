@@ -164,4 +164,4 @@ jobs:
           git add .
 
           git commit -m "remove temporary files and fix AI translations"
-          git push origin HEAD
+          git push origin HEAD:update-translations

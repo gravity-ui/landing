@@ -3,7 +3,7 @@ import * as DateComponents from '@gravity-ui/date-components';
 import * as Navigation from '@gravity-ui/navigation';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import * as UIKit from '@gravity-ui/uikit';
-import type {MDXComponents} from 'mdx/types';
+import type {MDXComponents, MDXContent} from 'mdx/types';
 import React from 'react';
 
 import * as DateComponentsExamples from '../../content/components/date-components/examples/components';
@@ -13,9 +13,10 @@ import {ExampleBlock} from './ExampleBlock/ExampleBlock';
 
 export const componentsAvailableInMDX: MDXComponents = {
     Grid,
-    Row,
-    Col,
-    ExampleBlock,
+    // TODO remove cast after update mdx to 3 major version
+    Row: Row as MDXContent,
+    Col: Col as MDXContent,
+    ExampleBlock: ExampleBlock as MDXContent,
     UIKitExamples,
     DateComponentsExamples,
     React: React as unknown as Record<string, MDXComponents>,

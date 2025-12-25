@@ -27,7 +27,13 @@ const Home = ({libs}: {libs: LibWithMetadata[]}) => {
         <>
             <Head>
                 {/* Preload background image for improve LCP */}
-                <link rel="preload" as="image" href={backgroundAsset.src} type="image/jpeg" />
+                <link
+                    rel="preload"
+                    fetchPriority="high"
+                    as="image"
+                    href={backgroundAsset.src}
+                    type="image/jpeg"
+                />
             </Head>
             <Layout isPageConstructor>
                 <Landing libs={libs} backgroundImageSrc={backgroundAsset.src} />
