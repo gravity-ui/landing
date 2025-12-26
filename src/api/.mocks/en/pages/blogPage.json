@@ -6,7 +6,7 @@
   "type": "default",
   "isDeleted": false,
   "pageId": 969,
-  "locale": "ru",
+  "locale": "en",
   "publishedVersionId": 17498,
   "lastVersionId": 17498,
   "content": {
@@ -45,3 +45,4 @@
     }
   ]
 }
+
