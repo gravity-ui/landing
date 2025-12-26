@@ -745,12 +745,13 @@ export class Api {
      */
     async getBlogPost(locale: string, slug: string): Promise<{post: BlogPost; page: BlogPage}> {
         try {
-            const postMock = await import('./.mocks/post.json');
-            const pageMock = await import('./.mocks/page.json');
-
             // Determine lang and region from locale
+
             const lang = locale.split('-')[0] as 'en' | 'ru';
             const region = locale.includes('-') ? locale : `${locale}-${locale}`;
+
+            const postMock = await import(`./.mocks/${lang}/posts/${slug}.json`);
+            const pageMock = await import(`./.mocks/${lang}/pages/${slug}.json`);
 
             // Plugins for markdown transformation (empty array for now)
             const plugins: MarkdownItPluginCb[] = [];
@@ -797,8 +798,8 @@ export class Api {
      */
     async getBlogTags(locale: string): Promise<BlogTag[]> {
         try {
-            const tagsMock = await import('./.mocks/tags.json');
-            return tagsMock.default.filter((tag: BlogTag) => tag.locale === locale);
+            const tagsMock = await import(`./.mocks/${locale}/tags.json`);
+            return tagsMock.default;
         } catch (error) {
             console.error('Error fetching blog tags:', error);
             return [];
@@ -818,10 +819,10 @@ export class Api {
         _query?: BlogPostsQuery,
     ): Promise<BlogPostsResponse & {page: BlogPage}> {
         try {
-            const postsMock = (await import('./.mocks/posts.json')) as {
+            const postsMock = (await import(`./.mocks/${locale}/posts/index.json`)) as {
                 default: BlogPostsResponse;
             };
-            const blogPageMock = await import('./.mocks/blogPage.json');
+            const blogPageMock = await import(`./.mocks/${locale}/pages/blogPage.json`);
             const {preparePost} = await import('../utils/blog');
 
             // Transform locale string to object with lang property
