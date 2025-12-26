@@ -13,6 +13,7 @@ $block: '.#{variables.$ns}github-star-button';
     color: var(--g-color-text-dark-primary);
     height: 36px;
     width: 136px;
+    min-width: 136px;
 
     &:hover {
         opacity: 0.8;
@@ -25,6 +26,16 @@ $block: '.#{variables.$ns}github-star-button';
         padding: 5px 8px;
         border: none;
         color: var(--g-color-text-dark-primary);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+    }
+
+    &__text {
+        display: flex;
+        align-items: center;
     }
 
     &__divider {

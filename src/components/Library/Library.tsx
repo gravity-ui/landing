@@ -16,6 +16,7 @@ import versionIcon from '../../assets/icons/version.svg';
 import {ContributorList} from '../../components/ContributorList';
 import {GitHubStarButton} from '../../components/GitHubStarButton';
 import {Link} from '../../components/Link';
+import {useIsMobile} from '../../hooks/useIsMobile';
 import {useLocale} from '../../hooks/useLocale';
 import {availablePlaygrounds} from '../../pages/libraries/[libId]/playground';
 import {block, getAnchor, getMaintainers} from '../../utils';
@@ -42,6 +43,7 @@ const HASH_REG_EXP = /^#/;
 export const Library: React.FC<Props> = ({lib}) => {
     const {t} = useTranslation();
     const locale = useLocale();
+    const isMobile = useIsMobile();
 
     const contentTabs = [
         {
@@ -336,7 +338,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                         <div className={b('github-star-text')}>
                                                             {content}
                                                         </div>
-                                                        {isVisibleInfoListMobile && (
+                                                        {(!isMobile || isVisibleInfoListMobile) && (
                                                             <GitHubStarButton
                                                                 githubId={lib.config.githubId}
                                                                 starCount={lib.metadata.stars}

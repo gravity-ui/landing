@@ -2,11 +2,11 @@ import {Icon, Text} from '@gravity-ui/uikit';
 import React from 'react';
 
 import githubIcon from '../../assets/icons/github.svg';
+import {block} from '../../utils';
 
 import './GitHubStarButton.scss';
 
-const block = (name: string) => `gravity-ui-landing-github-star-button${name ? `__${name}` : ''}`;
-const b = block;
+const b = block('github-star-button');
 
 interface GitHubStarButtonProps {
     githubId: string;
@@ -24,7 +24,7 @@ export const GitHubStarButton: React.FC<GitHubStarButtonProps> = ({githubId, sta
     };
 
     return (
-        <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={b('')}>
+        <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={b()}>
             <div className={b('button')}>
                 <Icon data={githubIcon} size={20} className={b('icon')} />
                 <Text variant="body-1" className={b('text')}>
