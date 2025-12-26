@@ -34,6 +34,12 @@ blocks:
         url: https://medium.com/p/32985f939f1c
         target: _blank
       - type: basic-card
+        title: AI Assistant Library Based on Gravity UI
+        text: >-
+          An article about the launch of the AIKit library: what we looked at in development, why it's needed and how to use it in your projects.
+        url: https://habr.com/ru/companies/yandex/articles/977824/
+        target: _blank
+      - type: basic-card
         title: 'Graph Visualization Library: How We Solved the Canvas vs HTML Dilemma in Gravity UI'
         text: >-
           A post about the architectural challenges that arose during the creation of the

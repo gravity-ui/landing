@@ -1,6 +1,6 @@
 # @gravity-ui/eslint-config
 
-## Instalar
+## Instalación
 
 ```
 npm install --save-dev eslint @gravity-ui/eslint-config
@@ -8,58 +8,68 @@ npm install --save-dev eslint @gravity-ui/eslint-config
 
 ## Uso
 
-Agregue `.eslintrc` un archivo en la raíz del proyecto con el siguiente contenido:
+Añade un archivo `eslint.config.js` en tu proyecto con el siguiente contenido:
 
-```json
-{
-  "extends": "@gravity-ui/eslint-config",
-  "root": true
-}
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+
+export default [
+  ...baseConfig,
+  {
+    // ...otra configuración
+  },
+];
 ```
 
-Agregue los archivos de configuración del cliente y del servidor en los directorios correspondientes:
+La configuración base también incluye reglas de TypeScript.
 
-```json
-{
-  "extends": "@gravity-ui/eslint-config/server"
-}
-```
+### Prettier
 
-```json
-{
-  "extends": "@gravity-ui/eslint-config/client"
-}
-```
+Si usas Prettier, añade la configuración correspondiente:
 
-### Más bonita
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import prettierConfig from '@gravity-ui/eslint-config/prettier';
 
-Si está utilizando Prettier, amplíe la configuración raíz con las reglas adicionales:
-
-```json
-{
-  "extends": ["@gravity-ui/eslint-config", "@gravity-ui/eslint-config/prettier"],
-  "root": true
-}
+export default [
+  ...baseConfig,
+  ...prettierConfig,
+  {
+    // ...otra configuración
+  },
+];
 ```
 
 ### a11y
 
-Si desea detectar problemas de accesibilidad, amplíe la configuración raíz con las reglas adicionales:
+Si quieres detectar problemas de accesibilidad, añade la configuración correspondiente:
 
-```json
-{
-  "extends": ["@gravity-ui/eslint-config", "@gravity-ui/eslint-config/a11y"],
-  "root": true
-}
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import a11yConfig from '@gravity-ui/eslint-config/a11y';
+
+export default [
+  ...baseConfig,
+  ...a11yConfig,
+  {
+    // ...otra configuración
+  },
+];
 ```
 
-### Pedido
+### Orden
 
-si desea hacer cumplir una convención en el orden de importación de los módulos, extienda la configuración raíz con las reglas adicionales:
+Si quieres imponer una convención en el orden de importación de módulos, añade la configuración correspondiente:
 
-```json
-{
-  "extends": ["@gravity-ui/eslint-config", "@gravity-ui/eslint-config/import-order"],
-  "root": true
-}
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import importOrderConfig from '@gravity-ui/eslint-config/import-order';
+
+export default [
+  ...baseConfig,
+  ...importOrderConfig,
+  {
+    // ...otra configuración
+  },
+];
 ```

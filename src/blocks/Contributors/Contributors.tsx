@@ -1,44 +1,25 @@
-import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
+import {AnimateBlock, HTML} from '@gravity-ui/page-constructor';
 import {Button} from '@gravity-ui/uikit';
 import React from 'react';
+import {LazyExpandableContributorsList} from 'src/components/ExpandableContributorList';
 
-import {Contributor} from '../../api';
-import {ExpandableContributorList} from '../../components/ExpandableContributorList';
 import {block} from '../../utils';
-import {CustomBlock} from '../constants';
 
 import './Contributors.scss';
+import {ContributorsProps} from './types';
 
 const b = block('contributors');
 
-type TelegramLink = {
-    title: string;
-    href: string;
-};
+export const ContributorsBlock: React.FC<ContributorsProps> = ({animated, title, link}) => {
+    const [contributorsCount, setContributorsCount] = React.useState('');
 
-export type ContributorsProps = Animatable & {
-    title: string;
-    link: TelegramLink;
-    contributors: Contributor[];
-};
-
-export type ContributorsModel = ContributorsProps & {
-    type: CustomBlock.Contributors;
-};
-
-export const ContributorsBlock: React.FC<ContributorsProps> = ({
-    animated,
-    title,
-    link,
-    contributors,
-}) => {
     return (
         <AnimateBlock className={b()} animate={animated}>
             <div className={b('header-wrapper')}>
                 <h2 className={b('header-title')}>
                     <HTML>{title}</HTML>
                 </h2>
-                <div className={b('header-count')}>{contributors.length}</div>
+                <div className={b('header-count')}>{contributorsCount}</div>
                 <div>
                     <Button
                         size="xl"
@@ -53,7 +34,11 @@ export const ContributorsBlock: React.FC<ContributorsProps> = ({
             </div>
 
             <section className={b('section')}>
-                <ExpandableContributorList contributors={contributors} />
+                <LazyExpandableContributorsList
+                    onLoad={(_, props) => {
+                        setContributorsCount(String(props.contributors.length) || '0');
+                    }}
+                />
             </section>
         </AnimateBlock>
     );

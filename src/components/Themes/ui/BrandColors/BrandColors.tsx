@@ -1,11 +1,13 @@
-import {Sliders} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
+import {Flask, HandOk} from '@gravity-ui/icons';
+import {Flex, Icon, SegmentedRadioGroup, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
+import {useIsMobile} from '../../../../hooks/useIsMobile';
 import {block} from '../../../../utils';
-import {useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
+import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
 import {BRAND_COLORS_PRESETS} from '../../lib/constants';
+import type {ColorsSettingsType} from '../../lib/types';
 import {ThemeSection} from '../ThemeSection';
 
 import './BrandColors.scss';
@@ -13,19 +15,14 @@ import './BrandColors.scss';
 const b = block('brand-colors');
 
 interface BrandColorsProps {
-    showThemeEditButton?: boolean;
-    onEditThemeClick: () => void;
     onSelectCustomColor: () => void;
 }
 
-export const BrandColors: React.FC<BrandColorsProps> = ({
-    showThemeEditButton,
-    onEditThemeClick,
-    onSelectCustomColor,
-}) => {
+export const BrandColors: React.FC<BrandColorsProps> = ({onSelectCustomColor}) => {
     const {t} = useTranslation('themes');
 
     const [customModeEnabled, setCustomMode] = React.useState(false);
+    const isMobile = useIsMobile();
 
     const [lightBrandColor] = useThemePaletteColor({
         token: 'brand',
@@ -36,7 +33,8 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
         theme: 'dark',
     });
 
-    const {applyBrandPreset} = useThemeCreatorMethods();
+    const {applyBrandPreset, setColorsSettingsType} = useThemeCreatorMethods();
+    const {colorsSettingsType} = useThemeCreator();
 
     const activeColorIndex = React.useMemo(() => {
         return BRAND_COLORS_PRESETS.findIndex(
@@ -67,43 +65,54 @@ export const BrandColors: React.FC<BrandColorsProps> = ({
     return (
         <ThemeSection className={b()} title={t('title_brand-colors')}>
             <Flex direction="column">
-                <div className={b('brand-color-picker')}>
-                    {BRAND_COLORS_PRESETS.map((value, index) => (
+                <Flex gap={2} justifyContent="space-between">
+                    <div className={b('brand-color-picker')}>
+                        {BRAND_COLORS_PRESETS.map((value, index) => (
+                            <div
+                                key={index}
+                                className={b('color', {
+                                    selected: !customModeEnabled && index === activeColorIndex,
+                                })}
+                                // @ts-ignore
+                                style={{'--color-value': value.brandColor}}
+                                onClick={() => setBrandPreset(index)}
+                            >
+                                <div className={b('color-inner')} />
+                            </div>
+                        ))}
                         <div
-                            key={index}
                             className={b('color', {
-                                selected: !customModeEnabled && index === activeColorIndex,
+                                selected: customModeEnabled || activeColorIndex === -1,
+                                custom: true,
                             })}
-                            // @ts-ignore
-                            style={{'--color-value': value.brandColor}}
-                            onClick={() => setBrandPreset(index)}
+                            onClick={handleSelectCustomColor}
                         >
                             <div className={b('color-inner')} />
+                            <Text variant="body-2">{t('label_custom-color')}</Text>
                         </div>
-                    ))}
-                    <div
-                        className={b('color', {
-                            selected: customModeEnabled || activeColorIndex === -1,
-                            custom: true,
-                        })}
-                        onClick={handleSelectCustomColor}
-                    >
-                        <div className={b('color-inner')} />
-                        <Text variant="body-2">{t('label_custom-color')}</Text>
                     </div>
-                </div>
+                    {!isMobile && (
+                        <SegmentedRadioGroup
+                            size="xl"
+                            className={b('colors-settings-type-radio-group')}
+                            defaultValue={colorsSettingsType}
+                            value={colorsSettingsType}
+                            onChange={(e) => {
+                                setColorsSettingsType(e.target.value as ColorsSettingsType);
+                            }}
+                        >
+                            <SegmentedRadioGroup.Option value="basic">
+                                <Icon data={HandOk} />
+                                Basic
+                            </SegmentedRadioGroup.Option>
+                            <SegmentedRadioGroup.Option value="advanced">
+                                <Icon data={Flask} />
+                                Advanced
+                            </SegmentedRadioGroup.Option>
+                        </SegmentedRadioGroup>
+                    )}
+                </Flex>
             </Flex>
-            {showThemeEditButton && (
-                <Button
-                    className={b('switch-button')}
-                    onClick={onEditThemeClick}
-                    view="normal"
-                    size="xl"
-                >
-                    <Icon data={Sliders} size={20} />
-                    {t('action_edit-theme')}
-                </Button>
-            )}
         </ThemeSection>
     );
 };

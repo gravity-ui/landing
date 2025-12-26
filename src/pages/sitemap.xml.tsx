@@ -55,7 +55,7 @@ const generatePaths = () => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const basePaths = generatePaths();
-    const supportedLocales = ['', 'ru', 'es', 'zh'];
+    const supportedLocales = ['', 'ru', 'es', 'zh', 'fr', 'de', 'ko'];
 
     const fields = basePaths.map((pathItem) => {
         const {path, notLocalized} = pathItem;

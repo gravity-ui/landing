@@ -33,6 +33,12 @@ blocks:
         url: https://medium.com/p/32985f939f1c
         target: _blank
       - type: basic-card
+        title: 基于Gravity UI的AI助手库
+        text: >-
+          关于AIKit库发布的文章：我们在开发中关注的内容、为什么需要它以及如何在您的项目中使用它。
+        url: https://habr.com/ru/companies/yandex/articles/977824/
+        target: _blank
+      - type: basic-card
         title: '图形可视化库：我们如何在Gravity UI中解决Canvas vs HTML的难题'
         text: >-
           一篇关于在创建Gravity UI Graph库过程中出现的架构挑战的文章，

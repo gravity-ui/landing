@@ -32,8 +32,6 @@ export const Meta: React.FC<MetaProps> = ({
 
             <meta name="description" content={description} />
 
-            <link data-react-helmet="true" rel="canonical" href="https://gravity-ui.com/" />
-
             <meta itemProp="name" content={name} />
             <meta itemProp="description" content={description} />
             <meta itemProp="image" content={image} />

@@ -1,16 +1,16 @@
 # Page Constructor Builder
 
-一个强大的命令行实用程序，用于使用 [@gravity](https://github.com/gravity-ui/page-constructor) -ui/page-constructor 包从 YAML 配置中构建静态页面。有关配置的详细信息， [请参阅页面构造器故事书](https://preview.gravity-ui.com/page-constructor/)。
+一个强大的命令行工具，用于使用 [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor) 包从 YAML 配置构建静态页面。有关配置详情，请参阅 [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/)。
 
 ## 快速入门
 
-1.**安装软件包：**
+1. **安装包：**
 
 ```bash
 npm install @gravity-ui/page-constructor-builder
 ```
 
-2.**向 package.json 添加编译命令：**
+2. **在 package.json 中添加构建命令：**
 
 ```json
 {
@@ -20,7 +20,7 @@ npm install @gravity-ui/page-constructor-builder
 }
 ```
 
-3.**添加源文件：**
+3. **添加源文件：**
 
 `page-builder.config.yml`:
 
@@ -28,6 +28,7 @@ npm install @gravity-ui/page-constructor-builder
 input: ./pages
 output: ./dist
 assets: ./assets
+favicon: logo.svg
 theme: light
 minify: true
 ```
@@ -49,13 +50,13 @@ blocks:
       color: '#f8f9fa'
 ```
 
-4.**创建您的页面：**
+4. **构建你的页面：**
 
 ```bash
 npm run build
 ```
 
-5.**在浏览器中打开生成的 HTML 文件：**
+5. **在浏览器中打开生成的 HTML 文件：**
 
 ```bash
 open dist/index.html
@@ -63,11 +64,11 @@ open dist/index.html
 
 ## 用法
 
-### Commands
+### 命令
 
 #### `page-builder build`
 
-使用 YAML 配置构建页面。
+从 YAML 配置构建页面。
 
 ```bash
 page-builder build [options]
@@ -75,43 +76,44 @@ page-builder build [options]
 
 **选项：**
 
-- `-i，-- <path>` 输入：包含 YAML 文件的输入目录（默认值：”。/页面 “)
-- `-o，-- <path>` 输出：已生成文件的输出目录（默认值：”。/dist “)
-- `-c，-- <path>` config：配置文件路径（默认值：”。/page-builder.config.yml “)
-- `--css <files...>`:要包含的自定义 CSS 文件
-- `--组件 <path>`：自定义组件目录
-- `--导航 <path>`：导航数据文件
-- `--资产 <path>`：要复制的静态资产目录
-- `--主题 <theme>`：主题（灯光）|深色）（默认值：“浅色”）
-- `--基本网址 <url>`：该网站的基本 URL
-- `--minify`:启用缩小
-- `--source-maps`:生成源地图
-- `--watch`:启用监视模式
+- `-i, --input <path>`: 包含 YAML 文件的输入目录 (默认值: "./pages")
+- `-o, --output <path>`: 构建文件的输出目录 (默认值: "./dist")
+- `-c, --config <path>`: 配置文件路径 (默认值: "./page-builder.config.yml")
+- `--css <files...>`: 要包含的自定义 CSS 文件
+- `--components <path>`: 自定义组件目录
+- `--navigation <path>`: 导航数据文件
+- `--assets <path>`: 要复制的静态资源目录
+- `--theme <theme>`: 主题 (light|dark) (默认值: "light")
+- `--base-url <url>`: 站点的基础 URL
+- `--minify`: 启用压缩
+- `--source-maps`: 生成源映射
+- `--watch`: 启用监视模式
 
 ### 配置
 
-在你的项目根目录下创建一个 `page-builder.config.yml` 文件：
+在项目根目录创建 `page-builder.config.yml` 文件：
 
 ```yaml
 input: ./pages
 output: ./dist
 assets: ./assets
+favicon: logo.svg # 来自 assets 或外部 URL 的图标文件
 theme: light
 baseUrl: https://mysite.com
 minify: true
-sourceMaps: false # Generate source maps for debugging (increases bundle size)
+sourceMaps: false # 为调试生成源映射（会增加包大小）
 css:
   - ./styles/main.css
   - ./styles/components.scss
 components: ./components
 navigation: ./navigation.yml
 webpack:
-  # Custom webpack configuration
+  # 自定义 webpack 配置
 ```
 
 ### 页面配置
 
-在你的页面目录中创建 YAML 文件：
+在你的 pages 目录中创建 YAML 文件：
 
 ```yaml
 # pages/index.yml
@@ -133,14 +135,14 @@ blocks:
 
       You can use **markdown** formatting here.
 
-  - type: CustomBlock # Your custom component
+  - type: CustomBlock # 你的自定义组件
     title: Custom Component
     content: This uses a custom component
 ```
 
 ### 自定义组件
 
-在你的组件目录中创建 React 组件：
+在你的 components 目录中创建 React 组件：
 
 ```typescript
 // components/CustomBlock.tsx
@@ -152,7 +154,11 @@ interface CustomBlockProps {
   className?: string;
 }
 
-export const CustomBlock: React.FC<CustomBlockProps> = ({title, content, className = ''}) => {
+export const CustomBlock: React.FC<CustomBlockProps> = ({
+  title,
+  content,
+  className = ''
+}) => {
   return (
     <div className={`custom-block ${className}`}>
       <h2>{title}</h2>
@@ -166,7 +172,7 @@ export default CustomBlock;
 
 ### 自定义样式
 
-添加您的自定义 CSS/SCSS 文件：
+添加你的自定义 CSS/SCSS 文件：
 
 ```css
 /* styles/main.css */
@@ -184,18 +190,18 @@ export default CustomBlock;
 }
 ```
 
-### 静态资产
+### 静态资源
 
-页面构造器生成器会自动处理静态资产，例如图像、图标和其他文件。在配置文件中配置资产目录：
+Page constructor builder 会自动处理图片、图标和其他文件等静态资源。在配置文件中配置 assets 目录：
 
 ```yaml
 # page-builder.config.yml
 input: ./pages
 output: ./dist
-assets: ./assets # Assets directory to copy
+assets: ./assets # 要复制的资源目录
 ```
 
-**资产目录结构：**
+**资源目录结构：**
 
 ```
 assets/
@@ -209,7 +215,7 @@ assets/
     └── brochure.pdf
 ```
 
-**在页面中使用资产：**
+**在你的页面中使用资源：**
 
 ```yaml
 # pages/index.yml
@@ -228,70 +234,156 @@ blocks:
         alt: Our team photo
 ```
 
+### Favicon
+
+Page constructor builder 支持为你的静态页面添加 favicon。你可以指定一个来自 assets 目录的本地文件或一个外部 URL。
+
+#### 配置
+
+在配置文件中添加 `favicon` 选项：
+
+```yaml
+# page-builder.config.yml
+favicon: logo.svg # 来自 assets 目录的本地文件
+# 或者
+favicon: https://cdn.example.com/favicon.ico # 外部 URL
+```
+
+#### 本地 Favicon 文件
+
+对于本地 favicon 文件，构建器将：
+
+- 自动检测 assets 目录中的文件
+- 将其复制到输出目录
+- 生成正确的 HTML `<link>` 标签，并带有正确的 MIME 类型
+
+**支持的文件格式：**
+
+- **SVG** (推荐) - `image/svg+xml`
+- **ICO** (经典) - `image/x-icon`
+- **PNG** (现代) - `image/png`
+- **JPG/JPEG** (可接受) - `image/jpeg`
+- **GIF** (动画) - `image/gif`
+
+**示例：**
+
+```yaml
+# page-builder.config.yml
+favicon: logo.svg                    # assets/ 目录下的文件
+favicon: icons/favicon.ico           # assets/icons/ 子目录下的文件
+favicon: ./custom/path/favicon.png   # 相对于项目根目录的自定义路径
+favicon: /absolute/path/favicon.ico  # 绝对路径
+```
+
+#### 外部 Favicon URL
+
+您也可以使用来自 CDN 或其他域的外部 favicon URL：
+
+```yaml
+# page-builder.config.yml
+favicon: https://cdn.example.com/favicon.ico
+favicon: https://mysite.com/assets/logo.svg
+```
+
+#### 生成的 HTML
+
+构建器会根据 favicon 类型自动生成相应的 HTML 标签：
+
+```html
+<!-- 对于 SVG favicons -->
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+
+<!-- 对于 ICO favicons (包括对旧版浏览器的支持) -->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<link rel="shortcut icon" href="assets/favicon.ico" />
+
+<!-- 对于外部 URL -->
+<link rel="icon" href="https://example.com/favicon.ico" />
+```
+
 ### 导航
 
-页面构造器生成器支持显示在所有页面上的全局导航配置。导航是通过单独的 YAML 文件配置的。
+页面构建器支持全局导航配置，该配置会显示在所有页面上。导航通过一个单独的 YAML 文件进行配置。
 
 #### 导航配置
 
-在项目根目录中创建 `navigation.yml` 文件（或在配置中指定自定义路径）：
+在项目根目录创建一个 `navigation.yml` 文件（或在您的配置文件中指定自定义路径）：
 
 ```yaml
 # navigation.yml
 logo:
-  text: Your Site Name
+  text: 您的网站名称
   url: 'index.html'
   icon: 'assets/logo.svg'
 
 header:
   leftItems:
-    - text: Home
+    - text: 首页
       url: 'index.html'
       type: 'link'
-    - text: About
+    - text: 关于
       url: 'about.html'
       type: 'link'
-    - text: Documentation
+    - text: 文档
       url: 'https://external-site.com/docs'
       type: 'link'
   rightItems:
     - text: GitHub
       url: 'https://github.com/your-repo'
       type: 'link'
-    - text: Contact
+    - text: 联系
       url: 'contact.html'
       type: 'link'
 
 footer:
   leftItems:
-    - text: Privacy Policy
+    - text: 隐私政策
       url: 'privacy.html'
       type: 'link'
   rightItems:
-    - text: © 2024 Your Company
+    - text: © 2024 您的公司
       type: 'text'
 ```
 
 #### 每页导航覆盖
 
-您可以通过直接在页面中添加分 `navigation` 区来覆盖特定页面的导航 YAML：
+您可以通过在页面 YAML 中直接添加 `navigation` 部分来覆盖特定页面的导航：
 
 ```yaml
 # pages/special-page.yml
 meta:
-  title: Special Page
+  title: 特殊页面
 
 navigation:
   logo:
-    text: Special Site
+    text: 特殊网站
     url: 'index.html'
   header:
     leftItems:
-      - text: Back to Main
+      - text: 返回主页
         url: 'index.html'
         type: 'link'
 
 blocks:
   - type: header-block
-    title: This page has custom navigation
+    title: 此页面具有自定义导航
+```
+
+### 分析配置
+
+将 `analytics` 字段添加到您的 `page-builder.config.yml`：
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js`:
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
 ```

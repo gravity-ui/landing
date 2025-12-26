@@ -1,16 +1,17 @@
-﻿{
-    "actions_copyIconName": "Copiar nombre de icono",
+{
+    "actions_copyIconName": "Copiar nombre del icono",
     "actions_copyLink": "Copiar enlace",
     "actions_copied": "Copiado",
-    "actions_copyReactComponent": "Copiar el componente React",
-    "actions_copySvgImport": "Copiar importación de SVG",
+    "actions_copyReactComponent": "Copiar componente React",
+    "actions_copySvgImport": "Copiar importación SVG",
     "actions_downloadSvg": "Descargar SVG",
     "title": "Iconos",
+    "meta_description": "Explora, busca y descarga cientos de iconos SVG modernos de la biblioteca de iconos de Gravity UI",
     "goToLibrary": "Ir a la biblioteca",
     "filterPlaceholder": "Filtrar por nombre de icono",
     "keywords": "Palabras clave",
-    "empty_title": "No se han encontrado resultados para su solicitud",
-    "empty_subTitle": "Compruebe la ortografía o pruebe con otras palabras clave.",
+    "empty_title": "No se encontraron resultados para tu búsqueda",
+    "empty_subTitle": "Por favor, comprueba la ortografía o prueba con otras palabras clave.",
     "usage_reactComponent": "Componente React",
     "usage_svg": "SVG"
 }

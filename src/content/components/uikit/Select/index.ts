@@ -65,6 +65,10 @@ export const selectConfig: Component = {
                 type: 'switch',
                 defaultValue: false,
             },
+            hasCounter: {
+                type: 'switch',
+                defaultValue: false,
+            },
         },
     },
 };

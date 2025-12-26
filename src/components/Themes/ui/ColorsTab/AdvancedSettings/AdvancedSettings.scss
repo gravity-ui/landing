@@ -1,0 +1,9 @@
+@use '../../../../../variables.scss';
+
+$block: '.#{variables.$ns}advanced-color-settings';
+
+#{$block} {
+    &__learn-more-button {
+        --g-button-border-radius: 8px;
+    }
+}

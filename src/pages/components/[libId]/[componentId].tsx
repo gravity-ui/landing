@@ -5,13 +5,14 @@ import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
 
 import i18nextConfig from '../../../../next-i18next.config';
-import {Api, type LibWithFullData} from '../../../api';
+import {type LibWithFullData, ServerApi} from '../../../api';
 import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
-import {getLibComponents, getLibraryMeta, getMaintainers} from '../../../utils';
+import {getLibComponents, getMaintainers} from '../../../utils';
 import {getI18nProps} from '../../../utils/i18next';
+import {getComponentMeta} from '../../../utils/meta';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const components = getLibComponents(ctx.params?.libId as string);
@@ -33,9 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     const libId = ctx.params?.libId as string;
 
-    const libPromise = Api.instance.fetchLibByIdWithCache(libId);
-    const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info']);
-    const readmePromise = Api.instance.fetchComponentReadmeWithCache({
+    const libPromise = ServerApi.instance.fetchLibByIdWithCache(libId);
+    const i18nPropsPromise = getI18nProps(ctx, ['component', 'libraries-info', 'component-meta']);
+    const readmePromise = ServerApi.instance.fetchComponentReadmeWithCache({
         readmeUrl: component.content.readmeUrl,
         componentId: component.id,
         libId,
@@ -78,6 +79,15 @@ export const ComponentPage = ({
         return null;
     }
 
+    // Generate meta description using translation function
+    const componentMeta = getComponentMeta({
+        libId: lib.config.id,
+        libTitle: lib.config.title,
+        componentId: component.id,
+        componentTitle: component.title,
+        t,
+    });
+
     const maintainers = getMaintainers(lib, `/src/components/${component.title}`);
 
     const sections = React.useMemo<Section[]>(() => {
@@ -104,7 +114,7 @@ export const ComponentPage = ({
             title={`${lib.config.title} – ${component.title}`}
             hideFooter
             noScroll={!isMobile}
-            meta={getLibraryMeta({id: lib.config.id, title: lib.config.title}, t, component.title)}
+            meta={componentMeta}
         >
             <ComponentsLayout libId={lib.config.id} componentId={componentId} sections={sections}>
                 <Component

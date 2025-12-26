@@ -1,16 +1,16 @@
-# Creador de constructores de páginas
+# Page Constructor Builder
 
-Una potente utilidad de línea de comandos para crear páginas estáticas a partir de configuraciones de YAML mediante el paquete [@gravity](https://github.com/gravity-ui/page-constructor) -ui/page-constructor. Consulte el [libro de cuentos del constructor de páginas para obtener detalles](https://preview.gravity-ui.com/page-constructor/) de configuración.
+Una potente utilidad de línea de comandos para construir páginas estáticas a partir de configuraciones YAML utilizando el paquete [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor). Consulta [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/) para obtener detalles de configuración.
 
-## Inicio rápido
+## Inicio Rápido
 
-1. **Paquete de instalación:**
+1. **Instalar paquete:**
 
 ```bash
 npm install @gravity-ui/page-constructor-builder
 ```
 
-2. **Agregue el comando de compilación a package.json:**
+2. **Añadir comando de construcción a package.json:**
 
 ```json
 {
@@ -28,6 +28,7 @@ npm install @gravity-ui/page-constructor-builder
 input: ./pages
 output: ./dist
 assets: ./assets
+favicon: logo.svg
 theme: light
 minify: true
 ```
@@ -36,26 +37,26 @@ minify: true
 
 ```yaml
 meta:
-  title: Hello, World
-  description: A simple page constructor page
+  title: Hola, Mundo
+  description: Una página simple de constructor de páginas
 
 blocks:
   - type: header-block
-    title: Hello, World
+    title: Hola, Mundo
     description: |
-      Build beautiful static pages from **YAML configurations** using the power of 
+      Crea páginas estáticas atractivas a partir de **configuraciones YAML** utilizando la potencia de
       [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor).
     background:
       color: '#f8f9fa'
 ```
 
-4. **Crea tus páginas:**
+4. **Construir tus páginas:**
 
 ```bash
 npm run build
 ```
 
-5. **Abra los archivos HTML generados en su navegador:**
+5. **Abrir los archivos HTML generados en tu navegador:**
 
 ```bash
 open dist/index.html
@@ -67,80 +68,81 @@ open dist/index.html
 
 #### `page-builder build`
 
-Crea páginas a partir de configuraciones de YAML.
+Construye páginas a partir de configuraciones YAML.
 
 ```bash
-page-builder build [options]
+page-builder build [opciones]
 ```
 
 **Opciones:**
 
-- `-i, --entrada: <path>` Directorio de entrada que contiene archivos YAML (predeterminado:». /páginas «)
-- `-o, --salida: <path>` Directorio de salida para los archivos creados (predeterminado:». /dist «)
-- `-c, --configuración: <path>` Ruta del archivo de configuración (predeterminado:»). /page-builder.config.yml «)
-- `--css: <files...>` Archivos CSS personalizados para incluir
-- `--componentes: <path>` Directorio de componentes personalizados
-- `--navegación: <path>` Archivo de datos de navegación
-- `--activos: <path>` Directorio de activos estáticos para copiar
-- `--tema: <theme>` Tema (luz)|oscuro) (predeterminado: «claro»)
-- `--URL base: <url>` URL base del sitio
-- `--minify`: Habilitar la minificación
+- `-i, --input <ruta>`: Directorio de entrada que contiene archivos YAML (por defecto: "./pages")
+- `-o, --output <ruta>`: Directorio de salida para los archivos construidos (por defecto: "./dist")
+- `-c, --config <ruta>`: Ruta del archivo de configuración (por defecto: "./page-builder.config.yml")
+- `--css <archivos...>`: Archivos CSS personalizados para incluir
+- `--components <ruta>`: Directorio de componentes personalizados
+- `--navigation <ruta>`: Archivo de datos de navegación
+- `--assets <ruta>`: Directorio de activos estáticos para copiar
+- `--theme <tema>`: Tema (light|dark) (por defecto: "light")
+- `--base-url <url>`: URL base para el sitio
+- `--minify`: Habilitar minificación
 - `--source-maps`: Generar mapas de origen
-- `--watch`: Activar el modo reloj
+- `--watch`: Habilitar modo de observación
 
 ### Configuración
 
-Crea un `page-builder.config.yml` archivo en la raíz de tu proyecto:
+Crea un archivo `page-builder.config.yml` en la raíz de tu proyecto:
 
 ```yaml
 input: ./pages
 output: ./dist
 assets: ./assets
+favicon: logo.svg # Archivo favicon desde assets o URL externa
 theme: light
 baseUrl: https://mysite.com
 minify: true
-sourceMaps: false # Generate source maps for debugging (increases bundle size)
+sourceMaps: false # Generar mapas de origen para depuración (aumenta el tamaño del paquete)
 css:
   - ./styles/main.css
   - ./styles/components.scss
 components: ./components
 navigation: ./navigation.yml
 webpack:
-  # Custom webpack configuration
+  # Configuración personalizada de webpack
 ```
 
-### Configuración de página
+### Configuración de Página
 
 Crea archivos YAML en tu directorio de páginas:
 
 ```yaml
 # pages/index.yml
 meta:
-  title: Welcome to My Site
-  description: This is the homepage of my awesome site
+  title: Bienvenido a Mi Sitio
+  description: Esta es la página de inicio de mi increíble sitio
 
 blocks:
   - type: header-block
-    title: Welcome!
-    description: This is a **header block** with markdown support
+    title: ¡Bienvenido!
+    description: Este es un **bloque de encabezado** con soporte para markdown
     background:
       color: '#f0f0f0'
 
   - type: content-block
-    title: About Us
+    title: Sobre Nosotros
     text: |
-      This is a content block with multiple lines of text.
+      Este es un bloque de contenido con múltiples líneas de texto.
 
-      You can use **markdown** formatting here.
+      Puedes usar formato **markdown** aquí.
 
-  - type: CustomBlock # Your custom component
-    title: Custom Component
-    content: This uses a custom component
+  - type: CustomBlock # Tu componente personalizado
+    title: Componente Personalizado
+    content: Esto utiliza un componente personalizado
 ```
 
-### Componentes personalizados
+### Componentes Personalizados
 
-Crea componentes de React en tu directorio de componentes:
+Crea componentes React en tu directorio de componentes:
 
 ```typescript
 // components/CustomBlock.tsx
@@ -152,7 +154,11 @@ interface CustomBlockProps {
   className?: string;
 }
 
-export const CustomBlock: React.FC<CustomBlockProps> = ({title, content, className = ''}) => {
+export const CustomBlock: React.FC<CustomBlockProps> = ({
+  title,
+  content,
+  className = ''
+}) => {
   return (
     <div className={`custom-block ${className}`}>
       <h2>{title}</h2>
@@ -164,9 +170,9 @@ export const CustomBlock: React.FC<CustomBlockProps> = ({title, content, classNa
 export default CustomBlock;
 ```
 
-### Estilos personalizados
+### Estilos Personalizados
 
-Agregue sus archivos CSS/SCSS personalizados:
+Añade tus archivos CSS/SCSS personalizados:
 
 ```css
 /* styles/main.css */
@@ -184,18 +190,18 @@ Agregue sus archivos CSS/SCSS personalizados:
 }
 ```
 
-### Activos estáticos
+### Activos Estáticos
 
-El constructor de páginas gestiona automáticamente los activos estáticos, como imágenes, iconos y otros archivos. Configure el directorio de activos en su archivo de configuración:
+El constructor de páginas maneja automáticamente activos estáticos como imágenes, iconos y otros archivos. Configura el directorio de activos en tu archivo de configuración:
 
 ```yaml
 # page-builder.config.yml
 input: ./pages
 output: ./dist
-assets: ./assets # Assets directory to copy
+assets: ./assets # Directorio de activos para copiar
 ```
 
-**Estructura del directorio de activos:**
+**Estructura del Directorio de Activos:**
 
 ```
 assets/
@@ -209,89 +215,175 @@ assets/
     └── brochure.pdf
 ```
 
-**Uso de activos en tus páginas:**
+**Uso de Activos en tus Páginas:**
 
 ```yaml
 # pages/index.yml
 blocks:
   - type: header-block
-    title: Welcome
-    description: Check out our amazing content
+    title: Bienvenido
+    description: Echa un vistazo a nuestro increíble contenido
     background:
       image: assets/images/hero-banner.jpg
 
   - type: media-block
-    title: About Us
+    title: Sobre Nosotros
     media:
       - type: image
         src: assets/images/about-photo.png
-        alt: Our team photo
+        alt: Foto de nuestro equipo
+```
+
+### Favicon
+
+El constructor de páginas admite la adición de favicons a tus páginas estáticas. Puedes especificar un archivo local de tu directorio de activos o una URL externa.
+
+#### Configuración
+
+Añade la opción `favicon` a tu archivo de configuración:
+
+```yaml
+# page-builder.config.yml
+favicon: logo.svg # Archivo local del directorio de activos
+# o
+favicon: https://cdn.example.com/favicon.ico # URL externa
+```
+
+#### Archivos Favicon Locales
+
+Para archivos favicon locales, el constructor:
+
+- Detectará automáticamente el archivo en tu directorio de activos
+- Lo copiará al directorio de salida
+- Generará etiquetas `<link>` HTML correctas con los tipos MIME adecuados
+
+**Formatos de archivo compatibles:**
+
+- **SVG** (recomendado) - `image/svg+xml`
+- **ICO** (clásico) - `image/x-icon`
+- **PNG** (moderno) - `image/png`
+- **JPG/JPEG** (aceptable) - `image/jpeg`
+- **GIF** (animado) - `image/gif`
+
+**Ejemplos:**
+
+```yaml
+# page-builder.config.yml
+favicon: logo.svg                    # Archivo en el directorio assets/
+favicon: icons/favicon.ico           # Archivo en el subdirectorio assets/icons/
+favicon: ./custom/path/favicon.png   # Ruta personalizada relativa al proyecto
+favicon: /absolute/path/favicon.ico  # Ruta absoluta
+```
+
+#### URLs externas para Favicon
+
+También puedes usar URLs externas de favicon desde CDNs u otros dominios:
+
+```yaml
+# page-builder.config.yml
+favicon: https://cdn.example.com/favicon.ico
+favicon: https://mysite.com/assets/logo.svg
+```
+
+#### HTML Generado
+
+El constructor genera automáticamente las etiquetas HTML apropiadas basándose en el tipo de favicon:
+
+```html
+<!-- Para favicons SVG -->
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+
+<!-- Para favicons ICO (incluye soporte para navegadores antiguos) -->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<link rel="shortcut icon" href="assets/favicon.ico" />
+
+<!-- Para URLs externas -->
+<link rel="icon" href="https://example.com/favicon.ico" />
 ```
 
 ### Navegación
 
-El constructor de páginas admite la configuración de navegación global que aparece en todas las páginas. La navegación se configura mediante un archivo YAML independiente.
+El constructor de páginas soporta la configuración de navegación global que aparece en todas las páginas. La navegación se configura a través de un archivo YAML separado.
 
-#### Configuración de navegación
+#### Configuración de Navegación
 
-Crea un `navigation.yml` archivo en la raíz de tu proyecto (o especifica una ruta personalizada en tu configuración):
+Crea un archivo `navigation.yml` en la raíz de tu proyecto (o especifica una ruta personalizada en tu configuración):
 
 ```yaml
 # navigation.yml
 logo:
-  text: Your Site Name
+  text: Nombre de Tu Sitio
   url: 'index.html'
   icon: 'assets/logo.svg'
 
 header:
   leftItems:
-    - text: Home
+    - text: Inicio
       url: 'index.html'
       type: 'link'
-    - text: About
+    - text: Acerca de
       url: 'about.html'
       type: 'link'
-    - text: Documentation
+    - text: Documentación
       url: 'https://external-site.com/docs'
       type: 'link'
   rightItems:
     - text: GitHub
       url: 'https://github.com/your-repo'
       type: 'link'
-    - text: Contact
+    - text: Contacto
       url: 'contact.html'
       type: 'link'
 
 footer:
   leftItems:
-    - text: Privacy Policy
+    - text: Política de Privacidad
       url: 'privacy.html'
       type: 'link'
   rightItems:
-    - text: © 2024 Your Company
+    - text: © 2024 Tu Empresa
       type: 'text'
 ```
 
-#### Anulación de navegación por página
+#### Anulación de Navegación por Página
 
-Puedes anular la navegación de páginas específicas añadiendo una `navigation` sección directamente en el YAML de tu página:
+Puedes anular la navegación para páginas específicas añadiendo una sección `navigation` directamente en el YAML de tu página:
 
 ```yaml
 # pages/special-page.yml
 meta:
-  title: Special Page
+  title: Página Especial
 
 navigation:
   logo:
-    text: Special Site
+    text: Sitio Especial
     url: 'index.html'
   header:
     leftItems:
-      - text: Back to Main
+      - text: Volver al Principal
         url: 'index.html'
         type: 'link'
 
 blocks:
   - type: header-block
-    title: This page has custom navigation
+    title: Esta página tiene navegación personalizada
+```
+
+### Configuración de Analíticas
+
+Añade el campo `analytics` a tu `page-builder.config.yml`:
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js`:
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
 ```

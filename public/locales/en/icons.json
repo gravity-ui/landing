@@ -6,6 +6,7 @@
     "actions_copySvgImport": "Copy SVG import",
     "actions_downloadSvg": "Download SVG",
     "title": "Icons",
+    "meta_description": "Browse, search, and download hundreds of modern SVG icons from the Gravity UI icon library",
     "goToLibrary": "Go to library",
     "filterPlaceholder": "Filter by icon name",
     "keywords": "Keywords",

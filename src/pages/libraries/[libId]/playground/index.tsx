@@ -15,17 +15,31 @@ const MarkdownEditor = dynamic(
         ssr: false,
     },
 );
-const GraphPlayround = dynamic(
+const GraphPlayground = dynamic(
     () =>
         import('../../../../components/GraphPlayground/GraphPlayground').then(
-            (mod) => mod.GraphPlayround,
+            (mod) => mod.GraphPlayground,
         ),
     {
         ssr: false,
     },
 );
 
-export const availablePlaygrounds = ['markdown-editor', 'graph'];
+const TimelinePlayground = dynamic(
+    () => import('../../../../components/TimelinePlayground').then((mod) => mod.TimelinePlayground),
+    {
+        ssr: false,
+    },
+);
+
+const AikitPlayground = dynamic(
+    () => import('../../../../components/AikitPlayground').then((mod) => mod.AikitPlayground),
+    {
+        ssr: false,
+    },
+);
+
+export const availablePlaygrounds = ['markdown-editor', 'graph', 'timeline', 'aikit'];
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const libId = Array.isArray(context.params?.libId)
@@ -52,7 +66,9 @@ export const PlaygroundPage = ({libId}: {libId: string}) => {
     return (
         <Layout title={availablePlaygrounds.includes(libId) ? t(libId) : ''}>
             {libId === 'markdown-editor' && <MarkdownEditor />}
-            {libId === 'graph' && <GraphPlayround />}
+            {libId === 'graph' && <GraphPlayground />}
+            {libId === 'timeline' && <TimelinePlayground />}
+            {libId === 'aikit' && <AikitPlayground />}
         </Layout>
     );
 };

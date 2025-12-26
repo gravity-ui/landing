@@ -1,4 +1,5 @@
 import {GetServerSideProps} from 'next';
+import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
 
@@ -17,6 +18,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 const ICON_QUERY_KEY = 'icon';
 
 export const IconsPage = () => {
+    const {t} = useTranslation('icons');
     const router = useRouter();
     const {[ICON_QUERY_KEY]: iconFromQuery} = router.query;
     const currentIcon = typeof iconFromQuery === 'string' ? iconFromQuery : undefined;
@@ -37,7 +39,14 @@ export const IconsPage = () => {
     );
 
     return (
-        <Layout title="Icons">
+        <Layout
+            title="Icons"
+            meta={{
+                description: t('icons:meta_description'),
+                name: 'Gravity UI – Icons',
+                image: 'https://gravity-ui.com/index-social.png',
+            }}
+        >
             <Icons currentIcon={currentIcon} onChangeCurrentIcon={handleChangeCurrentIcon} />
         </Layout>
     );

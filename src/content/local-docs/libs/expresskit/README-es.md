@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit es un contenedor ligero de [express.js](https://expressjs.com/) que se integra con [NodeKit](https://github.com/gravity-ui/nodekit) y proporciona algunas funciones útiles como el registro de solicitudes, el soporte de rastreo, el middleware de controladores asíncronos y la descripción detallada de rutas. &
+ExpressKit es un wrapper ligero para [express.js](https://expressjs.com/) que se integra con [NodeKit](https://github.com/gravity-ui/nodekit) y proporciona algunas características útiles como registro de solicitudes, soporte de tracing, controladores y middleware asíncronos, y descripciones detalladas de las rutas.
 
 Instalación:
 
@@ -18,7 +18,7 @@ const nodekit = new NodeKit();
 
 const app = new ExpressKit(nodekit, {
   'GET /': (req, res) => {
-    res.send('Hello World!');
+    res.send('¡Hola Mundo!');
   },
 });
 
@@ -53,3 +53,111 @@ const config: Partial<AppConfig> = {
 
 export default config;
 ```
+
+## Protección CSRF
+
+ExpressKit proporciona protección integrada contra Cross-Site Request Forgery (CSRF) para asegurar tus aplicaciones contra solicitudes maliciosas de origen cruzado. El middleware CSRF genera y valida automáticamente tokens para solicitudes HTTP que cambian el estado.
+
+### Configuración básica
+
+Para habilitar la protección CSRF, configura la clave secreta en tu configuración:
+
+```typescript
+import type {AppConfig} from '@gravity-ui/nodekit';
+
+const config: Partial<AppConfig> = {
+  // ...
+  appCsrfSecret: 'tu-clave-secreta-aqui',
+};
+
+export default config;
+```
+
+### Opciones de configuración
+
+| Opción              | Tipo                 | Predeterminado                           | Descripción                                                                                     |
+| ------------------- | -------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `appCsrfSecret`     | `string \| string[]` | -                                        | **Requerido.** Clave(s) secreta(s) para la generación de tokens HMAC. Múltiples secretos permiten la rotación de claves. |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 días)                      | Vida útil del token en segundos. Establecer a `0` para que no expire.                                        |
+| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                         | Nombre de la cabecera HTTP para la validación del token.                                                          |
+| `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | Métodos HTTP que requieren validación CSRF.                                                      |
+
+### Uso
+
+Una vez configurada, la protección CSRF se aplica automáticamente a todas las rutas con los métodos HTTP especificados:
+
+```typescript
+import {ExpressKit, AuthPolicy} from '@gravity-ui/expresskit';
+import {NodeKit} from '@gravity-ui/nodekit';
+
+const nodekit = new NodeKit({
+  config: {
+    appCsrfSecret: 'tu-clave-secreta',
+    appAuthPolicy: AuthPolicy.required,
+
+    // Asegúrate de que tu middleware establezca el ID de usuario en originalContext, de lo contrario, la generación del token CSRF fallará
+    appAuthHandler: tuManejadorDeAutenticacion,
+  },
+});
+
+const app = new ExpressKit(nodekit, {
+  'GET /api/form': (req, res) => {
+    // El token está disponible en el contexto de la solicitud
+    res.json({csrfToken: req.originalContext.get('csrfToken')});
+  },
+
+  'POST /api/submit': (req, res) => {
+    // Esta ruta valida automáticamente el token CSRF
+    res.json({message: 'Formulario enviado con éxito'});
+  },
+});
+```
+
+### Configuración por ruta
+
+Puedes deshabilitar la protección CSRF para rutas específicas:
+
+```typescript
+const app = new ExpressKit(nodekit, {
+  'POST /api/webhook': {
+    authPolicy: AuthPolicy.required,
+    disableCsrf: true, // Deshabilita CSRF para esta ruta
+    handler: (req, res) => {
+      res.json({message: 'Webhook procesado'});
+    },
+  },
+});
+```
+
+## Control de caché
+
+Por defecto, ExpressKit establece cabeceras `no-cache` en todas las respuestas. Puedes controlar este comportamiento globalmente o por ruta.
+
+### Configuración global
+
+```typescript
+const config: Partial<AppConfig> = {
+  expressEnableCaching: true, // Permite la caché por defecto
+};
+```
+
+### Configuración por ruta
+
+```typescript
+const app = new ExpressKit(nodekit, {
+  'GET /api/cached': {
+    enableCaching: true, // Permite la caché para esta ruta
+    handler: (req, res) => res.json({data: 'cacheable'}),
+  },
+  'GET /api/fresh': {
+    enableCaching: false, // Fuerza no-cache
+    handler: (req, res) => res.json({data: 'siempre fresco'}),
+  },
+});
+```
+
+El `enableCaching` a nivel de ruta anula la configuración global. El estado de la caché está disponible en `req.routeInfo.enableCaching`.
+
+## Validación y serialización de respuestas
+
+- [Validación de solicitudes y serialización de respuestas](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utiliza esquemas Zod para la validación automática de solicitudes y la serialización de respuestas.

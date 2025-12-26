@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 24
       - name: Upgrade sandbox packages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

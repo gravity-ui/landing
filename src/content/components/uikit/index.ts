@@ -4,6 +4,7 @@ import {getLibConfigById} from '../../../libs/config';
 import {Component, Lib} from '../types';
 
 import {accordionConfig} from './Accordion';
+import {actionTooltipConfig} from './ActionTooltip';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {avatarConfig} from './Avatar';
@@ -11,7 +12,14 @@ import {breadcrumbsConfig} from './Breadcrumbs';
 import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
+import {clipboardButtonConfig} from './ClipboardButton';
+import {dialogConfig} from './Dialog';
+import {disclosureConfig} from './Disclosure';
+import {dividerConfig} from './Divider';
 import {dropdownMenuConfig} from './DropdownMenu';
+import {filePreviewConfig} from './FilePreview';
+import {helpMarkConfig} from './HelpMark';
+import {hotkeyConfig} from './Hotkey';
 import {iconConfig} from './Icon';
 import {labelConfig} from './Label';
 import {linkConfig} from './Link';
@@ -19,10 +27,13 @@ import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {modalConfig} from './Modal';
+import {numberInputConfig} from './NumberInput';
 import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
 import {pinInputConfig} from './PinInput';
+import {placeholderContainerConfig} from './PlaceholderContainer';
+import {popoverConfig} from './Popover';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
 import {progressConfig} from './Progress';
@@ -42,6 +53,7 @@ import {textConfig} from './Text';
 import {textAreaConfig} from './TextArea';
 import {textInputConfig} from './TextInput';
 import {config as toasterConfig} from './Toaster';
+import {tocConfig} from './Toc';
 import {tooltipConfig} from './Tooltip';
 import {userConfig} from './User';
 import {userLabelConfig} from './UserLabel';
@@ -53,10 +65,15 @@ const uikitComponents: Component[] = [
     alertConfig,
     arrowToggleConfig,
     avatarConfig,
+    actionTooltipConfig,
     breadcrumbsConfig,
     buttonConfig,
     cardConfig,
     checkboxConfig,
+    clipboardButtonConfig,
+    dialogConfig,
+    disclosureConfig,
+    dividerConfig,
     dropdownMenuConfig,
     iconConfig,
     labelConfig,
@@ -65,10 +82,13 @@ const uikitComponents: Component[] = [
     loaderConfig,
     menuConfig,
     modalConfig,
+    numberInputConfig,
     overlayConfig,
     paginationConfig,
     paletteConfig,
     pinInputConfig,
+    placeholderContainerConfig,
+    popoverConfig,
     popupConfig,
     portalConfig,
     progressConfig,
@@ -87,10 +107,14 @@ const uikitComponents: Component[] = [
     textInputConfig,
     tooltipConfig,
     toasterConfig,
+    tocConfig,
     userConfig,
     userLabelConfig,
     sheetConfig,
     stepperConfig,
+    helpMarkConfig,
+    hotkeyConfig,
+    filePreviewConfig,
 ];
 
 export const uikit: Lib = {
