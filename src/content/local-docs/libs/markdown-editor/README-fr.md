@@ -2,15 +2,15 @@
 
 # @gravity-ui/markdown-editor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/markdown-editor)](https://www.npmjs.com/package/@gravity-ui/markdown-editor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/markdown-editor/actions/workflows/ci.yml?query=branch:main) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/markdown-editor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/md-editor/)
 
-## Éditeur WYSIWYG et de balisage Markdown
+## Éditeur Markdown WYSIWYG et de balisage
 
-MarkdownEditor est un outil puissant pour travailler avec Markdown, qui combine les modes WYSIWYG (What You See Is What You Get) et Markup. Cela signifie que vous pouvez créer et modifier du contenu dans un mode visuel pratique, tout en ayant un contrôle total sur le balisage.
+MarkdownEditor est un outil puissant pour travailler avec Markdown, qui combine les modes WYSIWYG et Markup. Cela signifie que vous pouvez créer et modifier du contenu dans un mode visuel pratique, tout en ayant un contrôle total sur le balisage.
 
 ### 🔧 Fonctionnalités principales
 
 - Prise en charge de la syntaxe Markdown de base et de [YFM](https://ydocs.tech).
 - Extensibilité grâce à l'utilisation des moteurs ProseMirror et CodeMirror.
-- Possibilité de travailler en modes WYSIWYG et Markup pour une flexibilité maximale.
+- La possibilité de travailler en modes WYSIWYG et Markup pour une flexibilité maximale.
 
 ## Installation
 
@@ -20,7 +20,7 @@ npm install @gravity-ui/markdown-editor
 
 ### Dépendances requises
 
-Veuillez noter que pour commencer à utiliser le package, votre projet doit également avoir installé les éléments suivants : `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` et quelques autres. Consultez la section `peerDependencies` de `package.json` pour des informations précises.
+Veuillez noter que pour commencer à utiliser le package, votre projet doit également avoir les éléments suivants installés : `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` et quelques autres. Consultez la section `peerDependencies` de `package.json` pour des informations précises.
 
 ## Démarrage
 
@@ -61,11 +61,13 @@ En savoir plus :
 - [Comment ajouter une extension de liaison de texte en markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Développement
-Pour démarrer le storybook de développement
 
-```shell
-npm start
-```
+1. Installez l'environnement Nodejs, la version est spécifiée dans le fichier `.nvmrc`. Nous recommandons d'utiliser [NVM](https://github.com/nvm-sh/nvm) ou un outil similaire.
+2. Installez [pnpm](https://pnpm.io/installation), la version est spécifiée dans `package.json` dans la propriété "packageManager".
+  
+   Vous pouvez utiliser [Corepack](https://nodejs.org/api/corepack.html), ou simplement l'installer via npm : exécutez `npm deps:global --force`.
+3. Installez les dépendances : `pnpm i`
+4. Lancez le serveur de développement Storybook : `pnpm start`
 
 
 ### i18n
@@ -80,7 +82,7 @@ configure({
 });
 ```
 
-N'oubliez pas d'appeler `configure()` depuis [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) et d'autres bibliothèques d'interface utilisateur.
+N'oubliez pas d'appeler `configure()` depuis [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) et d'autres bibliothèques UI.
 
 ### Contribution
 

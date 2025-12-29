@@ -4,7 +4,7 @@
 
 ## Markdown WYSIWYG- und Markup-Editor
 
-MarkdownEditor ist ein leistungsstarkes Werkzeug für die Arbeit mit Markdown, das WYSIWYG- und Markup-Modi kombiniert. Das bedeutet, dass Sie Inhalte in einem praktischen visuellen Modus erstellen und bearbeiten können, während Sie gleichzeitig die volle Kontrolle über das Markup behalten.
+MarkdownEditor ist ein leistungsstarkes Werkzeug für die Arbeit mit Markdown, das WYSIWYG- und Markup-Modi kombiniert. Das bedeutet, dass Sie Inhalte in einem komfortablen visuellen Modus erstellen und bearbeiten können, während Sie gleichzeitig die volle Kontrolle über das Markup behalten.
 
 ### 🔧 Hauptfunktionen
 
@@ -20,12 +20,12 @@ npm install @gravity-ui/markdown-editor
 
 ### Erforderliche Abhängigkeiten
 
-Bitte beachten Sie, dass Ihr Projekt für die Nutzung des Pakets auch Folgendes installiert haben muss: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` und einige andere. Genaue Informationen finden Sie im Abschnitt `peerDependencies` der `package.json`.
+Bitte beachten Sie, dass Ihr Projekt auch die folgenden Pakete installiert haben muss, um das Paket nutzen zu können: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` und einige andere. Die genauen Informationen finden Sie im Abschnitt `peerDependencies` der `package.json`.
 
 ## Erste Schritte
 
-Der Markdown-Editor wird als React-Hook zur Erstellung einer Editorinstanz und als Komponente zur Anzeige der Ansicht bereitgestellt.
-Informationen zum Einrichten von Styling und Themes finden Sie in der [UIKit-Dokumentation](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+Der Markdown-Editor wird als React-Hook zur Erstellung einer Editorinstanz und als Komponente zur Anzeige bereitgestellt.
+Um Styling und Theme einzurichten, siehe [UIKit-Dokumentation](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
 import React from 'react';
@@ -51,21 +51,23 @@ function Editor({onSubmit}) {
 }
 ```
 Mehr erfahren:
-- [So verbinden Sie den Editor in Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
-- [So fügen Sie eine Vorschau für den Markup-Modus hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
-- [So fügen Sie eine HTML-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [So fügen Sie eine Latex-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
-- [So fügen Sie eine Mermaid-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
-- [So schreiben Sie eine Erweiterung](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
-- [So fügen Sie eine GPT-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [So fügen Sie eine Textbindungs-Erweiterung in Markdown hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [Wie man den Editor in Create React App integriert](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
+- [Wie man eine Vorschau für den Markup-Modus hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
+- [Wie man die HTML-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
+- [Wie man die Latex-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
+- [Wie man die Mermaid-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
+- [Wie man eine Erweiterung schreibt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
+- [Wie man die GPT-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
+- [Wie man eine Textbindungs-Erweiterung in Markdown hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Entwicklung
-Um den Dev-Storybook zu starten:
 
-```shell
-npm start
-```
+1. Installieren Sie die Node.js-Umgebung. Die Version ist in der `.nvmrc`-Datei angegeben. Wir empfehlen die Verwendung von [NVM](https://github.com/nvm-sh/nvm) oder einem ähnlichen Tool.
+2. Installieren Sie [pnpm](https://pnpm.io/installation). Die Version ist in der `package.json` unter der Eigenschaft "packageManager" angegeben.
+  
+   Sie können [Corepack](https://nodejs.org/api/corepack.html) verwenden oder einfach über npm installieren: führen Sie `npm deps:global --force` aus.
+3. Installieren Sie die Abhängigkeiten: `pnpm i`
+4. Starten Sie den Storybook-Entwicklungsserver: `pnpm start`
 
 
 ### i18n
@@ -82,6 +84,6 @@ configure({
 
 Vergessen Sie nicht, `configure()` aus [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) und anderen UI-Bibliotheken aufzurufen.
 
-### Mitwirken
+### Mitwirkung
 
 - [Richtlinien für Mitwirkende](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
