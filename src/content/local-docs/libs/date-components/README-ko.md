@@ -1,4 +1,4 @@
-# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
+# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/) [![coverage](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fstorage.yandexcloud.net%2Fplaywright-reports%2Fdate-components%2Fpulls%2Fmain%2Fcoverage%2Fcoverage-summary.json&query=%24.total.lines.pct&suffix=%25&label=Coverage)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/coverage/lcov-report/index.html) [![tests-report](https://img.shields.io/badge/Tests-report-ff4685)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/html/index.html)
 
 ## 설치
 
@@ -53,7 +53,7 @@ function App() {
 }
 ```
 
-앱에서 언어 전환을 지원하는 경우, 앱이 처음 로드될 때 지원되는 모든 로케일을 미리 로드하거나, 언어를 전환하기 전에 로케일을 로드하세요:
+앱에서 언어 전환을 지원하는 경우, 앱이 처음 로드될 때 지원되는 모든 로케일을 미리 로드하거나 언어를 전환하기 전에 로케일을 로드하세요.
 
 ```jsx
 // 로케일 미리 로드
@@ -77,7 +77,7 @@ function App() {
 }
 ```
 
-이 컴포넌트들은 영어와 러시아어로 번역되어 있습니다. 다른 언어로 번역을 추가하려면 `@gravity-ui/uikit`의 `addLanguageKeysets`를 사용하세요:
+컴포넌트에는 영어와 러시아어 번역이 포함되어 있습니다. 다른 언어로 번역을 추가하려면 `@gravity-ui/uikit`의 `addLanguageKeysets`를 사용하세요.
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
@@ -89,13 +89,13 @@ addLanguageKeysets<Keysets>(lang, {...});
 // 또는 필요한 것만 지정하려면 PartialKeysets 타입을 사용합니다.
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// 일부 컴포넌트에 대한 번역을 지정하려면
+// 특정 컴포넌트에 대한 번역을 지정하려면
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
 ## 개발
 
-storybook과 함께 개발 서버를 시작하려면 다음을 실행하세요:
+스토리북과 함께 개발 서버를 시작하려면 다음을 실행하세요.
 
 ```shell
 npm start
