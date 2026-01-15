@@ -21,22 +21,8 @@ const logo: AsideHeaderProps['logo'] = {
 
 const renderFooter: AsideHeaderProps['renderFooter'] = ({compact}) => (
     <Fragment>
-        <FooterItem
-            compact={compact}
-            item={{
-                id: 'feedback',
-                title: 'Feedback',
-                icon: Feedback,
-            }}
-        />
-        <FooterItem
-            item={{
-                id: 'settings',
-                icon: Gear,
-                title: 'Settings',
-            }}
-            compact={compact}
-        />
+        <FooterItem compact={compact} id="feedback" title="Feedback" icon={Feedback} />
+        <FooterItem id="settings" title="Feedback" icon={Gear} compact={compact} />
     </Fragment>
 );
 

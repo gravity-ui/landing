@@ -23,7 +23,7 @@ export function HotkeysPanelComponent({
     return (
         <HotkeysPanel
             hotkeys={hotkeys}
-            visible={visible}
+            open={visible}
             filterable={filterable}
             title={
                 <span className={b('title')}>
