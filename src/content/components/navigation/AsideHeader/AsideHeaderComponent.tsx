@@ -1,5 +1,5 @@
 import {Aperture, Gear, Magnifier, Star} from '@gravity-ui/icons';
-import {AsideHeader, AsideHeaderProps, FooterItem, SubheaderMenuItem} from '@gravity-ui/navigation';
+import {AsideHeader, AsideHeaderItem, AsideHeaderProps, FooterItem} from '@gravity-ui/navigation';
 import {TextInput} from '@gravity-ui/uikit';
 import React from 'react';
 
@@ -24,16 +24,14 @@ export const AsideHeaderComponent = ({
     const [visiblePanel, setVisiblePanel] = React.useState<Panel>();
     const [compact, setCompact] = React.useState(false);
 
-    const subheaderItems: SubheaderMenuItem[] = [
+    const subheaderItems: AsideHeaderItem[] = [
         {
-            item: {
-                id: 'search',
-                title: 'Search',
-                icon: Magnifier,
-                current: visiblePanel === Panel.Search,
-                onItemClick: () =>
-                    setVisiblePanel(visiblePanel === Panel.Search ? undefined : Panel.Search),
-            },
+            id: 'search',
+            title: 'Search',
+            icon: Magnifier,
+            current: visiblePanel === Panel.Search,
+            onItemClick: () =>
+                setVisiblePanel(visiblePanel === Panel.Search ? undefined : Panel.Search),
         },
     ];
 
@@ -47,53 +45,49 @@ export const AsideHeaderComponent = ({
             panelItems={[
                 {
                     id: 'search',
-                    content: (
+                    children: (
                         <div style={panelStyle}>
                             <TextInput placeholder="Search by ID" hasClear />
                         </div>
                     ),
-                    visible: visiblePanel === Panel.Search,
+                    open: visiblePanel === Panel.Search,
                 },
                 {
                     id: 'settings',
-                    content: <div style={panelStyle}> Settigs panel</div>,
-                    visible: visiblePanel === Panel.Settings,
+                    children: <div style={panelStyle}>Settings panel</div>,
+                    open: visiblePanel === Panel.Settings,
                 },
                 {
                     id: 'favorites',
-                    content: <div style={panelStyle}>Favorites panel</div>,
-                    visible: visiblePanel === Panel.Favorites,
+                    children: <div style={panelStyle}>Favorites panel</div>,
+                    open: visiblePanel === Panel.Favorites,
                 },
             ]}
             renderFooter={({compact}) => (
                 <React.Fragment>
                     <FooterItem
-                        item={{
-                            id: 'favorites',
-                            title: 'Favorites',
-                            tooltipText: 'Favorites with panel',
-                            current: visiblePanel === Panel.Favorites,
-                            icon: Star,
-                            onItemClick: () => {
-                                setVisiblePanel(
-                                    visiblePanel === Panel.Favorites ? undefined : Panel.Favorites,
-                                );
-                            },
+                        id="favorites"
+                        title="Favorites"
+                        tooltipText="Favorites with panel"
+                        current={visiblePanel === Panel.Favorites}
+                        icon={Star}
+                        onItemClick={() => {
+                            setVisiblePanel(
+                                visiblePanel === Panel.Favorites ? undefined : Panel.Favorites,
+                            );
                         }}
                         compact={compact}
                     />
                     <FooterItem
-                        item={{
-                            id: 'settings',
-                            title: 'Settings',
-                            tooltipText: 'Settings with panel',
-                            current: visiblePanel === Panel.Settings,
-                            icon: Gear,
-                            onItemClick: () => {
-                                setVisiblePanel(
-                                    visiblePanel === Panel.Settings ? undefined : Panel.Settings,
-                                );
-                            },
+                        id="settings"
+                        title="Settings"
+                        tooltipText="Settings with panel"
+                        current={visiblePanel === Panel.Settings}
+                        icon={Gear}
+                        onItemClick={() => {
+                            setVisiblePanel(
+                                visiblePanel === Panel.Settings ? undefined : Panel.Settings,
+                            );
                         }}
                         compact={compact}
                     />
