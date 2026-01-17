@@ -133,7 +133,6 @@ module.exports = withBundleAnalyzer(
         ],
         experimental: {
             esmExternals: 'loose',
-            optimizePackageImports: ['@gravity-ui/uikit'],
         },
         typescript: {
             ignoreBuildErrors: true,
