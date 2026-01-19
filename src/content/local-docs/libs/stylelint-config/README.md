@@ -43,3 +43,4 @@ If you want to order properties in your css files, extend root config with the a
   "extends": ["@gravity-ui/stylelint-config", "@gravity-ui/stylelint-config/order"]
 }
 ```
+
