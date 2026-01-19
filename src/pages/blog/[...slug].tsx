@@ -105,11 +105,11 @@ export default function BlogPostPage({
 
     // Share options for the post
     const shareOptions = [
-        ShareOptions.Twitter,
-        ShareOptions.Facebook,
         ShareOptions.Telegram,
-        ShareOptions.VK,
+        ShareOptions.Facebook,
         ShareOptions.LinkedIn,
+        ShareOptions.VK,
+        ShareOptions.Twitter,
     ];
 
     // Breadcrumbs for navigation
