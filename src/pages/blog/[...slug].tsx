@@ -201,7 +201,7 @@ export default function BlogPostPage({
                             isMobile,
                             theme: Theme.Dark,
                             projectSettings: {
-                                disableCompress: false,
+                                disableCompress: true,
                             },
                             analytics,
                         }}
