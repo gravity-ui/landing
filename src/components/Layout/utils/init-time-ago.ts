@@ -3,7 +3,9 @@ import de from 'javascript-time-ago/locale/de.json';
 import en from 'javascript-time-ago/locale/en.json';
 import es from 'javascript-time-ago/locale/es.json';
 import fr from 'javascript-time-ago/locale/fr.json';
+import ja from 'javascript-time-ago/locale/ja.json';
 import ko from 'javascript-time-ago/locale/ko.json';
+import pt from 'javascript-time-ago/locale/pt.json';
 import ru from 'javascript-time-ago/locale/ru.json';
 import zh from 'javascript-time-ago/locale/zh.json';
 
@@ -15,4 +17,6 @@ export const initTimeAgo = () => {
     TimeAgo.addLocale(fr);
     TimeAgo.addLocale(de);
     TimeAgo.addLocale(ko);
+    TimeAgo.addLocale(pt);
+    TimeAgo.addLocale(ja);
 };

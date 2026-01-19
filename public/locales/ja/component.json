@@ -1,0 +1,13 @@
+{
+    "actions_openInFigma": "Open in Figma",
+    "title": "Components",
+    "searchPlaceholder": "Search by component name",
+    "color-input_validation-format-error": "Incorrect format",
+    "maintainers_one": "Maintainer:",
+    "maintainers_other": "Maintainers:",
+    "maintainers": "Maintainers:",
+    "theme": "Switch theme",
+    "rtlOn": "Switch RTL on",
+    "rtlOff": "Switch RTL off",
+    "rtlNotSupported": "RTL not supported"
+}

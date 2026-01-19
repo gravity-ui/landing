@@ -1,0 +1,17 @@
+{
+    "actions_copyIconName": "Copy icon name",
+    "actions_copyLink": "Copy Link",
+    "actions_copied": "Copied",
+    "actions_copyReactComponent": "Copy React component",
+    "actions_copySvgImport": "Copy SVG import",
+    "actions_downloadSvg": "Download SVG",
+    "title": "Icons",
+    "meta_description": "Browse, search, and download hundreds of modern SVG icons from the Gravity UI icon library",
+    "goToLibrary": "Go to library",
+    "filterPlaceholder": "Filter by icon name",
+    "keywords": "Keywords",
+    "empty_title": "No results found for your request",
+    "empty_subTitle": "Please check the spelling or try another keywords.",
+    "usage_reactComponent": "React component",
+    "usage_svg": "SVG"
+}

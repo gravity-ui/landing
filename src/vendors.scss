@@ -3,7 +3,7 @@
     $flag-icons-path: '~flag-icons/flags',
 
     // Include only specific country flags
-    $flag-icons-included-countries: ('us', 'ru', 'es', 'cn', 'fr', 'de', 'kr')
+    $flag-icons-included-countries: ('us', 'ru', 'es', 'cn', 'fr', 'de', 'kr', 'pt', 'jp')
 );
 
 @import '~@gravity-ui/page-constructor/styles/styles.scss';

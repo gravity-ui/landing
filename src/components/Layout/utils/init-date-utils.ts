@@ -7,4 +7,6 @@ export const initDateUtils = () => {
     settings.loadLocale('fr');
     settings.loadLocale('de');
     settings.loadLocale('ko');
+    settings.loadLocale('pt');
+    settings.loadLocale('ja');
 };
