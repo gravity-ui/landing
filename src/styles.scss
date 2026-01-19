@@ -131,6 +131,114 @@ body.g-root,
     .pc-page-constructor {
         background-color: transparent;
     }
+
+    // Стили для блоков кода в blog-constructor с цветами из prism-tomorrow
+    // stylelint-disable declaration-no-important
+    .yfm_blog {
+        // Фон блоков кода (аналогично prism-tomorrow)
+        pre {
+            background-color: #2d2d2d !important;
+        }
+
+        pre > code {
+            background-color: #2d2d2d !important;
+            color: #ccc !important; // Базовый цвет текста
+        }
+
+        // Подсветка синтаксиса highlight.js с цветами из prism-tomorrow
+        .hljs-subst {
+            color: #ccc !important; // Базовый цвет
+        }
+
+        .hljs-comment {
+            color: #999 !important; // Комментарии
+        }
+
+        .hljs-keyword,
+        .hljs-attribute,
+        .hljs-selector-tag,
+        .hljs-meta-keyword,
+        .hljs-doctag,
+        .hljs-name {
+            color: #cc99cd !important; // Ключевые слова
+        }
+
+        .hljs-type,
+        .hljs-string,
+        .hljs-quote,
+        .hljs-template-tag {
+            color: #7ec699 !important; // Строки
+        }
+
+        .hljs-number {
+            color: #f08d49 !important; // Числа
+        }
+
+        .hljs-selector-id,
+        .hljs-selector-class {
+            color: #7ec699 !important; // Селекторы
+        }
+
+        .hljs-deletion {
+            color: #e2777a !important; // Удалённое
+        }
+
+        .hljs-title,
+        .hljs-section {
+            color: #e2777a !important; // Заголовки
+        }
+
+        .hljs-regexp,
+        .hljs-symbol,
+        .hljs-variable,
+        .hljs-template-variable,
+        .hljs-link,
+        .hljs-selector-attr,
+        .hljs-selector-pseudo {
+            color: #67cdcc !important; // Переменные и операторы
+        }
+
+        .hljs-literal {
+            color: #f08d49 !important; // Литералы (boolean, number)
+        }
+
+        .hljs-built_in,
+        .hljs-bullet,
+        .hljs-code,
+        .hljs-addition {
+            color: #f8c555 !important; // Встроенные функции и константы
+        }
+
+        .hljs-meta {
+            color: #cc99cd !important; // Мета-информация
+        }
+
+        .hljs-meta-string {
+            color: #7ec699 !important; // Мета-строки
+        }
+
+        // Дополнительные классы для лучшей совместимости
+        .hljs-function {
+            color: #f08d49 !important; // Функции
+        }
+
+        .hljs-class {
+            color: #f8c555 !important; // Классы
+        }
+
+        .hljs-tag {
+            color: #e2777a !important; // Теги
+        }
+
+        .hljs-attr {
+            color: #e2777a !important; // Атрибуты
+        }
+
+        .hljs-attr-value {
+            color: #7ec699 !important; // Значения атрибутов
+        }
+    }
+    // stylelint-enable declaration-no-important
 }
 
 .g-fun-gravity {
