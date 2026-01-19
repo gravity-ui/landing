@@ -350,3 +350,4 @@ The differences are as follows:
 - A more convenient API that allows you to work with any kind of internationalization functions (including namespaces-helpers like useTranslation from i18next, imported functions from other modules, etc.)
 - Correct generation of source maps relative to the source code
 - There is only support for webpack 5. Webpack 4 support has been removed.
+

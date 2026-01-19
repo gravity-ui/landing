@@ -13,3 +13,4 @@ Add `tsconfig.json` file in the project root with the following content:
     "extends": "@gravity-ui/tsconfig/tsconfig.json"
 }
 ```
+
