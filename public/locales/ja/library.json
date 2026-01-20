@@ -1,0 +1,15 @@
+{
+    "actions_goToIcons": "Go to icons",
+    "libraries": "Libraries",
+    "readme": "Readme",
+    "changelog": "Changelog",
+    "about": "About library",
+    "stars": "Stars",
+    "version": "Version",
+    "lastUpdate": "Last update",
+    "repository": "Repository",
+    "license": "License",
+    "issues": "Issues",
+    "maintainers": "Maintainers",
+    "contributors": "Contributors"
+}

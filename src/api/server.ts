@@ -266,6 +266,8 @@ export class ServerApi {
         fr: string;
         de: string;
         ko: string;
+        pt: string;
+        ja: string;
     }> {
         const headers: Record<string, string> = {'User-Agent': 'request'};
 
@@ -293,7 +295,7 @@ export class ServerApi {
                 'utf8',
             );
 
-        const [en, ru, es, zh, fr, de, ko] = await Promise.all([
+        const [en, ru, es, zh, fr, de, ko, pt, ja] = await Promise.all([
             fetchReadmeContent(readmeUrl.en),
             fetchReadmeContent(readmeUrl.ru),
             getLocalDocsReadPromise('es'),
@@ -301,6 +303,8 @@ export class ServerApi {
             getLocalDocsReadPromise('fr'),
             getLocalDocsReadPromise('de'),
             getLocalDocsReadPromise('ko'),
+            getLocalDocsReadPromise('pt'),
+            getLocalDocsReadPromise('ja'),
         ]);
 
         return {
@@ -311,6 +315,8 @@ export class ServerApi {
             fr,
             de,
             ko,
+            pt,
+            ja,
         };
     }
 

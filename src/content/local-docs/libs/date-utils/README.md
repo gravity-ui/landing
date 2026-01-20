@@ -58,3 +58,4 @@ settings.loadLocale('de').then(() => {
 // Customization
 settings.updateLocale({weekStart: 0}); // change first day of week
 ```
+

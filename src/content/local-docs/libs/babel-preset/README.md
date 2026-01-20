@@ -24,3 +24,4 @@ npm install --save-dev @gravity-ui/babel-preset
   ]
 }
 ```
+

@@ -29,3 +29,4 @@ import {Cloud} from '@gravity-ui/icons';
 ```js
 import cloudIcon from '@gravity-ui/icons/svgs/cloud.svg';
 ```
+
