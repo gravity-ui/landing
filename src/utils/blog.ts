@@ -1,4 +1,4 @@
-import {PostData} from '@gravity-ui/blog-constructor';
+import {PostData, Tag} from '@gravity-ui/blog-constructor';
 import {
     fullTransform,
     typografToHTML,
@@ -39,7 +39,16 @@ export const getUrlWithLocale = (url: string, locale: string): string => {
     return cleanUrl ? `/${lang}/blog/${cleanUrl}` : `/${lang}/blog`;
 };
 
-type MarkdownItPluginCb = Parameters<typeof fullTransform>[1]['plugins'][number];
+/**
+ * Converts a locale string to Lang type (only 'en' and 'ru' are supported by typograf functions)
+ * @param locale - The locale string
+ * @returns Lang type (Lang.En or Lang.Ru)
+ */
+const localeToLang = (locale: string): Lang => {
+    return locale === 'ru' ? Lang.Ru : Lang.En;
+};
+
+type MarkdownItPluginCb = NonNullable<Parameters<typeof fullTransform>[1]['plugins']>[number];
 
 /**
  * Transforms post content from markdown to HTML
@@ -115,29 +124,27 @@ export function preparePost({
         ...post
     } = postData;
 
-    const transformedTitle = yfmTransformer(locale.lang, title as string, {plugins});
+    // Convert locale to Lang (only 'en' and 'ru' are supported by typograf functions)
+    const lang = localeToLang(locale.lang);
 
-    const preparedPost: PostData = {
+    const transformedTitle = yfmTransformer(lang, title as string, {plugins});
+
+    const preparedPost = {
         ...post,
-        tags,
+        tags: (tags as Tag[]) || [],
         title: transformedTitle,
-        textTitle: typografToText(transformedTitle, locale.lang),
-        htmlTitle: typografToHTML(transformedTitle, locale.lang),
-        metaTitle: extractTextFromHtml(locale.lang, title, plugins),
-        metaDescription: extractTextFromHtml(locale.lang, description, plugins),
-        shareTitle: extractTextFromHtml(locale.lang, title, plugins),
-        shareDescription: extractTextFromHtml(locale.lang, description, plugins),
-        description: yfmTransformer(locale.lang, description as string, {plugins}),
-        url: url ? getUrlWithLocale(url, locale.lang) : '',
-    };
+        textTitle: typografToText(transformedTitle, lang),
+        htmlTitle: typografToHTML(transformedTitle, lang),
+        metaTitle: extractTextFromHtml(lang, title as string | undefined, plugins),
+        metaDescription: extractTextFromHtml(lang, description as string | undefined, plugins),
+        shareTitle: extractTextFromHtml(lang, title as string | undefined, plugins),
+        shareDescription: extractTextFromHtml(lang, description as string | undefined, plugins),
+        description: yfmTransformer(lang, description as string, {plugins}),
+        url: typeof url === 'string' ? getUrlWithLocale(url, locale.lang) : '',
+    } as PostData;
 
     if (withContent) {
-        preparedPost.content = transformPostContent(
-            content as string,
-            locale.lang,
-            plugins,
-            contentPath,
-        );
+        preparedPost.content = transformPostContent(content as string, lang, plugins, contentPath);
     }
 
     return preparedPost;
