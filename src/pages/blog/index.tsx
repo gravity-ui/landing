@@ -14,7 +14,7 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
-import {Api} from '../../api';
+import {ServerApi} from '../../api';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
@@ -48,8 +48,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     try {
         const [postsResponse, tags, i18nProps] = await Promise.all([
-            Api.instance.getBlogPosts(locale),
-            Api.instance.getBlogTags(locale),
+            ServerApi.instance.getBlogPosts(locale),
+            ServerApi.instance.getBlogTags(locale),
             getI18nProps(ctx, ['blog']),
         ]);
 
@@ -116,7 +116,7 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
             };
 
             const currentLocale = router.locale || 'en';
-            const response = await Api.instance.getBlogPosts(currentLocale, apiQuery);
+            const response = await ServerApi.instance.getBlogPosts(currentLocale, apiQuery);
 
             // URLs are already formatted with locale prefix by preparePost on the server
             const postsResponse = {

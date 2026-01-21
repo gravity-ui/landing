@@ -13,7 +13,7 @@ import Head from 'next/head';
 import {useRouter} from 'next/router';
 import {useMemo} from 'react';
 
-import {Api} from '../../api';
+import {ServerApi} from '../../api';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {getI18nProps} from '../../utils/i18next';
@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     try {
         const [postResponse, i18nProps] = await Promise.all([
-            Api.instance.getBlogPost(locale, fullSlug),
+            ServerApi.instance.getBlogPost(locale, fullSlug),
             getI18nProps(ctx, ['blog']),
         ]);
 
