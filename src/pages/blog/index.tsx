@@ -18,9 +18,9 @@ import {ServerApi} from '../../api';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
+import {localeEn, localeRu} from '../../utils/blog-constants';
 import {getI18nProps} from '../../utils/i18next';
 
-import {localeEn, localeRu} from './constants';
 import './index.scss';
 
 const b = block('blog-page');
