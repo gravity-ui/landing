@@ -24,7 +24,7 @@ import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
 
 ### 国际化 (I18N)
 
-某些组件包含两种语言的文本标记（单词和短语）：`en`（默认）和 `ru`。要设置语言，请使用 `configure` 函数：
+某些组件包含文本令牌（单词和短语），提供两种语言：`en`（默认）和 `ru`。要设置语言，请使用 `configure` 函数：
 
 ```js
 // index.js

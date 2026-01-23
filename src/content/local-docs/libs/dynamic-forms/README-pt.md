@@ -1,8 +1,8 @@
 # @gravity-ui/dynamic-forms &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/dynamic-forms)](https://www.npmjs.com/package/@gravity-ui/dynamic-forms) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/dynamic-forms/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/dynamic-forms/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/dynamic-forms/)
 
-La biblioteca basada en JSON Schema para renderizar formularios y valores de formularios.
+Biblioteca baseada em JSON Schema para renderização de formulários e valores de formulário.
 
-## Instalación
+## Instalação
 
 ```shell
 npm install --save-dev @gravity-ui/dynamic-forms
@@ -13,18 +13,18 @@ npm install --save-dev @gravity-ui/dynamic-forms
 ```jsx
 import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
 
-// Para incrustar en un final-form
+// Para incorporar em um final-form
 <DynamicField name={name} spec={spec} config={config} />;
 
 import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
 
-// Para obtener una vista general de los valores
+// Para obter uma visão geral dos valores
 <DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
 ```
 
-### Internacionalización (I18N)
+### I18N
 
-Ciertos componentes incluyen tokens de texto (palabras y frases) que están disponibles en dos idiomas: `en` (el predeterminado) y `ru`. Para establecer el idioma, usa la función `configure`:
+Certos componentes incluem tokens de texto (palavras e frases) que estão disponíveis em dois idiomas: `en` (o padrão) e `ru`. Para definir o idioma, use a função `configure`:
 
 ```js
 // index.js
@@ -34,9 +34,9 @@ import {configure, Lang} from '@gravity-ui/dynamic-forms';
 configure({lang: Lang.Ru});
 ```
 
-## Desarrollo
+## Desenvolvimento
 
-Para iniciar el servidor de desarrollo con storybook, ejecuta el siguiente comando:
+Para iniciar o servidor de desenvolvimento com o storybook, execute o seguinte comando:
 
 ```shell
 npm ci
