@@ -1,10 +1,10 @@
 # 🌍 webpack-i18n-assets-plugin
 
-Ein Plugin für Webpack, das Aufrufe von Lokalisierungsfunktionen (i18n) durch Zieltexte ersetzt.
+Ein Webpack-Plugin, das Aufrufe von Lokalisierungsfunktionen (i18n) durch Zieltexte ersetzt.
 
-### Features
+### Funktionen
 
-- Inline-i18n-Texte in das Bundle (während Parameter in die endgültige Zeichenkette eingefügt werden)
+- Inline i18n-Texte in das Bundle (während Parameter in die endgültige Zeichenkette eingefügt werden)
 - Generiert Assets für alle Locales in einem Build
 - Das Plugin funktioniert nur für Produktions-Builds!
 - Unterstützt nur Literale als Schlüssel im Argument der Lokalisierungsfunktion (Template-Strings und Variablen sind nicht erlaubt)
@@ -55,7 +55,7 @@ Ein Plugin für Webpack, das Aufrufe von Lokalisierungsfunktionen (i18n) durch Z
         tr: {},
     };
 
-    // Eine bestehende Webpack-Konfiguration
+    // Eine vorhandene Webpack-Konfiguration
     const webpackConfig = {
         plugins: [ ... ],
         ...
@@ -123,7 +123,7 @@ Standardmäßig ist das Plugin für die Arbeit mit der [`@gravity-ui/i18n`](./fr
 
 Typ: [`ImportResolver`](./src/types.ts#18)
 
-Die Funktion, die Importe verarbeitet und markiert, welche der Importe als Lokalisierungsfunktionen betrachtet werden sollen (anschließend werden Aufrufe der markierten Bezeichner von der Ersetzungsfunktion verarbeitet).
+Die Funktion, die Importe verarbeitet und markiert, welche Importe als Lokalisierungsfunktionen betrachtet werden sollen (anschließend werden Aufrufe der markierten Bezeichner von der Ersetzungsfunktion verarbeitet).
 
 Die Signatur ähnelt dem ursprünglichen [importSpecifier](https://webpack.js.org/api/parser/#importspecifier) von Webpack.
 
@@ -175,30 +175,22 @@ const declarationResolver = (declarator: VariableDeclarator, module: string) => 
     if (module.startsWith('src/units/compute')) {
         return undefined;
     }
-```
-
-```html
-<div class="language-selector">
-    <a href="/en/README.md">English</a>
-    <a href="/de/README.md">Deutsch</a>
-</div>
-```
 
 ```typescript
-// Verarbeitungsfunktion für Deklarationen wie const i18nK = i18n.bind(null, 'keyset');
-if (
-    declarator.id.type === 'Identifier' &&
-    declarator.id.name.startsWith('i18n') &&
-    declarator.init &&
-    isI18nBind(declarator.init)
-) {
-    return {
-        functionName: declarator.id.name,
-        keyset: getKeysetFromBind(declarator.init),
-    };
-}
+    // Verarbeitungsfunktion für Funktionsdeklarationen wie const i18nK = i18n.bind(null, 'keyset');
+    if (
+        declarator.id.type === 'Identifier' &&
+        declarator.id.name.startsWith('i18n') &&
+        declarator.init &&
+        isI18nBind(declarator.init)
+    ) {
+        return {
+            functionName: declarator.id.name,
+            keyset: getKeysetFromBind(declarator.init),
+        };
+    }
 
-return undefined;
+    return undefined;
 };
 ```
 
@@ -206,7 +198,7 @@ return undefined;
 
 Typ: [`Replacer`](./src/types.ts#55)
 
-Eine Funktion, die Lokalisierungsfunktionsaufrufe verarbeitet und einen Ersatz als String zurückgibt.
+Eine Funktion, die Lokalisierungsfunktionsaufrufe verarbeitet und eine Ersetzung als Zeichenkette zurückgibt.
 
 Beispiel:
 
@@ -256,7 +248,7 @@ function replacer(
         throw new Error('Incorrect count of arguments in localizer call');
     }
 
-    // Stellen Sie sicher, dass der aus dem Funktionsargument erhaltene Schlüssel verarbeitet wird.
+    // Stellen Sie sicher, dass der aus dem Funktionsaufrufargument erhaltene Schlüssel verarbeitet wird.
     // Wenn die Funktion mit einem Keyset zusammenhängt, kann nach der Codeänderung der Keyset in den Schlüssel eingefügt werden (dies ist eine Plugin-Funktion).
     // Wenn Sie den Schlüssel von ReplacerArgs verwenden, kommt er ohne Keyset und muss nicht verarbeitet werden.
     const keyParts = key.split('::');
@@ -267,7 +259,7 @@ function replacer(
     const value = this.resolveKey(key, keyset);
 
     // Implementieren Sie hier Ersetzungsoptionen nach Ihren Bedürfnissen.
-    // Wenn der Schlüssel beispielsweise Plural ist, geben Sie einen Funktionsaufruf zurück usw.
+    // Wenn der Schlüssel beispielsweise plural ist, geben Sie einen Funktionsaufruf zurück usw.
 
     return JSON.stringify(value);
 };
@@ -279,7 +271,7 @@ Typ: [`Boolean`] (Standard - false)
 
 Aktiviert den Modus zum Sammeln ungenutzter Schlüssel im Projekt. Nach dem Build wird eine Datei namens `unused-keys.json` erstellt.
 
-Um eine ordnungsgemäße Funktionalität zu gewährleisten, ist es immer notwendig, in der `Replacer`-Funktion ein detailliertes Format zurückzugeben. Dies ist wichtig, da während der Ersetzung die Möglichkeit besteht, automatisch ermittelte Schlüssel und Keysets zu ändern.
+Um eine ordnungsgemäße Funktionalität zu gewährleisten, ist es immer notwendig, im `Replacer`-Funktion ein detailliertes Format zurückzugeben. Dies ist wichtig, da während der Ersetzung die Möglichkeit besteht, automatisch ermittelte Schlüssel und Keyset zu ändern.
 
 ## Framework-Einstellungen
 
@@ -310,7 +302,7 @@ i18n('component.navigation', 'some_key_with_param', { someParam: 'hello' });
 
 Der Replacer führt zusätzlich Folgendes aus:
 
-1. Inline-Parameter in einen String. Wenn der Schlüsselwert beispielsweise wie folgt lautet:
+1. Inline-Parameter in eine Zeichenkette. Wenn der Schlüsselwert beispielsweise wie folgt lautet:
 
     ```typescript
     const keyset = {
@@ -350,14 +342,12 @@ Der Replacer führt zusätzlich Folgendes aus:
 
 ## ℹ️ FAQ
 
-```markdown
-### Wie verhält sich das im Vergleich zu [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin)?
+### Wie unterscheidet sich dies von [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin)?
 
-Zur Implementierung dieses Plugins wurde eine Idee aus dem webpack-localize-assets-plugins-Paket übernommen (vielen Dank an den Ersteller des Pakets!).
+Zur Implementierung dieses Plugins wurde eine Idee aus dem Paket webpack-localize-assets-plugins übernommen (wofür dem Ersteller des Pakets vielen Dank gebührt!).
 
 Die Unterschiede sind wie folgt:
 
 - Eine bequemere API, die es Ihnen ermöglicht, mit jeder Art von Internationalisierungsfunktionen zu arbeiten (einschließlich Namespaces-Helfern wie `useTranslation` von i18next, importierten Funktionen aus anderen Modulen usw.)
 - Korrekte Generierung von Source Maps relativ zum Quellcode
-- Es wird nur Webpack 5 unterstützt. Die Unterstützung für Webpack 4 wurde entfernt.
-```
+- Es wird nur webpack 5 unterstützt. Die Unterstützung für webpack 4 wurde entfernt.
