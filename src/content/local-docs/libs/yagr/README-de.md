@@ -8,7 +8,7 @@ Yagr ist ein performanter HTML5 Canvas Chart Renderer, der auf [uPlot](https://g
 
 -   [Linien, Flächen, Säulen und Punkte als Visualisierungstypen. Konfigurierbar pro Serie](https://yagr.tech/en/api/visualization)
 -   [Konfigurierbarer Legenden-Tooltip](https://yagr.tech/en/plugins/tooltip)
--   [Achsen mit zusätzlichen Optionen für Dezimalpräzision](https://yagr.tech/en/api/axes)
+-   [Achsen mit zusätzlichen Optionen für Dezimalstellenpräzision](https://yagr.tech/en/api/axes)
 -   [Skalen mit konfigurierbaren Bereichsfunktionen und Transformationen](https://yagr.tech/en/api/scales)
 -   [Plot-Linien und -Bänder. Konfigurierbare Zeichenebene](https://yagr.tech/en/plugins/plot-lines)
 -   [Responsive Diagramme](https://yagr.tech/en/api/settings#adaptivity) (erfordert [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver))
@@ -27,13 +27,13 @@ Yagr ist ein performanter HTML5 Canvas Chart Renderer, der auf [uPlot](https://g
 
 ## [Dokumentation](https://yagr.tech)
 
-## Schnelleinstieg
+## Schnellstart
 
 ```
 npm i @gravity-ui/yagr
 ```
 
-### NPM Modul
+### NPM-Modul
 
 ```typescript
 import Yagr from '@gravity-ui/yagr';
@@ -53,7 +53,7 @@ new Yagr(document.body, {
 });
 ```
 
-### Script Tag
+### Script-Tag
 
 ```html
 <script src="https://unpkg.com/@gravity-ui/yagr/dist/yagr.iife.min.js"></script>
