@@ -1,12 +1,6 @@
-```html
-<div class="language-selector">
-  <a href="/en/readme.html">English</a>
-  <a href="/es/readme.html">Español</a>
-</div>
-```
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-Una biblioteca basada en React para crear visualizaciones de línea de tiempo interactivas con renderizado en canvas.
+Una biblioteca basada en React para crear visualizaciones interactivas de líneas de tiempo con renderizado en canvas.
 
 ## Documentación
 
@@ -54,7 +48,7 @@ const MyTimelineComponent = () => {
 
   // timeline - Instancia de Timeline
   // api - Instancia de CanvasApi (igual que timeline.api)
-  // start - función para inicializar la línea de tiempo con canvas
+  // start - función para inicializar la línea de tiempo con el canvas
   // stop - función para destruir la línea de tiempo
 
   return (
@@ -110,7 +104,7 @@ const MyTimelineComponent = () => {
     },
     viewConfiguration: {
       sections: {
-        hitboxPadding: 2 // Relleno para la detección al pasar el ratón
+        hitboxPadding: 2 // Relleno para la detección de hover
       }
     }
   });
@@ -178,11 +172,11 @@ const MyTimelineComponent = () => {
 
 ## Cómo Funciona
 
-El componente de línea de tiempo está construido usando React y proporciona una forma flexible de crear visualizaciones de línea de tiempo interactivas. Así es como funciona:
+El componente de línea de tiempo está construido con React y proporciona una forma flexible de crear visualizaciones interactivas de líneas de tiempo. Así es como funciona:
 
 ### Arquitectura del Componente
 
-La línea de tiempo se implementa como un componente de React que se puede configurar mediante dos objetos principales:
+La línea de tiempo se implementa como un componente de React que se puede configurar a través de dos objetos principales:
 
 1. **TimelineSettings**: Controla el comportamiento y la apariencia principal de la línea de tiempo
    - `start`: Hora de inicio de la línea de tiempo
@@ -235,7 +229,7 @@ El componente utiliza hooks personalizados para la gestión de la línea de tiem
   - Maneja la limpieza al desmontar el componente
   - Proporciona acceso a la instancia de la línea de tiempo
 
-- `useTimelineEvent`: Maneja las suscripciones a eventos y la limpieza
+- `useTimelineEvent`: Maneja la suscripción a eventos y la limpieza
   - Gestiona el ciclo de vida del oyente de eventos
   - Limpia automáticamente los oyentes al desmontar
 
@@ -263,7 +257,7 @@ type TimelineEvent = {
 La clase `Timeline` se puede usar directamente en TypeScript sin React. Esto es útil para integrarse con otros frameworks o aplicaciones JavaScript puras:
 
 ```typescript
-import { Timeline } from '@gravity-ui/timeline';
+import { Timeline } from '@gravityui/timeline';
 
 const timestamp = Date.now();
 
@@ -335,7 +329,7 @@ timeline.on('on-select-change', (detail) => {
 timeline.destroy();
 ```
 
-La clase `Timeline` proporciona una API rica para gestionar la línea de tiempo:
+La clase `Timeline` proporciona una API completa para gestionar la línea de tiempo:
 
 - **Gestión de eventos**:
   ```typescript
@@ -350,7 +344,7 @@ La clase `Timeline` proporciona una API rica para gestionar la línea de tiempo:
   timeline.off('eventClick', handler);
 
   // Emitir eventos personalizados
-  timeline.emit('customEvent', { data: 'custom data' });
+  timeline.emit('customEvent', { data: 'datos personalizados' });
   ```
 
 - **Control de la línea de tiempo**:
@@ -361,7 +355,7 @@ La clase `Timeline` proporciona una API rica para gestionar la línea de tiempo:
       id: 'newEvent',
       from: Date.now(),
       to: Date.now() + 3600000,
-      label: 'Nuevo Evento',
+      label: 'Nuevo evento',
       axisId: 'main',
       trackIndex: 0
     }
@@ -371,7 +365,7 @@ La clase `Timeline` proporciona una API rica para gestionar la línea de tiempo:
   timeline.api.setAxes([
     {
       id: 'newAxis',
-      label: 'Nuevo Eje',
+      label: 'Nuevo eje',
       color: '#0000ff'
     }
   ]);
@@ -381,7 +375,7 @@ La clase `Timeline` proporciona una API rica para gestionar la línea de tiempo:
     {
       id: 'newMarker',
       time: Date.now(),
-      label: 'Nuevo Marcador',
+      label: 'Nuevo marcador',
       color: '#00ff00',
       activeColor: '#4caf50',
       hoverColor: '#2e7d32'
@@ -424,7 +418,7 @@ npm run storybook
 
 Esto iniciará el servidor de desarrollo de Storybook en el puerto 6006. Puedes acceder a él en http://localhost:6006.
 
-Para crear una versión estática de Storybook para su despliegue:
+Para compilar una versión estática de Storybook para su despliegue:
 
 ```bash
 npm run build-storybook

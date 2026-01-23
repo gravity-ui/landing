@@ -1,6 +1,6 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-Une bibliothèque basée sur React pour créer des visualisations de chronologie interactives avec rendu Canvas.
+Une bibliothèque basée sur React pour créer des visualisations de chronologie interactives avec rendu sur canvas.
 
 ## Documentation
 
@@ -8,12 +8,12 @@ Pour plus de détails, consultez la [Documentation](./docs/docs.md).
 
 ## Fonctionnalités
 
-- Rendu basé sur Canvas pour des performances élevées
+- Rendu basé sur canvas pour de hautes performances
 - Chronologie interactive avec capacités de zoom et de panoramique
 - Prise en charge des événements, des marqueurs, des sections, des axes et de la grille
 - Sections d'arrière-plan pour l'organisation visuelle et la mise en évidence des périodes
 - Regroupement intelligent des marqueurs avec zoom automatique sur le groupe - Cliquez sur les marqueurs groupés pour zoomer sur leurs composants individuels
-- Rendu virtualisé pour des performances améliorées avec de grands ensembles de données (actif uniquement lorsque le contenu de la chronologie dépasse la zone d'affichage)
+- Rendu virtualisé pour améliorer les performances avec de grands ensembles de données (activé uniquement lorsque le contenu de la chronologie dépasse la fenêtre d'affichage)
 - Apparence et comportement personnalisables
 - Prise en charge de TypeScript avec des définitions de types complètes
 - Intégration React avec des hooks personnalisés
@@ -42,7 +42,7 @@ const MyTimelineComponent = () => {
       sections: []
     },
     viewConfiguration: {
-      // Configuration d'affichage optionnelle
+      // Configuration de vue optionnelle
     }
   });
 
@@ -70,7 +70,7 @@ type TimelineSection = {
   to?: number;              // Horodatage de fin optionnel (par défaut, fin de la chronologie)
   color: string;            // Couleur d'arrière-plan de la section
   hoverColor?: string;      // Couleur optionnelle lors du survol de la section
-  renderer?: AbstractSectionRenderer; // Renderer personnalisé optionnel
+  renderer?: AbstractSectionRenderer; // Rendu personnalisé optionnel
 };
 ```
 
@@ -122,11 +122,11 @@ type TimelineMarker = {
   time: number;           // Horodatage pour la position du marqueur
   color: string;          // Couleur de la ligne du marqueur
   activeColor: string;    // Couleur lorsque le marqueur est sélectionné (obligatoire)
-  hoverColor: string;     // Couleur lors du survol du marqueur (obligatoire)
+  hoverColor: string;     // Couleur lorsque le marqueur est survolé (obligatoire)
   lineWidth?: number;     // Épaisseur optionnelle de la ligne du marqueur
   label?: string;         // Texte d'étiquette optionnel
   labelColor?: string;    // Couleur d'étiquette optionnelle
-  renderer?: AbstractMarkerRenderer; // Renderer personnalisé optionnel
+  renderer?: AbstractMarkerRenderer; // Rendu personnalisé optionnel
   nonSelectable?: boolean;// Indique si le marqueur peut être sélectionné
   group?: boolean;        // Indique si le marqueur représente un groupe
 };
@@ -134,7 +134,7 @@ type TimelineMarker = {
 
 ### Regroupement et Zoom des Marqueurs
 
-La chronologie regroupe automatiquement les marqueurs proches les uns des autres et offre une fonctionnalité de zoom :
+La chronologie regroupe automatiquement les marqueurs proches et offre une fonctionnalité de zoom :
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -176,11 +176,11 @@ Le composant de chronologie est construit avec React et offre un moyen flexible 
 
 ### Architecture du Composant
 
-Le timeline est implémenté sous forme de composant React configurable via deux objets principaux :
+La chronologie est implémentée sous forme de composant React qui peut être configuré via deux objets principaux :
 
-1. **TimelineSettings** : Contrôle le comportement et l'apparence fondamentaux du timeline
-    * `start` : Heure de début du timeline
-    * `end` : Heure de fin du timeline
+1. **TimelineSettings** : Contrôle le comportement et l'apparence de base de la chronologie
+    * `start` : Heure de début de la chronologie
+    * `end` : Heure de fin de la chronologie
     * `axes` : Tableau de configurations d'axes
     * `events` : Tableau de configurations d'événements
     * `markers` : Tableau de configurations de marqueurs
@@ -192,13 +192,13 @@ Le timeline est implémenté sous forme de composant React configurable via deux
 
 ### Gestion des événements
 
-Le composant timeline prend en charge plusieurs événements interactifs :
+Le composant de chronologie prend en charge plusieurs événements interactifs :
 
-* `on-click` : Déclenché lors d'un clic sur le timeline
+* `on-click` : Déclenché lors d'un clic sur la chronologie
 * `on-context-click` : Déclenché lors d'un clic droit/menu contextuel
 * `on-select-change` : Déclenché lorsque la sélection change
-* `on-hover` : Déclenché lors du survol des éléments du timeline
-* `on-leave` : Déclenché lorsque la souris quitte les éléments du timeline
+* `on-hover` : Déclenché lors du survol des éléments de la chronologie
+* `on-leave` : Déclenché lorsque la souris quitte les éléments de la chronologie
 
 Exemple de gestion d'événements :
 
@@ -209,7 +209,7 @@ const MyTimelineComponent = () => {
   const { timeline } = useTimeline({ /* ... */ });
 
   useTimelineEvent(timeline, 'on-click', (data) => {
-    console.log('Timeline cliqué :', data);
+    console.log('Timeline cliquée :', data);
   });
 
   useTimelineEvent(timeline, 'on-select-change', (data) => {
@@ -222,22 +222,22 @@ const MyTimelineComponent = () => {
 
 ### Intégration React
 
-Le composant utilise des hooks personnalisés pour la gestion du timeline :
+Le composant utilise des hooks personnalisés pour la gestion de la chronologie :
 
-* `useTimeline` : Gère l'instance du timeline et son cycle de vie
-    * Crée et initialise le timeline
+* `useTimeline` : Gère l'instance de la chronologie et son cycle de vie
+    * Crée et initialise la chronologie
     * Gère le nettoyage lors du démontage du composant
-    * Fournit l'accès à l'instance du timeline
+    * Fournit l'accès à l'instance de la chronologie
 
 * `useTimelineEvent` : Gère les abonnements aux événements et le nettoyage
     * Gère le cycle de vie des écouteurs d'événements
     * Nettoie automatiquement les écouteurs lors du démontage
 
-Le composant gère automatiquement le nettoyage et la destruction de l'instance du timeline lorsqu'il est démonté.
+Le composant gère automatiquement le nettoyage et la destruction de l'instance de la chronologie lorsqu'elle est démontée.
 
 ### Structure des événements
 
-Les événements dans le timeline suivent cette structure :
+Les événements dans la chronologie suivent cette structure :
 
 ```typescript
 type TimelineEvent = {
@@ -246,7 +246,7 @@ type TimelineEvent = {
   to?: number;            // Horodatage de fin (optionnel pour les événements ponctuels)
   axisId: string;         // ID de l'axe auquel cet événement appartient
   trackIndex: number;     // Index dans la piste de l'axe
-  renderer?: AbstractEventRenderer; // Renderer personnalisé optionnel
+  renderer?: AbstractEventRenderer; // Rendu personnalisé optionnel
   color?: string;         // Couleur optionnelle de l'événement
   selectedColor?: string; // Couleur optionnelle pour l'état sélectionné
 };
@@ -261,7 +261,7 @@ import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// Créer une instance de timeline
+// Créer une instance de chronologie
 const timeline = new Timeline({
   settings: {
     start: timestamp,
@@ -318,18 +318,18 @@ if (canvas instanceof HTMLCanvasElement) {
 
 // Ajouter des écouteurs d'événements
 timeline.on('on-click', (detail) => {
-  console.log('Timeline cliqué :', detail);
+  console.log('Chronologie cliquée :', detail);
 });
 
 timeline.on('on-select-change', (detail) => {
   console.log('Sélection modifiée :', detail);
 });
 
-// Nettoyer lorsque terminé
+// Nettoyer lorsque vous avez terminé
 timeline.destroy();
 ```
 
-La classe `Timeline` fournit une API riche pour gérer le timeline :
+La classe `Timeline` fournit une API riche pour gérer la chronologie :
 
 * **Gestion des événements** :
   ```typescript
@@ -347,9 +347,9 @@ La classe `Timeline` fournit une API riche pour gérer le timeline :
   timeline.emit('customEvent', { data: 'données personnalisées' });
   ```
 
-* **Contrôle du timeline** :
+* **Contrôle de la chronologie** :
   ```typescript
-  // Mettre à jour les données du timeline
+  // Mettre à jour les données de la chronologie
   timeline.api.setEvents([
     {
       id: 'newEvent',
@@ -398,24 +398,11 @@ La classe `Timeline` fournit une API riche pour gérer le timeline :
 
 Explorez des exemples interactifs dans notre [Storybook](https://preview.gravity-ui.com/timeline/) :
 
-```html
-<p align="center">
-  <a href="README.md">English</a> |
-  <a href="README.fr.md">Français</a>
-</p>
+- [Timeline de base](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Timeline simple avec événements et axes
+- [Timeline infinie](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Timeline infinie avec événements et axes
+- [Marqueurs](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline avec marqueurs verticaux et étiquettes
+- [Événements personnalisés](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline avec rendu d'événements personnalisé
 
-# @gravity/timeline
-
-Un composant de chronologie réactif et personnalisable pour React.
-
----
-
-## Démos
-
-- [Chronologie de base](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Chronologie simple avec événements et axes
-- [Chronologie infinie](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Chronologie infinie avec événements et axes
-- [Marqueurs](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Chronologie avec marqueurs verticaux et étiquettes
-- [Événements personnalisés](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Chronologie avec rendu d'événements personnalisé
 
 ## Développement
 
@@ -429,7 +416,7 @@ Pour lancer Storybook :
 npm run storybook
 ```
 
-Cela démarrera le serveur de développement Storybook sur le port 6006. Vous pouvez y accéder à l'adresse http://localhost:6006.
+Cela démarrera le serveur de développement Storybook sur le port 6006. Vous pourrez y accéder à l'adresse http://localhost:6006.
 
 Pour générer une version statique de Storybook pour le déploiement :
 
@@ -440,4 +427,3 @@ npm run build-storybook
 ## Licence
 
 MIT
-```
