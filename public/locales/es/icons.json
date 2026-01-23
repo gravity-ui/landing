@@ -11,7 +11,7 @@
     "filterPlaceholder": "Filtrar por nombre de icono",
     "keywords": "Palabras clave",
     "empty_title": "No se encontraron resultados para tu búsqueda",
-    "empty_subTitle": "Por favor, comprueba la ortografía o prueba con otras palabras clave.",
+    "empty_subTitle": "Por favor, revisa la ortografía o intenta con otras palabras clave.",
     "usage_reactComponent": "Componente React",
     "usage_svg": "SVG"
 }
