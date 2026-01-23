@@ -1,39 +1,39 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [迁移指南 0.x 到 1.x →](docs/migration-guides/v0-to-v1.md)
+> [Guia de Migração de 0.x para 1.x →](docs/migration-guides/v0-to-v1.md)
 
-一个图表可视化库，融合了两种最佳方案：
-- **Canvas**：在查看完整图表时提供高**性能**
-- **HTML/React**：在缩放时提供丰富的**交互性**
+Uma biblioteca de visualização de grafos que combina o melhor dos dois mundos:
+- Canvas para alto desempenho ao visualizar o grafo completo
+- HTML/React para interações ricas ao dar zoom
 
-告别在性能和交互性之间二选一的困境。非常适合大型图表、流程图和基于节点的编辑器。
+Chega de escolher entre desempenho e interatividade. Perfeito para diagramas grandes, fluxogramas e editores baseados em nós.
 
-## 动机
+## Motivação
 
-现代 Web 应用通常需要复杂的可视化和交互性，但现有的解决方案通常只侧重于一种渲染技术：
+Aplicações web modernas frequentemente exigem visualização e interatividade complexas, mas as soluções existentes geralmente se concentram em uma única tecnologia de renderização:
 
-- **Canvas**：提供复杂图形的高性能，但在文本处理和交互性方面受限。
-- **HTML DOM**：方便构建界面，但对于复杂图形或大量元素效率较低。
+- **Canvas** oferece alto desempenho para gráficos complexos, mas é limitado no tratamento de texto e interatividade.
+- **HTML DOM** é conveniente para interfaces, mas menos eficiente para gráficos complexos ou um grande número de elementos.
 
-@gravity-ui/graph 通过根据缩放级别自动在 Canvas 和 HTML 之间切换来解决这个问题：
-- **缩小视图**：使用 Canvas 高效渲染整个图表
-- **中等缩放**：显示具有基本交互性的示意图
-- **放大视图**：切换到 HTML/React 组件以实现丰富的交互
+O @gravity-ui/graph resolve isso alternando automaticamente entre Canvas e HTML com base no nível de zoom:
+- **Zoom Out**: Usa Canvas para renderização eficiente do grafo completo
+- **Zoom Médio**: Mostra uma visão esquemática com interatividade básica
+- **Zoom In**: Alterna para componentes HTML/React para interações ricas
 
-## 工作原理
+## Como Funciona
 
-该库使用智能渲染系统，可自动管理 Canvas 和 React 组件之间的过渡：
+A biblioteca usa um sistema de renderização inteligente que gerencia automaticamente a transição entre Canvas e componentes React:
 
-1. 在低缩放级别，所有内容都在 Canvas 上渲染以获得性能。
-2. 放大到详细视图时，`GraphCanvas` 组件会：
-   - 跟踪摄像机的视口和缩放变化
-   - 计算当前视口中可见的块（包含填充以实现平滑滚动）
-   - **仅为可见块渲染 React 组件**
-   - 在滚动或缩放时自动更新列表
-   - 缩小视图时移除 React 组件
+1. Em níveis de zoom baixos, tudo é renderizado no Canvas para desempenho.
+2. Ao dar zoom para uma visualização detalhada, o componente `GraphCanvas`:
+   - Rastreia as mudanças na viewport da câmera e na escala.
+   - Calcula quais blocos estão visíveis na viewport atual (com preenchimento para rolagem suave).
+   - Renderiza componentes React apenas para os blocos visíveis.
+   - Atualiza automaticamente a lista ao rolar ou dar zoom.
+   - Remove componentes React ao dar zoom out.
 
 ```typescript
-// React 组件渲染示例
+// Exemplo de renderização de componentes React
 const MyGraph = () => {
   return (
     <GraphCanvas
@@ -51,17 +51,17 @@ const MyGraph = () => {
 
 [Storybook](https://preview.gravity-ui.com/graph/)
 
-## 安装
+## Instalar
 
 ```bash
 npm install @gravity-ui/graph
 ```
 
-## 示例
+## Exemplos
 
-### React 示例
+### Exemplo com React
 
-[详细的 React 组件文档](docs/react/usage.md)
+[Documentação Detalhada de Componentes React](docs/react/usage.md)
 
 ```typescript
 import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
@@ -84,7 +84,7 @@ export function GraphEditor() {
           width: 126,
           height: 126,
           selected: true,
-          name: "Block #1",
+          name: "Bloco #1",
           anchors: [
             {
               id: "out1",
@@ -102,7 +102,7 @@ export function GraphEditor() {
           width: 126,
           height: 126,
           selected: false,
-          name: "Block #2",
+          name: "Bloco #2",
           anchors: [
             {
               id: "in1",
@@ -143,19 +143,19 @@ export function GraphEditor() {
 }
 ```
 
-### 原生 JavaScript 示例
+### Exemplo com JavaScript Puro
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
 
-// 创建容器元素
+// Cria o elemento container
 const container = document.createElement('div');
 container.style.width = '100vw';
 container.style.height = '100vh';
 container.style.overflow = 'hidden';
 document.body.appendChild(container);
 
-// 使用配置初始化图表
+// Inicializa o grafo com a configuração
 const graph = new Graph({
     configurationName: "example",
     blocks: [],
@@ -169,7 +169,7 @@ const graph = new Graph({
 }, container);
 ```
 
-// 添加节点和连接
+// Adiciona blocos e conexões
 graph.setEntities({
     blocks: [
         {
@@ -179,7 +179,7 @@ graph.setEntities({
             y: 100,
             width: 120,
             height: 120,
-            name: "节点 #1",
+            name: "Bloco #1",
             anchors: [
                 {
                     id: "out1",
@@ -196,7 +196,7 @@ graph.setEntities({
             y: 300,
             width: 120,
             height: 120,
-            name: "节点 #2",
+            name: "Bloco #2",
             anchors: [
                 {
                     id: "in1",
@@ -217,41 +217,41 @@ graph.setEntities({
     ]
 });
 
-// 开始渲染
+// Inicia a renderização
 graph.start();
 
-// 居中视图
+// Centraliza a visualização
 graph.zoomTo("center", { padding: 100 });
 ```
 
-## 实时示例
+## Exemplos ao Vivo
 
-- [基础示例](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
-- [大规模示例](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
-- [自定义节点视图](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
-- [贝塞尔曲线连接](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
-- [连接自定义](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
+- [Exemplo básico](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
+- [Exemplo em larga escala](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
+- [Visualização de blocos personalizados](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
+- [Conexão Bezier](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
+- [Personalização de conexão](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
-## 文档
+## Documentação
 
-### 目录
+### Índice
 
-1. 系统
-   - [组件生命周期](docs/system/component-lifecycle.md)
-   - [事件](docs/system/events.md)
-   - [图表设置](docs/system/graph-settings.md)
-   - [公共 API](docs/system/public_api.md)
-   - [调度器系统](docs/system/scheduler-system.md)
+1. Sistema
+   - [Ciclo de Vida do Componente](docs/system/component-lifecycle.md)
+   - [Eventos](docs/system/events.md)
+   - [Configurações do Gráfico](docs/system/graph-settings.md)
+   - [API Pública](docs/system/public_api.md)
+   - [Sistema de Agendamento](docs/system/scheduler-system.md)
 
-2. 组件
-   - [Canvas Graph 组件](docs/components/canvas-graph-component.md)
-   - [节点组件](docs/components/block-component.md)
-   - [锚点](docs/components/anchors.md)
+2. Componentes
+   - [Componente Canvas Graph](docs/components/canvas-graph-component.md)
+   - [Componente Block](docs/components/block-component.md)
+   - [Âncoras](docs/components/anchors.md)
 
-3. 渲染
-   - [渲染机制](docs/rendering/rendering-mechanism.md)
-   - [图层](docs/rendering/layers.md)
+3. Renderização
+   - [Mecanismo de Renderização](docs/rendering/rendering-mechanism.md)
+   - [Camadas](docs/rendering/layers.md)
 
-4. 节点和连接
-   - [节点分组](docs/blocks/groups.md)
-   - [Canvas 连接系统](docs/connections/canvas-connection-system.md)
+4. Blocos e Conexões
+   - [Grupos de Blocos](docs/blocks/groups.md)
+   - [Sistema de Conexão Canvas](docs/connections/canvas-connection-system.md)

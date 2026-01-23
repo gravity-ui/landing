@@ -6,7 +6,7 @@ Una biblioteca de visualización de grafos que combina lo mejor de ambos mundos:
 - Canvas para un alto rendimiento al ver el grafo completo
 - HTML/React para interacciones enriquecidas al hacer zoom
 
-Se acabaron las elecciones entre rendimiento e interactividad. Perfecta para diagramas grandes, diagramas de flujo y editores basados en nodos.
+No más elegir entre rendimiento e interactividad. Perfecto para diagramas grandes, diagramas de flujo y editores basados en nodos.
 
 ## Motivación
 
@@ -16,7 +16,7 @@ Las aplicaciones web modernas a menudo requieren visualización e interactividad
 - **HTML DOM** es conveniente para interfaces, pero menos eficiente para gráficos complejos o un gran número de elementos.
 
 @gravity-ui/graph resuelve esto cambiando automáticamente entre Canvas y HTML según el nivel de zoom:
-- **Alejado**: Utiliza Canvas para un renderizado eficiente del grafo completo
+- **Alejado**: Utiliza Canvas para renderizar eficientemente el grafo completo
 - **Zoom medio**: Muestra una vista esquemática con interactividad básica
 - **Acercado**: Cambia a componentes HTML/React para interacciones enriquecidas
 
@@ -24,10 +24,10 @@ Las aplicaciones web modernas a menudo requieren visualización e interactividad
 
 La biblioteca utiliza un sistema de renderizado inteligente que gestiona automáticamente la transición entre Canvas y componentes React:
 
-1. En niveles de zoom bajos, todo se renderiza en Canvas para optimizar el rendimiento.
+1. En niveles de zoom bajos, todo se renderiza en Canvas para un mejor rendimiento.
 2. Al hacer zoom para ver los detalles, el componente `GraphCanvas`:
    - Rastrea los cambios en la vista de la cámara y la escala.
-   - Calcula qué bloques son visibles en la vista actual (con relleno para una navegación fluida).
+   - Calcula qué bloques son visibles en la vista actual (con relleno para un desplazamiento suave).
    - Renderiza componentes React solo para los bloques visibles.
    - Actualiza automáticamente la lista al desplazarse o hacer zoom.
    - Elimina los componentes React al alejarse.
@@ -167,13 +167,6 @@ const graph = new Graph({
         showConnectionArrows: true
     }
 }, container);
-```
-
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/es/README.md">Español</a>
-</div>
 ```
 
 ```javascript
