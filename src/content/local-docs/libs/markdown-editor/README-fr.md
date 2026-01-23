@@ -2,15 +2,15 @@
 
 # @gravity-ui/markdown-editor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/markdown-editor)](https://www.npmjs.com/package/@gravity-ui/markdown-editor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/markdown-editor/actions/workflows/ci.yml?query=branch:main) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/markdown-editor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/md-editor/)
 
-## Éditeur Markdown WYSIWYG et de balisage
+## Éditeur WYSIWYG et de balisage Markdown
 
-MarkdownEditor est un outil puissant pour travailler avec Markdown, qui combine les modes WYSIWYG et Markup. Cela signifie que vous pouvez créer et modifier du contenu dans un mode visuel pratique, tout en ayant un contrôle total sur le balisage.
+MarkdownEditor est un outil puissant pour travailler avec Markdown, qui combine les modes WYSIWYG (What You See Is What You Get) et Markup. Cela signifie que vous pouvez créer et modifier du contenu dans un mode visuel pratique, tout en ayant un contrôle total sur le balisage.
 
 ### 🔧 Fonctionnalités principales
 
 - Prise en charge de la syntaxe Markdown de base et de [YFM](https://ydocs.tech).
 - Extensibilité grâce à l'utilisation des moteurs ProseMirror et CodeMirror.
-- La possibilité de travailler en modes WYSIWYG et Markup pour une flexibilité maximale.
+- Possibilité de travailler en modes WYSIWYG et Markup pour une flexibilité maximale.
 
 ## Installation
 
@@ -20,11 +20,11 @@ npm install @gravity-ui/markdown-editor
 
 ### Dépendances requises
 
-Veuillez noter que pour commencer à utiliser le package, votre projet doit également avoir les éléments suivants installés : `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` et quelques autres. Consultez la section `peerDependencies` de `package.json` pour des informations précises.
+Veuillez noter que pour commencer à utiliser le package, votre projet doit également avoir installé les éléments suivants : `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` et quelques autres. Consultez la section `peerDependencies` de `package.json` pour des informations précises.
 
 ## Démarrage
 
-L'éditeur Markdown est fourni sous forme de hook React pour créer une instance de l'éditeur et un composant pour le rendu de la vue.
+L'éditeur Markdown est fourni sous forme de hook React pour créer une instance de l'éditeur et d'un composant pour le rendu de la vue.
 Pour configurer le style et le thème, consultez la [documentation UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
@@ -72,7 +72,7 @@ En savoir plus :
 
 ### i18n
 
-Pour configurer l'internationalisation, il vous suffit d'utiliser `configure` :
+Pour configurer l'internationalisation, il vous suffit d'utiliser la fonction `configure` :
 
 ```typescript
 import {configure} from '@gravity-ui/markdown-editor';
