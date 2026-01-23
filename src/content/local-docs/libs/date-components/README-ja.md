@@ -1,12 +1,12 @@
 # @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/) [![coverage](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fstorage.yandexcloud.net%2Fplaywright-reports%2Fdate-components%2Fpulls%2Fmain%2Fcoverage%2Fcoverage-summary.json&query=%24.total.lines.pct&suffix=%25&label=Coverage)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/coverage/lcov-report/index.html) [![tests-report](https://img.shields.io/badge/Tests-report-ff4685)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/html/index.html)
 
-## Installation
+## インストール
 
 ```shell
 npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
 ```
 
-## Verwendung
+## 使用方法
 
 ```jsx
 import {createRoot} from 'react-dom/client';
@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label htmlFor="date-picker">Datum: </label>
+        <label htmlFor="date-picker">Date: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -31,21 +31,21 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-### Lokalisierung
+### ローカライゼーション
 
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Lade die Datum-Locales, die in der Anwendung verwendet werden.
+// アプリケーションで使用する日付ロケールをロードします。
 await settings.loadLocale('ru');
 
 function App() {
   return (
-    // Setze die Sprache, die mit den Komponenten verwendet werden soll.
+    // コンポーネントで使用する言語を設定します。
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label htmlFor="date-picker">Datum: </label>
+        <label htmlFor="date-picker">Дата: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -53,16 +53,16 @@ function App() {
 }
 ```
 
-Wenn die App Sprachwechsel unterstützt, lade alle unterstützten Locales vor, wenn die App zum ersten Mal geladen wird, oder lade die Locales vor dem Sprachwechsel:
+アプリが言語切り替えをサポートしている場合、アプリの初回ロード時にサポートされているすべてのロケールをプリロードするか、言語を切り替える前にロケールをロードしてください。
 
 ```jsx
-// Locales vorladen
+// ロケールのプリロード
 await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// oder Locales bei Bedarf laden.
+// またはオンデマンドでロケールをロードします。
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -77,25 +77,25 @@ function App() {
 }
 ```
 
-Die Komponenten haben Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwende `addLanguageKeysets` von `@gravity-ui/uikit`:
+コンポーネントには、英語とロシア語の翻訳が含まれています。他の言語への翻訳を追加するには、`@gravity-ui/uikit` の `addLanguageKeysets` を使用してください。
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// Verwende den Keyset-Typ, um Übersetzungen für alle verfügbaren Komponenten anzugeben
+// Keyset 型を使用して、利用可能なすべてのコンポーネントの翻訳を指定します
 addLanguageKeysets<Keysets>(lang, {...});
 
-// oder verwende den PartialKeysets-Typ, um nur die benötigten anzugeben
+// または PartialKeysets 型を使用して、必要なものだけを指定します
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// Um Übersetzungen für einige Komponenten anzugeben
+// 一部のコンポーネントの翻訳を指定するには
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
-## Entwicklung
+## 開発
 
-Um den Entwicklungsserver mit Storybook zu starten, führe Folgendes aus:
+ストーリーブックで開発サーバーを開始するには、以下を実行します。
 
 ```shell
 npm start

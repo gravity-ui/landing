@@ -77,7 +77,7 @@ function App() {
 }
 ```
 
-这些组件提供英语和俄语的翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
+组件已提供英语和俄语的翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
