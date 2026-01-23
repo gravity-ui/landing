@@ -12,10 +12,10 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## 설명
 
-이 라이브러리는 위젯을 그리드에 정렬하고, 크기를 조절하며, 새로 추가하거나 삭제하는 데 사용됩니다.
-위젯은 React 컴포넌트입니다. 예를 들어, 텍스트, 그래픽, 이미지 등이 있습니다.
+이 라이브러리는 위젯을 그리드에 정렬하고, 크기를 조절하며, 새 위젯을 추가하거나 삭제하는 데 사용됩니다.
+위젯은 React 컴포넌트이며, 텍스트, 그래픽, 이미지 등이 될 수 있습니다.
 
-새로운 위젯은 플러그인 시스템을 통해 추가됩니다.
+새 위젯은 플러그인 시스템을 통해 추가됩니다.
 
 ### 플러그인
 
@@ -68,20 +68,20 @@ interface DashKitProps {
 }
 ```
 
-- **config**: [Config](#Config)입니다.
+- **config**: [설정](#Config)입니다.
 - **editMode**: 편집 모드가 활성화되었는지 여부입니다.
 - **onItemEdit**: 위젯 편집을 클릭할 때 호출됩니다.
-- **onChange**: config 또는 [itemsStateAndParams](#itemsStateAndParams)가 변경될 때 호출됩니다.
+- **onChange**: 설정 또는 [itemsStateAndParams](#itemsStateAndParams)가 변경될 때 호출됩니다.
 - **onDrop**: ActionPanel에서 (#DashKitDnDWrapper)를 사용하여 항목을 드롭할 때 호출됩니다.
 - **onItemMountChange**: 항목 마운트 상태가 변경될 때 호출됩니다.
 - **onItemRender**: 항목 렌더링이 완료될 때 호출됩니다.
-- **defaultGlobalParams**, **globalParams**: 모든 위젯에 영향을 미치는 [매개변수](#Params)입니다. DataLens에서 `defaultGlobalParams`는 대시보드 설정에 전역적으로 설정된 매개변수입니다. `globalParams`는 URL에서 설정할 수 있는 전역 매개변수입니다.
+- **defaultGlobalParams**, **globalParams**: 모든 위젯에 영향을 미치는 [매개변수](#Params)입니다. DataLens에서 `defaultGlobalParams`는 대시보드 설정에 지정된 전역 매개변수입니다. `globalParams`는 URL에 설정할 수 있는 전역 매개변수입니다.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)입니다.
 - **settings**: DashKit 설정입니다.
 - **context**: 모든 위젯에 전달될 객체입니다.
 - **overlayControls**: 편집 시 위젯 컨트롤을 재정의하는 객체입니다. 전달되지 않으면 기본 컨트롤이 표시됩니다. `null`이 전달되면 닫기 버튼 또는 사용자 정의 메뉴만 표시됩니다.
 - **overlayMenuItems**: 사용자 정의 드롭다운 메뉴 항목입니다.
-- **noOverlay**: `true`이면 편집 중에 오버레이 및 컨트롤이 표시되지 않습니다.
+- **noOverlay**: `true`이면 편집 중 오버레이 및 컨트롤이 표시되지 않습니다.
 - **focusable**: `true`이면 그리드 항목에 포커스를 맞출 수 있습니다.
 - **onItemFocus**: `focusable`이 `true`이고 항목에 포커스가 맞춰질 때 호출됩니다.
 - **onItemBlur**: `focusable`이 `true`이고 항목에서 포커스가 해제될 때 호출됩니다.
@@ -92,7 +92,7 @@ interface DashKitProps {
 - **onResizeStart**: 항목 크기 조절이 시작될 때 ReactGridLayout에서 호출됩니다.
 - **onResize**: 항목 크기 조절 중에 ReactGridLayout에서 호출됩니다.
 - **onResizeStop**: 항목 크기 조절이 중지될 때 ReactGridLayout에서 호출됩니다.
-- **getPreparedCopyItemOptions**: 로컬 스토리지에 저장하기 전에 복사된 항목을 직렬화 가능한 객체로 변환할 때 호출됩니다. 이는 더 이상 사용되지 않는 `context.getPreparedCopyItemOptions` prop 대신 사용해야 합니다.
+- **getPreparedCopyItemOptions**: 로컬 스토리지에 저장하기 전에 복사된 항목을 직렬화 가능한 객체로 변환할 때 호출됩니다. 이전에 사용되던 `context.getPreparedCopyItemOptions` prop 대신 사용해야 합니다.
 - **onCopyFulfill**: 항목 복사가 성공적으로 완료되면 `error=null` 및 `data`가 정의된 상태로 호출되고, 그렇지 않으면 `data` 없이 `error: Error`와 함께 호출됩니다.
 
 ## 사용법
@@ -111,7 +111,7 @@ interface DashKitProps {
 
 - DashKit.setSettings
 
-  전역 DashKit 설정(예: 위젯 간 마진, 기본 위젯 크기 및 위젯 오버레이 메뉴)에 사용됩니다.
+  전역 DashKit 설정(위젯 간 마진, 기본 위젯 크기, 위젯 오버레이 메뉴 등)에 사용됩니다.
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -152,7 +152,7 @@ interface DashKitProps {
   });
   ```
 
-### Config
+### 설정
 
 ```ts
 export interface Config {
@@ -165,37 +165,13 @@ export interface Config {
 }
 ```
 
-Config 예시:
+설정 예시:
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
 ```
 
-```html
-<ul>
-  <li><a href="/en/dashkit/">English</a></li>
-  <li><a href="/ko/dashkit/">Korean</a></li>
-</ul>
-```
-
-# DashKit
-
-DashKit는 대시보드 레이아웃을 생성하고 관리하기 위한 라이브러리입니다.
-
-## 설치
-
-```bash
-npm install @gravity-ui/dashkit
-# or
-yarn add @gravity-ui/dashkit
-```
-
-## 사용법
-
 ```ts
-import DashKit from '@gravity-ui/dashkit';
-import { DashKitProps, ConfigItem } from '@gravity-ui/dashkit';
-
 const config: DashKitProps['config'] = {
   salt: '0.46703554571365613',
   counter: 4,
@@ -204,7 +180,7 @@ const config: DashKitProps['config'] = {
       id: 'tT',
       data: {
         size: 'm',
-        text: 'Caption',
+        text: '캡션',
         showInTOC: true,
       },
       type: 'title',
@@ -214,7 +190,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'Ea',
       data: {
-        text: 'mode _editActive',
+        text: '모드 _editActive',
         _editActive: true,
       },
       type: 'text',
@@ -223,7 +199,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'zR',
       data: {
-        text: '### Text',
+        text: '### 텍스트',
       },
       type: 'text',
       namespace: 'default',
@@ -274,7 +250,7 @@ const config: DashKitProps['config'] = {
 };
 ```
 
-### 새 항목 추가
+config에 새 항목 추가하기:
 
 ```ts
 const newLayout = updateLayout: [
@@ -297,12 +273,12 @@ const newLayout = updateLayout: [
 const newConfig = DashKit.setItem({
   item: {
     data: {
-      text: `Some text`,
+      text: `일부 텍스트`,
     },
     namespace: 'default',
     type: 'text',
-    // Optional. If new item needed to be inserted in current layout with predefined dimensions
-    layout: { // Current item inseterted before 'Ea'
+    // 선택 사항. 새 항목을 미리 정의된 크기로 현재 레이아웃에 삽입해야 하는 경우
+    layout: { // 현재 항목이 'Ea' 앞에 삽입됨
       h: 6,
       w: 12,
       x: 0,
@@ -311,13 +287,13 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // Optional. New layout values for existing items when new element is dropped from ActionPanel
+    // 선택 사항. 새 요소가 ActionPanel에서 드롭될 때 기존 항목에 대한 새 레이아웃 값
     updateLayout: newLayout,
   },
 });
 ```
 
-### 기존 항목 변경
+config에서 기존 항목 변경하기:
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -325,7 +301,7 @@ const newConfig = DashKit.setItem({
     id: 'tT', // item.id
     data: {
       size: 'm',
-      text: `New caption`,
+      text: `새 캡션`,
     },
     namespace: 'default',
     type: 'title',
@@ -334,7 +310,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-### 항목 삭제
+config에서 항목 삭제하기:
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -348,13 +324,13 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 });
 ```
 
-### Params
+### 매개변수
 
 ```ts
 type Params = Record<string, string | string[]>;
 ```
 
-`DashKit`는 위젯, 링크 및 별칭에 대한 기본 매개변수에 따라 매개변수를 생성합니다. 이 매개변수는 [ChartKit](https://github.com/gravity-ui/chartkit) 라이브러리에 필요합니다.
+`DashKit`은 위젯, 링크 및 별칭에 대한 기본 매개변수에 따라 매개변수를 생성합니다. 이러한 매개변수는 [ChartKit](https://github.com/gravity-ui/chartkit) 라이브러리에 필요합니다.
 
 생성 순서:
 
@@ -371,8 +347,8 @@ type Params = Record<string, string | string[]>;
 ```ts
 interface StateAndParamsMeta = {
     __meta__: {
-        queue: {id: string}[]; // queue
-        version: number; // current version itemsStateAndParams
+        queue: {id: string}[]; // 큐
+        version: number; // itemsStateAndParams의 현재 버전
     };
 }
 ```
@@ -398,20 +374,20 @@ type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 
 ```ts
 type MenuItem = {
-  id: string; // uniq id
-  title?: string; // string title
-  icon?: ReactNode; // node of icon
-  iconSize?: number | string; // icon size in px as number or as string with units
-  handler?: (item: ConfigItem) => void; // custom item action handler
-  visible?: (item: ConfigItem) => boolean; // optional visibility handler for filtering menu items
-  className?: string; // custom class property
+  id: string; // 고유 ID
+  title?: string; // 문자열 제목
+  icon?: ReactNode; // 아이콘 노드
+  iconSize?: number | string; // px 단위 아이콘 크기 (숫자 또는 단위가 있는 문자열)
+  handler?: (item: ConfigItem) => void; // 사용자 지정 항목 작업 핸들러
+  visible?: (item: ConfigItem) => boolean; // 메뉴 항목 필터링을 위한 선택적 가시성 핸들러
+  className?: string; // 사용자 지정 클래스 속성
 };
 
-// use array of menu items in settings
+// 설정에서 메뉴 항목 배열 사용
 <Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
 
-[deprecated]
-// overlayMenuItems property has greater priority over setSettings menu
+[사용 중단됨]
+// overlayMenuItems 속성이 setSettings 메뉴보다 우선순위가 높음
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
 
@@ -436,9 +412,9 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: 드래그 이미지 미리보기. 기본적으로 투명한 1px png base64가 사용됩니다.
-- **onDragStart**: ActionPanel에서 요소를 드래그할 때 호출되는 콜백입니다.
-- **onDragEnd**: 요소를 드롭하거나 드래그를 취소할 때 호출되는 콜백입니다.
+- **dragImageSrc**: 드래그 이미지 미리 보기. 기본적으로 투명한 1px png base64가 사용됩니다.
+- **onDragStart**: ActionPanel에서 요소를 드래그할 때 호출되는 콜백
+- **onDragEnd**: 요소를 드롭하거나 드래그를 취소할 때 호출되는 콜백
 
 ```ts
 type ItemDragProps = {
@@ -477,7 +453,7 @@ const overlayMenuItems = [
 ]
 
 const onDrop = (dropProps: ItemDropProps) => {
-  // ... 요소를 구성에 추가
+  // ... 구성에 요소 추가
   dropProps.commit();
 }
 
@@ -491,23 +467,23 @@ const onDrop = (dropProps: ItemDropProps) => {
 
 | 이름                                           | 설명           |
 | :--------------------------------------------- | :------------- |
-| 액션 패널 변수                                 |                |
+| Action panel 변수                              |                |
 | `--dashkit-action-panel-color`                 | 배경색         |
 | `--dashkit-action-panel-border-color`          | 테두리 색상    |
 | `--dashkit-action-panel-border-radius`         | 테두리 반경    |
-| 액션 패널 항목 변수                            |                |
+| Action panel 항목 변수                         |                |
 | `--dashkit-action-panel-item-color`            | 배경색         |
 | `--dashkit-action-panel-item-text-color`       | 텍스트 색상    |
 | `--dashkit-action-panel-item-color-hover`      | 호버 배경색    |
 | `--dashkit-action-panel-item-text-color-hover` | 호버 텍스트 색상 |
-| 오버레이 변수                                  |                |
+| Overlay 변수                                   |                |
 | `--dashkit-overlay-border-color`               | 테두리 색상    |
 | `--dashkit-overlay-color`                      | 배경색         |
 | `--dashkit-overlay-opacity`                    | 투명도         |
-| 그리드 항목 변수                               |                |
+| Grid item 변수                                 |                |
 | `--dashkit-grid-item-edit-opacity`             | 투명도         |
 | `--dashkit-grid-item-border-radius`            | 테두리 반경    |
-| 플레이스홀더 변수                              |                |
+| Placeholder 변수                               |                |
 | `--dashkit-placeholder-color`                  | 배경색         |
 | `--dashkit-placeholder-opacity`                | 투명도         |
 

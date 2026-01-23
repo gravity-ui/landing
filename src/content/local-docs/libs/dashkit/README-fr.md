@@ -2,7 +2,7 @@
 
 # DashKit
 
-Une bibliothèque pour le rendu de tableaux de bord sous forme de grille.
+Une bibliothèque de rendu de grille de tableaux de bord.
 
 ## Installation
 
@@ -68,20 +68,20 @@ interface DashKitProps {
 }
 ```
 
-- **config**: [Config](#Config).
+- **config**: [сonfig](#Config).
 - **editMode**: Indique si le mode édition est activé.
 - **onItemEdit**: Appelée lorsque vous cliquez pour éditer un widget.
 - **onChange**: Appelée lorsque la configuration ou [itemsStateAndParams](#itemsStateAndParams) sont modifiés.
-- **onDrop**: Appelée lorsqu'un élément est déposé depuis ActionPanel via (#DashKitDnDWrapper).
+- **onDrop**: Appelée lorsqu'un élément est déposé depuis ActionPanel via (#DashKitDnDWrapper)
 - **onItemMountChange**: Appelée lorsque l'état de montage d'un élément change.
 - **onItemRender**: Appelée lorsque le rendu d'un élément est terminé.
 - **defaultGlobalParams**, **globalParams**: [Paramètres](#Params) qui affectent tous les widgets. Dans DataLens, `defaultGlobalParams` sont les paramètres globaux définis dans les paramètres du tableau de bord. `globalParams` sont les paramètres globaux qui peuvent être définis dans l'URL.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
 - **settings**: Paramètres de DashKit.
 - **context**: Objet qui sera transmis à tous les widgets.
-- **overlayControls**: Objet qui remplace les contrôles du widget pendant l'édition. S'il n'est pas transmis, les contrôles de base seront affichés. Si `null` est passé, seul le bouton de fermeture ou un menu personnalisé sera affiché.
+- **overlayControls**: Objet qui remplace les contrôles du widget au moment de l'édition. S'il n'est pas transmis, les contrôles de base seront affichés. Si `null` est passé, seul le bouton de fermeture ou un menu personnalisé sera affiché.
 - **overlayMenuItems**: Éléments de menu déroulant personnalisés.
-- **noOverlay**: Si `true`, l'overlay et les contrôles ne sont pas affichés pendant l'édition.
+- **noOverlay**: Si `true`, la superposition et les contrôles ne sont pas affichés pendant l'édition.
 - **focusable**: Si `true`, les éléments de la grille seront focusables.
 - **onItemFocus**: Appelée lorsque `focusable` est vrai et que l'élément est focusé.
 - **onItemBlur**: Appelée lorsque `focusable` est vrai et que l'élément perd le focus.
@@ -93,13 +93,13 @@ interface DashKitProps {
 - **onResize**: Appelée par ReactGridLayout pendant le redimensionnement d'un élément.
 - **onResizeStop**: Appelée par ReactGridLayout lorsque le redimensionnement d'un élément s'arrête.
 - **getPreparedCopyItemOptions**: Appelée pour convertir un élément copié en objet sérialisable avant de l'enregistrer dans le localStorage. Elle doit être utilisée à la place de la prop obsolète `context.getPreparedCopyItemOptions`.
-- **onCopyFulfill**: Appelée lorsque la copie d'un élément est terminée, avec `error=null` et `data` défini en cas de succès, et avec `error: Error` sans `data` sinon.
+- **onCopyFulfill**: Appelée lorsque la copie d'un élément est terminée avec `error=null` et `data` défini en cas de succès, et avec `error: Error` sans `data` sinon.
 
 ## Utilisation
 
 ### Configuration de DashKit
 
-Avant d'utiliser `DashKit` comme composant React, il doit être configuré.
+Avant d'utiliser `DashKit` en tant que composant React, il doit être configuré.
 
 - Définir la langue
 
@@ -111,7 +111,7 @@ Avant d'utiliser `DashKit` comme composant React, il doit être configuré.
 
 - DashKit.setSettings
 
-  Utilisé pour les paramètres globaux de DashKit (tels que les marges entre les widgets, les tailles par défaut des widgets et le menu d'overlay des widgets).
+  Utilisé pour les paramètres globaux de DashKit (tels que les marges entre les widgets, les tailles par défaut des widgets et le menu de superposition des widgets).
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -147,7 +147,7 @@ Avant d'utiliser `DashKit` comme composant React, il doit être configuré.
       h: 8,
     },
     renderer: function CustomPlugin() {
-      return <div>Widget personnalisé avec des contrôles personnalisés</div>;
+      return <div>Custom widget with custom controls</div>;
     },
   });
   ```
@@ -171,14 +171,6 @@ Exemple de configuration :
 import {DashKitProps} from '@gravity-ui/dashkit';
 ```
 
-```html
-<!-- Language options -->
-<div class="language-options">
-  <a href="/en/README.md">English</a>
-  <a href="/fr/README.md">Français</a>
-</div>
-```
-
 ```ts
 const config: DashKitProps['config'] = {
   salt: '0.46703554571365613',
@@ -188,7 +180,7 @@ const config: DashKitProps['config'] = {
       id: 'tT',
       data: {
         size: 'm',
-        text: 'Caption',
+        text: 'Légende',
         showInTOC: true,
       },
       type: 'title',
@@ -207,7 +199,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'zR',
       data: {
-        text: '### Text',
+        text: '### Texte',
       },
       type: 'text',
       namespace: 'default',
@@ -281,12 +273,12 @@ const newLayout = updateLayout: [
 const newConfig = DashKit.setItem({
   item: {
     data: {
-      text: `Some text`,
+      text: `Du texte`,
     },
     namespace: 'default',
     type: 'text',
-    // Optionnel. Si un nouvel élément doit être inséré dans la mise en page actuelle avec des dimensions prédéfinies
-    layout: { // Élément actuel inséré avant 'Ea'
+    // Optionnel. Si un nouvel élément doit être inséré dans la disposition actuelle avec des dimensions prédéfinies
+    layout: { // L'élément actuel est inséré avant 'Ea'
       h: 6,
       w: 12,
       x: 0,
@@ -295,7 +287,7 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // Optionnel. Nouvelles valeurs de mise en page pour les éléments existants lorsqu'un nouvel élément est déposé depuis l'ActionPanel
+    // Optionnel. Nouvelles valeurs de disposition pour les éléments existants lorsqu'un nouvel élément est déposé depuis le panneau d'actions
     updateLayout: newLayout,
   },
 });
@@ -309,7 +301,7 @@ const newConfig = DashKit.setItem({
     id: 'tT', // item.id
     data: {
       size: 'm',
-      text: `New caption`,
+      text: `Nouvelle légende`,
     },
     namespace: 'default',
     type: 'title',
@@ -385,7 +377,7 @@ type MenuItem = {
   id: string; // id unique
   title?: string; // titre textuel
   icon?: ReactNode; // nœud d'icône
-  iconSize?: number | string; // taille de l'icône en px (nombre) ou avec unités (chaîne)
+  iconSize?: number | string; // taille de l'icône en px sous forme de nombre ou de chaîne avec unité
   handler?: (item: ConfigItem) => void; // gestionnaire d'action personnalisé pour l'élément
   visible?: (item: ConfigItem) => boolean; // gestionnaire de visibilité optionnel pour filtrer les éléments du menu
   className?: string; // propriété de classe personnalisée
@@ -399,7 +391,7 @@ type MenuItem = {
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
 
-### Éléments déplaçables depuis l'ActionPanel
+### Éléments déplaçables depuis le panneau d'actions
 
 #### DashKitDnDWrapper
 
@@ -420,20 +412,14 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: Aperçu de l'image de glisser-déposer, par défaut une image PNG transparente de 1px en base64 est utilisée.
-- **onDragStart**: Callback appelé lorsqu'un élément est déplacé depuis l'ActionPanel.
-- **onDragEnd**: Callback appelé lorsque l'élément est déposé ou que le glisser-déposer est annulé.
+- **dragImageSrc** : Aperçu de l'image de glisser-déposer, par défaut un png transparent de 1px en base64 est utilisé.
+- **onDragStart** : Callback appelé lorsqu'un élément est glissé depuis le panneau d'actions.
+- **onDragEnd** : Callback appelé lorsqu'un élément est déposé ou que le glisser-déposer est annulé.
 
-```html
-<!-- Language options -->
-<div class="language-options">
-  <a href="/en/README.md">English</a>
-  <a href="/fr/README.md">Français</a>
-</div>
-
+```ts
 type ItemDragProps = {
     type: string; // Type de plugin
-    layout?: { // Optionnel. Taille de l'élément de mise en page pour l'aperçu et l'initialisation
+    layout?: { // Optionnel. Taille de l'élément pour l'aperçu et l'initialisation
         w?: number;
         h?: number;
     };
@@ -443,10 +429,10 @@ type ItemDragProps = {
 
 ```ts
 type ItemDropProps = {
-    commit: () => void; // Le callback doit être appelé après la configuration de toutes les opérations
+    commit: () => void; // Le callback doit être appelé après que toutes les opérations de configuration soient effectuées
     dragProps: ItemDragProps; // Propriétés de glisser-déposer de l'élément
-    itemLayout: ConfigLayout; // Dimensions calculées de la mise en page de l'élément
-    newLayout: ConfigLayout[]; // Nouvelle mise en page après le dépôt de l'élément
+    itemLayout: ConfigLayout; // Dimensions calculées de la disposition de l'élément
+    newLayout: ConfigLayout[]; // Nouvelle disposition après le dépôt de l'élément
 };
 ```
 
@@ -483,20 +469,20 @@ const onDrop = (dropProps: ItemDropProps) => {
 | :--------------------------------------------- | :-------------------- |
 | Variables du panneau d'actions                         |                       |
 | `--dashkit-action-panel-color`                 | Couleur de fond      |
-| `--dashkit-action-panel-border-color`          | Couleur de la bordure          |
-| `--dashkit-action-panel-border-radius`         | Rayon de la bordure         |
+| `--dashkit-action-panel-border-color`          | Couleur de bordure          |
+| `--dashkit-action-panel-border-radius`         | Rayon de bordure         |
 | Variables des éléments du panneau d'actions                    |                       |
 | `--dashkit-action-panel-item-color`            | Couleur de fond       |
 | `--dashkit-action-panel-item-text-color`       | Couleur du texte       |
 | `--dashkit-action-panel-item-color-hover`      | Couleur de fond au survol |
 | `--dashkit-action-panel-item-text-color-hover` | Couleur du texte au survol      |
 | Variables de la superposition                              |                       |
-| `--dashkit-overlay-border-color`               | Couleur de la bordure          |
+| `--dashkit-overlay-border-color`               | Couleur de bordure          |
 | `--dashkit-overlay-color`                      | Couleur de fond                      |
 | `--dashkit-overlay-opacity`                    | Opacité               |
 | Variables des éléments de la grille                            |                       |
 | `--dashkit-grid-item-edit-opacity`             | Opacité               |
-| `--dashkit-grid-item-border-radius`            | Rayon de la bordure            |
+| `--dashkit-grid-item-border-radius`            | Rayon de bordure            |
 | Variables des espaces réservés                            |                       |
 | `--dashkit-placeholder-color`                  | Couleur de fond                      |
 | `--dashkit-placeholder-opacity`                | Opacité               |
@@ -541,7 +527,7 @@ const CustomThemeWrapper = (props: {
 - Compiler le storybook `npm run start`
 
 Par défaut, le storybook s'exécute sur `http://localhost:7120/`.
-Les nouveaux changements dans un projet ne sont pas toujours pris en compte lorsque le storybook est en cours d'exécution, il est donc préférable de recompiler manuellement un projet et de redémarrer le storybook.
+Les nouveaux changements du projet ne sont pas toujours pris en compte lorsque le storybook est en cours d'exécution, il est donc préférable de recompiler le projet manuellement et de redémarrer le storybook.
 
 
 ### Exemple de configuration nginx pour le développement sur une machine de développement
