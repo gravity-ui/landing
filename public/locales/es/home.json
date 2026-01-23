@@ -2,7 +2,7 @@
     "header_title": "Crea interfaces modernas con el sistema de diseño y las bibliotecas de Gravity",
     "header_actions_howToStart": "Cómo empezar",
     "news_title": "Actualizaciones recientes",
-    "banner_content": "Estamos recopilando preguntas para el webinar sobre el editor de Markdown, ¡por favor, rellena el formulario!",
+    "banner_content": "Estamos recopilando preguntas para el webinar sobre el editor de Markdown, ¡por favor completa el formulario!",
     "news_items_item1": "Hemos creado un componente — <a href=\"https://preview.gravity-ui.com/uikit/?path=/docs/lab-colorpicker--docs\">Selector de color</a> ahora puedes seleccionar colores fácilmente con una interfaz intuitiva, soporte para formato HEX/RGB y canal alfa opcional.",
     "news_items_item2": "Hemos lanzado la <a href=\"/libraries/aikit\">biblioteca AIKit</a>, ¡empieza a crear chats de IA funcionales de forma fácil y rápida!",
     "news_items_item3": "Se ha añadido un modo avanzado al <a href=\"/themer\">themer</a>, que te permite configurar el valor de cada variable semántica.",
@@ -34,6 +34,6 @@
     "ui_samples_kubernetes_tab": "Descripción general de la contenerización",
     "ui_samples_osn_tab": "Landing",
     "ui_samples_mail_tab": "Correo",
-    "ui_samples_task_tracker_tab": "Seguimiento de tareas",
-    "ui_samples_apartment_tab": "Página de reservas"
+    "ui_samples_task_tracker_tab": "Rastreador de tareas",
+    "ui_samples_apartment_tab": "Página de reserva"
 }
