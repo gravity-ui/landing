@@ -1,6 +1,6 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source**는 데이터 페칭을 위한 간단한 래퍼입니다. [클린 아키텍처](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)의 일종의 "포트"라고 할 수 있습니다. 이를 통해 사용 사례에 따라 데이터 페칭과 관련된 래퍼를 만들 수 있습니다. **Data Source**는 내부적으로 [react-query](https://tanstack.com/query/latest)를 사용합니다.
+**Data Source**는 데이터 페칭을 위한 간단한 래퍼입니다. [클린 아키텍처](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)의 일종의 "포트"라고 할 수 있습니다. 이를 통해 사용 사례에 따라 데이터 페칭 주변의 것들에 대한 래퍼를 만들 수 있습니다. **Data Source**는 내부적으로 [react-query](https://tanstack.com/query/latest)를 사용합니다.
 
 ## 설치
 
@@ -14,7 +14,7 @@ npm install @gravity-ui/data-source @tanstack/react-query
 
 ### 1. DataManager 설정
 
-먼저 애플리케이션에 `DataManager`를 생성하고 제공합니다.
+먼저 애플리케이션에서 `DataManager`를 생성하고 제공합니다.
 
 ```tsx
 import React from 'react';
@@ -77,8 +77,8 @@ export interface DataLoaderProps
 }
 
 export const DataLoader: React.FC<DataLoaderProps> = ({
-  LoadingView = YourLoader, // 자신만의 로더 컴포넌트를 사용할 수 있습니다.
-  ErrorView = YourError, // 자신만의 오류 컴포넌트를 사용할 수 있습니다.
+  LoadingView = YourLoader, // 나만의 로더 컴포넌트를 사용할 수 있습니다.
+  ErrorView = YourError, // 나만의 오류 컴포넌트를 사용할 수 있습니다.
   ...restProps
 }) => {
   return <DataLoaderBase LoadingView={LoadingView} ErrorView={ErrorView} {...restProps} />;
@@ -123,7 +123,7 @@ export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 
 ### 데이터 소스 유형
 
-라이브러리는 두 가지 주요 데이터 소스 유형을 제공합니다.
+이 라이브러리는 두 가지 주요 데이터 소스 유형을 제공합니다.
 
 #### 일반 쿼리 데이터 소스
 
@@ -161,15 +161,15 @@ const postsDataSource = makeInfiniteQueryDataSource({
 
 ### 상태 관리
 
-라이브러리는 쿼리 상태를 세 가지 간단한 상태로 정규화합니다.
+이 라이브러리는 쿼리 상태를 세 가지 간단한 상태로 정규화합니다.
 
 - `loading` - 실제 데이터 로딩 중입니다. React Query의 `isLoading`과 동일합니다.
-- `success` - 데이터를 사용할 수 있습니다 (idle로 건너뛸 수 있습니다).
+- `success` - 데이터를 사용할 수 있습니다 (idle로 건너뛸 수 있음).
 - `error` - 데이터 페칭에 실패했습니다.
 
 ### Idle 개념
 
-라이브러리는 쿼리 실행을 건너뛰기 위한 특별한 `idle` 심볼을 제공합니다.
+이 라이브러리는 쿼리 실행을 건너뛰기 위한 특별한 `idle` 심볼을 제공합니다.
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -193,7 +193,7 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 - 데이터는 `undefined`로 유지됩니다.
 - 컴포넌트는 로딩 없이 안전하게 렌더링할 수 있습니다.
 
-**`idle`의 장점:**
+**`idle`의 이점:**
 
 1. **타입 안전성** - TypeScript는 조건부 매개변수에 대한 타입을 올바르게 추론합니다.
 2. **성능** - 불필요한 서버 요청을 방지합니다.
@@ -302,7 +302,7 @@ const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
-// refetchAll()은 모든 쿼리에 대해 refetch를 트리거합니다.
+// refetchAll()은 모든 쿼리에 대해 다시 페칭을 트리거합니다.
 ```
 
 #### `useRefetchErrored(states)`
@@ -453,7 +453,7 @@ await dataManager.invalidateParams(userDataSource, {userId: 123});
 
 ##### `resetSource(dataSource)`
 
-데이터 소스의 모든 캐시된 데이터를 재설정(지움)합니다.
+데이터 소스에 대한 모든 캐시된 데이터를 재설정(지움)합니다.
 
 ```ts
 await dataManager.resetSource(userDataSource);
@@ -490,18 +490,11 @@ async function fetchUser(params: {userId: number}) {
 // 데이터 소스에 맞게 조정
 const dataSource = makePlainQueryDataSource({
   name: 'user',
-  fetch: skipContext(fetchUser), // 컨텍스트 및 fetchContext 매개변수를 건너뜁니다.
+  fetch: skipContext(fetchUser), // context 및 fetchContext 매개변수를 건너뜁니다.
 });
 ```
 
 #### `withCatch(fetchFunction, errorHandler)`
-
-```html
-<div class="language-selector">
-  <a href="/en/readme.html">English</a>
-  <a href="/ko/readme.html">한국어</a>
-</div>
-```
 
 fetch 함수에 표준화된 오류 처리를 추가합니다.
 
@@ -520,7 +513,7 @@ const cancellableFetch = withCancellation(fetchFunction);
 
 #### `getProgressiveRefetch(options)`
 
-점진적인 리페치 간격 함수를 생성합니다.
+점진적인 리프레시 간격 함수를 생성합니다.
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
@@ -540,7 +533,7 @@ const dataSource = makePlainQueryDataSource({
 
 #### `normalizeStatus(status, fetchStatus)`
 
-React Query의 상태를 DataLoader 상태로 변환합니다.
+React Query 상태를 DataLoader 상태로 변환합니다.
 
 ```ts
 const status = normalizeStatus('pending', 'fetching'); // 'loading'
@@ -565,7 +558,7 @@ const hasUserTag = hasTag(queryKey, 'users');
 #### 키 조합 유틸리티
 
 ```ts
-// 데이터 소스의 캐시 키 조합
+// 데이터 소스에 대한 캐시 키 조합
 const key = composeKey(userDataSource, {userId: 123});
 
 // 태그를 포함한 전체 키 조합
@@ -586,7 +579,7 @@ const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Bo
 
 // 사용:
 const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
-// TypeScript는 두 분기 모두에 대해 올바르게 타입을 추론합니다.
+// TypeScript는 두 분기 모두에 대해 타입을 올바르게 추론합니다.
 ```
 
 #### 쿼리 옵션 조합
@@ -683,7 +676,7 @@ await dataManager.invalidateTag('user:123');
 await dataManager.invalidateTag('users');
 ```
 
-### 타입 안전한 오류 처리
+### 타입이 있는 오류 처리
 
 타입 안전한 오류 처리를 생성합니다.
 
@@ -707,7 +700,7 @@ const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
 );
 ```
 
-### 복잡한 페이징을 사용한 무한 쿼리
+### 복잡한 페이징이 있는 무한 쿼리
 
 복잡한 페이징 시나리오를 처리합니다.
 
@@ -752,215 +745,23 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
   const combined = useQueryResponses([user, posts, followers]);
 ```
 
-```html
-<p>
-  <a href="https://github.com/gravity-ui/data-sources/blob/main/README.md">English</a> |
-  <a href="https://github.com/gravity-ui/data-sources/blob/main/README.ko.md">한국어</a>
-</p>
-```
-
-# @gravity-ui/data-sources
-
-이 라이브러리는 React 애플리케이션에서 데이터 페칭 및 상태 관리를 위한 간단하고 강력한 솔루션을 제공합니다.
-
-## 주요 기능
-
-*   **간단한 API**: 데이터 소스를 정의하고 훅을 사용하여 데이터를 쉽게 가져올 수 있습니다.
-*   **상태 관리**: 로딩, 에러, 성공 상태를 자동으로 관리합니다.
-*   **TypeScript 지원**: 타입 안전성을 보장하고 개발 생산성을 높입니다.
-*   **캐싱 및 재검증**: 데이터 중복을 피하고 최신 상태를 유지합니다.
-*   **유연성**: 다양한 데이터 페칭 시나리오에 맞게 사용자 정의가 가능합니다.
-
-## 설치
-
-```bash
-npm install @gravity-ui/data-sources
-# 또는
-yarn add @gravity-ui/data-sources
-```
-
-## 사용법
-
-### 1. 데이터 소스 정의
-
-`makePlainQueryDataSource` 또는 `makeMutationDataSource`를 사용하여 데이터 소스를 정의합니다.
-
-```ts
-import { makePlainQueryDataSource, skipContext } from '@gravity-ui/data-sources';
-
-interface User {
-  id: number;
-  name: string;
-}
-
-const userDataSource = makePlainQueryDataSource<
-  { userId: number }, // Params type
-  User // Response type
->({
-  name: 'user',
-  fetch: skipContext(async (params) => {
-    const response = await fetch(`/api/users/${params.userId}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch user');
-    }
-    return response.json();
-  }),
-});
-```
-
-### 2. 데이터 가져오기
-
-`useQueryData` 훅을 사용하여 정의된 데이터 소스에서 데이터를 가져옵니다.
-
-```ts
-import { useQueryData } from '@gravity-ui/data-sources';
-import { userDataSource } from './dataSources'; // 위에서 정의한 데이터 소스
-
-function UserProfile({ userId }: { userId: number }) {
-  const { data, isLoading, error, refetch } = useQueryData(userDataSource, { userId });
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return (
-      <div>
-        Error: {error.message}
-        <button onClick={refetch}>Retry</button>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <h1>{data?.name}</h1>
-      <p>User ID: {data?.id}</p>
-    </div>
-  );
-}
-```
-
-### 3. 뮤테이션 (데이터 변경)
-
-`makeMutationDataSource`와 `useMutationData`를 사용하여 데이터를 생성, 업데이트 또는 삭제합니다.
-
-```ts
-import { makeMutationDataSource, useMutationData } from '@gravity-ui/data-sources';
-
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-}
-
-const createPostDataSource = makeMutationDataSource<
-  Post, // Request body type
-  Post // Response type
->({
-  name: 'createPost',
-  fetch: async (postData) => {
-    const response = await fetch('/api/posts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(postData),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to create post');
-    }
-    return response.json();
-  },
-});
-
-function CreatePostForm() {
-  const { mutate, isLoading, error } = useMutationData(createPostDataSource);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const title = formData.get('title') as string;
-    const body = formData.get('body') as string;
-
-    await mutate({ title, body });
-    alert('Post created successfully!');
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="title" placeholder="Title" required />
-      <textarea name="body" placeholder="Body" required />
-      <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Creating...' : 'Create Post'}
-      </button>
-      {error && <div>Error: {error.message}</div>}
-    </form>
-  );
-}
-```
-
-### 4. 복합 데이터 소스
-
-여러 데이터 소스를 결합하여 한 번에 로드할 수 있습니다.
-
-```ts
-import { useCombinedDataSource } from '@gravity-ui/data-sources';
-import { userDataSource, postsDataSource, followersDataSource } from './dataSources';
-
-const combined = useCombinedDataSource([
-  { dataSource: userDataSource, params: { userId: 123 } },
-  { dataSource: postsDataSource, params: { userId: 123 } },
-  { dataSource: followersDataSource, params: { userId: 123 } },
-]);
-
-// ... DataLoader 컴포넌트 사용 예시
-const MyComponent = () => {
-  const combined = useCombinedDataSource([
-    { dataSource: userDataSource, params: { userId: 123 } },
-    { dataSource: postsDataSource, params: { userId: 123 } },
-    { dataSource: followersDataSource, params: { userId: 123 } },
-  ]);
-
-  return (
-    <DataLoader
-      status={combined.status}
-      error={combined.error}
-      errorAction={combined.refetchErrored} // 실패한 요청만 다시 시도
-      LoadingView={ProfileSkeleton}
-      ErrorView={ProfileError}
-    >
-      {combined.data && (
-        <div>
-          <UserInfo user={combined.data.user.data} />
-          <UserPosts posts={combined.data.posts.data} />
-          <UserFollowers followers={combined.data.followers.data} />
-        </div>
-      )}
-    </DataLoader>
-  );
-};
-```
-
-## TypeScript 지원
-
-이 라이브러리는 TypeScript 우선 접근 방식으로 구축되었으며 완전한 타입 추론을 제공합니다.
-
-```ts
-// 타입은 자동으로 추론됩니다.
+```tsx
+// Types are automatically inferred
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // 반환 타입은 User로 추론됩니다.
+    // Return type is inferred as User
   }),
 });
 
-// 훅 반환 타입은 자동으로 타이핑됩니다.
+// Hook return type is automatically typed
 const {data} = useQueryData(userDataSource, {userId: 123});
-// data는 User | undefined로 타이핑됩니다.
+// data is typed as User | undefined
 ```
 
-### 사용자 정의 에러 타입
+### 사용자 정의 오류 타입
 
-사용자 정의 에러 타입을 정의하고 사용할 수 있습니다.
+사용자 정의 오류 타입을 정의하고 사용하세요:
 
 ```ts
 interface ValidationError {
@@ -986,10 +787,11 @@ const typedDataSource = makePlainQueryDataSource<
 });
 ```
 
-## 기여
+## 기여하기
 
-코드 오브 컨덕트 및 풀 리퀘스트 제출 프로세스에 대한 자세한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하십시오.
+코드 오브 컨덕트 및 풀 리퀘스트 제출 절차에 대한 자세한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어보세요.
 
 ## 라이선스
 
-MIT 라이선스. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하십시오.
+MIT 라이선스. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+```

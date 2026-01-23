@@ -1,4 +1,3 @@
-```markdown
 # @gravity-ui/stylelint-config
 
 Stylelint-Konfiguration für Gravity UI-Projekte.
@@ -27,7 +26,7 @@ Fügen Sie eine `.stylelintrc`-Datei im Stammverzeichnis Ihres Projekts mit folg
 
 ### Prettier
 
-Wenn Sie Prettier verwenden, erweitern Sie die Stammkonfiguration um zusätzliche Regeln:
+Wenn Sie Prettier verwenden, erweitern Sie die Hauptkonfiguration um zusätzliche Regeln:
 
 ```json
 {
@@ -37,11 +36,10 @@ Wenn Sie Prettier verwenden, erweitern Sie die Stammkonfiguration um zusätzlich
 
 ### Reihenfolge
 
-Wenn Sie die Reihenfolge von Eigenschaften in Ihren CSS-Dateien festlegen möchten, erweitern Sie die Stammkonfiguration um zusätzliche Regeln:
+Wenn Sie die Reihenfolge von Eigenschaften in Ihren CSS-Dateien festlegen möchten, erweitern Sie die Hauptkonfiguration um zusätzliche Regeln:
 
 ```json
 {
   "extends": ["@gravity-ui/stylelint-config", "@gravity-ui/stylelint-config/order"]
 }
-```
 ```

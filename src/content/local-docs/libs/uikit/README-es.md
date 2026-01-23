@@ -63,7 +63,7 @@ root.render(
 );
 ```
 
-Es posible generar clases CSS raíz iniciales durante el SSR para evitar el parpadeo del tema:
+Es posible generar las clases CSS raíz iniciales durante el SSR para evitar el parpadeo del tema:
 
 ```js
 import {getRootClassName} from '@gravity-ui/uikit/server';

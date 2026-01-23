@@ -42,4 +42,3 @@ To start the development server with storybook execute the following command:
 npm ci
 npm run dev
 ```
-

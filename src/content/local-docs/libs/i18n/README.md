@@ -45,4 +45,3 @@ This repository contains common utilities, libraries, and plugins used for i18n 
     # Run lint for all packages
     pnpm nx run-many --target=lint --parallel
     ```
-

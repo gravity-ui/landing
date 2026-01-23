@@ -53,4 +53,4 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## CSS API
 
-Wird für die Thematisierung der Navigationskomponenten verwendet
+Wird für die Thematisierung von Navigationskomponenten verwendet

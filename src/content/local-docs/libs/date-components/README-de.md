@@ -36,7 +36,7 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Lade die Datum-Locales, die in der Anwendung verwendet werden sollen.
+// Lade die Datum-Locales, die in der Anwendung verwendet werden.
 await settings.loadLocale('ru');
 
 function App() {
@@ -77,7 +77,7 @@ function App() {
 }
 ```
 
-Die Komponenten verfügen über Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwende `addLanguageKeysets` aus `@gravity-ui/uikit`:
+Die Komponenten haben Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwende `addLanguageKeysets` von `@gravity-ui/uikit`:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';

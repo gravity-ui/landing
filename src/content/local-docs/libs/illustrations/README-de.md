@@ -14,9 +14,9 @@ npm install --save-dev @gravity-ui/illustrations
 
 Richten Sie das Illustrations-Theme ein. Führen Sie einen der folgenden Schritte aus:
 
-##### CSS-Variablen mit eigener Farbpalette definieren
+##### Definition von CSS-Tokens mit eigener Farbpalette
 
-Definieren Sie folgende CSS-Variablen in Ihrer App:
+Definieren Sie folgende CSS-Tokens in Ihrer App:
 
 ```scss
 --gil-color-object-base: rgb(255, 190, 92);
@@ -29,7 +29,7 @@ Definieren Sie folgende CSS-Variablen in Ihrer App:
 --gil-color-object-danger: rgb(255, 0, 61);
 ```
 
-##### Mixins mit Standard-Gravity-Theme in SCSS verwenden
+##### Verwendung von Mixins mit dem Standard-Gravity-Theme in SCSS
 
 Verwenden Sie die folgenden Mixins für das Styling von Illustrationen in verschiedenen Themes:
 
@@ -88,7 +88,7 @@ import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 
 ### Entwicklung
 
-Um Illustrationen gemäß dem neuen Design zu aktualisieren, ändern Sie den Inhalt der SVGs im Light-Theme (`<this-repository-root>/svgs/<illustration-name>-light.svg`-Dateien) und führen Sie dann den Befehl aus:
+Um Illustrationen gemäß dem neuen Design zu aktualisieren, ändern Sie den Inhalt der SVGs im Light-Theme (`<dieses-Repository-Root>/svgs/<illustrationsname>-light.svg`-Dateien) und führen Sie dann den Befehl aus:
 
 ```shell
 npm run generate

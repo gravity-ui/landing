@@ -7,4 +7,3 @@ A set of complex React components
 ```shell
 npm install --save-dev @gravity-ui/components
 ```
-

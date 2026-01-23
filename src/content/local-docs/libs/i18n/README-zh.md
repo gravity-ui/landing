@@ -1,6 +1,6 @@
 # 🌍 Gravity-UI i18n Tools
 
-本仓库包含 Gravity-UI 在国际化 (i18n) 方面使用的通用工具、库和插件。
+本仓库包含 Gravity-UI 在国际化 (i18n) 过程中使用的通用工具、库和插件。
 
 ## 实用链接
 

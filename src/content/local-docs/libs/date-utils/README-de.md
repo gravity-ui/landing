@@ -1,6 +1,6 @@
 # @gravity-ui/date-utils
 
-Hilfsprogramme zur Verwaltung von Datum und Uhrzeit.
+Hilfsprogramme für die Verwaltung von Datum und Uhrzeit.
 
 ## Installation
 
@@ -56,5 +56,5 @@ settings.loadLocale('de').then(() => {
 });
 
 // Anpassung
-settings.updateLocale({weekStart: 0}); // Ersten Wochentag ändern
+settings.updateLocale({weekStart: 0}); // Ändert den ersten Tag der Woche
 ```

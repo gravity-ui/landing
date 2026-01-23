@@ -1,6 +1,6 @@
 # NodeKit
 
-NodeKit 是一个为您的 Node.js 应用、脚本和库提供的简单工具集。它提供了日志记录、遥测、配置和错误处理等功能，让您在不同的项目中拥有熟悉的基础。
+NodeKit 是一个用于 Node.js 应用、脚本和库的简单工具集。它提供了日志记录、遥测、配置和错误处理等功能，让您在不同的项目中拥有熟悉的基础。
 
 ## 入门
 
@@ -23,10 +23,10 @@ nodekit.ctx.log('App is ready');
 
 有关更多文档，请参阅 `docs/` 目录：
 
-- [`docs/configuration.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/configuration.md) 详细说明了如何配置 nodekit 本身以及基于 nodekit 的应用程序。
+- [`docs/configuration.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/configuration.md) 详细说明了如何配置 NodeKit 本身以及基于 NodeKit 的应用程序。
 - [`docs/contexts.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/contexts.md) 描述了 NodeKit 上下文、日志记录和跟踪的概念。
-- [`docs/app-error.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/app-error.md) 包含 NodeKit 为您的应用程序提供的有用自定义错误类的说明。
-- [`docs/utils.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/utils.md) 列出了 NodeKit 捆绑的一些附加辅助函数。
+- [`docs/app-error.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/app-error.md) 包含 NodeKit 为您的应用程序提供的有用自定义错误类的描述。
+- [`docs/utils.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/utils.md) 列出了一些随 NodeKit 一起打包的附加辅助函数。
 
 ## 贡献
 
@@ -39,13 +39,13 @@ git clone git@github.com:gravity-ui/nodekit
 git clone git@github.com:gravity-ui/nodekit-examples
 ```
 
-将您的 nodekit 链接到 npm 并启动编译器：
+将您的 NodeKit 链接到 npm 并启动编译器：
 
 ```bash
 cd nodekit && npm link && npm run dev
 ```
 
-然后，在另一个终端中，进入 examples 目录，打开您感兴趣的示例，在那里链接您的 nodekit，然后启动应用程序：
+然后，在另一个终端中，进入示例目录，打开您感兴趣的示例，在那里链接您的 NodeKit，然后启动应用程序：
 
 ```bash
 cd nodekit-examples/basic-app && npm i && npm link @gravity-ui/nodekit

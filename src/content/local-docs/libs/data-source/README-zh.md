@@ -1,6 +1,6 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** 是一个简单的数据获取封装库。它类似于 [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) 中的“端口”。它允许你根据用例为数据获取相关的操作创建封装。**Data Source** 在底层使用了 [react-query](https://tanstack.com/query/latest)。
+**Data Source** 是一个简单的数据获取封装库。它在[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)中扮演着“端口”的角色。它允许你根据具体用例来封装数据获取相关的逻辑。**Data Source** 内部使用了 [react-query](https://tanstack.com/query/latest)。
 
 ## 安装
 
@@ -164,7 +164,7 @@ const postsDataSource = makeInfiniteQueryDataSource({
 该库将查询状态规范化为三种简单状态：
 
 - `loading` - 正在实际加载数据。与 React Query 中的 `isLoading` 相同。
-- `success` - 数据可用（可能通过 `idle` 跳过）。
+- `success` - 数据可用（可以使用 `idle` 跳过）。
 - `error` - 数据获取失败。
 
 ### Idle 概念
@@ -188,19 +188,19 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 
 当参数等于 `idle` 时：
 
-- 查询不会执行。
-- 状态保持为 `success`。
-- 数据保持为 `undefined`。
-- 组件可以安全地渲染而无需加载。
+- 查询不会执行
+- 状态保持为 `success`
+- 数据保持为 `undefined`
+- 组件可以安全地渲染而无需加载
 
 **`idle` 的优势：**
 
 1. **类型安全** - TypeScript 正确推断条件参数的类型。
 2. **性能** - 避免不必要的服务器请求。
 3. **逻辑简化** - 无需管理额外的 `enabled` 状态。
-4. **一致性** - 所有条件查询的统一方法。
+4. **一致性** - 对所有条件查询采用统一的方法。
 
-这对于条件查询特别有用，当你想在特定条件下加载数据，同时保持类型安全时。
+这对于条件查询尤其有用，当你想在特定条件下加载数据，同时保持类型安全时。
 
 ## API 参考
 
@@ -294,11 +294,11 @@ const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]
 - `status` - 所有查询的合并状态
 - `error` - 遇到的第一个错误
 - `refetch` - 重新获取所有查询的函数
-- `refetchErrored` - 只重新获取失败查询的函数
+- `refetchErrored` - 仅重新获取失败查询的函数
 
 #### `useRefetchAll(states)`
 
-创建一个用于重新获取多个查询的回调函数。
+创建一个回调函数以重新获取多个查询。
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
@@ -307,16 +307,16 @@ const refetchAll = useRefetchAll([user, posts, comments]);
 
 #### `useRefetchErrored(states)`
 
-创建一个用于只重新获取失败查询的回调函数。
+创建一个回调函数以仅重新获取失败的查询。
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
-// refetchErrored() 只会重新获取有错误的查询
+// refetchErrored() 将仅重新获取有错误的查询
 ```
 
 #### `useDataManager()`
 
-从上下文中获取 DataManager。
+从上下文中返回 DataManager。
 
 ```ts
 const dataManager = useDataManager();
@@ -353,13 +353,13 @@ await dataManager.invalidateTag('users');
 - `error` - 错误对象
 - `errorAction` - 用于错误重试的函数或操作配置
 - `LoadingView` - 加载期间显示的组件
-- `ErrorView` - 发生错误时显示的组件
+- `ErrorView` - 错误时显示的组件
 - `loadingViewProps` - 传递给 LoadingView 的 props
 - `errorViewProps` - 传递给 ErrorView 的 props
 
 #### `<DataInfiniteLoader />`
 
-专为无限查询设计的组件。
+用于无限查询的专用组件。
 
 ```tsx
 <DataInfiniteLoader
@@ -383,11 +383,11 @@ await dataManager.invalidateTag('users');
 - `hasNextPage` - 是否还有更多页面可用
 - `fetchNextPage` - 获取下一页的函数
 - `isFetchingNextPage` - 是否正在获取下一页
-- `MoreView` - "加载更多" 按钮的组件
+- `MoreView` - “加载更多”按钮的组件
 
 #### `withDataManager(Component)`
 
-一个 HOC，将 DataManager 作为 prop 注入。
+注入 DataManager 作为 prop 的 HOC。
 
 ```tsx
 const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
@@ -400,13 +400,13 @@ const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
 
 #### `ClientDataManager`
 
-数据管理的核心类。
+数据管理的主要类。
 
 ```ts
 const dataManager = new ClientDataManager({
   defaultOptions: {
     queries: {
-      staleTime: 300000, // 5 分钟
+      staleTime: 300000, // 5 minutes
       retry: 3,
       refetchOnWindowFocus: false,
     },
@@ -423,13 +423,13 @@ const dataManager = new ClientDataManager({
 ```ts
 await dataManager.invalidateTag('users');
 await dataManager.invalidateTag('posts', {
-  repeat: {count: 3, interval: 1000}, // 重试失效
+  repeat: {count: 3, interval: 1000}, // Retry invalidation
 });
 ```
 
 ##### `invalidateTags(tags, options?)`
 
-使包含所有指定标签的查询失效。
+使具有所有指定标签的查询失效。
 
 ```ts
 await dataManager.invalidateTags(['user', 'profile']);
@@ -479,7 +479,7 @@ await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 
 #### `skipContext(fetchFunction)`
 
-用于将现有 fetch 函数适配到数据源接口的工具函数。
+用于将现有 fetch 函数适配到数据源接口的实用工具。
 
 ```ts
 // Existing function
@@ -496,13 +496,6 @@ const dataSource = makePlainQueryDataSource({
 
 #### `withCatch(fetchFunction, errorHandler)`
 
-```html
-<div class="language-selector">
-  <a href="/en/readme.html">English</a>
-  <a href="/zh/readme.html">中文</a>
-</div>
-```
-
 为 fetch 函数添加标准化的错误处理。
 
 ```ts
@@ -515,7 +508,7 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
-// 自动处理来自 React Query 的 AbortSignal
+// 自动处理 React Query 的 AbortSignal
 ```
 
 #### `getProgressiveRefetch(options)`
@@ -549,10 +542,10 @@ const status = normalizeStatus('pending', 'fetching'); // 'loading'
 #### 状态和错误工具
 
 ```ts
-// 从多个状态获取合并后的状态
+// 获取多个状态的组合状态
 const status = getStatus([user, posts, comments]);
 
-// 从多个状态获取第一个错误
+// 获取多个状态的第一个错误
 const error = getError([user, posts, comments]);
 
 // 合并多个状态
@@ -741,7 +734,7 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 
 ### 组合多个数据源
 
-组合来自多个源的数据：
+组合来自多个数据源的数据：
 
 ```ts
 const UserProfile: React.FC<{userId: number}> = ({userId}) => {
@@ -752,29 +745,8 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
   const combined = useQueryResponses([user, posts, followers]);
 ```
 
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/zh/README.md">中文</a>
-</div>
-```
-
 ```jsx
-  return (
-    <DataLoader
-      status={combined.status}
-      error={combined.error}
-      errorAction={combined.refetchErrored} // Only retry failed requests
-      LoadingView={ProfileSkeleton}
-      ErrorView={ProfileError}
-    >
-      {user && posts && followers && (
-        <div>
-          <UserInfo user={user.data} />
-          <UserPosts posts={posts.data} />
-          <UserFollowers followers={followers.data} />
-        </div>
-      )}
+// ... (previous code)
     </DataLoader>
   );
 };
@@ -815,11 +787,11 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Params 类型
-  {id: number}, // Request 类型
-  ApiResponse, // Response 类型
-  User, // Data 类型
-  ApiError // Error 类型
+  {id: number}, // 参数类型
+  {id: number}, // 请求类型
+  ApiResponse, // 响应类型
+  User, // 数据类型
+  ApiError // 错误类型
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),

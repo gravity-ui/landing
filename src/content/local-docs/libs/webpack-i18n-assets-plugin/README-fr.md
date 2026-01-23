@@ -7,7 +7,7 @@ Un plugin pour Webpack qui remplace les appels aux fonctions de localisation (i1
 - Intègre les textes i18n dans le bundle (tout en substituant les paramètres dans la chaîne finale)
 - Génère des assets pour toutes les locales en une seule compilation
 - Le plugin ne fonctionne que pour les builds de production !
-- Ne prend en charge que les littéraux comme clés dans l'argument de la fonction de localisation (les chaînes de caractères modèles et les variables ne sont pas autorisées)
+- Ne prend en charge que les littéraux comme clés dans l'argument de la fonction de localisation (les chaînes de caractères et les variables ne sont pas autorisées)
 
 ## 📝 Comment l'utiliser
 
@@ -123,7 +123,7 @@ Par défaut, le plugin est configuré pour fonctionner avec la bibliothèque [`@
 
 Type : [`ImportResolver`](./src/types.ts#18)
 
-La fonction qui traite les importations et marque lesquelles doivent être considérées comme des fonctions de localisation (par la suite, les appels aux identifiants marqués sont traités par le remplaçant).
+La fonction qui traite les importations et marque lesquelles doivent être considérées comme des fonctions de localisation (par la suite, les appels aux identifiants marqués sont traités par le replacer).
 
 La signature est similaire à l'[importSpecifier](https://webpack.js.org/api/parser/#importspecifier) original de webpack.
 
@@ -176,15 +176,8 @@ const declarationResolver = (declarator: VariableDeclarator, module: string) => 
         return undefined;
     }
 
-```html
-<div class="languages">
-    <a href="/en/README.md">English</a>
-    <a href="/fr/README.md">Français</a>
-</div>
-```
-
 ```typescript
-// Traitement des déclarations de fonctions comme const i18nK = i18n.bind(null, 'keyset');
+// Déclaration de fonctions de traitement comme const i18nK = i18n.bind(null, 'keyset');
 if (
     declarator.id.type === 'Identifier' &&
     declarator.id.name.startsWith('i18n') &&
@@ -274,7 +267,7 @@ function replacer(
 
 ### collectUnusedKeys
 
-Type : [`Boolean`] (défaut - false)
+Type : [`Boolean`] (par défaut - false)
 
 Active le mode de collecte des clés inutilisées dans le projet. Après la compilation, il crée un fichier nommé `unused-keys.json`.
 
@@ -294,10 +287,10 @@ Un exemple de code avec lequel les fonctions fonctionneront :
 // L'importResolver ne prend en compte que l'importation par défaut au chemin ui/utils/i18n.
 import i18n from 'ui/utils/i18n';
 
-// La declarationResolver gère les variables dont la valeur est un appel à i18n.bind.
+// Le declarationResolver gère les variables dont la valeur est un appel à i18n.bind.
 const i18nK = i18n.bind(null, 'component.navigation');
 
-// Le replacer gère les appels aux identifiants trouvés par l'importResolver et la declarationResolver
+// Le replacer gère les appels aux identifiants trouvés par l'importResolver et le declarationResolver
 // Cela signifie que les appels suivants seront traités :
 i18nK('some_key');
 i18nK('some_plural_key', { count: 123 });
@@ -307,9 +300,9 @@ i18n('component.navigation', 'some_plural_key', { count: 123 });
 i18n('component.navigation', 'some_key_with_param', { someParam: 'hello' });
 ```
 
-Le Replacer effectue en plus les opérations suivantes :
+Le Replacer effectue en outre les opérations suivantes :
 
-1. Inline les paramètres dans une chaîne de caractères. Par exemple, si la valeur de la clé est la suivante :
+1. Intègre les paramètres dans une chaîne de caractères. Par exemple, si la valeur de la clé est la suivante :
 
     ```typescript
     const keyset = {
@@ -349,14 +342,12 @@ Le Replacer effectue en plus les opérations suivantes :
 
 ## ℹ️ FAQ
 
-Voici la traduction du fichier README en français, en gardant le ton naturel et en respectant vos consignes :
-
 ### Comment cela se compare-t-il à [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin) ?
 
-Pour implémenter ce plugin, une idée du package webpack-localize-assets-plugins a été utilisée (un grand merci au créateur du package !).
+Pour implémenter ce plugin, une idée du package webpack-localize-assets-plugins a été utilisée (un grand merci à son créateur !).
 
 Les différences sont les suivantes :
 
 - Une API plus pratique qui vous permet de travailler avec n'importe quel type de fonction d'internationalisation (y compris les helpers de namespaces comme `useTranslation` d'i18next, les fonctions importées d'autres modules, etc.)
 - Génération correcte des cartes sources par rapport au code source
-- Il n'y a que le support de webpack 5. Le support de webpack 4 a été supprimé.
+- Prise en charge uniquement de webpack 5. La prise en charge de webpack 4 a été supprimée.

@@ -38,7 +38,7 @@ const SubmitButton = <Button view="action" size="l" />;
 
 ### Styles
 
-UIKit est livré avec des styles de base et un thème. Pour que tout soit esthétique, incluez ceci en haut de votre fichier d'entrée :
+UIKit est livré avec des styles de base et un thème. Pour que tout soit agréable, incluez ceci en haut de votre fichier d'entrée :
 
 ```js
 // index.js
@@ -63,7 +63,7 @@ root.render(
 );
 ```
 
-Il est possible de générer des classes CSS racines initiales lors du SSR pour éviter le scintillement du thème :
+Il est possible de générer les classes CSS racines initiales lors du SSR pour éviter le scintillement du thème :
 
 ```js
 import {getRootClassName} from '@gravity-ui/uikit/server';

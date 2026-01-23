@@ -25,7 +25,7 @@ export default [
 
 ### Prettier
 
-Prettier를 사용 중이라면 해당 설정을 추가하세요:
+Prettier를 사용 중이라면, 해당 설정을 추가하세요:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -42,7 +42,7 @@ export default [
 
 ### a11y
 
-접근성 문제를 감지하고 싶다면 해당 설정을 추가하세요:
+접근성 문제를 감지하고 싶다면, 해당 설정을 추가하세요:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -59,7 +59,7 @@ export default [
 
 ### Order
 
-모듈 가져오기 순서에 대한 규칙을 적용하고 싶다면 해당 설정을 추가하세요:
+모듈 import 순서에 대한 규칙을 적용하고 싶다면, 해당 설정을 추가하세요:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';

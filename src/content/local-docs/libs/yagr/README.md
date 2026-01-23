@@ -83,4 +83,3 @@ Need something specific? Yagr presents some useful examples in the [demo/example
 3. Run `npm run build`.
 4. Run `npx http-server .`.
 5. Open examples in browser according to the http-server output.
-

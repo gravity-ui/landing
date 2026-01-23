@@ -34,4 +34,3 @@ You can specify additional browsers based on your audience, like:
 ## Usage
 
 Package provides production version of browserslist.
-

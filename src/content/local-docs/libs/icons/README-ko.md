@@ -24,7 +24,7 @@ import {Cloud} from '@gravity-ui/icons';
 
 ### SVG
 
-> 이 경우 적절한 로더가 필요할 수 있습니다.
+> 이 기능을 사용하려면 적절한 로더가 필요할 수 있습니다.
 
 ```js
 import cloudIcon from '@gravity-ui/icons/svgs/cloud.svg';

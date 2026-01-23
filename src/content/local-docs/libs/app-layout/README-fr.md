@@ -73,11 +73,11 @@ interface RenderParams<Data, Plugins> {
     className?: string;
     // attributs de la balise body
     attributes?: string;
-    // contenu du body avant la balise div avec id root
+    // contenu de la balise body avant la balise div avec id root
     beforeRoot?: string;
     // contenu innerHtml de la balise div avec id root
     root?: string;
-    // contenu du body après la balise div avec id root
+    // contenu de la balise body après la balise div avec id root
     afterRoot?: string;
   };
   // options des plugins
@@ -299,14 +299,7 @@ import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 ```
 
-```html
-<div class="language-selector">
-  <a href="/README.md">English</a>
-  <a href="/README.fr.md">Français</a>
-</div>
-```
-
-```js
+```javascript
 app.get((req, res) => {
   res.send(
     renderLayout({
@@ -324,7 +317,7 @@ app.get((req, res) => {
 });
 ```
 
-Options du plugin :
+Options de plugin :
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -339,7 +332,7 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-Ajoute les compteurs de métriques Yandex sur la page.
+Ajoute des compteurs Yandex Metrika à la page.
 
 Utilisation :
 
@@ -368,7 +361,7 @@ app.get((req, res) => {
 });
 ```
 
-Options du plugin :
+Options de plugin :
 
 ```typescript
 export type UserParams = {
@@ -399,16 +392,14 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Ajoute les scripts et les styles du fichier manifest des assets webpack.
+Ajoute les scripts et styles du fichier de manifeste des assets webpack.
 
 Utilisation :
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([
-  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
-]);
+const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
 
 app.get((req, res) => {
   res.send(
@@ -424,7 +415,7 @@ app.get((req, res) => {
 });
 ```
 
-Options du plugin :
+Options de plugin :
 
 ```typescript
 export interface LayoutOptions {
@@ -435,7 +426,7 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-Ajoute des attributs au corps de la page.
+Ajoute des attributs au corps (`body`).
 
 Utilisation :
 
@@ -459,7 +450,7 @@ app.get((req, res) => {
 });
 ```
 
-Options du plugin :
+Options de plugin :
 
 ```typescript
 interface UikitPluginOptions {
@@ -470,9 +461,9 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-Ajoute les informations de version des micro-frontends à la page.
+Ajoute des informations sur les versions des microfrontends à la page.
 
-Ce plugin crée un objet global `window.__REMOTE_VERSIONS__` contenant les versions des micro-frontends fournies, qui peut être utilisé par la fédération de modules ou des architectures de micro-frontends similaires pour déterminer quelles versions des modules distants charger.
+Ce plugin crée un objet global `window.__REMOTE_VERSIONS__` contenant les versions des microfrontends fournies, qui peut être utilisé par le module federation ou des architectures de microfrontends similaires pour déterminer quelles versions des modules distants charger.
 
 Il peut être utilisé en combinaison avec [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) et l'option `moduleFederation.remotesRuntimeVersioning` pour charger automatiquement les modules distants avec les versions correspondantes.
 
@@ -499,7 +490,7 @@ app.get((req, res) => {
 });
 ```
 
-Options du plugin :
+Options de plugin :
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -536,7 +527,7 @@ app.get((req, res) => {
 
 ## Utilisation alternative
 
-Avec les renderers partiels `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via le streaming HTML :
+Avec les générateurs de parties `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via le streaming HTML :
 
 ```js
 import express from 'express';

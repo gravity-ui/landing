@@ -16,7 +16,7 @@ npm install --save-dev @gravity-ui/illustrations
 
 ##### 자체 색상 팔레트로 CSS 토큰 정의
 
-앱에서 다음 CSS 토큰을 정의합니다:
+앱에서 다음 CSS 토큰을 정의하세요:
 
 ```scss
 --gil-color-object-base: rgb(255, 190, 92);
@@ -31,7 +31,7 @@ npm install --save-dev @gravity-ui/illustrations
 
 ##### SCSS에서 기본 gravity-theme 믹스인 사용
 
-다양한 테마에서 일러스트레이션 스타일링을 위해 다음 믹스인을 사용합니다.
+다양한 테마에서 일러스트레이션 스타일링을 위해 다음 믹스인을 사용하세요.
 
 ```scss
 @import '@gravity-ui/illustrations/styles/theme.scss';
@@ -55,14 +55,14 @@ npm install --save-dev @gravity-ui/illustrations
 }
 ```
 
-##### 미리 설치된 gravity 테마가 있는 프로젝트의 대안
+##### 미리 설치된 gravity 테마가 있는 프로젝트를 위한 대안
 
-또는, 프로젝트에 `@gravity-ui/uikit`이 이미 설치되어 있고 기본 테마를 사용하는 경우, 프로젝트의 루트 스타일 파일에 `styles.scss`를 가져오기만 하면 됩니다:
+대안으로, 프로젝트에 `@gravity-ui/uikit`이 이미 설치되어 있고 기본 테마를 사용하는 경우, 프로젝트의 스타일 루트 파일에 `styles.scss`를 가져오기만 하면 됩니다:
 
 ```js
 // 기존 gravity 스타일 정의
 import '@gravity-ui/uikit/styles/styles.css';
-// 바로 아래에 한 줄 더 추가
+// 아래에 한 줄 더 추가
 import '@gravity-ui/illustrations/styles/styles.scss';
 ```
 
@@ -88,7 +88,7 @@ import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 
 ### 개발
 
-새로운 디자인에 맞춰 일러스트레이션을 업데이트하려면, 라이트 테마의 SVG 콘텐츠를 변경합니다 (`<이-저장소-루트>/svgs/<일러스트레이션-이름>-light.svg` 파일) 그런 다음 명령을 실행합니다:
+새로운 디자인에 맞춰 일러스트레이션을 업데이트하려면, 라이트 테마의 SVG 파일 (`<이-저장소-루트>/svgs/<일러스트레이션-이름>-light.svg` 파일)의 내용을 변경한 후 다음 명령을 실행하세요:
 
 ```shell
 npm run generate

@@ -55,12 +55,12 @@ npm install --save-dev @gravity-ui/illustrations
 }
 ```
 
-##### 对于已安装 gravity 主题的项目，有另一种选择
+##### 对于已安装 gravity theme 的项目，有另一种选择
 
-或者，如果项目中已安装 `@gravity-ui/uikit` 并使用默认主题，您可以直接在项目根样式文件中导入 `styles.scss`：
+或者，如果项目中已安装 `@gravity-ui/uikit` 并且使用了默认主题，您可以直接在项目根样式文件中导入 `styles.scss`：
 
 ```scss
-// 现有的 gravity 样式定义
+// 已有的 gravity 样式定义
 import '@gravity-ui/uikit/styles/styles.css';
 // 只需在下方添加另一个导入
 import '@gravity-ui/illustrations/styles/styles.scss';
@@ -80,7 +80,7 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> 您可能需要相应的加载器来处理此文件
+> 您可能需要相应的 loader 来处理此文件
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
@@ -88,7 +88,7 @@ import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 
 ### 开发
 
-要根据新设计更新插画，请更改 light 主题下的 SVG 文件内容（位于 `<此仓库根目录>/svgs/<插画名称>-light.svg` 文件中），然后运行以下命令：
+要根据新设计更新插画，请更改 light 主题下的 SVG 内容（`<此仓库根目录>/svgs/<插画名称>-light.svg` 文件），然后运行命令：
 
 ```shell
 npm run generate

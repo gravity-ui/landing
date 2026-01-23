@@ -56,5 +56,5 @@ settings.loadLocale('de').then(() => {
 });
 
 // 自定义
-settings.updateLocale({weekStart: 0}); // 更改每周的开始日期
+settings.updateLocale({weekStart: 0}); // 修改每周的开始日期
 ```

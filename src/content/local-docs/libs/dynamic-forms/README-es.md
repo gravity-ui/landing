@@ -1,6 +1,6 @@
 # @gravity-ui/dynamic-forms &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/dynamic-forms)](https://www.npmjs.com/package/@gravity-ui/dynamic-forms) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/dynamic-forms/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/dynamic-forms/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/dynamic-forms/)
 
-Una biblioteca basada en JSON Schema para renderizar formularios y valores de formularios.
+La biblioteca basada en JSON Schema para renderizar formularios y valores de formularios.
 
 ## Instalación
 
@@ -24,7 +24,7 @@ import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
 
 ### Internacionalización (I18N)
 
-Ciertos componentes incluyen tokens de texto (palabras y frases) que están disponibles en dos idiomas: `en` (el predeterminado) y `ru`. Para establecer el idioma, utiliza la función `configure`:
+Ciertos componentes incluyen tokens de texto (palabras y frases) que están disponibles en dos idiomas: `en` (el predeterminado) y `ru`. Para establecer el idioma, usa la función `configure`:
 
 ```js
 // index.js
