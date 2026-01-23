@@ -41,7 +41,7 @@ function App() {
 
 ### 2. Définition des Types d'Erreurs et des Wrappers
 
-Définissez un type d'erreur et créez vos constructeurs pour les sources de données en vous basant sur les constructeurs par défaut :
+Définissez un type d'erreur et créez vos constructeurs pour les sources de données basés sur les constructeurs par défaut :
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -94,9 +94,9 @@ import {skipContext} from '@gravity-ui/data-source';
 import {fetchUser} from './api';
 
 export const userDataSource = makePlainQueryDataSource({
-  // Les clés doivent être uniques. Peut-être devriez-vous créer un utilitaire pour nommer les sources de données
+  // Les clés doivent être uniques. Peut-être devriez-vous créer un helper pour nommer les sources de données
   name: 'user',
-  // skipContext est un utilitaire pour ignorer les 2 premiers paramètres de la fonction (context et fetchContext)
+  // skipContext est un helper pour ignorer les 2 premiers paramètres de la fonction (context et fetchContext)
   fetch: skipContext(fetchUser),
   // Optionnel : générer des tags pour une invalidation de cache avancée
   tags: (params) => [`user:${params.userId}`, 'users'],
@@ -127,7 +127,7 @@ La bibliothèque fournit deux types principaux de sources de données :
 
 #### Source de Données de Requête Simple (Plain Query Data Source)
 
-Pour les modèles simples de requête/réponse :
+Pour les schémas simples de requête/réponse :
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -163,7 +163,7 @@ const postsDataSource = makeInfiniteQueryDataSource({
 
 La bibliothèque normalise les états des requêtes en trois états simples :
 
-- `loading` - Chargement effectif des données. Identique à `isLoading` dans React Query.
+- `loading` - Chargement des données en cours. Identique à `isLoading` dans React Query.
 - `success` - Données disponibles (peut être ignoré en utilisant `idle`).
 - `error` - Échec de la récupération des données.
 
@@ -200,7 +200,7 @@ Lorsque les paramètres sont égaux à `idle` :
 3. **Simplicité Logique** - Pas besoin de gérer un état `enabled` supplémentaire.
 4. **Cohérence** - Approche unifiée pour toutes les requêtes conditionnelles.
 
-Ceci est particulièrement utile pour les requêtes conditionnelles lorsque vous souhaitez charger des données uniquement sous certaines conditions tout en maintenant la sécurité des types.
+Ceci est particulièrement utile pour les requêtes conditionnelles lorsque vous souhaitez charger des données uniquement sous certaines conditions tout en conservant la sécurité des types.
 
 ## Référence API
 
@@ -208,14 +208,7 @@ Ceci est particulièrement utile pour les requêtes conditionnelles lorsque vous
 
 #### `makePlainQueryDataSource(config)`
 
-Crée une source de données de requête simple pour les modèles de requête/réponse.
-
-```html
-<p>Options de langue :
-    <a href="/README.html">English</a> |
-    <a href="/README.fr.html">Français</a>
-</p>
-```
+Crée une source de données de requête simple pour les schémas de requête/réponse.
 
 ```ts
 const dataSource = makePlainQueryDataSource({
@@ -243,7 +236,7 @@ const dataSource = makePlainQueryDataSource({
 
 #### `makeInfiniteQueryDataSource(config)`
 
-Crée une source de données de requête infinie pour les modèles de pagination et de défilement infini.
+Crée une source de données pour les requêtes infinies, adaptée aux schémas de pagination et de défilement infini.
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -251,7 +244,7 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
   fetch: skipContext(fetchFunction),
   next: (lastPage, allPages) => nextPageParam || undefined,
   prev: (firstPage, allPages) => prevPageParam || undefined,
-  // ... autres options identiques à plain
+  // ... autres options identiques à celles de 'plain'
 });
 ```
 
@@ -282,12 +275,12 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 - `data` - Les données récupérées
 - `status` - Statut actuel ('loading' | 'success' | 'error')
 - `error` - Objet d'erreur si la requête a échoué
-- `refetch` - Fonction pour relancer manuellement la récupération des données
+- `refetch` - Fonction pour recharger manuellement les données
 - Autres propriétés React Query
 
 #### `useQueryResponses(responses)`
 
-Combine plusieurs réponses de requête en un seul état.
+Combine plusieurs réponses de requêtes en un seul état.
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -300,30 +293,30 @@ const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]
 
 - `status` - Statut combiné de toutes les requêtes
 - `error` - Première erreur rencontrée
-- `refetch` - Fonction pour relancer toutes les requêtes
-- `refetchErrored` - Fonction pour relancer uniquement les requêtes échouées
+- `refetch` - Fonction pour recharger toutes les requêtes
+- `refetchErrored` - Fonction pour recharger uniquement les requêtes échouées
 
 #### `useRefetchAll(states)`
 
-Crée une fonction de rappel pour relancer plusieurs requêtes.
+Crée une fonction de rappel pour recharger plusieurs requêtes.
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
-// refetchAll() déclenchera la relance de toutes les requêtes
+// refetchAll() déclenchera le rechargement de toutes les requêtes
 ```
 
 #### `useRefetchErrored(states)`
 
-Crée une fonction de rappel pour relancer uniquement les requêtes échouées.
+Crée une fonction de rappel pour recharger uniquement les requêtes échouées.
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
-// refetchErrored() ne relancera que les requêtes ayant des erreurs
+// refetchErrored() ne rechargera que les requêtes ayant des erreurs
 ```
 
 #### `useDataManager()`
 
-Retourne le DataManager du contexte.
+Retourne le DataManager depuis le contexte.
 
 ```ts
 const dataManager = useDataManager();
@@ -332,7 +325,7 @@ await dataManager.invalidateTag('users');
 
 #### `useQueryContext()`
 
-Retourne le contexte de requête (pour construire des hooks de données personnalisés basés sur react-query).
+Retourne le contexte de la requête (pour construire des hooks de données personnalisés basés sur react-query).
 
 ### Composants React
 
@@ -358,7 +351,7 @@ Composant pour gérer les états de chargement et les erreurs.
 
 - `status` - Statut de chargement actuel
 - `error` - Objet d'erreur
-- `errorAction` - Fonction ou configuration d'action pour la nouvelle tentative d'erreur
+- `errorAction` - Fonction ou configuration d'action pour la nouvelle tentative en cas d'erreur
 - `LoadingView` - Composant à afficher pendant le chargement
 - `ErrorView` - Composant à afficher en cas d'erreur
 - `loadingViewProps` - Props passées à LoadingView
@@ -387,7 +380,7 @@ Composant spécialisé pour les requêtes infinies.
 
 **Props supplémentaires :**
 
-- `hasNextPage` - Indique si d'autres pages sont disponibles
+- `hasNextPage` - Indique si des pages supplémentaires sont disponibles
 - `fetchNextPage` - Fonction pour récupérer la page suivante
 - `isFetchingNextPage` - Indique si la page suivante est en cours de récupération
 - `MoreView` - Composant pour le bouton "charger plus"
@@ -403,7 +396,7 @@ const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
 });
 ```
 
-### Gestion des données
+### Gestion des Données
 
 #### `ClientDataManager`
 
@@ -486,7 +479,7 @@ await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 
 #### `skipContext(fetchFunction)`
 
-Utilité pour adapter les fonctions fetch existantes à l'interface de source de données.
+Utilitaires pour adapter les fonctions fetch existantes à l'interface de la source de données.
 
 ```ts
 // Fonction existante
@@ -503,14 +496,7 @@ const dataSource = makePlainQueryDataSource({
 
 #### `withCatch(fetchFunction, errorHandler)`
 
-```html
-<div class="language-selector">
-  <a href="/en/readme.html">English</a>
-  <a href="/fr/readme.html">Français</a>
-</div>
-```
-
-Ajoute une gestion d'erreurs standardisée aux fonctions `fetch`.
+Ajoute une gestion d'erreurs standardisée aux fonctions fetch.
 
 ```ts
 const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.message}));
@@ -518,7 +504,7 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 #### `withCancellation(fetchFunction)`
 
-Ajoute la prise en charge de l'annulation aux fonctions `fetch`.
+Ajoute la prise en charge de l'annulation aux fonctions fetch.
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
@@ -527,7 +513,7 @@ const cancellableFetch = withCancellation(fetchFunction);
 
 #### `getProgressiveRefetch(options)`
 
-Crée une fonction d'intervalle de rafraîchissement progressif.
+Crée une fonction d'intervalle de re-fetch progressive.
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
@@ -587,7 +573,7 @@ import {idle} from '@gravity-ui/data-source';
 // Symbole spécial pour ignorer l'exécution de la requête
 const params = shouldFetch ? {userId: 123} : idle;
 
-// Alternative typée à enabled: false
+// Alternative type-safe à enabled: false
 // Au lieu de :
 const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Boolean(userId)});
 
@@ -608,7 +594,7 @@ const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params,
 
 **Note :** Ces fonctions sont principalement destinées à un usage interne lors de la création d'implémentations de sources de données personnalisées.
 
-## Modèles Avancés
+## Motifs Avancés
 
 ### Requêtes Conditionnelles avec `idle`
 
@@ -683,7 +669,7 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// Invalide toutes les données pour un utilisateur spécifique
+// Invalide toutes les données d'un utilisateur spécifique
 await dataManager.invalidateTag('user:123');
 
 // Invalide toutes les données liées à l'utilisateur
@@ -692,7 +678,7 @@ await dataManager.invalidateTag('users');
 
 ### Gestion des Erreurs avec des Types
 
-Créez une gestion d'erreurs typée :
+Créez une gestion d'erreurs type-safe :
 
 ```ts
 interface ApiError {
@@ -759,70 +745,7 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
   const combined = useQueryResponses([user, posts, followers]);
 ```
 
-```html
-<p>
-  <a href="README.md">English</a> |
-  <a href="README.fr.md">Français</a>
-</p>
-```
-
-# @gravity/data-source
-
-Ce package fournit un ensemble d'outils pour gérer les états de chargement, d'erreur et de données de vos requêtes asynchrones. Il est conçu pour être utilisé avec des frameworks comme React, mais peut être adapté à d'autres environnements.
-
-## Fonctionnalités
-
-*   **Gestion d'état simplifiée :** Gère automatiquement les états de chargement, de succès et d'erreur pour vos requêtes.
-*   **Composants réutilisables :** Fournit des composants pour afficher des vues de chargement, d'erreur et de données.
-*   **Intégration facile :** S'intègre facilement dans votre application existante.
-*   **Support TypeScript :** Construit avec une approche "TypeScript-first" pour une meilleure expérience de développement.
-
-## Installation
-
-```bash
-npm install @gravity/data-source
-# ou
-yarn add @gravity/data-source
-```
-
-## Utilisation
-
-Voici un exemple d'utilisation de `DataLoader` pour afficher des informations utilisateur, des publications et des abonnés :
-
 ```jsx
-import React from 'react';
-import { DataLoader } from '@gravity/data-source';
-import { ProfileSkeleton, ProfileError } from './views'; // Vos composants de vue
-import { UserInfo, UserPosts, UserFollowers } from './components'; // Vos composants de données
-
-const UserProfile = ({ combined }) => {
-  const { user, posts, followers } = combined;
-
-  return (
-    <DataLoader
-      status={combined.status}
-      error={combined.error}
-      errorAction={combined.refetchErrored} // Seulement pour retenter les requêtes échouées
-      LoadingView={ProfileSkeleton}
-      ErrorView={ProfileError}
-    >
-      {user && posts && followers && (
-        <div>
-          <UserInfo user={user.data} />
-          <UserPosts posts={posts.data} />
-          <UserFollowers followers={followers.data} />
-        </div>
-      )}
-    </DataLoader>
-  );
-};
-```
-
-## Support TypeScript
-
-La bibliothèque est construite avec une approche "TypeScript-first" et offre une inférence de type complète :
-
-```ts
 // Les types sont automatiquement inférés
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
@@ -836,9 +759,9 @@ const {data} = useQueryData(userDataSource, {userId: 123});
 // data est typé comme User | undefined
 ```
 
-### Types d'erreur personnalisés
+### Types d'erreurs personnalisés
 
-Définissez et utilisez des types d'erreur personnalisés :
+Définissez et utilisez des types d'erreurs personnalisés :
 
 ```ts
 interface ValidationError {
@@ -870,4 +793,4 @@ Veuillez lire [CONTRIBUTING.md](CONTRIBUTING.md) pour plus de détails sur notre
 
 ## Licence
 
-MIT License. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.

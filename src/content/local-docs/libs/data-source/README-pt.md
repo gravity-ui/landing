@@ -1,20 +1,20 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** es un envoltorio sencillo para la obtención de datos. Es una especie de "puerto" en la [arquitectura limpia](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Permite crear envoltorios para elementos relacionados con la obtención de datos, según tus casos de uso. **Data Source** utiliza [react-query](https://tanstack.com/query/latest) internamente.
+**Data Source** é um wrapper simples para busca de dados. É uma espécie de "porta" na [arquitetura limpa](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Ele permite que você crie wrappers para coisas relacionadas à busca de dados, dependendo dos seus casos de uso. **Data Source** usa [react-query](https://tanstack.com/query/latest) internamente.
 
-## Instalación
+## Instalação
 
 ```bash
 npm install @gravity-ui/data-source @tanstack/react-query
 ```
 
-`@tanstack/react-query` es una dependencia peer.
+`@tanstack/react-query` é uma dependência peer.
 
-## Inicio Rápido
+## Início Rápido
 
 ### 1. Configurar DataManager
 
-Primero, crea y proporciona un `DataManager` en tu aplicación:
+Primeiro, crie e forneça um `DataManager` na sua aplicação:
 
 ```tsx
 import React from 'react';
@@ -26,7 +26,7 @@ const dataManager = new ClientDataManager({
       staleTime: 5 * 60 * 1000, // 5 minutos
       retry: 3,
     },
-    // ... otras opciones de react-query
+    // ... outras opções do react-query
   },
 });
 
@@ -39,9 +39,9 @@ function App() {
 }
 ```
 
-### 2. Definir Tipos de Error y Envoltorios
+### 2. Definir Tipos de Erro e Wrappers
 
-Define un tipo de error y crea tus constructores para las fuentes de datos basándote en los constructores predeterminados:
+Defina um tipo de erro e crie seus construtores para fontes de dados com base nos construtores padrão:
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -59,9 +59,9 @@ export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TE
 };
 ```
 
-### 3. Crear Componente DataLoader Personalizado
+### 3. Criar Componente DataLoader Personalizado
 
-Escribe un componente `DataLoader` basado en el predeterminado para definir tu visualización del estado de carga y los errores:
+Escreva um componente `DataLoader` baseado no padrão para definir a exibição do status de carregamento e dos erros:
 
 ```tsx
 import {
@@ -77,33 +77,33 @@ export interface DataLoaderProps
 }
 
 export const DataLoader: React.FC<DataLoaderProps> = ({
-  LoadingView = YourLoader, // Puedes usar tu propio componente de carga
-  ErrorView = YourError, // Puedes usar tu propio componente de error
+  LoadingView = YourLoader, // Você pode usar seu próprio componente de loader
+  ErrorView = YourError, // Você pode usar seu próprio componente de erro
   ...restProps
 }) => {
   return <DataLoaderBase LoadingView={LoadingView} ErrorView={ErrorView} {...restProps} />;
 };
 ```
 
-### 4. Definir Tu Primera Fuente de Datos
+### 4. Definir Sua Primeira Fonte de Dados
 
 ```ts
 import {skipContext} from '@gravity-ui/data-source';
 
-// Tu función de API
+// Sua função de API
 import {fetchUser} from './api';
 
 export const userDataSource = makePlainQueryDataSource({
-  // Las claves deben ser únicas. Quizás deberías crear un helper para generar nombres de fuentes de datos
+  // As chaves precisam ser únicas. Talvez você deva criar um helper para criar nomes de fontes de dados
   name: 'user',
-  // skipContext es un helper para omitir los 2 primeros parámetros de la función (context y fetchContext)
+  // skipContext é um helper para pular os 2 primeiros parâmetros da função (context e fetchContext)
   fetch: skipContext(fetchUser),
-  // Opcional: generar etiquetas para invalidación avanzada de caché
+  // Opcional: gerar tags para invalidação avançada de cache
   tags: (params) => [`user:${params.userId}`, 'users'],
 });
 ```
 
-### 5. Usar en Componentes
+### 5. Usar em Componentes
 
 ```tsx
 import {useQueryData} from '@gravity-ui/data-source';
@@ -119,15 +119,15 @@ export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 };
 ```
 
-## Conceptos Clave
+## Conceitos Principais
 
-### Tipos de Fuentes de Datos
+### Tipos de Fonte de Dados
 
-La biblioteca proporciona dos tipos principales de fuentes de datos:
+A biblioteca fornece dois tipos principais de fontes de dados:
 
-#### Fuente de Datos de Consulta Simple (Plain Query Data Source)
+#### Fonte de Dados de Consulta Simples (Plain Query Data Source)
 
-Para patrones simples de solicitud/respuesta:
+Para padrões simples de requisição/resposta:
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -139,9 +139,9 @@ const userDataSource = makePlainQueryDataSource({
 });
 ```
 
-#### Fuente de Datos de Consulta Infinita (Infinite Query Data Source)
+#### Fonte de Dados de Consulta Infinita (Infinite Query Data Source)
 
-Para paginación y desplazamiento infinito:
+Para paginação e rolagem infinita:
 
 ```ts
 const postsDataSource = makeInfiniteQueryDataSource({
@@ -159,23 +159,23 @@ const postsDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### Gestión de Estados
+### Gerenciamento de Status
 
-La biblioteca normaliza los estados de las consultas en tres estados simples:
+A biblioteca normaliza os estados de consulta em três status simples:
 
-- `loading` - Carga de datos real. Lo mismo que `isLoading` en React Query.
-- `success` - Datos disponibles (puede omitirse usando `idle`).
-- `error` - Falló la obtención de datos.
+- `loading` - Carregamento real dos dados. O mesmo que `isLoading` no React Query.
+- `success` - Dados disponíveis (pode ser ignorado usando `idle`).
+- `error` - Falha ao buscar os dados.
 
-### Concepto de `idle`
+### Conceito de Idle
 
-La biblioteca proporciona un símbolo especial `idle` para omitir la ejecución de la consulta:
+A biblioteca fornece um símbolo especial `idle` para pular a execução da consulta:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
 const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
-  // La consulta no se ejecutará si userId no está definido
+  // A consulta não será executada se userId não estiver definido
   const {data, status} = useQueryData(userDataSource, userId ? {userId} : idle);
 
   return (
@@ -186,29 +186,29 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 };
 ```
 
-Cuando los parámetros son iguales a `idle`:
+Quando os parâmetros são iguais a `idle`:
 
-- La consulta no se ejecuta.
-- El estado permanece `success`.
-- Los datos permanecen `undefined`.
-- El componente puede renderizarse de forma segura sin mostrar carga.
+- A consulta não executa.
+- O status permanece `success`.
+- Os dados permanecem `undefined`.
+- O componente pode renderizar com segurança sem carregar.
 
-**Beneficios de `idle`:**
+**Benefícios do `idle`:**
 
-1. **Seguridad de Tipos** - TypeScript infiere correctamente los tipos para parámetros condicionales.
-2. **Rendimiento** - Evita solicitudes innecesarias al servidor.
-3. **Simplicidad Lógica** - No es necesario gestionar un estado `enabled` adicional.
-4. **Consistencia** - Enfoque unificado para todas las consultas condicionales.
+1. **Segurança de Tipo** - O TypeScript infere corretamente os tipos para parâmetros condicionais.
+2. **Desempenho** - Evita requisições desnecessárias ao servidor.
+3. **Simplicidade Lógica** - Não há necessidade de gerenciar estado `enabled` adicional.
+4. **Consistência** - Abordagem unificada para todas as consultas condicionais.
 
-Esto es especialmente útil para consultas condicionales cuando deseas cargar datos solo bajo ciertas condiciones, manteniendo al mismo tiempo la seguridad de tipos.
+Isso é especialmente útil para consultas condicionais quando você deseja carregar dados apenas sob certas condições, mantendo a segurança de tipo.
 
-## Referencia de la API
+## Referência da API
 
-### Creación de Fuentes de Datos
+### Criação de Fontes de Dados
 
 #### `makePlainQueryDataSource(config)`
 
-Crea una fuente de datos de consulta simple para patrones de solicitud/respuesta.
+Cria uma fonte de dados de consulta simples para padrões de requisição/resposta.
 
 ```ts
 const dataSource = makePlainQueryDataSource({
@@ -220,23 +220,23 @@ const dataSource = makePlainQueryDataSource({
   options: {
     staleTime: 60000,
     retry: 3,
-    // ... otras opciones de react-query
+    // ... outras opções do react-query
   },
 });
 ```
 
-**Parámetros:**
+**Parâmetros:**
 
-- `name` - Identificador único para el origen de datos
-- `fetch` - Función que realiza la obtención real de datos
-- `transformParams` (opcional) - Transforma los parámetros de entrada antes de la solicitud
-- `transformResponse` (opcional) - Transforma los datos de respuesta
-- `tags` (opcional) - Genera etiquetas de caché para invalidación
-- `options` (opcional) - Opciones de React Query
+- `name` - Identificador único para a fonte de dados
+- `fetch` - Função que executa a busca real dos dados
+- `transformParams` (opcional) - Transforma os parâmetros de entrada antes da requisição
+- `transformResponse` (opcional) - Transforma os dados da resposta
+- `tags` (opcional) - Gera tags de cache para invalidação
+- `options` (opcional) - Opções do React Query
 
 #### `makeInfiniteQueryDataSource(config)`
 
-Crea un origen de datos de consulta infinita para patrones de paginación y desplazamiento infinito.
+Cria uma fonte de dados de consulta infinita para padrões de paginação e rolagem infinita.
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -244,20 +244,20 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
   fetch: skipContext(fetchFunction),
   next: (lastPage, allPages) => nextPageParam || undefined,
   prev: (firstPage, allPages) => prevPageParam || undefined,
-  // ... otras opciones iguales que las de consulta simple
+  // ... outras opções iguais às do tipo plain
 });
 ```
 
-**Parámetros Adicionales:**
+**Parâmetros Adicionais:**
 
-- `next` - Función para determinar los parámetros de la siguiente página
-- `prev` (opcional) - Función para determinar los parámetros de la página anterior
+- `next` - Função para determinar os parâmetros da próxima página
+- `prev` (opcional) - Função para determinar os parâmetros da página anterior
 
-### Hooks de React
+### Hooks do React
 
 #### `useQueryData(dataSource, params, options?)`
 
-Hook principal para obtener datos con un origen de datos.
+Hook principal para buscar dados com uma fonte de dados.
 
 ```ts
 const {data, status, error, refetch, ...rest} = useQueryData(
@@ -270,17 +270,17 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 );
 ```
 
-**Devuelve:**
+**Retorna:**
 
-- `data` - Los datos obtenidos
-- `status` - Estado actual ('loading' | 'success' | 'error')
-- `error` - Objeto de error si la solicitud falló
-- `refetch` - Función para volver a obtener datos manualmente
-- Otras propiedades de React Query
+- `data` - Os dados buscados
+- `status` - Status atual ('loading' | 'success' | 'error')
+- `error` - Objeto de erro se a requisição falhar
+- `refetch` - Função para buscar os dados manualmente
+- Outras propriedades do React Query
 
 #### `useQueryResponses(responses)`
 
-Combina múltiples respuestas de consulta en un único estado.
+Combina múltiplas respostas de consulta em um único estado.
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -289,34 +289,34 @@ const posts = useQueryData(postsDataSource, {userId});
 const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]);
 ```
 
-**Devuelve:**
+**Retorna:**
 
-- `status` - Estado combinado de todas las consultas
-- `error` - Primer error encontrado
-- `refetch` - Función para volver a obtener todas las consultas
-- `refetchErrored` - Función para volver a obtener solo las consultas fallidas
+- `status` - Status combinado de todas as consultas
+- `error` - Primeiro erro encontrado
+- `refetch` - Função para buscar todos os dados novamente
+- `refetchErrored` - Função para buscar novamente apenas as consultas com erro
 
 #### `useRefetchAll(states)`
 
-Crea una función de callback para volver a obtener múltiples consultas.
+Cria um callback para buscar múltiplos dados novamente.
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
-// refetchAll() activará la reobtención de todos los datos de las consultas
+// refetchAll() acionará a busca novamente para todas as consultas
 ```
 
 #### `useRefetchErrored(states)`
 
-Crea una función de callback para volver a obtener solo las consultas fallidas.
+Cria um callback para buscar novamente apenas os dados com falha.
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
-// refetchErrored() solo volverá a obtener los datos de las consultas con errores
+// refetchErrored() buscará novamente apenas as consultas com erros
 ```
 
 #### `useDataManager()`
 
-Devuelve el `DataManager` del contexto.
+Retorna o DataManager do contexto.
 
 ```ts
 const dataManager = useDataManager();
@@ -325,13 +325,13 @@ await dataManager.invalidateTag('users');
 
 #### `useQueryContext()`
 
-Devuelve el contexto de la consulta (para construir hooks de datos personalizados basados en react-query).
+Retorna o contexto da consulta (para construir hooks de dados personalizados baseados no react-query).
 
-### Componentes de React
+### Componentes do React
 
 #### `<DataLoader />`
 
-Componente para manejar estados de carga y errores.
+Componente para lidar com estados de carregamento e erros.
 
 ```tsx
 <DataLoader
@@ -349,13 +349,13 @@ Componente para manejar estados de carga y errores.
 
 **Props:**
 
-- `status` - Estado de carga actual
-- `error` - Objeto de error
-- `errorAction` - Función o configuración de acción para reintentar en caso de error
-- `LoadingView` - Componente a mostrar durante la carga
-- `ErrorView` - Componente a mostrar en caso de error
-- `loadingViewProps` - Props pasadas a `LoadingView`
-- `errorViewProps` - Props pasadas a `ErrorView`
+- `status` - Status atual de carregamento
+- `error` - Objeto de erro
+- `errorAction` - Função ou configuração de ação para retentar o erro
+- `LoadingView` - Componente a ser exibido durante o carregamento
+- `ErrorView` - Componente a ser exibido em caso de erro
+- `loadingViewProps` - Props passadas para o LoadingView
+- `errorViewProps` - Props passadas para o ErrorView
 
 #### `<DataInfiniteLoader />`
 
@@ -378,29 +378,29 @@ Componente especializado para consultas infinitas.
 </DataInfiniteLoader>
 ```
 
-**Props Adicionales:**
+**Props Adicionais:**
 
-- `hasNextPage` - Indica si hay más páginas disponibles
-- `fetchNextPage` - Función para obtener la siguiente página
-- `isFetchingNextPage` - Indica si se está obteniendo la siguiente página
-- `MoreView` - Componente para el botón "cargar más"
+- `hasNextPage` - Se há mais páginas disponíveis
+- `fetchNextPage` - Função para buscar a próxima página
+- `isFetchingNextPage` - Se a próxima página está sendo buscada
+- `MoreView` - Componente para o botão "carregar mais"
 
 #### `withDataManager(Component)`
 
-HOC que inyecta `DataManager` como una prop.
+HOC que injeta o DataManager como uma prop.
 
 ```tsx
 const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
-  // El componente tiene acceso a dataManager
+  // O componente tem acesso ao dataManager
   return <div>...</div>;
 });
 ```
 
-### Gestión de Datos
+### Gerenciamento de Dados
 
 #### `ClientDataManager`
 
-Clase principal para la gestión de datos.
+Classe principal para gerenciamento de dados.
 
 ```ts
 const dataManager = new ClientDataManager({
@@ -418,18 +418,18 @@ const dataManager = new ClientDataManager({
 
 ##### `invalidateTag(tag, options?)`
 
-Invalida todas las consultas con una etiqueta específica.
+Invalida todas as consultas com uma tag específica.
 
 ```ts
 await dataManager.invalidateTag('users');
 await dataManager.invalidateTag('posts', {
-  repeat: {count: 3, interval: 1000}, // Reintentar invalidación
+  repeat: {count: 3, interval: 1000}, // Tenta invalidar novamente
 });
 ```
 
 ##### `invalidateTags(tags, options?)`
 
-Invalida las consultas que tienen todas las etiquetas especificadas.
+Invalida consultas que possuem todas as tags especificadas.
 
 ```ts
 await dataManager.invalidateTags(['user', 'profile']);
@@ -437,7 +437,7 @@ await dataManager.invalidateTags(['user', 'profile']);
 
 ##### `invalidateSource(dataSource, options?)`
 
-Invalida todas las consultas para un origen de datos.
+Invalida todas as consultas para uma fonte de dados.
 
 ```ts
 await dataManager.invalidateSource(userDataSource);
@@ -445,7 +445,7 @@ await dataManager.invalidateSource(userDataSource);
 
 ##### `invalidateParams(dataSource, params, options?)`
 
-Invalida una consulta específica con parámetros exactos.
+Invalida uma consulta específica com parâmetros exatos.
 
 ```ts
 await dataManager.invalidateParams(userDataSource, {userId: 123});
@@ -453,7 +453,7 @@ await dataManager.invalidateParams(userDataSource, {userId: 123});
 
 ##### `resetSource(dataSource)`
 
-Restablece (borra) todos los datos cacheados para un origen de datos.
+Reseta (limpa) todos os dados em cache para uma fonte de dados.
 
 ```ts
 await dataManager.resetSource(userDataSource);
@@ -461,7 +461,7 @@ await dataManager.resetSource(userDataSource);
 
 ##### `resetParams(dataSource, params)`
 
-Restablece los datos cacheados para parámetros específicos.
+Reseta os dados em cache para parâmetros específicos.
 
 ```ts
 await dataManager.resetParams(userDataSource, {userId: 123});
@@ -469,34 +469,34 @@ await dataManager.resetParams(userDataSource, {userId: 123});
 
 ##### `invalidateSourceTags(dataSource, params, options?)`
 
-Invalida consultas basándose en las etiquetas generadas por un origen de datos.
+Invalida consultas com base nas tags geradas por uma fonte de dados.
 
 ```ts
 await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 ```
 
-### Utilidades
+### Utilitários
 
 #### `skipContext(fetchFunction)`
 
-Utilidad para adaptar funciones `fetch` existentes a la interfaz de origen de datos.
+Utilitário para adaptar funções fetch existentes à interface da fonte de dados.
 
 ```ts
-// Función existente
+// Função existente
 async function fetchUser(params: {userId: number}) {
   // ...
 }
 
-// Adaptada para el origen de datos
+// Adaptada para a fonte de dados
 const dataSource = makePlainQueryDataSource({
   name: 'user',
-  fetch: skipContext(fetchUser), // Omite el contexto y los parámetros de fetchContext
+  fetch: skipContext(fetchUser), // Ignora o contexto e os parâmetros de fetchContext
 });
 ```
 
 #### `withCatch(fetchFunction, errorHandler)`
 
-Añade manejo de errores estandarizado a las funciones fetch.
+Adiciona tratamento de erros padronizado a funções fetch.
 
 ```ts
 const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.message}));
@@ -504,22 +504,22 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 #### `withCancellation(fetchFunction)`
 
-Añade soporte de cancelación a las funciones fetch.
+Adiciona suporte de cancelamento a funções fetch.
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
-// Maneja automáticamente AbortSignal de React Query
+// Lida automaticamente com AbortSignal do React Query
 ```
 
 #### `getProgressiveRefetch(options)`
 
-Crea una función de intervalo de refetch progresivo.
+Cria uma função de intervalo de refetch progressivo.
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
-  minInterval: 1000, // Empieza con 1 segundo
-  maxInterval: 30000, // Máximo 30 segundos
-  multiplier: 2, // Duplica cada vez
+  minInterval: 1000, // Começa com 1 segundo
+  maxInterval: 30000, // Máximo de 30 segundos
+  multiplier: 2, // Dobra a cada vez
 });
 
 const dataSource = makePlainQueryDataSource({
@@ -533,35 +533,35 @@ const dataSource = makePlainQueryDataSource({
 
 #### `normalizeStatus(status, fetchStatus)`
 
-Convierte los estados de React Query a estados de DataLoader.
+Converte status do React Query para status do DataLoader.
 
 ```ts
 const status = normalizeStatus('pending', 'fetching'); // 'loading'
 ```
 
-#### Utilidades de Estado y Error
+#### Utilitários de Status e Erro
 
 ```ts
-// Obtiene el estado combinado de múltiples estados
+// Obtém o status combinado de múltiplos estados
 const status = getStatus([user, posts, comments]);
 
-// Obtiene el primer error de múltiples estados
+// Obtém o primeiro erro de múltiplos estados
 const error = getError([user, posts, comments]);
 
-// Fusiona múltiples estados
+// Mescla múltiplos status
 const combinedStatus = mergeStatuses(['loading', 'success', 'error']); // 'error'
 
-// Comprueba si una clave de consulta tiene una etiqueta
+// Verifica se a chave da query tem uma tag
 const hasUserTag = hasTag(queryKey, 'users');
 ```
 
-#### Utilidades de Composición de Claves
+#### Utilitários de Composição de Chaves
 
 ```ts
-// Compone la clave de caché para una fuente de datos
+// Compõe a chave de cache para uma fonte de dados
 const key = composeKey(userDataSource, {userId: 123});
 
-// Compone la clave completa incluyendo etiquetas
+// Compõe a chave completa incluindo tags
 const fullKey = composeFullKey(userDataSource, {userId: 123});
 ```
 
@@ -570,35 +570,35 @@ const fullKey = composeFullKey(userDataSource, {userId: 123});
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
-// Símbolo especial para omitir la ejecución de la consulta
+// Símbolo especial para pular a execução da query
 const params = shouldFetch ? {userId: 123} : idle;
 
-// Alternativa segura para tipos a enabled: false
-// En lugar de:
+// Alternativa type-safe para enabled: false
+// Em vez de:
 const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Boolean(userId)});
 
-// Usa:
+// Use:
 const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
-// TypeScript infiere correctamente los tipos para ambas ramas
+// O TypeScript infere corretamente os tipos para ambos os ramos
 ```
 
-#### Composición de Opciones de Consulta
+#### Composição de Opções de Query
 
 ```ts
-// Compone las opciones de React Query para consultas simples
+// Compõe opções do React Query para queries simples
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// Compone las opciones de React Query para consultas infinitas
+// Compõe opções do React Query para queries infinitas
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
-**Nota:** Estas funciones se utilizan principalmente internamente al crear implementaciones de fuentes de datos personalizadas.
+**Nota:** Estas funções são usadas principalmente internamente ao criar implementações de fontes de dados personalizadas.
 
-## Patrones Avanzados
+## Padrões Avançados
 
-### Consultas Condicionales con `idle`
+### Queries Condicionais com `idle`
 
-Usa `idle` para crear consultas condicionales:
+Use `idle` para criar queries condicionais:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -607,13 +607,13 @@ const ConditionalDataComponent: React.FC<{
   userId?: number;
   shouldLoadPosts: boolean;
 }> = ({userId, shouldLoadPosts}) => {
-  // Carga el usuario solo si userId está definido
+  // Carrega o usuário apenas se userId estiver definido
   const user = useQueryData(
     userDataSource,
     userId ? {userId} : idle
   );
 
-  // Carga las publicaciones solo si el usuario está cargado y la bandera está habilitada
+  // Carrega os posts apenas se o usuário for carregado e o flag estiver habilitado
   const posts = useQueryData(
     userPostsDataSource,
     user.data && shouldLoadPosts ? {userId: user.data.id} : idle
@@ -632,9 +632,9 @@ const ConditionalDataComponent: React.FC<{
 };
 ```
 
-### Transformación de Datos
+### Transformação de Dados
 
-Transforma parámetros de solicitud y datos de respuesta:
+Transforma parâmetros de requisição e dados de resposta:
 
 ```ts
 const apiDataSource = makePlainQueryDataSource({
@@ -652,9 +652,9 @@ const apiDataSource = makePlainQueryDataSource({
 });
 ```
 
-### Invalidez de Caché Basada en Etiquetas
+### Invalidação de Cache Baseada em Tags
 
-Usa etiquetas para una gestión de caché sofisticada:
+Use tags para gerenciamento sofisticado de cache:
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -669,16 +669,16 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// Invalida todos los datos de un usuario específico
+// Invalida todos os dados de um usuário específico
 await dataManager.invalidateTag('user:123');
 
-// Invalida todos los datos relacionados con el usuario
+// Invalida todos os dados relacionados ao usuário
 await dataManager.invalidateTag('users');
 ```
 
-### Manejo de Errores con Tipos
+### Tratamento de Erros com Tipos
 
-Crea un manejo de errores seguro para tipos:
+Cria tratamento de erros type-safe:
 
 ```ts
 interface ApiError {
@@ -689,20 +689,20 @@ interface ApiError {
 
 const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
   <div className="error">
-    <h3>Error {error?.code}</h3>
+    <h3>Erro {error?.code}</h3>
     <p>{error?.message}</p>
     {action && (
       <button onClick={action.handler}>
-        {action.children || 'Reintentar'}
+        {action.children || 'Tentar novamente'}
       </button>
     )}
   </div>
 );
 ```
 
-### Consultas Infinitas con Paginación Compleja
+### Queries Infinitas com Paginação Complexa
 
-Maneja escenarios de paginación complejos:
+Lida com cenários de paginação complexos:
 
 ```ts
 interface PaginationParams {
@@ -732,9 +732,9 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### Combinación de Múltiples Fuentes de Datos
+### Combinando Múltiplas Fontes de Dados
 
-Combina datos de múltiples fuentes:
+Combina dados de múltiplas fontes:
 
 ```ts
 const UserProfile: React.FC<{userId: number}> = ({userId}) => {
@@ -746,22 +746,33 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 ```
 
 ```jsx
-// Los tipos se infieren automáticamente
+// ...
+    </DataLoader>
+  );
+};
+```
+
+## Suporte a TypeScript
+
+A biblioteca foi desenvolvida com uma abordagem "TypeScript-first" e oferece inferência de tipos completa:
+
+```ts
+// Tipos são inferidos automaticamente
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // El tipo de retorno se infiere como User
+    // O tipo de retorno é inferido como User
   }),
 });
 
-// El tipo de retorno del hook se tipifica automáticamente
+// O tipo de retorno do hook é tipado automaticamente
 const {data} = useQueryData(userDataSource, {userId: 123});
-// data se tipifica como User | undefined
+// data é tipado como User | undefined
 ```
 
-### Tipos de error personalizados
+### Tipos de Erro Personalizados
 
-Define y utiliza tipos de error personalizados:
+Defina e utilize tipos de erro personalizados:
 
 ```ts
 interface ValidationError {
@@ -776,22 +787,21 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Tipo de parámetros
-  {id: number}, // Tipo de solicitud
-  ApiResponse, // Tipo de respuesta
-  User, // Tipo de datos
-  ApiError // Tipo de error
+  {id: number}, // Tipo dos parâmetros
+  {id: number}, // Tipo da requisição
+  ApiResponse, // Tipo da resposta
+  User, // Tipo dos dados
+  ApiError // Tipo do erro
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
 });
 ```
 
-## Contribución
+## Contribuição
 
-Por favor, lee [CONTRIBUTING.md](CONTRIBUTING.md) para obtener detalles sobre nuestro código de conducta y el proceso para enviar solicitudes de extracción (pull requests).
+Por favor, leia o [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre nosso código de conduta e o processo para enviar pull requests.
 
-## Licencia
+## Licença
 
-Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para obtener más detalles.
-```
+Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.

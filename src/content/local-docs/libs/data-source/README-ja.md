@@ -1,20 +1,20 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** es un envoltorio sencillo para la obtención de datos. Es una especie de "puerto" en la [arquitectura limpia](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Permite crear envoltorios para elementos relacionados con la obtención de datos, según tus casos de uso. **Data Source** utiliza [react-query](https://tanstack.com/query/latest) internamente.
+**Data Source** は、データ取得処理をラップするシンプルなライブラリです。[クリーンアーキテクチャ](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)における「ポート」のようなものです。ユースケースに応じて、データ取得処理のラッパーを作成できます。**Data Source** は内部で [react-query](https://tanstack.com/query/latest) を使用しています。
 
-## Instalación
+## インストール
 
 ```bash
 npm install @gravity-ui/data-source @tanstack/react-query
 ```
 
-`@tanstack/react-query` es una dependencia peer.
+`@tanstack/react-query` はピア依存関係です。
 
-## Inicio Rápido
+## クイックスタート
 
-### 1. Configurar DataManager
+### 1. DataManager のセットアップ
 
-Primero, crea y proporciona un `DataManager` en tu aplicación:
+まず、アプリケーションで `DataManager` を作成し、提供します。
 
 ```tsx
 import React from 'react';
@@ -23,10 +23,10 @@ import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
 const dataManager = new ClientDataManager({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutos
+      staleTime: 5 * 60 * 1000, // 5分
       retry: 3,
     },
-    // ... otras opciones de react-query
+    // ... その他の react-query オプション
   },
 });
 
@@ -39,9 +39,9 @@ function App() {
 }
 ```
 
-### 2. Definir Tipos de Error y Envoltorios
+### 2. エラータイプとラッパーの定義
 
-Define un tipo de error y crea tus constructores para las fuentes de datos basándote en los constructores predeterminados:
+エラーの型を定義し、デフォルトコンストラクタに基づいてデータソースのコンストラクタを作成します。
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -59,9 +59,9 @@ export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TE
 };
 ```
 
-### 3. Crear Componente DataLoader Personalizado
+### 3. カスタム DataLoader コンポーネントの作成
 
-Escribe un componente `DataLoader` basado en el predeterminado para definir tu visualización del estado de carga y los errores:
+デフォルトの `DataLoader` コンポーネントに基づいて、ローディング状態とエラー表示を定義するコンポーネントを作成します。
 
 ```tsx
 import {
@@ -77,33 +77,33 @@ export interface DataLoaderProps
 }
 
 export const DataLoader: React.FC<DataLoaderProps> = ({
-  LoadingView = YourLoader, // Puedes usar tu propio componente de carga
-  ErrorView = YourError, // Puedes usar tu propio componente de error
+  LoadingView = YourLoader, // 独自のローダーコンポーネントを使用できます
+  ErrorView = YourError, // 独自のカスタムエラーコンポーネントを使用できます
   ...restProps
 }) => {
   return <DataLoaderBase LoadingView={LoadingView} ErrorView={ErrorView} {...restProps} />;
 };
 ```
 
-### 4. Definir Tu Primera Fuente de Datos
+### 4. 最初のデータソースの定義
 
 ```ts
 import {skipContext} from '@gravity-ui/data-source';
 
-// Tu función de API
+// API 関数
 import {fetchUser} from './api';
 
 export const userDataSource = makePlainQueryDataSource({
-  // Las claves deben ser únicas. Quizás deberías crear un helper para generar nombres de fuentes de datos
+  // キーは一意である必要があります。データソース名の生成ヘルパーを作成すると良いかもしれません
   name: 'user',
-  // skipContext es un helper para omitir los 2 primeros parámetros de la función (context y fetchContext)
+  // skipContext は、関数の最初の2つのパラメータ (context と fetchContext) をスキップするためのヘルパーです
   fetch: skipContext(fetchUser),
-  // Opcional: generar etiquetas para invalidación avanzada de caché
+  // オプション: 高度なキャッシュ無効化のためのタグを生成します
   tags: (params) => [`user:${params.userId}`, 'users'],
 });
 ```
 
-### 5. Usar en Componentes
+### 5. コンポーネントでの使用
 
 ```tsx
 import {useQueryData} from '@gravity-ui/data-source';
@@ -119,15 +119,15 @@ export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 };
 ```
 
-## Conceptos Clave
+## コアコンセプト
 
-### Tipos de Fuentes de Datos
+### データソースの種類
 
-La biblioteca proporciona dos tipos principales de fuentes de datos:
+ライブラリは主に2つのデータソースタイプを提供します。
 
-#### Fuente de Datos de Consulta Simple (Plain Query Data Source)
+#### Plain Query Data Source
 
-Para patrones simples de solicitud/respuesta:
+シンプルなリクエスト/レスポンスパターン向けです。
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -139,9 +139,9 @@ const userDataSource = makePlainQueryDataSource({
 });
 ```
 
-#### Fuente de Datos de Consulta Infinita (Infinite Query Data Source)
+#### Infinite Query Data Source
 
-Para paginación y desplazamiento infinito:
+ページネーションや無限スクロール向けです。
 
 ```ts
 const postsDataSource = makeInfiniteQueryDataSource({
@@ -159,23 +159,23 @@ const postsDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### Gestión de Estados
+### ステータス管理
 
-La biblioteca normaliza los estados de las consultas en tres estados simples:
+ライブラリはクエリの状態を3つのシンプルなステータスに正規化します。
 
-- `loading` - Carga de datos real. Lo mismo que `isLoading` en React Query.
-- `success` - Datos disponibles (puede omitirse usando `idle`).
-- `error` - Falló la obtención de datos.
+- `loading` - 実際のデータロード中。React Query の `isLoading` と同じです。
+- `success` - データが利用可能（`idle` でスキップされる場合があります）。
+- `error` - データ取得に失敗しました。
 
-### Concepto de `idle`
+### Idle コンセプト
 
-La biblioteca proporciona un símbolo especial `idle` para omitir la ejecución de la consulta:
+ライブラリはクエリ実行をスキップするための特別な `idle` シンボルを提供します。
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
 const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
-  // La consulta no se ejecutará si userId no está definido
+  // userId が未定義の場合、クエリは実行されません
   const {data, status} = useQueryData(userDataSource, userId ? {userId} : idle);
 
   return (
@@ -186,29 +186,29 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 };
 ```
 
-Cuando los parámetros son iguales a `idle`:
+パラメータが `idle` と等しい場合：
 
-- La consulta no se ejecuta.
-- El estado permanece `success`.
-- Los datos permanecen `undefined`.
-- El componente puede renderizarse de forma segura sin mostrar carga.
+- クエリは実行されません。
+- ステータスは `success` のままです。
+- データは `undefined` のままです。
+- コンポーネントはローディングなしで安全にレンダリングできます。
 
-**Beneficios de `idle`:**
+**`idle` の利点:**
 
-1. **Seguridad de Tipos** - TypeScript infiere correctamente los tipos para parámetros condicionales.
-2. **Rendimiento** - Evita solicitudes innecesarias al servidor.
-3. **Simplicidad Lógica** - No es necesario gestionar un estado `enabled` adicional.
-4. **Consistencia** - Enfoque unificado para todas las consultas condicionales.
+1. **型安全性** - TypeScript は条件付きパラメータの型を正しく推論します。
+2. **パフォーマンス** - 不要なサーバーリクエストを回避します。
+3. **ロジックの簡潔さ** - 追加の `enabled` 状態を管理する必要がありません。
+4. **一貫性** - すべての条件付きクエリに対して統一されたアプローチを提供します。
 
-Esto es especialmente útil para consultas condicionales cuando deseas cargar datos solo bajo ciertas condiciones, manteniendo al mismo tiempo la seguridad de tipos.
+これは、型安全性を維持しながら特定の条件下でのみデータをロードしたい条件付きクエリに特に役立ちます。
 
-## Referencia de la API
+## API リファレンス
 
-### Creación de Fuentes de Datos
+### データソースの作成
 
 #### `makePlainQueryDataSource(config)`
 
-Crea una fuente de datos de consulta simple para patrones de solicitud/respuesta.
+シンプルなリクエスト/レスポンスパターン用のプレーンクエリデータソースを作成します。
 
 ```ts
 const dataSource = makePlainQueryDataSource({
@@ -220,23 +220,23 @@ const dataSource = makePlainQueryDataSource({
   options: {
     staleTime: 60000,
     retry: 3,
-    // ... otras opciones de react-query
+    // ... other react-query options
   },
 });
 ```
 
-**Parámetros:**
+**パラメータ:**
 
-- `name` - Identificador único para el origen de datos
-- `fetch` - Función que realiza la obtención real de datos
-- `transformParams` (opcional) - Transforma los parámetros de entrada antes de la solicitud
-- `transformResponse` (opcional) - Transforma los datos de respuesta
-- `tags` (opcional) - Genera etiquetas de caché para invalidación
-- `options` (opcional) - Opciones de React Query
+- `name` - データソースの一意な識別子
+- `fetch` - 実際のデータ取得を実行する関数
+- `transformParams` (オプション) - リクエスト前に入力パラメータを変換
+- `transformResponse` (オプション) - レスポンスデータを変換
+- `tags` (オプション) - 無効化のためのキャッシュタグを生成
+- `options` (オプション) - React Query オプション
 
 #### `makeInfiniteQueryDataSource(config)`
 
-Crea un origen de datos de consulta infinita para patrones de paginación y desplazamiento infinito.
+ページネーションや無限スクロールパターン用の無限クエリデータソースを作成します。
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -244,20 +244,20 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
   fetch: skipContext(fetchFunction),
   next: (lastPage, allPages) => nextPageParam || undefined,
   prev: (firstPage, allPages) => prevPageParam || undefined,
-  // ... otras opciones iguales que las de consulta simple
+  // ... other options same as plain
 });
 ```
 
-**Parámetros Adicionales:**
+**追加パラメータ:**
 
-- `next` - Función para determinar los parámetros de la siguiente página
-- `prev` (opcional) - Función para determinar los parámetros de la página anterior
+- `next` - 次のページパラメータを決定する関数
+- `prev` (オプション) - 前のページパラメータを決定する関数
 
-### Hooks de React
+### React Hooks
 
 #### `useQueryData(dataSource, params, options?)`
 
-Hook principal para obtener datos con un origen de datos.
+データソースでデータを取得するためのメインフックです。
 
 ```ts
 const {data, status, error, refetch, ...rest} = useQueryData(
@@ -270,17 +270,17 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 );
 ```
 
-**Devuelve:**
+**返り値:**
 
-- `data` - Los datos obtenidos
-- `status` - Estado actual ('loading' | 'success' | 'error')
-- `error` - Objeto de error si la solicitud falló
-- `refetch` - Función para volver a obtener datos manualmente
-- Otras propiedades de React Query
+- `data` - 取得されたデータ
+- `status` - 現在のステータス ('loading' | 'success' | 'error')
+- `error` - リクエストが失敗した場合のエラーオブジェクト
+- `refetch` - 手動でデータを再取得する関数
+- その他の React Query プロパティ
 
 #### `useQueryResponses(responses)`
 
-Combina múltiples respuestas de consulta en un único estado.
+複数のクエリレスポンスを単一のステータスに結合します。
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -289,34 +289,34 @@ const posts = useQueryData(postsDataSource, {userId});
 const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]);
 ```
 
-**Devuelve:**
+**返り値:**
 
-- `status` - Estado combinado de todas las consultas
-- `error` - Primer error encontrado
-- `refetch` - Función para volver a obtener todas las consultas
-- `refetchErrored` - Función para volver a obtener solo las consultas fallidas
+- `status` - 全てのクエリの結合されたステータス
+- `error` - 最初に見つかったエラー
+- `refetch` - 全てのクエリを再取得する関数
+- `refetchErrored` - エラーが発生したクエリのみを再取得する関数
 
 #### `useRefetchAll(states)`
 
-Crea una función de callback para volver a obtener múltiples consultas.
+複数のクエリを再取得するためのコールバックを作成します。
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
-// refetchAll() activará la reobtención de todos los datos de las consultas
+// refetchAll() は全てのクエリの再取得をトリガーします
 ```
 
 #### `useRefetchErrored(states)`
 
-Crea una función de callback para volver a obtener solo las consultas fallidas.
+エラーが発生したクエリのみを再取得するためのコールバックを作成します。
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
-// refetchErrored() solo volverá a obtener los datos de las consultas con errores
+// refetchErrored() はエラーが発生したクエリのみを再取得します
 ```
 
 #### `useDataManager()`
 
-Devuelve el `DataManager` del contexto.
+コンテキストから DataManager を返します。
 
 ```ts
 const dataManager = useDataManager();
@@ -325,13 +325,13 @@ await dataManager.invalidateTag('users');
 
 #### `useQueryContext()`
 
-Devuelve el contexto de la consulta (para construir hooks de datos personalizados basados en react-query).
+クエリコンテキストを返します（react-query をベースにしたカスタムデータフックの構築用）。
 
-### Componentes de React
+### React Components
 
 #### `<DataLoader />`
 
-Componente para manejar estados de carga y errores.
+ローディングステータスとエラーを処理するためのコンポーネントです。
 
 ```tsx
 <DataLoader
@@ -349,17 +349,17 @@ Componente para manejar estados de carga y errores.
 
 **Props:**
 
-- `status` - Estado de carga actual
-- `error` - Objeto de error
-- `errorAction` - Función o configuración de acción para reintentar en caso de error
-- `LoadingView` - Componente a mostrar durante la carga
-- `ErrorView` - Componente a mostrar en caso de error
-- `loadingViewProps` - Props pasadas a `LoadingView`
-- `errorViewProps` - Props pasadas a `ErrorView`
+- `status` - 現在のローディングステータス
+- `error` - エラーオブジェクト
+- `errorAction` - エラーリトライのための関数またはアクション設定
+- `LoadingView` - ローディング中に表示するコンポーネント
+- `ErrorView` - エラー時に表示するコンポーネント
+- `loadingViewProps` - LoadingView に渡される props
+- `errorViewProps` - ErrorView に渡される props
 
 #### `<DataInfiniteLoader />`
 
-Componente especializado para consultas infinitas.
+無限クエリ専用のコンポーネントです。
 
 ```tsx
 <DataInfiniteLoader
@@ -378,35 +378,35 @@ Componente especializado para consultas infinitas.
 </DataInfiniteLoader>
 ```
 
-**Props Adicionales:**
+**追加 Props:**
 
-- `hasNextPage` - Indica si hay más páginas disponibles
-- `fetchNextPage` - Función para obtener la siguiente página
-- `isFetchingNextPage` - Indica si se está obteniendo la siguiente página
-- `MoreView` - Componente para el botón "cargar más"
+- `hasNextPage` - 次のページが利用可能かどうか
+- `fetchNextPage` - 次のページを取得する関数
+- `isFetchingNextPage` - 次のページが取得中かどうか
+- `MoreView` - 「もっと読み込む」ボタン用のコンポーネント
 
 #### `withDataManager(Component)`
 
-HOC que inyecta `DataManager` como una prop.
+DataManager を prop として注入する HOC です。
 
-```tsx
+```ts
 const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
-  // El componente tiene acceso a dataManager
+  // Component は dataManager にアクセスできます
   return <div>...</div>;
 });
 ```
 
-### Gestión de Datos
+### Data Management
 
 #### `ClientDataManager`
 
-Clase principal para la gestión de datos.
+データ管理のメインクラスです。
 
 ```ts
 const dataManager = new ClientDataManager({
   defaultOptions: {
     queries: {
-      staleTime: 300000, // 5 minutos
+      staleTime: 300000, // 5分
       retry: 3,
       refetchOnWindowFocus: false,
     },
@@ -414,22 +414,22 @@ const dataManager = new ClientDataManager({
 });
 ```
 
-**Métodos:**
+**メソッド:**
 
 ##### `invalidateTag(tag, options?)`
 
-Invalida todas las consultas con una etiqueta específica.
+特定のタグを持つ全てのクエリを無効化します。
 
 ```ts
 await dataManager.invalidateTag('users');
 await dataManager.invalidateTag('posts', {
-  repeat: {count: 3, interval: 1000}, // Reintentar invalidación
+  repeat: {count: 3, interval: 1000}, // 無効化のリトライ
 });
 ```
 
 ##### `invalidateTags(tags, options?)`
 
-Invalida las consultas que tienen todas las etiquetas especificadas.
+指定された全てのタグを持つクエリを無効化します。
 
 ```ts
 await dataManager.invalidateTags(['user', 'profile']);
@@ -437,7 +437,7 @@ await dataManager.invalidateTags(['user', 'profile']);
 
 ##### `invalidateSource(dataSource, options?)`
 
-Invalida todas las consultas para un origen de datos.
+データソースの全てのクエリを無効化します。
 
 ```ts
 await dataManager.invalidateSource(userDataSource);
@@ -445,7 +445,7 @@ await dataManager.invalidateSource(userDataSource);
 
 ##### `invalidateParams(dataSource, params, options?)`
 
-Invalida una consulta específica con parámetros exactos.
+正確なパラメータを持つ特定のクエリを無効化します。
 
 ```ts
 await dataManager.invalidateParams(userDataSource, {userId: 123});
@@ -453,7 +453,7 @@ await dataManager.invalidateParams(userDataSource, {userId: 123});
 
 ##### `resetSource(dataSource)`
 
-Restablece (borra) todos los datos cacheados para un origen de datos.
+データソースの全てのキャッシュデータをリセット（クリア）します。
 
 ```ts
 await dataManager.resetSource(userDataSource);
@@ -461,7 +461,7 @@ await dataManager.resetSource(userDataSource);
 
 ##### `resetParams(dataSource, params)`
 
-Restablece los datos cacheados para parámetros específicos.
+特定のパラメータのキャッシュデータをリセットします。
 
 ```ts
 await dataManager.resetParams(userDataSource, {userId: 123});
@@ -469,34 +469,34 @@ await dataManager.resetParams(userDataSource, {userId: 123});
 
 ##### `invalidateSourceTags(dataSource, params, options?)`
 
-Invalida consultas basándose en las etiquetas generadas por un origen de datos.
+データソースによって生成されたタグに基づいてクエリを無効化します。
 
 ```ts
 await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 ```
 
-### Utilidades
+### Utilities
 
 #### `skipContext(fetchFunction)`
 
-Utilidad para adaptar funciones `fetch` existentes a la interfaz de origen de datos.
+既存の fetch 関数をデータソースインターフェースに適応させるユーティリティです。
 
 ```ts
-// Función existente
+// 既存の関数
 async function fetchUser(params: {userId: number}) {
   // ...
 }
 
-// Adaptada para el origen de datos
+// データソース用に適応
 const dataSource = makePlainQueryDataSource({
   name: 'user',
-  fetch: skipContext(fetchUser), // Omite el contexto y los parámetros de fetchContext
+  fetch: skipContext(fetchUser), // context と fetchContext パラメータをスキップします
 });
 ```
 
 #### `withCatch(fetchFunction, errorHandler)`
 
-Añade manejo de errores estandarizado a las funciones fetch.
+fetch関数に標準化されたエラーハンドリングを追加します。
 
 ```ts
 const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.message}));
@@ -504,22 +504,22 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 #### `withCancellation(fetchFunction)`
 
-Añade soporte de cancelación a las funciones fetch.
+fetch関数にキャンセル機能を追加します。
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
-// Maneja automáticamente AbortSignal de React Query
+// React QueryのAbortSignalを自動的に処理します
 ```
 
 #### `getProgressiveRefetch(options)`
 
-Crea una función de intervalo de refetch progresivo.
+段階的なリフェッチ間隔関数を作成します。
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
-  minInterval: 1000, // Empieza con 1 segundo
-  maxInterval: 30000, // Máximo 30 segundos
-  multiplier: 2, // Duplica cada vez
+  minInterval: 1000, // 1秒から開始
+  maxInterval: 30000, // 最大30秒
+  multiplier: 2, // その都度2倍にする
 });
 
 const dataSource = makePlainQueryDataSource({
@@ -533,72 +533,72 @@ const dataSource = makePlainQueryDataSource({
 
 #### `normalizeStatus(status, fetchStatus)`
 
-Convierte los estados de React Query a estados de DataLoader.
+React QueryのステータスをDataLoaderのステータスに変換します。
 
 ```ts
 const status = normalizeStatus('pending', 'fetching'); // 'loading'
 ```
 
-#### Utilidades de Estado y Error
+#### ステータスとエラーユーティリティ
 
 ```ts
-// Obtiene el estado combinado de múltiples estados
+// 複数のステータスから結合されたステータスを取得
 const status = getStatus([user, posts, comments]);
 
-// Obtiene el primer error de múltiples estados
+// 複数のステータスから最初のエラーを取得
 const error = getError([user, posts, comments]);
 
-// Fusiona múltiples estados
+// 複数のステータスをマージ
 const combinedStatus = mergeStatuses(['loading', 'success', 'error']); // 'error'
 
-// Comprueba si una clave de consulta tiene una etiqueta
+// クエリキーにタグが含まれているか確認
 const hasUserTag = hasTag(queryKey, 'users');
 ```
 
-#### Utilidades de Composición de Claves
+#### キー合成ユーティリティ
 
 ```ts
-// Compone la clave de caché para una fuente de datos
+// データソースのキャッシュキーを合成
 const key = composeKey(userDataSource, {userId: 123});
 
-// Compone la clave completa incluyendo etiquetas
+// タグを含む完全なキーを合成
 const fullKey = composeFullKey(userDataSource, {userId: 123});
 ```
 
-#### Constantes
+#### 定数
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
-// Símbolo especial para omitir la ejecución de la consulta
+// クエリ実行をスキップするための特別なシンボル
 const params = shouldFetch ? {userId: 123} : idle;
 
-// Alternativa segura para tipos a enabled: false
-// En lugar de:
+// enabled: false の型安全な代替手段
+// 以下のようにする代わりに:
 const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Boolean(userId)});
 
-// Usa:
+// 以下のように使用します:
 const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
-// TypeScript infiere correctamente los tipos para ambas ramas
+// TypeScript は両方の分岐で型を正しく推論します
 ```
 
-#### Composición de Opciones de Consulta
+#### クリオプションの合成
 
 ```ts
-// Compone las opciones de React Query para consultas simples
+// プレーンクエリのReact Queryオプションを合成
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// Compone las opciones de React Query para consultas infinitas
+// 無限クエリのReact Queryオプションを合成
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
-**Nota:** Estas funciones se utilizan principalmente internamente al crear implementaciones de fuentes de datos personalizadas.
+**注意:** これらの関数は主に、カスタムデータソース実装を作成する際の内部使用を目的としています。
 
-## Patrones Avanzados
+## 高度なパターン
 
-### Consultas Condicionales con `idle`
+### idle を使用した条件付きクエリ
 
-Usa `idle` para crear consultas condicionales:
+`idle` を使用して条件付きクエリを作成します。
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -607,13 +607,13 @@ const ConditionalDataComponent: React.FC<{
   userId?: number;
   shouldLoadPosts: boolean;
 }> = ({userId, shouldLoadPosts}) => {
-  // Carga el usuario solo si userId está definido
+  // userId が定義されている場合のみユーザーをロード
   const user = useQueryData(
     userDataSource,
     userId ? {userId} : idle
   );
 
-  // Carga las publicaciones solo si el usuario está cargado y la bandera está habilitada
+  // ユーザーがロードされ、フラグが有効な場合のみ投稿をロード
   const posts = useQueryData(
     userPostsDataSource,
     user.data && shouldLoadPosts ? {userId: user.data.id} : idle
@@ -632,9 +632,9 @@ const ConditionalDataComponent: React.FC<{
 };
 ```
 
-### Transformación de Datos
+### データ変換
 
-Transforma parámetros de solicitud y datos de respuesta:
+リクエストパラメータとレスポンスデータを変換します。
 
 ```ts
 const apiDataSource = makePlainQueryDataSource({
@@ -652,9 +652,9 @@ const apiDataSource = makePlainQueryDataSource({
 });
 ```
 
-### Invalidez de Caché Basada en Etiquetas
+### タグベースのキャッシュ無効化
 
-Usa etiquetas para una gestión de caché sofisticada:
+タグを使用して高度なキャッシュ管理を行います。
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -669,16 +669,16 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// Invalida todos los datos de un usuario específico
+// 特定ユーザーのすべてのデータを無効化
 await dataManager.invalidateTag('user:123');
 
-// Invalida todos los datos relacionados con el usuario
+// すべてのユーザー関連データを無効化
 await dataManager.invalidateTag('users');
 ```
 
-### Manejo de Errores con Tipos
+### 型によるエラーハンドリング
 
-Crea un manejo de errores seguro para tipos:
+型安全なエラーハンドリングを作成します。
 
 ```ts
 interface ApiError {
@@ -693,16 +693,16 @@ const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
     <p>{error?.message}</p>
     {action && (
       <button onClick={action.handler}>
-        {action.children || 'Reintentar'}
+        {action.children || 'Retry'}
       </button>
     )}
   </div>
 );
 ```
 
-### Consultas Infinitas con Paginación Compleja
+### 複雑なページネーションを持つ無限クエリ
 
-Maneja escenarios de paginación complejos:
+複雑なページネーションシナリオを処理します。
 
 ```ts
 interface PaginationParams {
@@ -732,9 +732,9 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### Combinación de Múltiples Fuentes de Datos
+### 複数のデータソースの結合
 
-Combina datos de múltiples fuentes:
+複数のソースからのデータを結合します。
 
 ```ts
 const UserProfile: React.FC<{userId: number}> = ({userId}) => {
@@ -746,22 +746,22 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 ```
 
 ```jsx
-// Los tipos se infieren automáticamente
+// Types are automatically inferred
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // El tipo de retorno se infiere como User
+    // Return type is inferred as User
   }),
 });
 
-// El tipo de retorno del hook se tipifica automáticamente
+// Hook return type is automatically typed
 const {data} = useQueryData(userDataSource, {userId: 123});
-// data se tipifica como User | undefined
+// data is typed as User | undefined
 ```
 
-### Tipos de error personalizados
+### カスタムエラータイプ
 
-Define y utiliza tipos de error personalizados:
+カスタムエラータイプを定義して使用します。
 
 ```ts
 interface ValidationError {
@@ -776,22 +776,21 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Tipo de parámetros
-  {id: number}, // Tipo de solicitud
-  ApiResponse, // Tipo de respuesta
-  User, // Tipo de datos
-  ApiError // Tipo de error
+  {id: number}, // Params type
+  {id: number}, // Request type
+  ApiResponse, // Response type
+  User, // Data type
+  ApiError // Error type
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
 });
 ```
 
-## Contribución
+## 貢献
 
-Por favor, lee [CONTRIBUTING.md](CONTRIBUTING.md) para obtener detalles sobre nuestro código de conducta y el proceso para enviar solicitudes de extracción (pull requests).
+コードオブコンダクトおよびプルリクエストの送信プロセスについては、[CONTRIBUTING.md](CONTRIBUTING.md) をお読みください。
 
-## Licencia
+## ライセンス
 
-Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para obtener más detalles.
-```
+MIT License. 詳細については、[LICENSE](LICENSE) ファイルを参照してください。
