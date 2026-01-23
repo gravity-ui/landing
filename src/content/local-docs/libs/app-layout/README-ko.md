@@ -37,17 +37,17 @@ app.listen(3000);
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // window.__DATA__에 설정될 JSON 호환 데이터
+  // JSON 호환 데이터, 페이지의 window.__DATA__에 설정됩니다.
   data?: Data;
   // favicon
   icon?: Icon;
   // 적절한 태그에 설정될 nonce
   nonce?: string;
 
-  // 공통 옵션
+  // 일반 옵션
   // 페이지 제목
   title: string;
-  // 페이지 언어, html 태그에 설정됨
+  // 페이지 언어, html 태그에 설정됩니다.
   lang?: string;
   isMobile?: boolean;
 
@@ -62,9 +62,9 @@ interface RenderParams<Data, Plugins> {
   scripts?: Script[];
   // style 태그
   styleSheets?: Stylesheet[];
-  // 인라인 코드 스크립트 태그
+  // 인라인 코드가 포함된 script 태그
   inlineScripts?: string[];
-  // 인라인 스타일 태그
+  // 인라인 스타일이 포함된 style 태그
   inlineStyleSheets?: string[];
 
   // body 태그 내용
@@ -172,7 +172,7 @@ const link = {
 
 ### Scripts
 
-스크립트 링크를 preload와 함께 설명합니다:
+스크립트 링크를 사전 로드(preload)하도록 설명합니다:
 
 ```typescript
 interface Script {
@@ -289,7 +289,7 @@ export interface RenderHelpers {
 
 ### Google analytics
 
-페이지에 Google Analytics 카운터를 추가합니다.
+페이지에 Google analytics 카운터를 추가합니다.
 
 사용법:
 
@@ -299,55 +299,11 @@ import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 ```
 
-```html
-<div class="languages">
-  <a href="/en/README.md">English</a>
-  <a href="/ko/README.md">Korean</a>
-</div>
-```
+Google Analytics
 
-# @gravity-ui/app-layout
+페이지에 Google Analytics 카운터를 추가합니다.
 
-This library provides a set of plugins for rendering HTML layouts with server-side rendering (SSR) support. It allows you to easily integrate various third-party services and features into your application's HTML structure.
-
-## Installation
-
-```bash
-npm install @gravity-ui/app-layout
-# or
-yarn add @gravity-ui/app-layout
-```
-
-## Usage
-
-The main idea is to create a `renderLayout` function using `createRenderFunction` and pass it an array of plugins. Then, you can use this function to render your HTML.
-
-```js
-import {createRenderFunction} from '@gravity-ui/app-layout';
-
-// Create a render function with your desired plugins
-const renderLayout = createRenderFunction([
-  // ... your plugins
-]);
-
-// Use the render function to generate HTML
-app.get('/', (req, res) => {
-  res.send(
-    renderLayout({
-      title: 'My Page Title',
-      // ... other options
-    }),
-  );
-});
-```
-
-## Plugins
-
-### Google Analytics
-
-Adds Google Analytics counters on the page.
-
-Usage:
+사용법:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
@@ -371,7 +327,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+플러그인 옵션:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -386,9 +342,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-Adds Yandex Metrika counters on the page.
+페이지에 Yandex Metrika 카운터를 추가합니다.
 
-Usage:
+사용법:
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -415,7 +371,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+플러그인 옵션:
 
 ```typescript
 export type UserParams = {
@@ -446,16 +402,14 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Adds scripts and styles from the webpack assets manifest file.
+Webpack assets manifest 파일에서 스크립트와 스타일을 추가합니다.
 
-Usage:
+사용법:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([
-  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
-]);
+const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
 
 app.get((req, res) => {
   res.send(
@@ -471,7 +425,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+플러그인 옵션:
 
 ```typescript
 export interface LayoutOptions {
@@ -482,9 +436,9 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-Adds body attributes.
+body 속성을 추가합니다.
 
-Usage:
+사용법:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -506,7 +460,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+플러그인 옵션:
 
 ```typescript
 interface UikitPluginOptions {
@@ -517,13 +471,13 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-Adds microfrontend versions information to the page.
+마이크로프론트엔드 버전 정보를 페이지에 추가합니다.
 
-This plugin creates a global `window.__REMOTE_VERSIONS__` object containing the provided microfrontend versions. This object can be used by module federation or similar microfrontend architectures to determine which versions of remote modules to load.
+이 플러그인은 제공된 마이크로프론트엔드 버전을 포함하는 전역 `window.__REMOTE_VERSIONS__` 객체를 생성하며, 이는 모듈 페더레이션 또는 유사한 마이크로프론트엔드 아키텍처에서 로드할 원격 모듈의 버전을 결정하는 데 사용될 수 있습니다.
 
-It can be used in combination with [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) and the `moduleFederation.remotesRuntimeVersioning` option to automatically load remote modules with the corresponding versions.
+[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 및 `moduleFederation.remotesRuntimeVersioning` 옵션과 함께 사용하여 해당 버전의 원격 모듈을 자동으로 로드할 수 있습니다.
 
-Usage:
+사용법:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -546,7 +500,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+플러그인 옵션:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -554,7 +508,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-There is a helper to create all plugins:
+모든 플러그인을 생성하는 헬퍼가 있습니다:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -583,7 +537,7 @@ app.get((req, res) => {
 
 ## Alternative usage
 
-With partial renderers `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via HTML streaming:
+HTML 스트리밍을 통한 파트 렌더러 `generateRenderContent`, `renderHeadContent`, `renderBodyContent` 사용:
 
 ```js
 import express from 'express';
@@ -610,27 +564,26 @@ app.get('/', async function (req, res) {
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;
-```
 
 ```html
-<!DOCTYPE html>
-<html ${helpers.attrs({...htmlAttributes})}>
-<head>
-    ${renderHeadContent(content)}
-</head>
-<body ${helpers.attrs(bodyContent.attributes)}>
-    ${renderBodyContent(content)}
-`);
+        <!DOCTYPE html>
+        <html ${helpers.attrs({...htmlAttributes})}>
+        <head>
+            ${renderHeadContent(content)}
+        </head>
+        <body ${helpers.attrs(bodyContent.attributes)}>
+            ${renderBodyContent(content)}
+    `);
 
   const data = await getUserData();
 
   res.write(`
-    ${content.renderHelpers.renderInlineScript(`
-        window.__DATA__ = ${htmlescape(data)};
-    `)}
-</body>
-</html>
-`);
+            ${content.renderHelpers.renderInlineScript(`
+                window.__DATA__ = ${htmlescape(data)};
+            `)}
+        </body>
+        </html>
+    `);
   res.end();
 });
 

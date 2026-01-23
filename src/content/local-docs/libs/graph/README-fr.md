@@ -4,9 +4,9 @@
 
 Une bibliothèque de visualisation de graphes qui combine le meilleur des deux mondes :
 - Canvas pour des performances élevées lors de la visualisation du graphe complet
-- HTML/React pour des interactions riches lorsque l'on zoome
+- HTML/React pour des interactions riches lors du zoom
 
-Fini le choix entre performance et interactivité. Idéal pour les diagrammes complexes, les organigrammes et les éditeurs basés sur des nœuds.
+Plus besoin de choisir entre performance et interactivité. Idéal pour les grands diagrammes, les organigrammes et les éditeurs basés sur des nœuds.
 
 ## Motivation
 
@@ -17,17 +17,17 @@ Les applications web modernes nécessitent souvent une visualisation et une inte
 
 @gravity-ui/graph résout ce problème en basculant automatiquement entre Canvas et HTML en fonction du niveau de zoom :
 - **Dézoomé** : Utilise Canvas pour un rendu efficace du graphe complet
-- **Zoom moyen** : Affiche une vue schématique avec une interactivité de base
+- **Zoom Moyen** : Affiche une vue schématique avec une interactivité de base
 - **Zoomé** : Bascule vers des composants HTML/React pour des interactions riches
 
 ## Comment ça marche
 
-La bibliothèque utilise un système de rendu intelligent qui gère automatiquement la transition entre les composants Canvas et React :
+La bibliothèque utilise un système de rendu intelligent qui gère automatiquement la transition entre Canvas et les composants React :
 
-1. Aux niveaux de zoom bas, tout est rendu sur Canvas pour des raisons de performance.
+1. Aux faibles niveaux de zoom, tout est rendu sur Canvas pour des raisons de performance.
 2. Lors du zoom avant vers une vue détaillée, le composant `GraphCanvas` :
-   - Suit les changements de la caméra (position et échelle).
-   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un padding pour un défilement fluide).
+   - Suit les changements de la caméra et de l'échelle.
+   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un rembourrage pour un défilement fluide).
    - Rend les composants React uniquement pour les blocs visibles.
    - Met à jour automatiquement la liste lors du défilement ou du zoom.
    - Supprime les composants React lors du dézoom.
@@ -169,15 +169,8 @@ const graph = new Graph({
 }, container);
 ```
 
-```html
-<div class="language-selector">
-    <a href="/README.md">English</a>
-    <a href="/README.fr.md">Français</a>
-</div>
-```
-
 ```javascript
-// Ajout de blocs et de connexions
+// Ajouter des blocs et des connexions
 graph.setEntities({
     blocks: [
         {
@@ -225,10 +218,10 @@ graph.setEntities({
     ]
 });
 
-// Démarrage du rendu
+// Démarrer le rendu
 graph.start();
 
-// Centrage de la vue
+// Centrer la vue
 graph.zoomTo("center", { padding: 100 });
 ```
 
@@ -236,7 +229,7 @@ graph.zoomTo("center", { padding: 100 });
 
 - [Exemple de base](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
 - [Exemple à grande échelle](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
-- [Vue de blocs personnalisés](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
+- [Vue de blocs personnalisée](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
 - [Connexion Bézier](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
 - [Personnalisation des connexions](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
@@ -252,14 +245,14 @@ graph.zoomTo("center", { padding: 100 });
    - [Système de planification](docs/system/scheduler-system.md)
 
 2. Composants
-   - [Composant Canvas Graph](docs/components/canvas-graph-component.md)
-   - [Composant Bloc](docs/components/block-component.md)
+   - [Composant de graphe sur canevas](docs/components/canvas-graph-component.md)
+   - [Composant de bloc](docs/components/block-component.md)
    - [Points d'ancrage](docs/components/anchors.md)
 
 3. Rendu
    - [Mécanisme de rendu](docs/rendering/rendering-mechanism.md)
    - [Calques](docs/rendering/layers.md)
 
-4. Blocs et Connexions
+4. Blocs et connexions
    - [Groupes de blocs](docs/blocks/groups.md)
-   - [Système de connexion Canvas](docs/connections/canvas-connection-system.md)
+   - [Système de connexion sur canevas](docs/connections/canvas-connection-system.md)

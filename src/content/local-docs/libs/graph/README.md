@@ -254,4 +254,3 @@ graph.zoomTo("center", { padding: 100 });
 4. Blocks and Connections
    - [Block Groups](docs/blocks/groups.md)
    - [Canvas Connection System](docs/connections/canvas-connection-system.md)
-

@@ -54,7 +54,7 @@ const data: YagrWidgetData = {
       },
     },
     title: {
-      text: 'línea: 10 puntos aleatorios',
+      text: 'line: random 10 pts',
     },
   },
 };

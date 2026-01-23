@@ -1,6 +1,6 @@
 # @gravity-ui/dynamic-forms &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/dynamic-forms)](https://www.npmjs.com/package/@gravity-ui/dynamic-forms) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/dynamic-forms/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/dynamic-forms/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/dynamic-forms/)
 
-Die JSON Schema-basierte Bibliothek zum Rendern von Formularen und Formularwerten.
+Die auf JSON Schema basierende Bibliothek zum Rendern von Formularen und Formularwerten.
 
 ## Installation
 
@@ -13,7 +13,7 @@ npm install --save-dev @gravity-ui/dynamic-forms
 ```jsx
 import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
 
-// Zum Einbetten in ein final-form
+// Zum Einbetten in final-form
 <DynamicField name={name} spec={spec} config={config} />;
 
 import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';

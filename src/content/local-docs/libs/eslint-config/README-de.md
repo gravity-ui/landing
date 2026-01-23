@@ -1,11 +1,3 @@
-```html
-<!-- Language options -->
-<div class="language-options">
-  <a href="/README.md">English</a>
-  <a href="/README.de.md">Deutsch</a>
-</div>
-```
-
 # @gravity-ui/eslint-config
 
 ## Installation
@@ -16,7 +8,7 @@ npm install --save-dev eslint @gravity-ui/eslint-config
 
 ## Verwendung
 
-Fügen Sie die Datei `eslint.config.js` in Ihrem Projekt mit folgendem Inhalt hinzu:
+Fügen Sie eine Datei namens `eslint.config.js` in Ihrem Projekt mit folgendem Inhalt hinzu:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';

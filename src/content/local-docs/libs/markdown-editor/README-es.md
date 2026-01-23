@@ -4,13 +4,13 @@
 
 ## Editor WYSIWYG y de marcado Markdown
 
-MarkdownEditor es una herramienta potente para trabajar con Markdown, que combina los modos WYSIWYG y de Marcado. Esto significa que puedes crear y editar contenido en un modo visual conveniente, además de tener control total sobre el marcado.
+MarkdownEditor es una herramienta potente para trabajar con Markdown, que combina los modos WYSIWYG y de marcado. Esto significa que puedes crear y editar contenido en un modo visual conveniente, además de tener control total sobre el marcado.
 
 ### 🔧 Características principales
 
 - Soporte para la sintaxis básica de Markdown y [YFM](https://ydocs.tech).
 - Extensibilidad mediante el uso de los motores ProseMirror y CodeMirror.
-- La capacidad de trabajar en modos WYSIWYG y de Marcado para una máxima flexibilidad.
+- La capacidad de trabajar en modos WYSIWYG y de marcado para una máxima flexibilidad.
 
 ## Instalación
 
@@ -82,7 +82,7 @@ configure({
 });
 ```
 
-No olvides llamar a `configure()` desde [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) y otras bibliotecas de UI.
+No olvides llamar a `configure()` de [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) y otras bibliotecas de UI.
 
 ### Contribución
 

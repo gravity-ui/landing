@@ -8,7 +8,7 @@ Yagr es un renderizador de gráficos HTML5 Canvas de alto rendimiento basado en 
 
 -   [Líneas, áreas, columnas y puntos como tipos de visualización. Configurables por serie](https://yagr.tech/en/api/visualization)
 -   [Tooltip de leyenda configurable](https://yagr.tech/en/plugins/tooltip)
--   [Ejes con opciones adicionales para precisión a nivel decimal](https://yagr.tech/en/api/axes)
+-   [Ejes con opciones adicionales para precisión de nivel decimal](https://yagr.tech/en/api/axes)
 -   [Escalas con funciones de rango y transformaciones configurables](https://yagr.tech/en/api/scales)
 -   [Líneas y bandas de trazado. Capa de dibujo configurable](https://yagr.tech/en/plugins/plot-lines)
 -   [Gráficos responsivos](https://yagr.tech/en/api/settings#adaptivity) (requiere [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver))
@@ -20,7 +20,7 @@ Yagr es un renderizador de gráficos HTML5 Canvas de alto rendimiento basado en 
 -   Typescript
 -   [Localización](https://yagr.tech/en/api/settings#localization)
 -   [Variables CSS en nombres de color](https://yagr.tech/en/api/css)
--   [Leyenda en línea paginada](https://yagr.tech/en/plugins/legend)
+-   [Leyenda paginada en línea](https://yagr.tech/en/plugins/legend)
 -   [Manejo de errores y hooks extendidos](https://yagr.tech/en/api/lifecycle)
 -   [Alineación e interpolación de datos para datos faltantes](https://yagr.tech/en/api/data-processing)
 -   [Actualizaciones en tiempo real](https://yagr.tech/en/api/dynamic-updates)

@@ -8,13 +8,13 @@ npm install @gravity-ui/blog-constructor
 
 ## Blog-constructor
 
-`Blog-constructor` est une bibliothèque basée sur [Page-constructor](https://github.com/gravity-ui/page-constructor) pour créer des pages web au format blog. Blog-constructor utilise la prop [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) de page-constructor pour ajouter les composants nécessaires au blog.
+`Blog-constructor` est une bibliothèque basée sur la bibliothèque [Page-constructor](https://github.com/gravity-ui/page-constructor) pour créer des pages web au format blog. Blog-constructor utilise la prop [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) de page-constructor pour ajouter les composants nécessaires au blog.
 
 ### Documentation - [storybook](https://preview.gravity-ui.com/blog-constructor/)
 
-### Premiers pas
+### Démarrage rapide
 
-Le blog-constructor dispose de composants côté client et côté serveur à importer. Les pages du blog sont importées comme un composant React. Pour vous assurer qu'il fonctionne correctement, encapsulez-le dans `BlogConstructorProvider` :
+Le blog-constructor dispose de composants côté client et côté serveur pour l'importation. Les pages du blog sont importées en tant que composant React. Pour vous assurer qu'il fonctionne correctement, encapsulez-le dans `BlogConstructorProvider` :
 
 ```jsx
 import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
@@ -49,7 +49,7 @@ import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructo
 
 Documentation sur [providerProps](./src/constructor/README.md).
 
-De plus, blog-constructor propose des composants serveur pour vous aider à transformer vos données si nécessaire :
+De plus, blog-constructor propose des composants serveur pour vous aider à transformer vos données si nécessaire.
 
 ```jsx
 import {

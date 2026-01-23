@@ -14,9 +14,9 @@ npm install --save-dev @gravity-ui/illustrations
 
 Configura el tema de las ilustraciones. Ejecuta cualquiera de los siguientes pasos:
 
-##### Definir tokens CSS con tu propia paleta de colores
+##### Definir css-tokens con tu propia paleta de colores
 
-Define los siguientes tokens CSS en tu aplicación:
+Define los siguientes css-tokens en tu aplicación:
 
 ```scss
 --gil-color-object-base: rgb(255, 190, 92);
@@ -31,7 +31,7 @@ Define los siguientes tokens CSS en tu aplicación:
 
 ##### Usar mixins con el tema predeterminado de gravity-theme en scss
 
-Utiliza los siguientes mixins para estilizar ilustraciones en diferentes temas:
+Utiliza los siguientes mixins para estilizar las ilustraciones en diferentes temas:
 
 ```scss
 @import '@gravity-ui/illustrations/styles/theme.scss';
@@ -80,7 +80,7 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> Es posible que necesites un cargador adecuado para esto
+> Es posible que necesites un cargador (loader) apropiado para esto
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
@@ -88,7 +88,7 @@ import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 
 ### Desarrollo
 
-Para actualizar las ilustraciones según el nuevo diseño, cambia el contenido de los archivos SVG en el tema claro (`<raíz-de-este-repositorio>/svgs/<nombre-de-la-ilustración>-light.svg`) y luego ejecuta el comando:
+Para actualizar las ilustraciones según el nuevo diseño, cambia el contenido de los svg en el tema claro (archivos `<this-repository-root>/svgs/<illustration-name>-light.svg`) y luego ejecuta el comando:
 
 ```shell
 npm run generate

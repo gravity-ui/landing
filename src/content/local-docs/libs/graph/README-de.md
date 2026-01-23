@@ -1,21 +1,21 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [Migrationsleitfaden von 0.x zu 1.x →](docs/migration-guides/v0-to-v1.md)
+> [Migration Guide von 0.x zu 1.x →](docs/migration-guides/v0-to-v1.md)
 
 Eine Bibliothek zur Visualisierung von Graphen, die das Beste aus beiden Welten vereint:
 - Canvas für hohe Leistung bei der Anzeige des gesamten Graphen
-- HTML/React für reichhaltige Interaktionen bei der Vergrößerung
+- HTML/React für reichhaltige Interaktionen bei Vergrößerung
 
 Keine Kompromisse mehr zwischen Leistung und Interaktivität. Perfekt für große Diagramme, Flussdiagramme und knotenbasierte Editoren.
 
 ## Motivation
 
-Moderne Webanwendungen erfordern oft komplexe Visualisierungen und Interaktionen, aber bestehende Lösungen konzentrieren sich typischerweise auf eine einzige Rendering-Technologie:
+Moderne Webanwendungen erfordern oft komplexe Visualisierungen und Interaktivität, aber bestehende Lösungen konzentrieren sich typischerweise auf eine einzige Rendering-Technologie:
 
 - **Canvas** bietet hohe Leistung für komplexe Grafiken, ist aber in der Textverarbeitung und Interaktivität eingeschränkt.
 - **HTML DOM** ist praktisch für Benutzeroberflächen, aber weniger effizient für komplexe Grafiken oder eine große Anzahl von Elementen.
 
-@gravity-ui/graph löst dieses Problem, indem es automatisch zwischen Canvas und HTML basierend auf dem Zoomfaktor wechselt:
+@gravity-ui/graph löst dieses Problem, indem es automatisch zwischen Canvas und HTML basierend auf dem Zoomlevel wechselt:
 - **Ausgezoomt**: Verwendet Canvas für effizientes Rendern des gesamten Graphen
 - **Mittlerer Zoom**: Zeigt eine schematische Ansicht mit grundlegender Interaktivität
 - **Eingezoomt**: Wechselt zu HTML/React-Komponenten für reichhaltige Interaktionen
@@ -26,8 +26,8 @@ Die Bibliothek verwendet ein intelligentes Rendering-System, das den Übergang z
 
 1. Bei niedrigen Zoomstufen wird alles auf Canvas gerendert, um die Leistung zu optimieren.
 2. Beim Hineinzoomen in die Detailansicht:
-   - Verfolgt die `GraphCanvas`-Komponente Änderungen an der Kameraansicht und dem Maßstab.
-   - Berechnet, welche Blöcke im aktuellen Ansichtsbereich sichtbar sind (mit Polsterung für sanftes Scrollen).
+   - Der `GraphCanvas`-Komponente verfolgt Änderungen an der Kameraansicht und dem Maßstab.
+   - Berechnet, welche Blöcke im aktuellen Ansichtsfenster sichtbar sind (mit Polsterung für sanftes Scrollen).
    - Rendert React-Komponenten nur für sichtbare Blöcke.
    - Aktualisiert die Liste automatisch beim Scrollen oder Zoomen.
    - Entfernt React-Komponenten beim Auszoomen.
@@ -143,7 +143,7 @@ export function GraphEditor() {
 }
 ```
 
-### Vanilla JavaScript Beispiel
+### Vanilla JavaScript-Beispiel
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
@@ -169,13 +169,7 @@ const graph = new Graph({
 }, container);
 ```
 
-```html
-<div class="language-selector">
-  <a href="/README.md">English</a>
-  <a href="/README.de.md">Deutsch</a>
-</div>
-```
-
+```javascript
 // Blöcke und Verbindungen hinzufügen
 graph.setEntities({
     blocks: [
@@ -235,9 +229,9 @@ graph.zoomTo("center", { padding: 100 });
 
 - [Grundlegendes Beispiel](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
 - [Groß angelegtes Beispiel](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
-- [Benutzerdefinierte Blöcke anzeigen](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
+- [Ansicht benutzerdefinierter Blöcke](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
 - [Bezier-Verbindung](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
-- [Verbindung anpassen](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
+- [Anpassung von Verbindungen](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
 ## Dokumentation
 
@@ -260,5 +254,5 @@ graph.zoomTo("center", { padding: 100 });
    - [Ebenen](docs/rendering/layers.md)
 
 4. Blöcke und Verbindungen
-   - [Blockgruppen](docs/blocks/groups.md)
-   - [Canvas Verbindungssystem](docs/connections/canvas-connection-system.md)
+   - [Block-Gruppen](docs/blocks/groups.md)
+   - [Canvas Connection System](docs/connections/canvas-connection-system.md)

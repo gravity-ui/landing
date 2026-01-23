@@ -1,6 +1,6 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-Eine React-basierte Bibliothek zum Erstellen interaktiver Zeitachsenvisualisierungen mit Canvas-Rendering.
+Eine React-basierte Bibliothek zum Erstellen interaktiver Timeline-Visualisierungen mit Canvas-Rendering.
 
 ## Dokumentation
 
@@ -9,11 +9,11 @@ Details finden Sie in der [Dokumentation](./docs/docs.md).
 ## Funktionen
 
 - Canvas-basiertes Rendering für hohe Leistung
-- Interaktive Zeitachse mit Zoom- und Schwenkfunktionen
+- Interaktive Timeline mit Zoom- und Schwenkfunktionen
 - Unterstützung für Ereignisse, Markierungen, Abschnitte, Achsen und Gitter
 - Hintergrundabschnitte zur visuellen Organisation und Hervorhebung von Zeiträumen
-- Intelligente Markierungsgruppierung mit automatischem Zoom auf die Gruppe – Klicken Sie auf gruppierte Markierungen, um in ihre einzelnen Komponenten zu zoomen
-- Virtualisiertes Rendering für verbesserte Leistung bei großen Datensätzen (nur aktiv, wenn der Inhalt der Zeitachse den Ansichtsbereich überschreitet)
+- Intelligente Gruppierung von Markierungen mit automatischem Zoom auf die Gruppe – Klicken Sie auf gruppierte Markierungen, um in ihre einzelnen Komponenten zu zoomen
+- Virtualisiertes Rendering für verbesserte Leistung bei großen Datensätzen (nur aktiv, wenn der Timeline-Inhalt den Viewport überschreitet)
 - Anpassbares Erscheinungsbild und Verhalten
 - TypeScript-Unterstützung mit vollständigen Typdefinitionen
 - React-Integration mit benutzerdefinierten Hooks
@@ -26,7 +26,7 @@ npm install @gravity-ui/timeline
 
 ## Verwendung
 
-Die Zeitachsenkomponente kann in React-Anwendungen mit der folgenden grundlegenden Einrichtung verwendet werden:
+Die Timeline-Komponente kann in React-Anwendungen mit der folgenden grundlegenden Einrichtung verwendet werden:
 
 ```tsx
 import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
@@ -46,10 +46,10 @@ const MyTimelineComponent = () => {
     }
   });
 
-  // timeline - Instanz der Zeitachse
-  // api - Instanz von CanvasApi (identisch mit timeline.api)
-  // start - Funktion zur Initialisierung der Zeitachse mit Canvas
-  // stop - Funktion zur Zerstörung der Zeitachse
+  // timeline - Timeline-Instanz
+  // api - CanvasApi-Instanz (identisch mit timeline.api)
+  // start - Funktion zur Initialisierung der Timeline mit Canvas
+  // stop - Funktion zur Zerstörung der Timeline
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
@@ -59,22 +59,22 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### Struktur von Abschnitten
+### Abschnittsstruktur
 
 Jeder Abschnitt erfordert die folgende Struktur:
 
 ```typescript
 type TimelineSection = {
-  id: string;               // Eindeutiger Bezeichner des Abschnitts
-  from: number;             // Start-Zeitstempel
-  to?: number;              // Optionaler End-Zeitstempel (standardmäßig das Ende der Zeitachse)
+  id: string;               // Eindeutiger Abschnittsbezeichner
+  from: number;             // Startzeitstempel
+  to?: number;              // Optionaler Endzeitstempel (standardmäßig das Ende der Timeline)
   color: string;            // Hintergrundfarbe des Abschnitts
   hoverColor?: string;      // Optionale Farbe beim Überfahren des Abschnitts mit der Maus
   renderer?: AbstractSectionRenderer; // Optionaler benutzerdefinierter Renderer
 };
 ```
 
-Abschnitte bieten Hintergrundfarben für Zeiträume und helfen bei der visuellen Organisation des Zeitachseninhalts:
+Abschnitte bieten Hintergrundfarben für Zeiträume und helfen bei der visuellen Organisation von Timeline-Inhalten:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -90,21 +90,21 @@ const MyTimelineComponent = () => {
           id: 'morning',
           from: Date.now(),
           to: Date.now() + 1800000, // 30 Minuten
-          color: 'rgba(255, 235, 59, 0.3)', // Halbtransparenter gelber Farbton
+          color: 'rgba(255, 235, 59, 0.3)', // Halbtransparentes Gelb
           hoverColor: 'rgba(255, 235, 59, 0.4)'
         },
         {
           id: 'afternoon',
           from: Date.now() + 1800000,
-          // Kein 'to' angegeben – erstreckt sich bis zum Ende der Zeitachse
-          color: 'rgba(76, 175, 80, 0.2)', // Halbtransparenter grüner Farbton
+          // Kein 'to' angegeben - erstreckt sich bis zum Ende der Timeline
+          color: 'rgba(76, 175, 80, 0.2)', // Halbtransparentes Grün
           hoverColor: 'rgba(76, 175, 80, 0.3)'
         }
       ]
     },
     viewConfiguration: {
       sections: {
-        hitboxPadding: 2 // Abstand für die Erkennung von Mauszeiger-Überfahrten
+        hitboxPadding: 2 // Polsterung für die Erkennung von Mauszeiger-Überfahrten
       }
     }
   });
@@ -113,7 +113,7 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### Struktur von Markierungen
+### Markierungsstruktur
 
 Jede Markierung erfordert die folgende Struktur:
 
@@ -132,9 +132,9 @@ type TimelineMarker = {
 };
 ```
 
-### Gruppierung und Zoom von Markierungen
+### Markierungsgruppierung und Zoom
 
-Die Zeitachse gruppiert Markierungen, die nahe beieinander liegen, automatisch und bietet Zoom-Funktionalität:
+Die Timeline gruppiert Markierungen, die nahe beieinander liegen, automatisch und bietet Zoom-Funktionalität:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -155,13 +155,13 @@ const MyTimelineComponent = () => {
       markers: {
         collapseMinDistance: 8,        // Markierungen innerhalb von 8 Pixeln gruppieren
         groupZoomEnabled: true,        // Zoom beim Klicken auf eine Gruppe aktivieren
-        groupZoomPadding: 0.3,        // 30% Abstand um die Gruppe
+        groupZoomPadding: 0.3,        // 30% Polsterung um die Gruppe
         groupZoomMaxFactor: 0.3,      // Maximaler Zoomfaktor
       }
     }
   });
 
-  // Auf Ereignisse beim Gruppenzoom reagieren
+  // Auf Gruppen-Zoom-Ereignisse hören
   useTimelineEvent(timeline, 'on-group-marker-click', (data) => {
     console.log('Gruppe gezoomt:', data);
   });
@@ -172,22 +172,22 @@ const MyTimelineComponent = () => {
 
 ## Funktionsweise
 
-Die Zeitachsenkomponente ist mit React erstellt und bietet eine flexible Möglichkeit, interaktive Zeitachsenvisualisierungen zu erstellen. So funktioniert sie:
+Die Timeline-Komponente ist mit React erstellt und bietet eine flexible Möglichkeit, interaktive Timeline-Visualisierungen zu erstellen. So funktioniert sie:
 
 ### Komponentenarchitektur
 
 Die Timeline wird als React-Komponente implementiert, die über zwei Hauptobjekte konfiguriert werden kann:
 
-1.  **TimelineSettings**: Steuert das Kernverhalten und das Erscheinungsbild der Timeline
+1.  **TimelineSettings**: Steuert das Kernverhalten und die Darstellung der Timeline
     *   `start`: Startzeit der Timeline
     *   `end`: Endzeit der Timeline
     *   `axes`: Array von Achsenkonfigurationen
     *   `events`: Array von Ereigniskonfigurationen
-    *   `markers`: Array von Marker-Konfigurationen
+    *   `markers`: Array von Markierungskonfigurationen
     *   `sections`: Array von Abschnittskonfigurationen
 
 2.  **ViewConfiguration**: Verwaltet die visuelle Darstellung und die Interaktionseinstellungen
-    *   Steuert das Erscheinungsbild, Zoomstufen und das Interaktionsverhalten
+    *   Steuert Darstellung, Zoomstufen und Interaktionsverhalten
     *   Kann angepasst oder mit Standardwerten verwendet werden
 
 ### Ereignisbehandlung
@@ -241,7 +241,7 @@ Ereignisse in der Timeline folgen dieser Struktur:
 
 ```typescript
 type TimelineEvent = {
-  id: string;             // Eindeutiger Identifikator
+  id: string;             // Eindeutiger Bezeichner
   from: number;           // Start-Zeitstempel
   to?: number;            // End-Zeitstempel (optional für Punkt-Ereignisse)
   axisId: string;         // ID der Achse, zu der dieses Ereignis gehört
@@ -278,7 +278,7 @@ const timeline = new Timeline({
         id: 'event1',
         from: timestamp + 1800000, // 30 Minuten ab jetzt
         to: timestamp + 2400000,   // 40 Minuten ab jetzt
-        label: 'Beispielereignis',
+        label: 'Beispiel-Ereignis',
         axisId: 'main'
       }
     ],
@@ -329,7 +329,7 @@ timeline.on('on-select-change', (detail) => {
 timeline.destroy();
 ```
 
-Die `Timeline`-Klasse bietet eine reichhaltige API zur Verwaltung der Timeline:
+Die `Timeline`-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
 
 *   **Ereignisverwaltung**:
     ```typescript
@@ -370,12 +370,12 @@ Die `Timeline`-Klasse bietet eine reichhaltige API zur Verwaltung der Timeline:
       }
     ]);
 
-    // Marker aktualisieren
+    // Markierungen aktualisieren
     timeline.api.setMarkers([
       {
         id: 'newMarker',
         time: Date.now(),
-        label: 'Neuer Marker',
+        label: 'Neue Markierung',
         color: '#00ff00',
         activeColor: '#4caf50',
         hoverColor: '#2e7d32'
@@ -388,7 +388,7 @@ Die `Timeline`-Klasse bietet eine reichhaltige API zur Verwaltung der Timeline:
         id: 'newSection',
         from: Date.now(),
         to: Date.now() + 1800000,
-        color: 'rgba(255, 193, 7, 0.2)', // Hellamber-Hintergrund
+        color: 'rgba(255, 193, 7, 0.2)', // Hellamber Hintergrundfarbe
         hoverColor: 'rgba(255, 193, 7, 0.3)'
       }
     ]);
@@ -398,35 +398,10 @@ Die `Timeline`-Klasse bietet eine reichhaltige API zur Verwaltung der Timeline:
 
 Entdecken Sie interaktive Beispiele in unserem [Storybook](https://preview.gravity-ui.com/timeline/):
 
-```html
-<p align="center">
-  <a href="https://github.com/gravity-ui/timeline">
-    <img src="https://raw.githubusercontent.com/gravity-ui/timeline/main/assets/logo.svg" alt="Logo" width="120" height="120">
-  </a>
-</p>
-
-<h3 align="center">Gravity UI Timeline</h3>
-
-<p align="center">
-  A flexible and customizable timeline component for React.
-  <br />
-  <br />
-  <a href="https://github.com/gravity-ui/timeline/issues">Report Bug</a>
-  ·
-  <a href="https://github.com/gravity-ui/timeline/issues">Request Feature</a>
-</p>
-
-<p align="center">
-  <a href="README.md">English</a>
-  ·
-  <a href="README.de.md">Deutsch</a>
-</p>
-
-<!-- Examples -->
-- [Basis-Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Einfache Timeline mit Ereignissen und Achsen
-- [Endlose Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Endlose Timeline mit Ereignissen und Achsen
-- [Markierungen](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline mit vertikalen Markierungen und Beschriftungen
-- [Benutzerdefinierte Ereignisse](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline mit benutzerdefinierter Ereignisdarstellung
+- [Basic Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Einfache Timeline mit Ereignissen und Achsen
+- [Endless Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Endlose Timeline mit Ereignissen und Achsen
+- [Markers](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline mit vertikalen Markierungen und Beschriftungen
+- [Custom Events](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline mit benutzerdefinierter Ereignisdarstellung
 
 
 ## Entwicklung
@@ -452,4 +427,3 @@ npm run build-storybook
 ## Lizenz
 
 MIT
-```

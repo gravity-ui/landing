@@ -24,9 +24,9 @@ nodekit.ctx.log('La aplicación está lista');
 Consulta el directorio `docs/` para obtener documentación adicional:
 
 - [`docs/configuration.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/configuration.md) especifica cómo puedes configurar tanto NodeKit como tus aplicaciones basadas en NodeKit.
-- [`docs/contexts.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/contexts.md) describe el concepto de contextos de NodeKit, registro (logging) y rastreo (tracing).
+- [`docs/contexts.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/contexts.md) describe el concepto de contextos de NodeKit, registro (logging) y trazado (tracing).
 - [`docs/app-error.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/app-error.md) contiene la descripción de una útil clase de error personalizada que NodeKit proporciona para tus aplicaciones.
-- [`docs/utils.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/utils.md) lista algunas funciones auxiliares adicionales que se incluyen con NodeKit.
+- [`docs/utils.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/utils.md) enumera algunas funciones auxiliares adicionales que se incluyen con NodeKit.
 
 ## Contribución
 
@@ -39,17 +39,17 @@ git clone git@github.com:gravity-ui/nodekit
 git clone git@github.com:gravity-ui/nodekit-examples
 ```
 
-Vincula tu NodeKit a npm e inicia el compilador:
+Enlaza tu NodeKit a npm e inicia el compilador:
 
 ```bash
 cd nodekit && npm link && npm run dev
 ```
 
-Luego, en otra terminal, ve a los ejemplos, abre el que te interese, vincula tu NodeKit allí y luego inicia la aplicación:
+Luego, en otra terminal, ve a los ejemplos, abre el que te interese, enlaza tu NodeKit allí y luego inicia la aplicación:
 
 ```bash
 cd nodekit-examples/basic-app && npm i && npm link @gravity-ui/nodekit
 npm run dev
 ```
 
-En este punto, puedes realizar cambios tanto en NodeKit como en la aplicación de demostración, y ver los resultados en tiempo real.
+En este punto, puedes realizar cambios tanto en NodeKit como en la aplicación de demostración y ver los resultados en tiempo real.

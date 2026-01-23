@@ -41,7 +41,7 @@ interface RenderParams<Data, Plugins> {
   data?: Data;
   // favicon
   icon?: Icon;
-  // nonce que se establecerá en las etiquetas apropiadas
+  // nonce para ser establecido en las etiquetas apropiadas
   nonce?: string;
 
   // opciones comunes
@@ -126,7 +126,7 @@ interface Icon {
 }
 ```
 
-El valor predeterminado es:
+El valor por defecto es:
 
 ```js
 const icon = {
@@ -205,7 +205,7 @@ se renderizará como:
 
 #### Hojas de estilo
 
-Describen el enlace a estilos:
+Describe el enlace a estilos:
 
 ```typescript
 interface Stylesheet {
@@ -229,8 +229,8 @@ se renderizará como:
 
 ## Plugins
 
-La función de renderizado puede extenderse mediante plugins. Un plugin puede reescribir el contenido de renderizado definido por el usuario.
-Un plugin es un objeto con las propiedades `name` y `apply`:
+La función de renderizado puede ser extendida por plugins. Un plugin puede reescribir el contenido de renderizado definido por el usuario.
+Un plugin es un objeto con propiedades `name` y `apply`:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
@@ -299,13 +299,6 @@ import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 ```
 
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/es/README.md">Español</a>
-</div>
-```
-
 ```js
 app.get((req, res) => {
   res.send(
@@ -324,7 +317,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones del plugin:
+Opciones de plugin:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -368,7 +361,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones del plugin:
+Opciones de plugin:
 
 ```typescript
 export type UserParams = {
@@ -399,14 +392,16 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Añade scripts y estilos del archivo de manifiesto de assets de webpack.
+Añade scripts y estilos del archivo de manifiesto de activos de webpack.
 
 Uso:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
+const renderLayout = createRenderFunction([
+  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+]);
 
 app.get((req, res) => {
   res.send(
@@ -422,7 +417,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones del plugin:
+Opciones de plugin:
 
 ```typescript
 export interface LayoutOptions {
@@ -457,7 +452,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones del plugin:
+Opciones de plugin:
 
 ```typescript
 interface UikitPluginOptions {
@@ -470,7 +465,7 @@ interface UikitPluginOptions {
 
 Añade información de versiones de microfrontends a la página.
 
-Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, las cuales pueden ser utilizadas por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
+Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, el cual puede ser utilizado por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
 
 Puede ser utilizado en combinación con [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) y la opción `moduleFederation.remotesRuntimeVersioning` para cargar automáticamente módulos remotos con las versiones correspondientes.
 
@@ -497,7 +492,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones del plugin:
+Opciones de plugin:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -563,23 +558,28 @@ app.get('/', async function (req, res) {
   const {htmlAttributes, helpers, bodyContent} = content;
 ```
 
-```html
+```markdown
+res.write(`
         <!DOCTYPE html>
-        <html lang="es">
+        <html ${helpers.attrs({...htmlAttributes})}>
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Mi Aplicación</title>
-            <link rel="stylesheet" href="/styles.css">
+            ${renderHeadContent(content)}
         </head>
-        <body>
-            <h1>Bienvenido a Mi Aplicación</h1>
-            <p>Esta es una página de ejemplo.</p>
-            <div id="root"></div>
-            <script>
-                window.__DATA__ = {"user": "ejemplo"};
-            </script>
+        <body ${helpers.attrs(bodyContent.attributes)}>
+            ${renderBodyContent(content)}
+    `);
+
+  const data = await getUserData();
+
+  res.write(`
+            ${content.renderHelpers.renderInlineScript(`
+                window.__DATA__ = ${htmlescape(data)};
+            `)}
         </body>
         </html>
-    
+    `);
+  res.end();
+});
+
+app.listen(3000);
 ```

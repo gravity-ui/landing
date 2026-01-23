@@ -8,15 +8,15 @@ Yagr est un moteur de rendu de graphiques HTML5 Canvas haute performance basé s
 
 -   [Lignes, aires, colonnes et points comme types de visualisation. Configurables par série](https://yagr.tech/en/api/visualization)
 -   [Info-bulle de légende configurable](https://yagr.tech/en/plugins/tooltip)
--   [Axes avec des options supplémentaires pour la précision des décimales](https://yagr.tech/en/api/axes)
--   [Échelles avec des fonctions de plage et des transformations configurables](https://yagr.tech/en/api/scales)
+-   [Axes avec options supplémentaires pour la précision des décimales](https://yagr.tech/en/api/axes)
+-   [Échelles avec fonctions de plage et transformations configurables](https://yagr.tech/en/api/scales)
 -   [Lignes et bandes de tracé. Couche de dessin configurable](https://yagr.tech/en/plugins/plot-lines)
 -   [Graphiques réactifs](https://yagr.tech/en/api/settings#adaptivity) (nécessite [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver))
 -   [Support de haut niveau pour les aires/colonnes empilées](https://yagr.tech/en/api/scales#stacking)
 -   [Marqueurs configurables](./docs/api/markers.md)
 -   [Thème clair/sombre](https://yagr.tech/en/api/settings#theme)
 -   [Normalisation des données](https://yagr.tech/en/api/scales#normalization)
--   [Règle, marqueurs de curseur et accrochage configurables](https://yagr.tech/en/api/cursor)
+-   [Raccourcis, marqueurs de curseur et accrochage configurables](https://yagr.tech/en/api/cursor)
 -   Typescript
 -   [Localisation](https://yagr.tech/en/api/settings#localization)
 -   [Variables CSS dans les noms de couleurs](https://yagr.tech/en/api/css)
@@ -27,7 +27,7 @@ Yagr est un moteur de rendu de graphiques HTML5 Canvas haute performance basé s
 
 ## [Documentation](https://yagr.tech)
 
-## Démarrage rapide
+## Démarrage Rapide
 
 ```
 npm i @gravity-ui/yagr
@@ -80,6 +80,6 @@ Besoin de quelque chose de spécifique ? Yagr propose des exemples utiles dans l
 
 1. Clonez le dépôt.
 2. Installez les dépendances `npm i`.
-3. Exécutez `npm run build`.
-4. Exécutez `npx http-server .`.
+3. Lancez `npm run build`.
+4. Lancez `npx http-server .`.
 5. Ouvrez les exemples dans le navigateur en suivant la sortie de http-server.

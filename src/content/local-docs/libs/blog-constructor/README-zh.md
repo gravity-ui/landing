@@ -14,7 +14,7 @@ npm install @gravity-ui/blog-constructor
 
 ### 入门指南
 
-Blog-constructor 同时提供客户端组件和服务器端组件供导入。博客页面作为 React 组件导入。为了确保其正常运行，请将其包裹在 `BlogConstructorProvider` 中：
+Blog-constructor 同时包含客户端组件和服务器组件供您导入。博客页面作为 React 组件导入。为了确保其正常运行，请将其包裹在 `BlogConstructorProvider` 中：
 
 ```jsx
 import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
@@ -49,7 +49,7 @@ import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructo
 
 关于 [providerProps](./src/constructor/README.md) 的文档。
 
-此外，blog-constructor 还提供了服务器端组件，以帮助您在需要时转换数据：
+此外，blog-constructor 还提供了服务器组件，以帮助您在需要时转换数据：
 
 ```jsx
 import {
@@ -60,7 +60,7 @@ import {
 } from '@gravity-ui/blog-constructor/server';
 ```
 
-`blog-constructor` 是一个基于 `uikit` 的库，我们使用了 uikit 的 `i18n` 实例。要设置国际化，您只需使用 uikit 的 `configure` 方法：
+`blog-constructor` 是一个 `uikit-based` 库，我们使用了 uikit 中的 `i18n` 实例。要设置国际化，您只需使用 uikit 中的 `configure` 函数：
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';

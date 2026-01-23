@@ -25,7 +25,7 @@ La configuración base también incluye reglas de TypeScript.
 
 ### Prettier
 
-Si usas Prettier, añade la configuración correspondiente:
+Si estás usando Prettier, añade la configuración correspondiente:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';

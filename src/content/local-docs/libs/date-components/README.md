@@ -100,4 +100,3 @@ To start the development server with storybook run the following:
 ```shell
 npm start
 ```
-

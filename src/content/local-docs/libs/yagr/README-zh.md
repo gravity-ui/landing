@@ -1,23 +1,23 @@
 # Ẏagr <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/yagr.svg" width="24px" height="24px" />
 
-Yagr 是一个高性能的 HTML5 Canvas 图表渲染器，基于 [uPlot](https://github.com/leeoniya/uPlot) 构建。它为 uPlot 图表提供了高级功能。
+Yagr 是一个高性能的 HTML5 Canvas 图表渲染器，基于 [uPlot](https://github.com/leeoniya/uPlot)。它为 uPlot 图表提供了高级功能。
 
 <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/demo.png" width="800" />
 
 ## 特性
 
--   [折线图、面积图、柱状图和点图等可视化类型。可按系列配置](https://yagr.tech/en/api/visualization)
+-   [折线图、面积图、柱状图和散点图等可视化类型。可按系列配置](https://yagr.tech/en/api/visualization)
 -   [可配置的图例提示框](https://yagr.tech/en/plugins/tooltip)
 -   [带有额外小数精度选项的坐标轴](https://yagr.tech/en/api/axes)
 -   [具有可配置范围函数和转换的刻度](https://yagr.tech/en/api/scales)
--   [绘图线和绘图带。可配置的绘制层](https://yagr.tech/en/plugins/plot-lines)
+-   [参考线和参考区域。可配置的绘制层](https://yagr.tech/en/plugins/plot-lines)
 -   [响应式图表](https://yagr.tech/en/api/settings#adaptivity) (需要 [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver))
 -   [堆叠面积图/柱状图的高级支持](https://yagr.tech/en/api/scales#stacking)
 -   [可配置的标记点](./docs/api/markers.md)
 -   [浅色/深色主题](https://yagr.tech/en/api/settings#theme)
 -   [数据归一化](https://yagr.tech/en/api/scales#normalization)
--   [可配置的十字准线、鼠标标记和吸附](https://yagr.tech/en/api/cursor)
--   TypeScript
+-   [可配置的十字准线、鼠标标记和吸附功能](https://yagr.tech/en/api/cursor)
+-   TypeScript 支持
 -   [本地化](https://yagr.tech/en/api/settings#localization)
 -   [颜色名称中的 CSS 变量](https://yagr.tech/en/api/css)
 -   [分页式内联图例](https://yagr.tech/en/plugins/legend)
@@ -29,7 +29,7 @@ Yagr 是一个高性能的 HTML5 Canvas 图表渲染器，基于 [uPlot](https:/
 
 ## 快速入门
 
-```
+```bash
 npm i @gravity-ui/yagr
 ```
 

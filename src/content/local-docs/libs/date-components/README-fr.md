@@ -77,7 +77,7 @@ function App() {
 }
 ```
 
-Les composants disposent de traductions en anglais et en russe. Pour ajouter des traductions dans d'autres langues, utilisez `addLanguageKeysets` de `@gravity-ui/uikit` :
+Les composants ont des traductions en anglais et en russe. Pour ajouter des traductions dans d'autres langues, utilisez `addLanguageKeysets` de `@gravity-ui/uikit` :
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';

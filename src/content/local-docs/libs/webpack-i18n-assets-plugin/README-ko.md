@@ -4,10 +4,10 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
 
 ### 기능
 
-- i18n 텍스트를 번들에 인라인 처리합니다 (최종 문자열에 매개변수 치환 포함).
-- 단일 빌드에서 모든 로케일에 대한 에셋을 생성합니다.
+- i18n 텍스트를 번들에 인라인 처리합니다 (최종 문자열에 매개변수를 치환하면서).
+- 단일 빌드에서 모든 로케일에 대한 애셋을 생성합니다.
 - 이 플러그인은 프로덕션 빌드에서만 작동합니다!
-- 지역화 함수 인수에 리터럴만 지원합니다 (템플릿 문자열 및 변수는 허용되지 않음).
+- 지역화 함수 인자에서 리터럴만 지원합니다 (템플릿 문자열 및 변수는 허용되지 않음).
 
 ## 📝 사용 방법
 
@@ -17,7 +17,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
     npm i -D @gravity-ui/webpack-i18n-assets-plugin
     ```
 
-2. Webpack에 플러그인을 연결합니다 (`@gravity-ui/app-builder` 예시):
+2. Webpack에 플러그인을 연결합니다 (예시: `@gravity-ui/app-builder`):
 
     Webpack 설정 예시 (`webpack.config.js`):
 
@@ -33,7 +33,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
 
     module.exports = {
         output: {
-            filename: '[name].[locale].js', // filename에 [locale]이 필수입니다.
+            filename: '[name].[locale].js', // 파일 이름에 [locale]이 필수입니다.
         },
 
         plugins: [
@@ -44,7 +44,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
     }
     ```
 
-    각 로케일에 대한 에셋 매니페스트를 생성하려는 경우 예시 (`webpack.config.js`):
+    각 로케일에 대한 애셋 매니페스트를 생성하려는 경우 예시 (`webpack.config.js`):
 
     ```js
     const {applyPluginToWebpackConfig} = require('@gravity-ui/webpack-i18n-assets-plugin');
@@ -62,7 +62,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
     };
 
     // applyPluginToWebpackConfig를 사용하면 WebpackAssetsManifest 플러그인도 함께 연결되어
-    // 각 로케일에 대한 에셋 매니페스트를 생성합니다.
+    // 각 로케일에 대한 애셋 매니페스트를 생성합니다.
     module.exports = applyPluginToWebpackConfig(webpackConfig, {locales});
     ```
 
@@ -79,7 +79,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
     };
 
     // applyPluginToWebpackConfig를 사용하면 WebpackAssetsManifest 플러그인도 함께 연결되어
-    // 각 로케일에 대한 에셋 매니페스트를 생성합니다.
+    // 각 로케일에 대한 애셋 매니페스트를 생성합니다.
     const config: ServiceConfig = {
         client: {
             webpack: (originalConfig) => applyPluginToWebpackConfig(originalConfig, {locales}),
@@ -87,7 +87,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
     }
     ```
 
-3. 서버에서 에셋 매니페스트를 통한 동적 정적 파일 설정을 구성합니다 (`@gravity-ui/app-layout` 예시):
+3. 서버에서 애셋 매니페스트로부터 동적 정적 파일을 구성합니다 (예시: `@gravity-ui/app-layout` 사용):
 
     ```typescript
     import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -123,7 +123,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
 
 타입: [`ImportResolver`](./src/types.ts#18)
 
-가져오기(import)를 처리하고 지역화 함수로 간주되어야 하는 가져오기(import)를 표시하는 함수입니다 (이후, 표시된 식별자에 대한 호출은 replacer에 의해 처리됩니다).
+가져오기(import)를 처리하고 어떤 가져오기가 지역화 함수로 간주되어야 하는지 표시하는 함수입니다 (이후, 표시된 식별자에 대한 호출은 replacer에 의해 처리됩니다).
 
 시그니처는 webpack의 원래 [importSpecifier](https://webpack.js.org/api/parser/#importspecifier)와 유사합니다.
 
@@ -131,7 +131,7 @@ Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로
 
 ```typescript
 const importResolver = (source: string, exportName: string, _identifierName: string, module: string) => {
-    // 특정 경로를 기반으로 모듈 처리를 무시해야 하는 경우, 이와 같이 처리할 수 있습니다.
+    // 특정 경로를 기반으로 모듈 처리를 무시해야 하는 경우, 다음과 같이 처리할 수 있습니다.
     if (module.startsWith('src/units/compute')) {
         return undefined;
     }
@@ -145,7 +145,7 @@ const importResolver = (source: string, exportName: string, _identifierName: str
         };
     }
 
-    // 헬퍼 함수의 가져오기 처리 및 공통 키셋(네임스페이스)에 속함을 지정합니다.
+    // 헬퍼 함수의 가져오기 처리 및 해당 함수가 공통 키셋(네임스페이스)에 속함을 지정합니다.
     // import {ci18n} from 'ui/utils/i18n'
     if (source === 'ui/utils/i18n' && exportName === 'ci18n') {
         return {
@@ -163,7 +163,7 @@ const importResolver = (source: string, exportName: string, _identifierName: str
 
 타입: [`DeclarationResolver`](./src/types.ts#30)
 
-변수 선언을 처리하고 지역화 함수로 간주되어야 하는 변수를 표시하는 함수입니다 (이후, 표시된 식별자에 대한 호출은 replacer 함수에 의해 처리됩니다).
+변수 선언을 처리하고 어떤 변수가 지역화 함수로 간주되어야 하는지 표시하는 함수입니다 (이후, 표시된 식별자에 대한 호출은 replacer 함수에 의해 처리됩니다).
 
 예시:
 
@@ -171,34 +171,27 @@ const importResolver = (source: string, exportName: string, _identifierName: str
 import type {VariableDeclarator} from 'estree';
 
 const declarationResolver = (declarator: VariableDeclarator, module: string) => {
-    // 특정 경로를 기반으로 모듈 처리를 무시해야 하는 경우, 이와 같이 처리할 수 있습니다.
+    // 특정 경로를 기반으로 모듈 처리를 무시해야 하는 경우, 다음과 같이 처리할 수 있습니다.
     if (module.startsWith('src/units/compute')) {
         return undefined;
     }
 ```
 
-```html
-<p>
-    <a href="README.md">English</a> |
-    <a href="README.ko.md">Korean</a>
-</p>
-```
-
 ```typescript
 // const i18nK = i18n.bind(null, 'keyset');
-if (
-    declarator.id.type === 'Identifier' &&
-    declarator.id.name.startsWith('i18n') &&
-    declarator.init &&
-    isI18nBind(declarator.init)
-) {
-    return {
-        functionName: declarator.id.name,
-        keyset: getKeysetFromBind(declarator.init),
-    };
-}
+    if (
+        declarator.id.type === 'Identifier' &&
+        declarator.id.name.startsWith('i18n') &&
+        declarator.init &&
+        isI18nBind(declarator.init)
+    ) {
+        return {
+            functionName: declarator.id.name,
+            keyset: getKeysetFromBind(declarator.init),
+        };
+    }
 
-return undefined;
+    return undefined;
 };
 ```
 
@@ -267,7 +260,7 @@ function replacer(
     const value = this.resolveKey(key, keyset);
 
     // 필요에 따라 대체 옵션을 구현하세요.
-    // 예를 들어, 키가 복수형이면 함수 호출을 반환하는 등.
+    // 예를 들어, 키가 복수형이면 함수 호출을 반환하는 등
 
     return JSON.stringify(value);
 };
@@ -310,7 +303,7 @@ i18n('component.navigation', 'some_key_with_param', { someParam: 'hello' });
 
 Replacer는 추가로 다음을 수행합니다:
 
-1. 매개변수를 문자열로 인라인합니다. 예를 들어, 키 값이 다음과 같다고 가정해 봅시다:
+1. 인수를 문자열로 인라인 처리합니다. 예를 들어, 키 값이 다음과 같다고 가정해 보겠습니다:
 
     ```typescript
     const keyset = {
@@ -350,19 +343,12 @@ Replacer는 추가로 다음을 수행합니다:
 
 ## ℹ️ FAQ
 
-```html
-<p>
-  <a href="README.md">English</a> |
-  <a href="README.ko.md">한국어</a>
-</p>
-```
+### [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin)와 비교하면 어떤가요?
 
-### [webpack-assets-manifest-localize](https://github.com/privatenumber/webpack-localize-assets-plugin)와 비교하면 어떤가요?
-
-이 플러그인을 구현하기 위해 webpack-localize-assets-plugins 패키지의 아이디어를 사용했습니다 (패키지 제작자에게 정말 감사합니다!).
+이 플러그인을 구현하기 위해 webpack-localize-assets-plugins 패키지의 아이디어를 사용했습니다 (패키지 제작자에게 깊이 감사드립니다!).
 
 차이점은 다음과 같습니다.
 
-- 네임스페이스 헬퍼 (i18next의 `useTranslation` 등), 다른 모듈에서 가져온 함수 등 모든 종류의 국제화 함수와 함께 작업할 수 있는 더 편리한 API
+- 네임스페이스 헬퍼(i18next의 useTranslation 등), 다른 모듈에서 가져온 함수 등 모든 종류의 국제화 함수와 함께 작업할 수 있는 더 편리한 API
 - 소스 코드에 상대적인 소스 맵의 올바른 생성
 - webpack 5만 지원합니다. webpack 4 지원은 제거되었습니다.

@@ -1,6 +1,6 @@
 # 🌍 Gravity-UI i18n Tools
 
-Dieses Repository enthält allgemeine Dienstprogramme, Bibliotheken und Plugins, die für i18n in Gravity-UI verwendet werden.
+Dieses Repository enthält gängige Hilfsprogramme, Bibliotheken und Plugins, die für i18n in Gravity-UI verwendet werden.
 
 ## Nützliche Links
 
@@ -39,7 +39,7 @@ Dieses Repository enthält allgemeine Dienstprogramme, Bibliotheken und Plugins,
     # Baue das i18n-cli-Paket
     pnpm nx build @gravity-ui/i18n-cli
 
-    # Führe Typecheck für das i18n-cli-Paket aus
+    # Führe Typüberprüfung für das i18n-cli-Paket aus
     pnpm nx typecheck @gravity-ui/i18n-cli
 
     # Führe Lint für alle Pakete aus

@@ -14,7 +14,7 @@ Gravity UI 项目的 Stylelint 配置。
 npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 ```
 
-## 使用
+## 用法
 
 在项目根目录下添加 `.stylelintrc` 文件，内容如下：
 
@@ -34,7 +34,7 @@ npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 }
 ```
 
-### 顺序
+### 排序
 
 如果您想在 CSS 文件中对属性进行排序，请在根配置中扩展额外的规则：
 

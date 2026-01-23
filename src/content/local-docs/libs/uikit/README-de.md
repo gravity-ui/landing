@@ -38,7 +38,7 @@ const SubmitButton = <Button view="action" size="l" />;
 
 ### Styles
 
-UIKit kommt mit Basis-Styling und einem Theme. Damit alles gut aussieht, fügen Sie dies am Anfang Ihrer Einstiegsdatei hinzu:
+UIKit wird mit Basis-Styling und einem Theme geliefert. Damit alles gut aussieht, fügen Sie dies am Anfang Ihrer Einstiegsdatei ein:
 
 ```js
 // index.js
@@ -49,7 +49,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 // ...
 ```
 
-UIKit unterstützt verschiedene Themes: hell, dunkel und deren Kontrastvarianten. Ihre App muss innerhalb von `ThemeProvider` gerendert werden:
+UIKit unterstützt verschiedene Themes: hell, dunkel und deren kontrastreiche Varianten. Ihre App muss innerhalb von `ThemeProvider` gerendert werden:
 
 ```js
 import {createRoot} from 'react-dom/client';
@@ -63,7 +63,7 @@ root.render(
 );
 ```
 
-Es ist möglich, beim SSR anfängliche Root-CSS-Klassen zu generieren, um Theme-Flimmern zu vermeiden:
+Es ist möglich, beim SSR anfängliche Root-CSS-Klassen zu generieren, um Theme-Flackern zu vermeiden:
 
 ```js
 import {getRootClassName} from '@gravity-ui/uikit/server';

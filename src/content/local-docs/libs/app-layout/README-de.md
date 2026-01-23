@@ -60,7 +60,7 @@ interface RenderParams<Data, Plugins> {
   links?: Link[];
   // Script-Tags
   scripts?: Script[];
-  // Stylesheet-Tags
+  // Stylesheet-Links
   styleSheets?: Stylesheet[];
   // Script-Tags mit eingebettetem Code
   inlineScripts?: string[];
@@ -71,13 +71,13 @@ interface RenderParams<Data, Plugins> {
   bodyContent?: {
     // Klassenname für den body-Tag
     className?: string;
-    // Body-Attribute
+    // body-Attribute
     attributes?: string;
-    // Body-Inhalt vor dem div-Tag mit der ID root
+    // Inhalt des body-Tags vor dem div-Tag mit der ID root
     beforeRoot?: string;
     // Innerer HTML-Inhalt des div-Tags mit der ID root
     root?: string;
-    // Body-Inhalt nach dem div-Tag mit der ID root
+    // Inhalt des body-Tags nach dem div-Tag mit der ID root
     afterRoot?: string;
   };
   // Plugin-Optionen
@@ -100,7 +100,7 @@ Beispiel:
 
 ```js
 const meta = [
-  {name: 'description', content: 'Einige Texte'},
+  {name: 'description', content: 'Ein Text'},
   {name: 'robots', content: 'noindex'},
   {name: 'og:title', content: 'Ein Titel'},
 ];
@@ -109,7 +109,7 @@ const meta = [
 Wird gerendert als:
 
 ```html
-<meta name="description" content="Einige Texte" />
+<meta name="description" content="Ein Text" />
 <meta name="robots" content="noindex" />
 <meta property="og:title" content="Ein Titel" />
 ```
@@ -203,7 +203,7 @@ wird gerendert als:
 <script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
 ```
 
-#### Stylesheets
+#### Style sheets
 
 Beschreibt den Link zu Stylesheets:
 
@@ -236,7 +236,7 @@ Ein Plugin ist ein Objekt mit den Eigenschaften `name` und `apply`:
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // wird über die `renderLayout`-Funktion im `pluginsOptions`-Parameter übergeben.
+    options: Options | undefined; // wird über den Parameter `pluginsOptions` der Funktion `renderLayout` übergeben.
     commonOptions: CommonOptions;
     renderContent: RenderContent;
     /** @deprecated verwende stattdessen `renderContent.helpers` */
@@ -299,65 +299,11 @@ import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 ```
 
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/de/README.md">Deutsch</a>
-</div>
-```
-
-# @gravity-ui/app-layout
-
-This library provides a set of plugins for rendering HTML layouts with server-side rendering (SSR) support. It simplifies the integration of various third-party scripts and styles, such as Google Analytics, Yandex Metrika, and microfrontend version information.
-
-## Installation
-
-```bash
-npm install @gravity-ui/app-layout
-# or
-yarn add @gravity-ui/app-layout
-```
-
-## Usage
-
-The core of the library is the `createRenderFunction` which takes an array of plugins and returns a function to render your HTML layout.
-
 ```js
-import {createRenderFunction} from '@gravity-ui/app-layout';
-
-// Create a render function with your desired plugins
-const renderLayout = createRenderFunction([
-  // ... your plugins
-]);
-
-// Use the render function in your Express route
-app.get('/', (req, res) => {
-  res.send(
-    renderLayout({
-      title: 'My Awesome Page',
-      // ... other options
-    }),
-  );
-});
-```
-
-## Plugins
-
-### Google Analytics
-
-Adds Google Analytics tracking to your page.
-
-Usage:
-
-```js
-import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
-
-const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Startseite',
       pluginsOptions: {
         googleAnalytics: {
           useBeaconTransport: true, // aktiviert die Verwendung von navigator.sendBeacon
@@ -371,7 +317,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+Plugin-Optionen:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -398,7 +344,7 @@ const renderLayout = createRenderFunction([createYandexMetrikaPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Startseite',
       pluginsOptions: {
         yandexMetrika: {
           counter: {
@@ -415,7 +361,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+Plugin-Optionen:
 
 ```typescript
 export type UserParams = {
@@ -446,21 +392,19 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Fügt Skripte und Stile aus der Webpack-Assets-Manifestdatei hinzu.
+Fügt Skripte und Stile aus der Webpack Assets Manifest-Datei hinzu.
 
 Verwendung:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([
-  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
-]);
+const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
 
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Startseite',
       pluginsOptions: {
         layout: {
           name: 'home',
@@ -471,7 +415,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+Plugin-Optionen:
 
 ```typescript
 export interface LayoutOptions {
@@ -494,7 +438,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Startseite',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -506,7 +450,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+Plugin-Optionen:
 
 ```typescript
 interface UikitPluginOptions {
@@ -517,9 +461,9 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-Fügt Informationen zu den Versionen von Microfrontends zur Seite hinzu.
+Fügt Informationen zu Microfrontend-Versionen zur Seite hinzu.
 
-Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die bereitgestellten Versionen von Microfrontends enthält. Dies kann von Modul-Federation oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
+Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die bereitgestellten Microfrontend-Versionen enthält. Dies kann von Modul-Bundlern oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
 
 Es kann in Kombination mit [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) und der Option `moduleFederation.remotesRuntimeVersioning` verwendet werden, um Remote-Module mit den entsprechenden Versionen automatisch zu laden.
 
@@ -533,7 +477,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Startseite',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -546,13 +490,13 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+Plugin-Optionen:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
 ```
 
-### Helpers
+### Helfer
 
 Es gibt einen Helfer, um alle Plugins zu erstellen:
 
@@ -565,7 +509,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: 'Home page',
+        title: 'Startseite',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -581,7 +525,7 @@ app.get((req, res) => {
 })
 ```
 
-## Alternative usage
+## Alternative Verwendung
 
 Mit Teil-Renderern `generateRenderContent`, `renderHeadContent`, `renderBodyContent` über HTML-Streaming:
 
@@ -606,13 +550,14 @@ app.get('/', async function (req, res) {
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
-    title: 'Home page',
+    title: 'Startseite',
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;
 ```
 
-```html
+```markdown
+  res.write(`
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
         <head>

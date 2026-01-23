@@ -1,24 +1,24 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [从 0.x 迁移到 1.x 的指南 →](docs/migration-guides/v0-to-v1.md)
+> [迁移指南 0.x 到 1.x →](docs/migration-guides/v0-to-v1.md)
 
-一个图形可视化库，结合了两种最佳方案：
-- **Canvas**：在查看整个图形时提供高**性能**
+一个图表可视化库，融合了两种最佳方案：
+- **Canvas**：在查看完整图表时提供高**性能**
 - **HTML/React**：在缩放时提供丰富的**交互性**
 
-告别在性能和交互性之间二选一的困境。非常适合大型图表、流程图和节点式编辑器。
+告别在性能和交互性之间二选一的困境。非常适合大型图表、流程图和基于节点的编辑器。
 
 ## 动机
 
-现代 Web 应用通常需要复杂的可视化和交互性，但现有的解决方案通常只专注于一种渲染技术：
+现代 Web 应用通常需要复杂的可视化和交互性，但现有的解决方案通常只侧重于一种渲染技术：
 
-- **Canvas**：为复杂图形提供高**性能**，但在文本处理和交互性方面受限。
-- **HTML DOM**：方便构建界面，但在处理复杂图形或大量元素时**效率较低**。
+- **Canvas**：提供复杂图形的高性能，但在文本处理和交互性方面受限。
+- **HTML DOM**：方便构建界面，但对于复杂图形或大量元素效率较低。
 
-@gravity-ui/graph 通过根据缩放级别**自动切换 Canvas 和 HTML** 来解决这个问题：
-- **缩放较远时**：使用 Canvas 高效渲染整个图形
-- **中等缩放时**：显示具有基本交互性的示意图
-- **缩放较近时**：切换到 HTML/React 组件以实现丰富的交互
+@gravity-ui/graph 通过根据缩放级别自动在 Canvas 和 HTML 之间切换来解决这个问题：
+- **缩小视图**：使用 Canvas 高效渲染整个图表
+- **中等缩放**：显示具有基本交互性的示意图
+- **放大视图**：切换到 HTML/React 组件以实现丰富的交互
 
 ## 工作原理
 
@@ -27,10 +27,10 @@
 1. 在低缩放级别，所有内容都在 Canvas 上渲染以获得性能。
 2. 放大到详细视图时，`GraphCanvas` 组件会：
    - 跟踪摄像机的视口和缩放变化
-   - 计算当前视口中可见的块（带有填充以实现平滑滚动）
+   - 计算当前视口中可见的块（包含填充以实现平滑滚动）
    - **仅为可见块渲染 React 组件**
    - 在滚动或缩放时自动更新列表
-   - 缩放时移除 React 组件
+   - 缩小视图时移除 React 组件
 
 ```typescript
 // React 组件渲染示例
@@ -169,13 +169,6 @@ const graph = new Graph({
 }, container);
 ```
 
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/zh/README.md">中文</a>
-</div>
-```
-
 // 添加节点和连接
 graph.setEntities({
     blocks: [
@@ -246,7 +239,7 @@ graph.zoomTo("center", { padding: 100 });
 1. 系统
    - [组件生命周期](docs/system/component-lifecycle.md)
    - [事件](docs/system/events.md)
-   - [图设置](docs/system/graph-settings.md)
+   - [图表设置](docs/system/graph-settings.md)
    - [公共 API](docs/system/public_api.md)
    - [调度器系统](docs/system/scheduler-system.md)
 

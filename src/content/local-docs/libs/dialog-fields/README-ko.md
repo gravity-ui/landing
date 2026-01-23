@@ -1,14 +1,14 @@
-## 짧은 설명
+## 간략한 설명
 
-`DFDialog` 컴포넌트는 폼 생성을 용이하게 하기 위해 만들어졌으며, 내부적으로 `react-final-form`을 사용합니다.
-몇 가지 미리 정의된 필드 유형을 지원하지만, 사용자는 `registerDialogControl`을 사용하여 새로운 필드를 등록하여 확장할 수 있습니다.
+`DFDialog` 컴포넌트는 폼 생성을 쉽게 하기 위한 목적으로, 내부적으로 `react-final-form`을 사용합니다.
+몇 가지 미리 정의된 필드 유형을 지원하지만, `registerDialogControl`을 사용하여 새로운 필드를 등록하여 확장할 수 있습니다.
 
 ### 컨트롤
 
 - [기본 컨트롤](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-00-base-controls)
   - `plain` - 정적 텍스트
   - `text` - 편집 가능한 텍스트
-  - `multi-text` - 사용자가 정의한 문자열 배열
+  - `multi-text` - 사용자가 정의하는 문자열 배열
   - `checkbox` - 체크박스
   - `tumbler` - 토글 스위치
   - `radio` - 라디오 버튼
@@ -16,12 +16,12 @@
   - `multi-editable-list` - 제거 가능한 문자열의 다중 목록
   - `text area` - 텍스트 영역
   - `select` - 선택
-  - `block` - `ReactNode` 추가 가능
+  - `block` - ReactNode 추가 가능
 - [사용자 정의 컨트롤 등록](https://preview.yandexcloud.dev/dialog-fields/?path=/story/tutorials-custom-control-registration)
 
 ### 기능
 
-- 인플레이스 및 모달 보기
+- 인플레이스(Inplace) 및 모달(Modal) 보기
 - [단일 탭](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) 및 [여러 탭 폼](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
 - [세로/가로 탭](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
 - [숨겨진 필드 및 탭](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
@@ -36,7 +36,7 @@
 
 ```bash
 $ npm install @gravity-ui/dialog-fields
-# 아직 설치하지 않았다면 필요한 react/react-dom 버전을 설치하세요
+# 아직 설치하지 않았다면 필요한 react/react-dom 버전을 사용하세요
 $ npm install @gravity-ui/dialog-fields react@18 react-dom@18
 ```
 

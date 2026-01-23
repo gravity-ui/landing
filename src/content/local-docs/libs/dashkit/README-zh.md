@@ -78,7 +78,7 @@ interface DashKitProps {
 - **defaultGlobalParams**, **globalParams**: 影响所有小部件的[参数](#Params)。在 DataLens 中，`defaultGlobalParams` 是在仪表盘设置中设置的全局参数。`globalParams` 是可以在 URL 中设置的全局参数。
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)。
 - **settings**: DashKit 设置。
-- **context**: 将作为 props 传递给所有小部件的对象。
+- **context**: 将会传递给所有小部件的对象。
 - **overlayControls**: 在编辑时覆盖小部件控件的对象。如果未传递，将显示基本控件。如果传递 `null`，则仅显示关闭按钮或自定义菜单。
 - **overlayMenuItems**: 自定义下拉菜单项
 - **noOverlay**: 如果为 `true`，则在编辑时不会显示覆盖层和控件。
@@ -90,10 +90,10 @@ interface DashKitProps {
 - **onDrag**: ReactGridLayout 在项目拖动过程中调用
 - **onDragStop**: ReactGridLayout 在项目拖动停止时调用
 - **onResizeStart**: ReactGridLayout 在项目调整大小开始时调用
-- **onResize**: ReactGridLayout 在项目调整大小过程中调用
+- **onResize**: ReactGridLayout 在项目调整大小时调用
 - **onResizeStop**: ReactGridLayout 在项目调整大小停止时调用
-- **getPreparedCopyItemOptions**: 在将复制的项目保存到本地存储之前，用于将复制的项目转换为可序列化对象。它应该替代已弃用的 `context.getPreparedCopyItemOptions` prop。
-- **onCopyFulfill**: 在项目复制成功完成时（`error=null` 且 `data` 已定义）调用，否则以 `error: Error`（无 `data`）调用。
+- **getPreparedCopyItemOptions**: 在将复制的项目保存到本地存储之前，用于将复制的项目转换为可序列化对象。它应该取代已弃用的 `context.getPreparedCopyItemOptions` prop
+- **onCopyFulfill**: 在项目复制成功完成时（`error=null` 且 `data` 已定义）调用，否则以 `error: Error` 而不带 `data` 调用
 
 ## 用法
 
@@ -111,7 +111,7 @@ interface DashKitProps {
 
 - DashKit.setSettings
 
-  用于全局 DashKit 设置（例如，小部件之间的边距、默认小部件大小和小部件覆盖菜单）
+  用于全局 DashKit 设置（例如小部件之间的边距、默认小部件大小和小部件覆盖菜单）
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -171,31 +171,6 @@ Config 示例：
 import {DashKitProps} from '@gravity-ui/dashkit';
 ```
 
-```html
-<!-- Language options -->
-<div class="language-options">
-  <a href="/en/README.md">English</a>
-  <a href="/zh/README.md">中文</a>
-</div>
-
-# DashKit
-
-DashKit 是一个用于创建和管理仪表板的库。它提供了一个灵活的框架来构建交互式仪表板，允许用户自定义布局、添加和删除小部件，并配置小部件的参数。
-
-## 安装
-
-```bash
-npm install @gravity-ui/dashkit
-# or
-yarn add @gravity-ui/dashkit
-```
-
-## 用法
-
-### 配置
-
-DashKit 的核心是其配置对象，它定义了仪表板的布局、小部件及其数据。
-
 ```ts
 const config: DashKitProps['config'] = {
   salt: '0.46703554571365613',
@@ -205,7 +180,7 @@ const config: DashKitProps['config'] = {
       id: 'tT',
       data: {
         size: 'm',
-        text: 'Caption',
+        text: '标题',
         showInTOC: true,
       },
       type: 'title',
@@ -215,7 +190,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'Ea',
       data: {
-        text: 'mode _editActive',
+        text: '模式 _editActive',
         _editActive: true,
       },
       type: 'text',
@@ -224,7 +199,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'zR',
       data: {
-        text: '### Text',
+        text: '### 文本',
       },
       type: 'text',
       namespace: 'default',
@@ -275,7 +250,7 @@ const config: DashKitProps['config'] = {
 };
 ```
 
-### 添加新项
+添加新配置项：
 
 ```ts
 const newLayout = updateLayout: [
@@ -298,12 +273,12 @@ const newLayout = updateLayout: [
 const newConfig = DashKit.setItem({
   item: {
     data: {
-      text: `Some text`,
+      text: `一些文本`,
     },
     namespace: 'default',
     type: 'text',
-    // Optional. If new item needed to be inserted in current layout with predefined dimensions
-    layout: { // Current item inseterted before 'Ea'
+    // 可选。如果需要将新项插入到当前布局中并预设尺寸
+    layout: { // 当前项插入到 'Ea' 之前
       h: 6,
       w: 12,
       x: 0,
@@ -312,13 +287,13 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // Optional. New layout values for existing items when new element is dropped from ActionPanel
+    // 可选。当新元素从 ActionPanel 拖放时，现有项的新布局值
     updateLayout: newLayout,
   },
 });
 ```
 
-### 修改现有项
+修改现有配置项：
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -326,7 +301,7 @@ const newConfig = DashKit.setItem({
     id: 'tT', // item.id
     data: {
       size: 'm',
-      text: `New caption`,
+      text: `新的标题`,
     },
     namespace: 'default',
     type: 'title',
@@ -335,7 +310,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-### 删除项
+删除配置项：
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -349,7 +324,7 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 });
 ```
 
-### 参数
+### Params
 
 ```ts
 type Params = Record<string, string | string[]>;
@@ -366,8 +341,8 @@ type Params = Record<string, string | string[]>;
 
 ### itemsStateAndParams
 
-一个对象，用于存储小部件参数和状态以及参数更改队列。
-它有一个 `__meta__` 字段，用于存储队列和元信息。
+存储小部件参数和状态以及参数更改队列的对象。
+它有一个 `__meta__` 字段用于存储队列和元信息。
 
 ```ts
 interface StateAndParamsMeta = {
@@ -393,7 +368,7 @@ interface ItemsStateAndParamsBase {
 type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 ```
 
-### 菜单
+### Menu
 
 您可以在编辑模式下指定自定义的 DashKit 小部件覆盖菜单。
 
@@ -403,7 +378,7 @@ type MenuItem = {
   title?: string; // 字符串标题
   icon?: ReactNode; // 图标节点
   iconSize?: number | string; // 图标大小，以像素为单位的数字或带单位的字符串
-  handler?: (item: ConfigItem) => void; // 自定义菜单项操作处理程序
+  handler?: (item: ConfigItem) => void; // 自定义项操作处理程序
   visible?: (item: ConfigItem) => boolean; // 用于过滤菜单项的可选可见性处理程序
   className?: string; // 自定义类属性
 };
@@ -430,16 +405,11 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string;
-  onDragStart?: (dragProps: ItemDragProps) => void;
-  onDragEnd?: () => void;
-  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean;
+  dragImageSrc?: string; // 拖拽图像预览，默认使用透明的 1px png base64
+  onDragStart?: (dragProps: ItemDragProps) => void; // 当元素从 ActionPanel 拖拽时调用的回调
+  onDragEnd?: () => void; // 当元素被放置或拖拽取消时调用的回调
+  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean; // 当拖拽元素在目标上方时调用的回调
 }
-```
-
-- **dragImageSrc**: 拖拽图像预览，默认为透明的 1px png base64
-- **onDragStart**: 当元素从 ActionPanel 拖拽时调用的回调函数
-- **onDragEnd**: 当元素被放置或拖拽取消时调用的回调函数
 ```
 
 ```ts
@@ -455,7 +425,7 @@ type ItemDragProps = {
 
 ```ts
 type ItemDropProps = {
-    commit: () => void; // 在完成所有配置操作后应调用此回调
+    commit: () => void; // 在所有配置操作完成后应调用此回调
     dragProps: ItemDragProps; // 项拖拽属性
     itemLayout: ConfigLayout; // 计算出的项布局尺寸
     newLayout: ConfigLayout[]; // 元素被放置后的新布局
@@ -546,17 +516,17 @@ const CustomThemeWrapper = (props: {
 
 ## 开发
 
-### 构建与监听
+### 构建与监视
 
 - 构建依赖 `npm ci`
 - 构建项目 `npm run build`
 - 构建 Storybook `npm run start`
 
 默认情况下，Storybook 运行在 `http://localhost:7120/`。
-当 Storybook 运行时，项目中的新更改不一定会被捕获，因此最好手动重新构建项目并重启 Storybook。
+当 Storybook 运行时，项目中的新更改并不总是能及时被识别，因此最好手动重新构建项目并重启 Storybook。
 
 
-### 开发机器上用于开发的 Nginx 配置示例
+### 在开发机器上进行开发的 Nginx 配置示例
 
 ```bash
 server {

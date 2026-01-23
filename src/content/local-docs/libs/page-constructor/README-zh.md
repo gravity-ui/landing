@@ -2,9 +2,9 @@
 
 ## Page constructor
 
-`Page-constructor` 是一个库，用于根据 `JSON` 数据渲染网页或其部分（稍后将支持 `YAML` 格式）。
+`Page-constructor` 是一个用于根据 `JSON` 数据渲染网页或其部分的库（稍后将支持 `YAML` 格式）。
 
-在创建页面时，采用了组件化方法：页面由一组现成的块构建而成，这些块可以按任意顺序放置。每个块都有特定的类型和一组输入数据参数。
+在创建页面时，会采用组件化方法：页面由一组现成的块构建而成，这些块可以按任意顺序放置。每个块都有特定的类型和一组输入数据参数。
 
 有关输入数据格式和可用块列表，请参阅[文档](https://preview.gravity-ui.com/page-constructor/?path=/docs/documentation-blocks--docs)。
 
@@ -24,7 +24,7 @@ npm install @gravity-ui/page-constructor
 npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
 ```
 
-将 `Page Constructor` 插入页面。为了正常工作，它必须包装在 `PageConstructorProvider` 中：
+将 `Page Constructor` 插入页面。为了使其正常工作，它必须被 `PageConstructorProvider` 包裹：
 
 ```tsx
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
@@ -55,13 +55,13 @@ export default App;
 
 这是最简单的连接示例。为了使 YFM 标记生效，您需要在服务器上处理内容并在客户端接收它。
 
-如果您的服务器是独立的应用程序，则需要安装 page-constructor：
+如果您的服务器是独立的应用程序，那么您需要安装 page-constructor：
 
 ```shell
 npm install @gravity-ui/page-constructor
 ```
 
-要处理所有基本块中的 YFM，请调用 `contentTransformer` 并将内容和选项传递给它：
+要处理所有基础块中的 YFM，请调用 `contentTransformer` 并将内容和选项传递给它：
 
 ```ts
 const express = require('express');
@@ -116,11 +116,11 @@ export default App;
 
 ### 现成模板
 
-要启动新项目，您可以使用我们准备的[现成模板（基于 Next.js）](https://github.com/gravity-ui/page-constructor-website-template)。
+要启动新项目，您可以使用我们准备的[基于 Next.js 的现成模板](https://github.com/gravity-ui/page-constructor-website-template)。
 
 ### 静态站点生成器
 
-[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - 使用 @gravity-ui/page-constructor 从 YAML 配置构建静态页面的命令行实用程序。
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - 用于使用 @gravity-ui/page-constructor 从 YAML 配置构建静态页面的命令行实用程序。
 
 ## 文档
 
@@ -196,17 +196,19 @@ interface HeaderData {
 }
 ```
 
-```html
-<!-- Language options -->
-<div class="language-options">
-  <a href="/en/README.md">English</a> |
-  <a href="/zh/README.md">中文</a>
-</div>
+```json
+{
+  "navigationLogo": {
+    "icon": "ImageProps",
+    "text": "string",
+    "url": "string"
+  }
+}
 ```
 
-### Server utils
+### 服务器工具
 
-该包提供了一组用于转换内容的服务器端工具。
+该包提供了一组服务器工具，用于转换您的内容。
 
 ```ts
 const {fullTransform} = require('@gravity-ui/page-constructor/server');
@@ -220,9 +222,9 @@ const {html} = fullTransform(content, {
 });
 ```
 
-底层使用 `diplodoc/transfrom` 包将 Yandex Flavored Markdown 转换为 HTML，因此它也是 peer 依赖项。
+底层使用了一个包将 Yandex Flavored Markdown 转换为 HTML - `diplodoc/transfrom`，它也是对等依赖项。
 
-您也可以在需要的地方使用有用的工具，例如在自定义组件中。
+您也可以在需要的地方使用有用的工具，例如在您的自定义组件中。
 
 ```ts
 const {
@@ -240,13 +242,13 @@ const post = {
 
 您可以在此 [部分](https://github.com/gravity-ui/page-constructor/tree/main/src/text-transform) 找到更多工具。
 
-### Server Utilities 和 Transformers 详细文档
+### 服务器工具和转换器的详细文档
 
-有关使用服务器端工具的全面指南，包括详细的解释和高级用例，请访问 [服务器端工具使用附加章节](./docs/data-preparation.md)。
+有关使用服务器工具的全面指南，包括详细说明和高级用例，请访问 [服务器工具使用附加章节](./docs/data-preparation.md)。
 
-### Custom blocks
+### 自定义块
 
-页面构造器允许您使用用户在其应用程序中定义的块。块是普通的 React 组件。
+页面构造器允许您使用用户在其应用程序中定义的块。块是常规的 React 组件。
 
 要将自定义块传递给构造器：
 
@@ -254,11 +256,11 @@ const post = {
 
 2. 在您的代码中，创建一个对象，以块类型（字符串）作为键，以导入的块组件作为值。
 
-3. 将您创建的对象传递给 `PageConstructor` 组件的 `custom.blocks`、`custom.headers` 或 `custom.subBlocks` 参数（`custom.headers` 指定要单独渲染在常规内容上方的块标题）。
+3. 将您创建的对象传递给 `PageConstructor` 组件的 `custom.blocks`、`custom.headers` 或 `custom.subBlocks` 参数（`custom.headers` 指定要在常规内容上方单独渲染的块标题）。
 
 4. 现在您可以通过指定类型和数据在输入数据（`content` 参数）中使用创建的块。
 
-要在使用自定义块时使用 mixins 和构造器样式变量，请在您的文件中添加导入：
+要在创建自定义块时使用 mixins 和构造器样式变量，请在您的文件中添加导入：
 
 ```css
 @import '~@gravity-ui/page-constructor/styles/styles.scss';
@@ -270,16 +272,16 @@ const post = {
 @import '~@gravity-ui/page-constructor/styles/fonts.scss';
 ```
 
-### Loadable blocks
+### 可加载块
 
-有时需要一个块根据要加载的数据来渲染自身。在这种情况下，可以使用可加载块。
+有时需要一个块根据要加载的数据自行渲染。在这种情况下，可以使用可加载块。
 
-要添加自定义 `loadable` 块，请将 `PageConstructor` 的 `custom.loadable` 属性传递给它，其中数据源名称（字符串）作为键，一个对象作为值。
+要添加自定义 `loadable` 块，请将 `custom.loadable` 属性传递给 `PageConstructor`，其中数据源名称（字符串）作为键，对象作为值。
 
 ```typescript
 export interface LoadableConfigItem {
   fetch: FetchLoadableData; // 数据加载方法
-  component: React.ComponentType; // 传递加载数据的块
+  component: React.ComponentType; // 用于传递加载数据的块
 }
 
 type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
@@ -287,7 +289,7 @@ type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
 
 ### Grid
 
-页面构造器使用 `bootstrap` 网格及其基于 React 组件的实现，您可以在自己的项目中独立使用它们（包括独立于构造器）。
+页面构造器使用 `bootstrap` 网格及其基于 React 组件的实现，您可以在自己的项目中使用它们（包括独立于构造器使用）。
 
 使用示例：
 
@@ -335,10 +337,10 @@ const Page= ({data, logo}: React.PropsWithChildren<PageProps>) => <Navigation da
 
    - 在块或子块目录中添加 `schema.ts` 文件。在此文件中，使用 [`json-schema`](http://json-schema.org/) 格式描述组件的参数验证器。
    - 在 `schema/validators/blocks.ts` 或 `schema/validators/sub-blocks.ts` 文件中导出它。
-   - 在 `schema/index.ts` 文件中将其添加到 `enum` 或 `selectCases` 中。
+   - 在 `schema/index.ts` 文件中的 `enum` 或 `selectCases` 中添加它。
 
 6. 在块目录中，添加 `README.md` 文件，其中包含输入参数的描述。
-7. 在块目录中，在 `__stories__` 文件夹中添加 storybook 演示。故事的所有演示内容应放在故事目录中的 `data.json` 文件中。通用的 `Story` 必须接受块属性的类型，否则 Storybook 中将显示不正确的块属性。
+7. 在块目录中，在 `__stories__` 文件夹中添加 storybook 演示。故事的所有演示内容应放在故事目录中的 `data.json` 中。通用的 `Story` 必须接受块属性的类型，否则 Storybook 中将显示不正确的块属性。
 8. 将块数据模板添加到 `src/editor/data/templates/` 文件夹，文件名应与块类型匹配。
 9. （可选）将块预览图标添加到 `src/editor/data/previews/` 文件夹，文件名应与块类型匹配。
 
@@ -350,7 +352,7 @@ const Page= ({data, logo}: React.PropsWithChildren<PageProps>) => <Navigation da
 
 1. 在 `models/blocks.ts` 文件中，使用 `ThemeSupporting<T>` 泛型定义相应块属性的类型，其中 `T` 是属性的类型。
 
-2. 在块的 `react` 组件文件（例如 `MediaBlock.tsx`）中，使用 `getThemedValue` 和 `useTheme` hook 获取带主题的属性值（请参阅示例）。
+2. 在块的 `react` 组件所在的文件中，通过 `getThemedValue` 和 `useTheme` hook 获取带有主题的属性值（请参阅 `MediaBlock.tsx` 块中的示例）。
 
 3. 为属性验证器添加主题支持：在块的 `schema.ts` 文件中，将该属性包装在 `withTheme` 中。
 
@@ -370,14 +372,14 @@ configure({
 
 要使用地图，请将地图类型、`scriptSrc` 和 `apiKey` 放在 `PageConstructorProvider` 的 `mapContext` 字段中。
 
-您可以在项目根目录的 `.env.development` 文件中为开发模式定义环境变量。
+您可以在项目根目录下的 `.env.development` 文件中为开发模式定义环境变量。
 `STORYBOOK_GMAP_API_KEY` - google maps 的 apiKey
 
 ### Analytics
 
 #### Init
 
-要开始使用任何分析功能，请将一个处理程序传递给构造器。该处理程序必须在项目端创建。处理程序将接收 `default` 和 `custom` 事件对象。传递的处理程序将在按钮、链接、导航和控件点击时触发。由于只有一个处理程序用于处理所有事件，因此在创建处理程序时请注意如何处理不同的事件。有一些预定义的字段可帮助您构建复杂的逻辑。
+要开始使用任何分析功能，请将一个处理程序传递给构造器。该处理程序必须在项目端创建。处理程序将接收 `default` 和 `custom` 事件对象。传递的处理程序将在按钮、链接、导航和控件点击时触发。由于只有一个处理程序用于所有事件处理，因此在创建处理程序时请注意如何处理不同的事件。提供了预定义字段，用于帮助您构建复杂的逻辑。
 
 将 `autoEvents: true` 传递给构造器以触发自动配置的事件。
 
@@ -421,13 +423,13 @@ type MyEventType = AnalyticsEvent<{
 ```ts
 type AnalyticsCounters = {
   include?: string[]; // 将应用的分析计数器 ID 数组
-  exclude?: string[]; // 将不应用的分析计数器 ID 数组
+  exclude?: string[]; // 不会应用的分析计数器 ID 数组
 };
 ```
 
 #### context 参数
 
-传递 `context` 值以定义事件触发的项目中的位置。
+传递 `context` 值来定义事件触发的项目中的位置。
 
 使用下面的选择器或创建满足项目需求的逻辑。
 
@@ -479,8 +481,8 @@ export default defineConfig({
 
 通常情况下，我们使用两种类型的提交：
 
-1. `fix`: `fix` 类型的提交会修复您代码库中的 bug（这对应于语义化版本控制中的 PATCH）。
-2. `feat`: `feat` 类型的提交会在代码库中引入新功能（这对应于语义化版本控制中的 MINOR）。
+1. `fix`: `fix` 类型的提交用于修复代码库中的错误（这对应于语义化版本控制中的 PATCH）。
+2. `feat`: `feat` 类型的提交在代码库中引入新功能（这对应于语义化版本控制中的 MINOR）。
 3. `BREAKING CHANGE`: 包含 `BREAKING CHANGE:` 页脚的提交，或在类型/范围后附加 `!` 的提交，会引入破坏性的 API 更改（对应于语义化版本控制中的 MAJOR）。`BREAKING CHANGE` 可以是任何类型提交的一部分。
 4. 要手动设置发布包版本，您需要在提交消息中添加 `Release-As: <version>`，例如：
 
@@ -490,25 +492,25 @@ git commit -m 'chore: bump release
 Release-As: 1.2.3'
 ```
 
-您可以在[此处](https://www.conventionalcommits.org/en/v1.0.0/)查看所有信息。
+您可以在 [这里](https://www.conventionalcommits.org/en/v1.0.0/) 查看所有信息。
 
 当您的 pull-request 获得代码所有者的批准并通过所有检查后，请执行以下操作：
 
-1. 检查是否有来自其他贡献者的机器人发布的 release pull-request（看起来像 `chore(main): release 0.0.0`）。如果存在，请检查它未合并的原因。如果贡献者同意发布共享版本，请继续下一步。如果不同意，请让他发布他的版本，然后继续下一步。
+1. 检查是否有来自其他贡献者的发布 pull-request（看起来像 `chore(main): release 0.0.0`）。如果存在，请检查它未合并的原因。如果贡献者同意发布共享版本，请继续下一步。如果不同意，请要求他发布自己的版本，然后继续下一步。
 2. Squash and merge 您的 PR（发布新版本需要使用 Github-Actions）。
-3. 等待机器人创建一个带有新包版本和 `CHANGELOG.md` 中您更改信息的 PR。您可以在[Actions 标签页](https://github.com/gravity-ui/page-constructor/actions)上查看该过程。
+3. 等待机器人创建一个包含新包版本和 `CHANGELOG.md` 中您更改信息的 PR。您可以在 [Actions 标签页](https://github.com/gravity-ui/page-constructor/actions) 上查看此过程。
 4. 检查 `CHANGELOG.md` 中的更改并批准机器人的 PR。
-5. Squash and merge PR。您可以在[Actions 标签页](https://github.com/gravity-ui/page-constructor/actions)上查看发布过程。
+5. Squash and merge PR。您可以在 [Actions 标签页](https://github.com/gravity-ui/page-constructor/actions) 上查看发布过程。
 
 ### Alpha 版本发布
 
-如果您想从您的分支发布包的 alpha 版本，您可以手动执行：
+如果您想从您的分支发布包的 alpha 版本，您可以手动进行：
 
 1. 转到 Actions 标签页。
-2. 在页面左侧选择 "Release alpha version" 工作流。
-3. 在右侧，您会看到 "Run workflow" 按钮。在这里您可以选择分支。
-4. 您还可以看到一个手动设置版本的字段。如果您是第一次在您的分支上发布 alpha 版本，请不要在此处设置任何内容。首次发布后，您必须手动设置新版本，因为我们不会更改 `package.json`，以防分支很快过期。否则，您将收到错误。请在您的手动版本中使用 `alpha` 前缀，否则您将收到错误。
-5. 点击 "Run workflow" 并等待操作完成。您可以发布任意次数的版本，但不要滥用它，只在您真正需要时发布版本。在其他情况下，请使用 [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack)。
+2. 在左侧页面选择 "Release alpha version" 工作流。
+3. 右侧会显示 "Run workflow" 按钮。在这里您可以选择分支。
+4. 您还可以看到一个手动版本字段。如果您是第一次在您的分支发布 alpha 版本，请不要在此处设置任何内容。首次发布后，您必须手动设置新版本，因为我们不会更改 `package.json`，以防分支很快过期。否则，您将收到错误。请在您的手动版本中使用 `alpha` 前缀，否则您将收到错误。
+5. 点击 "Run workflow" 并等待操作完成。您可以发布任意次数的版本，但不要滥用它，只在真正需要时发布版本。在其他情况下，请使用 [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack)。
 
 ### Beta-major 版本发布
 
@@ -516,7 +518,7 @@ Release-As: 1.2.3'
 
 1. 创建或更新 `beta` 分支。
 2. 将您的更改添加到其中。
-3. 当您准备好发布新的 beta 版本时，使用一个空提交手动发布它（或者您可以将此提交消息和页脚添加到最后一个提交中）：
+3. 当您准备好发布新的 beta 版本时，手动使用一个空提交进行发布（或者您可以将此提交消息和页脚添加到最后一个提交中）：
 
 ```bash
 git commit -m 'fix: last commit
@@ -525,22 +527,22 @@ Release-As: 3.0.0-beta.0' --allow-empty
 ```
 
 4. Release please 机器人将创建一个新的 PR 到 `beta` 分支，其中包含更新的 `CHANGELOG.md` 并增加包的版本。
-5. 您可以根据需要重复此操作。当您准备好发布没有 beta 标签的最新 major 版本时，您需要从 `beta` 分支创建 PR 到 `main` 分支。请注意，您的包版本带有 beta 标签是正常的。机器人知道这一点并会正确处理。`3.0.0-beta.0` 将变为 `3.0.0`。
+5. 您可以根据需要重复此操作。当您准备好发布没有 beta 标签的最新 major 版本时，您需要从 `beta` 分支创建 PR 到 `main` 分支。请注意，您的包版本带有 beta 标签是正常的。机器人知道这一点并会正确更改它。`3.0.0-beta.0` 将变为 `3.0.0`。
 
-### 之前 major 版本发布流程
+### 之前 major 版本的发布流程
 
-如果您想在将提交到 main 后为之前的 major 版本发布新版本，请执行以下操作：
+如果您想在提交到 main 后为之前的 major 版本发布新版本，请执行以下操作：
 
 1. 更新必要的分支，之前的 major 版本分支名称为：
    1. `version-1.x.x/fixes` - 用于 major 1.x.x
    2. `version-2.x.x` - 用于 major 2.x.x
-2. 从之前的 major 发布分支检出一个新分支。
+2. 从之前的 major 版本分支检出新分支。
 3. 从 `main` 分支 cherry-pick 您的提交。
-4. 创建 PR，获得批准并合并到之前的 major 发布分支。
+4. 创建 PR，获得批准并合并到之前的 major 版本分支。
 5. Squash and merge 您的 PR（发布新版本需要使用 Github-Actions）。
-6. 等待机器人创建一个带有新包版本和 `CHANGELOG.md` 中您更改信息的 PR。您可以在[Actions 标签页](https://github.com/gravity-ui/page-constructor/actions)上查看该过程。
+6. 等待机器人创建一个包含新包版本和 `CHANGELOG.md` 中您更改信息的 PR。您可以在 [Actions 标签页](https://github.com/gravity-ui/page-constructor/actions) 上查看此过程。
 7. 检查 `CHANGELOG.md` 中的更改并批准机器人的 PR。
-8. Squash and merge PR。您可以在[Actions 标签页](https://github.com/gravity-ui/page-constructor/actions)上查看发布过程。
+8. Squash and merge PR。您可以在 [Actions 标签页](https://github.com/gravity-ui/page-constructor/actions) 上查看发布过程。
 
 ## 页面构造器编辑器
 
@@ -565,27 +567,18 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 ## Memory Bank
 ```
 
-```html
-<p align="center">
-  <a href="README.zh.md">中文</a> |
-  <a href="README.md">English</a>
-</p>
-```
+本项目包含一个全面的**记忆库**——一个 Markdown 文档文件的集合，提供了关于项目架构、组件和使用模式的详细信息。记忆库在与 AI 代理协同工作时尤其有用，因为它包含了关于以下内容的结构化信息：
 
-# Memory Bank
+- **项目概述**：核心需求、目标和背景
+- **组件文档**：所有组件的详细使用指南
+- **系统架构**：技术模式和设计决策
+- **开发进度**：当前状态和实现细节
 
-本项目包含一个全面的**Memory Bank**——一个 Markdown 文档集合，提供了关于项目架构、组件和使用模式的详细信息。Memory Bank 在与 AI 代理协同工作时尤其有用，因为它包含了关于以下内容的结构化信息：
+### 使用记忆库
 
-- **项目概述**: 核心需求、目标和背景
-- **组件文档**: 所有组件的详细使用指南
-- **系统架构**: 技术模式和设计决策
-- **开发进度**: 当前状态和实现细节
+记忆库位于 `memory-bank/` 目录下，由常规的 Markdown 文件组成，可以像阅读其他文档一样阅读：
 
-### 使用 Memory Bank
-
-Memory Bank 位于 `memory-bank/` 目录中，由常规的 Markdown 文件组成，可以像阅读其他文档一样阅读：
-
-- `projectbrief.md` - 包含核心需求的基础文档
+- `projectbrief.md` - 基础文档，包含核心需求
 - `productContext.md` - 项目目的和用户体验目标
 - `systemPatterns.md` - 架构和技术决策
 - `techContext.md` - 技术栈、设置和约束
@@ -596,15 +589,15 @@ Memory Bank 位于 `memory-bank/` 目录中，由常规的 Markdown 文件组成
 
 ### 面向 AI 代理
 
-当与本项目中的 AI 代理协同工作时，Memory Bank 可作为全面的知识库，帮助代理理解：
+在本项目中与 AI 代理协同工作时，记忆库可作为全面的知识库，帮助代理理解：
 
 - 项目结构和模式
 - 组件 API 和使用示例
 - 开发工作流程和最佳实践
 - 当前实现状态和后续步骤
 
-AI 代理可以阅读这些文件，快速了解项目背景，并就代码更改和实现做出更明智的决策。
+AI 代理可以阅读这些文件，快速了解项目背景，并就代码变更和实现做出更明智的决策。
 
 ## 测试
 
-完整的文档可在提供的 [链接](./test-utils/docs/README.md) 中找到。
+在提供的 [链接](./test-utils/docs/README.md) 中可以找到全面的文档。

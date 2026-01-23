@@ -1,7 +1,7 @@
 ## Descripción corta
 
-El propósito del componente `DFDialog` es facilitar la creación de formularios, utilizando `react-final-form` internamente.
-Soporta varios tipos de campos predefinidos, pero el usuario puede extenderlo registrando nuevos mediante `registerDialogControl`.
+El propósito del componente `DFDialog` es facilitar la creación de formularios, ya que utiliza `react-final-form` internamente.
+Soporta varios tipos de campos predefinidos, pero el usuario puede extenderlo registrando nuevos tipos mediante `registerDialogControl`.
 
 ### Controles
 
@@ -17,19 +17,19 @@ Soporta varios tipos de campos predefinidos, pero el usuario puede extenderlo re
   - `text area` - área de texto
   - `select` - selector
   - `block` - permite añadir ReactNode
-- [Registro de control personalizado](https://preview.yandexcloud.dev/dialog-fields/?path=/story/tutorials-custom-control-registration)
+- [Registro de controles personalizados](https://preview.yandexcloud.dev/dialog-fields/?path=/story/tutorials-custom-control-registration)
 
 ### Características
 
 - Vista en línea y modal
-- [Una pestaña](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) y [varios formularios en pestañas](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
-- [Pestañas verticales/horizontales](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
-- [Campos y pestañas ocultos](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
+- [Un tab](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) y [varios formularios en tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
+- [Tabs verticales/horizontales](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
+- [Campos y tabs ocultos](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
 - [Campos enlazados por valores](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
 - [Validación a nivel de campo](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
 - [Validación a nivel de formulario](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
-- [Pestañas virtualizadas](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)
-- [Pestañas clonables](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-cloneable-tabs-)
+- [Tabs virtualizados](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)
+- [Tabs clonables](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-cloneable-tabs-)
 - [Campos agrupados](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-03-sections)
 
 ## Instalación
@@ -40,7 +40,7 @@ $ npm install @gravity-ui/dialog-fields
 $ npm install @gravity-ui/dialog-fields react@18 react-dom@18
 ```
 
-Dependiendo de tu gestor de paquetes, es posible que necesites instalar manualmente las `peerDependencies`.
+Dependiendo de tu gestor de paquetes, es posible que necesites instalar `peerDependencies` manualmente.
 
 ## Uso
 
@@ -68,13 +68,13 @@ function MyForm() {
           name: 'firstName',
           type: 'text',
           caption: 'Nombre',
-          tooltip: 'Descripción del campo nombre',
+          tooltip: 'Descripción para el campo nombre',
         },
         {
           name: 'lastName',
           type: 'text',
           caption: 'Apellido',
-          tooltip: 'Descripción del campo apellido',
+          tooltip: 'Descripción para el campo apellido',
         },
       ]}
     />

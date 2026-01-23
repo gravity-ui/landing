@@ -53,4 +53,3 @@ npm run dev
 ```
 
 At this point you can make changes both to NodeKit and demo app, and see results in real time.
-

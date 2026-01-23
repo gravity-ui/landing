@@ -9,17 +9,17 @@ npm install --save-dev @gravity-ui/babel-preset
 
 ## 사용법
 
-### `.babelrc`를 통한 사용
+### `.babelrc` 파일을 통한 설정
 
 ```json5
 {
   "presets": [
       "@gravity-ui/babel-preset",
       {
-        "env": {modules: false}, // 기본값: {}
-        "runtime": {useESModules: true}, // 기본값: {}
-        "typescript": true, // 기본값: false
-        "react": {runtime: "automatic"} // 기본값: {}
+        "env": {modules: false}, // 기본값은 {} 입니다.
+        "runtime": {useESModules: true}, // 기본값은 {} 입니다.
+        "typescript": true, // 기본값은 false 입니다.
+        "react": {runtime: "automatic"} // 기본값은 {} 입니다.
       }
   ]
 }

@@ -93,4 +93,3 @@ For updating illustrations according to new design, change the content of svg-s 
 ```shell
 npm run generate
 ```
-

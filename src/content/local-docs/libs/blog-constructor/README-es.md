@@ -14,7 +14,7 @@ npm install @gravity-ui/blog-constructor
 
 ### Primeros pasos
 
-El blog-constructor tiene componentes tanto para el cliente como para el servidor para importar. Las páginas del blog se importan como un componente de React. Para asegurarte de que funciona correctamente, envuélvelo en `BlogConstructorProvider`:
+El blog-constructor tiene componentes tanto del lado del cliente como del lado del servidor para importar. Las páginas del blog se importan como un componente de React. Para asegurarte de que funcione correctamente, envuélvelo en `BlogConstructorProvider`:
 
 ```jsx
 import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
@@ -34,7 +34,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
 import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
-// Página de una entrada del blog
+// Página de publicación
 <BlogConstructorProvider {...providerProps}>
     <BlogPostPage
         content={content}
@@ -60,7 +60,7 @@ import {
 } from '@gravity-ui/blog-constructor/server';
 ```
 
-El `blog-constructor` es una biblioteca basada en `uikit`, y utilizamos una instancia de `i18n` de uikit. Para configurar la internacionalización, solo necesitas usar `configure` de uikit:
+`blog-constructor` es una biblioteca basada en `uikit`, y utilizamos una instancia de `i18n` de uikit. Para configurar la internacionalización, solo necesitas usar `configure` de uikit:
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';

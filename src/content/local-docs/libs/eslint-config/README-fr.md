@@ -21,7 +21,7 @@ export default [
 ];
 ```
 
-La configuration de base inclut également les règles TypeScript.
+La configuration de base inclut également des règles TypeScript.
 
 ### Prettier
 
