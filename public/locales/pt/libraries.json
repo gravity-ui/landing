@@ -1,10 +1,10 @@
 {
-    "title": "Libraries",
-    "header": "Our libraries",
-    "searchPlaceholder": "Search by name or description",
-    "empty": "Nothing found",
-    "tags_all": "All",
+    "title": "Bibliotecas",
+    "header": "Nossas bibliotecas",
+    "searchPlaceholder": "Pesquisar por nome ou descrição",
+    "empty": "Nada encontrado",
+    "tags_all": "Todas",
     "tags_ui": "UI",
     "tags_nodejs": "Node.js",
-    "tags_infrastructure": "Infrastructure"
+    "tags_infrastructure": "Infraestrutura"
 }

@@ -1,15 +1,15 @@
 {
-    "actions_goToIcons": "Go to icons",
-    "libraries": "Libraries",
-    "readme": "Readme",
-    "changelog": "Changelog",
-    "about": "About library",
-    "stars": "Stars",
-    "version": "Version",
-    "lastUpdate": "Last update",
-    "repository": "Repository",
-    "license": "License",
-    "issues": "Issues",
-    "maintainers": "Maintainers",
-    "contributors": "Contributors"
+    "actions_goToIcons": "Ir para ícones",
+    "libraries": "Bibliotecas",
+    "readme": "Leia-me",
+    "changelog": "Registro de alterações",
+    "about": "Sobre a biblioteca",
+    "stars": "Estrelas",
+    "version": "Versão",
+    "lastUpdate": "Última atualização",
+    "repository": "Repositório",
+    "license": "Licença",
+    "issues": "Problemas",
+    "maintainers": "Mantenedores",
+    "contributors": "Contribuidores"
 }

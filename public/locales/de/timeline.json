@@ -1,9 +1,8 @@
 {
-  "goToLibrary": "Zur Bibliothek wechseln",
+  "goToLibrary": "Zur Bibliothek gehen",
   "title": "Spielwiese",
-  "timeline": "Zeitleiste",
+  "timeline": "Zeitachse",
   "jsonEditor": "JSON-Editor",
   "apply": "Anwenden",
   "reset": "Zurücksetzen"
 }
-

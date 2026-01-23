@@ -1,13 +1,13 @@
 {
-    "actions_openInFigma": "Open in Figma",
-    "title": "Components",
-    "searchPlaceholder": "Search by component name",
-    "color-input_validation-format-error": "Incorrect format",
-    "maintainers_one": "Maintainer:",
-    "maintainers_other": "Maintainers:",
-    "maintainers": "Maintainers:",
-    "theme": "Switch theme",
-    "rtlOn": "Switch RTL on",
-    "rtlOff": "Switch RTL off",
-    "rtlNotSupported": "RTL not supported"
+    "actions_openInFigma": "Figmaで開く",
+    "title": "コンポーネント",
+    "searchPlaceholder": "コンポーネント名で検索",
+    "color-input_validation-format-error": "フォーマットが無効です",
+    "maintainers_one": "メンテナー:",
+    "maintainers_other": "メンテナー:",
+    "maintainers": "メンテナー:",
+    "theme": "テーマ切り替え",
+    "rtlOn": "RTLをオンにする",
+    "rtlOff": "RTLをオフにする",
+    "rtlNotSupported": "RTLはサポートされていません"
 }

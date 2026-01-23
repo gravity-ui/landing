@@ -1,8 +1,8 @@
 {
     "actions_goToIcons": "아이콘으로 이동",
     "libraries": "라이브러리",
-    "readme": "읽어보기",
-    "changelog": "변경 기록",
+    "readme": "README",
+    "changelog": "변경 로그",
     "about": "라이브러리 정보",
     "stars": "별점",
     "version": "버전",
