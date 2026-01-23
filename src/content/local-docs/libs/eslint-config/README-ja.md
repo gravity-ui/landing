@@ -1,14 +1,14 @@
 # @gravity-ui/eslint-config
 
-## Instalación
+## インストール
 
 ```
 npm install --save-dev eslint @gravity-ui/eslint-config
 ```
 
-## Uso
+## 使用方法
 
-Añade un archivo `eslint.config.js` en tu proyecto con el siguiente contenido:
+プロジェクトに `eslint.config.js` ファイルを作成し、以下の内容を追加してください。
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -16,16 +16,16 @@ import baseConfig from '@gravity-ui/eslint-config';
 export default [
   ...baseConfig,
   {
-    // ...otra configuración
+    // ...その他の設定
   },
 ];
 ```
 
-La configuración base también incluye reglas de TypeScript.
+ベース設定には TypeScript のルールも含まれています。
 
 ### Prettier
 
-Si estás usando Prettier, añade la configuración correspondiente:
+Prettier を使用している場合は、対応する設定を追加してください。
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -35,14 +35,14 @@ export default [
   ...baseConfig,
   ...prettierConfig,
   {
-    // ...otra configuración
+    // ...その他の設定
   },
 ];
 ```
 
 ### a11y
 
-Si quieres detectar problemas de accesibilidad, añade la configuración correspondiente:
+アクセシビリティの問題を検出したい場合は、対応する設定を追加してください。
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -52,14 +52,14 @@ export default [
   ...baseConfig,
   ...a11yConfig,
   {
-    // ...otra configuración
+    // ...その他の設定
   },
 ];
 ```
 
-### Orden
+### Order
 
-Si quieres imponer una convención en el orden de importación de módulos, añade la configuración correspondiente:
+モジュールのインポート順に規約を適用したい場合は、対応する設定を追加してください。
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -69,7 +69,7 @@ export default [
   ...baseConfig,
   ...importOrderConfig,
   {
-    // ...otra configuración
+    // ...その他の設定
   },
 ];
 ```
