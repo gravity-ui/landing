@@ -1,10 +1,10 @@
 {
   "goToLibrary": "라이브러리로 이동",
-  "title": "AIKit Playground",
+  "title": "AIKit 플레이그라운드",
   "chat": {
     "title": "AI 채팅",
-    "emptyTitle": "대화 시작하기",
-    "emptyDescription": "AI, 프로그래밍 또는 다른 주제에 대해 무엇이든 물어보세요!",
+    "emptyTitle": "채팅 시작하기",
+    "emptyDescription": "AI, 프로그래밍 또는 기타 주제에 대해 무엇이든 물어보세요!",
     "placeholder": "메시지를 입력하세요..."
   },
   "welcome": {

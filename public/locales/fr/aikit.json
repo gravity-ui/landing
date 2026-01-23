@@ -3,12 +3,12 @@
   "title": "AIKit Playground",
   "chat": {
     "title": "Chat IA",
-    "emptyTitle": "Commencez à discuter",
+    "emptyTitle": "Commencer à discuter",
     "emptyDescription": "Posez-moi n'importe quelle question sur l'IA, la programmation ou tout autre sujet !",
     "placeholder": "Tapez votre message..."
   },
   "welcome": {
-    "title": "Bienvenue dans le Chat IA",
+    "title": "Bienvenue sur Chat IA",
     "description": "Commencez une conversation en tapant un message."
   },
   "error": {

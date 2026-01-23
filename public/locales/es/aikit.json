@@ -2,16 +2,16 @@
   "goToLibrary": "Ir a la biblioteca",
   "title": "AIKit Playground",
   "chat": {
-    "title": "Chat de IA",
-    "emptyTitle": "Comienza a chatear",
+    "title": "Chat IA",
+    "emptyTitle": "Empieza a chatear",
     "emptyDescription": "¡Pregúntame cualquier cosa sobre IA, programación o cualquier otro tema!",
     "placeholder": "Escribe tu mensaje..."
   },
   "welcome": {
-    "title": "Bienvenido al Chat de IA",
-    "description": "Comienza una conversación escribiendo un mensaje."
+    "title": "Bienvenido al Chat IA",
+    "description": "Inicia una conversación escribiendo un mensaje."
   },
   "error": {
-    "apiError": "Lo siento, ocurrió un error. Por favor, inténtalo de nuevo."
+    "apiError": "Lo sentimos, ocurrió un error. Por favor, inténtalo de nuevo."
   }
 }
