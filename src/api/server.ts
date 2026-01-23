@@ -286,14 +286,18 @@ export class ServerApi {
             return '';
         };
 
-        const getLocalDocsReadPromise = (locale: string) =>
-            fs.promises.readFile(
-                path.join(
-                    path.dirname(fileURLToPath(import.meta.url)),
-                    `../../src/content/local-docs/libs/${id}/README-${locale}.md`,
-                ),
-                'utf8',
+        const getLocalDocsReadPromise = (locale: string) => {
+            const filePath = path.join(
+                path.dirname(fileURLToPath(import.meta.url)),
+                `../../src/content/local-docs/libs/${id}/README-${locale}.md`,
             );
+
+            if (fs.existsSync(filePath)) {
+                return fs.promises.readFile(filePath, 'utf8');
+            }
+
+            return '';
+        };
 
         const [en, ru, es, zh, fr, de, ko, pt, ja] = await Promise.all([
             fetchReadmeContent(readmeUrl.en),
