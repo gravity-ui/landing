@@ -1,20 +1,20 @@
 # @gravity-ui/chartkit &middot; [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Componente React para renderizar gráficos a partir de cualquier fuente que necesites.
+必要なあらゆるソースに基づいてグラフを描画するためのReactコンポーネント
 
-## Instalación
+## インストール
 
 ```shell
 npm i --save-dev @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
-Asegúrate de tener los estilos de `@gravity-ui/uikit` habilitados en tu proyecto.
+プロジェクトで`@gravity-ui/uikit`のスタイルが有効になっていることを確認してください。
 
 ```typescript
 import '@gravity-ui/uikit/styles/styles.scss';
 ```
 
-## Uso
+## 使用方法
 
 ```typescript
 import {ThemeProvider} from '@gravity-ui/uikit';
