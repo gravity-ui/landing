@@ -101,4 +101,3 @@ const apiInstance = new API({
     }
 });
 ```
-

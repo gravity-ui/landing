@@ -87,4 +87,3 @@ Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/ui
 ### Contributing
 
 - [Contributor Guidelines](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
-
