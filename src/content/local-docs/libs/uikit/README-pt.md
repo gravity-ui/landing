@@ -1,16 +1,16 @@
 # UIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/ci.yml?query=branch:main) [![storybook tests](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/test-storybook.yml?label=Storybook%20Tests&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/test-storybook.yml) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/uikit/)
 
-Un ensemble de composants React flexibles, très pratiques et efficaces pour créer des applications web riches.
+Um conjunto de componentes React flexíveis, altamente práticos e eficientes para criar aplicações web ricas.
 
 <!--GITHUB_BLOCK-->
 
 ![Cover image](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/uikit_cover.png)
 
-## Ressources
+## Recursos
 
-### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Site Web](https://gravity-ui.com)
+### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Website](https://gravity-ui.com)
 
-### ![Documentation Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_light.svg#gh-light-mode-only) ![Documentation Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_dark.svg#gh-dark-mode-only) [Documentation](https://gravity-ui.com/components/uikit/alert)
+### ![Documentation Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_light.svg#gh-light-mode-only) ![Documentation Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_dark.svg#gh-dark-mode-only) [Documentação](https://gravity-ui.com/components/uikit/alert)
 
 ### ![Figma Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_light.svg#gh-light-mode-only) ![Figma Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_dark.svg#gh-dark-mode-only) [Figma](<https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)>)
 
@@ -18,17 +18,17 @@ Un ensemble de composants React flexibles, très pratiques et efficaces pour cr�
 
 ### ![Storybook Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Storybook Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/uikit/)
 
-### ![Community Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Community Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Communauté](https://t.me/gravity_ui)
+### ![Community Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Community Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Comunidade](https://t.me/gravity_ui)
 
 <!--/GITHUB_BLOCK-->
 
-## Installation
+## Instalação
 
 ```shell
 npm install --save-dev @gravity-ui/uikit
 ```
 
-## Utilisation
+## Uso
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
@@ -36,9 +36,9 @@ import {Button} from '@gravity-ui/uikit';
 const SubmitButton = <Button view="action" size="l" />;
 ```
 
-### Styles
+### Estilos
 
-UIKit est livré avec des styles de base et un thème. Pour que tout soit agréable, incluez ceci en haut de votre fichier d'entrée :
+O UIKit vem com estilos base e tema. Para que tudo fique bonito, inclua isto no topo do seu arquivo de entrada:
 
 ```js
 // index.js
@@ -49,7 +49,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 // ...
 ```
 
-UIKit prend en charge différents thèmes : clair, sombre et leurs variantes contrastées. Votre application doit être rendue à l'intérieur de `ThemeProvider` :
+O UIKit suporta diferentes temas: claro, escuro e suas variantes de contraste. Sua aplicação deve ser renderizada dentro de `ThemeProvider`:
 
 ```js
 import {createRoot} from 'react-dom/client';
@@ -63,7 +63,7 @@ root.render(
 );
 ```
 
-Il est possible de générer les classes CSS racines initiales lors du SSR pour éviter le scintillement du thème :
+É possível gerar classes CSS raiz iniciais durante o SSR para evitar o flash de tema:
 
 ```js
 import {getRootClassName} from '@gravity-ui/uikit/server';
@@ -80,12 +80,12 @@ const html = `
 `;
 ```
 
-De plus, il existe un fichier SCSS de [mixins](styles/mixins.scss) avec des helpers utiles à utiliser dans votre application.
+Além disso, há um arquivo SCSS com [mixins](styles/mixins.scss) com utilitários úteis para usar em sua aplicação.
 
 ### I18N
 
-Certains composants contiennent des jetons textuels (mots et phrases). Ils sont disponibles en deux langues : `en` (par défaut) et `ru`.
-Pour définir la langue, utilisez la fonction `configure` :
+Alguns componentes contêm tokens de texto (palavras e frases). Eles vêm em dois idiomas: `en` (padrão) e `ru`.
+Para definir o idioma, use a função `configure`:
 
 ```js
 // index.js
@@ -97,9 +97,9 @@ configure({
 });
 ```
 
-## Développement
+## Desenvolvimento
 
-Pour démarrer le serveur de développement avec storybook, exécutez la commande suivante :
+Para iniciar o servidor de desenvolvimento com o storybook, execute o seguinte:
 
 ```shell
 git clone git@github.com:gravity-ui/uikit.git
