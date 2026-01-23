@@ -1,16 +1,16 @@
 # @gravity-ui/navigation &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/navigation)](https://www.npmjs.com/package/@gravity-ui/navigation) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/navigation/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/navigation/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/navigation/)
 
-### Navigation pour l'en-tête latéral &middot; [Aperçu →](https://preview.yandexcloud.dev/navigation/)
+### サイドヘッダーナビゲーション &middot; [プレビュー →](https://preview.yandexcloud.dev/navigation/)
 
 ![](docs/images/showcase.png)
 
-## Installation
+## インストール
 
 ```bash
 npm install @gravity-ui/navigation
 ```
 
-Assurez-vous que les dépendances pair sont installées dans votre projet
+プロジェクトにピア依存関係がインストールされていることを確認してください。
 
 ```bash
 npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
@@ -18,20 +18,20 @@ npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/
 
 ## Sandboxes
 
-Basique
+基本
 https://codesandbox.io/p/devbox/navigation-demo-simple-x9k5sd
 
-Avancé
+高度
 https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
-## Feuille de route 2025
+## ロードマップ 2025
 
-1. Prise en charge du SSR
-2. Ajout de plus de documentation et d'exemples à [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Prise en charge de la navigation dans le thémiseur UIKit
-4. Unification des API `subheaderItem`, `menuItem`, `footerItem`
+1. SSR のサポート
+2. [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) にドキュメントと例を追加
+3. UIKit テーマでのナビゲーションのサポート
+4. subheaderItem、menuItem、footerItem API の統一
 
-## Composants
+## コンポーネント
 
 - [AsideHeader](https://github.com/gravity-ui/navigation/tree/main/src/components/AsideHeader/README.md)
   - [AllPagesPanel](https://github.com/gravity-ui/navigation/tree/main/src/components/AllPagesPanel/README.md)
@@ -51,6 +51,6 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 - [ActionBar](https://github.com/gravity-ui/navigation/tree/main/src/components/ActionBar/README.md)
 - [Settings](https://github.com/gravity-ui/navigation/tree/main/src/components/Settings/README.md)
 
-## API CSS
+## CSS API
 
-Utilisé pour la thématisation des composants de Navigation
+Navigation のコンポーネントのテーマ設定に使用されます。

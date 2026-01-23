@@ -1,6 +1,6 @@
 # @gravity-ui/navigation &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/navigation)](https://www.npmjs.com/package/@gravity-ui/navigation) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/navigation/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/navigation/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/navigation/)
 
-### Navegación de Encabezado Lateral &middot; [Vista previa →](https://preview.yandexcloud.dev/navigation/)
+### Navegación de encabezado lateral &middot; [Vista previa →](https://preview.yandexcloud.dev/navigation/)
 
 ![](docs/images/showcase.png)
 
@@ -28,7 +28,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 1. Soporte para SSR
 2. Añadir más documentación y ejemplos a [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Soporte para la navegación en el tematizador de UIKit
+3. Soporte para la tematización de Navegación en UIKit
 4. Unificar las API de subheaderItem, menuItem y footerItem
 
 ## Componentes
