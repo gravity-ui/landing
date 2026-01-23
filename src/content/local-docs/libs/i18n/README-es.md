@@ -27,7 +27,7 @@ Este repositorio contiene utilidades, bibliotecas y plugins comunes utilizados p
     npm run install:global
     ```
 
-1. Instala dependencias
+1. Instala las dependencias
 
     ```bash
     pnpm i
