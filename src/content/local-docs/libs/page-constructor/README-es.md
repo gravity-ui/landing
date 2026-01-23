@@ -1,8 +1,8 @@
 # @gravity-ui/page-constructor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/page-constructor)](https://www.npmjs.com/package/@gravity-ui/page-constructor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/page-constructor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/page-constructor/actions/workflows/ci.yml?query=branch:main) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/page-constructor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/page-constructor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/page-constructor/)
 
-## Page constructor
+## Constructor de páginas
 
-`Page-constructor` es una biblioteca para renderizar páginas web o partes de ellas basándose en datos `JSON` (próximamente se añadirá soporte para el formato `YAML`).
+`Page-constructor` es una biblioteca para renderizar páginas web o partes de ellas basándose en datos `JSON` (se añadirá soporte para el formato `YAML` más adelante).
 
 Al crear páginas, se utiliza un enfoque basado en componentes: una página se construye utilizando un conjunto de bloques listos para usar que se pueden colocar en cualquier orden. Cada bloque tiene un tipo específico y un conjunto de parámetros de datos de entrada.
 
@@ -16,7 +16,7 @@ npm install @gravity-ui/page-constructor
 
 ## Inicio rápido
 
-Primero, necesitamos un proyecto React y algún tipo de servidor. Por ejemplo, puedes crear un proyecto React usando Vite y un servidor Express, o puedes crear una aplicación Next.js, que tendrá lado cliente y servidor a la vez.
+Primero, necesitamos un proyecto de React y algún tipo de servidor. Por ejemplo, puedes crear un proyecto de React usando Vite y un servidor Express, o puedes crear una aplicación Next.js, que tendrá lado cliente y servidor a la vez.
 
 Instala las dependencias necesarias:
 
@@ -35,10 +35,10 @@ const App = () => {
     blocks: [
       {
         type: 'header-block',
-        title: 'Hello world',
+        title: 'Hola mundo',
         background: {color: '#f0f0f0'},
         description:
-          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+          '**¡Felicidades!** Has integrado [page-constructor](https://github.com/gravity-ui/page-constructor) en tu sitio web',
       },
     ],
   };
@@ -72,10 +72,10 @@ const content = {
   blocks: [
     {
       type: 'header-block',
-      title: 'Hello world',
+      title: 'Hola mundo',
       background: {color: '#f0f0f0'},
       description:
-        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+        '**¡Felicidades!** Has integrado [page-constructor](https://github.com/gravity-ui/page-constructor) en tu sitio web',
     },
   ],
 };
@@ -196,11 +196,12 @@ interface HeaderData {
 }
 ```
 
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/es/README.md">Español</a>
-</div>
+```typescript
+interface NavigationLogo {
+  icon: ImageProps;
+  text?: string;
+  url?: string;
+}
 ```
 
 ### Utilidades del servidor
@@ -219,7 +220,7 @@ const {html} = fullTransform(content, {
 });
 ```
 
-Internamente, se utiliza un paquete para transformar Yandex Flavored Markdown a HTML: `diplodoc/transfrom`, por lo que también se encuentra en las dependencias peer.
+Internamente, se utiliza un paquete para transformar Yandex Flavored Markdown en HTML: `diplodoc/transfrom`, por lo que también se encuentra en las dependencias peer.
 
 También puedes usar utilidades útiles donde las necesites, por ejemplo, en tus componentes personalizados.
 
@@ -241,11 +242,11 @@ Puedes encontrar más utilidades en esta [sección](https://github.com/gravity-u
 
 ### Documentación detallada sobre utilidades del servidor y transformadores
 
-Para una guía completa sobre el uso de utilidades del servidor, incluyendo explicaciones detalladas y casos de uso avanzados, visita el [capítulo adicional sobre el uso de utilidades del servidor](./docs/data-preparation.md).
+Para obtener una guía completa sobre el uso de utilidades del servidor, incluidas explicaciones detalladas y casos de uso avanzados, visita el [capítulo adicional sobre el uso de utilidades del servidor](./docs/data-preparation.md).
 
 ### Bloques personalizados
 
-El constructor de páginas te permite usar bloques definidos por el usuario en su aplicación. Los bloques son componentes React normales.
+El constructor de páginas te permite usar bloques que son definidos por el usuario en su aplicación. Los bloques son componentes React normales.
 
 Para pasar bloques personalizados al constructor:
 
@@ -253,7 +254,7 @@ Para pasar bloques personalizados al constructor:
 
 2. En tu código, crea un objeto con el tipo de bloque (cadena) como clave y un componente de bloque importado como valor.
 
-3. Pasa el objeto que creaste a los parámetros `custom.blocks`, `custom.headers` o `custom.subBlocks` del componente `PageConstructor` (`custom.headers` especifica los encabezados del bloque que se renderizarán por separado encima del contenido general).
+3. Pasa el objeto que creaste al parámetro `custom.blocks`, `custom.headers` o `custom.subBlocks` del componente `PageConstructor` (`custom.headers` especifica los encabezados del bloque que se renderizarán por separado encima del contenido general).
 
 4. Ahora puedes usar el bloque creado en los datos de entrada (el parámetro `content`) especificando su tipo y datos.
 
@@ -273,7 +274,7 @@ Para usar la fuente predeterminada, agrega una importación en tu archivo:
 
 A veces es necesario que un bloque se renderice basándose en datos que deben cargarse. En este caso, se utilizan bloques cargables.
 
-Para agregar bloques `loadable` personalizados, pasa al `PageConstructor` la propiedad `custom.loadable` con los nombres de las fuentes de datos (cadena) como clave y un objeto como valor.
+Para agregar bloques `loadable` personalizados, pasa al `PageConstructor` la propiedad `custom.loadable` con nombres de origen de datos (cadena) como clave y un objeto como valor.
 
 ```typescript
 export interface LoadableConfigItem {
@@ -318,13 +319,13 @@ Cada bloque es un componente atómico de nivel superior. Se almacenan en el dire
 
 ### Sub-bloques
 
-Los sub-bloques son componentes que se pueden usar en la propiedad `children` de un bloque. En una configuración, se especifica una lista de componentes hijos de sub-bloques. Una vez renderizados, estos sub-bloques se pasan al bloque como `children`.
+Los sub-bloques son componentes que se pueden usar en la propiedad `children` de un bloque. En una configuración, se especifica una lista de componentes hijos de los sub-bloques. Una vez renderizados, estos sub-bloques se pasan al bloque como `children`.
 
 ### Cómo agregar un nuevo bloque a `page-constructor`
 
 1. En el directorio `src/blocks` o `src/sub-blocks`, crea una carpeta con el código del bloque o sub-bloque.
 
-2. Agrega el nombre del bloque o sub-bloque al enum `BlockType` o `SubBlockType` y describe sus propiedades en el archivo `src/models/constructor-items/blocks.ts` o `src/models/constructor-items/sub-blocks.ts` de manera similar a los existentes.
+2. Agrega el nombre del bloque o sub-bloque a la enumeración `BlockType` o `SubBlockType` y describe sus propiedades en el archivo `src/models/constructor-items/blocks.ts` o `src/models/constructor-items/sub-blocks.ts` de manera similar a los existentes.
 
 3. Agrega una exportación para el bloque en el archivo `src/blocks/index.ts` y para el sub-bloque en el archivo `src/sub-blocks/index.ts`.
 
@@ -332,7 +333,7 @@ Los sub-bloques son componentes que se pueden usar en la propiedad `children` de
 
 5. Agrega un validador para el nuevo bloque:
 
-   - Agrega un archivo `schema.ts` al directorio del bloque o sub-bloque. En este archivo, describe un validador de parámetros para el componente en formato [`json-schema`](http://json-schema.org/).
+   - Agrega un archivo `schema.ts` al directorio del bloque o sub-bloque. En este archivo, describe un validador de parámetros para el componente en formato [`json-schema`](http://json-schema/).
    - Expórtalo en el archivo `schema/validators/blocks.ts` o `schema/validators/sub-blocks.ts`.
    - Agrégalo a `enum` o `selectCases` en el archivo `schema/index.ts`.
 
@@ -343,15 +344,15 @@ Los sub-bloques son componentes que se pueden usar en la propiedad `children` de
 
 ### Temas
 
-El `PageConstructor` te permite usar temas: puedes establecer diferentes valores para propiedades individuales de los bloques según el tema seleccionado en la aplicación.
+El `PageConstructor` te permite usar temas: puedes establecer diferentes valores para las propiedades individuales de los bloques según el tema seleccionado en la aplicación.
 
 Para agregar un tema a una propiedad de bloque:
 
 1. En el archivo `models/blocks.ts`, define el tipo de la propiedad de bloque respectiva usando el genérico `ThemeSupporting<T>`, donde `T` es el tipo de la propiedad.
 
-2. En el archivo con el componente `react` del bloque, obtén el valor de la propiedad con el tema a través del hook `getThemedValue` y `useTheme` (ver ejemplos en el bloque `MediaBlock.tsx`).
+2. En el archivo con el componente `react` del bloque, obtén el valor de la propiedad con el tema a través de `getThemedValue` y el hook `useTheme` (ver ejemplos en el bloque `MediaBlock.tsx`).
 
-3. Agrega soporte de tema a la propiedad validadora: en el archivo `schema.ts` del bloque, envuelve esta propiedad en `withTheme`.
+3. Agrega soporte de tema al validador de la propiedad: en el archivo `schema.ts` del bloque, envuelve esta propiedad en `withTheme`.
 
 ### i18n
 
@@ -370,13 +371,13 @@ configure({
 Para usar mapas, coloca el tipo de mapa, `scriptSrc` y `apiKey` en el campo `mapContext` en `PageConstructorProvider`.
 
 Puedes definir variables de entorno para el modo de desarrollo en el archivo `.env.development` dentro de la raíz del proyecto.
-`STORYBOOK_GMAP_API_KEY` - apiKey para google maps.
+`STORYBOOK_GMAP_API_KEY` - apiKey para google maps
 
 ### Analíticas
 
 #### Inicialización
 
-Para comenzar a usar cualquier analítica, pasa un manejador al constructor. El manejador debe ser creado en el lado del proyecto. El manejador recibirá los objetos de evento `default` y `custom`. El manejador pasado se activará al hacer clic en botones, enlaces, navegación y controles. Como se utiliza un solo manejador para tratar todos los eventos, presta atención a cómo tratar diferentes eventos al crear el manejador. Hay campos predefinidos que sirven para ayudarte a construir lógica compleja.
+Para comenzar a usar cualquier analítica, pasa un manejador al constructor. El manejador debe ser creado en el lado del proyecto. El manejador recibirá los objetos de evento `default` y `custom`. El manejador pasado se activará en clics de botones, enlaces, navegación y controles. Como se utiliza un solo manejador para tratar todos los eventos, presta atención a cómo tratar diferentes eventos al crear el manejador. Hay campos predefinidos que sirven para ayudarte a construir lógica compleja.
 
 Pasa `autoEvents: true` al constructor para activar eventos configurados automáticamente.
 
@@ -394,7 +395,7 @@ function sendEvents(events: MyEventType []) {
 />
 ```
 
-Un objeto de evento tiene un único campo obligatorio: `name`. También tiene campos predefinidos que sirven para ayudar a gestionar la lógica compleja. Por ejemplo, `counter.include` puede ayudar a enviar un evento a un contador particular si se utilizan varios sistemas de análisis en un proyecto.
+Un objeto de evento tiene un único campo obligatorio: `name`. También tiene campos predefinidos que sirven para ayudar a gestionar lógica compleja. Por ejemplo, `counter.include` puede ayudar a enviar un evento a un contador particular si se utilizan varios sistemas de análisis en un proyecto.
 
 ```ts
 type AnalyticsEvent<T = {}> = T & {
@@ -415,7 +416,7 @@ type MyEventType = AnalyticsEvent<{
 
 #### Selector de contador
 
-Es posible configurar un evento al que se enviará un sistema de análisis.
+Es posible configurar un evento para determinar a qué sistema de análisis se enviará.
 
 ```ts
 type AnalyticsCounters = {
@@ -426,9 +427,9 @@ type AnalyticsCounters = {
 
 #### Parámetro `context`
 
-Pase el valor de `context` para definir el lugar en el proyecto donde se dispara un evento.
+Pasa el valor de `context` para definir el lugar en el proyecto donde se dispara un evento.
 
-Utilice el selector a continuación o cree una lógica que sirva a las necesidades del proyecto.
+Utiliza el selector a continuación o crea lógica que sirva a las necesidades del proyecto.
 
 ```ts
 // analyticsHandler.ts
@@ -439,7 +440,7 @@ if (isCounterAllowed(counterName, counters)) {
 
 #### Tipos de evento reservados
 
-Se utilizan varios tipos de eventos predefinidos para marcar eventos configurados automáticamente. Utilice los tipos para filtrar eventos predeterminados, por ejemplo.
+Se utilizan varios tipos de eventos predefinidos para marcar eventos configurados automáticamente. Utiliza los tipos para filtrar eventos predeterminados, por ejemplo.
 
 ```ts
 enum PredefinedEventTypes {
@@ -472,16 +473,16 @@ export default defineConfig({
 });
 ```
 
-Para Vite, necesita instalar el plugin `vite-plugin-dynamic-import` y configurar el archivo `vite.config.ts` para que los imports dinámicos funcionen.
+Para Vite, necesitas instalar el plugin `vite-plugin-dynamic-import` y configurar el archivo `vite.config.ts` para que los imports dinámicos funcionen.
 
 ## Flujo de lanzamiento
 
 En casos habituales, utilizamos dos tipos de commits:
 
-1. `fix`: un commit de tipo `fix` corrige un error en su código (esto se correlaciona con `PATCH` en el Versionado Semántico).
-2. `feat`: un commit de tipo `feat` introduce una nueva funcionalidad en el código (esto se correlaciona con `MINOR` en el Versionado Semántico).
-3. `BREAKING CHANGE`: un commit que tiene un pie de página `BREAKING CHANGE:`, o añade un `!` después del tipo/ámbito, introduce un cambio de API que rompe la compatibilidad (correlacionándose con `MAJOR` en el Versionado Semántico). Un `BREAKING CHANGE` puede formar parte de commits de cualquier tipo.
-4. Para establecer manualmente la versión del paquete de lanzamiento, necesita añadir `Release-As: <version>` a su mensaje de commit, por ejemplo:
+1. `fix`: un commit de tipo `fix` corrige un error en tu código (esto se correlaciona con `PATCH` en Versionado Semántico).
+2. `feat`: un commit de tipo `feat` introduce una nueva funcionalidad en el código (esto se correlaciona con `MINOR` en Versionado Semántico).
+3. `BREAKING CHANGE`: un commit que tiene un pie de página `BREAKING CHANGE:`, o añade un `!` después del tipo/alcance, introduce un cambio de API que rompe la compatibilidad (correlacionándose con `MAJOR` en Versionado Semántico). Un `BREAKING CHANGE` puede ser parte de commits de cualquier tipo.
+4. Para establecer la versión del paquete de lanzamiento manualmente, necesitas añadir `Release-As: <version>` a tu mensaje de commit, por ejemplo:
 
 ```bash
 git commit -m 'chore: bump release
@@ -489,33 +490,33 @@ git commit -m 'chore: bump release
 Release-As: 1.2.3'
 ```
 
-Puede ver toda la información [aquí](https://www.conventionalcommits.org/en/v1.0.0/).
+Puedes ver toda la información [aquí](https://www.conventionalcommits.org/en/v1.0.0/).
 
-Cuando reciba la aprobación de su pull-request por parte de los propietarios del código y supere todas las comprobaciones, por favor, haga lo siguiente:
+Cuando recibas la aprobación de tu pull-request por parte de los propietarios del código y pases todas las comprobaciones, por favor, haz lo siguiente:
 
-1. Debe comprobar si existe un pull-request de lanzamiento del robot con cambios de otro contribuyente (tiene un aspecto como `chore(main): release 0.0.0`). Si existe, debe comprobar por qué no se ha fusionado. Si el contribuyente está de acuerdo en lanzar una versión compartida, siga el siguiente paso. Si no, pídale que lance su versión, y luego siga el siguiente paso.
-2. Haga un "Squash and merge" de su PR (¡Es importante lanzar una nueva versión con Github-Actions!).
-3. Espere hasta que el robot cree un PR con una nueva versión del paquete e información sobre sus cambios en `CHANGELOG.md`. Puede ver el proceso en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
-4. Compruebe sus cambios en `CHANGELOG.md` y apruebe el PR del robot.
-5. Haga un "Squash and merge" del PR. Puede ver el proceso de lanzamiento en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
+1. Debes comprobar si hay un pull-request de lanzamiento del robot con cambios de otro contribuyente (tiene un aspecto como `chore(main): release 0.0.0`). Si existe, debes comprobar por qué no se ha fusionado. Si el contribuyente está de acuerdo en lanzar una versión compartida, sigue el siguiente paso. Si no, pídele que lance su versión, y luego sigue el siguiente paso.
+2. Haz un "Squash and merge" de tu PR (¡Es importante lanzar una nueva versión con Github-Actions!).
+3. Espera hasta que el robot cree un PR con una nueva versión del paquete e información sobre tus cambios en `CHANGELOG.md`. Puedes ver el proceso en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
+4. Comprueba tus cambios en `CHANGELOG.md` y aprueba el PR del robot.
+5. Haz un "Squash and merge" del PR. Puedes ver el proceso de lanzamiento en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
 
 ### Lanzamiento de versiones Alpha
 
-Si desea lanzar una versión alpha del paquete desde su rama, puede hacerlo manualmente:
+Si quieres lanzar una versión alpha del paquete desde tu rama, puedes hacerlo manualmente:
 
-1. Vaya a la pestaña Actions.
-2. Seleccione el flujo de trabajo "Release alpha version" en el lado izquierdo de la página.
-3. En el lado derecho, verá el botón "Run workflow". Aquí puede elegir la rama.
-4. También verá un campo para la versión manual. Si lanza alpha en su rama por primera vez, no ponga nada aquí. Después del primer lanzamiento, tendrá que establecer la nueva versión manualmente porque no cambiamos `package.json` en caso de que la rama pueda expirar muy pronto. Utilice el prefijo `alpha` en su versión manual, de lo contrario obtendrá un error.
-5. Pulse "Run workflow" y espere hasta que la acción finalice. Puede lanzar versiones tantas veces como quiera, pero no abuse y lance versiones si realmente las necesita. En otros casos, utilice [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
+1. Ve a la pestaña Actions.
+2. Selecciona el workflow "Release alpha version" en el lado izquierdo de la página.
+3. A la derecha, verás el botón "Run workflow". Aquí puedes elegir la rama.
+4. También verás un campo para la versión manual. Si lanzas una alpha en tu rama por primera vez, no pongas nada aquí. Después del primer lanzamiento, tendrás que establecer la nueva versión manualmente porque no cambiamos `package.json` en caso de que la rama pueda expirar muy pronto. Usa el prefijo `alpha` en tu versión manual, de lo contrario obtendrás un error.
+5. Pulsa "Run workflow" y espera hasta que la acción termine. Puedes lanzar versiones tantas veces como quieras, pero no abuses y lanza versiones solo si realmente las necesitas. En otros casos, usa [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
 
 ### Lanzamiento de versiones Beta-major
 
-Si desea lanzar una nueva versión mayor, probablemente necesitará versiones beta antes de una estable, por favor, haga lo siguiente:
+Si quieres lanzar una nueva versión major, probablemente necesitarás versiones beta antes de la estable. Por favor, haz lo siguiente:
 
-1. Cree o actualice la rama `beta`.
-2. Añada sus cambios allí.
-3. Cuando esté listo para una nueva versión beta, láncela manualmente con un commit vacío (o puede añadir este mensaje de commit con pie de página al último commit):
+1. Crea o actualiza la rama `beta`.
+2. Añade tus cambios allí.
+3. Cuando estés listo para una nueva versión beta, lánzala manualmente con un commit vacío (o puedes añadir este mensaje de commit con un pie de página al último commit):
 
 ```bash
 git commit -m 'fix: last commit
@@ -523,23 +524,23 @@ git commit -m 'fix: last commit
 Release-As: 3.0.0-beta.0' --allow-empty
 ```
 
-4. El robot "Release please" creará un nuevo PR a la rama `beta` con `CHANGELOG.md` actualizado y el número de versión del paquete incrementado.
-5. Puede repetirlo tantas veces como quiera. Cuando esté listo para lanzar la última versión mayor sin etiqueta beta, tendrá que crear un PR desde la rama `beta` a la rama `main`. Tenga en cuenta que es normal que su versión de paquete tenga una etiqueta beta. El robot lo sabe y lo cambia adecuadamente. `3.0.0-beta.0` se convertirá en `3.0.0`.
+4. El robot "Release please" creará un nuevo PR a la rama `beta` con `CHANGELOG.md` actualizado y la versión del paquete incrementada.
+5. Puedes repetirlo tantas veces como quieras. Cuando estés listo para lanzar la última versión major sin etiqueta beta, tendrás que crear un PR desde la rama `beta` a la rama `main`. Ten en cuenta que es normal que la versión de tu paquete tenga una etiqueta beta. El robot lo sabe y lo cambia correctamente. `3.0.0-beta.0` se convertirá en `3.0.0`.
 
-### Flujo de lanzamiento para versiones mayores anteriores
+### Flujo de lanzamiento para versiones major anteriores
 
-Si desea lanzar una nueva versión en una versión mayor anterior después de confirmarla en `main`, por favor, haga lo siguiente:
+Si quieres lanzar una nueva versión en una versión major anterior después de haberla confirmado en `main`, por favor, haz lo siguiente:
 
-1. Actualice la rama necesaria, los nombres de las ramas de lanzamiento de versiones mayores anteriores son:
-   1. `version-1.x.x/fixes` - para la versión mayor 1.x.x
-   2. `version-2.x.x` - para la versión mayor 2.x.x
-2. Cree una nueva rama a partir de la rama de lanzamiento de la versión mayor anterior.
-3. Haga un "cherry-pick" de su commit desde la rama `main`.
-4. Cree un PR, obtenga la aprobación y fusione en la rama de lanzamiento de la versión mayor anterior.
-5. Haga un "Squash and merge" de su PR (¡Es importante lanzar una nueva versión con Github-Actions!).
-6. Espere hasta que el robot cree un PR con una nueva versión del paquete e información sobre sus cambios en `CHANGELOG.md`. Puede ver el proceso en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
-7. Compruebe sus cambios en `CHANGELOG.md` y apruebe el PR del robot.
-8. Haga un "Squash and merge" del PR. Puede ver el proceso de lanzamiento en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
+1. Actualiza la rama necesaria. Los nombres de las ramas de lanzamiento de versiones major anteriores son:
+   1. `version-1.x.x/fixes` - para la major 1.x.x
+   2. `version-2.x.x` - para la major 2.x.x
+2. Crea una nueva rama a partir de la rama de lanzamiento de la versión major anterior.
+3. Haz un "cherry-pick" de tu commit desde la rama `main`.
+4. Crea un PR, obtén la aprobación y fusiona en la rama de lanzamiento de la versión major anterior.
+5. Haz un "Squash and merge" de tu PR (¡Es importante lanzar una nueva versión con Github-Actions!).
+6. Espera hasta que el robot cree un PR con una nueva versión del paquete e información sobre tus cambios en `CHANGELOG.md`. Puedes ver el proceso en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
+7. Comprueba tus cambios en `CHANGELOG.md` y aprueba el PR del robot.
+8. Haz un "Squash and merge" del PR. Puedes ver el proceso de lanzamiento en [la pestaña Actions](https://github.com/gravity-ui/page-constructor/actions).
 
 ## Editor de Page Constructor
 
@@ -563,15 +564,9 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 
 ## Memory Bank
 
-Aquí tienes la traducción del archivo README al español, manteniendo un tono natural y la estructura solicitada:
+Este proyecto incluye un completo **Banco de Memoria** (Memory Bank): una colección de archivos de documentación en Markdown que proporcionan información detallada sobre la arquitectura del proyecto, sus componentes y patrones de uso. El Banco de Memoria es particularmente útil cuando se trabaja con agentes de IA, ya que contiene información estructurada sobre:
 
-```html
-<a href="../README.es.md">es</a> | <a href="../README.en.md">en</a>
-```
-
-Este proyecto incluye un **Banco de Memoria** completo: una colección de archivos de documentación Markdown que proporcionan información detallada sobre la arquitectura del proyecto, sus componentes y patrones de uso. El Banco de Memoria es especialmente útil cuando se trabaja con agentes de IA, ya que contiene información estructurada sobre:
-
-- **Descripción General del Proyecto**: Requisitos principales, objetivos y contexto.
+- **Resumen del Proyecto**: Requisitos principales, objetivos y contexto.
 - **Documentación de Componentes**: Guías de uso detalladas para todos los componentes.
 - **Arquitectura del Sistema**: Patrones técnicos y decisiones de diseño.
 - **Progreso del Desarrollo**: Estado actual y detalles de implementación.
@@ -598,7 +593,7 @@ Al trabajar con agentes de IA en este proyecto, el Banco de Memoria sirve como u
 - Los flujos de trabajo de desarrollo y las mejores prácticas.
 - El estado actual de implementación y los próximos pasos.
 
-Los agentes de IA pueden leer estos archivos para familiarizarse rápidamente con el contexto del proyecto y tomar decisiones más informadas sobre cambios de código e implementaciones.
+Los agentes de IA pueden leer estos archivos para familiarizarse rápidamente con el contexto del proyecto y tomar decisiones más informadas sobre cambios e implementaciones de código.
 
 ## Pruebas
 

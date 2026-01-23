@@ -2,7 +2,7 @@
 
 ## Page Constructor
 
-`Page-constructor` ist eine Bibliothek zum Rendern von Webseiten oder deren Teilen basierend auf `JSON`-Daten (Unterstützung für das `YAML`-Format wird später hinzugefügt).
+`Page-constructor` ist eine Bibliothek zum Rendern von Webseiten oder deren Teilen basierend auf `JSON`-Daten (die Unterstützung für das `YAML`-Format wird später hinzugefügt).
 
 Beim Erstellen von Seiten wird ein komponentenbasiertes Vorgehen verwendet: Eine Seite wird aus einer Reihe fertiger Blöcke aufgebaut, die in beliebiger Reihenfolge platziert werden können. Jeder Block hat einen bestimmten Typ und eine Reihe von Eingabeparametern.
 
@@ -16,7 +16,7 @@ npm install @gravity-ui/page-constructor
 
 ## Schnelleinstieg
 
-Zuerst benötigen wir ein React-Projekt und eine Art von Server. Sie können beispielsweise ein React-Projekt mit Vite und einem Express-Server erstellen oder eine Next.js-Anwendung erstellen – diese verfügt über eine Client- und eine Serverseite gleichzeitig.
+Zuerst benötigen wir ein React-Projekt und eine Art von Server. Sie können zum Beispiel ein React-Projekt mit Vite und einem Express-Server erstellen oder eine Next.js-Anwendung erstellen – diese hat sofort eine Client- und eine Serverseite.
 
 Installieren Sie die erforderlichen Abhängigkeiten:
 
@@ -24,7 +24,7 @@ Installieren Sie die erforderlichen Abhängigkeiten:
 npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
 ```
 
-Fügen Sie den `Page Constructor` zur Seite ein. Damit er korrekt funktioniert, muss er in einen `PageConstructorProvider` eingepackt sein:
+Fügen Sie den `Page Constructor` zur Seite hinzu. Damit er korrekt funktioniert, muss er in einen `PageConstructorProvider` eingepackt sein:
 
 ```tsx
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
@@ -120,7 +120,7 @@ Um ein neues Projekt zu starten, können Sie die [fertige Vorlage auf Next.js](h
 
 ### Static Site Builder
 
-[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) – ein Kommandozeilen-Dienstprogramm zum Erstellen statischer Seiten aus YAML-Konfigurationen mit @gravity-ui/page-constructor
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) – ein Kommandozeilen-Dienstprogramm zum Erstellen statischer Seiten aus YAML-Konfigurationen mit @gravity-ui/page-constructor.
 
 ## Dokumentation
 
@@ -196,35 +196,17 @@ interface HeaderData {
 }
 ```
 
-```html
-<a href="https://github.com/gravity-ui/page-constructor/blob/main/README.md">English</a>
-<a href="https://github.com/gravity-ui/page-constructor/blob/main/README.de.md">Deutsch</a>
+```typescript
+interface NavigationLogo {
+  icon: ImageProps;
+  text?: string;
+  url?: string;
+}
 ```
 
-# @gravity-ui/page-constructor
+### Server-Utils
 
-`PageConstructor` — это React-компонент, который позволяет создавать страницы из готовых блоков. Он упрощает разработку сложных страниц, предоставляя гибкий механизм для сборки контента из различных компонентов.
-
-## Установка
-
-```bash
-npm install @gravity-ui/page-constructor
-# or
-yarn add @gravity-ui/page-constructor
-```
-
-## Использование
-
-```jsx
-import {PageConstructor} from '@gravity-ui/page-constructor';
-import '@gravity-ui/page-constructor/styles/styles.scss'; // Импорт стилей
-
-const Page = ({data}) => <PageConstructor content={data} />;
-```
-
-## Серверные утилиты
-
-Пакет предоставляет набор серверных утилит для трансформации вашего контента.
+Das Paket stellt eine Reihe von Server-Utils zur Verfügung, um Ihre Inhalte zu transformieren.
 
 ```ts
 const {fullTransform} = require('@gravity-ui/page-constructor/server');
@@ -238,9 +220,9 @@ const {html} = fullTransform(content, {
 });
 ```
 
-Под капотом используется пакет для трансформации Yandex Flavored Markdown в HTML — `diplodoc/transfrom`, поэтому он также является peer dependency.
+Im Hintergrund wird ein Paket verwendet, um Yandex Flavored Markdown in HTML zu transformieren – `diplodoc/transfrom`, daher ist es auch in den Peer Dependencies enthalten.
 
-Вы также можете использовать полезные утилиты там, где вам это необходимо, например, в ваших пользовательских компонентах.
+Sie können nützliche Utilities auch an den Stellen verwenden, an denen Sie sie benötigen, z. B. in Ihren benutzerdefinierten Komponenten.
 
 ```ts
 const {
@@ -256,58 +238,58 @@ const post = {
 };
 ```
 
-Больше утилит вы можете найти в этом [разделе](https://github.com/gravity-ui/page-constructor/tree/main/src/text-transform).
+Weitere Utilities finden Sie in diesem [Abschnitt](https://github.com/gravity-ui/page-constructor/tree/main/src/text-transform).
 
-### Подробная документация по серверным утилитам и трансформерам
+### Detaillierte Dokumentation zu Server-Utils und Transformer
 
-Для получения исчерпывающего руководства по использованию серверных утилит, включая подробные объяснения и расширенные сценарии использования, посетите [дополнительную главу по использованию серверных утилит](./docs/data-preparation.md).
+Eine umfassende Anleitung zur Verwendung von Server-Utils, einschließlich detaillierter Erklärungen und fortgeschrittener Anwendungsfälle, finden Sie im [zusätzlichen Kapitel zur Verwendung von Server-Utils](./docs/data-preparation.md).
 
-## Пользовательские блоки
+### Benutzerdefinierte Blöcke
 
-Конструктор страниц позволяет использовать блоки, которые определяются пользователем в своем приложении. Блоки — это обычные React-компоненты.
+Der Page Constructor ermöglicht die Verwendung von Blöcken, die von Ihrer Anwendung benutzerdefiniert wurden. Blöcke sind reguläre React-Komponenten.
 
-Чтобы передать пользовательские блоки в конструктор:
+Um benutzerdefinierte Blöcke an den Constructor zu übergeben:
 
-1. Создайте блок в вашем приложении.
+1. Erstellen Sie einen Block in Ihrer Anwendung.
 
-2. В вашем коде создайте объект, где ключом будет тип блока (строка), а значением — импортированный компонент блока.
+2. Erstellen Sie in Ihrem Code ein Objekt mit dem Blocktyp (String) als Schlüssel und der importierten Blockkomponente als Wert.
 
-3. Передайте созданный объект в параметр `custom.blocks`, `custom.headers` или `custom.subBlocks` компонента `PageConstructor` (`custom.headers` определяет заголовки блоков, которые будут отображаться отдельно над основным контентом).
+3. Übergeben Sie das erstellte Objekt an den Parameter `custom.blocks`, `custom.headers` oder `custom.subBlocks` der `PageConstructor`-Komponente (`custom.headers` gibt die Block-Header an, die separat über dem allgemeinen Inhalt gerendert werden).
 
-4. Теперь вы можете использовать созданный блок во входных данных (параметр `content`), указав его тип и данные.
+4. Nun können Sie den erstellten Block in den Eingabedaten (dem `content`-Parameter) verwenden, indem Sie seinen Typ und seine Daten angeben.
 
-Чтобы использовать миксины и переменные стилей конструктора при создании пользовательских блоков, добавьте импорт в ваш файл:
+Um Mixins und Constructor-Style-Variablen bei der Erstellung benutzerdefinierter Blöcke zu verwenden, fügen Sie einen Import in Ihre Datei hinzu:
 
 ```css
 @import '~@gravity-ui/page-constructor/styles/styles.scss';
 ```
 
-Чтобы использовать шрифт по умолчанию, добавьте импорт в ваш файл:
+Um die Standard-Schriftart zu verwenden, fügen Sie einen Import in Ihre Datei hinzu:
 
 ```css
 @import '~@gravity-ui/page-constructor/styles/fonts.scss';
 ```
 
-## Загружаемые блоки
+### Loadable Blocks
 
-Иногда бывает необходимо, чтобы блок сам отрисовывал себя на основе загружаемых данных. В этом случае используются загружаемые блоки.
+Manchmal ist es notwendig, dass ein Block sich selbst basierend auf zu ladenden Daten rendert. In diesem Fall werden "loadable blocks" verwendet.
 
-Чтобы добавить пользовательские `loadable` блоки, передайте в `PageConstructor` свойство `custom.loadable`, где ключами будут имена источников данных (строка), а значениями — объект.
+Um benutzerdefinierte `loadable`-Blöcke hinzuzufügen, übergeben Sie dem `PageConstructor` die Eigenschaft `custom.loadable` mit den Namen der Datenquellen (String) für die Komponente als Schlüssel und einem Objekt als Wert.
 
 ```typescript
 export interface LoadableConfigItem {
-  fetch: FetchLoadableData; // метод загрузки данных
-  component: React.ComponentType; // блок для передачи загруженных данных
+  fetch: FetchLoadableData; // Methode zum Laden von Daten
+  component: React.ComponentType; // Block, der geladene Daten übergibt
 }
 
 type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
 ```
 
-## Сетка
+### Grid
 
-Конструктор страниц использует сетку `bootstrap` и ее реализацию на основе React-компонентов, которые вы можете использовать в своем проекте (в том числе отдельно от конструктора).
+Der Page Constructor verwendet das `bootstrap`-Grid und dessen Implementierung auf Basis von React-Komponenten, die Sie in Ihrem eigenen Projekt verwenden können (auch separat vom Constructor).
 
-Пример использования:
+Anwendungsbeispiel:
 
 ```jsx
 import {Grid, Row, Col} from '@gravity-ui/page-constructor';
@@ -321,9 +303,9 @@ const Page = ({children}: PropsWithChildren<PageProps>) => (
 );
 ```
 
-## Навигация
+### Navigation
 
-Навигацию по странице также можно использовать отдельно от конструктора:
+Die Seiten-Navigation kann auch separat vom Constructor verwendet werden:
 
 ```jsx
 import {Navigation} from '@gravity-ui/page-constructor';
@@ -331,50 +313,50 @@ import {Navigation} from '@gravity-ui/page-constructor';
 const Page= ({data, logo}: React.PropsWithChildren<PageProps>) => <Navigation data={data} logo={logo} />;
 ```
 
-## Блоки
+### Blöcke
 
-Каждый блок — это атомарный компонент верхнего уровня. Они хранятся в директории `src/units/constructor/blocks`.
+Jeder Block ist eine atomare Top-Level-Komponente. Sie sind im Verzeichnis `src/units/constructor/blocks` gespeichert.
 
-## Под-блоки
+### Sub-Blöcke
 
-Под-блоки — это компоненты, которые могут использоваться в свойстве `children` блока. В конфигурации указывается список дочерних компонентов из под-блоков. При рендеринге эти под-блоки передаются в блок как `children`.
+Sub-Blöcke sind Komponenten, die in der `children`-Eigenschaft eines Blocks verwendet werden können. In einer Konfiguration wird eine Liste von Kindkomponenten aus Sub-Blöcken angegeben. Nach dem Rendern werden diese Sub-Blöcke als `children` an den Block übergeben.
 
-## Как добавить новый блок в `page-constructor`
+### So fügen Sie einen neuen Block zum `page-constructor` hinzu
 
-1. В директории `src/blocks` или `src/sub-blocks` создайте папку с кодом блока или под-блока.
+1. Erstellen Sie im Verzeichnis `src/blocks` oder `src/sub-blocks` einen Ordner mit dem Code des Blocks oder Sub-Blocks.
 
-2. Добавьте имя блока или под-блока в перечисление `BlockType` или `SubBlockType` и опишите его свойства в файле `src/models/constructor-items/blocks.ts` или `src/models/constructor-items/sub-blocks.ts` аналогично существующим.
+2. Fügen Sie den Namen des Blocks oder Sub-Blocks zum Enum `BlockType` oder `SubBlockType` hinzu und beschreiben Sie seine Eigenschaften in der Datei `src/models/constructor-items/blocks.ts` oder `src/models/constructor-items/sub-blocks.ts` ähnlich wie bei den vorhandenen.
 
-3. Добавьте экспорт для блока в файл `src/blocks/index.ts`, а для под-блока — в `src/sub-blocks/index.ts`.
+3. Fügen Sie einen Export für den Block in der Datei `src/blocks/index.ts` und für den Sub-Block in der Datei `src/sub-blocks/index.ts` hinzu.
 
-4. Добавьте новый компонент или блок в маппинг в `src/constructor-items.ts`.
+4. Fügen Sie eine neue Komponente oder einen Block zur Zuordnung in `src/constructor-items.ts` hinzu.
 
-5. Добавьте валидатор для нового блока:
+5. Fügen Sie einen Validator für den neuen Block hinzu:
 
-   - Создайте файл `schema.ts` в директории блока или под-блока. В этом файле опишите валидатор параметров для компонента в формате [`json-schema`](http://json-schema.org/).
-   - Экспортируйте его в файле `schema/validators/blocks.ts` или `schema/validators/sub-blocks.ts`.
-   - Добавьте его в `enum` или `selectCases` в файле `schema/index.ts`.
+   - Erstellen Sie eine Datei `schema.ts` im Verzeichnis des Blocks oder Sub-Blocks. Beschreiben Sie in dieser Datei einen Parameter-Validator für die Komponente im [`json-schema`](http://json-schema.org/)-Format.
+   - Exportieren Sie ihn in der Datei `schema/validators/blocks.ts` oder `schema/validators/sub-blocks.ts`.
+   - Fügen Sie ihn in `enum` oder `selectCases` in der Datei `schema/index.ts` hinzu.
 
-6. В директории блока добавьте файл `README.md` с описанием входных параметров.
-7. В директории блока добавьте демо storybook в папку `__stories__`. Весь демонстрационный контент для story должен быть размещен в `data.json` в директории story. Универсальный `Story` должен принимать тип пропсов блока, иначе в Storybook будут отображаться некорректные пропсы блока.
-8. Добавьте шаблон данных блока в папку `src/editor/data/templates/`, имя файла должно совпадать с типом блока.
-9. (опционально) Добавьте иконку предварительного просмотра блока в папку `src/editor/data/previews/`, имя файла должно совпадать с типом блока.
+6. Fügen Sie im Verzeichnis des Blocks die Datei `README.md` mit einer Beschreibung der Eingabeparameter hinzu.
+7. Fügen Sie im Verzeichnis des Blocks eine Storybook-Demo im Ordner `__stories__` hinzu. Alle Demo-Inhalte für die Story müssen in `data.json` im Story-Verzeichnis platziert werden. Die generische `Story` muss den Typ der Block-Props akzeptieren, andernfalls werden in Storybook falsche Block-Props angezeigt.
+8. Fügen Sie eine Block-Daten-Vorlage zum Ordner `src/editor/data/templates/` hinzu, der Dateiname sollte dem Block-Typ entsprechen.
+9. (Optional) Fügen Sie ein Block-Vorschau-Icon zum Ordner `src/editor/data/previews/` hinzu, der Dateiname sollte dem Block-Typ entsprechen.
 
-## Темы
+### Themes
 
-`PageConstructor` позволяет использовать темы: вы можете устанавливать разные значения для отдельных свойств блоков в зависимости от выбранной в приложении темы.
+Der `PageConstructor` ermöglicht die Verwendung von Themes: Sie können unterschiedliche Werte für einzelne Block-Eigenschaften festlegen, abhängig vom im Projekt ausgewählten Theme.
 
-Чтобы добавить тему к свойству блока:
+Um einem Theme für eine Block-Eigenschaft hinzuzufügen:
 
-1. В файле `models/blocks.ts` определите тип соответствующего свойства блока с помощью дженерика `ThemeSupporting<T>`, где `T` — это тип свойства.
+1. Definieren Sie in der Datei `models/blocks.ts` den Typ der jeweiligen Block-Eigenschaft mit dem generischen Typ `ThemeSupporting<T>`, wobei `T` der Typ der Eigenschaft ist.
 
-2. В файле с `react`-компонентом блока получите значение свойства с учетом темы с помощью хука `getThemedValue` и `useTheme` (см. примеры в блоке `MediaBlock.tsx`).
+2. In der Datei mit der `react`-Komponente des Blocks rufen Sie den Wert der Eigenschaft mit dem Theme über den Hook `getThemedValue` und `useTheme` ab (siehe Beispiele im Block `MediaBlock.tsx`).
 
-3. Добавьте поддержку темы в валидатор свойства: в файле `schema.ts` блока оберните это свойство в `withTheme`.
+3. Fügen Sie Theme-Unterstützung zum Eigenschafts-Validator hinzu: In der Datei `schema.ts` des Blocks umschließen Sie diese Eigenschaft mit `withTheme`.
 
-## i18n
+### i18n
 
-`page-constructor` — это библиотека на основе `uikit`, и мы используем экземпляр `i18n` из uikit. Для настройки интернационализации вам достаточно использовать `configure` из uikit:
+Der `page-constructor` ist eine `uikit-basierte` Bibliothek, und wir verwenden eine Instanz von `i18n` aus uikit. Um die Internationalisierung einzurichten, müssen Sie nur `configure` von uikit verwenden:
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';
@@ -384,20 +366,20 @@ configure({
 });
 ```
 
-## Карты
+### Maps
 
-Для использования карт укажите тип карты, `scriptSrc` и `apiKey` в поле `mapContext` в `PageConstructorProvider`.
+Um Karten zu verwenden, geben Sie den Kartentyp, `scriptSrc` und `apiKey` im Feld `mapContext` in `PageConstructorProvider` an.
 
-Вы можете определить переменные окружения для режима разработки в файле `.env.development` в корне проекта.
-`STORYBOOK_GMAP_API_KEY` — apiKey для google maps.
+Sie können Umgebungsvariablen für den Entwicklungsmodus in der Datei `.env.development` im Stammverzeichnis des Projekts definieren.
+`STORYBOOK_GMAP_API_KEY` - apiKey für Google Maps
 
-## Аналитика
+### Analytics
 
-### Инициализация
+#### Init
 
-Чтобы начать использовать любую аналитику, передайте обработчик в конструктор. Обработчик должен быть создан на стороне проекта. Обработчик получит объекты событий `default` и `custom`. Переданный обработчик будет срабатывать при кликах по кнопкам, ссылкам, навигации и элементам управления. Поскольку для обработки всех событий используется один обработчик, обратите внимание на то, как обрабатывать различные события при создании обработчика. Предусмотрены предопределенные поля, которые помогут вам построить сложную логику.
+Um mit der Nutzung von Analytics zu beginnen, übergeben Sie einen Handler an den Constructor. Der Handler muss auf Projektseite erstellt werden. Der Handler erhält die Event-Objekte `default` und `custom`. Der übergebene Handler wird bei Klicks auf Buttons, Links, Navigation und Steuerelemente ausgelöst. Da ein Handler für die Behandlung aller Events verwendet wird, achten Sie darauf, wie Sie verschiedene Events bei der Erstellung des Handlers behandeln. Es gibt vordefinierte Felder, die Ihnen helfen, komplexe Logik zu erstellen.
 
-Передайте `autoEvents: true` в конструктор, чтобы автоматически настроить срабатывание событий.
+Übergeben Sie `autoEvents: true` an den Constructor, um automatisch konfigurierte Events auszulösen.
 
 ```ts
 function sendEvents(events: MyEventType []) {
@@ -413,7 +395,7 @@ function sendEvents(events: MyEventType []) {
 />
 ```
 
-Ein Event-Objekt hat nur ein erforderliches Feld – `name`. Es gibt auch vordefinierte Felder, die zur Verwaltung komplexer Logik dienen. Zum Beispiel kann `counter.include` helfen, ein Event in einem bestimmten Zähler zu senden, wenn mehrere Analytiksysteme in einem Projekt verwendet werden.
+Ein Event-Objekt hat nur ein erforderliches Feld – `name`. Es hat auch vordefinierte Felder, die dazu dienen, komplexe Logik zu verwalten. Zum Beispiel kann `counter.include` helfen, ein Event in einem bestimmten Zähler zu senden, wenn mehrere Analysetools in einem Projekt verwendet werden.
 
 ```ts
 type AnalyticsEvent<T = {}> = T & {
@@ -434,18 +416,18 @@ type MyEventType = AnalyticsEvent<{
 
 #### Zähler-Selektor
 
-Es ist möglich, ein Event so zu konfigurieren, an welches Analytiksystem es gesendet werden soll.
+Es ist möglich, ein Event so zu konfigurieren, an welches Analysetool es gesendet werden soll.
 
 ```ts
 type AnalyticsCounters = {
-  include?: string[]; // Array von Analytik-Zähler-IDs, die angewendet werden
-  exclude?: string[]; // Array von Analytik-Zähler-IDs, die nicht angewendet werden
+  include?: string[]; // Array von Analytics-Zähler-IDs, die angewendet werden
+  exclude?: string[]; // Array von Analytics-Zähler-IDs, die nicht angewendet werden
 };
 ```
 
-#### `context`-Parameter
+#### Kontext-Parameter
 
-Übergeben Sie einen `context`-Wert, um den Ort im Projekt zu definieren, an dem ein Event ausgelöst wird.
+Übergeben Sie den `context`-Wert, um den Ort im Projekt zu definieren, an dem ein Event ausgelöst wird.
 
 Verwenden Sie den untenstehenden Selektor oder erstellen Sie eine Logik, die den Projektanforderungen entspricht.
 
@@ -458,7 +440,7 @@ if (isCounterAllowed(counterName, counters)) {
 
 #### Reservierte Event-Typen
 
-Mehrere vordefinierte Event-Typen werden verwendet, um automatisch konfigurierte Events zu markieren. Verwenden Sie die Typen zum Beispiel, um Standard-Events zu filtern.
+Mehrere vordefinierte Event-Typen werden verwendet, um automatisch konfigurierte Events zu markieren. Verwenden Sie die Typen beispielsweise zum Filtern von Standard-Events.
 
 ```ts
 enum PredefinedEventTypes {
@@ -500,7 +482,7 @@ In der Regel verwenden wir zwei Arten von Commits:
 1.  `fix`: Ein Commit vom Typ `fix` behebt einen Fehler in Ihrem Code (dies korreliert mit PATCH in der semantischen Versionierung).
 2.  `feat`: Ein Commit vom Typ `feat` führt eine neue Funktion in den Code ein (dies korreliert mit MINOR in der semantischen Versionierung).
 3.  `BREAKING CHANGE`: Ein Commit, der einen `BREAKING CHANGE:`-Footer hat oder nach dem Typ/Scope ein `!` anhängt, führt eine nicht abwärtskompatible API-Änderung ein (korreliert mit MAJOR in der semantischen Versionierung). Ein `BREAKING CHANGE` kann Teil von Commits jeglichen Typs sein.
-4.  Um die Version des Release-Pakets manuell festzulegen, müssen Sie `Release-As: <version>` zu Ihrer Commit-Nachricht hinzufügen, z. B.
+4.  Um die Release-Paketversion manuell festzulegen, müssen Sie `Release-As: <version>` zu Ihrer Commit-Nachricht hinzufügen, z. B.
 
 ```bash
 git commit -m 'chore: bump release
@@ -510,27 +492,27 @@ Release-As: 1.2.3'
 
 Alle Informationen finden Sie [hier](https://www.conventionalcommits.org/en/v1.0.0/).
 
-Wenn Sie die Genehmigung Ihres Pull-Requests von den Code-Owners erhalten und alle Checks bestanden haben, gehen Sie wie folgt vor:
+Wenn Sie die Genehmigung Ihres Pull-Requests von den Code-Ownern erhalten und alle Checks bestanden haben, gehen Sie wie folgt vor:
 
-1.  Prüfen Sie, ob ein Release-Pull-Request vom Roboter mit Änderungen von anderen Mitwirkenden vorhanden ist (sieht aus wie `chore(main): release 0.0.0`). Wenn ja, prüfen Sie, warum er nicht gemerged wurde. Wenn der Mitwirkende einer gemeinsamen Veröffentlichung zustimmt, fahren Sie mit dem nächsten Schritt fort. Wenn nicht, bitten Sie ihn, seine Version zu veröffentlichen, und fahren Sie dann mit dem nächsten Schritt fort.
-2.  Squash and Merge (SQUASH) Sie Ihren PR (Es ist wichtig, eine neue Version mit Github-Actions zu veröffentlichen).
-3.  Warten Sie, bis der Roboter einen PR mit einer neuen Version des Pakets und Informationen zu Ihren Änderungen in CHANGELOG.md erstellt. Sie können den Prozess auf [der Actions-Registerkarte](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
+1.  Prüfen Sie, ob ein Release-Pull-Request vom Roboter mit Änderungen von anderen Mitwirkenden vorhanden ist (sieht aus wie `chore(main): release 0.0.0`). Wenn ja, prüfen Sie, warum er nicht gemerged wurde. Wenn der Mitwirkende zustimmt, eine gemeinsame Version zu veröffentlichen, fahren Sie mit dem nächsten Schritt fort. Wenn nicht, bitten Sie ihn, seine Version zu veröffentlichen, und fahren Sie dann mit dem nächsten Schritt fort.
+2.  Squash und merge Ihren PR (Es ist wichtig, eine neue Version mit Github-Actions zu veröffentlichen).
+3.  Warten Sie, bis der Roboter einen PR mit einer neuen Version des Pakets und Informationen zu Ihren Änderungen in CHANGELOG.md erstellt. Sie können den Prozess im [Actions-Tab](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
 4.  Überprüfen Sie Ihre Änderungen in CHANGELOG.md und genehmigen Sie den PR des Roboters.
-5.  Squash and Merge (SQUASH) Sie den PR. Sie können den Release-Prozess auf [der Actions-Registerkarte](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
+5.  Squash und merge den PR. Sie können den Release-Prozess im [Actions-Tab](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
 
 ### Alpha-Versionen veröffentlichen
 
 Wenn Sie eine Alpha-Version des Pakets von Ihrem Branch veröffentlichen möchten, können Sie dies manuell tun:
 
-1.  Gehen Sie zur Registerkarte "Actions".
-2.  Wählen Sie auf der linken Seite den Workflow "Release alpha version".
+1.  Gehen Sie zum Tab "Actions".
+2.  Wählen Sie auf der linken Seite des Bildschirms den Workflow "Release alpha version".
 3.  Auf der rechten Seite sehen Sie die Schaltfläche "Run workflow". Hier können Sie den Branch auswählen.
 4.  Sie sehen auch ein Feld für die manuelle Version. Wenn Sie zum ersten Mal ein Alpha in Ihrem Branch veröffentlichen, lassen Sie dieses Feld leer. Nach der ersten Veröffentlichung müssen Sie die neue Version manuell festlegen, da wir die package.json nicht ändern, falls der Branch sehr bald abläuft. Verwenden Sie das Präfix `alpha` in Ihrer manuellen Version, andernfalls erhalten Sie einen Fehler.
-5.  Klicken Sie auf "Run workflow" und warten Sie, bis die Aktion abgeschlossen ist. Sie können beliebig viele Versionen veröffentlichen, aber missbrauchen Sie es nicht und veröffentlichen Sie Versionen nur, wenn Sie sie wirklich benötigen. Verwenden Sie in anderen Fällen [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
+5.  Klicken Sie auf "Run workflow" und warten Sie, bis die Aktion abgeschlossen ist. Sie können so viele Versionen veröffentlichen, wie Sie möchten, aber missbrauchen Sie es nicht und veröffentlichen Sie Versionen nur, wenn Sie sie wirklich benötigen. In anderen Fällen verwenden Sie [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
 
 ### Beta-Major-Versionen veröffentlichen
 
-Wenn Sie eine neue Major-Version veröffentlichen möchten und dafür wahrscheinlich Beta-Versionen vor einer stabilen Version benötigen, gehen Sie wie folgt vor:
+Wenn Sie eine neue Major-Version veröffentlichen möchten und dafür wahrscheinlich Beta-Versionen vor der stabilen Version benötigen, gehen Sie wie folgt vor:
 
 1.  Erstellen oder aktualisieren Sie den Branch `beta`.
 2.  Fügen Sie Ihre Änderungen dort hinzu.
@@ -542,8 +524,8 @@ git commit -m 'fix: last commit
 Release-As: 3.0.0-beta.0' --allow-empty
 ```
 
-4.  "Release please" (Bitte veröffentlichen) erstellt einen neuen PR für den Branch `beta` mit aktualisiertem CHANGELOG.md und erhöht die Version des Pakets.
-5.  Sie können dies beliebig oft wiederholen. Wenn Sie bereit sind, die neueste Major-Version ohne Beta-Tag zu veröffentlichen, müssen Sie einen PR vom Branch `beta` zum Branch `main` erstellen. Beachten Sie, dass es normal ist, dass Ihre Paketversion mit einem Beta-Tag versehen ist. Der Roboter weiß das und ändert es entsprechend. `3.0.0-beta.0` wird zu `3.0.0`.
+4.  Der "Release please"-Roboter erstellt einen neuen PR zum Branch `beta` mit aktualisiertem CHANGELOG.md und erhöht die Version des Pakets.
+5.  Sie können dies beliebig oft wiederholen. Wenn Sie bereit sind, die neueste Major-Version ohne Beta-Tag zu veröffentlichen, müssen Sie einen PR vom Branch `beta` zum Branch `main` erstellen. Beachten Sie, dass es normal ist, dass Ihre Paketversion ein Beta-Tag hat. Der Roboter weiß das und passt es entsprechend an. `3.0.0-beta.0` wird zu `3.0.0`.
 
 ### Release-Ablauf für frühere Major-Versionen
 
@@ -553,16 +535,16 @@ Wenn Sie eine neue Version in einer früheren Major-Version veröffentlichen mö
     1.  `version-1.x.x/fixes` - für Major 1.x.x
     2.  `version-2.x.x` - für Major 2.x.x
 2.  Erstellen Sie einen neuen Branch von dem vorherigen Major-Release-Branch.
-3.  Cherry-picken Sie Ihren Commit vom Branch `main`.
-4.  Erstellen Sie einen PR, erhalten Sie die Genehmigung und mergen Sie ihn in den vorherigen Major-Release-Branch.
-5.  Squash and Merge (SQUASH) Sie Ihren PR (Es ist wichtig, eine neue Version mit Github-Actions zu veröffentlichen).
-6.  Warten Sie, bis der Roboter einen PR mit einer neuen Version des Pakets und Informationen zu Ihren Änderungen in CHANGELOG.md erstellt. Sie können den Prozess auf [der Actions-Registerkarte](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
+3.  Cherry-picken Sie Ihren Commit aus dem Branch `main`.
+4.  Erstellen Sie einen PR, holen Sie sich die Genehmigung und mergen Sie ihn in den vorherigen Major-Release-Branch.
+5.  Squash und merge Ihren PR (Es ist wichtig, eine neue Version mit Github-Actions zu veröffentlichen).
+6.  Warten Sie, bis der Roboter einen PR mit einer neuen Version des Pakets und Informationen zu Ihren Änderungen in CHANGELOG.md erstellt. Sie können den Prozess im [Actions-Tab](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
 7.  Überprüfen Sie Ihre Änderungen in CHANGELOG.md und genehmigen Sie den PR des Roboters.
-8.  Squash and Merge (SQUASH) Sie den PR. Sie können den Release-Prozess auf [der Actions-Registerkarte](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
+8.  Squash und merge den PR. Sie können den Release-Prozess im [Actions-Tab](https://github.com/gravity-ui/page-constructor/actions) verfolgen.
 
 ## Page Constructor Editor
 
-Der Editor bietet eine Benutzeroberfläche für die Verwaltung von Seiteninhalten mit Echtzeit-Vorschau.
+Der Editor bietet eine Benutzeroberfläche zur Verwaltung von Seiteninhalten mit Echtzeit-Vorschau.
 
 Anwendung:
 
@@ -583,12 +565,7 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 ## Memory Bank
 ```
 
-Hier ist die Übersetzung der README-Datei ins Deutsche:
-
-```markdown
-@gravity/uikit
-
-Dieses Projekt beinhaltet eine umfassende **Memory Bank** – eine Sammlung von Markdown-Dokumentationsdateien, die detaillierte Informationen über die Architektur, Komponenten und Nutzungsmuster des Projekts liefern. Die Memory Bank ist besonders nützlich bei der Arbeit mit KI-Agenten, da sie strukturierte Informationen enthält über:
+Dieses Projekt enthält eine umfassende **Memory Bank** – eine Sammlung von Markdown-Dokumentationsdateien, die detaillierte Informationen über die Architektur, Komponenten und Nutzungsmuster des Projekts liefern. Die Memory Bank ist besonders nützlich bei der Arbeit mit KI-Agenten, da sie strukturierte Informationen enthält über:
 
 - **Projektübersicht**: Kernanforderungen, Ziele und Kontext
 - **Komponentendokumentation**: Detaillierte Anleitungen zur Nutzung aller Komponenten
@@ -603,7 +580,7 @@ Die Memory Bank befindet sich im Verzeichnis `memory-bank/` und besteht aus regu
 - `productContext.md` - Projektzweck und Ziele der Benutzererfahrung
 - `systemPatterns.md` - Architektur und technische Entscheidungen
 - `techContext.md` - Technologien, Einrichtung und Einschränkungen
-- `activeContext.md` - Aktueller Arbeitsfokus und jüngste Änderungen
+- `activeContext.md` - Aktueller Arbeitsfokus und kürzliche Änderungen
 - `progress.md` - Implementierungsstatus und bekannte Probleme
 - `usage/` - Komponentenspezifische Nutzungdokumentation
 - `storybookComponents.md` - Details zur Storybook-Integration
@@ -622,4 +599,3 @@ KI-Agenten können diese Dateien lesen, um sich schnell mit dem Projektkontext v
 ## Tests
 
 Umfassende Dokumentation ist unter dem bereitgestellten [Link](./test-utils/docs/README.md) verfügbar.
-```

@@ -53,15 +53,15 @@ const App = () => {
 export default App;
 ```
 
-C'était l'exemple de connexion le plus simple. Pour que le balisage YFM fonctionne, vous devez traiter le contenu côté serveur et le recevoir côté client.
+C'était l'exemple de connexion le plus simple. Pour que le balisage YFM fonctionne, vous devez traiter le contenu sur le serveur et le recevoir sur le client.
 
-Si votre serveur est une application distincte, vous devez installer page-constructor :
+Si votre serveur est une application distincte, vous devez installer `page-constructor` :
 
 ```shell
 npm install @gravity-ui/page-constructor
 ```
 
-Pour traiter YFM dans tous les blocs de base, appelez `contentTransformer` et passez-lui le contenu et les options :
+Pour traiter le YFM dans tous les blocs de base, appelez `contentTransformer` et passez-lui le contenu et les options :
 
 ```ts
 const express = require('express');
@@ -139,7 +139,7 @@ interface PageConstructorProps {
 interface PageConstructorProviderProps {
   isMobile?: boolean; // Un indicateur indiquant que le code est exécuté en mode mobile.
   locale?: LocaleContextProps; // Informations sur la langue et le domaine (utilisé lors de la génération et du formatage des liens).
-  location?: Location; // API de l'historique du navigateur ou du routeur, URL de la page.
+  location?: Location; // API du navigateur ou de l'historique du routeur, URL de la page.
   analytics?: AnalyticsContextProps; // fonction pour gérer les événements d'analyse
 
   ssrConfig?: SSR; // Un indicateur indiquant que le code est exécuté côté serveur.
@@ -196,11 +196,12 @@ interface HeaderData {
 }
 ```
 
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/fr/README.md">Français</a>
-</div>
+```typescript
+interface NavigationLogo {
+  icon: ImageProps;
+  text?: string;
+  url?: string;
+}
 ```
 
 ### Utilitaires serveur
@@ -219,7 +220,7 @@ const {html} = fullTransform(content, {
 });
 ```
 
-En interne, un package est utilisé pour transformer le Markdown au format Yandex en HTML - `diplodoc/transfrom`, il est donc également dans les dépendances pairées.
+En coulisses, un package est utilisé pour transformer le Yandex Flavored Markdown en HTML - `diplodoc/transfrom`, il est donc également dans les dépendances pairées.
 
 Vous pouvez également utiliser des utilitaires utiles là où vous en avez besoin, par exemple dans vos composants personnalisés.
 
@@ -245,7 +246,7 @@ Pour un guide complet sur l'utilisation des utilitaires serveur, y compris des e
 
 ### Blocs personnalisés
 
-Le constructeur de pages vous permet d'utiliser des blocs définis par l'utilisateur dans son application. Les blocs sont des composants React ordinaires.
+Le constructeur de page vous permet d'utiliser des blocs définis par l'utilisateur dans leur application. Les blocs sont des composants React ordinaires.
 
 Pour passer des blocs personnalisés au constructeur :
 
@@ -273,7 +274,7 @@ Pour utiliser la police par défaut, ajoutez une importation dans votre fichier 
 
 Il est parfois nécessaire qu'un bloc se rende en fonction des données à charger. Dans ce cas, des blocs chargeables sont utilisés.
 
-Pour ajouter des blocs `loadable` personnalisés, passez au `PageConstructor` la propriété `custom.loadable` avec les noms des sources de données (chaîne de caractères) pour le composant comme clé et un objet comme valeur.
+Pour ajouter des blocs `loadable` personnalisés, passez à `PageConstructor` la propriété `custom.loadable` avec les noms des sources de données (chaîne de caractères) pour le composant comme clé et un objet comme valeur.
 
 ```typescript
 export interface LoadableConfigItem {
@@ -286,7 +287,7 @@ type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
 
 ### Grille
 
-Le constructeur de pages utilise la grille `bootstrap` et son implémentation basée sur des composants React que vous pouvez utiliser dans votre propre projet (y compris séparément du constructeur).
+Le constructeur de page utilise la grille `bootstrap` et son implémentation basée sur des composants React que vous pouvez utiliser dans votre propre projet (y compris séparément du constructeur).
 
 Exemple d'utilisation :
 
@@ -324,7 +325,7 @@ Les sous-blocs sont des composants qui peuvent être utilisés dans la propriét
 
 1. Dans le répertoire `src/blocks` ou `src/sub-blocks`, créez un dossier avec le code du bloc ou du sous-bloc.
 
-2. Ajoutez le nom du bloc ou du sous-bloc à l'énumération `BlockType` ou `SubBlockType` et décrivez ses propriétés dans le fichier `src/models/constructor-items/blocks.ts` ou `src/models/constructor-items/sub-blocks.ts` de la même manière que les existants.
+2. Ajoutez le nom du bloc ou du sous-bloc à l'énumération `BlockType` ou `SubBlockType` et décrivez ses propriétés dans le fichier `src/models/constructor-items/blocks.ts` ou `src/models/constructor-items/sub-blocks.ts` de manière similaire aux existants.
 
 3. Ajoutez une exportation pour le bloc dans le fichier `src/blocks/index.ts` et pour le sous-bloc dans le fichier `src/sub-blocks/index.ts`.
 
@@ -332,12 +333,12 @@ Les sous-blocs sont des composants qui peuvent être utilisés dans la propriét
 
 5. Ajoutez un validateur pour le nouveau bloc :
 
-   - Ajoutez un fichier `schema.ts` au répertoire du bloc ou du sous-bloc. Dans ce fichier, décrivez un validateur de paramètres pour le composant au format [`json-schema`](http://json-schema.org/).
+   - Ajoutez un fichier `schema.ts` au répertoire du bloc ou du sous-bloc. Dans ce fichier, décrivez un validateur de paramètre pour le composant au format [`json-schema`](http://json-schema.org/).
    - Exportez-le dans le fichier `schema/validators/blocks.ts` ou `schema/validators/sub-blocks.ts`.
-   - Ajoutez-le à `enum` ou `selectCases` dans le fichier `schema/index.ts`.
+   - Ajoutez-le à l'énumération `enum` ou `selectCases` dans le fichier `schema/index.ts`.
 
 6. Dans le répertoire du bloc, ajoutez le fichier `README.md` avec une description des paramètres d'entrée.
-7. Dans le répertoire du bloc, ajoutez une démo storybook dans le dossier `__stories__`. Tout le contenu de la démo pour l'histoire doit être placé dans `data.json` dans le répertoire de l'histoire. Le `Story` générique doit accepter le type des props du bloc, sinon des props de bloc incorrectes seront affichées dans Storybook.
+7. Dans le répertoire du bloc, ajoutez une démo Storybook dans le dossier `__stories__`. Tout le contenu de démo pour l'histoire doit être placé dans `data.json` dans le répertoire de l'histoire. Le `Story` générique doit accepter le type des props du bloc, sinon des props de bloc incorrectes seront affichées dans Storybook.
 8. Ajoutez un modèle de données de bloc au dossier `src/editor/data/templates/`, le nom du fichier doit correspondre au type de bloc.
 9. (facultatif) Ajoutez une icône de prévisualisation de bloc au dossier `src/editor/data/previews/`, le nom du fichier doit correspondre au type de bloc.
 
@@ -355,7 +356,7 @@ Pour ajouter un thème à une propriété de bloc :
 
 ### i18n
 
-Le `page-constructor` est une bibliothèque basée sur `uikit`, et nous utilisons une instance de `i18n` de uikit. Pour configurer l'internationalisation, il vous suffit d'utiliser `configure` de uikit :
+Le `page-constructor` est une bibliothèque basée sur `uikit`, et nous utilisons une instance de `i18n` de uikit. Pour configurer l'internationalisation, il vous suffit d'utiliser la fonction `configure` de uikit :
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';
@@ -369,14 +370,14 @@ configure({
 
 Pour utiliser des cartes, placez le type de carte, `scriptSrc` et `apiKey` dans le champ `mapContext` de `PageConstructorProvider`.
 
-Vous pouvez définir des variables d'environnement pour le mode de développement dans le fichier .env.development à la racine du projet.
+Vous pouvez définir des variables d'environnement pour le mode de développement dans le fichier `.env.development` à la racine du projet.
 `STORYBOOK_GMAP_API_KEY` - apiKey pour les cartes Google
 
 ### Analytique
 
 #### Initialisation
 
-Pour commencer à utiliser une quelconque analytique, passez un gestionnaire au constructeur. Le gestionnaire doit être créé côté projet. Le gestionnaire recevra les objets d'événement `default` et `custom`. Le gestionnaire passé sera déclenché lors des clics sur les boutons, les liens, la navigation et les contrôles. Comme un seul gestionnaire est utilisé pour le traitement de tous les événements, faites attention à la manière de traiter les différents événements lors de la création du gestionnaire. Il existe des champs prédéfinis qui servent à vous aider à construire une logique complexe.
+Pour commencer à utiliser une quelconque analytique, passez un gestionnaire au constructeur. Le gestionnaire doit être créé côté projet. Le gestionnaire recevra les objets d'événements `default` et `custom`. Le gestionnaire passé sera déclenché lors des clics sur les boutons, les liens, la navigation et les contrôles. Comme un seul gestionnaire est utilisé pour le traitement de tous les événements, faites attention à la manière de traiter les différents événements lors de la création du gestionnaire. Il existe des champs prédéfinis qui servent à vous aider à construire une logique complexe.
 
 Passez `autoEvents: true` au constructeur pour déclencher des événements configurés automatiquement.
 
@@ -394,7 +395,7 @@ function sendEvents(events: MyEventType []) {
 />
 ```
 
-Un objet d'événement possède un seul champ obligatoire : `name`. Il dispose également de champs prédéfinis, qui servent à faciliter la gestion de logiques complexes. Par exemple, `counter.include` peut aider à envoyer un événement dans un compteur particulier si plusieurs systèmes d'analyse sont utilisés dans un projet.
+Un objet événement possède un seul champ obligatoire : `name`. Il dispose également de champs prédéfinis qui servent à faciliter la gestion de logiques complexes. Par exemple, `counter.include` peut aider à envoyer un événement dans un compteur particulier si plusieurs systèmes d'analyse sont utilisés dans un projet.
 
 ```ts
 type AnalyticsEvent<T = {}> = T & {
@@ -409,13 +410,13 @@ Il est possible de configurer le type d'événement nécessaire pour un projet.
 
 ```ts
 type MyEventType = AnalyticsEvent<{
-  [key: string]?: string; // seul un type 'string' est supporté
+  [key: string]?: string; // seul le type 'string' est supporté
 }>;
 ```
 
 #### Sélecteur de compteur
 
-Il est possible de configurer un événement pour déterminer vers quel système d'analyse l'envoyer.
+Il est possible de configurer un événement pour savoir à quel système d'analyse l'envoyer.
 
 ```ts
 type AnalyticsCounters = {
@@ -472,7 +473,7 @@ export default defineConfig({
 });
 ```
 
-Pour Vite, vous devez installer le plugin `vite-plugin-dynamic-import` et configurer le fichier de configuration pour que les imports dynamiques fonctionnent.
+Pour Vite, vous devez installer le plugin `vite-plugin-dynamic-import` et configurer le fichier de configuration pour que les importations dynamiques fonctionnent.
 
 ## Flux de publication
 
@@ -493,11 +494,11 @@ Vous pouvez trouver toutes les informations [ici](https://www.conventionalcommit
 
 Lorsque vous recevez l'approbation de votre pull-request par les propriétaires du code et que vous avez passé toutes les vérifications, veuillez suivre les étapes suivantes :
 
-1. Vérifiez s'il existe une pull-request de publication du robot avec des modifications d'un autre contributeur (elle ressemble à `chore(main): release 0.0.0`). Si elle existe, vérifiez pourquoi elle n'a pas été fusionnée. Si le contributeur accepte de publier une version partagée, passez à l'étape suivante. Sinon, demandez-lui de publier sa version, puis suivez l'étape suivante.
-2. Fusionnez votre PR en "squash" (Il est important de publier une nouvelle version avec Github-Actions).
-3. Attendez que le robot crée une PR avec une nouvelle version du package et des informations sur vos modifications dans CHANGELOG.md. Vous pouvez suivre le processus dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
-4. Vérifiez vos modifications dans CHANGELOG.md et approuvez la PR du robot.
-5. Fusionnez la PR en "squash". Vous pouvez voir le processus de publication dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
+1. Vérifiez s'il existe une pull-request de publication du robot avec des changements d'un autre contributeur (elle ressemble à `chore(main): release 0.0.0`). Si elle existe, vérifiez pourquoi elle n'a pas été fusionnée. Si le contributeur accepte de publier une version partagée, passez à l'étape suivante. Sinon, demandez-lui de publier sa version, puis suivez l'étape suivante.
+2. Squash and merge votre PR (Il est important de publier une nouvelle version avec Github-Actions).
+3. Attendez que le robot crée une PR avec une nouvelle version du package et des informations sur vos changements dans CHANGELOG.md. Vous pouvez suivre le processus dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
+4. Vérifiez vos changements dans CHANGELOG.md et approuvez la PR du robot.
+5. Squash and merge la PR. Vous pouvez suivre le processus de publication dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
 
 ### Publication de versions alpha
 
@@ -506,7 +507,7 @@ Si vous souhaitez publier une version alpha du package depuis votre branche, vou
 1. Allez dans l'onglet Actions.
 2. Sélectionnez le workflow "Release alpha version" sur le côté gauche de la page.
 3. Sur le côté droit, vous verrez le bouton "Run workflow". Ici, vous pouvez choisir la branche.
-4. Vous verrez également un champ pour la version manuelle. Si vous publiez une alpha dans votre branche pour la première fois, ne laissez rien ici. Après la première publication, vous devrez définir la nouvelle version manuellement car nous ne modifions pas `package.json` au cas où la branche expirerait très bientôt. Utilisez le préfixe `alpha` dans votre version manuelle, sinon vous obtiendrez une erreur.
+4. Vous verrez également un champ pour la version manuelle. Si vous publiez une alpha dans votre branche pour la première fois, ne laissez rien ici. Après la première publication, vous devrez définir la nouvelle version manuellement car nous ne modifions pas `package.json` au cas où la branche pourrait expirer très rapidement. Utilisez le préfixe `alpha` dans votre version manuelle, sinon vous obtiendrez une erreur.
 5. Cliquez sur "Run workflow" et attendez que l'action se termine. Vous pouvez publier autant de versions que vous le souhaitez, mais n'en abusez pas et publiez des versions uniquement si vous en avez vraiment besoin. Dans les autres cas, utilisez [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
 
 ### Publication de versions bêta majeures
@@ -514,7 +515,7 @@ Si vous souhaitez publier une version alpha du package depuis votre branche, vou
 Si vous souhaitez publier une nouvelle version majeure, vous aurez probablement besoin de versions bêta avant la version stable. Veuillez suivre les étapes suivantes :
 
 1. Créez ou mettez à jour la branche `beta`.
-2. Ajoutez-y vos modifications.
+2. Ajoutez-y vos changements.
 3. Lorsque vous êtes prêt pour une nouvelle version bêta, publiez-la manuellement avec un commit vide (ou vous pouvez ajouter ce message de commit avec un pied de page au dernier commit) :
 
 ```bash
@@ -524,22 +525,22 @@ Release-As: 3.0.0-beta.0' --allow-empty
 ```
 
 4. Le robot "Release please" créera une nouvelle PR vers la branche `beta` avec CHANGELOG.md mis à jour et la version du package incrémentée.
-5. Vous pouvez répéter cela autant de fois que vous le souhaitez. Lorsque vous êtes prêt à publier la dernière version majeure sans tag bêta, vous devez créer une PR de la branche `beta` vers la branche `main`. Notez qu'il est normal que la version de votre package ait un tag bêta. Le robot le sait et le gère correctement. `3.0.0-beta.0` deviendra `3.0.0`.
+5. Vous pouvez répéter cela autant de fois que vous le souhaitez. Lorsque vous êtes prêt à publier la dernière version majeure sans tag bêta, vous devez créer une PR de la branche `beta` vers la branche `main`. Notez qu'il est normal que la version de votre package soit taguée bêta. Le robot le sait et la modifiera correctement. `3.0.0-beta.0` deviendra `3.0.0`.
 
 ### Flux de publication pour les versions majeures précédentes
 
 Si vous souhaitez publier une nouvelle version dans une version majeure précédente après l'avoir committée sur `main`, veuillez suivre les étapes suivantes :
 
-1. Mettez à jour la branche nécessaire, les noms des branches de publication des versions majeures précédentes sont :
+1. Mettez à jour la branche nécessaire. Les noms des branches de publication des versions majeures précédentes sont :
    1. `version-1.x.x/fixes` - pour la version majeure 1.x.x
    2. `version-2.x.x` - pour la version majeure 2.x.x
 2. Créez une nouvelle branche à partir de la branche de publication de la version majeure précédente.
 3. Cherry-pick votre commit depuis la branche `main`.
 4. Créez une PR, obtenez l'approbation et fusionnez-la dans la branche de publication de la version majeure précédente.
-5. Fusionnez votre PR en "squash" (Il est important de publier une nouvelle version avec Github-Actions).
-6. Attendez que le robot crée une PR avec une nouvelle version du package et des informations sur vos modifications dans CHANGELOG.md. Vous pouvez suivre le processus dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
-7. Vérifiez vos modifications dans CHANGELOG.md et approuvez la PR du robot.
-8. Fusionnez la PR en "squash". Vous pouvez voir le processus de publication dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
+5. Squash and merge votre PR (Il est important de publier une nouvelle version avec Github-Actions).
+6. Attendez que le robot crée une PR avec une nouvelle version du package et des informations sur vos changements dans CHANGELOG.md. Vous pouvez suivre le processus dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
+7. Vérifiez vos changements dans CHANGELOG.md et approuvez la PR du robot.
+8. Squash and merge la PR. Vous pouvez suivre le processus de publication dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
 
 ## Éditeur de constructeur de page
 
@@ -564,9 +565,7 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 ## Memory Bank
 ```
 
-Voici la traduction du fichier README en français, en gardant un ton naturel et en respectant vos consignes :
-
-Ce projet inclut une **Banque de Mémoire** complète – une collection de fichiers de documentation Markdown qui fournissent des informations détaillées sur l'architecture du projet, ses composants et ses modèles d'utilisation. La Banque de Mémoire est particulièrement utile lorsque vous travaillez avec des agents IA, car elle contient des informations structurées sur :
+Ce projet inclut une **Banque de Mémoire** complète - une collection de fichiers de documentation Markdown qui fournissent des informations détaillées sur l'architecture du projet, ses composants et ses modèles d'utilisation. La Banque de Mémoire est particulièrement utile lorsque l'on travaille avec des agents IA, car elle contient des informations structurées sur :
 
 - **Vue d'ensemble du projet** : Exigences fondamentales, objectifs et contexte
 - **Documentation des composants** : Guides d'utilisation détaillés pour tous les composants
@@ -575,18 +574,18 @@ Ce projet inclut une **Banque de Mémoire** complète – une collection de fich
 
 ### Utilisation de la Banque de Mémoire
 
-La Banque de Mémoire se trouve dans le répertoire `memory-bank/` et se compose de fichiers Markdown classiques qui peuvent être lus comme toute autre documentation :
+La Banque de Mémoire se trouve dans le répertoire `memory-bank/` et se compose de fichiers Markdown ordinaires qui peuvent être lus comme toute autre documentation :
 
-- `projectbrief.md` - Document fondamental avec les exigences clés
+- `projectbrief.md` - Document fondamental avec les exigences principales
 - `productContext.md` - Objectifs du projet et expérience utilisateur
 - `systemPatterns.md` - Architecture et décisions techniques
 - `techContext.md` - Technologies, configuration et contraintes
-- `activeContext.md` - Axe de travail actuel et changements récents
+- `activeContext.md` - Focus du travail actuel et changements récents
 - `progress.md` - État de l'implémentation et problèmes connus
 - `usage/` - Documentation d'utilisation spécifique aux composants
 - `storybookComponents.md` - Détails de l'intégration Storybook
 
-### Pour les Agents IA
+### Pour les agents IA
 
 Lorsque vous travaillez avec des agents IA sur ce projet, la Banque de Mémoire sert de base de connaissances complète qui aide les agents à comprendre :
 
