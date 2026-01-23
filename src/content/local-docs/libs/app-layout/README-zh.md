@@ -37,17 +37,17 @@ app.listen(3000);
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // 任何 JSON 兼容的数据，将设置为页面的 window.__DATA__
+  // 任何 JSON 兼容的数据，将会在页面上设置为 window.__DATA__
   data?: Data;
   // 网站图标
   icon?: Icon;
-  // 用于设置相应标签的 nonce
+  // 用于设置相应标签的 nonce 值
   nonce?: string;
 
   // 通用选项
   // 页面标题
   title: string;
-  // 页面语言，将设置为 html 标签
+  // 页面的语言，将设置到 html 标签上
   lang?: string;
   isMobile?: boolean;
 
@@ -60,16 +60,16 @@ interface RenderParams<Data, Plugins> {
   links?: Link[];
   // script 标签
   scripts?: Script[];
-  // style 标签
+  // 样式表标签
   styleSheets?: Stylesheet[];
-  // 带有内联代码的 script 标签
+  // 内联脚本标签
   inlineScripts?: string[];
-  // 带有内联样式的 style 标签
+  // 内联样式标签
   inlineStyleSheets?: string[];
 
   // body 标签内容
   bodyContent?: {
-    // body 标签的 class 名称
+    // body 标签的类名
     className?: string;
     // body 属性
     attributes?: string;
@@ -126,7 +126,7 @@ interface Icon {
 }
 ```
 
-默认值为：
+默认值是：
 
 ```js
 const icon = {
@@ -205,7 +205,7 @@ const script = {
 
 #### Style sheets
 
-描述样式链接：
+描述样式表链接：
 
 ```typescript
 interface Stylesheet {
@@ -229,7 +229,7 @@ const styleSheet = {
 
 ## 插件
 
-渲染函数可以通过插件进行扩展。插件可能会重写用户定义的渲染内容。
+可以通过插件扩展渲染函数。插件可以重写用户定义的渲染内容。
 插件是一个具有 `name` 和 `apply` 属性的对象：
 
 ```typescript
@@ -239,7 +239,7 @@ interface Plugin<Options = any, Name = string> {
     options: Options | undefined; // 通过 `pluginsOptions` 参数在 `renderLayout` 函数中传递。
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated 使用 `renderContent.helpers` 代替 */
+    /** @deprecated use `renderContent.helpers` instead */
     utils: RenderHelpers;
   }) => void;
 }
@@ -299,37 +299,14 @@ import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 ```
 
-```html
-<div class="languages">
-  <a href="/en/README.md">English</a>
-  <a href="/zh/README.md">Chinese</a>
-</div>
-```
-
-# @gravity-ui/app-layout
-
-This library helps to create server-side rendered applications with the help of plugins.
-
-## Plugins
-
-### Google Analytics
-
-Adds Google Analytics counters on the page.
-
-Usage:
-
 ```js
-import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
-
-const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-
 app.get((req, res) => {
   res.send(
     renderLayout({
       title: 'Home page',
       pluginsOptions: {
         googleAnalytics: {
-          useBeaconTransport: true, // enables use of navigator.sendBeacon
+          useBeaconTransport: true, // 启用 navigator.sendBeacon
           counter: {
             id: 'some id',
           },
@@ -340,7 +317,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+插件选项：
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -355,9 +332,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-Adds Yandex metrics counters on the page.
+在页面上添加 Yandex 统计计数器。
 
-Usage:
+用法：
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -384,7 +361,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+插件选项：
 
 ```typescript
 export type UserParams = {
@@ -415,9 +392,9 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Adds script and styles from webpack assets manifest file.
+从 webpack assets manifest 文件添加脚本和样式。
 
-Usage:
+用法：
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -438,7 +415,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+插件选项：
 
 ```typescript
 export interface LayoutOptions {
@@ -449,9 +426,9 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-Adds body attributes.
+添加 body 属性。
 
-Usage:
+用法：
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -473,7 +450,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+插件选项：
 
 ```typescript
 interface UikitPluginOptions {
@@ -484,13 +461,13 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-Adds microfrontend versions information to the page.
+将微前端版本信息添加到页面。
 
-This plugin creates a global `window.__REMOTE_VERSIONS__` object containing the provided microfrontend versions, which can be used by module federation or similar microfrontend architectures to determine which versions of remote modules to load.
+此插件创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本，可供模块联邦或类似的微前端架构用于确定要加载的远程模块版本。
 
-It can be used in combination with [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) and the `moduleFederation.remotesRuntimeVersioning` option to automatically load remote modules with the corresponding versions.
+它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 和 `moduleFederation.remotesRuntimeVersioning` 选项结合使用，以自动加载相应版本的远程模块。
 
-Usage:
+用法：
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -513,7 +490,7 @@ app.get((req, res) => {
 });
 ```
 
-Plugin options:
+插件选项：
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -521,7 +498,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-There is helper to create all plugins:
+有一个创建所有插件的辅助函数：
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -550,7 +527,7 @@ app.get((req, res) => {
 
 ## Alternative usage
 
-With parts renderers `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via html streaming:
+通过 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 等部分渲染器实现 HTML 流式传输：
 
 ```js
 import express from 'express';

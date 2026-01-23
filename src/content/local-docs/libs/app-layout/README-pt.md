@@ -1,14 +1,14 @@
 # @gravity-ui/app-layout &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
 
-## 설치
+## Instalar
 
 ```shell
 npm install --save-dev @gravity-ui/app-layout
 ```
 
-## 사용법
+## Uso
 
-`express`와 함께 사용:
+Com `express`:
 
 ```js
 import express from 'express';
@@ -22,9 +22,9 @@ app.get('/', function (req, res) {
   res.send(
     renderLayout({
       // RenderParams
-      title: '홈 페이지',
+      title: 'Página inicial',
       bodyContent: {
-        root: '안녕하세요!',
+        root: 'Olá mundo!',
       },
     }),
   );
@@ -33,61 +33,61 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
-여기서
+onde
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // JSON 호환 데이터, 페이지의 window.__DATA__에 설정됩니다.
+  // Qualquer dado compatível com JSON, será definido em window.__DATA__ na página
   data?: Data;
   // favicon
   icon?: Icon;
-  // 적절한 태그에 설정될 nonce
+  // nonce a ser definido nas tags apropriadas
   nonce?: string;
 
-  // 일반 옵션
-  // 페이지 제목
+  // opções comuns
+  // Título da página
   title: string;
-  // 페이지 언어, html 태그에 설정됩니다.
+  // idioma da página, será definido na tag html
   lang?: string;
   isMobile?: boolean;
 
-  // html 속성
+  // atributos html
   htmlAttributes?: string;
-  // 헤더 태그 내용
-  // meta 태그
+  // conteúdo da tag header
+  // tags meta
   meta?: Meta[];
-  // link 태그
+  // tags link
   links?: Link[];
-  // script 태그
+  // tags script
   scripts?: Script[];
-  // style 태그
+  // folhas de estilo
   styleSheets?: Stylesheet[];
-  // 인라인 코드가 포함된 script 태그
+  // tags script com código inline
   inlineScripts?: string[];
-  // 인라인 스타일이 포함된 style 태그
+  // tags style com estilos inline
   inlineStyleSheets?: string[];
 
-  // body 태그 내용
+  // conteúdo da tag body
   bodyContent?: {
-    // body 태그의 클래스 이름
+    // nome da classe para a tag body
     className?: string;
-    // body 속성
+    // atributos do body
     attributes?: string;
-    // root div 태그 이전의 body 내용
+    // conteúdo do body antes da tag div com id root
     beforeRoot?: string;
-    // root div 태그의 innerHtml 내용
+    // conteúdo innerHtml da tag div com id root
     root?: string;
-    // root div 태그 이후의 body 내용
+    // conteúdo do body depois da tag div com id root
     afterRoot?: string;
   };
-  // 플러그인 옵션
+  // opções de plugins
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
 ### Meta
 
-`meta` 태그를 설명합니다:
+Descreve a tag `meta`:
 
 ```typescript
 interface Meta {
@@ -96,27 +96,27 @@ interface Meta {
 }
 ```
 
-예시:
+Exemplo:
 
 ```js
 const meta = [
-  {name: 'description', content: 'some text'},
+  {name: 'description', content: 'algum texto'},
   {name: 'robots', content: 'noindex'},
-  {name: 'og:title', content: 'Some title'},
+  {name: 'og:title', content: 'Algum título'},
 ];
 ```
 
-다음과 같이 렌더링됩니다:
+Será renderizado como:
 
 ```html
-<meta name="description" content="some text" />
+<meta name="description" content="algum texto" />
 <meta name="robots" content="noindex" />
-<meta property="og:title" content="Some title" />
+<meta property="og:title" content="Algum título" />
 ```
 
 ### Icon
 
-페이지 favicon을 설명합니다:
+Descreve o favicon da página:
 
 ```typescript
 interface Icon {
@@ -126,7 +126,7 @@ interface Icon {
 }
 ```
 
-기본값은 다음과 같습니다:
+O valor padrão é:
 
 ```js
 const icon = {
@@ -138,7 +138,7 @@ const icon = {
 
 ### Links
 
-`link` 태그를 설명합니다:
+Descreve a tag `link`:
 
 ```typescript
 interface Link {
@@ -152,7 +152,7 @@ interface Link {
 }
 ```
 
-예시:
+Exemplo:
 
 ```js
 const link = {
@@ -164,7 +164,7 @@ const link = {
 };
 ```
 
-다음과 같이 렌더링됩니다:
+será renderizado como:
 
 ```html
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -172,7 +172,7 @@ const link = {
 
 ### Scripts
 
-스크립트 링크를 사전 로드(preload)하도록 설명합니다:
+Descreve o link para o script com preload:
 
 ```typescript
 interface Script {
@@ -184,7 +184,7 @@ interface Script {
 }
 ```
 
-예시:
+Exemplo:
 
 ```js
 const script = {
@@ -195,7 +195,7 @@ const script = {
 };
 ```
 
-다음과 같이 렌더링됩니다:
+será renderizado como:
 
 ```html
 <link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
@@ -203,9 +203,9 @@ const script = {
 <script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
 ```
 
-#### Style sheets
+#### Folhas de estilo
 
-스타일 링크를 설명합니다:
+Descrevem o link para os estilos:
 
 ```typescript
 interface Stylesheet {
@@ -213,7 +213,7 @@ interface Stylesheet {
 }
 ```
 
-예시:
+Exemplo:
 
 ```js
 const styleSheet = {
@@ -221,7 +221,7 @@ const styleSheet = {
 };
 ```
 
-다음과 같이 렌더링됩니다:
+será renderizado como:
 
 ```html
 <link href="url/to/stylesheet" rel="stylesheet" />
@@ -229,17 +229,17 @@ const styleSheet = {
 
 ## Plugins
 
-렌더 함수는 플러그인으로 확장될 수 있습니다. 플러그인은 사용자 정의 렌더링 콘텐츠를 덮어쓸 수 있습니다.
-플러그인은 `name`과 `apply` 속성을 가진 객체입니다:
+A função de renderização pode ser estendida por plugins. Um plugin pode reescrever o conteúdo de renderização definido pelo usuário.
+Um plugin é um objeto com as propriedades `name` e `apply`:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // `pluginsOptions` 매개변수의 `renderLayout` 함수를 통해 전달됩니다.
+    options: Options | undefined; // passado através da função `renderLayout` no parâmetro `pluginsOptions`.
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated `renderContent.helpers`를 사용하세요 */
+    /** @deprecated use `renderContent.helpers` instead */
     utils: RenderHelpers;
   }) => void;
 }
@@ -285,13 +285,13 @@ export interface RenderHelpers {
 }
 ```
 
-이 패키지에는 몇 가지 플러그인이 있습니다:
+Existem alguns plugins neste pacote:
 
 ### Google analytics
 
-페이지에 Google analytics 카운터를 추가합니다.
+Adiciona o contador do Google Analytics na página.
 
-사용법:
+Uso:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
@@ -299,26 +299,16 @@ import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 ```
 
-Google Analytics
-
-페이지에 Google Analytics 카운터를 추가합니다.
-
-사용법:
-
 ```js
-import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
-
-const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Página inicial',
       pluginsOptions: {
         googleAnalytics: {
-          useBeaconTransport: true, // navigator.sendBeacon 사용 활성화
+          useBeaconTransport: true, // habilita o uso de navigator.sendBeacon
           counter: {
-            id: 'some id',
+            id: 'algum id',
           },
         },
       },
@@ -327,7 +317,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+Opções do plugin:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -342,9 +332,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-페이지에 Yandex Metrika 카운터를 추가합니다.
+Adiciona contadores do Yandex Metrika à página.
 
-사용법:
+Uso:
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -354,7 +344,7 @@ const renderLayout = createRenderFunction([createYandexMetrikaPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Página inicial',
       pluginsOptions: {
         yandexMetrika: {
           counter: {
@@ -371,7 +361,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+Opções do plugin:
 
 ```typescript
 export type UserParams = {
@@ -402,9 +392,9 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Webpack assets manifest 파일에서 스크립트와 스타일을 추가합니다.
+Adiciona scripts e estilos do arquivo de manifesto de assets do webpack.
 
-사용법:
+Uso:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -414,7 +404,7 @@ const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/t
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Página inicial',
       pluginsOptions: {
         layout: {
           name: 'home',
@@ -425,7 +415,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+Opções do plugin:
 
 ```typescript
 export interface LayoutOptions {
@@ -436,9 +426,9 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-body 속성을 추가합니다.
+Adiciona atributos ao `body`.
 
-사용법:
+Uso:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -448,7 +438,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Página inicial',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -460,7 +450,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+Opções do plugin:
 
 ```typescript
 interface UikitPluginOptions {
@@ -471,13 +461,13 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-마이크로프론트엔드 버전 정보를 페이지에 추가합니다.
+Adiciona informações de versões de microfrontends à página.
 
-이 플러그인은 제공된 마이크로프론트엔드 버전을 포함하는 전역 `window.__REMOTE_VERSIONS__` 객체를 생성하며, 이는 모듈 페더레이션 또는 유사한 마이크로프론트엔드 아키텍처에서 로드할 원격 모듈의 버전을 결정하는 데 사용될 수 있습니다.
+Este plugin cria um objeto global `window.__REMOTE_VERSIONS__` contendo as versões dos microfrontends fornecidas, que pode ser usado por module federation ou arquiteturas de microfrontend semelhantes para determinar quais versões de módulos remotos carregar.
 
-[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 및 `moduleFederation.remotesRuntimeVersioning` 옵션과 함께 사용하여 해당 버전의 원격 모듈을 자동으로 로드할 수 있습니다.
+Pode ser usado em combinação com [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) e a opção `moduleFederation.remotesRuntimeVersioning` para carregar automaticamente módulos remotos com as versões correspondentes.
 
-사용법:
+Uso:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -487,7 +477,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'Página inicial',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -500,7 +490,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+Opções do plugin:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -508,7 +498,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-모든 플러그인을 생성하는 헬퍼가 있습니다:
+Existe um helper para criar todos os plugins:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -519,7 +509,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: 'Home page',
+        title: 'Página inicial',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -535,9 +525,9 @@ app.get((req, res) => {
 })
 ```
 
-## Alternative usage
+## Uso alternativo
 
-HTML 스트리밍을 통한 파트 렌더러 `generateRenderContent`, `renderHeadContent`, `renderBodyContent` 사용:
+Com renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via streaming de HTML:
 
 ```js
 import express from 'express';
@@ -560,12 +550,13 @@ app.get('/', async function (req, res) {
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
-    title: 'Home page',
+    title: 'Página inicial',
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;
+```
 
-```html
+```markdown
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
         <head>

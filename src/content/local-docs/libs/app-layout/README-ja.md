@@ -1,14 +1,14 @@
 # @gravity-ui/app-layout &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
 
-## 설치
+## インストール
 
 ```shell
 npm install --save-dev @gravity-ui/app-layout
 ```
 
-## 사용법
+## 使用方法
 
-`express`와 함께 사용:
+`express` を使用する場合:
 
 ```js
 import express from 'express';
@@ -22,9 +22,9 @@ app.get('/', function (req, res) {
   res.send(
     renderLayout({
       // RenderParams
-      title: '홈 페이지',
+      title: 'ホーム',
       bodyContent: {
-        root: '안녕하세요!',
+        root: 'こんにちは、世界！',
       },
     }),
   );
@@ -33,61 +33,61 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
-여기서
+ここで
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // JSON 호환 데이터, 페이지의 window.__DATA__에 설정됩니다.
+  // JSON互換の任意のデータ。ページ上の window.__DATA__ に設定されます。
   data?: Data;
-  // favicon
+  // ファビコン
   icon?: Icon;
-  // 적절한 태그에 설정될 nonce
+  // タグに設定される nonce
   nonce?: string;
 
-  // 일반 옵션
-  // 페이지 제목
+  // 一般的なオプション
+  // ページのタイトル
   title: string;
-  // 페이지 언어, html 태그에 설정됩니다.
+  // ページの言語。html タグに設定されます。
   lang?: string;
   isMobile?: boolean;
 
-  // html 속성
+  // html 属性
   htmlAttributes?: string;
-  // 헤더 태그 내용
-  // meta 태그
+  // header タグの内容
+  // meta タグ
   meta?: Meta[];
-  // link 태그
+  // link タグ
   links?: Link[];
-  // script 태그
+  // script タグ
   scripts?: Script[];
-  // style 태그
+  // style タグ
   styleSheets?: Stylesheet[];
-  // 인라인 코드가 포함된 script 태그
+  // インラインコードを含む script タグ
   inlineScripts?: string[];
-  // 인라인 스타일이 포함된 style 태그
+  // インラインスタイルを含む style タグ
   inlineStyleSheets?: string[];
 
-  // body 태그 내용
+  // body タグの内容
   bodyContent?: {
-    // body 태그의 클래스 이름
+    // body タグのクラス名
     className?: string;
-    // body 속성
+    // body 属性
     attributes?: string;
-    // root div 태그 이전의 body 내용
+    // root div タグの前の body の内容
     beforeRoot?: string;
-    // root div 태그의 innerHtml 내용
+    // id が root の div タグの innerHtml コンテンツ
     root?: string;
-    // root div 태그 이후의 body 내용
+    // root div タグの後の body の内容
     afterRoot?: string;
   };
-  // 플러그인 옵션
+  // プラグインオプション
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
 ### Meta
 
-`meta` 태그를 설명합니다:
+`meta` タグを記述します:
 
 ```typescript
 interface Meta {
@@ -96,27 +96,27 @@ interface Meta {
 }
 ```
 
-예시:
+例:
 
 ```js
 const meta = [
-  {name: 'description', content: 'some text'},
+  {name: 'description', content: 'いくつかのテキスト'},
   {name: 'robots', content: 'noindex'},
-  {name: 'og:title', content: 'Some title'},
+  {name: 'og:title', content: 'タイトル'},
 ];
 ```
 
-다음과 같이 렌더링됩니다:
+以下のようにレンダリングされます:
 
 ```html
-<meta name="description" content="some text" />
+<meta name="description" content="いくつかのテキスト" />
 <meta name="robots" content="noindex" />
-<meta property="og:title" content="Some title" />
+<meta property="og:title" content="タイトル" />
 ```
 
 ### Icon
 
-페이지 favicon을 설명합니다:
+ページのファビコンを記述します:
 
 ```typescript
 interface Icon {
@@ -126,7 +126,7 @@ interface Icon {
 }
 ```
 
-기본값은 다음과 같습니다:
+デフォルト値は次のとおりです:
 
 ```js
 const icon = {
@@ -138,7 +138,7 @@ const icon = {
 
 ### Links
 
-`link` 태그를 설명합니다:
+`link` タグを記述します:
 
 ```typescript
 interface Link {
@@ -152,7 +152,7 @@ interface Link {
 }
 ```
 
-예시:
+例:
 
 ```js
 const link = {
@@ -164,7 +164,7 @@ const link = {
 };
 ```
 
-다음과 같이 렌더링됩니다:
+以下のようにレンダリングされます:
 
 ```html
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -172,7 +172,7 @@ const link = {
 
 ### Scripts
 
-스크립트 링크를 사전 로드(preload)하도록 설명합니다:
+プリロード付きのスクリプトへのリンクを記述します:
 
 ```typescript
 interface Script {
@@ -184,7 +184,7 @@ interface Script {
 }
 ```
 
-예시:
+例:
 
 ```js
 const script = {
@@ -195,7 +195,7 @@ const script = {
 };
 ```
 
-다음과 같이 렌더링됩니다:
+以下のようにレンダリングされます:
 
 ```html
 <link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
@@ -205,7 +205,7 @@ const script = {
 
 #### Style sheets
 
-스타일 링크를 설명합니다:
+スタイルへのリンクを記述します:
 
 ```typescript
 interface Stylesheet {
@@ -213,7 +213,7 @@ interface Stylesheet {
 }
 ```
 
-예시:
+例:
 
 ```js
 const styleSheet = {
@@ -221,25 +221,24 @@ const styleSheet = {
 };
 ```
 
-다음과 같이 렌더링됩니다:
+以下のようにレンダリングされます:
 
 ```html
 <link href="url/to/stylesheet" rel="stylesheet" />
 ```
 
-## Plugins
+## プラグイン
 
-렌더 함수는 플러그인으로 확장될 수 있습니다. 플러그인은 사용자 정의 렌더링 콘텐츠를 덮어쓸 수 있습니다.
-플러그인은 `name`과 `apply` 속성을 가진 객체입니다:
+レンダリング関数はプラグインによって拡張できます。プラグインは `name` と `apply` プロパティを持つオブジェクトです:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // `pluginsOptions` 매개변수의 `renderLayout` 함수를 통해 전달됩니다.
+    options: Options | undefined; // `pluginsOptions` パラメータで `renderLayout` 関数を通じて渡されます。
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated `renderContent.helpers`를 사용하세요 */
+    /** @deprecated `renderContent.helpers` を使用してください */
     utils: RenderHelpers;
   }) => void;
 }
@@ -285,13 +284,13 @@ export interface RenderHelpers {
 }
 ```
 
-이 패키지에는 몇 가지 플러그인이 있습니다:
+このパッケージにはいくつかのプラグインがあります:
 
-### Google analytics
+### Google Analytics
 
-페이지에 Google analytics 카운터를 추가합니다.
+ページに Google Analytics カウンターを追加します。
 
-사용법:
+使用方法:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
@@ -301,9 +300,9 @@ const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 
 Google Analytics
 
-페이지에 Google Analytics 카운터를 추가합니다.
+Google Analytics をページに追加します。
 
-사용법:
+使用方法:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
@@ -316,7 +315,7 @@ app.get((req, res) => {
       title: 'Home page',
       pluginsOptions: {
         googleAnalytics: {
-          useBeaconTransport: true, // navigator.sendBeacon 사용 활성화
+          useBeaconTransport: true, // navigator.sendBeacon の使用を有効にします
           counter: {
             id: 'some id',
           },
@@ -327,7 +326,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+プラグイン オプション:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -342,9 +341,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-페이지에 Yandex Metrika 카운터를 추가합니다.
+Yandex Metrika カウンターをページに追加します。
 
-사용법:
+使用方法:
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -371,7 +370,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+プラグイン オプション:
 
 ```typescript
 export type UserParams = {
@@ -402,9 +401,9 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Webpack assets manifest 파일에서 스크립트와 스타일을 추가합니다.
+webpack assets manifest ファイルからスクリプトとスタイルを追加します。
 
-사용법:
+使用方法:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -425,7 +424,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+プラグイン オプション:
 
 ```typescript
 export interface LayoutOptions {
@@ -436,9 +435,9 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-body 속성을 추가합니다.
+body 属性を追加します。
 
-사용법:
+使用方法:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -460,7 +459,7 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+プラグイン オプション:
 
 ```typescript
 interface UikitPluginOptions {
@@ -471,13 +470,13 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-마이크로프론트엔드 버전 정보를 페이지에 추가합니다.
+マイクロフロントエンドのバージョン情報をページに追加します。
 
-이 플러그인은 제공된 마이크로프론트엔드 버전을 포함하는 전역 `window.__REMOTE_VERSIONS__` 객체를 생성하며, 이는 모듈 페더레이션 또는 유사한 마이크로프론트엔드 아키텍처에서 로드할 원격 모듈의 버전을 결정하는 데 사용될 수 있습니다.
+このプラグインは、指定されたマイクロフロントエンドのバージョンを含むグローバルな `window.__REMOTE_VERSIONS__` オブジェクトを作成します。これは、モジュールフェデレーションなどのマイクロフロントエンド アーキテクチャで、ロードするリモート モジュールのバージョンを決定するために使用できます。
 
-[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 및 `moduleFederation.remotesRuntimeVersioning` 옵션과 함께 사용하여 해당 버전의 원격 모듈을 자동으로 로드할 수 있습니다.
+[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) および `moduleFederation.remotesRuntimeVersioning` オプションと組み合わせて、対応するバージョンのリモート モジュールを自動的にロードするために使用できます。
 
-사용법:
+使用方法:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -500,15 +499,15 @@ app.get((req, res) => {
 });
 ```
 
-플러그인 옵션:
+プラグイン オプション:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
 ```
 
-### Helpers
+### ヘルパー
 
-모든 플러그인을 생성하는 헬퍼가 있습니다:
+すべてのプラグインを作成するためのヘルパーがあります。
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -535,9 +534,9 @@ app.get((req, res) => {
 })
 ```
 
-## Alternative usage
+## 代替の使用方法
 
-HTML 스트리밍을 통한 파트 렌더러 `generateRenderContent`, `renderHeadContent`, `renderBodyContent` 사용:
+HTML ストリーミング経由のパーツ レンダラー `generateRenderContent`、`renderHeadContent`、`renderBodyContent` を使用します。
 
 ```js
 import express from 'express';
@@ -565,7 +564,7 @@ app.get('/', async function (req, res) {
 
   const {htmlAttributes, helpers, bodyContent} = content;
 
-```html
+```markdown
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
         <head>
