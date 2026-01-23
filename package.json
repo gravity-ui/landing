@@ -94,7 +94,8 @@
     "next-compose-plugins": "^2.2.1",
     "next-sitemap": "^4.2.3",
     "next-transpile-modules": "^10.0.1",
-    "playwright": "^1.45.2",
+    "@playwright/test": "^1.45.2",
+    "wait-on": "^8.0.0",
     "prettier": "^2.8.0",
     "raw-loader": "^4.0.2",
     "sass": "^1.56.1",
@@ -131,7 +132,10 @@
     "typecheck": "tsc --noEmit",
     "circular:check": "madge --circular --ts-config ./tsconfig.json src/",
     "client:rsd": "rsdoctor analyze --profile .next/.rsdoctor/manifest.json",
-    "server:rsd": "rsdoctor analyze --profile .next/server/.rsdoctor/manifest.json"
+    "server:rsd": "rsdoctor analyze --profile .next/server/.rsdoctor/manifest.json",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:update": "playwright test --update-snapshots"
   },
   "browserslist": {
     "production": [
