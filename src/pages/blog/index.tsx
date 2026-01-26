@@ -12,9 +12,9 @@ import type {PageContent} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
-import {Api} from '../../api';
+import {Api, type BlogPostListItem} from '../../api';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
@@ -66,7 +66,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 ...i18nProps,
             },
         };
-    } catch (error) {
+    } catch {
         // Error is logged on server side
         return {
             notFound: true,
@@ -83,10 +83,125 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
 
     const [posts, setPosts] = useState<PostsProps>(postsData);
 
-    // Create a unique key based on first post URL to force re-render when URLs change
-    const postsKey = useMemo(
-        () => (posts.posts.length > 0 ? posts.posts[0]?.url || locale : locale),
-        [posts.posts, locale],
+    // Store all posts for local filtering
+    // This ref holds the complete list of posts loaded from mocks
+    const allPostsRef = useRef<BlogPostListItem[]>(
+        postsData.posts as unknown as BlogPostListItem[],
+    );
+
+    // Store the first post URL from initial data to maintain stable key
+    // This prevents BlogPage from resetting when search returns no results
+    const initialFirstPostUrlRef = useRef<string | null>(
+        postsData.posts.length > 0 ? (postsData.posts[0] as any)?.url || null : null,
+    );
+
+    // Create a stable key that doesn't change when search returns empty results
+    // This prevents BlogPage from resetting and clearing the search input
+    const postsKey = useMemo(() => initialFirstPostUrlRef.current || locale, [locale]);
+
+    // Load all posts from mocks for local filtering
+    // This effect runs when locale changes to ensure we have all posts for the current locale
+    // It also runs on initial mount to load posts for the current locale
+    useEffect(() => {
+        const loadAllPosts = async () => {
+            try {
+                const currentLocale = router.locale || 'en';
+                const response = await Api.instance.getBlogPosts(currentLocale);
+                allPostsRef.current = response.posts;
+
+                // Update the stable key reference when locale changes
+                // This ensures the key remains stable even when search returns no results
+                if (response.posts.length > 0) {
+                    initialFirstPostUrlRef.current = (response.posts[0] as any)?.url || null;
+                } else {
+                    initialFirstPostUrlRef.current = null;
+                }
+
+                // Update displayed posts when locale changes
+                // This ensures the UI shows posts for the current locale immediately
+                if (response.posts.length > 0) {
+                    const initialPostsResponse: PostsProps = {
+                        posts: response.posts.slice(
+                            0,
+                            postsData.count || 10,
+                        ) as unknown as PostsProps['posts'],
+                        count: Math.min(postsData.count || 10, response.posts.length),
+                        totalCount: response.posts.length,
+                        pinnedPost: response.pinnedPost as unknown as PostsProps['pinnedPost'],
+                    };
+                    setPosts(initialPostsResponse);
+                }
+            } catch (err) {
+                console.error('Failed to load posts for local search:', err);
+                // Fallback to initial posts data if loading fails
+                allPostsRef.current = postsData.posts as unknown as BlogPostListItem[];
+            }
+        };
+
+        loadAllPosts();
+    }, [router.locale, postsData.count]);
+
+    // Local filtering function
+    // Filters posts based on search query, tags, and services
+    const filterPostsLocally = useCallback(
+        (
+            posts: BlogPostListItem[],
+            searchQuery?: string,
+            tagSlugs?: string[],
+            serviceSlugs?: string[],
+        ): BlogPostListItem[] => {
+            let filtered = [...posts];
+
+            // Filter by search query
+            if (searchQuery && searchQuery.trim() !== '') {
+                const query = searchQuery.toLowerCase().trim();
+
+                filtered = filtered.filter((post) => {
+                    // Search in title fields
+                    const titleMatch =
+                        post.textTitle?.toLowerCase().includes(query) ||
+                        post.htmlTitle?.toLowerCase().includes(query) ||
+                        (post as any).title?.toLowerCase().includes(query) ||
+                        post.metaTitle?.toLowerCase().includes(query);
+
+                    // Search in description
+                    const descriptionMatch = post.description?.toLowerCase().includes(query);
+
+                    // Search in tags
+                    const tagsMatch = post.tags?.some(
+                        (tag) =>
+                            tag.name?.toLowerCase().includes(query) ||
+                            tag.slug?.toLowerCase().includes(query),
+                    );
+
+                    // Search in services
+                    const servicesMatch = post.services?.some(
+                        (service) =>
+                            service.name?.toLowerCase().includes(query) ||
+                            service.slug?.toLowerCase().includes(query),
+                    );
+
+                    return titleMatch || descriptionMatch || tagsMatch || servicesMatch;
+                });
+            }
+
+            // Filter by tags
+            if (tagSlugs && tagSlugs.length > 0) {
+                filtered = filtered.filter((post) =>
+                    post.tags?.some((tag) => tagSlugs.includes(tag.slug)),
+                );
+            }
+
+            // Filter by services
+            if (serviceSlugs && serviceSlugs.length > 0) {
+                filtered = filtered.filter((post) =>
+                    post.services?.some((service) => serviceSlugs.includes(service.slug)),
+                );
+            }
+
+            return filtered;
+        },
+        [],
     );
 
     // Router data for blog-constructor
@@ -103,33 +218,46 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
         [router.pathname, router.asPath, hostname, localeValue],
     );
 
-    // Handle posts fetching with filters
+    // Handle posts fetching with local filtering
+    // This function is called by BlogPage component when user types in search field (bc_search_suggest)
+    // or applies filters. It performs local filtering on posts loaded from mocks.
     const handleGetPosts = useCallback(
         async (query: GetPostsRequest): Promise<PostsProps> => {
-            // Convert GetPostsRequest format to our API format
-            const apiQuery = {
-                page: query.page,
-                pageSize: query.perPage,
-                search: query.search,
-                tags: query.tags ? query.tags.split(',') : undefined,
-                services: query.services ? query.services.split(',') : undefined,
-            };
+            // Get all posts from ref (loaded from mocks)
+            const allPostsData = allPostsRef.current;
 
-            const currentLocale = router.locale || 'en';
-            const response = await Api.instance.getBlogPosts(currentLocale, apiQuery);
+            // Parse filter parameters
+            const searchQuery = query.search;
+            const tagSlugs = query.tags ? query.tags.split(',') : undefined;
+            const serviceSlugs = query.services ? query.services.split(',') : undefined;
 
-            // URLs are already formatted with locale prefix by preparePost on the server
-            const postsResponse = {
-                posts: response.posts as unknown as PostsProps['posts'],
-                count: response.count,
-                totalCount: response.totalCount,
-                pinnedPost: response.pinnedPost as unknown as PostsProps['pinnedPost'],
+            // Apply local filtering
+            const filteredPosts = filterPostsLocally(
+                allPostsData,
+                searchQuery,
+                tagSlugs,
+                serviceSlugs,
+            );
+
+            // Apply pagination
+            const page = query.page || 1;
+            const perPage = query.perPage || 10;
+            const startIndex = (page - 1) * perPage;
+            const endIndex = startIndex + perPage;
+            const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
+
+            // Prepare response in PostsProps format
+            const postsResponse: PostsProps = {
+                posts: paginatedPosts as unknown as PostsProps['posts'],
+                count: paginatedPosts.length,
+                totalCount: filteredPosts.length,
+                pinnedPost: postsData.pinnedPost as unknown as PostsProps['pinnedPost'],
             };
 
             setPosts(postsResponse);
             return postsResponse;
         },
-        [router.locale],
+        [filterPostsLocally, postsData.pinnedPost],
     );
 
     // Automatically refetch posts when locale changes
