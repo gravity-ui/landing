@@ -18,7 +18,7 @@ import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {getI18nProps} from '../../utils/i18next';
 
-import {localeEn, localeRu} from './constants';
+import {localeMap} from './constants';
 
 interface BlogPostPageProps {
     post: PostData;
@@ -31,16 +31,6 @@ interface BlogPostPageProps {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const locale = ctx.locale || 'en';
     const slug = ctx.params?.slug;
-
-    // Blog is only available for ru and en locales
-    if (locale !== 'ru' && locale !== 'en') {
-        return {
-            redirect: {
-                destination: `/${ctx.defaultLocale || 'en'}/blog`,
-                permanent: false,
-            },
-        };
-    }
 
     // Validate slug
     if (!slug || !Array.isArray(slug)) {
@@ -87,7 +77,7 @@ export default function BlogPostPage({
     const router = useRouter();
     const isMobile = useIsMobile();
     const locale = router.locale || 'en';
-    const localeValue = locale === 'ru' ? localeRu : localeEn;
+    const localeValue = localeMap[locale] || localeMap['en'];
 
     // Router data for blog-constructor
     const routerData = useMemo(

@@ -747,7 +747,7 @@ export class Api {
         try {
             // Determine lang and region from locale
 
-            const lang = locale.split('-')[0] as 'en' | 'ru';
+            const lang = locale.split('-')[0];
             const region = locale.includes('-') ? locale : `${locale}-${locale}`;
 
             const postMock = await import(`./.mocks/${lang}/posts/${slug}.json`);
@@ -824,9 +824,20 @@ export class Api {
             };
             const blogPageMock = await import(`./.mocks/${locale}/pages/blogPage.json`);
             const {preparePost} = await import('../utils/blog');
+            const {Lang} = await import('@gravity-ui/uikit');
 
-            // Transform locale string to object with lang property
-            const localeObj = {lang: locale};
+            // Transform locale string to Lang enum value
+            const langMap: Record<string, typeof Lang.En> = {
+                en: Lang.En,
+                ru: Lang.Ru,
+                de: Lang.De,
+                es: Lang.Es,
+                fr: Lang.Fr,
+                ko: Lang.Ko,
+                zh: Lang.Zh,
+            };
+            const langValue = langMap[locale] || Lang.En;
+            const localeObj = {lang: langValue};
 
             // Transform mock data using preparePost
             const transformedPosts = postsMock.default.posts.map((post: any) => {

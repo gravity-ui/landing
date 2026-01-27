@@ -44,20 +44,10 @@ const getLocaleFromCookie = (request: NextRequest): string | undefined => {
 export const middleware = async (request: NextRequest) => {
     const {pathname} = request.nextUrl;
 
-    // Blog is only available for en and ru locales
     // Check if path is related to blog
     const isBlogPath = pathname.includes('/blog');
 
     if (isBlogPath) {
-        const blogLocale = request.nextUrl.locale || defaultLocale;
-
-        // Redirect to en if locale is not en or ru
-        if (blogLocale !== 'en' && blogLocale !== 'ru') {
-            const url = request.nextUrl.clone();
-            url.locale = 'en';
-            return NextResponse.redirect(url);
-        }
-
         // For blog pages, ignore cookie-based locale detection to prevent redirect loops
         // Only use the current locale from URL, don't try to detect from cookie/headers
         return NextResponse.next();

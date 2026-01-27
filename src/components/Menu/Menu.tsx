@@ -34,13 +34,8 @@ export const Menu: React.FC = () => {
 
     const {hideLocalePicker} = React.useContext(EnvironmentContext);
 
-    // Filter menu items based on locale - blog is only available for en and ru
-    const filteredMenu = React.useMemo(() => {
-        if (locale === 'en' || locale === 'ru') {
-            return menu;
-        }
-        return menu.filter((item) => item.url !== '/blog');
-    }, [locale]);
+    // Show all menu items for all locales
+    const filteredMenu = menu;
 
     const renderItem = (item: MenuItem) => {
         if (item.isComingSoon) {

@@ -20,7 +20,7 @@ import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
 import {getI18nProps} from '../../utils/i18next';
 
-import {localeEn, localeRu} from './constants';
+import {localeMap} from './constants';
 import './index.scss';
 
 const b = block('blog-page');
@@ -35,16 +35,6 @@ interface BlogIndexProps {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const locale = ctx.locale || 'en';
-
-    // Blog is only available for ru and en locales
-    if (locale !== 'ru' && locale !== 'en') {
-        return {
-            redirect: {
-                destination: `/${ctx.defaultLocale || 'en'}/blog`,
-                permanent: false,
-            },
-        };
-    }
 
     try {
         const [postsResponse, tags, i18nProps] = await Promise.all([
@@ -79,7 +69,7 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
     const router = useRouter();
     const isMobile = useIsMobile();
     const locale = router.locale || 'en';
-    const localeValue = locale === 'ru' ? localeRu : localeEn;
+    const localeValue = localeMap[locale] || localeMap['en'];
 
     const [posts, setPosts] = useState<PostsProps>(postsData);
 
