@@ -69,7 +69,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 ...i18nProps,
             },
         };
-    } catch (error) {
+    } catch {
         // Error is logged on server side
         return {
             notFound: true,
@@ -113,28 +113,31 @@ export default function BlogPostPage({
     ];
 
     // Breadcrumbs for navigation
+    // Note: ConstructorBlogPostPage automatically adds the current page (post.title) to breadcrumbs,
+    // so we only need to provide parent pages: Blog and Tag (if exists)
     const pathPrefix = localeValue.pathPrefix ? `/${localeValue.pathPrefix}` : '';
     const blogUrl = `${pathPrefix}/blog`;
 
-    // Ensure post URL has pathPrefix
-    let postUrl = router.asPath;
-    if (pathPrefix && !postUrl.startsWith(pathPrefix)) {
-        // Remove any existing locale prefix and add the correct one
-        const urlWithoutLocale = postUrl.replace(/^\/(en|ru)/, '');
-        postUrl = `${pathPrefix}${urlWithoutLocale}`;
+    // Build breadcrumbs: Blog -> Tag (if exists)
+    const breadcrumbItems = [
+        {
+            text: t('meta_title'),
+            url: blogUrl,
+        },
+    ];
+
+    // Add tag to breadcrumbs if post has tags
+    if (post.tags && post.tags.length > 0) {
+        const firstTag = post.tags[0];
+        const tagUrl = `${blogUrl}?tags=${firstTag.slug}`;
+        breadcrumbItems.push({
+            text: firstTag.name,
+            url: tagUrl,
+        });
     }
 
     const breadcrumbs = {
-        items: [
-            {
-                text: t('meta_title'),
-                url: blogUrl,
-            },
-            {
-                text: post.title,
-                url: postUrl,
-            },
-        ],
+        items: breadcrumbItems,
     };
 
     // Blog constructor settings

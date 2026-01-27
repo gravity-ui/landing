@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 73,
+      "name": "gravityui-aikit",
+      "date": "2025-12-18T00:00:00Z",
+      "title": "One Chat to Rule Them All: We Built an AI Assistant Library Based on Gravity UI",
+      "postId": 73,
+      "description": "An article about the launch of the AIKit library: what we focused on during development, why it’s needed, and how to use it in your own projects.",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+      "readingTime": 8,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravityui-aikit"
+    },
+    {
       "id": 36,
       "name": "graph",
       "date": "2025-08-07T00:00:00Z",
@@ -23,6 +47,54 @@
       ],
       "services": [],
       "url": "/blog/graph"
+    },
+    {
+      "id": 39,
+      "name": "navigation-webinar",
+      "date": "2025-03-20T00:00:00Z",
+      "title": "Webinar on Navigation",
+      "postId": 39,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+      "readingTime": 30,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "Webinars"
+        }
+      ],
+      "services": [],
+      "url": "/blog/navigation-webinar"
+    },
+    {
+      "id": 40,
+      "name": "gravity-start-webinar",
+      "date": "2024-12-09T00:00:00Z",
+      "title": "Gravity UI: A quick start",
+      "postId": 40,
+      "description": "Introductory webinar",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+      "readingTime": 43,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "Webinars"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-start-webinar"
     },
     {
       "id": 37,
@@ -97,6 +169,30 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 4,
-  "count": 4
+  "totalCount": 16,
+  "count": 7,
+  "pinnedPost": {
+    "id": 74,
+    "name": "gravity-speed",
+    "date": "2025-07-29T00:00:00Z",
+    "title": "Performance Comparison of React Components: Gravity UI vs Other Libraries",
+    "postId": 74,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+    "readingTime": 5,
+    "likes": 0,
+    "hasUserLike": false,
+    "hasPublishedVersionInRegion": true,
+    "hasPublishedVersionInLocale": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "Articles"
+      }
+    ],
+    "services": [],
+    "url": "/blog/gravity-speed"
+  }
 }
