@@ -131,6 +131,114 @@ body.g-root,
     .pc-page-constructor {
         background-color: transparent;
     }
+
+    // Styles for code blocks in blog-constructor with prism-tomorrow colors
+    // stylelint-disable declaration-no-important
+    .yfm_blog {
+        // Code block background (similar to prism-tomorrow)
+        pre {
+            background-color: #2d2d2d !important;
+        }
+
+        pre > code {
+            background-color: #2d2d2d !important;
+            color: #ccc !important; // Base text color
+        }
+
+        // highlight.js syntax highlighting with prism-tomorrow colors
+        .hljs-subst {
+            color: #ccc !important; // Base color
+        }
+
+        .hljs-comment {
+            color: #999 !important; // Comments
+        }
+
+        .hljs-keyword,
+        .hljs-attribute,
+        .hljs-selector-tag,
+        .hljs-meta-keyword,
+        .hljs-doctag,
+        .hljs-name {
+            color: #cc99cd !important; // Keywords
+        }
+
+        .hljs-type,
+        .hljs-string,
+        .hljs-quote,
+        .hljs-template-tag {
+            color: #7ec699 !important; // Strings
+        }
+
+        .hljs-number {
+            color: #f08d49 !important; // Numbers
+        }
+
+        .hljs-selector-id,
+        .hljs-selector-class {
+            color: #7ec699 !important; // Selectors
+        }
+
+        .hljs-deletion {
+            color: #e2777a !important; // Deletion
+        }
+
+        .hljs-title,
+        .hljs-section {
+            color: #e2777a !important; // Titles
+        }
+
+        .hljs-regexp,
+        .hljs-symbol,
+        .hljs-variable,
+        .hljs-template-variable,
+        .hljs-link,
+        .hljs-selector-attr,
+        .hljs-selector-pseudo {
+            color: #67cdcc !important; // Variables and operators
+        }
+
+        .hljs-literal {
+            color: #f08d49 !important; // Literals (boolean, number)
+        }
+
+        .hljs-built_in,
+        .hljs-bullet,
+        .hljs-code,
+        .hljs-addition {
+            color: #f8c555 !important; // Built-in functions and constants
+        }
+
+        .hljs-meta {
+            color: #cc99cd !important; // Meta information
+        }
+
+        .hljs-meta-string {
+            color: #7ec699 !important; // Meta strings
+        }
+
+        // Additional classes for better compatibility
+        .hljs-function {
+            color: #f08d49 !important; // Functions
+        }
+
+        .hljs-class {
+            color: #f8c555 !important; // Classes
+        }
+
+        .hljs-tag {
+            color: #e2777a !important; // Tags
+        }
+
+        .hljs-attr {
+            color: #e2777a !important; // Attributes
+        }
+
+        .hljs-attr-value {
+            color: #7ec699 !important; // Attribute values
+        }
+    }
+    // stylelint-enable declaration-no-important
 }
 
 .g-fun-gravity {
@@ -191,7 +299,7 @@ body.g-root,
         animation-delay: 2s;
     }
 
-    /* Пауза при наведении */
+    /* Pause on hover */
     *:hover {
         animation-play-state: paused;
     }

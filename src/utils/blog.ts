@@ -5,8 +5,14 @@ import {
     typografToText,
     yfmTransformer,
 } from '@gravity-ui/page-constructor/server';
-import {Lang} from '@gravity-ui/uikit';
 import {parse} from 'node-html-parser';
+
+/**
+ * For transform: page-constructor supports only 'en' | 'ru'
+ */
+function getTransformLang(locale: string): 'en' | 'ru' {
+    return locale === 'ru' ? 'ru' : 'en';
+}
 
 /**
  * Formats a blog post URL with locale prefix
@@ -39,15 +45,6 @@ export const getUrlWithLocale = (url: string, locale: string): string => {
     return cleanUrl ? `/${lang}/blog/${cleanUrl}` : `/${lang}/blog`;
 };
 
-/**
- * Converts a locale string to Lang type (only 'en' and 'ru' are supported by typograf functions)
- * @param locale - The locale string
- * @returns Lang type (Lang.En or Lang.Ru)
- */
-const localeToLang = (locale: string): Lang => {
-    return locale === 'ru' ? Lang.Ru : Lang.En;
-};
-
 type MarkdownItPluginCb = NonNullable<Parameters<typeof fullTransform>[1]['plugins']>[number];
 
 /**
@@ -60,12 +57,12 @@ type MarkdownItPluginCb = NonNullable<Parameters<typeof fullTransform>[1]['plugi
  */
 function transformPostContent(
     content: string,
-    lang: Lang,
+    locale: string,
     plugins: MarkdownItPluginCb[] = [],
     path?: string,
 ) {
     const {html} = fullTransform(content, {
-        lang,
+        lang: getTransformLang(locale),
         extractTitle: true,
         allowHTML: true,
         path: path || __dirname,
@@ -82,12 +79,12 @@ function transformPostContent(
  * @param plugins - Optional markdown plugins
  * @returns The extracted plain text
  */
-const extractTextFromHtml = (lang: Lang, yfmText?: string, plugins?: MarkdownItPluginCb[]) => {
+const extractTextFromHtml = (locale: string, yfmText?: string, plugins?: MarkdownItPluginCb[]) => {
     if (!yfmText) {
         return yfmText;
     }
 
-    const html = yfmTransformer(lang, yfmText, {plugins});
+    const html = yfmTransformer(getTransformLang(locale), yfmText, {plugins});
     const root = parse(html);
     return root.text;
 };
@@ -124,27 +121,36 @@ export function preparePost({
         ...post
     } = postData;
 
-    // Convert locale to Lang (only 'en' and 'ru' are supported by typograf functions)
-    const lang = localeToLang(locale.lang);
+    const localeStr = locale.lang || 'en';
+    const transformLang = getTransformLang(localeStr);
 
-    const transformedTitle = yfmTransformer(lang, title as string, {plugins});
+    const transformedTitle = yfmTransformer(transformLang, title as string, {plugins});
 
     const preparedPost = {
         ...post,
-        tags: (tags as Tag[]) || [],
+        tags: tags as Tag[],
         title: transformedTitle,
-        textTitle: typografToText(transformedTitle, lang),
-        htmlTitle: typografToHTML(transformedTitle, lang),
-        metaTitle: extractTextFromHtml(lang, title as string | undefined, plugins),
-        metaDescription: extractTextFromHtml(lang, description as string | undefined, plugins),
-        shareTitle: extractTextFromHtml(lang, title as string | undefined, plugins),
-        shareDescription: extractTextFromHtml(lang, description as string | undefined, plugins),
-        description: yfmTransformer(lang, description as string, {plugins}),
-        url: typeof url === 'string' ? getUrlWithLocale(url, locale.lang) : '',
+        textTitle: typografToText(transformedTitle, transformLang),
+        htmlTitle: typografToHTML(transformedTitle, transformLang),
+        metaTitle: extractTextFromHtml(localeStr, title as string | undefined, plugins),
+        metaDescription: extractTextFromHtml(localeStr, description as string | undefined, plugins),
+        shareTitle: extractTextFromHtml(localeStr, title as string | undefined, plugins),
+        shareDescription: extractTextFromHtml(
+            localeStr,
+            description as string | undefined,
+            plugins,
+        ),
+        description: yfmTransformer(transformLang, description as string, {plugins}),
+        url: url && typeof url === 'string' ? getUrlWithLocale(url, localeStr) : '',
     } as PostData;
 
     if (withContent) {
-        preparedPost.content = transformPostContent(content as string, lang, plugins, contentPath);
+        preparedPost.content = transformPostContent(
+            content as string,
+            localeStr,
+            plugins,
+            contentPath,
+        );
     }
 
     return preparedPost;

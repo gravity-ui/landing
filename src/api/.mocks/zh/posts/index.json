@@ -1,0 +1,198 @@
+{
+  "posts": [
+    {
+      "id": 73,
+      "name": "gravityui-aikit",
+      "date": "2025-12-18T00:00:00Z",
+      "title": "一个聊天统治所有：我们基于 Gravity UI 构建了 AI 助手库",
+      "postId": 73,
+      "description": "一篇关于 AIKit 库发布的文章：我们在开发过程中关注的重点、为什么需要它，以及如何在您自己的项目中使用它。",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+      "readingTime": 8,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "文章"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravityui-aikit"
+    },
+    {
+      "id": 36,
+      "name": "graph",
+      "date": "2025-08-07T00:00:00Z",
+      "title": "图可视化库：我们如何解决 Canvas vs HTML 的困境",
+      "postId": 36,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/graph-cover-bg.png",
+      "readingTime": 17,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "文章"
+        }
+      ],
+      "services": [],
+      "url": "/blog/graph"
+    },
+    {
+      "id": 39,
+      "name": "navigation-webinar",
+      "date": "2025-03-20T00:00:00Z",
+      "title": "导航网络研讨会",
+      "postId": 39,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+      "readingTime": 30,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "网络研讨会"
+        }
+      ],
+      "services": [],
+      "url": "/blog/navigation-webinar"
+    },
+    {
+      "id": 40,
+      "name": "gravity-start-webinar",
+      "date": "2024-12-09T00:00:00Z",
+      "title": "Gravity UI：快速入门",
+      "postId": 40,
+      "description": "介绍性网络研讨会",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+      "readingTime": 43,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "网络研讨会"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-start-webinar"
+    },
+    {
+      "id": 37,
+      "name": "yc-site-in-gravity-ui",
+      "date": "2024-10-28T00:00:00Z",
+      "title": "我们如何使用 Gravity UI 设计系统使 Yandex Cloud 更易访问",
+      "postId": 37,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+      "readingTime": 20,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "文章"
+        }
+      ],
+      "services": [],
+      "url": "/blog/yc-site-in-gravity-ui"
+    },
+    {
+      "id": 38,
+      "name": "md-editor-in-gravity-ui",
+      "date": "2024-10-01T00:00:00Z",
+      "title": "Markdown 编辑器：基于 Gravity UI 构建的 WYSIWYG 和标记编辑器",
+      "postId": 38,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/mdeditor-cover-bg.png",
+      "readingTime": 7,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "文章"
+        }
+      ],
+      "services": [],
+      "url": "/blog/md-editor-in-gravity-ui"
+    },
+    {
+      "id": 35,
+      "name": "gravity-ui-in-opensource",
+      "date": "2023-12-12T00:00:00Z",
+      "title": "Gravity UI 设计系统：如何轻松构建您自己的界面",
+      "postId": 35,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/gravity-ui-cover.png",
+      "readingTime": 10,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "文章"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-ui-in-opensource"
+    }
+  ],
+  "totalCount": 16,
+  "count": 7,
+  "pinnedPost": {
+    "id": 74,
+    "name": "gravity-speed",
+    "date": "2025-07-29T00:00:00Z",
+    "title": "React 组件性能比较：Gravity UI vs 其他库",
+    "postId": 74,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+    "readingTime": 5,
+    "likes": 0,
+    "hasUserLike": false,
+    "hasPublishedVersionInRegion": true,
+    "hasPublishedVersionInLocale": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "文章"
+      }
+    ],
+    "services": [],
+    "url": "/blog/gravity-speed"
+  }
+}
