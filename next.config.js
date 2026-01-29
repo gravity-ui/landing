@@ -8,6 +8,7 @@ const {patchWebpackConfig} = require('next-global-css');
 const withTM = require('next-transpile-modules')([
     '@gravity-ui/uikit',
     '@gravity-ui/page-constructor',
+    '@gravity-ui/blog-constructor',
     '@gravity-ui/components',
     '@gravity-ui/date-components',
     '@gravity-ui/navigation',
@@ -15,8 +16,7 @@ const withTM = require('next-transpile-modules')([
     '@gravity-ui/charts',
     '@gravity-ui/yagr',
     '@gravity-ui/markdown-editor',
-    '@gravity-ui/timeline',
-    '@gravity-ui/aikit',
+    'swiper',
 ]);
 
 const {i18n} = require('./next-i18next.config');

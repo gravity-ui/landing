@@ -1,0 +1,12 @@
+@use '../../variables.scss';
+@use '../../mixins.scss' as baseMixins;
+
+$block: '.#{variables.$ns}blog-page';
+
+#{$block} {
+    // Переопределение переменных для всех дочерних элементов
+    & * {
+        --g-border-radius-xl: 8px;
+        --bc-text-input-border-radius: 8px;
+    }
+}

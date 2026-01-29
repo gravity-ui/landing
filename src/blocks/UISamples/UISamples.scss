@@ -8,7 +8,10 @@ $block: '.#{variables.$ns}ui-samples-block';
     @include pcStyles.animate();
 
     &__title {
-        @include pcStyles.heading2();
         margin-bottom: pcVariables.$indentM;
+    }
+
+    &__title-content {
+        @include pcStyles.heading2();
     }
 }

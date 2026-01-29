@@ -1,6 +1,6 @@
 import {dateTime} from '@gravity-ui/date-utils';
 import {ChevronRight} from '@gravity-ui/icons';
-import {HTML} from '@gravity-ui/page-constructor';
+import {YFMWrapper} from '@gravity-ui/page-constructor';
 import {Icon, Link} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
@@ -19,31 +19,32 @@ interface RoadmapItemProps {
 }
 
 export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
+    const {title, url, status, completedDate} = task;
     const {t} = useTranslation();
     const locale = useLocale();
 
-    const inProgress = task.status === RoadmapTaskStatus.InProgress;
-    const completed = task.status === RoadmapTaskStatus.Completed;
+    const inProgress = status === RoadmapTaskStatus.InProgress;
+    const completed = status === RoadmapTaskStatus.Completed;
 
-    const showStatus = inProgress || (completed && task.completedDate);
+    const showStatus = inProgress || (completed && completedDate);
 
     const taskContent = (
         <div className={b('wrapper')}>
             <div className={b('content')}>
-                <HTML>{task.title}</HTML>
+                <YFMWrapper content={title} modifiers={{constructor: true}} />
                 {showStatus && (
                     <span className={b('status')}>
                         {inProgress && t('roadmap_inProgress')}
                         {completed &&
-                            task.completedDate &&
+                            completedDate &&
                             dateTime({
-                                input: new Date(task.completedDate),
+                                input: new Date(completedDate),
                                 lang: locale,
                             }).fromNow()}
                     </span>
                 )}
             </div>
-            {task.url && <Icon className={b('arrow')} data={ChevronRight} size={16} />}
+            {url && <Icon className={b('arrow')} data={ChevronRight} size={16} />}
         </div>
     );
 
@@ -52,14 +53,14 @@ export const RoadmapItem: React.FC<RoadmapItemProps> = ({task}) => {
             className={b({
                 completed,
                 progress: inProgress,
-                planned: task.status === RoadmapTaskStatus.Planned,
+                planned: status === RoadmapTaskStatus.Planned,
             })}
         >
             <div className={b('separator')}>
-                <RoadmapIcon status={task.status} />
+                <RoadmapIcon status={status} />
             </div>
-            {task.url ? (
-                <Link href={task.url} className={b('link')} target="_blank">
+            {url ? (
+                <Link href={url} className={b('link')} target="_blank">
                     {taskContent}
                 </Link>
             ) : (

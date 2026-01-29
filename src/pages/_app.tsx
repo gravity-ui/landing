@@ -1,3 +1,4 @@
+import '@gravity-ui/blog-constructor/styles/styles.css';
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import {NextComponentType} from 'next';

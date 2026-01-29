@@ -1,0 +1,23 @@
+{
+  "id": 73,
+  "name": "gravityui-aikit",
+  "isPinned": false,
+  "postId": 73,
+  "description": "Статья о запуске библиотеки AIKit: на что мы смотрели в разработке, зачем она нужна и как её применять в своих проектах.",
+  "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+  "readingTime": 8,
+  "title": "Один чат, чтобы править всеми: собрали библиотеку для ИИ-ассистентов на базе Gravity UI",
+  "date": "2025-12-18T00:00:00Z",
+  "likes": 0,
+  "hasUserLike": false,
+  "addLegacyPrefix": false,
+  "tags": [
+    {
+      "icon": null,
+      "slug": "articles",
+      "name": "Статьи"
+    }
+  ],
+  "authors": [],
+  "services": []
+}
