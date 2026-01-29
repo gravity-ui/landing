@@ -10,7 +10,7 @@
   "dependencies": {
     "@diplodoc/transform": "^4.18.0",
     "@gravity-ui/aikit": "^1.1.0",
-    "@gravity-ui/blog-constructor": "^9.0.0-alpha.3",
+    "@gravity-ui/blog-constructor": "^9.0.0",
     "@gravity-ui/chartkit": "^6.1.1",
     "@gravity-ui/charts": "^0.8.0",
     "@gravity-ui/components": "^4.18.0",
@@ -20,7 +20,7 @@
     "@gravity-ui/icons": "^2.17.0",
     "@gravity-ui/markdown-editor": "^15.1.0",
     "@gravity-ui/navigation": "^4.0.10",
-    "@gravity-ui/page-constructor": "^6.0.0-beta.6",
+    "@gravity-ui/page-constructor": "^8.0.0",
     "@gravity-ui/timeline": "^1.26.1",
     "@gravity-ui/uikit": "^7.31.1",
     "@gravity-ui/uikit-themer": "^1.7.0",
