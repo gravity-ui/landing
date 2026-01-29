@@ -152,7 +152,7 @@
     ]
   },
   "lint-staged": {
-    "*.{scss}": [
+    "*.scss": [
       "stylelint --fix --quiet"
     ],
     "*.{js,jsx,ts,tsx}": [
