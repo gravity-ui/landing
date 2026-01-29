@@ -6,9 +6,9 @@
 npm install @gravity-ui/blog-constructor
 ```
 
-## 블로그 생성기
+## Blog-constructor
 
-`Blog-constructor`는 [Page-constructor](https://github.com/gravity-ui/page-constructor) 라이브러리를 기반으로 블로그 형식의 웹 페이지를 만드는 데 사용되는 라이브러리입니다. Blog-constructor는 블로그에 필요한 컴포넌트를 추가하기 위해 page-constructor의 [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) 속성을 사용합니다.
+`Blog-constructor`는 블로그 형식의 웹 페이지를 만들기 위한 [Page-constructor](https://github.com/gravity-ui/page-constructor) 라이브러리를 기반으로 합니다. Blog-constructor는 블로그에 필요한 컴포넌트를 추가하기 위해 page-constructor의 [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) prop을 사용합니다.
 
 ### 문서 - [Storybook](https://preview.gravity-ui.com/blog-constructor/)
 
@@ -47,7 +47,7 @@ import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructo
 
 ```
 
-[providerProps](./src/constructor/README.md)에 대한 문서를 확인하세요.
+[providerProps](./src/constructor/README.md)에 대한 문서.
 
 또한 blog-constructor에는 필요한 경우 데이터를 변환하는 데 도움이 되는 서버 컴포넌트가 있습니다.
 

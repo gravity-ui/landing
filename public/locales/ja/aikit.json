@@ -1,0 +1,17 @@
+{
+  "goToLibrary": "ライブラリに移動",
+  "title": "AIKit Playground",
+  "chat": {
+    "title": "AIチャット",
+    "emptyTitle": "チャットを開始",
+    "emptyDescription": "AI、プログラミング、その他のトピックについて何でも聞いてください！",
+    "placeholder": "メッセージを入力..."
+  },
+  "welcome": {
+    "title": "AIチャットへようこそ",
+    "description": "メッセージを入力して会話を開始してください。"
+  },
+  "error": {
+    "apiError": "申し訳ありませんが、エラーが発生しました。もう一度お試しください。"
+  }
+}

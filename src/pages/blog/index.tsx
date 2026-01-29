@@ -14,13 +14,13 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
-import {Api, type BlogPostListItem} from '../../api';
+import {type BlogPostListItem, ServerApi} from '../../api';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
+import {localeMap} from '../../utils/blog-constants';
 import {getI18nProps} from '../../utils/i18next';
 
-import {localeMap} from './constants';
 import './index.scss';
 
 const b = block('blog-page');
@@ -38,8 +38,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     try {
         const [postsResponse, tags, i18nProps] = await Promise.all([
-            Api.instance.getBlogPosts(locale),
-            Api.instance.getBlogTags(locale),
+            ServerApi.instance.getBlogPosts(locale),
+            ServerApi.instance.getBlogTags(locale),
             getI18nProps(ctx, ['blog']),
         ]);
 
@@ -96,7 +96,7 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
         const loadAllPosts = async () => {
             try {
                 const currentLocale = router.locale || 'en';
-                const response = await Api.instance.getBlogPosts(currentLocale);
+                const response = await ServerApi.instance.getBlogPosts(currentLocale);
                 allPostsRef.current = response.posts;
 
                 // Update the stable key reference when locale changes
@@ -131,6 +131,7 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
         loadAllPosts();
     }, [router.locale, postsData.count]);
 
+    // TODO delete after conneting to real API
     // Local filtering function
     // Filters posts based on search query, tags, and services
     const filterPostsLocally = useCallback(

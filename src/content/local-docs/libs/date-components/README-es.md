@@ -1,4 +1,4 @@
-# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
+# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/) [![coverage](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fstorage.yandexcloud.net%2Fplaywright-reports%2Fdate-components%2Fpulls%2Fmain%2Fcoverage%2Fcoverage-summary.json&query=%24.total.lines.pct&suffix=%25&label=Coverage)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/coverage/lcov-report/index.html) [![tests-report](https://img.shields.io/badge/Tests-report-ff4685)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/html/index.html)
 
 ## Instalación
 
@@ -36,7 +36,7 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Carga las configuraciones regionales de fecha que se usarán en la aplicación.
+// Carga las localizaciones de fecha que se usarán en la aplicación.
 await settings.loadLocale('ru');
 
 function App() {
@@ -53,16 +53,16 @@ function App() {
 }
 ```
 
-Si la aplicación admite el cambio de idioma, precarga todas las configuraciones regionales compatibles cuando la aplicación se carga por primera vez, o carga las configuraciones regionales antes de cambiar el idioma:
+Si la aplicación admite el cambio de idioma, precarga todas las localizaciones admitidas cuando la aplicación se carga por primera vez, o carga las localizaciones antes de cambiar el idioma:
 
 ```jsx
-// Precarga de configuraciones regionales
+// Precarga de localizaciones
 await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// o carga las configuraciones regionales bajo demanda.
+// o carga las localizaciones bajo demanda.
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -77,7 +77,7 @@ function App() {
 }
 ```
 
-Los componentes tienen traducciones al inglés y al ruso. Para agregar traducciones a otros idiomas, usa `addLanguageKeysets` de `@gravity-ui/uikit`:
+Los componentes tienen traducciones al inglés y al ruso. Para añadir traducciones a otros idiomas, utiliza `addLanguageKeysets` de `@gravity-ui/uikit`:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';

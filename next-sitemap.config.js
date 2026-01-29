@@ -5,6 +5,13 @@ module.exports = {
     generateRobotsTxt: true,
     exclude: ['/**'],
     robotsTxtOptions: {
+        policies: [
+            {
+                userAgent: '*',
+                allow: '/',
+                disallow: ['/sandbox/'],
+            },
+        ],
         additionalSitemaps: ['https://gravity-ui.com/sitemap.xml'],
     },
     generateIndexSitemap: false,

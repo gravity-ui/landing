@@ -1,6 +1,7 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /sandbox/
 
 # Host
 Host: https://gravity-ui.com

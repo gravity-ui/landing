@@ -1,0 +1,17 @@
+{
+  "goToLibrary": "라이브러리로 이동",
+  "title": "AIKit 플레이그라운드",
+  "chat": {
+    "title": "AI 채팅",
+    "emptyTitle": "채팅 시작하기",
+    "emptyDescription": "AI, 프로그래밍 또는 기타 주제에 대해 무엇이든 물어보세요!",
+    "placeholder": "메시지를 입력하세요..."
+  },
+  "welcome": {
+    "title": "AI 채팅에 오신 것을 환영합니다",
+    "description": "메시지를 입력하여 대화를 시작하세요."
+  },
+  "error": {
+    "apiError": "죄송합니다. 오류가 발생했습니다. 다시 시도해 주세요."
+  }
+}

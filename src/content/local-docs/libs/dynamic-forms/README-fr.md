@@ -1,6 +1,6 @@
 # @gravity-ui/dynamic-forms &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/dynamic-forms)](https://www.npmjs.com/package/@gravity-ui/dynamic-forms) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/dynamic-forms/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/dynamic-forms/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/dynamic-forms/)
 
-Bibliothèque basée sur JSON Schema pour le rendu de formulaires et de valeurs de formulaires.
+La bibliothèque basée sur JSON Schema pour le rendu de formulaires et de valeurs de formulaires.
 
 ## Installation
 
@@ -22,7 +22,7 @@ import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
 <DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
 ```
 
-### Internationalisation (I18N)
+### I18N
 
 Certains composants incluent des jetons textuels (mots et phrases) disponibles en deux langues : `en` (par défaut) et `ru`. Pour définir la langue, utilisez la fonction `configure` :
 
@@ -36,7 +36,7 @@ configure({lang: Lang.Ru});
 
 ## Développement
 
-Pour démarrer le serveur de développement avec Storybook, exécutez la commande suivante :
+Pour démarrer le serveur de développement avec storybook, exécutez la commande suivante :
 
 ```shell
 npm ci

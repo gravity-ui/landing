@@ -26,7 +26,7 @@ Añade un archivo `.stylelintrc` en la raíz del proyecto con el siguiente conte
 
 ### Prettier
 
-Si estás utilizando Prettier, extiende la configuración raíz con las reglas adicionales:
+Si utilizas Prettier, extiende la configuración raíz con las reglas adicionales:
 
 ```json
 {

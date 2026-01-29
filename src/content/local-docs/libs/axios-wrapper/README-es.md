@@ -1,7 +1,7 @@
 # Axios Wrapper
-Esta librería proporciona un envoltorio conveniente para Axios, añadiendo la cancelación automática de peticiones concurrentes a sus funcionalidades.
+Esta biblioteca proporciona una envoltura conveniente alrededor de Axios, añadiendo la cancelación automática de solicitudes concurrentes a sus características.
 
-## Instalación
+## Instalar
 
 ```shell
 npm install --save-dev @gravity-ui/axios-wrapper
@@ -15,7 +15,7 @@ npm install --save-dev @gravity-ui/axios-wrapper
 La configuración de una instancia de `axios`.
 
 ##### collector [opcional]
-La configuración del colector de peticiones es un objeto:
+La configuración del colector de solicitudes es un objeto:
 ```json
 {
     "collectErrors": 10,
@@ -24,36 +24,36 @@ La configuración del colector de peticiones es un objeto:
 ```
 
 ### Métodos básicos
-El envoltorio proporciona los métodos HTTP `get`, `head`, `put`, `post`, `delete`.
+La envoltura proporciona los métodos http `get`, `head`, `put`, `post`, `delete`.
 
 Los métodos `get` y `head` tienen la firma `(url, params, options)`; `put`, `post`, mientras que el método `delete`
 tiene la firma `(url, data, params, options)`.
 
-El argumento `params` representa los parámetros de la cadena de consulta, mientras que `options` son los ajustes de la petición.
+El argumento `params` se refiere a los parámetros de la cadena de consulta, mientras que `options` son la configuración de la solicitud.
 
-Actualmente se admiten 4 ajustes de petición:
-- `concurrentId (string)`: ID de petición opcional
-- `collectRequest (bool)`: indicador opcional que indica si la petición debe ser registrada (por defecto `true`)
-- `requestConfig (object)`: configuración opcional con parámetros de petición personalizados
-- `headers (object)`: objeto opcional con cabeceras de petición personalizadas.
-- `timeout (number)`: tiempo de espera de petición opcional
+Actualmente se admiten 4 configuraciones de solicitud:
+- `concurrentId (string)`: ID de solicitud opcional
+- `collectRequest (bool)`: indicador opcional que indica si la solicitud debe ser registrada (por defecto `true`)
+- `requestConfig (object)`: configuración opcional con parámetros de solicitud personalizados
+- `headers (object)`: objeto opcional con encabezados de solicitud personalizados.
+- `timeout (number)`: tiempo de espera de solicitud opcional
 - `onDownloadProgress (function)`: función de devolución de llamada opcional para procesar el progreso de la descarga de archivos
 
-### Cabeceras
-El método `setDefaultHeader({name (string), value (string), methods (array)})` permite añadir una cabecera de petición por defecto.
+### Encabezados
+El método `setDefaultHeader({name (string), value (string), methods (array)})` permite añadir un encabezado de solicitud predeterminado.
 
-Los argumentos `name` y `value` son obligatorios, el argumento opcional `methods` especifica todos los métodos que recibirán estas cabeceras por defecto (por defecto, todos los métodos recibirán estas cabeceras).
+Los argumentos `name` y `value` son obligatorios, el argumento opcional `methods` especifica todos los métodos que recibirán esos encabezados predeterminados (por defecto, todos los métodos recibirán esos encabezados).
 
 ### CSRF
-El método `setCSRFToken` permite especificar un token CSRF, que se añadirá a todas las peticiones `put`, `post` y `delete`.
+El método `setCSRFToken` permite especificar un token CSRF, que se añadirá a todas las solicitudes `put`, `post` y `delete`.
 
-### Peticiones concurrentes
-A veces es mejor cancelar una petición en curso si sus resultados ya no son necesarios. Para que esto ocurra, se debe pasar el ID `concurrentId` a las `options` de la petición. Cuando se produce la siguiente petición con el mismo `concurrentId`, la petición anterior con ese ID se cancelará.
+### Solicitudes concurrentes
+A veces es mejor cancelar una solicitud en curso si sus resultados ya no son necesarios. Para que esto suceda, se debe pasar el ID `concurrentId` a las `options` de la solicitud. Cuando se produce la siguiente solicitud con el mismo `concurrentId`, la solicitud anterior con ese ID se cancelará.
 
-También se puede cancelar una petición manualmente invocando el método `cancelRequest(concurrentId)`.
+También se puede cancelar una solicitud manualmente invocando el método `cancelRequest(concurrentId)`.
 
-### Recopilación de peticiones
-Es posible configurar la recopilación de peticiones en el almacenamiento local utilizando la opción `collector`. Almacena todas las peticiones y errores por separado. La siguiente instancia `apiInstance` conservará las 10 últimas peticiones (tanto exitosas como no) y los 10 últimos errores.
+### Recopilación de solicitudes
+Es posible configurar la recopilación de solicitudes en el almacenamiento local utilizando la opción `collector`. Almacena todas las solicitudes y errores por separado. La siguiente `apiInstance` conservará las 10 últimas solicitudes (tanto exitosas como no) y los 10 últimos errores.
 ```javascript
 const apiInstance = new API({
     collector: {
@@ -63,11 +63,10 @@ const apiInstance = new API({
 });
 ```
 
-Para obtener las peticiones guardadas, hay que invocar el método `getCollectedRequests`, que devuelve el objeto
-`{errors: [...], requests: [...]}`.
+Para obtener las solicitudes guardadas, hay que invocar el método `getCollectedRequests`, que devuelve el objeto `{errors: [...], requests: [...]}`.
 
 ### Uso
-El uso sugerido es heredar de la clase base `AxiosWrapper`:
+El uso sugerido es crear una subclase de la clase base `AxiosWrapper`:
 ```javascript
 export class API extends AxiosWrapper {
     getProjects() {
@@ -85,7 +84,7 @@ export class API extends AxiosWrapper {
 }
 ```
 
-Cuando se pasa el parámetro `baseURL` a la configuración de `axios`, todos los nombres de ruta solicitados se añadirán a él.
+Cuando se pasa el parámetro `baseURL` a la configuración de `axios`, todas las rutas solicitadas se añadirán a él.
 ```javascript
 const apiInstance = new API({
     config: {

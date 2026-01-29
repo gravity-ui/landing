@@ -124,9 +124,15 @@ module.exports = withBundleAnalyzer(
             defaultLocale: i18n.defaultLocale,
             localeDetection: false,
         },
+        // Transpile ESM-only packages to work with SSR
+        transpilePackages: [
+            '@uiw/react-color',
+            '@uiw/react-color-name',
+            'colors-named',
+            'colors-named-hex',
+        ],
         experimental: {
             esmExternals: 'loose',
-            optimizePackageImports: ['@gravity-ui/uikit'],
         },
         typescript: {
             ignoreBuildErrors: true,

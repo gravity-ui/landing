@@ -10,7 +10,7 @@ on:
 permissions: write-all
 
 env:
-  LANGUAGES: 'ko es de zh fr' # Supported languages separated by space (spaces are important)
+  LANGUAGES: 'ko es de zh fr pt ja' # Supported languages separated by space (spaces are important)
 
 jobs:
   prepare-inputs:
@@ -55,7 +55,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 24
       - name: Create pull request
         id: create-pr
         env:
@@ -164,4 +164,4 @@ jobs:
           git add .
 
           git commit -m "remove temporary files and fix AI translations"
-          git push origin HEAD
+          git push origin HEAD:update-translations

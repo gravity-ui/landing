@@ -1,5 +1,5 @@
 # Axios Wrapper
-Diese Bibliothek bietet einen praktischen Wrapper für Axios, der unter anderem die automatische Abbrechung gleichzeitiger Anfragen hinzufügt.
+Diese Bibliothek bietet einen praktischen Wrapper für Axios und fügt automatische Abbruchfunktionen für gleichzeitige Anfragen hinzu.
 
 ## Installation
 
@@ -24,35 +24,36 @@ Die Konfiguration des Anfragensammlers ist ein Objekt:
 ```
 
 ### Grundlegende Methoden
-Der Wrapper bietet die HTTP-Methoden `get`, `head`, `put`, `post`, `delete`.
+Der Wrapper stellt die HTTP-Methoden `get`, `head`, `put`, `post`, `delete` bereit.
 
-Die Methoden `get` und `head` haben die Signatur `(url, params, options)`; `put`, `post` und die `delete`-Methode haben die Signatur `(url, data, params, options)`.
+Die Methoden `get` und `head` haben die Signatur `(url, params, options)`; die Methoden `put`, `post` und `delete`
+haben die Signatur `(url, data, params, options)`.
 
 Das Argument `params` steht für Query-String-Parameter, während `options` eine Anfrageseinstellung ist.
 
 Derzeit werden 4 Anfrageseinstellungen unterstützt:
 - `concurrentId (string)`: optionale Anfrage-ID
 - `collectRequest (bool)`: optionales Flag, das angibt, ob die Anfrage protokolliert werden soll (Standard `true`)
-- `requestConfig (object)`: optionales Konfigurationsobjekt mit benutzerdefinierten Anfrageparametern
+- `requestConfig (object)`: optionale Konfiguration mit benutzerdefinierten Anfrageparametern
 - `headers (object)`: optionales Objekt mit benutzerdefinierten Anfrageheadern.
-- `timeout (number)`: optionales Timeout für die Anfrage
+- `timeout (number)`: optionales Anfrage-Timeout
 - `onDownloadProgress (function)`: optionale Callback-Funktion zur Verarbeitung des Fortschritts beim Herunterladen von Dateien
 
 ### Header
 Die Methode `setDefaultHeader({name (string), value (string), methods (array)})` ermöglicht das Hinzufügen eines Standard-Anfrageheaders.
 
-Die Argumente `name` und `value` sind erforderlich. Das optionale Argument `methods` gibt alle Methoden an, die diese Standard-Header erhalten (standardmäßig erhalten alle Methoden diese Header).
+Die Argumente `name` und `value` sind erforderlich. Das optionale Argument `methods` gibt alle Methoden an, die diese Standardheader erhalten (standardmäßig erhalten alle Methoden diese Header).
 
 ### CSRF
 Die Methode `setCSRFToken` ermöglicht die Angabe eines CSRF-Tokens, das zu allen `put`, `post` und `delete`-Anfragen hinzugefügt wird.
 
 ### Gleichzeitige Anfragen
-Manchmal ist es besser, eine laufende Anfrage abzubrechen, wenn ihre Ergebnisse nicht mehr benötigt werden. Um dies zu erreichen, sollte der `concurrentId` in den `options` der Anfrage übergeben werden. Wenn eine weitere Anfrage mit derselben `concurrentId` erfolgt, wird die vorherige Anfrage mit dieser ID abgebrochen.
+Manchmal ist es besser, eine laufende Anfrage abzubrechen, wenn ihre Ergebnisse nicht mehr benötigt werden. Um dies zu erreichen, sollte der `options` der Anfrage die `concurrentId` übergeben werden. Wenn eine weitere Anfrage mit derselben `concurrentId` erfolgt, wird die vorherige Anfrage mit dieser ID abgebrochen.
 
 Eine Anfrage kann auch manuell abgebrochen werden, indem die Methode `cancelRequest(concurrentId)` aufgerufen wird.
 
-### Anfragen sammeln
-Es ist möglich, das Sammeln von Anfragen im lokalen Speicher über die Option `collector` einzurichten. Dabei werden alle Anfragen und Fehler separat gespeichert. Die folgende `apiInstance` speichert die 10 letzten Anfragen (sowohl erfolgreiche als auch nicht erfolgreiche) und die 10 letzten fehlerhaften Anfragen.
+### Sammeln von Anfragen
+Es ist möglich, das Sammeln von Anfragen im lokalen Speicher mithilfe der `collector`-Option einzurichten. Es speichert alle Anfragen und Fehler separat. Die folgende `apiInstance` behält die 10 letzten Anfragen (sowohl erfolgreiche als auch nicht erfolgreiche) und die 10 letzten fehlerhaften Anfragen.
 ```javascript
 const apiInstance = new API({
     collector: {

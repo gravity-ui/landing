@@ -10,7 +10,7 @@
     "goToLibrary": "前往库",
     "filterPlaceholder": "按图标名称筛选",
     "keywords": "关键词",
-    "empty_title": "未找到您的请求结果",
+    "empty_title": "未找到匹配您搜索条件的结果",
     "empty_subTitle": "请检查拼写或尝试其他关键词。",
     "usage_reactComponent": "React 组件",
     "usage_svg": "SVG"

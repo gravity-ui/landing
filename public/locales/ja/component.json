@@ -1,0 +1,13 @@
+{
+    "actions_openInFigma": "Figmaで開く",
+    "title": "コンポーネント",
+    "searchPlaceholder": "コンポーネント名で検索",
+    "color-input_validation-format-error": "フォーマットが無効です",
+    "maintainers_one": "メンテナー:",
+    "maintainers_other": "メンテナー:",
+    "maintainers": "メンテナー:",
+    "theme": "テーマ切り替え",
+    "rtlOn": "RTLをオンにする",
+    "rtlOff": "RTLをオフにする",
+    "rtlNotSupported": "RTLはサポートされていません"
+}

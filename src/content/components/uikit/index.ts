@@ -12,9 +12,12 @@ import {breadcrumbsConfig} from './Breadcrumbs';
 import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
+import {clipboardButtonConfig} from './ClipboardButton';
+import {dialogConfig} from './Dialog';
 import {disclosureConfig} from './Disclosure';
 import {dividerConfig} from './Divider';
 import {dropdownMenuConfig} from './DropdownMenu';
+import {filePreviewConfig} from './FilePreview';
 import {helpMarkConfig} from './HelpMark';
 import {hotkeyConfig} from './Hotkey';
 import {iconConfig} from './Icon';
@@ -24,10 +27,12 @@ import {listConfig} from './List';
 import {loaderConfig} from './Loader';
 import {menuConfig} from './Menu';
 import {modalConfig} from './Modal';
+import {numberInputConfig} from './NumberInput';
 import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
 import {pinInputConfig} from './PinInput';
+import {placeholderContainerConfig} from './PlaceholderContainer';
 import {popoverConfig} from './Popover';
 import {popupConfig} from './Popup';
 import {portalConfig} from './Portal';
@@ -65,6 +70,8 @@ const uikitComponents: Component[] = [
     buttonConfig,
     cardConfig,
     checkboxConfig,
+    clipboardButtonConfig,
+    dialogConfig,
     disclosureConfig,
     dividerConfig,
     dropdownMenuConfig,
@@ -75,10 +82,12 @@ const uikitComponents: Component[] = [
     loaderConfig,
     menuConfig,
     modalConfig,
+    numberInputConfig,
     overlayConfig,
     paginationConfig,
     paletteConfig,
     pinInputConfig,
+    placeholderContainerConfig,
     popoverConfig,
     popupConfig,
     portalConfig,
@@ -105,6 +114,7 @@ const uikitComponents: Component[] = [
     stepperConfig,
     helpMarkConfig,
     hotkeyConfig,
+    filePreviewConfig,
 ];
 
 export const uikit: Lib = {

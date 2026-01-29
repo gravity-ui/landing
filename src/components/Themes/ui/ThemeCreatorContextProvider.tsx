@@ -35,7 +35,7 @@ import {
     updateFontFamilyInTheme,
     updateFontFamilyTypeTitleInTheme,
 } from '../lib/themeCreatorUtils';
-import type {ThemeCreatorState} from '../lib/types';
+import type {ColorsSettingsType, ThemeCreatorState} from '../lib/types';
 
 type ThemeCreatorAction =
     | {
@@ -103,6 +103,10 @@ type ThemeCreatorAction =
     | {
           type: 'setAdvancedMode';
           payload: boolean;
+      }
+    | {
+          type: 'setColorsSettingsType';
+          payload: ColorsSettingsType;
       };
 
 const themeCreatorReducer = (
@@ -155,6 +159,11 @@ const themeCreatorReducer = (
             };
         case 'reinitialize':
             return initThemeCreator(action.payload);
+        case 'setColorsSettingsType':
+            return {
+                ...newState,
+                colorsSettingsType: action.payload,
+            };
         default:
             return prevState;
     }
@@ -334,6 +343,15 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const setColorsSettingsType = React.useCallback<
+        ThemeCreatorMethodsContextType['setColorsSettingsType']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'setColorsSettingsType',
+            payload,
+        });
+    }, []);
+
     const methods = React.useMemo(
         () => ({
             addColor,
@@ -353,6 +371,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             openMainSettings,
             setAdvancedMode,
             importTheme,
+            setColorsSettingsType,
         }),
         [
             addColor,
@@ -372,6 +391,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             openMainSettings,
             setAdvancedMode,
             importTheme,
+            setColorsSettingsType,
         ],
     );
 

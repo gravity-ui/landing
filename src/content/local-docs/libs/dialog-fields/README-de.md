@@ -1,10 +1,3 @@
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/de/README.md" class="active">Deutsch</a>
-</div>
-```
-
 ## Kurzbeschreibung
 
 Die `DFDialog`-Komponente erleichtert die Erstellung von Formularen und verwendet intern `react-final-form`.
@@ -15,12 +8,12 @@ Sie unterstützt mehrere vordefinierte Feldtypen, kann aber durch Registrierung 
 - [Basis-Steuerelemente](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-00-base-controls)
   - `plain` - statischer Text
   - `text` - editierbarer Text
-  - `multi-text` - vom Benutzer definierte Zeichenketten-Array
+  - `multi-text` - vom Benutzer definierter String-Array
   - `checkbox` - Kontrollkästchen
   - `tumbler` - Kippschalter
   - `radio` - Optionsfeld
-  - `editable-list` - Liste von entfernbaren Zeichenketten
-  - `multi-editable-list` - Mehrfachliste von entfernbaren Zeichenketten
+  - `editable-list` - Liste von löschbaren Strings
+  - `multi-editable-list` - Mehrfachliste von löschbaren Strings
   - `text area` - Textbereich
   - `select` - Auswahlfeld
   - `block` - Ermöglicht das Hinzufügen von `ReactNode`
@@ -33,8 +26,8 @@ Sie unterstützt mehrere vordefinierte Feldtypen, kann aber durch Registrierung 
 - [Vertikale/Horizontale Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
 - [Ausgeblendete Felder und Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
 - [Felder basierend auf Werten verknüpfen](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
-- [Feld-spezifische Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
-- [Formular-spezifische Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
+- [Feld-Level-Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
+- [Formular-Level-Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
 - [Virtualisierte Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)
 - [Klonbare Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-cloneable-tabs-)
 - [Gruppierte Felder](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-03-sections)

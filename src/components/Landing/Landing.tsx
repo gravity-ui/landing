@@ -2,12 +2,12 @@ import {PageConstructor, PageContent} from '@gravity-ui/page-constructor';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
+import {ContributorsBlock} from 'src/blocks/Contributors/Contributors';
 import Examples from 'src/blocks/Examples/Examples';
 import {UISamplesBlock} from 'src/blocks/UISamples/UISamples';
 import {CustomPageContent} from 'src/content/types';
 
-import type {Contributor, LibWithMetadata} from '../../api';
-import {ContributorsBlock} from '../../blocks/Contributors/Contributors';
+import type {LibWithMetadata} from '../../api';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
 import {IFrameBlock} from '../../blocks/IFrameBlock/IFrameBlock';
@@ -41,11 +41,10 @@ const filterBlocks = ({blocks, ...rest}: CustomPageContent): CustomPageContent =
 
 type Props = {
     libs: LibWithMetadata[];
-    contributors: Contributor[];
     backgroundImageSrc: string;
 };
 
-export const Landing: React.FC<Props> = ({libs, contributors, backgroundImageSrc}) => {
+export const Landing: React.FC<Props> = ({libs, backgroundImageSrc}) => {
     const {t} = useTranslation();
     const {pathname} = useRouter();
 
@@ -58,8 +57,8 @@ export const Landing: React.FC<Props> = ({libs, contributors, backgroundImageSrc
                 content={
                     filterBlocks(
                         pathname === '/rtl'
-                            ? getRtlLanding({t, libs, contributors, backgroundImageSrc})
-                            : getLanding({t, libs, contributors, backgroundImageSrc}),
+                            ? getRtlLanding({t, libs, backgroundImageSrc})
+                            : getLanding({t, libs, backgroundImageSrc}),
                     ) as PageContent
                 }
                 custom={{

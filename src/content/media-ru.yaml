@@ -34,6 +34,12 @@ blocks:
         url: https://habr.com/en/companies/yandex/articles/773870/
         target: _blank
       - type: basic-card
+        title: Библиотека для ИИ-ассистентов на базе Gravity UI
+        text: >-
+          Статья о запуске библиотеки AIKit: на что мы смотрели в разработке, зачем она нужна и как её применять в своих проектах.
+        url: https://habr.com/ru/companies/yandex/articles/977824/
+        target: _blank
+      - type: basic-card
         title: 'Библиотека визуализации графов: как мы решили дилемму Canvas vs HTML в Gravity UI'
         text: >-
           Пост про архитектурные вызовы, которые возникали при создании библиотеки 

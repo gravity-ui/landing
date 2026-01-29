@@ -8,7 +8,7 @@ on:
 permissions: write-all
 
 env:
-  LANGUAGES: 'ko es de zh fr' # Supported languages separated by space (spaces are important)
+  LANGUAGES: 'ko es de zh fr pt ja' # Supported languages separated by space (spaces are important)
 
 jobs:
   update-packages-readme:
@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 24
       - name: Update packages readme
         id: update-readme
         env:
@@ -47,7 +47,7 @@ jobs:
           git add src/content/local-docs/libs/*/README.md
 
           export COMMIT_MESSAGE="docs: update packages readme"
-          git commit -m "$COMMIT_MESSAGE"
+          git commit -m "$COMMIT_MESSAGE" || true
           git push --set-upstream origin update-packages-readme --force
           gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
           PR_NUMBER=$(gh pr view --json number -q ".number")

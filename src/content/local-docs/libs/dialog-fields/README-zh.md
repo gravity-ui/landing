@@ -1,4 +1,4 @@
-## 简短描述
+## 简要说明
 
 `DFDialog` 组件旨在简化表单的创建，它内部使用了 `react-final-form`。
 它支持几种预定义的字段类型，但用户可以通过 `registerDialogControl` 注册新的字段类型来扩展它。
@@ -13,7 +13,7 @@
   - `tumbler` - 开关
   - `radio` - 单选按钮
   - `editable-list` - 可移除字符串列表
-  - `multi-editable-list` - 可移除字符串的多选列表
+  - `multi-editable-list` - 多项可移除字符串列表
   - `text area` - 文本区域
   - `select` - 选择框
   - `block` - 允许添加 ReactNode
@@ -21,11 +21,11 @@
 
 ### 特性
 
-- 嵌入式和模态视图
+- 内嵌和模态视图
 - [单标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) 和 [多标签页表单](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
 - [垂直/水平标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
 - [隐藏字段和标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
-- [根据值关联字段](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
+- [根据值联动字段](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
 - [字段级验证](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
 - [表单级验证](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
 - [虚拟化标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)

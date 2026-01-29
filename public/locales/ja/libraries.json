@@ -1,0 +1,10 @@
+{
+    "title": "ライブラリ",
+    "header": "当社のライブラリ",
+    "searchPlaceholder": "名前または説明で検索",
+    "empty": "何も見つかりませんでした",
+    "tags_all": "すべて",
+    "tags_ui": "UI",
+    "tags_nodejs": "Node.js",
+    "tags_infrastructure": "インフラストラクチャ"
+}

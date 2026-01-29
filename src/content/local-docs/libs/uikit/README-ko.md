@@ -1,6 +1,6 @@
 # UIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/ci.yml?query=branch:main) [![storybook tests](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/test-storybook.yml?label=Storybook%20Tests&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/test-storybook.yml) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/uikit/)
 
-풍부한 웹 애플리케이션을 만들기 위한 유연하고 실용적이며 효율적인 React 컴포넌트 모음입니다.
+유연하고 실용적이며 효율적인 React 컴포넌트 모음으로 풍부한 웹 애플리케이션을 구축할 수 있습니다.
 
 <!--GITHUB_BLOCK-->
 
@@ -38,7 +38,7 @@ const SubmitButton = <Button view="action" size="l" />;
 
 ### 스타일
 
-UIKit은 기본 스타일과 테마를 제공합니다. 모든 것이 보기 좋게 보이도록 하려면 진입 파일 상단에 다음을 포함하세요.
+UIKit은 기본 스타일과 테마를 제공합니다. 모든 것이 보기 좋게 표시되도록 하려면 진입 파일 상단에 다음을 포함하세요.
 
 ```js
 // index.js
@@ -80,9 +80,9 @@ const html = `
 `;
 ```
 
-또한 SCSS [믹스인](styles/mixins.scss) 파일에는 앱에서 사용할 수 있는 유용한 도우미가 있습니다.
+또한 앱에서 유용한 도우미를 사용할 수 있는 SCSS [믹스인](styles/mixins.scss) 파일이 있습니다.
 
-### I18N
+### 국제화 (I18N)
 
 일부 컴포넌트에는 텍스트 토큰(단어 및 구문)이 포함되어 있습니다. 이들은 `en`(기본값) 및 `ru` 두 가지 언어로 제공됩니다.
 언어를 설정하려면 `configure` 함수를 사용하세요.

@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM node:24-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -32,11 +32,12 @@ RUN --mount=type=secret,id=s3_access_key_id \
     export AWS_ACCESS_KEY_ID=$(cat /run/secrets/s3_access_key_id) && \
     export AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/s3_secret_access_key) && \
     aws s3 sync .next/static s3://gravity-landing-static/_next/static/ \
-    --endpoint-url=https://storage.yandexcloud.net/ && \
+    --endpoint-url=https://storage.yandexcloud.net/ \
+    --cache-control "public, max-age=31536000, immutable" && \
     unset AWS_ACCESS_KEY_ID && \
     unset AWS_SECRET_ACCESS_KEY
 
-FROM node:18-alpine AS runner
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 

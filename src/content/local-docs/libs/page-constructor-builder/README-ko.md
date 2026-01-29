@@ -1,6 +1,6 @@
 # Page Constructor Builder
 
-[@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor) 패키지를 사용하여 YAML 구성에서 정적 페이지를 빌드하는 강력한 명령줄 유틸리티입니다. 구성 세부 정보는 [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/)을 참조하세요.
+[@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor) 패키지를 사용하여 YAML 설정을 기반으로 정적 페이지를 빌드하는 강력한 명령줄 유틸리티입니다. 설정에 대한 자세한 내용은 [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/)을 참조하세요.
 
 ## 빠른 시작
 
@@ -68,7 +68,7 @@ open dist/index.html
 
 #### `page-builder build`
 
-YAML 구성에서 페이지를 빌드합니다.
+YAML 설정을 사용하여 페이지를 빌드합니다.
 
 ```bash
 page-builder build [options]
@@ -78,7 +78,7 @@ page-builder build [options]
 
 - `-i, --input <path>`: YAML 파일을 포함하는 입력 디렉토리 (기본값: "./pages")
 - `-o, --output <path>`: 빌드된 파일의 출력 디렉토리 (기본값: "./dist")
-- `-c, --config <path>`: 구성 파일 경로 (기본값: "./page-builder.config.yml")
+- `-c, --config <path>`: 설정 파일 경로 (기본값: "./page-builder.config.yml")
 - `--css <files...>`: 포함할 사용자 정의 CSS 파일
 - `--components <path>`: 사용자 정의 컴포넌트 디렉토리
 - `--navigation <path>`: 네비게이션 데이터 파일
@@ -89,7 +89,7 @@ page-builder build [options]
 - `--source-maps`: 소스 맵 생성
 - `--watch`: 감시 모드 활성화
 
-### 구성
+### 설정
 
 프로젝트 루트에 `page-builder.config.yml` 파일을 생성합니다:
 
@@ -108,10 +108,10 @@ css:
 components: ./components
 navigation: ./navigation.yml
 webpack:
-  # 사용자 정의 webpack 구성
+  # 사용자 정의 webpack 설정
 ```
 
-### 페이지 구성
+### 페이지 설정
 
 페이지 디렉토리에 YAML 파일을 생성합니다:
 
@@ -192,7 +192,7 @@ export default CustomBlock;
 
 ### 정적 에셋
 
-페이지 생성기 빌더는 이미지, 아이콘 및 기타 파일을 포함한 정적 에셋을 자동으로 처리합니다. 구성 파일에서 에셋 디렉토리를 구성합니다:
+페이지 생성기 빌더는 이미지, 아이콘 및 기타 파일과 같은 정적 에셋을 자동으로 처리합니다. 설정 파일에서 에셋 디렉토리를 구성합니다:
 
 ```yaml
 # page-builder.config.yml
@@ -238,9 +238,9 @@ blocks:
 
 페이지 생성기 빌더는 정적 페이지에 파비콘을 추가하는 것을 지원합니다. 에셋 디렉토리의 로컬 파일 또는 외부 URL을 지정할 수 있습니다.
 
-#### 구성
+#### 설정
 
-구성 파일에 `favicon` 옵션을 추가합니다:
+설정 파일에 `favicon` 옵션을 추가합니다:
 
 ```yaml
 # page-builder.config.yml
@@ -262,22 +262,22 @@ favicon: https://cdn.example.com/favicon.ico # 외부 URL
 - **SVG** (권장) - `image/svg+xml`
 - **ICO** (클래식) - `image/x-icon`
 - **PNG** (모던) - `image/png`
-- **JPG/JPEG** (허용됨) - `image/jpeg`
+- **JPG/JPEG** (허용) - `image/jpeg`
 - **GIF** (애니메이션) - `image/gif`
 
 **예시:**
 
 ```yaml
 # page-builder.config.yml
-favicon: logo.svg                    # assets/ 디렉토리의 파일
-favicon: icons/favicon.ico           # assets/icons/ 하위 디렉토리의 파일
-favicon: ./custom/path/favicon.png   # 프로젝트에 상대적인 사용자 지정 경로
+favicon: logo.svg                    # assets/ 디렉토리 내 파일
+favicon: icons/favicon.ico           # assets/icons/ 하위 디렉토리 내 파일
+favicon: ./custom/path/favicon.png   # 프로젝트 상대 경로
 favicon: /absolute/path/favicon.ico  # 절대 경로
 ```
 
 #### 외부 파비콘 URL
 
-CDN 또는 다른 도메인의 외부 파비콘 URL을 사용할 수도 있습니다.
+CDN 또는 다른 도메인의 외부 파비콘 URL도 사용할 수 있습니다.
 
 ```yaml
 # page-builder.config.yml
@@ -307,7 +307,7 @@ favicon: https://mysite.com/assets/logo.svg
 
 #### 네비게이션 구성
 
-프로젝트 루트에 `navigation.yml` 파일을 생성하거나(또는 구성에서 사용자 지정 경로 지정) 하세요.
+프로젝트 루트에 `navigation.yml` 파일을 생성하거나 (또는 설정에서 사용자 지정 경로 지정) 합니다.
 
 ```yaml
 # navigation.yml
@@ -366,5 +366,24 @@ navigation:
 
 blocks:
   - type: header-block
-    title: 이 페이지는 사용자 지정 네비게이션을 가지고 있습니다.
+    title: 이 페이지는 사용자 지정 네비게이션을 가지고 있습니다
+```
+
+### 분석 구성
+
+`page-builder.config.yml`에 `analytics` 필드를 추가합니다.
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js`:
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
 ```

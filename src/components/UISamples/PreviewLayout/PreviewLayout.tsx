@@ -183,23 +183,18 @@ export const PreviewLayout = ({
                     renderFooter={({compact}) => (
                         <React.Fragment>
                             <FooterItem
-                                item={{
-                                    id: 'user-settings',
-                                    icon: Gear,
-                                    title: 'User Settings',
-                                    tooltipText: 'User Settings',
-                                    onItemClick: () => {},
-                                }}
+                                id="user-settings"
+                                icon={Gear}
+                                title="User Settings"
+                                tooltipText="User Settings"
+                                onItemClick={() => {}}
                                 compact={compact}
                             />
                             <FooterItem
+                                id="user-account"
+                                title="User"
+                                itemWrapper={(p, makeItem) => makeItem({...p, icon: <Person />})}
                                 compact={compact}
-                                item={{
-                                    id: 'user-account',
-                                    title: 'User',
-                                    itemWrapper: (p, makeItem) =>
-                                        makeItem({...p, icon: <Person />}),
-                                }}
                             />
                         </React.Fragment>
                     )}

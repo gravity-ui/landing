@@ -34,6 +34,19 @@ export const libs = [
         mainBranch: 'main',
     },
     {
+        id: 'aikit',
+        githubId: 'gravity-ui/aikit',
+        npmId: '@gravity-ui/aikit',
+        title: 'AIKit',
+        primary: false,
+        landing: true,
+        tags: ['ui', 'ai'],
+        storybookUrl: 'https://preview.gravity-ui.com/aikit/',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/aikit/main'),
+        changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/aikit/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
         id: 'graph',
         githubId: 'gravity-ui/graph',
         npmId: '@gravity-ui/graph',
@@ -446,12 +459,9 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        storybookUrl: '',
-        readmeUrl: getReadmeUrls(
-            'https://raw.githubusercontent.com/gravity-ui/timeline/main',
-        ),
-        changelogUrl:
-            'https://raw.githubusercontent.com/gravity-ui/timeline/main/CHANGELOG.md',
+        storybookUrl: 'https://preview.gravity-ui.com/timeline/',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/timeline/main'),
+        changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/timeline/main/CHANGELOG.md',
         mainBranch: 'main',
     },
     {

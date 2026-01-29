@@ -1,6 +1,6 @@
 # @gravity-ui/navigation &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/navigation)](https://www.npmjs.com/package/@gravity-ui/navigation) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/navigation/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/navigation/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/navigation/)
 
-### Navigation en-tête latérale &middot; [Aperçu →](https://preview.yandexcloud.dev/navigation/)
+### Navigation pour l'en-tête latéral &middot; [Aperçu →](https://preview.yandexcloud.dev/navigation/)
 
 ![](docs/images/showcase.png)
 
@@ -10,7 +10,7 @@
 npm install @gravity-ui/navigation
 ```
 
-Assurez-vous que les dépendances peer sont installées dans votre projet
+Assurez-vous que les dépendances pair sont installées dans votre projet
 
 ```bash
 npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
@@ -27,9 +27,9 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 ## Feuille de route 2025
 
 1. Prise en charge du SSR
-2. Ajouter plus de documentation et d'exemples à [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Prise en charge de la navigation dans le thème UIKit
-4. Unifier les API de `subheaderItem`, `menuItem`, `footerItem`
+2. Ajout de plus de documentation et d'exemples à [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
+3. Prise en charge de la navigation dans le thémiseur UIKit
+4. Unification des API `subheaderItem`, `menuItem`, `footerItem`
 
 ## Composants
 

@@ -19,6 +19,8 @@ const FLAGS: Record<Locale, string> = {
     fr: 'fr',
     de: 'de',
     ko: 'kr',
+    pt: 'pt',
+    ja: 'jp',
 };
 
 export const LocalePicker: React.FC = () => {

@@ -7,6 +7,8 @@ import React from 'react';
 
 import type {LibWithMetadata} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';
+import aikitAssetMobile from '../../../../assets/libs/img-lib-aikit-mobile.jpg';
+import aikitAsset from '../../../../assets/libs/img-lib-aikit.jpg';
 import dashkitAssetMobile from '../../../../assets/libs/img-lib-dashkit-mobile.jpg';
 import dashkitAsset from '../../../../assets/libs/img-lib-dashkit.jpg';
 import datecomponentsAssetMobile from '../../../../assets/libs/img-lib-datecomponents-mobile.jpg';
@@ -33,20 +35,22 @@ export type LibraryPreviewProps = {
     contentStyle: Record<string, unknown>;
 };
 
-const libIdToAsset: Record<string, {src: string}> = {
+const libIdToAsset: Partial<Record<string, {src: string}>> = {
     uikit: uikitAsset,
     'page-constructor': pageconstructorAsset,
     navigation: navigationAsset,
+    aikit: aikitAsset,
     'markdown-editor': wysiwygAsset,
     dashkit: dashkitAsset,
     graph: graphAsset,
     'date-components': datecomponentsAsset,
 };
 
-const libIdToAssetMobile: Record<string, {src: string}> = {
+const libIdToAssetMobile: Partial<Record<string, {src: string}>> = {
     uikit: uikitAssetMobile,
     'page-constructor': pageconstructorAssetMobile,
     navigation: navigationAssetMobile,
+    aikit: aikitAssetMobile,
     'markdown-editor': wysiwygAssetMobile,
     dashkit: dashkitAssetMobile,
     graph: graphAssetMobile,
@@ -55,7 +59,7 @@ const libIdToAssetMobile: Record<string, {src: string}> = {
 
 function getBackgroundImage(id: string, isMobile?: boolean) {
     const assetsMap = isMobile ? libIdToAssetMobile : libIdToAsset;
-    return assetsMap[id].src;
+    return assetsMap[id]?.src;
 }
 
 export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle}) => {
@@ -64,6 +68,12 @@ export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle
 
     const {id, title, primary} = lib.config;
     const {stars} = lib.metadata;
+
+    const backgroundImage = getBackgroundImage(id, isMobile);
+
+    if (!backgroundImage) {
+        return null;
+    }
 
     return (
         <Link href={`/libraries/${id}`} className={b()}>
@@ -74,7 +84,7 @@ export const LibraryPreview: React.FC<LibraryPreviewProps> = ({lib, contentStyle
                 style={contentStyle}
             >
                 <Image
-                    src={getBackgroundImage(id, isMobile)}
+                    src={backgroundImage}
                     alt={title}
                     loading="lazy"
                     className={b('image')}

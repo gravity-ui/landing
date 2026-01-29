@@ -16,7 +16,7 @@ npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 
 ## 사용법
 
-프로젝트 루트에 `.stylelintrc` 파일을 다음과 같은 내용으로 추가하세요:
+프로젝트 루트에 다음과 같은 내용으로 `.stylelintrc` 파일을 추가하세요:
 
 ```json
 {
@@ -26,7 +26,7 @@ npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 
 ### Prettier
 
-Prettier를 사용 중이라면, 루트 설정을 추가 규칙으로 확장하세요:
+Prettier를 사용 중이라면, 추가 규칙을 포함하여 루트 설정을 확장하세요:
 
 ```json
 {
@@ -36,7 +36,7 @@ Prettier를 사용 중이라면, 루트 설정을 추가 규칙으로 확장하�
 
 ### 순서
 
-CSS 파일의 속성 순서를 정렬하고 싶다면, 루트 설정을 추가 규칙으로 확장하세요:
+CSS 파일의 속성 순서를 정렬하고 싶다면, 추가 규칙을 포함하여 루트 설정을 확장하세요:
 
 ```json
 {

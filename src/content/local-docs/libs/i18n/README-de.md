@@ -24,7 +24,7 @@ Dieses Repository enthält gängige Hilfsprogramme, Bibliotheken und Plugins, di
 1. Installiere pnpm
 
     ```bash
-    npm i -g pnpm@9.12.3
+    npm run install:global
     ```
 
 1. Installiere Abhängigkeiten
@@ -39,7 +39,7 @@ Dieses Repository enthält gängige Hilfsprogramme, Bibliotheken und Plugins, di
     # Baue das i18n-cli-Paket
     pnpm nx build @gravity-ui/i18n-cli
 
-    # Führe Typecheck für das i18n-cli-Paket aus
+    # Führe Typüberprüfung für das i18n-cli-Paket aus
     pnpm nx typecheck @gravity-ui/i18n-cli
 
     # Führe Lint für alle Pakete aus

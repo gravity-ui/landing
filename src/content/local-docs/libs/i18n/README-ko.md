@@ -24,7 +24,7 @@
 1. pnpm 설치
 
     ```bash
-    npm i -g pnpm@9.12.3
+    npm run install:global
     ```
 
 1. 종속성 설치
@@ -33,15 +33,15 @@
     pnpm i
     ```
 
-1. `nx`를 사용하여 명령어 실행
+1. `nx`로 명령어 실행
 
     ```bash
     # i18n-cli 패키지 빌드
     pnpm nx build @gravity-ui/i18n-cli
 
-    # i18n-cli 패키지에 대한 타입 검사 실행
+    # i18n-cli 패키지 타입 검사 실행
     pnpm nx typecheck @gravity-ui/i18n-cli
 
-    # 모든 패키지에 대한 린트 실행
+    # 모든 패키지 린트 실행
     pnpm nx run-many --target=lint --parallel
     ```

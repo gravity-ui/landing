@@ -1,9 +1,3 @@
-```html
-<!-- Language options -->
-<a href="/en/README.md">English</a>
-<a href="/fr/README.md">Français</a>
-```
-
 # Axios Wrapper
 Cette bibliothèque fournit un wrapper pratique autour d'Axios, ajoutant notamment l'annulation automatique des requêtes concurrentes.
 
@@ -32,29 +26,28 @@ La configuration du collecteur de requêtes est un objet :
 ### Méthodes de base
 Le wrapper fournit les méthodes HTTP `get`, `head`, `put`, `post`, `delete`.
 
-Les méthodes `get` et `head` ont la signature `(url, params, options)`; les méthodes `put`, `post`, ainsi que `delete`
-ont la signature `(url, data, params, options)`.
+Les méthodes `get` et `head` ont la signature `(url, params, options)`; les méthodes `put`, `post`, ainsi que la méthode `delete` ont la signature `(url, data, params, options)`.
 
-L'argument `params` représente les paramètres de la chaîne de requête, tandis que `options` sont les paramètres de la requête.
+L'argument `params` représente les paramètres de la chaîne de requête, tandis que `options` contient les paramètres de la requête.
 
 Actuellement, 4 paramètres de requête sont pris en charge :
 - `concurrentId (string)` : identifiant de requête optionnel
 - `collectRequest (bool)` : indicateur optionnel indiquant si la requête doit être enregistrée (par défaut `true`)
 - `requestConfig (object)` : configuration optionnelle avec des paramètres de requête personnalisés
 - `headers (object)` : objet optionnel avec des en-têtes de requête personnalisés.
-- `timeout (number)` : délai d'attente de requête optionnel
+- `timeout (number)` : délai d'attente optionnel pour la requête
 - `onDownloadProgress (function)` : fonction de rappel optionnelle pour le traitement de la progression du téléchargement de fichiers
 
 ### En-têtes
 La méthode `setDefaultHeader({name (string), value (string), methods (array)})` permet d'ajouter un en-tête de requête par défaut.
 
-Les arguments `name` et `value` sont requis, l'argument optionnel `methods` spécifie toutes les méthodes qui recevront ces en-têtes par défaut (par défaut, toutes les méthodes recevront ces en-têtes).
+Les arguments `name` et `value` sont requis. L'argument optionnel `methods` spécifie toutes les méthodes qui recevront ces en-têtes par défaut (par défaut, toutes les méthodes recevront ces en-têtes).
 
 ### CSRF
 La méthode `setCSRFToken` permet de spécifier un jeton CSRF, qui sera ajouté à toutes les requêtes `put`, `post` et `delete`.
 
 ### Requêtes concurrentes
-Il est parfois préférable d'annuler une requête en cours si ses résultats ne sont plus nécessaires. Pour ce faire, il faut passer un identifiant `concurrentId` dans les `options` de la requête. Lorsqu'une nouvelle requête avec le même `concurrentId` est effectuée, la requête précédente avec cet identifiant sera annulée.
+Il est parfois préférable d'annuler une requête en cours si ses résultats ne sont plus nécessaires. Pour ce faire, il faut passer un identifiant `concurrentId` dans les `options` de la requête. Lorsqu'une nouvelle requête avec le même `concurrentId` est effectuée, la requête précédente portant cet identifiant sera annulée.
 
 Il est également possible d'annuler une requête manuellement en appelant la méthode `cancelRequest(concurrentId)`.
 
@@ -69,10 +62,10 @@ const apiInstance = new API({
 });
 ```
 
-Pour obtenir les requêtes enregistrées, il faut appeler la méthode `getCollectedRequests` qui renvoie l'objet `{errors: [...], requests: [...]}`.
+Pour obtenir les requêtes enregistrées, il faut appeler la méthode `getCollectedRequests`, qui renvoie l'objet `{errors: [...], requests: [...]}`.
 
 ### Utilisation
-L'utilisation suggérée est de sous-classer la classe de base `AxiosWrapper` :
+L'utilisation suggérée est de créer une sous-classe de la classe de base `AxiosWrapper` :
 ```javascript
 export class API extends AxiosWrapper {
     getProjects() {

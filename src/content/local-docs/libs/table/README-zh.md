@@ -44,7 +44,7 @@ const BasicExample = () => {
 您可以使用两个 Table 组件：
 
 - `BaseTable` - 仅包含基本样式的组件；
-- `Table` - 包含基于 Gravity UI 的样式的组件。
+- `Table` - 包含基于 Gravity UI 样式的组件。
 
 ### 行选择
 
@@ -79,7 +79,7 @@ const RowSelectionExample = () => {
 };
 ```
 
-要将分组与选择结合使用，请使用 `useRowSelectionFixedHandler` hook。没有它，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+要使用带有选择功能的组，请使用 `useRowSelectionFixedHandler` hook。没有它，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
 
 ### 自定义范围选择列
 
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-还有一个 `RangedSelectionCheckbox` 组件，它在内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件为向自定义选择列添加范围选择功能提供了快捷方式。
+还有一个 `RangedSelectionCheckbox` 组件，它在内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件为自定义选择列添加范围选择功能提供了快捷方式。
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -210,7 +210,7 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**注意**: 如果表格包含嵌套行，则范围选择将不起作用。目前，这被认为是未定义行为。
+**注意**: 如果表格包含嵌套行，则范围选择将不起作用。目前，这被视为未定义行为。
 
 ### 排序
 
@@ -394,7 +394,7 @@ const ReorderingExample = () => {
 
 ### 虚拟化
 
-如果希望将网格容器用作滚动元素（如果您想使用窗口，请参阅窗口虚拟化部分），请使用此功能。请确保为容器设置固定的高度，否则虚拟化将不起作用。
+如果希望将网格容器用作滚动元素（如果希望使用窗口，请参阅窗口虚拟化部分），请使用此功能。请确保为容器设置固定高度，否则虚拟化将不起作用。
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -431,7 +431,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-如果您将虚拟化与重排功能一起使用，还需要传递 `rangeExtractor` 选项：
+如果将虚拟化与重排功能一起使用，还需要传递 `rangeExtractor` 选项：
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -457,7 +457,7 @@ return (
 
 ### 窗口虚拟化
 
-如果您希望将窗口用作滚动元素，请使用此功能。
+如果希望将窗口用作滚动元素，请使用此功能。
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -481,7 +481,7 @@ const WindowVirtualizationExample = () => {
 ```
 
 ```tsx
-const rowVirtualizer = useWindowRowVirtualizer({
+  const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
     overscan: 5,
@@ -492,7 +492,7 @@ const rowVirtualizer = useWindowRowVirtualizer({
 };
 ```
 
-### 列宽调整
+### 列调整大小
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -525,7 +525,7 @@ const columns: ColumnDef<Person>[] = [
     header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // 可选。允许在设置弹出窗口中隐藏此列
-      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的 header 字段（如果您需要与 header 不同的内容用于设置弹出窗口）
+      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的 header 字段（如果您需要与 header 不同的内容）
     },
   }, // 或者您可以使用 getSettingsColumn 函数
 ];
@@ -537,13 +537,13 @@ const data: Person[] = [
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // 用于外部控制和初始状态
-    column_id: false, // 用于默认隐藏
+    column_id: false, // 默认隐藏
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
     /* leaf columns ids */
   ]); // 用于外部控制和初始状态
 
-  // 使用 useTableSettings hook 获取状态、回调和在设置应用时设置回调的替代方案：
+  // 获取状态、回调以及在设置应用时设置的替代方案 - 使用 useTableSettings hook：
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -561,4 +561,59 @@ const TableSettingsDemo = () => {
 };
 ```
 
-在 react-table [文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解更多关于表格和列宽调整的属性
+在 react-table [文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解有关表格和列调整大小属性的更多信息。
+
+## 已知问题和兼容性
+
+### React 19 + React Compiler 兼容性
+
+**⚠️ 已知问题：** 在使用 `@gravity-ui/table`（基于 TanStack Table 构建）时，存在一个与 React 19 和 React Compiler 的已知兼容性问题。当数据更改时，表格可能不会重新渲染。有关详细信息，请参阅 [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567)。
+
+**解决方法：**
+
+如果您正在使用 React 19 和 React Compiler，并且遇到表格重新渲染问题，可以在组件代码中使用 `'use no memo'` 指令：
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  'use no memo'; // 禁用此组件的 React Compiler 记忆化
+
+  const [data, setData] = React.useState<Person[]>([]);
+
+  const table = useTable({
+    data,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**替代解决方案：**
+
+您还可以显式地记忆化表格实例或数据，以确保正确重新渲染：
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
+  // 显式记忆化数据以确保重新渲染
+  const memoizedData = React.useMemo(() => data, [data]);
+
+  const table = useTable({
+    data: memoizedData,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**注意：** 此问题存在于底层的 TanStack Table 库中，需要在此处修复。上述解决方法应在修复可用之前有所帮助。

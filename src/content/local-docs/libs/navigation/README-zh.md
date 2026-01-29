@@ -27,7 +27,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 ## 2025 年路线图
 
 1. 支持 SSR
-2. 向 [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) 添加更多文档和示例
+2. 为 [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) 添加更多文档和示例
 3. 支持 UIKit 主题中的导航
 4. 统一 subheaderItem、menuItem、footerItem 的 API
 

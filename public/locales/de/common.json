@@ -1,6 +1,6 @@
 {
     "actions_open": "Öffnen",
-    "actions_copyToClipboard": "In die Zwischenablage kopieren",
+    "actions_copyToClipboard": "In Zwischenablage kopieren",
     "actions_share": "Teilen",
     "actions_github": "GitHub",
     "actions_storybook": "Storybook",
@@ -14,8 +14,8 @@
     "menu_media": "Medien",
     "menu_blog": "Blog",
     "roadmap_inProgress": "In Bearbeitung",
-    "navigation_previous": "Vorheriger",
-    "navigation_next": "Nächster",
+    "navigation_previous": "Zurück",
+    "navigation_next": "Weiter",
     "emptySearchPlaceholder": "Nichts gefunden",
     "show_more": "Mehr anzeigen",
     "show_less": "Weniger anzeigen",

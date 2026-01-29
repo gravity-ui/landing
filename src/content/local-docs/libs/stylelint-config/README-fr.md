@@ -1,10 +1,3 @@
-```html
-<div class="language-selector">
-  <a href="/README.md">English</a>
-  <a href="/README.fr.md">Français</a>
-</div>
-```
-
 # @gravity-ui/stylelint-config
 
 Configuration Stylelint pour les projets Gravity UI.

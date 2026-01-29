@@ -34,6 +34,12 @@ blocks:
         url: https://medium.com/p/32985f939f1c
         target: _blank
       - type: basic-card
+        title: Biblioteca para asistentes de IA basada en Gravity UI
+        text: >-
+          Un artículo sobre el lanzamiento de la biblioteca AIKit: qué consideramos en el desarrollo, por qué es necesaria y cómo usarla en tus proyectos.
+        url: https://habr.com/ru/companies/yandex/articles/977824/
+        target: _blank
+      - type: basic-card
         title: 'Biblioteca de visualización de grafos: cómo resolvimos el dilema Canvas vs HTML en Gravity UI'
         text: >-
           Una publicación sobre los desafíos arquitectónicos que surgieron durante la creación de la

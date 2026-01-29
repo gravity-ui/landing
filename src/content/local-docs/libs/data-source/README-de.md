@@ -1,6 +1,6 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** ist ein einfacher Wrapper für das Abrufen von Daten. Es ist eine Art "Port" in der [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Es ermöglicht Ihnen, Wrapper für Dinge rund um das Abrufen von Daten zu erstellen, je nach Ihren Anwendungsfällen. **Data Source** verwendet intern [react-query](https://tanstack.com/query/latest).
+**Data Source** ist ein einfacher Wrapper für das Abrufen von Daten. Es ist eine Art "Port" in der [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Es ermöglicht Ihnen, Wrapper für Dinge rund um das Abrufen von Daten zu erstellen, je nach Ihren Anwendungsfällen. **Data Source** verwendet [react-query](https://tanstack.com/query/latest) im Hintergrund.
 
 ## Installation
 
@@ -94,7 +94,7 @@ import {skipContext} from '@gravity-ui/data-source';
 import {fetchUser} from './api';
 
 export const userDataSource = makePlainQueryDataSource({
-  // Schlüssel müssen eindeutig sein. Vielleicht sollten Sie einen Helfer für die Benennung von Datenquellen erstellen
+  // Schlüssel müssen eindeutig sein. Vielleicht sollten Sie einen Helfer zum Erstellen von Namen für Datenquellen erstellen
   name: 'user',
   // skipContext ist ein Helfer, um die ersten 2 Parameter der Funktion zu überspringen (context und fetchContext)
   fetch: skipContext(fetchUser),
@@ -163,13 +163,13 @@ const postsDataSource = makeInfiniteQueryDataSource({
 
 Die Bibliothek normalisiert Abfragestati in drei einfache Status:
 
-- `loading` - Aktuelles Laden der Daten. Das Gleiche wie `isLoading` in React Query.
-- `success` - Daten verfügbar (kann mit `idle` übersprungen werden).
-- `error` - Fehler beim Abrufen der Daten.
+- `loading` - Tatsächliches Laden von Daten. Das Gleiche wie `isLoading` in React Query
+- `success` - Daten verfügbar (kann mit `idle` übersprungen werden)
+- `error` - Fehler beim Abrufen von Daten
 
 ### Idle-Konzept
 
-Die Bibliothek stellt ein spezielles `idle`-Symbol bereit, um die Abfrageausführung zu überspringen:
+Die Bibliothek stellt ein spezielles `idle`-Symbol zum Überspringen der Abfrageausführung bereit:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -188,17 +188,17 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 
 Wenn die Parameter gleich `idle` sind:
 
-- Die Abfrage wird nicht ausgeführt.
-- Der Status bleibt `success`.
-- Die Daten bleiben `undefined`.
-- Die Komponente kann sicher ohne Ladeanzeige gerendert werden.
+- Die Abfrage wird nicht ausgeführt
+- Der Status bleibt `success`
+- Die Daten bleiben `undefined`
+- Die Komponente kann sicher ohne Ladeanzeige gerendert werden
 
 **Vorteile von `idle`:**
 
-1. **Typsicherheit** - TypeScript leitet Typen für bedingte Parameter korrekt ab.
-2. **Performance** - Vermeidet unnötige Serveranfragen.
-3. **Logische Einfachheit** - Keine Notwendigkeit, einen zusätzlichen `enabled`-Status zu verwalten.
-4. **Konsistenz** - Einheitlicher Ansatz für alle bedingten Abfragen.
+1. **Typsicherheit** - TypeScript leitet Typen für bedingte Parameter korrekt ab
+2. **Leistung** - Vermeidet unnötige Serveranfragen
+3. **Logische Einfachheit** - Kein Bedarf an der Verwaltung eines zusätzlichen `enabled`-Status
+4. **Konsistenz** - Einheitlicher Ansatz für alle bedingten Abfragen
 
 Dies ist besonders nützlich für bedingte Abfragen, wenn Sie Daten nur unter bestimmten Bedingungen laden möchten, während die Typsicherheit erhalten bleibt.
 
@@ -209,27 +209,6 @@ Dies ist besonders nützlich für bedingte Abfragen, wenn Sie Daten nur unter be
 #### `makePlainQueryDataSource(config)`
 
 Erstellt eine Plain Query Data Source für einfache Anfrage/Antwort-Muster.
-
-```html
-<ul>
-  <li><a href="/en/README.md">English</a></li>
-  <li><a href="/de/README.md">Deutsch</a></li>
-</ul>
-```
-
-# @gravity/data-manager
-
-Ein Framework, das die Datenverwaltung in React-Anwendungen vereinfacht. Es bietet eine einheitliche Schnittstelle für das Abrufen, Zwischenspeichern und Verwalten von Daten, die auf [React Query](https://react-query.tanstack.com/) basiert.
-
-## Kernkonzepte
-
-### Datenquellen
-
-Datenquellen sind die Bausteine für die Datenverwaltung. Sie definieren, wie Daten abgerufen und transformiert werden.
-
-#### `makePlainQueryDataSource(config)`
-
-Erstellt eine Datenquelle für einfache Abfragemuster.
 
 ```ts
 const dataSource = makePlainQueryDataSource({
@@ -249,7 +228,7 @@ const dataSource = makePlainQueryDataSource({
 **Parameter:**
 
 - `name` - Eindeutiger Bezeichner für die Datenquelle
-- `fetch` - Funktion, die den eigentlichen Datenabruf durchführt
+- `fetch` - Funktion, die das eigentliche Datenabrufen durchführt
 - `transformParams` (optional) - Transformiert Eingabeparameter vor der Anfrage
 - `transformResponse` (optional) - Transformiert Antwortdaten
 - `tags` (optional) - Generiert Cache-Tags für die Invalidierung
@@ -257,7 +236,7 @@ const dataSource = makePlainQueryDataSource({
 
 #### `makeInfiniteQueryDataSource(config)`
 
-Erstellt eine Datenquelle für unendliche Abfragen, die für Paginierungs- und unendliche Scrollmuster verwendet wird.
+Erstellt eine Datenquelle für unendliche Abfragen für Muster mit Paginierung und unendlichem Scrollen.
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -297,11 +276,11 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 - `status` - Aktueller Status ('loading' | 'success' | 'error')
 - `error` - Fehlerobjekt, wenn die Anfrage fehlgeschlagen ist
 - `refetch` - Funktion zum manuellen erneuten Abrufen von Daten
-- Weitere React Query-Eigenschaften
+- Andere React Query-Eigenschaften
 
 #### `useQueryResponses(responses)`
 
-Kombiniert mehrere Abfrageergebnisse in einen einzigen Zustand.
+Kombiniert mehrere Abfrageergebnisse zu einem einzigen Zustand.
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -408,7 +387,7 @@ Spezialisierte Komponente für unendliche Abfragen.
 
 #### `withDataManager(Component)`
 
-HOC, das den DataManager als Prop injiziert.
+HOC, der den DataManager als Prop injiziert.
 
 ```tsx
 const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
@@ -474,7 +453,7 @@ await dataManager.invalidateParams(userDataSource, {userId: 123});
 
 ##### `resetSource(dataSource)`
 
-Setzt (leert) alle zwischengespeicherten Daten für eine Datenquelle zurück.
+Setzt (leert) alle gecachten Daten für eine Datenquelle zurück.
 
 ```ts
 await dataManager.resetSource(userDataSource);
@@ -482,7 +461,7 @@ await dataManager.resetSource(userDataSource);
 
 ##### `resetParams(dataSource, params)`
 
-Setzt zwischengespeicherte Daten für spezifische Parameter zurück.
+Setzt gecachte Daten für spezifische Parameter zurück.
 
 ```ts
 await dataManager.resetParams(userDataSource, {userId: 123});
@@ -500,7 +479,7 @@ await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 
 #### `skipContext(fetchFunction)`
 
-Hilfsprogramm zum Anpassen vorhandener Fetch-Funktionen an die Datenquellen-Schnittstelle.
+Hilfsprogramm zum Anpassen bestehender Fetch-Funktionen an die Datenquellen-Schnittstelle.
 
 ```ts
 // Bestehende Funktion
@@ -516,8 +495,9 @@ const dataSource = makePlainQueryDataSource({
 ```
 
 #### `withCatch(fetchFunction, errorHandler)`
+```
 
-Fügt standardisierte Fehlerbehandlung zu Fetch-Funktionen hinzu.
+Fügt standardisierte Fehlerbehandlung zu `fetch`-Funktionen hinzu.
 
 ```ts
 const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.message}));
@@ -525,7 +505,7 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 #### `withCancellation(fetchFunction)`
 
-Fügt Abbruchunterstützung zu Fetch-Funktionen hinzu.
+Fügt Unterstützung für die Abbruchfunktion zu `fetch`-Funktionen hinzu.
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
@@ -606,10 +586,10 @@ const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
 #### Komposition von Query-Optionen
 
 ```ts
-// Komponiert React Query-Optionen für einfache Abfragen
+// Komponiert React Query-Optionen für einfache Queries
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// Komponiert React Query-Optionen für unendliche Abfragen
+// Komponiert React Query-Optionen für unendliche Queries
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
@@ -617,9 +597,9 @@ const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params,
 
 ## Fortgeschrittene Muster
 
-### Bedingte Abfragen mit `idle`
+### Bedingte Queries mit `idle`
 
-Verwenden Sie `idle`, um bedingte Abfragen zu erstellen:
+Verwenden Sie `idle`, um bedingte Queries zu erstellen:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -699,7 +679,7 @@ await dataManager.invalidateTag('users');
 
 ### Fehlerbehandlung mit Typen
 
-Erstellt typsichere Fehlerbehandlung:
+Erstellen Sie typsichere Fehlerbehandlung:
 
 ```ts
 interface ApiError {
@@ -721,9 +701,9 @@ const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
 );
 ```
 
-### Unendliche Abfragen mit komplexer Paginierung
+### Unendliche Queries mit komplexer Paginierung
 
-Behandelt komplexe Paginierungsszenarien:
+Behandeln Sie komplexe Paginierungsszenarien:
 
 ```ts
 interface PaginationParams {
@@ -755,7 +735,7 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 
 ### Kombinieren mehrerer Datenquellen
 
-Kombiniert Daten aus mehreren Quellen:
+Kombinieren Sie Daten aus mehreren Quellen:
 
 ```ts
 const UserProfile: React.FC<{userId: number}> = ({userId}) => {
@@ -766,50 +746,18 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
   const combined = useQueryResponses([user, posts, followers]);
 ```
 
-```html
-<div class="language-selector">
-  <a href="/en/README.md" class="language-link">English</a>
-  <a href="/de/README.md" class="language-link">Deutsch</a>
-</div>
-```
-
-```jsx
-  return (
-    <DataLoader
-      status={combined.status}
-      error={combined.error}
-      errorAction={combined.refetchErrored} // Nur fehlgeschlagene Anfragen erneut versuchen
-      LoadingView={ProfileSkeleton}
-      ErrorView={ProfileError}
-    >
-      {user && posts && followers && (
-        <div>
-          <UserInfo user={user.data} />
-          <UserPosts posts={posts.data} />
-          <UserFollowers followers={followers.data} />
-        </div>
-      )}
-    </DataLoader>
-  );
-};
-```
-
-## TypeScript-Unterstützung
-
-Die Bibliothek wurde mit einem TypeScript-First-Ansatz entwickelt und bietet vollständige Typinferenz:
-
-```ts
-// Typen werden automatisch abgeleitet
+```typescript
+// Types are automatically inferred
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // Rückgabetyp wird als User abgeleitet
+    // Return type is inferred as User
   }),
 });
 
-// Hook-Rückgabetyp ist automatisch typisiert
+// Hook return type is automatically typed
 const {data} = useQueryData(userDataSource, {userId: 123});
-// data ist als User | undefined typisiert
+// data is typed as User | undefined
 ```
 
 ### Benutzerdefinierte Fehlertypen
@@ -829,20 +777,20 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Parametertyp
-  {id: number}, // Anfragetyp
-  ApiResponse, // Antworttyp
-  User, // Datentyp
-  ApiError // Fehlertyp
+  {id: number}, // Params type
+  {id: number}, // Request type
+  ApiResponse, // Response type
+  User, // Data type
+  ApiError // Error type
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
 });
 ```
 
-## Mitwirkung
+## Mitwirken
 
-Bitte lesen Sie [CONTRIBUTING.md](CONTRIBUTING.md) für Details zu unserem Verhaltenskodex und dem Prozess für das Einreichen von Pull-Requests.
+Bitte lesen Sie [CONTRIBUTING.md](CONTRIBUTING.md) für Details zu unserem Verhaltenskodex und dem Prozess für das Einreichen von Pull-Anfragen.
 
 ## Lizenz
 

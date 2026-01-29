@@ -1,9 +1,9 @@
 {
     "actions_goToIcons": "Ir a los iconos",
-    "libraries": "Bibliotecas",
-    "readme": "Léeme",
-    "changelog": "Registro de cambios",
-    "about": "Acerca de la biblioteca",
+    "libraries": "Librerías",
+    "readme": "Readme",
+    "changelog": "Changelog",
+    "about": "Acerca de la librería",
     "stars": "Estrellas",
     "version": "Versión",
     "lastUpdate": "Última actualización",

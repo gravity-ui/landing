@@ -1,6 +1,6 @@
 # UIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/ci.yml?query=branch:main) [![storybook tests](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/test-storybook.yml?label=Storybook%20Tests&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/test-storybook.yml) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/uikit/)
 
-一套灵活、实用且高效的 React 组件，用于构建丰富的 Web 应用。
+一套灵活、实用且高效的 React 组件，用于构建丰富的 Web 应用程序。
 
 <!--GITHUB_BLOCK-->
 
@@ -38,7 +38,7 @@ const SubmitButton = <Button view="action" size="l" />;
 
 ### 样式
 
-UIKit 包含基础样式和主题。为了让一切看起来都很棒，请在你的入口文件顶部添加以下内容：
+UIKit 包含基础样式和主题。为了让一切看起来都很棒，请在你的入口文件的顶部添加以下内容：
 
 ```js
 // index.js
@@ -49,7 +49,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 // ...
 ```
 
-UIKit 支持不同的主题：浅色、深色以及它们的对比度变体。你的应用必须渲染在 `ThemeProvider` 内部：
+UIKit 支持不同的主题：浅色、深色以及它们的对比变体。你的应用必须渲染在 `ThemeProvider` 内部：
 
 ```js
 import {createRoot} from 'react-dom/client';
@@ -63,7 +63,7 @@ root.render(
 );
 ```
 
-在 SSR 期间可以生成初始的根 CSS 类，以避免主题闪烁：
+在 SSR（服务器端渲染）期间，可以生成初始的根 CSS 类，以避免主题闪烁：
 
 ```js
 import {getRootClassName} from '@gravity-ui/uikit/server';

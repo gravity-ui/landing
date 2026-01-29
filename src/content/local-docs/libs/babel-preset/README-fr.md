@@ -1,11 +1,3 @@
-```html
-<!-- Language options -->
-<div class="language-options">
-  <a href="/README.md">English</a> |
-  <a href="/README.fr.md">Français</a>
-</div>
-```
-
 # @gravity-ui/babel-preset
 
 Preset Babel pour les projets Gravity UI

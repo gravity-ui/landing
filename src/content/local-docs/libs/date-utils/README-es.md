@@ -1,10 +1,3 @@
-```html
-<div class="language-selector">
-  <a href="/en/README.md">English</a>
-  <a href="/es/README.md">Español</a>
-</div>
-```
-
 # @gravity-ui/date-utils
 
 Utilidades para gestionar fechas y horas.

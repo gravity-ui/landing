@@ -34,9 +34,6 @@ export const Menu: React.FC = () => {
 
     const {hideLocalePicker} = React.useContext(EnvironmentContext);
 
-    // Show all menu items for all locales
-    const filteredMenu = menu;
-
     const renderItem = (item: MenuItem) => {
         if (item.isComingSoon) {
             return (
@@ -72,7 +69,7 @@ export const Menu: React.FC = () => {
 
                 <div className={b('desktop-menu')}>
                     <div className={b('desktop-menu-items')}>
-                        {filteredMenu.map((item) => (
+                        {menu.map((item) => (
                             <div
                                 key={item.titleKey}
                                 className={b('desktop-menu-item', {
@@ -124,7 +121,7 @@ export const Menu: React.FC = () => {
                     <Row>
                         <Col sizes={{sm: 12}}>
                             <div className={b('mobile-menu-items')}>
-                                {filteredMenu.map((item) => (
+                                {menu.map((item) => (
                                     <div className={b('mobile-menu-item')} key={item.titleKey}>
                                         {renderItem(item)}
                                     </div>

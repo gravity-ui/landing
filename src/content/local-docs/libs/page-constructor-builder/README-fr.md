@@ -1,6 +1,6 @@
 # Page Constructor Builder
 
-Un utilitaire puissant en ligne de commande pour construire des pages statiques à partir de configurations YAML en utilisant le package [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor). Voir le [storybook de page-constructor](https://preview.gravity-ui.com/page-constructor/) pour les détails de configuration.
+Un utilitaire puissant en ligne de commande pour construire des pages statiques à partir de configurations YAML en utilisant le package [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor). Voir [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/) pour les détails de configuration.
 
 ## Démarrage Rapide
 
@@ -38,13 +38,13 @@ minify: true
 ```yaml
 meta:
   title: Bonjour, le Monde
-  description: Une page simple de constructeur de page
+  description: Une page simple du constructeur de pages
 
 blocks:
   - type: header-block
     title: Bonjour, le Monde
     description: |
-      Construisez de magnifiques pages statiques à partir de **configurations YAML** grâce à la puissance de
+      Construisez de belles pages statiques à partir de **configurations YAML** en utilisant la puissance de
       [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor).
     background:
       color: '#f8f9fa'
@@ -76,14 +76,14 @@ page-builder build [options]
 
 **Options :**
 
-- `-i, --input <path>` : Répertoire d'entrée contenant les fichiers YAML (par défaut : "./pages")
-- `-o, --output <path>` : Répertoire de sortie pour les fichiers construits (par défaut : "./dist")
-- `-c, --config <path>` : Chemin du fichier de configuration (par défaut : "./page-builder.config.yml")
+- `-i, --input <path>` : Répertoire d'entrée contenant les fichiers YAML (défaut : "./pages")
+- `-o, --output <path>` : Répertoire de sortie pour les fichiers construits (défaut : "./dist")
+- `-c, --config <path>` : Chemin du fichier de configuration (défaut : "./page-builder.config.yml")
 - `--css <files...>` : Fichiers CSS personnalisés à inclure
 - `--components <path>` : Répertoire des composants personnalisés
 - `--navigation <path>` : Fichier de données de navigation
 - `--assets <path>` : Répertoire des ressources statiques à copier
-- `--theme <theme>` : Thème (light|dark) (par défaut : "light")
+- `--theme <theme>` : Thème (light|dark) (défaut : "light")
 - `--base-url <url>` : URL de base pour le site
 - `--minify` : Activer la minification
 - `--source-maps` : Générer des cartes sources
@@ -119,7 +119,7 @@ Créez des fichiers YAML dans votre répertoire de pages :
 # pages/index.yml
 meta:
   title: Bienvenue sur Mon Site
-  description: Ceci est la page d'accueil de mon site génial
+  description: C'est la page d'accueil de mon super site
 
 blocks:
   - type: header-block
@@ -192,7 +192,7 @@ Ajoutez vos fichiers CSS/SCSS personnalisés :
 
 ### Ressources Statiques
 
-Le constructeur de page gère automatiquement les ressources statiques telles que les images, les icônes et autres fichiers. Configurez le répertoire des ressources dans votre fichier de configuration :
+Le constructeur de pages gère automatiquement les ressources statiques comme les images, les icônes et autres fichiers. Configurez le répertoire des ressources dans votre fichier de configuration :
 
 ```yaml
 # page-builder.config.yml
@@ -236,7 +236,7 @@ blocks:
 
 ### Favicon
 
-Le constructeur de page prend en charge l'ajout de favicons à vos pages statiques. Vous pouvez spécifier soit un fichier local de votre répertoire d'assets, soit une URL externe.
+Le constructeur de pages prend en charge l'ajout de favicons à vos pages statiques. Vous pouvez spécifier soit un fichier local de votre répertoire d'assets, soit une URL externe.
 
 #### Configuration
 
@@ -270,13 +270,14 @@ Pour les fichiers favicon locaux, le constructeur :
 ```yaml
 # page-builder.config.yml
 favicon: logo.svg                    # Fichier dans le répertoire assets/
-favicon: icons/favicon.ico           # Sous-répertoire assets/icons/
+favicon: icons/favicon.ico           # Fichier dans le sous-répertoire assets/icons/
 favicon: ./custom/path/favicon.png   # Chemin personnalisé relatif au projet
 favicon: /absolute/path/favicon.ico  # Chemin absolu
+```
 
 #### URLs externes pour les favicons
 
-Vous pouvez également utiliser des URLs externes pour les favicons, provenant de CDN ou d'autres domaines :
+Vous pouvez également utiliser des URLs externes pour les favicons, provenant de CDNs ou d'autres domaines :
 
 ```yaml
 # page-builder.config.yml
@@ -359,11 +360,30 @@ navigation:
     url: 'index.html'
   header:
     leftItems:
-      - text: Retour à l'accueil
+      - text: Retour au principal
         url: 'index.html'
         type: 'link'
 
 blocks:
   - type: header-block
     title: Cette page a une navigation personnalisée
+```
+
+### Configuration des analyses
+
+Ajoutez le champ `analytics` à votre fichier `page-builder.config.yml` :
+
+```yaml
+analytics: ./analytics.js
+```
+
+`analytics.js` :
+
+```javascript
+module.exports = {
+  sendEvents: (events) => {
+    /* ... */
+  },
+  autoEvents: true,
+};
 ```

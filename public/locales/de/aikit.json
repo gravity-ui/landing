@@ -1,0 +1,17 @@
+{
+  "goToLibrary": "Zur Bibliothek gehen",
+  "title": "AIKit Playground",
+  "chat": {
+    "title": "KI-Chat",
+    "emptyTitle": "Chat starten",
+    "emptyDescription": "Fragen Sie mich alles über KI, Programmierung oder jedes andere Thema!",
+    "placeholder": "Nachricht eingeben..."
+  },
+  "welcome": {
+    "title": "Willkommen beim KI-Chat",
+    "description": "Beginnen Sie ein Gespräch, indem Sie eine Nachricht eingeben."
+  },
+  "error": {
+    "apiError": "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  }
+}
