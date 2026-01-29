@@ -3,11 +3,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 
 import type {MarkdownItPluginCb} from '@diplodoc/transform/lib/plugins/typings';
-import {
-    createReadableContent,
-    transformPageContent,
-    transformPost,
-} from '@gravity-ui/blog-constructor/server';
+import {createReadableContent, transformPageContent} from '@gravity-ui/blog-constructor/server';
 import {Lang} from '@gravity-ui/uikit';
 import {createAppAuth} from '@octokit/auth-app';
 import {Octokit} from '@octokit/rest';
@@ -30,6 +26,11 @@ import type {
     LibWithMetadata,
     NpmInfo,
 } from './types';
+
+/** For transform: blog-constructor supports only Lang.En | Lang.Ru (uikit) */
+function getTransformLang(locale: string): Lang {
+    return locale === 'ru' ? Lang.Ru : Lang.En;
+}
 
 export class ServerApi {
     private static _instance: ServerApi;
@@ -535,29 +536,57 @@ export class ServerApi {
         try {
             // Determine lang and region from locale
 
-            const langStr = locale.split('-')[0] as 'en' | 'ru';
-            const lang = langStr === 'en' ? Lang.En : Lang.Ru;
+            const lang = locale.split('-')[0];
+            const region = locale.includes('-') ? locale : `${locale}-${locale}`;
 
-            const postMock = await import(`./.mocks/${langStr}/posts/${slug}.json`);
-            const pageMock = await import(`./.mocks/${langStr}/pages/${slug}.json`);
+            const postMock = await import(`./.mocks/${lang}/posts/${slug}.json`);
+            const pageMock = await import(`./.mocks/${lang}/pages/${slug}.json`);
 
             // Plugins for markdown transformation (empty array for now)
             const plugins: MarkdownItPluginCb[] = [];
 
-            // Transform post using transformPost from blog-constructor
-            const transformedPost = transformPost({
+            /**
+             * ADR: Use preparePost instead of transformPost for blog post transformation
+             *
+             * Context:
+             * - We need to support multiple locales including non-Latin scripts (Chinese, Korean, Japanese)
+             * - @gravity-ui/blog-constructor's transformPost only accepts Lang.En or Lang.Ru from @gravity-ui/uikit
+             * - For non-Russian locales, transformPost falls back to Lang.En, applying English typographic rules
+             * - When English typographic rules are applied to CJK (Chinese/Japanese/Korean) characters,
+             *   they get incorrectly escaped, producing invalid JavaScript in the bundle
+             * - This causes "Uncaught SyntaxError: Invalid or unexpected token" in the browser
+             *
+             * Decision:
+             * - Use preparePost from utils/blog.ts instead of transformPost
+             * - preparePost accepts any locale string (zh, ko, ja, etc.)
+             * - For meta fields (metaTitle, metaDescription), it uses extractTextFromHtml which:
+             *   1. Transforms YFM to HTML first
+             *   2. Parses HTML and extracts plain text only
+             *   3. Preserves CJK characters without applying typographic transformations
+             * - Typography is only applied to already-transformed HTML, not raw CJK text
+             *
+             * Consequences:
+             * - Positive: All locales are properly supported without syntax errors
+             * - Positive: CJK characters remain valid UTF-8 in the JavaScript bundle
+             * - Positive: Consistent behavior across all supported languages
+             * - Neutral: preparePost has similar API but slightly different parameter structure
+             * - Trade-off: We maintain our own transformation logic instead of relying solely on blog-constructor
+             */
+            const {preparePost} = await import('../utils/blog');
+            const transformedPost = preparePost({
                 postData: postMock.default,
-                lang,
-                options: {
-                    plugins,
-                },
+                locale: {lang: locale},
+                withContent: false,
+                plugins: plugins as any,
             }) as unknown as BlogPost;
 
-            // Transform page content using transformPageContent from blog-constructor
+            // Transform page content (blog-constructor uses uikit Lang)
+            const transformLang = getTransformLang(locale);
             const transformedPageContent: Parameters<typeof createReadableContent>[number] =
                 transformPageContent({
                     content: pageMock.default.content,
-                    lang,
+                    lang: transformLang,
+                    region,
                     plugins: plugins as MarkdownItPluginCb[],
                 });
 
@@ -613,7 +642,6 @@ export class ServerApi {
             const blogPageMock = await import(`./.mocks/${locale}/pages/blogPage.json`);
             const {preparePost} = await import('../utils/blog');
 
-            // Transform locale string to object with lang property
             const localeObj = {lang: locale};
 
             // Transform mock data using preparePost

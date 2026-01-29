@@ -1,0 +1,23 @@
+{
+  "id": 40,
+  "name": "gravity-start-webinar",
+  "isPinned": false,
+  "postId": 40,
+  "description": "Einführendes Webinar",
+  "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+  "readingTime": 43,
+  "title": "Gravity UI: Ein schneller Start",
+  "date": "2024-12-09T00:00:00Z",
+  "likes": 0,
+  "hasUserLike": false,
+  "addLegacyPrefix": false,
+  "tags": [
+    {
+      "icon": null,
+      "slug": "webinars",
+      "name": "Webinare"
+    }
+  ],
+  "authors": [],
+  "services": []
+}

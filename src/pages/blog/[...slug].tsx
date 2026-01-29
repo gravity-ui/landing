@@ -16,7 +16,7 @@ import {useMemo} from 'react';
 import {ServerApi} from '../../api';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
-import {localeEn, localeRu} from '../../utils/blog-constants';
+import {localeMap} from '../../utils/blog-constants';
 import {getI18nProps} from '../../utils/i18next';
 
 interface BlogPostPageProps {
@@ -30,16 +30,6 @@ interface BlogPostPageProps {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const locale = ctx.locale || 'en';
     const slug = ctx.params?.slug;
-
-    // Blog is only available for ru and en locales
-    if (locale !== 'ru' && locale !== 'en') {
-        return {
-            redirect: {
-                destination: `/${ctx.defaultLocale || 'en'}/blog`,
-                permanent: false,
-            },
-        };
-    }
 
     // Validate slug
     if (!slug || !Array.isArray(slug)) {
@@ -68,7 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 ...i18nProps,
             },
         };
-    } catch (error) {
+    } catch {
         // Error is logged on server side
         return {
             notFound: true,
@@ -86,7 +76,7 @@ export default function BlogPostPage({
     const router = useRouter();
     const isMobile = useIsMobile();
     const locale = router.locale || 'en';
-    const localeValue = locale === 'ru' ? localeRu : localeEn;
+    const localeValue = localeMap[locale] || localeMap['en'];
 
     // Router data for blog-constructor
     const routerData = useMemo(
@@ -104,36 +94,39 @@ export default function BlogPostPage({
 
     // Share options for the post
     const shareOptions = [
-        ShareOptions.Twitter,
-        ShareOptions.Facebook,
         ShareOptions.Telegram,
-        ShareOptions.VK,
+        ShareOptions.Facebook,
         ShareOptions.LinkedIn,
+        ShareOptions.VK,
+        ShareOptions.Twitter,
     ];
 
     // Breadcrumbs for navigation
+    // Note: ConstructorBlogPostPage automatically adds the current page (post.title) to breadcrumbs,
+    // so we only need to provide parent pages: Blog and Tag (if exists)
     const pathPrefix = localeValue.pathPrefix ? `/${localeValue.pathPrefix}` : '';
     const blogUrl = `${pathPrefix}/blog`;
 
-    // Ensure post URL has pathPrefix
-    let postUrl = router.asPath;
-    if (pathPrefix && !postUrl.startsWith(pathPrefix)) {
-        // Remove any existing locale prefix and add the correct one
-        const urlWithoutLocale = postUrl.replace(/^\/(en|ru)/, '');
-        postUrl = `${pathPrefix}${urlWithoutLocale}`;
+    // Build breadcrumbs: Blog -> Tag (if exists)
+    const breadcrumbItems = [
+        {
+            text: t('meta_title'),
+            url: blogUrl,
+        },
+    ];
+
+    // Add tag to breadcrumbs if post has tags
+    if (post.tags && post.tags.length > 0) {
+        const firstTag = post.tags[0];
+        const tagUrl = `${blogUrl}?tags=${firstTag.slug}`;
+        breadcrumbItems.push({
+            text: firstTag.name,
+            url: tagUrl,
+        });
     }
 
     const breadcrumbs = {
-        items: [
-            {
-                text: t('meta_title'),
-                url: blogUrl,
-            },
-            {
-                text: post.title,
-                url: postUrl,
-            },
-        ],
+        items: breadcrumbItems,
     };
 
     // Blog constructor settings

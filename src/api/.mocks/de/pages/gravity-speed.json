@@ -1,0 +1,73 @@
+{
+  "id": 109,
+  "name": "blog/gravity-speed",
+  "createdAt": "2026-01-27T14:08:02.359Z",
+  "updatedAt": "2026-01-27T14:08:02.359Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 109,
+  "regionCode": "en",
+  "publishedVersionId": 275,
+  "lastVersionId": 275,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#2A1A2A'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        resetPaddings: true\n        column: right\n        text: >\n\n          ![image](https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/speaker.jpg\n          =80x)\n\n\n          **Evgeny Alaev**\n\n          Gravity UI Core Developer\n      - type: blog-yfm-block\n        column: right\n        resetPaddings: true\n        text: |\n\n          In this article:\n\n            - [Research methodology](#methods)\n            - [Results](#results)\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          I’m a core developer of [Gravity\n          UI](https://gravity-ui.com/){target=\"_blank\"}, and from time to time\n          our team gets questions about the performance of React components from\n          our library\n          [@gravity‑ui/uikit](https://github.com/gravity-ui/uikit){target=\"_blank\"}.\n          I decided to run a small study on this topic, and everything written\n          below is a starting point for further research and an attempt to\n          answer the question of why Gravity feels slow.\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/pic1.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          Usually this question comes without any additional details, so I’m\n          assuming that one (though, of course, not the only) major performance\n          issue is long render time. As part of this study, we looked at the\n          cost of the initial render of individual components from each library\n          in an isolated environment. For comparison, we chose\n          @adobe/react‑spectrum, @mui/material, and antd.\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## Research methodology{#methods}\n\n\n          Tech stack:\n\n            * **Playwright** — a framework for automated testing across different browsers.\n              [Learn more](https://playwright.dev/){target=\"_blank\"}\n            * **PerformanceObserver API** — a browser API for measuring performance.\n              [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver){target=\"_blank\"}\n\n          Test conditions:\n\n            * Each test is run in a separate browser context.\n            * Only one test runs at a time (the `workers` setting in the Playwright config), which guarantees the same amount of resources allocated to each test.\n            * Each test is repeated 50 times.\n            * Tests are run with different numbers of nodes (10, 100, 1000).\n\n          Steps for a single test run:\n\n            * Open a new page in the browser.\n            * Initialize `PerformanceObserver`.\n            * Start collecting metrics.\n            * Render components.\n            * Stop collecting metrics.\n\n          Measurement process:\n\n\n          At the beginning of each test, a `PerformanceObserver` is created to\n          listen for events of type 'measure'. All collected metrics are stored\n          in a global object `__PERFORMANCE_METRICS__`. The observer\n          automatically collects data about operation execution time, including\n          the metric name, event type, start time, and duration. Using the\n          [measure](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType#measure){target=\"_blank\"}\n          event, we log our `total‑render‑time` measurement.\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## Results{#results}\n\n\n          The measurement results don’t include absolute numbers. From one\n          environment to another they can, of course, vary. But these figures\n          are sufficient to see some patterns and draw conclusions based on\n          them:\n\n\n          * @gravity‑ui/uikit shows competitive results:\n\n            * In most tests it ranks near the top.\n            * Demonstrates stable render time across different node counts.\n            * Particularly effective for Button, Checkbox, and Switch components.\n            * Has issues with the render time of the `TextArea` component.\n\n          * @mui/material also shows good results:\n\n            * Leads in almost all categories (e.g., Text, Label) with a small number of nodes.\n            * Shows a noticeable increase in render time as the number of nodes grows.\n\n          * **antd** and **React Spectrum**:\n\n            * Show higher render times in most tests.\n            * Have a larger spread between minimum and maximum times.\n\n          Using [this\n          tool](https://github.com/korvin89/gravity-ui-perf){target=\"_blank\"},\n          you can run performance measurements on your local machine and add\n          tests for components that aren’t covered yet. It would help us if you\n          deploy it on your side and [send a\n          PR](https://github.com/korvin89/gravity-ui-perf/pulls){target=\"_blank\"}\n          with the results from your machine.\n\n\n          In this article, I shared one example of how we work with the library.\n          But community feedback is very important to us: if you have a specific\n          case where Gravity UI performs significantly worse than other\n          libraries, or if you notice an issue with our testing methodology,\n          come to the comments under this post or [create an\n          issue](https://github.com/gravity-ui/uikit/issues){target=\"_blank\"} —\n          let’s discuss it. And don’t forget to star the project!\n  - type: blog-layout-block\n    resetPaddings: true\n    fullWidth: false\n    children:\n      - type: blog-meta-block\n        column: left\n        resetPaddings: true\n  - type: blog-suggest-block\n    resetPaddings: true\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "initial-en",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageRegionId": 119,
+  "summary": null,
+  "versionId": 275,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 118,
+      "pageId": 109,
+      "locale": "ru",
+      "createdAt": "2026-01-27T13:59:59.588Z",
+      "updatedAt": "2026-01-27T13:59:59.680Z",
+      "publishedVersionId": null,
+      "lastVersionId": 270
+    },
+    {
+      "id": 119,
+      "pageId": 109,
+      "locale": "en",
+      "createdAt": "2026-01-27T13:59:59.694Z",
+      "updatedAt": "2026-01-27T13:59:59.784Z",
+      "publishedVersionId": null,
+      "lastVersionId": 271
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": 274
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 275
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}
