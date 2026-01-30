@@ -6,7 +6,7 @@
   "description": "",
   "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
   "readingTime": 30,
-  "title": "Webinar on Navigation",
+  "title": "Webinario sobre navegación",
   "date": "2025-03-20T00:00:00Z",
   "likes": 0,
   "hasUserLike": false,
@@ -15,7 +15,7 @@
     {
       "icon": null,
       "slug": "webinars",
-      "name": "Webinar"
+      "name": "Webinarios"
     }
   ],
   "authors": [],
