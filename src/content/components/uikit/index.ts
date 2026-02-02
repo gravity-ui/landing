@@ -16,6 +16,7 @@ import {clipboardButtonConfig} from './ClipboardButton';
 import {dialogConfig} from './Dialog';
 import {disclosureConfig} from './Disclosure';
 import {dividerConfig} from './Divider';
+import {drawerConfig} from './Drawer';
 import {dropdownMenuConfig} from './DropdownMenu';
 import {filePreviewConfig} from './FilePreview';
 import {helpMarkConfig} from './HelpMark';
@@ -74,6 +75,7 @@ const uikitComponents: Component[] = [
     dialogConfig,
     disclosureConfig,
     dividerConfig,
+    drawerConfig,
     dropdownMenuConfig,
     iconConfig,
     labelConfig,
