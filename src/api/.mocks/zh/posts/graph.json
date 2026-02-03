@@ -6,7 +6,7 @@
     "description": "",
     "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
     "readingTime": 17,
-    "title": "Graph Visualization Library: How We Solved the Canvas vs. HTML Dilemma",
+    "title": "图可视化库：我们如何解决 Canvas vs HTML 的困境",
     "date": "2025-08-07T00:00:00Z",
     "likes": 0,
     "hasUserLike": false,
@@ -15,7 +15,7 @@
       {
         "icon": null,
         "slug": "articles",
-        "name": "Articles"
+        "name": "文章"
       }
     ],
     "authors": [],

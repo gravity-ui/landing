@@ -6,7 +6,7 @@
     "description": "",
     "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
     "readingTime": 20,
-    "title": "How We Made Yandex Cloud More Accessible with the Gravity UI Design System",
+    "title": "我们如何使用 Gravity UI 设计系统使 Yandex Cloud 更易访问",
     "date": "2024-10-28T00:00:00Z",
     "likes": 0,
     "hasUserLike": false,
@@ -15,7 +15,7 @@
       {
         "icon": null,
         "slug": "articles",
-        "name": "Articles"
+        "name": "文章"
       }
     ],
     "authors": [],

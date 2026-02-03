@@ -6,7 +6,7 @@
     "description": "",
     "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
     "readingTime": 7,
-    "title": "Markdown Editor: A WYSIWYG and Markup Editor Built on Gravity UI",
+    "title": "Markdown 에디터: Gravity UI로 구축한 WYSIWYG 및 마크업 에디터",
     "date": "2024-10-01T00:00:00Z",
     "likes": 0,
     "hasUserLike": false,
@@ -15,7 +15,7 @@
       {
         "icon": null,
         "slug": "articles",
-        "name": "Articles"
+        "name": "기사"
       }
     ],
     "authors": [],
