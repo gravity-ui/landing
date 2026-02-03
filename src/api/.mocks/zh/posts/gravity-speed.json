@@ -6,7 +6,7 @@
   "description": "",
   "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
   "readingTime": 5,
-  "title": "Performance Comparison of React Components: Gravity UI vs Other Libraries",
+  "title": "React 组件性能比较：Gravity UI vs 其他库",
   "date": "2025-07-29T00:00:00Z",
   "likes": 0,
   "hasUserLike": false,
@@ -15,7 +15,7 @@
     {
       "icon": null,
       "slug": "articles",
-      "name": "Articles"
+      "name": "文章"
     }
   ],
   "authors": [],

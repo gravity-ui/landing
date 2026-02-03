@@ -3,10 +3,10 @@
   "name": "gravity-start-webinar",
   "isPinned": false,
   "postId": 40,
-  "description": "Introductory webinar",
+  "description": "介绍性网络研讨会",
   "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
   "readingTime": 43,
-  "title": "Gravity UI: A quick start",
+  "title": "Gravity UI：快速入门",
   "date": "2024-12-09T00:00:00Z",
   "likes": 0,
   "hasUserLike": false,
@@ -15,7 +15,7 @@
     {
       "icon": null,
       "slug": "webinars",
-      "name": "Webinar"
+      "name": "网络研讨会"
     }
   ],
   "authors": [],
