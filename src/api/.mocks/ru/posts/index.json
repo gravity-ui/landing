@@ -1,0 +1,198 @@
+{
+  "posts": [
+    {
+      "id": 73,
+      "name": "gravityui-aikit",
+      "date": "2025-12-18T00:00:00Z",
+      "title": "Один чат, чтобы править всеми: собрали библиотеку для ИИ-ассистентов на базе Gravity UI",
+      "postId": 73,
+      "description": "Статья о запуске библиотеки AIKit: на что мы смотрели в разработке, зачем она нужна и как её применять в своих проектах.",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+      "readingTime": 8,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Статьи"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravityui-aikit"
+    },
+    {
+      "id": 36,
+      "name": "graph",
+      "date": "2025-08-07T00:00:00Z",
+      "title": "Библиотека визуализации графов: как мы решили дилемму Canvas vs HTML в Gravity UI",
+      "postId": 36,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/graph-cover-bg.png",
+      "readingTime": 17,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Статьи"
+        }
+      ],
+      "services": [],
+      "url": "/blog/graph"
+    },
+    {
+      "id": 39,
+      "name": "navigation-webinar",
+      "date": "2025-03-20T00:00:00Z",
+      "title": "Вебинар о Navigation",
+      "postId": 39,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+      "readingTime": 30,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "Вебинары"
+        }
+      ],
+      "services": [],
+      "url": "/blog/navigation-webinar"
+    },
+    {
+      "id": 40,
+      "name": "gravity-start-webinar",
+      "date": "2024-12-09T00:00:00Z",
+      "title": "Gravity UI: быстрый старт",
+      "postId": 40,
+      "description": "Вводный вебинар",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+      "readingTime": 43,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "Вебинары"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-start-webinar"
+    },
+    {
+      "id": 37,
+      "name": "yc-site-in-gravity-ui",
+      "date": "2024-10-28T00:00:00Z",
+      "title": "Как мы делали Yandex Cloud на дизайн‑системе Gravity UI доступнее",
+      "postId": 37,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+      "readingTime": 20,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Статьи"
+        }
+      ],
+      "services": [],
+      "url": "/blog/yc-site-in-gravity-ui"
+    },
+    {
+      "id": 38,
+      "name": "md-editor-in-gravity-ui",
+      "date": "2024-10-01T00:00:00Z",
+      "title": "Markdown Editor: WYSIWYG и markup‑редактор на базе Gravity UI",
+      "postId": 38,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/mdeditor-cover-bg.png",
+      "readingTime": 7,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Статьи"
+        }
+      ],
+      "services": [],
+      "url": "/blog/md-editor-in-gravity-ui"
+    },
+    {
+      "id": 35,
+      "name": "gravity-ui-in-opensource",
+      "date": "2023-12-12T00:00:00Z",
+      "title": "Дизайн-система Gravity UI: как легко построить свой интерфейс",
+      "postId": 35,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/gravity-ui-cover.png",
+      "readingTime": 10,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Статьи"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-ui-in-opensource"
+    }
+  ],
+  "totalCount": 16,
+  "count": 7,
+  "pinnedPost": {
+    "id": 74,
+    "name": "gravity-speed",
+    "date": "2025-07-29T00:00:00Z",
+    "title": "Сравнение производительности React-компонентов: Gravity UI vs другие библиотеки",
+    "postId": 74,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+    "readingTime": 5,
+    "likes": 0,
+    "hasUserLike": false,
+    "hasPublishedVersionInRegion": true,
+    "hasPublishedVersionInLocale": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "Статьи"
+      }
+    ],
+    "services": [],
+    "url": "/blog/gravity-speed"
+  }
+}

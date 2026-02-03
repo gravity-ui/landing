@@ -1,0 +1,73 @@
+{
+  "id": 109,
+  "name": "blog/gravity-speed",
+  "createdAt": "2026-01-27T14:08:02.359Z",
+  "updatedAt": "2026-01-27T14:08:02.359Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 109,
+  "regionCode": "en",
+  "publishedVersionId": 275,
+  "lastVersionId": 275,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#2A1A2A'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        resetPaddings: true\n        column: right\n        text: \"\\n![image](https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/speaker.jpg =80x)\\n\\n**예브게니 알라예프**\\nGravity\\_UI 코어 개발자\\n\"\n      - type: blog-yfm-block\n        column: right\n        resetPaddings: true\n        text: |\n\n          이 글에서 다루는 내용:\n\n            - [연구 방법론](#methods)\n            - [결과](#results)\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n저는 [Gravity\\_UI](https://gravity-ui.com/){target=\\\"_blank\\\"}의 코어 개발자이며, 팀에는 우리 라이브러리 [@gravity-ui/uikit](https://github.com/gravity-ui/uikit){target=\\\"_blank\\\"}의 React 컴포넌트 성능에 대한 질문이 주기적으로 들어옵니다. 저는 이 주제에 대해 간단한 조사를 해보기로 했고, 아래에 적힌 내용은 향후 추가 연구를 위한 출발점이자, Gravity가 왜 느린지에 대한 질문에 답해 보려는 시도입니다.\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/pic1.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          보통 이런 문의는 별다른 추가 정보 없이 올라오기 때문에,\n          저는 성능 문제의 주요 원인 중 하나(물론 유일한 원인은\n          아니지만)가 긴 렌더링 시간이라고 가정했습니다. 이번\n          연구에서는 격리된 환경에서 각 라이브러리의 개별 컴포넌트에\n          대한 첫 렌더링 비용을 살펴봤습니다. 비교 대상으로는\n          @adobe/react-spectrum, @mui/material, antd 라이브러리를\n          선택했습니다.\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## 연구 방법론{#methods}\\n\\n기술 스택:\\n\\n  * **Playwright** — 다양한 브라우저에서 코드를 자동으로 테스트하기 위한 프레임워크.\\n    [자세히 보기](https://playwright.dev/){target=\\\"_blank\\\"}\\n  * **PerformanceObserver API** — 성능을 측정하기 위한 브라우저 API.\\n    [자세히 보기](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver){target=\\\"_blank\\\"}\\n\\n테스트 실행 조건:\\n\\n  * 각 테스트는 별도의 브라우저 컨텍스트에서 실행됩니다.\\n  * 한 번에 하나의 테스트만 실행합니다(Playwright 설정의 `workers` 값). 이를 통해\\_각 테스트에 동일한 양의 리소스가 할당됨을 보장합니다.\\n  * 각 테스트는 50회 반복합니다.\\n  * 테스트는 서로 다른 노드 수(10, 100, 1000)로 수행됩니다.\\n\\n단일 테스트 수행 순서:\\n\\n  * 브라우저에서 새 페이지 열기.\\n  * `PerformanceObserver` 초기화.\\n  * 메트릭 수집 시작.\\n  * 컴포넌트 렌더링.\\n  * 메트릭 수집 종료.\\n\\n측정 과정:\\n\\n각 테스트 시작 시 'measure' 타입 이벤트를 추적하는 `PerformanceObserver`를 생성합니다. 수집된 모든 메트릭은 전역 객체 `__PERFORMANCE_METRICS__`에 저장됩니다. Observer는 메트릭 이름, 이벤트 타입, 시작 시간, 지속 시간 등을 포함해 작업 수행 시간에 대한 데이터를 자동으로 수집합니다. [measure](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType#measure){target=\\\"_blank\\\"} 이벤트를 사용해 `total-render-time` 측정 값을 로깅합니다.\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## 결과{#results}\n\n\n          측정 결과에는 절대적인 수치가 포함되어 있지 않습니다.\n          환경에 따라 당연히 달라질 수 있습니다. 하지만 이 수치만으로도\n          몇 가지 경향을 확인하고 그에 기반해 결론을 내리기에 충분합니다:\n\n\n          * @gravity-ui/uikit은 경쟁력 있는 결과를 보여줍니다:\n\n            * 대부분의 테스트에서 상위권에 위치합니다.\n            * 노드 수가 달라도 렌더링 시간이 안정적입니다.\n            * Button, Checkbox, Switch 컴포넌트에서 특히 효율적입니다.\n            * `TextArea` 컴포넌트의 렌더링 시간에는 문제가 있습니다.\n\n          * @mui/material도 좋은 결과를 보여줍니다:\n\n            * 노드 수가 적을 때 Text, Label 등 거의 모든 카테고리에서 선두를 차지합니다.\n            * 노드 수에 따라 렌더링 시간이 눈에 띄게 증가합니다.\n\n          * **antd**와 **React Spectrum**:\n\n            * 대부분의 테스트에서 더 긴 렌더링 시간을 보입니다.\n            * 최소/최대 시간 간 편차가 더 큽니다.\n\n          [이\n          도구](https://github.com/korvin89/gravity-ui-perf){target=\"_blank\"}를\n          사용하면 로컬 머신에서 성능 측정을 수행할 수 있으며, 아직\n          없는 컴포넌트에 대한 테스트도 추가할 수 있습니다. 여러분이\n          직접 설치해 실행해 보고, 자신의 컴퓨터에서 얻은 결과를\n          [PR로\n          보내주시면](https://github.com/korvin89/gravity-ui-perf/pulls){target=\"_blank\"}\n          큰 도움이 됩니다.\n\n\n          이 글에서는 우리가 라이브러리로 작업하는 방식의 한 가지\n          예를 소개했습니다. 하지만 커뮤니티의 피드백은 우리에게 매우\n          중요합니다. Gravity UI가 다른 라이브러리보다 훨씬 나쁘게\n          동작하는 구체적인 사례가 있거나, 우리의 테스트 방법론에\n          오류가 있다고 생각된다면 이 글의 댓글로 오시거나\n          [이슈를\n          생성해 주세요](https://github.com/gravity-ui/uikit/issues){target=\"_blank\"}.\n          함께 논의하겠습니다. 그리고 프로젝트에 별을 주는 것도\n          잊지 마세요!\n  - type: blog-layout-block\n    resetPaddings: true\n    fullWidth: false\n    children:\n      - type: blog-meta-block\n        column: left\n        resetPaddings: true\n  - type: blog-suggest-block\n    resetPaddings: true\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "initial-en",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageRegionId": 119,
+  "summary": null,
+  "versionId": 275,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 118,
+      "pageId": 109,
+      "locale": "ru",
+      "createdAt": "2026-01-27T13:59:59.588Z",
+      "updatedAt": "2026-01-27T13:59:59.680Z",
+      "publishedVersionId": null,
+      "lastVersionId": 270
+    },
+    {
+      "id": 119,
+      "pageId": 109,
+      "locale": "en",
+      "createdAt": "2026-01-27T13:59:59.694Z",
+      "updatedAt": "2026-01-27T13:59:59.784Z",
+      "publishedVersionId": null,
+      "lastVersionId": 271
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": 274
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 275
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}

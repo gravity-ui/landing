@@ -44,6 +44,15 @@ const getLocaleFromCookie = (request: NextRequest): string | undefined => {
 export const middleware = async (request: NextRequest) => {
     const {pathname} = request.nextUrl;
 
+    // Check if path is related to blog
+    const isBlogPath = pathname.includes('/blog');
+
+    if (isBlogPath) {
+        // For blog pages, ignore cookie-based locale detection to prevent redirect loops
+        // Only use the current locale from URL, don't try to detect from cookie/headers
+        return NextResponse.next();
+    }
+
     if (
         nextI18nextConfig.routesWithoutRedirect.some(
             (route) => pathname === route || pathname.startsWith(route),

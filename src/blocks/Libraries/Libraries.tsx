@@ -83,7 +83,6 @@ export const Libraries: React.FC<LibrariesProps> = ({
     return (
         <AnimateBlock className={b()} animate={animated}>
             <SliderBlock
-                lazyLoad
                 blockClassName={b('slider')}
                 title={title ? {text: title} : undefined}
                 slidesToShow={{

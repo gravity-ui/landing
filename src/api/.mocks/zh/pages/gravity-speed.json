@@ -1,0 +1,73 @@
+{
+  "id": 109,
+  "name": "blog/gravity-speed",
+  "createdAt": "2026-01-27T14:08:02.359Z",
+  "updatedAt": "2026-01-27T14:08:02.359Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 109,
+  "regionCode": "en",
+  "publishedVersionId": 275,
+  "lastVersionId": 275,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#2A1A2A'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        resetPaddings: true\n        column: right\n        text: \"\\n![image](https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/speaker.jpg =80x)\\n\\n**叶夫根尼·阿拉耶夫**\\nGravity\\_UI 核心开发者\\n\"\n      - type: blog-yfm-block\n        column: right\n        resetPaddings: true\n        text: |\n\n          本文内容：\n\n            - [研究方法](#methods)\n            - [结果](#results)\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n我是 [Gravity\\_UI](https://gravity-ui.com/){target=\\\"_blank\\\"} 的核心开发者，我们团队会不时收到关于我们组件库 [@gravity-ui/uikit](https://github.com/gravity-ui/uikit){target=\\\"_blank\\\"} 中 React 组件性能的问题。我决定就此做一个小型研究，下面写的所有内容都是进一步研究的起点，并尝试回答一个问题：为什么 Gravity 会变慢。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/pic1.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          通常这类请求不会提供额外细节，因此我假设性能问题的主要原因之一\n          （当然并非唯一原因）是渲染耗时过长。在本次研究中，我们在隔离的\n          环境里考察了各个组件库中单个组件首次渲染的开销。对比选择了\n          @adobe/react-spectrum、@mui/material 和 antd。\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## 研究方法{#methods}\\n\\n技术栈：\\n\\n  * **Playwright** — 用于在不同浏览器中自动化测试代码的框架。\\n    [了解更多](https://playwright.dev/){target=\\\"_blank\\\"}\\n  * **PerformanceObserver API** — 用于测量性能的浏览器 API。\\n    [了解更多](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver){target=\\\"_blank\\\"}\\n\\n测试执行条件：\\n\\n  * 每个测试都在独立的浏览器上下文中运行。\\n  * 同一时间只运行一个测试（Playwright 配置中的 `workers` 设置），从而\\_保证每个测试获得相同数量的资源。\\n  * 每个测试重复 50 次。\\n  * 测试在不同节点数量（10、100、1000）下进行。\\n\\n单个测试的执行顺序：\\n\\n  * 在浏览器中打开新页面。\\n  * 初始化 `PerformanceObserver`。\\n  * 开始收集指标。\\n  * 渲染组件。\\n  * 结束收集指标。\\n\\n测量过程：\\n\\n每个测试开始时都会创建一个 `PerformanceObserver`，用于监听类型为 'measure' 的事件。所有收集到的指标都会保存在全局对象 `__PERFORMANCE_METRICS__` 中。Observer 会自动收集操作的执行时间数据，包括指标名称、事件类型、开始时间和持续时间。我们通过 [measure](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType#measure){target=\\\"_blank\\\"} 事件记录我们的 `total-render-time` 测量值。\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## 结果{#results}\n\n\n          测量结果不包含绝对数值。不同环境下结果当然会有所波动。\n          但这些数据足以让我们看到一些规律，并据此得出结论：\n\n\n          * @gravity-ui/uikit 表现出有竞争力的结果：\n\n            * 在大多数测试中位于排行榜前列。\n            * 在不同节点数量下渲染时间保持稳定。\n            * 在 Button、Checkbox 和 Switch 组件上尤其高效。\n            * `TextArea` 组件的渲染时间存在问题。\n\n          * @mui/material 也显示出不错的结果：\n\n            * 在节点数量较少时，几乎在所有类别（例如 Text、Label）中领先。\n            * 渲染时间会随着节点数量增加而明显增长。\n\n          * **antd** 和 **React Spectrum**：\n\n            * 在大多数测试中渲染时间更长。\n            * 最小与最大耗时之间的波动更大。\n\n          使用[这个\n          工具](https://github.com/korvin89/gravity-ui-perf){target=\"_blank\"}\n          可以在本地机器上进行性能测量，也可以为尚未覆盖的组件添加测试。\n          如果你能在本地部署它，并将你电脑上的运行结果通过\n          [PR 提交给我们](https://github.com/korvin89/gravity-ui-perf/pulls){target=\"_blank\"}，\n          将对我们非常有帮助。\n\n\n          在本文中，我展示了我们如何处理该库的一个示例。但社区反馈对我们\n          非常重要：如果你有某个具体案例，显示 Gravity UI 明显比其他库差，\n          或者你发现我们的测试方法存在问题，欢迎在本文评论区留言，或\n          [创建 issue](https://github.com/gravity-ui/uikit/issues){target=\"_blank\"}\n          一起讨论。另外也别忘了给项目点个星！\n  - type: blog-layout-block\n    resetPaddings: true\n    fullWidth: false\n    children:\n      - type: blog-meta-block\n        column: left\n        resetPaddings: true\n  - type: blog-suggest-block\n    resetPaddings: true\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "initial-en",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageRegionId": 119,
+  "summary": null,
+  "versionId": 275,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 118,
+      "pageId": 109,
+      "locale": "ru",
+      "createdAt": "2026-01-27T13:59:59.588Z",
+      "updatedAt": "2026-01-27T13:59:59.680Z",
+      "publishedVersionId": null,
+      "lastVersionId": 270
+    },
+    {
+      "id": 119,
+      "pageId": 109,
+      "locale": "en",
+      "createdAt": "2026-01-27T13:59:59.694Z",
+      "updatedAt": "2026-01-27T13:59:59.784Z",
+      "publishedVersionId": null,
+      "lastVersionId": 271
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": 274
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 275
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}

@@ -1,0 +1,73 @@
+{
+  "id": 74,
+  "name": "blog/navigation-webinar",
+  "createdAt": "2026-01-19T13:53:21.879Z",
+  "updatedAt": "2026-01-19T13:53:21.879Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 74,
+  "regionCode": "en",
+  "publishedVersionId": 224,
+  "lastVersionId": 224,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#CCDAFF'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n          새 웨비나에서 Gravity UI의 Navigation 라이브러리 메인테이너인\n          안젤리나 가드지예바가 내비게이션이 무엇으로 구성되어 있는지, 어떻게 도입하는지, 그리고 그 주변에는 어떤 컴포넌트들이 있는지 설명합니다.\n          또한 연결(통합) 예시를 보여주고 커뮤니티 채팅의 사용자 질문에 답변합니다.\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        youtube: https://www.youtube.com/watch?v=9J3tuiLq6rA\n        previewImg: >-\n          https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png\n        fullWidth: false\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": "",
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "dark",
+  "comment": "sharing_update",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+  "pageRegionId": 82,
+  "summary": null,
+  "versionId": 224,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 81,
+      "pageId": 74,
+      "locale": "ru",
+      "createdAt": "2026-01-19T13:39:05.982Z",
+      "updatedAt": "2026-01-19T13:39:06.057Z",
+      "publishedVersionId": null,
+      "lastVersionId": 218
+    },
+    {
+      "id": 82,
+      "pageId": 74,
+      "locale": "en",
+      "createdAt": "2026-01-19T13:39:06.069Z",
+      "updatedAt": "2026-01-19T13:39:06.133Z",
+      "publishedVersionId": null,
+      "lastVersionId": 219
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": null
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 224
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}

@@ -1,4 +1,4 @@
-import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
+import {Col, Grid, Row, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Icon, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
@@ -101,7 +101,11 @@ export const Libraries = ({libs}: Props) => {
                                     >
                                         <div className={b('library-header')}>
                                             <h5 className={b('library-title')}>
-                                                <HTML>{lib.config.title}</HTML>
+                                                <YFMWrapper
+                                                    content={lib.config.title}
+                                                    modifiers={{constructor: true}}
+                                                    contentClassName={b('library-title-content')}
+                                                />
                                             </h5>
                                             {lib.metadata.stars ? (
                                                 <div className={b('stars')}>

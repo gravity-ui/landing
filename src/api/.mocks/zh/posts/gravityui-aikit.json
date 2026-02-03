@@ -1,0 +1,23 @@
+{
+  "id": 73,
+  "name": "gravityui-aikit",
+  "isPinned": false,
+  "postId": 73,
+  "description": "一篇关于 AIKit 库发布的文章：我们在开发过程中关注的重点、为什么需要它，以及如何在您自己的项目中使用它。",
+  "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+  "readingTime": 8,
+  "title": "一个聊天统治所有：我们基于 Gravity UI 构建了 AI 助手库",
+  "date": "2025-12-18T00:00:00Z",
+  "likes": 0,
+  "hasUserLike": false,
+  "addLegacyPrefix": false,
+  "tags": [
+    {
+      "icon": null,
+      "slug": "articles",
+      "name": "文章"
+    }
+  ],
+  "authors": [],
+  "services": []
+}

@@ -1,0 +1,73 @@
+{
+  "id": 108,
+  "name": "blog/gravityui-aikit",
+  "createdAt": "2026-01-27T13:57:57.515Z",
+  "updatedAt": "2026-01-27T13:57:57.515Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 108,
+  "regionCode": "en",
+  "publishedVersionId": 268,
+  "lastVersionId": 268,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#2A1A2A'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        resetPaddings: true\n        column: right\n        text: >\n\n          ![image](https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/speaker.jpg\n          =80x)\n\n\n          **伊利亚·洛姆捷夫**\n\n          前端开发工程师\n      - type: blog-yfm-block\n        column: right\n        resetPaddings: true\n        text: |\n\n          本文内容：\n\n            - [我们如何以及为什么做了 AIKit](#why)\n            - [AIKit 架构：我们依托了什么](#architecture)\n            - [如何搭建自己的聊天](#how)\n            - [AIKit 如何影响各个服务](#influence)\n            - [接下来](#further)\n            - [如何试用 AIKit](#try)\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n过去一年我们看到 AI 助手迎来爆发，这也影响到了 Yandex\\_Cloud 的界面：要么在技术支持里出现了接入模型的聊天机器人，要么在控制台里出现了用于日常操作的代理。各团队会接入模型、设计对话逻辑、画 UI 设计、搭建聊天界面——而且都是各自为战。\\n\\n不同团队都基于同一个框架 Gravity UI 来构建界面，但随着变体越来越多，维护统一的用户体验变得困难。同时，大家也越来越频繁地发现，自己在反复花时间解决同样的问题。\\n\\n为了不再每次都重复造轮子，我们把积累的实践沉淀成统一的方法，并做了一个面向 AI 聊天机器人的工具——[@gravity‑ui/aikit](https://github.com/gravity-ui/aikit){target=\\\"_blank\\\"}。它能在几天内创建一个完整的助手界面，并且还能轻松适配不同的场景。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/pic0.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n我叫伊利亚·洛姆捷夫，是 Yandex\\_Cloud Foundation Services 团队的高级开发工程师。在这篇文章里我会讲讲：我们为什么决定打造 AIKit、它的内部结构是什么样、未来的一些计划——以及你可以在自己的项目里试用些什么。\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## 我们如何以及为什么做了 AIKit{#why}\\n\\n过去一年，Yandex\\_Cloud 中带有 AI 助手的服务数量增长了，例如： \\n\\n  * SourceCraft 中的 Code Assistant Chat——助手帮助开发者编写代码；在 AI 代理模式下还能创建与配置仓库、启动 CI/CD 流程、回答文档问题并自动化任务；也能管理 issues、pull requests，并对代码进行操作：解释、创建与编辑文件。\\n\\n  * 云控制台中的 AI 助手——一个用于管理 Yandex\\_Cloud 资源的助手。核心目标是在隐藏与 API 和工具交互复杂性的前提下，帮助用户快速且安全地配置、变更与管理云基础设施。\\n\\n生态里出现了十来个聊天界面，每个都有自己的逻辑、自己的消息格式，以及一套 corner case。 \\n\\n我们发现各团队会遇到一组大致相同的任务。大多数场景需要的是： \\n\\n  * 规范地展示用户与助手消息； \\n\\n  * 正确组织回答的流式输出（streaming）； \\n\\n  * 展示「助手正在输入」指示； \\n\\n  * 处理诸如连接中断或重试等错误。 \\n\\n这些任务本质相同，但解决路径很多，UX 也因此不同。比如聊天历史的放置与展示方式：既可能是一个像菜单一样打开的独立页面，也可能是在 popup 里显示的聊天列表。\\n\\n问题逐渐显现：不同聊天中的体验差异很大。有的地方助手会流式输出答案，有的地方则直接显示完整文本。在一个界面里消息会分组，而在另一个界面里则是连续时间线。这破坏了整体 UX——用户在同一生态的不同产品间切换时，对助手的感受却完全不同。   \\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: 使用 AIKit 构建的聊天示例（浅色主题）\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/pic1.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          另外还明显感觉到，把模型的新特性逐步推到线上变得越来越难。\n          要把例如工具能力、多模态，或工具的结构化输出等能力传递给用户，\n          就需要对齐契约、改造后端，然后再由每个团队分别更新 UI。\n          在这样的条件下，任何变更都耗时很长，而且难以规模化。\n\n\n          我们希望阻止这种变体不断增长的趋势，并恢复可预期性。\n          为此需要统一数据模型与工作模式，提供现成的组件与 hooks，\n          让团队不必从零开始，同时也要保留可定制空间——毕竟每个团队的\n          场景都不一样。\n\n\n          于是我们就有了单独的库 @gravity‑ui/aikit：它是 Gravity UI 的扩展，\n          遵循相同的原则，但面向现代 AI 场景：对话、助手、多模态。\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## AIKit 架构：我们依托了什么{#architecture}\\n\\n在设计 AIKkit 时，我们参考了 [AI\\_SDK](https://ai-sdk.dev/){target=\\\"_blank\\\"} 的经验以及若干基础原则。\\n\\n**以 Atomic Design 为核心**：整个库从原子（atoms）一路搭到页面（pages）。这样的结构带来清晰的层级关系，便于复用组件，并且在需要时可以在任何层级替换或调整行为。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/pic2.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n**完全 SDK 无关（SDK‑agnostic）**：AIKit 不依赖特定的 AI 提供商。你可以使用 OpenAI、Alice\\_AI LLM 或自己的后端——UI 通过 props 接收数据，而状态与请求仍由产品侧负责。 \\n\\n**面向复杂场景的两层使用方式**：既有开箱即用的组件，也提供包含逻辑的 hook，让你可以完全控制 UI。例如，你可以直接用 `PromptInput`，或基于 `usePromptInput` 自行搭建输入框。这样既保持灵活性，又不需要重写底层基础。\\n\\n**可扩展的类型系统**。为了保证一致性与类型安全，我们构建了可扩展的数据模型。消息用统一的类型化结构表示：包含用户消息、助手消息，以及若干基础内容类型——文本（`text`）、模型思考过程（`thinking`）、工具（`tool`）。同时也可以通过 `MessageRendererRegistry` 添加自定义类型。 \\n\\n所有内容都用 TypeScript 进行类型标注，这能帮助更快搭建复杂场景，并在开发阶段避免错误。\\n\\n```javascript\\n// 1. 定义数据类型\\ntype ChartMessageContent = TMessageContent<\\n    'chart',\\n    {\\n        chartData: number[];\\n        chartType: 'bar' | 'line';\\n    }\\n>;\\n// 2. 创建展示组件\\nconst ChartRenderer = ({part}: MessageContentComponentProps<ChartMessageContent>) => {\\n    return <div>图表可视化：{part.data.chartType}</div>;\\n};\\n// 3. 注册渲染器\\nconst customRegistry = registerMessageRenderer(createMessageRendererRegistry(), 'chart', {\\n    component: ChartRenderer,\\n});\\n// 4. 在 AssistantMessage 中使用\\n<AssistantMessage message={message} messageRendererRegistry={customRegistry} />;\\n```\\n\\n最后，我们通过 CSS 变量实现主题化，加入 i18n（RU/EN），保证可访问性（ARIA、键盘导航），并在 Docker 中使用 Playwright Component Testing 配置了视觉回归测试——库也就具备了生产可用状态。\\n\\n### 底层实现 \\n\\nAIKit 的核心是统一的对话模型。要构建它，首先需要理清消息的层级结构。 \\n\\n消息本身是相当多维的实体。来自 LLM 的第一条消息是一个 stream。但在其内部可能包含很多不同的嵌套子消息：本质上是推理、建议、为解决某个问题而发起的 tool 调用。所有这些不同的子消息，实际上是后端发来的同一个消息。但在更简单的 LLM 使用方式中，每个子消息也完全可能是独立的一条消息。 \\n\\n因此我们保留了两种用法：消息可以互相嵌套，也可以是扁平结构——取决于你的需求。\\n\\n状态管理仍由服务侧掌控。AIKit 不自行存储数据——它从外部接收。团队可以使用 React State、Redux、Zustand、Reatom——任何合适的方案。我们只提供封装典型 UI 逻辑的 hooks，例如： \\n\\n  * 通过 `useSmartScroll` 实现智能滚动；\\n\\n  * 通过 `useDateFormatter` 处理日期，例如按 locale 格式化； \\n\\n  * 通过 `useToolMessage` 处理 tool 消息；\\n\\n  * 以及构建对话所需的其他能力。\\n\\n此外，AIKit 仍然保持可扩展。你可以接入任何模型、创建自己的内容类型，并完全按自己的任务构建 UI——既可以复用 hooks 中的逻辑，也可以用现成组件作为基础。该架构允许在不破坏共同原则的前提下进行实验。\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## 如何搭建自己的聊天{#how}\n\n\n          为了创建第一个聊天，我们将使用预置组件 ChatContainer：\n\n\n          ```javascript\n\n          import React, { useState } from 'react';\n\n          import { ChatContainer } from 'aikit';\n\n          import type { ChatType, MessageType } from 'aikit';\n\n\n          function App() {\n              const [messages, setMessages] = useState<MessageType[]>([]);\n              const [chats, setChats] = useState<ChatType[]>([]);\n              const [activeChat, setActiveChat] = useState<ChatType | null>(null);\n\n              const handleSendMessage = async (content: string) => {\n                  // Your message sending logic\n                  const response = await fetch('/api/chat', {\n                      method: 'POST',\n                      body: JSON.stringify({ message: content })\n                  });\n                  const data = await response.json();\n\n                  // Update state\n                  setMessages(prev => [...prev, data]);\n              };\n\n              return (\n            <ChatContainer\n              messages={[]}\n              onSendMessage={() => {}}\n              welcomeConfig={{\n                description: '输入消息或选择一个建议来开始对话。',\n                image: <Icon data={() => {}} size={48}/>,\n                suggestionTitle: '可以尝试问：',\n                suggestions: [\n                  {\n                    id: '1',\n                    title: '用简单的方式解释量子计算'\n                  },\n                  {\n                    id: '2',\n                    title: '写一首关于自然的诗'\n                  },\n                  {\n                    id: '3',\n                    title: '帮我调试 JavaScript 代码'\n                  },\n                  {\n                    id: '4',\n                    title: '总结近期 AI 领域的发展'\n                  }\n                ],\n                title: '欢迎来到 AI 聊天'\n              }}\n          />\n                  \n              );\n          }\n\n          ```\n\n\n          「开箱即用」的效果如下：\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/pic3.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          增添一点节日气氛：\n\n\n          1. 调整初始状态。\n\n              为了更细致地配置，我们用独立组件组装聊天：`Header`、`MessageList`、`PromptBox`。\n\n              ```javascript\n              import { Header, MessageList, PromptBox } from 'aikit';\n              function CustomChat() {\n                  return (\n                      <div className=\"custom-chat\">\n                          <Header title=\"AI Assistant\" onNewChat={() => {}} />\n                          <MessageList messages={messages} showTimestamp />\n                          <PromptBox onSend={handleSend} placeholder=\"随便问点什么...\" />\n                      </div>\n                  );\n              }\n              ```\n\n          2. 使用通过 `MessageType` 导入的不同内置消息类型。\n\n              * `thinking` ——展示 AI 的思考过程（用户可以了解助手如何推导出答案）。\n\n              * `tool` ——适合展示交互式的答案块；在我们的例子里是代码块，语法高亮能正确工作，并支持编辑与复制到剪贴板。\n\n              也可以添加自定义类型，例如带图片的消息：\n\n\n              ```javascript\n              type ImageMessage = BaseMessage<ImageMessageData> & { type: 'image' };\n\n\n              const ImageMessageView = ({ message }: { message: ImageMessage }) => (\n                  <div>\n                      <img src={message.data.imageUrl} />\n                      {message.data.caption && <p>{message.data.caption}</p>}\n                  </div>\n              );\n\n\n              const customTypes: MessageTypeRegistry = {\n                  image: {\n                      component: ImageMessageView,\n                      validator: (msg) => msg.type === 'image'\n                  }\n              };\n\n\n              <ChatContainer messages={messages} messageTypeRegistry={customTypes} />\n              ```\n\n          3. 再通过 CSS 加点样式……\n\n              ……就能得到一个和“杰德·莫罗兹”（俄罗斯版圣诞老人）一起聊天的界面：)\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/pic4.png\n        fullscreen: true\n      - type: blog-colored-text-block\n        column: left\n        resetPaddings: true\n        size: l\n        background:\n          color: '#CCD9FF'\n        text: >\n\n          若要对某些元素进行完全定制，可以使用 hooks ——\n          也欢迎在文章评论区分享你们的样式方案！\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## AIKit 如何影响各个服务{#influence}\\n\\n在 Yandex\\_Cloud 中使用 AIKit 的效果很快就显现出来了。所有服务中的助手行为都变得一致：一致地流式输出回答、一致地展示错误、一致地对消息分组。UX 变得统一，现在在整个生态中更容易交互，行为也更符合预期、更可预测。\\n\\n  * UX 语言实现统一——不同产品里的助手聊天现在更像同一生态的一部分。用户看到可预期的行为：相同的 streaming、错误处理和交互模式。 \\n\\n  * 聊天 UI 的开发速度显著提升。 \\n\\n  * 集中式演进——像 thinking 内容类型或更好的工具处理等新特性只需添加一次，所有团队即可自动获得。 \\n\\n  * 该库成为生态中 AI 界面标准化的基础。\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## 接下来{#further}\n\n\n          再说说计划。我们确定了几个方向：\n\n            * 通过虚拟化提升性能，以支持非常大的聊天历史。\n\n            * 随着 AI 代理能力快速发展，扩展基础场景以适配新的能力。\n\n            * 增加一些工具函数，简化将主流 AI 模型数据映射到我们聊天数据模型的过程。\n\n          另外我们也会持续完善文档与示例。当然还有社区建设——我们希望这个库不仅对公司内部有用，也能帮助到外部开发者。\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## 如何试用 AIKit{#try}\n\n\n          请前往我们网站的\n          [库页面](https://gravity-ui.com/libraries/aikit){target=\"_blank\"}。\n          如果你正在做自己的 AI 助手，想要一个快速且可预测的聊天界面，\n          并且已经在使用 Gravity UI（或愿意尝试），欢迎查看 README 和示例。\n          也非常感谢反馈——欢迎提 issue、提交 PR，并告诉我们你的场景还需要什么！\n\n\n          如果您喜欢我们的项目，欢迎给\n          [AIKit](https://github.com/gravity-ui/aikit){target=\"_blank\"} 和\n          [UIKit](https://github.com/gravity-ui/uikit){target=\"_blank\"} 点个 ⭐️！\n  - type: blog-layout-block\n    resetPaddings: true\n    fullWidth: false\n    children:\n      - type: blog-meta-block\n        column: left\n        resetPaddings: true\n  - type: blog-suggest-block\n    resetPaddings: true\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "initial en",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+  "pageRegionId": 117,
+  "summary": null,
+  "versionId": 268,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 116,
+      "pageId": 108,
+      "locale": "ru",
+      "createdAt": "2026-01-27T13:47:58.059Z",
+      "updatedAt": "2026-01-27T13:47:58.118Z",
+      "publishedVersionId": null,
+      "lastVersionId": 263
+    },
+    {
+      "id": 117,
+      "pageId": 108,
+      "locale": "en",
+      "createdAt": "2026-01-27T13:47:58.121Z",
+      "updatedAt": "2026-01-27T13:47:58.138Z",
+      "publishedVersionId": null,
+      "lastVersionId": 264
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": null
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 268
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}
