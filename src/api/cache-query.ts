@@ -1,4 +1,4 @@
-import {CacheTTL} from './types';
+import {CacheQueryState, CacheTTL} from './types';
 
 type Params<Data> = {
     ttl: CacheTTL;
@@ -11,10 +11,10 @@ export class CacheQuery<Data> {
     private static calculateTTLms(ttl: CacheTTL) {
         return (
             (ttl?.milliseconds ?? 0) +
-                (ttl?.seconds ?? 0) * 1000 +
+                (ttl?.seconds ?? 0) * 1_000 +
                 (ttl?.minutes ?? 0) * 60_000 +
                 (ttl?.hours ?? 0) * 3_600_000 +
-                (ttl?.days ?? 0) * 86_400_000 || 0
+                (ttl?.days ?? 0) * 86_400_000 || Infinity
         );
     }
 
@@ -25,7 +25,7 @@ export class CacheQuery<Data> {
     private _autoRevalidate: boolean;
     private _autoRevalidateInterval: ReturnType<typeof setInterval> | null;
     private _onError: ((error: Error) => void) | null;
-    private _state: 'initial' | 'fresh' | 'stale' | 'fetching' | 'error';
+    private _state: CacheQueryState;
     private _currentQueryPromise: Promise<Data> | null;
 
     constructor(params: Params<Data>) {
@@ -33,53 +33,21 @@ export class CacheQuery<Data> {
 
         this._state = 'initial';
         this._queryFn = queryFn;
-        this._autoRevalidate = autoRevalidate;
-
         this._ttl = CacheQuery.calculateTTLms(cacheTTL);
-
         this._data = null;
         this._cacheTimestamp = null;
-        this._autoRevalidateInterval = null;
         this._currentQueryPromise = null;
+        this._autoRevalidate = autoRevalidate;
 
-        this.changeAutoRevalidate(autoRevalidate);
-        this._onError = onError;
-    }
-
-    changeAutoRevalidate(newAutoRevalidate: boolean) {
-        if (this._autoRevalidateInterval) {
-            clearInterval(this._autoRevalidateInterval);
-        }
-
-        this._autoRevalidate = newAutoRevalidate;
-
-        if (newAutoRevalidate) {
+        if (autoRevalidate) {
             this._autoRevalidateInterval = setInterval(() => {
                 this.revalidate();
             }, this._ttl);
         } else {
             this._autoRevalidateInterval = null;
         }
-    }
 
-    clear() {
-        this._data = null;
-        this._cacheTimestamp = null;
-        this._state = 'stale';
-    }
-
-    reset() {
-        this._data = null;
-        this._cacheTimestamp = null;
-        this._state = 'initial';
-
-        this.changeAutoRevalidate(false);
-    }
-
-    changeTTL(newTTL: CacheTTL) {
-        this._ttl = CacheQuery.calculateTTLms(newTTL) || 0;
-
-        this.changeAutoRevalidate(this._autoRevalidate);
+        this._onError = onError;
     }
 
     async revalidate() {
@@ -102,13 +70,7 @@ export class CacheQuery<Data> {
 
     getState() {
         if (this._state === 'fresh') {
-            if (this._cacheTimestamp === null || this._data === null) {
-                this._state = 'stale';
-
-                return this._state;
-            }
-
-            if (Date.now() - this._cacheTimestamp >= this._ttl) {
+            if (this._cacheTimestamp === null || Date.now() - this._cacheTimestamp >= this._ttl) {
                 this._state = 'stale';
 
                 return this._state;
@@ -124,22 +86,38 @@ export class CacheQuery<Data> {
         return this._state;
     }
 
-    async getData(withoutRevalidate = false) {
-        if (withoutRevalidate) {
-            return this._data;
-        }
+    async getData(params?: {withoutRevalidate?: boolean; immediateResponse?: boolean}) {
+        const {withoutRevalidate = false, immediateResponse = true} = params || {};
 
         const state = this.getState();
 
+        if (state === 'initial') {
+            await this.revalidate();
+
+            return this._data;
+        }
+
         if (state === 'fetching') {
+            if (immediateResponse && this._data) {
+                return this._data;
+            }
+
             return this._currentQueryPromise;
         }
 
         if (state === 'fresh') {
-            return this._data as Data;
+            return this._data;
         }
 
-        await this.revalidate();
+        if (withoutRevalidate) {
+            return this._data;
+        }
+
+        if (immediateResponse) {
+            this.revalidate();
+        } else {
+            await this.revalidate();
+        }
 
         return this._data;
     }

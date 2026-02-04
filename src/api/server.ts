@@ -24,7 +24,7 @@ export class ServerApi {
     private octokit: Octokit;
 
     private contributorsCache: CacheQuery<Contributor[]>;
-    private libsCache: Record<string, CacheQuery<LibWithFullData>>;
+    private libsCache: Record<string, CacheQuery<LibWithFullData>> = {};
     private componentsReadmeCache: Record<string, CacheQuery<string>> = {};
 
     private readonly CONTRIBUTOR_IGNORE_LIST = [
@@ -375,7 +375,7 @@ export class ServerApi {
     }
 
     async fetchLibByIdWithCache(id: string): Promise<LibWithFullData> {
-        const libData = await this.libsCache[id].getData();
+        const libData = await this.libsCache?.[id]?.getData?.();
 
         if (!libData) {
             throw new Error(`Can't find lib with id – ${id}`);
@@ -495,7 +495,7 @@ export class ServerApi {
             });
         }
 
-        const content = await this.componentsReadmeCache[cacheKey].getData();
+        const content = await this.componentsReadmeCache?.[cacheKey]?.getData?.();
 
         if (!content) {
             throw new Error(`Can't find README for ${cacheKey}`);
