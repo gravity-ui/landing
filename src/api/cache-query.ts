@@ -27,7 +27,7 @@ export class CacheQuery<Data> {
     private _currentQueryPromise: Promise<Data> | null;
 
     constructor(params: Params<Data>) {
-        const {ttl: cacheTTL, queryFn, autoRevalidate = false, onError = null} = params;
+        const {ttl: cacheTTL, queryFn, onError = null} = params;
 
         this._state = 'initial';
         this._queryFn = queryFn;
@@ -35,12 +35,6 @@ export class CacheQuery<Data> {
         this._data = null;
         this._cacheTimestamp = null;
         this._currentQueryPromise = null;
-
-        if (autoRevalidate) {
-            setInterval(() => {
-                this.revalidate();
-            }, this._ttl);
-        }
 
         this._onError = onError;
     }
@@ -97,7 +91,8 @@ export class CacheQuery<Data> {
                 return this._data;
             }
 
-            return this._currentQueryPromise;
+            await this._currentQueryPromise;
+            return this._data;
         }
 
         if (state === 'fresh') {
