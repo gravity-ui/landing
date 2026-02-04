@@ -22,8 +22,6 @@ export class CacheQuery<Data> {
     private _queryFn: () => Promise<Data>;
     private _ttl: number;
     private _cacheTimestamp: number | null;
-    private _autoRevalidate: boolean;
-    private _autoRevalidateInterval: ReturnType<typeof setInterval> | null;
     private _onError: ((error: Error) => void) | null;
     private _state: CacheQueryState;
     private _currentQueryPromise: Promise<Data> | null;
@@ -37,14 +35,11 @@ export class CacheQuery<Data> {
         this._data = null;
         this._cacheTimestamp = null;
         this._currentQueryPromise = null;
-        this._autoRevalidate = autoRevalidate;
 
         if (autoRevalidate) {
-            this._autoRevalidateInterval = setInterval(() => {
+            setInterval(() => {
                 this.revalidate();
             }, this._ttl);
-        } else {
-            this._autoRevalidateInterval = null;
         }
 
         this._onError = onError;
