@@ -1,0 +1,114 @@
+import {CacheQueryState, CacheTTL} from './types';
+
+type Params<Data> = {
+    ttl: CacheTTL;
+    queryFn: () => Promise<Data>;
+    autoRevalidate?: boolean;
+    onError?: (error: Error) => void;
+};
+
+export class CacheQuery<Data> {
+    private static calculateTTLms(ttl: CacheTTL) {
+        return (
+            (ttl?.milliseconds ?? 0) +
+                (ttl?.seconds ?? 0) * 1_000 +
+                (ttl?.minutes ?? 0) * 60_000 +
+                (ttl?.hours ?? 0) * 3_600_000 +
+                (ttl?.days ?? 0) * 86_400_000 || Infinity
+        );
+    }
+
+    private _data: Data | null;
+    private _queryFn: () => Promise<Data>;
+    private _ttl: number;
+    private _cacheTimestamp: number | null;
+    private _onError: ((error: Error) => void) | null;
+    private _state: CacheQueryState;
+    private _currentQueryPromise: Promise<Data> | null;
+
+    constructor(params: Params<Data>) {
+        const {ttl: cacheTTL, queryFn, onError = null} = params;
+
+        this._state = 'initial';
+        this._queryFn = queryFn;
+        this._ttl = CacheQuery.calculateTTLms(cacheTTL);
+        this._data = null;
+        this._cacheTimestamp = null;
+        this._currentQueryPromise = null;
+
+        this._onError = onError;
+    }
+
+    async revalidate() {
+        try {
+            this._state = 'fetching';
+            this._cacheTimestamp = Date.now();
+            this._currentQueryPromise = this._queryFn();
+
+            const res = await this._currentQueryPromise;
+            this._data = res;
+
+            this._state = 'fresh';
+        } catch (error) {
+            this._state = 'error';
+            this._onError?.(error as Error);
+        } finally {
+            this._currentQueryPromise = null;
+        }
+    }
+
+    getState() {
+        if (this._state === 'fresh') {
+            if (this._cacheTimestamp === null || Date.now() - this._cacheTimestamp >= this._ttl) {
+                this._state = 'stale';
+
+                return this._state;
+            }
+        }
+
+        if (this._state === 'fetching' && !this._currentQueryPromise) {
+            this._state = 'stale';
+
+            return this._state;
+        }
+
+        return this._state;
+    }
+
+    async getData(params?: {withoutRevalidate?: boolean; immediateResponse?: boolean}) {
+        const {withoutRevalidate = false, immediateResponse = true} = params || {};
+
+        const state = this.getState();
+
+        if (state === 'initial') {
+            await this.revalidate();
+
+            return this._data;
+        }
+
+        if (state === 'fetching') {
+            if (immediateResponse && this._data) {
+                return this._data;
+            }
+
+            await this._currentQueryPromise;
+            return this._data;
+        }
+
+        if (state === 'fresh') {
+            return this._data;
+        }
+
+        if (withoutRevalidate) {
+            return this._data;
+        }
+
+        if (immediateResponse) {
+            this.revalidate();
+        } else {
+            await this.revalidate();
+        }
+
+        return this._data;
+    }
+}

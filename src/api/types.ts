@@ -65,3 +65,13 @@ export type GithubInfo = {
     contributors: Contributor[];
     codeOwners: CodeOwners[];
 };
+
+export type CacheTTL = {
+    milliseconds?: number;
+    seconds?: number;
+    minutes?: number;
+    hours?: number;
+    days?: number;
+};
+
+export type CacheQueryState = 'initial' | 'fresh' | 'stale' | 'fetching' | 'error';

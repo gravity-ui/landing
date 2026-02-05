@@ -8,6 +8,7 @@ import {i18n} from 'next-i18next.config';
 
 import {type LibConfig, libs as libsConfigs} from '../libs';
 
+import {CacheQuery} from './cache-query';
 import type {
     CodeOwners,
     Contributor,
@@ -22,14 +23,9 @@ export class ServerApi {
 
     private octokit: Octokit;
 
-    private readonly CONTRIBUTORS_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
-    private contributorsCache: {data: Contributor[]; timestamp: number} | null = null;
-
-    private readonly LIBS_CACHE_TTL = 60 * 60 * 1000; // 1 hour
-    private libsByIdCache: Record<string, {timestamp: number; lib: LibWithFullData}> = {};
-
-    private readonly COMPONENT_README_CACHE_TTL = 60 * 60 * 1000; // 1 hour
-    private componentReadmeCache: Record<string, {content: string; timestamp: number}> = {};
+    private contributorsCache: CacheQuery<Contributor[]>;
+    private libsCache: Record<string, CacheQuery<LibWithFullData>> = {};
+    private componentsReadmeCache: Record<string, CacheQuery<string>> = {};
 
     private readonly CONTRIBUTOR_IGNORE_LIST = [
         'dependabot',
@@ -59,6 +55,26 @@ export class ServerApi {
             : {auth: process.env.GITHUB_TOKEN};
 
         this.octokit = new Octokit(octokitParams);
+
+        this.libsCache = libsConfigs.reduce<Record<LibConfig['id'], CacheQuery<LibWithFullData>>>(
+            (acc, lib) => {
+                acc[lib.id] = new CacheQuery<LibWithFullData>({
+                    ttl: {hours: 1},
+                    queryFn: () => this.fetchLibById(lib.id),
+                    onError: (error) =>
+                        console.error(`Error updating lib cache for ${lib.id}:`, error),
+                });
+
+                return acc;
+            },
+            {},
+        );
+
+        this.contributorsCache = new CacheQuery<Contributor[]>({
+            ttl: {hours: 24},
+            queryFn: () => this.fetchAllContributors(),
+            onError: (error) => console.error('Error updating contributors cache:', error),
+        });
     }
 
     async getRepositoryContributors(repoOwner: string, repo: string): Promise<Contributor[]> {
@@ -163,34 +179,11 @@ export class ServerApi {
     }
 
     async fetchAllContributorsWithCache(): Promise<Contributor[]> {
-        const now = Date.now();
+        const contributors = await this.contributorsCache.getData();
 
-        if (this.contributorsCache) {
-            const isCacheOutdated =
-                now - this.contributorsCache.timestamp > this.CONTRIBUTORS_CACHE_TTL;
-
-            if (isCacheOutdated) {
-                this.fetchAllContributors()
-                    .then((contributors) => {
-                        this.contributorsCache = {
-                            data: contributors,
-                            timestamp: Date.now(),
-                        };
-                    })
-                    .catch((error) => {
-                        console.error('Error updating contributors cache:', error);
-                    });
-            }
-
-            return this.contributorsCache.data;
+        if (!contributors) {
+            return [];
         }
-
-        const contributors = await this.fetchAllContributors();
-
-        this.contributorsCache = {
-            data: contributors,
-            timestamp: now,
-        };
 
         return contributors;
     }
@@ -382,34 +375,13 @@ export class ServerApi {
     }
 
     async fetchLibByIdWithCache(id: string): Promise<LibWithFullData> {
-        const now = Date.now();
+        const libData = await this.libsCache?.[id]?.getData?.();
 
-        if (this.libsByIdCache[id]) {
-            const isCacheOutdated = now - this.libsByIdCache[id].timestamp > this.LIBS_CACHE_TTL;
-
-            if (isCacheOutdated) {
-                this.fetchLibById(id)
-                    .then((lib) => {
-                        this.libsByIdCache[id] = {
-                            timestamp: Date.now(),
-                            lib,
-                        };
-                    })
-                    .catch((error) => {
-                        console.error(`Error updating lib cache for ${id}:`, error);
-                    });
-            }
-
-            return this.libsByIdCache[id].lib;
+        if (!libData) {
+            throw new Error(`Can't find lib with id – ${id}`);
         }
 
-        const lib = await this.fetchLibById(id);
-        this.libsByIdCache[id] = {
-            timestamp: now,
-            lib,
-        };
-
-        return lib;
+        return libData;
     }
 
     fetchAllLibs(): Promise<LibWithFullData[]> {
@@ -513,34 +485,21 @@ export class ServerApi {
         locale: string;
     }): Promise<string> {
         const cacheKey = `${libId}:${componentId}:${locale}`;
-        const now = Date.now();
 
-        if (this.componentReadmeCache[cacheKey]) {
-            const isCacheOutdated =
-                now - this.componentReadmeCache[cacheKey].timestamp >
-                this.COMPONENT_README_CACHE_TTL;
-
-            if (isCacheOutdated) {
-                this.fetchComponentReadme({readmeUrl, libId, componentId, locale})
-                    .then((content) => {
-                        this.componentReadmeCache[cacheKey] = {
-                            content,
-                            timestamp: Date.now(),
-                        };
-                    })
-                    .catch((error) => {
-                        console.error(`Error updating README cache for ${cacheKey}:`, error);
-                    });
-            }
-
-            return this.componentReadmeCache[cacheKey].content;
+        if (!this.componentsReadmeCache[cacheKey]) {
+            this.componentsReadmeCache[cacheKey] = new CacheQuery<string>({
+                queryFn: () => this.fetchComponentReadme({readmeUrl, libId, componentId, locale}),
+                ttl: {hours: 1},
+                onError: (error) =>
+                    console.error(`Error updating README cache for ${cacheKey}:`, error),
+            });
         }
 
-        const content = await this.fetchComponentReadme({readmeUrl, libId, componentId, locale});
-        this.componentReadmeCache[cacheKey] = {
-            content,
-            timestamp: now,
-        };
+        const content = await this.componentsReadmeCache?.[cacheKey]?.getData?.();
+
+        if (!content) {
+            throw new Error(`Can't find README for ${cacheKey}`);
+        }
 
         return content;
     }
