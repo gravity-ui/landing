@@ -16,4 +16,6 @@ export const SCROLL_TO_TEMPLATES_EVENT = 'templates';
 
 export const GITHUB_UI_KIT_URL = 'https://github.com/gravity-ui/uikit';
 
+export const GITHUB_URL = 'https://github.com/';
+
 export const NEXT_LOCALE_COOKIE = 'NEXT_LOCALE';
