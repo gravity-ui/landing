@@ -100,6 +100,10 @@ $block: '.#{variables.$ns}library';
         }
     }
 
+    &__info-item-icon {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
     &__block {
         padding: 32px;
         margin-top: 16px;
@@ -218,7 +222,7 @@ $block: '.#{variables.$ns}library';
     }
 
     &__info-item-value {
-        margin-top: 2px;
+        margin-top: 4px;
         font-size: 15px;
         line-height: 20px;
         font-weight: 400;

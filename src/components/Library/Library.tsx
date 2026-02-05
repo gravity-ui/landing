@@ -2,6 +2,7 @@ import {Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, Tab, TabList, TabProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
+import {GITHUB_URL} from 'src/constants';
 
 // import issuesIcon from '../../assets/icons/issues.svg';
 import type {LibWithFullData} from '../../api';
@@ -14,6 +15,7 @@ import starIcon from '../../assets/icons/star.svg';
 import storybookIcon from '../../assets/icons/storybook.svg';
 import versionIcon from '../../assets/icons/version.svg';
 import {ContributorList} from '../../components/ContributorList';
+import {GithubButton} from '../../components/GithubButton';
 import {Link} from '../../components/Link';
 import {useLocale} from '../../hooks/useLocale';
 import {availablePlaygrounds} from '../../pages/libraries/[libId]/playground';
@@ -28,8 +30,6 @@ enum TabType {
     Readme = 'readme',
     Changelog = 'changelog',
 }
-
-const GITHUB_URL = 'https://github.com/';
 
 type Props = {
     lib: LibWithFullData;
@@ -59,7 +59,7 @@ export const Library: React.FC<Props> = ({lib}) => {
     const infoList = [
         {
             id: 'stars',
-            title: t('library:stars'),
+            title: t('library:title_star-button'),
             value: lib.metadata.stars,
             icon: starIcon,
         },
@@ -276,9 +276,7 @@ export const Library: React.FC<Props> = ({lib}) => {
                                     {infoList.map((item) => {
                                         const content = (
                                             <React.Fragment>
-                                                <div className={b('info-item-icon')}>
-                                                    <Icon data={item.icon} size={20} />
-                                                </div>
+                                                <Icon data={item.icon} size={20} />
                                                 <div className={b('info-item-content')}>
                                                     <div className={b('info-item-title')}>
                                                         {item.title}
@@ -309,6 +307,27 @@ export const Library: React.FC<Props> = ({lib}) => {
                                                         </div>
                                                     </div>
                                                 </a>
+                                            );
+                                        }
+
+                                        if (item.id === 'stars') {
+                                            return (
+                                                <div key={item.id} className={b('info-item')}>
+                                                    <div className={b('info-item-icon')}>
+                                                        <Icon data={item.icon} size={20} />
+                                                    </div>
+                                                    <div className={b('info-item-content')}>
+                                                        <div className={b('info-item-title')}>
+                                                            {item.title}
+                                                        </div>
+                                                        <div className={b('info-item-value')}>
+                                                            <GithubButton
+                                                                githubId={lib.config.githubId}
+                                                                stars={lib.metadata.stars}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             );
                                         }
 
