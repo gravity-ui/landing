@@ -1,0 +1,87 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Le composant `Card` est utilisé pour diviser le contenu en blocs sémantiques. Essentiellement, il s'agit d'un conteneur pour regrouper du contenu, avec la possibilité de le réduire.
+
+## Utilisation
+
+Le composant existe en quatre types.
+
+![Usage](/static/images/design/Card/Placement.png)
+
+## **Avec thèmes**
+
+![Placement](/static/images/design/Card/Placement1.png)
+
+Les cartes avec thèmes peuvent changer la couleur de fond ou de contour. Elles sont souvent utilisées pour décrire une erreur/un succès d'un bloc ou un avertissement utilisateur. Cette carte est le plus souvent utilisée pour combiner du contenu dans sa couleur par défaut (normal). Le paramètre `theme` spécifie le thème de la carte, tandis que le paramètre `View` détermine si la carte est contourée ou remplie.
+
+Vous avez les options suivantes pour les cartes de ce type (conteneur) :
+
+**View** : Outlined / Filled
+
+**Theme** : Normal, Info, Success, Warning, Danger (couleur)
+
+![theme](/static/images/design/Card/theme.png)
+
+- Normal - l'état de base de la carte avec un contour, utilisé dans la plupart des cas.
+- Info — utilisé pour fournir des informations à l'utilisateur.
+- Success — utilisé pour indiquer des événements avec des résultats positifs.
+- Warning — utilisé pour afficher un avertissement.
+- Danger est un conteneur conçu pour attirer le plus l'attention de l'utilisateur ; il peut être déclenché par une perte de données, une interruption de service, etc.
+
+## **Carte sélectionnable**
+
+![Selectable](/static/images/design/Card/Selectable.png)
+
+Les cartes de cette catégorie vous obligent à choisir parmi l'une des options disponibles. La carte a trois états : normal, sélectionné et survolé.
+
+Vous avez les options suivantes pour les cartes de ce type (`type` = `selection`) :
+
+**selected** : true / false
+
+**disabled** : true / false
+
+## **Surélevé**
+
+Utilisé pour regrouper du contenu, similaire à **Normal** dans le groupe "Avec thèmes". La principale différence est que ce type de carte a une ombre. Nous recommandons de l'utiliser dans les situations où la carte doit être mise en évidence. Par exemple, avec des widgets :
+
+![Raised](/static/images/design/Card/Raised.png)
+
+N'oubliez pas de laisser suffisamment d'espace entre ces cartes pour que l'ombre ne tombe pas sur la carte suivante.
+
+Dans la taille L, la carte a une ombre plus "aérée", donc lors de l'utilisation de cette taille, il est recommandé de choisir un espacement légèrement plus grand entre les cartes par rapport à la taille M.
+
+**type** : `container`;
+
+**view** : `raised`
+
+## **Surélevé avec action**
+
+Similaire à la carte précédente, mais nécessite de cliquer sur la carte. Contrairement à la carte **Raised**, il existe un état de survol mais pas d'état "option sélectionnée", comme dans la carte `Selectable`. Nous recommandons de l'utiliser lorsque vous avez besoin de fournir à l'utilisateur une option de sélection contenant des descriptions détaillées.
+
+Gardez à l'esprit que cliquer dessus redirigera l'utilisateur vers une page imbriquée. Par conséquent, les utilisateurs doivent s'attendre à ce comportement de la carte. (cela doit être clair à partir de la conception de la carte)
+
+![WithActions](/static/images/design/Card/WithActions.png)
+
+Vous avez les options suivantes pour les cartes de ce type (`type` = `action`) :
+
+**disabled** : true / false
+
+## Taille
+
+![Tailles M et L, en utilisant l'exemple de cartes avec une ombre (Raised)](/static/images/design/Card/Size.png)
+
+Tailles M et L, en utilisant l'exemple de cartes avec une ombre (Raised)
+
+Deux tailles sont disponibles : M et L. Le rayon des coins dépend de la taille : rayon L (8px) et rayon 2XL (16px). Le choix de la taille dépend de l'emplacement, du remplissage et de la taille des contrôles de page. Par exemple, si la page utilise la taille L pour les entrées, les boutons et d'autres éléments, la carte doit également être de taille L.
+
+La largeur et la hauteur du composant sont déterminées par son contenu. La taille minimale peut être sélectionnée avec un léger remplissage par rapport au contenu. La taille maximale peut être égale à 100 % de la largeur de la page.
+
+### Cas d'utilisation
+
+![Use case](/static/images/design/Card/Usecase.png)
+
+Exemple d'utilisation de la carte :
+
+1 - thèmes avec remplissage pour informer l'utilisateur,
+
+2 - carte avec un contour pour regrouper du contenu

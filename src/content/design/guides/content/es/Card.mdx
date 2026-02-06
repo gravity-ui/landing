@@ -1,85 +1,87 @@
-El componente Card se usa para dividir el contenido en bloques semánticos. En esencia, es un contenedor para agrupar contenido, con la opción de colapsarlo.
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, manteniendo un tono natural y conservando los componentes MDX, bloques de código y términos técnicos:
+
+El componente `Card` se utiliza para dividir el contenido en bloques semánticos. En esencia, es un contenedor para agrupar contenido, con la opción de colapsarlo.
 
 ## Uso
 
 El componente viene en cuatro tipos.
 
-![Usage](/static/images/design/Card/Placement.png)
+![Uso](/static/images/design/Card/Placement.png)
 
 ## **Con temas**
 
-![Placement](/static/images/design/Card/Placement1.png)
+![Ubicación](/static/images/design/Card/Placement1.png)
 
-Las tarjetas con temas pueden cambiar el color del fondo o del trazo. A menudo se usa para describir el error/éxito de un bloqueo o una advertencia de usuario. Esta tarjeta se usa más comúnmente para combinar contenido en su color predeterminado (normal). El parámetro theme especifica el tema de la tarjeta, mientras que el parámetro View determina si la carta está acariciada o rellena.
+Las tarjetas con temas pueden cambiar el color de fondo o del borde. A menudo se utilizan para describir el error/éxito de un bloque o una advertencia al usuario. Esta tarjeta se usa comúnmente para combinar contenido en su color predeterminado (normal). El parámetro `theme` especifica el tema de la tarjeta, mientras que el parámetro `View` determina si la tarjeta tiene borde o está rellena.
 
-Tienes las siguientes opciones para las tarjetas de este tipo (contenedor):
+Tienes las siguientes opciones para tarjetas de este tipo (contenedor):
 
-**Ver**: Delineado y rellenado
+**View**: `Outlined` / `Filled`
 
-**Tema**: Normal, información, éxito, advertencia, peligro (color)
+**Theme**: `Normal`, `Info`, `Success`, `Warning`, `Danger` (color)
 
-![theme](/static/images/design/Card/theme.png)
+![Tema](/static/images/design/Card/theme.png)
 
-- Normal: el estado básico de la carta con un trazo, que se usa en la mayoría de los casos.
-- Información: se utiliza para proporcionar información al usuario
-- Éxito: se usa para indicar eventos con resultados positivos.
-- Advertencia: se usa para mostrar una advertencia
-- Danger es un contenedor diseñado para atraer la mayor atención del usuario; puede activarse por la pérdida de datos, la interrupción del servicio, etc.
+- `Normal` - el estado básico de la tarjeta con un borde, utilizado en la mayoría de los casos.
+- `Info` — se utiliza para proporcionar información al usuario.
+- `Success` — se utiliza para indicar eventos con resultados positivos.
+- `Warning` — se utiliza para mostrar una advertencia.
+- `Danger` es un contenedor diseñado para captar la mayor atención del usuario; puede activarse por pérdida de datos, interrupción del servicio, etc.
 
 ## **Tarjeta seleccionable**
 
-![Selectable](/static/images/design/Card/Selectable.png)
+![Seleccionable](/static/images/design/Card/Selectable.png)
 
-Las tarjetas de esta categoría requieren que elijas una de las opciones disponibles. La carta tiene tres estados: normal, seleccionada y suspendida.
+Las tarjetas de esta categoría requieren que elijas entre una de las opciones disponibles. La tarjeta tiene tres estados: normal, seleccionado y al pasar el ratón por encima.
 
-Tienes las siguientes opciones para cartas de este tipo (tipo = selección):
+Tienes las siguientes opciones para tarjetas de este tipo (`type` = `selection`):
 
-**seleccionado**: verdadero /falso
+**selected**: `true` / `false`
 
-**deshabilitado**: verdadero /falso
+**disabled**: `true` / `false`
 
-## **Levantado**
+## **Elevada**
 
-Se usa para agrupar contenido, de forma similar a **Normal** en el grupo Con temas. La principal diferencia es que este tipo de carta tiene una sombra. Recomendamos usarla en situaciones en las que sea necesario resaltar la tarjeta. Por ejemplo, con los widgets:
+Se utiliza para agrupar contenido, similar a **Normal** en el grupo Con temas. La principal diferencia es que este tipo de tarjeta tiene una sombra. Recomendamos usarla en situaciones donde la tarjeta necesite ser resaltada. Por ejemplo, con widgets:
 
-![Raised](/static/images/design/Card/Raised.png)
+![Elevada](/static/images/design/Card/Raised.png)
 
-Recuerda dejar suficiente espacio entre estas cartas para que la sombra no caiga sobre la carta contigua.
+Recuerda dejar suficiente espacio entre estas tarjetas para que la sombra no caiga sobre la tarjeta contigua.
 
-En el tamaño L, la tarjeta tiene una «sombra más aireada», por lo que al usar este tamaño, se recomienda elegir un espacio ligeramente mayor entre las tarjetas en comparación con el tamaño M.
+En el tamaño L, la tarjeta tiene una sombra más 'aireada', por lo que al usar este tamaño, se recomienda elegir un espaciado ligeramente mayor entre las tarjetas en comparación con el tamaño M.
 
-**tipo**: contenedor;
+**type**: `container`;
 
-**vista**: elevada
+**view**: `raised`
 
-## **Criado con acción**
+## **Elevada con acción**
 
-Similar a la tarjeta anterior, pero requiere hacer clic en la tarjeta. A diferencia de la **carta** levantada, hay un estado de desplazamiento, pero no un estado de «opción seleccionada», como en la carta seleccionable. Recomendamos usarlo cuando necesite proporcionar al usuario una opción de selección que contenga descripciones detalladas.
+Similar a la tarjeta anterior, pero requiere hacer clic en ella. A diferencia de la tarjeta **Elevada**, tiene un estado al pasar el ratón por encima pero no un estado de "opción seleccionada", como en la tarjeta Seleccionable. Recomendamos usarla cuando necesites proporcionar al usuario una opción de selección que contenga descripciones detalladas.
 
-Ten en cuenta que al hacer clic en él se redirigirá al usuario a una página anidada. Por lo tanto, los usuarios deben esperar este comportamiento de la tarjeta. (debe quedar claro en el diseño de la tarjeta)
+Ten en cuenta que hacer clic en ella redirigirá al usuario a una página anidada. Por lo tanto, los usuarios deben esperar este comportamiento de la tarjeta (debe quedar claro por el diseño de la tarjeta).
 
-![WithActions](/static/images/design/Card/WithActions.png)
+![Con Acciones](/static/images/design/Card/WithActions.png)
 
-Tienes las siguientes opciones para cartas de este tipo (tipo = acción):
+Tienes las siguientes opciones para tarjetas de este tipo (`type` = `action`):
 
-**deshabilitado**: verdadero /falso
+**disabled**: `true` / `false`
 
-## Tamaño 
+## Tamaño
 
-![Sizes M and L, using the example of cards with a shadow (Raised)](/static/images/design/Card/Size.png)
+![Tamaños M y L, usando el ejemplo de tarjetas con sombra (Elevada)](/static/images/design/Card/Size.png)
 
-Tallas M y L, usando el ejemplo de las cartas con una sombra (en relieve)
+Tamaños M y L, usando el ejemplo de tarjetas con sombra (Elevada)
 
-Disponible en dos tamaños: M y L. El radio de las esquinas depende del tamaño: Radio L (8px) y radio 2XL (16px). La elección del tamaño depende de la ubicación, el relleno y el tamaño de los controles de página. Por ejemplo, si la página usa el tamaño L para las entradas, los botones y otros elementos, la tarjeta también debe tener el tamaño L.
+Hay dos tamaños disponibles: M y L. El radio de las esquinas depende del tamaño: radio L (8px) y radio 2XL (16px). La elección del tamaño depende de la ubicación, el relleno y el tamaño de los controles de la página. Por ejemplo, si la página utiliza el tamaño L para entradas, botones y otros elementos, la tarjeta también debería ser de tamaño L.
 
-La anchura y la altura del componente vienen determinadas por su contenido. El tamaño mínimo se puede seleccionar con un ligero relleno del contenido. El tamaño máximo puede ser igual al 100% del ancho de la página.
+El ancho y la altura del componente se determinan por su contenido. El tamaño mínimo se puede seleccionar con un ligero relleno respecto al contenido. El tamaño máximo puede ser igual al 100% del ancho de la página.
 
 ### Casos de uso
 
-![Use case](/static/images/design/Card/Usecase.png)
+![Caso de uso](/static/images/design/Card/Usecase.png)
 
 Ejemplo de uso de la tarjeta:
 
 1 - temas con relleno para informar al usuario,
 
-2: tarjeta con un esquema para agrupar el contenido
+2 - tarjeta con borde para agrupar contenido
