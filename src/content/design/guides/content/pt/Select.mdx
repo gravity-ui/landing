@@ -1,0 +1,175 @@
+Um componente para selecionar um ou um conjunto de valores de uma lista especificada. Quando o usuário clica no controle, uma lista suspensa é aberta com um conjunto de valores para o usuário escolher.
+
+## Casos de uso
+
+![1.png](/static/images/design/Select/select-0001.png)
+
+**Quando usar?**
+
+- Quando você espera que o usuário selecione valores de uma lista especificada.
+
+**Quando evitar?**
+
+- Quando você quer mostrar todos os valores para escolher. Para esses casos de uso, use [Radio](/design/guides/radio), [Checkbox](/design/guides/checkbox) ou Radio Button.
+
+## Opções
+
+**Seleção única**
+
+![2.png](/static/images/design/Select/select-0002.png)
+
+- Use para selecionar um único valor de uma lista.
+- Após o usuário selecionar um valor, a lista suspensa é fechada.
+- O controle exibe o valor selecionado.
+
+**Seleção múltipla**
+
+![3.png](/static/images/design/Select/select-0003.png)
+
+- Use quando você espera que o usuário selecione mais de um valor de uma lista.
+- Na lista, o valor selecionado é marcado com um checkmark à esquerda.
+- O controle exibe os valores selecionados separados por vírgulas.
+- Para fechar a lista suspensa e aplicar os valores selecionados, o usuário clica no espaço em branco fora dela ou no botão de confirmação na lista (se fornecido).
+
+## Tipos
+
+O controle vem em dois tipos: **Normal** e **Clear**, ambos com o mesmo conjunto de funções, mas com aparências diferentes e aplicados dependendo do contexto.
+
+![4.png](/static/images/design/Select/select-0004.png)
+
+**Normal**
+
+- O tipo mais frequentemente usado.
+- A característica distintiva é que o componente tem uma borda de 1 px, e os elementos internos (texto e chevron) têm margens das bordas.
+- Use este componente em formulários onde você precisa separar elementos do formulário usando margens.
+
+**Clear**
+
+- A característica distintiva é que o componente não tem borda, e os elementos internos (texto e chevron) estão alinhados com as bordas do campo de entrada.
+- Use-o quando o tipo Normal cria ruído visual.
+- Usando este tipo, certifique-se de que o significado do componente permaneça claro para o usuário.
+
+## Estrutura
+
+![5.png](/static/images/design/Select/select-0005.png)
+
+1. Rótulo inline
+2. Valor
+3. Ícone de limpar
+4. Chevron
+5. Ícone de erro
+6. Descrição do erro
+
+### Rótulo inline
+
+   ![6.png](/static/images/design/Select/select-0006.png)
+
+   - Um elemento opcional.
+   - Adiciona uma explicação ao nome do campo de seleção.
+   - Pode substituir o rótulo externo no formulário.
+
+### Valor
+
+   ![7.png](/static/images/design/Select/select-0007.png)
+
+   - Um elemento obrigatório.
+   - Por padrão, é uma dica para ajudar o usuário a entender o que pode ser selecionado na lista de valores.
+   - O local onde o valor ou valores selecionados são exibidos.
+
+### Ícone de limpar
+
+   ![8.png](/static/images/design/Select/select-0008.png)
+
+   - Um elemento opcional.
+   - Use-o para limpar rapidamente o componente de valores selecionados ou opções de valor sem invocar a lista suspensa.
+   - Pode aparecer quando pelo menos um valor foi selecionado.
+   - Após a limpeza, o foco permanece no componente.
+   - Muda de cor ao passar o mouse.
+
+### Chevron
+
+   ![9.png](/static/images/design/Select/select-0009.png)
+
+   - Um elemento obrigatório.
+   - Use-o para diferenciar o componente de outros componentes visualmente semelhantes (por exemplo, [TextInput](/design/guides/text-input)), para identificar o componente no formulário.
+   - O componente pode existir apenas com um chevron, por exemplo, quando você precisa de uma visualização compacta.
+   - Apesar da presença de um chevron, toda a área do componente é clicável.
+
+### Ícone de erro
+
+   ![10.png](/static/images/design/Select/select-0010.png)
+
+   - É exibido apenas no estado de Erro Inline.
+   - Funciona em conjunto com uma Tooltip de descrição de erro exibida ao passar o mouse sobre o ícone. Ajuda a manter o usuário informado, economizando espaço.
+
+### Descrição do erro
+
+   ![11.png](/static/images/design/Select/select-0011.png)
+
+   - Aparece apenas no estado de Erro Outline.
+   - A descrição do erro é colocada na parte inferior esquerda do campo quando você precisa exibir imediatamente a causa do erro.
+
+## Estados
+
+Possui vários estados: **Suggest, Default, Hover, Disabled, Active, Inline Error, Outline Error.**
+
+![12.png](/static/images/design/Select/select-0012.png)
+
+1. **Suggest.** Estado inativo, quando o usuário não está interagindo diretamente com o componente e não selecionou nada nele. Neste estado, ele pode sugerir ao usuário o que ele pode selecionar.
+2. **Default.** Estado inativo, quando o usuário não está interagindo diretamente com o componente e já selecionou algo nele. Neste estado, o valor da dica muda para a seleção da lista suspensa.
+3. **Hover.** Estado ativo quando o usuário move o cursor sobre a área do componente.
+4. **Disabled.** Estado inativo do componente quando o usuário não pode interagir com ele.
+5. **Active.** Estado ativo habilitado quando o usuário clicou no controle. Uma lista suspensa é aberta ao clicar.
+6. **Outline error.** Um estado do componente acionado por um erro de validação, que é exibido na parte inferior do campo com uma explicação do que aconteceu.
+7. **Inline error.** Um estado do componente acionado por um erro de validação, mas a explicação do erro não é exibida, apenas um ícone especial. Ao passar o mouse sobre o ícone, uma Tooltip com o erro aparece.
+
+## Tamanhos
+
+![13.png](/static/images/design/Select/select-0013.png)
+
+Existem quatro tamanhos de componente: **S, M, L, XL**.
+
+| Tamanho | Altura | Estilo de texto | Arredondamento |
+| --- | --- | --- | --- |
+| S | 24 | Body 1 | 5 |
+| M | 28 | Body 1 | 6 |
+| L | 36 | Body 1 | 8 |
+| XL | 44 | Body 2 | 10 |
+
+A escolha do tamanho determina a altura e o arredondamento dos cantos do controle, seus paddings e o tamanho do texto.
+
+O raio do canto depende do tamanho e é definido por variáveis.
+
+1. **S.** Use-o onde o controle padrão é muito grande (tabelas, pequenos cards).
+2. **M.** Este é o tamanho principal, use-o na maioria dos formulários e filtros.
+3. **L.** Muito raramente usado.
+4. **XL.** Use-o em ambientes de comunicação, ou seja, sites e landing pages.
+
+## Recomendações de uso
+
+1. **Trabalhando com o campo**
+   - Escolha a **largura do campo** dependendo do tamanho do conteúdo. Por exemplo, você pode tornar o elemento mais largo para valores longos ou seleção múltipla.
+   - Use **um tamanho** com outros componentes complementares no formulário. Se você escolheu trabalhar com M, os outros componentes devem ser do mesmo tamanho.
+   - Use o **ícone de cruz para limpar** a seleção múltipla: é mais conveniente e rápido.
+   - Você não pode alterar a altura do controle. Nós fornecemos apenas o **tamanho fixo do campo**.
+
+2. **Rótulo Outline**
+
+   ![14.png](/static/images/design/Select/select-0014.png)
+
+   - Um nome de campo breve (não deve exceder uma linha).
+   - Ao usá-lo em formulários, alinhe-o com o valor dentro do campo.
+
+3. **Dica com tooltip**
+
+   ![15.png](/static/images/design/Select/select-0015.png)
+
+   - Dica adicional sobre a escolha, exibida ao passar o mouse sobre o ícone de ponto de interrogação.
+   - Use-o quando precisar explicar o rótulo.
+
+4. **Descrição**
+
+   ![16.png](/static/images/design/Select/select-0016.png)
+
+   - Pode ser localizado abaixo do campo ou à direita do campo.
+   - Use-o em casos especiais para fazer esclarecimentos adicionais sobre a escolha ou dar explicações para os valores escolhidos.

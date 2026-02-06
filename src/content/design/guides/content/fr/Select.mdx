@@ -1,0 +1,177 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Un composant pour sélectionner une ou plusieurs valeurs parmi une liste spécifiée. Lorsque l'utilisateur clique sur le contrôle, une liste déroulante s'ouvre avec un ensemble de valeurs parmi lesquelles l'utilisateur peut choisir.
+
+## Cas d'utilisation
+
+![1.png](/static/images/design/Select/select-0001.png)
+
+**Quand l'utiliser ?**
+
+- Lorsque vous attendez de l'utilisateur qu'il sélectionne des valeurs dans une liste spécifiée.
+
+**Quand l'éviter ?**
+
+- Lorsque vous souhaitez afficher toutes les valeurs possibles à sélectionner. Pour de tels cas d'utilisation, utilisez [Radio](/design/guides/radio), [Checkbox](/design/guides/checkbox) ou Radio Button.
+
+## Options
+
+**Sélection unique**
+
+![2.png](/static/images/design/Select/select-0002.png)
+
+- À utiliser pour sélectionner une seule valeur dans une liste.
+- Après que l'utilisateur a sélectionné une valeur, la liste déroulante se ferme.
+- Le contrôle affiche la valeur sélectionnée.
+
+**Sélection multiple**
+
+![3.png](/static/images/design/Select/select-0003.png)
+
+- À utiliser lorsque vous attendez de l'utilisateur qu'il sélectionne plus d'une valeur dans une liste.
+- Dans la liste, la valeur sélectionnée est marquée d'une coche à gauche.
+- Le contrôle affiche les valeurs sélectionnées séparées par des virgules.
+- Pour fermer la liste déroulante et appliquer les valeurs sélectionnées, l'utilisateur clique dans l'espace vide à l'extérieur ou sur le bouton de confirmation dans la liste (si fourni).
+
+## Types
+
+Le contrôle existe en deux types : **Normal** et **Clear**, tous deux ayant le même ensemble de fonctions mais un aspect différent et appliqués en fonction du contexte.
+
+![4.png](/static/images/design/Select/select-0004.png)
+
+**Normal**
+
+- Le type le plus fréquemment utilisé.
+- La caractéristique distinctive est que le composant a une bordure de 1 px, et les éléments à l'intérieur (texte et chevron) ont des marges par rapport aux bords.
+- Utilisez ce composant dans les formulaires où vous avez besoin de séparer les éléments du formulaire à l'aide de marges.
+
+**Clear**
+
+- La caractéristique distinctive est que le composant n'a pas de bordure, et les éléments à l'intérieur (texte et chevron) sont alignés avec les bords du champ de saisie.
+- Utilisez-le lorsque le type Normal crée du bruit visuel.
+- En utilisant ce type, assurez-vous que le sens du composant reste clair pour l'utilisateur.
+
+## Structure
+
+![5.png](/static/images/design/Select/select-0005.png)
+
+1. Étiquette en ligne
+2. Valeur
+3. Icône de suppression
+4. Chevron
+5. Icône d'erreur
+6. Description de l'erreur
+
+### Étiquette en ligne
+
+   ![6.png](/static/images/design/Select/select-0006.png)
+
+   - Un élément optionnel.
+   - Ajoute une explication au nom du champ de sélection.
+   - Peut remplacer l'étiquette externe dans le formulaire.
+
+### Valeur
+
+   ![7.png](/static/images/design/Select/select-0007.png)
+
+   - Un élément obligatoire.
+   - Par défaut, il s'agit d'un indice pour aider l'utilisateur à comprendre ce qui peut être sélectionné dans la liste des valeurs.
+   - L'endroit où la ou les valeurs sélectionnées sont affichées.
+
+### Icône de suppression
+
+   ![8.png](/static/images/design/Select/select-0008.png)
+
+   - Un élément optionnel.
+   - Utilisez-la pour effacer rapidement le composant des valeurs ou options sélectionnées sans ouvrir la liste déroulante.
+   - Elle peut apparaître lorsqu'au moins une valeur a été sélectionnée.
+   - Après l'effacement, le focus reste sur le composant.
+   - Elle change de couleur au survol.
+
+### Chevron
+
+   ![9.png](/static/images/design/Select/select-0009.png)
+
+   - Un élément obligatoire.
+   - Utilisez-le pour différencier le composant d'autres composants visuellement similaires (par exemple, [TextInput](/design/guides/text-input)), pour identifier le composant dans le formulaire.
+   - Le composant peut exister uniquement avec un chevron, par exemple, lorsque vous avez besoin d'une vue compacte.
+   - Malgré la présence d'un chevron, toute la zone du composant est cliquable.
+
+### Icône d'erreur
+
+   ![10.png](/static/images/design/Select/select-0010.png)
+
+   - Elle est affichée uniquement dans l'état d'erreur en ligne.
+   - Elle fonctionne avec une infobulle de description d'erreur affichée au survol de l'icône. Elle aide à informer l'utilisateur tout en économisant de l'espace.
+
+### Description de l'erreur
+
+   ![11.png](/static/images/design/Select/select-0011.png)
+
+   - Elle apparaît uniquement dans l'état d'erreur en contour.
+   - La description de l'erreur est placée en bas à gauche du champ lorsque vous avez besoin d'afficher immédiatement la cause de l'erreur.
+
+## États
+
+Il possède plusieurs états : **Suggest, Default, Hover, Disabled, Active, Inline Error, Outline Error.**
+
+![12.png](/static/images/design/Select/select-0012.png)
+
+1. **Suggest.** État inactif, lorsque l'utilisateur n'interagit pas directement avec le composant et n'y a rien sélectionné. Dans cet état, il peut suggérer à l'utilisateur ce qu'il peut sélectionner.
+2. **Default.** État inactif, lorsque l'utilisateur n'interagit pas directement avec le composant et y a déjà sélectionné quelque chose. Dans cet état, la valeur d'indice est remplacée par la sélection de la liste déroulante.
+3. **Hover.** État actif lorsque l'utilisateur déplace le curseur sur la zone du composant.
+4. **Disabled.** État inactif du composant lorsque l'utilisateur ne peut pas interagir avec lui.
+5. **Active.** État actif activé lorsque l'utilisateur a cliqué sur le contrôle. Une liste déroulante s'ouvre au clic.
+6. **Outline error.** Un état du composant déclenché par une erreur de validation, qui est affiché en bas du champ avec une explication de ce qui s'est passé.
+7. **Inline error.** Un état du composant déclenché par une erreur de validation, mais l'explication de l'erreur ne s'affiche pas, seulement une icône spéciale. Lorsque vous survolez l'icône, une infobulle avec l'erreur apparaît.
+
+## Tailles
+
+![13.png](/static/images/design/Select/select-0013.png)
+
+Il existe quatre tailles de composant : **S, M, L, XL**.
+
+| Taille | Hauteur | Style de texte | Arrondi |
+| --- | --- | --- | --- |
+| S | 24 | Body 1 | 5 |
+| M | 28 | Body 1 | 6 |
+| L | 36 | Body 1 | 8 |
+| XL | 44 | Body 2 | 10 |
+
+Le choix de la taille détermine la hauteur et l'arrondi des coins du contrôle, ses marges intérieures et la taille du texte.
+
+Le rayon des coins dépend de la taille et est défini par des variables.
+
+1. **S.** Utilisez-le lorsque le contrôle standard est trop grand (tableaux, petites cartes).
+2. **M.** C'est la taille principale, utilisez-la dans la plupart des formulaires et filtres.
+3. **L.** Très rarement utilisé.
+4. **XL.** Utilisez-le dans les environnements de communication, c'est-à-dire les sites Web et les pages de destination.
+
+## Recommandations d'utilisation
+
+1. **Travail avec le champ**
+   - Choisissez la **largeur du champ** en fonction de la taille du contenu. Par exemple, vous pouvez rendre l'élément plus large pour les valeurs longues ou la sélection multiple.
+   - Utilisez **une seule taille** avec d'autres composants complémentaires dans le formulaire. Si vous avez choisi de travailler avec M, les autres composants doivent être de la même taille.
+   - Utilisez l'**icône en croix pour effacer** la sélection multiple : c'est plus pratique et rapide.
+   - Vous ne pouvez pas modifier la hauteur du contrôle. Nous fournissons uniquement la **taille fixe du champ**.
+
+2. **Étiquette en contour**
+
+   ![14.png](/static/images/design/Select/select-0014.png)
+
+   - Un nom de champ bref (ne doit pas dépasser une ligne).
+   - Lorsque vous l'utilisez dans des formulaires, alignez-le avec la valeur à l'intérieur du champ.
+
+3. **Indice avec une infobulle**
+
+   ![15.png](/static/images/design/Select/select-0015.png)
+
+   - Indice supplémentaire sur le choix, affiché au survol de l'icône en point d'interrogation.
+   - Utilisez-le lorsque vous avez besoin d'expliquer l'étiquette.
+
+4. **Description**
+
+   ![16.png](/static/images/design/Select/select-0016.png)
+
+   - Peut être située sous le champ ou à droite du champ.
+   - Utilisez-la dans des cas spéciaux pour apporter des clarifications supplémentaires sur le choix ou donner des explications sur les valeurs choisies.
