@@ -1,0 +1,52 @@
+{/* ![Example](/static/images/design/Loader/Example.gif) */}
+
+Um indicador que mostra o progresso de uma tarefa, como carregar, descarregar, processar e assim por diante, até que a interface esteja pronta para interação do usuário. O indicador não mostra progresso mensurável; em vez disso, indica que o processo ainda não foi concluído e está em andamento.
+
+### **Aplicação**
+
+✅ **Quando usar**
+
+1. Quando o carregamento leva mais de 300 ms. O loader não deve ser exibido por intervalos extremamente curtos, pois isso causa um piscar que pode ser desconfortável para o usuário. Se você optar por exibir o loader, evite o efeito de piscar. Se o carregamento levar menos de 300 ms, não exiba nada.
+2. Quando o tipo de conteúdo não pode ser previsto.
+3. Ao usar um loader para carregamento assíncrono, ele deve ser exibido exatamente onde o carregamento está ocorrendo. O carregamento de um único elemento não deve bloquear o restante da interface.
+
+{/* ![Application](/static/images/design/Loader/Application.png) */}
+
+
+🚫 **Quando não usar**
+
+1. Se o tempo de carregamento exceder 10 segundos e a duração exata for conhecida, uma barra de progresso deve ser exibida.
+2. Se o tipo de conteúdo puder ser previsto, considere usar um esqueleto.
+3. Quando o carregamento é iniciado pelo clique de um botão, usar o estado do botão como feedback é suficiente, especialmente em janelas modais.
+
+### Tamanhos
+
+![Sizes](/static/images/design/Loader/Sizes.png)
+
+1. **S** — Tamanho básico. Usado em campos de entrada, janelas pop-up, células de tabela e outras áreas com espaço limitado.
+2. **M** — Tamanho médio, usado em cards e tabelas.
+3. **L** — Tamanho grande, usado em páginas inteiras e janelas modais grandes (dialog).
+
+### Exemplos de aplicações
+
+1. Quando o conteúdo ainda não foi exibido.
+
+   ![Example](/static/images/design/Loader/Example5.png)
+
+2. Sobre o conteúdo se ele estiver sendo atualizado ou modificado. Veja como usar o loader sobre o conteúdo:
+
+   ![Content transparency 30%](/static/images/design/Loader/Example1.png)
+
+   Transparência do conteúdo 30%
+
+   {/* ![Loader on a background layer](/static/images/design/Loader/Example2.png)
+
+   Loader em uma camada de fundo */}
+
+3. Tente evitar sobrepor o loader ao conteúdo se houver espaço para isso.
+
+   ![Example](/static/images/design/Loader/Example3.png)
+
+4. Se a dica fornecer informações úteis, como uma explicação do processo em andamento, ela pode ser incluída. Como o loader já mostra ao usuário que o carregamento está em andamento, nenhuma divulgação adicional é necessária.
+
+   ![Example](/static/images/design/Loader/Example4.png)

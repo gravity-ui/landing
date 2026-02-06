@@ -1,0 +1,52 @@
+{/* ![Beispiel](/static/images/design/Loader/Example.gif) */}
+
+Eine Anzeige, die den Fortschritt einer Aufgabe zeigt, wie z. B. Laden, Entladen, Verarbeiten usw., bis die Benutzeroberfläche für die Benutzerinteraktion bereit ist. Die Anzeige zeigt keinen messbaren Fortschritt an, sondern signalisiert, dass der Prozess noch nicht abgeschlossen ist und noch läuft.
+
+### **Anwendung**
+
+✅ **Wann verwenden**
+
+1. Wenn das Laden länger als 300 ms dauert. Der Loader sollte nicht für extrem kurze Intervalle angezeigt werden, da dies zu einem Blinken führt, das für den Benutzer unangenehm sein kann. Wenn Sie sich entscheiden, den Loader anzuzeigen, vermeiden Sie den Blinkeffekt. Wenn das Laden weniger als 300 ms dauert, zeigen Sie nichts an.
+2. Wenn die Art des Inhalts nicht vorhersehbar ist.
+3. Bei der Verwendung eines Loaders für asynchrones Laden sollte dieser genau dort angezeigt werden, wo das Laden stattfindet. Das Laden eines einzelnen Elements sollte nicht die restliche Benutzeroberfläche blockieren.
+
+{/* ![Anwendung](/static/images/design/Loader/Application.png) */}
+
+
+🚫 **Wann nicht verwenden**
+
+1. Wenn die Ladezeit 10 Sekunden überschreitet und die genaue Dauer bekannt ist, sollte eine Fortschrittsleiste angezeigt werden.
+2. Wenn die Art des Inhalts vorhersehbar ist, sollten Sie ein Skeleton in Betracht ziehen.
+3. Wenn das Laden durch einen Button-Klick ausgelöst wird, ist die Verwendung des Button-Status als Feedback ausreichend, insbesondere in modalen Fenstern.
+
+### Größen
+
+![Größen](/static/images/design/Loader/Sizes.png)
+
+1. **S** — Grundgröße. Wird in Eingabefeldern, Pop-up-Fenstern, Tabellenzellen und anderen Bereichen mit begrenztem Platz verwendet.
+2. **M** — mittlere Größe, wird in Karten und Tabellen verwendet
+3. **L** — große Größe, wird auf ganzen Seiten und großen modalen Fenstern (Dialogen) verwendet
+
+### Anwendungsbeispiele
+
+1. Wenn der Inhalt noch nicht angezeigt wurde.
+
+   ![Beispiel](/static/images/design/Loader/Example5.png)
+
+2. Über dem Inhalt, wenn er aktualisiert oder geändert wird. Hier sehen Sie, wie der Loader über dem Inhalt verwendet wird:
+
+   ![Transparenz des Inhalts 30%](/static/images/design/Loader/Example1.png)
+
+   Transparenz des Inhalts 30%
+
+   {/* ![Loader auf einer Hintergrundebene](/static/images/design/Loader/Example2.png)
+
+   Loader auf einer Hintergrundebene */}
+
+3. Versuchen Sie, das Überlagern des Loaders über dem Inhalt zu vermeiden, wenn dafür Platz vorhanden ist.
+
+   ![Beispiel](/static/images/design/Loader/Example3.png)
+
+4. Wenn der Hinweis nützliche Informationen liefert, z. B. eine Erklärung des laufenden Prozesses, kann er einbezogen werden. Da der Loader dem Benutzer bereits anzeigt, dass das Laden im Gange ist, sind keine zusätzlichen Erklärungen erforderlich.
+
+   ![Beispiel](/static/images/design/Loader/Example4.png)
