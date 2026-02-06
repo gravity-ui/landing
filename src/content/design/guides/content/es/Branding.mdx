@@ -1,195 +1,196 @@
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, manteniendo un tono natural y conservando los componentes MDX, bloques de código y términos técnicos:
+
 # Creación rápida de temas
 
-La personalización rápida te permite cambiar de tema rápidamente y ver un resultado inmediato que puedes usar u optimizar aún más. Simplemente elige algunos colores y todos los controles se ajustarán en consecuencia. Repite el procedimiento para todos los temas compatibles y ya está todo listo.
+La marca rápida te permite cambiar entre temas de forma ágil y ver un resultado inmediato que puedes usar u optimizar. Simplemente elige algunos colores y todos los controles se ajustarán en consecuencia. Repite esto para todos los temas compatibles y estarás listo.
 
 ### Antes de empezar
 
-1. Te recomendamos descargar la última versión de la biblioteca de Figma
-2. Los valores se configuran en la interfaz de administración de variables. Abre la colección Estilos de color y selecciona el grupo Marca
+1. Recomendamos descargar la última versión de la biblioteca de Figma.
+2. Los valores se configuran en la interfaz de gestión de variables. Abre la colección "Color Styles" y selecciona el grupo "Branding".
 
    ![Branding](/static/images/design/Branding/Branding.png)
 
-3. Los resultados se pueden ver cómodamente en la página de marca de Figma. Contiene componentes que utilizan variables de marca, lo que te dará una idea de cómo se verá todo al final.
-4. Recuerde usar estilos de color en los componentes.
+3. Los resultados se pueden ver cómodamente en la página "Branding" de Figma. Contiene componentes que utilizan variables de marca, lo que te dará una idea de cómo se verá todo al final.
+4. Recuerda usar estilos de color en los componentes.
 5. El valor de cada estilo de color está representado por la variable correspondiente.
 
-### 1. Colores base de la marca
+### 1. Colores base de marca
 
 **--g-color-base-background**
 
-Color de fondo de la página. El color más común para un tema claro es el blanco, pero puedes usar cualquier color que desees. Los temas oscuros tienen más opciones, desde tonos grises neutros hasta colores cálidos o fríos.
+Color de fondo de la página. El color más común para un tema claro es el blanco, pero puedes usar el color que prefieras. Los temas oscuros tienen más opciones, desde tonos grises neutros hasta colores cálidos o fríos.
 
 ![background](/static/images/design/Branding/background.png)
 
-**--marca g-color-base**
+**--g-color-base-brand**
 
-Color principal de la marca. Fondo del botón principal, la casilla de verificación, la radio, el interruptor y el tema especial de información sobre herramientas
+Color principal de marca. Fondo para el botón principal, casilla de verificación, radio, interruptor y tema especial de tooltip.
 
 ![Primary brand color](/static/images/design/Branding/PrimaryBrandColor.png)
 
 **--g-color-base-brand-hover**
 
-Coloca el cursor sobre el color principal de la marca. Estamos usando un tono más oscuro, pero también se acepta un color más claro o completamente diferente.
+Color al pasar el ratón sobre el color principal de marca. Usamos un tono más oscuro, pero un color más claro o completamente diferente también es aceptable.
 
 ![Hover](/static/images/design/Branding/Hover.png)
 
-**--selección de marca g-color-base-**
+**--g-color-base-brand-selection**
 
-Capas subyacentes para elementos con semántica «seleccionada»
+Fondos para elementos con semántica de "seleccionado".
 
 ![Selection](/static/images/design/Branding/Selection.png)
 
-**--g-color-base-marca-selección-hover**
+**--g-color-base-brand-selection-hover**
 
-Coloca el cursor sobre el color de los elementos seleccionados. Se usa con menos frecuencia en tareas típicas y con más frecuencia al preparar todos los estados para un nuevo componente o creación de prototipos.
+Color al pasar el ratón sobre los elementos seleccionados. Se usa con menos frecuencia en tareas típicas y más a menudo al preparar todos los estados para un nuevo componente o al prototipar.
 
 ![Selection Hover](/static/images/design/Branding/SelectionHover.png)
 
-**--marca g-color-line**
+**--g-color-line-brand**
 
-Líneas del color de la marca Estado seleccionado en tarjetas, pestañas; color de la ruleta
+Líneas con el color de marca. Estado seleccionado en tarjetas, pestañas; color del spinner.
 
 ![Lines](/static/images/design/Branding/Lines.png)
 
 **--g-color-text-brand**
 
-Textos con colores de marca cuando se usan sin calcos subyacentes
+Textos con el color de marca cuando se usan sin fondos.
 
 ![Text](/static/images/design/Branding/Text.png)
 
-**--g-color-text-heavy**
+**--g-color-text-brand-heavy**
 
-Textos con colores de marca sobre las capas subyacentes. Compense la pérdida de contraste provocada por el uso de una base.
+Textos con el color de marca sobre fondos. Compensa la pérdida de contraste causada por el uso de un fondo.
 
 ![Text Heavy](/static/images/design/Branding/Heavy.png)
 
-**--g-color-text-marca-contraste**
+**--g-color-text-brand-contrast**
 
-Una vez que decidas el color para marcar los controles principales, elige un color que contraste para ellos. Se debe mantener el contraste en todos los temas.
+Una vez que decidas un color para la marca de los controles principales, elige un color contrastante para ellos. El contraste debe mantenerse en todos los temas.
 
-Si el brillo del color de la marca no cambia significativamente al cambiar de tema, puede probar colores con brillo constante: --g-color-text-light-primary y --g-color-text-dark-primary. Si el brillo del color de la marca cambia, prueba con --g-color-text-primary
-o --g-color-text-inverted-primary.
+Si el brillo del color de marca no cambia significativamente al cambiar de tema, puedes probar colores con brillo constante: `--g-color-text-light-primary` y `--g-color-text-dark-primary`. Si el brillo del color de marca cambia, prueba `--g-color-text-primary` o `--g-color-text-inverted-primary`.
 
 ![Contrast](/static/images/design/Branding/Contrast.png)
 
 **--g-color-text-link**
 
-Color del enlace
+Color del enlace.
 
 ![Link color](/static/images/design/Branding/LinkColor.png)
 
 **--g-color-text-link-hover**
 
-Color del enlace al pasar el ratón
+Color del enlace al pasar el ratón.
 
 ![Hover link color](/static/images/design/Branding/HoverLinkColor.png)
 
-**--g-color-text-link-visitado**
+**--g-color-text-link-visited**
 
-Color del enlace visitado
+Color del enlace visitado.
 
 ![Visited link color](/static/images/design/Branding/VisitedLinkColor.png)
 
 **--g-color-text-link-visited-hover**
 
-Color del enlace visitado al pasar el ratón
+Color del enlace visitado al pasar el ratón.
 
 ![Visited link hover color](/static/images/design/Branding/VisitedLinkHoverColor.png)
 
 ### 2. Tipografía
 
-Todos los estilos de texto se enumeran en la columna derecha de la biblioteca, en la sección Estilos locales. Esta sección se muestra si no hay ningún objeto seleccionado. En este caso, se muestran los atributos del objeto seleccionado, no de la biblioteca.
+Todos los estilos de texto se enumeran en la columna derecha de la biblioteca, bajo la sección "Local Styles". Esta sección se muestra si no hay objetos seleccionados. En este caso, se muestran los atributos del objeto seleccionado, no de la biblioteca.
 
 ![Typography](/static/images/design/Branding/Typography1.png)
 
-Para acceder a la interfaz de edición de estilos de texto, haga clic en el icono de configuración situado a la derecha del nombre del estilo.
+Para acceder a la interfaz de edición de estilos de texto, haz clic en el icono de configuración a la derecha del nombre del estilo.
 
 ![Typography](/static/images/design/Branding/Typography2.png)
 
-Los estilos se dividen en tres grupos.
+Los estilos se dividen en tres grupos:
 
 ![Typography](/static/images/design/Branding/Typography3.png)
 
-1. **Cabecera.** Contiene encabezados, subtítulos y estilos de visualización.
-2. **Texto.** Estilos para texto mecanografiado y subtítulos
-3. **Misceláneo.** Estilos para mostrar código y código dentro de texto escrito de forma normal (estilos en línea).
+1.  **Header.** Contiene encabezados, subencabezados y estilos de visualización.
+2.  **Text.** Estilos para texto escrito y subtítulos.
+3.  **Misc.** Estilos para mostrar código y código dentro de texto escrito normal (estilos en línea).
 
-Para los grupos Encabezado y Texto, puede usar una fuente con diferentes grosores. Los encabezados suelen tener un peso de fuente más alto que las fuentes de composición tipográfica.
+Para los grupos "Header" y "Text", puedes usar una fuente con diferentes pesos. Los encabezados suelen tener pesos de fuente más altos que las fuentes de tipografía.
 
-Para el grupo Misc, puede establecer una fuente monoespaciada. Asegúrese de que los estilos en línea se muestran correctamente cuando se incrustan en texto mecanografiado y de que la línea base de la composición tipográfica no se desplaza. De lo contrario, se recomienda elegir un valor adecuado para el parámetro Altura de línea.
+Para el grupo "Misc", puedes establecer una fuente monoespaciada. Asegúrate de que los estilos en línea se muestren correctamente cuando se incrustan en texto escrito y que la línea base de la tipografía no se desplace. De lo contrario, se recomienda elegir un valor adecuado para el parámetro "Line Height".
 
-En el caso de los estilos, se permiten pequeños cambios en los parámetros Tamaño de fuente y Altura de línea. En diferentes tipos de letra, la altura y el ancho de los caracteres pueden variar significativamente y, en algunos casos, es necesario compensar esta variación. Recuerde que algunos estilos de texto se utilizan en tamaños de componentes específicos y que los cambios importantes en los parámetros de estilo pueden provocar que los componentes se muestren incorrectamente. Por lo tanto, al realizar cambios en el tamaño de fuente y la altura de línea, es importante comprobar cómo se muestran los componentes en los diferentes tamaños.
+Para los estilos, se permiten pequeños cambios en los parámetros "Font Size" y "Line Height". En diferentes tipografías, la altura y el ancho de los caracteres pueden variar significativamente, y en algunos casos, esta variación necesita ser compensada. Recuerda que ciertos estilos de texto se utilizan dentro de tamaños de componente específicos, y cambios significativos en los parámetros de estilo pueden hacer que los componentes se muestren incorrectamente. Por lo tanto, al realizar cualquier cambio en "Font Size" y "Line Height", es importante verificar cómo se muestran los componentes en diferentes tamaños.
 
 ### 3. Radio de esquina
 
-Este parámetro se puede configurar en la interfaz de administración de variables. Los valores se encuentran en la colección Border Radius. Este atributo se establece mediante dos grupos de variables: primaria y técnica.
+Este parámetro se puede configurar en la interfaz de gestión de variables. Los valores se encuentran en la colección "Border Radius". Este atributo se establece mediante dos grupos de variables: primarias y técnicas.
 
 ![Corner radius](/static/images/design/Branding/CornerRadius.png)
 
 ### Conjunto primario
 
-Este conjunto de variables coincide con las variables de código. Estos valores se aplican a los controles de los tamaños correspondientes.
+Este conjunto de variables coincide con las variables de código. Estos valores se aplican a los controles de tamaños correspondientes.
 
-- --g-border-radius-s: 3 px
-- --g-border-radius-s: 5 px
-- --g-border-radius-l: 6 px
-- --g-border-radius-l: 8 px
-- --g-border-radius-xl: 10 px
-- --g-border-radius-2xl: 16 px
+*   `--g-border-radius-s`: 3px
+*   `--g-border-radius-s`: 5px
+*   `--g-border-radius-l`: 6px
+*   `--g-border-radius-l`: 8px
+*   `--g-border-radius-xl`: 10px
+*   `--g-border-radius-2xl`: 16px
 
-### Set técnico
+### Conjunto técnico
 
-Se usa solo en Figma para calcular el radio de la esquina del elemento interno en el componente Check Button. Estas son variables etiquetadas como Internas y sus valores deben estar vinculados a los valores del conjunto principal de variables. Para calcular el valor de una variable interna, toma el valor de la variable principal del mismo tamaño y resta 3.
+Se utiliza solo en Figma para calcular el radio de esquina del elemento interno en el componente "Check Button". Estas son variables etiquetadas como "Inner", y sus valores deben vincularse a los valores de las variables del conjunto primario. Para calcular el valor de una variable "Inner", toma el valor de la variable principal del mismo tamaño y resta 3.
 
-Por ejemplo, si --g-border-radius-m se establece en 6 px, el radio M interior se calcula como 6 - 3 = 3 px.
+Por ejemplo, si `--g-border-radius-m` se establece en 6px, entonces el radio "Inner M" se calcula como 6 - 3 = 3px.
 
 ### 4. Colores técnicos
 
-Este grupo contiene los colores de las barras de desplazamiento compatibles con el sistema de diseño. Para garantizar una visualización adecuada de las barras de desplazamiento en temas oscuros en varios navegadores, se recomienda configurarlas en consecuencia.
+Este grupo contiene los colores para las barras de desplazamiento compatibles con el sistema de diseño. Para garantizar una visualización correcta de las barras de desplazamiento en temas oscuros en varios navegadores, se recomienda configurarlas en consecuencia.
 
-Variables de este grupo:
+Variables en este grupo:
 
-- --g-color-scroll-track
-- --g-color-scroll-handle
-- --g-color-scroll-handle-hover
-- --esquina de desplazamiento de color g
+*   `--g-color-scroll-track`
+*   `--g-color-scroll-handle`
+*   `--g-color-scroll-handle-hover`
+*   `--g-color-scroll-corner`
 
-# Configuración avanzada del tema
+# Configuración avanzada de temas
 
-### Ajuste de color privado
+### Ajuste privado de colores
 
-Si quieres ajustar un tono de color específico para que se alinee con los colores de la marca, usa una paleta privada. Los colores privados se configuran en la interfaz de administración de variables de la colección Private Colors.
+Si deseas ajustar un tono de color específico para que coincida con los colores de marca, utiliza una paleta privada. Los colores privados se configuran en la interfaz de gestión de variables bajo la colección "Private Colors".
 
 ![Private color tuning](/static/images/design/Branding/PrivateColorTuning.png)
 
 Colores cromáticos básicos:
 
-- Azul
-- Verde
-- rojo
-- Amarillo
-- naranja
-- Gris frío
-- Morado
+*   Azul
+*   Verde
+*   Rojo
+*   Amarillo
+*   Naranja
+*   Gris frío
+*   Morado
 
-Es posible que sea necesario ajustar cualquiera de ellos (o todos a la vez) para que coincidan con los colores de la marca. Para preparar una paleta lista para su entrega al desarrollo, utilice un [script](https://preview.gravity-ui.com/uikit/?path=/docs/branding-palette-generator--docs). Deberás transferir la salida del script a Figma.
+Cualquiera de ellos (o todos a la vez) puede necesitar ser ajustado para que coincida con los colores de marca. Para preparar una paleta lista para entregar al desarrollo, utiliza un [script](https://preview.gravity-ui.com/uikit/?path=/docs/branding-palette-generator--docs). Necesitarás transferir la salida del script a Figma.
 
-Si se ha modificado el fondo de la página (o el fondo del tema que contrasta), genere nuevos tonos sólidos para blanco y negro.
+Si el fondo de la página (o el fondo en el tema contrastante) ha sido modificado, genera nuevos tonos sólidos para blanco y negro.
 
 Cuando se realizan cambios en la paleta privada, los colores semánticos también se actualizan automáticamente.
 
-### Ajuste semántico del color
+### Ajuste de color semántico
 
-Si los valores de las variables privadas no se alinean con el lenguaje visual de la marca, puedes ajustar los valores de los colores semánticos. Se configuran en la interfaz de variables de la colección Estilos de color.
+Si los valores de las variables privadas no se alinean con el lenguaje visual de la marca, puedes ajustar los valores de los colores semánticos. Estos se configuran en la interfaz de variables de la colección de Estilos de Color.
 
-![Semantic color tuning](/static/images/design/Branding/SemanticColorTuning.png)
+![Ajuste de color semántico](/static/images/design/Branding/SemanticColorTuning.png)
 
-Tenga en cuenta lo siguiente:
+Por favor, ten en cuenta lo siguiente:
 
 1. Asegúrate de usar colores privados que coincidan con el tema correspondiente.
-2. La sustitución de colores privados por un canal alfa con colores sólidos (y viceversa) puede causar problemas.
-3. Los cambios en las variables semánticas se aplicarán automáticamente a los estilos de color y a los componentes que las utilizan.
+2. Reemplazar colores privados con un canal alfa por colores sólidos (y viceversa) puede causar problemas.
+3. Los cambios en las variables semánticas se aplicarán automáticamente a los estilos de color y a los componentes que los utilicen.
 
 # Sincronización con el desarrollo
 
-Por el momento, la sincronización de temas entre la biblioteca de Figma y el código se realiza manualmente. [Antes de la transferencia del desarrollo, las variables CSS deben prepararse de acuerdo con las instrucciones.](https://preview.gravity-ui.com/uikit/?path=/docs/branding-overview--docs)
+Por el momento, la sincronización de temas entre la biblioteca de Figma y el código se realiza manualmente. Antes de la entrega al equipo de desarrollo, las variables CSS deben prepararse según las [instrucciones](https://preview.gravity-ui.com/uikit/?path=/docs/branding-overview--docs).

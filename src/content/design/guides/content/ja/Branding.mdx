@@ -1,0 +1,194 @@
+# クイックテーマ作成
+
+クイックブランディングを使用すると、テーマを素早く切り替えて、すぐに使用できる、またはさらに最適化できる結果を確認できます。数色を選択するだけで、すべてのコントロールがそれに応じて調整されます。サポートされているすべてのテーマでこれを繰り返し、準備完了です。
+
+### 開始する前に
+
+1. Figmaライブラリの最新バージョンをダウンロードすることをお勧めします。
+2. 値は、変数管理インターフェイスで設定されます。「Color Styles」コレクションを開き、「Branding」グループを選択します。
+
+   ![Branding](/static/images/design/Branding/Branding.png)
+
+3. 結果は、Figmaの「Branding」ページで便利に確認できます。このページには、ブランド変数が使用されているコンポーネントが含まれており、最終的にどのように見えるかのアイデアを得ることができます。
+4. コンポーネントでカラー スタイルを使用することを忘れないでください。
+5. 各カラー スタイルの値は、対応する変数によって表されます。
+
+### 1. 基本ブランドカラー
+
+**--g-color-base-background**
+
+ページの背景色。ライトテーマで最も一般的な色は白ですが、好きな色を使用できます。ダークテーマには、ニュートラルなグレーシェードからウォームまたはクールな色まで、より多くのオプションがあります。
+
+![background](/static/images/design/Branding/background.png)
+
+**--g-color-base-brand**
+
+プライマリブランドカラー。メインボタン、チェックボックス、ラジオ、スイッチ、および特別なツールチップテーマの背景色。
+
+![Primary brand color](/static/images/design/Branding/PrimaryBrandColor.png)
+
+**--g-color-base-brand-hover**
+
+プライマリブランドカラーのホバーカラー。より暗いシェードを使用していますが、より明るい色や完全に異なる色も許容されます。
+
+![Hover](/static/images/design/Branding/Hover.png)
+
+**--g-color-base-brand-selection**
+
+「選択済み」セマンティクスを持つ要素のアンダーレイ。
+
+![Selection](/static/images/design/Branding/Selection.png)
+
+**--g-color-base-brand-selection-hover**
+
+選択された要素のホバーカラー。一般的なタスクではあまり使用されませんが、新しいコンポーネントのすべての状態を準備したり、プロトタイピングしたりする際にはより頻繁に使用されます。
+
+![Selection Hover](/static/images/design/Branding/SelectionHover.png)
+
+**--g-color-line-brand**
+
+ブランドカラーの線。カード、タブの選択状態。スピナーの色。
+
+![Lines](/static/images/design/Branding/Lines.png)
+
+**--g-color-text-brand**
+
+アンダーレイなしで使用されるブランドカラーのテキスト。
+
+![Text](/static/images/design/Branding/Text.png)
+
+**--g-color-text-brand-heavy**
+
+アンダーレイの上に表示されるブランドカラーのテキスト。アンダーレイの使用によるコントラストの低下を補います。
+
+![Text Heavy](/static/images/design/Branding/Heavy.png)
+
+**--g-color-text-brand-contrast**
+
+メインコントロールのブランディングに色を決定したら、それらのためのコントラストカラーを選択します。コントラストは、すべてのテーマで維持される必要があります。
+
+テーマを切り替えたときにブランドカラーの明るさが大幅に変化しない場合は、明るさが一定の色（`--g-color-text-light-primary` および `--g-color-text-dark-primary`）を試すことができます。ブランドカラーの明るさが変化する場合は、`--g-color-text-primary` または `--g-color-text-inverted-primary` を試してください。
+
+![Contrast](/static/images/design/Branding/Contrast.png)
+
+**--g-color-text-link**
+
+リンクの色。
+
+![Link color](/static/images/design/Branding/LinkColor.png)
+
+**--g-color-text-link-hover**
+
+ホバー時のリンクの色。
+
+![Hover link color](/static/images/design/Branding/HoverLinkColor.png)
+
+**--g-color-text-link-visited**
+
+訪問済みリンクの色。
+
+![Visited link color](/static/images/design/Branding/VisitedLinkColor.png)
+
+**--g-color-text-link-visited-hover**
+
+訪問済みリンクのホバー時の色。
+
+![Visited link hover color](/static/images/design/Branding/VisitedLinkHoverColor.png)
+
+### 2. タイポグラフィ
+
+すべてのテキストスタイルは、ライブラリの右列にある「Local Styles」セクションにリストされています。このセクションは、オブジェクトが選択されていない場合に表示されます。この場合、選択されたオブジェクトの属性ではなく、ライブラリの属性が表示されます。
+
+![Typography](/static/images/design/Branding/Typography1.png)
+
+テキストスタイルの編集インターフェイスにアクセスするには、スタイル名の右側にある設定アイコンをクリックします。
+
+![Typography](/static/images/design/Branding/Typography2.png)
+
+スタイルは3つのグループに分かれています。
+
+![Typography](/static/images/design/Branding/Typography3.png)
+
+1.  **Header.** 見出し、副見出し、およびディスプレイ スタイルが含まれます。
+2.  **Text.** 入力テキストおよびキャプションのスタイル。
+3.  **Misc.** コードの表示および通常の入力テキスト内のコード（インライン スタイル）のスタイル。
+
+Header および Text グループでは、さまざまな太さを持つ 1 つのフォントを使用できます。見出しは通常、組版フォントよりも高いフォントの太さを持っています。
+
+Misc グループでは、等幅フォントを設定できます。インライン スタイルが入力テキスト内に埋め込まれたときに正しく表示され、組版のベースラインがずれていないことを確認してください。そうでない場合は、Line Height パラメータに適した値を選択することをお勧めします。
+
+スタイルについては、Font Size および Line Height パラメータのマイナーな変更が許可されます。異なる書体では、文字の高さと幅が大きく異なる場合があり、場合によってはこのバリエーションを補う必要があります。特定のテキストスタイルが特定のコンポーネントサイズ内で使用されていることを覚えておいてください。スタイルパラメータに大幅な変更を加えると、コンポーネントが正しく表示されなくなる可能性があります。したがって、Font Size および Line Height に変更を加える際は、さまざまなサイズでコンポーネントがどのように表示されるかを確認することが重要です。
+
+### 3. 角丸半径
+
+このパラメータは、変数管理インターフェイスで設定できます。値は「Border Radius」コレクションで見つけることができます。この属性は、プライマリとテクニカルの 2 つの変数グループによって設定されます。
+
+![Corner radius](/static/images/design/Branding/CornerRadius.png)
+
+### プライマリセット
+
+この変数セットは、コード変数に対応しています。これらの値は、対応するサイズのコントロールに適用されます。
+
+- --g-border-radius-s: 3px
+- --g-border-radius-s: 5px
+- --g-border-radius-l: 6px
+- --g-border-radius-l: 8px
+- --g-border-radius-xl: 10px
+- --g-border-radius-2xl: 16px
+
+### テクニカルセット
+
+Figma のみで使用され、Check Button コンポーネントの内部要素の角丸半径を計算します。これらは Inner とラベル付けされた変数であり、その値はプライマリ変数セットの値にリンクされている必要があります。Inner 変数の値を計算するには、同じサイズのメイン変数の値から 3 を引きます。
+
+たとえば、`--g-border-radius-m` が 6px に設定されている場合、Inner M の半径は 6 - 3 = 3px として計算されます。
+
+### 4. テクニカルカラー
+
+このグループには、デザインシステムでサポートされているスクロールバーの色が含まれています。さまざまなブラウザでダークテーマのスクロールバーが正しく表示されるようにするには、それらを適切に設定することをお勧めします。
+
+このグループの変数:
+
+- --g-color-scroll-track
+- --g-color-scroll-handle
+- --g-color-scroll-handle-hover
+- --g-color-scroll-corner
+
+# 高度なテーマ設定
+
+### プライベートカラーチューニング
+
+特定のカラーシェードをブランドカラーに合わせて調整したい場合は、プライベートパレットを使用します。プライベートカラーは、変数管理インターフェイスの「Private Colors」コレクションで設定されます。
+
+![Private color tuning](/static/images/design/Branding/PrivateColorTuning.png)
+
+基本的なクロマティックカラー:
+
+- Blue
+- Green
+- Red
+- Yellow
+- Orange
+- Cold gray
+- Purple
+
+これらのいずれか（またはすべてを同時に）をブランドカラーに合わせて調整する必要がある場合があります。開発に引き渡す準備ができたパレットを作成するには、[スクリプト](https://preview.gravity-ui.com/uikit/?path=/docs/branding-palette-generator--docs)を使用します。スクリプトの出力を Figma に転送する必要があります。
+
+ページ背景（またはコントラストテーマの背景）が変更された場合は、黒と白の新しいソリッドシェードを生成します。
+
+プライベートパレットに変更が加えられると、セマンティックカラーも自動的に更新されます。
+
+### セマンティックカラーチューニング
+
+プライベート変数の値がブランドのビジュアル言語と一致しない場合は、セマンティックカラーの値を調整できます。これらは、Color Styles コレクションの variables インターフェースで設定されます。
+
+![セマンティックカラーの調整](/static/images/design/Branding/SemanticColorTuning.png)
+
+以下の点にご注意ください。
+
+1. 対応するテーマに一致するプライベートカラーを使用してください。
+2. アルファチャンネルを持つプライベートカラーをソリッドカラーに置き換えたり（その逆も同様）、その逆を行ったりすると問題が発生する可能性があります。
+3. セマンティック変数の変更は、それらを使用する colorstyles およびコンポーネントに自動的に適用されます。
+
+# 開発との同期
+
+現時点では、Figma ライブラリとコード間のテーマ同期は手動で行われています。開発への引き渡し前に、[指示](https://preview.gravity-ui.com/uikit/?path=/docs/branding-overview--docs)に従って CSS 変数を準備する必要があります。
