@@ -1,0 +1,77 @@
+Ihr Serviceteam kann das Changelog verwenden, um Benutzer über Änderungen zu informieren.
+
+Das Changelog wird einmal angezeigt, wenn der Benutzer die Service-Seite öffnet. Wir bieten keine Option, die Changelog-Seite erneut zu öffnen. Implementieren Sie dies bei Bedarf eigenständig.
+
+Da das Changelog in einem Modalfenster angezeigt wird, gelten die Regeln für das Schließen und Skalieren von Modalfenstern.
+
+## Elemente
+
+Das Changelog ist ein Modalfenster der Größe M mit chronologisch angeordneten Beiträgen. Jeder Beitrag enthält:
+
+1. Veröffentlichungsdatum
+2. "Neu" [Label](https://gravity-ui.com/design/guides/label) (optional)
+3. Beitragsüberschrift
+4. Beitragsbild (optional)
+5. Beitragstext
+6. Aktions- [Button](https://gravity-ui.com/design/guides/button) (optional).
+
+![Elements](/static/images/design/ChangelogDialog/ChangelogDialog1.png)
+
+### Veröffentlichungsdatum
+
+Anhand des Veröffentlichungsdatums kann der Benutzer erkennen, wann eine bestimmte Änderung am Service vorgenommen wurde. Standardmäßig hat das Datum das Format TT Mon JJJJ. Sie können auch andere Datumsformate verwenden, um sie an das Service-Locale anzupassen.
+
+### Label
+
+Verwenden Sie das "Neu"-Label für neue Beiträge. Der Service bestimmt, welche Beiträge als neu gelten und mit diesem Label gekennzeichnet werden. Im Text können Sie auch andere Formulierungen als "Neu" verwenden.
+
+### Beitragsüberschrift
+
+Die Beitragsüberschrift dient zur kurzen Beschreibung der Service-Änderung. Die Überschrift kann beliebig lang sein. Wir empfehlen nicht:
+
+- Überschriften zu verwenden, die mehr als eine Zeile einnehmen (mehr als 70 Zeichen enthalten), da dies die Lesbarkeit des Textes beeinträchtigt.
+- Den Nachrichtentext in die Überschrift zu kopieren.
+
+Die Überschrift verwendet den Stil `text-subheader-3`. Wir stellen keine anderen Textstile für Überschriften bereit.
+
+### Bild
+
+Das Bild ist optional und hat feste Abmessungen von 516x240px. Sie können JPG- und PNG-Dateien als Bilder verwenden (GIF-Bilder und Videodateien werden nicht unterstützt). Verwenden Sie Bilder, wenn Sie das Thema des Beitrags veranschaulichen müssen. Ein Bild wird sowohl für helle als auch für dunkle Interface-Designs verwendet.
+
+Wenn Sie ein Bild hochladen, das größer als 516x240px ist, wird es skaliert und auf der größeren Seite zentriert.
+
+Unter Berücksichtigung von Retina-Displays empfehlen wir, Bilder doppelt so groß hochzuladen, d. h. 1032x480px.
+
+### Beitragstext
+
+Der Beitragstext folgt dem Bild und kann beliebig lang sein. Wir empfehlen nicht:
+
+- Sehr lange Texte zu verwenden (mehr als 500 Zeichen). Wenn Sie den Text nicht auf die empfohlene Länge kürzen können, können Sie Links zur Dokumentation innerhalb des Textes hinzufügen oder nach dem Text einen Button bereitstellen, um zum vollständigen Text zu navigieren.
+- Unterüberschriften zu erstellen. Da die empfohlene Textlänge kurz ist, müssen Sie den Text nicht mit Unterüberschriften in Abschnitte unterteilen.
+
+Der Text verwendet den Stil `text-body-1`. Wir stellen keine anderen Textstile bereit, aber Sie können Formatierungen hinzufügen, d. h. Aufzählungs- und nummerierte Listen erstellen, durchgestrichenen, unterstrichenen, fetten und kursiven Text verwenden.
+
+### Aktionsbutton
+
+Der Aktionsbutton ist optional und befindet sich unter dem Beitragstext. Verwenden Sie ihn, um zum vollständigen Text des Beitrags zu navigieren.
+
+Es werden nur Buttons der Größe M unterstützt. Der Button kann von beliebigem Typ sein, mit oder ohne Icon. Halten Sie sich an einen einzigen Button-Typ.
+
+Wir unterstützen keine mehreren Buttons.
+
+### Weitere Elemente
+
+Darüber hinaus können Sie unter der Überschrift des Modalfensters einen Link "Vollständiges Changelog anzeigen" zu einer Changelog-Seite hinzufügen (dies kann eine separate Service-Seite, ein Storybook oder ein externer Dokumentationsservice sein).
+
+## Nutzungsempfehlungen
+
+Verwenden Sie das Changelog:
+
+- Wenn Sie den Benutzer über wesentliche Änderungen am Service informieren müssen.
+- Wenn Sie den Benutzer über kleinere Änderungen auf dem Laufenden halten müssen. In diesem Fall sollten Sie erwägen, das Changelog periodisch anzuzeigen und über alle kleineren Änderungen seit dem letzten Changelog-Eintrag zu berichten.
+- Wenn Sie den Benutzer an Änderungen im Service erinnern und sein Bewusstsein für frühere Versionen erhöhen müssen.
+
+Wir empfehlen nicht:
+
+- Das Changelog für das Onboarding von Benutzern zu verwenden.
+- Das Changelog zu verwenden, um den Benutzer über jede kleine Änderung im Service zu informieren.
