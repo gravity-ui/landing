@@ -1,0 +1,104 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Un popover est une infobulle qui apparaît au survol ou au clic sur un élément, ou lors de la mise au point d'un élément à l'aide du clavier.
+
+Il est utilisé pour fournir un contexte ou des détails supplémentaires sans quitter l'écran actuel. Le popover améliore l'expérience utilisateur en offrant un accès rapide aux informations requises sans encombrer l'interface principale.
+
+## Types de popover
+
+### Info
+
+À utiliser dans les interfaces classiques
+
+![1.png](/static/images/design/Popover/popover-0001.png)
+
+### Spécial
+
+À utiliser dans les promotions
+
+![2.png](/static/images/design/Popover/popover-0002.png)
+
+### **Annonce**
+
+À utiliser pour une mise en évidence modérée dans les annonces et les notifications
+
+![3.png](/static/images/design/Popover/popover-0003.png)
+
+## Paramètres
+
+Les paramètres ci-dessous peuvent être configurés pour tous les types de Popover : Info, Spécial et Annonce :
+
+- Tailles
+- Type de contenu
+- Positionnement
+- Bouton "Fermer"
+- Méthode d'ouverture et de fermeture
+- Délai
+
+### **Tailles**
+
+Les tailles des composants varient en taille de police et en marges par rapport aux bords. La largeur et la hauteur du composant s'adaptent au contenu.
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      **S** a une taille de police de 13 px et des marges latérales de 16 px
+
+      ![4.png](/static/images/design/Popover/popover-0004.png)
+   </div>
+   <div className="col-12 col-md-6">
+      **L** a une taille de police de 15 px et des marges latérales de 24 px
+
+      ![5.png](/static/images/design/Popover/popover-0005.png)
+   </div>
+</div>
+
+### Type de contenu
+
+Le composant prend en charge les éléments suivants :
+
+1. En-tête
+2. Description
+3. Boutons d'action (vous pouvez utiliser un ou deux boutons, et intervertir les boutons)
+4. Icône de fermeture
+5. Épingle (queue) est un indicateur supplémentaire d'un lien vers l'élément de l'interface. Elle aide lorsqu'il y a beaucoup d'éléments autour, et que vous devez attirer l'attention de l'utilisateur sur un élément spécifique.
+
+![6.png](/static/images/design/Popover/popover-0006.png)
+
+### Positionnement
+
+Le popover peut apparaître sur différents côtés de l'élément en fonction de sa position dans l'interface. Si vous utilisez l'épingle, elle sera dirigée vers le centre de l'élément de l'interface.
+
+### Bouton "Fermer"
+
+Utilisez le bouton "Fermer" pour fermer le popover si vous le déclenchez par un clic plutôt que par survol ou mise au point de l'élément de l'interface.
+
+![7.png](/static/images/design/Popover/popover-0007.png)
+
+### Méthode d'ouverture et de fermeture
+
+- **Au survol de l'élément**
+   Dans ce cas, le composant disparaît lorsque l'utilisateur quitte la zone de survol de l'élément.
+- **Au clic sur l'élément**
+   Utilisez une icône en croix pour fermer le composant dans ce cas.
+- **Au focus de l'élément à l'aide du clavier**
+   Le popover disparaît lorsque l'élément perd le focus.
+- **Peut s'ouvrir spontanément**
+   Lorsque l'utilisateur arrive sur la page, le Popover est déjà ouvert. Convient aux popovers dans les publicités et les tutoriels. Utilisez l'icône en croix pour fermer le composant.
+- **En réponse à des actions dans l'interface**
+   Par exemple, dans un parcours d'intégration, lorsque vous fournissez une série de popovers.
+
+### Délai
+
+- **Sans délai d'apparition et de disparition**
+   Le popover s'ouvrira et se fermera instantanément. Convient aux popovers simples et classiques.
+- **Avec un délai d'apparition et de disparition**
+   Utilisez un délai d'apparition si votre page contient de nombreux éléments qui déclenchent des popovers. Cela permet d'éviter les survols accidentels d'éléments et les popovers indésirables. Utilisez le délai de fermeture si l'infobulle contient des boutons. Dans ce cas, l'utilisateur peut déplacer le curseur vers le bouton avant que l'infobulle ne se ferme.
+- **Avec un délai de disparition**
+   Utilisez cette option lorsque vous n'avez pas besoin de délai d'apparition, mais que votre popover contient des boutons.
+
+## Cas particuliers
+
+Dans la plupart des cas, le popover est un bon choix pour fournir des informations supplémentaires. Cependant, dans certains cas, d'autres composants devraient être préférés.
+
+- Si vous avez une infobulle complexe et que le nombre d'éléments pris en charge dans le composant Popover n'est pas suffisant, vous pouvez concevoir l'infobulle en vous basant sur le composant [Popup](/design/guides/popup).
+- Si vous devez fournir à l'utilisateur une explication ou des informations supplémentaires sur une action au clic sur un bouton, évitez le Popover. Utilisez plutôt [Action Tooltip](/design/guides/action-tooltip) ou [Tooltip](/design/guides/tooltip).

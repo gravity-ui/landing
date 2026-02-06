@@ -1,0 +1,104 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+Ein Popover ist ein Tooltip, der beim Überfahren oder Klicken auf ein Element oder beim Fokussieren eines Elements mit der Tastatur erscheint.
+
+Es wird verwendet, um Kontext oder zusätzliche Details bereitzustellen, ohne die aktuelle Ansicht zu verlassen. Popover verbessert die Benutzererfahrung, indem es schnellen Zugriff auf die benötigten Informationen ermöglicht, ohne die Hauptoberfläche zu überladen.
+
+## Arten von Popover
+
+### Info
+
+Für die Verwendung in regulären Benutzeroberflächen
+
+![1.png](/static/images/design/Popover/popover-0001.png)
+
+### Special
+
+Für die Verwendung in Werbeaktionen
+
+![2.png](/static/images/design/Popover/popover-0002.png)
+
+### **Announcement**
+
+Verwenden Sie dies für eine moderate Hervorhebung in Ankündigungen und Benachrichtigungen
+
+![3.png](/static/images/design/Popover/popover-0003.png)
+
+## Parameter
+
+Die folgenden Parameter können für alle Arten von Popover konfiguriert werden: Info, Special und Announcement:
+
+- Größen
+- Inhaltstyp
+- Positionierung
+- "Schließen"-Schaltfläche
+- Öffnungs- und Schließmethode
+- Timing
+
+### **Größen**
+
+Die Komponenten-Größen variieren in Schriftgröße und Abständen zu den Rändern. Die Breite und Höhe der Komponente passen sich an den Inhalt an.
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      **S** hat eine Schriftgröße von 13 px und seitliche Abstände von 16 px
+
+      ![4.png](/static/images/design/Popover/popover-0004.png)
+   </div>
+   <div className="col-12 col-md-6">
+      **L** hat eine Schriftgröße von 15 px und seitliche Abstände von 24 px
+
+      ![5.png](/static/images/design/Popover/popover-0005.png)
+   </div>
+</div>
+
+### Inhaltstyp
+
+Die Komponente unterstützt die folgenden Elemente:
+
+1. Kopfzeile
+2. Beschreibung
+3. Aktionsschaltflächen (Sie können eine oder zwei Schaltflächen verwenden und die Schaltflächen vertauschen)
+4. Schließen-Symbol
+5. Pin (Schwanz) ist ein zusätzlicher Indikator für eine Verknüpfung mit dem Benutzeroberflächenelement. Er hilft, wenn viele Elemente in der Nähe sind und Sie die Aufmerksamkeit des Benutzers auf ein bestimmtes lenken müssen.
+
+![6.png](/static/images/design/Popover/popover-0006.png)
+
+### Positionierung
+
+Das Popover kann je nach Position in der Benutzeroberfläche auf verschiedenen Seiten des Elements erscheinen. Wenn Sie den Pin verwenden, wird dieser auf das Zentrum des Benutzeroberflächenelements gerichtet sein.
+
+### "Schließen"-Schaltfläche
+
+Verwenden Sie die "Schließen"-Schaltfläche, um das Popover zu schließen, wenn Sie es durch Klicken und nicht durch Überfahren oder Fokussieren des Benutzeroberflächenelements auslösen.
+
+![7.png](/static/images/design/Popover/popover-0007.png)
+
+### Methode des Öffnens und Schließens
+
+- **Beim Überfahren des Elements mit der Maus**
+   In diesem Fall verschwindet die Komponente, wenn der Benutzer den Mauszeiger vom Element wegbewegt.
+- **Beim Klicken auf das Element**
+   Verwenden Sie in diesem Fall ein Kreuz-Symbol, um die Komponente zu schließen.
+- **Beim Fokussieren des Elements mit der Tastatur**
+   Das Popover verschwindet, wenn das Element den Fokus verliert.
+- **Kann spontan geöffnet werden**
+   Wenn der Benutzer die Seite aufruft, ist das Popover bereits geöffnet. Geeignet für Popover in Anzeigen und Tutorials. Verwenden Sie das Kreuz-Symbol, um die Komponente zu schließen.
+- **Als Reaktion auf beliebige Aktionen in der Benutzeroberfläche**
+   Zum Beispiel im Onboarding, wenn Sie eine Reihe von Popovern bereitstellen.
+
+### Timing
+
+- **Ohne Verzögerungen beim Erscheinen und Verschwinden**
+   Das Popover öffnet und schließt sich sofort. Geeignet für einfache, reguläre Popover.
+- **Mit Verzögerung beim Erscheinen und Verschwinden**
+   Verwenden Sie eine Verzögerung beim Erscheinen, wenn Ihre Seite viele Elemente enthält, die Popover auslösen. Dies hilft, versehentliches Überfahren von Elementen und unerwünschte Popover zu vermeiden. Verwenden Sie die Verzögerung beim Schließen, wenn der Tooltip Schaltflächen enthält. In diesem Fall kann der Benutzer den Mauszeiger auf die Schaltfläche bewegen, bevor der Tooltip geschlossen wird.
+- **Mit Verzögerung beim Verschwinden**
+   Verwenden Sie diese Option, wenn Sie keine Verzögerung beim Erscheinen benötigen, aber Ihr Popover Schaltflächen enthält.
+
+## Sonderfälle
+
+In den meisten Fällen ist ein Popover eine gute Wahl, um zusätzliche Informationen bereitzustellen. In bestimmten Fällen sollten jedoch andere Komponenten bevorzugt werden.
+
+- Wenn Sie einen komplexen Tooltip haben und die Anzahl der Elemente, die innerhalb der Popover-Komponente unterstützt werden, nicht ausreicht, können Sie den Tooltip basierend auf der [Popup](/design/guides/popup)-Komponente gestalten.
+- Wenn Sie dem Benutzer eine Erklärung oder zusätzliche Informationen zu einer Aktion beim Klicken auf eine Schaltfläche geben müssen, vermeiden Sie Popover. Verwenden Sie stattdessen [Action Tooltip](/design/guides/action-tooltip) oder [Tooltip](/design/guides/tooltip).

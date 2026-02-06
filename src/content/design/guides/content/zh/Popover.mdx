@@ -1,103 +1,102 @@
-弹出框是一种工具提示，当鼠标悬停在元素上、点击元素或使用键盘聚焦元素时出现。
+Popover 是一种提示框，当用户将鼠标悬停在元素上、点击元素或使用键盘聚焦元素时会出现。
 
-它用于提供上下文或额外细节，而无需离开当前屏幕。弹出框通过提供快速访问所需信息的方式增强用户体验，而不会使主界面变得杂乱。
+它用于在不离开当前屏幕的情况下提供上下文或附加信息。Popover 通过提供对所需信息的快速访问来增强用户体验，而不会使主界面显得杂乱。
 
-## 弹出框类型
+## Popover 类型
 
-### 信息型
+### Info
 
 用于常规界面
 
 ![1.png](/static/images/design/Popover/popover-0001.png)
 
-### 特殊型
+### Special
 
 用于促销活动
 
 ![2.png](/static/images/design/Popover/popover-0002.png)
 
-### **公告型**
+### **Announcement**
 
-用于公告和通知中的适度突出显示
+用于在公告和通知中进行适度突出显示
 
 ![3.png](/static/images/design/Popover/popover-0003.png)
 
 ## 参数
 
-以下参数可以为所有类型的弹出框配置：信息型、特殊型和公告型：
+以下参数可用于所有类型的 Popover：Info、Special 和 Announcement：
 
-- 尺寸
-- 内容类型
-- 定位
-- "关闭"按钮
-- 打开和关闭方法
-- 时间控制
+- Sizes (尺寸)
+- Content type (内容类型)
+- Positioning (定位)
+- "Close" button (关闭按钮)
+- Opening and closing method (打开和关闭方式)
+- Timing (时机)
 
-### **尺寸**
+### **Sizes**
 
-组件尺寸在字体大小和边缘边距方面有所不同。组件的宽度和高度会自适应以适应内容。
-
+组件尺寸在字体大小和边缘边距方面有所不同。组件的宽度和高度会根据内容进行自适应调整。
 
 <div className="row">
    <div className="col-12 col-md-6">
-      **S** 字体大小为13 px，侧边距为16 px
+      **S** 字体大小为 13 px，侧边距为 16 px
 
       ![4.png](/static/images/design/Popover/popover-0004.png)
    </div>
    <div className="col-12 col-md-6">
-      **L** 字体大小为15 px，侧边距为24 px
+      **L** 字体大小为 15 px，侧边距为 24 px
 
       ![5.png](/static/images/design/Popover/popover-0005.png)
    </div>
 </div>
 
-### 内容类型
+### Content type
 
-该组件支持以下元素：
+组件支持以下元素：
 
-1. 标题
-2. 描述
-3. 操作按钮（您可以使用一个或两个按钮，并交换按钮）
-4. 关闭图标
-5. 箭头（尾部）是指向界面元素链接的附加指示器。当周围有许多元素，而您需要将用户注意力集中在特定元素上时，这很有帮助
+1. header (标题)
+2. description (描述)
+3. Action buttons (操作按钮) (您可以使用一个或两个按钮，并交换按钮位置)
+4. Close icon (关闭图标)
+5. Pin (tail) (指示器/尾巴) 是指向界面元素的附加指示器。当周围有很多元素时，它有助于将用户的注意力集中在特定元素上。
 
 ![6.png](/static/images/design/Popover/popover-0006.png)
 
-### 定位
+### Positioning
 
-弹出框可以根据其在界面中的位置出现在元素的不同侧面。如果您使用箭头，它将指向界面元素的中心。
+Popover 可以根据其在界面中的位置出现在元素的侧面。如果您使用指示器，它将指向界面元素的中心。
 
-### "关闭"按钮
+### "Close" button
 
-如果您通过点击而不是悬停或聚焦界面元素来触发弹出框，请使用"关闭"按钮关闭弹出框
+如果您通过点击而不是悬停或聚焦界面元素来触发 Popover，请使用“关闭”按钮来关闭它。
 
 ![7.png](/static/images/design/Popover/popover-0007.png)
 
-### 打开和关闭方法
+### Method of opening and closing
 
-- **在元素悬停时**
-   在这种情况下，当用户将鼠标移出元素时，组件消失。
-- **在元素点击时**
-   在这种情况下，使用叉形图标关闭组件。
-- **使用键盘聚焦元素时**
-   当元素失去焦点时，弹出框消失。
-- **可以自发打开**
-   当用户登陆页面时，弹出框将已经打开。适用于广告和教程中的弹出框。使用叉形图标关闭组件。
-- **响应界面中的任何操作**
-   例如，在引导过程中，当您提供一系列弹出框时。
+- **On element hover** (鼠标悬停在元素上时)
+   在这种情况下，当用户将鼠标移出元素时，组件会消失。
+- **On element click** (点击元素时)
+   在这种情况下，请使用“X”图标关闭组件。
+- **On element focus using the keyboard** (使用键盘聚焦元素时)
+   当元素失去焦点时，Popover 会消失。
+- **Can open spontaneously** (可自动打开)
+   当用户进入页面时，Popover 将已打开。适用于广告和教程中的 Popover。请使用“X”图标关闭组件。
+- **In response to any actions in the interface** (响应界面中的任何操作)
+   例如，在引导流程中，当您提供一系列 Popover 时。
 
-### 时间控制
+### Timing
 
-- **出现和消失没有延迟**
-   弹出框将立即打开和关闭。适用于简单的常规弹出框。
-- **出现和消失有延迟**
-   如果您的页面包含许多触发弹出框的元素，请使用出现延迟。它有助于避免意外悬停在元素上和不需要的弹出框。如果工具提示包含按钮，请使用关闭延迟。在这种情况下，用户可以在工具提示关闭之前将光标移动到按钮上。
-- **消失有延迟**
-   当您不需要延迟出现，但您的弹出框包含按钮时，请使用此选项。
+- **Without delays in appearance and disappearance** (出现和消失无延迟)
+   Popover 将立即打开和关闭。适用于简单的常规 Popover。
+- **With a delay in appearance and disappearance** (出现和消失有延迟)
+   如果您的页面包含许多触发 Popover 的元素，请使用延迟出现。这有助于避免意外悬停在元素上而导致不必要的 Popover。如果提示框包含按钮，请使用延迟关闭。在这种情况下，用户可以在提示框关闭之前将光标移到按钮上。
+- **With a delay in disappearance** (消失有延迟)
+   当您不需要延迟出现，但您的 Popover 包含按钮时，请使用此选项。
 
-## 特殊情况
+## Special cases
 
-在大多数情况下，弹出框是提供额外信息的好选择。但是，在某些情况下，应该优先选择其他组件。
+在大多数情况下，Popover 是提供附加信息的不错选择。但是，在某些情况下，应优先考虑其他组件。
 
-- 如果您有一个复杂的工具提示，并且弹出框组件内支持的元素数量不够，您可以基于[Popup](/design/guides/popup)组件设计工具提示。
-- 如果您需要在按钮点击时为用户提供解释或有关操作的附加信息，请避免使用弹出框。请改用[Action Tooltip](/design/guides/action-tooltip)或[Tooltip](/design/guides/tooltip)。
+- 如果您的提示框很复杂，并且 Popover 组件支持的元素数量不够，您可以基于 [Popup](/design/guides/popup) 组件设计提示框。
+- 如果您需要向用户提供关于按钮点击操作的解释或附加信息，请避免使用 Popover。请改用 [Action Tooltip](/design/guides/action-tooltip) 或 [Tooltip](/design/guides/tooltip)。
