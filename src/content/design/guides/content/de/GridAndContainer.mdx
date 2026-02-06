@@ -1,0 +1,29 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+![Grid](/static/images/design/GridAndContainer/grid.png)
+
+Das Abstandsmodul ermöglicht uns die Definition strenger Regeln für Größen- und Abstands­berechnungen, während das Grid hilft, Inhalte in visuell organisierte Blöcke zu strukturieren. Wir verwenden ein 12-, 8- und 4-Spalten-Grid, das es ermöglicht, den ausgewählten Bereich in Hälften, Drittel und Viertel zu unterteilen.
+
+# Grid-Struktur
+
+![Grid structure](/static/images/design/GridAndContainer/structure.png)
+
+Spalten ➊ definieren die Grenzen für die horizontale Ausrichtung; Abstände ➋ sorgen für Polsterung zwischen den Grid-Spalten; äußere Ränder ➌ gewährleisten Polsterung und zentrierte Ausrichtung des Containers ➍. Die Breite der Grid-Spalte wird durch einen Prozentwert bestimmt, und der Standardabstand zwischen den Spalten ist auf 20px festgelegt.
+
+# Container
+
+![Container](/static/images/design/GridAndContainer/container.png)
+
+Ein Container ist eine grundlegende Komponente des Systemdesigns, die Inhalte innerhalb eines bestimmten Viewports enthält und organisiert. Wir verwenden zwei Arten von Containern: Fixed mit einer festen Breite (was bedeutet, dass seine feste maximale Breite sich bei jedem Breakpoint ändern kann) und Fluid mit einer variablen Breite, die 100 % des verfügbaren Platzes einnimmt (außer bei den Größen S, XS und 2XS).
+
+# Breakpoints
+
+Media Query Breakpoints, oder einfach Breakpoints, sind vordefinierte Viewport-Breiten, die es Ihnen ermöglichen, verschiedene Grid-Einstellungen zu verwalten.
+
+![Breakpoints](/static/images/design/GridAndContainer/breakpoints.png)
+
+# Ausschlusszonen
+
+![Exclusion zones](/static/images/design/GridAndContainer/zones.png)
+
+In UI-Design-Layouts erwarten Benutzer, dass bestimmte Elemente in bestimmten Bereichen positioniert sind. Wir bezeichnen diese Bereiche als "Ausschlusszonen", und wir beziehen sie nicht in unser Grid-System ein. Wenn sich flexible oder Navigations­paneele erweitern, werden die Inhalte und das Grid entweder komprimiert, um in den Browser zu passen, oder darüber hinaus erweitert. Overlay-Paneele überlagern den Inhalt, ohne den Hauptcontainer zu beeinträchtigen.
