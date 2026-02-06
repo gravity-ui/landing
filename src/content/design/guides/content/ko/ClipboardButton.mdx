@@ -1,0 +1,39 @@
+클립보드 복사 버튼은 `Button` `Flat` 컴포넌트를 수정하고 `ClipboardIcon` 아이콘을 별도로 배치한 것입니다.
+
+### 아이콘
+
+`ClipboardButton` 내부에는 `ClipboardIcon` 컴포넌트가 있으며, 이는 성공(Success)과 오류(Error)의 두 가지 상태를 가진 애니메이션 아이콘입니다. 복사 버튼을 사용자 정의하려면 표준 버튼 컴포넌트인 `Button`에 `ClipboardIcon` 아이콘을 사용하세요.
+
+### 상태
+
+![상태](/static/images/design/ClipboardButton/States.png)
+
+### 크기
+
+이 컴포넌트는 표준 버튼 크기인 `XS`, `S`, `M`, `L`, `XL`을 지원합니다.
+
+### 동작
+
+콘텐츠 복사가 자주 수행되지 않거나 아이콘이 가독성을 저해하는 경우, 커서가 가까이 이동할 때까지 복사 버튼이 나타나지 않습니다.
+
+![테이블에서는 커서가 콘텐츠가 있는 셀 위로 이동할 때까지 아이콘이 숨겨집니다](/static/images/design/ClipboardButton/Use-cases2.png)
+
+테이블에서는 커서가 콘텐츠가 있는 셀 위로 이동할 때까지 아이콘이 숨겨집니다.
+
+### 툴팁
+
+이 컴포넌트에는 비활성화할 수 있는 툴팁이 있습니다. 이 툴팁은 어떤 콘텐츠가 복사될 것인지를 나타내는 데 사용됩니다.
+
+![Yandex Tracker 서비스에서 작업 키가 복사됩니다](/static/images/design/ClipboardButton/Tooltip.png)
+
+Yandex Tracker 서비스에서 작업 키가 복사됩니다.
+
+### 사용 사례
+
+문서에서 코드 블록을 복사합니다.
+
+![사용 사례](/static/images/design/ClipboardButton/Use-cases1.png)
+
+테이블에서 셀 값을 복사합니다.
+
+![사용 사례](/static/images/design/ClipboardButton/Use-cases2.png)

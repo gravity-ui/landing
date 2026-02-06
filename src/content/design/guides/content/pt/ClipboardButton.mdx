@@ -1,0 +1,39 @@
+O botão de copiar para a área de transferência é uma modificação do componente `Button` `Flat` com o ícone `ClipboardIcon` posicionado separadamente.
+
+### Ícone
+
+Dentro do `ClipboardButton` há um componente `ClipboardIcon`, que é um ícone animado com dois estados: Sucesso e Erro. Para personalizar o botão de cópia, use o componente de botão padrão `Button` com o ícone `ClipboardIcon`.
+
+### Estados
+
+![Estados](/static/images/design/ClipboardButton/States.png)
+
+### Tamanhos
+
+O componente suporta os tamanhos de botão padrão `XS`, `S`, `M`, `L` e `XL`.
+
+### Comportamento
+
+Se a cópia de conteúdo não for realizada com frequência ou se o ícone reduzir a legibilidade, o botão de cópia não aparecerá até que o cursor seja movido para mais perto.
+
+![Em tabelas, o ícone fica oculto até que o cursor seja posicionado sobre uma célula com conteúdo](/static/images/design/ClipboardButton/Use-cases2.png)
+
+Em tabelas, o ícone fica oculto até que o cursor seja posicionado sobre uma célula com conteúdo.
+
+### Tooltip
+
+O componente possui um tooltip que pode ser desativado. Ele é usado para indicar qual conteúdo será copiado.
+
+![A chave da tarefa é copiada no serviço Yandex Tracker](/static/images/design/ClipboardButton/Tooltip.png)
+
+A chave da tarefa é copiada no serviço Yandex Tracker.
+
+### Casos de uso
+
+Um bloco de código é copiado na documentação.
+
+![Casos de uso](/static/images/design/ClipboardButton/Use-cases1.png)
+
+Valores de células são copiados em tabelas.
+
+![Casos de uso](/static/images/design/ClipboardButton/Use-cases2.png)

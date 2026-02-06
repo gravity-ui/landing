@@ -1,0 +1,39 @@
+クリップボードコピーボタンは、`Button` `Flat` コンポーネントを基に、`ClipboardIcon` アイコンを別途配置したものです。
+
+### アイコン
+
+`ClipboardButton` の内部には `ClipboardIcon` コンポーネントが含まれており、これは成功時とエラー時の2つの状態を持つアニメーションアイコンです。コピーボタンをカスタマイズするには、標準の `Button` コンポーネントに `ClipboardIcon` アイコンを使用してください。
+
+### ステート
+
+![States](/static/images/design/ClipboardButton/States.png)
+
+### サイズ
+
+コンポーネントは、標準のボタンサイズである `XS`、`S`、`M`、`L`、`XL` をサポートしています。
+
+### ビヘイビア
+
+コンテンツのコピーが頻繁に行われない場合や、アイコンが可読性を低下させる場合は、カーソルが近づくまでコピーボタンは表示されません。
+
+![テーブルでは、コンテンツが含まれるセルにカーソルを合わせたときにアイコンが非表示になります](/static/images/design/ClipboardButton/Use-cases2.png)
+
+テーブルでは、コンテンツが含まれるセルにカーソルを合わせたときにアイコンが非表示になります。
+
+### ツールチップ
+
+コンポーネントには無効化可能なツールチップがあります。これは、どのコンテンツがコピーされるかを示すために使用されます。
+
+![Yandex Tracker サービスでタスクキーがコピーされます](/static/images/design/ClipboardButton/Tooltip.png)
+
+Yandex Tracker サービスでタスクキーがコピーされます。
+
+### ユースケース
+
+ドキュメントでブロックコードがコピーされます。
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases1.png)
+
+テーブルのセル値がコピーされます。
+
+![Use-cases](/static/images/design/ClipboardButton/Use-cases2.png)
