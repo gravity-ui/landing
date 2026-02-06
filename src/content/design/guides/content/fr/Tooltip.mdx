@@ -1,0 +1,27 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+**Tooltip** — un composant de base sur lequel [Action Tooltip](/design/guides/action-tooltip) est construit. Il s'affiche au survol d'un bouton et contient une explication ou des informations supplémentaires sur l'action qui sera effectuée lors du clic sur le bouton.
+
+Le tooltip est uniquement utilisé lorsque du contenu personnalisé doit être inclus dans une indication. Dans les autres cas, il est recommandé d'utiliser [Action Tooltip](/design/guides/action-tooltip).
+
+### Tailles et styles
+
+La taille du tooltip est ajustée au contenu. La couleur et le style du tooltip ne peuvent pas être modifiés.
+
+![Tailles](/static/images/design/Tooltip/Sizes.png)
+
+### Contenu interne
+
+Le tooltip peut contenir tout type de contenu. Lors de la conception du contenu du tooltip, il est recommandé de suivre les directives générales et les indentations.
+
+### Synchronisation
+
+Vous pouvez modifier le délai d'apparition et de disparition en fonction de son objectif. Le tooltip apparaît avec un délai de 250 ms par défaut et disparaît lorsque l'utilisateur éloigne le curseur du bouton.
+
+Si vous pensez que la plupart des utilisateurs cliqueront sur un bouton sans lire le tooltip, il est préférable d'utiliser un délai plutôt que de les agacer avec trop d'invites. Si vous pensez que peu de personnes cliqueront sur le bouton sans le tooltip, supprimez le délai afin que l'utilisateur n'ait pas à attendre une description de la fonctionnalité.
+
+### Position
+
+La position du tooltip est choisie dans le but de minimiser le chevauchement avec le contenu de la page. Le placement optimal pour le tooltip est celui où il chevauche le moins le contenu de la page.
+
+![Position](/static/images/design/Tooltip/Position.png)
