@@ -1,0 +1,76 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+Der Toaster ist eine kleine Benachrichtigung, die auf dem Bildschirm erscheint, um wichtige Informationen oder eine Warnung bereitzustellen. Er kann verwendet werden, um den Benutzer über ein Ereignis oder eine Aktion zu informieren, z. B. wenn ein Formular gesendet oder eine Datei heruntergeladen wird.
+
+### Haupttypen
+
+**Standard**
+
+Wird verwendet, wenn keine sofortige Aktion erforderlich ist oder wenn die Nachricht nicht mit bestimmten Aktionen oder Ereignissen zusammenhängt.
+
+![Standard](/static/images/design/Toaster/Default.png)
+
+**Info**
+
+Wird verwendet, um den Benutzer über einen Prozess, ein Ereignis oder eine Aktion zu informieren. Zum Beispiel im Falle einer erfolgreichen Datenübertragung oder eines Seitenaufrufs.
+
+![Info](/static/images/design/Toaster/Info.png)
+
+**Erfolg**
+
+Zeigt an, dass eine Operation oder Aktion erfolgreich abgeschlossen wurde. Zum Beispiel, wenn Daten erfolgreich gespeichert wurden oder wenn der Benutzer autorisiert ist.
+
+![Erfolg](/static/images/design/Toaster/Success.png)
+
+**Warnung**
+
+Informiert den Benutzer über ein potenzielles Problem oder einen Fehler. Zum Beispiel, wenn ein erforderliches Feld in einem Formular ausgefüllt werden muss oder wenn keine Internetverbindung besteht.
+
+![Warnung](/static/images/design/Toaster/Warning.png)
+
+**Fehler**
+
+Wird verwendet, um einen Fehler anzuzeigen und dass die Aufmerksamkeit des Benutzers erforderlich ist, um ihn zu beheben. Zum Beispiel, wenn die Daten falsch eingegeben wurden oder ein Serverfehler vorliegt. Dieser Zustand lässt sich am besten mit einer Aktionsschaltfläche kombinieren, die es ermöglicht, einen Fehler zu korrigieren oder weitere Informationen zu erhalten.
+
+![Fehler](/static/images/design/Toaster/Error.png)
+
+### Modifikationen
+
+Der Toast besteht aus fünf Hauptkomponenten:
+
+![Modifikationen](/static/images/design/Toaster/Modifications.png)
+
+1. Toast-Typ-Symbol. Eine Komponente kann mit oder ohne Symbol verwendet werden. Ein Symbol ist ein optionales Element.
+2. Die Kopfzeile informiert den Benutzer über die durchgeführte Aktion. Wenn die Beschreibung enthalten ist, ist die Verwendung der Kopfzeile optional.
+3. Die Beschreibung erläutert den Titel und kann eigenständig verwendet werden.
+4. Schaltflächen. Ein Toast kann eine oder zwei Schaltflächen haben; es wird empfohlen, die erste Schaltfläche als Aktionsschaltfläche zu verwenden. Schaltflächen sind optionale Elemente.
+5. Schließen-Symbol. Das Schließen-Symbol ist ein optionales Element. Die Schließen-Schaltfläche ist erforderlich, wenn für den Toast keine Ausblendungsdauer festgelegt ist.
+
+### Wann verwenden
+
+Toaster werden für die folgenden Szenarien empfohlen:
+
+- Beim Absenden eines Formulars oder Ausführen einer Aktion, wenn der Benutzer den Fortschritt sehen soll. Zum Beispiel eine Meldung, die anzeigt, dass die Daten erfolgreich gesendet wurden oder dass ein Fehler aufgetreten ist.
+- Wenn Sie den Workflow des Benutzers nicht unterbrechen oder den Bildschirm blockieren möchten. Toaster werden in der Ecke angezeigt und verdecken nicht den gesamten Bildschirm, sodass der Benutzer die Benutzeroberfläche weiterhin nutzen kann.
+- Wenn weitere Informationen zu einer bestimmten Aktion erforderlich sind. Toasts können Links zu zusätzlichen Inhalten oder Informationen enthalten, die dem Benutzer helfen, zu verstehen, was passiert ist.
+
+### Wann nicht verwenden
+
+Toaster werden für die folgenden Szenarien nicht empfohlen:
+
+- Wenn eine sofortige Reaktion des Benutzers erforderlich ist.
+- Wenn die Aktion, die zum Zeitpunkt der Anzeige des Toasters ausgeführt wird, Probleme oder unerwünschte Folgen haben kann.
+- Wenn die Nachricht eine große Menge an Informationen oder eine detailliertere Erklärung erfordert.
+- Wenn die Informationen bereits in anderer Form auf dem Bildschirm angezeigt werden.
+
+### Position auf dem Bildschirm
+
+Der Toaster wird in der unteren rechten Ecke angezeigt.
+
+Seine Außenabstände betragen: unten M (8px), rechts XL (20px).
+
+![Position](/static/images/design/Toaster/Position.png)
+
+### Anpassung
+
+Der Inhalt eines Toasts kann vom Standard abweichen; er kann jede verfügbare Komponente aus der Bibliothek enthalten, wenn der Anwendungsfall dies erfordert.
