@@ -1,0 +1,157 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Le tableau est utilisé pour afficher intuitivement des données structurées de toute taille.
+
+Un élément atomique du tableau est une cellule. Les cellules forment des colonnes et des lignes dans le tableau. Le tableau a toujours un en-tête.
+
+## **Cellule de tableau**
+
+Une cellule est un conteneur à l'intersection d'une ligne et d'une colonne du tableau, dans lequel vous pouvez placer d'autres composants :
+
+- Texte
+- Icônes
+- [Boutons](/design/guides/button)
+- [Étiquettes](/design/guides/label)
+- [Avatar utilisateur](/design/guides/user-avatar)
+- [Barre de progression](/design/guides/progress-bar)
+- Case à cocher
+- [Sélection](/design/guides/select)
+- [Champ de saisie](/design/guides/text-input) et autres composants
+
+Une seule cellule peut contenir soit un seul composant (par exemple, du texte), soit une combinaison de composants (par exemple, une case à cocher, du texte et une icône).
+
+![1.png](/static/images/design/Table/table-0001.png)
+
+Une cellule peut être vide s'il n'y a pas de données à afficher. De plus, le contenu de la cellule peut être masqué dans son état normal et devenir visible lorsque vous survolez la cellule ou la ligne.
+
+### **Recommandations pour l'utilisation des composants**
+
+- N'utilisez pas plus de trois composants différents dans une cellule : cela rend les données dans la colonne avec de telles cellules plus difficiles à comparer et rend le tableau moins lisible. Dans de tels cas, vous pouvez créer une colonne séparée pour la propriété que chaque composant décrit.
+- Choisissez les tailles des composants dans le tableau en fonction de votre tâche actuelle. Pour les données textuelles simples, utilisez de préférence le style `text-body-1` sans décoration, et pour les autres éléments, utilisez la taille M.
+- Nous recommandons d'utiliser des composants de la même taille au sein d'une cellule, par exemple, des étiquettes et des boutons de taille M.
+
+### Hauteur et largeur de la cellule
+
+La taille de la cellule est déterminée par la taille de son contenu et les marges de la cellule.
+
+La hauteur standard de la cellule avec du texte sur une seule ligne, stylisé en `text-subheader-1` (interligne 18px), est de 40px. Les marges supérieure et inférieure de la cellule dans ce cas sont de 11px.
+
+Pour une cellule avec du texte sur deux lignes, la hauteur de la cellule est de 58px.
+
+![2.png](/static/images/design/Table/table-0002.png)
+
+Vous pouvez utiliser n'importe quelles marges en haut, en bas, à gauche et à droite, mais nous recommandons un système de marges qui sont des multiples de 4px. Les marges supérieure et inférieure sont généralement identiques, mais vous pouvez les rendre différentes. Il en va de même pour les marges gauche et droite (pour plus de détails, voir la description des lignes et des colonnes dans le tableau). Les marges supérieure et inférieure n'ont pas à être égales aux marges gauche et droite.
+
+### Séparateur
+
+Chaque cellule a un séparateur horizontal de 1px de hauteur. Ce séparateur est aligné avec le bord inférieur de la cellule, sa largeur est égale à la largeur de la cellule. Vous pouvez omettre le séparateur pour les cellules de la dernière ligne du tableau.
+
+### Alignement
+
+Le contenu à l'intérieur d'une cellule peut être aligné à gauche ou à droite (pour plus de détails sur l'alignement du texte, voir les descriptions des colonnes).
+
+## **En-tête du tableau**
+
+L'en-tête du tableau est situé en haut du tableau et contient les noms des colonnes. En plus des noms, l'en-tête peut également contenir des cases à cocher et des boutons.
+
+![3.png](/static/images/design/Table/table-0003.png)
+
+Évitez les noms de colonnes sur deux lignes pour éviter les sauts de ligne. Lorsque le nom passe à la deuxième ligne ou plus, la hauteur de l'en-tête augmente. Les autres noms et boutons restent alignés en haut dans ce cas.
+
+![4.png](/static/images/design/Table/table-0004.png)
+
+## **Colonnes du tableau**
+
+Une colonne est un groupe de cellules disposées verticalement. Selon le type de contenu des cellules, les données de la colonne peuvent être :
+
+- Triées
+- Alignées à droite
+
+### Tri
+
+Si les données de la colonne peuvent être triées (par exemple, par ordre alphabétique, par date ou par taille), une icône de flèche est placée à côté du nom de la colonne. Lorsque l'utilisateur clique sur le nom de l'icône, les lignes sont triées par cette colonne.
+
+![5.png](/static/images/design/Table/table-0005.png)
+
+Le tri est une fonctionnalité facultative du tableau. Il est disponible dans des cas d'utilisation spécifiques.
+
+Vous ne pouvez pas trier le tableau par deux colonnes en parallèle.
+
+Généralement, si les données d'une colonne peuvent être triées, ces données doivent avoir la même unité de mesure. Pour éviter de spécifier l'unité dans chaque cellule de colonne, ajoutez-la au nom de la colonne avec une virgule.
+
+### Contenu aligné à droite
+
+Cette fonctionnalité n'est disponible que pour les données textuelles et est utilisée pour comparer des données (par exemple, le temps passé ou les ressources consommées). Ces données ont souvent la même unité et peuvent être triées. Pour les données de colonne alignées à droite avec une flèche de tri, placez d'abord la flèche, suivie du texte.
+
+![6.png](/static/images/design/Table/table-0006.png)
+
+### Blocage de colonne lors du défilement
+
+Si le tableau ne rentre pas dans les bords de l'écran, une barre de défilement horizontale apparaît. Dans ces cas, vous pouvez bloquer certaines colonnes du tableau afin qu'elles restent toujours à l'écran. Vous pouvez bloquer les premières ou les dernières colonnes du tableau. Vous pouvez utiliser n'importe quel nombre de colonnes bloquées, mais assurez-vous qu'il y a suffisamment d'espace pour les colonnes défilantes, en tenant compte de la largeur minimale de la fenêtre d'affichage prise en charge.
+
+Lorsqu'elles sont bloquées, les cellules de ces colonnes obtiennent un séparateur supplémentaire : il est placé à droite si la colonne est bloquée à gauche et à gauche si la colonne est bloquée à droite. Ce séparateur limitera le défilement des autres cellules.
+
+![7.png](/static/images/design/Table/table-0007.png)
+
+Dans la colonne la plus à droite, vous pouvez ajouter des actions pour une ligne. Ces actions sont accessibles sous une icône à trois points, qui se développe en une liste. Bloquez cette colonne lors du défilement afin que l'utilisateur puisse toujours accéder aux actions. Placez l'icône d'engrenage, qui ouvre la configuration des colonnes du tableau lorsqu'elle est cliquée, dans l'en-tête d'une telle colonne.
+
+![8.png](/static/images/design/Table/table-0008.png)
+
+### Configuration des colonnes
+
+Les utilisateurs peuvent personnaliser le nombre et l'ordre des colonnes. Pour cela, ajoutez une icône d'engrenage dans l'en-tête de la dernière colonne du tableau. Lorsque l'utilisateur clique sur l'icône d'engrenage, une fenêtre contextuelle de paramètres apparaît.
+
+![9.png](/static/images/design/Table/table-0009.png)
+
+## **Lignes du tableau**
+
+Une ligne est un groupe de cellules disposées horizontalement.
+
+### Lignes cliquables
+
+Lorsque les utilisateurs cliquent sur une ligne de tableau, ils peuvent être dirigés vers une autre page, une fenêtre modale ou un panneau latéral. Lorsque vous survolez ces lignes, la couleur d'arrière-plan change en `--g-color-base-simple-hover`.
+
+![10.png](/static/images/design/Table/table-0010.png)
+
+Pour un affichage plus soigné du survol d'une ligne de tableau cliquable, vous pouvez ajouter de petites marges à gauche et à droite. Avec ces marges, le contenu n'est plus aligné sur la grille. Par conséquent, nous ne recommandons pas ces marges en l'absence de survol.
+
+### Lignes avec opérations groupées
+
+Vous pouvez appliquer des actions groupées aux lignes où la première cellule contient une case à cocher. Un ensemble d'actions groupées correspond le plus souvent à l'ensemble des actions individuelles sur une seule ligne de tableau.
+
+Si une ligne est sélectionnée, sa couleur d'arrière-plan change en `--g-color-base-selection`, et une barre d'actions avec une liste d'actions groupées apparaît en bas de la page.
+
+![11.png](/static/images/design/Table/table-0011.png)
+
+Si différentes actions sont disponibles pour différentes lignes de tableau, nous recommandons d'afficher dans la barre d'actions uniquement celles qui sont disponibles pour toutes les lignes sélectionnées. D'autres comportements peuvent être activés à la discrétion du concepteur.
+
+### Alignement du contenu
+
+Pour les lignes dont la hauteur de cellule est supérieure à 40px, le contenu peut être aligné en haut ou centré dans les cellules.
+
+L'alignement en haut est préférable car il améliore la lisibilité des données. Dans ce cas, tous les composants contenant du texte doivent être alignés sur la première ligne.
+
+![12.png](/static/images/design/Table/table-0012.png)
+
+Si une ligne alignée en haut contient des icônes, des avatars utilisateur, des boutons d'icônes, des cases à cocher, des barres de progression et d'autres éléments non textuels, définissez leurs marges supérieures de manière à ce que leur axe horizontal corresponde à l'axe du texte dans une cellule à une seule ligne.
+
+![13.png](/static/images/design/Table/table-0013.png)
+
+Vous pouvez utiliser l'alignement centré lorsqu'il est difficile d'ajuster finement les marges supérieures des cellules pour tous les types de contenu d'une ligne, ou lorsque l'alignement n'affecte pas la lisibilité du contenu.
+
+## Recommandations d'utilisation
+
+Utilisez des tableaux :
+
+- Pour organiser un grand volume de données homogènes qui décrivent les propriétés d'un objet.
+- Pour trier et comparer des données sur votre page.
+- Pour trouver rapidement des valeurs en triant, filtrant et parcourant le contenu du tableau.
+
+Nous déconseillons :
+
+Voici la traduction du fichier source du guide de conception en français :
+
+- Utiliser des tableaux pour décrire des objets avec une seule propriété. Une liste est une meilleure option dans de tels cas.
+   Par exemple, vous devriez utiliser une liste pour présenter des informations sur le nom de la couleur et son encodage HEX.
+- Utiliser des tableaux pour décrire des objets qui ont des propriétés hétérogènes distinctes. Il est préférable de décrire chaque objet individuellement dans ce cas.
+   Par exemple, si votre tâche consiste à décrire les appareils utilisés par un employé. Ces appareils peuvent inclure un ordinateur portable (propriétés : OS, capacité de stockage, taille de l'écran), une souris d'ordinateur (propriétés : filaire ou sans fil) et une lampe de bureau (propriétés : fabricant, type de fixation). N'ajoutez pas toutes ces données dans un seul tableau et essayez de trouver une méthode de visualisation différente.
