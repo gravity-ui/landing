@@ -1,0 +1,185 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche, wobei darauf geachtet wurde, dass sie natürlich klingt und alle technischen Elemente beibehalten werden:
+
+Eine Komponente zur Eingabe beliebiger Text-, Zahlen- und Symbolwerte in einer einzigen Zeile. Kann in Seitenformularen und Dialogfeldern sowie in Anmelde-, Such- und Filterformularen verwendet werden.
+
+## **Anwendung**
+
+Im Gegensatz zu [TextArea](/design/guides/text-area) ändert sich die Höhe während der Eingabe nicht und wird für einfache Freiformdaten mit beliebiger Kombination von Buchstaben, Zahlen oder Symbolen verwendet.
+
+![1.png](/static/images/design/TextInput/1.png)
+
+Wenn die eingegebene Textlänge die Breite des Feldes überschreitet, können Sie den Inhalt nach links und rechts scrollen.
+
+![2.png](/static/images/design/TextInput/2.png)
+
+✅ **Wann verwenden**
+
+1. Wenn nur eine Textzeile benötigt wird.
+2. Wenn die Auswahl einer Option aus einer vordefinierten Liste nicht möglich ist.
+3. Wenn genügend Platz für die Dateneingabe vorhanden ist und keine komplexeren Eingabeschnittstellen erforderlich sind.
+
+🚫 **Wann nicht verwenden**
+
+1. Wenn ein Parameter nur aus einer vordefinierten Liste eingegeben werden kann, da dies zu einem Fehler führen kann. Verwenden Sie hierfür Komponenten mit einer spezifischen Auswahl von Wertoptionen wie Select, Radio Button, Radio und Checkbox.
+2. Wenn eine große Anzahl von Zeichen eingegeben werden muss (mehr als 5 Wörter). Hierfür empfehlen wir die Verwendung von [TextArea](/design/guides/text-area), einer Komponente für die mehrzeilige Texteingabe.
+
+## Typen
+
+TextInput hat zwei Typen: **Normal** und **Clear**, die den gleichen Funktionsumfang haben, aber je nach Kontext unterschiedlich aussehen und verwendet werden.
+
+![3.png](/static/images/design/TextInput/3.png)
+
+**Normal**
+
+- Der am häufigsten verwendete Typ.
+- Ein charakteristisches Merkmal dieser Komponente sind ihre Innenabstände und Eckradien. Diese Parameter werden durch die Größe des Elements und einen 1px starken Rand bestimmt.
+- Wird in Formularen verwendet, wenn freier Platz zwischen den Komponenten benötigt wird, z. B. als Abstand zwischen Formularelementen.
+
+**Clear**
+
+- Das bestimmende Merkmal dieser Komponente ist das Fehlen eines Rahmens, wobei die Elemente innerhalb der Ränder des Eingabefeldes platziert sind.
+- Wird verwendet, wenn der Typ Normal visuelles Rauschen erzeugt.
+- Stellen Sie bei der Verwendung dieses Typs sicher, dass der Zweck dieser Komponente für den Benutzer klar ist.
+
+## Struktur
+
+![4.png](/static/images/design/TextInput/4.png)
+
+**1. Linkes Symbol**
+
+![5.png](/static/images/design/TextInput/5.png)
+
+- Ist eine optionale Komponente.
+- Das Symbol kann zur zusätzlichen Feldidentifizierung verwendet werden.
+- Wenn es sich beispielsweise um eine Suchzeile handelt, kann ein "Lupen"-Symbol verwendet werden. Oder ein "Schlüssel"-Symbol, wenn es sich um ein Feld zur Passworteingabe handelt.
+
+**2. Inline-Label.**
+
+![6.png](/static/images/design/TextInput/6.png)
+
+- Ist eine optionale Komponente.
+- Verstärkt den Wert des Feldnamens.
+- Ersetzt das externe Label.
+- Wird als Feldname verwendet, da beim Eingeben eines Wertes der Hinweis verschwindet und der Zweck des Feldes für den Benutzer unklar bleibt.
+
+**3. Wert**
+
+![7.png](/static/images/design/TextInput/7.png)
+
+- Ist ein erforderliches Element.
+- Platz für den Text des Hinweises und den eingegebenen Text.
+- Nach der Eingabe eines Zeichens ersetzt der eingegebene Text den Hinweis.
+
+**4. Clear-Button**
+
+![Clear button](/static/images/design/TextInput/21.png)
+
+- Ist eine optionale Komponente.
+- Wird verwendet, wenn der Feldinhalt gelöscht werden muss.
+- Wird angezeigt, wenn mindestens ein Zeichen in das Feld eingegeben wurde.
+- Wird auch angezeigt, wenn der Fokus außerhalb des Feldes liegt.
+- Ist eine Button-Komponente vom Typ Flat-secondary, die alle ihre Eigenschaften erbt. Zum Beispiel wird der Hintergrund des Kreuzes beim Überfahren mit der Maus gefüllt.
+- Beim Klicken auf den Clear-Button verschiebt sich der Fokus auf das Feld und der eingegebene Wert wird gelöscht.
+
+**5. Inline-Buttons**
+
+![11.png](/static/images/design/TextInput/11.png)
+
+- Ist ein optionales Element und wird rechts eingebettet.
+- Wird verwendet, um die Beziehung zwischen Inhalt und Aktionen klarer zu kennzeichnen und kann innerhalb einer Komponente platziert werden.
+- Das Feld erlaubt maximal zwei Button-Komponenten.
+- Die Größe der eingebetteten Buttons sollte eine Größe kleiner sein als die Größe der Komponente selbst. Wenn beispielsweise Größe S verwendet wird, sollte der Button XS sein; wenn Größe M verwendet wird, sollte der Button S sein und so weiter.
+- Zum Beispiel kann er zur Bestätigung von Aktionen, zum Senden von Nachrichten oder zum Hinzufügen zusätzlicher Filter zu einem Feld verwendet werden.
+
+**6. Zusätzlicher Inhalt**
+
+![12.png](/static/images/design/TextInput/12.png)
+
+- Ist ein optionales Element und wird rechts eingebettet.
+- Wird verwendet, wenn zusätzlicher Text im Inneren benötigt wird.
+- Der Text ist rechtsbündig ausgerichtet.
+- Kann zum Beispiel als Zähler (Anzahl der eingegebenen Zeichen), zur Zählung der in einer Suchzeichenfolge gefundenen Werte oder für Maßeinheiten verwendet werden.
+
+**7. Fehler-Symbol**
+
+![Error icon](/static/images/design/TextInput/24.png)
+
+- Wird nur im Inline-Fehlerzustand angezeigt.
+- Arbeitet mit Tooltip zusammen und bietet Fehlerbeschreibungen beim Überfahren des Symbols, um ein kompaktes Layout des Formulars zu erreichen.
+
+**8. Fehlerbeschreibung**
+
+![Error description](/static/images/design/TextInput/25.png)
+
+- Wird nur im Outline-Fehlerzustand angezeigt.
+- Wird unten links eingebettet.
+
+## Zustände
+
+Hat die folgenden Zustände: **Suggest, Default, Hover, Active, Disabled, Inline Error und Outline Error.**
+
+![14.png](/static/images/design/TextInput/14.png)
+
+1. **Suggest.** Inaktiver Zustand, wenn keine direkte Interaktion mit der Komponente stattfindet und keine Daten eingegeben wurden. In diesem Zustand kann der Wert als Hinweis dienen, der dem Benutzer anzeigt, welche Art von Informationen in das Feld eingegeben werden soll.
+2. **Default.** Inaktiver Zustand, wenn keine direkte Interaktion mit der Komponente stattfindet und bereits Daten eingegeben wurden. In diesem Zustand ändert sich der Hinweiswert basierend auf der Benutzereingabe.
+3. **Hover.** Aktiver Zustand, wenn der Cursor über den Komponentenbereich fährt.
+4. **Active.** Aktiver Zustand, der durch den Übergang von der vorherigen Komponente oder durch Klicken mit dem Cursor ausgelöst wird. Der Zustand wird zurückgesetzt, wenn zu einer anderen Komponente gewechselt oder in einen leeren Bereich geklickt wird.
+5. **Disabled.** Inaktiver Zustand einer Komponente, wenn keine Interaktion mit ihr möglich ist.
+6. **Outline error.** Aktiver Zustand der Komponente, wenn während der Validierung ein Fehler auftritt und dieser zusammen mit einer Erklärung unterhalb des Feldes angezeigt wird.
+7. **Inline error.** Aktiver Zustand der Komponente, wenn ein Validierungsfehler im Feld auftritt, der Fehler aber nicht angezeigt wird. Stattdessen wird der Fehler durch ein spezielles Symbol dargestellt, das beim Überfahren mit der Maus einen Fehler-Tooltip anzeigt.
+
+## Größen
+
+![16.png](/static/images/design/TextInput/16.png)
+
+Die Komponente ist in vier Größen erhältlich: **S, M, L und XL.**
+
+Die Höhe und der Eckradius des Feldes sowie die Innenabstände und die Textgröße variieren je nach Größe der Komponente.
+
+Der Eckradius hängt von der Größe ab und wird durch [Variablen](/design/branding/corner-radius) festgelegt.
+
+1. **S** (-g-border-radius-s: 5px;) – wird verwendet, wenn die Standardeingabe zu groß ist (z. B. Tabellen, kleine Karten).
+2. **M** (-g-border-radius-m: 6px;) – Basisgröße, wird in den meisten Formularen und Filtern verwendet.
+3. **L** (-g-border-radius-l: 8px;) – wird für die Suche verwendet (z. B. Service-Suche).
+4. **XL** (-g-border-radius-xl: 10px;) – wird in der Kommunikationsumgebung verwendet (z. B. Websites und Landing Pages).
+
+## Benutzerhandbuch
+
+**1. Arbeiten mit dem Feld**
+
+- Das Feld kann nur eine Zeile enthalten. Hierfür empfehlen wir die Verwendung von [TextArea](/design/guides/text-area), einer Komponente für die mehrzeilige Texteingabe.
+- Wir empfehlen, keinen **Hinweis** innerhalb eines Feldes zu verwenden, da der Feldname beim Eingeben eines Wertes nicht sichtbar ist, es sei denn, Sie haben nur begrenzten Platz oder der Zweck des Feldes ist dem Benutzer klar.
+- **Die Breite des Feldes** muss mit der Breite des eingegebenen Wertes übereinstimmen. Dies informiert den Benutzer über die erwartete Eingabe.
+- Verwenden Sie für alle ergänzenden Komponenten des Formulars die **gleiche Größe**. Wenn Sie Größe M gewählt haben, sollten alle anderen Komponenten die gleiche Größe haben.
+
+**2. Externer Feldkopf**
+
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche, wobei darauf geachtet wurde, dass sie natürlich klingt und technische Begriffe sowie MDX-Komponenten unverändert bleiben:
+
+![Formating.png](/static/images/design/TextInput/Formating.png)
+
+- Ein kurzer Feldname, vorzugsweise auf eine Zeile beschränkt.
+- In Desktop-Formularen sollte die Komponente in einer Zeile mit dem Wert des Feldes platziert werden. Wenn der Kontext mobil ist oder die Dialoggröße S beträgt, wird der Titel der Komponente über der Komponente angezeigt.
+
+**3. Hinweis mit Tooltip**
+
+![Tooltip.png](/static/images/design/TextInput/Tooltip.png)
+
+- Anweisungen zum Ausfüllen des Feldes beim Überfahren des Icons mit einem Fragezeichen.
+- Wird verwendet, wenn der Titel verdeutlicht werden muss.
+- Sollte nicht mehr als zwei Absätze Text enthalten.
+
+**4. Zusätzliche Beschreibung**
+
+![Description.png](/static/images/design/TextInput/Description.png)
+
+- Kann am unteren Rand oder rechts neben dem Feld gefunden werden.
+- Wird in seltenen Fällen verwendet, wenn unklar ist, wie ein Feld ohne zusätzliche Beschreibung auszufüllen ist, oder wenn Erklärungen für zuvor eingegebene Werte erforderlich sind.
+
+**5. Maßeinheiten** können wie folgt platziert werden:
+
+![s.png](/static/images/design/TextInput/s.png)
+
+- In der Textbeschreibung des Feldes, wenn genügend Platz im Formular vorhanden ist.
+- Innerhalb des Eingabefeldes, wenn die Beschreibung gekürzt werden muss.
+- Rechts neben dem Feld, wenn Platz für andere Elemente innerhalb des Feldes benötigt wird, wie z. B. Schaltflächen oder ein Lösch- (Zurücksetzen-) Icon.
