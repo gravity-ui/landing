@@ -1,0 +1,157 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Un bouton est un élément interactif de l'interface utilisateur qui, lorsqu'il est cliqué, exécute une action, par exemple : la soumission d'un formulaire, la sauvegarde de modifications ou le passage à l'étape suivante. Si vous avez besoin de naviguer vers une autre page ou un autre site web, utilisez un lien.
+
+## Apparence
+
+Il existe cinq types de boutons : accent, primaire, sémantique, surélevé et contrasté.
+
+### **Accent**
+
+![Accent](/static/images/design/Button/Button1.png)
+
+Les boutons d'accentuation mettent en évidence les actions clés et attirent l'attention de l'utilisateur sur les opérations importantes. Ils ont trois styles principaux : Action, Action avec contour, et Action plate.
+
+Choisissez entre ces types de boutons d'accentuation en fonction du degré d'emphase que vous souhaitez accorder aux actions dans l'interface. Utilisez "Action" pour la priorité la plus élevée, "Action avec contour" pour une priorité moyenne, et "Action plate" pour des opérations de priorité inférieure ou secondaires.
+
+Utilisez les boutons d'accentuation avec parcimonie dans l'interface et, si possible, limitez leur nombre à un par page (sauf pour les boîtes de dialogue). De cette façon, vous pouvez souligner l'importance et mettre en évidence l'action principale pour l'utilisateur, tout en atténuant le risque de surcharger l'interface avec trop d'éléments d'accentuation.
+
+### Primaire
+
+![Primaire](/static/images/design/Button/Button2.png)
+
+Les boutons primaires exécutent les actions principales et couramment utilisées dans l'interface. Ces boutons ont plusieurs styles : Normal, Avec contour, Plat et Plat secondaire. Choisissez entre ces styles en fonction du degré d'emphase que vous souhaitez accorder à certaines actions dans l'interface. Par exemple, un bouton "Normal" convient aux actions standard, un bouton "Avec contour" aux actions de priorité moyenne, et les boutons "Plat" et "Plat secondaire" sont destinés aux opérations moins importantes ou secondaires.
+
+### Sémantique
+
+Les boutons sémantiques transmettent un contexte ou une action spécifique, portant une signification pour l'utilisateur. Utilisez-les pour aider les utilisateurs à comprendre facilement quelles opérations sont effectuées et quelle est leur signification.
+
+Les boutons sémantiques ont quatre styles principaux : Info, Succès, Avertissement, Danger.
+
+### Info
+
+![Info](/static/images/design/Button/Button3.png)
+
+Utilisez-les pour les actions liées à l'obtention d'informations supplémentaires, d'indices ou de contexte. Les boutons d'information peuvent également servir de liens hypertextes lorsque vous avez besoin de mettre en évidence une option pour naviguer vers une autre ressource. Par exemple : Plus d'informations, Documentation, Aide.
+
+**Succès**
+
+![Succès](/static/images/design/Button/Button4.png)
+
+Utilisez-les pour mettre en évidence les actions qui se sont terminées avec succès.
+
+**Avertissement**
+
+![Avertissement](/static/images/design/Button/Button5.png)
+
+Utilisez-les pour mettre en évidence les actions nécessitant l'attention de l'utilisateur en raison de risques potentiels ou d'avertissements. Ces boutons aident les utilisateurs à comprendre les conséquences possibles de leur action et encouragent la prudence.
+
+**Danger**
+
+![Danger](/static/images/design/Button/Button6.png)
+
+Utilisez-les pour mettre en évidence les actions qui pourraient être destructrices ou avoir des conséquences négatives. Nous vous recommandons d'utiliser ce bouton avec prudence et uniquement là où il est vraiment nécessaire de souligner les aspects négatifs potentiels (par exemple, suppression, arrêt, déconnexion).
+
+**Surélevé**
+
+![Surélevé](/static/images/design/Button/Button7.png)
+
+Les boutons surélevés sont un type de bouton qui dépasse du contenu. Utilisez-les pour mettre en évidence les actions importantes à l'écran, généralement avec une position fixe. Ce type de bouton convient aux opérations clés que l'utilisateur doit remarquer immédiatement.
+
+Ces boutons sont également souvent utilisés dans les interfaces cartographiques et les applications basées sur des images pour diverses actions, telles que le zoom, le panoramique ou d'autres manipulations de données d'image.
+
+**Boutons contrastés**
+
+![Contrasté](/static/images/design/Button/Button8.png)
+
+Les **boutons contrastés** sont des types spéciaux de boutons utilisés pour mettre en évidence les actions sur un fond complexe. Ils créent un contraste vif et clair, offrant une excellente visibilité même sur des arrière-plans divers et saturés, tels que des bannières ou des supports marketing.
+
+Ces boutons aident à mettre en évidence les actions et à assurer une bonne visibilité sur des arrière-plans divers, par exemple dans les bannières.
+
+## Anatomie
+
+L'anatomie d'un bouton dans l'interface comprend diverses options de conception :
+
+![Anatomie](/static/images/design/Button/Button9.png)
+
+1.  **Texte uniquement** : Bouton qui ne contient que du texte. Un tel bouton est utile lorsque le texte communique clairement et sans ambiguïté le but du bouton, surtout lorsque le texte est court et informatif. Par exemple, vous pouvez utiliser un tel bouton pour des actions comme "créer" ou "annuler".
+2.  **Icônes à droite** : Bouton où l'icône est placée à droite du texte. Cette option est utile pour présenter différentes manières d'effectuer la même action. Utilisez un tel bouton, par exemple, pour l'action "enregistrer", où l'utilisateur a plusieurs options parmi lesquelles choisir (enregistrer sous : PDF, RTF, HTML).
+3.  **Icône à gauche** : Bouton où l'icône est placée à gauche du texte. Utilisez cette option lorsque l'icône porte des informations importantes et doit être mise en évidence. Par exemple, vous pouvez utiliser un tel bouton pour les actions "démarrer" ou "supprimer".
+4.  **Icônes à droite et à gauche** : Bouton avec des icônes placées des deux côtés du texte. Utilisez cette option pour souligner une action clé avec une icône et fournir différents chemins pour son exécution. Par exemple, un tel bouton peut être utilisé pour l'action "ajouter", où l'utilisateur a plusieurs options parmi lesquelles choisir (ajouter : projet, ressource, document).
+5.  **Icône uniquement** : Bouton qui ne consiste qu'en une icône et ne contient aucun texte. Utilisez cette option lorsque les informations sur le bouton peuvent être comprises visuellement et ne nécessitent aucune explication textuelle supplémentaire. Vous pouvez également l'utiliser pour regrouper plusieurs actions de manière compacte dans un espace limité, ne laissant pas de place pour des boutons avec des étiquettes textuelles. Par exemple, un bouton de suppression dans une liste d'éléments. Dans ce contexte, vous pouvez proposer l'option de suppression sous la forme d'une icône de corbeille sans étiquette textuelle.
+
+## États
+
+Chaque bouton de l'interface possède cinq états de base, qui indiquent visuellement la disponibilité du bouton et l'action en cours pour l'utilisateur.
+
+![États](/static/images/design/Button/Button10.png)
+
+**Défaut** : État primaire du bouton, dans lequel il est prêt à interagir et attend les actions de l'utilisateur.
+
+**Survol** : État dans lequel le bouton est prêt à interagir et attend les actions de l'utilisateur.
+
+**Désactivé** : État dans lequel le bouton est temporairement indisponible pour l'interaction. Pour une meilleure expérience utilisateur, nous vous recommandons d'expliquer pourquoi le bouton a été désactivé, surtout si cela n'est pas intuitif. Vous pouvez présenter cette explication sous forme de texte à côté du bouton, ou sous forme d'infobulle au survol.
+
+**Chargement** : État indiquant que le système exécute une opération en réponse à une action initiée par l'utilisateur.
+
+**Sélectionné** : État utilisé pour les éléments commutables où l'utilisateur peut sélectionner l'une des plusieurs options. Un bouton dans l'état "Sélectionné" indique l'état ou l'option actuellement sélectionné(e).
+
+## Tailles
+
+Chaque bouton peut avoir quatre tailles, ce qui permet de choisir l'option la plus appropriée en fonction du contexte.
+
+![Tailles](/static/images/design/Button/Button11.png)
+
+**XS** est une taille supplémentaire utilisée pour les actions dans des composants de taille limitée.
+
+**S** est utilisé dans les situations où les boutons standard sont trop grands et occupent beaucoup d'espace, comme dans les tableaux ou les petites cartes.
+
+**M** est la taille principale que nous recommandons par défaut.
+
+**L** est utilisé pour mettre en évidence les actions primaires, dans les formulaires de création, les fenêtres modales ou les fenêtres pop-up.
+
+**XL** est utilisé lorsque les actions doivent être mises en évidence et que vous disposez de suffisamment d'espace sur votre site web ou votre page de destination.
+
+## Forme
+
+Avec la propriété "pin", vous pouvez contrôler la forme des boutons, en définissant leur style selon les valeurs suivantes :
+
+![Forme](/static/images/design/Button/Button12.png)
+
+**round** : Bouton de forme arrondie, c'est-à-dire avec des coins arrondis des deux côtés. Ce style donne au bouton un aspect doux et moderne, le rendant convivial et agréable à interagir.
+
+**brick** : Bouton avec des coins carrés des deux côtés.
+
+**clear** : Bouton avec des coins carrés et sans contour des deux côtés.
+
+**circle** : Bouton de forme circulaire des deux côtés.
+
+Vous pouvez également combiner ces propriétés dans différentes variations, créant ainsi des styles uniques pour vos boutons en fonction du concept de conception et des exigences de l'interface.
+
+## Largeur
+
+La largeur par défaut du bouton s'ajuste automatiquement au texte, permettant au bouton de s'étirer en largeur pour accueillir tout le texte sans troncature. Cependant, si vous avez besoin de contrôler la largeur du bouton, vous pouvez utiliser deux propriétés principales : `auto` et `max`.
+
+![Largeur](/static/images/design/Button/Button13.png)
+
+`auto` : Restreint les dimensions du bouton pour éviter qu'il ne dépasse les limites du conteneur. Si le contenu du bouton ne rentre pas dans le conteneur, il est masqué avec des points de suspension, indiquant la présence de texte supplémentaire.
+
+`max` : Définit une largeur de bouton fixe égale à la largeur du conteneur parent. Si le contenu du bouton dépasse cette largeur, il est également tronqué avec des points de suspension, maintenant l'interface compacte et évitant le débordement du conteneur.
+
+## Recommandations
+
+**Utilisation**
+
+Voici la traduction du fichier source du guide de conception en français :
+
+- Formulez le texte des boutons de manière claire et concise afin que les utilisateurs comprennent immédiatement ce qui se passera après avoir cliqué.
+- Lorsque vous utilisez des icônes, assurez-vous qu'elles transmettent clairement leur signification et que vos utilisateurs les reconnaîtront facilement.
+- Maintenez un équilibre entre les icônes et le texte afin que les deux éléments soient visibles et lisibles, et qu'aucun ne domine.
+- Lorsque vous utilisez des boutons composés uniquement d'icônes, ajoutez des infobulles d'action au survol afin que les utilisateurs puissent voir ce que signifie l'icône.
+
+**Rédaction des textes**
+
+- Les mots sur le bouton doivent clairement et concisément transmettre l'essence de l'action qui se produira après le clic. Évitez les phrases longues ou les abréviations peu claires.
+- Utilisez des verbes qui décrivent les actions de l'utilisateur. Par exemple, enregistrer, envoyer, supprimer.
+- Évitez les mots ou phrases négatifs sur les boutons. Les instructions négatives peuvent prêter à confusion.
+- Adoptez un style et un format cohérents pour le texte de tous les boutons de l'interface. Cela aide les utilisateurs à naviguer facilement et à comprendre les actions disponibles.
