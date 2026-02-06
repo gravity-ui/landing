@@ -1,0 +1,35 @@
+Placeholder animé qui remplace le contenu réel pendant le chargement du contenu jusqu'à ce que l'interface soit prête pour l'interaction utilisateur. À utiliser si le temps de chargement ne dépasse pas 300 ms.
+
+### Structure
+
+Selon le contenu, peut prendre la forme d'un rectangle, d'un cercle ou d'une combinaison des deux.
+
+![IMG - 11.png](/static/images/design/Skeleton/IMG_-_11.png)
+
+### Tailles
+
+Le composant s'adapte au conteneur de contenu qu'il remplace pendant le chargement.
+
+### Cas d'utilisation
+
+1. Peut afficher la page entière
+![Frame 1.png](/static/images/design/Skeleton/Frame_1.png)
+
+2. Peut remplacer seulement une partie du contenu, permettant l'interaction avec le reste de l'interface
+![Frame 2.png](/static/images/design/Skeleton/Frame_2.png)
+
+### Recommandations
+
+**À utiliser**
+
+1. Lorsque le type de contenu peut être prédit après le chargement
+2. Le temps de chargement est inférieur à 300 ms
+3. Si le squelette est utilisé pour un chargement asynchrone, il doit être affiché exactement là où le chargement se produit, car le chargement d'un bloc d'éléments ne doit pas bloquer le reste de l'interface.
+
+![IMG - 88.png](/static/images/design/Skeleton/IMG_-_88.png)
+
+**À ne pas utiliser**
+
+1. Si le chargement prend plus de trois secondes, il est préférable d'utiliser une roue qui tourne (spin) ou un chargeur (loader),
+2. Si le temps de chargement dépasse 10 secondes et que la durée exacte est connue, une barre de progression doit être affichée.
+3. Lorsque le chargement est initié par un clic sur un bouton, l'utilisation de l'état du bouton comme retour d'information est suffisante, en particulier dans les fenêtres modales.
