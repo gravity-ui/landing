@@ -6,13 +6,13 @@ on:
     branches:
       - main
     paths:
-      - 'src/content/design/guides/content/ru/**'
+      - 'src/content/design/guides/content/en/**'
 
 permissions: write-all
 
 env:
-  LANGUAGES: 'en ko es de zh fr pt ja' # Supported languages separated by space (spaces are important)
-  SOURCE_LANG: 'ru'
+  LANGUAGES: 'ru ko es de zh fr pt ja' # Supported languages separated by space (spaces are important)
+  SOURCE_LANG: 'en'
 
 jobs:
   prepare-inputs:
@@ -44,7 +44,7 @@ jobs:
           JSON_OUTPUT=$(echo "$MODIFIED_FILES" | awk 'NF' | jq -R -c -s '
             split("\n") |
             map(select(length > 0)) |
-            map(capture("src/content/design/guides/content/ru/(?<guide>[^/]+)\\.mdx").guide) |
+            map(capture("src/content/design/guides/content/en/(?<guide>[^/]+)\\.mdx").guide) |
             map(select(. != null))
           ')
 
