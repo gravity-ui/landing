@@ -1,57 +1,59 @@
-SegmentedRadioGroup es un conjunto de dos o más botones dispuestos en fila y combinados en un grupo, que funciona según el principio de los conmutadores de banda en los receptores de radio. Para evitar confusiones con los interruptores de radio, también se les conoce como control segmentado.
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, buscando que suene lo más natural posible:
 
-## Cuándo usar
+`SegmentedRadioGroup` es un conjunto de dos o más botones organizados en fila y combinados en un grupo, que funcionan bajo el principio de los interruptores de banda en los receptores de radio. Para evitar confusiones con los interruptores de radio (`Radio`), también se les denomina "Segmented-control".
 
-SegmentedRadioGroup se usa para elegir entre dos o más opciones al rellenar un formulario, filtrar una lista o tabla, cambiar el diseño de una página o ajustar el modo de funcionamiento de una herramienta. Es más fácil de usar que un menú desplegable porque todas las opciones se muestran a la vez.
+## Cuándo usarlo
 
-Las opciones de SegmentedRadioGroup deben estar relacionadas con el contexto y excluirse mutuamente.
+`SegmentedRadioGroup` se utiliza para elegir entre dos o más opciones al completar un formulario, filtrar una lista o tabla, cambiar la disposición de una página o ajustar el modo de funcionamiento de una herramienta. Es más fácil de usar que un menú desplegable porque todas las opciones se muestran a la vez.
 
-El número de opciones debe limitarse a 2 a 5 y sus nombres deben ser breves (hasta 3 palabras).
+Las opciones de `SegmentedRadioGroup` deben estar relacionadas contextualmente y ser mutuamente excluyentes.
 
-Al inicializar un SegmentedRadioGroup, se debe seleccionar al menos una opción de forma predeterminada.
+El número de opciones debe limitarse a 2-5, y sus nombres deben ser breves (hasta 3 palabras).
 
-## Cuándo no usar
+Al inicializar un `SegmentedRadioGroup`, al menos una opción debe estar seleccionada por defecto.
 
-Si hay varias opciones disponibles, utilice una casilla de verificación o una lista desplegable (Seleccionar).
+## Cuándo no usarlo
 
-Para opciones como «Sí/No» o «Activar/Desactivar», utiliza una casilla de verificación o un interruptor (Switch).
+Si hay varias opciones disponibles, utiliza una casilla de verificación (`checkbox`) o una lista desplegable (`Select`).
 
-Si hay más de 5 a 6 opciones o los nombres de las opciones son largos, utilice un grupo de conmutadores de radio (Radio) o una lista desplegable.
+Para opciones como "Sí / No" o "Activado / Desactivado", utiliza una casilla de verificación (`checkbox`) o un interruptor (`Switch`).
 
-No es aceptable usar un grupo de radio segmentado para la navegación de páginas o una barra de progreso (por ejemplo, en un asistente). Para navegar por la página, utilice un grupo de pestañas (pestañas).
+Si hay más de 5-6 opciones o los nombres de las opciones son largos, utiliza un grupo de interruptores de radio (`Radio`) o una lista desplegable.
 
-### Tallas
+No es aceptable usar un `SegmentedRadioGroup` para la navegación de páginas o como barra de progreso (por ejemplo, en un asistente). Para navegar por la página, utiliza un grupo de pestañas (`Tabs`).
 
-M es el tamaño estándar para las interfaces de escritorio y XL es el tamaño estándar para las interfaces móviles. También se pueden usar otros tamaños, por ejemplo, para mantener la coherencia visual con otros elementos de la página o del cuadro de diálogo.
+### Tamaños
 
-![Sizes](/static/images/design/SegmentedRadioGroup/Sizes1.png)
+`M` es el tamaño estándar para interfaces de escritorio, y `XL` es el tamaño estándar para interfaces móviles. También se pueden utilizar otros tamaños, por ejemplo, para mantener la consistencia visual con otros elementos de la página o en el cuadro de diálogo.
 
-Además de ajustar la altura de los botones, también puedes personalizar los tamaños del relleno interno, el redondeo de las esquinas de los botones y la fuente
+![Tamaños](/static/images/design/SegmentedRadioGroup/Sizes1.png)
 
-Los botones con opciones pueden tener diferentes anchuras y se pueden ajustar automáticamente para que se ajusten al contenido (ancho automático). Alternativamente, pueden tener el mismo ancho, con el ancho del contenedor dividido por la mitad (ancho máximo).
+Además de ajustar las alturas de los botones, también puedes personalizar los tamaños del relleno interno, el redondeo de las esquinas de los botones y la fuente.
 
-![Sizes](/static/images/design/SegmentedRadioGroup/Sizes2.png)
+Los botones con opciones pueden tener anchos variables y ajustarse automáticamente al contenido (ancho automático). Alternativamente, pueden tener el mismo ancho, con el ancho del contenedor dividido por la mitad (ancho máximo).
 
-La última opción se usa cuando los nombres difieren solo en unos pocos caracteres; de lo contrario, los nombres pueden extenderse más allá de los bordes de los botones.
+![Tamaños](/static/images/design/SegmentedRadioGroup/Sizes2.png)
 
-Intente mantener los botones de SegmentedRadioGroup del mismo tamaño, incluso en modo automático, para que el elemento en su conjunto esté bien equilibrado.
+La última opción se utiliza cuando los nombres difieren solo en unos pocos caracteres; de lo contrario, los nombres pueden extenderse más allá de los bordes del botón.
+
+Intenta mantener los botones dentro de `SegmentedRadioGroup` del mismo tamaño, incluso en modo automático, para que el elemento en su conjunto esté bien equilibrado.
 
 ### Contenido
 
-Además del texto (etiqueta), los botones pueden incluir un icono y un contador. Al igual que en el elemento Botón, el icono se puede mostrar con texto (icono y etiqueta) o sin texto (solo icono). No combine botones con diferentes tipos de contenido dentro del mismo grupo de radio segmentado.
+Además del texto (etiqueta), los botones pueden incluir un icono y un contador. Al igual que en el elemento `Button`, el icono puede mostrarse con texto (icono y etiqueta) o sin texto (solo icono). No combines botones con diferentes tipos de contenido dentro del mismo `SegmentedRadioGroup`.
 
 El contador informa al usuario del número de objetos contenidos en la opción.
 
-![Content](/static/images/design/SegmentedRadioGroup/Content.png)
+![Contenido](/static/images/design/SegmentedRadioGroup/Content.png)
 
-El texto del botón dentro de un grupo de radio segmentado debe comenzar con una letra mayúscula. El texto no debe cortarse con puntos suspensivos ni tener partes repetidas.
+El texto del botón dentro de un `SegmentedRadioGroup` debe comenzar con una letra mayúscula. El texto no debe cortarse con puntos suspensivos ni tener partes repetidas.
 
-En la versión de solo iconos, al pasar el cursor sobre los iconos, se debe mostrar la información sobre herramientas (Tooltip) que contenga los nombres de los iconos.
+En la versión de solo icono, al pasar el ratón por encima de los iconos, deben aparecer tooltips (`Tooltip`) que contengan los nombres de los iconos.
 
-En los formularios, se recomienda utilizar la opción de solo texto o texto e icono. El modo de solo iconos se usa normalmente para cambiar entre diseños o elegir opciones que el usuario ya conoce, como cambiar entre una lista y miniaturas de objetos o elegir el tipo de formato en el editor.
+En los formularios, se recomienda utilizar la opción de solo texto o de texto e icono. El modo de solo icono se utiliza típicamente para cambiar entre diseños o elegir opciones que ya son familiares para el usuario, como cambiar entre una lista y miniaturas de objetos o elegir el tipo de formato en el editor.
 
 ### Estados
 
-Además del estado predeterminado (Predeterminado), los botones también pueden estar en los estados (Seleccionado) o deshabilitado (Desactivado). Al pasar el ratón por encima (Hover), los botones también muestran los estados. Solo se puede seleccionar un botón.
+Además del estado predeterminado (`Default`), los botones también pueden estar en los estados (seleccionado) (`Selected`) y/o deshabilitado (`Disabled`). Al pasar el ratón por encima (`Hover`), los botones también muestran estados. Solo se puede seleccionar un botón.
 
-![States](/static/images/design/SegmentedRadioGroup/States.png)
+![Estados](/static/images/design/SegmentedRadioGroup/States.png)

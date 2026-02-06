@@ -1,0 +1,59 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+SegmentedRadioGroup est un ensemble de deux boutons ou plus, disposés en ligne et regroupés, fonctionnant sur le principe des commutateurs de bande des récepteurs radio. Afin d'éviter toute confusion avec les interrupteurs Radio, ils sont également appelés Segmented-control.
+
+## Quand l'utiliser
+
+SegmentedRadioGroup est utilisé pour choisir parmi deux options ou plus lors du remplissage d'un formulaire, du filtrage d'une liste ou d'un tableau, du changement de la disposition d'une page ou de l'ajustement du mode de fonctionnement d'un outil. Il est plus convivial qu'un menu déroulant car toutes les options sont affichées simultanément.
+
+Les options de SegmentedRadioGroup doivent être contextuellement liées et mutuellement exclusives.
+
+Le nombre d'options doit être limité à 2-5, et leurs noms doivent être concis (jusqu'à 3 mots).
+
+Lors de l'initialisation d'un SegmentedRadioGroup, au moins une option doit être sélectionnée par défaut.
+
+## Quand ne pas l'utiliser
+
+Si plusieurs options sont disponibles, utilisez une case à cocher ou une liste déroulante (Select).
+
+Pour des options telles que « Oui / Non » ou « Activé / Désactivé », utilisez une case à cocher ou un interrupteur (Switch).
+
+S'il y a plus de 5-6 options ou si les noms des options sont longs, utilisez un groupe d'interrupteurs radio (Radio) ou une liste déroulante.
+
+Il n'est pas acceptable d'utiliser un SegmentedRadioGroup pour la navigation sur la page ou une barre de progression (par exemple, dans un assistant). Pour naviguer sur la page, utilisez un groupe d'onglets (Tabs).
+
+### Tailles
+
+M est la taille standard pour les interfaces de bureau, et XL est la taille standard pour les interfaces mobiles. D'autres tailles peuvent également être utilisées, par exemple, pour maintenir la cohérence visuelle avec d'autres éléments sur la page ou dans la boîte de dialogue.
+
+![Tailles](/static/images/design/SegmentedRadioGroup/Sizes1.png)
+
+En plus d'ajuster la hauteur des boutons, vous pouvez également personnaliser les tailles du remplissage interne, l'arrondi des coins des boutons et la police.
+
+Les boutons avec des options peuvent avoir des largeurs variables et peuvent être ajustés automatiquement pour s'adapter au contenu (largeur automatique). Alternativement, ils peuvent avoir la même largeur, la largeur du conteneur étant divisée par deux (largeur maximale).
+
+![Tailles](/static/images/design/SegmentedRadioGroup/Sizes2.png)
+
+La dernière option est utilisée lorsque les noms diffèrent de quelques caractères seulement ; sinon, les noms peuvent dépasser les bords du bouton.
+
+Essayez de garder les boutons de SegmentedRadioGroup de la même taille, même en mode automatique, afin que l'élément dans son ensemble soit bien équilibré.
+
+### Contenu
+
+En plus du texte (Label), les boutons peuvent inclure une icône et un compteur. Comme dans l'élément Button, l'icône peut être affichée avec du texte (Icône et Libellé) ou sans texte (Icône seule). Ne combinez pas de boutons avec différents types de contenu au sein du même SegmentedRadioGroup.
+
+Le compteur informe l'utilisateur du nombre d'objets contenus dans l'option.
+
+![Contenu](/static/images/design/SegmentedRadioGroup/Content.png)
+
+Le texte du bouton dans un SegmentedRadioGroup doit commencer par une majuscule. Le texte ne doit pas être coupé par des points de suspension ni avoir de parties répétées.
+
+Dans la version avec icône seule, lors du survol des icônes, des infobulles (Tooltip) contenant les noms des icônes doivent être affichées.
+
+Dans les formulaires, il est recommandé d'utiliser l'option texte seul ou texte et icône. Le mode icône seule est généralement utilisé pour basculer entre différentes dispositions ou choisir des options déjà familières à l'utilisateur, comme passer d'une liste à des miniatures d'objets ou choisir le type de mise en forme dans l'éditeur.
+
+### États
+
+En plus de l'état par défaut (Default), les boutons peuvent également être dans les états (Selected) et/ou désactivé (Disabled). Lors du survol (Hover), les boutons affichent également des états. Un seul bouton peut être sélectionné.
+
+![États](/static/images/design/SegmentedRadioGroup/States.png)

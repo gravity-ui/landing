@@ -1,0 +1,59 @@
+Aqui está a tradução do arquivo fonte do guia de design para português:
+
+O `SegmentedRadioGroup` é um conjunto de dois ou mais botões dispostos em linha e combinados em um grupo, funcionando sob o princípio dos interruptores de banda em receptores de rádio. Para evitar confusão com os `Radio` switches, eles também são referidos como Segmented-control.
+
+## Quando usar
+
+O `SegmentedRadioGroup` é usado para escolher entre duas ou mais opções ao preencher um formulário, filtrar uma lista ou tabela, alterar o layout de uma página ou ajustar o modo de operação de uma ferramenta. É mais amigável ao usuário do que um menu suspenso, pois todas as opções são exibidas de uma vez.
+
+As opções do `SegmentedRadioGroup` devem ser contextualmente relacionadas e mutuamente exclusivas.
+
+O número de opções deve ser limitado a 2-5, e seus nomes devem ser breves (até 3 palavras).
+
+Ao inicializar um `SegmentedRadioGroup`, pelo menos uma opção deve ser selecionada por padrão.
+
+## Quando não usar
+
+Se houver várias opções disponíveis, use uma caixa de seleção (`Checkbox`) ou uma lista suspensa (`Select`).
+
+Para opções como "Sim / Não" ou "Ligado / Desligado", use uma caixa de seleção (`Checkbox`) ou um interruptor (`Switch`).
+
+Se houver mais de 5-6 opções ou os nomes das opções forem longos, use um grupo de `Radio` switches ou uma lista suspensa.
+
+Não é aceitável usar um `SegmentedRadioGroup` para navegação de página ou barra de progresso (por exemplo, em um assistente). Para navegar na página, use um grupo de abas (`Tabs`).
+
+### Tamanhos
+
+`M` é o tamanho padrão para interfaces de desktop, e `XL` é o tamanho padrão para interfaces móveis. Outros tamanhos podem ser usados também, por exemplo, para manter a consistência visual com outros elementos na página ou na caixa de diálogo.
+
+![Tamanhos](/static/images/design/SegmentedRadioGroup/Sizes1.png)
+
+Além de ajustar as alturas dos botões, você também pode personalizar os tamanhos do preenchimento interno, o arredondamento dos cantos dos botões e a fonte.
+
+Os botões com opções podem ter larguras variadas e podem ser ajustados automaticamente para caber no conteúdo (largura `Auto`). Alternativamente, eles podem ter a mesma largura, com a largura do contêiner dividida ao meio (largura `Max`).
+
+![Tamanhos](/static/images/design/SegmentedRadioGroup/Sizes2.png)
+
+A última opção é usada quando os nomes diferem por apenas alguns caracteres; caso contrário, os nomes podem exceder as bordas do botão.
+
+Tente manter os botões dentro do `SegmentedRadioGroup` do mesmo tamanho, mesmo no modo `Auto`, para que o elemento como um todo seja bem equilibrado.
+
+### Conteúdo
+
+Além do texto (Label), os botões podem incluir um ícone e um contador. Assim como no elemento `Button`, o ícone pode ser exibido com texto (Icon and Label) ou sem texto (Icon only). Não combine botões com diferentes tipos de conteúdo dentro do mesmo `SegmentedRadioGroup`.
+
+O Contador informa ao usuário o número de objetos contidos na opção.
+
+![Conteúdo](/static/images/design/SegmentedRadioGroup/Content.png)
+
+O texto do botão dentro de um `SegmentedRadioGroup` deve começar com letra maiúscula. O texto não deve ser cortado com reticências ou ter partes repetidas.
+
+Na versão apenas com ícone, ao passar o mouse sobre os ícones, devem ser exibidas dicas de ferramentas (`Tooltip`) contendo os nomes dos ícones.
+
+Em formulários, é recomendado usar a opção apenas com texto ou com texto e ícone. O modo apenas com ícone é tipicamente usado para alternar entre layouts ou escolher opções que já são familiares ao usuário, como alternar entre uma lista e miniaturas de objetos ou escolher o tipo de formatação no editor.
+
+### Estados
+
+Além do estado padrão (`Default`), os botões também podem estar nos estados (Selecionado) (`Selected`) e/ou desativado (`Disabled`). Ao passar o mouse sobre eles (`Hover`), os botões também exibem estados. Apenas um botão pode ser selecionado.
+
+![Estados](/static/images/design/SegmentedRadioGroup/States.png)
