@@ -1,0 +1,123 @@
+Um **dialog box** é usado para exibir conteúdo adicional, bem como para chamar a atenção do usuário para uma ação ou cenário específico. O dialog box impede que o usuário interaja com a página pai até que ele seja fechado ou a ação especificada nesta janela seja executada.
+
+### Ponto de entrada
+
+O ponto de entrada para o dialog box pode ser um clique em um gatilho específico (por exemplo, um botão na interface) ou certas ações ou condições na interface (por exemplo, uma tentativa de sair de uma página sem salvar dados, ou alterar uma conta em outra aba).
+
+### Tamanhos
+
+O tamanho do dialog box é determinado pelo seu conteúdo.
+
+![Sizes](/static/images/design/Dialog/sizes.png)
+
+**Tamanho S - 480 px**: Usado para pequenas notificações/confirmações e formulários.
+
+**Tamanho M – 720 px**: Usado para formulários pequenos e médios.
+
+**Tamanho L – 900 px**: Usado para grandes quantidades de dados e fluxo dentro de uma janela modal.
+
+**Tamanho personalizado**: Usado quando nenhuma das três opções (S, M ou L) é adequada.
+
+### Área de conteúdo
+
+A janela de diálogo pode conter qualquer tipo de conteúdo. O layout é escolhido dependendo dos requisitos do usuário.
+
+Se o dialog box contiver um formulário, um dos dois layouts de elementos é recomendado:
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      **Vertical.**
+
+      Mais adequado para caixas de texto simples e tamanho S.
+
+      ![vertical](/static/images/design/Dialog/vertical.png)
+   </div>
+   <div className="col-12 col-md-6">
+      **Horizontal.**
+
+      Adequado para formulários mais complexos.
+
+      ![horizontal](/static/images/design/Dialog/horizontal.png)
+   </div>
+</div>
+
+### Botões
+
+O botão de ação é necessário na maioria dos casos. Se o usuário não concluir as ações especificadas no dialog box, o botão fica Desabilitado.
+No lado esquerdo, há uma seção para controles personalizados, onde você pode colocar botões secundários e links. Por exemplo, referências.
+
+![Group 507124116.png](/static/images/design/Dialog/Group_507124116.png)
+
+Em alguns casos, um botão de Perigo pode ser usado em vez de um botão de Ação (por exemplo, em um dialog box para excluir uma entidade).
+
+![Group 2087325976.png](/static/images/design/Dialog/Group_2087325976.png)
+
+O botão de ação não é necessário se não houver uma ação de destino, e o dialog box for apenas para fins informativos. Nesse caso, você pode usar o botão Fechar no estilo Normal.
+
+![Frame 2087326371.png](/static/images/design/Dialog/Frame_2087326371.png)
+
+O botão secundário é sempre usado como botão de cancelamento. Pode ser usado para realizar ações adicionais (por exemplo, continuar sem alterações).
+
+![Group 2087326024.png](/static/images/design/Dialog/Group_2087326024.png)
+
+Pode não haver botões. Normalmente, uma seleção deve ser feita dentro da própria área de conteúdo; caso contrário, a interface pai não estará disponível.
+
+![Frame 2087325516.png](/static/images/design/Dialog/Frame_2087325516.png)
+
+### Navegação dentro do diálogo
+
+Se o dialog box incluir várias etapas, use o botão Voltar para retornar à etapa anterior.
+
+![Group 2087326025.png](/static/images/design/Dialog/Group_2087326025.png)
+
+Se o dialog box for aninhado, mas as etapas não forem lineares, você pode usar breadcrumbs na área de conteúdo da janela.
+
+![breadcrumbs](/static/images/design/Dialog/breadcrumbs.png)
+
+### Posicionamento do dialog box na página
+
+O dialog box é alinhado ao centro da tela, tanto vertical quanto horizontalmente.
+
+Ao redimensionar a viewport, seu posicionamento permanece inalterado, e o tamanho da janela de diálogo pode ser reduzido, desde que não afete o conteúdo.
+
+O espaçamento mínimo permitido das bordas superior e esquerda da tela é de 20px.
+
+![position](/static/images/design/Dialog/position.png)
+
+Em casos onde a janela não cabe na viewport, o espaçamento superior e esquerdo permanece inalterado, enquanto as bordas direita e inferior da janela de diálogo se estendem além das bordas da tela. No entanto, isso não é recomendado. Por isso, o dialog box deve ser projetado de forma que caiba na viewport e que o espaçamento em todos os lados seja de pelo menos 20px da borda da tela.
+
+### Fechando uma janela
+
+Além da ação de destino, a janela modal pode ser fechada das seguintes maneiras:
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      1. Botão Cancelar
+
+      ![cancel_btn](/static/images/design/Dialog/cancel_btn.png)
+   </div>
+   <div className="col-12 col-md-6">
+      2. Botão 'X'
+
+      ![x_btn](/static/images/design/Dialog/x_btn.png)
+   </div>
+</div>
+
+Se a janela não for modal, ela pode ser fechada usando um dos seguintes métodos:
+
+- Clicando fora da janela modal
+- Pressionando a tecla Esc
+
+Os botões 'cancelar' e 'X' são elementos familiares, pois são amplamente utilizados em dialog boxes. Clicar fora da janela modal facilita o fechamento pelo usuário, pois ele não precisa mirar o cursor do mouse em um elemento específico. Pressionar a tecla Esc permite fechar a janela sem usar o mouse.
+
+Como apenas o dialog box deve ser interagido, o conteúdo da página pai não deve rolar.
+
+### Prevenindo Perda de Dados do Usuário
+
+Como é fácil fechar uma janela modal, sempre há a chance de fazê-lo acidentalmente. Se o usuário selecionou apenas caixas de seleção na janela modal, é mais fácil recuperar os dados perdidos do que se o usuário gastou um tempo considerável escrevendo código ou digitando novamente o código VIN de 12 dígitos do veículo. Portanto, é melhor evitar tais situações. No entanto, não devemos impedir o usuário de fechar a janela modal da maneira usual.
+
+**Para evitar o risco de perda de dados, recomendamos o uso** de uma janela de confirmação adicional para exclusão de dados. Nesse caso, a ação deve ser confirmada pelo usuário.
+
+![Pop-up S.png](/static/images/design/Dialog/Pop-up_S%202.png)
+
+Ao fechar a janela modal, use o bom senso para determinar se outra janela de confirmação é necessária. É importante encontrar um equilíbrio entre segurança e fazer muitas perguntas que possam irritar o usuário. O objetivo da confirmação é evitar a perda da entrada do usuário, permitindo que ele execute o script.
