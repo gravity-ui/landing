@@ -1,0 +1,56 @@
+Ein Tooltip, der erscheint, wenn der Benutzer mit der Maus über eine Schaltfläche fährt. Typischerweise enthält er eine Erklärung oder zusätzliche Informationen zur Aktion, die beim Klicken auf die Schaltfläche ausgeführt wird. Wird oft für Schaltflächen mit nur einem Symbol verwendet, um den Benutzern ein klares Verständnis der damit verbundenen Aktion zu vermitteln.
+
+## Struktur
+
+![2.png](/static/images/design/ActionTooltip/Structure.png)
+
+1.  **Titel** ist das wichtigste und erforderliche Element des Tooltips; es beschreibt die Hauptfunktion der Schaltfläche. Wir empfehlen, den Titel so zu formulieren, dass er in eine einzige Zeile passt.
+2.  **Beschreibung** – ein optionales Element des Tooltips, das zusätzliche Informationen zum Titel liefert.
+3.  **Hotkeys / Verknüpfung** - ein optionales Element des Tooltips, eine Tastenkombination, die beim Drücken die beschriebene Aktion in der Benutzeroberfläche auslöst. Wird verwendet, um Benutzern schnelle Aktionen beizubringen, um ihre Interaktion mit dem Dienst zu beschleunigen.
+
+## Optionen
+
+![Group 2087325956.png](/static/images/design/ActionTooltip/Variants.png)
+
+1.  **Nur Titel** ist die am häufigsten verwendete Option; der Tooltip beschreibt kurz nur die Aktion selbst. Wir empfehlen, den Text so zu formulieren, dass er nicht mehr als 5 Wörter enthält.
+2.  **Titel und Verknüpfung** - Wenn einer Aktion eine Tastenkombination zugewiesen ist, wird empfohlen, diese zur Benutzerführung anzuzeigen.
+3.  **Titel und Beschreibung** - Wenn die Aktion komplex ist und der Titel nicht prägnant und klar formuliert werden kann, wird empfohlen, eine Beschreibung mit zusätzlichen Informationen einzufügen.
+4.  **Titel, Beschreibung und Verknüpfung** - die maximale Einstellung für eine Komponente, die verwendet wird, wenn alle Elemente für den Benutzer erforderlich sind, um eine Entscheidung in der Benutzeroberfläche zu treffen.
+
+## Größen
+
+Wenn nur ein Titel oder Titel + Verknüpfung verwendet wird, passt sich die Breite des Tooltips dem Text an. Für Beschreibungen wird die Breite auf 300px festgelegt.
+
+Abstand in allen Optionen: 12px links und rechts, 8px oben und unten.
+
+In der Option mit Verknüpfungen beträgt der Abstand zwischen Titel und Label 8px.
+
+In der Option mit einer Beschreibung (unabhängig davon, ob Hotkeys vorhanden sind oder nicht) beträgt der Abstand zwischen Titel und Beschreibung 2px.
+
+![158.png](/static/images/design/ActionTooltip/Sizes.png)
+
+## Position
+
+Die Hauptposition des Tooltips relativ zur Schaltfläche ist unten und zentriert, mit einem Abstand von 4px zwischen den Elementen.
+
+![13.png](/static/images/design/ActionTooltip/LocationUnder.png)
+
+Wenn Schaltflächen am linken oder rechten Rand der Seite positioniert sind, wird der Tooltip am entsprechenden Schaltflächenrand ausgerichtet.
+
+![14.png](/static/images/design/ActionTooltip/LocationUnderLeft&right.png)
+
+Wenn sich Schaltflächen am unteren Bildschirmrand befinden, wird der Tooltip oben in der Position angezeigt, die der Position der Schaltfläche entspricht: linker Rand, Mitte oder rechter Rand.
+
+![15.png](/static/images/design/ActionTooltip/LocationAboveLeft&center&right.png)
+
+## Timing
+
+Je nach Zweck können Sie die Verzögerung für das Erscheinen und Verschwinden des Tooltips beim Überfahren mit der Maus anpassen. In den meisten Fällen erscheint der Tooltip sofort oder mit einer minimalen Verzögerung von bis zu 250 ms und verschwindet, wenn der Benutzer den Cursor von der Schaltfläche wegbewegt.
+
+Wenn Sie der Meinung sind, dass die Mehrheit der Benutzer die Funktion der Schaltfläche ohne Hinweis versteht, kann der Tooltip nur denjenigen angezeigt werden, die Schwierigkeiten haben, und die Verzögerung beim Erscheinen kann erhöht werden, um Benutzer nicht mit unnötigen Elementen zu verärgern.
+
+## Anwendungsfälle
+
+![Example](/static/images/design/ActionTooltip/Example1.png)
+
+![Example](/static/images/design/ActionTooltip/Example2.png)

@@ -1,0 +1,56 @@
+Uma tooltip que aparece quando o usuário passa o mouse sobre um botão. Geralmente, inclui uma explicação ou informações adicionais sobre a ação que será realizada ao clicar no botão. Frequentemente usada para botões com apenas um ícone, fornecendo aos usuários uma compreensão clara da ação associada a ele.
+
+## Estrutura
+
+![2.png](/static/images/design/ActionTooltip/Structure.png)
+
+1. **Título** é o elemento mais importante e obrigatório da tooltip; ele descreve a função principal do botão. Recomendamos formular o texto do título de forma que ele caiba em uma única linha.
+2. **Descrição** — um elemento opcional da tooltip que fornece informações adicionais sobre o título.
+3. **Hotkeys / Atalho** - um elemento opcional da tooltip, uma combinação de teclas que, ao ser pressionada, inicia a ação descrita na interface. Usado para ensinar aos usuários ações rápidas para acelerar sua interação com o serviço.
+
+## Opções
+
+![Group 2087325956.png](/static/images/design/ActionTooltip/Variants.png)
+
+1. **Apenas título** é a opção mais comum; a tooltip descreve brevemente apenas a ação em si. Recomendamos formular o texto de forma que ele contenha no máximo 5 palavras.
+2. **Título e atalho** - Se uma ação tiver uma combinação de teclas atribuída a ela, é recomendado exibi-la para orientação do usuário.
+3. **Título e descrição** - Se a ação for complexa e o título não puder ser formulado de forma concisa e clara, é recomendado incluir uma descrição com informações adicionais.
+4. **Título, descrição e atalho** - o conjunto máximo para um componente, usado quando todos os elementos são necessários para que o usuário tome uma decisão na interface.
+
+## Tamanhos
+
+Quando um título único ou título+atalho é usado, a largura da tooltip se ajusta ao texto. Para descrições, a largura é definida em 300px.
+
+Padding em todas as opções: 12px à esquerda e à direita, 8px em cima e embaixo.
+
+Na opção com atalhos, o espaço entre o título e o rótulo é definido em 8px.
+
+Na opção com descrição (independentemente de haver ou não atalhos), a distância entre o título e a descrição é de 2px.
+
+![158.png](/static/images/design/ActionTooltip/Sizes.png)
+
+## Posição
+
+A posição principal da tooltip em relação ao botão é inferior e centralizada, com uma distância de 4px entre os elementos.
+
+![13.png](/static/images/design/ActionTooltip/LocationUnder.png)
+
+Se os botões estiverem posicionados na borda esquerda ou direita da página, a tooltip é alinhada com a borda correspondente do botão.
+
+![14.png](/static/images/design/ActionTooltip/LocationUnderLeft&right.png)
+
+Se os botões estiverem na parte inferior da tela, a tooltip é exibida na parte superior na posição que corresponde à localização do botão: borda esquerda, centro ou borda direita.
+
+![15.png](/static/images/design/ActionTooltip/LocationAboveLeft&center&right.png)
+
+## Tempo
+
+Dependendo do seu propósito, você pode ajustar o atraso para que a tooltip apareça e desapareça ao passar o mouse sobre ela. Na maioria dos casos, a tooltip aparece instantaneamente ou com um atraso mínimo de até 250 ms e desaparece quando o usuário move o cursor para longe do botão.
+
+Se você achar que a maioria dos usuários entenderá a função do botão sem uma dica, a tooltip pode ser exibida apenas para aqueles que estão com dificuldades, e o atraso de aparecimento pode ser aumentado para evitar incomodar os usuários com elementos desnecessários.
+
+## Casos de uso
+
+![Example](/static/images/design/ActionTooltip/Example1.png)
+
+![Example](/static/images/design/ActionTooltip/Example2.png)
