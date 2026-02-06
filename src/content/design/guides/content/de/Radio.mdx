@@ -1,0 +1,47 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche, wobei darauf geachtet wurde, dass sie natürlich klingt und technische Begriffe sowie MDX-Komponenten unverändert bleiben:
+
+Wird verwendet, wenn Sie zwischen mehreren sich gegenseitig ausschließenden Optionen wählen müssen.
+
+### Wann zu verwenden
+
+Ähnlich wie bei Checkboxen löst Radio keine Aktion sofort aus. Dazu müssen Sie auf die Bestätigungsschaltfläche (Speichern / Anwenden / Senden) klicken.
+
+Der erklärende Text auf dem Label sollte die Frage beantworten: "Wie?" oder "Welche?".
+
+**Wann nicht zu verwenden**
+
+Radio kann nicht zum Wechseln zwischen Seiten- oder Menüinhalten verwendet werden. Diese Funktionalität wird von den Komponenten [radio-button](https://gravity-ui.com/design/guides/radio-button) und Tab unterstützt.
+
+### Struktur
+
+![Struktur](/static/images/design/Radio/radio-content.png)
+
+1 — Radio-Element, 2 — erklärendes Label
+
+Radio wird immer mit einem Label verwendet, das seine Bedeutung erklärt.
+
+Die erste Option ist standardmäßig ausgewählt.
+
+Sie können die Umschaltsteuerelemente auch unausgewählt lassen (wenn alle Optionen entfernt sind).
+
+Sobald ein Element innerhalb einer Gruppe ausgewählt wurde, kann der Benutzer es nicht mehr abwählen, um die Gruppe in ihren ursprünglichen Zustand zurückzuversetzen (ohne die Seite zu aktualisieren).
+
+Bei der Verwendung einer Komponente empfehlen wir, immer die erste Option in der Liste auszuwählen.
+
+### Größen
+
+Erhältlich in zwei Größen: M und L. Die Größe der Komponente wird durch die Größe der Seitensteuerelemente bestimmt. Wenn die Seite beispielsweise die Größe L für Eingabefelder, Schaltflächen und andere Elemente verwendet, sollte das Radio die gleiche Größe haben.
+
+![Größen](/static/images/design/Radio/radio-size.png)
+
+### Zustände
+
+![Zustände](/static/images/design/Radio/radio-state.png)
+
+Standard – wenn der Benutzer nicht mit dem Element interagiert
+
+Hover – beim Überfahren eines Elements und eines Textlabels mit der Maus
+
+Checked – ausgewählter Zustand
+
+Disabled – deaktivierter Zustand, wenn die ausgewählte Option nicht zur Interaktion verfügbar ist
