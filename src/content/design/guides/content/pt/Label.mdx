@@ -1,0 +1,103 @@
+Um rótulo é uma descrição textual dos atributos de um objeto, como seu status ou tipo. Os rótulos são usados para categorizar, etiquetar ou classificar entidades, bem como para marcá-las em um formato Chave:Valor.
+
+### Quando usar
+
+Rótulos são usados em todos os lugares (por exemplo, em cards, tabelas, páginas de entidades) para indicar atributos de objetos e ajudar os usuários a identificar e categorizar conteúdo rapidamente. Os rótulos geralmente são exibidos ao lado dos objetos relacionados.
+
+Outra opção de aplicação é exibir o número de objetos que não cabem na lista. Nesse caso, passar o mouse sobre o rótulo exibe um Popover com a lista das entidades restantes.
+
+![DLQ](/static/images/design/Label/DLQ1.png)
+
+Rótulos também podem ser usados como tags para organizar entidades e facilitar o trabalho com elas.
+
+![DLQ](/static/images/design/Label/DLQ2.png)
+
+Ao exibir rótulos em uma tabela, limite o número de rótulos em uma célula (não mais que 2-3 rótulos por linha e não mais que 2 colunas com rótulos em uma única tabela) e o número máximo de caracteres (não mais que 20 caracteres seguidos por reticências).
+
+### Estrutura
+
+![Structure](/static/images/design/Label/Structure2.png)
+
+![Structure](/static/images/design/Label/Structure.png)
+
+![Application Examples](/static/images/design/Label/Application.png)
+
+1 — Ícone à esquerda: opcional e não interativo. Usado para recuperação de informações mais rápida.
+
+2 — Texto: um rótulo não deve exceder 20 caracteres. Você pode usar adjetivos (por exemplo, Novo, Ativo, Grátis), Particípios (por exemplo, Parado), Substantivos (por exemplo, Desconto) e Advérbios. O texto do rótulo não deve conter verbos (por exemplo, Habilitar). Se precisar usar verbos, use botões em vez disso.
+
+3 — Uma versão alternativa do texto no formato "Chave: Valor", que é usada para marcar objetos manualmente. Por exemplo, você pode rotular o objeto como "serviço: entrega" ou "versão: 23".
+
+4 — Botão à direita: interativo. Pode ser um ícone de fechar ou um ícone de copiar.
+
+### Tamanhos
+
+![Sizes](/static/images/design/Label/Sizes.png)
+
+**Existem três tamanhos de rótulo:**
+
+**XS** - Frequentemente usado em tabelas, listas, cabeçalhos, popups e páginas de entidades.
+
+**S** - Usado para pré-visualizar marcas recém-adicionadas em formulários e outras áreas, se houver espaço suficiente.
+
+**M** - Usado com menos frequência devido à sua semelhança com um botão.
+
+### Temas
+
+![Themes](/static/images/design/Label/Themes.png)
+
+![Themes](/static/images/design/Label/Themes2.png)
+
+**Sem cor semântica**
+
+**Padrão** — O rótulo padrão, que é frequentemente usado para destacar informações sem coloração semântica.
+
+**Claro** — Não possui fundo, apenas um contorno. Usado para ênfase mínima.
+
+**Com coloração semântica**
+
+**Desconhecido** — Uma opção neutra usada quando não há necessidade de focar nas informações contidas no rótulo.
+
+**Destaque** — Usado para destacar informações importantes e para operações "em andamento".
+
+**Sucesso** — Usado para indicar um processo concluído com sucesso ou a "saúde" de uma entidade.
+
+**Aviso** — Usado para situações de emergência, como para alertar o usuário sobre algo.
+
+**Perigo** — Para chamar a atenção total do usuário, como quando um erro ocorreu e ação imediata é necessária para corrigi-lo.
+
+### Rótulos Semânticos vs. Botões
+
+Rótulos, incluindo aqueles com coloração semântica, são usados para indicar estados. A única forma de interagir com eles é passando o mouse sobre o rótulo ou clicando no ícone. O rótulo não pode ser definido como "selecionado". Se você precisar criar um elemento interativo baseado em rótulos semânticos (por exemplo, para filtros de status), use botões. Eles têm um estado pressionado (aplicado) - selecionado - e podem ser usados com cores semânticas.
+
+### Modificações e estados
+
+Todos os rótulos têm cinco estados: apenas texto, ícone antes do texto, ícone após o texto, ícone antes e depois, e apenas um ícone.
+
+![States](/static/images/design/Label/States.png)
+
+![States](/static/images/design/Label/States2.png)
+
+Você pode interagir:
+
+1. Com o rótulo inteiro. Por exemplo, para exibir um Popover com informações detalhadas passando o mouse sobre um rótulo.
+
+2. Apenas com o ícone à direita. Dependendo do ícone, clicar nele pode excluir o rótulo ou copiar seu valor.
+
+Ao adicionar interações ao rótulo, certifique-se de que elas sejam intuitivas e diretas.
+
+### Recursos adicionais
+
+Você pode criar filtros dinâmicos para classificar conteúdo com base no rótulo. Por exemplo, clicar no ícone de adição adiciona um novo valor, enquanto clicar no ícone de cruz cancela o filtro.
+
+![Features](/static/images/design/Label/Features.png)
+
+Se sua interface permite que os usuários criem seus próprios rótulos e marquem objetos, eles também devem poder adicioná-los e excluí-los.
+
+### Personalização
+
+As cores, cantos arredondados, tamanhos e preenchimentos do rótulo podem ser personalizados. O texto contido no rótulo deve ser fácil de ler.
+
+![Customization](/static/images/design/Label/Customization.png)
+
+Altere a aparência ou a cor de um rótulo quando o usuário passar o mouse sobre ele para indicar a possibilidade de interação.
