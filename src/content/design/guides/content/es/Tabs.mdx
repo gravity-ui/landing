@@ -1,18 +1,20 @@
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, buscando que suene lo más natural posible:
+
 ## Descripción
 
-Con el componente Pestañas, puede organizar el contenido dividiéndolo en varias secciones entre las que el usuario puede cambiar para verlas. Usa pestañas para agrupar secciones relacionadas y proporcionar acceso rápido a cada una de ellas.
+Con el componente `Tabs`, puedes organizar el contenido dividiéndolo en varias secciones entre las que el usuario puede alternar para visualizarlas. Utiliza pestañas para agrupar secciones relacionadas y proporcionar acceso rápido a cada una de ellas.
 
 ![1.png](/static/images/design/Tabs/tabs-0001.png)
 
-## Tallas
+## Tamaños
 
 Las pestañas pueden tener tres tamaños:
 
 ![2.png](/static/images/design/Tabs/tabs-0002.png)
 
-- **M (mediana):** Usa este tamaño para uso general en páginas, dentro de secciones individuales.
-- **L (grande):** Usa el tamaño L si las pestañas también sirven como subtítulos de página. En este caso, el contenido de las pestañas es una sección independiente de la página y las pestañas son los subtítulos de esta sección.
-- **XL (extra grande)**: Este tamaño es adecuado cuando las pestañas también sirven como encabezados de página. En este caso, cuando los usuarios cambian de pestaña, cambia el contenido de toda la página.
+- **M (Mediano):** Utiliza este tamaño para uso general en páginas, dentro de secciones individuales.
+- **L (Grande):** Usa el tamaño L si las pestañas también sirven como subencabezados de página. En este caso, el contenido de la pestaña es una sección separada en la página, y las pestañas son los subencabezados de esta sección.
+- **XL (Extra Grande):** Este tamaño es apropiado cuando las pestañas también sirven como encabezados de página. En este caso, cuando los usuarios cambian de pestaña, el contenido de toda la página cambia.
 
 ## Estados
 
@@ -20,26 +22,26 @@ Las pestañas pueden tener los siguientes estados:
 
 ![3.png](/static/images/design/Tabs/tabs-0003.png)
 
-- **Inactivo**: La pestaña está inactiva cuando no está seleccionada. En este estado, la pestaña tiene un color más descolorido para resaltar la pestaña activa.
-- **Activo**: Este estado se asigna a la pestaña seleccionada que muestra la sección activa actual del contenido. Las pestañas activas tienen colores más saturados y están subrayadas para enfatizar.
-- **Flotar:** Cuando el usuario pasa el ratón por encima de la pestaña, el puntero cambia de estilo para indicar la posibilidad de interacción.
-- **Discapacitado**: Las pestañas se pueden desactivar si no están disponibles temporal o permanentemente para su selección. Estas pestañas aparecen atenuadas y están inactivas para interactuar.
+- **Inactivo:** La pestaña está en estado inactivo cuando no está seleccionada. En este estado, la pestaña tiene un color más apagado para resaltar la pestaña activa.
+- **Activo:** Este estado se asigna a la pestaña seleccionada que muestra la sección de contenido activa actual. Las pestañas activas tienen colores más saturados y están subrayadas para enfatizarlas.
+- **Hover (Paso del ratón por encima):** Cuando el usuario pasa el ratón por encima de la pestaña, el puntero cambia su estilo para indicar la posibilidad de interacción.
+- **Deshabilitado:** Las pestañas pueden estar deshabilitadas si no están disponibles temporal o permanentemente para su selección. Dichas pestañas se muestran en gris y no son interactivas.
 
 ## Propiedades
 
-Puede activar o desactivar los siguientes elementos para cada pestaña:
+Puedes habilitar/deshabilitar los siguientes elementos para cada pestaña:
 
 ![4.png](/static/images/design/Tabs/tabs-0004.png)
 
-1. Icono. Se usa según el criterio del diseñador para visualizar el tipo de contenido dentro de la pestaña.
-2. Etiqueta. El nombre de la sección en formato de texto.
-3. mostrador. Puede usarlo para indicar el número de entidades dentro de una pestaña. También puede usarlo para especificar el número de entidades nuevas que surgieron en la pestaña.
-4. Etiqueta. Puede usarlo para indicar el estado de la sección de la que es responsable la pestaña.
+1.  **Icono:** Lo usa el diseñador a su discreción para visualizar el tipo de contenido dentro de la pestaña.
+2.  **Etiqueta (Label):** El nombre de la sección en formato de texto.
+3.  **Contador:** Puedes usarlo para indicar el número de entidades dentro de una pestaña. También puedes usarlo para especificar el número de entidades nuevas que han aparecido en la pestaña.
+4.  **Etiqueta (Label):** Puedes usarla para denotar el estado de la sección de la que es responsable la pestaña.
 
 ## Recomendaciones de uso
 
-Use pestañas para organizar grandes volúmenes de contenido o para dividir la información en secciones lógicas. Garantice una estructura clara y fácil de leer para los encabezados de las pestañas.
+Utiliza pestañas para organizar grandes volúmenes de contenido o para dividir la información en secciones lógicas. Asegúrate de que la estructura de los encabezados de las pestañas sea clara y fácilmente legible.
 
-Selecciona el estilo de pestaña y los colores que coincidan con el diseño general de tu proyecto. Resalta siempre las pestañas activas para que los usuarios puedan identificar fácilmente la sección actual.
+Selecciona un estilo y colores para las pestañas que coincidan con el diseño general de tu proyecto. Siempre resalta las pestañas activas para que los usuarios puedan identificar fácilmente la sección actual.
 
-Siempre que sea posible, intenta que las secciones de las pestañas M y L quepan en una sola altura de pantalla. De esta forma, puedes asociar fácilmente el contenido con el nombre de la pestaña y ver dónde termina el contenido de la pestaña y dónde comienza el siguiente bloque.
+Siempre que sea posible, intenta que las secciones de tus pestañas de tamaño M y L quepan en la altura de una sola pantalla. De esta manera, podrás asociar fácilmente el contenido con el nombre de la pestaña y ver dónde termina el contenido de la pestaña y comienza el siguiente bloque.

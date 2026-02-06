@@ -1,0 +1,47 @@
+Aqui está a tradução do arquivo fonte do guia de design para português, com foco em soar natural e manter os elementos técnicos intactos:
+
+## Descrição
+
+Com o componente `Tabs`, você pode organizar o conteúdo dividindo-o em várias seções entre as quais o usuário pode alternar para visualização. Use abas para agrupar seções relacionadas e fornecer acesso rápido a cada uma delas.
+
+![1.png](/static/images/design/Tabs/tabs-0001.png)
+
+## Tamanhos
+
+As abas podem ter três tamanhos:
+
+![2.png](/static/images/design/Tabs/tabs-0002.png)
+
+- **M (Médio):** Use este tamanho para uso geral em páginas, dentro de seções individuais.
+- **L (Grande):** Use o tamanho L se as abas também servirem como sub-títulos de página. Neste caso, o conteúdo da aba é uma seção separada na página, e as abas são sub-títulos desta seção.
+- **XL (Extra Grande)**: Este tamanho é apropriado quando as abas também servem como títulos de página. Neste caso, quando os usuários alternam entre as abas, o conteúdo de toda a página muda.
+
+## Estados
+
+As abas podem ter os seguintes estados:
+
+![3.png](/static/images/design/Tabs/tabs-0003.png)
+
+- **Inativo**: A aba está em um estado inativo quando não está selecionada. Neste estado, a aba tem uma cor mais desbotada para destacar a aba ativa.
+- **Ativo**: Este status é atribuído à aba selecionada, que exibe a seção de conteúdo ativa atual. As abas ativas têm cores mais saturadas e são sublinhadas para ênfase.
+- **Hover**: Quando o usuário passa o mouse sobre a aba, o ponteiro muda seu estilo para indicar a possibilidade de interação.
+- **Desabilitado**: As abas podem ser desabilitadas se estiverem temporariamente ou permanentemente indisponíveis para seleção. Tais abas ficam acinzentadas e inativas para interação.
+
+## Propriedades
+
+Você pode habilitar/desabilitar os seguintes elementos para cada aba:
+
+![4.png](/static/images/design/Tabs/tabs-0004.png)
+
+1. Ícone. Usado a critério do designer para visualizar o tipo de conteúdo dentro da aba.
+2. Rótulo. O nome da seção em formato de texto.
+3. Contador. Você pode usá-lo para indicar o número de entidades dentro de uma aba. Você também pode usá-lo para especificar o número de novas entidades que surgiram na aba.
+4. Rótulo. Você pode usá-lo para denotar o status da seção pela qual a aba é responsável.
+
+## Recomendações de uso
+
+Use abas para organizar grandes volumes de conteúdo ou para dividir informações em seções lógicas. Garanta uma estrutura clara e facilmente legível para os títulos das abas.
+
+Selecione o estilo e as cores das abas que correspondam ao design geral do seu projeto. Sempre destaque as abas ativas para que os usuários possam identificar facilmente a seção atual.
+
+Sempre que possível, tente fazer com que as seções de abas M e L caibam em uma única altura de tela. Dessa forma, você pode associar facilmente o conteúdo ao nome da aba e ver onde o conteúdo da aba termina e o próximo bloco começa.

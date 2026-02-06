@@ -1,0 +1,47 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+## Description
+
+Avec le composant `Tabs`, vous pouvez organiser du contenu en le divisant en plusieurs sections entre lesquelles l'utilisateur peut naviguer. Utilisez des onglets pour regrouper des sections connexes et offrir un accès rapide à chacune d'elles.
+
+![1.png](/static/images/design/Tabs/tabs-0001.png)
+
+## Tailles
+
+Les onglets peuvent avoir trois tailles :
+
+![2.png](/static/images/design/Tabs/tabs-0002.png)
+
+- **M (Medium) :** Utilisez cette taille pour une utilisation générale sur les pages, au sein de sections individuelles.
+- **L (Large) :** Utilisez la taille L si les onglets servent également de sous-titres de page. Dans ce cas, le contenu des onglets constitue une section distincte sur la page, et les onglets sont les sous-titres de cette section.
+- **XL (Extra Large) :** Cette taille est appropriée lorsque les onglets servent également de titres de page. Dans ce cas, lorsque les utilisateurs changent d'onglet, le contenu de la page entière est modifié.
+
+## États
+
+Les onglets peuvent avoir les états suivants :
+
+![3.png](/static/images/design/Tabs/tabs-0003.png)
+
+- **Inactif :** L'onglet est dans un état inactif lorsqu'il n'est pas sélectionné. Dans cet état, l'onglet a une couleur plus atténuée pour mettre en évidence l'onglet actif.
+- **Actif :** Ce statut est attribué à l'onglet sélectionné qui affiche la section de contenu actuellement active. Les onglets actifs ont des couleurs plus saturées et sont soulignés pour l'emphase.
+- **Survol :** Lorsque l'utilisateur survole l'onglet, le pointeur change de style pour indiquer la possibilité d'interaction.
+- **Désactivé :** Les onglets peuvent être désactivés s'ils sont temporairement ou définitivement indisponibles pour la sélection. Ces onglets sont grisés et inactifs pour l'interaction.
+
+## Propriétés
+
+Vous pouvez activer/désactiver les éléments suivants pour chaque onglet :
+
+![4.png](/static/images/design/Tabs/tabs-0004.png)
+
+1. **Icône.** Utilisée à la discrétion du designer pour visualiser le type de contenu à l'intérieur de l'onglet.
+2. **Libellé.** Le nom de la section sous forme de texte.
+3. **Compteur.** Vous pouvez l'utiliser pour indiquer le nombre d'entités à l'intérieur d'un onglet. Vous pouvez également l'utiliser pour spécifier le nombre de nouvelles entités apparues dans l'onglet.
+4. **Libellé.** Vous pouvez l'utiliser pour indiquer le statut de la section dont l'onglet est responsable.
+
+## Recommandations d'utilisation
+
+Utilisez les onglets pour organiser de grands volumes de contenu ou pour diviser les informations en sections logiques. Assurez une structure claire et facilement lisible pour les titres des onglets.
+
+Sélectionnez un style et des couleurs d'onglets qui correspondent à la conception globale de votre projet. Mettez toujours en évidence les onglets actifs afin que les utilisateurs puissent facilement identifier la section actuelle.
+
+Dans la mesure du possible, essayez de faire en sorte que vos sections d'onglets M et L tiennent sur une seule hauteur d'écran. De cette façon, vous pouvez facilement associer le contenu au nom de l'onglet et voir où le contenu de l'onglet se termine et où commence le bloc suivant.
