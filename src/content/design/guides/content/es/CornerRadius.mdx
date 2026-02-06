@@ -1,22 +1,24 @@
-El radio de las esquinas de los controles se puede anular. Para ello, utilice las siguientes variables:
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, manteniendo un tono natural y conservando los elementos técnicos:
 
-- --g-border-radius-xs: 3 px;
-- --g-border-radius-s: 5 px;
-- --g-border-radius-m: 6 px;
-- --g-border-radius-l: 8 px;
-- --g-border-radius-xl: 10 px;
-- --g-border-radius-2xl: 16 px;
+El radio de las esquinas de los controles se puede sobrescribir. Para hacerlo, utiliza las siguientes variables:
 
-![Corner radius](/static/images/design/CornerRadius/1.png)
+- `--g-border-radius-xs: 3px;`
+- `--g-border-radius-s: 5px;`
+- `--g-border-radius-m: 6px;`
+- `--g-border-radius-l: 8px;`
+- `--g-border-radius-xl: 10px;`
+- `--g-border-radius-2xl: 16px;`
 
-Puede anular los valores de Variables. ****
+![Radio de las esquinas](/static/images/design/CornerRadius/1.png)
 
-Las variables se utilizan en los controles de los tamaños correspondientes. Si cambias el valor de la variable, el radio de las esquinas de todos los controles del mismo tamaño cambiará en consecuencia. Los controles afectados por esta variable aparecen en la página de personalización de marca de la biblioteca de Figma. Dado que los distintos controles tienen diferentes rangos de tamaño, es posible que los conjuntos de controles no coincidan. Las etiquetas, por ejemplo, no vienen en tamaños superiores a L, por lo que las variables que comienzan por --g-border-radius-l no se utilizan en este componente y no afectan a su apariencia.
+Puedes sobrescribir los valores en **Variables**.
 
-![Corner radius](/static/images/design/CornerRadius/2.png)
+Las variables se utilizan en los controles de tamaños correspondientes. Si cambias el valor de una variable, el radio de las esquinas de todos los controles del mismo tamaño cambiará en consecuencia. Los controles afectados por esta variable se enumeran en la página de Branding de la biblioteca de Figma. Dado que los diferentes controles tienen rangos de tamaño distintos, los conjuntos de controles pueden no coincidir. Las etiquetas, por ejemplo, no vienen en tamaños mayores que L, por lo que las variables que comienzan con `--g-border-radius-l` no se utilizan en este componente y no tienen ningún efecto en su apariencia.
 
-El radio de la esquina del elemento anidado del botón de verificación viene determinado por las fichas y se calcula mediante la fórmula «valor de la ficha: 3» (donde 3 es la distancia entre los elementos internos y externos). En la versión actual, debe realizar los cálculos manualmente e introducir los resultados en los siguientes símbolos:
+![Radio de las esquinas](/static/images/design/CornerRadius/2.png)
 
-![Corner radius](/static/images/design/CornerRadius/3.png)
+El radio de las esquinas del elemento anidado para el botón de selección se determina mediante tokens y se calcula utilizando la fórmula "valor del token - 3" (donde 3 es la distancia entre los elementos interno y externo). En la versión actual, debes realizar los cálculos manualmente e introducir los resultados en los siguientes tokens:
 
-![Corner radius](/static/images/design/CornerRadius/4.png)
+![Radio de las esquinas](/static/images/design/CornerRadius/3.png)
+
+![Radio de las esquinas](/static/images/design/CornerRadius/4.png)
