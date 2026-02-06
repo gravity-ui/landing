@@ -1,0 +1,159 @@
+여러 줄에 걸쳐 임의의 텍스트, 숫자 및 기호 값을 입력하기 위한 컴포넌트입니다. 엔티티를 생성하거나 양식 및 대화 상자에 메시지를 입력할 때 가장 일반적으로 설명 필드에 사용됩니다.
+
+## **적용**
+
+[TextInput](/design/guides/text-input)과 달리 여러 줄의 합산 높이를 가지며, 문자, 숫자 또는 기호의 조합으로 자유 형식 데이터를 입력하는 데 사용됩니다.
+
+최소 높이는 한 줄이지만, 두 줄 이상을 사용하는 것을 권장합니다.
+
+![Rows](/static/images/design/TextArea/Rows.png)
+
+줄 수가 지정되지 않으면 콘텐츠 양에 따라 높이가 자동으로 계산됩니다.
+
+![Auto](/static/images/design/TextArea/Auto.png)
+
+✅ **사용 시기**
+
+1. 한 줄 이상의 텍스트가 필요한 경우.
+2. 텍스트가 긴 설명이거나 많은 문자를 포함하는 메시지여야 하는 경우.
+3. 필수 입력 필드가 있는 양식에 추가되는 경우.
+
+🚫 **사용하지 않을 때**
+
+1. 필터, 인증 양식 필드 또는 검색 문자열이 필요한 경우.
+2. 적은 수의 문자(5단어 미만)가 필요한 경우. 이 경우 한 줄 텍스트 입력을 위한 컴포넌트인 [TextInput](/design/guides/text-input)을 사용하는 것이 좋습니다.
+
+## 유형
+
+TextInput에는 **Normal**과 **Clear** 두 가지 유형이 있으며, 동일한 기능을 제공하지만 컨텍스트에 따라 모양과 사용 방식이 다릅니다.
+
+![Normal, Clear](/static/images/design/TextArea/Normal_Clear.png)
+
+**Normal**
+
+- 가장 일반적으로 사용되는 유형입니다.
+- 이 컴포넌트의 한 가지 특징은 내부 패딩과 모서리 반경입니다. 이러한 매개변수는 요소의 크기에 따라 결정되며, 특정 모서리 반경 변수(자세한 내용은 [여기](/design/branding/corner-radius) 참조)와 1px 스트로크로 정의됩니다.
+- 양식 요소 간의 패딩과 같이 컴포넌트 간의 여유 공간이 필요한 경우 양식에서 사용됩니다.
+
+{/* ![Console. Creating a cluster.](/static/images/design/TextArea/Console.png)
+
+Console. Creating a cluster.
+
+![DataLens. Creating a collection.](/static/images/design/TextArea/Datal.png)
+
+DataLens. Creating a collection. */}
+
+**Clear**
+
+- 이 컴포넌트의 특징은 테두리가 없고 입력 필드의 여백 내에 요소가 배치된다는 것입니다.
+- Normal 유형이 시각적으로 산만해지는 경우에 사용됩니다.
+- 이 유형을 사용할 때는 이 컴포넌트의 목적이 사용자에게 명확한지 확인하십시오.
+
+{/* ![Yandex GPT. Entering instructions.](/static/images/design/TextArea/Chat_GPT.png)
+
+Yandex GPT. Entering instructions. */}
+
+## 구조
+
+![Structure.png](/static/images/design/TextArea/Structure.png)
+
+**1. 값**
+
+![Active.png](/static/images/design/TextArea/Active.png)
+
+- 필수 요소입니다.
+- 힌트(플레이스홀더) 및 입력된 텍스트로 사용될 수 있습니다.
+- 입력된 텍스트는 힌트를 대체합니다.
+
+**2. 지우기 버튼**
+
+![Clear Button](/static/images/design/TextArea/ClearButton.png)
+
+- 선택적 컴포넌트입니다.
+- 필드 내용을 지워야 할 때 사용됩니다.
+- 필드에 최소 한 글자 이상 입력되었을 때 표시됩니다.
+- 필드 외부에서 포커스가 벗어난 경우에도 표시됩니다.
+- Flat-secondary 유형의 Button 컴포넌트이며 모든 속성을 상속합니다. 예를 들어, 호버 시 십자 모양의 배경이 채워집니다.
+- 지우기 버튼을 클릭하면 포커스가 필드로 이동하고 입력된 값이 지워집니다.
+**3. 추가 콘텐츠**
+
+![Structure2.png](/static/images/design/TextArea/Structure2.png)
+
+- 선택적 요소이며 오른쪽 하단에 포함됩니다.
+- 외부로 추가 텍스트를 추가해야 할 때 사용됩니다.
+- 텍스트는 오른쪽으로 정렬됩니다.
+- 예를 들어, 카운터(문자 입력 카운터)로 사용할 수 있습니다.
+
+
+**4. 오류 아이콘**
+
+![Error icon](/static/images/design/TextArea/8.png)
+
+- Inline Error 상태에서만 표시됩니다.
+- Tooltip과 함께 작동하여 아이콘에 마우스를 올리면 오류 설명을 제공하여 양식 레이아웃을 더 간결하게 만듭니다.
+
+**5. 오류 메시지**
+
+![Error message](/static/images/design/TextArea/9.png)
+
+- Outline Error 상태에서만 표시됩니다.
+- 필드 왼쪽 하단에 포함됩니다.
+
+## 상태
+
+![States.png](/static/images/design/TextArea/States.png)
+
+**Suggest, Default, Hover, Active, Disabled, Inline Error, Outline Error**의 상태를 가집니다.
+
+1. **Suggest.** 컴포넌트와 직접적인 상호 작용이 없고 데이터가 입력되지 않은 비활성 상태입니다. 이 상태에서는 값이 힌트 역할을 하여 사용자에게 필드에 어떤 종류의 정보가 입력되어야 하는지 알려줄 수 있습니다.
+2. **Default.** 컴포넌트와 직접적인 상호 작용이 없고 데이터가 이미 입력된 비활성 상태입니다. 이 상태에서는 힌트 값이 사용자의 입력에 따라 변경됩니다.
+3. **Hover.** 커서가 컴포넌트 영역에 올라갔을 때의 활성 상태입니다.
+4. **Active.** 이전 컴포넌트에서 전환되거나 커서로 클릭하여 트리거되는 활성 상태입니다. 다른 컴포넌트로 전환하거나 빈 영역을 클릭하면 상태가 재설정됩니다.
+5. **Disabled.** 상호 작용할 수 없는 컴포넌트의 비활성 상태입니다.
+6. **Outline error.** 유효성 검사 중에 오류가 발생하여 필드 하단에 설명과 함께 표시되는 컴포넌트의 활성 상태입니다.
+7. **Inline error.** 필드 유효성 검사 오류가 발생했지만 오류가 표시되지 않는 컴포넌트의 활성 상태입니다. 대신 오류는 특수 아이콘으로 표시되며, 이 아이콘에 마우스를 올리면 오류 Tooltip이 표시됩니다.
+
+## 크기
+
+![Sizes.png](/static/images/design/TextArea/Sizes.png)
+
+컴포넌트는 **S, M, L, XL**의 네 가지 크기로 제공됩니다.
+
+필드의 높이와 모서리 반경, 필드 내부의 패딩 및 텍스트 크기는 컴포넌트 크기에 따라 달라집니다.
+
+모서리 반경은 크기에 따라 다르며 [변수](/design/branding/corner-radius)로 설정됩니다.
+
+1. **S** (-g-border-radius-s: 5px;) – 표준 입력이 너무 클 때 사용됩니다(예: 테이블, 작은 카드).
+2. **M** (-g-border-radius-m: 6px;) – 기본 크기이며 대부분의 양식 및 필터에 사용됩니다.
+3. **L** (-g-border-radius-l: 8px;) – 검색에 사용됩니다(예: 서비스 검색).
+4. **XL** (-g-border-radius-xl: 10px;) – 커뮤니케이션 환경에서 사용됩니다(예: 웹사이트 및 랜딩 페이지).
+
+## 사용자 가이드
+
+**1. 필드 작업**
+
+- 필드의 높이는 다양할 수 있습니다. [TextInput](/design/guides/text-input)은 한 줄 입력에 사용할 수 있습니다.
+- 필드에 값을 입력하면 필드 이름이 보이지 않으므로, 공간이 제한적이거나 필드의 목적이 사용자에게 명확한 경우가 아니라면 필드 내에 **힌트**를 포함하는 것은 권장하지 않습니다.
+- 양식의 모든 보조 컴포넌트에 **동일한 크기**를 사용하십시오. M 크기를 선택했다면 다른 모든 컴포넌트도 같은 크기여야 합니다.
+
+**2. 외부 필드 헤더**
+
+![External field header](/static/images/design/TextArea/12.png)
+
+- 짧은 필드 이름으로, 가급적 한 줄로 제한하십시오.
+- 컨텍스트가 모바일이거나 Dialog 크기가 S인 경우가 아니라면 컴포넌트는 필드 값과 같은 줄에 배치되어야 합니다. 이 경우 컴포넌트의 제목이 컴포넌트 위에 표시됩니다.
+
+**3. 툴팁이 있는 힌트**
+
+![Hint with tooltip](/static/images/design/TextArea/13.png)
+
+- 물음표 아이콘에 마우스를 올렸을 때 필드를 채우는 방법에 대한 지침입니다.
+- 제목과 의미를 명확히 해야 할 때 사용됩니다.
+- 텍스트는 두 단락을 넘지 않아야 합니다.
+
+**4. 추가 설명**
+
+![Additional description](/static/images/design/TextArea/14.png)
+
+- 필드 하단 또는 오른쪽에 있을 수 있습니다.
+- 추가 설명 없이는 필드를 채우는 방법이 불분명하거나 이전에 입력한 값에 대한 설명이 필요한 드문 경우에 사용됩니다.

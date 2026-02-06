@@ -1,0 +1,115 @@
+Aqui está a tradução do arquivo fonte do guia de design para português:
+
+## Sistema de cores de duas camadas
+
+Existem dois tipos de esquemas de cores usados na biblioteca: privados e semânticos. Esses dois esquemas de cores, ou paletas, variam em estrutura e propósito. A paleta privada atribui valores RGBA a todas as tonalidades e matizes de cores em todos os temas, enquanto a paleta semântica usa cores privadas como valores e as aplica a elementos de UI específicos.
+
+![Sistema de cores de duas camadas](/static/images/design/Color/ColorSystem.png)
+
+### **Cores privadas**
+
+São as camadas de cores base em um sistema de design. Elas não são projetadas para serem usadas diretamente dentro de componentes. Em vez disso, servem como valores para variáveis semânticas que já são usadas em componentes. Os valores das variáveis privadas são cores RGBA/RGB.
+
+Esta paleta inclui todos os tons de cada cor para cada tema, com e sem canal alfa, com o prefixo **Solid**.
+
+![Cores privadas](/static/images/design/Color/PrivateColors.png)
+
+### **Cores com canal alfa**
+
+As cores alfa estão disponíveis apenas para índices de 500 e abaixo. Elas são misturadas com a cor de fundo, permitindo melhor legibilidade e contraste. Sugere-se que você as use:
+
+1. para cores claras (de 50 a 300)
+2. em projetos relacionados à tipografia onde o texto pode ser exibido sobre fundos de qualquer cor, pois o uso de um canal alfa evita a perda de contraste.
+
+### **Cores sólidas**
+
+Use cores sólidas quando dois objetos puderem se sobrepor e você quiser evitar a mistura de cores no local da sobreposição. As cores sólidas são selecionadas com base no fundo principal para o tema. Como as cores sólidas podem ser exibidas sobre fundos de qualquer cor, seu uso deve ser cuidadosamente considerado.
+
+As tonalidades devem ser regeneradas sempre que a cor de fundo primária ou secundária for alterada para manter a consistência visual entre as cores sólidas e as cores com canal alfa.
+
+### Como criar tons
+
+O tom é criado a partir do meio da escala, que em nosso caso é uma cor com índice 550. É a cor primária que gera tons menos saturados e mais saturados. As exceções são preto e branco, que estão na extremidade da escala e permitem a criação de mais tons e valores com canal alfa.
+
+Cores com índice de 50 a 500 são criadas reduzindo a Opacidade da cor base (550). Cores com canal alfa só podem ser encontradas nesta faixa, em oposição às cores sólidas, que podem ter valores em toda a escala.
+
+Cores com índice de 600 a 1000 são criadas misturando com uma cor de fundo que contrasta com a cor primária para o tema selecionado. Por exemplo, a cor de fundo primária de um tema claro é branca, e a cor contrastante é o fundo de um tema escuro. Portanto, esse fundo contrastante será misturado à cor para criar tons mais escuros.
+
+Em um tema escuro, o fundo primário é escuro, e o fundo contrastante é o fundo de um tema claro, que é branco. Portanto, o branco será misturado à cor para criar tons de alto índice.
+
+Um script permite gerar rapidamente uma paleta de cores para entrega de desenvolvimento.
+
+### **Cores semânticas**
+
+As variáveis neste grupo de cores são categorizadas em **grupos**, que subsequentemente são usadas dentro de componentes com base em seus **significados**. Seus valores são configurados para cada tema usando variáveis privadas. Algumas variáveis semânticas podem ocasionalmente ser usadas como valores para outras, mas isso deve ser feito com cuidado para evitar recursão.
+
+![Cores semânticas](/static/images/design/Color/SemanticColors.png)
+
+### **Categorias baseadas em tipos**
+
+No Figma, as variáveis são organizadas em grupos para facilitar a navegação, conforme listado abaixo. Enquanto, no código, a estrutura é mais direta. Branding não é colocado em uma categoria separada, e há apenas um grupo de variáveis Base. Figma e código são equivalentes em termos de nomes de variáveis, estrutura e significado, exceto quando o nome é otimizado para legibilidade ou compreensão.
+
+1. **Branding**
+
+   Uma coleção de variáveis específicas da marca de todas as categorias. Estas são cores básicas que permitem aplicar rapidamente um estilo e ver o resultado. Este grupo é exclusivo do Figma. Ele não está incluído no código, e as cores são categorizadas em seus próprios grupos.
+
+2. **Text**
+
+   Um grupo de variáveis para a cor de texto e ícones. Como texto e ícones são frequentemente exibidos juntos, faz sentido manter sua consistência visual.
+
+3. **Base**
+
+   Um grupo de cores para fundos, preenchimentos e backgrounds.
+
+4. **Base Semantic**
+
+   Cores de fundo com colorações Info, Positive, Warning, Danger e Misc. Existem valores para estados Normal e Hover. Pode funcionar para alguns tipos de infográficos, mas não para todos. Este grupo é exclusivo do Figma. No código, faz parte do grupo **Base**.
+
+5. **Base Float**
+
+   Cores de fundo de elementos que flutuam acima do fundo principal da página. Este grupo é exclusivo do Figma. No código, faz parte do grupo **Base**.
+
+6. **Line**
+
+   Cores de traços, linhas, divisores, molduras e quaisquer outros elementos finos.
+
+7. **Effects**
+
+   Cores usadas para escurecer texto, aplicar sombras, etc.
+
+8. **Misc**
+
+   Um grupo de cores técnicas usadas para barras de rolagem, eixos de gráficos e fundos de tooltips em gráficos.
+
+Mais informações sobre cada variável podem ser encontradas na descrição do estilo de cor do Figma ou no storybook.
+
+### Categorias baseadas em significado
+
+As variáveis em cada grupo podem ter seus próprios significados, que são determinados pelos princípios de aplicação de um grupo. Para textos, por exemplo, faz sentido usar categorias como **main** e **additional**. No entanto, elas não podem ser aplicadas a nenhum outro tipo de conteúdo.
+
+Os seguintes são exemplos de significados compartilhados por diferentes categorias:
+
+- success
+- dangerous
+- warning
+- neutral
+- etc.
+
+## Variáveis e estilos de cor
+
+Você pode trabalhar com valores de cor usando a interface de Variáveis Locais do Figma. Para acessá-la, abra o arquivo com a biblioteca, certifique-se de que nada esteja selecionado na página (você pode fazer isso clicando no fundo vazio da tela) e selecione Variáveis Locais no painel direito.
+
+![Variáveis](/static/images/design/Color/Variables.png)
+
+Enquanto as variáveis ainda não estão em beta, o sistema de design continua a usar estilos de cor para definir diretamente a cor de um objeto. Observe que o valor dentro do estilo de cor é representado pela variável correspondente. O que significa:
+
+1. Para alterar a cor de um estilo de cor, você precisa alterar a cor da variável correspondente.
+2. Os estilos de cor herdam as propriedades das variáveis, particularmente o suporte para temas de cores. Como resultado, um objeto com um estilo de cor aplicado pode mudar o tema usando apenas a funcionalidade do Figma.
+
+   ![Estilos](/static/images/design/Color/Styles.png)
+
+## Temas
+
+O Gravity-UI suporta quatro temas: claro, escuro e versões contrastantes de cada um. O padrão atual da indústria exige pelo menos dois: claro e escuro. Dada a diversidade de preferências dos usuários, às vezes é difícil escolher o melhor.
+
+Temas com contraste aumentado foram criados para resolver a falta de contraste nos temas regulares, que pode ser causada por recursos do equipamento, como calibração do monitor, brilho definido, tipo de matriz e renderização de cores (especialmente em TVs) ou iluminação ambiente. Atualmente, esses temas não oferecem uma solução para abordar preocupações de Acessibilidade.

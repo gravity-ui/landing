@@ -1,0 +1,52 @@
+{/* ![Example](/static/images/design/Loader/Example.gif) */}
+
+Un indicateur qui montre la progression d'une tâche, telle que le chargement, le déchargement, le traitement, etc., jusqu'à ce que l'interface soit prête pour l'interaction de l'utilisateur. L'indicateur ne montre pas une progression mesurable ; il indique plutôt que le processus n'est pas encore terminé et est toujours en cours.
+
+### **Application**
+
+✅ **Quand l'utiliser**
+
+1. Lorsque le chargement prend plus de 300 ms. Le chargeur ne doit pas être affiché pendant des intervalles extrêmement courts, car cela provoque un clignotement qui peut être inconfortable pour l'utilisateur. Si vous choisissez d'afficher le chargeur, évitez l'effet de clignotement. Si le chargement prend moins de 300 ms, n'affichez rien.
+2. Lorsque le type de contenu ne peut pas être prédit.
+3. Lors de l'utilisation d'un chargeur pour un chargement asynchrone, il doit être affiché exactement là où le chargement a lieu. Le chargement d'un seul élément ne doit pas bloquer le reste de l'interface.
+
+{/* ![Application](/static/images/design/Loader/Application.png) */}
+
+
+🚫 **Quand ne pas l'utiliser**
+
+1. Si le temps de chargement dépasse 10 secondes et que la durée exacte est connue, une barre de progression doit être affichée.
+2. Si le type de contenu peut être prédit, envisagez d'utiliser un squelette.
+3. Lorsque le chargement est initié par un clic sur un bouton, l'état du bouton comme retour d'information est suffisant, en particulier dans les fenêtres modales.
+
+### Tailles
+
+![Sizes](/static/images/design/Loader/Sizes.png)
+
+1. **S** — Taille de base. Utilisée dans les champs de saisie, les fenêtres contextuelles, les cellules de tableau et autres zones à espace limité.
+2. **M** — Taille moyenne, utilisée dans les cartes et les tableaux.
+3. **L** — Grande taille, utilisée sur des pages entières et de grandes fenêtres modales (dialogues).
+
+### Exemples d'applications
+
+1. Lorsque le contenu n'a pas encore été affiché.
+
+   ![Example](/static/images/design/Loader/Example5.png)
+
+2. Par-dessus le contenu s'il est mis à jour ou modifié. Voici comment utiliser le chargeur par-dessus le contenu :
+
+   ![Content transparency 30%](/static/images/design/Loader/Example1.png)
+
+   Transparence du contenu 30%
+
+   {/* ![Loader on a background layer](/static/images/design/Loader/Example2.png)
+
+   Chargeur sur une couche de fond */}
+
+3. Essayez d'éviter de superposer le chargeur sur le contenu s'il y a de la place pour cela.
+
+   ![Example](/static/images/design/Loader/Example3.png)
+
+4. Si l'indice fournit des informations utiles, telles qu'une explication du processus en cours, il peut être inclus. Comme le chargeur indique déjà à l'utilisateur que le chargement est en cours, aucune divulgation supplémentaire n'est nécessaire.
+
+   ![Example](/static/images/design/Loader/Example4.png)

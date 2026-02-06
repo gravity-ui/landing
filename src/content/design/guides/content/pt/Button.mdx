@@ -1,0 +1,157 @@
+Aqui está a tradução do arquivo fonte do guia de design para português, mantendo a naturalidade e todos os elementos técnicos:
+
+Um botão é um elemento interativo da interface do usuário que, ao ser clicado, executa uma ação, por exemplo: envio de formulário, salvamento de alterações ou avanço para a próxima etapa. Se você precisar navegar para outra página ou site, use um link.
+
+## Aparência
+
+Existem cinco tipos de botões: destaque (accent), primário (primary), semântico (semantic), elevado (raised) e contrastante (contrasting).
+
+### **Destaque (Accent)**
+
+![Accent](/static/images/design/Button/Button1.png)
+
+Botões de destaque ressaltam ações chave e atraem a atenção do usuário para operações importantes. Eles possuem três estilos principais: Ação (Action), Ação Contornada (Outlined action) e Ação Plana (Flat action).
+
+Escolha entre esses tipos de botões de destaque dependendo do grau de ênfase que você deseja dar às ações na interface. Use Ação para a prioridade mais alta, Ação Contornada para prioridade média e Ação Plana para operações de menor prioridade ou secundárias.
+
+Use botões de destaque na interface com moderação e, se possível, limite o número a um por página (exceto em caixas de diálogo). Dessa forma, você pode enfatizar a importância e destacar a ação principal para o usuário, mas mitigar o risco de sobrecarregar a interface com muitos elementos de destaque.
+
+### Primário (Primary)
+
+![Primary](/static/images/design/Button/Button2.png)
+
+Botões primários executam ações principais e comumente usadas na interface. Esses botões possuem vários estilos: Normal, Contornado (Outlined), Plano (Flat) e Plano Secundário (Flat Secondary). Escolha entre esses estilos dependendo do grau de ênfase que você deseja dar a certas ações na interface. Por exemplo, um botão Normal é adequado para ações padrão, um botão Contornado para ações de prioridade média, e botões Planos e Planos Secundários são destinados a operações menos importantes ou secundárias.
+
+### Semântico (Semantic)
+
+Botões semânticos transmitem um contexto ou ação específica, carregando um significado para o usuário. Use-os para ajudar os usuários a entender facilmente quais operações são realizadas e qual o seu significado.
+
+Botões semânticos possuem quatro estilos principais: Informação (Info), Sucesso (Success), Aviso (Warning), Perigo (Danger).
+
+### Informação (Info)
+
+![Info](/static/images/design/Button/Button3.png)
+
+Use-os para ações relacionadas à obtenção de informações adicionais, dicas ou contexto. Botões de informação também podem servir como hiperlinks quando você precisa destacar uma opção para navegar para outro recurso. Ex: Mais Informações, Documentação, Ajuda.
+
+**Sucesso (Success)**
+
+![Success](/static/images/design/Button/Button4.png)
+
+Use-os para destacar ações concluídas com sucesso.
+
+**Aviso (Warning)**
+
+![Warning](/static/images/design/Button/Button5.png)
+
+Use-os para destacar ações que requerem atenção do usuário devido a riscos ou avisos potenciais. Esses botões ajudam os usuários a entender as possíveis consequências de suas ações e incentivam a cautela.
+
+**Perigo (Danger)**
+
+![Danger](/static/images/design/Button/Button6.png)
+
+Use-os para destacar ações que podem ser destrutivas ou ter consequências negativas. Recomendamos o uso cauteloso deste botão e apenas onde for realmente necessário destacar aspectos negativos potenciais (por exemplo, exclusão, parada, desconexão).
+
+**Elevado (Raised)**
+
+![Raised](/static/images/design/Button/Button7.png)
+
+Botões elevados são um tipo de botão que se projeta acima do conteúdo. Use-o para destacar ações importantes na tela, geralmente com uma posição fixa. Este tipo de botão é adequado para operações chave que o usuário deve notar imediatamente.
+
+Esses botões também são frequentemente usados em interfaces de mapas e aplicativos baseados em imagens para várias ações, como zoom, pan ou outras manipulações com dados de imagem.
+
+**Botões Contrastantes (Contrasting buttons)**
+
+![Contrast](/static/images/design/Button/Button8.png)
+
+**Botões contrastantes** são tipos especiais de botões usados para destacar ações em um fundo complexo. Eles criam um contraste brilhante e claro, proporcionando excelente visibilidade mesmo em fundos diversos e saturados, como banners ou materiais de marketing.
+
+Esses botões ajudam a destacar ações e garantir boa visibilidade em fundos diversos, por exemplo, em banners.
+
+## Anatomia
+
+A anatomia de um botão na interface inclui várias opções de design:
+
+![Anatomy](/static/images/design/Button/Button9.png)
+
+1.  **Apenas Texto**: Botão que contém apenas texto. Tal botão é útil quando o texto transmite o propósito do botão de forma clara e inequívoca, especialmente quando o texto é curto e informativo. Por exemplo, você pode usar tal botão para ações como criar ou cancelar.
+2.  **Ícones à Direita**: Botão onde o ícone é posicionado à direita do texto. Esta opção é útil para apresentar diferentes maneiras de executar a mesma ação. Use tal botão, por exemplo, para a ação de salvar, onde o usuário tem várias opções para escolher (salvar como: PDF, RTF, HTML).
+3.  **Ícone à Esquerda**: Botão onde o ícone é posicionado à esquerda do texto. Use esta opção quando o ícone carrega informações importantes e precisa ser destacado. Por exemplo, você pode usar tal botão para as ações de iniciar ou excluir.
+4.  **Ícones à Direita e à Esquerda**: Botão com ícones posicionados em ambos os lados do texto. Use esta opção para sublinhar uma ação chave com um ícone e fornecer diferentes caminhos para sua execução. Por exemplo, tal botão pode ser usado para a ação de adicionar, onde o usuário tem várias opções para escolher (adicionar: projeto, recurso, documento).
+5.  **Apenas Ícone**: Botão que consiste apenas em um ícone e não contém nenhum texto. Use esta opção quando a informação no botão puder ser compreendida visualmente e não exigir explicações textuais adicionais. Você também pode usá-lo para agrupar várias ações de forma compacta em um espaço limitado, não deixando espaço para botões com rótulos de texto. Por exemplo, um botão de exclusão em uma lista de itens. Neste contexto, você pode fornecer a opção de exclusão como um ícone de lixeira sem rótulo de texto.
+
+## Estados
+
+Cada botão na interface possui cinco estados básicos, que indicam visualmente a disponibilidade do botão e a ação atual para o usuário.
+
+![States](/static/images/design/Button/Button10.png)
+
+**Padrão (Default)**: Estado primário do botão, no qual ele está pronto para interação e aguarda as ações do usuário.
+
+**Passar o Mouse (Hover)**: Estado em que o botão está pronto para interação e aguarda as ações do usuário.
+
+**Desabilitado (Disable)**: Estado em que o botão está temporariamente indisponível para interação. Para uma melhor experiência do usuário, recomendamos explicar por que o botão foi desabilitado, especialmente se isso não for intuitivo. Você pode apresentar essa explicação como um texto ao lado do botão, ou como uma dica (tooltip) ao passar o mouse.
+
+**Carregando (Loading)**: Estado que indica que o sistema está executando uma operação em resposta a uma ação iniciada pelo usuário.
+
+**Selecionado (Selected)**: Estado usado para elementos comutáveis onde o usuário pode selecionar uma de várias opções. Um botão no estado "Selecionado" indica o estado ou opção atualmente selecionado.
+
+## Tamanhos
+
+Cada botão pode ter quatro tamanhos, que permitem escolher a opção mais apropriada dependendo do contexto.
+
+![Sizes](/static/images/design/Button/Button11.png)
+
+**XS** é um tamanho adicional usado para ações em componentes de tamanhos limitados.
+
+**S** é usado em situações onde botões padrão são muito grandes e ocupam muito espaço, como em tabelas ou cartões pequenos.
+
+**M** é o tamanho principal que recomendamos por padrão.
+
+**L** é usado para destacar ações primárias, em formulários de criação, janelas modais ou pop-ups.
+
+**XL** é usado onde as ações precisam ser destacadas e você tem espaço suficiente em seu site ou página de destino.
+
+## Forma (Form)
+
+Com a propriedade "pin" (forma), você pode controlar o formato dos botões, definindo seu estilo pelos seguintes valores:
+
+![Form](/static/images/design/Button/Button12.png)
+
+**round**: Botão com formato arredondado, ou seja, cantos arredondados em ambos os lados. Este estilo confere ao botão um visual suave e moderno, tornando-o amigável e agradável de interagir.
+
+**brick**: Botão com cantos retos em ambos os lados.
+
+**clear**: Botão com cantos retos e sem contorno em ambos os lados.
+
+**circle**: Botão com formato circular em ambos os lados.
+
+Você também pode combinar essas propriedades em diferentes variações, criando estilos únicos para seus botões dependendo do conceito de design e dos requisitos da interface.
+
+## Largura (Width)
+
+A largura padrão do botão se ajusta automaticamente ao texto, permitindo que o botão se expanda em largura para acomodar todo o texto sem truncamento. No entanto, se você precisar controlar a largura do botão, pode usar duas propriedades principais: auto e max.
+
+![Width](/static/images/design/Button/Button13.png)
+
+**auto**: Restringe as dimensões do botão para evitar que ele ultrapasse os limites do contêiner. Se o conteúdo do botão não couber no contêiner, ele é ocultado com reticências, indicando a presença de texto adicional.
+
+**max**: Define uma largura fixa para o botão, igual à largura do contêiner pai. Se o conteúdo do botão exceder essa largura, ele também é truncado com reticências, mantendo a interface compacta e evitando o transbordamento do contêiner.
+
+## Recomendações
+
+**Uso**
+
+Aqui está a tradução do arquivo fonte do guia de design para português, mantendo um tom natural e preservando todos os componentes MDX, blocos de código e termos técnicos:
+
+- Fraseie o texto do botão de forma clara e concisa para que os usuários entendam imediatamente o que acontecerá após o clique.
+- Ao usar ícones, certifique-se de que eles transmitam claramente seu significado e que seus usuários os reconheçam facilmente.
+- Mantenha um equilíbrio entre ícones e texto para que ambos os elementos sejam visíveis e legíveis, e nenhum domine o outro.
+- Ao usar botões apenas com ícones, adicione tooltips de ação ao passar o mouse para que os usuários possam ver o que o ícone significa.
+
+**Escrevendo textos**
+
+- As palavras no botão devem transmitir de forma clara e concisa a essência da ação que ocorrerá após o clique. Evite frases longas ou abreviações pouco claras.
+- Use verbos que descrevam as ações do usuário. Por exemplo, salvar, enviar, excluir.
+- Evite palavras ou frases negativas nos botões. Instruções negativas podem causar confusão.
+- Mantenha um estilo e formato consistentes para o texto em todos os botões da interface. Isso ajuda os usuários a navegar e entender facilmente quais ações estão disponíveis.

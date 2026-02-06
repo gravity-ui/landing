@@ -1,0 +1,155 @@
+Die Tabelle wird zur intuitiven Anzeige strukturierter Daten jeder Größe verwendet.
+
+Ein atomares Element der Tabelle ist eine Zelle. Zellen bilden Spalten und Zeilen in der Tabelle. Die Tabelle hat immer eine Kopfzeile.
+
+## **Tabellenzelle**
+
+Eine Zelle ist ein Container an der Schnittstelle einer Zeile und einer Spalte der Tabelle, in den Sie andere Komponenten einfügen können:
+
+- Text
+- Icons
+- [Buttons](/design/guides/button)
+- [Labels](/design/guides/label)
+- [User avatar](/design/guides/user-avatar)
+- [Progress bar](/design/guides/progress-bar)
+- Checkbox
+- [Select](/design/guides/select)
+- [Input](/design/guides/text-input) und andere Komponenten
+
+Eine einzelne Zelle kann entweder eine einzelne Komponente (z. B. Text) oder eine Kombination von Komponenten (z. B. eine Checkbox, Text und ein Icon) enthalten.
+
+![1.png](/static/images/design/Table/table-0001.png)
+
+Eine Zelle kann leer sein, wenn keine Daten darin angezeigt werden sollen. Darüber hinaus kann der Zelleninhalt in seinem normalen Zustand verborgen sein und sichtbar werden, wenn Sie mit der Maus über die Zelle oder Zeile fahren.
+
+### **Empfehlungen zur Verwendung von Komponenten**
+
+- Verwenden Sie nicht mehr als drei verschiedene Komponenten in einer Zelle: Dies erschwert den Vergleich von Daten in der Spalte mit solchen Zellen und macht die Tabelle weniger lesbar. In solchen Fällen können Sie eine separate Spalte für die Eigenschaft erstellen, die jede Komponente beschreibt.
+- Wählen Sie die Komponentengrößen in der Tabelle basierend auf Ihrer aktuellen Aufgabe. Für reine Textdaten verwenden Sie besser den Textstil `text-body-1` ohne Dekoration, und für andere Elemente verwenden Sie die Größe `M`.
+- Wir empfehlen, Komponenten gleicher Größe innerhalb einer Zelle zu verwenden, z. B. Labels und Buttons der Größe `M`.
+
+### Zellhöhe und -breite
+
+Die Zellgröße wird durch die Größe ihres Inhalts und die Zellabstände bestimmt.
+
+Die Standard-Zellhöhe mit einzeiligem Text, formatiert als `text-subheader-1` (Zeilenabstand 18px), beträgt 40px. Sowohl der obere als auch der untere Zellabstand sind in diesem Fall 11px.
+
+Für eine Zelle mit zweizeiligem Text beträgt die Zellhöhe 58px.
+
+![2.png](/static/images/design/Table/table-0002.png)
+
+Sie können beliebige Abstände oben, unten, links und rechts verwenden, aber wir empfehlen ein System von Abständen, die Vielfache von 4px sind. Die oberen und unteren Abstände sind normalerweise gleich, aber Sie können sie unterschiedlich gestalten. Dasselbe gilt für die linken und rechten Abstände (weitere Details finden Sie in der Beschreibung der Zeilen und Spalten in der Tabelle). Die oberen und unteren Abstände müssen nicht gleich den linken und rechten Abständen sein.
+
+### Trennlinie
+
+Jede Zelle hat eine horizontale Trennlinie mit einer Höhe von 1px. Diese Trennlinie ist bündig mit der Unterkante der Zelle ausgerichtet, ihre Breite entspricht der Zellbreite. Sie können die Trennlinie für die Zellen der letzten Zeile in der Tabelle weglassen.
+
+### Ausrichtung
+
+Der Inhalt innerhalb einer Zelle kann links- oder rechtsbündig ausgerichtet sein (weitere Details zur Textausrichtung finden Sie in den Spaltenbeschreibungen).
+
+## **Tabellenkopfzeile**
+
+Die Tabellenkopfzeile befindet sich am oberen Rand der Tabelle und enthält die Spaltennamen. Zusätzlich zu den Namen kann die Kopfzeile auch Checkboxen und Buttons enthalten.
+
+![3.png](/static/images/design/Table/table-0003.png)
+
+Vermeiden Sie zweizeilige Spaltennamen, um Zeilenumbrüche zu verhindern. Wenn der Name auf die zweite und weitere Zeilen umbricht, erhöht sich die Höhe der Kopfzeile. Andere Namen und Buttons bleiben in diesem Fall oben ausgerichtet.
+
+![4.png](/static/images/design/Table/table-0004.png)
+
+## **Tabellenspalten**
+
+Eine Spalte ist eine Gruppe von Zellen, die vertikal angeordnet sind. Abhängig vom Inhalt der Zellen können die Daten in der Spalte:
+
+- Sortiert
+- Rechtsbündig ausgerichtet
+
+### Sortierung
+
+Wenn die Daten in der Spalte sortiert werden können (z. B. alphabetisch, nach Zeit oder Größe), wird neben dem Spaltennamen ein Pfeilsymbol platziert. Wenn der Benutzer auf den Namen des Symbols klickt, werden die Zeilen nach dieser Spalte sortiert.
+
+![5.png](/static/images/design/Table/table-0005.png)
+
+Die Sortierung ist eine optionale Funktionalität in der Tabelle. Sie ist in bestimmten Anwendungsfällen verfügbar.
+
+Sie können die Tabelle nicht nach zwei Spalten parallel sortieren.
+
+Typischerweise sollten Daten in einer Spalte, die sortiert werden können, die gleiche Maßeinheit haben. Um die Angabe der Einheit in jeder Spaltenzelle zu vermeiden, fügen Sie sie mit einem Komma zum Spaltennamen hinzu.
+
+### Rechtsbündige Inhalte
+
+Diese Funktion ist nur für Textdaten verfügbar und dient zum Vergleichen von Daten (z. B. aufgewendete Zeit oder verbrauchte Ressourcen). Solche Daten haben oft die gleiche Einheit und können sortiert werden. Platzieren Sie bei rechtsbündigen Spaltendaten mit einem Sortierpfeil den Pfeil zuerst, gefolgt vom Text.
+
+![6.png](/static/images/design/Table/table-0006.png)
+
+### Spaltenfixierung beim Scrollen
+
+Wenn die Tabelle nicht innerhalb der Bildschirmgrenzen passt, erscheint eine horizontale Scrollleiste. In solchen Fällen können Sie bestimmte Tabellenspalten fixieren, damit sie immer auf dem Bildschirm sichtbar bleiben. Sie können die erste oder die letzte Spalte der Tabelle fixieren. Sie können beliebig viele Spalten fixieren, stellen Sie jedoch sicher, dass genügend Platz für die scrollenden Spalten vorhanden ist, unter Berücksichtigung der minimal unterstützten Viewport-Breite.
+
+Beim Fixieren erhalten diese Spaltenzellen eine zusätzliche Trennlinie: Sie wird rechts platziert, wenn die Spalte links fixiert ist, und links, wenn die Spalte rechts fixiert ist. Diese Trennlinie begrenzt das Scrollen anderer Zellen.
+
+![7.png](/static/images/design/Table/table-0007.png)
+
+In der rechtesten Spalte können Sie Aktionen für eine Zeile hinzufügen. Diese Aktionen sind unter einem Drei-Punkte-Symbol zugänglich, das sich zu einer Liste erweitert. Fixieren Sie diese Spalte beim Scrollen, damit der Benutzer immer auf die Aktionen zugreifen kann. Platzieren Sie das Zahnradsymbol, das beim Klicken die Tabellenspaltenkonfigurationen öffnet, in der Kopfzeile einer solchen Spalte.
+
+![8.png](/static/images/design/Table/table-0008.png)
+
+### Spalteneinrichtung
+
+Benutzer können die Anzahl und Reihenfolge der Spalten anpassen. Fügen Sie dazu ein Zahnradsymbol in die Kopfzeile der letzten Tabellenspalte ein. Wenn der Benutzer auf das Zahnradsymbol klickt, erscheint ein Einstellungs-Popup.
+
+![9.png](/static/images/design/Table/table-0009.png)
+
+## **Tabellenzeilen**
+
+Eine Zeile ist eine Gruppe von Zellen, die horizontal angeordnet sind.
+
+### Klickbare Zeilen
+
+Wenn Benutzer auf eine Tabellenzeile klicken, können sie zu einer anderen Seite, einem modalen Fenster oder einer Seitenleiste weitergeleitet werden. Beim Überfahren mit der Maus ändert sich die Hintergrundfarbe solcher Zeilen zu `--g-color-base-simple-hover`.
+
+![10.png](/static/images/design/Table/table-0010.png)
+
+Für eine sauberere Darstellung des Hover-Effekts bei einer klickbaren Tabellenzeile können Sie kleine Ränder links und rechts hinzufügen. Mit diesen Rändern richtet sich der Inhalt nicht mehr am Raster aus. Daher empfehlen wir diese Ränder nicht in Fällen ohne Hover.
+
+### Zeilen mit Massenoperationen
+
+Sie können Massenaktionen auf Zeilen anwenden, bei denen die erste Zelle eine Checkbox enthält. Eine Reihe von Gruppenaktionen entspricht meist der Reihe von Einzelaktionen mit einer Tabellenzeile.
+
+Wenn eine Zeile ausgewählt ist, ändert sich ihre Hintergrundfarbe zu `--g-color-base-selection`, und am unteren Rand der Seite erscheint eine Aktionsleiste mit einer Liste von Gruppenaktionen.
+
+![11.png](/static/images/design/Table/table-0011.png)
+
+Wenn für verschiedene Tabellenzeilen unterschiedliche Aktionen verfügbar sind, empfehlen wir, in der Aktionsleiste nur die Aktionen anzuzeigen, die für alle ausgewählten Zeilen verfügbar sind. Andere Verhaltensweisen können nach Ermessen des Designers aktiviert werden.
+
+### Inhaltsausrichtung
+
+Für Zeilen, deren Zellhöhe mehr als 40px beträgt, kann der Inhalt oben oder zentriert in den Zellen ausgerichtet werden.
+
+Die obere Ausrichtung ist vorzuziehen, da sie die Lesbarkeit der Daten verbessert. In diesem Fall sollten alle textführenden Komponenten an der ersten Zeile ausgerichtet sein.
+
+![12.png](/static/images/design/Table/table-0012.png)
+
+Wenn eine oben ausgerichtete Zeile Icons, Benutzeravatare, Icon-Buttons, Checkboxen, Fortschrittsbalken und andere nicht-textuelle Elemente enthält, stellen Sie deren obere Abstände so ein, dass ihre horizontale Achse mit der Textachse in einer einzeiligen Zelle übereinstimmt.
+
+![13.png](/static/images/design/Table/table-0013.png)
+
+Sie können die Zentrierung verwenden, wenn es schwierig ist, die oberen Zellabstände für alle Inhaltstypen in einer Zeile fein abzustimmen, oder wenn die Ausrichtung die Lesbarkeit des Inhalts nicht beeinträchtigt.
+
+## Nutzungsempfehlungen
+
+Verwenden Sie Tabellen:
+
+- Um eine große Menge homogener Daten zu organisieren, die die Eigenschaften eines Objekts beschreiben.
+- Zum Sortieren und Vergleichen von Daten auf Ihrer Seite.
+- Um Werte schnell durch Sortieren, Filtern und Scannen des Tabelleninhalts zu finden.
+
+Wir empfehlen nicht:
+
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche, die darauf abzielt, so natürlich wie möglich zu klingen und dabei alle MDX-Komponenten-Tags, Codeblöcke und technischen Begriffe beizubehalten:
+
+- Verwenden Sie Tabellen zur Beschreibung von Objekten mit einer einzelnen Eigenschaft. Eine Liste ist in solchen Fällen die bessere Option.
+  Zum Beispiel sollten Sie eine Liste verwenden, um Informationen über den Farbnamen und seine HEX-Kodierung darzustellen.
+- Verwenden Sie Tabellen zur Beschreibung von Objekten mit unterschiedlichen, heterogenen Eigenschaften. Beschreiben Sie in diesem Fall jedes Objekt besser einzeln.
+  Sagen wir zum Beispiel, Ihre Aufgabe ist es, die Geräte zu beschreiben, die ein Mitarbeiter verwendet. Solche Geräte können einen Laptop (Eigenschaften: Betriebssystem, Speicherkapazität, Bildschirmgröße), eine Computermaus (Eigenschaften: kabelgebunden oder kabellos) und eine Schreibtischlampe (Eigenschaften: Hersteller, Befestigungsart) umfassen. Fügen Sie nicht alle diese Daten in eine einzige Tabelle ein und versuchen Sie, eine andere Visualisierungsmethode zu finden.

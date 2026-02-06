@@ -1,0 +1,186 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Un composant pour saisir des valeurs textuelles, numériques et symboliques arbitraires sur une seule ligne. Peut être utilisé dans les formulaires de page et les boîtes de dialogue, ainsi que dans les formulaires de connexion, de recherche et de filtrage.
+
+## **Application**
+
+Contrairement à [TextArea](/design/guides/text-area), il ne change pas de hauteur pendant la saisie et est utilisé pour des données simples en format libre avec n'importe quelle combinaison de lettres, de chiffres ou de symboles.
+
+![1.png](/static/images/design/TextInput/1.png)
+
+Lors de la saisie de texte qui dépasse la largeur du champ, vous pouvez faire défiler le contenu vers la gauche et la droite.
+
+![2.png](/static/images/design/TextInput/2.png)
+
+✅ **Quand l'utiliser**
+
+1. Lorsqu'une seule ligne de texte est requise.
+2. Lorsqu'il n'est pas possible de sélectionner une option dans une liste prédéterminée.
+3. Lorsqu'il y a suffisamment d'espace pour la saisie de données et qu'il n'y a pas besoin d'interfaces de saisie plus complexes.
+
+🚫 **Quand ne pas l'utiliser**
+
+1. Lorsqu'un paramètre ne peut être saisi qu'à partir d'une liste prédéfinie, car cela peut entraîner une erreur. À cette fin, envisagez d'utiliser d'autres composants avec une sélection spécifique d'options de valeur, tels que Select, Radio Button, Radio et Checkbox.
+2. Lorsqu'un grand nombre de caractères doit être saisi (plus de 5 mots). À cette fin, nous recommandons d'utiliser [TextArea](/design/guides/text-area), un composant pour la saisie de texte multiligne.
+
+## Types
+
+TextInput a deux types : **Normal** et **Clear**, qui ont le même ensemble de fonctions mais se présentent et s'utilisent différemment selon le contexte.
+
+![3.png](/static/images/design/TextInput/3.png)
+
+**Normal**
+
+- Le type le plus couramment utilisé.
+- Une caractéristique distinctive de ce composant est son rembourrage interne et son rayon de coin. Ces paramètres sont déterminés par la taille de l'élément et un trait de 1px.
+- Utilisé dans les formulaires lorsqu'un espace libre entre les composants est requis, tel qu'un espacement entre les éléments du formulaire.
+
+**Clear**
+
+- La caractéristique déterminante de ce composant est l'absence de bordure, les éléments étant positionnés dans les marges du champ de saisie.
+- Utilisé lorsque le type Normal crée un bruit visuel.
+- Lors de l'utilisation de ce type, assurez-vous que le but de ce composant est clair pour l'utilisateur.
+
+## Structure
+
+![4.png](/static/images/design/TextInput/4.png)
+
+**1. Icône gauche**
+
+![5.png](/static/images/design/TextInput/5.png)
+
+- Est un composant facultatif.
+- L'icône peut être utilisée pour une identification supplémentaire du champ.
+- S'il s'agit d'une chaîne de recherche, par exemple, une icône de "loupe" peut être utilisée. Ou une icône de "clé", s'il s'agit d'un champ de saisie de mot de passe.
+
+**2. Libellé en ligne.**
+
+![6.png](/static/images/design/TextInput/6.png)
+
+- Est un composant facultatif.
+- Amplifie la valeur du nom du champ.
+- Remplace le libellé externe.
+- Utilisé comme nom de champ car, lors de la saisie d'une valeur, l'indice disparaît, laissant le but du champ peu clair pour l'utilisateur.
+
+**3. Valeur**
+
+![7.png](/static/images/design/TextInput/7.png)
+
+- Est un élément requis.
+- Espace utilisé pour le texte de l'indice et le texte saisi.
+- Après la saisie d'un caractère, le texte saisi remplace l'indice.
+
+**4. Bouton Effacer**
+
+![Clear button](/static/images/design/TextInput/21.png)
+
+- Est un composant facultatif.
+- Utilisé lorsque le contenu du champ doit être effacé.
+- Affiché lorsqu'au moins un caractère a été saisi dans le champ.
+- Affiché même lorsque le focus est à l'extérieur du champ.
+- Est un composant Button de type Flat-secondary qui hérite de toutes ses propriétés. Par exemple, l'arrière-plan de la croix est rempli au survol.
+- En cliquant sur le bouton d'effacement, le focus se déplace vers le champ et la valeur saisie est effacée.
+
+**5. Boutons en ligne**
+
+![11.png](/static/images/design/TextInput/11.png)
+
+- Est un élément facultatif et est intégré à droite.
+- Utilisé pour indiquer plus clairement la relation entre le contenu et les actions et peut être placé à l'intérieur d'un composant.
+- Le champ autorise un maximum de deux composants Button.
+- La taille des boutons intégrés doit être une taille inférieure à la taille du composant lui-même. Par exemple, si une taille S est utilisée, le bouton doit être XS ; si une taille M est utilisée, le bouton doit être S ; et ainsi de suite.
+- Par exemple, il peut être utilisé pour confirmer des actions, envoyer des messages ou ajouter des filtres supplémentaires à un champ.
+
+**6. Contenu supplémentaire**
+
+![12.png](/static/images/design/TextInput/12.png)
+
+- Est un élément facultatif et est intégré à droite.
+- Utilisé lorsqu'un texte supplémentaire est requis à l'intérieur.
+- Le texte est aligné à droite.
+- Par exemple, peut être utilisé comme compteur (compteur de caractères saisis), pour compter le nombre de valeurs trouvées dans une chaîne de recherche, ou pour des unités de mesure.
+
+
+**7. Icône d'erreur**
+
+![Error icon](/static/images/design/TextInput/24.png)
+
+- Est affiché uniquement dans l'état Inline Error.
+- Fonctionne avec Tooltip, offrant des descriptions d'erreur au survol de l'icône, pour obtenir une disposition compacte du formulaire.
+
+**8. Description de l'erreur**
+
+![Error description](/static/images/design/TextInput/25.png)
+
+- Est affiché uniquement dans l'état Outline Error.
+- Est intégré en bas à gauche.
+
+## États
+
+Possède les états suivants : **Suggest, Default, Hover, Active, Disabled, Inline Error, et Outline Error.**
+
+![14.png](/static/images/design/TextInput/14.png)
+
+1. **Suggest.** État inactif lorsqu'il n'y a pas d'interaction directe avec le composant et qu'aucune donnée n'a été saisie. Dans cet état, la valeur peut servir d'indice, indiquant à l'utilisateur quel type d'information doit être saisi dans le champ.
+2. **Default.** État inactif lorsqu'il n'y a pas d'interaction directe avec le composant et que des données ont déjà été saisies. Dans cet état, la valeur de l'indice change en fonction de la saisie de l'utilisateur.
+3. **Hover.** État actif lorsque le curseur survole la zone du composant.
+4. **Active.** État actif, déclenché par la transition depuis le composant précédent ou par un clic avec le curseur. L'état est réinitialisé lors de la transition vers un autre composant ou lors d'un clic du curseur sur une zone vide.
+5. **Disabled.** État inactif d'un composant lorsqu'il n'est pas possible d'interagir avec lui.
+6. **Outline error.** État actif du composant lorsqu'une erreur survient lors de la validation et est affichée en bas du champ avec une explication.
+7. **Inline error.** État actif du composant lorsqu'une erreur de validation de champ survient, mais que l'erreur n'est pas affichée. Au lieu de cela, l'erreur est représentée par une icône spéciale qui, au survol, affiche une Tooltip d'erreur.
+
+## Tailles
+
+![16.png](/static/images/design/TextInput/16.png)
+
+Le composant est disponible en quatre tailles : **S, M, L, et XL.**
+
+La hauteur et le rayon de coin du champ, ainsi que le rembourrage intérieur et la taille du texte, varient en fonction de la taille du composant.
+
+Le rayon de coin dépend de la taille et est défini par [variables](/design/branding/corner-radius).
+
+1. **S** (-g-border-radius-s: 5px;) – utilisé lorsque l'entrée standard est trop grande (par exemple, dans les tableaux, les petites cartes).
+2. **M** (-g-border-radius-m: 6px;) – taille de base, utilisée dans la plupart des formulaires et filtres.
+3. **L** (-g-border-radius-l: 8px;) – utilisé pour la recherche (par exemple, recherche de service).
+4. **XL** (-g-border-radius-xl: 10px;) – utilisé dans l'environnement de communication (par exemple, sites web et pages de destination).
+
+## Guide utilisateur
+
+**1. Travailler avec le champ**
+
+- Le champ ne peut contenir qu'une seule ligne. À cette fin, nous recommandons d'utiliser [TextArea](/design/guides/text-area), un composant pour la saisie de texte multiligne.
+- Nous ne recommandons pas d'inclure un **indice** dans un champ, car le nom du champ ne sera pas visible lors de la saisie d'une valeur, sauf si vous avez un espace limité ou si le but du champ est clair pour l'utilisateur.
+- **La largeur du champ** doit être la même que la largeur de la valeur saisie. Cela informe l'utilisateur sur les entrées attendues.
+- Utilisez la **même taille** pour tous les composants complémentaires du formulaire. Si vous avez sélectionné la taille M, tous les autres composants doivent être de la même taille.
+
+**2. En-tête de champ externe**
+
+Voici la traduction du fichier source du guide de conception en français :
+
+![Formating.png](/static/images/design/TextInput/Formating.png)
+
+- Un nom de champ court, de préférence limité à une ligne.
+- Dans les formulaires de bureau, le composant doit être placé en ligne avec la valeur du champ. Si le contexte est mobile ou si la taille de la `Dialog` est S, le titre du composant est affiché au-dessus du composant.
+
+**3. Indice avec infobulle**
+
+![Tooltip.png](/static/images/design/TextInput/Tooltip.png)
+
+- Instructions pour remplir le champ lors du survol de l'icône avec un point d'interrogation.
+- Utilisé lorsque le titre doit être clarifié.
+- Ne doit pas contenir plus de deux paragraphes de texte.
+
+**4. Description supplémentaire**
+
+![Description.png](/static/images/design/TextInput/Description.png)
+
+- Peut être trouvé en bas ou à droite du champ.
+- Utilisé dans de rares cas lorsqu'il n'est pas clair comment remplir un champ sans description supplémentaire ou lorsque des explications pour les valeurs précédemment saisies sont nécessaires.
+
+**5. Les unités de mesure** peuvent être placées comme suit :
+
+![s.png](/static/images/design/TextInput/s.png)
+
+- Dans la description textuelle du champ, s'il y a suffisamment d'espace dans le formulaire.
+- À l'intérieur du champ de saisie, si la description doit être raccourcie.
+- À droite du champ, si de l'espace est nécessaire pour d'autres éléments à l'intérieur du champ, tels que des boutons ou une icône de suppression (réinitialisation).

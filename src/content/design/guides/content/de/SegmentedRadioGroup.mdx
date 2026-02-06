@@ -1,0 +1,59 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+SegmentedRadioGroup ist eine Gruppe von zwei oder mehr Schaltflächen, die nebeneinander angeordnet und zu einer Gruppe zusammengefasst sind und nach dem Prinzip von Bandumschaltern in Radioempfängern funktionieren. Um Verwechslungen mit Radio-Schaltern zu vermeiden, werden sie auch als Segmented-Control bezeichnet.
+
+## Wann verwenden
+
+SegmentedRadioGroup wird verwendet, um bei der Formularausfüllung, beim Filtern einer Liste oder Tabelle, beim Ändern des Layouts einer Seite oder beim Anpassen des Betriebsmodus eines Werkzeugs aus zwei oder mehr Optionen zu wählen. Es ist benutzerfreundlicher als ein Dropdown-Menü, da alle Optionen gleichzeitig angezeigt werden.
+
+Die Optionen von SegmentedRadioGroup müssen kontextbezogen und sich gegenseitig ausschließend sein.
+
+Die Anzahl der Optionen sollte auf 2-5 begrenzt sein, und ihre Namen sollten kurz sein (bis zu 3 Wörter).
+
+Bei der Initialisierung einer SegmentedRadioGroup sollte mindestens eine Option standardmäßig ausgewählt sein.
+
+## Wann nicht verwenden
+
+Wenn mehrere Optionen verfügbar sind, verwenden Sie eine Checkbox oder eine Dropdown-Liste (Select).
+
+Für Optionen wie „Ja / Nein“ oder „Ein / Aus“ verwenden Sie eine Checkbox oder einen Schalter (Switch).
+
+Wenn mehr als 5-6 Optionen vorhanden sind oder die Optionsnamen lang sind, verwenden Sie eine Gruppe von Radio-Schaltern (Radio) oder eine Dropdown-Liste.
+
+Es ist nicht zulässig, eine SegmentedRadioGroup für die Seitennavigation oder eine Fortschrittsanzeige (z. B. in einem Wizard) zu verwenden. Zur Navigation auf der Seite verwenden Sie eine Gruppe von Tabs (Tabs).
+
+### Größen
+
+M ist die Standardgröße für Desktop-Oberflächen, und XL ist die Standardgröße für mobile Oberflächen. Andere Größen können ebenfalls verwendet werden, z. B. um die visuelle Konsistenz mit anderen Elementen auf der Seite oder im Dialogfeld zu wahren.
+
+![Größen](/static/images/design/SegmentedRadioGroup/Sizes1.png)
+
+Neben der Anpassung der Schaltflächenhöhen können Sie auch die Größen des inneren Abstands, die Rundung der Schaltflächenecken und die Schriftart anpassen.
+
+Schaltflächen mit Optionen können unterschiedliche Breiten haben und automatisch an den Inhalt angepasst werden (Auto-Breite). Alternativ können sie die gleiche Breite haben, wobei die Breite des Containers halbiert wird (Max-Breite).
+
+![Größen](/static/images/design/SegmentedRadioGroup/Sizes2.png)
+
+Die letzte Option wird verwendet, wenn sich die Namen nur um wenige Zeichen unterscheiden; andernfalls können die Namen über die Schaltflächenränder hinausgehen.
+
+Versuchen Sie, die Schaltflächen innerhalb von SegmentedRadioGroup gleich groß zu halten, auch im Auto-Modus, damit das Element als Ganzes gut ausbalanciert ist.
+
+### Inhalt
+
+Zusätzlich zum Text (Label) können die Schaltflächen ein Symbol und einen Zähler enthalten. Wie beim Button-Element kann das Symbol mit Text (Icon und Label) oder ohne Text (nur Icon) angezeigt werden. Kombinieren Sie keine Schaltflächen mit unterschiedlichen Inhaltstypen innerhalb derselben SegmentedRadioGroup.
+
+Der Zähler informiert den Benutzer über die Anzahl der Objekte, die in der Option enthalten sind.
+
+![Inhalt](/static/images/design/SegmentedRadioGroup/Content.png)
+
+Der Schaltflächentext innerhalb einer SegmentedRadioGroup sollte mit einem Großbuchstaben beginnen. Der Text sollte nicht mit Auslassungspunkten abgeschnitten oder wiederholte Teile enthalten.
+
+In der Nur-Icon-Version müssen beim Überfahren der Icons Tooltips (Tooltip) mit den Icon-Namen angezeigt werden.
+
+In Formularen wird die Option Nur-Text oder Text und Icon empfohlen. Der Nur-Icon-Modus wird typischerweise zum Wechseln zwischen Layouts oder zur Auswahl von Optionen verwendet, die dem Benutzer bereits vertraut sind, wie z. B. der Wechsel zwischen einer Liste und Miniaturansichten von Objekten oder die Auswahl des Formattyps im Editor.
+
+### Zustände
+
+Zusätzlich zum Standardzustand (Default) können Schaltflächen auch im Zustand (Selected) und/oder deaktiviert (Disabled) sein. Beim Überfahren (Hover) zeigen Schaltflächen ebenfalls Zustände an. Es kann immer nur eine Schaltfläche ausgewählt sein.
+
+![Zustände](/static/images/design/SegmentedRadioGroup/States.png)

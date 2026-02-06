@@ -1,0 +1,29 @@
+Eine modifizierte Beschriftung, die eine Kombination von Hotkeys enthält, die einer Schnittstellenaktion zugewiesen sind.
+
+## Plattformen /. **platform**
+
+![Group 2087325957.png](/static/images/design/Hotkey/Group_2087325957.png)
+
+1. **Mac** – für Tastaturen von iOS-Geräten
+2. **PC** – für andere Tastaturen
+
+### Struktur
+
+1. **Taste** — ein Symbol auf der Tastatur, das gedrückt werden muss, um eine schnelle Aktion auszuführen. Kann ein Buchstabe, eine Zahl, ein spezielles Tastatursymbol oder ein beschreibendes Wort für eine Aktion sein (z. B. Klicken). Stellen Sie sicher, dass die Symbole mit den Symbolen auf der Tastatur übereinstimmen.
+   Textstil: Text/Body1, Farbe: Text/Light Complementary.
+2. **Plus** — wird für die Zeichenkommunikation und die Aufrechterhaltung der richtigen Reihenfolge der Tastendrücke bei Bedarf verwendet.
+   Textstil: Text/Body1, Farbe: Text/Light Hint.
+
+![8.png](/static/images/design/Hotkey/8.png)
+
+## Anwendungsfälle
+
+- **in [ActionTooltip](/design/guides/action-tooltip)**, um Hotkeys anzuzeigen, die der Aktion eines bestimmten Buttons zugewiesen sind
+
+![example](/static/images/design/Hotkey/example1.png)
+
+- **in einem separaten Hotkey-Panel**, das alle im Dienst verfügbaren Optionen auflistet
+
+![example](/static/images/design/Hotkey/example2.png)
+
+- in der [List](/design/guides/list-item) von Aktionsbuttons, wenn einem von ihnen Hotkeys zugewiesen sind

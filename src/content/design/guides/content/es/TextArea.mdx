@@ -1,12 +1,12 @@
-Un componente para introducir texto arbitrario, valores numéricos y simbólicos en varias filas. Se usa con más frecuencia como descripción al crear entidades o introducir mensajes en formularios y cuadros de diálogo.
+Un componente para introducir valores de texto arbitrario, numéricos y simbólicos en varias filas. Se utiliza comúnmente para descripciones al crear entidades o al introducir mensajes en formularios y cuadros de diálogo.
 
-## **Solicitud**
+## **Aplicación**
 
-A diferencia de [TextInput,](/design/guides/text-input) tiene la altura de la suma de filas y se usa para introducir datos en forma libre con cualquier combinación de letras, números o símbolos.
+A diferencia de [TextInput](/design/guides/text-input), tiene la altura de la suma de las filas y se utiliza para introducir datos de forma libre con cualquier combinación de letras, números o símbolos.
 
-La altura mínima es de una fila, pero se recomienda usar un componente con dos o más filas.
+La altura mínima es de una fila, pero recomendamos usar un componente con dos o más filas.
 
-![Rows](/static/images/design/TextArea/Rows.png)
+![Filas](/static/images/design/TextArea/Rows.png)
 
 Si no se especifica el número de filas, la altura se calcula automáticamente en función de la cantidad de contenido.
 
@@ -14,146 +14,146 @@ Si no se especifica el número de filas, la altura se calcula automáticamente e
 
 ✅ **Cuándo usar**
 
-1. Cuando se requiere más de una línea de texto.
-2. Cuando el texto debe ser una descripción extensa o un mensaje con muchos caracteres.
-3. Cuando se agrega a un formulario con campos que deben rellenarse.
+1. Cuando se requieren más de una línea de texto.
+2. Cuando el texto debe ser una descripción extensa o un mensaje que contenga muchos caracteres.
+3. Cuando se añade a un formulario con campos que deben ser completados.
 
-🚫 **Cuándo no usar**
+🚫 **Cuándo no usar**
 
 1. Cuando se requiere un filtro, un campo de formulario de autorización o una cadena de búsqueda.
-2. Cuando se requiere un número reducido de caracteres (menos de 5 palabras). Para ello, recomendamos utilizar [TextInput](/design/guides/text-input), un componente para la entrada de texto de una sola línea.
+2. Cuando se requiere un número pequeño de caracteres (menos de 5 palabras). Para este propósito, recomendamos usar [TextInput](/design/guides/text-input), un componente para la entrada de texto de una sola línea.
 
 ## Tipos
 
-TextInput tiene dos tipos: **Normal** y **Clear**, que tienen el mismo conjunto de funciones pero tienen un aspecto y se usan de forma diferente según el contexto.
+TextInput tiene dos tipos: **Normal** y **Clear**, que tienen el mismo conjunto de funciones pero se ven y se utilizan de manera diferente según el contexto.
 
 ![Normal, Clear](/static/images/design/TextArea/Normal_Clear.png)
 
 **Normal**
 
-- El tipo más utilizado.
-- Una característica distintiva de este componente es su relleno interno y su radio de esquina. Estos parámetros vienen determinados por el tamaño del elemento y se definen mediante una variable específica para el radio de las esquinas (más información [aquí](/design/branding/corner-radius)), así como un trazo de 1 px.
-- Se usa en formularios cuando se requiere espacio libre entre los componentes, como el relleno entre los elementos del formulario.
+- El tipo más comúnmente utilizado.
+- Una característica distintiva de este componente es su relleno interno y radio de esquina. Estos parámetros se determinan por el tamaño del elemento y se definen por una variable específica para el radio de esquina (más información [aquí](/design/branding/corner-radius)), así como un trazo de 1px.
+- Se utiliza en formularios cuando se requiere espacio libre entre componentes, como relleno entre elementos del formulario.
 
-{/* ![Console. Creating a cluster.](/static/images/design/TextArea/Console.png)
+{/* ![Consola. Creación de un clúster.](/static/images/design/TextArea/Console.png)
 
-consola. Creación de un clúster.
+Consola. Creación de un clúster.
 
-![DataLens. Creating a collection.](/static/images/design/TextArea/Datal.png)
+![DataLens. Creación de una colección.](/static/images/design/TextArea/Datal.png)
 
-Lente de datos. Crear una colección. */}
+DataLens. Creación de una colección. */}
 
-**Borrar**
+**Clear**
 
-- La característica definitoria de este componente es la ausencia de un borde, con elementos colocados dentro de los márgenes del campo de entrada.
-- Se usa cuando el tipo Normal crea ruido visual.
-- Cuando utilice este tipo, asegúrese de que el propósito de este componente esté claro para el usuario.
+- La característica definitoria de este componente es la ausencia de un borde, con los elementos posicionados dentro de los márgenes del campo de entrada.
+- Se utiliza cuando el tipo Normal crea ruido visual.
+- Al usar este tipo, asegúrese de que el propósito de este componente sea claro para el usuario.
 
-{/* ![Yandex GPT. Entering instructions.](/static/images/design/TextArea/Chat_GPT.png)
+{/* ![Yandex GPT. Introducción de instrucciones.](/static/images/design/TextArea/Chat_GPT.png)
 
-Yandex GPT. Introducir instrucciones. */}
+Yandex GPT. Introducción de instrucciones. */}
 
 ## Estructura
 
-![Structure.png](/static/images/design/TextArea/Structure.png)
+![Estructura.png](/static/images/design/TextArea/Structure.png)
 
 **1. Valor**
 
-![Active.png](/static/images/design/TextArea/Active.png)
+![Activo.png](/static/images/design/TextArea/Active.png)
 
-- Es un elemento obligatorio.
-- Se puede usar como sugerencia (marcador de posición) y como texto introducido.
-- El texto introducido sustituye a la sugerencia.
+- Es un elemento requerido.
+- Puede usarse como pista (placeholder) y como texto introducido.
+- El texto introducido reemplaza la pista.
 
-**2. Botón Borrar**
+**2. Botón de borrar**
 
-![Clear Button](/static/images/design/TextArea/ClearButton.png)
+![Botón de borrar](/static/images/design/TextArea/ClearButton.png)
 
 - Es un componente opcional.
-- Se usa cuando es necesario borrar el contenido del campo.
+- Se utiliza cuando el contenido del campo necesita ser borrado.
 - Se muestra cuando se ha introducido al menos un carácter en el campo.
 - Se muestra incluso cuando el foco está fuera del campo.
-- Es un componente de botón de tipo Flat-Secondary que hereda todas sus propiedades. Por ejemplo, el fondo de la cruz se rellena al pasar el ratón.
+- Es un componente Button de tipo Flat-secondary que hereda todas sus propiedades. Por ejemplo, el fondo de la cruz se rellena al pasar el ratón por encima.
 - Al hacer clic en el botón de borrar, el foco se desplaza al campo y se borra el valor introducido.
 **3. Contenido adicional**
 
-![Structure2.png](/static/images/design/TextArea/Structure2.png)
+![Estructura2.png](/static/images/design/TextArea/Structure2.png)
 
-- Es un elemento opcional y está incrustado en la parte inferior derecha.
-- Se usa cuando se debe agregar texto adicional al exterior.
+- Es un elemento opcional y se incrusta en la parte inferior derecha.
+- Se utiliza cuando se debe añadir texto adicional en el exterior.
 - El texto está alineado a la derecha.
-- Por ejemplo, se puede usar como contador (contador de entrada de caracteres).
+- Por ejemplo, puede usarse como contador (contador de caracteres introducidos).
 
 
 **4. Icono de error**
 
-![Error icon](/static/images/design/TextArea/8.png)
+![Icono de error](/static/images/design/TextArea/8.png)
 
-- Se muestra solo en el estado Error en línea.
-- Funciona junto con Tooltip, ya que ofrece descripciones de errores al pasar el ratón sobre un icono para lograr un diseño más compacto del formulario.
+- Se muestra solo en el estado de Error en Línea (Inline Error).
+- Funciona junto con Tooltip, ofreciendo descripciones de error al pasar el ratón por encima del icono, para lograr un diseño más compacto del formulario.
 
 **5. Mensaje de error**
 
-![Error message](/static/images/design/TextArea/9.png)
+![Mensaje de error](/static/images/design/TextArea/9.png)
 
-- Se muestra solo en el estado Error de esquema.
-- Está incrustado en la parte inferior izquierda.
+- Se muestra solo en el estado de Error de Contorno (Outline Error).
+- Se incrusta en la parte inferior izquierda.
 
 ## Estados
 
-![States.png](/static/images/design/TextArea/States.png)
+![Estados.png](/static/images/design/TextArea/States.png)
 
-Tiene los siguientes estados: **Sugerir, Predeterminado, Pasar el ratón, Activo, Desactivado, Error en línea y Error de esquema.**
+Tiene los siguientes estados: **Suggest, Default, Hover, Active, Disabled, Inline Error y Outline Error.**
 
-1. **Sugerir.** Estado inactivo cuando no hay interacción directa con el componente y no se han introducido datos. En este estado, el valor puede servir como una sugerencia, indicando al usuario qué tipo de información debe ingresarse en el campo.
-2. **Predeterminado.** Estado inactivo cuando no hay interacción directa con el componente y ya se han introducido datos. En este estado, el valor de la sugerencia cambia en función de la entrada del usuario.
-3. **Flotar.** Estado activo cuando el cursor pasa por encima del área del componente.
-4. **Activo.** Estado activo, que se activa al hacer la transición desde el componente anterior o al hacer clic en él con el cursor. El estado se restablece al pasar a un componente diferente o al hacer clic con el cursor en un área vacía.
-5. **Discapacitado.** Estado inactivo de un componente cuando no es posible interactuar con él.
-6. **Error de esquema.** Estado activo del componente cuando se produce un error durante la validación y se muestra en la parte inferior del campo junto con una explicación.
-7. **Error en línea.** Estado activo del componente cuando se produce un error de validación de campo, pero el error no se muestra. En su lugar, el error se representa mediante un icono especial que, al pasar el ratón sobre él, muestra una descripción emergente del error.
+1. **Suggest.** Estado inactivo cuando no hay interacción directa con el componente y no se han introducido datos. En este estado, el valor puede servir como pista, indicando al usuario qué tipo de información debe introducirse en el campo.
+2. **Default.** Estado inactivo cuando no hay interacción directa con el componente y ya se han introducido datos. En este estado, el valor de la pista cambia en función de la entrada del usuario.
+3. **Hover.** Estado activo cuando el cursor se sitúa sobre el área del componente.
+4. **Active.** Estado activo, activado al pasar del componente anterior o al hacer clic con el cursor. El estado se restablece al pasar a otro componente o al hacer clic con el cursor en un área vacía.
+5. **Disabled.** Estado inactivo de un componente cuando no es posible interactuar con él.
+6. **Outline error.** Estado activo del componente cuando ocurre un error durante la validación y se muestra en la parte inferior del campo junto con una explicación.
+7. **Inline error.** Estado activo del componente cuando ocurre un error de validación del campo, pero el error no se muestra. En su lugar, el error está representado por un icono especial que, al pasar el ratón por encima, muestra un Tooltip de error.
 
-## Tallas
+## Tamaños
 
-![Sizes.png](/static/images/design/TextArea/Sizes.png)
+![Tamaños.png](/static/images/design/TextArea/Sizes.png)
 
-El componente está disponible en cuatro tamaños: **S, M, L y XL.**
+El componente viene en cuatro tamaños: **S, M, L y XL.**
 
-La altura y el radio de las esquinas del campo, así como el relleno interior del campo y el tamaño del texto, varían en función del tamaño del componente.
+La altura y el radio de esquina del campo, así como el relleno interior del campo y el tamaño del texto, varían según el tamaño del componente.
 
-El radio de la esquina depende del tamaño y se establece mediante [variables](/design/branding/corner-radius).
+El radio de esquina depende del tamaño y se establece mediante [variables](/design/branding/corner-radius).
 
-1. **S** (-g-border-radius-s: 5px;): se usa cuando la entrada estándar es demasiado grande (por ejemplo, mesas, cartas pequeñas).
-2. **M** (-g-border-radius-m: 6px;) — tamaño básico, usado en la mayoría de los formularios y filtros.
-3. **L** (-g-border-radius-l: 8px;): se usa para buscar (por ejemplo, búsqueda de servicios).
-4. **хL** (-g-border-radius-xl: 10px;): se utiliza en el entorno de comunicación (p. ej., sitios web y páginas de destino).
+1. **S** (-g-border-radius-s: 5px;) – se utiliza cuando la entrada estándar es demasiado grande (por ejemplo, tablas, tarjetas pequeñas).
+2. **M** (-g-border-radius-m: 6px;) – tamaño básico, se utiliza en la mayoría de los formularios y filtros.
+3. **L** (-g-border-radius-l: 8px;) – se utiliza para búsquedas (por ejemplo, búsqueda de servicios).
+4. **XL** (-g-border-radius-xl: 10px;) – se utiliza en el entorno de comunicación (por ejemplo, sitios web y páginas de destino).
 
-## Guía del usuario
+## Guía de usuario
 
-**1. Trabajando con el campo**
+**1. Trabajar con el campo**
 
-- La altura del campo puede variar. [TextInput](/design/guides/text-input) se puede usar para entradas de una sola línea.
-- No se recomienda incluir una **sugerencia** en un campo, ya que el nombre del campo no estará visible al introducir un valor, a menos que el espacio sea limitado o que el usuario tenga claro el propósito del campo.
-- Utilice el **mismo tamaño** para todos los componentes complementarios del formulario. Si seleccionó la talla M, todos los demás componentes deben tener el mismo tamaño.
+- El campo puede variar en altura. [TextInput](/design/guides/text-input) se puede usar para entradas de una sola línea.
+- No recomendamos incluir una **pista** dentro de un campo, ya que el nombre del campo no será visible al introducir un valor, a menos que tenga espacio limitado o el propósito del campo sea claro para el usuario.
+- Utilice el **mismo tamaño** para todos los componentes complementarios del formulario. Si seleccionó el tamaño M, todos los demás componentes deben ser del mismo tamaño.
 
-**2. Encabezado de campo externo**
+**2. Encabezado externo del campo**
 
-![External field header](/static/images/design/TextArea/12.png)
+![Encabezado externo del campo](/static/images/design/TextArea/12.png)
 
 - Un nombre de campo corto, preferiblemente limitado a una línea.
-- El componente debe colocarse en línea con el valor del campo, a menos que el contexto sea móvil o el tamaño del cuadro de diálogo sea S, en cuyo caso el título del componente se muestra en la parte superior del componente.
+- El componente debe colocarse en línea con el valor del campo, a menos que el contexto sea móvil o el tamaño del Dialog sea S, en cuyo caso el título del componente se muestra encima del componente.
 
-**3. Sugerencia con información sobre herramientas**
+**3. Pista con tooltip**
 
-![Hint with tooltip](/static/images/design/TextArea/13.png)
+![Pista con tooltip](/static/images/design/TextArea/13.png)
 
-- Instrucciones para rellenar el campo al pasar el ratón sobre el icono con un signo de interrogación.
-- Se usa cuando se deben aclarar el título y el significado.
+- Instrucciones para completar el campo al pasar el ratón por encima del icono con un signo de interrogación.
+- Se utiliza cuando el título y el significado deben aclararse.
 - No debe incluir más de dos párrafos de texto.
 
 **4. Descripción adicional**
 
-![Additional description](/static/images/design/TextArea/14.png)
+![Descripción adicional](/static/images/design/TextArea/14.png)
 
-- Se encuentra en la parte inferior o a la derecha del campo.
-- Se usa en casos excepcionales cuando no está claro cómo rellenar un campo sin una descripción adicional o cuando se requieren explicaciones para los valores ingresados anteriormente.
+- Se puede encontrar en la parte inferior o a la derecha del campo.
+- Se utiliza en casos raros cuando no está claro cómo completar un campo sin una descripción adicional o cuando se requieren explicaciones para valores introducidos previamente.

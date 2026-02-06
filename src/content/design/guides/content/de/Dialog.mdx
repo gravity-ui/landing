@@ -1,0 +1,123 @@
+Ein **Dialogfeld** wird verwendet, um zusätzliche Inhalte anzuzeigen und die Aufmerksamkeit des Benutzers auf eine bestimmte Aktion oder ein bestimmtes Szenario zu lenken. Das Dialogfeld blockiert die Interaktion des Benutzers mit der übergeordneten Seite, bis es entweder geschlossen oder die in diesem Fenster angegebene Aktion ausgeführt wird.
+
+### Einstiegspunkt
+
+Der Einstiegspunkt zum Dialogfeld kann ein Klick auf einen bestimmten Auslöser sein (z. B. ein Button in der Benutzeroberfläche) oder bestimmte Aktionen oder Bedingungen in der Benutzeroberfläche (z. B. der Versuch, eine Seite zu verlassen, ohne Daten zu speichern, oder das Ändern eines Kontos in einem anderen Tab).
+
+### Größen
+
+Die Größe des Dialogfelds wird durch seinen Inhalt bestimmt.
+
+![Größen](/static/images/design/Dialog/sizes.png)
+
+**Größe S - 480 px**: Wird für kleine Benachrichtigungen/Bestätigungen und Formulare verwendet.
+
+**Größe M – 720 px**: Wird für kleine und mittlere Formulare verwendet.
+
+**Größe L – 900 px**: Wird für große Datenmengen und Abläufe innerhalb eines modalen Fensters verwendet.
+
+**Benutzerdefinierte Größe**: Wird verwendet, wenn keine der drei Optionen (S, M oder L) geeignet ist.
+
+### Inhaltsbereich
+
+Das Dialogfenster kann beliebige Inhalte enthalten. Das Layout wird je nach den Anforderungen des Benutzers gewählt.
+
+Wenn das Dialogfeld ein Formular enthält, wird eines der beiden folgenden Elementlayouts empfohlen:
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      **Vertikal.**
+
+      Am besten geeignet für einfache Textfelder und Größe S.
+
+      ![vertikal](/static/images/design/Dialog/vertical.png)
+   </div>
+   <div className="col-12 col-md-6">
+      **Horizontal.**
+
+      Geeignet für komplexere Formulare.
+
+      ![horizontal](/static/images/design/Dialog/horizontal.png)
+   </div>
+</div>
+
+### Buttons
+
+Ein Aktionsbutton ist in den meisten Fällen erforderlich. Wenn der Benutzer die im Dialogfeld angegebenen Aktionen nicht abschließt, ist der Button deaktiviert.
+Auf der linken Seite befindet sich ein Bereich für benutzerdefinierte Steuerelemente, in dem Sie sekundäre Buttons und Links platzieren können. Zum Beispiel Referenzen.
+
+![Group 507124116.png](/static/images/design/Dialog/Group_507124116.png)
+
+In einigen Fällen kann anstelle eines Aktionsbuttons ein Danger-Button verwendet werden (z. B. in einem Dialogfeld zum Löschen einer Entität).
+
+![Group 2087325976.png](/static/images/design/Dialog/Group_2087325976.png)
+
+Ein Aktionsbutton ist nicht erforderlich, wenn keine Zielaktion vorhanden ist und das Dialogfeld nur zu Informationszwecken dient. In diesem Fall können Sie einen Schließen-Button im normalen Stil verwenden.
+
+![Frame 2087326371.png](/static/images/design/Dialog/Frame_2087326371.png)
+
+Ein sekundärer Button wird immer als Abbrechen-Button verwendet. Er kann für zusätzliche Aktionen verwendet werden (z. B. Fortfahren ohne Änderungen).
+
+![Group 2087326024.png](/static/images/design/Dialog/Group_2087326024.png)
+
+Es können auch gar keine Buttons vorhanden sein. Typischerweise muss eine Auswahl im Inhaltsbereich selbst getroffen werden, andernfalls ist die übergeordnete Benutzeroberfläche nicht verfügbar.
+
+![Frame 2087325516.png](/static/images/design/Dialog/Frame_2087325516.png)
+
+### Navigation im Dialogfeld
+
+Wenn das Dialogfeld mehrere Schritte enthält, verwenden Sie den Zurück-Button, um zum vorherigen Schritt zu gelangen.
+
+![Group 2087326025.png](/static/images/design/Dialog/Group_2087326025.png)
+
+Wenn das Dialogfeld verschachtelt ist, die Schritte aber nicht linear sind, können Sie Breadcrumbs im Inhaltsbereich des Fensters verwenden.
+
+![breadcrumbs](/static/images/design/Dialog/breadcrumbs.png)
+
+### Positionierung des Dialogfelds auf der Seite
+
+Das Dialogfeld wird sowohl vertikal als auch horizontal in der Mitte des Bildschirms ausgerichtet.
+
+Beim Skalieren des Viewports bleibt seine Position unverändert, und die Größe des Dialogfensters kann reduziert werden, solange dies den Inhalt nicht beeinträchtigt.
+
+Der minimal zulässige Abstand zu den oberen und linken Bildschirmrändern beträgt 20px.
+
+![position](/static/images/design/Dialog/position.png)
+
+In Fällen, in denen das Fenster nicht in den Viewport passt, bleiben der obere und linke Abstand unverändert, während die rechten und unteren Ränder des Dialogfensters über die Bildschirmränder hinausgehen. Dies wird jedoch nicht empfohlen. Deshalb sollte das Dialogfeld so gestaltet sein, dass es in den Viewport passt und der Abstand zu allen Seiten mindestens 20px vom Bildschirmrand beträgt.
+
+### Schließen eines Fensters
+
+Zusätzlich zur Zielaktion kann das modale Fenster auf folgende Weise geschlossen werden:
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      1. Abbrechen-Button
+
+      ![cancel_btn](/static/images/design/Dialog/cancel_btn.png)
+   </div>
+   <div className="col-12 col-md-6">
+      2. 'X'-Button
+
+      ![x_btn](/static/images/design/Dialog/x_btn.png)
+   </div>
+</div>
+
+Wenn das Fenster nicht modal ist, kann es mit einer der folgenden Methoden geschlossen werden:
+
+- Durch Klicken außerhalb des modalen Fensters
+- Durch Drücken der Esc-Taste
+
+Die Buttons 'Abbrechen' und 'X' sind vertraute Elemente, da sie in Dialogfeldern weit verbreitet sind. Das Klicken außerhalb des modalen Fensters erleichtert dem Benutzer das Schließen, da er seinen Mauszeiger nicht auf ein bestimmtes Element richten muss. Das Drücken der Esc-Taste ermöglicht das Schließen des Fensters ohne Maus.
+
+Da nur mit dem Dialogfeld interagiert werden soll, sollte der Inhalt der übergeordneten Seite nicht scrollen.
+
+### Verhindern von Benutzerdatenverlust
+
+Da ein modales Fenster leicht geschlossen werden kann, besteht immer die Gefahr, dass dies versehentlich geschieht. Wenn der Benutzer im modalen Fenster nur Kontrollkästchen ausgewählt hat, ist die Wiederherstellung verlorener Daten einfacher, als wenn der Benutzer erhebliche Zeit mit dem Schreiben von Code oder der Eingabe des 12-stelligen VIN-Codes des Fahrzeugs verbracht hat. Daher ist es besser, solche Situationen zu vermeiden. Wir sollten den Benutzer jedoch nicht daran hindern, das modale Fenster auf übliche Weise zu schließen.
+
+**Um das Risiko von Datenverlust zu vermeiden, empfehlen wir die Verwendung** eines zusätzlichen Bestätigungsfensters für die Datenlöschung. In diesem Fall muss die Aktion vom Benutzer bestätigt werden.
+
+![Pop-up S.png](/static/images/design/Dialog/Pop-up_S%202.png)
+
+Beim Schließen des modalen Fensters sollten Sie mit gesundem Menschenverstand entscheiden, ob ein weiteres Bestätigungsfenster erforderlich ist. Es ist wichtig, ein Gleichgewicht zwischen Sicherheit und der Vermeidung von zu vielen Fragen zu finden, die den Benutzer verärgern könnten. Der Zweck der Bestätigung ist es, den Verlust der Benutzereingaben zu verhindern und gleichzeitig die Ausführung des Skripts zu ermöglichen.

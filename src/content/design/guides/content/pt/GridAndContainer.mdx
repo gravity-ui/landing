@@ -1,0 +1,29 @@
+Aqui está a tradução do arquivo fonte do guia de design para português:
+
+![Grid](/static/images/design/GridAndContainer/grid.png)
+
+O módulo de espaço nos permite definir regras estritas para cálculos de tamanho e espaçamento, enquanto a grade ajuda a estruturar o conteúdo em blocos visualmente organizados. Usamos uma grade de 12, 8 e 4 colunas que possibilita dividir a área selecionada em metades, terços e quartos.
+
+# Estrutura da Grade
+
+![Estrutura da Grade](/static/images/design/GridAndContainer/structure.png)
+
+Colunas ➊ definem os limites para alinhamento horizontal; espaços ➋ fornecem preenchimento entre as colunas da grade; margens externas ➌ garantem o preenchimento e o alinhamento central do contêiner ➍. A largura da coluna da grade é determinada por um valor percentual, e o espaçamento padrão da coluna é definido em 20px.
+
+# Contêiner
+
+![Contêiner](/static/images/design/GridAndContainer/container.png)
+
+Um contêiner é um componente fundamental do design do sistema que contém e organiza o conteúdo dentro de uma determinada viewport. Usamos dois tipos de contêineres: Fixo com largura fixa (o que significa que sua largura máxima fixa pode mudar em cada breakpoint) e Fluido com largura variável, que ocupa 100% do espaço disponível (exceto para os tamanhos S, XS e 2XS).
+
+# Breakpoints
+
+Os breakpoints de media query, ou breakpoints, são larguras de viewport predefinidas que permitem gerenciar várias configurações de grade.
+
+![Breakpoints](/static/images/design/GridAndContainer/breakpoints.png)
+
+# Zonas de Exclusão
+
+![Zonas de Exclusão](/static/images/design/GridAndContainer/zones.png)
+
+Em layouts de design de UI, os usuários esperam que certos elementos sejam posicionados em áreas específicas. Referimo-nos a essas áreas como "zonas de exclusão" e não as incluímos em nosso sistema de grade. Quando painéis flexíveis ou de navegação se expandem, o conteúdo e a grade são comprimidos para caberem no navegador ou se estendem além dele. Painéis de sobreposição cobrem o conteúdo sem afetar o contêiner principal.

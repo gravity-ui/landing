@@ -1,0 +1,67 @@
+Um checkbox é um elemento de interface do usuário que permite aos usuários selecionar uma ou mais opções dentre as fornecidas.
+
+## Casos de uso
+
+![Casos](/static/images/design/Checkbox/Checkbox1.png)
+
+Quando ativado, o checkbox não dispara uma ação instantaneamente. Os usuários devem clicar em um botão de confirmação (por exemplo, Salvar, Aplicar, Enviar) para aplicá-lo. Na maioria dos casos, o checkbox é usado em conjunto com um rótulo explicativo. No entanto, em alguns cenários, checkboxes podem ser usados sem rótulos, como em tabelas ou onde incluir um rótulo "ativar" ao lado de cada checkbox é redundante. Comece seu texto com uma redação positiva, por exemplo, use "Ativar" em vez de "Desativar", para evitar que o usuário resolva um quebra-cabeça lógico.
+
+## Anatomia
+
+O checkbox consiste em:
+
+![Anatomia](/static/images/design/Checkbox/Checkbox2.png)
+
+1.  **Container**: Área retangular visual que envolve o checkbox. O container indica limites e ativa o checkbox.
+2.  **Checkmark**: Símbolo que aparece dentro do container quando o usuário ativa o checkbox. Este símbolo confirma visualmente que o usuário selecionou o checkbox.
+3.  **Rótulo de texto (opcional)**: Texto posicionado à direita do checkbox. O rótulo de texto explica o significado ou propósito do checkbox.
+
+## Tamanhos
+
+O componente checkbox possui dois tamanhos principais:
+
+![Tamanhos](/static/images/design/Checkbox/Checkbox3.png)
+
+**M** é o tamanho padrão, com dimensões adequadas na maioria dos casos. Neste tamanho, o container tem 14x14 px e o rótulo de texto usa uma fonte de 13 px.
+
+**L** é usado quando o checkbox precisa se destacar entre outros elementos da interface ou se a interface requer elementos maiores para facilitar o uso. Neste tamanho, o container tem 17x17 px e o rótulo de texto usa uma fonte de 15 px.
+
+## Estados
+
+![Estados](/static/images/design/Checkbox/Checkbox4.png)
+
+**Padrão** é o estado principal do checkbox que o usuário pode ativar ou desativar com um clique.
+
+**Hover** é o estado quando o usuário move o cursor sobre a área do checkbox (checkbox + rótulo).
+
+**Desativado** é o estado quando o usuário não pode interagir com o checkbox por algum motivo.
+
+**Indeterminado** é o estado do cabeçalho em um grupo de checkboxes quando um de vários itens é selecionado (geralmente ocorre em tabelas com seleção de várias linhas).
+
+## Recomendações
+
+### Usar
+
+-   **Seleção de opções** se você deseja que o usuário selecione uma ou mais opções de uma lista.
+
+-   **Ativação/desativação de recursos** se você deseja que o usuário ative ou desative certos recursos na interface. Por exemplo, os usuários podem ativar ou desativar notificações ou reprodução automática e outros recursos. Nesses casos, os checkboxes proporcionam uma interação clara e intuitiva.
+
+-   **Seleção múltipla em tabelas ou listas** se você deseja que o usuário selecione vários itens para operações em massa, como exclusão ou exportação. Isso simplifica as operações de dados e facilita ações em massa.
+
+-   **Filtragem de conteúdo ou resultados** se você deseja que o usuário selecione parâmetros para filtrar conteúdo ou resultados de pesquisa.
+
+### Evitar
+
+-   **Seleção de opção única**. Se você espera que o usuário selecione uma opção de um conjunto mutuamente exclusivo, use botões de rádio.
+
+-   **Ativação/desativação de duas posições (ação instantânea)**. Se a opção tiver apenas dois estados, ativado e desativado, e as alterações entrarem em vigor instantaneamente, sem um botão "Aplicar", use switches. Switches apresentam tais opções de forma mais clara e compacta, e as alterações são aplicadas imediatamente após a troca.
+
+-   **Seleção segmentada**. Se você oferece várias opções mutuamente exclusivas que os usuários podem selecionar simultaneamente em diferentes categorias, use controles de segmento. Eles permitem que o usuário selecione opções em diferentes segmentos ou categorias.
+
+-   **Seleção de muitas opções**. Se você fornecer uma longa lista de opções para escolher uma única, use uma lista suspensa (select). Isso economiza espaço na tela e facilita a escolha de um grande conjunto de opções.
+
+### Escrevendo textos
+
+-   Busque concisão nas descrições textuais. Evite frases longas ou sentenças complexas.
+-   Use verbos ativos que indiquem claramente a ação associada à escolha. Por exemplo, "Inscrever-se na newsletter" em vez de "Assinatura de newsletter".
+-   Dê aos usuários uma compreensão completa do que acontecerá quando eles selecionarem o checkbox. Por exemplo, "Receber notificações sobre novos artigos" em vez de "Notificações".

@@ -1,0 +1,62 @@
+**Breadcrumbs** são uma cadeia de links que representam o caminho na estrutura do serviço, desde a página raiz até a página atual, permitindo que os usuários naveguem para qualquer página intermediária. Eles ajudam o usuário a determinar em qual parte do serviço ele está e a navegar rapidamente um ou mais níveis para trás.
+
+![Exemplo](/static/images/design/Breadcrumbs/Example.png)
+
+## Quando usar
+
+- Use o componente Breadcrumbs para páginas aninhadas.
+- Não há necessidade de usar breadcrumbs na página inicial.
+- Breadcrumbs geralmente são colocados na barra de ação, no topo da página.
+
+## Estrutura
+
+![Estrutura](/static/images/design/Breadcrumbs/Structure.png)
+
+1 - **Página atual.**
+
+2 - **Página anterior.** É melhor exibi-la primeiro, se a largura do contêiner permitir.
+
+3 - **Página raiz do serviço.**
+
+4 - **Divisor.** "/" é usado por padrão, mas ">" também é aceitável.
+
+5 - **Ícone de overflow.** Aparece quando os títulos das páginas não cabem na largura do contêiner. Páginas que ocupam mais espaço do que o disponível são acessadas através de um menu suspenso, que é revelado clicando nas reticências.
+
+## Tamanhos
+
+O tamanho básico da fonte nos breadcrumbs é body-1. O tamanho do ícone é 16x16 px.
+
+![Tamanhos](/static/images/design/Breadcrumbs/Sizes.png)
+
+## Estados
+
+![Estados](/static/images/design/Breadcrumbs/States.png)
+
+**Padrão** - estado padrão.
+
+**Hover** - ao passar o mouse sobre o título da página.
+
+**Desativado** - não clicável. Pode ser usado para a página atual ou para páginas que não são links.
+
+**Carregando** - o componente pode exibir o conteúdo do elemento passando uma função pelo parâmetro `renderItemContent`. Por exemplo, exibir um Skeleton se os dados para o elemento do crumb ainda não foram carregados.
+
+## Modificações
+
+![Modificações](/static/images/design/Breadcrumbs/Modifications1.png)
+
+Breadcrumbs podem conter os seguintes elementos adicionais:
+
+1. **Ícone de ação -** como adicionar aos favoritos, copiar o título da página ou menu de contexto.
+2. **[Label](/design/guides/label)** — um status ou outro atributo associado à página.
+3. **Select** — clicar no elemento permite escolher entre várias opções.
+4. **Texto adicional**—ID, contador de quantidade e outros atributos da página.
+
+Um ícone de casa pode ser usado em vez da palavra "Principal" para indicar o retorno à página inicial.
+
+![Modificações](/static/images/design/Breadcrumbs/Modifications1.png)
+
+## Customização
+
+Você pode alterar cores, divisores e estilos de hover. Lembre-se de manter um destaque mais brilhante na página atual e contraste suficiente entre os elementos.
+
+![Customização](/static/images/design/Breadcrumbs/Customization.png)

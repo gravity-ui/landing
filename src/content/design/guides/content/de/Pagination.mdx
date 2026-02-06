@@ -1,0 +1,74 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+Diese Komponente ermöglicht es Benutzern, die angezeigten Inhalte seitenweise zu navigieren, z. B. in Tabellen.
+
+![IMG - 8.png](/static/images/design/Pagination/paginator-0001.png)
+
+## Wann verwenden
+
+✅ **Wann verwenden**
+
+- In allen Fällen mit paginierter Anzeige.
+- Um dem Benutzer das Überspringen mehrerer Seiten oder das direkte Navigieren zur gewünschten Seite zu ermöglichen.
+- Um dem Benutzer die Anpassung der Anzahl der angezeigten Zeilen zu ermöglichen.
+- Um die Größe von Abschnitten innerhalb einer Seite festzulegen, damit das automatische Laden von Inhalten oben nicht den Inhalt unten verschiebt.
+
+![3.png](/static/images/design/Pagination/paginator-0002.png)
+
+🚫 **Wann vermeiden**
+
+Wenn Sie einen nahtlosen Übergang zwischen Suchergebnisseiten benötigen, verwenden Sie automatische Ladefunktionen oder das Laden per Button, es sei denn, dies verlangsamt die Seite.
+
+<div className="row">
+   <div className="col-12 col-md-6">
+      ![2.png](/static/images/design/Pagination/paginator-0003.png)
+   </div>
+   <div className="col-12 col-md-6">
+      ![1.png](/static/images/design/Pagination/paginator-0004.png)
+   </div>
+</div>
+
+## Struktur
+
+![IMG - 18.png](/static/images/design/Pagination/paginator-0005.png)
+
+1. **Aktuelle Seite.** Zeigt die fortlaufende Nummer der angezeigten Seite an.
+2. **Vorherige Seite.** Öffnet die vorherige Seite.
+3. **Nächste Seite.** Öffnet die nächste Seite.
+4. **Letzte Seite des Inhalts.** Erscheint, wenn der gesamte Inhalt bekannt ist und sofort in Seiten aufgeteilt werden kann. Öffnet die letzte Seite per Klick.
+5. **Überlauf-Symbol.** Erscheint, wenn die Anzahl der Seiten vier überschreitet.
+6. **Vorwärts-/Rückwärts-Schalter.** Wechselt die Seiten einzeln.
+7. **Zur ersten Seite.** Öffnet die erste Inhaltsseite.
+8. **Zu einer bestimmten Seite.** Öffnet die angegebene Seite, wenn der Benutzer die Seitennummer eingibt und Enter drückt.
+9. **Anzahl der Elemente pro Seite.** Ein Schalter für die Anzahl der auf einer Seite angezeigten Elemente.
+
+Sie müssen nicht alle Elemente der Struktur zusammen verwenden. Die verfügbaren Konfigurationen finden Sie unter "Modifikationen".
+
+## Größen
+
+Standardmäßig ist die Größe der Buttons, des Inputs und des Selects im Paginator M.
+
+![Frame 2087326211.png](/static/images/design/Pagination/paginator-0006.png)
+
+## Zustände
+
+![IMG - 19.png](/static/images/design/Pagination/paginator-0007.png)
+
+**Erste Seite** zeigt die erste Seite an.
+
+**Zweite/nächste Seite** zeigt die zweite und die folgenden Seiten an.
+
+**Letzte Seite** zeigt die letzte Seite an.
+
+## Modifikationen
+
+![IMG - 20.png](/static/images/design/Pagination/paginator-0008.png)
+
+1. **Seiten-Größen-Optionen und Eingabe anzeigen**: Sie können diese Felder deaktivieren, wenn der Benutzer nicht zu einer bestimmten Seite springen oder die auf der Seite angezeigte Inhaltsmenge steuern kann.
+2. **Gesamtanzahl unbekannt** zeigt nur die aktuelle Seite an. Verwenden Sie dies, wenn die Gesamtzahl der Elemente unbekannt ist.
+3. **Seiten ausblenden** sorgt für Seitenwechsel ohne fortlaufende Nummern. Verwenden Sie dies, wenn die Liste der Elemente dynamisch ist und die Seitenzahl sowie die fortlaufende Nummer sich ständig ändern und den Benutzer verwirren würden.
+4. **Kompakt** ist ein kompaktes Format ohne Text. Verwenden Sie dies, wenn der Platz in der Benutzeroberfläche begrenzt ist (z. B. in Dialogfeldern).
+
+Für Benutzeroberflächen auf Mobilgeräten können Sie die mobile Version des Paginators verwenden.
+
+![IMG - 23.png](/static/images/design/Pagination/paginator-0009.png)

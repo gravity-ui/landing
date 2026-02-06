@@ -1,0 +1,107 @@
+Gerne, hier ist die Übersetzung des Design-Guide-Quellcodes ins Deutsche, wobei darauf geachtet wurde, dass sie natürlich klingt und alle technischen Elemente beibehalten werden:
+
+## Zweischichtiges Farbsystem
+
+In der Bibliothek werden zwei Arten von Farbschemata verwendet: privat und semantisch. Diese beiden Farbschemata, oder Paletten, unterscheiden sich in Struktur und Zweck. Die private Palette weist allen Schattierungen und Tönungen von Farben über alle Themes hinweg RGBA-Werte zu, während die semantische Palette private Farben als Werte verwendet und diese auf spezifische UI-Elemente anwendet.
+
+![Zweischichtiges Farbsystem](/static/images/design/Color/ColorSystem.png)
+
+### **Private Farben**
+
+Sind die grundlegenden Farbschichten in einem Designsystem. Sie sind nicht dafür gedacht, direkt in Komponenten verwendet zu werden. Stattdessen dienen sie als Werte für semantische Variablen, die bereits in Komponenten verwendet werden. Die Werte privater Variablen sind RGBA/RGB-Farben.
+
+Diese Palette enthält alle Töne jeder Farbe für jedes Theme, sowohl mit als auch ohne Alphakanal, mit dem Präfix **Solid**.
+
+![Private Farben](/static/images/design/Color/PrivateColors.png)
+
+### **Farben mit Alphakanal**
+
+Alpha-Farben sind nur für Indizes von 500 und darunter verfügbar. Sie werden mit der Hintergrundfarbe gemischt, was eine bessere Lesbarkeit und Kontrast ermöglicht. Es wird empfohlen, sie zu verwenden:
+
+1. für helle Farben (von 50 bis 300)
+2. in typografiebezogenen Projekten, bei denen Text über Hintergründen jeder Farbe angezeigt werden kann, da die Verwendung eines Alphakanals einen Kontrastverlust verhindert.
+
+### **Solide Farben**
+
+Verwenden Sie solide Farben, wenn sich zwei Objekte überlappen können und Sie eine Vermischung der Farben an der Überlappungsstelle verhindern möchten. Solide Farben werden basierend auf dem primären Hintergrund für das Theme ausgewählt. Da solide Farben über Unterlagen jeder Farbe angezeigt werden können, sollte ihre Verwendung sorgfältig abgewogen werden.
+
+Schattierungen sollten jedes Mal neu generiert werden, wenn die primäre oder sekundäre Hintergrundfarbe geändert wird, um die visuelle Konsistenz zwischen soliden Farben und Farben mit Alphakanal zu erhalten.
+
+### Wie Töne erstellt werden
+
+Ein Ton wird von der Mitte der Skala aus erstellt, die in unserem Fall eine Farbe mit dem Index 550 ist. Dies ist die Primärfarbe, die weniger gesättigte und gesättigtere Töne erzeugt. Ausnahmen bilden Schwarz und Weiß, die sich am extremen Ende der Skala befinden und die Erstellung weiterer Töne und Werte mit einem Alphakanal ermöglichen.
+
+Farben mit einem Index von 50 bis 500 werden durch Reduzierung der Deckkraft der Basisfarbe (550) erstellt. Farben mit einem Alphakanal sind nur in diesem Bereich zu finden, im Gegensatz zu soliden Farben, die Werte über die gesamte Skala hinweg haben können.
+
+Farben mit einem Index von 600 bis 1000 werden durch Mischen mit einer Hintergrundfarbe erstellt, die im Kontrast zur Primärfarbe für das ausgewählte Theme steht. Zum Beispiel ist die primäre Hintergrundfarbe eines hellen Themes Weiß, und die kontrastierende Farbe ist der Hintergrund eines dunklen Themes. Diese kontrastierende Hintergrundfarbe wird also mit der Farbe gemischt, um dunklere Töne zu erzeugen.
+
+In einem dunklen Theme ist der primäre Hintergrund dunkel, und der kontrastierende Hintergrund ist der Hintergrund eines hellen Themes, der weiß ist. Weiß wird also mit der Farbe gemischt, um Töne mit hohem Index zu erzeugen.
+
+Ein Skript ermöglicht es Ihnen, schnell eine Farbpalette für die Übergabe an die Entwicklung zu generieren.
+
+### **Semantische Farben**
+
+Variablen in dieser Farbengruppe sind in **Gruppen** kategorisiert, die anschließend in Komponenten basierend auf ihrer **Bedeutung** verwendet werden. Ihre Werte werden für jedes Theme mithilfe privater Variablen konfiguriert. Einige semantische Variablen können manchmal als Werte für andere verwendet werden, dies muss jedoch sorgfältig geschehen, um Rekursionen zu vermeiden.
+
+![Semantische Farben](/static/images/design/Color/SemanticColors.png)
+
+### **Kategorien basierend auf Typen**
+
+In Figma sind Variablen zur einfacheren Navigation in Gruppen organisiert, wie unten aufgeführt. Im Code ist die Struktur jedoch einfacher. Branding ist keiner separaten Kategorie zugeordnet, und es gibt nur eine Gruppe von Basisvariablen. Figma und Code sind in Bezug auf Variablennamen, Struktur und Bedeutung gleichwertig, außer wenn der Name zur besseren Lesbarkeit oder Verständlichkeit optimiert ist.
+
+1.  **Branding**
+    Eine Sammlung markenspezifischer Variablen aus allen Kategorien. Dies sind Basisfarben, die es Ihnen ermöglichen, schnell einen Stil anzuwenden und das Ergebnis zu sehen. Diese Gruppe ist exklusiv für Figma. Sie ist nicht im Code enthalten, und die Farben sind in eigenen Gruppen kategorisiert.
+
+2.  **Text**
+    Eine Gruppe von Variablen für die Farbe von Text und Symbolen. Da Text und Symbole oft zusammen angezeigt werden, ist es sinnvoll, ihre visuelle Konsistenz zu wahren.
+
+3.  **Base**
+    Eine Farbengruppe für Unterlagen, Füllungen und Hintergründe.
+
+4.  **Base Semantic**
+    Unterlagenfarben mit Info-, Positiv-, Warnungs-, Gefahren- und sonstigen Farbgebungen. Es gibt Werte für die Zustände Normal und Hover. Kann für einige Arten von Infografiken funktionieren, aber nicht für alle. Diese Gruppe ist exklusiv für Figma. Im Code ist sie Teil der Gruppe **Base**.
+
+5.  **Base Float**
+    Unterlagenfarben von Elementen, die über dem primären Hintergrund der Seite schweben. Diese Gruppe ist exklusiv für Figma. Im Code ist sie Teil der Gruppe **Base**.
+
+6.  **Line**
+    Farben von Strichen, Linien, Trennlinien, Rahmen und anderen dünnen Elementen.
+
+7.  **Effects**
+    Farben, die zum Abdunkeln von Text, zum Anwenden von Schatten usw. verwendet werden.
+
+8.  **Misc**
+    Eine Gruppe technischer Farben, die für Scrollbalken, Diagrammachsen und Tooltip-Hintergründe in Diagrammen verwendet werden.
+
+Weitere Informationen zu jeder Variablen finden Sie in der Beschreibung des Figma-Farbstils oder im Storybook.
+
+### Kategorien basierend auf Bedeutung
+
+Variablen in jeder Gruppe können ihre eigenen Bedeutungen haben, die durch die Anwendungsprinzipien einer Gruppe bestimmt werden. Für Texte ist es beispielsweise sinnvoll, Kategorien wie **main** und **additional** zu verwenden. Sie können jedoch nicht auf andere Inhaltstypen angewendet werden.
+
+Die folgenden Beispiele für Bedeutungen, die von verschiedenen Kategorien geteilt werden:
+
+*   success
+*   dangerous
+*   warning
+*   neutral
+*   etc.
+
+## Variablen und Farb-Styles
+
+Sie können mit Farb-Werten über die lokale Variablen-Oberfläche von Figma arbeiten. Um dorthin zu gelangen, öffnen Sie die Datei mit der Bibliothek, stellen Sie sicher, dass nichts auf der Seite ausgewählt ist (Sie können dies tun, indem Sie auf den leeren Hintergrund der Zeichenfläche klicken) und wählen Sie im rechten Bereich "Local Variables".
+
+![Variablen](/static/images/design/Color/Variables.png)
+
+Solange Variablen noch nicht im Beta-Stadium sind, verwendet das Designsystem weiterhin Farb-Styles, um die Farbe eines Objekts direkt zu definieren. Beachten Sie, dass der Wert innerhalb des Farb-Styles durch die entsprechende Variable dargestellt wird. Das bedeutet:
+
+1.  Um die Farbe eines Farb-Styles zu ändern, müssen Sie die Farbe der entsprechenden Variable ändern.
+2.  Farb-Styles erben die Eigenschaften von Variablen, insbesondere die Unterstützung für Farb-Themes. Infolgedessen kann ein Objekt mit einem angewendeten Farb-Style das Theme nur mit der Funktionalität von Figma ändern.
+
+    ![Styles](/static/images/design/Color/Styles.png)
+
+## Themes
+
+Gravity-UI unterstützt vier Themes: hell, dunkel und kontrastierende Versionen von beiden. Der aktuelle Industriestandard erfordert mindestens zwei: hell und dunkel. Angesichts der Vielfalt der Benutzerpräferenzen ist es manchmal schwierig, das beste auszuwählen.
+
+Themes mit erhöhtem Kontrast wurden entwickelt, um den Mangel an Kontrast in regulären Themes zu beheben, der durch Gerätefunktionen wie Monitor-Kalibrierung, eingestellte Helligkeit, Matrix-Typ und Farbwiedergabe (insbesondere bei Fernsehern) oder Raumbeleuchtung verursacht werden kann. Derzeit bieten diese Themes keine Lösung für Barrierefreiheitsbedenken.

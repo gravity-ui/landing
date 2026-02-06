@@ -1,81 +1,83 @@
-La alerta se utiliza para llamar la atención del usuario y proporcionarle información útil sin interrumpir su flujo de trabajo.
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, manteniendo un tono natural y conservando los componentes MDX, bloques de código y términos técnicos:
 
-![Example](/static/images/design/Alert/Example.png)
+La alerta se utiliza para captar la atención del usuario y proporcionarle información útil sin interrumpir su flujo de trabajo.
+
+![Ejemplo](/static/images/design/Alert/Example.png)
 
 ## Cuándo usar
 
-Está diseñado para actualizar al usuario sobre el estado actual del sistema, informar de errores y advertencias y proporcionar al usuario instrucciones, enlaces o comandos para corregir esos errores lo antes posible.
+Está diseñada para actualizar al usuario sobre el estado actual del sistema, reportar errores y advertencias, y proporcionar al usuario instrucciones, enlaces o comandos para corregir esos errores lo antes posible.
 
 ## Tipos
 
-Según la situación, el usuario puede ver uno de los siguientes tipos de alerta (tipo):
+Dependiendo de la situación, el usuario puede ver uno de los siguientes tipos de Alerta (Tipo):
 
-- El peligro se usa para notificar al usuario que el escenario subyacente no puede continuar en este momento (por ejemplo, no hay acceso a un objeto) o que otras acciones del usuario pueden provocar la pérdida permanente de datos o recursos.
-- La advertencia se utiliza para informar al usuario de que otras operaciones pueden resultar difíciles o de que un escenario alternativo puede no estar disponible.
-- El éxito se usa para notificar al usuario un estado positivo o cualquier otro cambio positivo en el sistema. Por ejemplo, sobre la finalización exitosa de una operación prolongada.
-- La información se usa para mostrar recomendaciones sobre cómo organizar el trabajo con el sistema (que deben mostrarse de forma explícita) o para anunciar funciones adicionales del sistema.
-- Normal se usa principalmente para resaltar texto, como ayuda breve, código de ejemplo, resultados de cálculos, etc.
+- **Peligro** se utiliza para notificar al usuario que el escenario subyacente no puede continuar en este momento (por ejemplo, no hay acceso a un objeto) o que acciones posteriores del usuario pueden resultar en la pérdida permanente de datos o recursos.
+- **Advertencia** se utiliza para informar al usuario que las operaciones futuras pueden ser difíciles o que un escenario de respaldo puede no estar disponible.
+- **Éxito** se utiliza para notificar al usuario sobre un estado positivo o cualquier otro cambio positivo en el sistema. Por ejemplo, sobre la finalización exitosa de una operación larga.
+- **Info** se utiliza para mostrar recomendaciones sobre cómo organizar el trabajo con el sistema (que deben mostrarse explícitamente) o para anunciar funciones adicionales del sistema.
+- **Normal** se utiliza principalmente para resaltar texto, como ayuda breve, código de ejemplo, resultados de cálculos, etc.
 
-![Types](/static/images/design/Alert/Types.png)
+![Tipos](/static/images/design/Alert/Types.png)
 
-No sustituya los tipos simplemente para llamar la atención del usuario, por ejemplo, mostrando la información de referencia en una alerta por un tipo de advertencia o error.
+No reemplaces los tipos simplemente para llamar la atención del usuario, como al mostrar información de referencia en una Alerta con un tipo de Advertencia o Peligro.
 
-Además de las instrucciones, Alert ofrece una serie de comandos para ayudar al usuario a encontrar una solución y tomar medidas.
+Además de las instrucciones, la Alerta ofrece una serie de comandos para ayudar al usuario a encontrar una solución y tomar medidas.
 
-![Warning](/static/images/design/Alert/Warning.png)
+![Advertencia](/static/images/design/Alert/Warning.png)
 
 ## Cuándo no usar
 
-Debido a su naturaleza disruptiva (especialmente si se selecciona un tipo de alerta incorrecto), las alertas deben usarse con moderación.
+Debido a su naturaleza disruptiva (especialmente si se selecciona el tipo de Alerta incorrecto), las alertas deben usarse con moderación.
 
-- No recomendamos usar Alert para mostrar un mensaje de error, advertencia o ayuda asociado a un formulario o campo de diálogo independiente. En esta situación, es mejor usar el estado Error en el componente de campo o mostrar un mensaje de texto sin formato o texto con un icono junto al campo.
-- No recomendamos colocar varias alertas, como las de peligro y advertencia, en la misma página (formulario, cuadro de diálogo), ya que esto dificulta la determinación de la prioridad de los mensajes.
-- No utilices Alert para ningún otro propósito que no sea el previsto, como resaltar visualmente los bloques de la página: encabezados, campos de formulario, etc.
-- No utilice Alert para confirmar que las operaciones se han completado. Para este tipo de tareas, utilice Dialog.
-- No utilice una alerta para mostrar el estado de una operación iniciada por el usuario. Para ello, utilice Toaster.
+- No recomendamos usar Alerta para mostrar un mensaje de error, advertencia o ayuda asociado con un campo de formulario o diálogo separado. En esta situación, es mejor usar el estado de Error en el componente del campo o mostrar un mensaje de texto plano o texto con un icono junto al campo.
+- No recomendamos colocar múltiples Alertas, como Peligro y Advertencia, en la misma página (formulario, diálogo), ya que esto dificulta determinar la prioridad de los mensajes.
+- No uses Alerta para nada que no sea su propósito previsto, como resaltar visualmente bloques en la página: encabezados, campos de formulario, etc.
+- No uses Alerta para confirmar que las operaciones se han completado. Para este tipo de tareas, usa Diálogo.
+- No uses Alerta para mostrar el estado de una operación iniciada por el usuario. Para este propósito, usa Toaster.
 
 ## Contenido
 
-Los elementos de alerta obligatorios incluyen una descripción y un icono. Además de estos, Alert puede incluir un título (Título), un botón de cierre (Cerrar) y hasta tres botones adicionales con acciones (Acciones).
+Los elementos requeridos de la Alerta incluyen una descripción y un icono. Además de estos, la Alerta puede incluir un título (Título), un botón de cierre (Cerrar) y hasta tres botones adicionales con acciones (Acciones).
 
 ### Icono
 
-De forma predeterminada, una alerta muestra un icono que corresponde a su tipo. Sin embargo, puede elegir su propio icono para el componente sin modificar el color de fondo. Para el tipo de alerta Normal, el icono es opcional y no se muestra de forma predeterminada.
+Por defecto, una Alerta muestra un icono que corresponde a su tipo. Sin embargo, puedes elegir tu propio icono para el componente manteniendo el color de fondo sin cambios. Para el tipo de Alerta Normal, el icono es opcional y no se muestra por defecto.
 
-![Icon](/static/images/design/Alert/Icon.png)
+![Icono](/static/images/design/Alert/Icon.png)
 
 ### Texto
 
-El texto del título y la descripción deben ser lo más breves posible y comenzar con una letra mayúscula. Si desea proporcionar más información al usuario, es mejor utilizar enlaces o los botones «Ayuda», «Documentación» y «Más información» para dirigir al usuario a una página de ayuda o sitio web independiente.
+El texto del título y la descripción deben ser lo más cortos posible y comenzar con mayúscula. Si deseas proporcionar más información al usuario, es mejor usar enlaces o los botones "Ayuda", "Documentación" y "Más información" para dirigir al usuario a una página de ayuda o sitio web separado.
 
-El título debe transmitir claramente la tesis del mensaje. Sin embargo, no debe repetir la descripción. Si es difícil elegir la tesis y convertirla en un titular, usa la descripción sin encabezado.
+El título debe transmitir claramente la tesis del mensaje. Sin embargo, no debe repetir la descripción. Si elegir la tesis y convertirla en un titular es difícil, usa la descripción sin encabezado.
 
 El título no debe terminar con un punto.
 
 ### Botones
 
-Según los requisitos y restricciones del diseño, es posible que aparezcan botones adicionales a la derecha del texto (diseño horizontal) o debajo de él (diseño vertical).
+Dependiendo de los requisitos y restricciones de diseño, se pueden mostrar botones adicionales a la derecha del texto (Diseño Horizontal) o debajo de él (Diseño Vertical).
 
-![Button](/static/images/design/Alert/Button1.png)
+![Botón](/static/images/design/Alert/Button1.png)
 
-Si los botones y sus etiquetas dejan suficiente espacio para la descripción y el encabezado sin crear saltos de línea innecesarios, coloque los botones a la derecha. Si el ancho de la alerta es inferior a 500-600 píxeles, opta por la vista vertical.
+Si los botones y sus etiquetas dejan suficiente espacio para la descripción y el encabezado sin crear saltos de línea innecesarios, coloca los botones a la derecha. Si el ancho de la Alerta es inferior a 500-600px, opta por la vista vertical.
 
-Los botones adicionales utilizan el estilo Normal de forma predeterminada. Sin embargo, según la semántica del mensaje, pueden ser Action, Contrast-normal y varios tipos de Outline (Outline-info, Outline-danger, etc.). Recomendamos que los estilos de los tres botones sean coherentes. Utilice solo un botón de acción y asegúrese de tener en cuenta el contexto de la página, por ejemplo, si ya hay otros botones de acción presentes.
+Los botones adicionales utilizan el estilo Normal por defecto. Sin embargo, dependiendo de la semántica del mensaje, pueden ser de tipo Acción, Contraste-normal y varios tipos de Contorno (Contorno-info, Contorno-peligro, etc.). Recomendamos mantener los estilos de los tres botones consistentes. Usa solo un botón de Acción y asegúrate de considerar el contexto de la página, como si ya hay otros botones de Acción presentes.
 
-![Button](/static/images/design/Alert/Button2.png)
+![Botón](/static/images/design/Alert/Button2.png)
 
-La alerta tiene un botón en forma de cruz que debe mostrarse en caso de que el usuario quiera ocultar el mensaje debido a su irrelevancia.
+La Alerta tiene un botón de cruz que debe mostrarse en caso de que el usuario quiera ocultar el mensaje debido a su irrelevancia.
 
-![Button](/static/images/design/Alert/Button3.png)
+![Botón](/static/images/design/Alert/Button3.png)
 
 ## Opciones
 
-El ancho de la alerta no está limitado: puede ocupar todo el espacio disponible en la página (formulario o cuadro de diálogo) o tener un ancho fijo determinado por el ancho del contenido principal.
+El ancho de la Alerta no está limitado: puede ocupar todo el espacio disponible en la página (formulario o diálogo) o tener un ancho fijo determinado por el ancho del contenido principal.
 
-Si la alerta está diseñada para mostrarse cerca de los bordes de la página (formulario, cuadro de diálogo) y ocupar todo el ancho (por ejemplo, un mensaje sobre la actualización del navegador o las condiciones para almacenar las cookies en el sitio), no es necesario redondear las esquinas del contenedor de alertas.
+Si la Alerta está diseñada para mostrarse cerca de los bordes de la página (formulario, diálogo) y ocupar todo el ancho (por ejemplo, un mensaje sobre la actualización del navegador o las condiciones para almacenar Cookies en el sitio), no es necesario redondear las esquinas del contenedor de la Alerta.
 
-![Options](/static/images/design/Alert/Options1.png)
+![Opciones](/static/images/design/Alert/Options1.png)
 
-Si el diseño no requiere que la alerta atraiga activamente la atención del usuario, puedes usar la vista esquemática, que tiene el mismo tipo de semántica que la vista rellena.
+Si el diseño no requiere que la Alerta atraiga activamente la atención del usuario, puedes usar la Vista de Contorno, que tiene la misma semántica que la Vista Rellena.
 
-![Options](/static/images/design/Alert/Options2.png)
+![Opciones](/static/images/design/Alert/Options2.png)

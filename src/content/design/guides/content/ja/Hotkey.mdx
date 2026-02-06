@@ -1,0 +1,29 @@
+インターフェースアクションに割り当てられたホットキーの組み合わせを含む、変更されたラベル。
+
+## プラットフォーム /. **platform**
+
+![Group 2087325957.png](/static/images/design/Hotkey/Group_2087325957.png)
+
+1. **Mac** – iOSデバイスのキーボード用
+2. **PC** – その他のキーボード用
+
+### 構造
+
+1. **Key** — クイックアクションを実行するために押す必要があるキーボード上のシンボル。文字、数字、特殊キーボードシンボル、またはアクションを説明する単語（例: Click）の場合があります。シンボルがキーボード上のシンボルと一致していることを確認してください。
+   テキストスタイル: Text/Body1、カラー: Text/Light Complementary。
+2. **Plus** — 文字の伝達と、必要に応じてキーストロークの正しい順序を維持するために使用されます。
+   テキストスタイル: Text/Body1、カラー: Text/Light Hint。
+
+![8.png](/static/images/design/Hotkey/8.png)
+
+## ユースケース
+
+- [ActionTooltip](/design/guides/action-tooltip) 内で、特定のボタンのアクションに割り当てられたホットキーを示すために使用します。
+
+![example](/static/images/design/Hotkey/example1.png)
+
+- サービスで利用可能なすべてのオプションをリストする、個別のホットキーパネル内で使用します。
+
+![example](/static/images/design/Hotkey/example2.png)
+
+- アクションボタンの [List](/design/guides/list-item) 内で、いずれかのアクションボタンにホットキーが割り当てられている場合に使用します。

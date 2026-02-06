@@ -1,0 +1,76 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Le Toaster est une petite notification qui apparaît à l'écran pour fournir des informations importantes ou un avertissement. Il peut être utilisé pour informer l'utilisateur d'un événement ou d'une action, par exemple lors de la soumission d'un formulaire ou du téléchargement d'un fichier.
+
+### Types principaux
+
+**Défaut**
+
+Il est utilisé lorsqu'il n'y a pas besoin d'action immédiate ou lorsque le message n'est lié à aucune action ou événement spécifique.
+
+![Défaut](/static/images/design/Toaster/Default.png)
+
+**Info**
+
+Il est utilisé pour informer l'utilisateur d'un processus, d'un événement ou d'une action. Par exemple, en cas de transfert de données réussi ou de chargement de page.
+
+![Info](/static/images/design/Toaster/Info.png)
+
+**Succès**
+
+Il indique qu'une opération ou une action s'est terminée avec succès. Par exemple, lorsque les données ont été enregistrées avec succès ou lorsque l'utilisateur est autorisé.
+
+![Succès](/static/images/design/Toaster/Success.png)
+
+**Avertissement**
+
+Il informe l'utilisateur d'un problème potentiel ou d'une erreur. Par exemple, s'il doit remplir un champ obligatoire sur un formulaire ou s'il n'y a pas de connexion Internet.
+
+![Avertissement](/static/images/design/Toaster/Warning.png)
+
+**Erreur**
+
+Il est utilisé pour indiquer une erreur et que l'attention de l'utilisateur est requise pour la corriger. Par exemple, si les données sont saisies incorrectement ou s'il y a une erreur serveur. Cet état est idéalement associé à un bouton d'action qui permet de corriger une erreur ou d'obtenir plus d'informations.
+
+![Erreur](/static/images/design/Toaster/Error.png)
+
+### Modifications
+
+Le Toast est composé de cinq éléments principaux :
+
+![Modifications](/static/images/design/Toaster/Modifications.png)
+
+1. Icône de type de Toast. Un composant peut être utilisé avec ou sans icône. L'icône est un élément optionnel.
+2. L'en-tête informe l'utilisateur de l'action en cours. Si la description est incluse, l'utilisation de l'en-tête est facultative.
+3. La description clarifie le titre et peut être utilisée indépendamment.
+4. Boutons. Le Toast peut comporter un ou deux boutons ; il est recommandé que le premier bouton soit utilisé comme bouton d'action. Les boutons sont des éléments optionnels.
+5. Icône de fermeture. L'icône de fermeture est un élément optionnel. Le bouton de fermeture est requis s'il n'y a pas de durée de masquage définie pour le toast.
+
+### Quand l'utiliser
+
+Les Toasters sont recommandés dans les scénarios suivants :
+
+- Lors de la soumission d'un formulaire ou de l'exécution d'une action, si vous souhaitez que l'utilisateur voie la progression. Par exemple, un message indiquant que les données ont été envoyées avec succès ou qu'une erreur s'est produite.
+- Lorsque vous ne souhaitez pas perturber le flux de travail de l'utilisateur ou bloquer l'écran. Les Toasters s'affichent dans un coin et ne couvrent pas tout l'écran, permettant à l'utilisateur de continuer à utiliser l'interface.
+- Lorsque des informations supplémentaires sur une action spécifique sont nécessaires. Les Toasts peuvent inclure des liens vers du contenu ou des informations supplémentaires qui aideront l'utilisateur à comprendre ce qui s'est passé.
+
+### Quand ne pas l'utiliser
+
+Les Toasters ne sont pas recommandés dans les scénarios suivants :
+
+- Lorsqu'une réponse immédiate de l'utilisateur est requise.
+- Lorsque l'action en cours au moment de l'affichage du toaster peut entraîner des problèmes ou des conséquences indésirables.
+- Lorsque le message nécessite une grande quantité d'informations ou une explication plus détaillée.
+- Lorsque l'information est déjà affichée à l'écran sous une autre forme.
+
+### Position à l'écran
+
+Le Toaster s'affiche dans le coin inférieur droit.
+
+Ses marges externes sont : bas M (8px), droite XL (20px).
+
+![Position](/static/images/design/Toaster/Position.png)
+
+### Personnalisation
+
+Le contenu du Toast peut différer de celui standard ; il peut inclure tout composant disponible dans la bibliothèque, si le cas d'utilisation l'exige.

@@ -1,0 +1,77 @@
+Votre équipe de service peut utiliser le journal des modifications pour informer les utilisateurs des changements.
+
+Le journal des modifications s'affiche une seule fois lorsque l'utilisateur ouvre la page du service. Nous ne proposons pas d'option pour rouvrir la page du journal des modifications. Implémentez-la indépendamment si nécessaire.
+
+Étant donné que le journal des modifications s'affiche dans une fenêtre modale, il suit les règles de fermeture et de mise à l'échelle des fenêtres modales.
+
+## Éléments
+
+Le journal des modifications est une fenêtre modale de taille M avec des publications disposées chronologiquement. Chaque publication contient :
+
+1. La date de publication
+2. Le [label](https://gravity-ui.com/design/guides/label) « Nouveau » (facultatif)
+3. Le titre de la publication
+4. L'image de la publication (facultative)
+5. Le texte de la publication
+6. Un [bouton](https://gravity-ui.com/design/guides/button) d'action (facultatif).
+
+![Éléments](/static/images/design/ChangelogDialog/ChangelogDialog1.png)
+
+### Date de publication
+
+La date de publication permet à l'utilisateur de savoir quand une modification particulière du service a eu lieu. Par défaut, la date est au format JJ Mois AAAA. Vous pouvez également utiliser d'autres formats de date pour correspondre à la locale du service.
+
+### Label
+
+Utilisez le label « Nouveau » pour les nouvelles publications. Le service détermine quelles publications considérer comme nouvelles et les marquer avec ce label. Dans le texte, vous pouvez utiliser d'autres formulations, différentes de « Nouveau ».
+
+### Titre de la publication
+
+Le titre de la publication est utilisé pour une brève description du changement apporté au service. Le titre peut avoir n'importe quelle longueur. Nous déconseillons :
+
+- D'utiliser des titres qui occupent plus d'une ligne (contenant plus de 70 caractères), car cela nuit à la lisibilité du texte.
+- De copier le texte des actualités dans le titre.
+
+Le titre utilise le style `text-subheader-3`. Nous ne proposons pas d'autres styles de texte pour les titres.
+
+### Image
+
+L'image est facultative et a des dimensions fixes de 516x240px. Vous pouvez utiliser des fichiers JPG et PNG comme images (les images GIF et les fichiers vidéo ne sont pas pris en charge). Utilisez des images lorsque vous avez besoin d'illustrer le sujet de la publication. Une seule image est utilisée pour les thèmes d'interface clairs et sombres.
+
+Si vous téléchargez une image plus grande que 516x240px, elle sera mise à l'échelle et centrée sur le côté le plus grand.
+
+En tenant compte des écrans Retina, nous recommandons de télécharger des images mises à l'échelle deux fois plus grandes de chaque côté, c'est-à-dire 1032x480px.
+
+### Texte de la publication
+
+Le texte de la publication suit l'image et peut avoir n'importe quelle longueur. Nous déconseillons :
+
+- D'utiliser des textes très longs (plus de 500 caractères). Si vous ne pouvez pas raccourcir le texte à la longueur recommandée, vous pouvez ajouter des liens vers la documentation dans le texte ou fournir un bouton après le texte pour accéder au texte complet.
+- De créer des sous-titres. Étant donné que la longueur de texte recommandée est concise, vous n'avez pas besoin de diviser le texte en sections à l'aide de sous-titres.
+
+Le texte utilise le style `text-body-1`. Nous ne proposons pas d'autres styles de texte, mais vous pouvez ajouter du formatage, c'est-à-dire créer des listes à puces et numérotées, ajouter un barré, un soulignement, du gras et de l'italique.
+
+### Bouton d'action
+
+Le bouton d'action est facultatif et est situé sous le texte de la publication. Utilisez-le pour naviguer vers le texte complet de la publication.
+
+Seuls les boutons de taille M sont pris en charge. Le bouton peut être de n'importe quel type, avec ou sans icône. Adhérez à un seul type de bouton.
+
+Nous ne prenons pas en charge plusieurs boutons.
+
+### Autres éléments
+
+De plus, sous l'en-tête de la fenêtre modale, vous pouvez ajouter un lien « Voir le journal des modifications complet » vers une page de journal des modifications (cela peut être une page de service distincte, un storybook ou un service de documentation externe).
+
+## Recommandations d'utilisation
+
+Utilisez le journal des modifications :
+
+- Lorsque vous devez informer l'utilisateur de changements importants dans le service.
+- Lorsque vous devez tenir l'utilisateur informé des changements mineurs. Dans ce cas, envisagez d'afficher le journal des modifications périodiquement et de signaler les changements mineurs depuis la dernière entrée du journal des modifications.
+- Lorsque vous devez rappeler à l'utilisateur les changements apportés au service et accroître sa connaissance des versions précédentes.
+
+Nous déconseillons :
+
+- D'utiliser le journal des modifications pour l'intégration des utilisateurs.
+- D'utiliser le journal des modifications pour informer l'utilisateur de chaque changement mineur dans le service.

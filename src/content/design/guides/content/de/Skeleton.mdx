@@ -1,0 +1,35 @@
+Animierter Platzhalter, der tatsächliche Inhalte während des Ladens ersetzt, bis die Benutzeroberfläche zur Interaktion bereit ist. Wird verwendet, wenn die Ladezeit 300 ms nicht überschreitet.
+
+### Struktur
+
+Je nach Inhalt kann er die Form eines Rechtecks, eines Kreises oder einer Kombination aus beidem annehmen.
+
+![IMG - 11.png](/static/images/design/Skeleton/IMG_-_11.png)
+
+### Größen
+
+Die Komponente passt sich dem Inhaltscontainer an, den sie während des Ladens ersetzt.
+
+### Anwendungsfälle
+
+1. Kann die gesamte Seite anzeigen
+![Frame 1.png](/static/images/design/Skeleton/Frame_1.png)
+
+2. Kann nur einen Teil des Inhalts ersetzen und Interaktionen mit dem Rest der Benutzeroberfläche ermöglichen
+![Frame 2.png](/static/images/design/Skeleton/Frame_2.png)
+
+### Empfehlungen
+
+**Verwenden**
+
+1. Wenn der Inhaltstyp nach dem Laden vorhersehbar ist
+2. Die Ladezeit beträgt weniger als 300 ms
+3. Wenn das Skeleton für asynchrones Laden verwendet wird, sollte es genau dort angezeigt werden, wo das Laden stattfindet, da das Laden eines Elementblocks den Rest der Benutzeroberfläche nicht blockieren sollte.
+
+![IMG - 88.png](/static/images/design/Skeleton/IMG_-_88.png)
+
+**Nicht verwenden**
+
+1. Wenn das Laden länger als drei Sekunden dauert, ist es besser, einen Spinner oder einen Ladeindikator zu verwenden.
+2. Wenn die Ladezeit 10 Sekunden überschreitet und die genaue Dauer bekannt ist, sollte eine Fortschrittsanzeige angezeigt werden.
+3. Wenn das Laden durch einen Button-Klick ausgelöst wird, ist die Verwendung des Button-Zustands als Feedback ausreichend, insbesondere in modalen Fenstern.

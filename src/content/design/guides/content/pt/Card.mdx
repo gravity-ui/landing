@@ -1,0 +1,87 @@
+Aqui está a tradução do arquivo fonte do guia de design para português, mantendo a naturalidade e os elementos técnicos:
+
+O componente `Card` é usado para dividir o conteúdo em blocos semânticos. Essencialmente, é um contêiner para agrupar conteúdo, com a opção de colapsá-lo.
+
+## Uso
+
+O componente vem em quatro tipos.
+
+![Uso](/static/images/design/Card/Placement.png)
+
+## **Com temas**
+
+![Posicionamento](/static/images/design/Card/Placement1.png)
+
+Os cards com temas podem alterar a cor de fundo ou do contorno. Frequentemente usados para descrever o erro/sucesso de um bloco ou um aviso ao usuário. Este card é mais comumente usado para combinar conteúdo em sua cor padrão (normal). O parâmetro `theme` especifica o tema do card, enquanto o parâmetro `View` determina se o card terá contorno ou preenchimento.
+
+Você tem as seguintes opções para cards deste tipo (container):
+
+**View**: Outlined / Filled
+
+**Theme**: Normal, Info, Success, Warning, Danger (color)
+
+![Tema](/static/images/design/Card/theme.png)
+
+- Normal - o estado básico do card com um contorno, usado na maioria dos casos.
+- Info — usado para fornecer informações ao usuário.
+- Success — usado para indicar eventos com resultados positivos.
+- Warning — usado para exibir um aviso.
+- Danger é um contêiner projetado para atrair a maior atenção do usuário; pode ser acionado por perda de dados, interrupção de serviço, etc.
+
+## **Card selecionável**
+
+![Selecionável](/static/images/design/Card/Selectable.png)
+
+Os cards desta categoria exigem que você escolha uma das opções disponíveis. O card tem três estados: normal, selecionado e em hover.
+
+Você tem as seguintes opções para cards deste tipo (type = selection):
+
+**selected**: true / false
+
+**disabled**: true / false
+
+## **Elevado**
+
+Usado para agrupar conteúdo, semelhante ao **Normal** no grupo Com temas. A principal diferença é que este tipo de card possui uma sombra. Recomendamos usá-lo em situações onde o card precisa ser destacado. Por exemplo, com widgets:
+
+![Elevado](/static/images/design/Card/Raised.png)
+
+Lembre-se de deixar espaço suficiente entre esses cards para que a sombra não caia sobre o card vizinho.
+
+No tamanho L, o card tem uma sombra mais 'aerada', portanto, ao usar este tamanho, é recomendado escolher um espaçamento ligeiramente maior entre os cards em comparação com o tamanho M.
+
+**type**: container;
+
+**view**: raised
+
+## **Elevado com ação**
+
+Semelhante ao card anterior, mas requer um clique no card. Ao contrário do card **Elevado**, ele possui um estado de hover, mas não um estado de "opção selecionada", como no card Selecionável. Recomendamos usá-lo quando você precisa fornecer ao usuário uma opção de seleção que contenha descrições detalhadas.
+
+Tenha em mente que clicar nele redirecionará o usuário para uma página aninhada. Portanto, os usuários devem esperar esse comportamento do card. (deve ficar claro pelo design do card)
+
+![Com Ações](/static/images/design/Card/WithActions.png)
+
+Você tem as seguintes opções para cards deste tipo (type = action):
+
+**disabled**: true / false
+
+## Tamanho
+
+![Tamanhos M e L, usando o exemplo de cards com sombra (Elevado)](/static/images/design/Card/Size.png)
+
+Tamanhos M e L, usando o exemplo de cards com sombra (Elevado)
+
+Dois tamanhos disponíveis: M e L. O raio do canto depende do tamanho: raio L (8px) e raio 2XL (16px). A escolha do tamanho depende da localização, preenchimento e tamanho dos controles da página. Por exemplo, se a página usa o tamanho L para inputs, botões e outros elementos, o card também deve ser de tamanho L.
+
+A largura e a altura do componente são determinadas pelo seu conteúdo. O tamanho mínimo pode ser selecionado com um leve preenchimento em relação ao conteúdo. O tamanho máximo pode ser igual a 100% da largura da página.
+
+### Casos de uso
+
+![Caso de uso](/static/images/design/Card/Usecase.png)
+
+Exemplo de uso do card:
+
+1 - temas com preenchimento para informar o usuário,
+
+2 - card com contorno para agrupar conteúdo

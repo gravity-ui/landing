@@ -1,0 +1,73 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche, wobei darauf geachtet wurde, dass sie natürlich klingt und alle technischen Elemente beibehalten werden:
+
+Diese Komponente dient zum Einbetten eines horizontalen Balkendiagramms in verschiedene Benutzeroberflächen. Sie kann Datenverteilung, Anteile oder Fortschritt anzeigen.
+
+## Anwendungsfälle
+
+✅ **Wann verwenden**
+Verwenden Sie es, wenn Sie den Abschlussgrad oder Füllstand einer Entität anzeigen müssen, z. B. freien Speicherplatz auf der Festplatte, die Anzahl abgeschlossener Aufgaben usw.
+
+🚫 **Wann nicht verwenden**
+Wenn Sie einen einzelnen Wert ohne Vergleich anzeigen müssen. Sie können beispielsweise Progress verwenden, um 15/60 anzuzeigen, aber nicht nur 15.
+
+## Struktur
+
+![Struktur](/static/images/design/Progress/progress-0001.png)
+
+1. Farbe des Indikators. Erforderlicher Teil
+2. Text. Nur mit Größe M verwenden, optionaler Teil.
+3. Hintergrund. Erforderlicher Teil
+
+## Größen
+
+![Größen](/static/images/design/Progress/progress-0002.png)
+
+1. **M** ist die einzige Größe, die Text enthält. Verwenden Sie sie in Bereichen mit viel Platz, auf Seiten, auf denen der Fortschrittsanzeiger das Schlüsselelement ist.
+2. **S** wird in Tabellen, Karten und separat verwendet, wenn der Fortschritt nicht die einzige Schlüsselkomponente auf der Seite ist.
+3. **XS** wird in schmalen Bereichen verwendet, in denen Sie Ihren Inhalt kompakt halten müssen.
+
+## Themen
+
+![Themen](/static/images/design/Progress/progress-0003.png)
+
+**Default** wird am häufigsten für neutrale Fälle verwendet, wenn Sie dem Fortschritt keine zusätzliche Aufmerksamkeit schenken müssen, z. B. wenn die Seite wichtigere Elemente enthält.
+
+**Info** wird ebenfalls für neutrale Fälle verwendet, bei denen Sie dem Fortschritt mehr Betonung verleihen oder anzeigen möchten, dass eine Operation im Gange ist.
+
+**Success** wird für erfolgreich abgeschlossene Prozesse verwendet oder um anzuzeigen, dass das System ohne Probleme läuft.
+
+**Warning** wird in ungewöhnlichen Situationen verwendet, um den Benutzer vor etwas zu warnen, z. B. um die Aufmerksamkeit des Benutzers auf ein drohendes Problem zu lenken.
+
+**Danger** wird verwendet, um maximale Aufmerksamkeit zu erregen, wenn ein Fehler aufgetreten ist und der Benutzer Maßnahmen zur Behebung des Problems ergreifen muss: Festplattenspeicher ist voll, System ausgefallen usw.
+
+**Misc** wird in neutralen Fällen verwendet, wenn Sie Default nicht verwenden möchten.
+
+## Umfang
+
+1. **Änderung der Farbe je nach Fortschrittswert**. Sie können diese Komponente so konfigurieren, dass sie ihre Farbe je nach Fortschrittswert ändert. Zum Beispiel ist die Standardanzeige blau (Info) und 100 % grün (Erfolg).
+
+   ![Umfang](/static/images/design/Progress/progress-0004.png)
+
+2. **Ladeanimation. Verwenden Sie sie**, um dem Benutzer den Fortschritt in Echtzeit anzuzeigen, z. B. beim Hochladen von Dateien vom Computer.
+
+   ![Umfang](/static/images/design/Progress/progress-0005.png)
+
+3. **Benutzerdefinierte Farben.** Sie können Ihr eigenes Set von Progress-Farben verwenden, wenn alle anderen Optionen nicht passen: Verwenden Sie eine benutzerdefinierte Farbe und kombinieren Sie mehrere Farben.
+
+   ![Umfang](/static/images/design/Progress/progress-0006.png)
+
+## Anwendungsfälle
+
+Sie können diese Komponente mit Text kombinieren, in andere Komponenten einbetten, z. B. Progress in eine Karte oder Tabelle einwickeln, mit erklärendem Text, Aktionen usw. kombinieren.
+
+1. In Abschnitten mit Datei-Upload/Download
+
+   ![Progress](/static/images/design/Progress/progress-0007.png)
+
+2. In Karten, z. B. in einer Checkliste mit Problemen
+
+   ![Progress](/static/images/design/Progress/progress-0008.png)
+
+3. In Tabellen, z. B. zur Anzeige der Festplattennutzung.
+
+   ![Progress](/static/images/design/Progress/progress-0009.png)

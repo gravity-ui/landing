@@ -1,0 +1,131 @@
+A tabela é usada para a exibição intuitiva de dados estruturados de qualquer tamanho.
+
+Um elemento atômico da tabela é uma célula. As células formam colunas e linhas na tabela. A tabela sempre tem um cabeçalho.
+
+## **Célula da tabela**
+
+Uma célula é um contêiner na interseção de uma linha e uma coluna da tabela, onde você pode colocar outros componentes:
+
+- Texto
+- Ícones
+- [Botões](/design/guides/button)
+- [Etiquetas](/design/guides/label)
+- [Avatar do usuário](/design/guides/user-avatar)
+- [Barra de progresso](/design/guides/progress-bar)
+- Checkbox
+- [Seleção](/design/guides/select)
+- [Entrada](/design/guides/text-input) e outros componentes
+
+Uma única célula pode conter um único componente (por exemplo, texto) ou uma combinação de componentes (por exemplo, um checkbox, texto e ícone).
+
+![1.png](/static/images/design/Table/table-0001.png)
+
+Uma célula pode estar vazia se não houver dados para exibir nela. Além disso, o conteúdo da célula pode ficar oculto em seu estado normal e se tornar visível ao passar o mouse sobre a célula ou linha.
+
+### **Recomendações para o uso de componentes**
+
+- Não use mais de três componentes diferentes em uma célula: isso torna os dados na coluna com tais células mais difíceis de comparar e a tabela menos legível. Nesses casos, você pode criar uma coluna separada para a propriedade que cada componente descreve.
+- Escolha os tamanhos dos componentes na tabela com base na sua tarefa atual. Para dados de texto simples, é melhor usar o estilo `text-body-1` sem decoração e, para outros elementos, use o tamanho `M`.
+- Recomendamos o uso de componentes do mesmo tamanho dentro de uma célula, por exemplo, etiquetas e botões de tamanho `M`.
+
+### Altura e largura da célula
+
+O tamanho da célula é determinado pelo tamanho de seu conteúdo e pelos preenchimentos da célula.
+
+A altura padrão da célula com texto de linha única, estilizado como `text-subheader-1` (espaçamento entre linhas de 18px), é de 40px. Tanto o preenchimento superior quanto o inferior da célula neste caso são de 11px.
+
+Para uma célula com texto de duas linhas, a altura da célula é de 58px.
+
+![2.png](/static/images/design/Table/table-0002.png)
+
+Você pode usar quaisquer preenchimentos na parte superior, inferior, esquerda e direita, mas recomendamos um sistema de preenchimentos que sejam múltiplos de 4px. Os preenchimentos superior e inferior geralmente são os mesmos, mas você pode torná-los diferentes. O mesmo se aplica aos preenchimentos esquerdo e direito (para mais detalhes, consulte a descrição das linhas e colunas na tabela). Os preenchimentos superior e inferior não precisam ser iguais aos preenchimentos esquerdo e direito.
+
+### Separador
+
+Cada célula tem um separador horizontal de 1px de altura. Este separador está alinhado com a borda inferior da célula, sua largura é igual à largura da célula. Você pode omitir o separador para as células da última linha da tabela.
+
+### Alinhamento
+
+O conteúdo dentro de uma célula pode ser alinhado à esquerda ou à direita (para mais detalhes sobre alinhamento de texto, consulte as descrições das colunas).
+
+## Cabeçalho da **tabela**
+
+O cabeçalho da tabela está localizado na parte superior da tabela e contém os nomes das colunas. Além dos nomes, o cabeçalho também pode conter checkboxes e botões.
+
+![3.png](/static/images/design/Table/table-0003.png)
+
+Evite nomes de colunas de duas linhas para evitar quebras de linha. Quando o nome é quebrado para a segunda e outras linhas, a altura do cabeçalho aumenta. Outros nomes e botões permanecem alinhados ao topo neste caso.
+
+![4.png](/static/images/design/Table/table-0004.png)
+
+## Colunas da **tabela**
+
+Uma coluna é um grupo de células dispostas verticalmente. Dependendo do tipo de conteúdo nas células, os dados na coluna podem ser:
+
+- Ordenados
+- Alinhados à direita
+
+### Ordenação
+
+Se os dados na coluna puderem ser ordenados (por exemplo, alfabeticamente, por tempo ou por tamanho), um ícone de seta é colocado ao lado do nome da coluna. Quando o usuário clica no nome do ícone, as linhas são ordenadas por esta coluna.
+
+![5.png](/static/images/design/Table/table-0005.png)
+
+A ordenação é uma funcionalidade opcional na tabela. Está disponível em casos de uso específicos.
+
+Você não pode ordenar a tabela por duas colunas em paralelo.
+
+Normalmente, se os dados em uma coluna puderem ser ordenados, tais dados devem ter a mesma unidade de medida. Para evitar especificar a unidade em cada célula da coluna, adicione-a ao nome da coluna com uma vírgula.
+
+### Conteúdo alinhado à direita
+
+Este recurso está disponível apenas para dados de texto e é usado para comparar dados (por exemplo, tempo gasto ou recursos consumidos). Tais dados geralmente têm a mesma unidade e podem ser ordenados. Para dados de coluna alinhados à direita com uma seta de ordenação, coloque a seta primeiro, seguida pelo texto.
+
+![6.png](/static/images/design/Table/table-0006.png)
+
+### Bloqueio de coluna na rolagem
+
+Se a tabela não couber dentro das bordas da tela, uma barra de rolagem horizontal aparece. Nesses casos, você pode bloquear certas colunas da tabela para que elas permaneçam sempre na tela. Você pode bloquear as primeiras ou últimas colunas da tabela. Você pode usar qualquer número de colunas bloqueadas, mas certifique-se de que haja espaço suficiente para as colunas em rolagem, considerando a largura mínima da viewport suportada.
+
+Quando bloqueadas, essas células de coluna recebem um separador adicional: ele é colocado à direita se a coluna estiver bloqueada à esquerda e à esquerda se a coluna estiver bloqueada à direita. Este separador limitará a rolagem de outras células.
+
+![7.png](/static/images/design/Table/table-0007.png)
+
+Na coluna mais à direita, você pode adicionar ações para uma linha. Essas ações podem ser acessadas sob um ícone de três pontos, que se expande em uma lista. Bloqueie esta coluna na rolagem para que o usuário possa sempre acessar as ações. Coloque o ícone de engrenagem, que abre as configurações da coluna da tabela ao ser clicado, no cabeçalho de tal coluna.
+
+![8.png](/static/images/design/Table/table-0008.png)
+
+### Configuração de coluna
+
+Os usuários podem personalizar o número e a ordem das colunas. Para isso, adicione um ícone de engrenagem no cabeçalho da última coluna da tabela. Quando o usuário clica no ícone de engrenagem, um pop-up de configurações aparece.
+
+![9.png](/static/images/design/Table/table-0009.png)
+
+## Linhas da **tabela**
+
+Uma linha é um grupo de células dispostas horizontalmente.
+
+### Linhas clicáveis
+
+Quando os usuários clicam em uma linha da tabela, eles podem ser direcionados para outra página, uma janela modal ou uma barra lateral. Ao passar o mouse sobre essas linhas, a cor de fundo muda para `--g-color-base-simple-hover`.
+
+![10.png](/static/images/design/Table/table-0010.png)
+
+Para uma exibição mais organizada do hover sobre uma linha de tabela clicável, você pode adicionar pequenas margens à esquerda e à direita. Com essas margens, o conteúdo não se alinha mais à grade. Portanto, não recomendamos essas margens em casos sem hover.
+
+### Linhas com operações em massa
+
+Você pode aplicar ações em massa a linhas onde a primeira célula contém um checkbox. Um conjunto de ações em grupo geralmente corresponde ao conjunto de ações individuais com uma linha de tabela.
+
+Se uma linha for selecionada, sua cor de fundo muda para `--g-color-base-selection`, e uma barra de ações com uma lista de ações em grupo aparece na parte inferior da página.
+
+![11.png](/static/images/design/Table/table-0011.png)
+
+Se ações diferentes estiverem disponíveis para diferentes linhas da tabela, recomendamos exibir na
+
+Aqui está a tradução do arquivo fonte do guia de design para português, mantendo um tom natural e preservando todos os componentes MDX, blocos de código e termos técnicos:
+
+- Use tabelas para descrever objetos com uma única propriedade. Uma lista é uma opção melhor para esses casos.
+  Por exemplo, você deve usar uma lista para apresentar informações sobre o nome da cor e sua codificação HEX.
+- Use tabelas para descrever objetos que possuem propriedades heterogêneas distintas. Descreva cada objeto individualmente neste caso.
+  Por exemplo, se sua tarefa for descrever os dispositivos usados por um funcionário. Esses dispositivos podem incluir um laptop (propriedades: SO, capacidade de armazenamento, tamanho da tela), um mouse de computador (propriedades: com fio ou sem fio) e uma luminária de mesa (propriedades: fabricante, tipo de montagem). Não adicione todos esses dados em uma única tabela e tente encontrar um método de visualização diferente.

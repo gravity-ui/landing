@@ -1,0 +1,31 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Une étiquette modifiée contenant une combinaison de raccourcis clavier attribués à une action d'interface.
+
+## Plateformes /. **platform**
+
+![Group 2087325957.png](/static/images/design/Hotkey/Group_2087325957.png)
+
+1. **Mac** – pour les claviers des appareils iOS
+2. **PC** – pour les autres claviers
+
+### Structure
+
+1. **Key** — un symbole sur le clavier qui doit être pressé pour effectuer une action rapide. Il peut s'agir d'une lettre, d'un chiffre, d'un symbole de clavier spécial ou d'un mot décrivant une action (par exemple, Click). Assurez-vous que les symboles correspondent aux symboles sur le clavier.
+   Style de texte : Text/Body1, couleur : Text/Light Complementary.
+2. **Plus** — utilisé pour la communication de caractères et le maintien du bon ordre des frappes si nécessaire.
+   Style de texte : Text/Body1, couleur : Text/Light Hint.
+
+![8.png](/static/images/design/Hotkey/8.png)
+
+## Cas d'utilisation
+
+- **dans [ActionTooltip](/design/guides/action-tooltip)**, pour indiquer les raccourcis clavier attribués à l'action d'un bouton spécifique
+
+![example](/static/images/design/Hotkey/example1.png)
+
+- **dans un panneau de raccourcis clavier séparé** qui liste toutes les options disponibles dans le service
+
+![example](/static/images/design/Hotkey/example2.png)
+
+- dans la [List](/design/guides/list-item) des boutons d'action, si l'un d'entre eux a des raccourcis clavier attribués

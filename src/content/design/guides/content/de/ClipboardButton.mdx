@@ -1,0 +1,39 @@
+Der `ClipboardButton` ist eine Modifikation der `Button` `Flat`-Komponente, bei der das `ClipboardIcon` separat platziert ist.
+
+### Icon
+
+Innerhalb des `ClipboardButton` befindet sich eine `ClipboardIcon`-Komponente, ein animiertes Icon mit zwei Zuständen: Erfolg und Fehler. Um den Kopierbutton anzupassen, verwenden Sie die Standard-Button-Komponente `Button` mit dem `ClipboardIcon`.
+
+### Zustände
+
+![Zustände](/static/images/design/ClipboardButton/States.png)
+
+### Größen
+
+Die Komponente unterstützt die Standard-Button-Größen `XS`, `S`, `M`, `L` und `XL`.
+
+### Verhalten
+
+Wenn Inhalte nicht häufig kopiert werden oder das Icon die Lesbarkeit beeinträchtigt, wird der Kopierbutton erst angezeigt, wenn der Mauszeiger näher herangeführt wird.
+
+![In Tabellen ist das Icon verborgen, bis der Mauszeiger über eine Zelle mit Inhalt bewegt wird](/static/images/design/ClipboardButton/Use-cases2.png)
+
+In Tabellen ist das Icon verborgen, bis der Mauszeiger über eine Zelle mit Inhalt bewegt wird.
+
+### Tooltip
+
+Die Komponente verfügt über einen Tooltip, der deaktiviert werden kann. Er wird verwendet, um anzuzeigen, welcher Inhalt kopiert wird.
+
+![Der Task-Schlüssel wird im Yandex Tracker-Dienst kopiert](/static/images/design/ClipboardButton/Tooltip.png)
+
+Der Task-Schlüssel wird im Yandex Tracker-Dienst kopiert.
+
+### Anwendungsfälle
+
+Ein Codeblock wird in der Dokumentation kopiert.
+
+![Anwendungsfälle](/static/images/design/ClipboardButton/Use-cases1.png)
+
+Zellenwerte werden in Tabellen kopiert.
+
+![Anwendungsfälle](/static/images/design/ClipboardButton/Use-cases2.png)

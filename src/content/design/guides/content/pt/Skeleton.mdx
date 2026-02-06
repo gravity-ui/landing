@@ -1,0 +1,41 @@
+Arquivo fonte do guia de design traduzido para pt.
+Faça a tradução soar o mais natural possível.
+Esta é uma documentação de guia de design UI/UX para desenvolvedores.
+Mantenha todas as tags de componentes MDX, blocos de código e termos técnicos intactos.
+Não traduza nomes de componentes como Button, Alert, Dialog, etc.
+Não converta blocos de código markdown em html!
+Placeholder animado que substitui o conteúdo real durante o carregamento do conteúdo até que a interface esteja pronta para interação do usuário. Usado se o tempo de carregamento não exceder 300 ms.
+
+### Estrutura
+
+Dependendo do conteúdo, pode assumir a forma de um retângulo, um círculo ou uma combinação dos dois.
+
+![IMG - 11.png](/static/images/design/Skeleton/IMG_-_11.png)
+
+### Tamanhos
+
+O componente se adapta ao contêiner de conteúdo que ele substitui durante o carregamento.
+
+### Casos de uso
+
+1. Pode mostrar a página inteira
+![Frame 1.png](/static/images/design/Skeleton/Frame_1.png)
+
+2. Pode substituir apenas uma parte do conteúdo, permitindo a interação com o restante da interface
+![Frame 2.png](/static/images/design/Skeleton/Frame_2.png)
+
+### Recomendações
+
+**Usar**
+
+1. Quando o tipo de conteúdo pode ser previsto após o carregamento
+2. O tempo de carregamento é inferior a 300 ms
+3. Se o esqueleto for usado para carregamento assíncrono, ele deve ser exibido exatamente onde o carregamento acontece, pois o carregamento de um bloco de elementos não deve bloquear o restante da interface.
+
+![IMG - 88.png](/static/images/design/Skeleton/IMG_-_88.png)
+
+**Não usar**
+
+1. Se o carregamento levar mais de três segundos, é melhor usar um spin ou um loader.
+2. Se o tempo de carregamento exceder 10 segundos e a duração exata for conhecida, uma barra de progresso deve ser exibida.
+3. Quando o carregamento é iniciado por um clique de botão, usar o estado do botão como feedback é suficiente, especialmente em janelas modais.

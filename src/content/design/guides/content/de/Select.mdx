@@ -1,0 +1,175 @@
+Eine Komponente zur Auswahl eines einzelnen Wertes oder einer Gruppe von Werten aus einer vorgegebenen Liste. Wenn der Benutzer auf die Steuerelement klickt, öffnet sich eine Dropdown-Liste mit einer Reihe von Werten, aus denen der Benutzer wählen kann.
+
+## Anwendungsfälle
+
+![1.png](/static/images/design/Select/select-0001.png)
+
+**Wann verwenden?**
+
+- Wenn Sie erwarten, dass der Benutzer Werte aus einer vorgegebenen Liste auswählt.
+
+**Wann vermeiden?**
+
+- Wenn Sie alle Werte zur Auswahl anzeigen möchten. Verwenden Sie für solche Anwendungsfälle [Radio](/design/guides/radio), [Checkbox](/design/guides/checkbox) oder Radio Button.
+
+## Optionen
+
+**Einzelne Auswahl**
+
+![2.png](/static/images/design/Select/select-0002.png)
+
+- Verwenden Sie dies zur Auswahl eines einzelnen Wertes aus einer Liste.
+- Nachdem der Benutzer einen Wert ausgewählt hat, wird die Dropdown-Liste geschlossen.
+- Die Steuerelement zeigt den ausgewählten Wert an.
+
+**Mehrfachauswahl**
+
+![3.png](/static/images/design/Select/select-0003.png)
+
+- Verwenden Sie dies, wenn Sie erwarten, dass der Benutzer mehr als einen Wert aus einer Liste auswählt.
+- In der Liste wird der ausgewählte Wert mit einem Häkchen links markiert.
+- Die Steuerelement zeigt die ausgewählten Werte, getrennt durch Kommas, an.
+- Um die Dropdown-Liste zu schließen und die ausgewählten Werte anzuwenden, klickt der Benutzer auf den leeren Bereich außerhalb oder auf die Bestätigungsschaltfläche in der Liste (falls vorhanden).
+
+## Typen
+
+Die Steuerelement gibt es in zwei Typen: **Normal** und **Clear**, beide haben die gleichen Funktionen, sehen aber unterschiedlich aus und werden je nach Kontext angewendet.
+
+![4.png](/static/images/design/Select/select-0004.png)
+
+**Normal**
+
+- Der am häufigsten verwendete Typ.
+- Das charakteristische Merkmal ist, dass die Komponente einen 1 Pixel breiten Rand hat und die Elemente im Inneren (Text und Pfeil) Abstände zu den Rändern aufweisen.
+- Verwenden Sie diese Komponente in Formularen, bei denen Sie Formularelemente durch Abstände trennen müssen.
+
+**Clear**
+
+- Das charakteristische Merkmal ist, dass die Komponente keinen Rand hat und die Elemente im Inneren (Text und Pfeil) bündig mit den Rändern des Eingabefeldes abschließen.
+- Verwenden Sie sie, wenn der Normal-Typ visuelles Rauschen erzeugt.
+- Stellen Sie bei der Verwendung dieses Typs sicher, dass die Bedeutung der Komponente für den Benutzer klar bleibt.
+
+## Struktur
+
+![5.png](/static/images/design/Select/select-0005.png)
+
+1. Inline-Label
+2. Wert
+3. Clear-Symbol
+4. Pfeil
+5. Fehler-Symbol
+6. Fehlerbeschreibung
+
+### Inline-Label
+
+   ![6.png](/static/images/design/Select/select-0006.png)
+
+   - Ein optionales Element.
+   - Fügt eine Erklärung zum Namen des Select-Feldes hinzu.
+   - Kann das externe Label im Formular ersetzen.
+
+### Wert
+
+   ![7.png](/static/images/design/Select/select-0007.png)
+
+   - Ein obligatorisches Element.
+   - Standardmäßig ist dies ein Hinweis, der dem Benutzer hilft zu verstehen, was aus der Liste der Werte ausgewählt werden kann.
+   - Der Ort, an dem der ausgewählte Wert oder die ausgewählten Werte angezeigt werden.
+
+### Clear-Symbol
+
+   ![8.png](/static/images/design/Select/select-0008.png)
+
+   - Ein optionales Element.
+   - Verwenden Sie es, um die Komponente schnell von ausgewählten Werten oder Wertoptionen zu leeren, ohne die Dropdown-Liste aufzurufen.
+   - Es kann angezeigt werden, wenn mindestens ein Wert ausgewählt wurde.
+   - Nach dem Leeren bleibt der Fokus in der Komponente.
+   - Es ändert die Farbe beim Hover.
+
+### Pfeil
+
+   ![9.png](/static/images/design/Select/select-0009.png)
+
+   - Ein obligatorisches Element.
+   - Verwenden Sie es, um die Komponente von anderen visuell ähnlichen Komponenten (z. B. [TextInput](/design/guides/text-input)) zu unterscheiden und die Komponente im Formular zu identifizieren.
+   - Die Komponente kann auch nur mit einem Pfeil vorhanden sein, z. B. wenn eine kompakte Ansicht benötigt wird.
+   - Trotz des Vorhandenseins eines Pfeils ist der gesamte Bereich der Komponente klickbar.
+
+### Fehler-Symbol
+
+   ![10.png](/static/images/design/Select/select-0010.png)
+
+   - Wird nur im Zustand "Inline Error" angezeigt.
+   - Funktioniert zusammen mit einer Tooltip-Fehlerbeschreibung, die beim Hover über das Symbol angezeigt wird. Hilft, den Benutzer informiert zu halten und spart Platz.
+
+### Fehlerbeschreibung
+
+   ![11.png](/static/images/design/Select/select-0011.png)
+
+   - Wird nur im Zustand "Outline Error" angezeigt.
+   - Die Fehlerbeschreibung wird unten links im Feld platziert, wenn die Ursache des Fehlers sofort angezeigt werden muss.
+
+## Zustände
+
+Es gibt mehrere Zustände: **Suggest, Default, Hover, Disabled, Active, Inline Error, Outline Error.**
+
+![12.png](/static/images/design/Select/select-0012.png)
+
+1. **Suggest.** Inaktiver Zustand, wenn der Benutzer nicht direkt mit der Komponente interagiert und nichts darin ausgewählt hat. In diesem Zustand kann sie dem Benutzer Hinweise geben, was er auswählen kann.
+2. **Default.** Inaktiver Zustand, wenn der Benutzer nicht direkt mit der Komponente interagiert und bereits etwas darin ausgewählt hat. In diesem Zustand ändert sich der Hinweistext zur Auswahl aus der Dropdown-Liste.
+3. **Hover.** Aktiver Zustand, wenn der Benutzer den Cursor über den Bereich der Komponente bewegt.
+4. **Disabled.** Inaktiver Zustand der Komponente, wenn der Benutzer nicht mit ihr interagieren kann.
+5. **Active.** Aktiver Zustand, der aktiviert wird, wenn der Benutzer auf die Steuerelement klickt. Beim Klicken öffnet sich eine Dropdown-Liste.
+6. **Outline error.** Ein Zustand der Komponente, der durch einen Validierungsfehler ausgelöst wird und am unteren Rand des Feldes mit einer Erklärung angezeigt wird, was passiert ist.
+7. **Inline error.** Ein Zustand der Komponente, der durch einen Validierungsfehler ausgelöst wird, aber die Fehlererklärung wird nicht angezeigt, nur ein spezielles Symbol. Wenn Sie mit der Maus über das Symbol fahren, erscheint ein Tooltip mit dem Fehler.
+
+## Größen
+
+![13.png](/static/images/design/Select/select-0013.png)
+
+Es gibt vier Größen für die Komponente: **S, M, L, XL**.
+
+| Größe | Höhe | Textstil | Abrundung |
+| --- | --- | --- | --- |
+| S | 24 | Body 1 | 5 |
+| M | 28 | Body 1 | 6 |
+| L | 36 | Body 1 | 8 |
+| XL | 44 | Body 2 | 10 |
+
+Die Wahl der Größe bestimmt die Höhe und die abgerundeten Ecken der Steuerelement, ihre Abstände und die Textgröße.
+
+Der Eckradius hängt von der Größe ab und wird durch Variablen festgelegt.
+
+1. **S.** Verwenden Sie dies dort, wo die Standard-Steuerelement zu groß ist (Tabellen, kleine Karten).
+2. **M.** Dies ist die Hauptgröße, verwenden Sie sie in den meisten Formularen und Filtern.
+3. **L.** Sehr selten verwendet.
+4. **XL.** Verwenden Sie dies in Kommunikationsumgebungen, d. h. auf Websites und Landing Pages.
+
+## Empfehlungen zur Verwendung
+
+1. **Arbeiten mit dem Feld**
+   - Wählen Sie die **Breite des Feldes** je nach Größe des Inhalts. Sie können das Element beispielsweise für lange Werte oder Mehrfachauswahl breiter machen.
+   - Verwenden Sie **eine Größe** mit anderen ergänzenden Komponenten im Formular. Wenn Sie sich für die Arbeit mit M entscheiden, sollten die anderen Komponenten die gleiche Größe haben.
+   - Verwenden Sie das **Kreuz-Symbol zum Leeren** der Mehrfachauswahl: Dies ist bequemer und schneller.
+   - Sie können die Höhe der Steuerelement nicht ändern. Wir bieten nur die **feste Feldgröße**.
+
+2. **Outline-Label**
+
+   ![14.png](/static/images/design/Select/select-0014.png)
+
+   - Ein kurzer Feldname (sollte nicht mehr als eine Zeile umfassen).
+   - Bei der Verwendung in Formularen richten Sie es an dem Wert innerhalb des Feldes aus.
+
+3. **Hinweis mit Tooltip**
+
+   ![15.png](/static/images/design/Select/select-0015.png)
+
+   - Zusätzlicher Hinweis zur Auswahl, der beim Hover über das Fragezeichen-Symbol angezeigt wird.
+   - Verwenden Sie dies, wenn Sie das Label erklären müssen.
+
+4. **Beschreibung**
+
+   ![16.png](/static/images/design/Select/select-0016.png)
+
+   - Kann unterhalb des Feldes oder rechts vom Feld platziert werden.
+   - Verwenden Sie dies in besonderen Fällen, um zusätzliche Klarstellungen zur Auswahl zu geben oder Erklärungen für die ausgewählten Werte zu liefern.

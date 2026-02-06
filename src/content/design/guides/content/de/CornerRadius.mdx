@@ -1,0 +1,22 @@
+Der Eckradius von Steuerelementen kann überschrieben werden. Verwenden Sie dazu die folgenden Variablen:
+
+- `--g-border-radius-xs`: 3px;
+- `--g-border-radius-s`: 5px;
+- `--g-border-radius-m`: 6px;
+- `--g-border-radius-l`: 8px;
+- `--g-border-radius-xl`: 10px;
+- `--g-border-radius-2xl`: 16px;
+
+![Eckradius](/static/images/design/CornerRadius/1.png)
+
+Sie können die Werte in **Variablen** überschreiben.
+
+Variablen werden in Steuerelementen entsprechender Größen verwendet. Wenn Sie den Wert einer Variable ändern, ändert sich der Eckradius aller Steuerelemente gleicher Größe entsprechend. Die von dieser Variable betroffenen Steuerelemente sind auf der Branding-Seite der Figma-Bibliothek aufgeführt. Da verschiedene Steuerelemente unterschiedliche Größenbereiche haben, können die Steuerelementgruppen nicht übereinstimmen. Labels beispielsweise gibt es nicht in Größen größer als L, daher werden Variablen, die mit `--g-border-radius-l` beginnen, in dieser Komponente nicht verwendet und haben keinen Einfluss auf deren Aussehen.
+
+![Eckradius](/static/images/design/CornerRadius/2.png)
+
+Der Eckradius des verschachtelten Elements für den Check-Button wird durch die Tokens bestimmt und mit der Formel "Token-Wert - 3" (wobei 3 der Abstand zwischen internem und externem Element ist) berechnet. In der aktuellen Version müssen Sie die Berechnungen manuell durchführen und die Ergebnisse in die folgenden Tokens eingeben:
+
+![Eckradius](/static/images/design/CornerRadius/3.png)
+
+![Eckradius](/static/images/design/CornerRadius/4.png)

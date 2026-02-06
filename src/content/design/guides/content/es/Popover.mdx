@@ -1,30 +1,32 @@
-Un popover es un tooltip que aparece al pasar el cursor sobre un elemento, al hacer clic en él, o al enfocarlo usando el teclado.
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, manteniendo un tono natural y conservando los componentes MDX, bloques de código y términos técnicos:
 
-Se utiliza para proporcionar contexto o detalles adicionales sin abandonar la pantalla actual. Popover mejora la experiencia del usuario al proporcionar acceso rápido a la información requerida sin saturar la interfaz principal.
+Un popover es una información que aparece al pasar el cursor sobre un elemento, al hacer clic en él o al enfocarlo con el teclado.
+
+Se utiliza para proporcionar contexto o detalles adicionales sin salir de la pantalla actual. El popover mejora la experiencia del usuario al ofrecer acceso rápido a la información requerida sin saturar la interfaz principal.
 
 ## Tipos de popover
 
 ### Info
 
-Para uso en interfaces regulares
+Para usar en interfaces regulares
 
 ![1.png](/static/images/design/Popover/popover-0001.png)
 
-### Special
+### Especial
 
-Para uso en promociones
+Para usar en promociones
 
 ![2.png](/static/images/design/Popover/popover-0002.png)
 
-### **Announcement**
+### **Anuncio**
 
-Usar para resaltado moderado en anuncios y notificaciones
+Úsalo para un resaltado moderado en anuncios y notificaciones
 
 ![3.png](/static/images/design/Popover/popover-0003.png)
 
 ## Parámetros
 
-Los siguientes parámetros pueden configurarse para todos los tipos de Popover: Info, Special y Announcement:
+Los siguientes parámetros se pueden configurar para todos los tipos de Popover: Info, Especial y Anuncio:
 
 - Tamaños
 - Tipo de contenido
@@ -35,8 +37,7 @@ Los siguientes parámetros pueden configurarse para todos los tipos de Popover: 
 
 ### **Tamaños**
 
-Los tamaños del componente varían en tamaño de fuente y márgenes desde los bordes. El ancho y la altura del componente se adaptan para ajustarse al contenido.
-
+Los tamaños del componente varían en tamaño de fuente y márgenes respecto a los bordes. El ancho y la altura del componente se adaptan para ajustarse al contenido.
 
 <div className="row">
    <div className="col-12 col-md-6">
@@ -55,49 +56,49 @@ Los tamaños del componente varían en tamaño de fuente y márgenes desde los b
 
 El componente admite los siguientes elementos:
 
-1. encabezado
-2. descripción
-3. Botones de acción (puede usar uno o dos botones, e intercambiar botones)
+1. Encabezado
+2. Descripción
+3. Botones de acción (puedes usar uno o dos botones, y alternar botones)
 4. Icono de cierre
-5. Pin (cola) es un indicador adicional de un enlace al elemento de la interfaz. Ayuda cuando hay muchos elementos alrededor, y necesita enfocar la atención del usuario en uno específico
+5. Pin (cola) es un indicador adicional de un enlace al elemento de la interfaz. Ayuda cuando hay muchos elementos alrededor y necesitas enfocar la atención del usuario en uno específico.
 
 ![6.png](/static/images/design/Popover/popover-0006.png)
 
 ### Posicionamiento
 
-El popover puede aparecer en diferentes lados del elemento dependiendo de su posición en la interfaz. Si usa el pin, estará dirigido hacia el centro del elemento de la interfaz.
+El popover puede aparecer en diferentes lados del elemento, dependiendo de su posición en la interfaz. Si usas el pin, este se dirigirá hacia el centro del elemento de la interfaz.
 
 ### Botón "Cerrar"
 
-Use el botón "Cerrar" para cerrar el popover si lo activa con un clic en lugar de pasar el cursor o enfocar el elemento de la interfaz
+Utiliza el botón "Cerrar" para cerrar el popover si lo activas haciendo clic en lugar de pasar el cursor o enfocar el elemento de la interfaz.
 
 ![7.png](/static/images/design/Popover/popover-0007.png)
 
 ### Método de apertura y cierre
 
 - **Al pasar el cursor sobre el elemento**
-   En este caso, el componente desaparece cuando el usuario retira el cursor del elemento.
+   En este caso, el componente desaparece cuando el usuario saca el cursor del elemento.
 - **Al hacer clic en el elemento**
-   Use un icono de cruz para cerrar el componente en este caso.
-- **Al enfocar el elemento usando el teclado**
+   Usa un icono de cruz para cerrar el componente en este caso.
+- **Al enfocar el elemento con el teclado**
    El popover desaparece cuando el elemento pierde el foco.
 - **Puede abrirse espontáneamente**
-   Cuando el usuario llega a la página, el Popover ya estará abierto. Adecuado para popovers en anuncios y tutoriales. Use el icono de cruz para cerrar el componente.
+   Cuando el usuario llega a la página, el Popover ya estará abierto. Adecuado para popovers en anuncios y tutoriales. Usa el icono de cruz para cerrar el componente.
 - **En respuesta a cualquier acción en la interfaz**
-   Por ejemplo, en onboarding, cuando proporciona una serie de popovers.
+   Por ejemplo, en el onboarding, cuando proporcionas una serie de popovers.
 
 ### Temporización
 
 - **Sin retrasos en la aparición y desaparición**
    El popover se abrirá y cerrará instantáneamente. Adecuado para popovers regulares simples.
 - **Con un retraso en la aparición y desaparición**
-   Use un retraso en la aparición si su página incluye muchos elementos que activan popovers. Ayuda a evitar pasar el cursor accidentalmente sobre elementos y popovers no deseados. Use el retraso de cierre si el tooltip contiene botones. En este caso, el usuario puede mover el cursor al botón antes de que se cierre el tooltip.
+   Usa un retraso en la aparición si tu página incluye muchos elementos que activan popovers. Ayuda a evitar pasar el cursor accidentalmente sobre elementos y popovers no deseados. Usa el retraso de cierre si el tooltip contiene botones. En este caso, el usuario puede mover el cursor al botón antes de que el tooltip se cierre.
 - **Con un retraso en la desaparición**
-   Use esta opción cuando no necesite retrasar la aparición, pero su popover contiene botones.
+   Usa esta opción cuando no necesites retrasar la aparición, pero tu popover contenga botones.
 
 ## Casos especiales
 
-En la mayoría de los casos, popover es una buena opción para proporcionar información adicional. Sin embargo, en ciertos casos, se deben preferir otros componentes.
+En la mayoría de los casos, el popover es una buena opción para proporcionar información adicional. Sin embargo, en ciertos casos, se deben preferir otros componentes.
 
-- Si tiene un tooltip complejo y el número de elementos admitidos dentro del componente Popover no es suficiente, puede diseñar el tooltip basado en el componente [Popup](/design/guides/popup).
-- Si necesita proporcionar al usuario una explicación o información adicional sobre la acción al hacer clic en un botón, evite Popover. Use [Action Tooltip](/design/guides/action-tooltip) o [Tooltip](/design/guides/tooltip) en su lugar.
+- Si tienes un tooltip complejo y el número de elementos admitidos dentro del componente Popover no es suficiente, puedes diseñar el tooltip basándote en el componente [Popup](/design/guides/popup).
+- Si necesitas proporcionar al usuario una explicación o información adicional sobre una acción al hacer clic en un botón, evita el Popover. Usa [Action Tooltip](/design/guides/action-tooltip) o [Tooltip](/design/guides/tooltip) en su lugar.

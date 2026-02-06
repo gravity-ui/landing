@@ -1,0 +1,194 @@
+# Schnelle Themeerstellung
+
+Schnelles Branding ermöglicht es Ihnen, schnell zwischen Themes zu wechseln und sofort ein Ergebnis zu sehen, das Sie verwenden oder weiter optimieren können. Wählen Sie einfach ein paar Farben aus, und alle Steuerelemente werden entsprechend angepasst. Wiederholen Sie dies für alle unterstützten Themes, und Sie sind fertig.
+
+### Bevor Sie beginnen
+
+1. Wir empfehlen, die neueste Version der Figma-Bibliothek herunterzuladen.
+2. Die Werte werden in der Benutzeroberfläche zur Verwaltung von Variablen konfiguriert. Öffnen Sie die Sammlung "Color Styles" und wählen Sie die Gruppe "Branding".
+
+   ![Branding](/static/images/design/Branding/Branding.png)
+
+3. Die Ergebnisse können bequem auf der Branding-Seite von Figma eingesehen werden. Sie enthält Komponenten, die Markenvariablen verwenden, was Ihnen eine Vorstellung davon gibt, wie alles am Ende aussehen wird.
+4. Denken Sie daran, Color Styles in Komponenten zu verwenden.
+5. Der Wert jedes Color Styles wird durch die entsprechende Variable dargestellt.
+
+### 1. Grundlegende Markenfarben
+
+**--g-color-base-background**
+
+Hintergrundfarbe der Seite. Die häufigste Farbe für ein helles Theme ist Weiß, aber Sie können jede beliebige Farbe verwenden. Dunkle Themes bieten mehr Optionen, von neutralen Grautönen bis hin zu warmen oder kühlen Farben.
+
+![Hintergrund](/static/images/design/Branding/background.png)
+
+**--g-color-base-brand**
+
+Primäre Markenfarbe. Hintergrund für den Hauptbutton, die Checkbox, das Radio-Button, den Schalter und das spezielle Tooltip-Theme.
+
+![Primäre Markenfarbe](/static/images/design/Branding/PrimaryBrandColor.png)
+
+**--g-color-base-brand-hover**
+
+Hover-Farbe für die primäre Markenfarbe. Wir verwenden einen dunkleren Farbton, aber eine hellere oder eine völlig andere Farbe ist ebenfalls akzeptabel.
+
+![Hover](/static/images/design/Branding/Hover.png)
+
+**--g-color-base-brand-selection**
+
+Hintergründe für Elemente mit der Semantik "ausgewählt".
+
+![Auswahl](/static/images/design/Branding/Selection.png)
+
+**--g-color-base-brand-selection-hover**
+
+Hover-Farbe für ausgewählte Elemente. Diese wird seltener bei typischen Aufgaben verwendet und häufiger bei der Vorbereitung aller Zustände für eine neue Komponente oder beim Prototyping.
+
+![Auswahl Hover](/static/images/design/Branding/SelectionHover.png)
+
+**--g-color-line-brand**
+
+Markenfarbene Linien. Ausgewählter Zustand in Karten, Tabs; Spinner-Farbe.
+
+![Linien](/static/images/design/Branding/Lines.png)
+
+**--g-color-text-brand**
+
+Markenfarbene Texte, wenn sie ohne Hintergrund verwendet werden.
+
+![Text](/static/images/design/Branding/Text.png)
+
+**--g-color-text-brand-heavy**
+
+Markenfarbene Texte über Hintergründen. Kompensiert den Kontrastverlust, der durch die Verwendung eines Hintergrunds entsteht.
+
+![Text Schwer](/static/images/design/Branding/Heavy.png)
+
+**--g-color-text-brand-contrast**
+
+Sobald Sie sich für eine Farbe für das Branding der Hauptsteuerelemente entschieden haben, wählen Sie eine kontrastierende Farbe dafür aus. Der Kontrast muss über alle Themes hinweg erhalten bleiben.
+
+Wenn sich die Helligkeit der Markenfarbe beim Wechseln der Themes nicht wesentlich ändert, können Sie Farben mit konstanter Helligkeit ausprobieren: `--g-color-text-light-primary` und `--g-color-text-dark-primary`. Wenn sich die Helligkeit der Markenfarbe ändert, versuchen Sie es mit `--g-color-text-primary` oder `--g-color-text-inverted-primary`.
+
+![Kontrast](/static/images/design/Branding/Contrast.png)
+
+**--g-color-text-link**
+
+Link-Farbe.
+
+![Link-Farbe](/static/images/design/Branding/LinkColor.png)
+
+**--g-color-text-link-hover**
+
+Hover-Link-Farbe.
+
+![Hover-Link-Farbe](/static/images/design/Branding/HoverLinkColor.png)
+
+**--g-color-text-link-visited**
+
+Besuchte Link-Farbe.
+
+![Besuchte Link-Farbe](/static/images/design/Branding/VisitedLinkColor.png)
+
+**--g-color-text-link-visited-hover**
+
+Hover-Farbe für besuchte Links.
+
+![Hover-Farbe für besuchte Links](/static/images/design/Branding/VisitedLinkHoverColor.png)
+
+### 2. Typografie
+
+Alle Textstile sind in der rechten Spalte der Bibliothek unter der Sektion "Local Styles" aufgeführt. Diese Sektion wird angezeigt, wenn keine Objekte ausgewählt sind. In diesem Fall werden die Attribute des ausgewählten Objekts und nicht die der Bibliothek angezeigt.
+
+![Typografie](/static/images/design/Branding/Typography1.png)
+
+Um zur Bearbeitungsoberfläche für Textstile zu gelangen, klicken Sie auf das Einstellungssymbol rechts neben dem Stilnamen.
+
+![Typografie](/static/images/design/Branding/Typography2.png)
+
+Die Stile sind in drei Gruppen unterteilt.
+
+![Typografie](/static/images/design/Branding/Typography3.png)
+
+1.  **Header.** Enthält Überschriften, Unterüberschriften und Display-Stile.
+2.  **Text.** Stile für getippten Text und Bildunterschriften.
+3.  **Misc.** Stile für die Anzeige von Code und Code innerhalb von normalem getipptem Text (Inline-Stile).
+
+Für die Gruppen "Header" und "Text" können Sie eine Schriftart mit unterschiedlichen Schritten verwenden. Überschriften haben normalerweise höhere Schriftstärken als Schriftsätze.
+
+Für die Gruppe "Misc" können Sie eine Monospace-Schriftart festlegen. Stellen Sie sicher, dass die Inline-Stile korrekt angezeigt werden, wenn sie in getippten Text eingebettet sind, und dass die Grundlinie des Schriftsatzes nicht verschoben ist. Andernfalls wird empfohlen, einen geeigneten Wert für den Parameter "Line Height" zu wählen.
+
+Für Stile sind geringfügige Änderungen an den Parametern "Font Size" und "Line Height" zulässig. Bei verschiedenen Schriftarten können Höhe und Breite der Zeichen erheblich variieren, und in einigen Fällen muss diese Variation ausgeglichen werden. Denken Sie daran, dass bestimmte Textstile innerhalb spezifischer Komponentengrößen verwendet werden und erhebliche Änderungen an den Stilparametern dazu führen können, dass Komponenten falsch angezeigt werden. Daher ist es wichtig, bei allen Änderungen an "Font Size" und "Line Height" zu überprüfen, wie Komponenten in verschiedenen Größen angezeigt werden.
+
+### 3. Eckradius
+
+Dieser Parameter kann in der Benutzeroberfläche zur Verwaltung von Variablen konfiguriert werden. Die Werte finden Sie in der Sammlung "Border Radius". Dieses Attribut wird durch zwei Variablengruppen gesetzt: primär und technisch.
+
+![Eckradius](/static/images/design/Branding/CornerRadius.png)
+
+### Primäres Set
+
+Dieses Set von Variablen entspricht den Code-Variablen. Diese Werte werden auf Steuerelemente entsprechender Größen angewendet.
+
+- `--g-border-radius-s`: 3px
+- `--g-border-radius-s`: 5px
+- `--g-border-radius-l`: 6px
+- `--g-border-radius-l`: 8px
+- `--g-border-radius-xl`: 10px
+- `--g-border-radius-2xl`: 16px
+
+### Technisches Set
+
+Wird nur in Figma verwendet, um den Eckradius des internen Elements in der Check Button-Komponente zu berechnen. Dies sind Variablen mit der Bezeichnung "Inner", und ihre Werte sollten mit den Werten des primären Variablensets verknüpft sein. Um den Wert einer "Inner"-Variable zu berechnen, nehmen Sie den Wert der Hauptvariable derselben Größe und ziehen Sie 3 ab.
+
+Wenn beispielsweise `--g-border-radius-m` auf 6px gesetzt ist, wird der "Inner M"-Radius als 6 - 3 = 3px berechnet.
+
+### 4. Technische Farben
+
+Diese Gruppe enthält die Farben für Scrollbars, die vom Designsystem unterstützt werden. Um eine korrekte Anzeige von Scrollbars in dunklen Themes über verschiedene Browser hinweg zu gewährleisten, wird empfohlen, diese entsprechend zu konfigurieren.
+
+Variablen in dieser Gruppe:
+
+- `--g-color-scroll-track`
+- `--g-color-scroll-handle`
+- `--g-color-scroll-handle-hover`
+- `--g-color-scroll-corner`
+
+# Erweiterte Theme-Einstellungen
+
+### Private Farbabstimmung
+
+Wenn Sie einen bestimmten Farbton anpassen möchten, damit er zu den Markenfarben passt, verwenden Sie eine private Palette. Private Farben werden in der Benutzeroberfläche zur Verwaltung von Variablen unter der Sammlung "Private Colors" konfiguriert.
+
+![Private Farbabstimmung](/static/images/design/Branding/PrivateColorTuning.png)
+
+Grundlegende chromatische Farben:
+
+- Blau
+- Grün
+- Rot
+- Gelb
+- Orange
+- Kaltgrau
+- Lila
+
+Jede davon (oder alle gleichzeitig) muss möglicherweise an die Markenfarben angepasst werden. Um eine Palette vorzubereiten, die für die Übergabe an die Entwicklung bereit ist, verwenden Sie ein [Skript](https://preview.gravity-ui.com/uikit/?path=/docs/branding-palette-generator--docs). Sie müssen die Ausgabe des Skripts in Figma übertragen.
+
+Wenn der Seitenhintergrund (oder der Hintergrund im kontrastierenden Theme) geändert wurde, generieren Sie neue Volltonfarben für Schwarz und Weiß.
+
+Wenn Änderungen an der privaten Palette vorgenommen werden, werden die semantischen Farben automatisch aktualisiert.
+
+### Semantische Farbabstimmung
+
+Wenn die Werte privater Variablen nicht mit der visuellen Sprache der Marke übereinstimmen, können Sie die Werte semantischer Farben anpassen. Diese werden in der Variablen-Schnittstelle in der Color Styles-Sammlung konfiguriert.
+
+![Semantische Farbabstimmung](/static/images/design/Branding/SemanticColorTuning.png)
+
+Bitte beachten Sie Folgendes:
+
+1. Stellen Sie sicher, dass Sie private Farben verwenden, die dem entsprechenden Thema entsprechen.
+2. Der Austausch privater Farben mit einem Alpha-Kanal durch Vollfarben (und umgekehrt) kann zu Problemen führen.
+3. Änderungen an semantischen Variablen werden automatisch auf Color Styles und Komponenten angewendet, die sie verwenden.
+
+# Synchronisation mit der Entwicklung
+
+Derzeit erfolgt die Themensynchronisation zwischen der Figma-Bibliothek und dem Code manuell. Vor der Übergabe an die Entwicklung müssen die CSS-Variablen gemäß den [Anweisungen](https://preview.gravity-ui.com/uikit/?path=/docs/branding-overview--docs) vorbereitet werden.

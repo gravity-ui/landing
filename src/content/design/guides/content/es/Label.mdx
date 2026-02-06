@@ -1,103 +1,105 @@
-Una etiqueta es una descripción textual de los atributos de un objeto, como su estado o tipo. Las etiquetas se utilizan para categorizar, etiquetar o clasificar entidades, así como para marcarlas en un formato Clave:Valor.
+Aquí tienes la traducción de la guía de diseño al español, manteniendo un tono natural y conservando los elementos técnicos:
+
+Una etiqueta es una descripción textual de los atributos de un objeto, como su estado o tipo. Las etiquetas se utilizan para categorizar, etiquetar o clasificar entidades, así como para marcarlas en formato Clave:Valor.
 
 ### Cuándo usar
 
-Las etiquetas se utilizan en todas partes (por ejemplo, en tarjetas, en tablas, en páginas de entidades) para indicar atributos de objetos y ayudar a los usuarios a identificar y categorizar rápidamente el contenido. Las etiquetas generalmente se muestran junto a los objetos relacionados.
+Las etiquetas se utilizan en todas partes (por ejemplo, en tarjetas, tablas, páginas de entidades) para indicar atributos de objetos y ayudar a los usuarios a identificar y categorizar contenido rápidamente. Las etiquetas suelen mostrarse junto a los objetos relacionados.
 
-Otra opción de aplicación es mostrar el número de objetos que no caben en la lista. En este caso, al pasar el cursor sobre la etiqueta se muestra un Popover con la lista de las entidades restantes.
+Otra opción de aplicación es mostrar el número de objetos que no caben en la lista. En este caso, al pasar el ratón por encima de la etiqueta se muestra un Popover con la lista de las entidades restantes.
 
 ![DLQ](/static/images/design/Label/DLQ1.png)
 
-Las etiquetas también pueden usarse como tags para organizar entidades y facilitar el trabajo con ellas.
+Las etiquetas también se pueden usar como "tags" para organizar entidades y facilitar su manejo.
 
 ![DLQ](/static/images/design/Label/DLQ2.png)
 
-Al mostrar etiquetas en una tabla, limite el número de etiquetas en una celda (no más de 2-3 etiquetas en una fila y no más de 2 columnas con etiquetas en una tabla) y el número máximo de caracteres (no más de 20 caracteres seguidos de puntos suspensivos).
+Al mostrar etiquetas en una tabla, limita el número de etiquetas en una celda (no más de 2-3 etiquetas en una fila y no más de 2 columnas con etiquetas en una misma tabla) y el número máximo de caracteres (no más de 20 caracteres seguidos de puntos suspensivos).
 
 ### Estructura
 
-![Estructura](/static/images/design/Label/Structure2.png)
+![Structure](/static/images/design/Label/Structure2.png)
 
-![Estructura](/static/images/design/Label/Structure.png)
+![Structure](/static/images/design/Label/Structure.png)
 
-![Ejemplos de aplicación](/static/images/design/Label/Application.png)
+![Application Examples](/static/images/design/Label/Application.png)
 
-1 — Icono izquierdo: opcional y no interactivo. Se utiliza para una recuperación más rápida de la información.
+1 — Icono izquierdo: opcional y no interactivo. Se utiliza para una recuperación de información más rápida.
 
-2 — Texto: una etiqueta no debe exceder los 20 caracteres. Puede usar adjetivos (por ejemplo, Nuevo, Activo, Gratis), Participios (por ejemplo, Detenido), Sustantivos (por ejemplo, Descuento) y Adverbios. El texto de la etiqueta no debe contener verbos (por ejemplo, Habilitar). Si necesita usar verbos, use botones en su lugar.
+2 — Texto: una etiqueta no debe exceder los 20 caracteres. Puedes usar adjetivos (por ejemplo, Nuevo, Activo, Gratis), participios (por ejemplo, Detenido), sustantivos (por ejemplo, Descuento) y adverbios. El texto de la etiqueta no debe contener verbos (por ejemplo, Habilitar). Si necesitas usar verbos, utiliza botones en su lugar.
 
-3 — Una versión alternativa del texto en el formato "Clave: Valor", que se utiliza para marcar objetos manualmente. Por ejemplo, podría etiquetar el objeto "servicio: entrega" o "versión: 23".
+3 — Una versión alternativa del texto en formato "Clave: Valor", que se utiliza para marcar objetos manualmente. Por ejemplo, podrías etiquetar el objeto como "servicio: entrega" o "versión: 23".
 
-4 — Botón derecho: interactivo. Puede ser un icono de salida o un icono de copia.
+4 — Botón derecho: interactivo. Puede ser un icono de cierre o un icono de copia.
 
 ### Tamaños
 
-![Tamaños](/static/images/design/Label/Sizes.png)
+![Sizes](/static/images/design/Label/Sizes.png)
 
 **Hay tres tamaños de etiqueta:**
 
-**XS** - A menudo se usa en tablas, listas, encabezados, ventanas emergentes y páginas de entidades.
+**XS** - Se utiliza a menudo en tablas, listas, encabezados, popups y páginas de entidades.
 
 **S** - Se utiliza para previsualizar marcas recién añadidas en formularios y otras áreas si hay suficiente espacio.
 
-**M** - Se usa con menos frecuencia debido a su parecido con un botón.
+**M** - Se utiliza con menos frecuencia debido a su parecido con un botón.
 
 ### Temas
 
-![Temas](/static/images/design/Label/Themes.png)
+![Themes](/static/images/design/Label/Themes.png)
 
-![Temas](/static/images/design/Label/Themes2.png)
+![Themes](/static/images/design/Label/Themes2.png)
 
 **Sin color semántico**
 
-**Default** — La etiqueta predeterminada, que a menudo se utiliza para resaltar información sin coloración semántica.
+**Predeterminado** — La etiqueta predeterminada, que se utiliza a menudo para resaltar información sin color semántico.
 
-**Clear** — No tiene fondo, solo un contorno. Se utiliza para un énfasis mínimo
+**Claro** — No tiene fondo, solo un contorno. Se utiliza para un énfasis mínimo.
 
-**Con coloración semántica**
+**Con color semántico**
 
-**Unknown** — Una opción neutral utilizada cuando no hay necesidad de enfocarse en la información contenida dentro de la etiqueta.
+**Desconocido** — Una opción neutral utilizada cuando no hay necesidad de centrarse en la información contenida en la etiqueta.
 
-**Accent** — Se utiliza para resaltar información importante y para operaciones "en progreso".
+**Acento** — Se utiliza para resaltar información importante y para operaciones "en curso".
 
-**Success** — Se utiliza para indicar un proceso completado con éxito o la "salud" de una entidad.
+**Éxito** — Se utiliza para indicar un proceso completado con éxito o la "salud" de una entidad.
 
-**Warning** — Se utiliza para situaciones de emergencia, como para alertar al usuario sobre algo
+**Advertencia** — Se utiliza para situaciones de emergencia, como para alertar al usuario sobre algo.
 
-**Danger** — Para llamar completamente la atención del usuario, como cuando ha ocurrido un error y se requiere acción inmediata para solucionarlo.
+**Peligro** — Para captar la atención total del usuario, como cuando ha ocurrido un error y se requiere una acción inmediata para solucionarlo.
 
-### Etiquetas semánticas vs Botones
+### Etiquetas Semánticas vs. Botones
 
-Las etiquetas, incluidas aquellas con coloración semántica, se utilizan para indicar estados. La única forma de interactuar con ellas es pasar el cursor sobre la etiqueta o hacer clic en el icono. La etiqueta no se puede configurar como "seleccionada". Si necesita crear un elemento interactivo basado en etiquetas semánticas (por ejemplo, para filtros de estado), use botones. Tienen un estado presionado (aplicado) - seleccionado - y pueden usarse con colores semánticos.
+Las etiquetas, incluidas las que tienen color semántico, se utilizan para indicar estados. La única forma de interactuar con ellas es pasando el ratón por encima de la etiqueta o haciendo clic en el icono. La etiqueta no se puede establecer en "seleccionado". Si necesitas crear un elemento interactivo basado en etiquetas semánticas (por ejemplo, para filtros de estado), utiliza botones. Estos tienen un estado presionado (aplicado) - seleccionado - y se pueden usar con colores semánticos.
 
 ### Modificaciones y estados
 
 Todas las etiquetas tienen cinco estados: solo texto, icono antes del texto, icono después del texto, icono antes y después, y solo un icono.
 
-![Estados](/static/images/design/Label/States.png)
+![States](/static/images/design/Label/States.png)
 
-![Estados](/static/images/design/Label/States2.png)
+![States](/static/images/design/Label/States2.png)
 
-Puede interactuar:
+Puedes interactuar:
 
-1. Con toda la etiqueta. Por ejemplo, para mostrar un Popover con información detallada al pasar el cursor sobre una etiqueta.
+1. Con toda la etiqueta. Por ejemplo, para mostrar un Popover con información detallada al pasar el ratón por encima de una etiqueta.
 
 2. Solo con el icono derecho. Dependiendo del icono, hacer clic en él puede eliminar la etiqueta o copiar su valor.
 
-Al agregar interacciones de etiqueta, asegúrese de que sean intuitivas y sencillas.
+Al añadir interacciones a las etiquetas, asegúrate de que sean intuitivas y sencillas.
 
 ### Características adicionales
 
-Puede crear filtros dinámicos para ordenar contenido basado en la etiqueta. Por ejemplo, hacer clic en el icono más agrega un nuevo valor, mientras que hacer clic en el icono de cruz cancela el filtro.
+Puedes crear filtros dinámicos para ordenar contenido basándote en la etiqueta. Por ejemplo, hacer clic en el icono de más añade un nuevo valor, mientras que hacer clic en el icono de cruz cancela el filtro.
 
-![Características](/static/images/design/Label/Features.png)
+![Features](/static/images/design/Label/Features.png)
 
-Si su interfaz permite a los usuarios crear sus propias etiquetas y marcar objetos, también deberían poder agregarlas y eliminarlas.
+Si tu interfaz permite a los usuarios crear sus propias etiquetas y marcar objetos, también deberían poder añadirlas y eliminarlas.
 
 ### Personalización
 
-Los colores, filetes, tamaños y rellenos de la etiqueta pueden personalizarse. El texto contenido dentro de la etiqueta debe ser fácil de leer.
+Los colores, bordes, tamaños y rellenos de la etiqueta se pueden personalizar. El texto contenido dentro de la etiqueta debe ser fácil de leer.
 
-![Personalización](/static/images/design/Label/Customization.png)
+![Customization](/static/images/design/Label/Customization.png)
 
-Cambie la apariencia o el color de una etiqueta cuando un usuario pasa el cursor sobre ella para indicar la posibilidad de interacción.
+Cambia la apariencia o el color de una etiqueta cuando el usuario pasa el ratón por encima para indicar la posibilidad de interacción.

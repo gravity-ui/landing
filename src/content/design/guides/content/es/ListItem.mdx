@@ -1,18 +1,20 @@
-**Lista** — un componente de lista universal que sirve como contenedor con filas de datos organizadas en una sola columna vertical. El componente ordena sus elementos de lista secundarios, admite múltiples tamaños y permite el control de selección por teclado y el filtrado.
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, buscando que suene lo más natural posible:
 
-# **Estructura de la lista**
+**List** — un componente de lista universal que sirve como contenedor con filas de datos organizadas en una sola columna vertical. El componente ordena sus elementos `list-item` hijos, soporta múltiples tamaños y permite el control de selección por teclado y filtrado.
+
+# **Estructura de List**
 
 ![60.png](/static/images/design/List/60.png)
 
 ➊ Área de filtro
 
-➋ Elemento de lista
+➋ Elemento de lista (`List-item`)
 
 ➌ Barra de desplazamiento (scrollbar)
 
 ➍ Elemento de lista bajo el cursor
 
-# **Estructura del elemento de lista**
+# **Estructura de List-item**
 
 ![61.png](/static/images/design/List/61.png)
 
@@ -22,21 +24,21 @@
 
 ➌ Bloque de texto
 
-➍ Botón de acción adicional (mostrado al pasar el cursor)
+➍ Botón de acción adicional (se muestra al pasar el ratón)
 
 # Tamaño
 
 ![65.png](/static/images/design/List/65.png)
 
-**Elemento de lista**
+**List-item**
 
-Todos los elementos de lista (List-item) admiten renderizado en 4 tamaños: S, M, L, XL. Los tamaños y rellenos corresponden a los elementos de la biblioteca con los que interactúa el componente, como select, input y button, que admiten variables de tamaño similares.
+Todos los elementos de lista (`List-item`) soportan la visualización en 4 tamaños: S, M, L, XL. Los tamaños y los paddings corresponden a los elementos de la librería con los que interactúa el componente, como `select`, `input` y `button`, que soportan variables de tamaño similares.
 
 ![63.png](/static/images/design/List/63.png)
 
-**Lista**
+**List**
 
-Por defecto, el ancho del componente Lista es dinámico y se calcula en base al ancho del elemento más largo de la lista. El ancho se puede establecer en un valor fijo o heredar el ancho del objeto que desencadenó la visualización de la lista (select, input).
+Por defecto, el ancho del componente `List` es dinámico y se calcula basándose en el ancho del elemento más largo de la lista. El ancho puede establecerse a un valor fijo o heredar el ancho del objeto que activó la visualización de la lista (`select`, `input`).
 
 # Estados
 
@@ -52,7 +54,7 @@ Elemento de lista básico que no muestra elementos adicionales
 
 ![Group 2087326006.png](/static/images/design/List/Group_2087326006.png)
 
-**Elemento de lista con un icono**
+**Elemento de lista con icono**
 
 Cualquier elemento de lista puede tener uno o más iconos a la izquierda o derecha del componente.
 
@@ -60,58 +62,58 @@ Cualquier elemento de lista puede tener uno o más iconos a la izquierda o derec
 
 **Elemento de lista ordenable**
 
-Para elementos ordenables, puede especificar en qué lado aparece el icono "arrastrar"
+Para elementos ordenables, puedes especificar en qué lado aparece el icono de "arrastrar"
 
 ![Group 2087326008.png](/static/images/design/List/Group_2087326008.png)
 
-**Elemento de lista con un icono adicional al pasar el cursor**
+**Elemento de lista con un icono adicional al pasar el ratón**
 
-Para todas las opciones de elementos de lista con iconos o elementos ordenables, se puede mostrar un icono adicional cuando se pasa el cursor sobre el componente.
+Para todas las opciones de elementos de lista con iconos o elementos ordenables, se puede mostrar un icono adicional al pasar el ratón sobre el componente.
 
 --- */}
 
-# Características del elemento de lista
+# Características de List-item
 
 ![59.png](/static/images/design/List/59.png)
 
 **Soporte para múltiples iconos**
 
-Los elementos **List-item** pueden tener uno o más iconos colocados a la izquierda y derecha del componente.
+Los elementos `List-item` pueden tener uno o más iconos colocados a la izquierda y derecha del componente.
 
 ![64.png](/static/images/design/List/64.png)
 
-**Cambiar el orden de clasificación**
+**Cambio del orden de clasificación**
 
-Para los elementos de la lista, puede activar la ordenación de elementos de lista. El icono de ordenación siempre se muestra en la parte superior de la lista por defecto.
+Para los elementos de la lista, puedes activar la ordenación de los elementos de la lista. El icono de ordenación siempre se muestra en la parte superior de la lista por defecto.
 
-# Características de la lista
+# Características de List
 
 ![66.png](/static/images/design/List/66.png)
 
 **Altura personalizable para el contenedor principal de la lista**
 
-La altura de los elementos de lista o una función que devuelve el valor de altura se puede establecer dinámicamente o especificar con un valor exacto en píxeles (px). Si los elementos de la lista exceden la altura máxima, aparece una barra de desplazamiento. La altura se puede establecer manualmente o ajustar dinámicamente.
+La altura de los elementos de la lista o una función que devuelva el valor de la altura puede establecerse dinámicamente o especificarse con un valor exacto en píxeles (px). Si los elementos de la lista superan la altura máxima, aparece una barra de desplazamiento. La altura puede establecerse manualmente o ajustarse dinámicamente.
 
 ![70.png](/static/images/design/List/70.png)
 
 **Selección única y múltiple**
 
-El componente admite tanto la selección de un solo elemento como la selección múltiple.
+El componente soporta tanto la selección de un solo elemento como la de varios.
 
 ![68.png](/static/images/design/List/68.png)
 
 **Filtro y búsqueda**
 
-Opcionalmente, el componente puede incluir un campo de entrada para el filtrado rápido de elementos en la lista. El placeholder del filtro puede cambiarse por defecto dependiendo de la tarea del componente.
+Opcionalmente, el componente puede incluir un campo de entrada para filtrar rápidamente los elementos de la lista. El texto de ayuda (placeholder) del filtro puede cambiarse por defecto según la tarea del componente.
 
 ![69.png](/static/images/design/List/69.png)
 
-**Disparadores de llamada**
+**Desencadenantes de llamada**
 
-Por defecto, el componente de lista se activa mediante interacciones con otros elementos de la página como select, label y button, y sirve como una característica de sugerencia para el componente Input.
+Por defecto, el componente `List` se activa mediante interacciones con otros elementos de la página como `select`, `label` y `button`, y sirve como una función de sugerencia para el componente `Input`.
 
 ![67.png](/static/images/design/List/67.png)
 
 **Virtualización**
 
-Cuando la bandera de virtualización está habilitada, el navegador renderiza solo un subconjunto de filas a la vez, reduciendo significativamente el tiempo requerido para volver a renderizar componentes. Con este método, también conocido como "carga infinita", se agregan nuevos elementos a la lista a medida que el usuario se desplaza hacia abajo hasta un elemento umbral específico (disparador).
+Cuando la bandera de virtualización está activada, el navegador renderiza solo un subconjunto de filas a la vez, reduciendo significativamente el tiempo necesario para volver a renderizar los componentes. Con este método, también conocido como "carga infinita", se añaden nuevos elementos a la lista a medida que el usuario se desplaza hacia abajo hasta un elemento umbral específico (disparador).

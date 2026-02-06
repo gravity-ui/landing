@@ -1,45 +1,45 @@
-用于在几个互斥选项之间进行选择时使用。
+用于在多个互斥选项之间进行选择时。
 
-### 何时使用DLQ
+### 何时使用
 
-与复选框类似，单选按钮不会立即触发操作。要执行此操作，您必须点击确认按钮（保存/应用/发送）。
+与复选框类似，单选按钮（Radio）不会立即触发操作。要执行此操作，您必须点击确认按钮（保存 / 应用 / 发送）。
 
-标签上的解释文本应回答"如何？"或"哪个？"的问题
+标签上的解释性文本应回答“如何？”或“哪个？”的问题。
 
 **何时不使用**
 
-单选按钮不能用于切换页面或菜单内容。此功能由[radio-button](https://gravity-ui.com/design/guides/radio-button)和tab组件支持。
+单选按钮（Radio）不能用于切换页面或菜单内容。此功能由 [radio-button](https://gravity-ui.com/design/guides/radio-button) 和 tab 组件支持。
 
 ### 结构
 
-![结构](/static/images/design/Radio/radio-content.png)
+![Structure](/static/images/design/Radio/radio-content.png)
 
-1 — 单选按钮元素，2 — 解释标签
+1 — 单选按钮元素，2 — 解释性标签
 
-单选按钮始终与解释其含义的标签一起使用。
+单选按钮（Radio）始终与解释其含义的标签一起使用。
 
-默认情况下选择第一个选项。
+默认情况下，第一个选项被选中。
 
-您也可以让切换控件保持未选中状态（当所有选项都被移除时）。
+您也可以将切换控件留空（当所有选项都被移除时）。
 
-一旦组内的项目被选中，用户就不能取消选择它以将组恢复到其原始状态（无需刷新页面）。
+一旦组内的一个项目被选中，用户就无法取消选择它以将组恢复到原始状态（不刷新页面）。
 
-使用组件时，我们建议您始终选择列表中的第一个选项。
+在使用组件时，我们建议您始终选择列表中的第一个选项。
 
 ### 尺寸
 
-有两种尺寸：M和L。组件的大小由页面控件的大小决定。例如，如果页面对输入框、按钮和其他元素使用L尺寸，那么单选按钮应该是相同的尺寸。
+有两种尺寸：M 和 L。组件的尺寸由页面控件的尺寸决定。例如，如果页面对输入框、按钮和其他元素使用 L 尺寸，那么单选按钮（Radio）也应使用相同的尺寸。
 
-![尺寸](/static/images/design/Radio/radio-size.png)
+![Sizes](/static/images/design/Radio/radio-size.png)
 
 ### 状态
 
-![状态](/static/images/design/Radio/radio-state.png)
+![States](/static/images/design/Radio/radio-state.png)
 
-Default – 当用户不与元素交互时
+默认（Default）– 当用户不与元素交互时
 
-Hover – 当鼠标悬停在元素和文本标签上时
+悬停（Hover）– 当鼠标悬停在元素和文本标签上时
 
-Checked – 选中状态
+选中（Checked）– 选中状态
 
-Disabled – 禁用状态，当所选选项不可用于交互时
+禁用（Disabled）– 禁用状态，当选中的选项不可交互时

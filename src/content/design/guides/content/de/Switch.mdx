@@ -1,0 +1,42 @@
+Gerne, hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche, wobei darauf geachtet wurde, dass sie natürlich klingt und technische Begriffe sowie MDX-Komponenten unverändert bleiben:
+
+## Beschreibung
+
+Diese Komponente ist eine interaktive Steuerung, die zwischen zwei Zuständen wechseln kann: aktiviert (ein) und deaktiviert (aus). Sie wird verwendet, um bestimmte Funktionen, Optionen oder Einstellungen zu aktivieren oder zu deaktivieren.
+
+![Beschreibung](/static/images/design/Switch/description.png)
+
+## Dimensionen
+
+Der Switch hat zwei Hauptgrößen:
+
+![Größen](/static/images/design/Switch/Sizes.png)
+
+- **M (Medium)**: Für Standardanwendungsfälle. Bietet den meisten Benutzern ein intuitives visuelles Erlebnis.
+- **L (Large)**: Wird verwendet, wenn das Element hervorgehoben werden muss oder wenn eine größere Schriftgröße bevorzugt wird.
+
+## Zustände
+
+Der Switch hat vier Hauptzustände:
+
+![Zustände](/static/images/design/Switch/States.png)
+
+1. **Aus**: Ein inaktiver Zustand, in dem die Option oder Funktion deaktiviert ist.
+2. **Ein**: Ein aktiver Zustand, in dem die Option oder Funktion aktiviert ist.
+3. **Hover**: Wenn ein Benutzer mit der Maus über das Element fährt, reagiert es visuell, um anzuzeigen, dass es interaktiv ist.
+4. **Deaktiviert**: Ein Zustand, in dem das Element inaktiv ist und nicht interaktiv sein kann.
+
+## Eigenschaften
+
+Die Komponente kann das Label aktivieren/deaktivieren. Das Label ist standardmäßig deaktiviert, kann aber über die Eigenschaft "Label" aktiviert werden.
+
+Beachten Sie, dass bei Größenänderung des Elements die Größe des Labels entsprechend angepasst wird:
+
+![Labels](/static/images/design/Switch/Labels.png)
+
+- 13px ist die Schriftgröße für Labels der Größe M
+- 15px ist die Schriftgröße für Labels der Größe L
+
+## Benutzerhandbuch
+
+Um die visuelle Kohäsion und Konsistenz der Benutzeroberfläche zu erhalten, verwenden Sie einen Switch, wenn das Ein-/Ausschalten sofortige Änderungen an bestimmten Optionen oder am Gesamtzustand der Seite bewirkt. Wir empfehlen nicht, den Switch und die Aktionsbestätigungsschaltfläche zusammen zu verwenden. In diesen Situationen ist es besser, eine Checkbox zu verwenden.

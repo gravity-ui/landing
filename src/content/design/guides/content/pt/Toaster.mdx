@@ -1,0 +1,74 @@
+O Toaster é uma pequena notificação que aparece na tela para fornecer informações importantes ou um aviso. Ele pode ser usado para notificar o usuário sobre um evento ou ação, como quando um formulário é enviado ou um arquivo é baixado.
+
+### Principais tipos
+
+**Padrão**
+
+É usado quando não há necessidade de ação imediata ou quando a mensagem não está relacionada a nenhuma ação ou evento específico.
+
+![Padrão](/static/images/design/Toaster/Default.png)
+
+**Info**
+
+É usado para informar o usuário sobre um processo, evento ou ação. Por exemplo, em caso de transferência de dados bem-sucedida ou carregamento de página.
+
+![Info](/static/images/design/Toaster/Info.png)
+
+**Sucesso**
+
+Indica que uma operação ou ação foi concluída com sucesso. Por exemplo, quando os dados são salvos com sucesso ou quando o usuário é autorizado.
+
+![Sucesso](/static/images/design/Toaster/Success.png)
+
+**Aviso**
+
+Informa o usuário sobre um problema ou erro potencial. Por exemplo, se ele precisar preencher um campo obrigatório em um formulário ou se não houver conexão com a Internet.
+
+![Aviso](/static/images/design/Toaster/Warning.png)
+
+**Erro**
+
+É usado para indicar um erro e que a atenção do usuário é necessária para corrigi-lo. Por exemplo, se os dados forem inseridos incorretamente ou se houver um erro no servidor. Esse estado é melhor combinado com um botão de ação que permite corrigir um erro ou obter mais informações.
+
+![Erro](/static/images/design/Toaster/Error.png)
+
+### Modificações
+
+O Toast é composto por cinco componentes principais:
+
+![Modificações](/static/images/design/Toaster/Modifications.png)
+
+1. Ícone do tipo Toast. Um componente pode ser usado com ou sem ícone. Um ícone é um elemento opcional.
+2. O cabeçalho informa o usuário sobre a ação que está sendo realizada. Se a descrição for incluída, o uso do cabeçalho é opcional.
+3. A descrição esclarece o título e pode ser usada de forma independente.
+4. Botões. O Toast pode ter um ou dois botões; recomenda-se que o primeiro botão seja usado como botão de ação. Botões são elementos opcionais.
+5. Ícone de saída. O ícone de saída é um elemento opcional. O botão de fechar é obrigatório, se não houver duração de ocultação definida no toast.
+
+### Quando usar
+
+Toasters são recomendados para uso nos seguintes cenários:
+
+- Ao enviar um formulário ou realizar uma ação, se você quiser que o usuário veja o progresso. Como uma mensagem indicando que os dados foram enviados com sucesso ou que houve um erro.
+- Quando você não quer interromper o fluxo de trabalho do usuário ou bloquear a tela. Toasters são exibidos no canto e não cobrem a tela inteira, permitindo que o usuário continue usando a interface.
+- Quando mais informações sobre uma ação específica são necessárias. Toasts podem incluir links para conteúdo ou informações adicionais que ajudarão o usuário a entender o que aconteceu.
+
+### Quando não usar
+
+Toasters não são recomendados para uso nos seguintes cenários:
+
+- Quando uma resposta imediata do usuário é necessária.
+- Quando a ação que está sendo realizada no momento da exibição do toaster pode causar problemas ou consequências indesejadas.
+- Quando a mensagem requer uma grande quantidade de informações ou uma explicação mais detalhada.
+- Quando a informação já está exibida na tela de outra forma.
+
+### Posição na tela
+
+O Toaster é exibido no canto inferior direito.
+
+Suas margens externas são: inferior M (8px), direita XL (20px).
+
+![Posição](/static/images/design/Toaster/Position.png)
+
+### Customização
+
+O conteúdo do Toast pode diferir do padrão; ele pode incluir qualquer componente disponível na biblioteca, se o caso de uso exigir.

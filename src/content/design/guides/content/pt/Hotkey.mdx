@@ -1,0 +1,29 @@
+Um rótulo modificado contendo uma combinação de teclas de atalho atribuídas a uma ação de interface.
+
+## Plataformas /. **platform**
+
+![Group 2087325957.png](/static/images/design/Hotkey/Group_2087325957.png)
+
+1. **Mac** – para teclados de dispositivos iOS
+2. **PC** – para outros teclados
+
+### Estrutura
+
+1. **Key** — um símbolo no teclado que deve ser pressionado para realizar uma ação rápida. Pode ser uma letra, número, símbolo especial do teclado ou uma palavra que descreve uma ação (por exemplo, Click). Certifique-se de que os símbolos correspondam aos símbolos no teclado.
+   Estilo de texto: Text/Body1, cor: Text/Light Complementary.
+2. **Plus** — usado para comunicação de caracteres e para manter a ordem correta das sequências de teclas, se necessário.
+   Estilo de texto: Text/Body1, cor: Text/Light Hint.
+
+![8.png](/static/images/design/Hotkey/8.png)
+
+## Casos de uso
+
+- **em [ActionTooltip](/design/guides/action-tooltip)**, para indicar as teclas de atalho atribuídas à ação de um botão específico
+
+![example](/static/images/design/Hotkey/example1.png)
+
+- **em um painel de atalhos separado** que lista todas as opções disponíveis no serviço
+
+![example](/static/images/design/Hotkey/example2.png)
+
+- na [List](/design/guides/list-item) de botões de ação, se algum deles tiver teclas de atalho atribuídas

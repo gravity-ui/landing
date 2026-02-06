@@ -1,0 +1,56 @@
+Un tooltip qui apparaît lorsque l'utilisateur survole un bouton. Il comprend généralement une explication ou des informations supplémentaires sur l'action qui sera effectuée lors du clic sur le bouton. Souvent utilisé pour les boutons avec une seule icône, fournissant aux utilisateurs une compréhension claire de l'action qui y est associée.
+
+## Structure
+
+![2.png](/static/images/design/ActionTooltip/Structure.png)
+
+1. **Titre** est l'élément le plus important et requis du tooltip ; il décrit la fonction principale du bouton. Nous recommandons de formuler le texte du titre de manière à ce qu'il tienne sur une seule ligne.
+2. **Description** — un élément de tooltip optionnel qui fournit des informations supplémentaires sur le titre.
+3. **Raccourci clavier** - un élément de tooltip optionnel, une combinaison de touches qui, lorsqu'elle est pressée, initie l'action décrite dans l'interface. Utilisé pour enseigner aux utilisateurs des actions rapides afin d'accélérer leur interaction avec le service.
+
+## Options
+
+![Group 2087325956.png](/static/images/design/ActionTooltip/Variants.png)
+
+1. **Titre seul** est l'option la plus couramment utilisée ; le tooltip décrit brièvement l'action elle-même. Nous recommandons de formuler le texte de manière à ce qu'il ne contienne pas plus de 5 mots.
+2. **Titre et raccourci** - Si une action a une combinaison de touches qui lui est attribuée, il est recommandé de l'afficher pour guider l'utilisateur.
+3. **Titre et description** - Si l'action est complexe et que le titre ne peut pas être formulé de manière concise et claire, il est recommandé d'inclure une description avec des informations supplémentaires.
+4. **Titre, description et raccourci** - l'ensemble maximum pour un composant, utilisé lorsque tous les éléments sont requis pour que l'utilisateur prenne une décision dans l'interface.
+
+## Tailles
+
+Lorsqu'un titre seul ou un titre + raccourci est utilisé, la largeur du tooltip s'ajuste au texte. Pour les descriptions, la largeur est fixée à 300px.
+
+Marge intérieure dans toutes les options : 12px à gauche et à droite, 8px en haut et en bas.
+
+Dans l'option avec raccourcis, l'espace entre le titre et le libellé est de 8px.
+
+Dans l'option avec une description (qu'il y ait des raccourcis clavier ou non), la distance entre le titre et la description est de 2px.
+
+![158.png](/static/images/design/ActionTooltip/Sizes.png)
+
+## Position
+
+La position principale du tooltip par rapport au bouton est en bas et centré, avec une distance de 4px entre les éléments.
+
+![13.png](/static/images/design/ActionTooltip/LocationUnder.png)
+
+Si les boutons sont positionnés sur le bord gauche ou droit de la page, le tooltip est aligné avec le bord correspondant du bouton.
+
+![14.png](/static/images/design/ActionTooltip/LocationUnderLeft&right.png)
+
+Si les boutons sont en bas de l'écran, le tooltip est affiché en haut, dans la position qui correspond à l'emplacement du bouton : bord gauche, centre ou bord droit.
+
+![15.png](/static/images/design/ActionTooltip/LocationAboveLeft&center&right.png)
+
+## Délai
+
+En fonction de son objectif, vous pouvez ajuster le délai d'apparition et de disparition du tooltip lors du survol. Dans la plupart des cas, le tooltip apparaît instantanément ou avec un délai minimal allant jusqu'à 250 ms et disparaît lorsque l'utilisateur éloigne le curseur du bouton.
+
+Si vous pensez que la majorité des utilisateurs comprendront la fonction du bouton sans indice, le tooltip peut être affiché uniquement à ceux qui rencontrent des difficultés, et le délai d'apparition peut être augmenté pour éviter d'agacer les utilisateurs avec des éléments inutiles.
+
+## Cas d'utilisation
+
+![Example](/static/images/design/ActionTooltip/Example1.png)
+
+![Example](/static/images/design/ActionTooltip/Example2.png)

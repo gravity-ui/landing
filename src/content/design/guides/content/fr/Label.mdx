@@ -1,0 +1,105 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Une étiquette est une description textuelle des attributs d'un objet, tels que son statut ou son type. Les étiquettes sont utilisées pour catégoriser, nommer ou classer des entités, ainsi que pour les marquer au format Clé:Valeur.
+
+### Quand l'utiliser
+
+Les étiquettes sont utilisées partout (par exemple, dans les cartes, les tableaux, les pages d'entité) pour indiquer les attributs des objets et aider les utilisateurs à identifier et catégoriser rapidement le contenu. Les étiquettes sont généralement affichées à côté des objets associés.
+
+Une autre option d'application consiste à afficher le nombre d'objets qui ne rentrent pas dans la liste. Dans ce cas, le survol de l'étiquette affiche une Popover avec la liste des entités restantes.
+
+![DLQ](/static/images/design/Label/DLQ1.png)
+
+Les étiquettes peuvent également être utilisées comme des tags pour organiser les entités et faciliter leur manipulation.
+
+![DLQ](/static/images/design/Label/DLQ2.png)
+
+Lors de l'affichage d'étiquettes dans un tableau, limitez le nombre d'étiquettes dans une cellule (pas plus de 2-3 étiquettes par ligne et pas plus de 2 colonnes avec des étiquettes dans un même tableau) et le nombre maximum de caractères (pas plus de 20 caractères suivis de points de suspension).
+
+### Structure
+
+![Structure](/static/images/design/Label/Structure2.png)
+
+![Structure](/static/images/design/Label/Structure.png)
+
+![Application Examples](/static/images/design/Label/Application.png)
+
+1 — Icône gauche : facultative et non interactive. Utilisée pour une récupération d'informations plus rapide.
+
+2 — Texte : une étiquette ne doit pas dépasser 20 caractères. Vous pouvez utiliser des adjectifs (par exemple, Nouveau, Actif, Gratuit), des participes (par exemple, Arrêté), des noms (par exemple, Remise) et des adverbes. Le texte de l'étiquette ne doit pas contenir de verbes (par exemple, Activer). Si vous avez besoin d'utiliser des verbes, utilisez plutôt des boutons.
+
+3 — Une version alternative du texte au format "Clé : Valeur", utilisée pour marquer manuellement les objets. Par exemple, vous pourriez étiqueter l'objet "service : livraison" ou "release : 23".
+
+4 — Bouton droit : interactif. Peut être une icône de suppression ou une icône de copie.
+
+### Tailles
+
+![Sizes](/static/images/design/Label/Sizes.png)
+
+**Il existe trois tailles d'étiquettes :**
+
+**XS** - Souvent utilisé dans les tableaux, les listes, les en-têtes, les popups et les pages d'entité.
+
+**S** - Utilisé pour prévisualiser les marques nouvellement ajoutées sur les formulaires et autres zones s'il y a suffisamment d'espace.
+
+**M** - Utilisé moins souvent en raison de sa ressemblance avec un bouton.
+
+### Thèmes
+
+![Themes](/static/images/design/Label/Themes.png)
+
+![Themes](/static/images/design/Label/Themes2.png)
+
+**Sans couleur sémantique**
+
+**Défaut** — L'étiquette par défaut, souvent utilisée pour mettre en évidence des informations sans coloration sémantique.
+
+**Clair** — N'a pas de fond, seulement un contour. Utilisé pour une mise en évidence minimale.
+
+**Avec coloration sémantique**
+
+**Inconnu** — Une option neutre utilisée lorsqu'il n'est pas nécessaire de mettre l'accent sur les informations contenues dans l'étiquette.
+
+**Accent** — Utilisé pour mettre en évidence des informations importantes et pour les opérations "en cours".
+
+**Succès** — Utilisé pour indiquer un processus terminé avec succès ou la "santé" d'une entité.
+
+**Avertissement** — Utilisé pour les situations d'urgence, par exemple pour alerter l'utilisateur sur quelque chose.
+
+**Danger** — Pour attirer toute l'attention de l'utilisateur, par exemple lorsqu'une erreur s'est produite et qu'une action immédiate est nécessaire pour la corriger.
+
+### Étiquettes sémantiques vs Boutons
+
+Les étiquettes, y compris celles avec une coloration sémantique, sont utilisées pour indiquer des états. La seule façon d'interagir avec elles est de survoler l'étiquette ou de cliquer sur l'icône. L'étiquette ne peut pas être définie sur "sélectionnée". Si vous avez besoin de créer un élément interactif basé sur des étiquettes sémantiques (par exemple, pour des filtres de statut), utilisez des boutons. Ils ont un état pressé (appliqué) - sélectionné - et peuvent être utilisés avec des couleurs sémantiques.
+
+### Modifications et états
+
+Toutes les étiquettes ont cinq états : texte seul, icône avant le texte, icône après le texte, icône avant et après, et une seule icône.
+
+![States](/static/images/design/Label/States.png)
+
+![States](/static/images/design/Label/States2.png)
+
+Vous pouvez interagir :
+
+1. Avec l'étiquette entière. Par exemple, pour afficher une Popover avec des informations détaillées en survolant une étiquette.
+
+2. Uniquement avec l'icône de droite. Selon l'icône, cliquer dessus peut supprimer l'étiquette ou copier sa valeur.
+
+Lorsque vous ajoutez des interactions à une étiquette, assurez-vous qu'elles sont intuitives et claires.
+
+### Fonctionnalités supplémentaires
+
+Vous pouvez créer des filtres dynamiques pour trier le contenu en fonction de l'étiquette. Par exemple, cliquer sur l'icône plus ajoute une nouvelle valeur, tandis que cliquer sur l'icône croix annule le filtre.
+
+![Features](/static/images/design/Label/Features.png)
+
+Si votre interface permet aux utilisateurs de créer leurs propres étiquettes et de marquer des objets, ils devraient également pouvoir les ajouter et les supprimer.
+
+### Personnalisation
+
+Les couleurs, les arrondis, les tailles et les espacements des étiquettes peuvent être personnalisés. Le texte contenu dans l'étiquette doit être facile à lire.
+
+![Customization](/static/images/design/Label/Customization.png)
+
+Modifiez l'apparence ou la couleur d'une étiquette lorsque l'utilisateur la survole pour indiquer la possibilité d'interaction.

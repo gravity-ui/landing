@@ -1,0 +1,22 @@
+コントロールの角丸は上書きできます。これを行うには、以下の変数を使用します。
+
+- `--g-border-radius-xs: 3px;`
+- `--g-border-radius-s: 5px;`
+- `--g-border-radius-m: 6px;`
+- `--g-border-radius-l: 8px;`
+- `--g-border-radius-xl: 10px;`
+- `--g-border-radius-2xl: 16px;`
+
+![Corner radius](/static/images/design/CornerRadius/1.png)
+
+**Variables** の値を上書きできます。
+
+変数は、対応するサイズのコントロールで使用されます。変数の値を変更すると、同じサイズのすべてのコントロールの角丸がそれに従って変更されます。この変数によって影響を受けるコントロールは、Figma ライブラリの Branding ページに記載されています。コントロールによってサイズ範囲が異なるため、コントロールのセットは一致しない場合があります。たとえば、Label は L より大きいサイズがないため、`--g-border-radius-l` で始まる変数はこのコンポーネントでは使用されず、その外観には影響しません。
+
+![Corner radius](/static/images/design/CornerRadius/2.png)
+
+チェックボタンのネストされた要素の角丸は、トークンによって決定され、「トークン値 - 3」（3 は内部要素と外部要素の間の距離）の式を使用して計算されます。現在のバージョンでは、手動で計算を行い、結果を以下のトークンに入力する必要があります。
+
+![Corner radius](/static/images/design/CornerRadius/3.png)
+
+![Corner radius](/static/images/design/CornerRadius/4.png)

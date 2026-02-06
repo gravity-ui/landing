@@ -1,0 +1,29 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+![Grid](/static/images/design/GridAndContainer/grid.png)
+
+Le module d'espacement nous permet de définir des règles strictes pour les calculs de taille et d'espacement, tandis que la grille aide à structurer le contenu en blocs visuellement organisés. Nous utilisons une grille à 12, 8 et 4 colonnes qui permet de diviser la zone sélectionnée en moitiés, tiers et quarts.
+
+# Structure de la grille
+
+![Grid structure](/static/images/design/GridAndContainer/structure.png)
+
+Les colonnes ➊ définissent les limites pour l'alignement horizontal ; les espacements ➋ fournissent un remplissage entre les colonnes de la grille ; les marges extérieures ➌ assurent le remplissage et l'alignement centré du conteneur ➍. La largeur des colonnes de la grille est déterminée par une valeur en pourcentage, et l'espacement par défaut des colonnes est défini à 20px.
+
+# Conteneur
+
+![Container](/static/images/design/GridAndContainer/container.png)
+
+Un conteneur est un composant fondamental de la conception système qui contient et organise le contenu dans une vue donnée. Nous utilisons deux types de conteneurs : Fixe avec une largeur fixe (ce qui signifie que sa largeur maximale fixe peut changer à chaque point de rupture) et Fluide avec une largeur variable, qui occupe 100 % de l'espace disponible (sauf pour les tailles S, XS et 2XS).
+
+# Points de rupture
+
+Les points de rupture des requêtes média, ou breakpoints, sont des largeurs de vue prédéfinies qui vous permettent de gérer divers paramètres de grille.
+
+![Breakpoints](/static/images/design/GridAndContainer/breakpoints.png)
+
+# Zones d'exclusion
+
+![Exclusion zones](/static/images/design/GridAndContainer/zones.png)
+
+Dans les mises en page de conception UI, les utilisateurs s'attendent à ce que certains éléments soient positionnés dans des zones spécifiques. Nous appelons ces zones des "zones d'exclusion", et nous ne les incluons pas dans notre système de grille. Lorsque des panneaux flexibles ou de navigation s'étendent, le contenu et la grille sont soit compressés pour tenir dans le navigateur, soit étendus au-delà. Les panneaux superposés couvrent le contenu sans affecter le conteneur principal.

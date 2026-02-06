@@ -1,39 +1,41 @@
-El botón de copia del portapapeles es una modificación del `Button` `Flat` componente con el `ClipboardIcon` icono colocado por separado.
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, manteniendo un tono natural y conservando los elementos técnicos y de MDX:
+
+El botón de copiar al portapapeles es una modificación del componente `Button` `Flat` con el icono `ClipboardIcon` colocado por separado.
 
 ### Icono
 
-Dentro `ClipboardButton` hay un `ClipboardIcon` componente, que es un icono animado con dos estados: Éxito y error. Para personalizar el botón de copia, utilice el componente de botón estándar `Button` con el `ClipboardIcon` icono.
+Dentro del `ClipboardButton` se encuentra un componente `ClipboardIcon`, que es un icono animado con dos estados: Éxito y Error. Para personalizar el botón de copia, utiliza el componente de botón estándar `Button` con el icono `ClipboardIcon`.
 
 ### Estados
 
-![States](/static/images/design/ClipboardButton/States.png)
+![Estados](/static/images/design/ClipboardButton/States.png)
 
-### Tallas
+### Tamaños
 
-El componente admite tamaños de botones estándar `XS` `S`, `M`, `L`, y `XL`
+El componente soporta los tamaños de botón estándar `XS`, `S`, `M`, `L` y `XL`.
 
 ### Comportamiento
 
-Si la copia de contenido no se realiza con frecuencia o si el icono reduce la legibilidad, el botón de copia no aparecerá hasta que se acerque el cursor.
+Si la copia de contenido no se realiza con frecuencia o si el icono reduce la legibilidad, el botón de copia no aparecerá hasta que el cursor se acerque.
 
-![In tables, the icon is hidden until the cursor is placed over a cell with content](/static/images/design/ClipboardButton/Use-cases2.png)
+![En tablas, el icono se oculta hasta que el cursor se coloca sobre una celda con contenido](/static/images/design/ClipboardButton/Use-cases2.png)
 
-En las tablas, el icono está oculto hasta que el cursor se coloca sobre una celda con contenido
+En tablas, el icono se oculta hasta que el cursor se coloca sobre una celda con contenido.
 
-### Información sobre herramientas
+### Tooltip
 
-El componente tiene una información sobre herramientas que se puede desactivar. Se usa para indicar qué contenido se va a copiar.
+El componente tiene un tooltip que se puede deshabilitar. Se utiliza para indicar qué contenido se copiará.
 
-![The task key is copied in the Yandex Tracker service](/static/images/design/ClipboardButton/Tooltip.png)
+![La clave de la tarea se copia en el servicio Yandex Tracker](/static/images/design/ClipboardButton/Tooltip.png)
 
-La clave de la tarea se copia en el servicio Yandex Tracker
+La clave de la tarea se copia en el servicio Yandex Tracker.
 
 ### Casos de uso
 
-Se copia un código de bloqueo en la documentación.
+Se copia un bloque de código en la documentación.
 
-![Use-cases](/static/images/design/ClipboardButton/Use-cases1.png)
+![Casos de uso](/static/images/design/ClipboardButton/Use-cases1.png)
 
-Los valores de las celdas se copian en las tablas.
+Se copian valores de celdas en tablas.
 
-![Use-cases](/static/images/design/ClipboardButton/Use-cases2.png)
+![Casos de uso](/static/images/design/ClipboardButton/Use-cases2.png)

@@ -1,0 +1,26 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+L'élément `Popup` est un élément flottant qui apparaît au survol ou au clic sur un élément d'interface, ou lors de la mise au focus d'un élément à l'aide du clavier. Le `Popup` sert également de structure sous-jacente au composant [Popover](/design/guides/popover). Utilisez-le lorsque les capacités intégrées du composant [Popover](/design/guides/popover) sont insuffisantes.
+
+## Quand utiliser Popup
+
+- Lorsque l'élément flottant contient une action. Dans ce cas, utilisez `Popup` comme alternative à une boîte de dialogue, si vous avez besoin de conserver le contexte de la page actuelle.
+
+   ![Popup](/static/images/design/Popup/popup-0001.png)
+
+- Lorsque vous ne pouvez pas utiliser [Popover](/design/guides/popover) en raison d'une quantité de contenu trop importante. Par exemple, lorsque vous devez fournir plus de détails sur un objet dans votre infobulle, en donnant des caractéristiques techniques et des détails.
+
+   ![Popup](/static/images/design/Popup/popup-0002.png)
+
+
+## Style
+
+Vous ne pouvez pas personnaliser la couleur et le style du popup. Vous pouvez uniquement modifier son emplacement et la présence d'une queue :
+
+Vous pouvez placer n'importe quel contenu dans le corps du popup. Lors de la conception du contenu, respectez les marges de base du composant [Popover](/design/guides/popover) et les directives générales. Essayez de ne pas surcharger le `Popup` afin qu'il ne paraisse pas encombrant.
+
+## Positionnement
+
+Vous pouvez placer le `Popup` n'importe où sur votre page en fonction de sa disposition. Assurez-vous qu'il chevauche le moins d'informations importantes possible sur la page.
+
+![Positioning](/static/images/design/Popup/popup-0003.png)

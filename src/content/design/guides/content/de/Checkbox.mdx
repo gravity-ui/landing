@@ -1,0 +1,69 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+Ein Kontrollkästchen ist ein Benutzeroberflächenelement, das es Benutzern ermöglicht, eine oder mehrere der angebotenen Optionen auszuwählen.
+
+## Anwendungsfälle
+
+![Cases](/static/images/design/Checkbox/Checkbox1.png)
+
+Wenn ein Kontrollkästchen aktiviert wird, löst es nicht sofort eine Aktion aus. Benutzer müssen auf eine Bestätigungsschaltfläche (z. B. Speichern, Anwenden, Senden) klicken, um die Auswahl zu übernehmen. In den meisten Fällen wird das Kontrollkästchen zusammen mit einer erklärenden Beschriftung verwendet. In einigen Szenarien können Kontrollkästchen jedoch auch ohne Beschriftungen verwendet werden, z. B. in Tabellen oder wenn die Einbeziehung einer "Aktivieren"-Beschriftung neben jedem Kontrollkästchen redundant ist. Beginnen Sie Ihren Text mit positiver Formulierung, verwenden Sie zum Beispiel "Aktivieren" anstelle von "Deaktivieren", um zu verhindern, dass der Benutzer ein Logikrätsel lösen muss.
+
+## Anatomie
+
+Das Kontrollkästchen besteht aus:
+
+![Anatomy](/static/images/design/Checkbox/Checkbox2.png)
+
+1.  **Container**: Visueller rechteckiger Bereich, der das Kontrollkästchen umschließt. Der Container zeigt Grenzen an und aktiviert das Kontrollkästchen.
+2.  **Häkchen**: Symbol, das innerhalb des Containers erscheint, wenn der Benutzer das Kontrollkästchen aktiviert. Dieses Symbol bestätigt visuell, dass der Benutzer das Kontrollkästchen ausgewählt hat.
+3.  **Textbeschriftung (optional)**: Text, der rechts vom Kontrollkästchen platziert ist. Die Textbeschriftung erklärt die Bedeutung oder den Zweck des Kontrollkästchens.
+
+## Größen
+
+Die Komponente Kontrollkästchen hat zwei Hauptgrößen:
+
+![Sizes](/static/images/design/Checkbox/Checkbox3.png)
+
+**M** ist die Standardgröße mit Standardabmessungen, die in den meisten Fällen geeignet sind. In dieser Größe ist der Container 14x14 px und die Textbeschriftung verwendet eine Schriftgröße von 13 px.
+
+**L** wird verwendet, wenn das Kontrollkästchen unter anderen Benutzeroberflächenelementen hervorstechen soll oder wenn die Benutzeroberfläche größere Elemente für eine einfachere Bedienung erfordert. In dieser Größe ist der Container 17x17 px und die Textbeschriftung verwendet eine Schriftgröße von 15 px.
+
+## Zustände
+
+![States](/static/images/design/Checkbox/Checkbox4.png)
+
+**Standard** ist der Hauptzustand des Kontrollkästchens, den der Benutzer durch Klicken aktivieren oder deaktivieren kann.
+
+**Hover** ist der Zustand, wenn der Benutzer den Mauszeiger über den Bereich des Kontrollkästchens (Kontrollkästchen + Beschriftung) bewegt.
+
+**Deaktiviert** ist der Zustand, in dem der Benutzer aus irgendeinem Grund nicht mit dem Kontrollkästchen interagieren kann.
+
+**Indeterminiert** ist der Zustand der Kopfzeile in einer Kontrollkästchengruppe, wenn einer von mehreren Einträgen ausgewählt ist (tritt normalerweise in Tabellen mit Mehrfachauswahl von Zeilen auf).
+
+## Empfehlungen
+
+### Verwenden Sie
+
+-   **Optionsauswahl**, wenn Sie möchten, dass der Benutzer eine oder mehrere Optionen aus einer Liste auswählt.
+
+-   **Aktivieren/Deaktivieren von Funktionen**, wenn Sie möchten, dass der Benutzer bestimmte Funktionen in der Benutzeroberfläche aktiviert oder deaktiviert. Benutzer können beispielsweise Benachrichtigungen oder automatische Wiedergabe und andere Funktionen aktivieren oder deaktivieren. In solchen Fällen bieten Kontrollkästchen eine klare und intuitive Interaktion.
+
+-   **Mehrfachauswahl in Tabellen oder Listen**, wenn Sie möchten, dass der Benutzer mehrere Elemente für Massenoperationen wie Löschen oder Exportieren auswählt. Dies vereinfacht Datenoperationen und erleichtert Massenaktionen.
+
+-   **Inhalts- oder Ergebnisfilterung**, wenn Sie möchten, dass der Benutzer Parameter zur Filterung von Inhalten oder Suchergebnissen auswählt.
+
+### Vermeiden Sie
+
+-   **Einzelne Optionsauswahl**. Wenn Sie erwarten, dass der Benutzer eine Option aus einer sich gegenseitig ausschließenden Menge auswählt, verwenden Sie Optionsfelder (Radio Buttons).
+
+-   **Zweistufiges Aktivieren/Deaktivieren (sofortige Aktion)**. Wenn die Option nur zwei Zustände hat, aktiviert und deaktiviert, und Änderungen sofort wirksam werden, ohne eine Schaltfläche "Anwenden", verwenden Sie Schalter (Switches). Schalter stellen solche Optionen klarer und kompakter dar, und Änderungen werden sofort nach dem Umschalten angewendet.
+
+-   **Segmentierte Auswahl**. Wenn Sie mehrere sich gegenseitig ausschließende Optionen anbieten, die Benutzer gleichzeitig in verschiedenen Kategorien auswählen können, verwenden Sie Segmentsteuerelemente (Segment Controls). Sie ermöglichen es dem Benutzer, Optionen in verschiedenen Segmenten oder Kategorien auszuwählen.
+
+-   **Auswahl aus zahlreichen Optionen**. Wenn Sie eine lange Liste von Optionen anbieten, aus denen eine einzelne ausgewählt werden soll, verwenden Sie eine Dropdown-Liste (Select). Dies spart Bildschirmplatz und erleichtert die Auswahl aus einer großen Menge von Optionen.
+
+### Texte schreiben
+
+-   Streben Sie nach Kürze bei Textbeschreibungen. Vermeiden Sie lange Phrasen oder komplexe Sätze.
+-   Verwenden Sie aktive Verben, die die mit der Auswahl verbundene Aktion klar angeben. Zum Beispiel "Newsletter abonnieren" anstelle von "Newsletter-Abonnement".
+-   Geben Sie den Benutzern ein vollständiges Verständnis davon, was passiert, wenn sie das Kontrollkästchen auswählen. Zum Beispiel "Benachrichtigungen über neue Artikel erhalten" anstelle von "Benachrichtigungen".

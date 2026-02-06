@@ -1,0 +1,119 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+**List** — eine universelle Listenkomponente, die als Container mit Datenzeilen dient, die in einer einzigen vertikalen Spalte organisiert sind. Die Komponente sortiert ihre untergeordneten List-Item-Elemente, unterstützt mehrere Größen und ermöglicht die Steuerung der Tastaturauswahl sowie die Filterung.
+
+# **List-Struktur**
+
+![60.png](/static/images/design/List/60.png)
+
+➊ Filterbereich
+
+➋ List-Item
+
+➌ Scrollleiste (Scrollbar)
+
+➍ List-Item unter dem Cursor
+
+# **List-Item-Struktur**
+
+![61.png](/static/images/design/List/61.png)
+
+➊ Sortier-Icon
+
+➋ Item-Icon
+
+➌ Textblock
+
+➍ Zusätzlicher Aktionsbutton (wird beim Hover angezeigt)
+
+# Größe
+
+![65.png](/static/images/design/List/65.png)
+
+**List-Item**
+
+Alle List-Items (List-item) unterstützen die Darstellung in 4 Größen: S, M, L, XL. Die Größen und Abstände entsprechen den Bibliotheks-Items, mit denen die Komponente interagiert, wie z. B. Select, Input und Button, die ähnliche Größenvariablen unterstützen.
+
+![63.png](/static/images/design/List/63.png)
+
+**List**
+
+Standardmäßig ist die Breite der List-Komponente dynamisch und wird basierend auf der Breite des längsten Items in der Liste berechnet. Die Breite kann auf einen festen Wert gesetzt oder die Breite des Objekts übernommen werden, das die Anzeige der Liste ausgelöst hat (Select, Input).
+
+# Zustände
+
+![62.png](/static/images/design/List/62.png)
+
+# Arten von **Inhalten**
+
+![Group 2087326004.png](/static/images/design/List/Group_2087326004.png)
+
+{/* **Einfaches List-Item (Standard)**
+
+Basis-List-Item, das keine zusätzlichen Elemente anzeigt
+
+![Group 2087326006.png](/static/images/design/List/Group_2087326006.png)
+
+**List-Item mit Icon**
+
+Jedes List-Item kann ein oder mehrere Icons links oder rechts von der Komponente haben.
+
+![Group 2087326007.png](/static/images/design/List/Group_2087326007.png)
+
+**Sortierbares List-Item**
+
+Für sortierbare Elemente können Sie festlegen, auf welcher Seite das "Drag"-Icon erscheint.
+
+![Group 2087326008.png](/static/images/design/List/Group_2087326008.png)
+
+**List-Item mit zusätzlichem Icon beim Hover**
+
+Für alle List-Item-Optionen mit Icons oder sortierbaren Items kann beim Überfahren der Komponente mit der Maus ein zusätzliches Icon angezeigt werden.
+
+--- */}
+
+# List-Item-Funktionen
+
+![59.png](/static/images/design/List/59.png)
+
+**Unterstützung mehrerer Icons**
+
+**List-Item**-Elemente können ein oder mehrere Icons links und rechts von der Komponente haben.
+
+![64.png](/static/images/design/List/64.png)
+
+**Änderung der Sortierreihenfolge**
+
+Für Items in der Liste können Sie die Sortierung der List-Items aktivieren. Das Sortier-Icon wird standardmäßig immer oben in der Liste angezeigt.
+
+# List-Funktionen
+
+![66.png](/static/images/design/List/66.png)
+
+**Anpassbare Höhe für den Hauptcontainer der Liste**
+
+Die Höhe von List-Items oder eine Funktion, die den Höhenwert zurückgibt, kann dynamisch gesetzt oder mit einem exakten Wert in Pixeln (px) angegeben werden. Wenn die List-Items die maximale Höhe überschreiten, erscheint eine Scrollleiste. Die Höhe kann manuell eingestellt oder dynamisch angepasst werden.
+
+![70.png](/static/images/design/List/70.png)
+
+**Einzel- und Mehrfachauswahl**
+
+Die Komponente unterstützt sowohl die Einzel- als auch die Mehrfachauswahl von Items.
+
+![68.png](/static/images/design/List/68.png)
+
+**Filter und Suche**
+
+Optional kann die Komponente ein Eingabefeld für die schnelle Filterung von Items in der Liste enthalten. Der Filter-Platzhalter kann standardmäßig je nach Aufgabe der Komponente geändert werden.
+
+![69.png](/static/images/design/List/69.png)
+
+**Aufruf-Trigger**
+
+Standardmäßig wird die List-Komponente durch Interaktionen mit anderen Seitenelementen wie Select, Label und Button ausgelöst und dient als Vorschlagsfunktion für die Input-Komponente.
+
+![67.png](/static/images/design/List/67.png)
+
+**Virtualisierung**
+
+Wenn das Virtualisierungs-Flag aktiviert ist, rendert der Browser nur eine Teilmenge von Zeilen gleichzeitig, was die Zeit für das erneute Rendern von Komponenten erheblich reduziert. Bei dieser Methode, auch bekannt als "unendliches Laden", werden neue Items zur Liste hinzugefügt, während der Benutzer nach unten zu einem bestimmten Schwellenwert-Item (Trigger) scrollt.
