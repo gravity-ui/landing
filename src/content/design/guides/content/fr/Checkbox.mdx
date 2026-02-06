@@ -1,0 +1,69 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Une case à cocher est un élément d'interface utilisateur qui permet aux utilisateurs de sélectionner une ou plusieurs options parmi celles proposées.
+
+## Cas d'utilisation
+
+![Cas d'utilisation](/static/images/design/Checkbox/Checkbox1.png)
+
+Lorsqu'elle est activée, la case à cocher ne déclenche pas d'action instantanément. Les utilisateurs doivent cliquer sur un bouton de confirmation (par exemple, Enregistrer, Appliquer, Soumettre) pour l'appliquer. Dans la plupart des cas, la case à cocher est utilisée conjointement avec une étiquette explicative. Cependant, dans certains scénarios, les cases à cocher peuvent être utilisées sans étiquettes, par exemple dans les tableaux ou lorsque l'ajout d'une étiquette "activer" à côté de chaque case à cocher est redondant. Commencez votre texte par une formulation positive, par exemple, utilisez "Activer" au lieu de "Désactiver", pour éviter que l'utilisateur ne résolve un casse-tête logique.
+
+## Anatomie
+
+La case à cocher se compose de :
+
+![Anatomie](/static/images/design/Checkbox/Checkbox2.png)
+
+1.  **Conteneur** : Zone rectangulaire visuelle qui entoure la case à cocher. Le conteneur indique les limites et active la case à cocher.
+2.  **Coche** : Symbole qui apparaît à l'intérieur du conteneur lorsque l'utilisateur active la case à cocher. Ce symbole confirme visuellement que l'utilisateur a sélectionné la case à cocher.
+3.  **Étiquette de texte (facultative)** : Texte placé à droite de la case à cocher. L'étiquette de texte explique la signification ou le but de la case à cocher.
+
+## Tailles
+
+Le composant de case à cocher a deux tailles principales :
+
+![Tailles](/static/images/design/Checkbox/Checkbox3.png)
+
+**M** est la taille par défaut, avec des dimensions standard adaptées à la plupart des cas. Dans cette taille, le conteneur mesure 14x14 px et l'étiquette de texte utilise une police de 13 px.
+
+**L** est utilisée lorsque la case à cocher doit se démarquer parmi d'autres éléments d'interface ou si l'interface nécessite des éléments plus grands pour une utilisation plus facile. Dans cette taille, le conteneur mesure 17x17 px, et l'étiquette de texte utilise une police de 15 px.
+
+## États
+
+![États](/static/images/design/Checkbox/Checkbox4.png)
+
+**Défaut** est l'état principal de la case à cocher que l'utilisateur peut activer ou désactiver par un clic.
+
+**Survol** est l'état lorsque l'utilisateur déplace le curseur sur la zone de la case à cocher (case à cocher + étiquette).
+
+**Désactivé** est l'état lorsque l'utilisateur ne peut pas interagir avec la case à cocher pour une raison quelconque.
+
+**Indéterminé** est l'état de l'en-tête dans un groupe de cases à cocher lorsqu'un élément parmi plusieurs est sélectionné (se produit généralement dans les tableaux avec sélection de plusieurs lignes).
+
+## Recommandations
+
+### Utiliser
+
+-   **Sélection d'options** si vous souhaitez que l'utilisateur sélectionne une ou plusieurs options dans une liste.
+
+-   **Activation/désactivation de fonctionnalités** si vous souhaitez que l'utilisateur active ou désactive certaines fonctionnalités de l'interface. Par exemple, les utilisateurs peuvent activer ou désactiver les notifications ou la lecture automatique et d'autres fonctionnalités. Dans de tels cas, les cases à cocher offrent une interaction claire et intuitive.
+
+-   **Sélection multiple dans les tableaux ou les listes** si vous souhaitez que l'utilisateur sélectionne plusieurs éléments pour des opérations groupées, telles que la suppression ou l'exportation. Cela simplifie les opérations sur les données et facilite les actions groupées.
+
+-   **Filtrage de contenu ou de résultats** si vous souhaitez que l'utilisateur sélectionne des paramètres pour filtrer le contenu ou les résultats de recherche.
+
+### Éviter
+
+-   **Sélection d'une seule option**. Si vous attendez de l'utilisateur qu'il sélectionne une option parmi un ensemble mutuellement exclusif, utilisez des boutons radio.
+
+-   **Activation/désactivation à deux positions (action instantanée)**. Si l'option n'a que deux états, activé et désactivé, et que les changements prennent effet instantanément, sans bouton "Appliquer", utilisez des interrupteurs (switches). Les interrupteurs présentent de telles options de manière plus claire et compacte, et les changements s'appliquent immédiatement après le basculement.
+
+-   **Sélection segmentée**. Si vous proposez plusieurs options mutuellement exclusives que les utilisateurs peuvent sélectionner simultanément dans différentes catégories, utilisez des contrôles de segment (segment controls). Ils permettent à l'utilisateur de sélectionner des options dans différents segments ou catégories.
+
+-   **Sélection parmi de nombreuses options**. Si vous proposez une longue liste d'options parmi lesquelles choisir une seule, utilisez une liste déroulante (select). Cela permet d'économiser de l'espace à l'écran et facilite le choix parmi un grand ensemble d'options.
+
+### Rédaction des textes
+
+-   Soyez concis dans les descriptions textuelles. Évitez les phrases longues ou les phrases complexes.
+-   Utilisez des verbes d'action qui indiquent clairement l'action associée au choix. Par exemple, "S'abonner à la newsletter" au lieu de "Abonnement à la newsletter".
+-   Donnez aux utilisateurs une compréhension complète de ce qui se passera lorsqu'ils sélectionneront la case à cocher. Par exemple, "Recevoir des notifications sur les nouveaux articles" au lieu de "Notifications".
