@@ -1,0 +1,119 @@
+Aqui está a tradução do arquivo fonte do guia de design para português, mantendo a naturalidade e os elementos técnicos:
+
+**List** — um componente de lista universal que serve como um contêiner com linhas de dados organizadas em uma única coluna vertical. O componente ordena seus elementos filhos `list-item`, suporta múltiplos tamanhos e permite controle de seleção por teclado e filtragem.
+
+# **Estrutura da List**
+
+![60.png](/static/images/design/List/60.png)
+
+➊ Área de filtro
+
+➋ Item da lista (`List-item`)
+
+➌ Barra de rolagem (scrollbar)
+
+➍ Item da lista sob o cursor
+
+# **Estrutura do List-item**
+
+![61.png](/static/images/design/List/61.png)
+
+➊ Ícone de ordenação
+
+➋ Ícone do item
+
+➌ Bloco de texto
+
+➍ Botão de ação adicional (exibido ao passar o mouse)
+
+# Tamanho
+
+![65.png](/static/images/design/List/65.png)
+
+**List-item**
+
+Todos os itens da lista (`List-item`) suportam renderização em 4 tamanhos: S, M, L, XL. Os tamanhos e paddings correspondem aos itens da biblioteca com os quais o componente interage, como `select`, `input` e `button`, que suportam variáveis de tamanho semelhantes.
+
+![63.png](/static/images/design/List/63.png)
+
+**List**
+
+Por padrão, a largura do componente `List` é dinâmica e calculada com base na largura do item mais longo da lista. A largura pode ser definida como um valor fixo ou herdar a largura do objeto que acionou a exibição da lista (`select`, `input`).
+
+# Estados
+
+![62.png](/static/images/design/List/62.png)
+
+# Tipos de **conteúdo**
+
+![Group 2087326004.png](/static/images/design/List/Group_2087326004.png)
+
+{/* **Item de lista simples (padrão)**
+
+Item de lista básico que não exibe itens adicionais
+
+![Group 2087326006.png](/static/images/design/List/Group_2087326006.png)
+
+**Item de lista com ícone**
+
+Qualquer item de lista pode ter um ou mais ícones à esquerda ou à direita do componente.
+
+![Group 2087326007.png](/static/images/design/List/Group_2087326007.png)
+
+**Item de lista ordenável**
+
+Para elementos ordenáveis, você pode especificar em qual lado o ícone de "arrastar" aparece
+
+![Group 2087326008.png](/static/images/design/List/Group_2087326008.png)
+
+**Item de lista com ícone adicional ao passar o mouse**
+
+Para todas as opções de item de lista com ícones ou itens ordenáveis, um ícone adicional pode ser exibido quando o componente está sob o cursor do mouse.
+
+--- */}
+
+# Recursos do List-item
+
+![59.png](/static/images/design/List/59.png)
+
+**Suporte a múltiplos ícones**
+
+Os elementos `List-item` podem ter um ou mais ícones posicionados à esquerda e à direita do componente.
+
+![64.png](/static/images/design/List/64.png)
+
+**Alterando a ordem de ordenação**
+
+Para os itens da lista, você pode ativar a ordenação dos itens da lista. O ícone de ordenação é sempre exibido no topo da lista por padrão.
+
+# Recursos da List
+
+![66.png](/static/images/design/List/66.png)
+
+**Altura personalizável para o contêiner principal da lista**
+
+A altura dos itens da lista ou uma função que retorna o valor da altura pode ser definida dinamicamente ou especificada com um valor exato em pixels (px). Se os itens da lista excederem a altura máxima, uma barra de rolagem aparece. A altura pode ser definida manualmente ou ajustada dinamicamente.
+
+![70.png](/static/images/design/List/70.png)
+
+**Seleção única e múltipla**
+
+O componente suporta seleção de item única e múltipla.
+
+![68.png](/static/images/design/List/68.png)
+
+**Filtro e busca**
+
+Opcionalmente, o componente pode incluir um campo de entrada para filtragem rápida de itens na lista. O placeholder do filtro pode ser alterado por padrão, dependendo da tarefa do componente.
+
+![69.png](/static/images/design/List/69.png)
+
+**Gatilhos de chamada**
+
+Por padrão, o componente `List` é acionado por interações com outros elementos da página, como `select`, `label` e `button`, e serve como um recurso de sugestão para o componente `Input`.
+
+![67.png](/static/images/design/List/67.png)
+
+**Virtualização**
+
+Quando o sinalizador de virtualização está ativado, o navegador renderiza apenas um subconjunto de linhas por vez, reduzindo significativamente o tempo necessário para re-renderizar componentes. Com este método, também conhecido como "carregamento infinito", novos itens são adicionados à lista à medida que o usuário rola para baixo até um item de limite específico (gatilho).
