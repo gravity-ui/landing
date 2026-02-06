@@ -1,0 +1,160 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+Un composant pour saisir des valeurs textuelles, numériques et symboliques arbitraires sur plusieurs lignes. Le plus souvent utilisé pour les descriptions lors de la création d'entités ou pour la saisie de messages dans des formulaires et des boîtes de dialogue.
+
+## **Application**
+
+Contrairement à [TextInput](/design/guides/text-input), il a la hauteur de la somme des lignes et est utilisé pour saisir des données sous forme libre avec n'importe quelle combinaison de lettres, de chiffres ou de symboles.
+
+La hauteur minimale est d'une ligne, mais nous recommandons d'utiliser un composant avec deux lignes ou plus.
+
+![Lignes](/static/images/design/TextArea/Rows.png)
+
+Si le nombre de lignes n'est pas spécifié, la hauteur est calculée automatiquement en fonction de la quantité de contenu.
+
+![Auto](/static/images/design/TextArea/Auto.png)
+
+✅ **Quand l'utiliser**
+
+1. Lorsqu'une ligne de texte suffit.
+2. Lorsque le texte doit être une description longue ou un message contenant beaucoup de caractères.
+3. Lorsqu'il est ajouté à un formulaire avec des champs qui doivent être remplis.
+
+🚫 **Quand ne pas l'utiliser**
+
+1. Lorsqu'un filtre, un champ de formulaire d'autorisation ou une chaîne de recherche est requis.
+2. Lorsqu'un petit nombre de caractères est requis (moins de 5 mots). À cette fin, nous recommandons d'utiliser [TextInput](/design/guides/text-input), un composant pour la saisie de texte sur une seule ligne.
+
+## Types
+
+TextInput a deux types : **Normal** et **Clear**, qui ont le même ensemble de fonctions mais ont un aspect et une utilisation différents selon le contexte.
+
+![Normal, Clear](/static/images/design/TextArea/Normal_Clear.png)
+
+**Normal**
+
+- Le type le plus couramment utilisé.
+- Une caractéristique distinctive de ce composant est son rembourrage interne et son rayon d'angle. Ces paramètres sont déterminés par la taille de l'élément et sont définis par une variable spécifique pour le rayon d'angle (plus d'informations [ici](/design/branding/corner-radius)), ainsi qu'une bordure de 1px.
+- Utilisé dans les formulaires lorsqu'un espace libre entre les composants est requis, comme un rembourrage entre les éléments du formulaire.
+
+{/* ![Console. Création d'un cluster.](/static/images/design/TextArea/Console.png)
+
+Console. Création d'un cluster.
+
+![DataLens. Création d'une collection.](/static/images/design/TextArea/Datal.png)
+
+DataLens. Création d'une collection. */}
+
+**Clear**
+
+- La caractéristique déterminante de ce composant est l'absence de bordure, les éléments étant positionnés dans les marges du champ de saisie.
+- Utilisé lorsque le type Normal crée du bruit visuel.
+- Lors de l'utilisation de ce type, assurez-vous que le but de ce composant est clair pour l'utilisateur.
+
+{/* ![Yandex GPT. Saisie d'instructions.](/static/images/design/TextArea/Chat_GPT.png)
+
+Yandex GPT. Saisie d'instructions. */}
+
+## Structure
+
+![Structure.png](/static/images/design/TextArea/Structure.png)
+
+**1. Valeur**
+
+![Active.png](/static/images/design/TextArea/Active.png)
+
+- Est un élément requis.
+- Peut être utilisé comme indice (placeholder) et comme texte saisi.
+- Le texte saisi remplace l'indice.
+
+**2. Bouton Effacer**
+
+![Bouton Effacer](/static/images/design/TextArea/ClearButton.png)
+
+- Est un composant optionnel.
+- Utilisé lorsque le contenu du champ doit être effacé.
+- Affiché lorsqu'au moins un caractère a été saisi dans le champ.
+- Affiché même lorsque le focus est à l'extérieur du champ.
+- Est un composant Button de type Flat-secondary qui hérite de toutes ses propriétés. Par exemple, l'arrière-plan de la croix est rempli au survol.
+- En cliquant sur le bouton Effacer, le focus se déplace vers le champ et la valeur saisie est effacée.
+**3. Contenu supplémentaire**
+
+![Structure2.png](/static/images/design/TextArea/Structure2.png)
+
+- Est un élément optionnel et est intégré en bas à droite.
+- Utilisé lorsqu'un texte supplémentaire doit être ajouté à l'extérieur.
+- Le texte est aligné à droite.
+- Par exemple, peut être utilisé comme compteur (compteur de caractères saisis).
+
+**4. Icône d'erreur**
+
+![Icône d'erreur](/static/images/design/TextArea/8.png)
+
+- Est affiché uniquement dans l'état Inline Error.
+- Fonctionne avec Tooltip, offrant des descriptions d'erreur au survol de l'icône, pour obtenir une disposition plus compacte du formulaire.
+
+**5. Message d'erreur**
+
+![Message d'erreur](/static/images/design/TextArea/9.png)
+
+- Est affiché uniquement dans l'état Outline Error.
+- Est intégré en bas à gauche.
+
+## États
+
+![États.png](/static/images/design/TextArea/States.png)
+
+Possède les états suivants : **Suggest, Default, Hover, Active, Disabled, Inline Error, et Outline Error.**
+
+1. **Suggest.** État inactif lorsqu'il n'y a pas d'interaction directe avec le composant et qu'aucune donnée n'a été saisie. Dans cet état, la valeur peut servir d'indice, indiquant à l'utilisateur quel type d'information doit être saisi dans le champ.
+2. **Default.** État inactif lorsqu'il n'y a pas d'interaction directe avec le composant et que des données ont déjà été saisies. Dans cet état, la valeur de l'indice change en fonction de la saisie de l'utilisateur.
+3. **Hover.** État actif lorsque le curseur survole la zone du composant.
+4. **Active.** État actif, déclenché par la transition depuis le composant précédent ou par un clic avec le curseur. L'état est réinitialisé lors de la transition vers un autre composant ou lors d'un clic du curseur sur une zone vide.
+5. **Disabled.** État inactif d'un composant lorsqu'il n'est pas possible d'interagir avec lui.
+6. **Outline error.** État actif du composant lorsqu'une erreur survient lors de la validation et est affichée en bas du champ avec une explication.
+7. **Inline error.** État actif du composant lorsqu'une erreur de validation de champ se produit, mais que l'erreur n'est pas affichée. Au lieu de cela, l'erreur est représentée par une icône spéciale qui, au survol, affiche une Tooltip d'erreur.
+
+## Tailles
+
+![Tailles.png](/static/images/design/TextArea/Sizes.png)
+
+Le composant est disponible en quatre tailles : **S, M, L et XL.**
+
+La hauteur et le rayon d'angle du champ, ainsi que le rembourrage à l'intérieur du champ et la taille du texte, varient en fonction de la taille du composant.
+
+Le rayon d'angle dépend de la taille et est défini par des [variables](/design/branding/corner-radius).
+
+1. **S** (-g-border-radius-s: 5px;) – utilisé lorsque la saisie standard est trop grande (par exemple, dans les tableaux, les petites cartes).
+2. **M** (-g-border-radius-m: 6px;) – taille de base, utilisée dans la plupart des formulaires et des filtres.
+3. **L** (-g-border-radius-l: 8px;) – utilisé pour la recherche (par exemple, la recherche de service).
+4. **XL** (-g-border-radius-xl: 10px;) – utilisé dans l'environnement de communication (par exemple, les sites web et les pages de destination).
+
+## Guide utilisateur
+
+**1. Travailler avec le champ**
+
+- Le champ peut varier en hauteur. [TextInput](/design/guides/text-input) peut être utilisé pour la saisie sur une seule ligne.
+- Nous déconseillons d'inclure un **indice** dans un champ, car le nom du champ ne sera pas visible lors de la saisie d'une valeur, sauf si vous avez un espace limité ou si le but du champ est clair pour l'utilisateur.
+- Utilisez la **même taille** pour tous les composants complémentaires du formulaire. Si vous avez choisi la taille M, tous les autres composants doivent être de la même taille.
+
+**2. En-tête de champ externe**
+
+![En-tête de champ externe](/static/images/design/TextArea/12.png)
+
+- Un nom de champ court, de préférence limité à une ligne.
+- Le composant doit être placé en ligne avec la valeur du champ, sauf si le contexte est mobile ou si la taille du Dialog est S, auquel cas le titre du composant est affiché au-dessus du composant.
+
+**3. Indice avec tooltip**
+
+![Indice avec tooltip](/static/images/design/TextArea/13.png)
+
+- Instructions pour remplir le champ lors du survol de l'icône avec un point d'interrogation.
+- Utilisé lorsque le titre et la signification doivent être clarifiés.
+- Ne doit pas contenir plus de deux paragraphes de texte.
+
+**4. Description supplémentaire**
+
+![Description supplémentaire](/static/images/design/TextArea/14.png)
+
+- Peut être trouvé en bas ou à droite du champ.
+- Utilisé dans de rares cas lorsqu'il n'est pas clair comment remplir un champ sans description supplémentaire ou lorsque des explications sur les valeurs précédemment saisies sont nécessaires.
