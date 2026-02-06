@@ -1,8 +1,8 @@
 {
   "actions_goToIcons": "Ir a los iconos",
   "libraries": "Librerías",
-  "readme": "Readme",
-  "changelog": "Changelog",
+  "readme": "Léeme",
+  "changelog": "Registro de cambios",
   "about": "Acerca de la librería",
   "stars": "Estrellas",
   "title_star-button": "Apoya la librería con una estrella",

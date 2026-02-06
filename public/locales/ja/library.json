@@ -1,11 +1,11 @@
 {
-  "actions_goToIcons": "アイコンへ移動",
+  "actions_goToIcons": "アイコンに移動",
   "libraries": "ライブラリ",
   "readme": "Readme",
   "changelog": "変更履歴",
   "about": "ライブラリについて",
   "stars": "スター",
-  "title_star-button": "スターでライブラリをサポート",
+  "title_star-button": "スターでライブラリを応援",
   "version": "バージョン",
   "lastUpdate": "最終更新日",
   "repository": "リポジトリ",
