@@ -1,0 +1,64 @@
+Hier ist die Übersetzung der Design-Guide-Quelldatei ins Deutsche:
+
+**Breadcrumbs** sind eine Kette von Links, die den Pfad in der Struktur des Dienstes von der Startseite zur aktuellen Seite darstellen und es den Benutzern ermöglichen, zu jeder Seite dazwischen zu navigieren. Sie helfen dem Benutzer zu bestimmen, in welchem Teil des Dienstes er sich befindet, und schnell ein oder mehrere Ebenen zurück zu navigieren.
+
+![Beispiel](/static/images/design/Breadcrumbs/Example.png)
+
+## Wann verwenden
+
+- Verwenden Sie die Breadcrumbs-Komponente für verschachtelte Seiten.
+- Auf der Startseite müssen keine Breadcrumbs verwendet werden.
+- Breadcrumbs werden normalerweise in der Aktionsleiste ganz oben auf der Seite platziert.
+
+## Struktur
+
+![Struktur](/static/images/design/Breadcrumbs/Structure.png)
+
+1 - **Aktuelle Seite.**
+
+2 - **Vorherige Seite.** Am besten zuerst anzeigen, wenn die Breite des Containers dies zulässt.
+
+3 - **Startseite des Dienstes.**
+
+4 - **Trennzeichen.** "/" wird standardmäßig verwendet, aber ">" ist ebenfalls akzeptabel.
+
+5 - **Overflow-Symbol.** Erscheint, wenn die Seitentitel nicht in die Breite des Containers passen. Seiten, die mehr Platz beanspruchen als verfügbar ist, werden über ein Dropdown-Menü aufgerufen, das durch Klicken auf die Ellipse angezeigt wird.
+
+## Größen
+
+Die Basisschriftgröße in Breadcrumbs ist body-1. Die Icon-Größe beträgt 16x16 px.
+
+![Größen](/static/images/design/Breadcrumbs/Sizes.png)
+
+## Zustände
+
+![Zustände](/static/images/design/Breadcrumbs/States.png)
+
+**Standard** - Standardzustand.
+
+**Hover** - Überfahren des Seitentitels mit der Maus.
+
+**Deaktiviert** - Nicht klickbar. Kann für die aktuelle Seite oder für Seiten verwendet werden, die nicht verlinkt sind.
+
+**Laden** - Die Komponente kann den Inhalt des Elements anzeigen, indem sie eine Funktion über den Parameter `renderItemContent` übergibt. Zeigen Sie zum Beispiel Skeleton an, wenn die Daten für das Breadcrumb-Element noch nicht geladen wurden.
+
+## Modifikationen
+
+![Modifikationen](/static/images/design/Breadcrumbs/Modifications1.png)
+
+Breadcrumbs können die folgenden zusätzlichen Elemente enthalten:
+
+1. **Aktions-Icon** - wie z. B. zu Favoriten hinzufügen, Seitentitel kopieren oder Kontextmenü.
+2. **[Label](/design/guides/label)** — ein Status oder ein anderes Attribut, das mit der Seite verbunden ist.
+3. **Select** — durch Klicken auf das Element können verschiedene Optionen ausgewählt werden.
+4. **Zusätzlicher Text**—ID, Mengen Zähler und andere Seitenattribute
+
+Ein Haus-Icon kann anstelle des Wortes "Haupt" verwendet werden, um zur Startseite zurückzukehren.
+
+![Modifikationen](/static/images/design/Breadcrumbs/Modifications1.png)
+
+## Anpassung
+
+Sie können Farben, Trennzeichen und Hover-Stile ändern. Denken Sie daran, die aktuelle Seite heller hervorzuheben und genügend Kontrast zwischen den Elementen zu gewährleisten.
+
+![Anpassung](/static/images/design/Breadcrumbs/Customization.png)

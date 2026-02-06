@@ -1,0 +1,64 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+**Les fil d'Ariane** sont une chaîne de liens qui représentent le chemin dans la structure du service, de la page racine à la page actuelle, permettant aux utilisateurs de naviguer vers n'importe quelle page intermédiaire. Ils aident l'utilisateur à déterminer dans quelle partie du service il se trouve et à revenir rapidement un ou plusieurs niveaux en arrière.
+
+![Exemple](/static/images/design/Breadcrumbs/Example.png)
+
+## Quand l'utiliser
+
+- Utilisez le composant Fil d'Ariane pour les pages imbriquées.
+- Il n'est pas nécessaire d'utiliser un fil d'Ariane sur la page d'accueil.
+- Les fils d'Ariane sont généralement placés dans la barre d'actions, tout en haut de la page.
+
+## Structure
+
+![Structure](/static/images/design/Breadcrumbs/Structure.png)
+
+1 - **Page actuelle.**
+
+2 - **Page précédente.** Il est préférable de l'afficher en premier, si la largeur du conteneur le permet.
+
+3 - **Page racine du service.**
+
+4 - **Séparateur.** Le caractère "/" est utilisé par défaut, mais ">" est également acceptable.
+
+5 - **Icône de dépassement.** Apparaît lorsque les titres des pages ne rentrent pas dans la largeur du conteneur. Les pages qui occupent plus d'espace que disponible sont accessibles via un menu déroulant, révélé en cliquant sur les points de suspension.
+
+## Tailles
+
+La taille de police de base dans les fils d'Ariane est `body-1`. La taille de l'icône est de 16x16 px.
+
+![Tailles](/static/images/design/Breadcrumbs/Sizes.png)
+
+## États
+
+![États](/static/images/design/Breadcrumbs/States.png)
+
+**Défaut** - état par défaut.
+
+**Survol** - survol de la souris sur le titre de la page.
+
+**Désactivé** - non cliquable. Peut être utilisé pour la page actuelle ou pour des pages qui ne sont pas liées.
+
+**Chargement** - le composant peut afficher le contenu de l'élément en passant une fonction via le paramètre `renderItemContent`. Par exemple, afficher un `Skeleton` si les données de l'élément du fil d'Ariane n'ont pas encore été chargées.
+
+## Modifications
+
+![Modifications](/static/images/design/Breadcrumbs/Modifications1.png)
+
+Les fils d'Ariane peuvent contenir les éléments supplémentaires suivants :
+
+1. **Icône d'action -** comme ajouter aux favoris, copier le titre de la page, ou menu contextuel.
+2. **[Label](/design/guides/label)** — un statut ou un autre attribut associé à la page.
+3. **Select** — cliquer sur l'élément permet de choisir parmi différentes options.
+4. **Texte supplémentaire** — ID, compteur de quantité, et autres attributs de la page.
+
+Une icône de maison peut être utilisée à la place du mot "Accueil" pour indiquer un retour à la page d'accueil.
+
+![Modifications](/static/images/design/Breadcrumbs/Modifications1.png)
+
+## Personnalisation
+
+Vous pouvez modifier les couleurs, les séparateurs et les styles de survol. N'oubliez pas de conserver une mise en surbrillance plus vive pour la page actuelle et un contraste suffisant entre les éléments.
+
+![Personnalisation](/static/images/design/Breadcrumbs/Customization.png)
