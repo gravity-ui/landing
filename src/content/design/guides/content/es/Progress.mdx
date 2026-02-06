@@ -1,69 +1,70 @@
-Este es un componente para incrustar una barra de gráfico horizontal en varias interfaces. Puede mostrar distribución de datos, participación o progreso.
+Aquí tienes la traducción del archivo fuente de la guía de diseño al español, manteniendo un tono natural y conservando los componentes MDX, bloques de código y términos técnicos:
+
+Este es un componente para incrustar un gráfico de barras horizontal en diversas interfaces. Puede mostrar la distribución de datos, la participación o el progreso.
 
 ## Casos de uso
 
-✅ **Cuándo usar**
-Úselo cuando necesite mostrar el nivel de finalización o llenado de una entidad, como espacio libre en el disco, el número de tareas completadas, etc.
+✅ **Cuándo usarlo**
+Úsalo cuando necesites mostrar el nivel de finalización o llenado de una entidad, como espacio libre en el disco, el número de tareas completadas, etc.
 
-🚫**Cuándo no usar**
-Cuando necesite mostrar un valor único sin comparación. Por ejemplo, puede usar Progress para mostrar 15/60, pero no 15 solo.
+🚫 **Cuándo no usarlo**
+Cuando necesites mostrar un valor único sin comparación. Por ejemplo, puedes usar `Progress` para mostrar 15/60, pero no solo 15.
 
 ## Estructura
 
 ![Estructura](/static/images/design/Progress/progress-0001.png)
 
-1. Color del indicador. Parte requerida
-2. Texto. Usar solo con tamaño M, parte opcional.
-3. Fondo. Parte requerida
+1. Color del indicador. Parte requerida.
+2. Texto. Úsalo solo con tamaño M, parte opcional.
+3. Fondo. Parte requerida.
 
 ## Tamaños
 
 ![Tamaños](/static/images/design/Progress/progress-0002.png)
 
-1. **M** es el único tamaño que tiene texto. Usar en secciones con gran cantidad de espacio, en páginas donde el indicador de progreso es el elemento clave.
-2. **S** se utiliza en tablas, tarjetas y por separado donde el progreso no es el único componente clave en la página
-3. **XS** se utiliza en lugares estrechos, donde necesita mantener su contenido compacto.
+1. **M** es el único tamaño que tiene texto. Úsalo en secciones con mucho espacio, en páginas donde el indicador de progreso sea el elemento clave.
+2. **S** se usa en tablas, tarjetas y por separado, donde el progreso no es el único componente clave en la página.
+3. **XS** se usa en lugares estrechos, donde necesitas mantener tu contenido compacto.
 
 ## Temas
 
 ![Temas](/static/images/design/Progress/progress-0003.png)
 
-**Default** se utiliza con más frecuencia para casos neutrales, cuando no necesita llamar la atención extra sobre el progreso, por ejemplo, cuando la página incluye elementos más importantes
+**Default** se usa con mayor frecuencia para casos neutrales, cuando no necesitas llamar la atención adicional sobre el progreso, por ejemplo, cuando la página incluye elementos más importantes.
 
-**Info** también se utiliza para casos neutrales, donde necesita poner más énfasis en el progreso, o para mostrar que la operación está en curso
+**Info** también se usa para casos neutrales, donde necesitas poner más énfasis en el progreso, o para mostrar que una operación está en curso.
 
-**Success** se utiliza para procesos completados con éxito o para indicar que el sistema está funcionando sin problemas
+**Success** se usa para procesos completados con éxito o para indicar que el sistema está funcionando sin problemas.
 
-**Warning** se utiliza en situaciones inusuales para advertir al usuario sobre algo, por ejemplo, para llamar la atención del usuario sobre un problema inminente.
+**Warning** se usa en situaciones inusuales para advertir al usuario sobre algo, por ejemplo, para llamar la atención del usuario sobre un problema inminente.
 
-**Danger** se utiliza para atraer la máxima atención, cuando ha ocurrido un error y el usuario necesita tomar acciones para resolver el problema: el espacio en disco se ha agotado, el sistema ha fallado, etc.
+**Danger** se usa para atraer la máxima atención, cuando ha ocurrido un error y el usuario necesita tomar medidas para resolver el problema: se ha agotado el espacio en disco, ha fallado el sistema, etc.
 
-**Misc** se utiliza en casos neutrales, cuando no quiere usar Default.
+**Misc** se usa en casos neutrales, cuando no quieres usar `Default`.
 
 ## Alcance
 
-1. **Cambiar el color dependiendo del valor de progreso**. Puede configurar este componente para cambiar de color dependiendo del valor de progreso, por ejemplo, la indicación estándar es azul (info), y 100% es verde (success).
+1. **Cambio de color según el valor del progreso**. Puedes configurar este componente para que cambie de color según el valor del progreso; por ejemplo, la indicación estándar es azul (info), y el 100% es verde (success).
 
    ![Alcance](/static/images/design/Progress/progress-0004.png)
 
-2. **Animación de carga. Úsela** para mostrar el progreso en tiempo real al usuario, por ejemplo, al cargar archivos desde una computadora.
+2. **Animación de carga**. Úsala para mostrar el progreso en tiempo real al usuario, por ejemplo, al subir archivos desde un ordenador.
 
    ![Alcance](/static/images/design/Progress/progress-0005.png)
 
-3. **Colores personalizados.** Puede usar su conjunto de colores Progress cuando todas las demás opciones no encajan: use un color personalizado y combine múltiples colores.
+3. **Colores personalizados**. Puedes usar tu propio conjunto de colores para `Progress` cuando todas las demás opciones no se ajustan: usa un color personalizado y combina varios colores.
 
    ![Alcance](/static/images/design/Progress/progress-0006.png)
 
-
 ## Casos de uso
 
-Puede combinar este componente con texto, incrustarlo en otros componentes, por ejemplo, envolver Progress en una tarjeta o tabla, combinarlo con texto explicativo, acción, etc.
+Puedes combinar este componente con texto, incrustarlo en otros componentes, por ejemplo, envolver `Progress` en una tarjeta o tabla, combinarlo con texto explicativo, acciones, etc.
 
-1. En secciones con carga/descarga de archivos
+1. En secciones con carga/descarga de archivos.
 
    ![Progreso](/static/images/design/Progress/progress-0007.png)
 
-2. En tarjetas, por ejemplo, en una lista de verificación con problemas
+2. En tarjetas, por ejemplo, en una lista de verificación de incidencias.
 
    ![Progreso](/static/images/design/Progress/progress-0008.png)
 

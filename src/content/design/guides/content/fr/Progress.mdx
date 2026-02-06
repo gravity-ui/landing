@@ -1,0 +1,73 @@
+Voici la traduction du fichier source du guide de conception en français, en veillant à ce qu'elle soit aussi naturelle que possible pour des développeurs travaillant avec de la documentation UI/UX. Les balises de composants MDX, les blocs de code et les termes techniques sont conservés.
+
+Ce composant permet d'intégrer un graphique à barres horizontales dans diverses interfaces. Il peut représenter la distribution des données, une part ou une progression.
+
+## Cas d'utilisation
+
+✅ **Quand l'utiliser**
+Utilisez-le lorsque vous devez afficher le niveau d'achèvement ou de remplissage d'une entité, comme l'espace libre sur un disque, le nombre de tâches terminées, etc.
+
+🚫 **Quand ne pas l'utiliser**
+Lorsque vous devez afficher une valeur unique sans comparaison. Par exemple, vous pouvez utiliser `Progress` pour afficher 15/60, mais pas 15 seul.
+
+## Structure
+
+![Structure](/static/images/design/Progress/progress-0001.png)
+
+1. Couleur de l'indicateur. Partie obligatoire.
+2. Texte. À utiliser uniquement avec la taille M, partie optionnelle.
+3. Arrière-plan. Partie obligatoire.
+
+## Tailles
+
+![Tailles](/static/images/design/Progress/progress-0002.png)
+
+1. **M** est la seule taille qui inclut du texte. À utiliser dans les sections disposant de beaucoup d'espace, sur les pages où l'indicateur de progression est l'élément clé.
+2. **S** est utilisé dans les tableaux, les cartes et séparément lorsque la progression n'est pas le seul composant clé de la page.
+3. **XS** est utilisé dans les espaces restreints, lorsque vous avez besoin de maintenir votre contenu compact.
+
+## Thèmes
+
+![Thèmes](/static/images/design/Progress/progress-0003.png)
+
+**Default** est le plus souvent utilisé pour les cas neutres, lorsque vous n'avez pas besoin d'attirer une attention particulière sur la progression, par exemple, lorsque la page contient des éléments plus importants.
+
+**Info** est également utilisé pour les cas neutres, où vous souhaitez mettre davantage l'accent sur la progression, ou pour indiquer qu'une opération est en cours.
+
+**Success** est utilisé pour les processus terminés avec succès ou pour indiquer que le système fonctionne sans problème.
+
+**Warning** est utilisé dans des situations inhabituelles pour avertir l'utilisateur de quelque chose, par exemple, pour attirer l'attention de l'utilisateur sur un problème imminent.
+
+**Danger** est utilisé pour attirer un maximum d'attention, lorsqu'une erreur s'est produite et que l'utilisateur doit prendre des mesures pour résoudre le problème : espace disque épuisé, panne système, etc.
+
+**Misc** est utilisé dans les cas neutres, lorsque vous ne souhaitez pas utiliser `Default`.
+
+## Portée
+
+1. **Changement de couleur en fonction de la valeur de progression**. Vous pouvez configurer ce composant pour qu'il change de couleur en fonction de la valeur de progression. Par exemple, l'indication standard est bleue (info), et 100 % est verte (success).
+
+   ![Portée](/static/images/design/Progress/progress-0004.png)
+
+2. **Animation de chargement**. Utilisez-la pour montrer la progression en temps réel à l'utilisateur, par exemple, lors du téléchargement de fichiers depuis un ordinateur.
+
+   ![Portée](/static/images/design/Progress/progress-0005.png)
+
+3. **Couleurs personnalisées**. Vous pouvez utiliser votre propre ensemble de couleurs pour `Progress` lorsque toutes les autres options ne conviennent pas : utilisez une couleur personnalisée et combinez plusieurs couleurs.
+
+   ![Portée](/static/images/design/Progress/progress-0006.png)
+
+## Cas d'utilisation
+
+Vous pouvez combiner ce composant avec du texte, l'intégrer dans d'autres composants, par exemple, encapsuler `Progress` dans une carte ou un tableau, le combiner avec du texte explicatif, une action, etc.
+
+1. Dans les sections de téléchargement/transfert de fichiers
+
+   ![Progress](/static/images/design/Progress/progress-0007.png)
+
+2. Dans les cartes, par exemple, dans une liste de contrôle des problèmes
+
+   ![Progress](/static/images/design/Progress/progress-0008.png)
+
+3. Dans les tableaux, par exemple, pour afficher l'utilisation du disque.
+
+   ![Progress](/static/images/design/Progress/progress-0009.png)

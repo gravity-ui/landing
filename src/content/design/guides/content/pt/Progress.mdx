@@ -1,0 +1,71 @@
+Este é um componente para incorporar um gráfico de barras horizontal em várias interfaces. Ele pode mostrar distribuição de dados, participação ou progresso.
+
+## Casos de uso
+
+✅ **Quando usar**
+Use-o quando precisar mostrar o nível de conclusão ou preenchimento de uma entidade, como espaço livre em disco, número de tarefas concluídas, etc.
+
+🚫 **Quando não usar**
+Quando precisar mostrar um único valor sem comparação. Por exemplo, você pode usar `Progress` para mostrar 15/60, mas não apenas 15.
+
+## Estrutura
+
+![Estrutura](/static/images/design/Progress/progress-0001.png)
+
+1. Cor do indicador. Parte obrigatória
+2. Texto. Use apenas com tamanho M, parte opcional.
+3. Fundo. Parte obrigatória
+
+## Tamanhos
+
+![Tamanhos](/static/images/design/Progress/progress-0002.png)
+
+1. **M** é o único tamanho que possui texto. Use em seções com grande quantidade de espaço, em páginas onde o indicador de progresso é o elemento principal.
+2. **S** é usado em tabelas, cards e separadamente onde o progresso não é o único componente principal na página.
+3. **XS** é usado em locais estreitos, onde você precisa manter seu conteúdo compacto.
+
+## Temas
+
+![Temas](/static/images/design/Progress/progress-0003.png)
+
+**Default** é mais frequentemente usado para casos neutros, quando você não precisa chamar atenção extra para o progresso, por exemplo, quando a página inclui elementos mais importantes.
+
+**Info** também é usado para casos neutros, onde você precisa dar mais ênfase ao progresso, ou para mostrar que a operação está em andamento.
+
+**Success** é usado para processos concluídos com sucesso ou para indicar que o sistema está funcionando sem problemas.
+
+**Warning** é usado em situações incomuns para alertar o usuário sobre algo, por exemplo, para chamar a atenção do usuário para um problema iminente.
+
+**Danger** é usado para atrair atenção máxima, quando ocorreu um erro e o usuário precisa tomar medidas para resolver o problema: espaço em disco esgotado, falha do sistema, etc.
+
+**Misc** é usado em casos neutros, quando você não quer usar `Default`.
+
+## Escopo
+
+1. **Alterando a cor dependendo do valor do progresso**. Você pode configurar este componente para mudar de cor dependendo do valor do progresso, por exemplo, a indicação padrão é azul (info), e 100% é verde (success).
+
+   ![Escopo](/static/images/design/Progress/progress-0004.png)
+
+2. **Animação de carregamento. Use-a** para mostrar o progresso em tempo real ao usuário, por exemplo, ao fazer upload de arquivos do computador.
+
+   ![Escopo](/static/images/design/Progress/progress-0005.png)
+
+3. **Cores personalizadas.** Você pode usar seu conjunto de cores `Progress` quando todas as outras opções não se encaixam: use uma cor personalizada e combine várias cores.
+
+   ![Escopo](/static/images/design/Progress/progress-0006.png)
+
+## Casos de uso
+
+Você pode combinar este componente com texto, incorporá-lo em outros componentes, por exemplo, envolver `Progress` em um card ou tabela, combiná-lo com texto explicativo, ação, etc.
+
+1. Em seções com upload/download de arquivos
+
+   ![Progress](/static/images/design/Progress/progress-0007.png)
+
+2. Em cards, por exemplo, em uma lista de verificação com problemas
+
+   ![Progress](/static/images/design/Progress/progress-0008.png)
+
+3. Em tabelas, por exemplo, para mostrar o uso do disco.
+
+   ![Progress](/static/images/design/Progress/progress-0009.png)
