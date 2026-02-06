@@ -9,13 +9,13 @@ Este componente permite a los usuarios navegar por el contenido mostrado página
 - En todos los casos con visualización paginada.
 - Para permitir al usuario saltar varias páginas o ir directamente a la página deseada.
 - Para permitir al usuario personalizar el número de filas mostradas.
-- Para fijar el tamaño de las secciones dentro de una página de modo que la carga automática de contenido en la parte superior no desplace el contenido inferior.
+- Para fijar el tamaño de las secciones dentro de una página, de modo que la carga automática de contenido en la parte superior no desplace el contenido inferior.
 
 ![3.png](/static/images/design/Pagination/paginator-0002.png)
 
 🚫 **Cuándo evitar**
 
-Cuando necesite una transición fluida entre páginas de resultados de búsqueda, use carga automática o carga mediante un botón, a menos que esto ralentice la página.
+Cuando necesites una transición fluida entre las páginas de resultados de búsqueda, utiliza la carga automática o la carga mediante un botón, a menos que esto ralentice la página.
 
 <div className="row">
    <div className="col-12 col-md-6">
@@ -33,18 +33,18 @@ Cuando necesite una transición fluida entre páginas de resultados de búsqueda
 1. **Página actual.** Muestra el número de serie de la página mostrada.
 2. **Página anterior.** Abre la página anterior.
 3. **Página siguiente.** Abre la página siguiente.
-4. **Última página de contenido.** Aparece si se conoce el contenido total y puede dividirse en páginas de inmediato. Abre la última página con un clic.
-5. **Icono de desbordamiento.** Aparece si el número de páginas excede cuatro.
-6. **Interruptores adelante/atrás.** Cambian las páginas una por una.
+4. **Última página de contenido.** Aparece si el contenido total se conoce y se puede dividir en páginas de inmediato. Abre la última página al hacer clic.
+5. **Icono de desbordamiento.** Aparece si el número de páginas supera cuatro.
+6. **Interruptores de avance/retroceso.** Cambian las páginas una por una.
 7. **Ir a la primera página.** Abre la primera página de contenido.
-8. **Ir a una página específica.** Abre la página especificada cuando el usuario ingresa el número de página y presiona Enter.
+8. **Ir a una página específica.** Abre la página especificada cuando el usuario introduce el número de página y pulsa Intro.
 9. **Número de elementos por página.** Un interruptor para el número de elementos mostrados en una página.
 
-No tiene que usar todos los elementos de la estructura juntos. Puede encontrar las configuraciones disponibles en "Modificaciones".
+No tienes que usar todos los elementos de la estructura juntos. Puedes encontrar las configuraciones disponibles en "Modificaciones".
 
 ## Tamaños
 
-Por defecto, el tamaño de los botones, input y select en el paginador es M.
+Por defecto, el tamaño de los botones, la entrada y la selección en el paginador es M.
 
 ![Frame 2087326211.png](/static/images/design/Pagination/paginator-0006.png)
 
@@ -54,7 +54,7 @@ Por defecto, el tamaño de los botones, input y select en el paginador es M.
 
 **Primera página** muestra la primera página.
 
-**Segunda/siguiente página** muestra la segunda y siguientes páginas.
+**Segunda/siguiente página** muestra la segunda y las siguientes páginas.
 
 **Última página** muestra la última página.
 
@@ -62,11 +62,11 @@ Por defecto, el tamaño de los botones, input y select en el paginador es M.
 
 ![IMG - 20.png](/static/images/design/Pagination/paginator-0008.png)
 
-1. **Opciones de tamaño de página y mostrar input**: Puede deshabilitar estos campos si el usuario no puede ir a una página específica o controlar la cantidad de contenido mostrado en la página.
-2. **Total desconocido** solo muestra la página actual. Use cuando se desconoce el número total de elementos
-3. **Ocultar páginas** asegura el cambio de página sin números de serie. Use cuando la lista de elementos es dinámica y el número de páginas, así como el número de serie, cambiará constantemente y confundirá al usuario.
-4. **Compacto** es un formato compacto sin texto. Use cuando el espacio de la interfaz es limitado (por ejemplo, en cuadros de diálogo)
+1. **Opciones de tamaño de página y Mostrar entrada**: Puedes deshabilitar estos campos si el usuario no puede ir a una página específica o controlar la cantidad de contenido mostrado en la página.
+2. **Total desconocido** solo muestra la página actual. Úsalo cuando el número total de elementos sea desconocido.
+3. **Ocultar páginas** asegura el cambio de página sin números de serie. Úsalo cuando la lista de elementos sea dinámica y el número de páginas, así como el número de serie, cambien constantemente y confundan al usuario.
+4. **Compacto** es un formato compacto sin texto. Úsalo cuando el espacio de la interfaz sea limitado (por ejemplo, en cuadros de diálogo).
 
-Para interfaces de dispositivos móviles, puede usar la versión móvil del paginador.
+Para interfaces de dispositivos móviles, puedes usar la versión móvil del paginador.
 
 ![IMG - 23.png](/static/images/design/Pagination/paginator-0009.png)
