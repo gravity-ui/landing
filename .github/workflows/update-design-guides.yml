@@ -11,7 +11,7 @@ on:
 permissions: write-all
 
 env:
-  LANGUAGES: 'ru ko es de zh fr pt ja' # Supported languages separated by space (spaces are important)
+  LANGUAGES: 'ko es de zh fr pt ja' # Supported languages separated by space (spaces are important)
   SOURCE_LANG: 'en'
 
 jobs:
