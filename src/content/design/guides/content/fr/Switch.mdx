@@ -1,0 +1,42 @@
+Voici la traduction du fichier source du guide de conception en français :
+
+## Description
+
+Ce composant est un contrôle interactif qui peut basculer entre deux états : activé (on) et désactivé (off). Il est utilisé pour activer ou désactiver certaines fonctionnalités, options ou paramètres.
+
+![Description](/static/images/design/Switch/description.png)
+
+## Dimensions
+
+Le Switch existe en deux tailles principales :
+
+![Tailles](/static/images/design/Switch/Sizes.png)
+
+- **M (Medium)** : Pour les cas d'utilisation standard. Il offre à la plupart des utilisateurs une expérience visuelle intuitive.
+- **L (Large)** : Utilisé lorsque l'élément doit être mis en évidence ou lorsqu'une taille de police plus grande est préférable.
+
+## États
+
+Le Switch possède quatre états principaux :
+
+![États](/static/images/design/Switch/States.png)
+
+1. **Off** : un état inactif dans lequel l'option ou la fonctionnalité est désactivée.
+2. **On** : un état actif dans lequel l'option ou la fonctionnalité est activée.
+3. **Hover** : lorsque l'utilisateur survole l'élément, celui-ci réagit visuellement pour indiquer qu'il peut être interagi.
+4. **Disabled** : un état dans lequel l'élément est inactif et ne peut pas être interagi.
+
+## Propriétés
+
+Le composant peut activer/désactiver le label. Le label est désactivé par défaut, mais il peut être activé en utilisant la propriété "Label".
+
+Gardez à l'esprit que si la taille de l'élément est modifiée, la taille du label sera ajustée en conséquence :
+
+![Labels](/static/images/design/Switch/Labels.png)
+
+- 13px est la taille de police pour les labels de taille M
+- 15px est la taille de police pour les labels de taille L
+
+## Guide utilisateur
+
+Afin de maintenir la cohésion visuelle et la cohérence de l'interface, utilisez un switch si son activation/désactivation entraîne des changements immédiats dans certaines options ou dans l'état général de la page. Nous déconseillons l'utilisation conjointe du switch et d'un bouton de confirmation d'action. Dans ces situations, il est préférable d'utiliser une checkbox.

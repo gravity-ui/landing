@@ -1,0 +1,40 @@
+## Descrição
+
+Este componente é um controle interativo que pode alternar entre dois estados: ativado (ligado) e desativado (desligado). Ele é usado para habilitar ou desabilitar determinados recursos, opções ou configurações.
+
+![Descrição](/static/images/design/Switch/description.png)
+
+## Dimensões
+
+O Switch possui dois tamanhos principais:
+
+![Tamanhos](/static/images/design/Switch/Sizes.png)
+
+- **M (Médio)**: Para casos de uso padrão. Oferece à maioria dos usuários uma experiência visual intuitiva.
+- **L (Grande)**: Usado quando o elemento precisa ser destacado ou quando um tamanho de fonte maior é preferível.
+
+## Estados
+
+O Switch possui quatro estados principais:
+
+![Estados](/static/images/design/Switch/States.png)
+
+1. **Desligado**: um estado inativo em que a opção ou recurso está desabilitado.
+2. **Ligado**: um estado ativo em que a opção ou recurso está habilitado.
+3. **Hover**: quando um usuário passa o mouse sobre o elemento, ele responde visualmente para indicar que pode ser interagido.
+4. **Desabilitado**: um estado em que o elemento está inativo e não pode ser interagido.
+
+## Propriedades
+
+O componente pode habilitar/desabilitar o rótulo. O rótulo está desabilitado por padrão, mas pode ser habilitado usando a propriedade "Label".
+
+Lembre-se que se o elemento for redimensionado, o tamanho do rótulo será ajustado de acordo:
+
+![Rótulos](/static/images/design/Switch/Labels.png)
+
+- 13px é o tamanho da fonte para rótulos de tamanho M
+- 15px é o tamanho da fonte para rótulos de tamanho L
+
+## Guia do usuário
+
+Para manter a coesão visual e a consistência da interface, use um switch se ligá-lo/desligá-lo causar mudanças imediatas em certas opções ou no estado geral da página. Não recomendamos o uso do switch e do botão de confirmação de ação juntos. Nessas situações, é melhor usar um checkbox.
