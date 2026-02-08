@@ -5,6 +5,7 @@ import {Component, Lib} from '../types';
 
 import {accordionConfig} from './Accordion';
 import {actionTooltipConfig} from './ActionTooltip';
+import {actionsPanelConfig} from './ActionsPanel';
 import {alertConfig} from './Alert';
 import {arrowToggleConfig} from './ArrowToggle';
 import {avatarConfig} from './Avatar';
@@ -117,6 +118,7 @@ const uikitComponents: Component[] = [
     helpMarkConfig,
     hotkeyConfig,
     filePreviewConfig,
+    actionsPanelConfig,
 ];
 
 export const uikit: Lib = {
