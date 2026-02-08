@@ -1,7 +1,7 @@
 import {ActionsPanel, ActionsPanelProps} from '@gravity-ui/uikit';
 import React from 'react';
 
-type Props = {
+type ActionsPanelComponentProps = {
     withNote?: boolean;
     withClose?: boolean;
 };
@@ -38,7 +38,7 @@ export const actions: ActionsPanelProps['actions'] = [
         },
     },
 ];
-export function ActionsPanelComponent(props: Props) {
+export function ActionsPanelComponent(props: ActionsPanelComponentProps) {
     const {withNote, withClose} = props;
 
     return (
