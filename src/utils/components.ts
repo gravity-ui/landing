@@ -31,6 +31,23 @@ export function getRouteFromReadmeUrl(readmeUrl: string) {
     }`;
 }
 
+const REPO_BASE_REGEX = /^(https:\/\/raw\.githubusercontent\.com\/([^/]+\/[^/]+)\/([^/]+))/;
+
+export function resolveRepoAbsoluteLink(
+    link: string,
+    contentReadmeUrl: string,
+): string | undefined {
+    const repoBaseMatch = contentReadmeUrl.match(REPO_BASE_REGEX);
+    if (!repoBaseMatch) {
+        return undefined;
+    }
+
+    const [, repoBaseUrl, githubId, branch] = repoBaseMatch;
+    const fullUrl = repoBaseUrl + link;
+
+    return getRouteFromReadmeUrl(fullUrl) ?? `https://github.com/${githubId}/tree/${branch}${link}`;
+}
+
 function toKebabCase(input?: string) {
     if (!input) {
         return input;
