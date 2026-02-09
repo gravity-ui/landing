@@ -9,7 +9,7 @@ import {Contributor} from '../../api';
 import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {Component as ComponentType} from '../../content/components/types';
-import {block, getRouteFromReadmeUrl} from '../../utils';
+import {block, getRouteFromReadmeUrl, resolveRepoAbsoluteLink} from '../../utils';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
@@ -130,6 +130,13 @@ export const Component: React.FC<ComponentProps> = ({
 
             if (url.origin !== readmeUrl.origin) {
                 return link;
+            }
+
+            if (link.startsWith('/src/')) {
+                const resolved = resolveRepoAbsoluteLink(link, contentReadmeUrl);
+                if (resolved) {
+                    return resolved;
+                }
             }
 
             const newLink = getRouteFromReadmeUrl(url.toString());

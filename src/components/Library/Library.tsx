@@ -119,13 +119,13 @@ export const Library: React.FC<Props> = ({lib}) => {
                 return link;
             }
 
-            const githubRepoUrl = `${GITHUB_URL}${githubId}/blob/main/${
-                link && link.startsWith('/') ? link.slice(1) : link
-            }`;
+            const githubRepoUrl = `${GITHUB_URL}${githubId}/blob/${
+                lib.config.mainBranch || 'main'
+            }/${link && link.startsWith('/') ? link.slice(1) : link}`;
 
             return githubRepoUrl;
         },
-        [lib.config?.githubId],
+        [lib.config?.githubId, lib.config.mainBranch],
     );
 
     const readmeContent = lib.data.readme[locale] || lib.data.readme.en;
