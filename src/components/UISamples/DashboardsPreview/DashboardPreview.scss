@@ -14,5 +14,13 @@ $block: '.#{variables.$ns}dashboards-preview';
 
     &__dashboard-wrapper {
         height: 230px;
+
+        &_s {
+            width: 280px;
+        }
+
+        &_m {
+            width: 450px;
+        }
     }
 }

@@ -54,7 +54,7 @@ export const DashboardPreview = () => {
                             (data, index) => (
                                 <Col s="12" m="6" l="4" key={index}>
                                     <StyledCard key={index}>
-                                        <div className={b('dashboard-wrapper')}>
+                                        <div className={b('dashboard-wrapper', {s: true})}>
                                             <ChartKit type="gravity-charts" data={data} />
                                         </div>
                                     </StyledCard>
@@ -66,7 +66,7 @@ export const DashboardPreview = () => {
                         {[pieDashboardData, dotsDashboardData].map((data, index) => (
                             <Col s="12" m="6" key={index}>
                                 <StyledCard key={index}>
-                                    <div className={b('dashboard-wrapper')}>
+                                    <div className={b('dashboard-wrapper', {m: true})}>
                                         <ChartKit type="gravity-charts" data={data} />
                                     </div>
                                 </StyledCard>
