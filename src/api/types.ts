@@ -66,7 +66,6 @@ export type GithubInfo = {
     codeOwners: CodeOwners[];
 };
 
-<<<<<<< HEAD
 export type CacheTTL = {
     milliseconds?: number;
     seconds?: number;
@@ -76,7 +75,6 @@ export type CacheTTL = {
 };
 
 export type CacheQueryState = 'initial' | 'fresh' | 'stale' | 'fetching' | 'error';
-=======
 // Blog types
 export type BlogTag = {
     id: number;
@@ -212,4 +210,3 @@ export type BlogPostsQuery = {
     tags?: string[];
     services?: string[];
 };
->>>>>>> f9633a5d6f (feat: install next alpha PC and refactor code structure after rebase)

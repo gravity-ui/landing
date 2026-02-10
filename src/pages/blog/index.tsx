@@ -261,9 +261,6 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
         });
     }, [locale, handleGetPosts, postsData.count]);
 
-    // Blog constructor settings
-    const BLOG_CONSTRUCTOR_SETTINGS = {};
-
     return (
         <Layout
             title={t('meta_title')}
@@ -279,7 +276,6 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
                     theme={Theme.Dark}
                     router={routerData}
                     locale={localeValue as unknown as Locale}
-                    settings={BLOG_CONSTRUCTOR_SETTINGS}
                 >
                     <BlogPage
                         key={postsKey}

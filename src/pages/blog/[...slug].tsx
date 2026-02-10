@@ -129,12 +129,6 @@ export default function BlogPostPage({
         items: breadcrumbItems,
     };
 
-    // Blog constructor settings
-    const BLOG_CONSTRUCTOR_SETTINGS = {
-        // TODO: Add custom extra info items if needed (e.g., AudioButton)
-        // extraInfoItems: [AudioButton]
-    };
-
     // TODO: Implement analytics when needed
     const analytics = undefined;
 
@@ -181,7 +175,6 @@ export default function BlogPostPage({
                     router={routerData}
                     locale={localeValue as unknown as Locale}
                     analytics={analytics}
-                    settings={BLOG_CONSTRUCTOR_SETTINGS}
                 >
                     <ConstructorBlogPostPage
                         content={pageContent}

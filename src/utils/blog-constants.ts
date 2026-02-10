@@ -6,49 +6,49 @@ export type LocaleConfig = {
 };
 
 export const localeEn: LocaleConfig = {
-    code: 'en-En',
+    code: 'en-US',
     lang: 'en',
     langName: 'English',
     pathPrefix: 'en',
 };
 
 export const localeRu: LocaleConfig = {
-    code: 'ru-Ru',
+    code: 'ru-RU',
     lang: 'ru',
     langName: 'Russia',
     pathPrefix: 'ru',
 };
 
 export const localeDe: LocaleConfig = {
-    code: 'de-De',
+    code: 'de-DE',
     lang: 'de',
     langName: 'Deutsch',
     pathPrefix: 'de',
 };
 
 export const localeEs: LocaleConfig = {
-    code: 'es-Es',
+    code: 'es-ES',
     lang: 'es',
     langName: 'Español',
     pathPrefix: 'es',
 };
 
 export const localeFr: LocaleConfig = {
-    code: 'fr-Fr',
+    code: 'fr-FR',
     lang: 'fr',
     langName: 'Français',
     pathPrefix: 'fr',
 };
 
 export const localeKo: LocaleConfig = {
-    code: 'ko-Ko',
+    code: 'ko-KR',
     lang: 'ko',
     langName: '한국어',
     pathPrefix: 'ko',
 };
 
 export const localeZh: LocaleConfig = {
-    code: 'zh-Zh',
+    code: 'zh-CN',
     lang: 'zh',
     langName: '中文',
     pathPrefix: 'zh',
