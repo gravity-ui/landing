@@ -45,25 +45,57 @@ export const LocalePicker: React.FC = () => {
         return null;
     }
 
+    const availableLocales = i18nextConfig.i18n.locales;
+
+    const handleLocaleChange = React.useCallback(
+        (locale: string) => {
+            if (appLocale === locale) {
+                return;
+            }
+
+            setCookie({name: NEXT_LOCALE_COOKIE, value: locale});
+
+            // Get the current path without locale prefix
+            let pathWithoutLocale = router.asPath;
+
+            // Remove locale prefix if it exists
+            const currentLocalePrefix = `/${appLocale}`;
+            if (pathWithoutLocale.startsWith(currentLocalePrefix)) {
+                pathWithoutLocale = pathWithoutLocale.slice(currentLocalePrefix.length);
+            }
+
+            // Ensure path starts with /
+            if (!pathWithoutLocale.startsWith('/')) {
+                pathWithoutLocale = `/${pathWithoutLocale}`;
+            }
+
+            // Build new path with new locale (preserve query and hash)
+            const newPath =
+                locale === i18nextConfig.i18n.defaultLocale
+                    ? pathWithoutLocale
+                    : `/${locale}${pathWithoutLocale}`;
+
+            // For pages with getServerSideProps, we need to do a full page reload
+            // to ensure server-side props are fetched with the new locale
+            // Using window.location ensures getServerSideProps is called
+            window.location.href = newPath;
+        },
+        [appLocale, router.asPath],
+    );
+
     return (
         <div className={b()}>
             <Select
                 size="xl"
                 width="max"
                 value={[appLocale]}
-                options={i18nextConfig.i18n.locales.map((locale) => ({
+                options={availableLocales.map((locale) => ({
                     value: locale,
                 }))}
                 renderOption={renderOption}
                 renderSelectedOption={renderOption}
                 onUpdate={([locale]) => {
-                    if (appLocale === locale) {
-                        return;
-                    }
-
-                    setCookie({name: NEXT_LOCALE_COOKIE, value: locale});
-
-                    router.push(router.pathname, router.asPath, {locale});
+                    handleLocaleChange(locale);
                 }}
             />
         </div>

@@ -1,4 +1,4 @@
-import {AnimateBlock, HTML} from '@gravity-ui/page-constructor';
+import {AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button} from '@gravity-ui/uikit';
 import React from 'react';
 import {LazyExpandableContributorsList} from 'src/components/ExpandableContributorList';
@@ -17,7 +17,11 @@ export const ContributorsBlock: React.FC<ContributorsProps> = ({animated, title,
         <AnimateBlock className={b()} animate={animated}>
             <div className={b('header-wrapper')}>
                 <h2 className={b('header-title')}>
-                    <HTML>{title}</HTML>
+                    <YFMWrapper
+                        content={title}
+                        modifiers={{constructor: true}}
+                        contentClassName={b('header-title-content')}
+                    />
                 </h2>
                 <div className={b('header-count')}>{contributorsCount}</div>
                 <div>

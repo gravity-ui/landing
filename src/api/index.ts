@@ -8,6 +8,15 @@ export type {
     LibWithFullData,
     NpmInfo,
     GithubInfo,
+    BlogTag,
+    BlogService,
+    BlogAuthor,
+    BlogPostListItem,
+    BlogPost,
+    BlogPostsResponse,
+    BlogPageContent,
+    BlogPage,
+    BlogPostsQuery,
 } from './types';
 
 export {ServerApi} from './server';

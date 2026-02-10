@@ -1,0 +1,24 @@
+{
+    "id": 36,
+    "name": "graph",
+    "isPinned": false,
+    "postId": 36,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 17,
+    "title": "Graph-Visualisierungsbibliothek: Wie wir das Canvas vs. HTML-Dilemma gelöst haben",
+    "date": "2025-08-07T00:00:00Z",
+    "likes": 0,
+    "hasUserLike": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "Artikel"
+      }
+    ],
+    "authors": [],
+    "services": []
+  }
+  

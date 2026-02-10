@@ -1,0 +1,73 @@
+{
+  "id": 70,
+  "name": "blog/gravity-ui-in-opensource",
+  "createdAt": "2026-01-15T11:59:09.523Z",
+  "updatedAt": "2026-01-15T11:59:09.523Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 70,
+  "regionCode": "en",
+  "publishedVersionId": 201,
+  "lastVersionId": 201,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: https://storage.yandexcloud.net/yandex-opensource/blog-cover-bg.png\n        disableCompress: true\n      color: ''\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-author-block\n        column: right\n        resetPaddings: true\n        authorId: 1069\n      - type: blog-yfm-block\n        column: right\n        resetPaddings: true\n        text: \"\\n本文内容：\\n\\n  - [Gravity\\_UI 的特点是什么](#peculiarities)\\n  - [如何使用 Gravity\\_UI 进行开发](#work)\\n  - [如何开始使用 Gravity\\_UI](#use)\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n大家好，我是 Alexey Sizikov，Yandex Cloud 的用户体验（User Experience）部门负责人。在这篇文章中我想分享一个消息：我们已将我们的设计系统与组件库 [Gravity\\_UI](https://github.com/gravity-ui){target=\\\"_blank\\\"} 开源发布。\\n\\n借助 Gravity\\_UI 组件库，你可以构建现代化的界面。它包含：\\n\\n  * 一套基础 React 组件；\\n  * 用于落地页（Landing Page）的搭建器库；\\n  * 组件使用的[详细指南](https://gravity-ui.com/design){target=\\\"_blank\\\"}；\\n  * [Figma](https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)){target=\\\"_blank\\\"} 资源库；\\n  * 一套现成图标，总计接近 600 种变体；\\n  * ChartKit —— 数据可视化包；\\n  * Yagr —— 基于 uPlot 的高性能图表渲染器；\\n  * I18n —— 界面本地化包；\\n  * 以及另外超过 [25 个实用库](https://gravity-ui.com/libraries){target=\\\"_blank\\\"}。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic0.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n下方折叠内容将介绍：我们为什么做 Gravity\\_UI、如何使用它、我们的做法有哪些特点与优势，以及未来的演进计划。另外还会讲：如何在项目中配置不同的配色方案，以及为什么我们不是两套常见主题，而是四套主题。\\n\\n{% cut \\\"我们为什么做 Gravity\\_UI\\\" %}\\n\\n最初，UIKit 组件库是一个内部产品，用来加速团队工作。随着新服务数量不断增长，我们设定了目标：在我们的产品中构建统一的 UX。我们非常重视在各个服务中使用一致的用户行为模式，让用户把整个平台感知为一个整体。\\n\\n设计团队的另一个目标是打造工具，使开发者在不需要设计师参与的情况下也能做出新服务。\\n\\n不久前，使用我们设计系统的平台与服务开始逐步开源：[YTsaurus](https://ytsaurus.tech/){target=\\\"_blank\\\"}、[YDB](https://ydb.tech/){target=\\\"_blank\\\"}、[DataLens](https://datalens.tech/){target=\\\"_blank\\\"}、[Diplodoc](https://diplodoc.com/){target=\\\"_blank\\\"}。许多用户对它们评价积极，并与开发者一起帮助改进代码。受到他们的启发，我们也决定将 Gravity\\_UI 公开发布，因为我们看到这套库不仅在 Yandex 内部，对更多服务也会很有价值。\\n\\n{% endcut %}\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## Gravity\\_UI 的特点是什么{#peculiarities}\\n\\n### 基于真实经验\\n\\n我们设计系统的一个显著特点是：它基于用户需求不断演进，而我们的用户大多是开发者。更重要的是，设计师与他们所负责的产品紧密相连。每位设计师都会覆盖若干个具有不同使用场景的服务。某个方案在他们的服务中完成验证后，产品设计师会将其推广到其他服务，以确认它确实可用并能帮助开发者。\\n\\n例如，侧边导航组件最初只有 Logo 和菜单项。后来为了方便，我们加入了包含“所有服务”和搜索的条目。当某个服务需要直接在侧边菜单中创建新实体时，我们新增了一个带“+”的独立按钮。再后来，为了适配菜单项很多的复杂服务，又增加了带分隔符的菜单分区，以及“其他项”按钮。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        paddingBottom: s\n        text: >-\n          导航组件——既可配置为简单版本，也可配置为功能最丰富的版本\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic1.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n### 灵活的可变性\\n\\nGravity\\_UI 的许多组件都可以根据不同场景进行配置。例如，[pagination](https://gravity-ui.com/components/uikit/pagination){target=\\\"_blank\\\"} 组件就有多种显示方式：显示总页数、使用完整的按钮文字、支持跳转到指定页面、支持修改每页条目数——这类配置适用于页数较多的情况。如果你的场景中结果不多，可以启用紧凑模式，甚至隐藏数字只显示箭头。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        paddingBottom: s\n        text: 不同分页样式的示例\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic2.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n### 广泛的适用范围\\n\\n使用 Gravity\\_UI，你既可以做一个简单的后台管理界面，也可以做一个包含图表的复杂仪表盘。下面是一些可以用我们设计系统搭建的示例：\\n\\n  * 落地页，\\n  * 管理后台，\\n  * 仪表盘，\\n  * 图表，\\n  * CRM，\\n  * 分析服务。\\n\\n例如，我们的同事做了这样的仪表盘：\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: \"使用 Gravity\\_UI 可以制作的仪表盘示例\"\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic3.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n也可以做一个简单的落地页。例如，展示我们开源项目的[网站](https://opensource.yandex/){target=\\\"_blank\\\"}就是基于 Gravity\\_UI 组件构建的。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        paddingBottom: s\n        text: >-\n          这也是一个可用我们的设计系统制作的网站示例\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic4.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ### 超过 150 位贡献者\n\n\n          我们的生态系统持续发展并不断改进。除了来自开发者社区的反馈之外，我们还会收到来自 100 多个已在使用我们设计系统的服务的建议。\n\n\n          举个例子：一开始我们只有两套主题——深色和浅色。但我们开始收到一些团队的反馈：他们会把界面投到电视上用来查看图表，或在站会期间展示。问题在于，电视上界面显示不够清晰。类似问题也会发生在使用老旧或质量较差显示器的用户身上。\n\n\n          最终我们为每个主题都开发了“增强对比度”版本。它会提高深色与浅色，以及语义色的亮度。这通过 CSS 样式进行配置，并在用户设置中进行控制。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: \"Yandex Tracker 界面示例（同样基于 Gravity\\_UI 组件），支持开启增强对比度\"\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic5.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          顺便说一句，现在你也可以参与贡献：欢迎在 GitHub 提交 PR，或在 Figma 中留下评论。\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## 如何使用 Gravity\\_UI 进行开发{#work}\\n\\n### 将界面适配你的品牌\\n\\n接下来我会介绍 Gravity\\_UI 还能做什么。先从“将设计系统适配你的品牌”说起。例如，当 YDB 开源时，我们面临的任务是：既要保留统一的设计系统，又要让不同品牌呈现出各自的独特性。为此我们创建了一组独立的 CSS 变量，包含品牌色、字体以及圆角半径。代码看起来像这样一个小块：\\n\\n```json          \\n.g-root {\\n    --g-font-family-sans: 'Inter', sans-serif;\\n\\n    --g-text-header-font-weight: 600;\\n    --g-text-subheader-font-weight: 600;\\n    --g-text-display-font-weight: 600;\\n    --g-text-accent-font-weight: 600;\\n\\n    --g-color-base-brand: rgb(117, 155, 255);\\n    --g-color-base-brand-hover: rgb(99, 143, 255);\\n    --g-color-base-selection: rgba(82, 130, 255, 0.05);\\n    --g-color-base-selection-hover: rgba(82, 130, 255, 0.1);\\n    --g-color-line-brand: rgb(117, 155, 255);\\n    --g-color-text-brand: rgb(117, 155, 255);\\n    --g-color-text-brand-contrast: rgb(255, 255 ,255);\\n    --g-color-text-link: rgb(117, 155, 255);\\n    --g-color-text-link-hover: rgb(82, 130, 255);\\n\\n    --g-border-radius-xs: 3px;\\n    --g-border-radius-s: 5px;\\n    --g-border-radius-m: 6px;\\n    --g-border-radius-l: 8px;\\n    --g-border-radius-xl: 10px;\\n    --g-border-radius-2xl: 16px;\\n}\\n```\\n\\n在这组变量里你可以替换字体、强调按钮颜色、圆角等。这样就能在保持品牌风格的同时，用同一个设计系统服务多个品牌。如果这种方式不适合你，也可以创建自己的配色方案。详细说明见[文档](https://preview.gravity-ui.com/uikit/?path=/docs/branding-overview--docs#additional-customization){target=\\\"_blank\\\"}。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: 不同品牌变量下的界面示例\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic6.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          值得注意的是，修改品牌色不会影响主要界面。这一点对使用语义色的元素尤其重要：例如红色仍然表示错误，绿色仍然表示成功。\n\n\n          ### Figma 中的组件\n\n\n          为了方便工作，我们的设计团队已将组件的所有状态准备好并上传到\n          [Figma](https://www.figma.com/community/file/1271150067798118027){target=\"_blank\"}。\n          如有需要，你可以复制这套库，并直接在工具里尝试搭建界面。\n\n\n          在最近一次更新后，库中不再重复放置全部四套主题。\n          默认在浅色主题下工作，但你可以在 Layer（图层）面板中将任意元素或整页切换到其他主题。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: 如何在不同主题下查看元素\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic7.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          库中的所有元素都展示在 Overview 页面上。\n          在这里你可以找到所需组件，并跳转到包含该元素所有状态的页面。\n          另外，每个组件还提供使用示例。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        paddingBottom: s\n        text: \"包含 Gravity\\_UI 全部元素的页面\"\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic8.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ### 近 600 个图标\n\n          图标是设计与可用性中不可或缺的元素。\n          它们帮助组织和结构化内容、突出重点，并提升信息的可读性。\n          乍一看，做一套图标包似乎并不难。\n          但当我们需要为复杂隐喻（如虚拟机、数据库、不同类型的图表）制作图标时，遇到了不小挑战。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: 目前我们有 594 个图标，但很快会更多\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic9.png\n        fullscreen: true\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: >-\n          另一个特别的任务是为图形化内容编辑器（WYSIWYG）开发图标。\n          该编辑器会被集成到不同位置，用于文本格式化\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic10.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          为了让图标搜索更方便，我们使用了特殊的命名系统。\n          现在同一个图标可以通过不同名称找到。\n          例如，要找到带箭头的图标，你可以输入任意一个词：arrow、enter、move、login。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        paddingBottom: s\n        text: >-\n          所有图标都在[单独页面](https://gravity-ui.com/icons)提供。\n          你可以复制 SVG 或下载任意图标\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic11.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ### 指南\n\n\n          正如我在上文提到的，我们的目标是让开发者能够依据指南中对组件的描述，轻松创建典型界面。\n          我们希望这个过程尽量简单，不必为每一个元素都去找设计师。\n          目前我们已经有 5 个内部服务案例：完全由开发者仅凭指南创建。\n\n\n          当然，仅靠开发者之力无法解决所有问题：无论如何，总会有需要 UX/UI 专家关注的复杂场景。\n          即便如此，我们也成功为设计师减轻了很大一部分负担。\n\n\n          在指南中，设计团队对组件进行了说明，并给出了使用建议，同时展示了正确与错误做法的示例。\n          你可以在[这个页面](https://gravity-ui.com/components/uikit/alert){target=\"_blank\"}查看。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/pic12.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## 如何开始使用 Gravity\\_UI{#use}\\n\\n你只需要在控制台输入命令：\\n\\n```\\ngit clone git@github.com:gravity-ui/uikit-example-cra.git my-project && cd my-project\\nnpm i \\nnpm run start\\n```\\n\\n更详细的说明在 [GitHub](https://github.com/gravity-ui/uikit){target=\\\"_blank\\\"} 仓库首页。\\n\\n你可以在 [UIkit](https://preview.gravity-ui.com/uikit/){target=\\\"_blank\\\"} 查看 Gravity\\_UI 的全部组件，并在 [Libraries](https://gravity-ui.com/libraries){target=\\\"_blank\\\"} 中选择并接入满足你需求的库。\\n\\n--------\\n\\n最后再总结一下：Gravity\\_UI 是一个从真实用户经验、开发者需求与设计师专业能力中成长起来的设计系统，因此它更实用、更高效。现在任何人都可以免费使用它。\\n\\n我们希望在用户需求与反馈的基础上，把项目做得更好。欢迎来 GitHub 提交 PR，在 Figma 留下评论，并分享你的使用案例。\\n\"\n  - type: blog-layout-block\n    resetPaddings: true\n    fullWidth: false\n    children:\n      - type: blog-meta-block\n        column: left\n        resetPaddings: true\n  - type: blog-suggest-block\n    resetPaddings: true\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": null,
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "auto",
+  "sharingTheme": "light",
+  "comment": "translation",
+  "shareImageUrl": "https://storage.cloud-preprod.yandex.net/ui-api-ru-preprod-stable-share-generator-screenshots/cache/6a79bcd295f4b97553c519c462935cc394f84cb8.png",
+  "pageRegionId": 74,
+  "summary": null,
+  "versionId": 201,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 73,
+      "pageId": 70,
+      "locale": "ru",
+      "createdAt": "2025-12-25T10:43:18.571Z",
+      "updatedAt": "2025-12-25T10:43:18.615Z",
+      "publishedVersionId": null,
+      "lastVersionId": 190
+    },
+    {
+      "id": 74,
+      "pageId": 70,
+      "locale": "en",
+      "createdAt": "2025-12-25T10:43:18.620Z",
+      "updatedAt": "2025-12-25T10:43:18.926Z",
+      "publishedVersionId": null,
+      "lastVersionId": 191
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": 194
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 201
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}

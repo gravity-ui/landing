@@ -15,8 +15,12 @@ $block: '.#{variables.$ns}custom-header';
     }
 
     &__title {
-        @include pcStyles.heading1();
         max-width: 800px;
+        margin: 0;
+    }
+
+    &__title-content {
+        @include pcStyles.heading1();
     }
 
     &__buttons {

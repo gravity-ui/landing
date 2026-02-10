@@ -1,0 +1,198 @@
+{
+  "posts": [
+    {
+      "id": 73,
+      "name": "gravityui-aikit",
+      "date": "2025-12-18T00:00:00Z",
+      "title": "One Chat to Rule Them All: We Built an AI Assistant Library Based on Gravity UI",
+      "postId": 73,
+      "description": "An article about the launch of the AIKit library: what we focused on during development, why it’s needed, and how to use it in your own projects.",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+      "readingTime": 8,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravityui-aikit"
+    },
+    {
+      "id": 36,
+      "name": "graph",
+      "date": "2025-08-07T00:00:00Z",
+      "title": "Graph Visualization Library: How We Solved the Canvas vs. HTML Dilemma",
+      "postId": 36,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/graph-cover-bg.png",
+      "readingTime": 17,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/graph"
+    },
+    {
+      "id": 39,
+      "name": "navigation-webinar",
+      "date": "2025-03-20T00:00:00Z",
+      "title": "Webinar on Navigation",
+      "postId": 39,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+      "readingTime": 30,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "Webinars"
+        }
+      ],
+      "services": [],
+      "url": "/blog/navigation-webinar"
+    },
+    {
+      "id": 40,
+      "name": "gravity-start-webinar",
+      "date": "2024-12-09T00:00:00Z",
+      "title": "Gravity UI: A quick start",
+      "postId": 40,
+      "description": "Introductory webinar",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+      "readingTime": 43,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "Webinars"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-start-webinar"
+    },
+    {
+      "id": 37,
+      "name": "yc-site-in-gravity-ui",
+      "date": "2024-10-28T00:00:00Z",
+      "title": "How We Made Yandex Cloud More Accessible with the Gravity UI Design System",
+      "postId": 37,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+      "readingTime": 20,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/yc-site-in-gravity-ui"
+    },
+    {
+      "id": 38,
+      "name": "md-editor-in-gravity-ui",
+      "date": "2024-10-01T00:00:00Z",
+      "title": "Markdown Editor: A WYSIWYG and Markup Editor Built on Gravity UI",
+      "postId": 38,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/mdeditor-cover-bg.png",
+      "readingTime": 7,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/md-editor-in-gravity-ui"
+    },
+    {
+      "id": 35,
+      "name": "gravity-ui-in-opensource",
+      "date": "2023-12-12T00:00:00Z",
+      "title": "Gravity UI design system: how to build your own interface easily",
+      "postId": 35,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/gravity-ui-cover.png",
+      "readingTime": 10,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-ui-in-opensource"
+    }
+  ],
+  "totalCount": 16,
+  "count": 7,
+  "pinnedPost": {
+    "id": 74,
+    "name": "gravity-speed",
+    "date": "2025-07-29T00:00:00Z",
+    "title": "Performance Comparison of React Components: Gravity UI vs Other Libraries",
+    "postId": 74,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+    "readingTime": 5,
+    "likes": 0,
+    "hasUserLike": false,
+    "hasPublishedVersionInRegion": true,
+    "hasPublishedVersionInLocale": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "Articles"
+      }
+    ],
+    "services": [],
+    "url": "/blog/gravity-speed"
+  }
+}

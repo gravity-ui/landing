@@ -1,0 +1,24 @@
+{
+    "id": 38,
+    "name": "md-editor-in-gravity-ui",
+    "isPinned": false,
+    "postId": 38,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 7,
+    "title": "Éditeur Markdown : un éditeur WYSIWYG et de balisage construit sur Gravity UI",
+    "date": "2024-10-01T00:00:00Z",
+    "likes": 0,
+    "hasUserLike": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "Articles"
+      }
+    ],
+    "authors": [],
+    "services": []
+  }
+  

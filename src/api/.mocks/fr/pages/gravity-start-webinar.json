@@ -1,0 +1,73 @@
+{
+  "id": 75,
+  "name": "blog/gravity-start-webinar",
+  "createdAt": "2026-01-19T14:07:00.903Z",
+  "updatedAt": "2026-01-19T14:07:00.903Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 75,
+  "regionCode": "en",
+  "publishedVersionId": 231,
+  "lastVersionId": 231,
+  "сontent": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#CCDAFF'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n          Vladimir Timofeev (Product Owner de gravity-ui.com) expliquera par où\n          commencer pour découvrir Gravity UI, présentera les principaux éléments\n          et assembléra, à partir d’eux, une interface prête à l’emploi.\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        youtube: https://www.youtube.com/watch?v=e77kbTjqZX8\n        previewImg: >-\n          https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png\n        fullWidth: false\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "initial-en",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+  "pageRegionId": 84,
+  "summary": null,
+  "versionId": 231,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 83,
+      "pageId": 75,
+      "locale": "ru",
+      "createdAt": "2026-01-19T14:01:23.834Z",
+      "updatedAt": "2026-01-19T14:01:23.903Z",
+      "publishedVersionId": null,
+      "lastVersionId": 226
+    },
+    {
+      "id": 84,
+      "pageId": 75,
+      "locale": "en",
+      "createdAt": "2026-01-19T14:01:23.914Z",
+      "updatedAt": "2026-01-19T14:01:23.978Z",
+      "publishedVersionId": null,
+      "lastVersionId": 227
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": 230
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 231
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}

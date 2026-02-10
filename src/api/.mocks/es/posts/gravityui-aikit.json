@@ -1,0 +1,23 @@
+{
+  "id": 73,
+  "name": "gravityui-aikit",
+  "isPinned": false,
+  "postId": 73,
+  "description": "Un artículo sobre el lanzamiento de la biblioteca AIKit: en qué nos enfocamos durante el desarrollo, por qué es necesaria y cómo usarla en tus propios proyectos.",
+  "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+  "readingTime": 8,
+  "title": "Un chat para gobernarlos a todos: construimos una biblioteca de asistente de IA basada en Gravity UI",
+  "date": "2025-12-18T00:00:00Z",
+  "likes": 0,
+  "hasUserLike": false,
+  "addLegacyPrefix": false,
+  "tags": [
+    {
+      "icon": null,
+      "slug": "articles",
+      "name": "Artículos"
+    }
+  ],
+  "authors": [],
+  "services": []
+}

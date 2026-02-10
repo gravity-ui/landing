@@ -1,0 +1,23 @@
+{
+  "id": 73,
+  "name": "gravityui-aikit",
+  "isPinned": false,
+  "postId": 73,
+  "description": "AIKit 라이브러리 출시에 관한 기사: 개발 중에 집중한 부분, 필요한 이유, 그리고 자체 프로젝트에서 사용하는 방법.",
+  "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+  "readingTime": 8,
+  "title": "모든 것을 지배하는 하나의 채팅: Gravity UI 기반 AI 어시스턴트 라이브러리를 구축했습니다",
+  "date": "2025-12-18T00:00:00Z",
+  "likes": 0,
+  "hasUserLike": false,
+  "addLegacyPrefix": false,
+  "tags": [
+    {
+      "icon": null,
+      "slug": "articles",
+      "name": "기사"
+    }
+  ],
+  "authors": [],
+  "services": []
+}

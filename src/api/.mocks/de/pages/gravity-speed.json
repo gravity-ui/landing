@@ -1,0 +1,73 @@
+{
+  "id": 109,
+  "name": "blog/gravity-speed",
+  "createdAt": "2026-01-27T14:08:02.359Z",
+  "updatedAt": "2026-01-27T14:08:02.359Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 109,
+  "regionCode": "en",
+  "publishedVersionId": 275,
+  "lastVersionId": 275,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#2A1A2A'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        resetPaddings: true\n        column: right\n        text: \"\\n![image](https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/speaker.jpg =80x)\\n\\n**Jewgenij Alaew**\\nCore-Entwickler von Gravity\\_UI\\n\"\n      - type: blog-yfm-block\n        column: right\n        resetPaddings: true\n        text: |\n\n          In diesem Artikel:\n\n            - [Methodik der Untersuchung](#methods)\n            - [Ergebnisse](#results)\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\nIch bin Core-Entwickler von [Gravity\\_UI](https://gravity-ui.com/){target=\\\"_blank\\\"}, und in unserem Team erreichen uns regelmäßig Fragen zur Performance von React-Komponenten aus unserer Bibliothek [@gravity-ui/uikit](https://github.com/gravity-ui/uikit){target=\\\"_blank\\\"}. Ich habe beschlossen, dazu eine kleine Untersuchung zu machen, und alles, was unten steht, ist ein Ausgangspunkt für weitere Untersuchungen und der Versuch, die Frage zu beantworten, warum Gravity langsam ist.\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/pic1.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          Üblicherweise wird diese Anfrage ohne zusätzliche Details gestellt,\n          daher gehe ich von der Annahme aus, dass eines (wenn auch natürlich\n          nicht das einzige) der Hauptprobleme der Performance eine lange\n          Renderzeit ist. Im Rahmen dieser Untersuchung haben wir die Kosten\n          des ersten Renderings einzelner Komponenten jeder Bibliothek in einer\n          isolierten Umgebung betrachtet. Für den Vergleich wurden die\n          Bibliotheken @adobe/react-spectrum, @mui/material und antd ausgewählt.\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## Methodik der Untersuchung{#methods}\\n\\nTechnischer Stack:\\n\\n  * **Playwright** — ein Framework zur Automatisierung von Tests in verschiedenen Browsern.\\n    [Mehr dazu](https://playwright.dev/){target=\\\"_blank\\\"}\\n  * **PerformanceObserver API** — ein Browser-API zur Messung der Performance.\\n    [Mehr dazu](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver){target=\\\"_blank\\\"}\\n\\nBedingungen für die Testausführung:\\n\\n  * Jeder Test wird in einem separaten Browser-Kontext ausgeführt.\\n  * Es wird jeweils nur ein Test gleichzeitig ausgeführt (Einstellung `workers` in der Playwright-Konfiguration), was\\_garantiert, dass jedem Test die gleiche Menge an Ressourcen zugewiesen wird.\\n  * Jeder Test wird 50-mal wiederholt.\\n  * Die Tests werden mit unterschiedlicher Anzahl von Nodes (10, 100, 1000) durchgeführt.\\n\\nAblauf eines Tests:\\n\\n  * Öffnen einer neuen Seite im Browser.\\n  * Initialisierung des `PerformanceObserver`.\\n  * Start der Erfassung der Metriken.\\n  * Rendern der Komponenten.\\n  * Beenden der Erfassung der Metriken.\\n\\nMessprozess:\\n\\nZu Beginn jedes Tests wird ein `PerformanceObserver` erstellt, der Ereignisse vom Typ 'measure' verfolgt. Alle gesammelten Metriken werden im globalen Objekt `__PERFORMANCE_METRICS__` gespeichert. Der Observer sammelt automatisch Daten über die Ausführungszeit von Operationen, einschließlich des Namens der Metrik, des Ereignistyps, der Startzeit und der Dauer. Mithilfe des Ereignisses [measure](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType#measure){target=\\\"_blank\\\"} protokollieren wir unsere Messung `total-render-time`.\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## Ergebnisse{#results}\n\n\n          Die Messergebnisse enthalten keine absoluten Zahlen. Je nach Umgebung\n          können sie sich natürlich unterscheiden. Aber diese Zahlen reichen\n          vollkommen aus, um einige Abhängigkeiten zu erkennen und darauf\n          basierend Schlussfolgerungen zu ziehen:\n\n\n          * @gravity-ui/uikit zeigt konkurrenzfähige Ergebnisse:\n\n            * Befindet sich in den meisten Tests im oberen Bereich des Rankings.\n            * Zeigt eine stabile Renderzeit bei unterschiedlicher Node-Anzahl.\n            * Besonders effizient bei den Komponenten Button, Checkbox und Switch.\n            * Hat Probleme mit der Renderzeit der Komponente `TextArea`.\n\n          * @mui/material zeigt ebenfalls gute Ergebnisse:\n\n            * Führt bei einer kleinen Anzahl von Nodes fast in allen Kategorien (z. B. Text, Label).\n            * Zeigt einen sichtbaren Anstieg der Renderzeit in Abhängigkeit von der Node-Anzahl.\n\n          * **antd** und **React Spectrum**:\n\n            * Zeigen in den meisten Tests eine höhere Renderzeit.\n            * Haben eine größere Streuung zwischen minimaler und maximaler Zeit.\n\n          Mit [diesem\n          Tool](https://github.com/korvin89/gravity-ui-perf){target=\"_blank\"}\n          kann man Performance-Messungen auf der eigenen lokalen Maschine\n          durchführen und außerdem Tests für Komponenten hinzufügen, die es\n          noch nicht gibt. Es hilft uns, wenn ihr es bei euch aufsetzt und\n          das Ergebnis eurer Messungen auf eurem Rechner in einem\n          [PR](https://github.com/korvin89/gravity-ui-perf/pulls){target=\"_blank\"}\n          einsendet.\n\n\n          In diesem Artikel habe ich eines der Beispiele gezeigt, wie wir mit\n          der Bibliothek arbeiten. Aber Feedback aus der Community ist uns sehr\n          wichtig: Wenn ihr ein konkretes Beispiel habt, in dem Gravity UI\n          deutlich schlechter abschneidet als andere Bibliotheken, oder wenn ihr\n          einen Fehler in unserer Testmethodik seht, kommt in die Kommentare zu\n          diesem Beitrag oder [erstellt ein\n          Issue](https://github.com/gravity-ui/uikit/issues){target=\"_blank\"} —\n          dann diskutieren wir das. Und vergesst außerdem nicht, dem Projekt\n          Sterne zu geben!\n  - type: blog-layout-block\n    resetPaddings: true\n    fullWidth: false\n    children:\n      - type: blog-meta-block\n        column: left\n        resetPaddings: true\n  - type: blog-suggest-block\n    resetPaddings: true\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "initial-en",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageRegionId": 119,
+  "summary": null,
+  "versionId": 275,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 118,
+      "pageId": 109,
+      "locale": "ru",
+      "createdAt": "2026-01-27T13:59:59.588Z",
+      "updatedAt": "2026-01-27T13:59:59.680Z",
+      "publishedVersionId": null,
+      "lastVersionId": 270
+    },
+    {
+      "id": 119,
+      "pageId": 109,
+      "locale": "en",
+      "createdAt": "2026-01-27T13:59:59.694Z",
+      "updatedAt": "2026-01-27T13:59:59.784Z",
+      "publishedVersionId": null,
+      "lastVersionId": 271
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "ru-ru",
+      "publishedVersionId": 274
+    },
+    {
+      "regionCode": "en",
+      "publishedVersionId": 275
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "Blog",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}

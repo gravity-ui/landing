@@ -83,17 +83,18 @@ $block: '.#{variables.$ns}libraries';
 
     &__library-title {
         flex: 1;
-
-        @include pcStyles.heading4();
-
         display: flex;
         position: relative;
-        margin-bottom: pcVariables.$indentXXXS;
+        margin: 0 0 pcVariables.$indentXXXS 0;
         color: #fff;
 
         a {
             @include pcStyles.link();
         }
+    }
+
+    &__library-title-content {
+        @include pcStyles.heading4();
     }
 
     &__stars {

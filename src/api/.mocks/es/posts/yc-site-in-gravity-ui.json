@@ -1,0 +1,24 @@
+{
+    "id": 37,
+    "name": "yc-site-in-gravity-ui",
+    "isPinned": false,
+    "postId": 37,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 20,
+    "title": "Cómo hicimos Yandex Cloud más accesible con el sistema de diseño Gravity UI",
+    "date": "2024-10-28T00:00:00Z",
+    "likes": 0,
+    "hasUserLike": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "Artículos"
+      }
+    ],
+    "authors": [],
+    "services": []
+  }
+  

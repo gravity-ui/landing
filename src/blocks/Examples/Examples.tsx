@@ -1,4 +1,4 @@
-import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
+import {Animatable, AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button, Icon, SegmentedRadioGroup, Select, SelectOption, Theme} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
@@ -55,7 +55,7 @@ export const Examples: React.FC<ExamplesProps> = ({animated, title, colors}) => 
         <AnimateBlock className={b()} animate={animated}>
             <div className={b('header-wrapper')}>
                 <h2 className={b('header-title')}>
-                    <HTML>{title}</HTML>
+                    <YFMWrapper content={title} modifiers={{constructor: true}} />
                 </h2>
                 <div className={b('controls')}>
                     <div className={b('control', {type: 'color'})}>

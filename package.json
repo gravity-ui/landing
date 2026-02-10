@@ -10,6 +10,7 @@
   "dependencies": {
     "@diplodoc/transform": "^4.18.0",
     "@gravity-ui/aikit": "^1.1.0",
+    "@gravity-ui/blog-constructor": "^9.0.0",
     "@gravity-ui/chartkit": "^6.1.1",
     "@gravity-ui/charts": "^0.8.0",
     "@gravity-ui/components": "^4.18.0",
@@ -19,7 +20,7 @@
     "@gravity-ui/icons": "^2.17.0",
     "@gravity-ui/markdown-editor": "^15.1.0",
     "@gravity-ui/navigation": "^4.0.10",
-    "@gravity-ui/page-constructor": "^6.0.0-beta.6",
+    "@gravity-ui/page-constructor": "^8.0.0",
     "@gravity-ui/timeline": "^1.26.1",
     "@gravity-ui/uikit": "^7.31.1",
     "@gravity-ui/uikit-themer": "^1.7.0",
@@ -46,6 +47,7 @@
     "next": "^14.2.24",
     "next-global-css": "^1.3.1",
     "next-i18next": "^15.2.0",
+    "node-html-parser": "^7.0.1",
     "openai": "^6.14.0",
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
@@ -150,7 +152,7 @@
     ]
   },
   "lint-staged": {
-    "*.{scss}": [
+    "*.scss": [
       "stylelint --fix --quiet"
     ],
     "*.{js,jsx,ts,tsx}": [

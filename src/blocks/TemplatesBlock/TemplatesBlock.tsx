@@ -1,4 +1,4 @@
-import {Animatable, AnimateBlock, HTML} from '@gravity-ui/page-constructor';
+import {Animatable, AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
 import React from 'react';
 
 import {Templates} from '../../components/Templates';
@@ -40,7 +40,11 @@ export const TemplatesBlock: React.FC<TemplatesProps> = ({animated, title, tabs}
             <div ref={blockRef} />
             <AnimateBlock className={b()} animate={animated}>
                 <h2 className={b('title')} data-section="templates">
-                    <HTML>{title}</HTML>
+                    <YFMWrapper
+                        content={title}
+                        modifiers={{constructor: true}}
+                        contentClassName={b('title-content')}
+                    />
                 </h2>
                 <Templates tabs={tabs} />
             </AnimateBlock>

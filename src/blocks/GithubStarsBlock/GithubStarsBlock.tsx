@@ -1,5 +1,5 @@
 import {ChevronRight} from '@gravity-ui/icons';
-import {Animatable, HTML} from '@gravity-ui/page-constructor';
+import {Animatable, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
@@ -43,7 +43,10 @@ export const GithubStarsBlock: React.FC<GithubStarsBlockProps> = ({device}) => {
         <div className={b('wrapper')} data-hide={hide} data-device={device}>
             <a className={b()} href={GITHUB_UI_KIT_URL} target="_blank" onClick={hideBlock}>
                 <Text color="dark-primary" variant="body-2" className={b('text')}>
-                    <HTML>{t('home:github_stars-text')}</HTML>
+                    <YFMWrapper
+                        content={t('home:github_stars-text')}
+                        modifiers={{constructor: true}}
+                    />
                     <Icon data={ChevronRight} size="16" />
                 </Text>
             </a>

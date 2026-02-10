@@ -1,5 +1,5 @@
 import {ChevronRight} from '@gravity-ui/icons';
-import {Animatable, AnimateBlock, Col, Grid, HTML, Row} from '@gravity-ui/page-constructor';
+import {Animatable, AnimateBlock, Col, Grid, Row, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button, ButtonProps, Flex, Icon, IconData, Text} from '@gravity-ui/uikit';
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';
@@ -99,7 +99,11 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                             )}
                             <div className={b('title-col')}>
                                 <h1 className={b('title')}>
-                                    <HTML>{title}</HTML>
+                                    <YFMWrapper
+                                        content={title}
+                                        modifiers={{constructor: true}}
+                                        contentClassName={b('title-content')}
+                                    />
                                 </h1>
                                 {buttons?.length > 0 ? (
                                     <div className={b('buttons')}>
@@ -147,7 +151,10 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                                     />
                                                 </div>
                                                 <div className={b('news-item-content')}>
-                                                    <HTML>{newsItem.content}</HTML>
+                                                    <YFMWrapper
+                                                        content={newsItem.content}
+                                                        modifiers={{constructor: true}}
+                                                    />
                                                 </div>
                                             </div>
                                         ) : null,
