@@ -259,10 +259,10 @@ export const KubernetesPreview = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                                 <div
                                                     style={{
                                                         position: 'absolute',
-                                                        width: '120px',
-                                                        height: '70px',
+                                                        width: '50px',
+                                                        height: '60px',
                                                         bottom: '20px',
-                                                        right: '-50px',
+                                                        right: '20px',
                                                     }}
                                                 >
                                                     <Chart data={barXData} />
