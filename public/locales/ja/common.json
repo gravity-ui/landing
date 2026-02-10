@@ -12,6 +12,7 @@
     "menu_icons": "アイコン",
     "menu_themer": "テーマ設定",
     "menu_media": "メディア",
+    "menu_blog": "ブログ",
     "roadmap_inProgress": "進行中",
     "navigation_previous": "前へ",
     "navigation_next": "次へ",
@@ -19,6 +20,6 @@
     "show_more": "もっと表示",
     "show_less": "少なく表示",
     "pageNotFound": "ページが見つかりません",
-    "pageNotFoundDescription": "探しているページは存在しないか、移動されました。",
+    "pageNotFoundDescription": "お探しのページは存在しないか、移動しました。",
     "backToHome": "ホームに戻る"
 }
