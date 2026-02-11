@@ -1,0 +1,48 @@
+name: Update icons embeddings
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'package-lock.json'
+  workflow_dispatch:
+
+permissions: write-all
+
+jobs:
+  update-icons-embeddings:
+    permissions:
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 24
+      - name: Install Dependencies
+        run: npm ci
+      - name: Update icons embeddings
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx tsx scripts/icon-search/run.ts
+
+          MODIFIED_FILES=$(git diff --name-only || echo "")
+
+          if [ -z "$MODIFIED_FILES" ]; then
+            echo "No files changed — skipping commit and PR creation."
+            exit 0
+          fi
+
+          git config user.email ""
+          git config user.name "Update icons embeddings action"
+          git checkout -b update-icons-embeddings
+          git add .
+
+          export COMMIT_MESSAGE="feat: update icons embeddings"
+          git commit -m "$COMMIT_MESSAGE" || true
+          git push --set-upstream origin update-icons-embeddings --force
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
