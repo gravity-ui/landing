@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: icon-search
+Version: 0.1.0
+Summary: Visual icon search service using CLIP embeddings
+Requires-Python: >=3.11
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: uvicorn[standard]>=0.32.0
+Requires-Dist: open-clip-torch>=2.29.0
+Requires-Dist: torch>=2.5.0
+Requires-Dist: Pillow>=11.0.0
+Requires-Dist: numpy>=2.0.0
+Provides-Extra: dev
+Requires-Dist: cairosvg>=2.7.0; extra == "dev"

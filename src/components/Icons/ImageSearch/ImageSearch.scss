@@ -1,0 +1,65 @@
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}image-search';
+
+#{$block} {
+    display: flex;
+    align-items: center;
+
+    &__file-input {
+        display: none;
+    }
+
+    &__upload-button {
+        color: rgba(255, 255, 255, 0.5);
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+    }
+
+    &__preview {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 8px;
+    }
+
+    &__preview-image {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        border-radius: 4px;
+    }
+
+    &__loader {
+        display: flex;
+    }
+
+    &__clear-button {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &__drop-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.7);
+        pointer-events: none;
+    }
+
+    &__drop-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 48px 64px;
+        border: 2px dashed rgba(255, 255, 255, 0.4);
+        border-radius: 16px;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 18px;
+    }
+}

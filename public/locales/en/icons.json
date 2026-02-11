@@ -13,5 +13,7 @@
     "empty_title": "No results found for your request",
     "empty_subTitle": "Please check the spelling or try another keywords.",
     "usage_reactComponent": "React component",
-    "usage_svg": "SVG"
+    "usage_svg": "SVG",
+    "imageSearch_tooltip": "Search by image (or paste from clipboard)",
+    "imageSearch_drop": "Drop image to search"
 }
