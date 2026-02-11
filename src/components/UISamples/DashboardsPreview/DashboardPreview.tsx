@@ -1,5 +1,5 @@
 import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {D3Plugin} from '@gravity-ui/chartkit/d3';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
 import {Card, Col, Container, Flex, Row, Text} from '@gravity-ui/uikit';
 import React, {PropsWithChildren} from 'react';
 import {block} from 'src/utils';
@@ -16,7 +16,7 @@ import './DashboardPreview.scss';
 
 interface StyleCardProps extends PropsWithChildren {}
 
-settings.set({plugins: [D3Plugin]});
+settings.set({plugins: [GravityChartsPlugin]});
 
 const b = block('dashboards-preview');
 
@@ -54,8 +54,8 @@ export const DashboardPreview = () => {
                             (data, index) => (
                                 <Col s="12" m="6" l="4" key={index}>
                                     <StyledCard key={index}>
-                                        <div className={b('dashboard-wrapper')}>
-                                            <ChartKit type="d3" data={data} />
+                                        <div className={b('dashboard-wrapper', {s: true})}>
+                                            <ChartKit type="gravity-charts" data={data} />
                                         </div>
                                     </StyledCard>
                                 </Col>
@@ -66,8 +66,8 @@ export const DashboardPreview = () => {
                         {[pieDashboardData, dotsDashboardData].map((data, index) => (
                             <Col s="12" m="6" key={index}>
                                 <StyledCard key={index}>
-                                    <div className={b('dashboard-wrapper')}>
-                                        <ChartKit type="d3" data={data} />
+                                    <div className={b('dashboard-wrapper', {m: true})}>
+                                        <ChartKit type="gravity-charts" data={data} />
                                     </div>
                                 </StyledCard>
                             </Col>

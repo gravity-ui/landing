@@ -66,44 +66,44 @@ export const DashboardContent = () => {
                     ))}
                 </Row>
                 <Row space={3}>
-                    <Col style={{maxWidth: '60%'}} className={b('col')}>
+                    <Col style={{maxWidth: '60%'}}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Dynamic
                             </Text>
-                            <div className={b('graph')}>
+                            <div className={b('chart')}>
                                 <Chart data={dynamicMock} />
                             </div>
                         </Card>
                     </Col>
-                    <Col style={{maxWidth: '40%'}} className={b('col')}>
+                    <Col style={{maxWidth: '40%'}}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Performance
                             </Text>
-                            <div className={b('graph-performance')}>
+                            <div className={b('chart')}>
                                 <Chart data={performanceMock} />
                             </div>
                         </Card>
                     </Col>
                 </Row>
                 <Row space={3}>
-                    <Col style={{flexBasis: '40%'}} className={b('col')}>
+                    <Col style={{maxWidth: '40%'}}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Top Items
                             </Text>
-                            <div className={b('graph-items')}>
+                            <div className={b('chart')}>
                                 <Chart data={topItemsMock} />
                             </div>
                         </Card>
                     </Col>
-                    <Col style={{flexBasis: '60%'}} className={b('col')}>
+                    <Col style={{maxWidth: '60%'}}>
                         <Card className={b('card', {big: true})}>
                             <Text className={b('dashboard-title')} as="h1" variant="subheader-1">
                                 Distribution
                             </Text>
-                            <div className={b('graph')}>
+                            <div className={b('chart')}>
                                 <Chart data={distributionMock} />
                             </div>
                         </Card>
