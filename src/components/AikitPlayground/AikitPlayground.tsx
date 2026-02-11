@@ -1,4 +1,4 @@
-import {ChatContainer} from '@gravity-ui/aikit';
+import {ChatContainer, useOpenAIStreamAdapter} from '@gravity-ui/aikit';
 import type {
     ChatStatus,
     TAssistantMessage,
@@ -24,61 +24,11 @@ type ApiMessage = {
     content: string;
 };
 
-/**
- * Responses API event type
- */
-type ResponseEvent = {
-    event: string;
-    data: {
-        type: string;
-        delta?: string;
-        text?: string;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        [key: string]: any;
-    };
-    error?: string;
+/** Stream options for useOpenAIStreamAdapter: initialMessages and assistantMessageId are set when the request starts. */
+type StreamOptions = {
+    initialMessages: TChatMessage[];
+    assistantMessageId: string;
 };
-
-/**
- * Parses data from SSE stream
- */
-function parseStreamData(line: string): ResponseEvent | null {
-    try {
-        return JSON.parse(line.slice(6)) as ResponseEvent;
-    } catch {
-        return null;
-    }
-}
-
-/**
- * Extracts text from Responses API event
- */
-function extractTextFromEvent(event: ResponseEvent): string | null {
-    // Handle text delta events
-    const isOutputTextDelta =
-        event.event === 'response.output_text.delta' ||
-        event.data?.type === 'response.output_text.delta';
-
-    if (isOutputTextDelta) {
-        return event.data?.delta || null;
-    }
-
-    // Handle content part events
-    const isContentPartDelta =
-        event.event === 'response.content_part.delta' ||
-        event.data?.type === 'response.content_part.delta';
-
-    if (isContentPartDelta) {
-        return event.data?.delta || null;
-    }
-
-    // Fallback for legacy format
-    if (event.event === 'content' && event.data?.content) {
-        return event.data.content;
-    }
-
-    return null;
-}
 
 /**
  * Extracts text content from chat message
@@ -88,7 +38,6 @@ function getMessageContent(message: TChatMessage): string {
         return message.content;
     }
 
-    // For assistant messages, content can be of different types
     const {content} = message;
 
     if (typeof content === 'string') {
@@ -114,48 +63,83 @@ function getMessageContent(message: TChatMessage): string {
     return '';
 }
 
+const getChatStatus = (hasResponse: boolean, isFetching: boolean, status: string): ChatStatus => {
+    if (!hasResponse) {
+        return isFetching ? 'submitted' : 'ready';
+    }
+    if (status === 'streaming') return 'streaming';
+    if (status === 'error') return 'error';
+    return 'ready';
+};
+
 /**
  * AIKit Playground component
- * Uses /api/chat endpoint for OpenAI interaction
+ * Uses /api/chat endpoint for OpenAI interaction and useOpenAIStreamAdapter for response handling
  */
 export const AikitPlayground = memo(() => {
     const {t} = useTranslation('aikit');
 
     const [messages, setMessages] = useState<TChatMessage[]>([]);
-    const [status, setStatus] = useState<ChatStatus>('ready');
     const [controller, setController] = useState<AbortController | null>(null);
+    const [isFetching, setIsFetching] = useState(false);
+    const [streamResponse, setStreamResponse] = useState<Response | null>(null);
+    const [streamOptions, setStreamOptions] = useState<StreamOptions | null>(null);
+
+    const handleStreamEnd = useCallback((finalMessages: TChatMessage[]) => {
+        // Drop assistant messages with empty content (stream adapter may leave a placeholder)
+        const committed = finalMessages.filter(
+            (msg) => msg.role !== 'assistant' || getMessageContent(msg) !== '',
+        );
+
+        setMessages(committed);
+        setStreamResponse(null);
+        setStreamOptions(null);
+    }, []);
+
+    const streamResult = useOpenAIStreamAdapter(streamResponse, {
+        initialMessages: streamOptions?.initialMessages ?? [],
+        assistantMessageId: streamOptions?.assistantMessageId ?? 'assistant-idle',
+        onStreamEnd: handleStreamEnd,
+    });
+
+    const hasResponse = Boolean(streamResponse);
+    const displayMessages =
+        hasResponse && streamResult.messages.length > 0 ? streamResult.messages : messages;
+    const chatStatus = getChatStatus(hasResponse, isFetching, streamResult.status);
 
     /**
      * Message send handler
-     * Supports streaming responses from API
+     * Passes fetch Response to useOpenAIStreamAdapter; all stream parsing is done in the hook
      */
     const handleSendMessage = useCallback(
         async (data: TSubmitData) => {
-            // Add user message
             const userMessage: TUserMessage = {
                 id: Date.now().toString(),
                 role: 'user',
                 content: data.content,
             };
-            setMessages((prev) => [...prev, userMessage]);
+            const initialMessages: TChatMessage[] = [...messages, userMessage];
+            const assistantMessageId = (Date.now() + 1).toString();
 
-            // Start streaming
-            setStatus('submitted');
+            setMessages(initialMessages);
+            setIsFetching(true);
+
             const abortController = new AbortController();
             setController(abortController);
 
             try {
-                // Build message history for API
                 const apiMessages: ApiMessage[] = [
                     {
                         role: 'system',
                         content:
                             'You are a helpful AI assistant. Respond in the same language as the user message.',
                     },
-                    ...messages.map((msg) => ({
-                        role: msg.role as 'user' | 'assistant',
-                        content: getMessageContent(msg),
-                    })),
+                    ...messages
+                        .filter((msg) => msg.role !== 'assistant' || getMessageContent(msg) !== '')
+                        .map((msg) => ({
+                            role: msg.role as 'user' | 'assistant',
+                            content: getMessageContent(msg),
+                        })),
                     {role: 'user' as const, content: data.content},
                 ];
 
@@ -173,117 +157,44 @@ export const AikitPlayground = memo(() => {
                     throw new Error(`API error: ${response.status}`);
                 }
 
-                const reader = response.body?.getReader();
-                if (!reader) {
+                if (!response.body) {
                     throw new Error('No response body');
                 }
 
-                const decoder = new TextDecoder();
-
-                // Assistant message ID for updates
-                const assistantMessageId = (Date.now() + 1).toString();
-
-                // Add empty assistant message
-                setMessages((prev) => [
-                    ...prev,
-                    {
-                        id: assistantMessageId,
-                        role: 'assistant',
-                        content: '',
-                    } as TAssistantMessage,
-                ]);
-
-                let buffer = '';
-                // Local variable for text accumulation
-                let accumulatedContent = '';
-
-                setStatus('streaming');
-                // Read data stream
-                // eslint-disable-next-line no-constant-condition
-                while (true) {
-                    const {done, value} = await reader.read();
-
-                    if (done) {
-                        break;
-                    }
-
-                    buffer += decoder.decode(value, {stream: true});
-                    const lines = buffer.split('\n');
-                    buffer = lines.pop() || '';
-
-                    for (const line of lines) {
-                        const trimmedLine = line.trim();
-
-                        if (trimmedLine === 'data: [DONE]') {
-                            continue;
-                        }
-
-                        if (!trimmedLine.startsWith('data: ')) {
-                            continue;
-                        }
-
-                        const parsedEvent = parseStreamData(trimmedLine);
-                        if (!parsedEvent) continue;
-
-                        if (parsedEvent.error) {
-                            throw new Error(parsedEvent.error);
-                        }
-
-                        const textContent = extractTextFromEvent(parsedEvent);
-                        if (textContent) {
-                            // Accumulate text in local variable
-                            accumulatedContent += textContent;
-                            // Copy value for closure
-                            const newContent = accumulatedContent;
-
-                            setMessages((prev) => {
-                                return prev.map((msg): TChatMessage => {
-                                    if (msg.id === assistantMessageId && msg.role === 'assistant') {
-                                        return {
-                                            ...msg,
-                                            content: newContent,
-                                        } as TAssistantMessage;
-                                    }
-                                    return msg;
-                                });
-                            });
-                        }
-                    }
-                }
+                // Set stream and options in one tick so the hook never sees new options with stream=null
+                setStreamResponse(response);
+                setStreamOptions({initialMessages, assistantMessageId});
             } catch (error) {
                 if ((error as Error).name !== 'AbortError') {
                     // eslint-disable-next-line no-console
                     console.error('Chat error:', error);
 
-                    // Add error message
                     const errorMessage: TAssistantMessage = {
                         id: (Date.now() + 2).toString(),
                         role: 'assistant',
                         content: t('error.apiError'),
                     };
-
                     setMessages((prev) => {
-                        // Remove empty assistant message if exists
                         const filtered = prev.filter(
                             (msg) => msg.role !== 'assistant' || msg.content !== '',
                         );
                         return [...filtered, errorMessage];
                     });
                 }
+                setStreamResponse(null);
+                setStreamOptions(null);
             } finally {
-                setStatus('ready');
+                setIsFetching(false);
                 setController(null);
             }
         },
         [messages, t],
     );
 
-    /**
-     * Request cancellation handler
-     */
     const handleCancel = useCallback(async () => {
         controller?.abort();
-        setStatus('ready');
+        setStreamResponse(null);
+        setStreamOptions(null);
     }, [controller]);
 
     return (
@@ -298,10 +209,10 @@ export const AikitPlayground = memo(() => {
                         description: t('welcome.description'),
                     }}
                     showActionsOnHover={true}
-                    messages={messages}
+                    messages={displayMessages}
                     onSendMessage={handleSendMessage}
                     onCancel={handleCancel}
-                    status={status}
+                    status={chatStatus}
                     i18nConfig={{
                         header: {
                             defaultTitle: t('chat.title'),
