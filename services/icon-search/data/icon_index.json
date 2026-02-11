@@ -1,0 +1,3907 @@
+[
+  {
+    "name": "abbr-api",
+    "componentName": "AbbrApi",
+    "style": "regular"
+  },
+  {
+    "name": "abbr-ml",
+    "componentName": "AbbrMl",
+    "style": "regular"
+  },
+  {
+    "name": "abbr-ql",
+    "componentName": "AbbrQl",
+    "style": "regular"
+  },
+  {
+    "name": "abbr-sql",
+    "componentName": "AbbrSql",
+    "style": "regular"
+  },
+  {
+    "name": "abbr-zip",
+    "componentName": "AbbrZip",
+    "style": "regular"
+  },
+  {
+    "name": "alarm",
+    "componentName": "AlarmFill",
+    "style": "fill"
+  },
+  {
+    "name": "alarm",
+    "componentName": "Alarm",
+    "style": "regular"
+  },
+  {
+    "name": "almost-equal",
+    "componentName": "AlmostEqual",
+    "style": "regular"
+  },
+  {
+    "name": "antenna-signal",
+    "componentName": "AntennaSignal",
+    "style": "regular"
+  },
+  {
+    "name": "aperture",
+    "componentName": "Aperture",
+    "style": "regular"
+  },
+  {
+    "name": "archive",
+    "componentName": "Archive",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-chevron-down",
+    "componentName": "ArrowChevronDown",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-chevron-left",
+    "componentName": "ArrowChevronLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-chevron-right",
+    "componentName": "ArrowChevronRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-chevron-up",
+    "componentName": "ArrowChevronUp",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-down",
+    "componentName": "ArrowDown",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-down-from-line",
+    "componentName": "ArrowDownFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-down-left",
+    "componentName": "ArrowDownLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-down-right",
+    "componentName": "ArrowDownRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-down-to-line",
+    "componentName": "ArrowDownToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-down-to-square",
+    "componentName": "ArrowDownToSquare",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-left",
+    "componentName": "ArrowLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-left-from-line",
+    "componentName": "ArrowLeftFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-left-to-line",
+    "componentName": "ArrowLeftToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-right",
+    "componentName": "ArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-right-arrow-left",
+    "componentName": "ArrowRightArrowLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-right-from-line",
+    "componentName": "ArrowRightFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-right-from-square",
+    "componentName": "ArrowRightFromSquare",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-right-to-line",
+    "componentName": "ArrowRightToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-right-to-square",
+    "componentName": "ArrowRightToSquare",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-rotate-left",
+    "componentName": "ArrowRotateLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-rotate-left-number-5",
+    "componentName": "ArrowRotateLeftNumber5",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-rotate-right",
+    "componentName": "ArrowRotateRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-rotate-right-number-5",
+    "componentName": "ArrowRotateRightNumber5",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-down",
+    "componentName": "ArrowShapeDown",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-down-from-line",
+    "componentName": "ArrowShapeDownFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-down-to-line",
+    "componentName": "ArrowShapeDownToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-left",
+    "componentName": "ArrowShapeLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-left-from-line",
+    "componentName": "ArrowShapeLeftFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-left-to-line",
+    "componentName": "ArrowShapeLeftToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-right",
+    "componentName": "ArrowShapeRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-right-from-line",
+    "componentName": "ArrowShapeRightFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-right-to-line",
+    "componentName": "ArrowShapeRightToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-turn-up-left",
+    "componentName": "ArrowShapeTurnUpLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-turn-up-right",
+    "componentName": "ArrowShapeTurnUpRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-up",
+    "componentName": "ArrowShapeUp",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-up-from-line",
+    "componentName": "ArrowShapeUpFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-shape-up-to-line",
+    "componentName": "ArrowShapeUpToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up",
+    "componentName": "ArrowUp",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-arrow-down",
+    "componentName": "ArrowUpArrowDown",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-from-line",
+    "componentName": "ArrowUpFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-from-square",
+    "componentName": "ArrowUpFromSquare",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-from-square-slash",
+    "componentName": "ArrowUpFromSquareSlash",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-left",
+    "componentName": "ArrowUpLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-right",
+    "componentName": "ArrowUpRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-right-from-square",
+    "componentName": "ArrowUpRightFromSquare",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-up-to-line",
+    "componentName": "ArrowUpToLine",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-uturn-ccw-down",
+    "componentName": "ArrowUturnCcwDown",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-uturn-ccw-left",
+    "componentName": "ArrowUturnCcwLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-uturn-ccw-right",
+    "componentName": "ArrowUturnCcwRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-uturn-cw-down",
+    "componentName": "ArrowUturnCwDown",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-uturn-cw-left",
+    "componentName": "ArrowUturnCwLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrow-uturn-cw-right",
+    "componentName": "ArrowUturnCwRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-3-rotate-left",
+    "componentName": "Arrows3RotateLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-3-rotate-left-letter-a",
+    "componentName": "Arrows3RotateLeftLetterA",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-3-rotate-right",
+    "componentName": "Arrows3RotateRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-expand",
+    "componentName": "ArrowsExpand",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-expand-horizontal",
+    "componentName": "ArrowsExpandHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-expand-vertical",
+    "componentName": "ArrowsExpandVertical",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-opposite-to-dots",
+    "componentName": "ArrowsOppositeToDots",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-rotate-left",
+    "componentName": "ArrowsRotateLeft",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-rotate-left-slash",
+    "componentName": "ArrowsRotateLeftSlash",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-rotate-right",
+    "componentName": "ArrowsRotateRight",
+    "style": "regular"
+  },
+  {
+    "name": "arrows-rotate-right-slash",
+    "componentName": "ArrowsRotateRightSlash",
+    "style": "regular"
+  },
+  {
+    "name": "at",
+    "componentName": "At",
+    "style": "regular"
+  },
+  {
+    "name": "backward-step",
+    "componentName": "BackwardStep",
+    "style": "regular"
+  },
+  {
+    "name": "backward-step",
+    "componentName": "BackwardStepFill",
+    "style": "fill"
+  },
+  {
+    "name": "ban",
+    "componentName": "Ban",
+    "style": "regular"
+  },
+  {
+    "name": "bars",
+    "componentName": "Bars",
+    "style": "regular"
+  },
+  {
+    "name": "bars-ascending-align-center",
+    "componentName": "BarsAscendingAlignCenter",
+    "style": "regular"
+  },
+  {
+    "name": "bars-ascending-align-left",
+    "componentName": "BarsAscendingAlignLeft",
+    "style": "regular"
+  },
+  {
+    "name": "bars-ascending-align-left-arrow-down",
+    "componentName": "BarsAscendingAlignLeftArrowDown",
+    "style": "regular"
+  },
+  {
+    "name": "bars-ascending-align-left-arrow-up",
+    "componentName": "BarsAscendingAlignLeftArrowUp",
+    "style": "regular"
+  },
+  {
+    "name": "bars-ascending-align-right",
+    "componentName": "BarsAscendingAlignRight",
+    "style": "regular"
+  },
+  {
+    "name": "bars-descending-align-center",
+    "componentName": "BarsDescendingAlignCenter",
+    "style": "regular"
+  },
+  {
+    "name": "bars-descending-align-left",
+    "componentName": "BarsDescendingAlignLeft",
+    "style": "regular"
+  },
+  {
+    "name": "bars-descending-align-left-arrow-down",
+    "componentName": "BarsDescendingAlignLeftArrowDown",
+    "style": "regular"
+  },
+  {
+    "name": "bars-descending-align-left-arrow-up",
+    "componentName": "BarsDescendingAlignLeftArrowUp",
+    "style": "regular"
+  },
+  {
+    "name": "bars-descending-align-right",
+    "componentName": "BarsDescendingAlignRight",
+    "style": "regular"
+  },
+  {
+    "name": "bars-play",
+    "componentName": "BarsPlay",
+    "style": "regular"
+  },
+  {
+    "name": "bars-unaligned",
+    "componentName": "BarsUnaligned",
+    "style": "regular"
+  },
+  {
+    "name": "bell",
+    "componentName": "Bell",
+    "style": "regular"
+  },
+  {
+    "name": "bell",
+    "componentName": "BellFill",
+    "style": "fill"
+  },
+  {
+    "name": "bell-dot",
+    "componentName": "BellDot",
+    "style": "regular"
+  },
+  {
+    "name": "bell-slash",
+    "componentName": "BellSlash",
+    "style": "regular"
+  },
+  {
+    "name": "binoculars",
+    "componentName": "Binoculars",
+    "style": "regular"
+  },
+  {
+    "name": "bold",
+    "componentName": "Bold",
+    "style": "regular"
+  },
+  {
+    "name": "book",
+    "componentName": "Book",
+    "style": "regular"
+  },
+  {
+    "name": "book-open",
+    "componentName": "BookOpen",
+    "style": "regular"
+  },
+  {
+    "name": "bookmark",
+    "componentName": "Bookmark",
+    "style": "regular"
+  },
+  {
+    "name": "bookmark",
+    "componentName": "BookmarkFill",
+    "style": "fill"
+  },
+  {
+    "name": "books",
+    "componentName": "Books",
+    "style": "regular"
+  },
+  {
+    "name": "box",
+    "componentName": "Box",
+    "style": "regular"
+  },
+  {
+    "name": "boxes-3",
+    "componentName": "Boxes3",
+    "style": "regular"
+  },
+  {
+    "name": "branches-down",
+    "componentName": "BranchesDown",
+    "style": "regular"
+  },
+  {
+    "name": "branches-right",
+    "componentName": "BranchesRight",
+    "style": "regular"
+  },
+  {
+    "name": "branches-right-arrow-right",
+    "componentName": "BranchesRightArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "briefcase",
+    "componentName": "Briefcase",
+    "style": "regular"
+  },
+  {
+    "name": "briefcase",
+    "componentName": "BriefcaseFill",
+    "style": "fill"
+  },
+  {
+    "name": "broadcast-signal",
+    "componentName": "BroadcastSignal",
+    "style": "regular"
+  },
+  {
+    "name": "broom-motion",
+    "componentName": "BroomMotion",
+    "style": "regular"
+  },
+  {
+    "name": "broom-motion",
+    "componentName": "BroomMotionFill",
+    "style": "fill"
+  },
+  {
+    "name": "brush",
+    "componentName": "Brush",
+    "style": "regular"
+  },
+  {
+    "name": "bucket",
+    "componentName": "Bucket",
+    "style": "regular"
+  },
+  {
+    "name": "bucket-paint",
+    "componentName": "BucketPaint",
+    "style": "regular"
+  },
+  {
+    "name": "bug",
+    "componentName": "Bug",
+    "style": "regular"
+  },
+  {
+    "name": "bulb",
+    "componentName": "Bulb",
+    "style": "regular"
+  },
+  {
+    "name": "calculator",
+    "componentName": "Calculator",
+    "style": "regular"
+  },
+  {
+    "name": "calendar",
+    "componentName": "Calendar",
+    "style": "regular"
+  },
+  {
+    "name": "calendar-xmark",
+    "componentName": "CalendarXmark",
+    "style": "regular"
+  },
+  {
+    "name": "camera",
+    "componentName": "Camera",
+    "style": "regular"
+  },
+  {
+    "name": "car",
+    "componentName": "Car",
+    "style": "regular"
+  },
+  {
+    "name": "card-club",
+    "componentName": "CardClub",
+    "style": "regular"
+  },
+  {
+    "name": "card-diamond",
+    "componentName": "CardDiamond",
+    "style": "regular"
+  },
+  {
+    "name": "card-heart",
+    "componentName": "CardHeart",
+    "style": "regular"
+  },
+  {
+    "name": "card-spade",
+    "componentName": "CardSpade",
+    "style": "regular"
+  },
+  {
+    "name": "caret-down",
+    "componentName": "CaretDown",
+    "style": "regular"
+  },
+  {
+    "name": "caret-left",
+    "componentName": "CaretLeft",
+    "style": "regular"
+  },
+  {
+    "name": "caret-right",
+    "componentName": "CaretRight",
+    "style": "regular"
+  },
+  {
+    "name": "caret-up",
+    "componentName": "CaretUp",
+    "style": "regular"
+  },
+  {
+    "name": "carets-expand-vertical",
+    "componentName": "CaretsExpandVertical",
+    "style": "regular"
+  },
+  {
+    "name": "chart-area-stacked",
+    "componentName": "ChartAreaStacked",
+    "style": "regular"
+  },
+  {
+    "name": "chart-area-stacked-normalized",
+    "componentName": "ChartAreaStackedNormalized",
+    "style": "regular"
+  },
+  {
+    "name": "chart-bar",
+    "componentName": "ChartBar",
+    "style": "regular"
+  },
+  {
+    "name": "chart-bar-stacked",
+    "componentName": "ChartBarStacked",
+    "style": "regular"
+  },
+  {
+    "name": "chart-column",
+    "componentName": "ChartColumn",
+    "style": "regular"
+  },
+  {
+    "name": "chart-column-stacked",
+    "componentName": "ChartColumnStacked",
+    "style": "regular"
+  },
+  {
+    "name": "chart-donut",
+    "componentName": "ChartDonut",
+    "style": "regular"
+  },
+  {
+    "name": "chart-line",
+    "componentName": "ChartLine",
+    "style": "regular"
+  },
+  {
+    "name": "chart-line-arrow-up",
+    "componentName": "ChartLineArrowUp",
+    "style": "regular"
+  },
+  {
+    "name": "chart-line-label",
+    "componentName": "ChartLineLabel",
+    "style": "regular"
+  },
+  {
+    "name": "chart-line-points",
+    "componentName": "ChartLinePoints",
+    "style": "regular"
+  },
+  {
+    "name": "chart-mixed",
+    "componentName": "ChartMixed",
+    "style": "regular"
+  },
+  {
+    "name": "chart-pie",
+    "componentName": "ChartPie",
+    "style": "regular"
+  },
+  {
+    "name": "chart-treemap",
+    "componentName": "ChartTreemap",
+    "style": "regular"
+  },
+  {
+    "name": "check",
+    "componentName": "Check",
+    "style": "regular"
+  },
+  {
+    "name": "check-double",
+    "componentName": "CheckDouble",
+    "style": "regular"
+  },
+  {
+    "name": "check-shape",
+    "componentName": "CheckShape",
+    "style": "regular"
+  },
+  {
+    "name": "check-shape",
+    "componentName": "CheckShapeFill",
+    "style": "fill"
+  },
+  {
+    "name": "cherry",
+    "componentName": "Cherry",
+    "style": "regular"
+  },
+  {
+    "name": "chevron-down",
+    "componentName": "ChevronDown",
+    "style": "regular"
+  },
+  {
+    "name": "chevron-down-wide",
+    "componentName": "ChevronDownWide",
+    "style": "regular"
+  },
+  {
+    "name": "chevron-left",
+    "componentName": "ChevronLeft",
+    "style": "regular"
+  },
+  {
+    "name": "chevron-right",
+    "componentName": "ChevronRight",
+    "style": "regular"
+  },
+  {
+    "name": "chevron-up",
+    "componentName": "ChevronUp",
+    "style": "regular"
+  },
+  {
+    "name": "chevron-up-wide",
+    "componentName": "ChevronUpWide",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-collapse-from-lines",
+    "componentName": "ChevronsCollapseFromLines",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-collapse-horizontal",
+    "componentName": "ChevronsCollapseHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-collapse-to-line",
+    "componentName": "ChevronsCollapseToLine",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-collapse-up-right",
+    "componentName": "ChevronsCollapseUpRight",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-collapse-vertical",
+    "componentName": "ChevronsCollapseVertical",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-down",
+    "componentName": "ChevronsDown",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-down-wide",
+    "componentName": "ChevronsDownWide",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-expand-from-line",
+    "componentName": "ChevronsExpandFromLine",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-expand-horizontal",
+    "componentName": "ChevronsExpandHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-expand-to-lines",
+    "componentName": "ChevronsExpandToLines",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-expand-up-right",
+    "componentName": "ChevronsExpandUpRight",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-expand-vertical",
+    "componentName": "ChevronsExpandVertical",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-left",
+    "componentName": "ChevronsLeft",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-right",
+    "componentName": "ChevronsRight",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-up",
+    "componentName": "ChevronsUp",
+    "style": "regular"
+  },
+  {
+    "name": "chevrons-up-wide",
+    "componentName": "ChevronsUpWide",
+    "style": "regular"
+  },
+  {
+    "name": "circle",
+    "componentName": "Circle",
+    "style": "regular"
+  },
+  {
+    "name": "circle",
+    "componentName": "CircleFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-arrow-down",
+    "componentName": "CircleArrowDown",
+    "style": "regular"
+  },
+  {
+    "name": "circle-arrow-down",
+    "componentName": "CircleArrowDownFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-arrow-left",
+    "componentName": "CircleArrowLeft",
+    "style": "regular"
+  },
+  {
+    "name": "circle-arrow-left",
+    "componentName": "CircleArrowLeftFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-arrow-right",
+    "componentName": "CircleArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "circle-arrow-right",
+    "componentName": "CircleArrowRightFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-arrow-up",
+    "componentName": "CircleArrowUp",
+    "style": "regular"
+  },
+  {
+    "name": "circle-arrow-up",
+    "componentName": "CircleArrowUpFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-check",
+    "componentName": "CircleCheck",
+    "style": "regular"
+  },
+  {
+    "name": "circle-check",
+    "componentName": "CircleCheckFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-chevron-down",
+    "componentName": "CircleChevronDown",
+    "style": "regular"
+  },
+  {
+    "name": "circle-chevron-down",
+    "componentName": "CircleChevronDownFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-chevron-left",
+    "componentName": "CircleChevronLeft",
+    "style": "regular"
+  },
+  {
+    "name": "circle-chevron-left",
+    "componentName": "CircleChevronLeftFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-chevron-right",
+    "componentName": "CircleChevronRight",
+    "style": "regular"
+  },
+  {
+    "name": "circle-chevron-right",
+    "componentName": "CircleChevronRightFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-chevron-up",
+    "componentName": "CircleChevronUp",
+    "style": "regular"
+  },
+  {
+    "name": "circle-chevron-up",
+    "componentName": "CircleChevronUpFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-chevrons-down",
+    "componentName": "CircleChevronsDown",
+    "style": "regular"
+  },
+  {
+    "name": "circle-chevrons-left",
+    "componentName": "CircleChevronsLeft",
+    "style": "regular"
+  },
+  {
+    "name": "circle-chevrons-right",
+    "componentName": "CircleChevronsRight",
+    "style": "regular"
+  },
+  {
+    "name": "circle-chevrons-up",
+    "componentName": "CircleChevronsUp",
+    "style": "regular"
+  },
+  {
+    "name": "circle-dashed",
+    "componentName": "CircleDashed",
+    "style": "regular"
+  },
+  {
+    "name": "circle-dollar",
+    "componentName": "CircleDollar",
+    "style": "regular"
+  },
+  {
+    "name": "circle-exclamation",
+    "componentName": "CircleExclamation",
+    "style": "regular"
+  },
+  {
+    "name": "circle-exclamation",
+    "componentName": "CircleExclamationFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-info",
+    "componentName": "CircleInfo",
+    "style": "regular"
+  },
+  {
+    "name": "circle-info",
+    "componentName": "CircleInfoFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-letter-a",
+    "componentName": "CircleLetterA",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-b",
+    "componentName": "CircleLetterB",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-c",
+    "componentName": "CircleLetterC",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-d",
+    "componentName": "CircleLetterD",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-e",
+    "componentName": "CircleLetterE",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-f",
+    "componentName": "CircleLetterF",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-g",
+    "componentName": "CircleLetterG",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-h",
+    "componentName": "CircleLetterH",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-i",
+    "componentName": "CircleLetterI",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-j",
+    "componentName": "CircleLetterJ",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-k",
+    "componentName": "CircleLetterK",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-l",
+    "componentName": "CircleLetterL",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-m",
+    "componentName": "CircleLetterM",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-n",
+    "componentName": "CircleLetterN",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-o",
+    "componentName": "CircleLetterO",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-p",
+    "componentName": "CircleLetterP",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-q",
+    "componentName": "CircleLetterQ",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-r",
+    "componentName": "CircleLetterR",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-s",
+    "componentName": "CircleLetterS",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-t",
+    "componentName": "CircleLetterT",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-u",
+    "componentName": "CircleLetterU",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-v",
+    "componentName": "CircleLetterV",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-w",
+    "componentName": "CircleLetterW",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-x",
+    "componentName": "CircleLetterX",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-y",
+    "componentName": "CircleLetterY",
+    "style": "regular"
+  },
+  {
+    "name": "circle-letter-z",
+    "componentName": "CircleLetterZ",
+    "style": "regular"
+  },
+  {
+    "name": "circle-link",
+    "componentName": "CircleLink",
+    "style": "regular"
+  },
+  {
+    "name": "circle-minus",
+    "componentName": "CircleMinus",
+    "style": "regular"
+  },
+  {
+    "name": "circle-minus",
+    "componentName": "CircleMinusFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-number-0",
+    "componentName": "CircleNumber0",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-1",
+    "componentName": "CircleNumber1",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-2",
+    "componentName": "CircleNumber2",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-3",
+    "componentName": "CircleNumber3",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-4",
+    "componentName": "CircleNumber4",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-5",
+    "componentName": "CircleNumber5",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-6",
+    "componentName": "CircleNumber6",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-7",
+    "componentName": "CircleNumber7",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-8",
+    "componentName": "CircleNumber8",
+    "style": "regular"
+  },
+  {
+    "name": "circle-number-9",
+    "componentName": "CircleNumber9",
+    "style": "regular"
+  },
+  {
+    "name": "circle-pause",
+    "componentName": "CirclePause",
+    "style": "regular"
+  },
+  {
+    "name": "circle-pause",
+    "componentName": "CirclePauseFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-play",
+    "componentName": "CirclePlay",
+    "style": "regular"
+  },
+  {
+    "name": "circle-play",
+    "componentName": "CirclePlayFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-plus",
+    "componentName": "CirclePlus",
+    "style": "regular"
+  },
+  {
+    "name": "circle-plus",
+    "componentName": "CirclePlusFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-question",
+    "componentName": "CircleQuestion",
+    "style": "regular"
+  },
+  {
+    "name": "circle-question",
+    "componentName": "CircleQuestionFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-question-dot",
+    "componentName": "CircleQuestionDot",
+    "style": "regular"
+  },
+  {
+    "name": "circle-ruble",
+    "componentName": "CircleRuble",
+    "style": "regular"
+  },
+  {
+    "name": "circle-stop",
+    "componentName": "CircleStop",
+    "style": "regular"
+  },
+  {
+    "name": "circle-stop",
+    "componentName": "CircleStopFill",
+    "style": "fill"
+  },
+  {
+    "name": "circle-tree",
+    "componentName": "CircleTree",
+    "style": "regular"
+  },
+  {
+    "name": "circle-xmark",
+    "componentName": "CircleXmark",
+    "style": "regular"
+  },
+  {
+    "name": "circle-xmark",
+    "componentName": "CircleXmarkFill",
+    "style": "fill"
+  },
+  {
+    "name": "circles-3-plus",
+    "componentName": "Circles3Plus",
+    "style": "regular"
+  },
+  {
+    "name": "circles-4-diamond",
+    "componentName": "Circles4Diamond",
+    "style": "regular"
+  },
+  {
+    "name": "circles-4-square",
+    "componentName": "Circles4Square",
+    "style": "regular"
+  },
+  {
+    "name": "circles-5-random",
+    "componentName": "Circles5Random",
+    "style": "regular"
+  },
+  {
+    "name": "circles-concentric",
+    "componentName": "CirclesConcentric",
+    "style": "regular"
+  },
+  {
+    "name": "circles-intersection",
+    "componentName": "CirclesIntersection",
+    "style": "regular"
+  },
+  {
+    "name": "clock",
+    "componentName": "Clock",
+    "style": "regular"
+  },
+  {
+    "name": "clock",
+    "componentName": "ClockFill",
+    "style": "fill"
+  },
+  {
+    "name": "clock-arrow-rotate-left",
+    "componentName": "ClockArrowRotateLeft",
+    "style": "regular"
+  },
+  {
+    "name": "cloud",
+    "componentName": "Cloud",
+    "style": "regular"
+  },
+  {
+    "name": "cloud-arrow-up-in",
+    "componentName": "CloudArrowUpIn",
+    "style": "regular"
+  },
+  {
+    "name": "cloud-check",
+    "componentName": "CloudCheck",
+    "style": "regular"
+  },
+  {
+    "name": "cloud-gear",
+    "componentName": "CloudGear",
+    "style": "regular"
+  },
+  {
+    "name": "cloud-nut-hex",
+    "componentName": "CloudNutHex",
+    "style": "regular"
+  },
+  {
+    "name": "cloud-slash",
+    "componentName": "CloudSlash",
+    "style": "regular"
+  },
+  {
+    "name": "clouds",
+    "componentName": "Clouds",
+    "style": "regular"
+  },
+  {
+    "name": "code",
+    "componentName": "Code",
+    "style": "regular"
+  },
+  {
+    "name": "code-commit",
+    "componentName": "CodeCommit",
+    "style": "regular"
+  },
+  {
+    "name": "code-commit-horizontal",
+    "componentName": "CodeCommitHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "code-commits",
+    "componentName": "CodeCommits",
+    "style": "regular"
+  },
+  {
+    "name": "code-compare",
+    "componentName": "CodeCompare",
+    "style": "regular"
+  },
+  {
+    "name": "code-fork",
+    "componentName": "CodeFork",
+    "style": "regular"
+  },
+  {
+    "name": "code-merge",
+    "componentName": "CodeMerge",
+    "style": "regular"
+  },
+  {
+    "name": "code-pull-request",
+    "componentName": "CodePullRequest",
+    "style": "regular"
+  },
+  {
+    "name": "code-pull-request-arrow-left",
+    "componentName": "CodePullRequestArrowLeft",
+    "style": "regular"
+  },
+  {
+    "name": "code-pull-request-arrow-right",
+    "componentName": "CodePullRequestArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "code-pull-request-check",
+    "componentName": "CodePullRequestCheck",
+    "style": "regular"
+  },
+  {
+    "name": "code-pull-request-xmark",
+    "componentName": "CodePullRequestXmark",
+    "style": "regular"
+  },
+  {
+    "name": "code-trunk",
+    "componentName": "CodeTrunk",
+    "style": "regular"
+  },
+  {
+    "name": "comment",
+    "componentName": "Comment",
+    "style": "regular"
+  },
+  {
+    "name": "comment",
+    "componentName": "CommentFill",
+    "style": "fill"
+  },
+  {
+    "name": "comment-dot",
+    "componentName": "CommentDot",
+    "style": "regular"
+  },
+  {
+    "name": "comment-plus",
+    "componentName": "CommentPlus",
+    "style": "regular"
+  },
+  {
+    "name": "comment-slash",
+    "componentName": "CommentSlash",
+    "style": "regular"
+  },
+  {
+    "name": "comments",
+    "componentName": "Comments",
+    "style": "regular"
+  },
+  {
+    "name": "compass",
+    "componentName": "Compass",
+    "style": "regular"
+  },
+  {
+    "name": "copy",
+    "componentName": "Copy",
+    "style": "regular"
+  },
+  {
+    "name": "copy-arrow-right",
+    "componentName": "CopyArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "copy-check",
+    "componentName": "CopyCheck",
+    "style": "regular"
+  },
+  {
+    "name": "copy-check-xmark",
+    "componentName": "CopyCheckXmark",
+    "style": "regular"
+  },
+  {
+    "name": "copy-chevron-right",
+    "componentName": "CopyChevronRight",
+    "style": "regular"
+  },
+  {
+    "name": "copy-minus",
+    "componentName": "CopyMinus",
+    "style": "regular"
+  },
+  {
+    "name": "copy-picture",
+    "componentName": "CopyPicture",
+    "style": "regular"
+  },
+  {
+    "name": "copy-plus",
+    "componentName": "CopyPlus",
+    "style": "regular"
+  },
+  {
+    "name": "copy-transparent",
+    "componentName": "CopyTransparent",
+    "style": "regular"
+  },
+  {
+    "name": "copy-xmark",
+    "componentName": "CopyXmark",
+    "style": "regular"
+  },
+  {
+    "name": "cpu",
+    "componentName": "Cpu",
+    "style": "regular"
+  },
+  {
+    "name": "cpus",
+    "componentName": "Cpus",
+    "style": "regular"
+  },
+  {
+    "name": "credit-card",
+    "componentName": "CreditCard",
+    "style": "regular"
+  },
+  {
+    "name": "crop",
+    "componentName": "Crop",
+    "style": "regular"
+  },
+  {
+    "name": "crown-diamond",
+    "componentName": "CrownDiamond",
+    "style": "regular"
+  },
+  {
+    "name": "cube",
+    "componentName": "Cube",
+    "style": "regular"
+  },
+  {
+    "name": "cubes-3",
+    "componentName": "Cubes3",
+    "style": "regular"
+  },
+  {
+    "name": "cubes-3-overlap",
+    "componentName": "Cubes3Overlap",
+    "style": "regular"
+  },
+  {
+    "name": "cup",
+    "componentName": "Cup",
+    "style": "regular"
+  },
+  {
+    "name": "curly-brackets",
+    "componentName": "CurlyBrackets",
+    "style": "regular"
+  },
+  {
+    "name": "curly-brackets-function",
+    "componentName": "CurlyBracketsFunction",
+    "style": "regular"
+  },
+  {
+    "name": "curly-brackets-lock",
+    "componentName": "CurlyBracketsLock",
+    "style": "regular"
+  },
+  {
+    "name": "database",
+    "componentName": "Database",
+    "style": "regular"
+  },
+  {
+    "name": "database",
+    "componentName": "DatabaseFill",
+    "style": "fill"
+  },
+  {
+    "name": "database-arrow-right",
+    "componentName": "DatabaseArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "database-magnifier",
+    "componentName": "DatabaseMagnifier",
+    "style": "regular"
+  },
+  {
+    "name": "databases",
+    "componentName": "Databases",
+    "style": "regular"
+  },
+  {
+    "name": "databases",
+    "componentName": "DatabasesFill",
+    "style": "fill"
+  },
+  {
+    "name": "delete",
+    "componentName": "Delete",
+    "style": "regular"
+  },
+  {
+    "name": "diamond",
+    "componentName": "Diamond",
+    "style": "regular"
+  },
+  {
+    "name": "diamond",
+    "componentName": "DiamondFill",
+    "style": "fill"
+  },
+  {
+    "name": "diamond-exclamation",
+    "componentName": "DiamondExclamation",
+    "style": "regular"
+  },
+  {
+    "name": "diamond-exclamation",
+    "componentName": "DiamondExclamationFill",
+    "style": "fill"
+  },
+  {
+    "name": "dice-1",
+    "componentName": "Dice1",
+    "style": "regular"
+  },
+  {
+    "name": "dice-2",
+    "componentName": "Dice2",
+    "style": "regular"
+  },
+  {
+    "name": "dice-3",
+    "componentName": "Dice3",
+    "style": "regular"
+  },
+  {
+    "name": "dice-4",
+    "componentName": "Dice4",
+    "style": "regular"
+  },
+  {
+    "name": "dice-5",
+    "componentName": "Dice5",
+    "style": "regular"
+  },
+  {
+    "name": "dice-6",
+    "componentName": "Dice6",
+    "style": "regular"
+  },
+  {
+    "name": "display",
+    "componentName": "Display",
+    "style": "regular"
+  },
+  {
+    "name": "display-pulse",
+    "componentName": "DisplayPulse",
+    "style": "regular"
+  },
+  {
+    "name": "dots-9",
+    "componentName": "Dots9",
+    "style": "regular"
+  },
+  {
+    "name": "droplet",
+    "componentName": "Droplet",
+    "style": "regular"
+  },
+  {
+    "name": "ear",
+    "componentName": "Ear",
+    "style": "regular"
+  },
+  {
+    "name": "ellipsis",
+    "componentName": "Ellipsis",
+    "style": "regular"
+  },
+  {
+    "name": "ellipsis-vertical",
+    "componentName": "EllipsisVertical",
+    "style": "regular"
+  },
+  {
+    "name": "envelope",
+    "componentName": "Envelope",
+    "style": "regular"
+  },
+  {
+    "name": "envelope-open",
+    "componentName": "EnvelopeOpen",
+    "style": "regular"
+  },
+  {
+    "name": "envelope-open-xmark",
+    "componentName": "EnvelopeOpenXmark",
+    "style": "regular"
+  },
+  {
+    "name": "equal",
+    "componentName": "Equal",
+    "style": "regular"
+  },
+  {
+    "name": "eraser",
+    "componentName": "Eraser",
+    "style": "regular"
+  },
+  {
+    "name": "exclamation-shape",
+    "componentName": "ExclamationShape",
+    "style": "regular"
+  },
+  {
+    "name": "exclamation-shape",
+    "componentName": "ExclamationShapeFill",
+    "style": "fill"
+  },
+  {
+    "name": "eye",
+    "componentName": "Eye",
+    "style": "regular"
+  },
+  {
+    "name": "eye-closed",
+    "componentName": "EyeClosed",
+    "style": "regular"
+  },
+  {
+    "name": "eye-dashed",
+    "componentName": "EyeDashed",
+    "style": "regular"
+  },
+  {
+    "name": "eye-slash",
+    "componentName": "EyeSlash",
+    "style": "regular"
+  },
+  {
+    "name": "eyes-look-left",
+    "componentName": "EyesLookLeft",
+    "style": "regular"
+  },
+  {
+    "name": "eyes-look-right",
+    "componentName": "EyesLookRight",
+    "style": "regular"
+  },
+  {
+    "name": "face-alien",
+    "componentName": "FaceAlien",
+    "style": "regular"
+  },
+  {
+    "name": "face-angry",
+    "componentName": "FaceAngry",
+    "style": "regular"
+  },
+  {
+    "name": "face-fun",
+    "componentName": "FaceFun",
+    "style": "regular"
+  },
+  {
+    "name": "face-neutral",
+    "componentName": "FaceNeutral",
+    "style": "regular"
+  },
+  {
+    "name": "face-neutral-dashed",
+    "componentName": "FaceNeutralDashed",
+    "style": "regular"
+  },
+  {
+    "name": "face-robot",
+    "componentName": "FaceRobot",
+    "style": "regular"
+  },
+  {
+    "name": "face-robot-smile",
+    "componentName": "FaceRobotSmile",
+    "style": "regular"
+  },
+  {
+    "name": "face-sad",
+    "componentName": "FaceSad",
+    "style": "regular"
+  },
+  {
+    "name": "face-smile",
+    "componentName": "FaceSmile",
+    "style": "regular"
+  },
+  {
+    "name": "face-surprise",
+    "componentName": "FaceSurprise",
+    "style": "regular"
+  },
+  {
+    "name": "factory",
+    "componentName": "Factory",
+    "style": "regular"
+  },
+  {
+    "name": "file",
+    "componentName": "File",
+    "style": "regular"
+  },
+  {
+    "name": "file-arrow-down",
+    "componentName": "FileArrowDown",
+    "style": "regular"
+  },
+  {
+    "name": "file-arrow-left",
+    "componentName": "FileArrowLeft",
+    "style": "regular"
+  },
+  {
+    "name": "file-arrow-right",
+    "componentName": "FileArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "file-arrow-right-out",
+    "componentName": "FileArrowRightOut",
+    "style": "regular"
+  },
+  {
+    "name": "file-arrow-up",
+    "componentName": "FileArrowUp",
+    "style": "regular"
+  },
+  {
+    "name": "file-check",
+    "componentName": "FileCheck",
+    "style": "regular"
+  },
+  {
+    "name": "file-code",
+    "componentName": "FileCode",
+    "style": "regular"
+  },
+  {
+    "name": "file-dollar",
+    "componentName": "FileDollar",
+    "style": "regular"
+  },
+  {
+    "name": "file-exclamation",
+    "componentName": "FileExclamation",
+    "style": "regular"
+  },
+  {
+    "name": "file-letter-p",
+    "componentName": "FileLetterP",
+    "style": "regular"
+  },
+  {
+    "name": "file-letter-w",
+    "componentName": "FileLetterW",
+    "style": "regular"
+  },
+  {
+    "name": "file-letter-x",
+    "componentName": "FileLetterX",
+    "style": "regular"
+  },
+  {
+    "name": "file-magnifier",
+    "componentName": "FileMagnifier",
+    "style": "regular"
+  },
+  {
+    "name": "file-minus",
+    "componentName": "FileMinus",
+    "style": "regular"
+  },
+  {
+    "name": "file-plus",
+    "componentName": "FilePlus",
+    "style": "regular"
+  },
+  {
+    "name": "file-question",
+    "componentName": "FileQuestion",
+    "style": "regular"
+  },
+  {
+    "name": "file-ruble",
+    "componentName": "FileRuble",
+    "style": "regular"
+  },
+  {
+    "name": "file-text",
+    "componentName": "FileText",
+    "style": "regular"
+  },
+  {
+    "name": "file-xmark",
+    "componentName": "FileXmark",
+    "style": "regular"
+  },
+  {
+    "name": "file-zipper",
+    "componentName": "FileZipper",
+    "style": "regular"
+  },
+  {
+    "name": "files",
+    "componentName": "Files",
+    "style": "regular"
+  },
+  {
+    "name": "filmstrip",
+    "componentName": "Filmstrip",
+    "style": "regular"
+  },
+  {
+    "name": "fingerprint",
+    "componentName": "Fingerprint",
+    "style": "regular"
+  },
+  {
+    "name": "firewall",
+    "componentName": "Firewall",
+    "style": "regular"
+  },
+  {
+    "name": "flag",
+    "componentName": "Flag",
+    "style": "regular"
+  },
+  {
+    "name": "flame",
+    "componentName": "Flame",
+    "style": "regular"
+  },
+  {
+    "name": "flask",
+    "componentName": "Flask",
+    "style": "regular"
+  },
+  {
+    "name": "floppy-disk",
+    "componentName": "FloppyDisk",
+    "style": "regular"
+  },
+  {
+    "name": "folder",
+    "componentName": "Folder",
+    "style": "regular"
+  },
+  {
+    "name": "folder",
+    "componentName": "FolderFill",
+    "style": "fill"
+  },
+  {
+    "name": "folder-arrow-down",
+    "componentName": "FolderArrowDown",
+    "style": "regular"
+  },
+  {
+    "name": "folder-arrow-left",
+    "componentName": "FolderArrowLeft",
+    "style": "regular"
+  },
+  {
+    "name": "folder-arrow-right",
+    "componentName": "FolderArrowRight",
+    "style": "regular"
+  },
+  {
+    "name": "folder-arrow-up",
+    "componentName": "FolderArrowUp",
+    "style": "regular"
+  },
+  {
+    "name": "folder-arrow-up-in",
+    "componentName": "FolderArrowUpIn",
+    "style": "regular"
+  },
+  {
+    "name": "folder-check",
+    "componentName": "FolderCheck",
+    "style": "regular"
+  },
+  {
+    "name": "folder-code",
+    "componentName": "FolderCode",
+    "style": "regular"
+  },
+  {
+    "name": "folder-exclamation",
+    "componentName": "FolderExclamation",
+    "style": "regular"
+  },
+  {
+    "name": "folder-flows",
+    "componentName": "FolderFlows",
+    "style": "regular"
+  },
+  {
+    "name": "folder-house",
+    "componentName": "FolderHouse",
+    "style": "regular"
+  },
+  {
+    "name": "folder-keyhole",
+    "componentName": "FolderKeyhole",
+    "style": "regular"
+  },
+  {
+    "name": "folder-lock",
+    "componentName": "FolderLock",
+    "style": "regular"
+  },
+  {
+    "name": "folder-magnifier",
+    "componentName": "FolderMagnifier",
+    "style": "regular"
+  },
+  {
+    "name": "folder-open",
+    "componentName": "FolderOpen",
+    "style": "regular"
+  },
+  {
+    "name": "folder-open",
+    "componentName": "FolderOpenFill",
+    "style": "fill"
+  },
+  {
+    "name": "folder-plus",
+    "componentName": "FolderPlus",
+    "style": "regular"
+  },
+  {
+    "name": "folder-tree",
+    "componentName": "FolderTree",
+    "style": "regular"
+  },
+  {
+    "name": "folders",
+    "componentName": "Folders",
+    "style": "regular"
+  },
+  {
+    "name": "font",
+    "componentName": "Font",
+    "style": "regular"
+  },
+  {
+    "name": "font-case",
+    "componentName": "FontCase",
+    "style": "regular"
+  },
+  {
+    "name": "font-cursor",
+    "componentName": "FontCursor",
+    "style": "regular"
+  },
+  {
+    "name": "forward-step",
+    "componentName": "ForwardStep",
+    "style": "regular"
+  },
+  {
+    "name": "forward-step",
+    "componentName": "ForwardStepFill",
+    "style": "fill"
+  },
+  {
+    "name": "frame",
+    "componentName": "Frame",
+    "style": "regular"
+  },
+  {
+    "name": "frames",
+    "componentName": "Frames",
+    "style": "regular"
+  },
+  {
+    "name": "function",
+    "componentName": "Function",
+    "style": "regular"
+  },
+  {
+    "name": "funnel",
+    "componentName": "Funnel",
+    "style": "regular"
+  },
+  {
+    "name": "funnel-xmark",
+    "componentName": "FunnelXmark",
+    "style": "regular"
+  },
+  {
+    "name": "gear",
+    "componentName": "Gear",
+    "style": "regular"
+  },
+  {
+    "name": "gear-branches",
+    "componentName": "GearBranches",
+    "style": "regular"
+  },
+  {
+    "name": "gear-dot",
+    "componentName": "GearDot",
+    "style": "regular"
+  },
+  {
+    "name": "gear-play",
+    "componentName": "GearPlay",
+    "style": "regular"
+  },
+  {
+    "name": "gem",
+    "componentName": "Gem",
+    "style": "regular"
+  },
+  {
+    "name": "geo",
+    "componentName": "Geo",
+    "style": "regular"
+  },
+  {
+    "name": "geo",
+    "componentName": "GeoFill",
+    "style": "fill"
+  },
+  {
+    "name": "geo-dots",
+    "componentName": "GeoDots",
+    "style": "regular"
+  },
+  {
+    "name": "geo-pin",
+    "componentName": "GeoPin",
+    "style": "regular"
+  },
+  {
+    "name": "geo-polygons",
+    "componentName": "GeoPolygons",
+    "style": "regular"
+  },
+  {
+    "name": "ghost",
+    "componentName": "Ghost",
+    "style": "regular"
+  },
+  {
+    "name": "gift",
+    "componentName": "Gift",
+    "style": "regular"
+  },
+  {
+    "name": "globe",
+    "componentName": "Globe",
+    "style": "regular"
+  },
+  {
+    "name": "gpu",
+    "componentName": "Gpu",
+    "style": "regular"
+  },
+  {
+    "name": "graduation-cap",
+    "componentName": "GraduationCap",
+    "style": "regular"
+  },
+  {
+    "name": "graph-node",
+    "componentName": "GraphNode",
+    "style": "regular"
+  },
+  {
+    "name": "grip",
+    "componentName": "Grip",
+    "style": "regular"
+  },
+  {
+    "name": "grip-horizontal",
+    "componentName": "GripHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "hammer",
+    "componentName": "Hammer",
+    "style": "regular"
+  },
+  {
+    "name": "hand",
+    "componentName": "Hand",
+    "style": "regular"
+  },
+  {
+    "name": "hand-ok",
+    "componentName": "HandOk",
+    "style": "regular"
+  },
+  {
+    "name": "hand-point-down",
+    "componentName": "HandPointDown",
+    "style": "regular"
+  },
+  {
+    "name": "hand-point-left",
+    "componentName": "HandPointLeft",
+    "style": "regular"
+  },
+  {
+    "name": "hand-point-right",
+    "componentName": "HandPointRight",
+    "style": "regular"
+  },
+  {
+    "name": "hand-point-up",
+    "componentName": "HandPointUp",
+    "style": "regular"
+  },
+  {
+    "name": "hand-stop",
+    "componentName": "HandStop",
+    "style": "regular"
+  },
+  {
+    "name": "handset",
+    "componentName": "Handset",
+    "style": "regular"
+  },
+  {
+    "name": "handset-arrow-in",
+    "componentName": "HandsetArrowIn",
+    "style": "regular"
+  },
+  {
+    "name": "handset-arrow-out",
+    "componentName": "HandsetArrowOut",
+    "style": "regular"
+  },
+  {
+    "name": "hard-drive",
+    "componentName": "HardDrive",
+    "style": "regular"
+  },
+  {
+    "name": "hashtag",
+    "componentName": "Hashtag",
+    "style": "regular"
+  },
+  {
+    "name": "heading",
+    "componentName": "Heading",
+    "style": "regular"
+  },
+  {
+    "name": "heading-1",
+    "componentName": "Heading1",
+    "style": "regular"
+  },
+  {
+    "name": "heading-2",
+    "componentName": "Heading2",
+    "style": "regular"
+  },
+  {
+    "name": "heading-3",
+    "componentName": "Heading3",
+    "style": "regular"
+  },
+  {
+    "name": "heading-4",
+    "componentName": "Heading4",
+    "style": "regular"
+  },
+  {
+    "name": "heading-5",
+    "componentName": "Heading5",
+    "style": "regular"
+  },
+  {
+    "name": "heading-6",
+    "componentName": "Heading6",
+    "style": "regular"
+  },
+  {
+    "name": "headphones",
+    "componentName": "Headphones",
+    "style": "regular"
+  },
+  {
+    "name": "heart",
+    "componentName": "Heart",
+    "style": "regular"
+  },
+  {
+    "name": "heart",
+    "componentName": "HeartFill",
+    "style": "fill"
+  },
+  {
+    "name": "heart-crack",
+    "componentName": "HeartCrack",
+    "style": "regular"
+  },
+  {
+    "name": "heart-pulse",
+    "componentName": "HeartPulse",
+    "style": "regular"
+  },
+  {
+    "name": "hierarchy",
+    "componentName": "Hierarchy",
+    "style": "regular"
+  },
+  {
+    "name": "house",
+    "componentName": "House",
+    "style": "regular"
+  },
+  {
+    "name": "house",
+    "componentName": "HouseFill",
+    "style": "fill"
+  },
+  {
+    "name": "italic",
+    "componentName": "Italic",
+    "style": "regular"
+  },
+  {
+    "name": "key",
+    "componentName": "Key",
+    "style": "regular"
+  },
+  {
+    "name": "keyboard",
+    "componentName": "Keyboard",
+    "style": "regular"
+  },
+  {
+    "name": "layers",
+    "componentName": "Layers",
+    "style": "regular"
+  },
+  {
+    "name": "layers-3-diagonal",
+    "componentName": "Layers3Diagonal",
+    "style": "regular"
+  },
+  {
+    "name": "layers-vertical",
+    "componentName": "LayersVertical",
+    "style": "regular"
+  },
+  {
+    "name": "layout-cells",
+    "componentName": "LayoutCells",
+    "style": "regular"
+  },
+  {
+    "name": "layout-cells-large",
+    "componentName": "LayoutCellsLarge",
+    "style": "regular"
+  },
+  {
+    "name": "layout-columns",
+    "componentName": "LayoutColumns",
+    "style": "regular"
+  },
+  {
+    "name": "layout-columns-3",
+    "componentName": "LayoutColumns3",
+    "style": "regular"
+  },
+  {
+    "name": "layout-footer",
+    "componentName": "LayoutFooter",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header",
+    "componentName": "LayoutHeader",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header-cells",
+    "componentName": "LayoutHeaderCells",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header-cells-large",
+    "componentName": "LayoutHeaderCellsLarge",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header-cells-large",
+    "componentName": "LayoutHeaderCellsLargeFill",
+    "style": "fill"
+  },
+  {
+    "name": "layout-header-cells-large-letter-d",
+    "componentName": "LayoutHeaderCellsLargeLetterD",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header-cells-large-thunderbolt",
+    "componentName": "LayoutHeaderCellsLargeThunderbolt",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header-columns",
+    "componentName": "LayoutHeaderColumns",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header-cursor",
+    "componentName": "LayoutHeaderCursor",
+    "style": "regular"
+  },
+  {
+    "name": "layout-header-side-content",
+    "componentName": "LayoutHeaderSideContent",
+    "style": "regular"
+  },
+  {
+    "name": "layout-list",
+    "componentName": "LayoutList",
+    "style": "regular"
+  },
+  {
+    "name": "layout-rows",
+    "componentName": "LayoutRows",
+    "style": "regular"
+  },
+  {
+    "name": "layout-rows-3",
+    "componentName": "LayoutRows3",
+    "style": "regular"
+  },
+  {
+    "name": "layout-side-content-left",
+    "componentName": "LayoutSideContentLeft",
+    "style": "regular"
+  },
+  {
+    "name": "layout-side-content-right",
+    "componentName": "LayoutSideContentRight",
+    "style": "regular"
+  },
+  {
+    "name": "layout-split-columns",
+    "componentName": "LayoutSplitColumns",
+    "style": "regular"
+  },
+  {
+    "name": "layout-split-columns-3",
+    "componentName": "LayoutSplitColumns3",
+    "style": "regular"
+  },
+  {
+    "name": "layout-split-rows",
+    "componentName": "LayoutSplitRows",
+    "style": "regular"
+  },
+  {
+    "name": "layout-split-side-content-left",
+    "componentName": "LayoutSplitSideContentLeft",
+    "style": "regular"
+  },
+  {
+    "name": "layout-split-side-content-right",
+    "componentName": "LayoutSplitSideContentRight",
+    "style": "regular"
+  },
+  {
+    "name": "layout-tabs",
+    "componentName": "LayoutTabs",
+    "style": "regular"
+  },
+  {
+    "name": "letter-a-underline",
+    "componentName": "LetterAUnderline",
+    "style": "regular"
+  },
+  {
+    "name": "letter-group",
+    "componentName": "LetterGroup",
+    "style": "regular"
+  },
+  {
+    "name": "letter-m",
+    "componentName": "LetterM",
+    "style": "regular"
+  },
+  {
+    "name": "life-ring",
+    "componentName": "LifeRing",
+    "style": "regular"
+  },
+  {
+    "name": "link",
+    "componentName": "Link",
+    "style": "regular"
+  },
+  {
+    "name": "link-slash",
+    "componentName": "LinkSlash",
+    "style": "regular"
+  },
+  {
+    "name": "list-check",
+    "componentName": "ListCheck",
+    "style": "regular"
+  },
+  {
+    "name": "list-check-lock",
+    "componentName": "ListCheckLock",
+    "style": "regular"
+  },
+  {
+    "name": "list-ol",
+    "componentName": "ListOl",
+    "style": "regular"
+  },
+  {
+    "name": "list-timeline",
+    "componentName": "ListTimeline",
+    "style": "regular"
+  },
+  {
+    "name": "list-ul",
+    "componentName": "ListUl",
+    "style": "regular"
+  },
+  {
+    "name": "location-arrow",
+    "componentName": "LocationArrow",
+    "style": "regular"
+  },
+  {
+    "name": "location-arrow",
+    "componentName": "LocationArrowFill",
+    "style": "fill"
+  },
+  {
+    "name": "lock",
+    "componentName": "Lock",
+    "style": "regular"
+  },
+  {
+    "name": "lock",
+    "componentName": "LockFill",
+    "style": "fill"
+  },
+  {
+    "name": "lock-open",
+    "componentName": "LockOpen",
+    "style": "regular"
+  },
+  {
+    "name": "lock-open",
+    "componentName": "LockOpenFill",
+    "style": "fill"
+  },
+  {
+    "name": "logo-acrobat",
+    "componentName": "LogoAcrobat",
+    "style": "regular"
+  },
+  {
+    "name": "logo-android",
+    "componentName": "LogoAndroid",
+    "style": "regular"
+  },
+  {
+    "name": "logo-debian",
+    "componentName": "LogoDebian",
+    "style": "regular"
+  },
+  {
+    "name": "logo-docker",
+    "componentName": "LogoDocker",
+    "style": "regular"
+  },
+  {
+    "name": "logo-draw-io",
+    "componentName": "LogoDrawIo",
+    "style": "regular"
+  },
+  {
+    "name": "logo-facebook",
+    "componentName": "LogoFacebook",
+    "style": "regular"
+  },
+  {
+    "name": "logo-figma",
+    "componentName": "LogoFigma",
+    "style": "regular"
+  },
+  {
+    "name": "logo-github",
+    "componentName": "LogoGithub",
+    "style": "regular"
+  },
+  {
+    "name": "logo-gitlab",
+    "componentName": "LogoGitlab",
+    "style": "regular"
+  },
+  {
+    "name": "logo-linkedin",
+    "componentName": "LogoLinkedin",
+    "style": "regular"
+  },
+  {
+    "name": "logo-linux",
+    "componentName": "LogoLinux",
+    "style": "regular"
+  },
+  {
+    "name": "logo-macos",
+    "componentName": "LogoMacos",
+    "style": "regular"
+  },
+  {
+    "name": "logo-markdown",
+    "componentName": "LogoMarkdown",
+    "style": "regular"
+  },
+  {
+    "name": "logo-mcp",
+    "componentName": "LogoMcp",
+    "style": "regular"
+  },
+  {
+    "name": "logo-mermaid",
+    "componentName": "LogoMermaid",
+    "style": "regular"
+  },
+  {
+    "name": "logo-microsoft-office",
+    "componentName": "LogoMicrosoftOffice",
+    "style": "regular"
+  },
+  {
+    "name": "logo-nodejs",
+    "componentName": "LogoNodejs",
+    "style": "regular"
+  },
+  {
+    "name": "logo-notion",
+    "componentName": "LogoNotion",
+    "style": "regular"
+  },
+  {
+    "name": "logo-osi",
+    "componentName": "LogoOsi",
+    "style": "regular"
+  },
+  {
+    "name": "logo-python",
+    "componentName": "LogoPython",
+    "style": "regular"
+  },
+  {
+    "name": "logo-slack",
+    "componentName": "LogoSlack",
+    "style": "regular"
+  },
+  {
+    "name": "logo-stack-overflow",
+    "componentName": "LogoStackOverflow",
+    "style": "regular"
+  },
+  {
+    "name": "logo-telegram",
+    "componentName": "LogoTelegram",
+    "style": "regular"
+  },
+  {
+    "name": "logo-ubuntu",
+    "componentName": "LogoUbuntu",
+    "style": "regular"
+  },
+  {
+    "name": "logo-windows",
+    "componentName": "LogoWindows",
+    "style": "regular"
+  },
+  {
+    "name": "logo-yandex",
+    "componentName": "LogoYandex",
+    "style": "regular"
+  },
+  {
+    "name": "logo-yandex-cloud",
+    "componentName": "LogoYandexCloud",
+    "style": "regular"
+  },
+  {
+    "name": "logo-yandex-messenger",
+    "componentName": "LogoYandexMessenger",
+    "style": "regular"
+  },
+  {
+    "name": "logo-yandex-tracker",
+    "componentName": "LogoYandexTracker",
+    "style": "regular"
+  },
+  {
+    "name": "magic-wand",
+    "componentName": "MagicWand",
+    "style": "regular"
+  },
+  {
+    "name": "magnet",
+    "componentName": "Magnet",
+    "style": "regular"
+  },
+  {
+    "name": "magnifier",
+    "componentName": "Magnifier",
+    "style": "regular"
+  },
+  {
+    "name": "magnifier-minus",
+    "componentName": "MagnifierMinus",
+    "style": "regular"
+  },
+  {
+    "name": "magnifier-plus",
+    "componentName": "MagnifierPlus",
+    "style": "regular"
+  },
+  {
+    "name": "map-pin",
+    "componentName": "MapPin",
+    "style": "regular"
+  },
+  {
+    "name": "map-pin-minus",
+    "componentName": "MapPinMinus",
+    "style": "regular"
+  },
+  {
+    "name": "map-pin-plus",
+    "componentName": "MapPinPlus",
+    "style": "regular"
+  },
+  {
+    "name": "math-intersection-shape",
+    "componentName": "MathIntersectionShape",
+    "style": "regular"
+  },
+  {
+    "name": "math-operations",
+    "componentName": "MathOperations",
+    "style": "regular"
+  },
+  {
+    "name": "math-union-shape",
+    "componentName": "MathUnionShape",
+    "style": "regular"
+  },
+  {
+    "name": "medal",
+    "componentName": "Medal",
+    "style": "regular"
+  },
+  {
+    "name": "megaphone",
+    "componentName": "Megaphone",
+    "style": "regular"
+  },
+  {
+    "name": "microphone",
+    "componentName": "Microphone",
+    "style": "regular"
+  },
+  {
+    "name": "microphone-slash",
+    "componentName": "MicrophoneSlash",
+    "style": "regular"
+  },
+  {
+    "name": "microscope",
+    "componentName": "Microscope",
+    "style": "regular"
+  },
+  {
+    "name": "minus",
+    "componentName": "Minus",
+    "style": "regular"
+  },
+  {
+    "name": "minus-shape",
+    "componentName": "MinusShape",
+    "style": "regular"
+  },
+  {
+    "name": "minus-shape",
+    "componentName": "MinusShapeFill",
+    "style": "fill"
+  },
+  {
+    "name": "molecule",
+    "componentName": "Molecule",
+    "style": "regular"
+  },
+  {
+    "name": "moon",
+    "componentName": "Moon",
+    "style": "regular"
+  },
+  {
+    "name": "mug",
+    "componentName": "Mug",
+    "style": "regular"
+  },
+  {
+    "name": "music-note",
+    "componentName": "MusicNote",
+    "style": "regular"
+  },
+  {
+    "name": "nodes-down",
+    "componentName": "NodesDown",
+    "style": "regular"
+  },
+  {
+    "name": "nodes-left",
+    "componentName": "NodesLeft",
+    "style": "regular"
+  },
+  {
+    "name": "nodes-right",
+    "componentName": "NodesRight",
+    "style": "regular"
+  },
+  {
+    "name": "nodes-up",
+    "componentName": "NodesUp",
+    "style": "regular"
+  },
+  {
+    "name": "nut-hex",
+    "componentName": "NutHex",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-bottom",
+    "componentName": "ObjectAlignBottom",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-center-horizontal",
+    "componentName": "ObjectAlignCenterHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-center-vertical",
+    "componentName": "ObjectAlignCenterVertical",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-justify-horizontal",
+    "componentName": "ObjectAlignJustifyHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-justify-vertical",
+    "componentName": "ObjectAlignJustifyVertical",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-left",
+    "componentName": "ObjectAlignLeft",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-right",
+    "componentName": "ObjectAlignRight",
+    "style": "regular"
+  },
+  {
+    "name": "object-align-top",
+    "componentName": "ObjectAlignTop",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-bottom",
+    "componentName": "ObjectsAlignBottom",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-center-horizontal",
+    "componentName": "ObjectsAlignCenterHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-center-vertical",
+    "componentName": "ObjectsAlignCenterVertical",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-justify-horizontal",
+    "componentName": "ObjectsAlignJustifyHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-justify-vertical",
+    "componentName": "ObjectsAlignJustifyVertical",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-left",
+    "componentName": "ObjectsAlignLeft",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-right",
+    "componentName": "ObjectsAlignRight",
+    "style": "regular"
+  },
+  {
+    "name": "objects-align-top",
+    "componentName": "ObjectsAlignTop",
+    "style": "regular"
+  },
+  {
+    "name": "octagon-xmark",
+    "componentName": "OctagonXmark",
+    "style": "regular"
+  },
+  {
+    "name": "office-badge",
+    "componentName": "OfficeBadge",
+    "style": "regular"
+  },
+  {
+    "name": "paintbrush",
+    "componentName": "Paintbrush",
+    "style": "regular"
+  },
+  {
+    "name": "palette",
+    "componentName": "Palette",
+    "style": "regular"
+  },
+  {
+    "name": "paper-plane",
+    "componentName": "PaperPlane",
+    "style": "regular"
+  },
+  {
+    "name": "paperclip",
+    "componentName": "Paperclip",
+    "style": "regular"
+  },
+  {
+    "name": "passport",
+    "componentName": "Passport",
+    "style": "regular"
+  },
+  {
+    "name": "pause",
+    "componentName": "Pause",
+    "style": "regular"
+  },
+  {
+    "name": "pause",
+    "componentName": "PauseFill",
+    "style": "fill"
+  },
+  {
+    "name": "pencil",
+    "componentName": "Pencil",
+    "style": "regular"
+  },
+  {
+    "name": "pencil-to-line",
+    "componentName": "PencilToLine",
+    "style": "regular"
+  },
+  {
+    "name": "pencil-to-square",
+    "componentName": "PencilToSquare",
+    "style": "regular"
+  },
+  {
+    "name": "percent",
+    "componentName": "Percent",
+    "style": "regular"
+  },
+  {
+    "name": "person",
+    "componentName": "Person",
+    "style": "regular"
+  },
+  {
+    "name": "person",
+    "componentName": "PersonFill",
+    "style": "fill"
+  },
+  {
+    "name": "person-gear",
+    "componentName": "PersonGear",
+    "style": "regular"
+  },
+  {
+    "name": "person-magnifier",
+    "componentName": "PersonMagnifier",
+    "style": "regular"
+  },
+  {
+    "name": "person-nut-hex",
+    "componentName": "PersonNutHex",
+    "style": "regular"
+  },
+  {
+    "name": "person-pencil",
+    "componentName": "PersonPencil",
+    "style": "regular"
+  },
+  {
+    "name": "person-planet-earth",
+    "componentName": "PersonPlanetEarth",
+    "style": "regular"
+  },
+  {
+    "name": "person-plus",
+    "componentName": "PersonPlus",
+    "style": "regular"
+  },
+  {
+    "name": "person-speaker",
+    "componentName": "PersonSpeaker",
+    "style": "regular"
+  },
+  {
+    "name": "person-worker",
+    "componentName": "PersonWorker",
+    "style": "regular"
+  },
+  {
+    "name": "person-xmark",
+    "componentName": "PersonXmark",
+    "style": "regular"
+  },
+  {
+    "name": "persons",
+    "componentName": "Persons",
+    "style": "regular"
+  },
+  {
+    "name": "persons-lock",
+    "componentName": "PersonsLock",
+    "style": "regular"
+  },
+  {
+    "name": "picture",
+    "componentName": "Picture",
+    "style": "regular"
+  },
+  {
+    "name": "pill",
+    "componentName": "Pill",
+    "style": "regular"
+  },
+  {
+    "name": "pin",
+    "componentName": "Pin",
+    "style": "regular"
+  },
+  {
+    "name": "pin",
+    "componentName": "PinFill",
+    "style": "fill"
+  },
+  {
+    "name": "pin-slash",
+    "componentName": "PinSlash",
+    "style": "regular"
+  },
+  {
+    "name": "pin-slash",
+    "componentName": "PinSlashFill",
+    "style": "fill"
+  },
+  {
+    "name": "pipeline",
+    "componentName": "Pipeline",
+    "style": "regular"
+  },
+  {
+    "name": "plane",
+    "componentName": "PlaneFill",
+    "style": "fill"
+  },
+  {
+    "name": "plane",
+    "componentName": "Plane",
+    "style": "regular"
+  },
+  {
+    "name": "planet-earth",
+    "componentName": "PlanetEarth",
+    "style": "regular"
+  },
+  {
+    "name": "play",
+    "componentName": "Play",
+    "style": "regular"
+  },
+  {
+    "name": "play",
+    "componentName": "PlayFill",
+    "style": "fill"
+  },
+  {
+    "name": "plug-connection",
+    "componentName": "PlugConnection",
+    "style": "regular"
+  },
+  {
+    "name": "plug-wire",
+    "componentName": "PlugWire",
+    "style": "regular"
+  },
+  {
+    "name": "plus",
+    "componentName": "Plus",
+    "style": "regular"
+  },
+  {
+    "name": "plus-shape",
+    "componentName": "PlusShape",
+    "style": "regular"
+  },
+  {
+    "name": "plus-shape",
+    "componentName": "PlusShapeFill",
+    "style": "fill"
+  },
+  {
+    "name": "power",
+    "componentName": "Power",
+    "style": "regular"
+  },
+  {
+    "name": "printer",
+    "componentName": "Printer",
+    "style": "regular"
+  },
+  {
+    "name": "pulse",
+    "componentName": "Pulse",
+    "style": "regular"
+  },
+  {
+    "name": "puzzle",
+    "componentName": "Puzzle",
+    "style": "regular"
+  },
+  {
+    "name": "qr-code",
+    "componentName": "QrCode",
+    "style": "regular"
+  },
+  {
+    "name": "quote-close",
+    "componentName": "QuoteClose",
+    "style": "regular"
+  },
+  {
+    "name": "quote-open",
+    "componentName": "QuoteOpen",
+    "style": "regular"
+  },
+  {
+    "name": "receipt",
+    "componentName": "Receipt",
+    "style": "regular"
+  },
+  {
+    "name": "rectangle-pulse",
+    "componentName": "RectanglePulse",
+    "style": "regular"
+  },
+  {
+    "name": "rectangles-4",
+    "componentName": "Rectangles4",
+    "style": "regular"
+  },
+  {
+    "name": "rocket",
+    "componentName": "Rocket",
+    "style": "regular"
+  },
+  {
+    "name": "round-brackets",
+    "componentName": "RoundBrackets",
+    "style": "regular"
+  },
+  {
+    "name": "route",
+    "componentName": "Route",
+    "style": "regular"
+  },
+  {
+    "name": "sack",
+    "componentName": "Sack",
+    "style": "regular"
+  },
+  {
+    "name": "scales-balanced",
+    "componentName": "ScalesBalanced",
+    "style": "regular"
+  },
+  {
+    "name": "scales-unbalanced",
+    "componentName": "ScalesUnbalanced",
+    "style": "regular"
+  },
+  {
+    "name": "scissors",
+    "componentName": "Scissors",
+    "style": "regular"
+  },
+  {
+    "name": "seal-check",
+    "componentName": "SealCheck",
+    "style": "regular"
+  },
+  {
+    "name": "seal-percent",
+    "componentName": "SealPercent",
+    "style": "regular"
+  },
+  {
+    "name": "server",
+    "componentName": "Server",
+    "style": "regular"
+  },
+  {
+    "name": "shapes-3",
+    "componentName": "Shapes3",
+    "style": "regular"
+  },
+  {
+    "name": "shapes-4",
+    "componentName": "Shapes4",
+    "style": "regular"
+  },
+  {
+    "name": "shield",
+    "componentName": "Shield",
+    "style": "regular"
+  },
+  {
+    "name": "shield-check",
+    "componentName": "ShieldCheck",
+    "style": "regular"
+  },
+  {
+    "name": "shield-exclamation",
+    "componentName": "ShieldExclamation",
+    "style": "regular"
+  },
+  {
+    "name": "shield-keyhole",
+    "componentName": "ShieldKeyhole",
+    "style": "regular"
+  },
+  {
+    "name": "shopping-bag",
+    "componentName": "ShoppingBag",
+    "style": "regular"
+  },
+  {
+    "name": "shopping-basket",
+    "componentName": "ShoppingBasket",
+    "style": "regular"
+  },
+  {
+    "name": "shopping-cart",
+    "componentName": "ShoppingCart",
+    "style": "regular"
+  },
+  {
+    "name": "shuffle",
+    "componentName": "Shuffle",
+    "style": "regular"
+  },
+  {
+    "name": "signal",
+    "componentName": "Signal",
+    "style": "regular"
+  },
+  {
+    "name": "skull",
+    "componentName": "Skull",
+    "style": "regular"
+  },
+  {
+    "name": "sliders",
+    "componentName": "Sliders",
+    "style": "regular"
+  },
+  {
+    "name": "sliders-vertical",
+    "componentName": "SlidersVertical",
+    "style": "regular"
+  },
+  {
+    "name": "smartphone",
+    "componentName": "Smartphone",
+    "style": "regular"
+  },
+  {
+    "name": "snail",
+    "componentName": "Snail",
+    "style": "regular"
+  },
+  {
+    "name": "snowflake",
+    "componentName": "Snowflake",
+    "style": "regular"
+  },
+  {
+    "name": "sparkles",
+    "componentName": "Sparkles",
+    "style": "regular"
+  },
+  {
+    "name": "sparkles",
+    "componentName": "SparklesFill",
+    "style": "fill"
+  },
+  {
+    "name": "speedometer",
+    "componentName": "Speedometer",
+    "style": "regular"
+  },
+  {
+    "name": "sphere",
+    "componentName": "Sphere",
+    "style": "regular"
+  },
+  {
+    "name": "square",
+    "componentName": "Square",
+    "style": "regular"
+  },
+  {
+    "name": "square",
+    "componentName": "SquareFill",
+    "style": "fill"
+  },
+  {
+    "name": "square-article",
+    "componentName": "SquareArticle",
+    "style": "regular"
+  },
+  {
+    "name": "square-bars",
+    "componentName": "SquareBars",
+    "style": "regular"
+  },
+  {
+    "name": "square-bars-vertical",
+    "componentName": "SquareBarsVertical",
+    "style": "regular"
+  },
+  {
+    "name": "square-brackets",
+    "componentName": "SquareBrackets",
+    "style": "regular"
+  },
+  {
+    "name": "square-brackets-bars-vertical",
+    "componentName": "SquareBracketsBarsVertical",
+    "style": "regular"
+  },
+  {
+    "name": "square-brackets-letter-a",
+    "componentName": "SquareBracketsLetterA",
+    "style": "regular"
+  },
+  {
+    "name": "square-chart-bar",
+    "componentName": "SquareChartBar",
+    "style": "regular"
+  },
+  {
+    "name": "square-chart-column",
+    "componentName": "SquareChartColumn",
+    "style": "regular"
+  },
+  {
+    "name": "square-check",
+    "componentName": "SquareCheck",
+    "style": "regular"
+  },
+  {
+    "name": "square-dashed",
+    "componentName": "SquareDashed",
+    "style": "regular"
+  },
+  {
+    "name": "square-dashed-circle",
+    "componentName": "SquareDashedCircle",
+    "style": "regular"
+  },
+  {
+    "name": "square-dashed-letter-a",
+    "componentName": "SquareDashedLetterA",
+    "style": "regular"
+  },
+  {
+    "name": "square-dashed-letter-t",
+    "componentName": "SquareDashedLetterT",
+    "style": "regular"
+  },
+  {
+    "name": "square-dashed-text",
+    "componentName": "SquareDashedText",
+    "style": "regular"
+  },
+  {
+    "name": "square-dot",
+    "componentName": "SquareDot",
+    "style": "regular"
+  },
+  {
+    "name": "square-exclamation",
+    "componentName": "SquareExclamation",
+    "style": "regular"
+  },
+  {
+    "name": "square-hashtag",
+    "componentName": "SquareHashtag",
+    "style": "regular"
+  },
+  {
+    "name": "square-letter-p",
+    "componentName": "SquareLetterP",
+    "style": "regular"
+  },
+  {
+    "name": "square-letter-t",
+    "componentName": "SquareLetterT",
+    "style": "regular"
+  },
+  {
+    "name": "square-line-horizontal",
+    "componentName": "SquareLineHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "square-line-vertical",
+    "componentName": "SquareLineVertical",
+    "style": "regular"
+  },
+  {
+    "name": "square-list-ul",
+    "componentName": "SquareListUl",
+    "style": "regular"
+  },
+  {
+    "name": "square-minus",
+    "componentName": "SquareMinus",
+    "style": "regular"
+  },
+  {
+    "name": "square-plus",
+    "componentName": "SquarePlus",
+    "style": "regular"
+  },
+  {
+    "name": "square-xmark",
+    "componentName": "SquareXmark",
+    "style": "regular"
+  },
+  {
+    "name": "star",
+    "componentName": "Star",
+    "style": "regular"
+  },
+  {
+    "name": "star",
+    "componentName": "StarFill",
+    "style": "fill"
+  },
+  {
+    "name": "stethoscope",
+    "componentName": "Stethoscope",
+    "style": "regular"
+  },
+  {
+    "name": "sticker",
+    "componentName": "Sticker",
+    "style": "regular"
+  },
+  {
+    "name": "stop",
+    "componentName": "Stop",
+    "style": "regular"
+  },
+  {
+    "name": "stop",
+    "componentName": "StopFill",
+    "style": "fill"
+  },
+  {
+    "name": "stopwatch",
+    "componentName": "Stopwatch",
+    "style": "regular"
+  },
+  {
+    "name": "strikethrough",
+    "componentName": "Strikethrough",
+    "style": "regular"
+  },
+  {
+    "name": "suitcase",
+    "componentName": "Suitcase",
+    "style": "regular"
+  },
+  {
+    "name": "sun",
+    "componentName": "Sun",
+    "style": "regular"
+  },
+  {
+    "name": "superscript",
+    "componentName": "Superscript",
+    "style": "regular"
+  },
+  {
+    "name": "t-shirt",
+    "componentName": "TShirt",
+    "style": "regular"
+  },
+  {
+    "name": "tachometer",
+    "componentName": "Tachometer",
+    "style": "regular"
+  },
+  {
+    "name": "tag",
+    "componentName": "Tag",
+    "style": "regular"
+  },
+  {
+    "name": "tag-dollar",
+    "componentName": "TagDollar",
+    "style": "regular"
+  },
+  {
+    "name": "tag-ruble",
+    "componentName": "TagRuble",
+    "style": "regular"
+  },
+  {
+    "name": "tags",
+    "componentName": "Tags",
+    "style": "regular"
+  },
+  {
+    "name": "target",
+    "componentName": "Target",
+    "style": "regular"
+  },
+  {
+    "name": "target-dart",
+    "componentName": "TargetDart",
+    "style": "regular"
+  },
+  {
+    "name": "terminal",
+    "componentName": "Terminal",
+    "style": "regular"
+  },
+  {
+    "name": "terminal-line",
+    "componentName": "TerminalLine",
+    "style": "regular"
+  },
+  {
+    "name": "text",
+    "componentName": "Text",
+    "style": "regular"
+  },
+  {
+    "name": "text-align-center",
+    "componentName": "TextAlignCenter",
+    "style": "regular"
+  },
+  {
+    "name": "text-align-justify",
+    "componentName": "TextAlignJustify",
+    "style": "regular"
+  },
+  {
+    "name": "text-align-left",
+    "componentName": "TextAlignLeft",
+    "style": "regular"
+  },
+  {
+    "name": "text-align-right",
+    "componentName": "TextAlignRight",
+    "style": "regular"
+  },
+  {
+    "name": "text-indent",
+    "componentName": "TextIndent",
+    "style": "regular"
+  },
+  {
+    "name": "text-outdent",
+    "componentName": "TextOutdent",
+    "style": "regular"
+  },
+  {
+    "name": "thumbs-down",
+    "componentName": "ThumbsDown",
+    "style": "regular"
+  },
+  {
+    "name": "thumbs-down",
+    "componentName": "ThumbsDownFill",
+    "style": "fill"
+  },
+  {
+    "name": "thumbs-up",
+    "componentName": "ThumbsUp",
+    "style": "regular"
+  },
+  {
+    "name": "thumbs-up",
+    "componentName": "ThumbsUpFill",
+    "style": "fill"
+  },
+  {
+    "name": "thumbs-up-2",
+    "componentName": "ThumbsUp2",
+    "style": "regular"
+  },
+  {
+    "name": "thunderbolt",
+    "componentName": "Thunderbolt",
+    "style": "regular"
+  },
+  {
+    "name": "thunderbolt",
+    "componentName": "ThunderboltFill",
+    "style": "fill"
+  },
+  {
+    "name": "ticket",
+    "componentName": "Ticket",
+    "style": "regular"
+  },
+  {
+    "name": "timeline",
+    "componentName": "Timeline",
+    "style": "regular"
+  },
+  {
+    "name": "timestamps",
+    "componentName": "Timestamps",
+    "style": "regular"
+  },
+  {
+    "name": "toggle-off",
+    "componentName": "ToggleOff",
+    "style": "regular"
+  },
+  {
+    "name": "toggle-on",
+    "componentName": "ToggleOn",
+    "style": "regular"
+  },
+  {
+    "name": "traffic-light",
+    "componentName": "TrafficLight",
+    "style": "regular"
+  },
+  {
+    "name": "trapezoid-left-line-horizontal",
+    "componentName": "TrapezoidLeftLineHorizontal",
+    "style": "regular"
+  },
+  {
+    "name": "trapezoid-up-line-vertical",
+    "componentName": "TrapezoidUpLineVertical",
+    "style": "regular"
+  },
+  {
+    "name": "trash-bin",
+    "componentName": "TrashBin",
+    "style": "regular"
+  },
+  {
+    "name": "tray",
+    "componentName": "Tray",
+    "style": "regular"
+  },
+  {
+    "name": "triangle-down",
+    "componentName": "TriangleDown",
+    "style": "regular"
+  },
+  {
+    "name": "triangle-down",
+    "componentName": "TriangleDownFill",
+    "style": "fill"
+  },
+  {
+    "name": "triangle-exclamation",
+    "componentName": "TriangleExclamation",
+    "style": "regular"
+  },
+  {
+    "name": "triangle-exclamation",
+    "componentName": "TriangleExclamationFill",
+    "style": "fill"
+  },
+  {
+    "name": "triangle-left",
+    "componentName": "TriangleLeft",
+    "style": "regular"
+  },
+  {
+    "name": "triangle-left",
+    "componentName": "TriangleLeftFill",
+    "style": "fill"
+  },
+  {
+    "name": "triangle-right",
+    "componentName": "TriangleRight",
+    "style": "regular"
+  },
+  {
+    "name": "triangle-right",
+    "componentName": "TriangleRightFill",
+    "style": "fill"
+  },
+  {
+    "name": "triangle-thunderbolt",
+    "componentName": "TriangleThunderbolt",
+    "style": "regular"
+  },
+  {
+    "name": "triangle-up",
+    "componentName": "TriangleUp",
+    "style": "regular"
+  },
+  {
+    "name": "triangle-up",
+    "componentName": "TriangleUpFill",
+    "style": "fill"
+  },
+  {
+    "name": "trolley",
+    "componentName": "Trolley",
+    "style": "regular"
+  },
+  {
+    "name": "tv",
+    "componentName": "Tv",
+    "style": "regular"
+  },
+  {
+    "name": "tv-retro",
+    "componentName": "TvRetro",
+    "style": "regular"
+  },
+  {
+    "name": "umbrella",
+    "componentName": "Umbrella",
+    "style": "regular"
+  },
+  {
+    "name": "underline",
+    "componentName": "Underline",
+    "style": "regular"
+  },
+  {
+    "name": "universal-access",
+    "componentName": "UniversalAccess",
+    "style": "regular"
+  },
+  {
+    "name": "vault",
+    "componentName": "Vault",
+    "style": "regular"
+  },
+  {
+    "name": "vector-circle",
+    "componentName": "VectorCircle",
+    "style": "regular"
+  },
+  {
+    "name": "vector-square",
+    "componentName": "VectorSquare",
+    "style": "regular"
+  },
+  {
+    "name": "video",
+    "componentName": "Video",
+    "style": "regular"
+  },
+  {
+    "name": "volume",
+    "componentName": "Volume",
+    "style": "regular"
+  },
+  {
+    "name": "volume",
+    "componentName": "VolumeFill",
+    "style": "fill"
+  },
+  {
+    "name": "volume-low",
+    "componentName": "VolumeLow",
+    "style": "regular"
+  },
+  {
+    "name": "volume-low",
+    "componentName": "VolumeLowFill",
+    "style": "fill"
+  },
+  {
+    "name": "volume-off",
+    "componentName": "VolumeOff",
+    "style": "regular"
+  },
+  {
+    "name": "volume-off",
+    "componentName": "VolumeOffFill",
+    "style": "fill"
+  },
+  {
+    "name": "volume-slash",
+    "componentName": "VolumeSlash",
+    "style": "regular"
+  },
+  {
+    "name": "volume-slash",
+    "componentName": "VolumeSlashFill",
+    "style": "fill"
+  },
+  {
+    "name": "volume-xmark",
+    "componentName": "VolumeXmark",
+    "style": "regular"
+  },
+  {
+    "name": "volume-xmark",
+    "componentName": "VolumeXmarkFill",
+    "style": "fill"
+  },
+  {
+    "name": "weight-hanging",
+    "componentName": "WeightHanging",
+    "style": "regular"
+  },
+  {
+    "name": "wrench",
+    "componentName": "Wrench",
+    "style": "regular"
+  },
+  {
+    "name": "xmark",
+    "componentName": "Xmark",
+    "style": "regular"
+  },
+  {
+    "name": "xmark-shape",
+    "componentName": "XmarkShape",
+    "style": "regular"
+  },
+  {
+    "name": "xmark-shape",
+    "componentName": "XmarkShapeFill",
+    "style": "fill"
+  },
+  {
+    "name": "layout-side-content",
+    "componentName": "LayoutSideContent",
+    "style": "regular"
+  }
+]

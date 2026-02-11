@@ -11,6 +11,7 @@ import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
+import {ImageSearch} from './ImageSearch';
 import {allIcons} from './constants';
 import type {IconItem} from './types';
 
@@ -27,6 +28,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     const isMobile = useIsMobile();
 
     const [filterString, setFilterString] = React.useState('');
+    const [imageSearchResults, setImageSearchResults] = React.useState<string[] | null>(null);
 
     const [isOpenIconDialog, setIsOpenIconDialog] = React.useState(false);
     const [iconForDialog, setIconForDialog] = React.useState<IconItem>();
@@ -82,7 +84,26 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         }, 100);
     }, []);
 
+    const handleImageSearchResults = React.useCallback((componentNames: string[]) => {
+        setImageSearchResults(componentNames);
+        setFilterString('');
+    }, []);
+
+    const handleImageSearchClear = React.useCallback(() => {
+        setImageSearchResults(null);
+    }, []);
+
     const icons = React.useMemo(() => {
+        if (imageSearchResults) {
+            const resultSet = new Set(imageSearchResults);
+            const matched = allIcons.filter(({name}) => resultSet.has(name));
+            // preserve the ranking order from the search results
+            matched.sort(
+                (a, b) => imageSearchResults.indexOf(a.name) - imageSearchResults.indexOf(b.name),
+            );
+            return matched;
+        }
+
         if (!filterString) {
             return allIcons;
         }
@@ -97,7 +118,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     keyword.toLowerCase().includes(searchLower),
                 ),
         );
-    }, [filterString]);
+    }, [filterString, imageSearchResults]);
 
     return (
         <Grid className={b()}>
@@ -121,12 +142,17 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 </Col>
             </Row>
             <Row className={b('search')}>
-                <Col sizes={12}>
+                <Col sizes={12} className={b('search-row')}>
                     <TextInput
                         controlRef={searchInputRef}
                         className={b('search-input')}
                         value={filterString}
-                        onUpdate={setFilterString}
+                        onUpdate={(value) => {
+                            setFilterString(value);
+                            if (value) {
+                                setImageSearchResults(null);
+                            }
+                        }}
                         size="xl"
                         placeholder={t('icons:filterPlaceholder')}
                         startContent={
@@ -136,6 +162,11 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                         }
                         autoFocus={!isMobile}
                         hasClear
+                    />
+                    <ImageSearch
+                        onResults={handleImageSearchResults}
+                        onClear={handleImageSearchClear}
+                        isActive={imageSearchResults !== null}
                     />
                 </Col>
             </Row>
