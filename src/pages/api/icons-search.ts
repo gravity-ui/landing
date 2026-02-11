@@ -1,6 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
-const ICON_SEARCH_SERVICE_URL = process.env.ICON_SEARCH_SERVICE_URL || 'http://127.0.0.1:8080';
+import {search} from '../../api/icon-search-model';
 
 export const config = {
     api: {
@@ -8,13 +8,6 @@ export const config = {
             sizeLimit: '4mb',
         },
     },
-};
-
-type IconSearchResult = {
-    name: string;
-    componentName: string;
-    style: string;
-    score: number;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -30,19 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-        const response = await fetch(`${ICON_SEARCH_SERVICE_URL}/search`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({image, top_k: topK ?? 12}),
-        });
-
-        if (!response.ok) {
-            const text = await response.text();
-            return res.status(response.status).json({error: text});
-        }
-
-        const data: {results: IconSearchResult[]} = await response.json();
-        return res.status(200).json(data);
+        const results = await search(image, topK ?? 12);
+        return res.status(200).json({results});
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Icon search error:', error);

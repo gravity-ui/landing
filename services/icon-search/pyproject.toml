@@ -1,24 +1,15 @@
 [project]
 name = "icon-search"
 version = "0.1.0"
-description = "Visual icon search service using CLIP embeddings"
+description = "Scripts for precomputing CLIP icon embeddings"
 requires-python = ">=3.11"
 dependencies = [
-    "fastapi>=0.115.0",
-    "uvicorn[standard]>=0.32.0",
     "open-clip-torch>=2.29.0",
     "torch>=2.5.0",
     "Pillow>=11.0.0",
     "numpy>=2.0.0",
-]
-
-[project.optional-dependencies]
-dev = [
     "cairosvg>=2.7.0",
 ]
-
-[tool.setuptools.packages.find]
-include = ["app*"]
 
 [build-system]
 requires = ["setuptools>=75.0"]
