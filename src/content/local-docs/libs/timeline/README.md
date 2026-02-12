@@ -1,10 +1,22 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
+> [Русская версия](./README.ru.md)
+
 A React-based library for building interactive timeline visualizations with canvas rendering.
 
 ## Documentation
 
 For details see [Documentation](./docs/docs.md).
+
+## Preview
+
+Basic timeline with events and axes:
+
+![Basic timeline with events](./docs/img/lines.png)
+
+Custom rendering with expandable nested events ([NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story) example):
+
+![Nested events timeline](./docs/img/events.png)
 
 ## Features
 
@@ -59,6 +71,19 @@ const MyTimelineComponent = () => {
 };
 ```
 
+### Axis Structure
+
+Each axis has the following structure:
+
+```typescript
+type TimelineAxis = {
+  id: string;          // Unique axis identifier
+  tracksCount: number; // Number of tracks in the axis
+  top: number;         // Vertical position (px)
+  height: number;      // Height per track (px)
+};
+```
+
 ### Section Structure
 
 Each section requires the following structure:
@@ -70,7 +95,7 @@ type TimelineSection = {
   to?: number;              // Optional end timestamp (defaults to timeline end)
   color: string;            // Background color of the section
   hoverColor?: string;      // Optional color when section is hovered
-  renderer?: AbstractSectionRenderer; // Optional custom renderer
+  renderer?: AbstractSectionRenderer; // Optional custom renderer (exported from the package)
 };
 ```
 
@@ -181,10 +206,10 @@ The timeline is implemented as a React component that can be configured through 
 1. **TimelineSettings**: Controls the core timeline behavior and appearance
    - `start`: Start time of the timeline
    - `end`: End time of the timeline
-  - `axes`: Array of axis configurations
-  - `events`: Array of event configurations
-  - `markers`: Array of marker configurations
-  - `sections`: Array of section configurations
+   - `axes`: Array of axis configurations (see structure below)
+   - `events`: Array of event configurations
+   - `markers`: Array of marker configurations
+   - `sections`: Array of section configurations
 
 2. **ViewConfiguration**: Manages the visual representation and interaction settings
    - Controls appearance, zoom levels, and interaction behavior
@@ -269,8 +294,9 @@ const timeline = new Timeline({
     axes: [
       {
         id: 'main',
-        label: 'Main Axis',
-        color: '#000000'
+        tracksCount: 3,
+        top: 0,
+        height: 100
       }
     ],
     events: [
@@ -365,8 +391,9 @@ The Timeline class provides a rich API for managing the timeline:
   timeline.api.setAxes([
     {
       id: 'newAxis',
-      label: 'New Axis',
-      color: '#0000ff'
+      tracksCount: 2,
+      top: 0,
+      height: 80
     }
   ]);
 
@@ -392,6 +419,9 @@ The Timeline class provides a rich API for managing the timeline:
       hoverColor: 'rgba(255, 193, 7, 0.3)'
     }
   ]);
+
+  // Update view configuration (merges with current config)
+  timeline.api.setViewConfiguration({ hideRuler: true });
   ```
 
 ## Live Examples
@@ -402,6 +432,7 @@ Explore interactive examples in our [Storybook](https://preview.gravity-ui.com/t
 - [Endless Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Endless timeline with events and axes
 - [Markers](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline with vertical markers and labels
 - [Custom Events](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline with custom event rendering
+- [Integrations](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection, DragHandler, NestedEvents, Popup, List
 
 
 ## Development
