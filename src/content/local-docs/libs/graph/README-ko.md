@@ -12,12 +12,12 @@
 
 현대 웹 애플리케이션은 종종 복잡한 시각화 및 상호작용을 요구하지만, 기존 솔루션은 일반적으로 단일 렌더링 기술에 집중합니다.
 
-- **Canvas**는 복잡한 그래픽에 대해 높은 성능을 제공하지만 텍스트 처리 및 상호작용에 제한이 있습니다.
-- **HTML DOM**은 인터페이스에 편리하지만 복잡한 그래픽이나 많은 수의 요소에는 효율성이 떨어집니다.
+- **Canvas**는 복잡한 그래픽에 대해 높은 성능을 제공하지만, 텍스트 처리 및 상호작용에는 제한이 있습니다.
+- **HTML DOM**은 인터페이스에 편리하지만, 복잡한 그래픽이나 많은 수의 요소에는 효율성이 떨어집니다.
 
 @gravity-ui/graph는 확대/축소 수준에 따라 Canvas와 HTML 간에 자동으로 전환하여 이 문제를 해결합니다.
 - **축소 시**: 전체 그래프의 효율적인 렌더링을 위해 Canvas 사용
-- **중간 확대**: 기본 상호작용이 있는 개략적인 보기 표시
+- **중간 확대 시**: 기본 상호작용 기능을 갖춘 개략적인 보기 표시
 - **확대 시**: 풍부한 상호작용을 위해 HTML/React 컴포넌트로 전환
 
 ## 작동 방식
@@ -64,9 +64,10 @@ npm install @gravity-ui/graph
 [상세 React 컴포넌트 문서](docs/react/usage.md)
 
 ```typescript
-import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
 import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-import React from "react";
 
 const config = {};
 
@@ -90,8 +91,8 @@ export function GraphEditor() {
               id: "out1",
               blockId: "action_1",
               type: EAnchorType.OUT,
-              index: 0
-            }
+              index: 0,
+            },
           ],
         },
         {
@@ -108,10 +109,10 @@ export function GraphEditor() {
               id: "in1",
               blockId: "action_2",
               type: EAnchorType.IN,
-              index: 0
-            }
+              index: 0,
+            },
           ],
-        }
+        },
       ],
       connections: [
         {
@@ -119,13 +120,17 @@ export function GraphEditor() {
           sourceAnchorId: "out1",
           targetBlockId: "action_2",
           targetAnchorId: "in1",
-        }
-      ]
+        },
+      ],
     });
   }, [setEntities]);
 
-  const renderBlockFn = (graph, block) => {
-    return <GraphBlock graph={graph} block={block}>{block.id}</GraphBlock>;
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
   };
 
   return (
@@ -141,9 +146,10 @@ export function GraphEditor() {
     />
   );
 }
+
 ```
 
-### 일반 JavaScript 예제
+### Vanilla JavaScript 예제
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
