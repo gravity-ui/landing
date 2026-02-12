@@ -1,8 +1,8 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-> [Versão em Português](./README.pt.md)
+> [Versão em Português](./README-pt.md)
 
-Uma biblioteca baseada em React para construir visualizações interativas de linha do tempo com renderização em canvas.
+Uma biblioteca baseada em React para construir visualizações de linha do tempo interativas com renderização em canvas.
 
 ## Documentação
 
@@ -25,7 +25,7 @@ Renderização personalizada com eventos aninhados expansíveis (exemplo [Nested
 - Suporte para eventos, marcadores, seções, eixos e grade
 - Seções de fundo para organização visual e destaque de períodos de tempo
 - Agrupamento inteligente de marcadores com zoom automático para o grupo - Clique em marcadores agrupados para dar zoom em seus componentes individuais
-- Renderização virtualizada para melhor desempenho com grandes conjuntos de dados (ativo apenas quando o conteúdo da linha do tempo excede a viewport)
+- Renderização virtualizada para melhor desempenho com grandes conjuntos de dados (ativa apenas quando o conteúdo da linha do tempo excede a viewport)
 - Aparência e comportamento personalizáveis
 - Suporte a TypeScript com definições de tipo completas
 - Integração com React com hooks personalizados
@@ -94,7 +94,7 @@ type TimelineSection = {
   from: number;             // Timestamp de início
   to?: number;              // Timestamp de fim opcional (padrão para o fim da linha do tempo)
   color: string;            // Cor de fundo da seção
-  hoverColor?: string;      // Cor opcional ao passar o mouse sobre a seção
+  hoverColor?: string;      // Cor opcional quando a seção está em hover
   renderer?: AbstractSectionRenderer; // Renderizador personalizado opcional (exportado do pacote)
 };
 ```
@@ -147,7 +147,7 @@ type TimelineMarker = {
   time: number;           // Timestamp para a posição do marcador
   color: string;          // Cor da linha do marcador
   activeColor: string;    // Cor quando o marcador está selecionado (obrigatório)
-  hoverColor: string;     // Cor ao passar o mouse sobre o marcador (obrigatório)
+  hoverColor: string;     // Cor quando o marcador está em hover (obrigatório)
   lineWidth?: number;     // Largura opcional da linha do marcador
   label?: string;         // Texto de rótulo opcional
   labelColor?: string;    // Cor do rótulo opcional
@@ -277,7 +277,7 @@ type TimelineEvent = {
 };
 ```
 
-### Uso Direto de TypeScript
+### Uso Direto com TypeScript
 
 A classe `Timeline` pode ser usada diretamente em TypeScript sem React. Isso é útil para integrar com outros frameworks ou aplicações JavaScript vanilla:
 

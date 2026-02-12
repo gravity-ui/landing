@@ -1,8 +1,8 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-> [Version russe](./README.ru.md)
+> [Version française](./README.md)
 
-Une bibliothèque basée sur React pour créer des visualisations interactives de chronologies avec rendu sur canvas.
+Une bibliothèque basée sur React pour créer des visualisations interactives de chronologies avec rendu sur toile (canvas).
 
 ## Documentation
 
@@ -20,12 +20,12 @@ Rendu personnalisé avec des événements imbriqués extensibles (exemple [Neste
 
 ## Fonctionnalités
 
-- Rendu basé sur le canvas pour de hautes performances
+- Rendu basé sur la toile (canvas) pour des performances élevées
 - Chronologie interactive avec capacités de zoom et de panoramique
-- Prise en charge des événements, marqueurs, sections, axes et grille
+- Prise en charge des événements, des marqueurs, des sections, des axes et de la grille
 - Sections d'arrière-plan pour l'organisation visuelle et la mise en évidence des périodes
 - Regroupement intelligent des marqueurs avec zoom automatique sur le groupe - Cliquez sur les marqueurs groupés pour zoomer sur leurs composants individuels
-- Rendu virtualisé pour améliorer les performances avec de grands ensembles de données (actif uniquement lorsque le contenu de la chronologie dépasse la fenêtre d'affichage)
+- Rendu virtualisé pour améliorer les performances avec de grands ensembles de données (actif uniquement lorsque le contenu de la chronologie dépasse la zone d'affichage)
 - Apparence et comportement personnalisables
 - Prise en charge de TypeScript avec des définitions de types complètes
 - Intégration React avec des hooks personnalisés
@@ -38,7 +38,7 @@ npm install @gravity-ui/timeline
 
 ## Utilisation
 
-Le composant de chronologie peut être utilisé dans les applications React avec la configuration de base suivante :
+Le composant de chronologie peut être utilisé dans des applications React avec la configuration de base suivante :
 
 ```tsx
 import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
@@ -60,7 +60,7 @@ const MyTimelineComponent = () => {
 
   // timeline - Instance de la chronologie
   // api - Instance de CanvasApi (identique à timeline.api)
-  // start - fonction pour initialiser la chronologie avec le canvas
+  // start - fonction pour initialiser la chronologie avec la toile
   // stop - fonction pour détruire la chronologie
 
   return (
@@ -159,7 +159,7 @@ type TimelineMarker = {
 
 ### Regroupement et zoom des marqueurs
 
-La chronologie regroupe automatiquement les marqueurs proches et fournit une fonctionnalité de zoom :
+La chronologie regroupe automatiquement les marqueurs proches et offre une fonctionnalité de zoom :
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -178,7 +178,7 @@ const MyTimelineComponent = () => {
     },
     viewConfiguration: {
       markers: {
-        collapseMinDistance: 8,        // Regrouper les marqueurs à moins de 8 pixels
+        collapseMinDistance: 8,        // Regrouper les marqueurs dans un rayon de 8 pixels
         groupZoomEnabled: true,        // Activer le zoom sur le clic du groupe
         groupZoomPadding: 0.3,        // Marge de 30% autour du groupe
         groupZoomMaxFactor: 0.3,      // Facteur de zoom maximum
@@ -201,7 +201,7 @@ Le composant de chronologie est construit avec React et offre un moyen flexible 
 
 ### Architecture du composant
 
-La chronologie est implémentée sous forme de composant React qui peut être configuré via deux objets principaux :
+La chronologie est implémentée comme un composant React qui peut être configuré via deux objets principaux :
 
 1. **TimelineSettings** : Contrôle le comportement et l'apparence de base de la chronologie
    - `start` : Heure de début de la chronologie
@@ -272,8 +272,8 @@ type TimelineEvent = {
   axisId: string;         // ID de l'axe auquel cet événement appartient
   trackIndex: number;     // Index dans la piste de l'axe
   renderer?: AbstractEventRenderer; // Renderer personnalisé optionnel
-  color?: string;         // Couleur d'événement optionnelle
-  selectedColor?: string; // Couleur optionnelle pour l'état sélectionné
+  color?: string;         // Couleur optionnelle de l'événement
+  selectedColor?: string; // Couleur optionnelle de l'état sélectionné
 };
 ```
 
@@ -434,7 +434,7 @@ Explorez des exemples interactifs dans notre [Storybook](https://preview.gravity
 - [Chronologie infinie](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Chronologie infinie avec événements et axes
 - [Marqueurs](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Chronologie avec marqueurs verticaux et étiquettes
 - [Événements personnalisés](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Chronologie avec rendu d'événements personnalisé
-- [Intégrations](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - Sélection de date de plage, gestionnaire de glisser-déposer, événements imbriqués, pop-up, liste
+- [Intégrations](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - Sélection de dates de plage, gestionnaire de glisser-déposer, événements imbriqués, pop-up, liste
 
 
 ## Développement
