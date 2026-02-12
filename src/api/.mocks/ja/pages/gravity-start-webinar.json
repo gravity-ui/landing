@@ -1,0 +1,73 @@
+{
+  "id": 75,
+  "name": "blog/gravity-start-webinar",
+  "createdAt": "2026-01-19T14:05:45.601Z",
+  "updatedAt": "2026-01-19T14:05:45.601Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 75,
+  "regionCode": "ja",
+  "publishedVersionId": 230,
+  "lastVersionId": 230,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#CCDAFF'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n          ウラジミール・ティモフェーエフ（gravity-ui.comプロダクトオーナー）が、Gravity UIの入門、主要な要素を紹介し、それらを使って完成したインターフェースを構築します。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        videoIframe: https://runtime.strm.yandex.ru/player/episode/vpleycdol66bubppvqg7\n        previewImg: >-\n          https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png\n        fullWidth: false\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "initital ja",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+  "pageRegionId": 83,
+  "summary": null,
+  "versionId": 230,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 83,
+      "pageId": 75,
+      "locale": "ja",
+      "createdAt": "2026-01-19T14:01:23.834Z",
+      "updatedAt": "2026-01-19T14:01:23.903Z",
+      "publishedVersionId": null,
+      "lastVersionId": 226
+    },
+    {
+      "id": 84,
+      "pageId": 75,
+      "locale": "en",
+      "createdAt": "2026-01-19T14:01:23.914Z",
+      "updatedAt": "2026-01-19T14:01:23.978Z",
+      "publishedVersionId": null,
+      "lastVersionId": 227
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "en",
+      "publishedVersionId": null
+    },
+    {
+      "regionCode": "ja",
+      "publishedVersionId": 230
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "ブログ",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}
