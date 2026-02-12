@@ -27,7 +27,7 @@ Die Bibliothek verwendet ein intelligentes Rendering-System, das den Übergang z
 1. Bei niedrigen Zoomstufen wird alles auf Canvas gerendert, um die Leistung zu optimieren.
 2. Beim Hineinzoomen in die Detailansicht:
    - Der `GraphCanvas`-Komponente verfolgt Änderungen an der Kameraansicht und dem Maßstab.
-   - Berechnet, welche Blöcke im aktuellen Ansichtsfenster sichtbar sind (mit Polsterung für sanftes Scrollen).
+   - Berechnet, welche Blöcke im aktuellen Ansichtsbereich sichtbar sind (mit Polsterung für sanftes Scrollen).
    - Rendert React-Komponenten nur für sichtbare Blöcke.
    - Aktualisiert die Liste automatisch beim Scrollen oder Zoomen.
    - Entfernt React-Komponenten beim Auszoomen.
@@ -64,9 +64,10 @@ npm install @gravity-ui/graph
 [Detaillierte Dokumentation zu React-Komponenten](docs/react/usage.md)
 
 ```typescript
-import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
 import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-import React from "react";
 
 const config = {};
 
@@ -90,8 +91,8 @@ export function GraphEditor() {
               id: "out1",
               blockId: "action_1",
               type: EAnchorType.OUT,
-              index: 0
-            }
+              index: 0,
+            },
           ],
         },
         {
@@ -108,10 +109,10 @@ export function GraphEditor() {
               id: "in1",
               blockId: "action_2",
               type: EAnchorType.IN,
-              index: 0
-            }
+              index: 0,
+            },
           ],
-        }
+        },
       ],
       connections: [
         {
@@ -119,13 +120,17 @@ export function GraphEditor() {
           sourceAnchorId: "out1",
           targetBlockId: "action_2",
           targetAnchorId: "in1",
-        }
-      ]
+        },
+      ],
     });
   }, [setEntities]);
 
-  const renderBlockFn = (graph, block) => {
-    return <GraphBlock graph={graph} block={block}>{block.id}</GraphBlock>;
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
   };
 
   return (
@@ -141,9 +146,10 @@ export function GraphEditor() {
     />
   );
 }
+
 ```
 
-### Vanilla JavaScript-Beispiel
+### Vanilla JavaScript Beispiel
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
@@ -255,4 +261,4 @@ graph.zoomTo("center", { padding: 100 });
 
 4. Blöcke und Verbindungen
    - [Block-Gruppen](docs/blocks/groups.md)
-   - [Canvas Connection System](docs/connections/canvas-connection-system.md)
+   - [Canvas Verbindungssystem](docs/connections/canvas-connection-system.md)

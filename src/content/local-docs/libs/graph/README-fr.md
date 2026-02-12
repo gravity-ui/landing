@@ -6,14 +6,14 @@ Une bibliothèque de visualisation de graphes qui combine le meilleur des deux m
 - Canvas pour des performances élevées lors de la visualisation du graphe complet
 - HTML/React pour des interactions riches lors du zoom
 
-Plus besoin de choisir entre performance et interactivité. Idéal pour les grands diagrammes, les organigrammes et les éditeurs basés sur des nœuds.
+Fini le choix entre performance et interactivité. Idéal pour les grands diagrammes, les organigrammes et les éditeurs basés sur des nœuds.
 
 ## Motivation
 
 Les applications web modernes nécessitent souvent une visualisation et une interactivité complexes, mais les solutions existantes se concentrent généralement sur une seule technologie de rendu :
 
-- **Canvas** offre des performances élevées pour les graphiques complexes, mais est limité dans la gestion du texte et l'interactivité.
-- **DOM HTML** est pratique pour les interfaces, mais moins efficace pour les graphiques complexes ou un grand nombre d'éléments.
+- **Canvas** offre des performances élevées pour les graphiques complexes mais est limité dans la gestion du texte et l'interactivité.
+- **DOM HTML** est pratique pour les interfaces mais moins efficace pour les graphiques complexes ou un grand nombre d'éléments.
 
 @gravity-ui/graph résout ce problème en basculant automatiquement entre Canvas et HTML en fonction du niveau de zoom :
 - **Dézoomé** : Utilise Canvas pour un rendu efficace du graphe complet
@@ -24,13 +24,13 @@ Les applications web modernes nécessitent souvent une visualisation et une inte
 
 La bibliothèque utilise un système de rendu intelligent qui gère automatiquement la transition entre Canvas et les composants React :
 
-1. Aux faibles niveaux de zoom, tout est rendu sur Canvas pour des raisons de performance.
+1. Aux niveaux de zoom bas, tout est rendu sur Canvas pour des performances optimales.
 2. Lors du zoom avant vers une vue détaillée, le composant `GraphCanvas` :
-   - Suit les changements de la caméra et de l'échelle.
-   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un rembourrage pour un défilement fluide).
-   - Rend les composants React uniquement pour les blocs visibles.
-   - Met à jour automatiquement la liste lors du défilement ou du zoom.
-   - Supprime les composants React lors du dézoom.
+   - Suit les changements de la caméra (position et échelle)
+   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un padding pour un défilement fluide)
+   - Rend les composants React uniquement pour les blocs visibles
+   - Met à jour automatiquement la liste lors du défilement ou du zoom
+   - Supprime les composants React lors du dézoom
 
 ```typescript
 // Exemple de rendu de composants React
@@ -64,9 +64,10 @@ npm install @gravity-ui/graph
 [Documentation détaillée des composants React](docs/react/usage.md)
 
 ```typescript
-import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
 import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-import React from "react";
 
 const config = {};
 
@@ -90,8 +91,8 @@ export function GraphEditor() {
               id: "out1",
               blockId: "action_1",
               type: EAnchorType.OUT,
-              index: 0
-            }
+              index: 0,
+            },
           ],
         },
         {
@@ -108,10 +109,10 @@ export function GraphEditor() {
               id: "in1",
               blockId: "action_2",
               type: EAnchorType.IN,
-              index: 0
-            }
+              index: 0,
+            },
           ],
-        }
+        },
       ],
       connections: [
         {
@@ -119,13 +120,17 @@ export function GraphEditor() {
           sourceAnchorId: "out1",
           targetBlockId: "action_2",
           targetAnchorId: "in1",
-        }
-      ]
+        },
+      ],
     });
   }, [setEntities]);
 
-  const renderBlockFn = (graph, block) => {
-    return <GraphBlock graph={graph} block={block}>{block.id}</GraphBlock>;
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
   };
 
   return (
@@ -141,6 +146,7 @@ export function GraphEditor() {
     />
   );
 }
+
 ```
 
 ### Exemple JavaScript Vanilla
