@@ -1,17 +1,29 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
+> [English version](./README.md)
+
 Canvasレンダリングによるインタラクティブなタイムラインビジュアライゼーション構築のためのReactベースライブラリです。
 
 ## ドキュメント
 
-詳細については、[ドキュメント](./docs/docs.md) を参照してください。
+詳細については、[ドキュメント](./docs/docs.md)を参照してください。
 
-## 特長
+## プレビュー
 
-- 高パフォーマンスなCanvasベースのレンダリング
+イベントと軸を持つ基本的なタイムライン：
+
+![Basic timeline with events](./docs/img/lines.png)
+
+展開可能なネストされたイベントを持つカスタムレンダリング（[NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story)例）：
+
+![Nested events timeline](./docs/img/events.png)
+
+## 特徴
+
+- 高パフォーマンスのためのCanvasベースレンダリング
 - ズームおよびパン機能を備えたインタラクティブなタイムライン
 - イベント、マーカー、セクション、軸、グリッドのサポート
-- 視覚的な整理と期間のハイライトのための背景セクション
+- 視覚的な整理と時間帯のハイライトのための背景セクション
 - スマートマーカーグルーピングと自動ズーム機能 - グループ化されたマーカーをクリックすると、個々のコンポーネントにズームインします
 - 大規模データセットでのパフォーマンス向上のための仮想化レンダリング（タイムラインコンテンツがビューポートを超える場合にのみアクティブ）
 - カスタマイズ可能な外観と動作
@@ -47,8 +59,8 @@ const MyTimelineComponent = () => {
   });
 
   // timeline - Timelineインスタンス
-  // api - CanvasApiインスタンス (timeline.apiと同じ)
-  // start - canvasでタイムラインを初期化する関数
+  // api - CanvasApiインスタンス（timeline.apiと同じ）
+  // start - タイムラインをキャンバスで初期化する関数
   // stop - タイムラインを破棄する関数
 
   return (
@@ -56,6 +68,19 @@ const MyTimelineComponent = () => {
       <TimelineCanvas timeline={timeline} />
     </div>
   );
+};
+```
+
+### 軸の構造
+
+各軸は以下の構造を持ちます。
+
+```typescript
+type TimelineAxis = {
+  id: string;          // 一意の軸識別子
+  tracksCount: number; // 軸内のトラック数
+  top: number;         // 垂直位置 (px)
+  height: number;      // トラックごとの高さ (px)
 };
 ```
 
@@ -67,14 +92,14 @@ const MyTimelineComponent = () => {
 type TimelineSection = {
   id: string;               // 一意のセクション識別子
   from: number;             // 開始タイムスタンプ
-  to?: number;              // オプションの終了タイムスタンプ (デフォルトはタイムラインの終了)
+  to?: number;              // オプションの終了タイムスタンプ（デフォルトはタイムラインの終了）
   color: string;            // セクションの背景色
-  hoverColor?: string;      // オプションでホバー時の色
-  renderer?: AbstractSectionRenderer; // オプションのカスタムレンダラー
+  hoverColor?: string;      // オプションでセクションにホバーしたときのカラー
+  renderer?: AbstractSectionRenderer; // オプションのカスタムレンダラー（パッケージからエクスポート）
 };
 ```
 
-セクションは、期間の背景色を提供し、タイムラインコンテンツを視覚的に整理するのに役立ちます。
+セクションは時間帯の背景色を提供し、タイムラインコンテンツを視覚的に整理するのに役立ちます。
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -97,7 +122,7 @@ const MyTimelineComponent = () => {
           id: 'afternoon',
           from: Date.now() + 1800000,
           // 'to' が指定されていない - タイムラインの終了まで拡張されます
-          color: 'rgba(76, 175, 80, 0.2)', // 半透明の緑
+          color: 'rgba(76, 175, 80, 0.2)', // 半透明の緑色
           hoverColor: 'rgba(76, 175, 80, 0.3)'
         }
       ]
@@ -120,15 +145,15 @@ const MyTimelineComponent = () => {
 ```typescript
 type TimelineMarker = {
   time: number;           // マーカー位置のタイムスタンプ
-  color: string;          // マーカー線の色
-  activeColor: string;    // 選択時の色 (必須)
-  hoverColor: string;     // ホバー時の色 (必須)
-  lineWidth?: number;     // オプションのマーカー線の幅
+  color: string;          // マーカーラインの色
+  activeColor: string;    // マーカーが選択されたときのカラー（必須）
+  hoverColor: string;     // マーカーにホバーしたときのカラー（必須）
+  lineWidth?: number;     // オプションのマーカーラインの幅
   label?: string;         // オプションのラベルテキスト
-  labelColor?: string;    // オプションのラベル色
+  labelColor?: string;    // オプションのラベルカラー
   renderer?: AbstractMarkerRenderer; // オプションのカスタムレンダラー
-  nonSelectable?: boolean;// 選択可能かどうか
-  group?: boolean;        // グループを表すかどうか
+  nonSelectable?: boolean;// マーカーを選択可能かどうか
+  group?: boolean;        // マーカーがグループを表すかどうか
 };
 ```
 
@@ -145,7 +170,7 @@ const MyTimelineComponent = () => {
       axes: [],
       events: [],
       markers: [
-        // これらのマーカーは一緒にグループ化されます
+        // これらのマーカーはグループ化されます
         { time: Date.now(), color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'イベント 1' },
         { time: Date.now() + 1000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'イベント 2' },
         { time: Date.now() + 2000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'イベント 3' },
@@ -154,14 +179,14 @@ const MyTimelineComponent = () => {
     viewConfiguration: {
       markers: {
         collapseMinDistance: 8,        // 8ピクセル以内のマーカーをグループ化
-        groupZoomEnabled: true,        // グループクリックでズームを有効にする
+        groupZoomEnabled: true,        // グループクリックでズームを有効化
         groupZoomPadding: 0.3,        // グループの周りに30%のパディング
         groupZoomMaxFactor: 0.3,      // 最大ズームファクター
       }
     }
   });
 
-  // グループズームイベントをリッスンする
+  // グループズームイベントをリッスン
   useTimelineEvent(timeline, 'on-group-marker-click', (data) => {
     console.log('グループがズームされました:', data);
   });
@@ -172,25 +197,25 @@ const MyTimelineComponent = () => {
 
 ## 仕組み
 
-タイムラインコンポーネントはReactを使用して構築されており、インタラクティブなタイムラインビジュアライゼーションを作成するための柔軟な方法を提供します。仕組みは以下の通りです。
+このタイムラインコンポーネントはReactで構築されており、インタラクティブなタイムラインビジュアライゼーションを作成するための柔軟な方法を提供します。仕組みは以下の通りです。
 
 ### コンポーネントアーキテクチャ
 
-タイムラインは、主に2つのオブジェクトで設定可能なReactコンポーネントとして実装されています。
+タイムラインはReactコンポーネントとして実装されており、主に2つのオブジェクトを通じて設定できます。
 
 1. **TimelineSettings**: タイムラインのコアな動作と外観を制御します。
    - `start`: タイムラインの開始時刻
    - `end`: タイムラインの終了時刻
-   - `axes`: 軸の設定配列
-   - `events`: イベントの設定配列
-   - `markers`: マーカーの設定配列
-   - `sections`: セクションの設定配列
+   - `axes`: 軸設定の配列（構造は以下を参照）
+   - `events`: イベント設定の配列
+   - `markers`: マーカー設定の配列
+   - `sections`: セクション設定の配列
 
 2. **ViewConfiguration**: ビジュアル表現とインタラクション設定を管理します。
    - 外観、ズームレベル、インタラクションの動作を制御します。
-   - カスタマイズ可能ですが、デフォルト値を使用することもできます。
+   - カスタマイズ可能であり、デフォルト値を使用することもできます。
 
-### イベントハンドリング
+### イベント処理
 
 タイムラインコンポーネントは、いくつかのインタラクティブなイベントをサポートしています。
 
@@ -200,7 +225,7 @@ const MyTimelineComponent = () => {
 - `on-hover`: タイムライン要素にマウスカーソルが乗ったときにトリガーされます。
 - `on-leave`: マウスカーソルがタイムライン要素から離れたときに発行されます。
 
-イベントハンドリングの例：
+イベント処理の例：
 
 ```tsx
 import { useTimelineEvent } from '@gravity-ui/timeline/react';
@@ -220,16 +245,16 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### React連携
+### Reactとの統合
 
 コンポーネントは、タイムライン管理のためにカスタムフックを使用しています。
 
 - `useTimeline`: タイムラインインスタンスとそのライフサイクルを管理します。
-  - タイムラインを作成し、初期化します。
+  - タイムラインを作成および初期化します。
   - コンポーネントのアンマウント時にクリーンアップを処理します。
   - タイムラインインスタンスへのアクセスを提供します。
 
-- `useTimelineEvent`: イベントの購読とクリーンアップを処理します。
+- `useTimelineEvent`: イベントサブスクリプションとクリーンアップを処理します。
   - イベントリスナーのライフサイクルを管理します。
   - アンマウント時にリスナーを自動的にクリーンアップします。
 
@@ -237,14 +262,14 @@ const MyTimelineComponent = () => {
 
 ### イベント構造
 
-タイムライン内のイベントは、次の構造に従います。
+タイムライン内のイベントは、この構造に従います。
 
 ```typescript
 type TimelineEvent = {
   id: string;             // 一意の識別子
   from: number;           // 開始タイムスタンプ
-  to?: number;            // 終了タイムスタンプ (ポイントイベントの場合はオプション)
-  axisId: string;         // このイベントが属する軸のID
+  to?: number;            // 終了タイムスタンプ（ポイントイベントの場合はオプション）
+  axisId: string;         // イベントが属する軸のID
   trackIndex: number;     // 軸トラック内のインデックス
   renderer?: AbstractEventRenderer; // オプションのカスタムレンダラー
   color?: string;         // オプションのイベントカラー
@@ -252,9 +277,9 @@ type TimelineEvent = {
 };
 ```
 
-### TypeScriptの直接利用
+### 直接TypeScriptを使用する場合
 
-Timeline クラスは、React を使用せずに TypeScript で直接利用できます。これは、他のフレームワークやバニラ JavaScript アプリケーションとの統合に役立ちます。
+Timelineクラスは、Reactなしで直接TypeScriptで使用できます。これは、他のフレームワークやバニラJavaScriptアプリケーションとの統合に役立ちます。
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
@@ -269,8 +294,9 @@ const timeline = new Timeline({
     axes: [
       {
         id: 'main',
-        label: 'メイン軸',
-        color: '#000000'
+        tracksCount: 3,
+        top: 0,
+        height: 100
       }
     ],
     events: [
@@ -310,7 +336,7 @@ const timeline = new Timeline({
   }
 });
 
-// canvas 要素で初期化
+// canvas要素で初期化
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
@@ -329,7 +355,7 @@ timeline.on('on-select-change', (detail) => {
 timeline.destroy();
 ```
 
-Timeline クラスは、タイムラインを管理するための豊富な API を提供します。
+Timelineクラスは、タイムラインを管理するための豊富なAPIを提供します。
 
 - **イベント管理**:
   ```typescript
@@ -337,88 +363,95 @@ Timeline クラスは、タイムラインを管理するための豊富な API 
   timeline.on('eventClick', (detail) => {
     console.log('イベントがクリックされました:', detail);
   });
+```
 
-  // イベントリスナーを削除
+```markdown
+  // イベントリスナーの削除
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // カスタムイベントを発行
-  timeline.emit('customEvent', { data: 'カスタムデータ' });
+  // カスタムイベントの発火
+  timeline.emit('customEvent', { data: 'custom data' });
   ```
 
-- **タイムライン制御**:
+- **タイムラインの制御**:
   ```typescript
-  // タイムラインデータを更新
+  // タイムラインデータの更新
   timeline.api.setEvents([
     {
       id: 'newEvent',
       from: Date.now(),
       to: Date.now() + 3600000,
-      label: '新しいイベント',
+      label: 'New Event',
       axisId: 'main',
       trackIndex: 0
     }
   ]);
 
-  // 軸を更新
+  // 軸の更新
   timeline.api.setAxes([
     {
       id: 'newAxis',
-      label: '新しい軸',
-      color: '#0000ff'
+      tracksCount: 2,
+      top: 0,
+      height: 80
     }
   ]);
 
-  // マーカーを更新
+  // マーカーの更新
   timeline.api.setMarkers([
     {
       id: 'newMarker',
       time: Date.now(),
-      label: '新しいマーカー',
+      label: 'New Marker',
       color: '#00ff00',
       activeColor: '#4caf50',
       hoverColor: '#2e7d32'
     }
   ]);
 
-  // セクションを更新
+  // セクションの更新
   timeline.api.setSections([
     {
       id: 'newSection',
       from: Date.now(),
       to: Date.now() + 1800000,
-      color: 'rgba(255, 193, 7, 0.2)', // 薄いアンバー色の背景
+      color: 'rgba(255, 193, 7, 0.2)', // 薄いアンバーの背景
       hoverColor: 'rgba(255, 193, 7, 0.3)'
     }
   ]);
+
+  // ビュー設定の更新（現在の設定とマージされます）
+  timeline.api.setViewConfiguration({ hideRuler: true });
   ```
 
 ## ライブデモ
 
-インタラクティブなデモは、[Storybook](https://preview.gravity-ui.com/timeline/) でご覧いただけます。
+[Storybook](https://preview.gravity-ui.com/timeline/) でインタラクティブなデモをご覧ください:
 
-- [基本タイムライン](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - イベントと軸を備えたシンプルなタイムライン
-- [無限タイムライン](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - イベントと軸を備えた無限タイムライン
-- [マーカー](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 垂直マーカーとラベルを備えたタイムライン
-- [カスタムイベント](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - カスタムイベントレンダリングを備えたタイムライン
+- [基本的なタイムライン](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - イベントと軸を持つシンプルなタイムライン
+- [無限タイムライン](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - イベントと軸を持つ無限タイムライン
+- [マーカー](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 垂直マーカーとラベルを持つタイムライン
+- [カスタムイベント](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - カスタムイベントレンダリングを持つタイムライン
+- [インテグレーション](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection, DragHandler, NestedEvents, Popup, List
 
 
 ## 開発
 
 ### Storybook
 
-このプロジェクトには、コンポーネントの開発とドキュメントのためにStorybookが含まれています。
+このプロジェクトには、コンポーネント開発とドキュメントのための Storybook が含まれています。
 
-Storybookを実行するには：
+Storybook を実行するには:
 
 ```bash
 npm run storybook
 ```
 
-これにより、ポート6006でStorybook開発サーバーが起動します。http://localhost:6006からアクセスできます。
+これにより、ポート 6006 で Storybook 開発サーバーが起動します。http://localhost:6006 からアクセスできます。
 
-デプロイ用にStorybookの静的バージョンをビルドするには：
+デプロイ用に Storybook の静的バージョンをビルドするには:
 
 ```bash
 npm run build-storybook
@@ -427,3 +460,4 @@ npm run build-storybook
 ## ライセンス
 
 MIT
+```
