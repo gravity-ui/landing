@@ -14,7 +14,7 @@ import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 
-import {getRoadmapTasks} from './roadmap';
+// import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
 
 export const getLanding = ({
@@ -108,11 +108,11 @@ export const getLanding = ({
 
             items: libs,
         },
-        {
-            type: CustomBlock.Roadmap,
-            title: t('home:roadmap_title'),
-            tasks: getRoadmapTasks(t),
-        },
+        // {
+        //     type: CustomBlock.Roadmap,
+        //     title: t('home:roadmap_title'),
+        //     tasks: getRoadmapTasks(t),
+        // },
         {
             type: CustomBlock.Templates,
             title: t('home:templates_title'),
