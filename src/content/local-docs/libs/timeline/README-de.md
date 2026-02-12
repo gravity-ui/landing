@@ -1,6 +1,6 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-> [Deutsche Version](./README.de.md)
+> [Русская версия](./README-ru.md)
 
 Eine auf React basierende Bibliothek zum Erstellen interaktiver Timeline-Visualisierungen mit Canvas-Rendering.
 
@@ -24,7 +24,7 @@ Benutzerdefiniertes Rendering mit erweiterbaren verschachtelten Ereignissen ([Ne
 - Interaktive Timeline mit Zoom- und Schwenkfunktionen
 - Unterstützung für Ereignisse, Markierungen, Abschnitte, Achsen und Gitter
 - Hintergrundabschnitte zur visuellen Organisation und Hervorhebung von Zeiträumen
-- Intelligente Gruppierung von Markierungen mit automatischem Zoom auf die Gruppe – Klicken Sie auf gruppierte Markierungen, um in ihre einzelnen Komponenten zu zoomen
+- Intelligente Gruppierung von Markierungen mit automatischem Zoom auf die Gruppe - Klicken Sie auf gruppierte Markierungen, um in ihre einzelnen Komponenten zu zoomen
 - Virtualisiertes Rendering für verbesserte Leistung bei großen Datensätzen (nur aktiv, wenn der Timeline-Inhalt den Viewport überschreitet)
 - Anpassbares Erscheinungsbild und Verhalten
 - TypeScript-Unterstützung mit vollständigen Typdefinitionen
@@ -77,7 +77,7 @@ Jede Achse hat die folgende Struktur:
 
 ```typescript
 type TimelineAxis = {
-  id: string;          // Eindeutige Achsen-ID
+  id: string;          // Eindeutige Achsenkennung
   tracksCount: number; // Anzahl der Spuren in der Achse
   top: number;         // Vertikale Position (px)
   height: number;      // Höhe pro Spur (px)
@@ -90,16 +90,16 @@ Jeder Abschnitt erfordert die folgende Struktur:
 
 ```typescript
 type TimelineSection = {
-  id: string;               // Eindeutige Abschnitts-ID
+  id: string;               // Eindeutige Abschnittskennung
   from: number;             // Start-Zeitstempel
-  to?: number;              // Optionaler End-Zeitstempel (standardmäßig Ende der Timeline)
+  to?: number;              // Optionaler End-Zeitstempel (standardmäßig das Ende der Timeline)
   color: string;            // Hintergrundfarbe des Abschnitts
-  hoverColor?: string;      // Optionale Farbe beim Hovern über den Abschnitt
+  hoverColor?: string;      // Optionale Farbe, wenn der Abschnitt überfahren wird
   renderer?: AbstractSectionRenderer; // Optionaler benutzerdefinierter Renderer (aus dem Paket exportiert)
 };
 ```
 
-Abschnitte bieten Hintergrundfarben für Zeiträume und helfen bei der visuellen Organisation des Timeline-Inhalts:
+Abschnitte bieten Hintergrundfarben für Zeiträume und helfen bei der visuellen Organisation von Timeline-Inhalten:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -121,7 +121,7 @@ const MyTimelineComponent = () => {
         {
           id: 'afternoon',
           from: Date.now() + 1800000,
-          // Kein 'to' angegeben – erstreckt sich bis zum Ende der Timeline
+          // Kein 'to' angegeben - erstreckt sich bis zum Ende der Timeline
           color: 'rgba(76, 175, 80, 0.2)', // Halbtransparentes Grün
           hoverColor: 'rgba(76, 175, 80, 0.3)'
         }
@@ -129,7 +129,7 @@ const MyTimelineComponent = () => {
     },
     viewConfiguration: {
       sections: {
-        hitboxPadding: 2 // Polsterung für die Hover-Erkennung
+        hitboxPadding: 2 // Abstand für die Erkennung von Hover-Effekten
       }
     }
   });
@@ -147,7 +147,7 @@ type TimelineMarker = {
   time: number;           // Zeitstempel für die Position der Markierung
   color: string;          // Farbe der Markierungslinie
   activeColor: string;    // Farbe, wenn die Markierung ausgewählt ist (erforderlich)
-  hoverColor: string;     // Farbe beim Hovern über die Markierung (erforderlich)
+  hoverColor: string;     // Farbe, wenn die Markierung überfahren wird (erforderlich)
   lineWidth?: number;     // Optionale Breite der Markierungslinie
   label?: string;         // Optionaler Beschriftungstext
   labelColor?: string;    // Optionale Beschriftungsfarbe
@@ -197,7 +197,7 @@ const MyTimelineComponent = () => {
 
 ## Funktionsweise
 
-Die Timeline-Komponente basiert auf React und bietet eine flexible Möglichkeit, interaktive Timeline-Visualisierungen zu erstellen. So funktioniert sie:
+Die Timeline-Komponente ist mit React erstellt und bietet eine flexible Möglichkeit, interaktive Timeline-Visualisierungen zu erstellen. So funktioniert sie:
 
 ### Komponentenarchitektur
 
@@ -220,7 +220,7 @@ Die Timeline ist als React-Komponente implementiert, die über zwei Hauptobjekte
 Die Timeline-Komponente unterstützt mehrere interaktive Ereignisse:
 
 - `on-click`: Wird beim Klicken auf die Timeline ausgelöst
-- `on-context-click`: Wird bei einem Rechtsklick/Kontextmenü ausgelöst
+- `on-context-click`: Wird bei Rechtsklick/Kontextmenü ausgelöst
 - `on-select-change`: Wird ausgelöst, wenn sich die Auswahl ändert
 - `on-hover`: Wird beim Überfahren von Timeline-Elementen mit der Maus ausgelöst
 - `on-leave`: Wird ausgelöst, wenn die Maus Timeline-Elemente verlässt
@@ -247,18 +247,18 @@ const MyTimelineComponent = () => {
 
 ### React-Integration
 
-Die Komponente verwendet benutzerdefinierte Hooks für die Timeline-Verwaltung:
+Die Komponente verwendet benutzerdefinierte Hooks zur Timeline-Verwaltung:
 
 - `useTimeline`: Verwaltet die Timeline-Instanz und ihren Lebenszyklus
   - Erstellt und initialisiert die Timeline
-  - Kümmert sich um die Bereinigung beim Unmounten der Komponente
+  - Kümmert sich um die Bereinigung beim Ausblenden der Komponente
   - Bietet Zugriff auf die Timeline-Instanz
 
-- `useTimelineEvent`: Behandelt Ereignisabonnements und Bereinigung
+- `useTimelineEvent`: Verwaltet Ereignisabonnements und die Bereinigung
   - Verwaltet den Lebenszyklus von Ereignis-Listenern
-  - Bereinigt Listener automatisch beim Unmounten
+  - Bereinigt Listener automatisch beim Ausblenden
 
-Die Komponente kümmert sich automatisch um die Bereinigung und Zerstörung der Timeline-Instanz, wenn sie unmounted wird.
+Die Komponente kümmert sich automatisch um die Bereinigung und Zerstörung der Timeline-Instanz, wenn sie ausgeblendet wird.
 
 ### Ereignisstruktur
 
@@ -342,7 +342,7 @@ if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
 }
 
-// Event-Listener hinzufügen
+// Ereignis-Listener hinzufügen
 timeline.on('on-click', (detail) => {
   console.log('Timeline geklickt:', detail);
 });
@@ -359,7 +359,7 @@ Die `Timeline`-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
 
 - **Ereignisverwaltung**:
   ```typescript
-  // Event-Listener hinzufügen
+  // Ereignis-Listener hinzufügen
   timeline.on('eventClick', (detail) => {
     console.log('Ereignis geklickt:', detail);
   });

@@ -2,7 +2,7 @@
 
 > [English version](./README.md)
 
-Canvasレンダリングによるインタラクティブなタイムラインビジュアライゼーション構築のためのReactベースライブラリです。
+Canvasレンダリングによるインタラクティブなタイムラインビジュアライゼーションを構築するためのReactベースのライブラリです。
 
 ## ドキュメント
 
@@ -10,11 +10,11 @@ Canvasレンダリングによるインタラクティブなタイムライン�
 
 ## プレビュー
 
-イベントと軸を持つ基本的なタイムライン：
+イベントと軸を備えた基本的なタイムライン：
 
 ![Basic timeline with events](./docs/img/lines.png)
 
-展開可能なネストされたイベントを持つカスタムレンダリング（[NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story)例）：
+展開可能なネストされたイベントを使用したカスタムレンダリング（[NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story)の例）：
 
 ![Nested events timeline](./docs/img/events.png)
 
@@ -23,8 +23,8 @@ Canvasレンダリングによるインタラクティブなタイムライン�
 - 高パフォーマンスのためのCanvasベースレンダリング
 - ズームおよびパン機能を備えたインタラクティブなタイムライン
 - イベント、マーカー、セクション、軸、グリッドのサポート
-- 視覚的な整理と時間帯のハイライトのための背景セクション
-- スマートマーカーグルーピングと自動ズーム機能 - グループ化されたマーカーをクリックすると、個々のコンポーネントにズームインします
+- 視覚的な整理と時間範囲のハイライトのための背景セクション
+- スマートマーカーグルーピングとグループへの自動ズーム - グループ化されたマーカーをクリックして個々のコンポーネントにズームします
 - 大規模データセットでのパフォーマンス向上のための仮想化レンダリング（タイムラインコンテンツがビューポートを超える場合にのみアクティブ）
 - カスタマイズ可能な外観と動作
 - 完全な型定義によるTypeScriptサポート
@@ -60,7 +60,7 @@ const MyTimelineComponent = () => {
 
   // timeline - Timelineインスタンス
   // api - CanvasApiインスタンス（timeline.apiと同じ）
-  // start - タイムラインをキャンバスで初期化する関数
+  // start - canvasでタイムラインを初期化する関数
   // stop - タイムラインを破棄する関数
 
   return (
@@ -78,9 +78,9 @@ const MyTimelineComponent = () => {
 ```typescript
 type TimelineAxis = {
   id: string;          // 一意の軸識別子
-  tracksCount: number; // 軸内のトラック数
-  top: number;         // 垂直位置 (px)
-  height: number;      // トラックごとの高さ (px)
+  tracksCount: number; // 軸のトラック数
+  top: number;         // 垂直位置（px）
+  height: number;      // トラックごとの高さ（px）
 };
 ```
 
@@ -99,7 +99,7 @@ type TimelineSection = {
 };
 ```
 
-セクションは時間帯の背景色を提供し、タイムラインコンテンツを視覚的に整理するのに役立ちます。
+セクションは時間範囲の背景色を提供し、タイムラインコンテンツを視覚的に整理するのに役立ちます。
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -145,14 +145,14 @@ const MyTimelineComponent = () => {
 ```typescript
 type TimelineMarker = {
   time: number;           // マーカー位置のタイムスタンプ
-  color: string;          // マーカーラインの色
+  color: string;          // マーカー線の色
   activeColor: string;    // マーカーが選択されたときのカラー（必須）
   hoverColor: string;     // マーカーにホバーしたときのカラー（必須）
-  lineWidth?: number;     // オプションのマーカーラインの幅
+  lineWidth?: number;     // オプションのマーカー線の幅
   label?: string;         // オプションのラベルテキスト
   labelColor?: string;    // オプションのラベルカラー
   renderer?: AbstractMarkerRenderer; // オプションのカスタムレンダラー
-  nonSelectable?: boolean;// マーカーを選択可能かどうか
+  nonSelectable?: boolean;// マーカーを選択できるかどうか
   group?: boolean;        // マーカーがグループを表すかどうか
 };
 ```
@@ -221,9 +221,9 @@ const MyTimelineComponent = () => {
 
 - `on-click`: タイムラインをクリックしたときにトリガーされます。
 - `on-context-click`: 右クリック/コンテキストメニューでトリガーされます。
-- `on-select-change`: 選択範囲が変更されたときに発行されます。
+- `on-select-change`: 選択範囲が変更されたときに発生します。
 - `on-hover`: タイムライン要素にマウスカーソルが乗ったときにトリガーされます。
-- `on-leave`: マウスカーソルがタイムライン要素から離れたときに発行されます。
+- `on-leave`: マウスカーソルがタイムライン要素から離れたときに発生します。
 
 イベント処理の例：
 
@@ -254,7 +254,7 @@ const MyTimelineComponent = () => {
   - コンポーネントのアンマウント時にクリーンアップを処理します。
   - タイムラインインスタンスへのアクセスを提供します。
 
-- `useTimelineEvent`: イベントサブスクリプションとクリーンアップを処理します。
+- `useTimelineEvent`: イベントのサブスクリプションとクリーンアップを処理します。
   - イベントリスナーのライフサイクルを管理します。
   - アンマウント時にリスナーを自動的にクリーンアップします。
 
@@ -269,7 +269,7 @@ type TimelineEvent = {
   id: string;             // 一意の識別子
   from: number;           // 開始タイムスタンプ
   to?: number;            // 終了タイムスタンプ（ポイントイベントの場合はオプション）
-  axisId: string;         // イベントが属する軸のID
+  axisId: string;         // このイベントが属する軸のID
   trackIndex: number;     // 軸トラック内のインデックス
   renderer?: AbstractEventRenderer; // オプションのカスタムレンダラー
   color?: string;         // オプションのイベントカラー
@@ -277,7 +277,7 @@ type TimelineEvent = {
 };
 ```
 
-### 直接TypeScriptを使用する場合
+### TypeScriptの直接利用
 
 Timelineクラスは、Reactなしで直接TypeScriptで使用できます。これは、他のフレームワークやバニラJavaScriptアプリケーションとの統合に役立ちます。
 
@@ -290,7 +290,7 @@ const timestamp = Date.now();
 const timeline = new Timeline({
   settings: {
     start: timestamp,
-    end: timestamp + 3600000, // 現在から1時間後
+    end: timestamp + 3600000, // 今から1時間後
     axes: [
       {
         id: 'main',
@@ -302,8 +302,8 @@ const timeline = new Timeline({
     events: [
       {
         id: 'event1',
-        from: timestamp + 1800000, // 現在から30分後
-        to: timestamp + 2400000,   // 現在から40分後
+        from: timestamp + 1800000, // 今から30分後
+        to: timestamp + 2400000,   // 今から40分後
         label: 'サンプルイベント',
         axisId: 'main'
       }
@@ -311,7 +311,7 @@ const timeline = new Timeline({
     markers: [
       {
         id: 'marker1',
-        time: timestamp + 1200000, // 現在から20分後
+        time: timestamp + 1200000, // 今から20分後
         label: '重要なポイント',
         color: '#ff0000',
         activeColor: '#ff5252',
@@ -363,7 +363,7 @@ Timelineクラスは、タイムラインを管理するための豊富なAPIを
   timeline.on('eventClick', (detail) => {
     console.log('イベントがクリックされました:', detail);
   });
-```
+  ```
 
 ```markdown
   // イベントリスナーの削除

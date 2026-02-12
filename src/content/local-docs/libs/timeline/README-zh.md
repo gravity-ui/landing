@@ -1,6 +1,6 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-> [English version](./README.md)
+> [中文版本](./README.md)
 
 一个基于 React 的库，用于构建具有 Canvas 渲染的交互式时间轴可视化。
 
@@ -12,23 +12,23 @@
 
 带有事件和轴的基本时间轴：
 
-![Basic timeline with events](./docs/img/lines.png)
+![带有事件的基本时间轴](./docs/img/lines.png)
 
-带有可展开嵌套事件的自定义渲染（[NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story) 示例）：
+自定义渲染，支持可展开的嵌套事件（[NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story) 示例）：
 
-![Nested events timeline](./docs/img/events.png)
+![嵌套事件时间轴](./docs/img/events.png)
 
 ## 特性
 
-- 基于 Canvas 的渲染，性能高
-- 交互式时间轴，支持缩放和平移
+- 基于 Canvas 的渲染，性能卓越
+- 支持缩放和平移的交互式时间轴
 - 支持事件、标记、区域、轴和网格
-- 背景区域，用于视觉组织和时间段高亮
-- 智能标记分组，并自动缩放至组 - 点击分组标记可缩放至其独立组件
-- 虚拟化渲染，以提高处理大型数据集时的性能（仅当时间轴内容超出视口时激活）
+- 背景区域，用于视觉组织和时间段高亮显示
+- 智能标记分组，并自动缩放到组 - 点击分组标记可缩放到其独立组件
+- 虚拟化渲染，提高处理大型数据集时的性能（仅当时间轴内容超出视口时激活）
 - 可自定义的外观和行为
 - 支持 TypeScript，提供完整的类型定义
-- React 集成，包含自定义 Hook
+- React 集成，包含自定义 Hooks
 
 ## 安装
 
@@ -59,9 +59,9 @@ const MyTimelineComponent = () => {
   });
 
   // timeline - Timeline 实例
-  // api - CanvasApi 实例（与 timeline.api 相同）
-  // start - 用于使用 canvas 初始化 timeline 的函数
-  // stop - 用于销毁 timeline 的函数
+  // api - CanvasApi 实例 (与 timeline.api 相同)
+  // start - 用于使用 canvas 初始化时间轴的函数
+  // stop - 用于销毁时间轴的函数
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
@@ -92,10 +92,10 @@ type TimelineAxis = {
 type TimelineSection = {
   id: string;               // 唯一的区域标识符
   from: number;             // 开始时间戳
-  to?: number;              // 可选的结束时间戳（默认为时间轴结束时间）
+  to?: number;              // 可选的结束时间戳 (默认为时间轴结束时间)
   color: string;            // 区域的背景颜色
   hoverColor?: string;      // 区域悬停时的可选颜色
-  renderer?: AbstractSectionRenderer; // 可选的自定义渲染器（从包中导出）
+  renderer?: AbstractSectionRenderer; // 可选的自定义渲染器 (从包中导出)
 };
 ```
 
@@ -146,8 +146,8 @@ const MyTimelineComponent = () => {
 type TimelineMarker = {
   time: number;           // 标记位置的时间戳
   color: string;          // 标记线的颜色
-  activeColor: string;    // 标记被选中时的颜色（必需）
-  hoverColor: string;     // 标记悬停时的颜色（必需）
+  activeColor: string;    // 标记被选中时的颜色 (必需)
+  hoverColor: string;     // 标记悬停时的颜色 (必需)
   lineWidth?: number;     // 可选的标记线宽度
   label?: string;         // 可选的标签文本
   labelColor?: string;    // 可选的标签颜色
@@ -180,7 +180,7 @@ const MyTimelineComponent = () => {
       markers: {
         collapseMinDistance: 8,        // 将相距 8 像素内的标记分组
         groupZoomEnabled: true,        // 点击分组时启用缩放
-        groupZoomPadding: 0.3,        // 分组周围的填充比例为 30%
+        groupZoomPadding: 0.3,        // 分组周围的填充为 30%
         groupZoomMaxFactor: 0.3,      // 最大缩放因子
       }
     }
@@ -256,20 +256,20 @@ const MyTimelineComponent = () => {
 
 - `useTimelineEvent`: 处理事件订阅和清理
   - 管理事件监听器的生命周期
-  - 在组件卸载时自动清理监听器
+  - 在卸载时自动清理监听器
 
 当组件卸载时，该组件会自动处理时间轴实例的清理和销毁。
 
 ### 事件结构
 
-时间轴中的事件遵循以下结构：
+时间轴中的事件遵循此结构：
 
 ```typescript
 type TimelineEvent = {
   id: string;             // 唯一标识符
   from: number;           // 开始时间戳
   to?: number;            // 结束时间戳（点事件可选）
-  axisId: string;         // 该事件所属的轴的 ID
+  axisId: string;         // 事件所属的轴的 ID
   trackIndex: number;     // 轴轨道中的索引
   renderer?: AbstractEventRenderer; // 可选的自定义渲染器
   color?: string;         // 可选的事件颜色
@@ -277,9 +277,9 @@ type TimelineEvent = {
 };
 ```
 
-### 直接使用 TypeScript
+### 直接 TypeScript 用法
 
-Timeline 类可以直接在 TypeScript 中使用，无需 React。这对于与其他框架或原生 JavaScript 应用程序集成非常有用：
+Timeline 类可以直接在 TypeScript 中使用，无需 React。这对于与框架或其他 JavaScript 应用程序集成非常有用：
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
@@ -290,7 +290,7 @@ const timestamp = Date.now();
 const timeline = new Timeline({
   settings: {
     start: timestamp,
-    end: timestamp + 3600000, // 当前时间起 1 小时
+    end: timestamp + 3600000, // 从现在开始 1 小时
     axes: [
       {
         id: 'main',
@@ -302,8 +302,8 @@ const timeline = new Timeline({
     events: [
       {
         id: 'event1',
-        from: timestamp + 1800000, // 当前时间起 30 分钟
-        to: timestamp + 2400000,   // 当前时间起 40 分钟
+        from: timestamp + 1800000, // 从现在开始 30 分钟
+        to: timestamp + 2400000,   // 从现在开始 40 分钟
         label: '示例事件',
         axisId: 'main'
       }
@@ -311,7 +311,7 @@ const timeline = new Timeline({
     markers: [
       {
         id: 'marker1',
-        time: timestamp + 1200000, // 当前时间起 20 分钟
+        time: timestamp + 1200000, // 从现在开始 20 分钟
         label: '重要节点',
         color: '#ff0000',
         activeColor: '#ff5252',
@@ -351,11 +351,11 @@ timeline.on('on-select-change', (detail) => {
   console.log('选择已更改:', detail);
 });
 
-// 完成后进行清理
+// 完成后清理
 timeline.destroy();
 ```
 
-Timeline 类提供了丰富的 API 来管理时间轴：
+Timeline 类提供了一个丰富的 API 来管理时间轴：
 
 - **事件管理**:
   ```typescript
