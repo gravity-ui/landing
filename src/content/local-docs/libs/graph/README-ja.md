@@ -3,37 +3,37 @@
 > [0.x から 1.x への移行ガイド →](docs/migration-guides/v0-to-v1.md)
 
 両方の長所を兼ね備えたグラフ描画ライブラリです。
-- 全体グラフ表示時の高パフォーマンスのための Canvas
-- ズームイン時のリッチなインタラクションのための HTML/React
+- グラフ全体を表示する際の高パフォーマンスのために Canvas を使用
+- ズームイン時のリッチなインタラクションのために HTML/React を使用
 
 パフォーマンスとインタラクティブ性のどちらかを選択する必要はもうありません。大規模な図、フローチャート、ノードベースのエディタに最適です。
 
-## 動機
+## モチベーション
 
-現代のウェブアプリケーションでは、複雑な描画とインタラクションが求められることがよくありますが、既存のソリューションは通常、単一のレンダリング技術に焦点を当てています。
+最新の Web アプリケーションでは、複雑な描画とインタラクションが求められることがよくありますが、既存のソリューションは通常、単一のレンダリング技術に焦点を当てています。
 
 - **Canvas** は複雑なグラフィックスに対して高いパフォーマンスを提供しますが、テキスト処理やインタラクションには制限があります。
 - **HTML DOM** はインターフェースには便利ですが、複雑なグラフィックスや多数の要素には効率が悪いです。
 
 @gravity-ui/graph は、ズームレベルに応じて Canvas と HTML を自動的に切り替えることで、この問題を解決します。
-- **ズームアウト時**: グラフ全体を効率的に描画するために Canvas を使用します。
-- **中程度のズーム**: 基本的なインタラクションを備えた概略図を表示します。
-- **ズームイン時**: リッチなインタラクションのために HTML/React コンポーネントに切り替えます。
+- **ズームアウト時**: グラフ全体を効率的にレンダリングするために Canvas を使用
+- **中程度のズーム**: 基本的なインタラクションを備えた概略図を表示
+- **ズームイン時**: リッチなインタラクションのために HTML/React コンポーネントに切り替え
 
 ## 仕組み
 
 このライブラリは、Canvas と React コンポーネント間の遷移を自動的に管理するスマートなレンダリングシステムを使用しています。
 
-1. 低いズームレベルでは、パフォーマンスのためにすべて Canvas 上に描画されます。
-2. 詳細表示にズームインすると、`GraphCanvas` コンポーネントは以下の処理を行います。
+1. 低いズームレベルでは、パフォーマンスのためにすべて Canvas 上にレンダリングされます。
+2. 詳細表示にズームインすると、`GraphCanvas` コンポーネントは次の処理を行います。
    - カメラのビューポートとスケールの変更を追跡します。
    - 現在のビューポートで表示されているブロックを計算します（スムーズなスクロールのためのパディング付き）。
-   - 表示されているブロックに対してのみ React コンポーネントを描画します。
+   - 表示されているブロックに対してのみ React コンポーネントをレンダリングします。
    - スクロールまたはズーム時にリストを自動的に更新します。
    - ズームアウト時に React コンポーネントを削除します。
 
 ```typescript
-// React コンポーネント描画の例
+// React コンポーネントのレンダリング例
 const MyGraph = () => {
   return (
     <GraphCanvas
@@ -64,9 +64,10 @@ npm install @gravity-ui/graph
 [詳細な React コンポーネントのドキュメント](docs/react/usage.md)
 
 ```typescript
-import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
 import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-import React from "react";
 
 const config = {};
 
@@ -90,8 +91,8 @@ export function GraphEditor() {
               id: "out1",
               blockId: "action_1",
               type: EAnchorType.OUT,
-              index: 0
-            }
+              index: 0,
+            },
           ],
         },
         {
@@ -108,10 +109,10 @@ export function GraphEditor() {
               id: "in1",
               blockId: "action_2",
               type: EAnchorType.IN,
-              index: 0
-            }
+              index: 0,
+            },
           ],
-        }
+        },
       ],
       connections: [
         {
@@ -119,13 +120,17 @@ export function GraphEditor() {
           sourceAnchorId: "out1",
           targetBlockId: "action_2",
           targetAnchorId: "in1",
-        }
-      ]
+        },
+      ],
     });
   }, [setEntities]);
 
-  const renderBlockFn = (graph, block) => {
-    return <GraphBlock graph={graph} block={block}>{block.id}</GraphBlock>;
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
   };
 
   return (
@@ -141,6 +146,7 @@ export function GraphEditor() {
     />
   );
 }
+
 ```
 
 ### Vanilla JavaScript の例

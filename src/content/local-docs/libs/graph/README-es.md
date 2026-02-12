@@ -4,7 +4,7 @@
 
 Una biblioteca de visualización de grafos que combina lo mejor de ambos mundos:
 - Canvas para un alto rendimiento al ver el grafo completo
-- HTML/React para interacciones enriquecidas al hacer zoom
+- HTML/React para interacciones ricas al hacer zoom
 
 No más elegir entre rendimiento e interactividad. Perfecto para diagramas grandes, diagramas de flujo y editores basados en nodos.
 
@@ -18,13 +18,13 @@ Las aplicaciones web modernas a menudo requieren visualización e interactividad
 @gravity-ui/graph resuelve esto cambiando automáticamente entre Canvas y HTML según el nivel de zoom:
 - **Alejado**: Utiliza Canvas para renderizar eficientemente el grafo completo
 - **Zoom medio**: Muestra una vista esquemática con interactividad básica
-- **Acercado**: Cambia a componentes HTML/React para interacciones enriquecidas
+- **Acercado**: Cambia a componentes HTML/React para interacciones ricas
 
-## Cómo Funciona
+## Cómo funciona
 
 La biblioteca utiliza un sistema de renderizado inteligente que gestiona automáticamente la transición entre Canvas y componentes React:
 
-1. En niveles de zoom bajos, todo se renderiza en Canvas para un mejor rendimiento.
+1. En niveles de zoom bajos, todo se renderiza en Canvas para obtener rendimiento.
 2. Al hacer zoom para ver los detalles, el componente `GraphCanvas`:
    - Rastrea los cambios en la vista de la cámara y la escala.
    - Calcula qué bloques son visibles en la vista actual (con relleno para un desplazamiento suave).
@@ -59,14 +59,15 @@ npm install @gravity-ui/graph
 
 ## Ejemplos
 
-### Ejemplo con React
+### Ejemplo de React
 
 [Documentación detallada de componentes React](docs/react/usage.md)
 
 ```typescript
-import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
 import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-import React from "react";
 
 const config = {};
 
@@ -90,8 +91,8 @@ export function GraphEditor() {
               id: "out1",
               blockId: "action_1",
               type: EAnchorType.OUT,
-              index: 0
-            }
+              index: 0,
+            },
           ],
         },
         {
@@ -108,10 +109,10 @@ export function GraphEditor() {
               id: "in1",
               blockId: "action_2",
               type: EAnchorType.IN,
-              index: 0
-            }
+              index: 0,
+            },
           ],
-        }
+        },
       ],
       connections: [
         {
@@ -119,13 +120,17 @@ export function GraphEditor() {
           sourceAnchorId: "out1",
           targetBlockId: "action_2",
           targetAnchorId: "in1",
-        }
-      ]
+        },
+      ],
     });
   }, [setEntities]);
 
-  const renderBlockFn = (graph, block) => {
-    return <GraphBlock graph={graph} block={block}>{block.id}</GraphBlock>;
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
   };
 
   return (
@@ -141,9 +146,10 @@ export function GraphEditor() {
     />
   );
 }
+
 ```
 
-### Ejemplo con JavaScript Vanilla
+### Ejemplo de JavaScript Vanilla
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";

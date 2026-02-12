@@ -28,10 +28,6 @@ export const menu: MenuItem[] = [
         url: '/themer',
     },
     {
-        titleKey: 'menu_media',
-        url: '/media',
-    },
-    {
         titleKey: 'menu_blog',
         url: '/blog',
         isNew: true,

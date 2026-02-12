@@ -1,10 +1,22 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-Uma biblioteca baseada em React para criar visualizações de linha do tempo interativas com renderização em canvas.
+> [Versão em Português](./README.pt.md)
+
+Uma biblioteca baseada em React para construir visualizações interativas de linha do tempo com renderização em canvas.
 
 ## Documentação
 
 Para detalhes, consulte [Documentação](./docs/docs.md).
+
+## Prévia
+
+Linha do tempo básica com eventos e eixos:
+
+![Linha do tempo básica com eventos](./docs/img/lines.png)
+
+Renderização personalizada com eventos aninhados expansíveis (exemplo [NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story)):
+
+![Linha do tempo com eventos aninhados](./docs/img/events.png)
 
 ## Funcionalidades
 
@@ -59,7 +71,20 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### Estrutura de Seção
+### Estrutura do Eixo
+
+Cada eixo tem a seguinte estrutura:
+
+```typescript
+type TimelineAxis = {
+  id: string;          // Identificador único do eixo
+  tracksCount: number; // Número de trilhas no eixo
+  top: number;         // Posição vertical (px)
+  height: number;      // Altura por trilha (px)
+};
+```
+
+### Estrutura da Seção
 
 Cada seção requer a seguinte estrutura:
 
@@ -70,11 +95,11 @@ type TimelineSection = {
   to?: number;              // Timestamp de fim opcional (padrão para o fim da linha do tempo)
   color: string;            // Cor de fundo da seção
   hoverColor?: string;      // Cor opcional ao passar o mouse sobre a seção
-  renderer?: AbstractSectionRenderer; // Renderizador personalizado opcional
+  renderer?: AbstractSectionRenderer; // Renderizador personalizado opcional (exportado do pacote)
 };
 ```
 
-As seções fornecem coloração de fundo para períodos de tempo e ajudam a organizar o conteúdo da linha do tempo visualmente:
+As seções fornecem cores de fundo para períodos de tempo e ajudam a organizar o conteúdo da linha do tempo visualmente:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -96,7 +121,7 @@ const MyTimelineComponent = () => {
         {
           id: 'afternoon',
           from: Date.now() + 1800000,
-          // Nenhum 'to' especificado - estende até o fim da linha do tempo
+          // 'to' não especificado - estende até o fim da linha do tempo
           color: 'rgba(76, 175, 80, 0.2)', // Verde semitransparente
           hoverColor: 'rgba(76, 175, 80, 0.3)'
         }
@@ -113,7 +138,7 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### Estrutura de Marcador
+### Estrutura do Marcador
 
 Cada marcador requer a seguinte estrutura:
 
@@ -153,8 +178,8 @@ const MyTimelineComponent = () => {
     },
     viewConfiguration: {
       markers: {
-        collapseMinDistance: 8,        // Agrupa marcadores a até 8 pixels de distância
-        groupZoomEnabled: true,        // Habilita zoom ao clicar no grupo
+        collapseMinDistance: 8,        // Agrupa marcadores a uma distância de 8 pixels
+        groupZoomEnabled: true,        // Habilita zoom ao clicar em um grupo
         groupZoomPadding: 0.3,        // 30% de preenchimento ao redor do grupo
         groupZoomMaxFactor: 0.3,      // Fator máximo de zoom
       }
@@ -172,7 +197,7 @@ const MyTimelineComponent = () => {
 
 ## Como Funciona
 
-O componente de linha do tempo é construído usando React e oferece uma maneira flexível de criar visualizações de linha do tempo interativas. Veja como funciona:
+O componente de linha do tempo é construído usando React e oferece uma maneira flexível de criar visualizações interativas de linha do tempo. Veja como funciona:
 
 ### Arquitetura do Componente
 
@@ -181,13 +206,13 @@ A linha do tempo é implementada como um componente React que pode ser configura
 1. **TimelineSettings**: Controla o comportamento e a aparência principal da linha do tempo
    - `start`: Hora de início da linha do tempo
    - `end`: Hora de término da linha do tempo
-   - `axes`: Array de configurações de eixos
-   - `events`: Array de configurações de eventos
-   - `markers`: Array de configurações de marcadores
-   - `sections`: Array de configurações de seções
+   - `axes`: Matriz de configurações de eixo (veja a estrutura abaixo)
+   - `events`: Matriz de configurações de evento
+   - `markers`: Matriz de configurações de marcador
+   - `sections`: Matriz de configurações de seção
 
 2. **ViewConfiguration**: Gerencia a representação visual e as configurações de interação
-   - Controla a aparência, níveis de zoom e comportamento de interação
+   - Controla a aparência, os níveis de zoom e o comportamento de interação
    - Pode ser personalizado ou usar valores padrão
 
 ### Tratamento de Eventos
@@ -198,7 +223,7 @@ O componente de linha do tempo suporta vários eventos interativos:
 - `on-context-click`: Disparado ao clicar com o botão direito/menu de contexto
 - `on-select-change`: Disparado quando a seleção muda
 - `on-hover`: Disparado ao passar o mouse sobre elementos da linha do tempo
-- `on-leave`: Disparado quando o mouse sai de elementos da linha do tempo
+- `on-leave`: Disparado quando o mouse sai dos elementos da linha do tempo
 
 Exemplo de tratamento de eventos:
 
@@ -209,7 +234,7 @@ const MyTimelineComponent = () => {
   const { timeline } = useTimeline({ /* ... */ });
 
   useTimelineEvent(timeline, 'on-click', (data) => {
-    console.log('Timeline clicada:', data);
+    console.log('Linha do tempo clicada:', data);
   });
 
   useTimelineEvent(timeline, 'on-select-change', (data) => {
@@ -247,12 +272,12 @@ type TimelineEvent = {
   axisId: string;         // ID do eixo ao qual este evento pertence
   trackIndex: number;     // Índice na trilha do eixo
   renderer?: AbstractEventRenderer; // Renderizador personalizado opcional
-  color?: string;         // Cor do evento opcional
-  selectedColor?: string; // Cor do estado selecionado opcional
+  color?: string;         // Cor opcional do evento
+  selectedColor?: string; // Cor opcional do estado selecionado
 };
 ```
 
-### Uso Direto com TypeScript
+### Uso Direto de TypeScript
 
 A classe `Timeline` pode ser usada diretamente em TypeScript sem React. Isso é útil para integrar com outros frameworks ou aplicações JavaScript vanilla:
 
@@ -261,7 +286,7 @@ import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// Cria uma instância da linha do tempo
+// Cria uma instância de linha do tempo
 const timeline = new Timeline({
   settings: {
     start: timestamp,
@@ -269,8 +294,9 @@ const timeline = new Timeline({
     axes: [
       {
         id: 'main',
-        label: 'Eixo Principal',
-        color: '#000000'
+        tracksCount: 3,
+        top: 0,
+        height: 100
       }
     ],
     events: [
@@ -318,7 +344,7 @@ if (canvas instanceof HTMLCanvasElement) {
 
 // Adiciona ouvintes de eventos
 timeline.on('on-click', (detail) => {
-  console.log('Timeline clicada:', detail);
+  console.log('Linha do tempo clicada:', detail);
 });
 
 timeline.on('on-select-change', (detail) => {
@@ -337,19 +363,21 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
   timeline.on('eventClick', (detail) => {
     console.log('Evento clicado:', detail);
   });
+```
 
-  // Remove um ouvinte de evento
+```markdown
+  // Remove event listener
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // Emite eventos personalizados
-  timeline.emit('customEvent', { data: 'dados personalizados' });
+  // Emit custom events
+  timeline.emit('customEvent', { data: 'custom data' });
   ```
 
 - **Controle da Linha do Tempo**:
   ```typescript
-  // Atualiza os dados da linha do tempo
+  // Atualiza os dados dos eventos
   timeline.api.setEvents([
     {
       id: 'newEvent',
@@ -365,8 +393,9 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
   timeline.api.setAxes([
     {
       id: 'newAxis',
-      label: 'Novo Eixo',
-      color: '#0000ff'
+      tracksCount: 2,
+      top: 0,
+      height: 80
     }
   ]);
 
@@ -392,6 +421,9 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
       hoverColor: 'rgba(255, 193, 7, 0.3)'
     }
   ]);
+
+  // Atualiza a configuração de visualização (mescla com a configuração atual)
+  timeline.api.setViewConfiguration({ hideRuler: true });
   ```
 
 ## Exemplos ao Vivo
@@ -402,6 +434,7 @@ Explore exemplos interativos em nosso [Storybook](https://preview.gravity-ui.com
 - [Linha do Tempo Infinita](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Linha do tempo infinita com eventos e eixos
 - [Marcadores](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Linha do tempo com marcadores verticais e rótulos
 - [Eventos Personalizados](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Linha do tempo com renderização de eventos personalizada
+- [Integrações](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection, DragHandler, NestedEvents, Popup, List
 
 
 ## Desenvolvimento
@@ -427,3 +460,4 @@ npm run build-storybook
 ## Licença
 
 MIT
+```

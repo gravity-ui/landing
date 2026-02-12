@@ -14,7 +14,7 @@ import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
 
-import {getRoadmapTasks} from './roadmap';
+// import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
 
 export const getLanding = ({
@@ -72,15 +72,15 @@ export const getLanding = ({
                 title: t('home:news_title'),
                 items: [
                     {
-                        date: '2025-12-25T12:00:00.000Z',
+                        date: '2026-02-12T12:00:00.000Z',
                         content: t('home:news_items_item1'),
                     },
                     {
-                        date: '2025-12-18T12:00:00.000Z',
+                        date: '2025-12-25T12:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
                     {
-                        date: '2025-12-17T12:00:00.000Z',
+                        date: '2025-12-18T12:00:00.000Z',
                         content: t('home:news_items_item3'),
                     },
                 ],
@@ -108,11 +108,11 @@ export const getLanding = ({
 
             items: libs,
         },
-        {
-            type: CustomBlock.Roadmap,
-            title: t('home:roadmap_title'),
-            tasks: getRoadmapTasks(t),
-        },
+        // {
+        //     type: CustomBlock.Roadmap,
+        //     title: t('home:roadmap_title'),
+        //     tasks: getRoadmapTasks(t),
+        // },
         {
             type: CustomBlock.Templates,
             title: t('home:templates_title'),
