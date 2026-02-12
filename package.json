@@ -24,6 +24,7 @@
     "@gravity-ui/timeline": "^1.26.1",
     "@gravity-ui/uikit": "^7.31.1",
     "@gravity-ui/uikit-themer": "^1.7.0",
+    "@huggingface/transformers": "^3.8.1",
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@monaco-editor/react": "^4.6.0",
