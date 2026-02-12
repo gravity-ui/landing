@@ -1,0 +1,198 @@
+{
+  "posts": [
+    {
+      "id": 73,
+      "name": "gravityui-aikit",
+      "date": "2025-12-18T00:00:00Z",
+      "title": "すべてを統べる一つのチャット：Gravity UIをベースにしたAIアシスタント向けライブラリを構築",
+      "postId": 73,
+      "description": "AIKitライブラリのリリースについての記事：開発で注目したこと、なぜ必要なのか、そしてプロジェクトでの活用方法。",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+      "readingTime": 8,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravityui-aikit"
+    },
+    {
+      "id": 36,
+      "name": "graph",
+      "date": "2025-08-07T00:00:00Z",
+      "title": "グラフ可視化ライブラリ：Gravity UIでCanvas vs HTMLのジレンマをどう解決したか",
+      "postId": 36,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/graph-cover-bg.png",
+      "readingTime": 17,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/graph"
+    },
+    {
+      "id": 39,
+      "name": "navigation-webinar",
+      "date": "2025-03-20T00:00:00Z",
+      "title": "Navigationウェビナー",
+      "postId": 39,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+      "readingTime": 30,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "ウェビナー"
+        }
+      ],
+      "services": [],
+      "url": "/blog/navigation-webinar"
+    },
+    {
+      "id": 40,
+      "name": "gravity-start-webinar",
+      "date": "2024-12-09T00:00:00Z",
+      "title": "Gravity UI：クイックスタート",
+      "postId": 40,
+      "description": "入門ウェビナー",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/zastavka-2.png",
+      "readingTime": 43,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "webinars",
+          "name": "ウェビナー"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-start-webinar"
+    },
+    {
+      "id": 37,
+      "name": "yc-site-in-gravity-ui",
+      "date": "2024-10-28T00:00:00Z",
+      "title": "Gravity UIデザインシステムでYandex Cloudをよりアクセシブルにした方法",
+      "postId": 37,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+      "readingTime": 20,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/yc-site-in-gravity-ui"
+    },
+    {
+      "id": 38,
+      "name": "md-editor-in-gravity-ui",
+      "date": "2024-10-01T00:00:00Z",
+      "title": "Markdown Editor：Gravity UIベースのWYSIWYGおよびmarkupエディタ",
+      "postId": 38,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/mdeditor-cover-bg.png",
+      "readingTime": 7,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/md-editor-in-gravity-ui"
+    },
+    {
+      "id": 35,
+      "name": "gravity-ui-in-opensource",
+      "date": "2023-12-12T00:00:00Z",
+      "title": "Gravity UIデザインシステム：簡単にインターフェースを構築する方法",
+      "postId": 35,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/gravity-ui-cover.png",
+      "readingTime": 10,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-ui-in-opensource"
+    }
+  ],
+  "totalCount": 16,
+  "count": 7,
+  "pinnedPost": {
+    "id": 74,
+    "name": "gravity-speed",
+    "date": "2025-07-29T00:00:00Z",
+    "title": "Reactコンポーネントのパフォーマンス比較：Gravity UI vs 他のライブラリ",
+    "postId": 74,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+    "readingTime": 5,
+    "likes": 0,
+    "hasUserLike": false,
+    "hasPublishedVersionInRegion": true,
+    "hasPublishedVersionInLocale": false,
+    "addLegacyPrefix": false,
+    "tags": [
+      {
+        "icon": null,
+        "slug": "articles",
+        "name": "記事"
+      }
+    ],
+    "services": [],
+    "url": "/blog/gravity-speed"
+  }
+}

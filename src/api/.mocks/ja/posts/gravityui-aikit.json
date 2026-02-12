@@ -1,0 +1,23 @@
+{
+  "id": 73,
+  "name": "gravityui-aikit",
+  "isPinned": false,
+  "postId": 73,
+  "description": "AIKitライブラリのリリースについての記事：開発で注目したこと、なぜ必要なのか、そしてプロジェクトでの活用方法。",
+  "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+  "readingTime": 8,
+  "title": "すべてを統べる一つのチャット：Gravity UIをベースにしたAIアシスタント向けライブラリを構築",
+  "date": "2025-12-18T00:00:00Z",
+  "likes": 0,
+  "hasUserLike": false,
+  "addLegacyPrefix": false,
+  "tags": [
+    {
+      "icon": null,
+      "slug": "articles",
+      "name": "記事"
+    }
+  ],
+  "authors": [],
+  "services": []
+}

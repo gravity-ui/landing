@@ -1,0 +1,34 @@
+{
+  "id": 35,
+  "name": "gravity-ui-in-opensource",
+  "isPinned": false,
+  "postId": 35,
+  "description": "",
+  "image": "https://storage.yandexcloud.net/yandex-opensource/blog-cover-bg.png",
+  "readingTime": 10,
+  "title": "Sistema de design Gravity UI: como construir facilmente sua interface",
+  "date": "2025-12-25T00:00:00Z",
+  "likes": 0,
+  "hasUserLike": false,
+  "addLegacyPrefix": false,
+  "tags": [
+    {
+      "slug": "articles",
+      "icon": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M10 2.75C10 2.33579 9.66421 2 9.25 2H5.75C3.67893 2 2 3.67893 2 5.75V14.25C2 16.3211 3.67893 18 5.75 18H14.25C16.3211 18 18 16.3211 18 14.25V10.75C18 10.3358 17.6642 10 17.25 10C16.8358 10 16.5 10.3358 16.5 10.75V14.25C16.5 15.4926 15.4926 16.5 14.25 16.5H5.75C4.50736 16.5 3.5 15.4926 3.5 14.25V5.75C3.5 4.50736 4.50736 3.5 5.75 3.5H9.25C9.66421 3.5 10 3.16421 10 2.75ZM16.4833 4.89539C16.3807 4.18284 15.8172 3.61928 15.1046 3.51671L14.2844 4.33691C14.8777 4.63789 15.3621 5.12234 15.6631 5.71559L16.4833 4.89539ZM14.4833 6.89539C14.3807 6.18284 13.8172 5.61928 13.1046 5.51671L8.83282 9.7885C8.53024 10.0911 8.32022 10.4737 8.22739 10.8914L7.97562 12.0244L9.10861 11.7726C9.52633 11.6798 9.90892 11.4698 10.2115 11.1672L14.4833 6.89539ZM12.2398 4.26019L14.2381 2.2619C14.4058 2.09421 14.6332 2 14.8704 2C16.5988 2 18 3.40118 18 5.12962C18 5.36677 17.9058 5.59421 17.7381 5.7619L15.7381 7.7619L11.2722 12.2278C10.7679 12.7321 10.1302 13.0822 9.434 13.2369L7.91751 13.5739C7.80587 13.5987 7.69574 13.608 7.58886 13.6034C6.84075 13.5717 6.25245 12.864 6.42611 12.0825L6.76311 10.566C6.77278 10.5225 6.78321 10.4792 6.7944 10.4362C6.96218 9.79061 7.29938 9.20062 7.77216 8.72784L12.2381 4.2619C12.2387 4.26133 12.2392 4.26076 12.2398 4.26019Z\" fill=\"#262626\"/></svg>",
+      "name": "Artigos"
+    }
+  ],
+  "authors": [
+    {
+      "id": 1069,
+      "avatar": "https://storage.yandexcloud.net/cloud-www-assets/blog-assets/ru/posts/2025/12/gravity-ui-in-opensource/sizikov.png",
+      "firstName": "Alexey",
+      "secondName": "Sizikov",
+      "description": "Yandex Cloud",
+      "fullDescription": "Chefe do departamento de User Experience, Yandex Cloud",
+      "shortDescription": "Chefe do departamento de User Experience, Yandex Cloud",
+      "fullName": "Alexey Sizikov"
+    }
+  ],
+  "services": []
+  }

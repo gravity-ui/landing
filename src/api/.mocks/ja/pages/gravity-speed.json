@@ -1,0 +1,73 @@
+{
+  "id": 109,
+  "name": "blog/gravity-speed",
+  "createdAt": "2026-01-27T14:03:40.504Z",
+  "updatedAt": "2026-01-27T14:03:40.504Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 109,
+  "regionCode": "ja",
+  "publishedVersionId": 274,
+  "lastVersionId": 274,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#2A1A2A'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        resetPaddings: true\n        column: right\n        text: \"\\n![image](https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/speaker.jpg =80x)\\n\\n**エフゲニー・アラエフ**\\nGravity\\_UIコア開発者\\n\"\n      - type: blog-yfm-block\n        column: right\n        resetPaddings: true\n        text: |+\n\n          この記事の内容：\n\n            - [調査方法](#methods)\n            - [結果](#results)\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n私は[Gravity\\_UI](https://gravity-ui.com/){target=\\\"_blank\\\"}のコア開発者です。私たちのチームには、[@gravity‑ui/uikit](https://github.com/gravity-ui/uikit){target=\\\"_blank\\\"}ライブラリのReactコンポーネントのパフォーマンスについて定期的に質問が寄せられます。この問題について小規模な調査を行うことにしました。以下に書かれていることは、今後の調査の出発点であり、なぜGravityが遅いのかという質問への回答の試みです。\\n\"\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        text: ''\n        image:\n          src: >-\n            https://storage.yandexcloud.net/gravity-landing-static/blog/react-comparison/pic1.png\n        fullscreen: true\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          通常、このリクエストは追加の詳細なしに送られてくるため、主なパフォーマンス問題の一つ（もちろん唯一ではありませんが）は描画時間の長さであると仮定しています。この調査では、各ライブラリの個々のコンポーネントの初回レンダリングにかかるコストを、隔離された環境で検証しました。比較対象として、@adobe/react-spectrum、@mui/material、antdライブラリを選びました。\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: \"\\n## 調査方法{#methods}\\n\\n技術スタック：\\n\\n  * **Playwright** — 異なるブラウザでコードテストを自動化するフレームワーク。\\n    [詳細](https://playwright.dev/){target=\\\"_blank\\\"}\\n  * **PerformanceObserver API** — パフォーマンス測定のためのブラウザAPI。\\n    [詳細](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver){target=\\\"_blank\\\"}\\n\\nテスト実行条件：\\n\\n  * 各テストは別々のブラウザコンテキストで実行されます。\\n  * 一度に実行されるテストは1つだけ（Playwright設定の`workers`）、これにより各テストに同じリソースが割り当てられることが保証されます。\\n  * 各テストは50回繰り返されます。\\n  * テストは異なるノード数（10、100、1000）で実施されます。\\n\\n1回のテストの実行順序：\\n\\n  * ブラウザで新しいページを開く。\\n  * `PerformanceObserver`の初期化。\\n  * メトリクス収集の開始。\\n  * コンポーネントのレンダリング。\\n  * メトリクス収集の終了。\\n\\n測定プロセス：\\n\\n各テストの開始時に'measure'タイプのイベントを追跡する`PerformanceObserver`が作成されます。収集されたすべてのメトリクスはグローバルオブジェクト`__PERFORMANCE_METRICS__`に保存されます。Observerは操作名、イベントタイプ、開始時間、実行時間を含む操作の実行時間データを自動的に収集します。[measure](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType#measure){target=\\\"_blank\\\"}イベントを使用して、`total‑render‑time`測定をログに記録します。\\n\"\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n\n          ## 結果{#results}\n\n\n          測定結果には絶対値は含まれていません。環境によって当然変動する可能性があります。しかし、これらの数値は、いくつかの依存関係を確認し、それに基づいて結論を導き出すのに十分です：\n\n\n          * @gravity‑ui/uikitは競争力のある結果を示しています：\n\n            * ほとんどのテストでランキングの上位に位置しています。\n            * 異なるノード数で安定したレンダリング時間を示しています。\n            * Button、Checkbox、Switchコンポーネントで特に効果的です。\n            * `TextArea`コンポーネントのレンダリング時間に問題があります。\n\n          * @mui/materialも良好な結果を示しています：\n\n            * 少数のノードでほぼすべてのカテゴリ（例：Text、Label）でリードしています。\n            * ノード数に応じてレンダリング時間が目に見えて増加します。\n\n          * **antd**と**React Spectrum**：\n\n            * ほとんどのテストでより高いレンダリング時間を示しています。\n            * 最小時間と最大時間の間により大きなばらつきがあります。\n\n          [このツール](https://github.com/korvin89/gravity-ui-perf){target=\"_blank\"}を使用して、ローカルマシンでパフォーマンス測定を行ったり、まだ存在しないコンポーネントのテストを追加したりできます。これを自分の環境にデプロイし、[PRで結果を送って](https://github.com/korvin89/gravity-ui-perf/pulls){target=\"_blank\"}いただけると助かります。\n\n\n          この記事では、ライブラリをどのように扱っているかの一例を紹介しました。しかし、コミュニティからのフィードバックは非常に重要です：Gravity UIが他のライブラリに比べて著しく劣るパフォーマンスを示す具体的な例がある場合、または私たちのテスト方法論に誤りがあると思われる場合は、この投稿へのコメントまたは[issueを作成](https://github.com/gravity-ui/uikit/issues){target=\"_blank\"}して議論しましょう。また、プロジェクトにスターを付けることも忘れないでください！\n  - type: blog-layout-block\n    resetPaddings: true\n    fullWidth: false\n    children:\n      - type: blog-meta-block\n        column: left\n        resetPaddings: true\n  - type: blog-suggest-block\n    resetPaddings: true\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "ja-initial",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+  "pageRegionId": 118,
+  "summary": null,
+  "versionId": 274,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 118,
+      "pageId": 109,
+      "locale": "ja",
+      "createdAt": "2026-01-27T13:59:59.588Z",
+      "updatedAt": "2026-01-27T13:59:59.680Z",
+      "publishedVersionId": null,
+      "lastVersionId": 270
+    },
+    {
+      "id": 119,
+      "pageId": 109,
+      "locale": "en",
+      "createdAt": "2026-01-27T13:59:59.694Z",
+      "updatedAt": "2026-01-27T13:59:59.784Z",
+      "publishedVersionId": null,
+      "lastVersionId": 271
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "en",
+      "publishedVersionId": null
+    },
+    {
+      "regionCode": "ja",
+      "publishedVersionId": 274
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "ブログ",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}

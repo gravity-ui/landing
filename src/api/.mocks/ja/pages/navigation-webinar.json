@@ -1,0 +1,73 @@
+{
+  "id": 74,
+  "name": "blog/navigation-webinar",
+  "createdAt": "2026-01-19T13:53:46.310Z",
+  "updatedAt": "2026-01-19T13:53:46.310Z",
+  "type": "default",
+  "isDeleted": false,
+  "versionOnTranslationId": null,
+  "searchCategorySlug": "blog",
+  "regions": [],
+  "pageId": 74,
+  "regionCode": "ja",
+  "publishedVersionId": 225,
+  "lastVersionId": 225,
+  "content": "blocks:\n  - type: blog-header-block\n    resetPaddings: true\n    paddingBottom: l\n    width: m\n    verticalOffset: m\n    theme: dark\n    background:\n      image:\n        src: >-\n          https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png\n        disableCompress: true\n      color: '#CCDAFF'\n      fullWidth: false\n  - type: blog-layout-block\n    resetPaddings: true\n    mobileOrder: reverse\n    children:\n      - type: blog-yfm-block\n        column: left\n        resetPaddings: true\n        text: >\n          新しいウェビナーでは、Gravity UIのNavigationライブラリのメンテナーであるアンジェリーナ・ガジエワが、ナビゲーションの構成要素、導入方法、周辺コンポーネントについて説明し、接続例を示し、コミュニティチャットからのユーザーの質問に回答します。\n      - type: blog-media-block\n        column: left\n        resetPaddings: true\n        videoIframe: https://runtime.strm.yandex.ru/player/video/vplvibavcepgpr3wkjew\n        previewImg: >-\n          https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png\n        fullWidth: false\n",
+  "title": "",
+  "noIndex": false,
+  "shareTitle": null,
+  "shareDescription": null,
+  "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+  "pageLocaleId": null,
+  "author": "timofeyevvv",
+  "metaDescription": null,
+  "keywords": [],
+  "shareGenTitle": null,
+  "canonicalLink": null,
+  "sharingType": "custom",
+  "sharingTheme": "light",
+  "comment": "sharing",
+  "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/assets/w_Navigation-2.png",
+  "pageRegionId": 81,
+  "summary": null,
+  "versionId": 225,
+  "service": null,
+  "solution": null,
+  "locales": [
+    {
+      "id": 81,
+      "pageId": 74,
+      "locale": "ja",
+      "createdAt": "2026-01-19T13:39:05.982Z",
+      "updatedAt": "2026-01-19T13:39:06.057Z",
+      "publishedVersionId": null,
+      "lastVersionId": 218
+    },
+    {
+      "id": 82,
+      "pageId": 74,
+      "locale": "en",
+      "createdAt": "2026-01-19T13:39:06.069Z",
+      "updatedAt": "2026-01-19T13:39:06.133Z",
+      "publishedVersionId": null,
+      "lastVersionId": 219
+    }
+  ],
+  "pageRegions": [
+    {
+      "regionCode": "en",
+      "publishedVersionId": 224
+    },
+    {
+      "regionCode": "ja",
+      "publishedVersionId": 225
+    }
+  ],
+  "searchCategory": {
+    "id": 7,
+    "slug": "blog",
+    "title": "ブログ",
+    "url": "/blog"
+  },
+  "voiceovers": []
+}
