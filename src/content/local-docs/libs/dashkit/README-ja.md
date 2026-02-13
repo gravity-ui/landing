@@ -12,7 +12,7 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## 説明
 
-このライブラリは、ウィジェットをグリッド上に配置し、リサイズ、追加、削除するために使用されます。
+このライブラリは、ウィジェットをグリッド上に配置し、サイズ変更、追加、削除するために使用されます。
 ウィジェットはReactコンポーネントです。例えば、テキスト、グラフィック、画像などです。
 
 新しいウィジェットはプラグインシステムを通じて追加されます。
@@ -25,7 +25,7 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layouts;
+    layout: Layout[];
     oldItem: Layout;
     newItem: Layout;
     placeholder: Layout;
@@ -68,24 +68,24 @@ interface DashKitProps {
 }
 ```
 
-- **config**: [config](#Config)を参照してください。
+- **config**: [сonfig](#Config)。
 - **editMode**: 編集モードが有効かどうか。
 - **onItemEdit**: ウィジェットの編集をクリックしたときに呼び出されます。
 - **onChange**: configまたは[itemsStateAndParams](#itemsStateAndParams)が変更されたときに呼び出されます。
 - **onDrop**: ActionPanelから(#DashKitDnDWrapper)を使用してアイテムがドロップされたときに呼び出されます。
 - **onItemMountChange**: アイテムのマウント状態が変更されたときに呼び出されます。
 - **onItemRender**: アイテムのレンダリングが完了したときに呼び出されます。
-- **defaultGlobalParams**, **globalParams**: すべてのウィジェットに影響を与える[パラメータ](#Params)です。DataLensでは、`defaultGlobalParams`はダッシュボード設定で設定されたグローバルパラメータです。`globalParams`はURLで設定できるグローバルパラメータです。
-- **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)を参照してください。
-- **settings**: DashKitの設定です。
-- **context**: すべてのウィジェットにプロップとして渡されるオブジェクトです。
-- **overlayControls**: 編集時にウィジェットコントロールをオーバーライドするオブジェクトです。指定しない場合は、基本的なコントロールが表示されます。`null`を渡すと、閉じるボタンまたはカスタムメニューのみが表示されます。
-- **overlayMenuItems**: カスタムドロップダウンメニューアイテムです。
-- **noOverlay**: `true`の場合、編集中にオーバーレイとコントロールは表示されません。
+- **defaultGlobalParams**, **globalParams**: すべてのウィジェットに影響する[パラメータ](#Params)。DataLensでは、`defaultGlobalParams`はダッシュボード設定で設定されたグローバルパラメータです。`globalParams`はURLで設定できるグローバルパラメータです。
+- **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)。
+- **settings**: DashKitの設定。
+- **context**: すべてのウィジェットにプロップとして渡されるオブジェクト。
+- **overlayControls**: 編集時にウィジェットコントロールをオーバーライドするオブジェクト。渡されない場合は、基本的なコントロールが表示されます。`null`が渡された場合は、閉じるボタンまたはカスタムメニューのみが表示されます。
+- **overlayMenuItems**: カスタムドロップダウンメニューアイテム。
+- **noOverlay**: `true`の場合、編集中はオーバーレイとコントロールが表示されません。
 - **focusable**: `true`の場合、グリッドアイテムはフォーカス可能になります。
 - **onItemFocus**: `focusable`が`true`でアイテムがフォーカスされたときに呼び出されます。
 - **onItemBlur**: `focusable`が`true`でアイテムからフォーカスが外れたときに呼び出されます。
-- **draggableHandleClassName**: ウィジェットをドラッグ可能にする要素のCSSクラス名です。
+- **draggableHandleClassName**: ウィジェットをドラッグ可能にする要素のCSSクラス名。
 - **onDragStart**: アイテムのドラッグが開始されたときにReactGridLayoutによって呼び出されます。
 - **onDrag**: アイテムのドラッグ中にReactGridLayoutによって呼び出されます。
 - **onDragStop**: アイテムのドラッグが停止したときにReactGridLayoutによって呼び出されます。
@@ -93,15 +93,15 @@ interface DashKitProps {
 - **onResize**: アイテムのリサイズ中にReactGridLayoutによって呼び出されます。
 - **onResizeStop**: アイテムのリサイズが停止したときにReactGridLayoutによって呼び出されます。
 - **getPreparedCopyItemOptions**: ローカルストレージに保存する前に、コピーされたアイテムをシリアライズ可能なオブジェクトに変換するために呼び出されます。非推奨の`context.getPreparedCopyItemOptions`プロップの代わりにこれを使用する必要があります。
-- **onCopyFulfill**: アイテムのコピーが完了したときに、成功した場合は`error=null`と`data`が定義され、それ以外の場合は`error: Error`と`data`なしで呼び出されます。
+- **onCopyFulfill**: アイテムのコピーが完了したときに、成功した場合は`error=null`と`data`が定義され、それ以外の場合は`error: Error`なしで`data`なしで呼び出されます。
 
 ## 使用方法
 
 ### DashKitの設定
 
-`DashKit`をReactコンポーネントとして使用する前に、設定が必要です。
+`DashKit`をReactコンポーネントとして使用する前に、設定する必要があります。
 
-- 言語設定
+- 言語を設定する
 
   ```js
   import {configure, Lang} from '@gravity-ui/uikit';
@@ -156,12 +156,12 @@ interface DashKitProps {
 
 ```ts
 export interface Config {
-  salt: string; // 一意のIDを形成するためのソルト
-  counter: number; // 一意のIDを形成するためのカウンター、増加し続けます
+  salt: string; // 一意のIDを形成するため
+  counter: number; // 一意のIDを形成するため、増加し続けます
   items: ConfigItem[]; // 初期ウィジェットの状態
   layout: ConfigLayout[]; // グリッド上のウィジェットの位置 https://github.com/react-grid-layout
-  aliases: ConfigAliases; // パラメータのエイリアス #Params を参照してください
-  connections: ConfigConnection[]; // ウィジェット間のリンク #Params を参照してください
+  aliases: ConfigAliases; // パラメータのエイリアス #Params を参照
+  connections: ConfigConnection[]; // ウィジェット間のリンク #Params を参照
 }
 ```
 
@@ -353,7 +353,7 @@ interface StateAndParamsMeta = {
 }
 ```
 
-およびウィジェットの状態とパラメータ:
+また、ウィジェットの状態とパラメータも含まれます:
 
 ```ts
 interface ItemsStateAndParamsBase {
@@ -374,20 +374,20 @@ type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 
 ```ts
 type MenuItem = {
-  id: string; // 一意のID
+  id: string; // ユニークなID
   title?: string; // 文字列タイトル
   icon?: ReactNode; // アイコンのノード
-  iconSize?: number | string; // px単位のアイコンサイズ（数値または単位付き文字列）
-  handler?: (item: ConfigItem) => void; // カスタムアイテムアクションハンドラ
+  iconSize?: number | string; // アイコンサイズ（px単位の数値または単位付き文字列）
+  handler?: (item: ConfigItem) => void; // カスタムアイテムのアクションハンドラ
   visible?: (item: ConfigItem) => boolean; // メニューアイテムをフィルタリングするためのオプションの表示ハンドラ
   className?: string; // カスタムクラスプロパティ
 };
 
-// 設定でメニューアイテムの配列を使用する
+// 設定でメニューアイテムの配列を使用します
 <Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
 
 [非推奨]
-// overlayMenuItems プロパティは setSettings メニューよりも優先度が高いです
+// overlayMenuItems プロパティは setSettings メニューよりも優先されます
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
 

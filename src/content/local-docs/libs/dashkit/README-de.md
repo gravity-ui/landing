@@ -2,7 +2,7 @@
 
 # DashKit
 
-Eine Bibliothek zum Rendern von Dashboard-Gittern.
+Eine Bibliothek zum Rendern von Dashboard-Grids.
 
 ## Installation
 
@@ -12,7 +12,7 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## Beschreibung
 
-Die Bibliothek wird verwendet, um Widgets in einem Raster anzuordnen, ihre Größe zu ändern, neue hinzuzufügen und sie zu löschen.
+Die Bibliothek wird verwendet, um Widgets in einem Grid anzuordnen, ihre Größe zu ändern, neue hinzuzufügen und sie zu löschen.
 Das Widget ist eine React-Komponente. Zum Beispiel Text, Grafiken und Bilder.
 
 Neue Widgets werden über ein Plugin-System hinzugefügt.
@@ -25,7 +25,7 @@ Plugins sind erforderlich, um benutzerdefinierte Widgets zu erstellen.
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layouts;
+    layout: Layout[];
     oldItem: Layout;
     newItem: Layout;
     placeholder: Layout;
@@ -75,31 +75,31 @@ interface DashKitProps {
 - **onDrop**: Wird aufgerufen, wenn ein Element aus der ActionPanel über (#DashKitDnDWrapper) fallen gelassen wird.
 - **onItemMountChange**: Wird aufgerufen, wenn sich der Mount-Status eines Elements ändert.
 - **onItemRender**: Wird aufgerufen, wenn das Rendern eines Elements abgeschlossen ist.
-- **defaultGlobalParams**, **globalParams**: [Parameter](#Params), die alle Widgets beeinflussen. In DataLens sind `defaultGlobalParams` globale Parameter, die in den Dashboard-Einstellungen festgelegt sind. `globalParams` sind globale Parameter, die in der URL festgelegt werden können.
+- **defaultGlobalParams**, **globalParams**: [Parameter](#Params), die alle Widgets beeinflussen. In DataLens sind `defaultGlobalParams` globale Parameter, die in den Dashboard-Einstellungen festgelegt sind. `globalParams` sind globale Parameter, die in der URL gesetzt werden können.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
 - **settings**: DashKit-Einstellungen.
 - **context**: Objekt, das an alle Widgets weitergegeben wird.
 - **overlayControls**: Objekt, das die Widget-Steuerelemente während der Bearbeitung überschreibt. Wenn nicht übergeben, werden grundlegende Steuerelemente angezeigt. Wenn `null` übergeben wird, werden nur die Schließen-Schaltfläche oder ein benutzerdefiniertes Menü angezeigt.
 - **overlayMenuItems**: Benutzerdefinierte Dropdown-Menüelemente.
-- **noOverlay**: Wenn `true`, werden Overlay und Steuerelemente während der Bearbeitung nicht angezeigt.
-- **focusable**: Wenn `true`, sind die Gitterelemente fokussierbar.
+- **noOverlay**: Wenn `true`, werden Overlays und Steuerelemente während der Bearbeitung nicht angezeigt.
+- **focusable**: Wenn `true`, sind Grid-Elemente fokussierbar.
 - **onItemFocus**: Wird aufgerufen, wenn `focusable` true ist und ein Element fokussiert wird.
 - **onItemBlur**: Wird aufgerufen, wenn `focusable` true ist und ein Element den Fokus verliert.
 - **draggableHandleClassName**: CSS-Klassenname des Elements, das das Widget ziehbar macht.
-- **onDragStart**: ReactGridLayout wird aufgerufen, wenn das Ziehen eines Elements beginnt.
-- **onDrag**: ReactGridLayout wird während des Ziehens eines Elements aufgerufen.
-- **onDragStop**: ReactGridLayout wird aufgerufen, wenn das Ziehen eines Elements beendet wird.
-- **onResizeStart**: ReactGridLayout wird aufgerufen, wenn die Größenänderung eines Elements beginnt.
-- **onResize**: ReactGridLayout wird während der Größenänderung eines Elements aufgerufen.
-- **onResizeStop**: ReactGridLayout wird aufgerufen, wenn die Größenänderung eines Elements beendet wird.
-- **getPreparedCopyItemOptions**: Wird aufgerufen, um ein kopiertes Element in ein serialisierbares Objekt zu konvertieren, bevor es im Local Storage gespeichert wird. Dies sollte anstelle des veralteten `context.getPreparedCopyItemOptions`-Props verwendet werden.
-- **onCopyFulfill**: Wird aufgerufen, wenn das Kopieren eines Elements abgeschlossen ist, mit `error=null` und definierten `data` bei erfolgreicher Ausführung und mit `error: Error` ohne `data` andernfalls.
+- **onDragStart**: Wird von ReactGridLayout aufgerufen, wenn das Ziehen eines Elements beginnt.
+- **onDrag**: Wird von ReactGridLayout während des Ziehens eines Elements aufgerufen.
+- **onDragStop**: Wird von ReactGridLayout aufgerufen, wenn das Ziehen eines Elements beendet wird.
+- **onResizeStart**: Wird von ReactGridLayout aufgerufen, wenn die Größenänderung eines Elements beginnt.
+- **onResize**: Wird von ReactGridLayout während der Größenänderung eines Elements aufgerufen.
+- **onResizeStop**: Wird von ReactGridLayout aufgerufen, wenn die Größenänderung eines Elements beendet wird.
+- **getPreparedCopyItemOptions**: Wird aufgerufen, um ein kopiertes Element in ein serialisierbares Objekt umzuwandeln, bevor es im LocalStorage gespeichert wird. Dies sollte anstelle des veralteten Props `context.getPreparedCopyItemOptions` verwendet werden.
+- **onCopyFulfill**: Wird aufgerufen, wenn das Kopieren eines Elements abgeschlossen ist. Bei Erfolg wird `error=null` und `data` übergeben, andernfalls `error: Error` ohne `data`.
 
 ## Verwendung
 
 ### DashKit-Konfiguration
 
-Bevor Sie `DashKit` als React-Komponente verwenden, muss es konfiguriert werden.
+Bevor Sie `DashKit` als React-Komponente verwenden können, muss es konfiguriert werden.
 
 - Sprache festlegen
 
@@ -111,7 +111,7 @@ Bevor Sie `DashKit` als React-Komponente verwenden, muss es konfiguriert werden.
 
 - DashKit.setSettings
 
-  Wird für globale DashKit-Einstellungen verwendet (z. B. Abstände zwischen Widgets, Standard-Widget-Größen und Widget-Overlay-Menü).
+  Wird für globale DashKit-Einstellungen verwendet (wie Abstände zwischen Widgets, Standard-Widget-Größen und das Widget-Overlay-Menü).
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -125,7 +125,7 @@ Bevor Sie `DashKit` als React-Komponente verwenden, muss es konfiguriert werden.
 
 - DashKit.registerPlugins
 
-  Registrierung und Konfiguration von Plugins
+  Registrierung und Konfiguration von Plugins.
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -156,10 +156,10 @@ Bevor Sie `DashKit` als React-Komponente verwenden, muss es konfiguriert werden.
 
 ```ts
 export interface Config {
-  salt: string; // zur Bildung einer eindeutigen ID
-  counter: number; // zur Bildung einer eindeutigen ID, erhöht sich nur
+  salt: string; // zum Erstellen einer eindeutigen ID
+  counter: number; // zum Erstellen einer eindeutigen ID, wird nur erhöht
   items: ConfigItem[]; // anfängliche Widget-Zustände
-  layout: ConfigLayout[]; // Widget-Position im Raster https://github.com/react-grid-layout
+  layout: ConfigLayout[]; // Widget-Position im Grid https://github.com/react-grid-layout
   aliases: ConfigAliases; // Aliase für Parameter siehe #Params
   connections: ConfigConnection[]; // Links zwischen Widgets siehe #Params
 }
@@ -375,12 +375,12 @@ Sie können ein benutzerdefiniertes Overlay-Menü für DashKit-Widgets im Bearbe
 ```ts
 type MenuItem = {
   id: string; // eindeutige ID
-  title?: string; // String-Titel
-  icon?: ReactNode; // Knoten des Icons
-  iconSize?: number | string; // Icon-Größe in px als Zahl oder als String mit Einheiten
-  handler?: (item: ConfigItem) => void; // Handler für benutzerdefinierte Elementaktionen
+  title?: string; // Zeichenfolgentitel
+  icon?: ReactNode; // Knoten des Symbols
+  iconSize?: number | string; // Symbolgröße in px als Zahl oder als Zeichenfolge mit Einheiten
+  handler?: (item: ConfigItem) => void; // benutzerdefinierter Aktionshandler für Elemente
   visible?: (item: ConfigItem) => boolean; // optionaler Sichtbarkeits-Handler zum Filtern von Menüelementen
-  className?: string; // benutzerdefinierte Klassen-Eigenschaft
+  className?: string; // benutzerdefinierte Klasseneigenschaft
 };
 
 // Array von Menüelementen in den Einstellungen verwenden
@@ -413,8 +413,8 @@ interface DashKitDnDWrapperProps {
 ```
 
 - **dragImageSrc**: Vorschau des Ziehbilds, standardmäßig wird ein transparentes 1px PNG als Base64 verwendet
-- **onDragStart**: Callback, der aufgerufen wird, wenn ein Element aus der Aktionsleiste gezogen wird
-- **onDragEnd**: Callback, der aufgerufen wird, wenn das Element fallen gelassen oder der Ziehvorgang abgebrochen wird
+- **onDragStart**: Rückruf, der aufgerufen wird, wenn ein Element aus der Aktionsleiste gezogen wird
+- **onDragEnd**: Rückruf, der aufgerufen wird, wenn ein Element abgelegt oder der Ziehvorgang abgebrochen wird
 
 ```ts
 type ItemDragProps = {
@@ -474,8 +474,8 @@ const onDrop = (dropProps: ItemDropProps) => {
 | Action panel Element Variablen                 |                       |
 | `--dashkit-action-panel-item-color`            | Hintergrundfarbe      |
 | `--dashkit-action-panel-item-text-color`       | Textfarbe             |
-| `--dashkit-action-panel-item-color-hover`      | Hintergrundfarbe bei Hover |
-| `--dashkit-action-panel-item-text-color-hover` | Textfarbe bei Hover   |
+| `--dashkit-action-panel-item-color-hover`      | Hintergrundfarbe (Hover) |
+| `--dashkit-action-panel-item-text-color-hover` | Textfarbe (Hover)     |
 | Overlay Variablen                              |                       |
 | `--dashkit-overlay-border-color`               | Rahmenfarbe           |
 | `--dashkit-overlay-color`                      | Hintergrundfarbe      |
@@ -527,7 +527,7 @@ const CustomThemeWrapper = (props: {
 - Storybook bauen `npm run start`
 
 Standardmäßig läuft Storybook unter `http://localhost:7120/`.
-Neue Änderungen im Projekt werden nicht immer erkannt, wenn Storybook läuft. Daher ist es besser, ein Projekt manuell neu zu bauen und Storybook neu zu starten.
+Neue Änderungen im Projekt werden nicht immer übernommen, wenn Storybook läuft. Daher ist es besser, ein Projekt manuell neu zu bauen und Storybook neu zu starten.
 
 
 ### Beispiel für eine Nginx-Konfiguration für die Entwicklung auf einem Entwicklungsrechner

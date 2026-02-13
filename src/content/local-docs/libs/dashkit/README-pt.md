@@ -25,7 +25,7 @@ Plugins são necessários para criar widgets personalizados.
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layouts;
+    layout: Layout[];
     oldItem: Layout;
     newItem: Layout;
     placeholder: Layout;
@@ -69,7 +69,7 @@ interface DashKitProps {
 ```
 
 - **config**: [Config](#Config).
-- **editMode**: Se o modo de edição está ativado.
+- **editMode**: Se o modo de edição está habilitado.
 - **onItemEdit**: Chamado quando você clica para editar um widget.
 - **onChange**: Chamado quando a configuração ou [itemsStateAndParams](#itemsStateAndParams) são alterados.
 - **onDrop**: Chamado quando um item é solto do ActionPanel usando (#DashKitDnDWrapper)
@@ -431,7 +431,7 @@ type ItemDragProps = {
 type ItemDropProps = {
     commit: () => void; // O callback deve ser chamado após todas as operações de configuração serem feitas
     dragProps: ItemDragProps; // Props de arrastar do item
-    itemLayout: ConfigLayout; // Dimensões do layout do item calculadas
+    itemLayout: ConfigLayout; // Dimensões calculadas do layout do item
     newLayout: ConfigLayout[]; // Novo layout após o elemento ser solto
 };
 ```
@@ -483,7 +483,7 @@ const onDrop = (dropProps: ItemDropProps) => {
 | Variáveis do item da grade                             |                       |
 | `--dashkit-grid-item-edit-opacity`             | Opacidade               |
 | `--dashkit-grid-item-border-radius`            | Raio da borda            |
-| Variáveis do placeholder                           |                       |
+| Variáveis do placeholder                             |                       |
 | `--dashkit-placeholder-color`                  | Cor de fundo                      |
 | `--dashkit-placeholder-opacity`                | Opacidade               |
 
