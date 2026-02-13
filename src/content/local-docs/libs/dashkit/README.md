@@ -25,7 +25,7 @@ Plugins are required to create custom widgets.
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layouts;
+    layout: Layout[];
     oldItem: Layout;
     newItem: Layout;
     placeholder: Layout;
