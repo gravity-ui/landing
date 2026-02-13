@@ -2,7 +2,7 @@
 
 # DashKit
 
-Una librería para renderizar cuadrículas de dashboards.
+Una biblioteca para renderizar cuadrículas de paneles.
 
 ## Instalación
 
@@ -12,10 +12,10 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## Descripción
 
-La librería se utiliza para alinear widgets en una cuadrícula, redimensionarlos, añadir nuevos y eliminarlos.
+La biblioteca se utiliza para alinear widgets en una cuadrícula, cambiar su tamaño, agregar nuevos y eliminarlos.
 El widget es un componente de React. Por ejemplo, texto, gráficos e imágenes.
 
-Los nuevos widgets se añaden a través de un sistema de plugins.
+Los nuevos widgets se agregan a través de un sistema de plugins.
 
 ### Plugins
 
@@ -25,7 +25,7 @@ Los plugins son necesarios para crear widgets personalizados.
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layouts;
+    layout: Layout[];
     oldItem: Layout;
     newItem: Layout;
     placeholder: Layout;
@@ -69,31 +69,31 @@ interface DashKitProps {
 ```
 
 - **config**: [Config](#Config).
-- **editMode**: Indica si el modo de edición está activado.
-- **onItemEdit**: Se llama al hacer clic para editar un widget.
+- **editMode**: Si el modo de edición está habilitado.
+- **onItemEdit**: Se llama cuando haces clic para editar un widget.
 - **onChange**: Se llama cuando cambian la configuración o [itemsStateAndParams](#itemsStateAndParams).
 - **onDrop**: Se llama cuando un elemento se suelta desde ActionPanel usando (#DashKitDnDWrapper)
-- **onItemMountChange**: Se llama cuando cambia el estado de montaje de un elemento.
-- **onItemRender**: Se llama cuando finaliza el renderizado de un elemento.
-- **defaultGlobalParams**, **globalParams**: [Parámetros](#Params) que afectan a todos los widgets. En DataLens, `defaultGlobalParams` son parámetros globales establecidos en la configuración del dashboard. `globalParams` son parámetros globales que se pueden establecer en la URL.
+- **onItemMountChange**: Se llama cuando cambia el estado de montaje del elemento.
+- **onItemRender**: Se llama cuando se completa el renderizado del elemento.
+- **defaultGlobalParams**, **globalParams**: [Parámetros](#Params) que afectan a todos los widgets. En DataLens, `defaultGlobalParams` son parámetros globales establecidos en la configuración del panel. `globalParams` son parámetros globales que se pueden establecer en la URL.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
 - **settings**: Configuración de DashKit.
 - **context**: Objeto que se pasará a todos los widgets.
-- **overlayControls**: Objeto que reemplaza los controles del widget durante la edición. Si no se transmite, se mostrarán los controles básicos. Si se pasa `null`, solo se mostrará el botón de cierre o un menú personalizado.
-- **overlayMenuItems**: Elementos de menú desplegable personalizados.
+- **overlayControls**: Objeto que anula los controles del widget durante la edición. Si no se transmite, se mostrarán los controles básicos. Si se pasa `null`, solo se mostrará el botón de cierre o un menú personalizado.
+- **overlayMenuItems**: Elementos del menú desplegable personalizados.
 - **noOverlay**: Si es `true`, la superposición y los controles no se mostrarán durante la edición.
 - **focusable**: Si es `true`, los elementos de la cuadrícula serán enfocables.
-- **onItemFocus**: Se llama cuando `focusable` es true y un elemento recibe el foco.
-- **onItemBlur**: Se llama cuando `focusable` es true y un elemento pierde el foco.
+- **onItemFocus**: Se llama cuando `focusable` es true y el elemento tiene el foco.
+- **onItemBlur**: Se llama cuando `focusable` es true y el elemento pierde el foco.
 - **draggableHandleClassName**: Nombre de la clase CSS del elemento que hace que el widget sea arrastrable.
-- **onDragStart**: Llamado por ReactGridLayout cuando comienza a arrastrar un elemento.
-- **onDrag**: Llamado por ReactGridLayout mientras se arrastra un elemento.
-- **onDragStop**: Llamado por ReactGridLayout cuando se detiene el arrastre de un elemento.
-- **onResizeStart**: Llamado por ReactGridLayout cuando comienza a redimensionar un elemento.
-- **onResize**: Llamado por ReactGridLayout mientras se redimensiona un elemento.
-- **onResizeStop**: Llamado por ReactGridLayout cuando se detiene el redimensionamiento de un elemento.
-- **getPreparedCopyItemOptions**: Se llama para convertir un elemento copiado en un objeto serializable antes de guardarlo en el localStorage. Debe usarse en lugar de la prop obsoleta `context.getPreparedCopyItemOptions`.
-- **onCopyFulfill**: Se llama cuando la copia de un elemento finaliza con `error=null` y `data` definido en caso de éxito, y con `error: Error` sin `data` en caso contrario.
+- **onDragStart**: ReactGridLayout se llama cuando comienza a arrastrar un elemento.
+- **onDrag**: ReactGridLayout se llama mientras se arrastra un elemento.
+- **onDragStop**: ReactGridLayout se llama cuando se detiene el arrastre de un elemento.
+- **onResizeStart**: ReactGridLayout se llama cuando comienza a redimensionar un elemento.
+- **onResize**: ReactGridLayout se llama mientras se redimensiona un elemento.
+- **onResizeStop**: ReactGridLayout se llama cuando se detiene el redimensionamiento de un elemento.
+- **getPreparedCopyItemOptions**: Se llama para convertir un elemento copiado en un objeto serializable antes de guardarlo en el almacenamiento local. Debe usarse en lugar de la prop obsoleta `context.getPreparedCopyItemOptions`.
+- **onCopyFulfill**: Se llama cuando la copia del elemento finaliza con `error=null` y `data` definido en caso de operación exitosa, y con `error: Error` sin `data` en caso contrario.
 
 ## Uso
 
@@ -431,7 +431,7 @@ type ItemDragProps = {
 type ItemDropProps = {
     commit: () => void; // La función de callback debe llamarse después de que se realicen todas las operaciones de configuración
     dragProps: ItemDragProps; // Propiedades de arrastre del elemento
-    itemLayout: ConfigLayout; // Dimensiones de diseño del elemento calculadas
+    itemLayout: ConfigLayout; // Dimensiones del diseño del elemento calculadas
     newLayout: ConfigLayout[]; // Nuevo diseño después de soltar el elemento
 };
 ```
@@ -453,7 +453,7 @@ const overlayMenuItems = [
 ]
 
 const onDrop = (dropProps: ItemDropProps) => {
-  // ... añadir elemento a tu configuración
+  // ... agregar elemento a tu configuración
   dropProps.commit();
 }
 
@@ -463,7 +463,7 @@ const onDrop = (dropProps: ItemDropProps) => {
 </DashKitDnDWrapper>
 ```
 
-### API CSS
+### API de CSS
 
 | Nombre                                           | Descripción           |
 | :--------------------------------------------- | :-------------------- |
@@ -471,19 +471,19 @@ const onDrop = (dropProps: ItemDropProps) => {
 | `--dashkit-action-panel-color`                 | Color de fondo      |
 | `--dashkit-action-panel-border-color`          | Color del borde          |
 | `--dashkit-action-panel-border-radius`         | Radio del borde         |
-| Variables de los elementos del panel de acciones                    |                       |
+| Variables de elementos del panel de acciones                    |                       |
 | `--dashkit-action-panel-item-color`            | Color de fondo       |
 | `--dashkit-action-panel-item-text-color`       | Color del texto      |
 | `--dashkit-action-panel-item-color-hover`      | Color de fondo al pasar el ratón |
 | `--dashkit-action-panel-item-text-color-hover` | Color del texto al pasar el ratón      |
-| Variables de la superposición                             |                       |
+| Variables de superposición                             |                       |
 | `--dashkit-overlay-border-color`               | Color del borde          |
 | `--dashkit-overlay-color`                      | Color de fondo      |
 | `--dashkit-overlay-opacity`                    | Opacidad               |
-| Variables de los elementos de la cuadrícula                            |                       |
+| Variables de elementos de la cuadrícula                            |                       |
 | `--dashkit-grid-item-edit-opacity`             | Opacidad               |
 | `--dashkit-grid-item-border-radius`            | Radio del borde            |
-| Variables del marcador de posición                          |                       |
+| Variables de marcador de posición                          |                       |
 | `--dashkit-placeholder-color`                  | Color de fondo      |
 | `--dashkit-placeholder-opacity`                | Opacidad               |
 

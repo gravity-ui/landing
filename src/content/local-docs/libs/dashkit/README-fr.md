@@ -25,7 +25,7 @@ Les plugins sont nécessaires pour créer des widgets personnalisés.
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layouts;
+    layout: Layout[];
     oldItem: Layout;
     newItem: Layout;
     placeholder: Layout;
@@ -73,27 +73,27 @@ interface DashKitProps {
 - **onItemEdit**: Appelée lorsque vous cliquez pour éditer un widget.
 - **onChange**: Appelée lorsque la configuration ou [itemsStateAndParams](#itemsStateAndParams) sont modifiés.
 - **onDrop**: Appelée lorsqu'un élément est déposé depuis ActionPanel via (#DashKitDnDWrapper)
-- **onItemMountChange**: Appelée lorsque l'état de montage d'un élément change.
-- **onItemRender**: Appelée lorsque le rendu d'un élément est terminé.
+- **onItemMountChange**: Appelée lorsque l'état de montage d'un élément change
+- **onItemRender**: Appelée lorsque le rendu d'un élément est terminé
 - **defaultGlobalParams**, **globalParams**: [Paramètres](#Params) qui affectent tous les widgets. Dans DataLens, `defaultGlobalParams` sont les paramètres globaux définis dans les paramètres du tableau de bord. `globalParams` sont les paramètres globaux qui peuvent être définis dans l'URL.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
 - **settings**: Paramètres de DashKit.
 - **context**: Objet qui sera transmis à tous les widgets.
-- **overlayControls**: Objet qui remplace les contrôles du widget au moment de l'édition. S'il n'est pas transmis, les contrôles de base seront affichés. Si `null` est passé, seul le bouton de fermeture ou un menu personnalisé sera affiché.
-- **overlayMenuItems**: Éléments de menu déroulant personnalisés.
+- **overlayControls**: Objet qui remplace les contrôles du widget au moment de l'édition. Si non transmis, les contrôles de base seront affichés. Si `null` est passé, seul le bouton de fermeture ou un menu personnalisé sera affiché.
+- **overlayMenuItems**: Éléments de menu déroulant personnalisés
 - **noOverlay**: Si `true`, la superposition et les contrôles ne sont pas affichés pendant l'édition.
 - **focusable**: Si `true`, les éléments de la grille seront focusables.
 - **onItemFocus**: Appelée lorsque `focusable` est vrai et que l'élément est focusé.
 - **onItemBlur**: Appelée lorsque `focusable` est vrai et que l'élément perd le focus.
 - **draggableHandleClassName** : Nom de la classe CSS de l'élément qui rend le widget déplaçable.
-- **onDragStart**: Appelée par ReactGridLayout lorsque le déplacement d'un élément commence.
-- **onDrag**: Appelée par ReactGridLayout pendant le déplacement d'un élément.
-- **onDragStop**: Appelée par ReactGridLayout lorsque le déplacement d'un élément s'arrête.
-- **onResizeStart**: Appelée par ReactGridLayout lorsque le redimensionnement d'un élément commence.
-- **onResize**: Appelée par ReactGridLayout pendant le redimensionnement d'un élément.
-- **onResizeStop**: Appelée par ReactGridLayout lorsque le redimensionnement d'un élément s'arrête.
-- **getPreparedCopyItemOptions**: Appelée pour convertir un élément copié en objet sérialisable avant de l'enregistrer dans le localStorage. Elle doit être utilisée à la place de la prop obsolète `context.getPreparedCopyItemOptions`.
-- **onCopyFulfill**: Appelée lorsque la copie d'un élément est terminée avec `error=null` et `data` défini en cas de succès, et avec `error: Error` sans `data` sinon.
+- **onDragStart**: Appelée par ReactGridLayout lorsque le déplacement d'un élément commence
+- **onDrag**: Appelée par ReactGridLayout pendant le déplacement d'un élément
+- **onDragStop**: Appelée par ReactGridLayout lorsque le déplacement d'un élément s'arrête
+- **onResizeStart**: Appelée par ReactGridLayout lorsque le redimensionnement d'un élément commence
+- **onResize**: Appelée par ReactGridLayout pendant le redimensionnement d'un élément
+- **onResizeStop**: Appelée par ReactGridLayout lorsque le redimensionnement d'un élément s'arrête
+- **getPreparedCopyItemOptions**: Appelée pour convertir un élément copié en objet sérialisable avant de l'enregistrer dans le localStorage. Elle doit être utilisée à la place de la prop obsolète `context.getPreparedCopyItemOptions`
+- **onCopyFulfill**: Appelée lorsque la copie d'un élément est terminée avec `error=null` et `data` défini en cas de succès, et avec `error: Error` sans `data` sinon
 
 ## Utilisation
 
@@ -111,7 +111,7 @@ Avant d'utiliser `DashKit` en tant que composant React, il doit être configuré
 
 - DashKit.setSettings
 
-  Utilisé pour les paramètres globaux de DashKit (tels que les marges entre les widgets, les tailles par défaut des widgets et le menu de superposition des widgets).
+  Utilisé pour les paramètres globaux de DashKit (tels que les marges entre les widgets, les tailles de widgets par défaut et le menu de superposition des widgets)
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -125,7 +125,7 @@ Avant d'utiliser `DashKit` en tant que composant React, il doit être configuré
 
 - DashKit.registerPlugins
 
-  Enregistrement et configuration des plugins.
+  Enregistrement et configuration des plugins
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -273,7 +273,7 @@ const newLayout = updateLayout: [
 const newConfig = DashKit.setItem({
   item: {
     data: {
-      text: `Du texte`,
+      text: `Quelques textes`,
     },
     namespace: 'default',
     type: 'text',
@@ -287,7 +287,7 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // Optionnel. Nouvelles valeurs de disposition pour les éléments existants lorsqu'un nouvel élément est déposé depuis le panneau d'actions
+    // Optionnel. Nouvelles valeurs de disposition pour les éléments existants lorsqu'un nouvel élément est déposé depuis l'ActionPanel
     updateLayout: newLayout,
   },
 });
@@ -375,9 +375,9 @@ Vous pouvez spécifier un menu personnalisé pour les superpositions de widgets 
 ```ts
 type MenuItem = {
   id: string; // id unique
-  title?: string; // titre textuel
-  icon?: ReactNode; // nœud d'icône
-  iconSize?: number | string; // taille de l'icône en px sous forme de nombre ou de chaîne avec unité
+  title?: string; // titre de la chaîne
+  icon?: ReactNode; // nœud de l'icône
+  iconSize?: number | string; // taille de l'icône en px sous forme de nombre ou de chaîne avec unités
   handler?: (item: ConfigItem) => void; // gestionnaire d'action personnalisé pour l'élément
   visible?: (item: ConfigItem) => boolean; // gestionnaire de visibilité optionnel pour filtrer les éléments du menu
   className?: string; // propriété de classe personnalisée
@@ -391,7 +391,7 @@ type MenuItem = {
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
 
-### Éléments déplaçables depuis le panneau d'actions
+### Éléments déplaçables depuis l'ActionPanel
 
 #### DashKitDnDWrapper
 
@@ -412,9 +412,9 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc** : Aperçu de l'image de glisser-déposer, par défaut un png transparent de 1px en base64 est utilisé.
-- **onDragStart** : Callback appelé lorsqu'un élément est glissé depuis le panneau d'actions.
-- **onDragEnd** : Callback appelé lorsqu'un élément est déposé ou que le glisser-déposer est annulé.
+- **dragImageSrc**: Aperçu de l'image de glisser-déposer, par défaut une image png transparente de 1px en base64 est utilisée.
+- **onDragStart**: Callback appelé lorsqu'un élément est glissé depuis l'ActionPanel.
+- **onDragEnd**: Callback appelé lorsqu'un élément est déposé ou que le glisser-déposer est annulé.
 
 ```ts
 type ItemDragProps = {
@@ -476,7 +476,7 @@ const onDrop = (dropProps: ItemDropProps) => {
 | `--dashkit-action-panel-item-text-color`       | Couleur du texte       |
 | `--dashkit-action-panel-item-color-hover`      | Couleur de fond au survol |
 | `--dashkit-action-panel-item-text-color-hover` | Couleur du texte au survol      |
-| Variables de la superposition                              |                       |
+| Variables de la surcouche                              |                       |
 | `--dashkit-overlay-border-color`               | Couleur de bordure          |
 | `--dashkit-overlay-color`                      | Couleur de fond                      |
 | `--dashkit-overlay-opacity`                    | Opacité               |

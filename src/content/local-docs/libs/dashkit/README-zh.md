@@ -25,7 +25,7 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layouts;
+    layout: Layout[];
     oldItem: Layout;
     newItem: Layout;
     placeholder: Layout;
@@ -75,7 +75,7 @@ interface DashKitProps {
 - **onDrop**: 使用 (#DashKitDnDWrapper) 从 ActionPanel 拖放项目时调用
 - **onItemMountChange**: 项目挂载状态更改时调用
 - **onItemRender**: 项目渲染完成时调用
-- **defaultGlobalParams**, **globalParams**: 影响所有小部件的[参数](#Params)。在 DataLens 中，`defaultGlobalParams` 是在仪表盘设置中设置的全局参数。`globalParams` 是可以在 URL 中设置的全局参数。
+- **defaultGlobalParams**, **globalParams**: 影响所有小部件的 [参数](#Params)。在 DataLens 中，`defaultGlobalParams` 是在仪表盘设置中设置的全局参数。`globalParams` 是可以在 URL 中设置的全局参数。
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)。
 - **settings**: DashKit 设置。
 - **context**: 将会传递给所有小部件的对象。
@@ -92,8 +92,8 @@ interface DashKitProps {
 - **onResizeStart**: ReactGridLayout 在项目调整大小开始时调用
 - **onResize**: ReactGridLayout 在项目调整大小时调用
 - **onResizeStop**: ReactGridLayout 在项目调整大小停止时调用
-- **getPreparedCopyItemOptions**: 在将复制的项目保存到本地存储之前，用于将复制的项目转换为可序列化对象。它应该取代已弃用的 `context.getPreparedCopyItemOptions` prop
-- **onCopyFulfill**: 在项目复制成功完成时（`error=null` 且 `data` 已定义）调用，否则以 `error: Error` 而不带 `data` 调用
+- **getPreparedCopyItemOptions**: 在保存到本地存储之前，用于将复制的项目转换为可序列化对象。它应该取代已弃用的 `context.getPreparedCopyItemOptions` prop
+- **onCopyFulfill**: 在项目复制成功完成时调用，此时 `error=null` 且 `data` 已定义；否则，将调用 `error: Error` 而不带 `data`
 
 ## 用法
 
@@ -152,7 +152,7 @@ interface DashKitProps {
   });
   ```
 
-### Config
+### 配置
 
 ```ts
 export interface Config {
@@ -165,7 +165,7 @@ export interface Config {
 }
 ```
 
-Config 示例：
+配置示例：
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -250,7 +250,7 @@ const config: DashKitProps['config'] = {
 };
 ```
 
-添加新配置项：
+向配置中添加新项：
 
 ```ts
 const newLayout = updateLayout: [
@@ -277,7 +277,7 @@ const newConfig = DashKit.setItem({
     },
     namespace: 'default',
     type: 'text',
-    // 可选。如果需要将新项插入到当前布局中并预设尺寸
+    // 可选。如果需要将新项插入到当前布局中并预定义尺寸
     layout: { // 当前项插入到 'Ea' 之前
       h: 6,
       w: 12,
@@ -293,7 +293,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-修改现有配置项：
+更改现有项：
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -310,7 +310,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-删除配置项：
+删除一项：
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -324,7 +324,7 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 });
 ```
 
-### Params
+### 参数
 
 ```ts
 type Params = Record<string, string | string[]>;
@@ -337,12 +337,12 @@ type Params = Record<string, string | string[]>;
 1. `defaultGlobalParams`
 2. 默认小部件参数 `item.default`
 3. `globalParams`
-4. 根据队列从 [itemsStateAndParams](#itemsStateAndParams) 中获取的参数。
+4. 来自 [itemsStateAndParams](#itemsStateAndParams) 的参数，按队列顺序。
 
 ### itemsStateAndParams
 
 存储小部件参数和状态以及参数更改队列的对象。
-它有一个 `__meta__` 字段用于存储队列和元信息。
+它有一个 `__meta__` 字段，用于存储队列和元信息。
 
 ```ts
 interface StateAndParamsMeta = {
@@ -368,16 +368,16 @@ interface ItemsStateAndParamsBase {
 type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 ```
 
-### Menu
+### 菜单
 
-您可以在编辑模式下指定自定义的 DashKit 小部件覆盖菜单。
+在编辑模式下，您可以为 DashKit 小部件指定自定义覆盖菜单。
 
 ```ts
 type MenuItem = {
   id: string; // 唯一 ID
   title?: string; // 字符串标题
   icon?: ReactNode; // 图标节点
-  iconSize?: number | string; // 图标大小，以像素为单位的数字或带单位的字符串
+  iconSize?: number | string; // 图标大小，以像素为单位（数字）或带单位的字符串
   handler?: (item: ConfigItem) => void; // 自定义项操作处理程序
   visible?: (item: ConfigItem) => boolean; // 用于过滤菜单项的可选可见性处理程序
   className?: string; // 自定义类属性
@@ -391,7 +391,7 @@ type MenuItem = {
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
 
-### 从 ActionPanel 拖拽项目
+### 从 ActionPanel 拖动的项
 
 #### DashKitDnDWrapper
 
@@ -405,12 +405,16 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string; // 拖拽图像预览，默认使用透明的 1px png base64
-  onDragStart?: (dragProps: ItemDragProps) => void; // 当元素从 ActionPanel 拖拽时调用的回调
-  onDragEnd?: () => void; // 当元素被放置或拖拽取消时调用的回调
-  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean; // 当拖拽元素在目标上方时调用的回调
+  dragImageSrc?: string; // 拖动图像预览，默认使用透明的 1px png base64
+  onDragStart?: (dragProps: ItemDragProps) => void; // 当元素从 ActionPanel 拖动时调用的回调
+  onDragEnd?: () => void; // 当元素被放置或拖动取消时调用的回调
+  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean; // 当元素被放置在目标上时调用的回调
 }
 ```
+
+- **dragImageSrc**: 拖动图像预览，默认使用透明的 1px png base64。
+- **onDragStart**: 当元素从 ActionPanel 拖动时调用的回调。
+- **onDragEnd**: 当元素被放置或拖动取消时调用的回调。
 
 ```ts
 type ItemDragProps = {
@@ -428,7 +432,7 @@ type ItemDropProps = {
     commit: () => void; // 在所有配置操作完成后应调用此回调
     dragProps: ItemDragProps; // 项拖拽属性
     itemLayout: ConfigLayout; // 计算出的项布局尺寸
-    newLayout: ConfigLayout[]; // 元素被放置后的新布局
+    newLayout: ConfigLayout[]; // 元素放置后的新布局
 };
 ```
 
@@ -516,17 +520,17 @@ const CustomThemeWrapper = (props: {
 
 ## 开发
 
-### 构建与监视
+### 构建与监听
 
 - 构建依赖 `npm ci`
 - 构建项目 `npm run build`
-- 构建 Storybook `npm run start`
+- 构建 storybook `npm run start`
 
-默认情况下，Storybook 运行在 `http://localhost:7120/`。
-当 Storybook 运行时，项目中的新更改并不总是能及时被识别，因此最好手动重新构建项目并重启 Storybook。
+默认情况下，storybook 运行在 `http://localhost:7120/`。
+当 storybook 运行时，项目中的新更改并非总能被捕获，因此最好手动重新构建项目并重启 storybook。
 
 
-### 在开发机器上进行开发的 Nginx 配置示例
+### 开发机器上 nginx 配置示例
 
 ```bash
 server {
