@@ -14,6 +14,7 @@ import {buttonConfig} from './Button';
 import {cardConfig} from './Card';
 import {checkboxConfig} from './Checkbox';
 import {clipboardButtonConfig} from './ClipboardButton';
+import {definitionListConfig} from './DefinitionList';
 import {dialogConfig} from './Dialog';
 import {disclosureConfig} from './Disclosure';
 import {dividerConfig} from './Divider';
@@ -73,6 +74,7 @@ const uikitComponents: Component[] = [
     cardConfig,
     checkboxConfig,
     clipboardButtonConfig,
+    definitionListConfig,
     dialogConfig,
     disclosureConfig,
     dividerConfig,
