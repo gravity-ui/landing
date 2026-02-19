@@ -35,7 +35,7 @@ import {
     updateFontFamilyInTheme,
     updateFontFamilyTypeTitleInTheme,
 } from '../lib/themeCreatorUtils';
-import type {ColorsSettingsType, ThemeCreatorState} from '../lib/types';
+import type {AdvancedColorType, ColorsSettingsType, ThemeCreatorState} from '../lib/types';
 
 type ThemeCreatorAction =
     | {
@@ -105,6 +105,10 @@ type ThemeCreatorAction =
           payload: boolean;
       }
     | {
+          type: 'setAdvancedColorType';
+          payload: AdvancedColorType;
+      }
+    | {
           type: 'setColorsSettingsType';
           payload: ColorsSettingsType;
       };
@@ -156,6 +160,11 @@ const themeCreatorReducer = (
             return {
                 ...newState,
                 advancedModeEnabled: action.payload,
+            };
+        case 'setAdvancedColorType':
+            return {
+                ...newState,
+                advancedColorType: action.payload,
             };
         case 'reinitialize':
             return initThemeCreator(action.payload);
@@ -336,6 +345,13 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
+    const setAdvancedColorType = React.useCallback((type: AdvancedColorType) => {
+        dispatchThemeCreator({
+            type: 'setAdvancedColorType',
+            payload: type,
+        });
+    }, []);
+
     const importTheme = React.useCallback((gravityTheme: GravityTheme) => {
         dispatchThemeCreator({
             type: 'reinitialize',
@@ -370,6 +386,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateFontFamily,
             openMainSettings,
             setAdvancedMode,
+            setAdvancedColorType,
             importTheme,
             setColorsSettingsType,
         }),
@@ -390,6 +407,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             updateFontFamilyTypeTitle,
             openMainSettings,
             setAdvancedMode,
+            setAdvancedColorType,
             importTheme,
             setColorsSettingsType,
         ],
