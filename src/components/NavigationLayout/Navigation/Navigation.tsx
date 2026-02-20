@@ -1,6 +1,7 @@
-import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {TextInput} from '@gravity-ui/uikit';
 import React from 'react';
+import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import {block} from '../../../utils';
 import {SectionBlock} from '../SectionBlock/SectionBlock';

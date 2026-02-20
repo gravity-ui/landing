@@ -1,4 +1,6 @@
-import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
+
+import {useWindowBreakpoint} from './useWindowBreakpoint';
 
 export const useIsMobile = () => {
     const currentBreakpoint = useWindowBreakpoint();

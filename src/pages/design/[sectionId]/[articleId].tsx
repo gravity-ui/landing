@@ -1,8 +1,9 @@
-import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 import {Article, Section} from 'src/content/design/types';
+import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
 import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';

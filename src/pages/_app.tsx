@@ -6,6 +6,7 @@ import {appWithTranslation} from 'next-i18next';
 import 'prismjs/themes/prism-tomorrow.min.css';
 
 import {useReportWebVitals} from '../hooks/useReportWebVitals';
+import {WindowBreakpointProvider} from '../hooks/useWindowBreakpoint';
 import '../styles.scss';
 import '../vendors.scss';
 
@@ -17,7 +18,12 @@ export const App = ({
     pageProps: Record<string, unknown>;
 }) => {
     useReportWebVitals();
-    return <Component {...pageProps} />;
+
+    return (
+        <WindowBreakpointProvider>
+            <Component {...pageProps} />
+        </WindowBreakpointProvider>
+    );
 };
 
 export default appWithTranslation(App);
