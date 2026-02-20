@@ -1,6 +1,7 @@
 import {Moon, Sun} from '@gravity-ui/icons';
 import {
     Icon,
+    PortalProvider,
     SegmentedRadioGroup,
     Theme,
     ThemeProvider,
@@ -22,12 +23,15 @@ const b = block('themes-preview-wrapper');
 
 export function PreviewWrapper({styles, ...props}: PreviewWrapperProps) {
     const [theme, setTheme] = useState<Theme>('dark');
+    const containerRef = React.useRef<HTMLDivElement>(null);
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
             {styles ? <style>{styles}</style> : undefined}
-            <div className={b('content')}>
-                <Content {...props} theme={theme} onThemeUpdate={setTheme} />
+            <div className={b('content')} ref={containerRef}>
+                <PortalProvider container={containerRef}>
+                    <Content {...props} theme={theme} onThemeUpdate={setTheme} />
+                </PortalProvider>
             </div>
         </ThemeProvider>
     );
