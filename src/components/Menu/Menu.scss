@@ -76,7 +76,7 @@ $border-color: rgba(255, 255, 255, 0.2);
 
     &__desktop-menu {
         display: flex;
-        flex: 1;
+        flex: 1 0 auto;
         align-self: stretch;
         justify-self: stretch;
         padding: 0 34px;
@@ -127,6 +127,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         margin-left: 20px;
+        flex-shrink: 0;
     }
 
     &__desktop-social-links {

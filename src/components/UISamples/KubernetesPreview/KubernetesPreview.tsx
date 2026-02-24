@@ -141,8 +141,8 @@ export const KubernetesPreview = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                 </ActionBar.Group>
                             </ActionBar.Section>
                         </ActionBar>
-                        <Flex grow style={{padding: '16px'}} gap="5">
-                            <Menu size="xl">
+                        <Flex grow spacing={{p: 4}} gap="5">
+                            <Menu size="xl" className={b('menu')}>
                                 <Menu.Group>
                                     <Menu.Item
                                         iconStart={<Icon data={Flag} />}
@@ -418,7 +418,9 @@ export const KubernetesPreview = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                                         IP address
                                                     </Flex>
                                                     <Flex gap="1" alignItems="center">
-                                                        <Text>fdaa:a:f987:a7b:2d5:a9fb:67c7:2</Text>
+                                                        <Text ellipsis>
+                                                            fdaa:a:f987:a7b:2d5:a9fb:67c7:2
+                                                        </Text>
                                                         <ClipboardButton
                                                             size="s"
                                                             text="fdaa:a:f987:a7b:2d5:a9fb:67c7:2"

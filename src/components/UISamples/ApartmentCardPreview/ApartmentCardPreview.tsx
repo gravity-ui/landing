@@ -1025,7 +1025,11 @@ export function ApartmentCardPreview(props: Pick<PreviewWrapperProps, 'styles'>)
                                 </Row>
                             </div>
 
-                            <Sheet noRadius spacing={{m: 0, px: HORIZONTAL_SPACING, py: 9}}>
+                            <Sheet
+                                noRadius
+                                spacing={{m: 0, px: HORIZONTAL_SPACING, py: 9}}
+                                style={{minWidth: 'fit-content'}}
+                            >
                                 <div
                                     style={{
                                         maxWidth: '1080px',

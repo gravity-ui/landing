@@ -4,6 +4,8 @@
 $block: '.#{variables.$ns}dashboard-preview-example';
 
 #{$block} {
+    overflow: hidden;
+
     & .gn-aside-header__pane-container,
     & .gn-aside-header__pane-container .gn-aside-header__aside {
         height: 100%;
