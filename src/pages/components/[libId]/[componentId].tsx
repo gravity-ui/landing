@@ -1,8 +1,9 @@
-import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 import {Section} from 'src/components/NavigationLayout/types';
+import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import i18nextConfig from '../../../../next-i18next.config';
 import {type LibWithFullData, ServerApi} from '../../../api';

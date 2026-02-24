@@ -1,7 +1,8 @@
-import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import type {BaseColors, Theme} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
 import {type ReactElement, useMemo, useState} from 'react';
+import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import {useThemeCreator} from '../../hooks';
 import {isManuallyCreatedPaletteToken} from '../../lib/themeCreatorUtils';

@@ -18,7 +18,7 @@ import {
     ThumbsUpFill,
 } from '@gravity-ui/icons';
 import {ActionBar} from '@gravity-ui/navigation';
-import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {
     Alert,
     Box,
@@ -43,6 +43,7 @@ import {
 } from '@gravity-ui/uikit';
 import chunk from 'lodash/chunk';
 import {Fragment, useState} from 'react';
+import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import apple from '../../../assets/preview-apartments/apple.png';
 import photo1sm from '../../../assets/preview-apartments/photo-1-sm.jpg';

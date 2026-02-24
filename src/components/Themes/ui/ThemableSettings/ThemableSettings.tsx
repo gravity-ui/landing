@@ -1,7 +1,8 @@
-import {BREAKPOINTS, useWindowBreakpoint} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {Col, Flex, Row} from '@gravity-ui/uikit';
 import type {Theme} from '@gravity-ui/uikit-themer';
 import React from 'react';
+import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import {block} from '../../../../utils';
 
