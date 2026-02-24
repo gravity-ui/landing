@@ -119,6 +119,7 @@
     "build:analyze": "ANALYZE_BUNDLE=true next build",
     "start": "next start",
     "postbuild": "next-sitemap",
+    "auto-import-components": "node ./scripts/auto-import-components.mjs",
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
     "prepare-metadata": "npm run get-packages-versions",
     "update-og-images": "node ./scripts/update-og-images.mjs",
