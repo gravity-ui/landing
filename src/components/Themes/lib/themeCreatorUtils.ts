@@ -354,6 +354,7 @@ export function initThemeCreator(inputTheme: GravityTheme): ThemeCreatorState {
         paletteTokens,
         showMainSettings: false,
         advancedModeEnabled: false,
+        advancedColorType: 'basic-palette',
         changesExist: false,
         borders: {
             preset: bordersPreset,

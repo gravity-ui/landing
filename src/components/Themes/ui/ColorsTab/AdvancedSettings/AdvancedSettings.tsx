@@ -1,10 +1,11 @@
 import {CircleQuestion} from '@gravity-ui/icons';
 import {Button, Flex, Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
-import {useMemo, useState} from 'react';
+import {useMemo} from 'react';
 
 import {block} from '../../../../../utils';
 import {type TagItem, Tags} from '../../../../Tags/Tags';
+import {useThemeCreator, useThemeCreatorMethods} from '../../../hooks/useThemeCreator';
 import type {AdvancedColorType} from '../../../lib/types';
 import {AdvancedSettingsTable} from '../../AdvancedSettingsTable/AdvancedSettingsTable';
 import {ThemeSection} from '../../ThemeSection';
@@ -13,7 +14,8 @@ const b = block('advanced-color-settings');
 
 export const AdvancedSettings = () => {
     const {t} = useTranslation('themes');
-    const [activeTab, setActiveTab] = useState<AdvancedColorType>('basic-palette');
+    const {advancedColorType} = useThemeCreator();
+    const {setAdvancedColorType} = useThemeCreatorMethods();
 
     const tags: TagItem<AdvancedColorType>[] = useMemo(
         () => [
@@ -63,12 +65,12 @@ export const AdvancedSettings = () => {
                 <Tags
                     className={b('tags')}
                     items={tags}
-                    value={activeTab}
-                    onChange={setActiveTab}
+                    value={advancedColorType}
+                    onChange={setAdvancedColorType}
                 />
             </Flex>
 
-            <AdvancedSettingsTable colorType={activeTab} />
+            <AdvancedSettingsTable colorType={advancedColorType} />
         </ThemeSection>
     );
 };

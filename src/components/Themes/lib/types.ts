@@ -81,6 +81,7 @@ export interface ThemeCreatorState {
     paletteTokens: PaletteTokens;
     showMainSettings: boolean;
     advancedModeEnabled: boolean;
+    advancedColorType: AdvancedColorType;
     changesExist: boolean;
 
     borders: BordersOption;
