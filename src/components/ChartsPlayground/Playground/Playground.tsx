@@ -2,6 +2,8 @@ import {Chart, ChartData, ChartSeries} from '@gravity-ui/charts';
 import {Flex, Select} from '@gravity-ui/uikit';
 import React, {useCallback, useState} from 'react';
 
+import {ErrorBoundary} from '../../ErrorBoundary';
+
 import {Editor} from './Editor';
 import * as mocks from './mocks';
 
@@ -70,7 +72,9 @@ export const Playground = () => {
             </Flex>
             <Flex gap={8} justifyContent="space-between" height="100%" key={chartType}>
                 <Flex width="calc(60% - 16px)">
-                    <Chart data={chartData} />
+                    <ErrorBoundary>
+                        <Chart data={chartData} />
+                    </ErrorBoundary>
                 </Flex>
                 <Flex width="calc(40% - 16px)">
                     <Editor data={chartData} onApplyChanges={setChartData} onReset={handleReset} />
