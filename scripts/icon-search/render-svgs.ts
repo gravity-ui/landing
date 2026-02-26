@@ -11,7 +11,7 @@ import sharp from 'sharp';
 import {ICONS_LIBRARY_DIR, ICONS_LIBRARY_METADATA_PATH, RENDERED_ICONS_DIR} from './constants';
 
 const TARGET_SIZE = 224;
-const ICON_SIZE = 160;
+const ICON_SIZE = 200;
 
 type IconMeta = {
     name: string;

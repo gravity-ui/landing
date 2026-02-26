@@ -1,6 +1,6 @@
 # Icon Search
 
-Visual search for icons from `@gravity-ui/icons` using [CLIP](https://openai.com/research/clip) (model `Xenova/clip-vit-base-patch32`).
+Visual search for icons from `@gravity-ui/icons` using [CLIP](https://openai.com/research/clip) (model `Xenova/clip-vit-base-patch16`).
 
 A user uploads an image, and the system finds the most visually similar icons.
 
