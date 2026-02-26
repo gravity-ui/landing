@@ -22,6 +22,10 @@ $block: '.#{variables.$ns}kubernetes-preview';
         }
     }
 
+    &__menu {
+        text-wrap: nowrap;
+    }
+
     &__grow {
         flex-grow: 1;
     }

@@ -544,6 +544,7 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                         flexBasis: '50%',
                                         backgroundColor: 'var(--g-color-base-background)',
                                         border: 'none',
+                                        isolation: 'isolate',
                                     }}
                                 >
                                     <Box height="100%" maxHeight="100%" overflow="auto">
@@ -553,6 +554,7 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                                             style={{
                                                 backgroundColor: 'var(--g-color-base-background)',
                                                 top: 0,
+                                                zIndex: 1,
                                             }}
                                         >
                                             <Flex

@@ -100,22 +100,24 @@ export const EmailList = ({
 
     return (
         <Flex direction="column" grow overflow="hidden">
-            <Header>
-                <Text variant="subheader-3">{selectedFolder}</Text>
-                <SegmentedRadioGroup
-                    options={RADIO_OPTIONS}
-                    onUpdate={handleOptionChange}
-                    defaultValue="All mail"
+            <Flex minWidth={250} minHeight={0} direction="column" grow>
+                <Header>
+                    <Text variant="subheader-3">{selectedFolder}</Text>
+                    <SegmentedRadioGroup
+                        options={RADIO_OPTIONS}
+                        onUpdate={handleOptionChange}
+                        defaultValue="All mail"
+                    />
+                </Header>
+                <Divider />
+                <Filter onUpdate={handleFilterChange} />
+                <TreeList
+                    list={list}
+                    mapItemDataToContentProps={mapItemDataToContentProps}
+                    renderItem={renderItem(handleItemClick)}
+                    className={b()}
                 />
-            </Header>
-            <Divider />
-            <Filter onUpdate={handleFilterChange} />
-            <TreeList
-                list={list}
-                mapItemDataToContentProps={mapItemDataToContentProps}
-                renderItem={renderItem(handleItemClick)}
-                className={b()}
-            />
+            </Flex>
         </Flex>
     );
 };

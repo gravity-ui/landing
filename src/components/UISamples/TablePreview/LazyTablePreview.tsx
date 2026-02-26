@@ -1,4 +1,4 @@
-import {Loader} from '@gravity-ui/uikit';
+import {Flex, Loader} from '@gravity-ui/uikit';
 import {IntersectionLoadComponent} from 'src/components/IntersectionLoadComponent/IntersectionLoadComponent';
 import {block} from 'src/utils';
 
@@ -13,8 +13,12 @@ export const LazyTablePreview: React.FC = () => {
         <IntersectionLoadComponent
             cacheKey="TablePreview"
             getComponent={getComponent}
-            loader={<Loader className={b('loader')} size="l" />}
-            wrapperClassName={b('loader')}
+            loader={
+                <Flex height="100%" justifyContent="center" alignItems="center">
+                    <Loader size="l" />
+                </Flex>
+            }
+            wrapperClassName={b('preview-wrapper')}
         />
     );
 };
