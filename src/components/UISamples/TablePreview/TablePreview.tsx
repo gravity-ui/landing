@@ -116,7 +116,6 @@ export const TablePreview = ({justify}: {justify?: string}) => {
                             value: pr,
                             content: pr,
                         }))}
-                        disablePortal={true}
                     />
                     <Select
                         placeholder="Choose from the list"
@@ -124,7 +123,6 @@ export const TablePreview = ({justify}: {justify?: string}) => {
                             value: label.title,
                             content: label.title,
                         }))}
-                        disablePortal={true}
                     />
                 </Flex>
                 <Button size="m" view="action">

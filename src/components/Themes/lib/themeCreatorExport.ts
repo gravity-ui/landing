@@ -62,13 +62,7 @@ export function exportTheme({
     });
 
     if (customRootClassName) {
-        css = css
-            .replace('.g-root {', `.g-root.${customRootClassName} {`)
-            .replace('.g-root_theme_dark', `.g-root_theme_dark.${customRootClassName}_theme_dark`)
-            .replace(
-                '.g-root_theme_light',
-                `.g-root_theme_light.${customRootClassName}_theme_light`,
-            );
+        css = replaceRootToCustomClassName(css, customRootClassName);
     }
 
     const fontImports = createFontImportsForExport(themeState.typography.fontFamilies);
@@ -84,4 +78,17 @@ export function exportThemeForDialog({themeState, format = 'css'}: ExportThemeFo
         format,
         forPreview: false,
     });
+}
+
+export function replaceRootToCustomClassName(fullStyles: string, customRootClassName: string) {
+    return fullStyles
+        .replace('.g-root {', `.g-root.${customRootClassName}, .${customRootClassName} .g-root {`)
+        .replace(
+            '.g-root_theme_dark {',
+            `.g-root_theme_dark.${customRootClassName}_theme_dark, .${customRootClassName}_theme_dark .g-root_theme_dark {`,
+        )
+        .replace(
+            '.g-root_theme_light {',
+            `.g-root_theme_light.${customRootClassName}_theme_light, .${customRootClassName}_theme_light .g-root_theme_light {`,
+        );
 }

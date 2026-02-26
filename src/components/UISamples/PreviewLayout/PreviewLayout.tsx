@@ -16,6 +16,7 @@ import {
     Breadcrumbs,
     Flex,
     Icon,
+    PortalProvider,
     SegmentedRadioGroup,
     Theme,
     ThemeProvider,
@@ -53,6 +54,7 @@ export const PreviewLayout = ({
     const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
     const [isCompact, setCompact] = useState<boolean>(true);
+    const containerRef = React.useRef<HTMLDivElement>(null);
 
     const onAlignmentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setJustify(event.target.value);
@@ -138,67 +140,72 @@ export const PreviewLayout = ({
                     'scrollable-content': scrollableContent,
                     'no-padding': noPadding,
                 })}
+                ref={containerRef}
             >
-                <AsideHeader
-                    menuItems={[
-                        {
-                            id: 'table',
-                            title: 'Table',
-                            icon: LayoutList,
-                            iconSize: 18,
-                            current: id === 'table',
-                        },
-                        {
-                            id: 'form',
-                            title: 'Form',
-                            icon: SquareChartBar,
-                            iconSize: 18,
-                            current: id === 'form',
-                        },
-                        {
-                            id: 'dashboard',
-                            title: 'Dashboard',
-                            icon: ChartAreaStackedNormalized,
-                            iconSize: 18,
-                            current: id === 'dashboard',
-                        },
-                        {
-                            id: 'cards',
-                            title: 'Cards',
-                            icon: SquareBars,
-                            iconSize: 18,
-                            current: id === 'cards',
-                        },
-                    ]}
-                    className={b('aside-header')}
-                    logo={{
-                        text: 'Gravity UI',
-                        href: '#',
-                        icon: gravityUi,
-                        iconSize: 38,
-                    }}
-                    compact={isCompact}
-                    onChangeCompact={setCompact}
-                    renderContent={renderContent}
-                    renderFooter={({compact}) => (
-                        <React.Fragment>
-                            <FooterItem
-                                id="user-settings"
-                                icon={Gear}
-                                title="User Settings"
-                                tooltipText="User Settings"
-                                onItemClick={() => {}}
-                                compact={compact}
-                            />
-                            <FooterItem
-                                id="user-account"
-                                title="User"
-                                itemWrapper={(p, makeItem) => makeItem({...p, icon: <Person />})}
-                                compact={compact}
-                            />
-                        </React.Fragment>
-                    )}
-                />
+                <PortalProvider container={containerRef}>
+                    <AsideHeader
+                        menuItems={[
+                            {
+                                id: 'table',
+                                title: 'Table',
+                                icon: LayoutList,
+                                iconSize: 18,
+                                current: id === 'table',
+                            },
+                            {
+                                id: 'form',
+                                title: 'Form',
+                                icon: SquareChartBar,
+                                iconSize: 18,
+                                current: id === 'form',
+                            },
+                            {
+                                id: 'dashboard',
+                                title: 'Dashboard',
+                                icon: ChartAreaStackedNormalized,
+                                iconSize: 18,
+                                current: id === 'dashboard',
+                            },
+                            {
+                                id: 'cards',
+                                title: 'Cards',
+                                icon: SquareBars,
+                                iconSize: 18,
+                                current: id === 'cards',
+                            },
+                        ]}
+                        className={b('aside-header')}
+                        logo={{
+                            text: 'Gravity UI',
+                            href: '#',
+                            icon: gravityUi,
+                            iconSize: 38,
+                        }}
+                        compact={isCompact}
+                        onChangeCompact={setCompact}
+                        renderContent={renderContent}
+                        renderFooter={({compact}) => (
+                            <React.Fragment>
+                                <FooterItem
+                                    id="user-settings"
+                                    icon={Gear}
+                                    title="User Settings"
+                                    tooltipText="User Settings"
+                                    onItemClick={() => {}}
+                                    compact={compact}
+                                />
+                                <FooterItem
+                                    id="user-account"
+                                    title="User"
+                                    itemWrapper={(p, makeItem) =>
+                                        makeItem({...p, icon: <Person />})
+                                    }
+                                    compact={compact}
+                                />
+                            </React.Fragment>
+                        )}
+                    />
+                </PortalProvider>
             </div>
         </ThemeProvider>
     );

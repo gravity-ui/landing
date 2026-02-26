@@ -16,7 +16,7 @@ import {
 } from 'src/components/UISamples';
 
 import {useThemeCreator} from '../../hooks';
-import {exportTheme} from '../../lib/themeCreatorExport';
+import {exportTheme, replaceRootToCustomClassName} from '../../lib/themeCreatorExport';
 
 const previewComponents = [
     {id: 'table', Component: TablePreview, title: 'Table', breadCrumbsItems: ['Table']},
@@ -71,13 +71,6 @@ const previewComponents = [
     },
 ];
 
-const replaceRootToCustom = (fullStyles: string, customRootClassName: string) => {
-    return fullStyles
-        .replace('.g-root {', `.g-root.${customRootClassName} {`)
-        .replace('.g-root_theme_dark', `.g-root_theme_dark.${customRootClassName}_theme_dark`)
-        .replace('.g-root_theme_light', `.g-root_theme_light.${customRootClassName}_theme_light`);
-};
-
 export const PreviewTab = () => {
     const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
@@ -89,11 +82,11 @@ export const PreviewTab = () => {
         });
 
         return {
-            previewWrapperStyles: replaceRootToCustom(
+            previewWrapperStyles: replaceRootToCustomClassName(
                 fullStyles,
                 'gravity-ui-landing-themes-preview-wrapper',
             ),
-            previewLayoutStyles: replaceRootToCustom(
+            previewLayoutStyles: replaceRootToCustomClassName(
                 fullStyles,
                 'gravity-ui-landing-themes-preview-layout',
             ),
