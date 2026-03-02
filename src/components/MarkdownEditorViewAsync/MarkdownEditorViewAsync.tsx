@@ -1,3 +1,4 @@
+import '@diplodoc/transform/dist/css/base.css';
 import {Loader} from '@gravity-ui/uikit';
 import dynamic from 'next/dynamic';
 
