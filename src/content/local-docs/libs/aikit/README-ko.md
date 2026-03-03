@@ -85,16 +85,16 @@ function App() {
 
 ## 아키텍처
 
-이 라이브러리는 **Atomic Design** 원칙에 따라 구축되었습니다.
+이 라이브러리는 **Atomic Design** 원칙을 기반으로 구축되었습니다.
 
 ### 🔹 Atoms
 
 비즈니스 로직이 없는 기본적인 분리 불가능한 UI 요소:
 
-- `ActionButton` — 통합된 툴팁이 있는 버튼
+- `ActionButton` — 툴팁이 통합된 버튼
 - `Alert` — 다양한 스타일의 알림 메시지
 - `ChatDate` — 상대적 날짜를 포함한 날짜 형식 지정
-- `ContextIndicator` — 토큰 컨텍스트 사용 표시기
+- `ContextIndicator` — 토큰 컨텍스트 사용 지표
 - `ContextItem` — 제거 액션이 있는 컨텍스트 레이블
 - `DiffStat` — 코드 변경 통계 표시
 - `Disclaimer` — 면책 조항 텍스트 컴포넌트
@@ -113,7 +113,7 @@ function App() {
 - `BaseMessage` — 모든 메시지 타입에 대한 기본 래퍼
 - `ButtonGroup` — 방향 지원이 있는 버튼 그룹
 - `InputContext` — 컨텍스트 관리
-- `PromptInputBody` — 자동 확장되는 텍스트 영역
+- `PromptInputBody` — 자동 크기 조절이 가능한 텍스트 영역
 - `PromptInputFooter` — 액션 아이콘 및 제출 버튼이 있는 푸터
 - `PromptInputHeader` — 컨텍스트 항목 및 표시기가 있는 헤더
 - `PromptInputPanel` — 사용자 정의 콘텐츠를 위한 패널 컨테이너
@@ -158,7 +158,7 @@ function App() {
 
 ## 테스트
 
-이 프로젝트는 시각적 회귀 테스트를 위해 Playwright 컴포넌트 테스트를 사용합니다.
+이 프로젝트는 시각적 회귀 테스트를 위해 Playwright 컴포넌트 테스팅을 사용합니다.
 
 ### 테스트 실행
 
@@ -180,15 +180,13 @@ npm run playwright:docker:clear-cache
 
 ### 로컬 테스트 (Linux 전용)
 
-Linux를 사용 중이라면 로컬에서 테스트를 실행할 수 있습니다.
+Linux 환경에서는 로컬에서 테스트를 실행할 수 있습니다.
 
 ```bash
 # Playwright 브라우저 설치 (한 번 실행)
 npm run playwright:install
-
 # 모든 컴포넌트 테스트 실행
 npm run playwright
-
 # 스크린샷 기준선 업데이트
 npm run playwright:update
 ```
