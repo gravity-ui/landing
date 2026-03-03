@@ -1,6 +1,6 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-Bibliothèque de composants UI pour les chats IA, construite selon les principes de l'Atomic Design.
+Bibliothèque de composants UI pour les chats IA construite selon les principes de l'Atomic Design.
 
 <!--GITHUB_BLOCK-->
 
@@ -8,7 +8,7 @@ Bibliothèque de composants UI pour les chats IA, construite selon les principes
 
 ## Ressources
 
-### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Site Web](https://gravity-ui.com/libraries/aikit)
+### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Site web](https://gravity-ui.com/libraries/aikit)
 
 ### ![Storybook Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Storybook Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/aikit/)
 
@@ -23,9 +23,9 @@ Bibliothèque de composants UI pour les chats IA, construite selon les principes
 ### Fonctionnalités clés
 
 - 🎨 **Atomic Design** — hiérarchie claire des composants, des atomes aux pages
-- 🔧 **SDK Agnostique** — indépendant des SDK IA spécifiques
+- 🔧 **Indépendant du SDK** — indépendant des SDK IA spécifiques
 - 🎭 **Approche à deux niveaux** — composants prêts à l'emploi + hooks pour la personnalisation
-- 🎨 **Variables CSS** — thèmes faciles sans remplacements de composants
+- 🎨 **Variables CSS** — thématisation facile sans avoir à surcharger les composants
 - 📦 **TypeScript** — sécurité de type complète dès le départ
 - 🔌 **Extensible** — système d'enregistrement de types de messages personnalisés
 
@@ -91,7 +91,7 @@ La bibliothèque est construite sur les principes de l'**Atomic Design** :
 
 Éléments UI de base indivisibles sans logique métier :
 
-- `ActionButton` — bouton avec tooltip intégré
+- `ActionButton` — bouton avec info-bulle intégrée
 - `Alert` — messages d'alerte avec variantes
 - `ChatDate` — formatage de date avec dates relatives
 - `ContextIndicator` — indicateur d'utilisation du contexte de jeton
@@ -116,7 +116,7 @@ Combinaisons simples d'atomes :
 - `PromptInputBody` — zone de texte avec redimensionnement automatique
 - `PromptInputFooter` — pied de page avec icônes d'action et bouton de soumission
 - `PromptInputHeader` — en-tête avec éléments de contexte et indicateur
-- `PromptInputPanel` — panneau conteneur pour le contenu personnalisé
+- `PromptInputPanel` — panneau pour le contenu personnalisé
 - `Suggestions` — boutons de suggestion cliquables
 - `Tabs` — onglets de navigation avec fonctionnalité de suppression
 - `ToolFooter` — pied de page du message de l'outil avec actions
@@ -140,7 +140,7 @@ Mises en page complètes :
 
 - `ChatContent` — contenu principal du chat
 - `EmptyContainer` — état vide
-- `History` — historique du chat
+- `History` — historique des chats
 
 ### 📱 Pages
 
@@ -168,7 +168,7 @@ Le projet utilise Playwright Component Testing pour les tests de régression vis
 # Exécuter tous les tests de composants dans Docker (recommandé)
 npm run playwright:docker
 
-# Mettre à jour les bases de référence des captures d'écran dans Docker
+# Mettre à jour les captures d'écran de référence dans Docker
 npm run playwright:docker:update
 
 # Exécuter un test spécifique par motif grep dans Docker
@@ -185,11 +185,9 @@ Si vous êtes sous Linux, vous pouvez exécuter les tests localement :
 ```bash
 # Installer les navigateurs Playwright (à exécuter une fois)
 npm run playwright:install
-
 # Exécuter tous les tests de composants
 npm run playwright
-
-# Mettre à jour les bases de référence des captures d'écran
+# Mettre à jour les captures d'écran de référence
 npm run playwright:update
 ```
 
