@@ -1,1 +1,1 @@
-export {ImageSearch} from './ImageSearch';
+export {useImageSearch} from './ImageSearch';

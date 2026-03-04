@@ -1,9 +1,10 @@
-import {ArrowUpRightFromSquare, Magnifier} from '@gravity-ui/icons';
+import {ArrowUpRightFromSquare, Magnifier, Xmark} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, Icon, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
+import photoSearchIcon from '../../assets/icons/photo-search.svg';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
 
@@ -11,7 +12,7 @@ import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
-import {ImageSearch} from './ImageSearch';
+import {useImageSearch} from './ImageSearch';
 import {allIcons} from './constants';
 import type {IconItem} from './types';
 
@@ -93,6 +94,12 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         setImageSearchResults(null);
     }, []);
 
+    const imageSearch = useImageSearch({
+        onResults: handleImageSearchResults,
+        onClear: handleImageSearchClear,
+        isActive: imageSearchResults !== null,
+    });
+
     const icons = React.useMemo(() => {
         if (imageSearchResults) {
             const resultSet = new Set(imageSearchResults);
@@ -120,6 +127,24 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         );
     }, [filterString, imageSearchResults]);
 
+    const searchStartContent = imageSearch.isActive ? (
+        imageSearch.startContent
+    ) : (
+        <div className={b('search-icon')}>
+            <Icon data={Magnifier} size={20} />
+        </div>
+    );
+
+    const searchEndContent = imageSearch.isActive ? (
+        <div className={b('clear-icon')} onClick={imageSearch.handleClear}>
+            <Icon data={Xmark} size={16} />
+        </div>
+    ) : (
+        <div className={b('photo-search-icon')} onClick={imageSearch.triggerFileSelect}>
+            <Icon data={photoSearchIcon} size={20} />
+        </div>
+    );
+
     return (
         <Grid className={b()}>
             <Row>
@@ -143,30 +168,28 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             </Row>
             <Row className={b('search')}>
                 <Col sizes={12} className={b('search-row')}>
+                    {imageSearch.fileInput}
                     <TextInput
                         controlRef={searchInputRef}
                         className={b('search-input')}
-                        value={filterString}
+                        value={imageSearch.isActive ? imageSearch.fileName ?? '' : filterString}
                         onUpdate={(value) => {
-                            setFilterString(value);
-                            if (value) {
-                                setImageSearchResults(null);
+                            if (!imageSearch.isActive) {
+                                setFilterString(value);
+                                if (value) {
+                                    setImageSearchResults(null);
+                                }
                             }
                         }}
                         size="xl"
                         placeholder={t('icons:filterPlaceholder')}
-                        startContent={
-                            <div className={b('search-icon')}>
-                                <Icon data={Magnifier} size={20} />
-                            </div>
-                        }
+                        startContent={searchStartContent}
                         autoFocus={!isMobile}
-                        hasClear
-                    />
-                    <ImageSearch
-                        onResults={handleImageSearchResults}
-                        onClear={handleImageSearchClear}
-                        isActive={imageSearchResults !== null}
+                        hasClear={false}
+                        endContent={searchEndContent}
+                        controlProps={{
+                            readOnly: imageSearch.isActive,
+                        }}
                     />
                 </Col>
             </Row>
@@ -186,6 +209,8 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 onClose={handleCloseDialog}
                 onClickToKeyword={handleClickToKeyword}
             />
+
+            {imageSearch.dropOverlay}
         </Grid>
     );
 };

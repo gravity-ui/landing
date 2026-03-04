@@ -1,5 +1,5 @@
-import {Picture, Xmark} from '@gravity-ui/icons';
-import {Button, Icon, Loader} from '@gravity-ui/uikit';
+import {Picture} from '@gravity-ui/icons';
+import {Icon, Loader, Portal} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -9,7 +9,7 @@ import './ImageSearch.scss';
 
 const b = block('image-search');
 
-interface ImageSearchProps {
+interface UseImageSearchOptions {
     onResults: (componentNames: string[]) => void;
     onClear: () => void;
     isActive: boolean;
@@ -35,7 +35,6 @@ function fileToBase64(file: Blob): Promise<string> {
         const reader = new FileReader();
         reader.onload = () => {
             const result = reader.result as string;
-            // strip data:image/...;base64, prefix
             const base64 = result.split(',')[1];
             resolve(base64);
         };
@@ -44,20 +43,23 @@ function fileToBase64(file: Blob): Promise<string> {
     });
 }
 
-export const ImageSearch: React.FC<ImageSearchProps> = ({onResults, onClear, isActive}) => {
-    const {t} = useTranslation();
+export function useImageSearch({onResults, onClear, isActive}: UseImageSearchOptions) {
+    const {t} = useTranslation('icons');
 
     const [preview, setPreview] = React.useState<string | null>(null);
+    const [fileName, setFileName] = React.useState<string | null>(null);
     const [loading, setLoading] = React.useState(false);
     const [dragging, setDragging] = React.useState(false);
     const fileInputRef = React.useRef<HTMLInputElement>(null);
     const dragCounterRef = React.useRef(0);
 
     const handleImage = React.useCallback(
-        async (file: Blob) => {
+        async (file: File | Blob) => {
+            const name = file instanceof File ? file.name : 'image.png';
             const base64 = await fileToBase64(file);
             const dataUrl = `data:image/png;base64,${base64}`;
             setPreview(dataUrl);
+            setFileName(name);
             setLoading(true);
 
             try {
@@ -155,6 +157,7 @@ export const ImageSearch: React.FC<ImageSearchProps> = ({onResults, onClear, isA
 
     const handleClear = React.useCallback(() => {
         setPreview(null);
+        setFileName(null);
         setLoading(false);
         if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -162,55 +165,48 @@ export const ImageSearch: React.FC<ImageSearchProps> = ({onResults, onClear, isA
         onClear();
     }, [onClear]);
 
-    const handleButtonClick = React.useCallback(() => {
+    const triggerFileSelect = React.useCallback(() => {
         fileInputRef.current?.click();
     }, []);
 
-    return (
-        <React.Fragment>
-            <div className={b()}>
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    className={b('file-input')}
-                    onChange={handleFileChange}
-                />
-
-                {isActive && preview ? (
-                    <div className={b('preview')}>
-                        <img src={preview} alt="" className={b('preview-image')} />
-                        {loading && <Loader className={b('loader')} size="s" />}
-                        <Button
-                            view="flat"
-                            size="s"
-                            className={b('clear-button')}
-                            onClick={handleClear}
-                        >
-                            <Icon data={Xmark} size={12} />
-                        </Button>
-                    </div>
-                ) : (
-                    <Button
-                        view="flat"
-                        size="xl"
-                        className={b('upload-button')}
-                        onClick={handleButtonClick}
-                        title={t('icons:imageSearch_tooltip')}
-                    >
-                        <Icon data={Picture} size={20} />
-                    </Button>
-                )}
-            </div>
-
-            {dragging && (
-                <div className={b('drop-overlay')}>
-                    <div className={b('drop-content')}>
-                        <Icon data={Picture} size={32} />
-                        <span>{t('icons:imageSearch_drop')}</span>
-                    </div>
-                </div>
-            )}
-        </React.Fragment>
+    const fileInput = (
+        <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            className={b('file-input')}
+            onChange={handleFileChange}
+        />
     );
-};
+
+    const startContent =
+        isActive && preview ? (
+            <div className={b('input-preview')}>
+                <img src={preview} alt="" className={b('input-preview-image')} />
+                {loading && <Loader className={b('input-loader')} size="s" />}
+            </div>
+        ) : null;
+
+    const dropOverlay = dragging ? (
+        <Portal>
+            <div className={b('drop-overlay')}>
+                <div className={b('drop-content')}>
+                    <Icon data={Picture} size={32} />
+                    <span>{t('imageSearch_drop')}</span>
+                </div>
+            </div>
+        </Portal>
+    ) : null;
+
+    return {
+        preview,
+        fileName,
+        loading,
+        isActive: isActive && preview !== null,
+        fileInput,
+        startContent,
+        dropOverlay,
+        triggerFileSelect,
+        handleClear,
+    };
+}
