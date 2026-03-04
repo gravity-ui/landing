@@ -8,12 +8,14 @@ Uma biblioteca de visualização de grafos que combina o melhor dos dois mundos:
 
 Chega de escolher entre desempenho e interatividade. Perfeito para diagramas grandes, fluxogramas e editores baseados em nós.
 
+![preview graph.](docs/_static/graph_preview.png)
+
 ## Motivação
 
 Aplicações web modernas frequentemente exigem visualização e interatividade complexas, mas as soluções existentes geralmente se concentram em uma única tecnologia de renderização:
 
-- **Canvas** oferece alto desempenho para gráficos complexos, mas é limitado no manuseio de texto e interatividade.
-- **HTML DOM** é conveniente para interfaces, mas menos eficiente para gráficos complexos ou um grande número de elementos.
+- **Canvas** oferece alto desempenho para gráficos complexos, mas é limitado no tratamento de texto e interatividade.
+- **DOM HTML** é conveniente para interfaces, mas menos eficiente para gráficos complexos ou um grande número de elementos.
 
 O @gravity-ui/graph resolve isso alternando automaticamente entre Canvas e HTML com base no nível de zoom:
 - **Zoom Out**: Usa Canvas para renderização eficiente do grafo completo
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}
@@ -59,7 +61,7 @@ npm install @gravity-ui/graph
 
 ## Exemplos
 
-### Exemplo com React
+### Exemplo React
 
 [Documentação Detalhada de Componentes React](docs/react/usage.md)
 
@@ -149,7 +151,7 @@ export function GraphEditor() {
 
 ```
 
-### Exemplo com JavaScript Puro
+### Exemplo JavaScript Puro
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
