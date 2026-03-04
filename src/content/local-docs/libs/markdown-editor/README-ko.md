@@ -9,7 +9,7 @@ MarkdownEditor는 마크다운 작업을 위한 강력한 도구로, WYSIWYG(Wha
 ### 🔧 주요 기능
 
 - 기본 마크다운 및 [YFM](https://ydocs.tech) 구문 지원.
-- ProseMirror 및 CodeMirror 엔진을 사용하여 확장 가능.
+- ProseMirror 및 CodeMirror 엔진을 사용한 확장성.
 - 최대 유연성을 위한 WYSIWYG 및 마크업 모드 작업 기능.
 
 ## 설치
@@ -24,7 +24,7 @@ npm install @gravity-ui/markdown-editor
 
 ## 시작하기
 
-마크다운 에디터는 에디터 인스턴스를 생성하기 위한 React 훅과 뷰 렌더링을 위한 컴포넌트로 제공됩니다.
+마크다운 에디터는 에디터 인스턴스를 생성하기 위한 React 훅과 뷰를 렌더링하기 위한 컴포넌트로 제공됩니다.
 스타일링 및 테마 설정은 [UIKit 문서](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)를 참조하세요.
 
 ```tsx
@@ -63,9 +63,7 @@ function Editor({onSubmit}) {
 ### 개발
 
 1. `.nvmrc` 파일에 지정된 버전의 Node.js 환경을 설치합니다. [NVM](https://github.com/nvm-sh/nvm) 또는 유사한 도구 사용을 권장합니다.
-2. [pnpm](https://pnpm.io/installation)을 설치합니다. 버전은 `package.json`의 "packageManager" 속성에 지정되어 있습니다.
-  
-   [Corepack](https://nodejs.org/api/corepack.html)을 사용하거나 npm을 통해 설치할 수 있습니다: `npm deps:global --force`를 실행하세요.
+2. `package.json`의 "packageManager" 속성에 지정된 버전의 [pnpm](https://pnpm.io/installation)을 설치합니다.
 3. 종속성 설치: `pnpm i`
 4. 스토리북 개발 서버 실행: `pnpm start`
 
@@ -82,7 +80,7 @@ configure({
 });
 ```
 
-[UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) 및 기타 UI 라이브러리에서도 `configure()`를 호출하는 것을 잊지 마세요.
+[UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) 및 기타 UI 라이브러리에서 `configure()`를 호출하는 것을 잊지 마세요.
 
 ### 기여
 

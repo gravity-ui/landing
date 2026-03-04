@@ -25,7 +25,7 @@ Bitte beachten Sie, dass für die Nutzung des Pakets auch die folgenden Abhängi
 ## Erste Schritte
 
 Der Markdown-Editor wird als React-Hook zur Erstellung einer Editorinstanz und als Komponente zur Anzeige bereitgestellt.
-Für Styling und Themes siehe die [UIKit-Dokumentation](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+Für Styling und Theme siehe [UIKit-Dokumentation](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
 import React from 'react';
@@ -51,21 +51,19 @@ function Editor({onSubmit}) {
 }
 ```
 Mehr erfahren:
-- [So verbinden Sie den Editor in Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
-- [So fügen Sie eine Vorschau für den Markup-Modus hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
-- [So fügen Sie eine HTML-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [So fügen Sie eine Latex-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
-- [So fügen Sie eine Mermaid-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
-- [So schreiben Sie eine Erweiterung](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
-- [So fügen Sie eine GPT-Erweiterung hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [So fügen Sie eine Textbindungs-Erweiterung in Markdown hinzu](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [Wie man den Editor in Create React App einbindet](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
+- [Wie man eine Vorschau für den Markup-Modus hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
+- [Wie man eine HTML-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
+- [Wie man eine Latex-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
+- [Wie man eine Mermaid-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
+- [Wie man eine Erweiterung schreibt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
+- [Wie man eine GPT-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
+- [Wie man eine Textbindungs-Erweiterung in Markdown hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Entwicklung
 
 1. Installieren Sie die Node.js-Umgebung. Die Version ist in der `.nvmrc`-Datei angegeben. Wir empfehlen die Verwendung von [NVM](https://github.com/nvm-sh/nvm) oder einem ähnlichen Tool.
 2. Installieren Sie [pnpm](https://pnpm.io/installation). Die Version ist in der `package.json` unter der Eigenschaft `"packageManager"` angegeben.
-  
-   Sie können [Corepack](https://nodejs.org/api/corepack.html) verwenden oder einfach über npm installieren: führen Sie `npm deps:global --force` aus.
 3. Installieren Sie die Abhängigkeiten: `pnpm i`
 4. Starten Sie den Storybook-Entwicklungsserver: `pnpm start`
 

@@ -20,7 +20,7 @@ npm install @gravity-ui/markdown-editor
 
 ### 必要な依存関係
 
-パッケージの使用を開始するには、プロジェクトに以下のものがインストールされている必要があります: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` など。正確な情報は `package.json` の `peerDependencies` セクションを確認してください。
+このパッケージの使用を開始するには、プロジェクトに以下のものがインストールされている必要があります: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` など。正確な情報は `package.json` の `peerDependencies` セクションをご確認ください。
 
 ## はじめに
 
@@ -58,16 +58,14 @@ function Editor({onSubmit}) {
 - [Mermaid 拡張機能を追加する方法](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
 - [拡張機能の作成方法](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
 - [GPT 拡張機能を追加する方法](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [Markdown にテキストバインディング拡張機能を追加する方法](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [Markdown でテキストバインディング拡張機能を追加する方法](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### 開発
 
-1. `.nvmrc` ファイルに指定されているバージョンの Node.js 環境をインストールします。[NVM](https://github.com/nvm-sh/nvm) または類似のツールを使用することを推奨します。
+1. `.nvmrc` ファイルに指定されているバージョンの Node.js 環境をインストールします。[NVM](https://github.com/nvm-sh/nvm) または類似のツールを使用することをお勧めします。
 2. `package.json` の "packageManager" プロパティで指定されているバージョンの [pnpm](https://pnpm.io/installation) をインストールします。
-  
-   [Corepack](https://nodejs.org/api/corepack.html) を使用するか、npm 経由でインストールできます: `npm deps:global --force` を実行します。
 3. 依存関係をインストールします: `pnpm i`
-4. Storybook の開発サーバーを実行します: `pnpm start`
+4. Storybook 開発サーバーを実行します: `pnpm start`
 
 
 ### i18n
