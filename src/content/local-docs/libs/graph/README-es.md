@@ -4,27 +4,29 @@
 
 Una biblioteca de visualización de grafos que combina lo mejor de ambos mundos:
 - Canvas para un alto rendimiento al ver el grafo completo
-- HTML/React para interacciones ricas al hacer zoom
+- HTML/React para interacciones enriquecidas al hacer zoom
 
-No más elegir entre rendimiento e interactividad. Perfecto para diagramas grandes, diagramas de flujo y editores basados en nodos.
+Se acabaron las elecciones entre rendimiento e interactividad. Perfecto para diagramas grandes, diagramas de flujo y editores basados en nodos.
+
+![vista previa del grafo.](docs/_static/graph_preview.png)
 
 ## Motivación
 
 Las aplicaciones web modernas a menudo requieren visualización e interactividad complejas, pero las soluciones existentes suelen centrarse en una única tecnología de renderizado:
 
-- **Canvas** ofrece un alto rendimiento para gráficos complejos, pero está limitado en el manejo de texto e interactividad.
+- **Canvas** ofrece un alto rendimiento para gráficos complejos, pero es limitado en el manejo de texto e interactividad.
 - **HTML DOM** es conveniente para interfaces, pero menos eficiente para gráficos complejos o un gran número de elementos.
 
 @gravity-ui/graph resuelve esto cambiando automáticamente entre Canvas y HTML según el nivel de zoom:
-- **Alejado**: Utiliza Canvas para renderizar eficientemente el grafo completo
+- **Alejado**: Utiliza Canvas para un renderizado eficiente del grafo completo
 - **Zoom medio**: Muestra una vista esquemática con interactividad básica
-- **Acercado**: Cambia a componentes HTML/React para interacciones ricas
+- **Acercado**: Cambia a componentes HTML/React para interacciones enriquecidas
 
-## Cómo funciona
+## Cómo Funciona
 
 La biblioteca utiliza un sistema de renderizado inteligente que gestiona automáticamente la transición entre Canvas y componentes React:
 
-1. En niveles de zoom bajos, todo se renderiza en Canvas para obtener rendimiento.
+1. A niveles de zoom bajos, todo se renderiza en Canvas para un mejor rendimiento.
 2. Al hacer zoom para ver los detalles, el componente `GraphCanvas`:
    - Rastrea los cambios en la vista de la cámara y la escala.
    - Calcula qué bloques son visibles en la vista actual (con relleno para un desplazamiento suave).
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}
@@ -59,7 +61,7 @@ npm install @gravity-ui/graph
 
 ## Ejemplos
 
-### Ejemplo de React
+### Ejemplo con React
 
 [Documentación detallada de componentes React](docs/react/usage.md)
 
@@ -149,7 +151,7 @@ export function GraphEditor() {
 
 ```
 
-### Ejemplo de JavaScript Vanilla
+### Ejemplo con JavaScript Vanilla
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
