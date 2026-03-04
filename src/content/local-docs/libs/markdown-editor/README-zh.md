@@ -2,15 +2,15 @@
 
 # @gravity-ui/markdown-editor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/markdown-editor)](https://www.npmjs.com/package/@gravity-ui/markdown-editor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/markdown-editor/actions/workflows/ci.yml?query=branch:main) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/markdown-editor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/md-editor/)
 
-## Markdown 所见即所得 (WYSIWYG) 和标记编辑器
+## Markdown 所见即所得和标记编辑器
 
-MarkdownEditor 是一个强大的 Markdown 编辑工具，它结合了 WYSIWYG（所见即所得）和标记模式。这意味着您可以在方便的可视化模式下创建和编辑内容，同时还能完全控制标记。
+MarkdownEditor 是一款强大的 Markdown 编辑工具，它结合了所见即所得 (WYSIWYG) 和标记模式。这意味着您可以在便捷的可视化模式下创建和编辑内容，同时又能完全掌控标记。
 
 ### 🔧 主要功能
 
 - 支持基础 Markdown 和 [YFM](https://ydocs.tech) 语法。
-- 通过使用 ProseMirror 和 CodeMirror 引擎实现可扩展性。
-- 支持 WYSIWYG 和标记模式，以实现最大的灵活性。
+- 通过 ProseMirror 和 CodeMirror 引擎实现可扩展性。
+- 支持所见即所得和标记模式，以实现最大的灵活性。
 
 ## 安装
 
@@ -24,7 +24,7 @@ npm install @gravity-ui/markdown-editor
 
 ## 入门
 
-Markdown 编辑器提供了一个 React hook 来创建编辑器实例，以及一个用于渲染视图的组件。\
+Markdown 编辑器提供了一个 React Hook 来创建编辑器实例，以及一个用于渲染视图的组件。
 要设置样式和主题，请参阅 [UIKit 文档](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)。
 
 ```tsx
@@ -50,7 +50,7 @@ function Editor({onSubmit}) {
   return <MarkdownEditorView stickyToolbar autofocus editor={editor} />;
 }
 ```
-阅读更多：
+了解更多：
 - [如何在 Create React App 中集成编辑器](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
 - [如何为标记模式添加预览](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
 - [如何添加 HTML 扩展](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
@@ -64,15 +64,13 @@ function Editor({onSubmit}) {
 
 1. 安装 Nodejs 环境，版本在 `.nvmrc` 文件中指定。我们推荐使用 [NVM](https://github.com/nvm-sh/nvm) 或类似工具。
 2. 安装 [pnpm](https://pnpm.io/installation)，版本在 `package.json` 的 "packageManager" 属性中指定。
-  
-   您可以使用 [Corepack](https://nodejs.org/api/corepack.html)，或者直接通过 npm 安装：运行 `npm deps:global --force`。
 3. 安装依赖：`pnpm i`
 4. 运行 storybook 开发服务器：`pnpm start`
 
 
-### i18n（国际化）
+### i18n
 
-要设置国际化，您只需使用 `configure` 函数：
+要设置国际化，只需使用 `configure`：
 
 ```typescript
 import {configure} from '@gravity-ui/markdown-editor';

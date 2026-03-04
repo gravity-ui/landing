@@ -24,7 +24,7 @@ Veuillez noter que pour commencer à utiliser le package, votre projet doit éga
 
 ## Démarrage
 
-L'éditeur Markdown est fourni sous forme de hook React pour créer une instance de l'éditeur et d'un composant pour le rendu de la vue.
+L'éditeur Markdown est fourni sous forme de hook React pour créer une instance de l'éditeur et un composant pour le rendu de la vue.
 Pour configurer le style et le thème, consultez la [documentation UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
@@ -64,8 +64,6 @@ En savoir plus :
 
 1. Installez l'environnement Nodejs, la version est spécifiée dans le fichier `.nvmrc`. Nous recommandons d'utiliser [NVM](https://github.com/nvm-sh/nvm) ou un outil similaire.
 2. Installez [pnpm](https://pnpm.io/installation), la version est spécifiée dans `package.json` dans la propriété "packageManager".
-  
-   Vous pouvez utiliser [Corepack](https://nodejs.org/api/corepack.html), ou simplement l'installer via npm : exécutez `npm deps:global --force`.
 3. Installez les dépendances : `pnpm i`
 4. Lancez le serveur de développement Storybook : `pnpm start`
 

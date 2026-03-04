@@ -64,8 +64,6 @@ Lee más:
 
 1. Instala el entorno de Nodejs, la versión se especifica en el archivo `.nvmrc`. Recomendamos usar [NVM](https://github.com/nvm-sh/nvm) o una herramienta similar.
 2. Instala [pnpm](https://pnpm.io/installation), la versión se especifica en la propiedad "packageManager" de `package.json`.
-  
-   Puedes usar [Corepack](https://nodejs.org/api/corepack.html), o simplemente instalarlo a través de npm: ejecuta `npm deps:global --force`.
 3. Instala las dependencias: `pnpm i`
 4. Ejecuta el servidor de desarrollo de storybook: `pnpm start`
 
@@ -82,7 +80,7 @@ configure({
 });
 ```
 
-No olvides llamar a `configure()` de [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) y otras bibliotecas de UI.
+No olvides llamar a `configure()` desde [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) y otras bibliotecas de UI.
 
 ### Contribución
 
