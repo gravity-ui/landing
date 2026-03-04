@@ -82,4 +82,26 @@ $block: '.#{variables.$ns}icons';
         padding: 0 12px;
         color: rgba(255, 255, 255, 0.5);
     }
+
+    &__photo-search-icon {
+        padding: 0 12px;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: color 0.1s ease;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+    }
+
+    &__clear-icon {
+        padding: 0 12px;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: color 0.1s ease;
+
+        &:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+    }
 }
