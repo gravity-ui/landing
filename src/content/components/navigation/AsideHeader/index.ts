@@ -22,10 +22,6 @@ export const asideHeaderConfig = {
                 type: 'switch',
                 defaultValue: true,
             },
-            multipleTooltip: {
-                type: 'switch',
-                defaultValue: false,
-            },
             subheaderItemsVisible: {
                 type: 'switch',
                 defaultValue: false,

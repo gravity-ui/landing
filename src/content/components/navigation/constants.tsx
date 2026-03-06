@@ -1,5 +1,5 @@
 import {Bell, Flag, ListCheck, Plus} from '@gravity-ui/icons';
-import {MenuItem} from '@gravity-ui/navigation';
+import {AsideHeaderItem} from '@gravity-ui/navigation';
 
 function renderTag(tag: string) {
     return (
@@ -10,7 +10,7 @@ function renderTag(tag: string) {
     );
 }
 
-export const menuItems: MenuItem[] = [
+export const menuItems: AsideHeaderItem[] = [
     {
         id: 'overview',
         title: 'Overview',
@@ -38,7 +38,6 @@ export const menuItems: MenuItem[] = [
         title: 'Create smth',
         type: 'action',
         icon: Plus,
-        afterMoreButton: true,
         onItemClick({id, title, current}) {
             alert(JSON.stringify({id, title, current}));
         },

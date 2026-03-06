@@ -22,7 +22,7 @@ export const AsideHeaderComponent = ({
     ...restProps
 }: AsideHeaderComponentProps) => {
     const [visiblePanel, setVisiblePanel] = React.useState<Panel>();
-    const [compact, setCompact] = React.useState(false);
+    const [pinned, setPinned] = React.useState(true);
 
     const subheaderItems: AsideHeaderItem[] = [
         {
@@ -38,7 +38,7 @@ export const AsideHeaderComponent = ({
     return (
         <AsideHeader
             {...restProps}
-            compact={compact}
+            pinned={pinned}
             logo={{text: 'Gravity UI', icon: Aperture}}
             menuItems={menuItems}
             subheaderItems={subheaderItemsVisible ? subheaderItems : []}
@@ -63,7 +63,7 @@ export const AsideHeaderComponent = ({
                     open: visiblePanel === Panel.Favorites,
                 },
             ]}
-            renderFooter={({compact}) => (
+            renderFooter={({isExpanded}) => (
                 <React.Fragment>
                     <FooterItem
                         id="favorites"
@@ -76,7 +76,7 @@ export const AsideHeaderComponent = ({
                                 visiblePanel === Panel.Favorites ? undefined : Panel.Favorites,
                             );
                         }}
-                        compact={compact}
+                        isExpanded={isExpanded}
                     />
                     <FooterItem
                         id="settings"
@@ -89,11 +89,11 @@ export const AsideHeaderComponent = ({
                                 visiblePanel === Panel.Settings ? undefined : Panel.Settings,
                             );
                         }}
-                        compact={compact}
+                        isExpanded={isExpanded}
                     />
                 </React.Fragment>
             )}
-            onChangeCompact={setCompact}
+            onChangePinned={setPinned}
         />
     );
 };
