@@ -333,7 +333,11 @@ export function TasksPreview(props: Pick<PreviewWrapperProps, 'styles'>) {
                             alignItems="flex-start"
                         >
                             <Box spacing={{px: 4, py: 2}} width="100%" minWidth="100%">
-                                <Logo {...LOGO_PROPS} className={spacing({mx: 7, mb: 2})} />
+                                <Logo
+                                    {...LOGO_PROPS}
+                                    className={spacing({mx: 7, mb: 2})}
+                                    placement="header"
+                                />
 
                                 <Divider orientation="horizontal" className={spacing({mb: 3})} />
 
