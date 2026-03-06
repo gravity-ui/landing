@@ -8,6 +8,8 @@ Eine Bibliothek zur Visualisierung von Graphen, die das Beste aus beiden Welten 
 
 Keine Kompromisse mehr zwischen Leistung und Interaktivität. Perfekt für große Diagramme, Flussdiagramme und knotenbasierte Editoren.
 
+![Vorschau Graph.](docs/_static/graph_preview.png)
+
 ## Motivation
 
 Moderne Webanwendungen erfordern oft komplexe Visualisierungen und Interaktivität, aber bestehende Lösungen konzentrieren sich typischerweise auf eine einzige Rendering-Technologie:
@@ -26,8 +28,8 @@ Die Bibliothek verwendet ein intelligentes Rendering-System, das den Übergang z
 
 1. Bei niedrigen Zoomstufen wird alles auf Canvas gerendert, um die Leistung zu optimieren.
 2. Beim Hineinzoomen in die Detailansicht:
-   - Der `GraphCanvas`-Komponente verfolgt Änderungen an der Kameraansicht und dem Maßstab.
-   - Berechnet, welche Blöcke im aktuellen Ansichtsbereich sichtbar sind (mit Polsterung für sanftes Scrollen).
+   - Verfolgt die `GraphCanvas`-Komponente Änderungen an der Kameraansicht und dem Maßstab.
+   - Berechnet, welche Blöcke im aktuellen Ansichtsfenster sichtbar sind (mit Polsterung für sanftes Scrollen).
    - Rendert React-Komponenten nur für sichtbare Blöcke.
    - Aktualisiert die Liste automatisch beim Scrollen oder Zoomen.
    - Entfernt React-Komponenten beim Auszoomen.
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}
@@ -149,7 +151,7 @@ export function GraphEditor() {
 
 ```
 
-### Vanilla JavaScript Beispiel
+### Vanilla JavaScript-Beispiel
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
@@ -261,4 +263,4 @@ graph.zoomTo("center", { padding: 100 });
 
 4. Blöcke und Verbindungen
    - [Block-Gruppen](docs/blocks/groups.md)
-   - [Canvas Verbindungssystem](docs/connections/canvas-connection-system.md)
+   - [Canvas Connection System](docs/connections/canvas-connection-system.md)

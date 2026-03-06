@@ -1,18 +1,20 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [迁移指南：从 0.x 到 1.x →](docs/migration-guides/v0-to-v1.md)
+> [从 0.x 迁移到 1.x 的指南 →](docs/migration-guides/v0-to-v1.md)
 
-一个图形可视化库，融合了两种最佳方案：
+一个图形可视化库，融合了两全其美的优势：
 - **Canvas**：在查看整个图形时提供高**性能**
 - **HTML/React**：在缩放时提供丰富的**交互性**
 
-告别在性能和交互性之间二选一的困境。非常适合大型图表、流程图和节点式编辑器。
+告别在性能和交互性之间做选择。非常适合大型图表、流程图和基于节点的编辑器。
+
+![preview graph.](docs/_static/graph_preview.png)
 
 ## 动机
 
-现代 Web 应用通常需要复杂的可视化和交互功能，但现有的解决方案通常只专注于一种渲染技术：
+现代 Web 应用通常需要复杂的可视化和交互性，但现有的解决方案通常只专注于一种渲染技术：
 
-- **Canvas**：提供复杂图形的高性能，但在文本处理和交互性方面受限。
+- **Canvas**：为复杂图形提供高**性能**，但在文本处理和交互性方面受限。
 - **HTML DOM**：方便构建界面，但对于复杂图形或大量元素效率较低。
 
 @gravity-ui/graph 通过根据缩放级别自动在 Canvas 和 HTML 之间切换来解决这个问题：
@@ -26,7 +28,7 @@
 
 1. 在低缩放级别，所有内容都在 Canvas 上渲染以获得性能。
 2. 放大到详细视图时，`GraphCanvas` 组件会：
-   - 跟踪相机视口和缩放变化
+   - 跟踪摄像机的视口和缩放变化
    - 计算当前视口中可见的块（带有填充以实现平滑滚动）
    - **仅为可见块渲染 React 组件**
    - 在滚动或缩放时自动更新列表
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}
@@ -161,7 +163,7 @@ container.style.height = '100vh';
 container.style.overflow = 'hidden';
 document.body.appendChild(container);
 
-// 使用配置初始化图表
+// 使用配置初始化图
 const graph = new Graph({
     configurationName: "example",
     blocks: [],

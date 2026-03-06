@@ -1,16 +1,18 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [0.x から 1.x への移行ガイド →](docs/migration-guides/v0-to-v1.md)
+> [v0.x から v1.x への移行ガイド →](docs/migration-guides/v0-to-v1.md)
 
 両方の長所を兼ね備えたグラフ描画ライブラリです。
-- グラフ全体を表示する際の高パフォーマンスのために Canvas を使用
+- 全体像を表示する際の高パフォーマンスのために Canvas を使用
 - ズームイン時のリッチなインタラクションのために HTML/React を使用
 
 パフォーマンスとインタラクティブ性のどちらかを選択する必要はもうありません。大規模な図、フローチャート、ノードベースのエディタに最適です。
 
+![preview graph.](docs/_static/graph_preview.png)
+
 ## モチベーション
 
-最新の Web アプリケーションでは、複雑な描画とインタラクションが求められることがよくありますが、既存のソリューションは通常、単一のレンダリング技術に焦点を当てています。
+現代のウェブアプリケーションでは、複雑な描画とインタラクションが求められることがよくありますが、既存のソリューションは通常、単一のレンダリング技術に焦点を当てています。
 
 - **Canvas** は複雑なグラフィックスに対して高いパフォーマンスを提供しますが、テキスト処理やインタラクションには制限があります。
 - **HTML DOM** はインターフェースには便利ですが、複雑なグラフィックスや多数の要素には効率が悪いです。
@@ -25,9 +27,9 @@
 このライブラリは、Canvas と React コンポーネント間の遷移を自動的に管理するスマートなレンダリングシステムを使用しています。
 
 1. 低いズームレベルでは、パフォーマンスのためにすべて Canvas 上にレンダリングされます。
-2. 詳細表示にズームインすると、`GraphCanvas` コンポーネントは次の処理を行います。
+2. 詳細表示にズームインすると、`GraphCanvas` コンポーネントは以下の処理を行います。
    - カメラのビューポートとスケールの変更を追跡します。
-   - 現在のビューポートで表示されているブロックを計算します（スムーズなスクロールのためのパディング付き）。
+   - 現在のビューポートで表示されているブロックを（スムーズなスクロールのためのパディングを含めて）計算します。
    - 表示されているブロックに対してのみ React コンポーネントをレンダリングします。
    - スクロールまたはズーム時にリストを自動的に更新します。
    - ズームアウト時に React コンポーネントを削除します。
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}
@@ -175,6 +177,7 @@ const graph = new Graph({
 }, container);
 ```
 
+```javascript
 // ブロックと接続を追加
 graph.setEntities({
     blocks: [

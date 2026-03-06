@@ -8,6 +8,8 @@
 
 성능과 상호작용성 사이에서 더 이상 선택할 필요가 없습니다. 대규모 다이어그램, 순서도 및 노드 기반 편집기에 완벽합니다.
 
+![preview graph.](docs/_static/graph_preview.png)
+
 ## 동기
 
 현대 웹 애플리케이션은 종종 복잡한 시각화 및 상호작용을 요구하지만, 기존 솔루션은 일반적으로 단일 렌더링 기술에 집중합니다.
@@ -15,18 +17,18 @@
 - **Canvas**는 복잡한 그래픽에 대해 높은 성능을 제공하지만, 텍스트 처리 및 상호작용에는 제한이 있습니다.
 - **HTML DOM**은 인터페이스에 편리하지만, 복잡한 그래픽이나 많은 수의 요소에는 효율성이 떨어집니다.
 
-@gravity-ui/graph는 확대/축소 수준에 따라 Canvas와 HTML 간에 자동으로 전환하여 이 문제를 해결합니다.
+@gravity-ui/graph는 줌 레벨에 따라 Canvas와 HTML 간에 자동으로 전환하여 이 문제를 해결합니다.
 - **축소 시**: 전체 그래프의 효율적인 렌더링을 위해 Canvas 사용
-- **중간 확대 시**: 기본 상호작용 기능을 갖춘 개략적인 보기 표시
+- **중간 줌**: 기본적인 상호작용이 가능한 개략적인 보기 표시
 - **확대 시**: 풍부한 상호작용을 위해 HTML/React 컴포넌트로 전환
 
 ## 작동 방식
 
 이 라이브러리는 Canvas와 React 컴포넌트 간의 전환을 자동으로 관리하는 스마트 렌더링 시스템을 사용합니다.
 
-1. 낮은 확대/축소 수준에서는 성능을 위해 모든 것이 Canvas에 렌더링됩니다.
+1. 낮은 줌 레벨에서는 성능을 위해 모든 것이 Canvas에 렌더링됩니다.
 2. 상세 보기로 확대할 때 `GraphCanvas` 컴포넌트는 다음을 수행합니다.
-   - 카메라 뷰포트 및 확대/축소 변경 사항을 추적합니다.
+   - 카메라 뷰포트 및 스케일 변경을 추적합니다.
    - 현재 뷰포트에서 보이는 블록을 계산합니다 (부드러운 스크롤을 위한 패딩 포함).
    - 보이는 블록에 대해서만 React 컴포넌트를 렌더링합니다.
    - 스크롤 또는 확대/축소 시 목록을 자동으로 업데이트합니다.
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}
@@ -61,7 +63,7 @@ npm install @gravity-ui/graph
 
 ### React 예제
 
-[상세 React 컴포넌트 문서](docs/react/usage.md)
+[자세한 React 컴포넌트 문서](docs/react/usage.md)
 
 ```typescript
 import React, { useEffect } from "react";
@@ -149,7 +151,7 @@ export function GraphEditor() {
 
 ```
 
-### Vanilla JavaScript 예제
+### 일반 JavaScript 예제
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
