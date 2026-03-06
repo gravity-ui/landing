@@ -8,7 +8,7 @@ Biblioteca de componentes de UI para chats de IA construida con principios de At
 
 ## Recursos
 
-### ![Logo del Globo Claro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Logo del Globo Oscuro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Sitio web](https://gravity-ui.com/libraries/aikit)
+### ![Logo de Globo Claro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Logo de Globo Oscuro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Sitio web](https://gravity-ui.com/libraries/aikit)
 
 ### ![Logo de Storybook Claro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Logo de Storybook Oscuro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/aikit/)
 
@@ -18,15 +18,15 @@ Biblioteca de componentes de UI para chats de IA construida con principios de At
 
 ## Descripción
 
-**@gravity-ui/aikit** es una biblioteca de componentes React flexible y extensible para construir chats de IA de cualquier complejidad. La biblioteca proporciona un conjunto de componentes listos para usar que se pueden utilizar tal cual o personalizar para adaptarlos a tus necesidades.
+**@gravity-ui/aikit** es una biblioteca de componentes React flexible y extensible para construir chats de IA de cualquier complejidad. La biblioteca proporciona un conjunto de componentes listos para usar que se pueden utilizar tal cual o personalizar para adaptarse a tus necesidades.
 
 ### Características principales
 
-- 🎨 **Atomic Design** — jerarquía de componentes clara desde átomos hasta páginas
+- 🎨 **Atomic Design** — jerarquía de componentes clara, desde átomos hasta páginas
 - 🔧 **Independiente del SDK** — independiente de SDKs de IA específicos
 - 🎭 **Enfoque de dos niveles** — componentes listos para usar + hooks para personalización
-- 🎨 **Variables CSS** — tematización fácil sin sobrescribir componentes
-- 📦 **TypeScript** — seguridad de tipos completa lista para usar
+- 🎨 **Variables CSS** — tematización sencilla sin sobrescribir componentes
+- 📦 **TypeScript** — seguridad de tipos completa desde el principio
 - 🔌 **Extensible** — sistema de registro de tipos de mensajes personalizados
 
 ## Estructura del proyecto
@@ -35,7 +35,7 @@ Biblioteca de componentes de UI para chats de IA construida con principios de At
 src/
 ├── components/
 │   ├── atoms/          # Elementos básicos de UI indivisibles
-│   ├── molecules/      # Grupos simples de átomos
+│   ├── molecules/      # Grupos sencillos de átomos
 │   ├── organisms/      # Componentes complejos con lógica
 │   ├── templates/      # Diseños completos
 │   └── pages/          # Integraciones completas con datos
@@ -101,14 +101,14 @@ Elementos básicos de UI indivisibles sin lógica de negocio:
 - `InlineCitation` — citas de texto
 - `Loader` — indicador de carga
 - `MarkdownRenderer` — renderizador de Yandex Flavored Markdown
-- `MessageBalloon` — contenedor de mensaje
+- `MessageBalloon` — contenedor de mensajes
 - `Shimmer` — efecto de animación de carga
 - `SubmitButton` — botón de envío con estados
 - `ToolIndicator` — indicador de estado de ejecución de herramienta
 
 ### 🔸 Moléculas
 
-Combinaciones simples de átomos:
+Combinaciones sencillas de átomos:
 
 - `BaseMessage` — contenedor base para todos los tipos de mensajes
 - `ButtonGroup` — grupo de botones con soporte de orientación
@@ -117,7 +117,7 @@ Combinaciones simples de átomos:
 - `PromptInputFooter` — pie de página con iconos de acción y botón de envío
 - `PromptInputHeader` — encabezado con elementos de contexto e indicador
 - `PromptInputPanel` — panel contenedor para contenido personalizado
-- `Suggestions` — botones de sugerencia clickeables
+- `Suggestions` — botones de sugerencias clickeables
 - `Tabs` — pestañas de navegación con funcionalidad de eliminación
 - `ToolFooter` — pie de página de mensaje de herramienta con acciones
 - `ToolHeader` — encabezado de mensaje de herramienta con icono y acciones
@@ -185,10 +185,8 @@ Si estás en Linux, puedes ejecutar las pruebas localmente:
 ```bash
 # Instalar navegadores de Playwright (ejecutar una vez)
 npm run playwright:install
-
 # Ejecutar todas las pruebas de componentes
 npm run playwright
-
 # Actualizar las líneas base de las capturas de pantalla
 npm run playwright:update
 ```

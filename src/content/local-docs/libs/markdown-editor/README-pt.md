@@ -63,9 +63,7 @@ Leia mais:
 ### Desenvolvimento
 
 1. Instale o ambiente Nodejs, a versão é especificada no arquivo `.nvmrc`. Recomendamos o uso de [NVM](https://github.com/nvm-sh/nvm) ou uma ferramenta similar.
-2. Instale o [pnpm](https://pnpm.io/installation), a versão é especificada em `package.json` na propriedade "packageManager".
-  
-   Você pode usar o [Corepack](https://nodejs.org/api/corepack.html), ou apenas instalar via npm: execute `npm deps:global --force`.
+2. Instale o [pnpm](https://pnpm.io/installation), a versão é especificada na propriedade "packageManager" do `package.json`.
 3. Instale as dependências: `pnpm i`
 4. Execute o servidor de desenvolvimento do storybook: `pnpm start`
 

@@ -1,6 +1,6 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [Guide de migration de la version 0.x vers 1.x →](docs/migration-guides/v0-to-v1.md)
+> [Guide de migration de la version 0.x vers la version 1.x →](docs/migration-guides/v0-to-v1.md)
 
 Une bibliothèque de visualisation de graphes qui combine le meilleur des deux mondes :
 - Canvas pour des performances élevées lors de la visualisation du graphe complet
@@ -8,29 +8,31 @@ Une bibliothèque de visualisation de graphes qui combine le meilleur des deux m
 
 Fini le choix entre performance et interactivité. Idéal pour les grands diagrammes, les organigrammes et les éditeurs basés sur des nœuds.
 
+![preview graph.](docs/_static/graph_preview.png)
+
 ## Motivation
 
 Les applications web modernes nécessitent souvent une visualisation et une interactivité complexes, mais les solutions existantes se concentrent généralement sur une seule technologie de rendu :
 
-- **Canvas** offre des performances élevées pour les graphiques complexes mais est limité dans la gestion du texte et l'interactivité.
-- **DOM HTML** est pratique pour les interfaces mais moins efficace pour les graphiques complexes ou un grand nombre d'éléments.
+- **Canvas** offre des performances élevées pour les graphiques complexes, mais est limité dans la gestion du texte et l'interactivité.
+- **DOM HTML** est pratique pour les interfaces, mais moins efficace pour les graphiques complexes ou un grand nombre d'éléments.
 
 @gravity-ui/graph résout ce problème en basculant automatiquement entre Canvas et HTML en fonction du niveau de zoom :
 - **Dézoomé** : Utilise Canvas pour un rendu efficace du graphe complet
-- **Zoom Moyen** : Affiche une vue schématique avec une interactivité de base
+- **Zoom moyen** : Affiche une vue schématique avec une interactivité de base
 - **Zoomé** : Bascule vers des composants HTML/React pour des interactions riches
 
 ## Comment ça marche
 
 La bibliothèque utilise un système de rendu intelligent qui gère automatiquement la transition entre Canvas et les composants React :
 
-1. Aux niveaux de zoom bas, tout est rendu sur Canvas pour des performances optimales.
+1. Aux faibles niveaux de zoom, tout est rendu sur Canvas pour des raisons de performance.
 2. Lors du zoom avant vers une vue détaillée, le composant `GraphCanvas` :
-   - Suit les changements de la caméra (position et échelle)
-   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un padding pour un défilement fluide)
-   - Rend les composants React uniquement pour les blocs visibles
-   - Met à jour automatiquement la liste lors du défilement ou du zoom
-   - Supprime les composants React lors du dézoom
+   - Suit les changements de la caméra et de l'échelle.
+   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un padding pour un défilement fluide).
+   - Rend les composants React uniquement pour les blocs visibles.
+   - Met à jour automatiquement la liste lors du défilement ou du zoom.
+   - Supprime les composants React lors du dézoom.
 
 ```typescript
 // Exemple de rendu de composants React
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}

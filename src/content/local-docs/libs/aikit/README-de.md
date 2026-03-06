@@ -51,7 +51,7 @@ src/
 npm install @gravity-ui/aikit
 ```
 
-## Erste Schritte
+## Schnelleinstieg
 
 ```typescript
 import { ChatContainer } from '@gravity-ui/aikit';
@@ -92,7 +92,7 @@ Die Bibliothek basiert auf den Prinzipien des **Atomic Design**:
 Grundlegende, unteilbare UI-Elemente ohne Geschäftslogik:
 
 - `ActionButton` — Schaltfläche mit integriertem Tooltip
-- `Alert` — Benachrichtigungsnachrichten mit Varianten
+- `Alert` — Alarmmeldungen mit Varianten
 - `ChatDate` — Datumsformatierung mit relativen Daten
 - `ContextIndicator` — Anzeige der Nutzung von Token-Kontext
 - `ContextItem` — Kontext-Label mit Entfernen-Aktion
@@ -104,7 +104,7 @@ Grundlegende, unteilbare UI-Elemente ohne Geschäftslogik:
 - `MessageBalloon` — Nachrichten-Wrapper
 - `Shimmer` — Ladeanimations-Effekt
 - `SubmitButton` — Senden-Schaltfläche mit Zuständen
-- `ToolIndicator` — Anzeige des Status der Werkzeugausführung
+- `ToolIndicator` — Anzeige des Status der Tool-Ausführung
 
 ### 🔸 Moleküle
 
@@ -119,8 +119,8 @@ Einfache Kombinationen von Atomen:
 - `PromptInputPanel` — Panel-Container für benutzerdefinierten Inhalt
 - `Suggestions` — klickbare Vorschlags-Schaltflächen
 - `Tabs` — Navigations-Tabs mit Löschfunktion
-- `ToolFooter` — Fußzeile für Werkzeugnachrichten mit Aktionen
-- `ToolHeader` — Kopfzeile für Werkzeugnachrichten mit Symbol und Aktionen
+- `ToolFooter` — Fußzeile für Tool-Nachrichten mit Aktionen
+- `ToolHeader` — Kopfzeile für Tool-Nachrichten mit Symbol und Aktionen
 
 ### 🔶 Organismen
 
@@ -131,7 +131,7 @@ Komplexe Komponenten mit interner Logik:
 - `MessageList` — Nachrichtenliste
 - `PromptInput` — Eingabefeld für Nachrichten
 - `ThinkingMessage` — Denkprozess der KI
-- `ToolMessage` — Ausführung von Werkzeugen
+- `ToolMessage` — Ausführung von Tools
 - `UserMessage` — Benutzernachricht
 
 ### 📄 Vorlagen
@@ -156,7 +156,7 @@ Vollständige Integrationen:
 - [Testanleitung](./docs/TESTING.md)
 - [Playwright-Anleitung](./playwright/README.md)
 
-## Tests
+## Testen
 
 Das Projekt verwendet Playwright Component Testing für visuelle Regressionstests.
 
@@ -178,17 +178,15 @@ npm run playwright:docker -- --grep "@ComponentName"
 npm run playwright:docker:clear-cache
 ```
 
-### Lokale Tests (nur Linux)
+### Lokales Testen (nur Linux)
 
 Wenn Sie unter Linux arbeiten, können Sie Tests lokal ausführen:
 
 ```bash
 # Playwright-Browser installieren (einmal ausführen)
 npm run playwright:install
-
 # Alle Komponententests ausführen
 npm run playwright
-
 # Screenshot-Baselines aktualisieren
 npm run playwright:update
 ```
