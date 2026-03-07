@@ -1,4 +1,3 @@
-import {Flex} from '@gravity-ui/uikit';
 import React from 'react';
 import {block} from 'src/utils';
 
@@ -20,10 +19,10 @@ export const UISamplesMobile: React.FC = () => {
     const samples = useSampleComponents();
 
     return (
-        <Flex direction="column" gap={4} className={b()}>
+        <div className={b()}>
             {samples.map(({type, imagePreviewSrc}) => (
                 <UISampleCard key={type} imageSrc={imagePreviewSrc} />
             ))}
-        </Flex>
+        </div>
     );
 };

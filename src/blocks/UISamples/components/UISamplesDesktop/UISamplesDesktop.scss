@@ -4,6 +4,10 @@
 $block: '.#{variables.$ns}ui-samples-block-desktop';
 
 #{$block} {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
     @include baseMixins.window-breakpoint('sm') {
         display: none;
     }

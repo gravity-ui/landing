@@ -1,5 +1,6 @@
 import '@diplodoc/transform/dist/css/base.css';
 import '@gravity-ui/blog-constructor/styles/styles.css';
+import '@gravity-ui/markdown-editor/styles/styles.css';
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import {NextComponentType} from 'next';
