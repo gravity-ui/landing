@@ -39,7 +39,14 @@ const AikitPlayground = dynamic(
     },
 );
 
-export const availablePlaygrounds = ['markdown-editor', 'graph', 'timeline', 'aikit'];
+const ChartsPlayground = dynamic(
+    () => import('../../../../components/ChartsPlayground').then((mod) => mod.ChartsPlayground),
+    {
+        ssr: false,
+    },
+);
+
+export const availablePlaygrounds = ['markdown-editor', 'graph', 'timeline', 'aikit', 'charts'];
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const libId = Array.isArray(context.params?.libId)
@@ -69,6 +76,7 @@ export const PlaygroundPage = ({libId}: {libId: string}) => {
             {libId === 'graph' && <GraphPlayground />}
             {libId === 'timeline' && <TimelinePlayground />}
             {libId === 'aikit' && <AikitPlayground />}
+            {libId === 'charts' && <ChartsPlayground />}
         </Layout>
     );
 };

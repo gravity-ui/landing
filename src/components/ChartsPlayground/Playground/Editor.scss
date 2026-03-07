@@ -1,0 +1,21 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}editor';
+
+#{$block} {
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+
+    &__actions {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: var(--g-spacing-3);
+
+        .g-button {
+            --_--border-radius: 8px;
+        }
+    }
+}

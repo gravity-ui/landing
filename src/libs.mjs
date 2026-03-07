@@ -480,4 +480,17 @@ export const libs = [
             'https://raw.githubusercontent.com/gravity-ui/page-constructor-builder/main/CHANGELOG.md',
         mainBranch: 'main',
     },
+    {
+        id: 'charts',
+        githubId: 'gravity-ui/charts',
+        npmId: '@gravity-ui/charts',
+        title: 'Charts',
+        primary: false,
+        landing: false,
+        tags: ['ui'],
+        storybookUrl: 'https://preview.gravity-ui.com/charts/',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/charts/main'),
+        changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/charts/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
 ];
