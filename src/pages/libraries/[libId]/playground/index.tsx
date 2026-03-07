@@ -3,6 +3,7 @@ import {useTranslation} from 'next-i18next';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
+import {AikitPlayground} from '../../../../components/AikitPlayground';
 import {Layout} from '../../../../components/Layout/Layout';
 import {getI18nProps} from '../../../../utils';
 
@@ -27,13 +28,6 @@ const GraphPlayground = dynamic(
 
 const TimelinePlayground = dynamic(
     () => import('../../../../components/TimelinePlayground').then((mod) => mod.TimelinePlayground),
-    {
-        ssr: false,
-    },
-);
-
-const AikitPlayground = dynamic(
-    () => import('../../../../components/AikitPlayground').then((mod) => mod.AikitPlayground),
     {
         ssr: false,
     },

@@ -8,6 +8,8 @@ $block: '.#{variables.$ns}ui-samples-mobile';
 
     @include baseMixins.window-breakpoint('sm') {
         display: flex;
+        flex-direction: column;
+        gap: 4px;
     }
 
     &__card {
