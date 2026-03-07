@@ -36,6 +36,8 @@ $block: '.#{variables.$ns}github-stars-promotion';
     }
 
     &__text {
+        --g-color-text-primary: var(--g-color-text-dark-primary);
+
         display: flex;
         align-items: center;
         gap: var(--g-spacing-1);
