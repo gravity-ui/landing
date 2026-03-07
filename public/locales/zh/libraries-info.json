@@ -22,7 +22,7 @@
   "description_react-data-table": "用于渲染大型复杂表格的 React 组件。",
   "description_unipika": "数据格式化库。",
   "description_ui-logger": "简单的客户端日志记录器。",
-  "description_oauth-clients": "客户端 OAuth 库，提供对身份验证流程的便捷抽象。",
+  "description_oauth-clients": "客户端 OAuth 库，提供对认证流程的便捷抽象。",
   "description_i18n": "Gravity UI 项目的国际化辅助函数。",
   "description_eslint-config": "Gravity UI 项目的 ESLint 配置预设。",
   "description_tsconfig": "Gravity UI 项目的 TypeScript 编译器配置预设。",
@@ -31,11 +31,12 @@
   "description_babel-preset": "Gravity UI 项目的 Babel 配置预设。",
   "description_browserslist-config": "我们在服务中使用的 Browserslist 配置预设。",
   "description_markdown-editor": "一个强大的 Markdown 编辑工具，结合了所见即所得和标记模式。",
-  "description_graph": "高性能图形渲染器，具有动态的比例感知细节级别。",
+  "description_graph": "高性能图形渲染器，具有动态的比例感知细节。",
   "description_data-source": "数据获取的包装器。",
   "description_webpack-i18n-assets-plugin": "一个 Webpack 插件，用于将本地化函数 (i18n) 的调用替换为目标文本。",
   "description_table": "用于以表格格式可视化数据的库。",
   "description_timeline": "一个基于 React 的库，用于使用 canvas 渲染构建交互式时间线可视化。",
   "description_page-constructor-builder": "一个强大的命令行实用程序，用于从 YAML 配置构建静态页面。",
-  "description_aikit": "一个灵活的 React 组件库，用于遵循原子设计原则构建 AI 聊天。"
+  "description_aikit": "一个灵活的 React 组件库，用于遵循原子设计原则构建 AI 聊天。",
+  "description_charts": "一个灵活的 JavaScript 库，用于使用 React 进行数据可视化和图表渲染。"
 }
