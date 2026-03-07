@@ -1,11 +1,11 @@
 {
   "description_uikit": "Gravityでサービスを構築するための基本的なUIコンポーネントとトークン。",
   "description_components": "一連の複雑なReactコンポーネント。",
-  "description_icons": "プロジェクト用の、数百ものモダンなSVGアイコンセット。",
+  "description_icons": "プロジェクト用の数百ものモダンなSVGアイコンセット。",
   "description_illustrations": "データステータスを表示するためのイラストセット。",
   "description_dynamic-forms": "JSONスキーマで記述された、きれいで機能的なReactフォームをレンダリングするためのライブラリ。",
   "description_page-constructor": "プロモーションページやランディングページを素早く作成するための、スタイリッシュで機能的なブロックセット。",
-  "description_blog-constructor": "Page constructorライブラリをベースにした、ブログライクなサービスを作成するためのライブラリ。",
+  "description_blog-constructor": "Page constructorライブラリをベースにした、ブログのようなサービスを作成するためのライブラリ。",
   "description_chartkit": "デザインシステムと統合されたデータ可視化スイート。",
   "description_dashkit": "インタラクティブなダッシュボードを構築するためのグリッドコンポーネント。",
   "description_yagr": "uPlotをベースにした、高性能なキャンバスチャートレンダラー。",
@@ -29,13 +29,14 @@
   "description_prettier-config": "Gravity UIプロジェクト用のPrettier設定プリセット。",
   "description_stylelint-config": "Gravity UIプロジェクト用のStylelint設定プリセット。",
   "description_babel-preset": "Gravity UIプロジェクト用のBabel設定プリセット。",
-  "description_browserslist-config": "当社のサービスで使用されているBrowserslist設定プリセット。",
+  "description_browserslist-config": "当社のサービスで使用されるBrowserslist設定プリセット。",
   "description_markdown-editor": "WYSIWYGモードとマークアップモードを組み合わせた、Markdownを扱うための強力なツール。",
   "description_graph": "動的なスケール対応の詳細化を備えた高性能グラフレンダラー。",
   "description_data-source": "データ取得のラッパー。",
   "description_webpack-i18n-assets-plugin": "ローカライゼーション関数（i18n）の呼び出しをターゲットテキストに置き換えるWebpackプラグイン。",
   "description_table": "表形式でデータを可視化するためのライブラリ。",
   "description_timeline": "キャンバスレンダリングによるインタラクティブなタイムライン可視化を構築するためのReactベースのライブラリ。",
-  "description_page-constructor-builder": "YAML設定から静的ページを構築するための強力なコマンドラインユーティリティ。",
-  "description_aikit": "アトミックデザインの原則に基づいたAIチャット構築のための柔軟なReactコンポーネントライブラリ。"
+  "description_page-constructor-builder": "YAML設定から静的ページをビルドするための強力なコマンドラインユーティリティ。",
+  "description_aikit": "アトミックデザインの原則でAIチャットを構築するための柔軟なReactコンポーネントライブラリ。",
+  "description_charts": "Reactを使用したデータ可視化とチャートレンダリングのための柔軟なJavaScriptライブラリ。"
 }

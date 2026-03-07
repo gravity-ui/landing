@@ -3,7 +3,7 @@
   "description_components": "Un ensemble de composants React complexes.",
   "description_icons": "Ensemble de centaines d'icônes SVG modernes et variées pour vos projets.",
   "description_illustrations": "Un ensemble d'illustrations pour afficher les statuts des données.",
-  "description_dynamic-forms": "Bibliothèque pour le rendu de formulaires React soignés et fonctionnels décrits par un schéma JSON",
+  "description_dynamic-forms": "Bibliothèque pour le rendu de formulaires React soignés et fonctionnels décrits par un schéma JSON.",
   "description_page-constructor": "Un ensemble de blocs élégants et fonctionnels pour créer rapidement des pages promotionnelles et de destination.",
   "description_blog-constructor": "Une bibliothèque basée sur la bibliothèque Page constructor pour la création de services de type blog.",
   "description_chartkit": "Une suite de visualisation de données intégrée à notre système de conception.",
@@ -31,11 +31,12 @@
   "description_babel-preset": "Preset de configuration Babel pour les projets Gravity UI.",
   "description_browserslist-config": "Preset de configuration Browserslist utilisé dans nos services.",
   "description_markdown-editor": "Un outil puissant pour travailler avec Markdown, qui combine les modes WYSIWYG et Markup.",
-  "description_graph": "Moteur de rendu de graphes haute performance avec une détailisation dynamique adaptée à l'échelle",
-  "description_data-source": "Un wrapper autour de la récupération de données.",
+  "description_graph": "Moteur de rendu de graphes haute performance avec une détailisation dynamique adaptée à l'échelle.",
+  "description_data-source": "Un wrapper pour la récupération de données.",
   "description_webpack-i18n-assets-plugin": "Un plugin pour Webpack qui remplace les appels aux fonctions de localisation (i18n) par les textes cibles.",
-  "description_table": "Bibliothèque pour visualiser des données au format tabulaire.",
+  "description_table": "Bibliothèque pour la visualisation de données au format tabulaire.",
   "description_timeline": "Une bibliothèque basée sur React pour la création de visualisations de chronologie interactives avec rendu sur toile.",
-  "description_page-constructor-builder": "Un utilitaire en ligne de commande puissant pour construire des pages statiques à partir de configurations YAML",
-  "description_aikit": "Une bibliothèque de composants React flexible pour la création de chats IA selon les principes de la conception atomique."
+  "description_page-constructor-builder": "Un utilitaire en ligne de commande puissant pour construire des pages statiques à partir de configurations YAML.",
+  "description_aikit": "Une bibliothèque de composants React flexible pour la création de chats IA selon les principes de la conception atomique.",
+  "description_charts": "Une bibliothèque JavaScript flexible pour la visualisation de données et le rendu de graphiques à l'aide de React."
 }

@@ -8,7 +8,7 @@
   "description_blog-constructor": "Uma biblioteca baseada na biblioteca Page constructor para criar serviços semelhantes a blogs.",
   "description_chartkit": "Uma suíte de visualização de dados integrada ao nosso sistema de design.",
   "description_dashkit": "Um componente de grade para construir dashboards interativos.",
-  "description_yagr": "Um renderizador de gráficos de tela de alto desempenho, baseado em uPlot.",
+  "description_yagr": "Um renderizador de gráficos de canvas de alto desempenho, baseado em uPlot.",
   "description_nodekit": "Um kit de ferramentas simples para seus aplicativos, scripts e bibliotecas Node.js.",
   "description_expresskit": "Wrapper leve do express.js que se integra ao NodeKit.",
   "description_app-layout": "Gerador de layout HTML usado em nossos aplicativos SPA.",
@@ -37,5 +37,6 @@
   "description_table": "Biblioteca para visualizar dados em formato tabular.",
   "description_timeline": "Uma biblioteca baseada em React para construir visualizações de linha do tempo interativas com renderização em canvas.",
   "description_page-constructor-builder": "Uma poderosa utilidade de linha de comando para construir páginas estáticas a partir de configurações YAML",
-  "description_aikit": "Uma biblioteca de componentes React flexível para construir chats de IA com princípios de Design Atômico."
+  "description_aikit": "Uma biblioteca de componentes React flexível para construir chats de IA com princípios de Design Atômico.",
+  "description_charts": "Uma biblioteca JavaScript flexível para visualização de dados e renderização de gráficos usando React."
 }

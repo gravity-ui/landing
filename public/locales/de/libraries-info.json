@@ -8,13 +8,13 @@
   "description_blog-constructor": "Eine Bibliothek, die auf der Page Constructor-Bibliothek basiert, zur Erstellung von blogähnlichen Diensten.",
   "description_chartkit": "Eine Datenvisualisierungs-Suite, die in unser Designsystem integriert ist.",
   "description_dashkit": "Eine Grid-Komponente zum Erstellen interaktiver Dashboards.",
-  "description_yagr": "Ein Hochleistungs-Renderer für Canvas-Diagramme, basierend auf uPlot.",
+  "description_yagr": "Ein Hochleistungs-Canvas-Chart-Renderer, basierend auf uPlot.",
   "description_nodekit": "Ein einfaches Toolkit für Ihre Node.js-Apps, Skripte und Bibliotheken.",
   "description_expresskit": "Leichter Express.js-Wrapper, der sich in NodeKit integriert.",
   "description_app-layout": "HTML-Layout-Generator, der in unseren SPA-Anwendungen verwendet wird.",
   "description_app-builder": "Webpack-basierter Builder für statische Assets, der in unseren SPA-Anwendungen verwendet wird.",
   "description_navigation": "Ein kompaktes und erweiterbares Navigationspanel für komplexe Dienste.",
-  "description_date-utils": "Hilfsprogramme zur Verwaltung von Datums- und Zeitwerten.",
+  "description_date-utils": "Helfer für die Verwaltung von Datums- und Zeitwerten.",
   "description_date-components": "Verschiedene Datums-Komponenten.",
   "description_axios-wrapper": "Axios-Wrapper, der das automatische Abbrechen gleichzeitiger Anfragen ermöglicht.",
   "description_dialog-fields": "Ein React-Final-Form-Wrapper, der einige nützliche High-Level-Komponenten für die Formularerstellung bietet.",
@@ -35,7 +35,8 @@
   "description_data-source": "Ein Wrapper für das Abrufen von Daten.",
   "description_webpack-i18n-assets-plugin": "Ein Plugin für Webpack, das Aufrufe von Lokalisierungsfunktionen (i18n) durch Zieltexte ersetzt.",
   "description_table": "Bibliothek zur Visualisierung von Daten im Tabellenformat.",
-  "description_timeline": "Eine React-basierte Bibliothek zum Erstellen interaktiver Zeitlinienvisualisierungen mit Canvas-Rendering.",
-  "description_page-constructor-builder": "Ein leistungsstarkes Befehlszeilenprogramm zum Erstellen statischer Seiten aus YAML-Konfigurationen.",
-  "description_aikit": "Eine flexible React-Komponentenbibliothek zum Erstellen von KI-Chats nach den Prinzipien des Atomic Design."
+  "description_timeline": "Eine React-basierte Bibliothek zum Erstellen interaktiver Timeline-Visualisierungen mit Canvas-Rendering.",
+  "description_page-constructor-builder": "Ein leistungsstarkes Befehlszeilen-Dienstprogramm zum Erstellen statischer Seiten aus YAML-Konfigurationen.",
+  "description_aikit": "Eine flexible React-Komponentenbibliothek zum Erstellen von KI-Chats nach den Prinzipien des Atomic Design.",
+  "description_charts": "Eine flexible JavaScript-Bibliothek für Datenvisualisierung und Chart-Rendering mit React."
 }
