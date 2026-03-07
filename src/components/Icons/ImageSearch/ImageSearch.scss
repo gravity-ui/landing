@@ -42,13 +42,13 @@ $block: '.#{variables.$ns}image-search';
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 16px;
         border: 1px dashed #5282ff;
-        background: #5282ff26;
+        background: rgba(82, 130, 255, 0.25);
         border-radius: var(--g-border-radius-s);
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 18px;
         width: 100%;
         height: 100%;
+        backdrop-filter: blur(3px);
     }
 }

@@ -1,5 +1,5 @@
 import {Picture} from '@gravity-ui/icons';
-import {Icon, Loader, Portal} from '@gravity-ui/uikit';
+import {Icon, Loader, Portal, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -191,8 +191,8 @@ export function useImageSearch({onResults, onClear, isActive}: UseImageSearchOpt
         <Portal>
             <div className={b('drop-overlay')}>
                 <div className={b('drop-content')}>
-                    <Icon data={Picture} size={32} />
-                    <span>{t('imageSearch_drop')}</span>
+                    <Icon data={Picture} size={60} />
+                    <Text variant="display-2">{t('imageSearch_drop')}</Text>
                 </div>
             </div>
         </Portal>

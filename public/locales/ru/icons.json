@@ -15,5 +15,5 @@
     "usage_reactComponent": "React-компонент",
     "usage_svg": "SVG",
     "imageSearch_tooltip": "Поиск по изображению (или вставьте из буфера обмена)",
-    "imageSearch_drop": "Перетащите изображение для поиска"
+    "imageSearch_drop": "Перетащите изображение для поиска похожих иконок"
 }

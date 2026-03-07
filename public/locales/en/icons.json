@@ -15,5 +15,5 @@
     "usage_reactComponent": "React component",
     "usage_svg": "SVG",
     "imageSearch_tooltip": "Search by image (or paste from clipboard)",
-    "imageSearch_drop": "Drop image to search"
+    "imageSearch_drop": "Drop image to search for similar icons"
 }
