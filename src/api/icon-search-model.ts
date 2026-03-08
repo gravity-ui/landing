@@ -46,7 +46,10 @@ async function init() {
 
 function ensureLoaded(): Promise<void> {
     if (!initPromise) {
-        initPromise = init();
+        initPromise = init().catch((err) => {
+            initPromise = null;
+            throw err;
+        });
     }
     return initPromise;
 }
