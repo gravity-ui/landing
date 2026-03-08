@@ -19,33 +19,30 @@ const logo: AsideHeaderProps['logo'] = {
     iconClassName: b('logo-icon'),
 };
 
-const renderFooter: AsideHeaderProps['renderFooter'] = ({compact}) => (
+const renderFooter: AsideHeaderProps['renderFooter'] = ({isExpanded}) => (
     <Fragment>
-        <FooterItem compact={compact} id="feedback" title="Feedback" icon={Feedback} />
-        <FooterItem id="settings" title="Feedback" icon={Gear} compact={compact} />
+        <FooterItem id="feedback" title="Feedback" icon={Feedback} isExpanded={isExpanded} />
+        <FooterItem id="settings" title="Feedback" icon={Gear} isExpanded={isExpanded} />
     </Fragment>
 );
 
 export const DashboardPreview2 = (props: Pick<PreviewWrapperProps, 'styles'>) => {
-    const [sidebarOpened, toggleSidebarOpened] = useState(true);
+    const [pinned, setPinned] = useState(false);
     const menuItems = useMenuItems();
 
-    const handleChangeCompact = useCallback((compact: boolean) => {
+    const handleChangePinned = useCallback((val: boolean) => {
         window.dispatchEvent(new Event('resize'));
-        toggleSidebarOpened(compact);
+        setPinned(val);
     }, []);
 
     return (
         <PreviewWrapper {...props}>
             {({isLightTheme, themeSwitcher}) => {
                 return (
-                    <PageLayout
-                        className={b({light: String(isLightTheme)})}
-                        compact={sidebarOpened}
-                    >
+                    <PageLayout className={b({light: String(isLightTheme)})} pinned={pinned}>
                         <AsideHeader
                             logo={logo}
-                            compact={sidebarOpened}
+                            pinned={pinned}
                             menuItems={menuItems}
                             renderFooter={renderFooter}
                             renderContent={() => (
@@ -56,7 +53,7 @@ export const DashboardPreview2 = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                     </Card>
                                 </div>
                             )}
-                            onChangeCompact={handleChangeCompact}
+                            onChangePinned={handleChangePinned}
                         />
                     </PageLayout>
                 );
