@@ -58,7 +58,7 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         }
     }
 
-    &__link {
+    & &__link {
         width: 100%;
     }
 
@@ -131,7 +131,7 @@ $defaultLineColor: rgba(255, 255, 255, 0.72);
         }
     }
 
-    &__arrow {
+    & &__arrow {
         position: absolute;
         color: rgba(255, 255, 255, 0.5);
 

@@ -27,7 +27,7 @@ $block: '.#{variables.$ns}theme-palette-color-editor';
         }
     }
 
-    &__input-title {
+    & &__input-title {
         display: none;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
@@ -46,7 +46,7 @@ $block: '.#{variables.$ns}theme-palette-color-editor';
         }
     }
 
-    &__title {
+    & &__title {
         display: none;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {

@@ -9,7 +9,7 @@ $block: '.#{variables.$ns}article-navigation';
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
         gap: var(--g-spacing-5);
     }
-    &__content {
+    & &__content {
         padding: var(--g-spacing-2) 0;
         overflow: hidden;
         width: 100%;
@@ -25,7 +25,7 @@ $block: '.#{variables.$ns}article-navigation';
             }
         }
     }
-    &__button {
+    & &__button {
         cursor: pointer;
         text-decoration: none;
         display: flex;

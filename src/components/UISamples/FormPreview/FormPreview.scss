@@ -7,7 +7,7 @@ $block: '.#{variables.$ns}form-preview';
 #{$block} {
     overflow: auto;
 
-    &__wrapper {
+    & &__wrapper {
         width: 600px;
     }
 }

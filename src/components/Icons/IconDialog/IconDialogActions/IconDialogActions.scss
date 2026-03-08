@@ -10,7 +10,7 @@ $block: '.#{variables.$ns}icon-dialog-actions';
     justify-content: flex-end;
     gap: 16px;
 
-    &__copy-action {
+    & &__copy-action {
         --g-color-base-light: #fff;
         width: 152px;
 

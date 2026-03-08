@@ -77,7 +77,7 @@ $block: '.#{variables.$ns}settings';
         position: relative;
     }
 
-    &__theme-icon {
+    & &__theme-icon {
         opacity: 0;
         transition: opacity 0.5s ease-in;
 

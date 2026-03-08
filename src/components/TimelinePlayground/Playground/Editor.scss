@@ -14,13 +14,13 @@ $block: '.#{variables.$ns}editor';
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 
-    &__monaco {
+    & &__monaco {
         flex: 1;
         height: 100%;
         min-height: 0;
     }
 
-    &__actions {
+    & &__actions {
         border-top: 1px solid rgba(255, 255, 255, 0.2);
         padding: var(--g-spacing-3);
 

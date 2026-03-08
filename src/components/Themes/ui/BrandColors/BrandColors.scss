@@ -58,7 +58,7 @@ $block: '.#{variables.$ns}brand-colors';
         }
     }
 
-    &__colors-settings-type-radio-group {
+    & &__colors-settings-type-radio-group {
         --g-border-radius-xl: 8px;
     }
 }

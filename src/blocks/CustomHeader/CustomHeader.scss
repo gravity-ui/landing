@@ -19,7 +19,7 @@ $block: '.#{variables.$ns}custom-header';
         margin: 0;
     }
 
-    &__title-content {
+    & &__title-content {
         @include pcStyles.heading1();
     }
 
@@ -33,7 +33,7 @@ $block: '.#{variables.$ns}custom-header';
         }
     }
 
-    &__button {
+    & &__button {
         margin: 0 8px;
 
         @media (max-width: variables.$extraSmallBreakpoint - 1) {
@@ -42,7 +42,7 @@ $block: '.#{variables.$ns}custom-header';
         }
     }
 
-    &__extra {
+    & &__extra {
         display: flex;
         flex-direction: column;
         align-items: stretch;
@@ -103,7 +103,7 @@ $block: '.#{variables.$ns}custom-header';
         }
     }
 
-    &__banner {
+    & &__banner {
         @include pcMixins.reset-link-style();
         @include uikitMixins.text-body-2();
 
@@ -125,7 +125,7 @@ $block: '.#{variables.$ns}custom-header';
             background-color: var(--g-color-base-brand-hover);
         }
     }
-    &__badges-wrapper {
+    & &__badges-wrapper {
         width: 68px;
         padding: var(--g-spacing-4) 0;
         border-inline-end: 1px solid var(--g-color-line-generic);
@@ -155,14 +155,14 @@ $block: '.#{variables.$ns}custom-header';
             order: 1;
         }
     }
-    &__title-with-badges {
+    & &__title-with-badges {
         align-items: center;
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
             flex-direction: column;
         }
     }
 
-    &__badge {
+    & &__badge {
         padding: var(--g-spacing-1) 0;
     }
 }

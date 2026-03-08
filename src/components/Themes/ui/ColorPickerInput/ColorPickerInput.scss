@@ -7,11 +7,11 @@ $block: '.#{variables.$ns}color-picker';
     flex-grow: 1;
     position: relative;
 
-    &__text-input {
+    & &__text-input {
         z-index: 1;
     }
 
-    &__preview {
+    & &__preview {
         margin-inline-start: var(--g-spacing-2);
         margin-inline-end: var(--g-spacing-1);
     }

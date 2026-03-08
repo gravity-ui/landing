@@ -6,7 +6,7 @@ $block: '.#{variables.$ns}theme-picker';
 #{$block} {
     --g-border-radius-xl: 8px;
 
-    &__option {
+    & &__option {
         margin-top: 13px;
     }
 }

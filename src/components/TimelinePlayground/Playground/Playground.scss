@@ -12,7 +12,7 @@ $pg: '.#{variables.$ns}timeline-playground';
     justify-content: space-between;
     gap: 32px;
 
-    &__content {
+    & &__content {
         height: 100%;
         width: calc(50% - 32px / 2);
         min-height: 0;

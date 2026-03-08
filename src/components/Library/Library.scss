@@ -46,7 +46,7 @@ $block: '.#{variables.$ns}library';
         }
     }
 
-    &__breadcrumbs-link {
+    & &__breadcrumbs-link {
         color: rgba(255, 255, 255, 0.5);
         text-decoration: none;
 
@@ -55,7 +55,7 @@ $block: '.#{variables.$ns}library';
         }
     }
 
-    &__breadcrumbs-title {
+    & &__breadcrumbs-title {
         @include pcStyles.text-size(caption-3);
         color: #fff;
     }
@@ -69,7 +69,7 @@ $block: '.#{variables.$ns}library';
         }
     }
 
-    &__title-content {
+    & &__title-content {
         @include pcStyles.heading2();
         color: #fff;
     }
@@ -90,7 +90,7 @@ $block: '.#{variables.$ns}library';
         }
     }
 
-    &__button {
+    & &__button {
         margin-left: 16px;
 
         &:first-child {

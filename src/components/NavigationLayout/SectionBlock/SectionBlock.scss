@@ -6,7 +6,7 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
 #{$block} {
     border-radius: 12px;
 
-    &__header {
+    & &__header {
         position: sticky;
         top: 64px;
         display: flex;
@@ -60,7 +60,7 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
         }
     }
 
-    &__sub-section {
+    & &__sub-section {
         display: flex;
         align-items: center;
         padding: 12px 20px;
@@ -109,7 +109,7 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
     @include baseMixins.window-breakpoint('lg') {
         background: var(--g-color-base-modal);
 
-        &__header {
+        & &__header {
             position: static;
             top: initial;
             padding: 16px 20px;
@@ -123,7 +123,7 @@ $block: '.#{variables.$ns}navigation-layout-section-block';
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        &__sub-section {
+        & &__sub-section {
             margin-top: 4px;
 
             &:first-child {

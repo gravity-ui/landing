@@ -11,7 +11,7 @@ $block: '.#{variables.$ns}roadmap-block';
         margin-bottom: pcVariables.$indentM;
     }
 
-    &__title-content {
+    & &__title-content {
         @include pcStyles.heading2();
     }
 }

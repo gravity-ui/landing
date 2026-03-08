@@ -21,7 +21,7 @@ $block: '.#{variables.$ns}themes-preview-layout';
         }
     }
 
-    &__aside-header {
+    & &__aside-header {
         --gn-aside-header-item-icon-color: var(--g-color-base-brand);
 
         --gn-aside-header-item-current-background-color: var(--g-color-base-brand);
@@ -40,12 +40,12 @@ $block: '.#{variables.$ns}themes-preview-layout';
         }
     }
 
-    &__breadcrumbs {
+    & &__breadcrumbs {
         width: 100%;
         box-sizing: content-box;
     }
 
-    &__header-actions {
+    & &__header-actions {
         &_hidden {
             display: none;
         }
@@ -55,7 +55,7 @@ $block: '.#{variables.$ns}themes-preview-layout';
         }
     }
 
-    &__content {
+    & &__content {
         width: 100%;
         height: calc(100% - 40px);
         overflow: hidden;

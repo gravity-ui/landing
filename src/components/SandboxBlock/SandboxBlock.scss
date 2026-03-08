@@ -112,7 +112,7 @@ $minSize: 768px;
         }
     }
 
-    &__iframe {
+    & &__iframe {
         position: absolute;
         top: 0;
         right: 0;
@@ -133,7 +133,7 @@ $minSize: 768px;
         justify-content: space-between;
     }
 
-    &__prop-title {
+    & &__prop-title {
         display: block;
         margin-bottom: 4px;
     }
@@ -168,7 +168,7 @@ $minSize: 768px;
         }
     }
 
-    &__control-icon {
+    & &__control-icon {
         cursor: pointer;
         height: 18px;
 

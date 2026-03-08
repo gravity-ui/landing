@@ -17,7 +17,7 @@ $block: '.#{variables.$ns}header-maintainer-list';
         line-height: 20px;
     }
 
-    &__maintainer {
+    & &__maintainer {
         display: flex;
         gap: 8px;
         align-items: center;

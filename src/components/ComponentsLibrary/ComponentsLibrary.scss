@@ -48,11 +48,11 @@ $block: '.#{variables.$ns}components-library';
         }
     }
 
-    &__col {
+    & &__col {
         display: flex;
     }
 
-    &__wrapper {
+    & &__wrapper {
         display: flex;
         flex: 1;
     }

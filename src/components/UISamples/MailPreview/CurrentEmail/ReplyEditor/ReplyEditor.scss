@@ -4,7 +4,8 @@ $block: '.#{variables.$children-prefix}reply-editor';
 
 #{$block} {
     height: 250px;
-    &__editor {
+
+    & &__editor {
         overflow-y: auto;
     }
 }

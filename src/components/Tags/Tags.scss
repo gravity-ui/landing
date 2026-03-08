@@ -8,7 +8,7 @@ $block: '.#{variables.$ns}tags';
 
     overflow-x: auto;
 
-    &__tag {
+    & &__tag {
         &_selected {
             --g-color-base-selection: var(--g-color-base-warning-light);
         }

@@ -7,7 +7,7 @@ $block: '.#{variables.$ns}dashboards-preview';
 #{$block} {
     overflow-y: auto;
 
-    &__card {
+    & &__card {
         flex: 1;
         padding: var(--g-spacing-5);
     }

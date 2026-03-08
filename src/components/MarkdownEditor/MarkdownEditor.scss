@@ -7,7 +7,7 @@ $block: '.#{variables.$ns}markdown-editor';
 #{$block} {
     margin-block-start: calc(var(--g-spacing-base) * 8);
 
-    &__heading {
+    & &__heading {
         display: flex;
         align-items: center;
         justify-content: space-between;

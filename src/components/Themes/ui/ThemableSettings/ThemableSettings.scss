@@ -6,7 +6,7 @@ $block: '.#{variables.$ns}themable-settings';
 #{$block} {
     width: calc(100% + var(--g-spacing-4));
 
-    &__columns {
+    & &__columns {
         width: 400px;
         max-width: 400px;
 
@@ -20,7 +20,7 @@ $block: '.#{variables.$ns}themable-settings';
         }
     }
 
-    &__dark-card {
+    & &__dark-card {
         display: block;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
