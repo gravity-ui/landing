@@ -38,7 +38,7 @@ jobs:
           git config user.email ""
           git config user.name "Update icons embeddings action"
           git checkout -b update-icons-embeddings
-          git add .
+          git add public/static/icons-embeddings.json scripts/icon-search/data/icons_version.txt
 
           export COMMIT_MESSAGE="feat: update icons embeddings"
           git commit -m "$COMMIT_MESSAGE" || true
