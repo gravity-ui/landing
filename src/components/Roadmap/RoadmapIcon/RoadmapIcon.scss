@@ -14,7 +14,7 @@ $block: '.#{variables.$ns}roadmap-icon';
     background-color: var(--roadmap-background-color);
     z-index: 1;
 
-    &__icon {
+    & &__icon {
         color: var(--roadmap-default-task-color);
     }
 

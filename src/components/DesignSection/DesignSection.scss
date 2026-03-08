@@ -52,7 +52,7 @@ $block: '.#{variables.$ns}design-section';
         }
     }
 
-    &__article {
+    & &__article {
         color: var(--g-color-base-special);
         text-decoration: none;
         font-size: 20px;

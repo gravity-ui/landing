@@ -30,11 +30,11 @@ $block: '.#{variables.$ns}text-block';
         border-style: solid;
     }
 
-    &__icon {
+    & &__icon {
         flex-shrink: 0;
     }
 
-    &__text {
+    & &__text {
         flex-grow: 1;
         font-weight: 500;
         text-overflow: ellipsis;

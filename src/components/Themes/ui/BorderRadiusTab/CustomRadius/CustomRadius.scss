@@ -10,11 +10,11 @@ $block: '.#{variables.$ns}custom-radius';
 $workaroundBlockDarkTheme: &#{$block}_theme_dark;
 
 #{$block} {
-    &__px {
+    & &__px {
         margin-inline: 8px;
     }
 
-    &__radius-input-row {
+    & &__radius-input-row {
         align-items: center;
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {

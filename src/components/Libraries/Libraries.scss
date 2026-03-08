@@ -39,15 +39,15 @@ $block: '.#{variables.$ns}libraries';
         text-align: center;
     }
 
-    &__col {
+    & &__col {
         display: flex;
     }
 
-    &__filters {
+    & &__filters {
         margin-bottom: 16px;
     }
 
-    &__library {
+    & &__library {
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -93,7 +93,7 @@ $block: '.#{variables.$ns}libraries';
         }
     }
 
-    &__library-title-content {
+    & &__library-title-content {
         @include pcStyles.heading4();
     }
 

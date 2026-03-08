@@ -7,11 +7,11 @@ $block: '.#{variables.$children-prefix}navigation';
     width: 280px;
     margin-block-end: auto;
 
-    &__divider {
+    & &__divider {
         padding-inline: calc(var(--g-spacing-base) * 4);
     }
 
-    &__inbox-list-item {
+    & &__inbox-list-item {
         cursor: pointer;
         height: 36px;
         padding-inline: calc(var(--g-spacing-base) * 4);

@@ -13,7 +13,7 @@ $block: '.#{variables.$ns}themable-settings-rows';
         padding-top: var(--g-spacing-4);
     }
 
-    &__title {
+    & &__title {
         margin-bottom: var(--g-spacing-4);
         min-height: 48px;
     }

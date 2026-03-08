@@ -6,7 +6,7 @@ $block: '.#{variables.$ns}add-extra-color';
     width: 100%;
     border-block-end: 1px solid var(--g-color-line-generic);
 
-    &__button {
+    & &__button {
         color: var(--g-color-text-secondary);
         --g-button-border-radius: 8px;
     }

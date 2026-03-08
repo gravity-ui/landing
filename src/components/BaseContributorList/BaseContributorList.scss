@@ -12,13 +12,13 @@ $block: '.#{variables.$ns}base-contributor-list';
     gap: 11px;
     grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
 
-    &__link {
+    & &__link {
         position: relative;
         padding: 100% 0 0;
         margin: 0;
     }
 
-    &__avatar {
+    & &__avatar {
         position: absolute;
         top: 0;
         left: 0;

@@ -102,7 +102,7 @@ $workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
         }
     }
 
-    &__copy-icon {
+    & &__copy-icon {
         position: absolute;
         right: 12px;
         top: 12px;

@@ -12,14 +12,14 @@ $block: '.#{variables.$ns}selectable-card';
     cursor: pointer;
     text-align: center;
 
-    &__icon {
+    & &__icon {
         position: absolute;
         top: 4px;
         right: 4px;
         color: var(--g-color-base-brand);
     }
 
-    &__fake-button {
+    & &__fake-button {
         height: 28px;
         padding-left: 8px;
         padding-right: 8px;

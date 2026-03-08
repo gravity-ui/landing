@@ -14,7 +14,7 @@ $block: '.#{variables.$ns}theme-section';
         gap: calc(var(--g-spacing-base) * 8);
     }
 
-    &__title {
+    & &__title {
         @include ukitMixins.text-display-2();
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {

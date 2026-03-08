@@ -11,7 +11,7 @@ $block: '.#{variables.$ns}icons';
         margin: 32px 0 0;
     }
 
-    &__heading {
+    & &__heading {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -45,7 +45,7 @@ $block: '.#{variables.$ns}icons';
         display: flex;
     }
 
-    &__search {
+    & &__search {
         padding: 8px 0;
         margin-bottom: 24px;
         position: sticky;
@@ -58,7 +58,7 @@ $block: '.#{variables.$ns}icons';
         }
     }
 
-    &__search-icon {
+    & &__search-icon {
         padding: 0 12px;
         color: rgba(255, 255, 255, 0.5);
     }

@@ -35,7 +35,7 @@ $block: '.#{variables.$ns}footer';
         }
     }
 
-    &__menu-link-icon {
+    & &__menu-link-icon {
         [dir='ltr'] & {
             margin-right: 8px;
         }
@@ -88,7 +88,7 @@ $block: '.#{variables.$ns}footer';
         }
     }
 
-    &__menu-link-arrow {
+    & &__menu-link-arrow {
         [dir='ltr'] & {
             margin: 4px 0 0 10px;
         }

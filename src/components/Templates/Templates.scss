@@ -48,7 +48,7 @@ $block: '.#{variables.$ns}templates';
         font-family: var(--g-font-family-monospace);
     }
 
-    &__copy {
+    & &__copy {
         top: 16px;
         position: absolute;
 
@@ -61,7 +61,7 @@ $block: '.#{variables.$ns}templates';
         }
     }
 
-    &__tabs {
+    & &__tabs {
         overflow: auto;
         flex-wrap: nowrap;
     }

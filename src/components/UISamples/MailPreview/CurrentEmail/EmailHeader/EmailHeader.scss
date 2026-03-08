@@ -4,10 +4,12 @@ $block: '.#{variables.$children-prefix}email-header';
 
 #{$block} {
     padding: 16px 20px;
-    &__user {
+
+    & &__user {
         overflow: hidden;
     }
-    &__created {
+
+    & &__created {
         flex-shrink: 0;
     }
 }

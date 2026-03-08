@@ -24,7 +24,7 @@ $block: '.#{variables.$ns}contributors';
         padding: 0;
     }
 
-    &__header-title-content {
+    & &__header-title-content {
         @include pcStyles.heading2();
     }
 

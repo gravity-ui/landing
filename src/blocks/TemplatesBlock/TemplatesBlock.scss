@@ -11,7 +11,7 @@ $block: '.#{variables.$ns}templates-block';
         margin-bottom: pcVariables.$indentM;
     }
 
-    &__title-content {
+    & &__title-content {
         @include pcStyles.heading2();
     }
 }

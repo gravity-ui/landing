@@ -5,7 +5,7 @@ $block: '.#{variables.$ns}export-theme-section';
 #{$block} {
     --g-button-border-radius: 8px;
 
-    &__export-button {
+    & &__export-button {
         width: min-content;
     }
 }

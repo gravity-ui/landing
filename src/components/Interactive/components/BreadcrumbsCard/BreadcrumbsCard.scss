@@ -5,7 +5,7 @@
 $block: '.#{variables.$ns}breadcrumbs-card';
 
 #{$block} {
-    &__wrapper {
+    & &__wrapper {
         box-sizing: content-box;
     }
 }

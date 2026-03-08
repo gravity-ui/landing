@@ -34,7 +34,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         }
     }
 
-    &__logo {
+    & &__logo {
         display: flex;
         align-items: center;
         font-size: 24px;
@@ -236,7 +236,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         }
     }
 
-    &__link {
+    & &__link {
         display: flex;
         gap: 8px;
         align-items: center;
@@ -307,7 +307,7 @@ $border-color: rgba(255, 255, 255, 0.2);
         color: var(--g-color-text-brand);
     }
 
-    &__link-icon {
+    & &__link-icon {
         align-self: baseline;
         margin-top: 4px;
     }

@@ -55,7 +55,7 @@ $block: '.#{variables.$ns}libraries-library-preview';
         }
     }
 
-    &__image {
+    & &__image {
         position: absolute;
         height: 100%;
         margin: 0 auto;

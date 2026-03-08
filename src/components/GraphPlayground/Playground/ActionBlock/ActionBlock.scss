@@ -20,7 +20,7 @@ $block: '.#{variables.$ns}block';
         background-color: rgba(57, 47, 57, 1);
     }
 
-    &__name {
+    & &__name {
         font-weight: 500;
     }
 }

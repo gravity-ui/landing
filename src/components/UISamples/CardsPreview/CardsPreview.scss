@@ -9,7 +9,7 @@ $block: '.#{variables.$ns}cards-preview';
     height: 100%;
     overflow: auto;
 
-    &__card {
+    & &__card {
         width: 295px;
         height: 430px;
         padding: var(--g-spacing-1) var(--g-spacing-1) 0;

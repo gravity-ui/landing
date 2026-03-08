@@ -8,12 +8,12 @@ $block: '.#{variables.$ns}private-colors-select';
     --g-text-input-border-radius: 8px;
     --g-color-base-selection: var(--g-color-private-yellow-150);
 
-    &__preview {
+    & &__preview {
         margin-inline-start: var(--g-spacing-2);
         margin-inline-end: var(--g-spacing-1);
     }
 
-    &__input {
+    & &__input {
         cursor: pointer;
 
         input {
@@ -21,11 +21,11 @@ $block: '.#{variables.$ns}private-colors-select';
         }
     }
 
-    &__arrow-button {
+    & &__arrow-button {
         --g-button-background-color-hover: transparent;
     }
 
-    &__customize-button {
+    & &__customize-button {
         flex-shrink: 0;
     }
 }
