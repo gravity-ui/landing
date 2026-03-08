@@ -19,7 +19,7 @@ async function searchByImage(base64: string): Promise<{name: string; componentNa
     const res = await fetch('/api/icons-search', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({image: base64, topK: 12}),
+        body: JSON.stringify({image: base64}),
     });
 
     if (!res.ok) {

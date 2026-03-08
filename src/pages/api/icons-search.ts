@@ -16,14 +16,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 
-    const {image, topK} = req.body;
+    const {image} = req.body;
 
     if (!image || typeof image !== 'string') {
         return res.status(400).json({error: 'image (base64) is required'});
     }
 
     try {
-        const results = await search(image, topK ?? 12);
+        const results = await search(image);
         return res.status(200).json({results});
     } catch (error) {
         // eslint-disable-next-line no-console
