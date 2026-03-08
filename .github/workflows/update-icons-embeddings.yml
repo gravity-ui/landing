@@ -7,8 +7,6 @@ on:
       - 'package-lock.json'
   workflow_dispatch:
 
-permissions: write-all
-
 jobs:
   update-icons-embeddings:
     permissions:
