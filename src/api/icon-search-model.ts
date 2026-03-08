@@ -115,15 +115,14 @@ async function normalizeQueryImage(imageBuffer: Buffer): Promise<Buffer> {
 
 const TOP_K = 10;
 
-export async function search(imageBase64: string): Promise<SearchResult[]> {
+export async function search(imageBuffer: Buffer): Promise<SearchResult[]> {
     await ensureLoaded();
 
     if (!processor || !visionModel || !embeddings || !iconIndex) {
         throw new Error('Model not loaded');
     }
 
-    const rawBuffer = Buffer.from(imageBase64, 'base64');
-    const normalizedBuffer = await normalizeQueryImage(rawBuffer);
+    const normalizedBuffer = await normalizeQueryImage(imageBuffer);
 
     const imageBytes = new Uint8Array(normalizedBuffer);
     const image = await RawImage.fromBlob(new Blob([imageBytes]));

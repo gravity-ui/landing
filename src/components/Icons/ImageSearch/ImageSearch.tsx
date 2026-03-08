@@ -15,11 +15,11 @@ interface UseImageSearchOptions {
     isActive: boolean;
 }
 
-async function searchByImage(base64: string): Promise<{name: string; componentName: string}[]> {
+async function searchByImage(file: Blob): Promise<{name: string; componentName: string}[]> {
     const res = await fetch('/api/icons-search', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({image: base64}),
+        headers: {'Content-Type': file.type || 'image/png'},
+        body: file,
     });
 
     if (!res.ok) {
@@ -28,19 +28,6 @@ async function searchByImage(base64: string): Promise<{name: string; componentNa
 
     const data = await res.json();
     return data.results;
-}
-
-function fileToBase64(file: Blob): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-            const result = reader.result as string;
-            const base64 = result.split(',')[1];
-            resolve(base64);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
 }
 
 export function useImageSearch({onResults, onClear, isActive}: UseImageSearchOptions) {
@@ -56,14 +43,15 @@ export function useImageSearch({onResults, onClear, isActive}: UseImageSearchOpt
     const handleImage = React.useCallback(
         async (file: File | Blob) => {
             const name = file instanceof File ? file.name : 'image.png';
-            const base64 = await fileToBase64(file);
-            const dataUrl = `data:image/png;base64,${base64}`;
-            setPreview(dataUrl);
+            setPreview((prev) => {
+                if (prev) URL.revokeObjectURL(prev);
+                return URL.createObjectURL(file);
+            });
             setFileName(name);
             setLoading(true);
 
             try {
-                const results = await searchByImage(base64);
+                const results = await searchByImage(file);
                 onResults(results.map((r) => r.componentName));
             } catch {
                 onResults([]);
@@ -156,7 +144,10 @@ export function useImageSearch({onResults, onClear, isActive}: UseImageSearchOpt
     }, [handleDragEnter, handleDragLeave, handleDragOver, handleDrop]);
 
     const handleClear = React.useCallback(() => {
-        setPreview(null);
+        setPreview((prev) => {
+            if (prev) URL.revokeObjectURL(prev);
+            return null;
+        });
         setFileName(null);
         setLoading(false);
         if (fileInputRef.current) {
