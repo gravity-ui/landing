@@ -15,10 +15,10 @@ export const config = {
 
 function readBody(req: IncomingMessage, limit: number): Promise<Buffer> {
     return new Promise((resolve, reject) => {
-        const chunks: Buffer[] = [];
+        const chunks: Uint8Array[] = [];
         let size = 0;
 
-        req.on('data', (chunk: Buffer) => {
+        req.on('data', (chunk: Uint8Array) => {
             size += chunk.length;
             if (size > limit) {
                 req.destroy();
