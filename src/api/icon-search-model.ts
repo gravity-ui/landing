@@ -113,7 +113,9 @@ async function normalizeQueryImage(imageBuffer: Buffer): Promise<Buffer> {
         .toBuffer();
 }
 
-export async function search(imageBase64: string, topK = 12): Promise<SearchResult[]> {
+const TOP_K = 10;
+
+export async function search(imageBase64: string): Promise<SearchResult[]> {
     await ensureLoaded();
 
     if (!processor || !visionModel || !embeddings || !iconIndex) {
@@ -155,7 +157,7 @@ export async function search(imageBase64: string, topK = 12): Promise<SearchResu
     scores.sort((a, b) => b.score - a.score);
 
     const icons = iconIndex;
-    return scores.slice(0, topK).map(({index, score}) => ({
+    return scores.slice(0, TOP_K).map(({index, score}) => ({
         ...icons[index],
         score: Math.round(score * 10000) / 10000,
     }));
