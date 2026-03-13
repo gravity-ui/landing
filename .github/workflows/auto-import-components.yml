@@ -1,0 +1,89 @@
+name: Auto-import new components
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-import-components:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 24
+
+      - name: Run auto-import script
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run auto-import-components
+
+      - name: Check for changes
+        id: diff
+        run: |
+          CHANGED=$(git diff --name-only)
+          if [ -z "$CHANGED" ]; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Exit if no changes
+        if: steps.diff.outputs.has_changes == 'false'
+        run: |
+          echo "No new components found — nothing to commit."
+          exit 0
+
+      - name: Parse added component names from diff
+        if: steps.diff.outputs.has_changes == 'true'
+        id: components
+        run: |
+          # Extract component names added to the auto-generated arrays (lines starting with +    ")
+          NAMES=$(git diff -- 'src/content/components/*/auto-generated.ts' \
+            | grep '^+    "' \
+            | sed 's/^+    "//;s/",\?$//' \
+            | sort -u \
+            | tr '\n' ',' \
+            | sed 's/,$//')
+          echo "names=$NAMES" >> $GITHUB_OUTPUT
+
+      - name: Commit and push
+        if: steps.diff.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.email ""
+          git config user.name "Auto-import components action"
+          git checkout -b auto-import-components
+          git add src/content/components/uikit/auto-generated.ts \
+                  src/content/components/date-components/auto-generated.ts \
+                  src/content/components/navigation/auto-generated.ts
+          git commit -m "feat: auto-import new components"
+          git push --set-upstream origin auto-import-components --force
+
+      - name: Create or update pull request
+        if: steps.diff.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NAMES="${{ steps.components.outputs.names }}"
+          if [ -n "$NAMES" ]; then
+            BODY="## New components\n\n$(echo "$NAMES" | tr ',' '\n' | sed 's/^/- /')"
+          else
+            BODY="Auto-generated component configs updated."
+          fi
+
+          gh pr create \
+            --title "feat: auto-import new components" \
+            --body "$(printf '%b' "$BODY")" \
+            --base main \
+            --head auto-import-components \
+            2>/dev/null || true
