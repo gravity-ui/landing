@@ -32,7 +32,6 @@ resource "yandex_compute_instance_group" "landing_ig" {
         yandex_vpc_subnet.subnet_b.id,
         yandex_vpc_subnet.subnet_d.id
       ]
-      nat                = true
       security_group_ids = [yandex_vpc_security_group.landing_sg.id]
     }
 
