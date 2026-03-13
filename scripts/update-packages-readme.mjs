@@ -48,6 +48,12 @@ const updatePackageReadme = async (lib) => {
     }
 
     const readmePath = getPackageReadmePath(lib.id);
+    const readmeDir = path.dirname(readmePath);
+
+    if (typeof readmeContent !== 'string' || readmeContent.length === 0) {
+        console.warn(`[README-UPDATER] Failed to load package readme: ${lib.id}`);
+        return;
+    }
 
     if (await fileExists(readmePath)) {
         const currentReadme = await fs.readFile(readmePath, 'utf8');
@@ -62,6 +68,7 @@ const updatePackageReadme = async (lib) => {
         }
     }
 
+    await fs.mkdir(readmeDir, {recursive: true});
     await fs.writeFile(readmePath, readmeContent);
 };
 
