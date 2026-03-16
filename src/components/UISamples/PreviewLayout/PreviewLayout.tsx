@@ -53,7 +53,7 @@ export const PreviewLayout = ({
 }: PreviewLayoutProps) => {
     const [theme, setTheme] = useState<Theme>('dark');
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
-    const [isCompact, setCompact] = useState<boolean>(true);
+    const [pinned, setPinned] = useState<boolean>(false);
     const containerRef = React.useRef<HTMLDivElement>(null);
 
     const onAlignmentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -181,10 +181,10 @@ export const PreviewLayout = ({
                             icon: gravityUi,
                             iconSize: 38,
                         }}
-                        compact={isCompact}
-                        onChangeCompact={setCompact}
+                        pinned={pinned}
+                        onChangePinned={setPinned}
                         renderContent={renderContent}
-                        renderFooter={({compact}) => (
+                        renderFooter={({isExpanded}) => (
                             <React.Fragment>
                                 <FooterItem
                                     id="user-settings"
@@ -192,7 +192,7 @@ export const PreviewLayout = ({
                                     title="User Settings"
                                     tooltipText="User Settings"
                                     onItemClick={() => {}}
-                                    compact={compact}
+                                    isExpanded={isExpanded}
                                 />
                                 <FooterItem
                                     id="user-account"
@@ -200,7 +200,7 @@ export const PreviewLayout = ({
                                     itemWrapper={(p, makeItem) =>
                                         makeItem({...p, icon: <Person />})
                                     }
-                                    compact={compact}
+                                    isExpanded={isExpanded}
                                 />
                             </React.Fragment>
                         )}
