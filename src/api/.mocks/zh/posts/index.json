@@ -1,30 +1,6 @@
 {
   "posts": [
     {
-      "id": 73,
-      "name": "gravityui-aikit",
-      "date": "2025-12-18T00:00:00Z",
-      "title": "一个聊天统治所有：我们基于 Gravity UI 构建了 AI 助手库",
-      "postId": 73,
-      "description": "一篇关于 AIKit 库发布的文章：我们在开发过程中关注的重点、为什么需要它，以及如何在您自己的项目中使用它。",
-      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
-      "readingTime": 8,
-      "likes": 0,
-      "hasUserLike": false,
-      "hasPublishedVersionInRegion": true,
-      "hasPublishedVersionInLocale": false,
-      "addLegacyPrefix": false,
-      "tags": [
-        {
-          "icon": null,
-          "slug": "articles",
-          "name": "文章"
-        }
-      ],
-      "services": [],
-      "url": "/blog/gravityui-aikit"
-    },
-    {
       "id": 36,
       "name": "graph",
       "date": "2025-08-07T00:00:00Z",
@@ -47,6 +23,30 @@
       ],
       "services": [],
       "url": "/blog/graph"
+    },
+    {
+      "id": 74,
+      "name": "gravity-speed",
+      "date": "2025-07-29T00:00:00Z",
+      "title": "React 组件性能比较：Gravity UI vs 其他库",
+      "postId": 74,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
+      "readingTime": 5,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "文章"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravity-speed"
     },
     {
       "id": 39,
@@ -172,14 +172,14 @@
   "totalCount": 16,
   "count": 7,
   "pinnedPost": {
-    "id": 74,
-    "name": "gravity-speed",
-    "date": "2025-07-29T00:00:00Z",
-    "title": "React 组件性能比较：Gravity UI vs 其他库",
-    "postId": 74,
-    "description": "",
-    "image": "https://storage.yandexcloud.net/gravity-landing-static/assets/is_it_slow.png",
-    "readingTime": 5,
+    "id": 73,
+    "name": "gravityui-aikit",
+    "date": "2025-12-18T00:00:00Z",
+    "title": "一个聊天统治所有：我们基于 Gravity UI 构建了 AI 助手库",
+    "postId": 73,
+    "description": "一篇关于 AIKit 库发布的文章：我们在开发过程中关注的重点、为什么需要它，以及如何在您自己的项目中使用它。",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+    "readingTime": 8,
     "likes": 0,
     "hasUserLike": false,
     "hasPublishedVersionInRegion": true,
@@ -193,6 +193,6 @@
       }
     ],
     "services": [],
-    "url": "/blog/gravity-speed"
+    "url": "/blog/gravityui-aikit"
   }
 }
