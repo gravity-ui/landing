@@ -34,6 +34,7 @@ import {numberInputConfig} from './NumberInput';
 import {overlayConfig} from './Overlay';
 import {paginationConfig} from './Pagination';
 import {paletteConfig} from './Palette';
+import {passwordInputConfig} from './PasswordInput';
 import {pinInputConfig} from './PinInput';
 import {placeholderContainerConfig} from './PlaceholderContainer';
 import {popoverConfig} from './Popover';
@@ -91,6 +92,7 @@ const uikitComponents: Component[] = [
     overlayConfig,
     paginationConfig,
     paletteConfig,
+    passwordInputConfig,
     pinInputConfig,
     placeholderContainerConfig,
     popoverConfig,
