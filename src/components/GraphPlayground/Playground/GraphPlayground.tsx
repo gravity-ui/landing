@@ -1,10 +1,12 @@
 import {
     ConnectionLayer,
     EAnchorType,
-    ECanChangeBlockGeometry,
+    ECanDrag,
+    ESchedulerPriority,
     Graph,
     GraphState,
     TBlock,
+    TBlockId,
 } from '@gravity-ui/graph';
 import {
     GraphBlock,
@@ -12,6 +14,8 @@ import {
     HookGraphParams,
     useGraph,
     useGraphEvent,
+    useLayer,
+    useSchedulerThrottle,
 } from '@gravity-ui/graph/react';
 import {LayoutColumns, LayoutSideContentRight} from '@gravity-ui/icons';
 import {
@@ -36,15 +40,14 @@ import {Toolbox} from './Toolbox';
 import {
     GravityActionBlockIS,
     GravityTextBlockIS,
+    TGravityActionBlock,
     createActionBlock,
     createTextBlock,
     generatePlaygroundActionBlocks,
 } from './generateLayout';
 
 const b = block('graph-playground');
-const radioB = block('graph-playground-radio-buton');
-
-const generated = generatePlaygroundActionBlocks(0, 5);
+const radioB = block('graph-playground-radio-button');
 
 const textBlocks = [
     createTextBlock(
@@ -94,7 +97,7 @@ const config: HookGraphParams = {
         canDragCamera: true,
         canZoomCamera: true,
         canDuplicateBlocks: false,
-        canChangeBlockGeometry: ECanChangeBlockGeometry.ALL,
+        canDrag: ECanDrag.ALL,
         canCreateNewConnections: true,
         showConnectionArrows: false,
         scaleFontSize: 1,
@@ -106,26 +109,6 @@ const config: HookGraphParams = {
             [GravityTextBlockIS]: TextBlock,
         },
     },
-    layers: [
-        [
-            ConnectionLayer,
-            {
-                // @ts-expect-error TODO: Layer types do not propagate through the graph configuration
-                drawLine: (start: {x: number; y: number}, end: {x: number; y: number}) => {
-                    const path = new Path2D();
-                    path.moveTo(start.x, start.y);
-                    path.lineTo(end.x, end.y);
-                    return {
-                        path,
-                        style: {
-                            color: 'rgba(234, 201, 74, 1)',
-                            dash: [5, 5], // Dashed line
-                        },
-                    };
-                },
-            },
-        ],
-    ],
 };
 
 const graphSizeOptions: SegmentedRadioGroupOptionProps[] = [
@@ -149,7 +132,26 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
     const {graph, setEntities, updateEntities, start} = useGraph(config);
     const editorRef = useRef<ConfigEditorController>(null);
 
+    const initialLayout = useRef(generatePlaygroundActionBlocks(0, 5));
+    const blockIndexRef = useRef(initialLayout.current.blocks.length);
+
     const [editorOpened, setEditorOpened] = useState(true);
+
+    useLayer(graph, ConnectionLayer, {
+        // @ts-expect-error TODO: Layer types do not propagate through the graph configuration
+        drawLine: (lineStart: {x: number; y: number}, lineEnd: {x: number; y: number}) => {
+            const path = new Path2D();
+            path.moveTo(lineStart.x, lineStart.y);
+            path.lineTo(lineEnd.x, lineEnd.y);
+            return {
+                path,
+                style: {
+                    color: 'rgba(234, 201, 74, 1)',
+                    dash: [5, 5], // Dashed line
+                },
+            };
+        },
+    });
 
     const updateVisibleConfig = useFn(() => {
         const currentConfig = graph.rootStore.getAsConfig();
@@ -159,12 +161,29 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
         });
     });
 
-    useGraphEvent(graph, 'block-change', ({block}) => {
-        editorRef.current?.updateBlocks([block]);
-        editorRef.current?.scrollTo(block.id);
+    const updatedRef = useRef<Map<TBlockId, TBlock>>(new Map());
+
+    const throttleUpdateBlocks = useSchedulerThrottle(
+        () => {
+            const blocks = Array.from(updatedRef.current.values());
+            updatedRef.current.clear();
+            if (blocks.length > 0) {
+                editorRef.current?.updateBlocks(blocks);
+                editorRef.current?.scrollTo(blocks[0].id);
+            }
+        },
+        {
+            priority: ESchedulerPriority.LOW,
+            frameInterval: 2,
+        },
+    );
+
+    useGraphEvent(graph, 'block-change', ({block: changedBlock}) => {
+        updatedRef.current.set(changedBlock.id, changedBlock);
+        throttleUpdateBlocks();
     });
 
-    useGraphEvent(graph, 'blocks-selection-change', ({changes}) => {
+    useGraphEvent(graph, 'blocks-selection-change', ({changes, list}) => {
         editorRef.current?.updateBlocks([
             ...changes.add.map((id) => ({
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -177,6 +196,9 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
                 selected: false,
             })),
         ]);
+        if (list.length === 1) {
+            editorRef.current?.scrollTo(list[0]);
+        }
     });
 
     useGraphEvent(
@@ -216,47 +238,39 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
             if (targetBlockId) {
                 return;
             }
-            let block: TBlock;
+            let newBlock: TGravityActionBlock;
             const pullSourceAnchor = graph.rootStore.blocksList
                 .getBlockState(sourceBlockId)
                 .getAnchorById(sourceAnchorId);
             if (pullSourceAnchor.state.type === EAnchorType.IN) {
-                block = createActionBlock(
-                    point.x - 126,
-                    point.y - 63,
-                    graph.rootStore.blocksList.$blocksMap.value.size + 1,
-                );
-                graph.api.addBlock(block);
+                newBlock = createActionBlock(point.x - 126, point.y - 63, ++blockIndexRef.current);
+                graph.api.addBlock(newBlock);
                 graph.api.addConnection({
-                    sourceBlockId: block.id,
-                    sourceAnchorId: block.anchors[1].id,
+                    sourceBlockId: newBlock.id,
+                    sourceAnchorId: newBlock.anchors[1].id,
                     targetBlockId: sourceBlockId,
                     targetAnchorId: sourceAnchorId,
                 });
             } else {
-                block = createActionBlock(
-                    point.x,
-                    point.y - 63,
-                    graph.rootStore.blocksList.$blocksMap.value.size + 1,
-                );
-                graph.api.addBlock(block);
+                newBlock = createActionBlock(point.x, point.y - 63, ++blockIndexRef.current);
+                graph.api.addBlock(newBlock);
                 graph.api.addConnection({
                     sourceBlockId: sourceBlockId,
                     sourceAnchorId: sourceAnchorId,
-                    targetBlockId: block.id,
-                    targetAnchorId: block.anchors[0].id,
+                    targetBlockId: newBlock.id,
+                    targetAnchorId: newBlock.anchors[0].id,
                 });
             }
-            graph.zoomTo([block.id], {transition: 250});
+            graph.zoomTo([newBlock.id], {transition: 250});
             updateVisibleConfig();
-            editorRef.current?.scrollTo(block.id);
+            editorRef.current?.scrollTo(newBlock.id);
         },
     );
 
     useLayoutEffect(() => {
         setEntities({
-            blocks: [...textBlocks, ...generated.blocks],
-            connections: generated.connections,
+            blocks: [...textBlocks, ...initialLayout.current.blocks],
+            connections: initialLayout.current.connections,
         });
         updateVisibleConfig();
     }, [setEntities]);
@@ -272,15 +286,17 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
         const rect = graph.api.getUsableRect();
         const x = random(rect.x, rect.x + rect.width + 100);
         const y = random(rect.y, rect.y + rect.height + 100);
-        const block = createActionBlock(x, y, graph.rootStore.blocksList.$blocksMap.value.size + 1);
-        graph.api.addBlock(block);
-        graph.zoomTo([block.id], {transition: 250});
+        const newBlock = createActionBlock(x, y, ++blockIndexRef.current);
+        graph.api.addBlock(newBlock);
+        graph.zoomTo([newBlock.id], {transition: 250});
         updateVisibleConfig();
-        editorRef.current?.scrollTo(block.id);
+        editorRef.current?.scrollTo(newBlock.id);
     });
 
-    const renderBlockFn = useFn((graph: Graph, block: TBlock) => {
-        const view = graph.rootStore.blocksList.getBlockState(block.id)?.getViewComponent();
+    const renderBlockFn = useFn((graphInstance: Graph, blockData: TBlock) => {
+        const view = graphInstance.rootStore.blocksList
+            .getBlockState(blockData.id)
+            ?.getViewComponent();
         if (view instanceof ActionBlock) {
             return view.renderHTML();
         }
@@ -288,34 +304,39 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
             return view.renderHTML();
         }
         return (
-            <GraphBlock graph={graph} block={block}>
-                Unknown block <>{block.id.toString()}</>
+            <GraphBlock graph={graphInstance} block={blockData}>
+                Unknown block <>{blockData.id.toString()}</>
             </GraphBlock>
         );
-    });
-
-    useGraphEvent(graph, 'blocks-selection-change', ({list}) => {
-        if (list.length === 1) {
-            editorRef.current?.scrollTo(list[0]);
-        }
     });
 
     useEffect(() => {
         const fn = (e: KeyboardEvent) => {
             if (e.code === 'Backspace') {
-                graph.api.deleteSelected();
+                const blocks = graph.selectionService.getBucket('block');
+                const connection = graph.selectionService.getBucket('connection');
+                if (blocks) {
+                    graph.rootStore.blocksList.deleteBlocks(Array.from(blocks.$selected.value));
+                }
+                if (connection) {
+                    const connections = graph.rootStore.connectionsList.getConnections(
+                        Array.from(connection.$selected.value),
+                    );
+                    graph.rootStore.connectionsList.deleteConnections(connections);
+                }
                 updateVisibleConfig();
             }
         };
         document.body.addEventListener('keydown', fn);
         return () => document.body.removeEventListener('keydown', fn);
-    });
+    }, [graph.api, updateVisibleConfig]);
 
-    const updateGraphSize = async (value: string) => {
+    const updateGraphSize = (value: string) => {
         let nextConfig;
         switch (value) {
             case graphSizeOptions[0].value: {
                 nextConfig = generatePlaygroundActionBlocks(0, 5);
+                nextConfig.blocks = [...textBlocks, ...nextConfig.blocks];
                 break;
             }
             case graphSizeOptions[1].value: {
@@ -337,8 +358,8 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
             }
         }
         if (nextConfig) {
-            await new Promise((resolve) => setTimeout(resolve, 200));
-            setEntities({blocks: nextConfig?.blocks, connections: nextConfig?.connections});
+            blockIndexRef.current = nextConfig.blocks.length;
+            setEntities({blocks: nextConfig.blocks, connections: nextConfig.connections});
             graph.zoomTo('center', {transition: 500});
             updateVisibleConfig();
         }
@@ -367,7 +388,7 @@ export const GraphPlayground = memo(({className}: {className: string}) => {
                         <Toolbox graph={graph} className={b('zoom', 'button-group')} />
                         <GraphSettings
                             className={b('graph-settings')}
-                            radionButtonClass={radioB()}
+                            radioButtonClass={radioB()}
                             graph={graph}
                         />
                     </Flex>

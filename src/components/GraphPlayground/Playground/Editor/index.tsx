@@ -2,18 +2,18 @@ import {TBlock, TBlockId, TConnection} from '@gravity-ui/graph';
 import {Button, Flex, Hotkey, Text} from '@gravity-ui/uikit';
 import {Editor, OnMount, OnValidate, loader} from '@monaco-editor/react';
 import {KeyCode, KeyMod} from 'monaco-editor/esm/vs/editor/editor.api';
-import React, {Ref, useCallback, useImperativeHandle, useRef, useState} from 'react';
+import {Ref, forwardRef, useCallback, useImperativeHandle, useRef, useState} from 'react';
 
 import {block} from '../../../../utils';
 
 import './Editor.scss';
-import {defineConigSchema} from './schema';
+import {defineConfigSchema} from './schema';
 import {GravityTheme, defineTheme} from './theme';
 import {findBlockPositionsMonaco} from './utils';
 
 loader.init().then((monaco) => {
     defineTheme(monaco);
-    defineConigSchema(monaco);
+    defineConfigSchema(monaco);
 });
 
 const b = block('editor');
@@ -31,7 +31,7 @@ type ConfigEditorProps = {
 
 type ExtractTypeFromArray<T> = T extends Array<infer E> ? E : never;
 
-export const ConfigEditor = React.forwardRef(function ConfigEditor(
+export const ConfigEditor = forwardRef(function ConfigEditor(
     props: ConfigEditorProps,
     ref: Ref<ConfigEditorController>,
 ) {
@@ -75,7 +75,6 @@ export const ConfigEditor = React.forwardRef(function ConfigEditor(
             }
             const edits = blocks.map((block) => {
                 const range = findBlockPositionsMonaco(model, block.id);
-                const text = JSON.stringify({block: [block]}, null, 2);
                 return {
                     range: {
                         startColumn: range.start.column,
@@ -83,7 +82,7 @@ export const ConfigEditor = React.forwardRef(function ConfigEditor(
                         endColumn: range.end.column,
                         endLineNumber: range.end.lineNumber,
                     },
-                    text: text.slice(19, text.length - 6),
+                    text: JSON.stringify(block, null, 2),
                 };
             });
 
@@ -108,11 +107,11 @@ export const ConfigEditor = React.forwardRef(function ConfigEditor(
         }
         try {
             const data = JSON.parse(model.getValue());
-            props?.onChange?.({blocks: data.blocks, connections: data.conections});
+            props?.onChange?.({blocks: data.blocks, connections: data.connections});
         } catch (e) {
             console.error(e);
         }
-    }, [monacoRef]);
+    }, [props.onChange]);
 
     return (
         <Flex direction="column" className={b()}>

@@ -1,15 +1,23 @@
-import {Graph} from '@gravity-ui/graph';
+import {ESchedulerPriority, Graph} from '@gravity-ui/graph';
 import {useGraphEvent} from '@gravity-ui/graph/react';
 import {MagnifierMinus, MagnifierPlus, SquareDashed} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Tooltip} from '@gravity-ui/uikit';
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 export function Toolbox({className, graph}: {className: string; graph: Graph}) {
     const [scale, setScale] = useState(1);
 
-    useGraphEvent(graph, 'camera-change', ({scale}) => {
-        setScale(scale);
-    });
+    useGraphEvent(
+        graph,
+        'camera-change',
+        ({scale}) => {
+            setScale(scale);
+        },
+        {
+            priority: ESchedulerPriority.HIGH,
+            frameInterval: 1,
+        },
+    );
 
     return (
         <Flex grow={1} justifyContent="center" className={className} direction="column">

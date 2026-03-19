@@ -9,7 +9,7 @@ import {
     SegmentedRadioGroupOptionProps,
     Text,
 } from '@gravity-ui/uikit';
-import React, {useState} from 'react';
+import {useState} from 'react';
 
 import {block} from '../../../utils';
 
@@ -30,15 +30,15 @@ const b = block('graph-settings');
 
 export function GraphSettings({
     className,
-    radionButtonClass,
+    radioButtonClass,
     graph,
 }: {
     className: string;
-    radionButtonClass: string;
+    radioButtonClass: string;
     graph: Graph;
 }) {
     const rerender = useRerender();
-    const [buttonElement, setButtonElement] = React.useState<HTMLButtonElement | null>(null);
+    const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null);
     const [settingsOpened, setSettingsOpened] = useState(false);
     return (
         <>
@@ -66,7 +66,7 @@ export function GraphSettings({
                     <Flex direction="column" gap={2}>
                         <Text variant="subheader-1">Connection type</Text>
                         <SegmentedRadioGroup
-                            className={radionButtonClass}
+                            className={radioButtonClass}
                             size="l"
                             onUpdate={(value) => {
                                 graph.updateSettings({
@@ -88,7 +88,7 @@ export function GraphSettings({
                         <Text variant="subheader-1">Show arrows</Text>
                         <SegmentedRadioGroup
                             size="l"
-                            className={radionButtonClass}
+                            className={radioButtonClass}
                             onUpdate={(value) => {
                                 graph.updateSettings({
                                     showConnectionArrows:

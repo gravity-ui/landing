@@ -1,9 +1,7 @@
-@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
-@use '~@gravity-ui/uikit/styles/mixins' as ukitMixins;
 @use '../../../variables.scss';
 
 $pg: '.#{variables.$ns}graph-playground';
-$radio: '.#{variables.$ns}graph-playground-radio-buton';
+$radio: '.#{variables.$ns}graph-playground-radio-button';
 
 #{$radio} {
     --_--border-radius: 8px;

@@ -1,7 +1,10 @@
-import {EAnchorType, type TBlock, TConnection} from '@gravity-ui/graph';
+import {EAnchorType, TAnchor, type TBlock, TConnection} from '@gravity-ui/graph';
 
 export const GravityActionBlockIS = 'block-action';
-export type TGravityActionBlock = TBlock<{description: string}> & {is: typeof GravityActionBlockIS};
+export type TGravityActionBlock = TBlock<{description: string}> & {
+    is: typeof GravityActionBlockIS;
+    anchors: [TAnchor, TAnchor];
+};
 
 export const GravityTextBlockIS = 'block-text';
 export type TGravityTextBlock = TBlock<{text: string}> & {is: typeof GravityTextBlockIS};
@@ -96,7 +99,7 @@ export function generatePlaygroundActionBlocks(layersCount: number, connectionsP
             config.blocks.push(block);
             currentLayerBlocks.push(block);
         }
-        if (i > 1) {
+        if (i > 0) {
             for (let c = 0; c <= connectionsPerLayer; c++) {
                 const indexSource = getRandomArbitrary(
                     config.blocks.length - currentLayerBlocks.length - prevLayerBlocks.length - 1,
@@ -111,14 +114,14 @@ export function generatePlaygroundActionBlocks(layersCount: number, connectionsP
                     const targetBlockId = getActionBlockId(indexTarget);
                     config.connections.push({
                         sourceBlockId: sourceBlockId,
-                        sourceAnchorId: `${sourceBlockId}_anchor_out`,
+                        sourceAnchorId: `${sourceBlockId}_out`,
                         targetBlockId: targetBlockId,
-                        targetAnchorId: `${targetBlockId}_anchor_in`,
+                        targetAnchorId: `${targetBlockId}_in`,
                     });
                 }
             }
-            prevLayerBlocks = [...currentLayerBlocks];
         }
+        prevLayerBlocks = [...currentLayerBlocks];
     }
 
     return config;
