@@ -1,73 +1,198 @@
-# @gravity-ui/chartkit &middot; [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
+# @gravity-ui/chartkit · [npm package](https://www.npmjs.com/package/@gravity-ui/chartkit) [License](LICENSE) [CI](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [storybook](https://preview.gravity-ui.com/chartkit/)
 
-Componente React para renderizar gráficos a partir de cualquier fuente que necesites.
+Componente React basado en plugins que proporciona una interfaz de renderizado unificada para múltiples bibliotecas de gráficos. Registras uno o más plugins y renderizas gráficos a través de `<ChartKit type="..." data={...} />` — ChartKit se encarga de enviarlo al renderizador correcto automáticamente.
 
-## Instalación
+Cada renderizador de plugin se carga de forma diferida, por lo que el código de la biblioteca subyacente solo se descarga cuando ChartKit se renderiza realmente en la interfaz de usuario. ChartKit también maneja la visualización de tooltips adaptados para móviles de forma nativa. Puedes usar los plugins integrados o implementar los tuyos propios.
+
+**Cuándo usarlo:**
+
+- Necesitas gráficos declarativos modernos (`gravity-charts`) o gráficos de series temporales / monitorización (`yagr`)
+- Necesitas múltiples tipos de gráficos bajo una única API consistente
+- Estás desarrollando dentro del ecosistema de Gravity UI
+
+**Cuándo no usarlo:**
+
+- Solo necesitas una biblioteca de gráficos específica — prefiere usar [@gravity-ui/charts](https://github.com/gravity-ui/charts) directamente
+
+## Tabla de contenidos
+
+- [Primeros pasos](#get-started)
+- [Desarrollo](#development)
+
+## Primeros pasos
+
+### Requisitos
+
+- React 16, 17 o 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dependencia peer requerida (proporciona theming y primitivas de UI)
+
+### Instalación
 
 ```shell
-npm i --save-dev @gravity-ui/chartkit @gravity-ui/uikit
+npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
-Asegúrate de tener los estilos de `@gravity-ui/uikit` habilitados en tu proyecto.
+### Estilos
 
-```typescript
-import '@gravity-ui/uikit/styles/styles.scss';
+Importa los estilos de `@gravity-ui/uikit` en tu punto de entrada:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-## Uso
+Para obtener detalles completos de la configuración, consulta la [guía de estilos de uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
-```typescript
+### Uso básico
+
+ChartKit utiliza un registro global de plugins. Llama a `settings.set` una vez en el punto de entrada de tu aplicación para registrar los plugins que necesites. Cuando se renderiza `<ChartKit type="..." />`, busca el plugin coincidente; si no se encuentra ninguno, se lanza un error. El renderizador de cada plugin es un componente `React.lazy`, por lo que su código se descarga solo cuando ChartKit aparece por primera vez en la interfaz de usuario.
+
+Puedes registrar múltiples plugins a la vez:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+O llama a `settings.set` varias veces — fusiona la lista de plugins en lugar de reemplazarla.
+
+**Ejemplo básico:**
+
+```tsx
 import {ThemeProvider} from '@gravity-ui/uikit';
 import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {YagrPlugin} from '@gravity-ui/chartkit/yagr';
-import type {YagrWidgetData} from '@gravity-ui/chartkit/yagr';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
 
-import '@gravity-ui/uikit/styles/styles.scss';
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
 
-settings.set({plugins: [YagrPlugin]});
+settings.set({plugins: [GravityChartsPlugin]});
 
-const data: YagrWidgetData = {
-  data: {
-    timeline: [
-      1636838612441, 1636925012441, 1637011412441, 1637097812441, 1637184212441, 1637270612441,
-      1637357012441, 1637443412441, 1637529812441, 1637616212441,
-    ],
-    graphs: [
+const data = {
+  series: {
+    data: [
       {
-        id: '0',
-        name: 'Serie 1',
-        color: '#6c59c2',
-        data: [25, 52, 89, 72, 39, 49, 82, 59, 36, 5],
-      },
-      {
-        id: '1',
-        name: 'Serie 2',
-        color: '#6e8188',
-        data: [37, 6, 51, 10, 65, 35, 72, 0, 94, 54],
-      },
-    ],
-  },
-  libraryConfig: {
-    chart: {
-      series: {
         type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
       },
-    },
-    title: {
-      text: 'line: random 10 pts',
-    },
+    ],
   },
 };
 
-function App() {
+export default function App() {
   return (
-    <ThemeProvider>
-      <div className="app" style={{height: 500}}>
-        <ChartKit type="yagr" data={data} />
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
       </div>
     </ThemeProvider>
   );
 }
-
-export default App;
 ```
+
+`ChartKit` se adapta al tamaño de su contenedor padre — asegúrate de que el contenedor tenga una altura explícita.
+
+## Desarrollo
+
+### Prerrequisitos
+
+- [Node.js](https://nodejs.org/) 22 (ver [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
+- [npm](https://www.npmjs.com/) 10 o posterior
+
+### Configuración
+
+Clona el repositorio e instala las dependencias:
+
+```shell
+git clone https://github.com/gravity-ui/ChartKit.git
+cd ChartKit
+npm ci
+```
+
+### Ejecutar Storybook
+
+```shell
+npm run start
+```
+
+Storybook estará disponible en `http://localhost:7007`.
+
+### Desarrollar con una dependencia local
+
+Para trabajar en una dependencia (por ejemplo, `@gravity-ui/charts`) y ver tus cambios en vivo en Storybook sin publicarlos en npm:
+
+**1. Enlaza el paquete local**
+
+```shell
+# En tu clon local de @gravity-ui/charts:
+git clone https://github.com/gravity-ui/charts.git
+cd charts
+npm ci
+# haz tus cambios
+npm run build
+npm link
+
+# En ChartKit:
+npm link @gravity-ui/charts
+```
+
+**2. Configura la observación del paquete local**
+
+Crea un archivo `.env.local` en la raíz de ChartKit (está ignorado por git):
+
+```shell
+LOCAL_PKG=@gravity-ui/charts
+```
+
+Esto le indica a Vite que observe ese paquete en `node_modules` y omita su pre-empaquetado. Después de reconstruir `@gravity-ui/charts`, Storybook se recargará en caliente automáticamente.
+
+Para múltiples paquetes, usa una lista separada por comas:
+
+```shell
+LOCAL_PKG=@gravity-ui/charts,@gravity-ui/uikit
+```
+
+**3. Inicia Storybook**
+
+```shell
+npm run start
+```
+
+**4. Restaura el paquete original**
+
+Cuando hayas terminado:
+
+1. Comenta `LOCAL_PKG` en `.env.local`
+2. Ejecuta `npm install` en ChartKit — esto reemplaza el enlace simbólico con la versión del registro
+
+```shell
+# En ChartKit:
+npm ci
+```
+
+### Ejecutar pruebas
+
+```shell
+npm test
+```
+
+Las pruebas de regresión visual se ejecutan en Docker para garantizar capturas de pantalla consistentes entre entornos:
+
+```shell
+npm run test:docker
+```
+
+Para actualizar las capturas de pantalla de referencia después de cambios intencionales en la UI:
+
+```shell
+npm run test:docker:update
+```
+
+### Contribución
+
+Por favor, consulta la [guía de contribución](CONTRIBUTING.md) antes de enviar una pull request.
