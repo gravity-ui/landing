@@ -1,6 +1,6 @@
 import {Monaco} from '@monaco-editor/react';
 
-export function defineConigSchema(monaco: Monaco) {
+export function defineConfigSchema(monaco: Monaco) {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
         validate: true,
         schemaValidation: 'error',

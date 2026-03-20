@@ -14,7 +14,7 @@ export const GraphPlayground = memo(() => {
 
     return (
         <PlaygroundWrap title={t('title')} libraryId="graph" goToLibraryText={t('goToLibrary')}>
-            <GraphPlaygroundInner className={b('graph-viewer')} key={Date.now()} />
+            <GraphPlaygroundInner className={b('graph-viewer')} />
         </PlaygroundWrap>
     );
 });

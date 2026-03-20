@@ -1,5 +1,5 @@
+/* eslint-disable no-param-reassign */
 import {CanvasBlock, TBlockId, layoutText} from '@gravity-ui/graph';
-import React from 'react';
 
 import {TGravityTextBlock} from '../generateLayout';
 
@@ -72,7 +72,6 @@ export class TextBlock extends CanvasBlock<TGravityTextBlock> {
 
         ctx.save();
 
-        ctx.lineWidth = Math.min(Math.round(2 / scale), 12);
         ctx.fillStyle = 'rgba(189, 142, 75, 0.1)';
 
         ctx.beginPath();
