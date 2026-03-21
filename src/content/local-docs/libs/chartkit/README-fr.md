@@ -1,8 +1,8 @@
-# @gravity-ui/chartkit · [npm package](https://www.npmjs.com/package/@gravity-ui/chartkit) [License](LICENSE) [CI](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [storybook](https://preview.gravity-ui.com/chartkit/)
+# Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Composant React basé sur des plugins, offrant une interface de rendu unifiée pour plusieurs bibliothèques de graphiques. Vous enregistrez un ou plusieurs plugins et affichez les graphiques via `<ChartKit type="..." data={...} />` — ChartKit se charge de la distribution vers le bon moteur de rendu automatiquement.
+Composant React basé sur des plugins qui offre une interface de rendu unifiée pour plusieurs bibliothèques de graphiques. Vous enregistrez un ou plusieurs plugins et affichez les graphiques via `<ChartKit type="..." data={...} />` — ChartKit distribue automatiquement au bon rendu.
 
-Chaque moteur de rendu de plugin est chargé de manière différée (lazy-loaded), ainsi le code de la bibliothèque sous-jacente n'est téléchargé que lorsque ChartKit est effectivement rendu dans l'interface utilisateur. ChartKit gère également l'affichage des infobulles adaptées aux mobiles dès l'installation. Vous pouvez utiliser les plugins intégrés ou implémenter les vôtres.
+Chaque rendu de plugin est chargé à la demande (lazy-loaded), de sorte que le code de la bibliothèque sous-jacente n'est téléchargé que lorsque ChartKit est effectivement rendu dans l'interface utilisateur. ChartKit gère également l'affichage des infobulles adaptées aux mobiles dès l'installation. Vous pouvez utiliser les plugins intégrés ou implémenter les vôtres.
 
 **Quand l'utiliser :**
 
@@ -24,7 +24,7 @@ Chaque moteur de rendu de plugin est chargé de manière différée (lazy-loaded
 ### Prérequis
 
 - React 16, 17 ou 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dépendance pair requise (fournit le thème et les primitives d'interface utilisateur)
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dépendance pair requise (fournit le theming et les primitives UI)
 
 ### Installation
 
@@ -41,11 +41,11 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-Pour les détails complets de configuration, consultez le [guide des styles uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+Pour des détails complets sur la configuration, consultez le [guide des styles uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ### Utilisation de base
 
-ChartKit utilise un registre global de plugins. Appelez `settings.set` une seule fois au point d'entrée de votre application pour enregistrer les plugins dont vous avez besoin. Lorsque `<ChartKit type="..." />` est rendu, il recherche le plugin correspondant — si aucun n'est trouvé, une erreur est levée. Le moteur de rendu de chaque plugin est un composant `React.lazy`, son code est donc récupéré uniquement lorsque ChartKit apparaît pour la première fois dans l'interface utilisateur.
+ChartKit utilise un registre global de plugins. Appelez `settings.set` une seule fois au point d'entrée de votre application pour enregistrer les plugins dont vous avez besoin. Lorsque `<ChartKit type="..." />` est rendu, il recherche le plugin correspondant — si aucun n'est trouvé, une erreur est levée. Le rendu de chaque plugin est un composant `React.lazy`, son code est donc récupéré uniquement lorsque ChartKit apparaît pour la première fois dans l'interface utilisateur.
 
 Vous pouvez enregistrer plusieurs plugins à la fois :
 
@@ -101,8 +101,8 @@ export default function App() {
 
 ### Prérequis
 
-- Node.js 22 (voir [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
-- npm 10 ou plus récent
+- [Node.js](https://nodejs.org/) 22 (voir [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
+- [npm](https://www.npmjs.com/) 10 ou plus récent
 
 ### Configuration
 
@@ -124,16 +124,16 @@ Storybook sera disponible à l'adresse `http://localhost:7007`.
 
 ### Développement avec une dépendance locale
 
-Pour travailler sur une dépendance (par exemple `@gravity-ui/charts`) et voir vos modifications en direct dans Storybook sans publier sur npm :
+Pour travailler sur une dépendance (par exemple, `@gravity-ui/charts`) et voir vos modifications en direct dans Storybook sans la publier sur npm :
 
-**1. Lier le paquet local**
+**1. Lier le package local**
 
 ```shell
 # Dans votre clone local de @gravity-ui/charts :
 git clone https://github.com/gravity-ui/charts.git
 cd charts
 npm ci
-# apportez vos modifications
+# faites vos modifications
 npm run build
 npm link
 
@@ -141,7 +141,7 @@ npm link
 npm link @gravity-ui/charts
 ```
 
-**2. Configurer la surveillance du paquet local**
+**2. Configurer la surveillance du package local**
 
 Créez un fichier `.env.local` à la racine de ChartKit (il est ignoré par git) :
 
@@ -149,9 +149,9 @@ Créez un fichier `.env.local` à la racine de ChartKit (il est ignoré par git)
 LOCAL_PKG=@gravity-ui/charts
 ```
 
-Cela indique à Vite de surveiller ce paquet dans `node_modules` et de ne pas le pré-compiler. Après avoir reconstruit `@gravity-ui/charts`, Storybook se rechargera à chaud automatiquement.
+Cela indique à Vite de surveiller ce package dans `node_modules` et d'éviter de le pré-compiler. Après avoir reconstruit `@gravity-ui/charts`, Storybook se rechargera automatiquement.
 
-Pour plusieurs paquets, utilisez une liste séparée par des virgules :
+Pour plusieurs packages, utilisez une liste séparée par des virgules :
 
 ```shell
 LOCAL_PKG=@gravity-ui/charts,@gravity-ui/uikit
@@ -163,7 +163,7 @@ LOCAL_PKG=@gravity-ui/charts,@gravity-ui/uikit
 npm run start
 ```
 
-**4. Restaurer le paquet d'origine**
+**4. Restaurer le package d'origine**
 
 Lorsque vous avez terminé :
 
@@ -175,7 +175,7 @@ Lorsque vous avez terminé :
 npm ci
 ```
 
-### Exécution des tests
+### Lancement des tests
 
 ```shell
 npm test

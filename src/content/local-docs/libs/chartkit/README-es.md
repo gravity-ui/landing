@@ -1,8 +1,8 @@
-# @gravity-ui/chartkit · [npm package](https://www.npmjs.com/package/@gravity-ui/chartkit) [License](LICENSE) [CI](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [storybook](https://preview.gravity-ui.com/chartkit/)
+# Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
 Componente React basado en plugins que proporciona una interfaz de renderizado unificada para múltiples bibliotecas de gráficos. Registras uno o más plugins y renderizas gráficos a través de `<ChartKit type="..." data={...} />` — ChartKit se encarga de enviarlo al renderizador correcto automáticamente.
 
-Cada renderizador de plugin se carga de forma diferida, por lo que el código de la biblioteca subyacente solo se descarga cuando ChartKit se renderiza realmente en la interfaz de usuario. ChartKit también maneja la visualización de tooltips adaptados para móviles de forma nativa. Puedes usar los plugins integrados o implementar los tuyos propios.
+Cada renderizador de plugin se carga de forma diferida (lazy-loaded), por lo que el código de la biblioteca subyacente solo se descarga cuando ChartKit se renderiza realmente en la interfaz de usuario. ChartKit también maneja la visualización de tooltips amigables para móviles de forma nativa. Puedes usar los plugins integrados o implementar los tuyos propios.
 
 **Cuándo usarlo:**
 
@@ -24,7 +24,7 @@ Cada renderizador de plugin se carga de forma diferida, por lo que el código de
 ### Requisitos
 
 - React 16, 17 o 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dependencia peer requerida (proporciona theming y primitivas de UI)
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dependencia peer requerida (proporciona temas y primitivas de UI)
 
 ### Instalación
 
@@ -45,7 +45,7 @@ Para obtener detalles completos de la configuración, consulta la [guía de esti
 
 ### Uso básico
 
-ChartKit utiliza un registro global de plugins. Llama a `settings.set` una vez en el punto de entrada de tu aplicación para registrar los plugins que necesites. Cuando se renderiza `<ChartKit type="..." />`, busca el plugin coincidente; si no se encuentra ninguno, se lanza un error. El renderizador de cada plugin es un componente `React.lazy`, por lo que su código se descarga solo cuando ChartKit aparece por primera vez en la interfaz de usuario.
+ChartKit utiliza un registro global de plugins. Llama a `settings.set` una vez en el punto de entrada de tu aplicación para registrar los plugins que necesitas. Cuando se renderiza `<ChartKit type="..." />`, busca el plugin coincidente; si no se encuentra ninguno, se lanza un error. El renderizador de cada plugin es un componente `React.lazy`, por lo que su código se descarga solo cuando ChartKit aparece por primera vez en la interfaz de usuario.
 
 Puedes registrar múltiples plugins a la vez:
 
@@ -187,12 +187,12 @@ Las pruebas de regresión visual se ejecutan en Docker para garantizar capturas 
 npm run test:docker
 ```
 
-Para actualizar las capturas de pantalla de referencia después de cambios intencionales en la UI:
+Para actualizar las capturas de pantalla de referencia después de cambios intencionados en la UI:
 
 ```shell
 npm run test:docker:update
 ```
 
-### Contribución
+### Contribuir
 
 Por favor, consulta la [guía de contribución](CONTRIBUTING.md) antes de enviar una pull request.

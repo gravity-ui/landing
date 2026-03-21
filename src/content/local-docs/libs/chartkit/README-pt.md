@@ -1,6 +1,6 @@
-# @gravity-ui/chartkit · [npm package](https://www.npmjs.com/package/@gravity-ui/chartkit) [License](LICENSE) [CI](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [storybook](https://preview.gravity-ui.com/chartkit/)
+# Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Componente React baseado em plugins que fornece uma interface de renderização unificada para múltiplas bibliotecas de gráficos. Você registra um ou mais plugins e renderiza gráficos através de `<ChartKit type="..." data={...} />` — o ChartKit despacha para o renderizador correto automaticamente.
+Um componente React baseado em plugins que fornece uma interface unificada de renderização para múltiplas bibliotecas de gráficos. Você registra um ou mais plugins e renderiza gráficos através de `<ChartKit type="..." data={...} />` — o ChartKit despacha para o renderizador correto automaticamente.
 
 Cada renderizador de plugin é carregado sob demanda (lazy-loaded), então o código da biblioteca subjacente só é baixado quando o ChartKit é realmente renderizado na UI. O ChartKit também lida com a exibição de tooltips amigáveis para dispositivos móveis nativamente. Você pode usar os plugins embutidos ou implementar os seus próprios.
 
@@ -8,7 +8,7 @@ Cada renderizador de plugin é carregado sob demanda (lazy-loaded), então o có
 
 - Você precisa de gráficos declarativos modernos (`gravity-charts`) ou gráficos de séries temporais / monitoramento (`yagr`)
 - Você precisa de múltiplos tipos de gráficos sob uma única API consistente
-- Você está construindo no ecossistema Gravity UI
+- Você está desenvolvendo no ecossistema Gravity UI
 
 **Quando não usar:**
 
@@ -16,10 +16,10 @@ Cada renderizador de plugin é carregado sob demanda (lazy-loaded), então o có
 
 ## Sumário
 
-- [Começando](#get-started)
+- [Primeiros passos](#get-started)
 - [Desenvolvimento](#development)
 
-## Começando
+## Primeiros passos
 
 ### Requisitos
 
@@ -45,7 +45,7 @@ Para detalhes completos de configuração, consulte o [guia de estilos do uikit]
 
 ### Uso básico
 
-O ChartKit usa um registro global de plugins. Chame `settings.set` uma vez no ponto de entrada do seu aplicativo para registrar os plugins que você precisa. Quando `<ChartKit type="..." />` renderiza, ele procura o plugin correspondente — se nenhum for encontrado, um erro é lançado. O renderizador de cada plugin é um componente `React.lazy`, então seu código é buscado apenas quando o ChartKit aparece pela primeira vez na UI.
+O ChartKit usa um registro global de plugins. Chame `settings.set` uma vez no ponto de entrada da sua aplicação para registrar os plugins que você precisa. Quando `<ChartKit type="..." />` renderiza, ele procura o plugin correspondente — se nenhum for encontrado, um erro é lançado. O renderizador de cada plugin é um componente `React.lazy`, então seu código é buscado apenas quando o ChartKit aparece pela primeira vez na UI.
 
 Você pode registrar múltiplos plugins de uma vez:
 
@@ -126,7 +126,7 @@ O Storybook estará disponível em `http://localhost:7007`.
 
 Para trabalhar em uma dependência (por exemplo, `@gravity-ui/charts`) e ver suas alterações ao vivo no Storybook sem publicar no npm:
 
-**1. Link a pacote local**
+**1. Vincule o pacote local**
 
 ```shell
 # No seu clone local de @gravity-ui/charts:
@@ -167,7 +167,7 @@ npm run start
 
 Quando terminar:
 
-1. Comente `LOCAL_PKG` em `.env.local`
+1. Comente a linha `LOCAL_PKG` em `.env.local`
 2. Execute `npm install` no ChartKit — isso substitui o link simbólico pela versão do registro
 
 ```shell
@@ -181,13 +181,13 @@ npm ci
 npm test
 ```
 
-Testes de regressão visual são executados no Docker para garantir screenshots consistentes entre ambientes:
+Testes de regressão visual são executados no Docker para garantir capturas de tela consistentes entre ambientes:
 
 ```shell
 npm run test:docker
 ```
 
-Para atualizar os screenshots de referência após alterações intencionais na UI:
+Para atualizar as capturas de tela de referência após alterações intencionais na UI:
 
 ```shell
 npm run test:docker:update
