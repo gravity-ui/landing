@@ -1,13 +1,13 @@
-# @gravity-ui/chartkit · [npm 패키지](https://www.npmjs.com/package/@gravity-ui/chartkit) [라이선스](LICENSE) [CI](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [storybook](https://preview.gravity-ui.com/chartkit/)
+# Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-다양한 차트 라이브러리에 대한 통합 렌더링 인터페이스를 제공하는 플러그인 기반 React 컴포넌트입니다. 하나 이상의 플러그인을 등록하고 `<ChartKit type="..." data={...} />`를 통해 차트를 렌더링하면 — ChartKit이 자동으로 올바른 렌더러로 디스패치합니다.
+플러그인 기반 React 컴포넌트로, 여러 차트 라이브러리에 대한 통합 렌더링 인터페이스를 제공합니다. 하나 이상의 플러그인을 등록하고 `<ChartKit type="..." data={...} />`를 통해 차트를 렌더링하면 — ChartKit이 자동으로 올바른 렌더러로 디스패치합니다.
 
-각 플러그인 렌더러는 지연 로딩되므로, 기본 라이브러리 코드는 ChartKit이 UI에 실제로 렌더링될 때만 다운로드됩니다. ChartKit은 또한 모바일 친화적인 툴팁 표시를 기본적으로 지원합니다. 내장된 플러그인을 사용하거나 자신만의 플러그인을 구현할 수 있습니다.
+각 플러그인 렌더러는 지연 로딩되므로, 기본 라이브러리 코드는 ChartKit이 UI에 실제로 렌더링될 때만 다운로드됩니다. ChartKit은 또한 모바일 친화적인 툴팁 표시를 기본적으로 지원합니다. 내장된 플러그인을 사용하거나 직접 구현할 수 있습니다.
 
 **언제 사용해야 할까요:**
 
 - 최신 선언형 차트 (`gravity-charts`) 또는 시계열/모니터링 차트 (`yagr`)가 필요할 때
-- 단일 일관된 API 아래에서 여러 차트 유형이 필요할 때
+- 단일하고 일관된 API 아래에서 여러 차트 유형이 필요할 때
 - Gravity UI 생태계에서 개발할 때
 
 **언제 사용하지 않아야 할까요:**
@@ -41,11 +41,11 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-전체 설정에 대한 자세한 내용은 [uikit 스타일 가이드](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)를 참조하세요.
+전체 설정 세부 정보는 [uikit 스타일 가이드](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)를 참조하세요.
 
 ### 기본 사용법
 
-ChartKit은 전역 플러그인 레지스트리를 사용합니다. 앱 엔트리 포인트에서 `settings.set`을 한 번 호출하여 필요한 플러그인을 등록합니다. `<ChartKit type="..." />`가 렌더링될 때, 일치하는 플러그인을 찾습니다 — 찾지 못하면 오류가 발생합니다. 각 플러그인의 렌더러는 `React.lazy` 컴포넌트이므로, ChartKit이 UI에 처음 나타날 때만 코드가 가져와집니다.
+ChartKit은 전역 플러그인 레지스트리를 사용합니다. 앱 엔트리 포인트에서 `settings.set`을 한 번 호출하여 필요한 플러그인을 등록합니다. `<ChartKit type="..." />`가 렌더링될 때, 일치하는 플러그인을 찾습니다 — 찾지 못하면 오류가 발생합니다. 각 플러그인의 렌더러는 `React.lazy` 컴포넌트이므로, 해당 코드의 가져오기는 ChartKit이 UI에 처음 나타날 때만 수행됩니다.
 
 여러 플러그인을 한 번에 등록할 수 있습니다:
 
@@ -95,7 +95,7 @@ export default function App() {
 }
 ```
 
-`ChartKit`은 부모 요소의 크기에 맞춰 조정됩니다 — 컨테이너에 명시적인 높이가 있는지 확인하세요.
+`ChartKit`은 부모 요소의 크기에 맞춰 조정됩니다 — 컨테이너에 명시적인 높이가 지정되어 있는지 확인하세요.
 
 ## 개발
 
@@ -106,7 +106,7 @@ export default function App() {
 
 ### 설정
 
-리포지토리를 클론하고 의존성을 설치합니다:
+저장소를 복제하고 종속성을 설치합니다:
 
 ```shell
 git clone https://github.com/gravity-ui/ChartKit.git
@@ -122,11 +122,11 @@ npm run start
 
 Storybook은 `http://localhost:7007`에서 사용할 수 있습니다.
 
-### 로컬 의존성으로 개발하기
+### 로컬 종속성으로 개발하기
 
-의존성(예: `@gravity-ui/charts`)을 수정하고 npm에 게시하지 않고도 Storybook에서 변경 사항을 실시간으로 확인하려면:
+npm에 게시하지 않고 Storybook에서 변경 사항을 실시간으로 확인하면서 종속성(예: `@gravity-ui/charts`)을 작업하려면 다음을 수행하세요:
 
-**1. 로컬 패키지 연결**
+**1. 로컬 패키지 링크**
 
 ```shell
 # 로컬 @gravity-ui/charts 복제본에서:
@@ -149,7 +149,7 @@ ChartKit 루트에 `.env.local` 파일을 생성합니다 (이 파일은 gitigno
 LOCAL_PKG=@gravity-ui/charts
 ```
 
-이렇게 하면 Vite가 `node_modules`에서 해당 패키지를 감시하고 사전 번들링을 건너뛰도록 지시합니다. `@gravity-ui/charts`를 다시 빌드하면 Storybook이 자동으로 핫 리로드됩니다.
+이렇게 하면 Vite가 `node_modules`에서 해당 패키지를 감시하고 사전 번들링을 건너뛰도록 지시합니다. `@gravity-ui/charts`를 다시 빌드하면 Storybook이 자동으로 다시 로드됩니다.
 
 여러 패키지의 경우 쉼표로 구분된 목록을 사용합니다:
 
@@ -181,7 +181,7 @@ npm ci
 npm test
 ```
 
-시각적 회귀 테스트는 Docker에서 실행되어 환경 간 일관된 스크린샷을 보장합니다:
+환경 간 일관된 스크린샷을 보장하기 위해 시각적 회귀 테스트는 Docker에서 실행됩니다:
 
 ```shell
 npm run test:docker
