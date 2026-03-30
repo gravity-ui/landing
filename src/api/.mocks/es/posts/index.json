@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 73,
+      "name": "gravityui-aikit",
+      "date": "2025-12-18T00:00:00Z",
+      "title": "Un chat para gobernarlos a todos: construimos una biblioteca de asistente de IA basada en Gravity UI",
+      "postId": 73,
+      "description": "Un artículo sobre el lanzamiento de la biblioteca AIKit: en qué nos enfocamos durante el desarrollo, por qué es necesaria y cómo usarla en tus propios proyectos.",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+      "readingTime": 8,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Artículos"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravityui-aikit"
+    },
+    {
       "id": 36,
       "name": "graph",
       "date": "2025-08-07T00:00:00Z",
@@ -169,21 +193,21 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 16,
+  "totalCount": 17,
   "count": 7,
   "pinnedPost": {
-    "id": 73,
-    "name": "gravityui-aikit",
-    "date": "2025-12-18T00:00:00Z",
-    "title": "Un chat para gobernarlos a todos: construimos una biblioteca de asistente de IA basada en Gravity UI",
-    "postId": 73,
-    "description": "Un artículo sobre el lanzamiento de la biblioteca AIKit: en qué nos enfocamos durante el desarrollo, por qué es necesaria y cómo usarla en tus propios proyectos.",
-    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
-    "readingTime": 8,
+    "id": 1765,
+    "name": "datalens-highcharts",
+    "date": "2026-03-27T00:00:00Z",
+    "title": "Reemplazar o Quedarse: Cómo DataLens Migró de Highcharts",
+    "postId": 1765,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
+    "readingTime": 10,
     "likes": 0,
     "hasUserLike": false,
     "hasPublishedVersionInRegion": true,
-    "hasPublishedVersionInLocale": false,
+    "hasPublishedVersionInLocale": true,
     "addLegacyPrefix": false,
     "tags": [
       {
@@ -193,6 +217,6 @@
       }
     ],
     "services": [],
-    "url": "/blog/gravityui-aikit"
+    "url": "/blog/datalens-highcharts"
   }
 }
