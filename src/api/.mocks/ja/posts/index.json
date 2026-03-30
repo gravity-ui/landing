@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 73,
+      "name": "gravityui-aikit",
+      "date": "2025-12-18T00:00:00Z",
+      "title": "すべてを統べる一つのチャット：Gravity UIをベースにしたAIアシスタント向けライブラリを構築",
+      "postId": 73,
+      "description": "AIKitライブラリのリリースについての記事：開発で注目したこと、なぜ必要なのか、そしてプロジェクトでの活用方法。",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
+      "readingTime": 8,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/gravityui-aikit"
+    },
+    {
       "id": 36,
       "name": "graph",
       "date": "2025-08-07T00:00:00Z",
@@ -169,17 +193,17 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 16,
+  "totalCount": 17,
   "count": 7,
   "pinnedPost": {
-    "id": 73,
-    "name": "gravityui-aikit",
-    "date": "2025-12-18T00:00:00Z",
-    "title": "すべてを統べる一つのチャット：Gravity UIをベースにしたAIアシスタント向けライブラリを構築",
-    "postId": 73,
-    "description": "AIKitライブラリのリリースについての記事：開発で注目したこと、なぜ必要なのか、そしてプロジェクトでの活用方法。",
-    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/aikit/aikit-bg-cover.png",
-    "readingTime": 8,
+    "id": 1765,
+    "name": "datalens-highcharts",
+    "date": "2026-03-27T00:00:00Z",
+    "title": "置き換えるか残すか：DataLensがHighchartsから移行した方法",
+    "postId": 1765,
+    "description": "",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
+    "readingTime": 10,
     "likes": 0,
     "hasUserLike": false,
     "hasPublishedVersionInRegion": true,
@@ -193,6 +217,6 @@
       }
     ],
     "services": [],
-    "url": "/blog/gravityui-aikit"
+    "url": "/blog/datalens-highcharts"
   }
 }
