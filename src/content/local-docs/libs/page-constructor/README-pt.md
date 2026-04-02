@@ -4,7 +4,7 @@
 
 `Page-constructor` é uma biblioteca para renderizar páginas web ou partes delas com base em dados `JSON` (o suporte ao formato `YAML` será adicionado posteriormente).
 
-Ao criar páginas, é utilizada uma abordagem baseada em componentes: uma página é construída usando um conjunto de blocos prontos que podem ser posicionados em qualquer ordem. Cada bloco possui um tipo específico e um conjunto de parâmetros de entrada de dados.
+Ao criar páginas, é utilizada uma abordagem baseada em componentes: uma página é construída usando um conjunto de blocos prontos que podem ser posicionados em qualquer ordem. Cada bloco possui um tipo específico e um conjunto de parâmetros de dados de entrada.
 
 Para o formato dos dados de entrada e a lista de blocos disponíveis, consulte a [documentação](https://preview.gravity-ui.com/page-constructor/?path=/docs/documentation-blocks--docs).
 
@@ -55,7 +55,7 @@ export default App;
 
 Este foi o exemplo mais simples de conexão. Para que a marcação YFM funcione, você precisa processar o conteúdo no servidor e recebê-lo no cliente.
 
-Se o seu servidor for uma aplicação separada, então você precisa instalar o page-constructor:
+Se o seu servidor for uma aplicação separada, você precisará instalar o page-constructor:
 
 ```shell
 npm install @gravity-ui/page-constructor
@@ -116,7 +116,7 @@ export default App;
 
 ### Template pronto
 
-Para iniciar um novo projeto, você pode usar o [template pronto no Next.js ](https://github.com/gravity-ui/page-constructor-website-template) que preparamos.
+Para iniciar um novo projeto, você pode usar o [template pronto no Next.js](https://github.com/gravity-ui/page-constructor-website-template) que preparamos.
 
 ### Construtor de sites estáticos
 
@@ -139,7 +139,7 @@ interface PageConstructorProps {
 interface PageConstructorProviderProps {
   isMobile?: boolean; // Um flag indicando que o código está sendo executado em modo mobile.
   locale?: LocaleContextProps; // Informações sobre o idioma e domínio (usado ao gerar e formatar links).
-  location?: Location; // API do histórico do navegador ou do roteador, URL da página.
+  location?: Location; // API do histórico do navegador ou do roteador, a URL da página.
   analytics?: AnalyticsContextProps; // função para lidar com eventos de analytics
 
   ssrConfig?: SSR; // Um flag indicando que o código está sendo executado no lado do servidor.
@@ -327,7 +327,7 @@ Sub-blocos são componentes que podem ser usados na propriedade `children` do bl
 
 2. Adicione o nome do bloco ou sub-bloco ao enum `BlockType` ou `SubBlockType` e descreva suas propriedades no arquivo `src/models/constructor-items/blocks.ts` ou `src/models/constructor-items/sub-blocks.ts` de forma semelhante aos existentes.
 
-3. Adicione um export para o bloco no arquivo `src/blocks/index.ts` e para o sub-bloco no arquivo `src/sub-blocks/index.ts`.
+3. Adicione uma exportação para o bloco no arquivo `src/blocks/index.ts` e para o sub-bloco no arquivo `src/sub-blocks/index.ts`.
 
 4. Adicione um novo componente ou bloco ao mapeamento em `src/constructor-items.ts`.
 
@@ -495,20 +495,20 @@ Você pode ver todas as informações [aqui](https://www.conventionalcommits.org
 Quando você receber a aprovação do seu pull-request dos proprietários do código e passar em todas as verificações, por favor, faça o seguinte:
 
 1. Verifique se há um pull-request de lançamento do robô com alterações de outro contribuidor (parece `chore(main): release 0.0.0`). Se existir, verifique por que ele não foi mesclado. Se o contribuidor concordar em lançar uma versão compartilhada, siga para a próxima etapa. Se não, peça a ele para lançar sua versão, então siga para a próxima etapa.
-2. Faça um "Squash and merge" do seu PR (É importante lançar uma nova versão com Github-Actions).
-3. Espere até que o robô crie um PR com uma nova versão do pacote e informações sobre suas alterações em `CHANGELOG.md`. Você pode ver o processo na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
+2. Faça o squash e merge do seu PR (É importante lançar uma nova versão com Github-Actions).
+3. Aguarde até que o robô crie um PR com uma nova versão do pacote e informações sobre suas alterações em `CHANGELOG.md`. Você pode ver o processo na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
 4. Verifique suas alterações em `CHANGELOG.md` e aprove o PR do robô.
-5. Faça um "Squash and merge" do PR. Você pode ver o processo de lançamento na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
+5. Faça o squash e merge do PR. Você pode ver o processo de lançamento na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
 
 ### Lançamento de versões Alpha
 
 Se você quiser lançar uma versão alpha do pacote a partir do seu branch, você pode fazer isso manualmente:
 
 1. Vá para a aba Actions.
-2. Selecione o workflow "Release alpha version" no lado esquerdo da página.
+2. Selecione o workflow "Release alpha version" na lateral esquerda da página.
 3. Você pode ver no lado direito o botão "Run workflow". Aqui você pode escolher o branch.
 4. Você também pode ver um campo com a versão manual. Se você estiver lançando alpha no seu branch pela primeira vez, não defina nada aqui. Após o primeiro lançamento, você terá que definir a nova versão manualmente porque não alteramos o `package.json` caso o branch possa expirar muito em breve. Use o prefixo `alpha` na sua versão manual, caso contrário, você receberá um erro.
-5. Clique em "Run workflow" e espere até que a ação termine. Você pode lançar versões quantas vezes quiser, mas não abuse e lance versões se realmente precisar. Em outros casos, use [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
+5. Clique em "Run workflow" e aguarde até que a ação termine. Você pode lançar versões quantas vezes quiser, mas não abuse e lance versões se realmente precisar. Em outros casos, use [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
 
 ### Lançamento de versões Beta-major
 
@@ -535,12 +535,12 @@ Se você quiser lançar uma nova versão em uma major anterior após commitá-la
    1. `version-1.x.x/fixes` - para major 1.x.x
    2. `version-2.x.x` - para major 2.x.x
 2. Faça checkout de um novo branch a partir do branch de lançamento major anterior.
-3. Faça um "cherry-pick" do seu commit do branch `main`.
+3. Faça cherry-pick do seu commit do branch `main`.
 4. Crie um PR, obtenha a aprovação e mescle no branch de lançamento major anterior.
-5. Faça um "Squash and merge" do seu PR (É importante lançar uma nova versão com Github-Actions).
-6. Espere até que o robô crie um PR com uma nova versão do pacote e informações sobre suas alterações em `CHANGELOG.md`. Você pode ver o processo na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
+5. Faça o squash e merge do seu PR (É importante lançar uma nova versão com Github-Actions).
+6. Aguarde até que o robô crie um PR com uma nova versão do pacote e informações sobre suas alterações em `CHANGELOG.md`. Você pode ver o processo na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
 7. Verifique suas alterações em `CHANGELOG.md` e aprove o PR do robô.
-8. Faça um "Squash and merge" do PR. Você pode ver o processo de lançamento na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
+8. Faça o squash e merge do PR. Você pode ver o processo de lançamento na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
 
 ## Editor de Page Constructor
 
@@ -566,16 +566,16 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 
 Este projeto inclui um abrangente **Banco de Memória** - uma coleção de arquivos de documentação Markdown que fornecem informações detalhadas sobre a arquitetura, componentes e padrões de uso do projeto. O Banco de Memória é particularmente útil ao trabalhar com agentes de IA, pois contém informações estruturadas sobre:
 
-- **Visão Geral do Projeto**: Requisitos principais, objetivos e contexto
+- **Visão Geral do Projeto**: Requisitos centrais, objetivos e contexto
 - **Documentação de Componentes**: Guias de uso detalhados para todos os componentes
 - **Arquitetura do Sistema**: Padrões técnicos e decisões de design
-- **Progresso do Desenvolvimento**: Status atual e detalhes de implementação
+- **Progresso de Desenvolvimento**: Status atual e detalhes de implementação
 
 ### Usando o Banco de Memória
 
 O Banco de Memória está localizado no diretório `memory-bank/` e consiste em arquivos Markdown regulares que podem ser lidos como qualquer outra documentação:
 
-- `projectbrief.md` - Documento fundamental com os requisitos principais
+- `projectbrief.md` - Documento fundamental com requisitos centrais
 - `productContext.md` - Propósito do projeto e objetivos de experiência do usuário
 - `systemPatterns.md` - Arquitetura e decisões técnicas
 - `techContext.md` - Tecnologias, configuração e restrições
@@ -591,7 +591,7 @@ Ao trabalhar com agentes de IA neste projeto, o Banco de Memória serve como uma
 - Estrutura e padrões do projeto
 - APIs de componentes e exemplos de uso
 - Fluxos de trabalho de desenvolvimento e melhores práticas
-- Status atual de implementação e próximos passos
+- Status de implementação atual e próximos passos
 
 Agentes de IA podem ler esses arquivos para se familiarizarem rapidamente com o contexto do projeto e tomarem decisões mais informadas sobre mudanças de código e implementações.
 
