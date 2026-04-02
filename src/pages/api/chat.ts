@@ -27,7 +27,7 @@ type ChatRequestBody = {
 };
 
 const API_KEY = process.env.OPENAI_API_KEY;
-
+const PROJECT = process.env.PROJECT;
 const MODEL = process.env.OPENAI_MODEL;
 const SYSTEM_PROMPT =
     'You are a helpful AI assistant. Respond in the same language as the user message.';
@@ -52,7 +52,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const openai = new OpenAI({
             apiKey: API_KEY,
-            baseURL: 'https://rest-assistant.api.cloud.yandex.net/v1',
+            baseURL: 'https://ai.api.cloud-preprod.yandex.net/v1',
+            project: PROJECT,
         });
 
         // Set SSE headers
