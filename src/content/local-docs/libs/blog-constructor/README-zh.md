@@ -24,7 +24,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
     <BlogPage
         content={content}
         posts={posts}
-        tags={tags}
+        filters={filters}
         getPosts={handleGetPosts}
         settings={settings}
     />
@@ -60,7 +60,7 @@ import {
 } from '@gravity-ui/blog-constructor/server';
 ```
 
-`blog-constructor` 是一个 `uikit-based` 库，我们使用了 uikit 中的 `i18n` 实例。要设置国际化，您只需使用 uikit 中的 `configure` 函数：
+`blog-constructor` 是一个基于 `uikit` 的库，我们使用了 uikit 中的 `i18n` 实例。要设置国际化，您只需使用 uikit 中的 `configure` 方法：
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';

@@ -12,7 +12,7 @@ npm install @gravity-ui/blog-constructor
 
 ### Documentation - [storybook](https://preview.gravity-ui.com/blog-constructor/)
 
-### Démarrage rapide
+### Premiers pas
 
 Le blog-constructor dispose de composants côté client et côté serveur pour l'importation. Les pages du blog sont importées en tant que composant React. Pour vous assurer qu'il fonctionne correctement, encapsulez-le dans `BlogConstructorProvider` :
 
@@ -24,7 +24,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
     <BlogPage
         content={content}
         posts={posts}
-        tags={tags}
+        filters={filters}
         getPosts={handleGetPosts}
         settings={settings}
     />
@@ -34,7 +34,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
 import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
-// Page d'un article
+// Page d'un article de blog
 <BlogConstructorProvider {...providerProps}>
     <BlogPostPage
         content={content}
@@ -49,7 +49,7 @@ import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructo
 
 Documentation sur [providerProps](./src/constructor/README.md).
 
-De plus, blog-constructor propose des composants serveur pour vous aider à transformer vos données si nécessaire.
+De plus, blog-constructor propose des composants côté serveur pour vous aider à transformer vos données si nécessaire.
 
 ```jsx
 import {

@@ -24,7 +24,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
     <BlogPage
         content={content}
         posts={posts}
-        tags={tags}
+        filters={filters}
         getPosts={handleGetPosts}
         settings={settings}
     />
@@ -60,7 +60,7 @@ import {
 } from '@gravity-ui/blog-constructor/server';
 ```
 
-O `blog-constructor` é uma biblioteca baseada em `uikit`, e utilizamos uma instância de `i18n` do uikit. Para configurar a internacionalização, basta usar o `configure` do uikit:
+O `blog-constructor` é uma biblioteca baseada em `uikit`, e utilizamos uma instância de `i18n` do uikit. Para configurar a internacionalização, basta usar a função `configure` do uikit:
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';

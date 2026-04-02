@@ -14,7 +14,7 @@ npm install @gravity-ui/blog-constructor
 
 ### はじめに
 
-blog-constructor には、クライアントコンポーネントとサーバーコンポーネントの両方があり、インポートして使用できます。ブログページは React コンポーネントとしてインポートされます。正しく動作させるには、`BlogConstructorProvider` でラップしてください。
+Blog-constructor には、クライアントコンポーネントとサーバーコンポーネントの両方があり、インポートして使用できます。ブログページは React コンポーネントとしてインポートされます。正しく動作させるには、`BlogConstructorProvider` でラップしてください。
 
 ```jsx
 import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
@@ -24,7 +24,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
     <BlogPage
         content={content}
         posts={posts}
-        tags={tags}
+        filters={filters}
         getPosts={handleGetPosts}
         settings={settings}
     />
