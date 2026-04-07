@@ -43,6 +43,8 @@ interface RenderParams<Data, Plugins> {
   icon?: Icon;
   // nonce a ser definido nas tags apropriadas
   nonce?: string;
+  // atributos da tag base
+  base?: Base;
 
   // opções comuns
   // Título da página
@@ -83,6 +85,32 @@ interface RenderParams<Data, Plugins> {
   // opções de plugins
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
+```
+
+### Base
+
+Descreve a tag `base`:
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+Exemplo:
+
+```js
+renderLayout({
+  title: 'Página inicial',
+  base: {target: '_top'},
+});
+```
+
+Será renderizado como:
+
+```html
+<base target="_top" />
 ```
 
 ### Meta
@@ -172,7 +200,7 @@ será renderizado como:
 
 ### Scripts
 
-Descreve o link para o script com preload:
+Descreve o link para um script com preload:
 
 ```typescript
 interface Script {
@@ -205,7 +233,7 @@ será renderizado como:
 
 #### Folhas de estilo
 
-Descrevem o link para os estilos:
+Descrevem o link para estilos:
 
 ```typescript
 interface Stylesheet {
@@ -252,6 +280,7 @@ interface CommonOptions {
 }
 
 export interface HeadContent {
+  base?: Base;
   scripts: Script[];
   helpers: RenderHelpers;
   links: Link[];
@@ -289,7 +318,7 @@ Existem alguns plugins neste pacote:
 
 ### Google analytics
 
-Adiciona o contador do Google Analytics na página.
+Adiciona um contador do Google Analytics à página.
 
 Uso:
 
@@ -297,9 +326,7 @@ Uso:
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-```
 
-```js
 app.get((req, res) => {
   res.send(
     renderLayout({
@@ -399,7 +426,9 @@ Uso:
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
+const renderLayout = createRenderFunction([
+  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+]);
 
 app.get((req, res) => {
   res.send(
@@ -547,36 +576,184 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-  const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
+```markdown
+# @gravity/uikit
 
-  const content = generateRenderContent(plugins, {
-    title: 'Página inicial',
-  });
+Um wrapper simples para o Axios que fornece funcionalidades adicionais para facilitar o desenvolvimento de aplicações React.
 
-  const {htmlAttributes, helpers, bodyContent} = content;
+## Instalação
+
+```bash
+npm install @gravity/uikit
+# ou
+yarn add @gravity/uikit
 ```
 
-```markdown
-        <!DOCTYPE html>
-        <html ${helpers.attrs({...htmlAttributes})}>
-        <head>
-            ${renderHeadContent(content)}
-        </head>
-        <body ${helpers.attrs(bodyContent.attributes)}>
-            ${renderBodyContent(content)}
-    `);
+## Uso
 
-  const data = await getUserData();
+Este wrapper estende o Axios, então você pode usá-lo da mesma forma que usaria o Axios. No entanto, ele também fornece algumas funcionalidades adicionais.
 
-  res.write(`
-            ${content.renderHelpers.renderInlineScript(`
-                window.__DATA__ = ${htmlescape(data)};
-            `)}
-        </body>
-        </html>
-    `);
-  res.end();
+### Configuração
+
+Você pode configurar o wrapper Axios com opções adicionais, como:
+
+*   `baseUrl`: A URL base para todas as requisições.
+*   `headers`: Cabeçalhos padrão a serem incluídos em todas as requisições.
+*   `interceptors`: Interceptadores para requisições e respostas.
+
+```javascript
+import axios from '@gravity/uikit';
+
+const api = axios.create({
+  baseUrl: 'https://api.example.com',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  interceptors: {
+    request: [
+      (config) => {
+        // Faça algo com a configuração da requisição
+        return config;
+      },
+    ],
+    response: [
+      (response) => {
+        // Faça algo com a resposta
+        return response;
+      },
+    ],
+  },
+});
+```
+
+### Requisições
+
+Você pode fazer requisições HTTP da mesma forma que faria com o Axios:
+
+```javascript
+// GET
+api.get('/users').then((response) => {
+  console.log(response.data);
 });
 
-app.listen(3000);
+// POST
+api.post('/users', { name: 'John Doe' }).then((response) => {
+  console.log(response.data);
+});
+
+// PUT
+api.put('/users/1', { name: 'Jane Doe' }).then((response) => {
+  console.log(response.data);
+});
+
+// DELETE
+api.delete('/users/1').then((response) => {
+  console.log(response.data);
+});
+```
+
+### Funcionalidades Adicionais
+
+#### Interceptadores de Requisição e Resposta
+
+O wrapper permite que você defina interceptadores de requisição e resposta para modificar requisições antes que elas sejam enviadas ou respostas antes que sejam retornadas para o seu código.
+
+```javascript
+api.interceptors.request.use((config) => {
+  // Adicionar um token de autenticação aos cabeçalhos
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  return config;
+});
+
+api.interceptors.response.use(
+  (response) => {
+    // Lidar com respostas de sucesso
+    return response;
+  },
+  (error) => {
+    // Lidar com erros de resposta
+    if (error.response.status === 401) {
+      // Redirecionar para a página de login
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
+```
+
+#### Gerenciamento de Erros
+
+O wrapper fornece um gerenciamento de erros mais robusto, permitindo que você lide com diferentes códigos de status de erro de forma centralizada.
+
+```javascript
+api.get('/users').catch((error) => {
+  if (error.response) {
+    // A requisição foi feita e o servidor respondeu com um status code
+    // que está fora do range de 2xx
+    console.error(error.response.data);
+    console.error(error.response.status);
+    console.error(error.response.headers);
+  } else if (error.request) {
+    // A requisição foi feita mas nenhuma resposta foi recebida
+    console.error(error.request);
+  } else {
+    // Algo aconteceu na configuração da requisição que disparou um erro
+    console.error('Error', error.message);
+  }
+});
+```
+
+## Exemplo de Código
+
+```javascript
+import React, { useState, useEffect } from 'react';
+import axios from '@gravity/uikit';
+
+function UserList() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('/users');
+        setUsers(response.data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (loading) {
+    return <div>Carregando usuários...</div>;
+  }
+
+  if (error) {
+    return <div>Erro ao carregar usuários: {error.message}</div>;
+  }
+
+  return (
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default UserList;
+```
+
+## Contribuição
+
+Sinta-se à vontade para contribuir com este projeto. Por favor, consulte o arquivo `CONTRIBUTING.md` para obter mais informações.
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT.
 ```

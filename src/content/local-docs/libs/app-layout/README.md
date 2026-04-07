@@ -43,6 +43,8 @@ interface RenderParams<Data, Plugins> {
   icon?: Icon;
   // nonce to be set on the appropriate tags
   nonce?: string;
+  // base tag attributes
+  base?: Base;
 
   // common options
   // Page title
@@ -83,6 +85,32 @@ interface RenderParams<Data, Plugins> {
   // plugins options
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
+```
+
+### Base
+
+Describes `base` tag:
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+Example:
+
+```js
+renderLayout({
+  title: 'Home page',
+  base: {target: '_top'},
+});
+```
+
+Will be rendered as:
+
+```html
+<base target="_top" />
 ```
 
 ### Meta
@@ -252,6 +280,7 @@ interface CommonOptions {
 }
 
 export interface HeadContent {
+  base?: Base;
   scripts: Script[];
   helpers: RenderHelpers;
   links: Link[];
