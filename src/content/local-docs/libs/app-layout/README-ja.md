@@ -43,6 +43,8 @@ interface RenderParams<Data, Plugins> {
   icon?: Icon;
   // タグに設定される nonce
   nonce?: string;
+  // base タグの属性
+  base?: Base;
 
   // 一般的なオプション
   // ページのタイトル
@@ -53,7 +55,7 @@ interface RenderParams<Data, Plugins> {
 
   // html 属性
   htmlAttributes?: string;
-  // header タグの内容
+  // ヘッダータグの内容
   // meta タグ
   meta?: Meta[];
   // link タグ
@@ -75,7 +77,7 @@ interface RenderParams<Data, Plugins> {
     attributes?: string;
     // root div タグの前の body の内容
     beforeRoot?: string;
-    // id が root の div タグの innerHtml コンテンツ
+    // id="root" の div タグの内部 HTML コンテンツ
     root?: string;
     // root div タグの後の body の内容
     afterRoot?: string;
@@ -83,6 +85,32 @@ interface RenderParams<Data, Plugins> {
   // プラグインオプション
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
+```
+
+### Base
+
+`base` タグを記述します:
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+例:
+
+```js
+renderLayout({
+  title: 'ホーム',
+  base: {target: '_top'},
+});
+```
+
+次のようにレンダリングされます:
+
+```html
+<base target="_top" />
 ```
 
 ### Meta
@@ -100,18 +128,18 @@ interface Meta {
 
 ```js
 const meta = [
-  {name: 'description', content: 'いくつかのテキスト'},
+  {name: 'description', content: 'some text'},
   {name: 'robots', content: 'noindex'},
-  {name: 'og:title', content: 'タイトル'},
+  {name: 'og:title', content: 'Some title'},
 ];
 ```
 
-以下のようにレンダリングされます:
+次のようにレンダリングされます:
 
 ```html
-<meta name="description" content="いくつかのテキスト" />
+<meta name="description" content="some text" />
 <meta name="robots" content="noindex" />
-<meta property="og:title" content="タイトル" />
+<meta property="og:title" content="Some title" />
 ```
 
 ### Icon
@@ -164,7 +192,7 @@ const link = {
 };
 ```
 
-以下のようにレンダリングされます:
+次のようにレンダリングされます:
 
 ```html
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -172,7 +200,7 @@ const link = {
 
 ### Scripts
 
-プリロード付きのスクリプトへのリンクを記述します:
+プリロード付きスクリプトへのリンクを記述します:
 
 ```typescript
 interface Script {
@@ -195,7 +223,7 @@ const script = {
 };
 ```
 
-以下のようにレンダリングされます:
+次のようにレンダリングされます:
 
 ```html
 <link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
@@ -221,7 +249,7 @@ const styleSheet = {
 };
 ```
 
-以下のようにレンダリングされます:
+次のようにレンダリングされます:
 
 ```html
 <link href="url/to/stylesheet" rel="stylesheet" />
@@ -229,7 +257,8 @@ const styleSheet = {
 
 ## プラグイン
 
-レンダリング関数はプラグインによって拡張できます。プラグインは `name` と `apply` プロパティを持つオブジェクトです:
+レンダリング関数はプラグインで拡張できます。プラグインはユーザー定義のレンダリングコンテンツを書き換えることができます。
+プラグインは `name` と `apply` プロパティを持つオブジェクトです:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
@@ -251,6 +280,7 @@ interface CommonOptions {
 }
 
 export interface HeadContent {
+  base?: Base;
   scripts: Script[];
   helpers: RenderHelpers;
   links: Link[];
@@ -290,19 +320,7 @@ export interface RenderHelpers {
 
 ページに Google Analytics カウンターを追加します。
 
-使用方法:
-
-```js
-import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
-
-const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-```
-
-Google Analytics
-
-Google Analytics をページに追加します。
-
-使用方法:
+使い方:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
@@ -312,7 +330,7 @@ const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'ホームページ',
       pluginsOptions: {
         googleAnalytics: {
           useBeaconTransport: true, // navigator.sendBeacon の使用を有効にします
@@ -326,7 +344,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグイン オプション:
+プラグインオプション:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -341,9 +359,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-Yandex Metrika カウンターをページに追加します。
+ページに Yandex メトリカカウンターを追加します。
 
-使用方法:
+使い方:
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -353,7 +371,7 @@ const renderLayout = createRenderFunction([createYandexMetrikaPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'ホームページ',
       pluginsOptions: {
         yandexMetrika: {
           counter: {
@@ -370,7 +388,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグイン オプション:
+プラグインオプション:
 
 ```typescript
 export type UserParams = {
@@ -401,19 +419,21 @@ export type MetrikaOptions = {
 
 ### Layout
 
-webpack assets manifest ファイルからスクリプトとスタイルを追加します。
+webpack アセットマニフェストファイルからスクリプトとスタイルを追加します。
 
-使用方法:
+使い方:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
+const renderLayout = createRenderFunction([
+  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+]);
 
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'ホームページ',
       pluginsOptions: {
         layout: {
           name: 'home',
@@ -424,7 +444,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグイン オプション:
+プラグインオプション:
 
 ```typescript
 export interface LayoutOptions {
@@ -437,7 +457,7 @@ export interface LayoutOptions {
 
 body 属性を追加します。
 
-使用方法:
+使い方:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -447,7 +467,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'ホームページ',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -459,7 +479,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグイン オプション:
+プラグインオプション:
 
 ```typescript
 interface UikitPluginOptions {
@@ -472,11 +492,11 @@ interface UikitPluginOptions {
 
 マイクロフロントエンドのバージョン情報をページに追加します。
 
-このプラグインは、指定されたマイクロフロントエンドのバージョンを含むグローバルな `window.__REMOTE_VERSIONS__` オブジェクトを作成します。これは、モジュールフェデレーションなどのマイクロフロントエンド アーキテクチャで、ロードするリモート モジュールのバージョンを決定するために使用できます。
+このプラグインは、指定されたマイクロフロントエンドのバージョンを含むグローバルな `window.__REMOTE_VERSIONS__` オブジェクトを作成します。これは、モジュールフェデレーションや同様のマイクロフロントエンドアーキテクチャが、ロードするリモートモジュールのバージョンを決定するために使用できます。
 
-[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) および `moduleFederation.remotesRuntimeVersioning` オプションと組み合わせて、対応するバージョンのリモート モジュールを自動的にロードするために使用できます。
+[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) および `moduleFederation.remotesRuntimeVersioning` オプションと組み合わせて、対応するバージョンのリモートモジュールを自動的にロードするために使用できます。
 
-使用方法:
+使い方:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -486,7 +506,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: 'ホームページ',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -499,7 +519,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグイン オプション:
+プラグインオプション:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -518,7 +538,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: 'Home page',
+        title: 'ホームページ',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -534,9 +554,9 @@ app.get((req, res) => {
 })
 ```
 
-## 代替の使用方法
+## 代替の使い方
 
-HTML ストリーミング経由のパーツ レンダラー `generateRenderContent`、`renderHeadContent`、`renderBodyContent` を使用します。
+`generateRenderContent`、`renderHeadContent`、`renderBodyContent` のパーツレンダラーを HTML ストリーミング経由で使用します。
 
 ```js
 import express from 'express';
@@ -556,17 +576,42 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-  const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
+```markdown
+# @gravity/uikit
+
+このライブラリは、Reactアプリケーションのサーバーサイドレンダリング（SSR）を容易にするためのユーティリティを提供します。
+
+## インストール
+
+```bash
+npm install @gravity/uikit
+# または
+yarn add @gravity/uikit
+```
+
+## 使用例
+
+以下は、Express.jsアプリケーションでこのライブラリを使用して、基本的なSSRページをレンダリングする例です。
+
+```javascript
+import express from 'express';
+import { createDefaultPlugins, generateRenderContent, renderHeadContent, renderBodyContent } from '@gravity/uikit';
+import htmlescape from 'htmlescape';
+
+const app = express();
+
+app.get('/', async (req, res) => {
+  const plugins = createDefaultPlugins({ layout: { manifest: 'path/to/assets-manifest.json' } });
 
   const content = generateRenderContent(plugins, {
-    title: 'Home page',
+    title: 'ホーム',
   });
 
-  const {htmlAttributes, helpers, bodyContent} = content;
+  const { htmlAttributes, helpers, bodyContent } = content;
 
-```markdown
+  res.write(`
         <!DOCTYPE html>
-        <html ${helpers.attrs({...htmlAttributes})}>
+        <html ${helpers.attrs({ ...htmlAttributes })}>
         <head>
             ${renderHeadContent(content)}
         </head>
@@ -587,4 +632,48 @@ app.get('/', async function (req, res) {
 });
 
 app.listen(3000);
+```
+
+この例では、以下のことを行っています。
+
+1.  `createDefaultPlugins` を使用して、SSRに必要なデフォルトのプラグインを作成します。`layout.manifest` は、アセットマニフェストファイルのパスを指定します。
+2.  `generateRenderContent` を使用して、ページのレンダリングに必要なコンテンツを生成します。`title` はページのタイトルを設定します。
+3.  生成された `content` オブジェクトから `htmlAttributes`、`helpers`、`bodyContent` を取得します。
+4.  基本的なHTML構造を構築し、`helpers.attrs` を使用して属性を適用します。
+5.  `renderHeadContent` でヘッダー部分をレンダリングします。
+6.  `renderBodyContent` でボディ部分をレンダリングします。
+7.  `getUserData` で非同期にデータを取得します。
+8.  `content.renderHelpers.renderInlineScript` を使用して、取得したデータをJavaScript変数 `window.__DATA__` としてインラインスクリプトで埋め込みます。`htmlescape` は、データを安全にエスケープするために使用されます。
+9.  レスポンスを終了します。
+
+## API
+
+### `createDefaultPlugins(options)`
+
+SSRのためのデフォルトプラグインを作成します。
+
+*   `options`:
+    *   `layout`:
+        *   `manifest`: アセットマニフェストファイルのパス (文字列)。
+
+### `generateRenderContent(plugins, pageOptions)`
+
+ページのレンダリングに必要なコンテンツを生成します。
+
+*   `plugins`: プラグインの配列。
+*   `pageOptions`:
+    *   `title`: ページのタイトル (文字列)。
+    *   その他、プラグインが期待するオプション。
+
+### `renderHeadContent(content)`
+
+HTMLの `<head>` セクションの内容をレンダリングします。
+
+### `renderBodyContent(content)`
+
+HTMLの `<body>` セクションの内容をレンダリングします。
+
+## ライセンス
+
+MITライセンスで提供されています。
 ```

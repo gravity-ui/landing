@@ -37,17 +37,19 @@ app.listen(3000);
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // 任何 JSON 兼容的数据，将会在页面上设置为 window.__DATA__
+  // 任何 JSON 兼容的数据，将设置为页面的 window.__DATA__
   data?: Data;
   // 网站图标
   icon?: Icon;
-  // 用于设置相应标签的 nonce 值
+  // 用于设置相应标签的 nonce
   nonce?: string;
+  // base 标签属性
+  base?: Base;
 
   // 通用选项
   // 页面标题
   title: string;
-  // 页面的语言，将设置到 html 标签上
+  // 页面的语言，将设置为 html 标签
   lang?: string;
   isMobile?: boolean;
 
@@ -62,9 +64,9 @@ interface RenderParams<Data, Plugins> {
   scripts?: Script[];
   // 样式表标签
   styleSheets?: Stylesheet[];
-  // 内联脚本标签
+  // 内联代码的 script 标签
   inlineScripts?: string[];
-  // 内联样式标签
+  // 内联样式的 style 标签
   inlineStyleSheets?: string[];
 
   // body 标签内容
@@ -73,16 +75,42 @@ interface RenderParams<Data, Plugins> {
     className?: string;
     // body 属性
     attributes?: string;
-    // root div 标签之前的内容
+    // root div 标签之前的 body 内容
     beforeRoot?: string;
     // id 为 root 的 div 标签的 innerHtml 内容
     root?: string;
-    // root div 标签之后的内容
+    // root div 标签之后的 body 内容
     afterRoot?: string;
   };
   // 插件选项
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
+```
+
+### Base
+
+描述 `base` 标签：
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+示例：
+
+```js
+renderLayout({
+  title: '首页',
+  base: {target: '_top'},
+});
+```
+
+将渲染为：
+
+```html
+<base target="_top" />
 ```
 
 ### Meta
@@ -205,7 +233,7 @@ const script = {
 
 #### Style sheets
 
-描述样式表链接：
+描述样式链接：
 
 ```typescript
 interface Stylesheet {
@@ -227,19 +255,19 @@ const styleSheet = {
 <link href="url/to/stylesheet" rel="stylesheet" />
 ```
 
-## 插件
+## Plugins
 
-可以通过插件扩展渲染函数。插件可以重写用户定义的渲染内容。
+渲染函数可以通过插件进行扩展。插件可以重写用户定义的渲染内容。
 插件是一个具有 `name` 和 `apply` 属性的对象：
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // 通过 `pluginsOptions` 参数在 `renderLayout` 函数中传递。
+    options: Options | undefined; // 通过 `renderLayout` 函数的 `pluginsOptions` 参数传递。
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated use `renderContent.helpers` instead */
+    /** @deprecated 使用 `renderContent.helpers` 代替 */
     utils: RenderHelpers;
   }) => void;
 }
@@ -252,6 +280,7 @@ interface CommonOptions {
 }
 
 export interface HeadContent {
+  base?: Base;
   scripts: Script[];
   helpers: RenderHelpers;
   links: Link[];
@@ -289,7 +318,7 @@ export interface RenderHelpers {
 
 ### Google analytics
 
-在页面上添加 Google Analytics 计数器。
+为页面添加 Google Analytics 计数器。
 
 用法：
 
@@ -297,13 +326,11 @@ export interface RenderHelpers {
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-```
 
-```js
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: '首页',
       pluginsOptions: {
         googleAnalytics: {
           useBeaconTransport: true, // 启用 navigator.sendBeacon
@@ -332,7 +359,7 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-在页面上添加 Yandex 统计计数器。
+为页面添加 Yandex Metrika 计数器。
 
 用法：
 
@@ -344,7 +371,7 @@ const renderLayout = createRenderFunction([createYandexMetrikaPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: '首页',
       pluginsOptions: {
         yandexMetrika: {
           counter: {
@@ -399,12 +426,14 @@ export type MetrikaOptions = {
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
+const renderLayout = createRenderFunction([
+  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+]);
 
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: '首页',
       pluginsOptions: {
         layout: {
           name: 'home',
@@ -438,7 +467,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: '首页',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -461,11 +490,11 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-将微前端版本信息添加到页面。
+向页面添加微前端版本信息。
 
-此插件创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本，可供模块联邦或类似的微前端架构用于确定要加载的远程模块版本。
+此插件创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本，可供模块联邦或类似的微前端架构使用，以确定要加载的远程模块版本。
 
-它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 和 `moduleFederation.remotesRuntimeVersioning` 选项结合使用，以自动加载相应版本的远程模块。
+它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 和 `moduleFederation.remotesRuntimeVersioning` 选项结合使用，以自动加载具有相应版本的远程模块。
 
 用法：
 
@@ -477,7 +506,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Home page',
+      title: '首页',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -509,7 +538,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: 'Home page',
+        title: '首页',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -527,7 +556,7 @@ app.get((req, res) => {
 
 ## Alternative usage
 
-通过 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 等部分渲染器实现 HTML 流式传输：
+通过 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 等部分渲染器进行 HTML 流式传输：
 
 ```js
 import express from 'express';
@@ -547,16 +576,16 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
+```zh
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
-    title: 'Home page',
+    title: '首页',
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;
-```
 
-```zh
+  res.write(`
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
         <head>
