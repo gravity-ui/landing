@@ -1,5 +1,5 @@
 import {Chart, ChartData, ChartSeries} from '@gravity-ui/charts';
-import {Flex, Select} from '@gravity-ui/uikit';
+import {Button, Flex} from '@gravity-ui/uikit';
 import React, {useCallback, useState} from 'react';
 
 import {ErrorBoundary} from '../../ErrorBoundary';
@@ -8,19 +8,19 @@ import {Editor} from './Editor';
 import * as mocks from './mocks';
 
 type ChartType = ChartSeries['type'];
-type SelectOption = {value: ChartType; content: string};
+type ChartTypeOption = {value: ChartType; content: string};
 
-const chartTypeOptions: SelectOption[] = [
+const chartTypeOptions: ChartTypeOption[] = [
+    {value: 'line', content: 'Line'},
     {value: 'area', content: 'Area'},
     {value: 'bar-x', content: 'Bar-X'},
     {value: 'bar-y', content: 'Bar-Y'},
+    {value: 'pie', content: 'Pie'},
+    {value: 'scatter', content: 'Scatter'},
     {value: 'funnel', content: 'Funnel'},
     {value: 'heatmap', content: 'Heatmap'},
-    {value: 'line', content: 'Line'},
-    {value: 'pie', content: 'Pie'},
     {value: 'radar', content: 'Radar'},
     {value: 'sankey', content: 'Sankey'},
-    {value: 'scatter', content: 'Scatter'},
     {value: 'treemap', content: 'Treemap'},
     {value: 'waterfall', content: 'Waterfall'},
 ];
@@ -45,8 +45,7 @@ export const Playground = () => {
     const [chartData, setChartData] = useState<ChartData>(chartMocks[defaultChartType]);
     const [chartType, setChartType] = useState<ChartType>(defaultChartType);
 
-    const handleUpdateChartType = useCallback((value: string[]) => {
-        const type = value[0] as ChartType;
+    const updateChartType = useCallback((type: ChartType) => {
         setChartType(type);
         setChartData(chartMocks[type]);
     }, []);
@@ -61,14 +60,17 @@ export const Playground = () => {
 
     return (
         <Flex gap={6} direction="column" width="100%" height="100%">
-            <Flex justifyContent="center">
-                <Select
-                    options={chartTypeOptions}
-                    defaultValue={[defaultChartType]}
-                    onUpdate={handleUpdateChartType}
-                    size="xl"
-                    width={200}
-                />
+            <Flex justifyContent="center" gap={2} wrap="wrap">
+                {chartTypeOptions.map((option) => (
+                    <Button
+                        key={option.value}
+                        size="l"
+                        view={chartType === option.value ? 'action' : 'outlined'}
+                        onClick={() => updateChartType(option.value)}
+                    >
+                        {option.content}
+                    </Button>
+                ))}
             </Flex>
             <Flex gap={8} justifyContent="space-between" height="100%" key={chartType}>
                 <Flex width="calc(60% - 16px)">
