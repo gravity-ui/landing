@@ -13,5 +13,7 @@
     "empty_title": "Nenhum resultado encontrado para sua solicitação",
     "empty_subTitle": "Verifique a ortografia ou tente outras palavras-chave.",
     "usage_reactComponent": "Componente React",
-    "usage_svg": "SVG"
+    "usage_svg": "SVG",
+    "imageSearch_tooltip": "Pesquisar por imagem (ou colar da área de transferência)",
+    "imageSearch_drop": "Solte a imagem para pesquisar ícones semelhantes"
 }

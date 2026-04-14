@@ -13,5 +13,7 @@
     "empty_title": "リクエストに一致する結果が見つかりませんでした",
     "empty_subTitle": "スペルを確認するか、別のキーワードをお試しください。",
     "usage_reactComponent": "Reactコンポーネント",
-    "usage_svg": "SVG"
+    "usage_svg": "SVG",
+    "imageSearch_tooltip": "画像で検索（またはクリップボードから貼り付け）",
+    "imageSearch_drop": "画像をドロップして類似アイコンを検索"
 }
