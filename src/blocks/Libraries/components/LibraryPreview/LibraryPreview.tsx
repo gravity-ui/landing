@@ -9,6 +9,8 @@ import type {LibWithMetadata} from '../../../../api';
 import starIcon from '../../../../assets/icons/star.svg';
 import aikitAssetMobile from '../../../../assets/libs/img-lib-aikit-mobile.jpg';
 import aikitAsset from '../../../../assets/libs/img-lib-aikit.jpg';
+import chartkitAssetMobile from '../../../../assets/libs/img-lib-chartkit-mobile.jpg';
+import chartkitAsset from '../../../../assets/libs/img-lib-chartkit.jpg';
 import dashkitAssetMobile from '../../../../assets/libs/img-lib-dashkit-mobile.jpg';
 import dashkitAsset from '../../../../assets/libs/img-lib-dashkit.jpg';
 import datecomponentsAssetMobile from '../../../../assets/libs/img-lib-datecomponents-mobile.jpg';
@@ -40,6 +42,7 @@ const libIdToAsset: Partial<Record<string, {src: string}>> = {
     'page-constructor': pageconstructorAsset,
     navigation: navigationAsset,
     aikit: aikitAsset,
+    charts: chartkitAsset,
     'markdown-editor': wysiwygAsset,
     dashkit: dashkitAsset,
     graph: graphAsset,
@@ -51,6 +54,7 @@ const libIdToAssetMobile: Partial<Record<string, {src: string}>> = {
     'page-constructor': pageconstructorAssetMobile,
     navigation: navigationAssetMobile,
     aikit: aikitAssetMobile,
+    charts: chartkitAssetMobile,
     'markdown-editor': wysiwygAssetMobile,
     dashkit: dashkitAssetMobile,
     graph: graphAssetMobile,
