@@ -183,7 +183,7 @@ export function useImageSearch({onResults, onClear, isActive}: UseImageSearchOpt
             <div className={b('drop-overlay')}>
                 <div className={b('drop-content')}>
                     <Icon data={Picture} size={60} />
-                    <Text variant="display-2">{t('imageSearch_drop')}</Text>
+                    <Text variant="header-2">{t('imageSearch_drop')}</Text>
                 </div>
             </div>
         </Portal>
