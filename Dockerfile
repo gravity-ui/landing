@@ -52,7 +52,7 @@ COPY --from=builder /app/public ./public
 ENV TRANSFORMERS_CACHE_DIR=/app/.model-cache
 RUN node scripts/download-model.mjs
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl bash && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends curl bash ca-certificates && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd -g 1001 app && \
     useradd -u 1001 -g app -m appuser && \
