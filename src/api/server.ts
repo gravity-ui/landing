@@ -431,12 +431,13 @@ export class ServerApi {
             const order = [
                 'uikit',
                 'aikit',
-                'date-components',
+                'charts',
                 'markdown-editor',
                 'graph',
                 'navigation',
                 'page-constructor',
                 'dashkit',
+                'date-components',
             ];
 
             return order.indexOf(lib1.config.id) - order.indexOf(lib2.config.id);
