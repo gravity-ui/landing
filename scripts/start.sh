@@ -21,6 +21,7 @@ export GITHUB_APP_INSTALLATION_ID
 export GITHUB_APP_PRIVATE_KEY
 export OPENAI_API_KEY
 export OPENAI_MODEL
+export TRANSFORMERS_CACHE_DIR=/app/.model-cache
 
 echo "Starting server..."
 exec node server.js
