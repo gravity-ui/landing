@@ -37,7 +37,7 @@ RUN --mount=type=secret,id=s3_access_key_id \
     unset AWS_ACCESS_KEY_ID && \
     unset AWS_SECRET_ACCESS_KEY
 
-FROM node:24-alpine AS runner
+FROM node:24-slim AS runner
 
 WORKDIR /app
 
@@ -49,10 +49,13 @@ COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/src/content/local-docs ./src/content/local-docs
 COPY --from=builder /app/public ./public
 
-RUN apk add --no-cache curl bash gcompat
+ENV TRANSFORMERS_CACHE_DIR=/app/.model-cache
+RUN node scripts/download-model.mjs
 
-RUN addgroup -g 1001 app && \
-    adduser -u 1001 -G app -S appuser && \
+RUN apt-get update && apt-get install -y --no-install-recommends curl bash && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd -g 1001 app && \
+    useradd -u 1001 -g app -m appuser && \
     chown -R appuser:app /app && \
     chmod +x /app/scripts/start.sh
 

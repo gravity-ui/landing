@@ -1,7 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 
-import {AutoProcessor, CLIPVisionModelWithProjection, RawImage} from '@huggingface/transformers';
+import {
+    AutoProcessor,
+    CLIPVisionModelWithProjection,
+    RawImage,
+    env,
+} from '@huggingface/transformers';
 
 type IconEntry = {
     name: string;
@@ -32,6 +37,11 @@ const EMBEDDINGS_PATH = path.join(process.cwd(), 'public', 'static', 'icons-embe
 const MODEL_ID = 'Xenova/clip-vit-base-patch16';
 
 async function init() {
+    if (process.env.TRANSFORMERS_CACHE_DIR) {
+        env.cacheDir = process.env.TRANSFORMERS_CACHE_DIR;
+        env.allowRemoteModels = false;
+    }
+
     [processor, visionModel] = await Promise.all([
         AutoProcessor.from_pretrained(MODEL_ID),
         CLIPVisionModelWithProjection.from_pretrained(MODEL_ID),
