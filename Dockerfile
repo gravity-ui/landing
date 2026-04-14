@@ -49,7 +49,7 @@ COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/src/content/local-docs ./src/content/local-docs
 COPY --from=builder /app/public ./public
 
-RUN apk add --no-cache curl bash
+RUN apk add --no-cache curl bash gcompat
 
 RUN addgroup -g 1001 app && \
     adduser -u 1001 -G app -S appuser && \
