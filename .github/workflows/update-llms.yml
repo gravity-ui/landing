@@ -28,6 +28,10 @@ jobs:
 
           git config user.email ""
           git config user.name "Update llms.txt action"
+          git checkout -b update-llms-txt
           git add public/llms.txt
-          git commit -m "docs: update llms.txt"
-          git push
+
+          export COMMIT_MESSAGE="docs: update llms.txt"
+          git commit -m "$COMMIT_MESSAGE" || true
+          git push --set-upstream origin update-llms-txt --force
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
