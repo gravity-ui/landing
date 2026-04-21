@@ -1,0 +1,33 @@
+name: Update llms.txt
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions: write-all
+
+jobs:
+  update-llms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 24
+      - name: Generate llms.txt
+        run: |
+          npm run generate-llms
+
+          if git diff --exit-code public/llms.txt; then
+            echo "No changes to llms.txt - skipping commit"
+            exit 0
+          fi
+
+          git config user.email ""
+          git config user.name "Update llms.txt action"
+          git add public/llms.txt
+          git commit -m "docs: update llms.txt"
+          git push
