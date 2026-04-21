@@ -18,7 +18,7 @@ Base UI components and tokens for building services with Gravity.
 - **Documentation:** [README](https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md)
 - **Components:**
   - [Accordion](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Accordion/README.md): The Accordion component allows you to create collapsible content panels where users can show or hide sections of information.
-  - [ActionTooltip](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ActionTooltip/README.md): Tooltip for labeling action buttons without descriptive text (e.
+  - [ActionTooltip](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ActionTooltip/README.md): Tooltip for labeling action buttons without descriptive text (e.g. icon buttons).
   - [ActionsPanel](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ActionsPanel/README.md): Use an ActionsPanel to render multiple buttons in a row.
   - [Alert](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Alert/README.md): normal: Main theme (used by default).
   - [ArrowToggle](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ArrowToggle/README.md): ArrowToggle is a component for displaying the chevron icon.
@@ -45,7 +45,7 @@ Base UI components and tokens for building services with Gravity.
   - [Menu](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Menu/README.md): The Menu component enables easily creating views for action lists.
   - [Modal](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Modal/README.md): The Modal component serves as base for creating pop-up windows with a backdrop above the rest of the content on a page.
   - [NumberInput](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/NumberInput/README.md): NumberInput allow users to enter numbers into a UI.
-  - [Overlay](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Overlay/README.md): The Overlay component renders an overlay over the parent element with the relative position, i.
+  - [Overlay](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Overlay/README.md): The Overlay component renders an overlay over the parent element with the relative position, i.e., the parent element must have position set to relative.
   - [Pagination](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Pagination/README.md): This component renders pagination.
   - [Palette](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Palette/README.md): The Palette component is used to display a grid of icons, emojis, reactions, and symbols which you can select or deselect.
   - [PasswordInput](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/PasswordInput/README.md)

@@ -80,8 +80,16 @@ const getComponentDescription = async (componentName) => {
                     .replace(/^-/g, '')
                     .trim();
                 if (cleaned.length > 10 && !cleaned.startsWith('npm')) {
-                    const firstSentence = cleaned.split('.')[0];
-                    return firstSentence + '.';
+                    const tempCleaned = cleaned
+                        .replace(/\bi\.e\./g, '___IE___')
+                        .replace(/\bi\.e,/g, '___IE___')
+                        .replace(/\be\.g\./g, '___EG___')
+                        .replace(/\be\.g,/g, '___EG___');
+                    const tempFirstSentence = tempCleaned.split('.')[0] + '.';
+                    const firstSentence = tempFirstSentence
+                        .replace(/___IE___/g, 'i.e.')
+                        .replace(/___EG___/g, 'e.g.');
+                    return firstSentence;
                 }
             }
         }
