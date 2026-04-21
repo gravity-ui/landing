@@ -17,63 +17,63 @@ Base UI components and tokens for building services with Gravity.
 - **GitHub:** [gravity-ui/uikit](https://github.com/gravity-ui/uikit)
 - **Documentation:** [README](https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md)
 - **Components:**
-  - [Accordion](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Accordion/README.md): The Accordion component allows you to create collapsible content panels where users can show or hide sections of informa
-  - [ActionTooltip](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ActionTooltip/README.md): Tooltip for labeling action buttons without descriptive text (e.g. icon buttons).
+  - [Accordion](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Accordion/README.md): The Accordion component allows you to create collapsible content panels where users can show or hide sections of information.
+  - [ActionTooltip](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ActionTooltip/README.md): Tooltip for labeling action buttons without descriptive text (e.
   - [ActionsPanel](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ActionsPanel/README.md): Use an ActionsPanel to render multiple buttons in a row.
   - [Alert](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Alert/README.md): normal: Main theme (used by default).
-  - [ArrowToggle](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ArrowToggle/README.md): ArrowToggle is a component for displaying the chevron icon. It can rotate in four directions and can be used to display 
-  - [Avatar](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Avatar/README.md): This component is intended for rendering avatars. It has three basic avatar types: image, icon, and text (name initials)
-  - [Breadcrumbs](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Breadcrumbs/README.md): Breadcrumbs is a navigation element that shows the current location of a page within a website’s hierarchy. It provides 
-  - [Button](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Button/README.md): Buttons act as a trigger for certain actions. While this is their main purpose, in some very rare cases, they can be use
-  - [Card](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Card/README.md): Card is a reusable React component that basically is a card-like container with customizable styles and features. It is 
+  - [ArrowToggle](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ArrowToggle/README.md): ArrowToggle is a component for displaying the chevron icon.
+  - [Avatar](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Avatar/README.md): This component is intended for rendering avatars.
+  - [Breadcrumbs](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Breadcrumbs/README.md): Breadcrumbs is a navigation element that shows the current location of a page within a website’s hierarchy.
+  - [Button](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Button/README.md): Buttons act as a trigger for certain actions.
+  - [Card](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Card/README.md): Card is a reusable React component that basically is a card-like container with customizable styles and features.
   - [Checkbox](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Checkbox/README.md): The Checkbox component allows the user to select or deselect a specific value.
-  - [ClipboardButton](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ClipboardButton/README.md): This component puts CopyToClipboard and ClipboardIcon together. CopyToClipboard sends a text to the clipboard and, as a 
+  - [ClipboardButton](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/ClipboardButton/README.md): This component puts CopyToClipboard and ClipboardIcon together.
   - [DefinitionList](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/DefinitionList/README.md): The component to display definition list with term and definition separated by dots.
   - [Dialog](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Dialog/README.md): This is a component used for dialogs.
   - [Disclosure](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Disclosure/README.md): Disclosure is a collapsible component that allows to display and hide its nested content.
   - [Divider](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Divider/README.md): The Divider component is used as a thin line for delimiting and grouping elements to reinforce visual hierarchy.
-  - [Drawer](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Drawer/README.md): The Drawer component is a versatile interface element used in web applications to provide a sliding panel that emerges f
-  - [DropdownMenu](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/DropdownMenu/README.md): The dropdown menu component provides item grouping, submenus, and a customizable toggle. The dropdown menu items are con
+  - [Drawer](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Drawer/README.md): The Drawer component is a versatile interface element used in web applications to provide a sliding panel that emerges from the edge of the screen.
+  - [DropdownMenu](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/DropdownMenu/README.md): The dropdown menu component provides item grouping, submenus, and a customizable toggle.
   - [FilePreview](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/FilePreview/README.md): A component for displaying the file.
-  - [HelpMark](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/HelpMark/README.md): Component to display help icon with popover
+  - [HelpMark](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/HelpMark/README.md): Component to display help icon with popover.
   - [Hotkey](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Hotkey/README.md): You can use the Hotkey component to display keyboard shortcuts for both Mac and PC.
-  - [Icon](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Icon/README.md): The Icon component is a wrapper for SVG icon. SVGs can be loaded in different ways, such as though a React component or 
-  - [Label](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Label/README.md): You can use Labels for highlighting certain information. A Label with the Close or Copy button may be useful for various
-  - [Link](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Link/README.md): Link is a part of text that, when clicked, takes the user to another part of the page, another page within the service, 
-  - [List](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/List/README.md): Determines the item list height (or a function that returns the height value for a list). It can be helpful when setting
-  - [Loader](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Loader/README.md): The Loader component displays the loading progress as flashing bars. Unlike Spin, this component is used in global scena
+  - [Icon](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Icon/README.md): The Icon component is a wrapper for SVG icon.
+  - [Label](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Label/README.md): You can use Labels for highlighting certain information.
+  - [Link](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Link/README.md): Link is a part of text that, when clicked, takes the user to another part of the page, another page within the service, or an external website page.
+  - [List](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/List/README.md): Determines the item list height (or a function that returns the height value for a list).
+  - [Loader](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Loader/README.md): The Loader component displays the loading progress as flashing bars.
   - [Menu](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Menu/README.md): The Menu component enables easily creating views for action lists.
   - [Modal](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Modal/README.md): The Modal component serves as base for creating pop-up windows with a backdrop above the rest of the content on a page.
   - [NumberInput](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/NumberInput/README.md): NumberInput allow users to enter numbers into a UI.
-  - [Overlay](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Overlay/README.md): The Overlay component renders an overlay over the parent element with the relative position, i.e., the parent element mu
+  - [Overlay](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Overlay/README.md): The Overlay component renders an overlay over the parent element with the relative position, i.
   - [Pagination](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Pagination/README.md): This component renders pagination.
-  - [Palette](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Palette/README.md): The Palette component is used to display a grid of icons, emojis, reactions, and symbols which you can select or deselec
+  - [Palette](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Palette/README.md): The Palette component is used to display a grid of icons, emojis, reactions, and symbols which you can select or deselect.
   - [PasswordInput](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/PasswordInput/README.md)
-  - [PinInput](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/PinInput/README.md): PinInput is a group of inputs to enter sequence of numeric or alphanumeric values quickly. Its most common use case is e
+  - [PinInput](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/PinInput/README.md): PinInput is a group of inputs to enter sequence of numeric or alphanumeric values quickly.
   - [PlaceholderContainer](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/PlaceholderContainer/README.md): PlaceholderContainer is a component for displaying content with an image, text content, and action controls.
-  - [Popover](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Popover/README.md): The Popover component is technically the Popup with some trigger interactivity built-in. The Popover uses passed ReactEl
-  - [Popup](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Popup/README.md): You can use a Popup to display floating content above the page. Technically, it is a wrapper around Floating UI with som
-  - [Portal](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Portal/README.md): Portal is a utility component. Basically, it is a simple wrapper around React's createPortal that allows you to render c
-  - [Progress](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Progress/README.md): The Progress component shows current operation progress. It can also be divided into sections.
+  - [Popover](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Popover/README.md): The Popover component is technically the Popup with some trigger interactivity built-in.
+  - [Popup](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Popup/README.md): You can use a Popup to display floating content above the page.
+  - [Portal](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Portal/README.md): Portal is a utility component.
+  - [Progress](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Progress/README.md): The Progress component shows current operation progress.
   - [Radio](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Radio/README.md): The Radio component allows the users to select a single option from a list of choices.
   - [RadioGroup](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/RadioGroup/README.md): The RadioGroup component is used to create a group where users can select a single option from multiple choices.
-  - [SegmentedRadioGroup](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/SegmentedRadioGroup/README.md): The SegmentedRadioGroup component is used to create a group of radio buttons where users can select a single option from
+  - [SegmentedRadioGroup](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/SegmentedRadioGroup/README.md): The SegmentedRadioGroup component is used to create a group of radio buttons where users can select a single option from multiple choices.
   - [Select](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Select/README.md): Select is a control that provides a list of options that a user can select.
-  - [Sheet](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Sheet/README.md): Sheet is a component designed for using in the mobile context as an information or interactive element. You can place co
-  - [Skeleton](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Skeleton/README.md): The Skeleton component displays a placeholder preview of your content before the data gets loaded. This preview is shown
-  - [Slider](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Slider/README.md): The slider is a customizable and responsive React component that allows users to select a single value or a range of val
-  - [Spin](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Spin/README.md): The Spin component displays the loading state (a rotating semicircle) in inline scenarios. Unlike Loader, this component
-  - [Stepper](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Stepper/README.md): Stepper convey progress through numbered steps. It provides a wizard-like workflow.Steppers display progress through a s
+  - [Sheet](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Sheet/README.md): Sheet is a component designed for using in the mobile context as an information or interactive element.
+  - [Skeleton](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Skeleton/README.md): The Skeleton component displays a placeholder preview of your content before the data gets loaded.
+  - [Slider](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Slider/README.md): The slider is a customizable and responsive React component that allows users to select a single value or a range of values from a specified data set.
+  - [Spin](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Spin/README.md): The Spin component displays the loading state (a rotating semicircle) in inline scenarios.
+  - [Stepper](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Stepper/README.md): Stepper convey progress through numbered steps.
   - [Switch](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Switch/README.md): The Switch component is used to toggle between two states: typically, between on and off, or enabled and disabled.
   - [Table](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Table/README.md): A Table allows selecting and sorting rows, as well as performing actions on a row.
   - [Tabs](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Tabs/README.md)
-  - [Text](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Text/README.md): These are the default fonts that can be overridden in the project. You can see a list of all available fonts here.
+  - [Text](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Text/README.md): These are the default fonts that can be overridden in the project.
   - [TextArea](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/TextArea/README.md)
   - [TextInput](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/TextInput/README.md)
   - [Toaster](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Toaster/README.md): This is a component for adjustable notifications also known as toasts.
-  - [Toc](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Toc/README.md): The Toc component is designed to display a table of contents of the page, namely showing a set items with two levels of 
-  - [Tooltip](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Tooltip/README.md): A simple text tip that uses its child node as an anchor. This component accepts only text content and may be an excellen
-  - [User](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/User/README.md): This is a general component for displaying a user avatar with an info block. It uses the Avatar component to render the 
+  - [Toc](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Toc/README.md): The Toc component is designed to display a table of contents of the page, namely showing a set items with two levels of hierarchy.
+  - [Tooltip](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/Tooltip/README.md): A simple text tip that uses its child node as an anchor.
+  - [User](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/User/README.md): This is a general component for displaying a user avatar with an info block.
   - [UserLabel](https://raw.githubusercontent.com/gravity-ui/uikit/refs/heads/main/src/components/UserLabel/README.md): The UserLabel component can be used to display users or user-related information.
 
 ### Blog Constructor

@@ -80,7 +80,8 @@ const getComponentDescription = async (componentName) => {
                     .replace(/^-/g, '')
                     .trim();
                 if (cleaned.length > 10 && !cleaned.startsWith('npm')) {
-                    return cleaned.substring(0, 120);
+                    const firstSentence = cleaned.split('.')[0];
+                    return firstSentence + '.';
                 }
             }
         }
