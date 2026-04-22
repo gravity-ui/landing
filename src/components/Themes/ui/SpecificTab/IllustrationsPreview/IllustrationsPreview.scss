@@ -1,0 +1,30 @@
+@use '../../../../../variables.scss';
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+
+$block: '.#{variables.$ns}illustrations-preview';
+
+#{$block} {
+    background: var(--g-color-base-background);
+    border-radius: 24px;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 120px);
+        gap: var(--g-spacing-5);
+        justify-items: center;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
+            grid-template-columns: repeat(auto-fit, 100px);
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__cell {
+        max-width: 100px;
+    }
+}

@@ -95,18 +95,17 @@ export type Palette = {
     colors: Record<Theme, string>;
 }[];
 
+export type PaletteColor = ({colorName: UtilityColor} | {colorName: string}) & {
+    light?: {
+        value: string;
+        ref?: string;
+    };
+    dark?: {
+        value: string;
+        ref?: string;
+    };
+};
+
 export type AdvanceColors = {
-    [K in AdvancedColorType]: Record<
-        AdvancedColorTypeGroup[K],
-        (({colorName: UtilityColor} | {colorName: string}) & {
-            light?: {
-                value: string;
-                ref?: string;
-            };
-            dark?: {
-                value: string;
-                ref?: string;
-            };
-        })[]
-    >;
+    [K in AdvancedColorType]: Record<AdvancedColorTypeGroup[K], PaletteColor[]>;
 };

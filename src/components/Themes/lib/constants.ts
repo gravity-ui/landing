@@ -7,7 +7,7 @@ import {
 
 import {type AdvanceColors, RadiusPresetName} from './types';
 import {DEFAULT_FONT_FAMILY_SETTINGS} from './typography/constants';
-import {getDefaultAdvancedColorValue} from './utils';
+import {getDefaultAdvancedColorValue, getDefaultIllustrationColorValue} from './utils';
 
 export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
@@ -279,6 +279,17 @@ export const DEFAULT_ADVANCED_COLORS: AdvanceColors = {
         ],
     },
 };
+
+export const ILLUSTRATION_COLORS = [
+    getDefaultIllustrationColorValue('object-base'),
+    getDefaultIllustrationColorValue('object-hightlight'),
+    getDefaultIllustrationColorValue('object-accent-heavy'),
+    getDefaultIllustrationColorValue('object-accent-light'),
+    getDefaultIllustrationColorValue('object-danger'),
+    getDefaultIllustrationColorValue('shadow-over-object'),
+    getDefaultIllustrationColorValue('background-lines'),
+    getDefaultIllustrationColorValue('background-shapes'),
+];
 
 // Default colors mappings (values from gravity-ui styles)
 // https://github.com/gravity-ui/uikit/tree/main/styles/themes

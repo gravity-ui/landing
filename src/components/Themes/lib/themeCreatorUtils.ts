@@ -16,6 +16,7 @@ import type {
     TextVariant,
     Theme,
     UtilityColor,
+    UtilityIllustrationColor,
 } from '@gravity-ui/uikit-themer';
 import {generatePrivateColorsForBaseColors} from '@gravity-ui/uikit-themer/dist/utils';
 import capitalize from 'lodash/capitalize';
@@ -276,6 +277,13 @@ export type ChangeUtilityColorInThemeParams = {
     ref?: string;
 };
 
+export type ChangeIllustrationColorInThemeParams = {
+    themeVariant: Theme;
+    name: UtilityIllustrationColor;
+    value: string;
+    ref?: string;
+};
+
 export function changeUtilityColorInTheme(
     themeState: ThemeCreatorState,
     {themeVariant, name, value, ref}: ChangeUtilityColorInThemeParams,
@@ -289,6 +297,21 @@ export function changeUtilityColorInTheme(
     });
 
     return {...themeState, gravityTheme: updatedGravityTheme};
+}
+
+export function changeIllustrationColorInTheme(
+    themeState: ThemeCreatorState,
+    {themeVariant, name, value, ref}: ChangeIllustrationColorInThemeParams,
+): ThemeCreatorState {
+    const updatedGravityTheme = cloneDeep(themeState);
+    if (updatedGravityTheme.gravityTheme.libraries?.illustrations) {
+        updatedGravityTheme.gravityTheme.libraries.illustrations[name][themeVariant] = {
+            value,
+            ref,
+        };
+    }
+
+    return {...themeState, ...updatedGravityTheme};
 }
 
 export function applyBrandPresetToTheme(

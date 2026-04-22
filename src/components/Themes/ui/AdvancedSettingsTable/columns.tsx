@@ -3,14 +3,19 @@ import {Flex, HelpMark, Icon, SegmentedRadioGroup, Text} from '@gravity-ui/uikit
 import {
     type Theme,
     type UtilityColor,
+    type UtilityIllustrationColor,
+    createIllustrationColorCssVariable,
     createInternalUtilityColorReference,
     createUtilityColorCssVariable,
     isUtilityColorToken,
+    isUtilityIllustrationColorToken,
 } from '@gravity-ui/uikit-themer';
+import {createInternalUtilityIllustrationColorReference} from '@gravity-ui/uikit-themer/dist/libraries/illustrations/utils';
 import {useTranslation} from 'next-i18next';
 
 import {block} from '../../../../utils';
 import {useThemePaletteColor, useThemePrivateColorOptions, useThemeUtilityColor} from '../../hooks';
+import {useThemeIllustrationColor} from '../../hooks/useThemeIllustrationColor';
 import {useThemeSemanticColorOption} from '../../hooks/useThemeSemanticColorOption';
 import {getColorName, getColorPrefix} from '../../lib/utils';
 import {ColorPickerInput} from '../ColorPickerInput/ColorPickerInput';
@@ -84,11 +89,45 @@ const UtilityThemeValueColumn = ({
     );
 };
 
+const IllustrationThemeValueColumn = ({
+    colorName,
+    theme,
+    value,
+}: Omit<ColumnProps, 'colorName'> & {colorName: UtilityIllustrationColor}) => {
+    const [color, setColor] = useThemeIllustrationColor({
+        name: colorName,
+        theme,
+    });
+
+    const themePrivateColorOptions = useThemePrivateColorOptions(theme);
+    const themeSemanticColorOptions = useThemeSemanticColorOption(
+        theme,
+        createInternalUtilityIllustrationColorReference(colorName),
+    );
+
+    return (
+        <GravityColorSelect
+            privateGroups={themePrivateColorOptions}
+            semanticGroups={themeSemanticColorOptions}
+            defaultValue={value ?? '#000000'}
+            value={color}
+            onChange={setColor}
+            inputProps={{view: 'clear', size: 's'}}
+            buttonProps={{size: 's'}}
+        />
+    );
+};
+
 const ThemeValueColumn = ({colorName, theme, value}: ColumnProps) => {
     const isUtilityColor = isUtilityColorToken(colorName);
+    const isUtilityIllustrationColor = isUtilityIllustrationColorToken(colorName);
 
     if (isUtilityColor) {
         return <UtilityThemeValueColumn colorName={colorName} theme={theme} value={value} />;
+    }
+
+    if (isUtilityIllustrationColor) {
+        return <IllustrationThemeValueColumn colorName={colorName} theme={theme} value={value} />;
     }
 
     return <PaletteThemeValueColumn colorName={colorName} theme={theme} value={value} />;
@@ -144,12 +183,29 @@ const UtilityVariableDescription = ({name}: {name: UtilityColor}) => {
     );
 };
 
+const IllustrationVariableDescription = ({name}: {name: UtilityIllustrationColor}) => {
+    const {t} = useTranslation('themes');
+    const content = t(`text_utility-color_${name}_description`);
+
+    return (
+        <Flex direction="column" gap={1} justifyContent="center">
+            <Text variant="body-1" color="secondary">
+                {createIllustrationColorCssVariable(name)}
+            </Text>
+            <Text variant="body-1" color="primary">
+                {content}
+            </Text>
+        </Flex>
+    );
+};
+
 const VariableColumn = ({name, extraVariable}: {name: string; extraVariable?: boolean}) => {
     if (extraVariable) {
         return <ExtraColorName token={name} />;
     }
 
-    const isUtilityColor = isUtilityColorToken(name as UtilityColor);
+    const isUtilityColor = isUtilityColorToken(name);
+    const isIllustrationColor = isUtilityIllustrationColorToken(name);
 
     return (
         <Flex justifyContent="space-between" gap={2}>
@@ -161,7 +217,12 @@ const VariableColumn = ({name, extraVariable}: {name: string; extraVariable?: bo
             </Text>
             {isUtilityColor && (
                 <HelpMark iconSize="m" popoverProps={{placement: 'top-start'}}>
-                    <UtilityVariableDescription name={name as UtilityColor} />
+                    <UtilityVariableDescription name={name} />
+                </HelpMark>
+            )}
+            {isIllustrationColor && (
+                <HelpMark iconSize="m" popoverProps={{placement: 'top-start'}}>
+                    <IllustrationVariableDescription name={name} />
                 </HelpMark>
             )}
         </Flex>

@@ -1,10 +1,8 @@
 import {Text} from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
 import {Fragment} from 'react';
 
 import {block} from '../../../../utils';
-import {DEFAULT_ADVANCED_COLORS} from '../../lib/constants';
-import type {AdvancedColorType} from '../../lib/types';
+import {PaletteColor} from '../../lib/types';
 
 import {AddExtraColor} from './AddExtraColor/AddExtraColor';
 import './AdvancedSettingsTable.scss';
@@ -13,16 +11,25 @@ import {useColumns, useExtraColors} from './hooks';
 const b = block('advanced-color-settings-table');
 
 export interface AdvancedSettingsTableProps {
-    colorType: AdvancedColorType;
+    colorGroups: {
+        title?: string;
+        variables: PaletteColor[];
+        hasExtraColors?: boolean;
+    }[];
+    variablesTitle: string;
+    className?: string;
 }
 
-export const AdvancedSettingsTable = ({colorType}: AdvancedSettingsTableProps) => {
-    const {t} = useTranslation('themes');
+export const AdvancedSettingsTable = ({
+    colorGroups,
+    variablesTitle,
+    className,
+}: AdvancedSettingsTableProps) => {
     const extraColors = useExtraColors();
-    const columns = useColumns({colorType});
+    const columns = useColumns({variablesTitle});
 
     return (
-        <table className={b()}>
+        <table className={b(null, className)}>
             <thead>
                 <tr className={b('row')}>
                     {columns.map(({title: Title}, index) => (
@@ -33,27 +40,26 @@ export const AdvancedSettingsTable = ({colorType}: AdvancedSettingsTableProps) =
                 </tr>
             </thead>
             <tbody className={b('body')}>
-                {Object.entries(DEFAULT_ADVANCED_COLORS[colorType]).map(([group, variables]) => {
+                {colorGroups.map(({title, variables, hasExtraColors}) => {
                     return (
-                        <Fragment key={group}>
-                            <tr className={b('row')}>
-                                {columns.map(({key}) => (
-                                    <td
-                                        className={b('cell', {group: true})}
-                                        key={`${group}-${key}`}
-                                    >
-                                        {key === 'variable' ? (
-                                            <Text variant="subheader-1">
-                                                {t(`title_advance-color-settings-group-${group}`)}
-                                            </Text>
-                                        ) : (
-                                            ''
-                                        )}
-                                    </td>
-                                ))}
-                            </tr>
-
-                            {colorType === 'basic-palette' && group === 'extra-color' && (
+                        <Fragment>
+                            {title && (
+                                <tr className={b('row')}>
+                                    {columns.map(({key}) => (
+                                        <td
+                                            className={b('cell', {group: true})}
+                                            key={`${title}-${key}`}
+                                        >
+                                            {key === 'variable' ? (
+                                                <Text variant="subheader-1">{title}</Text>
+                                            ) : (
+                                                ''
+                                            )}
+                                        </td>
+                                    ))}
+                                </tr>
+                            )}
+                            {hasExtraColors && (
                                 <Fragment>
                                     {Object.entries(extraColors).map(([colorName, value]) => (
                                         <tr className={b('row')} key={colorName}>

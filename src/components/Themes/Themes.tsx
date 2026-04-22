@@ -13,6 +13,7 @@ import {DEFAULT_THEME} from './lib/constants';
 import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {PreviewTab} from './ui/PreviewTab/PreviewTab';
+import {SpecificTab} from './ui/SpecificTab/SpecificTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 import {ThemeImport} from './ui/ThemeImport/ThemeImport';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
@@ -23,6 +24,7 @@ enum ThemeTab {
     Colors = 'colors',
     Typography = 'typography',
     BorderRadius = 'borderRadius',
+    Specific = 'specific',
     Preview = 'preview',
 }
 
@@ -30,6 +32,7 @@ const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
     [ThemeTab.Colors]: ColorsTab,
     [ThemeTab.Typography]: TypographyTab,
     [ThemeTab.BorderRadius]: BorderRadiusTab,
+    [ThemeTab.Specific]: SpecificTab,
     [ThemeTab.Preview]: PreviewTab,
 };
 
@@ -67,6 +70,10 @@ export const Themes = () => {
             {
                 value: ThemeTab.BorderRadius,
                 title: t('tags_borderRadius'),
+            },
+            {
+                value: ThemeTab.Specific,
+                title: t('tags_specific'),
             },
             {
                 value: ThemeTab.Preview,
