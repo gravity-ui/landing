@@ -7,6 +7,7 @@ import {initThemeCreator} from './themeCreatorUtils';
 import type {
     AddColorToThemeParams,
     AddFontFamilyTypeParams,
+    ChangeIllustrationColorInThemeParams,
     ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
@@ -28,6 +29,7 @@ export interface ThemeCreatorMethodsContextType {
     removeColor: (title: string) => void;
     renameColor: (params: RenameColorInThemeParams) => void;
     changeUtilityColor: (params: ChangeUtilityColorInThemeParams) => void;
+    changeIllustrationColor: (params: ChangeIllustrationColorInThemeParams) => void;
     applyBrandPreset: (preset: BrandPreset) => void;
     changeRadiusPreset: (params: ChangeRadiusPresetInThemeParams) => void;
     updateCustomRadiusPreset: (params: UpdateCustomRadiusPresetInThemeParams) => void;
@@ -50,6 +52,7 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     removeColor: noop,
     renameColor: noop,
     changeUtilityColor: noop,
+    changeIllustrationColor: noop,
     applyBrandPreset: noop,
     changeRadiusPreset: noop,
     updateCustomRadiusPreset: noop,

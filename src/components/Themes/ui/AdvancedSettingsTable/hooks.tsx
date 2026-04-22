@@ -6,7 +6,6 @@ import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import {useThemeCreator} from '../../hooks';
 import {isManuallyCreatedPaletteToken} from '../../lib/themeCreatorUtils';
-import type {AdvancedColorType} from '../../lib/types';
 
 import {ThemeToggleTitleColumn, ThemeValueColumn, TitleColumn, VariableColumn} from './columns';
 
@@ -34,7 +33,7 @@ type Column = {
     }) => ReactElement;
 };
 
-export const useColumns = ({colorType}: {colorType: AdvancedColorType}): Column[] => {
+export const useColumns = ({variablesTitle}: {variablesTitle: string}): Column[] => {
     const [theme, toggleTheme] = useState<Theme>('light');
     const {t} = useTranslation('themes');
 
@@ -43,21 +42,13 @@ export const useColumns = ({colorType}: {colorType: AdvancedColorType}): Column[
 
     const variableColumn: Column = useMemo(
         () => ({
-            title: () => (
-                <TitleColumn
-                    value={
-                        colorType === 'basic-palette'
-                            ? t('title_advance-settings-table_title-color')
-                            : t('title_advance-settings-table_title-variable')
-                    }
-                />
-            ),
+            title: () => <TitleColumn value={variablesTitle} />,
             key: 'variable',
             render: ({colorName, extraVariable = false}) => (
                 <VariableColumn name={colorName} extraVariable={extraVariable} />
             ),
         }),
-        [t, colorType],
+        [t, variablesTitle],
     );
 
     const tabletColumns: Column[] = useMemo(

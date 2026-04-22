@@ -2,6 +2,7 @@ import {CircleQuestion} from '@gravity-ui/icons';
 import {Button, Flex, Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useMemo} from 'react';
+import {DEFAULT_ADVANCED_COLORS} from 'src/components/Themes/lib/constants';
 
 import {block} from '../../../../../utils';
 import {type TagItem, Tags} from '../../../../Tags/Tags';
@@ -16,6 +17,8 @@ export const AdvancedSettings = () => {
     const {t} = useTranslation('themes');
     const {advancedColorType} = useThemeCreator();
     const {setAdvancedColorType} = useThemeCreatorMethods();
+
+    const isBasicPalette = advancedColorType === 'basic-palette';
 
     const tags: TagItem<AdvancedColorType>[] = useMemo(
         () => [
@@ -51,6 +54,16 @@ export const AdvancedSettings = () => {
         [t],
     );
 
+    const groups = useMemo(() => {
+        return Object.entries(DEFAULT_ADVANCED_COLORS[advancedColorType]).map(
+            ([group, variables]) => ({
+                title: t(`title_advance-color-settings-group-${group}`),
+                variables,
+                hasExtraColors: isBasicPalette && group === 'extra-color',
+            }),
+        );
+    }, [advancedColorType]);
+
     return (
         <ThemeSection
             title="Colors setup"
@@ -70,7 +83,14 @@ export const AdvancedSettings = () => {
                 />
             </Flex>
 
-            <AdvancedSettingsTable colorType={advancedColorType} />
+            <AdvancedSettingsTable
+                colorGroups={groups}
+                variablesTitle={
+                    isBasicPalette
+                        ? t('title_advance-settings-table_title-color')
+                        : t('title_advance-settings-table_title-variable')
+                }
+            />
         </ThemeSection>
     );
 };

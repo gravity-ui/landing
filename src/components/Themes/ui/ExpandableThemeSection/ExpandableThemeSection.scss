@@ -1,0 +1,23 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}expandable-theme-section';
+
+#{$block} {
+    &__header {
+        border-bottom: 1px solid var(--g-color-line-generic);
+        cursor: pointer;
+        padding-bottom: calc(var(--g-spacing-base) * 6);
+    }
+
+    &__content {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+
+        &_open {
+            max-height: 5000px;
+            opacity: 1;
+        }
+    }
+}

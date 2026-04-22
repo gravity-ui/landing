@@ -4,6 +4,7 @@
   "tags_colors": "Couleurs",
   "tags_typography": "Typographie",
   "tags_borderRadius": "Rayon de bordure",
+  "tags_specific": "Spécifique",
   "tags_preview": "Aperçu",
   "btn_export_theme": "Exporter le thème",
   "btn_import_theme": "Importer le thème",
@@ -247,5 +248,13 @@
   "text_utility-color_scroll-corner_description": "Un coin où les défilements horizontal et vertical se rencontrent.",
   "text_utility-color_infographics-axis_description": "Axe du graphique",
   "text_utility-color_infographics-tooltip-bg_description": "Arrière-plan principal pour les info-bulles.",
-  "text_utility-color_disabled_description": "Désactivé : référence de couleur récursive détectée"
+  "text_utility-color_disabled_description": "Désactivé : référence de couleur récursive détectée",
+  "text_utility-color_object-base_description": "Couleur de base pour les objets",
+  "text_utility-color_object-hightlight_description": "Couleur d'accentuation pour les objets",
+  "text_utility-color_object-accent-heavy_description": "Couleur d'accentuation à contraste élevé pour les objets",
+  "text_utility-color_object-accent-light_description": "Couleur d'accentuation claire pour les objets",
+  "text_utility-color_object-danger_description": "Couleur pour les objets avec contexte négatif",
+  "text_utility-color_shadow-over-object_description": "Ombre pour les objets",
+  "text_utility-color_background-lines_description": "Couleur des lignes d'arrière-plan",
+  "text_utility-color_background-shapes_description": "Couleur des formes d'arrière-plan"
 }

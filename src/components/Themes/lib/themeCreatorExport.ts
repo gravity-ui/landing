@@ -51,6 +51,7 @@ export function exportTheme({
             theme: themeState.gravityTheme,
             ignoreDefaultValues,
             forPreview,
+            libraries: ['illustrations'],
         });
         return JSON.stringify(json, null, 2);
     }
@@ -59,6 +60,7 @@ export function exportTheme({
         theme: themeState.gravityTheme,
         ignoreDefaultValues,
         forPreview,
+        libraries: ['illustrations'],
     });
 
     if (customRootClassName) {
