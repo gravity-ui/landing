@@ -24,14 +24,14 @@
   "description_ui-logger": "Simple logger côté client.",
   "description_oauth-clients": "Bibliothèque client OAuth qui fournit une abstraction pratique sur le flux d'authentification.",
   "description_i18n": "Utilitaires d'internationalisation des projets Gravity UI.",
-  "description_eslint-config": "Preset de configuration ESLint pour les projets Gravity UI.",
-  "description_tsconfig": "Preset de configuration du compilateur TypeScript pour les projets Gravity UI.",
-  "description_prettier-config": "Preset de configuration Prettier pour les projets Gravity UI.",
-  "description_stylelint-config": "Preset de configuration Stylelint pour les projets Gravity UI.",
-  "description_babel-preset": "Preset de configuration Babel pour les projets Gravity UI.",
-  "description_browserslist-config": "Preset de configuration Browserslist utilisé dans nos services.",
+  "description_eslint-config": "Configuration ESLint prédéfinie pour les projets Gravity UI.",
+  "description_tsconfig": "Configuration du compilateur TypeScript prédéfinie pour les projets Gravity UI.",
+  "description_prettier-config": "Configuration Prettier prédéfinie pour les projets Gravity UI.",
+  "description_stylelint-config": "Configuration Stylelint prédéfinie pour les projets Gravity UI.",
+  "description_babel-preset": "Configuration Babel prédéfinie pour les projets Gravity UI.",
+  "description_browserslist-config": "Configuration Browserslist prédéfinie utilisée dans nos services.",
   "description_markdown-editor": "Un outil puissant pour travailler avec Markdown, qui combine les modes WYSIWYG et Markup.",
-  "description_graph": "Moteur de rendu de graphes haute performance avec une détailisation dynamique adaptée à l'échelle.",
+  "description_graph": "Rendu de graphe haute performance avec une détailisation dynamique adaptée à l'échelle.",
   "description_data-source": "Un wrapper pour la récupération de données.",
   "description_webpack-i18n-assets-plugin": "Un plugin pour Webpack qui remplace les appels aux fonctions de localisation (i18n) par les textes cibles.",
   "description_table": "Bibliothèque pour la visualisation de données au format tabulaire.",
@@ -39,5 +39,5 @@
   "description_page-constructor-builder": "Un utilitaire en ligne de commande puissant pour construire des pages statiques à partir de configurations YAML.",
   "description_aikit": "Une bibliothèque de composants React flexible pour la création de chats IA selon les principes de la conception atomique.",
   "description_charts": "Une bibliothèque JavaScript flexible pour la visualisation de données et le rendu de graphiques à l'aide de React.",
-  "description_playwright-tools": "Une collection d'utilitaires pour écrire des tests Playwright, incluant des actions navigateur, l'enregistrement et la lecture de requêtes basés sur HAR et des fixtures pour les tests de composants."
+  "description_playwright-tools": "Une collection d'utilitaires pour écrire des tests Playwright, y compris des actions de navigateur, l'enregistrement et la relecture de requêtes basées sur HAR, et des fixtures de test de composants."
 }
