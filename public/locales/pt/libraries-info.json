@@ -38,5 +38,6 @@
   "description_timeline": "Uma biblioteca baseada em React para construir visualizações de linha do tempo interativas com renderização em canvas.",
   "description_page-constructor-builder": "Uma poderosa utilidade de linha de comando para construir páginas estáticas a partir de configurações YAML",
   "description_aikit": "Uma biblioteca de componentes React flexível para construir chats de IA com princípios de Design Atômico.",
-  "description_charts": "Uma biblioteca JavaScript flexível para visualização de dados e renderização de gráficos usando React."
+  "description_charts": "Uma biblioteca JavaScript flexível para visualização de dados e renderização de gráficos usando React.",
+  "description_playwright-tools": "Uma coleção de utilitários para escrever testes com Playwright, incluindo ações de navegador, gravação e reprodução de requisições baseadas em HAR e fixtures para testes de componentes."
 }

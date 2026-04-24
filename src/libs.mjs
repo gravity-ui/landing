@@ -479,4 +479,20 @@ export const libs = [
             'https://raw.githubusercontent.com/gravity-ui/page-constructor-builder/main/CHANGELOG.md',
         mainBranch: 'main',
     },
+    {
+        id: 'playwright-tools',
+        githubId: 'gravity-ui/playwright-tools',
+        npmId: '@gravity-ui/playwright-tools',
+        title: 'Playwright Tools',
+        primary: false,
+        landing: false,
+        tags: ['testing'],
+        storybookUrl: '',
+        readmeUrl: getReadmeUrls(
+            'https://raw.githubusercontent.com/gravity-ui/playwright-tools/main',
+        ),
+        changelogUrl:
+            'https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
 ];
