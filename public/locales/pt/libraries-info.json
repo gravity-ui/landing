@@ -24,12 +24,12 @@
   "description_ui-logger": "Logger simples do lado do cliente.",
   "description_oauth-clients": "Biblioteca cliente OAuth que fornece abstração conveniente sobre o fluxo de autenticação.",
   "description_i18n": "Utilitários de internacionalização para projetos Gravity UI.",
-  "description_eslint-config": "Configuração preset do ESLint para projetos Gravity UI.",
-  "description_tsconfig": "Configuração preset do compilador TypeScript para projetos Gravity UI.",
-  "description_prettier-config": "Configuração preset do Prettier para projetos Gravity UI.",
-  "description_stylelint-config": "Configuração preset do Stylelint para projetos Gravity UI.",
-  "description_babel-preset": "Configuração preset do Babel para projetos Gravity UI.",
-  "description_browserslist-config": "Configuração preset do Browserslist usada em nossos serviços.",
+  "description_eslint-config": "Configuração de preset ESLint para projetos Gravity UI.",
+  "description_tsconfig": "Configuração de preset do compilador TypeScript para projetos Gravity UI.",
+  "description_prettier-config": "Configuração de preset Prettier para projetos Gravity UI.",
+  "description_stylelint-config": "Configuração de preset Stylelint para projetos Gravity UI.",
+  "description_babel-preset": "Configuração de preset Babel para projetos Gravity UI.",
+  "description_browserslist-config": "Configuração de preset Browserslist usada em nossos serviços.",
   "description_markdown-editor": "Uma ferramenta poderosa para trabalhar com Markdown, que combina modos WYSIWYG e Markup.",
   "description_graph": "Renderizador de gráficos de alto desempenho com detalhamento dinâmico adaptável à escala",
   "description_data-source": "Um wrapper para busca de dados.",
@@ -39,5 +39,5 @@
   "description_page-constructor-builder": "Uma poderosa utilidade de linha de comando para construir páginas estáticas a partir de configurações YAML",
   "description_aikit": "Uma biblioteca de componentes React flexível para construir chats de IA com princípios de Design Atômico.",
   "description_charts": "Uma biblioteca JavaScript flexível para visualização de dados e renderização de gráficos usando React.",
-  "description_playwright-tools": "Uma coleção de utilitários para escrever testes com Playwright, incluindo ações de navegador, gravação e reprodução de requisições baseadas em HAR e fixtures para testes de componentes."
+  "description_playwright-tools": "Uma coleção de utilitários para escrever testes Playwright, incluindo ações de navegador, gravação e reprodução de requisições baseadas em HAR e fixtures de teste de componentes."
 }

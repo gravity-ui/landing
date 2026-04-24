@@ -3,8 +3,8 @@
   "description_components": "一套复杂的 React 组件。",
   "description_icons": "包含数百个各种现代 SVG 图标的集合，适用于您的项目。",
   "description_illustrations": "用于显示数据状态的插图集。",
-  "description_dynamic-forms": "用于渲染由 JSON schema 描述的整洁且功能齐全的 React 表单的库。",
-  "description_page-constructor": "一套时尚、功能齐全的块，用于快速创建宣传和着陆页。",
+  "description_dynamic-forms": "用于根据 JSON schema 渲染整洁且功能齐全的 React 表单的库。",
+  "description_page-constructor": "一套时尚、功能齐全的块，用于快速创建宣传页和着陆页。",
   "description_blog-constructor": "基于 Page constructor 库的库，用于创建类似博客的服务。",
   "description_chartkit": "与我们的设计系统集成的可视化数据套件。",
   "description_dashkit": "用于构建交互式仪表板的网格组件。",
@@ -36,8 +36,8 @@
   "description_webpack-i18n-assets-plugin": "一个 Webpack 插件，用于将本地化函数 (i18n) 的调用替换为目标文本。",
   "description_table": "用于以表格格式可视化数据的库。",
   "description_timeline": "一个基于 React 的库，用于使用 canvas 渲染构建交互式时间线可视化。",
-  "description_page-constructor-builder": "一个强大的命令行实用程序，用于从 YAML 配置构建静态页面。",
+  "description_page-constructor-builder": "一个强大的命令行工具，用于从 YAML 配置构建静态页面。",
   "description_aikit": "一个灵活的 React 组件库，用于遵循原子设计原则构建 AI 聊天。",
   "description_charts": "一个灵活的 JavaScript 库，用于使用 React 进行数据可视化和图表渲染。",
-  "description_playwright-tools": "用于编写 Playwright 测试的工具集，包括浏览器操作、基于 HAR 文件的请求录制与回放以及组件测试夹具。"
+  "description_playwright-tools": "一套用于编写 Playwright 测试的实用工具，包括浏览器操作、基于 HAR 的请求记录和回放以及组件测试 fixture。"
 }
