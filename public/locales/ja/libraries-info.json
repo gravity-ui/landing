@@ -38,5 +38,6 @@
   "description_timeline": "キャンバスレンダリングによるインタラクティブなタイムライン可視化を構築するためのReactベースのライブラリ。",
   "description_page-constructor-builder": "YAML設定から静的ページをビルドするための強力なコマンドラインユーティリティ。",
   "description_aikit": "アトミックデザインの原則でAIチャットを構築するための柔軟なReactコンポーネントライブラリ。",
-  "description_charts": "Reactを使用したデータ可視化とチャートレンダリングのための柔軟なJavaScriptライブラリ。"
+  "description_charts": "Reactを使用したデータ可視化とチャートレンダリングのための柔軟なJavaScriptライブラリ。",
+  "description_playwright-tools": "ブラウザアクション、HARファイルに基づくリクエストの記録と再生、コンポーネントテストフィクスチャを含む、Playwrightテスト作成のためのユーティリティコレクション。"
 }

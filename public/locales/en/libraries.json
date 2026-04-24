@@ -6,5 +6,6 @@
     "tags_all": "All",
     "tags_ui": "UI",
     "tags_nodejs": "Node.js",
-    "tags_infrastructure": "Infrastructure"
+    "tags_infrastructure": "Infrastructure",
+    "tags_testing": "Testing"
 }

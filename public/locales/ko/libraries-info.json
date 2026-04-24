@@ -38,5 +38,6 @@
   "description_timeline": "캔버스 렌더링을 사용하여 대화형 타임라인 시각화를 구축하기 위한 React 기반 라이브러리입니다.",
   "description_page-constructor-builder": "YAML 구성을 사용하여 정적 페이지를 빌드하기 위한 강력한 명령줄 유틸리티입니다.",
   "description_aikit": "Atomic Design 원칙을 사용하여 AI 채팅을 구축하기 위한 유연한 React 컴포넌트 라이브러리입니다.",
-  "description_charts": "React를 사용하여 데이터 시각화 및 차트 렌더링을 위한 유연한 JavaScript 라이브러리입니다."
+  "description_charts": "React를 사용하여 데이터 시각화 및 차트 렌더링을 위한 유연한 JavaScript 라이브러리입니다.",
+  "description_playwright-tools": "브라우저 액션, HAR 파일 기반 요청 녹화 및 재생, 컴포넌트 테스트 픽스처를 포함하는 Playwright 테스트 작성용 유틸리티 모음입니다."
 }
