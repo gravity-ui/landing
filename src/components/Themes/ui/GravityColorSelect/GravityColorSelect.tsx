@@ -13,7 +13,9 @@ import {
 import {
     isInternalPrivateColorReference,
     isInternalUtilityColorReference,
+    isInternalUtilityIllustrationColorReference,
     parseInternalUtilityColorReference,
+    parseInternalUtilityIllustrationColorReference,
 } from '@gravity-ui/uikit-themer';
 import React from 'react';
 
@@ -53,7 +55,9 @@ export const GravityColorSelect = ({
     const [containerElement, setContainerElement] = React.useState<HTMLDivElement | null>(null);
     const [showPopup, setShowPopup] = React.useState(false);
     const isCustomValue =
-        !isInternalPrivateColorReference(value) && !isInternalUtilityColorReference(value);
+        !isInternalPrivateColorReference(value) &&
+        !isInternalUtilityColorReference(value) &&
+        !isInternalUtilityIllustrationColorReference(value);
 
     const handleChange = React.useCallback(
         (newVal: string, newRef?: string) => {
@@ -74,9 +78,28 @@ export const GravityColorSelect = ({
 
     const selectedColor = React.useMemo(() => {
         const isUtilityColor = isInternalUtilityColorReference(value);
+        const isIllustrationColor = isInternalUtilityIllustrationColorReference(value);
 
         if (isUtilityColor && value) {
             const tokenName = parseInternalUtilityColorReference(value);
+            let semanticItem: BaseColor | undefined;
+
+            semanticGroups?.forEach((group) =>
+                group.groups.forEach((nestedGroup) =>
+                    nestedGroup.items.forEach((item) => {
+                        if (item.name === tokenName) {
+                            semanticItem = item;
+                            return;
+                        }
+                    }),
+                ),
+            );
+
+            return semanticItem;
+        }
+
+        if (isIllustrationColor && value) {
+            const tokenName = parseInternalUtilityIllustrationColorReference(value);
             let semanticItem: BaseColor | undefined;
 
             semanticGroups?.forEach((group) =>
