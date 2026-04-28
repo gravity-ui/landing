@@ -89,14 +89,18 @@ export const MDXRenderer = React.memo<Props>(
         React.useEffect(() => {
             if (isMounted) {
                 const content = document.getElementById(CONTENT_WRAPPER_ID);
-                const sectionId = window.location.hash.split('#')[1];
-                const section = document.querySelector<HTMLElement>('#' + sectionId);
+                try {
+                    const sectionId = decodeURI(window.location.hash).split('#')[1];
+                    const section = document.querySelector<HTMLElement>('#' + sectionId);
 
-                if (content && section) {
-                    content.scrollTo({
-                        top: section.offsetTop,
-                        behavior: 'smooth',
-                    });
+                    if (content && section) {
+                        content.scrollTo({
+                            top: section.offsetTop,
+                            behavior: 'smooth',
+                        });
+                    }
+                } catch (err) {
+                    console.error(err);
                 }
             }
         }, [isMounted]);
