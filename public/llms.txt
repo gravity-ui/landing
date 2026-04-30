@@ -3,7 +3,7 @@
 This index links to Gravity UI library documentation on GitHub.
 Each link points to the library's README.md file.
 
-**Last updated:** 2026-04-21
+**Last updated:** 2026-04-30
 
 **Main website:** [https://gravity-ui.com](https://gravity-ui.com)
 
@@ -203,6 +203,14 @@ A powerful command-line utility for building static pages from YAML configuratio
 - **npm:** `@gravity-ui/page-constructor-builder`
 - **GitHub:** [gravity-ui/page-constructor-builder](https://github.com/gravity-ui/page-constructor-builder)
 - **Documentation:** [README](https://raw.githubusercontent.com/gravity-ui/page-constructor-builder/main/README.md)
+
+### Playwright Tools
+
+A collection of utilities for writing Playwright tests, including browser actions, HAR-based request recording and replay, and component testing fixtures.
+
+- **npm:** `@gravity-ui/playwright-tools`
+- **GitHub:** [gravity-ui/playwright-tools](https://github.com/gravity-ui/playwright-tools)
+- **Documentation:** [README](https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/README.md)
 
 ### Table
 
