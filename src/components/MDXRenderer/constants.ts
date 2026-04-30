@@ -10,6 +10,7 @@ import * as DateComponentsExamples from '../../content/components/date-component
 import * as UIKitExamples from '../../content/components/uikit/examples/components';
 
 import {ExampleBlock} from './ExampleBlock/ExampleBlock';
+import {Sandbox} from './Sandbox';
 
 export const componentsAvailableInMDX: MDXComponents = {
     Grid,
@@ -17,6 +18,7 @@ export const componentsAvailableInMDX: MDXComponents = {
     Row: Row as MDXContent,
     Col: Col as MDXContent,
     ExampleBlock: ExampleBlock as MDXContent,
+    Sandbox: Sandbox as MDXContent,
     UIKitExamples,
     DateComponentsExamples,
     React: React as unknown as Record<string, MDXComponents>,

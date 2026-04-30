@@ -17,3 +17,7 @@ declare module '*.yml' {
     const value: object;
     export default value;
 }
+declare module '@gravity-ui/prettier-config' {
+    const config: Record<string, unknown>;
+    export default config;
+}
