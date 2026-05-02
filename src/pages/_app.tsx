@@ -5,7 +5,6 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import {NextComponentType} from 'next';
 import {appWithTranslation} from 'next-i18next';
-import 'prismjs/themes/prism-tomorrow.min.css';
 
 import {useReportWebVitals} from '../hooks/useReportWebVitals';
 import {WindowBreakpointProvider} from '../hooks/useWindowBreakpoint';
