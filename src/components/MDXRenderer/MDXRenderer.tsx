@@ -36,6 +36,9 @@ export const MDXRenderer = React.memo<Props>(
         const Content = React.useMemo<MDXContent | null>(() => {
             const preparedText = text
                 .trim()
+                .replace(/<!--SANDBOX(.*?)SANDBOX-->/gms, (_, code) => {
+                    return `<Sandbox code={${JSON.stringify(code.trim())}} />`;
+                })
                 .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1')
                 .replace(/<!--GITHUB_BLOCK(.*?)\/GITHUB_BLOCK-->/gms, '');
 

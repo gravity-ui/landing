@@ -1,12 +1,7 @@
-@use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
-@use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
 @use '../../../variables.scss';
 
-$block: '.#{variables.$ns}example-block';
-
-// Workaround for missing theme class in ThemeProvider
-$workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
+$block: '.#{variables.$ns}sandbox';
 
 #{$block} {
     margin-bottom: 16px;
@@ -18,13 +13,8 @@ $workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
         margin-bottom: 0;
     }
 
-    #{$workaroundBlockDarkTheme},
-    &__theme-root.g-root_theme_dark {
+    &__theme-root_theme_dark {
         --g-color-base-background: #251b25;
-    }
-
-    &__container {
-        background-color: var(--g-color-base-background);
     }
 
     &__content {
@@ -39,15 +29,7 @@ $workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
             margin: 0 8px;
         }
 
-        ul {
-            padding-left: 0;
-
-            p {
-                margin-bottom: 0;
-            }
-        }
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+        @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'lg') - 1px)) {
             flex-direction: column;
             align-items: center;
 
@@ -65,26 +47,36 @@ $workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
         padding: 14px;
         background: #251b25;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     &__control {
+        border: none;
+        background: transparent;
+        font: inherit;
+        color: inherit;
+        line-height: inherit;
+        text-align: inherit;
+        appearance: none;
+        margin: 0;
+
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 6px;
-        margin: 0 8px;
         cursor: pointer;
 
-        &_open {
+        &_active {
             background-color: rgba(255, 190, 92, 0.1);
             border-radius: 5px;
         }
     }
 
-    &__code {
+    &__editor-container {
         position: relative;
         display: grid;
         grid-template-rows: 0fr;
@@ -93,27 +85,50 @@ $workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
         transition: all 0.2s ease-out;
 
-        & > * {
-            overflow: hidden;
-        }
-
-        pre {
-            margin: 0 50px 0 0;
-        }
-
-        &_open {
+        &_visible {
             grid-template-rows: 1fr;
             opacity: 1;
             visibility: visible;
         }
     }
 
-    & &__copy-icon {
+    &__editor-scroll {
+        overflow: auto;
+        min-width: 0;
+    }
+
+    &__editor-textarea:focus {
+        outline: none;
+    }
+
+    &__copy-button {
         position: absolute;
         right: 12px;
         top: 12px;
         padding: 8px;
         border-radius: 8px;
         background: rgba(0, 0, 0, 0.5);
+    }
+
+    &__alert {
+        --g-card-border-radius: 0;
+
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        padding: 0 var(--g-spacing-5);
+        transition: all 0.2s ease-out;
+
+        & > * {
+            overflow: hidden;
+        }
+
+        &_visible {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            padding: var(--g-spacing-4) var(--g-spacing-5);
+            visibility: visible;
+        }
     }
 }

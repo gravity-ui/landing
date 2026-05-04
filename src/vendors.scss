@@ -1,3 +1,4 @@
+@use 'sass:meta';
 @use '~flag-icons/sass/flag-icons' with (
     // Override path to flags directory
     $flag-icons-path: '~flag-icons/flags',
@@ -5,6 +6,11 @@
     // Include only specific country flags
     $flag-icons-included-countries: ('us', 'ru', 'es', 'cn', 'fr', 'de', 'kr', 'pt', 'jp')
 );
+
+// Use css layer to prevent override github-markdown-dark.css styles
+@layer prism {
+    @include meta.load-css('../node_modules/prismjs/themes/prism-tomorrow.min.css');
+}
 
 // Swiper styles - imported here for SSR compatibility
 @import 'swiper/css';
