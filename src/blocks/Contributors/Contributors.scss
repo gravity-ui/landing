@@ -35,6 +35,9 @@ $block: '.#{variables.$ns}contributors';
     }
 
     &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
         padding: 40px;
         margin-top: 32px;
         background: #251b25;
@@ -43,5 +46,25 @@ $block: '.#{variables.$ns}contributors';
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             padding: 20px;
         }
+
+        &_newcomers {
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    &__section-title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+        color: var(--g-color-text-primary);
+    }
+
+    &__newcomers-avatars {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 12px;
+        align-items: center;
     }
 }

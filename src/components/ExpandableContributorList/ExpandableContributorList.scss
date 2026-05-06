@@ -7,15 +7,20 @@ $block: '.#{variables.$ns}expandable-contributor-list';
 
 #{$block} {
     display: grid;
+    grid-template-rows: 1fr auto;
     row-gap: 20px;
-    grid-template-rows: 0fr auto;
-    transition: grid-template-rows 0.3s ease;
 
-    &_expanded {
-        grid-template-rows: 1fr auto;
+    &__list-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.3s ease;
+
+        &_expanded {
+            grid-template-rows: 1fr;
+        }
     }
 
-    &_notExpandable {
+    &_notExpandable &__list-wrapper {
         grid-template-rows: unset;
     }
 

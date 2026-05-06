@@ -21,8 +21,9 @@ const getComponent = async () => {
 
 const getComponentProps = async () => {
     const contributors = await ClientApi.instance.fetchAllContributors();
+    const newcomers = contributors.filter((c) => c.isNewcomer);
 
-    return {contributors};
+    return {contributors, newcomers};
 };
 
 export const LazyExpandableContributorsList: React.FC<Props> = (props) => {

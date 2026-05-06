@@ -5,6 +5,7 @@ export type Contributor = {
     url: string;
     avatarUrl: string;
     contributions: number;
+    isNewcomer?: boolean;
 };
 
 export type CodeOwners = {

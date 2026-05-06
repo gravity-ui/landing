@@ -30,6 +30,16 @@ export const IntersectionLoadComponent = <Component extends React.ComponentType<
     const [intersectionElementRef, setIntersectionElementRef] =
         React.useState<HTMLDivElement | null>(null);
 
+    const onLoadRef = React.useRef(onLoad);
+    onLoadRef.current = onLoad;
+
+    React.useEffect(() => {
+        if (cache.has(cacheKey)) {
+            const {Component, props} = cache.get(cacheKey);
+            onLoadRef.current?.(Component, props);
+        }
+    }, [cacheKey]);
+
     const getComponentWithPropsCached = React.useCallback(async () => {
         if (cache.has(cacheKey)) {
             return cache.get(cacheKey);
