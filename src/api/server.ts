@@ -45,6 +45,7 @@ export class ServerApi {
         'dependabot',
         'dependabot[bot]',
         'gravity-ui-bot',
+        'gravity-ui[bot]',
         'yc-ui-bot',
     ];
 
