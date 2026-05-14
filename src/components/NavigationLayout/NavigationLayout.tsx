@@ -1,3 +1,4 @@
+import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
@@ -5,6 +6,7 @@ import React from 'react';
 import arrowIcon from '../../assets/icons/arrow.svg';
 import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import {CONTENT_WRAPPER_ID} from '../../constants';
+import {useWindowBreakpoint} from '../../hooks/useWindowBreakpoint';
 import {block} from '../../utils';
 import {Footer} from '../Footer/Footer';
 import LibraryVersion from '../LibraryVersion/LibraryVersion';
@@ -35,6 +37,8 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
     children,
 }) => {
     const {t} = useTranslation();
+    const windowBreakpoint = useWindowBreakpoint();
+    const isDesktop = windowBreakpoint >= BREAKPOINTS.lg;
 
     const [isOpenMobileNavigation, setIsOpenMobileNavigation] = React.useState(false);
 
@@ -59,7 +63,11 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
 
     return (
         <div className={b()}>
-            <div className={b('navigation-wrap')}>
+            <div
+                className={b('navigation-wrap')}
+                data-custom-scrollbar={isDesktop ? true : undefined}
+                data-scrollbar-axis={isDesktop ? 'vertical' : undefined}
+            >
                 <div
                     tabIndex={0}
                     role="button"
@@ -110,7 +118,12 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
                     />
                 </div>
             </div>
-            <div className={b('content-wrap')} id={CONTENT_WRAPPER_ID}>
+            <div
+                className={b('content-wrap')}
+                id={CONTENT_WRAPPER_ID}
+                data-custom-scrollbar={isDesktop ? true : undefined}
+                data-scrollbar-axis={isDesktop ? 'vertical' : undefined}
+            >
                 <div className={b('content')}>
                     {children}
                     <Footer containerClass={b('footer')} />

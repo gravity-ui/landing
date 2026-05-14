@@ -76,9 +76,10 @@ $border-color: rgba(255, 255, 255, 0.2);
 
     &__desktop-menu {
         display: flex;
-        flex: 1 0 auto;
+        flex: 1 1 auto;
         align-self: stretch;
         justify-self: stretch;
+        min-width: 0;
         padding: 0 34px;
         border-right: 1px solid $border-color;
         border-left: 1px solid $border-color;
@@ -86,6 +87,22 @@ $border-color: rgba(255, 255, 255, 0.2);
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
             display: none;
         }
+    }
+
+    &__desktop-menu-scrollbar {
+        flex: 1 1 auto;
+        align-self: stretch;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+    }
+
+    &__desktop-menu-content {
+        display: flex;
+        align-items: stretch;
+        min-width: max-content;
+        height: 100%;
     }
 
     &__desktop-menu-items {

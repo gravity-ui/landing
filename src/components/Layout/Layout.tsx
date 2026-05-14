@@ -79,9 +79,16 @@ export const Layout: React.FC<LayoutProps> = ({
                     <Menu />
                 </div>
             )}
-            <div className={b('wrapper')} id={noScroll ? undefined : CONTENT_WRAPPER_ID}>
-                <div className={b('content', {'no-scroll': noScroll})}>{children}</div>
-                {!showOnlyContent && !hideFooter && <Footer />}
+            <div
+                className={b('wrapper')}
+                id={noScroll ? undefined : CONTENT_WRAPPER_ID}
+                data-custom-scrollbar={noScroll ? undefined : true}
+                data-scrollbar-axis={noScroll ? undefined : 'vertical'}
+            >
+                <div className={b('scroll-content')}>
+                    <div className={b('content', {'no-scroll': noScroll})}>{children}</div>
+                    {!showOnlyContent && !hideFooter && <Footer />}
+                </div>
             </div>
         </div>
     );

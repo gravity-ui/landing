@@ -96,6 +96,7 @@ $block: '.#{variables.$ns}themes';
 
             padding-right: 0;
             padding-left: 40px;
+            margin: var(--g-spacing-6) 0;
 
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
                 display: block;
@@ -113,7 +114,6 @@ $block: '.#{variables.$ns}themes';
 
     &__tags {
         display: flex;
-        overflow: auto;
         flex-wrap: wrap;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
@@ -128,10 +128,6 @@ $block: '.#{variables.$ns}themes';
         --g-button-border-radius: 8px;
         border-radius: var(--g-border-radius-m);
         width: fit-content;
-
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            margin-block: var(--g-spacing-6) var(--g-spacing-8);
-        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             width: 100%;

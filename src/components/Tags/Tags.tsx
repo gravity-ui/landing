@@ -28,24 +28,26 @@ export function Tags<T extends string = string>({
     wrap = 'wrap',
 }: TagsProps<T>) {
     return (
-        <Flex wrap={wrap} gap={2} className={b(null, className)}>
-            {items.map((item) => {
-                return (
-                    <Button
-                        className={b('tag', {selected: item.value === value})}
-                        key={item.value}
-                        tabIndex={0}
-                        selected={item.value === value}
-                        view={'outlined'}
-                        size="xl"
-                        onClick={() => {
-                            onChange(item.value);
-                        }}
-                    >
-                        {item.title}
-                    </Button>
-                );
-            })}
-        </Flex>
+        <div className={b('scrollbar')} data-custom-scrollbar data-scrollbar-axis="horizontal">
+            <Flex wrap={wrap} gap={2} className={b(null, className)}>
+                {items.map((item) => {
+                    return (
+                        <Button
+                            className={b('tag', {selected: item.value === value})}
+                            key={item.value}
+                            tabIndex={0}
+                            selected={item.value === value}
+                            view={'outlined'}
+                            size="xl"
+                            onClick={() => {
+                                onChange(item.value);
+                            }}
+                        >
+                            {item.title}
+                        </Button>
+                    );
+                })}
+            </Flex>
+        </div>
     );
 }
