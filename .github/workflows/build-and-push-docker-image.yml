@@ -60,6 +60,8 @@ jobs:
             s3_secret_access_key=${{ secrets.STATIC_S3_SECRET_KEY }}
             openai_api_key=${{ secrets.OPENAI_API_KEY }}
             openai_model=${{ secrets.OPENAI_MODEL }}
+            openai_base_url=${{ secrets.OPENAI_BASE_URL }}
+            openai_prompt_id=${{ secrets.OPENAI_PROMPT_ID }}
 
       - name: Trigger deploy workflow
         uses: actions/github-script@v6

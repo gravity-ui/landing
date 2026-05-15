@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "AIチャットへようこそ",
-    "description": "メッセージを入力して会話を開始してください。"
+    "description": "メッセージを入力して会話を開始してください。",
+    "suggestion_fakePost": "フェイク投稿を生成して",
+    "suggestion_capabilities": "あなたは何ができますか？"
   },
   "error": {
     "apiError": "申し訳ありませんが、エラーが発生しました。もう一度お試しください。"
+  },
+  "feedback": {
+    "popupTitle": "何が問題でしたか？",
+    "reasonIncorrect": "不正確",
+    "reasonIncomplete": "不完全",
+    "reasonNotHelpful": "役に立たない",
+    "reasonOther": "その他",
+    "commentPlaceholder": "詳しく教えてください（任意）",
+    "submit": "送信",
+    "thankYou": "フィードバックをありがとうございます！"
   }
 }

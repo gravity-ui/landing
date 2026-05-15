@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "Bem-vindo ao Chat IA",
-    "description": "Inicie uma conversa digitando uma mensagem."
+    "description": "Inicie uma conversa digitando uma mensagem.",
+    "suggestion_fakePost": "Gerar uma postagem falsa",
+    "suggestion_capabilities": "O que você sabe fazer?"
   },
   "error": {
     "apiError": "Desculpe, ocorreu um erro. Por favor, tente novamente."
+  },
+  "feedback": {
+    "popupTitle": "O que houve de errado?",
+    "reasonIncorrect": "Impreciso",
+    "reasonIncomplete": "Incompleto",
+    "reasonNotHelpful": "Não foi útil",
+    "reasonOther": "Outro",
+    "commentPlaceholder": "Conte-nos mais (opcional)",
+    "submit": "Enviar",
+    "thankYou": "Obrigado pelo seu feedback!"
   }
 }

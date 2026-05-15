@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "Добро пожаловать в AI Чат",
-    "description": "Начните диалог, введя сообщение."
+    "description": "Начните диалог, введя сообщение.",
+    "suggestion_fakePost": "Сгенерируй фейковый пост",
+    "suggestion_capabilities": "Что ты умеешь?"
   },
   "error": {
     "apiError": "Произошла ошибка. Пожалуйста, попробуйте снова."
+  },
+  "feedback": {
+    "popupTitle": "Что было не так?",
+    "reasonIncorrect": "Неточно",
+    "reasonIncomplete": "Неполный ответ",
+    "reasonNotHelpful": "Не помог",
+    "reasonOther": "Другое",
+    "commentPlaceholder": "Расскажите подробнее (необязательно)",
+    "submit": "Отправить",
+    "thankYou": "Спасибо за отзыв!"
   }
 }
