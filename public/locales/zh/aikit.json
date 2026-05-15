@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "欢迎来到 AI 聊天",
-    "description": "输入消息开始对话。"
+    "description": "输入消息开始对话。",
+    "suggestion_fakePost": "生成一个虚假帖子",
+    "suggestion_capabilities": "你能做什么？"
   },
   "error": {
     "apiError": "抱歉，发生错误。请重试。"
+  },
+  "feedback": {
+    "popupTitle": "出了什么问题？",
+    "reasonIncorrect": "不准确",
+    "reasonIncomplete": "不完整",
+    "reasonNotHelpful": "没有帮助",
+    "reasonOther": "其他",
+    "commentPlaceholder": "告诉我们更多（可选）",
+    "submit": "发送",
+    "thankYou": "感谢您的反馈！"
   }
 }

@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "AI 채팅에 오신 것을 환영합니다",
-    "description": "메시지를 입력하여 대화를 시작하세요."
+    "description": "메시지를 입력하여 대화를 시작하세요.",
+    "suggestion_fakePost": "가짜 게시물 생성하기",
+    "suggestion_capabilities": "무엇을 할 수 있나요?"
   },
   "error": {
     "apiError": "죄송합니다. 오류가 발생했습니다. 다시 시도해 주세요."
+  },
+  "feedback": {
+    "popupTitle": "무엇이 잘못되었나요?",
+    "reasonIncorrect": "부정확함",
+    "reasonIncomplete": "불완전함",
+    "reasonNotHelpful": "도움이 되지 않음",
+    "reasonOther": "기타",
+    "commentPlaceholder": "자세히 알려주세요(선택)",
+    "submit": "보내기",
+    "thankYou": "피드백 감사합니다!"
   }
 }
