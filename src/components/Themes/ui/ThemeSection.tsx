@@ -12,8 +12,6 @@ interface ThemeSectionProps {
     children?: React.ReactNode;
     className?: string;
     titleActions?: React.ReactNode;
-    headerClassName?: string;
-    onHeaderClick?: () => void;
 }
 
 export const ThemeSection: React.FC<ThemeSectionProps> = ({
@@ -21,16 +19,10 @@ export const ThemeSection: React.FC<ThemeSectionProps> = ({
     className,
     children,
     titleActions,
-    headerClassName,
-    onHeaderClick,
 }) => {
     return (
         <div className={b(null, className)}>
-            <Flex
-                justifyContent="space-between"
-                className={b('header', headerClassName)}
-                onClick={onHeaderClick}
-            >
+            <Flex justifyContent="space-between">
                 <Text className={b('title')}>{title}</Text>
                 {titleActions}
             </Flex>

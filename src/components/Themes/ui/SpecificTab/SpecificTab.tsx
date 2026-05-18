@@ -20,21 +20,23 @@ export const SpecificTab = () => {
     }, []);
 
     return (
-        <ExpandableThemeSection
-            title={t('title_advance-color-settings-illustrations')}
-            initialExpanded={true}
-        >
-            <Flex direction="column" gap={10}>
-                <AdvancedSettingsTable
-                    colorGroups={groups}
-                    variablesTitle={t('title_advance-settings-table_title-variable')}
-                    className={b('illustration-settings')}
-                />
-                <Flex direction="column" gap={8}>
-                    <IllustrationsPreview theme="dark" />
-                    <IllustrationsPreview theme="light" />
+        <Flex direction="column" gap={8}>
+            <ExpandableThemeSection
+                title={t('title_advance-color-settings-illustrations')}
+                initialExpanded={true}
+            >
+                <Flex direction="column" gap={10}>
+                    <AdvancedSettingsTable
+                        colorGroups={groups}
+                        variablesTitle={t('title_advance-settings-table_title-variable')}
+                        className={b('illustration-settings')}
+                    />
+                    <Flex direction="column" gap={8}>
+                        <IllustrationsPreview theme="dark" />
+                        <IllustrationsPreview theme="light" />
+                    </Flex>
                 </Flex>
-            </Flex>
-        </ExpandableThemeSection>
+            </ExpandableThemeSection>
+        </Flex>
     );
 };
