@@ -1,8 +1,8 @@
-import {Loader} from '@gravity-ui/uikit';
 import {ClientApi} from 'src/api/client';
-import {block} from 'src/utils';
 
 import {IntersectionLoadComponent} from '../IntersectionLoadComponent/IntersectionLoadComponent';
+
+import {ContributorsListSkeleton} from './ContributorsListSkeleton';
 
 type Props = Omit<
     React.ComponentProps<
@@ -10,10 +10,6 @@ type Props = Omit<
     >,
     'cacheKey' | 'getComponent' | 'getComponentProps' | 'loader'
 >;
-
-import './ExpandableContributorList.scss';
-
-const b = block('expandable-contributor-list');
 
 const getComponent = async () => {
     return (await import('./ExpandableContributorList')).ExpandableContributorList;
@@ -41,7 +37,7 @@ export const LazyExpandableContributorsList: React.FC<Props> = (props) => {
             cacheKey="ExpandableContributorList"
             getComponent={getComponent}
             getComponentProps={getComponentProps}
-            loader={<Loader size="l" className={b('loader')} />}
+            loader={<ContributorsListSkeleton />}
             {...props}
         />
     );

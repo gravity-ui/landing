@@ -24,12 +24,57 @@ $block: '.#{variables.$ns}expandable-contributor-list';
         grid-template-rows: unset;
     }
 
-    &__loader {
-        width: 100%;
-        height: 276px;
+    &__skeleton {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__skeleton-section-title {
+        max-width: 100%;
+        margin-bottom: 32px;
+        border-radius: 4px;
+    }
+
+    &__skeleton-grid-wrapper {
+        position: relative;
+        overflow: hidden;
+        min-height: 156px;
+        margin-bottom: 20px;
+    }
+
+    &__skeleton-avatar-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__skeleton-avatar-row {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fill, 44px);
+        justify-content: start;
+        padding-left: var(--skeleton-row-offset, 0);
+    }
+
+    &__skeleton-avatar-cell {
+        position: relative;
+        padding: 100% 0 0;
+    }
+
+    &__skeleton-avatar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    &__skeleton-button {
+        width: 100%;
+        height: 44px;
+        border-radius: 100px;
     }
 
     &__inset-shadow {
