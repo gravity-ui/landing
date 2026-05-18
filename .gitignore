@@ -33,6 +33,7 @@ yarn-error.log*
 *.tsbuildinfo
 
 /src/data/*.json
+!/src/data/icons-embeddings.json
 
 .env
 .codeassistant/mcp.json

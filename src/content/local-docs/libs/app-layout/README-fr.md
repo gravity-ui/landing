@@ -43,6 +43,8 @@ interface RenderParams<Data, Plugins> {
   icon?: Icon;
   // nonce à définir sur les balises appropriées
   nonce?: string;
+  // attributs de la balise base
+  base?: Base;
 
   // options communes
   // Titre de la page
@@ -71,18 +73,44 @@ interface RenderParams<Data, Plugins> {
   bodyContent?: {
     // nom de classe pour la balise body
     className?: string;
-    // attributs de la balise body
+    // attributs du body
     attributes?: string;
-    // contenu de la balise body avant la balise div avec id root
+    // contenu du body avant la balise div avec l'id root
     beforeRoot?: string;
-    // contenu innerHtml de la balise div avec id root
+    // contenu innerHtml de la balise div avec l'id root
     root?: string;
-    // contenu de la balise body après la balise div avec id root
+    // contenu du body après la balise div avec l'id root
     afterRoot?: string;
   };
   // options des plugins
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
+```
+
+### Base
+
+Décrit la balise `base` :
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+Exemple :
+
+```js
+renderLayout({
+  title: 'Page d\'accueil',
+  base: {target: '_top'},
+});
+```
+
+Sera rendu comme :
+
+```html
+<base target="_top" />
 ```
 
 ### Meta
@@ -252,6 +280,7 @@ interface CommonOptions {
 }
 
 export interface HeadContent {
+  base?: Base;
   scripts: Script[];
   helpers: RenderHelpers;
   links: Link[];
@@ -289,7 +318,7 @@ Il existe quelques plugins dans ce package :
 
 ### Google analytics
 
-Ajoute un compteur Google Analytics sur la page.
+Ajoute un compteur Google Analytics à la page.
 
 Utilisation :
 
@@ -297,9 +326,7 @@ Utilisation :
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-```
 
-```javascript
 app.get((req, res) => {
   res.send(
     renderLayout({
@@ -317,7 +344,7 @@ app.get((req, res) => {
 });
 ```
 
-Options de plugin :
+Options du plugin :
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -361,7 +388,7 @@ app.get((req, res) => {
 });
 ```
 
-Options de plugin :
+Options du plugin :
 
 ```typescript
 export type UserParams = {
@@ -392,14 +419,16 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Ajoute les scripts et styles du fichier de manifeste des assets webpack.
+Ajoute des scripts et des styles à partir du fichier manifest des assets webpack.
 
 Utilisation :
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
+const renderLayout = createRenderFunction([
+  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+]);
 
 app.get((req, res) => {
   res.send(
@@ -415,7 +444,7 @@ app.get((req, res) => {
 });
 ```
 
-Options de plugin :
+Options du plugin :
 
 ```typescript
 export interface LayoutOptions {
@@ -426,7 +455,7 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-Ajoute des attributs au corps (`body`).
+Ajoute des attributs au corps de la page.
 
 Utilisation :
 
@@ -450,7 +479,7 @@ app.get((req, res) => {
 });
 ```
 
-Options de plugin :
+Options du plugin :
 
 ```typescript
 interface UikitPluginOptions {
@@ -490,7 +519,7 @@ app.get((req, res) => {
 });
 ```
 
-Options de plugin :
+Options du plugin :
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -498,7 +527,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-Il existe une aide pour créer tous les plugins :
+Il existe une fonction d'aide pour créer tous les plugins :
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -527,7 +556,7 @@ app.get((req, res) => {
 
 ## Utilisation alternative
 
-Avec les générateurs de parties `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via le streaming HTML :
+Avec les fonctions de rendu partielles `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via le streaming HTML :
 
 ```js
 import express from 'express';
@@ -547,6 +576,7 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
+```markdown
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
@@ -554,9 +584,8 @@ app.get('/', async function (req, res) {
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;
-```
 
-```html
+  res.write(`
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
         <head>

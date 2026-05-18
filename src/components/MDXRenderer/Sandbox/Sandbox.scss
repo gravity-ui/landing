@@ -1,0 +1,134 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}sandbox';
+
+#{$block} {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &__theme-root_theme_dark {
+        --g-color-base-background: #251b25;
+    }
+
+    &__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        flex-wrap: wrap;
+        row-gap: 20px;
+
+        & > * {
+            margin: 0 8px;
+        }
+
+        @media (max-width: (map-get(pcVariables.$gridBreakpoints, 'lg') - 1px)) {
+            flex-direction: column;
+            align-items: center;
+
+            & > * {
+                margin-top: 16px;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 14px;
+        background: #251b25;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    &__control {
+        border: none;
+        background: transparent;
+        font: inherit;
+        color: inherit;
+        line-height: inherit;
+        text-align: inherit;
+        appearance: none;
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        cursor: pointer;
+
+        &_active {
+            background-color: rgba(255, 190, 92, 0.1);
+            border-radius: 5px;
+        }
+    }
+
+    &__editor-container {
+        position: relative;
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.2s ease-out;
+
+        &_visible {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__editor-scroll {
+        overflow: auto;
+        min-width: 0;
+    }
+
+    &__editor-textarea:focus {
+        outline: none;
+    }
+
+    &__copy-button {
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        padding: 8px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    &__alert {
+        --g-card-border-radius: 0;
+
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        visibility: hidden;
+        padding: 0 var(--g-spacing-5);
+        transition: all 0.2s ease-out;
+
+        & > * {
+            overflow: hidden;
+        }
+
+        &_visible {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            padding: var(--g-spacing-4) var(--g-spacing-5);
+            visibility: visible;
+        }
+    }
+}

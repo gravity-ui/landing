@@ -41,8 +41,10 @@ interface RenderParams<Data, Plugins> {
   data?: Data;
   // favicon
   icon?: Icon;
-  // nonce para ser establecido en las etiquetas apropiadas
+  // nonce que se establecerá en las etiquetas apropiadas
   nonce?: string;
+  // atributos de la etiqueta base
+  base?: Base;
 
   // opciones comunes
   // Título de la página
@@ -83,6 +85,32 @@ interface RenderParams<Data, Plugins> {
   // opciones de plugins
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
+```
+
+### Base
+
+Describe la etiqueta `base`:
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+Ejemplo:
+
+```js
+renderLayout({
+  title: 'Página de inicio',
+  base: {target: '_top'},
+});
+```
+
+Se renderizará como:
+
+```html
+<base target="_top" />
 ```
 
 ### Meta
@@ -229,7 +257,7 @@ se renderizará como:
 
 ## Plugins
 
-La función de renderizado puede ser extendida por plugins. Un plugin puede reescribir el contenido de renderizado definido por el usuario.
+La función de renderizado puede extenderse mediante plugins. Un plugin puede reescribir el contenido de renderizado definido por el usuario.
 Un plugin es un objeto con propiedades `name` y `apply`:
 
 ```typescript
@@ -245,51 +273,9 @@ interface Plugin<Options = any, Name = string> {
 }
 
 interface CommonOptions {
-  name: string;
-  title: string;
-  lang?: string;
-  isMobile?: boolean;
-}
+  
 
-export interface HeadContent {
-  scripts: Script[];
-  helpers: RenderHelpers;
-  links: Link[];
-  meta: Meta[];
-  styleSheets: Stylesheet[];
-  inlineStyleSheets: string[];
-  inlineScripts: string[];
-  title: string;
-}
-
-export interface BodyContent {
-  attributes: Attributes;
-  beforeRoot: string[];
-  root?: string;
-  afterRoot: string[];
-}
-
-export interface RenderContent extends HeadContent {
-  htmlAttributes: Attributes;
-  bodyContent: BodyContent;
-}
-
-export interface RenderHelpers {
-  renderScript(script: Script): string;
-  renderInlineScript(content: string): string;
-  renderStyle(style: Stylesheet): string;
-  renderInlineStyle(content: string): string;
-  renderMeta(meta: Meta): string;
-  renderLink(link: Link): string;
-  attrs(obj: Attributes): string;
-}
-```
-
-Hay algunos plugins en este paquete:
-
-### Google analytics
-
-Añade el contador de Google Analytics a la página.
+Añade un contador de Google Analytics a la página.
 
 Uso:
 
@@ -297,9 +283,7 @@ Uso:
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-```
 
-```js
 app.get((req, res) => {
   res.send(
     renderLayout({
@@ -317,7 +301,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones de plugin:
+Opciones del plugin:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -361,7 +345,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones de plugin:
+Opciones del plugin:
 
 ```typescript
 export type UserParams = {
@@ -392,7 +376,7 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Añade scripts y estilos del archivo de manifiesto de activos de webpack.
+Añade scripts y estilos del archivo de manifiesto de assets de webpack.
 
 Uso:
 
@@ -400,7 +384,7 @@ Uso:
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([
-  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+  createLayoutPlugin({manifest: 'ruta/a/assets-manifest.json', publicPath: '/build/'}),
 ]);
 
 app.get((req, res) => {
@@ -417,7 +401,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones de plugin:
+Opciones del plugin:
 
 ```typescript
 export interface LayoutOptions {
@@ -428,7 +412,7 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-Añade atributos al `body`.
+Añade atributos al body.
 
 Uso:
 
@@ -452,7 +436,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones de plugin:
+Opciones del plugin:
 
 ```typescript
 interface UikitPluginOptions {
@@ -465,9 +449,9 @@ interface UikitPluginOptions {
 
 Añade información de versiones de microfrontends a la página.
 
-Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, el cual puede ser utilizado por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
+Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, las cuales pueden ser utilizadas por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
 
-Puede ser utilizado en combinación con [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) y la opción `moduleFederation.remotesRuntimeVersioning` para cargar automáticamente módulos remotos con las versiones correspondientes.
+Puede usarse en combinación con [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) y la opción `moduleFederation.remotesRuntimeVersioning` para cargar automáticamente módulos remotos con las versiones correspondientes.
 
 Uso:
 
@@ -492,7 +476,7 @@ app.get((req, res) => {
 });
 ```
 
-Opciones de plugin:
+Opciones del plugin:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -500,13 +484,13 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-Existe un helper para crear todos los plugins:
+Hay un helper para crear todos los plugins:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction(
-    createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}})
+    createDefaultPlugins({layout: {manifest: 'ruta/a/assets-manifest.json'}})
 );
 
 app.get((req, res) => {
@@ -529,7 +513,7 @@ app.get((req, res) => {
 
 ## Uso alternativo
 
-Con renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` a través de streaming de HTML:
+Con renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` a través de streaming de html:
 
 ```js
 import express from 'express';
@@ -549,37 +533,38 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-  const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
+```markdown
+# @gravity/uikit
 
-  const content = generateRenderContent(plugins, {
-    title: 'Página de inicio',
-  });
+Este es un paquete de componentes de UI para React, construido con Styled Components.
 
-  const {htmlAttributes, helpers, bodyContent} = content;
+## Instalación
+
+```bash
+npm install @gravity/uikit
+# o
+yarn add @gravity/uikit
 ```
 
-```markdown
-res.write(`
-        <!DOCTYPE html>
-        <html ${helpers.attrs({...htmlAttributes})}>
-        <head>
-            ${renderHeadContent(content)}
-        </head>
-        <body ${helpers.attrs(bodyContent.attributes)}>
-            ${renderBodyContent(content)}
-    `);
+## Uso
 
-  const data = await getUserData();
+```jsx
+import { Button } from '@gravity/uikit';
 
-  res.write(`
-            ${content.renderHelpers.renderInlineScript(`
-                window.__DATA__ = ${htmlescape(data)};
-            `)}
-        </body>
-        </html>
-    `);
-  res.end();
-});
+function MyComponent() {
+  return <Button onClick={() => alert('¡Hola!')}>Haz clic aquí</Button>;
+}
+```
 
-app.listen(3000);
+## Documentación
+
+La documentación completa está disponible en [gravity.github.io/uikit](https://gravity.github.io/uikit).
+
+## Contribución
+
+Si deseas contribuir a este proyecto, por favor, lee nuestras [guías de contribución](CONTRIBUTING.md).
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 ```

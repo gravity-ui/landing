@@ -86,19 +86,25 @@ $workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
 
     &__code {
         position: relative;
-        overflow: hidden;
-        max-height: 0;
+        display: grid;
+        grid-template-rows: 0fr;
         opacity: 0;
+        visibility: hidden;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease-in-out;
+        transition: all 0.2s ease-out;
+
+        & > * {
+            overflow: hidden;
+        }
 
         pre {
             margin: 0 50px 0 0;
         }
 
         &_open {
-            max-height: 5000px;
+            grid-template-rows: 1fr;
             opacity: 1;
+            visibility: visible;
         }
     }
 
@@ -106,7 +112,7 @@ $workaroundBlockDarkTheme: &#{$block}__theme-root_theme_dark;
         position: absolute;
         right: 12px;
         top: 12px;
-        padding: 4px;
+        padding: 8px;
         border-radius: 8px;
         background: rgba(0, 0, 0, 0.5);
     }

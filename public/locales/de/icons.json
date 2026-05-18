@@ -6,12 +6,14 @@
     "actions_copySvgImport": "SVG-Import kopieren",
     "actions_downloadSvg": "SVG herunterladen",
     "title": "Icons",
-    "meta_description": "Durchsuchen, suchen und herunterladen Sie Hunderte von modernen SVG-Icons aus der Gravity UI-Iconbibliothek",
+    "meta_description": "Durchsuchen und herunterladen Sie Hunderte von modernen SVG-Icons aus der Gravity UI-Icon-Bibliothek",
     "goToLibrary": "Zur Bibliothek gehen",
     "filterPlaceholder": "Nach Icon-Namen filtern",
     "keywords": "Schlüsselwörter",
     "empty_title": "Keine Ergebnisse für Ihre Anfrage gefunden",
     "empty_subTitle": "Bitte überprüfen Sie die Schreibweise oder versuchen Sie es mit anderen Schlüsselwörtern.",
     "usage_reactComponent": "React-Komponente",
-    "usage_svg": "SVG"
+    "usage_svg": "SVG",
+    "imageSearch_tooltip": "Nach Bild suchen (oder aus der Zwischenablage einfügen)",
+    "imageSearch_drop": "Bild hierher ziehen, um ähnliche Icons zu suchen"
 }

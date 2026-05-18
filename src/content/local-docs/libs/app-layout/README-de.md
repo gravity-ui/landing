@@ -43,11 +43,13 @@ interface RenderParams<Data, Plugins> {
   icon?: Icon;
   // Nonce, die auf die entsprechenden Tags gesetzt wird
   nonce?: string;
+  // Attribute für das base-Tag
+  base?: Base;
 
   // Allgemeine Optionen
   // Seitentitel
   title: string;
-  // Sprache der Seite, wird im html-Tag gesetzt
+  // Sprache der Seite, wird auf das html-Tag gesetzt
   lang?: string;
   isMobile?: boolean;
 
@@ -60,7 +62,7 @@ interface RenderParams<Data, Plugins> {
   links?: Link[];
   // Script-Tags
   scripts?: Script[];
-  // Stylesheet-Links
+  // Stylesheet-Tags
   styleSheets?: Stylesheet[];
   // Script-Tags mit eingebettetem Code
   inlineScripts?: string[];
@@ -69,9 +71,9 @@ interface RenderParams<Data, Plugins> {
 
   // Inhalt des body-Tags
   bodyContent?: {
-    // Klassenname für den body-Tag
+    // Klassenname für das body-Tag
     className?: string;
-    // body-Attribute
+    // Attribute für das body-Tag
     attributes?: string;
     // Inhalt des body-Tags vor dem div-Tag mit der ID root
     beforeRoot?: string;
@@ -85,9 +87,35 @@ interface RenderParams<Data, Plugins> {
 }
 ```
 
+### Base
+
+Beschreibt das `base`-Tag:
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+Beispiel:
+
+```js
+renderLayout({
+  title: 'Startseite',
+  base: {target: '_top'},
+});
+```
+
+Wird gerendert als:
+
+```html
+<base target="_top" />
+```
+
 ### Meta
 
-Beschreibt den `meta`-Tag:
+Beschreibt das `meta`-Tag:
 
 ```typescript
 interface Meta {
@@ -138,7 +166,7 @@ const icon = {
 
 ### Links
 
-Beschreibt den `link`-Tag:
+Beschreibt das `link`-Tag:
 
 ```typescript
 interface Link {
@@ -172,7 +200,7 @@ wird gerendert als:
 
 ### Scripts
 
-Beschreibt den Link zu einem Skript mit Preload:
+Beschreibt einen Link zu einem Skript mit Preload:
 
 ```typescript
 interface Script {
@@ -205,7 +233,7 @@ wird gerendert als:
 
 #### Style sheets
 
-Beschreibt den Link zu Stylesheets:
+Beschreibt einen Link zu Styles:
 
 ```typescript
 interface Stylesheet {
@@ -229,7 +257,7 @@ wird gerendert als:
 
 ## Plugins
 
-Die Render-Funktion kann durch Plugins erweitert werden. Ein Plugin kann den vom Benutzer definierten Render-Inhalt überschreiben.
+Die Renderfunktion kann durch Plugins erweitert werden. Ein Plugin kann den vom Benutzer definierten Renderinhalt überschreiben.
 Ein Plugin ist ein Objekt mit den Eigenschaften `name` und `apply`:
 
 ```typescript
@@ -252,6 +280,7 @@ interface CommonOptions {
 }
 
 export interface HeadContent {
+  base?: Base;
   scripts: Script[];
   helpers: RenderHelpers;
   links: Link[];
@@ -289,7 +318,7 @@ Es gibt einige Plugins in diesem Paket:
 
 ### Google Analytics
 
-Fügt einen Google Analytics Zähler auf der Seite hinzu.
+Fügt einen Google Analytics Zähler zur Seite hinzu.
 
 Verwendung:
 
@@ -297,9 +326,7 @@ Verwendung:
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
-```
 
-```js
 app.get((req, res) => {
   res.send(
     renderLayout({
@@ -308,7 +335,7 @@ app.get((req, res) => {
         googleAnalytics: {
           useBeaconTransport: true, // aktiviert die Verwendung von navigator.sendBeacon
           counter: {
-            id: 'some id',
+            id: 'eine ID',
           },
         },
       },
@@ -332,7 +359,7 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-Fügt Yandex Metrika-Zähler zur Seite hinzu.
+Fügt Yandex Metrika Zähler zur Seite hinzu.
 
 Verwendung:
 
@@ -399,7 +426,9 @@ Verwendung:
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
-const renderLayout = createRenderFunction([createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'})]);
+const renderLayout = createRenderFunction([
+  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+]);
 
 app.get((req, res) => {
   res.send(
@@ -463,7 +492,7 @@ interface UikitPluginOptions {
 
 Fügt Informationen zu Microfrontend-Versionen zur Seite hinzu.
 
-Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die bereitgestellten Microfrontend-Versionen enthält. Dies kann von Modul-Bundlern oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
+Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die bereitgestellten Microfrontend-Versionen enthält. Dies kann von Modul-Föderations- oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
 
 Es kann in Kombination mit [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) und der Option `moduleFederation.remotesRuntimeVersioning` verwendet werden, um Remote-Module mit den entsprechenden Versionen automatisch zu laden.
 
@@ -498,7 +527,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helfer
 
-Es gibt einen Helfer, um alle Plugins zu erstellen:
+Es gibt einen Helfer zum Erstellen aller Plugins:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -547,6 +576,27 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
+```markdown
+# @gravity/uikit
+
+Dies ist ein Beispiel für die Verwendung von `@gravity/uikit` mit React und Express.
+
+## Installation
+
+```bash
+npm install @gravity/uikit react react-dom express htmlescape
+```
+
+## Verwendung
+
+```javascript
+import express from 'express';
+import htmlescape from 'htmlescape';
+import { createDefaultPlugins, generateRenderContent, renderHeadContent, renderBodyContent } from '@gravity/uikit';
+
+const app = express();
+
+app.get('/', async (req, res) => {
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
@@ -554,9 +604,7 @@ app.get('/', async function (req, res) {
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;
-```
 
-```markdown
   res.write(`
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
@@ -580,4 +628,9 @@ app.get('/', async function (req, res) {
 });
 
 app.listen(3000);
+```
+
+## Lizenz
+
+MIT
 ```

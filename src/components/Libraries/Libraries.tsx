@@ -39,6 +39,10 @@ export const Libraries = ({libs}: Props) => {
             value: 'infrastructure',
             title: t('libraries:tags_infrastructure'),
         },
+        {
+            value: 'testing',
+            title: t('libraries:tags_testing'),
+        },
     ];
 
     const [activeTag, setActivaTag] = React.useState(tags[0].value);
