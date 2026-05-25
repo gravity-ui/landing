@@ -30,6 +30,7 @@ export const SpecificTab = () => {
                         colorGroups={groups}
                         variablesTitle={t('title_advance-settings-table_title-variable')}
                         className={b('illustration-settings')}
+                        withRightBorder={false}
                     />
                     <Flex direction="column" gap={8}>
                         <IllustrationsPreview theme="dark" />

@@ -18,18 +18,20 @@ export interface AdvancedSettingsTableProps {
     }[];
     variablesTitle: string;
     className?: string;
+    withRightBorder?: boolean;
 }
 
 export const AdvancedSettingsTable = ({
     colorGroups,
     variablesTitle,
     className,
+    withRightBorder = true,
 }: AdvancedSettingsTableProps) => {
     const extraColors = useExtraColors();
     const columns = useColumns({variablesTitle});
 
     return (
-        <table className={b(null, className)}>
+        <table className={b({'no-right-border': !withRightBorder}, className)}>
             <thead>
                 <tr className={b('row')}>
                     {columns.map(({title: Title}, index) => (

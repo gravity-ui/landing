@@ -7,7 +7,11 @@ import {
 
 import {type AdvanceColors, RadiusPresetName} from './types';
 import {DEFAULT_FONT_FAMILY_SETTINGS} from './typography/constants';
-import {getDefaultAdvancedColorValue, getDefaultIllustrationColorValue} from './utils';
+import {
+    DEFAULT_BRAND_ILLUSTRATION_COLORS,
+    getDefaultAdvancedColorValue,
+    getDefaultIllustrationColorValue,
+} from './utils';
 
 export const THEME_BORDER_RADIUS_VARIABLE_PREFIX = '--g-border-radius';
 
@@ -407,6 +411,10 @@ export const DEFAULT_THEME: GravityTheme = {
     ...DEFAULT_GRAVITY_THEME,
     baseColors: DEFAULT_PALETTE,
     utilityColors: DEFAULT_COLORS,
+    libraries: {
+        ...DEFAULT_GRAVITY_THEME.libraries,
+        illustrations: DEFAULT_BRAND_ILLUSTRATION_COLORS,
+    },
     typography: {
         ...DEFAULT_GRAVITY_THEME.typography,
         fontFamilies: DEFAULT_FONT_FAMILY_SETTINGS,

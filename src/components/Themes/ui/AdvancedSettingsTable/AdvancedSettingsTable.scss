@@ -31,6 +31,10 @@ $block: '.#{variables.$ns}advanced-color-settings-table';
         padding-inline-start: 0;
     }
 
+    &_no-right-border &__row > &__cell:last-child {
+        border-inline-end: none;
+    }
+
     &__theme-toggle {
         width: 100%;
         --g-border-radius-xl: 8px;
