@@ -19,7 +19,7 @@
     "@gravity-ui/graph": "^1.9.1",
     "@gravity-ui/icons": "^2.18.0",
     "@gravity-ui/markdown-editor": "^15.1.0",
-    "@gravity-ui/navigation": "^4.0.15",
+    "@gravity-ui/navigation": "^4.0.16",
     "@gravity-ui/page-constructor": "^8.0.0",
     "@gravity-ui/timeline": "^1.26.1",
     "@gravity-ui/uikit": "^7.39.0",
