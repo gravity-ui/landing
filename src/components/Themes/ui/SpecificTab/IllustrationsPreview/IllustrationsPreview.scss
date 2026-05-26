@@ -26,5 +26,9 @@ $block: '.#{variables.$ns}illustrations-preview';
 
     &__cell {
         max-width: 100px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            max-width: 110px;
+        }
     }
 }

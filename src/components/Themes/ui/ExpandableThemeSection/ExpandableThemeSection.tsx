@@ -1,5 +1,5 @@
 import {ArrowToggle, Flex, Text} from '@gravity-ui/uikit';
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 
 import {block} from '../../../../utils';
 
@@ -28,15 +28,26 @@ export const ExpandableThemeSection: React.FC<ExpandableThemeSectionProps> = ({
     const toggleExpanded = React.useCallback(() => setIsExpanded((s) => !s), []);
 
     const [contentMaxHeight, setContentMaxHeight] = useState<number>();
+    const contentRef = useRef<HTMLDivElement | null>(null);
 
     const contentWrapperStyle: ExpandableThemeSectionStyle = useMemo(
         () => ({'--theme-section-height': contentMaxHeight ? `${contentMaxHeight}px` : 'auto'}),
         [contentMaxHeight],
     );
-    const handleContentRef = useCallback((element: HTMLDivElement | null) => {
-        if (element) {
-            setContentMaxHeight(element.clientHeight);
+
+    useEffect(() => {
+        const element = contentRef.current;
+        if (!element || typeof ResizeObserver === 'undefined') {
+            return undefined;
         }
+
+        const observer = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                setContentMaxHeight(entry.target.clientHeight);
+            }
+        });
+        observer.observe(element);
+        return () => observer.disconnect();
     }, []);
 
     return (
@@ -46,7 +57,7 @@ export const ExpandableThemeSection: React.FC<ExpandableThemeSectionProps> = ({
                 <ArrowToggle size={24} direction={isExpanded ? 'top' : 'bottom'} />
             </Flex>
             <div className={b('content-wrapper', {open: isExpanded})} style={contentWrapperStyle}>
-                <div ref={handleContentRef} className={b('content')}>
+                <div ref={contentRef} className={b('content')}>
                     {children}
                 </div>
             </div>
