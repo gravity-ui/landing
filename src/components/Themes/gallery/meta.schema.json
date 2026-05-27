@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ThemeMetadata",
+    "description": "Metadata for a Theme Gallery entry. Pairs with a same-id <id>.theme.json payload file.",
+    "type": "object",
+    "required": ["id", "name", "author", "description", "tags", "previewMode", "brandColor"],
+    "additionalProperties": false,
+    "properties": {
+        "$schema": {
+            "type": "string"
+        },
+        "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "description": "Kebab-case identifier. Must match the file name without the .meta.json suffix."
+        },
+        "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Display name. Not localized (brand names stay original)."
+        },
+        "author": {
+            "type": "object",
+            "required": ["name"],
+            "additionalProperties": false,
+            "properties": {
+                "name": {"type": "string", "minLength": 1},
+                "url": {"type": "string", "format": "uri"}
+            }
+        },
+        "description": {
+            "type": "object",
+            "required": ["en", "ru"],
+            "additionalProperties": false,
+            "properties": {
+                "en": {"type": "string", "minLength": 1},
+                "ru": {"type": "string", "minLength": 1}
+            }
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "high-contrast",
+                    "accessible",
+                    "creative",
+                    "modern",
+                    "high-readability",
+                    "corporate",
+                    "minimal"
+                ]
+            },
+            "uniqueItems": true
+        },
+        "previewMode": {
+            "type": "string",
+            "enum": ["light", "dark"],
+            "description": "Default mode shown on the card; users can toggle per-card."
+        },
+        "brandColor": {
+            "type": "string",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "description": "Hex brand color (#RRGGBB) used to render the card preview without a binary image asset."
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "carbon",
+    "name": "Carbon",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Electric yellow against deep charcoal for maximum punch.",
+        "ru": "Электрический жёлтый на глубоком угольном фоне для максимального акцента."
+    },
+    "tags": [
+        "high-contrast",
+        "minimal"
+    ],
+    "previewMode": "dark",
+    "brandColor": "#E8FF4C"
+}

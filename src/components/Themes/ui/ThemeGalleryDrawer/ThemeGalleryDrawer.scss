@@ -1,0 +1,153 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-gallery-drawer';
+
+#{$block} {
+    --g-border-radius-l: 8px;
+    --g-border-radius-xl: 8px;
+
+    // The uikit Drawer renders the panel as `.g-drawer__item` and our content
+    // ends up inside `.g-drawer__item-content`. The flex column lives on the
+    // inner wrapper so action-bar and scroll-area get proper flex sizing.
+    .g-drawer__item {
+        background: #221d22;
+        box-shadow: 0 4px 12px rgb(0 0 0 / 5%), 0 2px 4px rgb(0 0 0 / 5%);
+    }
+
+    .g-drawer__item-content {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    &__action-bar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: inherit;
+        display: flex;
+        align-items: flex-start;
+        gap: var(--g-spacing-3);
+        flex-shrink: 0;
+    }
+
+    &__header-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-2);
+    }
+
+    &__title {
+        color: var(--g-color-text-primary);
+    }
+
+    &__description {
+        color: var(--g-color-text-secondary);
+    }
+
+    &__close-button {
+        flex-shrink: 0;
+    }
+
+    &__scroll-area {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__cards {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__all-themes-button {
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    &_placement_right .g-drawer__item {
+        border-radius: 16px 0 0 16px;
+    }
+
+    &_placement_bottom .g-drawer__item {
+        border-radius: 16px 16px 0 0;
+    }
+
+    // The variant modifier is computed in JS based on viewport vs. the
+    // push-layout minimum width — keep CSS in lock-step with the placement
+    // chosen there rather than duplicating breakpoint math in @media.
+    &_variant_desktop {
+        // 447 wide right-side drawer
+        #{$block}__action-bar {
+            min-height: 100px;
+            padding: var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-5);
+        }
+
+        #{$block}__scroll-area {
+            padding: var(--g-spacing-3) var(--g-spacing-5) var(--g-spacing-5);
+            gap: var(--g-spacing-6);
+        }
+
+        #{$block}__cards {
+            gap: var(--g-spacing-6);
+        }
+    }
+
+    &_variant_tablet {
+        // 376 tall bottom-sheet with horizontal card scroll
+        #{$block}__action-bar {
+            min-height: 56px;
+            padding: var(--g-spacing-4) var(--g-spacing-5);
+            align-items: center;
+        }
+
+        #{$block}__scroll-area {
+            overflow-x: auto;
+            overflow-y: hidden;
+            flex-direction: row;
+            // Top padding leaves room for ThemeCard's orange selection frame,
+            // which extends 5px + 2px border above the card's bounding box.
+            padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-5);
+        }
+
+        #{$block}__cards {
+            flex-direction: row;
+            gap: var(--g-spacing-4);
+            flex: 0 0 auto;
+        }
+
+        #{$block}__card {
+            width: 397px;
+            flex-shrink: 0;
+        }
+    }
+
+    &_variant_mobile {
+        // Bottom-sheet anchored 64px under the global mob header. Override
+        // the inline height the Drawer sets from its `size` prop so the panel
+        // reacts to viewport resize without a JS listener.
+        .g-drawer__item {
+            // stylelint-disable-next-line declaration-no-important
+            height: calc(100dvh - 64px) !important;
+        }
+
+        #{$block}__action-bar {
+            min-height: 92px;
+            padding: var(--g-spacing-2) var(--g-spacing-5);
+            align-items: flex-start;
+        }
+
+        #{$block}__scroll-area {
+            padding: var(--g-spacing-3) var(--g-spacing-5) var(--g-spacing-6);
+            gap: var(--g-spacing-4);
+        }
+
+        #{$block}__cards {
+            gap: var(--g-spacing-4);
+        }
+    }
+}

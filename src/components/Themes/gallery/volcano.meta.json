@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "volcano",
+    "name": "Volcano",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Lava red with strong contrast for high-visibility interfaces.",
+        "ru": "Лавовый красный с сильным контрастом для интерфейсов высокой видимости."
+    },
+    "tags": [
+        "high-contrast",
+        "accessible"
+    ],
+    "previewMode": "dark",
+    "brandColor": "#FF4C30"
+}

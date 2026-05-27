@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "midnight-owl",
+    "name": "Midnight Owl",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Soft dark with cyan accents for long late-night sessions.",
+        "ru": "Мягкая тёмная тема с акцентами циан для долгих ночных сессий."
+    },
+    "tags": [
+        "modern",
+        "high-readability"
+    ],
+    "previewMode": "dark",
+    "brandColor": "#7EE2E2"
+}

@@ -1,0 +1,149 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-card';
+
+#{$block} {
+    --g-border-radius-l: 8px;
+    --g-border-radius-xl: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--g-spacing-3);
+    width: 100%;
+
+    &__preview-stack {
+        position: relative;
+        height: 248px;
+        cursor: pointer;
+    }
+
+    &__preview-area {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        // `--g-border-radius-2xl` is missing in this uikit version (largest
+        // available is xl=32px which is too big); 16px is the Figma value.
+        border-radius: 16px;
+        border: 1px solid var(--g-color-line-generic);
+        box-shadow: 0 4px 24px 0 rgb(0 0 0 / 5%), 0 2px 8px 0 rgb(0 0 0 / 5%);
+        transition: filter 0.2s ease, border-color 0.15s ease;
+
+        // Brand-colored gradient stands in for the per-theme preview image.
+        // `--theme-card-brand` is set inline from `metadata.brandColor`.
+        background: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--theme-card-brand) 65%, #111) 0%,
+            color-mix(in srgb, var(--theme-card-brand) 25%, #111) 100%
+        );
+        color: var(--g-color-text-light-primary);
+
+        &[data-mode='light'] {
+            background: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--theme-card-brand) 35%, #fff) 0%,
+                color-mix(in srgb, var(--theme-card-brand) 75%, #fff) 100%
+            );
+            color: var(--g-color-text-dark-primary);
+        }
+    }
+
+    &__preview-name {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        text-align: center;
+        padding: 0 var(--g-spacing-4);
+    }
+
+    // Orange frame sits 5px outside the preview area as an absolute sibling so
+    // it stays sharp when the preview-area is blurred.
+    &__selection-frame {
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border: 2px solid var(--g-color-line-brand);
+        border-radius: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+    }
+
+    // Description / tags / Apply button sit as an absolute sibling of
+    // preview-area so they are not affected by the blur filter.
+    &__hover-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--g-spacing-8);
+        padding: 0 var(--g-spacing-5);
+        opacity: 0;
+        transition: opacity 0.15s ease;
+        pointer-events: none;
+        text-align: center;
+    }
+
+    &__overlay-text-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--g-spacing-2);
+        width: 100%;
+    }
+
+    &__description {
+        color: var(--g-color-text-light-primary);
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    // Hover triggers via the stack so cursor over the description/button keeps
+    // the state active. Blur is applied to the preview-area — the same element
+    // that owns border-radius — so the rounded shape itself gets blurred.
+    &__preview-stack:hover &__preview-area {
+        filter: blur(6px) brightness(0.7);
+        border-color: transparent;
+    }
+
+    &__preview-stack:hover &__hover-content {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &__preview-stack:hover &__selection-frame,
+    &_selected &__selection-frame {
+        opacity: 1;
+    }
+
+    &__meta {
+        padding: 0;
+    }
+
+    &__name {
+        color: var(--g-color-text-primary);
+    }
+
+    &__author {
+        color: var(--g-color-text-secondary);
+    }
+
+    &__mode-toggle {
+        display: flex;
+        gap: var(--g-spacing-1);
+        align-items: center;
+    }
+}

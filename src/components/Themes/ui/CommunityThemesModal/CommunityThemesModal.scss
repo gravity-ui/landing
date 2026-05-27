@@ -1,0 +1,156 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}community-themes-modal';
+$modal: '.#{variables.$ns}community-themes-modal__modal';
+
+#{$modal}_variant_mobile {
+    // uikit's Modal reserves ~20px breathing room around the centered dialog
+    // via `.g-modal__content-wrapper` margin and `.g-modal__content` max-width.
+    // On mobile we want the dialog to span the entire width, so override both.
+    .g-modal__content-wrapper {
+        margin: 0;
+    }
+
+    .g-modal__content {
+        max-width: 100vw;
+    }
+}
+
+#{$block} {
+    --g-border-radius-l: 8px;
+    --g-border-radius-xl: 8px;
+
+    // The uikit Dialog applies its own width via .g-dialog. We override here
+    // because the Figma modal (1308x791 on 1600x900) is wider than uikit's
+    // largest 'l' preset (~720px).
+    &.g-dialog {
+        width: 100%;
+        max-width: none;
+        max-height: none;
+    }
+
+    &__layout {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 0;
+    }
+
+    &__header {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: var(--g-color-base-float-modal, var(--g-color-base-modal));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--g-spacing-3);
+        flex-shrink: 0;
+        padding: var(--g-spacing-4) var(--g-spacing-5);
+    }
+
+    &__title {
+        color: var(--g-color-text-primary);
+    }
+
+    &__close-button {
+        flex-shrink: 0;
+    }
+
+    &__scroll-area {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-10);
+        padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-8);
+    }
+
+    &__cards {
+        display: grid;
+        gap: var(--g-spacing-6);
+    }
+
+    &__card {
+        min-width: 0;
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--g-spacing-3);
+        padding: var(--g-spacing-6) var(--g-spacing-4);
+    }
+
+    &__footer-title {
+        color: var(--g-color-text-primary);
+    }
+
+    &__footer-body {
+        color: var(--g-color-text-secondary);
+        max-width: 640px;
+    }
+
+    &__footer-actions {
+        display: flex;
+        gap: var(--g-spacing-3);
+        margin-top: var(--g-spacing-4);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &_variant_desktop {
+        &.g-dialog {
+            width: min(1308px, calc(100vw - 184px));
+            height: min(791px, calc(100vh - 100px));
+        }
+
+        #{$block}__cards {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &_variant_tablet {
+        &.g-dialog {
+            width: calc(100vw - 96px);
+            height: calc(100vh - 80px);
+        }
+
+        #{$block}__cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &_variant_mobile {
+        &.g-dialog {
+            width: 100%;
+            max-width: none;
+            height: calc(100dvh - 64px);
+            max-height: calc(100dvh - 64px);
+            border-radius: 0;
+            margin: 64px 0 0;
+        }
+
+        #{$block}__cards {
+            grid-template-columns: 1fr;
+        }
+
+        #{$block}__header {
+            padding: var(--g-spacing-3) var(--g-spacing-5);
+        }
+
+        #{$block}__scroll-area {
+            padding: var(--g-spacing-2) var(--g-spacing-4) var(--g-spacing-6);
+            gap: var(--g-spacing-6);
+        }
+
+        #{$block}__footer-actions {
+            width: 100%;
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+}

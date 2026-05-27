@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "solar-citrus",
+    "name": "Solar Citrus",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Bright citrus orange for an energetic, warm workspace.",
+        "ru": "Яркий цитрусовый оранжевый для энергичной тёплой рабочей среды."
+    },
+    "tags": [
+        "creative",
+        "modern"
+    ],
+    "previewMode": "light",
+    "brandColor": "#FF8E00"
+}
