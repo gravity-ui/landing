@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "pacific",
+    "name": "Pacific",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Classic oceanic blue suited for trustworthy enterprise UI.",
+        "ru": "Классический океанский синий для корпоративного интерфейса."
+    },
+    "tags": [
+        "corporate",
+        "accessible"
+    ],
+    "previewMode": "light",
+    "brandColor": "#227CC8"
+}
