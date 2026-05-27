@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "paper-white",
+    "name": "Paper White",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Neutral grayscale palette inspired by printed paper.",
+        "ru": "Нейтральная палитра в оттенках серого, вдохновлённая печатной бумагой."
+    },
+    "tags": [
+        "minimal",
+        "high-readability"
+    ],
+    "previewMode": "light",
+    "brandColor": "#6E6E6E"
+}

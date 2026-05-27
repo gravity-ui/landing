@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "magenta-pulse",
+    "name": "Magenta Pulse",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Bold magenta with synthwave energy for expressive products.",
+        "ru": "Яркая пурпурная тема с синтвейв-энергией для выразительных продуктов."
+    },
+    "tags": [
+        "creative",
+        "modern"
+    ],
+    "previewMode": "dark",
+    "brandColor": "#DC46B4"
+}

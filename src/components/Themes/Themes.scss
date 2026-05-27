@@ -18,6 +18,23 @@ $block: '.#{variables.$ns}themes';
 }
 
 #{$block} {
+    &__content-wrapper {
+        // ThemeGalleryDrawer sets `--theme-gallery-drawer-width` on <html> only
+        // on desktop (≥ md). On tablet/mobile the drawer overlays without push,
+        // so the variable stays unset and padding remains 0.
+        padding-inline-end: var(--theme-gallery-drawer-width, 0);
+        transition: padding-inline-end 0.25s ease;
+    }
+
+    &__playground-bar-wrapper {
+        @include gridContainerOffsets();
+        margin-block-end: var(--g-spacing-8);
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            padding-inline: var(--g-spacing-4);
+        }
+    }
+
     &__grid {
         position: relative;
         z-index: 1;
@@ -69,10 +86,12 @@ $block: '.#{variables.$ns}themes';
 
     &__header-actions {
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--g-spacing-4);
 
         @include gridContainerOffsets();
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            flex-direction: column;
+            flex-flow: column nowrap;
             justify-content: flex-start;
         }
 
@@ -113,12 +132,19 @@ $block: '.#{variables.$ns}themes';
 
     &__tags {
         display: flex;
-        overflow: auto;
-        flex-wrap: wrap;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        // Required so the flex item can shrink below its content size; without
+        // this the row stays at intrinsic width and pushes the page wider.
+        min-width: 0;
+        // Hide horizontal scrollbar but keep scrolling behaviour.
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            /* stylelint-disable */
-            flex-wrap: nowrap !important;
             margin: 0 -16px;
             padding: 0 16px;
         }

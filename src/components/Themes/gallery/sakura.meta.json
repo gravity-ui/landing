@@ -1,0 +1,17 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "sakura",
+    "name": "Sakura",
+    "author": {
+        "name": "Theme Gallery"
+    },
+    "description": {
+        "en": "Soft cherry-blossom pink for a gentle, expressive mood.",
+        "ru": "Мягкий вишнёво-цветочный розовый для нежного выразительного настроения."
+    },
+    "tags": [
+        "creative"
+    ],
+    "previewMode": "light",
+    "brandColor": "#F48FB1"
+}
