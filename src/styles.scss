@@ -124,6 +124,20 @@ body.g-root,
         background-color: transparent;
     }
 
+    .pc-storage-background-image {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background: linear-gradient(to right, #160d1b 0%, transparent 20%),
+                linear-gradient(to top, #160d1b 0%, transparent 15%);
+        }
+    }
+
     // Styles for code blocks in blog-constructor with prism-tomorrow colors
     // stylelint-disable declaration-no-important
     .yfm_blog {
