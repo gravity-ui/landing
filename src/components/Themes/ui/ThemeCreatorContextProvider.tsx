@@ -9,6 +9,7 @@ import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
 import type {
     AddColorToThemeParams,
     AddFontFamilyTypeParams,
+    ChangeIllustrationColorInThemeParams,
     ChangeRadiusPresetInThemeParams,
     ChangeUtilityColorInThemeParams,
     RenameColorInThemeParams,
@@ -22,6 +23,7 @@ import {
     addColorToTheme,
     addFontFamilyTypeInTheme,
     applyBrandPresetToTheme,
+    changeIllustrationColorInTheme,
     changeRadiusPresetInTheme,
     changeUtilityColorInTheme,
     initThemeCreator,
@@ -57,6 +59,10 @@ type ThemeCreatorAction =
     | {
           type: 'changeUtilityColor';
           payload: ChangeUtilityColorInThemeParams;
+      }
+    | {
+          type: 'changeIllustrationColor';
+          payload: ChangeIllustrationColorInThemeParams;
       }
     | {
           type: 'applyBrandPreset';
@@ -133,6 +139,8 @@ const themeCreatorReducer = (
             return updateColorInTheme(newState, action.payload);
         case 'changeUtilityColor':
             return changeUtilityColorInTheme(newState, action.payload);
+        case 'changeIllustrationColor':
+            return changeIllustrationColorInTheme(newState, action.payload);
         case 'applyBrandPreset':
             return applyBrandPresetToTheme(newState, action.payload);
         case 'changeRadiusPreset':
@@ -246,6 +254,15 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
     >((payload) => {
         dispatchThemeCreator({
             type: 'changeUtilityColor',
+            payload,
+        });
+    }, []);
+
+    const changeIllustrationColor = React.useCallback<
+        ThemeCreatorMethodsContextType['changeIllustrationColor']
+    >((payload) => {
+        dispatchThemeCreator({
+            type: 'changeIllustrationColor',
             payload,
         });
     }, []);
@@ -375,6 +392,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             removeColor,
             updateColor,
             changeUtilityColor,
+            changeIllustrationColor,
             applyBrandPreset,
             changeRadiusPreset,
             updateCustomRadiusPreset,
