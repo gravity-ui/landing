@@ -45,8 +45,11 @@ export class ServerApi {
         'dependabot',
         'dependabot[bot]',
         'gravity-ui-bot',
+        'gravity-ui[bot]',
         'yc-ui-bot',
     ];
+
+    private readonly NEWCOMER_THRESHOLD_DAYS = 30;
 
     static get instance(): ServerApi {
         if (!ServerApi._instance) {
@@ -109,6 +112,26 @@ export class ServerApi {
         return contributors;
     }
 
+    async getRepositoryRecentContributors(
+        repoOwner: string,
+        repo: string,
+        since: Date,
+    ): Promise<Map<string, number>> {
+        const commits = await this.octokit.paginate(this.octokit.rest.repos.listCommits, {
+            owner: repoOwner,
+            repo,
+            since: since.toISOString(),
+        });
+
+        const counts = new Map<string, number>();
+        for (const commit of commits) {
+            const login = commit.author?.login;
+            if (!login || this.CONTRIBUTOR_IGNORE_LIST.includes(login)) continue;
+            counts.set(login, (counts.get(login) ?? 0) + 1);
+        }
+        return counts;
+    }
+
     async fetchRepositoryCodeOwners(repoOwner: string, repo: string): Promise<CodeOwners[]> {
         const url = `https://raw.githubusercontent.com/${repoOwner}/${repo}/main/CODEOWNERS`;
         const res = await fetch(url);
@@ -160,32 +183,57 @@ export class ServerApi {
     async fetchAllContributors(): Promise<Contributor[]> {
         try {
             const repos = await this.getOrganizationRepositories('gravity-ui');
+            const since = new Date(Date.now() - this.NEWCOMER_THRESHOLD_DAYS * 24 * 60 * 60 * 1000);
 
-            const rawContributors = await Promise.all(
-                repos.map(async (repo) =>
-                    this.getRepositoryContributors(repo.owner.login, repo.name),
-                ),
-            );
-
+            const totalContributions: Record<string, number> = {};
+            const recentContributions: Record<string, number> = {};
             const contributors: Record<string, Contributor> = {};
 
-            for (const list of rawContributors) {
-                for (const contributor of list) {
-                    const {login, contributions} = contributor;
+            // Process in small batches to avoid GitHub secondary rate limits
+            const BATCH_SIZE = 5;
+            for (let i = 0; i < repos.length; i += BATCH_SIZE) {
+                const batch = repos.slice(i, i + BATCH_SIZE);
+                const batchResults = await Promise.all(
+                    batch.map(async (repo) => ({
+                        all: await this.getRepositoryContributors(
+                            repo.owner.login,
+                            repo.name,
+                        ).catch(() => [] as Contributor[]),
+                        recent: await this.getRepositoryRecentContributors(
+                            repo.owner.login,
+                            repo.name,
+                            since,
+                        ).catch(() => new Map<string, number>()),
+                    })),
+                );
 
-                    if (contributors[login]) {
-                        contributors[login].contributions += contributions;
-                    } else {
-                        contributors[login] = contributor;
+                for (const {all, recent} of batchResults) {
+                    for (const contributor of all) {
+                        const {login, contributions} = contributor;
+                        totalContributions[login] =
+                            (totalContributions[login] ?? 0) + contributions;
+                        if (contributors[login]) {
+                            contributors[login].contributions += contributions;
+                        } else {
+                            contributors[login] = contributor;
+                        }
+                    }
+                    for (const [login, count] of recent) {
+                        recentContributions[login] = (recentContributions[login] ?? 0) + count;
                     }
                 }
             }
 
-            const sortedContributors = Object.values(contributors).sort(
-                (a, b) => b.contributions - a.contributions,
-            );
+            // A contributor is a newcomer if all their contributions fall within the threshold
+            for (const login of Object.keys(contributors)) {
+                const total = totalContributions[login] ?? 0;
+                const recent = recentContributions[login] ?? 0;
+                if (total > 0 && recent >= total) {
+                    contributors[login].isNewcomer = true;
+                }
+            }
 
-            return sortedContributors;
+            return Object.values(contributors).sort((a, b) => b.contributions - a.contributions);
         } catch (error) {
             console.error('Error fetching contributors:', error);
             return [];

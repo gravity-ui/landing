@@ -34,7 +34,15 @@ $block: '.#{variables.$ns}contributors';
         font-weight: 200;
     }
 
+    &__header-skeleton {
+        flex-shrink: 0;
+        border-radius: 4px;
+    }
+
     &__section {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
         padding: 40px;
         margin-top: 32px;
         background: #251b25;
@@ -43,5 +51,46 @@ $block: '.#{variables.$ns}contributors';
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             padding: 20px;
         }
+
+        &_newcomers {
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding-block: 20px;
+        }
+    }
+
+    &__section-title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+        color: var(--g-color-text-primary);
+    }
+
+    &__newcomers-avatars {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 12px;
+        align-items: center;
+    }
+
+    &__skeleton-title {
+        flex-shrink: 0;
+        max-width: 100%;
+        border-radius: 4px;
+    }
+
+    &__newcomers-skeleton-avatars {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 12px;
+        align-items: center;
+        justify-content: flex-end;
+        margin-left: auto;
+    }
+
+    &__newcomers-skeleton-avatar {
+        border-radius: 50%;
     }
 }

@@ -18,6 +18,7 @@ const EXPANDABLE_MIN_HEIGHT =
 
 export type ExpandableContributorListProps = {
     contributors: Contributor[];
+    newcomers?: Contributor[];
 };
 
 export const ExpandableContributorList: React.FC<ExpandableContributorListProps> = ({
@@ -30,19 +31,18 @@ export const ExpandableContributorList: React.FC<ExpandableContributorListProps>
     const handleShowMoreClick = () => setIsExpanded(!isExpanded);
 
     return (
-        <div
-            className={b({
-                notExpandable: !isExpandable,
-                expanded: isExpanded,
-            })}
-        >
-            <BaseContributorList
-                style={{minHeight: isExpandable ? EXPANDABLE_MIN_HEIGHT : 'auto'}}
-                contributors={contributors}
-                footer={
-                    isExpandable && <div className={b('inset-shadow', {expanded: isExpanded})} />
-                }
-            />
+        <div className={b({notExpandable: !isExpandable})}>
+            <div className={b('list-wrapper', {expanded: isExpanded})}>
+                <BaseContributorList
+                    style={{minHeight: isExpandable ? EXPANDABLE_MIN_HEIGHT : 'auto'}}
+                    contributors={contributors}
+                    footer={
+                        isExpandable && (
+                            <div className={b('inset-shadow', {expanded: isExpanded})} />
+                        )
+                    }
+                />
+            </div>
 
             {isExpandable && (
                 <Button size="xl" width="max" onClick={handleShowMoreClick}>
