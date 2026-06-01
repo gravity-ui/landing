@@ -18,7 +18,7 @@ const Commands: React.FC<CommandsProps> = ({commands}) => {
     const html = Prism.highlight(commands.join('\n'), Prism.languages.bash, 'bash');
     return (
         <div className={b('commands-wrapper')}>
-            <pre>
+            <pre data-custom-scrollbar data-scrollbar-axis="horizontal">
                 <code className={b('commands')} dangerouslySetInnerHTML={{__html: html}} />
             </pre>
             <ClipboardButton text={commands.join(' && ')} className={b('copy')} size="m" />
