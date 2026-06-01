@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "Bienvenue sur Chat IA",
-    "description": "Commencez une conversation en tapant un message."
+    "description": "Commencez une conversation en tapant un message.",
+    "suggestion_fakePost": "Générer un faux post",
+    "suggestion_capabilities": "Que sais-tu faire ?"
   },
   "error": {
     "apiError": "Désolé, une erreur s'est produite. Veuillez réessayer."
+  },
+  "feedback": {
+    "popupTitle": "Qu'est-ce qui n'allait pas ?",
+    "reasonIncorrect": "Inexact",
+    "reasonIncomplete": "Incomplet",
+    "reasonNotHelpful": "Pas utile",
+    "reasonOther": "Autre",
+    "commentPlaceholder": "Dites-nous en plus (facultatif)",
+    "submit": "Envoyer",
+    "thankYou": "Merci pour votre retour !"
   }
 }

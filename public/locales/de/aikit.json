@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "Willkommen beim KI-Chat",
-    "description": "Beginnen Sie ein Gespräch, indem Sie eine Nachricht eingeben."
+    "description": "Beginnen Sie ein Gespräch, indem Sie eine Nachricht eingeben.",
+    "suggestion_fakePost": "Einen Fake-Post generieren",
+    "suggestion_capabilities": "Was kannst du?"
   },
   "error": {
     "apiError": "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "feedback": {
+    "popupTitle": "Was war falsch?",
+    "reasonIncorrect": "Ungenau",
+    "reasonIncomplete": "Unvollständig",
+    "reasonNotHelpful": "Nicht hilfreich",
+    "reasonOther": "Sonstiges",
+    "commentPlaceholder": "Erzählen Sie uns mehr (optional)",
+    "submit": "Senden",
+    "thankYou": "Vielen Dank für Ihr Feedback!"
   }
 }
