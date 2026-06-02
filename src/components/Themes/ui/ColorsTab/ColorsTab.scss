@@ -3,10 +3,27 @@
 
 $block: '.#{variables.$ns}colors-tab';
 
+$section-gap: 24;
+$section-gap-mobile: 12;
+$brand-group-gap: 8;
+
 #{$block} {
-    gap: calc(var(--g-spacing-base) * 24);
+    gap: calc(var(--g-spacing-base) * #{$section-gap});
 
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-        gap: calc(var(--g-spacing-base) * 12);
+        gap: calc(var(--g-spacing-base) * #{$section-gap-mobile});
+    }
+
+    // The Edit theme entry (and the settings it expands into) belong to the
+    // Brand colors group, so they sit 32px below the swatches instead of a full
+    // section gap. Pull the next sibling up to cancel the extra spacing.
+    & > .#{variables.$ns}brand-colors {
+        margin-block-end: calc(var(--g-spacing-base) * #{$brand-group-gap - $section-gap});
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            margin-block-end: calc(
+                var(--g-spacing-base) * #{$brand-group-gap - $section-gap-mobile}
+            );
+        }
     }
 }

@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "tea",
+    "name": "Tea",
+    "author": {
+        "name": "Allakin"
+    },
+    "description": {
+        "en": "Soft sage-green palette evoking calm afternoon brews.",
+        "ru": "Мягкая шалфейная палитра, как послеобеденный чай."
+    },
+    "tags": [
+        "minimal",
+        "high-readability"
+    ],
+    "previewMode": "light",
+    "brandColor": "#7EAE7E"
+}

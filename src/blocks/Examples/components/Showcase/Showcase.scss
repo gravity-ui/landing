@@ -12,15 +12,19 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
 #{$block} {
     padding: 40px;
     border-radius: 24px;
+    // Layout reacts to the showcase's own width (not the viewport) so the
+    // block stays correct when a side drawer pushes content inward.
+    container-type: inline-size;
+    container-name: showcase;
 
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+    @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'sm') - 1}) {
         padding: 20px;
     }
 
     &__row {
         display: flex;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'lg') - 1}) {
             flex-direction: column;
         }
     }
@@ -44,9 +48,13 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
 
         &_stretch {
             flex: 1;
+            // Flex items default to min-width: auto, which prevents the
+            // inner table-wrapper's overflow-x from engaging. Allow the
+            // stretch column to actually shrink so the wrapper can scroll.
+            min-width: 0;
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'lg') - 1}) {
             margin-bottom: 36px;
 
             [dir='ltr'] & {
@@ -62,7 +70,7 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
             }
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'sm') - 1}) {
             margin-bottom: 20px;
         }
     }
@@ -70,15 +78,15 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
     &__sub-row {
         display: flex;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'lg') - 1}) {
             flex-direction: column;
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'md') - 1}) {
             flex-direction: row;
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'sm') - 1}) {
             flex-direction: column;
         }
     }
@@ -104,7 +112,7 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
             flex: 1;
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'lg') - 1}) {
             display: flex;
             margin-bottom: 40px;
 
@@ -141,7 +149,7 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
             }
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'md') - 1}) {
             display: block;
             margin-bottom: 0;
 
@@ -178,7 +186,7 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
             }
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+        @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'sm') - 1}) {
             margin-bottom: 20px;
 
             #{$block}__col-item {

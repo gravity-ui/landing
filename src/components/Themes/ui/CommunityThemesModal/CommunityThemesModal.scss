@@ -64,15 +64,39 @@ $modal: '.#{variables.$ns}community-themes-modal__modal';
         display: flex;
         flex-direction: column;
         gap: var(--g-spacing-10);
-        padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-8);
+        // Figma 3011:98668: themes grid sits inside a 1296px-wide Content
+        // area with `left-[32px]`. The Figma scrollbar takes the right
+        // 12px outside the padding; in the browser the scrollbar lives
+        // inside the padding box and would otherwise eat into the 1232px
+        // cards area, dropping the layout to 2 columns. Compensate by
+        // narrowing the right padding so the 3×397 + 2×20 = 1231px row
+        // fits the available width.
+        padding-block: var(--g-spacing-2) var(--g-spacing-8);
+        padding-inline-start: var(--g-spacing-8);
+        padding-inline-end: var(--g-spacing-4);
     }
 
     &__cards {
-        display: grid;
-        gap: var(--g-spacing-6);
+        // Figma renders the grid as `flex flex-wrap content-start items-start
+        // gap-[32px_20px]` with fixed-width `w-[397px]` cards. Mirror the
+        // structure literally so wrapping behavior matches when the modal
+        // narrows (3 → 2 → 1 column without per-variant rules). Cards are
+        // centered horizontally so dropping to 2 or 1 column at narrower
+        // widths keeps the grid visually balanced inside the modal.
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+        align-items: flex-start;
+        row-gap: var(--g-spacing-8);
+        column-gap: var(--g-spacing-5);
     }
 
     &__card {
+        // Cards never grow past their design width; shrink to fit narrower
+        // viewports (mobile drops to a single column naturally).
+        flex: 0 0 auto;
+        width: min(397px, 100%);
         min-width: 0;
     }
 
@@ -81,8 +105,17 @@ $modal: '.#{variables.$ns}community-themes-modal__modal';
         flex-direction: column;
         align-items: center;
         text-align: center;
+        // Figma `gap-[32px] py-[48px]` for the footer block.
+        gap: var(--g-spacing-8);
+        padding-block: calc(var(--g-spacing-base) * 12);
+    }
+
+    &__footer-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: var(--g-spacing-3);
-        padding: var(--g-spacing-6) var(--g-spacing-4);
+        max-width: 520px;
     }
 
     &__footer-title {
@@ -90,52 +123,50 @@ $modal: '.#{variables.$ns}community-themes-modal__modal';
     }
 
     &__footer-body {
-        color: var(--g-color-text-secondary);
-        max-width: 640px;
+        color: var(--g-color-text-primary);
     }
 
     &__footer-actions {
         display: flex;
-        gap: var(--g-spacing-3);
-        margin-top: var(--g-spacing-4);
+        gap: var(--g-spacing-2);
         flex-wrap: wrap;
         justify-content: center;
     }
 
     &_variant_desktop {
         &.g-dialog {
-            width: min(1308px, calc(100vw - 184px));
+            // Need ≥1308 inner area to fit 3 fixed-width 397px cards with
+            // 20px gaps and 32px modal padding (3×397 + 2×20 + 64 ≈ 1295,
+            // plus the inner scrollbar). Cap margin at 80px so the modal
+            // reaches its target 1308 width on 1400+ viewports.
+            width: min(1308px, calc(100vw - 80px));
             height: min(791px, calc(100vh - 100px));
-        }
-
-        #{$block}__cards {
-            grid-template-columns: repeat(3, 1fr);
         }
     }
 
     &_variant_tablet {
+        // Figma 3325:127991 — at 768 viewport the modal is 599 wide and
+        // sits 84px from the left edge (168px total side margin). Stay
+        // visually inset on wider tablet/laptop sizes instead of letting
+        // the modal sprawl edge-to-edge.
         &.g-dialog {
-            width: calc(100vw - 96px);
-            height: calc(100vh - 80px);
-        }
-
-        #{$block}__cards {
-            grid-template-columns: repeat(2, 1fr);
+            width: min(599px, calc(100vw - 168px));
+            height: calc(100vh - 128px);
         }
     }
 
     &_variant_mobile {
+        // No dedicated Figma mockup at <sm — match the tablet card
+        // (3325:127991) pattern: give the modal real breathing room from
+        // the viewport edges and keep Figma's 32px content padding
+        // inside, just down-scaled to the narrower window. Symmetric
+        // 32px gutter on every side (uikit centers the dialog by
+        // default; height cap leaves the same room top and bottom).
         &.g-dialog {
-            width: 100%;
+            width: min(599px, calc(100vw - 32px));
             max-width: none;
             height: calc(100dvh - 64px);
             max-height: calc(100dvh - 64px);
-            border-radius: 0;
-            margin: 64px 0 0;
-        }
-
-        #{$block}__cards {
-            grid-template-columns: 1fr;
         }
 
         #{$block}__header {
@@ -143,7 +174,8 @@ $modal: '.#{variables.$ns}community-themes-modal__modal';
         }
 
         #{$block}__scroll-area {
-            padding: var(--g-spacing-2) var(--g-spacing-4) var(--g-spacing-6);
+            padding-block: var(--g-spacing-2) var(--g-spacing-8);
+            padding-inline: var(--g-spacing-8);
             gap: var(--g-spacing-6);
         }
 

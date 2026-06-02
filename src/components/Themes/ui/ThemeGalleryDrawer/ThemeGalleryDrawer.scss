@@ -6,6 +6,13 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
     --g-border-radius-l: 8px;
     --g-border-radius-xl: 8px;
 
+    // uikit's outer drawer overlay sets an inline `overflow: auto` via JS,
+    // so the slide-in `translateX(100%)` animation briefly extends the
+    // panel past the viewport and triggers a horizontal scrollbar. The
+    // `!important` is required to win against the inline style.
+    // stylelint-disable-next-line declaration-no-important
+    overflow-x: hidden !important;
+
     // The uikit Drawer renders the panel as `.g-drawer__item` and our content
     // ends up inside `.g-drawer__item-content`. The flex column lives on the
     // inner wrapper so action-bar and scroll-area get proper flex sizing.
@@ -64,6 +71,13 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
         flex-direction: column;
     }
 
+    // Default CTA wrapper layout — desktop/mobile keep the full-width
+    // outlined button; tablet (below) replaces the wrapper with a
+    // card-styled slot per the Figma horizontal-drawer mockup.
+    &__all-themes-cta {
+        flex-shrink: 0;
+    }
+
     &__all-themes-button {
         width: 100%;
         flex-shrink: 0;
@@ -81,7 +95,39 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
     // push-layout minimum width — keep CSS in lock-step with the placement
     // chosen there rather than duplicating breakpoint math in @media.
     &_variant_desktop {
-        // 447 wide right-side drawer
+        // 447 wide right-side drawer. Push the panel below the landing's
+        // sticky main menu (always) and below the in-page sticky tabs bar
+        // when it activates on scroll. Plus 20px gap around per Figma so
+        // the panel reads as a card detached from viewport edges.
+        .g-drawer__item {
+            top: calc(
+                var(--themes-main-menu-height, 0px) + var(--themes-sticky-header-height, 0px) +
+                    var(--g-spacing-5)
+            );
+            // Push the right inset past the page scrollbar so the visible
+            // gap is measured from the scrollbar's inner edge, not the
+            // viewport edge (otherwise the gap is half-eaten by the bar).
+            right: calc(var(--g-spacing-5) + var(--theme-gallery-page-scrollbar-width, 0px));
+            bottom: var(--g-spacing-5);
+            border-radius: 16px;
+            // uikit's .g-drawer__item ships without `overflow: hidden`, so
+            // the inner scrollable area's scrollbar (and any other content)
+            // bleeds past the rounded corners and squares off the bottom-
+            // right (and bottom-left). Clip to the radius.
+            overflow: hidden;
+        }
+
+        // uikit ships `.g-drawer[data-floating-ui-status=open] .g-drawer__item
+        // { transition: transform 300ms }` which beats a plain
+        // `.g-drawer__item` rule on specificity. Match the attribute so the
+        // sticky-state height shrink (driven by `top`) animates alongside
+        // the slide-in transform — both states included so the panel
+        // animates whether it's just opened or already on screen.
+        &[data-floating-ui-status='open'] .g-drawer__item,
+        &[data-floating-ui-status='close'] .g-drawer__item {
+            transition: top 0.2s ease, transform 0.3s;
+        }
+
         #{$block}__action-bar {
             min-height: 100px;
             padding: var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-5);
@@ -124,6 +170,28 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
             width: 397px;
             flex-shrink: 0;
         }
+
+        // "All Gallery Themes" CTA at the end of the horizontal scroll.
+        // Height (225px) matches ThemeCard's rendered preview-stack in
+        // the 376px tablet drawer; aligned to top so the rounded
+        // rectangle lines up with the card previews next to it.
+        #{$block}__all-themes-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: flex-start;
+            width: 277px;
+            height: 225px;
+            flex: 0 0 auto;
+            margin-inline-start: var(--g-spacing-4);
+            padding: var(--g-spacing-8);
+            background: var(--g-color-base-generic-ultralight);
+            border-radius: 16px;
+        }
+
+        #{$block}__all-themes-button {
+            width: auto;
+        }
     }
 
     &_variant_mobile {
@@ -133,6 +201,7 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
         .g-drawer__item {
             // stylelint-disable-next-line declaration-no-important
             height: calc(100dvh - 64px) !important;
+            border-radius: 0;
         }
 
         #{$block}__action-bar {

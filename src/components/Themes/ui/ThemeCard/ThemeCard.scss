@@ -51,7 +51,22 @@ $block: '.#{variables.$ns}theme-card';
         }
     }
 
+    // The PNG sits on top of the brand-color gradient fallback. When the file
+    // is missing (404) the inline onError hides the broken-image icon and
+    // the gradient + theme name behind it stay visible.
+    &__preview-image {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: left top;
+    }
+
     &__preview-name {
+        position: relative;
+        z-index: 0;
         font-size: 22px;
         font-weight: 600;
         letter-spacing: 0.2px;

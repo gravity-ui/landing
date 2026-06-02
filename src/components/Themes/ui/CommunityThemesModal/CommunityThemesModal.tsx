@@ -5,6 +5,7 @@ import React from 'react';
 
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block} from '../../../../utils';
+import type {ThemePreviewMode} from '../../gallery';
 import {allThemes} from '../../gallery';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
 
@@ -21,7 +22,7 @@ export interface CommunityThemesModalProps {
     open: boolean;
     onClose: () => void;
     activeThemeId?: string | null;
-    onApplyTheme: (id: string) => void;
+    onApplyTheme: (id: string, mode: ThemePreviewMode) => void;
     onImportTheme: () => void;
     onStartFromScratch: () => void;
 }
@@ -42,6 +43,27 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
         variant = 'mobile';
     }
 
+    // The landing scrolls inside `.layout__wrapper`, not on <body>, so
+    // uikit's body scroll-lock doesn't reach it and the underlying page
+    // keeps scrolling alongside the modal's own scroll area. Lock the
+    // wrapper for the modal's lifetime to avoid the double-scroll feel.
+    React.useEffect(() => {
+        if (!open) {
+            return undefined;
+        }
+        const wrapper = document.getElementsByClassName('gravity-ui-landing-layout__wrapper')[0] as
+            | HTMLElement
+            | undefined;
+        if (!wrapper) {
+            return undefined;
+        }
+        const previousOverflow = wrapper.style.overflow;
+        wrapper.style.overflow = 'hidden';
+        return () => {
+            wrapper.style.overflow = previousOverflow;
+        };
+    }, [open]);
+
     return (
         <Dialog
             open={open}
@@ -49,12 +71,16 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
             hasCloseButton={false}
             className={b({variant})}
             modalClassName={b('modal', {variant})}
-            contentOverflow="auto"
+            // `contentOverflow="auto"` makes uikit's `.g-modal__content`
+            // scroll, which stacks with our own `__scroll-area`. Keep it
+            // `visible` so the inner scroll-area is the only scroll
+            // container — no double scrollbar.
+            contentOverflow="visible"
             aria-label={TITLE}
         >
             <div className={b('layout')}>
                 <div className={b('header')}>
-                    <Text variant="subheader-1" className={b('title')}>
+                    <Text variant="header-1" className={b('title')}>
                         {TITLE}
                     </Text>
                     <Button
@@ -82,12 +108,14 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
                         ))}
                     </div>
                     <div className={b('footer')}>
-                        <Text variant="display-2" className={b('footer-title')}>
-                            {FOOTER_TITLE}
-                        </Text>
-                        <Text variant="body-1" className={b('footer-body')}>
-                            {FOOTER_BODY}
-                        </Text>
+                        <div className={b('footer-text')}>
+                            <Text variant="display-2" className={b('footer-title')}>
+                                {FOOTER_TITLE}
+                            </Text>
+                            <Text variant="body-1" className={b('footer-body')}>
+                                {FOOTER_BODY}
+                            </Text>
+                        </div>
                         <div className={b('footer-actions')}>
                             <Button view="outlined-action" size="xl" onClick={onStartFromScratch}>
                                 Start From Scratch

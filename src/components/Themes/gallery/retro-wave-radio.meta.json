@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "retro-wave-radio",
+    "name": "Retro Wave Radio",
+    "author": {
+        "name": "Allakin"
+    },
+    "description": {
+        "en": "Synthwave neon palette inspired by 80s sci-fi futurism.",
+        "ru": "Synthwave-неон, вдохновлённый футуризмом 80-х."
+    },
+    "tags": [
+        "creative",
+        "high-contrast"
+    ],
+    "previewMode": "dark",
+    "brandColor": "#E935C2"
+}
