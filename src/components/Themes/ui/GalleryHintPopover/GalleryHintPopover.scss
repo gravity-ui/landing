@@ -1,0 +1,18 @@
+@use '../../../../variables';
+
+// Figma node 3011:92515 binds title + body fills to `Text/Dark Primary`
+// (#000) on the brand-yellow popover bg. uikit's `theme="special"` defaults
+// to `text-light-primary` (white) which is wrong for this design — override
+// to always-dark text so the popover reads correctly regardless of the
+// surrounding page theme.
+.#{variables.$ns}gallery-hint-popover {
+    color: var(--g-color-text-dark-primary);
+
+    // The flat-secondary close button reads the page-theme text tokens (light
+    // on a dark page); remap them to the dark variants so the X stays dark like
+    // the rest of the popover content.
+    .g-popover-legacy__tooltip-close {
+        --g-color-text-secondary: var(--g-color-text-dark-secondary);
+        --g-color-text-primary: var(--g-color-text-dark-primary);
+    }
+}

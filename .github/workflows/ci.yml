@@ -32,3 +32,20 @@ jobs:
       run: npm run build
       env:
         GITHUB_TOKEN: ${{ github.token }}
+    - name: Cache Playwright browsers
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-${{ hashFiles('package-lock.json') }}
+    - name: Install Playwright chromium
+      run: npx playwright install --with-deps chromium
+    - name: Start Next app
+      run: npm run start -- -p 3010 &
+      env:
+        NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES: '1'
+    - name: Wait for Next app
+      run: npx wait-on http://localhost:3010 --timeout 60000
+    - name: Verify theme previews are up to date
+      run: npm run check-theme-previews
+      env:
+        BASE_URL: http://localhost:3010

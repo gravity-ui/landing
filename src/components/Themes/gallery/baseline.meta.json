@@ -1,0 +1,19 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "baseline",
+    "name": "Baseline",
+    "author": {
+        "name": "Simon"
+    },
+    "description": {
+        "en": "Clean neutral baseline tuned for production-ready interfaces.",
+        "ru": "Чистая нейтральная база, готовая для продакшн-интерфейсов."
+    },
+    "tags": [
+        "minimal",
+        "high-readability",
+        "accessible"
+    ],
+    "previewMode": "light",
+    "brandColor": "#0080FF"
+}

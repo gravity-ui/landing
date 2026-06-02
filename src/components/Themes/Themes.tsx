@@ -21,13 +21,17 @@ import {block} from '../../utils';
 import {TagItem, Tags} from '../Tags/Tags';
 
 import './Themes.scss';
+import type {ThemePreviewMode} from './gallery';
 import {loadThemePayload} from './gallery';
 import {useThemeCreator, useThemeCreatorMethods} from './hooks';
 import {DEFAULT_THEME} from './lib/constants';
 import type {BrandPreset} from './lib/constants';
+import {normalizeImportedTheme} from './lib/normalizeImportedTheme';
 import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {CommunityThemesModal} from './ui/CommunityThemesModal';
+import {GalleryHintPopover} from './ui/GalleryHintPopover/GalleryHintPopover';
+import {PreviewModeToggle} from './ui/PreviewModeToggle/PreviewModeToggle';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 import {ThemeGalleryDrawer} from './ui/ThemeGalleryDrawer';
 import {ThemeImport} from './ui/ThemeImport/ThemeImport';
@@ -52,16 +56,17 @@ enum ThemeTab {
     Preview = 'preview',
 }
 
-const tabToComponent: Record<ThemeTab, React.ComponentType | undefined> = {
+// PreviewTab is rendered explicitly because it has required props; the
+// lookup covers the prop-less tabs.
+const tabToComponent: Partial<Record<ThemeTab, React.ComponentType>> = {
     [ThemeTab.Colors]: ColorsTab,
     [ThemeTab.Typography]: TypographyTab,
     [ThemeTab.BorderRadius]: BorderRadiusTab,
-    [ThemeTab.Preview]: PreviewTab,
 };
 
 type PendingApply =
     | {type: 'preset'; preset: BrandPreset; index: number}
-    | {type: 'theme'; id: string};
+    | {type: 'theme'; id: string; mode: ThemePreviewMode};
 
 const ThemesContent = () => {
     const {t} = useTranslation('themes');
@@ -70,7 +75,8 @@ const ThemesContent = () => {
     const {importTheme, applyBrandPreset} = useThemeCreatorMethods();
     const {add: addToast} = useToaster();
 
-    const headerRef = useRef<HTMLDivElement>(null);
+    const stickyBarRef = useRef<HTMLDivElement>(null);
+    const firstSwatchRef = useRef<HTMLButtonElement>(null);
 
     const [isExportDialogVisible, setIsExportDialogVisible] = useState(false);
     const [isImportDialogVisible, setIsImportDialogVisible] = useState(false);
@@ -79,6 +85,7 @@ const ThemesContent = () => {
     const [activeThemeId, setActiveThemeId] = useState<string | null>(null);
     const [activePresetIndex, setActivePresetIndex] = useState<number | null>(null);
     const [pendingApply, setPendingApply] = useState<PendingApply | null>(null);
+    const [forcedPreviewMode, setForcedPreviewMode] = useState<ThemePreviewMode | null>(null);
 
     const openExportDialog = useCallback(() => setIsExportDialogVisible(true), []);
     const closeExportDialog = useCallback(() => setIsExportDialogVisible(false), []);
@@ -101,19 +108,21 @@ const ThemesContent = () => {
             applyBrandPreset(preset);
             setActivePresetIndex(index);
             setActiveThemeId(null);
+            setForcedPreviewMode(null);
             showThemeImportedToast();
         },
         [applyBrandPreset, showThemeImportedToast],
     );
 
     const performApplyTheme = useCallback(
-        async (id: string) => {
+        async (id: string, mode: ThemePreviewMode) => {
             try {
                 const payload = await loadThemePayload(id);
-                const gravityTheme = parseJSON(payload);
+                const gravityTheme = normalizeImportedTheme(parseJSON(payload));
                 importTheme(gravityTheme);
                 setActiveThemeId(id);
                 setActivePresetIndex(null);
+                setForcedPreviewMode(mode);
                 setCommunityModalOpen(false);
                 setGalleryDrawerOpen(false);
                 showThemeImportedToast();
@@ -130,6 +139,7 @@ const ThemesContent = () => {
         importTheme(DEFAULT_THEME);
         setActiveThemeId(null);
         setActivePresetIndex(null);
+        setForcedPreviewMode(null);
     }, [importTheme]);
 
     const handleImportFromModal = useCallback(() => {
@@ -149,11 +159,11 @@ const ThemesContent = () => {
     );
 
     const handleApplyTheme = useCallback(
-        (id: string) => {
+        (id: string, mode: ThemePreviewMode) => {
             if (themeCreator.changesExist) {
-                setPendingApply({type: 'theme', id});
+                setPendingApply({type: 'theme', id, mode});
             } else {
-                performApplyTheme(id);
+                performApplyTheme(id, mode);
             }
         },
         [themeCreator.changesExist, performApplyTheme],
@@ -166,7 +176,7 @@ const ThemesContent = () => {
         if (pendingApply.type === 'preset') {
             performApplyPreset(pendingApply.preset, pendingApply.index);
         } else {
-            performApplyTheme(pendingApply.id);
+            performApplyTheme(pendingApply.id, pendingApply.mode);
         }
         setPendingApply(null);
     }, [pendingApply, performApplyPreset, performApplyTheme]);
@@ -186,17 +196,47 @@ const ThemesContent = () => {
     useEffect(() => {
         const contentEl = document.getElementsByClassName(
             'gravity-ui-landing-layout__wrapper',
-        )?.[0];
+        )?.[0] as HTMLElement | undefined;
 
         if (!contentEl) {
-            return;
+            return undefined;
         }
 
+        // The landing-wide menu is sticky-pinned to viewport top with its own
+        // z-index. Measure its bottom edge so the Theme Gallery drawer can
+        // permanently sit beneath it, and the sticky tabs+button bar can pin
+        // right under it on scroll. Re-measure on resize because the menu's
+        // height changes between breakpoints (mobile hamburger vs full nav).
+        const updateMenuHeight = () => {
+            const menuHeight = contentEl.getBoundingClientRect().top;
+            document.documentElement.style.setProperty(
+                '--themes-main-menu-height',
+                `${menuHeight}px`,
+            );
+        };
+        updateMenuHeight();
+        window.addEventListener('resize', updateMenuHeight);
+
+        const visibleClass = b('sticky-bar_visible');
+        let stuck = false;
+
         const onScroll = () => {
-            if (headerRef?.current?.offsetTop && headerRef.current.offsetTop > 136) {
-                headerRef.current?.classList.add(b('header-actions-wrapper_sticky'));
-            } else {
-                headerRef.current?.classList.remove(b('header-actions-wrapper_sticky'));
+            const stickyBar = stickyBarRef.current;
+            if (!stickyBar) {
+                return;
+            }
+            const shouldStick = contentEl.scrollTop > 136;
+            if (shouldStick && !stuck) {
+                stickyBar.classList.add(visibleClass);
+                document.documentElement.style.setProperty(
+                    '--themes-sticky-header-height',
+                    `${stickyBar.getBoundingClientRect().height}px`,
+                );
+                stuck = true;
+            } else if (!shouldStick && stuck) {
+                stickyBar.classList.remove(visibleClass);
+                document.documentElement.style.removeProperty('--themes-sticky-header-height');
+                stuck = false;
             }
         };
 
@@ -204,12 +244,27 @@ const ThemesContent = () => {
 
         return () => {
             contentEl.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', updateMenuHeight);
+            document.documentElement.style.removeProperty('--themes-sticky-header-height');
+            document.documentElement.style.removeProperty('--themes-main-menu-height');
         };
     }, []);
 
     const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.Preview);
 
     const TabComponent = tabToComponent[activeTab];
+
+    let tabContent: React.ReactNode = null;
+    if (activeTab === ThemeTab.Preview) {
+        tabContent = (
+            <PreviewTab
+                forcedPreviewMode={forcedPreviewMode}
+                onPreviewModeChange={setForcedPreviewMode}
+            />
+        );
+    } else if (TabComponent) {
+        tabContent = <TabComponent />;
+    }
 
     const ThemeActionsButtons = useCallback(
         () => (
@@ -236,43 +291,60 @@ const ThemesContent = () => {
         [openImportDialog, openExportDialog, t],
     );
 
+    const renderHeaderRow = () => (
+        <Flex className={b('header-actions')}>
+            <Tags
+                className={b('tags')}
+                items={tags}
+                value={activeTab}
+                onChange={setActiveTab}
+                wrap="nowrap"
+            />
+            <div className={b('header-action-buttons')}>
+                <PreviewModeToggle
+                    className={b('sticky-mode-toggle')}
+                    value={forcedPreviewMode}
+                    onChange={setForcedPreviewMode}
+                />
+                <ThemeActionsButtons />
+            </div>
+        </Flex>
+    );
+
     return (
         <>
             <div className={b('content-wrapper')}>
                 <div className={b('title')}>
                     <Text className={b('title__text')}>{t('title')}</Text>
+                    <Text className={b('title__subtitle')} variant="body-2">
+                        {t('subtitle')}
+                    </Text>
                 </div>
-                <div className={b('header-actions-wrapper')} ref={headerRef}>
-                    <Flex className={b('header-actions')}>
-                        <Tags
-                            className={b('tags')}
-                            items={tags}
-                            value={activeTab}
-                            onChange={setActiveTab}
-                            wrap="nowrap"
-                        />
-                        <div className={b('header-action-buttons', 'desktop')}>
-                            <ThemeActionsButtons />
-                        </div>
-                    </Flex>
+                <div className={b('header-actions-wrapper')}>{renderHeaderRow()}</div>
+                <div className={b('sticky-bar')} ref={stickyBarRef}>
+                    {renderHeaderRow()}
                 </div>
 
-                <div className={b('header-action-buttons', 'mobile')}>
-                    <ThemeActionsButtons />
-                </div>
-
-                <div className={b('playground-bar-wrapper')}>
+                {/* Always mounted so the background image stays decoded and
+                    visible the instant the user comes back to the Preview tab
+                    — toggling visibility via CSS instead of unmount/remount
+                    avoids the load-flash on every tab switch. */}
+                <div
+                    className={b('playground-bar-wrapper', {
+                        hidden: activeTab !== ThemeTab.Preview,
+                    })}
+                >
                     <ThemePlaygroundBar
                         activePresetIndex={activePresetIndex}
                         onSelectPreset={handleSelectPreset}
                         onOpenGallery={() => setGalleryDrawerOpen(true)}
+                        firstSwatchRef={firstSwatchRef}
                     />
+                    <GalleryHintPopover anchorRef={firstSwatchRef} />
                 </div>
 
                 <Grid className={b('grid')}>
-                    <div className={b('grid__content')}>
-                        {TabComponent ? <TabComponent /> : null}
-                    </div>
+                    <div className={b('grid__content')}>{tabContent}</div>
                 </Grid>
             </div>
 

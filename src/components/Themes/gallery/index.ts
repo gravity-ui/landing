@@ -1,27 +1,12 @@
-import carbon from './carbon.meta.json';
-import forestFloor from './forest-floor.meta.json';
-import lagoon from './lagoon.meta.json';
-import magentaPulse from './magenta-pulse.meta.json';
-import midnightOwl from './midnight-owl.meta.json';
-import pacific from './pacific.meta.json';
-import paperWhite from './paper-white.meta.json';
-import sakura from './sakura.meta.json';
+import baseline from './baseline.meta.json';
+import coffee from './coffee.meta.json';
+import dustOlive from './dust-olive.meta.json';
+import orange from './orange.meta.json';
+import retroWaveRadio from './retro-wave-radio.meta.json';
 import {type ThemeMetadata, type ThemePayload, validateThemeMetadata} from './schema';
-import solarCitrus from './solar-citrus.meta.json';
-import volcano from './volcano.meta.json';
+import tea from './tea.meta.json';
 
-const RAW_META: unknown[] = [
-    carbon,
-    forestFloor,
-    lagoon,
-    magentaPulse,
-    midnightOwl,
-    pacific,
-    paperWhite,
-    sakura,
-    solarCitrus,
-    volcano,
-];
+const RAW_META: unknown[] = [baseline, coffee, dustOlive, orange, retroWaveRadio, tea];
 
 RAW_META.forEach(validateThemeMetadata);
 
@@ -30,11 +15,11 @@ export const allThemes: ThemeMetadata[] = (RAW_META as ThemeMetadata[])
     .sort((a, b) => a.id.localeCompare(b.id));
 
 export const FEATURED_THEME_IDS = [
-    'midnight-owl',
-    'pacific',
-    'volcano',
-    'sakura',
-    'carbon',
+    'baseline',
+    'coffee',
+    'dust-olive',
+    'orange',
+    'retro-wave-radio',
 ] as const;
 
 export const featuredThemes: ThemeMetadata[] = FEATURED_THEME_IDS.map((id) =>

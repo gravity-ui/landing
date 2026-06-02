@@ -1,0 +1,18 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "orange",
+    "name": "Orange",
+    "author": {
+        "name": "albe"
+    },
+    "description": {
+        "en": "Vibrant tangerine accents for high-energy, expressive UIs.",
+        "ru": "Сочные мандариновые акценты для энергичных выразительных интерфейсов."
+    },
+    "tags": [
+        "creative",
+        "high-contrast"
+    ],
+    "previewMode": "light",
+    "brandColor": "#FF6200"
+}

@@ -16,6 +16,61 @@ $block: '.#{variables.$ns}typography-tab';
     }
 
     &__font {
+        // Layout reacts to the font picker's own width (not the viewport)
+        // so the label/cards row stacks and the cards grid reflows as the
+        // surrounding content area shrinks (e.g. when a drawer is open).
+        container-type: inline-size;
+        container-name: font-picker;
+        width: 100%;
+
+        &__row {
+            display: flex;
+            align-items: center;
+            gap: var(--g-spacing-5);
+            width: 100%;
+
+            // Stack label above content when the row can no longer hold
+            // 4 cards on a single horizontal line at a comfortable size.
+            // 1400px is the minimum container width at which the cards
+            // area (33%/67% split) fits 4 × 220px cards plus gaps; below
+            // that the cards would be too narrow for header-1 labels
+            // like "Titillium Web" / "IBM Plex Mono".
+            @container font-picker (max-width: 1399px) {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        &__row-label {
+            flex: 0 0 auto;
+            min-width: 0;
+            // Match the proportions used at wide widths (label ≈ 4/12 of
+            // the row). On narrow widths the row stacks so the explicit
+            // width is overridden by the parent's column direction.
+            width: 33.33%;
+
+            @container font-picker (max-width: 1399px) {
+                width: 100%;
+            }
+        }
+
+        &__row-content {
+            flex: 1 1 auto;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--g-spacing-5);
+        }
+
+        &__card-grid {
+            display: grid;
+            // Each card needs ≈220px to fit "Titillium Web" / "IBM Plex
+            // Mono" labels at header-1 without wrapping; auto-fit drops
+            // to fewer columns once the row can't fit the next 220px slot.
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--g-spacing-5);
+        }
+
         &__additional-font-input {
             @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
                 width: 100%;
@@ -109,6 +164,11 @@ $block: '.#{variables.$ns}typography-tab';
 
     &__preview {
         border-radius: 16px;
+        // Layout reacts to the card's own width (not the viewport) so the
+        // column grid and inner padding stay correct when a side drawer
+        // pushes the page content inward.
+        container-type: inline-size;
+        container-name: typography-preview;
         /* stylelint-disable */
         --g-text-display-4-font-size: 48px !important;
         --g-text-display-4-line-height: 52px !important;
@@ -117,9 +177,24 @@ $block: '.#{variables.$ns}typography-tab';
             padding: 60px;
             margin-block-start: 0 !important;
 
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'lg')) {
-                padding: 0 var(--g-spacing-10)  var(--g-spacing-10)  var(--g-spacing-10);
+            @container typography-preview (max-width: #{map-get(pcVariables.$gridBreakpoints, 'lg') - 1}) {
+                padding: var(--g-spacing-10);
             }
+        }
+
+        &__cols {
+            display: grid;
+            // Auto-fit to the available container width: each column
+            // demands at least enough room for the widest typography
+            // sample (Display 4 at 48px) before another track is added,
+            // and otherwise stretches evenly. Tracks wrap when the
+            // container can no longer fit the next 220px slot.
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--g-spacing-10);
+        }
+
+        &__col {
+            min-width: 0;
         }
 
         &__variant-title {

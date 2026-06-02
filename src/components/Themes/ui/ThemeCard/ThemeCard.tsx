@@ -18,7 +18,7 @@ const formatTagLabel = (tag: string) =>
 interface ThemeCardProps {
     metadata: ThemeMetadata;
     selected?: boolean;
-    onApply?: (id: string) => void;
+    onApply?: (id: string, mode: ThemePreviewMode) => void;
     className?: string;
 }
 
@@ -37,7 +37,20 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
         >
             <div className={b('preview-stack')}>
                 <div className={b('preview-area')} data-mode={previewMode}>
-                    <span className={b('preview-name')}>{metadata.name}</span>
+                    <img
+                        className={b('preview-image')}
+                        src={`/themes/previews/${metadata.id}-${previewMode}.png`}
+                        alt={`${metadata.name} ${previewMode} preview`}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(event) => {
+                            // eslint-disable-next-line no-param-reassign
+                            event.currentTarget.style.visibility = 'hidden';
+                        }}
+                    />
+                    <span className={b('preview-name')} aria-hidden="true">
+                        {metadata.name}
+                    </span>
                 </div>
                 <div className={b('selection-frame')} aria-hidden="true" />
                 <div className={b('hover-content')}>
@@ -55,7 +68,11 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                             </div>
                         )}
                     </div>
-                    <Button view="action" size="l" onClick={() => onApply?.(metadata.id)}>
+                    <Button
+                        view="action"
+                        size="l"
+                        onClick={() => onApply?.(metadata.id, previewMode)}
+                    >
                         Apply Theme
                     </Button>
                 </div>

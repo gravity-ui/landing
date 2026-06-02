@@ -5,7 +5,21 @@
 $block: '.#{variables.$ns}themes';
 
 @mixin sticky() {
-    z-index: 150;
+    // Pull the sticky bar out of `content-wrapper` so it spans the full
+    // viewport width instead of being squeezed by drawer push-padding. Top
+    // offset accounts for the landing-wide sticky main menu so we don't
+    // cover it. z-index sits BELOW the uikit Drawer (its panel layer is
+    // 990) so that on tablet/mobile (where the drawer is a bottom-sheet
+    // or full-screen overlay) the drawer covers the bar instead of having
+    // the bar punch through its top edge. On desktop the drawer's top is
+    // explicitly pushed below this bar via CSS calc, so they never
+    // overlap visually regardless of z-order. Modal/Dialog (1000) still
+    // veils the bar correctly on top of everything.
+    position: fixed;
+    top: var(--themes-main-menu-height, 0);
+    left: 0;
+    right: 0;
+    z-index: 989;
     padding-block: var(--g-spacing-2);
     background-color: var(--g-color-base-float);
     border-bottom: 1px solid var(--g-color-line-generic);
@@ -28,10 +42,22 @@ $block: '.#{variables.$ns}themes';
 
     &__playground-bar-wrapper {
         @include gridContainerOffsets();
-        margin-block-end: var(--g-spacing-8);
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             padding-inline: var(--g-spacing-4);
+        }
+
+        // Off-Preview tabs hide the bar but keep it mounted so the
+        // decoded background image is ready when the user comes back.
+        // Move it offscreen rather than `display: none` so the image
+        // stays in the render tree and we don't pay a decode flash on
+        // every tab switch.
+        &_hidden {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
     }
 
@@ -63,25 +89,93 @@ $block: '.#{variables.$ns}themes';
                 @include ukitMixins.text-display-2();
             }
         }
+
+        &__subtitle {
+            // Figma node 3011:92965 binds the subtitle fill to
+            // `var(--g-color-text-primary)` (not text-secondary). Drop the
+            // color override so uikit's `Text` default (text-primary)
+            // applies.
+            display: block;
+            margin-block-start: var(--g-spacing-2);
+
+            @media (max-width: #{map-get(pcVariables.$gridBreakpoints, 'lg') - 1}) {
+                display: none;
+            }
+        }
     }
 
+    // Original in-flow toolbar — sits at its natural position in the page,
+    // scrolls away with content as the user scrolls. The separate sticky
+    // bar below appears at the top of the viewport once the wrapper has
+    // scrolled past the threshold.
     &__header-actions-wrapper {
-        position: sticky;
-        top: 0;
-
+        padding-block: var(--g-spacing-2);
+        // Desktop: 32px gap to the Theme playground card matches Figma
+        // node 3011:92948 (in-block 32px bottom + 0 between blocks).
         margin-block-end: calc(var(--g-spacing-base) * 8);
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
-            margin-block-end: 0;
+        // Tablet (3011:98895) + phone (3011:99311) mockups both show a
+        // 64px gap from the buttons row to the Theme playground card.
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            margin-block-end: calc(var(--g-spacing-base) * 16);
         }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             padding-inline: var(--g-spacing-4);
         }
+    }
 
-        &_sticky {
-            @include sticky();
+    // Fixed sticky bar — separate element that overlays the page once the
+    // user scrolls past the in-flow wrapper. Hidden by default; JS toggles
+    // `_visible` based on scroll position.
+    &__sticky-bar {
+        @include sticky();
+
+        // Hidden by default — keeps the bar out of the way until the in-flow
+        // wrapper has scrolled past. `visibility: hidden` (rather than
+        // display: none) preserves measurable height so JS can still read
+        // the bar's dimensions for the drawer top offset.
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+
+        // No outer padding on phone — gutters live INSIDE each scrollable
+        // child (`__tags`, `__header-action-buttons`) so tabs can scroll
+        // all the way to the viewport edge instead of being clipped at
+        // the bar's own padding boundary.
+
+        &_visible {
+            visibility: visible;
+            pointer-events: auto;
+            opacity: 1;
         }
+    }
+
+    // Sun/Moon toggle in the sticky bar — visible only inside the sticky
+    // copy. The in-flow wrapper hides it because PreviewTab's heading-row
+    // toggle takes that role pre-scroll.
+    &__sticky-mode-toggle {
+        display: none;
+    }
+
+    &__sticky-bar &__sticky-mode-toggle {
+        display: inline-flex;
+        align-self: center;
+
+        // On phone the sticky bar is already cramped — hide the dark/light
+        // toggle here so tabs + Import/Export get the available room. The
+        // in-section toggle next to the "UI Samples" heading still covers
+        // mode switching for users on small screens.
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            display: none;
+        }
+    }
+
+    // Hide the PreviewTab heading toggle once the sticky bar appears — the
+    // sticky bar's toggle takes over to avoid duplicate controls on screen.
+    &__content-wrapper:has(&__sticky-bar_visible) .preview-tab__mode-toggle {
+        display: none;
     }
 
     &__header-actions {
@@ -89,11 +183,11 @@ $block: '.#{variables.$ns}themes';
         flex-wrap: wrap;
         gap: var(--g-spacing-4);
 
+        // Match the drawer's own slide-in timing (see content-wrapper above)
+        // so the toolbar expands/collapses in sync with the panel.
+        transition: max-width 0.25s ease;
+
         @include gridContainerOffsets();
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            flex-flow: column nowrap;
-            justify-content: flex-start;
-        }
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
             margin: 0 -16px;
@@ -101,52 +195,92 @@ $block: '.#{variables.$ns}themes';
         }
     }
 
-    &__header-action-buttons {
-        &.desktop {
-            display: block;
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
-                display: none;
-            }
-        }
-
-        &.mobile {
-            display: none;
-
-            padding-right: 0;
-            padding-left: 40px;
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md')) {
-                display: block;
-            }
-
-            @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-                padding: 0 var(--g-spacing-4);
-            }
-        }
-
+    // Sticky bar's inner row uses the same wrap behaviour as the in-flow
+    // wrapper — when the cluster of tabs + toggle + Import/Export doesn't
+    // fit on one line it breaks to two, and each row scrolls horizontally
+    // on its own if still too wide (handled by `__tags` / `__header-
+    // action-buttons` below).
+    &__sticky-bar &__header-actions {
+        // The base `header-actions` rule below applies `margin: 0 -16px;
+        // padding-inline: 16px` on phone to give the in-flow wrapper a
+        // full-bleed look. Inside the fixed sticky bar that negative margin
+        // would cancel the bar's own left/right padding — kill it.
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-            padding-inline: 16px;
+            margin: 0;
+            padding-inline: 0;
         }
     }
 
-    &__tags {
+    // When the Theme Gallery drawer is open, the toolbar drops its centered
+    // 1232px grid cap and stretches to fill the available width (Figma
+    // 3011:93840 in the sticky state, 3011:96824 in the non-sticky state).
+    // Apply unconditionally on drawer-open so the cap value doesn't flip
+    // when scroll activates the sticky class — otherwise the max-width
+    // transition would replay on every scroll-in. 100vw stays numeric so
+    // max-width can transition smoothly (`none` is non-animatable).
+    html[style*='--theme-gallery-drawer-width'] &__header-actions {
+        max-width: 100vw;
+    }
+
+    // Tabs cluster and action-buttons cluster both sit on the parent
+    // `__header-actions` row. When the row wraps (narrow viewport), each
+    // cluster occupies its own line. Within a line, each cluster scrolls
+    // horizontally on its own if its natural width still exceeds the line
+    // — that way long tabs scroll independently of the Import/Export
+    // cluster on the next line.
+
+    &__header-action-buttons {
         display: flex;
-        overflow-x: auto;
         flex-wrap: nowrap;
-        // Required so the flex item can shrink below its content size; without
-        // this the row stays at intrinsic width and pushes the page wider.
+        align-items: center;
+        gap: var(--g-spacing-2);
+        max-width: 100%;
         min-width: 0;
-        // Hide horizontal scrollbar but keep scrolling behaviour.
+        overflow-x: auto;
         scrollbar-width: none;
 
         &::-webkit-scrollbar {
             display: none;
         }
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            margin: 0 -16px;
-            padding: 0 16px;
+        // Phone: the cluster wraps to its own line — claim the full row so
+        // Import / Export can stretch 50/50 across it (see __theme-action-
+        // btn below). Without this the cluster only takes intrinsic width
+        // and the buttons collapse to fit the small content.
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            flex: 1 1 100%;
+            overflow-x: visible;
+
+            > * {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+        }
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: nowrap;
+        max-width: 100%;
+        min-width: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    // Inside-the-scroll gutter — only inside the sticky bar, where the bar
+    // spans edge-to-edge and we want the tabs to scroll up to the viewport
+    // edge with a visual margin at rest. The in-flow wrapper sits inside
+    // gridContainerOffsets() so it doesn't need this. Same idea for the
+    // Import / Export cluster (which has overflow-x: visible on phone, so
+    // the padding here is a plain inset).
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        &__sticky-bar &__tags,
+        &__sticky-bar &__header-action-buttons {
+            padding-inline: var(--g-spacing-4);
         }
     }
 
@@ -155,12 +289,12 @@ $block: '.#{variables.$ns}themes';
         border-radius: var(--g-border-radius-m);
         width: fit-content;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
-            margin-block: var(--g-spacing-6) var(--g-spacing-8);
-        }
-
+        // Phone: Import + Export share the cluster row 50/50 instead of
+        // each demanding 100% of the parent (which would overflow).
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
-            width: 100%;
+            flex: 1 1 0;
+            min-width: 0;
+            width: auto;
         }
     }
 }
