@@ -30,9 +30,14 @@ export const IntersectionLoadComponent = <Component extends React.ComponentType<
     const [intersectionElementRef, setIntersectionElementRef] =
         React.useState<HTMLDivElement | null>(null);
 
+    // Keep the latest `onLoad` in a ref so the effect below can stay subscribed
+    // only to `cacheKey` and not re-run whenever an inline `onLoad` changes identity.
     const onLoadRef = React.useRef(onLoad);
     onLoadRef.current = onLoad;
 
+    // When the component is already in the cache it renders synchronously below and
+    // skips the `React.lazy` path where `onLoad` is normally fired. This effect makes
+    // sure `onLoad` is still called for that cache-hit case.
     React.useEffect(() => {
         if (cache.has(cacheKey)) {
             const {Component, props} = cache.get(cacheKey);

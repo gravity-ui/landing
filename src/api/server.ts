@@ -98,6 +98,7 @@ export class ServerApi {
         const items = await this.octokit.paginate(this.octokit.rest.repos.listContributors, {
             owner: repoOwner,
             repo,
+            per_page: 100,
         });
 
         const contributors = items
@@ -121,6 +122,7 @@ export class ServerApi {
             owner: repoOwner,
             repo,
             since: since.toISOString(),
+            per_page: 100,
         });
 
         const counts = new Map<string, number>();
@@ -189,8 +191,10 @@ export class ServerApi {
             const recentContributions: Record<string, number> = {};
             const contributors: Record<string, Contributor> = {};
 
-            // Process in small batches to avoid GitHub secondary rate limits
-            const BATCH_SIZE = 5;
+            // Process in batches to cap concurrent in-flight requests under
+            // GitHub's secondary rate limit of 100 concurrent requests. Each repo's
+            // calls run sequentially, so peak concurrency ≈ BATCH_SIZE.
+            const BATCH_SIZE = 50;
             for (let i = 0; i < repos.length; i += BATCH_SIZE) {
                 const batch = repos.slice(i, i + BATCH_SIZE);
                 const batchResults = await Promise.all(
