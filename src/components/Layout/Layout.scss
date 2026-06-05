@@ -23,6 +23,13 @@ $block: '.#{variables.$ns}layout';
         overflow: auto;
     }
 
+    &__scroll-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        min-height: 100%;
+    }
+
     &__content {
         position: relative;
         flex: 1;

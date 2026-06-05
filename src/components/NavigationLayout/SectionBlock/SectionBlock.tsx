@@ -104,7 +104,10 @@ export const SectionBlock: React.FC<SectionBlockProps> = ({
 
     const renderSubSectionsContainer = () => {
         return (
-            <div className={b('sub-sections', {open: isOpen})}>
+            <div
+                className={b('sub-sections', {open: isOpen})}
+                data-custom-scrollbar-update-on-transition
+            >
                 {data.url ? (
                     <Link
                         key="__overview"

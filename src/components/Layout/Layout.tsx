@@ -8,6 +8,7 @@ import {CONTENT_WRAPPER_ID, DEFAULT_THEME, MENU_ID} from '../../constants';
 import {EnvironmentContext} from '../../contexts';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
+import {CustomScrollbar} from '../CustomScrollbar';
 import {Footer} from '../Footer/Footer';
 import {Menu} from '../Menu/Menu';
 
@@ -79,10 +80,17 @@ export const Layout: React.FC<LayoutProps> = ({
                     <Menu />
                 </div>
             )}
-            <div className={b('wrapper')} id={noScroll ? undefined : CONTENT_WRAPPER_ID}>
-                <div className={b('content', {'no-scroll': noScroll})}>{children}</div>
-                {!showOnlyContent && !hideFooter && <Footer />}
-            </div>
+            <CustomScrollbar
+                className={b('wrapper')}
+                id={noScroll ? undefined : CONTENT_WRAPPER_ID}
+                axis="vertical"
+                enabled={!noScroll}
+            >
+                <div className={b('scroll-content')}>
+                    <div className={b('content', {'no-scroll': noScroll})}>{children}</div>
+                    {!showOnlyContent && !hideFooter && <Footer />}
+                </div>
+            </CustomScrollbar>
         </div>
     );
 
