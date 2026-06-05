@@ -17,6 +17,7 @@ const withTM = require('next-transpile-modules')([
     '@gravity-ui/yagr',
     '@gravity-ui/markdown-editor',
     '@gravity-ui/aikit',
+    '@gravity-ui/illustrations',
     'swiper',
 ]);
 
