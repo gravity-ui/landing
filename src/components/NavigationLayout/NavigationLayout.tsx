@@ -8,6 +8,7 @@ import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import {CONTENT_WRAPPER_ID} from '../../constants';
 import {useWindowBreakpoint} from '../../hooks/useWindowBreakpoint';
 import {block} from '../../utils';
+import {CustomScrollbar} from '../CustomScrollbar';
 import {Footer} from '../Footer/Footer';
 import LibraryVersion from '../LibraryVersion/LibraryVersion';
 
@@ -63,11 +64,7 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
 
     return (
         <div className={b()}>
-            <div
-                className={b('navigation-wrap')}
-                data-custom-scrollbar={isDesktop ? true : undefined}
-                data-scrollbar-axis={isDesktop ? 'vertical' : undefined}
-            >
+            <CustomScrollbar className={b('navigation-wrap')} axis="vertical" enabled={isDesktop}>
                 <div
                     tabIndex={0}
                     role="button"
@@ -117,18 +114,18 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
                         onClickOnLink={clickOnLinkHandler}
                     />
                 </div>
-            </div>
-            <div
+            </CustomScrollbar>
+            <CustomScrollbar
                 className={b('content-wrap')}
                 id={CONTENT_WRAPPER_ID}
-                data-custom-scrollbar={isDesktop ? true : undefined}
-                data-scrollbar-axis={isDesktop ? 'vertical' : undefined}
+                axis="vertical"
+                enabled={isDesktop}
             >
                 <div className={b('content')}>
                     {children}
                     <Footer containerClass={b('footer')} />
                 </div>
-            </div>
+            </CustomScrollbar>
         </div>
     );
 };

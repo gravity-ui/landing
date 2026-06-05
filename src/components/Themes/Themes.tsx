@@ -6,6 +6,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
 import {block} from '../../utils';
+import {CustomScrollbar} from '../CustomScrollbar';
 import {TagItem, Tags} from '../Tags/Tags';
 
 import './Themes.scss';
@@ -106,7 +107,7 @@ export const Themes = () => {
 
     const ThemeActionsButtons = useCallback(
         () => (
-            <div data-custom-scrollbar data-scrollbar-axis="horizontal">
+            <CustomScrollbar axis="horizontal">
                 <Flex direction="row" gap={2}>
                     <Button
                         className={b('theme-action-btn')}
@@ -126,7 +127,7 @@ export const Themes = () => {
                         <Text>{t('btn_export_theme')}</Text>
                     </Button>
                 </Flex>
-            </div>
+            </CustomScrollbar>
         ),
         [],
     );

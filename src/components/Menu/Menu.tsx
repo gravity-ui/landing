@@ -15,6 +15,7 @@ import {socialLinks} from '../../content/social-links';
 import {EnvironmentContext} from '../../contexts';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
+import {CustomScrollbar} from '../CustomScrollbar';
 import {Link} from '../Link';
 
 import {LocalePicker} from './LocalePicker';
@@ -68,11 +69,7 @@ export const Menu: React.FC = () => {
                 </Link>
 
                 <div className={b('desktop-menu')}>
-                    <div
-                        className={b('desktop-menu-scrollbar')}
-                        data-custom-scrollbar
-                        data-scrollbar-axis="horizontal"
-                    >
+                    <CustomScrollbar className={b('desktop-menu-scrollbar')} axis="horizontal">
                         <div className={b('desktop-menu-content')}>
                             <div className={b('desktop-menu-items')}>
                                 {menu.map((item) => (
@@ -95,7 +92,7 @@ export const Menu: React.FC = () => {
                                 </div>
                             )}
                         </div>
-                    </div>
+                    </CustomScrollbar>
                 </div>
 
                 <nav className={b('desktop-social-links')}>

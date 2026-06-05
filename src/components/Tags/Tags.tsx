@@ -2,6 +2,7 @@ import {Button, CSSProperties, Flex} from '@gravity-ui/uikit';
 import React from 'react';
 
 import {block} from '../../utils';
+import {CustomScrollbar} from '../CustomScrollbar';
 
 import './Tags.scss';
 
@@ -28,7 +29,7 @@ export function Tags<T extends string = string>({
     wrap = 'wrap',
 }: TagsProps<T>) {
     return (
-        <div className={b('scrollbar')} data-custom-scrollbar data-scrollbar-axis="horizontal">
+        <CustomScrollbar className={b('scrollbar')} axis="horizontal">
             <Flex wrap={wrap} gap={2} className={b(null, className)}>
                 {items.map((item) => {
                     return (
@@ -48,6 +49,6 @@ export function Tags<T extends string = string>({
                     );
                 })}
             </Flex>
-        </div>
+        </CustomScrollbar>
     );
 }

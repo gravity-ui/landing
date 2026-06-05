@@ -4,6 +4,7 @@ import 'prismjs/components/prism-bash.js';
 import React from 'react';
 
 import {block} from '../../utils';
+import {CustomScrollbar} from '../CustomScrollbar';
 
 import './Templates.scss';
 import type {TabType} from './types';
@@ -18,9 +19,9 @@ const Commands: React.FC<CommandsProps> = ({commands}) => {
     const html = Prism.highlight(commands.join('\n'), Prism.languages.bash, 'bash');
     return (
         <div className={b('commands-wrapper')}>
-            <pre data-custom-scrollbar data-scrollbar-axis="horizontal">
+            <CustomScrollbar element="pre" axis="horizontal">
                 <code className={b('commands')} dangerouslySetInnerHTML={{__html: html}} />
-            </pre>
+            </CustomScrollbar>
             <ClipboardButton text={commands.join(' && ')} className={b('copy')} size="m" />
         </div>
     );

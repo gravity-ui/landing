@@ -8,7 +8,6 @@ import {appWithTranslation} from 'next-i18next';
 import 'overlayscrollbars/overlayscrollbars.css';
 
 import {useReportWebVitals} from '../hooks/useReportWebVitals';
-import {ScrollbarInitializer} from '../hooks/useScrollbarVisibility';
 import {WindowBreakpointProvider} from '../hooks/useWindowBreakpoint';
 import '../scrollbars.scss';
 import '../styles.scss';
@@ -25,7 +24,6 @@ export const App = ({
 
     return (
         <WindowBreakpointProvider>
-            <ScrollbarInitializer />
             <Component {...pageProps} />
         </WindowBreakpointProvider>
     );
