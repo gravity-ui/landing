@@ -26,7 +26,10 @@ type ChatRequestBody = {
     messages: ChatMessage[];
 };
 
+const DEFAULT_BASE_URL = 'https://ai.api.cloud.yandex.net/v1';
 const API_KEY = process.env.OPENAI_API_KEY;
+const BASE_URL = process.env.BASE_URL || DEFAULT_BASE_URL;
+const PROMPT_ID = process.env.PROMPT_ID;
 
 const MODEL = process.env.OPENAI_MODEL;
 const SYSTEM_PROMPT =
@@ -52,7 +55,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const openai = new OpenAI({
             apiKey: API_KEY,
-            baseURL: 'https://rest-assistant.api.cloud.yandex.net/v1',
+            baseURL: BASE_URL,
         });
 
         // Set SSE headers
@@ -66,6 +69,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // Create streaming request via Responses API
         const events = await openai.responses.create({
+            prompt: PROMPT_ID
+                ? {
+                      id: PROMPT_ID,
+                  }
+                : undefined,
             model: MODEL,
             input: inputMessages,
             instructions: SYSTEM_PROMPT,

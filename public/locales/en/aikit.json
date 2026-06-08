@@ -9,9 +9,21 @@
   },
   "welcome": {
     "title": "Welcome to AI Chat",
-    "description": "Start a conversation by typing a message."
+    "description": "Start a conversation by typing a message.",
+    "suggestion_fakePost": "Generate a fake post",
+    "suggestion_capabilities": "What can you do?"
   },
   "error": {
     "apiError": "Sorry, an error occurred. Please try again."
+  },
+  "feedback": {
+    "popupTitle": "What went wrong?",
+    "reasonIncorrect": "Inaccurate",
+    "reasonIncomplete": "Incomplete",
+    "reasonNotHelpful": "Not helpful",
+    "reasonOther": "Other",
+    "commentPlaceholder": "Tell us more (optional)",
+    "submit": "Send",
+    "thankYou": "Thanks for your feedback!"
   }
 }
