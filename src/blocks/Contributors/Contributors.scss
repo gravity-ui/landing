@@ -86,8 +86,6 @@ $block: '.#{variables.$ns}contributors';
         flex-flow: row wrap;
         gap: 12px;
         align-items: center;
-        justify-content: flex-end;
-        margin-left: auto;
     }
 
     &__newcomers-skeleton-avatar {

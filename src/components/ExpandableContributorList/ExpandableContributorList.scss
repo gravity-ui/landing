@@ -39,22 +39,15 @@ $block: '.#{variables.$ns}expandable-contributor-list';
     &__skeleton-grid-wrapper {
         position: relative;
         overflow: hidden;
-        min-height: 156px;
         margin-bottom: 20px;
     }
 
+    // Mirror base-contributor-list's grid so skeleton avatars stretch and align
+    // exactly like the loaded ones (no fixed size, no per-row offsets).
     &__skeleton-avatar-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    &__skeleton-avatar-row {
         display: grid;
-        gap: 12px;
-        grid-template-columns: repeat(auto-fill, 44px);
-        justify-content: start;
-        padding-left: var(--skeleton-row-offset, 0);
+        gap: 11px;
+        grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
     }
 
     &__skeleton-avatar-cell {

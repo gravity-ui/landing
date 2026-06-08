@@ -5,7 +5,7 @@ import {block} from '../../utils';
 
 import {
     NEWCOMERS_AVATAR_COUNT,
-    SKELETON_AVATAR_SIZE,
+    SKELETON_NEWCOMERS_AVATAR_SIZE,
     SKELETON_SECTION_TITLE_HEIGHT,
     SKELETON_SECTION_TITLE_WIDTH,
 } from './contributorsSkeletonPlacements';
@@ -27,7 +27,10 @@ export const ContributorsNewcomersSkeleton: React.FC = () => {
                     <div key={index} className={b('newcomers-skeleton-avatar-cell')}>
                         <Skeleton
                             className={b('newcomers-skeleton-avatar')}
-                            style={{width: SKELETON_AVATAR_SIZE, height: SKELETON_AVATAR_SIZE}}
+                            style={{
+                                width: SKELETON_NEWCOMERS_AVATAR_SIZE,
+                                height: SKELETON_NEWCOMERS_AVATAR_SIZE,
+                            }}
                         />
                     </div>
                 ))}

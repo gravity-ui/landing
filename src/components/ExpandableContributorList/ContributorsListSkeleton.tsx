@@ -6,7 +6,8 @@ import {block} from '../../utils';
 import './ExpandableContributorList.scss';
 import {SkeletonAvatarGrid} from './SkeletonAvatarGrid';
 import {
-    COMMUNITY_AVATAR_ROWS,
+    SKELETON_COMMUNITY_AVATAR_COUNT,
+    SKELETON_GRID_HEIGHT,
     SKELETON_SECTION_TITLE_HEIGHT,
     SKELETON_SECTION_TITLE_WIDTH,
 } from './contributorsSkeletonPlacements';
@@ -23,8 +24,8 @@ export const ContributorsListSkeleton: React.FC = () => {
                     height: SKELETON_SECTION_TITLE_HEIGHT,
                 }}
             />
-            <div className={b('skeleton-grid-wrapper')}>
-                <SkeletonAvatarGrid rows={COMMUNITY_AVATAR_ROWS} />
+            <div className={b('skeleton-grid-wrapper')} style={{height: SKELETON_GRID_HEIGHT}}>
+                <SkeletonAvatarGrid count={SKELETON_COMMUNITY_AVATAR_COUNT} />
                 <div className={b('inset-shadow')} />
             </div>
             <Skeleton className={b('skeleton-button')} />
