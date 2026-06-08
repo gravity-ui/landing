@@ -9,8 +9,6 @@ import {
 import {
     SKELETON_HEADER_COUNT_HEIGHT,
     SKELETON_HEADER_COUNT_WIDTH,
-    SKELETON_HEADER_TITLE_HEIGHT,
-    SKELETON_HEADER_TITLE_WIDTH,
 } from 'src/components/ExpandableContributorList/contributorsSkeletonPlacements';
 
 import {Contributor} from '../../api';
@@ -31,21 +29,11 @@ export const ContributorsBlock: React.FC<ContributorsProps> = ({animated, title,
         <AnimateBlock className={b()} animate={animated}>
             <div className={b('header-wrapper')}>
                 <h2 className={b('header-title')}>
-                    {isLoaded ? (
-                        <YFMWrapper
-                            content={title}
-                            modifiers={{constructor: true}}
-                            contentClassName={b('header-title-content')}
-                        />
-                    ) : (
-                        <Skeleton
-                            className={b('header-skeleton')}
-                            style={{
-                                width: SKELETON_HEADER_TITLE_WIDTH,
-                                height: SKELETON_HEADER_TITLE_HEIGHT,
-                            }}
-                        />
-                    )}
+                    <YFMWrapper
+                        content={title}
+                        modifiers={{constructor: true}}
+                        contentClassName={b('header-title-content')}
+                    />
                 </h2>
                 <div className={b('header-count')}>
                     {isLoaded ? (
