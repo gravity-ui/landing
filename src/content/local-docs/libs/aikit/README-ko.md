@@ -1,10 +1,12 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-AI 채팅을 위한 UI 컴포넌트 라이브러리로, Atomic Design 원칙을 기반으로 구축되었습니다.
+Atomic Design 원칙을 기반으로 구축된 AI 채팅 UI 컴포넌트 라이브러리입니다.
 
 <!--GITHUB_BLOCK-->
 
 ![Cover image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
+
+![Example image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
 
 ## 리소스
 
@@ -18,7 +20,7 @@ AI 채팅을 위한 UI 컴포넌트 라이브러리로, Atomic Design 원칙을 
 
 ## 설명
 
-**@gravity-ui/aikit**는 복잡한 AI 채팅을 구축하기 위한 유연하고 확장 가능한 React 컴포넌트 라이브러리입니다. 이 라이브러리는 즉시 사용 가능하거나 필요에 맞게 사용자 정의할 수 있는 다양한 기성 컴포넌트를 제공합니다.
+**@gravity-ui/aikit**는 복잡한 AI 채팅을 구축하기 위한 유연하고 확장 가능한 React 컴포넌트 라이브러리입니다. 이 라이브러리는 즉시 사용 가능하거나 필요에 맞게 사용자 정의할 수 있는 기성 컴포넌트 세트를 제공합니다.
 
 ### 주요 기능
 
@@ -89,12 +91,12 @@ function App() {
 
 ### 🔹 Atoms
 
-비즈니스 로직이 없는 기본적인 분리 불가능한 UI 요소:
+비즈니스 로직이 없는 기본적인 분리 불가능한 UI 요소입니다.
 
-- `ActionButton` — 툴팁이 통합된 버튼
+- `ActionButton` — 통합 툴팁이 있는 버튼
 - `Alert` — 다양한 스타일의 알림 메시지
-- `ChatDate` — 상대적 날짜를 포함한 날짜 형식 지정
-- `ContextIndicator` — 토큰 컨텍스트 사용 지표
+- `ChatDate` — 상대 날짜를 포함한 날짜 형식 지정
+- `ContextIndicator` — 토큰 컨텍스트 사용 표시기
 - `ContextItem` — 제거 액션이 있는 컨텍스트 레이블
 - `DiffStat` — 코드 변경 통계 표시
 - `Disclaimer` — 면책 조항 텍스트 컴포넌트
@@ -108,7 +110,7 @@ function App() {
 
 ### 🔸 Molecules
 
-원자들의 간단한 조합:
+원자들의 간단한 조합입니다.
 
 - `BaseMessage` — 모든 메시지 타입에 대한 기본 래퍼
 - `ButtonGroup` — 방향 지원이 있는 버튼 그룹
@@ -124,7 +126,7 @@ function App() {
 
 ### 🔶 Organisms
 
-내부 로직이 포함된 복잡한 컴포넌트:
+내부 로직이 포함된 복잡한 컴포넌트입니다.
 
 - `AssistantMessage` — AI 어시스턴트 메시지
 - `Header` — 채팅 헤더
@@ -136,7 +138,7 @@ function App() {
 
 ### 📄 Templates
 
-완전한 레이아웃:
+완전한 레이아웃입니다.
 
 - `ChatContent` — 메인 채팅 콘텐츠
 - `EmptyContainer` — 빈 상태
@@ -144,7 +146,7 @@ function App() {
 
 ### 📱 Pages
 
-완전한 통합:
+완전한 통합입니다.
 
 - `ChatContainer` — 완전히 조립된 채팅
 

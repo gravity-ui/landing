@@ -1,10 +1,12 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-Biblioteca de componentes de UI para chats de IA construída com princípios de Design Atômico.
+Biblioteca de componentes de UI para chats de IA construída com princípios de Atomic Design.
 
 <!--GITHUB_BLOCK-->
 
 ![Imagem de capa](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
+
+![Imagem de exemplo](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
 
 ## Recursos
 
@@ -22,11 +24,11 @@ Biblioteca de componentes de UI para chats de IA construída com princípios de 
 
 ### Principais Recursos
 
-- 🎨 **Design Atômico** — hierarquia clara de componentes, de átomos a páginas
-- 🔧 **Independente de SDK** — não depende de SDKs de IA específicos
+- 🎨 **Atomic Design** — hierarquia clara de componentes, de átomos a páginas
+- 🔧 **Independente de SDK** — independente de SDKs de IA específicos
 - 🎭 **Abordagem de Dois Níveis** — componentes prontos + hooks para personalização
 - 🎨 **Variáveis CSS** — temas fáceis sem sobrescrever componentes
-- 📦 **TypeScript** — segurança de tipo completa pronta para uso
+- 📦 **TypeScript** — segurança de tipo completa "out of the box"
 - 🔌 **Extensível** — sistema de registro de tipos de mensagem personalizados
 
 ## Estrutura do Projeto
@@ -40,7 +42,7 @@ src/
 │   ├── templates/      # Layouts completos
 │   └── pages/          # Integrações completas com dados
 ├── hooks/              # Hooks de propósito geral
-├── types/              # Tipos TypeScript
+├── types/              # Tipos do TypeScript
 ├── utils/              # Utilitários
 └── themes/             # Temas CSS e variáveis
 ```
@@ -76,7 +78,7 @@ function App() {
                 // Criar novo chat
             }}
             onDeleteChat={(chat) => {
-                // Excluir chat
+                // Deletar chat
             }}
         />
     );
@@ -85,11 +87,11 @@ function App() {
 
 ## Arquitetura
 
-A biblioteca é construída com base nos princípios do **Design Atômico**:
+A biblioteca é construída com base nos princípios de **Atomic Design**:
 
 ### 🔹 Átomos
 
-Elementos básicos de UI indivisíveis sem lógica de negócios:
+Elementos básicos de UI indivisíveis, sem lógica de negócios:
 
 - `ActionButton` — botão com tooltip integrado
 - `Alert` — mensagens de alerta com variantes
@@ -100,7 +102,7 @@ Elementos básicos de UI indivisíveis sem lógica de negócios:
 - `Disclaimer` — componente de texto de aviso
 - `InlineCitation` — citações de texto
 - `Loader` — indicador de carregamento
-- `MarkdownRenderer` — renderizador de Markdown no estilo Yandex
+- `MarkdownRenderer` — renderizador Yandex Flavored Markdown
 - `MessageBalloon` — wrapper de mensagem
 - `Shimmer` — efeito de animação de carregamento
 - `SubmitButton` — botão de envio com estados
@@ -116,7 +118,7 @@ Combinações simples de átomos:
 - `PromptInputBody` — área de texto com auto-redimensionamento
 - `PromptInputFooter` — rodapé com ícones de ação e botão de envio
 - `PromptInputHeader` — cabeçalho com itens de contexto e indicador
-- `PromptInputPanel` — painel contêiner para conteúdo personalizado
+- `PromptInputPanel` — painel para conteúdo personalizado
 - `Suggestions` — botões de sugestão clicáveis
 - `Tabs` — abas de navegação com funcionalidade de exclusão
 - `ToolFooter` — rodapé de mensagem de ferramenta com ações
@@ -140,7 +142,7 @@ Layouts completos:
 
 - `ChatContent` — conteúdo principal do chat
 - `EmptyContainer` — estado vazio
-- `History` — histórico de chat
+- `History` — histórico do chat
 
 ### 📱 Páginas
 
@@ -165,16 +167,16 @@ O projeto utiliza o Playwright Component Testing para testes de regressão visua
 **Importante**: Todos os testes devem ser executados via Docker para garantir capturas de tela consistentes em diferentes ambientes.
 
 ```bash
-# Executa todos os testes de componente no Docker (recomendado)
+# Executar todos os testes de componente no Docker (recomendado)
 npm run playwright:docker
 
-# Atualiza as linhas de base das capturas de tela no Docker
+# Atualizar as linhas de base das capturas de tela no Docker
 npm run playwright:docker:update
 
-# Executa um teste específico por padrão de grep no Docker
+# Executar um teste específico por padrão de grep no Docker
 npm run playwright:docker -- --grep "@ComponentName"
 
-# Limpa o cache do Docker, se necessário
+# Limpar o cache do Docker, se necessário
 npm run playwright:docker:clear-cache
 ```
 
@@ -183,11 +185,11 @@ npm run playwright:docker:clear-cache
 Se você estiver no Linux, pode executar os testes localmente:
 
 ```bash
-# Instala os navegadores do Playwright (execute uma vez)
+# Instalar navegadores do Playwright (executar uma vez)
 npm run playwright:install
-# Executa todos os testes de componente
+# Executar todos os testes de componente
 npm run playwright
-# Atualiza as linhas de base das capturas de tela
+# Atualizar as linhas de base das capturas de tela
 npm run playwright:update
 ```
 

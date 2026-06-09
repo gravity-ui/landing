@@ -1,14 +1,16 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-Biblioteca de componentes de UI para chats de IA construida con principios de Atomic Design.
+Biblioteca de componentes de UI para chats de IA construida con principios de Diseño Atómico.
 
 <!--GITHUB_BLOCK-->
 
 ![Imagen de portada](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
 
+![Imagen de ejemplo](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
+
 ## Recursos
 
-### ![Logo de Globo Claro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Logo de Globo Oscuro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Sitio web](https://gravity-ui.com/libraries/aikit)
+### ![Logo del Globo Claro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Logo del Globo Oscuro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Sitio web](https://gravity-ui.com/libraries/aikit)
 
 ### ![Logo de Storybook Claro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Logo de Storybook Oscuro](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/aikit/)
 
@@ -18,14 +20,14 @@ Biblioteca de componentes de UI para chats de IA construida con principios de At
 
 ## Descripción
 
-**@gravity-ui/aikit** es una biblioteca de componentes React flexible y extensible para construir chats de IA de cualquier complejidad. La biblioteca proporciona un conjunto de componentes listos para usar que se pueden utilizar tal cual o personalizar para adaptarse a tus necesidades.
+**@gravity-ui/aikit** es una biblioteca de componentes React flexible y extensible para construir chats de IA de cualquier complejidad. La biblioteca proporciona un conjunto de componentes listos para usar que pueden ser utilizados tal cual o personalizados para adaptarse a tus necesidades.
 
 ### Características principales
 
-- 🎨 **Atomic Design** — jerarquía de componentes clara, desde átomos hasta páginas
+- 🎨 **Diseño Atómico** — jerarquía de componentes clara desde átomos hasta páginas
 - 🔧 **Independiente del SDK** — independiente de SDKs de IA específicos
-- 🎭 **Enfoque de dos niveles** — componentes listos para usar + hooks para personalización
-- 🎨 **Variables CSS** — tematización sencilla sin sobrescribir componentes
+- 🎭 **Enfoque de Dos Niveles** — componentes listos para usar + hooks para personalización
+- 🎨 **Variables CSS** — tematización fácil sin sobrescrituras de componentes
 - 📦 **TypeScript** — seguridad de tipos completa desde el principio
 - 🔌 **Extensible** — sistema de registro de tipos de mensajes personalizados
 
@@ -34,8 +36,8 @@ Biblioteca de componentes de UI para chats de IA construida con principios de At
 ```
 src/
 ├── components/
-│   ├── atoms/          # Elementos básicos de UI indivisibles
-│   ├── molecules/      # Grupos sencillos de átomos
+│   ├── atoms/          # Elementos básicos indivisibles de la UI
+│   ├── molecules/      # Grupos simples de átomos
 │   ├── organisms/      # Componentes complejos con lógica
 │   ├── templates/      # Diseños completos
 │   └── pages/          # Integraciones completas con datos
@@ -85,11 +87,11 @@ function App() {
 
 ## Arquitectura
 
-La biblioteca está construida sobre los principios de **Atomic Design**:
+La biblioteca está construida sobre los principios del **Diseño Atómico**:
 
 ### 🔹 Átomos
 
-Elementos básicos de UI indivisibles sin lógica de negocio:
+Elementos básicos de la UI indivisibles sin lógica de negocio:
 
 - `ActionButton` — botón con tooltip integrado
 - `Alert` — mensajes de alerta con variantes
@@ -101,23 +103,23 @@ Elementos básicos de UI indivisibles sin lógica de negocio:
 - `InlineCitation` — citas de texto
 - `Loader` — indicador de carga
 - `MarkdownRenderer` — renderizador de Yandex Flavored Markdown
-- `MessageBalloon` — contenedor de mensajes
+- `MessageBalloon` — contenedor de mensaje
 - `Shimmer` — efecto de animación de carga
 - `SubmitButton` — botón de envío con estados
 - `ToolIndicator` — indicador de estado de ejecución de herramienta
 
 ### 🔸 Moléculas
 
-Combinaciones sencillas de átomos:
+Combinaciones simples de átomos:
 
 - `BaseMessage` — contenedor base para todos los tipos de mensajes
 - `ButtonGroup` — grupo de botones con soporte de orientación
 - `InputContext` — gestión de contexto
-- `PromptInputBody` — textarea con auto-redimensionamiento
+- `PromptInputBody` — área de texto con auto-crecimiento
 - `PromptInputFooter` — pie de página con iconos de acción y botón de envío
 - `PromptInputHeader` — encabezado con elementos de contexto e indicador
 - `PromptInputPanel` — panel contenedor para contenido personalizado
-- `Suggestions` — botones de sugerencias clickeables
+- `Suggestions` — botones de sugerencia clickeables
 - `Tabs` — pestañas de navegación con funcionalidad de eliminación
 - `ToolFooter` — pie de página de mensaje de herramienta con acciones
 - `ToolHeader` — encabezado de mensaje de herramienta con icono y acciones
@@ -140,7 +142,7 @@ Diseños completos:
 
 - `ChatContent` — contenido principal del chat
 - `EmptyContainer` — estado vacío
-- `History` — historial de chat
+- `History` — historial del chat
 
 ### 📱 Páginas
 

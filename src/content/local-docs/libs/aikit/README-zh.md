@@ -1,10 +1,12 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-专为 AI 聊天设计的 UI 组件库，遵循原子设计原则。
+为 AI 聊天构建的 UI 组件库，遵循原子设计原则。
 
 <!--GITHUB_BLOCK-->
 
 ![Cover image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
+
+![Example image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
 
 ## 资源
 
@@ -16,18 +18,18 @@
 
 <!--/GITHUB_BLOCK-->
 
-## 简介
+## 描述
 
-**@gravity-ui/aikit** 是一个灵活且可扩展的 React 组件库，用于构建各种复杂度的 AI 聊天应用。该库提供了一系列现成的组件，您可以直接使用，也可以根据您的需求进行定制。
+**@gravity-ui/aikit** 是一个灵活且可扩展的 React 组件库，用于构建任何复杂度的 AI 聊天。该库提供了一组现成的组件，您可以直接使用，也可以根据您的需求进行自定义。
 
 ### 主要特性
 
 - 🎨 **原子设计** — 从原子到页面的清晰组件层级结构
-- 🔧 **SDK 无关** — 不依赖于任何特定的 AI SDK
-- 🎭 **两层方法** — 现成组件 + 用于定制的 Hooks
-- 🎨 **CSS 变量** — 无需覆盖组件即可轻松实现主题切换
+- 🔧 **SDK 无关** — 不依赖于特定的 AI SDK
+- 🎭 **两级方法** — 现成组件 + 用于自定义的 Hooks
+- 🎨 **CSS 变量** — 无需覆盖组件即可轻松实现主题化
 - 📦 **TypeScript** — 开箱即用的完整类型安全
-- 🔌 **可扩展性** — 自定义消息类型注册系统
+- 🔌 **可扩展** — 自定义消息类型注册系统
 
 ## 项目结构
 
@@ -38,9 +40,9 @@ src/
 │   ├── molecules/      # 原子的简单组合
 │   ├── organisms/      # 带有逻辑的复杂组件
 │   ├── templates/      # 完整的布局
-│   └── pages/          # 与数据完全集成的页面
+│   └── pages/          # 与数据完全集成
 ├── hooks/              # 通用 Hooks
-├── types/              # TypeScript 类型定义
+├── types/              # TypeScript 类型
 ├── utils/              # 工具函数
 └── themes/             # CSS 主题和变量
 ```
@@ -51,7 +53,7 @@ src/
 npm install @gravity-ui/aikit
 ```
 
-## 快速开始
+## 快速入门
 
 ```typescript
 import { ChatContainer } from '@gravity-ui/aikit';
@@ -92,10 +94,10 @@ function App() {
 不包含业务逻辑的基本 UI 元素：
 
 - `ActionButton` — 带集成工具提示的按钮
-- `Alert` — 带不同变体的警告消息
+- `Alert` — 带变体的警告消息
 - `ChatDate` — 带相对日期的日期格式化
 - `ContextIndicator` — token 上下文使用指示器
-- `ContextItem` — 带移除操作的上下文标签
+- `ContextItem` — 带删除操作的上下文标签
 - `DiffStat` — 代码变更统计显示
 - `Disclaimer` — 免责声明文本组件
 - `InlineCitation` — 行内引用
@@ -113,10 +115,10 @@ function App() {
 - `BaseMessage` — 所有消息类型的基本包装器
 - `ButtonGroup` — 支持方向的按钮组
 - `InputContext` — 上下文管理
-- `PromptInputBody` — 可自动扩展的文本区域
+- `PromptInputBody` — 带自动增长的文本区域
 - `PromptInputFooter` — 带操作图标和提交按钮的页脚
 - `PromptInputHeader` — 带上下文项和指示器的页眉
-- `PromptInputPanel` — 用于自定义内容的面板容器
+- `PromptInputPanel` — 自定义内容的面板容器
 - `Suggestions` — 可点击的建议按钮
 - `Tabs` — 带删除功能的导航标签页
 - `ToolFooter` — 带操作的工具消息页脚
@@ -124,10 +126,10 @@ function App() {
 
 ### 🔶 Organisms (有机体)
 
-包含内部逻辑的复杂组件：
+带有内部逻辑的复杂组件：
 
 - `AssistantMessage` — AI 助手消息
-- `Header` — 聊天头部
+- `Header` — 聊天标题
 - `MessageList` — 消息列表
 - `PromptInput` — 消息输入框
 - `ThinkingMessage` — AI 思考过程
@@ -140,11 +142,11 @@ function App() {
 
 - `ChatContent` — 主要聊天内容
 - `EmptyContainer` — 空状态
-- `History` — 聊天历史
+- `History` — 聊天记录
 
 ### 📱 Pages (页面)
 
-完整的集成：
+完全集成：
 
 - `ChatContainer` — 完全组装的聊天界面
 
