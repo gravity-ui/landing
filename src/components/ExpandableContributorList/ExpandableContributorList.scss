@@ -7,24 +7,67 @@ $block: '.#{variables.$ns}expandable-contributor-list';
 
 #{$block} {
     display: grid;
+    grid-template-rows: 1fr auto;
     row-gap: 20px;
-    grid-template-rows: 0fr auto;
-    transition: grid-template-rows 0.3s ease;
 
-    &_expanded {
-        grid-template-rows: 1fr auto;
+    &__list-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.3s ease;
+
+        &_expanded {
+            grid-template-rows: 1fr;
+        }
     }
 
-    &_notExpandable {
+    &_notExpandable &__list-wrapper {
         grid-template-rows: unset;
     }
 
-    &__loader {
-        width: 100%;
-        height: 276px;
+    &__skeleton {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__skeleton-section-title {
+        max-width: 100%;
+        margin-bottom: 32px;
+        border-radius: 4px;
+    }
+
+    &__skeleton-grid-wrapper {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    // Mirror base-contributor-list's grid so skeleton avatars stretch and align
+    // exactly like the loaded ones (no fixed size, no per-row offsets).
+    &__skeleton-avatar-grid {
+        display: grid;
+        gap: 11px;
+        grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+    }
+
+    &__skeleton-avatar-cell {
+        position: relative;
+        padding: 100% 0 0;
+    }
+
+    &__skeleton-avatar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+    &__skeleton-button {
+        width: 100%;
+        height: 44px;
+        border-radius: 100px;
     }
 
     &__inset-shadow {

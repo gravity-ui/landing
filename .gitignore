@@ -40,3 +40,4 @@ yarn-error.log*
 
 # Circular dependency graphs
 circular-deps*.svg
+CLAUDE.md
