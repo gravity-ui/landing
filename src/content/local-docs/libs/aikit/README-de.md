@@ -6,6 +6,8 @@ UI-Komponentenbibliothek für KI-Chats, aufgebaut nach den Prinzipien des Atomic
 
 ![Cover image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
 
+![Example image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
+
 ## Ressourcen
 
 ### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Website](https://gravity-ui.com/libraries/aikit)
@@ -92,19 +94,19 @@ Die Bibliothek basiert auf den Prinzipien des **Atomic Design**:
 Grundlegende, unteilbare UI-Elemente ohne Geschäftslogik:
 
 - `ActionButton` — Schaltfläche mit integriertem Tooltip
-- `Alert` — Alarmmeldungen mit Varianten
+- `Alert` — Benachrichtigungsnachrichten mit Varianten
 - `ChatDate` — Datumsformatierung mit relativen Daten
 - `ContextIndicator` — Anzeige der Nutzung von Token-Kontext
-- `ContextItem` — Kontext-Label mit Entfernen-Aktion
+- `ContextItem` — Kontext-Label mit Entfernungsaktion
 - `DiffStat` — Anzeige von Code-Änderungsstatistiken
-- `Disclaimer` — Komponente für Haftungsausschlüsse
+- `Disclaimer` — Komponente für Haftungsausschlusstexte
 - `InlineCitation` — Textzitate
 - `Loader` — Ladeanzeige
 - `MarkdownRenderer` — Yandex Flavored Markdown Renderer
 - `MessageBalloon` — Nachrichten-Wrapper
 - `Shimmer` — Ladeanimations-Effekt
 - `SubmitButton` — Senden-Schaltfläche mit Zuständen
-- `ToolIndicator` — Anzeige des Status der Tool-Ausführung
+- `ToolIndicator` — Anzeige des Status der Werkzeugausführung
 
 ### 🔸 Moleküle
 
@@ -119,8 +121,8 @@ Einfache Kombinationen von Atomen:
 - `PromptInputPanel` — Panel-Container für benutzerdefinierten Inhalt
 - `Suggestions` — klickbare Vorschlags-Schaltflächen
 - `Tabs` — Navigations-Tabs mit Löschfunktion
-- `ToolFooter` — Fußzeile für Tool-Nachrichten mit Aktionen
-- `ToolHeader` — Kopfzeile für Tool-Nachrichten mit Symbol und Aktionen
+- `ToolFooter` — Fußzeile für Werkzeugnachrichten mit Aktionen
+- `ToolHeader` — Kopfzeile für Werkzeugnachrichten mit Symbol und Aktionen
 
 ### 🔶 Organismen
 
@@ -131,7 +133,7 @@ Komplexe Komponenten mit interner Logik:
 - `MessageList` — Nachrichtenliste
 - `PromptInput` — Eingabefeld für Nachrichten
 - `ThinkingMessage` — Denkprozess der KI
-- `ToolMessage` — Ausführung von Tools
+- `ToolMessage` — Ausführung von Werkzeugen
 - `UserMessage` — Benutzernachricht
 
 ### 📄 Vorlagen
@@ -156,7 +158,7 @@ Vollständige Integrationen:
 - [Testanleitung](./docs/TESTING.md)
 - [Playwright-Anleitung](./playwright/README.md)
 
-## Testen
+## Tests
 
 Das Projekt verwendet Playwright Component Testing für visuelle Regressionstests.
 
@@ -171,14 +173,14 @@ npm run playwright:docker
 # Screenshot-Baselines in Docker aktualisieren
 npm run playwright:docker:update
 
-# Spezifischen Test nach Grep-Muster in Docker ausführen
+# Spezifischen Test anhand eines Grep-Musters in Docker ausführen
 npm run playwright:docker -- --grep "@ComponentName"
 
 # Docker-Cache bei Bedarf löschen
 npm run playwright:docker:clear-cache
 ```
 
-### Lokales Testen (nur Linux)
+### Lokale Tests (nur Linux)
 
 Wenn Sie unter Linux arbeiten, können Sie Tests lokal ausführen:
 

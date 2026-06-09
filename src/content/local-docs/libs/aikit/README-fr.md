@@ -6,6 +6,8 @@ Bibliothèque de composants UI pour les chats IA construite selon les principes 
 
 ![Cover image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
 
+![Example image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
+
 ## Ressources
 
 ### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Site web](https://gravity-ui.com/libraries/aikit)
@@ -18,15 +20,15 @@ Bibliothèque de composants UI pour les chats IA construite selon les principes 
 
 ## Description
 
-**@gravity-ui/aikit** est une bibliothèque de composants React flexible et extensible pour construire des chats IA de toute complexité. La bibliothèque fournit un ensemble de composants prêts à l'emploi qui peuvent être utilisés tels quels ou personnalisés pour répondre à vos besoins.
+**@gravity-ui/aikit** est une bibliothèque de composants React flexible et extensible pour la création de chats IA de toute complexité. La bibliothèque fournit un ensemble de composants prêts à l'emploi qui peuvent être utilisés tels quels ou personnalisés pour répondre à vos besoins.
 
 ### Fonctionnalités clés
 
 - 🎨 **Atomic Design** — hiérarchie claire des composants, des atomes aux pages
-- 🔧 **Indépendant du SDK** — indépendant des SDK IA spécifiques
+- 🔧 **SDK Agnostique** — indépendant des SDK IA spécifiques
 - 🎭 **Approche à deux niveaux** — composants prêts à l'emploi + hooks pour la personnalisation
-- 🎨 **Variables CSS** — thématisation facile sans avoir à surcharger les composants
-- 📦 **TypeScript** — sécurité de type complète dès le départ
+- 🎨 **Variables CSS** — thèmes faciles sans remplacement de composants
+- 📦 **TypeScript** — sécurité de type complète prête à l'emploi
 - 🔌 **Extensible** — système d'enregistrement de types de messages personnalisés
 
 ## Structure du projet
@@ -38,7 +40,7 @@ src/
 │   ├── molecules/      # Groupes simples d'atomes
 │   ├── organisms/      # Composants complexes avec logique
 │   ├── templates/      # Mises en page complètes
-│   └── pages/          # Intégrations complètes avec les données
+│   └── pages/          # Intégrations complètes avec des données
 ├── hooks/              # Hooks à usage général
 ├── types/              # Types TypeScript
 ├── utils/              # Utilitaires
@@ -85,13 +87,13 @@ function App() {
 
 ## Architecture
 
-La bibliothèque est construite sur les principes de l'**Atomic Design** :
+La bibliothèque est construite selon les principes de l'**Atomic Design** :
 
 ### 🔹 Atomes
 
 Éléments UI de base indivisibles sans logique métier :
 
-- `ActionButton` — bouton avec info-bulle intégrée
+- `ActionButton` — bouton avec tooltip intégré
 - `Alert` — messages d'alerte avec variantes
 - `ChatDate` — formatage de date avec dates relatives
 - `ContextIndicator` — indicateur d'utilisation du contexte de jeton
@@ -116,7 +118,7 @@ Combinaisons simples d'atomes :
 - `PromptInputBody` — zone de texte avec redimensionnement automatique
 - `PromptInputFooter` — pied de page avec icônes d'action et bouton de soumission
 - `PromptInputHeader` — en-tête avec éléments de contexte et indicateur
-- `PromptInputPanel` — panneau pour le contenu personnalisé
+- `PromptInputPanel` — panneau conteneur pour le contenu personnalisé
 - `Suggestions` — boutons de suggestion cliquables
 - `Tabs` — onglets de navigation avec fonctionnalité de suppression
 - `ToolFooter` — pied de page du message de l'outil avec actions
@@ -158,14 +160,14 @@ Intégrations complètes :
 
 ## Tests
 
-Le projet utilise Playwright Component Testing pour les tests de régression visuelle.
+Le projet utilise le test de composant Playwright pour les tests de régression visuelle.
 
 ### Exécuter les tests
 
 **Important** : Tous les tests doivent être exécutés via Docker pour garantir des captures d'écran cohérentes entre les différents environnements.
 
 ```bash
-# Exécuter tous les tests de composants dans Docker (recommandé)
+# Exécuter tous les tests de composant dans Docker (recommandé)
 npm run playwright:docker
 
 # Mettre à jour les captures d'écran de référence dans Docker
@@ -185,7 +187,7 @@ Si vous êtes sous Linux, vous pouvez exécuter les tests localement :
 ```bash
 # Installer les navigateurs Playwright (à exécuter une fois)
 npm run playwright:install
-# Exécuter tous les tests de composants
+# Exécuter tous les tests de composant
 npm run playwright
 # Mettre à jour les captures d'écran de référence
 npm run playwright:update
