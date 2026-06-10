@@ -13,7 +13,7 @@ npm install @gravity-ui/navigation
 请确保您的项目中已安装对等依赖项
 
 ```bash
-npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## Sandboxes

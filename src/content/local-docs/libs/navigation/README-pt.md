@@ -10,10 +10,10 @@
 npm install @gravity-ui/navigation
 ```
 
-Certifique-se de que as dependências de pares estejam instaladas em seu projeto
+Certifique-se de que as dependências peer estejam instaladas em seu projeto
 
 ```bash
-npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## Sandboxes
@@ -24,11 +24,11 @@ https://codesandbox.io/p/devbox/navigation-demo-simple-x9k5sd
 Avançado
 https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
-## Roteiro 2025
+## Roadmap 2025
 
 1. Suporte a SSR
 2. Adicionar mais documentação e exemplos ao [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Suporte à navegação no tema UIKit
+3. Suporte à navegação no tema do UIKit
 4. Unificar as APIs de `subheaderItem`, `menuItem` e `footerItem`
 
 ## Componentes
