@@ -13,7 +13,7 @@ npm install @gravity-ui/navigation
 Asegúrate de que las dependencias peer estén instaladas en tu proyecto
 
 ```bash
-npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## Sandboxes
@@ -28,8 +28,8 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 1. Soporte para SSR
 2. Añadir más documentación y ejemplos a [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Soporte para la tematización de Navegación en UIKit
-4. Unificar las API de subheaderItem, menuItem y footerItem
+3. Soporte para la navegación en el tematizador de UIKit
+4. Unificar la API de subheaderItem, menuItem, footerItem
 
 ## Componentes
 
@@ -53,4 +53,4 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## API CSS
 
-Se utiliza para la tematización de los componentes de Navegación
+Se utiliza para tematizar los componentes de Navegación

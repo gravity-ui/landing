@@ -13,7 +13,7 @@ npm install @gravity-ui/navigation
 Stellen Sie sicher, dass die Peer-Abhängigkeiten in Ihrem Projekt installiert sind
 
 ```bash
-npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## Sandboxes
@@ -53,4 +53,4 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## CSS API
 
-Wird für die Thematisierung von Navigationskomponenten verwendet
+Wird für die Thematisierung von Navigation-Komponenten verwendet
