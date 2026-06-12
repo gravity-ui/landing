@@ -1,0 +1,1 @@
+export {OklchPalette} from './OklchPalette';
