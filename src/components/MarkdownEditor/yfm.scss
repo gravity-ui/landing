@@ -102,12 +102,10 @@
     .yfm-tab.active {
         border-bottom-color: var(--g-color-line-brand);
     }
-}
 
-.g-root_theme_dark .yfm,
-.g-root_theme_dark-hc .yfm {
     .yfm-cut-title:before {
-        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNykiIGZpbGw9Im5vbmUiIGQ9Ik0zIDZsNSA1IDUtNSI+PC9wYXRoPjwvc3ZnPg==');
+        color: var(--yfm-file-icon-color);
+        background-image: url('../../assets/yfm-cut-chevron.svg');
     }
 }
 
