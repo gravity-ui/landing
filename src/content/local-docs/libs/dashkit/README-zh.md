@@ -25,12 +25,12 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layout[];
-    oldItem: Layout;
-    newItem: Layout;
-    placeholder: Layout;
-    e: MouseEvent;
-    element: HTMLElement;
+  layout: Layout[];
+  oldItem: Layout;
+  newItem: Layout;
+  placeholder: Layout;
+  e: MouseEvent;
+  element: HTMLElement;
 }) => void;
 
 interface DashKitProps {
@@ -75,10 +75,10 @@ interface DashKitProps {
 - **onDrop**: 使用 (#DashKitDnDWrapper) 从 ActionPanel 拖放项目时调用
 - **onItemMountChange**: 项目挂载状态更改时调用
 - **onItemRender**: 项目渲染完成时调用
-- **defaultGlobalParams**, **globalParams**: 影响所有小部件的 [参数](#Params)。在 DataLens 中，`defaultGlobalParams` 是在仪表盘设置中设置的全局参数。`globalParams` 是可以在 URL 中设置的全局参数。
+- **defaultGlobalParams**, **globalParams**: 影响所有小部件的[参数](#Params)。在 DataLens 中，`defaultGlobalParams` 是在仪表盘设置中设置的全局参数。`globalParams` 是可以在 URL 中设置的全局参数。
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)。
 - **settings**: DashKit 设置。
-- **context**: 将会传递给所有小部件的对象。
+- **context**: 将被传递给所有小部件的对象。
 - **overlayControls**: 在编辑时覆盖小部件控件的对象。如果未传递，将显示基本控件。如果传递 `null`，则仅显示关闭按钮或自定义菜单。
 - **overlayMenuItems**: 自定义下拉菜单项
 - **noOverlay**: 如果为 `true`，则在编辑时不会显示覆盖层和控件。
@@ -92,8 +92,8 @@ interface DashKitProps {
 - **onResizeStart**: ReactGridLayout 在项目调整大小开始时调用
 - **onResize**: ReactGridLayout 在项目调整大小时调用
 - **onResizeStop**: ReactGridLayout 在项目调整大小停止时调用
-- **getPreparedCopyItemOptions**: 在保存到本地存储之前，用于将复制的项目转换为可序列化对象。它应该取代已弃用的 `context.getPreparedCopyItemOptions` prop
-- **onCopyFulfill**: 在项目复制成功完成时调用，此时 `error=null` 且 `data` 已定义；否则，将调用 `error: Error` 而不带 `data`
+- **getPreparedCopyItemOptions**: 在保存到本地存储之前，用于将复制的项目转换为可序列化对象时调用。它应该替代已弃用的 `context.getPreparedCopyItemOptions` prop
+- **onCopyFulfill**: 在项目复制成功完成时（`error=null` 且 `data` 已定义）调用，否则以 `error: Error` 而不带 `data` 调用
 
 ## 用法
 
@@ -152,7 +152,7 @@ interface DashKitProps {
   });
   ```
 
-### 配置
+### Config
 
 ```ts
 export interface Config {
@@ -165,7 +165,7 @@ export interface Config {
 }
 ```
 
-配置示例：
+Config 示例：
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -180,7 +180,7 @@ const config: DashKitProps['config'] = {
       id: 'tT',
       data: {
         size: 'm',
-        text: '标题',
+        text: 'Caption',
         showInTOC: true,
       },
       type: 'title',
@@ -190,7 +190,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'Ea',
       data: {
-        text: '模式 _editActive',
+        text: 'mode _editActive',
         _editActive: true,
       },
       type: 'text',
@@ -199,7 +199,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'zR',
       data: {
-        text: '### 文本',
+        text: '### Text',
       },
       type: 'text',
       namespace: 'default',
@@ -273,7 +273,7 @@ const newLayout = updateLayout: [
 const newConfig = DashKit.setItem({
   item: {
     data: {
-      text: `一些文本`,
+      text: `Some text`,
     },
     namespace: 'default',
     type: 'text',
@@ -293,7 +293,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-更改现有项：
+更改配置中的现有项：
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -301,7 +301,7 @@ const newConfig = DashKit.setItem({
     id: 'tT', // item.id
     data: {
       size: 'm',
-      text: `新的标题`,
+      text: `New caption`,
     },
     namespace: 'default',
     type: 'title',
@@ -310,7 +310,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-删除一项：
+从配置中删除一项：
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -324,7 +324,7 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 });
 ```
 
-### 参数
+### Params
 
 ```ts
 type Params = Record<string, string | string[]>;
@@ -368,17 +368,91 @@ interface ItemsStateAndParamsBase {
 type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 ```
 
+### 实验性 DashKit 事件
+
+> 实验性：此 API 可能会在次要版本中发生更改。
+
+`DashKit` 公开了一个实验性的实例事件 API。使用组件 ref 并通过 `dashkitRef.current?.on(eventName, handler)` 进行订阅。该方法返回一个取消订阅的回调函数。
+
+支持的第一个事件是 `change`。当布局发生更改时会发出此事件，在调用 `onChange` 之前。处理程序可以读取完整的下一个和上一个布局，读取布局补丁，或调用 `preventDefault()` 来阻止默认的 `onChange` 调用。
+
+```tsx
+import React from 'react';
+import {DashKit} from '@gravity-ui/dashkit';
+import type {DashKitChangeEvent} from '@gravity-ui/dashkit';
+
+function Dashboard() {
+  const dashkitRef = React.useRef<DashKit>(null);
+
+  React.useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event: DashKitChangeEvent) => {
+      console.log(event.patches);
+
+      if (event.patches.length > 0) {
+        event.preventDefault();
+      }
+    });
+
+    return () => unsubscribe?.();
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode={true} onChange={onChange} />;
+}
+```
+
+```ts
+type DashKitLayoutPatch = Pick<ConfigLayout, 'i'> &
+  Partial<Pick<ConfigLayout, 'x' | 'y' | 'w' | 'h' | 'parent'>>;
+
+type DashKitChangeEvent = {
+  patches: DashKitLayoutPatch[];
+  layout: ConfigLayout[];
+  previousLayout: ConfigLayout[];
+  preventDefault: () => void;
+  readonly defaultPrevented: boolean;
+};
+```
+
+#### 事件驱动的布局更新
+
+如果您在 `change` 事件处理程序中使用了 `preventDefault()`，现在您可以处理布局更新而无需重新初始化 `config` prop。DashKit 会维护一个内部基线并逐步计算补丁：
+
+```tsx
+function Dashboard() {
+  const [config, setConfig] = useState(initialConfig);
+  const dashkitRef = useRef<DashKit>(null);
+
+  useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event) => {
+      event.preventDefault(); // 不调用 onChange
+
+      // 只将增量补丁发送到您的后端
+      sendPatches(event.patches);
+
+      // 无需调用 setConfig({ ...config, layout: event.layout })
+      // DashKit 会在内部维护视觉状态
+    });
+
+    return unsubscribe;
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode onChange={() => {}} />;
+}
+```
+
+**重要提示：** 如果您之后从 props 更新 `config.layout`（例如，从服务器同步），DashKit 会重置其内部基线以匹配新的 prop。这确保了与事件驱动和受控工作流的兼容性。
+
 ### 菜单
 
-在编辑模式下，您可以为 DashKit 小部件指定自定义覆盖菜单。
+您可以在编辑模式下为 DashKit 指定自定义的 widget 覆盖菜单。
 
 ```ts
 type MenuItem = {
   id: string; // 唯一 ID
   title?: string; // 字符串标题
   icon?: ReactNode; // 图标节点
-  iconSize?: number | string; // 图标大小，以像素为单位（数字）或带单位的字符串
-  handler?: (item: ConfigItem) => void; // 自定义项操作处理程序
+  iconSize?: number | string; // 图标大小，以 px 为单位的数字或带单位的字符串
+  handler?: (item: ConfigItem) => void; // 自定义菜单项操作处理程序
   visible?: (item: ConfigItem) => boolean; // 用于过滤菜单项的可选可见性处理程序
   className?: string; // 自定义类属性
 };
@@ -387,11 +461,11 @@ type MenuItem = {
 <Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
 
 [已弃用]
-// overlayMenuItems 属性的优先级高于 setSettings 菜单
+// overlayMenuItems 属性的优先级高于 setSettings 的 menu
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
 
-### 从 ActionPanel 拖动的项
+### 从 ActionPanel 拖拽项目
 
 #### DashKitDnDWrapper
 
@@ -405,37 +479,40 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string; // 拖动图像预览，默认使用透明的 1px png base64
-  onDragStart?: (dragProps: ItemDragProps) => void; // 当元素从 ActionPanel 拖动时调用的回调
-  onDragEnd?: () => void; // 当元素被放置或拖动取消时调用的回调
-  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean; // 当元素被放置在目标上时调用的回调
+  dragImageSrc?: string; // 拖拽图像预览，默认使用透明的 1px png base64
+  onDragStart?: (dragProps: ItemDragProps) => void; // 当元素从 ActionPanel 拖拽时调用的回调
+  onDragEnd?: () => void; // 当元素被放置或拖拽取消时调用的回调
+  onDropDragOver?: (
+    draggedItem: DraggedOverItem,
+    sharedItem: DraggedOverItem | null,
+  ) => void | boolean;
 }
 ```
 
-- **dragImageSrc**: 拖动图像预览，默认使用透明的 1px png base64。
-- **onDragStart**: 当元素从 ActionPanel 拖动时调用的回调。
-- **onDragEnd**: 当元素被放置或拖动取消时调用的回调。
+- **dragImageSrc**: 拖拽图像预览，默认使用透明的 1px png base64。
+- **onDragStart**: 当元素从 ActionPanel 拖拽时调用的回调。
+- **onDragEnd**: 当元素被放置或拖拽取消时调用的回调。
 
 ```ts
 type ItemDragProps = {
-    type: string; // 插件类型
-    layout?: { // 可选。用于预览和初始化的布局项大小
-        w?: number;
-        h?: number;
-    };
-    extra?: any; // 自定义用户上下文
+  type: string; // 插件类型
+  layout?: {
+    // 可选。用于预览和初始化的布局项大小
+    w?: number;
+    h?: number;
+  };
+  extra?: any; // 自定义用户上下文
 };
 ```
 
 ```ts
 type ItemDropProps = {
-    commit: () => void; // 在所有配置操作完成后应调用此回调
-    dragProps: ItemDragProps; // 项拖拽属性
-    itemLayout: ConfigLayout; // 计算出的项布局尺寸
-    newLayout: ConfigLayout[]; // 元素放置后的新布局
+  commit: () => void; // 在所有配置操作完成后应调用的回调
+  dragProps: ItemDragProps; // 项目拖拽属性
+  itemLayout: ConfigLayout; // 计算出的项目布局尺寸
+  newLayout: ConfigLayout[]; // 元素被放置后的新布局
 };
 ```
-
 
 #### 示例：
 
@@ -467,25 +544,25 @@ const onDrop = (dropProps: ItemDropProps) => {
 
 | 名称                                           | 描述           |
 | :--------------------------------------------- | :------------- |
-| 操作面板变量                                   |                |
+| Action panel 变量                              |                |
 | `--dashkit-action-panel-color`                 | 背景颜色       |
 | `--dashkit-action-panel-border-color`          | 边框颜色       |
 | `--dashkit-action-panel-border-radius`         | 边框圆角       |
-| 操作面板项变量                                 |                |
+| Action panel item 变量                         |                |
 | `--dashkit-action-panel-item-color`            | 背景颜色       |
 | `--dashkit-action-panel-item-text-color`       | 文本颜色       |
-| `--dashkit-action-panel-item-color-hover`      | 悬停背景颜色   |
-| `--dashkit-action-panel-item-text-color-hover` | 悬停文本颜色   |
-| 覆盖层变量                                     |                |
+| `--dashkit-action-panel-item-color-hover`      | 鼠标悬停时的背景颜色 |
+| `--dashkit-action-panel-item-text-color-hover` | 鼠标悬停时的文本颜色 |
+| Overlay 变量                                   |                |
 | `--dashkit-overlay-border-color`               | 边框颜色       |
 | `--dashkit-overlay-color`                      | 背景颜色       |
-| `--dashkit-overlay-opacity`                    | 透明度         |
-| 网格项变量                                     |                |
-| `--dashkit-grid-item-edit-opacity`             | 透明度         |
+| `--dashkit-overlay-opacity`                    | 不透明度       |
+| Grid item 变量                                 |                |
+| `--dashkit-grid-item-edit-opacity`             | 不透明度       |
 | `--dashkit-grid-item-border-radius`            | 边框圆角       |
-| 占位符变量                                     |                |
+| Placeholder 变量                               |                |
 | `--dashkit-placeholder-color`                  | 背景颜色       |
-| `--dashkit-placeholder-opacity`                | 透明度         |
+| `--dashkit-placeholder-opacity`                | 不透明度       |
 
 #### 使用示例
 
@@ -522,15 +599,14 @@ const CustomThemeWrapper = (props: {
 
 ### 构建与监听
 
-- 构建依赖 `npm ci`
+- 安装依赖 `npm ci`
 - 构建项目 `npm run build`
-- 构建 storybook `npm run start`
+- 构建 Storybook `npm run start`
 
-默认情况下，storybook 运行在 `http://localhost:7120/`。
-当 storybook 运行时，项目中的新更改并非总能被捕获，因此最好手动重新构建项目并重启 storybook。
+默认情况下，Storybook 运行在 `http://localhost:7120/`。
+当 Storybook 运行时，项目中的新更改不一定会被立即捕获，因此最好手动重新构建项目并重启 Storybook。
 
-
-### 开发机器上 nginx 配置示例
+### 开发环境下 Nginx 配置示例
 
 ```bash
 server {
