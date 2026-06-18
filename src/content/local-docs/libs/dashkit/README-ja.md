@@ -2,7 +2,7 @@
 
 # DashKit
 
-ダッシュボードグリッドレンダリングライブラリです。
+ダッシュボードグリッド描画ライブラリです。
 
 ## インストール
 
@@ -12,7 +12,7 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## 説明
 
-このライブラリは、ウィジェットをグリッド上に配置し、サイズ変更、追加、削除するために使用されます。
+このライブラリは、ウィジェットをグリッド上に配置し、リサイズ、追加、削除するために使用されます。
 ウィジェットはReactコンポーネントです。例えば、テキスト、グラフィック、画像などです。
 
 新しいウィジェットはプラグインシステムを通じて追加されます。
@@ -25,12 +25,12 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layout[];
-    oldItem: Layout;
-    newItem: Layout;
-    placeholder: Layout;
-    e: MouseEvent;
-    element: HTMLElement;
+  layout: Layout[];
+  oldItem: Layout;
+  newItem: Layout;
+  placeholder: Layout;
+  e: MouseEvent;
+  element: HTMLElement;
 }) => void;
 
 interface DashKitProps {
@@ -68,38 +68,38 @@ interface DashKitProps {
 }
 ```
 
-- **config**: [сonfig](#Config)。
+- **config**: [Config](#Config)です。
 - **editMode**: 編集モードが有効かどうか。
 - **onItemEdit**: ウィジェットの編集をクリックしたときに呼び出されます。
 - **onChange**: configまたは[itemsStateAndParams](#itemsStateAndParams)が変更されたときに呼び出されます。
 - **onDrop**: ActionPanelから(#DashKitDnDWrapper)を使用してアイテムがドロップされたときに呼び出されます。
 - **onItemMountChange**: アイテムのマウント状態が変更されたときに呼び出されます。
 - **onItemRender**: アイテムのレンダリングが完了したときに呼び出されます。
-- **defaultGlobalParams**, **globalParams**: すべてのウィジェットに影響する[パラメータ](#Params)。DataLensでは、`defaultGlobalParams`はダッシュボード設定で設定されたグローバルパラメータです。`globalParams`はURLで設定できるグローバルパラメータです。
-- **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)。
-- **settings**: DashKitの設定。
-- **context**: すべてのウィジェットにプロップとして渡されるオブジェクト。
-- **overlayControls**: 編集時にウィジェットコントロールをオーバーライドするオブジェクト。渡されない場合は、基本的なコントロールが表示されます。`null`が渡された場合は、閉じるボタンまたはカスタムメニューのみが表示されます。
-- **overlayMenuItems**: カスタムドロップダウンメニューアイテム。
+- **defaultGlobalParams**, **globalParams**: すべてのウィジェットに影響を与える[パラメータ](#Params)です。DataLensでは、`defaultGlobalParams`はダッシュボード設定でグローバルに設定されたパラメータです。`globalParams`はURLで設定できるグローバルパラメータです。
+- **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)です。
+- **settings**: DashKitの設定です。
+- **context**: すべてのウィジェットにプロップとして渡されるオブジェクトです。
+- **overlayControls**: 編集時にウィジェットコントロールをオーバーライドするオブジェクトです。指定しない場合は、基本的なコントロールが表示されます。`null`を渡すと、閉じるボタンまたはカスタムメニューのみが表示されます。
+- **overlayMenuItems**: カスタムドロップダウンメニュー項目です。
 - **noOverlay**: `true`の場合、編集中はオーバーレイとコントロールが表示されません。
 - **focusable**: `true`の場合、グリッドアイテムはフォーカス可能になります。
 - **onItemFocus**: `focusable`が`true`でアイテムがフォーカスされたときに呼び出されます。
 - **onItemBlur**: `focusable`が`true`でアイテムからフォーカスが外れたときに呼び出されます。
-- **draggableHandleClassName**: ウィジェットをドラッグ可能にする要素のCSSクラス名。
+- **draggableHandleClassName**: ウィジェットをドラッグ可能にする要素のCSSクラス名です。
 - **onDragStart**: アイテムのドラッグが開始されたときにReactGridLayoutによって呼び出されます。
 - **onDrag**: アイテムのドラッグ中にReactGridLayoutによって呼び出されます。
 - **onDragStop**: アイテムのドラッグが停止したときにReactGridLayoutによって呼び出されます。
 - **onResizeStart**: アイテムのリサイズが開始されたときにReactGridLayoutによって呼び出されます。
 - **onResize**: アイテムのリサイズ中にReactGridLayoutによって呼び出されます。
 - **onResizeStop**: アイテムのリサイズが停止したときにReactGridLayoutによって呼び出されます。
-- **getPreparedCopyItemOptions**: ローカルストレージに保存する前に、コピーされたアイテムをシリアライズ可能なオブジェクトに変換するために呼び出されます。非推奨の`context.getPreparedCopyItemOptions`プロップの代わりにこれを使用する必要があります。
-- **onCopyFulfill**: アイテムのコピーが完了したときに、成功した場合は`error=null`と`data`が定義され、それ以外の場合は`error: Error`なしで`data`なしで呼び出されます。
+- **getPreparedCopyItemOptions**: ローカルストレージに保存する前に、コピーされたアイテムをシリアライズ可能なオブジェクトに変換するために呼び出されます。非推奨の`context.getPreparedCopyItemOptions`プロップの代わりにこれを使用してください。
+- **onCopyFulfill**: アイテムのコピーが完了したときに、成功した場合は`error=null`と`data`が定義され、それ以外の場合は`data`なしで`error: Error`とともに呼び出されます。
 
 ## 使用方法
 
 ### DashKitの設定
 
-`DashKit`をReactコンポーネントとして使用する前に、設定する必要があります。
+`DashKit`をReactコンポーネントとして使用する前に、設定が必要です。
 
 - 言語を設定する
 
@@ -156,12 +156,12 @@ interface DashKitProps {
 
 ```ts
 export interface Config {
-  salt: string; // 一意のIDを形成するため
-  counter: number; // 一意のIDを形成するため、増加し続けます
+  salt: string; // 一意のIDを形成するためのもの
+  counter: number; // 一意のIDを形成するためのもの、増加し続ける
   items: ConfigItem[]; // 初期ウィジェットの状態
   layout: ConfigLayout[]; // グリッド上のウィジェットの位置 https://github.com/react-grid-layout
-  aliases: ConfigAliases; // パラメータのエイリアス #Params を参照
-  connections: ConfigConnection[]; // ウィジェット間のリンク #Params を参照
+  aliases: ConfigAliases; // パラメータのエイリアス #Params参照
+  connections: ConfigConnection[]; // ウィジェット間のリンク #Params参照
 }
 ```
 
@@ -180,7 +180,7 @@ const config: DashKitProps['config'] = {
       id: 'tT',
       data: {
         size: 'm',
-        text: 'キャプション',
+        text: 'Caption',
         showInTOC: true,
       },
       type: 'title',
@@ -199,7 +199,7 @@ const config: DashKitProps['config'] = {
     {
       id: 'zR',
       data: {
-        text: '### テキスト',
+        text: '### Text',
       },
       type: 'text',
       namespace: 'default',
@@ -277,8 +277,8 @@ const newConfig = DashKit.setItem({
     },
     namespace: 'default',
     type: 'text',
-    // オプション。新しいアイテムを定義済みのディメンションで現在のレイアウトに挿入する必要がある場合
-    layout: { // 現在のアイテムは 'Ea' の前に挿入されます
+    // Optional. If new item needed to be inserted in current layout with predefined dimensions
+    layout: { // Current item inseterted before 'Ea'
       h: 6,
       w: 12,
       x: 0,
@@ -287,13 +287,13 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // オプション。ActionPanelからドロップされたときに既存のアイテムの新しいレイアウト値
+    // Optional. New layout values for existing items when new element is dropped from ActionPanel
     updateLayout: newLayout,
   },
 });
 ```
 
-config内の既存のアイテムを変更する:
+config内の既存アイテムを変更する:
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -301,7 +301,7 @@ const newConfig = DashKit.setItem({
     id: 'tT', // item.id
     data: {
       size: 'm',
-      text: `新しいキャプション`,
+      text: `New caption`,
     },
     namespace: 'default',
     type: 'title',
@@ -324,7 +324,7 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 });
 ```
 
-### パラメータ
+### Params
 
 ```ts
 type Params = Record<string, string | string[]>;
@@ -335,9 +335,9 @@ type Params = Record<string, string | string[]>;
 生成順序:
 
 1. `defaultGlobalParams`
-2. デフォルトのウィジェットパラメータ `item.default`
+2. デフォルトウィジェットパラメータ `item.default`
 3. `globalParams`
-4. [itemsStateAndParams](#itemsStateAndParams) からのパラメータ（キューに従って）。
+4. キューに従った [itemsStateAndParams](#itemsStateAndParams) からのパラメータ。
 
 ### itemsStateAndParams
 
@@ -347,8 +347,8 @@ type Params = Record<string, string | string[]>;
 ```ts
 interface StateAndParamsMeta = {
     __meta__: {
-        queue: {id: string}[]; // キュー
-        version: number; // itemsStateAndParams の現在のバージョン
+        queue: {id: string}[]; // queue
+        version: number; // current version itemsStateAndParams
     };
 }
 ```
@@ -368,16 +368,90 @@ interface ItemsStateAndParamsBase {
 type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 ```
 
+### Experimental DashKit events
+
+> Experimental: this API can change in minor releases.
+
+`DashKit` は、実験的なインスタンスイベント API を公開します。コンポーネントの ref を使用し、`dashkitRef.current?.on(eventName, handler)` で購読します。このメソッドは、アンサブスクライブコールバックを返します。
+
+最初にサポートされるイベントは `change` です。これは、レイアウトが変更されたときに、`onChange` が呼び出される前に発行されます。ハンドラは、次のレイアウトと前のレイアウト全体を読み取ったり、レイアウトパッチを読み取ったり、`preventDefault()` を呼び出してデフォルトの `onChange` 呼び出しを停止したりできます。
+
+```tsx
+import React from 'react';
+import {DashKit} from '@gravity-ui/dashkit';
+import type {DashKitChangeEvent} from '@gravity-ui/dashkit';
+
+function Dashboard() {
+  const dashkitRef = React.useRef<DashKit>(null);
+
+  React.useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event: DashKitChangeEvent) => {
+      console.log(event.patches);
+
+      if (event.patches.length > 0) {
+        event.preventDefault();
+      }
+    });
+
+    return () => unsubscribe?.();
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode={true} onChange={onChange} />;
+}
+```
+
+```ts
+type DashKitLayoutPatch = Pick<ConfigLayout, 'i'> &
+  Partial<Pick<ConfigLayout, 'x' | 'y' | 'w' | 'h' | 'parent'>>;
+
+type DashKitChangeEvent = {
+  patches: DashKitLayoutPatch[];
+  layout: ConfigLayout[];
+  previousLayout: ConfigLayout[];
+  preventDefault: () => void;
+  readonly defaultPrevented: boolean;
+};
+```
+
+#### Event-driven layout updates
+
+`preventDefault()` を `change` イベントハンドラで使用すると、`config` プロップを再初期化せずにレイアウトの更新を処理できるようになりました。DashKit は内部的にベースラインを維持し、パッチを段階的に計算します。
+
+```tsx
+function Dashboard() {
+  const [config, setConfig] = useState(initialConfig);
+  const dashkitRef = useRef<DashKit>(null);
+
+  useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event) => {
+      event.preventDefault(); // onChange を呼び出さない
+
+      // インクリメンタルなパッチのみをバックエンドに送信します
+      sendPatches(event.patches);
+
+      // setConfig({ ...config, layout: event.layout }) を呼び出す必要はありません
+      // DashKit はビジュアル状態を内部で維持します
+    });
+
+    return unsubscribe;
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode onChange={() => {}} />;
+}
+```
+
+**重要:** 後でプロップから `config.layout` を更新した場合（例: サーバー同期から）、DashKit は新しいプロップと一致するように内部ベースラインをリセットします。これにより、イベント駆動型ワークフローと制御型ワークフローの両方との互換性が確保されます。
+
 ### メニュー
 
-編集モードでは、カスタムの DashKit ウィジェットオーバーレイメニューを指定できます。
+編集モードでカスタム DashKit ウィジェットオーバーレイメニューを指定できます。
 
 ```ts
 type MenuItem = {
-  id: string; // ユニークなID
+  id: string; // 一意のID
   title?: string; // 文字列タイトル
   icon?: ReactNode; // アイコンのノード
-  iconSize?: number | string; // アイコンサイズ（px単位の数値または単位付き文字列）
+  iconSize?: number | string; // px単位のアイコンサイズ（数値または単位付き文字列）
   handler?: (item: ConfigItem) => void; // カスタムアイテムのアクションハンドラ
   visible?: (item: ConfigItem) => boolean; // メニューアイテムをフィルタリングするためのオプションの表示ハンドラ
   className?: string; // カスタムクラスプロパティ
@@ -387,7 +461,7 @@ type MenuItem = {
 <Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
 
 [非推奨]
-// overlayMenuItems プロパティは setSettings メニューよりも優先されます
+// overlayMenuItems プロパティは setSettings のメニューよりも優先されます
 DashKit.setSettings({menu: [] as Array<MenuItem>});
 ```
 
@@ -405,37 +479,40 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string;
-  onDragStart?: (dragProps: ItemDragProps) => void;
-  onDragEnd?: () => void;
-  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean;
+  dragImageSrc?: string; // ドラッグ画像プレビュー。デフォルトでは透明な1px PNG base64 が使用されます。
+  onDragStart?: (dragProps: ItemDragProps) => void; // ActionPanel から要素がドラッグされたときに呼び出されるコールバック
+  onDragEnd?: () => void; // 要素がドロップされたか、ドラッグがキャンセルされたときに呼び出されるコールバック
+  onDropDragOver?: (
+    draggedItem: DraggedOverItem,
+    sharedItem: DraggedOverItem | null,
+  ) => void | boolean;
 }
 ```
 
-- **dragImageSrc**: ドラッグ画像のプレビュー。デフォルトでは、透明な1px PNGのbase64が使用されます。
-- **onDragStart**: ActionPanelから要素がドラッグされたときに呼び出されるコールバック。
+- **dragImageSrc**: ドラッグ画像プレビュー。デフォルトでは透明な1px PNG base64 が使用されます。
+- **onDragStart**: ActionPanel から要素がドラッグされたときに呼び出されるコールバック。
 - **onDragEnd**: 要素がドロップされたか、ドラッグがキャンセルされたときに呼び出されるコールバック。
 
 ```ts
 type ItemDragProps = {
-    type: string; // プラグインのタイプ
-    layout?: { // オプション。プレビューと初期化のためのレイアウトアイテムのサイズ
-        w?: number;
-        h?: number;
-    };
-    extra?: any; // カスタムユーザーコンテキスト
+  type: string; // プラグインタイプ
+  layout?: {
+    // オプション。プレビューと初期化のためのレイアウトアイテムサイズ
+    w?: number;
+    h?: number;
+  };
+  extra?: any; // カスタムユーザーコンテキスト
 };
 ```
 
 ```ts
 type ItemDropProps = {
-    commit: () => void; // すべての設定操作が完了した後、コールバックを呼び出す必要があります
-    dragProps: ItemDragProps; // アイテムのドラッグプロパティ
-    itemLayout: ConfigLayout; // 計算されたアイテムのレイアウト寸法
-    newLayout: ConfigLayout[]; // 要素がドロップされた後の新しいレイアウト
+  commit: () => void; // すべての設定操作が完了した後、呼び出す必要があるコールバック
+  dragProps: ItemDragProps; // アイテムのドラッグプロップ
+  itemLayout: ConfigLayout; // 計算されたアイテムのレイアウト寸法
+  newLayout: ConfigLayout[]; // 要素がドロップされた後の新しいレイアウト
 };
 ```
-
 
 #### 例:
 
@@ -447,13 +524,13 @@ const overlayMenuItems = [
     title: 'Chart',
     qa: 'chart',
     dragProps: { // ItemDragProps
-        type: 'custom', // 登録されたプラグインタイプ
+        type: 'custom', // 登録済みのプラグインタイプ
     },
   }
 ]
 
 const onDrop = (dropProps: ItemDropProps) => {
-  // ... 要素を構成に追加します
+  // ... 要素をconfigに追加します
   dropProps.commit();
 }
 
@@ -467,23 +544,23 @@ const onDrop = (dropProps: ItemDropProps) => {
 
 | 名前                                           | 説明           |
 | :--------------------------------------------- | :------------- |
-| Action panel variables                         |                |
+| アクションパネル変数                           |                |
 | `--dashkit-action-panel-color`                 | 背景色         |
 | `--dashkit-action-panel-border-color`          | ボーダーの色   |
-| `--dashkit-action-panel-border-radius`         | ボーダーの半径 |
-| Action panel item variables                    |                |
+| `--dashkit-action-panel-border-radius`         | ボーダー半径   |
+| アクションパネルアイテム変数                   |                |
 | `--dashkit-action-panel-item-color`            | 背景色         |
 | `--dashkit-action-panel-item-text-color`       | テキストの色   |
 | `--dashkit-action-panel-item-color-hover`      | ホバー時の背景色 |
-| `--dashkit-action-panel-item-text-color-hover` | ホバー時のテキストの色 |
-| Overlay variables                              |                |
+| `--dashkit-action-panel-item-text-color-hover` | ホバー時のテキスト色 |
+| オーバーレイ変数                               |                |
 | `--dashkit-overlay-border-color`               | ボーダーの色   |
 | `--dashkit-overlay-color`                      | 背景色         |
 | `--dashkit-overlay-opacity`                    | 不透明度       |
-| Grid item variables                            |                |
+| グリッドアイテム変数                           |                |
 | `--dashkit-grid-item-edit-opacity`             | 不透明度       |
-| `--dashkit-grid-item-border-radius`            | ボーダーの半径 |
-| Placeholder variables                          |                |
+| `--dashkit-grid-item-border-radius`            | ボーダー半径   |
+| プレースホルダー変数                           |                |
 | `--dashkit-placeholder-color`                  | 背景色         |
 | `--dashkit-placeholder-opacity`                | 不透明度       |
 
@@ -520,15 +597,14 @@ const CustomThemeWrapper = (props: {
 
 ## 開発
 
-### ビルドと監視
+### ビルドとウォッチ
 
 - 依存関係のビルド `npm ci`
 - プロジェクトのビルド `npm run build`
 - Storybook のビルド `npm run start`
 
 デフォルトでは、Storybook は `http://localhost:7120/` で実行されます。
-Storybook を実行中にプロジェクトの変更が常に反映されるとは限らないため、プロジェクトを手動で再ビルドして Storybook を再起動することをお勧めします。
-
+Storybook を実行中にプロジェクトの変更が常に反映されるとは限らないため、手動でプロジェクトを再ビルドし、Storybook を再起動することをお勧めします。
 
 ### 開発マシンでの開発用 nginx 設定例
 
