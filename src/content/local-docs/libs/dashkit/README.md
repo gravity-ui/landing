@@ -25,12 +25,12 @@ Plugins are required to create custom widgets.
 
 ```ts
 type ItemManipulationCallback = (eventData: {
-    layout: Layout[];
-    oldItem: Layout;
-    newItem: Layout;
-    placeholder: Layout;
-    e: MouseEvent;
-    element: HTMLElement;
+  layout: Layout[];
+  oldItem: Layout;
+  newItem: Layout;
+  placeholder: Layout;
+  e: MouseEvent;
+  element: HTMLElement;
 }) => void;
 
 interface DashKitProps {
@@ -366,6 +366,80 @@ interface ItemsStateAndParamsBase {
 type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 ```
 
+### Experimental DashKit events
+
+> Experimental: this API can change in minor releases.
+
+`DashKit` exposes an experimental instance event API. Use a component ref and subscribe with `dashkitRef.current?.on(eventName, handler)`. The method returns an unsubscribe callback.
+
+The first supported event is `change`. It is emitted when the layout changes, before `onChange` is called. The handler can read the full next and previous layouts, read layout patches, or call `preventDefault()` to stop the default `onChange` call.
+
+```tsx
+import React from 'react';
+import {DashKit} from '@gravity-ui/dashkit';
+import type {DashKitChangeEvent} from '@gravity-ui/dashkit';
+
+function Dashboard() {
+  const dashkitRef = React.useRef<DashKit>(null);
+
+  React.useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event: DashKitChangeEvent) => {
+      console.log(event.patches);
+
+      if (event.patches.length > 0) {
+        event.preventDefault();
+      }
+    });
+
+    return () => unsubscribe?.();
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode={true} onChange={onChange} />;
+}
+```
+
+```ts
+type DashKitLayoutPatch = Pick<ConfigLayout, 'i'> &
+  Partial<Pick<ConfigLayout, 'x' | 'y' | 'w' | 'h' | 'parent'>>;
+
+type DashKitChangeEvent = {
+  patches: DashKitLayoutPatch[];
+  layout: ConfigLayout[];
+  previousLayout: ConfigLayout[];
+  preventDefault: () => void;
+  readonly defaultPrevented: boolean;
+};
+```
+
+#### Event-driven layout updates
+
+If you use `preventDefault()` in the `change` event handler, you can now handle layout updates without re-initializing the config prop. DashKit maintains an internal baseline and computes patches incrementally:
+
+```tsx
+function Dashboard() {
+  const [config, setConfig] = useState(initialConfig);
+  const dashkitRef = useRef<DashKit>(null);
+
+  useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event) => {
+      event.preventDefault(); // Don't call onChange
+
+      // Send only the incremental patches to your backend
+      sendPatches(event.patches);
+
+      // No need to call setConfig({ ...config, layout: event.layout })
+      // DashKit maintains the visual state internally
+    });
+
+    return unsubscribe;
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode onChange={() => {}} />;
+}
+```
+
+**Important:** If you later update `config.layout` from props (e.g., from server sync), DashKit will reset its internal baseline to match the new prop. This ensures compatibility with both event-driven and controlled workflows.
+
 ### Menu
 
 You can specify custom DashKit widget overlay menu in edit mode
@@ -406,7 +480,10 @@ interface DashKitDnDWrapperProps {
   dragImageSrc?: string;
   onDragStart?: (dragProps: ItemDragProps) => void;
   onDragEnd?: () => void;
-  onDropDragOver?: (draggedItem: DraggedOverItem, sharedItem: DraggedOverItem | null) => void | boolean;
+  onDropDragOver?: (
+    draggedItem: DraggedOverItem,
+    sharedItem: DraggedOverItem | null,
+  ) => void | boolean;
 }
 ```
 
@@ -416,24 +493,24 @@ interface DashKitDnDWrapperProps {
 
 ```ts
 type ItemDragProps = {
-    type: string; // Plugin type
-    layout?: { // Optional. Layout item size for preview and init
-        w?: number;
-        h?: number;
-    };
-    extra?: any; // Custom user context
+  type: string; // Plugin type
+  layout?: {
+    // Optional. Layout item size for preview and init
+    w?: number;
+    h?: number;
+  };
+  extra?: any; // Custom user context
 };
 ```
 
 ```ts
 type ItemDropProps = {
-    commit: () => void; // Callback should be called after all config operations are made
-    dragProps: ItemDragProps; // Item drag props
-    itemLayout: ConfigLayout; // Calculated item layout dimensions
-    newLayout: ConfigLayout[]; // New layout after element is dropped
+  commit: () => void; // Callback should be called after all config operations are made
+  dragProps: ItemDragProps; // Item drag props
+  itemLayout: ConfigLayout; // Calculated item layout dimensions
+  newLayout: ConfigLayout[]; // New layout after element is dropped
 };
 ```
-
 
 #### Example:
 
@@ -526,7 +603,6 @@ const CustomThemeWrapper = (props: {
 
 By default, storybook runs on `http://localhost:7120/`.
 New changes from a project aren't always picked up when storybook is running, so it's better to rebuild a project manually and restart storybook.
-
 
 ### Example of an nginx config for development on a dev machine
 
