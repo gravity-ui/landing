@@ -2,7 +2,7 @@
 
 ## Navigateurs compatibles
 
-Vous pouvez vérifier les navigateurs compatibles sur [browsersl.ist](https://browsersl.ist/#q=last%203%20years%20and%20fully%20supports%20es6%20and%20%3E%200.05%25%0Anot%20dead%0Anot%20op_mini%20all%0Anot%20and_qq%20%3E%200%0Anot%20and_uc%20%3E%200%0AFirefox%20ESR%0AFirefox%20%3E%200%20and%20last%203%20years%20and%20%3E%200.01%25).
+Vous pouvez vérifier les navigateurs compatibles sur [browsersl.ist](https://browsersl.ist/#q=baseline%20widely%20available%20on%202025-01-01%20with%20downstream).
 
 ## Installation
 
@@ -10,7 +10,7 @@ Vous pouvez vérifier les navigateurs compatibles sur [browsersl.ist](https://br
 npm i --save-dev @gravity-ui/browserslist-config
 ```
 
-Ajoutez la configuration à `package.json` dans la section `browserslist` :
+Ajoutez la configuration à la section `browserslist` de votre `package.json` :
 
 ```json
 {
