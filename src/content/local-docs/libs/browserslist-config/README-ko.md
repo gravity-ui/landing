@@ -2,7 +2,7 @@
 
 ## 호환 브라우저
 
-호환 브라우저는 [browsersl.ist](https://browsersl.ist/#q=last%203%20years%20and%20fully%20supports%20es6%20and%20%3E%200.05%25%0Anot%20dead%0Anot%20op_mini%20all%0Anot%20and_qq%20%3E%200%0Anot%20and_uc%20%3E%200%0AFirefox%20ESR%0AFirefox%20%3E%200%20and%20last%203%20years%20and%20%3E%200.01%25)에서 확인할 수 있습니다.
+호환 브라우저는 [browsersl.ist](https://browsersl.ist/#q=baseline%20widely%20available%20on%202025-01-01%20with%20downstream)에서 확인할 수 있습니다.
 
 ## 설치
 
@@ -20,7 +20,7 @@ npm i --save-dev @gravity-ui/browserslist-config
 }
 ```
 
-대상 사용자에 따라 다음과 같이 추가 브라우저를 지정할 수 있습니다:
+대상 사용자에 따라 추가 브라우저를 지정할 수 있습니다. 예를 들어:
 ```json
 {
   "browserslist": [
@@ -33,4 +33,4 @@ npm i --save-dev @gravity-ui/browserslist-config
 
 ## 사용법
 
-이 패키지는 브라우저 목록의 프로덕션 버전을 제공합니다.
+이 패키지는 프로덕션 버전의 브라우저 목록을 제공합니다.

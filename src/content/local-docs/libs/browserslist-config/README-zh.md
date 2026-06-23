@@ -1,8 +1,8 @@
-# Gravity UI 系列包的 Browserslist 配置
+# Gravity UI 包家族的 Browserslist 配置
 
 ## 兼容的浏览器
 
-您可以在 [browsersl.ist](https://browsersl.ist/#q=last%203%20years%20and%20fully%20supports%20es6%20and%20%3E%200.05%25%0Anot%20dead%0Anot%20op_mini%20all%0Anot%20and_qq%20%3E%200%0Anot%20and_uc%20%3E%200%0AFirefox%20ESR%0AFirefox%20%3E%200%20and%20last%203%20years%20and%20%3E%200.01%25) 上查看兼容的浏览器。
+您可以在 [browsersl.ist](https://browsersl.ist/#q=baseline%20widely%20available%20on%202025-01-01%20with%20downstream) 上查看兼容的浏览器。
 
 ## 安装
 
@@ -20,7 +20,7 @@ npm i --save-dev @gravity-ui/browserslist-config
 }
 ```
 
-您可以根据您的目标受众指定额外的浏览器，例如：
+您可以根据您的目标用户指定额外的浏览器，例如：
 ```json
 {
   "browserslist": [
