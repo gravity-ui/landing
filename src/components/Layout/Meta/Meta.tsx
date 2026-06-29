@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DEFAULT_META = {
-    name: 'Gravity&nbsp;UI',
+    name: 'Gravity UI',
     description: 'Build modern interfaces with the Gravity design system and libraries',
     image: 'https://gravity-ui.com/index-social.png',
 };
