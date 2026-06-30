@@ -36,6 +36,46 @@ const resolveDynamicPath = (path: string, query: Record<string, any>): string =>
     return resolvedSegments.join('/');
 };
 
+const getPathWithoutLocale = (resolvedPath: string) => {
+    const {locales} = i18nextConfig.i18n;
+    let pathWithoutLocale = resolvedPath;
+
+    const pathParts = resolvedPath.split('/').filter(Boolean);
+    if (pathParts.length > 0 && locales.includes(pathParts[0])) {
+        pathWithoutLocale = '/' + pathParts.slice(1).join('/');
+        if (pathWithoutLocale === '') {
+            pathWithoutLocale = '/';
+        }
+    }
+
+    return pathWithoutLocale;
+};
+
+const getPageCanonicalInfo = (
+    path: string,
+    query: Record<string, any>,
+    locale?: string,
+): {canonicalUrl: string; locale: string} => {
+    const {defaultLocale} = i18nextConfig.i18n;
+    const currentLocale = locale || defaultLocale;
+
+    if (shouldExcludeRoute(path)) {
+        return {canonicalUrl: SITE_URL, locale: currentLocale};
+    }
+
+    const resolvedPath = resolveDynamicPath(path, query);
+    if (resolvedPath.includes('[') && resolvedPath.includes(']')) {
+        return {canonicalUrl: SITE_URL, locale: currentLocale};
+    }
+
+    const pathWithoutLocale = getPathWithoutLocale(resolvedPath);
+
+    return {
+        canonicalUrl: getCanonicalUrlForLocale(currentLocale, pathWithoutLocale),
+        locale: currentLocale,
+    };
+};
+
 // Function to generate alternate links for SSG
 const generateAlternateLinks = (path: string, query: Record<string, any>, locale?: string) => {
     const {locales, defaultLocale} = i18nextConfig.i18n;
@@ -52,16 +92,7 @@ const generateAlternateLinks = (path: string, query: Record<string, any>, locale
         return null;
     }
 
-    // Determine if the path has a locale prefix
-    let pathWithoutLocale = resolvedPath;
-
-    // Check if the path starts with a locale
-    const pathParts = resolvedPath.split('/').filter(Boolean);
-    if (pathParts.length > 0 && locales.includes(pathParts[0])) {
-        // Extract the locale from the path
-        pathWithoutLocale = '/' + pathParts.slice(1).join('/');
-        if (pathWithoutLocale === '') pathWithoutLocale = '/';
-    }
+    const pathWithoutLocale = getPathWithoutLocale(resolvedPath);
 
     // Create links for all locales
     const links = locales.map((localeItem) => {
@@ -86,8 +117,7 @@ const generateAlternateLinks = (path: string, query: Record<string, any>, locale
     );
 
     // Add canonical link - each locale should canonical to itself
-    const currentLocale = locale || defaultLocale;
-    const canonicalUrl = getCanonicalUrlForLocale(currentLocale, pathWithoutLocale);
+    const {canonicalUrl} = getPageCanonicalInfo(path, query, locale);
 
     links.push(<link key="canonical" rel="canonical" href={canonicalUrl} />);
 
@@ -105,6 +135,7 @@ class CustomDocument extends Document {
 
         // Generate static links for SSG
         const staticLinks = generateAlternateLinks(page, query, locale);
+        const {canonicalUrl, locale: pageLocale} = getPageCanonicalInfo(page, query, locale);
 
         return (
             // Workaround for missing direction 'ltr' in ThemeProvider
@@ -114,6 +145,8 @@ class CustomDocument extends Document {
                         name="google-site-verification"
                         content="QhqdVzck0x0Hw82h7fl_l9ebRsYpSqlC_JhyDRXBnew"
                     />
+                    <meta property="og:url" content={canonicalUrl} />
+                    <meta property="og:locale" content={pageLocale} />
                     {staticLinks /* Static links for SSG */}
                     {IS_PRODUCTION && (
                         <Script

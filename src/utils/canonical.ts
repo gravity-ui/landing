@@ -10,17 +10,3 @@ export const getCanonicalUrlForLocale = (locale: string, pathWithoutLocale: stri
 
     return `${SITE_URL}${localePrefix}${pathPart}`;
 };
-
-export const getCanonicalUrlFromAsPath = (asPath: string): string => {
-    let path = asPath.split('?')[0].split('#')[0] || '/';
-
-    if (path !== '/' && path.endsWith('/')) {
-        path = path.slice(0, -1);
-    }
-
-    if (path === '/') {
-        return SITE_URL;
-    }
-
-    return `${SITE_URL}${path}`;
-};
