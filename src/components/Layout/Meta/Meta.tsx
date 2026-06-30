@@ -1,7 +1,9 @@
 import React from 'react';
 
+const SITE_NAME = 'Gravity UI';
+
 const DEFAULT_META = {
-    name: 'Gravity&nbsp;UI',
+    name: SITE_NAME,
     description: 'Build modern interfaces with the Gravity design system and libraries',
     image: 'https://gravity-ui.com/index-social.png',
 };
@@ -39,10 +41,8 @@ export const Meta: React.FC<MetaProps> = ({
             <meta property="og:title" content={name} />
             <meta property="og:description" content={description} />
             <meta property="og:type" content="website" />
-            <meta property="og:site_name" content={name} />
-            <meta property="og:url" content="https://gravity-ui.com/" />
+            <meta property="og:site_name" content={SITE_NAME} />
             <meta property="og:image" content={image} />
-            <meta property="og:locale" content="en" />
 
             <meta name="twitter:title" content={name} />
             <meta name="twitter:description" content={description} />
