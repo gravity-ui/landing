@@ -3,11 +3,8 @@ import Document, {Head, Html, Main, NextScript} from 'next/document';
 import Script from 'next/script';
 
 import i18nextConfig from '../../next-i18next.config';
-import sitemapConfig from '../../next-sitemap.config';
 import {DEFAULT_THEME, GA_ID, IS_PRODUCTION} from '../constants';
-
-// Site URL from next-sitemap.config.js
-const SITE_URL = sitemapConfig.siteUrl;
+import {SITE_URL, getCanonicalUrlForLocale} from '../utils/canonical';
 
 // Function to check if a route should be excluded from alternates
 const shouldExcludeRoute = (path: string) => {
@@ -90,9 +87,7 @@ const generateAlternateLinks = (path: string, query: Record<string, any>, locale
 
     // Add canonical link - each locale should canonical to itself
     const currentLocale = locale || defaultLocale;
-    const localePrefix = currentLocale === defaultLocale ? '' : `/${currentLocale}`;
-    const pathPart = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
-    const canonicalUrl = `${SITE_URL}${localePrefix}${pathPart}`;
+    const canonicalUrl = getCanonicalUrlForLocale(currentLocale, pathWithoutLocale);
 
     links.push(<link key="canonical" rel="canonical" href={canonicalUrl} />);
 
