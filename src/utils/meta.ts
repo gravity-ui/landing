@@ -4,10 +4,19 @@ export type MetaProps = {
     name: string;
     description: string;
     image?: string;
+    imageType?: string;
+    imageWidth?: number;
+    imageHeight?: number;
 };
 
 const getOgImageUrl = (id?: string) => {
     return id ? `https://storage.yandexcloud.net/gravity-ui-assets/og/${id}.jpg` : undefined;
+};
+
+const LIBRARY_OG_IMAGE_META = {
+    imageType: 'image/jpeg',
+    imageWidth: 1200,
+    imageHeight: 630,
 };
 
 export const getLibraryMeta = (
@@ -19,6 +28,7 @@ export const getLibraryMeta = (
         name: componentTitle ? `${lib.title} – ${componentTitle}` : lib.title,
         description: t(`libraries-info:description_${lib.id}`),
         image: getOgImageUrl(lib.id),
+        ...LIBRARY_OG_IMAGE_META,
     };
 };
 
@@ -45,6 +55,7 @@ export const getComponentMeta = (params: {
         name: `${libTitle} – ${componentTitle}`,
         description: hasTranslation ? description : `${componentTitle} component from ${libTitle}`,
         image: getOgImageUrl(libId),
+        ...LIBRARY_OG_IMAGE_META,
     };
 };
 
