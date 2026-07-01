@@ -6,18 +6,27 @@ const DEFAULT_META = {
     name: SITE_NAME,
     description: 'Build modern interfaces with the Gravity design system and libraries',
     image: 'https://gravity-ui.com/index-social.png',
+    imageType: 'image/png',
+    imageWidth: 1280,
+    imageHeight: 640,
 };
 
 export type MetaProps = {
     name?: string;
     description?: string;
     image?: string;
+    imageType?: string;
+    imageWidth?: number;
+    imageHeight?: number;
 };
 
 export const Meta: React.FC<MetaProps> = ({
     name = DEFAULT_META.name,
     description = DEFAULT_META.description,
     image = DEFAULT_META.image,
+    imageType = DEFAULT_META.imageType,
+    imageWidth = DEFAULT_META.imageWidth,
+    imageHeight = DEFAULT_META.imageHeight,
 }) => {
     return (
         <React.Fragment>
@@ -43,6 +52,11 @@ export const Meta: React.FC<MetaProps> = ({
             <meta property="og:type" content="website" />
             <meta property="og:site_name" content={SITE_NAME} />
             <meta property="og:image" content={image} />
+            <meta property="og:image:secure_url" content={image} />
+            <meta property="og:image:type" content={imageType} />
+            <meta property="og:image:width" content={String(imageWidth)} />
+            <meta property="og:image:height" content={String(imageHeight)} />
+            <meta property="og:image:alt" content={name} />
 
             <meta name="twitter:title" content={name} />
             <meta name="twitter:description" content={description} />

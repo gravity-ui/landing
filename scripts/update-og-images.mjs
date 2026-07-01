@@ -29,7 +29,7 @@ try {
         await page.goto(`https://gravity-ui.com/libraries/${id}/preview`, {
             waitUntil: 'networkidle',
         });
-        const buffer = await page.screenshot();
+        const buffer = await page.screenshot({type: 'jpeg', quality: 90});
 
         const uploadParams = {
             Bucket: BUCKET_NAME,
