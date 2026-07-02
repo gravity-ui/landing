@@ -20,7 +20,7 @@
   "description_dialog-fields": "Надстройка для react-final-form, которая предоставляет полезные высокоуровневые компоненты для создания форм.",
   "description_paranoid": "Визуализатор топологий кластера.",
   "description_react-data-table": "React-компонент для рендеринга больших и сложных таблиц.",
-  "description_unipika": "Библиотека форматирования данных.",
+  "description_unipika": "Библиотека для форматирования данных.",
   "description_ui-logger": "Простой клиентский логгер.",
   "description_oauth-clients": "Клиентская библиотека OAuth, обеспечивающая удобную абстракцию поверх аутентификации.",
   "description_i18n": "Библиотека для интернационализации проектов Gravity UI.",
