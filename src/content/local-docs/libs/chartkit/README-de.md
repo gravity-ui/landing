@@ -1,8 +1,8 @@
 # Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Ein Plugin-basiertes React-Komponenten-Set, das eine einheitliche Rendering-Schnittstelle für verschiedene Charting-Bibliotheken bietet. Sie registrieren ein oder mehrere Plugins und rendern Diagramme über `<ChartKit type="..." data={...} />` — ChartKit leitet automatisch an den richtigen Renderer weiter.
+Ein Plugin-basiertes React-Komponenten-Set, das eine einheitliche Rendering-Schnittstelle für mehrere Charting-Bibliotheken bietet. Sie registrieren ein oder mehrere Plugins und rendern Diagramme über `<ChartKit type="..." data={...} />` — ChartKit leitet automatisch an den richtigen Renderer weiter.
 
-Jeder Plugin-Renderer wird "lazy loaded", sodass der Code der zugrunde liegenden Bibliothek nur dann heruntergeladen wird, wenn ChartKit tatsächlich in der Benutzeroberfläche gerendert wird. ChartKit kümmert sich außerdem standardmäßig um die mobilefreundliche Anzeige von Tooltips. Sie können die integrierten Plugins verwenden oder eigene implementieren.
+Jeder Plugin-Renderer wird lazy-loaded, sodass der zugrunde liegende Bibliotheks-Code nur dann heruntergeladen wird, wenn ChartKit tatsächlich in der UI gerendert wird. ChartKit kümmert sich außerdem standardmäßig um die mobilefreundliche Anzeige von Tooltips. Sie können die integrierten Plugins verwenden oder eigene implementieren.
 
 **Wann verwenden:**
 
@@ -12,16 +12,17 @@ Jeder Plugin-Renderer wird "lazy loaded", sodass der Code der zugrunde liegenden
 
 **Wann nicht verwenden:**
 
-- Sie benötigen nur eine spezifische Charting-Bibliothek — bevorzugen Sie die direkte Verwendung von [@gravity-ui/charts](https://github.com/gravity-ui/charts)
+- Sie benötigen nur eine spezifische Charting-Bibliothek — verwenden Sie stattdessen direkt [@gravity-ui/charts](https://github.com/gravity-ui/charts)
 
 ## Inhaltsverzeichnis
 
-- [Erste Schritte](#get-started)
-- [Entwicklung](#development)
+- [Erste Schritte](#erste-schritte)
+- [Aktualisieren von Charting-Paketen](#aktualisieren-von-charting-paketen)
+- [Entwicklung](#entwicklung)
 
 ## Erste Schritte
 
-### Voraussetzungen
+### Anforderungen
 
 - React 16, 17 oder 18
 - `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — erforderliche Peer-Abhängigkeit (stellt Theming und UI-Primitive bereit)
@@ -41,11 +42,11 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-Ausführliche Informationen zur Einrichtung finden Sie im [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+Für vollständige Setup-Details siehe die [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ### Grundlegende Verwendung
 
-ChartKit verwendet eine globale Plugin-Registry. Rufen Sie `settings.set` einmal am Einstiegspunkt Ihrer App auf, um die benötigten Plugins zu registrieren. Wenn `<ChartKit type="..." />` gerendert wird, sucht es nach dem passenden Plugin — wenn keines gefunden wird, wird ein Fehler ausgelöst. Der Renderer jedes Plugins ist eine `React.lazy`-Komponente, sodass sein Code nur dann abgerufen wird, wenn ChartKit zum ersten Mal in der Benutzeroberfläche erscheint.
+ChartKit verwendet eine globale Plugin-Registry. Rufen Sie `settings.set` einmal am Einstiegspunkt Ihrer App auf, um die benötigten Plugins zu registrieren. Wenn `<ChartKit type="..." />` gerendert wird, sucht es nach dem passenden Plugin — wenn keines gefunden wird, wird ein Fehler ausgelöst. Der Renderer jedes Plugins ist eine `React.lazy`-Komponente, sodass sein Code nur dann abgerufen wird, wenn ChartKit zum ersten Mal in der UI erscheint.
 
 Sie können mehrere Plugins gleichzeitig registrieren:
 
@@ -53,7 +54,7 @@ Sie können mehrere Plugins gleichzeitig registrieren:
 settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
 ```
 
-Oder rufen Sie `settings.set` mehrmals auf — es wird die Plugin-Liste zusammengeführt, anstatt sie zu ersetzen.
+Oder rufen Sie `settings.set` mehrmals auf — es fügt die Plugin-Liste zusammen, anstatt sie zu ersetzen.
 
 **Grundlegendes Beispiel:**
 
@@ -95,7 +96,16 @@ export default function App() {
 }
 ```
 
-`ChartKit` passt sich an die Größe seines übergeordneten Elements an — stellen Sie sicher, dass der Container eine explizite Höhe hat.
+`ChartKit` passt sich an die Größe seines Elternteils an — stellen Sie sicher, dass der Container eine explizite Höhe hat.
+
+## Aktualisieren von Charting-Paketen
+
+ChartKit bündelt zwei Gravity UI Charting-Bibliotheken als Abhängigkeiten:
+
+- [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) — treibt das `gravity-charts`-Plugin an
+- [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — treibt das `yagr`-Plugin an
+
+Wenn Sie eine neuere Version eines dieser Pakete benötigen, öffnen Sie eine [Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) Issue und wählen Sie die benötigten Pakete aus. Die Maintainer werden die ausgewählten Pakete aktualisieren und das Update veröffentlichen.
 
 ## Entwicklung
 
@@ -104,7 +114,7 @@ export default function App() {
 - [Node.js](https://nodejs.org/) 22 (siehe [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
 - [npm](https://www.npmjs.com/) 10 oder neuer
 
-### Einrichtung
+### Setup
 
 Klonen Sie das Repository und installieren Sie die Abhängigkeiten:
 
@@ -124,7 +134,7 @@ Storybook ist unter `http://localhost:7007` verfügbar.
 
 ### Entwicklung mit einer lokalen Abhängigkeit
 
-Um an einer Abhängigkeit zu arbeiten (z. B. `@gravity-ui/charts`) und Ihre Änderungen live in Storybook zu sehen, ohne sie auf npm zu veröffentlichen:
+Um an einer Abhängigkeit (z. B. `@gravity-ui/charts`) zu arbeiten und Ihre Änderungen live in Storybook zu sehen, ohne sie auf npm zu veröffentlichen:
 
 **1. Lokales Paket verlinken**
 
@@ -143,13 +153,13 @@ npm link @gravity-ui/charts
 
 **2. Lokale Paketüberwachung konfigurieren**
 
-Erstellen Sie eine `.env.local`-Datei im Stammverzeichnis von ChartKit (sie wird von git ignoriert):
+Erstellen Sie eine `.env.local`-Datei im ChartKit-Root-Verzeichnis (sie wird von git ignoriert):
 
 ```shell
 LOCAL_PKG=@gravity-ui/charts
 ```
 
-Dies weist Vite an, dieses Paket in `node_modules` zu überwachen und das Vorab-Bundling zu überspringen. Nach dem Neuerstellen von `@gravity-ui/charts` wird Storybook automatisch neu geladen.
+Dies weist Vite an, dieses Paket in `node_modules` zu überwachen und es nicht vorab zu bündeln. Nach dem erneuten Erstellen von `@gravity-ui/charts` wird Storybook automatisch per Hot-Reload aktualisiert.
 
 Für mehrere Pakete verwenden Sie eine durch Kommas getrennte Liste:
 
@@ -168,7 +178,7 @@ npm run start
 Wenn Sie fertig sind:
 
 1. Kommentieren Sie `LOCAL_PKG` in `.env.local` aus
-2. Führen Sie `npm install` in ChartKit aus — dies ersetzt den Symlink durch die Version aus dem Registry
+2. Führen Sie `npm install` in ChartKit aus — dies ersetzt den Symlink durch die Registry-Version
 
 ```shell
 # In ChartKit:
