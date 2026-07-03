@@ -1,13 +1,13 @@
 # Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Composant React basé sur des plugins qui offre une interface de rendu unifiée pour plusieurs bibliothèques de graphiques. Vous enregistrez un ou plusieurs plugins et affichez les graphiques via `<ChartKit type="..." data={...} />` — ChartKit distribue automatiquement au bon rendu.
+Composant React basé sur des plugins qui offre une interface de rendu unifiée pour plusieurs bibliothèques de graphiques. Vous enregistrez un ou plusieurs plugins et affichez les graphiques via `<ChartKit type="..." data={...} />` — ChartKit distribue automatiquement vers le bon rendu.
 
 Chaque rendu de plugin est chargé à la demande (lazy-loaded), de sorte que le code de la bibliothèque sous-jacente n'est téléchargé que lorsque ChartKit est effectivement rendu dans l'interface utilisateur. ChartKit gère également l'affichage des infobulles adaptées aux mobiles dès l'installation. Vous pouvez utiliser les plugins intégrés ou implémenter les vôtres.
 
 **Quand l'utiliser :**
 
 - Vous avez besoin de graphiques déclaratifs modernes (`gravity-charts`) ou de graphiques de séries temporelles / de surveillance (`yagr`)
-- Vous avez besoin de plusieurs types de graphiques sous une API unique et cohérente
+- Vous avez besoin de plusieurs types de graphiques sous une seule API cohérente
 - Vous développez dans l'écosystème Gravity UI
 
 **Quand ne pas l'utiliser :**
@@ -16,15 +16,16 @@ Chaque rendu de plugin est chargé à la demande (lazy-loaded), de sorte que le 
 
 ## Table des matières
 
-- [Démarrage](#get-started)
-- [Développement](#development)
+- [Démarrage](#démarrage)
+- [Mise à jour des packages de graphiques](#mise-à-jour-des-packages-de-graphiques)
+- [Développement](#développement)
 
 ## Démarrage
 
 ### Prérequis
 
 - React 16, 17 ou 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dépendance pair requise (fournit le theming et les primitives UI)
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dépendance pair requise (fournit le thème et les primitives d'interface utilisateur)
 
 ### Installation
 
@@ -97,12 +98,21 @@ export default function App() {
 
 `ChartKit` s'adapte à la taille de son parent — assurez-vous que le conteneur a une hauteur explicite.
 
+## Mise à jour des packages de graphiques
+
+ChartKit regroupe deux bibliothèques de graphiques Gravity UI comme dépendances :
+
+- [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) — alimente le plugin `gravity-charts`
+- [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — alimente le plugin `yagr`
+
+Si vous avez besoin d'une version plus récente de l'un de ces packages, ouvrez une demande de mise à jour de package [Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) et sélectionnez le(s) package(s) dont vous avez besoin. Les mainteneurs mettront à jour les packages sélectionnés et publieront la mise à jour.
+
 ## Développement
 
 ### Prérequis
 
 - [Node.js](https://nodejs.org/) 22 (voir [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
-- [npm](https://www.npmjs.com/) 10 ou plus récent
+- [npm](https://www.npmjs.com/) 10 ou supérieur
 
 ### Configuration
 
@@ -124,7 +134,7 @@ Storybook sera disponible à l'adresse `http://localhost:7007`.
 
 ### Développement avec une dépendance locale
 
-Pour travailler sur une dépendance (par exemple, `@gravity-ui/charts`) et voir vos modifications en direct dans Storybook sans la publier sur npm :
+Pour travailler sur une dépendance (par exemple `@gravity-ui/charts`) et voir vos modifications en direct dans Storybook sans la publier sur npm :
 
 **1. Lier le package local**
 
@@ -149,7 +159,7 @@ Créez un fichier `.env.local` à la racine de ChartKit (il est ignoré par git)
 LOCAL_PKG=@gravity-ui/charts
 ```
 
-Cela indique à Vite de surveiller ce package dans `node_modules` et d'éviter de le pré-compiler. Après avoir reconstruit `@gravity-ui/charts`, Storybook se rechargera automatiquement.
+Cela indique à Vite de surveiller ce package dans `node_modules` et de ne pas le pré-compiler. Après avoir reconstruit `@gravity-ui/charts`, Storybook se rechargera à chaud automatiquement.
 
 Pour plusieurs packages, utilisez une liste séparée par des virgules :
 
@@ -195,4 +205,4 @@ npm run test:docker:update
 
 ### Contribution
 
-Veuillez consulter le [guide de contribution](CONTRIBUTING.md) avant de soumettre une pull request.
+Veuillez vous référer au [guide de contribution](CONTRIBUTING.md) avant de soumettre une pull request.

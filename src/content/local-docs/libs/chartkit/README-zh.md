@@ -2,12 +2,12 @@
 
 一个基于插件的 React 组件，为多个图表库提供统一的渲染接口。您可以注册一个或多个插件，然后通过 `<ChartKit type="..." data={...} />` 来渲染图表 — ChartKit 会自动分发到正确的渲染器。
 
-每个插件渲染器都支持懒加载，因此底层库的代码仅在 ChartKit 实际渲染到 UI 时才会被下载。ChartKit 还开箱即用地支持移动端友好的工具提示显示。您可以直接使用内置插件，也可以实现自己的插件。
+每个插件渲染器都支持懒加载，这意味着底层库的代码仅在 ChartKit 实际渲染到 UI 时才会被下载。ChartKit 还开箱即用地处理了移动端友好的工具提示显示。您可以直接使用内置插件，也可以实现自己的插件。
 
 **何时使用：**
 
 - 您需要现代的声明式图表 (`gravity-charts`) 或时间序列/监控图表 (`yagr`)
-- 您需要在单一的、一致的 API 下使用多种图表类型
+- 您需要在单一一致的 API 下使用多种图表类型
 - 您正在 Gravity UI 生态系统中进行开发
 
 **何时不使用：**
@@ -16,10 +16,11 @@
 
 ## 目录
 
-- [快速开始](#get-started)
+- [入门](#get-started)
+- [更新图表包](#updating-charting-packages)
 - [开发](#development)
 
-## 快速开始
+## 入门
 
 ### 要求
 
@@ -41,7 +42,7 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-有关完整的设置细节，请参阅 [uikit 样式指南](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)。
+有关完整的设置详细信息，请参阅 [uikit 样式指南](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)。
 
 ### 基本用法
 
@@ -95,13 +96,22 @@ export default function App() {
 }
 ```
 
-`ChartKit` 会适应其父容器的大小 — 请确保容器具有明确的高度。
+`ChartKit` 会适应其父容器的大小 — 确保容器具有明确的高度。
+
+## 更新图表包
+
+ChartKit 将两个 Gravity UI 图表库作为依赖项捆绑：
+
+- [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) — 为 `gravity-charts` 插件提供支持
+- [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — 为 `yagr` 插件提供支持
+
+如果您需要这些包的更新版本，请打开一个 [包更新请求](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) issue 并选择您需要的包。维护者将更新选定的包并发布更新。
 
 ## 开发
 
 ### 先决条件
 
-- [Node.js](https://nodejs.org/) 22 (请参阅 [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
+- [Node.js](https://nodejs.org/) 22 (参见 [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
 - [npm](https://www.npmjs.com/) 10 或更高版本
 
 ### 设置
@@ -124,7 +134,7 @@ Storybook 将在 `http://localhost:7007` 上可用。
 
 ### 使用本地依赖项进行开发
 
-要在不发布到 npm 的情况下处理依赖项（例如 `@gravity-ui/charts`）并在 Storybook 中实时查看您的更改：
+要在不发布到 npm 的情况下，在 Storybook 中查看对依赖项（例如 `@gravity-ui/charts`）的更改：
 
 **1. 链接本地包**
 
@@ -141,15 +151,15 @@ npm link
 npm link @gravity-ui/charts
 ```
 
-**2. 配置本地包的监听**
+**2. 配置本地包的监视**
 
-在 ChartKit 的根目录创建一个 `.env.local` 文件（它会被 gitignore）：
+在 ChartKit 的根目录下创建一个 `.env.local` 文件（它会被 gitignore）：
 
 ```shell
 LOCAL_PKG=@gravity-ui/charts
 ```
 
-这会告诉 Vite 监听 `node_modules` 中的该包，并跳过预打包。在重新构建 `@gravity-ui/charts` 后，Storybook 将自动热重载。
+这会告诉 Vite 监视 `node_modules` 中的该包并跳过预打包。在重新构建 `@gravity-ui/charts` 后，Storybook 将自动热重载。
 
 对于多个包，请使用逗号分隔的列表：
 
@@ -187,7 +197,7 @@ npm test
 npm run test:docker
 ```
 
-在有意更改 UI 后更新参考截图：
+在有意进行 UI 更改后更新参考截图：
 
 ```shell
 npm run test:docker:update
@@ -195,4 +205,4 @@ npm run test:docker:update
 
 ### 贡献
 
-在提交拉取请求之前，请参阅[贡献指南](CONTRIBUTING.md)。
+在提交拉取请求之前，请参阅 [贡献指南](CONTRIBUTING.md)。
