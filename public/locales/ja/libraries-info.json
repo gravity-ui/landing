@@ -1,7 +1,7 @@
 {
   "description_uikit": "Gravityでサービスを構築するための基本的なUIコンポーネントとトークン。",
   "description_components": "一連の複雑なReactコンポーネント。",
-  "description_icons": "プロジェクト用の数百ものモダンなSVGアイコンセット。",
+  "description_icons": "プロジェクト用の数百もの様々なモダンなSVGアイコンセット。",
   "description_illustrations": "データステータスを表示するためのイラストセット。",
   "description_dynamic-forms": "JSONスキーマで記述された、きれいで機能的なReactフォームをレンダリングするためのライブラリ。",
   "description_page-constructor": "プロモーションページやランディングページを素早く作成するための、スタイリッシュで機能的なブロックセット。",
@@ -9,11 +9,11 @@
   "description_chartkit": "デザインシステムと統合されたデータ可視化スイート。",
   "description_dashkit": "インタラクティブなダッシュボードを構築するためのグリッドコンポーネント。",
   "description_yagr": "uPlotをベースにした、高性能なキャンバスチャートレンダラー。",
-  "description_nodekit": "Node.jsアプリ、スクリプト、ライブラリのためのシンプルなツールキット。",
+  "description_nodekit": "Node.jsアプリ、スクリプト、ライブラリ用のシンプルなツールキット。",
   "description_expresskit": "NodeKitと統合された軽量なexpress.jsラッパー。",
   "description_app-layout": "SPAアプリケーションで使用されるHTMLレイアウトジェネレーター。",
   "description_app-builder": "SPAアプリケーションで使用されるWebpackベースの静的アセットビルダー。",
-  "description_navigation": "複雑なサービスのためのコンパクトで拡張可能なナビゲーションパネル。",
+  "description_navigation": "複雑なサービス向けのコンパクトで拡張性の高いナビゲーションパネル。",
   "description_date-utils": "日付と時刻の値を管理するためのヘルパー。",
   "description_date-components": "様々な日付コンポーネント。",
   "description_axios-wrapper": "同時リクエストの自動キャンセルを提供するAxiosラッパー。",
@@ -36,8 +36,8 @@
   "description_webpack-i18n-assets-plugin": "ローカライゼーション関数（i18n）の呼び出しをターゲットテキストに置き換えるWebpackプラグイン。",
   "description_table": "表形式でデータを可視化するためのライブラリ。",
   "description_timeline": "キャンバスレンダリングによるインタラクティブなタイムライン可視化を構築するためのReactベースのライブラリ。",
-  "description_page-constructor-builder": "YAML設定から静的ページをビルドするための強力なコマンドラインユーティリティ。",
-  "description_aikit": "アトミックデザインの原則に基づいたAIチャット構築のための柔軟なReactコンポーネントライブラリ。",
+  "description_page-constructor-builder": "YAML設定から静的ページを構築するための強力なコマンドラインユーティリティ。",
+  "description_aikit": "アトミックデザインの原則でAIチャットを構築するための柔軟なReactコンポーネントライブラリ。",
   "description_charts": "Reactを使用したデータ可視化とチャートレンダリングのための柔軟なJavaScriptライブラリ。",
-  "description_playwright-tools": "ブラウザアクション、HARベースのリクエスト記録と再生、コンポーネントテストフィクスチャを含む、Playwrightテストの記述用ユーティリティ集。"
+  "description_playwright-tools": "ブラウザアクション、HARベースのリクエスト記録と再生、コンポーネントテストフィクスチャを含む、Playwrightテストの記述用ユーティリティコレクション。"
 }

@@ -1,5 +1,5 @@
 {
-  "description_uikit": "Componentes y tokens base de UI para crear servicios con Gravity.",
+  "description_uikit": "Componentes y tokens UI base para crear servicios con Gravity.",
   "description_components": "Un conjunto de componentes React complejos.",
   "description_icons": "Conjunto con cientos de iconos SVG modernos y variados para tus proyectos.",
   "description_illustrations": "Un conjunto de ilustraciones para mostrar estados de datos.",
@@ -9,7 +9,7 @@
   "description_chartkit": "Una suite de visualización de datos integrada con nuestro sistema de diseño.",
   "description_dashkit": "Un componente de cuadrícula para crear dashboards interactivos.",
   "description_yagr": "Un renderizador de gráficos de lienzo de alto rendimiento, basado en uPlot.",
-  "description_nodekit": "Un kit de herramientas sencillo para tus aplicaciones, scripts y bibliotecas de Node.js.",
+  "description_nodekit": "Un kit de herramientas simple para tus aplicaciones, scripts y bibliotecas de Node.js.",
   "description_expresskit": "Wrapper ligero de express.js que se integra con NodeKit.",
   "description_app-layout": "Generador de diseño HTML utilizado en nuestras aplicaciones SPA.",
   "description_app-builder": "Constructor de activos estáticos basado en Webpack utilizado en nuestras aplicaciones SPA.",
@@ -37,7 +37,7 @@
   "description_table": "Biblioteca para visualizar datos en formato tabular.",
   "description_timeline": "Una biblioteca basada en React para crear visualizaciones de línea de tiempo interactivas con renderizado en lienzo.",
   "description_page-constructor-builder": "Una potente utilidad de línea de comandos para construir páginas estáticas a partir de configuraciones YAML.",
-  "description_aikit": "Una biblioteca de componentes React flexible para construir chats de IA con principios de Diseño Atómico.",
+  "description_aikit": "Una biblioteca de componentes React flexible para crear chats de IA con principios de Diseño Atómico.",
   "description_charts": "Una biblioteca JavaScript flexible para visualización de datos y renderizado de gráficos utilizando React.",
   "description_playwright-tools": "Una colección de utilidades para escribir pruebas de Playwright, incluyendo acciones del navegador, grabación y reproducción de solicitudes basadas en HAR, y fixtures de pruebas de componentes."
 }
