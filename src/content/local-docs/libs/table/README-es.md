@@ -214,7 +214,7 @@ const columns: ColumnDef<Person>[] = [
 
 ### Ordenación
 
-Aprende sobre las propiedades de las columnas en la documentación de react-table [aquí](https://tanstack.com/table/v8/docs/guide/sorting).
+Obtén información sobre las propiedades de las columnas en la documentación de react-table [aquí](https://tanstack.com/table/v8/docs/guide/sorting).
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -247,7 +247,7 @@ const SortingExample = () => {
 };
 ```
 
-Si quieres ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
+Si deseas ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
 
 ```tsx
 const table = useTable({
@@ -325,7 +325,7 @@ Para habilitar los estilos de anidamiento, pasa `withNestingStyles = true` en la
 
 Los indicadores de anidamiento se pueden deshabilitar pasando `showTreeDepthIndicators = false`.
 
-Para añadir un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu propio componente similar:
+Para agregar un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu propio componente personalizado similar:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -390,6 +390,102 @@ const ReorderingExample = () => {
     </ReorderingProvider>
   );
 };
+```
+
+### Reordenación de columnas
+
+Envuelve la tabla con `ColumnReorderingProvider` para habilitar la reordenación de columnas mediante arrastrar y soltar en sus encabezados.
+
+```tsx
+import {ColumnReorderingProvider} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Nombre', size: 100},
+  {accessorKey: 'age', header: 'Edad', size: 100},
+];
+
+const ColumnReorderingExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  return (
+    <ColumnReorderingProvider table={table}>
+      <Table table={table} />
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+Si controlas `columnOrder` tú mismo (por ejemplo, para persistirlo), pasa `onReorder` y aplica el orden resultante:
+
+```tsx
+const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+const table = useTable({
+  columns,
+  data,
+  state: {columnOrder},
+  onColumnOrderChange: setColumnOrder,
+});
+
+return (
+  <ColumnReorderingProvider
+    table={table}
+    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
+  >
+    <Table table={table} />
+  </ColumnReorderingProvider>
+);
+```
+
+API CSS:
+
+| Variable CSS                                 | Predeterminado                | Descripción                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color de la línea de inserción de arrastre |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Ancho de la línea de inserción de arrastre |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacidad de la columna arrastrada    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Fondo de la vista previa de arrastre          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Sombra del cuadro de vista previa de arrastre          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Radio del borde de la vista previa de arrastre       |
+
+Para prohibir la reordenación de una columna específica, establece `enableColumnReordering: false` en su definición de columna. Las columnas de marcador de posición (agrupadas) no se pueden arrastrar. Usa `activationDistance` (predeterminado `8`) para ajustar cuánto debe moverse el puntero antes de que comience un arrastre, lo que mantiene funcionando los clics en la cabecera (como la ordenación).
+
+Las columnas fijadas también se pueden reordenar, pero solo entre ellas: una columna se puede mover dentro del grupo fijado a la izquierda, el grupo fijado a la derecha o el grupo central (no fijado); nunca cruza un límite de fijación al arrastrar.
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  onReorder={({columnOrder, columnPinning, pinned}) => {
+    if (pinned) {
+      setColumnPinning(columnPinning);
+    } else {
+      setColumnOrder(columnOrder);
+    }
+  }}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+Mientras arrastras:
+
+- una vista previa flotante de la columna (su cabecera más las primeras filas) sigue al puntero en una superposición de arrastre;
+- la columna arrastrada se vuelve semitransparente;
+- se dibuja una línea de inserción azul donde se soltará la columna;
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  autoScroll
+  dragOverlayRowCount={10}
+  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
 ```
 
 ### Virtualización
@@ -457,7 +553,7 @@ return (
 
 ### Virtualización de ventana
 
-Úsalo si quieres usar la ventana como elemento de desplazamiento.
+Úsalo si quieres usar la ventana como elemento de desplazamiento
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -478,9 +574,7 @@ const WindowVirtualizationExample = () => {
   });
 
   const bodyRef = React.useRef<HTMLTableSectionElement>(null);
-```
 
-```tsx
   const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
@@ -525,7 +619,7 @@ const columns: ColumnDef<Person>[] = [
     header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // Opcional. Permite ocultar esta columna del popover de configuración
-      titleInSettings: 'ReactNode', // Opcional. Sobrescribe el campo header para el popover de configuración (si necesitas contenido diferente para el header y el popover de configuración)
+      titleInSettings: 'ReactNode', // Opcional. Sobrescribe el campo de cabecera para el popover de configuración (si necesitas contenido diferente para la cabecera y el popover de configuración)
     },
   }, // o puedes usar la función getSettingsColumn
 ];
@@ -540,12 +634,14 @@ const TableSettingsDemo = () => {
     column_id: false, // para ocultar por defecto
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* ids de las columnas hoja */
+    /* ids de columnas hoja */
   ]); // para control externo y estado inicial
 
-  // Variante alternativa para obtener el estado, callbacks y establecer callbacks de aplicación de configuración - usando el hook useTableSettings:
+  // Variante alternativa para obtener estado, callbacks y establecer callbacks de aplicación de configuración - usando el hook useTableSettings:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
+```
 
+```tsx
   const table = useTable({
     columns,
     data,
@@ -561,15 +657,15 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Obtén más información sobre la tabla y las propiedades de redimensionamiento de columnas en la [documentación](https://tanstack.com/table/v8/docs/api/features/column-sizing) de react-table.
+Obtén más información sobre las propiedades de redimensionamiento de tablas y columnas en la [documentación](https://tanstack.com/table/v8/docs/api/features/column-sizing) de react-table.
 
-## Problemas conocidos y compatibilidad
+## Problemas Conocidos y Compatibilidad
 
 ### Compatibilidad con React 19 + React Compiler
 
-**⚠️ Problema conocido:** Existe un problema de compatibilidad conocido con React 19 y React Compiler al usar `@gravity-ui/table` (que se basa en TanStack Table). La tabla puede no volver a renderizarse cuando los datos cambian. Consulta el [problema #5567 de TanStack Table](https://github.com/TanStack/table/issues/5567) para obtener más detalles.
+**⚠️ Problema Conocido:** Existe un problema de compatibilidad conocido con React 19 y React Compiler al usar `@gravity-ui/table` (que se basa en TanStack Table). La tabla podría no volver a renderizarse cuando los datos cambien. Consulta el [issue #5567 de TanStack Table](https://github.com/TanStack/table/issues/5567) para obtener más detalles.
 
-**Solución:**
+**Solución Provisional:**
 
 Si estás utilizando React 19 con React Compiler y experimentas problemas con la reactualización de la tabla, puedes usar la directiva `'use no memo'` en el código de tu componente:
 
@@ -592,9 +688,9 @@ function MyTable() {
 }
 ```
 
-**Solución alternativa:**
+**Solución Alternativa:**
 
-También puedes memoizar explícitamente la instancia de la tabla o los datos para garantizar una correcta reactualización:
+También puedes memoizar explícitamente la instancia de la tabla o los datos para asegurar renderizados correctos:
 
 ```tsx
 import React from 'react';
@@ -604,7 +700,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 function MyTable() {
   const [data, setData] = React.useState<Person[]>([]);
 
-  // Memoiza explícitamente los datos para garantizar la reactualización
+  // Memoiza explícitamente los datos para asegurar renderizados
   const memoizedData = React.useMemo(() => data, [data]);
 
   const table = useTable({
@@ -616,4 +712,4 @@ function MyTable() {
 }
 ```
 
-**Nota:** Este problema está en la biblioteca subyacente TanStack Table y deberá solucionarse allí. Las soluciones alternativas anteriores deberían ayudar hasta que haya una corrección disponible.
+**Nota:** Este problema está en la biblioteca subyacente TanStack Table y deberá solucionarse allí. Las soluciones provisionales anteriores deberían ayudar hasta que haya una corrección disponible.

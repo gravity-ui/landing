@@ -392,6 +392,102 @@ const ReorderingExample = () => {
 };
 ```
 
+### Column reordering
+
+Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
+
+```tsx
+import {ColumnReorderingProvider} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const ColumnReorderingExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  return (
+    <ColumnReorderingProvider table={table}>
+      <Table table={table} />
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
+
+```tsx
+const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+const table = useTable({
+  columns,
+  data,
+  state: {columnOrder},
+  onColumnOrderChange: setColumnOrder,
+});
+
+return (
+  <ColumnReorderingProvider
+    table={table}
+    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
+  >
+    <Table table={table} />
+  </ColumnReorderingProvider>
+);
+```
+
+CSS API:
+
+| CSS variable                                 | Default                       | Description                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color of the drop insertion line |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Width of the drop insertion line |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacity of the dragged column    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Drag preview background          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Drag preview box-shadow          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Drag preview border radius       |
+
+To forbid reordering a specific column, set `enableColumnReordering: false` in its column definition. Placeholder (grouped) columns are not draggable. Use `activationDistance` (default `8`) to tune how far the pointer must move before a drag starts, which keeps header clicks (like sorting) working.
+
+Pinned columns can be reordered too, but only among themselves: a column can be moved within the left-pinned group, the right-pinned group, or the center (non-pinned) group — it never crosses a pin boundary by dragging.
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  onReorder={({columnOrder, columnPinning, pinned}) => {
+    if (pinned) {
+      setColumnPinning(columnPinning);
+    } else {
+      setColumnOrder(columnOrder);
+    }
+  }}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+While dragging:
+
+- a floating preview of the column (its header plus the first rows) follows the pointer in a drag overlay;
+- the dragged column becomes semi-transparent;
+- a blue insertion line is drawn where the column will be dropped;
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  autoScroll
+  dragOverlayRowCount={10}
+  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
 ### Virtualization
 
 Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.

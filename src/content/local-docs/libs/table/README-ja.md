@@ -1,12 +1,12 @@
 # @gravity-ui/table &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/table)](https://www.npmjs.com/package/@gravity-ui/table) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/table/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/table/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/table/)
 
-## 安装
+## インストール
 
 ```shell
 npm install --save @gravity-ui/table
 ```
 
-## 用法
+## 使用方法
 
 ```tsx
 import React from 'react';
@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## 组件
+## コンポーネント
 
-您可以使用两个 Table 组件：
+使用できる Table コンポーネントは2つあります。
 
-- `BaseTable` - 仅包含基本样式的组件；
-- `Table` - 包含 Gravity UI 样式的组件。
+- `BaseTable` - 基本的なスタイルのみを持つコンポーネントです。
+- `Table` - Gravity UI ベースのスタイルを持つコンポーネントです。
 
-### 行选择
+### 行選択
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -54,7 +54,7 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...其他列
+  // ...他のカラム
 ];
 
 const data: Person[] = [
@@ -79,11 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
-要使用分组选择，请使用 `useRowSelectionFixedHandler` hook。否则，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+選択機能とグループ化を併用する場合、`useRowSelectionFixedHandler` フックを使用してください。これがないと、親行のチェックボックスの状態が正しく表示されません。https://github.com/TanStack/table/issues/4878
 
-### 自定义范围选择列
+### カスタム範囲選択カラム
 
-`useToggleRangeSelectionHandler` hook 返回一个更改处理程序，该处理程序监听 Shift+click 事件并执行范围行选择。它需要一个 `CellContext` 实例才能访问表格和行的内部状态。
+`useToggleRangeSelectionHandler` フックは、Shift+クリックイベントをリッスンして範囲選択を実行する変更ハンドラーを返します。テーブルと行の内部状態にアクセスするには、`CellContext` インスタンスを渡す必要があります。
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -141,7 +141,7 @@ const customSelectionColumn: ColumnDef<unknown> = {
 
 const columns: ColumnDef<Person>[] = [
   customSelectionColumn as ColumnDef<Person>,
-  // ...其他列
+  // ...他のカラム
 ];
 
 const data: Person[] = [
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-还有一个 `RangedSelectionCheckbox` 组件，它在内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件提供了向自定义选择列添加范围选择功能的快捷方式。
+`RangedSelectionCheckbox` コンポーネントもあり、内部でフックを使用し、`CellContext` インスタンスをプロップとして受け取ります。このコンポーネントは、カスタム選択カラムに範囲選択機能を簡単に追加するためのショートカットを提供します。
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -198,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-默认情况下，使用 `selectionColumn` 生成的选择列包含范围选择功能。
+デフォルトでは、`selectionColumn` で生成される選択カラムには範囲選択機能が含まれています。
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -206,15 +206,15 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...其他列
+  // ...他のカラム
 ];
 ```
 
-**注意**: 如果表格包含嵌套行，则范围选择将不起作用。目前，这被视为未定义行为。
+**注意**: テーブルにネストされた行が含まれている場合、範囲選択は機能しません。現時点では、これは未定義の動作と見なされます。
 
-### 排序
+### ソート
 
-了解 `react-table` 的列属性，请参阅 [文档](https://tanstack.com/table/v8/docs/guide/sorting)
+react-table の列プロパティについては、[ドキュメント](https://tanstack.com/table/v8/docs/guide/sorting) を参照してください。
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -230,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // 您的列必须具有 accessorFn 才能启用排序
+  // ソートを有効にするには、列に accessorFn が必須です
 
   const table = useTable({
     columns,
@@ -247,7 +247,7 @@ const SortingExample = () => {
 };
 ```
 
-如果您想手动排序元素，请传递 `manualSorting` 属性：
+要素をマニュアルでソートしたい場合は、`manualSorting` プロパティを渡してください。
 
 ```tsx
 const table = useTable({
@@ -256,7 +256,7 @@ const table = useTable({
 });
 ```
 
-### 分组
+### グルーピング
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -319,13 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
-要将分组与选择结合使用，请使用 `useRowSelectionFixedHandler` hook。否则父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+選択機能付きのグルーピングを使用するには、`useRowSelectionFixedHandler` フックを使用してください。これがないと、親行のチェックボックスの状態が正しく表示されません。https://github.com/TanStack/table/issues/4878
 
-要启用嵌套样式，请在列配置中传递 `withNestingStyles = true`。
+ネストスタイルを有効にするには、列設定で `withNestingStyles = true` を渡してください。
 
-可以通过传递 `showTreeDepthIndicators = false` 来禁用嵌套指示器。
+ネストインジケーターは、`showTreeDepthIndicators = false` を渡すことで無効にできます。
 
-要添加用于展开/折叠行的控件，请将单元格内容包装在 `TreeExpandableCell` 组件或您类似的自定义组件中：
+行の展開/折りたたみを制御するコントロールを追加するには、セルコンテンツを `TreeExpandableCell` コンポーネントまたは同様のカスタムコンポーネントでラップしてください。
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -341,11 +341,11 @@ const columns: ColumnDef<Item>[] = [
       <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
     ),
   },
-  // ...其他列
+  // ...他の列
 ];
 ```
 
-### 行重排
+### 並べ替え
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -353,7 +353,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...其他列
+  // ...他の列
 ];
 
 const data: Person[] = [
@@ -392,9 +392,9 @@ const ReorderingExample = () => {
 };
 ```
 
-### 列重排
+### 列の並べ替え
 
-将表格包装在 `ColumnReorderingProvider` 中，以启用通过拖放标题来重排列。
+テーブルを `ColumnReorderingProvider` でラップすると、ヘッダーによる列のドラッグアンドドロップ並べ替えが有効になります。
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
@@ -419,7 +419,7 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-如果您自己控制 `columnOrder`（例如，为了持久化它），请传递 `onReorder` 并应用结果顺序：
+`columnOrder` を自分で制御する場合（例: 保存するため）、`onReorder` を渡し、結果の順序を適用してください。
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -441,206 +441,48 @@ return (
 );
 ```
 
-CSS API：
+CSS API:
 
-| CSS 变量                                 | 默认值                       | 描述                      |
+| CSS 変数                                 | デフォルト                       | 説明                      |
 | -------------------------------------------- | ----------------------------- | -------------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | 插入线颜色 |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | 插入线宽度 |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | 拖拽列的透明度    |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | 拖拽预览背景          |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | 拖拽预览阴影          |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | 拖拽预览圆角       |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | ドロップ挿入ラインの色 |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | ドロップ挿入ラインの幅 |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | ドラッグ中の列の不透明度    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | ドラッグプレビューの背景          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | ドラッグプレビューのbox-shadow          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | ドラッグプレビューの角丸        |
 
-要禁止重新排序特定列，请在其列定义中设置 `enableColumnReordering: false`。占位符（分组）列不可拖动。使用 `activationDistance`（默认值为 `8`）来调整指针移动多远才能开始拖动，这可以确保表头点击（如排序）功能正常工作。
+特定の列の並べ替えを禁止するには、その列の定義で `enableColumnReordering: false` を設定します。プレースホルダー（グループ化された）列はドラッグできません。`activationDistance`（デフォルトは `8`）を使用して、ドラッグが開始されるまでにポインターが移動する必要がある距離を調整します。これにより、ヘッダーのクリック（ソートなど）が引き続き機能します。
 
-固定列也可以重新排序，但只能在它们之间进行：列可以在左固定组、右固定组或中心（未固定）组内移动 — 拖动时它永远不会跨越固定边界。
+固定された列も並べ替え可能ですが、それらの間でのみ可能です。列は左固定グループ、右固定グループ、または中央（固定なし）グループ内で移動できます。ドラッグによってピンの境界を越えることはありません。
 
 ```tsx
 <ColumnReorderingProvider
   table={table}
   onReorder={({columnOrder, columnPinning, pinned}) => {
-    if (pinned) {
-      setColumnPinning(columnPinning);
-    } else {
-      setColumnOrder(columnOrder);
-    }
-  }}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
-
-拖动时：
-
-- 列的浮动预览（其表头加上前几行）会跟随指针显示在拖拽覆盖层中；
-- 被拖动的列会变得半透明；
-- 会绘制一条蓝色的插入线，指示列将被放置的位置；
 
 ```tsx
-<ColumnReorderingProvider
-  table={table}
-  autoScroll
-  dragOverlayRowCount={10}
-  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
-### 虚拟化
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<Record<string, boolean>>({});
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
 
-如果您想将网格容器用作滚动元素（如果您想使用窗口，请参阅窗口虚拟化部分）。请确保为容器设置固定的高度；否则，虚拟化将无法工作。
+  const columns: ColumnDef<Person>[] = [
+    // ... your column definitions
+  ];
 
-```tsx
-import {useRowVirtualizer} from '@gravity-ui/table';
+  const onColumnVisibilityChange = (visibility: Record<string, boolean>) => {
+    setColumnVisibility(visibility);
+  };
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+  const onColumnOrderChange = (order: string[]) => {
+    setColumnOrder(order);
+  };
 
-const data: Person[] = [
-  /* ... */
-];
-
-const VirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const rowVirtualizer = useRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    getScrollElement: () => containerRef.current,
-  });
-
-  return (
-    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
-      <Table table={table} rowVirtualizer={rowVirtualizer} />
-    </div>
-  );
-};
-```
-
-如果您将虚拟化与重新排序功能一起使用，还需要传递 `rangeExtractor` 选项：
-
-```tsx
-import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
-
-// ...
-
-const tableRef = React.useRef<HTMLTableElement>(null);
-
-const rowVirtualizer = useRowVirtualizer({
-  // ...
-  rangeExtractor: getVirtualRowRangeExtractor(tableRef.current),
-});
-
-return (
-  <TableWithReordering
-    ref={tableRef}
-    table={table}
-    rowVirtualizer={rowVirtualizer}
-    onReorder={handleReorder}
-  />
-);
-```
-
-### 窗口虚拟化
-
-如果您想使用窗口作为滚动元素
-
-```tsx
-import {useWindowRowVirtualizer} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const WindowVirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const bodyRef = React.useRef<HTMLTableSectionElement>(null);
-
-  const rowVirtualizer = useWindowRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    scrollMargin: bodyRef.current?.offsetTop ?? 0,
-  });
-
-  return <Table table={table} rowVirtualizer={rowVirtualizer} bodyRef={bodyRef} />;
-};
-```
-
-### 调整列宽
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const ResizingDemo = () => {
-  const table = useTable({
-    columns,
-    data,
-    enableColumnResizing: true,
-    columnResizeMode: 'onChange',
-  });
-
-  return <Table table={table} />;
-};
-```
-
-### 列设置
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  // ...其他列
-  {
-    id: 'settings_column_id',
-    header: ({table}) => <TableSettings table={table} />,
-    meta: {
-      hideInSettings: false, // 可选。允许在设置弹出窗口中隐藏此列
-      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的表头字段（如果您需要表头和设置弹出窗口的内容不同）
-    },
-  }, // 或者您可以使用 getSettingsColumn 函数
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const TableSettingsDemo = () => {
-  const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // 用于外部控制和初始状态
-    column_id: false, // 默认隐藏
-  });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* 叶子列 ID */
-  ]); // 用于外部控制和初始状态
-
-  // 使用 useTableSettings hook 获取状态、回调和在设置应用时设置回调的替代方案：
-  // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
-
-```tsx
   const table = useTable({
     columns,
     data,
@@ -656,17 +498,17 @@ const TableSettingsDemo = () => {
 };
 ```
 
-在 [react-table 文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解更多关于表格和列调整大小的属性。
+react-table のテーブルと列のリサイズ機能については、[ドキュメント](https://tanstack.com/table/v8/docs/api/features/column-sizing)で詳細をご確認ください。
 
-## 已知问题与兼容性
+## 既知の問題と互換性
 
-### React 19 + React Compiler 兼容性
+### React 19 + React Compiler の互換性
 
-**⚠️ 已知问题：** 在使用 `@gravity-ui/table`（基于 TanStack Table 构建）时，与 React 19 和 React Compiler 存在一个已知的兼容性问题。表格在数据更改时可能不会重新渲染。详情请参阅 [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567)。
+**⚠️ 既知の問題:** `@gravity-ui/table` (TanStack Table を基盤としています) を使用している場合、React 19 および React Compiler との間に互換性の問題が確認されています。データが変更されてもテーブルが再レンダリングされない場合があります。詳細は [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567) を参照してください。
 
-**解决方法：**
+**回避策:**
 
-如果您正在使用 React 19 和 React Compiler，并且遇到表格重新渲染的问题，可以在您的组件代码中使用 `'use no memo'` 指令：
+React 19 と React Compiler を使用していて、テーブルの再レンダリングに関する問題が発生している場合は、コンポーネントコードで `'use no memo'` ディレクティブを使用できます。
 
 ```tsx
 import React from 'react';
@@ -674,7 +516,7 @@ import {Table, useTable} from '@gravity-ui/table';
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 function MyTable() {
-  'use no memo'; // 禁用此组件的 React Compiler 记忆化
+  'use no memo'; // このコンポーネントの React Compiler によるメモ化を無効にする
 
   const [data, setData] = React.useState<Person[]>([]);
 
@@ -687,9 +529,9 @@ function MyTable() {
 }
 ```
 
-**替代方案：**
+**代替ソリューション:**
 
-您也可以显式地记忆化表格实例或数据，以确保正确的重新渲染：
+テーブルインスタンスまたはデータを明示的にメモ化して、適切な再レンダリングを保証することもできます。
 
 ```tsx
 import React from 'react';
@@ -699,7 +541,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 function MyTable() {
   const [data, setData] = React.useState<Person[]>([]);
 
-  // 显式记忆化数据以确保重新渲染
+  // 再レンダリングを保証するためにデータを明示的にメモ化する
   const memoizedData = React.useMemo(() => data, [data]);
 
   const table = useTable({
@@ -711,4 +553,4 @@ function MyTable() {
 }
 ```
 
-**注意：** 此问题存在于底层的 TanStack Table 库中，需要在此库中进行修复。上述解决方法将在修复可用之前提供帮助。
+**注意:** この問題は基盤となる TanStack Table ライブラリに存在し、そちらで修正される必要があります。上記の回避策は、修正が利用可能になるまで役立つはずです。
