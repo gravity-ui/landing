@@ -15,6 +15,7 @@ export type NavigationProps = {
     sections: Section[];
     sectionId: string;
     subSectionId?: string;
+    searchAutoFocus?: boolean;
     searchPlaceholder?: string;
     emptySearchPlaceholder?: string;
     onClickOnLink: () => void;
@@ -25,6 +26,7 @@ export const Navigation = React.memo<NavigationProps>(
         sections,
         sectionId,
         subSectionId,
+        searchAutoFocus,
         searchPlaceholder,
         emptySearchPlaceholder,
         onClickOnLink,
@@ -94,6 +96,7 @@ export const Navigation = React.memo<NavigationProps>(
                         value={filterString}
                         onUpdate={filterStringUpdateHandle}
                         size={isMobile ? 'xl' : 'l'}
+                        autoFocus={searchAutoFocus}
                         placeholder={searchPlaceholder}
                         hasClear
                     />

@@ -23,6 +23,7 @@ export type NavigationLayoutProps = {
     sectionId: string;
     subSectionId?: string;
     mobileTitle: string;
+    searchAutoFocus?: boolean;
     searchPlaceholder?: string;
     emptySearchPlaceholder?: string;
     children?: React.ReactNode;
@@ -33,6 +34,7 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
     sectionId,
     subSectionId,
     mobileTitle,
+    searchAutoFocus,
     searchPlaceholder,
     emptySearchPlaceholder,
     children,
@@ -107,6 +109,7 @@ export const NavigationLayout: React.FC<NavigationLayoutProps> = ({
                         sections={sections}
                         sectionId={sectionId}
                         subSectionId={subSectionId}
+                        searchAutoFocus={searchAutoFocus}
                         searchPlaceholder={searchPlaceholder}
                         emptySearchPlaceholder={
                             emptySearchPlaceholder ?? t('emptySearchPlaceholder')
