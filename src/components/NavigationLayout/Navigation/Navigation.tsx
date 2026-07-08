@@ -53,7 +53,7 @@ export const Navigation = React.memo<NavigationProps>(
 
                 if (newValue) {
                     const newOpenState = {...openState};
-                    const filterStringLower = newValue.toLowerCase();
+                    const filterStringLower = newValue.toLowerCase().trim();
 
                     const filtered = filterStringLower
                         ? sections.reduce<Section[]>((acc, section) => {
