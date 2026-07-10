@@ -1,6 +1,6 @@
 # @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/) [![coverage](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fstorage.yandexcloud.net%2Fplaywright-reports%2Fdate-components%2Fpulls%2Fmain%2Fcoverage%2Fcoverage-summary.json&query=%24.total.lines.pct&suffix=%25&label=Coverage)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/coverage/lcov-report/index.html) [![tests-report](https://img.shields.io/badge/Tests-report-ff4685)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/html/index.html)
 
-## Instalação
+## Instalar
 
 ```shell
 npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
@@ -100,3 +100,30 @@ Para iniciar o servidor de desenvolvimento com o storybook, execute o seguinte:
 ```shell
 npm start
 ```
+
+## Licença
+
+Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
+
+## Para agentes de IA
+
+Controles de data e hora em React para aplicativos Gravity UI — seletores de data/hora, calendários e seletores de intervalo absoluto/relativo construídos sobre `@gravity-ui/date-utils`.
+
+### Quando usar
+
+- Entrada de data ou data/hora única: `DatePicker`, `DateField`.
+- Calendários para seleção de mês/dia: `Calendar`, `CalendarView`.
+- Intervalos de datas: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
+- Intervalos relativos e mistos absoluto/relativo (por exemplo, "últimos 7 dias"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+
+### Quando não usar
+
+- Entradas de texto simples ou numéricas, botões ou outros controles genéricos — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Matemática de data de baixo nível, análise, formatação ou manipulação de fuso horário sem interface — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) diretamente.
+
+### Armadilhas comuns
+
+- **Valores são objetos `DateTime`, não `Date` do JS.** Os componentes trabalham com `dateTime()` de [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); passe e leia `DateTime`, não `Date` nativo ou strings ISO.
+- **Requer configuração do uikit.** Renderize dentro de `ThemeProvider` e importe `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` e `@gravity-ui/date-utils` são dependências obrigatórias.
+- **Local é carregado, não apenas definido.** Defina o idioma via `ThemeProvider` `lang`, mas carregue os dados de local primeiro com `settings.loadLocale('ru')` de `@gravity-ui/date-utils`, ou as datas serão renderizadas no local padrão.
+- **Traduções específicas de componentes usam `addLanguageKeysets`.** Para idiomas além de `en`/`ru`, registre os conjuntos de chaves via `addLanguageKeysets` de `@gravity-ui/uikit/i18n` usando os tipos `Keysets`/`PartialKeysets` exportados aqui.

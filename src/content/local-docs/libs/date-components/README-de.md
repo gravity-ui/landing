@@ -36,12 +36,12 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Lade die Datum-Locales, die in der Anwendung verwendet werden.
+// Laden Sie die Datums-Locales, die in der Anwendung verwendet werden sollen.
 await settings.loadLocale('ru');
 
 function App() {
   return (
-    // Setze die Sprache, die mit den Komponenten verwendet werden soll.
+    // Setzen Sie die Sprache, die mit den Komponenten verwendet werden soll.
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
@@ -53,10 +53,10 @@ function App() {
 }
 ```
 
-Wenn die App Sprachwechsel unterstützt, lade alle unterstützten Locales vor, wenn die App zum ersten Mal geladen wird, oder lade die Locales vor dem Sprachwechsel:
+Wenn die App Sprachwechsel unterstützt, laden Sie alle unterstützten Locales vorab, wenn die App zum ersten Mal geladen wird, oder laden Sie die Locales vor dem Sprachwechsel:
 
 ```jsx
-// Locales vorladen
+// Locales vorab laden
 await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
@@ -77,16 +77,16 @@ function App() {
 }
 ```
 
-Die Komponenten haben Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwende `addLanguageKeysets` von `@gravity-ui/uikit`:
+Die Komponenten verfügen über Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwenden Sie `addLanguageKeysets` aus `@gravity-ui/uikit`:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// Verwende den Keyset-Typ, um Übersetzungen für alle verfügbaren Komponenten anzugeben
+// Verwenden Sie den Keyset-Typ, um Übersetzungen für alle verfügbaren Komponenten anzugeben
 addLanguageKeysets<Keysets>(lang, {...});
 
-// oder verwende den PartialKeysets-Typ, um nur die benötigten anzugeben
+// oder verwenden Sie den PartialKeysets-Typ, um nur die benötigten anzugeben
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
 // Um Übersetzungen für einige Komponenten anzugeben
@@ -95,8 +95,35 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 
 ## Entwicklung
 
-Um den Entwicklungsserver mit Storybook zu starten, führe Folgendes aus:
+Um den Entwicklungsserver mit Storybook zu starten, führen Sie Folgendes aus:
 
 ```shell
 npm start
 ```
+
+## Lizenz
+
+Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
+
+## Für KI-Agenten
+
+React-Datums- und Zeitsteuerungen für Gravity UI-Apps – Datums-/Zeitauswähler, Kalender und absolute/relative Bereichsauswähler, die auf `@gravity-ui/date-utils` basieren.
+
+### Wann zu verwenden
+
+- Eingabe für ein einzelnes Datum oder Datum/Uhrzeit: `DatePicker`, `DateField`.
+- Kalender zur Auswahl von Monat/Tag: `Calendar`, `CalendarView`.
+- Datumsbereiche: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
+- Relative und gemischte absolute/relative Bereiche (z. B. „letzte 7 Tage“): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+
+### Wann nicht zu verwenden
+
+- Reine Text- oder Zahleneingaben, Schaltflächen oder andere generische Steuerelemente – verwenden Sie [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Low-Level-Datumsberechnungen, Parsen, Formatieren oder Zeitzonenbehandlung ohne Benutzeroberfläche – verwenden Sie direkt [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils).
+
+### Häufige Fallstricke
+
+- **Werte sind `DateTime`-Objekte, nicht JS `Date`.** Komponenten arbeiten mit `dateTime()` aus [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); übergeben und lesen Sie `DateTime`, nicht native `Date`- oder ISO-Strings.
+- **Benötigt uikit-Setup.** Rendern Sie innerhalb von `ThemeProvider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` und `@gravity-ui/date-utils` sind erforderliche Peer-Abhängigkeiten.
+- **Locale wird geladen, nicht nur gesetzt.** Setzen Sie die Sprache über `ThemeProvider` `lang`, aber laden Sie zuerst die Locale-Daten mit `settings.loadLocale('ru')` aus `@gravity-ui/date-utils`, oder Daten werden in der Standard-Locale gerendert.
+- **Komponentenspezifische Übersetzungen verwenden `addLanguageKeysets`.** Für Sprachen über `en`/`ru` hinaus registrieren Sie Keysets über `addLanguageKeysets` aus `@gravity-ui/uikit/i18n` unter Verwendung der hier exportierten Typen `Keysets`/`PartialKeysets`.
