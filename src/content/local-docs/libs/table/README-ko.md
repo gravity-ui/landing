@@ -41,7 +41,7 @@ const BasicExample = () => {
 
 ## 컴포넌트
 
-두 가지 Table 컴포넌트를 사용할 수 있습니다.
+두 가지 Table 컴포넌트를 사용할 수 있습니다:
 
 - `BaseTable` - 기본적인 스타일만 적용된 컴포넌트입니다.
 - `Table` - Gravity UI 기반 스타일이 적용된 컴포넌트입니다.
@@ -83,7 +83,7 @@ const RowSelectionExample = () => {
 
 ### 사용자 정의 범위 선택 컬럼
 
-`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 접근하려면 `CellContext` 인스턴스를 전달해야 합니다.
+`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 액세스하려면 `CellContext` 인스턴스를 전달해야 합니다.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-`RangedSelectionCheckbox` 컴포넌트도 제공됩니다. 이 컴포넌트는 내부적으로 훅을 사용하며 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 데 편리합니다.
+`RangedSelectionCheckbox` 컴포넌트도 제공됩니다. 이 컴포넌트는 내부적으로 훅을 사용하며 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 데 편리한 방법을 제공합니다.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -319,11 +319,11 @@ const GroupingExample = () => {
 };
 ```
 
-선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행의 체크박스 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
+선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행 체크박스의 상태가 올바르지 않게 됩니다. https://github.com/TanStack/table/issues/4878
 
-중첩 스타일을 활성화하려면 컬럼 구성에서 `withNestingStyles = true`를 전달하세요.
+중첩 스타일을 활성화하려면 컬럼 설정에서 `withNestingStyles = true`를 전달하세요.
 
-트리 깊이 표시기는 `showTreeDepthIndicators = false`를 전달하여 비활성화할 수 있습니다.
+중첩 표시기는 `showTreeDepthIndicators = false`를 전달하여 비활성화할 수 있습니다.
 
 행을 확장/축소하는 컨트롤을 추가하려면 셀 내용을 `TreeExpandableCell` 컴포넌트 또는 유사한 사용자 정의 컴포넌트로 감싸세요.
 
@@ -452,7 +452,7 @@ CSS API:
 | `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | 드래그 미리보기 박스 그림자          |
 | `--gt-table-drag-overlay-border-radius`      | `6px`                         | 드래그 미리보기 테두리 반경       |
 
-특정 열의 재정렬을 금지하려면 해당 열 정의에서 `enableColumnReordering: false`를 설정하세요. 플레이스홀더(그룹화된) 열은 드래그할 수 없습니다. `activationDistance`(기본값 `8`)를 사용하여 포인터가 드래그가 시작되기 전에 이동해야 하는 거리를 조정하여 헤더 클릭(정렬 등)이 작동하도록 유지합니다.
+특정 열의 재정렬을 금지하려면 해당 열 정의에서 `enableColumnReordering: false`를 설정하세요. 플레이스홀더(그룹화된) 열은 드래그할 수 없습니다. `activationDistance`(기본값 `8`)를 사용하여 포인터가 드래그가 시작되기 전에 이동해야 하는 거리를 조정하면 헤더 클릭(정렬 등)이 계속 작동합니다.
 
 고정된 열도 재정렬할 수 있지만, 서로 간에만 가능합니다. 열은 왼쪽 고정 그룹, 오른쪽 고정 그룹 또는 중앙(고정되지 않은) 그룹 내에서 이동할 수 있으며, 드래그 시 고정 경계를 넘지 않습니다.
 
@@ -631,7 +631,7 @@ const data: Person[] = [
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // 외부 제어 및 초기 상태용
-    column_id: false, // 기본적으로 숨김
+    column_id: false, // 기본적으로 숨김 처리
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
     /* 리프 열 ID */
@@ -657,10 +657,87 @@ const TableSettingsDemo = () => {
 };
 ```
 
-테이블 및 열 크기 조정 속성에 대해 자세히 알아보려면 react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)를 참조하세요.
+[react-table](https://tanstack.com/table/v8/docs/api/features/column-sizing) [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 열 크기 조정 속성에 대해 자세히 알아보세요.
 
 ## 알려진 문제 및 호환성
 
 ### React 19 + React Compiler 호환성
 
-**⚠️ 알려진 문제:** `@gravity-ui/table`(TanStack Table 기반)을 사용할 때 React 19 및 React Compiler와 호환성 문제가 있습니다. 데이터가 변경되어도 테이블이 다시 렌
+**⚠️ 알려진 문제:** `@gravity-ui/table`(TanStack Table 기반)을 사용할 때 React 19 및 React Compiler와 호환성 문제가 있습니다. 데이터가 변경되어도 테이블이 다시 렌더링되지 않을 수 있습니다. 자세한 내용은 [TanStack Table 이슈 #5567](https://github.com/TanStack/table/issues/5567)을 참조하세요.
+
+**해결 방법:**
+
+React 19와 React Compiler를 사용 중이며 테이블 다시 렌더링에 문제가 발생하는 경우, 컴포넌트 코드에 `'use no memo'` 지시문을 사용할 수 있습니다.
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  'use no memo'; // 이 컴포넌트에 대한 React Compiler 메모이제이션 비활성화
+
+  const [data, setData] = React.useState<Person[]>([]);
+
+  const table = useTable({
+    data,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**대안 솔루션:**
+
+테이블 인스턴스 또는 데이터를 명시적으로 메모이제이션하여 올바른 다시 렌더링을 보장할 수도 있습니다.
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
+  // 다시 렌더링을 보장하기 위해 데이터를 명시적으로 메모이제이션
+  const memoizedData = React.useMemo(() => data, [data]);
+
+  const table = useTable({
+    data: memoizedData,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**참고:** 이 문제는 기본 TanStack Table 라이브러리에 있으며 해당 라이브러리에서 수정되어야 합니다. 위의 해결 방법은 수정이 제공될 때까지 도움이 될 것입니다.
+
+## 라이선스
+
+MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
+
+## AI 에이전트용
+
+Gravity UI 앱을 위한 헤드리스 TanStack-Table 기반 데이터 그리드입니다. uikit의 기본 `Table` 위에 원시 마크업을 구성하는 대신 정렬 가능, 선택 가능, 그룹화 가능, 재정렬 가능 및 가상화된 테이블이 필요한 경우 사용하세요.
+
+### 언제 사용해야 할까요?
+
+- 행 또는 창 가상화가 필요한 대규모 데이터 세트 (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- 열 정렬, 크기 조정, 재정렬 (`ColumnReorderingProvider`), 고정 및 사용자별 열 설정 (`TableSettings`).
+- 행 선택(단일/다중, 범위) 및 확장 가능한 셀이 있는 트리/그룹화된 행.
+
+### 언제 사용하지 않아야 할까요?
+
+- 몇 개의 행과 고급 기능이 없는 간단한 정적 테이블 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 uikit 내장 `Table`이 더 가볍습니다.
+- 비표 형식 목록 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 `List`를 사용하세요.
+- 스프레드시트 스타일의 인라인 셀 편집 — 이 그리드는 편집 가능한 스프레드시트가 아닌 읽기/표시 중심입니다.
+
+### 일반적인 함정
+
+- **`useTable`로 테이블을 빌드한 다음 `<Table table={table} />`를 렌더링합니다.** 기본 속성은 `<Table>`의 `data`/`columns`가 아니라 `table`(인스턴스)입니다. `data`와 `columns`를 `useTable`에 전달하세요.
+- **타입은 `@gravity-ui/table/tanstack` 하위 경로에서 가져옵니다.** `ColumnDef`, `RowSelectionState`, `SortingState` 등은 패키지 루트가 아닌 `@gravity-ui/table/tanstack`에서 가져옵니다.
+- **정렬에는 accessor가 필요합니다.** 정렬이 작동하려면 열에 `accessorKey`/`accessorFn`이 있어야 합니다. `enableSorting`을 설정하고 `getRowId`를 제공하세요.
+- **React 19 + React Compiler는 다시 렌더링을 건너뛸 수 있습니다.** 이는 상위 TanStack Table 문제이므로 컴포넌트에 `'use no memo'` 지시문을 추가하거나 `data`를 메모이제이션하세요.
+- **범위 선택이 중첩된 행에서 깨집니다.** 테이블에 그룹화된/중첩된 행이 있을 때 범위 선택은 정의되지 않은 동작입니다. 그룹화 시 올바른 부모 체크박스 상태를 위해 `useRowSelectionFixedHandler`를 사용하세요.

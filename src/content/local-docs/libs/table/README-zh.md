@@ -79,7 +79,7 @@ const RowSelectionExample = () => {
 };
 ```
 
-要使用分组选择，请使用 `useRowSelectionFixedHandler` hook。否则，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+要使用带选择功能的组，请使用 `useRowSelectionFixedHandler` hook。没有它，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
 
 ### 自定义范围选择列
 
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-还有一个 `RangedSelectionCheckbox` 组件，它在内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件提供了向自定义选择列添加范围选择功能的快捷方式。
+还有一个 `RangedSelectionCheckbox` 组件，它在内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件为向自定义选择列添加范围选择功能提供了快捷方式。
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -210,11 +210,11 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**注意**: 如果表格包含嵌套行，则范围选择将不起作用。目前，这被视为未定义行为。
+**注意**: 如果表格包含嵌套行，范围选择将不起作用。目前，这被认为是未定义行为。
 
 ### 排序
 
-了解 `react-table` 的列属性，请参阅 [文档](https://tanstack.com/table/v8/docs/guide/sorting)
+了解 `react-table` 的列属性，请参阅 [文档](https://tanstack.com/table/v8/docs/guide/sorting)。
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -230,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // 您的列必须具有 accessorFn 才能启用排序
+  // 必须为您的列设置 accessorFn 才能启用排序
 
   const table = useTable({
     columns,
@@ -319,7 +319,7 @@ const GroupingExample = () => {
 };
 ```
 
-要将分组与选择结合使用，请使用 `useRowSelectionFixedHandler` hook。否则父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+要将分组与选择结合使用，请使用 `useRowSelectionFixedHandler` hook。否则，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
 
 要启用嵌套样式，请在列配置中传递 `withNestingStyles = true`。
 
@@ -394,7 +394,7 @@ const ReorderingExample = () => {
 
 ### 列重排
 
-将表格包装在 `ColumnReorderingProvider` 中，以启用通过拖放标题来重排列。
+将表格包装在 `ColumnReorderingProvider` 中，以启用通过表头进行列的拖放重排。
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
@@ -475,7 +475,7 @@ CSS API：
 
 - 列的浮动预览（其表头加上前几行）会跟随指针显示在拖拽覆盖层中；
 - 被拖动的列会变得半透明；
-- 会绘制一条蓝色的插入线，指示列将被放置的位置；
+- 在列将要被放置的位置会绘制一条蓝色的插入线；
 
 ```tsx
 <ColumnReorderingProvider
@@ -586,7 +586,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### 调整列宽
+### 列宽度调整
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -619,7 +619,7 @@ const columns: ColumnDef<Person>[] = [
     header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // 可选。允许在设置弹出窗口中隐藏此列
-      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的表头字段（如果您需要表头和设置弹出窗口的内容不同）
+      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的表头字段（如果您需要表头和设置弹出窗口之间不同的内容）
     },
   }, // 或者您可以使用 getSettingsColumn 函数
 ];
@@ -656,17 +656,17 @@ const TableSettingsDemo = () => {
 };
 ```
 
-在 [react-table 文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解更多关于表格和列调整大小的属性。
+在 [react-table 文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解更多关于表格和列调整大小的属性
 
-## 已知问题与兼容性
+## 已知问题和兼容性
 
 ### React 19 + React Compiler 兼容性
 
-**⚠️ 已知问题：** 在使用 `@gravity-ui/table`（基于 TanStack Table 构建）时，与 React 19 和 React Compiler 存在一个已知的兼容性问题。表格在数据更改时可能不会重新渲染。详情请参阅 [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567)。
+**⚠️ 已知问题：** 在使用 `@gravity-ui/table`（基于 TanStack Table 构建）时，存在一个与 React 19 和 React Compiler 的已知兼容性问题。当数据更改时，表格可能不会重新渲染。详情请参阅 [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567)。
 
 **解决方法：**
 
-如果您正在使用 React 19 和 React Compiler，并且遇到表格重新渲染的问题，可以在您的组件代码中使用 `'use no memo'` 指令：
+如果您正在使用 React 19 和 React Compiler，并且遇到表格重新渲染问题，可以在组件代码中使用 `'use no memo'` 指令：
 
 ```tsx
 import React from 'react';
@@ -674,7 +674,7 @@ import {Table, useTable} from '@gravity-ui/table';
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 function MyTable() {
-  'use no memo'; // 禁用此组件的 React Compiler 记忆化
+  'use no memo'; // 为此组件禁用 React Compiler 的 memoization
 
   const [data, setData] = React.useState<Person[]>([]);
 
@@ -689,7 +689,7 @@ function MyTable() {
 
 **替代方案：**
 
-您也可以显式地记忆化表格实例或数据，以确保正确的重新渲染：
+您也可以显式地 memoize 表格实例或数据，以确保正确重新渲染：
 
 ```tsx
 import React from 'react';
@@ -699,7 +699,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 function MyTable() {
   const [data, setData] = React.useState<Person[]>([]);
 
-  // 显式记忆化数据以确保重新渲染
+  // 显式 memoize 数据以确保重新渲染
   const memoizedData = React.useMemo(() => data, [data]);
 
   const table = useTable({
@@ -711,4 +711,32 @@ function MyTable() {
 }
 ```
 
-**注意：** 此问题存在于底层的 TanStack Table 库中，需要在此库中进行修复。上述解决方法将在修复可用之前提供帮助。
+**注意：** 此问题存在于底层的 TanStack Table 库中，需要在此处修复。在修复可用之前，上述解决方法应该有所帮助。
+
+## 许可证
+
+MIT 许可证。详情请参阅 [LICENSE](LICENSE)。
+
+## 致 AI 代理
+
+为 Gravity UI 应用打造的无头、基于 TanStack Table 的数据网格 — 当您需要在 uikit 的基础 `Table` 上组合原始标记时，请使用它来实现可排序、可选择、可分组、可重排和虚拟化的表格。
+
+### 何时使用
+
+- 需要行或窗口虚拟化的大型数据集（`useRowVirtualizer`、`useWindowRowVirtualizer`）。
+- 列排序、调整大小、重排（`ColumnReorderingProvider`）、固定以及用户自定义列设置（`TableSettings`）。
+- 行选择（单选/多选、范围选择）以及带有可展开单元格的树形/分组行。
+
+### 何时避免使用
+
+- 具有少量行且没有高级功能的简单静态表格 — 来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 的 uikit 内置 `Table` 更轻量。
+- 非表格列表 — 使用来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 的 `List`。
+- 电子表格风格的内联单元格编辑 — 此网格侧重于读取/显示，而非可编辑的电子表格。
+
+### 常见陷阱
+
+- **您使用 `useTable` 构建表格，然后渲染 `<Table table={table} />`。** 主要 prop 是 `table`（实例），而不是直接在 `<Table>` 上的 `data`/`columns`；将 `data` 和 `columns` 传递给 `useTable`。
+- **类型来自 `@gravity-ui/table/tanstack` 子路径。** 从 `@gravity-ui/table/tanstack` 导入 `ColumnDef`、`RowSelectionState`、`SortingState` 等，而不是从包的根目录导入。
+- **排序需要一个访问器。** 列必须具有 `accessorKey`/`accessorFn` 才能使排序生效；设置 `enableSorting` 并提供 `getRowId`。
+- **React 19 + React Compiler 可能会跳过重新渲染。** 这是上游 TanStack Table 的问题 — 在组件中添加 `'use no memo'` 指令或 memoize `data`。
+- **范围选择在嵌套行中会中断。** 当表格具有分组/嵌套行时，范围选择是未定义行为；使用 `useRowSelectionFixedHandler` 来正确处理分组情况下的父复选框状态。
