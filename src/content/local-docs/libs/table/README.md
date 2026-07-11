@@ -711,3 +711,31 @@ function MyTable() {
 ```
 
 **Note:** This issue is in the underlying TanStack Table library and will need to be fixed there. The workarounds above should help until a fix is available.
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## For AI agents
+
+A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
+
+### When to use
+
+- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
+- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
+
+### When not to use
+
+- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
+
+### Common pitfalls
+
+- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
+- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
+- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
+- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
+- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
