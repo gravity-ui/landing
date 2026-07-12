@@ -6,12 +6,14 @@ import {Section} from 'src/components/NavigationLayout/types';
 import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import i18nextConfig from '../../../../next-i18next.config';
-import {type LibWithFullData, ServerApi} from '../../../api';
+import {type LibWithFullData} from '../../../api';
+import {ServerApi} from '../../../api/server';
 import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
-import {getLibComponents, getMaintainers} from '../../../utils';
+import {getMaintainers} from '../../../utils';
+import {getLibComponents} from '../../../utils/components';
 import {getI18nProps} from '../../../utils/i18next';
 import {getComponentMeta} from '../../../utils/meta';
 

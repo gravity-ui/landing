@@ -1,5 +1,6 @@
 import {GetServerSideProps} from 'next';
-import {ClientApi, ServerApi} from 'src/api';
+import {ClientApi} from 'src/api';
+import {ServerApi} from 'src/api/server';
 
 let cachePromise: Promise<unknown> | null = null;
 

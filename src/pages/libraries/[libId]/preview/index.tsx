@@ -3,7 +3,8 @@ import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 import React from 'react';
 
-import {type LibWithMetadata, ServerApi} from '../../../../api';
+import {type LibWithMetadata} from '../../../../api';
+import {ServerApi} from '../../../../api/server';
 import {LibraryPreview} from '../../../../components/LibraryPreview/LibraryPreview';
 import {getI18nProps, isValidLibId} from '../../../../utils';
 

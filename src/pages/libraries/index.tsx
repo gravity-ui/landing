@@ -1,7 +1,8 @@
 import {GetServerSideProps} from 'next';
 import {useTranslation} from 'next-i18next';
 
-import {type LibWithMetadata, ServerApi} from '../../api';
+import {type LibWithMetadata} from '../../api';
+import {ServerApi} from '../../api/server';
 import {Layout} from '../../components/Layout/Layout';
 import {Libraries} from '../../components/Libraries/Libraries';
 import {getI18nProps} from '../../utils/i18next';

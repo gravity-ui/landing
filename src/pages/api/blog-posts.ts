@@ -8,7 +8,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
 
-    const contributors = await ServerApi.instance.fetchAllContributorsWithCache();
+    const locale = typeof req.query.locale === 'string' ? req.query.locale : 'en';
 
-    res.status(200).json({contributors});
+    try {
+        const response = await ServerApi.instance.getBlogPosts(locale);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({posts: [], count: 0, totalCount: 0, pinnedPost: null});
+    }
 }
