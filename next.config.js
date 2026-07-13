@@ -1,4 +1,3 @@
-const {join} = require('path');
 const path = require('path');
 
 const bundleAnalyzer = require('@next/bundle-analyzer');
@@ -21,7 +20,7 @@ module.exports = withBundleAnalyzer({
         config.module.rules.push({
             issuer: /\.(tsx|ts|js|cjs|mjs|jsx)$/,
             test: /\.svg$/,
-            exclude: join(__dirname, 'src/assets/icons'),
+            exclude: path.join(__dirname, 'src/assets/icons'),
             use: [
                 {
                     loader: 'file-loader',
