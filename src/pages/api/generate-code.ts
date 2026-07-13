@@ -50,7 +50,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             ],
         });
 
-        return res.status(200).json({output: response.output_text});
+        const parsed = JSON.parse(response.output_text ?? '{}');
+        return res.status(200).json({code: parsed.code ?? ''});
     } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error in generate-code API:', error);

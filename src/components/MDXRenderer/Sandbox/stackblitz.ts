@@ -220,4 +220,35 @@ function isProjectDependency(name: string): name is keyof typeof dependencies {
     return name in dependencies;
 }
 
-export {openStackblitz};
+function openStackblitzFromGenerated(source: string) {
+    const packageJson = {
+        ...packageJsonBase,
+        dependencies: {
+            ...packageJsonBase.dependencies,
+            ...getExtraDependencies(source),
+        },
+    };
+
+    sdk.openProject(
+        {
+            title: 'Gravity UI live editor',
+            description: 'Generated from landing live editor',
+            template: 'node',
+            files: {
+                'package.json': JSON.stringify(packageJson, null, 4),
+                'tsconfig.json': JSON.stringify(tsconfig, null, 4),
+                '.prettierrc': JSON.stringify(prettierrc, null, 4),
+                'index.html': indexHtml.trim(),
+                'src/main.tsx': source.trim(),
+                'src/styles.css': styles.trim(),
+                'vite.config.ts': viteConfig.trim(),
+            },
+        },
+        {
+            openFile: 'src/main.tsx',
+            newWindow: true,
+        },
+    );
+}
+
+export {openStackblitz, openStackblitzFromGenerated};

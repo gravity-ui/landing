@@ -1,4 +1,4 @@
-import {ChevronRight} from '@gravity-ui/icons';
+import {ChevronRight, SparklesFill} from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, Col, Grid, Row, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button, ButtonProps, Flex, Icon, IconData, Text} from '@gravity-ui/uikit';
 import React from 'react';
@@ -10,6 +10,7 @@ import {block} from '../../utils';
 import {CustomBlock} from '../constants';
 
 import './CustomHeader.scss';
+import {GenerateCodeModal} from './GenerateCodeModal';
 
 const b = block('custom-header');
 
@@ -62,6 +63,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     banner,
 }) => {
     const locale = useLocale();
+    const [isGenerateModalOpen, setGenerateModalOpen] = React.useState(false);
 
     const showNewsBlock = news && news.items && news.items.length > 0;
     const showBannerBlock = banner?.content;
@@ -127,8 +129,25 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                                 </Button>
                                             );
                                         })}
+                                        <Button
+                                            className={b('button')}
+                                            size="xl"
+                                            view="outlined"
+                                            onClick={() => setGenerateModalOpen(true)}
+                                        >
+                                            <Icon
+                                                className={b('button-icon')}
+                                                data={SparklesFill}
+                                                size={16}
+                                            />
+                                            Сгенерировать playground
+                                        </Button>
                                     </div>
                                 ) : null}
+                                <GenerateCodeModal
+                                    open={isGenerateModalOpen}
+                                    onClose={() => setGenerateModalOpen(false)}
+                                />
                             </div>
                         </Flex>
                     </Col>
