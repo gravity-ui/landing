@@ -23,7 +23,7 @@
     "@gravity-ui/navigation": "^6.1.2",
     "@gravity-ui/page-constructor": "^8.0.0",
     "@gravity-ui/timeline": "^1.26.1",
-    "@gravity-ui/uikit": "^7.44.0",
+    "@gravity-ui/uikit": "^7.44.2",
     "@gravity-ui/uikit-themer": "^1.8.0",
     "@huggingface/transformers": "^3.8.1",
     "@mdx-js/mdx": "^2.3.0",
