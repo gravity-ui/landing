@@ -2,7 +2,8 @@ import {Direction, Theme, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 
 import type {Component} from '../../content/components';
-import {block, getLibComponents} from '../../utils';
+import {block} from '../../utils';
+import {getLibComponents} from '../../utils/components';
 
 import './SandboxComponent.scss';
 

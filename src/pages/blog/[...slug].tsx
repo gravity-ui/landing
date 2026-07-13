@@ -13,7 +13,7 @@ import Head from 'next/head';
 import {useRouter} from 'next/router';
 import {useMemo} from 'react';
 
-import {ServerApi} from '../../api';
+import {ServerApi} from '../../api/server';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {localeMap} from '../../utils/blog-constants';
