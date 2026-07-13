@@ -49,7 +49,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 // ...
 ```
 
-UIKit 支持不同的主题：浅色、深色以及它们的对比变体。你的应用必须渲染在 `ThemeProvider` 内部：
+UIKit 支持不同的主题：浅色、深色以及它们的对比色变体。你的应用必须渲染在 `ThemeProvider` 内部：
 
 ```js
 import {createRoot} from 'react-dom/client';
@@ -80,9 +80,9 @@ const html = `
 `;
 ```
 
-此外，还有一个 SCSS [mixins](styles/mixins.scss) 文件，其中包含一些有用的辅助函数，可以在你的应用中使用。
+此外，还有一个 SCSS [mixins](styles/mixins.scss) 文件，其中包含一些有用的辅助函数，可以在你的应用程序中使用。
 
-### 国际化 (I18N)
+### i18N（国际化）
 
 某些组件包含文本令牌（单词和短语）。它们有两种语言：`en`（默认）和 `ru`。
 要设置语言，请使用 `configure` 函数：
@@ -107,3 +107,38 @@ cd uikit
 npm ci
 npm run start
 ```
+
+## 许可证
+
+根据 MIT 许可证分发。有关详细信息，请参阅 [LICENSE](LICENSE)。
+
+## 致 AI 代理
+
+Gravity UI 应用的基础 React 组件和设计令牌库 — 包含其他所有 `@gravity-ui` 包都依赖的控件、输入、覆盖层、布局和主题化功能。
+
+### 何时使用
+
+- 标准应用程序 UI：按钮、表单控件、模态框和弹出窗口、菜单、标签页、标签、排版和布局基元。
+- Gravity UI 应用的主题基础：`ThemeProvider`、设计令牌和 CSS 变量，这是其他 `@gravity-ui/*` 生态系统所期望存在的。
+- 通过内置的 `Table` 组件（支持选择、排序、行操作）处理简单的表格数据。
+
+### 何时避免使用
+
+- 功能丰富的表格（虚拟化、列调整、分组、重排）— 请使用 [`@gravity-ui/table`](https://github.com/gravity-ui/table)，这是一个独立的无头包。它**不同于** uikit 的 `Table` 组件。
+- 图表和数据可视化 — 请使用 [`@gravity-ui/charts`](https://github.com/gravity-ui/charts)（`@gravity-ui/chartkit` 是旧版包装器）。
+- 应用导航外壳（侧边栏、页眉、页脚、Logo）— 请使用 [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation)。
+- 日期选择器、日历和范围控件 — 请使用 [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components)。
+- SVG 图标集本身 — 请使用 [`@gravity-ui/icons`](https://github.com/gravity-ui/icons)；uikit 只提供 `Icon` 渲染器。
+
+### 常见陷阱
+
+- `Button` 的样式属性是 `view`，而不是 `variant` 或 `color`。
+- **组件在未设置的情况下会渲染无样式。** 请将应用包裹在 `ThemeProvider` 中，**并**在入口点一次性导入 `@gravity-ui/uikit/styles/styles.css`（以及 `fonts.css`）— 两者都是必需的。
+- **`Icon` 没有 `name` 属性。** 通过 `data` 传递导入的图标组件：`import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
+- **`theme` 的值是 `light | dark | light-hc | dark-hc`。** 没有 `theme="default"`。
+
+### 有用的文档
+
+- [布局组件和间距](./docs/layout.md)
+- [主题、颜色和品牌](./docs/theming.md)
+- [排版](./docs/typography.md)

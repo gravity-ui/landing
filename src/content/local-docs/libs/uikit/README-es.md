@@ -4,21 +4,21 @@ Un conjunto de componentes React flexibles, muy prácticos y eficientes para cre
 
 <!--GITHUB_BLOCK-->
 
-![Cover image](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/uikit_cover.png)
+![Imagen de portada](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/uikit_cover.png)
 
 ## Recursos
 
-### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Sitio web](https://gravity-ui.com)
+### ![Logo del Globo Claro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Logo del Globo Oscuro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Sitio web](https://gravity-ui.com)
 
-### ![Documentation Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_light.svg#gh-light-mode-only) ![Documentation Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_dark.svg#gh-dark-mode-only) [Documentación](https://gravity-ui.com/components/uikit/alert)
+### ![Logo de Documentación Claro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_light.svg#gh-light-mode-only) ![Logo de Documentación Oscuro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_dark.svg#gh-dark-mode-only) [Documentación](https://gravity-ui.com/components/uikit/alert)
 
-### ![Figma Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_light.svg#gh-light-mode-only) ![Figma Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_dark.svg#gh-dark-mode-only) [Figma](<https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)>)
+### ![Logo de Figma Claro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_light.svg#gh-light-mode-only) ![Logo de Figma Oscuro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_dark.svg#gh-dark-mode-only) [Figma](<https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)>)
 
-### ![Themer Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/bucket-paint_light.svg#gh-light-mode-only) ![Themer Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/bucket-paint_dark.svg#gh-dark-mode-only) [Themer](https://gravity-ui.com/themer)
+### ![Logo del Themer Claro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/bucket-paint_light.svg#gh-light-mode-only) ![Logo del Themer Oscuro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/bucket-paint_dark.svg#gh-dark-mode-only) [Themer](https://gravity-ui.com/themer)
 
-### ![Storybook Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Storybook Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/uikit/)
+### ![Logo de Storybook Claro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Logo de Storybook Oscuro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/uikit/)
 
-### ![Community Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Community Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Comunidad](https://t.me/gravity_ui)
+### ![Logo de Comunidad Claro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Logo de Comunidad Oscuro](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Comunidad](https://t.me/gravity_ui)
 
 <!--/GITHUB_BLOCK-->
 
@@ -107,3 +107,38 @@ cd uikit
 npm ci
 npm run start
 ```
+
+## Licencia
+
+Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.
+
+## Para agentes de IA
+
+La biblioteca base de componentes React y tokens de diseño para aplicaciones Gravity UI — controles, entradas, superposiciones, diseño y temas en los que se basa cada otro paquete de @gravity-ui.
+
+### Cuándo usar
+
+- UI estándar de aplicaciones: botones, controles de formulario, modales y ventanas emergentes, menús, pestañas, etiquetas, tipografía y primitivas de diseño.
+- La base de temas de una aplicación Gravity UI: `ThemeProvider`, tokens de diseño y variables CSS que el resto del ecosistema `@gravity-ui/*` espera que estén presentes.
+- Datos tabulares sencillos a través del componente `Table` integrado (selección, ordenación, acciones de fila).
+
+### Cuándo no usar
+
+- Rejillas de datos con muchas funciones (virtualización, redimensionamiento de columnas, agrupación, reordenación): utiliza [`@gravity-ui/table`](https://github.com/gravity-ui/table), un paquete headless independiente. **No** es lo mismo que el componente `Table` de uikit.
+- Gráficos y visualización de datos: utiliza [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` es el wrapper heredado).
+- Estructuras de navegación de aplicaciones (barra lateral, encabezado, pie de página, logo): utiliza [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Selectores de fecha, calendarios y controles de rango: utiliza [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- El conjunto de iconos SVG en sí: utiliza [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit solo distribuye el renderizador `Icon`.
+
+### Errores comunes
+
+- La prop de estilo de `Button` es `view`, no `variant` ni `color`.
+- **Los componentes se renderizan sin estilo sin configuración.** Envuelve la aplicación en `ThemeProvider` **e** importa `@gravity-ui/uikit/styles/styles.css` (además de `fonts.css`) una vez en el punto de entrada; ambos son necesarios.
+- **`Icon` no tiene la prop `name`.** Pasa un componente de icono importado a través de `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
+- Los valores de `theme` son `light | dark | light-hc | dark-hc`. No existe `theme="default"`.
+
+### Documentación útil
+
+- [Componentes de diseño y espaciado](./docs/layout.md)
+- [Temas, Colores y Marca](./docs/theming.md)
+- [Tipografía](./docs/typography.md)

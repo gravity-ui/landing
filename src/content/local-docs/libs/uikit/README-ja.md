@@ -1,6 +1,6 @@
 # UIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/ci.yml?query=branch:main) [![storybook tests](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/test-storybook.yml?label=Storybook%20Tests&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/test-storybook.yml) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/uikit/)
 
-柔軟で実用的、かつ効率的なReactコンポーネントのセットで、リッチなWebアプリケーションを作成できます。
+リッチなWebアプリケーションを作成するための、柔軟で実用的、かつ効率的なReactコンポーネントセットです。
 
 <!--GITHUB_BLOCK-->
 
@@ -80,7 +80,7 @@ const html = `
 `;
 ```
 
-また、アプリで使用できる便利なヘルパーを備えたSCSS [ミックスイン](styles/mixins.scss) ファイルもあります。
+また、アプリで使用できる便利なヘルパーを備えたSCSS [mixins](styles/mixins.scss) ファイルもあります。
 
 ### I18N
 
@@ -99,7 +99,7 @@ configure({
 
 ## 開発
 
-Storybookで開発サーバーを起動するには、以下を実行します。
+Storybookで開発サーバーを起動するには、以下を実行してください。
 
 ```shell
 git clone git@github.com:gravity-ui/uikit.git
@@ -107,3 +107,38 @@ cd uikit
 npm ci
 npm run start
 ```
+
+## ライセンス
+
+MIT Licenseの下で配布されています。詳細については[LICENSE](LICENSE)を参照してください。
+
+## AIエージェント向け
+
+Gravity UIアプリのベースとなるReactコンポーネントおよびデザイントークンライブラリ — 他のすべての`@gravity-ui`パッケージが構築される、コントロール、入力、オーバーレイ、レイアウト、およびテーマ設定。
+
+### 使用する場合
+
+- 標準的なアプリケーションUI：ボタン、フォームコントロール、モーダルとポップアップ、メニュー、タブ、ラベル、タイポグラフィ、およびレイアウトプリミティブ。
+- Gravity UIアプリのテーマ設定の基盤：`ThemeProvider`、デザイントークン、および他の`@gravity-ui/*`エコシステムが期待するCSS変数。
+- 内蔵の`Table`コンポーネント（選択、ソート、行アクション）によるシンプルな表形式データ。
+
+### 使用しない場合
+
+- 機能豊富なデータグリッド（仮想化、列リサイズ、グループ化、並べ替え） — [`@gravity-ui/table`](https://github.com/gravity-ui/table) を使用してください。これは独立したヘッドレスパッケージです。uikit の `Table` コンポーネントとは**異なります**。
+- チャートとデータ可視化 — [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) を使用してください（`@gravity-ui/chartkit` はレガシーラッパーです）。
+- アプリケーションナビゲーションシェル（サイドヘッダー、フッター、ロゴ） — [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation) を使用してください。
+- 日付ピッカー、カレンダー、範囲コントロール — [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components) を使用してください。
+- SVG アイコンセット自体 — [`@gravity-ui/icons`](https://github.com/gravity-ui/icons) を使用してください。uikit は `Icon` レンダラーのみを提供します。
+
+### よくある間違い
+
+- `Button` のスタイリングプロパティは `view` であり、`variant` や `color` ではありません。
+- **コンポーネントはセットアップなしではスタイルなしでレンダリングされます。** アプリを `ThemeProvider` でラップし、エントリーポイントで `@gravity-ui/uikit/styles/styles.css`（および `fonts.css`）を一度インポートしてください。両方とも必要です。
+- **`Icon` には `name` プロパティがありません。** インポートしたアイコンコンポーネントを `data` を介して渡してください: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
+- **`theme` の値は `light | dark | light-hc | dark-hc` です。** `theme="default"` はありません。
+
+### 役立つドキュメント
+
+- [レイアウトコンポーネントとスペーシング](./docs/layout.md)
+- [テーマ設定、色とブランディング](./docs/theming.md)
+- [タイポグラフィ](./docs/typography.md)
