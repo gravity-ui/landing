@@ -38,7 +38,7 @@ const SubmitButton = <Button view="action" size="l" />;
 
 ### Styles
 
-UIKit wird mit Basis-Styling und einem Theme geliefert. Damit alles gut aussieht, fügen Sie dies am Anfang Ihrer Einstiegsdatei ein:
+UIKit wird mit Basis-Styling und einem Theme geliefert. Damit alles gut aussieht, fügen Sie dies am Anfang Ihrer Einstiegsdatei hinzu:
 
 ```js
 // index.js
@@ -80,7 +80,7 @@ const html = `
 `;
 ```
 
-Außerdem gibt es eine SCSS-Datei mit [Mixins](styles/mixins.scss) und nützlichen Helfern für Ihre App.
+Außerdem gibt es eine SCSS-Datei mit [Mixins](styles/mixins.scss) mit nützlichen Helfern für Ihre App.
 
 ### I18N
 
@@ -107,3 +107,38 @@ cd uikit
 npm ci
 npm run start
 ```
+
+## Lizenz
+
+Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
+
+## Für KI-Agenten
+
+Die Basis-React-Komponenten und die Design-Token-Bibliothek für Gravity UI-Apps – Steuerelemente, Eingaben, Overlays, Layout und Theming, auf denen jedes andere @gravity-ui-Paket aufbaut.
+
+### Wann zu verwenden
+
+- Standard-UI für Anwendungen: Schaltflächen, Formularsteuerelemente, Modale und Popups, Menüs, Tabs, Labels, Typografie und Layout-Primitive.
+- Die Theming-Grundlage einer Gravity UI-App: `ThemeProvider`, Design-Tokens und CSS-Variablen, die der Rest des `@gravity-ui/*`-Ökosystems erwartet.
+- Einfache tabellarische Daten über die integrierte `Table`-Komponente (Auswahl, Sortierung, Zeilenaktionen).
+
+### Wann nicht zu verwenden
+
+- Umfangreiche Daten-Tabellen (Virtualisierung, Spaltenanpassung, Gruppierung, Neuanordnung) – verwenden Sie [`@gravity-ui/table`](https://github.com/gravity-ui/table), ein separates Headless-Paket. Es ist **nicht** dasselbe wie die `Table`-Komponente von uikit.
+- Diagramme und Datenvisualisierung – verwenden Sie [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` ist der Legacy-Wrapper).
+- Anwendungsnavigations-Shells (Seitenleiste, Header, Footer, Logo) – verwenden Sie [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Datumsauswahl, Kalender und Bereichssteuerelemente – verwenden Sie [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- Der SVG-Icon-Satz selbst – verwenden Sie [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit liefert nur den `Icon`-Renderer.
+
+### Häufige Fallstricke
+
+- Der Styling-Prop für `Button` ist `view`, nicht `variant` oder `color`.
+- **Komponenten werden ohne Einrichtung ungestylt gerendert.** Umschließen Sie die App mit `ThemeProvider` **und** importieren Sie `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) einmal am Einstiegspunkt – beides ist erforderlich.
+- **`Icon` hat keinen `name`-Prop.** Übergeben Sie eine importierte Icon-Komponente über `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
+- **`theme`-Werte sind `light | dark | light-hc | dark-hc`.** Es gibt kein `theme="default"`.
+
+### Nützliche Dokumentation
+
+- [Layout-Komponenten und Abstände](./docs/layout.md)
+- [Theming, Farben & Branding](./docs/theming.md)
+- [Typografie](./docs/typography.md)

@@ -84,26 +84,16 @@ Além disso, há um arquivo SCSS com [mixins](styles/mixins.scss) com utilitári
 
 ### I18N
 
-Alguns componentes contêm tokens de texto (palavras e frases). Eles vêm em dois idiomas: `en` (padrão) e `ru`.
-Para definir o idioma, use a função `configure`:
+Alguns componentes contêm tokens de texto (palavras e frases). Eles vêm em dois
 
-```js
-// index.js
+- Grade de dados rica em recursos (virtualização, redimensionamento de colunas, agrupamento, reordenação) — use [`@gravity-ui/table`](https://github.com/gravity-ui/table), um pacote separado sem interface. **Não** é o mesmo que o componente `Table` do uikit.
+- Gráficos e visualização de dados — use [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` é o wrapper legado).
+- Estruturas de navegação de aplicativos (cabeçalho lateral, rodapé, logo) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Seletores de data, calendários e controles de intervalo — use [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- O próprio conjunto de ícones SVG — use [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); o uikit apenas distribui o renderizador `Icon`.
 
-import {configure} from '@gravity-ui/uikit';
+### Armadilhas comuns
 
-configure({
-  lang: 'ru',
-});
-```
-
-## Desenvolvimento
-
-Para iniciar o servidor de desenvolvimento com o storybook, execute o seguinte:
-
-```shell
-git clone git@github.com:gravity-ui/uikit.git
-cd uikit
-npm ci
-npm run start
-```
+- A prop de estilo do `Button` é `view`, não `variant` ou `color`.
+- **Componentes renderizam sem estilo sem configuração.** Envolva o aplicativo em `ThemeProvider` **e** importe `@gravity-ui/uikit/styles/styles.css` (mais `fonts.css`) uma vez no ponto de entrada — ambos são necessários.
+- **`Icon` não tem a prop `name`.** Passe um componente de ícone importado através de `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
