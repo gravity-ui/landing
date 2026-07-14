@@ -99,6 +99,11 @@ export const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({open, onClo
                                 maxRows={10}
                                 disabled={loading}
                                 validationState={isOverLimit ? 'invalid' : undefined}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+                                        handleGenerate();
+                                    }
+                                }}
                             />
                             <Text
                                 className={b('counter')}
