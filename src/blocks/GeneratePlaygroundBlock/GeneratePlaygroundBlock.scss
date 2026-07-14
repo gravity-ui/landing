@@ -21,6 +21,7 @@ $block: '.#{variables.$ns}generate-playground-block';
 
     &__input-area {
         position: relative;
+        padding: 8px;
     }
 
     &__overlay {
@@ -51,6 +52,7 @@ $block: '.#{variables.$ns}generate-playground-block';
         display: flex;
         gap: 12px;
         align-items: flex-start;
+        margin-bottom: 20px;
 
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
             flex-direction: column;

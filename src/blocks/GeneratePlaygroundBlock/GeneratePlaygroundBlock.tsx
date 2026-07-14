@@ -141,6 +141,17 @@ export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = (
                                 Сгенерировать Playground
                             </Button>
                         </div>
+                        <div className={b('examples')}>
+                            {EXAMPLES.map((example) => (
+                                <button
+                                    key={example}
+                                    className={b('example-chip')}
+                                    onClick={() => setInput(example)}
+                                >
+                                    {example}
+                                </button>
+                            ))}
+                        </div>
                         {loading && (
                             <div className={b('overlay')}>
                                 <Spin size="m" />
@@ -153,19 +164,6 @@ export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = (
                     <Text color="danger" variant="body-2">
                         {error}
                     </Text>
-                )}
-                {!result && (
-                    <div className={b('examples')}>
-                        {EXAMPLES.map((example) => (
-                            <button
-                                key={example}
-                                className={b('example-chip')}
-                                onClick={() => setInput(example)}
-                            >
-                                {example}
-                            </button>
-                        ))}
-                    </div>
                 )}
             </div>
         </AnimateBlock>
