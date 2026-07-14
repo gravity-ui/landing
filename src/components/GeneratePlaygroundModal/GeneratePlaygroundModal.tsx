@@ -8,11 +8,10 @@ import {openStackblitzFromGenerated} from '../MDXRenderer/Sandbox/stackblitz';
 import {AiDisclaimer} from './AiDisclaimer';
 import './GeneratePlaygroundModal.scss';
 import {LoadingText} from './LoadingText';
-import {LOADING_TEXTS} from './constants';
+import {EXAMPLES, LOADING_TEXTS, MAX_LENGTH} from './constants';
+import {useGeneratePlayground} from './hooks/useGeneratePlayground';
 
 const b = block('generate-playground-modal');
-
-const MAX_LENGTH = 200;
 
 interface GeneratePlaygroundModalProps {
     open: boolean;
@@ -23,41 +22,11 @@ export const GeneratePlaygroundModal: React.FC<GeneratePlaygroundModalProps> = (
     open,
     onClose,
 }) => {
-    const [input, setInput] = React.useState('');
-    const [result, setResult] = React.useState('');
-    const [loading, setLoading] = React.useState(false);
-
-    const isOverLimit = input.length > MAX_LENGTH;
-
-    const handleGenerate = async () => {
-        if (!input.trim() || isOverLimit) return;
-
-        setLoading(true);
-        setResult('');
-
-        try {
-            const response = await fetch('/api/generate-code', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({input}),
-            });
-
-            const data = await response.json();
-            const output = data.code ?? data.error ?? '';
-            setResult(output);
-            if (data.code) {
-                openStackblitzFromGenerated(data.code);
-            }
-        } catch {
-            setResult('Произошла ошибка. Попробуйте ещё раз.');
-        } finally {
-            setLoading(false);
-        }
-    };
+    const {input, setInput, loading, result, error, isOverLimit, handleGenerate, reset} =
+        useGeneratePlayground();
 
     const handleClose = () => {
-        setInput('');
-        setResult('');
+        reset();
         onClose();
     };
 
@@ -88,7 +57,7 @@ export const GeneratePlaygroundModal: React.FC<GeneratePlaygroundModalProps> = (
                                 className={b('textarea')}
                                 value={input}
                                 onUpdate={setInput}
-                                placeholder="Например: «Форма авторизации с email и паролем»"
+                                placeholder={`Например: «${EXAMPLES[0]}»`}
                                 minRows={4}
                                 maxRows={10}
                                 disabled={loading}
@@ -107,6 +76,11 @@ export const GeneratePlaygroundModal: React.FC<GeneratePlaygroundModalProps> = (
                                 {input.length}/{MAX_LENGTH}
                             </Text>
                         </div>
+                        {error && (
+                            <Text color="danger" variant="body-2">
+                                {error}
+                            </Text>
+                        )}
                         <AiDisclaimer />
                     </Flex>
                 )}

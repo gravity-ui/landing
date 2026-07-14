@@ -5,7 +5,12 @@ import React from 'react';
 
 import {AiDisclaimer} from '../../components/GeneratePlaygroundModal/AiDisclaimer';
 import {LoadingText} from '../../components/GeneratePlaygroundModal/LoadingText';
-import {LOADING_TEXTS} from '../../components/GeneratePlaygroundModal/constants';
+import {
+    EXAMPLES,
+    LOADING_TEXTS,
+    MAX_LENGTH,
+} from '../../components/GeneratePlaygroundModal/constants';
+import {useGeneratePlayground} from '../../components/GeneratePlaygroundModal/hooks/useGeneratePlayground';
 import {openStackblitzFromGenerated} from '../../components/MDXRenderer/Sandbox/stackblitz';
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
@@ -14,62 +19,14 @@ import './GeneratePlaygroundBlock.scss';
 
 const b = block('generate-playground-block');
 
-const MAX_LENGTH = 200;
-
-const EXAMPLES = [
-    'Кнопка c модалкой подтверждения действия',
-    'Тултип с расширенной информацией при наведении',
-    'Карточка с аватаром и кнопками',
-    'Селект с поиском и группировкой опций',
-    'Форма авторизации',
-];
-
 export type GeneratePlaygroundBlockModel = {
     type: CustomBlock.GeneratePlayground;
     animated?: boolean;
 };
 
 export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = ({animated}) => {
-    const [input, setInput] = React.useState('');
-    const [loading, setLoading] = React.useState(false);
-    const [error, setError] = React.useState('');
-    const [result, setResult] = React.useState('');
-
-    const isOverLimit = input.length > MAX_LENGTH;
-
-    const handleGenerate = async () => {
-        if (!input.trim() || isOverLimit || loading) return;
-
-        setLoading(true);
-        setError('');
-        setResult('');
-
-        try {
-            const response = await fetch('/api/generate-code', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({input}),
-            });
-
-            const data = await response.json();
-            if (data.code) {
-                setResult(data.code);
-                openStackblitzFromGenerated(data.code);
-            } else {
-                setError(data.error ?? 'Что-то пошло не так');
-            }
-        } catch {
-            setError('Произошла ошибка. Попробуйте ещё раз.');
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleReset = () => {
-        setResult('');
-        setError('');
-        setInput('');
-    };
+    const {input, setInput, loading, result, error, isOverLimit, handleGenerate, reset} =
+        useGeneratePlayground();
 
     return (
         <AnimateBlock className={b()} animate={animated}>
@@ -88,7 +45,7 @@ export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = (
                                 <Icon data={Play} size={16} />
                                 Открыть Playground
                             </Button>
-                            <Button view="outlined" size="xl" onClick={handleReset}>
+                            <Button view="outlined" size="xl" onClick={reset}>
                                 Начать заново
                             </Button>
                         </div>
