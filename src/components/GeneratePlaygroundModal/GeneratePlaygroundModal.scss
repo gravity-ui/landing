@@ -18,6 +18,7 @@ $block: '.#{variables.$ns}generate-playground-modal';
         gap: 12px;
         border-radius: inherit;
         opacity: 0.92;
+        background: var(--g-color-base-background);
     }
 
     &__result {
