@@ -4,13 +4,13 @@ import {Button, ButtonProps, Flex, Icon, IconData, Text} from '@gravity-ui/uikit
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';
 
+import {GeneratePlaygroundModal} from '../../components/GeneratePlaygroundModal';
 import {Link} from '../../components/Link';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
 
 import './CustomHeader.scss';
-import {GenerateCodeModal} from './GenerateCodeModal';
 
 const b = block('custom-header');
 
@@ -144,7 +144,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                         </Button>
                                     </div>
                                 ) : null}
-                                <GenerateCodeModal
+                                <GeneratePlaygroundModal
                                     open={isGenerateModalOpen}
                                     onClose={() => setGenerateModalOpen(false)}
                                 />

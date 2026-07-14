@@ -1,6 +1,6 @@
 @use '../../variables.scss';
 
-$block: '.#{variables.$ns}generate-code-modal';
+$block: '.#{variables.$ns}generate-playground-modal';
 
 #{$block} {
     .g-dialog-content {

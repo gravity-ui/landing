@@ -11,13 +11,13 @@ import menuCloseIcon from '../../assets/icons/menu-close.svg';
 import menuOpenIcon from '../../assets/icons/menu-open.svg';
 import newLabelIcon from '../../assets/icons/new-label.svg';
 import soonLabelIcon from '../../assets/icons/soon-label.svg';
-import {GenerateCodeModal} from '../../blocks/CustomHeader/GenerateCodeModal';
 import {MenuItem, menu} from '../../content/menu';
 import {socialLinks} from '../../content/social-links';
 import {EnvironmentContext} from '../../contexts';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
 import {CustomScrollbar} from '../CustomScrollbar';
+import {GeneratePlaygroundModal} from '../GeneratePlaygroundModal';
 import {Link} from '../Link';
 
 import {LocalePicker} from './LocalePicker';
@@ -172,7 +172,7 @@ export const Menu: React.FC = () => {
                     </Row>
                 </Grid>
             </div>
-            <GenerateCodeModal
+            <GeneratePlaygroundModal
                 open={isGenerateModalOpen}
                 onClose={() => setGenerateModalOpen(false)}
             />

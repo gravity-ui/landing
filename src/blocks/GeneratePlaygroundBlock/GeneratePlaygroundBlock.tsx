@@ -3,8 +3,9 @@ import {AnimateBlock} from '@gravity-ui/page-constructor';
 import {Button, Icon, Spin, Text, TextArea} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {AiDisclaimer} from '../../components/AiDisclaimer';
-import {LoadingText} from '../../components/LoadingText';
+import {AiDisclaimer} from '../../components/GeneratePlaygroundModal/AiDisclaimer';
+import {LoadingText} from '../../components/GeneratePlaygroundModal/LoadingText';
+import {LOADING_TEXTS} from '../../components/GeneratePlaygroundModal/constants';
 import {openStackblitzFromGenerated} from '../../components/MDXRenderer/Sandbox/stackblitz';
 import {block} from '../../utils';
 import {CustomBlock} from '../constants';
@@ -16,20 +17,11 @@ const b = block('generate-playground-block');
 const MAX_LENGTH = 200;
 
 const EXAMPLES = [
-    'Кнопка, открывающая модалку',
-    'Форма с полями и валидацией',
-    'Таблица с сортировкой',
+    'Кнопка c модалкой подтверждения действия',
+    'Тултип с расширенной информацией при наведении',
     'Карточка с аватаром и кнопками',
-];
-
-const LOADING_TEXTS = [
-    'Пишем компонент',
-    'Создаем playground',
-    'Реализуем стили',
-    'Собираем структуру',
-    'Подключаем зависимости',
-    'Настраиваем окружение',
-    'Генерируем разметку',
+    'Селект с поиском и группировкой опций',
+    'Форма авторизации',
 ];
 
 export type GeneratePlaygroundBlockModel = {

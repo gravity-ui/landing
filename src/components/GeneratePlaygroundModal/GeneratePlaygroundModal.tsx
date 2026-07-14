@@ -2,33 +2,27 @@ import {Play} from '@gravity-ui/icons';
 import {Button, Dialog, Flex, Icon, Spin, Text, TextArea} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {AiDisclaimer} from '../../components/AiDisclaimer';
-import {LoadingText} from '../../components/LoadingText';
-import {openStackblitzFromGenerated} from '../../components/MDXRenderer/Sandbox/stackblitz';
 import {block} from '../../utils';
+import {openStackblitzFromGenerated} from '../MDXRenderer/Sandbox/stackblitz';
 
-import './GenerateCodeModal.scss';
+import {AiDisclaimer} from './AiDisclaimer';
+import './GeneratePlaygroundModal.scss';
+import {LoadingText} from './LoadingText';
+import {LOADING_TEXTS} from './constants';
 
-const b = block('generate-code-modal');
+const b = block('generate-playground-modal');
 
 const MAX_LENGTH = 200;
 
-const LOADING_TEXTS = [
-    'Пишем компонент',
-    'Создаем playground',
-    'Реализуем стили',
-    'Собираем структуру',
-    'Подключаем зависимости',
-    'Настраиваем окружение',
-    'Генерируем разметку',
-];
-
-interface GenerateCodeModalProps {
+interface GeneratePlaygroundModalProps {
     open: boolean;
     onClose: () => void;
 }
 
-export const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({open, onClose}) => {
+export const GeneratePlaygroundModal: React.FC<GeneratePlaygroundModalProps> = ({
+    open,
+    onClose,
+}) => {
     const [input, setInput] = React.useState('');
     const [result, setResult] = React.useState('');
     const [loading, setLoading] = React.useState(false);

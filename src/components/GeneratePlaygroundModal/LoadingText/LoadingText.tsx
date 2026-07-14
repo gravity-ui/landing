@@ -1,7 +1,7 @@
 import {Text} from '@gravity-ui/uikit';
 import React from 'react';
 
-import {block} from '../../utils';
+import {block} from '../../../utils';
 
 import './LoadingText.scss';
 
