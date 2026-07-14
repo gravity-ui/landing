@@ -19,6 +19,34 @@ $block: '.#{variables.$ns}generate-playground-block';
         text-align: center;
     }
 
+    &__input-area {
+        position: relative;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        border-radius: 8px;
+        background: var(--g-color-base-background);
+        opacity: 0.92;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+        }
+    }
+
     &__input-wrap {
         display: flex;
         gap: 12px;

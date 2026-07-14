@@ -2,6 +2,8 @@ import {Play} from '@gravity-ui/icons';
 import {Button, Dialog, Flex, Icon, Spin, Text, TextArea} from '@gravity-ui/uikit';
 import React from 'react';
 
+import {AiDisclaimer} from '../../components/AiDisclaimer';
+import {LoadingText} from '../../components/LoadingText';
 import {openStackblitzFromGenerated} from '../../components/MDXRenderer/Sandbox/stackblitz';
 import {block} from '../../utils';
 
@@ -21,30 +23,6 @@ const LOADING_TEXTS = [
     'Генерируем разметку',
 ];
 
-function useLoadingText(active: boolean) {
-    const [index, setIndex] = React.useState(0);
-    const [visible, setVisible] = React.useState(true);
-
-    React.useEffect(() => {
-        if (!active) return;
-
-        setIndex(Math.floor(Math.random() * LOADING_TEXTS.length));
-        setVisible(true);
-
-        const interval = setInterval(() => {
-            setVisible(false);
-            setTimeout(() => {
-                setIndex(Math.floor(Math.random() * LOADING_TEXTS.length));
-                setVisible(true);
-            }, 300);
-        }, 2000);
-
-        return () => clearInterval(interval);
-    }, [active]);
-
-    return {text: LOADING_TEXTS[index], visible};
-}
-
 interface GenerateCodeModalProps {
     open: boolean;
     onClose: () => void;
@@ -54,7 +32,6 @@ export const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({open, onClo
     const [input, setInput] = React.useState('');
     const [result, setResult] = React.useState('');
     const [loading, setLoading] = React.useState(false);
-    const {text: loadingText, visible: loadingTextVisible} = useLoadingText(loading);
 
     const isOverLimit = input.length > MAX_LENGTH;
 
@@ -90,12 +67,6 @@ export const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({open, onClo
         onClose();
     };
 
-    const warningNode = (
-        <Text variant="caption-2" color="secondary">
-            ⚠️ Результат создаётся с помощью AI и может содержать ошибки — рекомендуем проверить
-            сгенерированный код
-        </Text>
-    );
     return (
         <Dialog className={b()} maxWidth="s" open={open} onClose={handleClose}>
             <Dialog.Header caption="AI-генерация playground" />
@@ -110,7 +81,7 @@ export const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({open, onClo
                             <Icon data={Play} size={18} />
                             Открыть Playground
                         </Button>
-                        {warningNode}
+                        <AiDisclaimer />
                     </Flex>
                 ) : (
                     <Flex direction="column" gap={4}>
@@ -137,7 +108,7 @@ export const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({open, onClo
                                 {input.length}/{MAX_LENGTH}
                             </Text>
                         </div>
-                        {warningNode}
+                        <AiDisclaimer />
                     </Flex>
                 )}
             </Dialog.Body>
@@ -155,14 +126,7 @@ export const GenerateCodeModal: React.FC<GenerateCodeModalProps> = ({open, onClo
             {loading && (
                 <div className={b('overlay')}>
                     <Spin size="l" />
-                    <Text
-                        className={b('loader-text', {visible: loadingTextVisible})}
-                        variant="body-2"
-                        color="secondary"
-                    >
-                        {loadingText}
-                        <span className={b('dots')} />
-                    </Text>
+                    <LoadingText active={loading} texts={LOADING_TEXTS} />
                 </div>
             )}
         </Dialog>
