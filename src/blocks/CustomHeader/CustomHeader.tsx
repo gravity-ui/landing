@@ -140,7 +140,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                                 data={SparklesFill}
                                                 size={16}
                                             />
-                                            Сгенерировать playground
+                                            AI-генерация playground
                                         </Button>
                                     </div>
                                 ) : null}

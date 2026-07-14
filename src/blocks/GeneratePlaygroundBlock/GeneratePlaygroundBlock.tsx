@@ -1,4 +1,4 @@
-import {SparklesFill} from '@gravity-ui/icons';
+import {Play, SparklesFill} from '@gravity-ui/icons';
 import {AnimateBlock} from '@gravity-ui/page-constructor';
 import {Button, Icon, Text, TextArea} from '@gravity-ui/uikit';
 import React from 'react';
@@ -29,6 +29,7 @@ export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = (
     const [input, setInput] = React.useState('');
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState('');
+    const [result, setResult] = React.useState('');
 
     const isOverLimit = input.length > MAX_LENGTH;
 
@@ -37,6 +38,7 @@ export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = (
 
         setLoading(true);
         setError('');
+        setResult('');
 
         try {
             const response = await fetch('/api/generate-code', {
@@ -47,6 +49,7 @@ export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = (
 
             const data = await response.json();
             if (data.code) {
+                setResult(data.code);
                 openStackblitzFromGenerated(data.code);
             } else {
                 setError(data.error ?? 'Что-то пошло не так');
@@ -98,13 +101,23 @@ export const GeneratePlaygroundBlock: React.FC<GeneratePlaygroundBlockModel> = (
                         onClick={handleGenerate}
                     >
                         <Icon data={SparklesFill} size={16} />
-                        Сгенерировать
+                        Сгенерировать Playground
                     </Button>
                 </div>
                 {error && (
                     <Text color="danger" variant="body-2">
                         {error}
                     </Text>
+                )}
+                {result && (
+                    <Button
+                        view="outlined-action"
+                        size="l"
+                        onClick={() => openStackblitzFromGenerated(result)}
+                    >
+                        <Icon data={Play} size={16} />
+                        Открыть Playground
+                    </Button>
                 )}
                 <div className={b('examples')}>
                     {EXAMPLES.map((example) => (

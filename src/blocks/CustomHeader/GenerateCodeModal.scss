@@ -3,6 +3,27 @@
 $block: '.#{variables.$ns}generate-code-modal';
 
 #{$block} {
+    .g-dialog-content {
+        position: relative;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        border-radius: inherit;
+        opacity: 0.92;
+    }
+
+    &__result {
+        min-height: 100px;
+    }
+
     &__textarea-wrap {
         position: relative;
     }
@@ -10,20 +31,6 @@ $block: '.#{variables.$ns}generate-code-modal';
     &__textarea {
         font-size: 16px;
         width: 100%;
-    }
-
-    &__textarea-loader {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        border-radius: inherit;
-        background: var(--g-color-base-float-heavy);
-        opacity: 0.9;
-        pointer-events: none;
     }
 
     &__loader-text {
@@ -35,22 +42,36 @@ $block: '.#{variables.$ns}generate-code-modal';
         }
     }
 
+    &__dots {
+        display: inline-block;
+        width: 1em;
+        text-align: left;
+
+        &::after {
+            content: '.';
+            animation: generate-code-modal-dots 1.2s infinite;
+        }
+    }
+
+    @keyframes generate-code-modal-dots {
+        0% {
+            content: '.';
+        }
+        33% {
+            content: '..';
+        }
+        66% {
+            content: '...';
+        }
+        100% {
+            content: '.';
+        }
+    }
+
     &__counter {
         position: absolute;
         right: 8px;
         bottom: 8px;
         pointer-events: none;
-    }
-
-    &__result {
-        white-space: pre-wrap;
-        word-break: break-word;
-        font-size: 13px;
-        line-height: 1.5;
-        padding: 12px;
-        border-radius: 6px;
-        background: var(--g-color-base-misc-light);
-        max-height: 300px;
-        overflow-y: auto;
     }
 }
