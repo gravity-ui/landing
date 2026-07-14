@@ -1,5 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import OpenAI from 'openai';
+import {RateLimiterMemory} from 'rate-limiter-flexible';
 
 type GenerateCodeRequestBody = {
     input: string;
@@ -11,9 +12,23 @@ const BASE_URL = process.env.BASE_URL || DEFAULT_BASE_URL;
 const PROJECT_ID = process.env.YANDEX_PROJECT_ID;
 const PROMPT_ID = process.env.GENERATE_CODE_PROMPT_ID;
 
+const rateLimiter = new RateLimiterMemory({
+    points: 5,
+    duration: 30,
+});
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {
         return res.status(405).json({error: 'Method not allowed'});
+    }
+
+    const ip = (req.headers['x-forwarded-for'] ?? req.socket.remoteAddress ?? 'unknown') as string;
+    const key = Array.isArray(ip) ? ip[0] : ip.split(',')[0].trim();
+
+    try {
+        await rateLimiter.consume(key);
+    } catch {
+        return res.status(429).json({error: 'Too many requests. Please wait and try again.'});
     }
 
     try {
@@ -21,6 +36,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         if (!input || typeof input !== 'string' || input.trim().length === 0) {
             return res.status(400).json({error: 'Input is required'});
+        }
+
+        if (input.length > 200) {
+            return res.status(400).json({error: 'Input must not exceed 200 characters'});
         }
 
         const openai = new OpenAI({
@@ -54,7 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(200).json({code: parsed.code ?? ''});
     } catch (error) {
         // eslint-disable-next-line no-console
-        console.error('Error in generate-code API:', error);
+        console.error('Error in generate-playground API:', error);
 
         return res.status(500).json({
             error: error instanceof Error ? error.message : 'Unknown error',

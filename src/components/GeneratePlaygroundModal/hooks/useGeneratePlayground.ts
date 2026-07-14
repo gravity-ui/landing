@@ -19,7 +19,7 @@ export function useGeneratePlayground() {
         setResult('');
 
         try {
-            const response = await fetch('/api/generate-code', {
+            const response = await fetch('/api/generate-playground', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({input}),
