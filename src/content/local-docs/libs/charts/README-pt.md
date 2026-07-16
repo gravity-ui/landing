@@ -8,7 +8,7 @@ Biblioteca de gráficos React com mais de 10 tipos de gráficos: área, barra, l
 npm install @gravity-ui/uikit @gravity-ui/charts
 ```
 
-`@gravity-ui/uikit` é uma dependência peer obrigatória — ela fornece os temas e estilos dos quais os gráficos dependem.
+`@gravity-ui/uikit` é uma dependência peer obrigatória — ela fornece a temática e os estilos dos quais os gráficos dependem.
 
 ## Uso
 
@@ -65,7 +65,7 @@ Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
 
 ## Para agentes de IA
 
-Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — renderize gráficos de linha, área, barra, pizza, dispersão, treemap e outros a partir de uma única configuração `data`, com tema para combinar com o restante do aplicativo.
+Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — renderiza gráficos de linha, área, barra, pizza, dispersão, treemap e outros a partir de uma única configuração `data`, com tema para combinar com o restante do aplicativo.
 
 ### Quando usar
 
@@ -89,10 +89,14 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 ### Documentos úteis
 
 - [Começando](./docs/diplodoc/pages/get-started.md)
-- [Tematização](./docs/diplodoc/pages/guides/theming.md)
+- [Temática](./docs/diplodoc/pages/guides/theming.md)
 - [Tooltip](./docs/diplodoc/pages/guides/tooltip.md)
 - [Legenda](./docs/diplodoc/pages/guides/legend.md)
 - [Conteúdo HTML](./docs/diplodoc/pages/guides/html.md)
 - [Formatação de Valor](./docs/diplodoc/pages/guides/value-formatting.md)
 - [Rótulos de Dados](./docs/diplodoc/pages/guides/data-labels.md)
 - [Tipos de Eixo](./docs/diplodoc/pages/guides/axis-types.md)
+
+## Documentação para agentes de IA
+
+A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/charts/dist/docs/INDEX.md`.
