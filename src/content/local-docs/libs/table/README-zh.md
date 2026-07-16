@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## 组件
+### 组件
 
 您可以使用两个 Table 组件：
 
 - `BaseTable` - 仅包含基本样式的组件；
-- `Table` - 包含 Gravity UI 样式的组件。
+- `Table` - 包含基于 Gravity UI 样式的组件。
 
-### 行选择
+#### 行选择
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -79,9 +79,9 @@ const RowSelectionExample = () => {
 };
 ```
 
-要使用带选择功能的组，请使用 `useRowSelectionFixedHandler` hook。没有它，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+要使用带有选择功能的组，请使用 `useRowSelectionFixedHandler` hook。没有它，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
 
-### 自定义范围选择列
+#### 自定义范围选择列
 
 `useToggleRangeSelectionHandler` hook 返回一个更改处理程序，该处理程序监听 Shift+click 事件并执行范围行选择。它需要一个 `CellContext` 实例才能访问表格和行的内部状态。
 
@@ -212,7 +212,7 @@ const columns: ColumnDef<Person>[] = [
 
 **注意**: 如果表格包含嵌套行，范围选择将不起作用。目前，这被认为是未定义行为。
 
-### 排序
+#### 排序
 
 了解 `react-table` 的列属性，请参阅 [文档](https://tanstack.com/table/v8/docs/guide/sorting)。
 
@@ -256,7 +256,7 @@ const table = useTable({
 });
 ```
 
-### 分组
+#### 分组
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -345,7 +345,7 @@ const columns: ColumnDef<Item>[] = [
 ];
 ```
 
-### 行重排
+#### 重新排序
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -392,9 +392,9 @@ const ReorderingExample = () => {
 };
 ```
 
-### 列重排
+#### 列重新排序
 
-将表格包装在 `ColumnReorderingProvider` 中，以启用通过表头进行列的拖放重排。
+用 `ColumnReorderingProvider` 包裹表格，以启用通过表头拖放重新排序列。
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
@@ -488,9 +488,9 @@ CSS API：
 </ColumnReorderingProvider>
 ```
 
-### 虚拟化
+#### 虚拟化
 
-如果您想将网格容器用作滚动元素（如果您想使用窗口，请参阅窗口虚拟化部分）。请确保为容器设置固定的高度；否则，虚拟化将无法工作。
+如果您想将网格容器用作滚动元素（如果您想使用窗口，请参阅窗口虚拟化部分）。请确保为容器设置固定的高度；否则，虚拟化将不起作用。
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -527,7 +527,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-如果您将虚拟化与重新排序功能一起使用，还需要传递 `rangeExtractor` 选项：
+如果您将虚拟化与重新排序功能一起使用，您还需要传递 `rangeExtractor` 选项：
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -551,7 +551,7 @@ return (
 );
 ```
 
-### 窗口虚拟化
+#### 窗口虚拟化
 
 如果您想使用窗口作为滚动元素
 
@@ -586,7 +586,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### 列宽度调整
+#### 列宽度调整
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -609,7 +609,7 @@ const ResizingDemo = () => {
 };
 ```
 
-### 列设置
+#### 列设置
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -641,6 +641,13 @@ const TableSettingsDemo = () => {
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
 ```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
   const table = useTable({
     columns,
     data,
@@ -662,7 +669,7 @@ const TableSettingsDemo = () => {
 
 ### React 19 + React Compiler 兼容性
 
-**⚠️ 已知问题：** 在使用 `@gravity-ui/table`（基于 TanStack Table 构建）时，存在一个与 React 19 和 React Compiler 的已知兼容性问题。当数据更改时，表格可能不会重新渲染。详情请参阅 [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567)。
+**⚠️ 已知问题：** 在使用 `@gravity-ui/table`（基于 TanStack Table 构建）时，React 19 和 React Compiler 存在一个已知的兼容性问题。表格在数据更改时可能不会重新渲染。详情请参阅 [TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567)。
 
 **解决方法：**
 
@@ -674,7 +681,7 @@ import {Table, useTable} from '@gravity-ui/table';
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 function MyTable() {
-  'use no memo'; // 为此组件禁用 React Compiler 的 memoization
+  'use no memo'; // 禁用此组件的 React Compiler 记忆化
 
   const [data, setData] = React.useState<Person[]>([]);
 
@@ -689,7 +696,7 @@ function MyTable() {
 
 **替代方案：**
 
-您也可以显式地 memoize 表格实例或数据，以确保正确重新渲染：
+您也可以显式地记忆化表格实例或数据，以确保正确重新渲染：
 
 ```tsx
 import React from 'react';
@@ -699,7 +706,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 function MyTable() {
   const [data, setData] = React.useState<Person[]>([]);
 
-  // 显式 memoize 数据以确保重新渲染
+  // 显式记忆化数据以确保重新渲染
   const memoizedData = React.useMemo(() => data, [data]);
 
   const table = useTable({
@@ -711,32 +718,36 @@ function MyTable() {
 }
 ```
 
-**注意：** 此问题存在于底层的 TanStack Table 库中，需要在此处修复。在修复可用之前，上述解决方法应该有所帮助。
+**注意：** 此问题存在于底层的 TanStack Table 库中，需要在此库中修复。上述解决方法将在修复可用之前提供帮助。
 
 ## 许可证
 
-MIT 许可证。详情请参阅 [LICENSE](LICENSE)。
+根据 MIT 许可证分发。详情请参阅 [LICENSE](LICENSE)。
 
 ## 致 AI 代理
 
-为 Gravity UI 应用打造的无头、基于 TanStack Table 的数据网格 — 当您需要在 uikit 的基础 `Table` 上组合原始标记时，请使用它来实现可排序、可选择、可分组、可重排和虚拟化的表格。
+为 Gravity UI 应用设计的无头、基于 TanStack Table 的数据网格 — 当您需要可排序、可选择、可分组、可重排和虚拟化的表格时，请使用它，而不是在 uikit 的基础 `Table` 上组合原始标记。
 
 ### 何时使用
 
 - 需要行或窗口虚拟化的大型数据集（`useRowVirtualizer`、`useWindowRowVirtualizer`）。
-- 列排序、调整大小、重排（`ColumnReorderingProvider`）、固定以及用户自定义列设置（`TableSettings`）。
+- 列排序、调整大小、重排（`ColumnReorderingProvider`）、固定以及每个用户的列设置（`TableSettings`）。
 - 行选择（单选/多选、范围选择）以及带有可展开单元格的树形/分组行。
 
-### 何时避免使用
+### 何时不要使用
 
-- 具有少量行且没有高级功能的简单静态表格 — 来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 的 uikit 内置 `Table` 更轻量。
+- 只有少量行且没有高级功能的简单静态表格 — uikit 中来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 的内置 `Table` 更轻量。
 - 非表格列表 — 使用来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 的 `List`。
-- 电子表格风格的内联单元格编辑 — 此网格侧重于读取/显示，而非可编辑的电子表格。
+- 电子表格风格的内联单元格编辑 — 此网格侧重于读取/显示，而不是可编辑的电子表格。
 
 ### 常见陷阱
 
 - **您使用 `useTable` 构建表格，然后渲染 `<Table table={table} />`。** 主要 prop 是 `table`（实例），而不是直接在 `<Table>` 上的 `data`/`columns`；将 `data` 和 `columns` 传递给 `useTable`。
 - **类型来自 `@gravity-ui/table/tanstack` 子路径。** 从 `@gravity-ui/table/tanstack` 导入 `ColumnDef`、`RowSelectionState`、`SortingState` 等，而不是从包的根目录导入。
-- **排序需要一个访问器。** 列必须具有 `accessorKey`/`accessorFn` 才能使排序生效；设置 `enableSorting` 并提供 `getRowId`。
-- **React 19 + React Compiler 可能会跳过重新渲染。** 这是上游 TanStack Table 的问题 — 在组件中添加 `'use no memo'` 指令或 memoize `data`。
-- **范围选择在嵌套行中会中断。** 当表格具有分组/嵌套行时，范围选择是未定义行为；使用 `useRowSelectionFixedHandler` 来正确处理分组情况下的父复选框状态。
+- **排序需要访问器。** 列必须具有 `accessorKey`/`accessorFn` 才能使排序生效；设置 `enableSorting` 并提供 `getRowId`。
+- **React 19 + React Compiler 可能会跳过重新渲染。** 这是上游 TanStack Table 的问题 — 在组件中添加 `'use no memo'` 指令或记忆化 `data`。
+- **范围选择在嵌套行中会中断。** 当表格具有分组/嵌套行时，范围选择是未定义行为；使用 `useRowSelectionFixedHandler` 来正确处理分组时的父复选框状态。
+
+## 致 AI 代理的文档
+
+已安装版本的代理可读文档位于 `node_modules/@gravity-ui/table/build/docs/INDEX.md`。
