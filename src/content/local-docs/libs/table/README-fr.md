@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## Composants
+### Composants
 
-Deux composants `Table` sont disponibles :
+Vous pouvez utiliser deux composants `Table` :
 
-- `BaseTable` : un composant avec uniquement les styles de base ;
-- `Table` : un composant avec les styles basés sur Gravity UI.
+- `BaseTable` - un composant avec des styles de base uniquement ;
+- `Table` - un composant avec des styles basés sur Gravity UI.
 
-### Sélection de lignes
+#### Sélection de lignes
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -81,9 +81,9 @@ const RowSelectionExample = () => {
 
 Pour utiliser le regroupement avec la sélection, utilisez le hook `useRowSelectionFixedHandler`. Sans lui, l'état de la case à cocher de la ligne parente sera incorrect. https://github.com/TanStack/table/issues/4878
 
-### Colonne de sélection personnalisée par plage
+#### Colonne de sélection par plage personnalisée
 
-Le hook `useToggleRangeSelectionHandler` renvoie un gestionnaire de changement qui écoute les événements Shift+clic et effectue une sélection de lignes par plage. Il doit recevoir une instance de `CellContext` pour avoir accès aux états internes de la table et de la ligne.
+Le hook `useToggleRangeSelectionHandler` renvoie un gestionnaire de changement qui écoute les événements Shift+clic et effectue la sélection de lignes par plage. Il doit recevoir une instance de `CellContext` pour avoir accès aux états internes de la table et de la ligne.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -210,11 +210,11 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. À l'heure actuelle, cela est considéré comme un comportement indéfini.
+**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. Pour le moment, cela est considéré comme un comportement indéfini.
 
-### Tri
+#### Tri
 
-Apprenez-en davantage sur les propriétés des colonnes dans la documentation de react-table [ici](https://tanstack.com/table/v8/docs/guide/sorting).
+Apprenez-en plus sur les propriétés des colonnes dans la documentation de react-table [ici](https://tanstack.com/table/v8/docs/guide/sorting).
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -256,7 +256,7 @@ const table = useTable({
 });
 ```
 
-### Groupement
+#### Groupement
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -319,13 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
-Pour utiliser le groupement avec la sélection, utilisez le hook `useRowSelectionFixedHandler`. Sans cela, l'état de la case à cocher de la ligne parente sera incorrect. https://github.com/TanStack/table/issues/4878
+Pour utiliser le groupement avec la sélection, utilisez le hook `useRowSelectionFixedHandler`. Sans lui, l'état de la case à cocher de la ligne parente sera incorrect. https://github.com/TanStack/table/issues/4878
 
 Pour activer les styles d'imbrication, passez `withNestingStyles = true` dans la configuration de la colonne.
 
 Les indicateurs d'imbrication peuvent être désactivés en passant `showTreeDepthIndicators = false`.
 
-Pour ajouter un contrôle permettant d'étendre/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou avec votre composant personnalisé similaire :
+Pour ajouter un contrôle pour développer/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou votre composant personnalisé similaire :
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -345,7 +345,7 @@ const columns: ColumnDef<Item>[] = [
 ];
 ```
 
-### Réorganisation
+#### Réorganisation
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -392,7 +392,7 @@ const ReorderingExample = () => {
 };
 ```
 
-### Réorganisation des colonnes
+#### Réorganisation des colonnes
 
 Enveloppez le tableau avec `ColumnReorderingProvider` pour activer la réorganisation des colonnes par glisser-déposer de leurs en-têtes.
 
@@ -419,7 +419,7 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-Si vous contrôlez vous-même `columnOrder` (par exemple, pour le rendre persistant), passez `onReorder` et appliquez l'ordre résultant :
+Si vous contrôlez vous-même `columnOrder` (par exemple, pour le conserver), passez `onReorder` et appliquez l'ordre résultant :
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -443,18 +443,18 @@ return (
 
 API CSS :
 
-| Variable CSS                                 | Défaut                        | Description                      |
+| Variable CSS                                 | Défaut                       | Description                      |
 | -------------------------------------------- | ----------------------------- | -------------------------------- |
 | `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Couleur de la ligne d'insertion |
 | `--gt-table-reordering-insertion-line-width` | `2px`                         | Largeur de la ligne d'insertion |
 | `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacité de la colonne déplacée   |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | Arrière-plan de l'aperçu de glisser |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Ombre de l'aperçu de glisser     |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Rayon des coins de l'aperçu de glisser |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Arrière-plan de l'aperçu de déplacement |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Ombre portée de l'aperçu de déplacement |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Rayon des coins de l'aperçu de déplacement |
 
-Pour interdire le réordonnancement d'une colonne spécifique, définissez `enableColumnReordering: false` dans sa définition de colonne. Les colonnes de type "placeholder" (regroupées) ne sont pas déplaçables. Utilisez `activationDistance` (par défaut `8`) pour ajuster la distance que le pointeur doit parcourir avant qu'un glisser-déposer ne commence, ce qui permet aux clics sur les en-têtes (comme le tri) de fonctionner.
+Pour interdire le réordonnancement d'une colonne spécifique, définissez `enableColumnReordering: false` dans sa définition de colonne. Les colonnes d'espace réservé (groupées) ne sont pas déplaçables. Utilisez `activationDistance` (par défaut `8`) pour ajuster la distance que le pointeur doit parcourir avant qu'un déplacement ne commence, ce qui permet aux clics d'en-tête (comme le tri) de fonctionner.
 
-Les colonnes épinglées peuvent également être réordonnées, mais uniquement entre elles : une colonne peut être déplacée au sein du groupe épinglé à gauche, du groupe épinglé à droite, ou du groupe central (non épinglé) — elle ne franchit jamais une limite d'épinglage lors du glisser-déposer.
+Les colonnes épinglées peuvent également être réordonnées, mais uniquement entre elles : une colonne peut être déplacée au sein du groupe épinglé à gauche, du groupe épinglé à droite, ou du groupe central (non épinglé) — elle ne franchit jamais une limite d'épinglage par glisser-déposer.
 
 ```tsx
 <ColumnReorderingProvider
@@ -471,9 +471,9 @@ Les colonnes épinglées peuvent également être réordonnées, mais uniquement
 </ColumnReorderingProvider>
 ```
 
-Pendant le glisser-déposer :
+Pendant le déplacement :
 
-- un aperçu flottant de la colonne (son en-tête plus les premières lignes) suit le pointeur dans une superposition de glisser-déposer ;
+- un aperçu flottant de la colonne (son en-tête plus les premières lignes) suit le pointeur dans une superposition de déplacement ;
 - la colonne déplacée devient semi-transparente ;
 - une ligne d'insertion bleue est dessinée à l'endroit où la colonne sera déposée ;
 
@@ -488,9 +488,9 @@ Pendant le glisser-déposer :
 </ColumnReorderingProvider>
 ```
 
-### Virtualisation
+#### Virtualisation
 
-Utilisez cette option si vous souhaitez utiliser le conteneur de la grille comme élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section de virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur, sinon la virtualisation ne fonctionnera pas.
+Utilisez si vous souhaitez utiliser le conteneur de grille comme élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section de virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur ; sinon, la virtualisation ne fonctionnera pas.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -551,9 +551,9 @@ return (
 );
 ```
 
-### Virtualisation de fenêtre
+#### Virtualisation de fenêtre
 
-Utilisez cette option si vous souhaitez utiliser la fenêtre comme élément de défilement
+Utilisez si vous souhaitez utiliser la fenêtre comme élément de défilement
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -586,7 +586,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Redimensionnement
+#### Redimensionnement
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -609,7 +609,7 @@ const ResizingDemo = () => {
 };
 ```
 
-### Paramètres des colonnes
+#### Paramètres des colonnes
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -619,7 +619,7 @@ const columns: ColumnDef<Person>[] = [
     header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // Optionnel. Permet de masquer cette colonne dans le popover des paramètres
-      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ header pour le popover des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et le popover des paramètres)
+      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ d'en-tête pour le popover des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et le popover des paramètres)
     },
   }, // ou vous pouvez utiliser la fonction getSettingsColumn
 ];
@@ -639,7 +639,6 @@ const TableSettingsDemo = () => {
 
   // Variante alternative pour obtenir l'état, les callbacks et définir les callbacks d'application des paramètres - en utilisant le hook useTableSettings :
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
-```
 
 ```tsx
   const table = useTable({
@@ -661,7 +660,7 @@ Apprenez-en davantage sur les propriétés de redimensionnement des colonnes et 
 
 ## Problèmes connus et compatibilité
 
-### Compatibilité React 19 + React Compiler
+### Compatibilité avec React 19 + React Compiler
 
 **⚠️ Problème connu :** Il existe un problème de compatibilité connu avec React 19 et React Compiler lors de l'utilisation de `@gravity-ui/table` (qui est basé sur TanStack Table). Le tableau peut ne pas se réafficher lorsque les données changent. Voir le [problème #5567 de TanStack Table](https://github.com/TanStack/table/issues/5567) pour plus de détails.
 
@@ -720,13 +719,13 @@ Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
 
 ## Pour les agents IA
 
-Une grille de données sans tête, alimentée par TanStack-Table, pour les applications Gravity UI — utilisez-la pour des tableaux triables, sélectionnables, groupables, réorganisables et virtualisés au lieu de composer du balisage brut par-dessus le `Table` de base d'uikit.
+Une grille de données sans tête, alimentée par TanStack-Table, pour les applications Gravity UI — utilisez-la pour des tableaux triables, sélectionnables, groupables, réordonnables et virtualisés au lieu de composer du balisage brut par-dessus le `Table` de base d'uikit.
 
 ### Quand l'utiliser
 
-- Grands ensembles de données nécessitant une virtualisation de ligne ou de fenêtre (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- Grands ensembles de données nécessitant une virtualisation des lignes ou des fenêtres (`useRowVirtualizer`, `useWindowRowVirtualizer`).
 - Tri, redimensionnement, réorganisation des colonnes (`ColumnReorderingProvider`), épinglage et paramètres de colonnes par utilisateur (`TableSettings`).
-- Sélection de lignes (simple/multiple, étendue) et lignes arborescentes/groupées avec des cellules extensibles.
+- Sélection de lignes (simple/multiple, par plage) et lignes d'arbre/groupées avec des cellules extensibles.
 
 ### Quand ne pas l'utiliser
 
@@ -740,4 +739,8 @@ Une grille de données sans tête, alimentée par TanStack-Table, pour les appli
 - **Les types proviennent du sous-chemin `@gravity-ui/table/tanstack`.** Importez `ColumnDef`, `RowSelectionState`, `SortingState`, etc. depuis `@gravity-ui/table/tanstack`, pas depuis la racine du package.
 - **Le tri nécessite un accesseur.** Une colonne doit avoir `accessorKey`/`accessorFn` pour que le tri fonctionne ; définissez `enableSorting` et fournissez `getRowId`.
 - **React 19 + React Compiler peut ignorer les réaffichages.** Il s'agit d'un problème en amont de TanStack Table — ajoutez la directive `'use no memo'` au composant ou mémoïsez `data`.
-- **La sélection d'étendue échoue avec les lignes imbriquées.** Le comportement de la sélection d'étendue est indéfini lorsque le tableau a des lignes groupées/imbriquées ; utilisez `useRowSelectionFixedHandler` pour un état de case à cocher parent correct avec le regroupement.
+- **La sélection par plage échoue avec les lignes imbriquées.** Le comportement de la sélection par plage est indéfini lorsque le tableau a des lignes groupées/imbriquées ; utilisez `useRowSelectionFixedHandler` pour un état de case à cocher parent correct avec le regroupement.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/table/build/docs/INDEX.md`.

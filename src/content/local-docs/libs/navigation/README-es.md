@@ -60,7 +60,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 1. Soporte para SSR
 2. Añadir más documentación y ejemplos a [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Soporte para la temática de Navigation en UIKit
+3. Soporte para la navegación en el tema de UIKit
 4. Unificar la API de `subheaderItem`, `menuItem`, `footerItem`
 
 ## Componentes
@@ -85,7 +85,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## API CSS
 
-Se utiliza para la tematización de los componentes de Navigation
+Se utiliza para la tematización de los componentes de Navegación
 
 ## Licencia
 
@@ -103,8 +103,8 @@ Componentes de navegación de shell de aplicación para aplicaciones Gravity UI:
 
 ### Cuándo no usar
 
-- Controles genéricos dentro de la página (botones, pestañas, menús, breadcrumbs): usa [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); este paquete es el cromo exterior de la aplicación, no componentes generales.
-- Renderizar el cuerpo de la página en sí a partir de una configuración: usa [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
+- Controles genéricos dentro de la página (botones, pestañas, menús, breadcrumbs): usa [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); este paquete es el borde exterior de la aplicación, no componentes generales.
+- Renderizar el cuerpo de la página en sí mismo a partir de la configuración: usa [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
 - Enrutamiento del lado del cliente: esto solo proporciona la UI de navegación; conecta los clics a tu propio enrutador.
 
 ### Errores comunes
@@ -114,3 +114,7 @@ Componentes de navegación de shell de aplicación para aplicaciones Gravity UI:
 - **Se requieren dependencias peer.** `@gravity-ui/uikit`, `@gravity-ui/icons` y `@bem-react/classname` deben instalarse junto con `react`/`react-dom`.
 - **Necesita configuración de uikit.** Renderiza dentro de `ThemeProvider` e importa `@gravity-ui/uikit/styles/styles.css`, o el shell se renderizará sin estilo.
 - **El contenido de la página se pasa a través de `renderContent`.** Renderiza tu contenido enrutado a través de la prop `renderContent` / `PageLayout`, no como `children`.
+
+## Documentación para agentes de IA
+
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/navigation/build/docs/INDEX.md`.

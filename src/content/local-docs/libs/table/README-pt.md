@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## Componentes
+### Componentes
 
 Existem dois componentes `Table` que você pode usar:
 
 - `BaseTable` - um componente com estilos básicos apenas;
 - `Table` - um componente com estilos baseados no Gravity UI.
 
-### Seleção de Linha
+#### Seleção de Linhas
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -81,9 +81,9 @@ const RowSelectionExample = () => {
 
 Para usar agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler`. Sem ele, o estado da caixa de seleção da linha pai ficará incorreto. https://github.com/TanStack/table/issues/4878
 
-### Coluna de Seleção em Intervalo Personalizada
+#### Coluna de Seleção de Intervalo Personalizada
 
-O hook `useToggleRangeSelectionHandler` retorna um manipulador de eventos que escuta cliques com a tecla Shift e realiza a seleção de linhas em intervalo. Ele precisa receber uma instância de `CellContext` para ter acesso aos estados internos da tabela e da linha.
+O hook `useToggleRangeSelectionHandler` retorna um manipulador de eventos que escuta cliques com a tecla Shift pressionada e realiza a seleção de linhas em intervalo. Ele precisa receber uma instância de `CellContext` para ter acesso aos estados internos da tabela e da linha.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-Existe também o componente `RangedSelectionCheckbox`, que utiliza o hook internamente e aceita uma instância de `CellContext` como prop. Este componente oferece um atalho para adicionar a funcionalidade de seleção em intervalo a colunas de seleção personalizadas.
+Existe também o componente `RangedSelectionCheckbox`, que utiliza o hook internamente e aceita uma instância de `CellContext` como prop. Este componente oferece um atalho para adicionar a funcionalidade de seleção de intervalo a colunas de seleção personalizadas.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -198,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-Por padrão, a coluna de seleção gerada com `selectionColumn` inclui a funcionalidade de seleção em intervalo.
+Por padrão, a coluna de seleção gerada com `selectionColumn` inclui a funcionalidade de seleção de intervalo.
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -210,9 +210,9 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**Observação**: Se a tabela contiver linhas aninhadas, a seleção em intervalo não funcionará. No momento, isso é considerado um comportamento indefinido.
+**Observação**: Se a tabela contiver linhas aninhadas, a seleção de intervalo não funcionará. No momento, isso é considerado um comportamento indefinido.
 
-### Ordenação
+#### Ordenação
 
 Saiba mais sobre as propriedades de coluna na documentação do [react-table](https://tanstack.com/table/v8/docs/guide/sorting).
 
@@ -230,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Sua coluna DEVE ter accessorFn para que a ordenação seja habilitada
+  // Sua coluna DEVE ter accessorFn para que a ordenação seja ativada
 
   const table = useTable({
     columns,
@@ -256,7 +256,7 @@ const table = useTable({
 });
 ```
 
-### Agrupamento
+#### Agrupamento
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -319,9 +319,9 @@ const GroupingExample = () => {
 };
 ```
 
-Para usar agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler`. Sem ele, o estado da caixa de seleção da linha pai ficará incorreto. https://github.com/TanStack/table/issues/4878
+Para usar agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler`. Sem ele, o estado da caixa de seleção pai ficará incorreto. https://github.com/TanStack/table/issues/4878
 
-Para habilitar estilos de aninhamento, passe `withNestingStyles = true` na configuração da coluna.
+Para ativar estilos de aninhamento, passe `withNestingStyles = true` na configuração da coluna.
 
 Indicadores de aninhamento podem ser desativados passando `showTreeDepthIndicators = false`.
 
@@ -345,7 +345,7 @@ const columns: ColumnDef<Item>[] = [
 ];
 ```
 
-### Reordenação
+#### Reordenação
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -392,9 +392,9 @@ const ReorderingExample = () => {
 };
 ```
 
-### Reordenação de Colunas
+#### Reordenação de Colunas
 
-Envolva a tabela com `ColumnReorderingProvider` para habilitar a reordenação de colunas por meio de arrastar e soltar em seus cabeçalhos.
+Envolva a tabela com `ColumnReorderingProvider` para ativar a reordenação de colunas por meio de arrastar e soltar em seus cabeçalhos.
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
@@ -443,18 +443,18 @@ return (
 
 API CSS:
 
-| Variável CSS                                 | Padrão                        | Descrição                      |
-| -------------------------------------------- | ----------------------------- | -------------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Cor da linha de inserção de arrastar |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | Largura da linha de inserção de arrastar |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacidade da coluna arrastada    |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | Fundo da prévia de arrastar      |
+| Variável CSS                                 | Padrão                          | Descrição                      |
+| -------------------------------------------- | ------------------------------- | ------------------------------ |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                       | Cor da linha de inserção de soltar |
+| `--gt-table-reordering-insertion-line-width` | `2px`                           | Largura da linha de inserção de soltar |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                           | Opacidade da coluna arrastada    |
+| `--gt-table-drag-overlay-background`         | `#fff`                          | Fundo da prévia de arrastar      |
 | `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Sombra da caixa da prévia de arrastar |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Raio da borda da prévia de arrastar |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                           | Raio da borda da prévia de arrastar |
 
 Para proibir a reordenação de uma coluna específica, defina `enableColumnReordering: false` na sua definição de coluna. Colunas de placeholder (agrupadas) não são arrastáveis. Use `activationDistance` (padrão `8`) para ajustar a distância que o ponteiro deve se mover antes que um arrasto comece, o que mantém os cliques no cabeçalho (como ordenação) funcionando.
 
-Colunas fixadas também podem ser reordenadas, mas apenas entre si: uma coluna pode ser movida dentro do grupo fixado à esquerda, do grupo fixado à direita ou do grupo central (não fixado) — ela nunca cruza um limite de fixação ao ser arrastada.
+Colunas fixadas também podem ser reordenadas, mas apenas entre si: uma coluna pode ser movida dentro do grupo fixado à esquerda, do grupo fixado à direita ou do grupo central (não fixado) — ela nunca cruza um limite de fixação ao arrastar.
 
 ```tsx
 <ColumnReorderingProvider
@@ -471,9 +471,9 @@ Colunas fixadas também podem ser reordenadas, mas apenas entre si: uma coluna p
 </ColumnReorderingProvider>
 ```
 
-Durante o arrasto:
+Enquanto arrasta:
 
-- uma prévia flutuante da coluna (seu cabeçalho mais as primeiras linhas) segue o ponteiro em uma sobreposição de arrasto;
+- uma prévia flutuante da coluna (seu cabeçalho mais as primeiras linhas) segue o ponteiro em uma sobreposição de arrastar;
 - a coluna arrastada fica semitransparente;
 - uma linha de inserção azul é desenhada onde a coluna será solta;
 
@@ -488,7 +488,7 @@ Durante o arrasto:
 </ColumnReorderingProvider>
 ```
 
-### Virtualização
+#### Virtualização
 
 Use se você quiser usar o contêiner da grade como elemento de rolagem (se quiser usar a janela, veja a seção de virtualização de janela). Certifique-se de definir uma altura fixa no contêiner; caso contrário, a virtualização não funcionará.
 
@@ -551,7 +551,7 @@ return (
 );
 ```
 
-### Virtualização de Janela
+#### Virtualização de Janela
 
 Use se você quiser usar a janela como elemento de rolagem
 
@@ -586,7 +586,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Redimensionamento
+#### Redimensionamento
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -609,7 +609,7 @@ const ResizingDemo = () => {
 };
 ```
 
-### Configurações de Coluna
+#### Configurações de Coluna
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -641,7 +641,7 @@ const TableSettingsDemo = () => {
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 ```
 
-```tsx
+```typescript
   const table = useTable({
     columns,
     data,
@@ -720,19 +720,19 @@ Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
 
 ## Para agentes de IA
 
-Uma grade de dados headless, alimentada por TanStack-Table, para aplicativos Gravity UI — utilize-a para tabelas com ordenação, seleção, agrupamento, reordenação e virtualização em vez de compor marcação bruta sobre a `Table` básica do uikit.
+Uma grade de dados headless, alimentada por TanStack-Table, para aplicativos Gravity UI — utilize-a para tabelas ordenáveis, selecionáveis, agrupáveis, reorganizáveis e virtualizadas em vez de compor marcação bruta sobre o `Table` básico do uikit.
 
 ### Quando usar
 
 - Grandes conjuntos de dados que precisam de virtualização de linha ou janela (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Ordenação de colunas, redimensionamento, reordenação (`ColumnReorderingProvider`), fixação e configurações de coluna por usuário (`TableSettings`).
-- Seleção de linha (única/múltipla, intervalo) e linhas de árvore/agrupadas com células expansíveis.
+- Ordenação de colunas, redimensionamento, reorganização (`ColumnReorderingProvider`), fixação e configurações de coluna por usuário (`TableSettings`).
+- Seleção de linha (única/múltipla, em intervalo) e linhas de árvore/agrupadas com células expansíveis.
 
 ### Quando não usar
 
-- Uma tabela simples e estática com algumas linhas e sem recursos avançados — a `Table` integrada do uikit de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) é mais leve.
+- Uma tabela simples e estática com algumas linhas e sem recursos avançados — o `Table` integrado do uikit de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) é mais leve.
 - Uma lista não tabular — use `List` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Edição de células inline no estilo de planilha — esta grade é focada em leitura/exibição, não em uma planilha editável.
+- Edição de células inline no estilo planilha — esta grade é focada em leitura/exibição, não em uma planilha editável.
 
 ### Armadilhas comuns
 
@@ -740,4 +740,8 @@ Uma grade de dados headless, alimentada por TanStack-Table, para aplicativos Gra
 - **Tipos vêm do subcaminho `@gravity-ui/table/tanstack`.** Importe `ColumnDef`, `RowSelectionState`, `SortingState`, etc. de `@gravity-ui/table/tanstack`, não da raiz do pacote.
 - **A ordenação precisa de um acessador.** Uma coluna deve ter `accessorKey`/`accessorFn` para que a ordenação funcione; defina `enableSorting` e forneça `getRowId`.
 - **React 19 + React Compiler pode pular renderizações.** Este é um problema upstream do TanStack Table — adicione a diretiva `'use no memo'` ao componente ou memoize `data`.
-- **A seleção de intervalo falha com linhas aninhadas.** O comportamento da seleção de intervalo é indefinido quando a tabela tem linhas agrupadas/aninhadas; use `useRowSelectionFixedHandler` para o estado correto da caixa de seleção pai com agrupamento.
+- **A seleção em intervalo quebra com linhas aninhadas.** A seleção em intervalo tem comportamento indefinido quando a tabela tem linhas agrupadas/aninhadas; use `useRowSelectionFixedHandler` para o estado correto da caixa de seleção pai com agrupamento.
+
+## Documentação para agentes de IA
+
+A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/table/build/docs/INDEX.md`.

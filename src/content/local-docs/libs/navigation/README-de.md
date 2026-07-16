@@ -59,7 +59,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 ## Roadmap 2025
 
 1. Unterstützung für SSR
-2. Mehr Dokumentation und Beispiele für [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) hinzufügen
+2. Weitere Dokumentation und Beispiele für [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) hinzufügen
 3. Unterstützung für Navigation im UIKit-Themer
 4. API für subheaderItem, menuItem, footerItem vereinheitlichen
 
@@ -93,7 +93,7 @@ Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
 
 ## Für KI-Agenten
 
-Application-Shell-Navigationskomponenten für Gravity UI-Apps – die einklappbare `AsideHeader`-Seitenleiste sowie Fußzeilen, Schubladen, Logos, Hotkeys und Einstellungsfenster, die eine ganze Seite umrahmen.
+Anwendungs-Shell-Navigationskomponenten für Gravity UI-Apps – die einklappbare `AsideHeader`-Seitenleiste sowie Fußzeilen, Schubladen, Logos, Hotkeys und Einstellungsfenster, die eine ganze Seite umrahmen.
 
 ### Wann zu verwenden
 
@@ -109,8 +109,12 @@ Application-Shell-Navigationskomponenten für Gravity UI-Apps – die einklappba
 
 ### Häufige Fallstricke
 
-- **`AsideHeader` ist gesteuert.** Sie müssen den zusammengeklappten Zustand mit `compact` verwalten und ihn in `onChangeCompact` aktualisieren; das Übergeben von `compact` ohne den Handler friert die Seitenleiste ein.
+- **`AsideHeader` ist gesteuert.** Sie müssen den zusammengeklappten Zustand mit `compact` verwalten und ihn in `onChangeCompact` aktualisieren; das Übergeben von `compact` ohne Handler friert die Seitenleiste ein.
 - **Menüelemente sind `menuItems`, indiziert nach `id`.** Jedes Element ist `{id, title, icon, current, onItemClick}`; `icon` erwartet eine Icon-Komponente (z. B. von `@gravity-ui/icons`), keine Zeichenkette.
 - **Peer-Abhängigkeiten sind erforderlich.** `@gravity-ui/uikit`, `@gravity-ui/icons` und `@bem-react/classname` müssen zusammen mit `react`/`react-dom` installiert werden.
 - **Benötigt uikit-Setup.** Rendern Sie innerhalb von `ThemeProvider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`, oder die Shell wird ungestylt gerendert.
 - **Seiteninhalt wird über `renderContent` bereitgestellt.** Rendern Sie Ihren gerouteten Inhalt über die `renderContent`-Prop / `PageLayout`, nicht als `children`.
+
+## Dokumentation für KI-Agenten
+
+Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/navigation/build/docs/INDEX.md`.

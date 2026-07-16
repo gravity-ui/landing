@@ -8,11 +8,11 @@
 npm install @gravity-ui/uikit @gravity-ui/charts
 ```
 
-`@gravity-ui/uikit`은 필수 피어 종속성입니다. 차트가 의존하는 테마 및 스타일을 제공합니다.
+`@gravity-ui/uikit`은 필수 peer dependency입니다. 이 라이브러리는 차트가 의존하는 테마 및 스타일을 제공합니다.
 
 ## 사용법
 
-진입점에서 `@gravity-ui/uikit` 스타일을 한 번 임포트하고, 앱을 `ThemeProvider`로 감싼 다음, 명시적인 높이를 가진 컨테이너 안에 `Chart`를 렌더링하세요.
+애플리케이션의 진입점에서 `@gravity-ui/uikit` 스타일을 한 번 임포트하고, 앱을 `ThemeProvider`로 감싼 후, 명시적인 높이를 가진 컨테이너 안에 `Chart`를 렌더링하세요.
 
 ```tsx
 import {ThemeProvider} from '@gravity-ui/uikit';
@@ -49,7 +49,7 @@ export default function App() {
 }
 ```
 
-`Chart`는 부모 요소의 크기에 맞춰 조정되므로, 감싸는 요소에는 높이가 지정되어야 합니다.
+`Chart`는 부모 요소의 크기에 맞춰 조정되므로, 감싸는 요소에는 반드시 높이를 지정해야 합니다.
 
 ## 문서
 
@@ -65,26 +65,26 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENS
 
 ## AI 에이전트용
 
-Gravity UI 앱을 위한 선언형 React 차트 라이브러리 — 단일 `data` 구성으로 선, 영역, 막대, 파이, 산점도, 트리맵 및 기타 차트를 렌더링하며, 앱의 나머지 부분과 일치하도록 테마가 적용됩니다.
+Gravity UI 앱을 위한 선언형 React 차트 라이브러리입니다. 단일 `data` 구성으로 선, 영역, 막대, 파이, 산점도, 트리맵 등 다양한 차트를 렌더링하며, 앱의 다른 부분과 일치하도록 테마가 적용됩니다.
 
 ### 언제 사용해야 할까요?
 
 - 표준 비즈니스 차트: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
 - Gravity UI 테마(라이트/다크)를 따르고 `@gravity-ui/uikit` 앱과 토큰을 공유해야 하는 시각화.
-- 명령형으로 그리는 대신 선언형 데이터에서 차트를 렌더링하는 경우.
+- 명령형으로 그리는 대신 선언형 데이터로부터 차트를 렌더링할 때.
 
 ### 언제 사용하지 않아야 할까요?
 
-- 아직 `@gravity-ui/chartkit`을 사용하는 프로젝트 — 이는 이전 어댑터 기반 래퍼(YAGR/Highcharts/D3)이며, 이 패키지는 최신 독립형 렌더러이며 드롭인 대체재가 아닙니다.
-- 일반적인 테이블 형식 데이터 — [`@gravity-ui/table`](https://github.com/gravity-ui/table)을 사용하세요.
-- React가 아니거나 서버 전용 렌더링 — `Chart`는 React SVG를 렌더링하며 DOM이 필요합니다.
+- 아직 `@gravity-ui/chartkit`을 사용하는 프로젝트: 이는 이전 어댑터 기반 래퍼(YAGR/Highcharts/D3)이며, 이 패키지는 최신 독립형 렌더러이므로 직접적인 대체품이 아닙니다.
+- 일반적인 테이블 형식 데이터: [`@gravity-ui/table`](https://github.com/gravity-ui/table)을 사용하세요.
+- React가 아니거나 서버 전용 렌더링: `Chart`는 React SVG를 렌더링하며 DOM이 필요합니다.
 
-### 일반적인 함정
+### 일반적인 주의사항
 
 - **컴포넌트 이름은 `Chart`이며 `ChartKit`이 아닙니다.** `@gravity-ui/charts`에서 `{Chart}`를 임포트하세요. `ChartKit`은 별도의 레거시 `@gravity-ui/chartkit` 패키지에 속합니다.
-- **`data` prop은 `{series: {data: [...]}}` 형식의 `data`입니다.** `series.data`의 각 항목은 자체 `type`과 `data` 배열을 가진 하나의 시리즈입니다. 최상위 배열은 없습니다.
-- **크기가 지정되지 않은 컨테이너 없이는 아무것도 렌더링되지 않습니다.** `Chart`는 부모를 채우므로 래퍼에 명시적인 높이를 지정하세요.
-- **uikit 설정이 필요합니다.** `ThemeProvider`로 감싸고 `@gravity-ui/uikit/styles/styles.css`를 임포트하세요. `@gravity-ui/uikit`은 필수 피어 종속성입니다.
+- **`data` prop은 `{series: {data: [...]}}` 형식입니다.** `series.data`의 각 항목은 자체 `type`과 `data` 배열을 가진 하나의 시리즈입니다. 최상위 배열은 없습니다.
+- **크기가 지정된 컨테이너 없이는 아무것도 렌더링되지 않습니다.** `Chart`는 부모 요소를 채우므로, 래퍼에 명시적인 높이를 지정해야 합니다.
+- **uikit 설정이 필요합니다.** `ThemeProvider`로 감싸고 `@gravity-ui/uikit/styles/styles.css`를 임포트하세요. `@gravity-ui/uikit`은 필수 peer dependency입니다.
 
 ### 유용한 문서
 
@@ -96,3 +96,7 @@ Gravity UI 앱을 위한 선언형 React 차트 라이브러리 — 단일 `data
 - [값 형식 지정](./docs/diplodoc/pages/guides/value-formatting.md)
 - [데이터 레이블](./docs/diplodoc/pages/guides/data-labels.md)
 - [축 유형](./docs/diplodoc/pages/guides/axis-types.md)
+
+## AI 에이전트용 문서
+
+설치된 버전에 대한 에이전트가 읽을 수 있는 문서는 `node_modules/@gravity-ui/charts/dist/docs/INDEX.md`에 있습니다.

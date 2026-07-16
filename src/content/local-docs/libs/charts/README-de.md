@@ -1,6 +1,6 @@
 # Gravity UI Charts · [![npm package](https://img.shields.io/npm/v/@gravity-ui/charts)](https://www.npmjs.com/package/@gravity-ui/charts) [![License](https://img.shields.io/github/license/gravity-ui/charts)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/charts/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/charts/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/charts/)
 
-React-Charting-Bibliothek mit über 10 Diagrammtypen: Fläche, Balken, Linie, Kreis, Streu, Treemap und mehr.
+React-Charting-Bibliothek mit über 10 Diagrammtypen: Fläche, Balken, Linie, Kreis, Streu, Baumkarte und mehr.
 
 ## Installation
 
@@ -65,17 +65,17 @@ Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
 
 ## Für KI-Agenten
 
-Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Linien-, Flächen-, Balken-, Kreis-, Streu-, Treemap- und andere Diagramme aus einer einzigen `data`-Konfiguration, die passend zum Rest der App thematisiert ist.
+Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Linien-, Flächen-, Balken-, Kreis-, Streu-, Baumkarten- und andere Diagramme aus einer einzigen `data`-Konfiguration, die thematisch auf den Rest der App abgestimmt ist.
 
 ### Wann verwenden
 
 - Standard-Geschäftsdiagramme: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
 - Visualisierungen, die dem Gravity UI-Theming (hell/dunkel) folgen und Tokens mit einer `@gravity-ui/uikit`-App teilen müssen.
-- Rendern eines Diagramms aus deklarativen Daten anstatt imperativer Zeichnung.
+- Rendern eines Diagramms aus deklarativen Daten anstatt imperativer Zeichenoperationen.
 
 ### Wann nicht verwenden
 
-- Projekte, die noch `@gravity-ui/chartkit` verwenden – das ist der ältere, Adapter-basierte Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne, eigenständige Renderer und kein direkter Ersatz.
+- Projekte, die noch `@gravity-ui/chartkit` verwenden – dies ist der ältere Adapter-basierte Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne eigenständige Renderer und kein direkter Ersatz.
 - Reine Tabellendaten – verwenden Sie [`@gravity-ui/table`](https://github.com/gravity-ui/table).
 - Nicht-React- oder reine Server-Rendering – `Chart` rendert React SVG und benötigt das DOM.
 
@@ -96,3 +96,7 @@ Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Lini
 - [Wertformatierung](./docs/diplodoc/pages/guides/value-formatting.md)
 - [Datenbeschriftungen](./docs/diplodoc/pages/guides/data-labels.md)
 - [Achsentypen](./docs/diplodoc/pages/guides/axis-types.md)
+
+## Dokumentation für KI-Agenten
+
+Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/charts/dist/docs/INDEX.md`.
