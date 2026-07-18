@@ -10,7 +10,7 @@ MarkdownEditor est un outil puissant pour travailler avec Markdown, qui combine 
 
 - Prise en charge de la syntaxe Markdown de base et de [YFM](https://ydocs.tech).
 - Extensibilité grâce à l'utilisation des moteurs ProseMirror et CodeMirror.
-- La possibilité de travailler en modes WYSIWYG et Markup pour une flexibilité maximale.
+- Possibilité de travailler en modes WYSIWYG et Markup pour une flexibilité maximale.
 
 ## Installation
 
@@ -20,11 +20,11 @@ npm install @gravity-ui/markdown-editor
 
 ### Dépendances requises
 
-Veuillez noter que pour commencer à utiliser le package, votre projet doit également avoir installé les éléments suivants : `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` et quelques autres. Consultez la section `peerDependencies` de `package.json` pour des informations précises.
+Veuillez noter que pour commencer à utiliser le package, votre projet doit également avoir installé : `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` et quelques autres. Consultez la section `peerDependencies` de `package.json` pour des informations précises.
 
-## Démarrage
+## Premiers pas
 
-L'éditeur Markdown est fourni sous forme de hook React pour créer une instance de l'éditeur et d'un composant pour le rendu de la vue.
+L'éditeur Markdown est fourni sous forme de hook React pour créer une instance de l'éditeur et un composant pour le rendu de la vue.
 Pour configurer le style et le thème, consultez la [documentation UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
@@ -54,7 +54,7 @@ En savoir plus :
 - [Comment connecter l'éditeur dans Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
 - [Comment ajouter un aperçu pour le mode balisage](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
 - [Comment ajouter une extension HTML](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [Comment ajouter une extension Latex](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
+- [Comment ajouter une extension LaTeX](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
 - [Comment ajouter une extension Mermaid](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
 - [Comment écrire une extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
 - [Comment ajouter une extension GPT](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
@@ -63,7 +63,7 @@ En savoir plus :
 ### Développement
 
 1. Installez l'environnement Nodejs, la version est spécifiée dans le fichier `.nvmrc`. Nous recommandons d'utiliser [NVM](https://github.com/nvm-sh/nvm) ou un outil similaire.
-2. Installez [pnpm](https://pnpm.io/installation), la version est spécifiée dans la propriété "packageManager" de `package.json`.
+2. Installez [pnpm](https://pnpm.io/installation), la version est spécifiée dans `package.json` dans la propriété "packageManager".
 3. Installez les dépendances : `pnpm i`
 4. Lancez le serveur de développement storybook : `pnpm start`
 
@@ -80,7 +80,7 @@ configure({
 });
 ```
 
-N'oubliez pas d'appeler `configure()` depuis [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) et d'autres bibliothèques d'interface utilisateur.
+N'oubliez pas d'appeler `configure()` depuis [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) et d'autres bibliothèques UI.
 
 ### Contribution
 
@@ -92,11 +92,11 @@ Distribué sous la licence MIT. Voir [LICENSE](LICENSE.txt) pour les détails.
 
 ## Pour les agents IA
 
-Un éditeur Markdown à double mode pour React qui combine un mode WYSIWYG (ProseMirror) et un mode balisage brut (CodeMirror), avec prise en charge de Markdown de base et de YFM.
+Un éditeur Markdown à double mode pour React qui combine un mode WYSIWYG (ProseMirror) et un mode de balisage brut (CodeMirror), avec prise en charge de Markdown de base et de YFM.
 
 ### Quand l'utiliser
 
-- Édition de contenu Markdown/YFM avec une vue visuelle (WYSIWYG) et source (balisage) commutable.
+- Édition de contenu Markdown/YFM avec une vue visuelle (WYSIWYG) et une vue source (balisage) commutable.
 - Vous avez besoin d'un éditeur extensible : marques, nœuds, éléments de barre d'outils et extensions personnalisés (HTML, LaTeX, Mermaid, GPT) via les moteurs ProseMirror/CodeMirror.
 - Rendu de l'interface utilisateur de l'éditeur : créez l'instance avec `useMarkdownEditor` et rendez-la avec `MarkdownEditorView`.
 
@@ -112,3 +112,7 @@ Un éditeur Markdown à double mode pour React qui combine un mode WYSIWYG (Pros
 - **Lisez la valeur via l'instance, pas une prop `value` contrôlée.** Appelez `editor.getValue()` (par exemple, lors de l'événement `submit`) pour sérialiser en Markdown ; l'éditeur gère son propre état.
 - **Les dépendances pairées sont requises.** Votre projet doit fournir `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react` et `react-dom` — vérifiez les `peerDependencies` dans `package.json`.
 - **Les styles et l'i18n proviennent d'uikit.** Configurez le thème/les styles conformément à la documentation d'uikit et appelez `configure({lang})` à la fois depuis ce package et depuis `@gravity-ui/uikit`.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/markdown-editor/build/docs/INDEX.md`.
