@@ -4,7 +4,7 @@
 
 ## Markdown WYSIWYG- und Markup-Editor
 
-MarkdownEditor ist ein leistungsstarkes Werkzeug für die Arbeit mit Markdown, das WYSIWYG- und Markup-Modi kombiniert. Das bedeutet, dass Sie Inhalte in einem komfortablen visuellen Modus erstellen und bearbeiten können, während Sie gleichzeitig die volle Kontrolle über das Markup behalten.
+MarkdownEditor ist ein leistungsstarkes Werkzeug für die Arbeit mit Markdown, das WYSIWYG- und Markup-Modi kombiniert. Das bedeutet, dass Sie Inhalte in einem praktischen visuellen Modus erstellen und bearbeiten können, während Sie gleichzeitig die volle Kontrolle über das Markup behalten.
 
 ### 🔧 Hauptfunktionen
 
@@ -79,7 +79,7 @@ configure({
 });
 ```
 
-Vergessen Sie nicht, `configure()` von [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) und anderen UI-Bibliotheken aufzurufen.
+Vergessen Sie nicht, `configure()` aus [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) und anderen UI-Bibliotheken aufzurufen.
 
 ### Mitwirken
 
@@ -111,3 +111,7 @@ Ein Dual-Mode-Markdown-Editor für React, der einen WYSIWYG-Modus (ProseMirror) 
 - **Lesen Sie den Wert über die Instanz, nicht über eine gesteuerte `value`-Prop.** Rufen Sie `editor.getValue()` auf (z. B. beim `submit`-Ereignis), um zu Markdown zu serialisieren; der Editor verwaltet seinen eigenen Zustand.
 - **Peer-Abhängigkeiten sind erforderlich.** Ihr Projekt muss `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react` und `react-dom` bereitstellen – überprüfen Sie die `peerDependencies` in `package.json`.
 - **Stile und i18n stammen von uikit.** Richten Sie Theming/Stile gemäß der uikit-Dokumentation ein und rufen Sie `configure({lang})` sowohl von diesem Paket als auch von `@gravity-ui/uikit` auf.
+
+## Dokumentation für KI-Agenten
+
+Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/markdown-editor/build/docs/INDEX.md`.

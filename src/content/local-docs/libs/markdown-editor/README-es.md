@@ -4,7 +4,7 @@
 
 ## Editor WYSIWYG y de marcado Markdown
 
-MarkdownEditor es una herramienta potente para trabajar con Markdown, que combina los modos WYSIWYG y de marcado. Esto significa que puedes crear y editar contenido en un modo visual cómodo, además de tener control total sobre el marcado.
+MarkdownEditor es una herramienta potente para trabajar con Markdown, que combina los modos WYSIWYG y de marcado. Esto significa que puedes crear y editar contenido en un modo visual conveniente, además de tener control total sobre el marcado.
 
 ### 🔧 Características principales
 
@@ -36,7 +36,7 @@ function Editor({onSubmit}) {
 
   React.useEffect(() => {
     function submitHandler() {
-      // Serializa el contenido actual a marcado markdown
+      // Serializar el contenido actual a marcado Markdown
       const value = editor.getValue();
       onSubmit(value);
     }
@@ -58,14 +58,14 @@ Lee más:
 - [Cómo añadir una extensión Mermaid](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
 - [Cómo escribir una extensión](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
 - [Cómo añadir una extensión GPT](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [Cómo añadir una extensión de enlace de texto en markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [Cómo añadir una extensión de enlace de texto en Markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Desarrollo
 
 1. Instala el entorno de Nodejs, la versión se especifica en el archivo `.nvmrc`. Recomendamos usar [NVM](https://github.com/nvm-sh/nvm) o una herramienta similar.
 2. Instala [pnpm](https://pnpm.io/installation), la versión se especifica en la propiedad "packageManager" de `package.json`.
 3. Instala las dependencias: `pnpm i`
-4. Ejecuta el servidor de desarrollo de storybook: `pnpm start`
+4. Ejecuta el servidor de desarrollo de Storybook: `pnpm start`
 
 
 ### i18n
@@ -103,7 +103,7 @@ Un editor Markdown de doble modo para React que combina un modo WYSIWYG (ProseMi
 ### Cuándo no usarlo
 
 - Renderizado de Markdown a HTML de solo lectura sin edición: transfórmalo con [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) y renderiza la salida en su lugar.
-- Entrada de texto simple multilínea: usa `TextArea` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Entrada de texto multilínea simple: usa `TextArea` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Texto enriquecido que no sea Markdown/YFM: este editor está centrado en Markdown.
 
 ### Errores comunes
@@ -112,3 +112,7 @@ Un editor Markdown de doble modo para React que combina un modo WYSIWYG (ProseMi
 - **Lee el valor a través de la instancia, no de una prop `value` controlada.** Llama a `editor.getValue()` (por ejemplo, en el evento `submit`) para serializar a Markdown; el editor gestiona su propio estado.
 - **Se requieren dependencias peer.** Tu proyecto debe proporcionar `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react` y `react-dom`: consulta las `peerDependencies` en `package.json`.
 - **Los estilos y la internacionalización provienen de uikit.** Configura los temas/estilos según la documentación de uikit y llama a `configure({lang})` tanto desde este paquete como desde `@gravity-ui/uikit`.
+
+## Documentación para agentes de IA
+
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/markdown-editor/build/docs/INDEX.md`.

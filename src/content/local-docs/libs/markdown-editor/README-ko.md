@@ -2,9 +2,9 @@
 
 # @gravity-ui/markdown-editor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/markdown-editor)](https://www.npmjs.com/package/@gravity-ui/markdown-editor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/markdown-editor/actions/workflows/ci.yml?query=branch:main) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/markdown-editor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/md-editor/)
 
-## Markdown WYSIWYG 및 마크업 에디터
+## Markdown wysiwyg 및 마크업 에디터
 
-MarkdownEditor는 마크다운 작업을 위한 강력한 도구로, WYSIWYG 모드와 마크업 모드를 결합합니다. 즉, 편리한 시각적 모드에서 콘텐츠를 생성하고 편집할 수 있을 뿐만 아니라 마크업을 완벽하게 제어할 수 있습니다.
+MarkdownEditor는 마크다운 작업을 위한 강력한 도구로, WYSIWYG 모드와 마크업 모드를 결합했습니다. 즉, 편리한 시각적 모드에서 콘텐츠를 생성하고 편집할 수 있을 뿐만 아니라 마크업을 완벽하게 제어할 수도 있습니다.
 
 ### 🔧 주요 기능
 
@@ -70,7 +70,7 @@ function Editor({onSubmit}) {
 
 ### i18n
 
-국제화를 설정하려면 `configure`를 사용하면 됩니다.
+국제화를 설정하려면 `configure`를 사용하면 됩니다:
 
 ```typescript
 import {configure} from '@gravity-ui/markdown-editor';
@@ -80,7 +80,7 @@ configure({
 });
 ```
 
-[UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) 및 기타 UI 라이브러리에서 `configure()`를 호출하는 것을 잊지 마세요.
+[UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) 및 기타 UI 라이브러리에서도 `configure()`를 호출하는 것을 잊지 마세요.
 
 ### 기여
 
@@ -97,18 +97,22 @@ WYSIWYG 모드(ProseMirror)와 원시 마크업 모드(CodeMirror)를 결합한 
 ### 언제 사용해야 할까요?
 
 - 전환 가능한 시각적(WYSIWYG) 및 소스(마크업) 보기로 마크다운/YFM 콘텐츠 편집.
-- 확장 가능한 에디터가 필요한 경우: ProseMirror/CodeMirror 엔진을 통한 사용자 지정 마크, 노드, 도구 모음 항목 및 확장 기능(HTML, LaTeX, Mermaid, GPT).
-- 에디터 UI 렌더링: `useMarkdownEditor`로 인스턴스를 생성하고 `MarkdownEditorView`로 렌더링합니다.
+- 확장 가능한 에디터가 필요한 경우: ProseMirror/CodeMirror 엔진을 통한 사용자 지정 마크, 노드, 툴바 항목 및 확장 기능(HTML, LaTeX, Mermaid, GPT).
+- 에디터 UI 렌더링: `useMarkdownEditor`로 인스턴스를 생성하고 `MarkdownEditorView`로 렌더링.
 
 ### 언제 사용하지 않아야 할까요?
 
 - 편집 없이 마크다운을 HTML로 읽기 전용 렌더링 — 대신 [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform)으로 변환하고 출력을 렌더링합니다.
 - 일반적인 여러 줄 텍스트 입력 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 `TextArea`를 사용합니다.
-- 마크다운/YFM이 아닌 풍부한 텍스트 — 이 에디터는 마크다운 우선입니다.
+- 마크다운/YFM이 아닌 리치 텍스트 — 이 에디터는 마크다운 우선입니다.
 
-### 일반적인 주의 사항
+### 일반적인 주의사항
 
-- **단일 컴포넌트가 아닌 훅과 뷰입니다.** `useMarkdownEditor(...)`로 인스턴스를 생성하고 `<MarkdownEditorView editor={editor} />`에 전달합니다. 직접 렌더링하는 단일 `<MarkdownEditor>`는 없습니다.
+- **단일 컴포넌트가 아닌 훅과 뷰입니다.** `useMarkdownEditor(...)`로 인스턴스를 생성하고 `<MarkdownEditorView editor={editor} />`에 전달하세요. 직접 렌더링하는 단일 `<MarkdownEditor>`는 없습니다.
 - **제어된 `value` prop이 아닌 인스턴스를 통해 값을 읽습니다.** 마크다운으로 직렬화하려면 `editor.getValue()`를 호출합니다(예: `submit` 이벤트에서). 에디터는 자체 상태를 관리합니다.
 - **피어 종속성이 필요합니다.** 프로젝트는 `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react`, `react-dom`을 제공해야 합니다. `package.json`의 `peerDependencies`를 확인하세요.
 - **스타일 및 i18n은 uikit에서 제공됩니다.** uikit 문서에 따라 테마/스타일을 설정하고 이 패키지와 `@gravity-ui/uikit` 모두에서 `configure({lang})`을 호출합니다.
+
+## AI 에이전트용 문서
+
+설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/markdown-editor/build/docs/INDEX.md`에 있습니다.
