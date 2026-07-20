@@ -1,0 +1,95 @@
+> Generated for `@gravity-ui/navigation@6.3.0`
+
+# @gravity-ui/navigation documentation
+
+Documentation for the **6.3.0** version of `@gravity-ui/navigation`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/navigation/build/docs/`).
+
+## For AI agents
+
+Application-shell navigation components for Gravity UI apps — the collapsible `AsideHeader` sidebar plus footers, drawers, logo, hotkeys and settings panels that frame a whole page.
+
+### When to use
+
+- The app's primary navigation frame: `AsideHeader` (collapsible side navigation) with `menuItems`, subheader, and footer sections.
+- Supporting shell UI: `Drawer`/`DrawerItem`, `Footer`/`MobileFooter`, `MobileHeader`, `HotkeysPanel`, `Settings`, `ActionBar`, `Logo`.
+- Laying out page content inside the navigation frame via `renderContent` / `PageLayout`.
+
+### When not to use
+
+- Generic in-page controls (buttons, tabs, menus, breadcrumbs) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); this package is the outer app chrome, not general components.
+- Rendering the page body itself from config — use [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
+- Client-side routing — this provides the navigation UI only; wire clicks to your own router.
+
+### Common pitfalls
+
+- **`AsideHeader` is controlled.** You must own the collapsed state with `compact` and update it in `onChangeCompact`; passing `compact` without the handler freezes the sidebar.
+- **Menu items are `menuItems`, keyed by `id`.** Each item is `{id, title, icon, current, onItemClick}`; `icon` takes an icon component (e.g. from `@gravity-ui/icons`), not a string name.
+- **Peer dependencies are required.** `@gravity-ui/uikit`, `@gravity-ui/icons`, and `@bem-react/classname` must be installed alongside `react`/`react-dom`.
+- **Needs uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`, or the shell renders unstyled.
+- **Page content goes through `renderContent`.** Render your routed content via the `renderContent` prop / `PageLayout`, not as `children`.
+
+## Install
+
+```bash
+npm install @gravity-ui/navigation
+```
+
+Ensure that peer dependencies are installed in your project
+
+```bash
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+```
+
+## Usage
+
+Render `AsideHeader` as the app shell. It is a controlled component — you own the collapsed state via `compact`/`onChangeCompact` — and your page content goes through `renderContent`. Set up `@gravity-ui/uikit` styles and `ThemeProvider` first (see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+
+```tsx
+import React from 'react';
+import {AsideHeader} from '@gravity-ui/navigation';
+import {Gear, House} from '@gravity-ui/icons';
+import {ThemeProvider} from '@gravity-ui/uikit';
+
+import '@gravity-ui/uikit/styles/styles.css';
+
+export function App() {
+  const [compact, setCompact] = React.useState(false);
+
+  return (
+    <ThemeProvider theme="light">
+      <AsideHeader
+        logo={{text: 'My App', href: '/'}}
+        compact={compact}
+        onChangeCompact={setCompact}
+        menuItems={[
+          {id: 'home', title: 'Home', icon: House, current: true},
+          {id: 'settings', title: 'Settings', icon: Gear},
+        ]}
+        renderContent={() => <main>Page content</main>}
+      />
+    </ThemeProvider>
+  );
+}
+```
+
+## Components
+
+- [ActionBar](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/ActionBar.md) — The component is a flexible horizontal bar that provides a standardized layout for arranging navigation elements, actions, and informational content within an application. It serves as a container for organizing UI elements like breadcrumbs, buttons, and dropdown menus into defined sections and groups.
+- [AsideHeader](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/AsideHeader.md) — AsideHeader is provided a flexible and customizable navigation experience within your application. Users can easily customize the appearance of the sidebar to match their branding colors also to add personalized links, icons that cater specifically to their application's functionality.
+- [AsideHeader/components/AllPagesPanel](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/AsideHeader/components/AllPagesPanel.md) — A navigation panel for managing and organizing application pages in the middle (menuItems) section of AsideHeader component. Panel provides drag-and-drop reordering, visibility toggles, pin/unpin and category grouping of menu items.
+- [Footer](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/Footer.md) — The page footer components. Use Footer for the desktop version and MobileFooter for the mobile version. Both components have the same properties.
+- [HotkeysPanel](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/HotkeysPanel.md) — A navigation panel for hotkeys documentation. The panel displays a set of hotkeys for your application with a description of their purpose.
+- [Logo](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/Logo.md) — Logo icon is wrapped in UIKit Button, text is wrapped in HTML tag a or div, when passing hasWrapper prop.
+- [MobileHeader](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/MobileHeader.md) — Header for Mobile navigation. MobileHeader provides maintaining Panels except for Modals.
+- [Settings](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/Settings.md) — The Settings component provides the layout for a settings panel with the following features.
+
+## Hooks
+
+- [useOverflowingHorizontalListItems](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/hooks/useOverflowingHorizontalListItems.md) — A hook for determining which horizontal list items stay visible and which collapse into an overflow "more" dropdown.
+
+---
+
+> Docs for `@gravity-ui/navigation@6.3.0`. Versioned at: `https://gravity-ui.com/llms/navigation/6.3.0/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/6/llms.txt` (latest of major 6), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

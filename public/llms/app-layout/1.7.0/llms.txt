@@ -1,0 +1,276 @@
+> Generated for `@gravity-ui/app-layout@1.7.0`
+
+# App Layout
+
+> HTML layout generator used in our SPA applications.
+>
+> **npm:** `@gravity-ui/app-layout` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/app-layout
+```
+
+
+## Usage
+
+With `express`:
+
+```js
+import express from 'express';
+import {createRenderFunction} from '@gravity-ui/app-layout';
+
+const app = express();
+
+const renderLayout = createRenderFunction();
+
+app.get('/', function (req, res) {
+  res.send(
+    renderLayout({
+      // RenderParams
+      title: 'Home page',
+      bodyContent: {
+        root: 'Hello world!',
+      },
+    }),
+  );
+});
+
+app.listen(3000);
+```
+
+where
+
+```typescript
+interface RenderParams<Data, Plugins> {
+  // Any json compatible data, will be set to window.__DATA__ on the page
+  data?: Data;
+  // favicon
+  icon?: Icon;
+  // nonce to be set on the appropriate tags
+  nonce?: string;
+  // base tag attributes
+  base?: Base;
+
+  // common options
+  // Page title
+  title: string;
+  // language of page, will be set to html tag
+  lang?: string;
+  isMobile?: boolean;
+
+  // html attributes
+  htmlAttributes?: string;
+  // header tag content
+  // meta tags
+  meta?: Meta[];
+  // link tags
+  links?: Link[];
+  // script tags
+  scripts?: Script[];
+  // style tags
+  styleSheets?: Stylesheet[];
+  // script tags with inlined code
+  inlineScripts?: string[];
+  // style tags with inlined styles
+  inlineStyleSheets?: string[];
+
+  // content of body tag
+  bodyContent?: {
+    // class name for body tag
+    className?: string;
+    // body attributes
+    attributes?: string;
+    // body content before div tag with id root
+    beforeRoot?: string;
+    // innerHtml content of div tag with id root
+    root?: string;
+    // body content after div tag with id root
+    afterRoot?: string;
+  };
+  // plugins options
+  pluginsOptions?: Partial<PluginsOptions<Plugins>>;
+}
+```
+
+### Base
+
+Describes `base` tag:
+
+```typescript
+interface Base {
+  href?: string;
+  target?: HTMLBaseElement['target'];
+}
+```
+
+Example:
+
+```js
+renderLayout({
+  title: 'Home page',
+  base: {target: '_top'},
+});
+```
+
+Will be rendered as:
+
+```html
+<base target="_top" />
+```
+
+### Meta
+
+Describes `meta` tag:
+
+```typescript
+interface Meta {
+  name: string;
+  content: string;
+}
+```
+
+Example:
+
+```js
+const meta = [
+  {name: 'description', content: 'some text'},
+  {name: 'robots', content: 'noindex'},
+  {name: 'og:title', content: 'Some title'},
+];
+```
+
+Will be rendered as:
+
+```html
+<meta name="description" content="some text" />
+<meta name="robots" content="noindex" />
+<meta property="og:title" content="Some title" />
+```
+
+### Icon
+
+Describes page favicon:
+
+```typescript
+interface Icon {
+  type?: string;
+  sizes?: string;
+  href?: string;
+}
+```
+
+Default value is:
+
+```js
+const icon = {
+  type: 'image/png',
+  sizes: '16x16',
+  href: '/favicon.png',
+};
+```
+
+### Links
+
+Describes `link` tag:
+
+```typescript
+interface Link {
+  as?: string;
+  href: string;
+  rel?: string;
+  type?: string;
+  sizes?: string;
+  title?: HTMLLinkElement['title'];
+  crossOrigin?: '' | 'anonymous' | 'use-credentials';
+}
+```
+
+Example:
+
+```js
+const link = {
+  href: 'myFont.woff2',
+  rel: 'preload',
+  as: 'font',
+  type: 'font/woff2',
+  crossOrigin: 'anonymous',
+};
+```
+
+will be rendered as:
+
+```html
+<link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
+```
+
+### Scripts
+
+Describes link to script with preload:
+
+```typescript
+interface Script {
+  src: string;
+  defer?: boolean;
+  async?: boolean;
+  crossOrigin?: '' | 'anonymous' | 'use-credentials';
+  type?: 'importmap' | 'module' | string;
+}
+```
+
+Example:
+
+```js
+const script = {
+  src: 'url/to/script',
+  defer: true,
+  async: false,
+  crossOrigin: 'anonymous',
+};
+```
+
+will be rendered as:
+
+```html
+<link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
+
+<script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
+```
+
+#### Style sheets
+
+Describe link to styles:
+
+```typescript
+interface Stylesheet {
+  href: string;
+}
+```
+
+Example:
+
+```js
+const styleSheet = {
+  href: 'url/to/stylesheet',
+};
+```
+
+will be rendered as:
+
+```html
+<link href="url/to/stylesheet" rel="stylesheet" />
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/app-layout/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/app-layout/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/app-layout/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/app-layout)
+
+---
+
+> Docs for `@gravity-ui/app-layout@1.7.0`. Versioned at: `https://gravity-ui.com/llms/app-layout/1.7.0/llms.txt` (exact), `https://gravity-ui.com/llms/app-layout/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/app-layout/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

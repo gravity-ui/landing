@@ -1,0 +1,19 @@
+> Generated for `@gravity-ui/expresskit@3.1.3`
+
+# ExpressKit
+
+> Lightweight express.js wrapper that integrates with NodeKit.
+>
+> **npm:** `@gravity-ui/expresskit` — check the installed major version in the user's `package.json` and read docs matching it.
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/expresskit/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/expresskit)
+
+---
+
+> Docs for `@gravity-ui/expresskit@3.1.3`. Versioned at: `https://gravity-ui.com/llms/expresskit/3.1.3/llms.txt` (exact), `https://gravity-ui.com/llms/expresskit/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/expresskit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

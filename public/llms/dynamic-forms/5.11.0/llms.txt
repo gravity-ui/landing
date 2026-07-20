@@ -1,0 +1,54 @@
+> Generated for `@gravity-ui/dynamic-forms@5.11.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.11.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

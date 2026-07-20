@@ -1,0 +1,27 @@
+> Generated for `@gravity-ui/graph@1.4.0`
+
+# Graph
+
+> High-performance graph renderer with dynamic scale-aware detailization
+>
+> **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```bash
+npm install @gravity-ui/graph
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/graph/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/graph/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/graph)
+
+---
+
+> Docs for `@gravity-ui/graph@1.4.0`. Versioned at: `https://gravity-ui.com/llms/graph/1.4.0/llms.txt` (exact), `https://gravity-ui.com/llms/graph/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

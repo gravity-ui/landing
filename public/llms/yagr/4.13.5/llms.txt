@@ -1,0 +1,77 @@
+> Generated for `@gravity-ui/yagr@4.13.5`
+
+# Yagr
+
+> A high-performance canvas charts renderer, based on uPlot.
+>
+> **npm:** `@gravity-ui/yagr` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Usage
+
+```
+npm i @gravity-ui/yagr
+```
+
+### NPM Module
+
+```typescript
+import Yagr from '@gravity-ui/yagr';
+
+new Yagr(document.body, {
+    timeline: [1, 2, 3, 4, 5],
+    series: [
+        {
+            data: [1, 2, 3, 4, 5],
+            color: 'red',
+        },
+        {
+            data: [2, 3, 1, 4, 5],
+            color: 'green',
+        },
+    ],
+});
+```
+
+### Script Tag
+
+```html
+<script src="https://unpkg.com/@gravity-ui/yagr/dist/yagr.iife.min.js"></script>
+<script>
+    new Yagr(document.body, {
+        timeline: [1, 2, 3, 4, 5],
+        series: [
+            {
+                data: [1, 2, 3, 4, 5],
+                color: 'red',
+            },
+            {
+                data: [2, 3, 1, 4, 5],
+                color: 'green',
+            },
+        ],
+    });
+</script>
+```
+
+### Examples
+
+Need something specific? Yagr presents some useful examples in the [demo/examples](./demo/examples/) folder. How to start them with current version:
+
+1. Clone the repository.
+2. Install dependencies `npm i`.
+3. Run `npm run build`.
+4. Run `npx http-server .`.
+5. Open examples in browser according to the http-server output.
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/yagr/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/yagr)
+
+---
+
+> Docs for `@gravity-ui/yagr@4.13.5`. Versioned at: `https://gravity-ui.com/llms/yagr/4.13.5/llms.txt` (exact), `https://gravity-ui.com/llms/yagr/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/yagr/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

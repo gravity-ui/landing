@@ -1,0 +1,60 @@
+> Generated for `@gravity-ui/aikit@2.11.0`
+
+# AIKit
+
+> A flexible React component library for building AI chats with Atomic Design principles.
+>
+> **npm:** `@gravity-ui/aikit` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```bash
+npm install @gravity-ui/aikit
+```
+
+
+## Usage
+
+```typescript
+import { ChatContainer } from '@gravity-ui/aikit';
+import type { ChatType, TChatMessage } from '@gravity-ui/aikit';
+
+function App() {
+    const [messages, setMessages] = useState<TChatMessage[]>([]);
+    const [chats, setChats] = useState<ChatType[]>([]);
+    const [activeChat, setActiveChat] = useState<ChatType | null>(null);
+
+    return (
+        <ChatContainer
+            chats={chats}
+            activeChat={activeChat}
+            messages={messages}
+            onSendMessage={async (data) => {
+                // Your sending logic
+                console.log('Message:', data.content);
+            }}
+            onSelectChat={setActiveChat}
+            onCreateChat={() => {
+                // Create new chat
+            }}
+            onDeleteChat={(chat) => {
+                // Delete chat
+            }}
+        />
+    );
+}
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/aikit/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/aikit/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/aikit/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/aikit/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/aikit)
+
+---
+
+> Docs for `@gravity-ui/aikit@2.11.0`. Versioned at: `https://gravity-ui.com/llms/aikit/2.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/aikit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/aikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
