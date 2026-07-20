@@ -1,0 +1,108 @@
+> Generated for `@gravity-ui/charts@1.57.0`
+
+# @gravity-ui/charts documentation
+
+Documentation for the **1.57.0** version of `@gravity-ui/charts`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
+
+## For AI agents
+
+A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
+
+### When to use
+
+- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
+- Rendering a chart from declarative data rather than drawing imperatively.
+
+### When not to use
+
+- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
+- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
+
+### Common pitfalls
+
+- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
+- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
+- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
+- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
+
+### Useful docs
+
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/get-started.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/tooltip.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/legend.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/html.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/value-formatting.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/data-labels.md)
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/axis-types.md)
+
+## Install
+
+```shell
+npm install @gravity-ui/uikit @gravity-ui/charts
+```
+
+`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
+
+## Usage
+
+Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {Chart} from '@gravity-ui/charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Temperature',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <Chart data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`Chart` adapts to its parent's size, so the wrapping element must have a height.
+
+## Guides
+
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/data-labels.md)
+- [Development](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/development.md)
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/get-started.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/html.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/legend.md)
+- [Overview](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/overview.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/tooltip.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.57.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
+
+---
+
+> Docs for `@gravity-ui/charts@1.57.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.57.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

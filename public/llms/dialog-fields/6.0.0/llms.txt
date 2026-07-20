@@ -1,0 +1,73 @@
+> Generated for `@gravity-ui/dialog-fields@6.0.0`
+
+# Dialog Fields
+
+> A react-final-form wrapper that provides some useful high-level components for building forms.
+>
+> **npm:** `@gravity-ui/dialog-fields` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```bash
+$ npm install @gravity-ui/dialog-fields
+# Use required version of react/react-dom in case you haven't installed them yet
+$ npm install @gravity-ui/dialog-fields react@18 react-dom@18
+```
+
+Depending on your package manager you may need to install `peerDependencies` manually.
+
+
+## Usage
+
+```ts
+import {DFDialog, FormApi} from '@gravity-ui/dialog-fields';
+
+interface FormValues {
+  firstName: string;
+  lastName: string;
+}
+
+function MyForm() {
+  return (
+    <DFDialog<FormValues>
+      visible={true}
+      headerProps={{
+        title: 'My form',
+      }}
+      onAdd={(form) => {
+        console.log(form.getState().values);
+        return Promise.resolve();
+      }}
+      fields={[
+        {
+          name: 'firstName',
+          type: 'text',
+          caption: 'First name',
+          tooltip: 'Description for first name field',
+        },
+        {
+          name: 'lastName',
+          type: 'text',
+          caption: 'LastName',
+          tooltip: 'Description for last name field',
+        },
+      ]}
+    />
+  );
+}
+```
+
+See more examples in [storybook](https://preview.yandexcloud.dev/dialog-fields).
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dialog-fields/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dialog-fields)
+
+---
+
+> Docs for `@gravity-ui/dialog-fields@6.0.0`. Versioned at: `https://gravity-ui.com/llms/dialog-fields/6.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/dialog-fields/6/llms.txt` (latest of major 6), `https://gravity-ui.com/llms/dialog-fields/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

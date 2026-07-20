@@ -1,0 +1,27 @@
+> Generated for `@gravity-ui/chartkit@7.55.0`
+
+# ChartKit
+
+> A data visualization suite integrated with our design system.
+>
+> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install @gravity-ui/chartkit @gravity-ui/uikit
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/chartkit/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/chartkit)
+
+---
+
+> Docs for `@gravity-ui/chartkit@7.55.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.55.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

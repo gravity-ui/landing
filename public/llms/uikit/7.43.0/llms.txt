@@ -1,0 +1,92 @@
+> Generated for `@gravity-ui/uikit@7.43.0`
+
+# UIKit
+
+> The base React component and design-token library for Gravity UI apps — controls, inputs, overlays, layout, and theming that every other @gravity-ui package builds on.
+>
+> **npm:** `@gravity-ui/uikit` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install @gravity-ui/uikit
+```
+
+
+## Usage
+
+### Prerequisites
+
+React 16.14, 17, 18, or 19 must be installed in your project.
+
+Import components directly from the package:
+
+```jsx
+import {Button} from '@gravity-ui/uikit';
+
+const SubmitButton = (
+  <Button view="action" size="l">
+    Submit
+  </Button>
+);
+```
+
+### Styles
+
+Include the base styles and fonts once at the top of your app entry point:
+
+```js
+// index.js
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+A SCSS [mixins](styles/mixins.scss) file with useful helpers is also available for use in your own stylesheets.
+
+### Guides
+
+Read more:
+
+- [Theming](docs/theming.md) — enable light, dark, and high-contrast themes
+- [Server-side rendering](docs/server-side-rendering.md) — generate the root CSS class on the server
+- [Internationalization](docs/i18n.md) — set the built-in component language
+
+
+### When to use
+
+- Standard application UI: buttons, form controls, modals and popups, menus, tabs, labels, typography, and layout primitives.
+- The theming foundation of a Gravity UI app: `ThemeProvider`, design tokens, and CSS variables the rest of the `@gravity-ui/*` ecosystem expects to be present.
+- Simple tabular data via the built-in `Table` component (selection, sorting, row actions).
+
+### When not to use
+
+- Feature-rich data grids (virtualization, column resizing, grouping, reordering) — use [`@gravity-ui/table`](https://github.com/gravity-ui/table), a separate headless package. It is **not** the same as uikit's `Table` component.
+- Charts and data visualization — use [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` is the legacy wrapper).
+- Application navigation shells (aside header, footer, logo) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Date pickers, calendars, and range controls — use [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- The SVG icon set itself — use [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit only ships the `Icon` renderer.
+
+### Common pitfalls
+
+- `Button` styling prop is `view`, not `variant` or `color`
+- **Components render unstyled without setup.** Wrap the app in `ThemeProvider` **and** import `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) once at the entry point — both are required.
+- **`Icon` has no `name` prop.** Pass an imported icon component through `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
+- **`theme` values are `light | dark | light-hc | dark-hc`.** There is no `theme="default"`.
+
+### Useful docs
+
+- [Layout components and spacings](./docs/layout.md)
+- [Theming, Colors & Branding](./docs/theming.md)
+- [Typography](./docs/typography.md)
+
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/uikit/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/uikit/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/uikit)
+
+---
+
+> Docs for `@gravity-ui/uikit@7.43.0`. Versioned at: `https://gravity-ui.com/llms/uikit/7.43.0/llms.txt` (exact), `https://gravity-ui.com/llms/uikit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/uikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

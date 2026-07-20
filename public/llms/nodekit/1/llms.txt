@@ -1,0 +1,37 @@
+> Generated for `@gravity-ui/nodekit@1.7.0`
+
+# NodeKit
+
+> A simple toolkit for your Node.js apps, scripts and libraries.
+>
+> **npm:** `@gravity-ui/nodekit` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Usage
+
+Add dependency to your project:
+
+```bash
+npm install --save @gravity-ui/nodekit
+```
+
+And then import and init NodeKit in your application:
+
+```typescript
+import {NodeKit} from '@gravity-ui/nodekit';
+
+const nodeKit = new NodeKit();
+nodekit.ctx.log('App is ready');
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/nodekit/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/nodekit/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/nodekit/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/nodekit)
+
+---
+
+> Docs for `@gravity-ui/nodekit@1.7.0`. Versioned at: `https://gravity-ui.com/llms/nodekit/1.7.0/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

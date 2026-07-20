@@ -1,0 +1,19 @@
+> Generated for `@gravity-ui/webpack-i18n-assets-plugin@1.0.0`
+
+# Webpack i18n plugin
+
+> A plugin for Webpack that replaces calls to localization functions (i18n) with target texts.
+>
+> **npm:** `@gravity-ui/webpack-i18n-assets-plugin` — check the installed major version in the user's `package.json` and read docs matching it.
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/webpack-i18n-assets-plugin/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/webpack-i18n-assets-plugin)
+
+---
+
+> Docs for `@gravity-ui/webpack-i18n-assets-plugin@1.0.0`. Versioned at: `https://gravity-ui.com/llms/webpack-i18n-assets-plugin/1.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/webpack-i18n-assets-plugin/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/webpack-i18n-assets-plugin/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

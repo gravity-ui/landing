@@ -22,6 +22,7 @@
     "@gravity-ui/markdown-editor": "^15.1.0",
     "@gravity-ui/navigation": "^6.1.2",
     "@gravity-ui/page-constructor": "^8.0.0",
+    "@gravity-ui/readme-validator": "^1.3.0",
     "@gravity-ui/timeline": "^1.26.1",
     "@gravity-ui/uikit": "^7.44.2",
     "@gravity-ui/uikit-themer": "^1.8.0",

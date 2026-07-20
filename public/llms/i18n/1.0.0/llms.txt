@@ -1,0 +1,19 @@
+> Generated for `@gravity-ui/i18n@1.0.0`
+
+# I18n
+
+> Internationalization helpers of Gravity UI projects.
+>
+> **npm:** `@gravity-ui/i18n` — check the installed major version in the user's `package.json` and read docs matching it.
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/i18n/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/i18n/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/i18n/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/i18n)
+
+---
+
+> Docs for `@gravity-ui/i18n@1.0.0`. Versioned at: `https://gravity-ui.com/llms/i18n/1.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/i18n/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/i18n/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

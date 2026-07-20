@@ -1,0 +1,28 @@
+> Generated for `@gravity-ui/markdown-editor@15.44.0`
+
+# @gravity-ui/markdown-editor documentation
+
+Documentation for the **15.44.0** version of `@gravity-ui/markdown-editor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/markdown-editor/build/docs/`).
+
+## Guides
+
+- [guidelines-contributions](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/guidelines-contributions.md)
+- [how-to-add-editor-with-create-react-app](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-add-editor-with-create-react-app.md)
+- [how-to-add-editor-with-nextjs](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-add-editor-with-nextjs.md)
+- [how-to-add-preview](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-add-preview.md)
+- [how-to-add-text-binding-extension-in-markdown](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-add-text-binding-extension-in-markdown.md)
+- [how-to-connect-gpt-extensions](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-connect-gpt-extensions.md)
+- [how-to-connect-html-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-connect-html-extension.md)
+- [how-to-connect-latex-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-connect-latex-extension.md)
+- [how-to-connect-mermaid-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-connect-mermaid-extension.md)
+- [how-to-create-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-create-extension.md)
+- [how-to-customize-the-editor](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-customize-the-editor.md)
+- [how-to-customize-toolbars](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-customize-toolbars.md)
+- [Visual Testing with Playwright](https://unpkg.com/@gravity-ui/markdown-editor@15.44.0/build/docs/guides/how-to-add-visual-test.md)
+
+---
+
+> Docs for `@gravity-ui/markdown-editor@15.44.0`. Versioned at: `https://gravity-ui.com/llms/markdown-editor/15.44.0/llms.txt` (exact), `https://gravity-ui.com/llms/markdown-editor/15/llms.txt` (latest of major 15), `https://gravity-ui.com/llms/markdown-editor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

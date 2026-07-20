@@ -1,0 +1,187 @@
+> Generated for `@gravity-ui/timeline@1.28.0`
+
+# Timeline
+
+> A React-based library for building interactive timeline visualizations with canvas rendering.
+>
+> **npm:** `@gravity-ui/timeline` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```bash
+npm install @gravity-ui/timeline
+```
+
+
+## Usage
+
+The timeline component can be used in React applications with the following basic setup:
+
+```tsx
+import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
+
+const MyTimelineComponent = () => {
+  const { timeline, api, start, stop } = useTimeline({
+    settings: {
+      start: Date.now(),
+      end: Date.now() + 3600000, // 1 hour from now
+      axes: [],
+      events: [],
+      markers: [],
+      sections: []
+    },
+    viewConfiguration: {
+      // Optional view configuration
+    }
+  });
+
+  // timeline - Timeline instance
+  // api - CanvasApi instance (same as timeline.api)
+  // start - function to initialize timeline with canvas
+  // stop - function to destroy timeline
+
+  return (
+    <div style={{ width: '100%', height: '100%' }}>
+      <TimelineCanvas timeline={timeline} />
+    </div>
+  );
+};
+```
+
+### Axis Structure
+
+Each axis has the following structure:
+
+```typescript
+type TimelineAxis = {
+  id: string;          // Unique axis identifier
+  tracksCount: number; // Number of tracks in the axis
+  top: number;         // Vertical position (px)
+  height: number;      // Height per track (px)
+};
+```
+
+### Section Structure
+
+Each section requires the following structure:
+
+```typescript
+type TimelineSection = {
+  id: string;               // Unique section identifier
+  from: number;             // Start timestamp
+  to?: number;              // Optional end timestamp (defaults to timeline end)
+  color: string;            // Background color of the section
+  hoverColor?: string;      // Optional color when section is hovered
+  renderer?: AbstractSectionRenderer; // Optional custom renderer (exported from the package)
+};
+```
+
+Sections provide background coloring for time periods and help organize timeline content visually:
+
+```tsx
+const MyTimelineComponent = () => {
+  const { timeline } = useTimeline({
+    settings: {
+      start: Date.now(),
+      end: Date.now() + 3600000,
+      axes: [],
+      events: [],
+      markers: [],
+      sections: [
+        {
+          id: 'morning',
+          from: Date.now(),
+          to: Date.now() + 1800000, // 30 minutes
+          color: 'rgba(255, 235, 59, 0.3)', // Semi-transparent yellow
+          hoverColor: 'rgba(255, 235, 59, 0.4)'
+        },
+        {
+          id: 'afternoon',
+          from: Date.now() + 1800000,
+          // No 'to' specified - extends to timeline end
+          color: 'rgba(76, 175, 80, 0.2)', // Semi-transparent green
+          hoverColor: 'rgba(76, 175, 80, 0.3)'
+        }
+      ]
+    },
+    viewConfiguration: {
+      sections: {
+        hitboxPadding: 2 // Hover detection padding
+      }
+    }
+  });
+
+  return <TimelineCanvas timeline={timeline} />;
+};
+```
+
+### Marker Structure
+
+Each marker requires the following structure:
+
+```typescript
+type TimelineMarker = {
+  time: number;           // Timestamp for the marker position
+  color: string;          // Color of the marker line
+  activeColor: string;    // Color when marker is selected (required)
+  hoverColor: string;     // Color when marker is hovered (required)
+  lineWidth?: number;     // Optional width of the marker line
+  label?: string;         // Optional label text
+  labelColor?: string;    // Optional label color
+  renderer?: AbstractMarkerRenderer; // Optional custom renderer
+  nonSelectable?: boolean;// Whether marker can be selected
+  group?: boolean;        // Whether marker represents a group
+};
+```
+
+### Marker Grouping and Zoom
+
+The timeline automatically groups markers that are close together and provides zoom functionality:
+
+```tsx
+const MyTimelineComponent = () => {
+  const { timeline } = useTimeline({
+    settings: {
+      start: Date.now(),
+      end: Date.now() + 3600000,
+      axes: [],
+      events: [],
+      markers: [
+        // These markers will be grouped together
+        { time: Date.now(), color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 1' },
+        { time: Date.now() + 1000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 2' },
+        { time: Date.now() + 2000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 3' },
+      ]
+    },
+    viewConfiguration: {
+      markers: {
+        collapseMinDistance: 8,        // Group markers within 8 pixels
+        groupZoomEnabled: true,        // Enable zoom on group click
+        groupZoomPadding: 0.3,        // 30% padding around group
+        groupZoomMaxFactor: 0.3,      // Max zoom factor
+      }
+    }
+  });
+
+  // Listen for group zoom events
+  useTimelineEvent(timeline, 'on-group-marker-click', (data) => {
+    console.log('Group zoomed:', data);
+  });
+
+  return <TimelineCanvas timeline={timeline} />;
+};
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/timeline/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/timeline/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/timeline/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/timeline/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/timeline)
+
+---
+
+> Docs for `@gravity-ui/timeline@1.28.0`. Versioned at: `https://gravity-ui.com/llms/timeline/1.28.0/llms.txt` (exact), `https://gravity-ui.com/llms/timeline/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/timeline/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

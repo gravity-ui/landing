@@ -1,0 +1,27 @@
+> Generated for `@gravity-ui/blog-constructor@8.2.0`
+
+# Blog Constructor
+
+> A library based on the Page constructor library for creating blog-like services.
+>
+> **npm:** `@gravity-ui/blog-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install @gravity-ui/blog-constructor
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md)
+- [Storybook](https://preview.yandexcloud.dev/blog-constructor/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/blog-constructor)
+
+---
+
+> Docs for `@gravity-ui/blog-constructor@8.2.0`. Versioned at: `https://gravity-ui.com/llms/blog-constructor/8.2.0/llms.txt` (exact), `https://gravity-ui.com/llms/blog-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/blog-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

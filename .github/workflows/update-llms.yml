@@ -21,7 +21,7 @@ jobs:
         run: |
           npm run generate-llms
 
-          if git diff --exit-code public/llms.txt; then
+          if git diff --exit-code public/llms.txt public/llms-full.txt public/llms; then
             echo "No changes to llms.txt - skipping commit"
             exit 0
           fi
@@ -29,7 +29,7 @@ jobs:
           git config user.email ""
           git config user.name "Update llms.txt action"
           git checkout -b update-llms-txt
-          git add public/llms.txt
+          git add public/llms.txt public/llms-full.txt public/llms
 
           export COMMIT_MESSAGE="docs: update llms.txt"
           git commit -m "$COMMIT_MESSAGE" || true
