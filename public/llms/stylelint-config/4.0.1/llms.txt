@@ -1,0 +1,57 @@
+> Generated for `@gravity-ui/stylelint-config@4.0.1`
+
+# Stylelint Config
+
+> Stylelint configuration preset for Gravity UI projects.
+>
+> **npm:** `@gravity-ui/stylelint-config` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```
+npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
+```
+
+
+## Usage
+
+Add `.stylelintrc` file in the project root with the following content:
+
+```json
+{
+  "extends": "@gravity-ui/stylelint-config"
+}
+```
+
+### Prettier
+
+If you are using Prettier, extend root config with the additional rules:
+
+```json
+{
+  "extends": ["@gravity-ui/stylelint-config", "@gravity-ui/stylelint-config/prettier"]
+}
+```
+
+### Order
+
+If you want to order properties in your css files, extend root config with the additional rules:
+
+```json
+{
+  "extends": ["@gravity-ui/stylelint-config", "@gravity-ui/stylelint-config/order"]
+}
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/stylelint-config/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/stylelint-config)
+
+---
+
+> Docs for `@gravity-ui/stylelint-config@4.0.1`. Versioned at: `https://gravity-ui.com/llms/stylelint-config/4.0.1/llms.txt` (exact), `https://gravity-ui.com/llms/stylelint-config/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/stylelint-config/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

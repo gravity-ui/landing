@@ -1,0 +1,19 @@
+> Generated for `@gravity-ui/playwright-tools@1.1.0`
+
+# Playwright Tools
+
+> A collection of utilities for writing Playwright tests, including browser actions, HAR-based request recording and replay, and component testing fixtures.
+>
+> **npm:** `@gravity-ui/playwright-tools` — check the installed major version in the user's `package.json` and read docs matching it.
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/playwright-tools)
+
+---
+
+> Docs for `@gravity-ui/playwright-tools@1.1.0`. Versioned at: `https://gravity-ui.com/llms/playwright-tools/1.1.0/llms.txt` (exact), `https://gravity-ui.com/llms/playwright-tools/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/playwright-tools/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

@@ -1,0 +1,35 @@
+> Generated for `@gravity-ui/prettier-config@1.0.0`
+
+# Prettier Config
+
+> Prettier configuration preset for Gravity UI projects.
+>
+> **npm:** `@gravity-ui/prettier-config` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```
+npm install --save-dev prettier @gravity-ui/prettier-config
+```
+
+
+## Usage
+
+Add `.prettierrc.js` file in the project root with the following content:
+
+```js
+module.exports = require('@gravity-ui/prettier-config');
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/prettier-config/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/prettier-config/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/prettier-config/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/prettier-config)
+
+---
+
+> Docs for `@gravity-ui/prettier-config@1.0.0`. Versioned at: `https://gravity-ui.com/llms/prettier-config/1.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/prettier-config/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/prettier-config/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

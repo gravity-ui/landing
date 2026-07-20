@@ -1,0 +1,138 @@
+> Generated for `@gravity-ui/data-source@0.3.0`
+
+# Data Source
+
+> A wrapper around data fetching.
+>
+> **npm:** `@gravity-ui/data-source` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```bash
+npm install @gravity-ui/data-source @tanstack/react-query
+```
+
+`@tanstack/react-query` is a peer dependency.
+
+
+## Usage
+
+### 1. Setup DataManager
+
+First, create and provide a `DataManager` in your application:
+
+```tsx
+import React from 'react';
+import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
+
+const dataManager = new ClientDataManager({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      retry: 3,
+    },
+    // ... other react-query options
+  },
+});
+
+function App() {
+  return (
+    <DataManagerContext.Provider value={dataManager}>
+      <YourApplication />
+    </DataManagerContext.Provider>
+  );
+}
+```
+
+### 2. Define Error Types and Wrappers
+
+Define a type of error and make your constructors for data sources based on default constructors:
+
+```ts
+import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
+
+export interface ApiError {
+  code: number;
+  title: string;
+  description?: string;
+}
+
+export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TError = ApiError>(
+  config: Omit<PlainQueryDataSource<TParams, TRequest, TResponse, TData, TError>, 'type'>,
+): PlainQueryDataSource<TParams, TRequest, TResponse, TData, TError> => {
+  return makePlainQueryDataSourceBase(config);
+};
+```
+
+### 3. Create Custom DataLoader Component
+
+Write a `DataLoader` component based on default to define your display of loading status and errors:
+
+```tsx
+import {
+  DataLoader as DataLoaderBase,
+  DataLoaderProps as DataLoaderPropsBase,
+  ErrorViewProps,
+} from '@gravity-ui/data-source';
+
+export interface DataLoaderProps
+  extends Omit<DataLoaderPropsBase<ApiError>, 'LoadingView' | 'ErrorView'> {
+  LoadingView?: ComponentType;
+  ErrorView?: ComponentType<ErrorViewProps<ApiError>>;
+}
+
+export const DataLoader: React.FC<DataLoaderProps> = ({
+  LoadingView = YourLoader, // You can use your own loader component
+  ErrorView = YourError, // You can use your own error component
+  ...restProps
+}) => {
+  return <DataLoaderBase LoadingView={LoadingView} ErrorView={ErrorView} {...restProps} />;
+};
+```
+
+### 4. Define Your First Data Source
+
+```ts
+import {skipContext} from '@gravity-ui/data-source';
+
+// Your API function
+import {fetchUser} from './api';
+
+export const userDataSource = makePlainQueryDataSource({
+  // Keys have to be unique. Maybe you should create a helper for making names of data sources
+  name: 'user',
+  // skipContext is a helper to skip 2 first parameters in the function (context and fetchContext)
+  fetch: skipContext(fetchUser),
+  // Optional: generate tags for advanced cache invalidation
+  tags: (params) => [`user:${params.userId}`, 'users'],
+});
+```
+
+### 5. Use in Components
+
+```tsx
+import {useQueryData} from '@gravity-ui/data-source';
+
+export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
+  const {data, status, error, refetch} = useQueryData(userDataSource, {userId});
+
+  return (
+    <DataLoader status={status} error={error} errorAction={refetch}>
+      {data && <UserCard user={data} />}
+    </DataLoader>
+  );
+};
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/data-source/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/data-source/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/data-source/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/data-source)
+
+---
+
+> Docs for `@gravity-ui/data-source@0.3.0`. Versioned at: `https://gravity-ui.com/llms/data-source/0.3.0/llms.txt` (exact), `https://gravity-ui.com/llms/data-source/0/llms.txt` (latest of major 0), `https://gravity-ui.com/llms/data-source/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

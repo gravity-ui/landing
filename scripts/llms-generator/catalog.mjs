@@ -66,11 +66,11 @@ export const buildRootLlms = async ({libraries, descriptions}) => {
         const extract = await library.getAiSection();
         const primary = library.primary ? ' (primary)' : '';
         const url = library.packageLlmsLatestUrl();
-        out += `### ${library.title}${primary} — \`${library.npmId}\`\n\n`;
-        out += `> If you need this library, read more at package llms.txt here ${url}\n`;
+        out += `## ${library.title}${primary} — \`${library.npmId}\`\n\n`;
+        out += `> If you need this library, read more at package [llms.txt](${url})\n`;
 
         if (library.githubId) {
-            out += `> GitHub: https://github.com/${library.githubId}\n`;
+            out += `> GitHub: [${library.githubId}](https://github.com/${library.githubId})\n`;
         }
 
         out += '\n';

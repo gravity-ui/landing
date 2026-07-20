@@ -1,0 +1,45 @@
+> Generated for `@gravity-ui/babel-preset@1.0.0`
+
+# Babel Preset
+
+> Babel configuration preset for Gravity UI projects.
+>
+> **npm:** `@gravity-ui/babel-preset` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```
+npm install --save-dev @gravity-ui/babel-preset
+```
+
+
+## Usage
+
+### Via `.babelrc`
+
+```json5
+{
+  "presets": [
+      "@gravity-ui/babel-preset",
+      {
+        "env": {modules: false}, // defaults to {}
+        "runtime": {useESModules: true}, // defaults to {}
+        "typescript": true, // defaults to false
+        "react": {runtime: "automatic"} // defaults to {}
+      }
+  ]
+}
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/babel-preset/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/babel-preset/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/babel-preset/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/babel-preset)
+
+---
+
+> Docs for `@gravity-ui/babel-preset@1.0.0`. Versioned at: `https://gravity-ui.com/llms/babel-preset/1.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/babel-preset/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/babel-preset/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

@@ -1,0 +1,52 @@
+> Generated for `@gravity-ui/browserslist-config@4.0.0`
+
+# Browserslist Config
+
+> Browserslist configuration preset used in our services.
+>
+> **npm:** `@gravity-ui/browserslist-config` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```bash
+npm i --save-dev @gravity-ui/browserslist-config
+```
+
+Add config to `package.json` in `browserslist` section:
+
+```json
+{
+  "browserslist": [
+    "extends @gravity-ui/browserslist-config"
+  ]
+}
+```
+
+You can specify additional browsers based on your audience, like:
+```json
+{
+  "browserslist": [
+    "extends @gravity-ui/browserslist-config",
+    "Chrome >= 100",
+    "Firefox >= 100"
+  ]
+}
+```
+
+
+## Usage
+
+Package provides production version of browserslist.
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/browserslist-config/master/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/browserslist-config)
+
+---
+
+> Docs for `@gravity-ui/browserslist-config@4.0.0`. Versioned at: `https://gravity-ui.com/llms/browserslist-config/4.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/browserslist-config/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/browserslist-config/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

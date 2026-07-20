@@ -1,0 +1,95 @@
+> Generated for `@gravity-ui/eslint-config@4.3.1`
+
+# ESlint Config
+
+> ESLint configuration preset for Gravity UI projects.
+>
+> **npm:** `@gravity-ui/eslint-config` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```
+npm install --save-dev eslint @gravity-ui/eslint-config
+```
+
+
+## Usage
+
+Add `eslint.config.js` file in your project with the following content:
+
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+
+export default [
+  ...baseConfig,
+  {
+    // ...other config
+  },
+];
+```
+
+Base config also includes TypeScript rules.
+
+### Prettier
+
+If you are using Prettier, add corresponding config:
+
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import prettierConfig from '@gravity-ui/eslint-config/prettier';
+
+export default [
+  ...baseConfig,
+  ...prettierConfig,
+  {
+    // ...other config
+  },
+];
+```
+
+### a11y
+
+If you want to spot accessibility issues, add corresponding config:
+
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import a11yConfig from '@gravity-ui/eslint-config/a11y';
+
+export default [
+  ...baseConfig,
+  ...a11yConfig,
+  {
+    // ...other config
+  },
+];
+```
+
+### Order
+
+if you want to enforce a convention in module import order, add corresponding config:
+
+```js
+import baseConfig from '@gravity-ui/eslint-config';
+import importOrderConfig from '@gravity-ui/eslint-config/import-order';
+
+export default [
+  ...baseConfig,
+  ...importOrderConfig,
+  {
+    // ...other config
+  },
+];
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/eslint-config/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/eslint-config/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/eslint-config/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/eslint-config)
+
+---
+
+> Docs for `@gravity-ui/eslint-config@4.3.1`. Versioned at: `https://gravity-ui.com/llms/eslint-config/4.3.1/llms.txt` (exact), `https://gravity-ui.com/llms/eslint-config/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/eslint-config/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
