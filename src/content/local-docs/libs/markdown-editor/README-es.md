@@ -36,7 +36,7 @@ function Editor({onSubmit}) {
 
   React.useEffect(() => {
     function submitHandler() {
-      // Serializar el contenido actual a marcado markdown
+      // Serializar el contenido actual a marcado Markdown
       const value = editor.getValue();
       onSubmit(value);
     }
@@ -54,18 +54,18 @@ Lee más:
 - [Cómo conectar el editor en Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
 - [Cómo añadir una vista previa para el modo de marcado](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
 - [Cómo añadir una extensión HTML](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [Cómo añadir una extensión Latex](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
+- [Cómo añadir una extensión LaTeX](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
 - [Cómo añadir una extensión Mermaid](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
 - [Cómo escribir una extensión](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
 - [Cómo añadir una extensión GPT](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [Cómo añadir una extensión de enlace de texto en markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [Cómo añadir una extensión de enlace de texto en Markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Desarrollo
 
 1. Instala el entorno de Nodejs, la versión se especifica en el archivo `.nvmrc`. Recomendamos usar [NVM](https://github.com/nvm-sh/nvm) o una herramienta similar.
 2. Instala [pnpm](https://pnpm.io/installation), la versión se especifica en la propiedad "packageManager" de `package.json`.
 3. Instala las dependencias: `pnpm i`
-4. Ejecuta el servidor de desarrollo de storybook: `pnpm start`
+4. Ejecuta el servidor de desarrollo de Storybook: `pnpm start`
 
 
 ### i18n
@@ -85,3 +85,34 @@ No olvides llamar a `configure()` desde [UIKit](https://github.com/gravity-ui/ui
 ### Contribución
 
 - [Directrices para colaboradores](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
+
+## Licencia
+
+Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE.txt) para más detalles.
+
+## Para agentes de IA
+
+Un editor Markdown de doble modo para React que combina un modo WYSIWYG (ProseMirror) y un modo de marcado sin procesar (CodeMirror), con soporte para Markdown básico y YFM.
+
+### Cuándo usarlo
+
+- Edición de contenido Markdown/YFM con una vista visual (WYSIWYG) y de origen (marcado) conmutable.
+- Necesitas un editor extensible: marcas, nodos, elementos de barra de herramientas y extensiones personalizadas (HTML, LaTeX, Mermaid, GPT) a través de los motores ProseMirror/CodeMirror.
+- Renderizado de la interfaz del editor: crea la instancia con `useMarkdownEditor` y renderízala con `MarkdownEditorView`.
+
+### Cuándo no usarlo
+
+- Renderizado de Markdown a HTML de solo lectura sin edición: transfórmalo con [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) y renderiza la salida en su lugar.
+- Entrada de texto multilínea simple: usa `TextArea` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Texto enriquecido que no sea Markdown/YFM: este editor está centrado en Markdown.
+
+### Errores comunes
+
+- **Es un hook más una vista, no un solo componente.** Crea la instancia con `useMarkdownEditor(...)` y pásala a `<MarkdownEditorView editor={editor} />`; no hay un único `<MarkdownEditor>` que renderices directamente.
+- **Lee el valor a través de la instancia, no de una prop `value` controlada.** Llama a `editor.getValue()` (por ejemplo, en el evento `submit`) para serializar a Markdown; el editor gestiona su propio estado.
+- **Se requieren dependencias peer.** Tu proyecto debe proporcionar `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react` y `react-dom`: consulta las `peerDependencies` en `package.json`.
+- **Los estilos y la internacionalización provienen de uikit.** Configura los temas/estilos según la documentación de uikit y llama a `configure({lang})` tanto desde este paquete como desde `@gravity-ui/uikit`.
+
+## Documentación para agentes de IA
+
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/markdown-editor/build/docs/INDEX.md`.

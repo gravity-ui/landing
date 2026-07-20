@@ -4,7 +4,8 @@ import Head from 'next/head';
 import React from 'react';
 
 import nextI18nextConfig from '../../next-i18next.config';
-import {LibWithMetadata, ServerApi} from '../api';
+import {LibWithMetadata} from '../api';
+import {ServerApi} from '../api/server';
 import backgroundAsset from '../assets/background.jpg';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';

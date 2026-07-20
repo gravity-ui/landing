@@ -14,7 +14,8 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
-import {type BlogPostListItem, ServerApi} from '../../api';
+import {type BlogPostListItem, ClientApi} from '../../api';
+import {ServerApi} from '../../api/server';
 import {Layout} from '../../components/Layout/Layout';
 import {useIsMobile} from '../../hooks/useIsMobile';
 import {block} from '../../utils';
@@ -96,7 +97,7 @@ export default function BlogIndex({postsData, tags, pageContent, hostname}: Blog
         const loadAllPosts = async () => {
             try {
                 const currentLocale = router.locale || 'en';
-                const response = await ServerApi.instance.getBlogPosts(currentLocale);
+                const response = await ClientApi.instance.getBlogPosts(currentLocale);
                 allPostsRef.current = response.posts;
 
                 // Update the stable key reference when locale changes

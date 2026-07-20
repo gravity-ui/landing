@@ -19,5 +19,4 @@ export type {
     BlogPostsQuery,
 } from './types';
 
-export {ServerApi} from './server';
 export {ClientApi} from './client';

@@ -1,4 +1,4 @@
-import {Contributor} from './types';
+import type {BlogPostsResponse, Contributor} from './types';
 
 export class ClientApi {
     private static _instance: ClientApi;
@@ -19,5 +19,15 @@ export class ClientApi {
         }
 
         return (await res.json())?.contributors || [];
+    }
+
+    async getBlogPosts(locale: string): Promise<BlogPostsResponse> {
+        const res = await fetch(`/api/blog-posts?locale=${encodeURIComponent(locale)}`);
+
+        if (!res.ok) {
+            return {posts: [], count: 0, totalCount: 0, pinnedPost: null};
+        }
+
+        return await res.json();
     }
 }

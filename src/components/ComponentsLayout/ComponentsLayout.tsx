@@ -22,6 +22,7 @@ export const ComponentsLayout: React.FC<ComponentsLayoutProps> = ({
         <NavigationLayout
             sections={sections}
             mobileTitle={t('component:title')}
+            searchAutoFocus
             searchPlaceholder={t('component:searchPlaceholder')}
             sectionId={libId}
             subSectionId={componentId}

@@ -53,7 +53,7 @@ function App() {
 }
 ```
 
-앱이 언어 전환을 지원하는 경우, 앱이 처음 로드될 때 지원되는 모든 로케일을 미리 로드하거나, 언어를 전환하기 전에 로케일을 로드하세요:
+앱에서 언어 전환을 지원하는 경우, 앱이 처음 로드될 때 지원되는 모든 로케일을 미리 로드하거나, 언어를 전환하기 전에 로케일을 로드하세요:
 
 ```jsx
 // 로케일 미리 로드
@@ -77,16 +77,16 @@ function App() {
 }
 ```
 
-컴포넌트에는 영어와 러시아어 번역이 포함되어 있습니다. 다른 언어로 번역을 추가하려면 `@gravity-ui/uikit`의 `addLanguageKeysets`를 사용하세요:
+이 컴포넌트들은 영어와 러시아어로 번역되어 있습니다. 다른 언어로 번역을 추가하려면 `@gravity-ui/uikit`의 `addLanguageKeysets`를 사용하세요:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// 모든 사용 가능한 컴포넌트에 대한 번역을 지정하려면 Keyset 타입을 사용하세요.
+// 모든 사용 가능한 컴포넌트에 대한 번역을 지정하려면 Keyset 타입을 사용합니다.
 addLanguageKeysets<Keysets>(lang, {...});
 
-// 또는 필요한 것만 지정하려면 PartialKeysets 타입을 사용하세요.
+// 또는 필요한 것만 지정하려면 PartialKeysets 타입을 사용합니다.
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
 // 일부 컴포넌트에 대한 번역을 지정하려면
@@ -100,3 +100,30 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 ```shell
 npm start
 ```
+
+## 라이선스
+
+MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
+
+## AI 에이전트용
+
+Gravity UI 앱을 위한 React 날짜 및 시간 컨트롤 — `@gravity-ui/date-utils`를 기반으로 구축된 날짜/시간 선택기, 캘린더 및 절대/상대 범위 선택기.
+
+### 언제 사용해야 할까요?
+
+- 단일 날짜 또는 날짜/시간 입력: `DatePicker`, `DateField`.
+- 월/일 선택을 위한 캘린더: `Calendar`, `CalendarView`.
+- 날짜 범위: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
+- 상대 및 혼합 절대/상대 범위 (예: "지난 7일"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+
+### 언제 사용하지 않아야 할까요?
+
+- 일반 텍스트 또는 숫자 입력, 버튼 또는 기타 일반 컨트롤 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)을 사용하세요.
+- UI 없이 저수준 날짜 계산, 파싱, 포맷팅 또는 시간대 처리 — [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils)를 직접 사용하세요.
+
+### 일반적인 주의사항
+
+- **값은 JS `Date`가 아닌 `DateTime` 객체입니다.** 컴포넌트는 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils)의 `dateTime()`과 함께 작동합니다. 네이티브 `Date`나 ISO 문자열이 아닌 `DateTime`을 전달하고 읽으세요.
+- **uikit 설정이 필요합니다.** `ThemeProvider` 내에서 렌더링하고 `@gravity-ui/uikit/styles/styles.css`를 가져오세요. `@gravity-ui/uikit` 및 `@gravity-ui/date-utils`는 필수 피어 종속성입니다.
+- **로케일이 로드되어야 합니다, 단순히 설정되는 것이 아닙니다.** `ThemeProvider`의 `lang`을 통해 언어를 설정하지만, `@gravity-ui/date-utils`에서 `settings.loadLocale('ru')`를 사용하여 로케일 데이터를 먼저 로드해야 날짜가 기본 로케일로 렌더링됩니다.
+- **컴포넌트별 번역은 `addLanguageKeysets`를 사용합니다.** `en`/`ru` 외의 언어에 대한 번역을 추가하려면, 여기서 내보낸 `Keysets`/`PartialKeysets` 타입을 사용하여 `@gravity-ui/uikit/i18n`의 `addLanguageKeysets`를 통해 키셋을 등록하세요.

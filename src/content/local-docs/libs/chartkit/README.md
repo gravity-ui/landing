@@ -17,6 +17,7 @@ Each plugin renderer is lazy-loaded, so the underlying library code is only down
 ## Table of contents
 
 - [Get started](#get-started)
+- [Updating charting packages](#updating-charting-packages)
 - [Development](#development)
 
 ## Get started
@@ -96,6 +97,15 @@ export default function App() {
 ```
 
 `ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+## Updating charting packages
+
+ChartKit bundles two Gravity UI charting libraries as dependencies:
+
+- [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) — powers the `gravity-charts` plugin
+- [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — powers the `yagr` plugin
+
+If you need a newer version of one of these packages, open a [Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) issue and select the package(s) you need. Maintainers will bump the selected packages and release the update.
 
 ## Development
 

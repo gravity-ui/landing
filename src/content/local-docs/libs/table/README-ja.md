@@ -1,12 +1,12 @@
 # @gravity-ui/table &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/table)](https://www.npmjs.com/package/@gravity-ui/table) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/table/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/table/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/table/)
 
-## Instalación
+## インストール
 
 ```shell
 npm install --save @gravity-ui/table
 ```
 
-## Uso
+## 使用方法
 
 ```tsx
 import React from 'react';
@@ -20,8 +20,8 @@ interface Person {
 }
 
 const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Nombre', size: 100},
-  {accessorKey: 'age', header: 'Edad', size: 100},
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
 ];
 
 const data: Person[] = [
@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-### Componentes
+### コンポーネント
 
-Hay dos componentes `Table` que puedes usar:
+使用できる `Table` コンポーネントは2つあります。
 
-- `BaseTable` - un componente con estilos básicos únicamente;
-- `Table` - un componente con estilos basados en Gravity UI.
+- `BaseTable` - 基本的なスタイルのみを持つコンポーネントです。
+- `Table` - Gravity UI ベースのスタイルを持つコンポーネントです。
 
-#### Selección de filas
+#### 行選択
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -54,7 +54,7 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...otras columnas
+  // ...その他のカラム
 ];
 
 const data: Person[] = [
@@ -79,11 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
-Para usar agrupamiento con selección, utiliza el hook `useRowSelectionFixedHandler`. Sin él, el estado de la casilla de verificación de la fila principal será incorrecto. https://github.com/TanStack/table/issues/4878
+選択機能とグループ化を併用する場合、`useRowSelectionFixedHandler` フックを使用してください。これがないと、親行のチェックボックスの状態が正しく表示されません。https://github.com/TanStack/table/issues/4878
 
-#### Columna de selección de rango personalizada
+#### カスタム範囲選択カラム
 
-El hook `useToggleRangeSelectionHandler` devuelve un manejador de cambios que escucha los eventos Shift+click y realiza la selección de filas por rango. Necesita que se le pase una instancia de `CellContext` para tener acceso a los estados internos de la tabla y de la fila.
+`useToggleRangeSelectionHandler` フックは、Shift+クリックイベントをリッスンして範囲選択を実行する変更ハンドラーを返します。テーブルと行の内部状態にアクセスするには、`CellContext` インスタンスを渡す必要があります。
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -141,7 +141,7 @@ const customSelectionColumn: ColumnDef<unknown> = {
 
 const columns: ColumnDef<Person>[] = [
   customSelectionColumn as ColumnDef<Person>,
-  // ...otras columnas
+  // ...その他のカラム
 ];
 
 const data: Person[] = [
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-También existe el componente `RangedSelectionCheckbox`, que utiliza el hook internamente y acepta una instancia de `CellContext` como prop. Este componente proporciona una forma abreviada de añadir funcionalidad de selección por rango a las columnas de selección personalizadas.
+`RangedSelectionCheckbox` コンポーネントもあり、内部でこのフックを使用し、`CellContext` インスタンスをプロップとして受け取ります。このコンポーネントは、カスタム選択カラムに範囲選択機能を簡単に追加するためのショートカットを提供します。
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -198,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-Por defecto, la columna de selección generada con `selectionColumn` incluye la funcionalidad de selección por rango.
+デフォルトでは、`selectionColumn` で生成される選択カラムには範囲選択機能が含まれています。
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -206,15 +206,15 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...otras columnas
+  // ...その他のカラム
 ];
 ```
 
-**Nota**: Si la tabla contiene filas anidadas, la selección por rango no funcionará. En este momento, se considera un comportamiento indefinido.
+**注意**: テーブルにネストされた行が含まれている場合、範囲選択は機能しません。現時点では、これは未定義の動作と見なされます。
 
-#### Ordenación
+#### ソート
 
-Aprende sobre las propiedades de las columnas en la documentación de react-table [aquí](https://tanstack.com/table/v8/docs/guide/sorting).
+react-table の列プロパティについては、[ドキュメント](https://tanstack.com/table/v8/docs/guide/sorting) を参照してください。
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -230,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Tu columna DEBE tener accessorFn para que la ordenación esté habilitada
+  // ソートを有効にするには、列に accessorFn が必須です
 
   const table = useTable({
     columns,
@@ -247,7 +247,7 @@ const SortingExample = () => {
 };
 ```
 
-Si quieres ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
+要素を手動でソートしたい場合は、`manualSorting` プロパティを渡してください。
 
 ```tsx
 const table = useTable({
@@ -256,7 +256,7 @@ const table = useTable({
 });
 ```
 
-#### Agrupación
+#### グルーピング
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -276,14 +276,14 @@ interface PersonGroup {
 type Item = PersonGroup | Person;
 
 const columns: ColumnDef<Item>[] = [
-  {accessorKey: 'name', header: 'Nombre', size: 200},
-  {accessorKey: 'age', header: 'Edad', size: 100},
+  {accessorKey: 'name', header: 'Name', size: 200},
+  {accessorKey: 'age', header: 'Age', size: 100},
 ];
 
 const data: Item[] = [
   {
     id: 'friends',
-    name: 'Amigos',
+    name: 'Friends',
     items: [
       {id: 'nick', name: 'Nick', age: 25},
       {id: 'tom', name: 'Tom', age: 21},
@@ -291,7 +291,7 @@ const data: Item[] = [
   },
   {
     id: 'relatives',
-    name: 'Familiares',
+    name: 'Relatives',
     items: [
       {id: 'john', name: 'John', age: 23},
       {id: 'michael', name: 'Michael', age: 27},
@@ -319,13 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
-Para usar la agrupación con selección, utiliza el hook `useRowSelectionFixedHandler`. Sin él, el estado de la casilla de verificación de la fila principal será incorrecto. https://github.com/TanStack/table/issues/4878
+選択機能付きのグルーピングを使用するには、`useRowSelectionFixedHandler` フックを使用してください。これがないと、親行のチェックボックスの状態が正しく表示されません。https://github.com/TanStack/table/issues/4878
 
-Para habilitar los estilos de anidamiento, pasa `withNestingStyles = true` en la configuración de la columna.
+ネストスタイルを有効にするには、列設定で `withNestingStyles = true` を渡してください。
 
-Los indicadores de anidamiento se pueden deshabilitar pasando `showTreeDepthIndicators = false`.
+ネストインジケーターは、`showTreeDepthIndicators = false` を渡すことで無効にできます。
 
-Para añadir un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con tu propio componente similar:
+行の展開/折りたたみのためのコントロールを追加するには、セルのコンテンツを `TreeExpandableCell` コンポーネントまたは同様のカスタムコンポーネントでラップしてください。
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -333,7 +333,7 @@ import {TreeExpandableCell} from '@gravity-ui/table';
 const columns: ColumnDef<Item>[] = [
   {
     accessorKey: 'name',
-    header: 'Nombre',
+    header: 'Name',
     size: 200,
     showTreeDepthIndicators: false,
     withNestingStyles: true,
@@ -341,11 +341,11 @@ const columns: ColumnDef<Item>[] = [
       <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
     ),
   },
-  // ...otras columnas
+  // ...他の列
 ];
 ```
 
-#### Reordenación
+#### 並べ替え
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -353,7 +353,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...otras columnas
+  // ...他の列
 ];
 
 const data: Person[] = [
@@ -392,16 +392,16 @@ const ReorderingExample = () => {
 };
 ```
 
-#### Reordenación de columnas
+#### 列の並べ替え
 
-Envuelve la tabla con `ColumnReorderingProvider` para habilitar la reordenación de columnas mediante arrastrar y soltar en sus encabezados.
+テーブルを `ColumnReorderingProvider` でラップすると、ヘッダーからのドラッグアンドドロップによる列の並べ替えが可能になります。
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Nombre', size: 100},
-  {accessorKey: 'age', header: 'Edad', size: 100},
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
 ];
 
 const ColumnReorderingExample = () => {
@@ -419,7 +419,7 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-Si controlas `columnOrder` tú mismo (por ejemplo, para persistirlo), pasa `onReorder` y aplica el orden resultante:
+`columnOrder` を自分で制御する場合（例: 保存するため）、`onReorder` を渡し、結果の順序を適用してください。
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -441,20 +441,20 @@ return (
 );
 ```
 
-API CSS:
+CSS API:
 
-| Variable CSS                                 | Predeterminado                  | Descripción                      |
-| -------------------------------------------- | ------------------------------- | -------------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                       | Color de la línea de inserción de arrastre |
-| `--gt-table-reordering-insertion-line-width` | `2px`                           | Ancho de la línea de inserción de arrastre |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                           | Opacidad de la columna arrastrada    |
-| `--gt-table-drag-overlay-background`         | `#fff`                          | Fondo de la vista previa de arrastre |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Sombra del cuadro de vista previa de arrastre |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                           | Radio del borde de la vista previa de arrastre |
+| CSS 変数                                 | デフォルト                       | 説明                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | ドロップ挿入ラインの色 |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | ドロップ挿入ラインの幅 |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | ドラッグ中の列の不透明度    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | ドラッグプレビューの背景          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | ドラッグプレビューのボックスシャドウ          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | ドラッグプレビューの角丸          |
 
-Para prohibir la reordenación de una columna específica, establece `enableColumnReordering: false` en su definición de columna. Las columnas de marcador de posición (agrupadas) no se pueden arrastrar. Usa `activationDistance` (predeterminado `8`) para ajustar cuánto debe moverse el puntero antes de que comience un arrastre, lo que mantiene funcionando los clics en la cabecera (como la ordenación).
+特定の列の並べ替えを禁止するには、その列定義で `enableColumnReordering: false` を設定します。プレースホルダー（グループ化された）列はドラッグできません。`activationDistance`（デフォルトは `8`）を使用して、ドラッグが開始されるまでにポインターが移動する必要がある距離を調整します。これにより、ヘッダーのクリック（ソートなど）が機能し続けます。
 
-Las columnas fijadas también se pueden reordenar, pero solo entre ellas: una columna se puede mover dentro del grupo de la izquierda, el grupo de la derecha o el grupo central (sin fijar); nunca cruza un límite de fijación al arrastrar.
+固定された列も並べ替え可能ですが、それらの間でのみ可能です。列は左固定グループ、右固定グループ、または中央（固定なし）グループ内で移動できます。ドラッグによってピンの境界を越えることはありません。
 
 ```tsx
 <ColumnReorderingProvider
@@ -471,11 +471,11 @@ Las columnas fijadas también se pueden reordenar, pero solo entre ellas: una co
 </ColumnReorderingProvider>
 ```
 
-Mientras arrastras:
+ドラッグ中：
 
-- una vista previa flotante de la columna (su cabecera más las primeras filas) sigue al puntero en una superposición de arrastre;
-- la columna arrastrada se vuelve semitransparente;
-- se dibuja una línea de inserción azul donde se soltará la columna;
+- 列の浮動プレビュー（ヘッダーと最初の数行）がドラッグオーバーレイ内でポインターを追従します。
+- ドラッグ中の列は半透明になります。
+- 列がドロップされる場所に青い挿入ラインが表示されます。
 
 ```tsx
 <ColumnReorderingProvider
@@ -488,9 +488,9 @@ Mientras arrastras:
 </ColumnReorderingProvider>
 ```
 
-#### Virtualización
+#### 仮想化
 
-Úsala si quieres usar el contenedor de la cuadrícula como elemento de desplazamiento (si quieres usar la ventana, consulta la sección de virtualización de ventana). Asegúrate de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
+グリッドコンテナをスクロール要素として使用したい場合に使用します（ウィンドウを使用したい場合はウィンドウ仮想化セクションを参照）。コンテナに固定の高さを設定してください。そうしないと、仮想化は機能しません。
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -527,7 +527,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-Si usas virtualización con la función de reordenación, también necesitas pasar la opción `rangeExtractor`:
+並べ替え機能で仮想化を使用する場合、`rangeExtractor` オプションも渡す必要があります。
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -551,9 +551,9 @@ return (
 );
 ```
 
-#### Virtualización de ventana
+#### ウィンドウ仮想化
 
-Úsala si quieres usar la ventana como elemento de desplazamiento
+ウィンドウをスクロール要素として使用したい場合に使用します。
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -586,7 +586,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-#### Redimensionamiento
+#### リサイズ
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -609,19 +609,19 @@ const ResizingDemo = () => {
 };
 ```
 
-#### Configuración de columnas
+#### 列設定
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
-  // ...otras columnas
+  // ...他の列
   {
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // Opcional. Permite ocultar esta columna del popover de configuración
-      titleInSettings: 'ReactNode', // Opcional. Sobrescribe el campo de cabecera para el popover de configuración (si necesitas contenido diferente para la cabecera y el popover de configuración)
+      hideInSettings: false, // オプション。設定ポップオーバーからこの列を非表示にできます
+      titleInSettings: 'ReactNode', // オプション。設定ポップオーバーのヘッダーフィールドをオーバーライドします（ヘッダーと設定ポップオーバーで異なるコンテンツが必要な場合）
     },
-  }, // o puedes usar la función getSettingsColumn
+  }, // または getSettingsColumn 関数を使用することもできます
 ];
 
 const data: Person[] = [
@@ -630,18 +630,25 @@ const data: Person[] = [
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // para control externo y estado inicial
-    column_id: false, // para ocultar por defecto
+    // 外部制御と初期状態用
+    column_id: false, // デフォルトで非表示にする場合
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* ids de columnas hoja */
-  ]); // para control externo y estado inicial
+    /* リーフ列のID */
+  ]); // 外部制御と初期状態用
 
-  // Variante alternativa para obtener el estado, callbacks y establecer callbacks al aplicar la configuración - usando el hook useTableSettings:
+  // useTableSettings フックを使用して、状態、コールバック、および設定適用時のコールバックを取得する代替バリアント：
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 ```
 
-```typescript
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
   const table = useTable({
     columns,
     data,
@@ -657,17 +664,17 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Obtén más información sobre las propiedades de redimensionamiento de tablas y columnas en la [documentación](https://tanstack.com/table/v8/docs/api/features/column-sizing) de react-table.
+テーブルと列のリサイズプロパティの詳細については、react-table の [ドキュメント](https://tanstack.com/table/v8/docs/api/features/column-sizing) を参照してください。
 
-## Problemas conocidos y compatibilidad
+## 既知の問題と互換性
 
-### Compatibilidad con React 19 + React Compiler
+### React 19 + React Compiler の互換性
 
-**⚠️ Problema conocido:** Existe un problema de compatibilidad conocido con React 19 y React Compiler al usar `@gravity-ui/table` (que se basa en TanStack Table). La tabla podría no volver a renderizarse cuando cambian los datos. Consulta el [problema #5567 de TanStack Table](https://github.com/TanStack/table/issues/5567) para obtener más detalles.
+**⚠️ 既知の問題:** `@gravity-ui/table` (TanStack Table を基盤としています) を使用している場合、React 19 および React Compiler との間に既知の互換性の問題があります。データが変更されてもテーブルが再レンダリングされない場合があります。詳細については、[TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567) を参照してください。
 
-**Solución alternativa:**
+**回避策:**
 
-Si estás utilizando React 19 con React Compiler y experimentas problemas con la reactualización de la tabla, puedes usar la directiva `'use no memo'` en el código de tu componente:
+React 19 と React Compiler を使用していて、テーブルの再レンダリングに関する問題が発生している場合は、コンポーネントコードで `'use no memo'` ディレクティブを使用できます。
 
 ```tsx
 import React from 'react';
@@ -675,7 +682,7 @@ import {Table, useTable} from '@gravity-ui/table';
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 function MyTable() {
-  'use no memo'; // Deshabilita la memorización de React Compiler para este componente
+  'use no memo'; // このコンポーネントの React Compiler によるメモ化を無効にする
 
   const [data, setData] = React.useState<Person[]>([]);
 
@@ -688,9 +695,9 @@ function MyTable() {
 }
 ```
 
-**Solución alternativa:**
+**代替ソリューション:**
 
-También puedes memorizar explícitamente la instancia de la tabla o los datos para garantizar la correcta reactualización:
+テーブルインスタンスまたはデータを明示的にメモ化して、適切な再レンダリングを保証することもできます。
 
 ```tsx
 import React from 'react';
@@ -700,7 +707,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 function MyTable() {
   const [data, setData] = React.useState<Person[]>([]);
 
-  // Memoriza explícitamente los datos para garantizar la reactualización
+  // 再レンダリングを保証するためにデータを明示的にメモ化する
   const memoizedData = React.useMemo(() => data, [data]);
 
   const table = useTable({
@@ -712,36 +719,36 @@ function MyTable() {
 }
 ```
 
-**Nota:** Este problema está en la biblioteca subyacente TanStack Table y deberá solucionarse allí. Las soluciones alternativas anteriores deberían ayudar hasta que haya una corrección disponible.
+**注意:** この問題は基盤となる TanStack Table ライブラリに存在し、そちらで修正される必要があります。上記の回避策は、修正が利用可能になるまで役立つはずです。
 
-## Licencia
+## ライセンス
 
-Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para obtener más detalles.
+MIT ライセンスの下で配布されています。詳細については [LICENSE](LICENSE) を参照してください。
 
-## Para agentes de IA
+## AI エージェント向け
 
-Una cuadrícula de datos sin encabezado, impulsada por TanStack-Table, para aplicaciones Gravity UI: utilízala para tablas ordenables, seleccionables, agrupables, reorganizables y virtualizadas en lugar de componer marcado sin procesar sobre la tabla básica de uikit.
+Gravity UI アプリケーション向けのヘッドレスな TanStack Table 搭載データグリッドです。uikit の基本的な `Table` の上に生のマークアップをそのまま構築する代わりに、ソート可能、選択可能、グループ化可能、並べ替え可能、仮想化されたテーブルが必要な場合はこちらを使用してください。
 
-### Cuándo usar
+### 使用する場合
 
-- Grandes conjuntos de datos que necesitan virtualización de filas o ventanas (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Ordenación, redimensionamiento, reorganización de columnas (`ColumnReorderingProvider`), fijación y configuración de columnas por usuario (`TableSettings`).
-- Selección de filas (individual/múltiple, por rango) y filas de árbol/agrupadas con celdas expandibles.
+- 行またはウィンドウの仮想化が必要な大規模データセット (`useRowVirtualizer`, `useWindowRowVirtualizer`)。
+- 列のソート、リサイズ、並べ替え (`ColumnReorderingProvider`)、固定、およびユーザーごとの列設定 (`TableSettings`)。
+- 行の選択 (単一/複数、範囲) および展開可能なセルを持つツリー/グループ化された行。
 
-### Cuándo no usar
+### 使用しない場合
 
-- Una tabla simple y estática con un puñado de filas y sin funciones avanzadas: la tabla integrada de uikit de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) es más ligera.
-- Una lista no tabular: usa `List` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Edición de celdas en línea estilo hoja de cálculo: esta cuadrícula está enfocada en la lectura/visualización, no en una hoja de cálculo editable.
+- 数行の単純な静的テーブルで高度な機能がない場合 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) の uikit の組み込み `Table` の方が軽量です。
+- 非表形式のリスト — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) の `List` を使用してください。
+- スプレッドシートスタイルのインラインセル編集 — このグリッドは読み取り/表示に焦点を当てており、編集可能なスプレッドシートではありません。
 
-### Errores comunes
+### よくある落とし穴
 
-- **Creas la tabla con `useTable`, luego renderizas `<Table table={table} />`.** La prop principal es `table` (la instancia), no `data`/`columns` directamente en `<Table>`; pasa `data` y `columns` a `useTable`.
-- **Los tipos provienen de la subruta `@gravity-ui/table/tanstack`.** Importa `ColumnDef`, `RowSelectionState`, `SortingState`, etc. desde `@gravity-ui/table/tanstack`, no desde la raíz del paquete.
-- **La ordenación necesita un accesor.** Una columna debe tener `accessorKey`/`accessorFn` para que la ordenación funcione; establece `enableSorting` y proporciona `getRowId`.
-- **React 19 + React Compiler puede omitir reactualizaciones.** Este es un problema de la biblioteca subyacente TanStack Table: agrega la directiva `'use no memo'` al componente o memoriza `data`.
-- **La selección por rango falla con filas anidadas.** El comportamiento de la selección por rango no está definido cuando la tabla tiene filas agrupadas/anidadas; usa `useRowSelectionFixedHandler` para el estado correcto de la casilla de verificación principal con la agrupación.
+- **`useTable` でテーブルを構築し、`<Table table={table} />` をレンダリングする。** メインのプロパティは `<Table>` の `data`/`columns` ではなく `table` (インスタンス) です。`data` と `columns` は `useTable` に渡してください。
+- **型は `@gravity-ui/table/tanstack` サブパスから取得します。** `ColumnDef`、`RowSelectionState`、`SortingState` などは、パッケージのルートからではなく、`@gravity-ui/table/tanstack` からインポートしてください。
+- **ソートにはアクセサーが必要です。** ソートを機能させるには、列に `accessorKey`/`accessorFn` が必要です。`enableSorting` を設定し、`getRowId` を提供してください。
+- **React 19 + React Compiler は再レンダリングをスキップする可能性があります。** これは上流の TanStack Table の問題です。コンポーネントに `'use no memo'` ディレクティブを追加するか、`data` をメモ化してください。
+- **範囲選択はネストされた行で壊れます。** テーブルにグループ化された/ネストされた行がある場合、範囲選択は未定義の動作です。グループ化された親チェックボックスの状態を正しく保つには、`useRowSelectionFixedHandler` を使用してください。
 
-## Documentación para agentes de IA
+## AI エージェント向けドキュメント
 
-La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/table/build/docs/INDEX.md`.
+インストールされているバージョン向けの、エージェントが読み取り可能なドキュメントは `node_modules/@gravity-ui/table/build/docs/INDEX.md` にあります。

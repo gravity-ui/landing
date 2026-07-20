@@ -100,3 +100,30 @@ Para iniciar el servidor de desarrollo con storybook, ejecuta lo siguiente:
 ```shell
 npm start
 ```
+
+## Licencia
+
+Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.
+
+## Para agentes de IA
+
+Controles de fecha y hora de React para aplicaciones Gravity UI — selectores de fecha/hora, calendarios y selectores de rangos absolutos/relativos construidos sobre `@gravity-ui/date-utils`.
+
+### Cuándo usar
+
+- Una entrada de fecha o fecha y hora única: `DatePicker`, `DateField`.
+- Calendarios para la selección de mes/día: `Calendar`, `CalendarView`.
+- Rangos de fechas: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
+- Rangos relativos y rangos mixtos absolutos/relativos (por ejemplo, "últimos 7 días"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+
+### Cuándo no usar
+
+- Entradas de texto plano o numéricas, botones u otros controles genéricos — usa [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Matemáticas de fechas de bajo nivel, análisis, formato o manejo de zonas horarias sin interfaz de usuario — usa [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directamente.
+
+### Errores comunes
+
+- **Los valores son objetos `DateTime`, no `Date` de JS.** Los componentes funcionan con `dateTime()` de [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pasa y lee `DateTime`, no `Date` nativo o cadenas ISO.
+- **Requiere configuración de uikit.** Renderiza dentro de `ThemeProvider` e importa `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` y `@gravity-ui/date-utils` son dependencias peer requeridas.
+- **La localización se carga, no solo se establece.** Establece el idioma a través del `lang` de `ThemeProvider`, pero primero carga los datos de localización con `settings.loadLocale('ru')` de `@gravity-ui/date-utils`, o las fechas se renderizarán en la localización predeterminada.
+- **Las traducciones específicas de componentes usan `addLanguageKeysets`.** Para idiomas más allá de `en`/`ru`, registra los conjuntos de claves a través de `addLanguageKeysets` de `@gravity-ui/uikit/i18n` usando los tipos `Keysets`/`PartialKeysets` exportados aquí.

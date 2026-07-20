@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## Components
+### Components
 
 There are two Table components that you can use:
 
 - `BaseTable` - a component with basic styles only;
 - `Table` - a component with Gravity UI based styles.
 
-### Row selection
+#### Row selection
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -81,7 +81,7 @@ const RowSelectionExample = () => {
 
 To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
 
-### Custom Ranged Selection Column
+#### Custom Ranged Selection Column
 
 The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
 
@@ -212,7 +212,7 @@ const columns: ColumnDef<Person>[] = [
 
 **Note**: If the table contains nested rows, range selection will not work. At the moment, this is considered undefined behavior.
 
-### Sorting
+#### Sorting
 
 Learn about the column properties in the react-table [docs](https://tanstack.com/table/v8/docs/guide/sorting)
 
@@ -256,7 +256,7 @@ const table = useTable({
 });
 ```
 
-### Grouping
+#### Grouping
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -345,7 +345,7 @@ const columns: ColumnDef<Item>[] = [
 ];
 ```
 
-### Reordering
+#### Reordering
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -392,7 +392,103 @@ const ReorderingExample = () => {
 };
 ```
 
-### Virtualization
+#### Column reordering
+
+Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
+
+```tsx
+import {ColumnReorderingProvider} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const ColumnReorderingExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  return (
+    <ColumnReorderingProvider table={table}>
+      <Table table={table} />
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
+
+```tsx
+const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+const table = useTable({
+  columns,
+  data,
+  state: {columnOrder},
+  onColumnOrderChange: setColumnOrder,
+});
+
+return (
+  <ColumnReorderingProvider
+    table={table}
+    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
+  >
+    <Table table={table} />
+  </ColumnReorderingProvider>
+);
+```
+
+CSS API:
+
+| CSS variable                                 | Default                       | Description                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color of the drop insertion line |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Width of the drop insertion line |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacity of the dragged column    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Drag preview background          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Drag preview box-shadow          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Drag preview border radius       |
+
+To forbid reordering a specific column, set `enableColumnReordering: false` in its column definition. Placeholder (grouped) columns are not draggable. Use `activationDistance` (default `8`) to tune how far the pointer must move before a drag starts, which keeps header clicks (like sorting) working.
+
+Pinned columns can be reordered too, but only among themselves: a column can be moved within the left-pinned group, the right-pinned group, or the center (non-pinned) group — it never crosses a pin boundary by dragging.
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  onReorder={({columnOrder, columnPinning, pinned}) => {
+    if (pinned) {
+      setColumnPinning(columnPinning);
+    } else {
+      setColumnOrder(columnOrder);
+    }
+  }}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+While dragging:
+
+- a floating preview of the column (its header plus the first rows) follows the pointer in a drag overlay;
+- the dragged column becomes semi-transparent;
+- a blue insertion line is drawn where the column will be dropped;
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  autoScroll
+  dragOverlayRowCount={10}
+  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+#### Virtualization
 
 Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
 
@@ -455,7 +551,7 @@ return (
 );
 ```
 
-### Window virtualization
+#### Window virtualization
 
 Use if you want to use window as the scroll element
 
@@ -490,7 +586,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Resizing
+#### Resizing
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -513,7 +609,7 @@ const ResizingDemo = () => {
 };
 ```
 
-### Column settings
+#### Column settings
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -615,3 +711,35 @@ function MyTable() {
 ```
 
 **Note:** This issue is in the underlying TanStack Table library and will need to be fixed there. The workarounds above should help until a fix is available.
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## For AI agents
+
+A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
+
+### When to use
+
+- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
+- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
+
+### When not to use
+
+- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
+
+### Common pitfalls
+
+- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
+- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
+- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
+- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
+- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
+
+## Documentation for AI agents
+
+Agent-readable documentation for the installed version is located in `node_modules/@gravity-ui/table/build/docs/INDEX.md`.

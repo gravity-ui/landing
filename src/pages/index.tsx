@@ -2,7 +2,7 @@ import {GetServerSideProps} from 'next';
 import Head from 'next/head';
 
 import type {LibWithMetadata} from '../api';
-import {ServerApi} from '../api';
+import {ServerApi} from '../api/server';
 import backgroundAsset from '../assets/background.jpg';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';

@@ -53,7 +53,7 @@ function App() {
 }
 ```
 
-如果应用支持语言切换，请在应用首次加载时预加载所有支持的区域设置，或在切换语言之前加载区域设置：
+如果应用支持语言切换，请在应用首次加载时预加载所有支持的区域设置，或者在切换语言之前加载区域设置：
 
 ```jsx
 // 预加载区域设置
@@ -77,7 +77,7 @@ function App() {
 }
 ```
 
-组件已提供英语和俄语的翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
+组件提供英语和俄语的翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
@@ -100,3 +100,30 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 ```shell
 npm start
 ```
+
+## 许可证
+
+根据 MIT 许可证分发。有关详细信息，请参阅 [LICENSE](LICENSE)。
+
+## 致 AI 代理
+
+用于 Gravity UI 应用的 React 日期和时间控件 — 基于 `@gravity-ui/date-utils` 构建的日期/时间选择器、日历以及绝对/相对范围选择器。
+
+### 何时使用
+
+- 单个日期或日期时间输入：`DatePicker`、`DateField`。
+- 用于月份/日期选择的日历：`Calendar`、`CalendarView`。
+- 日期范围：`RangeDatePicker`、`RangeCalendar`、`RangeDateField`。
+- 相对和混合绝对/相对范围（例如，“过去 7 天”）：`RelativeDatePicker`、`RelativeRangeDatePicker`、`RelativeDateField`。
+
+### 何时不要使用
+
+- 普通文本或数字输入、按钮或其他通用控件 — 请使用 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)。
+- 低级日期计算、解析、格式化或时区处理（无 UI） — 请直接使用 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils)。
+
+### 常见陷阱
+
+- **值是 `DateTime` 对象，而不是 JS `Date`。** 组件使用 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) 中的 `dateTime()`；传递和读取 `DateTime`，而不是原生 `Date` 或 ISO 字符串。
+- **需要 uikit 设置。** 在 `ThemeProvider` 中渲染并导入 `@gravity-ui/uikit/styles/styles.css`；`@gravity-ui/uikit` 和 `@gravity-ui/date-utils` 是必需的对等依赖项。
+- **区域设置已加载，而不仅仅是设置。** 通过 `ThemeProvider` 的 `lang` 设置语言，但首先使用 `@gravity-ui/date-utils` 中的 `settings.loadLocale('ru')` 加载区域设置数据，否则日期将以默认区域设置渲染。
+- **组件特定的翻译使用 `addLanguageKeysets`。** 对于 `en`/`ru` 以外的语言，请使用 `@gravity-ui/uikit/i18n` 中的 `addLanguageKeysets` 注册键集，并使用此处导出的 `Keysets`/`PartialKeysets` 类型。
