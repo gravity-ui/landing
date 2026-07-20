@@ -1,9 +1,10 @@
-import {ChevronRight} from '@gravity-ui/icons';
+import {ChevronRight, SparklesFill} from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, Col, Grid, Row, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button, ButtonProps, Flex, Icon, IconData, Text} from '@gravity-ui/uikit';
 import React from 'react';
 import ReactTimeAgo from 'react-time-ago';
 
+import {GeneratePlaygroundModal} from '../../components/GeneratePlaygroundModal';
 import {Link} from '../../components/Link';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
@@ -62,6 +63,7 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
     banner,
 }) => {
     const locale = useLocale();
+    const [isGenerateModalOpen, setGenerateModalOpen] = React.useState(false);
 
     const showNewsBlock = news && news.items && news.items.length > 0;
     const showBannerBlock = banner?.content;
@@ -127,8 +129,25 @@ export const CustomHeader: React.FC<CustomHeaderProps> = ({
                                                 </Button>
                                             );
                                         })}
+                                        <Button
+                                            className={b('button')}
+                                            size="xl"
+                                            view="outlined"
+                                            onClick={() => setGenerateModalOpen(true)}
+                                        >
+                                            <Icon
+                                                className={b('button-icon')}
+                                                data={SparklesFill}
+                                                size={16}
+                                            />
+                                            AI-генерация playground
+                                        </Button>
                                     </div>
                                 ) : null}
+                                <GeneratePlaygroundModal
+                                    open={isGenerateModalOpen}
+                                    onClose={() => setGenerateModalOpen(false)}
+                                />
                             </div>
                         </Flex>
                     </Col>

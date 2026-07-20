@@ -1,6 +1,7 @@
 import {ContributorsModel} from './Contributors/types';
 import {CustomHeaderModel} from './CustomHeader/CustomHeader';
 import {ExamplesModel} from './Examples/Examples';
+import {GeneratePlaygroundBlockModel} from './GeneratePlaygroundBlock/GeneratePlaygroundBlock';
 import {GithubStarsModel} from './GithubStarsBlock/GithubStarsBlock';
 import {IframeModel} from './IFrameBlock/IFrameBlock';
 import {LibrariesModel} from './Libraries/Libraries';
@@ -17,4 +18,5 @@ export type CustomBlockModel =
     | TemplatesModel
     | GithubStarsModel
     | ContributorsModel
-    | IframeModel;
+    | IframeModel
+    | GeneratePlaygroundBlockModel;

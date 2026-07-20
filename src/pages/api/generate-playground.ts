@@ -1,0 +1,82 @@
+import type {NextApiRequest, NextApiResponse} from 'next';
+import OpenAI from 'openai';
+import {RateLimiterMemory} from 'rate-limiter-flexible';
+
+type GenerateCodeRequestBody = {
+    input: string;
+};
+
+const DEFAULT_BASE_URL = 'https://ai.api.cloud.yandex.net/v1';
+const API_KEY = process.env.OPENAI_API_KEY;
+const BASE_URL = process.env.BASE_URL || DEFAULT_BASE_URL;
+const PROJECT_ID = process.env.YANDEX_PROJECT_ID;
+const PROMPT_ID = process.env.GENERATE_CODE_PROMPT_ID;
+
+const rateLimiter = new RateLimiterMemory({
+    points: 5,
+    duration: 30,
+});
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({error: 'Method not allowed'});
+    }
+
+    const ip = (req.headers['x-forwarded-for'] ?? req.socket.remoteAddress ?? 'unknown') as string;
+    const key = Array.isArray(ip) ? ip[0] : ip.split(',')[0].trim();
+
+    try {
+        await rateLimiter.consume(key);
+    } catch {
+        return res.status(429).json({error: 'Too many requests. Please wait and try again.'});
+    }
+
+    try {
+        const {input} = req.body as GenerateCodeRequestBody;
+
+        if (!input || typeof input !== 'string' || input.trim().length === 0) {
+            return res.status(400).json({error: 'Input is required'});
+        }
+
+        if (input.length > 200) {
+            return res.status(400).json({error: 'Input must not exceed 200 characters'});
+        }
+
+        const openai = new OpenAI({
+            apiKey: API_KEY,
+            baseURL: BASE_URL,
+            defaultHeaders: PROJECT_ID ? {'OpenAI-Project': PROJECT_ID} : undefined,
+        });
+
+        const response = await openai.responses.create({
+            prompt: PROMPT_ID ? {id: PROMPT_ID} : undefined,
+            input,
+            tools: [
+                {
+                    type: 'web_search',
+                    filters: {
+                        allowed_domains: [
+                            'https://gravity-ui.com/ru/components/',
+                            'https://github.com/gravity-ui/uikit/',
+                        ],
+                    },
+                    search_context_size: 'medium',
+                    user_location: {
+                        type: 'approximate',
+                        region: '225',
+                    },
+                },
+            ],
+        });
+
+        const parsed = JSON.parse(response.output_text ?? '{}');
+        return res.status(200).json({code: parsed.code ?? ''});
+    } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error in generate-playground API:', error);
+
+        return res.status(500).json({
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
+    }
+}

@@ -1,0 +1,109 @@
+@use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../variables.scss';
+
+$block: '.#{variables.$ns}generate-playground-block';
+
+#{$block} {
+    padding: 80px 0;
+
+    &__inner {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__title {
+        text-align: center;
+    }
+
+    &__input-area {
+        position: relative;
+        padding: 8px;
+    }
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        border-radius: 8px;
+        background: var(--g-color-base-background);
+        opacity: 0.92;
+    }
+
+    &__actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+        }
+    }
+
+    &__input-wrap {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            flex-direction: column;
+        }
+    }
+
+    &__textarea-wrap {
+        position: relative;
+        flex: 1;
+    }
+
+    &__textarea {
+        width: 100%;
+    }
+
+    &__counter {
+        position: absolute;
+        right: 8px;
+        bottom: 8px;
+        pointer-events: none;
+    }
+
+    &__button {
+        flex-shrink: 0;
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            width: 100%;
+        }
+    }
+
+    &__examples {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    &__example-chip {
+        padding: 6px 12px;
+        border-radius: 100px;
+        border: 1px solid var(--g-color-line-generic);
+        background: transparent;
+        color: var(--g-color-text-secondary);
+        font-size: 13px;
+        line-height: 18px;
+        cursor: pointer;
+        transition: border-color 0.15s ease, color 0.15s ease;
+
+        &:hover {
+            border-color: var(--g-color-line-brand);
+            color: var(--g-color-text-primary);
+        }
+    }
+}
