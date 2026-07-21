@@ -95,7 +95,7 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 
 ## Desenvolvimento
 
-Para iniciar o servidor de desenvolvimento com o storybook, execute o seguinte:
+Para iniciar o servidor de desenvolvimento com storybook, execute o seguinte:
 
 ```shell
 npm start
@@ -126,4 +126,8 @@ Controles de data e hora em React para aplicativos Gravity UI — seletores de d
 - **Valores são objetos `DateTime`, não `Date` do JS.** Os componentes trabalham com `dateTime()` de [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); passe e leia `DateTime`, não `Date` nativo ou strings ISO.
 - **Requer configuração do uikit.** Renderize dentro de `ThemeProvider` e importe `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` e `@gravity-ui/date-utils` são dependências obrigatórias.
 - **Local é carregado, não apenas definido.** Defina o idioma via `ThemeProvider` `lang`, mas carregue os dados de local primeiro com `settings.loadLocale('ru')` de `@gravity-ui/date-utils`, ou as datas serão renderizadas no local padrão.
-- **Traduções específicas de componentes usam `addLanguageKeysets`.** Para idiomas além de `en`/`ru`, registre os conjuntos de chaves via `addLanguageKeysets` de `@gravity-ui/uikit/i18n` usando os tipos `Keysets`/`PartialKeysets` exportados aqui.
+- **Traduções específicas de componentes usam `addLanguageKeysets`.** Para idiomas além de `en`/`ru`, registre conjuntos de chaves via `addLanguageKeysets` de `@gravity-ui/uikit/i18n` usando os tipos `Keysets`/`PartialKeysets` exportados aqui.
+
+## Documentação para agentes de IA
+
+A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/date-components/dist/docs/INDEX.md`.
