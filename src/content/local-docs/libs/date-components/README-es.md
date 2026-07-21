@@ -127,3 +127,7 @@ Controles de fecha y hora de React para aplicaciones Gravity UI — selectores d
 - **Requiere configuración de uikit.** Renderiza dentro de `ThemeProvider` e importa `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` y `@gravity-ui/date-utils` son dependencias peer requeridas.
 - **La localización se carga, no solo se establece.** Establece el idioma a través del `lang` de `ThemeProvider`, pero primero carga los datos de localización con `settings.loadLocale('ru')` de `@gravity-ui/date-utils`, o las fechas se renderizarán en la localización predeterminada.
 - **Las traducciones específicas de componentes usan `addLanguageKeysets`.** Para idiomas más allá de `en`/`ru`, registra los conjuntos de claves a través de `addLanguageKeysets` de `@gravity-ui/uikit/i18n` usando los tipos `Keysets`/`PartialKeysets` exportados aquí.
+
+## Documentación para agentes de IA
+
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/date-components/dist/docs/INDEX.md`.
