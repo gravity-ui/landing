@@ -419,6 +419,54 @@ const ColumnReorderingExample = () => {
 };
 ```
 
+### Row and column reordering together
+
+Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
+
+```tsx
+import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
+import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
+
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // update data array
+  }, []);
+
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
+
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
+};
+```
+
 If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
 
 ```tsx

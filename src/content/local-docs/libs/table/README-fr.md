@@ -210,11 +210,11 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. Pour le moment, cela est considéré comme un comportement indéfini.
+**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. À l'heure actuelle, cela est considéré comme un comportement indéfini.
 
 #### Tri
 
-Apprenez-en plus sur les propriétés des colonnes dans la documentation de react-table [ici](https://tanstack.com/table/v8/docs/guide/sorting).
+Apprenez-en davantage sur les propriétés des colonnes dans la documentation de react-table [ici](https://tanstack.com/table/v8/docs/guide/sorting).
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -325,7 +325,7 @@ Pour activer les styles d'imbrication, passez `withNestingStyles = true` dans la
 
 Les indicateurs d'imbrication peuvent être désactivés en passant `showTreeDepthIndicators = false`.
 
-Pour ajouter un contrôle pour développer/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou votre composant personnalisé similaire :
+Pour ajouter un contrôle permettant d'étendre/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou votre composant personnalisé similaire :
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -419,7 +419,56 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-Si vous contrôlez vous-même `columnOrder` (par exemple, pour le conserver), passez `onReorder` et appliquez l'ordre résultant :
+### Réorganisation des lignes et des colonnes simultanément
+
+Aninestez `ColumnReorderingProvider` et `ReorderingProvider` pour activer les deux axes de glisser-déposer à la fois. L'ordre des fournisseurs n'a pas d'importance — ils partagent un contexte dnd-kit unique en interne.
+
+```tsx
+import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
+import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  {accessorKey: 'name', header: 'Nom'},
+  {accessorKey: 'age', header: 'Âge'},
+];
+
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
+
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // mettre à jour le tableau de données
+  }, []);
+
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
+```
+
+```tsx
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+Si vous gérez vous-même `columnOrder` (par exemple, pour le sauvegarder), passez `onReorder` et appliquez l'ordre résultant :
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -443,18 +492,18 @@ return (
 
 API CSS :
 
-| Variable CSS                                 | Défaut                       | Description                      |
+| Variable CSS                                 | Défaut                        | Description                      |
 | -------------------------------------------- | ----------------------------- | -------------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Couleur de la ligne d'insertion |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | Largeur de la ligne d'insertion |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Couleur de la ligne d'insertion de dépôt |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Largeur de la ligne d'insertion de dépôt |
 | `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacité de la colonne déplacée   |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | Arrière-plan de l'aperçu de déplacement |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Fond de l'aperçu de déplacement  |
 | `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Ombre portée de l'aperçu de déplacement |
 | `--gt-table-drag-overlay-border-radius`      | `6px`                         | Rayon des coins de l'aperçu de déplacement |
 
-Pour interdire le réordonnancement d'une colonne spécifique, définissez `enableColumnReordering: false` dans sa définition de colonne. Les colonnes d'espace réservé (groupées) ne sont pas déplaçables. Utilisez `activationDistance` (par défaut `8`) pour ajuster la distance que le pointeur doit parcourir avant qu'un déplacement ne commence, ce qui permet aux clics d'en-tête (comme le tri) de fonctionner.
+Pour interdire le réordonnancement d'une colonne spécifique, définissez `enableColumnReordering: false` dans sa définition de colonne. Les colonnes de remplacement (groupées) ne sont pas déplaçables. Utilisez `activationDistance` (par défaut `8`) pour ajuster la distance que le pointeur doit parcourir avant qu'un déplacement ne commence, ce qui permet aux clics sur les en-têtes (comme le tri) de fonctionner.
 
-Les colonnes épinglées peuvent également être réordonnées, mais uniquement entre elles : une colonne peut être déplacée au sein du groupe épinglé à gauche, du groupe épinglé à droite, ou du groupe central (non épinglé) — elle ne franchit jamais une limite d'épinglage par glisser-déposer.
+Les colonnes épinglées peuvent également être réordonnées, mais uniquement entre elles : une colonne peut être déplacée au sein du groupe épinglé à gauche, du groupe épinglé à droite, ou du groupe central (non épinglé) — elle ne franchit jamais une limite d'épinglage par déplacement.
 
 ```tsx
 <ColumnReorderingProvider
@@ -475,7 +524,7 @@ Pendant le déplacement :
 
 - un aperçu flottant de la colonne (son en-tête plus les premières lignes) suit le pointeur dans une superposition de déplacement ;
 - la colonne déplacée devient semi-transparente ;
-- une ligne d'insertion bleue est dessinée à l'endroit où la colonne sera déposée ;
+- une ligne d'insertion bleue est dessinée là où la colonne sera déposée ;
 
 ```tsx
 <ColumnReorderingProvider
@@ -490,7 +539,7 @@ Pendant le déplacement :
 
 #### Virtualisation
 
-Utilisez si vous souhaitez utiliser le conteneur de grille comme élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section de virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur ; sinon, la virtualisation ne fonctionnera pas.
+Utilisez si vous souhaitez utiliser le conteneur de grille comme élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section de virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur, sinon la virtualisation ne fonctionnera pas.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -619,7 +668,7 @@ const columns: ColumnDef<Person>[] = [
     header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // Optionnel. Permet de masquer cette colonne dans le popover des paramètres
-      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ d'en-tête pour le popover des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et le popover des paramètres)
+      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ header pour le popover des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et le popover des paramètres)
     },
   }, // ou vous pouvez utiliser la fonction getSettingsColumn
 ];
@@ -637,110 +686,4 @@ const TableSettingsDemo = () => {
     /* ids des colonnes feuilles */
   ]); // pour le contrôle externe et l'état initial
 
-  // Variante alternative pour obtenir l'état, les callbacks et définir les callbacks d'application des paramètres - en utilisant le hook useTableSettings :
-  // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
-
-```tsx
-  const table = useTable({
-    columns,
-    data,
-    state: {
-      columnVisibility,
-      columnOrder,
-    },
-    onColumnVisibilityChange,
-    onColumnOrderChange,
-  });
-
-  return <Table table={table} />;
-};
-```
-
-Apprenez-en davantage sur les propriétés de redimensionnement des colonnes et du tableau dans la [documentation](https://tanstack.com/table/v8/docs/api/features/column-sizing) de react-table.
-
-## Problèmes connus et compatibilité
-
-### Compatibilité avec React 19 + React Compiler
-
-**⚠️ Problème connu :** Il existe un problème de compatibilité connu avec React 19 et React Compiler lors de l'utilisation de `@gravity-ui/table` (qui est basé sur TanStack Table). Le tableau peut ne pas se réafficher lorsque les données changent. Voir le [problème #5567 de TanStack Table](https://github.com/TanStack/table/issues/5567) pour plus de détails.
-
-**Solution de contournement :**
-
-Si vous utilisez React 19 avec React Compiler et rencontrez des problèmes de réaffichage du tableau, vous pouvez utiliser la directive `'use no memo'` dans le code de votre composant :
-
-```tsx
-import React from 'react';
-import {Table, useTable} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-function MyTable() {
-  'use no memo'; // Désactive la mémoïsation de React Compiler pour ce composant
-
-  const [data, setData] = React.useState<Person[]>([]);
-
-  const table = useTable({
-    data,
-    columns,
-  });
-
-  return <Table table={table} />;
-}
-```
-
-**Solution alternative :**
-
-Vous pouvez également mémoïser explicitement l'instance du tableau ou les données pour garantir des réaffichages corrects :
-
-```tsx
-import React from 'react';
-import {Table, useTable} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-function MyTable() {
-  const [data, setData] = React.useState<Person[]>([]);
-
-  // Mémoïse explicitement les données pour garantir les réaffichages
-  const memoizedData = React.useMemo(() => data, [data]);
-
-  const table = useTable({
-    data: memoizedData,
-    columns,
-  });
-
-  return <Table table={table} />;
-}
-```
-
-**Remarque :** Ce problème concerne la bibliothèque sous-jacente TanStack Table et devra y être corrigé. Les solutions de contournement ci-dessus devraient aider en attendant qu'un correctif soit disponible.
-
-## Licence
-
-Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
-
-## Pour les agents IA
-
-Une grille de données sans tête, alimentée par TanStack-Table, pour les applications Gravity UI — utilisez-la pour des tableaux triables, sélectionnables, groupables, réordonnables et virtualisés au lieu de composer du balisage brut par-dessus le `Table` de base d'uikit.
-
-### Quand l'utiliser
-
-- Grands ensembles de données nécessitant une virtualisation des lignes ou des fenêtres (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Tri, redimensionnement, réorganisation des colonnes (`ColumnReorderingProvider`), épinglage et paramètres de colonnes par utilisateur (`TableSettings`).
-- Sélection de lignes (simple/multiple, par plage) et lignes d'arbre/groupées avec des cellules extensibles.
-
-### Quand ne pas l'utiliser
-
-- Un tableau simple et statique avec une poignée de lignes et aucune fonctionnalité avancée — le `Table` intégré d'uikit de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) est plus léger.
-- Une liste non tabulaire — utilisez `List` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Édition de cellules en ligne de style tableur — cette grille est axée sur la lecture/l'affichage, pas sur un tableur modifiable.
-
-### Pièges courants
-
-- **Vous construisez le tableau avec `useTable`, puis vous affichez `<Table table={table} />`.** La prop principale est `table` (l'instance), pas `data`/`columns` directement sur `<Table>`; passez `data` et `columns` à `useTable`.
-- **Les types proviennent du sous-chemin `@gravity-ui/table/tanstack`.** Importez `ColumnDef`, `RowSelectionState`, `SortingState`, etc. depuis `@gravity-ui/table/tanstack`, pas depuis la racine du package.
-- **Le tri nécessite un accesseur.** Une colonne doit avoir `accessorKey`/`accessorFn` pour que le tri fonctionne ; définissez `enableSorting` et fournissez `getRowId`.
-- **React 19 + React Compiler peut ignorer les réaffichages.** Il s'agit d'un problème en amont de TanStack Table — ajoutez la directive `'use no memo'` au composant ou mémoïsez `data`.
-- **La sélection par plage échoue avec les lignes imbriquées.** Le comportement de la sélection par plage est indéfini lorsque le tableau a des lignes groupées/imbriquées ; utilisez `useRowSelectionFixedHandler` pour un état de case à cocher parent correct avec le regroupement.
-
-## Documentation pour les agents IA
-
-La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/table/build/docs/INDEX.md`.
+  // Variante alternative pour obtenir l'état, les
