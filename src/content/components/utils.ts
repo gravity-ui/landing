@@ -2,6 +2,8 @@ import {TARGET_PROFILE} from '../../constants';
 import packagesVersions from '../../data/packages-versions.json';
 import {Repos} from '../../types/common';
 
+import {Component} from './types';
+
 const githubTargetProfile = process.env.GITHUB_PROFILE || TARGET_PROFILE;
 
 const TARGET_REPOS_VERSIONS = {
@@ -39,3 +41,21 @@ export const mappingOptions = (arr: string[]) =>
         value: item,
         content: item,
     }));
+
+export const toKebabCase = (name: string): string =>
+    name.replace(
+        /([A-Z])/g,
+        (_, letter, offset) => (offset === 0 ? '' : '-') + letter.toLowerCase(),
+    );
+
+export const toTitleCase = (name: string): string =>
+    name.replace(/([A-Z])/g, (_, letter, offset) => (offset === 0 ? '' : ' ') + letter);
+
+export const createComponentConfig = (componentName: string, repoName: Repos): Component => ({
+    id: toKebabCase(componentName),
+    title: toTitleCase(componentName),
+    githubUrl: getGithubUrl({componentName, repoName}),
+    content: {
+        readmeUrl: getReadmeUrl({componentName, repoName}),
+    },
+});
