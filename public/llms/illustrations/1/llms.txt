@@ -13,6 +13,15 @@ npm install --save-dev @gravity-ui/illustrations
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^18.2.0` |
+| `react-dom` | `^18.2.0` |
+
 ## Usage
 
 ### React

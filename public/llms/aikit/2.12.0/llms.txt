@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/aikit@2.2.0`
+> Generated for `@gravity-ui/aikit@2.12.0`
 
 # AIKit
 
@@ -12,6 +12,20 @@
 npm install @gravity-ui/aikit
 ```
 
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^18.0.0 || ^19.0.0` |
+| `react-dom` | `^18.0.0 || ^19.0.0` |
+| `highlight.js` | `^11.11.1` |
+| `@gravity-ui/i18n` | `^1.8.0` |
+| `@gravity-ui/icons` | `^2.16.0` |
+| `@gravity-ui/uikit` | `^7.25.0` |
+| `@diplodoc/transform` | `^4.63.3` |
 
 ## Usage
 
@@ -57,4 +71,4 @@ function App() {
 
 ---
 
-> Docs for `@gravity-ui/aikit@2.2.0`. Versioned at: `https://gravity-ui.com/llms/aikit/2.2.0/llms.txt` (exact), `https://gravity-ui.com/llms/aikit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/aikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/aikit@2.12.0`. Versioned at: `https://gravity-ui.com/llms/aikit/2.12.0/llms.txt` (exact), `https://gravity-ui.com/llms/aikit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/aikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

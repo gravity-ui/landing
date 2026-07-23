@@ -15,6 +15,16 @@ npm install @gravity-ui/uikit @gravity-ui/charts
 `@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
 ## Usage
 
 Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:

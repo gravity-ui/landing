@@ -17,6 +17,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 24
+      - name: Install dependencies
+        run: npm ci
       - name: Generate llms.txt
         run: |
           npm run generate-llms

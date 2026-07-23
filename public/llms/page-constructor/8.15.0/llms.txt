@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/page-constructor@8.14.2`
+> Generated for `@gravity-ui/page-constructor@8.15.0`
 
 # Page constructor
 
@@ -12,6 +12,16 @@
 npm install @gravity-ui/page-constructor
 ```
 
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@diplodoc/transform` | `^4.28.2` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 
 ## Usage
 
@@ -133,4 +143,4 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 ---
 
-> Docs for `@gravity-ui/page-constructor@8.14.2`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.14.2/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/page-constructor@8.15.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.15.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
