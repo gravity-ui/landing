@@ -13,6 +13,14 @@ npm install --save-dev prettier @gravity-ui/prettier-config
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `prettier` | `^2.2.1` |
+
 ## Usage
 
 Add `.prettierrc.js` file in the project root with the following content:

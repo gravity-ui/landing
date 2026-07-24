@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/navigation@6.3.0`
+> Generated for `@gravity-ui/navigation@6.3.1`
 
 # @gravity-ui/navigation documentation
 
-Documentation for the **6.3.0** version of `@gravity-ui/navigation`.
+Documentation for the **6.3.1** version of `@gravity-ui/navigation`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/navigation/build/docs/`).
@@ -43,6 +43,18 @@ Ensure that peer dependencies are installed in your project
 npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@bem-react/classname` | `^1.6.0` |
+| `@gravity-ui/icons` | `^2.2.0` |
+| `@gravity-ui/uikit` | `^7.42.0` |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
 ## Usage
 
 Render `AsideHeader` as the app shell. It is a controlled component — you own the collapsed state via `compact`/`onChangeCompact` — and your page content goes through `renderContent`. Set up `@gravity-ui/uikit` styles and `ThemeProvider` first (see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
@@ -77,19 +89,19 @@ export function App() {
 
 ## Components
 
-- [ActionBar](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/ActionBar.md) — The component is a flexible horizontal bar that provides a standardized layout for arranging navigation elements, actions, and informational content within an application. It serves as a container for organizing UI elements like breadcrumbs, buttons, and dropdown menus into defined sections and groups.
-- [AsideHeader](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/AsideHeader.md) — AsideHeader is provided a flexible and customizable navigation experience within your application. Users can easily customize the appearance of the sidebar to match their branding colors also to add personalized links, icons that cater specifically to their application's functionality.
-- [AsideHeader/components/AllPagesPanel](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/AsideHeader/components/AllPagesPanel.md) — A navigation panel for managing and organizing application pages in the middle (menuItems) section of AsideHeader component. Panel provides drag-and-drop reordering, visibility toggles, pin/unpin and category grouping of menu items.
-- [Footer](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/Footer.md) — The page footer components. Use Footer for the desktop version and MobileFooter for the mobile version. Both components have the same properties.
-- [HotkeysPanel](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/HotkeysPanel.md) — A navigation panel for hotkeys documentation. The panel displays a set of hotkeys for your application with a description of their purpose.
-- [Logo](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/Logo.md) — Logo icon is wrapped in UIKit Button, text is wrapped in HTML tag a or div, when passing hasWrapper prop.
-- [MobileHeader](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/MobileHeader.md) — Header for Mobile navigation. MobileHeader provides maintaining Panels except for Modals.
-- [Settings](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/components/Settings.md) — The Settings component provides the layout for a settings panel with the following features.
+- [ActionBar](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/ActionBar.md) — The component is a flexible horizontal bar that provides a standardized layout for arranging navigation elements, actions, and informational content within an application. It serves as a container for organizing UI elements like breadcrumbs, buttons, and dropdown menus into defined sections and groups.
+- [AsideHeader](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/AsideHeader.md) — AsideHeader is provided a flexible and customizable navigation experience within your application. Users can easily customize the appearance of the sidebar to match their branding colors also to add personalized links, icons that cater specifically to their application's functionality.
+- [AsideHeader/components/AllPagesPanel](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/AsideHeader/components/AllPagesPanel.md) — A navigation panel for managing and organizing application pages in the middle (menuItems) section of AsideHeader component. Panel provides drag-and-drop reordering, visibility toggles, pin/unpin and category grouping of menu items.
+- [Footer](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/Footer.md) — The page footer components. Use Footer for the desktop version and MobileFooter for the mobile version. Both components have the same properties.
+- [HotkeysPanel](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/HotkeysPanel.md) — A navigation panel for hotkeys documentation. The panel displays a set of hotkeys for your application with a description of their purpose.
+- [Logo](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/Logo.md) — Logo icon is wrapped in UIKit Button, text is wrapped in HTML tag a or div, when passing hasWrapper prop.
+- [MobileHeader](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/MobileHeader.md) — Header for Mobile navigation. MobileHeader provides maintaining Panels except for Modals.
+- [Settings](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/components/Settings.md) — The Settings component provides the layout for a settings panel with the following features.
 
 ## Hooks
 
-- [useOverflowingHorizontalListItems](https://unpkg.com/@gravity-ui/navigation@6.3.0/build/docs/hooks/useOverflowingHorizontalListItems.md) — A hook for determining which horizontal list items stay visible and which collapse into an overflow "more" dropdown.
+- [useOverflowingHorizontalListItems](https://unpkg.com/@gravity-ui/navigation@6.3.1/build/docs/hooks/useOverflowingHorizontalListItems.md) — A hook for determining which horizontal list items stay visible and which collapse into an overflow "more" dropdown.
 
 ---
 
-> Docs for `@gravity-ui/navigation@6.3.0`. Versioned at: `https://gravity-ui.com/llms/navigation/6.3.0/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/6/llms.txt` (latest of major 6), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/navigation@6.3.1`. Versioned at: `https://gravity-ui.com/llms/navigation/6.3.1/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/6/llms.txt` (latest of major 6), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

@@ -7,6 +7,15 @@ Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/uikit/build/docs/`).
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
 ## Guides
 
 - [Layout components and spacings](https://unpkg.com/@gravity-ui/uikit@7.45.0/build/docs/guides/layout.md) — This guide covers UIKit's layout foundations: a shared spacing scale (--g-spacing-, used

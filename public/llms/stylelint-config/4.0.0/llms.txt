@@ -13,6 +13,16 @@ npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `postcss` | `^8.0.0` |
+| `prettier` | `^3.0.0` |
+| `stylelint` | `^15.8.0` |
+
 ## Usage
 
 Add `.stylelintrc` file in the project root with the following content:

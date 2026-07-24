@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/table@1.17.0`
+> Generated for `@gravity-ui/table@1.18.1`
 
 # @gravity-ui/table documentation
 
-Documentation for the **1.17.0** version of `@gravity-ui/table`.
+Documentation for the **1.18.1** version of `@gravity-ui/table`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
@@ -36,6 +36,21 @@ A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for i
 ```shell
 npm install --save @gravity-ui/table
 ```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@dnd-kit/core` | `^6.0.0` |
+| `@dnd-kit/sortable` | `^8.0.0 || ^9.0.0 || ^10.0.0` |
+| `@gravity-ui/i18n` | `^1.0.0` |
+| `@gravity-ui/icons` | `^2.0.0` |
+| `@gravity-ui/uikit` | `^6.0.0 || ^7.0.0` |
+| `lodash` | `^4.17.0` |
+| `react` | `^17.0.0 || ^18.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0` |
 
 ## Usage
 
@@ -450,6 +465,54 @@ const ColumnReorderingExample = () => {
 };
 ```
 
+### Row and column reordering together
+
+Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
+
+```tsx
+import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
+import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
+
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // update data array
+  }, []);
+
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
+
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
+};
+```
+
 If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
 
 ```tsx
@@ -690,17 +753,17 @@ Learn more about the table and the column resizing properties in the react-table
 
 ## Guides
 
-- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
-- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
 
 ## Components
 
-- [BaseTable](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
 
 ## Hooks
 
-- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
 
 ---
 
-> Docs for `@gravity-ui/table@1.17.0`. Versioned at: `https://gravity-ui.com/llms/table/1.17.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/table@1.18.1`. Versioned at: `https://gravity-ui.com/llms/table/1.18.1/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
