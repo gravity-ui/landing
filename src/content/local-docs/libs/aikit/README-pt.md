@@ -25,7 +25,7 @@ Biblioteca de componentes de UI para chats de IA construída com princípios de 
 ### Principais Recursos
 
 - 🎨 **Atomic Design** — hierarquia clara de componentes, de átomos a páginas
-- 🔧 **Independente de SDK** — independente de SDKs de IA específicos
+- 🔧 **Independente de SDK** — não depende de SDKs de IA específicos
 - 🎭 **Abordagem de Dois Níveis** — componentes prontos + hooks para personalização
 - 🎨 **Variáveis CSS** — temas fáceis sem sobrescrever componentes
 - 📦 **TypeScript** — segurança de tipo completa "out of the box"
@@ -42,7 +42,7 @@ src/
 │   ├── templates/      # Layouts completos
 │   └── pages/          # Integrações completas com dados
 ├── hooks/              # Hooks de propósito geral
-├── types/              # Tipos do TypeScript
+├── types/              # Tipos TypeScript
 ├── utils/              # Utilitários
 └── themes/             # Temas CSS e variáveis
 ```
@@ -78,7 +78,7 @@ function App() {
                 // Criar novo chat
             }}
             onDeleteChat={(chat) => {
-                // Deletar chat
+                // Excluir chat
             }}
         />
     );
@@ -115,7 +115,7 @@ Combinações simples de átomos:
 - `BaseMessage` — wrapper base para todos os tipos de mensagem
 - `ButtonGroup` — grupo de botões com suporte a orientação
 - `InputContext` — gerenciamento de contexto
-- `PromptInputBody` — área de texto com auto-redimensionamento
+- `PromptInputBody` — área de texto com crescimento automático
 - `PromptInputFooter` — rodapé com ícones de ação e botão de envio
 - `PromptInputHeader` — cabeçalho com itens de contexto e indicador
 - `PromptInputPanel` — painel para conteúdo personalizado
@@ -142,7 +142,7 @@ Layouts completos:
 
 - `ChatContent` — conteúdo principal do chat
 - `EmptyContainer` — estado vazio
-- `History` — histórico do chat
+- `History` — histórico de chat
 
 ### 📱 Páginas
 
@@ -164,7 +164,7 @@ O projeto utiliza o Playwright Component Testing para testes de regressão visua
 
 ### Executar testes
 
-**Importante**: Todos os testes devem ser executados via Docker para garantir capturas de tela consistentes em diferentes ambientes.
+**Importante**: Todos os testes devem ser executados via Docker para garantir capturas de tela consistentes entre diferentes ambientes.
 
 ```bash
 # Executar todos os testes de componente no Docker (recomendado)
@@ -193,7 +193,7 @@ npm run playwright
 npm run playwright:update
 ```
 
-Para documentação detalhada sobre testes, consulte o [Guia do Playwright](./playwright/README.md).
+Para documentação detalhada de testes, consulte [Guia do Playwright](./playwright/README.md).
 
 ## Desenvolvimento
 
@@ -202,3 +202,30 @@ As instruções de desenvolvimento e contribuição estão disponíveis em [CONT
 ## Licença
 
 MIT
+
+## Para agentes de IA
+
+Uma biblioteca de componentes React para construir interfaces de chat de IA, organizada por Atomic Design (átomos → moléculas → organismos → templates → páginas) e independente de SDK — utilize-a para montar uma UI de chat (listas de mensagens, entrada de prompt, chamadas de ferramentas, anexos) em vez de compor esses primitivos manualmente a partir do `@gravity-ui/uikit`.
+
+### Quando usar
+
+- Construindo uma UI de chat de IA/LLM (mensagens de assistente/usuário/ferramenta, entrada de prompt com sugestões, upload de anexos, estados de pensamento).
+- Desejando layouts de chat prontos (`ChatContainer`, `MessageList`, `PromptInput`) mais hooks para personalizar o comportamento.
+- Incorporando ao ecossistema Gravity UI com temas compartilhados via variáveis CSS.
+
+### Quando não usar
+
+- Para primitivos de UI de propósito geral (botões, entradas, modais), use [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) diretamente — AIKit é construído sobre ele para necessidades específicas de chat.
+- Para renderizar markdown rico em mensagens, o `MarkdownRenderer` do AIKit envolve o [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); para renderização de markdown independente, use esse pacote diretamente.
+- Para uma única bolha de chat sem orquestração de chat, um `MarkdownRenderer`/bloco de texto do uikit é mais leve do que o pipeline completo de mensagens do AIKit.
+
+### Armadilhas comuns
+
+- **Alucinar uma importação de SDK de IA** — AIKit é independente de SDK; ele fornece componentes/hooks, não um cliente LLM. Traga sua própria fonte de dados e alimente mensagens via props.
+- **Procurar por `<Chat>` / `<AIChat>`** — a exportação no nível da página é `ChatContainer` (e `AIStudioChat`); não há um componente literalmente chamado `Chat`.
+- **Pular o registro do tipo de mensagem para tipos personalizados** — tipos de mensagem personalizados devem ser registrados no sistema de tipos de mensagem, ou eles serão renderizados como desconhecidos.
+- **Editar componentes base em vez de usar hooks** — o design de dois níveis espera que você personalize via hooks/composição; substituir os internos diretamente quebra as atualizações.
+
+## Documentação para agentes de IA
+
+A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.

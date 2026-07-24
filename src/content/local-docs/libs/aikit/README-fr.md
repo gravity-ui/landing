@@ -20,15 +20,15 @@ Bibliothèque de composants UI pour les chats IA construite selon les principes 
 
 ## Description
 
-**@gravity-ui/aikit** est une bibliothèque de composants React flexible et extensible pour la création de chats IA de toute complexité. La bibliothèque fournit un ensemble de composants prêts à l'emploi qui peuvent être utilisés tels quels ou personnalisés pour répondre à vos besoins.
+**@gravity-ui/aikit** est une bibliothèque de composants React flexible et extensible pour construire des chats IA de toute complexité. La bibliothèque fournit un ensemble de composants prêts à l'emploi qui peuvent être utilisés tels quels ou personnalisés pour répondre à vos besoins.
 
 ### Fonctionnalités clés
 
 - 🎨 **Atomic Design** — hiérarchie claire des composants, des atomes aux pages
 - 🔧 **SDK Agnostique** — indépendant des SDK IA spécifiques
 - 🎭 **Approche à deux niveaux** — composants prêts à l'emploi + hooks pour la personnalisation
-- 🎨 **Variables CSS** — thèmes faciles sans remplacement de composants
-- 📦 **TypeScript** — sécurité de type complète prête à l'emploi
+- 🎨 **Variables CSS** — thèmes faciles sans surcharges de composants
+- 📦 **TypeScript** — sécurité de type complète dès le départ
 - 🔌 **Extensible** — système d'enregistrement de types de messages personnalisés
 
 ## Structure du projet
@@ -44,7 +44,7 @@ src/
 ├── hooks/              # Hooks à usage général
 ├── types/              # Types TypeScript
 ├── utils/              # Utilitaires
-└── themes/             # Thèmes CSS et variables
+└── themes/             # Thèmes et variables CSS
 ```
 
 ## Installation
@@ -93,7 +93,7 @@ La bibliothèque est construite selon les principes de l'**Atomic Design** :
 
 Éléments UI de base indivisibles sans logique métier :
 
-- `ActionButton` — bouton avec tooltip intégré
+- `ActionButton` — bouton avec info-bulle intégrée
 - `Alert` — messages d'alerte avec variantes
 - `ChatDate` — formatage de date avec dates relatives
 - `ContextIndicator` — indicateur d'utilisation du contexte de jeton
@@ -102,7 +102,7 @@ La bibliothèque est construite selon les principes de l'**Atomic Design** :
 - `Disclaimer` — composant de texte d'avertissement
 - `InlineCitation` — citations de texte
 - `Loader` — indicateur de chargement
-- `MarkdownRenderer` — rendu Yandex Flavored Markdown
+- `MarkdownRenderer` — rendu Markdown au format Yandex
 - `MessageBalloon` — conteneur de message
 - `Shimmer` — effet d'animation de chargement
 - `SubmitButton` — bouton de soumission avec états
@@ -121,8 +121,8 @@ Combinaisons simples d'atomes :
 - `PromptInputPanel` — panneau conteneur pour le contenu personnalisé
 - `Suggestions` — boutons de suggestion cliquables
 - `Tabs` — onglets de navigation avec fonctionnalité de suppression
-- `ToolFooter` — pied de page du message de l'outil avec actions
-- `ToolHeader` — en-tête du message de l'outil avec icône et actions
+- `ToolFooter` — pied de page de message d'outil avec actions
+- `ToolHeader` — en-tête de message d'outil avec icône et actions
 
 ### 🔶 Organismes
 
@@ -160,23 +160,23 @@ Intégrations complètes :
 
 ## Tests
 
-Le projet utilise le test de composant Playwright pour les tests de régression visuelle.
+Le projet utilise Playwright Component Testing pour les tests de régression visuelle.
 
 ### Exécuter les tests
 
 **Important** : Tous les tests doivent être exécutés via Docker pour garantir des captures d'écran cohérentes entre les différents environnements.
 
 ```bash
-# Exécuter tous les tests de composant dans Docker (recommandé)
+# Exécute tous les tests de composants dans Docker (recommandé)
 npm run playwright:docker
 
-# Mettre à jour les captures d'écran de référence dans Docker
+# Met à jour les bases de référence des captures d'écran dans Docker
 npm run playwright:docker:update
 
-# Exécuter un test spécifique par motif grep dans Docker
+# Exécute un test spécifique par motif grep dans Docker
 npm run playwright:docker -- --grep "@ComponentName"
 
-# Effacer le cache Docker si nécessaire
+# Efface le cache Docker si nécessaire
 npm run playwright:docker:clear-cache
 ```
 
@@ -185,11 +185,11 @@ npm run playwright:docker:clear-cache
 Si vous êtes sous Linux, vous pouvez exécuter les tests localement :
 
 ```bash
-# Installer les navigateurs Playwright (à exécuter une fois)
+# Installe les navigateurs Playwright (à exécuter une fois)
 npm run playwright:install
-# Exécuter tous les tests de composant
+# Exécute tous les tests de composants
 npm run playwright
-# Mettre à jour les captures d'écran de référence
+# Met à jour les bases de référence des captures d'écran
 npm run playwright:update
 ```
 
@@ -202,3 +202,30 @@ Les instructions de développement et de contribution sont disponibles dans [CON
 ## Licence
 
 MIT
+
+## Pour les agents IA
+
+Une bibliothèque de composants React pour la création d'interfaces de chat IA, organisée selon la conception atomique (atomes → molécules → organismes → modèles → pages) et indépendante du SDK — utilisez-la pour assembler une interface de chat (listes de messages, entrée de prompt, appels d'outils, pièces jointes) au lieu de composer ces primitives à partir de `@gravity-ui/uikit` manuellement.
+
+### Quand l'utiliser
+
+- Création d'une interface de chat IA/LLM (messages assistant/utilisateur/outil, entrée de prompt avec suggestions, téléchargements de pièces jointes, états de réflexion).
+- Besoin de mises en page de chat prêtes à l'emploi (`ChatContainer`, `MessageList`, `PromptInput`) ainsi que de hooks pour personnaliser le comportement.
+- Intégration dans l'écosystème Gravity UI avec un thème partagé via des variables CSS.
+
+### Quand ne pas l'utiliser
+
+- Pour des primitives d'interface utilisateur à usage général (boutons, champs de saisie, modales), utilisez [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) directement — AIKit s'appuie sur celui-ci pour les besoins spécifiques au chat.
+- Pour rendre du markdown riche dans les messages, le `MarkdownRenderer` d'AIKit encapsule [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor) ; pour un rendu markdown autonome, utilisez ce package directement.
+- Pour une seule bulle de chat sans orchestration de chat, un `MarkdownRenderer`/bloc de texte de uikit est plus léger que le pipeline de messages complet d'AIKit.
+
+### Pièges courants
+
+- **Halluciner une importation de SDK IA** — AIKit est indépendant du SDK ; il fournit des composants/hooks, pas un client LLM. Apportez votre propre source de données et alimentez les messages via les props.
+- **Rechercher `<Chat>` / `<AIChat>`** — l'exportation au niveau de la page est `ChatContainer` (et `AIStudioChat`) ; il n'y a pas de composant littéralement nommé `Chat`.
+- **Oublier d'enregistrer les types de messages personnalisés** — les types de messages personnalisés doivent être enregistrés dans le système de types de messages, sinon ils seront rendus comme inconnus.
+- **Modifier les composants de base au lieu d'utiliser des hooks** — la conception à deux niveaux s'attend à ce que vous personnalisiez via des hooks/composition ; la substitution directe des éléments internes rompt les mises à niveau.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.

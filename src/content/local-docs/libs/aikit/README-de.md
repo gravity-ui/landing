@@ -1,6 +1,6 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-UI-Komponentenbibliothek für KI-Chats, aufgebaut nach den Prinzipien des Atomic Design.
+UI-Komponentenbibliothek für KI-Chats, die nach den Prinzipien des Atomic Design entwickelt wurde.
 
 <!--GITHUB_BLOCK-->
 
@@ -43,7 +43,7 @@ src/
 │   └── pages/          # Vollständige Integrationen mit Daten
 ├── hooks/              # Allgemeine Hooks
 ├── types/              # TypeScript-Typen
-├── utils/              # Hilfsfunktionen
+├── utils/              # Hilfsprogramme
 └── themes/             # CSS-Themes und Variablen
 ```
 
@@ -53,7 +53,7 @@ src/
 npm install @gravity-ui/aikit
 ```
 
-## Schnelleinstieg
+## Erste Schritte
 
 ```typescript
 import { ChatContainer } from '@gravity-ui/aikit';
@@ -99,7 +99,7 @@ Grundlegende, unteilbare UI-Elemente ohne Geschäftslogik:
 - `ContextIndicator` — Anzeige der Nutzung von Token-Kontext
 - `ContextItem` — Kontext-Label mit Entfernungsaktion
 - `DiffStat` — Anzeige von Code-Änderungsstatistiken
-- `Disclaimer` — Komponente für Haftungsausschlusstexte
+- `Disclaimer` — Textkomponente für Haftungsausschlüsse
 - `InlineCitation` — Textzitate
 - `Loader` — Ladeanzeige
 - `MarkdownRenderer` — Yandex Flavored Markdown Renderer
@@ -155,10 +155,10 @@ Vollständige Integrationen:
 - [Schnellstart-Anleitung](./docs/GETTING_STARTED.md)
 - [Architektur](./docs/ARCHITECTURE.md)
 - [Projektstruktur](./docs/PROJECT_STRUCTURE.md)
-- [Testanleitung](./docs/TESTING.md)
+- [Test-Anleitung](./docs/TESTING.md)
 - [Playwright-Anleitung](./playwright/README.md)
 
-## Tests
+## Testen
 
 Das Projekt verwendet Playwright Component Testing für visuelle Regressionstests.
 
@@ -173,14 +173,14 @@ npm run playwright:docker
 # Screenshot-Baselines in Docker aktualisieren
 npm run playwright:docker:update
 
-# Spezifischen Test anhand eines Grep-Musters in Docker ausführen
+# Spezifischen Test nach Grep-Muster in Docker ausführen
 npm run playwright:docker -- --grep "@ComponentName"
 
 # Docker-Cache bei Bedarf löschen
 npm run playwright:docker:clear-cache
 ```
 
-### Lokale Tests (nur Linux)
+### Lokales Testen (nur Linux)
 
 Wenn Sie unter Linux arbeiten, können Sie Tests lokal ausführen:
 
@@ -197,8 +197,35 @@ Detaillierte Testdokumentation finden Sie in der [Playwright-Anleitung](./playwr
 
 ## Entwicklung
 
-Anweisungen zur Entwicklung und Mitarbeit finden Sie in [CONTRIBUTING.md](./CONTRIBUTING.md).
+Anleitungen zur Entwicklung und zum Beitrag finden Sie in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Lizenz
 
 MIT
+
+## Für KI-Agenten
+
+Eine React-Komponentenbibliothek zum Erstellen von KI-Chat-Oberflächen, organisiert nach Atomic Design (Atome → Moleküle → Organismen → Vorlagen → Seiten) und SDK-agnostisch – verwenden Sie sie, um eine Chat-UI (Nachrichtenlisten, Eingabeaufforderung, Tool-Aufrufe, Anhänge) zusammenzustellen, anstatt diese Primitiven von Hand aus `@gravity-ui/uikit` zu komponieren.
+
+### Wann verwenden
+
+- Erstellen einer KI/LLM-Chat-UI (Assistenten-/Benutzer-/Tool-Nachrichten, Eingabeaufforderung mit Vorschlägen, Anhänge-Uploads, Denkzustände).
+- Bereitgestellte Chat-Layouts (`ChatContainer`, `MessageList`, `PromptInput`) plus Hooks zur Anpassung des Verhaltens.
+- Einbettung in das Gravity UI-Ökosystem mit gemeinsam genutztem Theming über CSS-Variablen.
+
+### Wann nicht verwenden
+
+- Für allgemeine UI-Primitiven (Schaltflächen, Eingabefelder, Modale) verwenden Sie [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) direkt – AIKit baut darauf auf für Chat-spezifische Anforderungen.
+- Zum Rendern von Rich Markdown in Nachrichten umschließt der `MarkdownRenderer` von AIKit [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); für eigenständiges Markdown-Rendering verwenden Sie dieses Paket direkt.
+- Für eine einzelne Chat-Blase ohne Chat-Orchestrierung ist ein uikit `MarkdownRenderer`/Textblock leichter als die vollständige AIKit-Nachrichtenpipeline.
+
+### Häufige Fallstricke
+
+- **Halluzinieren eines KI-SDK-Imports** – AIKit ist SDK-agnostisch; es stellt Komponenten/Hooks bereit, keinen LLM-Client. Bringen Sie Ihre eigene Datenquelle mit und füttern Sie Nachrichten über Props.
+- **Verwendung von `<Chat>` / `<AIChat>`** – der Export auf Seitenebene ist `ChatContainer` (und `AIStudioChat`); es gibt keine Komponente, die buchstäblich `Chat` heißt.
+- **Überspringen der Registrierung von Nachrichtentypen für benutzerdefinierte Typen** – benutzerdefinierte Nachrichtenarten müssen im Nachrichtentypensystem registriert werden, sonst werden sie als unbekannt gerendert.
+- **Bearbeiten von Basiskomponenten anstelle der Verwendung von Hooks** – das zweistufige Design erwartet, dass Sie über Hooks/Komposition anpassen; das direkte Überschreiben interner Elemente bricht Upgrades.
+
+## Dokumentation für KI-Agenten
+
+Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.
