@@ -42,7 +42,19 @@ The base React component and design-token library for Gravity UI apps — contro
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/aikit/llms.txt)
 > GitHub: [gravity-ui/aikit](https://github.com/gravity-ui/aikit)
 
-A flexible React component library for building AI chats with Atomic Design principles.
+A React component library for building AI chat interfaces, organized by Atomic Design (atoms → molecules → organisms → templates → pages) and SDK-agnostic — reach for it to assemble a chat UI (message lists, prompt input, tool calls, attachments) instead of composing those primitives out of `@gravity-ui/uikit` by hand.
+
+#### When to use
+
+- Building an AI/LLM chat UI (assistant/user/tool messages, prompt input with suggestions, attachment uploads, thinking states).
+- Wanting ready-made chat layouts (`ChatContainer`, `MessageList`, `PromptInput`) plus hooks to customize behavior.
+- Embedding into the Gravity UI ecosystem with shared theming via CSS variables.
+
+#### When not to use
+
+- For general-purpose UI primitives (buttons, inputs, modals), use [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) directly — AIKit builds on top of it for chat-specific needs.
+- To render rich markdown in messages, AIKit's `MarkdownRenderer` wraps [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); for standalone markdown rendering use that package directly.
+- For a single chat bubble without chat orchestration, a uikit `MarkdownRenderer`/text block is lighter than the full AIKit message pipeline.
 
 ## App Layout — `@gravity-ui/app-layout`
 
@@ -255,7 +267,18 @@ Application-shell navigation components for Gravity UI apps — the collapsible 
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/nodekit/llms.txt)
 > GitHub: [gravity-ui/nodekit](https://github.com/gravity-ui/nodekit)
 
-A simple toolkit for your Node.js apps, scripts and libraries.
+A foundational Node.js toolkit (logging, telemetry, typed errors, config, request contexts) shared across Gravity UI backends — reach for it to get a consistent app spine before adding any HTTP layer, instead of assembling logging/error/config plumbing yourself.
+
+#### When to use
+
+- Any Node.js service/script that wants shared logging, telemetry (tracing), and a typed `AppError`.
+- Providing request-scoped context (logs/traces) across async boundaries.
+- Centralizing configuration so multiple services in the same ecosystem behave consistently.
+
+#### When not to use
+
+- To expose HTTP routes, middleware, or a server, use [`@gravity-ui/expresskit`](https://github.com/gravity-ui/expresskit) — it builds on top of NodeKit and adds the Express/HTTP layer.
+- For a standalone, single-file script with no logging/telemetry needs, plain Node APIs are lighter than the full NodeKit context system.
 
 ## Page constructor — `@gravity-ui/page-constructor`
 
