@@ -20,13 +20,13 @@
 
 ## 描述
 
-**@gravity-ui/aikit** 是一个灵活且可扩展的 React 组件库，用于构建任何复杂度的 AI 聊天。该库提供了一组现成的组件，您可以直接使用，也可以根据您的需求进行自定义。
+**@gravity-ui/aikit** 是一个灵活且可扩展的 React 组件库，用于构建任意复杂度的 AI 聊天。该库提供了一系列现成的组件，可以直接使用或根据您的需求进行定制。
 
 ### 主要特性
 
 - 🎨 **原子设计** — 从原子到页面的清晰组件层级结构
 - 🔧 **SDK 无关** — 不依赖于特定的 AI SDK
-- 🎭 **两级方法** — 现成组件 + 用于自定义的 Hooks
+- 🎭 **两级方法** — 现成组件 + 用于定制的 Hooks
 - 🎨 **CSS 变量** — 无需覆盖组件即可轻松实现主题化
 - 📦 **TypeScript** — 开箱即用的完整类型安全
 - 🔌 **可扩展** — 自定义消息类型注册系统
@@ -36,7 +36,7 @@
 ```
 src/
 ├── components/
-│   ├── atoms/          # 基本的不可分割 UI 元素
+│   ├── atoms/          # 基本不可分割的 UI 元素
 │   ├── molecules/      # 原子的简单组合
 │   ├── organisms/      # 带有逻辑的复杂组件
 │   ├── templates/      # 完整的布局
@@ -115,10 +115,10 @@ function App() {
 - `BaseMessage` — 所有消息类型的基本包装器
 - `ButtonGroup` — 支持方向的按钮组
 - `InputContext` — 上下文管理
-- `PromptInputBody` — 带自动增长的文本区域
+- `PromptInputBody` — 自动扩展的文本区域
 - `PromptInputFooter` — 带操作图标和提交按钮的页脚
 - `PromptInputHeader` — 带上下文项和指示器的页眉
-- `PromptInputPanel` — 自定义内容的面板容器
+- `PromptInputPanel` — 自定义内容面板容器
 - `Suggestions` — 可点击的建议按钮
 - `Tabs` — 带删除功能的导航标签页
 - `ToolFooter` — 带操作的工具消息页脚
@@ -167,7 +167,7 @@ function App() {
 **重要提示**: 所有测试都必须通过 Docker 运行，以确保不同环境中截图的一致性。
 
 ```bash
-# 在 Docker 中运行所有组件测试 (推荐)
+# 在 Docker 中运行所有组件测试（推荐）
 npm run playwright:docker
 
 # 在 Docker 中更新截图基线
@@ -180,12 +180,12 @@ npm run playwright:docker -- --grep "@ComponentName"
 npm run playwright:docker:clear-cache
 ```
 
-### 本地测试 (仅限 Linux)
+### 本地测试（仅限 Linux）
 
 如果您使用的是 Linux 系统，可以在本地运行测试：
 
 ```bash
-# 安装 Playwright 浏览器 (只需运行一次)
+# 安装 Playwright 浏览器（只需运行一次）
 npm run playwright:install
 # 运行所有组件测试
 npm run playwright
@@ -202,3 +202,30 @@ npm run playwright:update
 ## 许可证
 
 MIT
+
+## 致 AI 代理
+
+一个用于构建 AI 聊天界面的 React 组件库，遵循原子设计（原子 → 分子 → 器官 → 模板 → 页面）组织，并且 SDK 无关——您可以直接使用它来组装聊天 UI（消息列表、提示输入、工具调用、附件），而不是手动从 `@gravity-ui/uikit` 中组合这些基础组件。
+
+### 何时使用
+
+- 构建 AI/LLM 聊天 UI（助手/用户/工具消息、带建议的提示输入、附件上传、思考状态）。
+- 需要现成的聊天布局（`ChatContainer`、`MessageList`、`PromptInput`）以及用于自定义行为的 Hooks。
+- 嵌入到 Gravity UI 生态系统中，通过 CSS 变量共享主题。
+
+### 何时**不**使用
+
+- 对于通用 UI 组件（按钮、输入框、模态框），请直接使用 [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) — AIKit 在其基础上构建，以满足聊天特定需求。
+- 要在消息中渲染富文本 Markdown，AIKit 的 `MarkdownRenderer` 包装了 [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor)；如果需要独立的 Markdown 渲染，请直接使用该包。
+- 对于单个聊天气泡而无需聊天编排，使用 uikit 的 `MarkdownRenderer`/文本块比完整的 AIKit 消息流程更轻量。
+
+### 常见陷阱
+
+- **误以为导入了 AI SDK** — AIKit 是 SDK 无关的；它提供组件/Hooks，而不是 LLM 客户端。请自行提供数据源并通过 props 传递消息。
+- **寻找 `<Chat>` / `<AIChat>`** — 页面级别的导出是 `ChatContainer`（以及 `AIStudioChat`）；没有名为 `Chat` 的组件。
+- **跳过自定义类型的消息类型注册** — 自定义消息类型必须在消息类型系统中注册，否则将渲染为未知类型。
+- **直接编辑基础组件而非使用 Hooks** — 两层设计期望您通过 Hooks/组合进行自定义；直接覆盖内部实现会破坏升级。
+
+## AI 代理文档
+
+已安装版本的代理可读文档位于 `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`。
