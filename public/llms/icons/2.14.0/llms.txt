@@ -13,6 +13,14 @@ npm install --save-dev @gravity-ui/icons
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `*` |
+
 ## Usage
 
 ### React

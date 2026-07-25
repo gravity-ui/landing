@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/uikit@7.46.0`
+> Generated for `@gravity-ui/uikit@7.47.0`
 
 # @gravity-ui/uikit documentation
 
-Documentation for the **7.46.0** version of `@gravity-ui/uikit`.
+Documentation for the **7.47.0** version of `@gravity-ui/uikit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/uikit/build/docs/`).
@@ -34,182 +34,166 @@ The base React component and design-token library for Gravity UI apps — contro
 
 ### Useful docs
 
-- [Layout components and spacings](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/guides/layout.md)
-- [Theming, Colors & Branding](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/guides/theming.md)
-- [Typography](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/guides/typography.md)
+- [Layout components and spacings](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/layout.md)
+- [Theming, Colors & Branding](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming.md)
+- [Typography](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/typography.md)
 
 ## Install
 
 ```shell
-npm install --save-dev @gravity-ui/uikit
+npm install @gravity-ui/uikit
 ```
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@types/react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
 ## Usage
+
+### Prerequisites
+
+React 16.14, 17, 18, or 19 must be installed in your project.
+
+Import components directly from the package:
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
 
-const SubmitButton = <Button view="action" size="l" />;
+const SubmitButton = (
+  <Button view="action" size="l">
+    Submit
+  </Button>
+);
 ```
 
 ### Styles
 
-UIKit comes with base styling and theme. In order to everything look nice include this at the top of your entry file:
+Include the base styles and fonts once at the top of your app entry point:
 
 ```js
 // index.js
-
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
-
-// ...
 ```
 
-UIKit supports different themes: light, dark and their contrast variants. Your app must be rendered inside `ThemeProvider`:
+A SCSS mixins file with useful helpers is also available for use in your own stylesheets.
 
-```js
-import {createRoot} from 'react-dom/client';
-import {ThemeProvider} from '@gravity-ui/uikit';
+### Guides
 
-const root = createRoot(document.getElementById('root'));
-root.render(
-  <ThemeProvider theme="light">
-    <App />
-  </ThemeProvider>,
-);
-```
+Read more:
 
-It is possible to generate initial root CSS-classes during SSR to avoid theme flashing:
-
-```js
-import {getRootClassName} from '@gravity-ui/uikit/server';
-
-const theme = 'dark';
-const rootClassName = getRootClassName({theme});
-
-const html = `
-<html>
-  <body>
-    <div id="root" class="${rootClassName}"></div>
-  </body>
-</html>
-`;
-```
-
-Also, there is a SCSS mixins file with useful helpers to use in your app.
-
-### I18N
-
-Some components contain text tokens (words and phrases). They come in two languages: `en` (default) and `ru`.
-To set the language use `configure` function:
-
-```js
-// index.js
-
-import {configure} from '@gravity-ui/uikit';
-
-configure({
-  lang: 'ru',
-});
-```
+- [Theming](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming.md) — enable light, dark, and high-contrast themes
+- [Server-side rendering](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/server-side-rendering.md) — generate the root CSS class on the server
+- [Internationalization](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/i18n.md) — set the built-in component language
 
 ## Guides
 
-- [Layout components and spacings](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/guides/layout.md) — This guide covers UIKit's layout foundations: a shared spacing scale (--g-spacing-*, used everywhere via tokens and props) and a responsive grid (Container/Row/Col), plus the flexbox-based Flex/Box primitives built on top of them. Compose pages from these instead of raw divs and inline styles.
-- [Theming, Colors & Branding](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/guides/theming.md) — We use and recommend CSS variables for theming.
-- [Typography](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/guides/typography.md) — UIKit's type scale is a fixed set of text variants, each with predefined font-size and line-height. Render text with the Text component and a variant — not raw <h1>/<p> tags or inline font-size. This keeps sizing consistent and theme-aware across the app.
+- [Internationalization (I18N)](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/i18n.md) — English | Русский
+- [Layout components and spacings](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/layout.md) — This guide covers UIKit's layout foundations: a shared spacing scale (--g-spacing-*, used everywhere via tokens and props) and a responsive grid (Container/Row/Col), plus the flexbox-based Flex/Box primitives built on top of them. Compose pages from these instead of raw divs and inline styles.
+- [Server-Side Rendering](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/server-side-rendering.md) — English | Русский
+- [Theming, Colors & Branding](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming.md) — English | Русский
+- [Typography](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/typography.md) — UIKit's type scale is a fixed set of text variants, each with predefined font-size and line-height. Render text with the Text component and a variant — not raw <h1>/<p> tags or inline font-size. This keeps sizing consistent and theme-aware across the app.
+- [Интернационализация (I18N)](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/i18n-ru.md) — English | Русский
+- [Серверный рендеринг (SSR)](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/server-side-rendering-ru.md) — English | Русский
+- [Темизация](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming-ru.md) — English | Русский
 
 ## Components
 
-- [Accordion](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Accordion.md) — The Accordion component allows you to create collapsible content panels where users can show or hide sections of information. This is useful for organizing large amounts of content in a compact way.
-- [ActionsPanel](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/ActionsPanel.md) — Use an ActionsPanel to render multiple buttons in a row. When there is not enough space, buttons that don't fit will be added to an overflow menu.
-- [ActionTooltip](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/ActionTooltip.md) — Tooltip for labeling action buttons without descriptive text (e.g. icon buttons).
-- [Alert](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Alert.md) — The Alert component displays a prominent message to draw the user's attention to important information.
-- [ArrowToggle](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/ArrowToggle.md) — ArrowToggle is a component for displaying the chevron icon. It can rotate in four directions and can be used to display drop-down lists, cut components, etc.
-- [Avatar](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Avatar.md) — This component is intended for rendering avatars. It has three basic avatar types: image, icon, and text (name initials). All these types have special properties to configure the behavior and appearance.
-- [AvatarStack](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/AvatarStack.md) — This component is used for a stack of images with overlap over one another and, optionally, a control. It usually refers to user avatars.
-- [Breadcrumbs](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Breadcrumbs.md) — Breadcrumbs is a navigation element that shows the current location of a page within a website’s hierarchy. It provides links that allow users to return to higher levels in the hierarchy, making it easier to navigate through a website with multiple layers. Breadcrumbs are especially useful for large websites and applications with hierarchy-based structure of pages.
-- [Button](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Button.md) — Buttons act as a trigger for certain actions. While this is their main purpose, in some very rare cases, they can be used as links to navigate to other pages.
-- [Card](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Card.md) — Card is a reusable React component that basically is a card-like container with customizable styles and features. It is used to display information or content in a visually appealing and well-organized manner.
-- [Checkbox](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Checkbox.md) — The Checkbox component allows the user to select or deselect a specific value.
-- [ClipboardButton](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/ClipboardButton.md) — ClipboardButton is a ready-made button that copies given text to the clipboard and plays a success animation. It combines CopyToClipboard (the copy behavior) with ClipboardIcon (the animated icon).
-- [ClipboardIcon](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/ClipboardIcon.md) — ClipboardIcon is an animated copy icon that reflects the copy state (idle or success); it is meant to sit inside CopyToClipboard or ClipboardButton rather than be used on its own.
-- [controls/PasswordInput](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/controls/PasswordInput.md)
-- [controls/TextArea](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/controls/TextArea.md)
-- [controls/TextInput](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/controls/TextInput.md)
-- [CopyToClipboard](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/CopyToClipboard.md) — CopyToClipboard is a render-prop wrapper that copies text to the clipboard and exposes the copy status to its child, letting you render your own trigger; for a ready-made button use ClipboardButton.
-- [DefinitionList](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/DefinitionList.md) — The component to display definition list with term and definition separated by dots.
-- [Dialog](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Dialog.md) — Dialog is a modal window with a title, body, and footer actions, used for confirmations, forms, and prompts. It is built on top of Modal.
-- [Disclosure](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Disclosure.md) — Disclosure is a collapsible component that allows to display and hide its nested content.
-- [Divider](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Divider.md) — The Divider component is used as a thin line for delimiting and grouping elements to reinforce visual hierarchy.
-- [Drawer](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Drawer.md) — The Drawer component is a versatile interface element used in web applications to provide a sliding panel that emerges from the edge of the screen. This panel can house navigations, tools, or additional content. The component is implemented using React and CSS transitions for smooth animations.
-- [DropdownMenu](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/DropdownMenu.md) — The dropdown menu component provides item grouping, submenus, and a customizable toggle. The dropdown menu items are configured with the items property. By default, the menu toggle is a button with the ellipsis icon (⋯), which can be overridden with the renderSwitcher property.
-- [FilePreview](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/FilePreview.md) — FilePreview is a compact preview card for a single file, showing a thumbnail or file-type icon with the file name and optional actions.
-- [HelpMark](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/HelpMark.md) — A help icon that reveals contextual information in a popover on hover or click. Ideal for showing tips, explanations, or supporting content without taking up extra space in the interface.
-- [Hotkey](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Hotkey.md) — You can use the Hotkey component to display keyboard shortcuts for both Mac and PC.
-- [Icon](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Icon.md) — Icon renders an SVG glyph at a given size and color, taking the SVG as a React component or an imported asset. It serves as a single proxy for using SVGs across the codebase, which can be loaded through a React component or Webpack loaders such as SVGR, svg-react-loader, svg-inline-loader, or svg-sprite-loader.
-- [lab/ColorPicker](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/lab/ColorPicker.md)
-- [lab/FileDropZone](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/lab/FileDropZone.md)
-- [lab/Menu](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/lab/Menu.md)
-- [Label](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Label.md) — You can use Labels for highlighting certain information. A Label with the Close or Copy button may be useful for various simple actions.
-- [Link](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Link.md) — Link is a part of text that, when clicked, takes the user to another part of the page, another page within the service, or an external website page.
-- [List](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/List.md) — The List component renders a filterable, sortable, and virtualized list of items with support for custom rendering and keyboard navigation.
-- [Loader](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Loader.md) — The Loader component displays the loading progress as flashing bars. Unlike Spin, this component is used in global scenarios, e.g., for an entire page or Dialog.
-- [Menu](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Menu.md) — The Menu component enables easily creating views for action lists.
-- [Modal](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Modal.md) — The Modal component serves as base for creating pop-up windows with a backdrop above the rest of the content on a page. It disables scrolling while opening and manages focus for content. The Modal child components are rendered inside the Portal component. With Modal, you can implement dialogs, alerts, confirmations, and more.
-- [NumberInput](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/NumberInput.md) — NumberInput is a text field for entering numeric values, with optional stepper controls, min/max bounds, and value formatting.
-- [Overlay](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Overlay.md) — The Overlay component renders an overlay over the parent element with the relative position, i.e., the parent element must have position set to relative. For example, it can be used to preserve the desired layout while loading data.
-- [Pagination](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Pagination.md) — Pagination renders page-navigation controls — page numbers with previous/next buttons and an optional page-size selector — used for splitting long lists or tables across pages.
-- [Palette](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Palette.md) — The Palette component is used to display a grid of icons, emojis, reactions, and symbols which you can select or deselect.
-- [PinInput](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/PinInput.md) — PinInput is a group of inputs to enter sequence of numeric or alphanumeric values quickly. Its most common use case is entering OTP or confirmation codes received through text messages (SMS), emails, or authenticator apps.
-- [PlaceholderContainer](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/PlaceholderContainer.md) — PlaceholderContainer is a component for displaying content with an image, text content, and action controls.
-- [Popover](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Popover.md) — Popover shows floating, optionally interactive content (text, links, or buttons) anchored to a child element and opened on hover or click. It wraps Popup with built-in trigger interactivity, using the ReactElement passed via the children property as the trigger.
-- [Popup](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Popup.md) — Popup positions floating content above the page, anchored to a reference element — the low-level primitive behind tooltips, popovers, and menus, built on Floating UI. Its visibility is controlled with the open property; its children render inside the Portal component unless you set the disablePortal property.
-- [Portal](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Portal.md) — Portal is a utility component. Basically, it is a simple wrapper around React's createPortal that allows you to render children into a DOM node outside the parent component.
-- [Progress](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Progress.md) — The Progress component shows current operation progress. It can also be divided into sections.
-- [Radio](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Radio.md) — The Radio component allows the users to select a single option from a list of choices.
-- [RadioGroup](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/RadioGroup.md) — The RadioGroup component is used to create a group where users can select a single option from multiple choices.
-- [SegmentedRadioGroup](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/SegmentedRadioGroup.md) — The SegmentedRadioGroup component is used to create a group of radio buttons where users can select a single option from multiple choices.
-- [Select](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Select.md) — Select is a control that provides a list of options that a user can select.
-- [Select/hooks-public/useSelectOptions](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Select/hooks-public/useSelectOptions.md) — The useSelectOptions hook that helps to manage options data before passing into Select component. It could be handy in case of options management outside the component.
-- [Sheet](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Sheet.md) — Sheet is a component designed for using in the mobile context as an information or interactive element. You can place content of any size in it, since the internal scrolling and dynamic resizing are supported.
-- [Skeleton](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Skeleton.md) — The Skeleton component displays a placeholder preview of your content before the data gets loaded. This preview is shown in order to reduce the loading time frustration.
-- [Slider](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Slider.md) — The slider is a customizable and responsive React component that allows users to select a single value or a range of values from a specified data set.
-- [Spin](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Spin.md) — The Spin component displays the loading state (a rotating semicircle) in inline scenarios. Unlike Loader, this component is used to display the loading state in inline scenarios, e.g., in a Button or Label.
-- [Stepper](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Stepper.md) — Stepper guides users through a sequence of numbered steps, showing progress in a wizard-like, multi-step workflow.
-- [Switch](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Switch.md) — The Switch component is used to toggle between two states: typically, between on and off, or enabled and disabled.
-- [Table](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Table.md) — A Table allows selecting and sorting rows, as well as performing actions on a row.
-- [TableColumnSetup](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/TableColumnSetup.md) — The TableColumnSetup component provides a user interface for configuring table column visibility and order. It displays a button that opens a popup with a list of available columns, allowing users to show/hide columns and optionally reorder them via drag and drop.
-- [tabs](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/tabs.md) — Tabs components is used to explore, organize content and switch between different views.
-- [Text](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Text.md) — The Text component applies typography styles such as font variant, color, and text overflow handling to its content.
-- [Toaster](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Toaster.md) — This is a component for adjustable notifications also known as toasts.
-- [Toc](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Toc.md) — The Toc component is designed to display a table of contents of the page, namely showing a set items with two levels of hierarchy.
-- [Tooltip](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/Tooltip.md) — A simple text tip that uses its child node as an anchor. This component accepts only text content and may be an excellent alternative to the browser's title attribute with its small size and long appearance delay.
-- [User](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/User.md) — This is a general component for displaying a user avatar with an info block. It uses the Avatar component to render the avatar. It can also accept a custom React node as an avatar.
-- [UserLabel](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/components/UserLabel.md) — UserLabel is a compact chip with a user's avatar and name or email, suited for inline mentions and lists (use User for a larger profile block and Avatar for the picture alone).
+- [Accordion](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Accordion.md) — The Accordion component allows you to create collapsible content panels where users can show or hide sections of information. This is useful for organizing large amounts of content in a compact way.
+- [ActionsPanel](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ActionsPanel.md) — Use an ActionsPanel to render multiple buttons in a row. When there is not enough space, buttons that don't fit will be added to an overflow menu.
+- [ActionTooltip](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ActionTooltip.md) — Tooltip for labeling action buttons without descriptive text (e.g. icon buttons).
+- [Alert](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Alert.md) — The Alert component displays a prominent message to draw the user's attention to important information.
+- [ArrowToggle](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ArrowToggle.md) — ArrowToggle is a component for displaying the chevron icon. It can rotate in four directions and can be used to display drop-down lists, cut components, etc.
+- [Avatar](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Avatar.md) — This component is intended for rendering avatars. It has three basic avatar types: image, icon, and text (name initials). All these types have special properties to configure the behavior and appearance.
+- [AvatarStack](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/AvatarStack.md) — This component is used for a stack of images with overlap over one another and, optionally, a control. It usually refers to user avatars.
+- [Breadcrumbs](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Breadcrumbs.md) — Breadcrumbs is a navigation element that shows the current location of a page within a website’s hierarchy. It provides links that allow users to return to higher levels in the hierarchy, making it easier to navigate through a website with multiple layers. Breadcrumbs are especially useful for large websites and applications with hierarchy-based structure of pages.
+- [Button](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Button.md) — Buttons act as a trigger for certain actions. While this is their main purpose, in some very rare cases, they can be used as links to navigate to other pages.
+- [Card](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Card.md) — Card is a reusable React component that basically is a card-like container with customizable styles and features. It is used to display information or content in a visually appealing and well-organized manner.
+- [Checkbox](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Checkbox.md) — The Checkbox component allows the user to select or deselect a specific value.
+- [ClipboardButton](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ClipboardButton.md) — ClipboardButton is a ready-made button that copies given text to the clipboard and plays a success animation. It combines CopyToClipboard (the copy behavior) with ClipboardIcon (the animated icon).
+- [ClipboardIcon](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ClipboardIcon.md) — ClipboardIcon is an animated copy icon that reflects the copy state (idle or success); it is meant to sit inside CopyToClipboard or ClipboardButton rather than be used on its own.
+- [controls/PasswordInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/controls/PasswordInput.md)
+- [controls/TextArea](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/controls/TextArea.md)
+- [controls/TextInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/controls/TextInput.md)
+- [CopyToClipboard](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/CopyToClipboard.md) — CopyToClipboard is a render-prop wrapper that copies text to the clipboard and exposes the copy status to its child, letting you render your own trigger; for a ready-made button use ClipboardButton.
+- [DefinitionList](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/DefinitionList.md) — The component to display definition list with term and definition separated by dots.
+- [Dialog](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Dialog.md) — Dialog is a modal window with a title, body, and footer actions, used for confirmations, forms, and prompts. It is built on top of Modal.
+- [Disclosure](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Disclosure.md) — Disclosure is a collapsible component that allows to display and hide its nested content.
+- [Divider](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Divider.md) — The Divider component is used as a thin line for delimiting and grouping elements to reinforce visual hierarchy.
+- [Drawer](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Drawer.md) — The Drawer component is a versatile interface element used in web applications to provide a sliding panel that emerges from the edge of the screen. This panel can house navigations, tools, or additional content. The component is implemented using React and CSS transitions for smooth animations.
+- [DropdownMenu](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/DropdownMenu.md) — The dropdown menu component provides item grouping, submenus, and a customizable toggle. The dropdown menu items are configured with the items property. By default, the menu toggle is a button with the ellipsis icon (⋯), which can be overridden with the renderSwitcher property.
+- [FilePreview](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/FilePreview.md) — FilePreview is a compact preview card for a single file, showing a thumbnail or file-type icon with the file name and optional actions.
+- [HelpMark](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/HelpMark.md) — A help icon that reveals contextual information in a popover on hover or click. Ideal for showing tips, explanations, or supporting content without taking up extra space in the interface.
+- [Hotkey](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Hotkey.md) — You can use the Hotkey component to display keyboard shortcuts for both Mac and PC.
+- [Icon](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Icon.md) — Icon renders an SVG glyph at a given size and color, taking the SVG as a React component or an imported asset. It serves as a single proxy for using SVGs across the codebase, which can be loaded through a React component or Webpack loaders such as SVGR, svg-react-loader, svg-inline-loader, or svg-sprite-loader.
+- [lab/ColorPicker](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/lab/ColorPicker.md)
+- [lab/FileDropZone](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/lab/FileDropZone.md)
+- [lab/Menu](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/lab/Menu.md)
+- [Label](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Label.md) — You can use Labels for highlighting certain information. A Label with the Close or Copy button may be useful for various simple actions.
+- [Link](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Link.md) — Link is a part of text that, when clicked, takes the user to another part of the page, another page within the service, or an external website page.
+- [List](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/List.md) — The List component renders a filterable, sortable, and virtualized list of items with support for custom rendering and keyboard navigation.
+- [Loader](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Loader.md) — The Loader component displays the loading progress as flashing bars. Unlike Spin, this component is used in global scenarios, e.g., for an entire page or Dialog.
+- [Menu](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Menu.md) — The Menu component enables easily creating views for action lists.
+- [Modal](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Modal.md) — The Modal component serves as base for creating pop-up windows with a backdrop above the rest of the content on a page. It disables scrolling while opening and manages focus for content. The Modal child components are rendered inside the Portal component. With Modal, you can implement dialogs, alerts, confirmations, and more.
+- [NumberInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/NumberInput.md) — NumberInput is a text field for entering numeric values, with optional stepper controls, min/max bounds, and value formatting.
+- [Overlay](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Overlay.md) — The Overlay component renders an overlay over the parent element with the relative position, i.e., the parent element must have position set to relative. For example, it can be used to preserve the desired layout while loading data.
+- [Pagination](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Pagination.md) — Pagination renders page-navigation controls — page numbers with previous/next buttons and an optional page-size selector — used for splitting long lists or tables across pages.
+- [Palette](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Palette.md) — The Palette component is used to display a grid of icons, emojis, reactions, and symbols which you can select or deselect.
+- [PinInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/PinInput.md) — PinInput is a group of inputs to enter sequence of numeric or alphanumeric values quickly. Its most common use case is entering OTP or confirmation codes received through text messages (SMS), emails, or authenticator apps.
+- [PlaceholderContainer](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/PlaceholderContainer.md) — PlaceholderContainer is a component for displaying content with an image, text content, and action controls.
+- [Popover](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Popover.md) — Popover shows floating, optionally interactive content (text, links, or buttons) anchored to a child element and opened on hover or click. It wraps Popup with built-in trigger interactivity, using the ReactElement passed via the children property as the trigger.
+- [Popup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Popup.md) — Popup positions floating content above the page, anchored to a reference element — the low-level primitive behind tooltips, popovers, and menus, built on Floating UI. Its visibility is controlled with the open property; its children render inside the Portal component unless you set the disablePortal property.
+- [Portal](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Portal.md) — Portal is a utility component. Basically, it is a simple wrapper around React's createPortal that allows you to render children into a DOM node outside the parent component.
+- [Progress](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Progress.md) — The Progress component shows current operation progress. It can also be divided into sections.
+- [Radio](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Radio.md) — The Radio component allows the users to select a single option from a list of choices.
+- [RadioGroup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/RadioGroup.md) — The RadioGroup component is used to create a group where users can select a single option from multiple choices.
+- [SegmentedRadioGroup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/SegmentedRadioGroup.md) — The SegmentedRadioGroup component is used to create a group of radio buttons where users can select a single option from multiple choices.
+- [Select](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Select.md) — Select is a control that provides a list of options that a user can select.
+- [Select/hooks-public/useSelectOptions](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Select/hooks-public/useSelectOptions.md) — The useSelectOptions hook that helps to manage options data before passing into Select component. It could be handy in case of options management outside the component.
+- [Sheet](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Sheet.md) — Sheet is a component designed for using in the mobile context as an information or interactive element. You can place content of any size in it, since the internal scrolling and dynamic resizing are supported.
+- [Skeleton](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Skeleton.md) — The Skeleton component displays a placeholder preview of your content before the data gets loaded. This preview is shown in order to reduce the loading time frustration.
+- [Slider](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Slider.md) — The slider is a customizable and responsive React component that allows users to select a single value or a range of values from a specified data set.
+- [Spin](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Spin.md) — The Spin component displays the loading state (a rotating semicircle) in inline scenarios. Unlike Loader, this component is used to display the loading state in inline scenarios, e.g., in a Button or Label.
+- [Stepper](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Stepper.md) — Stepper guides users through a sequence of numbered steps, showing progress in a wizard-like, multi-step workflow.
+- [Switch](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Switch.md) — The Switch component is used to toggle between two states: typically, between on and off, or enabled and disabled.
+- [Table](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Table.md) — A Table allows selecting and sorting rows, as well as performing actions on a row.
+- [TableColumnSetup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/TableColumnSetup.md) — The TableColumnSetup component provides a user interface for configuring table column visibility and order. It displays a button that opens a popup with a list of available columns, allowing users to show/hide columns and optionally reorder them via drag and drop.
+- [tabs](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/tabs.md) — Tabs components is used to explore, organize content and switch between different views.
+- [Text](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Text.md) — The Text component applies typography styles such as font variant, color, and text overflow handling to its content.
+- [Toaster](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Toaster.md) — This is a component for adjustable notifications also known as toasts.
+- [Toc](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Toc.md) — The Toc component is designed to display a table of contents of the page, namely showing a set items with two levels of hierarchy.
+- [Tooltip](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Tooltip.md) — A simple text tip that uses its child node as an anchor. This component accepts only text content and may be an excellent alternative to the browser's title attribute with its small size and long appearance delay.
+- [User](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/User.md) — This is a general component for displaying a user avatar with an info block. It uses the Avatar component to render the avatar. It can also accept a custom React node as an avatar.
+- [UserLabel](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/UserLabel.md) — UserLabel is a compact chip with a user's avatar and name or email, suited for inline mentions and lists (use User for a larger profile block and Avatar for the picture alone).
 
 ## Hooks
 
-- [lab/useDropZone](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/lab/useDropZone.md)
-- [useActionHandlers](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useActionHandlers.md)
-- [useAsyncActionHandler](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useAsyncActionHandler.md)
-- [useCollapseChildren](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useCollapseChildren.md)
-- [useColorGenerator](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useColorGenerator.md)
-- [useControlledState](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useControlledState.md)
-- [useFileInput](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useFileInput.md)
-- [useFocusWithin](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useFocusWithin.md)
-- [useForkRef](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useForkRef.md)
-- [useIntersection](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useIntersection.md)
-- [useListNavigation](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useListNavigation.md)
-- [useOutsideClick](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useOutsideClick.md)
-- [usePortalContainer](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/usePortalContainer.md)
-- [useResizeObserver](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useResizeObserver.md)
-- [useSelect](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useSelect.md)
-- [useTimeout](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useTimeout.md)
-- [useUniqId](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useUniqId.md)
-- [useViewportSize](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useViewportSize.md)
-- [useVirtualElementRef](https://unpkg.com/@gravity-ui/uikit@7.46.0/build/docs/hooks/useVirtualElementRef.md)
+- [lab/useDropZone](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/lab/useDropZone.md)
+- [useActionHandlers](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useActionHandlers.md)
+- [useAsyncActionHandler](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useAsyncActionHandler.md)
+- [useCollapseChildren](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useCollapseChildren.md)
+- [useColorGenerator](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useColorGenerator.md)
+- [useControlledState](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useControlledState.md)
+- [useFileInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useFileInput.md)
+- [useFocusWithin](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useFocusWithin.md)
+- [useForkRef](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useForkRef.md)
+- [useIntersection](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useIntersection.md)
+- [useListNavigation](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useListNavigation.md)
+- [useOutsideClick](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useOutsideClick.md)
+- [usePortalContainer](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/usePortalContainer.md)
+- [useResizeObserver](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useResizeObserver.md)
+- [useSelect](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useSelect.md)
+- [useTimeout](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useTimeout.md)
+- [useUniqId](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useUniqId.md)
+- [useViewportSize](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useViewportSize.md)
+- [useVirtualElementRef](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useVirtualElementRef.md)
 
 ---
 
-> Docs for `@gravity-ui/uikit@7.46.0`. Versioned at: `https://gravity-ui.com/llms/uikit/7.46.0/llms.txt` (exact), `https://gravity-ui.com/llms/uikit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/uikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/uikit@7.47.0`. Versioned at: `https://gravity-ui.com/llms/uikit/7.47.0/llms.txt` (exact), `https://gravity-ui.com/llms/uikit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/uikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

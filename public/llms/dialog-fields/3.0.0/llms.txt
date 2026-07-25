@@ -10,6 +10,17 @@
 
 ```bash
 $ npm install @gravity-ui/dialog-fields
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
+| `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
+| `@gravity-ui/uikit` | `^5.0.0` |
+| `@bem-react/classname` | `^1.6.0` |
+
 # Use required version of react/react-dom in case you haven't installed them yet
 $ npm install @gravity-ui/dialog-fields react@18 react-dom@18
 ```

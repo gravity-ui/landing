@@ -13,6 +13,20 @@ npm install --save @gravity-ui/table
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0` |
+| `@dnd-kit/core` | `^6.0.0` |
+| `@gravity-ui/i18n` | `^1.0.0` |
+| `@dnd-kit/sortable` | `^8.0.0` |
+| `@gravity-ui/icons` | `^2.0.0` |
+| `@gravity-ui/uikit` | `^6.0.0` |
+
 ## Usage
 
 ```tsx
@@ -421,6 +435,54 @@ const ColumnReorderingExample = () => {
   return (
     <ColumnReorderingProvider table={table}>
       <Table table={table} />
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+### Row and column reordering together
+
+Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
+
+```tsx
+import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
+import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
+
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // update data array
+  }, []);
+
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
+
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
     </ColumnReorderingProvider>
   );
 };

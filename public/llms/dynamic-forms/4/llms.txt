@@ -13,6 +13,19 @@ npm install --save-dev @gravity-ui/dynamic-forms
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
+| `react-is` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
+| `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^6.0.0` |
+
 ## Usage
 
 ```jsx

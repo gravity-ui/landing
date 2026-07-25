@@ -20,6 +20,19 @@ export const renderLinks = (library, readmeUrl) => {
     return out;
 };
 
+// Peer dependencies block. Rendered from the package's own peerDependencies
+// (per version, from the npm packument) so an agent can reconcile the host
+// project's package.json without an extra lookup. Returns '' when none known.
+export const renderPeerDeps = (peerDependencies) => {
+    if (!peerDependencies) return '';
+    const entries = Object.entries(peerDependencies);
+    if (entries.length === 0) return '';
+    const rows = entries
+        .map(([name, range]) => `| \`${name}\` | \`${range}\` |`)
+        .join('\n');
+    return `## Peer dependencies\n\nInstall these in the host project at a compatible version:\n\n| Package | Version range |\n| --- | --- |\n${rows}\n\n`;
+};
+
 // From a package's agent prose, pull only the named `###` subsections (e.g.
 // "When to use", "When not to use"), dropping the rest (Common pitfalls, Useful
 // docs, lead-in text). Headings are bumped one level to nest under `###`.

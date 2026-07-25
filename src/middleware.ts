@@ -82,5 +82,8 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-    matcher: ['/', '/((?!_next|api|favicon|static|manifest).*)'],
+    // `llms` excludes the static llms.txt / llms-full.txt / llms/** docs so they
+    // are served as-is regardless of Accept-Language (locale detection would
+    // otherwise redirect e.g. /llms.txt to /ru/llms.txt, which 404s).
+    matcher: ['/', '/((?!_next|api|favicon|static|manifest|llms).*)'],
 };

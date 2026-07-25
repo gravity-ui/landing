@@ -13,6 +13,17 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.8.0 || ^17 || ^18 || ^19` |
+| `react-dom` | `^16.8.0 || ^17 || ^18 || ^19` |
+| `@gravity-ui/icons` | `^2.13.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
 ## Usage
 
 ### DashKit configuration

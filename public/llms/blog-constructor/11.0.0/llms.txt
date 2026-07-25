@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/blog-constructor@9.1.2`
+> Generated for `@gravity-ui/blog-constructor@11.0.0`
 
 # Blog Constructor
 
@@ -15,6 +15,17 @@ npm install @gravity-ui/blog-constructor
 
 > Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md) for full documentation.
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@diplodoc/transform` | `^4.10.7` |
+| `@gravity-ui/page-constructor` | `^8.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
 ## Links
 
 - [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md)
@@ -24,4 +35,4 @@ npm install @gravity-ui/blog-constructor
 
 ---
 
-> Docs for `@gravity-ui/blog-constructor@9.1.2`. Versioned at: `https://gravity-ui.com/llms/blog-constructor/9.1.2/llms.txt` (exact), `https://gravity-ui.com/llms/blog-constructor/9/llms.txt` (latest of major 9), `https://gravity-ui.com/llms/blog-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/blog-constructor@11.0.0`. Versioned at: `https://gravity-ui.com/llms/blog-constructor/11.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/blog-constructor/11/llms.txt` (latest of major 11), `https://gravity-ui.com/llms/blog-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

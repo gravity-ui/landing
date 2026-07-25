@@ -6,6 +6,14 @@
 >
 > **npm:** `@gravity-ui/nodekit` — check the installed major version in the user's `package.json` and read docs matching it.
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `axios` | `^1.7.7` |
+
 ## Usage
 
 Add dependency to your project:

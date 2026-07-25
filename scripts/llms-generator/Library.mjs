@@ -4,7 +4,7 @@ import {cleanMarkdown, parsePackageReadme} from '@gravity-ui/readme-validator';
 
 import {libs} from '../../src/libs.mjs';
 
-import {renderAgentBlock, renderLinks} from './catalog.mjs';
+import {renderAgentBlock, renderLinks, renderPeerDeps} from './catalog.mjs';
 import {
     DOCS_INDEX_PATHS,
     LAST_MAJORS,
@@ -75,7 +75,8 @@ export class Library {
     // --- async fetchers (cached on the instance) ---
 
     // All stable (non-prerelease) versions from the npm registry, semver-descending.
-    // Returns [] on failure.
+    // Returns [] on failure. As a side effect, caches per-version peerDependencies
+    // from the same packument so getPeerDependencies() needs no extra fetch.
     async getAllVersions() {
         if (this._cache.allVersions !== undefined) return this._cache.allVersions;
         let versions = [];
@@ -84,9 +85,17 @@ export class Library {
             const raw = await fetchRaw(url);
             if (raw) {
                 try {
-                    versions = Object.keys(JSON.parse(raw).versions || {})
+                    const byVersion = JSON.parse(raw).versions || {};
+                    versions = Object.keys(byVersion)
                         .filter((v) => !v.includes('-'))
                         .sort(compareVersions);
+                    // Stash peerDependencies per version for getPeerDependencies().
+                    this._cache.peerDependencies ||= {};
+                    for (const v of versions) {
+                        const peers = byVersion[v]?.peerDependencies;
+                        this._cache.peerDependencies[v] =
+                            peers && typeof peers === 'object' ? peers : null;
+                    }
                 } catch (error) {
                     console.warn(
                         `[LLMS-GENERATOR] Failed to parse npm registry for ${this.id}:`,
@@ -97,6 +106,18 @@ export class Library {
         }
         this._cache.allVersions = versions;
         return versions;
+    }
+
+    // Per-version peerDependencies from the npm packument (extracted in
+    // getAllVersions). Returns the {name: range} object, or null when unknown
+    // (registry unreachable / the version has no peerDependencies).
+    async getPeerDependencies(version) {
+        if (this._cache.peerDependencies === undefined) {
+            this._cache.peerDependencies = null;
+            await this.getAllVersions();
+        }
+        if (!version) return null;
+        return (this._cache.peerDependencies || {})[version] || null;
     }
 
     async getRecentVersions(limit = 5) {
@@ -324,11 +345,32 @@ export class Library {
         ].join('\n');
     }
 
+    // Place a pre-rendered block right after the ## Install section (i.e. before
+    // the next heading). When the body has no Install section, place it right
+    // after the opening header, before the first ## subsection. peerBlock is '' if
+    // there is nothing to insert, in which case the body is returned unchanged.
+    _insertAfterInstall(body, peerBlock) {
+        if (!peerBlock) return body;
+        const installMatch = body.match(/^## Install[^\n]*\n/m);
+        let at;
+        if (installMatch) {
+            const start = installMatch.index + installMatch[0].length;
+            const next = body.slice(start).match(/\n(?=#{1,6}\s)/);
+            at = next ? start + next.index + 1 : body.length;
+        } else {
+            const firstSub = body.match(/^## /m);
+            at = firstSub ? firstSub.index : body.length;
+        }
+        return body.slice(0, at) + peerBlock + body.slice(at);
+    }
+
     // When the package ships a published INDEX.md for this version, use it as the
     // authoritative per-component reference (substituting the concrete version for
     // the `**installed**` placeholder). Otherwise fall back to assembling a page
     // from the README's `## For AI agents` section. Either way the file is
-    // prefixed with the version it was generated for and ends with a URL footnote.
+    // prefixed with the version it was generated for, includes the package's
+    // peerDependencies for this version (after the Install section), and ends
+    // with a URL footnote.
     async buildPackageLlms({descriptions, version}) {
         const banner = this._versionBanner(version);
         const footnote = this._versionFootnote(version);
@@ -338,7 +380,9 @@ export class Library {
                   .replace(/\*\*installed\*\*/g, `**${version}**`)
                   .trim()}\n`
             : await this._buildAssembledPackageLlms({descriptions});
-        return `${banner}${body}\n${footnote}`;
+        const peers = await this.getPeerDependencies(version);
+        const bodyWithPeers = this._insertAfterInstall(body, renderPeerDeps(peers));
+        return `${banner}${bodyWithPeers}\n${footnote}`;
     }
 
     async _buildAssembledPackageLlms({descriptions}) {

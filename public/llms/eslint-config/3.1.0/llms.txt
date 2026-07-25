@@ -13,6 +13,15 @@ npm install --save-dev eslint @gravity-ui/eslint-config
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `eslint` | `^8.0.0` |
+| `prettier` | `^3.0.0` |
+
 ## Usage
 
 Add `eslint.config.js` file in your project with the following content:

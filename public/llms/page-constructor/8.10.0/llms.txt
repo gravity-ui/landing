@@ -13,6 +13,16 @@ npm install @gravity-ui/page-constructor
 ```
 
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
 ## Usage
 
 First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.

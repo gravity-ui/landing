@@ -15,6 +15,15 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 
 > Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
 
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@gravity-ui/uikit` | `^7.0.0` |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
 ## Links
 
 - [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
