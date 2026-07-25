@@ -1,12 +1,12 @@
 # Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Componente React basado en plugins que proporciona una interfaz de renderizado unificada para múltiples bibliotecas de gráficos. Registras uno o más plugins y renderizas gráficos a través de `<ChartKit type="..." data={...} />` — ChartKit se encarga de enviar la solicitud al renderizador correcto automáticamente.
+Componente React basado en plugins que proporciona una interfaz de renderizado unificada para múltiples bibliotecas de gráficos. Registras uno o más plugins y renderizas gráficos a través de `<ChartKit type="..." data={...} />` — ChartKit se encarga de enviarlo al renderizador correcto automáticamente.
 
-Cada renderizador de plugin se carga de forma diferida (lazy-loaded), por lo que el código de la biblioteca subyacente solo se descarga cuando ChartKit se renderiza realmente en la interfaz de usuario. ChartKit también maneja la visualización de tooltips amigables para dispositivos móviles de forma nativa. Puedes usar los plugins integrados o implementar los tuyos propios.
+Cada renderizador de plugin se carga de forma diferida (lazy-loaded), por lo que el código de la biblioteca subyacente solo se descarga cuando ChartKit se renderiza realmente en la interfaz de usuario. ChartKit también maneja la visualización de tooltips amigables para móviles de forma nativa. Puedes usar los plugins integrados o implementar los tuyos propios.
 
 **Cuándo usarlo:**
 
-- Necesitas gráficos modernos declarativos (`gravity-charts`) o gráficos de series temporales / de monitorización (`yagr`).
+- Necesitas gráficos declarativos modernos (`gravity-charts`) o gráficos de series temporales / monitorización (`yagr`).
 - Necesitas múltiples tipos de gráficos bajo una única API consistente.
 - Estás desarrollando dentro del ecosistema de Gravity UI.
 
@@ -16,7 +16,7 @@ Cada renderizador de plugin se carga de forma diferida (lazy-loaded), por lo que
 
 ## Tabla de contenidos
 
-- [Primeros pasos](#get-started)
+- [Primeros pasos](#getting-started)
 - [Actualización de paquetes de gráficos](#updating-charting-packages)
 - [Desarrollo](#development)
 
@@ -24,8 +24,8 @@ Cada renderizador de plugin se carga de forma diferida (lazy-loaded), por lo que
 
 ### Requisitos
 
-- React 16, 17 o 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dependencia peer requerida (proporciona theming y primitivas de UI)
+- React 16, 17 o 18.
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — dependencia peer requerida (proporciona theming y primitivas de UI).
 
 ### Instalación
 
@@ -42,7 +42,7 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-Para obtener detalles completos de la configuración, consulta la [guía de estilos de uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+Para detalles completos de configuración, consulta la [guía de estilos de uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ### Uso básico
 
@@ -100,7 +100,7 @@ export default function App() {
 
 ## Actualización de paquetes de gráficos
 
-ChartKit agrupa dos bibliotecas de gráficos de Gravity UI como dependencias:
+ChartKit incluye dos bibliotecas de gráficos de Gravity UI como dependencias:
 
 - [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) — potencia el plugin `gravity-charts`.
 - [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — potencia el plugin `yagr`.
@@ -111,8 +111,8 @@ Si necesitas una versión más reciente de uno de estos paquetes, abre una solic
 
 ### Prerrequisitos
 
-- [Node.js](https://nodejs.org/) 22 (ver [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
-- [npm](https://www.npmjs.com/) 10 o posterior
+- [Node.js](https://nodejs.org/) 22 (ver [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc)).
+- [npm](https://www.npmjs.com/) 10 o posterior.
 
 ### Configuración
 
@@ -132,7 +132,7 @@ npm run start
 
 Storybook estará disponible en `http://localhost:7007`.
 
-### Desarrollo con una dependencia local
+### Desarrollar con una dependencia local
 
 Para trabajar en una dependencia (por ejemplo, `@gravity-ui/charts`) y ver tus cambios en vivo en Storybook sin publicarlos en npm:
 
@@ -203,6 +203,37 @@ Para actualizar las capturas de pantalla de referencia después de cambios inten
 npm run test:docker:update
 ```
 
-### Contribución
+### Contribuir
 
-Por favor, consulta la [guía de contribución](CONTRIBUTING.md) antes de enviar una solicitud de extracción (pull request).
+Por favor, consulta la [guía de contribución](CONTRIBUTING.md) antes de enviar una pull request.
+
+## Licencia
+
+Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.
+
+## Para agentes de IA
+
+Un componente de React que distribuye plugins y renderiza gráficos de múltiples bibliotecas de gráficos de Gravity UI a través de una única API `<ChartKit type="..." data={...} />`. Úsalo cuando necesites un punto de entrada único de carga diferida para tipos de gráficos mixtos, en lugar de importar cada biblioteca de gráficos directamente.
+
+### Cuándo usarlo
+
+- Renderizar más de un motor de gráficos (por ejemplo, `gravity-charts` + `yagr`) bajo un componente consistente.
+- Carga diferida de paquetes de gráficos: el renderizador de cada plugin es `React.lazy`, por lo que el código de una biblioteca solo se descarga cuando su tipo de gráfico se muestra realmente.
+- Agrupar gráficos en una aplicación Gravity UI que desee tooltips amigables para móviles y temas unificados de inmediato.
+
+### Cuándo no usarlo
+
+- Para un solo tipo de gráfico, importa [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) o [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (series temporales de alto rendimiento) directamente; el registro de plugins es una sobrecarga para un solo motor.
+- Para componer una cuadrícula de panel de control con widgets, usa [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit); ChartKit renderiza un gráfico; DashKit organiza varios widgets.
+
+### Errores comunes
+
+- **Renderizar `<ChartKit>` antes de `settings.set({plugins: [...]})`**: el registro global de plugins debe estar poblado en el punto de entrada de la aplicación; un `type` no registrado lanzará un error en tiempo de renderizado.
+- **Prop `chartType` / `library` alucinada**: la prop de distribución es `type` (por ejemplo, `type="gravity-charts"`), y los datos son `data`.
+- **Olvidar la altura del contenedor**: `ChartKit` llena su padre; sin una altura explícita en el contenedor, el gráfico colapsa a cero.
+- **Esperar que los plugins estén incluidos en el paquete**: los renderizadores de plugins (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) son diferidos; la primera renderización de un tipo descarga su paquete.
+- **Falta la importación de estilos de uikit**: la tematización depende de `@gravity-ui/uikit/styles/styles.css`; sin ella, los gráficos se renderizan sin estilo.
+
+## Documentación para agentes de IA
+
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/chartkit/build/docs/INDEX.md`.
