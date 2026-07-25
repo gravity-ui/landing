@@ -1,12 +1,12 @@
 # Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-一个基于插件的 React 组件，为多个图表库提供统一的渲染接口。您可以注册一个或多个插件，然后通过 `<ChartKit type="..." data={...} />` 来渲染图表 — ChartKit 会自动分发到正确的渲染器。
+一个基于插件的 React 组件，为多个图表库提供统一的渲染接口。您注册一个或多个插件，然后通过 `<ChartKit type="..." data={...} />` 渲染图表 — ChartKit 会自动分发到正确的渲染器。
 
-每个插件渲染器都支持懒加载，这意味着底层库的代码仅在 ChartKit 实际渲染到 UI 时才会被下载。ChartKit 还开箱即用地处理了移动端友好的工具提示显示。您可以直接使用内置插件，也可以实现自己的插件。
+每个插件渲染器都是惰性加载的，因此底层库代码仅在 ChartKit 实际渲染到 UI 时才会被下载。ChartKit 还开箱即用地处理了移动端友好的工具提示显示。您可以直接使用内置插件，也可以实现自己的插件。
 
 **何时使用：**
 
-- 您需要现代的声明式图表 (`gravity-charts`) 或时间序列/监控图表 (`yagr`)
+- 您需要现代声明式图表 (`gravity-charts`) 或时间序列/监控图表 (`yagr`)
 - 您需要在单一一致的 API 下使用多种图表类型
 - 您正在 Gravity UI 生态系统中进行开发
 
@@ -16,7 +16,7 @@
 
 ## 目录
 
-- [入门](#get-started)
+- [入门](#getting-started)
 - [更新图表包](#updating-charting-packages)
 - [开发](#development)
 
@@ -111,7 +111,7 @@ ChartKit 将两个 Gravity UI 图表库作为依赖项捆绑：
 
 ### 先决条件
 
-- [Node.js](https://nodejs.org/) 22 (参见 [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
+- [Node.js](https://nodejs.org/) 22 (请参阅 [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
 - [npm](https://www.npmjs.com/) 10 或更高版本
 
 ### 设置
@@ -153,7 +153,7 @@ npm link @gravity-ui/charts
 
 **2. 配置本地包的监视**
 
-在 ChartKit 的根目录下创建一个 `.env.local` 文件（它会被 gitignore）：
+在 ChartKit 的根目录创建一个 `.env.local` 文件（它会被 gitignore）：
 
 ```shell
 LOCAL_PKG=@gravity-ui/charts
@@ -206,3 +206,34 @@ npm run test:docker:update
 ### 贡献
 
 在提交拉取请求之前，请参阅 [贡献指南](CONTRIBUTING.md)。
+
+## 许可证
+
+MIT 协议发布。详情请参阅 [LICENSE](LICENSE)。
+
+## 适用于 AI 代理
+
+一个插件分发的 React 组件，通过单一的 `<ChartKit type="..." data={...} />` API 渲染多个 Gravity UI 图表库的图表——当您需要一个统一的、支持懒加载的入口点来处理混合图表类型时，请使用它，而不是直接导入每个图表库。
+
+### 何时使用
+
+- 在一个统一的组件背后渲染多个图表引擎（例如 `gravity-charts` + `yagr`）。
+- 懒加载图表包——每个插件的渲染器都是 `React.lazy`，因此一个库的代码仅在其实际显示图表类型时才会被获取。
+- 将图表打包到 Gravity UI 应用中，该应用希望开箱即用地获得移动友好型工具提示和统一的主题。
+
+### 何时避免使用
+
+- 如果只使用一种图表类型，请直接导入 [`@gravity-ui/charts`](https://github.com/gravity-ui/charts)（通用）或 [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr)（高性能时间序列）——插件注册表对于单个引擎来说是额外的开销。
+- 要组合一个包含小部件的仪表板网格，请使用 [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit)——ChartKit 渲染图表；DashKit 安排多个小部件。
+
+### 常见陷阱
+
+- **在 `settings.set({plugins: [...]})` 之前渲染 `<ChartKit>`**——全局插件注册表必须在应用程序入口处填充；未注册的 `type` 会在渲染时抛出错误。
+- **错误的 `chartType` / `library` 属性**——分发属性是 `type`（例如 `type="gravity-charts"`），数据是 `data`。
+- **忘记容器高度**——`ChartKit` 会填充其父容器；如果没有为包装器设置显式高度，图表将收缩为零。
+- **期望插件已打包**——插件渲染器（`@gravity-ui/chartkit/gravity-charts`、`.../yagr`）是懒加载的；第一次渲染某个类型时会获取其包。
+- **缺少 uikit 样式导入**——主题依赖于 `@gravity-ui/uikit/styles/styles.css`；没有它，图表将渲染为未样式化。
+
+## 适用于 AI 代理的文档
+
+已安装版本的代理可读文档位于 `node_modules/@gravity-ui/chartkit/build/docs/INDEX.md`。

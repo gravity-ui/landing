@@ -1,24 +1,24 @@
 # Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Composant React basé sur des plugins qui offre une interface de rendu unifiée pour plusieurs bibliothèques de graphiques. Vous enregistrez un ou plusieurs plugins et affichez les graphiques via `<ChartKit type="..." data={...} />` — ChartKit distribue automatiquement vers le bon rendu.
+Composant React basé sur des plugins qui offre une interface de rendu unifiée pour plusieurs bibliothèques de graphiques. Vous enregistrez un ou plusieurs plugins et affichez les graphiques via `<ChartKit type="..." data={...} />` — ChartKit distribue automatiquement vers le bon moteur de rendu.
 
-Chaque rendu de plugin est chargé à la demande (lazy-loaded), de sorte que le code de la bibliothèque sous-jacente n'est téléchargé que lorsque ChartKit est effectivement rendu dans l'interface utilisateur. ChartKit gère également l'affichage des infobulles adaptées aux mobiles dès l'installation. Vous pouvez utiliser les plugins intégrés ou implémenter les vôtres.
+Chaque moteur de rendu de plugin est chargé à la demande (lazy-loaded), de sorte que le code de la bibliothèque sous-jacente n'est téléchargé que lorsque ChartKit est effectivement rendu dans l'interface utilisateur. ChartKit gère également l'affichage des infobulles adaptées aux mobiles dès l'installation. Vous pouvez utiliser les plugins intégrés ou implémenter les vôtres.
 
 **Quand l'utiliser :**
 
-- Vous avez besoin de graphiques déclaratifs modernes (`gravity-charts`) ou de graphiques de séries temporelles / de surveillance (`yagr`)
-- Vous avez besoin de plusieurs types de graphiques sous une seule API cohérente
-- Vous développez dans l'écosystème Gravity UI
+- Vous avez besoin de graphiques déclaratifs modernes (`gravity-charts`) ou de graphiques de séries temporelles / de surveillance (`yagr`).
+- Vous avez besoin de plusieurs types de graphiques sous une seule API cohérente.
+- Vous développez dans l'écosystème Gravity UI.
 
 **Quand ne pas l'utiliser :**
 
-- Vous n'avez besoin que d'une seule bibliothèque de graphiques spécifique — préférez utiliser [@gravity-ui/charts](https://github.com/gravity-ui/charts) directement
+- Vous n'avez besoin que d'une seule bibliothèque de graphiques spécifique — préférez utiliser [@gravity-ui/charts](https://github.com/gravity-ui/charts) directement.
 
 ## Table des matières
 
-- [Démarrage](#démarrage)
-- [Mise à jour des packages de graphiques](#mise-à-jour-des-packages-de-graphiques)
-- [Développement](#développement)
+- [Démarrage](#getting-started)
+- [Mise à jour des packages de graphiques](#updating-charting-packages)
+- [Développement](#development)
 
 ## Démarrage
 
@@ -46,7 +46,7 @@ Pour des détails complets sur la configuration, consultez le [guide des styles 
 
 ### Utilisation de base
 
-ChartKit utilise un registre global de plugins. Appelez `settings.set` une seule fois au point d'entrée de votre application pour enregistrer les plugins dont vous avez besoin. Lorsque `<ChartKit type="..." />` est rendu, il recherche le plugin correspondant — si aucun n'est trouvé, une erreur est levée. Le rendu de chaque plugin est un composant `React.lazy`, son code est donc récupéré uniquement lorsque ChartKit apparaît pour la première fois dans l'interface utilisateur.
+ChartKit utilise un registre global de plugins. Appelez `settings.set` une seule fois au point d'entrée de votre application pour enregistrer les plugins dont vous avez besoin. Lorsque `<ChartKit type="..." />` est rendu, il recherche le plugin correspondant — si aucun n'est trouvé, une erreur est levée. Le moteur de rendu de chaque plugin est un composant `React.lazy`, son code est donc récupéré uniquement lorsque ChartKit apparaît pour la première fois dans l'interface utilisateur.
 
 Vous pouvez enregistrer plusieurs plugins à la fois :
 
@@ -105,14 +105,14 @@ ChartKit regroupe deux bibliothèques de graphiques Gravity UI comme dépendance
 - [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) — alimente le plugin `gravity-charts`
 - [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — alimente le plugin `yagr`
 
-Si vous avez besoin d'une version plus récente de l'un de ces packages, ouvrez une demande de mise à jour de package [Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) et sélectionnez le(s) package(s) dont vous avez besoin. Les mainteneurs mettront à jour les packages sélectionnés et publieront la mise à jour.
+Si vous avez besoin d'une version plus récente de l'un de ces packages, ouvrez une demande de mise à jour de package ([Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml)) et sélectionnez le(s) package(s) dont vous avez besoin. Les mainteneurs mettront à jour les packages sélectionnés et publieront la mise à jour.
 
 ## Développement
 
 ### Prérequis
 
 - [Node.js](https://nodejs.org/) 22 (voir [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
-- [npm](https://www.npmjs.com/) 10 ou supérieur
+- [npm](https://www.npmjs.com/) 10 ou plus récent
 
 ### Configuration
 
@@ -143,7 +143,7 @@ Pour travailler sur une dépendance (par exemple `@gravity-ui/charts`) et voir v
 git clone https://github.com/gravity-ui/charts.git
 cd charts
 npm ci
-# faites vos modifications
+# apportez vos modifications
 npm run build
 npm link
 
@@ -206,3 +206,34 @@ npm run test:docker:update
 ### Contribution
 
 Veuillez vous référer au [guide de contribution](CONTRIBUTING.md) avant de soumettre une pull request.
+
+## Licence
+
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
+
+## Pour les agents IA
+
+Un composant React qui distribue des plugins et rend des graphiques à partir de plusieurs bibliothèques de graphiques Gravity UI via une seule API `<ChartKit type="..." data={...} />`. Utilisez-le lorsque vous avez besoin d'un point d'entrée unique pour le chargement différé de types de graphiques mixtes, au lieu d'importer chaque bibliothèque de graphiques directement.
+
+### Quand l'utiliser
+
+- Pour rendre plus d'un moteur de graphique (par exemple, `gravity-charts` + `yagr`) derrière un composant cohérent.
+- Pour le chargement différé des bundles de graphiques — le rendu de chaque plugin est `React.lazy`, donc le code d'une bibliothèque n'est récupéré que lorsque son type de graphique est réellement affiché.
+- Pour regrouper des graphiques dans une application Gravity UI qui souhaite des infobulles adaptées aux mobiles et un thème unifié dès le départ.
+
+### Quand ne pas l'utiliser
+
+- Pour un seul type de graphique, importez directement [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (général) ou [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (séries temporelles haute performance) — le registre des plugins représente une surcharge pour un seul moteur.
+- Pour composer une grille de tableaux de bord de widgets, utilisez [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit rend un graphique ; DashKit organise plusieurs widgets.
+
+### Pièges courants
+
+- **Rendre `<ChartKit>` avant `settings.set({plugins: [...]})`** — le registre global des plugins doit être peuplé à l'entrée de l'application ; un `type` non enregistré provoque une erreur au moment du rendu.
+- **Prop `chartType` / `library` hallucinée** — la prop de distribution est `type` (par exemple, `type="gravity-charts"`), et les données sont `data`.
+- **Oublier une hauteur de conteneur** — `ChartKit` remplit son parent ; sans hauteur explicite sur le wrapper, le graphique s'effondre à zéro.
+- **S'attendre à ce que les plugins soient inclus dans le bundle** — les rendus des plugins (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) sont différés ; le premier rendu d'un type récupère son bundle.
+- **Oublier l'importation des styles uikit** — le thème dépend de `@gravity-ui/uikit/styles/styles.css` ; sans cela, les graphiques sont rendus sans style.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/chartkit/build/docs/INDEX.md`.

@@ -2,21 +2,21 @@
 
 플러그인 기반 React 컴포넌트로, 여러 차트 라이브러리에 대한 통합 렌더링 인터페이스를 제공합니다. 하나 이상의 플러그인을 등록하고 `<ChartKit type="..." data={...} />`를 통해 차트를 렌더링하면, ChartKit이 자동으로 올바른 렌더러로 디스패치합니다.
 
-각 플러그인 렌더러는 지연 로딩(lazy-loaded)되므로, 실제 라이브러리 코드는 ChartKit이 UI에 렌더링될 때만 다운로드됩니다. ChartKit은 또한 모바일 친화적인 툴팁 표시를 기본적으로 지원합니다. 내장된 플러그인을 사용하거나 자신만의 플러그인을 구현할 수 있습니다.
+각 플러그인 렌더러는 지연 로딩(lazy-loaded)되므로, 해당 라이브러리 코드는 ChartKit이 UI에 실제로 렌더링될 때만 다운로드됩니다. ChartKit은 또한 모바일 친화적인 툴팁 표시를 기본적으로 지원합니다. 내장된 플러그인을 사용하거나 자신만의 플러그인을 구현할 수 있습니다.
 
-**언제 사용해야 할까요:**
+**언제 사용해야 할까요?**
 
-- 최신 선언형 차트 (`gravity-charts`) 또는 시계열/모니터링 차트 (`yagr`)가 필요할 때
+- 최신 선언형 차트(`gravity-charts`) 또는 시계열/모니터링 차트(`yagr`)가 필요할 때
 - 단일하고 일관된 API 아래에서 여러 차트 유형을 사용해야 할 때
 - Gravity UI 생태계 내에서 개발하고 있을 때
 
-**언제 사용하지 않아야 할까요:**
+**언제 사용하지 않아야 할까요?**
 
 - 특정 차트 라이브러리 하나만 필요한 경우 — 이때는 [@gravity-ui/charts](https://github.com/gravity-ui/charts)를 직접 사용하는 것이 좋습니다.
 
 ## 목차
 
-- [시작하기](#get-started)
+- [시작하기](#getting-started)
 - [차트 패키지 업데이트](#updating-charting-packages)
 - [개발](#development)
 
@@ -35,18 +35,18 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 
 ### 스타일
 
-애플리케이션 진입점에서 `@gravity-ui/uikit`의 스타일을 가져옵니다:
+진입점에서 `@gravity-ui/uikit`의 스타일을 가져옵니다:
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-전체 설정에 대한 자세한 내용은 [uikit 스타일 가이드](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)를 참조하세요.
+전체 설정 세부 정보는 [uikit 스타일 가이드](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)를 참조하세요.
 
 ### 기본 사용법
 
-ChartKit은 전역 플러그인 레지스트리를 사용합니다. 앱 진입점에서 `settings.set`을 한 번 호출하여 필요한 플러그인을 등록하세요. `<ChartKit type="..." />`가 렌더링될 때, 일치하는 플러그인을 찾습니다. 일치하는 플러그인이 없으면 오류가 발생합니다. 각 플러그인의 렌더러는 `React.lazy` 컴포넌트이므로, ChartKit이 UI에 처음 나타날 때만 해당 코드가 가져와집니다.
+ChartKit은 전역 플러그인 레지스트리를 사용합니다. 앱 진입점에서 `settings.set`을 한 번 호출하여 필요한 플러그인을 등록하세요. `<ChartKit type="..." />`가 렌더링될 때, 일치하는 플러그인을 찾습니다. 만약 찾지 못하면 오류가 발생합니다. 각 플러그인의 렌더러는 `React.lazy` 컴포넌트이므로, 해당 코드의 가져오기는 ChartKit이 UI에 처음 나타날 때만 수행됩니다.
 
 여러 플러그인을 한 번에 등록할 수 있습니다:
 
@@ -54,7 +54,7 @@ ChartKit은 전역 플러그인 레지스트리를 사용합니다. 앱 진입�
 settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
 ```
 
-또는 `settings.set`을 여러 번 호출해도 됩니다. 이 경우 플러그인 목록이 대체되는 것이 아니라 병합됩니다.
+또는 `settings.set`을 여러 번 호출해도 됩니다. 이때 플러그인 목록이 대체되는 것이 아니라 병합됩니다.
 
 **기본 예제:**
 
@@ -105,14 +105,14 @@ ChartKit은 두 개의 Gravity UI 차트 라이브러리를 종속성으로 번�
 - [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) — `gravity-charts` 플러그인을 구동합니다.
 - [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — `yagr` 플러그인을 구동합니다.
 
-이러한 패키지의 최신 버전을 사용해야 하는 경우, [Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) 이슈를 열고 필요한 패키지를 선택하세요. 유지보수자가 선택한 패키지의 버전을 업데이트하고 릴리스할 것입니다.
+이러한 패키지의 최신 버전을 사용해야 하는 경우, [Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) 이슈를 열고 필요한 패키지를 선택하세요. 유지보수자가 선택한 패키지의 버전을 올리고 업데이트를 릴리스할 것입니다.
 
 ## 개발
 
 ### 사전 요구 사항
 
-- Node.js 22 ( [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc) 참조)
-- npm 10 이상
+- [Node.js](https://nodejs.org/) 22 (참조: [.nvmrc](https://github.com/gravity-ui/ChartKit/blob/main/.nvmrc))
+- [npm](https://www.npmjs.com/) 10 이상
 
 ### 설정
 
@@ -134,7 +134,7 @@ Storybook은 `http://localhost:7007`에서 사용할 수 있습니다.
 
 ### 로컬 종속성으로 개발하기
 
-npm에 게시하지 않고 Storybook에서 변경 사항을 실시간으로 확인하면서 종속성(예: `@gravity-ui/charts`)을 작업하려면 다음 단계를 따르세요:
+종속성(예: `@gravity-ui/charts`)을 수정하고 npm에 게시하지 않고 Storybook에서 변경 사항을 실시간으로 확인하려면 다음 단계를 따르세요:
 
 **1. 로컬 패키지 링크**
 
@@ -159,7 +159,7 @@ ChartKit 루트에 `.env.local` 파일을 생성합니다 (이 파일은 gitigno
 LOCAL_PKG=@gravity-ui/charts
 ```
 
-이렇게 하면 Vite가 `node_modules`에서 해당 패키지를 감시하고 사전 번들링을 건너뛰도록 지시합니다. `@gravity-ui/charts`를 다시 빌드하면 Storybook이 자동으로 다시 로드됩니다.
+이렇게 하면 Vite가 `node_modules`에서 해당 패키지를 감시하고 사전 번들링을 건너뛰도록 지시합니다. `@gravity-ui/charts`를 다시 빌드하면 Storybook이 자동으로 핫 리로드됩니다.
 
 여러 패키지의 경우 쉼표로 구분된 목록을 사용합니다:
 
@@ -175,10 +175,10 @@ npm run start
 
 **4. 원래 패키지로 복원**
 
-작업이 끝나면 다음을 수행합니다:
+완료 후:
 
-1. `.env.local`에서 `LOCAL_PKG` 줄을 주석 처리합니다.
-2. ChartKit에서 `npm install`을 실행합니다. 그러면 심볼릭 링크가 레지스트리 버전으로 대체됩니다.
+1. `.env.local` 파일에서 `LOCAL_PKG` 줄을 주석 처리합니다.
+2. ChartKit에서 `npm install`을 실행합니다. 이렇게 하면 심볼릭 링크가 레지스트리 버전으로 대체됩니다.
 
 ```shell
 # ChartKit에서:
@@ -206,3 +206,34 @@ npm run test:docker:update
 ### 기여
 
 풀 리퀘스트를 제출하기 전에 [기여 가이드](CONTRIBUTING.md)를 참조하세요.
+
+## 라이선스
+
+MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
+
+## AI 에이전트용
+
+하나의 `<ChartKit type="..." data={...} />` API를 통해 여러 Gravity UI 차트 라이브러리에서 차트를 렌더링하는 플러그인 디스패치 React 컴포넌트입니다. 각 차트 라이브러리를 직접 가져오는 대신, 혼합 차트 유형에 대한 단일 지연 로딩 진입점이 필요할 때 사용하세요.
+
+### 언제 사용해야 할까요?
+
+- 여러 차트 엔진(`gravity-charts` + `yagr` 등)을 하나의 일관된 컴포넌트 뒤에서 렌더링할 때
+- 차트 번들을 지연 로딩할 때 — 각 플러그인의 렌더러는 `React.lazy`이므로, 해당 차트 유형이 실제로 표시될 때만 라이브러리 코드가 가져와집니다.
+- 차트를 Gravity UI 앱에 번들링하여 모바일 친화적인 툴팁과 통합된 테마를 즉시 사용할 때
+
+### 언제 사용하지 않아야 할까요?
+
+- 단일 차트 유형만 사용하는 경우, [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (일반) 또는 [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (고성능 시계열)를 직접 가져오세요 — 플러그인 레지스트리는 단일 엔진에 대한 오버헤드입니다.
+- 위젯 대시보드 그리드를 구성하려면 [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit)을 사용하세요 — ChartKit은 차트를 렌더링하고, DashKit은 여러 위젯을 배열합니다.
+
+### 일반적인 함정
+
+- **`settings.set({plugins: [...]})` 전에 `<ChartKit>` 렌더링** — 전역 플러그인 레지스트리는 앱 진입점에서 채워져야 합니다. 등록되지 않은 `type`은 렌더링 시 오류를 발생시킵니다.
+- **환각적인 `chartType` / `library` prop** — 디스패치 prop은 `type` (예: `type="gravity-charts"`)이며, 데이터는 `data`입니다.
+- **컨테이너 높이 누락** — `ChartKit`은 부모 요소를 채웁니다. 래퍼에 명시적인 높이가 없으면 차트가 0으로 축소됩니다.
+- **플러그인이 번들링될 것으로 예상** — 플러그인 렌더러(`@gravity-ui/chartkit/gravity-charts`, `.../yagr`)는 지연 로딩됩니다. 유형의 첫 번째 렌더링은 해당 번들을 가져옵니다.
+- **uikit 스타일 가져오기 누락** — 테마는 `@gravity-ui/uikit/styles/styles.css`에 의존합니다. 이것이 없으면 차트가 스타일 없이 렌더링됩니다.
+
+## AI 에이전트용 문서
+
+설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/chartkit/build/docs/INDEX.md`에 있습니다.

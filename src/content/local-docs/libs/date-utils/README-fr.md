@@ -58,3 +58,33 @@ settings.loadLocale('de').then(() => {
 // Personnalisation
 settings.updateLocale({weekStart: 0}); // changer le premier jour de la semaine
 ```
+
+## Licence
+
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour plus de détails.
+
+## Pour les agents IA
+
+Utilitaires de date/heure conscients des fuseaux horaires — analyse (y compris les expressions relatives comme `now-1d/d`), formatage et gestion des locales — sans aucune interface utilisateur. Utilisez-les lorsque vous avez besoin de calculer et de formater des dates de manière fiable entre les fuseaux horaires, sans avoir à importer une bibliothèque complète de calendrier.
+
+### Quand l'utiliser
+
+- Pour analyser des expressions de date absolues ou relatives (`'now-1d'`, `'now/d'`) en un objet `dateTime` conscient du fuseau horaire.
+- Pour formater des dates à afficher dans le fuseau horaire de l'utilisateur avec prise en charge des locales.
+- Pour partager la logique de date entre le code serveur (Node) et client (React) — le package n'a pas de dépendance React.
+
+### Quand ne pas l'utiliser
+
+- Pour afficher un calendrier, un sélecteur de date ou toute autre **interface utilisateur** de date, utilisez [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — il s'appuie sur ce package pour ses éléments visuels.
+- Pour des calculs de date immuables légers sans besoin de fuseaux horaires ou d'expressions relatives, `date-fns` ou les API natives `Intl`/`Date` peuvent suffire.
+
+### Pièges courants
+
+- **Appeler `dateTimeParse('')` en s'attendant à une date** — renvoie `undefined`, pas un objet `dateTime` ; utilisez la chaîne optionnelle (`?.`) ou une vérification nulle.
+- **Oublier de charger une locale** — `settings.setLocale('de')` ne formate les noms localisés (jours de la semaine, mois) qu'après que `settings.loadLocale('de')` a été résolu.
+- **Fonctions fantaisistes `formatDate` / `parseDate`** — les points d'entrée sont `dateTimeParse` (pour l'analyse) et `dateTime(...).format(...)` (pour le formatage).
+- **Supposer que le fuseau horaire de l'utilisateur est appliqué automatiquement** — spécifiez explicitement `timeZone` ou le fuseau horaire du système sera utilisé.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/date-utils/build/docs/INDEX.md`.
