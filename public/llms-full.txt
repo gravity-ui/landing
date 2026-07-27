@@ -133,7 +133,19 @@ A declarative React charting library for Gravity UI apps — render line, area, 
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/dashkit/llms.txt)
 > GitHub: [gravity-ui/dashkit](https://github.com/gravity-ui/dashkit)
 
-A grid component for building interactive dashboards.
+A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
+
+#### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+#### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
 
 ## Data Source — `@gravity-ui/data-source`
 
@@ -307,7 +319,20 @@ A foundational Node.js toolkit (logging, telemetry, typed errors, config, reques
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/page-constructor/llms.txt)
 > GitHub: [gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor)
 
-A set of stylish, functional blocks for quickly creating promo and landing pages.
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+#### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+#### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
 
 ## Page-constructor-builder — `@gravity-ui/page-constructor-builder`
 
@@ -8452,20 +8477,45 @@ configure({lang: Lang.Ru});
 
 ---
 
-> Generated for `@gravity-ui/page-constructor@8.15.0`
+> Generated for `@gravity-ui/page-constructor@8.16.0`
 
-# Page constructor
+# @gravity-ui/page-constructor documentation
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
->
-> **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **8.16.0** version of `@gravity-ui/page-constructor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/page-constructor/build/docs/`).
+
+## For AI agents
+
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
 
 ## Install
 
 ```shell
 npm install @gravity-ui/page-constructor
 ```
-
 
 ## Peer dependencies
 
@@ -8585,8 +8635,214 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
+## Guides
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+- [Data preparation](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/guides/data-preparation.md) — This chapter provides documentaion for server utilities for transforming content, including Yandex Flavored Markdown (YFM) to HTML conversion and text processing. Key features include:
+- [Подготовка данных](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/guides/data-preparation-ru.md) — Документацию по серверным утилитам для преобразования контента, включая конвертацию Yandex Flavored Markdown (YFM) в HTML и обработку текста. Основные возможности:
+
+## Blocks
+
+- [Banner](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Banner.md) — Renders a compact promotional card with a title, subtitle, an optional background image or color, and a single call-to-action button. Use it to highlight a feature, announce a release, or drive traffic to a landing page from anywhere in the page flow.
+- [CardLayout](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/CardLayout.md) — Renders a responsive grid of arbitrary cards (children) with an optional header and a decorative background image. Use it whenever you need to lay out a homogeneous set of cards — basic, image, background, price, or layout-item — in a row that adapts to the viewport.
+- [Companies](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Companies.md) — Renders a heading with a logo strip — a set of responsive images (desktop / tablet / mobile) shown beneath an optional title and description. Use it for "trusted by" or "powered by" logo rows that must adapt per device and theme.
+- [ContentLayout](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/ContentLayout.md) — Renders a single-column content section (title, body text, optional list, links, and buttons) paired with an optional list of downloadable files and a background. Use it for documentation-style sections, terms, descriptions, or anywhere a focused block of text with file attachments is needed.
+- [ExtendedFeatures](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/ExtendedFeatures.md) — Renders a responsive grid of feature cards, each with an icon, title, text, an optional label (New / Preview), and an optional link. Use it to present a list of product features, capabilities, or benefits in a compact, icon-driven layout.
+- [FilterBlock](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/FilterBlock.md) — Renders a set of cards grouped by tags, with a row of toggle buttons that lets the visitor filter the visible cards by tag. Use it to present a catalog of cards (articles, features, products) that the user can narrow down without leaving the page.
+- [FoldableList](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/FoldableList.md) — Renders a two-column block: a content panel on the left (title, text, links, buttons) and a list of collapsible items on the right, each with its own title, YFM text, and optional link. Use it for FAQ-style or specification pages where each row expands to reveal more detail.
+- [Footer](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Footer.md) — A configurable page footer assembled from optional floors: navigation columns, contacts (social icons), disclaimer, copyright (legal links, language switcher, logo), and an attribution strip.
+- [Form](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Form.md) — A two-column block that renders a third-party form (Yandex Forms or HubSpot) alongside optional YFM text content, with a configurable layout direction and background.
+- [Header](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Header.md) — Renders a full-width page header with a title, optional overtitle/description, call-to-action buttons, breadcrumbs, and an optional media asset (image, video, or video iframe) positioned to the right or centered. Use it as the primary hero/landing block at the top of a page.
+- [HeaderSlider](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/HeaderSlider.md) — Renders a carousel of full-bleed header-block slides — each slide carries its own title, description, buttons, and background media. Use it when the top of the page needs to rotate multiple equally important campaigns or announcements instead of a single hero.
+- [Hero](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Hero.md) — Renders a modern, content-driven hero block: an overtitle, a rich content column (title, body text, list, links, buttons) and a media column (image/video/iframe) that adapts to its intrinsic aspect ratio. Use it as the primary landing block when you want more layout flexibility than the classic Header provides.
+- [Icons](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Icons.md) — Renders a responsive grid of small icon items, each consisting of an image and a caption. Items can optionally be wrapped in links, turning the grid into a navigable set of icon links.
+- [Info](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Info.md) — Renders a two-column information section: a left content column and a right content column, each with its own title, text, lists, buttons, and links, placed inside an optional themed background container.
+- [Map](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Map.md) — A media-and-content block that embeds an interactive Yandex Map inside a card, paired with an optional title, description, links, and buttons.
+- [Media](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Media.md) — Renders a two-column layout that pairs a content column (title, body, list, links, button) with a media column (image, video, YouTube, iframe, or DataLens embed). Use it for feature or explainer sections where text and a rich media asset need to sit side by side.
+- [PromoFeaturesBlock](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/PromoFeaturesBlock.md) — Renders a masonry layout of promotional feature cards, each pairing a title, YFM text, and an optional media asset, displayed against a full-width background. Use it for marketing sections that showcase several value propositions with rich imagery in a non-uniform grid.
+- [Questions](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Questions.md) — Renders an FAQ block: a left content panel (title, text, links, buttons) and a list of expandable question/answer rows on the right. Automatically emits FAQPage JSON-LD microdata so search engines can index the answers as rich results.
+- [Share](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Share.md) — Renders a row of social-network share buttons that share the current page URL.
+- [Slider](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Slider.md) — A carousel block that renders any number of child cards as swipeable slides, with optional title, description, dots, arrows, autoplay, and per-breakpoint slide counts. Built on top of Swiper.
+- [SliderOld](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/SliderOld.md)
+- [Table](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Table.md) — Renders a title followed by a comparison-style table whose cells are plain strings or numbers. A legend column can be marked with disk or tick markers, and an optional legend list explains the marked columns.
+- [Tabs](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/blocks/Tabs.md) — Renders a set of tab buttons that switch between rich content panels. Each tab panel pairs a content column (title, text, lists, buttons, links) with an optional media column (image, video, YouTube, iframe, DataLens), with control over column order, sizing, and border treatment.
+
+## Sub-blocks
+
+- [BackgroundCard](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/BackgroundCard.md) — A card that renders text content (title, text, links, buttons, or a content list) over a decorative background image or solid color. Useful for promotional cards inside a card layout.
+- [BannerCard](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/BannerCard.md) — A compact banner card with a title, optional subtitle, a single call-to-action button, and a decorative background image. Designed to draw attention inside a card layout.
+- [BasicCard](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/BasicCard.md) — A general-purpose card with an optional icon (image or Gravity UI icon) and text content (title, text, links, buttons, or a content list). The simplest and most versatile card.
+- [Content](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/Content.md) — A text content block rendering a title, body text, additional info, links, buttons, and/or an icon content list. Used on its own as the textual portion of a content layout.
+- [Divider](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/Divider.md) — A spacing/separator element that adds vertical space between sibling items, optionally drawing a horizontal line. Useful for tuning rhythm inside a layout.
+- [HubspotForm](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/HubspotForm.md) — Embeds a HubSpot form inside a page. Loads the HubSpot scripts on demand and renders the form into a container; emits analytics events on submit and supports default field values and form event handlers.
+- [ImageCard](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/ImageCard.md) — A card pairing a foreground image with text content (title, text, links, buttons, or a content list). The image and content can be ordered in either direction.
+- [LayoutItem](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/LayoutItem.md) — Renders a two-part card: a media area (image, video, YouTube, etc.) stacked above a text content area with optional title, body, buttons, links, list, and meta info. Used as the primary content unit inside card-grid blocks.
+- [MediaCard](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/MediaCard.md) — Wraps a single media element (image, image slider, video, YouTube, iframe, or DataLens) inside a card with an optional border. Pure media card — no text content.
+- [PriceCard](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/PriceCard.md) — Renders a pricing card: a title, a price (with optional period and details), a description, a checklist of features, and optional buttons and links. Typically placed in a grid to compare plans.
+- [PriceDetailed](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/PriceDetailed.md)
+- [Quote](https://unpkg.com/@gravity-ui/page-constructor@8.16.0/build/docs/sub-blocks/Quote.md) — Renders a customer testimonial / quote card: a logo, the quote body, an optional author (name + avatar + description), and an optional CTA button. Paired with a large image on the side.
+
+---
+
+> Docs for `@gravity-ui/page-constructor@8.16.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.16.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/page-constructor@8.15.0`
+
+# Page constructor
+
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+>
+> **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
+## Usage
+
+First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
+
+Install the required dependencies:
+
+```shell
+npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
+```
+
+Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+
+const App = () => {
+  const content = {
+    blocks: [
+      {
+        type: 'header-block',
+        title: 'Hello world',
+        background: {color: '#f0f0f0'},
+        description:
+          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+      },
+    ],
+  };
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
+
+If your server is a separate application, then you need to install page-constructor:
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
+
+```ts
+const express = require('express');
+const app = express();
+const {contentTransformer} = require('@gravity-ui/page-constructor/server');
+
+const content = {
+  blocks: [
+    {
+      type: 'header-block',
+      title: 'Hello world',
+      background: {color: '#f0f0f0'},
+      description:
+        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+    },
+  ],
+};
+
+app.get('/content', (req, res) => {
+  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
+});
+
+app.listen(3000);
+```
+
+On the client, add an endpoint call to receive content:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+import {useEffect, useState} from 'react';
+
+const App = () => {
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
+      setContent(response.content);
+    })();
+  }, []);
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+### Ready-made template
+
+To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
+
+### Static site builder
+
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
+
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -8606,7 +8862,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -8736,7 +8992,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -8756,7 +9032,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -8886,7 +9162,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -8906,7 +9202,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -9036,7 +9332,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -9056,7 +9372,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -9186,7 +9502,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -9206,7 +9542,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -9336,7 +9672,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -9356,7 +9712,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -9486,7 +9842,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -9506,7 +9882,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -9636,7 +10012,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -9656,7 +10052,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -9786,7 +10182,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -9802,161 +10218,11 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 ---
 
-> Generated for `@gravity-ui/page-constructor@8.6.0`
-
-# Page constructor
-
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
->
-> **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/page-constructor
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.1.1` |
-| `@diplodoc/transform` | `^4.28.2` |
-
-## Usage
-
-First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
-
-Install the required dependencies:
-
-```shell
-npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
-```
-
-Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
-
-```tsx
-import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
-import '@gravity-ui/page-constructor/styles/styles.scss';
-
-const App = () => {
-  const content = {
-    blocks: [
-      {
-        type: 'header-block',
-        title: 'Hello world',
-        background: {color: '#f0f0f0'},
-        description:
-          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
-      },
-    ],
-  };
-
-  return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
-  );
-};
-
-export default App;
-```
-
-This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
-
-If your server is a separate application, then you need to install page-constructor:
-
-```shell
-npm install @gravity-ui/page-constructor
-```
-
-To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
-
-```ts
-const express = require('express');
-const app = express();
-const {contentTransformer} = require('@gravity-ui/page-constructor/server');
-
-const content = {
-  blocks: [
-    {
-      type: 'header-block',
-      title: 'Hello world',
-      background: {color: '#f0f0f0'},
-      description:
-        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
-    },
-  ],
-};
-
-app.get('/content', (req, res) => {
-  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
-});
-
-app.listen(3000);
-```
-
-On the client, add an endpoint call to receive content:
-
-```tsx
-import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
-import '@gravity-ui/page-constructor/styles/styles.scss';
-import {useEffect, useState} from 'react';
-
-const App = () => {
-  const [content, setContent] = useState();
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
-      setContent(response.content);
-    })();
-  }, []);
-
-  return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
-  );
-};
-
-export default App;
-```
-
-### Ready-made template
-
-To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
-
-### Static site builder
-
-[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/page-constructor/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/page-constructor)
-
----
-
-> Docs for `@gravity-ui/page-constructor@8.6.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.6.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/page-constructor@7.25.0`
 
 # Page constructor
 
-> A set of stylish, functional blocks for quickly creating promo and landing pages.
+> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
 >
 > **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10086,7 +10352,27 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md) for full documentation.
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
 
 ## Links
 
@@ -21711,20 +21997,44 @@ Learn more about the table and the column resizing properties in the react-table
 
 ---
 
-> Generated for `@gravity-ui/dashkit@10.3.0`
+> Generated for `@gravity-ui/dashkit@10.4.0`
 
-# DashKit
+# @gravity-ui/dashkit documentation
 
-> A grid component for building interactive dashboards.
->
-> **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **10.4.0** version of `@gravity-ui/dashkit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/dashkit/build/docs/`).
+
+## For AI agents
+
+A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
+
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
 
 ## Install
 
 ```bash
 npm i @gravity-ui/dashkit @gravity-ui/uikit
 ```
-
 
 ## Peer dependencies
 
@@ -22235,8 +22545,558 @@ const CustomThemeWrapper = (props: {
 };
 ```
 
+---
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+> Docs for `@gravity-ui/dashkit@10.4.0`. Versioned at: `https://gravity-ui.com/llms/dashkit/10.4.0/llms.txt` (exact), `https://gravity-ui.com/llms/dashkit/10/llms.txt` (latest of major 10), `https://gravity-ui.com/llms/dashkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dashkit@10.3.0`
+
+# DashKit
+
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
+>
+> **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```bash
+npm i @gravity-ui/dashkit @gravity-ui/uikit
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.8.0 || ^17 || ^18 || ^19` |
+| `react-dom` | `^16.8.0 || ^17 || ^18 || ^19` |
+| `@gravity-ui/icons` | `^2.13.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### DashKit configuration
+
+Before using `DashKit` as a react component, it must be configured.
+
+- set language
+
+  ```js
+  import {configure, Lang} from '@gravity-ui/uikit';
+
+  configure({lang: Lang.En});
+  ```
+
+- DashKit.setSettings
+
+  Used for global DashKit settings (such as margins between widgets, default widget sizes and widget overlay menu)
+
+  ```js
+  import {DashKit} from '@gravity-ui/dashkit';
+
+  DashKit.setSettings({
+    gridLayout: {margin: [8, 8]},
+    isMobile: true,
+    // menu: [] as Array<MenuItem>,
+  });
+  ```
+
+- DashKit.registerPlugins
+
+  Registering and configuring plugins
+
+  ```js
+  import {DashKit} from '@gravity-ui/dashkit';
+  import {pluginTitle, pluginText} from '@gravity-ui/dashkit';
+
+  DashKit.registerPlugins(
+    pluginTitle,
+    pluginText.setSettings({
+      apiHandler({text}) {
+        return api.getMarkdown(text);
+      },
+    }),
+  );
+
+  DashKit.registerPlugins({
+    type: 'custom',
+    defaultLayout: {
+      w: 10,
+      h: 8,
+    },
+    renderer: function CustomPlugin() {
+      return <div>Custom widget with custom controls</div>;
+    },
+  });
+  ```
+
+### Config
+
+```ts
+export interface Config {
+  salt: string; // to form a unique id
+  counter: number; // to form a unique id, only increases
+  items: ConfigItem[]; //  initial widget states
+  layout: ConfigLayout[]; // widget position on the grid https://github.com/react-grid-layout
+  aliases: ConfigAliases; // aliases for parameters see #Params
+  connections: ConfigConnection[]; // links between widgets see #Params
+}
+```
+
+Config example:
+
+```ts
+import {DashKitProps} from '@gravity-ui/dashkit';
+
+const config: DashKitProps['config'] = {
+  salt: '0.46703554571365613',
+  counter: 4,
+  items: [
+    {
+      id: 'tT',
+      data: {
+        size: 'm',
+        text: 'Caption',
+        showInTOC: true,
+      },
+      type: 'title',
+      namespace: 'default',
+      orderId: 1,
+    },
+    {
+      id: 'Ea',
+      data: {
+        text: 'mode _editActive',
+        _editActive: true,
+      },
+      type: 'text',
+      namespace: 'default',
+    },
+    {
+      id: 'zR',
+      data: {
+        text: '### Text',
+      },
+      type: 'text',
+      namespace: 'default',
+      orderId: 0,
+    },
+    {
+      id: 'Dk',
+      data: {
+        foo: 'bar',
+      },
+      type: 'custom',
+      namespace: 'default',
+      orderId: 5,
+    },
+  ],
+  layout: [
+    {
+      h: 2,
+      i: 'tT',
+      w: 36,
+      x: 0,
+      y: 0,
+    },
+    {
+      h: 6,
+      i: 'Ea',
+      w: 12,
+      x: 0,
+      y: 2,
+    },
+    {
+      h: 6,
+      i: 'zR',
+      w: 12,
+      x: 12,
+      y: 2,
+    },
+    {
+      h: 4,
+      i: 'Dk',
+      w: 8,
+      x: 0,
+      y: 8,
+    },
+  ],
+  aliases: {},
+  connections: [],
+};
+```
+
+Add a new item to the config:
+
+```ts
+const newLayout = updateLayout: [
+  {
+    h: 6,
+    i: 'Ea',
+    w: 12,
+    x: 0,
+    y: 6,
+  },
+  {
+    h: 4,
+    i: 'Dk',
+    w: 8,
+    x: 0,
+    y: 12,
+  },
+];
+
+const newConfig = DashKit.setItem({
+  item: {
+    data: {
+      text: `Some text`,
+    },
+    namespace: 'default',
+    type: 'text',
+    // Optional. If new item needed to be inserted in current layout with predefined dimensions
+    layout: { // Current item inseterted before 'Ea'
+      h: 6,
+      w: 12,
+      x: 0,
+      y: 2,
+    },,
+  },
+  config: config,
+  options: {
+    // Optional. New layout values for existing items when new element is dropped from ActionPanel
+    updateLayout: newLayout,
+  },
+});
+```
+
+Change an existing item in the config:
+
+```ts
+const newConfig = DashKit.setItem({
+  item: {
+    id: 'tT', // item.id
+    data: {
+      size: 'm',
+      text: `New caption`,
+    },
+    namespace: 'default',
+    type: 'title',
+  },
+  config: config,
+});
+```
+
+Delete an item from the config:
+
+```ts
+import {DashKitProps} from '@gravity-ui/dashkit';
+
+const oldItemsStateAndParams: DashKitProps['itemsStateAndParams'] = {};
+
+const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
+  id: 'tT', // item.id
+  config: config,
+  itemsStateAndParams: this.state.itemsStateAndParams,
+});
+```
+
+### Params
+
+```ts
+type Params = Record<string, string | string[]>;
+```
+
+`DashKit` generates parameters according to the default parameters for widgets, links, and aliases. These parameters are required for the [ChartKit](https://github.com/gravity-ui/chartkit) library.
+
+Generation order:
+
+1. `defaultGlobalParams`
+2. Default widget parameters `item.default`
+3. `globalParams`
+4. Parameters from [itemsStateAndParams](#itemsStateAndParams) according to the queue.
+
+### itemsStateAndParams
+
+Object that stores widget parameters and states as well as a parameter change queue.
+It has a `__meta__` field for storing queue and meta information.
+
+```ts
+interface StateAndParamsMeta = {
+    __meta__: {
+        queue: {id: string}[]; // queue
+        version: number; // current version itemsStateAndParams
+    };
+}
+```
+
+And also widget states and parameters:
+
+```ts
+interface ItemsStateAndParamsBase {
+  [itemId: string]: {
+    state?: Record<string, any>;
+    params?: Params;
+  };
+}
+```
+
+```ts
+type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
+```
+
+### Experimental DashKit events
+
+> Experimental: this API can change in minor releases.
+
+`DashKit` exposes an experimental instance event API. Use a component ref and subscribe with `dashkitRef.current?.on(eventName, handler)`. The method returns an unsubscribe callback.
+
+The first supported event is `change`. It is emitted when the layout changes, before `onChange` is called. The handler can read the full next and previous layouts, read layout patches, or call `preventDefault()` to stop the default `onChange` call.
+
+```tsx
+import React from 'react';
+import {DashKit} from '@gravity-ui/dashkit';
+import type {DashKitChangeEvent} from '@gravity-ui/dashkit';
+
+function Dashboard() {
+  const dashkitRef = React.useRef<DashKit>(null);
+
+  React.useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event: DashKitChangeEvent) => {
+      console.log(event.patches);
+
+      if (event.patches.length > 0) {
+        event.preventDefault();
+      }
+    });
+
+    return () => unsubscribe?.();
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode={true} onChange={onChange} />;
+}
+```
+
+```ts
+type DashKitLayoutPatch = Pick<ConfigLayout, 'i'> &
+  Partial<Pick<ConfigLayout, 'x' | 'y' | 'w' | 'h' | 'parent'>>;
+
+type DashKitChangeEvent = {
+  patches: DashKitLayoutPatch[];
+  layout: ConfigLayout[];
+  previousLayout: ConfigLayout[];
+  preventDefault: () => void;
+  readonly defaultPrevented: boolean;
+};
+```
+
+#### Event-driven layout updates
+
+If you use `preventDefault()` in the `change` event handler, you can now handle layout updates without re-initializing the config prop. DashKit maintains an internal baseline and computes patches incrementally:
+
+```tsx
+function Dashboard() {
+  const [config, setConfig] = useState(initialConfig);
+  const dashkitRef = useRef<DashKit>(null);
+
+  useEffect(() => {
+    const unsubscribe = dashkitRef.current?.on('change', (event) => {
+      event.preventDefault(); // Don't call onChange
+
+      // Send only the incremental patches to your backend
+      sendPatches(event.patches);
+
+      // No need to call setConfig({ ...config, layout: event.layout })
+      // DashKit maintains the visual state internally
+    });
+
+    return unsubscribe;
+  }, []);
+
+  return <DashKit ref={dashkitRef} config={config} editMode onChange={() => {}} />;
+}
+```
+
+**Important:** If you later update `config.layout` from props (e.g., from server sync), DashKit will reset its internal baseline to match the new prop. This ensures compatibility with both event-driven and controlled workflows.
+
+### Menu
+
+You can specify custom DashKit widget overlay menu in edit mode
+
+```ts
+type MenuItem = {
+  id: string; // uniq id
+  title?: string; // string title
+  icon?: ReactNode; // node of icon
+  iconSize?: number | string; // icon size in px as number or as string with units
+  handler?: (item: ConfigItem) => void; // custom item action handler
+  visible?: (item: ConfigItem) => boolean; // optional visibility handler for filtering menu items
+  className?: string; // custom class property
+};
+
+// use array of menu items in settings
+<Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
+
+[deprecated]
+// overlayMenuItems property has greater priority over setSettings menu
+DashKit.setSettings({menu: [] as Array<MenuItem>});
+```
+
+### Draggable items from ActionPanel
+
+#### DashKitDnDWrapper
+
+```ts
+type DraggedOverItem = {
+  h: number;
+  w: number;
+  type: string;
+  parent: string;
+  i?: number;
+};
+
+interface DashKitDnDWrapperProps {
+  dragImageSrc?: string;
+  onDragStart?: (dragProps: ItemDragProps) => void;
+  onDragEnd?: () => void;
+  onDropDragOver?: (
+    draggedItem: DraggedOverItem,
+    sharedItem: DraggedOverItem | null,
+  ) => void | boolean;
+}
+```
+
+- **dragImageSrc**: Drag image preview, by default used transparent 1px png base64
+- **onDragStart**: Callback called when element is dragged from ActionPanel
+- **onDragEnd**: Callback called when element dropped or drag canceled
+
+```ts
+type ItemDragProps = {
+  type: string; // Plugin type
+  layout?: {
+    // Optional. Layout item size for preview and init
+    w?: number;
+    h?: number;
+  };
+  extra?: any; // Custom user context
+};
+```
+
+```ts
+type ItemDropProps = {
+  commit: () => void; // Callback should be called after all config operations are made
+  dragProps: ItemDragProps; // Item drag props
+  itemLayout: ConfigLayout; // Calculated item layout dimensions
+  newLayout: ConfigLayout[]; // New layout after element is dropped
+};
+```
+
+#### Example:
+
+```jsx
+const overlayMenuItems = [
+  {
+    id: 'chart',
+    icon: <Icon data={ChartColumn} />,
+    title: 'Chart',
+    qa: 'chart',
+    dragProps: { // ItemDragProps
+        type: 'custom', // Registered plugin type
+    },
+  }
+]
+
+const onDrop = (dropProps: ItemDropProps) => {
+  // ... add element to your config
+  dropProps.commit();
+}
+
+<DashKitDnDWrapper>
+  <DashKit editMode={true} config={config} onChange={onChange} onDrop={onDrop} />
+  <ActionPanel items={overlayMenuItems} />
+</DashKitDnDWrapper>
+```
+
+### CSS API
+
+| Name                                           | Description           |
+| :--------------------------------------------- | :-------------------- |
+| Action panel variables                         |                       |
+| `--dashkit-action-panel-color`                 | Background color      |
+| `--dashkit-action-panel-border-color`          | Border color          |
+| `--dashkit-action-panel-border-radius`         | Border radius         |
+| Action panel item variables                    |                       |
+| `--dashkit-action-panel-item-color`            | Backgroud color       |
+| `--dashkit-action-panel-item-text-color`       | Text color            |
+| `--dashkit-action-panel-item-color-hover`      | Hover backgroud color |
+| `--dashkit-action-panel-item-text-color-hover` | Hover text color      |
+| Overlay variables                              |                       |
+| `--dashkit-overlay-border-color`               | Border color          |
+| `--dashkit-overlay-color`                      | Background color      |
+| `--dashkit-overlay-opacity`                    | Opacity               |
+| Grid item variables                            |                       |
+| `--dashkit-grid-item-edit-opacity`             | Opacity               |
+| `--dashkit-grid-item-border-radius`            | Border radius         |
+| Placeholder variables                          |                       |
+| `--dashkit-placeholder-color`                  | Background color      |
+| `--dashkit-placeholder-opacity`                | Opacity               |
+
+#### Usage example
+
+```css
+.custom-theme-wrapper {
+  --dashkit-grid-item-edit-opacit: 1;
+  --dashkit-overlay-color: var(--g-color-base-float);
+  --dashkit-overlay-border-color: var(--g-color-base-float);
+  --dashkit-overlay-opacity: 0.5;
+
+  --dashkit-action-panel-border-color: var(--g-color-line-info);
+  --dashkit-action-panel-color: var(--g-color-base-float-accent);
+  --dashkit-action-panel-border-radius: var(--g-border-radius-xxl);
+}
+```
+
+```tsx
+// ....
+
+const CustomThemeWrapper = (props: {
+  dashkitProps: DashkitProps;
+  actionPanelProps: ActionPanelProps;
+}) => {
+  return (
+    <div className="custom-theme-wrapper">
+      <Dashkit {...props.dashkitProps} />
+      <ActionPanel {...props.actionPanelProps} />
+    </div>
+  );
+};
+```
+
+
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -22255,7 +23115,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -22776,7 +23636,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -22795,7 +23674,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -23315,7 +24194,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -23334,7 +24232,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -23854,7 +24752,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -23873,7 +24790,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -24393,7 +25310,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -24412,7 +25348,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -24932,7 +25868,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -24951,7 +25906,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -25471,7 +26426,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -25490,7 +26464,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -26010,7 +26984,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -26029,7 +27022,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -26549,7 +27542,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -26568,7 +27580,7 @@ const CustomThemeWrapper = (props: {
 
 # DashKit
 
-> A grid component for building interactive dashboards.
+> A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
 >
 > **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -27087,7 +28099,26 @@ const CustomThemeWrapper = (props: {
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
 
 ## Links
 
@@ -27098,544 +28129,6 @@ const CustomThemeWrapper = (props: {
 ---
 
 > Docs for `@gravity-ui/dashkit@8.27.0`. Versioned at: `https://gravity-ui.com/llms/dashkit/8.27.0/llms.txt` (exact), `https://gravity-ui.com/llms/dashkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/dashkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/dashkit@8.26.0`
-
-# DashKit
-
-> A grid component for building interactive dashboards.
->
-> **npm:** `@gravity-ui/dashkit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```bash
-npm i @gravity-ui/dashkit @gravity-ui/uikit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.8.0  || ^17 || ^18` |
-| `@gravity-ui/uikit` | `^6.0.0` |
-
-## Usage
-
-### DashKit configuration
-
-Before using `DashKit` as a react component, it must be configured.
-
-- set language
-
-  ```js
-  import {configure, Lang} from '@gravity-ui/uikit';
-
-  configure({lang: Lang.En});
-  ```
-
-- DashKit.setSettings
-
-  Used for global DashKit settings (such as margins between widgets, default widget sizes and widget overlay menu)
-
-  ```js
-  import {DashKit} from '@gravity-ui/dashkit';
-
-  DashKit.setSettings({
-    gridLayout: {margin: [8, 8]},
-    isMobile: true,
-    // menu: [] as Array<MenuItem>,
-  });
-  ```
-
-- DashKit.registerPlugins
-
-  Registering and configuring plugins
-
-  ```js
-  import {DashKit} from '@gravity-ui/dashkit';
-  import {pluginTitle, pluginText} from '@gravity-ui/dashkit';
-
-  DashKit.registerPlugins(
-    pluginTitle,
-    pluginText.setSettings({
-      apiHandler({text}) {
-        return api.getMarkdown(text);
-      },
-    }),
-  );
-
-  DashKit.registerPlugins({
-    type: 'custom',
-    defaultLayout: {
-      w: 10,
-      h: 8,
-    },
-    renderer: function CustomPlugin() {
-      return <div>Custom widget with custom controls</div>;
-    },
-  });
-  ```
-
-### Config
-
-```ts
-export interface Config {
-  salt: string; // to form a unique id
-  counter: number; // to form a unique id, only increases
-  items: ConfigItem[]; //  initial widget states
-  layout: ConfigLayout[]; // widget position on the grid https://github.com/react-grid-layout
-  aliases: ConfigAliases; // aliases for parameters see #Params
-  connections: ConfigConnection[]; // links between widgets see #Params
-}
-```
-
-Config example:
-
-```ts
-import {DashKitProps} from '@gravity-ui/dashkit';
-
-const config: DashKitProps['config'] = {
-  salt: '0.46703554571365613',
-  counter: 4,
-  items: [
-    {
-      id: 'tT',
-      data: {
-        size: 'm',
-        text: 'Caption',
-        showInTOC: true,
-      },
-      type: 'title',
-      namespace: 'default',
-      orderId: 1,
-    },
-    {
-      id: 'Ea',
-      data: {
-        text: 'mode _editActive',
-        _editActive: true,
-      },
-      type: 'text',
-      namespace: 'default',
-    },
-    {
-      id: 'zR',
-      data: {
-        text: '### Text',
-      },
-      type: 'text',
-      namespace: 'default',
-      orderId: 0,
-    },
-    {
-      id: 'Dk',
-      data: {
-        foo: 'bar',
-      },
-      type: 'custom',
-      namespace: 'default',
-      orderId: 5,
-    },
-  ],
-  layout: [
-    {
-      h: 2,
-      i: 'tT',
-      w: 36,
-      x: 0,
-      y: 0,
-    },
-    {
-      h: 6,
-      i: 'Ea',
-      w: 12,
-      x: 0,
-      y: 2,
-    },
-    {
-      h: 6,
-      i: 'zR',
-      w: 12,
-      x: 12,
-      y: 2,
-    },
-    {
-      h: 4,
-      i: 'Dk',
-      w: 8,
-      x: 0,
-      y: 8,
-    },
-  ],
-  aliases: {},
-  connections: [],
-};
-```
-
-Add a new item to the config:
-
-```ts
-const newLayout = updateLayout: [
-  {
-    h: 6,
-    i: 'Ea',
-    w: 12,
-    x: 0,
-    y: 6,
-  },
-  {
-    h: 4,
-    i: 'Dk',
-    w: 8,
-    x: 0,
-    y: 12,
-  },
-];
-
-const newConfig = DashKit.setItem({
-  item: {
-    data: {
-      text: `Some text`,
-    },
-    namespace: 'default',
-    type: 'text',
-    // Optional. If new item needed to be inserted in current layout with predefined dimensions
-    layout: { // Current item inseterted before 'Ea'
-      h: 6,
-      w: 12,
-      x: 0,
-      y: 2,
-    },,
-  },
-  config: config,
-  options: {
-    // Optional. New layout values for existing items when new element is dropped from ActionPanel
-    updateLayout: newLayout,
-  },
-});
-```
-
-Change an existing item in the config:
-
-```ts
-const newConfig = DashKit.setItem({
-  item: {
-    id: 'tT', // item.id
-    data: {
-      size: 'm',
-      text: `New caption`,
-    },
-    namespace: 'default',
-    type: 'title',
-  },
-  config: config,
-});
-```
-
-Delete an item from the config:
-
-```ts
-import {DashKitProps} from '@gravity-ui/dashkit';
-
-const oldItemsStateAndParams: DashKitProps['itemsStateAndParams'] = {};
-
-const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
-  id: 'tT', // item.id
-  config: config,
-  itemsStateAndParams: this.state.itemsStateAndParams,
-});
-```
-
-### Params
-
-```ts
-type Params = Record<string, string | string[]>;
-```
-
-`DashKit` generates parameters according to the default parameters for widgets, links, and aliases. These parameters are required for the [ChartKit](https://github.com/gravity-ui/chartkit) library.
-
-Generation order:
-
-1. `defaultGlobalParams`
-2. Default widget parameters `item.default`
-3. `globalParams`
-4. Parameters from [itemsStateAndParams](#itemsStateAndParams) according to the queue.
-
-### itemsStateAndParams
-
-Object that stores widget parameters and states as well as a parameter change queue.
-It has a `__meta__` field for storing queue and meta information.
-
-```ts
-interface StateAndParamsMeta = {
-    __meta__: {
-        queue: {id: string}[]; // queue
-        version: number; // current version itemsStateAndParams
-    };
-}
-```
-
-And also widget states and parameters:
-
-```ts
-interface ItemsStateAndParamsBase {
-  [itemId: string]: {
-    state?: Record<string, any>;
-    params?: Params;
-  };
-}
-```
-
-```ts
-type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
-```
-
-### Experimental DashKit events
-
-> Experimental: this API can change in minor releases.
-
-`DashKit` exposes an experimental instance event API. Use a component ref and subscribe with `dashkitRef.current?.on(eventName, handler)`. The method returns an unsubscribe callback.
-
-The first supported event is `change`. It is emitted when the layout changes, before `onChange` is called. The handler can read the full next and previous layouts, read layout patches, or call `preventDefault()` to stop the default `onChange` call.
-
-```tsx
-import React from 'react';
-import {DashKit} from '@gravity-ui/dashkit';
-import type {DashKitChangeEvent} from '@gravity-ui/dashkit';
-
-function Dashboard() {
-  const dashkitRef = React.useRef<DashKit>(null);
-
-  React.useEffect(() => {
-    const unsubscribe = dashkitRef.current?.on('change', (event: DashKitChangeEvent) => {
-      console.log(event.patches);
-
-      if (event.patches.length > 0) {
-        event.preventDefault();
-      }
-    });
-
-    return () => unsubscribe?.();
-  }, []);
-
-  return <DashKit ref={dashkitRef} config={config} editMode={true} onChange={onChange} />;
-}
-```
-
-```ts
-type DashKitLayoutPatch = Pick<ConfigLayout, 'i'> &
-  Partial<Pick<ConfigLayout, 'x' | 'y' | 'w' | 'h' | 'parent'>>;
-
-type DashKitChangeEvent = {
-  patches: DashKitLayoutPatch[];
-  layout: ConfigLayout[];
-  previousLayout: ConfigLayout[];
-  preventDefault: () => void;
-  readonly defaultPrevented: boolean;
-};
-```
-
-#### Event-driven layout updates
-
-If you use `preventDefault()` in the `change` event handler, you can now handle layout updates without re-initializing the config prop. DashKit maintains an internal baseline and computes patches incrementally:
-
-```tsx
-function Dashboard() {
-  const [config, setConfig] = useState(initialConfig);
-  const dashkitRef = useRef<DashKit>(null);
-
-  useEffect(() => {
-    const unsubscribe = dashkitRef.current?.on('change', (event) => {
-      event.preventDefault(); // Don't call onChange
-
-      // Send only the incremental patches to your backend
-      sendPatches(event.patches);
-
-      // No need to call setConfig({ ...config, layout: event.layout })
-      // DashKit maintains the visual state internally
-    });
-
-    return unsubscribe;
-  }, []);
-
-  return <DashKit ref={dashkitRef} config={config} editMode onChange={() => {}} />;
-}
-```
-
-**Important:** If you later update `config.layout` from props (e.g., from server sync), DashKit will reset its internal baseline to match the new prop. This ensures compatibility with both event-driven and controlled workflows.
-
-### Menu
-
-You can specify custom DashKit widget overlay menu in edit mode
-
-```ts
-type MenuItem = {
-  id: string; // uniq id
-  title?: string; // string title
-  icon?: ReactNode; // node of icon
-  iconSize?: number | string; // icon size in px as number or as string with units
-  handler?: (item: ConfigItem) => void; // custom item action handler
-  visible?: (item: ConfigItem) => boolean; // optional visibility handler for filtering menu items
-  className?: string; // custom class property
-};
-
-// use array of menu items in settings
-<Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
-
-[deprecated]
-// overlayMenuItems property has greater priority over setSettings menu
-DashKit.setSettings({menu: [] as Array<MenuItem>});
-```
-
-### Draggable items from ActionPanel
-
-#### DashKitDnDWrapper
-
-```ts
-type DraggedOverItem = {
-  h: number;
-  w: number;
-  type: string;
-  parent: string;
-  i?: number;
-};
-
-interface DashKitDnDWrapperProps {
-  dragImageSrc?: string;
-  onDragStart?: (dragProps: ItemDragProps) => void;
-  onDragEnd?: () => void;
-  onDropDragOver?: (
-    draggedItem: DraggedOverItem,
-    sharedItem: DraggedOverItem | null,
-  ) => void | boolean;
-}
-```
-
-- **dragImageSrc**: Drag image preview, by default used transparent 1px png base64
-- **onDragStart**: Callback called when element is dragged from ActionPanel
-- **onDragEnd**: Callback called when element dropped or drag canceled
-
-```ts
-type ItemDragProps = {
-  type: string; // Plugin type
-  layout?: {
-    // Optional. Layout item size for preview and init
-    w?: number;
-    h?: number;
-  };
-  extra?: any; // Custom user context
-};
-```
-
-```ts
-type ItemDropProps = {
-  commit: () => void; // Callback should be called after all config operations are made
-  dragProps: ItemDragProps; // Item drag props
-  itemLayout: ConfigLayout; // Calculated item layout dimensions
-  newLayout: ConfigLayout[]; // New layout after element is dropped
-};
-```
-
-#### Example:
-
-```jsx
-const overlayMenuItems = [
-  {
-    id: 'chart',
-    icon: <Icon data={ChartColumn} />,
-    title: 'Chart',
-    qa: 'chart',
-    dragProps: { // ItemDragProps
-        type: 'custom', // Registered plugin type
-    },
-  }
-]
-
-const onDrop = (dropProps: ItemDropProps) => {
-  // ... add element to your config
-  dropProps.commit();
-}
-
-<DashKitDnDWrapper>
-  <DashKit editMode={true} config={config} onChange={onChange} onDrop={onDrop} />
-  <ActionPanel items={overlayMenuItems} />
-</DashKitDnDWrapper>
-```
-
-### CSS API
-
-| Name                                           | Description           |
-| :--------------------------------------------- | :-------------------- |
-| Action panel variables                         |                       |
-| `--dashkit-action-panel-color`                 | Background color      |
-| `--dashkit-action-panel-border-color`          | Border color          |
-| `--dashkit-action-panel-border-radius`         | Border radius         |
-| Action panel item variables                    |                       |
-| `--dashkit-action-panel-item-color`            | Backgroud color       |
-| `--dashkit-action-panel-item-text-color`       | Text color            |
-| `--dashkit-action-panel-item-color-hover`      | Hover backgroud color |
-| `--dashkit-action-panel-item-text-color-hover` | Hover text color      |
-| Overlay variables                              |                       |
-| `--dashkit-overlay-border-color`               | Border color          |
-| `--dashkit-overlay-color`                      | Background color      |
-| `--dashkit-overlay-opacity`                    | Opacity               |
-| Grid item variables                            |                       |
-| `--dashkit-grid-item-edit-opacity`             | Opacity               |
-| `--dashkit-grid-item-border-radius`            | Border radius         |
-| Placeholder variables                          |                       |
-| `--dashkit-placeholder-color`                  | Background color      |
-| `--dashkit-placeholder-opacity`                | Opacity               |
-
-#### Usage example
-
-```css
-.custom-theme-wrapper {
-  --dashkit-grid-item-edit-opacit: 1;
-  --dashkit-overlay-color: var(--g-color-base-float);
-  --dashkit-overlay-border-color: var(--g-color-base-float);
-  --dashkit-overlay-opacity: 0.5;
-
-  --dashkit-action-panel-border-color: var(--g-color-line-info);
-  --dashkit-action-panel-color: var(--g-color-base-float-accent);
-  --dashkit-action-panel-border-radius: var(--g-border-radius-xxl);
-}
-```
-
-```tsx
-// ....
-
-const CustomThemeWrapper = (props: {
-  dashkitProps: DashkitProps;
-  actionPanelProps: ActionPanelProps;
-}) => {
-  return (
-    <div className="custom-theme-wrapper">
-      <Dashkit {...props.dashkitProps} />
-      <ActionPanel {...props.actionPanelProps} />
-    </div>
-  );
-};
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dashkit/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dashkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dashkit)
-
----
-
-> Docs for `@gravity-ui/dashkit@8.26.0`. Versioned at: `https://gravity-ui.com/llms/dashkit/8.26.0/llms.txt` (exact), `https://gravity-ui.com/llms/dashkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/dashkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---

@@ -133,7 +133,19 @@ A declarative React charting library for Gravity UI apps — render line, area, 
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/dashkit/llms.txt)
 > GitHub: [gravity-ui/dashkit](https://github.com/gravity-ui/dashkit)
 
-A grid component for building interactive dashboards.
+A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
+
+#### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+#### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
 
 ## Data Source — `@gravity-ui/data-source`
 
@@ -307,7 +319,20 @@ A foundational Node.js toolkit (logging, telemetry, typed errors, config, reques
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/page-constructor/llms.txt)
 > GitHub: [gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor)
 
-A set of stylish, functional blocks for quickly creating promo and landing pages.
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+#### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+#### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
 
 ## Page-constructor-builder — `@gravity-ui/page-constructor-builder`
 
