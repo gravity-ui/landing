@@ -629,5 +629,36 @@ server {
         proxy_redirect off;
     }
 }
-
 ```
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## For AI agents
+
+A dashboard grid composer that arranges resizable, draggable widgets in a responsive grid via a plugin system — reach for it when you build a user-editable dashboard (add/move/resize/delete widgets) instead of placing individual charts or panels by hand.
+
+### When to use
+
+- Rendering a configurable dashboard where widgets are positioned, resized, and rearranged on a grid (built on `react-grid-layout`).
+- User-editable layouts: adding/removing widgets from an action panel, drag-and-drop, edit mode with overlay controls.
+- Plugin-based widgets where each widget type (title, text, chart, custom) is registered once and driven by a `config`.
+
+### When not to use
+
+- For a single, fixed chart or panel, use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directly — the grid/plugin machinery is overhead for one widget.
+- For a general-purpose responsive grid that is not a widget dashboard, use `react-grid-layout` directly.
+- For embedding ChartKit-backed chart widgets inside a DashKit dashboard, DashKit is the shell; it still relies on [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) to render the actual charts.
+
+### Common pitfalls
+
+- **Hallucinated component `<Dashboard>`** — the export is `<DashKit>` (the drag-and-drop shell is `<DashKitDnDWrapper>` wrapping `<DashKit>` + `<ActionPanel>`).
+- **Mutating `config` instead of using helpers** — use the static `DashKit.setItem({...})` / `DashKit.removeItem({...})` helpers to add/change/remove items so layout and ids stay consistent.
+- **Forgetting `DashKit.setSettings` / `DashKit.registerPlugins`** — the component must be configured (language, grid settings, plugin registration) before it is rendered, or widgets show nothing.
+- **Confusing the two param props** — `defaultGlobalParams` (dashboard-level defaults) vs `globalParams` (URL-overridable globals); both flow into the params generation queue consumed by ChartKit.
+- **Calling `onChange` manually with the `change` event** — when you `event.preventDefault()` in the experimental `change` handler, DashKit keeps the visual state internally; re-setting `config.layout` from props resets that baseline.
+
+## Documentation for AI agents
+
+Agent-readable documentation for the installed version is located in `node_modules/@gravity-ui/dashkit/build/docs/INDEX.md`.
