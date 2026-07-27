@@ -12,10 +12,10 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## 설명
 
-이 라이브러리는 위젯을 그리드에 정렬하고, 크기를 조절하며, 새로 추가하거나 삭제하는 데 사용됩니다.
-위젯은 React 컴포넌트입니다. 예를 들어 텍스트, 그래픽, 이미지 등이 있습니다.
+이 라이브러리는 위젯을 그리드에 정렬하고, 크기를 조절하며, 새 위젯을 추가하거나 삭제하는 데 사용됩니다.
+위젯은 React 컴포넌트이며, 텍스트, 그래픽, 이미지 등이 될 수 있습니다.
 
-새로운 위젯은 플러그인 시스템을 통해 추가됩니다.
+새 위젯은 플러그인 시스템을 통해 추가됩니다.
 
 ### 플러그인
 
@@ -68,32 +68,32 @@ interface DashKitProps {
 }
 ```
 
-- **config**: [설정](#Config)입니다.
-- **editMode**: 편집 모드가 활성화되었는지 여부입니다.
-- **onItemEdit**: 위젯 편집을 위해 클릭할 때 호출됩니다.
-- **onChange**: 설정 또는 [itemsStateAndParams](#itemsStateAndParams)가 변경될 때 호출됩니다.
-- **onDrop**: ActionPanel에서 (#DashKitDnDWrapper)를 사용하여 항목을 드롭할 때 호출됩니다.
-- **onItemMountChange**: 항목 마운트 상태가 변경될 때 호출됩니다.
-- **onItemRender**: 항목 렌더링이 완료될 때 호출됩니다.
-- **defaultGlobalParams**, **globalParams**: 모든 위젯에 영향을 미치는 [매개변수](#Params)입니다. DataLens에서 `defaultGlobalParams`는 대시보드 설정에 전역적으로 설정된 매개변수입니다. `globalParams`는 URL에 설정할 수 있는 전역 매개변수입니다.
+- **config**: [config](#Config)입니다.
+- **editMode**: 편집 모드 활성화 여부입니다.
+- **onItemEdit**: 위젯 편집을 클릭했을 때 호출됩니다.
+- **onChange**: config 또는 [itemsStateAndParams](#itemsStateAndParams)가 변경될 때 호출됩니다.
+- **onDrop**: ActionPanel에서 (#DashKitDnDWrapper)를 사용하여 아이템을 드롭할 때 호출됩니다.
+- **onItemMountChange**: 아이템 마운트 상태가 변경될 때 호출됩니다.
+- **onItemRender**: 아이템 렌더링이 완료될 때 호출됩니다.
+- **defaultGlobalParams**, **globalParams**: 모든 위젯에 영향을 미치는 [파라미터](#Params)입니다. DataLens에서 `defaultGlobalParams`는 대시보드 설정에 지정된 전역 파라미터입니다. `globalParams`는 URL에서 설정할 수 있는 전역 파라미터입니다.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)입니다.
 - **settings**: DashKit 설정입니다.
 - **context**: 모든 위젯에 전달될 객체입니다.
 - **overlayControls**: 편집 시 위젯 컨트롤을 재정의하는 객체입니다. 전달되지 않으면 기본 컨트롤이 표시됩니다. `null`이 전달되면 닫기 버튼 또는 사용자 정의 메뉴만 표시됩니다.
 - **overlayMenuItems**: 사용자 정의 드롭다운 메뉴 항목입니다.
-- **noOverlay**: `true`이면 편집 중에 오버레이 및 컨트롤이 표시되지 않습니다.
-- **focusable**: `true`이면 그리드 항목에 포커스를 맞출 수 있습니다.
-- **onItemFocus**: `focusable`이 `true`이고 항목에 포커스가 맞춰질 때 호출됩니다.
-- **onItemBlur**: `focusable`이 `true`이고 항목에서 포커스가 해제될 때 호출됩니다.
+- **noOverlay**: `true`이면 편집 중 오버레이 및 컨트롤이 표시되지 않습니다.
+- **focusable**: `true`이면 그리드 아이템에 포커스를 줄 수 있습니다.
+- **onItemFocus**: `focusable`이 `true`이고 아이템에 포커스가 맞춰졌을 때 호출됩니다.
+- **onItemBlur**: `focusable`이 `true`이고 아이템에서 포커스가 해제되었을 때 호출됩니다.
 - **draggableHandleClassName**: 위젯을 드래그 가능하게 만드는 요소의 CSS 클래스 이름입니다.
-- **onDragStart**: 항목 드래그가 시작될 때 ReactGridLayout에서 호출됩니다.
-- **onDrag**: 항목 드래그 중에 ReactGridLayout에서 호출됩니다.
-- **onDragStop**: 항목 드래그가 중지될 때 ReactGridLayout에서 호출됩니다.
-- **onResizeStart**: 항목 크기 조절이 시작될 때 ReactGridLayout에서 호출됩니다.
-- **onResize**: 항목 크기 조절 중에 ReactGridLayout에서 호출됩니다.
-- **onResizeStop**: 항목 크기 조절이 중지될 때 ReactGridLayout에서 호출됩니다.
-- **getPreparedCopyItemOptions**: 로컬 스토리지에 저장하기 전에 복사된 항목을 직렬화 가능한 객체로 변환할 때 호출됩니다. 비활성화된 `context.getPreparedCopyItemOptions` prop 대신 사용해야 합니다.
-- **onCopyFulfill**: 항목 복사가 성공적으로 완료되면 `error=null` 및 `data`가 정의된 상태로 호출되고, 그렇지 않으면 `error: Error`와 함께 `data` 없이 호출됩니다.
+- **onDragStart**: 아이템 드래그가 시작될 때 ReactGridLayout에서 호출됩니다.
+- **onDrag**: 아이템 드래그 중에 ReactGridLayout에서 호출됩니다.
+- **onDragStop**: 아이템 드래그가 중지될 때 ReactGridLayout에서 호출됩니다.
+- **onResizeStart**: 아이템 크기 조절이 시작될 때 ReactGridLayout에서 호출됩니다.
+- **onResize**: 아이템 크기 조절 중에 ReactGridLayout에서 호출됩니다.
+- **onResizeStop**: 아이템 크기 조절이 중지될 때 ReactGridLayout에서 호출됩니다.
+- **getPreparedCopyItemOptions**: 로컬 스토리지에 저장하기 전에 복사된 아이템을 직렬화 가능한 객체로 변환할 때 호출됩니다. 이는 더 이상 사용되지 않는 `context.getPreparedCopyItemOptions` prop 대신 사용해야 합니다.
+- **onCopyFulfill**: 아이템 복사가 성공적으로 완료되면 `error=null` 및 `data`와 함께 호출되고, 그렇지 않으면 `data` 없이 `error: Error`와 함께 호출됩니다.
 
 ## 사용법
 
@@ -152,20 +152,20 @@ interface DashKitProps {
   });
   ```
 
-### 설정
+### Config
 
 ```ts
 export interface Config {
   salt: string; // 고유 ID 생성을 위한 salt
-  counter: number; // 고유 ID 생성을 위한 카운터, 증가만 합니다.
+  counter: number; // 고유 ID 생성을 위한 counter, 증가만 합니다.
   items: ConfigItem[]; // 초기 위젯 상태
   layout: ConfigLayout[]; // 그리드 상의 위젯 위치 https://github.com/react-grid-layout
-  aliases: ConfigAliases; // 매개변수 별칭 #Params 참조
+  aliases: ConfigAliases; // 파라미터 별칭 #Params 참조
   connections: ConfigConnection[]; // 위젯 간 연결 #Params 참조
 }
 ```
 
-설정 예시:
+Config 예시:
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -250,7 +250,7 @@ const config: DashKitProps['config'] = {
 };
 ```
 
-새로운 항목을 config에 추가하기:
+새로운 항목을 설정에 추가합니다:
 
 ```ts
 const newLayout = updateLayout: [
@@ -277,7 +277,7 @@ const newConfig = DashKit.setItem({
     },
     namespace: 'default',
     type: 'text',
-    // 선택 사항. 기존 레이아웃에 새로운 항목을 미리 정의된 크기로 삽입해야 하는 경우
+    // 선택 사항. 새 항목을 미리 정의된 크기로 현재 레이아웃에 삽입해야 하는 경우
     layout: { // 현재 항목이 'Ea' 앞에 삽입됨
       h: 6,
       w: 12,
@@ -287,13 +287,13 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // 선택 사항. ActionPanel에서 새 요소를 드롭할 때 기존 항목에 대한 새 레이아웃 값
+    // 선택 사항. 새 요소가 ActionPanel에서 드롭될 때 기존 항목에 대한 새 레이아웃 값
     updateLayout: newLayout,
   },
 });
 ```
 
-기존 항목을 config에서 변경하기:
+설정에서 기존 항목을 변경합니다:
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -310,7 +310,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-config에서 항목 삭제하기:
+설정에서 항목을 삭제합니다:
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -324,7 +324,7 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 });
 ```
 
-### Params
+### 매개변수
 
 ```ts
 type Params = Record<string, string | string[]>;
@@ -337,7 +337,7 @@ type Params = Record<string, string | string[]>;
 1. `defaultGlobalParams`
 2. 기본 위젯 매개변수 `item.default`
 3. `globalParams`
-4. 큐에 따라 [itemsStateAndParams](#itemsStateAndParams)의 매개변수.
+4. 큐에 따라 [itemsStateAndParams](#itemsStateAndParams)의 매개변수
 
 ### itemsStateAndParams
 
@@ -372,7 +372,7 @@ type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 
 > 실험적: 이 API는 마이너 릴리스에서 변경될 수 있습니다.
 
-`DashKit`는 실험적인 인스턴스 이벤트 API를 노출합니다. 컴포넌트 ref를 사용하고 `dashkitRef.current?.on(eventName, handler)`로 구독하세요. 이 메서드는 구독 해제 콜백을 반환합니다.
+`DashKit`는 실험적인 인스턴스 이벤트 API를 제공합니다. 컴포넌트 ref를 사용하고 `dashkitRef.current?.on(eventName, handler)`로 구독하십시오. 이 메서드는 구독 취소 콜백을 반환합니다.
 
 지원되는 첫 번째 이벤트는 `change`입니다. 레이아웃이 변경될 때 `onChange`가 호출되기 전에 발생합니다. 핸들러는 이전 및 다음 전체 레이아웃을 읽거나, 레이아웃 패치를 읽거나, `preventDefault()`를 호출하여 기본 `onChange` 호출을 중지할 수 있습니다.
 
@@ -415,7 +415,7 @@ type DashKitChangeEvent = {
 
 #### 이벤트 기반 레이아웃 업데이트
 
-`preventDefault()`를 `change` 이벤트 핸들러에서 사용하면, config prop을 다시 초기화하지 않고도 레이아웃 업데이트를 처리할 수 있습니다. DashKit은 내부적으로 기준점을 유지하고 변경 사항을 점진적으로 계산합니다.
+`change` 이벤트 핸들러에서 `preventDefault()`를 사용하면 config prop을 다시 초기화하지 않고 레이아웃 업데이트를 처리할 수 있습니다. DashKit은 내부적으로 기준선을 유지하고 증분 방식으로 패치를 계산합니다.
 
 ```tsx
 function Dashboard() {
@@ -426,7 +426,7 @@ function Dashboard() {
     const unsubscribe = dashkitRef.current?.on('change', (event) => {
       event.preventDefault(); // onChange 호출 방지
 
-      // 변경된 부분만 백엔드로 전송
+      // 증분 패치만 백엔드로 전송
       sendPatches(event.patches);
 
       // setConfig({ ...config, layout: event.layout }) 호출 불필요
@@ -440,7 +440,7 @@ function Dashboard() {
 }
 ```
 
-**중요:** 나중에 props에서 `config.layout`을 업데이트하는 경우(예: 서버 동기화), DashKit은 새 prop과 일치하도록 내부 기준점을 재설정합니다. 이는 이벤트 기반 및 제어 워크플로우 모두와의 호환성을 보장합니다.
+**중요:** 나중에 props에서 `config.layout`을 업데이트하는 경우(예: 서버 동기화), DashKit은 새 prop과 일치하도록 내부 기준선을 재설정합니다. 이렇게 하면 이벤트 기반 및 제어 워크플로우 모두와 호환됩니다.
 
 ### 메뉴
 
@@ -451,7 +451,7 @@ type MenuItem = {
   id: string; // 고유 ID
   title?: string; // 문자열 제목
   icon?: ReactNode; // 아이콘 노드
-  iconSize?: number | string; // px 단위의 숫자 또는 단위가 포함된 문자열로 아이콘 크기
+  iconSize?: number | string; // px 단위의 아이콘 크기 (숫자 또는 단위 포함 문자열)
   handler?: (item: ConfigItem) => void; // 사용자 지정 항목 액션 핸들러
   visible?: (item: ConfigItem) => boolean; // 메뉴 항목 필터링을 위한 선택적 가시성 핸들러
   className?: string; // 사용자 지정 클래스 속성
@@ -479,7 +479,7 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string; // 드래그 이미지 미리보기, 기본값은 투명한 1px png base64 사용
+  dragImageSrc?: string; // 드래그 이미지 미리보기, 기본값은 투명한 1px png base64
   onDragStart?: (dragProps: ItemDragProps) => void; // ActionPanel에서 요소를 드래그할 때 호출되는 콜백
   onDragEnd?: () => void; // 요소가 드롭되거나 드래그가 취소될 때 호출되는 콜백
   onDropDragOver?: (
@@ -489,7 +489,7 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: 드래그 이미지 미리보기. 기본적으로 투명한 1px png base64가 사용됩니다.
+- **dragImageSrc**: 드래그 이미지 미리보기. 기본값은 투명한 1px png base64입니다.
 - **onDragStart**: ActionPanel에서 요소를 드래그할 때 호출되는 콜백입니다.
 - **onDragEnd**: 요소가 드롭되거나 드래그가 취소될 때 호출되는 콜백입니다.
 
@@ -544,23 +544,23 @@ const onDrop = (dropProps: ItemDropProps) => {
 
 | 이름                                           | 설명           |
 | :--------------------------------------------- | :------------- |
-| 액션 패널 변수                                 |                |
+| Action panel 변수                              |                |
 | `--dashkit-action-panel-color`                 | 배경색         |
 | `--dashkit-action-panel-border-color`          | 테두리 색상    |
 | `--dashkit-action-panel-border-radius`         | 테두리 반경    |
-| 액션 패널 항목 변수                            |                |
+| Action panel 항목 변수                         |                |
 | `--dashkit-action-panel-item-color`            | 배경색         |
 | `--dashkit-action-panel-item-text-color`       | 텍스트 색상    |
 | `--dashkit-action-panel-item-color-hover`      | 호버 배경색    |
 | `--dashkit-action-panel-item-text-color-hover` | 호버 텍스트 색상 |
-| 오버레이 변수                                  |                |
+| Overlay 변수                                   |                |
 | `--dashkit-overlay-border-color`               | 테두리 색상    |
 | `--dashkit-overlay-color`                      | 배경색         |
 | `--dashkit-overlay-opacity`                    | 투명도         |
-| 그리드 항목 변수                               |                |
+| Grid 항목 변수                                 |                |
 | `--dashkit-grid-item-edit-opacity`             | 투명도         |
 | `--dashkit-grid-item-border-radius`            | 테두리 반경    |
-| 플레이스홀더 변수                              |                |
+| Placeholder 변수                               |                |
 | `--dashkit-placeholder-color`                  | 배경색         |
 | `--dashkit-placeholder-opacity`                | 투명도         |
 
@@ -597,9 +597,9 @@ const CustomThemeWrapper = (props: {
 
 ## 개발
 
-### 빌드 및 워치
+### 빌드 및 감시
 
-- 의존성 설치 `npm ci`
+- 종속성 설치 `npm ci`
 - 프로젝트 빌드 `npm run build`
 - 스토리북 빌드 `npm run start`
 
@@ -631,5 +631,36 @@ server {
         proxy_redirect off;
     }
 }
-
 ```
+
+## 라이선스
+
+MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하십시오.
+
+## AI 에이전트용
+
+플러그인 시스템을 통해 크기 조절 및 드래그 가능한 위젯을 반응형 그리드에 배치하는 대시보드 그리드 컴포저입니다. 개별 차트나 패널을 수동으로 배치하는 대신 사용자 편집 가능한 대시보드를 구축할 때 사용하세요.
+
+### 언제 사용해야 할까요?
+
+- 위젯의 위치, 크기 조절, 재배치가 가능한 구성 가능한 대시보드를 렌더링할 때 ( `react-grid-layout` 기반).
+- 사용자 편집 가능한 레이아웃: 액션 패널에서 위젯 추가/제거, 드래그 앤 드롭, 오버레이 컨트롤이 있는 편집 모드.
+- 각 위젯 유형(제목, 텍스트, 차트, 사용자 정의)이 한 번 등록되고 `config`에 의해 구동되는 플러그인 기반 위젯.
+
+### 언제 사용하지 않아야 할까요?
+
+- 단일 고정 차트 또는 패널의 경우, [`@gravity-ui/charts`](https://gravity-ui.com/charts) 또는 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit)를 직접 사용하세요. 그리드/플러그인 메커니즘은 위젯 하나에 과도한 오버헤드입니다.
+- 위젯 대시보드가 아닌 범용 반응형 그리드의 경우, `react-grid-layout`을 직접 사용하세요.
+- DashKit 대시보드 내에 ChartKit 기반 차트 위젯을 포함하는 경우, DashKit이 쉘 역할을 하며 실제 차트 렌더링은 여전히 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit)에 의존합니다.
+
+### 일반적인 함정
+
+- **환각 컴포넌트 `<Dashboard>`** — 내보내기는 `<DashKit>`입니다 (드래그 앤 드롭 쉘은 `<DashKit>` + `<ActionPanel>`을 감싸는 `<DashKitDnDWrapper>`입니다).
+- **헬퍼 대신 `config`를 변경하는 경우** — 레이아웃과 ID가 일관되게 유지되도록 항목을 추가/변경/제거하려면 정적 `DashKit.setItem({...})` / `DashKit.removeItem({...})` 헬퍼를 사용하세요.
+- **`DashKit.setSettings` / `DashKit.registerPlugins`를 잊는 경우** — 컴포넌트가 렌더링되기 전에 구성(언어, 그리드 설정, 플러그인 등록)되어야 합니다. 그렇지 않으면 위젯이 아무것도 표시하지 않습니다.
+- **두 개의 매개변수 prop을 혼동하는 경우** — `defaultGlobalParams` (대시보드 수준 기본값) 대 `globalParams` (URL로 재정의 가능한 전역 변수); 둘 다 ChartKit에서 소비하는 매개변수 생성 큐로 전달됩니다.
+- **`change` 이벤트와 함께 `onChange`를 수동으로 호출하는 경우** — 실험적인 `change` 핸들러에서 `event.preventDefault()`를 사용하면 DashKit은 내부적으로 시각적 상태를 유지합니다. props에서 `config.layout`을 다시 설정하면 해당 기준선이 재설정됩니다.
+
+## AI 에이전트용 문서
+
+설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/dashkit/build/docs/INDEX.md`에 있습니다.
