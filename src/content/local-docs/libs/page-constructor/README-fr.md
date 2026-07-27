@@ -2,9 +2,9 @@
 
 ## Page constructor
 
-`Page-constructor` est une bibliothèque pour le rendu de pages web ou de leurs parties basé sur des données `JSON` (le support du format `YAML` sera ajouté ultérieurement).
+`Page-constructor` est une bibliothèque pour le rendu de pages web ou de leurs parties à partir de données `JSON` (la prise en charge du format `YAML` sera ajoutée ultérieurement).
 
-Lors de la création de pages, une approche basée sur les composants est utilisée : une page est construite à l'aide d'un ensemble de blocs prêts à l'emploi qui peuvent être placés dans n'importe quel ordre. Chaque bloc a un certain type et un ensemble de paramètres de données d'entrée.
+Lors de la création de pages, une approche basée sur les composants est utilisée : une page est construite à l'aide d'un ensemble de blocs prêts à l'emploi qui peuvent être placés dans n'importe quel ordre. Chaque bloc a un type spécifique et un ensemble de paramètres de données d'entrée.
 
 Pour le format des données d'entrée et la liste des blocs disponibles, consultez la [documentation](https://preview.gravity-ui.com/page-constructor/?path=/docs/documentation-blocks--docs).
 
@@ -55,7 +55,7 @@ export default App;
 
 C'était l'exemple de connexion le plus simple. Pour que le balisage YFM fonctionne, vous devez traiter le contenu sur le serveur et le recevoir sur le client.
 
-Si votre serveur est une application distincte, vous devez installer `page-constructor` :
+Si votre serveur est une application distincte, vous devez installer page-constructor :
 
 ```shell
 npm install @gravity-ui/page-constructor
@@ -118,7 +118,7 @@ export default App;
 
 Pour démarrer un nouveau projet, vous pouvez utiliser le [modèle prêt à l'emploi sur Next.js](https://github.com/gravity-ui/page-constructor-website-template) que nous avons préparé.
 
-### Générateur de sites statiques
+### Générateur de site statique
 
 [Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - utilitaire en ligne de commande pour construire des pages statiques à partir de configurations YAML en utilisant @gravity-ui/page-constructor
 
@@ -220,7 +220,7 @@ const {html} = fullTransform(content, {
 });
 ```
 
-En interne, un package est utilisé pour transformer le Yandex Flavored Markdown en HTML - `diplodoc/transfrom`, il est donc également dans les dépendances pairées.
+En coulisses, un package est utilisé pour transformer le Yandex Flavored Markdown en HTML - `diplodoc/transfrom`, il est donc également dans les dépendances pairées.
 
 Vous pouvez également utiliser des utilitaires utiles là où vous en avez besoin, par exemple dans vos composants personnalisés.
 
@@ -246,7 +246,7 @@ Pour un guide complet sur l'utilisation des utilitaires serveur, y compris des e
 
 ### Blocs personnalisés
 
-Le constructeur de pages vous permet d'utiliser des blocs définis par l'utilisateur dans leur application. Les blocs sont des composants React ordinaires.
+Le constructeur de page vous permet d'utiliser des blocs définis par l'utilisateur dans leur application. Les blocs sont des composants React ordinaires.
 
 Pour passer des blocs personnalisés au constructeur :
 
@@ -272,9 +272,9 @@ Pour utiliser la police par défaut, ajoutez une importation dans votre fichier 
 
 ### Blocs chargeables
 
-Il est parfois nécessaire qu'un bloc se rende lui-même en fonction des données à charger. Dans ce cas, des blocs chargeables sont utilisés.
+Il est parfois nécessaire qu'un bloc se rende en fonction des données à charger. Dans ce cas, des blocs chargeables sont utilisés.
 
-Pour ajouter des blocs `loadable` personnalisés, passez au `PageConstructor` la propriété `custom.loadable` avec les noms des sources de données (chaîne de caractères) pour le composant comme clé et un objet comme valeur.
+Pour ajouter des blocs `loadable` personnalisés, passez à `PageConstructor` la propriété `custom.loadable` avec les noms des sources de données (chaîne de caractères) pour le composant comme clé et un objet comme valeur.
 
 ```typescript
 export interface LoadableConfigItem {
@@ -287,7 +287,7 @@ type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
 
 ### Grille
 
-Le constructeur de pages utilise la grille `bootstrap` et son implémentation basée sur des composants React que vous pouvez utiliser dans votre propre projet (y compris séparément du constructeur).
+Le constructeur de page utilise la grille `bootstrap` et son implémentation basée sur des composants React que vous pouvez utiliser dans votre propre projet (y compris séparément du constructeur).
 
 Exemple d'utilisation :
 
@@ -333,12 +333,12 @@ Les sous-blocs sont des composants qui peuvent être utilisés dans la propriét
 
 5. Ajoutez un validateur pour le nouveau bloc :
 
-   - Ajoutez un fichier `schema.ts` au répertoire du bloc ou du sous-bloc. Dans ce fichier, décrivez un validateur de paramètres pour le composant au format [`json-schema`](http://json-schema/).
+   - Ajoutez un fichier `schema.ts` au répertoire du bloc ou du sous-bloc. Dans ce fichier, décrivez un validateur de paramètre pour le composant au format [`json-schema`](http://json-schema.org/).
    - Exportez-le dans le fichier `schema/validators/blocks.ts` ou `schema/validators/sub-blocks.ts`.
-   - Ajoutez-le à `enum` ou `selectCases` dans le fichier `schema/index.ts`.
+   - Ajoutez-le à l'énumération `enum` ou `selectCases` dans le fichier `schema/index.ts`.
 
 6. Dans le répertoire du bloc, ajoutez le fichier `README.md` avec une description des paramètres d'entrée.
-7. Dans le répertoire du bloc, ajoutez une démo Storybook dans le dossier `__stories__`. Tout le contenu de démo pour Storybook doit être placé dans `data.json` dans le répertoire de l'histoire. Le `Story` générique doit accepter le type des props du bloc, sinon des props de bloc incorrectes seront affichées dans Storybook.
+7. Dans le répertoire du bloc, ajoutez une démo Storybook dans le dossier `__stories__`. Tout le contenu de démo pour l'histoire doit être placé dans `data.json` dans le répertoire de l'histoire. Le `Story` générique doit accepter le type des props du bloc, sinon des props de bloc incorrectes seront affichées dans Storybook.
 8. Ajoutez un modèle de données de bloc au dossier `src/editor/data/templates/`, le nom du fichier doit correspondre au type de bloc.
 9. (facultatif) Ajoutez une icône de prévisualisation de bloc au dossier `src/editor/data/previews/`, le nom du fichier doit correspondre au type de bloc.
 
@@ -356,7 +356,7 @@ Pour ajouter un thème à une propriété de bloc :
 
 ### i18n
 
-Le `page-constructor` est une bibliothèque basée sur `uikit`, et nous utilisons une instance de `i18n` de uikit. Pour configurer l'internationalisation, il vous suffit d'utiliser `configure` de uikit :
+Le `page-constructor` est une bibliothèque basée sur `uikit`, et nous utilisons une instance de `i18n` de uikit. Pour configurer l'internationalisation, il vous suffit d'utiliser la fonction `configure` de uikit :
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';
@@ -370,14 +370,14 @@ configure({
 
 Pour utiliser des cartes, placez le type de carte, `scriptSrc` et `apiKey` dans le champ `mapContext` de `PageConstructorProvider`.
 
-Vous pouvez définir des variables d'environnement pour le mode de développement dans le fichier .env.development à la racine du projet.
-`STORYBOOK_GMAP_API_KEY` - apiKey pour les cartes Google
+Vous pouvez définir des variables d'environnement pour le mode de développement dans le fichier `.env.development` à la racine du projet.
+`STORYBOOK_GMAP_API_KEY` - apiKey pour google maps
 
-### Analyse
+### Analytique
 
 #### Initialisation
 
-Pour commencer à utiliser une analyse quelconque, passez un gestionnaire au constructeur. Le gestionnaire doit être créé côté projet. Le gestionnaire recevra les objets d'événement `default` et `custom`. Le gestionnaire passé sera déclenché lors des clics sur les boutons, les liens, la navigation et les contrôles. Comme un seul gestionnaire est utilisé pour le traitement de tous les événements, faites attention à la manière de traiter les différents événements lors de la création du gestionnaire. Il existe des champs prédéfinis qui servent à vous aider à construire une logique complexe.
+Pour commencer à utiliser une quelconque analytique, passez un gestionnaire au constructeur. Le gestionnaire doit être créé côté projet. Le gestionnaire recevra les objets d'événements `default` et `custom`. Le gestionnaire passé sera déclenché lors des clics sur les boutons, les liens, la navigation et les contrôles. Comme un seul gestionnaire est utilisé pour le traitement de tous les événements, faites attention à la manière de traiter les différents événements lors de la création du gestionnaire. Il existe des champs prédéfinis qui servent à vous aider à construire une logique complexe.
 
 Passez `autoEvents: true` au constructeur pour déclencher des événements configurés automatiquement.
 
@@ -395,177 +395,9 @@ function sendEvents(events: MyEventType []) {
 />
 ```
 
-Un objet d'événement possède un seul champ obligatoire : `name`. Il dispose également de champs prédéfinis qui aident à gérer une logique complexe. Par exemple, `counter.include` peut aider à envoyer un événement dans un compteur particulier si plusieurs systèmes d'analyse sont utilisés dans un projet.
+Un objet événement possède un seul champ obligatoire : `name`. Il dispose également de champs prédéfinis qui servent à faciliter la gestion de logiques complexes. Par exemple, `counter.include` peut aider à envoyer un événement dans un compteur particulier si plusieurs systèmes d
 
-```ts
-type AnalyticsEvent<T = {}> = T & {
-  name: string;
-  type?: string;
-  counters?: AnalyticsCounters;
-  context?: string;
-};
-```
-
-Il est possible de configurer le type d'événement nécessaire pour un projet.
-
-```ts
-type MyEventType = AnalyticsEvent<{
-  [key: string]?: string; // seul le type 'string' est supporté
-}>;
-```
-
-#### Sélecteur de compteur
-
-Il est possible de configurer un événement pour déterminer vers quel système d'analyse l'envoyer.
-
-```ts
-type AnalyticsCounters = {
-  include?: string[]; // tableau des identifiants de compteurs d'analyse qui seront appliqués
-  exclude?: string[]; // tableau des identifiants de compteurs d'analyse qui ne seront pas appliqués
-};
-```
-
-#### Paramètre `context`
-
-Passez la valeur `context` pour définir l'endroit dans le projet où un événement est déclenché.
-
-Utilisez le sélecteur ci-dessous ou créez une logique qui répond aux besoins du projet.
-
-```ts
-// analyticsHandler.ts
-if (isCounterAllowed(counterName, counters)) {
-  analyticsCounter.reachGoal(counterName, name, parameters);
-}
-```
-
-#### Types d'événements réservés
-
-Plusieurs types d'événements prédéfinis sont utilisés pour marquer les événements configurés automatiquement. Utilisez ces types pour filtrer les événements par défaut, par exemple.
-
-```ts
-enum PredefinedEventTypes {
-  Default = 'default-event', // événements par défaut qui se déclenchent à chaque clic sur un bouton
-  Play = 'play', // événement du lecteur React
-  Stop = 'stop', // événement du lecteur React
-}
-```
-
-## Développement
-
-```bash
-npm ci
-npm run dev
-```
-
-#### Note sur Vite
-
-```ts
-import react from '@vitejs/plugin-react-swc';
-import dynamicImport from 'vite-plugin-dynamic-import';
-
-export default defineConfig({
-  plugins: [
-    react(),
-    dynamicImport({
-      filter: (id) => id.includes('/node_modules/@gravity-ui/page-constructor'),
-    }),
-  ],
-});
-```
-
-Pour Vite, vous devez installer le plugin `vite-plugin-dynamic-import` et configurer le fichier de configuration pour que les importations dynamiques fonctionnent.
-
-## Flux de publication
-
-Dans la plupart des cas, nous utilisons deux types de commits :
-
-1. `fix` : un commit de type `fix` corrige un bug dans votre base de code (ce qui correspond à PATCH dans la sémantique de versionnement).
-2. `feat` : un commit de type `feat` introduit une nouvelle fonctionnalité dans la base de code (ce qui correspond à MINOR dans la sémantique de versionnement).
-3. `BREAKING CHANGE` : un commit qui a un pied de page `BREAKING CHANGE:`, ou qui ajoute un `!` après le type/scope, introduit un changement d'API majeur (correspondant à MAJOR dans la sémantique de versionnement). Un `BREAKING CHANGE` peut faire partie de commits de n'importe quel type.
-4. Pour définir manuellement la version du package de publication, vous devez ajouter `Release-As: <version>` à votre message de commit, par exemple :
-
-```bash
-git commit -m 'chore: bump release
-
-Release-As: 1.2.3'
-```
-
-Vous pouvez trouver toutes les informations [ici](https://www.conventionalcommits.org/en/v1.0.0/).
-
-Lorsque vous recevez l'approbation de votre pull-request par les propriétaires du code et que vous passez toutes les vérifications, veuillez suivre les étapes suivantes :
-
-1. Vérifiez s'il existe une pull-request de publication du robot avec des changements d'un autre contributeur (elle ressemble à `chore(main): release 0.0.0`). Si elle existe, vérifiez pourquoi elle n'a pas été fusionnée. Si le contributeur accepte de publier une version partagée, passez à l'étape suivante. Sinon, demandez-lui de publier sa version, puis suivez l'étape suivante.
-2. Squash and merge votre PR (il est important de publier une nouvelle version avec Github-Actions).
-3. Attendez que le robot crée une PR avec une nouvelle version du package et des informations sur vos changements dans CHANGELOG.md. Vous pouvez suivre le processus dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
-4. Vérifiez vos changements dans CHANGELOG.md et approuvez la PR du robot.
-5. Squash and merge la PR. Vous pouvez suivre le processus de publication dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
-
-### Publication de versions alpha
-
-Si vous souhaitez publier une version alpha du package depuis votre branche, vous pouvez le faire manuellement :
-
-1. Allez dans l'onglet Actions.
-2. Sélectionnez le workflow "Release alpha version" sur le côté gauche de la page.
-3. Sur le côté droit, vous verrez le bouton "Run workflow". Ici, vous pouvez choisir la branche.
-4. Vous verrez également un champ pour la version manuelle. Si c'est la première fois que vous publiez une alpha sur votre branche, ne laissez rien ici. Après la première publication, vous devrez définir la nouvelle version manuellement car nous ne modifions pas package.json au cas où la branche expirerait très bientôt. Utilisez le préfixe `alpha` dans votre version manuelle, sinon vous obtiendrez une erreur.
-5. Cliquez sur "Run workflow" et attendez que l'action se termine. Vous pouvez publier autant de versions que vous le souhaitez, mais n'en abusez pas et publiez des versions uniquement si vous en avez vraiment besoin. Dans les autres cas, utilisez [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
-
-### Publication de versions bêta majeures
-
-Si vous souhaitez publier une nouvelle version majeure, vous aurez probablement besoin de versions bêta avant la version stable. Veuillez suivre les étapes suivantes :
-
-1. Créez ou mettez à jour la branche `beta`.
-2. Ajoutez-y vos changements.
-3. Lorsque vous êtes prêt pour une nouvelle version bêta, publiez-la manuellement avec un commit vide (ou vous pouvez ajouter ce message de commit avec un pied de page au dernier commit) :
-
-```bash
-git commit -m 'fix: last commit
-
-Release-As: 3.0.0-beta.0' --allow-empty
-```
-
-4. Le robot de publication créera une nouvelle PR vers la branche `beta` avec un CHANGELOG.md mis à jour et la version du package incrémentée.
-5. Vous pouvez répéter cela autant de fois que vous le souhaitez. Lorsque vous êtes prêt à publier la dernière version majeure sans tag bêta, vous devez créer une PR de la branche `beta` vers la branche `main`. Notez qu'il est normal que la version de votre package ait un tag bêta. Le robot le sait et le gère correctement. `3.0.0-beta.0` deviendra `3.0.0`.
-
-### Flux de publication pour les versions majeures précédentes
-
-Si vous souhaitez publier une nouvelle version dans une version majeure précédente après l'avoir commitée sur `main`, veuillez suivre les étapes suivantes :
-
-1. Mettez à jour la branche nécessaire. Les noms des branches de publication des versions majeures précédentes sont :
-   1. `version-1.x.x/fixes` - pour la version majeure 1.x.x
-   2. `version-2.x.x` - pour la version majeure 2.x.x
-2. Créez une nouvelle branche à partir de la branche de publication de la version majeure précédente.
-3. Cherry-pick votre commit depuis la branche `main`.
-4. Créez une PR, obtenez l'approbation et fusionnez-la dans la branche de publication de la version majeure précédente.
-5. Squash and merge votre PR (il est important de publier une nouvelle version avec Github-Actions).
-6. Attendez que le robot crée une PR avec une nouvelle version du package et des informations sur vos changements dans CHANGELOG.md. Vous pouvez suivre le processus dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
-7. Vérifiez vos changements dans CHANGELOG.md et approuvez la PR du robot.
-8. Squash and merge la PR. Vous pouvez suivre le processus de publication dans [l'onglet Actions](https://github.com/gravity-ui/page-constructor/actions).
-
-## Éditeur de constructeur de page
-
-L'éditeur fournit une interface utilisateur pour la gestion du contenu de la page avec un aperçu en temps réel.
-
-Comment l'utiliser :
-
-```tsx
-import {Editor} from '@gravity-ui/page-constructor/editor';
-
-interface MyAppEditorProps {
-  initialContent: PageContent;
-  transformContent: ContentTransformer;
-  onChange: (content: PageContent) => void;
-}
-
-export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppEditorProps) => (
-  <Editor content={initialContent} onChange={onChange} transformContent={transformContent} />
-);
-```
-
-## Memory Bank
-```
-
-Ce projet inclut une **Banque de Mémoire** complète - une collection de fichiers de documentation Markdown qui fournissent des informations détaillées sur l'architecture du projet, ses composants et ses modèles d'utilisation. La Banque de Mémoire est particulièrement utile lorsque l'on travaille avec des agents IA, car elle contient des informations structurées sur :
+Ce projet inclut une **Banque de Mémoire** complète – une collection de fichiers de documentation Markdown qui fournissent des informations détaillées sur l'architecture du projet, ses composants et ses modèles d'utilisation. La Banque de Mémoire est particulièrement utile lorsque l'on travaille avec des agents IA, car elle contient des informations structurées sur :
 
 - **Vue d'ensemble du projet** : Exigences fondamentales, objectifs et contexte
 - **Documentation des composants** : Guides d'utilisation détaillés pour tous les composants
@@ -576,7 +408,7 @@ Ce projet inclut une **Banque de Mémoire** complète - une collection de fichie
 
 La Banque de Mémoire se trouve dans le répertoire `memory-bank/` et se compose de fichiers Markdown ordinaires qui peuvent être lus comme toute autre documentation :
 
-- `projectbrief.md` - Document fondamental avec les exigences de base
+- `projectbrief.md` - Document de base avec les exigences fondamentales
 - `productContext.md` - Objectifs du projet et expérience utilisateur
 - `systemPatterns.md` - Architecture et décisions techniques
 - `techContext.md` - Technologies, configuration et contraintes
@@ -585,17 +417,39 @@ La Banque de Mémoire se trouve dans le répertoire `memory-bank/` et se compose
 - `usage/` - Documentation d'utilisation spécifique aux composants
 - `storybookComponents.md` - Détails de l'intégration Storybook
 
-### Pour les agents IA
-
-Lorsque vous travaillez avec des agents IA sur ce projet, la Banque de Mémoire sert de base de connaissances complète qui aide les agents à comprendre :
-
-- La structure et les modèles du projet
-- Les API des composants et les exemples d'utilisation
-- Les flux de développement et les meilleures pratiques
-- L'état actuel de l'implémentation et les prochaines étapes
-
-Les agents IA peuvent lire ces fichiers pour se familiariser rapidement avec le contexte du projet et prendre des décisions plus éclairées concernant les modifications de code et les implémentations.
-
 ## Tests
 
 Une documentation complète est disponible au [lien](./test-utils/docs/README.md) fourni.
+
+## Licence
+
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
+
+## Pour les agents IA
+
+Une bibliothèque pour rendre des pages web entières ou des sections de pages à partir d'une configuration déclarative JSON/YAML, en utilisant un ensemble de blocs prêts à l'emploi et ordonnables — utilisez-la pour construire des pages marketing/de destination, pas des interfaces utilisateur d'application générales.
+
+### Quand l'utiliser
+
+- Pages basées sur des données : rendez une configuration `content` de blocs typés avec `PageConstructor` encapsulé dans `PageConstructorProvider`.
+- Pages marketing, de destination et de documentation assemblées à partir de blocs préfabriqués (en-têtes, médias, cartes, etc.).
+- Traitement côté serveur de YFM de texte de bloc via les utilitaires `@gravity-ui/page-constructor/server` (`contentTransformer`, `fullTransform`).
+- Réutilisation de la grille responsive (`Grid`/`Row`/`Col`) ou du composant `Navigation` de manière autonome.
+
+### Quand ne pas l'utiliser
+
+- Interfaces utilisateur d'application générales (boutons, formulaires, modales) — utilisez [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Édition de contenu Markdown/YFM — utilisez [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- Coques de navigation d'application (en-tête latéral) — utilisez [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation) ; le `Navigation` de ce package est une navigation principale au niveau de la page.
+
+### Pièges courants
+
+- **`PageConstructor` doit être encapsulé dans `PageConstructorProvider`.** Le rendre tel quel casse le contexte (locale, thème, SSR, analytique).
+- **La prop `content` est `content`, structurée `{blocks: [...]}`.** Chaque objet de bloc a besoin d'un `type` correspondant à un bloc connu plus ses champs de données ; il n'y a pas de prop `data`/`config`.
+- **YFM dans le texte des blocs nécessite un traitement côté serveur.** Les champs de type Markdown sont rendus comme du texte brut à moins que vous ne traitiez le contenu via `contentTransformer`/`fullTransform` depuis `@gravity-ui/page-constructor/server` ; `@diplodoc/transform` est une dépendance pair requise.
+- **Importez les styles SCSS.** Ajoutez `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, pas CSS) ; les blocs personnalisés importent le même fichier pour réutiliser les mixins/variables.
+- **Vite a besoin de `vite-plugin-dynamic-import`.** Les importations dynamiques de blocs échouent sous Vite sans cela.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/page-constructor/build/docs/INDEX.md`.
