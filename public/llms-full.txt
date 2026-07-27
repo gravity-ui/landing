@@ -96,7 +96,18 @@ Browserslist configuration preset used in our services.
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/chartkit/llms.txt)
 > GitHub: [gravity-ui/chartkit](https://github.com/gravity-ui/chartkit)
 
-A data visualization suite integrated with our design system.
+A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+
+#### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+#### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
 
 ## Charts — `@gravity-ui/charts`
 
@@ -155,7 +166,18 @@ React date and time controls for Gravity UI apps — date/time pickers, calendar
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/date-utils/llms.txt)
 > GitHub: [gravity-ui/date-utils](https://github.com/gravity-ui/date-utils)
 
-Helpers for managing Date and Time values.
+Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
+
+#### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+#### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
 
 ## Dialog Fields — `@gravity-ui/dialog-fields`
 
@@ -10504,7 +10526,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10515,8 +10537,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10525,6 +10545,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `@gravity-ui/uikit` | `^7.0.0` |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10544,7 +10657,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10555,8 +10668,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10565,6 +10676,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10584,7 +10788,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10595,8 +10799,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10605,6 +10807,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10624,7 +10919,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10635,8 +10930,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10645,6 +10938,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10664,7 +11050,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10675,8 +11061,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10685,6 +11069,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10704,7 +11181,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10715,8 +11192,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10725,6 +11200,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10744,7 +11312,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10755,8 +11323,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10765,6 +11331,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10784,7 +11443,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10795,8 +11454,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10805,6 +11462,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10824,7 +11574,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10835,8 +11585,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10845,6 +11593,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10864,7 +11705,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10875,8 +11716,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10885,6 +11724,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10904,7 +11836,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10915,8 +11847,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10925,6 +11855,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10944,7 +11967,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10955,8 +11978,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -10965,6 +11986,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -10984,7 +12098,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -10995,8 +12109,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -11005,6 +12117,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -11024,7 +12229,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -11035,8 +12240,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -11045,6 +12248,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -11064,7 +12360,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -11075,8 +12371,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -11085,6 +12379,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -11104,7 +12491,7 @@ Install these in the host project at a compatible version:
 
 # ChartKit
 
-> A data visualization suite integrated with our design system.
+> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
 >
 > **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -11115,8 +12502,6 @@ npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -11125,6 +12510,99 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
 
 ## Links
 
@@ -32606,7 +34084,7 @@ export function App() {
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -32653,7 +34131,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -32672,7 +34167,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -32719,7 +34214,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -32738,7 +34250,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -32785,7 +34297,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -32804,7 +34333,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -32851,7 +34380,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -32870,7 +34416,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -32917,7 +34463,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -32936,7 +34499,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -32983,7 +34546,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -33002,7 +34582,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -33049,7 +34629,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -33068,7 +34665,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -33115,7 +34712,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -33134,7 +34748,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -33181,7 +34795,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -33200,7 +34831,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -33247,7 +34878,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -33266,7 +34914,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -33313,7 +34961,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 
@@ -33332,7 +34997,7 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 # Date Utils
 
-> Helpers for managing Date and Time values.
+> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
 >
 > **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -33379,7 +35044,24 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md) for full documentation.
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
 
 ## Links
 

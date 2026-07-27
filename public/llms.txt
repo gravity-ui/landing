@@ -96,7 +96,18 @@ Browserslist configuration preset used in our services.
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/chartkit/llms.txt)
 > GitHub: [gravity-ui/chartkit](https://github.com/gravity-ui/chartkit)
 
-A data visualization suite integrated with our design system.
+A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+
+#### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+#### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
 
 ## Charts — `@gravity-ui/charts`
 
@@ -155,7 +166,18 @@ React date and time controls for Gravity UI apps — date/time pickers, calendar
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/date-utils/llms.txt)
 > GitHub: [gravity-ui/date-utils](https://github.com/gravity-ui/date-utils)
 
-Helpers for managing Date and Time values.
+Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
+
+#### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+#### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
 
 ## Dialog Fields — `@gravity-ui/dialog-fields`
 
