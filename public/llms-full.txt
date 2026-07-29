@@ -4529,6 +4529,128 @@ function App() {
 
 ---
 
+> Generated for `@gravity-ui/charts@1.57.1`
+
+# @gravity-ui/charts documentation
+
+Documentation for the **1.57.1** version of `@gravity-ui/charts`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
+
+## For AI agents
+
+A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
+
+### When to use
+
+- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
+- Rendering a chart from declarative data rather than drawing imperatively.
+
+### When not to use
+
+- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
+- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
+
+### Common pitfalls
+
+- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
+- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
+- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
+- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
+
+### Useful docs
+
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/get-started.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/tooltip.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/legend.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/html.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/value-formatting.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/data-labels.md)
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/axis-types.md)
+
+## Install
+
+```shell
+npm install @gravity-ui/uikit @gravity-ui/charts
+```
+
+`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@gravity-ui/uikit` | `^7.0.0` |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+
+## Usage
+
+Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {Chart} from '@gravity-ui/charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Temperature',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <Chart data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`Chart` adapts to its parent's size, so the wrapping element must have a height.
+
+## Guides
+
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/data-labels.md)
+- [Development](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/development.md)
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/get-started.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/html.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/legend.md)
+- [Overview](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/overview.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/tooltip.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.57.1/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
+
+---
+
+> Docs for `@gravity-ui/charts@1.57.1`. Versioned at: `https://gravity-ui.com/llms/charts/1.57.1/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/charts@1.57.0`
 
 # @gravity-ui/charts documentation
@@ -4586,9 +4708,9 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/uikit` | `^7.0.0` |
 | `react` | `>=17.0.0` |
 | `react-dom` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
 
 ## Usage
 
@@ -10830,20 +10952,43 @@ Install these in the host project at a compatible version:
 
 ---
 
-> Generated for `@gravity-ui/chartkit@7.60.5`
+> Generated for `@gravity-ui/chartkit@7.61.0`
 
-# ChartKit
+# @gravity-ui/chartkit documentation
 
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **7.61.0** version of `@gravity-ui/chartkit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
+
+## For AI agents
+
+A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
 
 ## Install
 
 ```shell
 npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
-
 
 ## Peer dependencies
 
@@ -10926,561 +11071,13 @@ export default function App() {
 
 `ChartKit` adapts to its parent's size — make sure the container has an explicit height.
 
+## Guides
 
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
+- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@7.61.0/build/docs/guides/testing.md)
 
 ---
 
-> Docs for `@gravity-ui/chartkit@7.60.5`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.60.5/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/chartkit@7.60.4`
-
-# ChartKit
-
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
-```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-```
-
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-### Basic usage
-
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
-
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-settings.set({plugins: [GravityChartsPlugin]});
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
-
-
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
-
----
-
-> Docs for `@gravity-ui/chartkit@7.60.4`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.60.4/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/chartkit@7.60.3`
-
-# ChartKit
-
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
-```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-```
-
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-### Basic usage
-
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
-
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-settings.set({plugins: [GravityChartsPlugin]});
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
-
-
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
-
----
-
-> Docs for `@gravity-ui/chartkit@7.60.3`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.60.3/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/chartkit@7.60.2`
-
-# ChartKit
-
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
-```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-```
-
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-### Basic usage
-
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
-
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-settings.set({plugins: [GravityChartsPlugin]});
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
-
-
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
-
----
-
-> Docs for `@gravity-ui/chartkit@7.60.2`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.60.2/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/chartkit@7.60.1`
-
-# ChartKit
-
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
-```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-```
-
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-### Basic usage
-
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
-
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-settings.set({plugins: [GravityChartsPlugin]});
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
-
-
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
-
----
-
-> Docs for `@gravity-ui/chartkit@7.60.1`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.60.1/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/chartkit@7.61.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.61.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -12664,137 +12261,6 @@ export default function App() {
 
 ---
 
-> Generated for `@gravity-ui/chartkit@7.51.0`
-
-# ChartKit
-
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
-```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-```
-
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-### Basic usage
-
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
-
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-settings.set({plugins: [GravityChartsPlugin]});
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
-
-
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
-
----
-
-> Docs for `@gravity-ui/chartkit@7.51.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.51.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/chartkit@6.1.2`
 
 # ChartKit
@@ -12926,11 +12392,11 @@ export default function App() {
 
 ---
 
-> Generated for `@gravity-ui/table@1.18.1`
+> Generated for `@gravity-ui/table@1.19.0`
 
 # @gravity-ui/table documentation
 
-Documentation for the **1.18.1** version of `@gravity-ui/table`.
+Documentation for the **1.19.0** version of `@gravity-ui/table`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
@@ -13681,20 +13147,20 @@ Learn more about the table and the column resizing properties in the react-table
 
 ## Guides
 
-- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
-- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.19.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.19.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
 
 ## Components
 
-- [BaseTable](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.19.0/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
 
 ## Hooks
 
-- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.18.1/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.19.0/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
 
 ---
 
-> Docs for `@gravity-ui/table@1.18.1`. Versioned at: `https://gravity-ui.com/llms/table/1.18.1/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/table@1.19.0`. Versioned at: `https://gravity-ui.com/llms/table/1.19.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -20490,769 +19956,6 @@ Learn more about the table and the column resizing properties in the react-table
 ---
 
 > Docs for `@gravity-ui/table@1.9.0`. Versioned at: `https://gravity-ui.com/llms/table/1.9.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/table@1.8.0`
-
-# Table
-
-> A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
->
-> **npm:** `@gravity-ui/table` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save @gravity-ui/table
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0` |
-| `@dnd-kit/core` | `^6.0.0` |
-| `@gravity-ui/i18n` | `^1.0.0` |
-| `@dnd-kit/sortable` | `^8.0.0` |
-| `@gravity-ui/icons` | `^2.0.0` |
-| `@gravity-ui/uikit` | `^6.0.0` |
-
-## Usage
-
-```tsx
-import React from 'react';
-import {Table, useTable} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-interface Person {
-  id: string;
-  name: string;
-  age: number;
-}
-
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const data: Person[] = [
-  {id: 'name', name: 'John', age: 23},
-  {id: 'age', name: 'Michael', age: 27},
-];
-
-const BasicExample = () => {
-  const table = useTable({
-    columns,
-    data,
-  });
-
-  return <Table table={table} />;
-};
-```
-
-### Components
-
-There are two Table components that you can use:
-
-- `BaseTable` - a component with basic styles only;
-- `Table` - a component with Gravity UI based styles.
-
-#### Row selection
-
-```tsx
-import {selectionColumn} from '@gravity-ui/table';
-import type {RowSelectionState} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  selectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const RowSelectionExample = () => {
-  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    enableMultiRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
-
-#### Custom Ranged Selection Column
-
-The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
-
-```tsx
-import React, {type ChangeEvent, useCallback, useState} from 'react';
-
-import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
-import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
-import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
-
-type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
-  cellContext: CellContext<unknown, unknown>;
-};
-
-const CustomRangedSelectionCheckbox = ({
-  className,
-  cellContext,
-  ...restProps
-}: CustomRangedSelectionCheckboxProps) => {
-  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
-
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      rowToggleRangedSelectionHandler(event);
-    },
-    [rowToggleRangedSelectionHandler],
-  );
-
-  return <Checkbox {...restProps} onChange={handleChange} />;
-};
-
-const customSelectionColumn: ColumnDef<unknown> = {
-  id: '_select',
-  header: ({table}) => (
-    <Checkbox
-      size="l"
-      checked={table.getIsAllRowsSelected()}
-      indeterminate={table.getIsSomeRowsSelected()}
-      onChange={table.getToggleAllRowsSelectedHandler()}
-    />
-  ),
-  cell: (cellContext) => (
-    <CustomRangedSelectionCheckbox
-      size="l"
-      checked={cellContext.row.getIsSelected()}
-      disabled={!cellContext.row.getCanSelect()}
-      indeterminate={cellContext.row.getIsSomeSelected()}
-      cellContext={cellContext}
-    />
-  ),
-  size: 41,
-  maxSize: 41,
-  minSize: 41,
-  enableResizing: false,
-  enableSorting: false,
-};
-
-const columns: ColumnDef<Person>[] = [
-  customSelectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const RowRangedSelectionExample = () => {
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    enableMultiRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-There is also a `RangedSelectionCheckbox` component, which internally uses the hook and accepts a `CellContext` instance as a prop. This component provides a shorthand for adding ranged selection functionality to custom selection columns.
-
-```tsx
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
-
-export const selectionColumn: ColumnDef<unknown> = {
-  id: '_select',
-  header: ({table}) => (
-    <SelectionCheckbox
-      checked={table.getIsAllRowsSelected()}
-      disabled={!table.options.enableRowSelection}
-      indeterminate={table.getIsSomeRowsSelected()}
-      onChange={table.getToggleAllRowsSelectedHandler()}
-    />
-  ),
-  cell: (cellContext) => (
-    <RangedSelectionCheckbox
-      checked={cellContext.row.getIsSelected()}
-      disabled={!cellContext.row.getCanSelect()}
-      indeterminate={cellContext.row.getIsSomeSelected()}
-      cellContext={cellContext}
-    />
-  ),
-  meta: {
-    hideInSettings: true,
-  },
-  size: 32,
-  minSize: 32,
-};
-```
-
-By default, the selection column generated with `selectionColumn` includes ranged selection functionality.
-
-```tsx
-import {selectionColumn} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  selectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-```
-
-**Note**: If the table contains nested rows, range selection will not work. At the moment, this is considered undefined behavior.
-
-#### Sorting
-
-Learn about the column properties in the react-table [docs](https://tanstack.com/table/v8/docs/guide/sorting)
-
-```tsx
-import type {SortingState} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const SortingExample = () => {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-
-  // Your column MUST have accessorFn for sorting to be enabled
-
-  const table = useTable({
-    columns,
-    data,
-    enableSorting: true,
-    getRowId: (item) => item.id,
-    onSortingChange: setSorting,
-    state: {
-      sorting,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-If you want to sort the elements manually pass `manualSorting` property:
-
-```tsx
-const table = useTable({
-  // ...
-  manualSorting: true,
-});
-```
-
-#### Grouping
-
-```tsx
-import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
-
-interface Person {
-  id: string;
-  name: string;
-  age: number;
-}
-
-interface PersonGroup {
-  id: string;
-  name: string;
-  items: Person[];
-}
-
-type Item = PersonGroup | Person;
-
-const columns: ColumnDef<Item>[] = [
-  {accessorKey: 'name', header: 'Name', size: 200},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const data: Item[] = [
-  {
-    id: 'friends',
-    name: 'Friends',
-    items: [
-      {id: 'nick', name: 'Nick', age: 25},
-      {id: 'tom', name: 'Tom', age: 21},
-    ],
-  },
-  {
-    id: 'relatives',
-    name: 'Relatives',
-    items: [
-      {id: 'john', name: 'John', age: 23},
-      {id: 'michael', name: 'Michael', age: 27},
-    ],
-  },
-];
-
-const getGroupTitle = (row: Row<Item>) => row.getValue<string>('name');
-
-const GroupingExample = () => {
-  const [expanded, setExpanded] = React.useState<ExpandedState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableExpanding: true,
-    getSubRows: (item) => ('items' in item ? item.items : undefined),
-    onExpandedChange: setExpanded,
-    state: {
-      expanded,
-    },
-  });
-
-  return <Table table={table} getGroupTitle={getGroupTitle} />;
-};
-```
-
-To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
-
-To enable nesting styles, pass `withNestingStyles = true` in the column configuration.
-
-Nesting indicators can be disabled by passing `showTreeDepthIndicators = false`.
-
-To add a control for expanding/collapsing rows, wrap the cell content with the `TreeExpandableCell` component or with your similar custom component:
-
-```tsx
-import {TreeExpandableCell} from '@gravity-ui/table';
-
-const columns: ColumnDef<Item>[] = [
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    size: 200,
-    showTreeDepthIndicators: false,
-    withNestingStyles: true,
-    cell: ({row, info}) => (
-      <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
-    ),
-  },
-  // ...other columns
-];
-```
-
-#### Reordering
-
-```tsx
-import type {ReorderingProviderProps} from '@gravity-ui/table';
-import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  dragHandleColumn,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const ReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const handleReorder = React.useCallback<
-    NonNullable<ReorderingProviderProps<Person>['onReorder']>
-  >(
-    ({
-      draggedItemKey,
-      targetItemKey,
-      baseItemKey,
-      baseNextItemKey,
-      enableNesting,
-      nextChild,
-      pullFromParent,
-    }) => {
-      // ...
-    },
-    [],
-  );
-
-  return (
-    <ReorderingProvider table={table} onReorder={handleReorder}>
-      <Table table={table} />
-    </ReorderingProvider>
-  );
-};
-```
-
-#### Column reordering
-
-Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
-
-```tsx
-import {ColumnReorderingProvider} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const ColumnReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  return (
-    <ColumnReorderingProvider table={table}>
-      <Table table={table} />
-    </ColumnReorderingProvider>
-  );
-};
-```
-
-### Row and column reordering together
-
-Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
-
-```tsx
-import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
-import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  dragHandleColumn,
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
-];
-
-const CombinedReorderingExample = () => {
-  const [data, setData] = React.useState(initialData);
-  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
-
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-    state: {columnOrder},
-    onColumnOrderChange: setColumnOrder,
-  });
-
-  const handleRowReorder = React.useCallback<
-    NonNullable<ReorderingProviderProps<Person>['onReorder']>
-  >(({draggedItemKey, baseItemKey}) => {
-    // update data array
-  }, []);
-
-  const handleColumnReorder = React.useCallback<
-    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
-  >(({columnOrder}) => {
-    setColumnOrder(columnOrder);
-  }, []);
-
-  return (
-    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
-      <ReorderingProvider table={table} onReorder={handleRowReorder}>
-        <Table table={table} />
-      </ReorderingProvider>
-    </ColumnReorderingProvider>
-  );
-};
-```
-
-If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
-
-```tsx
-const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
-
-const table = useTable({
-  columns,
-  data,
-  state: {columnOrder},
-  onColumnOrderChange: setColumnOrder,
-});
-
-return (
-  <ColumnReorderingProvider
-    table={table}
-    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
-  >
-    <Table table={table} />
-  </ColumnReorderingProvider>
-);
-```
-
-CSS API:
-
-| CSS variable                                 | Default                       | Description                      |
-| -------------------------------------------- | ----------------------------- | -------------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color of the drop insertion line |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | Width of the drop insertion line |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacity of the dragged column    |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | Drag preview background          |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Drag preview box-shadow          |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Drag preview border radius       |
-
-To forbid reordering a specific column, set `enableColumnReordering: false` in its column definition. Placeholder (grouped) columns are not draggable. Use `activationDistance` (default `8`) to tune how far the pointer must move before a drag starts, which keeps header clicks (like sorting) working.
-
-Pinned columns can be reordered too, but only among themselves: a column can be moved within the left-pinned group, the right-pinned group, or the center (non-pinned) group — it never crosses a pin boundary by dragging.
-
-```tsx
-<ColumnReorderingProvider
-  table={table}
-  onReorder={({columnOrder, columnPinning, pinned}) => {
-    if (pinned) {
-      setColumnPinning(columnPinning);
-    } else {
-      setColumnOrder(columnOrder);
-    }
-  }}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
-
-While dragging:
-
-- a floating preview of the column (its header plus the first rows) follows the pointer in a drag overlay;
-- the dragged column becomes semi-transparent;
-- a blue insertion line is drawn where the column will be dropped;
-
-```tsx
-<ColumnReorderingProvider
-  table={table}
-  autoScroll
-  dragOverlayRowCount={10}
-  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
-
-#### Virtualization
-
-Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
-
-```tsx
-import {useRowVirtualizer} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const VirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const rowVirtualizer = useRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    getScrollElement: () => containerRef.current,
-  });
-
-  return (
-    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
-      <Table table={table} rowVirtualizer={rowVirtualizer} />
-    </div>
-  );
-};
-```
-
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
-
-```tsx
-import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
-
-// ...
-
-const tableRef = React.useRef<HTMLTableElement>(null);
-
-const rowVirtualizer = useRowVirtualizer({
-  // ...
-  rangeExtractor: getVirtualRowRangeExtractor(tableRef.current),
-});
-
-return (
-  <TableWithReordering
-    ref={tableRef}
-    table={table}
-    rowVirtualizer={rowVirtualizer}
-    onReorder={handleReorder}
-  />
-);
-```
-
-#### Window virtualization
-
-Use if you want to use window as the scroll element
-
-```tsx
-import {useWindowRowVirtualizer} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const WindowVirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const bodyRef = React.useRef<HTMLTableSectionElement>(null);
-
-  const rowVirtualizer = useWindowRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    scrollMargin: bodyRef.current?.offsetTop ?? 0,
-  });
-
-  return <Table table={table} rowVirtualizer={rowVirtualizer} bodyRef={bodyRef} />;
-};
-```
-
-#### Resizing
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const ResizingDemo = () => {
-  const table = useTable({
-    columns,
-    data,
-    enableColumnResizing: true,
-    columnResizeMode: 'onChange',
-  });
-
-  return <Table table={table} />;
-};
-```
-
-#### Column settings
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  // ...other columns
-  {
-    id: 'settings_column_id',
-    header: ({table}) => <TableSettings table={table} />,
-    meta: {
-      hideInSettings: false, // Optional. Allows to hide this column from settings popover
-      titleInSettings: 'ReactNode', // Optional. Overrides header field for settings popover (if you need different content for header and settings popover)
-    },
-  }, // or you can use function getSettingsColumn
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const TableSettingsDemo = () => {
-  const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // for outside control and initial state
-    column_id: false, // for hidding by default
-  });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* leaf columns ids */
-  ]); // for outside control and initial state
-
-  // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
-  // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
-
-  const table = useTable({
-    columns,
-    data,
-    state: {
-      columnVisibility,
-      columnOrder,
-    },
-    onColumnVisibilityChange,
-    onColumnOrderChange,
-  });
-
-  return <Table table={table} />;
-};
-```
-
-Learn more about the table and the column resizing properties in the react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
-
-
-### When to use
-
-- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
-- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
-
-### When not to use
-
-- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
-- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
-
-### Common pitfalls
-
-- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
-- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
-- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
-- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
-- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/table/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/table/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/table)
-
----
-
-> Docs for `@gravity-ui/table@1.8.0`. Versioned at: `https://gravity-ui.com/llms/table/1.8.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
