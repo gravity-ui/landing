@@ -1,17 +1,40 @@
-> Generated for `@gravity-ui/chartkit@7.60.5`
+> Generated for `@gravity-ui/chartkit@7.61.0`
 
-# ChartKit
+# @gravity-ui/chartkit documentation
 
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **7.61.0** version of `@gravity-ui/chartkit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
+
+## For AI agents
+
+A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
 
 ## Install
 
 ```shell
 npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
-
 
 ## Peer dependencies
 
@@ -94,34 +117,10 @@ export default function App() {
 
 `ChartKit` adapts to its parent's size — make sure the container has an explicit height.
 
+## Guides
 
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
+- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@7.61.0/build/docs/guides/testing.md)
 
 ---
 
-> Docs for `@gravity-ui/chartkit@7.60.5`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.60.5/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/chartkit@7.61.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.61.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
