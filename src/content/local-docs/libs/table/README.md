@@ -392,6 +392,28 @@ const ReorderingExample = () => {
 };
 ```
 
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
