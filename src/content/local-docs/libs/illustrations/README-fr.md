@@ -14,7 +14,7 @@ npm install --save-dev @gravity-ui/illustrations
 
 Configurez le thème des illustrations. Suivez l'une des étapes suivantes :
 
-##### Définir des css-tokens avec votre propre palette de couleurs
+##### Définir les css-tokens avec votre propre palette de couleurs
 
 Définissez les css-tokens suivants dans votre application :
 
@@ -29,7 +29,7 @@ Définissez les css-tokens suivants dans votre application :
 --gil-color-object-danger: rgb(255, 0, 61);
 ```
 
-##### Utiliser des mixins avec le thème gravity par défaut en scss
+##### Utiliser les mixins avec le thème gravity par défaut en scss
 
 Utilisez les mixins suivants pour styliser les illustrations dans différents thèmes :
 
@@ -88,8 +88,37 @@ import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 
 ### Développement
 
-Pour mettre à jour les illustrations conformément au nouveau design, modifiez le contenu des fichiers svg dans le thème clair (`<racine-de-ce-dépôt>/svgs/<nom-de-l-illustration>-light.svg`) puis exécutez la commande :
+Pour mettre à jour les illustrations conformément au nouveau design, modifiez le contenu des fichiers svg dans le thème clair (`<racine-de-ce-dépôt>/svgs/<nom-illustration>-light.svg`) puis exécutez la commande :
 
 ```shell
 npm run generate
 ```
+
+## Licence
+
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour plus de détails.
+
+## Pour les agents IA
+
+Un ensemble thématique d'illustrations SVG plates (états vides, erreurs, non trouvées, etc.) pour les applications Gravity UI — utilisez-le lorsque vous avez besoin d'illustrations prêtes à l'emploi et conscientes du thème, plutôt que de dessiner les vôtres ou d'utiliser des icônes simples.
+
+### Quand l'utiliser
+
+- États vides, pages 404/erreurs, ou espaces réservés d'intégration qui nécessitent une illustration cohérente, pas un contrôle d'interface utilisateur fonctionnel.
+- Illustrations thématiques — les SVG répondent aux tokens de thème Gravity (clair/sombre, contraste élevé) via des mixins SCSS ou des variables CSS.
+- Importation d'illustrations en tant que composants React (par défaut) ou en tant que fichiers `.svg` bruts.
+
+### Quand ne pas l'utiliser
+
+- Pour l'iconographie fonctionnelle de l'interface utilisateur (chevrons, coches, boutons), utilisez [`@gravity-ui/icons`](https://gravity-ui.com/icons) — les illustrations sont des œuvres décoratives, pas des glyphes d'interface utilisateur.
+- Pour une seule illustration ponctuelle que vous possédez déjà en tant qu'actif, importez cet actif directement plutôt que d'inclure ce package.
+
+### Pièges courants
+
+- **Rendu sans importation de thème** — les illustrations apparaissent sans couleur à moins que vous n'importiez `@gravity-ui/illustrations/styles/styles.scss` (ou que vous ne définissiez les tokens CSS `--gil-color-*`).
+- **Noms d'exportation par défaut halluciné** — les composants d'illustration sont des exportations nommées en PascalCase (par exemple, `NotFound`), importées de la racine du package ou par fichier (`@gravity-ui/illustrations/NotFound`).
+- **Importation de `.svg` directement dans un bundler non configuré** — les importations SVG brutes nécessitent un loader approprié ; préférez l'exportation de composant React pour éviter la configuration du bundler.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/illustrations/docs/INDEX.md`.

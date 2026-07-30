@@ -12,9 +12,9 @@ npm install --save-dev @gravity-ui/illustrations
 
 #### Preparación
 
-Configura el tema de las ilustraciones. Ejecuta cualquiera de los siguientes pasos:
+Configura el tema de las ilustraciones. Realiza cualquiera de los siguientes pasos:
 
-##### Definir css-tokens con tu propia paleta de colores
+##### Definición de css-tokens con paleta de colores propia
 
 Define los siguientes css-tokens en tu aplicación:
 
@@ -29,7 +29,7 @@ Define los siguientes css-tokens en tu aplicación:
 --gil-color-object-danger: rgb(255, 0, 61);
 ```
 
-##### Usar mixins con el tema predeterminado de gravity-theme en scss
+##### Uso de mixins con el tema predeterminado de Gravity en scss
 
 Utiliza los siguientes mixins para estilizar las ilustraciones en diferentes temas:
 
@@ -55,14 +55,14 @@ Utiliza los siguientes mixins para estilizar las ilustraciones en diferentes tem
 }
 ```
 
-##### Alternativa para proyectos con gravity theme preinstalado
+##### Alternativa para proyectos con el tema de Gravity preinstalado
 
-Alternativamente, si `@gravity-ui/uikit` ya está instalado en el proyecto y se utiliza el tema predeterminado, puedes simplemente importar `styles.scss` al archivo raíz con los estilos de tu proyecto:
+Alternativamente, si `@gravity-ui/uikit` ya está instalado en el proyecto y se utiliza el tema predeterminado, puedes simplemente importar `styles.scss` en el archivo raíz con los estilos de tu proyecto:
 
 ```scss
-// definición de estilos de gravity existente
+// Definición de estilos de Gravity existente
 import '@gravity-ui/uikit/styles/styles.css';
-// solo agrega una importación más abajo
+// Simplemente añade otra importación debajo
 import '@gravity-ui/illustrations/styles/styles.scss';
 ```
 
@@ -80,7 +80,7 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> Es posible que necesites un cargador (loader) apropiado para esto
+> Es posible que necesites un cargador adecuado para esto
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
@@ -93,3 +93,11 @@ Para actualizar las ilustraciones según el nuevo diseño, cambia el contenido d
 ```shell
 npm run generate
 ```
+
+## Licencia
+
+Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.
+
+## Para agentes de IA
+
+Un conjunto temático de ilustraciones SVG planas (estados

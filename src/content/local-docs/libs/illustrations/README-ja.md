@@ -31,7 +31,7 @@ npm install --save-dev @gravity-ui/illustrations
 
 ##### SCSSでデフォルトのgravity-themeを使用したミックスインを使用する
 
-さまざまなテーマでイラストのスタイリングに以下のミックスインを使用します。
+さまざまなテーマのイラストのスタイリングに、以下のミックスインを使用します。
 
 ```scss
 @import '@gravity-ui/illustrations/styles/theme.scss';
@@ -57,12 +57,12 @@ npm install --save-dev @gravity-ui/illustrations
 
 ##### 事前にgravityテーマがインストールされているプロジェクト向けの代替手段
 
-または、プロジェクトに`@gravity-ui/uikit`が既にインストールされており、デフォルトテーマが使用されている場合は、プロジェクトのルートスタイルファイルに`styles.scss`をインポートするだけで済みます。
+または、プロジェクトに`@gravity-ui/uikit`が既にインストールされており、デフォルトテーマが使用されている場合は、プロジェクトのスタイルファイルのルートに`styles.scss`をインポートするだけで済みます。
 
 ```scss
 // 既存のgravityスタイル定義
 import '@gravity-ui/uikit/styles/styles.css';
-// その下にさらに1つインポートを追加するだけです
+// その下にインポートをもう1つ追加するだけです
 import '@gravity-ui/illustrations/styles/styles.scss';
 ```
 
@@ -80,7 +80,7 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> これには適切なローダーが必要になる場合があります
+> これには適切なローダーが必要になる場合があります。
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
@@ -88,8 +88,14 @@ import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 
 ### 開発
 
-新しいデザインに合わせてイラストを更新するには、ライトテーマのSVGファイル（`<this-repository-root>/svgs/<illustration-name>-light.svg`）の内容を変更し、次のコマンドを実行します。
+新しいデザインに合わせてイラストを更新するには、ライトテーマのSVGの内容を変更します（`<this-repository-root>/svgs/<illustration-name>-light.svg`ファイル）。その後、コマンドを実行します。
 
 ```shell
 npm run generate
 ```
+
+## ライセンス
+
+MITライセンスの下で配布されています。詳細については[LICENSE](LICENSE)を参照してください。
+
+## AIエ
