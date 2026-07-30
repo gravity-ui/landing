@@ -28,11 +28,11 @@ La bibliothèque utilise un système de rendu intelligent qui gère automatiquem
 
 1. Aux faibles niveaux de zoom, tout est rendu sur Canvas pour des raisons de performance.
 2. Lors du zoom avant vers une vue détaillée, le composant `GraphCanvas` :
-   - Suit les changements de la caméra et de l'échelle.
-   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un padding pour un défilement fluide).
+   - Suit les changements de la vue caméra et de l'échelle.
+   - Calcule quels blocs sont visibles dans la vue actuelle (avec un padding pour un défilement fluide).
    - Rend les composants React uniquement pour les blocs visibles.
    - Met à jour automatiquement la liste lors du défilement ou du zoom.
-   - Supprime les composants React lors du dézoom.
+   - Supprime les composants React lors du zoom arrière.
 
 ```typescript
 // Exemple de rendu de composants React
@@ -59,7 +59,7 @@ const MyGraph = () => {
 npm install @gravity-ui/graph
 ```
 
-## Exemples
+## Utilisation
 
 ### Exemple React
 
@@ -253,9 +253,9 @@ graph.zoomTo("center", { padding: 100 });
    - [Système de planification](docs/system/scheduler-system.md)
 
 2. Composants
-   - [Composant de graphe sur canevas](docs/components/canvas-graph-component.md)
+   - [Composant de graphe Canvas](docs/components/canvas-graph-component.md)
    - [Composant de bloc](docs/components/block-component.md)
-   - [Points d'ancrage](docs/components/anchors.md)
+   - [Ancres](docs/components/anchors.md)
 
 3. Rendu
    - [Mécanisme de rendu](docs/rendering/rendering-mechanism.md)
@@ -263,4 +263,34 @@ graph.zoomTo("center", { padding: 100 });
 
 4. Blocs et connexions
    - [Groupes de blocs](docs/blocks/groups.md)
-   - [Système de connexion sur canevas](docs/connections/canvas-connection-system.md)
+   - [Système de connexion Canvas](docs/connections/canvas-connection-system.md)
+
+## Licence
+
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
+
+## Pour les agents IA
+
+Un éditeur de graphes hybride Canvas/React pour les diagrammes basés sur des nœuds — utilisez-le pour créer des organigrammes, des éditeurs de nœuds ou de grands diagrammes interactifs où Canvas offre des performances à faible zoom et les composants React offrent une riche interactivité lors du zoom avant.
+
+### Quand l'utiliser
+
+- Éditeurs basés sur des nœuds (organigrammes, pipelines, constructeurs visuels) avec des centaines/milliers de nœuds et de connexions.
+- Rendu mixte : Canvas pour la vue d'ensemble du graphe complet, composants React pour les blocs visibles dans la fenêtre d'affichage à fort zoom.
+- Consommateurs Vanilla JS ou React — la classe principale `Graph` est indépendante du framework ; `@gravity-ui/graph/react` fournit les liaisons React.
+
+### Quand ne pas l'utiliser
+
+- Pour tracer des séries de données numériques (graphiques linéaires/à barres/de dispersion), utilisez [`@gravity-ui/charts`](https://gravity-ui.com/charts) ou [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr`) — le graphe est un éditeur de diagrammes de nœuds/arêtes, pas un graphique de données.
+- Pour un diagramme statique, non modifiable avec peu de nœuds, un SVG ou une bibliothèque de diagrammes plus simple peut suffire sans la machinerie de la fenêtre d'affichage Canvas/React.
+
+### Pièges courants
+
+- **Importation hallucinée de `GraphEditor`** — les composants React sont `GraphCanvas`, `GraphBlock` et le hook `useGraph`, importés de `@gravity-ui/graph/react` ; la classe principale est `Graph` de `@gravity-ui/graph`.
+- **Appel des méthodes du graphe avant l'état `ATTACHED`** — appelez `start()`/`zoomTo(...)` dans le callback `onStateChanged` lorsque `state === GraphState.ATTACHED`, pas au montage.
+- **Oubli de `setEntities`** — `useGraph` renvoie `graph`, `setEntities`, `start` ; les données n'apparaissent qu'après `setEntities({blocks, connections})`.
+- **Mélange de types d'ancres** — les connexions doivent référencer des identifiants d'ancres existants avec des `EAnchorType` (`IN`/`OUT`) correspondants sur les blocs source et cible.
+
+## Documentation pour les agents IA
+
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/graph/build/docs/INDEX.md`.

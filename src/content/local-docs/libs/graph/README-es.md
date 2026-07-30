@@ -4,29 +4,29 @@
 
 Una biblioteca de visualización de grafos que combina lo mejor de ambos mundos:
 - Canvas para un alto rendimiento al ver el grafo completo
-- HTML/React para interacciones enriquecidas al hacer zoom
+- HTML/React para interacciones ricas al hacer zoom
 
-Se acabaron las elecciones entre rendimiento e interactividad. Perfecto para diagramas grandes, diagramas de flujo y editores basados en nodos.
+Se acabaron las elecciones entre rendimiento e interactividad. Perfecta para diagramas grandes, diagramas de flujo y editores basados en nodos.
 
-![vista previa del grafo.](docs/_static/graph_preview.png)
+![preview graph.](docs/_static/graph_preview.png)
 
 ## Motivación
 
 Las aplicaciones web modernas a menudo requieren visualización e interactividad complejas, pero las soluciones existentes suelen centrarse en una única tecnología de renderizado:
 
-- **Canvas** ofrece un alto rendimiento para gráficos complejos, pero es limitado en el manejo de texto e interactividad.
+- **Canvas** ofrece un alto rendimiento para gráficos complejos, pero está limitado en el manejo de texto e interactividad.
 - **HTML DOM** es conveniente para interfaces, pero menos eficiente para gráficos complejos o un gran número de elementos.
 
 @gravity-ui/graph resuelve esto cambiando automáticamente entre Canvas y HTML según el nivel de zoom:
 - **Alejado**: Utiliza Canvas para un renderizado eficiente del grafo completo
 - **Zoom medio**: Muestra una vista esquemática con interactividad básica
-- **Acercado**: Cambia a componentes HTML/React para interacciones enriquecidas
+- **Acercado**: Cambia a componentes HTML/React para interacciones ricas
 
 ## Cómo Funciona
 
 La biblioteca utiliza un sistema de renderizado inteligente que gestiona automáticamente la transición entre Canvas y componentes React:
 
-1. A niveles de zoom bajos, todo se renderiza en Canvas para un mejor rendimiento.
+1. En niveles de zoom bajos, todo se renderiza en Canvas para obtener rendimiento.
 2. Al hacer zoom para ver los detalles, el componente `GraphCanvas`:
    - Rastrea los cambios en la vista de la cámara y la escala.
    - Calcula qué bloques son visibles en la vista actual (con relleno para un desplazamiento suave).
@@ -59,7 +59,7 @@ const MyGraph = () => {
 npm install @gravity-ui/graph
 ```
 
-## Ejemplos
+## Uso
 
 ### Ejemplo con React
 
@@ -233,7 +233,7 @@ graph.start();
 graph.zoomTo("center", { padding: 100 });
 ```
 
-## Ejemplos en Vivo
+## Ejemplos en vivo
 
 - [Ejemplo básico](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
 - [Ejemplo a gran escala](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
@@ -243,24 +243,54 @@ graph.zoomTo("center", { padding: 100 });
 
 ## Documentación
 
-### Tabla de Contenidos
+### Tabla de contenidos
 
 1. Sistema
-   - [Ciclo de Vida del Componente](docs/system/component-lifecycle.md)
+   - [Ciclo de vida del componente](docs/system/component-lifecycle.md)
    - [Eventos](docs/system/events.md)
-   - [Configuración del Gráfico](docs/system/graph-settings.md)
-   - [API Pública](docs/system/public_api.md)
-   - [Sistema de Planificación](docs/system/scheduler-system.md)
+   - [Configuración del gráfico](docs/system/graph-settings.md)
+   - [API pública](docs/system/public_api.md)
+   - [Sistema de planificación](docs/system/scheduler-system.md)
 
 2. Componentes
-   - [Componente de Gráfico de Lienzo](docs/components/canvas-graph-component.md)
-   - [Componente de Bloque](docs/components/block-component.md)
+   - [Componente de gráfico Canvas](docs/components/canvas-graph-component.md)
+   - [Componente de bloque](docs/components/block-component.md)
    - [Anclajes](docs/components/anchors.md)
 
 3. Renderizado
-   - [Mecanismo de Renderizado](docs/rendering/rendering-mechanism.md)
+   - [Mecanismo de renderizado](docs/rendering/rendering-mechanism.md)
    - [Capas](docs/rendering/layers.md)
 
-4. Bloques y Conexiones
-   - [Grupos de Bloques](docs/blocks/groups.md)
-   - [Sistema de Conexiones de Lienzo](docs/connections/canvas-connection-system.md)
+4. Bloques y conexiones
+   - [Grupos de bloques](docs/blocks/groups.md)
+   - [Sistema de conexiones Canvas](docs/connections/canvas-connection-system.md)
+
+## Licencia
+
+Distribuido bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
+
+## Para agentes de IA
+
+Un editor de gráficos híbrido Canvas/React para diagramas basados en nodos — úsalo para crear diagramas de flujo, editores de nodos o diagramas interactivos grandes donde Canvas ofrece rendimiento con zoom bajo y los componentes React ofrecen una rica interactividad al hacer zoom.
+
+### Cuándo usarlo
+
+- Editores basados en nodos (diagramas de flujo, pipelines, constructores visuales) con cientos/miles de nodos y conexiones.
+- Renderizado mixto: Canvas para la vista general del gráfico completo, componentes React para los bloques visibles en el viewport con zoom alto.
+- Consumidores de Vanilla JS o React — la clase principal `Graph` es independiente del framework; `@gravity-ui/graph/react` proporciona los enlaces de React.
+
+### Cuándo no usarlo
+
+- Para trazar series de datos numéricos (gráficos de líneas/barras/dispersión), usa [`@gravity-ui/charts`](https://gravity-ui.com/charts) o [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph es un editor de diagramas de nodos/aristas, no un gráfico de datos.
+- Para un diagrama estático, no editable con pocos nodos, un SVG o una biblioteca de diagramas más simple pueden ser suficientes sin la maquinaria de viewport Canvas/React.
+
+### Errores comunes
+
+- **Importación "alucinada" de `GraphEditor`** — los componentes de React son `GraphCanvas`, `GraphBlock` y el hook `useGraph`, importados de `@gravity-ui/graph/react`; la clase principal es `Graph` de `@gravity-ui/graph`.
+- **Llamar a métodos del gráfico antes del estado `ATTACHED`** — llama a `start()`/`zoomTo(...)` dentro del callback `onStateChanged` cuando `state === GraphState.ATTACHED`, no al montar.
+- **Olvidar `setEntities`** — `useGraph` devuelve `graph`, `setEntities`, `start`; los datos solo aparecen después de `setEntities({blocks, connections})`.
+- **Mezclar tipos de anclajes** — las conexiones deben referenciar IDs de anclajes existentes con `EAnchorType` (`IN`/`OUT`) coincidentes en los bloques de origen y destino.
+
+## Documentación para agentes de IA
+
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/graph/build/docs/INDEX.md`.

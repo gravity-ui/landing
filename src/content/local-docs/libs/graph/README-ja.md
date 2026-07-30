@@ -1,6 +1,6 @@
-# @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
+# @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity.ui.com/graph/)
 
-> [v0.x から v1.x への移行ガイド →](docs/migration-guides/v0-to-v1.md)
+> [0.x から 1.x への移行ガイド →](docs/migration-guides/v0-to-v1.md)
 
 両方の長所を兼ね備えたグラフ描画ライブラリです。
 - 全体像を表示する際の高パフォーマンスのために Canvas を使用
@@ -18,24 +18,24 @@
 - **HTML DOM** はインターフェースには便利ですが、複雑なグラフィックスや多数の要素には効率が悪いです。
 
 @gravity-ui/graph は、ズームレベルに応じて Canvas と HTML を自動的に切り替えることで、この問題を解決します。
-- **ズームアウト時**: グラフ全体を効率的にレンダリングするために Canvas を使用
+- **ズームアウト時**: グラフ全体を効率的に描画するために Canvas を使用
 - **中程度のズーム**: 基本的なインタラクションを備えた概略図を表示
 - **ズームイン時**: リッチなインタラクションのために HTML/React コンポーネントに切り替え
 
 ## 仕組み
 
-このライブラリは、Canvas と React コンポーネント間の遷移を自動的に管理するスマートなレンダリングシステムを使用しています。
+このライブラリは、Canvas と React コンポーネント間の遷移を自動的に管理するインテリジェントなレンダリングシステムを使用しています。
 
-1. 低いズームレベルでは、パフォーマンスのためにすべて Canvas 上にレンダリングされます。
+1. 低いズームレベルでは、パフォーマンスのためにすべて Canvas 上に描画されます。
 2. 詳細表示にズームインすると、`GraphCanvas` コンポーネントは以下の処理を行います。
    - カメラのビューポートとスケールの変更を追跡します。
    - 現在のビューポートで表示されているブロックを（スムーズなスクロールのためのパディングを含めて）計算します。
-   - 表示されているブロックに対してのみ React コンポーネントをレンダリングします。
+   - 表示されているブロックに対してのみ React コンポーネントを描画します。
    - スクロールまたはズーム時にリストを自動的に更新します。
    - ズームアウト時に React コンポーネントを削除します。
 
 ```typescript
-// React コンポーネントのレンダリング例
+// React コンポーネント描画の例
 const MyGraph = () => {
   return (
     <GraphCanvas
@@ -51,7 +51,7 @@ const MyGraph = () => {
 };
 ```
 
-[Storybook](https://preview.gravity-ui.com/graph/)
+[Storybook](https://preview.gravity.ui.com/graph/)
 
 ## インストール
 
@@ -59,7 +59,7 @@ const MyGraph = () => {
 npm install @gravity-ui/graph
 ```
 
-## 例
+## 使用方法
 
 ### React の例
 
@@ -177,8 +177,7 @@ const graph = new Graph({
 }, container);
 ```
 
-```javascript
-// ブロックと接続を追加
+// Add blocks and connections
 graph.setEntities({
     blocks: [
         {
@@ -226,10 +225,10 @@ graph.setEntities({
     ]
 });
 
-// レンダリングを開始
+// Start rendering
 graph.start();
 
-// ビューを中央に配置
+// Center the view
 graph.zoomTo("center", { padding: 100 });
 ```
 
@@ -253,7 +252,7 @@ graph.zoomTo("center", { padding: 100 });
    - [スケジューラシステム](docs/system/scheduler-system.md)
 
 2. コンポーネント
-   - [キャンバスグラフコンポーネント](docs/components/canvas-graph-component.md)
+   - [Canvas Graph コンポーネント](docs/components/canvas-graph-component.md)
    - [ブロックコンポーネント](docs/components/block-component.md)
    - [アンカー](docs/components/anchors.md)
 
@@ -263,4 +262,34 @@ graph.zoomTo("center", { padding: 100 });
 
 4. ブロックと接続
    - [ブロックグループ](docs/blocks/groups.md)
-   - [キャンバス接続システム](docs/connections/canvas-connection-system.md)
+   - [Canvas接続システム](docs/connections/canvas-connection-system.md)
+
+## ライセンス
+
+MITライセンスで配布されています。[LICENSE](LICENSE) を参照してください。
+
+## AIエージェント向け
+
+ノードベースのダイアグラムを構築するためのハイブリッドCanvas/Reactグラフエディタ — フローチャート、ノードエディタ、またはCanvasが低ズームでパフォーマンスを発揮し、Reactコンポーネントが高ズーム時にリッチなインタラクティビティを提供する大規模なインタラクティブダイアグラムの構築に役立ちます。
+
+### 使用すべき場合
+
+- 数百から数千のノードと接続を持つノードベースエディタ（フローチャート、パイプライン、ビジュアルビルダー）。
+- 混合レンダリング：全体像の表示にはCanvas、高ズーム時にビューポートに表示されるブロックにはReactコンポーネントを使用。
+- Vanilla JSまたはReactのコンシューマー — コアの`Graph`クラスはフレームワークに依存しません。`@gravity-ui/graph/react`がReactバインディングを提供します。
+
+### 使用すべきでない場合
+
+- 数値データ系列（折れ線グラフ/棒グラフ/散布図）のプロットには、[`@gravity-ui/charts`](https://gravity-ui.com/charts)または[`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr)を使用してください。Graphはノード/エッジダイアグラムエディタであり、データチャートではありません。
+- 少数のノードを持つ静的で編集不可能なダイアグラムには、SVGまたはよりシンプルなダイアグラムライブラリで十分な場合があります。Canvas/Reactビューポートの仕組みは不要です。
+
+### よくある間違い
+
+- **`GraphEditor`の誤ったインポート** — Reactコンポーネントは`GraphCanvas`、`GraphBlock`、および`useGraph`フックであり、これらは`@gravity-ui/graph/react`からインポートされます。コアクラスは`@gravity-ui/graph`の`Graph`です。
+- **`ATTACHED`状態になる前にグラフメソッドを呼び出す** — `onStateChanged`コールバック内で、マウント時ではなく`state === GraphState.ATTACHED`のときに`start()`/`zoomTo(...)`を呼び出してください。
+- **`setEntities`の忘れ** — `useGraph`は`graph`、`setEntities`、`start`を返します。データは`setEntities({blocks, connections})`の後にのみ表示されます。
+- **アンカータイプの混在** — 接続は、ソースブロックとターゲットブロックに存在する既存のアンカーIDを、一致する`EAnchorType`（`IN`/`OUT`）で参照する必要があります。
+
+## AIエージェント向けドキュメント
+
+インストールされているバージョンのエージェント可読ドキュメントは、`node_modules/@gravity-ui/graph/build/docs/INDEX.md`にあります。

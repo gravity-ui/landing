@@ -59,7 +59,7 @@ const MyGraph = () => {
 npm install @gravity-ui/graph
 ```
 
-## Exemplos
+## Uso
 
 ### Exemplo React
 
@@ -87,7 +87,7 @@ export function GraphEditor() {
           width: 126,
           height: 126,
           selected: true,
-          name: "Bloco #1",
+          name: "Block #1",
           anchors: [
             {
               id: "out1",
@@ -105,7 +105,7 @@ export function GraphEditor() {
           width: 126,
           height: 126,
           selected: false,
-          name: "Bloco #2",
+          name: "Block #2",
           anchors: [
             {
               id: "in1",
@@ -156,7 +156,7 @@ export function GraphEditor() {
 ```javascript
 import { Graph } from "@gravity-ui/graph";
 
-// Cria um elemento container
+// Cria o elemento container
 const container = document.createElement('div');
 container.style.width = '100vw';
 container.style.height = '100vh';
@@ -263,3 +263,33 @@ graph.zoomTo("center", { padding: 100 });
 4. Blocos e Conexões
    - [Grupos de Blocos](docs/blocks/groups.md)
    - [Sistema de Conexão Canvas](docs/connections/canvas-connection-system.md)
+
+## Licença
+
+Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
+
+## Para agentes de IA
+
+Um editor de gráficos híbrido Canvas/React para diagramas baseados em nós — utilize-o para construir fluxogramas, editores de nós ou diagramas interativos grandes onde o Canvas oferece desempenho em zoom baixo e os componentes React oferecem interatividade rica quando em zoom alto.
+
+### Quando usar
+
+- Editores baseados em nós (fluxogramas, pipelines, construtores visuais) com centenas/milhares de nós e conexões.
+- Renderização mista: Canvas para a visão geral do gráfico completo, componentes React para os blocos visíveis na viewport em zoom alto.
+- Consumidores Vanilla JS ou React — a classe principal `Graph` é agnóstica a frameworks; `@gravity-ui/graph/react` fornece os bindings React.
+
+### Quando não usar
+
+- Para plotar séries de dados numéricos (gráficos de linha/barra/dispersão), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) ou [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph é um editor de diagramas de nós/arestas, não um gráfico de dados.
+- Para um diagrama estático, não editável com poucos nós, um SVG ou uma biblioteca de diagramas mais simples pode ser suficiente sem a maquinaria de viewport Canvas/React.
+
+### Armadilhas comuns
+
+- **Importação "alucinada" de `GraphEditor`** — os componentes React são `GraphCanvas`, `GraphBlock` e o hook `useGraph`, importados de `@gravity-ui/graph/react`; a classe principal é `Graph` de `@gravity-ui/graph`.
+- **Chamar métodos do gráfico antes do estado `ATTACHED`** — chame `start()`/`zoomTo(...)` dentro do callback `onStateChanged` quando `state === GraphState.ATTACHED`, não no momento da montagem.
+- **Esquecer `setEntities`** — `useGraph` retorna `graph`, `setEntities`, `start`; os dados só aparecem após `setEntities({blocks, connections})`.
+- **Misturar tipos de âncora** — as conexões devem referenciar IDs de âncora existentes com `EAnchorType` (`IN`/`OUT`) correspondente nos blocos de origem e destino.
+
+## Documentação para agentes de IA
+
+A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/graph/build/docs/INDEX.md`.
