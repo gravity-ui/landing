@@ -20,8 +20,8 @@ interface Person {
 }
 
 const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
+  {accessorKey: 'name', header: '이름', size: 100},
+  {accessorKey: 'age', header: '나이', size: 100},
 ];
 
 const data: Person[] = [
@@ -81,7 +81,7 @@ const RowSelectionExample = () => {
 
 선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행의 체크박스 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
 
-#### 사용자 정의 범위 선택 컬럼
+#### 사용자 정의 범위 선택 열
 
 `useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 행 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 액세스하려면 `CellContext` 인스턴스를 전달해야 합니다.
 
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-`RangedSelectionCheckbox` 컴포넌트도 제공됩니다. 이 컴포넌트는 내부적으로 훅을 사용하며 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 데 편리한 방법을 제공합니다.
+`RangedSelectionCheckbox` 컴포넌트도 있으며, 내부적으로 훅을 사용하고 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 열에 범위 선택 기능을 추가하는 바로 가기를 제공합니다.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -198,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-기본적으로 `selectionColumn`으로 생성된 선택 컬럼에는 범위 선택 기능이 포함되어 있습니다.
+기본적으로 `selectionColumn`으로 생성된 선택 열에는 범위 선택 기능이 포함됩니다.
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -214,7 +214,7 @@ const columns: ColumnDef<Person>[] = [
 
 #### 정렬
 
-`react-table`의 컬럼 속성에 대해 알아보세요. [문서](https://tanstack.com/table/v8/docs/guide/sorting)
+react-table의 컬럼 속성에 대해 알아보세요. [문서](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -319,9 +319,9 @@ const GroupingExample = () => {
 };
 ```
 
-선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행 체크박스의 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
+선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행의 체크박스 상태가 올바르지 않게 됩니다. https://github.com/TanStack/table/issues/4878
 
-중첩 스타일을 활성화하려면 컬럼 설정에서 `withNestingStyles = true`를 전달하세요.
+중첩 스타일을 활성화하려면 컬럼 구성에서 `withNestingStyles = true`를 전달하세요.
 
 트리 깊이 표시기는 `showTreeDepthIndicators = false`를 전달하여 비활성화할 수 있습니다.
 
@@ -392,9 +392,28 @@ const ReorderingExample = () => {
 };
 ```
 
+#### 드래그 핸들 없이 재정렬
+
+행 전체를 드래그 활성기로 사용하고 컬럼 정의에서 `dragHandleColumn`을 생략하려면 `dragWithoutHandle`을 설정하세요.
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+포인터가 드래그가 시작되기 전에 8픽셀 이동해야 일반 행 및 컨트롤 클릭이 계속 작동합니다. 사용자 정의 행 부분을 드래그 시작에서 제외하려면 해당 `onPointerDown` 핸들러에서 `preventDefault()`를 호출하세요.
+
 #### 컬럼 재정렬
 
-`ColumnReorderingProvider`로 테이블을 감싸면 헤더를 드래그 앤 드롭하여 컬럼 순서를 변경할 수 있습니다.
+헤더를 드래그 앤 드롭하여 컬럼 순서를 재정렬하려면 테이블을 `ColumnReorderingProvider`로 감싸세요.
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
@@ -419,9 +438,9 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-### 행 및 컬럼 재정렬 동시 사용
+### 행 및 컬럼 재정렬 함께 사용
 
-`ColumnReorderingProvider`와 `ReorderingProvider`를 중첩하여 두 방향의 드래그 앤 드롭을 동시에 활성화할 수 있습니다. 프로바이더의 순서는 중요하지 않습니다. 내부적으로 단일 dnd-kit 컨텍스트를 공유합니다.
+`ColumnReorderingProvider`와 `ReorderingProvider`를 중첩하여 두 드래그 축을 동시에 활성화하세요. 프로바이더의 순서는 중요하지 않습니다. 내부적으로 단일 dnd-kit 컨텍스트를 공유합니다.
 
 ```tsx
 import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
@@ -436,7 +455,9 @@ const columns: ColumnDef<Person>[] = [
 const CombinedReorderingExample = () => {
   const [data, setData] = React.useState(initialData);
   const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+```
 
+```tsx
   const table = useTable({
     columns,
     data,
@@ -456,7 +477,18 @@ const CombinedReorderingExample = () => {
   >(({columnOrder}) => {
     setColumnOrder(columnOrder);
   }, []);
+
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
+};
 ```
+
+`columnOrder`를 직접 제어하는 경우(예: 영구 저장), `onReorder`를 전달하고 결과 순서를 적용하세요:
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -482,14 +514,14 @@ CSS API:
 
 | CSS 변수                                 | 기본값                        | 설명                      |
 | -------------------------------------------- | ----------------------------- | ------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | 드롭 삽입선 색상          |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | 드롭 삽입선 너비          |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | 드래그된 열 투명도        |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | 드롭 삽입선의 색상        |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | 드롭 삽입선의 너비        |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | 드래그된 열의 투명도      |
 | `--gt-table-drag-overlay-background`         | `#fff`                        | 드래그 미리보기 배경      |
 | `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | 드래그 미리보기 박스 그림자 |
 | `--gt-table-drag-overlay-border-radius`      | `6px`                         | 드래그 미리보기 테두리 반경 |
 
-특정 열의 재정렬을 금지하려면 열 정의에서 `enableColumnReordering: false`를 설정하세요. 플레이스홀더(그룹화된) 열은 드래그할 수 없습니다. `activationDistance`(기본값 `8`)를 사용하여 드래그가 시작되기 전에 포인터가 이동해야 하는 거리를 조정하여 헤더 클릭(정렬 등)이 작동하도록 합니다.
+특정 열의 재정렬을 금지하려면 해당 열 정의에서 `enableColumnReordering: false`를 설정하세요. 플레이스홀더(그룹화된) 열은 드래그할 수 없습니다. `activationDistance`(기본값 `8`)를 사용하여 포인터가 드래그를 시작하기 전에 이동해야 하는 거리를 조정하여 헤더 클릭(정렬 등)이 작동하도록 합니다.
 
 고정된 열도 재정렬할 수 있지만, 서로 간에만 가능합니다. 열은 왼쪽 고정 그룹, 오른쪽 고정 그룹 또는 중앙(고정되지 않은) 그룹 내에서만 이동할 수 있으며, 드래그 시 고정 경계를 넘지 않습니다.
 
@@ -510,7 +542,7 @@ CSS API:
 
 드래그하는 동안:
 
-- 열의 플로팅 미리보기(헤더와 첫 번째 행 포함)가 드래그 오버레이에서 포인터를 따라갑니다.
+- 열의 플로팅 미리보기(헤더와 첫 몇 개의 행)가 드래그 오버레이에서 포인터를 따라갑니다.
 - 드래그된 열은 반투명해집니다.
 - 열이 드롭될 위치에 파란색 삽입선이 그려집니다.
 
@@ -527,7 +559,7 @@ CSS API:
 
 #### 가상화
 
-그리드 컨테이너를 스크롤 요소로 사용하려는 경우 사용하세요(창 가상화 섹션에서 창을 사용하려는 경우). 가상화가 작동하려면 컨테이너에 고정된 높이를 설정해야 합니다.
+그리드 컨테이너를 스크롤 요소로 사용하려는 경우 사용하세요(창을 사용하려면 창 가상화 섹션을 참조하세요). 가상화가 작동하려면 컨테이너에 고정된 높이를 설정해야 합니다.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -629,7 +661,9 @@ const WindowVirtualizationExample = () => {
 const columns: ColumnDef<Person>[] = [
   /* ... */
 ];
+```
 
+```tsx
 const data: Person[] = [
   /* ... */
 ];
@@ -646,7 +680,7 @@ const ResizingDemo = () => {
 };
 ```
 
-#### 열 설정
+#### 컬럼 설정
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -674,7 +708,7 @@ const TableSettingsDemo = () => {
     /* 리프 컬럼 ID */
   ]); // 외부 제어 및 초기 상태용
 
-  // 설정 적용 콜백에서 상태, 콜백을 가져오고 설정하는 대체 변형 - useTableSettings 훅 사용:
+  // useTableSettings 훅을 사용하여 상태, 콜백 및 설정 적용 콜백을 가져오는 대안:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -698,11 +732,11 @@ react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizi
 
 ### React 19 + React Compiler 호환성
 
-**⚠️ 알려진 문제:** `@gravity-ui/table`(TanStack Table 기반)을 사용할 때 React 19 및 React Compiler와 호환성 문제가 있습니다. 데이터가 변경되어도 테이블이 다시 렌더링되지 않을 수 있습니다. 자세한 내용은 [TanStack Table 이슈 #5567](https://github.com/TanStack/table/issues/5567)을 참조하세요.
+**⚠️ 알려진 문제:** `@gravity-ui/table` (TanStack Table 기반)을 사용할 때 React 19 및 React Compiler와 알려진 호환성 문제가 있습니다. 데이터가 변경될 때 테이블이 다시 렌더링되지 않을 수 있습니다. 자세한 내용은 [TanStack Table 이슈 #5567](https://github.com/TanStack/table/issues/5567)을 참조하세요.
 
 **해결 방법:**
 
-React 19와 React Compiler를 사용 중이며 테이블 다시 렌더링 문제로 어려움을 겪고 있다면, 컴포넌트 코드에 `'use no memo'` 지시문을 사용할 수 있습니다.
+React 19와 React Compiler를 함께 사용하고 있으며 테이블 다시 렌더링 문제로 어려움을 겪고 있다면, 컴포넌트 코드에 `'use no memo'` 지시문을 사용할 수 있습니다.
 
 ```tsx
 import React from 'react';
@@ -723,7 +757,7 @@ function MyTable() {
 }
 ```
 
-**대체 솔루션:**
+**대안 솔루션:**
 
 테이블 인스턴스 또는 데이터를 명시적으로 메모이제이션하여 올바른 다시 렌더링을 보장할 수도 있습니다.
 
@@ -747,7 +781,7 @@ function MyTable() {
 }
 ```
 
-**참고:** 이 문제는 기본 TanStack Table 라이브러리에 있으며 해당 라이브러리에서 수정되어야 합니다. 위의 해결 방법은 수정이 제공될 때까지 도움이 될 것입니다.
+**참고:** 이 문제는 기본 TanStack Table 라이브러리에 있으며 거기서 수정되어야 합니다. 위의 해결 방법은 수정이 제공될 때까지 도움이 될 것입니다.
 
 ## 라이선스
 
@@ -755,28 +789,29 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENS
 
 ## AI 에이전트용
 
-Gravity UI 앱을 위한 헤드리스 TanStack-Table 기반 데이터 그리드 — uikit의 기본 `Table` 위에 원시 마크업을 조합하는 대신 정렬 가능하고, 선택 가능하며, 그룹화 가능하고, 재정렬 가능하며, 가상화된 테이블을 위해 사용하세요.
+Gravity UI 앱을 위한 헤드리스, TanStack-Table 기반 데이터 그리드 — uikit의 기본 `Table` 위에 원시 마크업을 구성하는 대신 정렬 가능하고, 선택 가능하며, 그룹화 가능하고, 재정렬 가능하며, 가상화된 테이블을 위해 사용하세요.
 
 ### 언제 사용해야 할까요?
 
 - 행 또는 창 가상화가 필요한 대규모 데이터셋 (`useRowVirtualizer`, `useWindowRowVirtualizer`).
 - 컬럼 정렬, 크기 조정, 재정렬 (`ColumnReorderingProvider`), 고정 및 사용자별 컬럼 설정 (`TableSettings`).
-- 행 선택(단일/다중, 범위) 및 확장 가능한 셀이 있는 트리/그룹화된 행.
+- 행 선택 (단일/다중, 범위) 및 확장 가능한 셀이 있는 트리/그룹화된 행.
 
 ### 언제 사용하지 않아야 할까요?
 
 - 몇 개의 행과 고급 기능이 없는 간단한 정적 테이블 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 uikit 내장 `Table`이 더 가볍습니다.
-- 비표 형식 목록 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 `List`를 사용하세요.
+- 테이블이 아닌 목록 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 `List`를 사용하세요.
 - 스프레드시트 스타일의 인라인 셀 편집 — 이 그리드는 편집 가능한 스프레드시트가 아닌 읽기/표시 중심입니다.
 
 ### 일반적인 함정
 
-- **`useTable`로 테이블을 빌드한 다음 `<Table table={table} />`를 렌더링합니다.** 기본 prop은 `<Table>`의 `data`/`columns`가 아니라 `table`(인스턴스)입니다. `data`와 `columns`는 `useTable`에 전달하세요.
+- **`useTable`로 테이블을 빌드한 다음 `<Table table={table} />`를 렌더링합니다.** 주요 prop은 `<Table>`의 `data`/`columns`가 아니라 `table` (인스턴스)입니다. `data`와 `columns`를 `useTable`에 전달하세요.
 - **타입은 `@gravity-ui/table/tanstack` 하위 경로에서 가져옵니다.** `ColumnDef`, `RowSelectionState`, `SortingState` 등은 패키지 루트가 아닌 `@gravity-ui/table/tanstack`에서 가져옵니다.
 - **정렬에는 accessor가 필요합니다.** 정렬이 작동하려면 컬럼에 `accessorKey`/`accessorFn`이 있어야 합니다. `enableSorting`을 설정하고 `getRowId`를 제공하세요.
-- **React 19 + React Compiler는 다시 렌더링을 건너뛸 수 있습니다.** 이는 상위 TanStack Table 문제이므로 컴포넌트에 `'use no memo'` 지시문을 추가하거나 `data`를 메모이제이션하세요.
-- **범위 선택이 중첩된 행에서 깨집니다.** 테이블에 그룹화된/중첩된 행이 있을 때 범위 선택은 정의되지 않은 동작입니다. 그룹화 시 올바른 부모 체크박스 상태를 위해 `useRowSelectionFixedHandler`를 사용하세요.
+- **React 19 + React Compiler는 다시 렌더링을 건너뛸 수 있습니다.** 이것은 상위 TanStack Table 문제이므로 컴포넌트에 `'use no memo'` 지시문을 추가하거나 `data`를 메모이제이션하세요.
+- **범위 선택이 중첩된 행에서 깨집니다.** 테이블에 그룹화/중첩된 행이 있는 경우 범위 선택은 정의되지 않은 동작입니다. 그룹화된 경우 올바른 부모 체크박스 상태를 위해 `useRowSelectionFixedHandler`를 사용하세요.
 
 ## AI 에이전트용 문서
 
 설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/table/build/docs/INDEX.md`에 있습니다.
+```
