@@ -2,7 +2,7 @@
 
 > [Migration Guide von 0.x zu 1.x →](docs/migration-guides/v0-to-v1.md)
 
-Eine Bibliothek zur Visualisierung von Graphen, die das Beste aus beiden Welten vereint:
+Eine Bibliothek zur Graphenvisualisierung, die das Beste aus beiden Welten vereint:
 - Canvas für hohe Leistung bei der Anzeige des gesamten Graphen
 - HTML/React für reichhaltige Interaktionen bei Vergrößerung
 
@@ -12,7 +12,7 @@ Keine Kompromisse mehr zwischen Leistung und Interaktivität. Perfekt für groß
 
 ## Motivation
 
-Moderne Webanwendungen erfordern oft komplexe Visualisierungen und Interaktivität, aber bestehende Lösungen konzentrieren sich typischerweise auf eine einzige Rendering-Technologie:
+Moderne Webanwendungen erfordern oft komplexe Visualisierungen und Interaktionen, aber bestehende Lösungen konzentrieren sich typischerweise auf eine einzige Rendering-Technologie:
 
 - **Canvas** bietet hohe Leistung für komplexe Grafiken, ist aber in der Textverarbeitung und Interaktivität eingeschränkt.
 - **HTML DOM** ist praktisch für Benutzeroberflächen, aber weniger effizient für komplexe Grafiken oder eine große Anzahl von Elementen.
@@ -28,8 +28,8 @@ Die Bibliothek verwendet ein intelligentes Rendering-System, das den Übergang z
 
 1. Bei niedrigen Zoomstufen wird alles auf Canvas gerendert, um die Leistung zu optimieren.
 2. Beim Hineinzoomen in die Detailansicht:
-   - Verfolgt die `GraphCanvas`-Komponente Änderungen an der Kameraansicht und dem Maßstab.
-   - Berechnet, welche Blöcke im aktuellen Ansichtsfenster sichtbar sind (mit Polsterung für sanftes Scrollen).
+   - Der `GraphCanvas`-Komponente verfolgt Änderungen an der Kameraansicht und dem Maßstab.
+   - Berechnet, welche Blöcke im aktuellen Ansichtsbereich sichtbar sind (mit Polsterung für sanftes Scrollen).
    - Rendert React-Komponenten nur für sichtbare Blöcke.
    - Aktualisiert die Liste automatisch beim Scrollen oder Zoomen.
    - Entfernt React-Komponenten beim Auszoomen.
@@ -59,7 +59,7 @@ const MyGraph = () => {
 npm install @gravity-ui/graph
 ```
 
-## Beispiele
+## Verwendung
 
 ### React-Beispiel
 
@@ -237,9 +237,9 @@ graph.zoomTo("center", { padding: 100 });
 
 - [Grundlegendes Beispiel](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
 - [Groß angelegtes Beispiel](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
-- [Ansicht benutzerdefinierter Blöcke](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
+- [Benutzerdefinierte Blöcke anzeigen](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
 - [Bezier-Verbindung](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
-- [Anpassung von Verbindungen](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
+- [Verbindung anpassen](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
 ## Dokumentation
 
@@ -263,4 +263,34 @@ graph.zoomTo("center", { padding: 100 });
 
 4. Blöcke und Verbindungen
    - [Block-Gruppen](docs/blocks/groups.md)
-   - [Canvas Connection System](docs/connections/canvas-connection-system.md)
+   - [Canvas Verbindungs-System](docs/connections/canvas-connection-system.md)
+
+## Lizenz
+
+Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
+
+## Für KI-Agenten
+
+Ein hybrider Canvas/React-Graph-Editor für knotenbasierte Diagramme – verwenden Sie ihn, um Flussdiagramme, Knoteneditoren oder große interaktive Diagramme zu erstellen, bei denen Canvas Leistung bei geringem Zoom bietet und React-Komponenten bei starkem Zoom reichhaltige Interaktivität ermöglichen.
+
+### Wann zu verwenden
+
+- Knoteneditoren (Flussdiagramme, Pipelines, visuelle Builder) mit Hunderten/Tausenden von Knoten und Verbindungen.
+- Gemischtes Rendering: Canvas für die Gesamtübersicht des Graphen, React-Komponenten für die im Viewport sichtbaren Blöcke bei hohem Zoom.
+- Vanilla JS oder React-Konsumenten – die Kernklasse `Graph` ist Framework-unabhängig; `@gravity-ui/graph/react` bietet die React-Bindings.
+
+### Wann nicht zu verwenden
+
+- Zum Plotten von numerischen Datenreihen (Linien-/Balken-/Streudiagramme) verwenden Sie [`@gravity-ui/charts`](https://gravity-ui.com/charts) oder [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) – Graph ist ein Knoten-/Kanten-Diagramm-Editor, kein Daten-Chart.
+- Für ein statisches, nicht editierbares Diagramm mit wenigen Knoten kann eine SVG oder eine einfachere Diagrammbibliothek ohne die Canvas/React-Viewport-Mechanismen ausreichen.
+
+### Häufige Fallstricke
+
+- **Halluzinierter Import `GraphEditor`** – die React-Komponenten sind `GraphCanvas`, `GraphBlock` und der Hook `useGraph`, importiert aus `@gravity-ui/graph/react`; die Kernklasse ist `Graph` aus `@gravity-ui/graph`.
+- **Aufrufen von Graph-Methoden vor dem `ATTACHED`-Zustand** – rufen Sie `start()`/`zoomTo(...)` innerhalb des `onStateChanged`-Callbacks auf, wenn `state === GraphState.ATTACHED`, nicht beim Mounten.
+- **Vergessen von `setEntities`** – `useGraph` gibt `graph`, `setEntities`, `start` zurück; Daten erscheinen erst nach `setEntities({blocks, connections})`.
+- **Mischen von Ankerpunkt-Typen** – Verbindungen müssen auf vorhandene Ankerpunkt-IDs mit übereinstimmendem `EAnchorType` (`IN`/`OUT`) auf den Quell- und Zielblöcken verweisen.
+
+## Dokumentation für KI-Agenten
+
+Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/graph/build/docs/INDEX.md`.

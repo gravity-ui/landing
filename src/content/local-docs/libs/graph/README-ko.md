@@ -12,7 +12,7 @@
 
 ## 동기
 
-현대 웹 애플리케이션은 종종 복잡한 시각화 및 상호작용을 요구하지만, 기존 솔루션은 일반적으로 단일 렌더링 기술에 집중합니다.
+현대 웹 애플리케이션은 복잡한 시각화와 상호작용을 자주 요구하지만, 기존 솔루션은 일반적으로 단일 렌더링 기술에 집중합니다.
 
 - **Canvas**는 복잡한 그래픽에 대해 높은 성능을 제공하지만, 텍스트 처리 및 상호작용에는 제한이 있습니다.
 - **HTML DOM**은 인터페이스에 편리하지만, 복잡한 그래픽이나 많은 수의 요소에는 효율성이 떨어집니다.
@@ -31,7 +31,7 @@
    - 카메라 뷰포트 및 스케일 변경을 추적합니다.
    - 현재 뷰포트에서 보이는 블록을 계산합니다 (부드러운 스크롤을 위한 패딩 포함).
    - 보이는 블록에 대해서만 React 컴포넌트를 렌더링합니다.
-   - 스크롤 또는 확대/축소 시 목록을 자동으로 업데이트합니다.
+   - 스크롤하거나 확대/축소할 때 목록을 자동으로 업데이트합니다.
    - 축소 시 React 컴포넌트를 제거합니다.
 
 ```typescript
@@ -59,11 +59,11 @@ const MyGraph = () => {
 npm install @gravity-ui/graph
 ```
 
-## 예제
+## 사용법
 
 ### React 예제
 
-[자세한 React 컴포넌트 문서](docs/react/usage.md)
+[상세 React 컴포넌트 문서](docs/react/usage.md)
 
 ```typescript
 import React, { useEffect } from "react";
@@ -151,7 +151,7 @@ export function GraphEditor() {
 
 ```
 
-### 일반 JavaScript 예제
+### Vanilla JavaScript 예제
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
@@ -163,7 +163,7 @@ container.style.height = '100vh';
 container.style.overflow = 'hidden';
 document.body.appendChild(container);
 
-// 구성으로 그래프 초기화
+// 설정으로 그래프 초기화
 const graph = new Graph({
     configurationName: "example",
     blocks: [],
@@ -177,6 +177,7 @@ const graph = new Graph({
 }, container);
 ```
 
+```markdown
 // 블록 및 연결 추가
 graph.setEntities({
     blocks: [
@@ -263,3 +264,34 @@ graph.zoomTo("center", { padding: 100 });
 4. 블록 및 연결
    - [블록 그룹](docs/blocks/groups.md)
    - [캔버스 연결 시스템](docs/connections/canvas-connection-system.md)
+
+## 라이선스
+
+MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하십시오.
+
+## AI 에이전트용
+
+노드 기반 다이어그램을 위한 하이브리드 Canvas/React 그래프 편집기 — 플로우차트, 노드 편집기 또는 Canvas가 낮은 줌 레벨에서 성능을 제공하고 React 컴포넌트가 높은 줌 레벨에서 풍부한 상호 작용을 제공하는 대규모 대화형 다이어그램을 구축하는 데 사용하세요.
+
+### 언제 사용해야 할까요?
+
+- 수백/수천 개의 노드와 연결이 있는 노드 기반 편집기(플로우차트, 파이프라인, 시각적 빌더).
+- 혼합 렌더링: 전체 그래프 개요는 Canvas로, 높은 줌 레벨에서 보이는 블록은 React 컴포넌트로.
+- 순수 JavaScript 또는 React 사용자 — 핵심 `Graph` 클래스는 프레임워크에 독립적이며, `@gravity-ui/graph/react`는 React 바인딩을 제공합니다.
+
+### 언제 사용하지 않아야 할까요?
+
+- 숫자 데이터 시리즈(선/막대/산점도)를 플로팅하려면 [`@gravity-ui/charts`](https://gravity-ui.com/charts) 또는 [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr)를 사용하세요. 그래프는 데이터 차트가 아닌 노드/엣지 다이어그램 편집기입니다.
+- 노드가 적은 정적이고 편집 불가능한 다이어그램의 경우, SVG 또는 더 간단한 다이어그램 라이브러리가 Canvas/React 뷰포트 메커니즘 없이도 충분할 수 있습니다.
+
+### 일반적인 주의 사항
+
+- **`GraphEditor` 잘못 가져오기** — React 컴포넌트는 `@gravity-ui/graph/react`에서 가져오는 `GraphCanvas`, `GraphBlock`, `useGraph` 훅이며, 핵심 클래스는 `@gravity-ui/graph`의 `Graph`입니다.
+- **`ATTACHED` 상태 이전에 그래프 메서드 호출** — 마운트 시가 아니라 `onStateChanged` 콜백 내에서 `state === GraphState.ATTACHED`일 때 `start()`/`zoomTo(...)`를 호출하세요.
+- **`setEntities` 누락** — `useGraph`는 `graph`, `setEntities`, `start`를 반환하며, 데이터는 `setEntities({blocks, connections})` 후에만 나타납니다.
+- **앵커 유형 혼합** — 연결은 소스 및 대상 블록에서 일치하는 `EAnchorType`(`IN`/`OUT`)을 가진 기존 앵커 ID를 참조해야 합니다.
+
+## AI 에이전트용 문서
+
+설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/graph/build/docs/INDEX.md`에 있습니다.
+```
