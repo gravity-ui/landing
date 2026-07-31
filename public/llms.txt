@@ -224,7 +224,18 @@ Lightweight express.js wrapper that integrates with NodeKit.
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/graph/llms.txt)
 > GitHub: [gravity-ui/graph](https://github.com/gravity-ui/graph)
 
-High-performance graph renderer with dynamic scale-aware detailization
+A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
+
+#### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+#### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
 
 ## I18n — `@gravity-ui/i18n`
 
@@ -256,7 +267,18 @@ The official SVG icon set for Gravity UI, shipped as both React components and r
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/illustrations/llms.txt)
 > GitHub: [gravity-ui/illustrations](https://github.com/gravity-ui/illustrations)
 
-A set of illustrations for displaying data statuses.
+A themed set of flat SVG illustrations (empty states, errors, not-found, etc.) for Gravity UI apps — reach for it when you need ready-made, theme-aware placeholder/empty-state artwork instead of drawing your own or using bare icons.
+
+#### When to use
+
+- Empty states, 404/error pages, or onboarding placeholders that need a consistent illustration, not a functional UI control.
+- Themeable artwork — the SVGs respond to Gravity theme tokens (light/dark, high-contrast) via SCSS mixins or CSS variables.
+- Importing artwork as React components (default) or as raw `.svg` files.
+
+#### When not to use
+
+- For functional UI iconography (chevrons, checks, buttons), use [`@gravity-ui/icons`](https://gravity-ui.com/icons) — illustrations are decorative artwork, not UI glyphs.
+- For a single one-off illustration you already have as an asset, import that asset directly rather than pulling in this package.
 
 ## Markdown editor — `@gravity-ui/markdown-editor`
 

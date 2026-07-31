@@ -224,7 +224,18 @@ Lightweight express.js wrapper that integrates with NodeKit.
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/graph/llms.txt)
 > GitHub: [gravity-ui/graph](https://github.com/gravity-ui/graph)
 
-High-performance graph renderer with dynamic scale-aware detailization
+A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
+
+#### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+#### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
 
 ## I18n — `@gravity-ui/i18n`
 
@@ -256,7 +267,18 @@ The official SVG icon set for Gravity UI, shipped as both React components and r
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/illustrations/llms.txt)
 > GitHub: [gravity-ui/illustrations](https://github.com/gravity-ui/illustrations)
 
-A set of illustrations for displaying data statuses.
+A themed set of flat SVG illustrations (empty states, errors, not-found, etc.) for Gravity UI apps — reach for it when you need ready-made, theme-aware placeholder/empty-state artwork instead of drawing your own or using bare icons.
+
+#### When to use
+
+- Empty states, 404/error pages, or onboarding placeholders that need a consistent illustration, not a functional UI control.
+- Themeable artwork — the SVGs respond to Gravity theme tokens (light/dark, high-contrast) via SCSS mixins or CSS variables.
+- Importing artwork as React components (default) or as raw `.svg` files.
+
+#### When not to use
+
+- For functional UI iconography (chevrons, checks, buttons), use [`@gravity-ui/icons`](https://gravity-ui.com/icons) — illustrations are decorative artwork, not UI glyphs.
+- For a single one-off illustration you already have as an asset, import that asset directly rather than pulling in this package.
 
 ## Markdown editor — `@gravity-ui/markdown-editor`
 
@@ -617,18 +639,49 @@ Read more:
 
 > Generated for `@gravity-ui/uikit@7.47.0`
 
-# UIKit
+# @gravity-ui/uikit documentation
 
-> The base React component and design-token library for Gravity UI apps — controls, inputs, overlays, layout, and theming that every other @gravity-ui package builds on.
->
-> **npm:** `@gravity-ui/uikit` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **7.47.0** version of `@gravity-ui/uikit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/uikit/build/docs/`).
+
+## For AI agents
+
+The base React component and design-token library for Gravity UI apps — controls, inputs, overlays, layout, and theming that every other @gravity-ui package builds on.
+
+### When to use
+
+- Standard application UI: buttons, form controls, modals and popups, menus, tabs, labels, typography, and layout primitives.
+- The theming foundation of a Gravity UI app: `ThemeProvider`, design tokens, and CSS variables the rest of the `@gravity-ui/*` ecosystem expects to be present.
+- Simple tabular data via the built-in `Table` component (selection, sorting, row actions).
+
+### When not to use
+
+- Feature-rich data grids (virtualization, column resizing, grouping, reordering) — use [`@gravity-ui/table`](https://github.com/gravity-ui/table), a separate headless package. It is **not** the same as uikit's `Table` component.
+- Charts and data visualization — use [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` is the legacy wrapper).
+- Application navigation shells (aside header, footer, logo) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Date pickers, calendars, and range controls — use [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- The SVG icon set itself — use [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit only ships the `Icon` renderer.
+
+### Common pitfalls
+
+- `Button` styling prop is `view`, not `variant` or `color`
+- **Components render unstyled without setup.** Wrap the app in `ThemeProvider` **and** import `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) once at the entry point — both are required.
+- **`Icon` has no `name` prop.** Pass an imported icon component through `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
+- **`theme` values are `light | dark | light-hc | dark-hc`.** There is no `theme="default"`.
+
+### Useful docs
+
+- [Layout components and spacings](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/layout.md)
+- [Theming, Colors & Branding](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming.md)
+- [Typography](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/typography.md)
 
 ## Install
 
 ```shell
 npm install @gravity-ui/uikit
 ```
-
 
 ## Peer dependencies
 
@@ -668,51 +721,117 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-A SCSS [mixins](styles/mixins.scss) file with useful helpers is also available for use in your own stylesheets.
+A SCSS mixins file with useful helpers is also available for use in your own stylesheets.
 
 ### Guides
 
 Read more:
 
-- [Theming](docs/theming.md) — enable light, dark, and high-contrast themes
-- [Server-side rendering](docs/server-side-rendering.md) — generate the root CSS class on the server
-- [Internationalization](docs/i18n.md) — set the built-in component language
+- [Theming](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming.md) — enable light, dark, and high-contrast themes
+- [Server-side rendering](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/server-side-rendering.md) — generate the root CSS class on the server
+- [Internationalization](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/i18n.md) — set the built-in component language
 
+## Guides
 
-### When to use
+- [Internationalization (I18N)](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/i18n.md) — English | Русский
+- [Layout components and spacings](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/layout.md) — This guide covers UIKit's layout foundations: a shared spacing scale (--g-spacing-*, used everywhere via tokens and props) and a responsive grid (Container/Row/Col), plus the flexbox-based Flex/Box primitives built on top of them. Compose pages from these instead of raw divs and inline styles.
+- [Server-Side Rendering](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/server-side-rendering.md) — English | Русский
+- [Theming, Colors & Branding](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming.md) — English | Русский
+- [Typography](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/typography.md) — UIKit's type scale is a fixed set of text variants, each with predefined font-size and line-height. Render text with the Text component and a variant — not raw <h1>/<p> tags or inline font-size. This keeps sizing consistent and theme-aware across the app.
+- [Интернационализация (I18N)](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/i18n-ru.md) — English | Русский
+- [Серверный рендеринг (SSR)](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/server-side-rendering-ru.md) — English | Русский
+- [Темизация](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/guides/theming-ru.md) — English | Русский
 
-- Standard application UI: buttons, form controls, modals and popups, menus, tabs, labels, typography, and layout primitives.
-- The theming foundation of a Gravity UI app: `ThemeProvider`, design tokens, and CSS variables the rest of the `@gravity-ui/*` ecosystem expects to be present.
-- Simple tabular data via the built-in `Table` component (selection, sorting, row actions).
+## Components
 
-### When not to use
+- [Accordion](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Accordion.md) — The Accordion component allows you to create collapsible content panels where users can show or hide sections of information. This is useful for organizing large amounts of content in a compact way.
+- [ActionsPanel](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ActionsPanel.md) — Use an ActionsPanel to render multiple buttons in a row. When there is not enough space, buttons that don't fit will be added to an overflow menu.
+- [ActionTooltip](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ActionTooltip.md) — Tooltip for labeling action buttons without descriptive text (e.g. icon buttons).
+- [Alert](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Alert.md) — The Alert component displays a prominent message to draw the user's attention to important information.
+- [ArrowToggle](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ArrowToggle.md) — ArrowToggle is a component for displaying the chevron icon. It can rotate in four directions and can be used to display drop-down lists, cut components, etc.
+- [Avatar](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Avatar.md) — This component is intended for rendering avatars. It has three basic avatar types: image, icon, and text (name initials). All these types have special properties to configure the behavior and appearance.
+- [AvatarStack](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/AvatarStack.md) — This component is used for a stack of images with overlap over one another and, optionally, a control. It usually refers to user avatars.
+- [Breadcrumbs](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Breadcrumbs.md) — Breadcrumbs is a navigation element that shows the current location of a page within a website’s hierarchy. It provides links that allow users to return to higher levels in the hierarchy, making it easier to navigate through a website with multiple layers. Breadcrumbs are especially useful for large websites and applications with hierarchy-based structure of pages.
+- [Button](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Button.md) — Buttons act as a trigger for certain actions. While this is their main purpose, in some very rare cases, they can be used as links to navigate to other pages.
+- [Card](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Card.md) — Card is a reusable React component that basically is a card-like container with customizable styles and features. It is used to display information or content in a visually appealing and well-organized manner.
+- [Checkbox](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Checkbox.md) — The Checkbox component allows the user to select or deselect a specific value.
+- [ClipboardButton](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ClipboardButton.md) — ClipboardButton is a ready-made button that copies given text to the clipboard and plays a success animation. It combines CopyToClipboard (the copy behavior) with ClipboardIcon (the animated icon).
+- [ClipboardIcon](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/ClipboardIcon.md) — ClipboardIcon is an animated copy icon that reflects the copy state (idle or success); it is meant to sit inside CopyToClipboard or ClipboardButton rather than be used on its own.
+- [controls/PasswordInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/controls/PasswordInput.md)
+- [controls/TextArea](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/controls/TextArea.md)
+- [controls/TextInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/controls/TextInput.md)
+- [CopyToClipboard](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/CopyToClipboard.md) — CopyToClipboard is a render-prop wrapper that copies text to the clipboard and exposes the copy status to its child, letting you render your own trigger; for a ready-made button use ClipboardButton.
+- [DefinitionList](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/DefinitionList.md) — The component to display definition list with term and definition separated by dots.
+- [Dialog](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Dialog.md) — Dialog is a modal window with a title, body, and footer actions, used for confirmations, forms, and prompts. It is built on top of Modal.
+- [Disclosure](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Disclosure.md) — Disclosure is a collapsible component that allows to display and hide its nested content.
+- [Divider](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Divider.md) — The Divider component is used as a thin line for delimiting and grouping elements to reinforce visual hierarchy.
+- [Drawer](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Drawer.md) — The Drawer component is a versatile interface element used in web applications to provide a sliding panel that emerges from the edge of the screen. This panel can house navigations, tools, or additional content. The component is implemented using React and CSS transitions for smooth animations.
+- [DropdownMenu](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/DropdownMenu.md) — The dropdown menu component provides item grouping, submenus, and a customizable toggle. The dropdown menu items are configured with the items property. By default, the menu toggle is a button with the ellipsis icon (⋯), which can be overridden with the renderSwitcher property.
+- [FilePreview](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/FilePreview.md) — FilePreview is a compact preview card for a single file, showing a thumbnail or file-type icon with the file name and optional actions.
+- [HelpMark](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/HelpMark.md) — A help icon that reveals contextual information in a popover on hover or click. Ideal for showing tips, explanations, or supporting content without taking up extra space in the interface.
+- [Hotkey](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Hotkey.md) — You can use the Hotkey component to display keyboard shortcuts for both Mac and PC.
+- [Icon](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Icon.md) — Icon renders an SVG glyph at a given size and color, taking the SVG as a React component or an imported asset. It serves as a single proxy for using SVGs across the codebase, which can be loaded through a React component or Webpack loaders such as SVGR, svg-react-loader, svg-inline-loader, or svg-sprite-loader.
+- [lab/ColorPicker](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/lab/ColorPicker.md)
+- [lab/FileDropZone](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/lab/FileDropZone.md)
+- [lab/Menu](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/lab/Menu.md)
+- [Label](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Label.md) — You can use Labels for highlighting certain information. A Label with the Close or Copy button may be useful for various simple actions.
+- [Link](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Link.md) — Link is a part of text that, when clicked, takes the user to another part of the page, another page within the service, or an external website page.
+- [List](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/List.md) — The List component renders a filterable, sortable, and virtualized list of items with support for custom rendering and keyboard navigation.
+- [Loader](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Loader.md) — The Loader component displays the loading progress as flashing bars. Unlike Spin, this component is used in global scenarios, e.g., for an entire page or Dialog.
+- [Menu](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Menu.md) — The Menu component enables easily creating views for action lists.
+- [Modal](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Modal.md) — The Modal component serves as base for creating pop-up windows with a backdrop above the rest of the content on a page. It disables scrolling while opening and manages focus for content. The Modal child components are rendered inside the Portal component. With Modal, you can implement dialogs, alerts, confirmations, and more.
+- [NumberInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/NumberInput.md) — NumberInput is a text field for entering numeric values, with optional stepper controls, min/max bounds, and value formatting.
+- [Overlay](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Overlay.md) — The Overlay component renders an overlay over the parent element with the relative position, i.e., the parent element must have position set to relative. For example, it can be used to preserve the desired layout while loading data.
+- [Pagination](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Pagination.md) — Pagination renders page-navigation controls — page numbers with previous/next buttons and an optional page-size selector — used for splitting long lists or tables across pages.
+- [Palette](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Palette.md) — The Palette component is used to display a grid of icons, emojis, reactions, and symbols which you can select or deselect.
+- [PinInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/PinInput.md) — PinInput is a group of inputs to enter sequence of numeric or alphanumeric values quickly. Its most common use case is entering OTP or confirmation codes received through text messages (SMS), emails, or authenticator apps.
+- [PlaceholderContainer](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/PlaceholderContainer.md) — PlaceholderContainer is a component for displaying content with an image, text content, and action controls.
+- [Popover](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Popover.md) — Popover shows floating, optionally interactive content (text, links, or buttons) anchored to a child element and opened on hover or click. It wraps Popup with built-in trigger interactivity, using the ReactElement passed via the children property as the trigger.
+- [Popup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Popup.md) — Popup positions floating content above the page, anchored to a reference element — the low-level primitive behind tooltips, popovers, and menus, built on Floating UI. Its visibility is controlled with the open property; its children render inside the Portal component unless you set the disablePortal property.
+- [Portal](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Portal.md) — Portal is a utility component. Basically, it is a simple wrapper around React's createPortal that allows you to render children into a DOM node outside the parent component.
+- [Progress](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Progress.md) — The Progress component shows current operation progress. It can also be divided into sections.
+- [Radio](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Radio.md) — The Radio component allows the users to select a single option from a list of choices.
+- [RadioGroup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/RadioGroup.md) — The RadioGroup component is used to create a group where users can select a single option from multiple choices.
+- [SegmentedRadioGroup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/SegmentedRadioGroup.md) — The SegmentedRadioGroup component is used to create a group of radio buttons where users can select a single option from multiple choices.
+- [Select](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Select.md) — Select is a control that provides a list of options that a user can select.
+- [Select/hooks-public/useSelectOptions](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Select/hooks-public/useSelectOptions.md) — The useSelectOptions hook that helps to manage options data before passing into Select component. It could be handy in case of options management outside the component.
+- [Sheet](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Sheet.md) — Sheet is a component designed for using in the mobile context as an information or interactive element. You can place content of any size in it, since the internal scrolling and dynamic resizing are supported.
+- [Skeleton](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Skeleton.md) — The Skeleton component displays a placeholder preview of your content before the data gets loaded. This preview is shown in order to reduce the loading time frustration.
+- [Slider](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Slider.md) — The slider is a customizable and responsive React component that allows users to select a single value or a range of values from a specified data set.
+- [Spin](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Spin.md) — The Spin component displays the loading state (a rotating semicircle) in inline scenarios. Unlike Loader, this component is used to display the loading state in inline scenarios, e.g., in a Button or Label.
+- [Stepper](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Stepper.md) — Stepper guides users through a sequence of numbered steps, showing progress in a wizard-like, multi-step workflow.
+- [Switch](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Switch.md) — The Switch component is used to toggle between two states: typically, between on and off, or enabled and disabled.
+- [Table](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Table.md) — A Table allows selecting and sorting rows, as well as performing actions on a row.
+- [TableColumnSetup](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/TableColumnSetup.md) — The TableColumnSetup component provides a user interface for configuring table column visibility and order. It displays a button that opens a popup with a list of available columns, allowing users to show/hide columns and optionally reorder them via drag and drop.
+- [tabs](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/tabs.md) — Tabs components is used to explore, organize content and switch between different views.
+- [Text](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Text.md) — The Text component applies typography styles such as font variant, color, and text overflow handling to its content.
+- [Toaster](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Toaster.md) — This is a component for adjustable notifications also known as toasts.
+- [Toc](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Toc.md) — The Toc component is designed to display a table of contents of the page, namely showing a set items with two levels of hierarchy.
+- [Tooltip](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/Tooltip.md) — A simple text tip that uses its child node as an anchor. This component accepts only text content and may be an excellent alternative to the browser's title attribute with its small size and long appearance delay.
+- [User](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/User.md) — This is a general component for displaying a user avatar with an info block. It uses the Avatar component to render the avatar. It can also accept a custom React node as an avatar.
+- [UserLabel](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/components/UserLabel.md) — UserLabel is a compact chip with a user's avatar and name or email, suited for inline mentions and lists (use User for a larger profile block and Avatar for the picture alone).
 
-- Feature-rich data grids (virtualization, column resizing, grouping, reordering) — use [`@gravity-ui/table`](https://github.com/gravity-ui/table), a separate headless package. It is **not** the same as uikit's `Table` component.
-- Charts and data visualization — use [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` is the legacy wrapper).
-- Application navigation shells (aside header, footer, logo) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
-- Date pickers, calendars, and range controls — use [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
-- The SVG icon set itself — use [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit only ships the `Icon` renderer.
+## Hooks
 
-### Common pitfalls
-
-- `Button` styling prop is `view`, not `variant` or `color`
-- **Components render unstyled without setup.** Wrap the app in `ThemeProvider` **and** import `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) once at the entry point — both are required.
-- **`Icon` has no `name` prop.** Pass an imported icon component through `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
-- **`theme` values are `light | dark | light-hc | dark-hc`.** There is no `theme="default"`.
-
-### Useful docs
-
-- [Layout components and spacings](./docs/layout.md)
-- [Theming, Colors & Branding](./docs/theming.md)
-- [Typography](./docs/typography.md)
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/uikit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/uikit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/uikit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/uikit)
+- [lab/useDropZone](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/lab/useDropZone.md)
+- [useActionHandlers](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useActionHandlers.md)
+- [useAsyncActionHandler](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useAsyncActionHandler.md)
+- [useCollapseChildren](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useCollapseChildren.md)
+- [useColorGenerator](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useColorGenerator.md)
+- [useControlledState](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useControlledState.md)
+- [useFileInput](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useFileInput.md)
+- [useFocusWithin](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useFocusWithin.md)
+- [useForkRef](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useForkRef.md)
+- [useIntersection](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useIntersection.md)
+- [useListNavigation](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useListNavigation.md)
+- [useOutsideClick](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useOutsideClick.md)
+- [usePortalContainer](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/usePortalContainer.md)
+- [useResizeObserver](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useResizeObserver.md)
+- [useSelect](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useSelect.md)
+- [useTimeout](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useTimeout.md)
+- [useUniqId](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useUniqId.md)
+- [useViewportSize](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useViewportSize.md)
+- [useVirtualElementRef](https://unpkg.com/@gravity-ui/uikit@7.47.0/build/docs/hooks/useVirtualElementRef.md)
 
 ---
 
@@ -5820,7 +5939,7 @@ export default function App() {
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -5831,8 +5950,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -5841,6 +5958,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -5860,7 +6169,7 @@ Install these in the host project at a compatible version:
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -5871,8 +6180,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -5881,6 +6188,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -5900,7 +6399,7 @@ Install these in the host project at a compatible version:
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -5911,8 +6410,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -5921,6 +6418,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -5940,7 +6629,7 @@ Install these in the host project at a compatible version:
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -5951,8 +6640,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -5961,6 +6648,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -5980,7 +6859,7 @@ Install these in the host project at a compatible version:
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -5991,8 +6870,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -6001,6 +6878,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6020,7 +7089,7 @@ Install these in the host project at a compatible version:
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6031,8 +7100,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -6041,6 +7108,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6060,7 +7319,7 @@ Install these in the host project at a compatible version:
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6071,8 +7330,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -6081,6 +7338,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6100,7 +7549,7 @@ Install these in the host project at a compatible version:
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6111,7 +7560,197 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6131,7 +7770,7 @@ npm install @gravity-ui/graph
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6142,7 +7781,197 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6162,7 +7991,7 @@ npm install @gravity-ui/graph
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6173,7 +8002,197 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6193,7 +8212,7 @@ npm install @gravity-ui/graph
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6204,7 +8223,197 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6224,7 +8433,7 @@ npm install @gravity-ui/graph
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6235,7 +8444,197 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6255,7 +8654,7 @@ npm install @gravity-ui/graph
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6266,7 +8665,197 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -6286,7 +8875,7 @@ npm install @gravity-ui/graph
 
 # Graph
 
-> High-performance graph renderer with dynamic scale-aware detailization
+> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
 >
 > **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -6297,8 +8886,6 @@ npm install @gravity-ui/graph
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md) for full documentation.
-
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -6307,6 +8894,198 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
 | `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
+
+## Usage
+
+### React Example
+
+[Detailed React Components Documentation](docs/react/usage.md)
+
+```typescript
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
+import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
+
+const config = {};
+
+export function GraphEditor() {
+  const { graph, setEntities, start } = useGraph(config);
+
+  useEffect(() => {
+    setEntities({
+      blocks: [
+        {
+          is: "block-action",
+          id: "action_1",
+          x: -100,
+          y: -450,
+          width: 126,
+          height: 126,
+          selected: true,
+          name: "Block #1",
+          anchors: [
+            {
+              id: "out1",
+              blockId: "action_1",
+              type: EAnchorType.OUT,
+              index: 0,
+            },
+          ],
+        },
+        {
+          id: "action_2",
+          is: "block-action",
+          x: 253,
+          y: 176,
+          width: 126,
+          height: 126,
+          selected: false,
+          name: "Block #2",
+          anchors: [
+            {
+              id: "in1",
+              blockId: "action_2",
+              type: EAnchorType.IN,
+              index: 0,
+            },
+          ],
+        },
+      ],
+      connections: [
+        {
+          sourceBlockId: "action_1",
+          sourceAnchorId: "out1",
+          targetBlockId: "action_2",
+          targetAnchorId: "in1",
+        },
+      ],
+    });
+  }, [setEntities]);
+
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
+  };
+
+  return (
+    <GraphCanvas
+      graph={graph}
+      renderBlock={renderBlockFn}
+      onStateChanged={({ state }) => {
+        if (state === GraphState.ATTACHED) {
+          start();
+          graph.zoomTo("center", { padding: 300 });
+        }
+      }}
+    />
+  );
+}
+
+```
+
+### Vanilla JavaScript Example
+
+```javascript
+import { Graph } from "@gravity-ui/graph";
+
+// Create container element
+const container = document.createElement('div');
+container.style.width = '100vw';
+container.style.height = '100vh';
+container.style.overflow = 'hidden';
+document.body.appendChild(container);
+
+// Initialize graph with configuration
+const graph = new Graph({
+    configurationName: "example",
+    blocks: [],
+    connections: [],
+    settings: {
+        canDragCamera: true,
+        canZoomCamera: true,
+        useBezierConnections: true,
+        showConnectionArrows: true
+    }
+}, container);
+
+// Add blocks and connections
+graph.setEntities({
+    blocks: [
+        {
+            is: "block-action",
+            id: "block1",
+            x: 100,
+            y: 100,
+            width: 120,
+            height: 120,
+            name: "Block #1",
+            anchors: [
+                {
+                    id: "out1",
+                    blockId: "block1",
+                    type: EAnchorType.OUT,
+                    index: 0
+                }
+            ]
+        },
+        {
+            is: "block-action",
+            id: "block2",
+            x: 300,
+            y: 300,
+            width: 120,
+            height: 120,
+            name: "Block #2",
+            anchors: [
+                {
+                    id: "in1",
+                    blockId: "block2",
+                    type: EAnchorType.IN,
+                    index: 0
+                }
+            ]
+        }
+    ],
+    connections: [
+        {
+            sourceBlockId: "block1",
+            sourceAnchorId: "out1",
+            targetBlockId: "block2",
+            targetAnchorId: "in1"
+        }
+    ]
+});
+
+// Start rendering
+graph.start();
+
+// Center the view
+graph.zoomTo("center", { padding: 100 });
+```
+
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
+
 
 ## Links
 
@@ -7187,7 +9966,7 @@ import cloudIcon from '@gravity-ui/icons/svgs/cloud.svg';
 
 # Illustrations
 
-> A set of illustrations for displaying data statuses.
+> A themed set of flat SVG illustrations (empty states, errors, not-found, etc.) for Gravity UI apps — reach for it when you need ready-made, theme-aware placeholder/empty-state artwork instead of drawing your own or using bare icons.
 >
 > **npm:** `@gravity-ui/illustrations` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -7297,7 +10076,23 @@ npm run generate
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/illustrations/main/README.md) for full documentation.
+### When to use
+
+- Empty states, 404/error pages, or onboarding placeholders that need a consistent illustration, not a functional UI control.
+- Themeable artwork — the SVGs respond to Gravity theme tokens (light/dark, high-contrast) via SCSS mixins or CSS variables.
+- Importing artwork as React components (default) or as raw `.svg` files.
+
+### When not to use
+
+- For functional UI iconography (chevrons, checks, buttons), use [`@gravity-ui/icons`](https://gravity-ui.com/icons) — illustrations are decorative artwork, not UI glyphs.
+- For a single one-off illustration you already have as an asset, import that asset directly rather than pulling in this package.
+
+### Common pitfalls
+
+- **Rendering without a theme import** — illustrations appear uncolored unless you import `@gravity-ui/illustrations/styles/styles.scss` (or define the `--gil-color-*` CSS tokens).
+- **Hallucinated default export names** — illustration components are PascalCase named exports (e.g. `NotFound`), imported from the package root or per-file (`@gravity-ui/illustrations/NotFound`).
+- **Importing `.svg` directly in a non-configured bundler** — raw SVG imports need an appropriate loader; prefer the React component export to avoid bundler setup.
+
 
 ## Links
 
@@ -7317,7 +10112,7 @@ npm run generate
 
 # Illustrations
 
-> A set of illustrations for displaying data statuses.
+> A themed set of flat SVG illustrations (empty states, errors, not-found, etc.) for Gravity UI apps — reach for it when you need ready-made, theme-aware placeholder/empty-state artwork instead of drawing your own or using bare icons.
 >
 > **npm:** `@gravity-ui/illustrations` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -7427,7 +10222,23 @@ npm run generate
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/illustrations/main/README.md) for full documentation.
+### When to use
+
+- Empty states, 404/error pages, or onboarding placeholders that need a consistent illustration, not a functional UI control.
+- Themeable artwork — the SVGs respond to Gravity theme tokens (light/dark, high-contrast) via SCSS mixins or CSS variables.
+- Importing artwork as React components (default) or as raw `.svg` files.
+
+### When not to use
+
+- For functional UI iconography (chevrons, checks, buttons), use [`@gravity-ui/icons`](https://gravity-ui.com/icons) — illustrations are decorative artwork, not UI glyphs.
+- For a single one-off illustration you already have as an asset, import that asset directly rather than pulling in this package.
+
+### Common pitfalls
+
+- **Rendering without a theme import** — illustrations appear uncolored unless you import `@gravity-ui/illustrations/styles/styles.scss` (or define the `--gil-color-*` CSS tokens).
+- **Hallucinated default export names** — illustration components are PascalCase named exports (e.g. `NotFound`), imported from the package root or per-file (`@gravity-ui/illustrations/NotFound`).
+- **Importing `.svg` directly in a non-configured bundler** — raw SVG imports need an appropriate loader; prefer the React component export to avoid bundler setup.
+
 
 ## Links
 
@@ -7447,7 +10258,7 @@ npm run generate
 
 # Illustrations
 
-> A set of illustrations for displaying data statuses.
+> A themed set of flat SVG illustrations (empty states, errors, not-found, etc.) for Gravity UI apps — reach for it when you need ready-made, theme-aware placeholder/empty-state artwork instead of drawing your own or using bare icons.
 >
 > **npm:** `@gravity-ui/illustrations` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -7556,7 +10367,23 @@ npm run generate
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/illustrations/main/README.md) for full documentation.
+### When to use
+
+- Empty states, 404/error pages, or onboarding placeholders that need a consistent illustration, not a functional UI control.
+- Themeable artwork — the SVGs respond to Gravity theme tokens (light/dark, high-contrast) via SCSS mixins or CSS variables.
+- Importing artwork as React components (default) or as raw `.svg` files.
+
+### When not to use
+
+- For functional UI iconography (chevrons, checks, buttons), use [`@gravity-ui/icons`](https://gravity-ui.com/icons) — illustrations are decorative artwork, not UI glyphs.
+- For a single one-off illustration you already have as an asset, import that asset directly rather than pulling in this package.
+
+### Common pitfalls
+
+- **Rendering without a theme import** — illustrations appear uncolored unless you import `@gravity-ui/illustrations/styles/styles.scss` (or define the `--gil-color-*` CSS tokens).
+- **Hallucinated default export names** — illustration components are PascalCase named exports (e.g. `NotFound`), imported from the package root or per-file (`@gravity-ui/illustrations/NotFound`).
+- **Importing `.svg` directly in a non-configured bundler** — raw SVG imports need an appropriate loader; prefer the React component export to avoid bundler setup.
+
 
 ## Links
 
@@ -7576,7 +10403,7 @@ npm run generate
 
 # Illustrations
 
-> A set of illustrations for displaying data statuses.
+> A themed set of flat SVG illustrations (empty states, errors, not-found, etc.) for Gravity UI apps — reach for it when you need ready-made, theme-aware placeholder/empty-state artwork instead of drawing your own or using bare icons.
 >
 > **npm:** `@gravity-ui/illustrations` — check the installed major version in the user's `package.json` and read docs matching it.
 
@@ -7685,7 +10512,23 @@ npm run generate
 ```
 
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/illustrations/main/README.md) for full documentation.
+### When to use
+
+- Empty states, 404/error pages, or onboarding placeholders that need a consistent illustration, not a functional UI control.
+- Themeable artwork — the SVGs respond to Gravity theme tokens (light/dark, high-contrast) via SCSS mixins or CSS variables.
+- Importing artwork as React components (default) or as raw `.svg` files.
+
+### When not to use
+
+- For functional UI iconography (chevrons, checks, buttons), use [`@gravity-ui/icons`](https://gravity-ui.com/icons) — illustrations are decorative artwork, not UI glyphs.
+- For a single one-off illustration you already have as an asset, import that asset directly rather than pulling in this package.
+
+### Common pitfalls
+
+- **Rendering without a theme import** — illustrations appear uncolored unless you import `@gravity-ui/illustrations/styles/styles.scss` (or define the `--gil-color-*` CSS tokens).
+- **Hallucinated default export names** — illustration components are PascalCase named exports (e.g. `NotFound`), imported from the package root or per-file (`@gravity-ui/illustrations/NotFound`).
+- **Importing `.svg` directly in a non-configured bundler** — raw SVG imports need an appropriate loader; prefer the React component export to avoid bundler setup.
+
 
 ## Links
 
@@ -12295,11 +15138,11 @@ export default function App() {
 
 ---
 
-> Generated for `@gravity-ui/table@1.19.0`
+> Generated for `@gravity-ui/table@1.20.0`
 
 # @gravity-ui/table documentation
 
-Documentation for the **1.19.0** version of `@gravity-ui/table`.
+Documentation for the **1.20.0** version of `@gravity-ui/table`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
@@ -12348,6 +15191,801 @@ Install these in the host project at a compatible version:
 | `lodash` | `^4.17.0` |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+
+## Usage
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+interface Person {
+  id: string;
+  name: string;
+  age: number;
+}
+
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const data: Person[] = [
+  {id: 'name', name: 'John', age: 23},
+  {id: 'age', name: 'Michael', age: 27},
+];
+
+const BasicExample = () => {
+  const table = useTable({
+    columns,
+    data,
+  });
+
+  return <Table table={table} />;
+};
+```
+
+### Components
+
+There are two Table components that you can use:
+
+- `BaseTable` - a component with basic styles only;
+- `Table` - a component with Gravity UI based styles.
+
+#### Row selection
+
+```tsx
+import {selectionColumn} from '@gravity-ui/table';
+import type {RowSelectionState} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...other columns
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const RowSelectionExample = () => {
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
+
+#### Custom Ranged Selection Column
+
+The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
+
+```tsx
+import React, {type ChangeEvent, useCallback, useState} from 'react';
+
+import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
+import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
+import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
+
+type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
+  cellContext: CellContext<unknown, unknown>;
+};
+
+const CustomRangedSelectionCheckbox = ({
+  className,
+  cellContext,
+  ...restProps
+}: CustomRangedSelectionCheckboxProps) => {
+  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      rowToggleRangedSelectionHandler(event);
+    },
+    [rowToggleRangedSelectionHandler],
+  );
+
+  return <Checkbox {...restProps} onChange={handleChange} />;
+};
+
+const customSelectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <Checkbox
+      size="l"
+      checked={table.getIsAllRowsSelected()}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <CustomRangedSelectionCheckbox
+      size="l"
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  size: 41,
+  maxSize: 41,
+  minSize: 41,
+  enableResizing: false,
+  enableSorting: false,
+};
+
+const columns: ColumnDef<Person>[] = [
+  customSelectionColumn as ColumnDef<Person>,
+  // ...other columns
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const RowRangedSelectionExample = () => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+There is also a `RangedSelectionCheckbox` component, which internally uses the hook and accepts a `CellContext` instance as a prop. This component provides a shorthand for adding ranged selection functionality to custom selection columns.
+
+```tsx
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
+
+export const selectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <SelectionCheckbox
+      checked={table.getIsAllRowsSelected()}
+      disabled={!table.options.enableRowSelection}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <RangedSelectionCheckbox
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  meta: {
+    hideInSettings: true,
+  },
+  size: 32,
+  minSize: 32,
+};
+```
+
+By default, the selection column generated with `selectionColumn` includes ranged selection functionality.
+
+```tsx
+import {selectionColumn} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...other columns
+];
+```
+
+**Note**: If the table contains nested rows, range selection will not work. At the moment, this is considered undefined behavior.
+
+#### Sorting
+
+Learn about the column properties in the react-table [docs](https://tanstack.com/table/v8/docs/guide/sorting)
+
+```tsx
+import type {SortingState} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const SortingExample = () => {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  // Your column MUST have accessorFn for sorting to be enabled
+
+  const table = useTable({
+    columns,
+    data,
+    enableSorting: true,
+    getRowId: (item) => item.id,
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+If you want to sort the elements manually pass `manualSorting` property:
+
+```tsx
+const table = useTable({
+  // ...
+  manualSorting: true,
+});
+```
+
+#### Grouping
+
+```tsx
+import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
+
+interface Person {
+  id: string;
+  name: string;
+  age: number;
+}
+
+interface PersonGroup {
+  id: string;
+  name: string;
+  items: Person[];
+}
+
+type Item = PersonGroup | Person;
+
+const columns: ColumnDef<Item>[] = [
+  {accessorKey: 'name', header: 'Name', size: 200},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const data: Item[] = [
+  {
+    id: 'friends',
+    name: 'Friends',
+    items: [
+      {id: 'nick', name: 'Nick', age: 25},
+      {id: 'tom', name: 'Tom', age: 21},
+    ],
+  },
+  {
+    id: 'relatives',
+    name: 'Relatives',
+    items: [
+      {id: 'john', name: 'John', age: 23},
+      {id: 'michael', name: 'Michael', age: 27},
+    ],
+  },
+];
+
+const getGroupTitle = (row: Row<Item>) => row.getValue<string>('name');
+
+const GroupingExample = () => {
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableExpanding: true,
+    getSubRows: (item) => ('items' in item ? item.items : undefined),
+    onExpandedChange: setExpanded,
+    state: {
+      expanded,
+    },
+  });
+
+  return <Table table={table} getGroupTitle={getGroupTitle} />;
+};
+```
+
+To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
+
+To enable nesting styles, pass `withNestingStyles = true` in the column configuration.
+
+Nesting indicators can be disabled by passing `showTreeDepthIndicators = false`.
+
+To add a control for expanding/collapsing rows, wrap the cell content with the `TreeExpandableCell` component or with your similar custom component:
+
+```tsx
+import {TreeExpandableCell} from '@gravity-ui/table';
+
+const columns: ColumnDef<Item>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    size: 200,
+    showTreeDepthIndicators: false,
+    withNestingStyles: true,
+    cell: ({row, info}) => (
+      <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
+    ),
+  },
+  // ...other columns
+];
+```
+
+#### Reordering
+
+```tsx
+import type {ReorderingProviderProps} from '@gravity-ui/table';
+import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  // ...other columns
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const ReorderingExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  const handleReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(
+    ({
+      draggedItemKey,
+      targetItemKey,
+      baseItemKey,
+      baseNextItemKey,
+      enableNesting,
+      nextChild,
+      pullFromParent,
+    }) => {
+      // ...
+    },
+    [],
+  );
+
+  return (
+    <ReorderingProvider table={table} onReorder={handleReorder}>
+      <Table table={table} />
+    </ReorderingProvider>
+  );
+};
+```
+
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
+
+#### Column reordering
+
+Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
+
+```tsx
+import {ColumnReorderingProvider} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const ColumnReorderingExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  return (
+    <ColumnReorderingProvider table={table}>
+      <Table table={table} />
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+### Row and column reordering together
+
+Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
+
+```tsx
+import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
+import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
+
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // update data array
+  }, []);
+
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
+
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
+
+```tsx
+const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+const table = useTable({
+  columns,
+  data,
+  state: {columnOrder},
+  onColumnOrderChange: setColumnOrder,
+});
+
+return (
+  <ColumnReorderingProvider
+    table={table}
+    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
+  >
+    <Table table={table} />
+  </ColumnReorderingProvider>
+);
+```
+
+CSS API:
+
+| CSS variable                                 | Default                       | Description                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color of the drop insertion line |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Width of the drop insertion line |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacity of the dragged column    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Drag preview background          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Drag preview box-shadow          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Drag preview border radius       |
+
+To forbid reordering a specific column, set `enableColumnReordering: false` in its column definition. Placeholder (grouped) columns are not draggable. Use `activationDistance` (default `8`) to tune how far the pointer must move before a drag starts, which keeps header clicks (like sorting) working.
+
+Pinned columns can be reordered too, but only among themselves: a column can be moved within the left-pinned group, the right-pinned group, or the center (non-pinned) group — it never crosses a pin boundary by dragging.
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  onReorder={({columnOrder, columnPinning, pinned}) => {
+    if (pinned) {
+      setColumnPinning(columnPinning);
+    } else {
+      setColumnOrder(columnOrder);
+    }
+  }}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+While dragging:
+
+- a floating preview of the column (its header plus the first rows) follows the pointer in a drag overlay;
+- the dragged column becomes semi-transparent;
+- a blue insertion line is drawn where the column will be dropped;
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  autoScroll
+  dragOverlayRowCount={10}
+  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+#### Virtualization
+
+Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
+
+```tsx
+import {useRowVirtualizer} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const VirtualizationExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const rowVirtualizer = useRowVirtualizer({
+    count: table.getRowModel().rows.length,
+    estimateSize: () => 20,
+    overscan: 5,
+    getScrollElement: () => containerRef.current,
+  });
+
+  return (
+    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
+      <Table table={table} rowVirtualizer={rowVirtualizer} />
+    </div>
+  );
+};
+```
+
+If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+
+```tsx
+import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
+
+// ...
+
+const tableRef = React.useRef<HTMLTableElement>(null);
+
+const rowVirtualizer = useRowVirtualizer({
+  // ...
+  rangeExtractor: getVirtualRowRangeExtractor(tableRef.current),
+});
+
+return (
+  <TableWithReordering
+    ref={tableRef}
+    table={table}
+    rowVirtualizer={rowVirtualizer}
+    onReorder={handleReorder}
+  />
+);
+```
+
+#### Window virtualization
+
+Use if you want to use window as the scroll element
+
+```tsx
+import {useWindowRowVirtualizer} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const WindowVirtualizationExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  const bodyRef = React.useRef<HTMLTableSectionElement>(null);
+
+  const rowVirtualizer = useWindowRowVirtualizer({
+    count: table.getRowModel().rows.length,
+    estimateSize: () => 20,
+    overscan: 5,
+    scrollMargin: bodyRef.current?.offsetTop ?? 0,
+  });
+
+  return <Table table={table} rowVirtualizer={rowVirtualizer} bodyRef={bodyRef} />;
+};
+```
+
+#### Resizing
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const ResizingDemo = () => {
+  const table = useTable({
+    columns,
+    data,
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange',
+  });
+
+  return <Table table={table} />;
+};
+```
+
+#### Column settings
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  // ...other columns
+  {
+    id: 'settings_column_id',
+    header: ({table}) => <TableSettings table={table} />,
+    meta: {
+      hideInSettings: false, // Optional. Allows to hide this column from settings popover
+      titleInSettings: 'ReactNode', // Optional. Overrides header field for settings popover (if you need different content for header and settings popover)
+    },
+  }, // or you can use function getSettingsColumn
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const TableSettingsDemo = () => {
+  const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
+    // for outside control and initial state
+    column_id: false, // for hidding by default
+  });
+  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
+    /* leaf columns ids */
+  ]); // for outside control and initial state
+
+  // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
+  // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
+
+  const table = useTable({
+    columns,
+    data,
+    state: {
+      columnVisibility,
+      columnOrder,
+    },
+    onColumnVisibilityChange,
+    onColumnOrderChange,
+  });
+
+  return <Table table={table} />;
+};
+```
+
+Learn more about the table and the column resizing properties in the react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
+
+## Guides
+
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.20.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.20.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
+
+## Components
+
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.20.0/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
+
+## Hooks
+
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.20.0/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
+
+---
+
+> Docs for `@gravity-ui/table@1.20.0`. Versioned at: `https://gravity-ui.com/llms/table/1.20.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/table@1.19.0`
+
+# @gravity-ui/table documentation
+
+Documentation for the **1.19.0** version of `@gravity-ui/table`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
+
+## For AI agents
+
+A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
+
+### When to use
+
+- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
+- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
+
+### When not to use
+
+- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
+
+### Common pitfalls
+
+- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
+- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
+- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
+- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
+- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
+
+## Install
+
+```shell
+npm install --save @gravity-ui/table
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0` |
+| `lodash` | `^4.17.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0` |
+| `@dnd-kit/core` | `^6.0.0` |
+| `@gravity-ui/i18n` | `^1.0.0` |
+| `@dnd-kit/sortable` | `^8.0.0 || ^9.0.0 || ^10.0.0` |
+| `@gravity-ui/icons` | `^2.0.0` |
+| `@gravity-ui/uikit` | `^6.0.0 || ^7.0.0` |
 
 ## Usage
 
@@ -14934,6 +18572,28 @@ const ReorderingExample = () => {
 };
 ```
 
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -15697,6 +19357,28 @@ const ReorderingExample = () => {
   );
 };
 ```
+
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
 
 #### Column reordering
 
@@ -16462,6 +20144,28 @@ const ReorderingExample = () => {
 };
 ```
 
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -17226,6 +20930,28 @@ const ReorderingExample = () => {
 };
 ```
 
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -17988,6 +21714,28 @@ const ReorderingExample = () => {
   );
 };
 ```
+
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
 
 #### Column reordering
 
@@ -18752,6 +22500,28 @@ const ReorderingExample = () => {
 };
 ```
 
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -19096,769 +22866,6 @@ Learn more about the table and the column resizing properties in the react-table
 ---
 
 > Docs for `@gravity-ui/table@1.10.0`. Versioned at: `https://gravity-ui.com/llms/table/1.10.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/table@1.9.0`
-
-# Table
-
-> A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
->
-> **npm:** `@gravity-ui/table` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save @gravity-ui/table
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0` |
-| `@dnd-kit/core` | `^6.0.0` |
-| `@gravity-ui/i18n` | `^1.0.0` |
-| `@dnd-kit/sortable` | `^8.0.0 || ^9.0.0 || ^10.0.0` |
-| `@gravity-ui/icons` | `^2.0.0` |
-| `@gravity-ui/uikit` | `^6.0.0 || ^7.0.0` |
-
-## Usage
-
-```tsx
-import React from 'react';
-import {Table, useTable} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-interface Person {
-  id: string;
-  name: string;
-  age: number;
-}
-
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const data: Person[] = [
-  {id: 'name', name: 'John', age: 23},
-  {id: 'age', name: 'Michael', age: 27},
-];
-
-const BasicExample = () => {
-  const table = useTable({
-    columns,
-    data,
-  });
-
-  return <Table table={table} />;
-};
-```
-
-### Components
-
-There are two Table components that you can use:
-
-- `BaseTable` - a component with basic styles only;
-- `Table` - a component with Gravity UI based styles.
-
-#### Row selection
-
-```tsx
-import {selectionColumn} from '@gravity-ui/table';
-import type {RowSelectionState} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  selectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const RowSelectionExample = () => {
-  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    enableMultiRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
-
-#### Custom Ranged Selection Column
-
-The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
-
-```tsx
-import React, {type ChangeEvent, useCallback, useState} from 'react';
-
-import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
-import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
-import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
-
-type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
-  cellContext: CellContext<unknown, unknown>;
-};
-
-const CustomRangedSelectionCheckbox = ({
-  className,
-  cellContext,
-  ...restProps
-}: CustomRangedSelectionCheckboxProps) => {
-  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
-
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      rowToggleRangedSelectionHandler(event);
-    },
-    [rowToggleRangedSelectionHandler],
-  );
-
-  return <Checkbox {...restProps} onChange={handleChange} />;
-};
-
-const customSelectionColumn: ColumnDef<unknown> = {
-  id: '_select',
-  header: ({table}) => (
-    <Checkbox
-      size="l"
-      checked={table.getIsAllRowsSelected()}
-      indeterminate={table.getIsSomeRowsSelected()}
-      onChange={table.getToggleAllRowsSelectedHandler()}
-    />
-  ),
-  cell: (cellContext) => (
-    <CustomRangedSelectionCheckbox
-      size="l"
-      checked={cellContext.row.getIsSelected()}
-      disabled={!cellContext.row.getCanSelect()}
-      indeterminate={cellContext.row.getIsSomeSelected()}
-      cellContext={cellContext}
-    />
-  ),
-  size: 41,
-  maxSize: 41,
-  minSize: 41,
-  enableResizing: false,
-  enableSorting: false,
-};
-
-const columns: ColumnDef<Person>[] = [
-  customSelectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const RowRangedSelectionExample = () => {
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    enableMultiRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-There is also a `RangedSelectionCheckbox` component, which internally uses the hook and accepts a `CellContext` instance as a prop. This component provides a shorthand for adding ranged selection functionality to custom selection columns.
-
-```tsx
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
-
-export const selectionColumn: ColumnDef<unknown> = {
-  id: '_select',
-  header: ({table}) => (
-    <SelectionCheckbox
-      checked={table.getIsAllRowsSelected()}
-      disabled={!table.options.enableRowSelection}
-      indeterminate={table.getIsSomeRowsSelected()}
-      onChange={table.getToggleAllRowsSelectedHandler()}
-    />
-  ),
-  cell: (cellContext) => (
-    <RangedSelectionCheckbox
-      checked={cellContext.row.getIsSelected()}
-      disabled={!cellContext.row.getCanSelect()}
-      indeterminate={cellContext.row.getIsSomeSelected()}
-      cellContext={cellContext}
-    />
-  ),
-  meta: {
-    hideInSettings: true,
-  },
-  size: 32,
-  minSize: 32,
-};
-```
-
-By default, the selection column generated with `selectionColumn` includes ranged selection functionality.
-
-```tsx
-import {selectionColumn} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  selectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-```
-
-**Note**: If the table contains nested rows, range selection will not work. At the moment, this is considered undefined behavior.
-
-#### Sorting
-
-Learn about the column properties in the react-table [docs](https://tanstack.com/table/v8/docs/guide/sorting)
-
-```tsx
-import type {SortingState} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const SortingExample = () => {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-
-  // Your column MUST have accessorFn for sorting to be enabled
-
-  const table = useTable({
-    columns,
-    data,
-    enableSorting: true,
-    getRowId: (item) => item.id,
-    onSortingChange: setSorting,
-    state: {
-      sorting,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-If you want to sort the elements manually pass `manualSorting` property:
-
-```tsx
-const table = useTable({
-  // ...
-  manualSorting: true,
-});
-```
-
-#### Grouping
-
-```tsx
-import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
-
-interface Person {
-  id: string;
-  name: string;
-  age: number;
-}
-
-interface PersonGroup {
-  id: string;
-  name: string;
-  items: Person[];
-}
-
-type Item = PersonGroup | Person;
-
-const columns: ColumnDef<Item>[] = [
-  {accessorKey: 'name', header: 'Name', size: 200},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const data: Item[] = [
-  {
-    id: 'friends',
-    name: 'Friends',
-    items: [
-      {id: 'nick', name: 'Nick', age: 25},
-      {id: 'tom', name: 'Tom', age: 21},
-    ],
-  },
-  {
-    id: 'relatives',
-    name: 'Relatives',
-    items: [
-      {id: 'john', name: 'John', age: 23},
-      {id: 'michael', name: 'Michael', age: 27},
-    ],
-  },
-];
-
-const getGroupTitle = (row: Row<Item>) => row.getValue<string>('name');
-
-const GroupingExample = () => {
-  const [expanded, setExpanded] = React.useState<ExpandedState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableExpanding: true,
-    getSubRows: (item) => ('items' in item ? item.items : undefined),
-    onExpandedChange: setExpanded,
-    state: {
-      expanded,
-    },
-  });
-
-  return <Table table={table} getGroupTitle={getGroupTitle} />;
-};
-```
-
-To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
-
-To enable nesting styles, pass `withNestingStyles = true` in the column configuration.
-
-Nesting indicators can be disabled by passing `showTreeDepthIndicators = false`.
-
-To add a control for expanding/collapsing rows, wrap the cell content with the `TreeExpandableCell` component or with your similar custom component:
-
-```tsx
-import {TreeExpandableCell} from '@gravity-ui/table';
-
-const columns: ColumnDef<Item>[] = [
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    size: 200,
-    showTreeDepthIndicators: false,
-    withNestingStyles: true,
-    cell: ({row, info}) => (
-      <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
-    ),
-  },
-  // ...other columns
-];
-```
-
-#### Reordering
-
-```tsx
-import type {ReorderingProviderProps} from '@gravity-ui/table';
-import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  dragHandleColumn,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const ReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const handleReorder = React.useCallback<
-    NonNullable<ReorderingProviderProps<Person>['onReorder']>
-  >(
-    ({
-      draggedItemKey,
-      targetItemKey,
-      baseItemKey,
-      baseNextItemKey,
-      enableNesting,
-      nextChild,
-      pullFromParent,
-    }) => {
-      // ...
-    },
-    [],
-  );
-
-  return (
-    <ReorderingProvider table={table} onReorder={handleReorder}>
-      <Table table={table} />
-    </ReorderingProvider>
-  );
-};
-```
-
-#### Column reordering
-
-Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
-
-```tsx
-import {ColumnReorderingProvider} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const ColumnReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  return (
-    <ColumnReorderingProvider table={table}>
-      <Table table={table} />
-    </ColumnReorderingProvider>
-  );
-};
-```
-
-### Row and column reordering together
-
-Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
-
-```tsx
-import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
-import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  dragHandleColumn,
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
-];
-
-const CombinedReorderingExample = () => {
-  const [data, setData] = React.useState(initialData);
-  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
-
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-    state: {columnOrder},
-    onColumnOrderChange: setColumnOrder,
-  });
-
-  const handleRowReorder = React.useCallback<
-    NonNullable<ReorderingProviderProps<Person>['onReorder']>
-  >(({draggedItemKey, baseItemKey}) => {
-    // update data array
-  }, []);
-
-  const handleColumnReorder = React.useCallback<
-    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
-  >(({columnOrder}) => {
-    setColumnOrder(columnOrder);
-  }, []);
-
-  return (
-    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
-      <ReorderingProvider table={table} onReorder={handleRowReorder}>
-        <Table table={table} />
-      </ReorderingProvider>
-    </ColumnReorderingProvider>
-  );
-};
-```
-
-If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
-
-```tsx
-const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
-
-const table = useTable({
-  columns,
-  data,
-  state: {columnOrder},
-  onColumnOrderChange: setColumnOrder,
-});
-
-return (
-  <ColumnReorderingProvider
-    table={table}
-    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
-  >
-    <Table table={table} />
-  </ColumnReorderingProvider>
-);
-```
-
-CSS API:
-
-| CSS variable                                 | Default                       | Description                      |
-| -------------------------------------------- | ----------------------------- | -------------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color of the drop insertion line |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | Width of the drop insertion line |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacity of the dragged column    |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | Drag preview background          |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Drag preview box-shadow          |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Drag preview border radius       |
-
-To forbid reordering a specific column, set `enableColumnReordering: false` in its column definition. Placeholder (grouped) columns are not draggable. Use `activationDistance` (default `8`) to tune how far the pointer must move before a drag starts, which keeps header clicks (like sorting) working.
-
-Pinned columns can be reordered too, but only among themselves: a column can be moved within the left-pinned group, the right-pinned group, or the center (non-pinned) group — it never crosses a pin boundary by dragging.
-
-```tsx
-<ColumnReorderingProvider
-  table={table}
-  onReorder={({columnOrder, columnPinning, pinned}) => {
-    if (pinned) {
-      setColumnPinning(columnPinning);
-    } else {
-      setColumnOrder(columnOrder);
-    }
-  }}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
-
-While dragging:
-
-- a floating preview of the column (its header plus the first rows) follows the pointer in a drag overlay;
-- the dragged column becomes semi-transparent;
-- a blue insertion line is drawn where the column will be dropped;
-
-```tsx
-<ColumnReorderingProvider
-  table={table}
-  autoScroll
-  dragOverlayRowCount={10}
-  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
-
-#### Virtualization
-
-Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
-
-```tsx
-import {useRowVirtualizer} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const VirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const rowVirtualizer = useRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    getScrollElement: () => containerRef.current,
-  });
-
-  return (
-    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
-      <Table table={table} rowVirtualizer={rowVirtualizer} />
-    </div>
-  );
-};
-```
-
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
-
-```tsx
-import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
-
-// ...
-
-const tableRef = React.useRef<HTMLTableElement>(null);
-
-const rowVirtualizer = useRowVirtualizer({
-  // ...
-  rangeExtractor: getVirtualRowRangeExtractor(tableRef.current),
-});
-
-return (
-  <TableWithReordering
-    ref={tableRef}
-    table={table}
-    rowVirtualizer={rowVirtualizer}
-    onReorder={handleReorder}
-  />
-);
-```
-
-#### Window virtualization
-
-Use if you want to use window as the scroll element
-
-```tsx
-import {useWindowRowVirtualizer} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const WindowVirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const bodyRef = React.useRef<HTMLTableSectionElement>(null);
-
-  const rowVirtualizer = useWindowRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    scrollMargin: bodyRef.current?.offsetTop ?? 0,
-  });
-
-  return <Table table={table} rowVirtualizer={rowVirtualizer} bodyRef={bodyRef} />;
-};
-```
-
-#### Resizing
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const ResizingDemo = () => {
-  const table = useTable({
-    columns,
-    data,
-    enableColumnResizing: true,
-    columnResizeMode: 'onChange',
-  });
-
-  return <Table table={table} />;
-};
-```
-
-#### Column settings
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  // ...other columns
-  {
-    id: 'settings_column_id',
-    header: ({table}) => <TableSettings table={table} />,
-    meta: {
-      hideInSettings: false, // Optional. Allows to hide this column from settings popover
-      titleInSettings: 'ReactNode', // Optional. Overrides header field for settings popover (if you need different content for header and settings popover)
-    },
-  }, // or you can use function getSettingsColumn
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const TableSettingsDemo = () => {
-  const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // for outside control and initial state
-    column_id: false, // for hidding by default
-  });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* leaf columns ids */
-  ]); // for outside control and initial state
-
-  // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
-  // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
-
-  const table = useTable({
-    columns,
-    data,
-    state: {
-      columnVisibility,
-      columnOrder,
-    },
-    onColumnVisibilityChange,
-    onColumnOrderChange,
-  });
-
-  return <Table table={table} />;
-};
-```
-
-Learn more about the table and the column resizing properties in the react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
-
-
-### When to use
-
-- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
-- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
-
-### When not to use
-
-- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
-- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
-
-### Common pitfalls
-
-- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
-- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
-- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
-- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
-- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/table/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/table/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/table)
-
----
-
-> Docs for `@gravity-ui/table@1.9.0`. Versioned at: `https://gravity-ui.com/llms/table/1.9.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -20276,6 +23283,28 @@ const ReorderingExample = () => {
   );
 };
 ```
+
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
 
 #### Column reordering
 
@@ -27648,6 +30677,83 @@ Need something specific? Yagr presents some useful examples in the [demo/example
 ---
 
 > Docs for `@gravity-ui/yagr@4.6.0`. Versioned at: `https://gravity-ui.com/llms/yagr/4.6.0/llms.txt` (exact), `https://gravity-ui.com/llms/yagr/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/yagr/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/nodekit@2.16.2`
+
+# @gravity-ui/nodekit documentation
+
+Documentation for the **2.16.2** version of `@gravity-ui/nodekit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/nodekit/dist/docs/`).
+
+## For AI agents
+
+A foundational Node.js toolkit (logging, telemetry, typed errors, config, request contexts) shared across Gravity UI backends — reach for it to get a consistent app spine before adding any HTTP layer, instead of assembling logging/error/config plumbing yourself.
+
+### When to use
+
+- Any Node.js service/script that wants shared logging, telemetry (tracing), and a typed `AppError`.
+- Providing request-scoped context (logs/traces) across async boundaries.
+- Centralizing configuration so multiple services in the same ecosystem behave consistently.
+
+### When not to use
+
+- To expose HTTP routes, middleware, or a server, use [`@gravity-ui/expresskit`](https://github.com/gravity-ui/expresskit) — it builds on top of NodeKit and adds the Express/HTTP layer.
+- For a standalone, single-file script with no logging/telemetry needs, plain Node APIs are lighter than the full NodeKit context system.
+
+### Common pitfalls
+
+- **Hallucinating `import {Logger}` / `logger`** — logging is reached through the NodeKit context: `new NodeKit()` then `nodekit.ctx.log(...)`, not a standalone logger export.
+- **Instantiating NodeKit repeatedly** — create one `NodeKit` instance per app and share its `ctx`; creating many instances fragments logging/telemetry config.
+- **Throwing plain `Error`** — use the bundled `AppError` (see `docs/app-error.md`) so error codes and telemetry are captured consistently.
+- **Skipping config initialization** — NodeKit reads configuration on construction; review `docs/configuration.md` before assuming defaults.
+
+## Install
+
+```bash
+npm install --save @gravity-ui/nodekit
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `axios` | `^1.7.7` |
+
+## Usage
+
+Add dependency to your project:
+
+```bash
+npm install --save @gravity-ui/nodekit
+```
+
+And then import and init NodeKit in your application:
+
+```typescript
+import {NodeKit} from '@gravity-ui/nodekit';
+
+const nodeKit = new NodeKit();
+nodekit.ctx.log('App is ready');
+```
+
+## Guides
+
+- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
+- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
+- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
+- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
+- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/telemetry.md)
+
+---
+
+> Docs for `@gravity-ui/nodekit@2.16.2`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.16.2/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---

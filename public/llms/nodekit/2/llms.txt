@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/nodekit@2.16.1`
+> Generated for `@gravity-ui/nodekit@2.16.2`
 
 # @gravity-ui/nodekit documentation
 
-Documentation for the **2.16.1** version of `@gravity-ui/nodekit`.
+Documentation for the **2.16.2** version of `@gravity-ui/nodekit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/nodekit/dist/docs/`).
@@ -62,12 +62,12 @@ nodekit.ctx.log('App is ready');
 
 ## Guides
 
-- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
-- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
-- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
-- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
-- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/telemetry.md)
+- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
+- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
+- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
+- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
+- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/telemetry.md)
 
 ---
 
-> Docs for `@gravity-ui/nodekit@2.16.1`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.16.1/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/nodekit@2.16.2`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.16.2/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
