@@ -37278,6 +37278,159 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 ---
 
+> Generated for `@gravity-ui/date-components@4.0.0`
+
+# @gravity-ui/date-components documentation
+
+Documentation for the **4.0.0** version of `@gravity-ui/date-components`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/date-components/dist/docs/`).
+
+## For AI agents
+
+React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
+
+### When to use
+
+- A single date or date-time input: `DatePicker`, `DateField`.
+- Calendars for month/day selection: `Calendar`, `CalendarView`.
+- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
+- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+
+### When not to use
+
+- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
+
+### Common pitfalls
+
+- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
+- **Requires uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` and `@gravity-ui/date-utils` are required peer dependencies.
+- **Locale is loaded, not just set.** Set language via `ThemeProvider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
+- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
+
+## Install
+
+```shell
+npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@gravity-ui/date-utils` | `^2.6.0` |
+| `@gravity-ui/uikit` | `^7.21.0` |
+| `@types/react` | `>=17.0.0` |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+
+## Usage
+
+```jsx
+import {createRoot} from 'react-dom/client';
+import {DatePicker} from '@gravity-ui/date-components';
+import {ThemeProvider} from '@gravity-ui/uikit';
+
+import '@gravity-ui/uikit/styles/styles.css';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <h1>DatePicker</h1>
+      <form>
+        <label htmlFor="date-picker">Date: </label>
+        <DatePicker id="date-picker" name="date" />
+      </form>
+    </ThemeProvider>
+  );
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+```
+
+### Localization
+
+```jsx
+import {settings} from '@gravity-ui/date-utils';
+
+// Load date locales that will be used in an application.
+await settings.loadLocale('ru');
+
+function App() {
+  return (
+    // Set the language to use with components.
+    <ThemeProvider lang="ru">
+      <h1>DatePicker</h1>
+      <form>
+        <label htmlFor="date-picker">Дата: </label>
+        <DatePicker id="date-picker" name="date" />
+      </form>
+    </ThemeProvider>
+  );
+}
+```
+
+If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
+
+```jsx
+// Preload locales
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+
+// or load locales on demand.
+
+function App() {
+  const [lang, setLang] = React.useState('en');
+
+  const handleLangChange = (newLang) => {
+    settings.loadLocale(newLang).then(() => {
+      setLang(newLang);
+    });
+  };
+
+  return <ThemeProvider lang={lang}>...</ThemeProvider>;
+}
+```
+
+The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
+
+```ts
+import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
+import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
+
+// Use the Keyset type to specify translations for all available components
+addLanguageKeysets<Keysets>(lang, {...});
+
+// or use the PartialKeysets type to specify only the ones you need
+addLanguageKeysets<PartialKeysets>(lang, {...});
+
+// To specify translations for some components
+addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
+```
+
+## Components
+
+- [Calendar](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/Calendar.md) — Calendar is a flexible, user-friendly calendar component for React applications. It allows users to view, select, and manage dates with ease. Ideal for event scheduling, booking systems, and any application where date selection is essential. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DateField](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/DateField.md) — DateField component is a versatile and convenient input field specifically designed for date entry in React applications. With an intuitive interface and easy integration, it's perfect for any form that requires date or time input, such as event schedulers, booking systems, or data-driven reports. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DatePicker](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/DatePicker.md) — DatePicker is a sophisticated, lightweight, and fully customizable component designed to provide intuitive date picking functionality in your React applications. Built with user experience and ease of integration in mind, it fits seamlessly within forms, modals, or any UI element requiring date input. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RangeCalendar](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/RangeCalendar.md) — RangeCalendar is a powerful, flexible, and user-friendly UI component designed for selecting a range of dates. Built with React, it combines the functionality of a calendar and a date range picker, making it an ideal choice for applications that require users to input a start and end date. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RelativeDateField](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/RelativeDateField.md) — RelativeDateField component is used only for entering relative dates. It can't be used as "normal" DateField.
+- [RelativeDatePicker](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/RelativeDatePicker.md) — RelativeDatePicker is almost the same component as DatePicker but it has ability to use relative dates.
+
+---
+
+> Docs for `@gravity-ui/date-components@4.0.0`. Versioned at: `https://gravity-ui.com/llms/date-components/4.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/date-components@3.4.2`
 
 # Date Components
@@ -37299,11 +37452,11 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/date-utils` | `^2.6.0` |
-| `@gravity-ui/uikit` | `^7.21.0` |
-| `@types/react` | `>=17.0.0` |
 | `react` | `>=17.0.0` |
 | `react-dom` | `>=17.0.0` |
+| `@types/react` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.21.0` |
+| `@gravity-ui/date-utils` | `^2.6.0` |
 
 ## Usage
 
@@ -37423,155 +37576,6 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 ---
 
 > Docs for `@gravity-ui/date-components@3.4.2`. Versioned at: `https://gravity-ui.com/llms/date-components/3.4.2/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/date-components@3.4.1`
-
-# Date Components
-
-> React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
->
-> **npm:** `@gravity-ui/date-components` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@types/react` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^7.21.0` |
-| `@gravity-ui/date-utils` | `^2.6.0` |
-
-## Usage
-
-```jsx
-import {createRoot} from 'react-dom/client';
-import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
-
-import '@gravity-ui/uikit/styles/styles.css';
-
-function App() {
-  return (
-    <ThemeProvider>
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Date: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </ThemeProvider>
-  );
-}
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-```
-
-### Localization
-
-```jsx
-import {settings} from '@gravity-ui/date-utils';
-
-// Load date locales that will be used in an application.
-await settings.loadLocale('ru');
-
-function App() {
-  return (
-    // Set the language to use with components.
-    <ThemeProvider lang="ru">
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Дата: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </ThemeProvider>
-  );
-}
-```
-
-If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
-
-```jsx
-// Preload locales
-await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-
-// or load locales on demand.
-
-function App() {
-  const [lang, setLang] = React.useState('en');
-
-  const handleLangChange = (newLang) => {
-    settings.loadLocale(newLang).then(() => {
-      setLang(newLang);
-    });
-  };
-
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
-}
-```
-
-The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
-
-```ts
-import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
-import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
-
-// Use the Keyset type to specify translations for all available components
-addLanguageKeysets<Keysets>(lang, {...});
-
-// or use the PartialKeysets type to specify only the ones you need
-addLanguageKeysets<PartialKeysets>(lang, {...});
-
-// To specify translations for some components
-addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
-```
-
-
-### When to use
-
-- A single date or date-time input: `DatePicker`, `DateField`.
-- Calendars for month/day selection: `Calendar`, `CalendarView`.
-- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
-- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
-
-### When not to use
-
-- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
-
-### Common pitfalls
-
-- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
-- **Requires uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` and `@gravity-ui/date-utils` are required peer dependencies.
-- **Locale is loaded, not just set.** Set language via `ThemeProvider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
-- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/date-components/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/date-components/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/date-components)
-
----
-
-> Docs for `@gravity-ui/date-components@3.4.1`. Versioned at: `https://gravity-ui.com/llms/date-components/3.4.1/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -38899,153 +38903,6 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 ---
 
 > Docs for `@gravity-ui/date-components@2.9.0`. Versioned at: `https://gravity-ui.com/llms/date-components/2.9.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/date-components@2.8.0`
-
-# Date Components
-
-> React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
->
-> **npm:** `@gravity-ui/date-components` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^6.0.0` |
-
-## Usage
-
-```jsx
-import {createRoot} from 'react-dom/client';
-import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
-
-import '@gravity-ui/uikit/styles/styles.css';
-
-function App() {
-  return (
-    <ThemeProvider>
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Date: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </ThemeProvider>
-  );
-}
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-```
-
-### Localization
-
-```jsx
-import {settings} from '@gravity-ui/date-utils';
-
-// Load date locales that will be used in an application.
-await settings.loadLocale('ru');
-
-function App() {
-  return (
-    // Set the language to use with components.
-    <ThemeProvider lang="ru">
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Дата: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </ThemeProvider>
-  );
-}
-```
-
-If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
-
-```jsx
-// Preload locales
-await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-
-// or load locales on demand.
-
-function App() {
-  const [lang, setLang] = React.useState('en');
-
-  const handleLangChange = (newLang) => {
-    settings.loadLocale(newLang).then(() => {
-      setLang(newLang);
-    });
-  };
-
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
-}
-```
-
-The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
-
-```ts
-import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
-import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
-
-// Use the Keyset type to specify translations for all available components
-addLanguageKeysets<Keysets>(lang, {...});
-
-// or use the PartialKeysets type to specify only the ones you need
-addLanguageKeysets<PartialKeysets>(lang, {...});
-
-// To specify translations for some components
-addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
-```
-
-
-### When to use
-
-- A single date or date-time input: `DatePicker`, `DateField`.
-- Calendars for month/day selection: `Calendar`, `CalendarView`.
-- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
-- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
-
-### When not to use
-
-- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
-
-### Common pitfalls
-
-- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
-- **Requires uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` and `@gravity-ui/date-utils` are required peer dependencies.
-- **Locale is loaded, not just set.** Set language via `ThemeProvider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
-- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/date-components/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/date-components/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/date-components)
-
----
-
-> Docs for `@gravity-ui/date-components@2.8.0`. Versioned at: `https://gravity-ui.com/llms/date-components/2.8.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
