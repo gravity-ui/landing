@@ -1,5 +1,6 @@
+import {SparklesFill} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Icon} from '@gravity-ui/uikit';
+import {Button, Icon} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import React from 'react';
@@ -16,6 +17,7 @@ import {EnvironmentContext} from '../../contexts';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
 import {CustomScrollbar} from '../CustomScrollbar';
+import {GeneratePlaygroundModal} from '../GeneratePlaygroundModal';
 import {Link} from '../Link';
 
 import {LocalePicker} from './LocalePicker';
@@ -32,6 +34,7 @@ export const Menu: React.FC = () => {
     const router = useRouter();
 
     const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+    const [isGenerateModalOpen, setGenerateModalOpen] = React.useState(false);
 
     const {hideLocalePicker} = React.useContext(EnvironmentContext);
 
@@ -85,6 +88,16 @@ export const Menu: React.FC = () => {
                                         {renderItem(item)}
                                     </div>
                                 ))}
+                                <div className={b('desktop-menu-item')}>
+                                    <Button
+                                        view="outlined"
+                                        size="m"
+                                        onClick={() => setGenerateModalOpen(true)}
+                                    >
+                                        <Icon data={SparklesFill} size={16} />
+                                        Сгенерировать
+                                    </Button>
+                                </div>
                             </div>
                             {!hideLocalePicker && (
                                 <div className={b('desktop-menu-locale-picker')}>
@@ -159,6 +172,10 @@ export const Menu: React.FC = () => {
                     </Row>
                 </Grid>
             </div>
+            <GeneratePlaygroundModal
+                open={isGenerateModalOpen}
+                onClose={() => setGenerateModalOpen(false)}
+            />
         </div>
     );
 };
