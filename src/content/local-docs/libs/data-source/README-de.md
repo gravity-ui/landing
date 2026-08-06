@@ -10,7 +10,7 @@ npm install @gravity-ui/data-source @tanstack/react-query
 
 `@tanstack/react-query` ist eine Peer-Abhängigkeit.
 
-## Schnellstart
+## Erste Schritte
 
 ### 1. DataManager einrichten
 
@@ -18,7 +18,7 @@ Erstellen und stellen Sie zuerst einen `DataManager` in Ihrer Anwendung bereit:
 
 ```tsx
 import React from 'react';
-import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
+import {ClientDataManager, DataSourceProvider} from '@gravity-ui/data-source';
 
 const dataManager = new ClientDataManager({
   defaultOptions: {
@@ -26,15 +26,15 @@ const dataManager = new ClientDataManager({
       staleTime: 5 * 60 * 1000, // 5 Minuten
       retry: 3,
     },
-    // ... weitere react-query-Optionen
+    // ... weitere react-query Optionen
   },
 });
 
 function App() {
   return (
-    <DataManagerContext.Provider value={dataManager}>
+    <DataSourceProvider dataManager={dataManager}>
       <YourApplication />
-    </DataManagerContext.Provider>
+    </DataSourceProvider>
   );
 }
 ```
@@ -77,7 +77,7 @@ export interface DataLoaderProps
 }
 
 export const DataLoader: React.FC<DataLoaderProps> = ({
-  LoadingView = YourLoader, // Sie können Ihre eigene Loader-Komponente verwenden
+  LoadingView = YourLoader, // Sie können Ihre eigene Ladekomponente verwenden
   ErrorView = YourError, // Sie können Ihre eigene Fehlerkomponente verwenden
   ...restProps
 }) => {
@@ -96,7 +96,7 @@ import {fetchUser} from './api';
 export const userDataSource = makePlainQueryDataSource({
   // Schlüssel müssen eindeutig sein. Vielleicht sollten Sie einen Helfer zum Erstellen von Namen für Datenquellen erstellen
   name: 'user',
-  // skipContext ist ein Helfer, um die ersten 2 Parameter der Funktion zu überspringen (context und fetchContext)
+  // skipContext ist ein Helfer, um die ersten 2 Parameter der Funktion (context und fetchContext) zu überspringen
   fetch: skipContext(fetchUser),
   // Optional: Tags für fortgeschrittene Cache-Invalidierung generieren
   tags: (params) => [`user:${params.userId}`, 'users'],
@@ -163,13 +163,13 @@ const postsDataSource = makeInfiniteQueryDataSource({
 
 Die Bibliothek normalisiert Abfragestati in drei einfache Status:
 
-- `loading` - Tatsächliches Laden von Daten. Das Gleiche wie `isLoading` in React Query
+- `loading` - Aktuelles Laden der Daten. Dasselbe wie `isLoading` in React Query
 - `success` - Daten verfügbar (kann mit `idle` übersprungen werden)
-- `error` - Fehler beim Abrufen von Daten
+- `error` - Fehler beim Abrufen der Daten
 
 ### Idle-Konzept
 
-Die Bibliothek stellt ein spezielles `idle`-Symbol zum Überspringen der Abfrageausführung bereit:
+Die Bibliothek stellt ein spezielles `idle`-Symbol zur Verfügung, um die Abfrageausführung zu überspringen:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -196,8 +196,8 @@ Wenn die Parameter gleich `idle` sind:
 **Vorteile von `idle`:**
 
 1. **Typsicherheit** - TypeScript leitet Typen für bedingte Parameter korrekt ab
-2. **Leistung** - Vermeidet unnötige Serveranfragen
-3. **Logische Einfachheit** - Kein Bedarf an der Verwaltung eines zusätzlichen `enabled`-Status
+2. **Performance** - Vermeidet unnötige Serveranfragen
+3. **Logikvereinfachung** - Keine Notwendigkeit, zusätzlichen `enabled`-Status zu verwalten
 4. **Konsistenz** - Einheitlicher Ansatz für alle bedingten Abfragen
 
 Dies ist besonders nützlich für bedingte Abfragen, wenn Sie Daten nur unter bestimmten Bedingungen laden möchten, während die Typsicherheit erhalten bleibt.
@@ -210,6 +210,8 @@ Dies ist besonders nützlich für bedingte Abfragen, wenn Sie Daten nur unter be
 
 Erstellt eine Plain Query Data Source für einfache Anfrage/Antwort-Muster.
 
+Hier ist die übersetzte README-Datei:
+
 ```ts
 const dataSource = makePlainQueryDataSource({
   name: 'unique-name',
@@ -220,7 +222,7 @@ const dataSource = makePlainQueryDataSource({
   options: {
     staleTime: 60000,
     retry: 3,
-    // ... weitere react-query-Optionen
+    // ... weitere react-query Optionen
   },
 });
 ```
@@ -231,12 +233,12 @@ const dataSource = makePlainQueryDataSource({
 - `fetch` - Funktion, die das eigentliche Datenabrufen durchführt
 - `transformParams` (optional) - Transformiert Eingabeparameter vor der Anfrage
 - `transformResponse` (optional) - Transformiert Antwortdaten
-- `tags` (optional) - Generiert Cache-Tags für die Invalidierung
-- `options` (optional) - React Query-Optionen
+- `tags` (optional) - Generiert Cache-Tags zur Invalidierung
+- `options` (optional) - React Query Optionen
 
 #### `makeInfiniteQueryDataSource(config)`
 
-Erstellt eine Datenquelle für unendliche Abfragen für Muster mit Paginierung und unendlichem Scrollen.
+Erstellt eine Datenquelle für unendliche Abfragen für Paginierungs- und unendliche Scrollmuster.
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -276,11 +278,11 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 - `status` - Aktueller Status ('loading' | 'success' | 'error')
 - `error` - Fehlerobjekt, wenn die Anfrage fehlgeschlagen ist
 - `refetch` - Funktion zum manuellen erneuten Abrufen von Daten
-- Andere React Query-Eigenschaften
+- Andere React Query Eigenschaften
 
 #### `useQueryResponses(responses)`
 
-Kombiniert mehrere Abfrageergebnisse zu einem einzigen Zustand.
+Kombiniert mehrere Abfrageergebnisse in einen einzigen Zustand.
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -354,8 +356,8 @@ Komponente zur Handhabung von Ladezuständen und Fehlern.
 - `errorAction` - Funktion oder Aktionskonfiguration für den Fehler-Retry
 - `LoadingView` - Komponente, die während des Ladens angezeigt wird
 - `ErrorView` - Komponente, die bei einem Fehler angezeigt wird
-- `loadingViewProps` - An `LoadingView` übergebene Props
-- `errorViewProps` - An `ErrorView` übergebene Props
+- `loadingViewProps` - An die `LoadingView` übergebene Props
+- `errorViewProps` - An die `ErrorView` übergebene Props
 
 #### `<DataInfiniteLoader />`
 
@@ -380,14 +382,14 @@ Spezialisierte Komponente für unendliche Abfragen.
 
 **Zusätzliche Props:**
 
-- `hasNextPage` - Gibt an, ob weitere Seiten verfügbar sind
+- `hasNextPage` - Ob weitere Seiten verfügbar sind
 - `fetchNextPage` - Funktion zum Abrufen der nächsten Seite
-- `isFetchingNextPage` - Gibt an, ob die nächste Seite abgerufen wird
+- `isFetchingNextPage` - Ob die nächste Seite gerade abgerufen wird
 - `MoreView` - Komponente für den "Mehr laden"-Button
 
 #### `withDataManager(Component)`
 
-HOC, der den DataManager als Prop injiziert.
+HOC, das den DataManager als Prop injiziert.
 
 ```tsx
 const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
@@ -423,7 +425,7 @@ Invalidiert alle Abfragen mit einem bestimmten Tag.
 ```ts
 await dataManager.invalidateTag('users');
 await dataManager.invalidateTag('posts', {
-  repeat: {count: 3, interval: 1000}, // Retry-Invalidierung
+  repeat: {count: 3, interval: 1000}, // Retry der Invalidierung
 });
 ```
 
@@ -495,9 +497,8 @@ const dataSource = makePlainQueryDataSource({
 ```
 
 #### `withCatch(fetchFunction, errorHandler)`
-```
 
-Fügt standardisierte Fehlerbehandlung zu `fetch`-Funktionen hinzu.
+Fügt standardisierte Fehlerbehandlung zu Fetch-Funktionen hinzu.
 
 ```ts
 const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.message}));
@@ -505,16 +506,16 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 #### `withCancellation(fetchFunction)`
 
-Fügt Unterstützung für die Abbruchfunktion zu `fetch`-Funktionen hinzu.
+Fügt Unterstützung für die Abbruchfunktion zu Fetch-Funktionen hinzu.
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
-// Behandelt AbortSignal von React Query automatisch
+// Behandelt automatisch AbortSignal von React Query
 ```
 
 #### `getProgressiveRefetch(options)`
 
-Erstellt eine Funktion für progressive Nachladeintervalle.
+Erstellt eine Funktion für progressive Refetch-Intervalle.
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
@@ -543,26 +544,26 @@ const status = normalizeStatus('pending', 'fetching'); // 'loading'
 #### Status- und Fehler-Dienstprogramme
 
 ```ts
-// Ermittelt den kombinierten Status aus mehreren Zuständen
+// Kombinierten Status aus mehreren Zuständen abrufen
 const status = getStatus([user, posts, comments]);
 
-// Ermittelt den ersten Fehler aus mehreren Zuständen
+// Ersten Fehler aus mehreren Zuständen abrufen
 const error = getError([user, posts, comments]);
 
-// Kombiniert mehrere Status
+// Mehrere Status zusammenführen
 const combinedStatus = mergeStatuses(['loading', 'success', 'error']); // 'error'
 
-// Prüft, ob ein Query-Schlüssel ein Tag hat
+// Prüfen, ob ein Query-Schlüssel ein Tag hat
 const hasUserTag = hasTag(queryKey, 'users');
 ```
 
 #### Dienstprogramme zur Schlüsselkomposition
 
 ```ts
-// Komponiert den Cache-Schlüssel für eine Datenquelle
+// Cache-Schlüssel für eine Datenquelle zusammenstellen
 const key = composeKey(userDataSource, {userId: 123});
 
-// Komponiert den vollständigen Schlüssel einschließlich Tags
+// Vollständigen Schlüssel einschließlich Tags zusammenstellen
 const fullKey = composeFullKey(userDataSource, {userId: 123});
 ```
 
@@ -586,10 +587,10 @@ const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
 #### Komposition von Query-Optionen
 
 ```ts
-// Komponiert React Query-Optionen für einfache Queries
+// React Query-Optionen für einfache Queries zusammenstellen
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// Komponiert React Query-Optionen für unendliche Queries
+// React Query-Optionen für unendliche Queries zusammenstellen
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
@@ -597,7 +598,7 @@ const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params,
 
 ## Fortgeschrittene Muster
 
-### Bedingte Queries mit `idle`
+### Bedingte Queries mit Idle
 
 Verwenden Sie `idle`, um bedingte Queries zu erstellen:
 
@@ -608,13 +609,13 @@ const ConditionalDataComponent: React.FC<{
   userId?: number;
   shouldLoadPosts: boolean;
 }> = ({userId, shouldLoadPosts}) => {
-  // Lädt den Benutzer nur, wenn userId definiert ist
+  // Benutzer nur laden, wenn userId definiert ist
   const user = useQueryData(
     userDataSource,
     userId ? {userId} : idle
   );
 
-  // Lädt Beiträge nur, wenn der Benutzer geladen ist und das Flag aktiviert ist
+  // Beiträge nur laden, wenn der Benutzer geladen ist und das Flag aktiviert ist
   const posts = useQueryData(
     userPostsDataSource,
     user.data && shouldLoadPosts ? {userId: user.data.id} : idle
@@ -635,7 +636,7 @@ const ConditionalDataComponent: React.FC<{
 
 ### Datentransformation
 
-Transformiert Anfrageparameter und Antwortdaten:
+Transformieren Sie Anfrageparameter und Antwortdaten:
 
 ```ts
 const apiDataSource = makePlainQueryDataSource({
@@ -655,7 +656,7 @@ const apiDataSource = makePlainQueryDataSource({
 
 ### Tag-basierte Cache-Invalidierung
 
-Verwenden Sie Tags für eine ausgefeilte Cache-Verwaltung:
+Verwenden Sie Tags für ein ausgefeiltes Cache-Management:
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -670,10 +671,10 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// Ungültigmachen aller Daten für einen bestimmten Benutzer
+// Alle Daten für einen bestimmten Benutzer ungültig machen
 await dataManager.invalidateTag('user:123');
 
-// Ungültigmachen aller benutzerbezogenen Daten
+// Alle benutzerbezogenen Daten ungültig machen
 await dataManager.invalidateTag('users');
 ```
 
@@ -733,7 +734,7 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### Kombinieren mehrerer Datenquellen
+### Kombination mehrerer Datenquellen
 
 Kombinieren Sie Daten aus mehreren Quellen:
 
@@ -746,18 +747,43 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
   const combined = useQueryResponses([user, posts, followers]);
 ```
 
-```typescript
-// Types are automatically inferred
+```jsx
+  return (
+    <DataLoader
+      status={combined.status}
+      error={combined.error}
+      errorAction={combined.refetchErrored} // Nur fehlgeschlagene Anfragen erneut versuchen
+      LoadingView={ProfileSkeleton}
+      ErrorView={ProfileError}
+    >
+      {user && posts && followers && (
+        <div>
+          <UserInfo user={user.data} />
+          <UserPosts posts={posts.data} />
+          <UserFollowers followers={followers.data} />
+        </div>
+      )}
+    </DataLoader>
+  );
+};
+```
+
+## TypeScript-Unterstützung
+
+Die Bibliothek wurde mit einem TypeScript-First-Ansatz entwickelt und bietet vollständige Typinferenz:
+
+```ts
+// Typen werden automatisch abgeleitet
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // Return type is inferred as User
+    // Rückgabetyp wird als User abgeleitet
   }),
 });
 
-// Hook return type is automatically typed
+// Rückgabetyp des Hooks ist automatisch typisiert
 const {data} = useQueryData(userDataSource, {userId: 123});
-// data is typed as User | undefined
+// data ist als User | undefined typisiert
 ```
 
 ### Benutzerdefinierte Fehlertypen
@@ -777,18 +803,18 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Params type
-  {id: number}, // Request type
-  ApiResponse, // Response type
-  User, // Data type
-  ApiError // Error type
+  {id: number}, // Parametertyp
+  {id: number}, // Anfragetyp
+  ApiResponse, // Antworttyp
+  User, // Datentyp
+  ApiError // Fehlertyp
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
 });
 ```
 
-## Mitwirken
+## Mitwirkung
 
 Bitte lesen Sie [CONTRIBUTING.md](CONTRIBUTING.md) für Details zu unserem Verhaltenskodex und dem Prozess für das Einreichen von Pull-Anfragen.
 
