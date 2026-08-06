@@ -18,7 +18,7 @@ npm install @gravity-ui/data-source @tanstack/react-query
 
 ```tsx
 import React from 'react';
-import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
+import {ClientDataManager, DataSourceProvider} from '@gravity-ui/data-source';
 
 const dataManager = new ClientDataManager({
   defaultOptions: {
@@ -32,9 +32,9 @@ const dataManager = new ClientDataManager({
 
 function App() {
   return (
-    <DataManagerContext.Provider value={dataManager}>
+    <DataSourceProvider dataManager={dataManager}>
       <YourApplication />
-    </DataManagerContext.Provider>
+    </DataSourceProvider>
   );
 }
 ```
@@ -61,7 +61,7 @@ export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TE
 
 ### 3. カスタム DataLoader コンポーネントの作成
 
-デフォルトの `DataLoader` コンポーネントに基づいて、ローディング状態とエラー表示を定義するコンポーネントを作成します。
+デフォルトの `DataLoader` コンポーネントに基づいて、ローディング状態とエラーの表示を定義します。
 
 ```tsx
 import {
@@ -123,7 +123,7 @@ export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 
 ### データソースの種類
 
-ライブラリは主に2つのデータソースタイプを提供します。
+このライブラリは、主に2つのデータソースの種類を提供します。
 
 #### Plain Query Data Source
 
@@ -161,15 +161,15 @@ const postsDataSource = makeInfiniteQueryDataSource({
 
 ### ステータス管理
 
-ライブラリはクエリの状態を3つのシンプルなステータスに正規化します。
+このライブラリは、クエリの状態を3つのシンプルなステータスに正規化します。
 
-- `loading` - 実際のデータロード中。React Query の `isLoading` と同じです。
+- `loading` - データ取得中。React Query の `isLoading` と同じです。
 - `success` - データが利用可能（`idle` でスキップされる場合があります）。
 - `error` - データ取得に失敗しました。
 
 ### Idle コンセプト
 
-ライブラリはクエリ実行をスキップするための特別な `idle` シンボルを提供します。
+このライブラリは、クエリの実行をスキップするための特別な `idle` シンボルを提供します。
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -197,10 +197,10 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 
 1. **型安全性** - TypeScript は条件付きパラメータの型を正しく推論します。
 2. **パフォーマンス** - 不要なサーバーリクエストを回避します。
-3. **ロジックの簡潔さ** - 追加の `enabled` 状態を管理する必要がありません。
+3. **ロジックの簡潔さ** - 追加の `enabled` ステートを管理する必要がありません。
 4. **一貫性** - すべての条件付きクエリに対して統一されたアプローチを提供します。
 
-これは、型安全性を維持しながら特定の条件下でのみデータをロードしたい条件付きクエリに特に役立ちます。
+これは、特定の条件下でのみデータをロードしたいが、型安全性を維持したい条件付きクエリに特に役立ちます。
 
 ## API リファレンス
 
@@ -298,7 +298,7 @@ const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]
 
 #### `useRefetchAll(states)`
 
-複数のクエリを再取得するためのコールバックを作成します。
+複数のクエリを再取得するコールバックを作成します。
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
@@ -307,7 +307,7 @@ const refetchAll = useRefetchAll([user, posts, comments]);
 
 #### `useRefetchErrored(states)`
 
-エラーが発生したクエリのみを再取得するためのコールバックを作成します。
+エラーが発生したクエリのみを再取得するコールバックを作成します。
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
@@ -490,7 +490,7 @@ async function fetchUser(params: {userId: number}) {
 // データソース用に適応
 const dataSource = makePlainQueryDataSource({
   name: 'user',
-  fetch: skipContext(fetchUser), // context と fetchContext パラメータをスキップします
+  fetch: skipContext(fetchUser), // Context と fetchContext パラメータをスキップします
 });
 ```
 
@@ -508,12 +508,12 @@ fetch関数にキャンセル機能を追加します。
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
-// React QueryのAbortSignalを自動的に処理します
+// React Query の AbortSignal を自動的に処理します
 ```
 
 #### `getProgressiveRefetch(options)`
 
-段階的なリフェッチ間隔関数を作成します。
+プログレッシブなリフェッチ間隔関数を作成します。
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
@@ -533,7 +533,7 @@ const dataSource = makePlainQueryDataSource({
 
 #### `normalizeStatus(status, fetchStatus)`
 
-React QueryのステータスをDataLoaderのステータスに変換します。
+React Query のステータスを DataLoader のステータスに変換します。
 
 ```ts
 const status = normalizeStatus('pending', 'fetching'); // 'loading'
@@ -573,7 +573,7 @@ import {idle} from '@gravity-ui/data-source';
 // クエリ実行をスキップするための特別なシンボル
 const params = shouldFetch ? {userId: 123} : idle;
 
-// enabled: false の型安全な代替手段
+// enabled: false の型安全な代替
 // 以下のようにする代わりに:
 const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Boolean(userId)});
 
@@ -585,10 +585,10 @@ const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
 #### クリオプションの合成
 
 ```ts
-// プレーンクエリのReact Queryオプションを合成
+// プレーンクエリの React Query オプションを合成
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// 無限クエリのReact Queryオプションを合成
+// インフィニティクエリの React Query オプションを合成
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
@@ -669,14 +669,14 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// 特定ユーザーのすべてのデータを無効化
+// 特定ユーザーの全データを無効化
 await dataManager.invalidateTag('user:123');
 
-// すべてのユーザー関連データを無効化
+// ユーザー関連の全データを無効化
 await dataManager.invalidateTag('users');
 ```
 
-### 型によるエラーハンドリング
+### 型付きエラーハンドリング
 
 型安全なエラーハンドリングを作成します。
 
@@ -700,7 +700,7 @@ const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
 );
 ```
 
-### 複雑なページネーションを持つ無限クエリ
+### 複雑なページネーションを持つインフィニティクエリ
 
 複雑なページネーションシナリオを処理します。
 
@@ -745,7 +745,7 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
   const combined = useQueryResponses([user, posts, followers]);
 ```
 
-```jsx
+```typescript
 // Types are automatically inferred
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
@@ -776,11 +776,11 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Params type
-  {id: number}, // Request type
-  ApiResponse, // Response type
-  User, // Data type
-  ApiError // Error type
+  {id: number}, // パラメータの型
+  {id: number}, // リクエストの型
+  ApiResponse, // レスポンスの型
+  User, // データ型
+  ApiError // エラー型
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
@@ -793,4 +793,4 @@ const typedDataSource = makePlainQueryDataSource<
 
 ## ライセンス
 
-MIT License. 詳細については、[LICENSE](LICENSE) ファイルを参照してください。
+MIT License。詳細は [LICENSE](LICENSE) ファイルをご覧ください。

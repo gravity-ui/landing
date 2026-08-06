@@ -1,6 +1,6 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source**는 데이터 페칭을 위한 간단한 래퍼입니다. [클린 아키텍처](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)의 일종의 "포트"라고 할 수 있습니다. 이를 통해 사용 사례에 따라 데이터 페칭 주변의 것들에 대한 래퍼를 만들 수 있습니다. **Data Source**는 내부적으로 [react-query](https://tanstack.com/query/latest)를 사용합니다.
+**Data Source**는 데이터 페칭을 감싸는 간단한 래퍼입니다. [클린 아키텍처](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)의 일종의 "포트"라고 할 수 있습니다. 사용 사례에 따라 데이터 페칭 주변의 것들에 대한 래퍼를 만들 수 있습니다. **Data Source**는 내부적으로 [react-query](https://tanstack.com/query/latest)를 사용합니다.
 
 ## 설치
 
@@ -18,7 +18,7 @@ npm install @gravity-ui/data-source @tanstack/react-query
 
 ```tsx
 import React from 'react';
-import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
+import {ClientDataManager, DataSourceProvider} from '@gravity-ui/data-source';
 
 const dataManager = new ClientDataManager({
   defaultOptions: {
@@ -32,9 +32,9 @@ const dataManager = new ClientDataManager({
 
 function App() {
   return (
-    <DataManagerContext.Provider value={dataManager}>
+    <DataSourceProvider dataManager={dataManager}>
       <YourApplication />
-    </DataManagerContext.Provider>
+    </DataSourceProvider>
   );
 }
 ```
@@ -61,7 +61,7 @@ export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TE
 
 ### 3. 사용자 정의 DataLoader 컴포넌트 생성
 
-로딩 상태 및 오류 표시를 정의하기 위해 기본값 기반의 `DataLoader` 컴포넌트를 작성합니다.
+로딩 상태 및 오류 표시를 정의하기 위해 기본값을 기반으로 `DataLoader` 컴포넌트를 작성합니다.
 
 ```tsx
 import {
@@ -77,8 +77,8 @@ export interface DataLoaderProps
 }
 
 export const DataLoader: React.FC<DataLoaderProps> = ({
-  LoadingView = YourLoader, // 나만의 로더 컴포넌트를 사용할 수 있습니다.
-  ErrorView = YourError, // 나만의 오류 컴포넌트를 사용할 수 있습니다.
+  LoadingView = YourLoader, // 자신만의 로더 컴포넌트를 사용할 수 있습니다.
+  ErrorView = YourError, // 자신만의 오류 컴포넌트를 사용할 수 있습니다.
   ...restProps
 }) => {
   return <DataLoaderBase LoadingView={LoadingView} ErrorView={ErrorView} {...restProps} />;
@@ -123,7 +123,7 @@ export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 
 ### 데이터 소스 유형
 
-이 라이브러리는 두 가지 주요 데이터 소스 유형을 제공합니다.
+라이브러리는 두 가지 주요 데이터 소스 유형을 제공합니다.
 
 #### 일반 쿼리 데이터 소스
 
@@ -161,15 +161,15 @@ const postsDataSource = makeInfiniteQueryDataSource({
 
 ### 상태 관리
 
-이 라이브러리는 쿼리 상태를 세 가지 간단한 상태로 정규화합니다.
+라이브러리는 쿼리 상태를 세 가지 간단한 상태로 정규화합니다.
 
 - `loading` - 실제 데이터 로딩 중입니다. React Query의 `isLoading`과 동일합니다.
-- `success` - 데이터를 사용할 수 있습니다 (idle로 건너뛸 수 있음).
-- `error` - 데이터 페칭에 실패했습니다.
+- `success` - 데이터를 사용할 수 있습니다 (idle로 건너뛸 수 있습니다).
+- `error` - 데이터를 가져오는 데 실패했습니다.
 
 ### Idle 개념
 
-이 라이브러리는 쿼리 실행을 건너뛰기 위한 특별한 `idle` 심볼을 제공합니다.
+라이브러리는 쿼리 실행을 건너뛰기 위한 특별한 `idle` 심볼을 제공합니다.
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -195,12 +195,12 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 
 **`idle`의 이점:**
 
-1. **타입 안전성** - TypeScript는 조건부 매개변수에 대한 타입을 올바르게 추론합니다.
+1. **타입 안전성** - TypeScript는 조건부 매개변수에 대한 유형을 올바르게 추론합니다.
 2. **성능** - 불필요한 서버 요청을 방지합니다.
 3. **로직 단순화** - 추가 `enabled` 상태를 관리할 필요가 없습니다.
 4. **일관성** - 모든 조건부 쿼리에 대한 통합된 접근 방식입니다.
 
-이는 타입 안전성을 유지하면서 특정 조건에서만 데이터를 로드하려는 조건부 쿼리에 특히 유용합니다.
+이는 특정 조건에서만 데이터를 로드하고 타입 안전성을 유지하려는 조건부 쿼리에 특히 유용합니다.
 
 ## API 참조
 
@@ -302,7 +302,7 @@ const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
-// refetchAll()은 모든 쿼리에 대해 다시 페칭을 트리거합니다.
+// refetchAll()은 모든 쿼리에 대해 refetch를 트리거합니다.
 ```
 
 #### `useRefetchErrored(states)`
@@ -351,7 +351,7 @@ await dataManager.invalidateTag('users');
 
 - `status` - 현재 로딩 상태
 - `error` - 오류 객체
-- `errorAction` - 오류 재시도를 위한 함수 또는 액션 구성
+- `errorAction` - 오류 재시도를 위한 함수 또는 액션 설정
 - `LoadingView` - 로딩 중에 표시할 컴포넌트
 - `ErrorView` - 오류 발생 시 표시할 컴포넌트
 - `loadingViewProps` - LoadingView에 전달되는 props
@@ -382,7 +382,7 @@ await dataManager.invalidateTag('users');
 
 - `hasNextPage` - 더 많은 페이지를 사용할 수 있는지 여부
 - `fetchNextPage` - 다음 페이지를 페칭하는 함수
-- `isFetchingNextPage` - 다음 페이지가 페칭 중인지 여부
+- `isFetchingNextPage` - 다음 페이지를 페칭 중인지 여부
 - `MoreView` - "더 보기" 버튼을 위한 컴포넌트
 
 #### `withDataManager(Component)`
@@ -437,7 +437,7 @@ await dataManager.invalidateTags(['user', 'profile']);
 
 ##### `invalidateSource(dataSource, options?)`
 
-데이터 소스에 대한 모든 쿼리를 무효화합니다.
+데이터 소스의 모든 쿼리를 무효화합니다.
 
 ```ts
 await dataManager.invalidateSource(userDataSource);
@@ -445,7 +445,7 @@ await dataManager.invalidateSource(userDataSource);
 
 ##### `invalidateParams(dataSource, params, options?)`
 
-정확한 매개변수로 특정 쿼리를 무효화합니다.
+정확한 매개변수를 가진 특정 쿼리를 무효화합니다.
 
 ```ts
 await dataManager.invalidateParams(userDataSource, {userId: 123});
@@ -453,7 +453,7 @@ await dataManager.invalidateParams(userDataSource, {userId: 123});
 
 ##### `resetSource(dataSource)`
 
-데이터 소스에 대한 모든 캐시된 데이터를 재설정(지움)합니다.
+데이터 소스의 모든 캐시된 데이터를 재설정(지움)합니다.
 
 ```ts
 await dataManager.resetSource(userDataSource);
@@ -513,7 +513,7 @@ const cancellableFetch = withCancellation(fetchFunction);
 
 #### `getProgressiveRefetch(options)`
 
-점진적인 리프레시 간격 함수를 생성합니다.
+점진적인 리페치 간격 함수를 생성합니다.
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
@@ -533,7 +533,7 @@ const dataSource = makePlainQueryDataSource({
 
 #### `normalizeStatus(status, fetchStatus)`
 
-React Query 상태를 DataLoader 상태로 변환합니다.
+React Query의 상태를 DataLoader 상태로 변환합니다.
 
 ```ts
 const status = normalizeStatus('pending', 'fetching'); // 'loading'
@@ -558,7 +558,7 @@ const hasUserTag = hasTag(queryKey, 'users');
 #### 키 조합 유틸리티
 
 ```ts
-// 데이터 소스에 대한 캐시 키 조합
+// 데이터 소스의 캐시 키 조합
 const key = composeKey(userDataSource, {userId: 123});
 
 // 태그를 포함한 전체 키 조합
@@ -585,10 +585,10 @@ const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
 #### 쿼리 옵션 조합
 
 ```ts
-// 일반 쿼리에 대한 React Query 옵션 조합
+// 일반 쿼리를 위한 React Query 옵션 조합
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// 무한 쿼리에 대한 React Query 옵션 조합
+// 무한 쿼리를 위한 React Query 옵션 조합
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
@@ -672,7 +672,7 @@ const userPostsDataSource = makePlainQueryDataSource({
 // 특정 사용자의 모든 데이터 무효화
 await dataManager.invalidateTag('user:123');
 
-// 모든 사용자 관련 데이터 무효화
+// 사용자 관련 모든 데이터 무효화
 await dataManager.invalidateTag('users');
 ```
 
@@ -700,7 +700,7 @@ const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
 );
 ```
 
-### 복잡한 페이징이 있는 무한 쿼리
+### 복잡한 페이징을 위한 무한 쿼리
 
 복잡한 페이징 시나리오를 처리합니다.
 
@@ -776,11 +776,11 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Params 타입
-  {id: number}, // Request 타입
-  ApiResponse, // Response 타입
-  User, // Data 타입
-  ApiError // Error 타입
+  {id: number}, // Params type
+  {id: number}, // Request type
+  ApiResponse, // Response type
+  User, // Data type
+  ApiError // Error type
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
@@ -789,7 +789,7 @@ const typedDataSource = makePlainQueryDataSource<
 
 ## 기여하기
 
-코드 오브 컨덕트 및 풀 리퀘스트 제출 절차에 대한 자세한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어보세요.
+코드 오브 컨덕트 및 풀 리퀘스트 제출 프로세스에 대한 자세한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md)를 읽어보세요.
 
 ## 라이선스
 

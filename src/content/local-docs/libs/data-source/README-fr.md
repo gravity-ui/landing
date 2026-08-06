@@ -8,7 +8,7 @@
 npm install @gravity-ui/data-source @tanstack/react-query
 ```
 
-`@tanstack/react-query` est une dépendance pair.
+`@tanstack/react-query` est une dépendance paire.
 
 ## Démarrage Rapide
 
@@ -18,7 +18,7 @@ Tout d'abord, créez et fournissez un `DataManager` dans votre application :
 
 ```tsx
 import React from 'react';
-import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
+import {ClientDataManager, DataSourceProvider} from '@gravity-ui/data-source';
 
 const dataManager = new ClientDataManager({
   defaultOptions: {
@@ -32,16 +32,16 @@ const dataManager = new ClientDataManager({
 
 function App() {
   return (
-    <DataManagerContext.Provider value={dataManager}>
+    <DataSourceProvider dataManager={dataManager}>
       <YourApplication />
-    </DataManagerContext.Provider>
+    </DataSourceProvider>
   );
 }
 ```
 
 ### 2. Définition des Types d'Erreurs et des Wrappers
 
-Définissez un type d'erreur et créez vos constructeurs pour les sources de données basés sur les constructeurs par défaut :
+Définissez un type d'erreur et créez vos constructeurs pour les sources de données en vous basant sur les constructeurs par défaut :
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -94,9 +94,9 @@ import {skipContext} from '@gravity-ui/data-source';
 import {fetchUser} from './api';
 
 export const userDataSource = makePlainQueryDataSource({
-  // Les clés doivent être uniques. Peut-être devriez-vous créer un helper pour nommer les sources de données
+  // Les clés doivent être uniques. Peut-être devriez-vous créer un utilitaire pour nommer les sources de données
   name: 'user',
-  // skipContext est un helper pour ignorer les 2 premiers paramètres de la fonction (context et fetchContext)
+  // skipContext est un utilitaire pour ignorer les 2 premiers paramètres de la fonction (context et fetchContext)
   fetch: skipContext(fetchUser),
   // Optionnel : générer des tags pour une invalidation de cache avancée
   tags: (params) => [`user:${params.userId}`, 'users'],
@@ -127,7 +127,7 @@ La bibliothèque fournit deux types principaux de sources de données :
 
 #### Source de Données de Requête Simple (Plain Query Data Source)
 
-Pour les schémas simples de requête/réponse :
+Pour les modèles simples de requête/réponse :
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -163,7 +163,7 @@ const postsDataSource = makeInfiniteQueryDataSource({
 
 La bibliothèque normalise les états des requêtes en trois états simples :
 
-- `loading` - Chargement des données en cours. Identique à `isLoading` dans React Query.
+- `loading` - Chargement effectif des données. Identique à `isLoading` dans React Query.
 - `success` - Données disponibles (peut être ignoré en utilisant `idle`).
 - `error` - Échec de la récupération des données.
 
@@ -208,7 +208,7 @@ Ceci est particulièrement utile pour les requêtes conditionnelles lorsque vous
 
 #### `makePlainQueryDataSource(config)`
 
-Crée une source de données de requête simple pour les schémas de requête/réponse.
+Crée une source de données de requête simple pour les modèles de requête/réponse.
 
 ```ts
 const dataSource = makePlainQueryDataSource({
@@ -236,7 +236,7 @@ const dataSource = makePlainQueryDataSource({
 
 #### `makeInfiniteQueryDataSource(config)`
 
-Crée une source de données pour les requêtes infinies, adaptée aux schémas de pagination et de défilement infini.
+Crée une source de données de requête infinie pour les modèles de pagination et de défilement infini.
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -280,7 +280,7 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 
 #### `useQueryResponses(responses)`
 
-Combine plusieurs réponses de requêtes en un seul état.
+Combine plusieurs réponses de requête en un seul état.
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -311,7 +311,7 @@ Crée une fonction de rappel pour recharger uniquement les requêtes échouées.
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
-// refetchErrored() ne rechargera que les requêtes ayant des erreurs
+// refetchErrored() ne rechargera que les requêtes contenant des erreurs
 ```
 
 #### `useDataManager()`
@@ -325,7 +325,7 @@ await dataManager.invalidateTag('users');
 
 #### `useQueryContext()`
 
-Retourne le contexte de la requête (pour construire des hooks de données personnalisés basés sur react-query).
+Retourne le contexte de requête (pour construire des hooks de données personnalisés basés sur react-query).
 
 ### Composants React
 
@@ -351,7 +351,7 @@ Composant pour gérer les états de chargement et les erreurs.
 
 - `status` - Statut de chargement actuel
 - `error` - Objet d'erreur
-- `errorAction` - Fonction ou configuration d'action pour la nouvelle tentative en cas d'erreur
+- `errorAction` - Fonction ou configuration d'action pour la nouvelle tentative d'erreur
 - `LoadingView` - Composant à afficher pendant le chargement
 - `ErrorView` - Composant à afficher en cas d'erreur
 - `loadingViewProps` - Props passées à LoadingView
@@ -396,7 +396,7 @@ const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
 });
 ```
 
-### Gestion des Données
+### Gestion des données
 
 #### `ClientDataManager`
 
@@ -469,7 +469,7 @@ await dataManager.resetParams(userDataSource, {userId: 123});
 
 ##### `invalidateSourceTags(dataSource, params, options?)`
 
-Invalide les requêtes en fonction des tags générés par une source de données.
+Invalide les requêtes basées sur les tags générés par une source de données.
 
 ```ts
 await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
@@ -479,7 +479,7 @@ await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 
 #### `skipContext(fetchFunction)`
 
-Utilitaires pour adapter les fonctions fetch existantes à l'interface de la source de données.
+Utilitaires pour adapter les fonctions fetch existantes à l'interface de source de données.
 
 ```ts
 // Fonction existante
@@ -594,7 +594,7 @@ const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params,
 
 **Note :** Ces fonctions sont principalement destinées à un usage interne lors de la création d'implémentations de sources de données personnalisées.
 
-## Motifs Avancés
+## Modèles Avancés
 
 ### Requêtes Conditionnelles avec `idle`
 
@@ -669,7 +669,7 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// Invalide toutes les données d'un utilisateur spécifique
+// Invalide toutes les données pour un utilisateur spécifique
 await dataManager.invalidateTag('user:123');
 
 // Invalide toutes les données liées à l'utilisateur

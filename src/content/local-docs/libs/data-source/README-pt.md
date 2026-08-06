@@ -18,7 +18,7 @@ Primeiro, crie e forneça um `DataManager` na sua aplicação:
 
 ```tsx
 import React from 'react';
-import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
+import {ClientDataManager, DataSourceProvider} from '@gravity-ui/data-source';
 
 const dataManager = new ClientDataManager({
   defaultOptions: {
@@ -32,9 +32,9 @@ const dataManager = new ClientDataManager({
 
 function App() {
   return (
-    <DataManagerContext.Provider value={dataManager}>
+    <DataSourceProvider dataManager={dataManager}>
       <YourApplication />
-    </DataManagerContext.Provider>
+    </DataSourceProvider>
   );
 }
 ```
@@ -175,7 +175,7 @@ A biblioteca fornece um símbolo especial `idle` para pular a execução da cons
 import {idle} from '@gravity-ui/data-source';
 
 const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
-  // A consulta não será executada se userId não estiver definido
+  // A consulta não será executada se userId não for definido
   const {data, status} = useQueryData(userDataSource, userId ? {userId} : idle);
 
   return (
@@ -298,7 +298,7 @@ const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]
 
 #### `useRefetchAll(states)`
 
-Cria um callback para buscar múltiplos dados novamente.
+Cria um callback para buscar novamente múltiplas consultas.
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
@@ -307,7 +307,7 @@ const refetchAll = useRefetchAll([user, posts, comments]);
 
 #### `useRefetchErrored(states)`
 
-Cria um callback para buscar novamente apenas os dados com falha.
+Cria um callback para buscar novamente apenas as consultas com falha.
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
@@ -351,7 +351,7 @@ Componente para lidar com estados de carregamento e erros.
 
 - `status` - Status atual de carregamento
 - `error` - Objeto de erro
-- `errorAction` - Função ou configuração de ação para retentar o erro
+- `errorAction` - Função ou configuração de ação para tentar novamente em caso de erro
 - `LoadingView` - Componente a ser exibido durante o carregamento
 - `ErrorView` - Componente a ser exibido em caso de erro
 - `loadingViewProps` - Props passadas para o LoadingView
@@ -479,7 +479,7 @@ await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 
 #### `skipContext(fetchFunction)`
 
-Utilitário para adaptar funções fetch existentes à interface da fonte de dados.
+Utilitário para adaptar funções de fetch existentes à interface da fonte de dados.
 
 ```ts
 // Função existente
@@ -561,7 +561,7 @@ const hasUserTag = hasTag(queryKey, 'users');
 // Compõe a chave de cache para uma fonte de dados
 const key = composeKey(userDataSource, {userId: 123});
 
-// Compõe a chave completa incluindo tags
+// Compõe a chave completa, incluindo tags
 const fullKey = composeFullKey(userDataSource, {userId: 123});
 ```
 
@@ -592,7 +592,7 @@ const plainOptions = composePlainQueryOptions(context, dataSource, params, optio
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
-**Nota:** Estas funções são usadas principalmente internamente ao criar implementações de fontes de dados personalizadas.
+**Nota:** Estas funções são principalmente para uso interno ao criar implementações de fontes de dados personalizadas.
 
 ## Padrões Avançados
 
@@ -607,7 +607,7 @@ const ConditionalDataComponent: React.FC<{
   userId?: number;
   shouldLoadPosts: boolean;
 }> = ({userId, shouldLoadPosts}) => {
-  // Carrega o usuário apenas se userId estiver definido
+  // Carrega o usuário apenas se userId for definido
   const user = useQueryData(
     userDataSource,
     userId ? {userId} : idle
@@ -745,8 +745,32 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
   const combined = useQueryResponses([user, posts, followers]);
 ```
 
-```jsx
-// ...
+```typescript
+import { DataLoader, DataLoaderProps } from '@gravity/uikit';
+import React from 'react';
+
+interface ProfileProps {
+  userId: number;
+}
+
+const Profile: React.FC<ProfileProps> = ({ userId }) => {
+  const combined = useCombinedDataSource({ userId });
+
+  return (
+    <DataLoader
+      status={combined.status}
+      error={combined.error}
+      errorAction={combined.refetchErrored} // Apenas tenta novamente requisições falhas
+      LoadingView={ProfileSkeleton}
+      ErrorView={ProfileError}
+    >
+      {user && posts && followers && (
+        <div>
+          <UserInfo user={user.data} />
+          <UserPosts posts={posts.data} />
+          <UserFollowers followers={followers.data} />
+        </div>
+      )}
     </DataLoader>
   );
 };
@@ -754,25 +778,25 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 
 ## Suporte a TypeScript
 
-A biblioteca foi desenvolvida com uma abordagem "TypeScript-first" e oferece inferência de tipos completa:
+A biblioteca é construída com uma abordagem "TypeScript-first" e oferece inferência de tipo completa:
 
 ```ts
 // Tipos são inferidos automaticamente
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // O tipo de retorno é inferido como User
+    // Tipo de retorno é inferido como User
   }),
 });
 
-// O tipo de retorno do hook é tipado automaticamente
+// Tipo de retorno do hook é tipado automaticamente
 const {data} = useQueryData(userDataSource, {userId: 123});
 // data é tipado como User | undefined
 ```
 
 ### Tipos de Erro Personalizados
 
-Defina e utilize tipos de erro personalizados:
+Defina e use tipos de erro personalizados:
 
 ```ts
 interface ValidationError {
@@ -804,4 +828,4 @@ Por favor, leia o [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre nosso c
 
 ## Licença
 
-Licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+MIT License. Veja o arquivo [LICENSE](LICENSE) para detalhes.

@@ -1,6 +1,6 @@
 # Data Source &middot; [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** 是一个简单的数据获取封装库。它在[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)中扮演着“端口”的角色。它允许你根据具体用例来封装数据获取相关的逻辑。**Data Source** 内部使用了 [react-query](https://tanstack.com/query/latest)。
+**Data Source** 是一个简单的数据获取封装库。它是一种“端口”，遵循[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) 的设计理念。它允许你根据具体用例，为数据获取相关的操作创建封装。**Data Source** 内部使用了 [react-query](https://tanstack.com/query/latest)。
 
 ## 安装
 
@@ -18,7 +18,7 @@ npm install @gravity-ui/data-source @tanstack/react-query
 
 ```tsx
 import React from 'react';
-import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
+import {ClientDataManager, DataSourceProvider} from '@gravity-ui/data-source';
 
 const dataManager = new ClientDataManager({
   defaultOptions: {
@@ -32,16 +32,16 @@ const dataManager = new ClientDataManager({
 
 function App() {
   return (
-    <DataManagerContext.Provider value={dataManager}>
+    <DataSourceProvider dataManager={dataManager}>
       <YourApplication />
-    </DataManagerContext.Provider>
+    </DataSourceProvider>
   );
 }
 ```
 
 ### 2. 定义错误类型和封装器
 
-定义错误类型，并基于默认构造函数创建你的数据源构造函数：
+定义错误类型，并基于默认构造函数创建你的数据源构造器：
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -96,7 +96,7 @@ import {fetchUser} from './api';
 export const userDataSource = makePlainQueryDataSource({
   // Key 必须是唯一的。也许你应该创建一个辅助函数来生成数据源的名称
   name: 'user',
-  // skipContext 是一个辅助函数，用于跳过函数的前两个参数（context 和 fetchContext）
+  // skipContext 是一个辅助函数，用于跳过函数的前两个参数 (context 和 fetchContext)
   fetch: skipContext(fetchUser),
   // 可选：生成标签以进行高级缓存失效
   tags: (params) => [`user:${params.userId}`, 'users'],
@@ -164,7 +164,7 @@ const postsDataSource = makeInfiniteQueryDataSource({
 该库将查询状态规范化为三种简单状态：
 
 - `loading` - 正在实际加载数据。与 React Query 中的 `isLoading` 相同。
-- `success` - 数据可用（可以使用 `idle` 跳过）。
+- `success` - 数据可用（可能会被 `idle` 跳过）。
 - `error` - 数据获取失败。
 
 ### Idle 概念
@@ -193,12 +193,12 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 - 数据保持为 `undefined`
 - 组件可以安全地渲染而无需加载
 
-**`idle` 的优势：**
+**`idle` 的优点：**
 
 1. **类型安全** - TypeScript 正确推断条件参数的类型。
 2. **性能** - 避免不必要的服务器请求。
 3. **逻辑简化** - 无需管理额外的 `enabled` 状态。
-4. **一致性** - 对所有条件查询采用统一的方法。
+4. **一致性** - 对所有条件查询都采用统一的方法。
 
 这对于条件查询尤其有用，当你想在特定条件下加载数据，同时保持类型安全时。
 
@@ -400,7 +400,7 @@ const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
 
 #### `ClientDataManager`
 
-数据管理的主要类。
+数据管理的核心类。
 
 ```ts
 const dataManager = new ClientDataManager({
@@ -423,7 +423,7 @@ const dataManager = new ClientDataManager({
 ```ts
 await dataManager.invalidateTag('users');
 await dataManager.invalidateTag('posts', {
-  repeat: {count: 3, interval: 1000}, // Retry invalidation
+  repeat: {count: 3, interval: 1000}, // 重试失效
 });
 ```
 
@@ -445,7 +445,7 @@ await dataManager.invalidateSource(userDataSource);
 
 ##### `invalidateParams(dataSource, params, options?)`
 
-使具有精确参数的特定查询失效。
+使用精确参数使特定查询失效。
 
 ```ts
 await dataManager.invalidateParams(userDataSource, {userId: 123});
@@ -573,7 +573,7 @@ import {idle} from '@gravity-ui/data-source';
 // 用于跳过查询执行的特殊符号
 const params = shouldFetch ? {userId: 123} : idle;
 
-// 类型安全的 `enabled: false` 的替代方案
+// 类型安全的 enabled: false 的替代方案
 // 而不是：
 const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Boolean(userId)});
 
@@ -592,7 +592,7 @@ const plainOptions = composePlainQueryOptions(context, dataSource, params, optio
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
-**注意：** 这些函数主要用于创建自定义数据源实现时的内部使用。
+**注意：** 这些函数主要用于内部创建自定义数据源实现。
 
 ## 高级模式
 
@@ -734,7 +734,7 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 
 ### 组合多个数据源
 
-组合来自多个数据源的数据：
+组合来自多个源的数据：
 
 ```ts
 const UserProfile: React.FC<{userId: number}> = ({userId}) => {
@@ -746,7 +746,21 @@ const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 ```
 
 ```jsx
-// ... (previous code)
+  return (
+    <DataLoader
+      status={combined.status}
+      error={combined.error}
+      errorAction={combined.refetchErrored} // Only retry failed requests
+      LoadingView={ProfileSkeleton}
+      ErrorView={ProfileError}
+    >
+      {user && posts && followers && (
+        <div>
+          <UserInfo user={user.data} />
+          <UserPosts posts={posts.data} />
+          <UserFollowers followers={followers.data} />
+        </div>
+      )}
     </DataLoader>
   );
 };
@@ -804,4 +818,4 @@ const typedDataSource = makePlainQueryDataSource<
 
 ## 许可证
 
-MIT 许可证。有关详细信息，请参阅 [LICENSE](LICENSE) 文件。
+MIT 许可证。详情请参阅 [LICENSE](LICENSE) 文件。
