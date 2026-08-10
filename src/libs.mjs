@@ -495,4 +495,17 @@ export const libs = [
             'https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/CHANGELOG.md',
         mainBranch: 'main',
     },
+    {
+        id: 'farm',
+        githubId: 'gravity-ui/farm',
+        npmId: '@gravity-ui/farm',
+        title: 'Farm',
+        primary: false,
+        landing: false,
+        tags: ['infrastructure'],
+        storybookUrl: '',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/farm/main'),
+        changelogUrl: '',
+        mainBranch: 'main',
+    },
 ];
