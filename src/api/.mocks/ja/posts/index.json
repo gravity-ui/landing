@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1765,
+      "name": "datalens-highcharts",
+      "date": "2026-03-27T00:00:00Z",
+      "title": "置き換えるか残すか：DataLensがHighchartsから移行した方法",
+      "postId": 1765,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
+      "readingTime": 10,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/datalens-highcharts"
+    },
+    {
       "id": 73,
       "name": "gravityui-aikit",
       "date": "2025-12-18T00:00:00Z",
@@ -193,17 +217,17 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 17,
+  "totalCount": 18,
   "count": 7,
   "pinnedPost": {
-    "id": 1765,
-    "name": "datalens-highcharts",
-    "date": "2026-03-27T00:00:00Z",
-    "title": "置き換えるか残すか：DataLensがHighchartsから移行した方法",
-    "postId": 1765,
-    "description": "",
-    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
-    "readingTime": 10,
+    "id": 1766,
+    "name": "agent-ready",
+    "date": "2026-08-10T00:00:00Z",
+    "title": "Gravity UIがagent-readyに：llms.txtとGravity UIスキルの紹介",
+    "postId": 1766,
+    "description": "llms.txtは、AIエージェント向けにGravity UIの全34パッケージをまとめたカタログで、パッケージごとにバージョン付きのドキュメントを提供します。オープンソースのGravity UIスキルは、コーディングエージェントが正しいパッケージを選び、最新のAPIを使えるよう支援します。",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 3,
     "likes": 0,
     "hasUserLike": false,
     "hasPublishedVersionInRegion": true,
@@ -217,6 +241,6 @@
       }
     ],
     "services": [],
-    "url": "/blog/datalens-highcharts"
+    "url": "/blog/agent-ready"
   }
 }
