@@ -219,6 +219,13 @@ ESLint configuration preset for Gravity UI projects.
 
 Lightweight express.js wrapper that integrates with NodeKit.
 
+## Farm — `@gravity-ui/farm`
+
+> If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/farm/llms.txt)
+> GitHub: [gravity-ui/farm](https://github.com/gravity-ui/farm)
+
+Documentation for the Farm package.
+
 ## Graph — `@gravity-ui/graph`
 
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/graph/llms.txt)
