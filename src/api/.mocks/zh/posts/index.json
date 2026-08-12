@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1767,
+      "name": "farm",
+      "date": "2026-07-30T00:00:00Z",
+      "title": "Farm 开源了：轻松搭建预览环境",
+      "postId": 1767,
+      "description": "Farm 如何从单台虚拟机上的 self-hosted 脚本成长为基于 Docker 和 Kubernetes 的预览环境编排器，以及我们为什么将它开源。",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/farm/pic1.png",
+      "readingTime": 18,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "文章"
+        }
+      ],
+      "services": [],
+      "url": "/blog/farm"
+    },
+    {
       "id": 1765,
       "name": "datalens-highcharts",
       "date": "2026-03-27T00:00:00Z",
@@ -217,7 +241,7 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 18,
+  "totalCount": 19,
   "count": 7,
   "pinnedPost": {
     "id": 1766,

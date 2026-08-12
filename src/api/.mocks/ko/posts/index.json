@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1767,
+      "name": "farm",
+      "date": "2026-07-30T00:00:00Z",
+      "title": "Farm 오픈소스 공개: 고통 없는 프리뷰 환경",
+      "postId": 1767,
+      "description": "Farm이 단일 VM의 셀프 호스팅 스크립트에서 Docker와 Kubernetes 기반 프리뷰 환경 오케스트레이터로 성장한 과정, 그리고 코드를 공개한 이유.",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/farm/pic1.png",
+      "readingTime": 18,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "기사"
+        }
+      ],
+      "services": [],
+      "url": "/blog/farm"
+    },
+    {
       "id": 1765,
       "name": "datalens-highcharts",
       "date": "2026-03-27T00:00:00Z",
@@ -217,7 +241,7 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 18,
+  "totalCount": 19,
   "count": 7,
   "pinnedPost": {
     "id": 1766,
