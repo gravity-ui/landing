@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1765,
+      "name": "datalens-highcharts",
+      "date": "2026-03-27T00:00:00Z",
+      "title": "교체할 것인가 남길 것인가: DataLens가 Highcharts에서 마이그레이션한 방법",
+      "postId": 1765,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
+      "readingTime": 10,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "기사"
+        }
+      ],
+      "services": [],
+      "url": "/blog/datalens-highcharts"
+    },
+    {
       "id": 73,
       "name": "gravityui-aikit",
       "date": "2025-12-18T00:00:00Z",
@@ -193,17 +217,17 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 17,
+  "totalCount": 18,
   "count": 7,
   "pinnedPost": {
-    "id": 1765,
-    "name": "datalens-highcharts",
-    "date": "2026-03-27T00:00:00Z",
-    "title": "교체할 것인가 남길 것인가: DataLens가 Highcharts에서 마이그레이션한 방법",
-    "postId": 1765,
-    "description": "",
-    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
-    "readingTime": 10,
+    "id": 1766,
+    "name": "agent-ready",
+    "date": "2026-08-10T00:00:00Z",
+    "title": "Gravity UI, 이제 agent-ready: llms.txt와 Gravity UI 스킬을 소개합니다",
+    "postId": 1766,
+    "description": "llms.txt는 AI 에이전트를 위한 Gravity UI 전체 34개 패키지 카탈로그로, 패키지별로 버전 관리되는 문서를 제공합니다. 오픈소스 Gravity UI 스킬은 코딩 에이전트가 올바른 패키지를 선택하고 최신 API를 사용하도록 돕습니다.",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 3,
     "likes": 0,
     "hasUserLike": false,
     "hasPublishedVersionInRegion": true,
@@ -217,6 +241,6 @@
       }
     ],
     "services": [],
-    "url": "/blog/datalens-highcharts"
+    "url": "/blog/agent-ready"
   }
 }

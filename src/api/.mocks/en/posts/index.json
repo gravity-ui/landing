@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1765,
+      "name": "datalens-highcharts",
+      "date": "2026-03-27T00:00:00Z",
+      "title": "Replace or Keep: How DataLens Migrated from Highcharts",
+      "postId": 1765,
+      "description": "",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
+      "readingTime": 10,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/datalens-highcharts"
+    },
+    {
       "id": 73,
       "name": "gravityui-aikit",
       "date": "2025-12-18T00:00:00Z",
@@ -193,17 +217,17 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 17,
+  "totalCount": 18,
   "count": 7,
   "pinnedPost": {
-    "id": 1765,
-    "name": "datalens-highcharts",
-    "date": "2026-03-27T00:00:00Z",
-    "title": "Replace or Keep: How DataLens Migrated from Highcharts",
-    "postId": 1765,
-    "description": "",
-    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/datalens-highcharts/pic1.png",
-    "readingTime": 10,
+    "id": 1766,
+    "name": "agent-ready",
+    "date": "2026-08-10T00:00:00Z",
+    "title": "Gravity UI Is Now Agent-Ready: Meet llms.txt and the Gravity UI Skill",
+    "postId": 1766,
+    "description": "llms.txt is an agent-facing catalog of all 34 Gravity UI packages with versioned per-package docs. The open-source Gravity UI skill helps coding agents pick the right package and use current APIs.",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 3,
     "likes": 0,
     "hasUserLike": false,
     "hasPublishedVersionInRegion": true,
@@ -217,6 +241,6 @@
       }
     ],
     "services": [],
-    "url": "/blog/datalens-highcharts"
+    "url": "/blog/agent-ready"
   }
 }
