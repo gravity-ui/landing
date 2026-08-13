@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/chartkit@8.0.0`
+> Generated for `@gravity-ui/chartkit@8.0.1`
 
 # @gravity-ui/chartkit documentation
 
-Documentation for the **8.0.0** version of `@gravity-ui/chartkit`.
+Documentation for the **8.0.1** version of `@gravity-ui/chartkit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
@@ -119,8 +119,8 @@ export default function App() {
 
 ## Guides
 
-- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.0.0/build/docs/guides/testing.md)
+- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.0.1/build/docs/guides/testing.md)
 
 ---
 
-> Docs for `@gravity-ui/chartkit@8.0.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/chartkit@8.0.1`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.0.1/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

@@ -55,9 +55,9 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/uikit` | `^7.0.0` |
 | `react` | `>=17.0.0` |
 | `react-dom` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
 
 ## Usage
 
