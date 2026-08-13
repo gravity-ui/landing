@@ -1,6 +1,6 @@
 # UIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![npm downloads](https://img.shields.io/npm/dm/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/ci.yml?query=branch:main) [![storybook tests](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/test-storybook.yml?label=Storybook%20Tests&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/test-storybook.yml) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/uikit/)
 
-[English](README.md) | [Русский](README-ru.md)
+[English](README.md) | [Español](README.es.md)
 
 Un conjunto de componentes React flexibles, muy prácticos y eficientes para crear aplicaciones web enriquecidas. Parte del sistema de diseño [Gravity UI](https://gravity-ui.com).
 
@@ -14,12 +14,12 @@ Un conjunto de componentes React flexibles, muy prácticos y eficientes para cre
 
 ## Acerca de
 
-UIKit es el paquete fundamental del sistema de diseño [Gravity UI](https://gravity-ui.com), un conjunto probado en batalla de más de 70 componentes React creados para aplicaciones web de producción. Se encarga de las partes difíciles: temas, accesibilidad, diseño RTL, renderizado del lado del servidor e internacionalización, para que puedas concentrarte en construir tu producto.
+UIKit es el paquete fundamental del sistema de diseño [Gravity UI](https://gravity-ui.com), un conjunto probado en batalla de más de 70 componentes React creados para aplicaciones web de producción. Se encarga de las partes difíciles: temas, accesibilidad, diseño RTL, renderizado del lado del servidor e internacionalización, para que puedas centrarte en construir tu producto.
 
-Características clave:
+Características principales:
 
 - **Más de 70 componentes** — entradas, superposiciones, visualización de datos, primitivas de diseño, retroalimentación y más
-- **Tematización integrada** — variantes claras, oscuras y de alto contraste con una herramienta [Themer](https://gravity-ui.com/themer) en vivo para personalizar tokens
+- **Temas integrados** — variantes claras, oscuras y de alto contraste con una herramienta [Themer](https://gravity-ui.com/themer) en vivo para personalizar tokens
 - **Soporte RTL** — dirección de diseño completa de derecha a izquierda
 
 Explora el catálogo completo de componentes en [Storybook](https://preview.gravity-ui.com/uikit/) o en la [documentación](https://gravity-ui.com/components/uikit/alert).
@@ -38,7 +38,7 @@ npm install @gravity-ui/uikit
 
 ## Uso
 
-Importa componentes directamente desde el paquete:
+Importa los componentes directamente desde el paquete:
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
@@ -66,7 +66,7 @@ También hay disponible un archivo SCSS con [mixins](styles/mixins.scss) con uti
 
 Lee más:
 
-- [Tematización](docs/theming.md) — habilita temas claros, oscuros y de alto contraste
+- [Temas](docs/theming.md) — habilita temas claros, oscuros y de alto contraste
 - [Renderizado del lado del servidor](docs/server-side-rendering.md) — genera la clase CSS raíz en el servidor
 - [Internacionalización](docs/i18n.md) — establece el idioma de los componentes integrados
 
@@ -83,7 +83,7 @@ Otros comandos útiles:
 
 ```shell
 npm test              # ejecuta pruebas unitarias
-npm run lint          # lint JS, SCSS y Markdown
+npm run lint          # revisa JS, SCSS y Markdown
 npm run typecheck     # verificación de tipos de TypeScript
 npm run playwright    # ejecuta pruebas de regresión visual
 ```
@@ -115,9 +115,9 @@ npm run playwright    # ejecuta pruebas de regresión visual
 
 ## Contribuciones
 
-¡Tus contribuciones son bienvenidas! Por favor, lee [CONTRIBUTING.md](CONTRIBUTING.md) antes de enviar una pull request. Para ver las directrices detalladas de las PR, consulta [contribute/pull-request.md](contribute/pull-request.md).
+¡Tus contribuciones son bienvenidas! Por favor, lee [CONTRIBUTING.md](CONTRIBUTING.md) antes de enviar una solicitud de extracción (pull request). Para obtener directrices detalladas sobre las PR, consulta [contribute/pull-request.md](contribute/pull-request.md).
 
-Tenemos [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) colaboradores y seguimos sumando. ¡Únete a nosotros!
+Tenemos [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) colaboradores y contando — ¡únete a nosotros!
 
 Únete a la comunidad en [Telegram](https://t.me/gravity_ui) para preguntas y discusiones.
 
@@ -127,7 +127,7 @@ Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles
 
 ## Para agentes de IA
 
-La biblioteca base de componentes React y tokens de diseño para aplicaciones Gravity UI — controles, entradas, superposiciones, diseño y temas en los que se basa cada otro paquete de `@gravity-ui/*`.
+La biblioteca base de componentes React y tokens de diseño para aplicaciones Gravity UI — controles, entradas, superposiciones, diseño y temas sobre los que se basa cada otro paquete de `@gravity-ui/*`.
 
 ### Cuándo usar
 
@@ -137,23 +137,23 @@ La biblioteca base de componentes React y tokens de diseño para aplicaciones Gr
 
 ### Cuándo no usar
 
-- Cuadrículas de datos con muchas funcionalidades (virtualización, redimensionamiento de columnas, agrupación, reordenación): utiliza [`@gravity-ui/table`](https://github.com/gravity-ui/table), un paquete separado sin cabeza. **No** es lo mismo que el componente `Table` de uikit.
-- Gráficos y visualización de datos: utiliza [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` es el wrapper heredado).
-- Estructuras de navegación de aplicaciones (barra lateral, encabezado, pie de página, logo): utiliza [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
-- Selectores de fecha, calendarios y controles de rango: utiliza [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
-- El conjunto de iconos SVG en sí: utiliza [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit solo distribuye el renderizador `Icon`.
+- Cuadrículas de datos con muchas funciones (virtualización, redimensionamiento de columnas, agrupación, reordenación) — usa [`@gravity-ui/table`](https://github.com/gravity-ui/table), un paquete separado sin cabeza (headless). **No** es lo mismo que el componente `Table` de uikit.
+- Gráficos y visualización de datos — usa [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` es el wrapper heredado).
+- Estructuras de navegación de aplicaciones (barra lateral, encabezado, pie de página, logo) — usa [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Selectores de fecha, calendarios y controles de rango — usa [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- El conjunto de iconos SVG en sí — usa [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit solo distribuye el renderizador `Icon`.
 
 ### Errores comunes
 
 - La prop de estilo de `Button` es `view`, no `variant` o `color`.
-- **Los componentes se renderizan sin estilo sin configuración.** Envuelve la aplicación en `ThemeProvider` **e** importa `@gravity-ui/uikit/styles/styles.css` (además de `fonts.css`) una vez en el punto de entrada; ambos son necesarios.
+- **Los componentes se renderizan sin estilo sin configuración.** Envuelve la aplicación en `ThemeProvider` **e** importa `@gravity-ui/uikit/styles/styles.css` (más `fonts.css`) una vez en el punto de entrada — ambos son necesarios.
 - **`Icon` no tiene prop `name`.** Pasa un componente de icono importado a través de `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
 - Los valores de `theme` son `light | dark | light-hc | dark-hc`. No existe `theme="default"`.
 
 ### Documentación útil
 
 - [Componentes de diseño y espaciado](./docs/layout.md)
-- [Temas, Colores y Branding](./docs/theming.md)
+- [Temas, Colores y Marca](./docs/theming.md)
 - [Tipografía](./docs/typography.md)
 
 ## Documentación para agentes de IA
@@ -164,12 +164,12 @@ La documentación legible por agentes para la versión instalada se encuentra en
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
-    <img alt="Gráfico de Historial de Estrellas" width="600" src="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <img alt="Gráfico de Historial de Estrellas" width="600" src="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
   </picture>
 </div>
 
 ---
 
-Si encuentras útil UIKit, considera darle una ⭐ en [GitHub](https://github.com/gravity-ui/uikit) — ayuda a otros a descubrir el proyecto.
+Si encuentras UIKit útil, considera darle una ⭐ en [GitHub](https://github.com/gravity-ui/uikit) — ayuda a otros a descubrir el proyecto.
