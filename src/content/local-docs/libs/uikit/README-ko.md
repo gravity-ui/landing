@@ -14,15 +14,15 @@
 
 ## 소개
 
-UIKit은 [Gravity UI](https://gravity-ui.com) 디자인 시스템의 기반이 되는 패키지입니다. 70개 이상의 React 컴포넌트로 구성되어 있으며, 실제 프로덕션 웹 애플리케이션에 적용 가능하도록 검증되었습니다. 테마, 접근성, RTL 레이아웃, 서버 사이드 렌더링, 국제화와 같이 복잡한 부분들을 처리해주므로, 여러분은 제품 개발에만 집중할 수 있습니다.
+UIKit은 [Gravity UI](https://gravity-ui.com) 디자인 시스템의 기반이 되는 패키지입니다. 70개 이상의 React 컴포넌트로 구성되어 있으며, 실제 웹 애플리케이션 개발에 검증된 라이브러리입니다. 테마, 접근성, RTL 레이아웃, 서버 사이드 렌더링, 국제화 등 복잡한 부분들을 처리해주므로, 여러분은 제품 개발에만 집중할 수 있습니다.
 
 주요 기능:
 
-- **70개 이상의 컴포넌트**: 입력, 오버레이, 데이터 표시, 레이아웃 기본 요소, 피드백 등 다양한 컴포넌트를 제공합니다.
-- **내장 테마 기능**: 라이트, 다크, 고대비(high-contrast) 테마를 지원하며, [Themer](https://gravity-ui.com/themer) 도구를 통해 토큰을 실시간으로 사용자 정의할 수 있습니다.
-- **RTL 지원**: 완벽한 오른쪽에서 왼쪽으로의 레이아웃 방향을 지원합니다.
+- **70개 이상의 컴포넌트** — 입력, 오버레이, 데이터 표시, 레이아웃 기본 요소, 피드백 등
+- **내장 테마 기능** — 라이트, 다크, 고대비 테마를 지원하며, 토큰을 사용자 정의할 수 있는 실시간 [Themer](https://gravity-ui.com/themer) 도구 제공
+- **RTL 지원** — 완벽한 오른쪽에서 왼쪽 레이아웃 방향 지원
 
-[Storybook](https://preview.gravity-ui.com/uikit/) 또는 [문서](https://gravity-ui.com/components/uikit/alert)에서 전체 컴포넌트 카탈로그를 살펴보세요.
+[Storybook](https://preview.gravity-ui.com/uikit/) 또는 [문서](https://gravity-ui.com/components/uikit/alert)에서 전체 컴포넌트 카탈로그를 확인하세요.
 
 ## 시작하기
 
@@ -88,7 +88,7 @@ npm run typecheck     # TypeScript 타입 검사
 npm run playwright    # 시각적 회귀 테스트 실행
 ```
 
-## 유지보수자
+## 유지보수 담당자
 
 <table>
   <tr>
@@ -123,7 +123,7 @@ npm run playwright    # 시각적 회귀 테스트 실행
 
 ## 라이선스
 
-MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참고하세요.
+MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
 
 ## AI 에이전트용
 
@@ -132,7 +132,7 @@ Gravity UI 앱을 위한 기본 React 컴포넌트 및 디자인 토큰 라이�
 ### 언제 사용해야 할까요?
 
 - 표준 애플리케이션 UI: 버튼, 폼 컨트롤, 모달 및 팝업, 메뉴, 탭, 라벨, 타이포그래피 및 레이아웃 기본 요소.
-- Gravity UI 앱의 테마 기반: `ThemeProvider`, 디자인 토큰, 그리고 `@gravity-ui/*` 생태계의 나머지 부분에서 필요로 하는 CSS 변수.
+- Gravity UI 앱의 테마 기반: `ThemeProvider`, 디자인 토큰, 그리고 `@gravity-ui/*` 생태계의 나머지 부분에서 기대하는 CSS 변수.
 - 내장된 `Table` 컴포넌트를 통한 간단한 테이블 데이터 (선택, 정렬, 행 액션).
 
 ### 언제 사용하지 않아야 할까요?
@@ -164,12 +164,12 @@ Gravity UI 앱을 위한 기본 React 컴포넌트 및 디자인 토큰 라이�
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
-    <img alt="Star History Chart" width="600" src="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <img alt="Star History Chart" width="600" src="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
   </picture>
 </div>
 
 ---
 
-UIKit이 유용하다고 생각하시면, [GitHub](https://github.com/gravity-ui/uikit)에서 ⭐를 눌러주세요 — 다른 사람들이 프로젝트를 발견하는 데 도움이 됩니다.
+UIKit이 유용하다고 생각되시면, [GitHub](https://github.com/gravity-ui/uikit)에서 ⭐를 눌러주세요 — 다른 사람들이 프로젝트를 발견하는 데 도움이 됩니다.

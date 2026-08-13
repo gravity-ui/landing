@@ -22,7 +22,7 @@ Hauptmerkmale:
 - **Integriertes Theming** – Varianten für helle, dunkle und kontrastreiche Modi mit einem Live-Tool [Themer](https://gravity-ui.com/themer) zur Anpassung von Tokens
 - **RTL-Unterstützung** – Vollständige Rechts-nach-links-Layoutrichtung
 
-Durchsuchen Sie den vollständigen Komponenten-Katalog in [Storybook](https://preview.gravity-ui.com/uikit/) oder der [Dokumentation](https://gravity-ui.com/components/uikit/alert).
+Durchsuchen Sie den vollständigen Komponenten-Katalog in [Storybook](https://preview.gravity-ui.com/uikit/) oder in der [Dokumentation](https://gravity-ui.com/components/uikit/alert).
 
 ## Erste Schritte
 
@@ -60,7 +60,7 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-Eine SCSS-Datei mit nützlichen [Mixins](styles/mixins.scss) ist ebenfalls für die Verwendung in Ihren eigenen Stylesheets verfügbar.
+Eine SCSS-Datei mit nützlichen [Mixins](styles/mixins.scss) ist ebenfalls verfügbar, die Sie in Ihren eigenen Stylesheets verwenden können.
 
 ### Anleitungen
 
@@ -127,26 +127,26 @@ Verteilt unter der MIT-Lizenz. Details findest du in [LICENSE](LICENSE).
 
 ## Für KI-Agenten
 
-Die Basis-React-Komponente und die Design-Token-Bibliothek für Gravity UI-Anwendungen – Steuerelemente, Eingaben, Overlays, Layout und Theming, auf denen jedes andere @gravity-ui-Paket aufbaut.
+Die Basis-React-Komponenten und die Design-Token-Bibliothek für Gravity UI-Anwendungen – Steuerelemente, Eingabefelder, Overlays, Layout und Theming, auf denen jedes andere @gravity-ui-Paket aufbaut.
 
 ### Wann verwenden
 
-- Standardmäßige Anwendungs-UI: Buttons, Formularsteuerelemente, Modals und Popups, Menüs, Tabs, Labels, Typografie und Layout-Primitive.
-- Die Theming-Grundlage einer Gravity UI-Anwendung: `ThemeProvider`, Design-Tokens und CSS-Variablen, die der Rest des `@gravity-ui/*`-Ökosystems erwartet.
+- Standard-UI für Anwendungen: Buttons, Formularsteuerelemente, Modals und Popups, Menüs, Tabs, Labels, Typografie und Layout-Primitive.
+- Die Grundlage für das Theming einer Gravity UI-App: `ThemeProvider`, Design-Tokens und CSS-Variablen, die der Rest des `@gravity-ui/*`-Ökosystems erwartet.
 - Einfache tabellarische Daten über die integrierte `Table`-Komponente (Auswahl, Sortierung, Zeilenaktionen).
 
 ### Wann nicht verwenden
 
 - Funktionsreiche Datenraster (Virtualisierung, Spaltenanpassung, Gruppierung, Neuanordnung) – verwende [`@gravity-ui/table`](https://github.com/gravity-ui/table), ein separates Headless-Paket. Es ist **nicht** dasselbe wie die `Table`-Komponente von uikit.
-- Diagramme und Datenvisualisierung – verwende [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` ist der Legacy-Wrapper).
-- Anwendungsnavigationsschalen (Seitenleiste, Kopfzeile, Fußzeile, Logo) – verwende [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Diagramme und Datenvisualisierung – verwende [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` ist der ältere Wrapper).
+- Navigationsschalen für Anwendungen (Seitenleiste, Kopfzeile, Fußzeile, Logo) – verwende [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
 - Datumsauswahlen, Kalender und Bereichssteuerelemente – verwende [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
 - Der SVG-Icon-Satz selbst – verwende [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit liefert nur den `Icon`-Renderer.
 
 ### Häufige Fallstricke
 
-- Der `Button`-Styling-Prop ist `view`, nicht `variant` oder `color`.
-- **Komponenten werden ohne Einrichtung ungestylt gerendert.** Wickle die App in `ThemeProvider` **und** importiere `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) einmal am Einstiegspunkt – beides ist erforderlich.
+- Der `Button`-Styling-Prop heißt `view`, nicht `variant` oder `color`.
+- **Komponenten werden ohne Einrichtung ungestylt gerendert.** Umschließe die App mit `ThemeProvider` **und** importiere `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) einmal am Einstiegspunkt – beides ist erforderlich.
 - **`Icon` hat keinen `name`-Prop.** Übergib eine importierte Icon-Komponente über `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
 - **`theme`-Werte sind `light | dark | light-hc | dark-hc`.** Es gibt kein `theme="default"`.
 
@@ -160,13 +160,13 @@ Die Basis-React-Komponente und die Design-Token-Bibliothek für Gravity UI-Anwen
 
 Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/uikit/build/docs/INDEX.md`.
 
-## Star-Historie
+## Star-Verlauf
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
-    <img alt="Star History Chart" width="600" src="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <img alt="Star History Chart" width="600" src="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
   </picture>
 </div>
 

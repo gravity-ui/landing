@@ -14,7 +14,7 @@
 
 ## About
 
-UIKitは、[Gravity UI](https://gravity-ui.com)デザインシステムの基盤となるパッケージです。本番環境のWebアプリケーション向けに構築された、実証済みの70以上のReactコンポーネントセットです。テーマ設定、アクセシビリティ、RTLレイアウト、サーバーサイドレンダリング、国際化といった難しい部分を処理するため、あなたはプロダクト構築に集中できます。
+UIKitは、[Gravity UI](https://gravity-ui.com)デザインシステムの基盤となるパッケージです。本番環境のWebアプリケーション向けに構築された、70以上のReactコンポーネントからなる実績のあるセットです。テーマ設定、アクセシビリティ、RTLレイアウト、サーバーサイドレンダリング、国際化といった難しい部分を処理するため、あなたはプロダクト構築に集中できます。
 
 主な特徴：
 
@@ -22,7 +22,7 @@ UIKitは、[Gravity UI](https://gravity-ui.com)デザインシステムの基盤
 - **組み込みテーマ設定** — ライト、ダーク、ハイコントラストのバリアントがあり、トークンをカスタマイズするためのライブ[Themer](https://gravity-ui.com/themer)ツールも利用可能
 - **RTLサポート** — 完全な右から左へのレイアウト方向
 
-コンポーネントカタログの全容は、[Storybook](https://preview.gravity-ui.com/uikit/)または[ドキュメント](https://gravity-ui.com/components/uikit/alert)でご覧ください。
+[Storybook](https://preview.gravity-ui.com/uikit/)または[ドキュメント](https://gravity-ui.com/components/uikit/alert)で、完全なコンポーネントカタログを参照してください。
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ npm install @gravity-ui/uikit
 
 ## Usage
 
-パッケージから直接コンポーネントをインポートします：
+パッケージから直接コンポーネントをインポートします。
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
@@ -52,7 +52,7 @@ const SubmitButton = (
 
 ### Styles
 
-ベーススタイルとフォントは、アプリのエントリーポイントの先頭に一度だけ含めてください：
+アプリのエントリポイントの先頭に、ベーススタイルとフォントを一度だけ含めてください。
 
 ```js
 // index.js
@@ -115,9 +115,9 @@ npm run playwright    # ビジュアルリグレッションテストを実行�
 
 ## 貢献について
 
-貢献を歓迎します！プルリクエストを送信する前に、[CONTRIBUTING.md](CONTRIBUTING.md) をお読みください。詳細な PR ガイドラインについては、[contribute/pull-request.md](contribute/pull-request.md) を参照してください。
+貢献を歓迎します！プルリクエストを送信する前に、[CONTRIBUTING.md](CONTRIBUTING.md) をお読みください。詳細なプルリクエストガイドラインについては、[contribute/pull-request.md](contribute/pull-request.md) を参照してください。
 
-現在 [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) 人のコントリビューターがいます — あなたも参加しませんか！
+現在 [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) 人の貢献者がいます。ぜひ参加してください！
 
 質問やディスカッションは、[Telegram](https://t.me/gravity_ui) コミュニティでどうぞ。
 
@@ -125,51 +125,51 @@ npm run playwright    # ビジュアルリグレッションテストを実行�
 
 MIT License に基づいて配布されています。詳細については [LICENSE](LICENSE) を参照してください。
 
-## AI エージェント向け
+## AIエージェント向け情報
 
-Gravity UI アプリケーションのベースとなる React コンポーネントおよびデザイン トークン ライブラリ — 他のすべての @gravity-ui パッケージが構築される基盤となるコントロール、入力、オーバーレイ、レイアウト、およびテーマ設定を提供します。
+Gravity UI アプリケーションのベースとなる React コンポーネントおよびデザイン・トークンライブラリです。他のすべての `@gravity-ui/*` パッケージが依存する、コントロール、インプット、オーバーレイ、レイアウト、およびテーマ設定を提供します。
 
-### 使用するケース
+### 使用すべき場合
 
-- 標準的なアプリケーション UI: ボタン、フォーム コントロール、モーダルとポップアップ、メニュー、タブ、ラベル、タイポグラフィ、レイアウトのプリミティブ。
-- Gravity UI アプリのテーマ設定の基盤: `ThemeProvider`、デザイン トークン、および `@gravity-ui/*` エコシステムの他の部分が期待する CSS 変数。
-- 組み込みの `Table` コンポーネントを使用したシンプルな表形式データ（選択、ソート、行アクション）。
+- 標準的なアプリケーション UI: ボタン、フォームコントロール、モーダルおよびポップアップ、メニュー、タブ、ラベル、タイポグラフィ、レイアウトプリミティブ。
+- Gravity UI アプリケーションのテーマ設定の基盤: `ThemeProvider`、デザイン・トークン、および `@gravity-ui/*` エコシステムの他の部分が期待する CSS 変数。
+- 内蔵の `Table` コンポーネントを使用したシンプルな表形式データ（選択、ソート、行アクション）。
 
-### 使用しないケース
+### 使用すべきでない場合
 
-- 機能豊富なデータ グリッド（仮想化、列リサイズ、グループ化、再配置） — ヘッドレスの独立したパッケージである [`@gravity-ui/table`](https://github.com/gravity-ui/table) を使用してください。これは uikit の `Table` コンポーネントとは**異なります**。
-- チャートとデータ可視化 — [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) を使用してください（`@gravity-ui/chartkit` はレガシー ラッパーです）。
-- アプリケーション ナビゲーション シェル（ヘッダー、フッター、ロゴの横） — [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation) を使用してください。
-- 日付ピッカー、カレンダー、範囲コントロール — [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components) を使用してください。
-- SVG アイコン セット自体 — [`@gravity-ui/icons`](https://github.com/gravity-ui/icons) を使用してください。uikit は `Icon` レンダラーのみを提供します。
+- 機能豊富なデータグリッド（仮想化、列リサイズ、グループ化、並べ替え） — ヘッドレスの独立したパッケージである [`@gravity-ui/table`](https://github.com/gravity-ui/table) を使用してください。これは uikit の `Table` コンポーネントとは**異なります**。
+- チャートおよびデータ可視化 — [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) を使用してください（`@gravity-ui/chartkit` はレガシーラッパーです）。
+- アプリケーションナビゲーションシェル（サイドヘッダー、フッター、ロゴ） — [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation) を使用してください。
+- 日付ピッカー、カレンダー、および範囲コントロール — [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components) を使用してください。
+- SVG アイコンセット自体 — [`@gravity-ui/icons`](https://github.com/gravity-ui/icons) を使用してください。uikit は `Icon` レンダラーのみを提供します。
 
 ### よくある落とし穴
 
-- `Button` のスタイリング プロパティは `view` であり、`variant` や `color` ではありません。
-- **コンポーネントはセットアップなしではスタイルが適用されずにレンダリングされます。** アプリを `ThemeProvider` でラップし、エントリ ポイントで `@gravity-ui/uikit/styles/styles.css`（および `fonts.css`）を一度インポートしてください — 両方が必要です。
-- **`Icon` には `name` プロップがありません。** インポートしたアイコン コンポーネントを `data` を介して渡してください: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
-- **`theme` の値は `light | dark | light-hc | dark-hc` です。** `theme="default"` はありません。
+- `Button` のスタイリングプロパティは `view` であり、`variant` や `color` ではありません。
+- **コンポーネントはセットアップなしではスタイルが適用されずにレンダリングされます。** アプリケーションを `ThemeProvider` でラップし、**かつ** エントリーポイントで `@gravity-ui/uikit/styles/styles.css`（および `fonts.css`）を一度インポートしてください。両方が必要です。
+- **`Icon` には `name` プロパティがありません。** インポートしたアイコンコンポーネントを `data` プロパティ経由で渡してください: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
+- **`theme` の値は `light | dark | light-hc | dark-hc` です。** `theme="default"` は存在しません。
 
 ### 役立つドキュメント
 
-- [レイアウト コンポーネントとスペーシング](./docs/layout.md)
+- [レイアウトコンポーネントとスペーシング](./docs/layout.md)
 - [テーマ設定、色 & ブランド](./docs/theming.md)
 - [タイポグラフィ](./docs/typography.md)
 
-## AI エージェント向けドキュメント
+## AIエージェント向けドキュメント
 
-インストールされているバージョンのエージェント読み取り可能なドキュメントは、`node_modules/@gravity-ui/uikit/build/docs/INDEX.md` にあります。
+インストールされているバージョンのエージェント可読ドキュメントは、`node_modules/@gravity-ui/uikit/build/docs/INDEX.md` にあります。
 
 ## スター履歴
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
-    <img alt="Star History Chart" width="600" src="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <img alt="Star History Chart" width="600" src="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
   </picture>
 </div>
 
 ---
 
-UIKit が役立つと感じた場合は、[GitHub](https://github.com/gravity-ui/uikit) で ⭐ を付けていただけると幸いです — プロジェクトの発見に役立ちます。
+UIKit が役立つと感じた場合は、[GitHub](https://github.com/gravity-ui/uikit) で ⭐ を付けていただけると幸いです。プロジェクトが他の人に発見される助けになります。

@@ -16,9 +16,9 @@ Un ensemble de composants React flexibles, très pratiques et performants pour c
 
 UIKit est le package fondamental du système de design [Gravity UI](https://gravity-ui.com) — un ensemble éprouvé de plus de 70 composants React conçus pour les applications web en production. Il gère les aspects complexes : thèmes, accessibilité, disposition RTL, rendu côté serveur et internationalisation, vous permettant ainsi de vous concentrer sur la création de votre produit.
 
-Caractéristiques principales :
+Fonctionnalités clés :
 
-- **Plus de 70 composants** — champs de saisie, fenêtres modales, affichage de données, primitives de mise en page, retours d'information, et plus encore.
+- **Plus de 70 composants** — champs de saisie, superpositions, affichage de données, primitives de mise en page, retours d'information, et plus encore.
 - **Thèmes intégrés** — variantes claires, sombres et à fort contraste avec un outil [Themer](https://gravity-ui.com/themer) interactif pour personnaliser les jetons.
 - **Support RTL** — direction de mise en page complète de droite à gauche.
 
@@ -60,11 +60,11 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-Un fichier SCSS avec des [mixins](styles/mixins.scss) utiles est également disponible pour être utilisé dans vos propres feuilles de style.
+Un fichier SCSS de [mixins](styles/mixins.scss) avec des utilitaires utiles est également disponible pour être utilisé dans vos propres feuilles de style.
 
 ### Guides
 
-Pour en savoir plus :
+En savoir plus :
 
 - [Thèmes](docs/theming.md) — activez les thèmes clair, sombre et à fort contraste.
 - [Rendu côté serveur](docs/server-side-rendering.md) — générez la classe CSS racine côté serveur.
@@ -164,9 +164,9 @@ La documentation lisible par agent pour la version installée se trouve dans `no
 
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
-    <img alt="Graphique d'historique des étoiles" width="600" src="https://api.star-history.com/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <img alt="Graphique d'historique des étoiles" width="600" src="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
   </picture>
 </div>
 
