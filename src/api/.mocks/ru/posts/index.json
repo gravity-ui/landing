@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1767,
+      "name": "farm",
+      "date": "2026-07-30T00:00:00Z",
+      "title": "Опенсорсная Весёлая Ферма: поднимаем preview‑окружения без боли",
+      "postId": 1767,
+      "description": "Как Ферма выросла из self‑hosted‑скрипта на одной виртуалке в оркестратор preview‑окружений на Docker и Kubernetes — и почему мы открыли её код.",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/farm/pic1.png",
+      "readingTime": 18,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Статьи"
+        }
+      ],
+      "services": [],
+      "url": "/blog/farm"
+    },
+    {
       "id": 1765,
       "name": "datalens-highcharts",
       "date": "2026-03-27T00:00:00Z",
@@ -217,7 +241,7 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 18,
+  "totalCount": 19,
   "count": 7,
   "pinnedPost": {
     "id": 1766,

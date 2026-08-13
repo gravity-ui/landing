@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1767,
+      "name": "farm",
+      "date": "2026-07-30T00:00:00Z",
+      "title": "Farm Goes Open Source: Preview Environments Without the Pain",
+      "postId": 1767,
+      "description": "How Farm grew from a self-hosted script on a single VM into a Docker and Kubernetes orchestrator for preview environments — and why we open-sourced it.",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/farm/pic1.png",
+      "readingTime": 18,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "Articles"
+        }
+      ],
+      "services": [],
+      "url": "/blog/farm"
+    },
+    {
       "id": 1765,
       "name": "datalens-highcharts",
       "date": "2026-03-27T00:00:00Z",
@@ -217,7 +241,7 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 18,
+  "totalCount": 19,
   "count": 7,
   "pinnedPost": {
     "id": 1766,

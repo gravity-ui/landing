@@ -1,6 +1,30 @@
 {
   "posts": [
     {
+      "id": 1767,
+      "name": "farm",
+      "date": "2026-07-30T00:00:00Z",
+      "title": "Farm がオープンソースに：手間いらずのプレビュー環境",
+      "postId": 1767,
+      "description": "Farm が 1 台の VM 上のセルフホスト・スクリプトから Docker と Kubernetes 上のプレビュー環境オーケストレーターへ成長した経緯と、コードを公開した理由。",
+      "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/farm/pic1.png",
+      "readingTime": 18,
+      "likes": 0,
+      "hasUserLike": false,
+      "hasPublishedVersionInRegion": true,
+      "hasPublishedVersionInLocale": false,
+      "addLegacyPrefix": false,
+      "tags": [
+        {
+          "icon": null,
+          "slug": "articles",
+          "name": "記事"
+        }
+      ],
+      "services": [],
+      "url": "/blog/farm"
+    },
+    {
       "id": 1765,
       "name": "datalens-highcharts",
       "date": "2026-03-27T00:00:00Z",
@@ -217,7 +241,7 @@
       "url": "/blog/gravity-ui-in-opensource"
     }
   ],
-  "totalCount": 18,
+  "totalCount": 19,
   "count": 7,
   "pinnedPost": {
     "id": 1766,
