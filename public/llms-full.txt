@@ -3385,13 +3385,13 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@diplodoc/transform` | `^4.63.3` |
+| `react` | `^18.0.0 || ^19.0.0` |
+| `react-dom` | `^18.0.0 || ^19.0.0` |
+| `highlight.js` | `^11.11.1` |
 | `@gravity-ui/i18n` | `^1.8.0` |
 | `@gravity-ui/icons` | `^2.16.0` |
 | `@gravity-ui/uikit` | `^7.25.0` |
-| `highlight.js` | `^11.11.1` |
-| `react` | `^18.0.0 || ^19.0.0` |
-| `react-dom` | `^18.0.0 || ^19.0.0` |
+| `@diplodoc/transform` | `^4.63.3` |
 
 ## Usage
 
@@ -32449,11 +32449,11 @@ Need something specific? Yagr presents some useful examples in the [demo/example
 
 ---
 
-> Generated for `@gravity-ui/nodekit@2.16.2`
+> Generated for `@gravity-ui/nodekit@2.17.0`
 
 # @gravity-ui/nodekit documentation
 
-Documentation for the **2.16.2** version of `@gravity-ui/nodekit`.
+Documentation for the **2.17.0** version of `@gravity-ui/nodekit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/nodekit/dist/docs/`).
@@ -32513,92 +32513,15 @@ nodekit.ctx.log('App is ready');
 
 ## Guides
 
-- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
-- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
-- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
-- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
-- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.16.2/dist/docs/guides/telemetry.md)
+- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.17.0/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
+- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.17.0/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
+- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.17.0/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
+- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.17.0/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
+- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.17.0/dist/docs/guides/telemetry.md)
 
 ---
 
-> Docs for `@gravity-ui/nodekit@2.16.2`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.16.2/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/nodekit@2.16.1`
-
-# @gravity-ui/nodekit documentation
-
-Documentation for the **2.16.1** version of `@gravity-ui/nodekit`.
-Your training data may be outdated — these files are the source of truth.
-
-Paths are relative to this file (`node_modules/@gravity-ui/nodekit/dist/docs/`).
-
-## For AI agents
-
-A foundational Node.js toolkit (logging, telemetry, typed errors, config, request contexts) shared across Gravity UI backends — reach for it to get a consistent app spine before adding any HTTP layer, instead of assembling logging/error/config plumbing yourself.
-
-### When to use
-
-- Any Node.js service/script that wants shared logging, telemetry (tracing), and a typed `AppError`.
-- Providing request-scoped context (logs/traces) across async boundaries.
-- Centralizing configuration so multiple services in the same ecosystem behave consistently.
-
-### When not to use
-
-- To expose HTTP routes, middleware, or a server, use [`@gravity-ui/expresskit`](https://github.com/gravity-ui/expresskit) — it builds on top of NodeKit and adds the Express/HTTP layer.
-- For a standalone, single-file script with no logging/telemetry needs, plain Node APIs are lighter than the full NodeKit context system.
-
-### Common pitfalls
-
-- **Hallucinating `import {Logger}` / `logger`** — logging is reached through the NodeKit context: `new NodeKit()` then `nodekit.ctx.log(...)`, not a standalone logger export.
-- **Instantiating NodeKit repeatedly** — create one `NodeKit` instance per app and share its `ctx`; creating many instances fragments logging/telemetry config.
-- **Throwing plain `Error`** — use the bundled `AppError` (see `docs/app-error.md`) so error codes and telemetry are captured consistently.
-- **Skipping config initialization** — NodeKit reads configuration on construction; review `docs/configuration.md` before assuming defaults.
-
-## Install
-
-```bash
-npm install --save @gravity-ui/nodekit
-```
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `axios` | `^1.7.7` |
-
-## Usage
-
-Add dependency to your project:
-
-```bash
-npm install --save @gravity-ui/nodekit
-```
-
-And then import and init NodeKit in your application:
-
-```typescript
-import {NodeKit} from '@gravity-ui/nodekit';
-
-const nodeKit = new NodeKit();
-nodekit.ctx.log('App is ready');
-```
-
-## Guides
-
-- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
-- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
-- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
-- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
-- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.16.1/dist/docs/guides/telemetry.md)
-
----
-
-> Docs for `@gravity-ui/nodekit@2.16.1`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.16.1/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/nodekit@2.17.0`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.17.0/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -33256,79 +33179,6 @@ nodekit.ctx.log('App is ready');
 ---
 
 > Docs for `@gravity-ui/nodekit@2.8.0`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.8.0/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/nodekit@2.7.0`
-
-# NodeKit
-
-> A foundational Node.js toolkit (logging, telemetry, typed errors, config, request contexts) shared across Gravity UI backends — reach for it to get a consistent app spine before adding any HTTP layer, instead of assembling logging/error/config plumbing yourself.
->
-> **npm:** `@gravity-ui/nodekit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```bash
-npm install --save @gravity-ui/nodekit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `axios` | `^1.7.7` |
-
-## Usage
-
-Add dependency to your project:
-
-```bash
-npm install --save @gravity-ui/nodekit
-```
-
-And then import and init NodeKit in your application:
-
-```typescript
-import {NodeKit} from '@gravity-ui/nodekit';
-
-const nodeKit = new NodeKit();
-nodekit.ctx.log('App is ready');
-```
-
-
-### When to use
-
-- Any Node.js service/script that wants shared logging, telemetry (tracing), and a typed `AppError`.
-- Providing request-scoped context (logs/traces) across async boundaries.
-- Centralizing configuration so multiple services in the same ecosystem behave consistently.
-
-### When not to use
-
-- To expose HTTP routes, middleware, or a server, use [`@gravity-ui/expresskit`](https://github.com/gravity-ui/expresskit) — it builds on top of NodeKit and adds the Express/HTTP layer.
-- For a standalone, single-file script with no logging/telemetry needs, plain Node APIs are lighter than the full NodeKit context system.
-
-### Common pitfalls
-
-- **Hallucinating `import {Logger}` / `logger`** — logging is reached through the NodeKit context: `new NodeKit()` then `nodekit.ctx.log(...)`, not a standalone logger export.
-- **Instantiating NodeKit repeatedly** — create one `NodeKit` instance per app and share its `ctx`; creating many instances fragments logging/telemetry config.
-- **Throwing plain `Error`** — use the bundled `AppError` (see `docs/app-error.md`) so error codes and telemetry are captured consistently.
-- **Skipping config initialization** — NodeKit reads configuration on construction; review `docs/configuration.md` before assuming defaults.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/nodekit/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/nodekit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/nodekit)
-
----
-
-> Docs for `@gravity-ui/nodekit@2.7.0`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.7.0/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -36920,11 +36770,11 @@ will be rendered as:
 
 ---
 
-> Generated for `@gravity-ui/navigation@6.4.0`
+> Generated for `@gravity-ui/navigation@6.4.1`
 
 # @gravity-ui/navigation documentation
 
-Documentation for the **6.4.0** version of `@gravity-ui/navigation`.
+Documentation for the **6.4.1** version of `@gravity-ui/navigation`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/navigation/build/docs/`).
@@ -36976,6 +36826,117 @@ Install these in the host project at a compatible version:
 | `@gravity-ui/uikit` | `^7.42.0` |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
+## Usage
+
+Render `AsideHeader` as the app shell. It is a controlled component — you own the collapsed state via `compact`/`onChangeCompact` — and your page content goes through `renderContent`. Set up `@gravity-ui/uikit` styles and `ThemeProvider` first (see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+
+```tsx
+import React from 'react';
+import {AsideHeader} from '@gravity-ui/navigation';
+import {Gear, House} from '@gravity-ui/icons';
+import {ThemeProvider} from '@gravity-ui/uikit';
+
+import '@gravity-ui/uikit/styles/styles.css';
+
+export function App() {
+  const [compact, setCompact] = React.useState(false);
+
+  return (
+    <ThemeProvider theme="light">
+      <AsideHeader
+        logo={{text: 'My App', href: '/'}}
+        compact={compact}
+        onChangeCompact={setCompact}
+        menuItems={[
+          {id: 'home', title: 'Home', icon: House, current: true},
+          {id: 'settings', title: 'Settings', icon: Gear},
+        ]}
+        renderContent={() => <main>Page content</main>}
+      />
+    </ThemeProvider>
+  );
+}
+```
+
+## Components
+
+- [ActionBar](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/ActionBar.md) — The component is a flexible horizontal bar that provides a standardized layout for arranging navigation elements, actions, and informational content within an application. It serves as a container for organizing UI elements like breadcrumbs, buttons, and dropdown menus into defined sections and groups.
+- [AsideHeader](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/AsideHeader.md) — AsideHeader is provided a flexible and customizable navigation experience within your application. Users can easily customize the appearance of the sidebar to match their branding colors also to add personalized links, icons that cater specifically to their application's functionality.
+- [AsideHeader/components/AllPagesPanel](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/AsideHeader/components/AllPagesPanel.md) — A navigation panel for managing and organizing application pages in the middle (menuItems) section of AsideHeader component. Panel provides drag-and-drop reordering, visibility toggles, pin/unpin and category grouping of menu items.
+- [Footer](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/Footer.md) — The page footer components. Use Footer for the desktop version and MobileFooter for the mobile version. Both components have the same properties.
+- [HotkeysPanel](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/HotkeysPanel.md) — A navigation panel for hotkeys documentation. The panel displays a set of hotkeys for your application with a description of their purpose.
+- [Logo](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/Logo.md) — Logo icon is wrapped in UIKit Button, text is wrapped in HTML tag a or div, when passing hasWrapper prop.
+- [MobileHeader](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/MobileHeader.md) — Header for Mobile navigation. MobileHeader provides maintaining Panels except for Modals.
+- [Settings](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/components/Settings.md) — The Settings component provides the layout for a settings panel with the following features.
+
+## Hooks
+
+- [useOverflowingHorizontalListItems](https://unpkg.com/@gravity-ui/navigation@6.4.1/build/docs/hooks/useOverflowingHorizontalListItems.md) — A hook for determining which horizontal list items stay visible and which collapse into an overflow "more" dropdown.
+
+---
+
+> Docs for `@gravity-ui/navigation@6.4.1`. Versioned at: `https://gravity-ui.com/llms/navigation/6.4.1/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/6/llms.txt` (latest of major 6), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/navigation@6.4.0`
+
+# @gravity-ui/navigation documentation
+
+Documentation for the **6.4.0** version of `@gravity-ui/navigation`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/navigation/build/docs/`).
+
+## For AI agents
+
+Application-shell navigation components for Gravity UI apps — the collapsible `AsideHeader` sidebar plus footers, drawers, logo, hotkeys and settings panels that frame a whole page.
+
+### When to use
+
+- The app's primary navigation frame: `AsideHeader` (collapsible side navigation) with `menuItems`, subheader, and footer sections.
+- Supporting shell UI: `Drawer`/`DrawerItem`, `Footer`/`MobileFooter`, `MobileHeader`, `HotkeysPanel`, `Settings`, `ActionBar`, `Logo`.
+- Laying out page content inside the navigation frame via `renderContent` / `PageLayout`.
+
+### When not to use
+
+- Generic in-page controls (buttons, tabs, menus, breadcrumbs) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); this package is the outer app chrome, not general components.
+- Rendering the page body itself from config — use [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
+- Client-side routing — this provides the navigation UI only; wire clicks to your own router.
+
+### Common pitfalls
+
+- **`AsideHeader` is controlled.** You must own the collapsed state with `compact` and update it in `onChangeCompact`; passing `compact` without the handler freezes the sidebar.
+- **Menu items are `menuItems`, keyed by `id`.** Each item is `{id, title, icon, current, onItemClick}`; `icon` takes an icon component (e.g. from `@gravity-ui/icons`), not a string name.
+- **Peer dependencies are required.** `@gravity-ui/uikit`, `@gravity-ui/icons`, and `@bem-react/classname` must be installed alongside `react`/`react-dom`.
+- **Needs uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`, or the shell renders unstyled.
+- **Page content goes through `renderContent`.** Render your routed content via the `renderContent` prop / `PageLayout`, not as `children`.
+
+## Install
+
+```bash
+npm install @gravity-ui/navigation
+```
+
+Ensure that peer dependencies are installed in your project
+
+```bash
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/icons` | `^2.2.0` |
+| `@gravity-ui/uikit` | `^7.42.0` |
+| `@bem-react/classname` | `^1.6.0` |
 
 ## Usage
 
