@@ -13,6 +13,7 @@ module.exports = {
         '/sitemap.xml',
         '/robots.txt',
         '/analytics.txt',
+        '/context7.json',
         '/index-social.png',
     ],
 };
