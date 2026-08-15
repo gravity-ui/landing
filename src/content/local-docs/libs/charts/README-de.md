@@ -75,14 +75,14 @@ Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Lini
 
 ### Wann nicht verwenden
 
-- Projekte, die noch `@gravity-ui/chartkit` verwenden – dies ist der ältere Adapter-basierte Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne eigenständige Renderer und kein direkter Ersatz.
+- Projekte, die noch `@gravity-ui/chartkit` verwenden – das ist der ältere, Adapter-basierte Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne, eigenständige Renderer und kein direkter Ersatz.
 - Reine Tabellendaten – verwenden Sie [`@gravity-ui/table`](https://github.com/gravity-ui/table).
 - Nicht-React- oder reine Server-Rendering – `Chart` rendert React SVG und benötigt das DOM.
 
 ### Häufige Fallstricke
 
-- **Die Komponente ist `Chart`, nicht `ChartKit`.** Importieren Sie `{Chart}` aus `@gravity-ui/charts`; `ChartKit` gehört zum separaten Legacy-Paket `@gravity-ui/chartkit`.
-- **Die `data`-Prop ist `data`, strukturiert als `{series: {data: [...]}}`.** Jeder Eintrag in `series.data` ist eine Serie mit eigenem `type` und eigener `data`-Array – es gibt kein Array von Serien auf oberster Ebene.
+- **Die Komponente heißt `Chart`, nicht `ChartKit`.** Importieren Sie `{Chart}` aus `@gravity-ui/charts`; `ChartKit` gehört zum separaten Legacy-Paket `@gravity-ui/chartkit`.
+- **Die `data`-Prop ist `data`, strukturiert als `{series: {data: [...]}}`.** Jeder Eintrag in `series.data` ist eine Serie mit ihrem eigenen `type` und einer `data`-Array – es gibt kein Array von Serien auf oberster Ebene.
 - **Ohne einen dimensionierten Container wird nichts gerendert.** `Chart` füllt seinen übergeordneten Container, geben Sie dem Wrapper also eine explizite Höhe.
 - **Erfordert uikit-Setup.** Umschließen Sie mit `ThemeProvider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` ist eine erforderliche Peer-Abhängigkeit.
 
@@ -95,7 +95,8 @@ Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Lini
 - [HTML-Inhalt](./docs/diplodoc/pages/guides/html.md)
 - [Wertformatierung](./docs/diplodoc/pages/guides/value-formatting.md)
 - [Datenbeschriftungen](./docs/diplodoc/pages/guides/data-labels.md)
-- [Achsentypen](./docs/diplodoc/pages/guides/axis-types.md)
+- [Achsentypen](./docs/diplodoc/pages/guides/axes/axis-types.md)
+- [Achsenbeschriftungen](./docs/diplodoc/pages/guides/axes/axis-labels.md)
 
 ## Dokumentation für KI-Agenten
 
