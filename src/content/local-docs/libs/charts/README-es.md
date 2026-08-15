@@ -1,6 +1,6 @@
 # Gravity UI Charts · [![npm package](https://img.shields.io/npm/v/@gravity-ui/charts)](https://www.npmjs.com/package/@gravity-ui/charts) [![License](https://img.shields.io/github/license/gravity-ui/charts)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/charts/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/charts/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/charts/)
 
-Librería de gráficos React con más de 10 tipos de gráficos: área, barras, línea, pastel, dispersión, treemap y más.
+Librería de gráficos React con más de 10 tipos de gráficos: de área, de barras, de líneas, circulares, de dispersión, de árbol, y más.
 
 ## Instalación
 
@@ -8,11 +8,11 @@ Librería de gráficos React con más de 10 tipos de gráficos: área, barras, l
 npm install @gravity-ui/uikit @gravity-ui/charts
 ```
 
-`@gravity-ui/uikit` es una dependencia peer requerida; proporciona la tematización y los estilos de los que dependen los gráficos.
+`@gravity-ui/uikit` es una dependencia peer requerida — proporciona la tematización y los estilos de los que dependen los gráficos.
 
 ## Uso
 
-Importa los estilos de `@gravity-ui/uikit` una vez en tu punto de entrada, envuelve tu aplicación en `ThemeProvider` y renderiza un `Chart` dentro de un contenedor con una altura explícita:
+Importa los estilos de `@gravity-ui/uikit` una vez en tu punto de entrada, envuelve tu aplicación en `ThemeProvider`, y renderiza un `Chart` dentro de un contenedor con una altura explícita:
 
 ```tsx
 import {ThemeProvider} from '@gravity-ui/uikit';
@@ -49,7 +49,7 @@ export default function App() {
 }
 ```
 
-`Chart` se adapta al tamaño de su contenedor padre, por lo que el elemento envolvente debe tener una altura definida.
+`Chart` se adapta al tamaño de su padre, por lo que el elemento contenedor debe tener una altura definida.
 
 ## Documentación
 
@@ -61,29 +61,29 @@ export default function App() {
 
 ## Licencia
 
-Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles.
+Distribuido bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
 
 ## Para agentes de IA
 
-Una librería declarativa de gráficos React para aplicaciones Gravity UI; renderiza gráficos de línea, área, barras, pastel, dispersión, treemap y otros a partir de una única configuración `data`, tematizada para que coincida con el resto de la aplicación.
+Una librería declarativa de gráficos React para aplicaciones Gravity UI — renderiza gráficos de líneas, áreas, barras, circulares, de dispersión, de árbol y otros a partir de una única configuración `data`, tematizados para coincidir con el resto de la aplicación.
 
-### Cuándo usarla
+### Cuándo usar
 
 - Gráficos empresariales estándar: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
 - Visualizaciones que deben seguir la tematización de Gravity UI (clara/oscura) y compartir tokens con una aplicación `@gravity-ui/uikit`.
 - Renderizar un gráfico a partir de datos declarativos en lugar de dibujarlo imperativamente.
 
-### Cuándo no usarla
+### Cuándo no usar
 
-- Proyectos que aún usan `@gravity-ui/chartkit`; ese es el antiguo wrapper basado en adaptadores (YAGR/Highcharts/D3); este paquete es el renderizador independiente moderno y no es un reemplazo directo.
-- Datos tabulares simples; usa [`@gravity-ui/table`](https://github.com/gravity-ui/table).
-- Renderizado no-React o solo del lado del servidor; `Chart` renderiza SVG en React y necesita el DOM.
+- Proyectos que aún usan `@gravity-ui/chartkit` — ese es el antiguo wrapper basado en adaptadores (YAGR/Highcharts/D3); este paquete es el renderizador independiente moderno y no es un reemplazo directo.
+- Datos tabulares simples — usa [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Renderizado no-React o solo del lado del servidor — `Chart` renderiza SVG de React y necesita el DOM.
 
 ### Errores comunes
 
-- **El componente es `Chart`, no `ChartKit`.** Importa `{Chart}` desde `@gravity-ui/charts`; `ChartKit` pertenece al paquete independiente heredado `@gravity-ui/chartkit`.
-- **La prop `data` es `data`, con la forma `{series: {data: [...]}}`.** Cada entrada en `series.data` es una serie con su propio `type` y array `data`; no hay un array de series de nivel superior.
-- **Nada se renderiza sin un contenedor con tamaño.** `Chart` llena su contenedor padre, así que dale al envoltorio una altura explícita.
+- **El componente es `Chart`, no `ChartKit`.** Importa `{Chart}` desde `@gravity-ui/charts`; `ChartKit` pertenece al paquete legado separado `@gravity-ui/chartkit`.
+- **La prop `data` es `data`, con forma `{series: {data: [...]}}`.** Cada entrada en `series.data` es una serie con su propio `type` y array `data` — no hay un array de series de nivel superior.
+- **Nada se renderiza sin un contenedor con tamaño.** `Chart` llena su padre, así que dale al contenedor un tamaño explícito.
 - **Requiere configuración de uikit.** Envuelve en `ThemeProvider` e importa `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` es una dependencia peer requerida.
 
 ### Documentación útil
@@ -95,7 +95,8 @@ Una librería declarativa de gráficos React para aplicaciones Gravity UI; rende
 - [Contenido HTML](./docs/diplodoc/pages/guides/html.md)
 - [Formato de valores](./docs/diplodoc/pages/guides/value-formatting.md)
 - [Etiquetas de datos](./docs/diplodoc/pages/guides/data-labels.md)
-- [Tipos de ejes](./docs/diplodoc/pages/guides/axis-types.md)
+- [Tipos de ejes](./docs/diplodoc/pages/guides/axes/axis-types.md)
+- [Etiquetas de ejes](./docs/diplodoc/pages/guides/axes/axis-labels.md)
 
 ## Documentación para agentes de IA
 

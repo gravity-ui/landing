@@ -8,7 +8,7 @@ Biblioteca de gráficos React com mais de 10 tipos de gráficos: área, barra, l
 npm install @gravity-ui/uikit @gravity-ui/charts
 ```
 
-`@gravity-ui/uikit` é uma dependência peer obrigatória — ela fornece a temática e os estilos dos quais os gráficos dependem.
+`@gravity-ui/uikit` é uma dependência peer obrigatória — ela fornece os temas e estilos dos quais os gráficos dependem.
 
 ## Uso
 
@@ -75,7 +75,7 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 
 ### Quando não usar
 
-- Projetos ainda em `@gravity-ui/chartkit` — esse é o wrapper mais antigo baseado em adaptadores (YAGR/Highcharts/D3); este pacote é o renderizador independente moderno e não é um substituto direto.
+- Projetos ainda com `@gravity-ui/chartkit` — esse é o wrapper mais antigo baseado em adaptadores (YAGR/Highcharts/D3); este pacote é o renderizador independente moderno e não é um substituto direto.
 - Dados tabulares simples — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
 - Renderização não-React ou apenas no servidor — `Chart` renderiza SVG React e precisa do DOM.
 
@@ -89,13 +89,14 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 ### Documentos úteis
 
 - [Começando](./docs/diplodoc/pages/get-started.md)
-- [Temática](./docs/diplodoc/pages/guides/theming.md)
+- [Tematização](./docs/diplodoc/pages/guides/theming.md)
 - [Tooltip](./docs/diplodoc/pages/guides/tooltip.md)
 - [Legenda](./docs/diplodoc/pages/guides/legend.md)
 - [Conteúdo HTML](./docs/diplodoc/pages/guides/html.md)
 - [Formatação de Valor](./docs/diplodoc/pages/guides/value-formatting.md)
 - [Rótulos de Dados](./docs/diplodoc/pages/guides/data-labels.md)
-- [Tipos de Eixo](./docs/diplodoc/pages/guides/axis-types.md)
+- [Tipos de Eixo](./docs/diplodoc/pages/guides/axes/axis-types.md)
+- [Rótulos de Eixo](./docs/diplodoc/pages/guides/axes/axis-labels.md)
 
 ## Documentação para agentes de IA
 
