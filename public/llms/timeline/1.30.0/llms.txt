@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/timeline@1.29.1`
+> Generated for `@gravity-ui/timeline@1.30.0`
 
 # Timeline
 
@@ -184,4 +184,4 @@ const MyTimelineComponent = () => {
 
 ---
 
-> Docs for `@gravity-ui/timeline@1.29.1`. Versioned at: `https://gravity-ui.com/llms/timeline/1.29.1/llms.txt` (exact), `https://gravity-ui.com/llms/timeline/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/timeline/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/timeline@1.30.0`. Versioned at: `https://gravity-ui.com/llms/timeline/1.30.0/llms.txt` (exact), `https://gravity-ui.com/llms/timeline/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/timeline/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
