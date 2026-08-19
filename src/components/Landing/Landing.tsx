@@ -9,6 +9,7 @@ import {CustomPageContent} from 'src/content/types';
 
 import type {LibWithMetadata} from '../../api';
 import {CustomHeader} from '../../blocks/CustomHeader/CustomHeader';
+import {GeneratePlaygroundBlock} from '../../blocks/GeneratePlaygroundBlock/GeneratePlaygroundBlock';
 import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
 import {IFrameBlock} from '../../blocks/IFrameBlock/IFrameBlock';
 import {Libraries} from '../../blocks/Libraries/Libraries';
@@ -70,6 +71,7 @@ export const Landing: React.FC<Props> = ({libs, backgroundImageSrc}) => {
                         [CustomBlock.Libraries]: Libraries,
                         [CustomBlock.Roadmap]: RoadmapBlock,
                         [CustomBlock.Templates]: TemplatesBlock,
+                        [CustomBlock.GeneratePlayground]: GeneratePlaygroundBlock,
                         [CustomBlock.Contributors]: ContributorsBlock,
                         [CustomBlock.Iframe]: IFrameBlock,
                     },

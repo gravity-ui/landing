@@ -9,4 +9,5 @@ export enum CustomBlock {
     GithubStars = 'github-stars-promotion',
     Contributors = 'contributors',
     Iframe = 'iframe',
+    GeneratePlayground = 'generate-playground',
 }

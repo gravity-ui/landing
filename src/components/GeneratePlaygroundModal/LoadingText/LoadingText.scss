@@ -1,0 +1,38 @@
+@use '../../../variables';
+
+$block: '.#{variables.$ns}loading-text';
+
+#{$block} {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &_visible {
+        opacity: 1;
+    }
+
+    &__dots {
+        display: inline-block;
+        width: 1em;
+        text-align: left;
+
+        &::after {
+            content: '.';
+            animation: loading-text-dots 1.2s infinite;
+        }
+    }
+}
+
+@keyframes loading-text-dots {
+    0% {
+        content: '.';
+    }
+    33% {
+        content: '..';
+    }
+    66% {
+        content: '...';
+    }
+    100% {
+        content: '.';
+    }
+}

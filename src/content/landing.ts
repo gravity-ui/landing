@@ -114,6 +114,9 @@ export const getLanding = ({
         //     tasks: getRoadmapTasks(t),
         // },
         {
+            type: CustomBlock.GeneratePlayground,
+        },
+        {
             type: CustomBlock.Templates,
             title: t('home:templates_title'),
             tabs: [
