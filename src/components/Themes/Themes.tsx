@@ -131,9 +131,11 @@ const ThemesContent = () => {
             setActivePresetIndex(index);
             setActiveThemeId(null);
             setForcedPreviewMode(null);
-            showThemeImportedToast();
+            // No toast here: switching a swatch is an instant local preview,
+            // nothing was imported — the "Theme imported" toast only belongs
+            // to applying a gallery theme.
         },
-        [applyBrandPreset, showThemeImportedToast],
+        [applyBrandPreset],
     );
 
     const performApplyTheme = useCallback(
