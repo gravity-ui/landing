@@ -38,7 +38,10 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
             className={b({selected}, className)}
             style={{['--theme-card-brand' as string]: metadata.brandColor}}
         >
-            <div className={b('preview-stack')}>
+            {/* The whole preview is the hit area — the Apply Theme button
+                stays as the visible affordance and the keyboard-reachable
+                control, its click just bubbles up to this handler. */}
+            <div className={b('preview-stack')} onClick={() => onApply?.(metadata.id, previewMode)}>
                 <div className={b('preview-area')} data-mode={previewMode}>
                     <img
                         className={b('preview-image')}
@@ -71,11 +74,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                             </div>
                         )}
                     </div>
-                    <Button
-                        view="action"
-                        size="l"
-                        onClick={() => onApply?.(metadata.id, previewMode)}
-                    >
+                    <Button view="action" size="l">
                         Apply Theme
                     </Button>
                 </div>
