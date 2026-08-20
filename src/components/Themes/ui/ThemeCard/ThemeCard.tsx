@@ -28,7 +28,10 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
     onApply,
     className,
 }) => {
-    const [previewMode, setPreviewMode] = React.useState<ThemePreviewMode>(metadata.previewMode);
+    // Every card opens dark regardless of `metadata.previewMode` — a mixed
+    // light/dark grid reads as visual noise. The light preview is one click
+    // away on the mode toggle below the card.
+    const [previewMode, setPreviewMode] = React.useState<ThemePreviewMode>('dark');
 
     return (
         <div
