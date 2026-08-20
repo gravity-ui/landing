@@ -6,8 +6,10 @@ import {expect, test} from '@playwright/test';
 import {allThemes} from '../src/components/Themes/gallery';
 
 const PREVIEWS_DIR = path.resolve(__dirname, '../public/themes/previews');
-const EXPECTED_WIDTH = 370;
-const EXPECTED_HEIGHT = 250;
+// Previews are captured at 2x (see OUTPUT_WIDTH/OUTPUT_HEIGHT in
+// scripts/update-theme-previews.mjs); the card renders them at half size.
+const EXPECTED_WIDTH = 740;
+const EXPECTED_HEIGHT = 500;
 
 // PNG dimensions sit at bytes 16-24 (big-endian width then height) of the IHDR
 // chunk. Parsing them avoids pulling sharp/pngjs into the e2e suite just to

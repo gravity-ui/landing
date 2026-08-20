@@ -5,7 +5,12 @@ import {Layout} from '../components/Layout/Layout';
 import {ThemePlaygroundBar} from '../components/Themes/ui/ThemePlaygroundBar/ThemePlaygroundBar';
 import {getI18nProps} from '../utils/i18next';
 
+// Developer-only scratch page; 404s in production unless the preview-routes
+// flag is set (same gate as the card-preview capture route).
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    if (process.env.NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES !== '1') {
+        return {notFound: true};
+    }
     return {
         props: {
             ...(await getI18nProps(ctx)),

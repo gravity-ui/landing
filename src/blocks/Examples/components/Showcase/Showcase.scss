@@ -17,7 +17,9 @@ $workaroundBlockDarkTheme: &#{$block}_theme_dark;
     container-type: inline-size;
     container-name: showcase;
 
-    @container showcase (max-width: #{map-get(pcVariables.$gridBreakpoints, 'sm') - 1}) {
+    // The block is its own container, so it can't query itself — descendants
+    // use @container below, but the block's own padding must stay on @media.
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
         padding: 20px;
     }
 

@@ -81,6 +81,9 @@ const ThemesContent = () => {
 
     const stickyBarRef = useRef<HTMLDivElement>(null);
     const firstSwatchRef = useRef<HTMLButtonElement>(null);
+    // Bumped on every apply so a slower-resolving theme load can't overwrite a
+    // more recent selection (last-click-wins instead of last-resolve-wins).
+    const applyGenerationRef = useRef(0);
 
     const [isExportDialogVisible, setIsExportDialogVisible] = useState(false);
     const [isImportDialogVisible, setIsImportDialogVisible] = useState(false);
@@ -107,8 +110,20 @@ const ThemesContent = () => {
         });
     }, [addToast]);
 
+    const showThemeApplyErrorToast = useCallback(() => {
+        addToast({
+            name: 'theme-apply-error',
+            title: 'Failed to apply theme',
+            content: 'Something went wrong while loading the theme. Please try again.',
+            theme: 'danger',
+            autoHiding: 5000,
+        });
+    }, [addToast]);
+
     const performApplyPreset = useCallback(
         (preset: BrandPreset, index: number) => {
+            // Invalidate any in-flight theme load so it can't overwrite this preset.
+            applyGenerationRef.current += 1;
             applyBrandPreset(preset);
             setActivePresetIndex(index);
             setActiveThemeId(null);
@@ -120,8 +135,13 @@ const ThemesContent = () => {
 
     const performApplyTheme = useCallback(
         async (id: string, mode: ThemePreviewMode) => {
+            const generation = (applyGenerationRef.current += 1);
             try {
                 const payload = await loadThemePayload(id);
+                // A newer apply happened while this load was in flight — drop it.
+                if (generation !== applyGenerationRef.current) {
+                    return;
+                }
                 const gravityTheme = normalizeImportedTheme(parseJSON(payload));
                 importTheme(gravityTheme);
                 setActiveThemeId(id);
@@ -131,14 +151,19 @@ const ThemesContent = () => {
                 setGalleryDrawerOpen(false);
                 showThemeImportedToast();
             } catch (error) {
+                if (generation !== applyGenerationRef.current) {
+                    return;
+                }
                 // eslint-disable-next-line no-console
                 console.error('Failed to apply theme', id, error);
+                showThemeApplyErrorToast();
             }
         },
-        [importTheme, showThemeImportedToast],
+        [importTheme, showThemeImportedToast, showThemeApplyErrorToast],
     );
 
     const handleStartFromScratch = useCallback(() => {
+        applyGenerationRef.current += 1;
         setCommunityModalOpen(false);
         importTheme(DEFAULT_THEME);
         setActiveThemeId(null);
@@ -362,7 +387,10 @@ const ThemesContent = () => {
                 onClose={() => setGalleryDrawerOpen(false)}
                 activeThemeId={activeThemeId}
                 onApplyTheme={handleApplyTheme}
-                onOpenAllThemes={() => setCommunityModalOpen(true)}
+                onOpenAllThemes={() => {
+                    setGalleryDrawerOpen(false);
+                    setCommunityModalOpen(true);
+                }}
             />
             <CommunityThemesModal
                 open={communityModalOpen}
