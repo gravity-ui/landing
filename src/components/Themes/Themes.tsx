@@ -105,23 +105,22 @@ const ThemesContent = () => {
     const showThemeImportedToast = useCallback(() => {
         addToast({
             name: 'theme-imported',
-            title: 'Theme imported',
-            content:
-                'Your theme has been successfully applied. Explore and configure, then export.',
+            title: t('gallery_toast_imported_title'),
+            content: t('gallery_toast_imported_content'),
             theme: 'success',
             autoHiding: 5000,
         });
-    }, [addToast]);
+    }, [addToast, t]);
 
     const showThemeApplyErrorToast = useCallback(() => {
         addToast({
             name: 'theme-apply-error',
-            title: 'Failed to apply theme',
-            content: 'Something went wrong while loading the theme. Please try again.',
+            title: t('gallery_toast_error_title'),
+            content: t('gallery_toast_error_content'),
             theme: 'danger',
             autoHiding: 5000,
         });
-    }, [addToast]);
+    }, [addToast, t]);
 
     const performApplyPreset = useCallback(
         (preset: BrandPreset, index: number) => {
@@ -407,18 +406,15 @@ const ThemesContent = () => {
                 onStartFromScratch={handleStartFromScratch}
             />
             <Dialog open={pendingApply !== null} onClose={cancelPendingApply} size="s">
-                <Dialog.Header caption="Unsaved changes will be lost" />
+                <Dialog.Header caption={t('gallery_unsaved_title')} />
                 <Dialog.Body>
-                    <Text>
-                        Are you sure you want to continue? Your modifications to this theme
-                        won&apos;t be saved.
-                    </Text>
+                    <Text>{t('gallery_unsaved_body')}</Text>
                 </Dialog.Body>
                 <Dialog.Footer
                     onClickButtonCancel={cancelPendingApply}
                     onClickButtonApply={confirmPendingApply}
-                    textButtonApply="Yes, continue"
-                    textButtonCancel="Cancel"
+                    textButtonApply={t('gallery_unsaved_confirm')}
+                    textButtonCancel={t('gallery_unsaved_cancel')}
                 />
             </Dialog>
         </>

@@ -1,5 +1,6 @@
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {Button, Text} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import galleryBgDesktopPng from '../../../../assets/themes/gallery-bg-desktop.png';
@@ -30,6 +31,7 @@ export const ThemePlaygroundBar: React.FC<ThemePlaygroundBarProps> = ({
     className,
     firstSwatchRef,
 }) => {
+    const {t} = useTranslation('themes');
     const breakpoint = useWindowBreakpoint();
     const isDesktop = breakpoint >= BREAKPOINTS.xl;
     const isMobile = breakpoint < BREAKPOINTS.sm;
@@ -51,10 +53,10 @@ export const ThemePlaygroundBar: React.FC<ThemePlaygroundBarProps> = ({
             <div className={b('content')}>
                 <div className={b('text')}>
                     <Text variant="header-1" className={b('title')}>
-                        Theme playground
+                        {t('gallery_playground_title')}
                     </Text>
                     <Text variant="body-2" className={b('description')}>
-                        Switch basic themes instantly here, and check out designer themes
+                        {t('gallery_playground_description')}
                     </Text>
                 </div>
                 <div className={b('bottom-row')}>
@@ -68,7 +70,9 @@ export const ThemePlaygroundBar: React.FC<ThemePlaygroundBarProps> = ({
                                     type="button"
                                     className={b('swatch', {active})}
                                     onClick={() => onSelectPreset?.(preset, i)}
-                                    aria-label={`Apply brand preset ${preset.brandColor}`}
+                                    aria-label={t('gallery_playground_preset_aria', {
+                                        color: preset.brandColor,
+                                    })}
                                     aria-pressed={active}
                                 >
                                     <span
@@ -80,7 +84,7 @@ export const ThemePlaygroundBar: React.FC<ThemePlaygroundBarProps> = ({
                         })}
                     </div>
                     <Button view="outlined-contrast" size="l" onClick={onOpenGallery}>
-                        Theme Gallery
+                        {t('gallery_open_button')}
                     </Button>
                 </div>
             </div>

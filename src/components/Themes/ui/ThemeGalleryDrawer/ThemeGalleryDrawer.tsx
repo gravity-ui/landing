@@ -1,6 +1,7 @@
 import {Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {Button, Drawer, Icon, Text} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
@@ -29,13 +30,6 @@ const useMatchMedia = (query: string): boolean => {
 
 const b = block('theme-gallery-drawer');
 
-const DESKTOP_TITLE = 'Theme Gallery';
-const DESKTOP_DESCRIPTION =
-    'Thoughtful color systems, typography & radii from real projects. Pick, apply, customize.';
-const COMPACT_TITLE = 'Browse and Apply Themes';
-const MOBILE_DESCRIPTION =
-    'Discover production-ready themes. Apply instantly or edit in Themisator';
-
 const DRAWER_WIDTH_VAR = '--theme-gallery-drawer-width';
 const SCROLLBAR_WIDTH_VAR = '--theme-gallery-page-scrollbar-width';
 const DESKTOP_DRAWER_WIDTH_PX = 447;
@@ -61,6 +55,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     onApplyTheme,
     onOpenAllThemes,
 }) => {
+    const {t} = useTranslation('themes');
     const breakpoint = useWindowBreakpoint();
     // page-constructor's hook returns at most xl=1185 (its BREAKPOINTS map
     // tops out there), so we can't ask it about >= xxl. Track the xxl
@@ -69,8 +64,13 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     const isMobile = breakpoint < BREAKPOINTS.sm;
     const isTablet = !isDesktop && !isMobile;
 
-    const title = isDesktop ? DESKTOP_TITLE : COMPACT_TITLE;
-    const description = isMobile ? MOBILE_DESCRIPTION : isDesktop ? DESKTOP_DESCRIPTION : null;
+    const title = t(isDesktop ? 'gallery_drawer_title' : 'gallery_drawer_title_compact');
+    let description: string | null = null;
+    if (isMobile) {
+        description = t('gallery_drawer_description_mobile');
+    } else if (isDesktop) {
+        description = t('gallery_drawer_description');
+    }
     // Figma 3325:119973 / 3325:124927 places the "All Gallery Themes"
     // CTA as the last card-sized slot at the end of the tablet drawer's
     // horizontal scroll; desktop renders it under the card stack and
@@ -145,7 +145,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
                     size="m"
                     onClick={onClose}
                     className={b('close-button')}
-                    aria-label="Close theme gallery"
+                    aria-label={t('gallery_drawer_close_aria')}
                 >
                     <Button.Icon>
                         <Icon data={Xmark} size={16} />
@@ -172,7 +172,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
                             onClick={onOpenAllThemes}
                             className={b('all-themes-button')}
                         >
-                            All Gallery Themes
+                            {t('gallery_all_themes_button')}
                         </Button>
                     </div>
                 )}

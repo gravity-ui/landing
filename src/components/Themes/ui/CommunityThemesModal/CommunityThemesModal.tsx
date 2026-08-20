@@ -1,6 +1,7 @@
 import {Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {Button, Dialog, Icon, Text} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
@@ -12,11 +13,6 @@ import {ThemeCard} from '../ThemeCard/ThemeCard';
 import './CommunityThemesModal.scss';
 
 const b = block('community-themes-modal');
-
-const TITLE = 'Community Themes';
-const FOOTER_TITLE = "Don't see anything you like?";
-const FOOTER_BODY =
-    'Adjust one from the gallery, import your CSS, or start designing from scratch — complete freedom.';
 
 export interface CommunityThemesModalProps {
     open: boolean;
@@ -35,6 +31,7 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
     onImportTheme,
     onStartFromScratch,
 }) => {
+    const {t} = useTranslation('themes');
     const breakpoint = useWindowBreakpoint();
     let variant: 'desktop' | 'tablet' | 'mobile' = 'tablet';
     if (breakpoint >= BREAKPOINTS.xl) {
@@ -76,19 +73,19 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
             // `visible` so the inner scroll-area is the only scroll
             // container — no double scrollbar.
             contentOverflow="visible"
-            aria-label={TITLE}
+            aria-label={t('gallery_modal_title')}
         >
             <div className={b('layout')}>
                 <div className={b('header')}>
                     <Text variant="header-1" className={b('title')}>
-                        {TITLE}
+                        {t('gallery_modal_title')}
                     </Text>
                     <Button
                         view="flat"
                         size="m"
                         onClick={onClose}
                         className={b('close-button')}
-                        aria-label="Close community themes"
+                        aria-label={t('gallery_modal_close_aria')}
                     >
                         <Button.Icon>
                             <Icon data={Xmark} size={16} />
@@ -110,18 +107,18 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
                     <div className={b('footer')}>
                         <div className={b('footer-text')}>
                             <Text variant="display-2" className={b('footer-title')}>
-                                {FOOTER_TITLE}
+                                {t('gallery_modal_footer_title')}
                             </Text>
                             <Text variant="body-1" className={b('footer-body')}>
-                                {FOOTER_BODY}
+                                {t('gallery_modal_footer_body')}
                             </Text>
                         </div>
                         <div className={b('footer-actions')}>
                             <Button view="outlined-action" size="xl" onClick={onStartFromScratch}>
-                                Start From Scratch
+                                {t('gallery_modal_start_from_scratch')}
                             </Button>
                             <Button view="outlined" size="xl" onClick={onImportTheme}>
-                                Import Theme
+                                {t('gallery_modal_import_theme')}
                             </Button>
                         </div>
                     </div>

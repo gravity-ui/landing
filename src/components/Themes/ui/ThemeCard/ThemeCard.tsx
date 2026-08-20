@@ -1,19 +1,19 @@
 import {Moon, Sun} from '@gravity-ui/icons';
 import {Button, Flex, Label, Text} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import type {ThemeMetadata, ThemePreviewMode} from '../../gallery';
+import type {LocalizedString, ThemeMetadata, ThemePreviewMode} from '../../gallery';
 
 import './ThemeCard.scss';
 
 const b = block('theme-card');
 
-const formatTagLabel = (tag: string) =>
-    tag
-        .split('-')
-        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-        .join(' ');
+// Theme metadata only ships `en`/`ru` copy; every other locale reads the
+// English original rather than a raw key.
+const pickLocalized = (value: LocalizedString, language: string) =>
+    language.startsWith('ru') ? value.ru : value.en;
 
 interface ThemeCardProps {
     metadata: ThemeMetadata;
@@ -28,6 +28,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
     onApply,
     className,
 }) => {
+    const {t, i18n} = useTranslation('themes');
     // Every card opens dark regardless of `metadata.previewMode` — a mixed
     // light/dark grid reads as visual noise. The light preview is one click
     // away on the mode toggle below the card.
@@ -46,7 +47,12 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                     <img
                         className={b('preview-image')}
                         src={`/themes/previews/${metadata.id}-${previewMode}.png`}
-                        alt={`${metadata.name} ${previewMode} preview`}
+                        alt={t(
+                            previewMode === 'dark'
+                                ? 'gallery_card_preview_alt_dark'
+                                : 'gallery_card_preview_alt_light',
+                            {name: metadata.name},
+                        )}
                         loading="lazy"
                         decoding="async"
                         onError={(event) => {
@@ -62,20 +68,20 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                 <div className={b('hover-content')}>
                     <div className={b('overlay-text-block')}>
                         <Text variant="body-2" className={b('description')}>
-                            {metadata.description.en}
+                            {pickLocalized(metadata.description, i18n.language)}
                         </Text>
                         {metadata.tags.length > 0 && (
                             <div className={b('tags')}>
                                 {metadata.tags.slice(0, 3).map((tag) => (
                                     <Label key={tag} theme="unknown" size="s">
-                                        {formatTagLabel(tag)}
+                                        {t(`gallery_tag_${tag}`)}
                                     </Label>
                                 ))}
                             </div>
                         )}
                     </div>
                     <Button view="action" size="l">
-                        Apply Theme
+                        {t('gallery_card_apply')}
                     </Button>
                 </div>
             </div>
@@ -90,7 +96,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                         {metadata.name}
                     </Text>
                     <Text variant="body-1" className={b('author')}>
-                        by {metadata.author.name}
+                        {t('gallery_card_author', {author: metadata.author.name})}
                     </Text>
                 </Flex>
                 <div className={b('mode-toggle')}>
@@ -99,7 +105,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                         size="s"
                         selected={previewMode === 'dark'}
                         onClick={() => setPreviewMode('dark')}
-                        aria-label="Show dark preview"
+                        aria-label={t('gallery_card_show_dark_aria')}
                         aria-pressed={previewMode === 'dark'}
                     >
                         <Button.Icon>
@@ -111,7 +117,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                         size="s"
                         selected={previewMode === 'light'}
                         onClick={() => setPreviewMode('light')}
-                        aria-label="Show light preview"
+                        aria-label={t('gallery_card_show_light_aria')}
                         aria-pressed={previewMode === 'light'}
                     >
                         <Button.Icon>
