@@ -34,15 +34,20 @@ $block: '.#{variables.$ns}theme-card';
 
         // Brand-colored gradient stands in for the per-theme preview image.
         // `--theme-card-brand` is set inline from `metadata.brandColor`.
-        background: linear-gradient(
+        // Longhands on purpose: the `background` shorthand would reset
+        // `background-clip`, which has to stay `padding-box` — the generic
+        // line color is semi-transparent, so with the default `border-box`
+        // the gradient shines through the frame and tints it per theme.
+        background-image: linear-gradient(
             135deg,
             color-mix(in srgb, var(--theme-card-brand) 65%, #111) 0%,
             color-mix(in srgb, var(--theme-card-brand) 25%, #111) 100%
         );
+        background-clip: padding-box;
         color: var(--g-color-text-light-primary);
 
         &[data-mode='light'] {
-            background: linear-gradient(
+            background-image: linear-gradient(
                 135deg,
                 color-mix(in srgb, var(--theme-card-brand) 35%, #fff) 0%,
                 color-mix(in srgb, var(--theme-card-brand) 75%, #fff) 100%
