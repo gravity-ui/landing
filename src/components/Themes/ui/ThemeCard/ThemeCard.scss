@@ -116,6 +116,21 @@ $block: '.#{variables.$ns}theme-card';
         transition: opacity 0.15s ease;
         pointer-events: none;
         text-align: center;
+        // Own stacking context so the scrim below can sit at `z-index: -1`
+        // without escaping behind the preview when opacity hits 1.
+        isolation: isolate;
+
+        // Figma puts a dedicated darkening fill over the preview image, not a
+        // brightness filter: a light theme dimmed with `brightness()` stays
+        // light grey and the white overlay text drowns in it.
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: 16px;
+            background-color: rgb(34 29 34 / 75%);
+        }
     }
 
     &__overlay-text-block {
@@ -142,7 +157,9 @@ $block: '.#{variables.$ns}theme-card';
     // the state active. Blur is applied to the preview-area — the same element
     // that owns border-radius — so the rounded shape itself gets blurred.
     &__preview-stack:hover &__preview-area {
-        filter: blur(6px) brightness(0.7);
+        // Dimming is the scrim's job (`__hover-content::before`) — the filter
+        // only blurs.
+        filter: blur(6px);
         border-color: transparent;
     }
 
