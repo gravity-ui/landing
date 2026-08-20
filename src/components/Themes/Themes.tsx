@@ -374,7 +374,7 @@ const ThemesContent = () => {
                     <ThemePlaygroundBar
                         activePresetIndex={activePresetIndex}
                         onSelectPreset={handleSelectPreset}
-                        onOpenGallery={() => setGalleryDrawerOpen(true)}
+                        onOpenGallery={() => setGalleryDrawerOpen((open) => !open)}
                         firstSwatchRef={firstSwatchRef}
                     />
                     <GalleryHintPopover anchorRef={firstSwatchRef} />
