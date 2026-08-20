@@ -61,10 +61,17 @@ $block: '.#{variables.$ns}theme-card';
     // the gradient + theme name behind it stay visible.
     &__preview-image {
         position: absolute;
-        inset: 0;
+        // Overdrawn by 2px on every side and clipped by the parent's
+        // `overflow: hidden`: the captured PNG carries the sample's own 1px
+        // frame, which would otherwise read as a stray line along the top and
+        // bottom edge of the preview. Explicit width/height are required —
+        // for an absolutely positioned replaced element `auto` resolves to the
+        // intrinsic size and the inset offsets get dropped.
+        top: -2px;
+        left: -2px;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
         z-index: 1;
-        width: 100%;
-        height: 100%;
         object-fit: cover;
         object-position: left top;
     }
