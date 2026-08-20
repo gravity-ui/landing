@@ -5,6 +5,10 @@ $block: '.#{variables.$ns}theme-card';
 #{$block} {
     --g-border-radius-l: 8px;
     --g-border-radius-xl: 8px;
+    // Hover eases in after a short delay so brushing across the gallery
+    // doesn't flash every card, and eases straight back out on leave.
+    --theme-card-hover-in: 0.25s ease 0.12s;
+    --theme-card-hover-out: 0.2s ease 0s;
 
     display: flex;
     flex-direction: column;
@@ -30,7 +34,7 @@ $block: '.#{variables.$ns}theme-card';
         border-radius: 16px;
         border: 1px solid var(--g-color-line-generic);
         box-shadow: 0 4px 24px 0 rgb(0 0 0 / 5%), 0 2px 8px 0 rgb(0 0 0 / 5%);
-        transition: filter 0.2s ease, border-color 0.15s ease;
+        transition: filter var(--theme-card-hover-out), border-color var(--theme-card-hover-out);
 
         // Brand-colored gradient stands in for the per-theme preview image.
         // `--theme-card-brand` is set inline from `metadata.brandColor`.
@@ -98,7 +102,7 @@ $block: '.#{variables.$ns}theme-card';
         border-radius: 20px;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.15s ease;
+        transition: opacity var(--theme-card-hover-out);
     }
 
     // Description / tags / Apply button sit as an absolute sibling of
@@ -113,7 +117,7 @@ $block: '.#{variables.$ns}theme-card';
         gap: var(--g-spacing-8);
         padding: 0 var(--g-spacing-5);
         opacity: 0;
-        transition: opacity 0.15s ease;
+        transition: opacity var(--theme-card-hover-out);
         pointer-events: none;
         text-align: center;
         // Own stacking context so the scrim below can sit at `z-index: -1`
@@ -166,15 +170,23 @@ $block: '.#{variables.$ns}theme-card';
         // into the drawer background. `clip-path` runs after `filter` and cuts
         // it back to the rounded box.
         clip-path: inset(0 round 16px);
+        transition: filter var(--theme-card-hover-in), border-color var(--theme-card-hover-in);
     }
 
     &__preview-stack:hover &__hover-content {
+        transition: opacity var(--theme-card-hover-in);
         opacity: 1;
         pointer-events: auto;
     }
 
-    &__preview-stack:hover &__selection-frame,
+    &__preview-stack:hover &__selection-frame {
+        transition: opacity var(--theme-card-hover-in);
+        opacity: 1;
+    }
+
+    // The applied theme keeps the frame permanently — no hover delay for it.
     &_selected &__selection-frame {
+        transition: opacity var(--theme-card-hover-out);
         opacity: 1;
     }
 
