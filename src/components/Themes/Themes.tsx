@@ -153,7 +153,8 @@ const ThemesContent = () => {
                 setActivePresetIndex(null);
                 setForcedPreviewMode(mode);
                 setCommunityModalOpen(false);
-                setGalleryDrawerOpen(false);
+                // The drawer stays open on purpose: applying a theme is meant
+                // to be tried on, so the user can keep picking from the list.
                 showThemeImportedToast();
             } catch (error) {
                 if (generation !== applyGenerationRef.current) {
