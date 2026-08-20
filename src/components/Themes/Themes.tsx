@@ -90,7 +90,10 @@ const ThemesContent = () => {
     const [galleryDrawerOpen, setGalleryDrawerOpen] = useState(false);
     const [communityModalOpen, setCommunityModalOpen] = useState(false);
     const [activeThemeId, setActiveThemeId] = useState<string | null>(null);
-    const [activePresetIndex, setActivePresetIndex] = useState<number | null>(null);
+    // DEFAULT_THEME is built from DEFAULT_BRAND_COLORS[0], i.e. the first
+    // preset is already applied to the samples on load — mark it as selected
+    // so the swatch row matches what the page actually shows.
+    const [activePresetIndex, setActivePresetIndex] = useState<number | null>(0);
     const [pendingApply, setPendingApply] = useState<PendingApply | null>(null);
     const [forcedPreviewMode, setForcedPreviewMode] = useState<ThemePreviewMode | null>(null);
 
