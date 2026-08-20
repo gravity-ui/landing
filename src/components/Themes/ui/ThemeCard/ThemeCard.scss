@@ -161,6 +161,11 @@ $block: '.#{variables.$ns}theme-card';
         // only blurs.
         filter: blur(6px);
         border-color: transparent;
+        // `overflow: hidden` clips children, not the element's own filtered
+        // output, so the blur used to smear ~10px past the selection frame
+        // into the drawer background. `clip-path` runs after `filter` and cuts
+        // it back to the rounded box.
+        clip-path: inset(0 round 16px);
     }
 
     &__preview-stack:hover &__hover-content {
