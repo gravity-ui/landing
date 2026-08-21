@@ -71,12 +71,6 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     } else if (isDesktop) {
         description = t('gallery_drawer_description');
     }
-    // Figma 3325:119973 / 3325:124927 places the "All Gallery Themes"
-    // CTA as the last card-sized slot at the end of the tablet drawer's
-    // horizontal scroll; desktop renders it under the card stack and
-    // mobile under the vertical column.
-    const showAllThemesCta = true;
-
     const placement = isDesktop ? 'right' : 'bottom';
     const variant = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
     // Mobile height is overridden via CSS (`calc(100dvh - 64px)`) so this value is unused there.
@@ -164,18 +158,20 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
                         />
                     ))}
                 </div>
-                {showAllThemesCta && (
-                    <div className={b('all-themes-cta')}>
-                        <Button
-                            view="outlined"
-                            size="xl"
-                            onClick={onOpenAllThemes}
-                            className={b('all-themes-button')}
-                        >
-                            {t('gallery_all_themes_button')}
-                        </Button>
-                    </div>
-                )}
+                {/* Figma 3325:119973 / 3325:124927 places the "All Gallery
+                    Themes" CTA as the last card-sized slot at the end of the
+                    tablet drawer's horizontal scroll; desktop renders it under
+                    the card stack and mobile under the vertical column. */}
+                <div className={b('all-themes-cta')}>
+                    <Button
+                        view="outlined"
+                        size="xl"
+                        onClick={onOpenAllThemes}
+                        className={b('all-themes-button')}
+                    >
+                        {t('gallery_all_themes_button')}
+                    </Button>
+                </div>
             </div>
         </Drawer>
     );

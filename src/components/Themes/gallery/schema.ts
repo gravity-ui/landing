@@ -32,7 +32,6 @@ export interface ThemeMetadata {
     author: ThemeAuthor;
     description: LocalizedString;
     tags: ThemeTag[];
-    previewMode: ThemePreviewMode;
     brandColor: string;
 }
 
@@ -97,10 +96,6 @@ export function validateThemeMetadata(value: unknown): asserts value is ThemeMet
                 `[${id}] unknown tag "${String(tag)}", allowed: ${THEME_TAGS.join(', ')}`,
             );
         }
-    }
-
-    if (v.previewMode !== 'light' && v.previewMode !== 'dark') {
-        throw new ThemeMetadataValidationError(`[${id}] previewMode must be "light" or "dark"`);
     }
 
     if (typeof v.brandColor !== 'string' || !/^#[0-9A-Fa-f]{6}$/.test(v.brandColor)) {

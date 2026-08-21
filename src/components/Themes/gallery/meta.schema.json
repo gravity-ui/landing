@@ -3,7 +3,7 @@
     "title": "ThemeMetadata",
     "description": "Metadata for a Theme Gallery entry. Pairs with a same-id <id>.theme.json payload file.",
     "type": "object",
-    "required": ["id", "name", "author", "description", "tags", "previewMode", "brandColor"],
+    "required": ["id", "name", "author", "description", "tags", "brandColor"],
     "additionalProperties": false,
     "properties": {
         "$schema": {
@@ -52,11 +52,6 @@
                 ]
             },
             "uniqueItems": true
-        },
-        "previewMode": {
-            "type": "string",
-            "enum": ["light", "dark"],
-            "description": "Default mode shown on the card; users can toggle per-card."
         },
         "brandColor": {
             "type": "string",
