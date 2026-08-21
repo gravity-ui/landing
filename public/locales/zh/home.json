@@ -34,7 +34,7 @@
     "start_creating_example_prev": "上一个示例",
     "start_creating_example_next": "下一个示例",
     "start_creating_skill_activated": "Gravity UI 技能已激活",
-    "start_creating_example_dashboard": "使用本项目中安装的 Gravity UI 版本构建一个响应式用量仪表板。",
+    "start_creating_example_dashboard": "构建一个响应式用量仪表板：界面使用 @gravity-ui/uikit，所有图表使用 @gravity-ui/charts。",
     "start_creating_example_landing": "使用 Gravity UI 组件创建产品落地页：包含 hero 区块、功能卡片和价格区块。",
     "start_creating_example_admin": "为网店管理后台搭建欢迎页：问候语、关键指标磁贴和最近订单表格。",
     "start_creating_manual_description": "交互式安装，几秒内即可搭建 Gravity UI 技术栈项目。",

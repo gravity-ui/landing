@@ -34,7 +34,7 @@
     "start_creating_example_prev": "Exemplo anterior",
     "start_creating_example_next": "Próximo exemplo",
     "start_creating_skill_activated": "Skill do Gravity UI ativado",
-    "start_creating_example_dashboard": "Crie um dashboard responsivo de consumo com as versões do Gravity UI instaladas neste projeto.",
+    "start_creating_example_dashboard": "Crie um dashboard responsivo de consumo: a interface com @gravity-ui/uikit e todos os gráficos com @gravity-ui/charts.",
     "start_creating_example_landing": "Crie uma landing page de produto com hero, cartões de recursos e seção de preços usando componentes do Gravity UI.",
     "start_creating_example_admin": "Monte a página de boas-vindas do painel administrativo de uma loja on-line: saudação, blocos de métricas principais e tabela de pedidos recentes.",
     "start_creating_manual_description": "Instalação interativa que cria um projeto com a stack do Gravity UI em segundos.",

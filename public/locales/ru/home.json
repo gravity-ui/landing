@@ -34,7 +34,7 @@
     "start_creating_example_prev": "Предыдущий пример",
     "start_creating_example_next": "Следующий пример",
     "start_creating_skill_activated": "Скилл Gravity UI активирован",
-    "start_creating_example_dashboard": "Собери адаптивный дашборд потребления на версиях Gravity UI, установленных в этом проекте.",
+    "start_creating_example_dashboard": "Собери адаптивный usage-дашборд: интерфейс на @gravity-ui/uikit, все графики — на @gravity-ui/charts.",
     "start_creating_example_landing": "Создай лендинг продукта с хиро-секцией, карточками возможностей и блоком тарифов на компонентах Gravity UI.",
     "start_creating_example_admin": "Сверстай welcome-страницу админки интернет-магазина: приветствие, плитки ключевых метрик и таблицу последних заказов.",
     "start_creating_manual_description": "Интерактивная установка: развернёт проект на стеке Gravity UI за считанные секунды.",

@@ -34,7 +34,7 @@
     "start_creating_example_prev": "이전 예시",
     "start_creating_example_next": "다음 예시",
     "start_creating_skill_activated": "Gravity UI 스킬 활성화됨",
-    "start_creating_example_dashboard": "이 프로젝트에 설치된 Gravity UI 버전으로 반응형 사용량 대시보드를 만들어 줘.",
+    "start_creating_example_dashboard": "반응형 사용량 대시보드를 만들어 줘: 인터페이스는 @gravity-ui/uikit으로, 모든 차트는 @gravity-ui/charts로.",
     "start_creating_example_landing": "Gravity UI 컴포넌트로 히어로, 기능 카드, 가격 섹션이 있는 제품 랜딩 페이지를 만들어 줘.",
     "start_creating_example_admin": "온라인 쇼핑몰 관리자 페이지의 웰컴 화면을 만들어 줘: 인사말, 핵심 지표 타일, 최근 주문 테이블.",
     "start_creating_manual_description": "몇 초 만에 Gravity UI 스택 프로젝트를 생성하는 인터랙티브 설치입니다.",
