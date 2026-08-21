@@ -1,10 +1,10 @@
 import React from 'react';
 
-import type {ThemePreviewMode} from '../../Themes/gallery';
-
-// Re-exported so existing consumers keep their import path; the single source
-// of truth for the mode union is the gallery schema.
-export type PreviewMode = ThemePreviewMode;
+// Deliberately declared here rather than reused from `Themes/gallery`:
+// UISamples is the lower layer that Themes builds on, so pointing this type at
+// the gallery schema would invert the dependency direction for a two-value
+// union.
+export type PreviewMode = 'light' | 'dark';
 
 interface PreviewModeContextValue {
     forcedMode: PreviewMode | null;
