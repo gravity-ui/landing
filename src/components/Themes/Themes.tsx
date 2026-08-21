@@ -18,7 +18,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
 import {CONTENT_WRAPPER_ID} from '../../constants';
-import {block} from '../../utils';
+import {block, getContentScrollElement} from '../../utils';
 import {CustomScrollbar} from '../CustomScrollbar';
 import {TagItem, Tags} from '../Tags/Tags';
 
@@ -259,21 +259,21 @@ const ThemesContent = () => {
                 return;
             }
             // Hand over to the sticky bar exactly when the in-flow header row
-            // starts sliding under the menu. Measured from the row itself, so
-            // a taller title (longer copy, another locale) shifts the hand-off
-            // along with it instead of desyncing from a hardcoded offset.
-            const rowOffset =
-                headerRow.getBoundingClientRect().top -
-                contentEl.getBoundingClientRect().top +
-                contentEl.scrollTop;
-            setStickyBarVisible(contentEl.scrollTop > rowOffset);
+            // slides under the menu. Compared as viewport rects rather than
+            // via `scrollTop`, so it keeps working no matter which element
+            // owns the scrolling (the layout wrapper delegates it to an
+            // overlayscrollbars viewport) and needs no hardcoded offset.
+            setStickyBarVisible(
+                headerRow.getBoundingClientRect().top < contentEl.getBoundingClientRect().top,
+            );
         };
         onScroll();
 
-        contentEl.addEventListener('scroll', onScroll, {passive: true});
+        const scrollEl = getContentScrollElement() ?? contentEl;
+        scrollEl.addEventListener('scroll', onScroll, {passive: true});
 
         return () => {
-            contentEl.removeEventListener('scroll', onScroll);
+            scrollEl.removeEventListener('scroll', onScroll);
             window.removeEventListener('resize', updateMenuHeight);
             document.documentElement.style.removeProperty(MAIN_MENU_HEIGHT_VAR);
         };

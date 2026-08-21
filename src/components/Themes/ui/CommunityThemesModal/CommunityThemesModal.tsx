@@ -4,9 +4,8 @@ import {Button, Dialog, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import {CONTENT_WRAPPER_ID} from '../../../../constants';
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
-import {block} from '../../../../utils';
+import {block, getContentScrollElement} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
 import {allThemes} from '../../gallery';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
@@ -41,15 +40,15 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
         variant = 'mobile';
     }
 
-    // The landing scrolls inside `.layout__wrapper`, not on <body>, so
+    // The landing scrolls inside the layout wrapper, not on <body>, so
     // uikit's body scroll-lock doesn't reach it and the underlying page
-    // keeps scrolling alongside the modal's own scroll area. Lock the
-    // wrapper for the modal's lifetime to avoid the double-scroll feel.
+    // keeps scrolling alongside the modal's own scroll area. Lock the actual
+    // scroll element for the modal's lifetime to avoid the double-scroll feel.
     React.useEffect(() => {
         if (!open) {
             return undefined;
         }
-        const wrapper = document.getElementById(CONTENT_WRAPPER_ID);
+        const wrapper = getContentScrollElement();
         if (!wrapper) {
             return undefined;
         }
