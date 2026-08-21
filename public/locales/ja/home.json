@@ -38,6 +38,7 @@
     "start_creating_example_landing": "Gravity UIコンポーネントで、ヒーローセクション、機能カード、料金セクションのある製品ランディングページを作成して。",
     "start_creating_example_admin": "ネットショップ管理画面のウェルカムページを作成して：挨拶、主要指標のタイル、直近の注文テーブル。",
     "start_creating_manual_description": "数秒でGravity UIスタックのプロジェクトを作成するインタラクティブなセットアップです。",
+    "start_creating_manual_link": "@gravity-ui/createの使い方",
     "github_stars-text": "Gravity UIがお好きですか？GitHubで⭐を付けてください",
     "contributors_title": "コントリビューター",
     "contributors_actions_telegram": "Telegramに参加する",

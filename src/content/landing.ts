@@ -121,6 +121,10 @@ export const getLanding = ({
                 title: t('home:start_creating_manual_tab'),
                 description: t('home:start_creating_manual_description'),
                 command: 'npm create @gravity-ui',
+                link: {
+                    title: t('home:start_creating_manual_link'),
+                    href: 'https://github.com/gravity-ui/create',
+                },
             },
         },
         {

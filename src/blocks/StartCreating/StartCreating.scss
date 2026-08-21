@@ -214,4 +214,10 @@ $block: '.#{variables.$ns}start-creating';
     &__manual &__command {
         margin-block-start: 0;
     }
+
+    & &__manual-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
 }

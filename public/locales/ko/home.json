@@ -38,6 +38,7 @@
     "start_creating_example_landing": "Gravity UI 컴포넌트로 히어로, 기능 카드, 가격 섹션이 있는 제품 랜딩 페이지를 만들어 줘.",
     "start_creating_example_admin": "온라인 쇼핑몰 관리자 페이지의 웰컴 화면을 만들어 줘: 인사말, 핵심 지표 타일, 최근 주문 테이블.",
     "start_creating_manual_description": "몇 초 만에 Gravity UI 스택 프로젝트를 생성하는 인터랙티브 설치입니다.",
+    "start_creating_manual_link": "@gravity-ui/create 사용 방법",
     "github_stars-text": "Gravity UI가 마음에 드시나요? Github에서 ⭐&nbsp;를 눌러주세요",
     "contributors_title": "기여자",
     "contributors_actions_telegram": "텔레그램 참여",

@@ -38,6 +38,7 @@
     "start_creating_example_landing": "使用 Gravity UI 组件创建产品落地页：包含 hero 区块、功能卡片和价格区块。",
     "start_creating_example_admin": "为网店管理后台搭建欢迎页：问候语、关键指标磁贴和最近订单表格。",
     "start_creating_manual_description": "交互式安装，几秒内即可搭建 Gravity UI 技术栈项目。",
+    "start_creating_manual_link": "@gravity-ui/create 使用说明",
     "github_stars-text": "您 💖 Gravity UI 吗？在 Github 上给我们一个 ⭐",
     "contributors_title": "贡献者",
     "contributors_actions_telegram": "加入 Telegram",

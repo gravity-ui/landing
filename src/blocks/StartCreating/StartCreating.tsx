@@ -1,6 +1,13 @@
-import {ChevronLeft, ChevronRight, CircleCheck, Code, FaceRobot} from '@gravity-ui/icons';
+import {
+    ArrowUpRightFromSquare,
+    ChevronLeft,
+    ChevronRight,
+    CircleCheck,
+    Code,
+    FaceRobot,
+} from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
-import {Button, ClipboardButton, Icon, Tab, TabList} from '@gravity-ui/uikit';
+import {Button, ClipboardButton, Icon, Link, Tab, TabList} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash.js';
@@ -50,6 +57,10 @@ export type StartCreatingProps = Animatable & {
         title: string;
         description: string;
         command: string;
+        link: {
+            title: string;
+            href: string;
+        };
     };
 };
 
@@ -149,6 +160,10 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                                                 total: examplesCount,
                                             })}
                                         </span>
+                                        <ClipboardButton
+                                            text={ai.build.examples[exampleIndex]}
+                                            size="s"
+                                        />
                                     </div>
                                     <div className={b('example-texts')} aria-live="polite">
                                         {ai.build.examples.map((example, index) => (
@@ -173,6 +188,15 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                         <div className={b('manual')}>
                             <p className={b('step-description')}>{manual.description}</p>
                             <Command command={manual.command} />
+                            <Link
+                                className={b('manual-link')}
+                                href={manual.link.href}
+                                target="_blank"
+                                rel="noopener"
+                            >
+                                {manual.link.title}
+                                <Icon data={ArrowUpRightFromSquare} size={16} />
+                            </Link>
                         </div>
                     )}
                 </section>

@@ -38,6 +38,7 @@
     "start_creating_example_landing": "Erstelle eine Produkt-Landingpage mit Hero-Bereich, Feature-Karten und Preissektion aus Gravity-UI-Komponenten.",
     "start_creating_example_admin": "Setze eine Willkommensseite für das Admin-Panel eines Onlineshops um: Begrüßung, Kacheln mit Kernmetriken und eine Tabelle der letzten Bestellungen.",
     "start_creating_manual_description": "Interaktives Setup, das in Sekunden ein Projekt mit dem Gravity-UI-Stack erstellt.",
+    "start_creating_manual_link": "So verwenden Sie @gravity-ui/create",
     "github_stars-text": "Sie 💖 Gravity UI? Geben Sie uns&nbsp;einen&nbsp;⭐&nbsp;auf&nbsp;Github",
     "contributors_title": "Mitwirkende",
     "contributors_actions_telegram": "Telegram beitreten",

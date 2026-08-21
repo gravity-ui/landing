@@ -38,6 +38,7 @@
     "start_creating_example_landing": "Создай лендинг продукта с хиро-секцией, карточками возможностей и блоком тарифов на компонентах Gravity UI.",
     "start_creating_example_admin": "Сверстай welcome-страницу админки интернет-магазина: приветствие, плитки ключевых метрик и таблицу последних заказов.",
     "start_creating_manual_description": "Интерактивная установка: развернёт проект на стеке Gravity UI за считанные секунды.",
+    "start_creating_manual_link": "Как пользоваться @gravity-ui/create",
     "github_stars-text": "Вам нравится 💖 Gravity UI? Поставьте&nbsp;нам&nbsp;⭐&nbsp;на&nbsp;Github",
     "contributors_title": "Участники",
     "contributors_actions_telegram": "Telegram",

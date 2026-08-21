@@ -38,6 +38,7 @@
     "start_creating_example_landing": "Crée une landing page produit avec un hero, des cartes de fonctionnalités et une section tarifs à partir des composants Gravity UI.",
     "start_creating_example_admin": "Maquette la page d'accueil du back-office d'une boutique en ligne : message de bienvenue, tuiles de métriques clés et tableau des dernières commandes.",
     "start_creating_manual_description": "Installation interactive qui génère un projet basé sur la stack Gravity UI en quelques secondes.",
+    "start_creating_manual_link": "Comment utiliser @gravity-ui/create",
     "github_stars-text": "Vous aimez Gravity UI ? Donnez-nous une ⭐ sur Github",
     "contributors_title": "Contributeurs",
     "contributors_actions_telegram": "Rejoindre Telegram",
