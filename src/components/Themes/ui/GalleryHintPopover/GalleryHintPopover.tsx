@@ -1,5 +1,6 @@
 import type {PopoverInstanceProps} from '@gravity-ui/uikit/legacy';
 import {Popover, PopoverBehavior} from '@gravity-ui/uikit/legacy';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {CONTENT_WRAPPER_ID} from '../../../../constants';
@@ -15,6 +16,7 @@ interface GalleryHintPopoverProps {
 }
 
 export const GalleryHintPopover: React.FC<GalleryHintPopoverProps> = ({anchorRef}) => {
+    const {t} = useTranslation('themes');
     const popoverRef = React.useRef<PopoverInstanceProps>(null);
 
     const dismiss = React.useCallback(() => {
@@ -76,9 +78,9 @@ export const GalleryHintPopover: React.FC<GalleryHintPopoverProps> = ({anchorRef
             hasClose
             onCloseClick={dismiss}
             tooltipClassName={b()}
-            title="New Feature"
-            content="Switch basic themes instantly and discover more in the Designer Gallery"
-            tooltipActionButton={{text: 'Got it', onClick: dismiss}}
+            title={t('gallery_hint_title')}
+            content={t('gallery_hint_content')}
+            tooltipActionButton={{text: t('gallery_hint_action'), onClick: dismiss}}
         >
             <span aria-hidden="true" />
         </Popover>

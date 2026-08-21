@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }
     return {
         props: {
-            ...(await getI18nProps(ctx)),
+            ...(await getI18nProps(ctx, ['themes'])),
         },
     };
 };

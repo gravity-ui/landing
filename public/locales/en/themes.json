@@ -295,5 +295,10 @@
   "gallery_unsaved_title": "Unsaved changes will be lost",
   "gallery_unsaved_body": "Are you sure you want to continue? Your modifications to this theme won't be saved.",
   "gallery_unsaved_confirm": "Yes, continue",
-  "gallery_unsaved_cancel": "Cancel"
+  "gallery_unsaved_cancel": "Cancel",
+  "gallery_hint_title": "New Feature",
+  "gallery_hint_content": "Switch basic themes instantly and discover more in the Designer Gallery",
+  "gallery_hint_action": "Got it",
+  "gallery_preview_mode_dark_aria": "Use dark preview",
+  "gallery_preview_mode_light_aria": "Use light preview"
 }

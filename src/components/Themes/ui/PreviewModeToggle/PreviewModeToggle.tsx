@@ -1,5 +1,6 @@
 import {Moon, Sun} from '@gravity-ui/icons';
 import {Button, Flex, Icon} from '@gravity-ui/uikit';
+import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
@@ -20,6 +21,7 @@ export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({
     onChange,
     className,
 }) => {
+    const {t} = useTranslation('themes');
     const selected: ThemePreviewMode = value ?? 'dark';
     return (
         <Flex className={b(null, className)} gap={1} alignItems="center">
@@ -28,7 +30,7 @@ export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({
                 size="l"
                 selected={selected === 'dark'}
                 onClick={() => onChange('dark')}
-                aria-label="Use dark preview"
+                aria-label={t('gallery_preview_mode_dark_aria')}
                 aria-pressed={selected === 'dark'}
             >
                 <Button.Icon>
@@ -40,7 +42,7 @@ export const PreviewModeToggle: React.FC<PreviewModeToggleProps> = ({
                 size="l"
                 selected={selected === 'light'}
                 onClick={() => onChange('light')}
-                aria-label="Use light preview"
+                aria-label={t('gallery_preview_mode_light_aria')}
                 aria-pressed={selected === 'light'}
             >
                 <Button.Icon>

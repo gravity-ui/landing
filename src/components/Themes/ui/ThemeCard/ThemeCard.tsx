@@ -4,7 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import type {LocalizedString, ThemeMetadata, ThemePreviewMode} from '../../gallery';
+import type {LocalizedString, ThemeMetadata, ThemePreviewMode, ThemeTag} from '../../gallery';
 
 import './ThemeCard.scss';
 
@@ -14,6 +14,18 @@ const b = block('theme-card');
 // English original rather than a raw key.
 const pickLocalized = (value: LocalizedString, language: string) =>
     language.startsWith('ru') ? value.ru : value.en;
+
+// Spelled out instead of `t(`gallery_tag_${tag}`)` so the keys stay greppable
+// for the translation tooling, and so a new tag fails the typecheck.
+const TAG_LABEL_KEYS: Record<ThemeTag, string> = {
+    'high-contrast': 'gallery_tag_high-contrast',
+    accessible: 'gallery_tag_accessible',
+    creative: 'gallery_tag_creative',
+    modern: 'gallery_tag_modern',
+    'high-readability': 'gallery_tag_high-readability',
+    corporate: 'gallery_tag_corporate',
+    minimal: 'gallery_tag_minimal',
+};
 
 interface ThemeCardProps {
     metadata: ThemeMetadata;
@@ -74,7 +86,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                             <div className={b('tags')}>
                                 {metadata.tags.slice(0, 3).map((tag) => (
                                     <Label key={tag} theme="unknown" size="s">
-                                        {t(`gallery_tag_${tag}`)}
+                                        {t(TAG_LABEL_KEYS[tag])}
                                     </Label>
                                 ))}
                             </div>

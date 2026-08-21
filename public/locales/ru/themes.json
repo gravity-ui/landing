@@ -295,5 +295,10 @@
   "gallery_unsaved_title": "Несохранённые изменения будут потеряны",
   "gallery_unsaved_body": "Точно продолжить? Ваши правки этой темы не сохранятся.",
   "gallery_unsaved_confirm": "Да, продолжить",
-  "gallery_unsaved_cancel": "Отмена"
+  "gallery_unsaved_cancel": "Отмена",
+  "gallery_hint_title": "Новая возможность",
+  "gallery_hint_content": "Переключайте базовые темы мгновенно и загляните в галерею дизайнерских",
+  "gallery_hint_action": "Понятно",
+  "gallery_preview_mode_dark_aria": "Показывать тёмную тему",
+  "gallery_preview_mode_light_aria": "Показывать светлую тему"
 }
