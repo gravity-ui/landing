@@ -83,7 +83,12 @@ export const ThemePlaygroundBar: React.FC<ThemePlaygroundBarProps> = ({
                             );
                         })}
                     </div>
-                    <Button view="outlined-contrast" size="l" onClick={onOpenGallery}>
+                    <Button
+                        view="outlined-contrast"
+                        size="l"
+                        className={b('gallery-button')}
+                        onClick={onOpenGallery}
+                    >
                         {t('gallery_open_button')}
                     </Button>
                 </div>

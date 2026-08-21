@@ -13,10 +13,13 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
     // stylelint-disable-next-line declaration-no-important
     overflow-x: hidden !important;
 
-    // The uikit Drawer renders the panel as `.g-drawer__item` and our content
-    // ends up inside `.g-drawer__item-content`. The flex column lives on the
-    // inner wrapper so action-bar and scroll-area get proper flex sizing.
-    .g-drawer__item {
+    // The panel itself is styled through the Drawer's `contentClassName`
+    // (`__panel`), written with explicit interpolation so it stays a
+    // descendant selector — uikit's own `.g-drawer .g-drawer__item` rules
+    // outrank a single class. Its inner wrapper has no such API, so
+    // `.g-drawer__item-content` stays the only way to give action-bar and
+    // scroll-area proper flex sizing.
+    #{$block}__panel {
         background: #221d22;
         box-shadow: 0 4px 12px rgb(0 0 0 / 5%), 0 2px 4px rgb(0 0 0 / 5%);
     }
@@ -83,11 +86,11 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
         flex-shrink: 0;
     }
 
-    &_placement_right .g-drawer__item {
+    &_placement_right #{$block}__panel {
         border-radius: 16px 0 0 16px;
     }
 
-    &_placement_bottom .g-drawer__item {
+    &_placement_bottom #{$block}__panel {
         border-radius: 16px 16px 0 0;
     }
 
@@ -99,7 +102,7 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
         // sticky main menu (always) and below the in-page sticky tabs bar
         // when it activates on scroll. Plus 20px gap around per Figma so
         // the panel reads as a card detached from viewport edges.
-        .g-drawer__item {
+        #{$block}__panel {
             top: calc(
                 var(--themes-main-menu-height, 0px) + var(--themes-sticky-header-height, 0px) +
                     var(--g-spacing-5)
@@ -110,7 +113,7 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
             right: calc(var(--g-spacing-5) + var(--theme-gallery-page-scrollbar-width, 0px));
             bottom: var(--g-spacing-5);
             border-radius: 16px;
-            // uikit's .g-drawer__item ships without `overflow: hidden`, so
+            // uikit's drawer panel ships without `overflow: hidden`, so
             // the inner scrollable area's scrollbar (and any other content)
             // bleeds past the rounded corners and squares off the bottom-
             // right (and bottom-left). Clip to the radius.
@@ -118,13 +121,13 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
         }
 
         // uikit ships `.g-drawer[data-floating-ui-status=open] .g-drawer__item
-        // { transition: transform 300ms }` which beats a plain
-        // `.g-drawer__item` rule on specificity. Match the attribute so the
+        // { transition: transform 300ms }` which beats a plain one-class rule
+        // on specificity. Match the attribute so the
         // sticky-state height shrink (driven by `top`) animates alongside
         // the slide-in transform — both states included so the panel
         // animates whether it's just opened or already on screen.
-        &[data-floating-ui-status='open'] .g-drawer__item,
-        &[data-floating-ui-status='close'] .g-drawer__item {
+        &[data-floating-ui-status='open'] #{$block}__panel,
+        &[data-floating-ui-status='close'] #{$block}__panel {
             transition: top 0.2s ease, transform 0.3s;
         }
 
@@ -198,7 +201,7 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
         // Bottom-sheet anchored 64px under the global mob header. Override
         // the inline height the Drawer sets from its `size` prop so the panel
         // reacts to viewport resize without a JS listener.
-        .g-drawer__item {
+        #{$block}__panel {
             // stylelint-disable-next-line declaration-no-important
             height: calc(100dvh - 64px) !important;
             border-radius: 0;

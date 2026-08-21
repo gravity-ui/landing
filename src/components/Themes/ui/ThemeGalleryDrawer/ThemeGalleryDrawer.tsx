@@ -121,6 +121,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
             size={size}
             hideVeil
             className={b({placement, variant})}
+            contentClassName={b('panel')}
             aria-label={title}
         >
             <div className={b('action-bar')}>
