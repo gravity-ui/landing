@@ -4,6 +4,7 @@ import {Button, Drawer, Icon, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
+import {CONTENT_WRAPPER_ID} from '../../../../constants';
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
@@ -85,9 +86,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
         // 20px before the drawer's left edge after the drawer's own 20px
         // viewport-margin is folded in. Subtract the wrapper's scrollbar so
         // the visible gap stays exact regardless of OS scrollbar width.
-        const wrapper = document.getElementsByClassName(
-            'gravity-ui-landing-layout__wrapper',
-        )?.[0] as HTMLElement | undefined;
+        const wrapper = document.getElementById(CONTENT_WRAPPER_ID);
         const scrollbar = wrapper ? wrapper.offsetWidth - wrapper.clientWidth : 0;
         // Reserve the full drawer width (no scrollbar subtraction) — the
         // drawer panel's right inset is pushed past the scrollbar via

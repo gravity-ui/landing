@@ -2,6 +2,7 @@ import type {PopoverInstanceProps} from '@gravity-ui/uikit/legacy';
 import {Popover, PopoverBehavior} from '@gravity-ui/uikit/legacy';
 import React from 'react';
 
+import {CONTENT_WRAPPER_ID} from '../../../../constants';
 import {block} from '../../../../utils';
 
 import './GalleryHintPopover.scss';
@@ -40,9 +41,7 @@ export const GalleryHintPopover: React.FC<GalleryHintPopoverProps> = ({anchorRef
         // user action — scroll, click outside the popover, link click,
         // button press, etc. Scroll listener also covers the visual
         // overlap with the semi-transparent landing nav (blur quirk).
-        const scrollContainer = document.getElementsByClassName(
-            'gravity-ui-landing-layout__wrapper',
-        )[0] as HTMLElement | undefined;
+        const scrollContainer = document.getElementById(CONTENT_WRAPPER_ID);
         const scrollTarget = scrollContainer ?? window;
         const handleScroll = () => {
             dismiss();

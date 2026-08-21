@@ -17,6 +17,7 @@ import dynamic from 'next/dynamic';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
+import {CONTENT_WRAPPER_ID} from '../../constants';
 import {block} from '../../utils';
 import {CustomScrollbar} from '../CustomScrollbar';
 import {TagItem, Tags} from '../Tags/Tags';
@@ -229,9 +230,7 @@ const ThemesContent = () => {
     );
 
     useEffect(() => {
-        const contentEl = document.getElementsByClassName(
-            'gravity-ui-landing-layout__wrapper',
-        )?.[0] as HTMLElement | undefined;
+        const contentEl = document.getElementById(CONTENT_WRAPPER_ID);
 
         if (!contentEl) {
             return undefined;
@@ -301,31 +300,31 @@ const ThemesContent = () => {
         tabContent = <TabComponent />;
     }
 
-    const ThemeActionsButtons = useCallback(
-        () => (
-            <CustomScrollbar axis="horizontal">
-                <Flex direction="row" gap={2}>
-                    <Button
-                        className={b('theme-action-btn')}
-                        view="outlined-action"
-                        size="xl"
-                        onClick={openImportDialog}
-                    >
-                        <Text>{t('btn_import_theme')}</Text>
-                    </Button>
-                    <Button
-                        className={b('theme-action-btn')}
-                        view="action"
-                        size="xl"
-                        onClick={openExportDialog}
-                    >
-                        <Icon data={ArrowUpFromSquare} />
-                        <Text>{t('btn_export_theme')}</Text>
-                    </Button>
-                </Flex>
-            </CustomScrollbar>
-        ),
-        [openImportDialog, openExportDialog, t],
+    // Plain render helper, not a component: declaring a component inside the
+    // render body makes its identity depend on the memo and remounts both
+    // buttons whenever the deps change.
+    const renderThemeActionsButtons = () => (
+        <CustomScrollbar axis="horizontal">
+            <Flex direction="row" gap={2}>
+                <Button
+                    className={b('theme-action-btn')}
+                    view="outlined-action"
+                    size="xl"
+                    onClick={openImportDialog}
+                >
+                    <Text>{t('btn_import_theme')}</Text>
+                </Button>
+                <Button
+                    className={b('theme-action-btn')}
+                    view="action"
+                    size="xl"
+                    onClick={openExportDialog}
+                >
+                    <Icon data={ArrowUpFromSquare} />
+                    <Text>{t('btn_export_theme')}</Text>
+                </Button>
+            </Flex>
+        </CustomScrollbar>
     );
 
     const renderHeaderRow = () => (
@@ -343,7 +342,7 @@ const ThemesContent = () => {
                     value={forcedPreviewMode}
                     onChange={setForcedPreviewMode}
                 />
-                <ThemeActionsButtons />
+                {renderThemeActionsButtons()}
             </div>
         </Flex>
     );
