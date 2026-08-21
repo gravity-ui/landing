@@ -174,7 +174,9 @@ $block: '.#{variables.$ns}themes';
 
     // Hide the PreviewTab heading toggle once the sticky bar appears — the
     // sticky bar's toggle takes over to avoid duplicate controls on screen.
-    &__content-wrapper:has(&__sticky-bar_visible) .preview-tab__mode-toggle {
+    // The class has to carry the BEM namespace `block()` adds, otherwise the
+    // selector matches nothing and both toggles stay on screen together.
+    &__content-wrapper:has(&__sticky-bar_visible) .#{variables.$ns}preview-tab__mode-toggle {
         display: none;
     }
 
