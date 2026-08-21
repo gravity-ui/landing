@@ -98,18 +98,6 @@ export const getLanding = ({
             title: t('home:examples_title'),
         },
         {
-            type: CustomBlock.Libraries,
-            backgroundColor: 'rgba(37, 27, 37, 0.5)',
-            title: t('home:libraries_title'),
-
-            items: libs,
-        },
-        // {
-        //     type: CustomBlock.Roadmap,
-        //     title: t('home:roadmap_title'),
-        //     tasks: getRoadmapTasks(t),
-        // },
-        {
             type: CustomBlock.StartCreating,
             title: t('home:templates_title'),
             ai: {
@@ -135,6 +123,18 @@ export const getLanding = ({
                 command: 'npm create @gravity-ui',
             },
         },
+        {
+            type: CustomBlock.Libraries,
+            backgroundColor: 'rgba(37, 27, 37, 0.5)',
+            title: t('home:libraries_title'),
+
+            items: libs,
+        },
+        // {
+        //     type: CustomBlock.Roadmap,
+        //     title: t('home:roadmap_title'),
+        //     tasks: getRoadmapTasks(t),
+        // },
         {
             type: CustomBlock.Contributors,
             title: t('home:contributors_title'),
