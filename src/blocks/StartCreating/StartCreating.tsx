@@ -4,7 +4,6 @@ import {
     ChevronRight,
     CircleCheck,
     Code,
-    FaceRobot,
 } from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button, ClipboardButton, Icon, Link, Tab, TabList} from '@gravity-ui/uikit';
@@ -13,6 +12,11 @@ import Prism from 'prismjs';
 import 'prismjs/components/prism-bash.js';
 import React from 'react';
 
+import chatgptLogo from '../../assets/icons/chatgpt-logo.svg';
+import claudeLogo from '../../assets/icons/claude-logo.svg';
+import deepseekLogo from '../../assets/icons/deepseek-logo.svg';
+import opencodeLogo from '../../assets/icons/opencode-logo.svg';
+import sourcecraftLogo from '../../assets/icons/sourcecraft-logo.svg';
 import {CustomScrollbar} from '../../components/CustomScrollbar';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../../constants';
 import {block} from '../../utils';
@@ -71,6 +75,24 @@ export type StartCreatingModel = StartCreatingProps & {
 const AI_TAB = 'ai';
 const MANUAL_TAB = 'manual';
 
+const AI_LOGOS = [
+    {name: 'Claude', icon: claudeLogo},
+    {name: 'ChatGPT', icon: chatgptLogo},
+    {name: 'DeepSeek', icon: deepseekLogo},
+    {name: 'OpenCode', icon: opencodeLogo},
+    {name: 'SourceCraft', icon: sourcecraftLogo},
+];
+
+const AiLogos: React.FC = () => (
+    <span className={b('ai-logos')}>
+        {AI_LOGOS.map(({name, icon}) => (
+            <span key={name} className={b('ai-logo')} title={name}>
+                <Icon data={icon} size={16} />
+            </span>
+        ))}
+    </span>
+);
+
 export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, title, ai, manual}) => {
     const {t} = useTranslation('home');
     const blockRef = React.useRef<HTMLDivElement>(null);
@@ -113,7 +135,7 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                             value={activeTab}
                             onUpdate={setActiveTab}
                         >
-                            <Tab value={AI_TAB} icon={<Icon data={FaceRobot} size={20} />}>
+                            <Tab value={AI_TAB} icon={<AiLogos />}>
                                 {ai.title}
                             </Tab>
                             <Tab value={MANUAL_TAB} icon={<Icon data={Code} size={20} />}>

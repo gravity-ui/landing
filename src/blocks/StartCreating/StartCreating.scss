@@ -42,6 +42,39 @@ $block: '.#{variables.$ns}start-creating';
         flex-wrap: nowrap;
     }
 
+    &__ai-logos {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &__ai-logo {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #251b25;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.15s ease;
+
+        & + & {
+            margin-inline-start: -8px;
+        }
+    }
+
+    &__ai-logos:hover &__ai-logo {
+        transform: scale(1.1);
+        z-index: 2;
+    }
+
+    &__ai-logos:hover &__ai-logo:hover {
+        transform: scale(1.4);
+        z-index: 3;
+    }
+
     &__steps {
         display: flex;
         gap: 44px;
