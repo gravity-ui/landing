@@ -15,8 +15,9 @@ const b = block('theme-card');
 const pickLocalized = (value: LocalizedString, language: string) =>
     language.startsWith('ru') ? value.ru : value.en;
 
-// Spelled out instead of `t(`gallery_tag_${tag}`)` so the keys stay greppable
-// for the translation tooling, and so a new tag fails the typecheck.
+// Spelled out rather than built from the tag at call time: the keys stay
+// greppable for the translation tooling, and adding a tag without a label
+// fails the typecheck.
 const TAG_LABEL_KEYS: Record<ThemeTag, string> = {
     'high-contrast': 'gallery_tag_high-contrast',
     accessible: 'gallery_tag_accessible',
