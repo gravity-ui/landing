@@ -1,6 +1,10 @@
 import React from 'react';
 
-export type PreviewMode = 'light' | 'dark';
+import type {ThemePreviewMode} from '../../Themes/gallery';
+
+// Re-exported so existing consumers keep their import path; the single source
+// of truth for the mode union is the gallery schema.
+export type PreviewMode = ThemePreviewMode;
 
 interface PreviewModeContextValue {
     forcedMode: PreviewMode | null;

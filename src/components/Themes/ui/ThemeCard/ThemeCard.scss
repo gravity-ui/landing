@@ -2,6 +2,15 @@
 
 $block: '.#{variables.$ns}theme-card';
 
+// `--g-border-radius-2xl` is missing in this uikit version (largest available
+// is xl=32px, too big), so the Figma values live here instead of as tokens.
+// The preview radius is repeated by the scrim and the hover clip-path, which
+// all have to stay in lock-step.
+$previewRadius: 16px;
+$selectionFrameRadius: 20px;
+// Figma puts a dedicated darkening fill over the preview image on hover.
+$scrimColor: rgb(34 29 34 / 75%);
+
 #{$block} {
     --g-border-radius-l: 8px;
     --g-border-radius-xl: 8px;
@@ -29,9 +38,7 @@ $block: '.#{variables.$ns}theme-card';
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        // `--g-border-radius-2xl` is missing in this uikit version (largest
-        // available is xl=32px which is too big); 16px is the Figma value.
-        border-radius: 16px;
+        border-radius: $previewRadius;
         border: 1px solid var(--g-color-line-generic);
         box-shadow: 0 4px 24px 0 rgb(0 0 0 / 5%), 0 2px 8px 0 rgb(0 0 0 / 5%);
         transition: filter var(--theme-card-hover-out), border-color var(--theme-card-hover-out);
@@ -99,7 +106,7 @@ $block: '.#{variables.$ns}theme-card';
         right: -5px;
         bottom: -5px;
         border: 2px solid var(--g-color-line-brand);
-        border-radius: 20px;
+        border-radius: $selectionFrameRadius;
         opacity: 0;
         pointer-events: none;
         transition: opacity var(--theme-card-hover-out);
@@ -124,16 +131,15 @@ $block: '.#{variables.$ns}theme-card';
         // without escaping behind the preview when opacity hits 1.
         isolation: isolate;
 
-        // Figma puts a dedicated darkening fill over the preview image, not a
-        // brightness filter: a light theme dimmed with `brightness()` stays
-        // light grey and the white overlay text drowns in it.
+        // A fill, not a brightness filter: a light theme dimmed with
+        // `brightness()` stays light grey and the white overlay text drowns.
         &::before {
             content: '';
             position: absolute;
             inset: 0;
             z-index: -1;
-            border-radius: 16px;
-            background-color: rgb(34 29 34 / 75%);
+            border-radius: $previewRadius;
+            background-color: $scrimColor;
         }
     }
 
@@ -169,7 +175,7 @@ $block: '.#{variables.$ns}theme-card';
         // output, so the blur used to smear ~10px past the selection frame
         // into the drawer background. `clip-path` runs after `filter` and cuts
         // it back to the rounded box.
-        clip-path: inset(0 round 16px);
+        clip-path: inset(0 round $previewRadius);
         transition: filter var(--theme-card-hover-in), border-color var(--theme-card-hover-in);
     }
 
