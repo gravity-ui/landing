@@ -32,6 +32,11 @@ const useMatchMedia = (query: string): boolean => {
 const b = block('theme-gallery-drawer');
 
 const DRAWER_WIDTH_VAR = '--theme-gallery-drawer-width';
+// Boolean channel for the push-layout styles in Themes.scss. A data attribute
+// rather than sniffing the inline `style` string for DRAWER_WIDTH_VAR, which
+// would break the moment the variable is cleared by assignment instead of
+// `removeProperty`.
+const DRAWER_OPEN_ATTR = 'themeGalleryDrawer';
 const SCROLLBAR_WIDTH_VAR = '--theme-gallery-page-scrollbar-width';
 const DESKTOP_DRAWER_WIDTH_PX = 447;
 const TABLET_DRAWER_HEIGHT_PX = 376;
@@ -100,9 +105,11 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
         // Expose the page-scrollbar width so the drawer's right inset can
         // sit beyond the scrollbar instead of being half-covered by it.
         document.documentElement.style.setProperty(SCROLLBAR_WIDTH_VAR, `${scrollbar}px`);
+        document.documentElement.dataset[DRAWER_OPEN_ATTR] = 'open';
         return () => {
             document.documentElement.style.removeProperty(DRAWER_WIDTH_VAR);
             document.documentElement.style.removeProperty(SCROLLBAR_WIDTH_VAR);
+            delete document.documentElement.dataset[DRAWER_OPEN_ATTR];
         };
     }, [open, isDesktop]);
 

@@ -220,7 +220,7 @@ $block: '.#{variables.$ns}themes';
     // when scroll activates the sticky class — otherwise the max-width
     // transition would replay on every scroll-in. 100vw stays numeric so
     // max-width can transition smoothly (`none` is non-animatable).
-    html[style*='--theme-gallery-drawer-width'] &__header-actions {
+    html[data-theme-gallery-drawer='open'] &__header-actions {
         max-width: 100vw;
     }
 

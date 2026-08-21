@@ -52,6 +52,9 @@ const PreviewTab = dynamic(
 
 const b = block('themes');
 
+const MAIN_MENU_HEIGHT_VAR = '--themes-main-menu-height';
+const STICKY_HEADER_HEIGHT_VAR = '--themes-sticky-header-height';
+
 enum ThemeTab {
     Colors = 'colors',
     Typography = 'typography',
@@ -81,6 +84,7 @@ const ThemesContent = () => {
     const {add: addToast} = useToaster();
 
     const stickyBarRef = useRef<HTMLDivElement>(null);
+    const headerRowRef = useRef<HTMLDivElement>(null);
     const firstSwatchRef = useRef<HTMLButtonElement>(null);
     // Bumped on every apply so a slower-resolving theme load can't overwrite a
     // more recent selection (last-click-wins instead of last-resolve-wins).
@@ -96,6 +100,7 @@ const ThemesContent = () => {
     // so the swatch row matches what the page actually shows.
     const [activePresetIndex, setActivePresetIndex] = useState<number | null>(0);
     const [pendingApply, setPendingApply] = useState<PendingApply | null>(null);
+    const [isStickyBarVisible, setStickyBarVisible] = useState(false);
     const [forcedPreviewMode, setForcedPreviewMode] = useState<ThemePreviewMode | null>(null);
 
     const openExportDialog = useCallback(() => setIsExportDialogVisible(true), []);
@@ -243,46 +248,61 @@ const ThemesContent = () => {
         // height changes between breakpoints (mobile hamburger vs full nav).
         const updateMenuHeight = () => {
             const menuHeight = contentEl.getBoundingClientRect().top;
-            document.documentElement.style.setProperty(
-                '--themes-main-menu-height',
-                `${menuHeight}px`,
-            );
+            document.documentElement.style.setProperty(MAIN_MENU_HEIGHT_VAR, `${menuHeight}px`);
         };
         updateMenuHeight();
         window.addEventListener('resize', updateMenuHeight);
 
-        const visibleClass = b('sticky-bar_visible');
-        let stuck = false;
-
         const onScroll = () => {
-            const stickyBar = stickyBarRef.current;
-            if (!stickyBar) {
+            const headerRow = headerRowRef.current;
+            if (!headerRow) {
                 return;
             }
-            const shouldStick = contentEl.scrollTop > 136;
-            if (shouldStick && !stuck) {
-                stickyBar.classList.add(visibleClass);
-                document.documentElement.style.setProperty(
-                    '--themes-sticky-header-height',
-                    `${stickyBar.getBoundingClientRect().height}px`,
-                );
-                stuck = true;
-            } else if (!shouldStick && stuck) {
-                stickyBar.classList.remove(visibleClass);
-                document.documentElement.style.removeProperty('--themes-sticky-header-height');
-                stuck = false;
-            }
+            // Hand over to the sticky bar exactly when the in-flow header row
+            // starts sliding under the menu. Measured from the row itself, so
+            // a taller title (longer copy, another locale) shifts the hand-off
+            // along with it instead of desyncing from a hardcoded offset.
+            const rowOffset =
+                headerRow.getBoundingClientRect().top -
+                contentEl.getBoundingClientRect().top +
+                contentEl.scrollTop;
+            setStickyBarVisible(contentEl.scrollTop > rowOffset);
         };
+        onScroll();
 
-        contentEl.addEventListener('scroll', onScroll);
+        contentEl.addEventListener('scroll', onScroll, {passive: true});
 
         return () => {
             contentEl.removeEventListener('scroll', onScroll);
             window.removeEventListener('resize', updateMenuHeight);
-            document.documentElement.style.removeProperty('--themes-sticky-header-height');
-            document.documentElement.style.removeProperty('--themes-main-menu-height');
+            document.documentElement.style.removeProperty(MAIN_MENU_HEIGHT_VAR);
         };
     }, []);
+
+    // The drawer sits below the sticky bar, so it needs the bar's height as a
+    // CSS variable. Kept in sync with a ResizeObserver: the bar wraps to two
+    // rows on narrow viewports, and a one-off measurement taken at the moment
+    // of sticking would leave the drawer offset stale after a resize.
+    useEffect(() => {
+        const stickyBar = stickyBarRef.current;
+        if (!stickyBar || !isStickyBarVisible) {
+            document.documentElement.style.removeProperty(STICKY_HEADER_HEIGHT_VAR);
+            return undefined;
+        }
+        const updateHeight = () => {
+            document.documentElement.style.setProperty(
+                STICKY_HEADER_HEIGHT_VAR,
+                `${stickyBar.getBoundingClientRect().height}px`,
+            );
+        };
+        updateHeight();
+        const observer = new ResizeObserver(updateHeight);
+        observer.observe(stickyBar);
+        return () => {
+            observer.disconnect();
+            document.documentElement.style.removeProperty(STICKY_HEADER_HEIGHT_VAR);
+        };
+    }, [isStickyBarVisible]);
 
     const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.Preview);
 
@@ -356,8 +376,10 @@ const ThemesContent = () => {
                         {t('subtitle')}
                     </Text>
                 </div>
-                <div className={b('header-actions-wrapper')}>{renderHeaderRow()}</div>
-                <div className={b('sticky-bar')} ref={stickyBarRef}>
+                <div className={b('header-actions-wrapper')} ref={headerRowRef}>
+                    {renderHeaderRow()}
+                </div>
+                <div className={b('sticky-bar', {visible: isStickyBarVisible})} ref={stickyBarRef}>
                     {renderHeaderRow()}
                 </div>
 
