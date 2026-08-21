@@ -14,7 +14,9 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
-import {chromium} from 'playwright';
+// `playwright` itself is not a declared dependency — it only resolves as a
+// transitive dep of `@playwright/test`, which re-exports the browser types.
+import {chromium} from '@playwright/test';
 import sharp from 'sharp';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
