@@ -76,11 +76,11 @@ const AI_TAB = 'ai';
 const MANUAL_TAB = 'manual';
 
 const AI_LOGOS = [
-    {name: 'Claude', icon: claudeLogo},
-    {name: 'ChatGPT', icon: chatgptLogo},
-    {name: 'DeepSeek', icon: deepseekLogo},
-    {name: 'OpenCode', icon: opencodeLogo},
     {name: 'SourceCraft', icon: sourcecraftLogo},
+    {name: 'OpenCode', icon: opencodeLogo},
+    {name: 'DeepSeek', icon: deepseekLogo},
+    {name: 'ChatGPT', icon: chatgptLogo},
+    {name: 'Claude', icon: claudeLogo},
 ];
 
 const AiLogos: React.FC = () => (
