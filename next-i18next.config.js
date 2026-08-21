@@ -15,5 +15,10 @@ module.exports = {
         '/analytics.txt',
         '/context7.json',
         '/index-social.png',
+        // Theme card previews are static files under `public/`. Without this
+        // the locale middleware 307s them to `/<locale>/themes/previews/...`,
+        // which 404s, and every card falls back to the gradient placeholder
+        // on any non-default locale.
+        '/themes/previews',
     ],
 };

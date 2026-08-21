@@ -1,0 +1,225 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-gallery-drawer';
+
+#{$block} {
+    --g-border-radius-l: 8px;
+    --g-border-radius-xl: 8px;
+
+    // uikit's outer drawer overlay sets an inline `overflow: auto` via JS,
+    // so the slide-in `translateX(100%)` animation briefly extends the
+    // panel past the viewport and triggers a horizontal scrollbar. The
+    // `!important` is required to win against the inline style.
+    // stylelint-disable-next-line declaration-no-important
+    overflow-x: hidden !important;
+
+    // The panel itself is styled through the Drawer's `contentClassName`
+    // (`__panel`), written with explicit interpolation so it stays a
+    // descendant selector — uikit's own `.g-drawer .g-drawer__item` rules
+    // outrank a single class. Its inner wrapper has no such API, so
+    // `.g-drawer__item-content` stays the only way to give action-bar and
+    // scroll-area proper flex sizing.
+    #{$block}__panel {
+        background: #221d22;
+        box-shadow: 0 4px 12px rgb(0 0 0 / 5%), 0 2px 4px rgb(0 0 0 / 5%);
+    }
+
+    .g-drawer__item-content {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    &__action-bar {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: inherit;
+        display: flex;
+        align-items: flex-start;
+        gap: var(--g-spacing-3);
+        flex-shrink: 0;
+    }
+
+    &__header-text {
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-2);
+    }
+
+    &__title {
+        color: var(--g-color-text-primary);
+    }
+
+    &__description {
+        color: var(--g-color-text-secondary);
+    }
+
+    &__close-button {
+        flex-shrink: 0;
+    }
+
+    &__scroll-area {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__cards {
+        display: flex;
+        flex-direction: column;
+    }
+
+    // Default CTA wrapper layout — desktop/mobile keep the full-width
+    // outlined button; tablet (below) replaces the wrapper with a
+    // card-styled slot per the Figma horizontal-drawer mockup.
+    &__all-themes-cta {
+        flex-shrink: 0;
+    }
+
+    &__all-themes-button {
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    &_placement_right #{$block}__panel {
+        border-radius: 16px 0 0 16px;
+    }
+
+    &_placement_bottom #{$block}__panel {
+        border-radius: 16px 16px 0 0;
+    }
+
+    // The variant modifier is computed in JS based on viewport vs. the
+    // push-layout minimum width — keep CSS in lock-step with the placement
+    // chosen there rather than duplicating breakpoint math in @media.
+    &_variant_desktop {
+        // 447 wide right-side drawer. Push the panel below the landing's
+        // sticky main menu (always) and below the in-page sticky tabs bar
+        // when it activates on scroll. Plus 20px gap around per Figma so
+        // the panel reads as a card detached from viewport edges.
+        #{$block}__panel {
+            top: calc(
+                var(--themes-main-menu-height, 0px) + var(--themes-sticky-header-height, 0px) +
+                    var(--g-spacing-5)
+            );
+            // Push the right inset past the page scrollbar so the visible
+            // gap is measured from the scrollbar's inner edge, not the
+            // viewport edge (otherwise the gap is half-eaten by the bar).
+            right: calc(var(--g-spacing-5) + var(--theme-gallery-page-scrollbar-width, 0px));
+            bottom: var(--g-spacing-5);
+            border-radius: 16px;
+            // uikit's drawer panel ships without `overflow: hidden`, so
+            // the inner scrollable area's scrollbar (and any other content)
+            // bleeds past the rounded corners and squares off the bottom-
+            // right (and bottom-left). Clip to the radius.
+            overflow: hidden;
+        }
+
+        // uikit ships `.g-drawer[data-floating-ui-status=open] .g-drawer__item
+        // { transition: transform 300ms }` which beats a plain one-class rule
+        // on specificity. Match the attribute so the
+        // sticky-state height shrink (driven by `top`) animates alongside
+        // the slide-in transform — both states included so the panel
+        // animates whether it's just opened or already on screen.
+        &[data-floating-ui-status='open'] #{$block}__panel,
+        &[data-floating-ui-status='close'] #{$block}__panel {
+            transition: top 0.2s ease, transform 0.3s;
+        }
+
+        #{$block}__action-bar {
+            min-height: 100px;
+            padding: var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-5);
+        }
+
+        #{$block}__scroll-area {
+            padding: var(--g-spacing-3) var(--g-spacing-5) var(--g-spacing-5);
+            gap: var(--g-spacing-6);
+        }
+
+        #{$block}__cards {
+            gap: var(--g-spacing-6);
+        }
+    }
+
+    &_variant_tablet {
+        // 376 tall bottom-sheet with horizontal card scroll
+        #{$block}__action-bar {
+            min-height: 56px;
+            padding: var(--g-spacing-4) var(--g-spacing-5);
+            align-items: center;
+        }
+
+        #{$block}__scroll-area {
+            overflow-x: auto;
+            overflow-y: hidden;
+            flex-direction: row;
+            // Top padding leaves room for ThemeCard's orange selection frame,
+            // which extends 5px + 2px border above the card's bounding box.
+            padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-5);
+        }
+
+        #{$block}__cards {
+            flex-direction: row;
+            gap: var(--g-spacing-4);
+            flex: 0 0 auto;
+        }
+
+        #{$block}__card {
+            width: 397px;
+            flex-shrink: 0;
+        }
+
+        // "All Gallery Themes" CTA at the end of the horizontal scroll.
+        // Height (225px) matches ThemeCard's rendered preview-stack in
+        // the 376px tablet drawer; aligned to top so the rounded
+        // rectangle lines up with the card previews next to it.
+        #{$block}__all-themes-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: flex-start;
+            width: 277px;
+            height: 225px;
+            flex: 0 0 auto;
+            margin-inline-start: var(--g-spacing-4);
+            padding: var(--g-spacing-8);
+            background: var(--g-color-base-generic-ultralight);
+            border-radius: 16px;
+        }
+
+        #{$block}__all-themes-button {
+            width: auto;
+        }
+    }
+
+    &_variant_mobile {
+        // Bottom-sheet anchored 64px under the global mob header. Override
+        // the inline height the Drawer sets from its `size` prop so the panel
+        // reacts to viewport resize without a JS listener.
+        #{$block}__panel {
+            // stylelint-disable-next-line declaration-no-important
+            height: calc(100dvh - 64px) !important;
+            border-radius: 0;
+        }
+
+        #{$block}__action-bar {
+            min-height: 92px;
+            padding: var(--g-spacing-2) var(--g-spacing-5);
+            align-items: flex-start;
+        }
+
+        #{$block}__scroll-area {
+            padding: var(--g-spacing-3) var(--g-spacing-5) var(--g-spacing-6);
+            gap: var(--g-spacing-4);
+        }
+
+        #{$block}__cards {
+            gap: var(--g-spacing-4);
+        }
+    }
+}
