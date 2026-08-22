@@ -10,7 +10,7 @@ import figmaIcon from '../../assets/icons/figma.svg';
 import githubIcon from '../../assets/icons/github.svg';
 import {Component as ComponentType} from '../../content/components/types';
 import {block} from '../../utils';
-import {getRouteFromReadmeUrl, resolveRepoAbsoluteLink} from '../../utils/components';
+import {getReadmeAssetsBasePath, resolveReadmeLink} from '../../utils/components';
 import {ArticleNavigation} from '../ArticleNavigation/ArticleNavigation';
 import {HeaderMaintainerList} from '../HeaderMaintainerList';
 import {MDXRenderer} from '../MDXRenderer/MDXRenderer';
@@ -119,29 +119,16 @@ export const Component: React.FC<ComponentProps> = ({
     }, [tabId]);
 
     const contentReadmeUrl = component.content?.readmeUrl[i18nextConfig.i18n.defaultLocale as 'en'];
+    const readmeAssetsBasePath = contentReadmeUrl
+        ? getReadmeAssetsBasePath(contentReadmeUrl)
+        : undefined;
 
     const rewriteLinks = React.useCallback(
         (link: string) => {
             if (!contentReadmeUrl) {
                 return link;
             }
-
-            const readmeUrl = new URL(contentReadmeUrl);
-            const url = new URL(link, contentReadmeUrl);
-
-            if (url.origin !== readmeUrl.origin) {
-                return link;
-            }
-
-            if (link.startsWith('/src/')) {
-                const resolved = resolveRepoAbsoluteLink(link, contentReadmeUrl);
-                if (resolved) {
-                    return resolved;
-                }
-            }
-
-            const newLink = getRouteFromReadmeUrl(url.toString());
-            return newLink ?? link;
+            return resolveReadmeLink(link, contentReadmeUrl);
         },
         [contentReadmeUrl],
     );
@@ -234,6 +221,7 @@ export const Component: React.FC<ComponentProps> = ({
                             key={`${libId}-${component.id}-${locale}-overview`}
                             text={readmeContent}
                             rewriteLinks={rewriteLinks}
+                            absoluteImgPath={readmeAssetsBasePath}
                             withComponents
                         />
                     </>
