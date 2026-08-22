@@ -224,7 +224,7 @@ Lightweight express.js wrapper that integrates with NodeKit.
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/farm/llms.txt)
 > GitHub: [gravity-ui/farm](https://github.com/gravity-ui/farm)
 
-Documentation for the Farm package.
+A self-hosted service for deploying application previews from pull requests.
 
 ## Graph — `@gravity-ui/graph`
 
