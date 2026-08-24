@@ -18,7 +18,7 @@ import type {ThemeImportProps} from './types';
 
 export type {ThemeImportProps} from './types';
 
-export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
+export const ThemeImport = ({isOpen, onClose, onImportSuccess}: ThemeImportProps) => {
     const {t} = useTranslation('themes');
     const breakpoint = useWindowBreakpoint();
     const [textareaValue, setTextareaValue] = React.useState('');
@@ -32,7 +32,10 @@ export const ThemeImport = ({isOpen, onClose}: ThemeImportProps) => {
 
     const {importThemeFromUserInput} = useImportTheme({
         onImportError: handleImportError,
-        onImportSuccess: onClose,
+        onImportSuccess: () => {
+            onImportSuccess?.();
+            onClose();
+        },
     });
     const handleImportThemeClick = useCallback(() => {
         importThemeFromUserInput(textareaValue);

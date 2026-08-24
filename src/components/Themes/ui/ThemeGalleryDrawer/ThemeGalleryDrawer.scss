@@ -198,12 +198,13 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
     }
 
     &_variant_mobile {
-        // Bottom-sheet anchored 64px under the global mob header. Override
-        // the inline height the Drawer sets from its `size` prop so the panel
+        // Full-screen sheet: the lead asked for the panel to take the whole
+        // viewport height instead of stopping under the mob header. Overrides
+        // the inline height the Drawer sets from its `size` prop, so the panel
         // reacts to viewport resize without a JS listener.
         #{$block}__panel {
             // stylelint-disable-next-line declaration-no-important
-            height: calc(100dvh - 64px) !important;
+            height: 100dvh !important;
             border-radius: 0;
         }
 

@@ -1,5 +1,5 @@
 import {ArrowUpFromSquare} from '@gravity-ui/icons';
-import {Grid} from '@gravity-ui/page-constructor';
+import {BREAKPOINTS, Grid} from '@gravity-ui/page-constructor';
 import {
     Button,
     Dialog,
@@ -18,6 +18,7 @@ import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
 import {CONTENT_WRAPPER_ID} from '../../constants';
+import {useWindowBreakpoint} from '../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement} from '../../utils';
 import {CustomScrollbar} from '../CustomScrollbar';
 import {TagItem, Tags} from '../Tags/Tags';
@@ -79,6 +80,9 @@ type PendingApply =
 const ThemesContent = () => {
     const {t} = useTranslation('themes');
 
+    const breakpoint = useWindowBreakpoint();
+    const isMobile = breakpoint < BREAKPOINTS.sm;
+
     const themeCreator = useThemeCreator();
     const {importTheme, applyBrandPreset} = useThemeCreatorMethods();
     const {add: addToast} = useToaster();
@@ -107,6 +111,17 @@ const ThemesContent = () => {
     const closeExportDialog = useCallback(() => setIsExportDialogVisible(false), []);
     const openImportDialog = useCallback(() => setIsImportDialogVisible(true), []);
     const closeImportDialog = useCallback(() => setIsImportDialogVisible(false), []);
+    // A hand-pasted theme replaces whatever the gallery/playground had applied,
+    // so drop their selection — otherwise the previously applied card keeps its
+    // orange frame and the UI misreports the current theme. Bumping the
+    // generation also drops a gallery load still in flight so it can't land on
+    // top of the freshly imported theme.
+    const handleImportSuccess = useCallback(() => {
+        applyGenerationRef.current += 1;
+        setActiveThemeId(null);
+        setActivePresetIndex(null);
+        setForcedPreviewMode(null);
+    }, []);
 
     const showThemeImportedToast = useCallback(() => {
         addToast({
@@ -158,8 +173,13 @@ const ThemesContent = () => {
                 setActivePresetIndex(null);
                 setForcedPreviewMode(mode);
                 setCommunityModalOpen(false);
-                // The drawer stays open on purpose: applying a theme is meant
-                // to be tried on, so the user can keep picking from the list.
+                // Desktop/tablet keep the drawer open on purpose: applying a
+                // theme is meant to be tried on, so the user can keep picking
+                // from the list. On phone the sheet covers the whole screen
+                // and would hide the result, so close it (DATAUI-3748).
+                if (isMobile) {
+                    setGalleryDrawerOpen(false);
+                }
                 showThemeImportedToast();
             } catch (error) {
                 if (generation !== applyGenerationRef.current) {
@@ -170,7 +190,7 @@ const ThemesContent = () => {
                 showThemeApplyErrorToast();
             }
         },
-        [importTheme, showThemeImportedToast, showThemeApplyErrorToast],
+        [importTheme, showThemeImportedToast, showThemeApplyErrorToast, isMobile],
     );
 
     const handleStartFromScratch = useCallback(() => {
@@ -407,7 +427,11 @@ const ThemesContent = () => {
             </div>
 
             <ThemeExport isOpen={isExportDialogVisible} onClose={closeExportDialog} />
-            <ThemeImport isOpen={isImportDialogVisible} onClose={closeImportDialog} />
+            <ThemeImport
+                isOpen={isImportDialogVisible}
+                onClose={closeImportDialog}
+                onImportSuccess={handleImportSuccess}
+            />
             <ThemeGalleryDrawer
                 open={galleryDrawerOpen}
                 onClose={() => setGalleryDrawerOpen(false)}

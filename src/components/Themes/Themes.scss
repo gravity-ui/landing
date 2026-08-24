@@ -4,6 +4,9 @@
 
 $block: '.#{variables.$ns}themes';
 
+// Figma content column: 1232 grid + 16 gap + 80 gutters.
+$contentMaxWidth: calc(1232px + 16px + 80px);
+
 @mixin sticky() {
     // Pull the sticky bar out of `content-wrapper` so it spans the full
     // viewport width instead of being squeezed by drawer push-padding. Top
@@ -26,9 +29,19 @@ $block: '.#{variables.$ns}themes';
 }
 
 @mixin gridContainerOffsets() {
-    max-width: calc(1232px + 16px + 80px);
+    max-width: $contentMaxWidth;
     padding-inline: var(--g-spacing-10);
     margin-inline: auto;
+    // Anchor the left margin to the viewport instead of the (drawer-shrunk)
+    // container. With plain `margin: auto` the available width drops below the
+    // grid cap the moment the drawer pushes the page, both margins collapse to
+    // 0 and the whole column jumps to the viewport edge. Deriving it from
+    // `100vw` keeps the column where it was and only pulls its right edge in
+    // (DATAUI-3748, lead review).
+    margin-inline-start: max(
+        0px,
+        calc((100vw - var(--theme-gallery-page-scrollbar-width, 0px) - #{$contentMaxWidth}) / 2)
+    );
 }
 
 #{$block} {
@@ -64,6 +77,23 @@ $block: '.#{variables.$ns}themes';
     &__grid {
         position: relative;
         z-index: 1;
+
+        // page-constructor's own container caps at the same grid width and
+        // centers with plain margins, so it collapses to the viewport edge
+        // when the drawer squeezes the page. Anchor it like
+        // `gridContainerOffsets()` does for the rows above it.
+        .container-fluid {
+            // page-constructor sets `width: 100%`, so the margin below would push
+            // the box out of the parent instead of shrinking it.
+            width: auto;
+            margin-inline-start: max(
+                0px,
+                calc(
+                    (100vw - var(--theme-gallery-page-scrollbar-width, 0px) - #{$contentMaxWidth}) /
+                        2
+                )
+            );
+        }
 
         &__content {
             padding: calc(var(--g-spacing-base) * 12) 0;
@@ -164,10 +194,18 @@ $block: '.#{variables.$ns}themes';
         align-self: center;
 
         // On phone the sticky bar is already cramped — hide the dark/light
-        // toggle here so tabs + Import/Export get the available room. The
-        // in-section toggle next to the "UI Samples" heading still covers
-        // mode switching for users on small screens.
+        // toggle here. The in-section toggle next to the "UI Samples" heading
+        // still covers mode switching for users on small screens.
         @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            display: none;
+        }
+    }
+
+    // Phone: keep only the tabs in the sticky bar. Import/Export wrapped onto
+    // a second row and doubled the bar's height; both stay available in the
+    // in-flow toolbar above (DATAUI-3748, lead review).
+    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+        &__sticky-bar &__header-action-buttons {
             display: none;
         }
     }

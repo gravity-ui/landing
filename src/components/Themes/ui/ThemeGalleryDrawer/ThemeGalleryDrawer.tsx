@@ -69,13 +69,11 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     const isMobile = breakpoint < BREAKPOINTS.sm;
     const isTablet = !isDesktop && !isMobile;
 
-    const title = t(isDesktop ? 'gallery_drawer_title' : 'gallery_drawer_title_compact');
-    let description: string | null = null;
-    if (isMobile) {
-        description = t('gallery_drawer_description_mobile');
-    } else if (isDesktop) {
-        description = t('gallery_drawer_description');
-    }
+    // One wording everywhere: the tablet/mobile-only copy diverged from the
+    // Figma drawer, which uses the same title and description on every
+    // breakpoint (DATAUI-3748, lead review).
+    const title = t('gallery_drawer_title');
+    const description = t('gallery_drawer_description');
     const placement = isDesktop ? 'right' : 'bottom';
     const variant = isDesktop ? 'desktop' : isTablet ? 'tablet' : 'mobile';
     // Mobile height is overridden via CSS (`calc(100dvh - 64px)`) so this value is unused there.
