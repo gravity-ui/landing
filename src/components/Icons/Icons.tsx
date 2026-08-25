@@ -1,6 +1,6 @@
-import {ArrowUpRightFromSquare, Magnifier, Xmark} from '@gravity-ui/icons';
+import {ArrowUpRightFromSquare, ChevronRight, Magnifier, Xmark} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, TextInput} from '@gravity-ui/uikit';
+import {Button, Icon, Sheet, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -13,6 +13,7 @@ import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
 import {useImageSearch} from './ImageSearch';
+import {iconCategories, isIconInCategory} from './categories';
 import {allIcons} from './constants';
 import type {IconItem} from './types';
 
@@ -29,6 +30,8 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     const isMobile = useIsMobile();
 
     const [filterString, setFilterString] = React.useState('');
+    const [categoryId, setCategoryId] = React.useState('all');
+    const [isCategorySheetOpen, setIsCategorySheetOpen] = React.useState(false);
     const [imageSearchResults, setImageSearchResults] = React.useState<string[] | null>(null);
 
     const [isOpenIconDialog, setIsOpenIconDialog] = React.useState(false);
@@ -100,13 +103,15 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         isActive: imageSearchResults !== null,
     });
 
-    const icons = React.useMemo(() => {
+    const searchedIcons = React.useMemo(() => {
         if (imageSearchResults) {
             const resultSet = new Set(imageSearchResults);
             const matched = allIcons.filter(({name}) => resultSet.has(name));
             // preserve the ranking order from the search results
             matched.sort(
-                (a, b) => imageSearchResults.indexOf(a.name) - imageSearchResults.indexOf(b.name),
+                (first, second) =>
+                    imageSearchResults.indexOf(first.name) -
+                    imageSearchResults.indexOf(second.name),
             );
             return matched;
         }
@@ -126,6 +131,68 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 ),
         );
     }, [filterString, imageSearchResults]);
+
+    const categoryCounts = React.useMemo(
+        () =>
+            Object.fromEntries(
+                iconCategories.map((category) => [
+                    category.id,
+                    allIcons.filter((icon) => isIconInCategory(icon, category.id)).length,
+                ]),
+            ),
+        [],
+    );
+
+    const isSearching = Boolean(filterString) || imageSearch.isActive;
+
+    const icons = React.useMemo(
+        () =>
+            isSearching || categoryId === 'all'
+                ? searchedIcons
+                : searchedIcons.filter((icon) => isIconInCategory(icon, categoryId)),
+        [categoryId, isSearching, searchedIcons],
+    );
+
+    const selectedCategory = iconCategories.find(({id}) => id === categoryId);
+    const resultsTitle = isSearching ? 'All icons' : selectedCategory?.label ?? 'All icons';
+    const resultsCount = isSearching ? allIcons.length : icons.length;
+
+    const handleSelectCategory = React.useCallback((nextCategoryId: string) => {
+        setCategoryId(nextCategoryId);
+        setIsCategorySheetOpen(false);
+    }, []);
+
+    const categoryOptions = (
+        <React.Fragment>
+            <button
+                type="button"
+                disabled={isSearching}
+                aria-pressed={!isSearching && categoryId === 'all'}
+                className={b('category', {
+                    selected: !isSearching && categoryId === 'all',
+                })}
+                onClick={() => handleSelectCategory('all')}
+            >
+                <span>All icons</span>
+                <span className={b('category-count')}>{allIcons.length}</span>
+            </button>
+            {iconCategories.map((category) => (
+                <button
+                    type="button"
+                    key={category.id}
+                    disabled={isSearching}
+                    aria-pressed={!isSearching && categoryId === category.id}
+                    className={b('category', {
+                        selected: !isSearching && categoryId === category.id,
+                    })}
+                    onClick={() => handleSelectCategory(category.id)}
+                >
+                    <span>{category.label}</span>
+                    <span className={b('category-count')}>{categoryCounts[category.id]}</span>
+                </button>
+            ))}
+        </React.Fragment>
+    );
 
     const searchStartContent = imageSearch.isActive ? (
         imageSearch.startContent
@@ -195,11 +262,37 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             </Row>
             <Row>
                 <Col sizes={12}>
-                    {icons.length ? (
-                        <IconCollection icons={icons} onSelectIcon={handleSelectIcon} />
-                    ) : (
-                        <IconsNotFound />
-                    )}
+                    <div className={b('catalog')}>
+                        <aside className={b('categories')} aria-label="Icon categories">
+                            <h2 className={b('section-title')}>Category</h2>
+                            <div className={b('category-list')}>{categoryOptions}</div>
+                        </aside>
+                        <button
+                            type="button"
+                            className={b('mobile-category-trigger')}
+                            disabled={isSearching}
+                            aria-haspopup="dialog"
+                            aria-expanded={isCategorySheetOpen}
+                            onClick={() => setIsCategorySheetOpen(true)}
+                        >
+                            <span>
+                                <span className={b('mobile-category-label')}>{resultsTitle}</span>{' '}
+                                <span className={b('mobile-category-count')}>{resultsCount}</span>
+                            </span>
+                            <Icon data={ChevronRight} size={16} />
+                        </button>
+                        <section className={b('results')}>
+                            <div className={b('results-heading')}>
+                                <h2 className={b('section-title')}>{resultsTitle}</h2>
+                                <span className={b('results-count')}>{resultsCount}</span>
+                            </div>
+                            {icons.length ? (
+                                <IconCollection icons={icons} onSelectIcon={handleSelectIcon} />
+                            ) : (
+                                <IconsNotFound />
+                            )}
+                        </section>
+                    </div>
                 </Col>
             </Row>
 
@@ -209,6 +302,20 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 onClose={handleCloseDialog}
                 onClickToKeyword={handleClickToKeyword}
             />
+
+            {isMobile && (
+                <Sheet
+                    className={b('category-sheet')}
+                    contentClassName={b('category-sheet-content')}
+                    visible={isCategorySheetOpen}
+                    onClose={() => setIsCategorySheetOpen(false)}
+                    title="Category"
+                >
+                    <div className={b('category-sheet-list')} aria-label="Mobile icon categories">
+                        {categoryOptions}
+                    </div>
+                </Sheet>
+            )}
 
             {imageSearch.dropOverlay}
         </Grid>

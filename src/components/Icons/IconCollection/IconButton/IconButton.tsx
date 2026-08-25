@@ -8,7 +8,7 @@ import './IconButton.scss';
 
 const b = block('icon-button');
 
-const ICON_SIZE = 20;
+const ICON_SIZE = 24;
 
 interface IconsProps {
     icon: IconItem;
