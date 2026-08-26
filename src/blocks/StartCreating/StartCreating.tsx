@@ -19,7 +19,7 @@ import opencodeLogo from '../../assets/icons/opencode-logo.svg';
 import sourcecraftLogo from '../../assets/icons/sourcecraft-logo.svg';
 import {CustomScrollbar} from '../../components/CustomScrollbar';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../../constants';
-import {block} from '../../utils';
+import {block, sendAnalyticsEvent} from '../../utils';
 import {CustomBlock} from '../constants';
 
 import './StartCreating.scss';
@@ -28,16 +28,22 @@ const b = block('start-creating');
 
 interface CommandProps {
     command: string;
+    onCopy?: () => void;
 }
 
-const Command: React.FC<CommandProps> = ({command}) => {
+const Command: React.FC<CommandProps> = ({command, onCopy}) => {
     const html = Prism.highlight(command, Prism.languages.bash, 'bash');
     return (
         <div className={b('command')}>
             <CustomScrollbar element="pre" axis="horizontal">
                 <code className={b('command-code')} dangerouslySetInnerHTML={{__html: html}} />
             </CustomScrollbar>
-            <ClipboardButton text={command} className={b('command-copy')} size="m" />
+            <ClipboardButton
+                text={command}
+                className={b('command-copy')}
+                size="m"
+                onCopy={onCopy}
+            />
         </div>
     );
 };
@@ -96,6 +102,7 @@ const AiLogos: React.FC = () => (
 export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, title, ai, manual}) => {
     const {t} = useTranslation('home');
     const blockRef = React.useRef<HTMLDivElement>(null);
+    const cardRef = React.useRef<HTMLElement>(null);
     const [activeTab, setActiveTab] = React.useState<string>(AI_TAB);
     const [exampleIndex, setExampleIndex] = React.useState(0);
 
@@ -110,6 +117,33 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
             window.removeEventListener(SCROLL_TO_TEMPLATES_EVENT, scrollTo);
         };
     }, []);
+
+    React.useEffect(() => {
+        const card = cardRef.current;
+
+        if (!card || typeof IntersectionObserver === 'undefined') {
+            return undefined;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    sendAnalyticsEvent('start_creating_view');
+                    observer.disconnect();
+                }
+            },
+            {threshold: 0.2},
+        );
+
+        observer.observe(card);
+
+        return () => observer.disconnect();
+    }, []);
+
+    const onTabUpdate = (tab: string) => {
+        setActiveTab(tab);
+        sendAnalyticsEvent('tab_switch', tab);
+    };
 
     const examplesCount = ai.build.examples.length;
     const showPrevExample = () =>
@@ -127,13 +161,13 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                         contentClassName={b('title-content')}
                     />
                 </h2>
-                <section className={b('card')}>
+                <section className={b('card')} ref={cardRef}>
                     <div className={b('tabs-wrapper')}>
                         <TabList
                             size="xl"
                             className={b('tabs')}
                             value={activeTab}
-                            onUpdate={setActiveTab}
+                            onUpdate={onTabUpdate}
                         >
                             <Tab value={AI_TAB} icon={<AiLogos />}>
                                 {ai.title}
@@ -151,7 +185,10 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                                     <h3 className={b('step-title')}>{ai.install.title}</h3>
                                 </div>
                                 <p className={b('step-description')}>{ai.install.description}</p>
-                                <Command command={ai.install.command} />
+                                <Command
+                                    command={ai.install.command}
+                                    onCopy={() => sendAnalyticsEvent('install_copy', 'ai')}
+                                />
                             </div>
                             <div className={b('step')}>
                                 <div className={b('step-header')}>
@@ -185,6 +222,12 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                                         <ClipboardButton
                                             text={ai.build.examples[exampleIndex]}
                                             size="s"
+                                            onCopy={() =>
+                                                sendAnalyticsEvent(
+                                                    'prompt_copy',
+                                                    String(exampleIndex + 1),
+                                                )
+                                            }
                                         />
                                     </div>
                                     <div className={b('example-texts')} aria-live="polite">
@@ -209,7 +252,10 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                     ) : (
                         <div className={b('manual')}>
                             <p className={b('step-description')}>{manual.description}</p>
-                            <Command command={manual.command} />
+                            <Command
+                                command={manual.command}
+                                onCopy={() => sendAnalyticsEvent('install_copy', 'manual')}
+                            />
                             <Link
                                 className={b('manual-link')}
                                 href={manual.link.href}
