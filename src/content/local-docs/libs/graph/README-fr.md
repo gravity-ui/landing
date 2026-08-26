@@ -1,6 +1,6 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [Guide de migration de la version 0.x vers la version 1.x →](docs/migration-guides/v0-to-v1.md)
+> [Guide de migration de la version 0.x vers la 1.x →](docs/migration-guides/v0-to-v1.md)
 
 Une bibliothèque de visualisation de graphes qui combine le meilleur des deux mondes :
 - Canvas pour des performances élevées lors de la visualisation du graphe complet
@@ -14,8 +14,8 @@ Fini le choix entre performance et interactivité. Idéal pour les grands diagra
 
 Les applications web modernes nécessitent souvent une visualisation et une interactivité complexes, mais les solutions existantes se concentrent généralement sur une seule technologie de rendu :
 
-- **Canvas** offre des performances élevées pour les graphiques complexes, mais est limité dans la gestion du texte et l'interactivité.
-- **DOM HTML** est pratique pour les interfaces, mais moins efficace pour les graphiques complexes ou un grand nombre d'éléments.
+- **Canvas** offre des performances élevées pour les graphiques complexes mais est limité dans la gestion du texte et l'interactivité.
+- **DOM HTML** est pratique pour les interfaces mais moins efficace pour les graphiques complexes ou un grand nombre d'éléments.
 
 @gravity-ui/graph résout ce problème en basculant automatiquement entre Canvas et HTML en fonction du niveau de zoom :
 - **Dézoomé** : Utilise Canvas pour un rendu efficace du graphe complet
@@ -28,8 +28,8 @@ La bibliothèque utilise un système de rendu intelligent qui gère automatiquem
 
 1. Aux faibles niveaux de zoom, tout est rendu sur Canvas pour des raisons de performance.
 2. Lors du zoom avant vers une vue détaillée, le composant `GraphCanvas` :
-   - Suit les changements de la vue caméra et de l'échelle.
-   - Calcule quels blocs sont visibles dans la vue actuelle (avec un padding pour un défilement fluide).
+   - Suit les changements de la fenêtre d'affichage de la caméra et de l'échelle.
+   - Calcule quels blocs sont visibles dans la fenêtre d'affichage actuelle (avec un padding pour un défilement fluide).
    - Rend les composants React uniquement pour les blocs visibles.
    - Met à jour automatiquement la liste lors du défilement ou du zoom.
    - Supprime les composants React lors du zoom arrière.
@@ -253,17 +253,20 @@ graph.zoomTo("center", { padding: 100 });
    - [Système de planification](docs/system/scheduler-system.md)
 
 2. Composants
-   - [Composant de graphe Canvas](docs/components/canvas-graph-component.md)
-   - [Composant de bloc](docs/components/block-component.md)
-   - [Ancres](docs/components/anchors.md)
+   - [Composant Canvas Graph](docs/components/canvas-graph-component.md)
+   - [Composant Bloc](docs/components/block-component.md)
+   - [Points d'ancrage](docs/components/anchors.md)
 
 3. Rendu
    - [Mécanisme de rendu](docs/rendering/rendering-mechanism.md)
    - [Calques](docs/rendering/layers.md)
 
-4. Blocs et connexions
+4. Blocs et Connexions
    - [Groupes de blocs](docs/blocks/groups.md)
    - [Système de connexion Canvas](docs/connections/canvas-connection-system.md)
+
+5. Tests
+   - [Objets de page Playwright](docs/testing/playwright.md)
 
 ## Licence
 
@@ -271,25 +274,25 @@ Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
 
 ## Pour les agents IA
 
-Un éditeur de graphes hybride Canvas/React pour les diagrammes basés sur des nœuds — utilisez-le pour créer des organigrammes, des éditeurs de nœuds ou de grands diagrammes interactifs où Canvas offre des performances à faible zoom et les composants React offrent une riche interactivité lors du zoom avant.
+Un éditeur de graphes hybride Canvas/React pour les diagrammes basés sur des nœuds — utilisez-le pour créer des organigrammes, des éditeurs de nœuds ou de grands diagrammes interactifs où Canvas offre des performances à faible zoom et les composants React offrent une riche interactivité lorsque le zoom est activé.
 
 ### Quand l'utiliser
 
 - Éditeurs basés sur des nœuds (organigrammes, pipelines, constructeurs visuels) avec des centaines/milliers de nœuds et de connexions.
 - Rendu mixte : Canvas pour la vue d'ensemble du graphe complet, composants React pour les blocs visibles dans la fenêtre d'affichage à fort zoom.
-- Consommateurs Vanilla JS ou React — la classe principale `Graph` est indépendante du framework ; `@gravity-ui/graph/react` fournit les liaisons React.
+- Consommateurs Vanilla JS ou React — la classe `Graph` principale est indépendante du framework ; `@gravity-ui/graph/react` fournit les liaisons React.
 
 ### Quand ne pas l'utiliser
 
-- Pour tracer des séries de données numériques (graphiques linéaires/à barres/de dispersion), utilisez [`@gravity-ui/charts`](https://gravity-ui.com/charts) ou [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr`) — le graphe est un éditeur de diagrammes de nœuds/arêtes, pas un graphique de données.
+- Pour tracer des séries de données numériques (graphiques linéaires/à barres/à dispersion), utilisez [`@gravity-ui/charts`](https://gravity-ui.com/charts) ou [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph est un éditeur de diagrammes de nœuds/arêtes, pas un graphique de données.
 - Pour un diagramme statique, non modifiable avec peu de nœuds, un SVG ou une bibliothèque de diagrammes plus simple peut suffire sans la machinerie de la fenêtre d'affichage Canvas/React.
 
 ### Pièges courants
 
-- **Importation hallucinée de `GraphEditor`** — les composants React sont `GraphCanvas`, `GraphBlock` et le hook `useGraph`, importés de `@gravity-ui/graph/react` ; la classe principale est `Graph` de `@gravity-ui/graph`.
+- **Importation hallucinée de `GraphEditor`** — les composants React sont `GraphCanvas`, `GraphBlock`, et le hook `useGraph`, importés de `@gravity-ui/graph/react` ; la classe principale est `Graph` de `@gravity-ui/graph`.
 - **Appel des méthodes du graphe avant l'état `ATTACHED`** — appelez `start()`/`zoomTo(...)` dans le callback `onStateChanged` lorsque `state === GraphState.ATTACHED`, pas au montage.
-- **Oubli de `setEntities`** — `useGraph` renvoie `graph`, `setEntities`, `start` ; les données n'apparaissent qu'après `setEntities({blocks, connections})`.
-- **Mélange de types d'ancres** — les connexions doivent référencer des identifiants d'ancres existants avec des `EAnchorType` (`IN`/`OUT`) correspondants sur les blocs source et cible.
+- **Oubli de `setEntities`** — `useGraph` retourne `graph`, `setEntities`, `start` ; les données n'apparaissent qu'après `setEntities({blocks, connections})`.
+- **Mélange de types de points d'ancrage** — les connexions doivent référencer des identifiants de points d'ancrage existants avec des `EAnchorType` (`IN`/`OUT`) correspondants sur les blocs source et cible.
 
 ## Documentation pour les agents IA
 

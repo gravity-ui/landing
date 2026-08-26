@@ -12,7 +12,7 @@ npm install @gravity-ui/uikit @gravity-ui/charts
 
 ## Uso
 
-Importe os estilos de `@gravity-ui/uikit` uma vez no seu ponto de entrada, envolva seu aplicativo em `ThemeProvider` e renderize um `Chart` dentro de um contêiner com uma altura explícita:
+Importe os estilos de `@gravity-ui/uikit` uma vez no seu ponto de entrada, envolva seu aplicativo em `ThemeProvider` e renderize um `Chart` dentro de um contêiner com altura explícita:
 
 ```tsx
 import {ThemeProvider} from '@gravity-ui/uikit';
@@ -49,7 +49,11 @@ export default function App() {
 }
 ```
 
-O `Chart` se adapta ao tamanho de seu pai, portanto, o elemento de envolvimento deve ter uma altura.
+`Chart` se adapta ao tamanho de seu pai, portanto, o elemento de envolvimento deve ter uma altura.
+
+## Ferramentas de configuração de gráficos
+
+O pacote fornece declarações TypeScript e JSON Schema para validação, geração e integração com Monaco da configuração de gráficos. Veja a [documentação das ferramentas de configuração de gráficos](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html) para detalhes de configuração e uso.
 
 ## Documentação
 
@@ -75,7 +79,7 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 
 ### Quando não usar
 
-- Projetos ainda com `@gravity-ui/chartkit` — esse é o wrapper mais antigo baseado em adaptadores (YAGR/Highcharts/D3); este pacote é o renderizador independente moderno e não é um substituto direto.
+- Projetos ainda em `@gravity-ui/chartkit` — esse é o wrapper mais antigo baseado em adaptadores (YAGR/Highcharts/D3); este pacote é o renderizador independente moderno e não é um substituto direto.
 - Dados tabulares simples — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
 - Renderização não-React ou apenas no servidor — `Chart` renderiza SVG React e precisa do DOM.
 
@@ -93,10 +97,10 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 - [Tooltip](./docs/diplodoc/pages/guides/tooltip.md)
 - [Legenda](./docs/diplodoc/pages/guides/legend.md)
 - [Conteúdo HTML](./docs/diplodoc/pages/guides/html.md)
-- [Formatação de Valor](./docs/diplodoc/pages/guides/value-formatting.md)
+- [Formatação de Valores](./docs/diplodoc/pages/guides/value-formatting.md)
 - [Rótulos de Dados](./docs/diplodoc/pages/guides/data-labels.md)
-- [Tipos de Eixo](./docs/diplodoc/pages/guides/axes/axis-types.md)
-- [Rótulos de Eixo](./docs/diplodoc/pages/guides/axes/axis-labels.md)
+- [Tipos de Eixos](./docs/diplodoc/pages/guides/axes/axis-types.md)
+- [Rótulos de Eixos](./docs/diplodoc/pages/guides/axes/axis-labels.md)
 
 ## Documentação para agentes de IA
 
