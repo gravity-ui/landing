@@ -51,6 +51,10 @@ export default function App() {
 
 `Chart` は親要素のサイズに適合するため、ラッパー要素には高さが必要です。
 
+## グラフ設定ツール
+
+このパッケージは、グラフ設定の検証、生成、Monacoエディタとの連携のためにTypeScriptの型定義とJSONスキーマを提供します。セットアップと使用方法の詳細については、[グラフ設定ツールのドキュメント](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html)を参照してください。
+
 ## ドキュメント
 
 - [概要](https://gravity-ui.github.io/charts/pages/overview.html)
@@ -61,30 +65,30 @@ export default function App() {
 
 ## ライセンス
 
-MIT License に基づいて配布されています。詳細は [LICENSE](LICENSE) を参照してください。
+MITライセンスの下で配布されています。詳細は[LICENSE](LICENSE)を参照してください。
 
 ## AIエージェント向け
 
-Gravity UI アプリケーション向けの宣言的な React グラフ描画ライブラリです。単一の `data` 設定から、線、エリア、棒、円、散布図、ツリーマップなどのグラフを、アプリの他の部分と調和するテーマでレンダリングします。
+Gravity UIアプリ向けの宣言的なReactグラフ描画ライブラリです。単一の`data`設定から、アプリの他の部分と一致するようにテーマ設定された線、エリア、棒、円、散布図、ツリーマップなどのグラフを描画します。
 
 ### 使用すべき場合
 
 - 標準的なビジネスグラフ: `line`、`area`、`bar-x`/`bar-y`、`pie`、`scatter`、`treemap`、`waterfall`、`sankey`、`radar`、`heatmap`、`funnel`、`x-range`。
-- Gravity UI のテーマ設定（ライト/ダーク）に従い、`@gravity-ui/uikit` アプリとトークンを共有する必要があるビジュアライゼーション。
+- Gravity UIのテーマ設定（ライト/ダーク）に従い、`@gravity-ui/uikit` アプリとトークンを共有する必要があるビジュアライゼーション。
 - 命令的に描画するのではなく、宣言的なデータからグラフをレンダリングする場合。
 
 ### 使用すべきでない場合
 
-- まだ `@gravity-ui/chartkit` を使用しているプロジェクト — これは古いアダプターベースのラッパー（YAGR/Highcharts/D3）です。このパッケージは最新のスタンドアロンレンダラーであり、ドロップインの代替ではありません。
-- 単純な表形式データ — [`@gravity-ui/table`](https://github.com/gravity-ui/table) を使用してください。
-- React を使用しない、またはサーバーサイドのみのレンダリング — `Chart` は React SVG をレンダリングし、DOM を必要とします。
+- まだ`@gravity-ui/chartkit`を使用しているプロジェクト。これは古いアダプターベースのラッパー（YAGR/Highcharts/D3）であり、このパッケージは最新のスタンドアロンレンダラーであり、ドロップインの代替ではありません。
+- 単純な表形式データ。[`@gravity-ui/table`](https://github.com/gravity-ui/table)を使用してください。
+- React以外またはサーバー専用のレンダリング。`Chart`はReact SVGをレンダリングし、DOMが必要です。
 
-### よくある落とし穴
+### よくある間違い
 
 - **コンポーネント名は `Chart` であり、`ChartKit` ではありません。** `@gravity-ui/charts` から `{Chart}` をインポートしてください。`ChartKit` は、別のレガシーパッケージである `@gravity-ui/chartkit` に属します。
-- **`data` プロップは `{series: {data: [...]}}` という形式です。** `series.data` の各エントリは、独自の `type` と `data` 配列を持つ1つのシリーズです。シリーズのトップレベル配列はありません。
+- **`data` プロップは `data` で、形状は `{series: {data: [...]}}` です。** `series.data` の各エントリは、独自の `type` と `data` 配列を持つ1つのシリーズです。トップレベルのシリーズ配列はありません。
 - **サイズ指定のないコンテナでは何もレンダリングされません。** `Chart` は親要素を埋めるため、ラッパーに明示的な高さを指定してください。
-- **uikit のセットアップが必要です。** `ThemeProvider` でラップし、`@gravity-ui/uikit/styles/styles.css` をインポートしてください。`@gravity-ui/uikit` は必須のピア依存関係です。
+- **uikitの設定が必要です。** `ThemeProvider` でラップし、`@gravity-ui/uikit/styles/styles.css` をインポートしてください。`@gravity-ui/uikit` は必須のピア依存関係です。
 
 ### 役立つドキュメント
 
@@ -92,7 +96,7 @@ Gravity UI アプリケーション向けの宣言的な React グラフ描画�
 - [テーマ設定](./docs/diplodoc/pages/guides/theming.md)
 - [ツールチップ](./docs/diplodoc/pages/guides/tooltip.md)
 - [凡例](./docs/diplodoc/pages/guides/legend.md)
-- [HTML コンテンツ](./docs/diplodoc/pages/guides/html.md)
+- [HTMLコンテンツ](./docs/diplodoc/pages/guides/html.md)
 - [値のフォーマット](./docs/diplodoc/pages/guides/value-formatting.md)
 - [データラベル](./docs/diplodoc/pages/guides/data-labels.md)
 - [軸のタイプ](./docs/diplodoc/pages/guides/axes/axis-types.md)
@@ -100,4 +104,4 @@ Gravity UI アプリケーション向けの宣言的な React グラフ描画�
 
 ## AIエージェント向けドキュメント
 
-インストールされているバージョン向けの、エージェントが読み取り可能なドキュメントは `node_modules/@gravity-ui/charts/dist/docs/INDEX.md` にあります。
+インストールされているバージョン向けの、エージェントが読み取れるドキュメントは `node_modules/@gravity-ui/charts/dist/docs/INDEX.md` にあります。
