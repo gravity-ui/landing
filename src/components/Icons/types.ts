@@ -17,5 +17,4 @@ export type IconItem = {
 
 export type IconCategory = {
     id: string;
-    label: string;
 };

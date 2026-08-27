@@ -154,7 +154,11 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     );
 
     const selectedCategory = iconCategories.find(({id}) => id === categoryId);
-    const resultsTitle = isSearching ? 'All icons' : selectedCategory?.label ?? 'All icons';
+    const allIconsTitle = t('icons:allIcons');
+    const resultsTitle =
+        !isSearching && selectedCategory
+            ? t(`icons:categories.${selectedCategory.id}`)
+            : allIconsTitle;
     const resultsCount = isSearching ? allIcons.length : icons.length;
 
     const handleSelectCategory = React.useCallback((nextCategoryId: string) => {
@@ -173,7 +177,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 })}
                 onClick={() => handleSelectCategory('all')}
             >
-                <span>All icons</span>
+                <span>{allIconsTitle}</span>
                 <span className={b('category-count')}>{allIcons.length}</span>
             </button>
             {iconCategories.map((category) => (
@@ -187,7 +191,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     })}
                     onClick={() => handleSelectCategory(category.id)}
                 >
-                    <span>{category.label}</span>
+                    <span>{t(`icons:categories.${category.id}`)}</span>
                     <span className={b('category-count')}>{categoryCounts[category.id]}</span>
                 </button>
             ))}
@@ -263,8 +267,8 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             <Row>
                 <Col sizes={12}>
                     <div className={b('catalog')}>
-                        <aside className={b('categories')} aria-label="Icon categories">
-                            <h2 className={b('section-title')}>Category</h2>
+                        <aside className={b('categories')} aria-label={t('icons:categoriesLabel')}>
+                            <h2 className={b('section-title')}>{t('icons:category')}</h2>
                             <div className={b('category-list')}>{categoryOptions}</div>
                         </aside>
                         <button
@@ -309,9 +313,12 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     contentClassName={b('category-sheet-content')}
                     visible={isCategorySheetOpen}
                     onClose={() => setIsCategorySheetOpen(false)}
-                    title="Category"
+                    title={t('icons:category')}
                 >
-                    <div className={b('category-sheet-list')} aria-label="Mobile icon categories">
+                    <div
+                        className={b('category-sheet-list')}
+                        aria-label={t('icons:mobileCategoriesLabel')}
+                    >
                         {categoryOptions}
                     </div>
                 </Sheet>
