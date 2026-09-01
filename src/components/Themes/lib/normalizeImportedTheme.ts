@@ -46,12 +46,24 @@ const normalizeColorOptions = (options: ColorOptions | undefined): ColorOptions 
     return {value: options.value, ref};
 };
 
+// `generateJSON` writes `{value: ''}` for the private shades it has nothing to
+// say about (the `-solid` / `-opaque` variants only exist in one of the two
+// modes). `parseJSON` reads those blanks back as if they were authored values,
+// and `generateCSS` then prints `--g-color-private-white-950-solid: ;` — an
+// invalid declaration. A theme built in code never carries such keys at all,
+// which is why only JSON-imported themes export them.
+const isBlank = (options: ColorOptions | undefined) =>
+    Boolean(options) && !options?.ref && !options?.value?.trim();
+
 /**
  * Mutates the given `GravityTheme` in place so that any ref stored as a raw
  * CSS-var-name (the shape emitted by `generateJSON`) gets rewritten into the
  * internal dotted form (`private.brand.550-solid`, `utility.base-brand`) that
  * `generateCSS` actually understands. Without this, gallery themes imported
  * from JSON have their brand/text/line/selection mappings silently ignored.
+ *
+ * Also drops the blank private shades described above so the exported CSS
+ * doesn't carry empty declarations.
  */
 export function normalizeImportedTheme(theme: GravityTheme): GravityTheme {
     for (const utilityColor of Object.values(theme.utilityColors)) {
@@ -62,10 +74,14 @@ export function normalizeImportedTheme(theme: GravityTheme): GravityTheme {
         for (const variant of ['light', 'dark'] as const) {
             const palette = mainTokenPrivates[variant];
             for (const shade of Object.keys(palette)) {
-                const opts = palette[shade as keyof typeof palette];
-                const normalized = normalizeColorOptions(opts);
+                const key = shade as keyof typeof palette;
+                if (isBlank(palette[key])) {
+                    delete palette[key];
+                    continue;
+                }
+                const normalized = normalizeColorOptions(palette[key]);
                 if (normalized) {
-                    palette[shade as keyof typeof palette] = normalized;
+                    palette[key] = normalized;
                 }
             }
         }
