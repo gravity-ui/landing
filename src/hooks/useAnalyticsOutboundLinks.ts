@@ -2,8 +2,8 @@ import {useEffect} from 'react';
 
 import {type AnalyticsAction, sendAnalyticsEvent} from '../utils/analytics';
 
-// Ссылки на GitHub и Figma разбросаны по контенту page-constructor, докам и MDX,
-// поэтому ловим их одним делегированным слушателем, а не точечными onClick.
+// GitHub and Figma links are scattered across page-constructor content, docs and MDX,
+// so we catch them with a single delegated listener instead of per-component onClick handlers.
 const getOutboundEvent = (url: URL): {action: AnalyticsAction; label: string} | null => {
     const host = url.hostname.replace(/^www\./, '');
 
@@ -20,7 +20,7 @@ const getOutboundEvent = (url: URL): {action: AnalyticsAction; label: string} | 
 };
 
 const handleLinkClick = (event: MouseEvent) => {
-    // auxclick: считаем только среднюю кнопку (открытие в новой вкладке)
+    // auxclick: count only the middle button (opening in a new tab)
     if (event.type === 'auxclick' && event.button !== 1) {
         return;
     }
@@ -49,7 +49,7 @@ const handleLinkClick = (event: MouseEvent) => {
 
 export const useAnalyticsOutboundLinks = () => {
     useEffect(() => {
-        // capture-фаза — чтобы событие не потерялось из-за stopPropagation в компонентах
+        // capture phase — so the event is not lost to stopPropagation in components
         document.addEventListener('click', handleLinkClick, true);
         document.addEventListener('auxclick', handleLinkClick, true);
 

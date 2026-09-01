@@ -17,8 +17,8 @@ export type AnalyticsAction =
     | 'howto_start_click'
     | 'tab_switch';
 
-// Единый канал аналитики: событие `cta` уходит в dataLayer, откуда GTM
-// раскладывает его в GA4 (event = cta_action) и Метрику (reachGoal(cta_action)).
+// Single analytics channel: a `cta` event goes to the dataLayer, where GTM
+// routes it to GA4 (event = cta_action) and Metrika (reachGoal(cta_action)).
 export const sendAnalyticsEvent = (action: AnalyticsAction, label?: string) => {
     if (typeof window === 'undefined') {
         return;
