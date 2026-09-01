@@ -5,6 +5,7 @@ import React, {useCallback, useMemo} from 'react';
 import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import {useLocale} from '../../../../hooks/useLocale';
+import {sendAnalyticsEvent} from '../../../../utils/analytics';
 import {block} from '../../../../utils/block';
 import {CodeExample} from '../../../CodeExample/CodeExample';
 import {useThemeCreator} from '../../hooks';
@@ -36,6 +37,8 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
     );
 
     const onSaveThemeCSSClick = useCallback(() => {
+        sendAnalyticsEvent('theme_export', 'css');
+
         const blob = new Blob([themeStylesCSS]);
 
         const url = URL.createObjectURL(blob);
@@ -48,6 +51,8 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
     }, [themeStylesCSS]);
 
     const onSaveThemeJSONClick = useCallback(() => {
+        sendAnalyticsEvent('theme_export', 'json');
+
         const themeStylesJSONString = exportThemeForDialog({themeState, format: 'json'});
         const blob = new Blob([themeStylesJSONString]);
 
