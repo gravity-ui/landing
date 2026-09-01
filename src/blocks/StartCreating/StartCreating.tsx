@@ -125,14 +125,21 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
             return undefined;
         }
 
+        const VIEW_THRESHOLD = 0.2;
+
         const observer = new IntersectionObserver(
             (entries) => {
-                if (entries.some((entry) => entry.isIntersecting)) {
+                if (
+                    entries.some(
+                        (entry) =>
+                            entry.isIntersecting && entry.intersectionRatio >= VIEW_THRESHOLD,
+                    )
+                ) {
                     sendAnalyticsEvent('start_creating_view');
                     observer.disconnect();
                 }
             },
-            {threshold: 0.2},
+            {threshold: VIEW_THRESHOLD},
         );
 
         observer.observe(card);
