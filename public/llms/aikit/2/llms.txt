@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/aikit@2.20.0`
+> Generated for `@gravity-ui/aikit@2.20.1`
 
 # @gravity-ui/aikit documentation
 
-Documentation for the **2.20.0** version of `@gravity-ui/aikit`.
+Documentation for the **2.20.1** version of `@gravity-ui/aikit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/aikit/build/docs/`).
@@ -84,76 +84,76 @@ function App() {
 
 ## Guides
 
-- [Adding a New Component](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/guidelines/new-component.md) — A checklist for everything that must be wired up when creating a new component inside src/components/<level>/<Name>/. Missing any of these makes the component invisible to consumers, breaks tree-shaking, or fails CI.
-- [AIKit Library Architecture](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/ARCHITECTURE.md)
-- [AIKit Project Structure](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/PROJECT_STRUCTURE.md) — This document describes the layout of the @gravity-ui/aikit source tree.
-- [Code Style and Language Requirements](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/guidelines/code-style.md) — CRITICAL: All code documentation, comments, and JSDoc must be written in English.
-- [Components](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/COMPONENTS.md) — 49 components organized by Atomic Design level. Each component lives in src/components/<level>/<Name>/ and ships with its own README and Storybook stories.
-- [Documentation](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/README.md) — This directory contains all @gravity-ui/aikit documentation.
-- [Examples](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/EXAMPLES.md) — Practical patterns for common AIKit integrations.
-- [Generative UI (toolset)](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/GENUI.md)
-- [Hooks](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/HOOKS.md) — AIKit exports 8 public hooks. All are re-exported from the package root and from the @gravity-ui/aikit/hooks subpath.
-- [Internationalization (i18n)](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/I18N.md) — AIKit localizes user-facing strings on a per-component basis using @gravity-ui/i18n. There is no global i18n provider — each component bundles its own keyset.
-- [Playwright Commands Quick Reference](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/PLAYWRIGHT.md)
-- [Quick Start](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/GETTING_STARTED.md) — This guide walks you through installing @gravity-ui/aikit and rendering your first chat.
-- [README Documentation](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/guidelines/readme.md) — Every component must have a comprehensive README.md file documenting its purpose, usage, and API.
-- [Storybook Files Creation](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/guidelines/storybook.md) — All components should have Storybook stories for documentation and testing purposes. Stories are located in the __stories__ directory within each component folder.
-- [Testing Guide](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/TESTING.md) — This project uses Playwright Component Testing for visual regression testing and component validation.
-- [Testing Guidelines](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/guidelines/testing.md) — Tests should be created based on Storybook stories to ensure consistency between documentation and functionality. We use Playwright Component Testing for visual regression testing and interaction testing.
-- [Theming](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/THEMING.md) — AIKit uses CSS variables for theming, in the --g-aikit-* namespace. Values fall back to Gravity UI's --g-color-* system so AIKit picks up your existing uikit theme automatically.
-- [Troubleshooting](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/TROUBLESHOOTING.md) — Common issues when integrating @gravity-ui/aikit.
-- [Using AIKit with AI Agents (Claude Code / Cursor)](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/guides/AI_AGENTS.md) — When you install @gravity-ui/aikit in a downstream project, you can teach Claude Code and Cursor about it so they write correct code without you spelling out the API every time.
+- [Adding a New Component](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/new-component.md) — A checklist for everything that must be wired up when creating a new component inside src/components/<level>/<Name>/. Missing any of these makes the component invisible to consumers, breaks tree-shaking, or fails CI.
+- [AIKit Library Architecture](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/ARCHITECTURE.md)
+- [AIKit Project Structure](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/PROJECT_STRUCTURE.md) — This document describes the layout of the @gravity-ui/aikit source tree.
+- [Code Style and Language Requirements](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/code-style.md) — CRITICAL: All code documentation, comments, and JSDoc must be written in English.
+- [Components](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/COMPONENTS.md) — 49 components organized by Atomic Design level. Each component lives in src/components/<level>/<Name>/ and ships with its own README and Storybook stories.
+- [Documentation](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/README.md) — This directory contains all @gravity-ui/aikit documentation.
+- [Examples](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/EXAMPLES.md) — Practical patterns for common AIKit integrations.
+- [Generative UI (toolset)](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/GENUI.md)
+- [Hooks](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/HOOKS.md) — AIKit exports 8 public hooks. All are re-exported from the package root and from the @gravity-ui/aikit/hooks subpath.
+- [Internationalization (i18n)](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/I18N.md) — AIKit localizes user-facing strings on a per-component basis using @gravity-ui/i18n. There is no global i18n provider — each component bundles its own keyset.
+- [Playwright Commands Quick Reference](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/PLAYWRIGHT.md)
+- [Quick Start](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/GETTING_STARTED.md) — This guide walks you through installing @gravity-ui/aikit and rendering your first chat.
+- [README Documentation](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/readme.md) — Every component must have a comprehensive README.md file documenting its purpose, usage, and API.
+- [Storybook Files Creation](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/storybook.md) — All components should have Storybook stories for documentation and testing purposes. Stories are located in the __stories__ directory within each component folder.
+- [Testing Guide](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/TESTING.md) — This project uses Playwright Component Testing for visual regression testing and component validation.
+- [Testing Guidelines](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/testing.md) — Tests should be created based on Storybook stories to ensure consistency between documentation and functionality. We use Playwright Component Testing for visual regression testing and interaction testing.
+- [Theming](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/THEMING.md) — AIKit uses CSS variables for theming, in the --g-aikit-* namespace. Values fall back to Gravity UI's --g-color-* system so AIKit picks up your existing uikit theme automatically.
+- [Troubleshooting](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/TROUBLESHOOTING.md) — Common issues when integrating @gravity-ui/aikit.
+- [Using AIKit with AI Agents (Claude Code / Cursor)](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/AI_AGENTS.md) — When you install @gravity-ui/aikit in a downstream project, you can teach Claude Code and Cursor about it so they write correct code without you spelling out the API every time.
 
 ## Components
 
-- [atoms/ActionButton](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/ActionButton.md) — A button component with integrated tooltip functionality, combining Button and ActionTooltip from Gravity UI.
-- [atoms/Alert](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/Alert.md) — An alert message with an indicator of alert's type opportunity to pass a button
-- [atoms/ChatDate](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/ChatDate.md) — A ChatDate component displays formatted dates with time and locale support.
-- [atoms/ContextIndicator](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/ContextIndicator.md) — A circular progress indicator that visualizes context usage as a percentage (0-100%).
-- [atoms/ContextItem](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/ContextItem.md) — A label for rendering context
-- [atoms/DiffStat](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/DiffStat.md) — A compact component that displays diff statistics showing the number of added and deleted lines.
-- [atoms/Disclaimer](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/Disclaimer.md) — A Disclaimer component displays informational or warning messages
-- [atoms/FileIcon](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/FileIcon.md) — Displays an icon representing a file based on its MIME type or file name extension.
-- [atoms/IntersectionContainer](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/IntersectionContainer.md) — Wrapper component for Intersection Observer API. Used for automatic loading of previous messages when scrolling up in MessageList.
-- [atoms/Loader](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/Loader.md) — A Loader visualizes loading state
-- [atoms/MarkdownRenderer](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/MarkdownRenderer.md) — A MarkdownRenderer component for rendering Yandex Flavored Markdown (YFM) content to HTML.
-- [atoms/MessageBalloon](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/MessageBalloon.md) — Visual wrapper for user's message
-- [atoms/Shimmer](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/Shimmer.md) — A loading animation component that creates a shimmer effect over its children.
-- [atoms/SubmitButton](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/SubmitButton.md) — A submit button component with state management through props and send/cancel icon switching.
-- [atoms/ToolIndicator](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/atoms/ToolIndicator.md) — A status indicator component that displays different icons based on the tool execution status. Shows a loader for loading state.
-- [molecules/ActionPopup](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/ActionPopup.md) — Universal anchored popup container for displaying content near action buttons.
-- [molecules/BaseMessage](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/BaseMessage.md) — Base wrapper for message with support for rendering action buttons
-- [molecules/ButtonGroup](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/ButtonGroup.md) — Wrapper for buttons group
-- [molecules/FeedbackForm](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/FeedbackForm.md) — Reusable feedback form component with reason selection and comment field.
-- [molecules/FileDropZone](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/FileDropZone.md) — A drag-and-drop area with a hidden file input. No external dependencies — uses native HTML5 DnD.
-- [molecules/FileItem](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/FileItem.md) — Displays a single file row with icon, name, optional size, upload status indicator, and remove button.
-- [molecules/InputContext](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/InputContext.md) — React context provider for prompt input attachments: queued files, removable chips in the prompt header, and an attachment picker slot. Pairs with useInputContext() for consumers inside the provider tree.
-- [molecules/PromptInputBody](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/PromptInputBody.md) — A body component for prompt input that displays a textarea with auto-growing capabilities or custom content.
-- [molecules/PromptInputFooter](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/PromptInputFooter.md) — A footer component for prompt input that displays action icons (settings, attachment, microphone) and a submit button.
-- [molecules/PromptInputHeader](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/PromptInputHeader.md) — A header component for prompt input that displays context items, context indicator, or custom content.
-- [molecules/PromptInputPanel](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/PromptInputPanel.md) — A simple panel container component that displays custom content.
-- [molecules/RatingBlock](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/RatingBlock.md) — Universal rating block with title and star rating.
-- [molecules/StarRating](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/StarRating.md) — A star rating component for displaying and collecting user ratings from 1 to 5 stars.
-- [molecules/Suggestions](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/Suggestions.md) — A Suggestions component displays a group of clickable suggestion buttons arranged in either horizontal (grid) or vertical (list) layout.
-- [molecules/Tabs](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/Tabs.md) — Tabs component for switching between sections with optional delete functionality. Built on top of Gravity UI's Label component.
-- [molecules/ToolFooter](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/ToolFooter.md) — Footer component for tool messages with action buttons and status message
-- [molecules/ToolHeader](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/ToolHeader.md) — Header component for tool messages with icon, name, actions, and status indicators
-- [molecules/ToolStatus](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/molecules/ToolStatus.md) — Component for displaying tool status with indicators and localized text
-- [organisms/AssistantMessage](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/AssistantMessage.md) — Component for rendering assistant messages with support for multiple message parts and custom renderers. Built on top of BaseMessage component with assistant variant styling.
-- [organisms/AttachmentPicker](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/AttachmentPicker.md) — A paperclip button that opens a file upload dialog.
-- [organisms/FileUploadDialog](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/FileUploadDialog.md) — A dialog with a drag-and-drop zone and a list of queued/uploaded files. Pure UI — upload logic is wired externally via useFileUploadStore.
-- [organisms/Header](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/Header.md) — Header component for displaying chat header with navigation and actions.
-- [organisms/MessageList](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/MessageList.md) — Component for displaying a list of messages. Supports custom message renderers through MessageRendererRegistry.
-- [organisms/PromptInput](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/PromptInput.md) — A flexible input component for chat interfaces with support for simple and full views, expandable panels, attachments, suggestions, and more.
-- [organisms/ThinkingMessage](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/ThinkingMessage.md) — A message component that displays AI thinking process with collapsible content and a status indicator.
-- [organisms/ToolMessage](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/ToolMessage.md) — Complete tool message component with automatic expand/collapse functionality and status-based behavior
-- [organisms/UserMessage](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/organisms/UserMessage.md) — Component for rendering a user message in a chat interface.
-- [pages/AIStudioChat](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/pages/AIStudioChat.md) — A ready-to-use chat component with built-in OpenAI streaming support. Wraps ChatContainer and manages all internal state — requires only an API URL to start working.
-- [pages/ChatContainer](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/pages/ChatContainer.md) — A fully assembled chat component - the main exportable component of the library that integrates Header, ChatContent, and History.
-- [templates/ChatContent](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/templates/ChatContent.md) — Main chat content container with view switching between empty state and message list.
-- [templates/EmptyContainer](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/templates/EmptyContainer.md) — A template component for displaying a welcome screen with image, title, description, and suggestions.
-- [templates/History](https://unpkg.com/@gravity-ui/aikit@2.20.0/build/docs/components/templates/History.md) — A comprehensive chat history component that displays a list of chats in a popup with integrated search, grouping, and action capabilities.
+- [atoms/ActionButton](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ActionButton.md) — A button component with integrated tooltip functionality, combining Button and ActionTooltip from Gravity UI.
+- [atoms/Alert](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Alert.md) — An alert message with an indicator of alert's type opportunity to pass a button
+- [atoms/ChatDate](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ChatDate.md) — A ChatDate component displays formatted dates with time and locale support.
+- [atoms/ContextIndicator](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ContextIndicator.md) — A circular progress indicator that visualizes context usage as a percentage (0-100%).
+- [atoms/ContextItem](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ContextItem.md) — A label for rendering context
+- [atoms/DiffStat](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/DiffStat.md) — A compact component that displays diff statistics showing the number of added and deleted lines.
+- [atoms/Disclaimer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Disclaimer.md) — A Disclaimer component displays informational or warning messages
+- [atoms/FileIcon](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/FileIcon.md) — Displays an icon representing a file based on its MIME type or file name extension.
+- [atoms/IntersectionContainer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/IntersectionContainer.md) — Wrapper component for Intersection Observer API. Used for automatic loading of previous messages when scrolling up in MessageList.
+- [atoms/Loader](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Loader.md) — A Loader visualizes loading state
+- [atoms/MarkdownRenderer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/MarkdownRenderer.md) — A MarkdownRenderer component for rendering Yandex Flavored Markdown (YFM) content to HTML.
+- [atoms/MessageBalloon](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/MessageBalloon.md) — Visual wrapper for user's message
+- [atoms/Shimmer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Shimmer.md) — A loading animation component that creates a shimmer effect over its children.
+- [atoms/SubmitButton](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/SubmitButton.md) — A submit button component with state management through props and send/cancel icon switching.
+- [atoms/ToolIndicator](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ToolIndicator.md) — A status indicator component that displays different icons based on the tool execution status. Shows a loader for loading state.
+- [molecules/ActionPopup](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ActionPopup.md) — Universal anchored popup container for displaying content near action buttons.
+- [molecules/BaseMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/BaseMessage.md) — Base wrapper for message with support for rendering action buttons
+- [molecules/ButtonGroup](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ButtonGroup.md) — Wrapper for buttons group
+- [molecules/FeedbackForm](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/FeedbackForm.md) — Reusable feedback form component with reason selection and comment field.
+- [molecules/FileDropZone](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/FileDropZone.md) — A drag-and-drop area with a hidden file input. No external dependencies — uses native HTML5 DnD.
+- [molecules/FileItem](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/FileItem.md) — Displays a single file row with icon, name, optional size, upload status indicator, and remove button.
+- [molecules/InputContext](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/InputContext.md) — React context provider for prompt input attachments: queued files, removable chips in the prompt header, and an attachment picker slot. Pairs with useInputContext() for consumers inside the provider tree.
+- [molecules/PromptInputBody](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputBody.md) — A body component for prompt input that displays a textarea with auto-growing capabilities or custom content.
+- [molecules/PromptInputFooter](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputFooter.md) — A footer component for prompt input that displays action icons (settings, attachment, microphone) and a submit button.
+- [molecules/PromptInputHeader](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputHeader.md) — A header component for prompt input that displays context items, context indicator, or custom content.
+- [molecules/PromptInputPanel](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputPanel.md) — A simple panel container component that displays custom content.
+- [molecules/RatingBlock](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/RatingBlock.md) — Universal rating block with title and star rating.
+- [molecules/StarRating](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/StarRating.md) — A star rating component for displaying and collecting user ratings from 1 to 5 stars.
+- [molecules/Suggestions](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/Suggestions.md) — A Suggestions component displays a group of clickable suggestion buttons arranged in either horizontal (grid) or vertical (list) layout.
+- [molecules/Tabs](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/Tabs.md) — Tabs component for switching between sections with optional delete functionality. Built on top of Gravity UI's Label component.
+- [molecules/ToolFooter](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ToolFooter.md) — Footer component for tool messages with action buttons and status message
+- [molecules/ToolHeader](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ToolHeader.md) — Header component for tool messages with icon, name, actions, and status indicators
+- [molecules/ToolStatus](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ToolStatus.md) — Component for displaying tool status with indicators and localized text
+- [organisms/AssistantMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/AssistantMessage.md) — Component for rendering assistant messages with support for multiple message parts and custom renderers. Built on top of BaseMessage component with assistant variant styling.
+- [organisms/AttachmentPicker](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/AttachmentPicker.md) — A paperclip button that opens a file upload dialog.
+- [organisms/FileUploadDialog](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/FileUploadDialog.md) — A dialog with a drag-and-drop zone and a list of queued/uploaded files. Pure UI — upload logic is wired externally via useFileUploadStore.
+- [organisms/Header](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/Header.md) — Header component for displaying chat header with navigation and actions.
+- [organisms/MessageList](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/MessageList.md) — Component for displaying a list of messages. Supports custom message renderers through MessageRendererRegistry.
+- [organisms/PromptInput](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/PromptInput.md) — A flexible input component for chat interfaces with support for simple and full views, expandable panels, attachments, suggestions, and more.
+- [organisms/ThinkingMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/ThinkingMessage.md) — A message component that displays AI thinking process with collapsible content and a status indicator.
+- [organisms/ToolMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/ToolMessage.md) — Complete tool message component with automatic expand/collapse functionality and status-based behavior
+- [organisms/UserMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/UserMessage.md) — Component for rendering a user message in a chat interface.
+- [pages/AIStudioChat](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/pages/AIStudioChat.md) — A ready-to-use chat component with built-in OpenAI streaming support. Wraps ChatContainer and manages all internal state — requires only an API URL to start working.
+- [pages/ChatContainer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/pages/ChatContainer.md) — A fully assembled chat component - the main exportable component of the library that integrates Header, ChatContent, and History.
+- [templates/ChatContent](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/templates/ChatContent.md) — Main chat content container with view switching between empty state and message list.
+- [templates/EmptyContainer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/templates/EmptyContainer.md) — A template component for displaying a welcome screen with image, title, description, and suggestions.
+- [templates/History](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/templates/History.md) — A comprehensive chat history component that displays a list of chats in a popup with integrated search, grouping, and action capabilities.
 
 ---
 
-> Docs for `@gravity-ui/aikit@2.20.0`. Versioned at: `https://gravity-ui.com/llms/aikit/2.20.0/llms.txt` (exact), `https://gravity-ui.com/llms/aikit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/aikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/aikit@2.20.1`. Versioned at: `https://gravity-ui.com/llms/aikit/2.20.1/llms.txt` (exact), `https://gravity-ui.com/llms/aikit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/aikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
