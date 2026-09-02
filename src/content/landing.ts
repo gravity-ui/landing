@@ -5,14 +5,11 @@ import type {LibWithMetadata} from '../api';
 import companiesDesktopAsset from '../assets/companies-desktop.svg';
 import companiesMobileAsset from '../assets/companies-mobile.svg';
 import companiesTabletAsset from '../assets/companies-tablet.svg';
-import craLogo from '../assets/icons/cra-logo.svg';
 import githubIcon from '../assets/icons/github.svg';
-import nextLogo from '../assets/icons/next-logo.svg';
-import remixLogo from '../assets/icons/remix-logo.svg';
 import rocketIcon from '../assets/icons/rocket.svg';
-import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
+import {sendAnalyticsEvent} from '../utils';
 
 // import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
@@ -46,6 +43,7 @@ export const getLanding = ({
                     view: 'action',
                     icon: rocketIcon,
                     onClick: () => {
+                        sendAnalyticsEvent('howto_start_click');
                         const evt = new Event(SCROLL_TO_TEMPLATES_EVENT, {
                             bubbles: true,
                             cancelable: false,
@@ -102,6 +100,36 @@ export const getLanding = ({
             title: t('home:examples_title'),
         },
         {
+            type: CustomBlock.StartCreating,
+            title: t('home:templates_title'),
+            ai: {
+                title: t('home:start_creating_ai_tab'),
+                install: {
+                    title: t('home:start_creating_install_title'),
+                    description: t('home:start_creating_install_description'),
+                    command: 'npx skills add gravity-ui/skills',
+                },
+                build: {
+                    title: t('home:start_creating_build_title'),
+                    examples: [
+                        t('home:start_creating_example_dashboard'),
+                        t('home:start_creating_example_landing'),
+                        t('home:start_creating_example_admin'),
+                    ],
+                    label: t('home:start_creating_skill_activated'),
+                },
+            },
+            manual: {
+                title: t('home:start_creating_manual_tab'),
+                description: t('home:start_creating_manual_description'),
+                command: 'npm create @gravity-ui',
+                link: {
+                    title: t('home:start_creating_manual_link'),
+                    href: 'https://github.com/gravity-ui/create',
+                },
+            },
+        },
+        {
             type: CustomBlock.Libraries,
             backgroundColor: 'rgba(37, 27, 37, 0.5)',
             title: t('home:libraries_title'),
@@ -113,69 +141,6 @@ export const getLanding = ({
         //     title: t('home:roadmap_title'),
         //     tasks: getRoadmapTasks(t),
         // },
-        {
-            type: CustomBlock.Templates,
-            title: t('home:templates_title'),
-            tabs: [
-                {
-                    title: 'Next.js',
-                    icon: nextLogo,
-                    commands: [
-                        'npx create-next-app@latest my-app --example "https://github.com/gravity-ui/gravity-ui-nextjs-example"',
-                        'cd my-app',
-                        'npm run dev',
-                    ],
-                    button: {
-                        href: 'https://codesandbox.io/p/devbox/gravityui-next-js-vvq8lf',
-                        target: '_blank',
-                        title: `${t('common:actions_open')} Next.js Playground`,
-                    },
-                },
-                {
-                    title: 'Vite',
-                    icon: viteLogo,
-                    commands: [
-                        'npx degit gravity-ui/gravity-ui-vite-example#main my-app && cd my-app',
-                        'npm install',
-                        'npm run dev',
-                    ],
-                    button: {
-                        href: 'https://codesandbox.io/p/devbox/gravityui-vite-36dq3r',
-                        target: '_blank',
-                        title: `${t('common:actions_open')} Vite Playground`,
-                    },
-                },
-                {
-                    title: 'Remix',
-                    icon: remixLogo,
-                    commands: [
-                        'npx create-remix my-app --template gravity-ui/gravity-ui-remix-example',
-                        'cd my-app',
-                        'npm run dev',
-                    ],
-                    button: {
-                        href: 'https://codesandbox.io/p/devbox/gravityui-remix-template-2y5ykj',
-                        target: '_blank',
-                        title: `${t('common:actions_open')} Remix Playground`,
-                    },
-                },
-                {
-                    title: 'CRA',
-                    icon: craLogo,
-                    commands: [
-                        '# probably you do not need it, since CRA is deprecated https://github.com/facebook/create-react-app?tab=readme-ov-file#deprecated',
-                        'npx create-react-app my-app --template gravity-ui-pure',
-                        'cd my-app',
-                        'npm start',
-                    ],
-                    button: {
-                        href: 'https://codesandbox.io/p/devbox/gravityui-cra-mpg4q3',
-                        target: '_blank',
-                        title: `${t('common:actions_open')} CRA Playground`,
-                    },
-                },
-            ],
-        },
         {
             type: CustomBlock.Contributors,
             title: t('home:contributors_title'),

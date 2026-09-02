@@ -13,6 +13,7 @@ import rocketIcon from '../assets/icons/rocket.svg';
 import viteLogo from '../assets/icons/vite-logo.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
+import {sendAnalyticsEvent} from '../utils';
 
 import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
@@ -49,6 +50,7 @@ export const getRtlLanding = ({
                     view: 'action',
                     icon: rocketIcon,
                     onClick: () => {
+                        sendAnalyticsEvent('howto_start_click', 'rtl');
                         const evt = new Event(SCROLL_TO_TEMPLATES_EVENT, {
                             bubbles: true,
                             cancelable: false,

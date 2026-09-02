@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/dynamic-forms@5.20.0`
+> Generated for `@gravity-ui/dynamic-forms@5.23.0`
 
 # Dynamic Forms
 
@@ -64,4 +64,4 @@ configure({lang: Lang.Ru});
 
 ---
 
-> Docs for `@gravity-ui/dynamic-forms@5.20.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.20.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/dynamic-forms@5.23.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.23.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

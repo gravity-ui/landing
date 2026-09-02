@@ -1,6 +1,6 @@
 # Gravity UI Charts · [![npm package](https://img.shields.io/npm/v/@gravity-ui/charts)](https://www.npmjs.com/package/@gravity-ui/charts) [![License](https://img.shields.io/github/license/gravity-ui/charts)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/charts/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/charts/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/charts/)
 
-Librería de gráficos React con más de 10 tipos de gráficos: de área, de barras, de líneas, circulares, de dispersión, de árbol, y más.
+Librería de gráficos React con más de 10 tipos de gráficos: área, barras, línea, pastel, dispersión, treemap y más.
 
 ## Instalación
 
@@ -8,11 +8,11 @@ Librería de gráficos React con más de 10 tipos de gráficos: de área, de bar
 npm install @gravity-ui/uikit @gravity-ui/charts
 ```
 
-`@gravity-ui/uikit` es una dependencia peer requerida — proporciona la tematización y los estilos de los que dependen los gráficos.
+`@gravity-ui/uikit` es una dependencia peer requerida; proporciona la tematización y los estilos de los que dependen los gráficos.
 
 ## Uso
 
-Importa los estilos de `@gravity-ui/uikit` una vez en tu punto de entrada, envuelve tu aplicación en `ThemeProvider`, y renderiza un `Chart` dentro de un contenedor con una altura explícita:
+Importa los estilos de `@gravity-ui/uikit` una vez en tu punto de entrada, envuelve tu aplicación en `ThemeProvider` y renderiza un `Chart` dentro de un contenedor con una altura explícita:
 
 ```tsx
 import {ThemeProvider} from '@gravity-ui/uikit';
@@ -51,9 +51,13 @@ export default function App() {
 
 `Chart` se adapta al tamaño de su padre, por lo que el elemento contenedor debe tener una altura definida.
 
+## Herramientas de configuración de gráficos
+
+El paquete proporciona declaraciones de TypeScript y JSON Schema para la validación, generación e integración de Monaco de la configuración de gráficos. Consulta la [documentación de herramientas de configuración de gráficos](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html) para obtener detalles de configuración y uso.
+
 ## Documentación
 
-- [Visión general](https://gravity-ui.github.io/charts/pages/overview.html)
+- [Descripción general](https://gravity-ui.github.io/charts/pages/overview.html)
 - [Primeros pasos](https://gravity-ui.github.io/charts/pages/get-started.html)
 - [Desarrollo](https://gravity-ui.github.io/charts/pages/development.html)
 - [API](https://gravity-ui.github.io/charts/pages/api/overview.html)
@@ -61,11 +65,11 @@ export default function App() {
 
 ## Licencia
 
-Distribuido bajo la Licencia MIT. Ver [LICENSE](LICENSE) para más detalles.
+Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para obtener más detalles.
 
 ## Para agentes de IA
 
-Una librería declarativa de gráficos React para aplicaciones Gravity UI — renderiza gráficos de líneas, áreas, barras, circulares, de dispersión, de árbol y otros a partir de una única configuración `data`, tematizados para coincidir con el resto de la aplicación.
+Una librería declarativa de gráficos React para aplicaciones Gravity UI: renderiza gráficos de línea, área, barras, pastel, dispersión, treemap y otros a partir de una única configuración de `data`, tematizada para que coincida con el resto de la aplicación.
 
 ### Cuándo usar
 
@@ -75,18 +79,18 @@ Una librería declarativa de gráficos React para aplicaciones Gravity UI — re
 
 ### Cuándo no usar
 
-- Proyectos que aún usan `@gravity-ui/chartkit` — ese es el antiguo wrapper basado en adaptadores (YAGR/Highcharts/D3); este paquete es el renderizador independiente moderno y no es un reemplazo directo.
-- Datos tabulares simples — usa [`@gravity-ui/table`](https://github.com/gravity-ui/table).
-- Renderizado no-React o solo del lado del servidor — `Chart` renderiza SVG de React y necesita el DOM.
+- Proyectos que aún usan `@gravity-ui/chartkit`: ese es el antiguo wrapper basado en adaptadores (YAGR/Highcharts/D3); este paquete es el renderizador independiente moderno y no es un reemplazo directo.
+- Datos tabulares simples: usa [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Renderizado no-React o solo en servidor: `Chart` renderiza SVG de React y necesita el DOM.
 
 ### Errores comunes
 
-- **El componente es `Chart`, no `ChartKit`.** Importa `{Chart}` desde `@gravity-ui/charts`; `ChartKit` pertenece al paquete legado separado `@gravity-ui/chartkit`.
-- **La prop `data` es `data`, con forma `{series: {data: [...]}}`.** Cada entrada en `series.data` es una serie con su propio `type` y array `data` — no hay un array de series de nivel superior.
-- **Nada se renderiza sin un contenedor con tamaño.** `Chart` llena su padre, así que dale al contenedor un tamaño explícito.
+- **El componente es `Chart`, no `ChartKit`.** Importa `{Chart}` desde `@gravity-ui/charts`; `ChartKit` pertenece al paquete separado y obsoleto `@gravity-ui/chartkit`.
+- **La prop `data` es `data`, con forma `{series: {data: [...]}}`.** Cada entrada en `series.data` es una serie con su propio `type` y array `data`; no hay un array de series de nivel superior.
+- **Nada se renderiza sin un contenedor con tamaño.** `Chart` llena su padre, así que dale al contenedor una altura explícita.
 - **Requiere configuración de uikit.** Envuelve en `ThemeProvider` e importa `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` es una dependencia peer requerida.
 
-### Documentación útil
+### Documentos útiles
 
 - [Primeros pasos](./docs/diplodoc/pages/get-started.md)
 - [Tematización](./docs/diplodoc/pages/guides/theming.md)

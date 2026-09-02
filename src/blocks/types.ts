@@ -5,6 +5,7 @@ import {GithubStarsModel} from './GithubStarsBlock/GithubStarsBlock';
 import {IframeModel} from './IFrameBlock/IFrameBlock';
 import {LibrariesModel} from './Libraries/Libraries';
 import {RoadmapModel} from './RoadmapBlock/RoadmapBlock';
+import {StartCreatingModel} from './StartCreating/StartCreating';
 import {TemplatesModel} from './TemplatesBlock/TemplatesBlock';
 import {UISamplesModel} from './UISamples/UISamples';
 
@@ -15,6 +16,7 @@ export type CustomBlockModel =
     | UISamplesModel
     | RoadmapModel
     | TemplatesModel
+    | StartCreatingModel
     | GithubStarsModel
     | ContributorsModel
     | IframeModel;

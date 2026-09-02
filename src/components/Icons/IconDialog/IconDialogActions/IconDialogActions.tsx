@@ -4,7 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useLocale} from '../../../../hooks/useLocale';
-import {block} from '../../../../utils';
+import {block, sendAnalyticsEvent} from '../../../../utils';
 import {downloadFile} from '../../../../utils/browser';
 import type {IconItem} from '../../types';
 
@@ -35,6 +35,7 @@ export const IconDialogActions: React.FC<IconDialogActionsProps> = ({icon, mobil
     const canShare = React.useMemo(() => navigator.canShare?.(sharingData), [sharingData]);
 
     const downloadSvg = React.useCallback(async () => {
+        sendAnalyticsEvent('icon_download', icon.name);
         setDownloadInProgress(true);
 
         try {

@@ -1,3 +1,4 @@
+export * from './analytics';
 export * from './block';
 export * from './media';
 export * from './theme';

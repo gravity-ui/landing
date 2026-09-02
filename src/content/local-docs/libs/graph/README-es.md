@@ -8,7 +8,7 @@ Una biblioteca de visualización de grafos que combina lo mejor de ambos mundos:
 
 Se acabaron las elecciones entre rendimiento e interactividad. Perfecta para diagramas grandes, diagramas de flujo y editores basados en nodos.
 
-![preview graph.](docs/_static/graph_preview.png)
+![vista previa del grafo.](docs/_static/graph_preview.png)
 
 ## Motivación
 
@@ -22,7 +22,7 @@ Las aplicaciones web modernas a menudo requieren visualización e interactividad
 - **Zoom medio**: Muestra una vista esquemática con interactividad básica
 - **Acercado**: Cambia a componentes HTML/React para interacciones ricas
 
-## Cómo Funciona
+## Cómo funciona
 
 La biblioteca utiliza un sistema de renderizado inteligente que gestiona automáticamente la transición entre Canvas y componentes React:
 
@@ -61,7 +61,7 @@ npm install @gravity-ui/graph
 
 ## Uso
 
-### Ejemplo con React
+### Ejemplo de React
 
 [Documentación detallada de componentes React](docs/react/usage.md)
 
@@ -151,7 +151,7 @@ export function GraphEditor() {
 
 ```
 
-### Ejemplo con JavaScript Vanilla
+### Ejemplo de JavaScript Vanilla
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
@@ -178,7 +178,7 @@ const graph = new Graph({
 ```
 
 ```javascript
-// Añadir bloques y conexiones
+// Add blocks and connections
 graph.setEntities({
     blocks: [
         {
@@ -226,10 +226,10 @@ graph.setEntities({
     ]
 });
 
-// Iniciar renderizado
+// Start rendering
 graph.start();
 
-// Centrar la vista
+// Center the view
 graph.zoomTo("center", { padding: 100 });
 ```
 
@@ -253,7 +253,7 @@ graph.zoomTo("center", { padding: 100 });
    - [Sistema de planificación](docs/system/scheduler-system.md)
 
 2. Componentes
-   - [Componente de gráfico Canvas](docs/components/canvas-graph-component.md)
+   - [Componente de gráfico de lienzo](docs/components/canvas-graph-component.md)
    - [Componente de bloque](docs/components/block-component.md)
    - [Anclajes](docs/components/anchors.md)
 
@@ -263,7 +263,10 @@ graph.zoomTo("center", { padding: 100 });
 
 4. Bloques y conexiones
    - [Grupos de bloques](docs/blocks/groups.md)
-   - [Sistema de conexiones Canvas](docs/connections/canvas-connection-system.md)
+   - [Sistema de conexión de lienzo](docs/connections/canvas-connection-system.md)
+
+5. Pruebas
+   - [Objetos de página de Playwright](docs/testing/playwright.md)
 
 ## Licencia
 
@@ -277,19 +280,19 @@ Un editor de gráficos híbrido Canvas/React para diagramas basados en nodos —
 
 - Editores basados en nodos (diagramas de flujo, pipelines, constructores visuales) con cientos/miles de nodos y conexiones.
 - Renderizado mixto: Canvas para la vista general del gráfico completo, componentes React para los bloques visibles en el viewport con zoom alto.
-- Consumidores de Vanilla JS o React — la clase principal `Graph` es independiente del framework; `@gravity-ui/graph/react` proporciona los enlaces de React.
+- Consumidores de JavaScript puro o React — la clase principal `Graph` es independiente del framework; `@gravity-ui/graph/react` proporciona los enlaces de React.
 
 ### Cuándo no usarlo
 
 - Para trazar series de datos numéricos (gráficos de líneas/barras/dispersión), usa [`@gravity-ui/charts`](https://gravity-ui.com/charts) o [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph es un editor de diagramas de nodos/aristas, no un gráfico de datos.
-- Para un diagrama estático, no editable con pocos nodos, un SVG o una biblioteca de diagramas más simple pueden ser suficientes sin la maquinaria de viewport Canvas/React.
+- Para un diagrama estático, no editable con pocos nodos, un SVG o una biblioteca de diagramas más simple pueden ser suficientes sin la maquinaria de viewport de Canvas/React.
 
 ### Errores comunes
 
-- **Importación "alucinada" de `GraphEditor`** — los componentes de React son `GraphCanvas`, `GraphBlock` y el hook `useGraph`, importados de `@gravity-ui/graph/react`; la clase principal es `Graph` de `@gravity-ui/graph`.
-- **Llamar a métodos del gráfico antes del estado `ATTACHED`** — llama a `start()`/`zoomTo(...)` dentro del callback `onStateChanged` cuando `state === GraphState.ATTACHED`, no al montar.
+- **Importación "alucinada" de `GraphEditor`** — los componentes de React son `GraphCanvas`, `GraphBlock` y el hook `useGraph`, importados desde `@gravity-ui/graph/react`; la clase principal es `Graph` desde `@gravity-ui/graph`.
+- **Llamar a métodos del gráfico antes del estado `ATTACHED`** — llama a `start()`/`zoomTo(...)` dentro de la devolución de llamada `onStateChanged` cuando `state === GraphState.ATTACHED`, no al montar.
 - **Olvidar `setEntities`** — `useGraph` devuelve `graph`, `setEntities`, `start`; los datos solo aparecen después de `setEntities({blocks, connections})`.
-- **Mezclar tipos de anclajes** — las conexiones deben referenciar IDs de anclajes existentes con `EAnchorType` (`IN`/`OUT`) coincidentes en los bloques de origen y destino.
+- **Mezclar tipos de anclajes** — las conexiones deben hacer referencia a IDs de anclajes existentes con `EAnchorType` (`IN`/`OUT`) coincidentes en los bloques de origen y destino.
 
 ## Documentación para agentes de IA
 

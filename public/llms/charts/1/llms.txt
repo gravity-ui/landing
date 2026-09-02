@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/charts@1.57.3`
+> Generated for `@gravity-ui/charts@1.59.0`
 
 # @gravity-ui/charts documentation
 
-Documentation for the **1.57.3** version of `@gravity-ui/charts`.
+Documentation for the **1.59.0** version of `@gravity-ui/charts`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
@@ -32,14 +32,15 @@ A declarative React charting library for Gravity UI apps — render line, area, 
 
 ### Useful docs
 
-- [Get started](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/get-started.md)
-- [Theming](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/theming.md)
-- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/tooltip.md)
-- [Legend](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/legend.md)
-- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/html.md)
-- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/value-formatting.md)
-- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/data-labels.md)
-- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/axis-types.md)
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/get-started.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/tooltip.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/legend.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/html.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/value-formatting.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/data-labels.md)
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-types.md)
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-labels.md)
 
 ## Install
 
@@ -102,17 +103,21 @@ export default function App() {
 
 ## Guides
 
-- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
-- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/data-labels.md)
-- [Development](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/development.md)
-- [Get started](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/get-started.md)
-- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/html.md)
-- [Legend](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/legend.md)
-- [Overview](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/overview.md)
-- [Theming](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/theming.md)
-- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/tooltip.md)
-- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.57.3/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
+- [Area series](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/series-types/area.md) — An area series is a line series with the space between the line and its baseline filled. It is useful for showing magnitude over time and for comparing cumulative values with stacking.
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-labels.md) — Axis labels show a value or category for each tick. Configure them with xAxis.labels for the X axis and yAxis[].labels for Y axes.
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
+- [Chart config tooling](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/integrations/chart-config.md) — The package publishes two versioned config artifacts:
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/data-labels.md)
+- [Development](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/development.md)
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/get-started.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/html.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/legend.md)
+- [Line series](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/series-types/line.md) — A line series connects data points to show how a value changes along the X axis. It is commonly used for time series, trends, and comparisons between several metrics.
+- [Overview](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/overview.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/tooltip.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
 
 ---
 
-> Docs for `@gravity-ui/charts@1.57.3`. Versioned at: `https://gravity-ui.com/llms/charts/1.57.3/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/charts@1.59.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.59.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
