@@ -9,6 +9,7 @@ import githubIcon from '../assets/icons/github.svg';
 import rocketIcon from '../assets/icons/rocket.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
+import {sendAnalyticsEvent} from '../utils';
 
 // import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
@@ -42,6 +43,7 @@ export const getLanding = ({
                     view: 'action',
                     icon: rocketIcon,
                     onClick: () => {
+                        sendAnalyticsEvent('howto_start_click');
                         const evt = new Event(SCROLL_TO_TEMPLATES_EVENT, {
                             bubbles: true,
                             cancelable: false,
