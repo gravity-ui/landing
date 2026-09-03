@@ -3950,6 +3950,169 @@ Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/ui
 
 ---
 
+> Generated for `@gravity-ui/aikit@2.20.1`
+
+# @gravity-ui/aikit documentation
+
+Documentation for the **2.20.1** version of `@gravity-ui/aikit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/aikit/build/docs/`).
+
+## For AI agents
+
+A React component library for building AI chat interfaces, organized by Atomic Design (atoms → molecules → organisms → templates → pages) and SDK-agnostic — reach for it to assemble a chat UI (message lists, prompt input, tool calls, attachments) instead of composing those primitives out of `@gravity-ui/uikit` by hand.
+
+### When to use
+
+- Building an AI/LLM chat UI (assistant/user/tool messages, prompt input with suggestions, attachment uploads, thinking states).
+- Wanting ready-made chat layouts (`ChatContainer`, `MessageList`, `PromptInput`) plus hooks to customize behavior.
+- Embedding into the Gravity UI ecosystem with shared theming via CSS variables.
+
+### When not to use
+
+- For general-purpose UI primitives (buttons, inputs, modals), use [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) directly — AIKit builds on top of it for chat-specific needs.
+- To render rich markdown in messages, AIKit's `MarkdownRenderer` wraps [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); for standalone markdown rendering use that package directly.
+- For a single chat bubble without chat orchestration, a uikit `MarkdownRenderer`/text block is lighter than the full AIKit message pipeline.
+
+### Common pitfalls
+
+- **Hallucinating an AI SDK import** — AIKit is SDK-agnostic; it provides components/hooks, not an LLM client. Bring your own data source and feed messages via props.
+- **Reaching for `<Chat>` / `<AIChat>`** — the page-level export is `ChatContainer` (and `AIStudioChat`); there is no component literally named `Chat`.
+- **Skipping message-type registration for custom types** — custom message kinds must be registered in the message type system, or they render as unknown.
+- **Editing base components instead of using hooks** — the two-level design expects you to customize via hooks/composition; overriding internals directly breaks upgrades.
+
+## Install
+
+```bash
+npm install @gravity-ui/aikit
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^18.0.0 || ^19.0.0` |
+| `react-dom` | `^18.0.0 || ^19.0.0` |
+| `highlight.js` | `^11.11.1` |
+| `@gravity-ui/i18n` | `^1.8.0` |
+| `@gravity-ui/icons` | `^2.16.0` |
+| `@gravity-ui/uikit` | `^7.25.0` |
+| `@diplodoc/transform` | `^4.63.3` |
+
+## Usage
+
+```typescript
+import { ChatContainer } from '@gravity-ui/aikit';
+import type { ChatType, TChatMessage } from '@gravity-ui/aikit';
+
+function App() {
+    const [messages, setMessages] = useState<TChatMessage[]>([]);
+    const [chats, setChats] = useState<ChatType[]>([]);
+    const [activeChat, setActiveChat] = useState<ChatType | null>(null);
+
+    return (
+        <ChatContainer
+            chats={chats}
+            activeChat={activeChat}
+            messages={messages}
+            onSendMessage={async (data) => {
+                // Your sending logic
+                console.log('Message:', data.content);
+            }}
+            onSelectChat={setActiveChat}
+            onCreateChat={() => {
+                // Create new chat
+            }}
+            onDeleteChat={(chat) => {
+                // Delete chat
+            }}
+        />
+    );
+}
+```
+
+## Guides
+
+- [Adding a New Component](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/new-component.md) — A checklist for everything that must be wired up when creating a new component inside src/components/<level>/<Name>/. Missing any of these makes the component invisible to consumers, breaks tree-shaking, or fails CI.
+- [AIKit Library Architecture](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/ARCHITECTURE.md)
+- [AIKit Project Structure](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/PROJECT_STRUCTURE.md) — This document describes the layout of the @gravity-ui/aikit source tree.
+- [Code Style and Language Requirements](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/code-style.md) — CRITICAL: All code documentation, comments, and JSDoc must be written in English.
+- [Components](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/COMPONENTS.md) — 49 components organized by Atomic Design level. Each component lives in src/components/<level>/<Name>/ and ships with its own README and Storybook stories.
+- [Documentation](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/README.md) — This directory contains all @gravity-ui/aikit documentation.
+- [Examples](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/EXAMPLES.md) — Practical patterns for common AIKit integrations.
+- [Generative UI (toolset)](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/GENUI.md)
+- [Hooks](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/HOOKS.md) — AIKit exports 8 public hooks. All are re-exported from the package root and from the @gravity-ui/aikit/hooks subpath.
+- [Internationalization (i18n)](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/I18N.md) — AIKit localizes user-facing strings on a per-component basis using @gravity-ui/i18n. There is no global i18n provider — each component bundles its own keyset.
+- [Playwright Commands Quick Reference](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/PLAYWRIGHT.md)
+- [Quick Start](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/GETTING_STARTED.md) — This guide walks you through installing @gravity-ui/aikit and rendering your first chat.
+- [README Documentation](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/readme.md) — Every component must have a comprehensive README.md file documenting its purpose, usage, and API.
+- [Storybook Files Creation](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/storybook.md) — All components should have Storybook stories for documentation and testing purposes. Stories are located in the __stories__ directory within each component folder.
+- [Testing Guide](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/TESTING.md) — This project uses Playwright Component Testing for visual regression testing and component validation.
+- [Testing Guidelines](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/guidelines/testing.md) — Tests should be created based on Storybook stories to ensure consistency between documentation and functionality. We use Playwright Component Testing for visual regression testing and interaction testing.
+- [Theming](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/THEMING.md) — AIKit uses CSS variables for theming, in the --g-aikit-* namespace. Values fall back to Gravity UI's --g-color-* system so AIKit picks up your existing uikit theme automatically.
+- [Troubleshooting](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/TROUBLESHOOTING.md) — Common issues when integrating @gravity-ui/aikit.
+- [Using AIKit with AI Agents (Claude Code / Cursor)](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/guides/AI_AGENTS.md) — When you install @gravity-ui/aikit in a downstream project, you can teach Claude Code and Cursor about it so they write correct code without you spelling out the API every time.
+
+## Components
+
+- [atoms/ActionButton](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ActionButton.md) — A button component with integrated tooltip functionality, combining Button and ActionTooltip from Gravity UI.
+- [atoms/Alert](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Alert.md) — An alert message with an indicator of alert's type opportunity to pass a button
+- [atoms/ChatDate](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ChatDate.md) — A ChatDate component displays formatted dates with time and locale support.
+- [atoms/ContextIndicator](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ContextIndicator.md) — A circular progress indicator that visualizes context usage as a percentage (0-100%).
+- [atoms/ContextItem](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ContextItem.md) — A label for rendering context
+- [atoms/DiffStat](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/DiffStat.md) — A compact component that displays diff statistics showing the number of added and deleted lines.
+- [atoms/Disclaimer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Disclaimer.md) — A Disclaimer component displays informational or warning messages
+- [atoms/FileIcon](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/FileIcon.md) — Displays an icon representing a file based on its MIME type or file name extension.
+- [atoms/IntersectionContainer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/IntersectionContainer.md) — Wrapper component for Intersection Observer API. Used for automatic loading of previous messages when scrolling up in MessageList.
+- [atoms/Loader](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Loader.md) — A Loader visualizes loading state
+- [atoms/MarkdownRenderer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/MarkdownRenderer.md) — A MarkdownRenderer component for rendering Yandex Flavored Markdown (YFM) content to HTML.
+- [atoms/MessageBalloon](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/MessageBalloon.md) — Visual wrapper for user's message
+- [atoms/Shimmer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/Shimmer.md) — A loading animation component that creates a shimmer effect over its children.
+- [atoms/SubmitButton](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/SubmitButton.md) — A submit button component with state management through props and send/cancel icon switching.
+- [atoms/ToolIndicator](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/atoms/ToolIndicator.md) — A status indicator component that displays different icons based on the tool execution status. Shows a loader for loading state.
+- [molecules/ActionPopup](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ActionPopup.md) — Universal anchored popup container for displaying content near action buttons.
+- [molecules/BaseMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/BaseMessage.md) — Base wrapper for message with support for rendering action buttons
+- [molecules/ButtonGroup](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ButtonGroup.md) — Wrapper for buttons group
+- [molecules/FeedbackForm](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/FeedbackForm.md) — Reusable feedback form component with reason selection and comment field.
+- [molecules/FileDropZone](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/FileDropZone.md) — A drag-and-drop area with a hidden file input. No external dependencies — uses native HTML5 DnD.
+- [molecules/FileItem](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/FileItem.md) — Displays a single file row with icon, name, optional size, upload status indicator, and remove button.
+- [molecules/InputContext](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/InputContext.md) — React context provider for prompt input attachments: queued files, removable chips in the prompt header, and an attachment picker slot. Pairs with useInputContext() for consumers inside the provider tree.
+- [molecules/PromptInputBody](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputBody.md) — A body component for prompt input that displays a textarea with auto-growing capabilities or custom content.
+- [molecules/PromptInputFooter](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputFooter.md) — A footer component for prompt input that displays action icons (settings, attachment, microphone) and a submit button.
+- [molecules/PromptInputHeader](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputHeader.md) — A header component for prompt input that displays context items, context indicator, or custom content.
+- [molecules/PromptInputPanel](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/PromptInputPanel.md) — A simple panel container component that displays custom content.
+- [molecules/RatingBlock](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/RatingBlock.md) — Universal rating block with title and star rating.
+- [molecules/StarRating](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/StarRating.md) — A star rating component for displaying and collecting user ratings from 1 to 5 stars.
+- [molecules/Suggestions](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/Suggestions.md) — A Suggestions component displays a group of clickable suggestion buttons arranged in either horizontal (grid) or vertical (list) layout.
+- [molecules/Tabs](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/Tabs.md) — Tabs component for switching between sections with optional delete functionality. Built on top of Gravity UI's Label component.
+- [molecules/ToolFooter](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ToolFooter.md) — Footer component for tool messages with action buttons and status message
+- [molecules/ToolHeader](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ToolHeader.md) — Header component for tool messages with icon, name, actions, and status indicators
+- [molecules/ToolStatus](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/molecules/ToolStatus.md) — Component for displaying tool status with indicators and localized text
+- [organisms/AssistantMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/AssistantMessage.md) — Component for rendering assistant messages with support for multiple message parts and custom renderers. Built on top of BaseMessage component with assistant variant styling.
+- [organisms/AttachmentPicker](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/AttachmentPicker.md) — A paperclip button that opens a file upload dialog.
+- [organisms/FileUploadDialog](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/FileUploadDialog.md) — A dialog with a drag-and-drop zone and a list of queued/uploaded files. Pure UI — upload logic is wired externally via useFileUploadStore.
+- [organisms/Header](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/Header.md) — Header component for displaying chat header with navigation and actions.
+- [organisms/MessageList](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/MessageList.md) — Component for displaying a list of messages. Supports custom message renderers through MessageRendererRegistry.
+- [organisms/PromptInput](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/PromptInput.md) — A flexible input component for chat interfaces with support for simple and full views, expandable panels, attachments, suggestions, and more.
+- [organisms/ThinkingMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/ThinkingMessage.md) — A message component that displays AI thinking process with collapsible content and a status indicator.
+- [organisms/ToolMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/ToolMessage.md) — Complete tool message component with automatic expand/collapse functionality and status-based behavior
+- [organisms/UserMessage](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/organisms/UserMessage.md) — Component for rendering a user message in a chat interface.
+- [pages/AIStudioChat](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/pages/AIStudioChat.md) — A ready-to-use chat component with built-in OpenAI streaming support. Wraps ChatContainer and manages all internal state — requires only an API URL to start working.
+- [pages/ChatContainer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/pages/ChatContainer.md) — A fully assembled chat component - the main exportable component of the library that integrates Header, ChatContent, and History.
+- [templates/ChatContent](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/templates/ChatContent.md) — Main chat content container with view switching between empty state and message list.
+- [templates/EmptyContainer](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/templates/EmptyContainer.md) — A template component for displaying a welcome screen with image, title, description, and suggestions.
+- [templates/History](https://unpkg.com/@gravity-ui/aikit@2.20.1/build/docs/components/templates/History.md) — A comprehensive chat history component that displays a list of chats in a popup with integrated search, grouping, and action capabilities.
+
+---
+
+> Docs for `@gravity-ui/aikit@2.20.1`. Versioned at: `https://gravity-ui.com/llms/aikit/2.20.1/llms.txt` (exact), `https://gravity-ui.com/llms/aikit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/aikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/aikit@2.20.0`
 
 # @gravity-ui/aikit documentation
@@ -5475,6 +5638,133 @@ function App() {
 
 ---
 
+> Generated for `@gravity-ui/charts@1.59.0`
+
+# @gravity-ui/charts documentation
+
+Documentation for the **1.59.0** version of `@gravity-ui/charts`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
+
+## For AI agents
+
+A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
+
+### When to use
+
+- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
+- Rendering a chart from declarative data rather than drawing imperatively.
+
+### When not to use
+
+- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
+- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
+
+### Common pitfalls
+
+- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
+- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
+- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
+- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
+
+### Useful docs
+
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/get-started.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/tooltip.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/legend.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/html.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/value-formatting.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/data-labels.md)
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-types.md)
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-labels.md)
+
+## Install
+
+```shell
+npm install @gravity-ui/uikit @gravity-ui/charts
+```
+
+`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@gravity-ui/uikit` | `^7.0.0` |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+
+## Usage
+
+Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {Chart} from '@gravity-ui/charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Temperature',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <Chart data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`Chart` adapts to its parent's size, so the wrapping element must have a height.
+
+## Guides
+
+- [Area series](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/series-types/area.md) — An area series is a line series with the space between the line and its baseline filled. It is useful for showing magnitude over time and for comparing cumulative values with stacking.
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-labels.md) — Axis labels show a value or category for each tick. Configure them with xAxis.labels for the X axis and yAxis[].labels for Y axes.
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/axes/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
+- [Chart config tooling](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/integrations/chart-config.md) — The package publishes two versioned config artifacts:
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/data-labels.md)
+- [Development](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/development.md)
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/get-started.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/html.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/legend.md)
+- [Line series](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/series-types/line.md) — A line series connects data points to show how a value changes along the X axis. It is commonly used for time series, trends, and comparisons between several metrics.
+- [Overview](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/overview.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/tooltip.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.59.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
+
+---
+
+> Docs for `@gravity-ui/charts@1.59.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.59.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/charts@1.58.0`
 
 # @gravity-ui/charts documentation
@@ -5533,9 +5823,9 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/uikit` | `^7.0.0` |
 | `react` | `>=17.0.0` |
 | `react-dom` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
 
 ## Usage
 
@@ -6527,121 +6817,6 @@ export default function App() {
 ---
 
 > Docs for `@gravity-ui/charts@1.50.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.50.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/charts@1.49.0`
-
-# Charts
-
-> A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
->
-> **npm:** `@gravity-ui/charts` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/uikit @gravity-ui/charts
-```
-
-`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import {Chart} from '@gravity-ui/charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Temperature',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <Chart data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`Chart` adapts to its parent's size, so the wrapping element must have a height.
-
-
-### When to use
-
-- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
-- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
-- Rendering a chart from declarative data rather than drawing imperatively.
-
-### When not to use
-
-- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
-- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
-- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
-
-### Common pitfalls
-
-- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
-- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
-- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
-- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
-
-### Useful docs
-
-- [Get started](./docs/diplodoc/pages/get-started.md)
-- [Theming](./docs/diplodoc/pages/guides/theming.md)
-- [Tooltip](./docs/diplodoc/pages/guides/tooltip.md)
-- [Legend](./docs/diplodoc/pages/guides/legend.md)
-- [HTML Content](./docs/diplodoc/pages/guides/html.md)
-- [Value Formatting](./docs/diplodoc/pages/guides/value-formatting.md)
-- [Data Labels](./docs/diplodoc/pages/guides/data-labels.md)
-- [Axis Types](./docs/diplodoc/pages/guides/axes/axis-types.md)
-- [Axis Labels](./docs/diplodoc/pages/guides/axes/axis-labels.md)
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/charts/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/charts/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/charts/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/charts)
-
----
-
-> Docs for `@gravity-ui/charts@1.49.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.49.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -11370,7 +11545,7 @@ npm run generate
 
 ---
 
-> Generated for `@gravity-ui/dynamic-forms@5.20.0`
+> Generated for `@gravity-ui/dynamic-forms@5.23.0`
 
 # Dynamic Forms
 
@@ -11397,6 +11572,219 @@ Install these in the host project at a compatible version:
 | `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `react-final-form` | `^6.5.3` |
 | `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.23.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.23.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.22.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.22.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.22.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.21.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.21.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.21.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.20.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
 
 ## Usage
 
@@ -11867,219 +12255,6 @@ configure({lang: Lang.Ru});
 
 ---
 
-> Generated for `@gravity-ui/dynamic-forms@5.13.0`
-
-# Dynamic Forms
-
-> Library for rendering neat and functional react forms described by JSON schema
->
-> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save-dev @gravity-ui/dynamic-forms
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `final-form` | `^4.20.2` |
-| `react-final-form` | `^6.5.3` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dynamic-forms)
-
----
-
-> Docs for `@gravity-ui/dynamic-forms@5.13.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.13.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/dynamic-forms@5.12.0`
-
-# Dynamic Forms
-
-> Library for rendering neat and functional react forms described by JSON schema
->
-> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save-dev @gravity-ui/dynamic-forms
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `final-form` | `^4.20.2` |
-| `react-final-form` | `^6.5.3` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dynamic-forms)
-
----
-
-> Docs for `@gravity-ui/dynamic-forms@5.12.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.12.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/dynamic-forms@5.11.0`
-
-# Dynamic Forms
-
-> Library for rendering neat and functional react forms described by JSON schema
->
-> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save-dev @gravity-ui/dynamic-forms
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `final-form` | `^4.20.2` |
-| `react-final-form` | `^6.5.3` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dynamic-forms)
-
----
-
-> Docs for `@gravity-ui/dynamic-forms@5.11.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/dynamic-forms@4.17.0`
 
 # Dynamic Forms
@@ -12147,6 +12322,639 @@ configure({lang: Lang.Ru});
 ---
 
 > Docs for `@gravity-ui/dynamic-forms@4.17.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/4.17.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/page-constructor@8.21.1`
+
+# @gravity-ui/page-constructor documentation
+
+Documentation for the **8.21.1** version of `@gravity-ui/page-constructor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/page-constructor/build/docs/`).
+
+## For AI agents
+
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
+## Install
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
+## Usage
+
+First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
+
+Install the required dependencies:
+
+```shell
+npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
+```
+
+Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+
+const App = () => {
+  const content = {
+    blocks: [
+      {
+        type: 'header-block',
+        title: 'Hello world',
+        background: {color: '#f0f0f0'},
+        description:
+          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+      },
+    ],
+  };
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
+
+If your server is a separate application, then you need to install page-constructor:
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
+
+```ts
+const express = require('express');
+const app = express();
+const {contentTransformer} = require('@gravity-ui/page-constructor/server');
+
+const content = {
+  blocks: [
+    {
+      type: 'header-block',
+      title: 'Hello world',
+      background: {color: '#f0f0f0'},
+      description:
+        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+    },
+  ],
+};
+
+app.get('/content', (req, res) => {
+  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
+});
+
+app.listen(3000);
+```
+
+On the client, add an endpoint call to receive content:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+import {useEffect, useState} from 'react';
+
+const App = () => {
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
+      setContent(response.content);
+    })();
+  }, []);
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+### Ready-made template
+
+To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
+
+### Static site builder
+
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
+
+## Guides
+
+- [Data preparation](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/guides/data-preparation.md) — This chapter provides documentaion for server utilities for transforming content, including Yandex Flavored Markdown (YFM) to HTML conversion and text processing. Key features include:
+- [Подготовка данных](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/guides/data-preparation-ru.md) — Документацию по серверным утилитам для преобразования контента, включая конвертацию Yandex Flavored Markdown (YFM) в HTML и обработку текста. Основные возможности:
+
+## Blocks
+
+- [Banner](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Banner.md) — Renders a compact promotional card with a title, subtitle, an optional background image or color, and a single call-to-action button. Use it to highlight a feature, announce a release, or drive traffic to a landing page from anywhere in the page flow.
+- [CardLayout](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/CardLayout.md) — Renders a responsive grid of arbitrary cards (children) with an optional header and a decorative background image. Use it whenever you need to lay out a homogeneous set of cards — basic, image, background, price, or layout-item — in a row that adapts to the viewport.
+- [Companies](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Companies.md) — Renders a heading with a logo strip — a set of responsive images (desktop / tablet / mobile) shown beneath an optional title and description. Use it for "trusted by" or "powered by" logo rows that must adapt per device and theme.
+- [ContentLayout](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/ContentLayout.md) — Renders a single-column content section (title, body text, optional list, links, and buttons) paired with an optional list of downloadable files and a background. Use it for documentation-style sections, terms, descriptions, or anywhere a focused block of text with file attachments is needed.
+- [ExtendedFeatures](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/ExtendedFeatures.md) — Renders a responsive grid of feature cards, each with an icon, title, text, an optional label (New / Preview), and an optional link. Use it to present a list of product features, capabilities, or benefits in a compact, icon-driven layout.
+- [FilterBlock](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/FilterBlock.md) — Renders a set of cards grouped by tags, with a row of toggle buttons that lets the visitor filter the visible cards by tag. Use it to present a catalog of cards (articles, features, products) that the user can narrow down without leaving the page.
+- [FoldableList](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/FoldableList.md) — Renders a two-column block: a content panel on the left (title, text, links, buttons) and a list of collapsible items on the right, each with its own title, YFM text, and optional link. Use it for FAQ-style or specification pages where each row expands to reveal more detail.
+- [Footer](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Footer.md) — A configurable page footer assembled from optional floors: navigation columns, contacts (social icons), disclaimer, copyright (legal links, language switcher, logo), and an attribution strip.
+- [Form](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Form.md) — A two-column block that renders a third-party form (Yandex Forms or HubSpot) alongside optional YFM text content, with a configurable layout direction and background.
+- [Header](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Header.md) — Renders a full-width page header with a title, optional overtitle/description, call-to-action buttons, breadcrumbs, and an optional media asset (image, video, or video iframe) positioned to the right or centered. Use it as the primary hero/landing block at the top of a page.
+- [HeaderSlider](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/HeaderSlider.md) — Renders a carousel of full-bleed header-block slides — each slide carries its own title, description, buttons, and background media. Use it when the top of the page needs to rotate multiple equally important campaigns or announcements instead of a single hero.
+- [Hero](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Hero.md) — Renders a modern, content-driven hero block: an overtitle, a rich content column (title, body text, list, links, buttons) and a media column (image/video/iframe) that adapts to its intrinsic aspect ratio. Use it as the primary landing block when you want more layout flexibility than the classic Header provides.
+- [Icons](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Icons.md) — Renders a responsive grid of small icon items, each consisting of an image and a caption. Items can optionally be wrapped in links, turning the grid into a navigable set of icon links.
+- [Info](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Info.md) — Renders a two-column information section: a left content column and a right content column, each with its own title, text, lists, buttons, and links, placed inside an optional themed background container.
+- [Map](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Map.md) — A media-and-content block that embeds an interactive Yandex Map inside a card, paired with an optional title, description, links, and buttons.
+- [Media](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Media.md) — Renders a two-column layout that pairs a content column (title, body, list, links, button) with a media column (image, video, YouTube, iframe, or DataLens embed). Use it for feature or explainer sections where text and a rich media asset need to sit side by side.
+- [PromoFeaturesBlock](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/PromoFeaturesBlock.md) — Renders a masonry layout of promotional feature cards, each pairing a title, YFM text, and an optional media asset, displayed against a full-width background. Use it for marketing sections that showcase several value propositions with rich imagery in a non-uniform grid.
+- [Questions](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Questions.md) — Renders an FAQ block: a left content panel (title, text, links, buttons) and a list of expandable question/answer rows on the right. Automatically emits FAQPage JSON-LD microdata so search engines can index the answers as rich results.
+- [Share](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Share.md) — Renders a row of social-network share buttons that share the current page URL.
+- [Slider](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Slider.md) — A carousel block that renders any number of child cards as swipeable slides, with optional title, description, dots, arrows, autoplay, and per-breakpoint slide counts. Built on top of Swiper.
+- [SliderOld](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/SliderOld.md)
+- [Table](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Table.md) — Renders a title followed by a comparison-style table whose cells are plain strings or numbers. A legend column can be marked with disk or tick markers, and an optional legend list explains the marked columns.
+- [Tabs](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/blocks/Tabs.md) — Renders a set of tab buttons that switch between rich content panels. Each tab panel pairs a content column (title, text, lists, buttons, links) with an optional media column (image, video, YouTube, iframe, DataLens), with control over column order, sizing, and border treatment.
+
+## Sub-blocks
+
+- [BackgroundCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/BackgroundCard.md) — A card that renders text content (title, text, links, buttons, or a content list) over a decorative background image or solid color. Useful for promotional cards inside a card layout.
+- [BannerCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/BannerCard.md) — A compact banner card with a title, optional subtitle, a single call-to-action button, and a decorative background image. Designed to draw attention inside a card layout.
+- [BasicCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/BasicCard.md) — A general-purpose card with an optional icon (image or Gravity UI icon) and text content (title, text, links, buttons, or a content list). The simplest and most versatile card.
+- [Content](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/Content.md) — A text content block rendering a title, body text, additional info, links, buttons, and/or an icon content list. Used on its own as the textual portion of a content layout.
+- [Divider](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/Divider.md) — A spacing/separator element that adds vertical space between sibling items, optionally drawing a horizontal line. Useful for tuning rhythm inside a layout.
+- [HubspotForm](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/HubspotForm.md) — Embeds a HubSpot form inside a page. Loads the HubSpot scripts on demand and renders the form into a container; emits analytics events on submit and supports default field values and form event handlers.
+- [ImageCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/ImageCard.md) — A card pairing a foreground image with text content (title, text, links, buttons, or a content list). The image and content can be ordered in either direction.
+- [LayoutItem](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/LayoutItem.md) — Renders a two-part card: a media area (image, video, YouTube, etc.) stacked above a text content area with optional title, body, buttons, links, list, and meta info. Used as the primary content unit inside card-grid blocks.
+- [MediaCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/MediaCard.md) — Wraps a single media element (image, image slider, video, YouTube, iframe, or DataLens) inside a card with an optional border. Pure media card — no text content.
+- [PriceCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/PriceCard.md) — Renders a pricing card: a title, a price (with optional period and details), a description, a checklist of features, and optional buttons and links. Typically placed in a grid to compare plans.
+- [PriceDetailed](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/PriceDetailed.md)
+- [Quote](https://unpkg.com/@gravity-ui/page-constructor@8.21.1/build/docs/sub-blocks/Quote.md) — Renders a customer testimonial / quote card: a logo, the quote body, an optional author (name + avatar + description), and an optional CTA button. Paired with a large image on the side.
+
+---
+
+> Docs for `@gravity-ui/page-constructor@8.21.1`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.21.1/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/page-constructor@8.21.0`
+
+# @gravity-ui/page-constructor documentation
+
+Documentation for the **8.21.0** version of `@gravity-ui/page-constructor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/page-constructor/build/docs/`).
+
+## For AI agents
+
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
+## Install
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
+## Usage
+
+First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
+
+Install the required dependencies:
+
+```shell
+npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
+```
+
+Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+
+const App = () => {
+  const content = {
+    blocks: [
+      {
+        type: 'header-block',
+        title: 'Hello world',
+        background: {color: '#f0f0f0'},
+        description:
+          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+      },
+    ],
+  };
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
+
+If your server is a separate application, then you need to install page-constructor:
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
+
+```ts
+const express = require('express');
+const app = express();
+const {contentTransformer} = require('@gravity-ui/page-constructor/server');
+
+const content = {
+  blocks: [
+    {
+      type: 'header-block',
+      title: 'Hello world',
+      background: {color: '#f0f0f0'},
+      description:
+        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+    },
+  ],
+};
+
+app.get('/content', (req, res) => {
+  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
+});
+
+app.listen(3000);
+```
+
+On the client, add an endpoint call to receive content:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+import {useEffect, useState} from 'react';
+
+const App = () => {
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
+      setContent(response.content);
+    })();
+  }, []);
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+### Ready-made template
+
+To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
+
+### Static site builder
+
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
+
+## Guides
+
+- [Data preparation](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/guides/data-preparation.md) — This chapter provides documentaion for server utilities for transforming content, including Yandex Flavored Markdown (YFM) to HTML conversion and text processing. Key features include:
+- [Подготовка данных](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/guides/data-preparation-ru.md) — Документацию по серверным утилитам для преобразования контента, включая конвертацию Yandex Flavored Markdown (YFM) в HTML и обработку текста. Основные возможности:
+
+## Blocks
+
+- [Banner](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Banner.md) — Renders a compact promotional card with a title, subtitle, an optional background image or color, and a single call-to-action button. Use it to highlight a feature, announce a release, or drive traffic to a landing page from anywhere in the page flow.
+- [CardLayout](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/CardLayout.md) — Renders a responsive grid of arbitrary cards (children) with an optional header and a decorative background image. Use it whenever you need to lay out a homogeneous set of cards — basic, image, background, price, or layout-item — in a row that adapts to the viewport.
+- [Companies](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Companies.md) — Renders a heading with a logo strip — a set of responsive images (desktop / tablet / mobile) shown beneath an optional title and description. Use it for "trusted by" or "powered by" logo rows that must adapt per device and theme.
+- [ContentLayout](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/ContentLayout.md) — Renders a single-column content section (title, body text, optional list, links, and buttons) paired with an optional list of downloadable files and a background. Use it for documentation-style sections, terms, descriptions, or anywhere a focused block of text with file attachments is needed.
+- [ExtendedFeatures](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/ExtendedFeatures.md) — Renders a responsive grid of feature cards, each with an icon, title, text, an optional label (New / Preview), and an optional link. Use it to present a list of product features, capabilities, or benefits in a compact, icon-driven layout.
+- [FilterBlock](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/FilterBlock.md) — Renders a set of cards grouped by tags, with a row of toggle buttons that lets the visitor filter the visible cards by tag. Use it to present a catalog of cards (articles, features, products) that the user can narrow down without leaving the page.
+- [FoldableList](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/FoldableList.md) — Renders a two-column block: a content panel on the left (title, text, links, buttons) and a list of collapsible items on the right, each with its own title, YFM text, and optional link. Use it for FAQ-style or specification pages where each row expands to reveal more detail.
+- [Footer](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Footer.md) — A configurable page footer assembled from optional floors: navigation columns, contacts (social icons), disclaimer, copyright (legal links, language switcher, logo), and an attribution strip.
+- [Form](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Form.md) — A two-column block that renders a third-party form (Yandex Forms or HubSpot) alongside optional YFM text content, with a configurable layout direction and background.
+- [Header](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Header.md) — Renders a full-width page header with a title, optional overtitle/description, call-to-action buttons, breadcrumbs, and an optional media asset (image, video, or video iframe) positioned to the right or centered. Use it as the primary hero/landing block at the top of a page.
+- [HeaderSlider](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/HeaderSlider.md) — Renders a carousel of full-bleed header-block slides — each slide carries its own title, description, buttons, and background media. Use it when the top of the page needs to rotate multiple equally important campaigns or announcements instead of a single hero.
+- [Hero](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Hero.md) — Renders a modern, content-driven hero block: an overtitle, a rich content column (title, body text, list, links, buttons) and a media column (image/video/iframe) that adapts to its intrinsic aspect ratio. Use it as the primary landing block when you want more layout flexibility than the classic Header provides.
+- [Icons](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Icons.md) — Renders a responsive grid of small icon items, each consisting of an image and a caption. Items can optionally be wrapped in links, turning the grid into a navigable set of icon links.
+- [Info](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Info.md) — Renders a two-column information section: a left content column and a right content column, each with its own title, text, lists, buttons, and links, placed inside an optional themed background container.
+- [Map](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Map.md) — A media-and-content block that embeds an interactive Yandex Map inside a card, paired with an optional title, description, links, and buttons.
+- [Media](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Media.md) — Renders a two-column layout that pairs a content column (title, body, list, links, button) with a media column (image, video, YouTube, iframe, or DataLens embed). Use it for feature or explainer sections where text and a rich media asset need to sit side by side.
+- [PromoFeaturesBlock](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/PromoFeaturesBlock.md) — Renders a masonry layout of promotional feature cards, each pairing a title, YFM text, and an optional media asset, displayed against a full-width background. Use it for marketing sections that showcase several value propositions with rich imagery in a non-uniform grid.
+- [Questions](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Questions.md) — Renders an FAQ block: a left content panel (title, text, links, buttons) and a list of expandable question/answer rows on the right. Automatically emits FAQPage JSON-LD microdata so search engines can index the answers as rich results.
+- [Share](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Share.md) — Renders a row of social-network share buttons that share the current page URL.
+- [Slider](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Slider.md) — A carousel block that renders any number of child cards as swipeable slides, with optional title, description, dots, arrows, autoplay, and per-breakpoint slide counts. Built on top of Swiper.
+- [SliderOld](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/SliderOld.md)
+- [Table](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Table.md) — Renders a title followed by a comparison-style table whose cells are plain strings or numbers. A legend column can be marked with disk or tick markers, and an optional legend list explains the marked columns.
+- [Tabs](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/blocks/Tabs.md) — Renders a set of tab buttons that switch between rich content panels. Each tab panel pairs a content column (title, text, lists, buttons, links) with an optional media column (image, video, YouTube, iframe, DataLens), with control over column order, sizing, and border treatment.
+
+## Sub-blocks
+
+- [BackgroundCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/BackgroundCard.md) — A card that renders text content (title, text, links, buttons, or a content list) over a decorative background image or solid color. Useful for promotional cards inside a card layout.
+- [BannerCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/BannerCard.md) — A compact banner card with a title, optional subtitle, a single call-to-action button, and a decorative background image. Designed to draw attention inside a card layout.
+- [BasicCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/BasicCard.md) — A general-purpose card with an optional icon (image or Gravity UI icon) and text content (title, text, links, buttons, or a content list). The simplest and most versatile card.
+- [Content](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/Content.md) — A text content block rendering a title, body text, additional info, links, buttons, and/or an icon content list. Used on its own as the textual portion of a content layout.
+- [Divider](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/Divider.md) — A spacing/separator element that adds vertical space between sibling items, optionally drawing a horizontal line. Useful for tuning rhythm inside a layout.
+- [HubspotForm](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/HubspotForm.md) — Embeds a HubSpot form inside a page. Loads the HubSpot scripts on demand and renders the form into a container; emits analytics events on submit and supports default field values and form event handlers.
+- [ImageCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/ImageCard.md) — A card pairing a foreground image with text content (title, text, links, buttons, or a content list). The image and content can be ordered in either direction.
+- [LayoutItem](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/LayoutItem.md) — Renders a two-part card: a media area (image, video, YouTube, etc.) stacked above a text content area with optional title, body, buttons, links, list, and meta info. Used as the primary content unit inside card-grid blocks.
+- [MediaCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/MediaCard.md) — Wraps a single media element (image, image slider, video, YouTube, iframe, or DataLens) inside a card with an optional border. Pure media card — no text content.
+- [PriceCard](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/PriceCard.md) — Renders a pricing card: a title, a price (with optional period and details), a description, a checklist of features, and optional buttons and links. Typically placed in a grid to compare plans.
+- [PriceDetailed](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/PriceDetailed.md)
+- [Quote](https://unpkg.com/@gravity-ui/page-constructor@8.21.0/build/docs/sub-blocks/Quote.md) — Renders a customer testimonial / quote card: a logo, the quote body, an optional author (name + avatar + description), and an optional CTA button. Paired with a large image on the side.
+
+---
+
+> Docs for `@gravity-ui/page-constructor@8.21.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.21.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/page-constructor@8.20.0`
+
+# @gravity-ui/page-constructor documentation
+
+Documentation for the **8.20.0** version of `@gravity-ui/page-constructor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/page-constructor/build/docs/`).
+
+## For AI agents
+
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
+## Install
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
+## Usage
+
+First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
+
+Install the required dependencies:
+
+```shell
+npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
+```
+
+Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+
+const App = () => {
+  const content = {
+    blocks: [
+      {
+        type: 'header-block',
+        title: 'Hello world',
+        background: {color: '#f0f0f0'},
+        description:
+          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+      },
+    ],
+  };
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
+
+If your server is a separate application, then you need to install page-constructor:
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
+
+```ts
+const express = require('express');
+const app = express();
+const {contentTransformer} = require('@gravity-ui/page-constructor/server');
+
+const content = {
+  blocks: [
+    {
+      type: 'header-block',
+      title: 'Hello world',
+      background: {color: '#f0f0f0'},
+      description:
+        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+    },
+  ],
+};
+
+app.get('/content', (req, res) => {
+  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
+});
+
+app.listen(3000);
+```
+
+On the client, add an endpoint call to receive content:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+import {useEffect, useState} from 'react';
+
+const App = () => {
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
+      setContent(response.content);
+    })();
+  }, []);
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+### Ready-made template
+
+To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
+
+### Static site builder
+
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
+
+## Guides
+
+- [Data preparation](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/guides/data-preparation.md) — This chapter provides documentaion for server utilities for transforming content, including Yandex Flavored Markdown (YFM) to HTML conversion and text processing. Key features include:
+- [Подготовка данных](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/guides/data-preparation-ru.md) — Документацию по серверным утилитам для преобразования контента, включая конвертацию Yandex Flavored Markdown (YFM) в HTML и обработку текста. Основные возможности:
+
+## Blocks
+
+- [Banner](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Banner.md) — Renders a compact promotional card with a title, subtitle, an optional background image or color, and a single call-to-action button. Use it to highlight a feature, announce a release, or drive traffic to a landing page from anywhere in the page flow.
+- [CardLayout](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/CardLayout.md) — Renders a responsive grid of arbitrary cards (children) with an optional header and a decorative background image. Use it whenever you need to lay out a homogeneous set of cards — basic, image, background, price, or layout-item — in a row that adapts to the viewport.
+- [Companies](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Companies.md) — Renders a heading with a logo strip — a set of responsive images (desktop / tablet / mobile) shown beneath an optional title and description. Use it for "trusted by" or "powered by" logo rows that must adapt per device and theme.
+- [ContentLayout](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/ContentLayout.md) — Renders a single-column content section (title, body text, optional list, links, and buttons) paired with an optional list of downloadable files and a background. Use it for documentation-style sections, terms, descriptions, or anywhere a focused block of text with file attachments is needed.
+- [ExtendedFeatures](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/ExtendedFeatures.md) — Renders a responsive grid of feature cards, each with an icon, title, text, an optional label (New / Preview), and an optional link. Use it to present a list of product features, capabilities, or benefits in a compact, icon-driven layout.
+- [FilterBlock](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/FilterBlock.md) — Renders a set of cards grouped by tags, with a row of toggle buttons that lets the visitor filter the visible cards by tag. Use it to present a catalog of cards (articles, features, products) that the user can narrow down without leaving the page.
+- [FoldableList](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/FoldableList.md) — Renders a two-column block: a content panel on the left (title, text, links, buttons) and a list of collapsible items on the right, each with its own title, YFM text, and optional link. Use it for FAQ-style or specification pages where each row expands to reveal more detail.
+- [Footer](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Footer.md) — A configurable page footer assembled from optional floors: navigation columns, contacts (social icons), disclaimer, copyright (legal links, language switcher, logo), and an attribution strip.
+- [Form](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Form.md) — A two-column block that renders a third-party form (Yandex Forms or HubSpot) alongside optional YFM text content, with a configurable layout direction and background.
+- [Header](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Header.md) — Renders a full-width page header with a title, optional overtitle/description, call-to-action buttons, breadcrumbs, and an optional media asset (image, video, or video iframe) positioned to the right or centered. Use it as the primary hero/landing block at the top of a page.
+- [HeaderSlider](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/HeaderSlider.md) — Renders a carousel of full-bleed header-block slides — each slide carries its own title, description, buttons, and background media. Use it when the top of the page needs to rotate multiple equally important campaigns or announcements instead of a single hero.
+- [Hero](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Hero.md) — Renders a modern, content-driven hero block: an overtitle, a rich content column (title, body text, list, links, buttons) and a media column (image/video/iframe) that adapts to its intrinsic aspect ratio. Use it as the primary landing block when you want more layout flexibility than the classic Header provides.
+- [Icons](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Icons.md) — Renders a responsive grid of small icon items, each consisting of an image and a caption. Items can optionally be wrapped in links, turning the grid into a navigable set of icon links.
+- [Info](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Info.md) — Renders a two-column information section: a left content column and a right content column, each with its own title, text, lists, buttons, and links, placed inside an optional themed background container.
+- [Map](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Map.md) — A media-and-content block that embeds an interactive Yandex Map inside a card, paired with an optional title, description, links, and buttons.
+- [Media](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Media.md) — Renders a two-column layout that pairs a content column (title, body, list, links, button) with a media column (image, video, YouTube, iframe, or DataLens embed). Use it for feature or explainer sections where text and a rich media asset need to sit side by side.
+- [PromoFeaturesBlock](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/PromoFeaturesBlock.md) — Renders a masonry layout of promotional feature cards, each pairing a title, YFM text, and an optional media asset, displayed against a full-width background. Use it for marketing sections that showcase several value propositions with rich imagery in a non-uniform grid.
+- [Questions](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Questions.md) — Renders an FAQ block: a left content panel (title, text, links, buttons) and a list of expandable question/answer rows on the right. Automatically emits FAQPage JSON-LD microdata so search engines can index the answers as rich results.
+- [Share](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Share.md) — Renders a row of social-network share buttons that share the current page URL.
+- [Slider](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Slider.md) — A carousel block that renders any number of child cards as swipeable slides, with optional title, description, dots, arrows, autoplay, and per-breakpoint slide counts. Built on top of Swiper.
+- [SliderOld](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/SliderOld.md)
+- [Table](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Table.md) — Renders a title followed by a comparison-style table whose cells are plain strings or numbers. A legend column can be marked with disk or tick markers, and an optional legend list explains the marked columns.
+- [Tabs](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/blocks/Tabs.md) — Renders a set of tab buttons that switch between rich content panels. Each tab panel pairs a content column (title, text, lists, buttons, links) with an optional media column (image, video, YouTube, iframe, DataLens), with control over column order, sizing, and border treatment.
+
+## Sub-blocks
+
+- [BackgroundCard](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/BackgroundCard.md) — A card that renders text content (title, text, links, buttons, or a content list) over a decorative background image or solid color. Useful for promotional cards inside a card layout.
+- [BannerCard](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/BannerCard.md) — A compact banner card with a title, optional subtitle, a single call-to-action button, and a decorative background image. Designed to draw attention inside a card layout.
+- [BasicCard](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/BasicCard.md) — A general-purpose card with an optional icon (image or Gravity UI icon) and text content (title, text, links, buttons, or a content list). The simplest and most versatile card.
+- [Content](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/Content.md) — A text content block rendering a title, body text, additional info, links, buttons, and/or an icon content list. Used on its own as the textual portion of a content layout.
+- [Divider](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/Divider.md) — A spacing/separator element that adds vertical space between sibling items, optionally drawing a horizontal line. Useful for tuning rhythm inside a layout.
+- [HubspotForm](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/HubspotForm.md) — Embeds a HubSpot form inside a page. Loads the HubSpot scripts on demand and renders the form into a container; emits analytics events on submit and supports default field values and form event handlers.
+- [ImageCard](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/ImageCard.md) — A card pairing a foreground image with text content (title, text, links, buttons, or a content list). The image and content can be ordered in either direction.
+- [LayoutItem](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/LayoutItem.md) — Renders a two-part card: a media area (image, video, YouTube, etc.) stacked above a text content area with optional title, body, buttons, links, list, and meta info. Used as the primary content unit inside card-grid blocks.
+- [MediaCard](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/MediaCard.md) — Wraps a single media element (image, image slider, video, YouTube, iframe, or DataLens) inside a card with an optional border. Pure media card — no text content.
+- [PriceCard](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/PriceCard.md) — Renders a pricing card: a title, a price (with optional period and details), a description, a checklist of features, and optional buttons and links. Typically placed in a grid to compare plans.
+- [PriceDetailed](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/PriceDetailed.md)
+- [Quote](https://unpkg.com/@gravity-ui/page-constructor@8.20.0/build/docs/sub-blocks/Quote.md) — Renders a customer testimonial / quote card: a logo, the quote body, an optional author (name + avatar + description), and an optional CTA button. Paired with a large image on the side.
+
+---
+
+> Docs for `@gravity-ui/page-constructor@8.20.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.20.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -13675,346 +14483,6 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 ---
 
-> Generated for `@gravity-ui/page-constructor@8.11.0`
-
-# Page constructor
-
-> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
->
-> **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/page-constructor
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.1.1` |
-| `@diplodoc/transform` | `^4.28.2` |
-
-## Usage
-
-First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
-
-Install the required dependencies:
-
-```shell
-npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
-```
-
-Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
-
-```tsx
-import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
-import '@gravity-ui/page-constructor/styles/styles.scss';
-
-const App = () => {
-  const content = {
-    blocks: [
-      {
-        type: 'header-block',
-        title: 'Hello world',
-        background: {color: '#f0f0f0'},
-        description:
-          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
-      },
-    ],
-  };
-
-  return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
-  );
-};
-
-export default App;
-```
-
-This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
-
-If your server is a separate application, then you need to install page-constructor:
-
-```shell
-npm install @gravity-ui/page-constructor
-```
-
-To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
-
-```ts
-const express = require('express');
-const app = express();
-const {contentTransformer} = require('@gravity-ui/page-constructor/server');
-
-const content = {
-  blocks: [
-    {
-      type: 'header-block',
-      title: 'Hello world',
-      background: {color: '#f0f0f0'},
-      description:
-        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
-    },
-  ],
-};
-
-app.get('/content', (req, res) => {
-  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
-});
-
-app.listen(3000);
-```
-
-On the client, add an endpoint call to receive content:
-
-```tsx
-import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
-import '@gravity-ui/page-constructor/styles/styles.scss';
-import {useEffect, useState} from 'react';
-
-const App = () => {
-  const [content, setContent] = useState();
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
-      setContent(response.content);
-    })();
-  }, []);
-
-  return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
-  );
-};
-
-export default App;
-```
-
-### Ready-made template
-
-To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
-
-### Static site builder
-
-[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
-
-
-### When to use
-
-- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
-- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
-- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
-- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
-
-### When not to use
-
-- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
-- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
-
-### Common pitfalls
-
-- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
-- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
-- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
-- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
-- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/page-constructor/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/page-constructor)
-
----
-
-> Docs for `@gravity-ui/page-constructor@8.11.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/page-constructor@8.10.0`
-
-# Page constructor
-
-> A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
->
-> **npm:** `@gravity-ui/page-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/page-constructor
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.1.1` |
-| `@diplodoc/transform` | `^4.28.2` |
-
-## Usage
-
-First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
-
-Install the required dependencies:
-
-```shell
-npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
-```
-
-Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
-
-```tsx
-import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
-import '@gravity-ui/page-constructor/styles/styles.scss';
-
-const App = () => {
-  const content = {
-    blocks: [
-      {
-        type: 'header-block',
-        title: 'Hello world',
-        background: {color: '#f0f0f0'},
-        description:
-          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
-      },
-    ],
-  };
-
-  return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
-  );
-};
-
-export default App;
-```
-
-This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
-
-If your server is a separate application, then you need to install page-constructor:
-
-```shell
-npm install @gravity-ui/page-constructor
-```
-
-To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
-
-```ts
-const express = require('express');
-const app = express();
-const {contentTransformer} = require('@gravity-ui/page-constructor/server');
-
-const content = {
-  blocks: [
-    {
-      type: 'header-block',
-      title: 'Hello world',
-      background: {color: '#f0f0f0'},
-      description:
-        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
-    },
-  ],
-};
-
-app.get('/content', (req, res) => {
-  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
-});
-
-app.listen(3000);
-```
-
-On the client, add an endpoint call to receive content:
-
-```tsx
-import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
-import '@gravity-ui/page-constructor/styles/styles.scss';
-import {useEffect, useState} from 'react';
-
-const App = () => {
-  const [content, setContent] = useState();
-
-  useEffect(() => {
-    (async () => {
-      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
-      setContent(response.content);
-    })();
-  }, []);
-
-  return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
-  );
-};
-
-export default App;
-```
-
-### Ready-made template
-
-To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
-
-### Static site builder
-
-[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
-
-
-### When to use
-
-- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
-- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
-- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
-- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
-
-### When not to use
-
-- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
-- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
-
-### Common pitfalls
-
-- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
-- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
-- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
-- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
-- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/page-constructor/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/page-constructor/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/page-constructor)
-
----
-
-> Docs for `@gravity-ui/page-constructor@8.10.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.10.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/page-constructor@7.25.0`
 
 # Page constructor
@@ -14185,7 +14653,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 
 ---
 
-> Generated for `@gravity-ui/blog-constructor@11.1.0`
+> Generated for `@gravity-ui/blog-constructor@11.2.0`
 
 # Blog Constructor
 
@@ -14209,9 +14677,51 @@ Install these in the host project at a compatible version:
 | Package | Version range |
 | --- | --- |
 | `@diplodoc/transform` | `^4.10.7` |
-| `@gravity-ui/page-constructor` | `^8.0.0` |
+| `@gravity-ui/page-constructor` | `^8.20.0` |
 | `@gravity-ui/uikit` | `^7.1.1` |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md)
+- [Storybook](https://preview.yandexcloud.dev/blog-constructor/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/blog-constructor)
+
+---
+
+> Docs for `@gravity-ui/blog-constructor@11.2.0`. Versioned at: `https://gravity-ui.com/llms/blog-constructor/11.2.0/llms.txt` (exact), `https://gravity-ui.com/llms/blog-constructor/11/llms.txt` (latest of major 11), `https://gravity-ui.com/llms/blog-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/blog-constructor@11.1.0`
+
+# Blog Constructor
+
+> A library based on the Page constructor library for creating blog-like services.
+>
+> **npm:** `@gravity-ui/blog-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install @gravity-ui/blog-constructor
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md) for full documentation.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.10.7` |
+| `@gravity-ui/page-constructor` | `^8.0.0` |
 
 ## Links
 
@@ -14563,22 +15073,43 @@ Install these in the host project at a compatible version:
 
 ---
 
-> Generated for `@gravity-ui/blog-constructor@8.2.0`
+> Generated for `@gravity-ui/chartkit@8.2.0`
 
-# Blog Constructor
+# @gravity-ui/chartkit documentation
 
-> A library based on the Page constructor library for creating blog-like services.
->
-> **npm:** `@gravity-ui/blog-constructor` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **8.2.0** version of `@gravity-ui/chartkit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
+
+## For AI agents
+
+A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
 
 ## Install
 
 ```shell
-npm install @gravity-ui/blog-constructor
+npm install @gravity-ui/chartkit @gravity-ui/uikit
 ```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md) for full documentation.
 
 ## Peer dependencies
 
@@ -14586,21 +15117,88 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
+| `@gravity-ui/uikit` | `^7.0.0` |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.1.1` |
-| `@diplodoc/transform` | `^4.10.7` |
-| `@gravity-ui/page-constructor` | `^7.0.0` |
 
-## Links
+## Usage
 
-- [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md)
-- [Storybook](https://preview.yandexcloud.dev/blog-constructor/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/blog-constructor)
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+## Guides
+
+- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.2.0/build/docs/guides/testing.md)
 
 ---
 
-> Docs for `@gravity-ui/blog-constructor@8.2.0`. Versioned at: `https://gravity-ui.com/llms/blog-constructor/8.2.0/llms.txt` (exact), `https://gravity-ui.com/llms/blog-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/blog-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/chartkit@8.2.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.2.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -14649,8 +15247,8 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/uikit` | `^7.0.0` |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
 
 ## Usage
 
@@ -15906,137 +16504,6 @@ export default function App() {
 ---
 
 > Docs for `@gravity-ui/chartkit@7.56.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.56.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/chartkit@7.55.0`
-
-# ChartKit
-
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
-```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-```
-
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-### Basic usage
-
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
-
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-settings.set({plugins: [GravityChartsPlugin]});
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
-
-
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
-
----
-
-> Docs for `@gravity-ui/chartkit@7.55.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.55.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -32838,6 +33305,87 @@ const CustomThemeWrapper = (props: {
 
 ---
 
+> Generated for `@gravity-ui/yagr@5.3.0`
+
+# Yagr
+
+> A high-performance canvas charts renderer, based on uPlot.
+>
+> **npm:** `@gravity-ui/yagr` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Usage
+
+```
+npm i @gravity-ui/yagr
+```
+
+### NPM Module
+
+```typescript
+import Yagr from '@gravity-ui/yagr';
+
+new Yagr(document.body, {
+    timeline: [1, 2, 3, 4, 5],
+    series: [
+        {
+            data: [1, 2, 3, 4, 5],
+            color: 'red',
+        },
+        {
+            data: [2, 3, 1, 4, 5],
+            color: 'green',
+        },
+    ],
+});
+```
+
+### Script Tag
+
+```html
+<script src="https://unpkg.com/@gravity-ui/yagr/dist/yagr.iife.min.js"></script>
+<script>
+    new Yagr(document.body, {
+        timeline: [1, 2, 3, 4, 5],
+        series: [
+            {
+                data: [1, 2, 3, 4, 5],
+                color: 'red',
+            },
+            {
+                data: [2, 3, 1, 4, 5],
+                color: 'green',
+            },
+        ],
+    });
+</script>
+```
+
+### Examples
+
+Need something specific? Yagr presents some useful examples in the [demo/examples](./demo/examples/) folder. How to start them with current version:
+
+1. Clone the repository.
+2. Install dependencies `npm i`.
+3. Run `npm run build`.
+4. Run `npx http-server .`.
+5. Open examples in browser according to the http-server output.
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/yagr/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/yagr)
+
+---
+
+> Docs for `@gravity-ui/yagr@5.3.0`. Versioned at: `https://gravity-ui.com/llms/yagr/5.3.0/llms.txt` (exact), `https://gravity-ui.com/llms/yagr/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/yagr/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/yagr@5.2.0`
 
 # Yagr
@@ -33644,87 +34192,6 @@ Need something specific? Yagr presents some useful examples in the [demo/example
 ---
 
 > Docs for `@gravity-ui/yagr@4.9.0`. Versioned at: `https://gravity-ui.com/llms/yagr/4.9.0/llms.txt` (exact), `https://gravity-ui.com/llms/yagr/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/yagr/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/yagr@4.8.0`
-
-# Yagr
-
-> A high-performance canvas charts renderer, based on uPlot.
->
-> **npm:** `@gravity-ui/yagr` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Usage
-
-```
-npm i @gravity-ui/yagr
-```
-
-### NPM Module
-
-```typescript
-import Yagr from '@gravity-ui/yagr';
-
-new Yagr(document.body, {
-    timeline: [1, 2, 3, 4, 5],
-    series: [
-        {
-            data: [1, 2, 3, 4, 5],
-            color: 'red',
-        },
-        {
-            data: [2, 3, 1, 4, 5],
-            color: 'green',
-        },
-    ],
-});
-```
-
-### Script Tag
-
-```html
-<script src="https://unpkg.com/@gravity-ui/yagr/dist/yagr.iife.min.js"></script>
-<script>
-    new Yagr(document.body, {
-        timeline: [1, 2, 3, 4, 5],
-        series: [
-            {
-                data: [1, 2, 3, 4, 5],
-                color: 'red',
-            },
-            {
-                data: [2, 3, 1, 4, 5],
-                color: 'green',
-            },
-        ],
-    });
-</script>
-```
-
-### Examples
-
-Need something specific? Yagr presents some useful examples in the [demo/examples](./demo/examples/) folder. How to start them with current version:
-
-1. Clone the repository.
-2. Install dependencies `npm i`.
-3. Run `npm run build`.
-4. Run `npx http-server .`.
-5. Open examples in browser according to the http-server output.
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/yagr/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/yagr/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/yagr)
-
----
-
-> Docs for `@gravity-ui/yagr@4.8.0`. Versioned at: `https://gravity-ui.com/llms/yagr/4.8.0/llms.txt` (exact), `https://gravity-ui.com/llms/yagr/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/yagr/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
