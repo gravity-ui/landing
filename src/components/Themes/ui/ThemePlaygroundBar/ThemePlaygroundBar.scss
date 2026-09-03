@@ -56,10 +56,33 @@ $block: '.#{variables.$ns}theme-playground-bar';
         font-weight: 500;
     }
 
+    // The preset row scrolls horizontally at every size instead of dropping
+    // presets that don't fit — on a phone the hidden ones were unreachable.
+    // `flex-shrink: 0` stays off so the row can actually be squeezed into the
+    // available width and produce the overflow it scrolls through.
     &__swatches {
         display: flex;
         align-items: center;
-        flex-shrink: 0;
+        gap: var(--g-spacing-2);
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        // Room for the active swatch's 2px frame, which would otherwise be
+        // clipped by the scroll box.
+        padding-block: 2px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    // Set from JS when the row actually overflows: fades the trailing edge so
+    // a partly-cut swatch reads as "there is more to scroll", instead of the
+    // row happening to end flush and looking complete.
+    &__swatches_scrollable {
+        mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent 100%);
     }
 
     &__swatch {
@@ -125,24 +148,11 @@ $block: '.#{variables.$ns}theme-playground-bar';
         }
 
         &__swatches {
-            justify-content: space-between;
             width: 100%;
         }
 
         &__gallery-button {
             width: 100%;
-        }
-    }
-
-    @container (max-width: #{variables.$extraSmallBreakpoint - 1}) {
-        &__swatch:nth-child(n + 6) {
-            display: none;
-        }
-    }
-
-    @container (max-width: 359px) {
-        &__swatch:nth-child(n + 5) {
-            display: none;
         }
     }
 }
