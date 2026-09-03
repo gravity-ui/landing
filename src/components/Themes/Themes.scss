@@ -214,8 +214,14 @@ $contentMaxWidth: calc(1232px + 16px + 80px);
     // sticky bar's toggle takes over to avoid duplicate controls on screen.
     // The class has to carry the BEM namespace `block()` adds, otherwise the
     // selector matches nothing and both toggles stay on screen together.
-    &__content-wrapper:has(&__sticky-bar_visible) .#{variables.$ns}preview-tab__mode-toggle {
-        display: none;
+    //
+    // Only above `sm`: on phone the sticky bar hides its own toggle (see
+    // `__sticky-mode-toggle` above), so handing over there left no way to
+    // switch light/dark at all once the page was scrolled past the threshold.
+    @media (min-width: #{map-get(pcVariables.$gridBreakpoints, 'sm') + 1}) {
+        &__content-wrapper:has(&__sticky-bar_visible) .#{variables.$ns}preview-tab__mode-toggle {
+            display: none;
+        }
     }
 
     &__header-actions {
