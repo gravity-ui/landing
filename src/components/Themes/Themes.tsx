@@ -13,7 +13,6 @@ import {
 } from '@gravity-ui/uikit';
 import {parseJSON} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
-import dynamic from 'next/dynamic';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
@@ -24,6 +23,16 @@ import {CustomScrollbar} from '../CustomScrollbar';
 import {TagItem, Tags} from '../Tags/Tags';
 
 import './Themes.scss';
+// PreviewTab renders heavy UISamples that aren't SSR-safe in the current
+// uikit/navigation stack — one of the descendant components resolves to
+// `undefined` during server render, so it is mounted only after hydration
+// (see `isHydrated` below).
+//
+// It has to be a STATIC import, not `next/dynamic`. With `dynamic(..., {ssr:
+// false})` Next only emits this subtree's CSS as a `<link rel=preload>` on a
+// client-side route transition and never promotes it to a stylesheet, so
+// arriving at /themes from another page left the UI samples (AsideHeader in
+// particular) completely unstyled until a hard reload.
 import type {ThemePreviewMode} from './gallery';
 import {loadThemePayload} from './gallery';
 import {useThemeCreator, useThemeCreatorMethods} from './hooks';
@@ -35,21 +44,13 @@ import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {CommunityThemesModal} from './ui/CommunityThemesModal';
 import {GalleryHintPopover} from './ui/GalleryHintPopover/GalleryHintPopover';
 import {PreviewModeToggle} from './ui/PreviewModeToggle/PreviewModeToggle';
+import {PreviewTab} from './ui/PreviewTab/PreviewTab';
 import {SpecificTab} from './ui/SpecificTab/SpecificTab';
 import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 import {ThemeGalleryDrawer} from './ui/ThemeGalleryDrawer';
 import {ThemeImport} from './ui/ThemeImport/ThemeImport';
 import {ThemePlaygroundBar} from './ui/ThemePlaygroundBar/ThemePlaygroundBar';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
-
-// PreviewTab renders heavy UISamples that aren't SSR-safe in the current
-// uikit/navigation stack — one of the descendant components resolves to
-// `undefined` during server render. Load it client-only so Preview can be
-// the default tab without crashing the page.
-const PreviewTab = dynamic(
-    () => import('./ui/PreviewTab/PreviewTab').then((mod) => mod.PreviewTab),
-    {ssr: false},
-);
 
 const b = block('themes');
 
@@ -326,16 +327,23 @@ const ThemesContent = () => {
 
     const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.Preview);
 
+    // PreviewTab's UI samples are not SSR-safe (see the import comment), so the
+    // subtree is skipped on the server pass and mounted once hydration is done.
+    const [isHydrated, setHydrated] = useState(false);
+    useEffect(() => {
+        setHydrated(true);
+    }, []);
+
     const TabComponent = tabToComponent[activeTab];
 
     let tabContent: React.ReactNode = null;
     if (activeTab === ThemeTab.Preview) {
-        tabContent = (
+        tabContent = isHydrated ? (
             <PreviewTab
                 forcedPreviewMode={forcedPreviewMode}
                 onPreviewModeChange={setForcedPreviewMode}
             />
-        );
+        ) : null;
     } else if (TabComponent) {
         tabContent = <TabComponent />;
     }

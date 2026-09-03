@@ -33,6 +33,28 @@ export const ThemePlaygroundBar: React.FC<ThemePlaygroundBarProps> = ({
 }) => {
     const {t} = useTranslation('themes');
     const breakpoint = useWindowBreakpoint();
+    // The preset row scrolls when it can't fit. CSS alone can't tell whether
+    // it currently overflows, so the trailing fade that advertises the scroll
+    // is toggled from a ResizeObserver.
+    const swatchesRef = React.useRef<HTMLDivElement>(null);
+    const [isSwatchRowScrollable, setSwatchRowScrollable] = React.useState(false);
+
+    React.useEffect(() => {
+        const node = swatchesRef.current;
+        if (!node) {
+            return undefined;
+        }
+        const update = () => {
+            setSwatchRowScrollable(node.scrollWidth - node.clientWidth > 1);
+        };
+        update();
+        const observer = new ResizeObserver(update);
+        observer.observe(node);
+        for (const child of Array.from(node.children)) {
+            observer.observe(child);
+        }
+        return () => observer.disconnect();
+    }, []);
     const isDesktop = breakpoint >= BREAKPOINTS.xl;
     const isMobile = breakpoint < BREAKPOINTS.sm;
     // Mobile source ships PNG only — WebP came out larger than the PNG for
@@ -60,7 +82,10 @@ export const ThemePlaygroundBar: React.FC<ThemePlaygroundBarProps> = ({
                     </Text>
                 </div>
                 <div className={b('bottom-row')}>
-                    <div className={b('swatches')}>
+                    <div
+                        ref={swatchesRef}
+                        className={b('swatches', {scrollable: isSwatchRowScrollable})}
+                    >
                         {BRAND_COLORS_PRESETS.map((preset, i) => {
                             const active = i === activePresetIndex;
                             return (
