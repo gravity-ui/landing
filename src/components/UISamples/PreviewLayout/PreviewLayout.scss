@@ -3,6 +3,8 @@
 @use '~@gravity-ui/uikit/styles/themes/_index.scss' as themes;
 
 $block: '.#{variables.$ns}themes-preview-layout';
+// Matches the width TasksPreview pins itself to.
+$desktopSampleWidth: 1080px;
 
 #{$block} {
     height: 800px;
@@ -111,6 +113,16 @@ $block: '.#{variables.$ns}themes-preview-layout';
             &_full-height {
                 padding-top: 0;
                 padding-bottom: 0;
+            }
+        }
+
+        // See PreviewWrapper: below `sm` the sample keeps its desktop width
+        // and the content area pans horizontally rather than collapsing.
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm')) {
+            overflow-x: auto;
+
+            > * {
+                min-width: $desktopSampleWidth;
             }
         }
     }
