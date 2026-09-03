@@ -1,0 +1,47 @@
+{
+    "entries": {
+        "baseline": {
+            "themeHash": "723d3a0c800f3f272ae63b67ecba790e3754b8bb3f7016352d2902246743dd10",
+            "files": {
+                "light": "29176f83e04e9a54ade301b19bf566611c543ac6b6d29e4320ebae5705c7cea9",
+                "dark": "00387f2119f431f00ada9b69218dcc5f99188e6aee32de1dd71f1512e34f2367"
+            }
+        },
+        "coffee": {
+            "themeHash": "5a4a76bf28ca280e76085264f0f6674f376fec04f58aedaa4358d74cd84e4c02",
+            "files": {
+                "light": "1c55e72933cd7ca912e09fad622f58f7ee0b156a5bef430afce2bf70d2598ae2",
+                "dark": "08ec5882bdcbcbfcfb9032fb524036715d0f46e5fb98e1fa79819d6745167ffb"
+            }
+        },
+        "dust-olive": {
+            "themeHash": "0adc7999acaeea0f42e7ce054a6f14c9742e651952964a1cdcc049d6e0c90199",
+            "files": {
+                "light": "a43f9785ce5131186c0e5636aecb9274e8867530e233f5235d470908741dba9b",
+                "dark": "1ab0b84688d253fd7954925d26861ab59fc76eafe8d4ecb0bbca2a3cfedcd8ce"
+            }
+        },
+        "orange": {
+            "themeHash": "8617d270c9c851731800a2c4169dd79783de75c71f641bb6bf9f4003f95d4507",
+            "files": {
+                "light": "60d7fef4a21f8bacdc7e432f551bc452318e627e6dd26c02977c96c4f1199afa",
+                "dark": "a220bf8e4f58c4ba3cc93b50c4b1da06f87577dfd52086ca59191bd554278c96"
+            }
+        },
+        "retro-wave-radio": {
+            "themeHash": "579d162e6c47d0f9262b1d803805b0942015948479fee6effb2de79a98219b86",
+            "files": {
+                "light": "8bdd0df9c9a946954c600b334bdaada75d6e0b45aef2a74d83fee137a634573d",
+                "dark": "32a53b23eff1290aa606dade4f1e250e232e2f78a9212356372999bbd42523f1"
+            }
+        },
+        "tea": {
+            "themeHash": "1092535be315fbac4a9e509c687749292f54e1416345fa441d4a9786ca0ae3f1",
+            "files": {
+                "light": "74f73f49debe5702bacc5bc1562a9f48efde786bee06712165b6d9fc0e6659ec",
+                "dark": "2f3e4c1c9f6dd8c4a7ad1678c74b6d21ee1820b3e09ff12a9872b3bedb8dc0b8"
+            }
+        }
+    },
+    "generatedAt": "pinned"
+}

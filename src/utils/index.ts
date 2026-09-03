@@ -4,6 +4,7 @@ export * from './media';
 export * from './theme';
 export * from './lib';
 export * from './browser';
+export * from './contentScroll';
 export * from './i18next';
 export * from './anchor';
 export * from './cookie';

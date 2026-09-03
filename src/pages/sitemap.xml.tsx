@@ -12,7 +12,7 @@ const BASE_URL = 'https://gravity-ui.com';
 const generatePaths = () => {
     const paths: {path: string; notLocalized?: boolean}[] = [
         {path: ''},
-        {path: '/themer'},
+        {path: '/themes'},
         {path: '/icons'},
     ];
 
