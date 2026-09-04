@@ -15,7 +15,13 @@ export type AnalyticsAction =
     | 'start_creating_view'
     | 'prompt_copy'
     | 'howto_start_click'
-    | 'tab_switch';
+    | 'tab_switch'
+    | 'gallery_open'
+    | 'gallery_all_open'
+    | 'theme_apply'
+    | 'theme_preset_select'
+    | 'theme_import'
+    | 'theme_start_scratch';
 
 // Single analytics channel: a `cta` event goes to the dataLayer, where GTM
 // routes it to GA4 (event = cta_action) and Metrika (reachGoal(cta_action)).
