@@ -18,7 +18,7 @@ import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
 import {CONTENT_WRAPPER_ID} from '../../constants';
 import {useWindowBreakpoint} from '../../hooks/useWindowBreakpoint';
-import {block, getContentScrollElement} from '../../utils';
+import {block, getContentScrollElement, sendAnalyticsEvent} from '../../utils';
 import {CustomScrollbar} from '../CustomScrollbar';
 import {TagItem, Tags} from '../Tags/Tags';
 
@@ -40,6 +40,7 @@ import {DEFAULT_THEME} from './lib/constants';
 import type {BrandPreset} from './lib/constants';
 import {normalizeImportedTheme} from './lib/normalizeImportedTheme';
 import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
+import {parseRgbStringToHex} from './ui/ColorPickerInput/utils';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
 import {CommunityThemesModal} from './ui/CommunityThemesModal';
 import {GalleryHintPopover} from './ui/GalleryHintPopover/GalleryHintPopover';
@@ -118,6 +119,7 @@ const ThemesContent = () => {
     // generation also drops a gallery load still in flight so it can't land on
     // top of the freshly imported theme.
     const handleImportSuccess = useCallback(() => {
+        sendAnalyticsEvent('theme_import');
         applyGenerationRef.current += 1;
         setActiveThemeId(null);
         setActivePresetIndex(null);
@@ -149,6 +151,7 @@ const ThemesContent = () => {
             // Invalidate any in-flight theme load so it can't overwrite this preset.
             applyGenerationRef.current += 1;
             applyBrandPreset(preset);
+            sendAnalyticsEvent('theme_preset_select', parseRgbStringToHex(preset.brandColor));
             setActivePresetIndex(index);
             setActiveThemeId(null);
             setForcedPreviewMode(null);
@@ -170,6 +173,7 @@ const ThemesContent = () => {
                 }
                 const gravityTheme = normalizeImportedTheme(parseJSON(payload));
                 importTheme(gravityTheme);
+                sendAnalyticsEvent('theme_apply', id);
                 setActiveThemeId(id);
                 setActivePresetIndex(null);
                 setForcedPreviewMode(mode);
@@ -195,6 +199,7 @@ const ThemesContent = () => {
     );
 
     const handleStartFromScratch = useCallback(() => {
+        sendAnalyticsEvent('theme_start_scratch');
         applyGenerationRef.current += 1;
         setCommunityModalOpen(false);
         importTheme(DEFAULT_THEME);
@@ -243,6 +248,13 @@ const ThemesContent = () => {
     }, [pendingApply, performApplyPreset, performApplyTheme]);
 
     const cancelPendingApply = useCallback(() => setPendingApply(null), []);
+
+    const toggleGalleryDrawer = useCallback(() => {
+        if (!galleryDrawerOpen) {
+            sendAnalyticsEvent('gallery_open');
+        }
+        setGalleryDrawerOpen(!galleryDrawerOpen);
+    }, [galleryDrawerOpen]);
 
     const tags: TagItem<ThemeTab>[] = useMemo(
         () => [
@@ -423,7 +435,7 @@ const ThemesContent = () => {
                     <ThemePlaygroundBar
                         activePresetIndex={activePresetIndex}
                         onSelectPreset={handleSelectPreset}
-                        onOpenGallery={() => setGalleryDrawerOpen((open) => !open)}
+                        onOpenGallery={toggleGalleryDrawer}
                         firstSwatchRef={firstSwatchRef}
                     />
                     <GalleryHintPopover anchorRef={firstSwatchRef} />
@@ -446,6 +458,7 @@ const ThemesContent = () => {
                 activeThemeId={activeThemeId}
                 onApplyTheme={handleApplyTheme}
                 onOpenAllThemes={() => {
+                    sendAnalyticsEvent('gallery_all_open');
                     setGalleryDrawerOpen(false);
                     setCommunityModalOpen(true);
                 }}
