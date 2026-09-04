@@ -70,7 +70,7 @@ export const getLanding = ({
                 title: t('home:news_title'),
                 items: [
                     {
-                        date: '2026-09-04T12:00:00.000Z',
+                        date: '2026-09-04T09:00:00.000Z',
                         content: t('home:news_items_item1'),
                     },
                     {
