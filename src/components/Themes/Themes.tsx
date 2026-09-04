@@ -1,3 +1,4 @@
+import {settings as dateUtilsSettings} from '@gravity-ui/date-utils';
 import {ArrowUpFromSquare} from '@gravity-ui/icons';
 import {BREAKPOINTS, Grid} from '@gravity-ui/page-constructor';
 import {
@@ -26,7 +27,7 @@ import './Themes.scss';
 // PreviewTab renders heavy UISamples that aren't SSR-safe in the current
 // uikit/navigation stack — one of the descendant components resolves to
 // `undefined` during server render, so it is mounted only after hydration
-// (see `isHydrated` below).
+// (see `isPreviewReady` below).
 //
 // It has to be a STATIC import, not `next/dynamic`. With `dynamic(..., {ssr:
 // false})` Next only emits this subtree's CSS as a `<link rel=preload>` on a
@@ -80,7 +81,7 @@ type PendingApply =
     | {type: 'theme'; id: string; mode: ThemePreviewMode};
 
 const ThemesContent = () => {
-    const {t} = useTranslation('themes');
+    const {t, i18n} = useTranslation('themes');
 
     const breakpoint = useWindowBreakpoint();
     const isMobile = breakpoint < BREAKPOINTS.sm;
@@ -341,16 +342,39 @@ const ThemesContent = () => {
 
     // PreviewTab's UI samples are not SSR-safe (see the import comment), so the
     // subtree is skipped on the server pass and mounted once hydration is done.
-    const [isHydrated, setHydrated] = useState(false);
+    //
+    // Mounting also waits for the dayjs locale of the current language. The
+    // Apartment sample renders a `DatePicker`, and date-components reads
+    // `dayjs.Ls[lang].formats` synchronously in a `useState` initializer. The
+    // landing kicks off `settings.loadLocale()` for every language at startup
+    // but never awaits it, so on a slow connection the sample mounted before
+    // the `ru` locale chunk arrived and the whole /ru/themes page died with
+    // "Cannot read properties of undefined (reading 'formats')". `loadLocale`
+    // is idempotent (`en` is preloaded), so awaiting it is free once the locale
+    // is in. If the locale chunk fails to load, the samples stay unmounted:
+    // an empty Preview tab beats taking the whole page down.
+    const [isPreviewReady, setPreviewReady] = useState(false);
     useEffect(() => {
-        setHydrated(true);
-    }, []);
+        let cancelled = false;
+        setPreviewReady(false);
+        dateUtilsSettings.loadLocale(i18n.language).then(
+            () => {
+                if (!cancelled) {
+                    setPreviewReady(true);
+                }
+            },
+            () => undefined,
+        );
+        return () => {
+            cancelled = true;
+        };
+    }, [i18n.language]);
 
     const TabComponent = tabToComponent[activeTab];
 
     let tabContent: React.ReactNode = null;
     if (activeTab === ThemeTab.Preview) {
-        tabContent = isHydrated ? (
+        tabContent = isPreviewReady ? (
             <PreviewTab
                 forcedPreviewMode={forcedPreviewMode}
                 onPreviewModeChange={setForcedPreviewMode}
