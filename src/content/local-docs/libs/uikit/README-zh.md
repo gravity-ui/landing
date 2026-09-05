@@ -2,7 +2,7 @@
 
 [English](README.md) | [Русский](README-ru.md)
 
-一套灵活、实用且高效的 React 组件，用于构建丰富的 Web 应用。作为 [Gravity UI](https://gravity-ui.com) 设计系统的一部分。
+一套灵活、实用且高效的 React 组件，用于构建丰富的 Web 应用程序。作为 [Gravity UI](https://gravity-ui.com) 设计系统的一部分。
 
 <!--GITHUB_BLOCK-->
 
@@ -14,12 +14,12 @@
 
 ## 关于
 
-UIKit 是 [Gravity UI](https://gravity-ui.com) 设计系统的基础包——一个经过实战检验的、包含 70 多个 React 组件的集合，专为生产级 Web 应用而构建。它处理了棘手的问题：主题化、可访问性、RTL 布局、服务器端渲染和国际化，让您可以专注于构建您的产品。
+UIKit 是 [Gravity UI](https://gravity-ui.com) 设计系统的基础包——这是一套经过实战检验的、包含 70 多个 React 组件的集合，专为生产级 Web 应用程序而构建。它处理了棘手的问题：主题化、可访问性、RTL 布局、服务器端渲染和国际化，让您可以专注于构建您的产品。
 
 主要特点：
 
 - **70 多个组件** — 输入框、覆盖层、数据展示、布局基元、反馈等
-- **内置主题化** — 提供浅色、深色和高对比度变体，并附带实时 [Themer](https://gravity-ui.com/themer) 工具来自定义令牌
+- **内置主题化** — 提供浅色、深色和高对比度变体，并附带实时 [Themer](https://gravity-ui.com/themer) 工具来定制令牌
 - **RTL 支持** — 完全支持从右到左的布局方向
 
 您可以在 [Storybook](https://preview.gravity-ui.com/uikit/) 或 [文档](https://gravity-ui.com/components/uikit/alert) 中浏览完整的组件目录。
@@ -52,7 +52,7 @@ const SubmitButton = (
 
 ### 样式
 
-在您的应用入口文件顶部一次性引入基础样式和字体：
+在应用程序入口点的顶部一次性引入基础样式和字体：
 
 ```js
 // index.js
@@ -66,7 +66,9 @@ import '@gravity-ui/uikit/styles/styles.css';
 
 阅读更多：
 
+- [布局组件和间距](docs/layout.md) — 使用共享的网格和间距比例来组合响应式页面
 - [主题化](docs/theming.md) — 启用浅色、深色和高对比度主题
+- [排版](docs/typography.md) — 使用和自定义共享的文本比例
 - [服务器端渲染](docs/server-side-rendering.md) — 在服务器上生成根 CSS 类
 - [国际化](docs/i18n.md) — 设置内置组件的语言
 
@@ -76,14 +78,14 @@ import '@gravity-ui/uikit/styles/styles.css';
 git clone git@github.com:gravity-ui/uikit.git
 cd uikit
 npm ci
-npm run start   # 在 http://localhost:7007 启动 Storybook
+npm run start   # 启动 Storybook，地址为 http://localhost:7007
 ```
 
-其他常用命令：
+其他有用的命令：
 
 ```shell
 npm test              # 运行单元测试
-npm run lint          # 检查 JS、SCSS 和 Markdown 代码风格
+npm run lint          # 对 JS、SCSS 和 Markdown 进行 linting
 npm run typecheck     # TypeScript 类型检查
 npm run playwright    # 运行视觉回归测试
 ```
@@ -117,7 +119,7 @@ npm run playwright    # 运行视觉回归测试
 
 欢迎贡献！在提交 Pull Request 之前，请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。有关详细的 PR 指南，请参阅 [contribute/pull-request.md](contribute/pull-request.md)。
 
-我们有 [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) 位贡献者，并且还在不断增加 — 加入我们吧！
+我们已有 [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) 位贡献者，并且还在不断增加 — 加入我们吧！
 
 加入我们的 [Telegram](https://t.me/gravity_ui) 社区，进行提问和讨论。
 
@@ -131,13 +133,13 @@ Gravity UI 应用的基础 React 组件和设计令牌库 — 包含其他所有
 
 ### 何时使用
 
-- 标准应用 UI：按钮、表单控件、模态框和弹出框、菜单、标签页、标签、排版以及布局基元。
+- 标准应用 UI：按钮、表单控件、模态框和弹出框、菜单、标签页、标签、排版以及布局基础组件。
 - Gravity UI 应用的主题化基础：`ThemeProvider`、设计令牌以及其他 `@gravity-ui/*` 生态系统期望存在的 CSS 变量。
 - 通过内置的 `Table` 组件处理简单的表格数据（选择、排序、行操作）。
 
 ### 何时避免使用
 
-- 功能丰富的表格（虚拟化、列调整大小、分组、重新排序）— 请使用 [`@gravity-ui/table`](https://github.com/gravity-ui/table)，这是一个独立的无头包。它**不**等同于 uikit 的 `Table` 组件。
+- 功能丰富的表格（虚拟化、列调整、分组、重新排序）— 请使用独立的无头包 [`@gravity-ui/table`](https://github.com/gravity-ui/table)。它**不**等同于 uikit 的 `Table` 组件。
 - 图表和数据可视化 — 请使用 [`@gravity-ui/charts`](https://github.com/gravity-ui/charts)（`@gravity-ui/chartkit` 是旧版包装器）。
 - 应用导航外壳（侧边栏、页眉、页脚、Logo）— 请使用 [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation)。
 - 日期选择器、日历和范围控件 — 请使用 [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components)。
@@ -147,13 +149,13 @@ Gravity UI 应用的基础 React 组件和设计令牌库 — 包含其他所有
 
 - `Button` 的样式属性是 `view`，而不是 `variant` 或 `color`。
 - **组件在未进行设置的情况下会渲染为空白。** 请在应用的入口点使用 `ThemeProvider` 包裹整个应用，**并且**导入一次 `@gravity-ui/uikit/styles/styles.css`（以及 `fonts.css`）— 两者都是必需的。
-- **`Icon` 没有 `name` 属性。** 通过 `data` 传递导入的图标组件：`import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
+- **`Icon` 没有 `name` 属性。** 请通过 `data` 传递导入的图标组件：`import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
 - **`theme` 的值是 `light | dark | light-hc | dark-hc`。** 没有 `theme="default"`。
 
 ### 有用的文档
 
 - [布局组件和间距](./docs/layout.md)
-- [主题化、颜色和品牌](./docs/theming.md)
+- [主题化、颜色与品牌](./docs/theming.md)
 - [排版](./docs/typography.md)
 
 ## 供 AI 代理使用的文档
