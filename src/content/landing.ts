@@ -70,15 +70,15 @@ export const getLanding = ({
                 title: t('home:news_title'),
                 items: [
                     {
-                        date: '2026-08-10T12:00:00.000Z',
+                        date: '2026-09-04T09:00:00.000Z',
                         content: t('home:news_items_item1'),
                     },
                     {
-                        date: '2026-05-27T12:00:00.000Z',
+                        date: '2026-08-10T12:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
                     {
-                        date: '2026-04-03T12:00:00.000Z',
+                        date: '2026-05-27T12:00:00.000Z',
                         content: t('home:news_items_item3'),
                     },
                 ],
