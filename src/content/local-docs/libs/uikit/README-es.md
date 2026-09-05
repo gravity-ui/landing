@@ -1,6 +1,6 @@
 # UIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![npm downloads](https://img.shields.io/npm/dm/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/ci.yml?query=branch:main) [![storybook tests](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/test-storybook.yml?label=Storybook%20Tests&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/test-storybook.yml) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/uikit/)
 
-[English](README.md) | [Español](README.es.md)
+[English](README.md) | [Русский](README-ru.md)
 
 Un conjunto de componentes React flexibles, muy prácticos y eficientes para crear aplicaciones web enriquecidas. Parte del sistema de diseño [Gravity UI](https://gravity-ui.com).
 
@@ -14,7 +14,7 @@ Un conjunto de componentes React flexibles, muy prácticos y eficientes para cre
 
 ## Acerca de
 
-UIKit es el paquete fundamental del sistema de diseño [Gravity UI](https://gravity-ui.com), un conjunto probado en batalla de más de 70 componentes React creados para aplicaciones web de producción. Se encarga de las partes difíciles: temas, accesibilidad, diseño RTL, renderizado del lado del servidor e internacionalización, para que puedas centrarte en construir tu producto.
+UIKit es el paquete fundamental del sistema de diseño [Gravity UI](https://gravity-ui.com), un conjunto probado en batalla de más de 70 componentes React creados para aplicaciones web de producción. Se encarga de las partes difíciles: temas, accesibilidad, diseño RTL, renderizado del lado del servidor e internacionalización, para que puedas concentrarte en construir tu producto.
 
 Características principales:
 
@@ -38,7 +38,7 @@ npm install @gravity-ui/uikit
 
 ## Uso
 
-Importa los componentes directamente desde el paquete:
+Importa componentes directamente desde el paquete:
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
@@ -66,7 +66,10 @@ También hay disponible un archivo SCSS con [mixins](styles/mixins.scss) con uti
 
 Lee más:
 
+- [Componentes de diseño y espaciado](docs/layout.md) — compón páginas responsivas con la cuadrícula compartida
+  y la escala de espaciado
 - [Temas](docs/theming.md) — habilita temas claros, oscuros y de alto contraste
+- [Tipografía](docs/typography.md) — usa y personaliza la escala de texto compartida
 - [Renderizado del lado del servidor](docs/server-side-rendering.md) — genera la clase CSS raíz en el servidor
 - [Internacionalización](docs/i18n.md) — establece el idioma de los componentes integrados
 
@@ -84,7 +87,7 @@ Otros comandos útiles:
 ```shell
 npm test              # ejecuta pruebas unitarias
 npm run lint          # revisa JS, SCSS y Markdown
-npm run typecheck     # verificación de tipos de TypeScript
+npm run typecheck     # verifica tipos de TypeScript
 npm run playwright    # ejecuta pruebas de regresión visual
 ```
 
@@ -115,7 +118,7 @@ npm run playwright    # ejecuta pruebas de regresión visual
 
 ## Contribuciones
 
-¡Tus contribuciones son bienvenidas! Por favor, lee [CONTRIBUTING.md](CONTRIBUTING.md) antes de enviar una solicitud de extracción (pull request). Para obtener directrices detalladas sobre las PR, consulta [contribute/pull-request.md](contribute/pull-request.md).
+¡Las contribuciones son bienvenidas! Por favor, lee [CONTRIBUTING.md](CONTRIBUTING.md) antes de enviar una solicitud de extracción (pull request). Para ver las directrices detalladas de las PR, consulta [contribute/pull-request.md](contribute/pull-request.md).
 
 Tenemos [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) colaboradores y contando — ¡únete a nosotros!
 
@@ -127,13 +130,13 @@ Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles
 
 ## Para agentes de IA
 
-La biblioteca base de componentes React y tokens de diseño para aplicaciones Gravity UI — controles, entradas, superposiciones, diseño y temas sobre los que se basa cada otro paquete de `@gravity-ui/*`.
+La biblioteca base de componentes React y tokens de diseño para aplicaciones Gravity UI — controles, entradas, superposiciones, diseño y temas en los que se basa cada otro paquete de `@gravity-ui/*`.
 
 ### Cuándo usar
 
 - Interfaz de usuario estándar de aplicaciones: botones, controles de formulario, modales y popups, menús, pestañas, etiquetas, tipografía y primitivas de diseño.
-- La base de temas de una aplicación Gravity UI: `ThemeProvider`, tokens de diseño y variables CSS que el resto del ecosistema `@gravity-ui/*` espera que estén presentes.
-- Datos tabulares sencillos a través del componente `Table` integrado (selección, ordenación, acciones de fila).
+- La base de temas de una aplicación Gravity UI: `ThemeProvider`, tokens de diseño y variables CSS que el resto del ecosistema de `@gravity-ui/*` espera que estén presentes.
+- Datos tabulares simples a través del componente `Table` integrado (selección, ordenación, acciones de fila).
 
 ### Cuándo no usar
 
@@ -172,4 +175,4 @@ La documentación legible por agentes para la versión instalada se encuentra en
 
 ---
 
-Si encuentras UIKit útil, considera darle una ⭐ en [GitHub](https://github.com/gravity-ui/uikit) — ayuda a otros a descubrir el proyecto.
+Si encuentras UIKit útil, por favor considera darle una ⭐ en [GitHub](https://github.com/gravity-ui/uikit) — ayuda a otros a descubrir el proyecto.

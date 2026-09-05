@@ -2,7 +2,7 @@
 
 [English](README.md) | [Русский](README-ru.md)
 
-Um conjunto de componentes React flexíveis, altamente práticos e eficientes para criar aplicações web ricas. Parte do sistema de design [Gravity UI](https://gravity-ui.com).
+Um conjunto de componentes React flexíveis, altamente práticos e eficientes para a criação de aplicações web ricas. Parte do sistema de design [Gravity UI](https://gravity-ui.com).
 
 <!--GITHUB_BLOCK-->
 
@@ -14,13 +14,13 @@ Um conjunto de componentes React flexíveis, altamente práticos e eficientes pa
 
 ## Sobre
 
-UIKit é o pacote fundamental do sistema de design [Gravity UI](https://gravity-ui.com) — um conjunto de mais de 70 componentes React testados em batalha, construídos para aplicações web de produção. Ele cuida das partes difíceis: temas, acessibilidade, layout RTL, renderização do lado do servidor e internacionalização, para que você possa focar na construção do seu produto.
+O UIKit é o pacote fundamental do sistema de design [Gravity UI](https://gravity-ui.com) — um conjunto testado em batalha com mais de 70 componentes React construídos para aplicações web de produção. Ele cuida das partes difíceis: temas, acessibilidade, layout RTL, renderização do lado do servidor e internacionalização, para que você possa se concentrar em construir seu produto.
 
 Principais recursos:
 
 - **Mais de 70 componentes** — inputs, overlays, exibição de dados, primitivas de layout, feedback e muito mais
-- **Temas integrados** — variantes claras, escuras e de alto contraste com uma ferramenta [Themer](https://gravity-ui.com/themer) ao vivo para personalizar tokens
-- **Suporte RTL** — direção completa do layout da direita para a esquerda
+- **Temas integrados** — variantes claro, escuro e de alto contraste com uma ferramenta [Themer](https://gravity-ui.com/themer) ao vivo para personalizar tokens
+- **Suporte RTL** — direção completa de layout da direita para a esquerda
 
 Navegue pelo catálogo completo de componentes no [Storybook](https://preview.gravity-ui.com/uikit/) ou na [documentação](https://gravity-ui.com/components/uikit/alert).
 
@@ -60,13 +60,16 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-Um arquivo SCSS com [mixins](styles/mixins.scss) úteis também está disponível para uso em suas próprias folhas de estilo.
+Um arquivo SCSS com [mixins](styles/mixins.scss) e utilitários úteis também está disponível para uso em suas próprias folhas de estilo.
 
 ### Guias
 
 Leia mais:
 
-- [Temas](docs/theming.md) — habilite temas claros, escuros e de alto contraste
+- [Componentes de layout e espaçamentos](docs/layout.md) — componha páginas responsivas com a grade compartilhada
+  e a escala de espaçamento
+- [Temas](docs/theming.md) — ative temas claro, escuro e de alto contraste
+- [Tipografia](docs/typography.md) — use e personalize a escala de texto compartilhada
 - [Renderização do lado do servidor](docs/server-side-rendering.md) — gere a classe CSS raiz no servidor
 - [Internacionalização](docs/i18n.md) — defina o idioma dos componentes integrados
 
@@ -83,7 +86,7 @@ Outros comandos úteis:
 
 ```shell
 npm test              # executa testes unitários
-npm run lint          # verifica JS, SCSS e Markdown
+npm run lint          # faz lint em JS, SCSS e Markdown
 npm run typecheck     # verifica tipos do TypeScript
 npm run playwright    # executa testes de regressão visual
 ```
@@ -131,8 +134,8 @@ A biblioteca base de componentes React e tokens de design para aplicativos Gravi
 
 ### Quando usar
 
-- UI padrão de aplicação: botões, controles de formulário, modais e popups, menus, abas, rótulos, tipografia e primitivas de layout.
-- A fundação de temas de um aplicativo Gravity UI: `ThemeProvider`, tokens de design e variáveis CSS que o restante do ecossistema `@gravity-ui/*` espera que estejam presentes.
+- UI padrão de aplicativos: botões, controles de formulário, modais e popups, menus, abas, rótulos, tipografia e primitivas de layout.
+- A base de temas de um aplicativo Gravity UI: `ThemeProvider`, tokens de design e variáveis CSS que o restante do ecossistema `@gravity-ui/*` espera que estejam presentes.
 - Dados tabulares simples através do componente `Table` integrado (seleção, ordenação, ações de linha).
 
 ### Quando não usar
@@ -141,7 +144,7 @@ A biblioteca base de componentes React e tokens de design para aplicativos Gravi
 - Gráficos e visualização de dados — use [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` é o wrapper legado).
 - Estruturas de navegação de aplicativos (cabeçalho lateral, rodapé, logo) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
 - Seletores de data, calendários e controles de intervalo — use [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
-- O próprio conjunto de ícones SVG — use [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); o uikit apenas distribui o renderizador `Icon`.
+- O próprio conjunto de ícones SVG — use [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); o uikit apenas fornece o renderizador `Icon`.
 
 ### Armadilhas comuns
 
@@ -166,7 +169,7 @@ A documentação legível por agente para a versão instalada está localizada e
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline&theme=dark" />
     <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
-    <img alt="Star History Chart" width="600" src="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
+    <img alt="Gráfico de Histórico de Estrelas" width="600" src="https://star-history.dera.page/svg?repos=gravity-ui/uikit&type=Timeline" />
   </picture>
 </div>
 
