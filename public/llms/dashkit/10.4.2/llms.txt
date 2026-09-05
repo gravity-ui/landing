@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/dashkit@10.4.3`
+> Generated for `@gravity-ui/dashkit@10.4.2`
 
 # @gravity-ui/dashkit documentation
 
-Documentation for the **10.4.3** version of `@gravity-ui/dashkit`.
+Documentation for the **10.4.2** version of `@gravity-ui/dashkit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/dashkit/build/docs/`).
@@ -43,10 +43,10 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/icons` | `^2.13.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
 | `react` | `^16.8.0 || ^17 || ^18 || ^19` |
 | `react-dom` | `^16.8.0 || ^17 || ^18 || ^19` |
+| `@gravity-ui/icons` | `^2.13.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
 
 ## Usage
 
@@ -548,4 +548,4 @@ const CustomThemeWrapper = (props: {
 
 ---
 
-> Docs for `@gravity-ui/dashkit@10.4.3`. Versioned at: `https://gravity-ui.com/llms/dashkit/10.4.3/llms.txt` (exact), `https://gravity-ui.com/llms/dashkit/10/llms.txt` (latest of major 10), `https://gravity-ui.com/llms/dashkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/dashkit@10.4.2`. Versioned at: `https://gravity-ui.com/llms/dashkit/10.4.2/llms.txt` (exact), `https://gravity-ui.com/llms/dashkit/10/llms.txt` (latest of major 10), `https://gravity-ui.com/llms/dashkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
