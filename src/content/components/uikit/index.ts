@@ -1,6 +1,8 @@
 import sortBy from 'lodash/sortBy';
 
 import {getLibConfigById} from '../../../libs/config';
+import {Repos} from '../../../types/common';
+import {getPublishedComponentConfigs, mergeComponentConfigs} from '../catalog';
 import {Component, Lib} from '../types';
 
 import {accordionConfig} from './Accordion';
@@ -61,10 +63,9 @@ import {tocConfig} from './Toc';
 import {tooltipConfig} from './Tooltip';
 import {userConfig} from './User';
 import {userLabelConfig} from './UserLabel';
-
 const config = getLibConfigById('uikit');
 
-const uikitComponents: Component[] = [
+const manualComponents: Component[] = [
     accordionConfig,
     alertConfig,
     arrowToggleConfig,
@@ -124,6 +125,11 @@ const uikitComponents: Component[] = [
     filePreviewConfig,
     actionsPanelConfig,
 ];
+
+const uikitComponents = mergeComponentConfigs(
+    getPublishedComponentConfigs(Repos.Uikit),
+    manualComponents,
+);
 
 export const uikit: Lib = {
     id: config.id,
