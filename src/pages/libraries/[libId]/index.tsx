@@ -6,6 +6,8 @@ import {ServerApi} from '../../../api/server';
 import {Layout} from '../../../components/Layout/Layout';
 import {Library} from '../../../components/Library/Library';
 import {getI18nProps, getLibraryMeta, isValidLibId} from '../../../utils';
+import {SITE_URL} from '../../../utils/canonical';
+import {getSoftwareSourceCodeJsonLd} from '../../../utils/structuredData';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const libId = ctx.params?.libId as string;
@@ -33,10 +35,20 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 export const LibraryPage = ({lib}: {lib: LibWithFullData}) => {
     const {t} = useTranslation();
 
+    const meta = getLibraryMeta({id: lib.config.id, title: lib.config.title}, t);
+
     return (
         <Layout
             title={lib?.config.title ?? ''}
-            meta={getLibraryMeta({id: lib.config.id, title: lib.config.title}, t)}
+            meta={meta}
+            jsonLd={[
+                getSoftwareSourceCodeJsonLd({
+                    name: lib.config.title,
+                    description: meta.description,
+                    githubId: lib.config.githubId,
+                    url: `${SITE_URL}/libraries/${lib.config.id}`,
+                }),
+            ]}
         >
             <Library lib={lib} />
         </Layout>
