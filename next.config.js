@@ -106,6 +106,17 @@ module.exports = withBundleAnalyzer({
         return config;
     },
     reactStrictMode: true,
+    // The theme builder route was renamed /themer -> /themes; keep old
+    // links and indexed URLs working with a permanent redirect.
+    async redirects() {
+        return [
+            {
+                source: '/themer',
+                destination: '/themes',
+                permanent: true,
+            },
+        ];
+    },
     i18n: {
         locales: i18n.locales,
         defaultLocale: i18n.defaultLocale,

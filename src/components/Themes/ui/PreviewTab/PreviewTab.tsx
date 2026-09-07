@@ -14,9 +14,17 @@ import {
     TablePreview,
     TasksPreview,
 } from 'src/components/UISamples';
+import {PreviewModeProvider} from 'src/components/UISamples/PreviewModeContext/PreviewModeContext';
 
+import {block} from '../../../../utils';
+import type {ThemePreviewMode} from '../../gallery';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme, replaceRootToCustomClassName} from '../../lib/themeCreatorExport';
+import {PreviewModeToggle} from '../PreviewModeToggle/PreviewModeToggle';
+
+import './PreviewTab.scss';
+
+const b = block('preview-tab');
 
 const previewComponents = [
     {id: 'table', Component: TablePreview, title: 'Table', breadCrumbsItems: ['Table']},
@@ -71,7 +79,15 @@ const previewComponents = [
     },
 ];
 
-export const PreviewTab = () => {
+interface PreviewTabProps {
+    forcedPreviewMode?: ThemePreviewMode | null;
+    onPreviewModeChange: (mode: ThemePreviewMode) => void;
+}
+
+export const PreviewTab: React.FC<PreviewTabProps> = ({
+    forcedPreviewMode = null,
+    onPreviewModeChange,
+}) => {
     const {t} = useTranslation('themes');
     const themeState = useThemeCreator();
 
@@ -94,27 +110,36 @@ export const PreviewTab = () => {
     }, [themeState]);
 
     return (
-        <Flex direction="column" gap={8}>
-            <Text variant="display-2">{t('title_ui-samples')}</Text>
-            <style>{themeStyles.previewLayoutStyles}</style>
-            <style>{themeStyles.previewWrapperStyles}</style>
+        <PreviewModeProvider forcedMode={forcedPreviewMode} hideToggle>
+            <Flex direction="column" gap={8}>
+                <Flex className={b('heading-row')} alignItems="center" gap={3} wrap="wrap">
+                    <Text variant="display-2">{t('title_ui-samples')}</Text>
+                    <PreviewModeToggle
+                        className={b('mode-toggle')}
+                        value={forcedPreviewMode}
+                        onChange={onPreviewModeChange}
+                    />
+                </Flex>
+                <style>{themeStyles.previewLayoutStyles}</style>
+                <style>{themeStyles.previewWrapperStyles}</style>
 
-            {previewComponents.map(
-                ({Component, title, breadCrumbsItems = [], id, blank}, index) => {
-                    return blank ? (
-                        <Component key={index} />
-                    ) : (
-                        <PreviewLayout
-                            key={index}
-                            id={id}
-                            title={title}
-                            breadCrumbsItems={breadCrumbsItems}
-                        >
-                            {(props) => <Component {...props} />}
-                        </PreviewLayout>
-                    );
-                },
-            )}
-        </Flex>
+                {previewComponents.map(
+                    ({Component, title, breadCrumbsItems = [], id, blank}, index) => {
+                        return blank ? (
+                            <Component key={index} />
+                        ) : (
+                            <PreviewLayout
+                                key={index}
+                                id={id}
+                                title={title}
+                                breadCrumbsItems={breadCrumbsItems}
+                            >
+                                {(props) => <Component {...props} />}
+                            </PreviewLayout>
+                        );
+                    },
+                )}
+            </Flex>
+        </PreviewModeProvider>
     );
 };

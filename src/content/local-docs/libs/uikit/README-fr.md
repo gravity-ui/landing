@@ -2,7 +2,7 @@
 
 [English](README.md) | [Русский](README-ru.md)
 
-Un ensemble de composants React flexibles, très pratiques et performants pour créer des applications web riches. Fait partie du système de design [Gravity UI](https://gravity-ui.com).
+Un ensemble de composants React flexibles, très pratiques et efficaces pour créer des applications web riches. Fait partie du système de design [Gravity UI](https://gravity-ui.com).
 
 <!--GITHUB_BLOCK-->
 
@@ -64,9 +64,12 @@ Un fichier SCSS de [mixins](styles/mixins.scss) avec des utilitaires utiles est 
 
 ### Guides
 
-En savoir plus :
+Lisez la suite :
 
+- [Composants de mise en page et espacements](docs/layout.md) — composez des pages réactives avec la grille partagée
+  et l'échelle d'espacement.
 - [Thèmes](docs/theming.md) — activez les thèmes clair, sombre et à fort contraste.
+- [Typographie](docs/typography.md) — utilisez et personnalisez l'échelle de texte partagée.
 - [Rendu côté serveur](docs/server-side-rendering.md) — générez la classe CSS racine côté serveur.
 - [Internationalisation](docs/i18n.md) — définissez la langue des composants intégrés.
 
@@ -76,7 +79,7 @@ En savoir plus :
 git clone git@github.com:gravity-ui/uikit.git
 cd uikit
 npm ci
-npm run start   # lance Storybook à l'adresse http://localhost:7007
+npm run start   # lance Storybook à http://localhost:7007
 ```
 
 Autres commandes utiles :

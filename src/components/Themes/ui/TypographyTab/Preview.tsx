@@ -1,4 +1,4 @@
-import {Card, Col, Flex, Row, Text, TextProps, ThemeProvider} from '@gravity-ui/uikit';
+import {Card, Flex, Text, TextProps, ThemeProvider} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -151,36 +151,30 @@ export const Preview = () => {
             <Card size="l">
                 <ThemeProvider theme="dark" scoped rootClassName={`${b()} ${b({theme: 'dark'})}`}>
                     {themeStyles ? <style>{themeStyles}</style> : null}
-                    <Row
-                        space={{l: 0, m: 0, s: 0}}
-                        spaceRow={{l: 0, s: 10}}
-                        className={b('wrapper')}
-                    >
-                        {TYPOGRAPHY_STYLES_PREVIEW.map(({title, variants}) => {
-                            return (
-                                <Col l="2" m="4" s="12" key={title}>
-                                    <Flex direction="column" gap={10} width="100%" key={title}>
+                    <div className={b('wrapper')}>
+                        <div className={b('cols')}>
+                            {TYPOGRAPHY_STYLES_PREVIEW.map(({title, variants}) => (
+                                <Flex direction="column" gap={10} key={title} className={b('col')}>
+                                    <Text
+                                        variant="subheader-3"
+                                        color="brand"
+                                        className={b('variant-title')}
+                                    >
+                                        {title}
+                                    </Text>
+                                    {variants.map((variant) => (
                                         <Text
-                                            variant="subheader-3"
-                                            color="brand"
-                                            className={b('variant-title')}
+                                            variant={variant.variant}
+                                            key={variant.variant}
+                                            style={{whiteSpace: 'nowrap'}}
                                         >
-                                            {title}
+                                            {variant.title}
                                         </Text>
-                                        {variants.map((variant) => (
-                                            <Text
-                                                variant={variant.variant}
-                                                key={variant.variant}
-                                                style={{whiteSpace: 'nowrap'}}
-                                            >
-                                                {variant.title}
-                                            </Text>
-                                        ))}
-                                    </Flex>
-                                </Col>
-                            );
-                        })}
-                    </Row>
+                                    ))}
+                                </Flex>
+                            ))}
+                        </div>
+                    </div>
                 </ThemeProvider>
             </Card>
         </Flex>

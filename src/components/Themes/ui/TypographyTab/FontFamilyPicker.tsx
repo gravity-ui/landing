@@ -347,70 +347,65 @@ const DefaultFontFamilyOptions = ({type}: DefaultFontFamilyOptionsProps) => {
     }, [type, fontSuggestions, fontFamilyOptions]);
 
     return (
-        <Row space={0} spaceRow={2} style={{width: '100%', alignItems: 'center'}}>
-            <Col s="12" l="4">
+        <div className={b('row')}>
+            <div className={b('row-label')}>
                 <Text variant="body-3">{name}</Text>
-            </Col>
-
-            <Col s="12" l="8">
-                <Row space={5} spaceRow={5}>
+            </div>
+            <div className={b('row-content')}>
+                <div className={b('card-grid')}>
                     {fontSuggestions.map((font) => (
-                        <Col s="6" m="3" key={font.key}>
-                            <SelectableCard
-                                className={b('font-card')}
-                                selected={
-                                    !isCustomFontSelected &&
-                                    fontFamilyOptions.mainFont === font.title
-                                }
-                                text={font.title}
-                                textProps={{
-                                    variant: 'header-1',
-                                    className: b('font-card__text', {
-                                        fontType: font.key,
-                                    }),
-                                }}
-                                pureText
-                                onClick={() => {
-                                    updateFontFamily({
-                                        fontType: type,
-                                        value: {
-                                            mainFont: font.title,
-                                            link: font.link,
-                                            fallbackFonts:
-                                                DEFAULT_FONT_FAMILY_SETTINGS[type]?.fallbackFonts,
-                                        },
-                                    });
-                                }}
-                            />
-                        </Col>
-                    ))}
-                    <Col s="6" m="3">
                         <SelectableCard
-                            key={'custom'}
+                            key={font.key}
                             className={b('font-card')}
-                            selected={isCustomFontSelected}
-                            text="Custom"
+                            selected={
+                                !isCustomFontSelected && fontFamilyOptions.mainFont === font.title
+                            }
+                            text={font.title}
                             textProps={{
                                 variant: 'header-1',
-                                className: b('font-card__text'),
+                                className: b('font-card__text', {
+                                    fontType: font.key,
+                                }),
                             }}
                             pureText
                             onClick={() => {
                                 updateFontFamily({
                                     fontType: type,
-                                    customType: CustomFontSelectType.GoogleFonts,
                                     value: {
-                                        mainFont: '',
-                                        fallbackFonts: [],
+                                        mainFont: font.title,
+                                        link: font.link,
+                                        fallbackFonts:
+                                            DEFAULT_FONT_FAMILY_SETTINGS[type]?.fallbackFonts,
                                     },
                                 });
                             }}
                         />
-                    </Col>
-                    <Col s="12">{isCustomFontSelected && <CustomFontFamily fontType={type} />}</Col>
-                </Row>
-            </Col>
-        </Row>
+                    ))}
+                    <SelectableCard
+                        key="custom"
+                        className={b('font-card')}
+                        selected={isCustomFontSelected}
+                        text="Custom"
+                        textProps={{
+                            variant: 'header-1',
+                            className: b('font-card__text'),
+                        }}
+                        pureText
+                        onClick={() => {
+                            updateFontFamily({
+                                fontType: type,
+                                customType: CustomFontSelectType.GoogleFonts,
+                                value: {
+                                    mainFont: '',
+                                    fallbackFonts: [],
+                                },
+                            });
+                        }}
+                    />
+                </div>
+                {isCustomFontSelected && <CustomFontFamily fontType={type} />}
+            </div>
+        </div>
     );
 };
 
@@ -441,7 +436,7 @@ export const FontFamilyPicker = () => {
     }, [gravityTheme.typography.fontFamilies]);
 
     return (
-        <Flex direction="column" alignItems="flex-start" gap={10} width="100%">
+        <Flex direction="column" alignItems="flex-start" gap={10} width="100%" className={b()}>
             <Text variant="display-2">{t('title_fonts')}</Text>
             {DEFAULT_FONT_FAMILIES.map((type) => (
                 <DefaultFontFamilyOptions key={type} type={type} />
