@@ -1,10 +1,14 @@
-import {generateCSS, generateJSON} from '@gravity-ui/uikit-themer';
+import {DEFAULT_THEME, generateCSS, generateJSON} from '@gravity-ui/uikit-themer';
+import type {JsonTheme} from '@gravity-ui/uikit-themer';
+import {compressToEncodedURIComponent} from 'lz-string';
 
 import {createFontImportsForExport} from './themeCreatorUtils';
 import type {ThemeCreatorState} from './types';
 
 export const FIGMA_GRAVITY_THEMER_LINK =
     'https://www.figma.com/community/plugin/1517138252177518072/gravity-themer';
+const UIKIT_STORYBOOK_LINK = 'https://preview.gravity-ui.com/uikit/';
+const STORYBOOK_THEME_QUERY_PARAM = 'theme';
 
 export const APPLY_THEME_TEMPLATE = {
     en: `
@@ -80,6 +84,24 @@ export function exportThemeForDialog({themeState, format = 'css'}: ExportThemeFo
         format,
         forPreview: false,
     });
+}
+
+export function createStorybookThemeLink(themeState: ThemeCreatorState) {
+    const theme = generateJSON({theme: themeState.gravityTheme, libraries: ['illustrations']});
+    const defaultTheme = generateJSON({theme: DEFAULT_THEME, libraries: ['illustrations']});
+    const themeDiff = Object.fromEntries(
+        Object.entries(theme).filter(
+            ([variable, value]) => JSON.stringify(value) !== JSON.stringify(defaultTheme[variable]),
+        ),
+    ) as JsonTheme;
+    const url = new URL(UIKIT_STORYBOOK_LINK);
+
+    url.searchParams.set(
+        STORYBOOK_THEME_QUERY_PARAM,
+        compressToEncodedURIComponent(JSON.stringify(themeDiff)),
+    );
+
+    return url.toString();
 }
 
 export function replaceRootToCustomClassName(fullStyles: string, customRootClassName: string) {

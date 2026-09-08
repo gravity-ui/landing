@@ -46,6 +46,7 @@
     "javascript-time-ago": "^2.5.9",
     "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
+    "lz-string": "^1.5.0",
     "lowlight": "^3.0.0",
     "micromatch": "^4.0.7",
     "next": "^14.2.24",
