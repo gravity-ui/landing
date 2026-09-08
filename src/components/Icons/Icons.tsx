@@ -159,7 +159,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         !isSearching && selectedCategory
             ? t(`icons:categories.${selectedCategory.id}`)
             : allIconsTitle;
-    const resultsCount = isSearching ? allIcons.length : icons.length;
+    const resultsCount = icons.length;
 
     const handleSelectCategory = React.useCallback((nextCategoryId: string) => {
         setCategoryId(nextCategoryId);
@@ -311,6 +311,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 <Sheet
                     className={b('category-sheet')}
                     contentClassName={b('category-sheet-content')}
+                    allowHideOnContentScroll={false}
                     visible={isCategorySheetOpen}
                     onClose={() => setIsCategorySheetOpen(false)}
                     title={t('icons:category')}
