@@ -13,10 +13,14 @@ $block: '.#{variables.$ns}theme-export';
     &__sheet {
         &__save-buttons {
             height: 60px;
+            justify-content: flex-start;
+            overflow-x: auto;
+            overflow-y: hidden;
+            overscroll-behavior-x: contain;
         }
 
         &__save-button {
-            flex-grow: 1;
+            flex: 1 0 auto;
         }
 
         &__sheet-content {
