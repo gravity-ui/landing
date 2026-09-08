@@ -2,7 +2,7 @@
 
 [English](README.md) | [Русский](README-ru.md)
 
-Ein Set flexibler, hochgradig praktischer und effizienter React-Komponenten zur Erstellung reichhaltiger Webanwendungen. Teil des [Gravity UI](https://gravity-ui.com) Designsystems.
+Eine Sammlung flexibler, äußerst praktischer und effizienter React-Komponenten zur Erstellung reichhaltiger Webanwendungen. Teil des [Gravity UI](https://gravity-ui.com) Designsystems.
 
 <!--GITHUB_BLOCK-->
 
@@ -12,17 +12,17 @@ Ein Set flexibler, hochgradig praktischer und effizienter React-Komponenten zur 
 
 <!--/GITHUB_BLOCK-->
 
-## Über
+## Über uns
 
-UIKit ist das Basispaket des [Gravity UI](https://gravity-ui.com) Designsystems – ein praxiserprobter Satz von über 70 React-Komponenten, die für produktive Webanwendungen entwickelt wurden. Es kümmert sich um die schwierigen Aspekte: Theming, Barrierefreiheit, RTL-Layout, serverseitiges Rendering und Internationalisierung, damit Sie sich auf die Entwicklung Ihres Produkts konzentrieren können.
+UIKit ist das Basispaket des [Gravity UI](https://gravity-ui.com) Designsystems – eine praxiserprobte Sammlung von über 70 React-Komponenten, die für produktive Webanwendungen entwickelt wurden. Es kümmert sich um die schwierigen Teile: Theming, Barrierefreiheit, RTL-Layout, serverseitiges Rendering und Internationalisierung, damit Sie sich auf die Entwicklung Ihres Produkts konzentrieren können.
 
 Hauptmerkmale:
 
-- **Über 70 Komponenten** – Eingabefelder, Overlays, Datenanzeige, Layout-Primitive, Feedback und mehr
-- **Integriertes Theming** – Varianten für helle, dunkle und kontrastreiche Modi mit einem Live-Tool [Themer](https://gravity-ui.com/themer) zur Anpassung von Tokens
-- **RTL-Unterstützung** – Vollständige Rechts-nach-links-Layoutrichtung
+- **Über 70 Komponenten** — Eingaben, Overlays, Datenanzeige, Layout-Primitive, Feedback und mehr
+- **Integriertes Theming** — Varianten für helle, dunkle und kontrastreiche Modi mit einem Live-Tool [Themer](https://gravity-ui.com/themer) zur Anpassung von Tokens
+- **RTL-Unterstützung** — Vollständige Rechts-nach-Links-Layoutrichtung
 
-Durchsuchen Sie den vollständigen Komponenten-Katalog in [Storybook](https://preview.gravity-ui.com/uikit/) oder in der [Dokumentation](https://gravity-ui.com/components/uikit/alert).
+Durchsuchen Sie den vollständigen Komponenten-Katalog in [Storybook](https://preview.gravity-ui.com/uikit/) oder der [Dokumentation](https://gravity-ui.com/components/uikit/alert).
 
 ## Erste Schritte
 
@@ -66,9 +66,12 @@ Eine SCSS-Datei mit nützlichen [Mixins](styles/mixins.scss) ist ebenfalls verf�
 
 Lesen Sie mehr:
 
-- [Theming](docs/theming.md) – Aktivieren Sie helle, dunkle und kontrastreiche Themes
-- [Serverseitiges Rendering](docs/server-side-rendering.md) – Generieren Sie die Root-CSS-Klasse auf dem Server
-- [Internationalisierung](docs/i18n.md) – Legen Sie die Sprache der integrierten Komponenten fest
+- [Layout-Komponenten und Abstände](docs/layout.md) — Erstellen Sie responsive Seiten mit dem gemeinsamen Grid
+  und der Abstandsskala
+- [Theming](docs/theming.md) — Aktivieren Sie helle, dunkle und kontrastreiche Themen
+- [Typografie](docs/typography.md) — Verwenden und passen Sie die gemeinsame Textskala an
+- [Serverseitiges Rendering](docs/server-side-rendering.md) — Generieren Sie die Root-CSS-Klasse auf dem Server
+- [Internationalisierung](docs/i18n.md) — Legen Sie die Sprache der integrierten Komponenten fest
 
 ## Entwicklung
 
@@ -132,20 +135,20 @@ Die Basis-React-Komponenten und die Design-Token-Bibliothek für Gravity UI-Anwe
 ### Wann verwenden
 
 - Standard-UI für Anwendungen: Buttons, Formularsteuerelemente, Modals und Popups, Menüs, Tabs, Labels, Typografie und Layout-Primitive.
-- Die Grundlage für das Theming einer Gravity UI-App: `ThemeProvider`, Design-Tokens und CSS-Variablen, die der Rest des `@gravity-ui/*`-Ökosystems erwartet.
+- Die Theming-Grundlage einer Gravity UI-App: `ThemeProvider`, Design-Tokens und CSS-Variablen, die der Rest des `@gravity-ui/*`-Ökosystems erwartet.
 - Einfache tabellarische Daten über die integrierte `Table`-Komponente (Auswahl, Sortierung, Zeilenaktionen).
 
 ### Wann nicht verwenden
 
 - Funktionsreiche Datenraster (Virtualisierung, Spaltenanpassung, Gruppierung, Neuanordnung) – verwende [`@gravity-ui/table`](https://github.com/gravity-ui/table), ein separates Headless-Paket. Es ist **nicht** dasselbe wie die `Table`-Komponente von uikit.
-- Diagramme und Datenvisualisierung – verwende [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` ist der ältere Wrapper).
-- Navigationsschalen für Anwendungen (Seitenleiste, Kopfzeile, Fußzeile, Logo) – verwende [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
-- Datumsauswahlen, Kalender und Bereichssteuerelemente – verwende [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- Diagramme und Datenvisualisierung – verwende [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (`@gravity-ui/chartkit` ist der Legacy-Wrapper).
+- Anwendungsnavigationsschalen (Seitenleiste, Kopfzeile, Fußzeile, Logo) – verwende [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Datumsauswahl, Kalender und Bereichssteuerelemente – verwende [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
 - Der SVG-Icon-Satz selbst – verwende [`@gravity-ui/icons`](https://github.com/gravity-ui/icons); uikit liefert nur den `Icon`-Renderer.
 
 ### Häufige Fallstricke
 
-- Der `Button`-Styling-Prop heißt `view`, nicht `variant` oder `color`.
+- Der `Button`-Styling-Prop ist `view`, nicht `variant` oder `color`.
 - **Komponenten werden ohne Einrichtung ungestylt gerendert.** Umschließe die App mit `ThemeProvider` **und** importiere `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) einmal am Einstiegspunkt – beides ist erforderlich.
 - **`Icon` hat keinen `name`-Prop.** Übergib eine importierte Icon-Komponente über `data`: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
 - **`theme`-Werte sind `light | dark | light-hc | dark-hc`.** Es gibt kein `theme="default"`.

@@ -1,0 +1,96 @@
+name: Update theme previews
+
+on:
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: Branch to regenerate previews from
+                default: main
+                required: true
+    schedule:
+        - cron: '0 6 * * 1'
+    push:
+        branches: [main]
+        paths:
+            - 'src/components/Themes/gallery/**'
+            - 'src/components/Themes/ui/PreviewTab/**'
+            - 'src/components/Themes/lib/themeCreatorExport.ts'
+            - 'src/components/UISamples/PreviewLayout/**'
+            - 'src/components/UISamples/TablePreview/**'
+            - 'src/pages/themes/_internal/card-preview/**'
+            - 'scripts/update-theme-previews.mjs'
+
+permissions:
+    contents: write
+    pull-requests: write
+
+concurrency:
+    group: update-theme-previews-${{ github.event.inputs.branch || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    update-theme-previews:
+        permissions:
+            pull-requests: write
+            contents: write
+        runs-on: ubuntu-latest
+        timeout-minutes: 25
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  ref: ${{ github.event.inputs.branch || github.ref }}
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 24
+                  cache: npm
+
+            - run: npm ci
+
+            - name: Cache Playwright browsers
+              uses: actions/cache@v4
+              with:
+                  path: ~/.cache/ms-playwright
+                  key: playwright-${{ hashFiles('package-lock.json') }}
+
+            - run: npx playwright install --with-deps chromium
+
+            - name: Build Next app
+              run: npm run build
+              env:
+                  NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES: '1'
+
+            - name: Start Next app
+              run: npm run start -- -p 3010 &
+              env:
+                  NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES: '1'
+
+            - run: npx wait-on http://localhost:3010 --timeout 60000
+
+            - name: Regenerate theme previews
+              run: npm run update-theme-previews
+              env:
+                  BASE_URL: http://localhost:3010
+
+            - name: Open PR if previews changed
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  if git diff --quiet -- public/themes/previews; then
+                      echo "No preview changes — nothing to commit."
+                      exit 0
+                  fi
+
+                  git config user.email ""
+                  git config user.name "Update theme previews action"
+                  git checkout -b update-theme-previews
+                  git add public/themes/previews
+
+                  COMMIT_MESSAGE="chore(themes): refresh card previews"
+                  git commit -m "$COMMIT_MESSAGE"
+                  git push --set-upstream origin update-theme-previews --force
+                  gh pr create \
+                      --title "$COMMIT_MESSAGE" \
+                      --body "Automated regeneration of theme card previews." \
+                      -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true

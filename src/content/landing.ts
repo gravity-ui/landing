@@ -9,6 +9,7 @@ import githubIcon from '../assets/icons/github.svg';
 import rocketIcon from '../assets/icons/rocket.svg';
 import {CustomBlock} from '../blocks/constants';
 import {SCROLL_TO_TEMPLATES_EVENT} from '../constants';
+import {sendAnalyticsEvent} from '../utils';
 
 // import {getRoadmapTasks} from './roadmap';
 import {CustomPageContent} from './types';
@@ -42,6 +43,7 @@ export const getLanding = ({
                     view: 'action',
                     icon: rocketIcon,
                     onClick: () => {
+                        sendAnalyticsEvent('howto_start_click');
                         const evt = new Event(SCROLL_TO_TEMPLATES_EVENT, {
                             bubbles: true,
                             cancelable: false,
@@ -68,15 +70,15 @@ export const getLanding = ({
                 title: t('home:news_title'),
                 items: [
                     {
-                        date: '2026-08-10T12:00:00.000Z',
+                        date: '2026-09-04T09:00:00.000Z',
                         content: t('home:news_items_item1'),
                     },
                     {
-                        date: '2026-05-27T12:00:00.000Z',
+                        date: '2026-08-10T12:00:00.000Z',
                         content: t('home:news_items_item2'),
                     },
                     {
-                        date: '2026-04-03T12:00:00.000Z',
+                        date: '2026-05-27T12:00:00.000Z',
                         content: t('home:news_items_item3'),
                     },
                 ],

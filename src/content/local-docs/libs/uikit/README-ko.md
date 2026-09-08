@@ -2,7 +2,7 @@
 
 [English](README.md) | [Русский](README-ru.md)
 
-풍부한 웹 애플리케이션을 만들기 위한 유연하고 실용적이며 효율적인 React 컴포넌트 모음입니다. [Gravity UI](https://gravity-ui.com) 디자인 시스템의 일부입니다.
+풍부한 웹 애플리케이션을 구축하기 위한 유연하고 실용적이며 효율적인 React 컴포넌트 모음입니다. [Gravity UI](https://gravity-ui.com) 디자인 시스템의 일부입니다.
 
 <!--GITHUB_BLOCK-->
 
@@ -14,15 +14,15 @@
 
 ## 소개
 
-UIKit은 [Gravity UI](https://gravity-ui.com) 디자인 시스템의 기반이 되는 패키지입니다. 70개 이상의 React 컴포넌트로 구성되어 있으며, 실제 웹 애플리케이션 개발에 검증된 라이브러리입니다. 테마, 접근성, RTL 레이아웃, 서버 사이드 렌더링, 국제화 등 복잡한 부분들을 처리해주므로, 여러분은 제품 개발에만 집중할 수 있습니다.
+UIKit은 프로덕션 웹 애플리케이션을 위해 제작된 70개 이상의 React 컴포넌트로 구성된 검증된 세트인 [Gravity UI](https://gravity-ui.com) 디자인 시스템의 기반 패키지입니다. 테마, 접근성, RTL 레이아웃, 서버 측 렌더링 및 국제화를 처리하여 제품 구축에 집중할 수 있습니다.
 
 주요 기능:
 
 - **70개 이상의 컴포넌트** — 입력, 오버레이, 데이터 표시, 레이아웃 기본 요소, 피드백 등
-- **내장 테마 기능** — 라이트, 다크, 고대비 테마를 지원하며, 토큰을 사용자 정의할 수 있는 실시간 [Themer](https://gravity-ui.com/themer) 도구 제공
-- **RTL 지원** — 완벽한 오른쪽에서 왼쪽 레이아웃 방향 지원
+- **내장 테마** — 라이트, 다크, 고대비 변형과 토큰을 사용자 정의할 수 있는 라이브 [Themer](https://gravity-ui.com/themer) 도구 제공
+- **RTL 지원** — 완전한 오른쪽에서 왼쪽 레이아웃 방향 지원
 
-[Storybook](https://preview.gravity-ui.com/uikit/) 또는 [문서](https://gravity-ui.com/components/uikit/alert)에서 전체 컴포넌트 카탈로그를 확인하세요.
+[Storybook](https://preview.gravity-ui.com/uikit/) 또는 [문서](https://gravity-ui.com/components/uikit/alert)에서 전체 컴포넌트 카탈로그를 찾아보세요.
 
 ## 시작하기
 
@@ -38,7 +38,7 @@ npm install @gravity-ui/uikit
 
 ## 사용법
 
-패키지에서 컴포넌트를 직접 가져와 사용하세요:
+패키지에서 직접 컴포넌트를 가져옵니다.
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
@@ -52,7 +52,7 @@ const SubmitButton = (
 
 ### 스타일
 
-앱 진입점 상단에 기본 스타일과 폰트를 한 번만 포함하세요:
+앱 진입점 상단에 기본 스타일과 글꼴을 한 번 포함합니다.
 
 ```js
 // index.js
@@ -60,14 +60,16 @@ import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 ```
 
-유용한 헬퍼가 포함된 SCSS [믹스인](styles/mixins.scss) 파일도 자체 스타일시트에서 사용할 수 있습니다.
+유용한 도우미가 포함된 SCSS [믹스인](styles/mixins.scss) 파일도 자체 스타일시트에서 사용할 수 있습니다.
 
 ### 가이드
 
 더 읽어보기:
 
+- [레이아웃 컴포넌트 및 간격](docs/layout.md) — 공유 그리드 및 간격 스케일을 사용하여 반응형 페이지 구성
 - [테마](docs/theming.md) — 라이트, 다크, 고대비 테마 활성화
-- [서버 사이드 렌더링](docs/server-side-rendering.md) — 서버에서 루트 CSS 클래스 생성
+- [타이포그래피](docs/typography.md) — 공유 텍스트 스케일 사용 및 사용자 정의
+- [서버 측 렌더링](docs/server-side-rendering.md) — 서버에서 루트 CSS 클래스 생성
 - [국제화](docs/i18n.md) — 내장 컴포넌트 언어 설정
 
 ## 개발
@@ -76,7 +78,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 git clone git@github.com:gravity-ui/uikit.git
 cd uikit
 npm ci
-npm run start   # Storybook을 http://localhost:7007에서 실행합니다.
+npm run start   # http://localhost:7007에서 Storybook 실행
 ```
 
 기타 유용한 명령어:
@@ -88,7 +90,7 @@ npm run typecheck     # TypeScript 타입 검사
 npm run playwright    # 시각적 회귀 테스트 실행
 ```
 
-## 유지보수 담당자
+## 유지보수자
 
 <table>
   <tr>
@@ -132,7 +134,7 @@ Gravity UI 앱을 위한 기본 React 컴포넌트 및 디자인 토큰 라이�
 ### 언제 사용해야 할까요?
 
 - 표준 애플리케이션 UI: 버튼, 폼 컨트롤, 모달 및 팝업, 메뉴, 탭, 라벨, 타이포그래피 및 레이아웃 기본 요소.
-- Gravity UI 앱의 테마 기반: `ThemeProvider`, 디자인 토큰, 그리고 `@gravity-ui/*` 생태계의 나머지 부분에서 기대하는 CSS 변수.
+- Gravity UI 앱의 테마 기반: `ThemeProvider`, 디자인 토큰, 그리고 `@gravity-ui/*` 생태계의 나머지 부분에서 필요로 하는 CSS 변수.
 - 내장된 `Table` 컴포넌트를 통한 간단한 테이블 데이터 (선택, 정렬, 행 액션).
 
 ### 언제 사용하지 않아야 할까요?
@@ -146,7 +148,7 @@ Gravity UI 앱을 위한 기본 React 컴포넌트 및 디자인 토큰 라이�
 ### 흔한 실수
 
 - `Button`의 스타일링 prop은 `view`이며, `variant`나 `color`가 아닙니다.
-- **컴포넌트가 설정 없이 스타일링되지 않은 채 렌더링됩니다.** 앱을 `ThemeProvider`로 감싸고, 진입점에서 `@gravity-ui/uikit/styles/styles.css` (및 `fonts.css`)를 한 번 임포트해야 합니다 — 둘 다 필수입니다.
+- **컴포넌트가 설정 없이 스타일 없이 렌더링됩니다.** 앱을 `ThemeProvider`로 감싸고, 진입점에서 `@gravity-ui/uikit/styles/styles.css` (및 `fonts.css`)를 한 번 임포트해야 합니다 — 둘 다 필수입니다.
 - **`Icon`에는 `name` prop이 없습니다.** 임포트한 아이콘 컴포넌트를 `data`를 통해 전달하세요: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`.
 - **`theme` 값은 `light | dark | light-hc | dark-hc`입니다.** `theme="default"`는 없습니다.
 
@@ -172,4 +174,4 @@ Gravity UI 앱을 위한 기본 React 컴포넌트 및 디자인 토큰 라이�
 
 ---
 
-UIKit이 유용하다고 생각되시면, [GitHub](https://github.com/gravity-ui/uikit)에서 ⭐를 눌러주세요 — 다른 사람들이 프로젝트를 발견하는 데 도움이 됩니다.
+UIKit이 유용하다고 생각하시면, [GitHub](https://github.com/gravity-ui/uikit)에서 ⭐를 눌러주세요 — 프로젝트를 다른 사람들에게 알리는 데 도움이 됩니다.

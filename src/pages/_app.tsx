@@ -7,6 +7,7 @@ import {NextComponentType} from 'next';
 import {appWithTranslation} from 'next-i18next';
 import 'overlayscrollbars/overlayscrollbars.css';
 
+import {useAnalyticsOutboundLinks} from '../hooks/useAnalyticsOutboundLinks';
 import {useReportWebVitals} from '../hooks/useReportWebVitals';
 import {WindowBreakpointProvider} from '../hooks/useWindowBreakpoint';
 import '../scrollbars.scss';
@@ -21,6 +22,7 @@ export const App = ({
     pageProps: Record<string, unknown>;
 }) => {
     useReportWebVitals();
+    useAnalyticsOutboundLinks();
 
     return (
         <WindowBreakpointProvider>

@@ -128,6 +128,8 @@
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
     "prepare-metadata": "npm run get-packages-versions",
     "update-og-images": "node ./scripts/update-og-images.mjs",
+    "update-theme-previews": "NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES=1 node ./scripts/update-theme-previews.mjs",
+    "check-theme-previews": "NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES=1 node ./scripts/update-theme-previews.mjs --check",
     "update-packages-readme": "node ./scripts/update-packages-readme.mjs",
     "generate-llms": "node ./scripts/generate-llms.mjs",
     "predev": "npm run prepare-metadata",

@@ -2,7 +2,7 @@
 
 [English](README.md) | [Русский](README-ru.md)
 
-リッチなWebアプリケーションを構築するための、柔軟で実用的、かつ効率的なReactコンポーネントセットです。[Gravity UI](https://gravity-ui.com)デザインシステムの一部です。
+リッチなWebアプリケーションを作成するための、柔軟で実用的、かつ効率的なReactコンポーネントセットです。[Gravity UI](https://gravity-ui.com)デザインシステムの一部です。
 
 <!--GITHUB_BLOCK-->
 
@@ -19,10 +19,10 @@ UIKitは、[Gravity UI](https://gravity-ui.com)デザインシステムの基盤
 主な特徴：
 
 - **70以上のコンポーネント** — 入力、オーバーレイ、データ表示、レイアウトプリミティブ、フィードバックなど
-- **組み込みテーマ設定** — ライト、ダーク、ハイコントラストのバリアントがあり、トークンをカスタマイズするためのライブ[Themer](https://gravity-ui.com/themer)ツールも利用可能
-- **RTLサポート** — 完全な右から左へのレイアウト方向
+- **組み込みテーマ機能** — ライト、ダーク、ハイコントラストのバリアントがあり、トークンをカスタマイズするためのライブ[Themer](https://gravity-ui.com/themer)ツールも利用可能
+- **RTLサポート** — 完全な右から左へのレイアウト方向に対応
 
-[Storybook](https://preview.gravity-ui.com/uikit/)または[ドキュメント](https://gravity-ui.com/components/uikit/alert)で、完全なコンポーネントカタログを参照してください。
+[Storybook](https://preview.gravity-ui.com/uikit/)または[ドキュメント](https://gravity-ui.com/components/uikit/alert)で、コンポーネントカタログ全体を参照してください。
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ npm install @gravity-ui/uikit
 
 ## Usage
 
-パッケージから直接コンポーネントをインポートします。
+パッケージから直接コンポーネントをインポートします：
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
@@ -52,7 +52,7 @@ const SubmitButton = (
 
 ### Styles
 
-アプリのエントリポイントの先頭に、ベーススタイルとフォントを一度だけ含めてください。
+アプリのエントリーポイントの先頭に、ベーススタイルとフォントを一度だけ含めてください：
 
 ```js
 // index.js
@@ -66,9 +66,11 @@ SCSSの[mixins](styles/mixins.scss)ファイルも、独自のスタイルシー
 
 さらに読む：
 
-- [Theming](docs/theming.md) — ライト、ダーク、ハイコントラストテーマを有効にする
-- [Server-side rendering](docs/server-side-rendering.md) — サーバーでルートCSSクラスを生成する
-- [Internationalization](docs/i18n.md) — 組み込みコンポーネントの言語を設定する
+- [レイアウトコンポーネントとスペーシング](docs/layout.md) — 共有グリッドとスペーシングスケールでレスポンシブなページを構築
+- [テーマ設定](docs/theming.md) — ライト、ダーク、ハイコントラストテーマを有効にする
+- [タイポグラフィ](docs/typography.md) — 共有テキストスケールを使用およびカスタマイズする
+- [サーバーサイドレンダリング](docs/server-side-rendering.md) — サーバーでルートCSSクラスを生成する
+- [国際化](docs/i18n.md) — 組み込みコンポーネントの言語を設定する
 
 ## Development
 
@@ -82,10 +84,10 @@ npm run start   # Storybookを http://localhost:7007 で起動します
 その他の便利なコマンド：
 
 ```shell
-npm test              # 単体テストを実行します
-npm run lint          # JS、SCSS、Markdownをリントします
-npm run typecheck     # TypeScriptの型チェックを行います
-npm run playwright    # ビジュアルリグレッションテストを実行します
+npm test              # 単体テストを実行
+npm run lint          # JS、SCSS、Markdownをリント
+npm run typecheck     # TypeScriptの型チェック
+npm run playwright    # ビジュアルリグレッションテストを実行
 ```
 
 ## Maintainers
@@ -117,7 +119,7 @@ npm run playwright    # ビジュアルリグレッションテストを実行�
 
 貢献を歓迎します！プルリクエストを送信する前に、[CONTRIBUTING.md](CONTRIBUTING.md) をお読みください。詳細なプルリクエストガイドラインについては、[contribute/pull-request.md](contribute/pull-request.md) を参照してください。
 
-現在 [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) 人の貢献者がいます。ぜひ参加してください！
+現在 [![contributors](https://img.shields.io/github/contributors/gravity-ui/uikit?label=contributors)](https://github.com/gravity-ui/uikit/graphs/contributors) 人のコントリビューターがいます。ぜひ参加してください！
 
 質問やディスカッションは、[Telegram](https://t.me/gravity_ui) コミュニティでどうぞ。
 
@@ -125,42 +127,42 @@ npm run playwright    # ビジュアルリグレッションテストを実行�
 
 MIT License に基づいて配布されています。詳細については [LICENSE](LICENSE) を参照してください。
 
-## AIエージェント向け情報
+## AIエージェント向け
 
-Gravity UI アプリケーションのベースとなる React コンポーネントおよびデザイン・トークンライブラリです。他のすべての `@gravity-ui/*` パッケージが依存する、コントロール、インプット、オーバーレイ、レイアウト、およびテーマ設定を提供します。
+Gravity UI アプリケーションのベースとなる React コンポーネントおよびデザイン トークン ライブラリです。他のすべての `@gravity-ui/*` パッケージが依存する、コントロール、入力、オーバーレイ、レイアウト、およびテーマ設定を提供します。
 
 ### 使用すべき場合
 
-- 標準的なアプリケーション UI: ボタン、フォームコントロール、モーダルおよびポップアップ、メニュー、タブ、ラベル、タイポグラフィ、レイアウトプリミティブ。
-- Gravity UI アプリケーションのテーマ設定の基盤: `ThemeProvider`、デザイン・トークン、および `@gravity-ui/*` エコシステムの他の部分が期待する CSS 変数。
+- 標準的なアプリケーション UI: ボタン、フォーム コントロール、モーダルとポップアップ、メニュー、タブ、ラベル、タイポグラフィ、レイアウトの基本要素。
+- Gravity UI アプリケーションのテーマ設定の基盤: `ThemeProvider`、デザイン トークン、および `@gravity-ui/*` エコシステムの他の部分が期待する CSS 変数。
 - 内蔵の `Table` コンポーネントを使用したシンプルな表形式データ（選択、ソート、行アクション）。
 
 ### 使用すべきでない場合
 
-- 機能豊富なデータグリッド（仮想化、列リサイズ、グループ化、並べ替え） — ヘッドレスの独立したパッケージである [`@gravity-ui/table`](https://github.com/gravity-ui/table) を使用してください。これは uikit の `Table` コンポーネントとは**異なります**。
-- チャートおよびデータ可視化 — [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) を使用してください（`@gravity-ui/chartkit` はレガシーラッパーです）。
-- アプリケーションナビゲーションシェル（サイドヘッダー、フッター、ロゴ） — [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation) を使用してください。
+- 機能豊富なデータ グリッド（仮想化、列のリサイズ、グループ化、並べ替え） — ヘッドレスの独立したパッケージである [`@gravity-ui/table`](https://github.com/gravity-ui/table) を使用してください。これは uikit の `Table` コンポーネントとは**異なります**。
+- チャートとデータ可視化 — [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) を使用してください（`@gravity-ui/chartkit` はレガシー ラッパーです）。
+- アプリケーション ナビゲーション シェル（サイド ヘッダー、フッター、ロゴ） — [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation) を使用してください。
 - 日付ピッカー、カレンダー、および範囲コントロール — [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components) を使用してください。
-- SVG アイコンセット自体 — [`@gravity-ui/icons`](https://github.com/gravity-ui/icons) を使用してください。uikit は `Icon` レンダラーのみを提供します。
+- SVG アイコン セット自体 — [`@gravity-ui/icons`](https://github.com/gravity-ui/icons) を使用してください。uikit は `Icon` レンダラーのみを提供します。
 
 ### よくある落とし穴
 
-- `Button` のスタイリングプロパティは `view` であり、`variant` や `color` ではありません。
-- **コンポーネントはセットアップなしではスタイルが適用されずにレンダリングされます。** アプリケーションを `ThemeProvider` でラップし、**かつ** エントリーポイントで `@gravity-ui/uikit/styles/styles.css`（および `fonts.css`）を一度インポートしてください。両方が必要です。
-- **`Icon` には `name` プロパティがありません。** インポートしたアイコンコンポーネントを `data` プロパティ経由で渡してください: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
-- **`theme` の値は `light | dark | light-hc | dark-hc` です。** `theme="default"` は存在しません。
+- `Button` のスタイリング プロパティは `view` であり、`variant` や `color` ではありません。
+- **コンポーネントは、セットアップなしではスタイルが適用されずにレンダリングされます。** アプリを `ThemeProvider` でラップし、**かつ** エントリ ポイントで `@gravity-ui/uikit/styles/styles.css`（および `fonts.css`）を一度インポートしてください。両方が必要です。
+- **`Icon` には `name` プロパティがありません。** インポートしたアイコン コンポーネントを `data` を介して渡してください: `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} size={16} />`。
+- **`theme` の値は `light | dark | light-hc | dark-hc` です。** `theme="default"` はありません。
 
 ### 役立つドキュメント
 
-- [レイアウトコンポーネントとスペーシング](./docs/layout.md)
+- [レイアウト コンポーネントとスペーシング](./docs/layout.md)
 - [テーマ設定、色 & ブランド](./docs/theming.md)
 - [タイポグラフィ](./docs/typography.md)
 
 ## AIエージェント向けドキュメント
 
-インストールされているバージョンのエージェント可読ドキュメントは、`node_modules/@gravity-ui/uikit/build/docs/INDEX.md` にあります。
+インストールされているバージョンのエージェント読み取り可能なドキュメントは、`node_modules/@gravity-ui/uikit/build/docs/INDEX.md` にあります。
 
-## スター履歴
+## スターの履歴
 
 <div align="center">
   <picture>
@@ -172,4 +174,4 @@ Gravity UI アプリケーションのベースとなる React コンポーネ�
 
 ---
 
-UIKit が役立つと感じた場合は、[GitHub](https://github.com/gravity-ui/uikit) で ⭐ を付けていただけると幸いです。プロジェクトが他の人に発見される助けになります。
+UIKit が役立つと思われた場合は、[GitHub](https://github.com/gravity-ui/uikit) で ⭐ を付けていただけると幸いです。プロジェクトの発見に役立ちます。

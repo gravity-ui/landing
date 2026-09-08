@@ -1,0 +1,17 @@
+@use '../../../../variables';
+
+.#{variables.$ns}preview-mode-toggle {
+    // Landing globally sets --g-border-radius-l: 32px (src/styles.scss:42) so
+    // a 36x36 icon Button size="l" would render as a circle. Figma node
+    // 3011:94605/94606 specifies borderRadiusPx=8 — override the button
+    // radius token inherited by the two child Buttons.
+    --g-button-border-radius: var(--g-border-radius-m);
+
+    // Figma maps the active Button's fill to `Base/Selection`. In the
+    // mockup's brand theme that resolves to `#ffbe5c33` (brand 20% alpha).
+    // Landing's default `--g-color-base-selection` is a near-transparent
+    // grey that is invisible on the dark themer header. Rebind the token
+    // locally to a brand-tinted 20% so the active Sun/Moon reads as
+    // selected, matching the mockup regardless of the page's brand value.
+    --g-color-base-selection: color-mix(in sRGB, var(--g-color-base-brand) 20%, transparent);
+}
