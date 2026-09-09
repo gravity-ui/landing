@@ -13,7 +13,7 @@ interface IconsProps {
     onSelectIcon?: (item: IconItem) => void;
 }
 
-export const IconCollection: React.FC<IconsProps> = ({icons, onSelectIcon}) => {
+export const IconCollection = React.memo<IconsProps>(({icons, onSelectIcon}) => {
     const handleClick = React.useCallback((item: IconItem) => onSelectIcon?.(item), [onSelectIcon]);
 
     return (
@@ -23,4 +23,4 @@ export const IconCollection: React.FC<IconsProps> = ({icons, onSelectIcon}) => {
             ))}
         </div>
     );
-};
+});
