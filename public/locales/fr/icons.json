@@ -19,7 +19,6 @@
     "category": "Catégorie",
     "allIcons": "Toutes les icônes",
     "categoriesLabel": "Catégories d’icônes",
-    "mobileCategoriesLabel": "Catégories d’icônes sur mobile",
     "categories": {
         "arrows": "Flèches",
         "layout": "Mise en page",

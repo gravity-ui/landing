@@ -19,7 +19,6 @@
     "category": "카테고리",
     "allIcons": "모든 아이콘",
     "categoriesLabel": "아이콘 카테고리",
-    "mobileCategoriesLabel": "모바일 아이콘 카테고리",
     "categories": {
         "arrows": "화살표",
         "layout": "레이아웃",

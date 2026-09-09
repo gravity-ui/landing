@@ -19,7 +19,6 @@
     "category": "Kategorie",
     "allIcons": "Alle Icons",
     "categoriesLabel": "Icon-Kategorien",
-    "mobileCategoriesLabel": "Mobile Icon-Kategorien",
     "categories": {
         "arrows": "Pfeile",
         "layout": "Layout",

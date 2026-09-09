@@ -19,7 +19,6 @@
     "category": "Категория",
     "allIcons": "Все иконки",
     "categoriesLabel": "Категории иконок",
-    "mobileCategoriesLabel": "Категории иконок для мобильных устройств",
     "categories": {
         "arrows": "Стрелки",
         "layout": "Макет",

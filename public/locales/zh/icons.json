@@ -19,7 +19,6 @@
     "category": "类别",
     "allIcons": "所有图标",
     "categoriesLabel": "图标类别",
-    "mobileCategoriesLabel": "移动端图标类别",
     "categories": {
         "arrows": "箭头",
         "layout": "布局",

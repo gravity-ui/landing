@@ -323,12 +323,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     onClose={() => setIsCategorySheetOpen(false)}
                     title={t('icons:category')}
                 >
-                    <div
-                        className={b('category-sheet-list')}
-                        aria-label={t('icons:mobileCategoriesLabel')}
-                    >
-                        {categoryOptions}
-                    </div>
+                    <div className={b('category-sheet-list')}>{categoryOptions}</div>
                 </Sheet>
             )}
 

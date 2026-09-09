@@ -19,7 +19,6 @@
     "category": "Categoria",
     "allIcons": "Todos os ícones",
     "categoriesLabel": "Categorias de ícones",
-    "mobileCategoriesLabel": "Categorias de ícones para dispositivos móveis",
     "categories": {
         "arrows": "Setas",
         "layout": "Layout",
