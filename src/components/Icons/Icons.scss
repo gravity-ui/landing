@@ -3,6 +3,10 @@
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}icons';
+$navigation-height: 81px;
+$search-row-height: 60px;
+$catalog-top-spacing: 16px;
+$categories-sticky-offset: $search-row-height + $catalog-top-spacing;
 
 #{$block} {
     margin: 56px 0 0;
@@ -113,9 +117,9 @@ $block: '.#{variables.$ns}icons';
 
     &__categories {
         position: sticky;
-        top: 76px;
+        top: $categories-sticky-offset;
         flex: 0 0 200px;
-        max-height: calc(100vh - 96px);
+        max-height: calc(100dvh - $navigation-height - $categories-sticky-offset);
         overflow-y: auto;
         scrollbar-width: thin;
     }
