@@ -80,6 +80,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     }, [onChangeCurrentIcon]);
 
     const handleClickToKeyword = React.useCallback((keyword: string) => {
+        setCategoryId('all');
         setFilterString(keyword);
         handleCloseDialog();
 
@@ -90,6 +91,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     }, []);
 
     const handleImageSearchResults = React.useCallback((componentNames: string[]) => {
+        setCategoryId('all');
         setImageSearchResults(componentNames);
         setFilterString('');
     }, []);
@@ -253,6 +255,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                             if (!imageSearch.isActive) {
                                 setFilterString(value);
                                 if (value) {
+                                    setCategoryId('all');
                                     setImageSearchResults(null);
                                 }
                             }
@@ -261,7 +264,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                         placeholder={t('icons:filterPlaceholder')}
                         startContent={searchStartContent}
                         autoFocus={!isMobile}
-                        hasClear={false}
+                        hasClear={!imageSearch.isActive}
                         endContent={searchEndContent}
                         controlProps={{
                             readOnly: imageSearch.isActive,
