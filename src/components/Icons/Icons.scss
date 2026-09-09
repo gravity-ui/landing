@@ -1,5 +1,6 @@
 @use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../mixins.scss' as baseMixins;
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}icons';
@@ -11,7 +12,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
 #{$block} {
     margin: 56px 0 0;
 
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+    @include baseMixins.window-breakpoint('md') {
         margin: 32px 0 0;
     }
 
@@ -21,7 +22,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
         justify-content: space-between;
         margin-bottom: pcVariables.$indentXS;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @include baseMixins.window-breakpoint('md') {
             margin-bottom: pcVariables.$indentXXXS;
         }
     }
@@ -33,7 +34,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
         color: #fff;
         margin: 0;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @include baseMixins.window-breakpoint('md') {
             font-size: 32px;
             line-height: 48px;
             margin-bottom: pcVariables.$indentXXXS;
@@ -51,13 +52,13 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
 
     & &__search {
         padding: 8px 0;
-        margin-bottom: 24px;
+        margin-bottom: pcVariables.$indentSM;
         position: sticky;
         top: 0;
         background: var(--g-color-base-background);
         z-index: 1;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @include baseMixins.window-breakpoint('md') {
             margin-bottom: pcVariables.$indentXXXS;
         }
     }
@@ -65,7 +66,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     &__search-row {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: pcVariables.$indentXXXS;
     }
 
     &__search-input {
@@ -75,7 +76,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     &__search-row {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: pcVariables.$indentXXXS;
     }
 
     &__search-input {
@@ -83,12 +84,12 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     }
 
     &__search-icon {
-        padding: 0 12px;
+        padding: 0 pcVariables.$indentXXS;
         color: rgba(255, 255, 255, 0.5);
     }
 
     &__photo-search-icon {
-        padding: 0 12px;
+        padding: 0 pcVariables.$indentXXS;
         color: rgba(255, 255, 255, 0.5);
         cursor: pointer;
         transition: color 0.1s ease;
@@ -99,7 +100,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     }
 
     &__clear-icon {
-        padding: 0 12px;
+        padding: 0 pcVariables.$indentXXS;
         color: rgba(255, 255, 255, 0.5);
         cursor: pointer;
         transition: color 0.1s ease;
@@ -112,7 +113,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     &__catalog {
         display: flex;
         align-items: flex-start;
-        gap: 32px;
+        gap: pcVariables.$indentM;
     }
 
     &__categories {
@@ -135,44 +136,25 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     &__category-list {
         display: flex;
         flex-direction: column;
-        margin-top: 20px;
+        margin-top: pcVariables.$indentS;
     }
 
     &__category {
-        display: flex;
+        --g-button-border-radius: 8px;
+        --g-button-padding: #{pcVariables.$indentXXS};
+
         width: 100%;
         height: 36px;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 8px 12px;
-        border: 0;
-        border-radius: 8px;
-        color: var(--g-color-text-primary);
-        background: transparent;
-        font: inherit;
         font-size: 13px;
         line-height: 20px;
         text-align: left;
-        cursor: pointer;
 
-        &:hover {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        &_selected,
-        &_selected:hover {
-            background: rgba(255, 190, 92, 0.08);
-        }
-
-        &:disabled {
-            color: var(--g-color-text-hint);
-            background: transparent;
-            cursor: default;
-
-            #{$block}__category-count {
-                color: var(--g-color-text-hint);
-            }
+        .g-button__text {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: pcVariables.$indentXS;
         }
     }
 
@@ -191,8 +173,8 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     &__results-heading {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 20px;
+        gap: pcVariables.$indentXXS;
+        margin-bottom: pcVariables.$indentS;
     }
 
     &__mobile-category-trigger {
@@ -207,12 +189,13 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     }
 
     &__category-sheet-list {
-        padding-top: 8px;
+        padding-top: pcVariables.$indentXXXS;
 
         #{$block}__category {
+            --g-button-border-radius: 6px;
+            --g-button-padding: #{pcVariables.$indentXS};
+
             height: 44px;
-            padding: 12px 16px;
-            border-radius: 6px;
             font-size: 15px;
         }
 
@@ -221,7 +204,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
         }
     }
 
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+    @include baseMixins.window-breakpoint('md') {
         &__catalog {
             display: block;
         }
@@ -236,8 +219,8 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
             height: 44px;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 24px;
-            padding: 12px 16px;
+            margin-bottom: pcVariables.$indentSM;
+            padding: pcVariables.$indentXXS pcVariables.$indentXS;
             border: 0;
             border-radius: 12px;
             color: var(--g-color-text-primary);

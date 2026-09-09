@@ -167,19 +167,20 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     }, []);
 
     const categoryButtons = categoryOptions.map(({id, count}) => (
-        <button
-            type="button"
+        <Button
             key={id}
+            view="flat"
             disabled={isSearching}
+            selected={activeCategoryId === id}
             aria-pressed={activeCategoryId === id}
-            className={b('category', {selected: activeCategoryId === id})}
+            className={b('category')}
             onClick={() => handleSelectCategory(id)}
         >
             <span>
                 {id === 'all' ? allIconsTitle : t(`icons:categories.${id}`, {defaultValue: id})}
             </span>
             <span className={b('category-count')}>{count}</span>
-        </button>
+        </Button>
     ));
 
     const searchStartContent = imageSearch.isActive ? (
