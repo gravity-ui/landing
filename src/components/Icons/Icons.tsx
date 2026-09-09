@@ -6,7 +6,7 @@ import React from 'react';
 
 import photoSearchIcon from '../../assets/icons/photo-search.svg';
 import {useIsMobile} from '../../hooks/useIsMobile';
-import {block} from '../../utils';
+import {block, sendAnalyticsEvent} from '../../utils';
 
 import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
@@ -157,31 +157,36 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             : t(`icons:categories.${activeCategoryId}`, {defaultValue: activeCategoryId});
     const resultsCount = icons.length;
 
-    const handleSelectCategory = React.useCallback((nextCategoryId: string) => {
-        setCategoryId(nextCategoryId);
-        setIsCategorySheetOpen(false);
+    const handleSelectCategory = React.useCallback(
+        (nextCategoryId: string, source: 'sidebar' | 'sheet') => {
+            setCategoryId(nextCategoryId);
+            setIsCategorySheetOpen(false);
+            sendAnalyticsEvent('icon_category_select', `${source}:${nextCategoryId}`);
 
-        requestAnimationFrame(() => {
-            pageTitleRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
-        });
-    }, []);
+            requestAnimationFrame(() => {
+                pageTitleRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+            });
+        },
+        [],
+    );
 
-    const categoryButtons = categoryOptions.map(({id, count}) => (
-        <Button
-            key={id}
-            view="flat"
-            disabled={isSearching}
-            selected={activeCategoryId === id}
-            aria-pressed={activeCategoryId === id}
-            className={b('category')}
-            onClick={() => handleSelectCategory(id)}
-        >
-            <span>
-                {id === 'all' ? allIconsTitle : t(`icons:categories.${id}`, {defaultValue: id})}
-            </span>
-            <span className={b('category-count')}>{count}</span>
-        </Button>
-    ));
+    const renderCategoryButtons = (source: 'sidebar' | 'sheet') =>
+        categoryOptions.map(({id, count}) => (
+            <Button
+                key={id}
+                view="flat"
+                disabled={isSearching}
+                selected={activeCategoryId === id}
+                aria-pressed={activeCategoryId === id}
+                className={b('category')}
+                onClick={() => handleSelectCategory(id, source)}
+            >
+                <span>
+                    {id === 'all' ? allIconsTitle : t(`icons:categories.${id}`, {defaultValue: id})}
+                </span>
+                <span className={b('category-count')}>{count}</span>
+            </Button>
+        ));
 
     const searchStartContent = imageSearch.isActive ? (
         imageSearch.startContent
@@ -255,7 +260,9 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     <div className={b('catalog')}>
                         <aside className={b('categories')} aria-label={t('icons:categoriesLabel')}>
                             <h2 className={b('section-title')}>{t('icons:category')}</h2>
-                            <div className={b('category-list')}>{categoryButtons}</div>
+                            <div className={b('category-list')}>
+                                {renderCategoryButtons('sidebar')}
+                            </div>
                         </aside>
                         <button
                             type="button"
@@ -300,7 +307,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     onClose={() => setIsCategorySheetOpen(false)}
                     title={t('icons:category')}
                 >
-                    <div className={b('category-sheet-list')}>{categoryButtons}</div>
+                    <div className={b('category-sheet-list')}>{renderCategoryButtons('sheet')}</div>
                 </Sheet>
             )}
 

@@ -21,6 +21,7 @@ export type AnalyticsAction =
     | 'theme_apply'
     | 'theme_preset_select'
     | 'theme_import'
+    | 'icon_category_select'
     | 'theme_start_scratch';
 
 // Single analytics channel: a `cta` event goes to the dataLayer, where GTM
