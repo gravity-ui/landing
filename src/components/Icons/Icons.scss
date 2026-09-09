@@ -200,20 +200,10 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     }
 
     &__category-sheet {
-        --g-color-base-float: #474247;
-    }
-
-    &__category-sheet-content {
-        padding: 0 20px 16px;
-
-        .g-sheet__sheet-content-title {
-            min-height: 48px;
-            justify-content: flex-start;
-            border-bottom: 1px solid var(--g-color-line-generic);
-            font-size: 20px;
-            line-height: 24px;
-            text-align: left;
-        }
+        --g-sheet-background-color: var(--g-color-base-modal);
+        --g-sheet-content-padding: 0 max(var(--g-spacing-5), env(safe-area-inset-right, 0px))
+            max(var(--g-spacing-4), env(safe-area-inset-bottom, 0px))
+            max(var(--g-spacing-5), env(safe-area-inset-left, 0px));
     }
 
     &__category-sheet-list {

@@ -307,7 +307,6 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             {isMobile && (
                 <Sheet
                     className={b('category-sheet')}
-                    contentClassName={b('category-sheet-content')}
                     visible={isCategorySheetOpen}
                     onClose={() => setIsCategorySheetOpen(false)}
                     title={t('icons:category')}
