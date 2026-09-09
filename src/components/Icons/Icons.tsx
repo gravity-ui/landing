@@ -164,6 +164,10 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     const handleSelectCategory = React.useCallback((nextCategoryId: string) => {
         setCategoryId(nextCategoryId);
         setIsCategorySheetOpen(false);
+
+        requestAnimationFrame(() => {
+            pageTitleRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+        });
     }, []);
 
     const categoryOptions = (
