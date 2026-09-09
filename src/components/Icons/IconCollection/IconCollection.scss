@@ -4,6 +4,7 @@ $block: '.#{variables.$ns}icon-collection';
 
 #{$block} {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 150px);
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    justify-content: center;
     gap: 20px;
 }
