@@ -224,7 +224,6 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
         &__catalog {
             display: block;
-            gap: 24px;
         }
 
         &__categories {
@@ -263,10 +262,6 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
             color: var(--g-color-text-secondary);
             font-size: 13px;
             line-height: 18px;
-        }
-
-        &__results {
-            width: 100%;
         }
 
         &__results-heading {

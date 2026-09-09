@@ -18,6 +18,10 @@ import {allIcons} from './constants';
 import type {IconItem} from './types';
 
 const b = block('icons');
+const categoryOptions = [
+    {id: 'all', count: allIcons.length},
+    ...iconCategories.map(({id}) => ({id, count: categoryCounts[id]})),
+];
 
 interface IconsProps {
     currentIcon?: string;
@@ -145,12 +149,12 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         [categoryId, isSearching, searchedIcons],
     );
 
-    const selectedCategory = iconCategories.find(({id}) => id === categoryId);
+    const activeCategoryId = isSearching ? 'all' : categoryId;
     const allIconsTitle = t('icons:allIcons');
     const resultsTitle =
-        !isSearching && selectedCategory
-            ? t(`icons:categories.${selectedCategory.id}`, {defaultValue: selectedCategory.id})
-            : allIconsTitle;
+        activeCategoryId === 'all'
+            ? allIconsTitle
+            : t(`icons:categories.${activeCategoryId}`, {defaultValue: activeCategoryId});
     const resultsCount = icons.length;
 
     const handleSelectCategory = React.useCallback((nextCategoryId: string) => {
@@ -162,37 +166,21 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         });
     }, []);
 
-    const categoryOptions = (
-        <React.Fragment>
-            <button
-                type="button"
-                disabled={isSearching}
-                aria-pressed={!isSearching && categoryId === 'all'}
-                className={b('category', {
-                    selected: !isSearching && categoryId === 'all',
-                })}
-                onClick={() => handleSelectCategory('all')}
-            >
-                <span>{allIconsTitle}</span>
-                <span className={b('category-count')}>{allIcons.length}</span>
-            </button>
-            {iconCategories.map((category) => (
-                <button
-                    type="button"
-                    key={category.id}
-                    disabled={isSearching}
-                    aria-pressed={!isSearching && categoryId === category.id}
-                    className={b('category', {
-                        selected: !isSearching && categoryId === category.id,
-                    })}
-                    onClick={() => handleSelectCategory(category.id)}
-                >
-                    <span>{t(`icons:categories.${category.id}`, {defaultValue: category.id})}</span>
-                    <span className={b('category-count')}>{categoryCounts[category.id]}</span>
-                </button>
-            ))}
-        </React.Fragment>
-    );
+    const categoryButtons = categoryOptions.map(({id, count}) => (
+        <button
+            type="button"
+            key={id}
+            disabled={isSearching}
+            aria-pressed={activeCategoryId === id}
+            className={b('category', {selected: activeCategoryId === id})}
+            onClick={() => handleSelectCategory(id)}
+        >
+            <span>
+                {id === 'all' ? allIconsTitle : t(`icons:categories.${id}`, {defaultValue: id})}
+            </span>
+            <span className={b('category-count')}>{count}</span>
+        </button>
+    ));
 
     const searchStartContent = imageSearch.isActive ? (
         imageSearch.startContent
@@ -266,7 +254,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     <div className={b('catalog')}>
                         <aside className={b('categories')} aria-label={t('icons:categoriesLabel')}>
                             <h2 className={b('section-title')}>{t('icons:category')}</h2>
-                            <div className={b('category-list')}>{categoryOptions}</div>
+                            <div className={b('category-list')}>{categoryButtons}</div>
                         </aside>
                         <button
                             type="button"
@@ -311,7 +299,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     onClose={() => setIsCategorySheetOpen(false)}
                     title={t('icons:category')}
                 >
-                    <div className={b('category-sheet-list')}>{categoryOptions}</div>
+                    <div className={b('category-sheet-list')}>{categoryButtons}</div>
                 </Sheet>
             )}
 
