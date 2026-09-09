@@ -13,7 +13,7 @@ import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
 import {useImageSearch} from './ImageSearch';
-import {iconCategories, isIconInCategory} from './categories';
+import {categoryCounts, iconCategories, isIconInCategory} from './categories';
 import {allIcons} from './constants';
 import type {IconItem} from './types';
 
@@ -135,17 +135,6 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         );
     }, [filterString, imageSearchResults]);
 
-    const categoryCounts = React.useMemo(
-        () =>
-            Object.fromEntries(
-                iconCategories.map((category) => [
-                    category.id,
-                    allIcons.filter((icon) => isIconInCategory(icon, category.id)).length,
-                ]),
-            ),
-        [],
-    );
-
     const isSearching = Boolean(filterString) || imageSearch.isActive;
 
     const icons = React.useMemo(
@@ -160,7 +149,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     const allIconsTitle = t('icons:allIcons');
     const resultsTitle =
         !isSearching && selectedCategory
-            ? t(`icons:categories.${selectedCategory.id}`)
+            ? t(`icons:categories.${selectedCategory.id}`, {defaultValue: selectedCategory.id})
             : allIconsTitle;
     const resultsCount = icons.length;
 
@@ -198,7 +187,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                     })}
                     onClick={() => handleSelectCategory(category.id)}
                 >
-                    <span>{t(`icons:categories.${category.id}`)}</span>
+                    <span>{t(`icons:categories.${category.id}`, {defaultValue: category.id})}</span>
                     <span className={b('category-count')}>{categoryCounts[category.id]}</span>
                 </button>
             ))}

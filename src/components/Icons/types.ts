@@ -14,7 +14,3 @@ export type IconItem = {
     data: IconProps['data'];
     meta: IconMeta;
 };
-
-export type IconCategory = {
-    id: string;
-};
