@@ -315,7 +315,6 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 <Sheet
                     className={b('category-sheet')}
                     contentClassName={b('category-sheet-content')}
-                    allowHideOnContentScroll={false}
                     visible={isCategorySheetOpen}
                     onClose={() => setIsCategorySheetOpen(false)}
                     title={t('icons:category')}

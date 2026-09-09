@@ -217,9 +217,7 @@ $categories-sticky-offset: $search-row-height + $catalog-top-spacing;
     }
 
     &__category-sheet-list {
-        max-height: calc(100vh - 168px);
         padding-top: 8px;
-        overflow-y: auto;
 
         #{$block}__category {
             height: 44px;
