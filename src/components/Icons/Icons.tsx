@@ -43,6 +43,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     React.useEffect(() => {
         if (!isMobile) {
             searchInputRef.current?.focus();
+            setIsCategorySheetOpen(false);
         }
     }, [isMobile]);
 
