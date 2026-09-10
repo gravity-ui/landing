@@ -8,7 +8,7 @@ import type {ThemeCreatorState} from './types';
 export const FIGMA_GRAVITY_THEMER_LINK =
     'https://www.figma.com/community/plugin/1517138252177518072/gravity-themer';
 const UIKIT_STORYBOOK_LINK = 'https://preview.gravity-ui.com/uikit/';
-const STORYBOOK_THEME_QUERY_PARAM = 'theme';
+const STORYBOOK_THEME_HASH_PARAM = 'theme';
 
 export const APPLY_THEME_TEMPLATE = {
     en: `
@@ -96,10 +96,13 @@ export function createStorybookThemeLink(themeState: ThemeCreatorState) {
     ) as JsonTheme;
     const url = new URL(UIKIT_STORYBOOK_LINK);
 
-    url.searchParams.set(
-        STORYBOOK_THEME_QUERY_PARAM,
+    const hashParams = new URLSearchParams();
+
+    hashParams.set(
+        STORYBOOK_THEME_HASH_PARAM,
         compressToEncodedURIComponent(JSON.stringify(themeDiff)),
     );
+    url.hash = hashParams.toString();
 
     return url.toString();
 }
