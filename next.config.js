@@ -105,6 +105,37 @@ module.exports = withBundleAnalyzer({
 
         return config;
     },
+    async headers() {
+        return [
+            {
+                source: '/:path*',
+                headers: [
+                    {
+                        key: 'Strict-Transport-Security',
+                        // `preload` is deliberately omitted: submitting to the preload list is
+                        // effectively irreversible. Add it only after confirming every
+                        // subdomain is HTTPS-only and you intend to submit.
+                        value: 'max-age=31536000; includeSubDomains',
+                    },
+                    {key: 'X-Content-Type-Options', value: 'nosniff'},
+                    {
+                        key: 'X-Frame-Options',
+                        // Must stay SAMEORIGIN, not DENY: SandboxBlock embeds
+                        // `${window.location.origin}/sandbox/<libId>/<componentId>` in an iframe
+                        // on every component page, and DENY blocks same-origin framing too.
+                        value: 'SAMEORIGIN',
+                    },
+                    {key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin'},
+                    {
+                        key: 'Permissions-Policy',
+                        value: 'camera=(), microphone=(), geolocation=()',
+                    },
+                ],
+            },
+        ];
+    },
+    // Drops the `X-Powered-By: Next.js` version-disclosure header.
+    poweredByHeader: false,
     reactStrictMode: true,
     // The theme builder route was renamed /themer -> /themes; keep old
     // links and indexed URLs working with a permanent redirect.
