@@ -69,6 +69,15 @@ module.exports = withBundleAnalyzer({
             use: 'raw-loader',
         });
 
+        // @gravity-ui/uikit/styles/fonts.css is nothing but a remote Google Fonts @import, and
+        // blog-constructor / page-constructor import it transitively. Inter is self-hosted via
+        // next/font (src/fonts.ts), so stub it out to keep the render-blocking request from
+        // coming back through a dependency.
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            '@gravity-ui/uikit/styles/fonts.css': path.resolve(__dirname, 'src/noop.css'),
+        };
+
         if (!options.isServer) {
             config.resolve.fallback.fs = false;
         }

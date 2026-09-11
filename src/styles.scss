@@ -17,6 +17,16 @@ body.g-root,
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+    // uikit's own default is `"Inter", ...` by name, which used to resolve because a remote
+    // stylesheet loaded Inter globally. Inter is now self-hosted via next/font under a
+    // generated family name, so the default is repointed at the variable here to keep
+    // sandbox pages (excluded from the :not(.sandbox) block below) rendering as before.
+    // Doubled selector: uikit's own .g-root rule has equal specificity and wins on source
+    // order, which left sandbox pages with an unresolvable literal "Inter".
+    &#{&} {
+        --g-font-family-sans: var(--font-inter), 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    }
+
     &__global-loader {
         position: fixed;
         top: 0;
@@ -31,7 +41,7 @@ body.g-root,
     }
 
     &:not(.sandbox) {
-        --g-font-family-sans: 'Inter', 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
+        --g-font-family-sans: var(--font-inter), 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif;
         // --g-text-body-font-family: var(--g-font-family-sans);
         --g-text-accent-font-weight: 600;
 
