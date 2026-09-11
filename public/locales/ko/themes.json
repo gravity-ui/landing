@@ -55,6 +55,7 @@
   "export_theme_cancel_btn": "취소",
   "export_theme_apply_btn_css": "CSS로 저장",
   "export_theme_apply_btn_json": "JSON으로 저장",
+  "export_theme_open_storybook": "Storybook에서 열기",
   "export_theme_apply-theme-alert-title": "테마 적용 방법",
   "radius": "반경",
   "radius_regular": "일반",

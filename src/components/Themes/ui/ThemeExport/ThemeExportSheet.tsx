@@ -2,6 +2,7 @@ import {Button, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {type PropsWithChildren} from 'react';
 
+import {sendAnalyticsEvent} from '../../../../utils/analytics';
 import {block} from '../../../../utils/block';
 import {ThemeActionSheet} from '../ThemeActionSheet/ThemeActionSheet';
 
@@ -11,6 +12,7 @@ import type {ThemeExportProps} from './types';
 export interface ThemeExportSheetProps extends ThemeExportProps, PropsWithChildren {
     onSaveThemeCSSClick: () => void;
     onSaveThemeJSONClick: () => void;
+    storybookThemeLink: string;
 }
 
 const b = block('theme-export__sheet');
@@ -21,6 +23,7 @@ export const ThemeExportSheet = ({
     children,
     onSaveThemeCSSClick,
     onSaveThemeJSONClick,
+    storybookThemeLink,
 }: ThemeExportSheetProps) => {
     const {t} = useTranslation('themes');
 
@@ -49,6 +52,16 @@ export const ThemeExportSheet = ({
                         className={b('save-button')}
                     >
                         <Text>Save as CSS</Text>
+                    </Button>
+                    <Button
+                        size="xl"
+                        href={storybookThemeLink}
+                        target="_blank"
+                        view="outlined-action"
+                        className={b('save-button')}
+                        onClick={() => sendAnalyticsEvent('theme_export', 'storybook')}
+                    >
+                        <Text>{t('export_theme_open_storybook')}</Text>
                     </Button>
                 </React.Fragment>
             }
