@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/date-components@4.0.0`
+> Generated for `@gravity-ui/date-components@4.1.0`
 
 # @gravity-ui/date-components documentation
 
-Documentation for the **4.0.0** version of `@gravity-ui/date-components`.
+Documentation for the **4.1.0** version of `@gravity-ui/date-components`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/date-components/dist/docs/`).
@@ -42,11 +42,11 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/date-utils` | `^2.6.0` |
-| `@gravity-ui/uikit` | `^7.21.0` |
-| `@types/react` | `>=17.0.0` |
 | `react` | `>=17.0.0` |
 | `react-dom` | `>=17.0.0` |
+| `@types/react` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.21.0` |
+| `@gravity-ui/date-utils` | `^2.6.0` |
 
 ## Usage
 
@@ -137,13 +137,13 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 
 ## Components
 
-- [Calendar](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/Calendar.md) — Calendar is a flexible, user-friendly calendar component for React applications. It allows users to view, select, and manage dates with ease. Ideal for event scheduling, booking systems, and any application where date selection is essential. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
-- [DateField](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/DateField.md) — DateField component is a versatile and convenient input field specifically designed for date entry in React applications. With an intuitive interface and easy integration, it's perfect for any form that requires date or time input, such as event schedulers, booking systems, or data-driven reports. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
-- [DatePicker](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/DatePicker.md) — DatePicker is a sophisticated, lightweight, and fully customizable component designed to provide intuitive date picking functionality in your React applications. Built with user experience and ease of integration in mind, it fits seamlessly within forms, modals, or any UI element requiring date input. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
-- [RangeCalendar](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/RangeCalendar.md) — RangeCalendar is a powerful, flexible, and user-friendly UI component designed for selecting a range of dates. Built with React, it combines the functionality of a calendar and a date range picker, making it an ideal choice for applications that require users to input a start and end date. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
-- [RelativeDateField](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/RelativeDateField.md) — RelativeDateField component is used only for entering relative dates. It can't be used as "normal" DateField.
-- [RelativeDatePicker](https://unpkg.com/@gravity-ui/date-components@4.0.0/dist/docs/components/RelativeDatePicker.md) — RelativeDatePicker is almost the same component as DatePicker but it has ability to use relative dates.
+- [Calendar](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/Calendar.md) — Calendar is a flexible, user-friendly calendar component for React applications. It allows users to view, select, and manage dates with ease. Ideal for event scheduling, booking systems, and any application where date selection is essential. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DateField](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/DateField.md) — DateField component is a versatile and convenient input field specifically designed for date entry in React applications. With an intuitive interface and easy integration, it's perfect for any form that requires date or time input, such as event schedulers, booking systems, or data-driven reports. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DatePicker](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/DatePicker.md) — DatePicker is a sophisticated, lightweight, and fully customizable component designed to provide intuitive date picking functionality in your React applications. Built with user experience and ease of integration in mind, it fits seamlessly within forms, modals, or any UI element requiring date input. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RangeCalendar](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/RangeCalendar.md) — RangeCalendar is a powerful, flexible, and user-friendly UI component designed for selecting a range of dates. Built with React, it combines the functionality of a calendar and a date range picker, making it an ideal choice for applications that require users to input a start and end date. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RelativeDateField](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/RelativeDateField.md) — RelativeDateField component is used only for entering relative dates. It can't be used as "normal" DateField.
+- [RelativeDatePicker](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/RelativeDatePicker.md) — RelativeDatePicker is almost the same component as DatePicker but it has ability to use relative dates.
 
 ---
 
-> Docs for `@gravity-ui/date-components@4.0.0`. Versioned at: `https://gravity-ui.com/llms/date-components/4.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/date-components@4.1.0`. Versioned at: `https://gravity-ui.com/llms/date-components/4.1.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
