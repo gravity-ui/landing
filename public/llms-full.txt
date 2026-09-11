@@ -11179,7 +11179,7 @@ npm run generate
 
 ---
 
-> Generated for `@gravity-ui/dynamic-forms@5.23.0`
+> Generated for `@gravity-ui/dynamic-forms@5.27.1`
 
 # Dynamic Forms
 
@@ -11206,6 +11206,361 @@ Install these in the host project at a compatible version:
 | `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `react-final-form` | `^6.5.3` |
 | `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.27.1`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.27.1/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.27.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.27.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.27.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.26.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.26.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.26.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.25.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.25.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.25.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.24.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+```jsx
+import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
+
+// To embed in a final-form
+<DynamicField name={name} spec={spec} config={config} />;
+
+import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
+
+// To get an overview of the values
+<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
+```
+
+### I18N
+
+Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
+
+```js
+// index.js
+
+import {configure, Lang} from '@gravity-ui/dynamic-forms';
+
+configure({lang: Lang.Ru});
+```
+
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/dynamic-forms)
+
+---
+
+> Docs for `@gravity-ui/dynamic-forms@5.24.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.24.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/dynamic-forms@5.23.0`
+
+# Dynamic Forms
+
+> Library for rendering neat and functional react forms described by JSON schema
+>
+> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/dynamic-forms
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `final-form` | `^4.20.2` |
+| `react-final-form` | `^6.5.3` |
+| `@gravity-ui/uikit` | `^7.0.0` |
 
 ## Usage
 
@@ -11605,290 +11960,6 @@ configure({lang: Lang.Ru});
 
 ---
 
-> Generated for `@gravity-ui/dynamic-forms@5.17.1`
-
-# Dynamic Forms
-
-> Library for rendering neat and functional react forms described by JSON schema
->
-> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save-dev @gravity-ui/dynamic-forms
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `final-form` | `^4.20.2` |
-| `react-final-form` | `^6.5.3` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dynamic-forms)
-
----
-
-> Docs for `@gravity-ui/dynamic-forms@5.17.1`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.17.1/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/dynamic-forms@5.16.0`
-
-# Dynamic Forms
-
-> Library for rendering neat and functional react forms described by JSON schema
->
-> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save-dev @gravity-ui/dynamic-forms
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `final-form` | `^4.20.2` |
-| `react-final-form` | `^6.5.3` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dynamic-forms)
-
----
-
-> Docs for `@gravity-ui/dynamic-forms@5.16.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.16.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/dynamic-forms@5.15.0`
-
-# Dynamic Forms
-
-> Library for rendering neat and functional react forms described by JSON schema
->
-> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save-dev @gravity-ui/dynamic-forms
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `final-form` | `^4.20.2` |
-| `react-final-form` | `^6.5.3` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dynamic-forms)
-
----
-
-> Docs for `@gravity-ui/dynamic-forms@5.15.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.15.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/dynamic-forms@5.14.0`
-
-# Dynamic Forms
-
-> Library for rendering neat and functional react forms described by JSON schema
->
-> **npm:** `@gravity-ui/dynamic-forms` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save-dev @gravity-ui/dynamic-forms
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-is` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `final-form` | `^4.20.2` |
-| `react-final-form` | `^6.5.3` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/dynamic-forms/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/dynamic-forms)
-
----
-
-> Docs for `@gravity-ui/dynamic-forms@5.14.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/5.14.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/dynamic-forms@4.17.0`
 
 # Dynamic Forms
@@ -11956,6 +12027,428 @@ configure({lang: Lang.Ru});
 ---
 
 > Docs for `@gravity-ui/dynamic-forms@4.17.0`. Versioned at: `https://gravity-ui.com/llms/dynamic-forms/4.17.0/llms.txt` (exact), `https://gravity-ui.com/llms/dynamic-forms/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/dynamic-forms/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/page-constructor@8.23.2`
+
+# @gravity-ui/page-constructor documentation
+
+Documentation for the **8.23.2** version of `@gravity-ui/page-constructor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/page-constructor/build/docs/`).
+
+## For AI agents
+
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
+## Install
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
+## Usage
+
+First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
+
+Install the required dependencies:
+
+```shell
+npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
+```
+
+Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+
+const App = () => {
+  const content = {
+    blocks: [
+      {
+        type: 'header-block',
+        title: 'Hello world',
+        background: {color: '#f0f0f0'},
+        description:
+          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+      },
+    ],
+  };
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
+
+If your server is a separate application, then you need to install page-constructor:
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
+
+```ts
+const express = require('express');
+const app = express();
+const {contentTransformer} = require('@gravity-ui/page-constructor/server');
+
+const content = {
+  blocks: [
+    {
+      type: 'header-block',
+      title: 'Hello world',
+      background: {color: '#f0f0f0'},
+      description:
+        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+    },
+  ],
+};
+
+app.get('/content', (req, res) => {
+  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
+});
+
+app.listen(3000);
+```
+
+On the client, add an endpoint call to receive content:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+import {useEffect, useState} from 'react';
+
+const App = () => {
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
+      setContent(response.content);
+    })();
+  }, []);
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+### Ready-made template
+
+To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
+
+### Static site builder
+
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
+
+## Guides
+
+- [Data preparation](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/guides/data-preparation.md) — This chapter provides documentaion for server utilities for transforming content, including Yandex Flavored Markdown (YFM) to HTML conversion and text processing. Key features include:
+- [Подготовка данных](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/guides/data-preparation-ru.md) — Документацию по серверным утилитам для преобразования контента, включая конвертацию Yandex Flavored Markdown (YFM) в HTML и обработку текста. Основные возможности:
+
+## Blocks
+
+- [Banner](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Banner.md) — Renders a compact promotional card with a title, subtitle, an optional background image or color, and a single call-to-action button. Use it to highlight a feature, announce a release, or drive traffic to a landing page from anywhere in the page flow.
+- [CardLayout](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/CardLayout.md) — Renders a responsive grid of arbitrary cards (children) with an optional header and a decorative background image. Use it whenever you need to lay out a homogeneous set of cards — basic, image, background, price, or layout-item — in a row that adapts to the viewport.
+- [Companies](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Companies.md) — Renders a heading with a logo strip — a set of responsive images (desktop / tablet / mobile) shown beneath an optional title and description. Use it for "trusted by" or "powered by" logo rows that must adapt per device and theme.
+- [ContentLayout](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/ContentLayout.md) — Renders a single-column content section (title, body text, optional list, links, and buttons) paired with an optional list of downloadable files and a background. Use it for documentation-style sections, terms, descriptions, or anywhere a focused block of text with file attachments is needed.
+- [ExtendedFeatures](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/ExtendedFeatures.md) — Renders a responsive grid of feature cards, each with an icon, title, text, an optional label (New / Preview), and an optional link. Use it to present a list of product features, capabilities, or benefits in a compact, icon-driven layout.
+- [FilterBlock](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/FilterBlock.md) — Renders a set of cards grouped by tags, with a row of toggle buttons that lets the visitor filter the visible cards by tag. Use it to present a catalog of cards (articles, features, products) that the user can narrow down without leaving the page.
+- [FoldableList](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/FoldableList.md) — Renders a two-column block: a content panel on the left (title, text, links, buttons) and a list of collapsible items on the right, each with its own title, YFM text, and optional link. Use it for FAQ-style or specification pages where each row expands to reveal more detail.
+- [Footer](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Footer.md) — A configurable page footer assembled from optional floors: navigation columns, contacts (social icons), disclaimer, copyright (legal links, language switcher, logo), and an attribution strip.
+- [Form](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Form.md) — A two-column block that renders a third-party form (Yandex Forms or HubSpot) alongside optional YFM text content, with a configurable layout direction and background.
+- [Header](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Header.md) — Renders a full-width page header with a title, optional overtitle/description, call-to-action buttons, breadcrumbs, and an optional media asset (image, video, or video iframe) positioned to the right or centered. Use it as the primary hero/landing block at the top of a page.
+- [HeaderSlider](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/HeaderSlider.md) — Renders a carousel of full-bleed header-block slides — each slide carries its own title, description, buttons, and background media. Use it when the top of the page needs to rotate multiple equally important campaigns or announcements instead of a single hero.
+- [Hero](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Hero.md) — Renders a modern, content-driven hero block: an overtitle, a rich content column (title, body text, list, links, buttons) and a media column (image/video/iframe) that adapts to its intrinsic aspect ratio. Use it as the primary landing block when you want more layout flexibility than the classic Header provides.
+- [Icons](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Icons.md) — Renders a responsive grid of small icon items, each consisting of an image and a caption. Items can optionally be wrapped in links, turning the grid into a navigable set of icon links.
+- [Info](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Info.md) — Renders a two-column information section: a left content column and a right content column, each with its own title, text, lists, buttons, and links, placed inside an optional themed background container.
+- [Map](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Map.md) — A media-and-content block that embeds an interactive Yandex Map inside a card, paired with an optional title, description, links, and buttons.
+- [Media](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Media.md) — Renders a two-column layout that pairs a content column (title, body, list, links, button) with a media column (image, video, YouTube, iframe, or DataLens embed). Use it for feature or explainer sections where text and a rich media asset need to sit side by side.
+- [PromoFeaturesBlock](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/PromoFeaturesBlock.md) — Renders a masonry layout of promotional feature cards, each pairing a title, YFM text, and an optional media asset, displayed against a full-width background. Use it for marketing sections that showcase several value propositions with rich imagery in a non-uniform grid.
+- [Questions](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Questions.md) — Renders an FAQ block: a left content panel (title, text, links, buttons) and a list of expandable question/answer rows on the right. Automatically emits FAQPage JSON-LD microdata so search engines can index the answers as rich results.
+- [Share](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Share.md) — Renders a row of social-network share buttons that share the current page URL.
+- [Slider](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Slider.md) — A carousel block that renders any number of child cards as swipeable slides, with optional title, description, dots, arrows, autoplay, and per-breakpoint slide counts. Built on top of Swiper.
+- [SliderOld](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/SliderOld.md)
+- [Table](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Table.md) — Renders a title followed by a comparison-style table whose cells are plain strings or numbers. A legend column can be marked with disk or tick markers, and an optional legend list explains the marked columns.
+- [Tabs](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/blocks/Tabs.md) — Renders a set of tab buttons that switch between rich content panels. Each tab panel pairs a content column (title, text, lists, buttons, links) with an optional media column (image, video, YouTube, iframe, DataLens), with control over column order, sizing, and border treatment.
+
+## Sub-blocks
+
+- [BackgroundCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/BackgroundCard.md) — A card that renders text content (title, text, links, buttons, or a content list) over a decorative background image or solid color. Useful for promotional cards inside a card layout.
+- [BannerCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/BannerCard.md) — A compact banner card with a title, optional subtitle, a single call-to-action button, and a decorative background image. Designed to draw attention inside a card layout.
+- [BasicCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/BasicCard.md) — A general-purpose card with an optional icon (image or Gravity UI icon) and text content (title, text, links, buttons, or a content list). The simplest and most versatile card.
+- [Content](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/Content.md) — A text content block rendering a title, body text, additional info, links, buttons, and/or an icon content list. Used on its own as the textual portion of a content layout.
+- [Divider](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/Divider.md) — A spacing/separator element that adds vertical space between sibling items, optionally drawing a horizontal line. Useful for tuning rhythm inside a layout.
+- [HubspotForm](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/HubspotForm.md) — Embeds a HubSpot form inside a page. Loads the HubSpot scripts on demand and renders the form into a container; emits analytics events on submit and supports default field values and form event handlers.
+- [ImageCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/ImageCard.md) — A card pairing a foreground image with text content (title, text, links, buttons, or a content list). The image and content can be ordered in either direction.
+- [LayoutItem](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/LayoutItem.md) — Renders a two-part card: a media area (image, video, YouTube, etc.) stacked above a text content area with optional title, body, buttons, links, list, and meta info. Used as the primary content unit inside card-grid blocks.
+- [MediaCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/MediaCard.md) — Wraps a single media element (image, image slider, video, YouTube, iframe, or DataLens) inside a card with an optional border. Pure media card — no text content.
+- [PriceCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/PriceCard.md) — Renders a pricing card: a title, a price (with optional period and details), a description, a checklist of features, and optional buttons and links. Typically placed in a grid to compare plans.
+- [PriceDetailed](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/PriceDetailed.md)
+- [Quote](https://unpkg.com/@gravity-ui/page-constructor@8.23.2/build/docs/sub-blocks/Quote.md) — Renders a customer testimonial / quote card: a logo, the quote body, an optional author (name + avatar + description), and an optional CTA button. Paired with a large image on the side.
+
+---
+
+> Docs for `@gravity-ui/page-constructor@8.23.2`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.23.2/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/page-constructor@8.23.1`
+
+# @gravity-ui/page-constructor documentation
+
+Documentation for the **8.23.1** version of `@gravity-ui/page-constructor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/page-constructor/build/docs/`).
+
+## For AI agents
+
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
+## Install
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
+## Usage
+
+First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
+
+Install the required dependencies:
+
+```shell
+npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
+```
+
+Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+
+const App = () => {
+  const content = {
+    blocks: [
+      {
+        type: 'header-block',
+        title: 'Hello world',
+        background: {color: '#f0f0f0'},
+        description:
+          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+      },
+    ],
+  };
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
+
+If your server is a separate application, then you need to install page-constructor:
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
+
+```ts
+const express = require('express');
+const app = express();
+const {contentTransformer} = require('@gravity-ui/page-constructor/server');
+
+const content = {
+  blocks: [
+    {
+      type: 'header-block',
+      title: 'Hello world',
+      background: {color: '#f0f0f0'},
+      description:
+        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+    },
+  ],
+};
+
+app.get('/content', (req, res) => {
+  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
+});
+
+app.listen(3000);
+```
+
+On the client, add an endpoint call to receive content:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+import {useEffect, useState} from 'react';
+
+const App = () => {
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
+      setContent(response.content);
+    })();
+  }, []);
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+### Ready-made template
+
+To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
+
+### Static site builder
+
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
+
+## Guides
+
+- [Data preparation](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/guides/data-preparation.md) — This chapter provides documentaion for server utilities for transforming content, including Yandex Flavored Markdown (YFM) to HTML conversion and text processing. Key features include:
+- [Подготовка данных](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/guides/data-preparation-ru.md) — Документацию по серверным утилитам для преобразования контента, включая конвертацию Yandex Flavored Markdown (YFM) в HTML и обработку текста. Основные возможности:
+
+## Blocks
+
+- [Banner](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Banner.md) — Renders a compact promotional card with a title, subtitle, an optional background image or color, and a single call-to-action button. Use it to highlight a feature, announce a release, or drive traffic to a landing page from anywhere in the page flow.
+- [CardLayout](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/CardLayout.md) — Renders a responsive grid of arbitrary cards (children) with an optional header and a decorative background image. Use it whenever you need to lay out a homogeneous set of cards — basic, image, background, price, or layout-item — in a row that adapts to the viewport.
+- [Companies](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Companies.md) — Renders a heading with a logo strip — a set of responsive images (desktop / tablet / mobile) shown beneath an optional title and description. Use it for "trusted by" or "powered by" logo rows that must adapt per device and theme.
+- [ContentLayout](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/ContentLayout.md) — Renders a single-column content section (title, body text, optional list, links, and buttons) paired with an optional list of downloadable files and a background. Use it for documentation-style sections, terms, descriptions, or anywhere a focused block of text with file attachments is needed.
+- [ExtendedFeatures](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/ExtendedFeatures.md) — Renders a responsive grid of feature cards, each with an icon, title, text, an optional label (New / Preview), and an optional link. Use it to present a list of product features, capabilities, or benefits in a compact, icon-driven layout.
+- [FilterBlock](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/FilterBlock.md) — Renders a set of cards grouped by tags, with a row of toggle buttons that lets the visitor filter the visible cards by tag. Use it to present a catalog of cards (articles, features, products) that the user can narrow down without leaving the page.
+- [FoldableList](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/FoldableList.md) — Renders a two-column block: a content panel on the left (title, text, links, buttons) and a list of collapsible items on the right, each with its own title, YFM text, and optional link. Use it for FAQ-style or specification pages where each row expands to reveal more detail.
+- [Footer](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Footer.md) — A configurable page footer assembled from optional floors: navigation columns, contacts (social icons), disclaimer, copyright (legal links, language switcher, logo), and an attribution strip.
+- [Form](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Form.md) — A two-column block that renders a third-party form (Yandex Forms or HubSpot) alongside optional YFM text content, with a configurable layout direction and background.
+- [Header](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Header.md) — Renders a full-width page header with a title, optional overtitle/description, call-to-action buttons, breadcrumbs, and an optional media asset (image, video, or video iframe) positioned to the right or centered. Use it as the primary hero/landing block at the top of a page.
+- [HeaderSlider](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/HeaderSlider.md) — Renders a carousel of full-bleed header-block slides — each slide carries its own title, description, buttons, and background media. Use it when the top of the page needs to rotate multiple equally important campaigns or announcements instead of a single hero.
+- [Hero](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Hero.md) — Renders a modern, content-driven hero block: an overtitle, a rich content column (title, body text, list, links, buttons) and a media column (image/video/iframe) that adapts to its intrinsic aspect ratio. Use it as the primary landing block when you want more layout flexibility than the classic Header provides.
+- [Icons](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Icons.md) — Renders a responsive grid of small icon items, each consisting of an image and a caption. Items can optionally be wrapped in links, turning the grid into a navigable set of icon links.
+- [Info](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Info.md) — Renders a two-column information section: a left content column and a right content column, each with its own title, text, lists, buttons, and links, placed inside an optional themed background container.
+- [Map](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Map.md) — A media-and-content block that embeds an interactive Yandex Map inside a card, paired with an optional title, description, links, and buttons.
+- [Media](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Media.md) — Renders a two-column layout that pairs a content column (title, body, list, links, button) with a media column (image, video, YouTube, iframe, or DataLens embed). Use it for feature or explainer sections where text and a rich media asset need to sit side by side.
+- [PromoFeaturesBlock](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/PromoFeaturesBlock.md) — Renders a masonry layout of promotional feature cards, each pairing a title, YFM text, and an optional media asset, displayed against a full-width background. Use it for marketing sections that showcase several value propositions with rich imagery in a non-uniform grid.
+- [Questions](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Questions.md) — Renders an FAQ block: a left content panel (title, text, links, buttons) and a list of expandable question/answer rows on the right. Automatically emits FAQPage JSON-LD microdata so search engines can index the answers as rich results.
+- [Share](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Share.md) — Renders a row of social-network share buttons that share the current page URL.
+- [Slider](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Slider.md) — A carousel block that renders any number of child cards as swipeable slides, with optional title, description, dots, arrows, autoplay, and per-breakpoint slide counts. Built on top of Swiper.
+- [SliderOld](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/SliderOld.md)
+- [Table](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Table.md) — Renders a title followed by a comparison-style table whose cells are plain strings or numbers. A legend column can be marked with disk or tick markers, and an optional legend list explains the marked columns.
+- [Tabs](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/blocks/Tabs.md) — Renders a set of tab buttons that switch between rich content panels. Each tab panel pairs a content column (title, text, lists, buttons, links) with an optional media column (image, video, YouTube, iframe, DataLens), with control over column order, sizing, and border treatment.
+
+## Sub-blocks
+
+- [BackgroundCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/BackgroundCard.md) — A card that renders text content (title, text, links, buttons, or a content list) over a decorative background image or solid color. Useful for promotional cards inside a card layout.
+- [BannerCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/BannerCard.md) — A compact banner card with a title, optional subtitle, a single call-to-action button, and a decorative background image. Designed to draw attention inside a card layout.
+- [BasicCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/BasicCard.md) — A general-purpose card with an optional icon (image or Gravity UI icon) and text content (title, text, links, buttons, or a content list). The simplest and most versatile card.
+- [Content](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/Content.md) — A text content block rendering a title, body text, additional info, links, buttons, and/or an icon content list. Used on its own as the textual portion of a content layout.
+- [Divider](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/Divider.md) — A spacing/separator element that adds vertical space between sibling items, optionally drawing a horizontal line. Useful for tuning rhythm inside a layout.
+- [HubspotForm](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/HubspotForm.md) — Embeds a HubSpot form inside a page. Loads the HubSpot scripts on demand and renders the form into a container; emits analytics events on submit and supports default field values and form event handlers.
+- [ImageCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/ImageCard.md) — A card pairing a foreground image with text content (title, text, links, buttons, or a content list). The image and content can be ordered in either direction.
+- [LayoutItem](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/LayoutItem.md) — Renders a two-part card: a media area (image, video, YouTube, etc.) stacked above a text content area with optional title, body, buttons, links, list, and meta info. Used as the primary content unit inside card-grid blocks.
+- [MediaCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/MediaCard.md) — Wraps a single media element (image, image slider, video, YouTube, iframe, or DataLens) inside a card with an optional border. Pure media card — no text content.
+- [PriceCard](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/PriceCard.md) — Renders a pricing card: a title, a price (with optional period and details), a description, a checklist of features, and optional buttons and links. Typically placed in a grid to compare plans.
+- [PriceDetailed](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/PriceDetailed.md)
+- [Quote](https://unpkg.com/@gravity-ui/page-constructor@8.23.1/build/docs/sub-blocks/Quote.md) — Renders a customer testimonial / quote card: a logo, the quote body, an optional author (name + avatar + description), and an optional CTA button. Paired with a large image on the side.
+
+---
+
+> Docs for `@gravity-ui/page-constructor@8.23.1`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.23.1/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -16143,11 +16636,11 @@ export default function App() {
 
 ---
 
-> Generated for `@gravity-ui/table@1.20.2`
+> Generated for `@gravity-ui/table@1.21.1`
 
 # @gravity-ui/table documentation
 
-Documentation for the **1.20.2** version of `@gravity-ui/table`.
+Documentation for the **1.21.1** version of `@gravity-ui/table`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
@@ -16605,6 +17098,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -16788,7 +17285,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -16920,29 +17456,29 @@ Learn more about the table and the column resizing properties in the react-table
 
 ## Guides
 
-- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.20.2/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
-- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.20.2/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.21.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.21.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
 
 ## Components
 
-- [BaseTable](https://unpkg.com/@gravity-ui/table@1.20.2/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.21.1/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
 
 ## Hooks
 
-- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.20.2/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.21.1/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
 
 ---
 
-> Docs for `@gravity-ui/table@1.20.2`. Versioned at: `https://gravity-ui.com/llms/table/1.20.2/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/table@1.21.1`. Versioned at: `https://gravity-ui.com/llms/table/1.21.1/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
 
-> Generated for `@gravity-ui/table@1.20.1`
+> Generated for `@gravity-ui/table@1.21.0`
 
 # @gravity-ui/table documentation
 
-Documentation for the **1.20.1** version of `@gravity-ui/table`.
+Documentation for the **1.21.0** version of `@gravity-ui/table`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
@@ -17400,6 +17936,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -17583,7 +18123,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -17715,20 +18294,20 @@ Learn more about the table and the column resizing properties in the react-table
 
 ## Guides
 
-- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.20.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
-- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.20.1/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.21.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.21.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
 
 ## Components
 
-- [BaseTable](https://unpkg.com/@gravity-ui/table@1.20.1/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.21.0/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
 
 ## Hooks
 
-- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.20.1/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.21.0/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
 
 ---
 
-> Docs for `@gravity-ui/table@1.20.1`. Versioned at: `https://gravity-ui.com/llms/table/1.20.1/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/table@1.21.0`. Versioned at: `https://gravity-ui.com/llms/table/1.21.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -21189,6 +21768,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -21372,7 +21955,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -21975,6 +22597,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -22158,7 +22784,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -22761,6 +23426,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -22944,7 +23613,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -23547,6 +24255,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -23730,7 +24442,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -24332,6 +25083,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -24515,7 +25270,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -24676,791 +25470,6 @@ Learn more about the table and the column resizing properties in the react-table
 ---
 
 > Docs for `@gravity-ui/table@1.11.0`. Versioned at: `https://gravity-ui.com/llms/table/1.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/table@1.10.0`
-
-# Table
-
-> A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
->
-> **npm:** `@gravity-ui/table` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install --save @gravity-ui/table
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0` |
-| `@dnd-kit/core` | `^6.0.0` |
-| `@gravity-ui/i18n` | `^1.0.0` |
-| `@dnd-kit/sortable` | `^8.0.0 || ^9.0.0 || ^10.0.0` |
-| `@gravity-ui/icons` | `^2.0.0` |
-| `@gravity-ui/uikit` | `^6.0.0 || ^7.0.0` |
-
-## Usage
-
-```tsx
-import React from 'react';
-import {Table, useTable} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-interface Person {
-  id: string;
-  name: string;
-  age: number;
-}
-
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const data: Person[] = [
-  {id: 'name', name: 'John', age: 23},
-  {id: 'age', name: 'Michael', age: 27},
-];
-
-const BasicExample = () => {
-  const table = useTable({
-    columns,
-    data,
-  });
-
-  return <Table table={table} />;
-};
-```
-
-### Components
-
-There are two Table components that you can use:
-
-- `BaseTable` - a component with basic styles only;
-- `Table` - a component with Gravity UI based styles.
-
-#### Row selection
-
-```tsx
-import {selectionColumn} from '@gravity-ui/table';
-import type {RowSelectionState} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  selectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const RowSelectionExample = () => {
-  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    enableMultiRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
-
-#### Custom Ranged Selection Column
-
-The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
-
-```tsx
-import React, {type ChangeEvent, useCallback, useState} from 'react';
-
-import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
-import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
-import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
-
-type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
-  cellContext: CellContext<unknown, unknown>;
-};
-
-const CustomRangedSelectionCheckbox = ({
-  className,
-  cellContext,
-  ...restProps
-}: CustomRangedSelectionCheckboxProps) => {
-  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
-
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      rowToggleRangedSelectionHandler(event);
-    },
-    [rowToggleRangedSelectionHandler],
-  );
-
-  return <Checkbox {...restProps} onChange={handleChange} />;
-};
-
-const customSelectionColumn: ColumnDef<unknown> = {
-  id: '_select',
-  header: ({table}) => (
-    <Checkbox
-      size="l"
-      checked={table.getIsAllRowsSelected()}
-      indeterminate={table.getIsSomeRowsSelected()}
-      onChange={table.getToggleAllRowsSelectedHandler()}
-    />
-  ),
-  cell: (cellContext) => (
-    <CustomRangedSelectionCheckbox
-      size="l"
-      checked={cellContext.row.getIsSelected()}
-      disabled={!cellContext.row.getCanSelect()}
-      indeterminate={cellContext.row.getIsSomeSelected()}
-      cellContext={cellContext}
-    />
-  ),
-  size: 41,
-  maxSize: 41,
-  minSize: 41,
-  enableResizing: false,
-  enableSorting: false,
-};
-
-const columns: ColumnDef<Person>[] = [
-  customSelectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const RowRangedSelectionExample = () => {
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableRowSelection: true,
-    enableMultiRowSelection: true,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      rowSelection,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-There is also a `RangedSelectionCheckbox` component, which internally uses the hook and accepts a `CellContext` instance as a prop. This component provides a shorthand for adding ranged selection functionality to custom selection columns.
-
-```tsx
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
-
-export const selectionColumn: ColumnDef<unknown> = {
-  id: '_select',
-  header: ({table}) => (
-    <SelectionCheckbox
-      checked={table.getIsAllRowsSelected()}
-      disabled={!table.options.enableRowSelection}
-      indeterminate={table.getIsSomeRowsSelected()}
-      onChange={table.getToggleAllRowsSelectedHandler()}
-    />
-  ),
-  cell: (cellContext) => (
-    <RangedSelectionCheckbox
-      checked={cellContext.row.getIsSelected()}
-      disabled={!cellContext.row.getCanSelect()}
-      indeterminate={cellContext.row.getIsSomeSelected()}
-      cellContext={cellContext}
-    />
-  ),
-  meta: {
-    hideInSettings: true,
-  },
-  size: 32,
-  minSize: 32,
-};
-```
-
-By default, the selection column generated with `selectionColumn` includes ranged selection functionality.
-
-```tsx
-import {selectionColumn} from '@gravity-ui/table';
-import type {ColumnDef} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  selectionColumn as ColumnDef<Person>,
-  // ...other columns
-];
-```
-
-**Note**: If the table contains nested rows, range selection will not work. At the moment, this is considered undefined behavior.
-
-#### Sorting
-
-Learn about the column properties in the react-table [docs](https://tanstack.com/table/v8/docs/guide/sorting)
-
-```tsx
-import type {SortingState} from '@gravity-ui/table/tanstack';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const SortingExample = () => {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-
-  // Your column MUST have accessorFn for sorting to be enabled
-
-  const table = useTable({
-    columns,
-    data,
-    enableSorting: true,
-    getRowId: (item) => item.id,
-    onSortingChange: setSorting,
-    state: {
-      sorting,
-    },
-  });
-
-  return <Table table={table} />;
-};
-```
-
-If you want to sort the elements manually pass `manualSorting` property:
-
-```tsx
-const table = useTable({
-  // ...
-  manualSorting: true,
-});
-```
-
-#### Grouping
-
-```tsx
-import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
-
-interface Person {
-  id: string;
-  name: string;
-  age: number;
-}
-
-interface PersonGroup {
-  id: string;
-  name: string;
-  items: Person[];
-}
-
-type Item = PersonGroup | Person;
-
-const columns: ColumnDef<Item>[] = [
-  {accessorKey: 'name', header: 'Name', size: 200},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const data: Item[] = [
-  {
-    id: 'friends',
-    name: 'Friends',
-    items: [
-      {id: 'nick', name: 'Nick', age: 25},
-      {id: 'tom', name: 'Tom', age: 21},
-    ],
-  },
-  {
-    id: 'relatives',
-    name: 'Relatives',
-    items: [
-      {id: 'john', name: 'John', age: 23},
-      {id: 'michael', name: 'Michael', age: 27},
-    ],
-  },
-];
-
-const getGroupTitle = (row: Row<Item>) => row.getValue<string>('name');
-
-const GroupingExample = () => {
-  const [expanded, setExpanded] = React.useState<ExpandedState>({});
-
-  const table = useTable({
-    columns,
-    data,
-    enableExpanding: true,
-    getSubRows: (item) => ('items' in item ? item.items : undefined),
-    onExpandedChange: setExpanded,
-    state: {
-      expanded,
-    },
-  });
-
-  return <Table table={table} getGroupTitle={getGroupTitle} />;
-};
-```
-
-To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
-
-To enable nesting styles, pass `withNestingStyles = true` in the column configuration.
-
-Nesting indicators can be disabled by passing `showTreeDepthIndicators = false`.
-
-To add a control for expanding/collapsing rows, wrap the cell content with the `TreeExpandableCell` component or with your similar custom component:
-
-```tsx
-import {TreeExpandableCell} from '@gravity-ui/table';
-
-const columns: ColumnDef<Item>[] = [
-  {
-    accessorKey: 'name',
-    header: 'Name',
-    size: 200,
-    showTreeDepthIndicators: false,
-    withNestingStyles: true,
-    cell: ({row, info}) => (
-      <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
-    ),
-  },
-  // ...other columns
-];
-```
-
-#### Reordering
-
-```tsx
-import type {ReorderingProviderProps} from '@gravity-ui/table';
-import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  dragHandleColumn,
-  // ...other columns
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const ReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const handleReorder = React.useCallback<
-    NonNullable<ReorderingProviderProps<Person>['onReorder']>
-  >(
-    ({
-      draggedItemKey,
-      targetItemKey,
-      baseItemKey,
-      baseNextItemKey,
-      enableNesting,
-      nextChild,
-      pullFromParent,
-    }) => {
-      // ...
-    },
-    [],
-  );
-
-  return (
-    <ReorderingProvider table={table} onReorder={handleReorder}>
-      <Table table={table} />
-    </ReorderingProvider>
-  );
-};
-```
-
-#### Reordering without a drag handle
-
-Set `dragWithoutHandle` to use the whole row as the drag activator and omit
-`dragHandleColumn` from the column definitions:
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
-];
-
-return (
-  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
-    <Table table={table} />
-  </ReorderingProvider>
-);
-```
-
-The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
-working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
-`onPointerDown` handler.
-
-#### Column reordering
-
-Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
-
-```tsx
-import {ColumnReorderingProvider} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
-];
-
-const ColumnReorderingExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  return (
-    <ColumnReorderingProvider table={table}>
-      <Table table={table} />
-    </ColumnReorderingProvider>
-  );
-};
-```
-
-### Row and column reordering together
-
-Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
-
-```tsx
-import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
-import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  dragHandleColumn,
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
-];
-
-const CombinedReorderingExample = () => {
-  const [data, setData] = React.useState(initialData);
-  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
-
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-    state: {columnOrder},
-    onColumnOrderChange: setColumnOrder,
-  });
-
-  const handleRowReorder = React.useCallback<
-    NonNullable<ReorderingProviderProps<Person>['onReorder']>
-  >(({draggedItemKey, baseItemKey}) => {
-    // update data array
-  }, []);
-
-  const handleColumnReorder = React.useCallback<
-    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
-  >(({columnOrder}) => {
-    setColumnOrder(columnOrder);
-  }, []);
-
-  return (
-    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
-      <ReorderingProvider table={table} onReorder={handleRowReorder}>
-        <Table table={table} />
-      </ReorderingProvider>
-    </ColumnReorderingProvider>
-  );
-};
-```
-
-If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
-
-```tsx
-const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
-
-const table = useTable({
-  columns,
-  data,
-  state: {columnOrder},
-  onColumnOrderChange: setColumnOrder,
-});
-
-return (
-  <ColumnReorderingProvider
-    table={table}
-    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
-  >
-    <Table table={table} />
-  </ColumnReorderingProvider>
-);
-```
-
-CSS API:
-
-| CSS variable                                 | Default                       | Description                      |
-| -------------------------------------------- | ----------------------------- | -------------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color of the drop insertion line |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | Width of the drop insertion line |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacity of the dragged column    |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | Drag preview background          |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Drag preview box-shadow          |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Drag preview border radius       |
-
-To forbid reordering a specific column, set `enableColumnReordering: false` in its column definition. Placeholder (grouped) columns are not draggable. Use `activationDistance` (default `8`) to tune how far the pointer must move before a drag starts, which keeps header clicks (like sorting) working.
-
-Pinned columns can be reordered too, but only among themselves: a column can be moved within the left-pinned group, the right-pinned group, or the center (non-pinned) group — it never crosses a pin boundary by dragging.
-
-```tsx
-<ColumnReorderingProvider
-  table={table}
-  onReorder={({columnOrder, columnPinning, pinned}) => {
-    if (pinned) {
-      setColumnPinning(columnPinning);
-    } else {
-      setColumnOrder(columnOrder);
-    }
-  }}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
-
-While dragging:
-
-- a floating preview of the column (its header plus the first rows) follows the pointer in a drag overlay;
-- the dragged column becomes semi-transparent;
-- a blue insertion line is drawn where the column will be dropped;
-
-```tsx
-<ColumnReorderingProvider
-  table={table}
-  autoScroll
-  dragOverlayRowCount={10}
-  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
->
-  <Table table={table} />
-</ColumnReorderingProvider>
-```
-
-#### Virtualization
-
-Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
-
-```tsx
-import {useRowVirtualizer} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const VirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  const rowVirtualizer = useRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    getScrollElement: () => containerRef.current,
-  });
-
-  return (
-    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
-      <Table table={table} rowVirtualizer={rowVirtualizer} />
-    </div>
-  );
-};
-```
-
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
-
-```tsx
-import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
-
-// ...
-
-const tableRef = React.useRef<HTMLTableElement>(null);
-
-const rowVirtualizer = useRowVirtualizer({
-  // ...
-  rangeExtractor: getVirtualRowRangeExtractor(tableRef.current),
-});
-
-return (
-  <TableWithReordering
-    ref={tableRef}
-    table={table}
-    rowVirtualizer={rowVirtualizer}
-    onReorder={handleReorder}
-  />
-);
-```
-
-#### Window virtualization
-
-Use if you want to use window as the scroll element
-
-```tsx
-import {useWindowRowVirtualizer} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const WindowVirtualizationExample = () => {
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-  });
-
-  const bodyRef = React.useRef<HTMLTableSectionElement>(null);
-
-  const rowVirtualizer = useWindowRowVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 20,
-    overscan: 5,
-    scrollMargin: bodyRef.current?.offsetTop ?? 0,
-  });
-
-  return <Table table={table} rowVirtualizer={rowVirtualizer} bodyRef={bodyRef} />;
-};
-```
-
-#### Resizing
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const ResizingDemo = () => {
-  const table = useTable({
-    columns,
-    data,
-    enableColumnResizing: true,
-    columnResizeMode: 'onChange',
-  });
-
-  return <Table table={table} />;
-};
-```
-
-#### Column settings
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  // ...other columns
-  {
-    id: 'settings_column_id',
-    header: ({table}) => <TableSettings table={table} />,
-    meta: {
-      hideInSettings: false, // Optional. Allows to hide this column from settings popover
-      titleInSettings: 'ReactNode', // Optional. Overrides header field for settings popover (if you need different content for header and settings popover)
-    },
-  }, // or you can use function getSettingsColumn
-];
-
-const data: Person[] = [
-  /* ... */
-];
-
-const TableSettingsDemo = () => {
-  const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // for outside control and initial state
-    column_id: false, // for hidding by default
-  });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* leaf columns ids */
-  ]); // for outside control and initial state
-
-  // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
-  // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
-
-  const table = useTable({
-    columns,
-    data,
-    state: {
-      columnVisibility,
-      columnOrder,
-    },
-    onColumnVisibilityChange,
-    onColumnOrderChange,
-  });
-
-  return <Table table={table} />;
-};
-```
-
-Learn more about the table and the column resizing properties in the react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
-
-
-### When to use
-
-- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
-- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
-
-### When not to use
-
-- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
-- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
-
-### Common pitfalls
-
-- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
-- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
-- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
-- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
-- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/table/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/table/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/table)
-
----
-
-> Docs for `@gravity-ui/table@1.10.0`. Versioned at: `https://gravity-ui.com/llms/table/1.10.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -25901,6 +25910,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -26084,7 +26097,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -39347,11 +39399,11 @@ will be rendered as:
 
 ---
 
-> Generated for `@gravity-ui/navigation@6.5.0`
+> Generated for `@gravity-ui/navigation@6.6.0`
 
 # @gravity-ui/navigation documentation
 
-Documentation for the **6.5.0** version of `@gravity-ui/navigation`.
+Documentation for the **6.6.0** version of `@gravity-ui/navigation`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/navigation/build/docs/`).
@@ -39403,6 +39455,117 @@ Install these in the host project at a compatible version:
 | `@gravity-ui/uikit` | `^7.42.0` |
 | `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
 | `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+
+## Usage
+
+Render `AsideHeader` as the app shell. It is a controlled component — you own the collapsed state via `compact`/`onChangeCompact` — and your page content goes through `renderContent`. Set up `@gravity-ui/uikit` styles and `ThemeProvider` first (see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+
+```tsx
+import React from 'react';
+import {AsideHeader} from '@gravity-ui/navigation';
+import {Gear, House} from '@gravity-ui/icons';
+import {ThemeProvider} from '@gravity-ui/uikit';
+
+import '@gravity-ui/uikit/styles/styles.css';
+
+export function App() {
+  const [compact, setCompact] = React.useState(false);
+
+  return (
+    <ThemeProvider theme="light">
+      <AsideHeader
+        logo={{text: 'My App', href: '/'}}
+        compact={compact}
+        onChangeCompact={setCompact}
+        menuItems={[
+          {id: 'home', title: 'Home', icon: House, current: true},
+          {id: 'settings', title: 'Settings', icon: Gear},
+        ]}
+        renderContent={() => <main>Page content</main>}
+      />
+    </ThemeProvider>
+  );
+}
+```
+
+## Components
+
+- [ActionBar](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/ActionBar.md) — The component is a flexible horizontal bar that provides a standardized layout for arranging navigation elements, actions, and informational content within an application. It serves as a container for organizing UI elements like breadcrumbs, buttons, and dropdown menus into defined sections and groups.
+- [AsideHeader](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/AsideHeader.md) — AsideHeader is provided a flexible and customizable navigation experience within your application. Users can easily customize the appearance of the sidebar to match their branding colors also to add personalized links, icons that cater specifically to their application's functionality.
+- [AsideHeader/components/AllPagesPanel](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/AsideHeader/components/AllPagesPanel.md) — A navigation panel for managing and organizing application pages in the middle (menuItems) section of AsideHeader component. Panel provides drag-and-drop reordering, visibility toggles, pin/unpin and category grouping of menu items.
+- [Footer](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/Footer.md) — The page footer components. Use Footer for the desktop version and MobileFooter for the mobile version. Both components have the same properties.
+- [HotkeysPanel](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/HotkeysPanel.md) — A navigation panel for hotkeys documentation. The panel displays a set of hotkeys for your application with a description of their purpose.
+- [Logo](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/Logo.md) — Logo icon is wrapped in UIKit Button, text is wrapped in HTML tag a or div, when passing hasWrapper prop.
+- [MobileHeader](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/MobileHeader.md) — Header for Mobile navigation. MobileHeader provides maintaining Panels except for Modals.
+- [Settings](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/components/Settings.md) — The Settings component provides the layout for a settings panel with the following features.
+
+## Hooks
+
+- [useOverflowingHorizontalListItems](https://unpkg.com/@gravity-ui/navigation@6.6.0/build/docs/hooks/useOverflowingHorizontalListItems.md) — A hook for determining which horizontal list items stay visible and which collapse into an overflow "more" dropdown.
+
+---
+
+> Docs for `@gravity-ui/navigation@6.6.0`. Versioned at: `https://gravity-ui.com/llms/navigation/6.6.0/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/6/llms.txt` (latest of major 6), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/navigation@6.5.0`
+
+# @gravity-ui/navigation documentation
+
+Documentation for the **6.5.0** version of `@gravity-ui/navigation`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/navigation/build/docs/`).
+
+## For AI agents
+
+Application-shell navigation components for Gravity UI apps — the collapsible `AsideHeader` sidebar plus footers, drawers, logo, hotkeys and settings panels that frame a whole page.
+
+### When to use
+
+- The app's primary navigation frame: `AsideHeader` (collapsible side navigation) with `menuItems`, subheader, and footer sections.
+- Supporting shell UI: `Drawer`/`DrawerItem`, `Footer`/`MobileFooter`, `MobileHeader`, `HotkeysPanel`, `Settings`, `ActionBar`, `Logo`.
+- Laying out page content inside the navigation frame via `renderContent` / `PageLayout`.
+
+### When not to use
+
+- Generic in-page controls (buttons, tabs, menus, breadcrumbs) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); this package is the outer app chrome, not general components.
+- Rendering the page body itself from config — use [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
+- Client-side routing — this provides the navigation UI only; wire clicks to your own router.
+
+### Common pitfalls
+
+- **`AsideHeader` is controlled.** You must own the collapsed state with `compact` and update it in `onChangeCompact`; passing `compact` without the handler freezes the sidebar.
+- **Menu items are `menuItems`, keyed by `id`.** Each item is `{id, title, icon, current, onItemClick}`; `icon` takes an icon component (e.g. from `@gravity-ui/icons`), not a string name.
+- **Peer dependencies are required.** `@gravity-ui/uikit`, `@gravity-ui/icons`, and `@bem-react/classname` must be installed alongside `react`/`react-dom`.
+- **Needs uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`, or the shell renders unstyled.
+- **Page content goes through `renderContent`.** Render your routed content via the `renderContent` prop / `PageLayout`, not as `children`.
+
+## Install
+
+```bash
+npm install @gravity-ui/navigation
+```
+
+Ensure that peer dependencies are installed in your project
+
+```bash
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/icons` | `^2.2.0` |
+| `@gravity-ui/uikit` | `^7.42.0` |
+| `@bem-react/classname` | `^1.6.0` |
 
 ## Usage
 
@@ -40383,107 +40546,6 @@ export function App() {
 ---
 
 > Docs for `@gravity-ui/navigation@3.11.0`. Versioned at: `https://gravity-ui.com/llms/navigation/3.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/navigation@3.10.0`
-
-# Navigation
-
-> Application-shell navigation components for Gravity UI apps — the collapsible `AsideHeader` sidebar plus footers, drawers, logo, hotkeys and settings panels that frame a whole page.
->
-> **npm:** `@gravity-ui/navigation` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```bash
-npm install @gravity-ui/navigation
-```
-
-Ensure that peer dependencies are installed in your project
-
-```bash
-npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/icons` | `^2.2.0` |
-| `@gravity-ui/uikit` | `^7.2.0` |
-| `@bem-react/classname` | `^1.6.0` |
-
-## Usage
-
-Render `AsideHeader` as the app shell. It is a controlled component — you own the collapsed state via `compact`/`onChangeCompact` — and your page content goes through `renderContent`. Set up `@gravity-ui/uikit` styles and `ThemeProvider` first (see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
-
-```tsx
-import React from 'react';
-import {AsideHeader} from '@gravity-ui/navigation';
-import {Gear, House} from '@gravity-ui/icons';
-import {ThemeProvider} from '@gravity-ui/uikit';
-
-import '@gravity-ui/uikit/styles/styles.css';
-
-export function App() {
-  const [compact, setCompact] = React.useState(false);
-
-  return (
-    <ThemeProvider theme="light">
-      <AsideHeader
-        logo={{text: 'My App', href: '/'}}
-        compact={compact}
-        onChangeCompact={setCompact}
-        menuItems={[
-          {id: 'home', title: 'Home', icon: House, current: true},
-          {id: 'settings', title: 'Settings', icon: Gear},
-        ]}
-        renderContent={() => <main>Page content</main>}
-      />
-    </ThemeProvider>
-  );
-}
-```
-
-
-### When to use
-
-- The app's primary navigation frame: `AsideHeader` (collapsible side navigation) with `menuItems`, subheader, and footer sections.
-- Supporting shell UI: `Drawer`/`DrawerItem`, `Footer`/`MobileFooter`, `MobileHeader`, `HotkeysPanel`, `Settings`, `ActionBar`, `Logo`.
-- Laying out page content inside the navigation frame via `renderContent` / `PageLayout`.
-
-### When not to use
-
-- Generic in-page controls (buttons, tabs, menus, breadcrumbs) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); this package is the outer app chrome, not general components.
-- Rendering the page body itself from config — use [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
-- Client-side routing — this provides the navigation UI only; wire clicks to your own router.
-
-### Common pitfalls
-
-- **`AsideHeader` is controlled.** You must own the collapsed state with `compact` and update it in `onChangeCompact`; passing `compact` without the handler freezes the sidebar.
-- **Menu items are `menuItems`, keyed by `id`.** Each item is `{id, title, icon, current, onItemClick}`; `icon` takes an icon component (e.g. from `@gravity-ui/icons`), not a string name.
-- **Peer dependencies are required.** `@gravity-ui/uikit`, `@gravity-ui/icons`, and `@bem-react/classname` must be installed alongside `react`/`react-dom`.
-- **Needs uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`, or the shell renders unstyled.
-- **Page content goes through `renderContent`.** Render your routed content via the `renderContent` prop / `PageLayout`, not as `children`.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/navigation/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/navigation/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/navigation/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/navigation)
-
----
-
-> Docs for `@gravity-ui/navigation@3.10.0`. Versioned at: `https://gravity-ui.com/llms/navigation/3.10.0/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -41484,6 +41546,159 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 ---
 
+> Generated for `@gravity-ui/date-components@4.1.0`
+
+# @gravity-ui/date-components documentation
+
+Documentation for the **4.1.0** version of `@gravity-ui/date-components`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/date-components/dist/docs/`).
+
+## For AI agents
+
+React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
+
+### When to use
+
+- A single date or date-time input: `DatePicker`, `DateField`.
+- Calendars for month/day selection: `Calendar`, `CalendarView`.
+- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
+- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+
+### When not to use
+
+- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
+
+### Common pitfalls
+
+- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
+- **Requires uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` and `@gravity-ui/date-utils` are required peer dependencies.
+- **Locale is loaded, not just set.** Set language via `ThemeProvider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
+- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
+
+## Install
+
+```shell
+npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+| `@types/react` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.21.0` |
+| `@gravity-ui/date-utils` | `^2.6.0` |
+
+## Usage
+
+```jsx
+import {createRoot} from 'react-dom/client';
+import {DatePicker} from '@gravity-ui/date-components';
+import {ThemeProvider} from '@gravity-ui/uikit';
+
+import '@gravity-ui/uikit/styles/styles.css';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <h1>DatePicker</h1>
+      <form>
+        <label htmlFor="date-picker">Date: </label>
+        <DatePicker id="date-picker" name="date" />
+      </form>
+    </ThemeProvider>
+  );
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+```
+
+### Localization
+
+```jsx
+import {settings} from '@gravity-ui/date-utils';
+
+// Load date locales that will be used in an application.
+await settings.loadLocale('ru');
+
+function App() {
+  return (
+    // Set the language to use with components.
+    <ThemeProvider lang="ru">
+      <h1>DatePicker</h1>
+      <form>
+        <label htmlFor="date-picker">Дата: </label>
+        <DatePicker id="date-picker" name="date" />
+      </form>
+    </ThemeProvider>
+  );
+}
+```
+
+If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
+
+```jsx
+// Preload locales
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+
+// or load locales on demand.
+
+function App() {
+  const [lang, setLang] = React.useState('en');
+
+  const handleLangChange = (newLang) => {
+    settings.loadLocale(newLang).then(() => {
+      setLang(newLang);
+    });
+  };
+
+  return <ThemeProvider lang={lang}>...</ThemeProvider>;
+}
+```
+
+The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
+
+```ts
+import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
+import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
+
+// Use the Keyset type to specify translations for all available components
+addLanguageKeysets<Keysets>(lang, {...});
+
+// or use the PartialKeysets type to specify only the ones you need
+addLanguageKeysets<PartialKeysets>(lang, {...});
+
+// To specify translations for some components
+addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
+```
+
+## Components
+
+- [Calendar](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/Calendar.md) — Calendar is a flexible, user-friendly calendar component for React applications. It allows users to view, select, and manage dates with ease. Ideal for event scheduling, booking systems, and any application where date selection is essential. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DateField](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/DateField.md) — DateField component is a versatile and convenient input field specifically designed for date entry in React applications. With an intuitive interface and easy integration, it's perfect for any form that requires date or time input, such as event schedulers, booking systems, or data-driven reports. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DatePicker](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/DatePicker.md) — DatePicker is a sophisticated, lightweight, and fully customizable component designed to provide intuitive date picking functionality in your React applications. Built with user experience and ease of integration in mind, it fits seamlessly within forms, modals, or any UI element requiring date input. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RangeCalendar](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/RangeCalendar.md) — RangeCalendar is a powerful, flexible, and user-friendly UI component designed for selecting a range of dates. Built with React, it combines the functionality of a calendar and a date range picker, making it an ideal choice for applications that require users to input a start and end date. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RelativeDateField](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/RelativeDateField.md) — RelativeDateField component is used only for entering relative dates. It can't be used as "normal" DateField.
+- [RelativeDatePicker](https://unpkg.com/@gravity-ui/date-components@4.1.0/dist/docs/components/RelativeDatePicker.md) — RelativeDatePicker is almost the same component as DatePicker but it has ability to use relative dates.
+
+---
+
+> Docs for `@gravity-ui/date-components@4.1.0`. Versioned at: `https://gravity-ui.com/llms/date-components/4.1.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/date-components@4.0.0`
 
 # @gravity-ui/date-components documentation
@@ -41528,11 +41743,11 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `@gravity-ui/date-utils` | `^2.6.0` |
-| `@gravity-ui/uikit` | `^7.21.0` |
-| `@types/react` | `>=17.0.0` |
 | `react` | `>=17.0.0` |
 | `react-dom` | `>=17.0.0` |
+| `@types/react` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.21.0` |
+| `@gravity-ui/date-utils` | `^2.6.0` |
 
 ## Usage
 
@@ -42962,153 +43177,6 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 ---
 
 > Docs for `@gravity-ui/date-components@2.10.0`. Versioned at: `https://gravity-ui.com/llms/date-components/2.10.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/date-components@2.9.0`
-
-# Date Components
-
-> React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
->
-> **npm:** `@gravity-ui/date-components` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^6.0.0` |
-
-## Usage
-
-```jsx
-import {createRoot} from 'react-dom/client';
-import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
-
-import '@gravity-ui/uikit/styles/styles.css';
-
-function App() {
-  return (
-    <ThemeProvider>
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Date: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </ThemeProvider>
-  );
-}
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-```
-
-### Localization
-
-```jsx
-import {settings} from '@gravity-ui/date-utils';
-
-// Load date locales that will be used in an application.
-await settings.loadLocale('ru');
-
-function App() {
-  return (
-    // Set the language to use with components.
-    <ThemeProvider lang="ru">
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Дата: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </ThemeProvider>
-  );
-}
-```
-
-If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
-
-```jsx
-// Preload locales
-await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-
-// or load locales on demand.
-
-function App() {
-  const [lang, setLang] = React.useState('en');
-
-  const handleLangChange = (newLang) => {
-    settings.loadLocale(newLang).then(() => {
-      setLang(newLang);
-    });
-  };
-
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
-}
-```
-
-The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
-
-```ts
-import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
-import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
-
-// Use the Keyset type to specify translations for all available components
-addLanguageKeysets<Keysets>(lang, {...});
-
-// or use the PartialKeysets type to specify only the ones you need
-addLanguageKeysets<PartialKeysets>(lang, {...});
-
-// To specify translations for some components
-addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
-```
-
-
-### When to use
-
-- A single date or date-time input: `DatePicker`, `DateField`.
-- Calendars for month/day selection: `Calendar`, `CalendarView`.
-- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
-- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
-
-### When not to use
-
-- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
-
-### Common pitfalls
-
-- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
-- **Requires uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` and `@gravity-ui/date-utils` are required peer dependencies.
-- **Locale is loaded, not just set.** Set language via `ThemeProvider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
-- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/date-components/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/date-components/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/date-components)
-
----
-
-> Docs for `@gravity-ui/date-components@2.9.0`. Versioned at: `https://gravity-ui.com/llms/date-components/2.9.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -51915,6 +51983,38 @@ module.exports = {
 ---
 
 > Docs for `@gravity-ui/page-constructor-builder@1.0.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor-builder/1.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor-builder/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/page-constructor-builder/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/playwright-tools@2.0.2`
+
+# Playwright Tools
+
+> A collection of utilities for writing Playwright tests, including browser actions, HAR-based request recording and replay, and component testing fixtures.
+>
+> **npm:** `@gravity-ui/playwright-tools` — check the installed major version in the user's `package.json` and read docs matching it.
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/README.md) for full documentation.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@playwright/experimental-ct-react` | `^1.22` |
+| `@playwright/test` | `^1.22` |
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/playwright-tools/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/playwright-tools)
+
+---
+
+> Docs for `@gravity-ui/playwright-tools@2.0.2`. Versioned at: `https://gravity-ui.com/llms/playwright-tools/2.0.2/llms.txt` (exact), `https://gravity-ui.com/llms/playwright-tools/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/playwright-tools/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
