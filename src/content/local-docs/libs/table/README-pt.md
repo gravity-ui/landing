@@ -81,9 +81,9 @@ const RowSelectionExample = () => {
 
 Para usar agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler`. Sem ele, o estado da caixa de seleção da linha pai ficará incorreto. https://github.com/TanStack/table/issues/4878
 
-#### Coluna de Seleção de Intervalo Personalizada
+#### Coluna de Seleção em Intervalo Personalizada
 
-O hook `useToggleRangeSelectionHandler` retorna um manipulador de alteração que escuta eventos de Shift+clique e realiza a seleção de linhas em intervalo. Ele precisa receber uma instância de `CellContext` para ter acesso aos estados internos da tabela e da linha.
+O hook `useToggleRangeSelectionHandler` retorna um manipulador de eventos que escuta cliques com a tecla Shift pressionada e realiza a seleção de linhas em intervalo. Ele precisa receber uma instância de `CellContext` para ter acesso aos estados internos da tabela e da linha.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-Existe também o componente `RangedSelectionCheckbox`, que utiliza o hook internamente e aceita uma instância de `CellContext` como prop. Este componente fornece um atalho para adicionar funcionalidade de seleção em intervalo a colunas de seleção personalizadas.
+Existe também o componente `RangedSelectionCheckbox`, que utiliza o hook internamente e aceita uma instância de `CellContext` como prop. Este componente oferece um atalho para adicionar a funcionalidade de seleção em intervalo a colunas de seleção personalizadas.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -214,7 +214,7 @@ const columns: ColumnDef<Person>[] = [
 
 #### Ordenação
 
-Saiba mais sobre as propriedades de coluna na documentação do react-table [aqui](https://tanstack.com/table/v8/docs/guide/sorting).
+Saiba mais sobre as propriedades de coluna na documentação do [react-table](https://tanstack.com/table/v8/docs/guide/sorting).
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -319,13 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
-Para usar o agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler`. Sem ele, o estado da caixa de seleção da linha pai ficará incorreto. https://github.com/TanStack/table/issues/4878
+Para usar agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler`. Sem ele, o estado da checkbox da linha pai ficará incorreto. https://github.com/TanStack/table/issues/4878
 
-Para ativar os estilos de aninhamento, passe `withNestingStyles = true` na configuração da coluna.
+Para ativar estilos de aninhamento, passe `withNestingStyles = true` na configuração da coluna.
 
-Os indicadores de aninhamento podem ser desativados passando `showTreeDepthIndicators = false`.
+Indicadores de aninhamento podem ser desativados passando `showTreeDepthIndicators = false`.
 
-Para adicionar um controle para expandir/recolher linhas, envolva o conteúdo da célula com o componente `TreeExpandableCell` ou com um componente personalizado semelhante:
+Para adicionar um controle para expandir/recolher linhas, envolva o conteúdo da célula com o componente `TreeExpandableCell` ou com um componente customizado similar:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -409,7 +409,9 @@ return (
 );
 ```
 
-O ponteiro deve se mover 8 pixels antes que a arrastar comece, para que cliques normais na linha e em controles continuem funcionando. Para excluir uma parte personalizada de uma linha de iniciar uma arrastar, chame `preventDefault()` em seu manipulador `onPointerDown`.
+O ponteiro deve se mover 8 pixels antes que o arrastar comece, para que cliques normais na linha e em controles continuem funcionando. Para excluir uma parte customizada de uma linha de iniciar um arrastar, chame `preventDefault()` em seu manipulador `onPointerDown`.
+
+`ReorderingProvider` ativa a rolagem automática vertical do dnd-kit por padrão. Passe `autoScroll={false}` quando a aplicação fornecer sua própria implementação de rolagem automática de arrastar; executar ambos ao mesmo tempo pode gerar conflitos de escrita de rolagem.
 
 #### Reordenação de colunas
 
@@ -451,12 +453,13 @@ const columns: ColumnDef<Person>[] = [
   {accessorKey: 'name', header: 'Nome'},
   {accessorKey: 'age', header: 'Idade'},
 ];
+```
 
+```tsx
 const CombinedReorderingExample = () => {
   const [data, setData] = React.useState(initialData);
   const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
 
-```tsx
   const table = useTable({
     columns,
     data,
@@ -468,7 +471,7 @@ const CombinedReorderingExample = () => {
   const handleRowReorder = React.useCallback<
     NonNullable<ReorderingProviderProps<Person>['onReorder']>
   >(({draggedItemKey, baseItemKey}) => {
-    // atualiza o array de dados
+    // update data array
   }, []);
 
   const handleColumnReorder = React.useCallback<
@@ -487,7 +490,7 @@ const CombinedReorderingExample = () => {
 };
 ```
 
-Se você controlar `columnOrder` por conta própria (por exemplo, para persistir), passe `onReorder` e aplique a ordem resultante:
+Se você controlar o `columnOrder` por conta própria (por exemplo, para persistir), passe `onReorder` e aplique a ordem resultante:
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -509,7 +512,7 @@ return (
 );
 ```
 
-API CSS:
+API de CSS:
 
 | Variável CSS                                 | Padrão                        | Descrição                      |
 | -------------------------------------------- | ----------------------------- | -------------------------------- |
@@ -520,7 +523,7 @@ API CSS:
 | `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Sombra da caixa da prévia de arrastar |
 | `--gt-table-drag-overlay-border-radius`      | `6px`                         | Raio da borda da prévia de arrastar |
 
-Para proibir a reordenação de uma coluna específica, defina `enableColumnReordering: false` em sua definição de coluna. Colunas placeholder (agrupadas) não são arrastáveis. Use `activationDistance` (padrão `8`) para ajustar a distância que o ponteiro deve se mover antes que um arrastar comece, o que mantém os cliques no cabeçalho (como ordenação) funcionando.
+Para proibir a reordenação de uma coluna específica, defina `enableColumnReordering: false` em sua definição de coluna. Colunas placeholder (agrupadas) não são arrastáveis. Use `activationDistance` (padrão `8`) para ajustar a distância que o ponteiro deve se mover antes que um arrasto comece, o que mantém os cliques no cabeçalho (como ordenação) funcionando.
 
 Colunas fixadas também podem ser reordenadas, mas apenas entre si: uma coluna pode ser movida dentro do grupo fixado à esquerda, do grupo fixado à direita ou do grupo central (não fixado) — ela nunca cruza um limite de fixação ao arrastar.
 
@@ -539,7 +542,7 @@ Colunas fixadas também podem ser reordenadas, mas apenas entre si: uma coluna p
 </ColumnReorderingProvider>
 ```
 
-Enquanto arrasta:
+Durante o arrasto:
 
 - uma prévia flutuante da coluna (seu cabeçalho mais as primeiras linhas) segue o ponteiro em uma sobreposição de arrastar;
 - a coluna arrastada se torna semitransparente;
@@ -595,7 +598,37 @@ const VirtualizationExample = () => {
 };
 ```
 
-Se você usar virtualização com o recurso de reordenação, também precisará passar a opção `rangeExtractor`:
+Para tabelas que devem permanecer cobertas durante a rolagem bidirecional contínua, ative o modo
+direto-DOM adaptativo e use chaves semânticas estáveis. A mesma chave deve identificar uma linha antes e depois de uma reordenação imutável ou de um reparenting de árvore:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` mantém um intervalo montado aquecido e preenche síncronamente apenas um intervalo visível descoberto. `directDomUpdates` permite que o virtualizador atualize as posições das linhas e o tamanho do corpo sem um renderização do React para cada notificação de rolagem. Use `position` para linhas de tabela, a menos que transformações sejam necessárias pelo layout circundante. Mantenha `getRowId` e `getItemKey` estáveis e defina `count` a partir do modelo de linha achatado atual após expandir, recolher, reordenar ou reparentar linhas. Um `rangeExtractor` personalizado arbitrário permanece autoritativo e desabilita o planejamento adaptativo de janela.
+
+`BaseTable.canDeferOffscreenCellContent` é uma opção adicional para tabelas adaptativas muito largas. Retorne `true` apenas para conteúdo de célula passivo cuja montagem atrasada não possa alterar a geometria, o foco, a acessibilidade ou o estado da aplicação. Linhas personalizadas, linhas de grupo, células fixadas e conteúdo interativo ou com efeitos colaterais devem permanecer ativos.
+
+Com o extrator de intervalo adaptativo padrão, `BaseTable` fixa automaticamente a linha ativa arrastada.
+Um extrator de intervalo personalizado é responsável por reter essa linha. Se você usar reordenação com
+um virtualizador não adaptativo, mantenha o mesmo contrato semântico `getItemKey` e passe a
+opção `rangeExtractor`:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -619,7 +652,7 @@ return (
 );
 ```
 
-#### Virtualização de Janela
+#### Virtualização de janela
 
 Use se você quiser usar a janela como elemento de rolagem
 
@@ -660,9 +693,7 @@ const WindowVirtualizationExample = () => {
 const columns: ColumnDef<Person>[] = [
   /* ... */
 ];
-```
 
-```tsx
 const data: Person[] = [
   /* ... */
 ];
@@ -679,7 +710,7 @@ const ResizingDemo = () => {
 };
 ```
 
-#### Configurações de Coluna
+#### Configurações de coluna
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -704,7 +735,7 @@ const TableSettingsDemo = () => {
     column_id: false, // para ocultar por padrão
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* ids das colunas leaf */
+    /* ids das colunas folha */
   ]); // para controle externo e estado inicial
 
   // Variante alternativa para obter estado, callbacks e definir callbacks de aplicação de configuração - usando o hook useTableSettings:
@@ -725,7 +756,7 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Saiba mais sobre as propriedades de redimensionamento de tabela e coluna na [documentação](https://tanstack.com/table/v8/docs/api/features/column-sizing) do react-table.
+Saiba mais sobre as propriedades de redimensionamento de tabelas e colunas na documentação do [react-table](https://tanstack.com/table/v8/docs/api/features/column-sizing)
 
 ## Problemas Conhecidos e Compatibilidade
 
@@ -735,7 +766,7 @@ Saiba mais sobre as propriedades de redimensionamento de tabela e coluna na [doc
 
 **Solução:**
 
-Se você estiver usando React 19 com React Compiler e estiver enfrentando problemas com a renderização da tabela, você pode usar a diretiva `'use no memo'` no código do seu componente:
+Se você estiver usando React 19 com React Compiler e enfrentando problemas com a re-renderização da tabela, você pode usar a diretiva `'use no memo'` no código do seu componente:
 
 ```tsx
 import React from 'react';
@@ -758,7 +789,7 @@ function MyTable() {
 
 **Solução Alternativa:**
 
-Você também pode memoizar explicitamente a instância da tabela ou os dados para garantir renderizações adequadas:
+Você também pode memoizar explicitamente a instância da tabela ou os dados para garantir re-renderizações adequadas:
 
 ```tsx
 import React from 'react';
@@ -768,7 +799,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 function MyTable() {
   const [data, setData] = React.useState<Person[]>([]);
 
-  // Memoiza explicitamente os dados para garantir renderizações
+  // Memoiza explicitamente os dados para garantir re-renderizações
   const memoizedData = React.useMemo(() => data, [data]);
 
   const table = useTable({
@@ -788,7 +819,7 @@ Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
 
 ## Para agentes de IA
 
-Uma grade de dados headless, alimentada por TanStack-Table, para aplicativos Gravity UI — use-a para tabelas classificáveis, selecionáveis, agrupáveis, reordenáveis e virtualizadas em vez de compor marcação bruta sobre o `Table` básico do uikit.
+Uma grade de dados headless, alimentada por TanStack-Table, para aplicativos Gravity UI — use-a para tabelas classificáveis, selecionáveis, agrupáveis, reordenáveis e virtualizadas em vez de compor marcação bruta sobre a `Table` básica do uikit.
 
 ### Quando usar
 
@@ -798,17 +829,17 @@ Uma grade de dados headless, alimentada por TanStack-Table, para aplicativos Gra
 
 ### Quando não usar
 
-- Uma tabela simples e estática com algumas linhas e sem recursos avançados — o `Table` integrado do uikit de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) é mais leve.
+- Uma tabela simples e estática com algumas linhas e sem recursos avançados — a `Table` integrada do uikit de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) é mais leve.
 - Uma lista não tabular — use `List` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Edição de célula inline estilo planilha — esta grade é focada em leitura/exibição, não em uma planilha editável.
+- Edição de células inline estilo planilha — esta grade é focada em leitura/exibição, não em uma planilha editável.
 
 ### Armadilhas comuns
 
-- **Você constrói a tabela com `useTable`, depois renderiza `<Table table={table} />`.** A propriedade principal é `table` (a instância), não `data`/`columns` diretamente em `<Table>`; passe `data` e `columns` para `useTable`.
+- **Você constrói a tabela com `useTable`, depois renderiza `<Table table={table} />`.** A prop principal é `table` (a instância), não `data`/`columns` diretamente no `<Table>`; passe `data` e `columns` para `useTable`.
 - **Tipos vêm do subcaminho `@gravity-ui/table/tanstack`.** Importe `ColumnDef`, `RowSelectionState`, `SortingState`, etc. de `@gravity-ui/table/tanstack`, não da raiz do pacote.
-- **A classificação precisa de um acessador.** Uma coluna deve ter `accessorKey`/`accessorFn` para que a classificação funcione; defina `enableSorting` e forneça `getRowId`.
-- **React 19 + React Compiler pode pular renderizações.** Este é um problema upstream do TanStack Table — adicione a diretiva `'use no memo'` ao componente ou memoize `data`.
-- **A seleção de intervalo falha com linhas aninhadas.** A seleção de intervalo tem comportamento indefinido quando a tabela tem linhas agrupadas/aninhadas; use `useRowSelectionFixedHandler` para o estado correto da caixa de seleção pai com agrupamento.
+- **A ordenação precisa de um acessor.** Uma coluna deve ter `accessorKey`/`accessorFn` para que a ordenação funcione; defina `enableSorting` e forneça `getRowId`.
+- **React 19 + React Compiler pode pular re-renderizações.** Este é um problema upstream do TanStack Table — adicione a diretiva `'use no memo'` ao componente ou use `memo` em `data`.
+- **A seleção de intervalo quebra com linhas aninhadas.** A seleção de intervalo tem comportamento indefinido quando a tabela possui linhas agrupadas/aninhadas; use `useRowSelectionFixedHandler` para o estado correto da caixa de seleção pai com agrupamento.
 
 ## Documentação para agentes de IA
 
