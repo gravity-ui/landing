@@ -7,14 +7,12 @@ $block: '.#{variables.$ns}icon-button';
     &.g-button,
     &.g-button:has(.g-button__icon:only-child) {
         --g-button-border-radius: 16px;
+        --g-button-background-color: #281a26;
+        --g-button-background-color-hover: #3c2e3a;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 62px;
-        height: 62px;
-    }
-
-    &:hover {
-        --g-button-background-color: rgba(255, 255, 255, 0.16);
+        width: 100%;
+        height: 150px;
     }
 }

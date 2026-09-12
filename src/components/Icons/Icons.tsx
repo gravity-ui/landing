@@ -1,22 +1,27 @@
-import {ArrowUpRightFromSquare, Magnifier, Xmark} from '@gravity-ui/icons';
+import {ArrowUpRightFromSquare, ChevronRight, Magnifier, Xmark} from '@gravity-ui/icons';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
-import {Button, Icon, TextInput} from '@gravity-ui/uikit';
+import {Button, Icon, Sheet, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import photoSearchIcon from '../../assets/icons/photo-search.svg';
 import {useIsMobile} from '../../hooks/useIsMobile';
-import {block} from '../../utils';
+import {block, sendAnalyticsEvent} from '../../utils';
 
 import {IconCollection} from './IconCollection';
 import {IconDialog} from './IconDialog/IconDialog';
 import './Icons.scss';
 import {IconsNotFound} from './IconsNotFound';
 import {useImageSearch} from './ImageSearch';
+import {categoryCounts, iconCategories, isIconInCategory} from './categories';
 import {allIcons} from './constants';
 import type {IconItem} from './types';
 
 const b = block('icons');
+const categoryOptions = [
+    {id: 'all', count: allIcons.length},
+    ...iconCategories.map(({id}) => ({id, count: categoryCounts[id]})),
+];
 
 interface IconsProps {
     currentIcon?: string;
@@ -29,6 +34,8 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     const isMobile = useIsMobile();
 
     const [filterString, setFilterString] = React.useState('');
+    const [categoryId, setCategoryId] = React.useState('all');
+    const [isCategorySheetOpen, setIsCategorySheetOpen] = React.useState(false);
     const [imageSearchResults, setImageSearchResults] = React.useState<string[] | null>(null);
 
     const [isOpenIconDialog, setIsOpenIconDialog] = React.useState(false);
@@ -40,6 +47,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     React.useEffect(() => {
         if (!isMobile) {
             searchInputRef.current?.focus();
+            setIsCategorySheetOpen(false);
         }
     }, [isMobile]);
 
@@ -76,6 +84,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     }, [onChangeCurrentIcon]);
 
     const handleClickToKeyword = React.useCallback((keyword: string) => {
+        setCategoryId('all');
         setFilterString(keyword);
         handleCloseDialog();
 
@@ -86,6 +95,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
     }, []);
 
     const handleImageSearchResults = React.useCallback((componentNames: string[]) => {
+        setCategoryId('all');
         setImageSearchResults(componentNames);
         setFilterString('');
     }, []);
@@ -100,13 +110,15 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
         isActive: imageSearchResults !== null,
     });
 
-    const icons = React.useMemo(() => {
+    const searchedIcons = React.useMemo(() => {
         if (imageSearchResults) {
             const resultSet = new Set(imageSearchResults);
             const matched = allIcons.filter(({name}) => resultSet.has(name));
             // preserve the ranking order from the search results
             matched.sort(
-                (a, b) => imageSearchResults.indexOf(a.name) - imageSearchResults.indexOf(b.name),
+                (first, second) =>
+                    imageSearchResults.indexOf(first.name) -
+                    imageSearchResults.indexOf(second.name),
             );
             return matched;
         }
@@ -126,6 +138,55 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 ),
         );
     }, [filterString, imageSearchResults]);
+
+    const isSearching = Boolean(filterString) || imageSearch.isActive;
+
+    const icons = React.useMemo(
+        () =>
+            isSearching || categoryId === 'all'
+                ? searchedIcons
+                : searchedIcons.filter((icon) => isIconInCategory(icon, categoryId)),
+        [categoryId, isSearching, searchedIcons],
+    );
+
+    const activeCategoryId = isSearching ? 'all' : categoryId;
+    const allIconsTitle = t('icons:allIcons');
+    const resultsTitle =
+        activeCategoryId === 'all'
+            ? allIconsTitle
+            : t(`icons:categories.${activeCategoryId}`, {defaultValue: activeCategoryId});
+    const resultsCount = icons.length;
+
+    const handleSelectCategory = React.useCallback(
+        (nextCategoryId: string, source: 'sidebar' | 'sheet') => {
+            setCategoryId(nextCategoryId);
+            setIsCategorySheetOpen(false);
+            sendAnalyticsEvent('icon_category_select', `${source}:${nextCategoryId}`);
+
+            requestAnimationFrame(() => {
+                pageTitleRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
+            });
+        },
+        [],
+    );
+
+    const renderCategoryButtons = (source: 'sidebar' | 'sheet') =>
+        categoryOptions.map(({id, count}) => (
+            <Button
+                key={id}
+                view="flat"
+                disabled={isSearching}
+                selected={activeCategoryId === id}
+                aria-pressed={activeCategoryId === id}
+                className={b('category')}
+                onClick={() => handleSelectCategory(id, source)}
+            >
+                <span>
+                    {id === 'all' ? allIconsTitle : t(`icons:categories.${id}`, {defaultValue: id})}
+                </span>
+                <span className={b('category-count')}>{count}</span>
+            </Button>
+        ));
 
     const searchStartContent = imageSearch.isActive ? (
         imageSearch.startContent
@@ -177,6 +238,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                             if (!imageSearch.isActive) {
                                 setFilterString(value);
                                 if (value) {
+                                    setCategoryId('all');
                                     setImageSearchResults(null);
                                 }
                             }
@@ -185,7 +247,7 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                         placeholder={t('icons:filterPlaceholder')}
                         startContent={searchStartContent}
                         autoFocus={!isMobile}
-                        hasClear={false}
+                        hasClear={!imageSearch.isActive}
                         endContent={searchEndContent}
                         controlProps={{
                             readOnly: imageSearch.isActive,
@@ -195,11 +257,39 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
             </Row>
             <Row>
                 <Col sizes={12}>
-                    {icons.length ? (
-                        <IconCollection icons={icons} onSelectIcon={handleSelectIcon} />
-                    ) : (
-                        <IconsNotFound />
-                    )}
+                    <div className={b('catalog')}>
+                        <aside className={b('categories')} aria-label={t('icons:categoriesLabel')}>
+                            <h2 className={b('section-title')}>{t('icons:category')}</h2>
+                            <div className={b('category-list')}>
+                                {renderCategoryButtons('sidebar')}
+                            </div>
+                        </aside>
+                        <button
+                            type="button"
+                            className={b('mobile-category-trigger')}
+                            disabled={isSearching}
+                            aria-haspopup="dialog"
+                            aria-expanded={isCategorySheetOpen}
+                            onClick={() => setIsCategorySheetOpen(true)}
+                        >
+                            <span>
+                                <span className={b('mobile-category-label')}>{resultsTitle}</span>{' '}
+                                <span className={b('mobile-category-count')}>{resultsCount}</span>
+                            </span>
+                            <Icon data={ChevronRight} size={16} />
+                        </button>
+                        <section className={b('results')}>
+                            <div className={b('results-heading')}>
+                                <h2 className={b('section-title')}>{resultsTitle}</h2>
+                                <span className={b('results-count')}>{resultsCount}</span>
+                            </div>
+                            {icons.length ? (
+                                <IconCollection icons={icons} onSelectIcon={handleSelectIcon} />
+                            ) : (
+                                <IconsNotFound />
+                            )}
+                        </section>
+                    </div>
                 </Col>
             </Row>
 
@@ -209,6 +299,17 @@ export const Icons: React.FC<IconsProps> = ({currentIcon, onChangeCurrentIcon}) 
                 onClose={handleCloseDialog}
                 onClickToKeyword={handleClickToKeyword}
             />
+
+            {isMobile && (
+                <Sheet
+                    className={b('category-sheet')}
+                    visible={isCategorySheetOpen}
+                    onClose={() => setIsCategorySheetOpen(false)}
+                    title={t('icons:category')}
+                >
+                    <div className={b('category-sheet-list')}>{renderCategoryButtons('sheet')}</div>
+                </Sheet>
+            )}
 
             {imageSearch.dropOverlay}
         </Grid>
