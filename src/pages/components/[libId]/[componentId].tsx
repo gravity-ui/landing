@@ -12,10 +12,13 @@ import {Component} from '../../../components/Component/Component';
 import {ComponentsLayout} from '../../../components/ComponentsLayout/ComponentsLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {libs} from '../../../content/components';
+import {useLocale} from '../../../hooks/useLocale';
 import {getMaintainers} from '../../../utils';
+import {getCanonicalUrlForLocale} from '../../../utils/canonical';
 import {getLibComponents} from '../../../utils/components';
 import {getI18nProps} from '../../../utils/i18next';
 import {getComponentMeta} from '../../../utils/meta';
+import {getBreadcrumbJsonLd, getTechArticleJsonLd} from '../../../utils/structuredData';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const components = getLibComponents(ctx.params?.libId as string);
@@ -72,6 +75,7 @@ export const ComponentPage = ({
     readmeContent: string;
 }) => {
     const {t} = useTranslation();
+    const locale = useLocale();
     const componentsLib = libs.find((item) => item.id === lib.config.id);
     const component = componentsLib?.components.find((item) => item.id === componentId);
 
@@ -92,6 +96,26 @@ export const ComponentPage = ({
     });
 
     const maintainers = getMaintainers(lib, `/src/components/${component.title}`);
+
+    const componentPath = `/components/${lib.config.id}/${component.id}`;
+    const componentUrl = getCanonicalUrlForLocale(locale, componentPath);
+
+    const structuredData = [
+        getBreadcrumbJsonLd([
+            {name: t('menu_components'), url: getCanonicalUrlForLocale(locale, '/components')},
+            {
+                name: lib.config.title,
+                url: getCanonicalUrlForLocale(locale, `/components/${lib.config.id}`),
+            },
+            {name: component.title, url: componentUrl},
+        ]),
+        getTechArticleJsonLd({
+            headline: `${lib.config.title} – ${component.title}`,
+            description: componentMeta.description,
+            url: componentUrl,
+            locale,
+        }),
+    ];
 
     const sections = React.useMemo<Section[]>(() => {
         return libs.map(({id, title, components}) => {
@@ -118,6 +142,7 @@ export const ComponentPage = ({
             hideFooter
             noScroll={!isMobile}
             meta={componentMeta}
+            jsonLd={structuredData}
         >
             <ComponentsLayout libId={lib.config.id} componentId={componentId} sections={sections}>
                 <Component
