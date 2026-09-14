@@ -57,6 +57,7 @@
   "export_theme_cancel_btn": "Cancel",
   "export_theme_apply_btn_css": "Save as CSS",
   "export_theme_apply_btn_json": "Save as JSON",
+  "export_theme_open_storybook": "Open in Storybook",
   "export_theme_apply-theme-alert-title": "How to apply the theme",
   "radius": "Radius",
   "radius_regular": "Regular",

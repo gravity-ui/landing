@@ -2,6 +2,7 @@ import {Button, Flex, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React, {PropsWithChildren} from 'react';
 
+import {sendAnalyticsEvent} from '../../../../utils/analytics';
 import {block} from '../../../../utils/block';
 import {ThemeActionDialog} from '../ThemeActionDialog/ThemeActionDialog';
 
@@ -13,6 +14,7 @@ const b = block('theme-export');
 interface ThemeExportDialogProps extends PropsWithChildren, ThemeExportProps {
     onSaveThemeCSSClick: () => void;
     onSaveThemeJSONClick: () => void;
+    storybookThemeLink: string;
     breakpoint: number;
 }
 export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({
@@ -20,6 +22,7 @@ export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({
     onClose,
     onSaveThemeCSSClick,
     onSaveThemeJSONClick,
+    storybookThemeLink,
     breakpoint,
     children,
 }) => {
@@ -55,6 +58,16 @@ export const ThemeExportDialog: React.FC<ThemeExportDialogProps> = ({
                         size="xl"
                     >
                         <Text>{t('export_theme_apply_btn_json')}</Text>
+                    </Button>
+                    <Button
+                        className={b('theme-action-btn')}
+                        href={storybookThemeLink}
+                        target="_blank"
+                        view="outlined-action"
+                        size="xl"
+                        onClick={() => sendAnalyticsEvent('theme_export', 'storybook')}
+                    >
+                        <Text>{t('export_theme_open_storybook')}</Text>
                     </Button>
                 </Flex>
             }
