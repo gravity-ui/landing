@@ -61,6 +61,45 @@ type TimelineAxis = {
 };
 ```
 
+### Horizontal Axis Lines
+
+Configure horizontal line placement through `viewConfiguration.axes.linePosition`:
+
+- `"center"` (default) draws a line through the center of every track.
+- `"between"` draws a line after every track, at its bottom boundary. This is useful for table-style rows with centered event bars.
+
+```typescript
+viewConfiguration: {
+  axes: {
+    linePosition: 'between'
+  }
+}
+```
+
+### Flexible Camera Interactions
+
+`ZoomMode` provides familiar interaction presets, while `camera.interactions` lets you override an individual gesture. This is useful when a timeline lives inside a vertically scrollable page: keep horizontal pan and trackpad zoom, but let normal wheel scrolling reach the parent container.
+
+```tsx
+import {ZoomMode} from '@gravity-ui/timeline';
+
+const {timeline} = useTimeline({
+  settings: { /* ... */ },
+  viewConfiguration: {
+    camera: {
+      zoom: ZoomMode.DEFAULT,
+      interactions: {
+        verticalWheel: 'pass-through',
+        horizontalWheel: 'pan',
+        pinch: 'zoom',
+      },
+    },
+  },
+});
+```
+
+Each interaction accepts `'zoom'`, `'pan'`, or `'pass-through'`. `pinch` represents a browser's Ctrl+wheel trackpad gesture. See the interactive [Camera interactions Storybook example](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus).
+
 ### Section Structure
 
 Each section requires the following structure:
