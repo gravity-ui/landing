@@ -22,6 +22,7 @@ Custom rendering with expandable nested events ([NestedEvents](https://preview.g
 
 - Canvas-based rendering for high performance
 - Interactive timeline with zoom and pan capabilities
+- Flexible wheel and trackpad interactions, including vertical scroll pass-through
 - Support for events, markers, sections, axes, and grid
 - Background sections for visual organization and time period highlighting
 - Smart marker grouping with automatic zoom to group - Click on grouped markers to zoom into their individual components
@@ -83,6 +84,45 @@ type TimelineAxis = {
   height: number;      // Height per track (px)
 };
 ```
+
+### Horizontal Axis Lines
+
+Configure horizontal line placement through `viewConfiguration.axes.linePosition`:
+
+- `"center"` (default) draws a line through the center of every track.
+- `"between"` draws a line after every track, at its bottom boundary. This is useful for table-style rows with centered event bars.
+
+```typescript
+viewConfiguration: {
+  axes: {
+    linePosition: 'between'
+  }
+}
+```
+
+### Flexible Camera Interactions
+
+`ZoomMode` provides familiar interaction presets, while `camera.interactions` lets you override an individual gesture. This is useful when a timeline lives inside a vertically scrollable page: keep horizontal pan and trackpad zoom, but let normal wheel scrolling reach the parent container.
+
+```tsx
+import {ZoomMode} from '@gravity-ui/timeline';
+
+const {timeline} = useTimeline({
+  settings: { /* ... */ },
+  viewConfiguration: {
+    camera: {
+      zoom: ZoomMode.DEFAULT,
+      interactions: {
+        verticalWheel: 'pass-through',
+        horizontalWheel: 'pan',
+        pinch: 'zoom',
+      },
+    },
+  },
+});
+```
+
+Each interaction accepts `'zoom'`, `'pan'`, or `'pass-through'`. `pinch` represents a browser's Ctrl+wheel trackpad gesture. See the interactive [Camera interactions Storybook example](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus).
 
 ### Section Structure
 
@@ -260,6 +300,32 @@ The component uses custom hooks for timeline management:
 
 The component automatically handles cleanup and destruction of the timeline instance when unmounted.
 
+### Event popup
+
+Install `@gravity-ui/uikit` and its styles to display event details without
+subscribing to hover events or calculating coordinates yourself:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+import {EventPopup} from '@gravity-ui/timeline/react/uikit';
+
+<>
+  <TimelineCanvas timeline={timeline} />
+  <EventPopup
+    timeline={timeline}
+    content={(event) => <EventDetails event={event} />}
+  />
+</>
+```
+
+`EventPopup` opens after 150 ms and closes 200 ms after the pointer leaves the
+event. Set `openDelay`, `closeDelay`, `placement`, `offset`, `className`, or
+`aria-label` when needed. The popup remains open while its content has pointer
+or focus, closes on Escape or outside click, and uses the last event in data
+order when events overlap. `hoverColor` and `isHovered` control event drawing;
+`EventPopup` controls its details UI.
+
 ### Event Structure
 
 Events in the timeline follow this structure:
@@ -273,9 +339,55 @@ type TimelineEvent = {
   trackIndex: number;     // Index in the axis track
   renderer?: AbstractEventRenderer; // Optional custom renderer
   color?: string;         // Optional event color
+  hoverColor?: string;    // Optional hovered state color
   selectedColor?: string; // Optional selected state color
 };
 ```
+
+### Gravity UI colors
+
+Canvas cannot resolve CSS custom properties by itself. Timeline resolves a
+whole-value `var(--token)` against its canvas element, so Gravity UI semantic
+tokens work for built-in events, markers, sections, axes, grid, and ruler.
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {useTimeline} from '@gravity-ui/timeline/react';
+import {GravityTimelineCanvas} from '@gravity-ui/timeline/react/uikit';
+
+<ThemeProvider theme="light">
+  <GravityTimelineCanvas timeline={timeline} />
+</ThemeProvider>
+```
+
+Pass tokens directly in any color field, for example
+`color: 'var(--g-color-base-positive-medium)'`. `GravityTimelineCanvas`
+automatically redraws when the effective Gravity UI theme changes. For a
+missing token, use a CSS fallback such as `var(--app-event-color, transparent)`
+or call `timeline.api.resolveColor(color, fallback)` from a custom renderer.
+
+For events, `color` is used normally, `hoverColor` on pointer hover, and
+`selectedColor` after selection:
+
+```ts
+const events = [
+  {
+    id: 'deploy',
+    from: start,
+    to: end,
+    axisId: 'main',
+    trackIndex: 0,
+    color: 'var(--g-color-base-positive-medium)',
+    hoverColor: 'var(--g-color-base-positive-medium-hover)',
+    selectedColor: 'var(--g-color-base-positive-heavy)',
+  },
+];
+```
+
+Custom event renderers receive `resolveColor` as their final optional argument;
+custom marker and section renderers receive it in their render data.
 
 ### Direct TypeScript Usage
 
@@ -431,6 +543,7 @@ Explore interactive examples in our [Storybook](https://preview.gravity-ui.com/t
 - [Basic Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Simple timeline with events and axes
 - [Endless Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Endless timeline with events and axes
 - [Markers](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline with vertical markers and labels
+- [Camera interactions](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) - Configure wheel, horizontal scroll, and trackpad pinch behavior
 - [Custom Events](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline with custom event rendering
 - [Integrations](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection, DragHandler, NestedEvents, Popup, List
 
