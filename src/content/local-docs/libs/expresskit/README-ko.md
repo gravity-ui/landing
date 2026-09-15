@@ -25,6 +25,17 @@ const app = new ExpressKit(nodekit, {
 app.run();
 ```
 
+## 자체 원격 측정
+
+기본적으로 자체 원격 측정은 원본 요청 URL을 전송합니다. 쿼리 문자열이 크거나 고유성이 높은 애플리케이션의 경우 통계를 전송하기 전에 쿼리 매개변수를 제거할 수 있습니다.
+
+```typescript
+const config: Partial<AppConfig> = {
+  appTelemetryChEnableSelfStats: true,
+  appTelemetryChSelfStatsStripQueryParams: true,
+};
+```
+
 ## CSP
 
 `config.ts`
@@ -58,9 +69,9 @@ export default config;
 
 ExpressKit는 애플리케이션을 악의적인 교차 출처 요청으로부터 보호하기 위해 내장된 교차 사이트 요청 위조(CSRF) 보호 기능을 제공합니다. CSRF 미들웨어는 상태 변경 HTTP 요청에 대한 토큰을 자동으로 생성하고 검증합니다.
 
-### 기본 설정
+### 기본 구성
 
-CSRF 보호를 활성화하려면 설정에서 비밀 키를 구성하십시오.
+CSRF 보호를 활성화하려면 구성에서 비밀 키를 설정하십시오.
 
 ```typescript
 import type {AppConfig} from '@gravity-ui/nodekit';
@@ -73,14 +84,14 @@ const config: Partial<AppConfig> = {
 export default config;
 ```
 
-### 설정 옵션
+### 구성 옵션
 
-| 옵션              | 타입                 | 기본값                              | 설명                                                                                     |
+| 옵션              | 유형                 | 기본값                              | 설명                                                                                     |
 | ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `appCsrfSecret`     | `string \| string[]` | -                                    | **필수.** HMAC 토큰 생성을 위한 비밀 키. 여러 개의 비밀 키를 사용하여 키 로테이션이 가능합니다. |
-| `appCsrfLifetime`   | `number`             | `2592000` (30일)                  | 토큰 유효 시간(초). 만료 없음으로 설정하려면 `0`으로 설정하십시오.                                        |
-| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | 토큰 검증을 위한 HTTP 헤더 이름.                                                          |
-| `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | CSRF 검증이 필요한 HTTP 메서드.                                                      |
+| `appCsrfSecret`     | `string \| string[]` | -                                    | **필수.** HMAC 토큰 생성을 위한 비밀 키입니다. 여러 개의 비밀 키를 사용하여 키 로테이션이 가능합니다. |
+| `appCsrfLifetime`   | `number`             | `2592000` (30일)                  | 토큰 수명(초). 만료 없음은 `0`으로 설정합니다.                                        |
+| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | 토큰 검증을 위한 HTTP 헤더 이름입니다.                                                          |
+| `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | CSRF 검증이 필요한 HTTP 메서드입니다.                                                      |
 
 ### 사용법
 
@@ -113,15 +124,15 @@ const app = new ExpressKit(nodekit, {
 });
 ```
 
-### 라우트별 설정
+### 라우트별 구성
 
-특정 라우트에 대해 CSRF 보호를 비활성화할 수 있습니다.
+특정 라우트에 대한 CSRF 보호를 비활성화할 수 있습니다.
 
 ```typescript
 const app = new ExpressKit(nodekit, {
   'POST /api/webhook': {
     authPolicy: AuthPolicy.required,
-    disableCsrf: true, // 이 라우트에 대해 CSRF 비활성화
+    disableCsrf: true, // 이 라우트에 대한 CSRF 비활성화
     handler: (req, res) => {
       res.json({message: 'Webhook processed'});
     },
@@ -133,7 +144,7 @@ const app = new ExpressKit(nodekit, {
 
 기본적으로 ExpressKit는 모든 응답에 `no-cache` 헤더를 설정합니다. 이 동작은 전역적으로 또는 라우트별로 제어할 수 있습니다.
 
-### 전역 설정
+### 전역 구성
 
 ```typescript
 const config: Partial<AppConfig> = {
@@ -141,12 +152,12 @@ const config: Partial<AppConfig> = {
 };
 ```
 
-### 라우트별 설정
+### 라우트별 구성
 
 ```typescript
 const app = new ExpressKit(nodekit, {
   'GET /api/cached': {
-    enableCaching: true, // 이 라우트에 대해 캐싱 허용
+    enableCaching: true, // 이 라우트에 대한 캐싱 허용
     handler: (req, res) => res.json({data: 'cacheable'}),
   },
   'GET /api/fresh': {
@@ -160,4 +171,4 @@ const app = new ExpressKit(nodekit, {
 
 ## 유효성 검사 및 응답 직렬화
 
-- [요청 유효성 검사 및 응답 직렬화](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - Zod 스키마를 사용하여 자동 요청 유효성 검사 및 응답 직렬화를 수행합니다.
+- [요청 유효성 검사 및 응답 직렬화](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - Zod 스키마를 사용하여 요청 유효성 검사 및 응답 직렬화를 자동으로 처리합니다.

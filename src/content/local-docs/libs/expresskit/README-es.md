@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit es un wrapper ligero para [express.js](https://expressjs.com/) que se integra con [NodeKit](https://github.com/gravity-ui/nodekit) y proporciona algunas características útiles como registro de solicitudes, soporte de tracing, controladores y middleware asíncronos, y descripciones detalladas de las rutas.
+ExpressKit es un wrapper ligero para [express.js](https://expressjs.com/) que se integra con [NodeKit](https://github.com/gravity-ui/nodekit) y proporciona algunas características útiles como registro de solicitudes, soporte de tracing, controladores y middleware asíncronos, y descripciones detalladas de rutas.
 
 Instalación:
 
@@ -23,6 +23,17 @@ const app = new ExpressKit(nodekit, {
 });
 
 app.run();
+```
+
+## Telemetría propia
+
+Por defecto, la telemetría propia envía la URL de la solicitud original. Las aplicaciones con cadenas de consulta grandes o de alta cardinalidad pueden eliminar los parámetros de consulta antes de enviar las estadísticas:
+
+```typescript
+const config: Partial<AppConfig> = {
+  appTelemetryChEnableSelfStats: true,
+  appTelemetryChSelfStatsStripQueryParams: true,
+};
 ```
 
 ## CSP
@@ -78,7 +89,7 @@ export default config;
 | Opción              | Tipo                 | Predeterminado                           | Descripción                                                                                     |
 | ------------------- | -------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `appCsrfSecret`     | `string \| string[]` | -                                        | **Requerido.** Clave(s) secreta(s) para la generación de tokens HMAC. Múltiples secretos permiten la rotación de claves. |
-| `appCsrfLifetime`   | `number`             | `2592000` (30 días)                      | Vida útil del token en segundos. Establecer a `0` para que no expire.                                        |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 días)                      | Vida útil del token en segundos. Establecer en `0` para que no expire.                                        |
 | `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                         | Nombre de la cabecera HTTP para la validación del token.                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | Métodos HTTP que requieren validación CSRF.                                                      |
 
@@ -95,7 +106,7 @@ const nodekit = new NodeKit({
     appCsrfSecret: 'tu-clave-secreta',
     appAuthPolicy: AuthPolicy.required,
 
-    // Asegúrate de que tu middleware establezca el ID de usuario en originalContext, de lo contrario, la generación del token CSRF fallará
+    // Asegúrate de que tu middleware establezca el ID de usuario en el originalContext, de lo contrario, la generación del token CSRF fallará
     appAuthHandler: tuManejadorDeAutenticacion,
   },
 });
@@ -160,4 +171,4 @@ El `enableCaching` a nivel de ruta anula la configuración global. El estado de 
 
 ## Validación y serialización de respuestas
 
-- [Validación de solicitudes y serialización de respuestas](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utiliza esquemas Zod para la validación automática de solicitudes y la serialización de respuestas.
+- [Validación de Solicitudes y Serialización de Respuestas](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utiliza esquemas Zod para la validación automática de solicitudes y la serialización de respuestas.

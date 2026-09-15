@@ -1,8 +1,8 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-> [Versão em Português](./README-pt.md)
+> [Versão em Russo](./README-ru.md)
 
-Uma biblioteca baseada em React para construir visualizações de linha do tempo interativas com renderização em canvas.
+Uma biblioteca baseada em React para construir visualizações interativas de linha do tempo com renderização em canvas.
 
 ## Documentação
 
@@ -20,12 +20,13 @@ Renderização personalizada com eventos aninhados expansíveis (exemplo [Nested
 
 ## Funcionalidades
 
-- Renderização baseada em canvas para alto desempenho
+- Renderização baseada em Canvas para alta performance
 - Linha do tempo interativa com capacidades de zoom e pan
+- Interações flexíveis com roda do mouse e touchpad, incluindo passagem de scroll vertical
 - Suporte para eventos, marcadores, seções, eixos e grade
 - Seções de fundo para organização visual e destaque de períodos de tempo
 - Agrupamento inteligente de marcadores com zoom automático para o grupo - Clique em marcadores agrupados para dar zoom em seus componentes individuais
-- Renderização virtualizada para melhor desempenho com grandes conjuntos de dados (ativa apenas quando o conteúdo da linha do tempo excede a viewport)
+- Renderização virtualizada para melhor performance com grandes conjuntos de dados (ativa apenas quando o conteúdo da linha do tempo excede a viewport)
 - Aparência e comportamento personalizáveis
 - Suporte a TypeScript com definições de tipo completas
 - Integração com React com hooks personalizados
@@ -84,6 +85,45 @@ type TimelineAxis = {
 };
 ```
 
+### Linhas Horizontais do Eixo
+
+Configure a posição das linhas horizontais através de `viewConfiguration.axes.linePosition`:
+
+- `"center"` (padrão) desenha uma linha no centro de cada trilha.
+- `"between"` desenha uma linha após cada trilha, em sua borda inferior. Isso é útil para linhas de estilo de tabela com barras de eventos centralizadas.
+
+```typescript
+viewConfiguration: {
+  axes: {
+    linePosition: 'between'
+  }
+}
+```
+
+### Interações Flexíveis da Câmera
+
+`ZoomMode` fornece predefinições de interação familiares, enquanto `camera.interactions` permite sobrescrever um gesto individual. Isso é útil quando uma linha do tempo está dentro de uma página com scroll vertical: mantenha o pan horizontal e o zoom do touchpad, mas permita que o scroll normal da roda do mouse alcance o contêiner pai.
+
+```tsx
+import {ZoomMode} from '@gravity-ui/timeline';
+
+const {timeline} = useTimeline({
+  settings: { /* ... */ },
+  viewConfiguration: {
+    camera: {
+      zoom: ZoomMode.DEFAULT,
+      interactions: {
+        verticalWheel: 'pass-through',
+        horizontalWheel: 'pan',
+        pinch: 'zoom',
+      },
+    },
+  },
+});
+```
+
+Cada interação aceita `'zoom'`, `'pan'` ou `'pass-through'`. `pinch` representa um gesto de Ctrl+roda do mouse no navegador. Veja o exemplo interativo [Camera interactions Storybook](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus).
+
 ### Estrutura da Seção
 
 Cada seção requer a seguinte estrutura:
@@ -121,7 +161,7 @@ const MyTimelineComponent = () => {
         {
           id: 'afternoon',
           from: Date.now() + 1800000,
-          // 'to' não especificado - estende até o fim da linha do tempo
+          // Nenhum 'to' especificado - estende até o fim da linha do tempo
           color: 'rgba(76, 175, 80, 0.2)', // Verde semitransparente
           hoverColor: 'rgba(76, 175, 80, 0.3)'
         }
@@ -129,7 +169,7 @@ const MyTimelineComponent = () => {
     },
     viewConfiguration: {
       sections: {
-        hitboxPadding: 2 // Preenchimento para detecção de hover
+        hitboxPadding: 2 // Padding para detecção de hover
       }
     }
   });
@@ -149,9 +189,9 @@ type TimelineMarker = {
   activeColor: string;    // Cor quando o marcador está selecionado (obrigatório)
   hoverColor: string;     // Cor quando o marcador está em hover (obrigatório)
   lineWidth?: number;     // Largura opcional da linha do marcador
-  label?: string;         // Texto de rótulo opcional
-  labelColor?: string;    // Cor do rótulo opcional
-  renderer?: AbstractMarkerRenderer; // Renderizador personalizado opcional
+  label?: string;         // Texto opcional do rótulo
+  labelColor?: string;    // Cor opcional do rótulo
+  renderer?: AbstractMarkerRenderer; // Renderizador customizado opcional
   nonSelectable?: boolean;// Se o marcador pode ser selecionado
   group?: boolean;        // Se o marcador representa um grupo
 };
@@ -159,7 +199,7 @@ type TimelineMarker = {
 
 ### Agrupamento e Zoom de Marcadores
 
-A linha do tempo agrupa automaticamente marcadores que estão próximos e fornece funcionalidade de zoom:
+A linha do tempo agrupa automaticamente marcadores que estão próximos e oferece funcionalidade de zoom:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -178,8 +218,8 @@ const MyTimelineComponent = () => {
     },
     viewConfiguration: {
       markers: {
-        collapseMinDistance: 8,        // Agrupa marcadores a uma distância de 8 pixels
-        groupZoomEnabled: true,        // Habilita zoom ao clicar em um grupo
+        collapseMinDistance: 8,        // Agrupa marcadores a até 8 pixels de distância
+        groupZoomEnabled: true,        // Habilita zoom ao clicar no grupo
         groupZoomPadding: 0.3,        // 30% de preenchimento ao redor do grupo
         groupZoomMaxFactor: 0.3,      // Fator máximo de zoom
       }
@@ -206,13 +246,13 @@ A linha do tempo é implementada como um componente React que pode ser configura
 1. **TimelineSettings**: Controla o comportamento e a aparência principal da linha do tempo
    - `start`: Hora de início da linha do tempo
    - `end`: Hora de término da linha do tempo
-   - `axes`: Matriz de configurações de eixo (veja a estrutura abaixo)
-   - `events`: Matriz de configurações de evento
-   - `markers`: Matriz de configurações de marcador
-   - `sections`: Matriz de configurações de seção
+   - `axes`: Array de configurações de eixos (veja a estrutura abaixo)
+   - `events`: Array de configurações de eventos
+   - `markers`: Array de configurações de marcadores
+   - `sections`: Array de configurações de seções
 
 2. **ViewConfiguration**: Gerencia a representação visual e as configurações de interação
-   - Controla a aparência, os níveis de zoom e o comportamento de interação
+   - Controla a aparência, níveis de zoom e comportamento de interação
    - Pode ser personalizado ou usar valores padrão
 
 ### Tratamento de Eventos
@@ -223,7 +263,7 @@ O componente de linha do tempo suporta vários eventos interativos:
 - `on-context-click`: Disparado ao clicar com o botão direito/menu de contexto
 - `on-select-change`: Disparado quando a seleção muda
 - `on-hover`: Disparado ao passar o mouse sobre elementos da linha do tempo
-- `on-leave`: Disparado quando o mouse sai dos elementos da linha do tempo
+- `on-leave`: Disparado quando o mouse sai de elementos da linha do tempo
 
 Exemplo de tratamento de eventos:
 
@@ -247,7 +287,7 @@ const MyTimelineComponent = () => {
 
 ### Integração com React
 
-O componente usa hooks personalizados para gerenciar a linha do tempo:
+O componente usa hooks customizados para gerenciamento da linha do tempo:
 
 - `useTimeline`: Gerencia a instância da linha do tempo e seu ciclo de vida
   - Cria e inicializa a linha do tempo
@@ -260,6 +300,32 @@ O componente usa hooks personalizados para gerenciar a linha do tempo:
 
 O componente lida automaticamente com a limpeza e destruição da instância da linha do tempo quando desmontado.
 
+### Popup de Evento
+
+Instale `@gravity-ui/uikit` e seus estilos para exibir detalhes de eventos sem
+precisar se inscrever em eventos de hover ou calcular coordenadas.
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+import {EventPopup} from '@gravity-ui/timeline/react/uikit';
+
+<>
+  <TimelineCanvas timeline={timeline} />
+  <EventPopup
+    timeline={timeline}
+    content={(event) => <EventDetails event={event} />}
+  />
+</>
+```
+
+O `EventPopup` abre após 150 ms e fecha 200 ms após o ponteiro sair do
+evento. Defina `openDelay`, `closeDelay`, `placement`, `offset`, `className` ou
+`aria-label` quando necessário. O popup permanece aberto enquanto seu conteúdo
+tiver ponteiro ou foco, fecha ao pressionar Escape ou clicar fora, e usa o último
+evento na ordem dos dados quando os eventos se sobrepõem. `hoverColor` e
+`isHovered` controlam o desenho do evento; `EventPopup` controla sua UI de detalhes.
+
 ### Estrutura de Eventos
 
 Os eventos na linha do tempo seguem esta estrutura:
@@ -271,22 +337,60 @@ type TimelineEvent = {
   to?: number;            // Timestamp de término (opcional para eventos pontuais)
   axisId: string;         // ID do eixo ao qual este evento pertence
   trackIndex: number;     // Índice na trilha do eixo
-  renderer?: AbstractEventRenderer; // Renderizador personalizado opcional
+  renderer?: AbstractEventRenderer; // Renderizador customizado opcional
   color?: string;         // Cor opcional do evento
+  hoverColor?: string;    // Cor opcional do estado em hover
   selectedColor?: string; // Cor opcional do estado selecionado
 };
 ```
 
-### Uso Direto com TypeScript
+### Cores do Gravity UI
 
-A classe `Timeline` pode ser usada diretamente em TypeScript sem React. Isso é útil para integrar com outros frameworks ou aplicações JavaScript vanilla:
+O Canvas não consegue resolver propriedades CSS customizadas por conta própria. A linha do tempo resolve um valor completo `var(--token)` em relação ao seu elemento canvas, portanto, os tokens semânticos do Gravity UI funcionam para eventos, marcadores, seções, eixos, grade e régua integrados.
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {useTimeline} from '@gravity-ui/timeline/react';
+import {GravityTimelineCanvas} from '@gravity-ui/timeline/react/uikit';
+
+<ThemeProvider theme="light">
+  <GravityTimelineCanvas timeline={timeline} />
+</ThemeProvider>
+```
+
+`GravityTimelineCanvas` redesenha automaticamente quando o tema efetivo do Gravity UI muda. Para um token ausente, use um fallback CSS como `var(--app-event-color, transparent)` ou chame `timeline.api.resolveColor(color, fallback)` de um renderizador personalizado.
+
+Para eventos, `color` é usado normalmente, `hoverColor` ao passar o mouse, e `selectedColor` após a seleção:
+
+```ts
+const events = [
+  {
+    id: 'deploy',
+    from: start,
+    to: end,
+    axisId: 'main',
+    trackIndex: 0,
+    color: 'var(--g-color-base-positive-medium)',
+    hoverColor: 'var(--g-color-base-positive-medium-hover)',
+    selectedColor: 'var(--g-color-base-positive-heavy)',
+  },
+];
+```
+
+Renderizadores de eventos personalizados recebem `resolveColor` como seu último argumento opcional; renderizadores de marcadores e seções personalizados o recebem em seus dados de renderização.
+
+### Uso Direto de TypeScript
+
+A classe `Timeline` pode ser usada diretamente em TypeScript sem React. Isso é útil para integrar com outros frameworks ou aplicações vanilla JavaScript:
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// Cria uma instância de linha do tempo
+// Criar uma instância de timeline
 const timeline = new Timeline({
   settings: {
     start: timestamp,
@@ -336,48 +440,46 @@ const timeline = new Timeline({
   }
 });
 
-// Inicializa com um elemento canvas
+// Inicializar com um elemento canvas
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
 }
 
-// Adiciona ouvintes de eventos
+// Adicionar ouvintes de eventos
 timeline.on('on-click', (detail) => {
-  console.log('Linha do tempo clicada:', detail);
+  console.log('Timeline clicado:', detail);
 });
 
 timeline.on('on-select-change', (detail) => {
   console.log('Seleção alterada:', detail);
 });
 
-// Limpa quando terminar
+// Limpar quando terminar
 timeline.destroy();
 ```
 
-A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
+A classe `Timeline` fornece uma API rica para gerenciar a timeline:
 
 - **Gerenciamento de Eventos**:
   ```typescript
-  // Adiciona um ouvinte de evento
+  // Adicionar ouvinte de evento
   timeline.on('eventClick', (detail) => {
     console.log('Evento clicado:', detail);
   });
-```
 
-```markdown
-  // Remove event listener
+  // Remover ouvinte de evento
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // Emit custom events
-  timeline.emit('customEvent', { data: 'custom data' });
+  // Emitir eventos personalizados
+  timeline.emit('customEvent', { data: 'dados personalizados' });
   ```
 
-- **Controle da Linha do Tempo**:
+- **Controle da Timeline**:
   ```typescript
-  // Atualiza os dados dos eventos
+  // Atualizar dados da timeline
   timeline.api.setEvents([
     {
       id: 'newEvent',
@@ -389,7 +491,7 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
     }
   ]);
 
-  // Atualiza os eixos
+  // Atualizar eixos
   timeline.api.setAxes([
     {
       id: 'newAxis',
@@ -399,7 +501,7 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
     }
   ]);
 
-  // Atualiza os marcadores
+  // Atualizar marcadores
   timeline.api.setMarkers([
     {
       id: 'newMarker',
@@ -411,7 +513,7 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
     }
   ]);
 
-  // Atualiza as seções
+  // Atualizar seções
   timeline.api.setSections([
     {
       id: 'newSection',
@@ -422,7 +524,7 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
     }
   ]);
 
-  // Atualiza a configuração de visualização (mescla com a configuração atual)
+  // Atualizar configuração de visualização (mescla com a configuração atual)
   timeline.api.setViewConfiguration({ hideRuler: true });
   ```
 
@@ -430,10 +532,11 @@ A classe `Timeline` fornece uma API rica para gerenciar a linha do tempo:
 
 Explore exemplos interativos em nosso [Storybook](https://preview.gravity-ui.com/timeline/):
 
-- [Linha do Tempo Básica](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Linha do tempo simples com eventos e eixos
-- [Linha do Tempo Infinita](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Linha do tempo infinita com eventos e eixos
-- [Marcadores](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Linha do tempo com marcadores verticais e rótulos
-- [Eventos Personalizados](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Linha do tempo com renderização de eventos personalizada
+- [Timeline Básica](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Timeline simples com eventos e eixos
+- [Timeline Infinita](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Timeline infinita com eventos e eixos
+- [Marcadores](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline com marcadores verticais e rótulos
+- [Interações da Câmera](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) - Configurar comportamento de roda, rolagem horizontal e zoom por trackpad
+- [Eventos Personalizados](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline com renderização de eventos personalizada
 - [Integrações](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection, DragHandler, NestedEvents, Popup, List
 
 
@@ -460,4 +563,3 @@ npm run build-storybook
 ## Licença
 
 MIT
-```
