@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/timeline@1.21.0`
+> Generated for `@gravity-ui/timeline@1.31.0`
 
 # Timeline
 
@@ -12,6 +12,14 @@
 npm install @gravity-ui/timeline
 ```
 
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@gravity-ui/uikit` | `^7.18.0` |
 
 ## Usage
 
@@ -60,6 +68,51 @@ type TimelineAxis = {
   height: number;      // Height per track (px)
 };
 ```
+
+### Horizontal Axis Lines
+
+Configure horizontal line placement through `viewConfiguration.axes.linePosition`:
+
+- `"center"` (default) draws a line through the center of every track.
+- `"between"` draws a line after every track, at its bottom boundary. This is useful for table-style rows with centered event bars.
+
+```typescript
+viewConfiguration: {
+  axes: {
+    linePosition: 'between'
+  }
+}
+```
+
+### Flexible Camera Interactions
+
+`ZoomMode` provides familiar interaction presets, while `camera.interactions` lets you override an individual gesture. This is useful when a timeline lives inside a vertically scrollable page: keep horizontal pan and trackpad zoom, but let normal wheel scrolling reach the parent container.
+
+```tsx
+import {ZoomMode} from '@gravity-ui/timeline';
+
+const {timeline} = useTimeline({
+  settings: { /* ... */ },
+  viewConfiguration: {
+    camera: {
+      zoom: ZoomMode.DEFAULT,
+      interactions: {
+        verticalWheel: 'pass-through',
+        horizontalWheel: 'pan',
+        pinch: 'zoom',
+      },
+      zoomSensitivity: {
+        in: 0.5,
+        out: 0.5,
+      },
+      minRange: 5_000,
+      maxRange: 1000 * 60 * 60 * 24 * 365,
+    },
+  },
+});
+```
+
+Each interaction accepts `'zoom'`, `'pan'`, or `'pass-through'`. `pinch` represents a browser's Ctrl+wheel trackpad gesture. `zoomSensitivity.in` and `zoomSensitivity.out` independently multiply zoom-in and zoom-out speed: `1` is the default, lower values are gentler, and `0` disables zoom in that direction. Small trackpad deltas are smoothed automatically. `minRange` and `maxRange` are durations in milliseconds; the minimum defaults to 5 seconds and the maximum is unrestricted unless configured, so set `maxRange` to limit how far users can zoom out. See the interactive [Camera interactions Storybook example](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus).
 
 ### Section Structure
 
@@ -184,4 +237,4 @@ const MyTimelineComponent = () => {
 
 ---
 
-> Docs for `@gravity-ui/timeline@1.21.0`. Versioned at: `https://gravity-ui.com/llms/timeline/1.21.0/llms.txt` (exact), `https://gravity-ui.com/llms/timeline/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/timeline/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/timeline@1.31.0`. Versioned at: `https://gravity-ui.com/llms/timeline/1.31.0/llms.txt` (exact), `https://gravity-ui.com/llms/timeline/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/timeline/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
