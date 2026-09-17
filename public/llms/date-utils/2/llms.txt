@@ -1,17 +1,39 @@
-> Generated for `@gravity-ui/date-utils@2.7.1`
+> Generated for `@gravity-ui/date-utils@2.7.2`
 
-# Date Utils
+# @gravity-ui/date-utils documentation
 
-> Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
->
-> **npm:** `@gravity-ui/date-utils` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **2.7.2** version of `@gravity-ui/date-utils`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/date-utils/build/docs/`).
+
+## For AI agents
+
+Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
+
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
 
 ## Install
 
 ```shell
 npm i @gravity-ui/date-utils
 ```
-
 
 ## Usage
 
@@ -48,32 +70,11 @@ dateTime({input: ''}).format(FORMAT); // "Invalid Date"
 dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid Date"
 ```
 
+## Guides
 
-### When to use
-
-- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
-- Formatting dates for display in the user's timezone with locale support.
-- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
-
-### When not to use
-
-- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
-- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
-
-### Common pitfalls
-
-- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
-- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
-- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
-- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/date-utils/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/date-utils/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/date-utils)
+- [Getting Started](https://unpkg.com/@gravity-ui/date-utils@2.7.2/build/docs/guides/get-started.md)
+- [Overview](https://unpkg.com/@gravity-ui/date-utils@2.7.2/build/docs/guides/overview.md)
 
 ---
 
-> Docs for `@gravity-ui/date-utils@2.7.1`. Versioned at: `https://gravity-ui.com/llms/date-utils/2.7.1/llms.txt` (exact), `https://gravity-ui.com/llms/date-utils/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-utils/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/date-utils@2.7.2`. Versioned at: `https://gravity-ui.com/llms/date-utils/2.7.2/llms.txt` (exact), `https://gravity-ui.com/llms/date-utils/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-utils/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
