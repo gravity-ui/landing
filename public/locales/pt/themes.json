@@ -55,6 +55,7 @@
   "export_theme_cancel_btn": "Cancelar",
   "export_theme_apply_btn_css": "Salvar como CSS",
   "export_theme_apply_btn_json": "Salvar como JSON",
+  "export_theme_open_storybook": "Abrir no Storybook",
   "export_theme_apply-theme-alert-title": "Como aplicar o tema",
   "radius": "Raio",
   "radius_regular": "Regular",

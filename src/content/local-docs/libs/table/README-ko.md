@@ -81,9 +81,9 @@ const RowSelectionExample = () => {
 
 선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행의 체크박스 상태가 올바르게 표시되지 않습니다. https://github.com/TanStack/table/issues/4878
 
-#### 사용자 정의 범위 선택 열
+#### 사용자 정의 범위 선택 컬럼
 
-`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 행 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 액세스하려면 `CellContext` 인스턴스를 전달해야 합니다.
+`useToggleRangeSelectionHandler` 훅은 Shift+클릭 이벤트를 감지하고 범위 행 선택을 수행하는 변경 핸들러를 반환합니다. 테이블 및 행의 내부 상태에 접근하려면 `CellContext` 인스턴스를 전달해야 합니다.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-`RangedSelectionCheckbox` 컴포넌트도 있으며, 내부적으로 훅을 사용하고 `CellContext` 인스턴스를 prop으로 받습니다. 이 컴포넌트는 사용자 정의 선택 열에 범위 선택 기능을 추가하는 바로 가기를 제공합니다.
+내부적으로 훅을 사용하고 `CellContext` 인스턴스를 prop으로 받는 `RangedSelectionCheckbox` 컴포넌트도 있습니다. 이 컴포넌트는 사용자 정의 선택 컬럼에 범위 선택 기능을 추가하는 데 편리한 방법을 제공합니다.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -198,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-기본적으로 `selectionColumn`으로 생성된 선택 열에는 범위 선택 기능이 포함됩니다.
+기본적으로 `selectionColumn`으로 생성된 선택 컬럼에는 범위 선택 기능이 포함됩니다.
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -276,25 +276,25 @@ interface PersonGroup {
 type Item = PersonGroup | Person;
 
 const columns: ColumnDef<Item>[] = [
-  {accessorKey: 'name', header: 'Name', size: 200},
-  {accessorKey: 'age', header: 'Age', size: 100},
+  {accessorKey: 'name', header: '이름', size: 200},
+  {accessorKey: 'age', header: '나이', size: 100},
 ];
 
 const data: Item[] = [
   {
     id: 'friends',
-    name: 'Friends',
+    name: '친구',
     items: [
-      {id: 'nick', name: 'Nick', age: 25},
-      {id: 'tom', name: 'Tom', age: 21},
+      {id: 'nick', name: '닉', age: 25},
+      {id: 'tom', name: '톰', age: 21},
     ],
   },
   {
     id: 'relatives',
-    name: 'Relatives',
+    name: '친척',
     items: [
-      {id: 'john', name: 'John', age: 23},
-      {id: 'michael', name: 'Michael', age: 27},
+      {id: 'john', name: '존', age: 23},
+      {id: 'michael', name: '마이클', age: 27},
     ],
   },
 ];
@@ -319,9 +319,9 @@ const GroupingExample = () => {
 };
 ```
 
-선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅 없이는 부모 행의 체크박스 상태가 올바르지 않게 됩니다. https://github.com/TanStack/table/issues/4878
+선택 기능과 함께 그룹화를 사용하려면 `useRowSelectionFixedHandler` 훅을 사용하세요. 이 훅을 사용하지 않으면 상위 행 체크박스의 상태가 올바르지 않게 됩니다. https://github.com/TanStack/table/issues/4878
 
-중첩 스타일을 활성화하려면 컬럼 구성에서 `withNestingStyles = true`를 전달하세요.
+중첩 스타일을 활성화하려면 컬럼 설정에서 `withNestingStyles = true`를 전달하세요.
 
 트리 깊이 표시기는 `showTreeDepthIndicators = false`를 전달하여 비활성화할 수 있습니다.
 
@@ -333,7 +333,7 @@ import {TreeExpandableCell} from '@gravity-ui/table';
 const columns: ColumnDef<Item>[] = [
   {
     accessorKey: 'name',
-    header: 'Name',
+    header: '이름',
     size: 200,
     showTreeDepthIndicators: false,
     withNestingStyles: true,
@@ -394,12 +394,12 @@ const ReorderingExample = () => {
 
 #### 드래그 핸들 없이 재정렬
 
-행 전체를 드래그 활성기로 사용하고 컬럼 정의에서 `dragHandleColumn`을 생략하려면 `dragWithoutHandle`을 설정하세요.
+전체 행을 드래그 활성기로 사용하고 컬럼 정의에서 `dragHandleColumn`을 생략하려면 `dragWithoutHandle`을 설정하세요.
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
+  {accessorKey: 'name', header: '이름'},
+  {accessorKey: 'age', header: '나이'},
 ];
 
 return (
@@ -409,18 +409,20 @@ return (
 );
 ```
 
-포인터가 드래그가 시작되기 전에 8픽셀 이동해야 일반 행 및 컨트롤 클릭이 계속 작동합니다. 사용자 정의 행 부분을 드래그 시작에서 제외하려면 해당 `onPointerDown` 핸들러에서 `preventDefault()`를 호출하세요.
+포인터가 드래그를 시작하기 전에 8픽셀 이동해야 일반 행 및 컨트롤 클릭이 계속 작동합니다. 사용자 정의 행 부분을 드래그 시작에서 제외하려면 해당 `onPointerDown` 핸들러에서 `preventDefault()`를 호출하세요.
+
+`ReorderingProvider`는 기본적으로 dnd-kit의 수직 자동 스크롤을 활성화합니다. 애플리케이션이 자체 드래그 자동 스크롤 구현을 제공하는 경우 `autoScroll={false}`를 전달하세요. 둘 다 동시에 실행하면 스크롤 쓰기가 충돌할 수 있습니다.
 
 #### 컬럼 재정렬
 
-헤더를 드래그 앤 드롭하여 컬럼 순서를 재정렬하려면 테이블을 `ColumnReorderingProvider`로 감싸세요.
+헤더를 드래그 앤 드롭하여 컬럼을 재정렬하려면 테이블을 `ColumnReorderingProvider`로 감싸세요.
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Age', size: 100},
+  {accessorKey: 'name', header: '이름', size: 100},
+  {accessorKey: 'age', header: '나이', size: 100},
 ];
 
 const ColumnReorderingExample = () => {
@@ -448,16 +450,16 @@ import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@g
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
+  {accessorKey: 'name', header: '이름'},
+  {accessorKey: 'age', header: '나이'},
 ];
-
-const CombinedReorderingExample = () => {
-  const [data, setData] = React.useState(initialData);
-  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
 ```
 
 ```tsx
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
   const table = useTable({
     columns,
     data,
@@ -469,7 +471,7 @@ const CombinedReorderingExample = () => {
   const handleRowReorder = React.useCallback<
     NonNullable<ReorderingProviderProps<Person>['onReorder']>
   >(({draggedItemKey, baseItemKey}) => {
-    // data 배열 업데이트
+    // update data array
   }, []);
 
   const handleColumnReorder = React.useCallback<
@@ -488,7 +490,7 @@ const CombinedReorderingExample = () => {
 };
 ```
 
-`columnOrder`를 직접 제어하는 경우(예: 영구 저장), `onReorder`를 전달하고 결과 순서를 적용하세요:
+`columnOrder`를 직접 제어하는 경우(예: 영구 저장), `onReorder`를 전달하고 결과 순서를 적용하세요.
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -521,9 +523,9 @@ CSS API:
 | `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | 드래그 미리보기 박스 그림자 |
 | `--gt-table-drag-overlay-border-radius`      | `6px`                         | 드래그 미리보기 테두리 반경 |
 
-특정 열의 재정렬을 금지하려면 해당 열 정의에서 `enableColumnReordering: false`를 설정하세요. 플레이스홀더(그룹화된) 열은 드래그할 수 없습니다. `activationDistance`(기본값 `8`)를 사용하여 포인터가 드래그를 시작하기 전에 이동해야 하는 거리를 조정하여 헤더 클릭(정렬 등)이 작동하도록 합니다.
+특정 열의 재정렬을 금지하려면 열 정의에서 `enableColumnReordering: false`를 설정하세요. 플레이스홀더(그룹화된) 열은 드래그할 수 없습니다. `activationDistance`(기본값 `8`)를 사용하여 드래그가 시작되기 전에 포인터가 이동해야 하는 거리를 조정하여 헤더 클릭(정렬 등)이 작동하도록 합니다.
 
-고정된 열도 재정렬할 수 있지만, 서로 간에만 가능합니다. 열은 왼쪽 고정 그룹, 오른쪽 고정 그룹 또는 중앙(고정되지 않은) 그룹 내에서만 이동할 수 있으며, 드래그 시 고정 경계를 넘지 않습니다.
+고정된 열도 재정렬할 수 있지만, 서로 간에만 가능합니다. 열은 왼쪽 고정 그룹, 오른쪽 고정 그룹 또는 중앙(고정되지 않은) 그룹 내에서만 이동할 수 있습니다. 드래그 시 고정 경계를 넘지 않습니다.
 
 ```tsx
 <ColumnReorderingProvider
@@ -542,7 +544,7 @@ CSS API:
 
 드래그하는 동안:
 
-- 열의 플로팅 미리보기(헤더와 첫 몇 개의 행)가 드래그 오버레이에서 포인터를 따라갑니다.
+- 열의 플로팅 미리보기(헤더와 첫 번째 행 포함)가 드래그 오버레이에서 포인터를 따라갑니다.
 - 드래그된 열은 반투명해집니다.
 - 열이 드롭될 위치에 파란색 삽입선이 그려집니다.
 
@@ -559,7 +561,7 @@ CSS API:
 
 #### 가상화
 
-그리드 컨테이너를 스크롤 요소로 사용하려는 경우 사용하세요(창을 사용하려면 창 가상화 섹션을 참조하세요). 가상화가 작동하려면 컨테이너에 고정된 높이를 설정해야 합니다.
+그리드 컨테이너를 스크롤 요소로 사용하려는 경우 사용하세요(창을 사용하려면 창 가상화 섹션을 참조하세요). 가상화가 작동하려면 컨테이너에 고정 높이를 설정해야 합니다.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -596,7 +598,37 @@ const VirtualizationExample = () => {
 };
 ```
 
-재정렬 기능과 함께 가상화를 사용하는 경우 `rangeExtractor` 옵션도 전달해야 합니다.
+지속적인 양방향 스크롤 중에 커버된 상태를 유지해야 하는 테이블의 경우 적응형
+직접 DOM 모드를 활성화하고 안정적인 의미론적 키를 사용하세요. 동일한 키는 불변 재정렬 또는 트리 재부모 지정 전후에 행을 식별해야 합니다.
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync`는 따뜻하게 마운트된 범위를 유지하고 덮이지 않은 보이는
+범위만 동기적으로 채웁니다. `directDomUpdates`를 사용하면 가상화기가 React 렌더링 없이 행 위치와 본문 크기를 업데이트할 수 있습니다. 테이블 행의 경우 `position`을 사용하세요. 주변 레이아웃에서 변환이 필요한 경우가 아니라면 말입니다. `getRowId` 및 `getItemKey`를 안정적으로 유지하고 행 확장, 축소, 재정렬 또는 재부모 지정 후 현재 평면화된 행 모델에서 `count`를 설정하세요. 임의의 사용자 지정 `rangeExtractor`는 계속해서 권한을 가지며 적응형 창 계획을 비활성화합니다.
+
+`BaseTable.canDeferOffscreenCellContent`는 매우 넓은 적응형 테이블을 위한 추가적인 선택적 기능입니다. 지연된 마운트가 기하학, 포커스, 접근성 또는 애플리케이션 상태를 변경할 수 없는 수동 셀 콘텐츠에 대해서만 `true`를 반환하세요. 사용자 지정 행, 그룹 행, 고정 셀, 대화형 또는 부작용이 있는 콘텐츠는 계속해서 즉시 마운트되어야 합니다.
+
+기본 적응형 범위 추출기를 사용하면 `BaseTable`이 활성 드래그 행을 자동으로 고정합니다.
+사용자 지정 범위 추출기는 해당 행을 직접 유지하는 역할을 합니다. 비적응형 가상화와 함께 재정렬을 사용하는 경우,
+동일한 의미론적 `getItemKey` 계약을 유지하고 `rangeExtractor` 옵션을 전달하세요:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -622,7 +654,7 @@ return (
 
 #### 창 가상화
 
-창을 스크롤 요소로 사용하려는 경우 사용하세요.
+스크롤 요소로 창을 사용하고 싶을 때 사용하세요.
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -661,9 +693,7 @@ const WindowVirtualizationExample = () => {
 const columns: ColumnDef<Person>[] = [
   /* ... */
 ];
-```
 
-```tsx
 const data: Person[] = [
   /* ... */
 ];
@@ -680,16 +710,16 @@ const ResizingDemo = () => {
 };
 ```
 
-#### 컬럼 설정
+#### 열 설정
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
-  // ...다른 컬럼들
+  // ...other columns
   {
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // 선택 사항. 설정 팝오버에서 이 컬럼을 숨길 수 있습니다.
+      hideInSettings: false, // 선택 사항. 설정 팝오버에서 이 열을 숨길 수 있습니다.
       titleInSettings: 'ReactNode', // 선택 사항. 설정 팝오버의 헤더 필드를 재정의합니다 (헤더와 설정 팝오버에 다른 콘텐츠가 필요한 경우).
     },
   }, // 또는 getSettingsColumn 함수를 사용할 수 있습니다.
@@ -705,10 +735,10 @@ const TableSettingsDemo = () => {
     column_id: false, // 기본적으로 숨김 처리
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* 리프 컬럼 ID */
+    /* leaf columns ids */
   ]); // 외부 제어 및 초기 상태용
 
-  // useTableSettings 훅을 사용하여 상태, 콜백 및 설정 적용 콜백을 가져오는 대안:
+  // useTableSettings 훅을 사용하여 상태, 콜백을 가져오고 설정 적용 콜백을 설정하는 대안:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -726,17 +756,17 @@ const TableSettingsDemo = () => {
 };
 ```
 
-react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 컬럼 크기 조정 속성에 대해 자세히 알아보세요.
+react-table [문서](https://tanstack.com/table/v8/docs/api/features/column-sizing)에서 테이블 및 열 크기 조정 속성에 대해 자세히 알아보세요.
 
 ## 알려진 문제 및 호환성
 
-### React 19 + React Compiler 호환성
+### React 19 + React 컴파일러 호환성
 
-**⚠️ 알려진 문제:** `@gravity-ui/table` (TanStack Table 기반)을 사용할 때 React 19 및 React Compiler와 알려진 호환성 문제가 있습니다. 데이터가 변경될 때 테이블이 다시 렌더링되지 않을 수 있습니다. 자세한 내용은 [TanStack Table 이슈 #5567](https://github.com/TanStack/table/issues/5567)을 참조하세요.
+**⚠️ 알려진 문제:** `@gravity-ui/table`(TanStack Table 기반)을 사용할 때 React 19 및 React 컴파일러와 알려진 호환성 문제가 있습니다. 데이터가 변경될 때 테이블이 다시 렌더링되지 않을 수 있습니다. 자세한 내용은 [TanStack Table 이슈 #5567](https://github.com/TanStack/table/issues/5567)을 참조하세요.
 
 **해결 방법:**
 
-React 19와 React Compiler를 함께 사용하고 있으며 테이블 다시 렌더링 문제로 어려움을 겪고 있다면, 컴포넌트 코드에 `'use no memo'` 지시문을 사용할 수 있습니다.
+React 19와 React 컴파일러를 함께 사용하고 테이블 다시 렌더링에 문제가 발생하는 경우, 컴포넌트 코드에 `'use no memo'` 지시문을 사용할 수 있습니다.
 
 ```tsx
 import React from 'react';
@@ -744,7 +774,7 @@ import {Table, useTable} from '@gravity-ui/table';
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 function MyTable() {
-  'use no memo'; // 이 컴포넌트에 대한 React Compiler 메모이제이션 비활성화
+  'use no memo'; // 이 컴포넌트에 대한 React 컴파일러 메모이제이션 비활성화
 
   const [data, setData] = React.useState<Person[]>([]);
 
@@ -781,7 +811,7 @@ function MyTable() {
 }
 ```
 
-**참고:** 이 문제는 기본 TanStack Table 라이브러리에 있으며 거기서 수정되어야 합니다. 위의 해결 방법은 수정이 제공될 때까지 도움이 될 것입니다.
+**참고:** 이 문제는 기본 TanStack Table 라이브러리에 있으며 해당 라이브러리에서 수정되어야 합니다. 위의 해결 방법은 수정이 제공될 때까지 도움이 될 것입니다.
 
 ## 라이선스
 
@@ -789,29 +819,28 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENS
 
 ## AI 에이전트용
 
-Gravity UI 앱을 위한 헤드리스, TanStack-Table 기반 데이터 그리드 — uikit의 기본 `Table` 위에 원시 마크업을 구성하는 대신 정렬 가능하고, 선택 가능하며, 그룹화 가능하고, 재정렬 가능하며, 가상화된 테이블을 위해 사용하세요.
+Gravity UI 앱을 위한 헤드리스, TanStack-Table 기반 데이터 그리드 — 정렬 가능, 선택 가능, 그룹화 가능, 재정렬 가능 및 가상화된 테이블을 위해 uikit의 기본 `Table` 위에 원시 마크업을 구성하는 대신 이를 사용하세요.
 
 ### 언제 사용해야 할까요?
 
-- 행 또는 창 가상화가 필요한 대규모 데이터셋 (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- 컬럼 정렬, 크기 조정, 재정렬 (`ColumnReorderingProvider`), 고정 및 사용자별 컬럼 설정 (`TableSettings`).
-- 행 선택 (단일/다중, 범위) 및 확장 가능한 셀이 있는 트리/그룹화된 행.
+- 행 또는 창 가상화가 필요한 대규모 데이터 세트 (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- 열 정렬, 크기 조정, 재정렬 (`ColumnReorderingProvider`), 고정 및 사용자별 열 설정 (`TableSettings`).
+- 행 선택(단일/다중, 범위) 및 확장 가능한 셀이 있는 트리/그룹화된 행.
 
 ### 언제 사용하지 않아야 할까요?
 
 - 몇 개의 행과 고급 기능이 없는 간단한 정적 테이블 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 uikit 내장 `Table`이 더 가볍습니다.
-- 테이블이 아닌 목록 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 `List`를 사용하세요.
-- 스프레드시트 스타일의 인라인 셀 편집 — 이 그리드는 편집 가능한 스프레드시트가 아닌 읽기/표시 중심입니다.
+- 비표 형식 목록 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)의 `List`를 사용하세요.
+- 스프레드시트 스타일의 인라인 셀 편집 — 이 그리드는 읽기/표시 중심이며 편집 가능한 스프레드시트가 아닙니다.
 
 ### 일반적인 함정
 
-- **`useTable`로 테이블을 빌드한 다음 `<Table table={table} />`를 렌더링합니다.** 주요 prop은 `<Table>`의 `data`/`columns`가 아니라 `table` (인스턴스)입니다. `data`와 `columns`를 `useTable`에 전달하세요.
-- **타입은 `@gravity-ui/table/tanstack` 하위 경로에서 가져옵니다.** `ColumnDef`, `RowSelectionState`, `SortingState` 등은 패키지 루트가 아닌 `@gravity-ui/table/tanstack`에서 가져옵니다.
+- **`useTable` 훅을 사용하여 테이블을 빌드한 다음 `<Table table={table} />`를 렌더링합니다.** 주요 prop은 `<Table>`에 직접 `data`/`columns`가 아닌 `table` (인스턴스)입니다. `data`와 `columns`는 `useTable`에 전달하세요.
+- **타입은 `@gravity-ui/table/tanstack` 경로에서 가져옵니다.** 패키지 루트가 아닌 `@gravity-ui/table/tanstack`에서 `ColumnDef`, `RowSelectionState`, `SortingState` 등을 가져옵니다.
 - **정렬에는 accessor가 필요합니다.** 정렬이 작동하려면 컬럼에 `accessorKey`/`accessorFn`이 있어야 합니다. `enableSorting`을 설정하고 `getRowId`를 제공하세요.
-- **React 19 + React Compiler는 다시 렌더링을 건너뛸 수 있습니다.** 이것은 상위 TanStack Table 문제이므로 컴포넌트에 `'use no memo'` 지시문을 추가하거나 `data`를 메모이제이션하세요.
-- **범위 선택이 중첩된 행에서 깨집니다.** 테이블에 그룹화/중첩된 행이 있는 경우 범위 선택은 정의되지 않은 동작입니다. 그룹화된 경우 올바른 부모 체크박스 상태를 위해 `useRowSelectionFixedHandler`를 사용하세요.
+- **React 19 + React Compiler는 리렌더링을 건너뛸 수 있습니다.** 이는 상위 TanStack Table 이슈입니다. 컴포넌트에 `'use no memo'` 지시문을 추가하거나 `data`를 memoize하세요.
+- **범위 선택은 중첩된 행에서 작동하지 않습니다.** 테이블에 그룹화/중첩된 행이 있는 경우 범위 선택은 정의되지 않은 동작입니다. 그룹화 시 올바른 부모 체크박스 상태를 위해 `useRowSelectionFixedHandler`를 사용하세요.
 
 ## AI 에이전트용 문서
 
 설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/table/build/docs/INDEX.md`에 있습니다.
-```

@@ -1,17 +1,39 @@
-> Generated for `@gravity-ui/graph@1.11.3`
+> Generated for `@gravity-ui/graph@1.12.0`
 
-# Graph
+# @gravity-ui/graph documentation
 
-> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
->
-> **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **1.12.0** version of `@gravity-ui/graph`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/graph/build/docs/`).
+
+## For AI agents
+
+A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
+
+### When to use
+
+- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
+- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
+- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
+
+### When not to use
+
+- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
+- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
+
+### Common pitfalls
+
+- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
+- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
+- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
+- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
 
 ## Install
 
 ```bash
 npm install @gravity-ui/graph
 ```
-
 
 ## Peer dependencies
 
@@ -21,12 +43,13 @@ Install these in the host project at a compatible version:
 | --- | --- |
 | `react` | `^17.0.0 || ^18.0.0` |
 | `react-dom` | `^17.0.0 || ^18.0.0` |
+| `@playwright/test` | `>=1.58.0` |
 
 ## Usage
 
 ### React Example
 
-[Detailed React Components Documentation](docs/react/usage.md)
+[Detailed React Components Documentation](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/react/usage.md)
 
 ```typescript
 import React, { useEffect } from "react";
@@ -194,33 +217,36 @@ graph.start();
 graph.zoomTo("center", { padding: 100 });
 ```
 
+## Guides
 
-### When to use
-
-- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
-- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
-- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
-
-### When not to use
-
-- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
-- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
-
-### Common pitfalls
-
-- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
-- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
-- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
-- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/graph/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/graph/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/graph)
+- [Anchors Documentation](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/components/anchors.md) — Anchors are connection points on blocks that allow creating connections between blocks. This document describes the anchor structure, behavior, and how to properly configure them.
+- [Batch Rendering System in BlockConnection](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/connections/batch-rendering.md) — BlockConnection uses a sophisticated batch rendering system to optimize performance when displaying many connections. Instead of drawing each connection individually, the system groups connections with similar visual properties and renders them together, significantly reducing canvas API calls.
+- [Block Component Documentation](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/components/block-component.md) — The Block component is the fundamental building block for rendering graph nodes in the visualization system. This document describes the Block component's structure, behavior, events, and how to extend it with custom implementations.
+- [Camera Service](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/camera.md) — This document describes the camera model in @gravity-ui/graph: how it transforms coordinates, how pan/zoom work, which API is available, and when to use optional viewport insets.
+- [Canvas GraphComponent: The Foundation of Visual Rendering](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/components/canvas-graph-component.md) — The GraphComponent class serves as the cornerstone for all visual elements within the graph system. Think of it as the "DNA" that all visible components share - blocks, connections, anchors, and interactive elements all inherit from this foundational class.
+- [Component Lifecycle](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/component-lifecycle.md) — This document provides an in-depth explanation of the component lifecycle in the rendering system, focusing on both the CoreComponent and Component classes.
+- [Component Rendering and Lifecycle Integration](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/component-rendering-lifecycle.md) — This document provides a comprehensive view of how the component lifecycle, rendering mechanism, and scheduler system work together to create the complete rendering pipeline.
+- [Connection System: Connecting Blocks in Your Graph](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/connections/canvas-connection-system.md) — The Connection System allows you to create visual links between blocks in your graph. It supports different types of connections, from simple straight lines to complex curved paths with multiple points.
+- [CSS Variables Plugin](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/plugins/cssVariables.md)
+- [Declarative Components](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/react/declarative-components.md) — The @gravity-ui/graph library provides declarative React components that simplify working with graph layers and HTML overlays.
+- [DevTools Plugin](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/plugins/devtools.md)
+- [Drag System](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/drag-system.md) — The Drag System provides a centralized way to handle drag operations for all graph components. It automatically manages drag lifecycle, autopanning, cursor states, and coordinates movement across multiple selected components.
+- [Event System](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/events.md) — This document describes the event system used in the graph visualization library, based on the DOM EventTarget API and CustomEvent.
+- [Graph Settings](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/graph-settings.md) — The Graph Visualization Library provides a comprehensive set of configuration options for customizing the appearance and behavior of your graph visualizations. This document describes the available settings and how to use them.
+- [Groups: cookbook](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/blocks/groups.md) — Groups draw a frame behind (or around) blocks: swimlanes, clusters by type, or collapsible regions. This page is organized by what you want to do; implementation details appear where they help you wire the behavior.
+- [Layers](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/rendering/layers.md)
+- [Migration Guide: v0.x → v1.x](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/migration-guides/v0-to-v1.md)
+- [React Components API](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/react/usage.md)
+- [React Hooks](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/react/hooks.md) — This document describes all available React hooks for working with @gravity-ui/graph.
+- [Rendering Mechanism Documentation](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/rendering/rendering-mechanism.md) — This document provides a detailed explanation of the rendering mechanism implemented in the library, focusing on the Component and CoreComponent classes and their lifecycles.
+- [Scheduler System Documentation](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/scheduler-system.md) — This document describes the scheduling system that coordinates component updates in the rendering engine, focusing on the Scheduler and GlobalScheduler classes.
+- [Selection Management System](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/selection-manager.md)
+- [system/event-model](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/event-model.md)
+- [system/public_api](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/public_api.md)
+- [Testing graph applications with Playwright](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/testing/playwright.md) — The package exposes Playwright page objects through a separate entry point. They let tests interact with canvas-rendered blocks and connections without depending on internal DOM structure.
+- [v1 to v2 transition](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/v1-v2-transition.md) — This guide describes the temporary branch and release setup while Gravity Graph v2 is developed. It is intentionally small and is expected to be retired after the transition.
+- [Wheel Intent Resolution](https://unpkg.com/@gravity-ui/graph@1.12.0/build/docs/guides/system/wheel-intent.md) — The camera routes wheel input by intent — pan or zoom — not by inferred device type (trackpad vs mouse). Classification lives in src/utils/functions/wheelIntent.ts and is configured via graph settings (resolveWheelIntent).
 
 ---
 
-> Docs for `@gravity-ui/graph@1.11.3`. Versioned at: `https://gravity-ui.com/llms/graph/1.11.3/llms.txt` (exact), `https://gravity-ui.com/llms/graph/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/graph@1.12.0`. Versioned at: `https://gravity-ui.com/llms/graph/1.12.0/llms.txt` (exact), `https://gravity-ui.com/llms/graph/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

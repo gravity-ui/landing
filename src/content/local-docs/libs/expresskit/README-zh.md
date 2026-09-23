@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit 是一个轻量级的 [express.js](https://expressjs.com/) 包装器，它集成了 [NodeKit](https://github.com/gravity-ui/nodekit)，并提供了一些有用的功能，例如请求日志记录、追踪支持、异步控制器和中间件以及详细的路由描述。
+ExpressKit 是一个轻量级的 [express.js](https://expressjs.com/) 包装器，它集成了 [NodeKit](https://github.com/gravity-ui/nodekit)，并提供了一些有用的功能，例如请求日志记录、跟踪支持、异步控制器和中间件以及详细的路由描述。
 
 安装：
 
@@ -23,6 +23,17 @@ const app = new ExpressKit(nodekit, {
 });
 
 app.run();
+```
+
+## 自我遥测
+
+默认情况下，自我遥测会发送原始请求 URL。查询字符串很大或基数很高的应用程序可以在发送统计信息之前剥离查询参数：
+
+```typescript
+const config: Partial<AppConfig> = {
+  appTelemetryChEnableSelfStats: true,
+  appTelemetryChSelfStatsStripQueryParams: true,
+};
 ```
 
 ## CSP
@@ -56,7 +67,7 @@ export default config;
 
 ## CSRF 防护
 
-ExpressKit 提供内置的跨站请求伪造 (CSRF) 防护功能，以保护您的应用程序免受恶意跨域请求的侵害。CSRF 中间件会自动生成和验证用于状态更改的 HTTP 请求的令牌。
+ExpressKit 提供内置的跨站请求伪造 (CSRF) 防护功能，以保护您的应用程序免受恶意跨域请求的侵害。CSRF 中间件会自动为状态更改的 HTTP 请求生成和验证令牌。
 
 ### 基本配置
 
@@ -75,16 +86,16 @@ export default config;
 
 ### 配置选项
 
-| 选项              | 类型                 | 默认值                              | 描述                                                                                     |
-| ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
-| `appCsrfSecret`     | `string \| string[]` | -                                    | **必需。** 用于 HMAC 令牌生成的密钥。多个密钥允许进行密钥轮换。 |
-| `appCsrfLifetime`   | `number`             | `2592000` (30 天)                  | 令牌的有效期（秒）。设置为 `0` 表示无过期时间。                                        |
-| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | 用于令牌验证的 HTTP 头部名称。                                                          |
+| 选项              | 类型                 | 默认值                           | 描述                                                                                     |
+| ------------------- | -------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `appCsrfSecret`     | `string \| string[]` | -                                | **必需。** 用于 HMAC 令牌生成的密钥。多个密钥允许密钥轮换。 |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 天)                | 令牌有效期（秒）。设置为 `0` 表示无过期时间。                                        |
+| `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                 | 用于令牌验证的 HTTP 标头名称。                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | 需要 CSRF 验证的 HTTP 方法。                                                      |
 
 ### 用法
 
-配置完成后，CSRF 防护将自动应用于所有具有指定 HTTP 方法的路由：
+配置完成后，CSRF 防护将自动应用于具有指定 HTTP 方法的所有路由：
 
 ```typescript
 import {ExpressKit, AuthPolicy} from '@gravity-ui/expresskit';
@@ -131,7 +142,7 @@ const app = new ExpressKit(nodekit, {
 
 ## 缓存控制
 
-默认情况下，ExpressKit 会为所有响应设置 `no-cache` 头部。您可以全局或按路由控制此行为。
+默认情况下，ExpressKit 会为所有响应设置 `no-cache` 标头。您可以全局或按路由控制此行为。
 
 ### 全局配置
 
@@ -150,14 +161,14 @@ const app = new ExpressKit(nodekit, {
     handler: (req, res) => res.json({data: 'cacheable'}),
   },
   'GET /api/fresh': {
-    enableCaching: false, // 强制不缓存
+    enableCaching: false, // 强制 no-cache
     handler: (req, res) => res.json({data: 'always fresh'}),
   },
 });
 ```
 
-路由级别的 `enableCaching` 会覆盖全局设置。缓存状态可在 `req.routeInfo.enableCaching` 中获取。
+路由级别的 `enableCaching` 会覆盖全局设置。缓存状态可在 `req.routeInfo.enableCaching` 中找到。
 
 ## 验证和响应序列化
 
-- [请求验证和响应序列化](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - 使用 Zod schema 进行自动请求验证和响应序列化。
+- [请求验证与响应序列化](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - 使用 Zod schema 实现自动化的请求验证和响应序列化。
