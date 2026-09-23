@@ -265,7 +265,7 @@ The timeline is implemented as a React component that can be configured through 
 
 The timeline component supports several interactive events:
 
-- `on-click`: Triggered when clicking on the timeline
+- `on-click`: Triggered when clicking on the timeline; includes the hit elements, timestamp, viewport coordinates, and canvas coordinates
 - `on-context-click`: Triggered on right-click/context menu
 - `on-select-change`: Fired when the selection changes
 - `on-hover`: Triggered when hovering over timeline elements
@@ -324,6 +324,8 @@ import {EventPopup} from '@gravity-ui/timeline/react/uikit';
   />
 </>
 ```
+
+The popup, hover highlight, and cursor use the same event: an exact hit takes priority over nearby events. Overlapping exact hits resolve to the last event in drawing order. Only when there is no exact hit, a tolerance of `3 px + events.hitboxPadding` is used. Group queries and `on-hover` still include all candidates.
 
 `EventPopup` opens after 150 ms and closes 200 ms after the pointer leaves the
 event. Set `openDelay`, `closeDelay`, `placement`, `offset`, `className`, or

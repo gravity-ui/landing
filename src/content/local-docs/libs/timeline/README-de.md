@@ -2,7 +2,7 @@
 
 > [English version](./README.md)
 
-Eine auf React basierende Bibliothek zum Erstellen interaktiver Zeitlinienvisualisierungen mit Canvas-Rendering.
+Eine auf React basierende Bibliothek zum Erstellen interaktiver Timeline-Visualisierungen mit Canvas-Rendering.
 
 ## Dokumentation
 
@@ -10,23 +10,23 @@ Details finden Sie in der [Dokumentation](./docs/docs.md).
 
 ## Vorschau
 
-Grundlegende Zeitlinie mit Ereignissen und Achsen:
+Basis-Timeline mit Ereignissen und Achsen:
 
-![Grundlegende Zeitlinie mit Ereignissen](./docs/img/lines.png)
+![Basis-Timeline mit Ereignissen](./docs/img/lines.png)
 
 Benutzerdefiniertes Rendering mit erweiterbaren verschachtelten Ereignissen ([NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story) Beispiel):
 
-![Verschachtelte Ereignisse Zeitlinie](./docs/img/events.png)
+![Verschachtelte Ereignisse Timeline](./docs/img/events.png)
 
 ## Funktionen
 
 - Canvas-basiertes Rendering für hohe Leistung
-- Interaktive Zeitlinie mit Zoom- und Schwenkfunktionen
-- Flexible Rad- und Touchpad-Interaktionen, einschließlich vertikalem Scroll-Pass-Through
+- Interaktive Timeline mit Zoom- und Schwenkfunktionen
+- Flexible Rad- und Trackpad-Interaktionen, einschließlich vertikalem Scroll-Pass-Through
 - Unterstützung für Ereignisse, Markierungen, Abschnitte, Achsen und Gitter
 - Hintergrundabschnitte zur visuellen Organisation und Hervorhebung von Zeiträumen
 - Intelligente Gruppierung von Markierungen mit automatischem Zoom auf die Gruppe – Klicken Sie auf gruppierte Markierungen, um in ihre einzelnen Komponenten hineinzuzoomen
-- Virtualisiertes Rendering für verbesserte Leistung bei großen Datensätzen (nur aktiv, wenn der Zeitlinieninhalt den Viewport überschreitet)
+- Virtualisiertes Rendering für verbesserte Leistung bei großen Datensätzen (nur aktiv, wenn der Timeline-Inhalt den Viewport überschreitet)
 - Anpassbares Erscheinungsbild und Verhalten
 - TypeScript-Unterstützung mit vollständigen Typdefinitionen
 - React-Integration mit benutzerdefinierten Hooks
@@ -39,7 +39,7 @@ npm install @gravity-ui/timeline
 
 ## Verwendung
 
-Die Zeitlinienkomponente kann in React-Anwendungen mit der folgenden grundlegenden Einrichtung verwendet werden:
+Die Timeline-Komponente kann in React-Anwendungen mit der folgenden grundlegenden Einrichtung verwendet werden:
 
 ```tsx
 import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
@@ -61,8 +61,8 @@ const MyTimelineComponent = () => {
 
   // timeline - Timeline-Instanz
   // api - CanvasApi-Instanz (identisch mit timeline.api)
-  // start - Funktion zur Initialisierung der Zeitlinie mit Canvas
-  // stop - Funktion zur Zerstörung der Zeitlinie
+  // start - Funktion zur Initialisierung der Timeline mit Canvas
+  // stop - Funktion zur Zerstörung der Timeline
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
@@ -102,7 +102,7 @@ viewConfiguration: {
 
 ### Flexible Kamera-Interaktionen
 
-`ZoomMode` bietet vertraute Interaktions-Presets, während `camera.interactions` es Ihnen ermöglicht, eine einzelne Geste zu überschreiben. Dies ist nützlich, wenn sich eine Zeitlinie innerhalb einer vertikal vertikal scrollbaren Seite befindet: Behalten Sie das horizontale Schwenken und das Touchpad-Zoomen bei, aber lassen Sie das normale Scrollen mit dem Mausrad den übergeordneten Container erreichen.
+`ZoomMode` bietet vertraute Interaktions-Presets, während `camera.interactions` es Ihnen ermöglicht, eine einzelne Geste zu überschreiben. Dies ist nützlich, wenn eine Timeline innerhalb einer vertikal scrollbaren Seite lebt: Behalten Sie das horizontale Schwenken und das Trackpad-Zoomen bei, aber lassen Sie das normale Scrollrad an den übergeordneten Container weitergegeben.
 
 ```tsx
 import {ZoomMode} from '@gravity-ui/timeline';
@@ -128,7 +128,7 @@ const {timeline} = useTimeline({
 });
 ```
 
-Jede Interaktion akzeptiert `'zoom'`, `'pan'` oder `'pass-through'`. `pinch` repräsentiert die Ctrl+Rad-Geste des Browsers auf dem Touchpad. `zoomSensitivity.in` und `zoomSensitivity.out` multiplizieren unabhängig voneinander die Geschwindigkeit des Ein- und Auszooms: `1` ist der Standard, niedrigere Werte sind sanfter und `0` deaktiviert das Zoomen in dieser Richtung. Kleine Deltas von Touchpads werden automatisch geglättet. `minRange` und `maxRange` sind Dauern in Millisekunden; das Minimum beträgt standardmäßig 5 Sekunden und das Maximum ist unbeschränkt, sofern nicht konfiguriert, setzen Sie also `maxRange`, um zu begrenzen, wie weit Benutzer herauszoomen können. Sehen Sie sich das interaktive [Camera interactions Storybook-Beispiel](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) an.
+Jede Interaktion akzeptiert `'zoom'`, `'pan'` oder `'pass-through'`. `pinch` repräsentiert die Ctrl+Rad-Geste des Browsers auf dem Trackpad. `zoomSensitivity.in` und `zoomSensitivity.out` multiplizieren unabhängig voneinander die Geschwindigkeit des Ein- und Auszoomens: `1` ist der Standard, niedrigere Werte sind sanfter und `0` deaktiviert das Zoomen in dieser Richtung. Kleine Trackpad-Änderungen werden automatisch geglättet. `minRange` und `maxRange` sind Dauern in Millisekunden; das Minimum beträgt standardmäßig 5 Sekunden und das Maximum ist unbeschränkt, sofern nicht konfiguriert, setzen Sie also `maxRange`, um zu begrenzen, wie weit Benutzer herauszoomen können. Sehen Sie sich das interaktive [Camera interactions Storybook-Beispiel](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) an.
 
 ### Abschnittsstruktur
 
@@ -138,14 +138,14 @@ Jeder Abschnitt erfordert die folgende Struktur:
 type TimelineSection = {
   id: string;               // Eindeutiger Abschnittsidentifikator
   from: number;             // Start-Zeitstempel
-  to?: number;              // Optionaler End-Zeitstempel (standardmäßig auf das Ende der Zeitlinie gesetzt)
+  to?: number;              // Optionaler End-Zeitstempel (standardmäßig auf das Ende der Timeline gesetzt)
   color: string;            // Hintergrundfarbe des Abschnitts
   hoverColor?: string;      // Optionale Farbe, wenn der Abschnitt überfahren wird
   renderer?: AbstractSectionRenderer; // Optionaler benutzerdefinierter Renderer (exportiert aus dem Paket)
 };
 ```
 
-Abschnitte bieten Hintergrundfarben für Zeiträume und helfen bei der visuellen Organisation von Zeitlinieninhalten:
+Abschnitte bieten Hintergrundfarben für Zeiträume und helfen bei der visuellen Organisation von Timeline-Inhalten:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -161,14 +161,14 @@ const MyTimelineComponent = () => {
           id: 'morning',
           from: Date.now(),
           to: Date.now() + 1800000, // 30 Minuten
-          color: 'rgba(255, 235, 59, 0.3)', // Halbtransparenter gelber Farbton
+          color: 'rgba(255, 235, 59, 0.3)', // Halbtransparentes Gelb
           hoverColor: 'rgba(255, 235, 59, 0.4)'
         },
         {
           id: 'afternoon',
           from: Date.now() + 1800000,
-          // Kein 'to' angegeben - erstreckt sich bis zum Ende der Zeitleiste
-          color: 'rgba(76, 175, 80, 0.2)', // Halbtransparenter grüner Farbton
+          // Kein 'to' angegeben - erstreckt sich bis zum Ende der Timeline
+          color: 'rgba(76, 175, 80, 0.2)', // Halbtransparentes Grün
           hoverColor: 'rgba(76, 175, 80, 0.3)'
         }
       ]
@@ -195,8 +195,8 @@ type TimelineMarker = {
   activeColor: string;    // Farbe, wenn der Marker ausgewählt ist (erforderlich)
   hoverColor: string;     // Farbe, wenn der Marker überfahren wird (erforderlich)
   lineWidth?: number;     // Optionale Breite der Markerlinie
-  label?: string;         // Optionaler Beschriftungstext
-  labelColor?: string;    // Optionale Farbe der Beschriftung
+  label?: string;         // Optionaler Labeltext
+  labelColor?: string;    // Optionale Farbe des Labels
   renderer?: AbstractMarkerRenderer; // Optionaler benutzerdefinierter Renderer
   nonSelectable?: boolean;// Ob der Marker ausgewählt werden kann
   group?: boolean;        // Ob der Marker eine Gruppe darstellt
@@ -205,7 +205,7 @@ type TimelineMarker = {
 
 ### Gruppierung und Zoom von Markern
 
-Die Zeitleiste gruppiert automatisch eng beieinander liegende Marker und bietet Zoom-Funktionalität:
+Die Timeline gruppiert automatisch Marker, die nahe beieinander liegen, und bietet Zoom-Funktionalität:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -225,7 +225,7 @@ const MyTimelineComponent = () => {
     viewConfiguration: {
       markers: {
         collapseMinDistance: 8,        // Marker innerhalb von 8 Pixeln gruppieren
-        groupZoomEnabled: true,        // Zoom bei Klick auf Gruppe aktivieren
+        groupZoomEnabled: true,        // Zoom beim Klicken auf eine Gruppe aktivieren
         groupZoomPadding: 0.3,        // 30% Polsterung um die Gruppe
         groupZoomMaxFactor: 0.3,      // Maximaler Zoomfaktor
       }
@@ -243,15 +243,15 @@ const MyTimelineComponent = () => {
 
 ## Funktionsweise
 
-Die Zeitleistenkomponente ist mit React erstellt und bietet eine flexible Möglichkeit, interaktive Zeitleistenvisualisierungen zu erstellen. So funktioniert sie:
+Die Timeline-Komponente ist mit React erstellt und bietet eine flexible Möglichkeit, interaktive Timeline-Visualisierungen zu erstellen. So funktioniert sie:
 
 ### Komponentenarchitektur
 
-Die Zeitleiste ist als React-Komponente implementiert, die über zwei Hauptobjekte konfiguriert werden kann:
+Die Timeline ist als React-Komponente implementiert, die über zwei Hauptobjekte konfiguriert werden kann:
 
-1. **TimelineSettings**: Steuert das Kernverhalten und die Darstellung der Zeitleiste
-   - `start`: Startzeit der Zeitleiste
-   - `end`: Endzeit der Zeitleiste
+1. **TimelineSettings**: Steuert das Kernverhalten und die Darstellung der Timeline
+   - `start`: Startzeit der Timeline
+   - `end`: Endzeit der Timeline
    - `axes`: Array von Achsenkonfigurationen (siehe Struktur unten)
    - `events`: Array von Ereigniskonfigurationen
    - `markers`: Array von Marker-Konfigurationen
@@ -263,13 +263,13 @@ Die Zeitleiste ist als React-Komponente implementiert, die über zwei Hauptobjek
 
 ### Ereignisbehandlung
 
-Die Zeitleistenkomponente unterstützt mehrere interaktive Ereignisse:
+Die Timeline-Komponente unterstützt mehrere interaktive Ereignisse:
 
-- `on-click`: Wird beim Klicken auf die Zeitleiste ausgelöst
-- `on-context-click`: Wird bei Rechtsklick/Kontextmenü ausgelöst
+- `on-click`: Wird beim Klicken auf die Timeline ausgelöst; enthält die getroffenen Elemente, den Zeitstempel, die Viewport-Koordinaten und die Canvas-Koordinaten
+- `on-context-click`: Wird bei einem Rechtsklick/Kontextmenü ausgelöst
 - `on-select-change`: Wird ausgelöst, wenn sich die Auswahl ändert
-- `on-hover`: Wird beim Überfahren von Zeilenelementen ausgelöst
-- `on-leave`: Wird ausgelöst, wenn die Maus Zeilenelemente verlässt
+- `on-hover`: Wird beim Überfahren von Timeline-Elementen ausgelöst
+- `on-leave`: Wird ausgelöst, wenn die Maus Timeline-Elemente verlässt
 
 Beispiel für die Ereignisbehandlung:
 
@@ -280,7 +280,7 @@ const MyTimelineComponent = () => {
   const { timeline } = useTimeline({ /* ... */ });
 
   useTimelineEvent(timeline, 'on-click', (data) => {
-    console.log('Zeitleiste geklickt:', data);
+    console.log('Timeline geklickt:', data);
   });
 
   useTimelineEvent(timeline, 'on-select-change', (data) => {
@@ -293,23 +293,23 @@ const MyTimelineComponent = () => {
 
 ### React-Integration
 
-Die Komponente verwendet benutzerdefinierte Hooks für die Zeitleistenverwaltung:
+Die Komponente verwendet benutzerdefinierte Hooks für die Timeline-Verwaltung:
 
-- `useTimeline`: Verwaltet die Zeitleisteninstanz und ihren Lebenszyklus
-  - Erstellt und initialisiert die Zeitleiste
-  - Kümmert sich um die Bereinigung beim Ausbau der Komponente
-  - Bietet Zugriff auf die Zeitleisteninstanz
+- `useTimeline`: Verwaltet die Timeline-Instanz und ihren Lebenszyklus
+  - Erstellt und initialisiert die Timeline
+  - Kümmert sich um die Bereinigung beim Unmounten der Komponente
+  - Bietet Zugriff auf die Timeline-Instanz
 
-- `useTimelineEvent`: Kümmert sich um Ereignisabonnements und Bereinigung
-  - Verwaltet den Lebenszyklus von Ereignis-Listenern
-  - Bereinigt Listener automatisch beim Ausbau
+- `useTimelineEvent`: Verwaltet die Ereignisabonnements und die Bereinigung
+  - Verwaltet den Lebenszyklus der Ereignis-Listener
+  - Bereinigt Listener automatisch beim Unmounten
 
-Die Komponente kümmert sich automatisch um die Bereinigung und Zerstörung der Zeitleisteninstanz, wenn sie ausgebaut wird.
+Die Komponente kümmert sich automatisch um die Bereinigung und Zerstörung der Timeline-Instanz, wenn sie unmounted wird.
 
 ### Ereignis-Popup
 
 Installieren Sie `@gravity-ui/uikit` und seine Stile, um Ereignisdetails anzuzeigen, ohne
-Ereignisse für Hover zu abonnieren oder Koordinaten selbst zu berechnen:
+Ereignisse abonnieren oder Koordinaten selbst berechnen zu müssen:
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -325,38 +325,39 @@ import {EventPopup} from '@gravity-ui/timeline/react/uikit';
 </>
 ```
 
-`EventPopup` öffnet sich nach 150 ms und schließt sich 200 ms, nachdem der Zeiger das
-Ereignis verlassen hat. Legen Sie `openDelay`, `closeDelay`, `placement`, `offset`, `className` oder
-`aria-label` bei Bedarf fest. Das Popup bleibt geöffnet, solange sein Inhalt den Zeiger hat oder den Fokus, schließt sich bei Escape oder Klick außerhalb und verwendet das letzte Ereignis in der Datenreihenfolge, wenn sich Ereignisse überlappen. `hoverColor` und `isHovered` steuern die Darstellung von Ereignissen; `EventPopup` steuert seine Detail-UI.
+Das Popup, die Hover-Hervorhebung und der Cursor verwenden dasselbe Ereignis: ein exakter Treffer hat Vorrang vor nahegelegenen Ereignissen. Überlappende exakte Treffer werden dem letzten Ereignis in der Zeichenreihenfolge zugeordnet. Nur wenn kein exakter Treffer vorliegt, wird eine Toleranz von `3 px + events.hitboxPadding` verwendet. Gruppenabfragen und `on-hover` enthalten weiterhin alle Kandidaten.
 
-### Ereignis-Struktur
+`EventPopup` öffnet sich nach 150 ms und schließt sich 200 ms, nachdem der Zeiger das
+Ereignis verlassen hat. Setzen Sie `openDelay`, `closeDelay`, `placement`, `offset`, `className` oder
+`aria-label`, falls erforderlich. Das Popup bleibt geöffnet, solange sein Inhalt über
+einen Zeiger oder Fokus verfügt, schließt sich bei Escape oder Klick außerhalb und verwendet das letzte Ereignis in der Datenreihenfolge, wenn sich Ereignisse überlappen. `hoverColor` und `isHovered` steuern die Ereignisdarstellung;
+`EventPopup` steuert seine Detail-UI.
+
+### Ereignisstruktur
 
 Ereignisse in der Zeitleiste folgen dieser Struktur:
 
 ```typescript
 type TimelineEvent = {
-  id: string;             // Eindeutige Kennung
+  id: string;             // Eindeutiger Bezeichner
   from: number;           // Start-Zeitstempel
-  to?: number;            // End-Zeitstempel (optional für Punkt-Events)
-  axisId: string;         // ID der Achse, zu der dieses Event gehört
-  trackIndex: number;     // Index im Track der Achse
+  to?: number;            // End-Zeitstempel (optional für Punkt-Ereignisse)
+  axisId: string;         // ID der Achse, zu der dieses Ereignis gehört
+  trackIndex: number;     // Index in der Achsenspur
   renderer?: AbstractEventRenderer; // Optionaler benutzerdefinierter Renderer
-  color?: string;         // Optionale Event-Farbe
-  hoverColor?: string;    // Optionale Farbe im Hover-Zustand
-  selectedColor?: string; // Optionale Farbe im ausgewählten Zustand
-  cursor?: string;        // Optionaler CSS-Cursor beim Hovern über das Event
+  color?: string;         // Optionale Ereignisfarbe
+  hoverColor?: string;    // Optionale Farbe für den Hover-Zustand
+  selectedColor?: string; // Optionale Farbe für den ausgewählten Zustand
+  cursor?: string;        // Optionaler CSS-Cursor beim Hovern über das Ereignis
 };
 ```
 
-Setzen Sie `cursor: 'pointer'` für Events, die bei einem Klick eine Aktion ausführen. Der Cursor
-wird nur angewendet, wenn sich der Zeiger über diesem Event befindet. Wenn sich Events überlappen,
-bestimmt das letzte Event in der Datenreihenfolge den Cursor.
+Setzen Sie `cursor: 'pointer'` für Ereignisse, die bei einem Klick eine Aktion ausführen. Der Cursor
+wird nur angewendet, solange sich der Zeiger über diesem Ereignis befindet; wenn sich Ereignisse überlappen, bestimmt das letzte Ereignis in der Datenreihenfolge den Cursor.
 
-### Gravity UI Farben
+### Gravity UI-Farben
 
-Canvas kann CSS-Custom-Properties nicht von sich aus auflösen. Timeline löst vollständige
-`var(--token)`-Werte für sein Canvas-Element auf, sodass Gravity UI-Semantik-Tokens für
-eingebaute Events, Marker, Abschnitte, Achsen, Gitter und Lineale funktionieren.
+Canvas kann CSS-Custom-Properties nicht von sich aus auflösen. Timeline löst einen vollständigen Wert `var(--token)` gegen sein Canvas-Element auf, sodass Gravity UI-Semantik-Tokens für integrierte Ereignisse, Marker, Abschnitte, Achsen, Gitter und Lineale funktionieren.
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -376,7 +377,7 @@ zeichnet automatisch neu, wenn sich das effektive Gravity UI-Theme ändert. Für
 fehlendes Token verwenden Sie einen CSS-Fallback wie `var(--app-event-color, transparent)`
 oder rufen Sie `timeline.api.resolveColor(color, fallback)` aus einem benutzerdefinierten Renderer auf.
 
-Für Events wird `color` normal verwendet, `hoverColor` beim Hovern mit der Maus und
+Für Ereignisse wird `color` normal verwendet, `hoverColor` beim Zeiger-Hover und
 `selectedColor` nach der Auswahl:
 
 ```ts
@@ -394,17 +395,16 @@ const events = [
 ];
 ```
 
-Benutzerdefinierte Event-Renderer erhalten `resolveColor` als letztes optionales Argument;
+Benutzerdefinierte Ereignis-Renderer erhalten `resolveColor` als letztes optionales Argument;
 benutzerdefinierte Marker- und Abschnitts-Renderer erhalten es in ihren Render-Daten.
 
 ### Canvas-Schriftarten
 
 Setzen Sie `viewConfiguration.font` einmal, um die Standardschriftart für Lineal,
-Events und Marker zu konfigurieren. Eine komponenten-spezifische `ruler.font`, `events.font` oder
-`markers.font` hat Vorrang. Der Standardwert bleibt `10px sans-serif`.
+Ereignisse und Marker zu konfigurieren. Eine komponenten-spezifische `ruler.font`, `events.font` oder
+`markers.font` hat Vorrang. Der Standard bleibt `10px sans-serif`.
 
-Canvas kann CSS-Variablen oder `inherit` nicht direkt in `ctx.font` verwenden, daher löst Timeline
-vollständige Token im CSS-Kontext des Canvas auf:
+Canvas kann CSS-Variablen oder `inherit` nicht direkt in `ctx.font` verwenden, daher löst Timeline vollständige Token im Canvas-CSS-Kontext auf:
 
 ```ts
 viewConfiguration: {
@@ -426,7 +426,7 @@ import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// Timeline-Instanz erstellen
+// Erstellen einer Timeline-Instanz
 const timeline = new Timeline({
   settings: {
     start: timestamp,
@@ -444,7 +444,7 @@ const timeline = new Timeline({
         id: 'event1',
         from: timestamp + 1800000, // 30 Minuten ab jetzt
         to: timestamp + 2400000,   // 40 Minuten ab jetzt
-        label: 'Beispiel-Event',
+        label: 'Beispiel-Ereignis',
         axisId: 'main'
       }
     ],
@@ -476,7 +476,7 @@ const timeline = new Timeline({
   }
 });
 
-// Mit einem Canvas-Element initialisieren
+// Initialisieren mit einem Canvas-Element
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
@@ -495,13 +495,13 @@ timeline.on('on-select-change', (detail) => {
 timeline.destroy();
 ```
 
-Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
+Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Zeitleiste:
 
-- **Event-Verwaltung**:
+- **Ereignisverwaltung**:
   ```typescript
   // Event-Listener hinzufügen
   timeline.on('eventClick', (detail) => {
-    console.log('Event geklickt:', detail);
+    console.log('Ereignis geklickt:', detail);
   });
 
   // Event-Listener entfernen
@@ -509,11 +509,11 @@ Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // Benutzerdefinierte Events auslösen
+  // Benutzerdefinierte Ereignisse auslösen
   timeline.emit('customEvent', { data: 'benutzerdefinierte Daten' });
   ```
 
-- **Timeline-Steuerung**:
+- **Timeline Control**:
   ```typescript
   // Timeline-Daten aktualisieren
   timeline.api.setEvents([
@@ -521,7 +521,7 @@ Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
       id: 'newEvent',
       from: Date.now(),
       to: Date.now() + 3600000,
-      label: 'Neues Event',
+      label: 'Neues Ereignis',
       axisId: 'main',
       trackIndex: 0
     }
@@ -536,10 +536,8 @@ Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
       height: 80
     }
   ]);
-```
 
-```javascript
-  // Update markers
+  // Marker aktualisieren
   timeline.api.setMarkers([
     {
       id: 'newMarker',
@@ -551,7 +549,7 @@ Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
     }
   ]);
 
-  // Update sections
+  // Abschnitte aktualisieren
   timeline.api.setSections([
     {
       id: 'newSection',
@@ -562,18 +560,18 @@ Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
     }
   ]);
 
-  // Update view configuration (merges with current config)
+  // Ansichtskonfiguration aktualisieren (wird mit der aktuellen Konfiguration zusammengeführt)
   timeline.api.setViewConfiguration({ hideRuler: true });
   ```
 
 ## Live-Beispiele
 
-Erkunden Sie interaktive Beispiele in unserem [Storybook](https://preview.gravity-ui.com/timeline/):
+Entdecken Sie interaktive Beispiele in unserem [Storybook](https://preview.gravity-ui.com/timeline/):
 
 - [Basis-Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Einfache Timeline mit Ereignissen und Achsen
 - [Endlose Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Endlose Timeline mit Ereignissen und Achsen
 - [Marker](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline mit vertikalen Markern und Beschriftungen
-- [Kamera-Interaktionen](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) - Konfigurieren Sie das Verhalten für Mausrad, horizontales Scrollen und Pinch-Gesten auf dem Trackpad
+- [Kamera-Interaktionen](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) - Konfigurieren Sie das Verhalten für Mausrad, horizontalen Scroll und Trackpad-Gesten
 - [Benutzerdefinierte Ereignisse](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline mit benutzerdefinierter Ereignisdarstellung
 - [Integrationen](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection, DragHandler, NestedEvents, Popup, List
 
@@ -601,4 +599,3 @@ npm run build-storybook
 ## Lizenz
 
 MIT
-```

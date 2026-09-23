@@ -85,7 +85,7 @@ type TimelineAxis = {
 };
 ```
 
-### Líneas Horizontales de Eje
+### Líneas Horizontales de Ejes
 
 Configura la colocación de las líneas horizontales a través de `viewConfiguration.axes.linePosition`:
 
@@ -128,7 +128,7 @@ const {timeline} = useTimeline({
 });
 ```
 
-Cada interacción acepta `'zoom'`, `'pan'` o `'pass-through'`. `pinch` representa el gesto de Ctrl+rueda del trackpad del navegador. `zoomSensitivity.in` y `zoomSensitivity.out` multiplican independientemente la velocidad de zoom hacia adentro y hacia afuera: `1` es el valor predeterminado, valores más bajos son más suaves y `0` deshabilita el zoom en esa dirección. Las pequeñas deltas del trackpad se suavizan automáticamente. `minRange` y `maxRange` son duraciones en milisegundos; el mínimo por defecto es 5 segundos y el máximo no está restringido a menos que se configure, así que establece `maxRange` para limitar hasta dónde pueden hacer zoom los usuarios. Consulta el ejemplo interactivo de [Interacciones de Cámara en Storybook](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus).
+Cada interacción acepta `'zoom'`, `'pan'` o `'pass-through'`. `pinch` representa el gesto de Ctrl+rueda del trackpad del navegador. `zoomSensitivity.in` y `zoomSensitivity.out` multiplican independientemente la velocidad de zoom-in y zoom-out: `1` es el valor predeterminado, valores más bajos son más suaves y `0` deshabilita el zoom en esa dirección. Los pequeños deltas del trackpad se suavizan automáticamente. `minRange` y `maxRange` son duraciones en milisegundos; el mínimo por defecto es 5 segundos y el máximo no está restringido a menos que se configure, así que establece `maxRange` para limitar hasta dónde pueden hacer zoom los usuarios. Consulta el ejemplo interactivo de [Interacciones de Cámara en Storybook](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus).
 
 ### Estructura de Secciones
 
@@ -140,7 +140,7 @@ type TimelineSection = {
   from: number;             // Marca de tiempo de inicio
   to?: number;              // Marca de tiempo de fin opcional (por defecto, el final de la línea de tiempo)
   color: string;            // Color de fondo de la sección
-  hoverColor?: string;      // Color opcional cuando la sección está en foco (hover)
+  hoverColor?: string;      // Color opcional cuando la sección está en modo hover
   renderer?: AbstractSectionRenderer; // Renderizador personalizado opcional (exportado del paquete)
 };
 ```
@@ -243,33 +243,33 @@ const MyTimelineComponent = () => {
 
 ## Cómo Funciona
 
-El componente de línea de tiempo está construido con React y proporciona una forma flexible de crear visualizaciones de línea de tiempo interactivas. Así es como funciona:
+El componente de línea de tiempo está construido con React y proporciona una forma flexible de crear visualizaciones interactivas de líneas de tiempo. Así es como funciona:
 
 ### Arquitectura del Componente
 
 La línea de tiempo se implementa como un componente de React que se puede configurar a través de dos objetos principales:
 
-1. **TimelineSettings**: Controla el comportamiento y la apariencia principal de la línea de tiempo.
-   - `start`: Hora de inicio de la línea de tiempo.
-   - `end`: Hora de fin de la línea de tiempo.
-   - `axes`: Matriz de configuraciones de ejes (ver estructura a continuación).
-   - `events`: Matriz de configuraciones de eventos.
-   - `markers`: Matriz de configuraciones de marcadores.
-   - `sections`: Matriz de configuraciones de secciones.
+1. **TimelineSettings**: Controla el comportamiento y la apariencia principal de la línea de tiempo
+   - `start`: Hora de inicio de la línea de tiempo
+   - `end`: Hora de finalización de la línea de tiempo
+   - `axes`: Matriz de configuraciones de ejes (ver estructura a continuación)
+   - `events`: Matriz de configuraciones de eventos
+   - `markers`: Matriz de configuraciones de marcadores
+   - `sections`: Matriz de configuraciones de secciones
 
-2. **ViewConfiguration**: Gestiona la representación visual y la configuración de interacción.
-   - Controla la apariencia, los niveles de zoom y el comportamiento de interacción.
-   - Se puede personalizar o usar valores predeterminados.
+2. **ViewConfiguration**: Gestiona la representación visual y la configuración de interacción
+   - Controla la apariencia, los niveles de zoom y el comportamiento de interacción
+   - Se puede personalizar o usar valores predeterminados
 
 ### Manejo de Eventos
 
 El componente de línea de tiempo admite varios eventos interactivos:
 
-- `on-click`: Se activa al hacer clic en la línea de tiempo.
-- `on-context-click`: Se activa al hacer clic derecho/menú contextual.
-- `on-select-change`: Se dispara cuando cambia la selección.
-- `on-hover`: Se activa al pasar el cursor sobre elementos de la línea de tiempo.
-- `on-leave`: Se dispara cuando el ratón sale de los elementos de la línea de tiempo.
+- `on-click`: Se activa al hacer clic en la línea de tiempo; incluye los elementos detectados, la marca de tiempo, las coordenadas de la vista y las coordenadas del lienzo
+- `on-context-click`: Se activa al hacer clic derecho/menú contextual
+- `on-select-change`: Se dispara cuando cambia la selección
+- `on-hover`: Se activa al pasar el cursor sobre elementos de la línea de tiempo
+- `on-leave`: Se dispara cuando el ratón sale de los elementos de la línea de tiempo
 
 Ejemplo de manejo de eventos:
 
@@ -295,21 +295,21 @@ const MyTimelineComponent = () => {
 
 El componente utiliza hooks personalizados para la gestión de la línea de tiempo:
 
-- `useTimeline`: Gestiona la instancia de la línea de tiempo y su ciclo de vida.
-  - Crea e inicializa la línea de tiempo.
-  - Maneja la limpieza al desmontar el componente.
-  - Proporciona acceso a la instancia de la línea de tiempo.
+- `useTimeline`: Gestiona la instancia de la línea de tiempo y su ciclo de vida
+  - Crea e inicializa la línea de tiempo
+  - Maneja la limpieza al desmontar el componente
+  - Proporciona acceso a la instancia de la línea de tiempo
 
-- `useTimelineEvent`: Maneja la suscripción a eventos y la limpieza.
-  - Gestiona el ciclo de vida del oyente de eventos.
-  - Limpia automáticamente los oyentes al desmontar.
+- `useTimelineEvent`: Maneja la suscripción a eventos y la limpieza
+  - Gestiona el ciclo de vida del oyente de eventos
+  - Limpia automáticamente los oyentes al desmontar
 
 El componente maneja automáticamente la limpieza y destrucción de la instancia de la línea de tiempo cuando se desmonta.
 
 ### Popup de Eventos
 
 Instala `@gravity-ui/uikit` y sus estilos para mostrar detalles de eventos sin
-necesidad de suscribirte a eventos de hover o calcular coordenadas tú mismo:
+suscribirte a eventos de hover o calcular coordenadas tú mismo:
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -325,13 +325,14 @@ import {EventPopup} from '@gravity-ui/timeline/react/uikit';
 </>
 ```
 
-`EventPopup` se abre después de 150 ms y se cierra 200 ms después de que el puntero
-sale del evento. Establece `openDelay`, `closeDelay`, `placement`, `offset`,
-`className` o `aria-label` cuando sea necesario. El popup permanece abierto
-mientras su contenido tenga puntero o foco, se cierra al presionar Escape o al
-hacer clic fuera, y utiliza el último evento en orden de datos cuando los eventos
-se superponen. `hoverColor` e `isHovered` controlan el dibujo del evento;
-`EventPopup` controla su interfaz de detalles.
+El popup, el resaltado de hover y el cursor utilizan el mismo evento: un acierto exacto tiene prioridad sobre los eventos cercanos. Los aciertos exactos superpuestos se resuelven en el último evento en orden de dibujo. Solo cuando no hay un acierto exacto, se utiliza una tolerancia de `3 px + events.hitboxPadding`. Las consultas de grupo y `on-hover` aún incluyen todos los candidatos.
+
+`EventPopup` se abre después de 150 ms y se cierra 200 ms después de que el puntero abandona el
+evento. Establezca `openDelay`, `closeDelay`, `placement`, `offset`, `className` o
+`aria-label` cuando sea necesario. El popup permanece abierto mientras su contenido tenga el puntero
+o el foco, se cierra al presionar Escape o al hacer clic fuera, y utiliza el último evento en el orden de los datos
+cuando los eventos se superponen. `hoverColor` e `isHovered` controlan el dibujo del evento;
+`EventPopup` controla su UI de detalles.
 
 ### Estructura de Eventos
 
@@ -345,21 +346,21 @@ type TimelineEvent = {
   axisId: string;         // ID del eje al que pertenece este evento
   trackIndex: number;     // Índice en la pista del eje
   renderer?: AbstractEventRenderer; // Renderizador personalizado opcional
-  color?: string;         // Color opcional del evento
-  hoverColor?: string;    // Color opcional para el estado al pasar el ratón por encima
+  color?: string;         // Color de evento opcional
+  hoverColor?: string;    // Color opcional para el estado resaltado
   selectedColor?: string; // Color opcional para el estado seleccionado
-  cursor?: string;        // Cursor CSS opcional al pasar el ratón por encima del evento
+  cursor?: string;        // Cursor CSS opcional al pasar el puntero sobre el evento
 };
 ```
 
-Establece `cursor: 'pointer'` en los eventos que realizan una acción al hacer clic. El cursor
+Establezca `cursor: 'pointer'` en los eventos que realizan una acción al hacer clic. El cursor
 se aplica solo mientras el puntero está sobre ese evento; cuando los eventos se superponen, el
 último evento en el orden de los datos determina el cursor.
 
 ### Colores de Gravity UI
 
-Canvas no puede resolver propiedades CSS personalizadas por sí solo. Timeline resuelve un
-token de valor completo `var(--token)` contra su elemento canvas, por lo que los tokens semánticos de Gravity UI
+El canvas no puede resolver las propiedades personalizadas de CSS por sí solo. Timeline resuelve un
+valor completo `var(--token)` contra su elemento canvas, por lo que los tokens semánticos de Gravity UI
 funcionan para eventos, marcadores, secciones, ejes, cuadrícula y regla integrados.
 
 ```tsx
@@ -374,13 +375,13 @@ import {GravityTimelineCanvas} from '@gravity-ui/timeline/react/uikit';
 </ThemeProvider>
 ```
 
-Pasa tokens directamente en cualquier campo de color, por ejemplo
+Pase tokens directamente en cualquier campo de color, por ejemplo
 `color: 'var(--g-color-base-positive-medium)'`. `GravityTimelineCanvas`
-se redibuja automáticamente cuando el tema efectivo de Gravity UI cambia. Para un token
-faltante, usa un fallback CSS como `var(--app-event-color, transparent)`
-o llama a `timeline.api.resolveColor(color, fallback)` desde un renderizador personalizado.
+se redibuja automáticamente cuando cambia el tema efectivo de Gravity UI. Para un
+token faltante, use una alternativa CSS como `var(--app-event-color, transparent)`
+o llame a `timeline.api.resolveColor(color, fallback)` desde un renderizador personalizado.
 
-Para eventos, `color` se usa normalmente, `hoverColor` al pasar el ratón por encima, y
+Para eventos, `color` se usa normalmente, `hoverColor` al pasar el puntero, y
 `selectedColor` después de la selección:
 
 ```ts
@@ -401,13 +402,13 @@ const events = [
 Los renderizadores de eventos personalizados reciben `resolveColor` como su argumento opcional final;
 los renderizadores de marcadores y secciones personalizados lo reciben en sus datos de renderizado.
 
-### Fuentes de Canvas
+### Fuentes del Canvas
 
-Establece `viewConfiguration.font` una vez para configurar la fuente predeterminada para la regla,
+Establezca `viewConfiguration.font` una vez para configurar la fuente predeterminada para la regla,
 eventos y marcadores. Un `ruler.font`, `events.font` o `markers.font` específico del componente
-tiene precedencia. El valor predeterminado sigue siendo `10px sans-serif`.
+tiene prioridad. El valor predeterminado sigue siendo `10px sans-serif`.
 
-Canvas no puede usar variables CSS o `inherit` directamente en `ctx.font`, por lo que Timeline
+El canvas no puede usar variables CSS o `inherit` directamente en `ctx.font`, por lo que Timeline
 resuelve tokens de valor completo en el contexto CSS del canvas:
 
 ```ts
@@ -416,9 +417,9 @@ viewConfiguration: {
 }
 ```
 
-Usa `font: 'inherit'` para usar la fuente calculada del elemento canvas. Los renderizadores personalizados
+Use `font: 'inherit'` para usar la fuente calculada del elemento canvas. Los renderizadores personalizados
 reciben `resolveFont` junto con `resolveColor`, o pueden llamar a `timeline.api.resolveFont(font)`.
-Después de que una fuente web se cargue dinámicamente, llama a `timeline.api.rerender()` para redibujar el texto del canvas con ella.
+Después de que una fuente web se cargue dinámicamente, llame a `timeline.api.rerender()` para redibujar el texto del canvas con ella.
 
 ### Uso Directo de TypeScript
 
@@ -447,7 +448,7 @@ const timeline = new Timeline({
         id: 'event1',
         from: timestamp + 1800000, // 30 minutos a partir de ahora
         to: timestamp + 2400000,   // 40 minutos a partir de ahora
-        label: 'Evento de Ejemplo',
+        label: 'Evento de Muestra',
         axisId: 'main'
       }
     ],
@@ -485,7 +486,7 @@ if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
 }
 
-// Añadir listeners de eventos
+// Agregar oyentes de eventos
 timeline.on('on-click', (detail) => {
   console.log('Timeline clickeado:', detail);
 });
@@ -494,7 +495,7 @@ timeline.on('on-select-change', (detail) => {
   console.log('Selección cambiada:', detail);
 });
 
-// Limpiar al terminar
+// Limpiar cuando se termine
 timeline.destroy();
 ```
 
@@ -502,12 +503,12 @@ La clase Timeline proporciona una API rica para gestionar la línea de tiempo:
 
 - **Gestión de Eventos**:
   ```typescript
-  // Añadir listener de eventos
+  // Agregar oyente de eventos
   timeline.on('eventClick', (detail) => {
     console.log('Evento clickeado:', detail);
   });
 
-  // Eliminar listener de eventos
+  // Eliminar oyente de eventos
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
@@ -516,7 +517,7 @@ La clase Timeline proporciona una API rica para gestionar la línea de tiempo:
   timeline.emit('customEvent', { data: 'datos personalizados' });
   ```
 
-- **Control de la Línea de Tiempo**:
+- **Control de Línea de Tiempo**:
   ```typescript
   // Actualizar datos de la línea de tiempo
   timeline.api.setEvents([
@@ -539,9 +540,7 @@ La clase Timeline proporciona una API rica para gestionar la línea de tiempo:
       height: 80
     }
   ]);
-```
 
-```javascript
   // Actualizar marcadores
   timeline.api.setMarkers([
     {
@@ -595,7 +594,7 @@ npm run storybook
 
 Esto iniciará el servidor de desarrollo de Storybook en el puerto 6006. Puedes acceder a él en http://localhost:6006.
 
-Para generar una versión estática de Storybook para su despliegue:
+Para compilar una versión estática de Storybook para su despliegue:
 
 ```bash
 npm run build-storybook
