@@ -414,6 +414,10 @@ The pointer must move by 8 pixels before dragging starts, so regular row and con
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
 
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -597,7 +601,46 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';

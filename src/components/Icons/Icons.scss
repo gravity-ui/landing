@@ -1,13 +1,18 @@
 @use '~@gravity-ui/page-constructor/styles/styles.scss' as pcStyles;
 @use '~@gravity-ui/page-constructor/styles/variables.scss' as pcVariables;
+@use '../../mixins.scss' as baseMixins;
 @use '../../variables.scss';
 
 $block: '.#{variables.$ns}icons';
+$navigation-height: 81px;
+$search-row-height: 60px;
+$catalog-top-spacing: 16px;
+$categories-sticky-offset: $search-row-height + $catalog-top-spacing;
 
 #{$block} {
     margin: 56px 0 0;
 
-    @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+    @include baseMixins.window-breakpoint('md') {
         margin: 32px 0 0;
     }
 
@@ -17,7 +22,7 @@ $block: '.#{variables.$ns}icons';
         justify-content: space-between;
         margin-bottom: pcVariables.$indentXS;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @include baseMixins.window-breakpoint('md') {
             margin-bottom: pcVariables.$indentXXXS;
         }
     }
@@ -29,7 +34,7 @@ $block: '.#{variables.$ns}icons';
         color: #fff;
         margin: 0;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @include baseMixins.window-breakpoint('md') {
             font-size: 32px;
             line-height: 48px;
             margin-bottom: pcVariables.$indentXXXS;
@@ -47,13 +52,13 @@ $block: '.#{variables.$ns}icons';
 
     & &__search {
         padding: 8px 0;
-        margin-bottom: 24px;
+        margin-bottom: pcVariables.$indentSM;
         position: sticky;
         top: 0;
         background: var(--g-color-base-background);
         z-index: 1;
 
-        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+        @include baseMixins.window-breakpoint('md') {
             margin-bottom: pcVariables.$indentXXXS;
         }
     }
@@ -61,7 +66,7 @@ $block: '.#{variables.$ns}icons';
     &__search-row {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: pcVariables.$indentXXXS;
     }
 
     &__search-input {
@@ -71,7 +76,7 @@ $block: '.#{variables.$ns}icons';
     &__search-row {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: pcVariables.$indentXXXS;
     }
 
     &__search-input {
@@ -79,12 +84,12 @@ $block: '.#{variables.$ns}icons';
     }
 
     &__search-icon {
-        padding: 0 12px;
+        padding: 0 pcVariables.$indentXXS;
         color: rgba(255, 255, 255, 0.5);
     }
 
     &__photo-search-icon {
-        padding: 0 12px;
+        padding: 0 pcVariables.$indentXXS;
         color: rgba(255, 255, 255, 0.5);
         cursor: pointer;
         transition: color 0.1s ease;
@@ -95,13 +100,155 @@ $block: '.#{variables.$ns}icons';
     }
 
     &__clear-icon {
-        padding: 0 12px;
+        padding: 0 pcVariables.$indentXXS;
         color: rgba(255, 255, 255, 0.5);
         cursor: pointer;
         transition: color 0.1s ease;
 
         &:hover {
             color: rgba(255, 255, 255, 0.8);
+        }
+    }
+
+    &__catalog {
+        display: flex;
+        align-items: flex-start;
+        gap: pcVariables.$indentM;
+    }
+
+    &__categories {
+        position: sticky;
+        top: $categories-sticky-offset;
+        flex: 0 0 200px;
+        max-height: calc(100dvh - $navigation-height - $categories-sticky-offset);
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+
+    &__section-title {
+        margin: 0;
+        color: var(--g-color-text-primary);
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: 600;
+    }
+
+    &__category-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: pcVariables.$indentS;
+    }
+
+    &__category {
+        --g-button-border-radius: 8px;
+        --g-button-padding: #{pcVariables.$indentXXS};
+
+        width: 100%;
+        height: 36px;
+        font-size: 13px;
+        line-height: 20px;
+        text-align: left;
+
+        .g-button__text {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: pcVariables.$indentXS;
+        }
+    }
+
+    &__category-count,
+    &__results-count {
+        color: var(--g-color-text-secondary);
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    &__results {
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    &__results-heading {
+        display: flex;
+        align-items: center;
+        gap: pcVariables.$indentXXS;
+        margin-bottom: pcVariables.$indentS;
+    }
+
+    &__mobile-category-trigger {
+        display: none;
+    }
+
+    &__category-sheet {
+        --g-sheet-background-color: var(--g-color-base-modal);
+        --g-sheet-content-padding: 0 max(var(--g-spacing-5), env(safe-area-inset-right, 0px))
+            max(var(--g-spacing-4), env(safe-area-inset-bottom, 0px))
+            max(var(--g-spacing-5), env(safe-area-inset-left, 0px));
+    }
+
+    &__category-sheet-list {
+        padding-top: pcVariables.$indentXXXS;
+
+        #{$block}__category {
+            --g-button-border-radius: 6px;
+            --g-button-padding: #{pcVariables.$indentXS};
+
+            height: 44px;
+            font-size: 15px;
+        }
+
+        #{$block}__category-count {
+            font-size: 11px;
+        }
+    }
+
+    @include baseMixins.window-breakpoint('md') {
+        &__catalog {
+            display: block;
+        }
+
+        &__categories {
+            display: none;
+        }
+
+        &__mobile-category-trigger {
+            display: flex;
+            width: 100%;
+            height: 44px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: pcVariables.$indentSM;
+            padding: pcVariables.$indentXXS pcVariables.$indentXS;
+            border: 0;
+            border-radius: 12px;
+            color: var(--g-color-text-primary);
+            background: rgba(255, 255, 255, 0.08);
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+
+            &:disabled {
+                color: var(--g-color-text-hint);
+                cursor: default;
+            }
+        }
+
+        &__mobile-category-label {
+            font-size: 15px;
+            line-height: 20px;
+            font-weight: 500;
+        }
+
+        &__mobile-category-count {
+            color: var(--g-color-text-secondary);
+            font-size: 13px;
+            line-height: 18px;
+        }
+
+        &__results-heading {
+            display: none;
         }
     }
 }

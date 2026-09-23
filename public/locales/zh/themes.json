@@ -55,6 +55,7 @@
   "export_theme_cancel_btn": "取消",
   "export_theme_apply_btn_css": "另存为 CSS",
   "export_theme_apply_btn_json": "另存为 JSON",
+  "export_theme_open_storybook": "在 Storybook 中打开",
   "export_theme_apply-theme-alert-title": "如何应用主题",
   "radius": "圆角",
   "radius_regular": "常规",
