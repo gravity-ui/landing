@@ -69,6 +69,16 @@ module.exports = withBundleAnalyzer({
             use: 'raw-loader',
         });
 
+        // rc-slider resolves to its CJS build (`main: ./lib/index`), which has no `exports`
+        // field. Combined with `esmExternals: 'loose'`, webpack hands uikit's
+        // `import Slider from 'rc-slider'` the module namespace object instead of the default
+        // export, so BaseSlider renders an invalid element type and SSR of
+        // /components/uikit/slider throws. Pointing at the ESM build gives a real default export.
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            'rc-slider$': path.resolve(__dirname, 'node_modules/rc-slider/es/index.js'),
+        };
+
         if (!options.isServer) {
             config.resolve.fallback.fs = false;
         }
@@ -137,6 +147,10 @@ module.exports = withBundleAnalyzer({
         '@gravity-ui/aikit',
         '@gravity-ui/illustrations',
         'swiper',
+        // Bundled (not left as ESM externals) so webpack resolves their extensionless
+        // internal imports — see the `rc-slider$` alias above.
+        'rc-slider',
+        'rc-util',
         '@uiw/react-color',
         '@uiw/react-color-name',
         'colors-named',

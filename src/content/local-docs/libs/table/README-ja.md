@@ -20,8 +20,8 @@ interface Person {
 }
 
 const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: '名前', size: 100},
-  {accessorKey: 'age', header: '年齢', size: 100},
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
 ];
 
 const data: Person[] = [
@@ -41,7 +41,7 @@ const BasicExample = () => {
 
 ### コンポーネント
 
-使用できる Table コンポーネントは2つあります。
+使用できる `Table` コンポーネントは2つあります。
 
 - `BaseTable` - 基本的なスタイルのみを持つコンポーネントです。
 - `Table` - Gravity UI ベースのスタイルを持つコンポーネントです。
@@ -79,11 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
-選択機能とグループ化を併用する場合は、`useRowSelectionFixedHandler` フックを使用してください。これがないと、親行のチェックボックスの状態が正しく表示されません。https://github.com/TanStack/table/issues/4878
+選択機能とグループ化を併用する場合、`useRowSelectionFixedHandler` フックを使用してください。これがないと、親行のチェックボックスの状態が正しく表示されません。https://github.com/TanStack/table/issues/4878
 
 #### カスタム範囲選択カラム
 
-`useToggleRangeSelectionHandler` フックは、Shift キーを押しながらクリックするイベントをリッスンし、範囲選択を実行する変更ハンドラーを返します。テーブルと行の内部状態にアクセスするには、`CellContext` インスタンスを渡す必要があります。
+`useToggleRangeSelectionHandler` フックは、Shift+クリックイベントをリッスンして範囲選択を実行する変更ハンドラーを返します。テーブルと行の内部状態にアクセスするには、`CellContext` インスタンスを渡す必要があります。
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-内部でフックを使用し、`CellContext` インスタンスをプロップとして受け取る `RangedSelectionCheckbox` コンポーネントもあります。このコンポーネントは、カスタム選択カラムに範囲選択機能を簡単に追加するためのショートカットを提供します。
+`RangedSelectionCheckbox` コンポーネントもあり、内部でフックを使用し、`CellContext` インスタンスをプロップとして受け取ります。このコンポーネントは、カスタム選択カラムに範囲選択機能を簡単に追加するためのショートカットを提供します。
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -212,7 +212,7 @@ const columns: ColumnDef<Person>[] = [
 
 **注意**: テーブルにネストされた行が含まれている場合、範囲選択は機能しません。現時点では、これは未定義の動作と見なされます。
 
-#### 並べ替え
+#### ソート
 
 react-table の列プロパティについては、[ドキュメント](https://tanstack.com/table/v8/docs/guide/sorting) を参照してください。
 
@@ -230,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // 並べ替えを有効にするには、列に accessorFn が必須です
+  // ソートを有効にするには、列に accessorFn が必須です
 
   const table = useTable({
     columns,
@@ -247,7 +247,7 @@ const SortingExample = () => {
 };
 ```
 
-要素を手動で並べ替えたい場合は、`manualSorting` プロパティを渡します。
+要素を手動でソートしたい場合は、`manualSorting` プロパティを渡します。
 
 ```tsx
 const table = useTable({
@@ -321,11 +321,11 @@ const GroupingExample = () => {
 
 選択機能付きのグルーピングを使用するには、`useRowSelectionFixedHandler` フックを使用します。これがないと、親行のチェックボックスの状態が正しく表示されません。https://github.com/TanStack/table/issues/4878
 
-ネストスタイルを有効にするには、列設定で `withNestingStyles = true` を渡します。
+ネストスタイルを有効にするには、列の設定で `withNestingStyles = true` を渡します。
 
 ネストインジケーターは、`showTreeDepthIndicators = false` を渡すことで無効にできます。
 
-行の展開/折りたたみのコントロールを追加するには、セルコンテンツを `TreeExpandableCell` コンポーネントまたは同様のカスタムコンポーネントでラップします。
+行の展開/折りたたみのコントロールを追加するには、セルのコンテンツを `TreeExpandableCell` コンポーネントまたは同様のカスタムコンポーネントでラップします。
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -394,7 +394,7 @@ const ReorderingExample = () => {
 
 #### ドラッグハンドルなしの並べ替え
 
-`dragWithoutHandle` を設定すると、行全体をドラッグアクティベーターとして使用でき、列定義から `dragHandleColumn` を省略できます。
+行全体をドラッグアクティベーターとして使用し、列定義から `dragHandleColumn` を省略するには、`dragWithoutHandle` を設定します。
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -409,11 +409,13 @@ return (
 );
 ```
 
-ポインターはドラッグ開始前に 8 ピクセル移動する必要があります。これにより、通常の行クリックやコントロールクリックが引き続き機能します。カスタム行の一部がドラッグを開始しないようにするには、その `onPointerDown` ハンドラーで `preventDefault()` を呼び出します。
+ポインターはドラッグ開始前に 8 ピクセル移動する必要があります。これにより、通常の行クリックやコントロールクリックが引き続き機能します。カスタム部分の行がドラッグを開始しないようにするには、その `onPointerDown` ハンドラーで `preventDefault()` を呼び出します。
+
+`ReorderingProvider` はデフォルトで dnd-kit の垂直自動スクロールを有効にします。アプリケーションが独自のドラッグ自動スクロール実装を提供している場合は、`autoScroll={false}` を渡します。両方を同時に実行すると、スクロールの競合が発生する可能性があります。
 
 #### 列の並べ替え
 
-テーブルを `ColumnReorderingProvider` でラップすると、ヘッダーによる列のドラッグアンドドロップ並べ替えが有効になります。
+ヘッダーによる列のドラッグアンドドロップ並べ替えを有効にするには、テーブルを `ColumnReorderingProvider` でラップします。
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
@@ -440,7 +442,7 @@ const ColumnReorderingExample = () => {
 
 ### 行と列の並べ替えを同時に行う
 
-`ColumnReorderingProvider` と `ReorderingProvider` をネストすると、両方のドラッグ軸を同時に有効にできます。プロバイダーの順序は関係ありません。内部で単一の dnd-kit コンテキストを共有します。
+`ColumnReorderingProvider` と `ReorderingProvider` をネストして、両方のドラッグ軸を同時に有効にします。プロバイダーの順序は関係ありません。内部で単一の dnd-kit コンテキストを共有します。
 
 ```tsx
 import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
@@ -451,43 +453,44 @@ const columns: ColumnDef<Person>[] = [
   {accessorKey: 'name', header: 'Name'},
   {accessorKey: 'age', header: 'Age'},
 ];
+```
 
+```tsx
 const CombinedReorderingExample = () => {
   const [data, setData] = React.useState(initialData);
   const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
 
-```tsx
-const table = useTable({
-  columns,
-  data,
-  getRowId: (item) => item.id,
-  state: {columnOrder},
-  onColumnOrderChange: setColumnOrder,
-});
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
 
-const handleRowReorder = React.useCallback<
-  NonNullable<ReorderingProviderProps<Person>['onReorder']>
->(({draggedItemKey, baseItemKey}) => {
-  // update data array
-}, []);
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // update data array
+  }, []);
 
-const handleColumnReorder = React.useCallback<
-  NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
->(({columnOrder}) => {
-  setColumnOrder(columnOrder);
-}, []);
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
 
-return (
-  <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
-    <ReorderingProvider table={table} onReorder={handleRowReorder}>
-      <Table table={table} />
-    </ReorderingProvider>
-  </ColumnReorderingProvider>
-);
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
 };
 ```
 
-`columnOrder` を自分で制御する場合（永続化するなど）、`onReorder` を渡し、結果の順序を適用してください。
+`columnOrder` を自分で制御する場合（例: 保存する場合）は、`onReorder` を渡して結果の順序を適用してください。
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -512,17 +515,17 @@ return (
 CSS API:
 
 | CSS 変数                                 | デフォルト                       | 説明                      |
-| ---------------------------------------- | ----------------------------- | ------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | ドロップ挿入線の色        |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | ドロップ挿入線の幅        |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | ドラッグ中の列の不透明度  |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | ドラッグプレビューの背景  |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | ドラッグプレビューの影    |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | ドラッグプレビューの角丸  |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | ドロップ挿入線の色 |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | ドロップ挿入線の幅 |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | ドラッグされた列の不透明度    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | ドラッグプレビューの背景          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | ドラッグプレビューの box-shadow          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | ドラッグプレビューの border-radius       |
 
-特定の列の並べ替えを禁止するには、その列定義で `enableColumnReordering: false` を設定します。プレースホルダー（グループ化された）列はドラッグできません。`activationDistance`（デフォルト `8`）を使用して、ドラッグが開始されるまでにポインターが移動する必要がある距離を調整します。これにより、ヘッダーのクリック（ソートなど）が引き続き機能します。
+特定の列の並べ替えを禁止するには、その列定義で `enableColumnReordering: false` を設定します。プレースホルダー（グループ化された）列はドラッグできません。`activationDistance`（デフォルトは `8`）を使用して、ドラッグが開始されるまでにポインターが移動する必要がある距離を調整します。これにより、ヘッダーのクリック（ソートなど）が機能し続けます。
 
-固定された列も並べ替え可能ですが、それらの間でのみ可能です。列は左固定グループ、右固定グループ、または中央（固定なし）グループ内で移動できます。ドラッグによってピン境界を越えることはありません。
+固定された列も並べ替え可能ですが、それらの中でのみ可能です。列は左固定グループ、右固定グループ、または中央（固定なし）グループ内で移動できます。ドラッグによってピンの境界を越えることはありません。
 
 ```tsx
 <ColumnReorderingProvider
@@ -539,10 +542,10 @@ CSS API:
 </ColumnReorderingProvider>
 ```
 
-ドラッグ中：
+ドラッグ中:
 
-- 列の浮いたプレビュー（ヘッダーと最初の数行）がドラッグオーバーレイ内でポインターを追従します。
-- ドラッグ中の列は半透明になります。
+- 列の浮遊プレビュー（ヘッダーと最初の数行）がドラッグオーバーレイ内でポインターを追従します。
+- ドラッグされた列は半透明になります。
 - 列がドロップされる場所に青い挿入線が表示されます。
 
 ```tsx
@@ -558,7 +561,7 @@ CSS API:
 
 #### Virtualization
 
-グリッドコンテナをスクロール要素として使用したい場合に使用します（ウィンドウを使用したい場合はウィンドウ仮想化セクションを参照）。仮想化が機能するように、コンテナに固定の高さを設定してください。
+グリッドコンテナをスクロール要素として使用したい場合（ウィンドウを使用したい場合はウィンドウ仮想化セクションを参照）に使用します。コンテナに固定の高さを設定してください。そうしないと、仮想化は機能しません。
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -595,7 +598,35 @@ const VirtualizationExample = () => {
 };
 ```
 
-並べ替え機能で仮想化を使用する場合、`rangeExtractor` オプションも渡す必要があります。
+連続した双方向スクロール中に常に表示される必要があるテーブルでは、アダプティブ
+Direct-DOM モードを有効にし、安定したセマンティックキーを使用します。同じキーは、不変の並べ替えやツリーの再親化の前後に、行を一意に識別する必要があります。
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` は、ウォームマウントされた範囲を維持し、カバーされていない表示範囲のみを同期的に埋めます。`directDomUpdates` は、仮想化コンポーネントが React のレンダリングなしで、スクロール通知ごとにセルの位置とボディのサイズを更新できるようにします。テーブルの行には `position` を使用してください。ただし、周囲のレイアウトでトランスフォームが必要な場合は除きます。`getRowId` と `getItemKey` を安定させ、行の展開、折りたたみ、並べ替え、または再親化の後に、現在のフラット化された行モデルから `count` を設定します。任意のカスタム `rangeExtractor` は引き続き権威があり、アダプティブウィンドウ計画を無効にします。
+
+`BaseTable.canDeferOffscreenCellContent` は、非常に幅の広いアダプティブテーブル向けの追加のオプトイン機能です。遅延マウントがジオメトリ、フォーカス、アクセシビリティ、またはアプリケーションの状態を変更できないパッシブなセルコンテンツに対してのみ `true` を返してください。カスタム行、グループ行、固定セル、およびインタラクティブまたは副作用のあるコンテンツは、引き続き即時マウントされるべきです。
+
+デフォルトのアダプティブレンジエクストラクタを使用すると、`BaseTable` はアクティブなドラッグ行を自動的にピン留めします。
+カスタムレンジエクストラクタは、その行自体を保持する責任があります。アダプティブではないバーチャライザーで並べ替えを使用する場合は、同じセマンティックな `getItemKey` 契約を維持し、`rangeExtractor` オプションを渡してください。
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -619,9 +650,9 @@ return (
 );
 ```
 
-#### Window virtualization
+#### ウィンドウ仮想化
 
-ウィンドウをスクロール要素として使用したい場合に使用します。
+スクロール要素としてウィンドウを使用したい場合に使用します。
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -654,15 +685,13 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-#### Resizing
+#### リサイジング
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
   /* ... */
 ];
-```
 
-```tsx
 const data: Person[] = [
   /* ... */
 ];
@@ -679,7 +708,7 @@ const ResizingDemo = () => {
 };
 ```
 
-#### 列の設定
+#### 列設定
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -700,14 +729,14 @@ const data: Person[] = [
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // 外部からの制御と初期状態用
+    // 外部制御と初期状態用
     column_id: false, // デフォルトで非表示にするため
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
     /* リーフ列のID */
-  ]); // 外部からの制御と初期状態用
+  ]); // 外部制御と初期状態用
 
-  // state、callbacks、および設定適用時のコールバックを取得する代替方法 - useTableSettings フックを使用:
+  // state、コールバック、および設定適用コールバックでの設定を取得する代替バリアント - useTableSettings フックを使用:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -725,17 +754,17 @@ const TableSettingsDemo = () => {
 };
 ```
 
-react-table のテーブルと列のリサイズプロパティの詳細については、[ドキュメント](https://tanstack.com/table/v8/docs/api/features/column-sizing)をご覧ください。
+テーブルと列のリサイジングプロパティの詳細については、react-table の [ドキュメント](https://tanstack.com/table/v8/docs/api/features/column-sizing) を参照してください。
 
 ## 既知の問題と互換性
 
 ### React 19 + React Compiler の互換性
 
-**⚠️ 既知の問題:** `@gravity-ui/table`（TanStack Table を基盤として構築されています）を使用している場合、React 19 および React Compiler との間に互換性の問題があります。データが変更されてもテーブルが再レンダリングされない場合があります。詳細については、[TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567) を参照してください。
+**⚠️ 既知の問題:** `@gravity-ui/table`（TanStack Table をベースに構築されています）を使用している場合、React 19 および React Compiler との間に既知の互換性の問題があります。データが変更されてもテーブルが再レンダリングされない場合があります。詳細については、[TanStack Table issue #5567](https://github.com/TanStack/table/issues/5567) を参照してください。
 
 **回避策:**
 
-React 19 を React Compiler と共に使用しており、テーブルの再レンダリングに関する問題が発生している場合は、コンポーネントコードで `'use no memo'` ディレクティブを使用できます。
+React 19 を React Compiler と共に使用していて、テーブルの再レンダリングに問題が発生している場合は、コンポーネントコードで `'use no memo'` ディレクティブを使用できます。
 
 ```tsx
 import React from 'react';
@@ -743,7 +772,7 @@ import {Table, useTable} from '@gravity-ui/table';
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 function MyTable() {
-  'use no memo'; // このコンポーネントの React Compiler によるメモ化を無効にする
+  'use no memo'; // このコンポーネントの React Compiler メモ化を無効にする
 
   const [data, setData] = React.useState<Person[]>([]);
 
@@ -780,7 +809,7 @@ function MyTable() {
 }
 ```
 
-**注意:** この問題は基盤となる TanStack Table ライブラリに存在し、そちらで修正される必要があります。上記の回避策は、修正が利用可能になるまで役立つはずです。
+**注意:** この問題は基盤となる TanStack Table ライブラリに存在し、そこで修正される必要があります。上記の回避策は、修正が利用可能になるまで役立つはずです。
 
 ## ライセンス
 
@@ -788,28 +817,28 @@ MIT ライセンスの下で配布されています。詳細については [LI
 
 ## AI エージェント向け
 
-Gravity UI アプリケーション向けのヘッドレスで TanStack Table を搭載したデータグリッド。ソート可能、選択可能、グループ化可能、並べ替え可能、仮想化されたテーブルのために、uikit の基本的な `Table` の上に生のマークアップを構成する代わりに、これを使用してください。
+Gravity UI アプリケーション向けのヘッドレス、TanStack-Table 搭載データグリッド — ソート可能、選択可能、グループ化可能、並べ替え可能、および仮想化されたテーブルのために、uikit の基本的な `Table` の上に生のマークアップを合成するのではなく、これを使用してください。
 
-### 使用する場面
+### 使用する場合
 
-- 行またはウィンドウの仮想化が必要な大規模データセット (`useRowVirtualizer`, `useWindowRowVirtualizer`)。
-- 列のソート、リサイズ、並べ替え (`ColumnReorderingProvider`)、固定、およびユーザーごとの列設定 (`TableSettings`)。
+- 行またはウィンドウ仮想化が必要な大規模データセット（`useRowVirtualizer`、`useWindowRowVirtualizer`）。
+- 列のソート、リサイジング、並べ替え（`ColumnReorderingProvider`）、ピン留め、およびユーザーごとの列設定（`TableSettings`）。
 - 行の選択（単一/複数、範囲）および展開可能なセルを持つツリー/グループ化された行。
 
-### 使用しない場面
+### 使用しない場合
 
-- 数行の単純な静的テーブルで高度な機能がない場合 — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) の uikit に組み込まれている `Table` はより軽量です。
-- 非表形式のリスト — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) の `List` を使用してください。
+- 数行のシンプルな静的テーブルで高度な機能がない場合 — uikit の組み込み `Table`（[`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) から）の方が軽量です。
+- 非表形式のリスト — uikit の `List`（[`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) から）を使用してください。
 - スプレッドシートスタイルのインラインセル編集 — このグリッドは読み取り/表示に焦点を当てており、編集可能なスプレッドシートではありません。
 
-### よくある落とし穴
+### 一般的な落とし穴
 
-- **`useTable` でテーブルを構築し、`<Table table={table} />` をレンダリングする。** メインのプロパティは `<Table>` の `data`/`columns` 自体ではなく `table`（インスタンス）です。`data` と `columns` は `useTable` に渡してください。
-- **型は `@gravity-ui/table/tanstack` サブパスから取得します。** `ColumnDef`、`RowSelectionState`、`SortingState` などは、パッケージのルートからではなく、`@gravity-ui/table/tanstack` からインポートしてください。
-- **ソートにはアクセサーが必要です。** ソートを機能させるには、列に `accessorKey`/`accessorFn` が必要です。`enableSorting` を設定し、`getRowId` を提供してください。
-- **React 19 + React Compiler は再レンダリングをスキップする可能性があります。** これは TanStack Table の上位の問題です。コンポーネントに `'use no memo'` ディレクティブを追加するか、`data` をメモ化してください。
-- **範囲選択はネストされた行で壊れます。** テーブルにグループ化された/ネストされた行がある場合、範囲選択は未定義の動作となります。グループ化された行で親チェックボックスの状態を正しく保つには、`useRowSelectionFixedHandler` を使用してください。
+- **テーブルは `useTable` で構築し、`<Table table={table} />` でレンダリングします。** メインのプロパティは `<Table>` 自体の `data`/`columns` ではなく `table` (インスタンス) です。`data` と `columns` は `useTable` に渡してください。
+- **型は `@gravity-ui/table/tanstack` サブパスから取得します。** `ColumnDef`, `RowSelectionState`, `SortingState` などは、パッケージのルートからではなく `@gravity-ui/table/tanstack` からインポートしてください。
+- **ソートにはアクセサーが必要です。** ソートを機能させるには、カラムに `accessorKey`/`accessorFn` が必要です。`enableSorting` を設定し、`getRowId` を提供してください。
+- **React 19 + React Compiler は再レンダリングをスキップできます。** これは TanStack Table のアップストリームの問題です。コンポーネントに `'use no memo'` ディレクティブを追加するか、`data` をメモ化してください。
+- **ネストされた行では範囲選択が壊れます。** テーブルにグループ化された/ネストされた行がある場合、範囲選択は未定義の動作となります。グループ化された状態での親チェックボックスの状態を正しく保つには、`useRowSelectionFixedHandler` を使用してください。
 
 ## AI エージェント向けドキュメント
 
-インストールされているバージョンのエージェント読み取り可能なドキュメントは、`node_modules/@gravity-ui/table/build/docs/INDEX.md` にあります。
+インストールされているバージョンのエージェント可読ドキュメントは、`node_modules/@gravity-ui/table/build/docs/INDEX.md` にあります。
