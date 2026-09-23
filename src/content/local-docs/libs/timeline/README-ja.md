@@ -10,19 +10,19 @@ Canvasレンダリングによるインタラクティブなタイムライン�
 
 ## プレビュー
 
-イベントと軸を持つ基本的なタイムライン：
+イベントと軸を持つ基本的なタイムライン:
 
 ![Basic timeline with events](./docs/img/lines.png)
 
-展開可能なネストされたイベントを持つカスタムレンダリング（[NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story)の例）：
+展開可能なネストされたイベントを持つカスタムレンダリング ([NestedEvents](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--nested-events-story) の例):
 
 ![Nested events timeline](./docs/img/events.png)
 
 ## 特徴
 
-- 高パフォーマンスのためのCanvasベースのレンダリング
+- 高パフォーマンスのためのCanvasベースレンダリング
 - ズームとパン機能を備えたインタラクティブなタイムライン
-- 柔軟なホイールとトラックパッドの操作、垂直スクロールのパススルーを含む
+- 柔軟なホイールとトラックパッド操作、垂直スクロールのパススルーを含む
 - イベント、マーカー、セクション、軸、グリッドのサポート
 - 視覚的な整理と時間範囲のハイライトのための背景セクション
 - スマートマーカーグルーピングと自動ズーム機能 - グループ化されたマーカーをクリックすると、個々のコンポーネントにズームインします
@@ -128,11 +128,11 @@ const {timeline} = useTimeline({
 });
 ```
 
-各インタラクションは `'zoom'`, `'pan'`, または `'pass-through'` を受け入れます。`pinch` はブラウザのCtrl+ホイールトラックパッドジェスチャーを表します。`zoomSensitivity.in` と `zoomSensitivity.out` は、ズームインとズームアウトの速度をそれぞれ乗算します。`1` はデフォルトで、値が小さいほど穏やかになり、`0` はその方向のズームを無効にします。小さなトラックパッドデルタは自動的にスムーズになります。`minRange` と `maxRange` はミリ秒単位の期間です。最小値はデフォルトで5秒、最大値は設定されない限り無制限です。したがって、ユーザーがズームアウトできる範囲を制限するには `maxRange` を設定してください。インタラクティブな[Camera interactions Storybook例](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus)を参照してください。
+各インタラクションは `'zoom'`, `'pan'`, または `'pass-through'` を受け入れます。`pinch` はブラウザのCtrl+ホイールトラックパッドジェスチャーを表します。`zoomSensitivity.in` と `zoomSensitivity.out` は、ズームインとズームアウトの速度をそれぞれ乗算します。`1` はデフォルトで、値が小さいほど穏やかになり、`0` はその方向のズームを無効にします。小さなトラックパッドデルタは自動的にスムーズ処理されます。`minRange` と `maxRange` はミリ秒単位の期間です。最小値はデフォルトで5秒、最大値は設定されない限り無制限です。したがって、ユーザーがズームアウトできる範囲を制限するには `maxRange` を設定してください。インタラクティブな[Camera interactions Storybook例](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus)を参照してください。
 
 ### セクションの構造
 
-各セクションは以下の構造が必要です。
+各セクションには以下の構造が必要です。
 
 ```typescript
 type TimelineSection = {
@@ -167,7 +167,7 @@ const MyTimelineComponent = () => {
         {
           id: 'afternoon',
           from: Date.now() + 1800000,
-          // No 'to' specified - extends to timeline end
+          // 'to' が指定されていない - タイムラインの最後まで拡張されます
           color: 'rgba(76, 175, 80, 0.2)', // Semi-transparent green
           hoverColor: 'rgba(76, 175, 80, 0.3)'
         }
@@ -175,7 +175,7 @@ const MyTimelineComponent = () => {
     },
     viewConfiguration: {
       sections: {
-        hitboxPadding: 2 // Hover detection padding
+        hitboxPadding: 2 // ホバー検出パディング
       }
     }
   });
@@ -190,15 +190,15 @@ const MyTimelineComponent = () => {
 
 ```typescript
 type TimelineMarker = {
-  time: number;           // マーカーの位置を示すタイムスタンプ
+  time: number;           // マーカー位置のタイムスタンプ
   color: string;          // マーカー線の色
-  activeColor: string;    // マーカーが選択されたときの色（必須）
-  hoverColor: string;     // マーカーにホバーしたときの色（必須）
-  lineWidth?: number;     // マーカー線の幅（オプション）
-  label?: string;         // ラベルテキスト（オプション）
-  labelColor?: string;    // ラベルの色（オプション）
-  renderer?: AbstractMarkerRenderer; // カスタムレンダラー（オプション）
-  nonSelectable?: boolean;// マーカーを選択可能かどうか
+  activeColor: string;    // マーカーが選択されたときの色 (必須)
+  hoverColor: string;     // マーカーにホバーしたときの色 (必須)
+  lineWidth?: number;     // マーカー線のオプションの幅
+  label?: string;         // オプションのラベルテキスト
+  labelColor?: string;    // オプションのラベルの色
+  renderer?: AbstractMarkerRenderer; // オプションのカスタムレンダラー
+  nonSelectable?: boolean;// マーカーを選択できるかどうか
   group?: boolean;        // マーカーがグループを表すかどうか
 };
 ```
@@ -216,25 +216,25 @@ const MyTimelineComponent = () => {
       axes: [],
       events: [],
       markers: [
-        // これらのマーカーはグループ化されます
-        { time: Date.now(), color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 1' },
-        { time: Date.now() + 1000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 2' },
-        { time: Date.now() + 2000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Event 3' },
+        // これらのマーカーは一緒にグループ化されます
+        { time: Date.now(), color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'イベント 1' },
+        { time: Date.now() + 1000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'イベント 2' },
+        { time: Date.now() + 2000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'イベント 3' },
       ]
     },
     viewConfiguration: {
       markers: {
         collapseMinDistance: 8,        // 8ピクセル以内のマーカーをグループ化
-        groupZoomEnabled: true,        // グループクリックでズームを有効化
+        groupZoomEnabled: true,        // グループクリックでズームを有効にする
         groupZoomPadding: 0.3,        // グループの周りに30%のパディング
         groupZoomMaxFactor: 0.3,      // 最大ズームファクター
       }
     }
   });
 
-  // グループズームイベントのリスニング
+  // グループズームイベントをリッスンする
   useTimelineEvent(timeline, 'on-group-marker-click', (data) => {
-    console.log('Group zoomed:', data);
+    console.log('グループがズームされました:', data);
   });
 
   return <TimelineCanvas timeline={timeline} />;
@@ -249,10 +249,10 @@ const MyTimelineComponent = () => {
 
 タイムラインはReactコンポーネントとして実装されており、主に2つのオブジェクトを通じて設定できます。
 
-1. **TimelineSettings**: コアとなるタイムラインの動作と外観を制御します。
+1. **TimelineSettings**: コアのタイムラインの動作と外観を制御します。
    - `start`: タイムラインの開始時刻
    - `end`: タイムラインの終了時刻
-   - `axes`: 軸設定の配列（構造は以下を参照）
+   - `axes`: 軸設定の配列 (構造は以下を参照)
    - `events`: イベント設定の配列
    - `markers`: マーカー設定の配列
    - `sections`: セクション設定の配列
@@ -265,13 +265,13 @@ const MyTimelineComponent = () => {
 
 タイムラインコンポーネントは、いくつかのインタラクティブなイベントをサポートしています。
 
-- `on-click`: タイムラインをクリックしたときにトリガーされます。
+- `on-click`: タイムラインをクリックしたときにトリガーされます。ヒットした要素、タイムスタンプ、ビューポート座標、キャンバス座標が含まれます。
 - `on-context-click`: 右クリック/コンテキストメニューでトリガーされます。
-- `on-select-change`: 選択範囲が変更されたときにトリガーされます。
+- `on-select-change`: 選択が変更されたときにトリガーされます。
 - `on-hover`: タイムライン要素にホバーしたときにトリガーされます。
 - `on-leave`: マウスがタイムライン要素から離れたときにトリガーされます。
 
-イベント処理の例：
+イベント処理の例:
 
 ```tsx
 import { useTimelineEvent } from '@gravity-ui/timeline/react';
@@ -280,11 +280,11 @@ const MyTimelineComponent = () => {
   const { timeline } = useTimeline({ /* ... */ });
 
   useTimelineEvent(timeline, 'on-click', (data) => {
-    console.log('Timeline clicked:', data);
+    console.log('タイムラインがクリックされました:', data);
   });
 
   useTimelineEvent(timeline, 'on-select-change', (data) => {
-    console.log('Selection changed:', data);
+    console.log('選択が変更されました:', data);
   });
 
   return <TimelineCanvas timeline={timeline} />;
@@ -308,7 +308,7 @@ const MyTimelineComponent = () => {
 
 ### イベントポップアップ
 
-イベントの詳細を表示するために、`@gravity-ui/uikit`とそのスタイルをインストールしてください。これにより、ホバーイベントのサブスクライブや座標の計算を自分で行う必要がなくなります。
+イベントの詳細を表示するために、`@gravity-ui/uikit`とそのスタイルをインストールしてください。ホバーイベントをサブスクライブしたり、座標を計算したりする必要はありません。
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -324,32 +324,34 @@ import {EventPopup} from '@gravity-ui/timeline/react/uikit';
 </>
 ```
 
-`EventPopup`は150ミリ秒後に開き、ポインターがイベントから離れてから200ミリ秒後に閉じます。必要に応じて `openDelay`、`closeDelay`、`placement`、`offset`、`className`、または `aria-label` を設定してください。ポップアップは、そのコンテンツがポインターまたはフォーカスを持っている間は開いたままになり、Escapeキーまたは外部クリックで閉じます。イベントが重なっている場合は、データ順で最後のイベントが使用されます。`hoverColor` と `isHovered` はイベントの描画を制御し、`EventPopup` は詳細UIを制御します。
+ポップアップ、ホバーハイライト、カーソルは同じイベントを使用します。正確なヒットは、近くのイベントよりも優先されます。重複する正確なヒットは、描画順で最後のイベントに解決されます。正確なヒットがない場合のみ、`3 px + events.hitboxPadding`の許容範囲が使用されます。グループクエリと`on-hover`には、引き続きすべての候補が含まれます。
 
-### イベントの構造
+`EventPopup` は 150ms 後に開き、ポインターがイベントから離れてから 200ms 後に閉じます。必要に応じて `openDelay`、`closeDelay`、`placement`、`offset`、`className`、または `aria-label` を設定してください。ポップアップは、そのコンテンツにポインターまたはフォーカスがある間は開いたままになり、Escape キーまたは外部クリックで閉じます。イベントが重なる場合は、データ順で最後のイベントが使用されます。`hoverColor` と `isHovered` はイベントの描画を制御し、`EventPopup` はその詳細 UI を制御します。
 
-タイムライン内のイベントは以下の構造に従います。
+### イベント構造
+
+タイムライン内のイベントは、次の構造に従います。
 
 ```typescript
 type TimelineEvent = {
-  id: string;             // ユニークな識別子
+  id: string;             // 一意の識別子
   from: number;           // 開始タイムスタンプ
-  to?: number;            // 終了タイムスタンプ (ポイントイベントの場合はオプション)
-  axisId: string;         // このイベントが属する軸のID
+  to?: number;            // 終了タイムスタンプ（ポイントイベントの場合はオプション）
+  axisId: string;         // このイベントが属する軸の ID
   trackIndex: number;     // 軸トラック内のインデックス
   renderer?: AbstractEventRenderer; // オプションのカスタムレンダラー
   color?: string;         // オプションのイベントカラー
-  hoverColor?: string;    // オプションのホバー時のカラー
-  selectedColor?: string; // オプションの選択時のカラー
-  cursor?: string;        // オプションのイベントホバー時のCSSカーソル
+  hoverColor?: string;    // オプションのホバー状態カラー
+  selectedColor?: string; // オプションの選択状態カラー
+  cursor?: string;        // イベントをホバー中のオプションの CSS カーソル
 };
 ```
 
-クリック時にアクションを実行するイベントには `cursor: 'pointer'` を設定してください。カーソルはポインターがそのイベント上にある間のみ適用されます。イベントが重なっている場合、データ順で最後のイベントがカーソルを決定します。
+クリック時にアクションを実行するイベントには、`cursor: 'pointer'` を設定してください。カーソルはポインターがそのイベント上にある場合にのみ適用されます。イベントが重なる場合、データ順で最後のイベントがカーソルを決定します。
 
 ### Gravity UI カラー
 
-Canvas は CSS カスタムプロパティを自身で解決できません。Timeline は `var(--token)` のような完全な値をその canvas 要素に対して解決するため、Gravity UI のセマンティックトークンは組み込みイベント、マーカー、セクション、軸、グリッド、ルーラーで機能します。
+Canvas は CSS カスタムプロパティを自身で解決できません。Timeline は、Canvas 要素に対して完全な値の `var(--token)` を解決するため、Gravity UI のセマンティックトークンは組み込みイベント、マーカー、セクション、軸、グリッド、ルーラーで機能します。
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -363,7 +365,7 @@ import {GravityTimelineCanvas} from '@gravity-ui/timeline/react/uikit';
 </ThemeProvider>
 ```
 
-`color: 'var(--g-color-base-positive-medium)'` のように、任意のカラーフィールドに直接トークンを渡してください。`GravityTimelineCanvas` は、Gravity UI のテーマが変更されると自動的に再描画されます。トークンが見つからない場合は、`var(--app-event-color, transparent)` のような CSS フォールバックを使用するか、カスタムレンダラーから `timeline.api.resolveColor(color, fallback)` を呼び出してください。
+`color: 'var(--g-color-base-positive-medium)'` のように、任意のカラーフィールドに直接トークンを渡してください。`GravityTimelineCanvas` は、有効な Gravity UI テーマが変更されると自動的に再描画されます。トークンが見つからない場合は、`var(--app-event-color, transparent)` のような CSS フォールバックを使用するか、カスタムレンダラーから `timeline.api.resolveColor(color, fallback)` を呼び出してください。
 
 イベントの場合、`color` は通常通り使用され、`hoverColor` はポインターホバー時、`selectedColor` は選択後に使用されます。
 
@@ -388,7 +390,7 @@ const events = [
 
 ルーラー、イベント、マーカーのデフォルトフォントを設定するには、`viewConfiguration.font` を一度設定してください。コンポーネント固有の `ruler.font`、`events.font`、または `markers.font` が優先されます。デフォルトは `10px sans-serif` のままです。
 
-Canvas は `ctx.font` で CSS 変数や `inherit` を直接使用できないため、Timeline は canvas の CSS コンテキストで完全な値のトークンを解決します。
+Canvas は `ctx.font` で CSS 変数や `inherit` を直接使用できないため、Timeline は Canvas CSS コンテキストで完全な値のトークンを解決します。
 
 ```ts
 viewConfiguration: {
@@ -396,18 +398,18 @@ viewConfiguration: {
 }
 ```
 
-canvas 要素の計算されたフォントを使用するには、`font: 'inherit'` を使用してください。カスタムレンダラーは `resolveColor` と共に `resolveFont` を受け取るか、`timeline.api.resolveFont(font)` を呼び出すことができます。Web フォントが動的にロードされた後、`timeline.api.rerender()` を呼び出して canvas テキストを再描画してください。
+Canvas 要素の計算されたフォントを使用するには、`font: 'inherit'` を使用してください。カスタムレンダラーは `resolveColor` と共に `resolveFont` を受け取るか、`timeline.api.resolveFont(font)` を呼び出すことができます。Web フォントが動的にロードされた後、`timeline.api.rerender()` を呼び出して Canvas テキストを再描画してください。
 
-### TypeScript の直接利用
+### 直接 TypeScript を使用する
 
-Timeline クラスは、React なしで TypeScript で直接使用できます。これは、他のフレームワークやバニラ JavaScript アプリケーションとの統合に便利です。
+Timeline クラスは、React なしで TypeScript で直接使用できます。これは、他のフレームワークやバニラ JavaScript アプリケーションとの統合に役立ちます。
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// タイムラインインスタンスの作成
+// タイムラインインスタンスを作成
 const timeline = new Timeline({
   settings: {
     start: timestamp,
@@ -457,13 +459,13 @@ const timeline = new Timeline({
   }
 });
 
-// canvas 要素で初期化
+// Canvas 要素で初期化
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
 }
 
-// イベントリスナーの追加
+// イベントリスナーを追加
 timeline.on('on-click', (detail) => {
   console.log('Timeline clicked:', detail);
 });
@@ -480,35 +482,35 @@ Timeline クラスは、タイムラインを管理するための豊富な API 
 
 - **イベント管理**:
   ```typescript
-  // イベントリスナーの追加
+  // イベントリスナーを追加
   timeline.on('eventClick', (detail) => {
     console.log('Event clicked:', detail);
   });
 
-  // イベントリスナーの削除
+  // イベントリスナーを削除
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // カスタムイベントの発火
+  // カスタムイベントを発火
   timeline.emit('customEvent', { data: 'custom data' });
   ```
 
-- **タイムライン制御**:
+- **タイムラインコントロール**:
   ```typescript
-  // タイムラインデータの更新
+  // タイムラインデータを更新
   timeline.api.setEvents([
     {
       id: 'newEvent',
       from: Date.now(),
       to: Date.now() + 3600000,
-      label: 'New Event',
+      label: '新しいイベント',
       axisId: 'main',
       trackIndex: 0
     }
   ]);
 
-  // 軸の更新
+  // 軸を更新
   timeline.api.setAxes([
     {
       id: 'newAxis',
@@ -517,10 +519,8 @@ Timeline クラスは、タイムラインを管理するための豊富な API 
       height: 80
     }
   ]);
-```
 
-```javascript
-  // マーカーの更新
+  // マーカーを更新
   timeline.api.setMarkers([
     {
       id: 'newMarker',
@@ -532,7 +532,7 @@ Timeline クラスは、タイムラインを管理するための豊富な API 
     }
   ]);
 
-  // セクションの更新
+  // セクションを更新
   timeline.api.setSections([
     {
       id: 'newSection',
@@ -543,20 +543,20 @@ Timeline クラスは、タイムラインを管理するための豊富な API 
     }
   ]);
 
-  // ビュー設定の更新（現在の設定とマージされます）
+  // ビュー設定を更新（現在の設定とマージされます）
   timeline.api.setViewConfiguration({ hideRuler: true });
   ```
 
 ## ライブデモ
 
-インタラクティブなデモは[Storybook](https://preview.gravity-ui.com/timeline/)でご覧いただけます。
+インタラクティブなデモを[Storybook](https://preview.gravity-ui.com/timeline/)でご覧ください:
 
 - [基本的なタイムライン](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - イベントと軸を持つシンプルなタイムライン
 - [無限タイムライン](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - イベントと軸を持つ無限タイムライン
-- [マーカー](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 垂直マーカーとラベル付きタイムライン
-- [カメラ操作](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) - ホイール、水平スクロール、トラックパッドのピンチ操作の挙動を設定
-- [カスタムイベント](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - カスタムイベントレンダリング付きタイムライン
-- [連携機能](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection, DragHandler, NestedEvents, Popup, List
+- [マーカー](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 垂直マーカーとラベルを持つタイムライン
+- [カメラ操作](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) - ホイール、水平スクロール、トラックパッドのピンチ操作を構成
+- [カスタムイベント](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - カスタムイベントレンダリングを持つタイムライン
+- [連携機能](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection、DragHandler、NestedEvents、Popup、List
 
 
 ## 開発
@@ -565,7 +565,7 @@ Timeline クラスは、タイムラインを管理するための豊富な API 
 
 このプロジェクトには、コンポーネント開発とドキュメントのためのStorybookが含まれています。
 
-Storybookを実行するには：
+Storybookを実行するには:
 
 ```bash
 npm run storybook
@@ -573,7 +573,7 @@ npm run storybook
 
 これにより、ポート6006でStorybook開発サーバーが起動します。http://localhost:6006 からアクセスできます。
 
-デプロイ用にStorybookの静的バージョンをビルドするには：
+デプロイ用にStorybookの静的バージョンをビルドするには:
 
 ```bash
 npm run build-storybook
@@ -582,4 +582,3 @@ npm run build-storybook
 ## ライセンス
 
 MIT
-```

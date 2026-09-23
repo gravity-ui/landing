@@ -25,7 +25,7 @@
 - 灵活的滚轮和触控板交互，包括垂直滚动穿透
 - 支持事件、标记、区域、轴和网格
 - 背景区域用于视觉组织和时间段高亮
-- 智能标记分组，自动缩放到组 - 点击分组标记可缩放到其个体组件
+- 智能标记分组，自动缩放到组 - 点击分组标记可缩放到其独立组件
 - 虚拟化渲染，提高大型数据集的性能（仅在时间轴内容超出视口时激活）
 - 可自定义的外观和行为
 - 支持 TypeScript，提供完整的类型定义
@@ -61,7 +61,7 @@ const MyTimelineComponent = () => {
 
   // timeline - Timeline 实例
   // api - CanvasApi 实例 (与 timeline.api 相同)
-  // start - 初始化时间轴并传入 canvas 的函数
+  // start - 初始化时间轴和 Canvas 的函数
   // stop - 销毁时间轴的函数
 
   return (
@@ -81,7 +81,7 @@ type TimelineAxis = {
   id: string;          // 唯一的轴标识符
   tracksCount: number; // 轴中的轨道数量
   top: number;         // 垂直位置 (px)
-  height: number;      // 每条轨道的像素高度
+  height: number;      // 每个轨道的高度 (px)
 };
 ```
 
@@ -89,8 +89,8 @@ type TimelineAxis = {
 
 通过 `viewConfiguration.axes.linePosition` 配置水平线的位置：
 
-- `"center"` (默认) 在每条轨道的中心绘制一条线。
-- `"between"` 在每条轨道之后绘制一条线，位于其底部边界。这对于带有居中事件条的表格样式行非常有用。
+- `"center"` (默认) 在每个轨道的中心绘制一条线。
+- `"between"` 在每个轨道之后绘制一条线，位于其底部边界。这对于带有居中事件条的表格样式行很有用。
 
 ```typescript
 viewConfiguration: {
@@ -128,7 +128,7 @@ const {timeline} = useTimeline({
 });
 ```
 
-每个交互都可以接受 `'zoom'`、`'pan'` 或 `'pass-through'`。`pinch` 代表浏览器按住 Ctrl 键的滚轮触控板手势。`zoomSensitivity.in` 和 `zoomSensitivity.out` 分别独立地乘以放大和缩小的速度：`1` 是默认值，较低的值更平缓，`0` 则在该方向禁用缩放。小的触控板滚动差值会被自动平滑处理。`minRange` 和 `maxRange` 是以毫秒为单位的时长；最小值默认为 5 秒，最大值在未配置时不受限制，因此设置 `maxRange` 可以限制用户可以缩小的程度。请参阅交互式的 [Camera interactions Storybook 示例](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus)。
+每个交互都可以接受 `'zoom'`、`'pan'` 或 `'pass-through'`。`pinch` 代表浏览器按住 Ctrl 键的滚轮触控板手势。`zoomSensitivity.in` 和 `zoomSensitivity.out` 分别独立地乘以放大和缩小的速度：`1` 是默认值，较低的值更平缓，`0` 则在该方向禁用缩放。小的触控板偏移会自动进行平滑处理。`minRange` 和 `maxRange` 是以毫秒为单位的时长；最小值默认为 5 秒，最大值除非配置否则不受限制，因此设置 `maxRange` 可以限制用户可以缩小的程度。请参阅交互式的 [Camera interactions Storybook 示例](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus)。
 
 ### 区域结构
 
@@ -145,7 +145,7 @@ type TimelineSection = {
 };
 ```
 
-区域为时间段提供背景着色，并帮助在视觉上组织时间轴内容：
+区域为时间段提供背景着色，并有助于在视觉上组织时间轴内容：
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -247,7 +247,7 @@ const MyTimelineComponent = () => {
 
 ### 组件架构
 
-时间轴被实现为一个 React 组件，可以通过两个主要对象进行配置：
+该时间轴实现为一个 React 组件，可以通过两个主要对象进行配置：
 
 1. **TimelineSettings**: 控制时间轴的核心行为和外观
    - `start`: 时间轴的开始时间
@@ -265,7 +265,7 @@ const MyTimelineComponent = () => {
 
 时间轴组件支持多种交互事件：
 
-- `on-click`: 点击时间轴时触发
+- `on-click`: 点击时间轴时触发；包含命中的元素、时间戳、视口坐标和画布坐标
 - `on-context-click`: 右键点击/上下文菜单时触发
 - `on-select-change`: 选择发生变化时触发
 - `on-hover`: 鼠标悬停在时间轴元素上时触发
@@ -293,7 +293,7 @@ const MyTimelineComponent = () => {
 
 ### React 集成
 
-该组件使用自定义 Hook 来管理时间轴：
+该组件使用自定义钩子来管理时间轴：
 
 - `useTimeline`: 管理时间轴实例及其生命周期
   - 创建并初始化时间轴
@@ -304,11 +304,11 @@ const MyTimelineComponent = () => {
   - 管理事件监听器的生命周期
   - 在组件卸载时自动清理监听器
 
-组件会自动处理时间轴实例的清理和销毁。
+组件会自动处理时间轴实例的清理和销毁工作，当组件卸载时。
 
 ### 事件弹出框
 
-安装 `@gravity-ui/uikit` 及其样式，即可显示事件详情，无需手动订阅悬停事件或计算坐标：
+安装 `@gravity-ui/uikit` 及其样式，即可显示事件详情，无需订阅悬停事件或自行计算坐标：
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -324,7 +324,14 @@ import {EventPopup} from '@gravity-ui/timeline/react/uikit';
 </>
 ```
 
-`EventPopup` 在 150 毫秒后打开，并在鼠标指针离开事件 200 毫秒后关闭。如有需要，可设置 `openDelay`、`closeDelay`、`placement`、`offset`、`className` 或 `aria-label`。当其内容具有指针或焦点时，弹出框将保持打开状态，按 Escape 键或点击外部区域即可关闭。当事件重叠时，它会使用数据顺序中的最后一个事件。`hoverColor` 和 `isHovered` 控制事件的绘制；`EventPopup` 则负责其详情 UI。
+弹出框、悬停高亮和光标使用相同的事件：精确命中优先于附近事件。重叠的精确命中将解析为绘制顺序中的最后一个事件。只有在没有精确命中时，才会使用 `3 px + events.hitboxPadding` 的容差。分组查询和 `on-hover` 仍然包含所有候选者。
+
+`EventPopup` 会在 150 毫秒后打开，并在指针离开事件 200 毫秒后关闭。
+在需要时设置 `openDelay`、`closeDelay`、`placement`、`offset`、`className` 或 `aria-label`。
+当鼠标悬停在弹窗内容上或内容获得焦点时，弹窗将保持打开状态。
+按下 Escape 键或在弹窗外部点击时，弹窗将关闭。
+当事件重叠时，将根据数据顺序使用最后一个事件。
+`hoverColor` 和 `isHovered` 用于控制事件的绘制；`EventPopup` 则负责其详细 UI。
 
 ### 事件结构
 
@@ -339,17 +346,17 @@ type TimelineEvent = {
   trackIndex: number;     // 事件在轴轨道中的索引
   renderer?: AbstractEventRenderer; // 可选的自定义渲染器
   color?: string;         // 可选的事件颜色
-  hoverColor?: string;    // 可选的鼠标悬停时的颜色
-  selectedColor?: string; // 可选的选中状态的颜色
-  cursor?: string;        // 可选的鼠标悬停在事件上时的 CSS 光标
+  hoverColor?: string;    // 可选的鼠标悬停状态颜色
+  selectedColor?: string; // 可选的选中状态颜色
+  cursor?: string;        // 鼠标悬停在事件上时的可选 CSS 鼠标样式
 };
 ```
 
-为执行点击操作的事件设置 `cursor: 'pointer'`。光标仅在指针悬停在该事件上时应用；当事件重叠时，数据顺序中的最后一个事件决定了光标。
+为执行点击操作的事件设置 `cursor: 'pointer'`。此光标仅在指针悬停在该事件上时生效；当事件重叠时，数据顺序中的最后一个事件将决定光标。
 
 ### Gravity UI 颜色
 
-Canvas 本身无法解析 CSS 自定义属性。Timeline 会在其 canvas 元素上解析完整的 `var(--token)` 值，因此 Gravity UI 的语义化 token 可以用于内置事件、标记、区域、轴、网格和标尺。
+Canvas 本身无法解析 CSS 自定义属性。Timeline 会针对其 canvas 元素解析完整的 `var(--token)` 值，因此 Gravity UI 的语义化 token 可用于内置事件、标记、区域、轴、网格和标尺。
 
 ```tsx
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -363,9 +370,9 @@ import {GravityTimelineCanvas} from '@gravity-ui/timeline/react/uikit';
 </ThemeProvider>
 ```
 
-可以直接在任何颜色字段中传递 token，例如 `color: 'var(--g-color-base-positive-medium)'`。`GravityTimelineCanvas` 会在 Gravity UI 主题生效时自动重绘。对于缺失的 token，可以使用 CSS 回退值，例如 `var(--app-event-color, transparent)`，或者从自定义渲染器中调用 `timeline.api.resolveColor(color, fallback)`。
+直接在任何颜色字段中传递 token，例如 `color: 'var(--g-color-base-positive-medium)'`。当有效的 Gravity UI 主题更改时，`GravityTimelineCanvas` 会自动重绘。对于缺失的 token，可以使用 CSS 回退值，例如 `var(--app-event-color, transparent)`，或者从自定义渲染器调用 `timeline.api.resolveColor(color, fallback)`。
 
-对于事件，`color` 用于正常状态，`hoverColor` 用于鼠标悬停时，`selectedColor` 用于选中后：
+对于事件，`color` 用于正常状态，`hoverColor` 用于鼠标悬停状态，`selectedColor` 用于选中状态：
 
 ```ts
 const events = [
@@ -382,13 +389,13 @@ const events = [
 ];
 ```
 
-自定义事件渲染器会接收 `resolveColor` 作为其最后一个可选参数；自定义标记和区域渲染器会在其渲染数据中接收它。
+自定义事件渲染器会接收 `resolveColor` 作为其最后一个可选参数；自定义标记和区域渲染器则在它们的渲染数据中接收。
 
 ### Canvas 字体
 
-一次性设置 `viewConfiguration.font` 来配置标尺、事件和标记的默认字体。组件特定的 `ruler.font`、`events.font` 或 `markers.font` 会优先。默认值为 `10px sans-serif`。
+设置 `viewConfiguration.font` 一次即可配置标尺、事件和标记的默认字体。组件特定的 `ruler.font`、`events.font` 或 `markers.font` 将具有更高的优先级。默认值为 `10px sans-serif`。
 
-Canvas 不能直接在 `ctx.font` 中使用 CSS 变量或 `inherit`，因此 Timeline 会在 canvas 的 CSS 上下文中解析完整的 token 值：
+Canvas 在 `ctx.font` 中无法直接使用 CSS 变量或 `inherit`，因此 Timeline 会在 canvas 的 CSS 上下文中解析完整的 token 值：
 
 ```ts
 viewConfiguration: {
@@ -396,18 +403,18 @@ viewConfiguration: {
 }
 ```
 
-使用 `font: 'inherit'` 来使用 canvas 元素的计算字体。自定义渲染器会接收 `resolveFont` 和 `resolveColor`，或者可以调用 `timeline.api.resolveFont(font)`。动态加载的 Web 字体加载完成后，请调用 `timeline.api.rerender()` 来用新字体重绘 canvas 文本。
+使用 `font: 'inherit'` 来使用 canvas 元素的计算字体。自定义渲染器会接收 `resolveFont` 和 `resolveColor`，或者可以调用 `timeline.api.resolveFont(font)`。在 Web 字体动态加载后，请调用 `timeline.api.rerender()` 以使用新字体重绘 canvas 文本。
 
 ### 直接使用 TypeScript
 
-Timeline 类可以直接在 TypeScript 中使用，无需 React。这对于与其它框架或原生 JavaScript 应用程序集成非常有用：
+Timeline 类可以直接在 TypeScript 中使用，无需 React。这对于与其他框架或原生 JavaScript 应用程序集成非常有用：
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// 创建一个 timeline 实例
+// 创建一个时间轴实例
 const timeline = new Timeline({
   settings: {
     start: timestamp,
@@ -457,7 +464,7 @@ const timeline = new Timeline({
   }
 });
 
-// 使用 canvas 元素进行初始化
+// 使用 canvas 元素初始化
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
@@ -472,13 +479,13 @@ timeline.on('on-select-change', (detail) => {
   console.log('Selection changed:', detail);
 });
 
-// 完成后进行清理
+// 完成后清理
 timeline.destroy();
 ```
 
 Timeline 类提供了一个丰富的 API 来管理时间轴：
 
-- **事件管理**:
+- **事件管理**：
   ```typescript
   // 添加事件监听器
   timeline.on('eventClick', (detail) => {
@@ -502,13 +509,13 @@ Timeline 类提供了一个丰富的 API 来管理时间轴：
       id: 'newEvent',
       from: Date.now(),
       to: Date.now() + 3600000,
-      label: 'New Event',
+      label: '新事件',
       axisId: 'main',
       trackIndex: 0
     }
   ]);
 
-  // 更新轴
+  // 更新轴线
   timeline.api.setAxes([
     {
       id: 'newAxis',
@@ -517,15 +524,13 @@ Timeline 类提供了一个丰富的 API 来管理时间轴：
       height: 80
     }
   ]);
-```
 
-```javascript
   // 更新标记
   timeline.api.setMarkers([
     {
       id: 'newMarker',
       time: Date.now(),
-      label: 'New Marker',
+      label: '新标记',
       color: '#00ff00',
       activeColor: '#4caf50',
       hoverColor: '#2e7d32'
@@ -551,9 +556,9 @@ Timeline 类提供了一个丰富的 API 来管理时间轴：
 
 在我们的 [Storybook](https://preview.gravity-ui.com/timeline/) 中探索交互式示例：
 
-- [基础时间轴](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - 带有事件和轴的简单时间轴
-- [无限时间轴](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - 带有事件和轴的无限时间轴
-- [标记](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 带垂直标记和标签的时间轴
+- [基础时间轴](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - 带有事件和轴线的简单时间轴
+- [无限时间轴](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - 带有事件和轴线的无限时间轴
+- [标记](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 带有垂直标记和标签的时间轴
 - [相机交互](https://preview.gravity-ui.com/timeline/?path=/story/components-timelinecanvas--interaction-and-focus) - 配置滚轮、水平滚动和触控板捏合行为
 - [自定义事件](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - 带有自定义事件渲染的时间轴
 - [集成](https://preview.gravity-ui.com/timeline/?path=/story/integrations-gravity-ui--timeline-ruler) - RangeDateSelection、DragHandler、NestedEvents、Popup、List
@@ -582,4 +587,3 @@ npm run build-storybook
 ## 许可证
 
 MIT
-```
