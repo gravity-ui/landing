@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit es un wrapper ligero para [express.js](https://expressjs.com/) que se integra con [NodeKit](https://github.com/gravity-ui/nodekit) y proporciona algunas características útiles como registro de solicitudes, soporte de tracing, controladores y middleware asíncronos, y descripciones detalladas de las rutas.
+ExpressKit es un wrapper ligero para [express.js](https://expressjs.com/) que se integra con [NodeKit](https://github.com/gravity-ui/nodekit) y proporciona algunas características útiles como registro de solicitudes, soporte de tracing, controladores y middleware asíncronos, y descripciones detalladas de rutas.
 
 Instalación:
 
@@ -23,6 +23,17 @@ const app = new ExpressKit(nodekit, {
 });
 
 app.run();
+```
+
+## Telemetría propia
+
+Por defecto, la telemetría propia envía la URL de la solicitud original. Las aplicaciones con cadenas de consulta grandes o de alta cardinalidad pueden eliminar los parámetros de consulta antes de enviar las estadísticas:
+
+```typescript
+const config: Partial<AppConfig> = {
+  appTelemetryChEnableSelfStats: true,
+  appTelemetryChSelfStatsStripQueryParams: true,
+};
 ```
 
 ## CSP
@@ -95,8 +106,8 @@ const nodekit = new NodeKit({
     appCsrfSecret: 'tu-clave-secreta',
     appAuthPolicy: AuthPolicy.required,
 
-    // Asegúrate de que tu middleware establezca el ID de usuario en originalContext, de lo contrario, la generación del token CSRF fallará
-    appAuthHandler: tuManejadorDeAutenticacion,
+    // Asegúrate de que tu middleware establezca el ID de usuario en el originalContext, de lo contrario, la generación del token CSRF fallará
+    appAuthHandler: yourAuthHandler,
   },
 });
 
@@ -160,4 +171,4 @@ El `enableCaching` a nivel de ruta anula la configuración global. El estado de 
 
 ## Validación y serialización de respuestas
 
-- [Validación de solicitudes y serialización de respuestas](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utiliza esquemas Zod para la validación automática de solicitudes y la serialización de respuestas.
+- [Validación de Solicitudes y Serialización de Respuestas](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utiliza esquemas Zod para la validación automática de solicitudes y la serialización de respuestas.

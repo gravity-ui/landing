@@ -25,6 +25,18 @@ const app = new ExpressKit(nodekit, {
 app.run();
 ```
 
+## Self telemetry
+
+By default, self telemetry sends the original request URL. Applications with large or
+high-cardinality query strings can strip query parameters before sending stats:
+
+```typescript
+const config: Partial<AppConfig> = {
+  appTelemetryChEnableSelfStats: true,
+  appTelemetryChSelfStatsStripQueryParams: true,
+};
+```
+
 ## CSP
 
 `config.ts`
