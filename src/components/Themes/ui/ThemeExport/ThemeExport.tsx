@@ -12,6 +12,7 @@ import {useThemeCreator} from '../../hooks';
 import {
     APPLY_THEME_TEMPLATE,
     FIGMA_GRAVITY_THEMER_LINK,
+    createStorybookThemeLink,
     exportThemeForDialog,
 } from '../../lib/themeCreatorExport';
 
@@ -35,6 +36,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
         () => exportThemeForDialog({themeState, format: 'css'}),
         [themeState],
     );
+    const storybookThemeLink = useMemo(() => createStorybookThemeLink(themeState), [themeState]);
 
     const onSaveThemeCSSClick = useCallback(() => {
         sendAnalyticsEvent('theme_export', 'css');
@@ -95,6 +97,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
             isOpen={isOpen}
             onSaveThemeCSSClick={onSaveThemeCSSClick}
             onSaveThemeJSONClick={onSaveThemeJSONClick}
+            storybookThemeLink={storybookThemeLink}
             breakpoint={breakpoint}
         >
             <ExportContent />
@@ -105,6 +108,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
             isOpen={isOpen}
             onSaveThemeCSSClick={onSaveThemeCSSClick}
             onSaveThemeJSONClick={onSaveThemeJSONClick}
+            storybookThemeLink={storybookThemeLink}
         >
             <ExportContent />
         </ThemeExportSheet>

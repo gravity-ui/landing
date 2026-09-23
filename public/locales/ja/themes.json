@@ -55,6 +55,7 @@
   "export_theme_cancel_btn": "キャンセル",
   "export_theme_apply_btn_css": "CSSとして保存",
   "export_theme_apply_btn_json": "JSONとして保存",
+  "export_theme_open_storybook": "Storybookで開く",
   "export_theme_apply-theme-alert-title": "テーマの適用方法",
   "radius": "角丸",
   "radius_regular": "通常",
