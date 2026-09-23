@@ -1,4 +1,5 @@
-import React, {useMemo, useState} from 'react';
+import shuffle from 'lodash/shuffle';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Tags} from 'src/components/Tags/Tags';
 import {PreviewLayout} from 'src/components/UISamples';
 import {block} from 'src/utils';
@@ -9,34 +10,36 @@ import './UISamplesDesktop.scss';
 
 const b = block('ui-samples-block-desktop');
 
-function useSampleTags() {
-    const sampleComponents = useSampleComponents();
-    return useMemo(
-        () =>
-            sampleComponents.map((sample) => ({
-                value: sample.type,
-                title: sample.title,
-            })),
-        [sampleComponents],
-    );
-}
-
-function useSampleComponent(activeTab: SampleComponent) {
-    const sampleComponents = useSampleComponents();
-    return useMemo(
-        () => sampleComponents.find((sample) => sample.type === activeTab) ?? sampleComponents[0],
-        [activeTab],
-    );
-}
-
 export const UISamplesDesktop = () => {
-    const [activeTab, setActiveTab] = useState<SampleComponent>(SampleComponent.Dashboard);
-    const tags = useSampleTags();
-    const {blank, Component, title, type, breadCrumbsItems} = useSampleComponent(activeTab);
+    const sampleComponents = useSampleComponents();
+    const [sampleOrder, setSampleOrder] = useState(() => Object.values(SampleComponent));
+    const [selectedTab, setSelectedTab] = useState<SampleComponent>();
+
+    useEffect(() => {
+        // Shuffle after hydration so the server and initial client render match.
+        setSampleOrder(shuffle(Object.values(SampleComponent)));
+    }, []);
+
+    const activeTab = selectedTab ?? sampleOrder[0];
+    const tags = useMemo(
+        () =>
+            [...sampleComponents]
+                .sort(
+                    (left, right) =>
+                        sampleOrder.indexOf(left.type) - sampleOrder.indexOf(right.type),
+                )
+                .map((sample) => ({
+                    value: sample.type,
+                    title: sample.title,
+                })),
+        [sampleComponents, sampleOrder],
+    );
+    const {blank, Component, title, type, breadCrumbsItems} =
+        sampleComponents.find((sample) => sample.type === activeTab) ?? sampleComponents[0];
 
     return (
         <div className={b()}>
-            <Tags wrap="nowrap" value={activeTab} onChange={setActiveTab} items={tags} />
+            <Tags wrap="nowrap" value={activeTab} onChange={setSelectedTab} items={tags} />
             {blank ? (
                 <Component />
             ) : (
