@@ -7,8 +7,21 @@ import {libs} from '../../../content/components';
 import {getI18nProps} from '../../../utils';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const libId = ctx.params?.libId as string;
+
+    // Without this check any /components/<anything> renders an empty shell with HTTP 200,
+    // so unlimited non-existent URLs are indexable as soft 404s. Mirrors the guard in
+    // src/pages/design/[sectionId]/index.tsx.
+    const lib = libs.find((item) => item.id === libId);
+
+    if (!lib) {
+        return {
+            notFound: true,
+        };
+    }
+
     return {
-        props: {libId: ctx.params?.libId, ...(await getI18nProps(ctx))},
+        props: {libId, ...(await getI18nProps(ctx))},
     };
 };
 
