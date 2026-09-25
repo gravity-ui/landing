@@ -23,15 +23,10 @@ export const UISamplesDesktop = () => {
     const activeTab = selectedTab ?? sampleOrder[0];
     const tags = useMemo(
         () =>
-            [...sampleComponents]
-                .sort(
-                    (left, right) =>
-                        sampleOrder.indexOf(left.type) - sampleOrder.indexOf(right.type),
-                )
-                .map((sample) => ({
-                    value: sample.type,
-                    title: sample.title,
-                })),
+            sampleOrder.flatMap((type) => {
+                const sample = sampleComponents.find((item) => item.type === type);
+                return sample ? [{value: sample.type, title: sample.title}] : [];
+            }),
         [sampleComponents, sampleOrder],
     );
     const {blank, Component, title, type, breadCrumbsItems} =
