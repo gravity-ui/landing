@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/navigation@5.0.1`
+> Generated for `@gravity-ui/navigation@5.0.0`
 
 # Navigation
 
@@ -94,4 +94,4 @@ export function App() {
 
 ---
 
-> Docs for `@gravity-ui/navigation@5.0.1`. Versioned at: `https://gravity-ui.com/llms/navigation/5.0.1/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/navigation@5.0.0`. Versioned at: `https://gravity-ui.com/llms/navigation/5.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
