@@ -9,8 +9,11 @@ import {DesignArticle} from '../../../components/DesignArticle/DesignArticle';
 import {DesignLayout} from '../../../components/DesignLayout/DesignLayout';
 import {Layout} from '../../../components/Layout/Layout';
 import {sections as designSections} from '../../../content/design';
+import {useLocale} from '../../../hooks/useLocale';
+import {getCanonicalUrlForLocale} from '../../../utils/canonical';
 import {getI18nProps} from '../../../utils/i18next';
 import {getDesignArticleMeta} from '../../../utils/meta';
+import {getBreadcrumbJsonLd, getTechArticleJsonLd} from '../../../utils/structuredData';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const sectionId = ctx.params?.sectionId as string;
@@ -40,6 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 export const ArticlePage = ({section, article}: {section: Section; article: Article}) => {
     const {i18n, t} = useTranslation();
+    const locale = useLocale();
 
     const sectionId = section.id;
     const articleId = article.id;
@@ -75,12 +79,33 @@ export const ArticlePage = ({section, article}: {section: Section; article: Arti
         };
     });
 
+    const articlePath = `/design/${sectionId}/${articleId}`;
+    const articleUrl = getCanonicalUrlForLocale(locale, articlePath);
+
+    const structuredData = [
+        getBreadcrumbJsonLd([
+            {name: t('menu_design'), url: getCanonicalUrlForLocale(locale, '/design')},
+            {
+                name: sectionTitle,
+                url: getCanonicalUrlForLocale(locale, `/design/${sectionId}`),
+            },
+            {name: articleTitle, url: articleUrl},
+        ]),
+        getTechArticleJsonLd({
+            headline: `${sectionTitle} – ${articleTitle}`,
+            description: articleMeta.description,
+            url: articleUrl,
+            locale,
+        }),
+    ];
+
     return (
         <Layout
             title={`${sectionTitle} – ${articleTitle}`}
             hideFooter
             noScroll={!isMobile}
             meta={articleMeta}
+            jsonLd={structuredData}
         >
             <DesignLayout sections={sections} sectionId={sectionId} articleId={articleId}>
                 <DesignArticle article={article} sectionId={sectionId} sections={sections} />
