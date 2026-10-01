@@ -2358,6 +2358,160 @@ Read more:
 
 ---
 
+> Generated for `@gravity-ui/markdown-editor@15.48.0`
+
+# @gravity-ui/markdown-editor documentation
+
+Documentation for the **15.48.0** version of `@gravity-ui/markdown-editor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/markdown-editor/build/docs/`).
+
+## For AI agents
+
+A dual-mode Markdown editor for React that combines a WYSIWYG mode (ProseMirror) and a raw markup mode (CodeMirror), with support for basic Markdown and YFM.
+
+### When to use
+
+- Editing Markdown/YFM content with a switchable visual (WYSIWYG) and source (markup) view.
+- You need an extensible editor: custom marks, nodes, toolbar items, and extensions (HTML, LaTeX, Mermaid, GPT) via the ProseMirror/CodeMirror engines.
+- Rendering the editor UI: create the instance with `useMarkdownEditor` and render it with `MarkdownEditorView`.
+
+### When not to use
+
+- Read-only rendering of Markdown to HTML with no editing — transform it with [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) and render the output instead.
+- Plain multiline text input — use `TextArea` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Rich-text that is not Markdown/YFM — this editor is Markdown-first.
+
+### Common pitfalls
+
+- **It is a hook plus a view, not one component.** Create the instance with `useMarkdownEditor(...)` and pass it to `<MarkdownEditorView editor={editor} />`; there is no single `<MarkdownEditor>` you render directly.
+- **Read the value via the instance, not a controlled `value` prop.** Call `editor.getValue()` (e.g. on the `submit` event) to serialize to Markdown; the editor manages its own state.
+- **Peer dependencies are required.** Your project must provide `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react`, and `react-dom` — check the `peerDependencies` in `package.json`.
+- **Styles and i18n come from uikit.** Set up theming/styles per the uikit docs and call `configure({lang})` from both this package and `@gravity-ui/uikit`.
+
+## Install
+
+```shell
+npm install @gravity-ui/markdown-editor
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `katex` | `^0.16.9` |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `lowlight` | `^3.0.0` |
+| `react-dom` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `markdown-it` | `^13.0.0` |
+| `highlight.js` | `^11.8.0` |
+| `@gravity-ui/uikit` | `^7.1.0` |
+| `@diplodoc/transform` | `^4.43.0` |
+| `@gravity-ui/components` | `^4.10.0` |
+| `@diplodoc/cut-extension` | `^0.5.0 || ^0.6.1 || ^0.7.1 || ^1.0.0` |
+| `@diplodoc/file-extension` | `^0.2.1` |
+| `@diplodoc/html-extension` | `^2.3.2` |
+| `@diplodoc/tabs-extension` | `^3.5.1` |
+| `@diplodoc/latex-extension` | `^1.0.3 || ^2.0.0` |
+| `@diplodoc/mermaid-extension` | `^1.0.0 || ^2.0.0` |
+| `@diplodoc/quote-link-extension` | `^0.1.3` |
+| `@diplodoc/folding-headings-extension` | `^0.1.0` |
+
+### Required dependencies
+
+Please note that to start using the package, your project must also have the following installed: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` and some others. Check out the `peerDependencies` section of `package.json` for accurate information.
+
+## Usage
+
+The markdown editor is supplied as a React hook to create an instance of editor and a component for rendering the view.\
+To set up styling and theme see [UIKit docs](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+```tsx
+import React from 'react';
+import {useMarkdownEditor, MarkdownEditorView} from '@gravity-ui/markdown-editor';
+
+function Editor({onSubmit}) {
+  const editor = useMarkdownEditor({allowHTML: false});
+
+  React.useEffect(() => {
+    function submitHandler() {
+      // Serialize current content to markdown markup
+      const value = editor.getValue();
+      onSubmit(value);
+    }
+
+    editor.on('submit', submitHandler);
+    return () => {
+      editor.off('submit', submitHandler);
+    };
+  }, [onSubmit]);
+
+  return <MarkdownEditorView stickyToolbar autofocus editor={editor} />;
+}
+```
+
+Read more:
+
+- [How to connect the editor in the Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
+- [How to add preview for markup mode](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
+- [How to add HTML extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
+- [How to add Latex extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
+- [How to add Mermaid extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
+- [How to write extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
+- [How to add GPT extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
+- [How to add text binding extension in markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+
+### Development
+
+1. Install Nodejs environment, version is specified in `.nvmrc` file. We recommend using [NVM](https://github.com/nvm-sh/nvm) or a similar tool.
+2. Install [pnpm](https://pnpm.io/installation), version is specified in `package.json` in "packageManager" property.
+3. Install dependencies: `pnpm i`
+4. Run storybook dev-server: `pnpm start`
+
+### i18n
+
+To set up internationalization, you just need to use the `configure`:
+
+```typescript
+import {configure} from '@gravity-ui/markdown-editor';
+
+configure({
+  lang: 'ru',
+});
+```
+
+Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) and other UI libraries.
+
+### Contributing
+
+- [Contributor Guidelines](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
+
+## Guides
+
+- [guidelines-contributions](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/guidelines-contributions.md)
+- [how-to-add-editor-with-create-react-app](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-add-editor-with-create-react-app.md)
+- [how-to-add-editor-with-nextjs](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-add-editor-with-nextjs.md)
+- [how-to-add-preview](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-add-preview.md)
+- [how-to-add-text-binding-extension-in-markdown](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-add-text-binding-extension-in-markdown.md)
+- [how-to-connect-gpt-extensions](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-connect-gpt-extensions.md)
+- [how-to-connect-html-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-connect-html-extension.md)
+- [how-to-connect-latex-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-connect-latex-extension.md)
+- [how-to-connect-mermaid-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-connect-mermaid-extension.md)
+- [how-to-create-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-create-extension.md)
+- [how-to-customize-the-editor](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-customize-the-editor.md)
+- [how-to-customize-toolbars](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-customize-toolbars.md)
+- [Visual Testing with Playwright](https://unpkg.com/@gravity-ui/markdown-editor@15.48.0/build/docs/guides/how-to-add-visual-test.md)
+
+---
+
+> Docs for `@gravity-ui/markdown-editor@15.48.0`. Versioned at: `https://gravity-ui.com/llms/markdown-editor/15.48.0/llms.txt` (exact), `https://gravity-ui.com/llms/markdown-editor/15/llms.txt` (latest of major 15), `https://gravity-ui.com/llms/markdown-editor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/markdown-editor@15.47.0`
 
 # @gravity-ui/markdown-editor documentation
@@ -3493,149 +3647,6 @@ Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/ui
 
 ---
 
-> Generated for `@gravity-ui/markdown-editor@15.38.0`
-
-# Markdown editor
-
-> A dual-mode Markdown editor for React that combines a WYSIWYG mode (ProseMirror) and a raw markup mode (CodeMirror), with support for basic Markdown and YFM.
->
-> **npm:** `@gravity-ui/markdown-editor` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/markdown-editor
-```
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `katex` | `^0.16.9` |
-| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `lowlight` | `^3.0.0` |
-| `react-dom` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `markdown-it` | `^13.0.0` |
-| `highlight.js` | `^11.8.0` |
-| `@gravity-ui/uikit` | `^7.1.0` |
-| `@diplodoc/transform` | `^4.43.0` |
-| `@gravity-ui/components` | `^4.10.0` |
-| `@diplodoc/cut-extension` | `^0.5.0 || ^0.6.1 || ^0.7.1 || ^1.0.0` |
-| `@diplodoc/file-extension` | `^0.2.1` |
-| `@diplodoc/html-extension` | `^2.3.2` |
-| `@diplodoc/tabs-extension` | `^3.5.1` |
-| `@diplodoc/latex-extension` | `^1.0.3` |
-| `@diplodoc/mermaid-extension` | `^1.0.0 || ^2.0.0` |
-| `@diplodoc/quote-link-extension` | `^0.1.3` |
-| `@diplodoc/folding-headings-extension` | `^0.1.0` |
-
-### Required dependencies
-
-Please note that to start using the package, your project must also have the following installed: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` and some others. Check out the `peerDependencies` section of `package.json` for accurate information.
-
-
-## Usage
-
-The markdown editor is supplied as a React hook to create an instance of editor and a component for rendering the view.\
-To set up styling and theme see [UIKit docs](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-```tsx
-import React from 'react';
-import {useMarkdownEditor, MarkdownEditorView} from '@gravity-ui/markdown-editor';
-
-function Editor({onSubmit}) {
-  const editor = useMarkdownEditor({allowHTML: false});
-
-  React.useEffect(() => {
-    function submitHandler() {
-      // Serialize current content to markdown markup
-      const value = editor.getValue();
-      onSubmit(value);
-    }
-
-    editor.on('submit', submitHandler);
-    return () => {
-      editor.off('submit', submitHandler);
-    };
-  }, [onSubmit]);
-
-  return <MarkdownEditorView stickyToolbar autofocus editor={editor} />;
-}
-```
-
-Read more:
-
-- [How to connect the editor in the Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
-- [How to add preview for markup mode](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
-- [How to add HTML extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [How to add Latex extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
-- [How to add Mermaid extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
-- [How to write extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
-- [How to add GPT extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [How to add text binding extension in markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
-
-### Development
-
-1. Install Nodejs environment, version is specified in `.nvmrc` file. We recommend using [NVM](https://github.com/nvm-sh/nvm) or a similar tool.
-2. Install [pnpm](https://pnpm.io/installation), version is specified in `package.json` in "packageManager" property.
-3. Install dependencies: `pnpm i`
-4. Run storybook dev-server: `pnpm start`
-
-### i18n
-
-To set up internationalization, you just need to use the `configure`:
-
-```typescript
-import {configure} from '@gravity-ui/markdown-editor';
-
-configure({
-  lang: 'ru',
-});
-```
-
-Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) and other UI libraries.
-
-### Contributing
-
-- [Contributor Guidelines](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
-
-
-### When to use
-
-- Editing Markdown/YFM content with a switchable visual (WYSIWYG) and source (markup) view.
-- You need an extensible editor: custom marks, nodes, toolbar items, and extensions (HTML, LaTeX, Mermaid, GPT) via the ProseMirror/CodeMirror engines.
-- Rendering the editor UI: create the instance with `useMarkdownEditor` and render it with `MarkdownEditorView`.
-
-### When not to use
-
-- Read-only rendering of Markdown to HTML with no editing — transform it with [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) and render the output instead.
-- Plain multiline text input — use `TextArea` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Rich-text that is not Markdown/YFM — this editor is Markdown-first.
-
-### Common pitfalls
-
-- **It is a hook plus a view, not one component.** Create the instance with `useMarkdownEditor(...)` and pass it to `<MarkdownEditorView editor={editor} />`; there is no single `<MarkdownEditor>` you render directly.
-- **Read the value via the instance, not a controlled `value` prop.** Call `editor.getValue()` (e.g. on the `submit` event) to serialize to Markdown; the editor manages its own state.
-- **Peer dependencies are required.** Your project must provide `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react`, and `react-dom` — check the `peerDependencies` in `package.json`.
-- **Styles and i18n come from uikit.** Set up theming/styles per the uikit docs and call `configure({lang})` from both this package and `@gravity-ui/uikit`.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/md-editor/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/markdown-editor)
-
----
-
-> Docs for `@gravity-ui/markdown-editor@15.38.0`. Versioned at: `https://gravity-ui.com/llms/markdown-editor/15.38.0/llms.txt` (exact), `https://gravity-ui.com/llms/markdown-editor/15/llms.txt` (latest of major 15), `https://gravity-ui.com/llms/markdown-editor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/markdown-editor@14.13.0`
 
 # Markdown editor
@@ -3774,6 +3785,169 @@ Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/ui
 ---
 
 > Docs for `@gravity-ui/markdown-editor@14.13.0`. Versioned at: `https://gravity-ui.com/llms/markdown-editor/14.13.0/llms.txt` (exact), `https://gravity-ui.com/llms/markdown-editor/14/llms.txt` (latest of major 14), `https://gravity-ui.com/llms/markdown-editor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/aikit@2.22.1`
+
+# @gravity-ui/aikit documentation
+
+Documentation for the **2.22.1** version of `@gravity-ui/aikit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/aikit/build/docs/`).
+
+## For AI agents
+
+A React component library for building AI chat interfaces, organized by Atomic Design (atoms → molecules → organisms → templates → pages) and SDK-agnostic — reach for it to assemble a chat UI (message lists, prompt input, tool calls, attachments) instead of composing those primitives out of `@gravity-ui/uikit` by hand.
+
+### When to use
+
+- Building an AI/LLM chat UI (assistant/user/tool messages, prompt input with suggestions, attachment uploads, thinking states).
+- Wanting ready-made chat layouts (`ChatContainer`, `MessageList`, `PromptInput`) plus hooks to customize behavior.
+- Embedding into the Gravity UI ecosystem with shared theming via CSS variables.
+
+### When not to use
+
+- For general-purpose UI primitives (buttons, inputs, modals), use [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) directly — AIKit builds on top of it for chat-specific needs.
+- To render rich markdown in messages, AIKit's `MarkdownRenderer` wraps [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); for standalone markdown rendering use that package directly.
+- For a single chat bubble without chat orchestration, a uikit `MarkdownRenderer`/text block is lighter than the full AIKit message pipeline.
+
+### Common pitfalls
+
+- **Hallucinating an AI SDK import** — AIKit is SDK-agnostic; it provides components/hooks, not an LLM client. Bring your own data source and feed messages via props.
+- **Reaching for `<Chat>` / `<AIChat>`** — the page-level export is `ChatContainer` (and `AIStudioChat`); there is no component literally named `Chat`.
+- **Skipping message-type registration for custom types** — custom message kinds must be registered in the message type system, or they render as unknown.
+- **Editing base components instead of using hooks** — the two-level design expects you to customize via hooks/composition; overriding internals directly breaks upgrades.
+
+## Install
+
+```bash
+npm install @gravity-ui/aikit
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^18.0.0 || ^19.0.0` |
+| `react-dom` | `^18.0.0 || ^19.0.0` |
+| `highlight.js` | `^11.11.1` |
+| `@gravity-ui/i18n` | `^1.8.0` |
+| `@gravity-ui/icons` | `^2.16.0` |
+| `@gravity-ui/uikit` | `^7.25.0` |
+| `@diplodoc/transform` | `^4.63.3` |
+
+## Usage
+
+```typescript
+import { ChatContainer } from '@gravity-ui/aikit';
+import type { ChatType, TChatMessage } from '@gravity-ui/aikit';
+
+function App() {
+    const [messages, setMessages] = useState<TChatMessage[]>([]);
+    const [chats, setChats] = useState<ChatType[]>([]);
+    const [activeChat, setActiveChat] = useState<ChatType | null>(null);
+
+    return (
+        <ChatContainer
+            chats={chats}
+            activeChat={activeChat}
+            messages={messages}
+            onSendMessage={async (data) => {
+                // Your sending logic
+                console.log('Message:', data.content);
+            }}
+            onSelectChat={setActiveChat}
+            onCreateChat={() => {
+                // Create new chat
+            }}
+            onDeleteChat={(chat) => {
+                // Delete chat
+            }}
+        />
+    );
+}
+```
+
+## Guides
+
+- [Adding a New Component](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/guidelines/new-component.md) — A checklist for everything that must be wired up when creating a new component inside src/components/<level>/<Name>/. Missing any of these makes the component invisible to consumers, breaks tree-shaking, or fails CI.
+- [AIKit Library Architecture](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/ARCHITECTURE.md)
+- [AIKit Project Structure](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/PROJECT_STRUCTURE.md) — This document describes the layout of the @gravity-ui/aikit source tree.
+- [Code Style and Language Requirements](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/guidelines/code-style.md) — CRITICAL: All code documentation, comments, and JSDoc must be written in English.
+- [Components](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/COMPONENTS.md) — 49 components organized by Atomic Design level. Each component lives in src/components/<level>/<Name>/ and ships with its own README and Storybook stories.
+- [Documentation](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/README.md) — This directory contains all @gravity-ui/aikit documentation.
+- [Examples](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/EXAMPLES.md) — Practical patterns for common AIKit integrations.
+- [Generative UI (toolset)](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/GENUI.md)
+- [Hooks](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/HOOKS.md) — AIKit's public hooks are all re-exported from the package root and from the @gravity-ui/aikit/hooks subpath; src/hooks/index.ts holds the full export list.
+- [Internationalization (i18n)](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/I18N.md) — AIKit localizes user-facing strings on a per-component basis using @gravity-ui/i18n. There is no global i18n provider — each component bundles its own keyset.
+- [Playwright Commands Quick Reference](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/PLAYWRIGHT.md)
+- [Quick Start](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/GETTING_STARTED.md) — This guide walks you through installing @gravity-ui/aikit and rendering your first chat.
+- [README Documentation](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/guidelines/readme.md) — Every component must have a comprehensive README.md file documenting its purpose, usage, and API.
+- [Storybook Files Creation](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/guidelines/storybook.md) — All components should have Storybook stories for documentation and testing purposes. Stories are located in the __stories__ directory within each component folder.
+- [Testing Guide](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/TESTING.md) — This project uses Playwright Component Testing for visual regression testing and component validation.
+- [Testing Guidelines](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/guidelines/testing.md) — Tests should be created based on Storybook stories to ensure consistency between documentation and functionality. We use Playwright Component Testing for visual regression testing and interaction testing.
+- [Theming](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/THEMING.md) — AIKit uses CSS variables for theming, in the --g-aikit-* namespace. Values fall back to Gravity UI's --g-color-* system so AIKit picks up your existing uikit theme automatically.
+- [Troubleshooting](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/TROUBLESHOOTING.md) — Common issues when integrating @gravity-ui/aikit.
+- [Using AIKit with AI Agents (Claude Code / Cursor)](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/guides/AI_AGENTS.md) — When you install @gravity-ui/aikit in a downstream project, you can teach Claude Code and Cursor about it so they write correct code without you spelling out the API every time.
+
+## Components
+
+- [atoms/ActionButton](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/ActionButton.md) — A button component with integrated tooltip functionality, combining Button and ActionTooltip from Gravity UI.
+- [atoms/Alert](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/Alert.md) — An alert message with an indicator of alert's type opportunity to pass a button
+- [atoms/ChatDate](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/ChatDate.md) — A ChatDate component displays formatted dates with time and locale support.
+- [atoms/ContextIndicator](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/ContextIndicator.md) — A circular progress indicator that visualizes context usage as a percentage (0-100%).
+- [atoms/ContextItem](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/ContextItem.md) — A label for rendering context
+- [atoms/DiffStat](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/DiffStat.md) — A compact component that displays diff statistics showing the number of added and deleted lines.
+- [atoms/Disclaimer](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/Disclaimer.md) — A Disclaimer component displays informational or warning messages
+- [atoms/FileIcon](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/FileIcon.md) — Displays an icon representing a file based on its MIME type or file name extension.
+- [atoms/IntersectionContainer](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/IntersectionContainer.md) — Wrapper component for Intersection Observer API. Used for automatic loading of previous messages when scrolling up in MessageList.
+- [atoms/Loader](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/Loader.md) — A Loader visualizes loading state
+- [atoms/MarkdownRenderer](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/MarkdownRenderer.md) — A MarkdownRenderer component for rendering Yandex Flavored Markdown (YFM) content to HTML.
+- [atoms/MessageBalloon](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/MessageBalloon.md) — Visual wrapper for user's message
+- [atoms/Shimmer](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/Shimmer.md) — A loading animation component that creates a shimmer effect over its children.
+- [atoms/SubmitButton](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/SubmitButton.md) — A submit button component with state management through props and send/cancel icon switching.
+- [atoms/ToolIndicator](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/atoms/ToolIndicator.md) — A status indicator component that displays different icons based on the tool execution status. Shows a loader for loading state.
+- [molecules/ActionPopup](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/ActionPopup.md) — Universal anchored popup container for displaying content near action buttons.
+- [molecules/BaseMessage](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/BaseMessage.md) — Base wrapper for message with support for rendering action buttons
+- [molecules/ButtonGroup](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/ButtonGroup.md) — Wrapper for buttons group
+- [molecules/FeedbackForm](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/FeedbackForm.md) — Reusable feedback form component with reason selection and comment field.
+- [molecules/FileDropZone](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/FileDropZone.md) — A drag-and-drop area with a hidden file input. No external dependencies — uses native HTML5 DnD.
+- [molecules/FileItem](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/FileItem.md) — Displays a single file row with icon, name, optional size, upload status indicator, and remove button.
+- [molecules/InputContext](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/InputContext.md) — React context provider for prompt input attachments: queued files, removable chips in the prompt header, and an attachment picker slot. Pairs with useInputContext() for consumers inside the provider tree.
+- [molecules/PromptInputBody](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/PromptInputBody.md) — A body component for prompt input that displays a textarea with auto-growing capabilities or custom content.
+- [molecules/PromptInputFooter](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/PromptInputFooter.md) — A footer component for prompt input that displays action icons (settings, attachment, microphone) and a submit button.
+- [molecules/PromptInputHeader](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/PromptInputHeader.md) — A header component for prompt input that displays context items, context indicator, or custom content.
+- [molecules/PromptInputPanel](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/PromptInputPanel.md) — A simple panel container component that displays custom content.
+- [molecules/RatingBlock](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/RatingBlock.md) — Universal rating block with title and star rating.
+- [molecules/StarRating](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/StarRating.md) — A star rating component for displaying and collecting user ratings from 1 to 5 stars.
+- [molecules/Suggestions](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/Suggestions.md) — A Suggestions component displays a group of clickable suggestion buttons arranged in either horizontal (grid) or vertical (list) layout.
+- [molecules/Tabs](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/Tabs.md) — Tabs component for switching between sections with optional delete functionality. Built on top of Gravity UI's Label component.
+- [molecules/ToolFooter](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/ToolFooter.md) — Footer component for tool messages with action buttons and status message
+- [molecules/ToolHeader](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/ToolHeader.md) — Header component for tool messages with icon, name, actions, and status indicators
+- [molecules/ToolStatus](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/molecules/ToolStatus.md) — Component for displaying tool status with indicators and localized text
+- [organisms/AssistantMessage](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/AssistantMessage.md) — Component for rendering assistant messages with support for multiple message parts and custom renderers. Built on top of BaseMessage component with assistant variant styling.
+- [organisms/AttachmentPicker](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/AttachmentPicker.md) — A paperclip button that opens a file upload dialog.
+- [organisms/FileUploadDialog](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/FileUploadDialog.md) — A dialog with a drag-and-drop zone and a list of queued/uploaded files. Pure UI — upload logic is wired externally via useFileUploadStore.
+- [organisms/Header](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/Header.md) — Header component for displaying chat header with navigation and actions.
+- [organisms/MessageList](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/MessageList.md) — Component for displaying a list of messages. Supports custom message renderers through MessageRendererRegistry.
+- [organisms/PromptInput](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/PromptInput.md) — A flexible input component for chat interfaces with support for simple and full views, expandable panels, attachments, suggestions, and more.
+- [organisms/ThinkingMessage](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/ThinkingMessage.md) — A message component that displays AI thinking process with collapsible content and a status indicator.
+- [organisms/ToolMessage](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/ToolMessage.md) — Complete tool message component with automatic expand/collapse functionality and status-based behavior
+- [organisms/UserMessage](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/organisms/UserMessage.md) — Component for rendering a user message in a chat interface.
+- [pages/AIStudioChat](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/pages/AIStudioChat.md) — A ready-to-use chat component with built-in OpenAI streaming support. Wraps ChatContainer and manages all internal state — requires only an API URL to start working.
+- [pages/ChatContainer](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/pages/ChatContainer.md) — A fully assembled chat component - the main exportable component of the library that integrates Header, ChatContent, and History.
+- [templates/ChatContent](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/templates/ChatContent.md) — Main chat content container with view switching between empty state and message list.
+- [templates/EmptyContainer](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/templates/EmptyContainer.md) — A template component for displaying a welcome screen with image, title, description, and suggestions.
+- [templates/History](https://unpkg.com/@gravity-ui/aikit@2.22.1/build/docs/components/templates/History.md) — A comprehensive chat history component that displays a list of chats in a popup with integrated search, grouping, and action capabilities.
+
+---
+
+> Docs for `@gravity-ui/aikit@2.22.1`. Versioned at: `https://gravity-ui.com/llms/aikit/2.22.1/llms.txt` (exact), `https://gravity-ui.com/llms/aikit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/aikit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -5437,6 +5611,136 @@ function App() {
 
 ---
 
+> Generated for `@gravity-ui/charts@1.62.0`
+
+# @gravity-ui/charts documentation
+
+Documentation for the **1.62.0** version of `@gravity-ui/charts`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
+
+## For AI agents
+
+A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
+
+### When to use
+
+- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
+- Rendering a chart from declarative data rather than drawing imperatively.
+
+### When not to use
+
+- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
+- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
+
+### Common pitfalls
+
+- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
+- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
+- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
+- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
+
+### Useful docs
+
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/get-started.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/tooltip.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/legend.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/html.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/value-formatting.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/data-labels.md)
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-types.md)
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-labels.md)
+
+## Install
+
+```shell
+npm install @gravity-ui/uikit @gravity-ui/charts
+```
+
+`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {Chart} from '@gravity-ui/charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Temperature',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <Chart data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`Chart` adapts to its parent's size, so the wrapping element must have a height.
+
+## Guides
+
+- [Adding a series plugin](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/development/adding-series-plugin.md) — This checklist is for contributors adding a built-in series plugin to Charts.
+- [Area range series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/area-range.md) — An area range series shows the interval between a lower and an upper value for every point on the x-axis. It is useful for uncertainty bands, min/max observations, confidence intervals, and other data where both boundaries are meaningful.
+- [Area series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/area.md) — An area series is a line series with the space between the line and its baseline filled. It is useful for showing magnitude over time and for comparing cumulative values with stacking.
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-labels.md) — Axis labels show a value or category for each tick. Configure them with xAxis.labels for the X axis and yAxis[].labels for Y axes.
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
+- [Bar-X series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/bar-x.md) — A Bar-X series displays vertical columns. Each point provides an x coordinate or category and a y value. Set series.data[].type to bar-x.
+- [Chart config tooling](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/integrations/chart-config.md) — The package publishes two versioned config artifacts:
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/data-labels.md)
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/get-started.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/html.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/legend.md)
+- [Line series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/line.md) — A line series connects data points to show how a value changes along the X axis. It is commonly used for time series, trends, and comparisons between several metrics.
+- [Local development](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/development.md)
+- [Overview](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/overview.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/tooltip.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
+
+---
+
+> Docs for `@gravity-ui/charts@1.62.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.62.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/charts@1.61.0`
 
 # @gravity-ui/charts documentation
@@ -6526,121 +6830,6 @@ export default function App() {
 ---
 
 > Docs for `@gravity-ui/charts@1.53.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.53.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/charts@1.52.0`
-
-# Charts
-
-> A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
->
-> **npm:** `@gravity-ui/charts` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install @gravity-ui/uikit @gravity-ui/charts
-```
-
-`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import {Chart} from '@gravity-ui/charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Temperature',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <Chart data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`Chart` adapts to its parent's size, so the wrapping element must have a height.
-
-
-### When to use
-
-- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
-- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
-- Rendering a chart from declarative data rather than drawing imperatively.
-
-### When not to use
-
-- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
-- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
-- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
-
-### Common pitfalls
-
-- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
-- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
-- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
-- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
-
-### Useful docs
-
-- [Get started](./docs/diplodoc/pages/get-started.md)
-- [Theming](./docs/diplodoc/pages/guides/theming.md)
-- [Tooltip](./docs/diplodoc/pages/guides/tooltip.md)
-- [Legend](./docs/diplodoc/pages/guides/legend.md)
-- [HTML Content](./docs/diplodoc/pages/guides/html.md)
-- [Value Formatting](./docs/diplodoc/pages/guides/value-formatting.md)
-- [Data Labels](./docs/diplodoc/pages/guides/data-labels.md)
-- [Axis Types](./docs/diplodoc/pages/guides/axes/axis-types.md)
-- [Axis Labels](./docs/diplodoc/pages/guides/axes/axis-labels.md)
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/charts/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/charts/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/charts/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/charts)
-
----
-
-> Docs for `@gravity-ui/charts@1.52.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.52.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -15213,6 +15402,136 @@ Install these in the host project at a compatible version:
 
 ---
 
+> Generated for `@gravity-ui/chartkit@8.5.0`
+
+# @gravity-ui/chartkit documentation
+
+Documentation for the **8.5.0** version of `@gravity-ui/chartkit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
+
+## For AI agents
+
+A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+
+### When to use
+
+- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
+## Install
+
+```shell
+npm install @gravity-ui/chartkit @gravity-ui/uikit
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+## Guides
+
+- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.5.0/build/docs/guides/testing.md)
+
+---
+
+> Docs for `@gravity-ui/chartkit@8.5.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.5.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/chartkit@8.4.0`
 
 # @gravity-ui/chartkit documentation
@@ -16515,20 +16834,44 @@ export default function App() {
 
 ---
 
-> Generated for `@gravity-ui/chartkit@7.58.0`
+> Generated for `@gravity-ui/table@1.21.2`
 
-# ChartKit
+# @gravity-ui/table documentation
 
-> A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
->
-> **npm:** `@gravity-ui/chartkit` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **1.21.2** version of `@gravity-ui/table`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
+
+## For AI agents
+
+A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
+
+### When to use
+
+- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
+- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
+
+### When not to use
+
+- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
+
+### Common pitfalls
+
+- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
+- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
+- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
+- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
+- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
 
 ## Install
 
 ```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
+npm install --save @gravity-ui/table
 ```
-
 
 ## Peer dependencies
 
@@ -16536,112 +16879,795 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
+| `react` | `^17.0.0 || ^18.0.0` |
+| `lodash` | `^4.17.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0` |
+| `@dnd-kit/core` | `^6.0.0` |
+| `@gravity-ui/i18n` | `^1.0.0` |
+| `@dnd-kit/sortable` | `^8.0.0 || ^9.0.0 || ^10.0.0` |
+| `@gravity-ui/icons` | `^2.0.0` |
+| `@gravity-ui/uikit` | `^6.0.0 || ^7.0.0` |
 
 ## Usage
 
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
 ```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+interface Person {
+  id: string;
+  name: string;
+  age: number;
+}
+
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const data: Person[] = [
+  {id: 'name', name: 'John', age: 23},
+  {id: 'age', name: 'Michael', age: 27},
+];
+
+const BasicExample = () => {
+  const table = useTable({
+    columns,
+    data,
+  });
+
+  return <Table table={table} />;
+};
 ```
 
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+### Components
 
-### Basic usage
+There are two Table components that you can use:
 
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+- `BaseTable` - a component with basic styles only;
+- `Table` - a component with Gravity UI based styles.
 
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
+#### Row selection
 
 ```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+import {selectionColumn} from '@gravity-ui/table';
+import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...other columns
+];
 
-settings.set({plugins: [GravityChartsPlugin]});
+const data: Person[] = [
+  /* ... */
+];
 
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
+const RowSelectionExample = () => {
+  const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
+
+#### Custom Ranged Selection Column
+
+The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
+
+```tsx
+import React, {type ChangeEvent, useCallback, useState} from 'react';
+
+import {Table, useToggleRangeSelectionHandler, useTable} from '@gravity-ui/table';
+import type {CellContext, ColumnDef, RowSelectionState} from '@gravity-ui/table/tanstack';
+import {Checkbox, type CheckboxProps} from '@gravity-ui/uikit';
+
+type CustomRangedSelectionCheckboxProps = Omit<CheckboxProps, 'onChange'> & {
+  cellContext: CellContext<unknown, unknown>;
 };
 
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
+const CustomRangedSelectionCheckbox = ({
+  className,
+  cellContext,
+  ...restProps
+}: CustomRangedSelectionCheckboxProps) => {
+  const rowToggleRangedSelectionHandler = useToggleRangeSelectionHandler(cellContext);
+
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>): void => {
+      rowToggleRangedSelectionHandler(event);
+    },
+    [rowToggleRangedSelectionHandler],
   );
-}
+
+  return <Checkbox {...restProps} onChange={handleChange} />;
+};
+
+const customSelectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <Checkbox
+      size="l"
+      checked={table.getIsAllRowsSelected()}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <CustomRangedSelectionCheckbox
+      size="l"
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  size: 41,
+  maxSize: 41,
+  minSize: 41,
+  enableResizing: false,
+  enableSorting: false,
+};
+
+const columns: ColumnDef<Person>[] = [
+  customSelectionColumn as ColumnDef<Person>,
+  // ...other columns
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const RowRangedSelectionExample = () => {
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableRowSelection: true,
+    enableMultiRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
+  });
+
+  return <Table table={table} />;
+};
 ```
 
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+There is also a `RangedSelectionCheckbox` component, which internally uses the hook and accepts a `CellContext` instance as a prop. This component provides a shorthand for adding ranged selection functionality to custom selection columns.
 
+```tsx
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+import {RangedSelectionCheckbox, SelectionCheckbox} from '@gravity-ui/table';
 
-### When to use
+export const selectionColumn: ColumnDef<unknown> = {
+  id: '_select',
+  header: ({table}) => (
+    <SelectionCheckbox
+      checked={table.getIsAllRowsSelected()}
+      disabled={!table.options.enableRowSelection}
+      indeterminate={table.getIsSomeRowsSelected()}
+      onChange={table.getToggleAllRowsSelectedHandler()}
+    />
+  ),
+  cell: (cellContext) => (
+    <RangedSelectionCheckbox
+      checked={cellContext.row.getIsSelected()}
+      disabled={!cellContext.row.getCanSelect()}
+      indeterminate={cellContext.row.getIsSomeSelected()}
+      cellContext={cellContext}
+    />
+  ),
+  meta: {
+    hideInSettings: true,
+  },
+  size: 32,
+  minSize: 32,
+};
+```
 
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+By default, the selection column generated with `selectionColumn` includes ranged selection functionality.
 
-### When not to use
+```tsx
+import {selectionColumn} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+const columns: ColumnDef<Person>[] = [
+  selectionColumn as ColumnDef<Person>,
+  // ...other columns
+];
+```
 
-### Common pitfalls
+**Note**: If the table contains nested rows, range selection will not work. At the moment, this is considered undefined behavior.
 
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+#### Sorting
 
+Learn about the column properties in the react-table [docs](https://tanstack.com/table/v8/docs/guide/sorting)
 
-## Links
+```tsx
+import type {SortingState} from '@gravity-ui/table/tanstack';
 
-- [README](https://raw.githubusercontent.com/gravity-ui/chartkit/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/chartkit/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/chartkit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/chartkit)
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const SortingExample = () => {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  // Your column MUST have accessorFn for sorting to be enabled
+
+  const table = useTable({
+    columns,
+    data,
+    enableSorting: true,
+    getRowId: (item) => item.id,
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
+
+If you want to sort the elements manually pass `manualSorting` property:
+
+```tsx
+const table = useTable({
+  // ...
+  manualSorting: true,
+});
+```
+
+#### Grouping
+
+```tsx
+import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
+
+interface Person {
+  id: string;
+  name: string;
+  age: number;
+}
+
+interface PersonGroup {
+  id: string;
+  name: string;
+  items: Person[];
+}
+
+type Item = PersonGroup | Person;
+
+const columns: ColumnDef<Item>[] = [
+  {accessorKey: 'name', header: 'Name', size: 200},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const data: Item[] = [
+  {
+    id: 'friends',
+    name: 'Friends',
+    items: [
+      {id: 'nick', name: 'Nick', age: 25},
+      {id: 'tom', name: 'Tom', age: 21},
+    ],
+  },
+  {
+    id: 'relatives',
+    name: 'Relatives',
+    items: [
+      {id: 'john', name: 'John', age: 23},
+      {id: 'michael', name: 'Michael', age: 27},
+    ],
+  },
+];
+
+const getGroupTitle = (row: Row<Item>) => row.getValue<string>('name');
+
+const GroupingExample = () => {
+  const [expanded, setExpanded] = React.useState<ExpandedState>({});
+
+  const table = useTable({
+    columns,
+    data,
+    enableExpanding: true,
+    getSubRows: (item) => ('items' in item ? item.items : undefined),
+    onExpandedChange: setExpanded,
+    state: {
+      expanded,
+    },
+  });
+
+  return <Table table={table} getGroupTitle={getGroupTitle} />;
+};
+```
+
+To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
+
+To enable nesting styles, pass `withNestingStyles = true` in the column configuration.
+
+Nesting indicators can be disabled by passing `showTreeDepthIndicators = false`.
+
+To add a control for expanding/collapsing rows, wrap the cell content with the `TreeExpandableCell` component or with your similar custom component:
+
+```tsx
+import {TreeExpandableCell} from '@gravity-ui/table';
+
+const columns: ColumnDef<Item>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    size: 200,
+    showTreeDepthIndicators: false,
+    withNestingStyles: true,
+    cell: ({row, info}) => (
+      <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
+    ),
+  },
+  // ...other columns
+];
+```
+
+#### Reordering
+
+```tsx
+import type {ReorderingProviderProps} from '@gravity-ui/table';
+import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  // ...other columns
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const ReorderingExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  const handleReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(
+    ({
+      draggedItemKey,
+      targetItemKey,
+      baseItemKey,
+      baseNextItemKey,
+      enableNesting,
+      nextChild,
+      pullFromParent,
+    }) => {
+      // ...
+    },
+    [],
+  );
+
+  return (
+    <ReorderingProvider table={table} onReorder={handleReorder}>
+      <Table table={table} />
+    </ReorderingProvider>
+  );
+};
+```
+
+#### Reordering without a drag handle
+
+Set `dragWithoutHandle` to use the whole row as the drag activator and omit
+`dragHandleColumn` from the column definitions:
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+return (
+  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+```
+
+The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
+working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
+`onPointerDown` handler.
+
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
+#### Column reordering
+
+Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
+
+```tsx
+import {ColumnReorderingProvider} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  {accessorKey: 'name', header: 'Name', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
+];
+
+const ColumnReorderingExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  return (
+    <ColumnReorderingProvider table={table}>
+      <Table table={table} />
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+### Row and column reordering together
+
+Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
+
+```tsx
+import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
+import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
+
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // update data array
+  }, []);
+
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
+
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+If you control `columnOrder` yourself (e.g. to persist it), pass `onReorder` and apply the resulting order:
+
+```tsx
+const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+const table = useTable({
+  columns,
+  data,
+  state: {columnOrder},
+  onColumnOrderChange: setColumnOrder,
+});
+
+return (
+  <ColumnReorderingProvider
+    table={table}
+    onReorder={({columnOrder}) => setColumnOrder(columnOrder)}
+  >
+    <Table table={table} />
+  </ColumnReorderingProvider>
+);
+```
+
+CSS API:
+
+| CSS variable                                 | Default                       | Description                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Color of the drop insertion line |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Width of the drop insertion line |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacity of the dragged column    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Drag preview background          |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Drag preview box-shadow          |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Drag preview border radius       |
+
+To forbid reordering a specific column, set `enableColumnReordering: false` in its column definition. Placeholder (grouped) columns are not draggable. Use `activationDistance` (default `8`) to tune how far the pointer must move before a drag starts, which keeps header clicks (like sorting) working.
+
+Pinned columns can be reordered too, but only among themselves: a column can be moved within the left-pinned group, the right-pinned group, or the center (non-pinned) group — it never crosses a pin boundary by dragging.
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  onReorder={({columnOrder, columnPinning, pinned}) => {
+    if (pinned) {
+      setColumnPinning(columnPinning);
+    } else {
+      setColumnOrder(columnOrder);
+    }
+  }}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+While dragging:
+
+- a floating preview of the column (its header plus the first rows) follows the pointer in a drag overlay;
+- the dragged column becomes semi-transparent;
+- a blue insertion line is drawn where the column will be dropped;
+
+```tsx
+<ColumnReorderingProvider
+  table={table}
+  autoScroll
+  dragOverlayRowCount={10}
+  renderDragOverlay={({columnId}) => <CustomColumnPreview columnId={columnId} />}
+>
+  <Table table={table} />
+</ColumnReorderingProvider>
+```
+
+#### Virtualization
+
+Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
+
+```tsx
+import {useRowVirtualizer} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const VirtualizationExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const rowVirtualizer = useRowVirtualizer({
+    count: table.getRowModel().rows.length,
+    estimateSize: () => 20,
+    overscan: 5,
+    getScrollElement: () => containerRef.current,
+  });
+
+  return (
+    <div ref={containerRef} style={{height: '500px', overflow: 'auto'}}>
+      <Table table={table} rowVirtualizer={rowVirtualizer} />
+    </div>
+  );
+};
+```
+
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+const rows = table.getRowModel().rows;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: 12,
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
+
+```tsx
+import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
+
+// ...
+
+const tableRef = React.useRef<HTMLTableElement>(null);
+
+const rowVirtualizer = useRowVirtualizer({
+  // ...
+  rangeExtractor: getVirtualRowRangeExtractor(tableRef.current),
+});
+
+return (
+  <TableWithReordering
+    ref={tableRef}
+    table={table}
+    rowVirtualizer={rowVirtualizer}
+    onReorder={handleReorder}
+  />
+);
+```
+
+#### Window virtualization
+
+Use if you want to use window as the scroll element
+
+```tsx
+import {useWindowRowVirtualizer} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const WindowVirtualizationExample = () => {
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+  });
+
+  const bodyRef = React.useRef<HTMLTableSectionElement>(null);
+
+  const rowVirtualizer = useWindowRowVirtualizer({
+    count: table.getRowModel().rows.length,
+    estimateSize: () => 20,
+    overscan: 5,
+    scrollMargin: bodyRef.current?.offsetTop ?? 0,
+  });
+
+  return <Table table={table} rowVirtualizer={rowVirtualizer} bodyRef={bodyRef} />;
+};
+```
+
+#### Resizing
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const ResizingDemo = () => {
+  const table = useTable({
+    columns,
+    data,
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange',
+  });
+
+  return <Table table={table} />;
+};
+```
+
+#### Column settings
+
+```tsx
+const columns: ColumnDef<Person>[] = [
+  // ...other columns
+  {
+    id: 'settings_column_id',
+    header: ({table}) => <TableSettings table={table} />,
+    meta: {
+      hideInSettings: false, // Optional. Allows to hide this column from settings popover
+      titleInSettings: 'ReactNode', // Optional. Overrides header field for settings popover (if you need different content for header and settings popover)
+    },
+  }, // or you can use function getSettingsColumn
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const TableSettingsDemo = () => {
+  const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
+    // for outside control and initial state
+    column_id: false, // for hidding by default
+  });
+  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
+    /* leaf columns ids */
+  ]); // for outside control and initial state
+
+  // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
+  // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
+
+  const table = useTable({
+    columns,
+    data,
+    state: {
+      columnVisibility,
+      columnOrder,
+    },
+    onColumnVisibilityChange,
+    onColumnOrderChange,
+  });
+
+  return <Table table={table} />;
+};
+```
+
+Learn more about the table and the column resizing properties in the react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
+
+## Guides
+
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.21.2/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.21.2/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
+
+## Components
+
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.21.2/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
+
+## Hooks
+
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.21.2/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
 
 ---
 
-> Docs for `@gravity-ui/chartkit@7.58.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/7.58.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/table@1.21.2`. Versioned at: `https://gravity-ui.com/llms/table/1.21.2/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -16691,14 +17717,14 @@ Install these in the host project at a compatible version:
 
 | Package | Version range |
 | --- | --- |
+| `react` | `^17.0.0 || ^18.0.0` |
+| `lodash` | `^4.17.0` |
+| `react-dom` | `^17.0.0 || ^18.0.0` |
 | `@dnd-kit/core` | `^6.0.0` |
-| `@dnd-kit/sortable` | `^8.0.0 || ^9.0.0 || ^10.0.0` |
 | `@gravity-ui/i18n` | `^1.0.0` |
+| `@dnd-kit/sortable` | `^8.0.0 || ^9.0.0 || ^10.0.0` |
 | `@gravity-ui/icons` | `^2.0.0` |
 | `@gravity-ui/uikit` | `^6.0.0 || ^7.0.0` |
-| `lodash` | `^4.17.0` |
-| `react` | `^17.0.0 || ^18.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0` |
 
 ## Usage
 
@@ -39944,6 +40970,117 @@ will be rendered as:
 ---
 
 > Docs for `@gravity-ui/app-layout@1.5.0`. Versioned at: `https://gravity-ui.com/llms/app-layout/1.5.0/llms.txt` (exact), `https://gravity-ui.com/llms/app-layout/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/app-layout/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/navigation@7.0.1`
+
+# @gravity-ui/navigation documentation
+
+Documentation for the **7.0.1** version of `@gravity-ui/navigation`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/navigation/build/docs/`).
+
+## For AI agents
+
+Application-shell navigation components for Gravity UI apps — the collapsible `AsideHeader` sidebar plus footers, drawers, logo, hotkeys and settings panels that frame a whole page.
+
+### When to use
+
+- The app's primary navigation frame: `AsideHeader` (collapsible side navigation) with `menuItems`, subheader, and footer sections.
+- Supporting shell UI: `Drawer`/`DrawerItem`, `Footer`/`MobileFooter`, `MobileHeader`, `HotkeysPanel`, `Settings`, `ActionBar`, `Logo`.
+- Laying out page content inside the navigation frame via `renderContent` / `PageLayout`.
+
+### When not to use
+
+- Generic in-page controls (buttons, tabs, menus, breadcrumbs) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); this package is the outer app chrome, not general components.
+- Rendering the page body itself from config — use [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
+- Client-side routing — this provides the navigation UI only; wire clicks to your own router.
+
+### Common pitfalls
+
+- **`AsideHeader` is controlled.** You must own the collapsed state with `compact` and update it in `onChangeCompact`; passing `compact` without the handler freezes the sidebar.
+- **Menu items are `menuItems`, keyed by `id`.** Each item is `{id, title, icon, current, onItemClick}`; `icon` takes an icon component (e.g. from `@gravity-ui/icons`), not a string name.
+- **Peer dependencies are required.** `@gravity-ui/uikit`, `@gravity-ui/icons`, and `@bem-react/classname` must be installed alongside `react`/`react-dom`.
+- **Needs uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`, or the shell renders unstyled.
+- **Page content goes through `renderContent`.** Render your routed content via the `renderContent` prop / `PageLayout`, not as `children`.
+
+## Install
+
+```bash
+npm install @gravity-ui/navigation
+```
+
+Ensure that peer dependencies are installed in your project
+
+```bash
+npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/icons` | `^2.2.0` |
+| `@gravity-ui/uikit` | `^7.42.0` |
+| `@bem-react/classname` | `^1.6.0` |
+
+## Usage
+
+Render `AsideHeader` as the app shell. It is a controlled component — you own the collapsed state via `compact`/`onChangeCompact` — and your page content goes through `renderContent`. Set up `@gravity-ui/uikit` styles and `ThemeProvider` first (see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+
+```tsx
+import React from 'react';
+import {AsideHeader} from '@gravity-ui/navigation';
+import {Gear, House} from '@gravity-ui/icons';
+import {ThemeProvider} from '@gravity-ui/uikit';
+
+import '@gravity-ui/uikit/styles/styles.css';
+
+export function App() {
+  const [compact, setCompact] = React.useState(false);
+
+  return (
+    <ThemeProvider theme="light">
+      <AsideHeader
+        logo={{text: 'My App', href: '/'}}
+        compact={compact}
+        onChangeCompact={setCompact}
+        menuItems={[
+          {id: 'home', title: 'Home', icon: House, current: true},
+          {id: 'settings', title: 'Settings', icon: Gear},
+        ]}
+        renderContent={() => <main>Page content</main>}
+      />
+    </ThemeProvider>
+  );
+}
+```
+
+## Components
+
+- [ActionBar](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/ActionBar.md) — The component is a flexible horizontal bar that provides a standardized layout for arranging navigation elements, actions, and informational content within an application. It serves as a container for organizing UI elements like breadcrumbs, buttons, and dropdown menus into defined sections and groups.
+- [AsideHeader](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/AsideHeader.md) — AsideHeader is provided a flexible and customizable navigation experience within your application. Users can easily customize the appearance of the sidebar to match their branding colors also to add personalized links, icons that cater specifically to their application's functionality.
+- [AsideHeader/components/AllPagesPanel](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/AsideHeader/components/AllPagesPanel.md) — A navigation panel for managing and organizing application pages in the middle (menuItems) section of AsideHeader component. Panel provides drag-and-drop reordering, visibility toggles, pin/unpin and category grouping of menu items.
+- [Footer](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/Footer.md) — The page footer components. Use Footer for the desktop version and MobileFooter for the mobile version. Both components have the same properties.
+- [HotkeysPanel](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/HotkeysPanel.md) — A navigation panel for hotkeys documentation. The panel displays a set of hotkeys for your application with a description of their purpose.
+- [Logo](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/Logo.md) — Logo icon is wrapped in UIKit Button, text is wrapped in HTML tag a or div, when passing hasWrapper prop.
+- [MobileHeader](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/MobileHeader.md) — Header for Mobile navigation. MobileHeader provides maintaining Panels except for Modals.
+- [Settings](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/components/Settings.md) — The Settings component provides the layout for a settings panel with the following features.
+
+## Hooks
+
+- [useOverflowingHorizontalListItems](https://unpkg.com/@gravity-ui/navigation@7.0.1/build/docs/hooks/useOverflowingHorizontalListItems.md) — A hook for determining which horizontal list items stay visible and which collapse into an overflow "more" dropdown.
+
+---
+
+> Docs for `@gravity-ui/navigation@7.0.1`. Versioned at: `https://gravity-ui.com/llms/navigation/7.0.1/llms.txt` (exact), `https://gravity-ui.com/llms/navigation/7/llms.txt` (latest of major 7), `https://gravity-ui.com/llms/navigation/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
