@@ -1,6 +1,7 @@
 import {GetServerSideProps} from 'next';
 import {getServerSideSitemapLegacy} from 'next-sitemap';
 
+import i18nextConfig from '../../next-i18next.config';
 import {libs as componentsLibs} from '../content/components';
 import {sections} from '../content/design';
 import {libs} from '../libs';
@@ -53,27 +54,40 @@ const generatePaths = () => {
     return paths;
 };
 
+// Derived from the i18n config rather than hardcoded: a separate list had drifted and was
+// missing `pt` and `ja`, so those locales were never submitted despite being fully translated
+// and advertised in every page's <head> hreflang set.
+const {locales, defaultLocale} = i18nextConfig.i18n;
+
+const localeUrl = (locale: string, path: string) =>
+    locale === defaultLocale ? `${BASE_URL}${path}` : `${BASE_URL}/${locale}${path}`;
+
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const basePaths = generatePaths();
-    const supportedLocales = ['', 'ru', 'es', 'zh', 'fr', 'de', 'ko'];
 
-    const fields = basePaths.map((pathItem) => {
+    const fields = basePaths.flatMap((pathItem) => {
         const {path, notLocalized} = pathItem;
 
-        // Generate alternate refs for this path
-        const alternateRefs = supportedLocales
-            .filter((locale) => !locale || !notLocalized) // Include default locale always, other locales only if path is localizable
-            .map((locale) => ({
-                href: locale ? `${BASE_URL}/${locale}${path}` : `${BASE_URL}${path}`,
-                hreflang: locale || 'en',
-            }));
+        const pathLocales = notLocalized ? [defaultLocale] : locales;
 
-        return {
-            loc: `${BASE_URL}${path}`, // Always use the canonical (English) URL as the main loc
+        const alternateRefs = [
+            ...pathLocales.map((locale) => ({
+                href: localeUrl(locale, path),
+                hreflang: locale,
+            })),
+            // Tells Google which version to serve for unmatched languages.
+            {href: localeUrl(defaultLocale, path), hreflang: 'x-default'},
+        ];
+
+        // One <url> entry per locale, each self-referencing plus the full alternate set.
+        // Previously only the English URL was listed, so the localized trees were never
+        // submitted as first-class URLs.
+        return pathLocales.map((locale) => ({
+            loc: localeUrl(locale, path),
             changefreq: 'daily' as const,
             priority: 0.7,
             alternateRefs,
-        };
+        }));
     });
 
     return getServerSideSitemapLegacy(ctx, fields);
