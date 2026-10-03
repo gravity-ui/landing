@@ -75,24 +75,24 @@ interface DashKitProps {
 - **onDrop**: Se llama cuando un elemento se suelta desde ActionPanel usando (#DashKitDnDWrapper).
 - **onItemMountChange**: Se llama cuando cambia el estado de montaje de un elemento.
 - **onItemRender**: Se llama cuando finaliza el renderizado de un elemento.
-- **defaultGlobalParams**, **globalParams**: [Parámetros](#Params) que afectan a todos los widgets. En DataLens, `defaultGlobalParams` son parámetros globales establecidos en la configuración del dashboard. `globalParams` son parámetros globales que se pueden establecer en la URL.
+- **defaultGlobalParams**, **globalParams**: [Parámetros](#Params) que afectan a todos los widgets. En DataLens, `defaultGlobalParams` son los parámetros globales establecidos en la configuración del dashboard. `globalParams` son parámetros globales que se pueden establecer en la URL.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
 - **settings**: Configuración de DashKit.
 - **context**: Objeto que se pasará a todos los widgets.
-- **overlayControls**: Objeto que reemplaza los controles del widget durante la edición. Si no se transmite, se mostrarán los controles básicos. Si se pasa `null`, solo se mostrará el botón de cierre o un menú personalizado.
-- **overlayMenuItems**: Elementos de menú desplegable personalizados.
-- **noOverlay**: Si es `true`, la superposición y los controles no se mostrarán durante la edición.
+- **overlayControls**: Objeto que reemplaza los controles del widget durante la edición. Si no se proporciona, se mostrarán los controles básicos. Si se pasa `null`, solo se mostrará el botón de cierre o un menú personalizado.
+- **overlayMenuItems**: Elementos del menú desplegable personalizados.
+- **noOverlay**: Si es `true`, la superposición y los controles no se muestran durante la edición.
 - **focusable**: Si es `true`, los elementos de la cuadrícula serán enfocables.
 - **onItemFocus**: Se llama cuando `focusable` es `true` y un elemento recibe el foco.
 - **onItemBlur**: Se llama cuando `focusable` es `true` y un elemento pierde el foco.
 - **draggableHandleClassName**: Nombre de la clase CSS del elemento que hace que el widget sea arrastrable.
-- **onDragStart**: Se llama desde ReactGridLayout cuando comienza a arrastrar un elemento.
-- **onDrag**: Se llama desde ReactGridLayout mientras se arrastra un elemento.
-- **onDragStop**: Se llama desde ReactGridLayout cuando se detiene el arrastre de un elemento.
-- **onResizeStart**: Se llama desde ReactGridLayout cuando comienza a redimensionar un elemento.
-- **onResize**: Se llama desde ReactGridLayout mientras se redimensiona un elemento.
-- **onResizeStop**: Se llama desde ReactGridLayout cuando se detiene el redimensionamiento de un elemento.
-- **getPreparedCopyItemOptions**: Se llama para convertir un elemento copiado en un objeto serializable antes de guardarlo en el localStorage. Debe usarse en lugar de la prop obsoleta `context.getPreparedCopyItemOptions`.
+- **onDragStart**: Llamado por ReactGridLayout cuando se inicia el arrastre de un elemento.
+- **onDrag**: Llamado por ReactGridLayout mientras se arrastra un elemento.
+- **onDragStop**: Llamado por ReactGridLayout cuando se detiene el arrastre de un elemento.
+- **onResizeStart**: Llamado por ReactGridLayout cuando se inicia el redimensionamiento de un elemento.
+- **onResize**: Llamado por ReactGridLayout mientras se redimensiona un elemento.
+- **onResizeStop**: Llamado por ReactGridLayout cuando se detiene el redimensionamiento de un elemento.
+- **getPreparedCopyItemOptions**: Se llama para convertir un elemento copiado en un objeto serializable antes de guardarlo en el almacenamiento local. Debe usarse en lugar de la prop obsoleta `context.getPreparedCopyItemOptions`.
 - **onCopyFulfill**: Se llama cuando la copia de un elemento finaliza con `error=null` y `data` definido en caso de éxito, y con `error: Error` sin `data` en caso contrario.
 
 ## Uso
@@ -147,7 +147,7 @@ Antes de usar `DashKit` como un componente de React, debe configurarse.
       h: 8,
     },
     renderer: function CustomPlugin() {
-      return <div>Custom widget with custom controls</div>;
+      return <div>Widget personalizado con controles personalizados</div>;
     },
   });
   ```
@@ -277,7 +277,7 @@ const newConfig = DashKit.setItem({
     },
     namespace: 'default',
     type: 'text',
-    // Opcional. Si se necesita insertar un nuevo elemento en el layout actual con dimensiones predefinidas
+    // Opcional. Si se necesita insertar un nuevo elemento en el diseño actual con dimensiones predefinidas
     layout: { // El elemento actual se inserta antes de 'Ea'
       h: 6,
       w: 12,
@@ -287,7 +287,7 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // Opcional. Nuevos valores de layout para elementos existentes cuando se suelta un nuevo elemento desde ActionPanel
+    // Opcional. Nuevos valores de diseño para elementos existentes cuando se suelta un nuevo elemento desde ActionPanel
     updateLayout: newLayout,
   },
 });
@@ -374,7 +374,7 @@ type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 
 `DashKit` expone una API de eventos de instancia experimental. Utiliza una referencia de componente y suscríbete con `dashkitRef.current?.on(eventName, handler)`. El método devuelve una función de cancelación de suscripción.
 
-El primer evento admitido es `change`. Se emite cuando el layout cambia, antes de que se llame a `onChange`. El manejador puede leer los layouts completos siguiente y anterior, leer los parches del layout o llamar a `preventDefault()` para detener la llamada predeterminada a `onChange`.
+El primer evento admitido es `change`. Se emite cuando cambia el diseño, antes de que se llame a `onChange`. El manejador puede leer los diseños completos anterior y siguiente, leer los parches del diseño o llamar a `preventDefault()` para detener la llamada predeterminada a `onChange`.
 
 ```tsx
 import React from 'react';
@@ -413,9 +413,9 @@ type DashKitChangeEvent = {
 };
 ```
 
-#### Actualizaciones de layout basadas en eventos
+#### Actualizaciones de diseño basadas en eventos
 
-Si usas `preventDefault()` en el manejador del evento `change`, ahora puedes gestionar las actualizaciones del layout sin necesidad de reinicializar la prop `config`. DashKit mantiene una línea base interna y calcula los parches de forma incremental:
+Si utilizas `preventDefault()` en el manejador del evento `change`, ahora puedes gestionar las actualizaciones de diseño sin necesidad de volver a inicializar la prop `config`. DashKit mantiene una línea base interna y calcula los parches de forma incremental:
 
 ```tsx
 function Dashboard() {
@@ -444,7 +444,7 @@ function Dashboard() {
 
 ### Menú
 
-Puedes especificar un menú superpuesto de widgets personalizado para DashKit en modo de edición
+Puedes especificar un menú superpuesto de widgets DashKit personalizado en modo de edición.
 
 ```ts
 type MenuItem = {
@@ -489,15 +489,15 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: Vista previa de la imagen de arrastre, por defecto se usa un png transparente de 1px en base64
-- **onDragStart**: Callback que se llama cuando un elemento se arrastra desde ActionPanel
-- **onDragEnd**: Callback que se llama cuando se suelta el elemento o se cancela el arrastre
+- **dragImageSrc**: Imagen de arrastre personalizada opcional. Por defecto, se muestra el elemento de ActionPanel arrastrado como vista previa.
+- **onDragStart**: Callback que se llama cuando un elemento se arrastra desde ActionPanel.
+- **onDragEnd**: Callback que se llama cuando se suelta un elemento o se cancela el arrastre.
 
 ```ts
 type ItemDragProps = {
   type: string; // Tipo de plugin
   layout?: {
-    // Opcional. Tamaño del elemento de layout para vista previa e inicialización
+    // Opcional. Tamaño del elemento de diseño para vista previa e inicialización
     w?: number;
     h?: number;
   };
@@ -509,8 +509,8 @@ type ItemDragProps = {
 type ItemDropProps = {
   commit: () => void; // Callback que debe llamarse después de que se realicen todas las operaciones de configuración
   dragProps: ItemDragProps; // Props de arrastre del elemento
-  itemLayout: ConfigLayout; // Dimensiones del layout del elemento calculadas
-  newLayout: ConfigLayout[]; // Nuevo layout después de soltar el elemento
+  itemLayout: ConfigLayout; // Dimensiones del diseño del elemento calculadas
+  newLayout: ConfigLayout[]; // Nuevo diseño después de soltar el elemento
 };
 ```
 
@@ -544,23 +544,25 @@ const onDrop = (dropProps: ItemDropProps) => {
 
 | Nombre                                           | Descripción           |
 | :--------------------------------------------- | :-------------------- |
-| Variables del panel de acciones                         |                       |
+| Variables de Action panel                         |                       |
 | `--dashkit-action-panel-color`                 | Color de fondo      |
 | `--dashkit-action-panel-border-color`          | Color del borde          |
 | `--dashkit-action-panel-border-radius`         | Radio del borde         |
-| Variables del elemento del panel de acciones                    |                       |
+| Variables de elementos de Action panel             |                       |
 | `--dashkit-action-panel-item-color`            | Color de fondo       |
 | `--dashkit-action-panel-item-text-color`       | Color del texto      |
-| `--dashkit-action-panel-item-color-hover`      | Color de fondo al pasar el ratón |
-| `--dashkit-action-panel-item-text-color-hover` | Color del texto al pasar el ratón |
-| Variables de superposición                              |                       |
-| `--dashkit-overlay-border-color`               | Color del borde          |
+| `--dashkit-action-panel-item-color-hover`      | Color de fondo al pasar el ratón      |
+| `--dashkit-action-panel-item-color-dragging`   | Color de fondo al arrastrar |
+| `--dashkit-action-panel-item-text-color-hover` | Color del texto al pasar el ratón      |
+| `--dashkit-action-panel-item-text-color-dragging` | Color del texto al arrastrar     |
+| Variables de Overlay                              |                       |
+| `--dashkit-overlay-border-color`               | Color del borde               |
 | `--dashkit-overlay-color`                      | Color de fondo                      |
 | `--dashkit-overlay-opacity`                    | Opacidad               |
-| Variables del elemento de la cuadrícula                            |                       |
+| Variables de elementos de Grid                     |                       |
 | `--dashkit-grid-item-edit-opacity`             | Opacidad               |
-| `--dashkit-grid-item-border-radius`            | Radio del borde            |
-| Variables del marcador de posición                          |                       |
+| `--dashkit-grid-item-border-radius`            | Radio del borde             |
+| Variables de Placeholder                          |                       |
 | `--dashkit-placeholder-color`                  | Color de fondo                      |
 | `--dashkit-placeholder-opacity`                | Opacidad               |
 
@@ -651,12 +653,16 @@ Un compositor de cuadrículas de paneles que organiza widgets redimensionables y
 
 - Para un único gráfico o panel fijo, usa [`@gravity-ui/charts`](https://gravity-ui.com/charts) o [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) directamente: la maquinaria de cuadrícula/plugins es una sobrecarga para un solo widget.
 - Para una cuadrícula responsiva de propósito general que no sea un panel de widgets, usa `react-grid-layout` directamente.
-- Para incrustar widgets de gráficos basados en ChartKit dentro de un panel DashKit, DashKit es el "shell"; aún depende de [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) para renderizar los gráficos reales.
+- Para incrustar widgets de gráficos basados en ChartKit dentro de un panel de DashKit, DashKit es el "contenedor"; aún depende de [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) para renderizar los gráficos reales.
 
 ### Errores comunes
 
-- **Componente `<Dashboard>` inexistente** — la exportación es `<DashKit>` (el shell de arrastrar y soltar es `<DashKitDnDWrapper>` que envuelve `<DashKit>` + `<ActionPanel>`).
-- **Mutar `config` en lugar de usar ayudantes** — usa los ayudantes estáticos `DashKit.setItem({...})` / `DashKit.removeItem({...})` para agregar/cambiar/eliminar elementos, de modo que el diseño y los IDs se mantengan consistentes.
+- **Componente `<Dashboard>` inexistente** — la exportación es `<DashKit>` (el contenedor de arrastrar y soltar es `<DashKitDnDWrapper>` que envuelve `<DashKit>` + `<ActionPanel>`).
+- **Mutar `config` en lugar de usar helpers** — usa los helpers estáticos `DashKit.setItem({...})` / `DashKit.removeItem({...})` para agregar/cambiar/eliminar elementos, de modo que el diseño y los IDs se mantengan consistentes.
 - **Olvidar `DashKit.setSettings` / `DashKit.registerPlugins`** — el componente debe configurarse (idioma, configuración de la cuadrícula, registro de plugins) antes de renderizarse, o los widgets no mostrarán nada.
 - **Confundir las dos props de parámetros** — `defaultGlobalParams` (valores predeterminados a nivel de panel) vs `globalParams` (globales que se pueden anular por URL); ambos fluyen a la cola de generación de parámetros consumida por ChartKit.
-- **Llamar a `onChange` manualmente con el evento `change`** — cuando usas `event.preventDefault()` en el manejador experimental `change`, DashKit mantiene el estado visual internamente; restable
+- **Llamar a `onChange` manualmente con el evento `change`** — cuando usas `event.preventDefault()` en el manejador experimental `change`, DashKit mantiene el estado visual internamente; restablecer `config.layout` desde las props restablece esa línea base.
+
+## Documentación para agentes de IA
+
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/dashkit/build/docs/INDEX.md`.
