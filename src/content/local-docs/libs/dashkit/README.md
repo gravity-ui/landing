@@ -487,7 +487,7 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: Drag image preview, by default used transparent 1px png base64
+- **dragImageSrc**: Optional custom drag image. By default, the dragged ActionPanel item is shown as the preview.
 - **onDragStart**: Callback called when element is dragged from ActionPanel
 - **onDragEnd**: Callback called when element dropped or drag canceled
 
@@ -550,7 +550,9 @@ const onDrop = (dropProps: ItemDropProps) => {
 | `--dashkit-action-panel-item-color`            | Backgroud color       |
 | `--dashkit-action-panel-item-text-color`       | Text color            |
 | `--dashkit-action-panel-item-color-hover`      | Hover backgroud color |
+| `--dashkit-action-panel-item-color-dragging`   | Drag background color |
 | `--dashkit-action-panel-item-text-color-hover` | Hover text color      |
+| `--dashkit-action-panel-item-text-color-dragging` | Drag text color     |
 | Overlay variables                              |                       |
 | `--dashkit-overlay-border-color`               | Border color          |
 | `--dashkit-overlay-color`                      | Background color      |
