@@ -7,6 +7,7 @@ import backgroundAsset from '../assets/background.jpg';
 import {Landing} from '../components/Landing/Landing';
 import {Layout} from '../components/Layout/Layout';
 import {getI18nProps} from '../utils/i18next';
+import {getOrganizationJsonLd, getWebSiteJsonLd} from '../utils/structuredData';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const [libs, i18nProps] = await Promise.all([
@@ -35,7 +36,8 @@ const Home = ({libs}: {libs: LibWithMetadata[]}) => {
                     type="image/jpeg"
                 />
             </Head>
-            <Layout isPageConstructor>
+            {/* Emitted on the homepage only: these describe the site as a whole, not each page. */}
+            <Layout isPageConstructor jsonLd={[getOrganizationJsonLd(), getWebSiteJsonLd()]}>
                 <Landing libs={libs} backgroundImageSrc={backgroundAsset.src} />
             </Layout>
         </>
