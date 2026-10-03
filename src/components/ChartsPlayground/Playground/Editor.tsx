@@ -1,7 +1,10 @@
 import {ChartData} from '@gravity-ui/charts';
 import {Button, Flex, Hotkey, Text} from '@gravity-ui/uikit';
 import {Editor as MonacoEditor, OnMount} from '@monaco-editor/react';
-import {KeyCode, KeyMod, type editor} from 'monaco-editor';
+// Type-only: importing values from `monaco-editor` would bundle the whole package, which
+// @monaco-editor/react already loads separately at runtime. Key codes come from the
+// monaco instance handed to onMount instead.
+import type {editor} from 'monaco-editor';
 import {useTranslation} from 'next-i18next';
 import React, {FC, useCallback, useRef, useState} from 'react';
 
@@ -67,12 +70,12 @@ export const Editor: FC<Props> = ({data, onApplyChanges, onReset}) => {
         [],
     );
 
-    const handleMount = useCallback(
-        (editor: editor.IStandaloneCodeEditor) => {
+    const handleMount = useCallback<OnMount>(
+        (editor, monaco) => {
             editorRef.current = editor;
             editor.setValue(JSON.stringify(data, null, 2));
             // eslint-disable-next-line no-bitwise
-            editor.addCommand(KeyMod.CtrlCmd | KeyCode.Enter, handleApplyChanges);
+            editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, handleApplyChanges);
         },
         [data],
     );
