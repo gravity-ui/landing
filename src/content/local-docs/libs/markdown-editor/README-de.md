@@ -20,12 +20,12 @@ npm install @gravity-ui/markdown-editor
 
 ### Erforderliche Abhängigkeiten
 
-Bitte beachten Sie, dass Ihr Projekt für die Nutzung des Pakets auch Folgendes installiert haben muss: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` und einige andere. Die genauen Informationen finden Sie im Abschnitt `peerDependencies` der `package.json`.
+Bitte beachten Sie, dass Ihr Projekt, um das Paket nutzen zu können, auch Folgendes installiert haben muss: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` und einige andere. Die genauen Informationen finden Sie im Abschnitt `peerDependencies` der `package.json`.
 
 ## Erste Schritte
 
 Der Markdown-Editor wird als React-Hook zur Erstellung einer Editor-Instanz und als Komponente zur Darstellung der Ansicht bereitgestellt.
-Um Styling und Theme einzurichten, siehe [UIKit-Dokumentation](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+Um Styling und Theme einzurichten, lesen Sie die [UIKit-Dokumentation](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
 import React from 'react';
@@ -51,21 +51,21 @@ function Editor({onSubmit}) {
 }
 ```
 Mehr erfahren:
-- [Wie man den Editor in Create React App einbindet](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
-- [Wie man eine Vorschau für den Markup-Modus hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
-- [Wie man eine HTML-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [Wie man eine LaTeX-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
-- [Wie man eine Mermaid-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
-- [Wie man eine Erweiterung schreibt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
-- [Wie man eine GPT-Erweiterung hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [Wie man eine Textbindungs-Erweiterung in Markdown hinzufügt](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [Wie man den Editor in Create React App integriert](https://gravity-ui.github.io/markdown-editor/getting-started/create-react-app.html)
+- [Wie man eine Vorschau für den Markup-Modus hinzufügt](https://gravity-ui.github.io/markdown-editor/getting-started/preview.html)
+- [Wie man eine HTML-Erweiterung hinzufügt](https://gravity-ui.github.io/markdown-editor/extensions/html-block.html)
+- [Wie man eine LaTeX-Erweiterung hinzufügt](https://gravity-ui.github.io/markdown-editor/extensions/latex-extension.html)
+- [Wie man eine Mermaid-Erweiterung hinzufügt](https://gravity-ui.github.io/markdown-editor/extensions/mermaid-extension.html)
+- [Wie man eine Erweiterung schreibt](https://gravity-ui.github.io/markdown-editor/develop/extension-creation.html)
+- [Wie man eine GPT-Erweiterung hinzufügt](https://gravity-ui.github.io/markdown-editor/extensions/gpt.html)
+- [Wie man eine Textbindungs-Erweiterung in Markdown hinzufügt](https://gravity-ui.github.io/markdown-editor/develop/extension-with-popup.html)
 
 ### Entwicklung
 
-1. Installieren Sie die Node.js-Umgebung. Die Version ist in der `.nvmrc`-Datei angegeben. Wir empfehlen die Verwendung von [NVM](https://github.com/nvm-sh/nvm) oder einem ähnlichen Tool.
+1. Installieren Sie die Node.js-Umgebung. Die Version ist in der Datei `.nvmrc` angegeben. Wir empfehlen die Verwendung von [NVM](https://github.com/nvm-sh/nvm) oder einem ähnlichen Tool.
 2. Installieren Sie [pnpm](https://pnpm.io/installation). Die Version ist in der `package.json` unter der Eigenschaft "packageManager" angegeben.
 3. Installieren Sie Abhängigkeiten: `pnpm i`
-4. Starten Sie den Storybook-Entwicklungsserver: `pnpm start`
+4. Führen Sie den Storybook-Entwicklungsserver aus: `pnpm start`
 
 ### i18n
 
@@ -83,7 +83,7 @@ Vergessen Sie nicht, `configure()` aus [UIKit](https://github.com/gravity-ui/uik
 
 ### Mitwirken
 
-- [Richtlinien für Mitwirkende](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
+- [Richtlinien für Mitwirkende](https://gravity-ui.github.io/markdown-editor/contributing.html)
 
 ## Lizenz
 
@@ -102,15 +102,15 @@ Ein Dual-Mode-Markdown-Editor für React, der einen WYSIWYG-Modus (ProseMirror) 
 ### Wann nicht zu verwenden
 
 - Nur schreibgeschütztes Rendern von Markdown zu HTML ohne Bearbeitung – transformieren Sie es stattdessen mit [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) und rendern Sie die Ausgabe.
-- Einfache mehrzeilige Texteingabe – verwenden Sie `TextArea` von [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Einfache mehrzeilige Texteingabe – verwenden Sie `TextArea` aus [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Rich-Text, der kein Markdown/YFM ist – dieser Editor ist primär für Markdown gedacht.
 
 ### Häufige Fallstricke
 
-- **Es ist ein Hook plus eine Ansicht, keine einzelne Komponente.** Erstellen Sie die Instanz mit `useMarkdownEditor(...)` und übergeben Sie sie an `<MarkdownEditorView editor={editor} />`; es gibt keine einzelne `<MarkdownEditor>`-Komponente, die Sie direkt rendern.
+- **Es ist ein Hook plus eine Ansicht, kein einzelner Baustein.** Erstellen Sie die Instanz mit `useMarkdownEditor(...)` und übergeben Sie sie an `<MarkdownEditorView editor={editor} />`; es gibt keinen einzelnen `<MarkdownEditor>`, den Sie direkt rendern.
 - **Lesen Sie den Wert über die Instanz, nicht über eine gesteuerte `value`-Prop.** Rufen Sie `editor.getValue()` auf (z. B. beim `submit`-Ereignis), um zu Markdown zu serialisieren; der Editor verwaltet seinen eigenen Zustand.
 - **Peer-Abhängigkeiten sind erforderlich.** Ihr Projekt muss `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react` und `react-dom` bereitstellen – überprüfen Sie die `peerDependencies` in `package.json`.
-- **Stile und i18n stammen von uikit.** Richten Sie Theming/Stile gemäß der uikit-Dokumentation ein und rufen Sie `configure({lang})` sowohl von diesem Paket als auch von `@gravity-ui/uikit` auf.
+- **Stile und i18n stammen von uikit.** Richten Sie Theming/Stile gemäß der uikit-Dokumentation ein und rufen Sie `configure({lang})` sowohl aus diesem Paket als auch aus `@gravity-ui/uikit` auf.
 
 ## Dokumentation für KI-Agenten
 
