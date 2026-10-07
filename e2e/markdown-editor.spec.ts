@@ -1,7 +1,7 @@
 import {expect, test} from '@playwright/test';
 
 const SCROLL_OFFSET = 600;
-// Matches `top` of the pinned toolbar in MarkdownEditor.scss.
+// `top` of the pinned toolbar in MarkdownEditor.scss.
 const STICKY_TOP = 8;
 // Pinned toolbar with its backdrop.
 const STRIP_HEIGHT = 48;

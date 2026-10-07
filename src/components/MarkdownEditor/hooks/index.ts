@@ -2,9 +2,6 @@ import {RefObject, useEffect, useState} from 'react';
 
 const TOOLBAR_SELECTOR = '.g-md-editor-component__toolbar';
 
-// Matches `top` of the pinned toolbar in MarkdownEditor.scss.
-const STICKY_TOP = 8;
-
 const getScrollContainer = (element: HTMLElement): HTMLElement | null => {
     for (let current = element.parentElement; current; current = current.parentElement) {
         const {overflowY} = getComputedStyle(current);
@@ -52,8 +49,10 @@ export function useStickyToolbar(rootRef: RefObject<HTMLElement>) {
             }
 
             const containerTop = container ? container.getBoundingClientRect().top : 0;
+            // `top` of a sticky element computes to the declared offset, not to the used one.
+            const stickyTop = parseFloat(getComputedStyle(toolbar).top) || 0;
 
-            setSticky(toolbar.getBoundingClientRect().top <= containerTop + STICKY_TOP);
+            setSticky(toolbar.getBoundingClientRect().top <= containerTop + stickyTop);
         };
 
         const schedule = () => {
