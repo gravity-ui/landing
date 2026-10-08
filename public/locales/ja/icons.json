@@ -6,7 +6,7 @@
     "actions_copySvgImport": "SVGインポートをコピー",
     "actions_downloadSvg": "SVGをダウンロード",
     "title": "アイコン",
-    "meta_description": "Gravity UIアイコンライブラリから、何百ものモダンなSVGアイコンを閲覧、検索、ダウンロードできます。",
+    "meta_description": "Gravity UIアイコンライブラリから数百のモダンなSVGアイコンを閲覧、検索、ダウンロード",
     "goToLibrary": "ライブラリへ移動",
     "filterPlaceholder": "アイコン名で絞り込む",
     "keywords": "キーワード",
@@ -16,18 +16,18 @@
     "usage_svg": "SVG",
     "imageSearch_tooltip": "画像で検索（またはクリップボードから貼り付け）",
     "imageSearch_drop": "画像をドロップして類似アイコンを検索",
-    "category": "カテゴリー",
+    "category": "カテゴリ",
     "allIcons": "すべてのアイコン",
-    "categoriesLabel": "アイコンのカテゴリー",
+    "categoriesLabel": "アイコンカテゴリ",
     "categories": {
         "arrows": "矢印",
         "layout": "レイアウト",
         "text": "テキスト",
         "status": "ステータス",
         "files": "ファイル",
-        "shapes": "図形",
+        "shapes": "形状",
         "development": "開発",
-        "editor": "エディター",
+        "editor": "エディタ",
         "people": "人物",
         "media": "メディア",
         "brands": "ブランド",
@@ -36,7 +36,7 @@
         "communication": "コミュニケーション",
         "games": "ゲーム",
         "devices": "デバイス",
-        "maps": "地図",
+        "maps": "マップ",
         "tools": "ツール",
         "math": "数学",
         "security": "セキュリティ",
@@ -46,6 +46,6 @@
         "transport": "交通",
         "weather": "天気",
         "time": "時間",
-        "food": "食べ物"
+        "food": "食品"
     }
 }
