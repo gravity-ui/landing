@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
+import {resolveInstalledPackage} from './component-catalog/package-resolver.mjs';
+
 const packagesMap = {
     '@gravity-ui/aikit': 'aikit',
     '@gravity-ui/uikit': 'uikit',
@@ -21,11 +23,16 @@ const getPackagesVersions = () => {
     try {
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         const dependencies = packageJson.dependencies;
+        const projectRoot = path.dirname(packageJsonPath);
 
         const result = {};
         Object.keys(packagesMap).forEach((packageName) => {
             if (dependencies[packageName]) {
-                result[packagesMap[packageName]] = dependencies[packageName].replace(/[\^~]/g, '');
+                const {packageJson: installedPackageJson} = resolveInstalledPackage(
+                    packageName,
+                    projectRoot,
+                );
+                result[packagesMap[packageName]] = installedPackageJson.version;
             } else {
                 console.warn(`Missed package when getting versions: ${packageName}`);
             }
