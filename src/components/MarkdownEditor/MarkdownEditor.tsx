@@ -1,20 +1,15 @@
-import {
-    MarkdownEditorView,
-    markupToolbarConfigs,
-    useMarkdownEditor,
-    wToolbarConfig,
-} from '@gravity-ui/markdown-editor';
+import {MarkdownEditorView, useMarkdownEditor} from '@gravity-ui/markdown-editor';
 import {Col, Grid, Row} from '@gravity-ui/page-constructor';
 import {Button, ThemeProvider, ToasterProvider} from '@gravity-ui/uikit';
 import {toaster} from '@gravity-ui/uikit/toaster-singleton';
 import {useTranslation} from 'next-i18next';
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 
 import {main} from '../../content/markdown-editor/main';
 import {block} from '../../utils';
 
 import './MarkdownEditor.scss';
-import {useSticky} from './hooks';
+import {useStickyToolbar} from './hooks';
 import './yfm.scss';
 
 const b = block('markdown-editor');
@@ -33,24 +28,15 @@ function Editor() {
         },
     });
 
-    // FIXME: This is a temporary solution, will be fixed after
-    // https://github.com/gravity-ui/markdown-editor/pull/369 */
-    const toolbarRef = useRef<HTMLElement | null>(null);
-    useEffect(() => {
-        const element = document.querySelector<HTMLElement>('.g-md-editor-component__toolbar');
-        if (element) {
-            toolbarRef.current = element;
-        }
-    }, []);
-    const sticky = useSticky(toolbarRef);
+    const rootRef = useRef<HTMLDivElement>(null);
+    const sticky = useStickyToolbar(rootRef);
 
     return (
         <MarkdownEditorView
+            ref={rootRef}
             autofocus
             className={b({sticky})}
             stickyToolbar={false}
-            wysiwygToolbarConfig={wToolbarConfig}
-            markupToolbarConfig={markupToolbarConfigs.mToolbarConfig}
             settingsVisible
             editor={editor}
         />

@@ -48,24 +48,24 @@ $block: '.#{variables.$ns}markdown-editor';
     color: var(--g-color-text-primary);
 }
 
-// FIXME: This is a temporary solution, will be fixed after
-// https://github.com/gravity-ui/markdown-editor/pull/369 */
-
-:root {
-    --g-md-sticky-offset-compensate: 100px;
-}
-
-.gravity-ui-landing-markdown-editor_sticky .g-md-editor-component__toolbar {
-    z-index: 2000;
+// The editor pins its toolbar relative to the window, while this page scrolls inside a
+// container: the toolbar is pinned here and useStickyToolbar reports when it is pinned.
+#{$block} .g-md-editor-component__toolbar {
     position: sticky;
     top: 8px;
 }
 
-.gravity-ui-landing-markdown-editor_sticky .g-md-editor-component__toolbar::before {
-    position: absolute;
-    inset: -4px;
-    content: '';
-    border: 1px solid var(--g-color-line-generic-solid);
-    border-radius: 4px;
-    background-color: var(--g-color-base-background);
+#{$block}_sticky .g-md-editor-component__toolbar {
+    z-index: 2000;
+
+    &::before {
+        position: absolute;
+        inset: -4px;
+
+        content: '';
+
+        border: 1px solid var(--g-color-line-generic-solid);
+        border-radius: 4px;
+        background-color: var(--g-color-base-background);
+    }
 }
