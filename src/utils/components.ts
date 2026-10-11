@@ -31,6 +31,43 @@ export function getRouteFromReadmeUrl(readmeUrl: string) {
     }`;
 }
 
+export function resolveReadmeLink(link: string, contentReadmeUrl: string): string {
+    if (link.startsWith('#')) {
+        return link;
+    }
+
+    const readmeUrl = new URL(contentReadmeUrl, 'https://gravity-ui.com');
+    const url = new URL(link, readmeUrl);
+
+    if (url.origin !== readmeUrl.origin) {
+        return link;
+    }
+
+    if (link.startsWith('/src/')) {
+        const resolved = resolveRepoAbsoluteLink(link, contentReadmeUrl);
+        if (resolved) {
+            return resolved;
+        }
+    }
+
+    const componentRoute = getRouteFromReadmeUrl(url.toString());
+    if (componentRoute) {
+        return componentRoute;
+    }
+
+    return link;
+}
+
+export function getReadmeAssetsBasePath(contentReadmeUrl: string): string | undefined {
+    const url = new URL(contentReadmeUrl);
+
+    if (url.hostname !== 'raw.githubusercontent.com') {
+        return undefined;
+    }
+
+    return `${url.origin}${url.pathname.slice(0, url.pathname.lastIndexOf('/') + 1)}`;
+}
+
 const REPO_BASE_REGEX = /^(https:\/\/raw\.githubusercontent\.com\/([^/]+\/[^/]+)\/([^/]+))/;
 
 export function resolveRepoAbsoluteLink(
