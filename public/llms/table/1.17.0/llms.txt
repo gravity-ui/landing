@@ -1,17 +1,41 @@
 > Generated for `@gravity-ui/table@1.17.0`
 
-# Table
+# @gravity-ui/table documentation
 
-> A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
->
-> **npm:** `@gravity-ui/table` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **1.17.0** version of `@gravity-ui/table`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
+
+## For AI agents
+
+A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for it for sortable, selectable, groupable, reorderable, and virtualized tables instead of composing raw markup on top of uikit's basic `Table`.
+
+### When to use
+
+- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
+- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
+- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
+
+### When not to use
+
+- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
+
+### Common pitfalls
+
+- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
+- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
+- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
+- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
+- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
 
 ## Install
 
 ```shell
 npm install --save @gravity-ui/table
 ```
-
 
 ## Peer dependencies
 
@@ -414,32 +438,6 @@ const ReorderingExample = () => {
 };
 ```
 
-#### Reordering without a drag handle
-
-Set `dragWithoutHandle` to use the whole row as the drag activator and omit
-`dragHandleColumn` from the column definitions:
-
-```tsx
-const columns: ColumnDef<Person>[] = [
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
-];
-
-return (
-  <ReorderingProvider table={table} dragWithoutHandle onReorder={handleReorder}>
-    <Table table={table} />
-  </ReorderingProvider>
-);
-```
-
-The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
-working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
-`onPointerDown` handler.
-
-`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
-when the application supplies its own drag auto-scroll implementation; running both at once can
-produce competing scroll writes.
-
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -462,54 +460,6 @@ const ColumnReorderingExample = () => {
   return (
     <ColumnReorderingProvider table={table}>
       <Table table={table} />
-    </ColumnReorderingProvider>
-  );
-};
-```
-
-### Row and column reordering together
-
-Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
-
-```tsx
-import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
-import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
-
-const columns: ColumnDef<Person>[] = [
-  dragHandleColumn,
-  {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Age'},
-];
-
-const CombinedReorderingExample = () => {
-  const [data, setData] = React.useState(initialData);
-  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
-
-  const table = useTable({
-    columns,
-    data,
-    getRowId: (item) => item.id,
-    state: {columnOrder},
-    onColumnOrderChange: setColumnOrder,
-  });
-
-  const handleRowReorder = React.useCallback<
-    NonNullable<ReorderingProviderProps<Person>['onReorder']>
-  >(({draggedItemKey, baseItemKey}) => {
-    // update data array
-  }, []);
-
-  const handleColumnReorder = React.useCallback<
-    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
-  >(({columnOrder}) => {
-    setColumnOrder(columnOrder);
-  }, []);
-
-  return (
-    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
-      <ReorderingProvider table={table} onReorder={handleRowReorder}>
-        <Table table={table} />
-      </ReorderingProvider>
     </ColumnReorderingProvider>
   );
 };
@@ -623,46 +573,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
-direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
-immutable reorder or a tree reparent:
-
-```tsx
-const rows = table.getRowModel().rows;
-
-const getItemKey = React.useCallback(
-  (index: number) => rows[index]?.id ?? `missing:${index}`,
-  [rows],
-);
-
-const rowVirtualizer = useRowVirtualizer({
-  adaptiveFlushSync: true,
-  count: rows.length,
-  directDomUpdates: true,
-  directDomUpdatesMode: 'position',
-  estimateSize: () => 40,
-  getItemKey,
-  getScrollElement: () => containerRef.current,
-  overscan: 12,
-});
-```
-
-`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
-range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
-React render for every scroll notification. Use `position` for table rows unless transforms are
-required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
-the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
-An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
-
-`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
-Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
-accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
-side-effectful content should remain eager.
-
-With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
-A custom range extractor is responsible for retaining that row itself. If you use reordering with
-a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
-`rangeExtractor` option:
+If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -792,33 +703,18 @@ const TableSettingsDemo = () => {
 
 Learn more about the table and the column resizing properties in the react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
 
+## Guides
 
-### When to use
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
 
-- Large datasets that need row or window virtualization (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Column sorting, resizing, reordering (`ColumnReorderingProvider`), pinning, and per-user column settings (`TableSettings`).
-- Row selection (single/multi, ranged) and tree/grouped rows with expandable cells.
+## Components
 
-### When not to use
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
 
-- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
-- A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
+## Hooks
 
-### Common pitfalls
-
-- **You build the table with `useTable`, then render `<Table table={table} />`.** The main prop is `table` (the instance), not `data`/`columns` directly on `<Table>`; pass `data` and `columns` to `useTable`.
-- **Types come from the `@gravity-ui/table/tanstack` subpath.** Import `ColumnDef`, `RowSelectionState`, `SortingState`, etc. from `@gravity-ui/table/tanstack`, not from the package root.
-- **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
-- **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
-- **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/table/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/table/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/table)
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.17.0/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
 
 ---
 

@@ -1,10 +1,34 @@
 > Generated for `@gravity-ui/markdown-editor@15.48.2`
 
-# Markdown editor
+# @gravity-ui/markdown-editor documentation
 
-> A dual-mode Markdown editor for React that combines a WYSIWYG mode (ProseMirror) and a raw markup mode (CodeMirror), with support for basic Markdown and YFM.
->
-> **npm:** `@gravity-ui/markdown-editor` — check the installed major version in the user's `package.json` and read docs matching it.
+Documentation for the **15.48.2** version of `@gravity-ui/markdown-editor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/markdown-editor/build/docs/`).
+
+## For AI agents
+
+A dual-mode Markdown editor for React that combines a WYSIWYG mode (ProseMirror) and a raw markup mode (CodeMirror), with support for basic Markdown and YFM.
+
+### When to use
+
+- Editing Markdown/YFM content with a switchable visual (WYSIWYG) and source (markup) view.
+- You need an extensible editor: custom marks, nodes, toolbar items, and extensions (HTML, LaTeX, Mermaid, GPT) via the ProseMirror/CodeMirror engines.
+- Rendering the editor UI: create the instance with `useMarkdownEditor` and render it with `MarkdownEditorView`.
+
+### When not to use
+
+- Read-only rendering of Markdown to HTML with no editing — transform it with [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) and render the output instead.
+- Plain multiline text input — use `TextArea` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Rich-text that is not Markdown/YFM — this editor is Markdown-first.
+
+### Common pitfalls
+
+- **It is a hook plus a view, not one component.** Create the instance with `useMarkdownEditor(...)` and pass it to `<MarkdownEditorView editor={editor} />`; there is no single `<MarkdownEditor>` you render directly.
+- **Read the value via the instance, not a controlled `value` prop.** Call `editor.getValue()` (e.g. on the `submit` event) to serialize to Markdown; the editor manages its own state.
+- **Peer dependencies are required.** Your project must provide `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react`, and `react-dom` — check the `peerDependencies` in `package.json`.
+- **Styles and i18n come from uikit.** Set up theming/styles per the uikit docs and call `configure({lang})` from both this package and `@gravity-ui/uikit`.
 
 ## Install
 
@@ -40,7 +64,6 @@ Install these in the host project at a compatible version:
 
 Please note that to start using the package, your project must also have the following installed: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` and some others. Check out the `peerDependencies` section of `package.json` for accurate information.
 
-
 ## Usage
 
 The markdown editor is supplied as a React hook to create an instance of editor and a component for rendering the view.\
@@ -72,14 +95,14 @@ function Editor({onSubmit}) {
 
 Read more:
 
-- [How to connect the editor in the Create React App](https://gravity-ui.github.io/markdown-editor/getting-started/create-react-app.html)
-- [How to add preview for markup mode](https://gravity-ui.github.io/markdown-editor/getting-started/preview.html)
-- [How to add HTML extension](https://gravity-ui.github.io/markdown-editor/extensions/html-block.html)
-- [How to add Latex extension](https://gravity-ui.github.io/markdown-editor/extensions/latex-extension.html)
-- [How to add Mermaid extension](https://gravity-ui.github.io/markdown-editor/extensions/mermaid-extension.html)
-- [How to write extension](https://gravity-ui.github.io/markdown-editor/develop/extension-creation.html)
-- [How to add GPT extension](https://gravity-ui.github.io/markdown-editor/extensions/gpt.html)
-- [How to add text binding extension in markdown](https://gravity-ui.github.io/markdown-editor/develop/extension-with-popup.html)
+- [How to connect the editor in the Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
+- [How to add preview for markup mode](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
+- [How to add HTML extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
+- [How to add Latex extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
+- [How to add Mermaid extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
+- [How to write extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
+- [How to add GPT extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
+- [How to add text binding extension in markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Development
 
@@ -104,35 +127,23 @@ Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/ui
 
 ### Contributing
 
-- [Contributor Guidelines](https://gravity-ui.github.io/markdown-editor/contributing.html)
+- [Contributor Guidelines](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
 
+## Guides
 
-### When to use
-
-- Editing Markdown/YFM content with a switchable visual (WYSIWYG) and source (markup) view.
-- You need an extensible editor: custom marks, nodes, toolbar items, and extensions (HTML, LaTeX, Mermaid, GPT) via the ProseMirror/CodeMirror engines.
-- Rendering the editor UI: create the instance with `useMarkdownEditor` and render it with `MarkdownEditorView`.
-
-### When not to use
-
-- Read-only rendering of Markdown to HTML with no editing — transform it with [`@diplodoc/transform`](https://github.com/diplodoc-platform/transform) and render the output instead.
-- Plain multiline text input — use `TextArea` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Rich-text that is not Markdown/YFM — this editor is Markdown-first.
-
-### Common pitfalls
-
-- **It is a hook plus a view, not one component.** Create the instance with `useMarkdownEditor(...)` and pass it to `<MarkdownEditorView editor={editor} />`; there is no single `<MarkdownEditor>` you render directly.
-- **Read the value via the instance, not a controlled `value` prop.** Call `editor.getValue()` (e.g. on the `submit` event) to serialize to Markdown; the editor manages its own state.
-- **Peer dependencies are required.** Your project must provide `@diplodoc/transform`, `@gravity-ui/uikit`, `@gravity-ui/components`, `react`, and `react-dom` — check the `peerDependencies` in `package.json`.
-- **Styles and i18n come from uikit.** Set up theming/styles per the uikit docs and call `configure({lang})` from both this package and `@gravity-ui/uikit`.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/md-editor/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/markdown-editor/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/markdown-editor)
+- [guidelines-contributions](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/guidelines-contributions.md)
+- [how-to-add-editor-with-create-react-app](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-editor-with-create-react-app.md)
+- [how-to-add-editor-with-nextjs](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-editor-with-nextjs.md)
+- [how-to-add-preview](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-preview.md)
+- [how-to-add-text-binding-extension-in-markdown](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-text-binding-extension-in-markdown.md)
+- [how-to-connect-gpt-extensions](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-gpt-extensions.md)
+- [how-to-connect-html-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-html-extension.md)
+- [how-to-connect-latex-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-latex-extension.md)
+- [how-to-connect-mermaid-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-mermaid-extension.md)
+- [how-to-create-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-create-extension.md)
+- [how-to-customize-the-editor](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-customize-the-editor.md)
+- [how-to-customize-toolbars](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-customize-toolbars.md)
+- [Visual Testing with Playwright](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-visual-test.md)
 
 ---
 
