@@ -606,7 +606,10 @@ direct-DOM mode and use stable semantic keys. The same key must identify a row b
 immutable reorder or a tree reparent:
 
 ```tsx
+import {getColumnAwareRowOverscan} from '@gravity-ui/table';
+
 const rows = table.getRowModel().rows;
+const columnCount = table.getVisibleLeafColumns().length;
 
 const getItemKey = React.useCallback(
   (index: number) => rows[index]?.id ?? `missing:${index}`,
@@ -621,7 +624,7 @@ const rowVirtualizer = useRowVirtualizer({
   estimateSize: () => 40,
   getItemKey,
   getScrollElement: () => containerRef.current,
-  overscan: 12,
+  overscan: getColumnAwareRowOverscan(columnCount),
 });
 ```
 
@@ -631,6 +634,30 @@ React render for every scroll notification. Use `position` for table rows unless
 required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
 the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
 An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`getColumnAwareRowOverscan(columnCount, options?)` reduces the base row overscan as the number
+of columns grows. By default, it divides a 240-cell budget by the column count, rounds down,
+and clamps the result to 4–24 rows. Use `table.getVisibleLeafColumns().length` to exclude hidden
+columns and include pinned columns. The helper works with both `useRowVirtualizer` and
+`useWindowRowVirtualizer`; you can still pass an explicit numeric `overscan` instead.
+
+Tune the budget and bounds for your cell rendering cost. If your application virtualizes columns,
+set `renderedColumnLimit` to the maximum number of columns rendered per row, including pinned
+columns; the helper caps the supplied column count at this value:
+
+```tsx
+const overscan = getColumnAwareRowOverscan(table.getVisibleLeafColumns().length, {
+  renderedColumnLimit: 16,
+  cellBudget: 320,
+  minOverscan: 4,
+  maxOverscan: 20,
+});
+```
+
+The result is a base row overscan, not a strict limit on mounted rows or cells. Visible rows are
+rendered in addition to the overscan, and adaptive scrolling can extend the mounted range.
+All helper inputs must be non-negative safe integers, and `maxOverscan` must be at least
+`minOverscan`; invalid values throw a `RangeError`. Zero columns are treated as one for the calculation.
 
 `BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
 Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
