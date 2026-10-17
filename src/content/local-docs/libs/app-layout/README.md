@@ -453,6 +453,75 @@ export interface LayoutOptions {
 }
 ```
 
+#### Public path fallbacks
+
+Loads initial scripts and stylesheets from backup addresses if loading from `publicPath` fails.
+
+Usage:
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: ['https://backup.example.com/build/', '/build/'],
+});
+```
+
+These options are also available in `createDefaultPlugins({layout: …})`. Enable the layout plugin with `pluginsOptions.layout.name`, as in the example above. Omitting `publicPathFallbacks` or passing `[]` preserves normal rendering.
+
+You can also use a callback function:
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: () =>
+    location.hostname.endsWith('.example.org')
+      ? ['https://backup.example.org/build/', '/build/']
+      : ['/build/'],
+});
+```
+
+The function runs once and must be self-contained, without closures or imports. It receives `{publicPath}`; for root-relative primary paths, this value includes `layout.prefix`. Returning `[]` uses the primary address without retries.
+
+The loader is bundled and minified when app-layout is built. The user callback is serialized from compiled server code using `Function.prototype.toString()`: transformations such as esbuild `keepNames` can inject external helpers (`__name`) that are unavailable in the browser. Test callbacks in your final server build. If bootstrap throws, synchronous registrations during HTML parsing restore the original tags via `document.write`, subject to browser restrictions; recovery cannot help if CSP blocks the registration scripts.
+
+Retry options:
+
+```typescript
+interface AssetRetryOptions {
+  retries?: number; // Additional attempts per address. Default: 0.
+  delayMs?: number; // Delay before the first retry, in milliseconds. Default: 500.
+  factor?: number; // Multiplier for subsequent retry delays. Default: 2.
+  maxDelayMs?: number; // Maximum retry delay, in milliseconds. Default: 3000.
+  timeoutMs?: number; // Attempt timeout, in milliseconds. Default: 10000; 0 disables.
+}
+```
+
+Pass these options as `assetRetry` to `createLayoutPlugin`. By default, a resource error switches to the next address without retrying the same URL. Set `retries` to enable additional attempts with exponential delays. The loader remembers the last successful address and starts subsequent resources there, cycling through the remaining addresses as backups. An individual failure does not change the preferred address; it changes only after a successful load. In-flight resources keep their candidate order. Explicit `undefined` option values use the defaults.
+
+Each script or stylesheet attempt has a `timeoutMs` limit (10000 ms by default). A timeout follows the same retry policy as a loading error: retry the current URL while attempts remain, then try the next address. Set `0` to disable the timeout. The loader removes timed-out elements and ignores their late callbacks; removing a script does not guarantee cancellation of its execution.
+
+Backup addresses must serve the same build files at the same relative paths. Do not include query parameters or fragments in base addresses. Trailing slashes are added and duplicate addresses are removed automatically. A path such as `/build/` is relative to the page's origin; include any application prefix explicitly. Allow backup domains in CSP and configure CORS.
+
+Loading behavior:
+
+- Supports `defer` scripts without `async` or `type`, and stylesheets under the primary path, preserving nonce and `crossOrigin`. Other resources retain normal rendering.
+- Stylesheets load in parallel. Scripts run in order after stylesheet attempts finish and the DOM is ready. `DOMContentLoaded` does not mean the application has finished loading.
+- Final failures emit `app-layout:asset-load-error` on `window`. The event detail contains `{type, originalUrl, attempts}` and is described by the exported `AssetLoadError` type; `attempts` lists attempted URLs, including retries. Register the handler before resources load. A final stylesheet loading failure does not block scripts; a final script loading failure stops the loader’s script queue.
+- For early scripts during streaming, use `renderScripts(content, scripts, state)`, then `renderHeadContent(content, state)` with the same `state: AssetRenderState = {}` for one HTML response, even if content is regenerated. Bootstrap is emitted once; its initial configuration applies to the entire response. Direct `content.helpers` calls render ordinary tags without fallback handling.
+
+```ts
+import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
+
+const state: AssetRenderState = {};
+res.write(renderScripts(content, firstScripts, state));
+// ... await data and regenerate content if needed.
+res.write(renderHeadContent(content, state));
+```
+
+Lazy chunks require separate configuration, such as `client.publicPathFallback` in [App Builder](https://github.com/gravity-ui/app-builder). Configure the backup addresses in both libraries; the fallback list is not shared through a global variable.
+
 ### @gravity-ui/uikit
 
 Adds body attributes.
