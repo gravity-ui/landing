@@ -1,0 +1,126 @@
+> Generated for `@gravity-ui/components@4.24.1`
+
+# @gravity-ui/components documentation
+
+Documentation for the **4.24.1** version of `@gravity-ui/components`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/components/build/docs/`).
+
+## For AI agents
+
+The composite-component layer of Gravity UI — ready-made form rows, confirmation dialogs, adaptive tabs, notifications, stories, galleries and similar product-level widgets assembled from `@gravity-ui/uikit` primitives, so you do not rebuild them by hand.
+
+### When to use
+
+- Form layout: `FormRow` (label + field + description) instead of a hand-made label/input wrapper.
+- Confirmation flows: `ConfirmDialog` instead of composing `Dialog` with two buttons yourself.
+- Tabs that must survive narrow containers: `AdaptiveTabs` (overflow collapses into a select).
+- Product widgets: `Notifications`, `Stories` / `StoriesGroup`, `ChangelogDialog`, `OnboardingMenu`, `PromoSheet`, `CookieConsent`, `Reactions`, `SharePopover`, `StoreBadge`.
+- Data helpers: `InfiniteScroll`, `ItemSelector`, `DelayedTextInput`, `TokenizedInput`, `Gallery`.
+
+### When not to use
+
+- Basic controls, overlays, layout and theming — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) directly; this package only adds composites on top of it.
+- Data grids — use [`@gravity-ui/table`](https://github.com/gravity-ui/table); there is no table here.
+- Date pickers and calendars — use [`@gravity-ui/date-components`](https://github.com/gravity-ui/date-components).
+- Application navigation shells (aside header, footer) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation).
+- Schema-driven forms — use [`@gravity-ui/dynamic-forms`](https://github.com/gravity-ui/dynamic-forms); `FormRow` is only a layout row.
+
+### Common pitfalls
+
+- **Nothing is styled without uikit setup.** Install `@gravity-ui/uikit`, import `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) once, and wrap the app in `ThemeProvider` — this package ships no global styles of its own.
+- **`FormRow` does not render the input.** Pass the control as `children` and link it with `fieldId` matching the control's `id`; the `label` prop is the label text, not a `<label>` element.
+- **`ConfirmDialog` has no `onConfirm` / `onCancel`.** The handlers are `onClickButtonApply` and `onClickButtonCancel`, and `textButtonApply` / `textButtonCancel` are required.
+- **`AdaptiveTabs` takes `items` + `activeTab` + `onSelectTab`,** not uikit `Tabs` children; the `size` values are `m | l | xl`.
+- **Hallucinated imports.** Everything is exported from the package root: `import {FormRow} from '@gravity-ui/components'`. There are no subpath imports like `@gravity-ui/components/FormRow`.
+
+## Install
+
+```shell
+npm install @gravity-ui/components
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `react-dom` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.44.0` |
+
+## Usage
+
+`@gravity-ui/uikit` is a peer dependency: install it, import its styles once at the app entry point, and wrap the app in `ThemeProvider`. The components in this package render unstyled without that setup.
+
+```tsx
+import {ThemeProvider, TextInput} from '@gravity-ui/uikit';
+import {FormRow} from '@gravity-ui/components';
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+export function App() {
+  return (
+    <ThemeProvider theme="light">
+      <FormRow label="Name" fieldId="name">
+        <TextInput id="name" name="name" />
+      </FormRow>
+    </ThemeProvider>
+  );
+}
+```
+
+### Confirmation dialog
+
+```tsx
+import {ConfirmDialog} from '@gravity-ui/components';
+
+<ConfirmDialog
+  open={open}
+  title="Delete the project?"
+  message="This cannot be undone."
+  textButtonApply="Delete"
+  textButtonCancel="Cancel"
+  onClickButtonApply={handleDelete}
+  onClickButtonCancel={() => setOpen(false)}
+  onClose={() => setOpen(false)}
+/>;
+```
+
+### More examples
+
+Every component has a README next to its source with props and examples — see `src/components/<Component>/README.md`. Live demos: [Storybook](https://preview.gravity-ui.com/components/).
+
+## Components
+
+- [AdaptiveTabs](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/AdaptiveTabs.md) — If there is not enough container width to fit all the tabs, the tabs that do not fit will be hidden and accessible via the select with the caption `More'. If only one tab fits, the select is displayed instead of the tabs.
+- [ChangelogDialog](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/ChangelogDialog.md) — Component for displaying the changelog. It looks like a list of versions in a modal. It can display regular versions and versions associated with stories.
+- [ConfirmDialog](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/ConfirmDialog.md) — A utility component that renders a confirmation dialog with apply and cancel buttons.
+- [CookieConsent](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/CookieConsent.md) — A cookie consent banner and settings popup driven by a ConsentManager that stores the user's choices.
+- [DelayedTextInput](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/DelayedTextInput.md) — Component for delaying user input synchronization with external state.
+- [FormRow](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/FormRow.md) — Base component to place form input and label.
+- [Gallery](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/Gallery.md) — The base component for rendering galleries of any type of data. The component is responsible for the gallery navigation (keyboard arrows, body side click and header arrow click). The children of the Gallery should be an array of GalleryItem with the required properties for rendering the gallery item view.
+- [Gallery/contexts/GalleryContext](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/Gallery/contexts/GalleryContext.md) — React context for communication between Gallery and its child views (like ImageView). Provides callbacks for view interaction events.
+- [Gallery/hooks/useImageZoom](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/Gallery/hooks/useImageZoom.md) — Hook for managing image zoom and pan functionality in Gallery. Automatically adapts to platform (desktop/mobile).
+- [InfiniteScroll](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/InfiniteScroll.md) — The component is useful for creating infinite lists like Social Network Feed, or events history. It renders its children. If you scroll it to the bottom, it will show a loader and call an onActivate callback. When all the data is loaded and there is no need to load more, pass the disabled={true} property.
+- [ItemSelector](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/ItemSelector.md) — A component that allows you to form a subset of a list (e.g., a subset of columns).
+- [Notifications](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/Notifications.md) — Components for displaying notifications (storybook). Can be used on desktop and touch devices.
+- [OnboardingMenu](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/OnboardingMenu.md) — A component for managing onboarding presets (storybook).
+- [PromoSheet](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/PromoSheet.md) — A component for displaying a promo dialog informing the user about a new feature in the service's mobile application.
+- [Reactions](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/Reactions.md) — Component for user reactions (e.g. 👍, 😊, 😎 etc) as in GitHub comments for example.
+- [SharePopover](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/SharePopover.md) — A popover with a list of share targets (social networks, copy link) for a given URL.
+- [StoreBadge](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/StoreBadge.md) — A badge linking to the app in Google Play or the App Store.
+- [Stories](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/Stories.md) — Component for displaying stories. It looks like a carousel in a modal with given places to display text and media.
+- [Stories/hooks/useSyncWithLS](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/Stories/hooks/useSyncWithLS.md)
+- [StoriesGroup](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/StoriesGroup.md) — Component for displaying group of stories. It looks like a carousel in a modal with given places to display text and media.
+- [TokenizedInput](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/components/TokenizedInput.md) — This component is for writing queries/filters and working with them as tokens. Here, a token is an expression (for example, for the format key = value the token would be User = Ivan). A distinguishing feature is full keyboard and mouse support (including clicking suggestions).
+
+## Hooks
+
+- [useGallery](https://unpkg.com/@gravity-ui/components@4.24.1/build/docs/hooks/useGallery.md)
+
+---
+
+> Docs for `@gravity-ui/components@4.24.1`. Versioned at: `https://gravity-ui.com/llms/components/4.24.1/llms.txt` (exact), `https://gravity-ui.com/llms/components/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
