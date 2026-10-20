@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/app-layout@2.5.1`
+> Generated for `@gravity-ui/app-layout@2.6.0`
 
 # App Layout
 
@@ -273,4 +273,4 @@ will be rendered as:
 
 ---
 
-> Docs for `@gravity-ui/app-layout@2.5.1`. Versioned at: `https://gravity-ui.com/llms/app-layout/2.5.1/llms.txt` (exact), `https://gravity-ui.com/llms/app-layout/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/app-layout/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/app-layout@2.6.0`. Versioned at: `https://gravity-ui.com/llms/app-layout/2.6.0/llms.txt` (exact), `https://gravity-ui.com/llms/app-layout/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/app-layout/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

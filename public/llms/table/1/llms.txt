@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/table@1.22.0`
+> Generated for `@gravity-ui/table@1.23.0`
 
 # @gravity-ui/table documentation
 
-Documentation for the **1.22.0** version of `@gravity-ui/table`.
+Documentation for the **1.23.0** version of `@gravity-ui/table`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/table/build/docs/`).
@@ -464,6 +464,38 @@ working. To exclude a custom part of a row from starting a drag, call `preventDe
 when the application supplies its own drag auto-scroll implementation; running both at once can
 produce competing scroll writes.
 
+Custom drag handles should read `attributes`, `listeners`, and `setActivatorNodeRef` from
+`DraggableRowContext` and attach them to the handle element. This reuses the row's DnD
+registration. Do not call `useSortable` again with the same row id: a handle mounted later
+by virtualization would replace the row's registered DOM node.
+
+#### Keyboard reordering and accessibility
+
+`ReorderingProvider` supports keyboard row dragging.
+Focus a drag handle, press Space or Enter to pick up the row, use the arrow keys to move it, and press
+Space or Enter to drop it. Escape cancels the move.
+Keyboard dragging applies only to rows; keyboard interactions with column headers remain unchanged.
+
+Use `accessibility` to customize dnd-kit's screen reader instructions, announcements, announcement
+container, and focus restoration for both keyboard and pointer dragging.
+When row and column providers are nested, they share the same DnD context and accessibility settings;
+provider order does not matter.
+
+```tsx
+<ReorderingProvider
+  table={table}
+  onReorder={handleReorder}
+  accessibility={{
+    screenReaderInstructions: {
+      draggable:
+        'Press Space to pick up a row, arrow keys to move, Enter to drop, or Escape to cancel.',
+    },
+  }}
+>
+  <Table table={table} />
+</ReorderingProvider>
+```
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
@@ -845,17 +877,17 @@ Learn more about the table and the column resizing properties in the react-table
 
 ## Guides
 
-- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.22.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
-- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.22.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
+- [Migration Guide: From Table (@gravity-ui/uikit) to Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.23.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table.md)
+- [Руководство по миграции с Table (@gravity-ui/uikit) на Table (@gravity-ui/table)](https://unpkg.com/@gravity-ui/table@1.23.0/build/docs/guides/migration-from-uikit-table/migration-from-uikit-table-ru.md)
 
 ## Components
 
-- [BaseTable](https://unpkg.com/@gravity-ui/table@1.22.0/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
+- [BaseTable](https://unpkg.com/@gravity-ui/table@1.23.0/build/docs/components/BaseTable.md) — The unstyled, low-level table renderer — renders a useTable instance as raw <table> markup without Gravity UI styling, for full visual control.
 
 ## Hooks
 
-- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.22.0/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
+- [useColumnsAutoSize](https://unpkg.com/@gravity-ui/table@1.23.0/build/docs/hooks/useColumnsAutoSize.md) — A React hook that automatically calculates column widths based on measured content, supporting primitives and React nodes, accessorKey/accessorFn columns, custom cell renderers, and respect for predefined or user-resized widths.
 
 ---
 
-> Docs for `@gravity-ui/table@1.22.0`. Versioned at: `https://gravity-ui.com/llms/table/1.22.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/table@1.23.0`. Versioned at: `https://gravity-ui.com/llms/table/1.23.0/llms.txt` (exact), `https://gravity-ui.com/llms/table/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/table/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
