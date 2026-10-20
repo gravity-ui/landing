@@ -133,13 +133,12 @@ A declarative React charting library for Gravity UI apps — render line, area, 
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/components/llms.txt)
 > GitHub: [gravity-ui/components](https://github.com/gravity-ui/components)
 
-The composite-component layer of Gravity UI — ready-made form rows, confirmation dialogs, adaptive tabs, notifications, stories, galleries and similar product-level widgets assembled from `@gravity-ui/uikit` primitives, so you do not rebuild them by hand.
+The composite-component layer of Gravity UI — ready-made form rows, confirmation dialogs, notifications, stories, galleries and similar product-level widgets assembled from `@gravity-ui/uikit` primitives, so you do not rebuild them by hand.
 
 #### When to use
 
 - Form layout: `FormRow` (label + field + description) instead of a hand-made label/input wrapper.
 - Confirmation flows: `ConfirmDialog` instead of composing `Dialog` with two buttons yourself.
-- Tabs that must survive narrow containers: `AdaptiveTabs` (overflow collapses into a select).
 - Product widgets: `Notifications`, `Stories` / `StoriesGroup`, `ChangelogDialog`, `OnboardingMenu`, `PromoSheet`, `CookieConsent`, `Reactions`, `SharePopover`, `StoreBadge`.
 - Data helpers: `InfiniteScroll`, `ItemSelector`, `DelayedTextInput`, `TokenizedInput`, `Gallery`.
 
