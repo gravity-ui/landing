@@ -8,6 +8,7 @@ import {CONTENT_WRAPPER_ID, DEFAULT_THEME, MENU_ID} from '../../constants';
 import {EnvironmentContext} from '../../contexts';
 import {useLocale} from '../../hooks/useLocale';
 import {block} from '../../utils';
+import type {JsonLd} from '../../utils/structuredData';
 import {CustomScrollbar} from '../CustomScrollbar';
 import {Footer} from '../Footer/Footer';
 import {Menu} from '../Menu/Menu';
@@ -31,6 +32,8 @@ export type LayoutProps = {
     noScroll?: boolean;
     meta?: MetaProps;
     hideLocalePicker?: boolean;
+    /** Schema.org blocks rendered as JSON-LD inside <head>. */
+    jsonLd?: JsonLd[];
 };
 
 export const Layout: React.FC<LayoutProps> = ({
@@ -43,6 +46,7 @@ export const Layout: React.FC<LayoutProps> = ({
     noScroll = false,
     hideLocalePicker = false,
     meta = {},
+    jsonLd,
 }) => {
     const locale = useLocale();
 
@@ -104,6 +108,13 @@ export const Layout: React.FC<LayoutProps> = ({
             <Head>
                 <title>{`Gravity UI${title ? ` – ${title}` : ''}`}</title>
                 <Meta {...meta} />
+                {jsonLd?.map((item, index) => (
+                    <script
+                        key={index}
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{__html: JSON.stringify(item)}}
+                    />
+                ))}
             </Head>
             <ThemeProvider theme={DEFAULT_THEME} direction={isRtl ? 'rtl' : 'ltr'}>
                 <React.Fragment>
