@@ -14,5 +14,9 @@ $block: '.#{variables.$ns}ui-samples-mobile';
 
     &__card {
         pointer-events: none;
+        // next/image emits intrinsic width/height attributes, so without this the card lays
+        // out at the source image's natural width (2216px) instead of the container width.
+        width: 100%;
+        height: auto;
     }
 }
