@@ -79,7 +79,7 @@ const RowSelectionExample = () => {
 };
 ```
 
-要使用带选择功能的组，请使用 `useRowSelectionFixedHandler` hook。没有它，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+要使用分组和选择功能，请使用 `useRowSelectionFixedHandler` hook。否则，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
 
 #### 自定义范围选择列
 
@@ -166,7 +166,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-还有一个 `RangedSelectionCheckbox` 组件，它在内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件为向自定义选择列添加范围选择功能提供了快捷方式。
+还有一个 `RangedSelectionCheckbox` 组件，它内部使用 hook 并接受 `CellContext` 实例作为 prop。此组件为向自定义选择列添加范围选择功能提供了快捷方式。
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -210,7 +210,7 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**注意**: 如果表格包含嵌套行，则范围选择将不起作用。目前，这被视为未定义行为。
+**注意**: 如果表格包含嵌套行，范围选择将不起作用。目前，这被认为是未定义行为。
 
 #### 排序
 
@@ -247,7 +247,7 @@ const SortingExample = () => {
 };
 ```
 
-如果您想手动排序元素，请传递 `manualSorting` 属性：
+如果您想手动对元素进行排序，请传递 `manualSorting` 属性：
 
 ```tsx
 const table = useTable({
@@ -319,7 +319,7 @@ const GroupingExample = () => {
 };
 ```
 
-要将分组与选择结合使用，请使用 `useRowSelectionFixedHandler` 钩子。否则，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
+要将分组与选择结合使用，请使用 `useRowSelectionFixedHandler` hook。否则，父行复选框的状态将不正确。https://github.com/TanStack/table/issues/4878
 
 要启用嵌套样式，请在列配置中传递 `withNestingStyles = true`。
 
@@ -394,7 +394,7 @@ const ReorderingExample = () => {
 
 #### 无拖动句柄的重新排序
 
-设置 `dragWithoutHandle` 以将整行用作拖动激活器，并从列定义中省略 `dragHandleColumn`：
+设置 `dragWithoutHandle` 以使用整行作为拖动激活器，并从列定义中省略 `dragHandleColumn`：
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -409,13 +409,39 @@ return (
 );
 ```
 
-指针在开始拖动前必须移动 8 像素，这样常规的行和控件点击才能正常工作。要排除行中自定义部分开始拖动，请在其 `onPointerDown` 处理程序中调用 `preventDefault()`。
+指针必须移动 8 像素后才能开始拖动，因此常规的行和控件点击仍然可以正常工作。要排除行中的自定义部分以开始拖动，请在其 `onPointerDown` 处理程序中调用 `preventDefault()`。
 
 `ReorderingProvider` 默认启用 dnd-kit 的垂直自动滚动。当应用程序提供自己的拖动自动滚动实现时，请传递 `autoScroll={false}`；同时运行两者可能会导致冲突的滚动写入。
 
+自定义拖动句柄应从 `DraggableRowContext` 读取 `attributes`、`listeners` 和 `setActivatorNodeRef`，并将它们附加到句柄元素。这会重用行的 DnD 注册。不要对同一行 ID 重复调用 `useSortable`：由虚拟化稍后挂载的句柄将替换行注册的 DOM 节点。
+
+#### 键盘重新排序和可访问性
+
+`ReorderingProvider` 支持键盘行拖动。
+聚焦拖动句柄，按空格键或回车键拾取行，使用箭头键移动它，然后按空格键或回车键放下它。按 Escape 键取消移动。
+键盘拖动仅适用于行；列标题的键盘交互保持不变。
+
+使用 `accessibility` 来自定义 dnd-kit 的屏幕阅读器说明、公告、公告容器以及键盘和指针拖动的焦点恢复。
+当行和列提供程序嵌套时，它们共享相同的 DnD 上下文和可访问性设置；提供程序的顺序无关紧要。
+
+```tsx
+<ReorderingProvider
+  table={table}
+  onReorder={handleReorder}
+  accessibility={{
+    screenReaderInstructions: {
+      draggable:
+        'Press Space to pick up a row, arrow keys to move, Enter to drop, or Escape to cancel.',
+    },
+  }}
+>
+  <Table table={table} />
+</ReorderingProvider>
+```
+
 #### 列重新排序
 
-用 `ColumnReorderingProvider` 包装表格，以通过其标题启用列的拖放重新排序。
+用 `ColumnReorderingProvider` 包裹表格，以启用通过其标题进行列的拖放重新排序。
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
@@ -440,9 +466,9 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-### 行和列同时重新排序
+### 行和列的重新排序
 
-嵌套 `ColumnReorderingProvider` 和 `ReorderingProvider` 以同时启用两个拖动轴。提供程序的顺序无关紧要——它们在内部共享一个 dnd-kit 上下文。
+将 `ColumnReorderingProvider` 和 `ReorderingProvider` 嵌套起来，即可同时启用两种拖拽轴。Provider 的顺序无关紧要——它们在内部共享一个 dnd-kit 上下文。
 
 ```tsx
 import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
@@ -453,9 +479,7 @@ const columns: ColumnDef<Person>[] = [
   {accessorKey: 'name', header: 'Name'},
   {accessorKey: 'age', header: 'Age'},
 ];
-```
 
-```tsx
 const CombinedReorderingExample = () => {
   const [data, setData] = React.useState(initialData);
   const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -471,7 +495,7 @@ const CombinedReorderingExample = () => {
   const handleRowReorder = React.useCallback<
     NonNullable<ReorderingProviderProps<Person>['onReorder']>
   >(({draggedItemKey, baseItemKey}) => {
-    // update data array
+    // 更新数据数组
   }, []);
 
   const handleColumnReorder = React.useCallback<
@@ -516,16 +540,16 @@ CSS API：
 
 | CSS 变量                                 | 默认值                       | 描述                      |
 | ---------------------------------------- | ----------------------------- | ------------------------- |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | 插入线的颜色              |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | 插入线的宽度              |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | 拖动列的透明度            |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | 拖动预览背景              |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | 拖动预览阴影              |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | 拖动预览圆角              |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | 插入线颜色                |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | 插入线宽度                |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | 被拖拽列的透明度          |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | 拖拽预览背景              |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | 拖拽预览阴影              |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | 拖拽预览圆角              |
 
-要禁止重新排序特定列，请在其列定义中设置 `enableColumnReordering: false`。占位符（分组）列不可拖动。使用 `activationDistance`（默认值为 `8`）来调整指针在开始拖动之前必须移动的距离，这可以确保表头点击（如排序）功能正常工作。
+要禁止重新排序特定列，请在其列定义中设置 `enableColumnReordering: false`。占位符（分组）列不可拖拽。使用 `activationDistance`（默认值为 `8`）来调整指针在开始拖拽前必须移动的距离，这可以确保表头点击（如排序）功能正常工作。
 
-固定列也可以重新排序，但只能在它们各自的组内进行：列可以在左固定组、右固定组或中心（未固定）组内移动——拖动时它永远不会跨越固定边界。
+固定列也可以重新排序，但仅限于它们各自的组内：列可以在左固定组、右固定组或中心（未固定）组内移动——拖拽时它永远不会跨越固定边界。
 
 ```tsx
 <ColumnReorderingProvider
@@ -542,11 +566,11 @@ CSS API：
 </ColumnReorderingProvider>
 ```
 
-拖动时：
+拖拽时：
 
-- 列的浮动预览（包括表头和前几行）会跟随指针在一个拖动叠加层中显示；
-- 被拖动的列会变得半透明；
-- 会绘制一条蓝色的插入线，指示列将要放置的位置；
+- 列的浮动预览（其表头加上前几行）会跟随指针在一个拖拽预览框中显示；
+- 被拖拽的列会变得半透明；
+- 会绘制一条蓝色的插入线，指示列将要被放置的位置；
 
 ```tsx
 <ColumnReorderingProvider
@@ -599,10 +623,13 @@ const VirtualizationExample = () => {
 ```
 
 对于必须在连续双向滚动期间保持覆盖的表格，请启用自适应
-直接 DOM 模式并使用稳定的语义键。相同的键必须在不可变重排或树重排之前和之后标识一个行：
+直接 DOM 模式并使用稳定的语义键。相同的键必须在不可变的重新排序或树重父化之前和之后标识同一行：
 
 ```tsx
+import {getColumnAwareRowOverscan} from '@gravity-ui/table';
+
 const rows = table.getRowModel().rows;
+const columnCount = table.getVisibleLeafColumns().length;
 
 const getItemKey = React.useCallback(
   (index: number) => rows[index]?.id ?? `missing:${index}`,
@@ -617,17 +644,30 @@ const rowVirtualizer = useRowVirtualizer({
   estimateSize: () => 40,
   getItemKey,
   getScrollElement: () => containerRef.current,
-  overscan: 12,
+  overscan: getColumnAwareRowOverscan(columnCount),
 });
 ```
 
-`adaptiveFlushSync` 会保持一个预热的挂载范围，并仅同步填充未覆盖的可见范围。`directDomUpdates` 允许虚拟化器在每次滚动通知时更新行位置和主体大小，而无需进行 React 渲染。对于表格行，请使用 `position`，除非周围布局需要使用 transform。保持 `getRowId` 和 `getItemKey` 稳定，并在展开、折叠、重排或重排行后从当前扁平化的行模型设置 `count`。任意自定义的 `rangeExtractor` 仍然是权威的，并会禁用自适应窗口规划。
+`adaptiveFlushSync` 会保持一个预热的挂载范围，并仅同步填充未覆盖的可见范围。`directDomUpdates` 允许虚拟化器在每次滚动通知时更新行位置和主体大小，而无需进行 React 渲染。对于表格行，请使用 `position`，除非周围的布局需要 `transform`。保持 `getRowId` 和 `getItemKey` 稳定，并在展开、折叠、重新排序或重新父化行后，从当前扁平化的行模型设置 `count`。任意自定义的 `rangeExtractor` 仍然是权威的，并会禁用自适应窗口规划。
 
-`BaseTable.canDeferOffscreenCellContent` 是一个额外的可选功能，适用于非常宽的自适应表格。
-仅为被延迟挂载后不会改变几何形状、焦点、可访问性或应用程序状态的被动单元格内容返回 `true`。自定义行、组行、固定单元格以及交互式或有副作用的内容应保持即时挂载。
+`getColumnAwareRowOverscan(columnCount, options?)` 会随着列数的增加而减少基础行的 overscan。默认情况下，它将 240 个单元格的预算除以列数，向下取整，并将结果限制在 4-24 行之间。使用 `table.getVisibleLeafColumns().length` 来排除隐藏列并包含固定列。该辅助函数同时适用于 `useRowVirtualizer` 和 `useWindowRowVirtualizer`；您仍然可以传递一个显式的数字 `overscan` 作为替代。
 
-使用默认的自适应范围提取器时，`BaseTable` 会自动固定活动的拖动行。
-自定义范围提取器负责保留该行本身。如果您使用非自适应虚拟化器进行重新排序，请保持相同的 `getItemKey` 语义约定，并传递 `rangeExtractor` 选项：
+根据您的单元格渲染成本调整预算和边界。如果您的应用程序对列进行虚拟化，请将 `renderedColumnLimit` 设置为每行渲染的最大列数，包括固定列；该辅助函数会将提供的列数限制在此值：
+
+```tsx
+const overscan = getColumnAwareRowOverscan(table.getVisibleLeafColumns().length, {
+  renderedColumnLimit: 16,
+  cellBudget: 320,
+  minOverscan: 4,
+  maxOverscan: 20,
+});
+```
+
+结果是基础行的 overscan，而不是挂载行或单元格的严格限制。可见行会额外渲染，并且自适应滚动可以扩展挂载范围。所有辅助函数的输入都必须是安全的非负整数，并且 `maxOverscan` 必须至少等于 `minOverscan`；无效值会抛出 `RangeError`。零列在计算中被视为一列。
+
+`BaseTable.canDeferOffscreenCellContent` 是针对非常宽的自适应表格的额外可选功能。仅对被动单元格内容返回 `true`，这些内容延迟挂载不会改变几何形状、焦点、可访问性或应用程序状态。自定义行、分组行、固定单元格以及交互式或有副作用的内容应保持即时挂载。
+
+使用默认的自适应范围提取器时，`BaseTable` 会自动固定活动的拖动行。自定义范围提取器负责保留该行本身。如果您使用非自适应虚拟化器进行重新排序，请保持相同的语义 `getItemKey` 合约，并传递 `rangeExtractor` 选项：
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -653,7 +693,7 @@ return (
 
 #### 窗口虚拟化
 
-如果您想将窗口用作滚动元素，请使用此功能。
+如果您想使用窗口作为滚动元素，请使用此功能。
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -686,7 +726,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-#### 列宽调整
+#### 调整大小
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -719,9 +759,9 @@ const columns: ColumnDef<Person>[] = [
     header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // 可选。允许在设置弹出窗口中隐藏此列
-      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的标题字段（如果您需要与标题不同的内容）
+      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的 header 字段（如果您需要与 header 不同的内容用于设置弹出窗口）
     },
-  }, // 或者您可以使用函数 getSettingsColumn
+  }, // 或者您可以使用 getSettingsColumn 函数
 ];
 
 const data: Person[] = [
@@ -731,13 +771,13 @@ const data: Person[] = [
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // 用于外部控制和初始状态
-    column_id: false, // 用于默认隐藏
+    column_id: false, // 默认隐藏
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
     /* leaf columns ids */
   ]); // 用于外部控制和初始状态
 
-  // 使用 useTableSettings hook 获取状态、回调和应用设置时的回调的替代方案：
+  // 另一种获取状态、回调和在设置应用回调上设置的方法 - 使用 useTableSettings hook：
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -755,7 +795,7 @@ const TableSettingsDemo = () => {
 };
 ```
 
-在 react-table [文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解有关表格和列宽调整属性的更多信息。
+在 [react-table 文档](https://tanstack.com/table/v8/docs/api/features/column-sizing) 中了解更多关于表格和列调整大小的属性。
 
 ## 已知问题和兼容性
 
@@ -765,7 +805,7 @@ const TableSettingsDemo = () => {
 
 **解决方法：**
 
-如果您正在使用 React 19 和 React Compiler，并且遇到表格重新渲染问题，可以在组件代码中使用 `'use no memo'` 指令：
+如果您正在使用 React 19 和 React Compiler，并且遇到表格重新渲染问题，可以在您的组件代码中使用 `'use no memo'` 指令：
 
 ```tsx
 import React from 'react';
@@ -781,14 +821,31 @@ function MyTable() {
     data,
     columns,
   });
+```
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
+  // Explicitly memoize data to ensure re-renders
+  const memoizedData = React.useMemo(() => data, [data]);
+
+  const table = useTable({
+    data: memoizedData,
+    columns,
+  });
 
   return <Table table={table} />;
 }
 ```
 
-**替代解决方案：**
+**备选方案：**
 
-您还可以显式地记忆化表格实例或数据，以确保正确重新渲染：
+您也可以显式地对表格实例或数据进行记忆化，以确保正确的重新渲染：
 
 ```tsx
 import React from 'react';
@@ -810,36 +867,36 @@ function MyTable() {
 }
 ```
 
-**注意：** 此问题存在于底层的 TanStack Table 库中，需要在那里修复。在修复可用之前，上述解决方法应有所帮助。
+**注意：** 此问题存在于底层的 TanStack Table 库中，需要在该库中进行修复。在修复可用之前，上述解决方法应该有所帮助。
 
 ## 许可证
 
-根据 MIT 许可证分发。有关详细信息，请参阅 [LICENSE](LICENSE)。
+MIT 许可证分发。详情请参阅 [LICENSE](LICENSE)。
 
-## 面向 AI 代理
+## 致 AI 代理
 
-适用于 Gravity UI 应用的无头、基于 TanStack Table 的数据网格 — 当您需要可排序、可选择、可分组、可重新排序和虚拟化的表格时，请使用它，而不是在 uikit 的基本 `Table` 上组合原始标记。
+为 Gravity UI 应用设计的无头、基于 TanStack Table 的数据网格 — 当您需要可排序、可选择、可分组、可重排和虚拟化的表格时，请使用它，而不是在 uikit 的基本 `Table` 上组合原始标记。
 
 ### 何时使用
 
 - 需要行或窗口虚拟化的大型数据集（`useRowVirtualizer`、`useWindowRowVirtualizer`）。
-- 列排序、调整大小、重新排序（`ColumnReorderingProvider`）、固定以及每个用户的列设置（`TableSettings`）。
+- 列排序、调整大小、重排（`ColumnReorderingProvider`）、固定以及每个用户的列设置（`TableSettings`）。
 - 行选择（单选/多选、范围选择）以及带有可展开单元格的树形/分组行。
 
 ### 何时避免使用
 
-- 具有少量行且没有高级功能的简单静态表格 — uikit 中内置的 `Table` 来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 更轻量。
-- 非表格列表 — 使用 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 中的 `List`。
-- 电子表格风格的内联单元格编辑 — 此网格侧重于读取和显示，而不是可编辑的电子表格。
+- 只有少量行且没有高级功能的简单静态表格 — uikit 中内置的 `Table`（来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)）更轻量。
+- 非表格列表 — 使用 uikit 中的 `List`（来自 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)）。
+- 电子表格风格的内联单元格编辑 — 此网格侧重于读取/显示，而不是可编辑的电子表格。
 
 ### 常见陷阱
 
 - **您使用 `useTable` 构建表格，然后渲染 `<Table table={table} />`。** 主要 prop 是 `table`（实例），而不是直接在 `<Table>` 上的 `data`/`columns`；将 `data` 和 `columns` 传递给 `useTable`。
 - **类型来自 `@gravity-ui/table/tanstack` 子路径。** 从 `@gravity-ui/table/tanstack` 导入 `ColumnDef`、`RowSelectionState`、`SortingState` 等，而不是从包的根目录导入。
 - **排序需要一个访问器。** 列必须具有 `accessorKey`/`accessorFn` 才能使排序生效；设置 `enableSorting` 并提供 `getRowId`。
-- **React 19 + React Compiler 可以跳过重新渲染。** 这是上游 TanStack Table 的一个问题 — 在组件中添加 `'use no memo'` 指令或对 `data` 进行 memoization。
-- **范围选择在嵌套行时会中断。** 当表格具有分组/嵌套行时，范围选择是未定义行为；使用 `useRowSelectionFixedHandler` 来正确处理分组时的父复选框状态。
+- **React 19 + React Compiler 可能会跳过重新渲染。** 这是上游 TanStack Table 的一个问题 — 向组件添加 `'use no memo'` 指令或记忆化 `data`。
+- **范围选择在嵌套行中会中断。** 当表格具有分组/嵌套行时，范围选择是未定义行为；使用 `useRowSelectionFixedHandler` 来正确处理分组情况下的父复选框状态。
 
-## AI 代理文档
+## 致 AI 代理的文档
 
 已安装版本的代理可读文档位于 `node_modules/@gravity-ui/table/build/docs/INDEX.md`。
