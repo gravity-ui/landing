@@ -200,7 +200,7 @@ será renderizado como:
 
 ### Scripts
 
-Descreve o link para um script com preload:
+Descreve o link para um script com pré-carregamento:
 
 ```typescript
 interface Script {
@@ -453,9 +453,78 @@ export interface LayoutOptions {
 }
 ```
 
+#### Fallbacks de caminho público
+
+Carrega scripts e folhas de estilo iniciais de endereços de backup se o carregamento de `publicPath` falhar.
+
+Uso:
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: ['https://backup.example.com/build/', '/build/'],
+});
+```
+
+Essas opções também estão disponíveis em `createDefaultPlugins({layout: …})`. Habilite o plugin de layout com `pluginsOptions.layout.name`, como no exemplo acima. Omitir `publicPathFallbacks` ou passar `[]` preserva a renderização normal.
+
+Você também pode usar uma função de callback:
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: () =>
+    location.hostname.endsWith('.example.org')
+      ? ['https://backup.example.org/build/', '/build/']
+      : ['/build/'],
+});
+```
+
+A função é executada uma vez e deve ser autônoma, sem closures ou imports. Ela recebe `{publicPath}`; para caminhos primários relativos à raiz, esse valor inclui `layout.prefix`. Retornar `[]` usa o endereço primário sem novas tentativas.
+
+O loader é empacotado e minificado quando o app-layout é compilado. O callback do usuário é serializado do código do servidor compilado usando `Function.prototype.toString()`: transformações como `keepNames` do esbuild podem injetar helpers externos (`__name`) que não estão disponíveis no navegador. Teste os callbacks na sua compilação final do servidor. Se o bootstrap falhar, registros síncronos durante a análise HTML restauram as tags originais via `document.write`, sujeitos a restrições do navegador; a recuperação não pode ajudar se o CSP bloquear os scripts de registro.
+
+Opções de nova tentativa:
+
+```typescript
+interface AssetRetryOptions {
+  retries?: number; // Tentativas adicionais por endereço. Padrão: 0.
+  delayMs?: number; // Atraso antes da primeira nova tentativa, em milissegundos. Padrão: 500.
+  factor?: number; // Multiplicador para atrasos de novas tentativas subsequentes. Padrão: 2.
+  maxDelayMs?: number; // Atraso máximo de nova tentativa, em milissegundos. Padrão: 3000.
+  timeoutMs?: number; // Tempo limite da tentativa, em milissegundos. Padrão: 10000; 0 desabilita.
+}
+```
+
+Passe essas opções como `assetRetry` para `createLayoutPlugin`. Por padrão, um erro de recurso muda para o próximo endereço sem tentar novamente o mesmo URL. Defina `retries` para habilitar tentativas adicionais com atrasos exponenciais. O loader lembra o último endereço bem-sucedido e inicia recursos subsequentes lá, percorrendo os endereços restantes como backups. Uma falha individual não altera o endereço preferido; ele muda apenas após um carregamento bem-sucedido. Recursos em andamento mantêm sua ordem de candidatos. Valores de opção explícitos `undefined` usam os padrões.
+
+Cada tentativa de script ou folha de estilo tem um limite de `timeoutMs` (10000 ms por padrão). Um tempo limite segue a mesma política de nova tentativa de um erro de carregamento: tente o URL atual enquanto houver tentativas, depois tente o próximo endereço. Defina `0` para desabilitar o tempo limite. O loader remove elementos com tempo limite e ignora seus callbacks tardios; remover um script não garante o cancelamento de sua execução.
+
+Endereços de backup devem servir os mesmos arquivos de compilação nos mesmos caminhos relativos. Não inclua parâmetros de consulta ou fragmentos em endereços base. Barras finais são adicionadas e endereços duplicados são removidos automaticamente. Um caminho como `/build/` é relativo à origem da página; inclua qualquer prefixo de aplicativo explicitamente. Permita domínios de backup no CSP e configure CORS.
+
+Comportamento de carregamento:
+
+- Suporta scripts `defer` sem `async` ou `type`, e folhas de estilo sob o caminho principal, preservando nonce e `crossOrigin`. Outros recursos mantêm a renderização normal. Todos os ativos gerenciados de um fragmento de resposta são registrados por um único script inline emitido logo após o bootstrap, na ordem do head (folhas de estilo, depois scripts); suas tags originais não são renderizadas.
+- Folhas de estilo carregam em paralelo. Scripts são executados em ordem após as tentativas de carregamento de folhas de estilo terminarem e o DOM estar pronto. `DOMContentLoaded` não significa que a aplicação terminou de carregar.
+- Falhas finais emitem `app-layout:asset-load-error` em `window`. O detalhe do evento contém `{type, originalUrl, attempts}` e é descrito pelo tipo exportado `AssetLoadError`; `attempts` lista URLs tentados, incluindo retentativas. Registre o manipulador antes que os recursos carreguem. Uma falha final no carregamento de uma folha de estilo não bloqueia scripts; uma falha final no carregamento de um script para a fila de scripts do loader.
+- Para scripts iniciais durante o streaming, use `renderScripts(content, scripts, state)`, depois `renderHeadContent(content, state)` com o mesmo `state: AssetRenderState = {}` para uma única resposta HTML, mesmo que o conteúdo seja regenerado. O bootstrap é emitido uma vez; sua configuração inicial se aplica a toda a resposta. Chamadas diretas a `content.helpers` renderizam tags comuns sem tratamento de fallback.
+
+```ts
+import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
+
+const state: AssetRenderState = {};
+res.write(renderScripts(content, firstScripts, state));
+// ... aguarde os dados e regenere o conteúdo, se necessário.
+res.write(renderHeadContent(content, state));
+```
+
+Chunks lazy exigem configuração separada, como `client.publicPathFallback` no [App Builder](https://github.com/gravity-ui/app-builder). Configure os endereços de backup em ambas as bibliotecas; a lista de fallback não é compartilhada através de uma variável global.
+
 ### @gravity-ui/uikit
 
-Adiciona atributos ao `body`.
+Adiciona atributos ao body.
 
 Uso:
 
@@ -492,9 +561,9 @@ interface UikitPluginOptions {
 
 Adiciona informações de versões de microfrontends à página.
 
-Este plugin cria um objeto global `window.__REMOTE_VERSIONS__` contendo as versões dos microfrontends fornecidas, que pode ser usado por module federation ou arquiteturas de microfrontend semelhantes para determinar quais versões de módulos remotos carregar.
+Este plugin cria um objeto global `window.__REMOTE_VERSIONS__` contendo as versões de microfrontends fornecidas, que podem ser usadas por module federation ou arquiteturas de microfrontends semelhantes para determinar quais versões de módulos remotos carregar.
 
-Pode ser usado em combinação com [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) e a opção `moduleFederation.remotesRuntimeVersioning` para carregar automaticamente módulos remotos com as versões correspondentes.
+Pode ser usado em combinação com o [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) e a opção `moduleFederation.remotesRuntimeVersioning` para carregar automaticamente módulos remotos com as versões correspondentes.
 
 Uso:
 
@@ -554,7 +623,7 @@ app.get((req, res) => {
 })
 ```
 
-## Uso alternativo
+## Uso Alternativo
 
 Com renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` via streaming de HTML:
 
@@ -576,184 +645,35 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-```markdown
-# @gravity/uikit
+  const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
-Um wrapper simples para o Axios que fornece funcionalidades adicionais para facilitar o desenvolvimento de aplicações React.
+  const content = generateRenderContent(plugins, {
+    title: 'Página inicial',
+  });
 
-## Instalação
+  const {htmlAttributes, helpers, bodyContent} = content;
 
-```bash
-npm install @gravity/uikit
-# ou
-yarn add @gravity/uikit
-```
+  res.write(`
+        <!DOCTYPE html>
+        <html ${helpers.attrs({...htmlAttributes})}>
+        <head>
+            ${renderHeadContent(content)}
+        </head>
+        <body ${helpers.attrs(bodyContent.attributes)}>
+            ${renderBodyContent(content)}
+    `);
 
-## Uso
+  const data = await getUserData();
 
-Este wrapper estende o Axios, então você pode usá-lo da mesma forma que usaria o Axios. No entanto, ele também fornece algumas funcionalidades adicionais.
-
-### Configuração
-
-Você pode configurar o wrapper Axios com opções adicionais, como:
-
-*   `baseUrl`: A URL base para todas as requisições.
-*   `headers`: Cabeçalhos padrão a serem incluídos em todas as requisições.
-*   `interceptors`: Interceptadores para requisições e respostas.
-
-```javascript
-import axios from '@gravity/uikit';
-
-const api = axios.create({
-  baseUrl: 'https://api.example.com',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  interceptors: {
-    request: [
-      (config) => {
-        // Faça algo com a configuração da requisição
-        return config;
-      },
-    ],
-    response: [
-      (response) => {
-        // Faça algo com a resposta
-        return response;
-      },
-    ],
-  },
-});
-```
-
-### Requisições
-
-Você pode fazer requisições HTTP da mesma forma que faria com o Axios:
-
-```javascript
-// GET
-api.get('/users').then((response) => {
-  console.log(response.data);
+  res.write(`
+            ${content.renderHelpers.renderInlineScript(`
+                window.__DATA__ = ${htmlescape(data)};
+            `)}
+        </body>
+        </html>
+    `);
+  res.end();
 });
 
-// POST
-api.post('/users', { name: 'John Doe' }).then((response) => {
-  console.log(response.data);
-});
-
-// PUT
-api.put('/users/1', { name: 'Jane Doe' }).then((response) => {
-  console.log(response.data);
-});
-
-// DELETE
-api.delete('/users/1').then((response) => {
-  console.log(response.data);
-});
-```
-
-### Funcionalidades Adicionais
-
-#### Interceptadores de Requisição e Resposta
-
-O wrapper permite que você defina interceptadores de requisição e resposta para modificar requisições antes que elas sejam enviadas ou respostas antes que sejam retornadas para o seu código.
-
-```javascript
-api.interceptors.request.use((config) => {
-  // Adicionar um token de autenticação aos cabeçalhos
-  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-  return config;
-});
-
-api.interceptors.response.use(
-  (response) => {
-    // Lidar com respostas de sucesso
-    return response;
-  },
-  (error) => {
-    // Lidar com erros de resposta
-    if (error.response.status === 401) {
-      // Redirecionar para a página de login
-      window.location.href = '/login';
-    }
-    return Promise.reject(error);
-  }
-);
-```
-
-#### Gerenciamento de Erros
-
-O wrapper fornece um gerenciamento de erros mais robusto, permitindo que você lide com diferentes códigos de status de erro de forma centralizada.
-
-```javascript
-api.get('/users').catch((error) => {
-  if (error.response) {
-    // A requisição foi feita e o servidor respondeu com um status code
-    // que está fora do range de 2xx
-    console.error(error.response.data);
-    console.error(error.response.status);
-    console.error(error.response.headers);
-  } else if (error.request) {
-    // A requisição foi feita mas nenhuma resposta foi recebida
-    console.error(error.request);
-  } else {
-    // Algo aconteceu na configuração da requisição que disparou um erro
-    console.error('Error', error.message);
-  }
-});
-```
-
-## Exemplo de Código
-
-```javascript
-import React, { useState, useEffect } from 'react';
-import axios from '@gravity/uikit';
-
-function UserList() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('/users');
-        setUsers(response.data);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  if (loading) {
-    return <div>Carregando usuários...</div>;
-  }
-
-  if (error) {
-    return <div>Erro ao carregar usuários: {error.message}</div>;
-  }
-
-  return (
-    <ul>
-      {users.map((user) => (
-        <li key={user.id}>{user.name}</li>
-      ))}
-    </ul>
-  );
-}
-
-export default UserList;
-```
-
-## Contribuição
-
-Sinta-se à vontade para contribuir com este projeto. Por favor, consulte o arquivo `CONTRIBUTING.md` para obter mais informações.
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT.
+app.listen(3000);
 ```

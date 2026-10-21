@@ -418,6 +418,38 @@ working. To exclude a custom part of a row from starting a drag, call `preventDe
 when the application supplies its own drag auto-scroll implementation; running both at once can
 produce competing scroll writes.
 
+Custom drag handles should read `attributes`, `listeners`, and `setActivatorNodeRef` from
+`DraggableRowContext` and attach them to the handle element. This reuses the row's DnD
+registration. Do not call `useSortable` again with the same row id: a handle mounted later
+by virtualization would replace the row's registered DOM node.
+
+#### Keyboard reordering and accessibility
+
+`ReorderingProvider` supports keyboard row dragging.
+Focus a drag handle, press Space or Enter to pick up the row, use the arrow keys to move it, and press
+Space or Enter to drop it. Escape cancels the move.
+Keyboard dragging applies only to rows; keyboard interactions with column headers remain unchanged.
+
+Use `accessibility` to customize dnd-kit's screen reader instructions, announcements, announcement
+container, and focus restoration for both keyboard and pointer dragging.
+When row and column providers are nested, they share the same DnD context and accessibility settings;
+provider order does not matter.
+
+```tsx
+<ReorderingProvider
+  table={table}
+  onReorder={handleReorder}
+  accessibility={{
+    screenReaderInstructions: {
+      draggable:
+        'Press Space to pick up a row, arrow keys to move, Enter to drop, or Escape to cancel.',
+    },
+  }}
+>
+  <Table table={table} />
+</ReorderingProvider>
+```
+
 #### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.

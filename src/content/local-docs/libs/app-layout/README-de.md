@@ -49,7 +49,7 @@ interface RenderParams<Data, Plugins> {
   // Allgemeine Optionen
   // Seitentitel
   title: string;
-  // Sprache der Seite, wird auf das html-Tag gesetzt
+  // Sprache der Seite, wird auf dem html-Tag gesetzt
   lang?: string;
   isMobile?: boolean;
 
@@ -200,7 +200,7 @@ wird gerendert als:
 
 ### Scripts
 
-Beschreibt einen Link zu einem Skript mit Preload:
+Beschreibt den Link zu einem Skript mit Preload:
 
 ```typescript
 interface Script {
@@ -233,7 +233,7 @@ wird gerendert als:
 
 #### Style sheets
 
-Beschreibt einen Link zu Styles:
+Beschreibt den Link zu Stylesheets:
 
 ```typescript
 interface Stylesheet {
@@ -318,7 +318,7 @@ Es gibt einige Plugins in diesem Paket:
 
 ### Google Analytics
 
-Fügt einen Google Analytics Zähler zur Seite hinzu.
+Fügt einen Google Analytics-Zähler zur Seite hinzu.
 
 Verwendung:
 
@@ -359,7 +359,7 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-Fügt Yandex Metrika Zähler zur Seite hinzu.
+Fügt Yandex Metrika-Zähler zur Seite hinzu.
 
 Verwendung:
 
@@ -427,7 +427,7 @@ Verwendung:
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([
-  createLayoutPlugin({manifest: 'path/to/assets-manifest.json', publicPath: '/build/'}),
+  createLayoutPlugin({manifest: 'pfad/zu/assets-manifest.json', publicPath: '/build/'}),
 ]);
 
 app.get((req, res) => {
@@ -453,6 +453,75 @@ export interface LayoutOptions {
 }
 ```
 
+#### Fallbacks für den öffentlichen Pfad
+
+Lädt initiale Skripte und Stylesheets von Backup-Adressen, falls das Laden vom `publicPath` fehlschlägt.
+
+Verwendung:
+
+```js
+createLayoutPlugin({
+  manifest: 'pfad/zu/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: ['https://backup.example.com/build/', '/build/'],
+});
+```
+
+Diese Optionen sind auch in `createDefaultPlugins({layout: …})` verfügbar. Aktivieren Sie das Layout-Plugin mit `pluginsOptions.layout.name`, wie im obigen Beispiel. Wenn Sie `publicPathFallbacks` weglassen oder `[]` übergeben, wird das normale Rendering beibehalten.
+
+Sie können auch eine Callback-Funktion verwenden:
+
+```js
+createLayoutPlugin({
+  manifest: 'pfad/zu/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: () =>
+    location.hostname.endsWith('.example.org')
+      ? ['https://backup.example.org/build/', '/build/']
+      : ['/build/'],
+});
+```
+
+Die Funktion wird einmal ausgeführt und muss in sich geschlossen sein, ohne Closures oder Importe. Sie empfängt `{publicPath}`; für primäre Pfade, die relativ zur Wurzel sind, enthält dieser Wert `layout.prefix`. Die Rückgabe von `[]` verwendet die primäre Adresse ohne Wiederholungsversuche.
+
+Der Loader wird beim Erstellen von app-layout gebündelt und minimiert. Der Benutzer-Callback wird aus kompiliertem Servercode mithilfe von `Function.prototype.toString()` serialisiert: Transformationen wie esbuild `keepNames` können externe Helfer (`__name`) einfügen, die im Browser nicht verfügbar sind. Testen Sie Callbacks in Ihrem endgültigen Server-Build. Wenn Bootstrap fehlschlägt, stellen synchrone Registrierungen während der HTML-Analyse die ursprünglichen Tags über `document.write` wieder her, vorbehaltlich von Browserbeschränkungen; eine Wiederherstellung kann nicht helfen, wenn CSP die Registrierungsskripte blockiert.
+
+Wiederholungsoptionen:
+
+```typescript
+interface AssetRetryOptions {
+  retries?: number; // Zusätzliche Versuche pro Adresse. Standard: 0.
+  delayMs?: number; // Verzögerung vor dem ersten Wiederholungsversuch in Millisekunden. Standard: 500.
+  factor?: number; // Multiplikator für nachfolgende Wiederholungsverzögerungen. Standard: 2.
+  maxDelayMs?: number; // Maximale Wiederholungsverzögerung in Millisekunden. Standard: 3000.
+  timeoutMs?: number; // Timeout für den Versuch in Millisekunden. Standard: 10000; 0 deaktiviert.
+}
+```
+
+Übergeben Sie diese Optionen als `assetRetry` an `createLayoutPlugin`. Standardmäßig wechselt ein Ressourcenfehler zur nächsten Adresse, ohne dieselbe URL erneut zu versuchen. Setzen Sie `retries` auf einen Wert größer als 0, um zusätzliche Versuche mit exponentiellen Verzögerungen zu aktivieren. Der Loader merkt sich die zuletzt erfolgreiche Adresse und beginnt mit nachfolgenden Ressourcen dort, wobei er die verbleibenden Adressen als Backups durchläuft. Ein einzelner Fehler ändert nicht die bevorzugte Adresse; er ändert sich erst nach einem erfolgreichen Laden. In Bearbeitung befindliche Ressourcen behalten ihre Kandidatenreihenfolge. Explizite `undefined`-Optionen verwenden die Standardwerte.
+
+Jeder Skript- oder Stylesheet-Versuch hat ein `timeoutMs`-Limit (standardmäßig 10000 ms). Ein Timeout folgt der gleichen Wiederholungsrichtlinie wie ein Ladefehler: Versuchen Sie die aktuelle URL erneut, solange noch Versuche übrig sind, und versuchen Sie dann die nächste Adresse. Setzen Sie den Wert auf 0, um das Timeout zu deaktivieren. Der Loader entfernt abgelaufene Elemente und ignoriert deren späte Callbacks; das Entfernen eines Skripts garantiert nicht die Unterbrechung seiner Ausführung.
+
+Backup-Adressen müssen dieselben Build-Dateien unter denselben relativen Pfaden bereitstellen. Fügen Sie keine Abfrageparameter oder Fragmente zu Basisadressen hinzu. Nachgestellte Schrägstriche werden automatisch hinzugefügt und doppelte Adressen entfernt. Ein Pfad wie `/build/` ist relativ zum Ursprung der Seite; fügen Sie jeden Anwendungspräfix explizit hinzu. Erlauben Sie Backup-Domains in CSP und konfigurieren Sie CORS.
+
+Ladeverhalten:
+
+- Unterstützt `defer`-Skripte ohne `async` oder `type` sowie Stylesheets unter dem primären Pfad, wobei Nonce und `crossOrigin` erhalten bleiben. Andere Ressourcen behalten das normale Rendering. Alle verwalteten Assets eines Response-Fragments werden von einem einzigen Inline-Skript registriert, das direkt nach dem Bootstrap in der Reihenfolge des Head ausgegeben wird (Stylesheets, dann Skripte); ihre ursprünglichen Tags werden nicht gerendert.
+- Stylesheets werden parallel geladen. Skripte werden nach Abschluss der Stylesheet-Versuche und wenn der DOM bereit ist, in der Reihenfolge ausgeführt. `DOMContentLoaded` bedeutet nicht, dass die Anwendung vollständig geladen ist.
+- Bei endgültigen Fehlern wird `app-layout:asset-load-error` auf `window` ausgelöst. Die Event-Details enthalten `{type, originalUrl, attempts}` und werden durch den exportierten `AssetLoadError`-Typ beschrieben; `attempts` listet versuchte URLs auf, einschließlich Wiederholungsversuchen. Registrieren Sie den Handler, bevor die Ressourcen geladen werden. Ein endgültiger Fehler beim Laden eines Stylesheets blockiert keine Skripte; ein endgültiger Fehler beim Laden eines Skripts stoppt die Skriptwarteschlange des Loaders.
+- Für frühe Skripte während des Streamings verwenden Sie `renderScripts(content, scripts, state)`, dann `renderHeadContent(content, state)` mit demselben `state: AssetRenderState = {}` für eine HTML-Antwort, auch wenn der Inhalt neu generiert wird. Der Bootstrap wird einmal ausgegeben; seine anfängliche Konfiguration gilt für die gesamte Antwort. Direkte `content.helpers`-Aufrufe rendern normale Tags ohne Fallback-Handling.
+
+```ts
+import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
+
+const state: AssetRenderState = {};
+res.write(renderScripts(content, firstScripts, state));
+// ... await data and regenerate content if needed.
+res.write(renderHeadContent(content, state));
+```
+
+Lazy Chunks erfordern eine separate Konfiguration, wie z. B. `client.publicPathFallback` in [App Builder](https://github.com/gravity-ui/app-builder). Konfigurieren Sie die Backup-Adressen in beiden Bibliotheken; die Fallback-Liste wird nicht über eine globale Variable geteilt.
+
 ### @gravity-ui/uikit
 
 Fügt Body-Attribute hinzu.
@@ -467,7 +536,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Startseite',
+      title: 'Home page',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -490,9 +559,9 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-Fügt Informationen zu Microfrontend-Versionen zur Seite hinzu.
+Fügt Versionsinformationen von Microfrontends zur Seite hinzu.
 
-Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die bereitgestellten Microfrontend-Versionen enthält. Dies kann von Modul-Föderations- oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
+Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die bereitgestellten Microfrontend-Versionen enthält. Dies kann von Modul-Federation oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
 
 Es kann in Kombination mit [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) und der Option `moduleFederation.remotesRuntimeVersioning` verwendet werden, um Remote-Module mit den entsprechenden Versionen automatisch zu laden.
 
@@ -506,7 +575,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'Startseite',
+      title: 'Home page',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -525,9 +594,9 @@ Plugin-Optionen:
 type RemoteVersionsPluginOptions = Record<string, string>;
 ```
 
-### Helfer
+### Helpers
 
-Es gibt einen Helfer zum Erstellen aller Plugins:
+Es gibt einen Helper zum Erstellen aller Plugins:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -538,7 +607,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: 'Startseite',
+        title: 'Home page',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -576,31 +645,10 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-```markdown
-# @gravity/uikit
-
-Dies ist ein Beispiel für die Verwendung von `@gravity/uikit` mit React und Express.
-
-## Installation
-
-```bash
-npm install @gravity/uikit react react-dom express htmlescape
-```
-
-## Verwendung
-
-```javascript
-import express from 'express';
-import htmlescape from 'htmlescape';
-import { createDefaultPlugins, generateRenderContent, renderHeadContent, renderBodyContent } from '@gravity/uikit';
-
-const app = express();
-
-app.get('/', async (req, res) => {
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
-    title: 'Startseite',
+    title: 'Home page',
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;
@@ -628,9 +676,4 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(3000);
-```
-
-## Lizenz
-
-MIT
 ```

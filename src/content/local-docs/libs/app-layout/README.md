@@ -506,7 +506,7 @@ Backup addresses must serve the same build files at the same relative paths. Do 
 
 Loading behavior:
 
-- Supports `defer` scripts without `async` or `type`, and stylesheets under the primary path, preserving nonce and `crossOrigin`. Other resources retain normal rendering.
+- Supports `defer` scripts without `async` or `type`, and stylesheets under the primary path, preserving nonce and `crossOrigin`. Other resources retain normal rendering. All managed assets of a response fragment are registered by a single inline script emitted right after the bootstrap, in head order (stylesheets, then scripts); their original tags are not rendered.
 - Stylesheets load in parallel. Scripts run in order after stylesheet attempts finish and the DOM is ready. `DOMContentLoaded` does not mean the application has finished loading.
 - Final failures emit `app-layout:asset-load-error` on `window`. The event detail contains `{type, originalUrl, attempts}` and is described by the exported `AssetLoadError` type; `attempts` lists attempted URLs, including retries. Register the handler before resources load. A final stylesheet loading failure does not block scripts; a final script loading failure stops the loader’s script queue.
 - For early scripts during streaming, use `renderScripts(content, scripts, state)`, then `renderHeadContent(content, state)` with the same `state: AssetRenderState = {}` for one HTML response, even if content is regenerated. Bootstrap is emitted once; its initial configuration applies to the entire response. Direct `content.helpers` calls render ordinary tags without fallback handling.
