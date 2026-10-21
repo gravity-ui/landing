@@ -37,19 +37,19 @@ app.listen(3000);
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // 任何 JSON 兼容的数据，将设置为页面的 window.__DATA__
+  // 任何 JSON 兼容的数据，将会在页面上设置为 window.__DATA__
   data?: Data;
   // 网站图标
   icon?: Icon;
-  // 用于设置相应标签的 nonce
+  // 将会设置到相应标签上的 nonce 值
   nonce?: string;
-  // base 标签属性
+  // base 标签的属性
   base?: Base;
 
   // 通用选项
   // 页面标题
   title: string;
-  // 页面的语言，将设置为 html 标签
+  // 页面的语言，将设置到 html 标签上
   lang?: string;
   isMobile?: boolean;
 
@@ -64,16 +64,16 @@ interface RenderParams<Data, Plugins> {
   scripts?: Script[];
   // 样式表标签
   styleSheets?: Stylesheet[];
-  // 内联代码的 script 标签
+  // 内联脚本标签
   inlineScripts?: string[];
-  // 内联样式的 style 标签
+  // 内联样式标签
   inlineStyleSheets?: string[];
 
-  // body 标签内容
+  // body 标签的内容
   bodyContent?: {
     // body 标签的类名
     className?: string;
-    // body 属性
+    // body 标签的属性
     attributes?: string;
     // root div 标签之前的 body 内容
     beforeRoot?: string;
@@ -255,7 +255,7 @@ const styleSheet = {
 <link href="url/to/stylesheet" rel="stylesheet" />
 ```
 
-## Plugins
+## 插件
 
 渲染函数可以通过插件进行扩展。插件可以重写用户定义的渲染内容。
 插件是一个具有 `name` 和 `apply` 属性的对象：
@@ -264,7 +264,7 @@ const styleSheet = {
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // 通过 `renderLayout` 函数的 `pluginsOptions` 参数传递。
+    options: Options | undefined; // 通过 `pluginsOptions` 参数在 `renderLayout` 函数中传递。
     commonOptions: CommonOptions;
     renderContent: RenderContent;
     /** @deprecated 使用 `renderContent.helpers` 代替 */
@@ -419,7 +419,7 @@ export type MetrikaOptions = {
 
 ### Layout
 
-从 webpack assets manifest 文件添加脚本和样式。
+从 webpack assets manifest 文件加载脚本和样式。
 
 用法：
 
@@ -453,9 +453,78 @@ export interface LayoutOptions {
 }
 ```
 
+#### Public path 备用地址
+
+如果从 `publicPath` 加载失败，则从备用地址加载初始脚本和样式表。
+
+用法：
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: ['https://backup.example.com/build/', '/build/'],
+});
+```
+
+这些选项也可在 `createDefaultPlugins({layout: …})` 中使用。通过 `pluginsOptions.layout.name` 启用布局插件，如上例所示。省略 `publicPathFallbacks` 或传入 `[]` 会保留正常渲染。
+
+您也可以使用回调函数：
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: () =>
+    location.hostname.endsWith('.example.org')
+      ? ['https://backup.example.org/build/', '/build/']
+      : ['/build/'],
+});
+```
+
+该函数只运行一次，并且必须是自包含的，不包含闭包或导入。它接收 `{publicPath}`；对于根相对的原始路径，此值包含 `layout.prefix`。返回 `[]` 会使用原始地址而不重试。
+
+加载器在构建 app-layout 时会被打包和最小化。用户回调使用 `Function.prototype.toString()` 从编译后的服务器代码中序列化：像 esbuild `keepNames` 这样的转换可能会注入浏览器中不可用的外部辅助函数（`__name`）。请在您的最终服务器构建中测试回调。如果引导程序抛出错误，在 HTML 解析期间同步注册会通过 `document.write` 恢复原始标签，但这会受到浏览器限制；如果 CSP 阻止了注册脚本，则无法恢复。
+
+重试选项：
+
+```typescript
+interface AssetRetryOptions {
+  retries?: number; // 每个地址的额外尝试次数。默认值：0。
+  delayMs?: number; // 第一次重试前的延迟（毫秒）。默认值：500。
+  factor?: number; // 后续重试延迟的乘数。默认值：2。
+  maxDelayMs?: number; // 最大重试延迟（毫秒）。默认值：3000。
+  timeoutMs?: number; // 尝试超时（毫秒）。默认值：10000；0 表示禁用。
+}
+```
+
+将这些选项作为 `assetRetry` 传递给 `createLayoutPlugin`。默认情况下，资源错误会在不重试同一 URL 的情况下切换到下一个地址。将 `retries` 设置为启用具有指数延迟的额外尝试。加载器会记住最后一个成功的地址，并从那里开始后续资源加载，然后依次尝试剩余的地址作为备用。单个失败不会改变首选地址；只有在成功加载后才会更改。正在进行的资源会保留其候选顺序。显式 `undefined` 选项值将使用默认值。
+
+每个脚本或样式表尝试都有一个 `timeoutMs` 限制（默认为 10000 毫秒）。超时遵循与加载错误相同的重试策略：在还有尝试次数的情况下重试当前 URL，然后尝试下一个地址。设置为 `0` 可禁用超时。加载器会移除已超时的元素并忽略其延迟的回调；移除脚本并不保证能取消其执行。
+
+备用地址必须在相同的相对路径下提供相同的构建文件。请勿在基本地址中包含查询参数或片段。尾部斜杠会自动添加，重复的地址也会被自动删除。像 `/build/` 这样的路径是相对于页面的源的；请显式包含任何应用程序前缀。在 CSP 中允许备用域并配置 CORS。
+
+加载行为：
+
+- 支持 `defer` 脚本（不带 `async` 或 `type`），以及主路径下的样式表，并保留 `nonce` 和 `crossOrigin`。其他资源保持正常渲染。响应片段的所有托管资源都由一个内联脚本在引导后立即注册，按头部顺序（样式表，然后是脚本）；它们的原始标签不会被渲染。
+- 样式表并行加载。脚本在样式表尝试加载完成且 DOM 就绪后按顺序运行。`DOMContentLoaded` 并不意味着应用程序已完成加载。
+- 最终失败会在 `window` 上触发 `app-layout:asset-load-error` 事件。事件详情包含 `{type, originalUrl, attempts}`，并由导出的 `AssetLoadError` 类型描述；`attempts` 列出了尝试过的 URL，包括重试。请在资源加载之前注册处理程序。最终的样式表加载失败不会阻止脚本；最终的脚本加载失败会停止加载器的脚本队列。
+- 对于流式传输期间的早期脚本，请使用 `renderScripts(content, scripts, state)`，然后使用相同的 `state: AssetRenderState = {}` 调用 `renderHeadContent(content, state)` 来生成一个 HTML 响应，即使内容被重新生成。引导程序只发出一次；其初始配置适用于整个响应。直接调用 `content.helpers` 会渲染普通的标签，不带回退处理。
+
+```ts
+import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
+
+const state: AssetRenderState = {};
+res.write(renderScripts(content, firstScripts, state));
+// ... 等待数据并根据需要重新生成内容。
+res.write(renderHeadContent(content, state));
+```
+
+延迟的块需要单独配置，例如 [App Builder](https://github.com/gravity-ui/app-builder) 中的 `client.publicPathFallback`。在两个库中都配置备份地址；回退列表不会通过全局变量共享。
+
 ### @gravity-ui/uikit
 
-添加 body 属性。
+添加 `body` 属性。
 
 用法：
 
@@ -490,9 +559,9 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-向页面添加微前端版本信息。
+将微前端版本信息添加到页面。
 
-此插件创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本，可供模块联邦或类似的微前端架构使用，以确定要加载的远程模块版本。
+此插件创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本，模块联邦或类似的微前端架构可以使用它来确定加载哪些版本的远程模块。
 
 它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 和 `moduleFederation.remotesRuntimeVersioning` 选项结合使用，以自动加载具有相应版本的远程模块。
 
@@ -527,7 +596,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-有一个创建所有插件的辅助函数：
+有一个用于创建所有插件的辅助函数：
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -554,9 +623,9 @@ app.get((req, res) => {
 })
 ```
 
-## Alternative usage
+## 替代用法
 
-通过 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 等部分渲染器进行 HTML 流式传输：
+通过部分渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 进行 HTML 流式传输：
 
 ```js
 import express from 'express';
@@ -576,7 +645,6 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-```zh
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {

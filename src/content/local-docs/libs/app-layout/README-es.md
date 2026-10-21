@@ -62,7 +62,7 @@ interface RenderParams<Data, Plugins> {
   links?: Link[];
   // etiquetas script
   scripts?: Script[];
-  // etiquetas style
+  // hojas de estilo
   styleSheets?: Stylesheet[];
   // etiquetas script con código en línea
   inlineScripts?: string[];
@@ -233,7 +233,7 @@ se renderizará como:
 
 #### Hojas de estilo
 
-Describe el enlace a estilos:
+Describen el enlace a estilos:
 
 ```typescript
 interface Stylesheet {
@@ -257,8 +257,8 @@ se renderizará como:
 
 ## Plugins
 
-La función de renderizado puede extenderse mediante plugins. Un plugin puede reescribir el contenido de renderizado definido por el usuario.
-Un plugin es un objeto con propiedades `name` y `apply`:
+La función de renderizado se puede extender mediante plugins. Un plugin puede reescribir el contenido de renderizado definido por el usuario.
+Un plugin es un objeto con las propiedades `name` y `apply`:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
@@ -273,9 +273,52 @@ interface Plugin<Options = any, Name = string> {
 }
 
 interface CommonOptions {
-  
+  name: string;
+  title: string;
+  lang?: string;
+  isMobile?: boolean;
+}
 
-Añade un contador de Google Analytics a la página.
+export interface HeadContent {
+  base?: Base;
+  scripts: Script[];
+  helpers: RenderHelpers;
+  links: Link[];
+  meta: Meta[];
+  styleSheets: Stylesheet[];
+  inlineStyleSheets: string[];
+  inlineScripts: string[];
+  title: string;
+}
+
+export interface BodyContent {
+  attributes: Attributes;
+  beforeRoot: string[];
+  root?: string;
+  afterRoot: string[];
+}
+
+export interface RenderContent extends HeadContent {
+  htmlAttributes: Attributes;
+  bodyContent: BodyContent;
+}
+
+export interface RenderHelpers {
+  renderScript(script: Script): string;
+  renderInlineScript(content: string): string;
+  renderStyle(style: Stylesheet): string;
+  renderInlineStyle(content: string): string;
+  renderMeta(meta: Meta): string;
+  renderLink(link: Link): string;
+  attrs(obj: Attributes): string;
+}
+```
+
+Hay algunos plugins en este paquete:
+
+### Google analytics
+
+Agrega un contador de Google Analytics a la página.
 
 Uso:
 
@@ -316,7 +359,7 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-Añade contadores de métricas de Yandex a la página.
+Agrega contadores de Yandex Metrika a la página.
 
 Uso:
 
@@ -376,7 +419,7 @@ export type MetrikaOptions = {
 
 ### Layout
 
-Añade scripts y estilos del archivo de manifiesto de assets de webpack.
+Agrega scripts y estilos desde el archivo de manifiesto de assets de webpack.
 
 Uso:
 
@@ -410,9 +453,78 @@ export interface LayoutOptions {
 }
 ```
 
+#### Fallbacks de ruta pública
+
+Carga scripts y hojas de estilo iniciales desde direcciones de respaldo si la carga desde `publicPath` falla.
+
+Uso:
+
+```js
+createLayoutPlugin({
+  manifest: 'ruta/a/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: ['https://backup.example.com/build/', '/build/'],
+});
+```
+
+Estas opciones también están disponibles en `createDefaultPlugins({layout: …})`. Habilita el plugin de layout con `pluginsOptions.layout.name`, como en el ejemplo anterior. Omitir `publicPathFallbacks` o pasar `[]` preserva la renderización normal.
+
+También puedes usar una función de callback:
+
+```js
+createLayoutPlugin({
+  manifest: 'ruta/a/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: () =>
+    location.hostname.endsWith('.example.org')
+      ? ['https://backup.example.org/build/', '/build/']
+      : ['/build/'],
+});
+```
+
+La función se ejecuta una vez y debe ser autocontenida, sin cierres ni importaciones. Recibe `{publicPath}`; para rutas primarias relativas a la raíz, este valor incluye `layout.prefix`. Devolver `[]` usa la dirección principal sin reintentos.
+
+El cargador se empaqueta y se minimiza cuando se compila app-layout. El callback del usuario se serializa desde el código del servidor compilado usando `Function.prototype.toString()`: transformaciones como `keepNames` de esbuild pueden inyectar ayudantes externos (`__name`) que no están disponibles en el navegador. Prueba los callbacks en tu compilación de servidor final. Si bootstrap falla, los registros síncronos durante el análisis HTML restauran las etiquetas originales a través de `document.write`, sujeto a las restricciones del navegador; la recuperación no puede ayudar si CSP bloquea los scripts de registro.
+
+Opciones de reintento:
+
+```typescript
+interface AssetRetryOptions {
+  retries?: number; // Intentos adicionales por dirección. Predeterminado: 0.
+  delayMs?: number; // Retraso antes del primer reintento, en milisegundos. Predeterminado: 500.
+  factor?: number; // Multiplicador para los retrasos de reintento subsiguientes. Predeterminado: 2.
+  maxDelayMs?: number; // Retraso máximo de reintento, en milisegundos. Predeterminado: 3000.
+  timeoutMs?: number; // Tiempo de espera del intento, en milisegundos. Predeterminado: 10000; 0 deshabilita.
+}
+```
+
+Pasa estas opciones como `assetRetry` a `createLayoutPlugin`. Por defecto, un error de recurso cambia a la siguiente dirección sin reintentar la misma URL. Establece `retries` para habilitar intentos adicionales con retrasos exponenciales. El cargador recuerda la última dirección exitosa y comienza los recursos subsiguientes allí, recorriendo las direcciones restantes como respaldos. Un fallo individual no cambia la dirección preferida; solo cambia después de una carga exitosa. Los recursos en curso mantienen su orden de candidatos. Los valores de opción explícitamente `undefined` usan los predeterminados.
+
+Cada intento de script o hoja de estilo tiene un límite de `timeoutMs` (10000 ms por defecto). Un tiempo de espera sigue la misma política de reintento que un error de carga: reintenta la URL actual mientras queden intentos, luego prueba la siguiente dirección. Establece `0` para deshabilitar el tiempo de espera. El cargador elimina los elementos con tiempo de espera agotado e ignora sus callbacks tardíos; eliminar un script no garantiza la cancelación de su ejecución.
+
+Las direcciones de respaldo deben servir los mismos archivos de compilación en las mismas rutas relativas. No incluyas parámetros de consulta ni fragmentos en las direcciones base. Las barras diagonales finales se agregan y las direcciones duplicadas se eliminan automáticamente. Una ruta como `/build/` es relativa al origen de la página; incluye explícitamente cualquier prefijo de aplicación. Permite dominios de respaldo en CSP y configura CORS.
+
+Comportamiento de carga:
+
+- Admite scripts `defer` sin `async` ni `type`, y hojas de estilo bajo la ruta principal, conservando nonce y `crossOrigin`. Otros recursos conservan la representación normal. Todos los activos gestionados de un fragmento de respuesta se registran mediante un único script en línea emitido justo después del arranque, en orden de encabezado (hojas de estilo, luego scripts); sus etiquetas originales no se renderizan.
+- Las hojas de estilo se cargan en paralelo. Los scripts se ejecutan en orden después de que finalizan los intentos de carga de hojas de estilo y el DOM está listo. `DOMContentLoaded` no significa que la aplicación haya terminado de cargarse.
+- Los fallos finales emiten `app-layout:asset-load-error` en `window`. El detalle del evento contiene `{type, originalUrl, attempts}` y se describe mediante el tipo exportado `AssetLoadError`; `attempts` enumera las URL intentadas, incluidas las reintentos. Registre el manejador antes de que se carguen los recursos. Un fallo final en la carga de una hoja de estilo no bloquea los scripts; un fallo final en la carga de un script detiene la cola de scripts del cargador.
+- Para scripts tempranos durante la transmisión, use `renderScripts(content, scripts, state)`, luego `renderHeadContent(content, state)` con el mismo `state: AssetRenderState = {}` para una respuesta HTML, incluso si el contenido se regenera. El arranque se emite una vez; su configuración inicial se aplica a toda la respuesta. Las llamadas directas a `content.helpers` renderizan etiquetas ordinarias sin manejo de respaldo.
+
+```ts
+import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
+
+const state: AssetRenderState = {};
+res.write(renderScripts(content, firstScripts, state));
+// ... esperar datos y regenerar contenido si es necesario.
+res.write(renderHeadContent(content, state));
+```
+
+Los fragmentos diferidos requieren configuración separada, como `client.publicPathFallback` en [App Builder](https://github.com/gravity-ui/app-builder). Configure las direcciones de respaldo en ambas bibliotecas; la lista de respaldo no se comparte a través de una variable global.
+
 ### @gravity-ui/uikit
 
-Añade atributos al body.
+Agrega atributos al `body`.
 
 Uso:
 
@@ -447,9 +559,9 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-Añade información de versiones de microfrontends a la página.
+Agrega información de versiones de microfrontends a la página.
 
-Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, las cuales pueden ser utilizadas por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
+Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, que pueden ser utilizadas por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
 
 Puede usarse en combinación con [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) y la opción `moduleFederation.remotesRuntimeVersioning` para cargar automáticamente módulos remotos con las versiones correspondientes.
 
@@ -490,7 +602,7 @@ Hay un helper para crear todos los plugins:
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction(
-    createDefaultPlugins({layout: {manifest: 'ruta/a/assets-manifest.json'}})
+    createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}})
 );
 
 app.get((req, res) => {
@@ -513,7 +625,7 @@ app.get((req, res) => {
 
 ## Uso alternativo
 
-Con renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` a través de streaming de html:
+Con renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` a través de streaming HTML:
 
 ```js
 import express from 'express';
@@ -533,38 +645,35 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-```markdown
-# @gravity/uikit
+  const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
-Este es un paquete de componentes de UI para React, construido con Styled Components.
+  const content = generateRenderContent(plugins, {
+    title: 'Página de inicio',
+  });
 
-## Instalación
+  const {htmlAttributes, helpers, bodyContent} = content;
 
-```bash
-npm install @gravity/uikit
-# o
-yarn add @gravity/uikit
-```
+  res.write(`
+        <!DOCTYPE html>
+        <html ${helpers.attrs({...htmlAttributes})}>
+        <head>
+            ${renderHeadContent(content)}
+        </head>
+        <body ${helpers.attrs(bodyContent.attributes)}>
+            ${renderBodyContent(content)}
+    `);
 
-## Uso
+  const data = await getUserData();
 
-```jsx
-import { Button } from '@gravity/uikit';
+  res.write(`
+            ${content.renderHelpers.renderInlineScript(`
+                window.__DATA__ = ${htmlescape(data)};
+            `)}
+        </body>
+        </html>
+    `);
+  res.end();
+});
 
-function MyComponent() {
-  return <Button onClick={() => alert('¡Hola!')}>Haz clic aquí</Button>;
-}
-```
-
-## Documentación
-
-La documentación completa está disponible en [gravity.github.io/uikit](https://gravity.github.io/uikit).
-
-## Contribución
-
-Si deseas contribuir a este proyecto, por favor, lee nuestras [guías de contribución](CONTRIBUTING.md).
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+app.listen(3000);
 ```
