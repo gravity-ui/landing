@@ -150,7 +150,7 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        storybookUrl: 'https://preview.yandexcloud.dev/blog-constructor/',
+        storybookUrl: 'https://preview.gravity-ui.com/blog-constructor/',
         readmeUrl: getReadmeUrls(
             'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main',
         ),
