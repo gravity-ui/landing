@@ -1,7 +1,7 @@
 ## Descripción corta
 
-El propósito del componente `DFDialog` es facilitar la creación de formularios, ya que utiliza `react-final-form` internamente.
-Soporta varios tipos de campos predefinidos, pero el usuario puede extenderlo registrando nuevos tipos mediante `registerDialogControl`.
+El propósito del componente `DFDialog` es facilitar la creación de formularios, utilizando `react-final-form` internamente.
+Soporta varios tipos de campos predefinidos, pero el usuario puede extenderlo registrando nuevos campos mediante `registerDialogControl`.
 
 ### Controles
 
@@ -11,7 +11,7 @@ Soporta varios tipos de campos predefinidos, pero el usuario puede extenderlo re
   - `multi-text` - array de strings definido por el usuario
   - `checkbox` - casilla de verificación
   - `tumbler` - interruptor
-  - `radio` - botón de opción
+  - `radio` - botón de radio
   - `editable-list` - lista de strings eliminables
   - `multi-editable-list` - lista múltiple de strings eliminables
   - `text area` - área de texto
@@ -40,7 +40,7 @@ $ npm install @gravity-ui/dialog-fields
 $ npm install @gravity-ui/dialog-fields react@18 react-dom@18
 ```
 
-Dependiendo de tu gestor de paquetes, es posible que necesites instalar `peerDependencies` manualmente.
+Dependiendo de tu gestor de paquetes, es posible que necesites instalar las `peerDependencies` manualmente.
 
 ## Uso
 
@@ -82,4 +82,30 @@ function MyForm() {
 }
 ```
 
-Consulta más ejemplos en [storybook](https://preview.yandexcloud.dev/dialog-fields).
+### Visibilidad condicional
+
+Los campos y tabs soportan `visibilityCondition`. Con un string `when`, `isActive`
+recibe el valor de ese campo:
+
+```ts
+visibilityCondition: {
+  when: 'register',
+  isActive: (value) => Boolean(value),
+}
+```
+
+Usa un array de nombres de campos para depender de múltiples valores. `isActive` recibe
+los valores como argumentos separados en el mismo orden que `when`:
+
+```ts
+visibilityCondition: {
+  when: ['multiConsumer', 'register'],
+  isActive: (multiConsumer, register) => Boolean(multiConsumer && register),
+}
+```
+
+Los nombres son rutas desde la raíz del formulario, incluyendo prefijos de tab como
+`general.register`. La visibilidad se actualiza cuando cambia cualquier campo referenciado.
+Un campo oculto por su condición se desmonta, no solo se oculta visualmente.
+
+Ver más ejemplos en [storybook](https://preview.yandexcloud.dev/dialog-fields).

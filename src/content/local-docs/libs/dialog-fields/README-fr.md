@@ -1,7 +1,7 @@
 ## Description courte
 
-Le composant `DFDialog` a pour but de faciliter la création de formulaires. Il utilise `react-final-form` en interne.
-Il prend en charge plusieurs types de champs prédéfinis, mais l'utilisateur peut en ajouter de nouveaux en enregistrant des contrôles personnalisés via `registerDialogControl`.
+Le composant `DFDialog` a pour but de faciliter la création de formulaires, il utilise `react-final-form` en interne.
+Il prend en charge plusieurs types de champs prédéfinis, mais l'utilisateur peut l'étendre en enregistrant de nouveaux champs à l'aide de `registerDialogControl`.
 
 ### Contrôles
 
@@ -15,7 +15,7 @@ Il prend en charge plusieurs types de champs prédéfinis, mais l'utilisateur pe
   - `editable-list` - liste de chaînes de caractères supprimables
   - `multi-editable-list` - liste multiple de chaînes de caractères supprimables
   - `text area` - zone de texte
-  - `select` - liste déroulante
+  - `select` - sélection
   - `block` - permet d'ajouter un `ReactNode`
 - [Enregistrement de contrôles personnalisés](https://preview.yandexcloud.dev/dialog-fields/?path=/story/tutorials-custom-control-registration)
 
@@ -81,5 +81,31 @@ function MyForm() {
   );
 }
 ```
+
+### Visibilité conditionnelle
+
+Les champs et les onglets prennent en charge `visibilityCondition`. Avec une chaîne de caractères `when`, `isActive`
+reçoit la valeur de ce champ :
+
+```ts
+visibilityCondition: {
+  when: 'register',
+  isActive: (value) => Boolean(value),
+}
+```
+
+Utilisez un tableau de noms de champs pour dépendre de plusieurs valeurs. `isActive` reçoit les
+valeurs comme arguments séparés dans le même ordre que `when` :
+
+```ts
+visibilityCondition: {
+  when: ['multiConsumer', 'register'],
+  isActive: (multiConsumer, register) => Boolean(multiConsumer && register),
+}
+```
+
+Les noms sont des chemins depuis la racine du formulaire, y compris les préfixes d'onglet tels que
+`general.register`. La visibilité se met à jour lorsque tout champ référencé change.
+Un champ masqué par sa condition est démonté, pas seulement visuellement caché.
 
 Voir plus d'exemples dans [storybook](https://preview.yandexcloud.dev/dialog-fields).

@@ -1,6 +1,6 @@
 ## 简要说明
 
-`DFDialog` 组件旨在简化表单的创建，它内部使用了 `react-final-form`。
+`DFDialog` 组件旨在简化表单创建过程，它内部使用了 `react-final-form`。
 它支持几种预定义的字段类型，但用户可以通过 `registerDialogControl` 注册新的字段类型来扩展它。
 
 ### 控件
@@ -8,7 +8,7 @@
 - [基础控件](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-00-base-controls)
   - `plain` - 静态文本
   - `text` - 可编辑文本
-  - `multi-text` - 用户定义的字符串数组
+  - `multi-text` - 用户自定义的字符串数组
   - `checkbox` - 复选框
   - `tumbler` - 开关
   - `radio` - 单选按钮
@@ -25,7 +25,7 @@
 - [单标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) 和 [多标签页表单](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
 - [垂直/水平标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
 - [隐藏字段和标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
-- [根据值联动字段](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
+- [按值关联字段](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
 - [字段级验证](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
 - [表单级验证](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
 - [虚拟化标签页](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)
@@ -36,7 +36,7 @@
 
 ```bash
 $ npm install @gravity-ui/dialog-fields
-# 如果您尚未安装 react/react-dom，请安装所需版本
+# 如果您尚未安装，请安装所需的 react/react-dom 版本
 $ npm install @gravity-ui/dialog-fields react@18 react-dom@18
 ```
 
@@ -82,4 +82,29 @@ function MyForm() {
 }
 ```
 
-更多示例请参见 [storybook](https://preview.yandexcloud.dev/dialog-fields)。
+### 条件可见性
+
+字段和标签页支持 `visibilityCondition`。使用字符串 `when`，`isActive`
+会接收该字段的值：
+
+```ts
+visibilityCondition: {
+  when: 'register',
+  isActive: (value) => Boolean(value),
+}
+```
+
+使用字段名数组来依赖多个值。`isActive` 会按 `when` 中相同的顺序接收值作为单独的参数：
+
+```ts
+visibilityCondition: {
+  when: ['multiConsumer', 'register'],
+  isActive: (multiConsumer, register) => Boolean(multiConsumer && register),
+}
+```
+
+名称是从表单根目录开始的路径，包括标签页前缀，例如
+`general.register`。当任何引用的字段发生变化时，可见性会更新。
+被其条件隐藏的字段会被卸载，而不仅仅是视觉上隐藏。
+
+在 [storybook](https://preview.yandexcloud.dev/dialog-fields) 中查看更多示例。
