@@ -41,7 +41,7 @@ interface RenderParams<Data, Plugins> {
   data?: Data;
   // favicon
   icon?: Icon;
-  // 적절한 태그에 설정될 nonce
+  // 태그에 설정될 nonce
   nonce?: string;
   // base 태그 속성
   base?: Base;
@@ -55,7 +55,7 @@ interface RenderParams<Data, Plugins> {
 
   // html 속성
   htmlAttributes?: string;
-  // header 태그 내용
+  // 헤더 태그 내용
   // meta 태그
   meta?: Meta[];
   // link 태그
@@ -200,7 +200,7 @@ const link = {
 
 ### Scripts
 
-스크립트와 함께 사전 로드를 설명합니다:
+스크립트와 함께 preload 링크를 설명합니다:
 
 ```typescript
 interface Script {
@@ -482,9 +482,9 @@ createLayoutPlugin({
 });
 ```
 
-함수는 한 번 실행되며 클로저나 import 없이 자체적으로 포함되어야 합니다. `{publicPath}`를 인자로 받으며, 루트 상대 기본 경로의 경우 이 값에 `layout.prefix`가 포함됩니다. `[]`를 반환하면 재시도 없이 기본 주소를 사용합니다.
+함수는 한 번 실행되며 클로저나 가져오기 없이 자체적으로 포함되어야 합니다. `{publicPath}`를 인자로 받으며, 루트 상대 기본 경로의 경우 이 값에 `layout.prefix`가 포함됩니다. `[]`를 반환하면 재시도 없이 기본 주소를 사용합니다.
 
-로더는 app-layout이 빌드될 때 번들링되고 축소됩니다. 사용자 콜백은 `Function.prototype.toString()`을 사용하여 컴파일된 서버 코드로 직렬화됩니다. esbuild `keepNames`와 같은 변환은 브라우저에서 사용할 수 없는 외부 헬퍼(`__name`)를 주입할 수 있습니다. 최종 서버 빌드에서 콜백을 테스트하세요. 부트스트랩이 실패하면 HTML 파싱 중 동기식 등록이 `document.write`를 통해 원래 태그를 복원하지만, 브라우저 제한 사항이 적용됩니다. CSP가 등록 스크립트를 차단하면 복구가 도움이 되지 않습니다.
+로더는 app-layout이 빌드될 때 번들링되고 축소됩니다. 사용자 콜백은 `Function.prototype.toString()`을 사용하여 컴파일된 서버 코드로 직렬화됩니다. esbuild `keepNames`와 같은 변환은 브라우저에서 사용할 수 없는 외부 헬퍼(`__name`)를 주입할 수 있습니다. 최종 서버 빌드에서 콜백을 테스트하세요. 부트스트랩이 실패하면 HTML 파싱 중 동기식 등록이 `document.write`를 통해 스크립트 태그를 복원하지만, 브라우저 제한 사항이 적용됩니다. 복구는 CSP가 등록 스크립트를 차단하는 경우 도움이 되지 않습니다.
 
 재시도 옵션:
 
@@ -498,29 +498,30 @@ interface AssetRetryOptions {
 }
 ```
 
-이 옵션들을 `assetRetry`로 `createLayoutPlugin`에 전달하세요. 기본적으로 리소스 오류가 발생하면 동일한 URL을 재시도하지 않고 다음 주소로 전환됩니다. `retries`를 설정하여 지수적 지연을 가진 추가 시도를 활성화하세요. 로더는 마지막으로 성공한 주소를 기억하고 다음 리소스를 거기서 시작하며, 백업으로 나머지 주소를 순환합니다. 개별 실패는 선호하는 주소를 변경하지 않고 성공적인 로드 후에만 변경됩니다. 진행 중인 리소스는 후보 순서를 유지합니다. 명시적인 `undefined` 옵션 값은 기본값을 사용합니다.
+이 옵션들을 `assetRetry`로 `createLayoutPlugin`에 전달하세요. 기본적으로 리소스 오류는 동일한 URL을 재시도하지 않고 다음 주소로 전환됩니다. `retries`를 설정하여 지수적 지연을 가진 추가 시도를 활성화하세요. 로더는 마지막으로 성공한 주소를 기억하고 후속 스크립트를 거기서 시작하며, 백업으로 남은 주소를 순환합니다. 스타일시트는 항상 `publicPath`에서 시작한 다음 구성된 순서대로 백업 주소를 시도합니다. 개별 실패는 기본 주소를 변경하지 않습니다. 성공적인 로드 후에만 변경됩니다. 진행 중인 리소스는 후보 순서를 유지합니다. 명시적인 `undefined` 옵션 값은 기본값을 사용합니다.
 
-각 스크립트 또는 스타일시트 시도에는 `timeoutMs` 제한(기본값 10000ms)이 있습니다. 타임아웃은 로딩 오류와 동일한 재시도 정책을 따릅니다: 남은 시도가 있으면 현재 URL을 재시도하고 다음 주소를 시도합니다. 타임아웃을 비활성화하려면 `0`으로 설정하세요. 로더는 타임아웃된 요소를 제거하고 늦은 콜백을 무시합니다. 스크립트를 제거한다고 해서 실행 취소가 보장되지는 않습니다.
+각 스크립트 또는 스타일시트 시도는 `timeoutMs` 제한(기본값 10000ms)을 가집니다. 타임아웃은 로딩 오류와 동일한 재시도 정책을 따릅니다: 남은 시도가 있으면 현재 URL을 재시도하고, 다음 주소를 시도합니다. 타임아웃을 비활성화하려면 `0`으로 설정하세요. 로더는 타임아웃된 요소를 제거하고 늦은 콜백을 무시합니다. 스크립트를 제거한다고 해서 실행이 취소되는 것은 보장되지 않습니다.
 
 백업 주소는 동일한 빌드 파일을 동일한 상대 경로로 제공해야 합니다. 기본 주소에 쿼리 매개변수나 프래그먼트를 포함하지 마세요. 후행 슬래시가 자동으로 추가되고 중복 주소가 제거됩니다. `/build/`와 같은 경로는 페이지의 origin을 기준으로 합니다. 애플리케이션 접두사를 명시적으로 포함하세요. CSP에서 백업 도메인을 허용하고 CORS를 구성하세요.
 
 로딩 동작:
 
-- `defer` 스크립트 (`async` 또는 `type` 없음) 및 기본 경로의 스타일시트를 `nonce` 및 `crossOrigin`을 유지하면서 지원합니다. 다른 리소스는 일반 렌더링을 유지합니다. 응답 조각의 모든 관리 대상 에셋은 부트스트랩 직후에 생성되는 단일 인라인 스크립트로 등록됩니다 (헤드 순서: 스타일시트, 스크립트). 원래 태그는 렌더링되지 않습니다.
-- 스타일시트는 병렬로 로드됩니다. 스크립트는 스타일시트 로드 시도가 완료되고 DOM이 준비된 후에 순서대로 실행됩니다. `DOMContentLoaded`는 애플리케이션 로드가 완료되었음을 의미하지 않습니다.
-- 최종 실패 시 `window`에 `app-layout:asset-load-error` 이벤트가 발생합니다. 이벤트 상세 정보에는 `{type, originalUrl, attempts}`가 포함되며, 내보낸 `AssetLoadError` 타입으로 설명됩니다. `attempts`는 재시도를 포함하여 시도된 URL 목록입니다. 리소스 로드 전에 핸들러를 등록하세요. 최종 스타일시트 로드 실패는 스크립트를 차단하지 않습니다. 최종 스크립트 로드 실패는 로더의 스크립트 큐를 중지합니다.
-- 스트리밍 중 초기 스크립트의 경우, `renderScripts(content, scripts, state)`를 사용한 다음, 동일한 `state: AssetRenderState = {}`로 `renderHeadContent(content, state)`를 사용하여 하나의 HTML 응답에 대해 콘텐츠가 재생성되더라도 사용합니다. 부트스트랩은 한 번만 생성되며, 초기 구성은 전체 응답에 적용됩니다. `content.helpers`를 직접 호출하면 대체 처리 없이 일반 태그가 렌더링됩니다.
+- `defer` 스크립트(`async` 또는 `type` 없음) 및 기본 경로의 스타일시트를 `nonce` 및 `crossOrigin`을 유지하면서 지원합니다. 다른 리소스는 정상적으로 렌더링됩니다. 응답 조각의 모든 관리 대상 에셋은 부트스트랩 직후에 생성되는 단일 인라인 스크립트에 등록됩니다 (스타일시트, 그 다음 스크립트). 원본 스크립트 태그는 렌더링되지 않습니다.
+- 스타일시트는 HTML에 포함되며 JavaScript 로더가 시작되지 않더라도 병렬로 로드됩니다. 재시도 중에 부분적으로 스타일이 적용된 콘텐츠가 보일 수 있습니다. 스크립트는 스타일시트 시도가 완료되고 DOM이 준비된 후에 순서대로 실행됩니다. `DOMContentLoaded`는 애플리케이션 로딩이 완료되었음을 의미하지 않습니다.
+- 최종 실패 시 `window`에 `app-layout:asset-load-error` 이벤트가 발생합니다. 이벤트 상세 정보에는 `{type, originalUrl, attempts}`가 포함되며, 내보낸 `AssetLoadError` 타입으로 설명됩니다. `attempts`는 재시도를 포함하여 시도된 URL 목록입니다. 리소스 로드 전에 핸들러를 등록하세요. 최종 스타일시트 로딩 실패는 스크립트를 차단하지 않습니다. 최종 스크립트 로딩 실패는 로더의 스크립트 큐를 중지합니다.
+- 스트리밍 중 초기 스크립트의 경우 `renderScripts(content, scripts, state)`를 사용한 다음, 동일한 `state: AssetRenderState = {}`로 `renderHeadContent(content, state)`를 호출하여 하나의 HTML 응답에 대해 콘텐츠가 재생성되더라도 사용합니다. `renderHeadContent`는 HTML 응답당 한 번 호출해야 합니다. 부트스트랩은 한 번만 생성되며, 초기 구성은 전체 응답에 적용됩니다. 직접 `content.helpers`를 호출하면 폴백 처리 없이 일반 태그가 렌더링됩니다.
+- 스트리밍 중 스타일시트의 `timeoutMs`는 해당 참조가 HTML에 도착할 때 시작됩니다. `DOMContentLoaded`에서 찾을 수 없는 등록된 스타일시트 링크는 실패로 보고되며 스크립트를 차단하지 않습니다.
 
 ```ts
 import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
 
 const state: AssetRenderState = {};
 res.write(renderScripts(content, firstScripts, state));
-// ... 데이터를 기다리고 필요한 경우 콘텐츠를 재생성합니다.
+// ... 데이터 로드 및 필요한 경우 콘텐츠 재생성.
 res.write(renderHeadContent(content, state));
 ```
 
-지연 청크는 별도의 구성이 필요합니다. 예를 들어 [App Builder](https://github.com/gravity-ui/app-builder)의 `client.publicPathFallback`과 같습니다. 두 라이브러리 모두에서 백업 주소를 구성하세요. 대체 목록은 전역 변수를 통해 공유되지 않습니다.
+지연 로드 청크는 별도의 구성이 필요합니다. 예를 들어 [App Builder](https://github.com/gravity-ui/app-builder)의 `client.publicPathFallback`과 같습니다. 두 라이브러리 모두에서 백업 주소를 구성하세요. 폴백 목록은 전역 변수를 통해 공유되지 않습니다.
 
 ### @gravity-ui/uikit
 

@@ -484,7 +484,7 @@ createLayoutPlugin({
 
 La función se ejecuta una vez y debe ser autocontenida, sin cierres ni importaciones. Recibe `{publicPath}`; para rutas primarias relativas a la raíz, este valor incluye `layout.prefix`. Devolver `[]` usa la dirección principal sin reintentos.
 
-El cargador se empaqueta y se minimiza cuando se compila app-layout. El callback del usuario se serializa desde el código del servidor compilado usando `Function.prototype.toString()`: transformaciones como `keepNames` de esbuild pueden inyectar ayudantes externos (`__name`) que no están disponibles en el navegador. Prueba los callbacks en tu compilación de servidor final. Si bootstrap falla, los registros síncronos durante el análisis HTML restauran las etiquetas originales a través de `document.write`, sujeto a las restricciones del navegador; la recuperación no puede ayudar si CSP bloquea los scripts de registro.
+El cargador se empaqueta y se minimiza cuando se compila app-layout. El callback del usuario se serializa desde el código del servidor compilado usando `Function.prototype.toString()`: transformaciones como `keepNames` de esbuild pueden inyectar ayudantes externos (`__name`) que no están disponibles en el navegador. Prueba los callbacks en tu compilación de servidor final. Si bootstrap falla, los registros síncronos durante el análisis HTML restauran las etiquetas de script a través de `document.write`, sujeto a restricciones del navegador; la recuperación no puede ayudar si CSP bloquea los scripts de registro.
 
 Opciones de reintento:
 
@@ -498,18 +498,19 @@ interface AssetRetryOptions {
 }
 ```
 
-Pasa estas opciones como `assetRetry` a `createLayoutPlugin`. Por defecto, un error de recurso cambia a la siguiente dirección sin reintentar la misma URL. Establece `retries` para habilitar intentos adicionales con retrasos exponenciales. El cargador recuerda la última dirección exitosa y comienza los recursos subsiguientes allí, recorriendo las direcciones restantes como respaldos. Un fallo individual no cambia la dirección preferida; solo cambia después de una carga exitosa. Los recursos en curso mantienen su orden de candidatos. Los valores de opción explícitamente `undefined` usan los predeterminados.
+Pasa estas opciones como `assetRetry` a `createLayoutPlugin`. Por defecto, un error de recurso cambia a la siguiente dirección sin reintentar la misma URL. Establece `retries` para habilitar intentos adicionales con retrasos exponenciales. El cargador recuerda la última dirección exitosa y comienza los scripts subsiguientes allí, recorriendo las direcciones restantes como respaldos. Las hojas de estilo siempre comienzan en `publicPath`, luego intentan las direcciones de respaldo en el orden configurado. Un fallo individual no cambia la dirección preferida; solo cambia después de una carga exitosa. Los recursos en curso mantienen su orden de candidatos. Los valores de opción explícitamente `undefined` usan los predeterminados.
 
-Cada intento de script o hoja de estilo tiene un límite de `timeoutMs` (10000 ms por defecto). Un tiempo de espera sigue la misma política de reintento que un error de carga: reintenta la URL actual mientras queden intentos, luego prueba la siguiente dirección. Establece `0` para deshabilitar el tiempo de espera. El cargador elimina los elementos con tiempo de espera agotado e ignora sus callbacks tardíos; eliminar un script no garantiza la cancelación de su ejecución.
+Cada intento de script o hoja de estilo tiene un límite de `timeoutMs` (10000 ms por defecto). Un tiempo de espera sigue la misma política de reintento que un error de carga: reintenta la URL actual mientras queden intentos, luego intenta la siguiente dirección. Establece `0` para deshabilitar el tiempo de espera. El cargador elimina los elementos que han superado el tiempo de espera e ignora sus callbacks tardíos; eliminar un script no garantiza la cancelación de su ejecución.
 
 Las direcciones de respaldo deben servir los mismos archivos de compilación en las mismas rutas relativas. No incluyas parámetros de consulta ni fragmentos en las direcciones base. Las barras diagonales finales se agregan y las direcciones duplicadas se eliminan automáticamente. Una ruta como `/build/` es relativa al origen de la página; incluye explícitamente cualquier prefijo de aplicación. Permite dominios de respaldo en CSP y configura CORS.
 
 Comportamiento de carga:
 
-- Admite scripts `defer` sin `async` ni `type`, y hojas de estilo bajo la ruta principal, conservando nonce y `crossOrigin`. Otros recursos conservan la representación normal. Todos los activos gestionados de un fragmento de respuesta se registran mediante un único script en línea emitido justo después del arranque, en orden de encabezado (hojas de estilo, luego scripts); sus etiquetas originales no se renderizan.
-- Las hojas de estilo se cargan en paralelo. Los scripts se ejecutan en orden después de que finalizan los intentos de carga de hojas de estilo y el DOM está listo. `DOMContentLoaded` no significa que la aplicación haya terminado de cargarse.
-- Los fallos finales emiten `app-layout:asset-load-error` en `window`. El detalle del evento contiene `{type, originalUrl, attempts}` y se describe mediante el tipo exportado `AssetLoadError`; `attempts` enumera las URL intentadas, incluidas las reintentos. Registre el manejador antes de que se carguen los recursos. Un fallo final en la carga de una hoja de estilo no bloquea los scripts; un fallo final en la carga de un script detiene la cola de scripts del cargador.
-- Para scripts tempranos durante la transmisión, use `renderScripts(content, scripts, state)`, luego `renderHeadContent(content, state)` con el mismo `state: AssetRenderState = {}` para una respuesta HTML, incluso si el contenido se regenera. El arranque se emite una vez; su configuración inicial se aplica a toda la respuesta. Las llamadas directas a `content.helpers` renderizan etiquetas ordinarias sin manejo de respaldo.
+- Admite scripts `defer` sin `async` ni `type`, y hojas de estilo bajo la ruta principal, conservando `nonce` y `crossOrigin`. Otros recursos conservan la representación normal. Todos los activos gestionados de un fragmento de respuesta se registran mediante un único script en línea emitido justo después del arranque, en orden de cabecera (hojas de estilo, luego scripts); las etiquetas de script originales no se renderizan.
+- Las hojas de estilo se incluyen en el HTML y se cargan en paralelo, incluso si el cargador de JavaScript no puede iniciarse. Es posible que se muestre contenido parcialmente estilizado durante los reintentos. Los scripts se ejecutan en orden después de que finalizan los intentos de carga de hojas de estilo y el DOM está listo. `DOMContentLoaded` no significa que la aplicación haya terminado de cargar.
+- Los fallos finales emiten `app-layout:asset-load-error` en `window`. Los detalles del evento contienen `{type, originalUrl, attempts}` y se describen mediante el tipo exportado `AssetLoadError`; `attempts` enumera las URL intentadas, incluidos los reintentos. Registre el manejador antes de que se carguen los recursos. Un fallo final en la carga de una hoja de estilo no bloquea los scripts; un fallo final en la carga de un script detiene la cola de scripts del cargador.
+- Para scripts tempranos durante la transmisión, use `renderScripts(content, scripts, state)`, luego `renderHeadContent(content, state)` con el mismo `state: AssetRenderState = {}` para una respuesta HTML, incluso si el contenido se regenera. Llame a `renderHeadContent` una vez por respuesta HTML. El arranque se emite una vez; su configuración inicial se aplica a toda la respuesta. Las llamadas directas a `content.helpers` renderizan etiquetas normales sin manejo de respaldo.
+- Durante la transmisión, el `timeoutMs` de una hoja de estilo comienza cuando su referencia llega al HTML. Los enlaces de hoja de estilo registrados que no se encuentran en `DOMContentLoaded` se informan como fallidos y no bloquean los scripts.
 
 ```ts
 import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
@@ -520,7 +521,7 @@ res.write(renderScripts(content, firstScripts, state));
 res.write(renderHeadContent(content, state));
 ```
 
-Los fragmentos diferidos requieren configuración separada, como `client.publicPathFallback` en [App Builder](https://github.com/gravity-ui/app-builder). Configure las direcciones de respaldo en ambas bibliotecas; la lista de respaldo no se comparte a través de una variable global.
+Los fragmentos diferidos requieren una configuración separada, como `client.publicPathFallback` en [App Builder](https://github.com/gravity-ui/app-builder). Configure las direcciones de respaldo en ambas bibliotecas; la lista de respaldo no se comparte a través de una variable global.
 
 ### @gravity-ui/uikit
 
@@ -561,7 +562,7 @@ interface UikitPluginOptions {
 
 Agrega información de versiones de microfrontends a la página.
 
-Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, que pueden ser utilizadas por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
+Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, las cuales pueden ser utilizadas por module federation o arquitecturas de microfrontends similares para determinar qué versiones de módulos remotos cargar.
 
 Puede usarse en combinación con [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) y la opción `moduleFederation.remotesRuntimeVersioning` para cargar automáticamente módulos remotos con las versiones correspondientes.
 
