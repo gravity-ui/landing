@@ -11,19 +11,19 @@ npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravi
 ```jsx
 import {createRoot} from 'react-dom/client';
 import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
 function App() {
   return (
-    <ThemeProvider>
+    <Provider>
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Date: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 
@@ -42,18 +42,18 @@ await settings.loadLocale('ru');
 function App() {
   return (
     // 设置组件使用的语言。
-    <ThemeProvider lang="ru">
+    <Provider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label htmlFor="date-picker">Дата: </label>
+        <label htmlFor="date-picker">日期: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
-如果应用支持语言切换，请在应用首次加载时预加载所有支持的区域设置，或在切换语言之前加载区域设置：
+如果应用支持语言切换，请在应用首次加载时预加载所有支持的区域设置，或者在切换语言之前加载区域设置：
 
 ```jsx
 // 预加载区域设置
@@ -73,7 +73,7 @@ function App() {
     });
   };
 
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
+  return <Provider lang={lang}>...</Provider>;
 }
 ```
 
@@ -93,6 +93,10 @@ addLanguageKeysets<PartialKeysets>(lang, {...});
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
+## 迁移
+
+- 从 4.x 到 5.x (`@gravity-ui/uikit` v8)：[docs/migration-4-to-5.md](docs/migration-4-to-5.md)
+
 ## 开发
 
 要启动带有 storybook 的开发服务器，请运行以下命令：
@@ -107,7 +111,7 @@ npm start
 
 ## 致 AI 代理
 
-Gravity UI 应用的 React 日期和时间控件 — 基于 `@gravity-ui/date-utils` 构建的日期/时间选择器、日历以及绝对/相对范围选择器。
+用于 Gravity UI 应用的 React 日期和时间控件 — 基于 `@gravity-ui/date-utils` 构建的日期/时间选择器、日历以及绝对/相对范围选择器。
 
 ### 何时使用
 
@@ -119,13 +123,13 @@ Gravity UI 应用的 React 日期和时间控件 — 基于 `@gravity-ui/date-ut
 ### 何时不要使用
 
 - 普通文本或数字输入、按钮或其他通用控件 — 请使用 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)。
-- 低级别的日期数学、解析、格式化或时区处理（无 UI） — 请直接使用 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils)。
+- 低级日期数学、解析、格式化或时区处理（无 UI） — 请直接使用 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils)。
 
 ### 常见陷阱
 
 - **值是 `DateTime` 对象，而不是 JS `Date`。** 组件使用 [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) 中的 `dateTime()`；传递和读取 `DateTime`，而不是原生 `Date` 或 ISO 字符串。
-- **需要 uikit 设置。** 在 `ThemeProvider` 中渲染并导入 `@gravity-ui/uikit/styles/styles.css`；`@gravity-ui/uikit` 和 `@gravity-ui/date-utils` 是必需的对等依赖项。
-- **区域设置已加载，而不仅仅是设置。** 通过 `ThemeProvider` 的 `lang` 设置语言，但首先使用 `@gravity-ui/date-utils` 中的 `settings.loadLocale('ru')` 加载区域设置数据，否则日期将以默认区域设置渲染。
+- **需要 uikit 设置。** 在 `@gravity-ui/uikit` 的 `Provider` 中渲染，并导入 `@gravity-ui/uikit/styles/styles.css`；`@gravity-ui/uikit` v8 和 `@gravity-ui/date-utils` 是必需的对等依赖项。
+- **区域设置已加载，而不仅仅是设置。** 通过 `Provider` 的 `lang` 设置语言，但首先使用 `@gravity-ui/date-utils` 中的 `settings.loadLocale('ru')` 加载区域设置数据，否则日期将以默认区域设置渲染。
 - **组件特定的翻译使用 `addLanguageKeysets`。** 对于 `en`/`ru` 以外的语言，请使用 `@gravity-ui/uikit/i18n` 中的 `addLanguageKeysets` 注册键集，并使用此处导出的 `Keysets`/`PartialKeysets` 类型。
 
 ## 致 AI 代理的文档
