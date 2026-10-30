@@ -69,6 +69,32 @@ function MyForm() {
 }
 ```
 
+### Conditional visibility
+
+Fields and tabs support `visibilityCondition`. With a string `when`, `isActive`
+receives the value of that field:
+
+```ts
+visibilityCondition: {
+  when: 'register',
+  isActive: (value) => Boolean(value),
+}
+```
+
+Use an array of field names to depend on multiple values. `isActive` receives the
+values as separate arguments in the same order as `when`:
+
+```ts
+visibilityCondition: {
+  when: ['multiConsumer', 'register'],
+  isActive: (multiConsumer, register) => Boolean(multiConsumer && register),
+}
+```
+
+Names are paths from the form root, including tab prefixes such as
+`general.register`. Visibility updates when any referenced field changes.
+A field hidden by its condition is unmounted, not just visually hidden.
+
 See more examples in [storybook](https://preview.yandexcloud.dev/dialog-fields).
 
 

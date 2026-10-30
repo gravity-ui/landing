@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/markdown-editor@15.48.2`
+> Generated for `@gravity-ui/markdown-editor@15.49.0`
 
 # @gravity-ui/markdown-editor documentation
 
-Documentation for the **15.48.2** version of `@gravity-ui/markdown-editor`.
+Documentation for the **15.49.0** version of `@gravity-ui/markdown-editor`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/markdown-editor/build/docs/`).
@@ -95,14 +95,14 @@ function Editor({onSubmit}) {
 
 Read more:
 
-- [How to connect the editor in the Create React App](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
-- [How to add preview for markup mode](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
-- [How to add HTML extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
-- [How to add Latex extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
-- [How to add Mermaid extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
-- [How to write extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-creation--docs)
-- [How to add GPT extension](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-gpt--docs)
-- [How to add text binding extension in markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
+- [How to connect the editor in the Create React App](https://gravity-ui.github.io/markdown-editor/getting-started/create-react-app.html)
+- [How to add preview for markup mode](https://gravity-ui.github.io/markdown-editor/getting-started/preview.html)
+- [How to add HTML extension](https://gravity-ui.github.io/markdown-editor/extensions/html-block.html)
+- [How to add Latex extension](https://gravity-ui.github.io/markdown-editor/extensions/latex-extension.html)
+- [How to add Mermaid extension](https://gravity-ui.github.io/markdown-editor/extensions/mermaid-extension.html)
+- [How to write extension](https://gravity-ui.github.io/markdown-editor/develop/extension-creation.html)
+- [How to add GPT extension](https://gravity-ui.github.io/markdown-editor/extensions/gpt.html)
+- [How to add text binding extension in markdown](https://gravity-ui.github.io/markdown-editor/develop/extension-with-popup.html)
 
 ### Development
 
@@ -127,24 +127,25 @@ Don't forget to call `configure()` from [UIKit](https://github.com/gravity-ui/ui
 
 ### Contributing
 
-- [Contributor Guidelines](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
+- [Contributor Guidelines](https://gravity-ui.github.io/markdown-editor/contributing.html)
 
 ## Guides
 
-- [guidelines-contributions](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/guidelines-contributions.md)
-- [how-to-add-editor-with-create-react-app](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-editor-with-create-react-app.md)
-- [how-to-add-editor-with-nextjs](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-editor-with-nextjs.md)
-- [how-to-add-preview](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-preview.md)
-- [how-to-add-text-binding-extension-in-markdown](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-text-binding-extension-in-markdown.md)
-- [how-to-connect-gpt-extensions](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-gpt-extensions.md)
-- [how-to-connect-html-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-html-extension.md)
-- [how-to-connect-latex-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-latex-extension.md)
-- [how-to-connect-mermaid-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-connect-mermaid-extension.md)
-- [how-to-create-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-create-extension.md)
-- [how-to-customize-the-editor](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-customize-the-editor.md)
-- [how-to-customize-toolbars](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-customize-toolbars.md)
-- [Visual Testing with Playwright](https://unpkg.com/@gravity-ui/markdown-editor@15.48.2/build/docs/guides/how-to-add-visual-test.md)
+- [Exporters](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/core-exporters.md) — WysiwygEditorOptions.exporters registers named exporter factories. Each factory receives the final schema and logger, after schema overrides and before plugins, actions, and views.
+- [guidelines-contributions](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/guidelines-contributions.md)
+- [how-to-add-editor-with-create-react-app](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-add-editor-with-create-react-app.md)
+- [how-to-add-editor-with-nextjs](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-add-editor-with-nextjs.md)
+- [how-to-add-preview](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-add-preview.md)
+- [how-to-add-text-binding-extension-in-markdown](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-add-text-binding-extension-in-markdown.md)
+- [how-to-connect-gpt-extensions](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-connect-gpt-extensions.md)
+- [how-to-connect-html-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-connect-html-extension.md)
+- [how-to-connect-latex-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-connect-latex-extension.md)
+- [how-to-connect-mermaid-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-connect-mermaid-extension.md)
+- [how-to-create-extension](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-create-extension.md)
+- [how-to-customize-the-editor](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-customize-the-editor.md)
+- [how-to-customize-toolbars](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-customize-toolbars.md)
+- [Visual Testing with Playwright](https://unpkg.com/@gravity-ui/markdown-editor@15.49.0/build/docs/guides/how-to-add-visual-test.md)
 
 ---
 
-> Docs for `@gravity-ui/markdown-editor@15.48.2`. Versioned at: `https://gravity-ui.com/llms/markdown-editor/15.48.2/llms.txt` (exact), `https://gravity-ui.com/llms/markdown-editor/15/llms.txt` (latest of major 15), `https://gravity-ui.com/llms/markdown-editor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/markdown-editor@15.49.0`. Versioned at: `https://gravity-ui.com/llms/markdown-editor/15.49.0/llms.txt` (exact), `https://gravity-ui.com/llms/markdown-editor/15/llms.txt` (latest of major 15), `https://gravity-ui.com/llms/markdown-editor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
