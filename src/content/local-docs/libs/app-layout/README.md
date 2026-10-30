@@ -484,7 +484,7 @@ createLayoutPlugin({
 
 The function runs once and must be self-contained, without closures or imports. It receives `{publicPath}`; for root-relative primary paths, this value includes `layout.prefix`. Returning `[]` uses the primary address without retries.
 
-The loader is bundled and minified when app-layout is built. The user callback is serialized from compiled server code using `Function.prototype.toString()`: transformations such as esbuild `keepNames` can inject external helpers (`__name`) that are unavailable in the browser. Test callbacks in your final server build. If bootstrap throws, synchronous registrations during HTML parsing restore the original tags via `document.write`, subject to browser restrictions; recovery cannot help if CSP blocks the registration scripts.
+The loader is bundled and minified when app-layout is built. The user callback is serialized from compiled server code using `Function.prototype.toString()`: transformations such as esbuild `keepNames` can inject external helpers (`__name`) that are unavailable in the browser. Test callbacks in your final server build. If bootstrap throws, synchronous registrations during HTML parsing restore script tags via `document.write`, subject to browser restrictions; recovery cannot help if CSP blocks the registration scripts.
 
 Retry options:
 
@@ -498,7 +498,7 @@ interface AssetRetryOptions {
 }
 ```
 
-Pass these options as `assetRetry` to `createLayoutPlugin`. By default, a resource error switches to the next address without retrying the same URL. Set `retries` to enable additional attempts with exponential delays. The loader remembers the last successful address and starts subsequent resources there, cycling through the remaining addresses as backups. An individual failure does not change the preferred address; it changes only after a successful load. In-flight resources keep their candidate order. Explicit `undefined` option values use the defaults.
+Pass these options as `assetRetry` to `createLayoutPlugin`. By default, a resource error switches to the next address without retrying the same URL. Set `retries` to enable additional attempts with exponential delays. The loader remembers the last successful address and starts subsequent scripts there, cycling through the remaining addresses as backups. Stylesheets always start at `publicPath`, then try backup addresses in the configured order. An individual failure does not change the preferred address; it changes only after a successful load. In-flight resources keep their candidate order. Explicit `undefined` option values use the defaults.
 
 Each script or stylesheet attempt has a `timeoutMs` limit (10000 ms by default). A timeout follows the same retry policy as a loading error: retry the current URL while attempts remain, then try the next address. Set `0` to disable the timeout. The loader removes timed-out elements and ignores their late callbacks; removing a script does not guarantee cancellation of its execution.
 
@@ -506,10 +506,11 @@ Backup addresses must serve the same build files at the same relative paths. Do 
 
 Loading behavior:
 
-- Supports `defer` scripts without `async` or `type`, and stylesheets under the primary path, preserving nonce and `crossOrigin`. Other resources retain normal rendering. All managed assets of a response fragment are registered by a single inline script emitted right after the bootstrap, in head order (stylesheets, then scripts); their original tags are not rendered.
-- Stylesheets load in parallel. Scripts run in order after stylesheet attempts finish and the DOM is ready. `DOMContentLoaded` does not mean the application has finished loading.
+- Supports `defer` scripts without `async` or `type`, and stylesheets under the primary path, preserving `nonce` and `crossOrigin`. Other resources retain normal rendering. All managed assets of a response fragment are registered by a single inline script emitted right after the bootstrap, in head order (stylesheets, then scripts); original script tags are not rendered.
+- Stylesheets are included in the HTML and load in parallel, even if the JavaScript loader cannot start. Partially styled content may be visible during retries. Scripts run in order after stylesheet attempts finish and the DOM is ready. `DOMContentLoaded` does not mean the application has finished loading.
 - Final failures emit `app-layout:asset-load-error` on `window`. The event detail contains `{type, originalUrl, attempts}` and is described by the exported `AssetLoadError` type; `attempts` lists attempted URLs, including retries. Register the handler before resources load. A final stylesheet loading failure does not block scripts; a final script loading failure stops the loader’s script queue.
-- For early scripts during streaming, use `renderScripts(content, scripts, state)`, then `renderHeadContent(content, state)` with the same `state: AssetRenderState = {}` for one HTML response, even if content is regenerated. Bootstrap is emitted once; its initial configuration applies to the entire response. Direct `content.helpers` calls render ordinary tags without fallback handling.
+- For early scripts during streaming, use `renderScripts(content, scripts, state)`, then `renderHeadContent(content, state)` with the same `state: AssetRenderState = {}` for one HTML response, even if content is regenerated. Call `renderHeadContent` once per HTML response. Bootstrap is emitted once; its initial configuration applies to the entire response. Direct `content.helpers` calls render ordinary tags without fallback handling.
+- During streaming, a stylesheet's `timeoutMs` starts when its reference arrives in the HTML. Registered stylesheet links that cannot be found by `DOMContentLoaded` are reported as failed and do not block scripts.
 
 ```ts
 import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
