@@ -453,7 +453,7 @@ export interface LayoutOptions {
 }
 ```
 
-#### Public path 备用地址
+#### Public path fallbacks
 
 如果从 `publicPath` 加载失败，则从备用地址加载初始脚本和样式表。
 
@@ -482,9 +482,9 @@ createLayoutPlugin({
 });
 ```
 
-该函数只运行一次，并且必须是自包含的，不包含闭包或导入。它接收 `{publicPath}`；对于根相对的原始路径，此值包含 `layout.prefix`。返回 `[]` 会使用原始地址而不重试。
+该函数仅运行一次，并且必须是自包含的，不包含闭包或导入。它接收 `{publicPath}`；对于根相对的原始路径，此值包含 `layout.prefix`。返回 `[]` 会使用原始地址而不重试。
 
-加载器在构建 app-layout 时会被打包和最小化。用户回调使用 `Function.prototype.toString()` 从编译后的服务器代码中序列化：像 esbuild `keepNames` 这样的转换可能会注入浏览器中不可用的外部辅助函数（`__name`）。请在您的最终服务器构建中测试回调。如果引导程序抛出错误，在 HTML 解析期间同步注册会通过 `document.write` 恢复原始标签，但这会受到浏览器限制；如果 CSP 阻止了注册脚本，则无法恢复。
+加载器在构建 app-layout 时会被打包和最小化。用户回调使用 `Function.prototype.toString()` 从编译后的服务器代码中序列化：像 esbuild `keepNames` 这样的转换可能会注入浏览器中不可用的外部助手（`__name`）。请在您的最终服务器构建中测试回调。如果引导程序抛出异常，在 HTML 解析期间的同步注册会通过 `document.write` 恢复脚本标签，但这会受到浏览器限制；如果 CSP 阻止了注册脚本，则无法恢复。
 
 重试选项：
 
@@ -498,18 +498,19 @@ interface AssetRetryOptions {
 }
 ```
 
-将这些选项作为 `assetRetry` 传递给 `createLayoutPlugin`。默认情况下，资源错误会在不重试同一 URL 的情况下切换到下一个地址。将 `retries` 设置为启用具有指数延迟的额外尝试。加载器会记住最后一个成功的地址，并从那里开始后续资源加载，然后依次尝试剩余的地址作为备用。单个失败不会改变首选地址；只有在成功加载后才会更改。正在进行的资源会保留其候选顺序。显式 `undefined` 选项值将使用默认值。
+将这些选项作为 `assetRetry` 传递给 `createLayoutPlugin`。默认情况下，资源错误会在不重试同一 URL 的情况下切换到下一个地址。将 `retries` 设置为启用具有指数延迟的额外尝试。加载器会记住最后一个成功的地址，并从那里开始加载后续脚本，然后按配置顺序循环使用剩余地址作为备用。样式表始终从 `publicPath` 开始，然后按配置顺序尝试备用地址。单个失败不会改变首选地址；只有在成功加载后才会更改。正在进行的资源会保留其候选顺序。显式 `undefined` 选项值将使用默认值。
 
-每个脚本或样式表尝试都有一个 `timeoutMs` 限制（默认为 10000 毫秒）。超时遵循与加载错误相同的重试策略：在还有尝试次数的情况下重试当前 URL，然后尝试下一个地址。设置为 `0` 可禁用超时。加载器会移除已超时的元素并忽略其延迟的回调；移除脚本并不保证能取消其执行。
+每个脚本或样式表的尝试都有一个 `timeoutMs` 限制（默认为 10000 毫秒）。超时遵循与加载错误相同的重试策略：在仍有尝试次数的情况下重试当前 URL，然后尝试下一个地址。设置为 `0` 可禁用超时。加载器会移除已超时的元素并忽略其延迟的回调；移除脚本并不保证能取消其执行。
 
-备用地址必须在相同的相对路径下提供相同的构建文件。请勿在基本地址中包含查询参数或片段。尾部斜杠会自动添加，重复的地址也会被自动删除。像 `/build/` 这样的路径是相对于页面的源的；请显式包含任何应用程序前缀。在 CSP 中允许备用域并配置 CORS。
+备用地址必须在相同的相对路径下提供相同的构建文件。请勿在基本地址中包含查询参数或片段。尾部斜杠会自动添加，重复的地址也会自动删除。像 `/build/` 这样的路径是相对于页面的源的；请显式包含任何应用程序前缀。允许在 CSP 中使用备用域并配置 CORS。
 
 加载行为：
 
-- 支持 `defer` 脚本（不带 `async` 或 `type`），以及主路径下的样式表，并保留 `nonce` 和 `crossOrigin`。其他资源保持正常渲染。响应片段的所有托管资源都由一个内联脚本在引导后立即注册，按头部顺序（样式表，然后是脚本）；它们的原始标签不会被渲染。
-- 样式表并行加载。脚本在样式表尝试加载完成且 DOM 就绪后按顺序运行。`DOMContentLoaded` 并不意味着应用程序已完成加载。
-- 最终失败会在 `window` 上触发 `app-layout:asset-load-error` 事件。事件详情包含 `{type, originalUrl, attempts}`，并由导出的 `AssetLoadError` 类型描述；`attempts` 列出了尝试过的 URL，包括重试。请在资源加载之前注册处理程序。最终的样式表加载失败不会阻止脚本；最终的脚本加载失败会停止加载器的脚本队列。
-- 对于流式传输期间的早期脚本，请使用 `renderScripts(content, scripts, state)`，然后使用相同的 `state: AssetRenderState = {}` 调用 `renderHeadContent(content, state)` 来生成一个 HTML 响应，即使内容被重新生成。引导程序只发出一次；其初始配置适用于整个响应。直接调用 `content.helpers` 会渲染普通的标签，不带回退处理。
+- 支持 `defer` 脚本（无 `async` 或 `type`），以及主路径下的样式表，同时保留 `nonce` 和 `crossOrigin`。其他资源将正常渲染。响应片段中所有托管的资源都会由一个内联脚本在引导（bootstrap）之后立即发出，并按头部顺序（样式表，然后是脚本）进行注册；原始脚本标签不会被渲染。
+- 样式表会包含在 HTML 中并并行加载，即使 JavaScript 加载器无法启动。部分样式化的内容在重试期间可能会可见。脚本在样式表加载尝试完成后且 DOM 就绪后按顺序运行。`DOMContentLoaded` 并不意味着应用程序已完成加载。
+- 最终失败时会在 `window` 上发出 `app-layout:asset-load-error` 事件。事件详情包含 `{type, originalUrl, attempts}`，并由导出的 `AssetLoadError` 类型描述；`attempts` 列出了尝试过的 URL，包括重试。请在资源加载之前注册处理程序。最终的样式表加载失败不会阻塞脚本；最终的脚本加载失败会停止加载器的脚本队列。
+- 对于流式传输期间的早期脚本，请使用 `renderScripts(content, scripts, state)`，然后使用相同的 `state: AssetRenderState = {}` 调用 `renderHeadContent(content, state)` 来处理一个 HTML 响应，即使内容被重新生成。每个 HTML 响应调用一次 `renderHeadContent`。引导程序只发出一次；其初始配置适用于整个响应。直接调用 `content.helpers` 会渲染普通标签，不带回退处理。
+- 在流式传输期间，样式表的 `timeoutMs` 从其引用在 HTML 中出现时开始计时。在 `DOMContentLoaded` 时找不到的已注册样式表链接将被报告为失败，并且不会阻塞脚本。
 
 ```ts
 import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
@@ -520,7 +521,7 @@ res.write(renderScripts(content, firstScripts, state));
 res.write(renderHeadContent(content, state));
 ```
 
-延迟的块需要单独配置，例如 [App Builder](https://github.com/gravity-ui/app-builder) 中的 `client.publicPathFallback`。在两个库中都配置备份地址；回退列表不会通过全局变量共享。
+延迟加载的块需要单独配置，例如 [App Builder](https://github.com/gravity-ui/app-builder) 中的 `client.publicPathFallback`。在两个库中都配置备份地址；回退列表不会通过全局变量共享。
 
 ### @gravity-ui/uikit
 
@@ -536,7 +537,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: '首页',
+      title: 'Home page',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -559,11 +560,11 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-将微前端版本信息添加到页面。
+向页面添加微前端版本信息。
 
-此插件创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本，模块联邦或类似的微前端架构可以使用它来确定加载哪些版本的远程模块。
+此插件会创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本，模块联邦或类似的微前端架构可以使用它来确定加载哪个版本的远程模块。
 
-它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 和 `moduleFederation.remotesRuntimeVersioning` 选项结合使用，以自动加载具有相应版本的远程模块。
+它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 和 `moduleFederation.remotesRuntimeVersioning` 选项结合使用，以自动加载对应版本的远程模块。
 
 用法：
 
@@ -575,7 +576,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: '首页',
+      title: 'Home page',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -596,7 +597,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-有一个用于创建所有插件的辅助函数：
+有一个辅助函数用于创建所有插件：
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -607,7 +608,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: '首页',
+        title: 'Home page',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -625,7 +626,7 @@ app.get((req, res) => {
 
 ## 替代用法
 
-通过部分渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 进行 HTML 流式传输：
+通过分块渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 进行 HTML 流式传输：
 
 ```js
 import express from 'express';
@@ -648,7 +649,7 @@ app.get('/', async function (req, res) {
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
-    title: '首页',
+    title: 'Home page',
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;

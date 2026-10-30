@@ -16,9 +16,13 @@ npm install @gravity-ui/navigation
 npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
+## 迁移
+
+从 4.x、5.x 或 6.x 版本升级：请参阅 [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md)。
+
 ## 用法
 
-将 `AsideHeader` 作为应用的骨架渲染。它是一个受控组件——您通过 `compact`/`onChangeCompact` 属性来控制折叠状态，并将您的页面内容通过 `renderContent` 属性传入。请先设置 `@gravity-ui/uikit` 的样式和 `ThemeProvider`（请参阅 [uikit 样式指南](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)）。
+将 `AsideHeader` 作为应用外壳渲染。它是一个受控组件——您通过 `compact`/`onChangeCompact` 属性来管理折叠状态，并将页面内容通过 `renderContent` 属性传入。请先设置 `@gravity-ui/uikit` 的样式和 `ThemeProvider`（请参阅 [uikit 样式指南](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)）。
 
 ```tsx
 import React from 'react';
@@ -34,14 +38,14 @@ export function App() {
   return (
     <ThemeProvider theme="light">
       <AsideHeader
-        logo={{text: '我的应用', href: '/'}}
+        logo={{text: 'My App', href: '/'}}
         compact={compact}
         onChangeCompact={setCompact}
         menuItems={[
-          {id: 'home', title: '首页', icon: House, current: true},
-          {id: 'settings', title: '设置', icon: Gear},
+          {id: 'home', title: 'Home', icon: House, current: true},
+          {id: 'settings', title: 'Settings', icon: Gear},
         ]}
-        renderContent={() => <main>页面内容</main>}
+        renderContent={() => <main>Page content</main>}
       />
     </ThemeProvider>
   );
@@ -98,12 +102,12 @@ Gravity UI 应用的应用程序外壳导航组件——可折叠的 `AsideHeade
 ### 何时使用
 
 - 应用的主要导航框架：`AsideHeader`（可折叠侧边导航），包含 `menuItems`、子头部和页脚部分。
-- 支持性的外壳 UI：`Drawer`/`DrawerItem`、`Footer`/`MobileFooter`、`MobileHeader`、`HotkeysPanel`、`Settings`、`ActionBar`、`Logo`。
+- 支持外壳 UI：`Drawer`/`DrawerItem`、`Footer`/`MobileFooter`、`MobileHeader`、`HotkeysPanel`、`Settings`、`ActionBar`、`Logo`。
 - 通过 `renderContent` / `PageLayout` 在导航框架内布局页面内容。
 
-### 何时避免使用
+### 何时不要使用
 
-- 通用的页面内控件（按钮、标签页、菜单、面包屑）——请使用 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)；此包是外部应用外壳，而非通用组件。
+- 通用的页面内控件（按钮、标签页、菜单、面包屑）——请使用 [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)；此包是应用的外层 chrome，而非通用组件。
 - 从配置中渲染页面主体本身——请使用 [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor)。
 - 客户端路由——此包仅提供导航 UI；请将点击事件连接到您自己的路由。
 

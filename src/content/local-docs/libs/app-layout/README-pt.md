@@ -455,7 +455,7 @@ export interface LayoutOptions {
 
 #### Fallbacks de caminho público
 
-Carrega scripts e folhas de estilo iniciais de endereços de backup se o carregamento de `publicPath` falhar.
+Carrega scripts e folhas de estilo iniciais de endereços de backup se o carregamento do `publicPath` falhar.
 
 Uso:
 
@@ -484,7 +484,7 @@ createLayoutPlugin({
 
 A função é executada uma vez e deve ser autônoma, sem closures ou imports. Ela recebe `{publicPath}`; para caminhos primários relativos à raiz, esse valor inclui `layout.prefix`. Retornar `[]` usa o endereço primário sem novas tentativas.
 
-O loader é empacotado e minificado quando o app-layout é compilado. O callback do usuário é serializado do código do servidor compilado usando `Function.prototype.toString()`: transformações como `keepNames` do esbuild podem injetar helpers externos (`__name`) que não estão disponíveis no navegador. Teste os callbacks na sua compilação final do servidor. Se o bootstrap falhar, registros síncronos durante a análise HTML restauram as tags originais via `document.write`, sujeitos a restrições do navegador; a recuperação não pode ajudar se o CSP bloquear os scripts de registro.
+O loader é empacotado e minificado quando o app-layout é construído. O callback do usuário é serializado do código do servidor compilado usando `Function.prototype.toString()`: transformações como `keepNames` do esbuild podem injetar helpers externos (`__name`) que não estão disponíveis no navegador. Teste os callbacks na sua build final do servidor. Se o bootstrap falhar, registros síncronos durante a análise HTML restauram tags de script via `document.write`, sujeitos a restrições do navegador; a recuperação não pode ajudar se o CSP bloquear os scripts de registro.
 
 Opções de nova tentativa:
 
@@ -498,29 +498,30 @@ interface AssetRetryOptions {
 }
 ```
 
-Passe essas opções como `assetRetry` para `createLayoutPlugin`. Por padrão, um erro de recurso muda para o próximo endereço sem tentar novamente o mesmo URL. Defina `retries` para habilitar tentativas adicionais com atrasos exponenciais. O loader lembra o último endereço bem-sucedido e inicia recursos subsequentes lá, percorrendo os endereços restantes como backups. Uma falha individual não altera o endereço preferido; ele muda apenas após um carregamento bem-sucedido. Recursos em andamento mantêm sua ordem de candidatos. Valores de opção explícitos `undefined` usam os padrões.
+Passe essas opções como `assetRetry` para `createLayoutPlugin`. Por padrão, um erro de recurso muda para o próximo endereço sem tentar novamente o mesmo URL. Defina `retries` para habilitar tentativas adicionais com atrasos exponenciais. O loader lembra o último endereço bem-sucedido e inicia scripts subsequentes lá, percorrendo os endereços restantes como backups. Folhas de estilo sempre começam em `publicPath`, depois tentam endereços de backup na ordem configurada. Uma falha individual não altera o endereço preferido; ele muda apenas após um carregamento bem-sucedido. Recursos em andamento mantêm sua ordem de candidatos. Valores de opção `undefined` explícitos usam os padrões.
 
-Cada tentativa de script ou folha de estilo tem um limite de `timeoutMs` (10000 ms por padrão). Um tempo limite segue a mesma política de nova tentativa de um erro de carregamento: tente o URL atual enquanto houver tentativas, depois tente o próximo endereço. Defina `0` para desabilitar o tempo limite. O loader remove elementos com tempo limite e ignora seus callbacks tardios; remover um script não garante o cancelamento de sua execução.
+Cada tentativa de script ou folha de estilo tem um limite de `timeoutMs` (10000 ms por padrão). Um tempo limite segue a mesma política de nova tentativa de um erro de carregamento: tente o URL atual enquanto houver tentativas restantes, depois tente o próximo endereço. Defina `0` para desabilitar o tempo limite. O loader remove elementos com tempo limite esgotado e ignora seus callbacks tardios; remover um script não garante o cancelamento de sua execução.
 
-Endereços de backup devem servir os mesmos arquivos de compilação nos mesmos caminhos relativos. Não inclua parâmetros de consulta ou fragmentos em endereços base. Barras finais são adicionadas e endereços duplicados são removidos automaticamente. Um caminho como `/build/` é relativo à origem da página; inclua qualquer prefixo de aplicativo explicitamente. Permita domínios de backup no CSP e configure CORS.
+Endereços de backup devem servir os mesmos arquivos de build nos mesmos caminhos relativos. Não inclua parâmetros de consulta ou fragmentos em endereços base. Barras finais são adicionadas e endereços duplicados são removidos automaticamente. Um caminho como `/build/` é relativo à origem da página; inclua qualquer prefixo de aplicativo explicitamente. Permita domínios de backup em CSP e configure CORS.
 
 Comportamento de carregamento:
 
-- Suporta scripts `defer` sem `async` ou `type`, e folhas de estilo sob o caminho principal, preservando nonce e `crossOrigin`. Outros recursos mantêm a renderização normal. Todos os ativos gerenciados de um fragmento de resposta são registrados por um único script inline emitido logo após o bootstrap, na ordem do head (folhas de estilo, depois scripts); suas tags originais não são renderizadas.
-- Folhas de estilo carregam em paralelo. Scripts são executados em ordem após as tentativas de carregamento de folhas de estilo terminarem e o DOM estar pronto. `DOMContentLoaded` não significa que a aplicação terminou de carregar.
-- Falhas finais emitem `app-layout:asset-load-error` em `window`. O detalhe do evento contém `{type, originalUrl, attempts}` e é descrito pelo tipo exportado `AssetLoadError`; `attempts` lista URLs tentados, incluindo retentativas. Registre o manipulador antes que os recursos carreguem. Uma falha final no carregamento de uma folha de estilo não bloqueia scripts; uma falha final no carregamento de um script para a fila de scripts do loader.
-- Para scripts iniciais durante o streaming, use `renderScripts(content, scripts, state)`, depois `renderHeadContent(content, state)` com o mesmo `state: AssetRenderState = {}` para uma única resposta HTML, mesmo que o conteúdo seja regenerado. O bootstrap é emitido uma vez; sua configuração inicial se aplica a toda a resposta. Chamadas diretas a `content.helpers` renderizam tags comuns sem tratamento de fallback.
+- Suporta scripts `defer` sem `async` ou `type`, e folhas de estilo sob o caminho principal, preservando `nonce` e `crossOrigin`. Outros recursos mantêm a renderização normal. Todos os ativos gerenciados de um fragmento de resposta são registrados por um único script inline emitido logo após o bootstrap, na ordem do head (folhas de estilo, depois scripts); as tags de script originais não são renderizadas.
+- Folhas de estilo são incluídas no HTML e carregam em paralelo, mesmo que o carregador JavaScript não possa iniciar. Conteúdo parcialmente estilizado pode ser visível durante as tentativas de retentativa. Scripts são executados em ordem após as tentativas de folha de estilo terminarem e o DOM estiver pronto. `DOMContentLoaded` não significa que a aplicação terminou de carregar.
+- Falhas finais emitem `app-layout:asset-load-error` em `window`. O detalhe do evento contém `{type, originalUrl, attempts}` e é descrito pelo tipo exportado `AssetLoadError`; `attempts` lista URLs tentados, incluindo retentativas. Registre o manipulador antes que os recursos carreguem. Uma falha final no carregamento de uma folha de estilo não bloqueia scripts; uma falha final no carregamento de um script para a fila de scripts do carregador.
+- Para scripts iniciais durante o streaming, use `renderScripts(content, scripts, state)`, depois `renderHeadContent(content, state)` com o mesmo `state: AssetRenderState = {}` para uma resposta HTML, mesmo que o conteúdo seja regenerado. Chame `renderHeadContent` uma vez por resposta HTML. O bootstrap é emitido uma vez; sua configuração inicial se aplica a toda a resposta. Chamadas diretas a `content.helpers` renderizam tags comuns sem tratamento de fallback.
+- Durante o streaming, o `timeoutMs` de uma folha de estilo começa quando sua referência chega no HTML. Links de folha de estilo registrados que não podem ser encontrados por `DOMContentLoaded` são relatados como falhos e não bloqueiam scripts.
 
 ```ts
 import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
 
 const state: AssetRenderState = {};
 res.write(renderScripts(content, firstScripts, state));
-// ... aguarde os dados e regenere o conteúdo, se necessário.
+// ... aguardar dados e regenerar conteúdo, se necessário.
 res.write(renderHeadContent(content, state));
 ```
 
-Chunks lazy exigem configuração separada, como `client.publicPathFallback` no [App Builder](https://github.com/gravity-ui/app-builder). Configure os endereços de backup em ambas as bibliotecas; a lista de fallback não é compartilhada através de uma variável global.
+Chunks lazy requerem configuração separada, como `client.publicPathFallback` em [App Builder](https://github.com/gravity-ui/app-builder). Configure os endereços de backup em ambas as bibliotecas; a lista de fallback não é compartilhada através de uma variável global.
 
 ### @gravity-ui/uikit
 
@@ -561,9 +562,9 @@ interface UikitPluginOptions {
 
 Adiciona informações de versões de microfrontends à página.
 
-Este plugin cria um objeto global `window.__REMOTE_VERSIONS__` contendo as versões de microfrontends fornecidas, que podem ser usadas por module federation ou arquiteturas de microfrontends semelhantes para determinar quais versões de módulos remotos carregar.
+Este plugin cria um objeto global `window.__REMOTE_VERSIONS__` contendo as versões de microfrontends fornecidas, que podem ser usadas por module federation ou arquiteturas de microfrontend semelhantes para determinar quais versões de módulos remotos carregar.
 
-Pode ser usado em combinação com o [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) e a opção `moduleFederation.remotesRuntimeVersioning` para carregar automaticamente módulos remotos com as versões correspondentes.
+Pode ser usado em combinação com [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) e a opção `moduleFederation.remotesRuntimeVersioning` para carregar automaticamente módulos remotos com as versões correspondentes.
 
 Uso:
 

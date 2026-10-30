@@ -16,9 +16,13 @@ Asegúrate de que las dependencias peer estén instaladas en tu proyecto
 npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
+## Migración
+
+Al actualizar desde las versiones 4.x, 5.x o 6.x: consulta [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md).
+
 ## Uso
 
-Renderiza `AsideHeader` como el shell de la aplicación. Es un componente controlado: tú gestionas el estado colapsado a través de `compact`/`onChangeCompact`, y el contenido de tu página se pasa a través de `renderContent`. Configura primero los estilos de `@gravity-ui/uikit` y `ThemeProvider` (consulta la [guía de estilos de uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+Renderiza `AsideHeader` como el shell de la aplicación. Es un componente controlado: tú gestionas el estado colapsado a través de `compact`/`onChangeCompact`, y el contenido de tu página se pasa mediante `renderContent`. Configura primero los estilos de `@gravity-ui/uikit` y `ThemeProvider` (consulta la [guía de estilos de uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
 
 ```tsx
 import React from 'react';
@@ -60,7 +64,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 1. Soporte para SSR
 2. Añadir más documentación y ejemplos a [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Soporte para la navegación en el tema de UIKit
+3. Soporte para la tematización de Navigation en UIKit
 4. Unificar la API de `subheaderItem`, `menuItem`, `footerItem`
 
 ## Componentes
@@ -85,7 +89,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## API CSS
 
-Se utiliza para la tematización de los componentes de Navegación
+Se utiliza para la tematización de los componentes de Navigation.
 
 ## Licencia
 
@@ -103,8 +107,8 @@ Componentes de navegación de shell de aplicación para aplicaciones Gravity UI:
 
 ### Cuándo no usar
 
-- Controles genéricos dentro de la página (botones, pestañas, menús, breadcrumbs): usa [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); este paquete es el borde exterior de la aplicación, no componentes generales.
-- Renderizar el cuerpo de la página en sí mismo a partir de la configuración: usa [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
+- Controles genéricos dentro de la página (botones, pestañas, menús, breadcrumbs): usa [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); este paquete es el cromo exterior de la aplicación, no componentes generales.
+- Renderizar el cuerpo de la página en sí mismo a partir de una configuración: usa [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
 - Enrutamiento del lado del cliente: esto solo proporciona la UI de navegación; conecta los clics a tu propio enrutador.
 
 ### Errores comunes

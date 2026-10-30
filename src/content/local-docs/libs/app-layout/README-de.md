@@ -484,32 +484,33 @@ createLayoutPlugin({
 
 Die Funktion wird einmal ausgeführt und muss in sich geschlossen sein, ohne Closures oder Importe. Sie empfängt `{publicPath}`; für primäre Pfade, die relativ zur Wurzel sind, enthält dieser Wert `layout.prefix`. Die Rückgabe von `[]` verwendet die primäre Adresse ohne Wiederholungsversuche.
 
-Der Loader wird beim Erstellen von app-layout gebündelt und minimiert. Der Benutzer-Callback wird aus kompiliertem Servercode mithilfe von `Function.prototype.toString()` serialisiert: Transformationen wie esbuild `keepNames` können externe Helfer (`__name`) einfügen, die im Browser nicht verfügbar sind. Testen Sie Callbacks in Ihrem endgültigen Server-Build. Wenn Bootstrap fehlschlägt, stellen synchrone Registrierungen während der HTML-Analyse die ursprünglichen Tags über `document.write` wieder her, vorbehaltlich von Browserbeschränkungen; eine Wiederherstellung kann nicht helfen, wenn CSP die Registrierungsskripte blockiert.
+Der Loader wird beim Erstellen von app-layout gebündelt und minimiert. Der Benutzer-Callback wird aus kompiliertem Servercode mit `Function.prototype.toString()` serialisiert: Transformationen wie esbuild `keepNames` können externe Helfer (`__name`) einfügen, die im Browser nicht verfügbar sind. Testen Sie Callbacks in Ihrem endgültigen Server-Build. Wenn Bootstrap fehlschlägt, stellen synchrone Registrierungen während der HTML-Analyse Skript-Tags über `document.write` wieder her, vorbehaltlich von Browser-Beschränkungen; eine Wiederherstellung kann nicht helfen, wenn CSP die Registrierungs-Skripte blockiert.
 
-Wiederholungsoptionen:
+Optionen für Wiederholungsversuche:
 
 ```typescript
 interface AssetRetryOptions {
   retries?: number; // Zusätzliche Versuche pro Adresse. Standard: 0.
   delayMs?: number; // Verzögerung vor dem ersten Wiederholungsversuch in Millisekunden. Standard: 500.
-  factor?: number; // Multiplikator für nachfolgende Wiederholungsverzögerungen. Standard: 2.
-  maxDelayMs?: number; // Maximale Wiederholungsverzögerung in Millisekunden. Standard: 3000.
-  timeoutMs?: number; // Timeout für den Versuch in Millisekunden. Standard: 10000; 0 deaktiviert.
+  factor?: number; // Multiplikator für nachfolgende Verzögerungen bei Wiederholungsversuchen. Standard: 2.
+  maxDelayMs?: number; // Maximale Verzögerung bei Wiederholungsversuchen in Millisekunden. Standard: 3000.
+  timeoutMs?: number; // Timeout für Versuche in Millisekunden. Standard: 10000; 0 deaktiviert.
 }
 ```
 
-Übergeben Sie diese Optionen als `assetRetry` an `createLayoutPlugin`. Standardmäßig wechselt ein Ressourcenfehler zur nächsten Adresse, ohne dieselbe URL erneut zu versuchen. Setzen Sie `retries` auf einen Wert größer als 0, um zusätzliche Versuche mit exponentiellen Verzögerungen zu aktivieren. Der Loader merkt sich die zuletzt erfolgreiche Adresse und beginnt mit nachfolgenden Ressourcen dort, wobei er die verbleibenden Adressen als Backups durchläuft. Ein einzelner Fehler ändert nicht die bevorzugte Adresse; er ändert sich erst nach einem erfolgreichen Laden. In Bearbeitung befindliche Ressourcen behalten ihre Kandidatenreihenfolge. Explizite `undefined`-Optionen verwenden die Standardwerte.
+Übergeben Sie diese Optionen als `assetRetry` an `createLayoutPlugin`. Standardmäßig wechselt ein Ressourcenfehler zur nächsten Adresse, ohne dieselbe URL erneut zu versuchen. Setzen Sie `retries` auf einen Wert größer als 0, um zusätzliche Versuche mit exponentiellen Verzögerungen zu aktivieren. Der Loader merkt sich die letzte erfolgreiche Adresse und startet nachfolgende Skripte dort, wobei er die verbleibenden Adressen als Backups durchläuft. Stylesheets beginnen immer mit `publicPath` und versuchen dann Backup-Adressen in der konfigurierten Reihenfolge. Ein einzelner Fehler ändert nicht die bevorzugte Adresse; sie ändert sich erst nach einem erfolgreichen Ladevorgang. In Bearbeitung befindliche Ressourcen behalten ihre Kandidatenreihenfolge. Explizite `undefined`-Optionen verwenden die Standardwerte.
 
-Jeder Skript- oder Stylesheet-Versuch hat ein `timeoutMs`-Limit (standardmäßig 10000 ms). Ein Timeout folgt der gleichen Wiederholungsrichtlinie wie ein Ladefehler: Versuchen Sie die aktuelle URL erneut, solange noch Versuche übrig sind, und versuchen Sie dann die nächste Adresse. Setzen Sie den Wert auf 0, um das Timeout zu deaktivieren. Der Loader entfernt abgelaufene Elemente und ignoriert deren späte Callbacks; das Entfernen eines Skripts garantiert nicht die Unterbrechung seiner Ausführung.
+Jeder Versuch mit einem Skript oder Stylesheet hat ein `timeoutMs`-Limit (standardmäßig 10000 ms). Ein Timeout folgt der gleichen Wiederholungsrichtlinie wie ein Ladefehler: Versuchen Sie die aktuelle URL erneut, solange noch Versuche übrig sind, und versuchen Sie dann die nächste Adresse. Setzen Sie den Wert auf `0`, um das Timeout zu deaktivieren. Der Loader entfernt zeitüberschrittene Elemente und ignoriert deren späte Callbacks; das Entfernen eines Skripts garantiert nicht die Abbrechung seiner Ausführung.
 
-Backup-Adressen müssen dieselben Build-Dateien unter denselben relativen Pfaden bereitstellen. Fügen Sie keine Abfrageparameter oder Fragmente zu Basisadressen hinzu. Nachgestellte Schrägstriche werden automatisch hinzugefügt und doppelte Adressen entfernt. Ein Pfad wie `/build/` ist relativ zum Ursprung der Seite; fügen Sie jeden Anwendungspräfix explizit hinzu. Erlauben Sie Backup-Domains in CSP und konfigurieren Sie CORS.
+Backup-Adressen müssen dieselben Build-Dateien unter denselben relativen Pfaden bereitstellen. Fügen Sie keine Abfrageparameter oder Fragmente zu Basisadressen hinzu. Nachgestellte Schrägstriche werden automatisch hinzugefügt und doppelte Adressen entfernt. Ein Pfad wie `/build/` ist relativ zum Ursprung der Seite; fügen Sie jeden Anwendungspräfix explizit hinzu. Erlauben Sie Backup-Domänen in CSP und konfigurieren Sie CORS.
 
 Ladeverhalten:
 
-- Unterstützt `defer`-Skripte ohne `async` oder `type` sowie Stylesheets unter dem primären Pfad, wobei Nonce und `crossOrigin` erhalten bleiben. Andere Ressourcen behalten das normale Rendering. Alle verwalteten Assets eines Response-Fragments werden von einem einzigen Inline-Skript registriert, das direkt nach dem Bootstrap in der Reihenfolge des Head ausgegeben wird (Stylesheets, dann Skripte); ihre ursprünglichen Tags werden nicht gerendert.
-- Stylesheets werden parallel geladen. Skripte werden nach Abschluss der Stylesheet-Versuche und wenn der DOM bereit ist, in der Reihenfolge ausgeführt. `DOMContentLoaded` bedeutet nicht, dass die Anwendung vollständig geladen ist.
-- Bei endgültigen Fehlern wird `app-layout:asset-load-error` auf `window` ausgelöst. Die Event-Details enthalten `{type, originalUrl, attempts}` und werden durch den exportierten `AssetLoadError`-Typ beschrieben; `attempts` listet versuchte URLs auf, einschließlich Wiederholungsversuchen. Registrieren Sie den Handler, bevor die Ressourcen geladen werden. Ein endgültiger Fehler beim Laden eines Stylesheets blockiert keine Skripte; ein endgültiger Fehler beim Laden eines Skripts stoppt die Skriptwarteschlange des Loaders.
-- Für frühe Skripte während des Streamings verwenden Sie `renderScripts(content, scripts, state)`, dann `renderHeadContent(content, state)` mit demselben `state: AssetRenderState = {}` für eine HTML-Antwort, auch wenn der Inhalt neu generiert wird. Der Bootstrap wird einmal ausgegeben; seine anfängliche Konfiguration gilt für die gesamte Antwort. Direkte `content.helpers`-Aufrufe rendern normale Tags ohne Fallback-Handling.
+- Unterstützt `defer`-Skripte ohne `async` oder `type` sowie Stylesheets unter dem primären Pfad, wobei `nonce` und `crossOrigin` beibehalten werden. Andere Ressourcen behalten das normale Rendering. Alle verwalteten Assets eines Response-Fragments werden von einem einzigen Inline-Skript registriert, das direkt nach dem Bootstrap in der Reihenfolge des Head ausgegeben wird (Stylesheets, dann Skripte); ursprüngliche Skript-Tags werden nicht gerendert.
+- Stylesheets werden in das HTML eingebunden und laden parallel, auch wenn der JavaScript-Loader nicht starten kann. Teilweise gestylter Inhalt kann während Wiederholungsversuchen sichtbar sein. Skripte werden nach Abschluss der Stylesheet-Versuche und wenn der DOM bereit ist, in der richtigen Reihenfolge ausgeführt. `DOMContentLoaded` bedeutet nicht, dass die Anwendung vollständig geladen ist.
+- Bei endgültigen Fehlern wird `app-layout:asset-load-error` auf `window` ausgelöst. Die Event-Details enthalten `{type, originalUrl, attempts}` und werden durch den exportierten `AssetLoadError`-Typ beschrieben; `attempts` listet versuchte URLs auf, einschließlich Wiederholungsversuchen. Registrieren Sie den Handler, bevor die Ressourcen geladen werden. Ein endgültiger Fehler beim Laden eines Stylesheets blockiert keine Skripte; ein endgültiger Fehler beim Laden eines Skripts stoppt die Skript-Warteschlange des Laders.
+- Für frühe Skripte während des Streamings verwenden Sie `renderScripts(content, scripts, state)`, dann `renderHeadContent(content, state)` mit demselben `state: AssetRenderState = {}` für eine HTML-Antwort, auch wenn der Inhalt neu generiert wird. Rufen Sie `renderHeadContent` einmal pro HTML-Antwort auf. Der Bootstrap wird einmal ausgegeben; seine anfängliche Konfiguration gilt für die gesamte Antwort. Direkte Aufrufe von `content.helpers` rendern normale Tags ohne Fallback-Handling.
+- Während des Streamings beginnt die `timeoutMs` eines Stylesheets, wenn seine Referenz im HTML ankommt. Registrierte Stylesheet-Links, die von `DOMContentLoaded` nicht gefunden werden können, werden als fehlgeschlagen gemeldet und blockieren keine Skripte.
 
 ```ts
 import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
@@ -561,7 +562,7 @@ interface UikitPluginOptions {
 
 Fügt Versionsinformationen von Microfrontends zur Seite hinzu.
 
-Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die bereitgestellten Microfrontend-Versionen enthält. Dies kann von Modul-Federation oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
+Dieses Plugin erstellt ein globales Objekt `window.__REMOTE_VERSIONS__`, das die bereitgestellten Microfrontend-Versionen enthält. Dieses Objekt kann von Module Federation oder ähnlichen Microfrontend-Architekturen verwendet werden, um zu bestimmen, welche Versionen von Remote-Modulen geladen werden sollen.
 
 Es kann in Kombination mit [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) und der Option `moduleFederation.remotesRuntimeVersioning` verwendet werden, um Remote-Module mit den entsprechenden Versionen automatisch zu laden.
 
@@ -596,7 +597,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-Es gibt einen Helper zum Erstellen aller Plugins:
+Es gibt einen Helper, um alle Plugins zu erstellen:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';

@@ -1,6 +1,6 @@
 ## Kurzbeschreibung
 
-Die `DFDialog`-Komponente erleichtert die Erstellung von Formularen und verwendet intern `react-final-form`.
+Die Komponente `DFDialog` dient der einfachen Erstellung von Formularen und verwendet intern `react-final-form`.
 Sie unterstützt mehrere vordefinierte Feldtypen, kann aber durch Registrierung neuer Typen mit `registerDialogControl` erweitert werden.
 
 ### Steuerelemente
@@ -8,15 +8,15 @@ Sie unterstützt mehrere vordefinierte Feldtypen, kann aber durch Registrierung 
 - [Basis-Steuerelemente](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-00-base-controls)
   - `plain` - statischer Text
   - `text` - editierbarer Text
-  - `multi-text` - vom Benutzer definierter String-Array
+  - `multi-text` - vom Benutzer definierte Zeichenketten-Array
   - `checkbox` - Kontrollkästchen
   - `tumbler` - Kippschalter
   - `radio` - Optionsfeld
-  - `editable-list` - Liste von löschbaren Strings
-  - `multi-editable-list` - Mehrfachliste von löschbaren Strings
+  - `editable-list` - Liste von entfernbaren Zeichenketten
+  - `multi-editable-list` - Mehrfachliste von entfernbaren Zeichenketten
   - `text area` - Textbereich
   - `select` - Auswahlfeld
-  - `block` - Ermöglicht das Hinzufügen von `ReactNode`
+  - `block` - Ermöglicht das Hinzufügen von ReactNode
 - [Registrierung benutzerdefinierter Steuerelemente](https://preview.yandexcloud.dev/dialog-fields/?path=/story/tutorials-custom-control-registration)
 
 ### Funktionen
@@ -24,10 +24,10 @@ Sie unterstützt mehrere vordefinierte Feldtypen, kann aber durch Registrierung 
 - In-Place- und Modalansicht
 - [Ein Tab](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) und [mehrere Tab-Formulare](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
 - [Vertikale/Horizontale Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
-- [Ausgeblendete Felder und Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
+- [Versteckte Felder und Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
 - [Felder basierend auf Werten verknüpfen](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
-- [Feld-Level-Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
-- [Formular-Level-Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
+- [Feld-spezifische Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
+- [Formular-spezifische Validierung](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
 - [Virtualisierte Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)
 - [Klonbare Tabs](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-cloneable-tabs-)
 - [Gruppierte Felder](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-03-sections)
@@ -81,5 +81,31 @@ function MyForm() {
   );
 }
 ```
+
+### Bedingte Sichtbarkeit
+
+Felder und Tabs unterstützen `visibilityCondition`. Mit einem String `when`
+erhält `isActive` den Wert dieses Feldes:
+
+```ts
+visibilityCondition: {
+  when: 'register',
+  isActive: (value) => Boolean(value),
+}
+```
+
+Verwenden Sie ein Array von Feldnamen, um von mehreren Werten abhängig zu sein. `isActive` erhält die
+Werte als separate Argumente in der gleichen Reihenfolge wie `when`:
+
+```ts
+visibilityCondition: {
+  when: ['multiConsumer', 'register'],
+  isActive: (multiConsumer, register) => Boolean(multiConsumer && register),
+}
+```
+
+Namen sind Pfade vom Formular-Stammverzeichnis, einschließlich Tab-Präfixen wie
+`general.register`. Die Sichtbarkeit wird aktualisiert, wenn sich eines der referenzierten Felder ändert.
+Ein Feld, das aufgrund seiner Bedingung ausgeblendet wird, wird nicht nur visuell versteckt, sondern auch demontiert.
 
 Weitere Beispiele finden Sie im [Storybook](https://preview.yandexcloud.dev/dialog-fields).

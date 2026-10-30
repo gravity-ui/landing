@@ -16,9 +16,13 @@ Stellen Sie sicher, dass die Peer-Abhängigkeiten in Ihrem Projekt installiert s
 npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
+## Migration
+
+Upgrade von Version 4.x, 5.x oder 6.x: siehe [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md).
+
 ## Verwendung
 
-Rendern Sie `AsideHeader` als App-Shell. Dies ist eine gesteuerte Komponente – Sie verwalten den zusammengeklappten Zustand über `compact`/`onChangeCompact` – und Ihr Seiteninhalt wird über `renderContent` bereitgestellt. Richten Sie zuerst die `@gravity-ui/uikit`-Stile und `ThemeProvider` ein (siehe [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+Rendern Sie `AsideHeader` als App-Shell. Dies ist eine gesteuerte Komponente – Sie verwalten den zusammengeklappten Zustand über `compact`/`onChangeCompact` – und Ihr Seiteninhalt wird über `renderContent` bereitgestellt. Richten Sie zuerst die `@gravity-ui/uikit`-Stile und `ThemeProvider` ein (siehe die [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
 
 ```tsx
 import React from 'react';
@@ -59,7 +63,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 ## Roadmap 2025
 
 1. Unterstützung für SSR
-2. Weitere Dokumentation und Beispiele für [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) hinzufügen
+2. Mehr Dokumentation und Beispiele für [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) hinzufügen
 3. Unterstützung für Navigation im UIKit-Themer
 4. API für subheaderItem, menuItem, footerItem vereinheitlichen
 
@@ -112,7 +116,7 @@ Anwendungs-Shell-Navigationskomponenten für Gravity UI-Apps – die einklappbar
 - **`AsideHeader` ist gesteuert.** Sie müssen den zusammengeklappten Zustand mit `compact` verwalten und ihn in `onChangeCompact` aktualisieren; das Übergeben von `compact` ohne Handler friert die Seitenleiste ein.
 - **Menüelemente sind `menuItems`, indiziert nach `id`.** Jedes Element ist `{id, title, icon, current, onItemClick}`; `icon` erwartet eine Icon-Komponente (z. B. von `@gravity-ui/icons`), keine Zeichenkette.
 - **Peer-Abhängigkeiten sind erforderlich.** `@gravity-ui/uikit`, `@gravity-ui/icons` und `@bem-react/classname` müssen zusammen mit `react`/`react-dom` installiert werden.
-- **Benötigt uikit-Setup.** Rendern Sie innerhalb von `ThemeProvider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`, oder die Shell wird ungestylt gerendert.
+- **Benötigt uikit-Setup.** Rendern Sie innerhalb von `ThemeProvider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`, sonst wird die Shell ungestylt gerendert.
 - **Seiteninhalt wird über `renderContent` bereitgestellt.** Rendern Sie Ihren gerouteten Inhalt über die `renderContent`-Prop / `PageLayout`, nicht als `children`.
 
 ## Dokumentation für KI-Agenten

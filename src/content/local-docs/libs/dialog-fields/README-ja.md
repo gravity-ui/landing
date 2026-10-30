@@ -13,19 +13,19 @@
   - `tumbler` - トゥンブラー
   - `radio` - ラジオボタン
   - `editable-list` - 削除可能な文字列のリスト
-  - `multi-editable-list` - 削除可能な文字列のマルチリスト
+  - `multi-editable-list` - 削除可能な文字列の複数リスト
   - `text area` - テキストエリア
-  - `select` - セレクトボックス
+  - `select` - セレクト
   - `block` - `ReactNode` を追加可能
 - [カスタムコントロールの登録](https://preview.yandexcloud.dev/dialog-fields/?path=/story/tutorials-custom-control-registration)
 
 ### 特徴
 
 - インプレース表示とモーダル表示
-- [タブ1つ](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) および [複数タブのフォーム](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
+- [タブ1つ](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) および [複数のタブフォーム](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
 - [縦/横タブ](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
 - [非表示フィールドとタブ](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
-- [値によるフィールドの連携](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
+- [値によるフィールドの連動](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-05-extras-and-linked-fields)
 - [フィールドレベルのバリデーション](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-06-field-validators)
 - [フォームレベルのバリデーション](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-07-form-validation)
 - [仮想化されたタブ](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-08-virtualized-tabs)
@@ -57,7 +57,7 @@ function MyForm() {
     <DFDialog<FormValues>
       visible={true}
       headerProps={{
-        title: 'マイフォーム',
+        title: 'My form',
       }}
       onAdd={(form) => {
         console.log(form.getState().values);
@@ -67,14 +67,14 @@ function MyForm() {
         {
           name: 'firstName',
           type: 'text',
-          caption: '名',
-          tooltip: '名フィールドの説明',
+          caption: 'First name',
+          tooltip: 'Description for first name field',
         },
         {
           name: 'lastName',
           type: 'text',
-          caption: '姓',
-          tooltip: '姓フィールドの説明',
+          caption: 'LastName',
+          tooltip: 'Description for last name field',
         },
       ]}
     />
@@ -82,4 +82,27 @@ function MyForm() {
 }
 ```
 
-その他の例は [storybook](https://preview.yandexcloud.dev/dialog-fields) でご覧ください。
+### 条件付き表示
+
+フィールドとタブは `visibilityCondition` をサポートしています。文字列 `when` を使用すると、`isActive` はそのフィールドの値を受け取ります。
+
+```ts
+visibilityCondition: {
+  when: 'register',
+  isActive: (value) => Boolean(value),
+}
+```
+
+複数の値に依存するには、フィールド名の配列を使用します。`isActive` は、`when` と同じ順序で、値を個別の引数として受け取ります。
+
+```ts
+visibilityCondition: {
+  when: ['multiConsumer', 'register'],
+  isActive: (multiConsumer, register) => Boolean(multiConsumer && register),
+}
+```
+
+名前はフォームのルートからのパスであり、`general.register` のようなタブプレフィックスも含まれます。参照されているフィールドのいずれかが変更されると、表示が更新されます。
+条件によって非表示になったフィールドは、単に視覚的に隠されるのではなく、アンマウントされます。
+
+その他の例については、[storybook](https://preview.yandexcloud.dev/dialog-fields) を参照してください。

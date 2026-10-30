@@ -467,7 +467,7 @@ createLayoutPlugin({
 });
 ```
 
-これらのオプションは `createDefaultPlugins({layout: …})` でも利用可能です。上記の例のように、`pluginsOptions.layout.name` でレイアウトプラグインを有効にします。`publicPathFallbacks` を省略するか `[]` を渡すと、通常のレンダリングが維持されます。
+これらのオプションは `createDefaultPlugins({layout: …})` でも利用可能です。上記の例のように `pluginsOptions.layout.name` でレイアウトプラグインを有効にします。`publicPathFallbacks` を省略するか `[]` を渡すと、通常のレンダリングが維持されます。
 
 コールバック関数を使用することもできます：
 
@@ -484,49 +484,50 @@ createLayoutPlugin({
 
 関数は一度だけ実行され、クロージャやインポートなしで自己完結している必要があります。`{publicPath}` を受け取ります。ルート相対のプライマリパスの場合、この値には `layout.prefix` が含まれます。`[]` を返すと、リトライなしでプライマリアドレスが使用されます。
 
-ローダーは app-layout がビルドされる際にバンドルおよびミニファイされます。ユーザーコールバックは、`Function.prototype.toString()` を使用してコンパイルされたサーバーコードからシリアライズされます。esbuild の `keepNames` のような変換は、ブラウザで利用できない外部ヘルパー (`__name`) を注入する可能性があります。コールバックは最終的なサーバービルドでテストしてください。ブートストラップが失敗した場合、HTML パーシング中の同期登録は `document.write` を介して元のタグを復元しますが、これはブラウザの制限を受けます。CSP が登録スクリプトをブロックした場合、リカバリは機能しません。
+ローダーは `app-layout` がビルドされる際にバンドルされ、ミニファイされます。ユーザーコールバックは `Function.prototype.toString()` を使用してコンパイルされたサーバーコードからシリアライズされます。esbuild の `keepNames` のような変換は、ブラウザで利用できない外部ヘルパー (`__name`) を注入する可能性があります。コールバックは最終的なサーバービルドでテストしてください。ブートストラップが失敗した場合、HTML パーシング中の同期登録は `document.write` を介してスクリプトタグを復元しますが、これはブラウザの制限を受けます。CSP が登録スクリプトをブロックした場合、リカバリは機能しません。
 
 リトライオプション：
 
 ```typescript
 interface AssetRetryOptions {
   retries?: number; // アドレスごとの追加試行回数。デフォルト: 0。
-  delayMs?: number; // 最初の試行までの遅延時間（ミリ秒）。デフォルト: 500。
-  factor?: number; // 後続の試行遅延の乗数。デフォルト: 2。
-  maxDelayMs?: number; // 最大試行遅延時間（ミリ秒）。デフォルト: 3000。
-  timeoutMs?: number; // 試行タイムアウト（ミリ秒）。デフォルト: 10000。0 で無効化。
+  delayMs?: number; // 最初のリトライ前の遅延時間（ミリ秒）。デフォルト: 500。
+  factor?: number; // 後続のリトライ遅延時間の乗数。デフォルト: 2。
+  maxDelayMs?: number; // 最大リトライ遅延時間（ミリ秒）。デフォルト: 3000。
+  timeoutMs?: number; // 試行タイムアウト時間（ミリ秒）。デフォルト: 10000。0 で無効化。
 }
 ```
 
-これらのオプションを `assetRetry` として `createLayoutPlugin` に渡します。デフォルトでは、リソースエラーが発生すると、同じ URL をリトライせずに次のアドレスに切り替わります。`retries` を設定すると、指数関数的な遅延で追加の試行が可能になります。ローダーは最後に成功したアドレスを記憶し、後続のリソースをそこから開始し、残りのアドレスをバックアップとして循環させます。個々の失敗は優先アドレスを変更しません。成功したロード後にのみ変更されます。インフライトリソースは候補順序を維持します。明示的な `undefined` オプション値はデフォルトを使用します。
+これらのオプションを `assetRetry` として `createLayoutPlugin` に渡します。デフォルトでは、リソースエラーが発生すると、同じ URL をリトライせずに次のアドレスに切り替わります。`retries` を設定すると、指数関数的な遅延で追加の試行が可能になります。ローダーは最後に成功したアドレスを記憶し、後続のスクリプトはそこから開始し、残りのアドレスをバックアップとして循環します。スタイルシートは常に `publicPath` から開始し、次に設定された順序でバックアップアドレスを試行します。個々の失敗は優先アドレスを変更しません。成功したロード後にのみ変更されます。インフライトリソースは候補順序を維持します。明示的な `undefined` オプション値はデフォルト値を使用します。
 
-各スクリプトまたはスタイルシートの試行には `timeoutMs` の制限があります（デフォルトは 10000 ミリ秒）。タイムアウトは、ロードエラーと同じリトライポリシーに従います。試行回数が残っている間は現在の URL をリトライし、その後次アドレスを試行します。`0` を設定するとタイムアウトが無効になります。ローダーはタイムアウトした要素を削除し、それらの遅延コールバックを無視します。スクリプトを削除しても、その実行がキャンセルされることは保証されません。
+各スクリプトまたはスタイルシートの試行には `timeoutMs` の制限があります（デフォルトは 10000 ミリ秒）。タイムアウトはロードエラーと同じリトライポリシーに従います。試行回数が残っている間は現在の URL をリトライし、その後次のアドレスを試行します。タイムアウトを無効にするには `0` を設定します。ローダーはタイムアウトした要素を削除し、それらの遅延コールバックを無視します。スクリプトを削除しても、その実行がキャンセルされることは保証されません。
 
-バックアップアドレスは、同じビルドファイルを同じ相対パスで提供する必要があります。ベースアドレスにクエリパラメータやフラグメントを含めないでください。末尾のスラッシュは自動的に追加され、重複するアドレスは削除されます。`/build/` のようなパスはページのオリジンからの相対パスです。アプリケーションプレフィックスがあれば明示的に含めてください。CSP でバックアップドメインを許可し、CORS を設定してください。
+バックアップアドレスは、同じビルドファイルを同じ相対パスで提供する必要があります。ベースアドレスにクエリパラメータやフラグメントを含めないでください。末尾のスラッシュは自動的に追加され、重複するアドレスは削除されます。`/build/` のようなパスはページのオリジンに対して相対的です。アプリケーションプレフィックスがあれば明示的に含めてください。CSP でバックアップドメインを許可し、CORS を設定してください。
 
-読み込み動作：
+読み込みの動作：
 
-- `defer`スクリプト（`async`や`type`なし）およびプライマリパス下のスタイルシートを、nonceと`crossOrigin`を保持したままサポートします。その他のリソースは通常のレンダリングを維持します。レスポンスフラグメントの管理対象アセットはすべて、ブートストラップ直後に発行される単一のインラインスクリプトによって登録されます（ヘッド順：スタイルシート、次にスクリプト）。元のタグはレンダリングされません。
-- スタイルシートは並列でロードされます。スクリプトは、スタイルシートのロード試行が完了し、DOMが準備できた後に順次実行されます。`DOMContentLoaded`は、アプリケーションのロードが完了したことを意味するわけではありません。
-- 最終的な失敗は、`window`上で`app-layout:asset-load-error`を発行します。イベントの詳細には`{type, originalUrl, attempts}`が含まれ、エクスポートされた`AssetLoadError`型によって記述されます。`attempts`はリトライを含む試行されたURLのリストです。ハンドラーはリソースロード前に登録してください。最終的なスタイルシートのロード失敗はスクリプトをブロックしません。最終的なスクリプトのロード失敗は、ローダーのスクリプトキューを停止します。
-- ストリーミング中の早期スクリプトには、`renderScripts(content, scripts, state)`を使用し、次に同じ`state: AssetRenderState = {}`で`renderHeadContent(content, state)`を使用してください。これは単一のHTMLレスポンスに対して行われ、コンテンツが再生成された場合でも同様です。ブートストラップは一度だけ発行され、その初期設定はレスポンス全体に適用されます。直接の`content.helpers`呼び出しは、フォールバック処理なしで通常のタグをレンダリングします。
+- `defer` スクリプト（`async` や `type` なし）とプライマリパス下のスタイルシートをサポートし、`nonce` および `crossOrigin` を保持します。その他のリソースは通常のレンダリングを維持します。レスポンスフラグメントの管理対象アセットはすべて、ブートストラップの直後に、ヘッドの順序（スタイルシート、次にスクリプト）でエミットされる単一のインラインスクリプトによって登録されます。元のスクリプトタグはレンダリングされません。
+- スタイルシートは HTML に含まれ、JavaScript ローダーが開始できない場合でも並列でロードされます。リトライ中に部分的にスタイルが適用されたコンテンツが表示される可能性があります。スクリプトは、スタイルシートの試行が完了し、DOM が準備できた後に順序どおりに実行されます。`DOMContentLoaded` は、アプリケーションのロードが完了したことを意味するわけではありません。
+- 最終的な失敗は、`window` 上で `app-layout:asset-load-error` をエミットします。イベントの詳細には `{type, originalUrl, attempts}` が含まれ、エクスポートされた `AssetLoadError` 型によって記述されます。`attempts` は、リトライを含む試行された URL のリストです。ハンドラーはリソースがロードされる前に登録してください。最終的なスタイルシートのロード失敗はスクリプトをブロックしません。最終的なスクリプトのロード失敗は、ローダーのスクリプトキューを停止します。
+- ストリーミング中の初期スクリプトには、`renderScripts(content, scripts, state)` を使用し、次に同じ `state: AssetRenderState = {}` で `renderHeadContent(content, state)` を使用します。これは 1 つの HTML レスポンスに対して行われ、コンテンツが再生成される場合でも同様です。`renderHeadContent` は HTML レスポンスごとに 1 回呼び出されます。ブートストラップは 1 回エミットされ、その初期設定はレスポンス全体に適用されます。直接の `content.helpers` の呼び出しは、フォールバック処理なしで通常のタグをレンダリングします。
+- ストリーミング中、スタイルシートの `timeoutMs` は、その参照が HTML に到着したときに開始されます。`DOMContentLoaded` で見つからない登録済みスタイルシートリンクは失敗として報告され、スクリプトをブロックしません。
 
 ```ts
 import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
 
 const state: AssetRenderState = {};
 res.write(renderScripts(content, firstScripts, state));
-// ... データの待機と必要に応じたコンテンツの再生成。
+// ... await data and regenerate content if needed.
 res.write(renderHeadContent(content, state));
 ```
 
-遅延チャンクには、[App Builder](https://github.com/gravity-ui/app-builder)の`client.publicPathFallback`のような個別の設定が必要です。両方のライブラリでバックアップアドレスを設定してください。フォールバックリストはグローバル変数では共有されません。
+遅延チャンクには、[App Builder](https://github.com/gravity-ui/app-builder) の `client.publicPathFallback` のような個別の設定が必要です。両方のライブラリでバックアップアドレスを設定してください。フォールバックリストはグローバル変数を通じて共有されません。
 
 ### @gravity-ui/uikit
 
-body属性を追加します。
+body 属性を追加します。
 
-使用方法：
+使用方法:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -536,7 +537,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'ホーム',
+      title: 'Home page',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -548,7 +549,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグインオプション：
+プラグインオプション:
 
 ```typescript
 interface UikitPluginOptions {
@@ -561,11 +562,11 @@ interface UikitPluginOptions {
 
 マイクロフロントエンドのバージョン情報をページに追加します。
 
-このプラグインは、提供されたマイクロフロントエンドのバージョンを含むグローバルな`window.__REMOTE_VERSIONS__`オブジェクトを作成します。これは、モジュールフェデレーションや同様のマイクロフロントエンドアーキテクチャが、ロードするリモートモジュールのバージョンを決定するために使用できます。
+このプラグインは、提供されたマイクロフロントエンドのバージョンを含むグローバルな `window.__REMOTE_VERSIONS__` オブジェクトを作成します。これは、モジュールフェデレーションや同様のマイクロフロントエンドアーキテクチャが、ロードするリモートモジュールのバージョンを決定するために使用できます。
 
-[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation)および`moduleFederation.remotesRuntimeVersioning`オプションと組み合わせて使用することで、対応するバージョンのリモートモジュールを自動的にロードできます。
+[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) および `moduleFederation.remotesRuntimeVersioning` オプションと組み合わせて使用することで、対応するバージョンのリモートモジュールを自動的にロードできます。
 
-使用方法：
+使用方法:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -575,7 +576,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'ホーム',
+      title: 'Home page',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -588,7 +589,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグインオプション：
+プラグインオプション:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -596,7 +597,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-すべてのプラグインを作成するためのヘルパーがあります：
+すべてのプラグインを作成するためのヘルパーがあります。
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -607,7 +608,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: 'ホーム',
+        title: 'Home page',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -625,7 +626,7 @@ app.get((req, res) => {
 
 ## 代替使用方法
 
-`generateRenderContent`、`renderHeadContent`、`renderBodyContent`のパーツレンダラーをHTMLストリーミング経由で使用します：
+`generateRenderContent`、`renderHeadContent`、`renderBodyContent` のパーツレンダラーを使用して HTML ストリーミングを行います。
 
 ```js
 import express from 'express';
@@ -648,7 +649,7 @@ app.get('/', async function (req, res) {
   const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
-    title: 'ホーム',
+    title: 'Home page',
   });
 
   const {htmlAttributes, helpers, bodyContent} = content;

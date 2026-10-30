@@ -1,14 +1,14 @@
-## 간략한 설명
+## 짧은 설명
 
-`DFDialog` 컴포넌트는 폼 생성을 쉽게 하기 위한 목적으로, 내부적으로 `react-final-form`을 사용합니다.
-몇 가지 미리 정의된 필드 유형을 지원하지만, `registerDialogControl`을 사용하여 새로운 필드를 등록하여 확장할 수 있습니다.
+`DFDialog` 컴포넌트는 폼 생성을 쉽게 하기 위한 목적으로, 내부적으로 react-final-form을 사용합니다.
+몇 가지 미리 정의된 필드 유형을 지원하지만, 사용자는 `registerDialogControl`을 사용하여 새로운 유형을 등록하여 확장할 수 있습니다.
 
 ### 컨트롤
 
 - [기본 컨트롤](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-00-base-controls)
   - `plain` - 정적 텍스트
   - `text` - 편집 가능한 텍스트
-  - `multi-text` - 사용자가 정의하는 문자열 배열
+  - `multi-text` - 사용자가 정의한 문자열 배열
   - `checkbox` - 체크박스
   - `tumbler` - 토글 스위치
   - `radio` - 라디오 버튼
@@ -21,7 +21,7 @@
 
 ### 기능
 
-- 인플레이스(Inplace) 및 모달(Modal) 보기
+- 인플레이스 및 모달 보기
 - [단일 탭](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-01-one-tab) 및 [여러 탭 폼](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab--horizontal-tabs)
 - [세로/가로 탭](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-02-several-tab)
 - [숨겨진 필드 및 탭](https://preview.yandexcloud.dev/dialog-fields/?path=/story/demo-04-visibility-condition)
@@ -36,7 +36,7 @@
 
 ```bash
 $ npm install @gravity-ui/dialog-fields
-# 아직 설치하지 않았다면 필요한 react/react-dom 버전을 사용하세요
+# 아직 설치하지 않은 경우 필요한 react/react-dom 버전을 사용하세요
 $ npm install @gravity-ui/dialog-fields react@18 react-dom@18
 ```
 
@@ -82,4 +82,30 @@ function MyForm() {
 }
 ```
 
-더 많은 예시는 [storybook](https://preview.yandexcloud.dev/dialog-fields)에서 확인할 수 있습니다.
+### 조건부 표시
+
+필드와 탭은 `visibilityCondition`을 지원합니다. `when` 문자열을 사용하면
+`isActive`는 해당 필드의 값을 받습니다.
+
+```ts
+visibilityCondition: {
+  when: 'register',
+  isActive: (value) => Boolean(value),
+}
+```
+
+여러 값에 의존하려면 필드 이름 배열을 사용하세요. `isActive`는 `when`과
+동일한 순서로 별도의 인수로 값을 받습니다.
+
+```ts
+visibilityCondition: {
+  when: ['multiConsumer', 'register'],
+  isActive: (multiConsumer, register) => Boolean(multiConsumer && register),
+}
+```
+
+이름은 탭 접두사(`general.register` 등)를 포함한 폼 루트의 경로입니다.
+참조된 필드 중 하나가 변경되면 가시성이 업데이트됩니다.
+조건에 의해 숨겨진 필드는 시각적으로만 숨겨지는 것이 아니라 마운트 해제됩니다.
+
+[스토리북](https://preview.yandexcloud.dev/dialog-fields)에서 더 많은 예제를 확인하세요.

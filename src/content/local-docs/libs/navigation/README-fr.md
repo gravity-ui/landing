@@ -1,6 +1,6 @@
 # @gravity-ui/navigation &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/navigation)](https://www.npmjs.com/package/@gravity-ui/navigation) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/navigation/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/navigation/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/navigation/)
 
-### Navigation dans l'en-tête latéral &middot; [Aperçu →](https://preview.yandexcloud.dev/navigation/)
+### Navigation pour l'en-tête latéral &middot; [Aperçu →](https://preview.yandexcloud.dev/navigation/)
 
 ![](docs/images/showcase.png)
 
@@ -16,9 +16,13 @@ Assurez-vous que les dépendances pair sont installées dans votre projet
 npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
+## Migration
+
+Mise à niveau depuis les versions 4.x, 5.x ou 6.x : consultez [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md).
+
 ## Utilisation
 
-Rendez `AsideHeader` comme la structure de l'application. C'est un composant contrôlé — vous gérez l'état replié via `compact`/`onChangeCompact` — et le contenu de votre page passe par `renderContent`. Configurez d'abord les styles de `@gravity-ui/uikit` et `ThemeProvider` (voir le [guide des styles uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+Rendez `AsideHeader` comme structure de l'application. C'est un composant contrôlé — vous gérez l'état réduit via `compact`/`onChangeCompact` — et le contenu de votre page passe par `renderContent`. Configurez d'abord les styles `@gravity-ui/uikit` et `ThemeProvider` (voir le [guide des styles uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
 
 ```tsx
 import React from 'react';
@@ -59,9 +63,9 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 ## Feuille de route 2025
 
 1. Prise en charge du SSR
-2. Ajout de plus de documentation et d'exemples sur [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
-3. Prise en charge de la navigation dans le thème UIKit
-4. Unification des API `subheaderItem`, `menuItem`, `footerItem`
+2. Ajouter plus de documentation et d'exemples sur [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
+3. Prise en charge de la navigation dans le thémiseur UIKit
+4. Unifier les API de `subheaderItem`, `menuItem` et `footerItem`
 
 ## Composants
 
@@ -85,7 +89,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## API CSS
 
-Utilisé pour la thémisation des composants de Navigation
+Utilisé pour la thématisation des composants de Navigation
 
 ## Licence
 
@@ -93,13 +97,13 @@ Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
 
 ## Pour les agents IA
 
-Composants de navigation de la structure d'application pour les applications Gravity UI — la barre latérale `AsideHeader` rétractable, ainsi que les pieds de page, les tiroirs, le logo, les panneaux de raccourcis clavier et les paramètres qui encadrent une page entière.
+Composants de navigation pour la structure d'application des applications Gravity UI — la barre latérale `AsideHeader` rétractable, ainsi que les pieds de page, les tiroirs, le logo, les panneaux de raccourcis clavier et les paramètres qui encadrent une page entière.
 
 ### Quand l'utiliser
 
 - La structure de navigation principale de l'application : `AsideHeader` (navigation latérale rétractable) avec `menuItems`, sous-en-tête et sections de pied de page.
 - Interface utilisateur de support : `Drawer`/`DrawerItem`, `Footer`/`MobileFooter`, `MobileHeader`, `HotkeysPanel`, `Settings`, `ActionBar`, `Logo`.
-- Mise en page du contenu de la page à l'intérieur de la structure de navigation via `renderContent` / `PageLayout`.
+- Mise en page du contenu de la page dans la structure de navigation via `renderContent` / `PageLayout`.
 
 ### Quand ne pas l'utiliser
 
@@ -109,12 +113,12 @@ Composants de navigation de la structure d'application pour les applications Gra
 
 ### Pièges courants
 
-- **`AsideHeader` est contrôlé.** Vous devez gérer l'état replié avec `compact` et le mettre à jour dans `onChangeCompact` ; passer `compact` sans le gestionnaire fige la barre latérale.
+- **`AsideHeader` est contrôlé.** Vous devez gérer l'état réduit avec `compact` et le mettre à jour dans `onChangeCompact` ; passer `compact` sans le gestionnaire fige la barre latérale.
 - **Les éléments de menu sont `menuItems`, indexés par `id`.** Chaque élément est `{id, title, icon, current, onItemClick}`; `icon` accepte un composant d'icône (par exemple, de `@gravity-ui/icons`), pas un nom de chaîne.
-- **Les dépendances pair sont requises.** `@gravity-ui/uikit`, `@gravity-ui/icons`, et `@bem-react/classname` doivent être installés aux côtés de `react`/`react-dom`.
+- **Les dépendances pair sont requises.** `@gravity-ui/uikit`, `@gravity-ui/icons` et `@bem-react/classname` doivent être installés avec `react`/`react-dom`.
 - **Nécessite une configuration uikit.** Rendez à l'intérieur de `ThemeProvider` et importez `@gravity-ui/uikit/styles/styles.css`, sinon la structure s'affichera sans style.
 - **Le contenu de la page passe par `renderContent`.** Rendez votre contenu routé via la prop `renderContent` / `PageLayout`, pas comme `children`.
 
 ## Documentation pour les agents IA
 
-La documentation lisible par l'agent pour la version installée se trouve dans `node_modules/@gravity-ui/navigation/build/docs/INDEX.md`.
+La documentation lisible par agent pour la version installée se trouve dans `node_modules/@gravity-ui/navigation/build/docs/INDEX.md`.
