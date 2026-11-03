@@ -7065,6 +7065,296 @@ function App() {
 
 ---
 
+> Generated for `@gravity-ui/charts@1.72.0`
+
+# @gravity-ui/charts documentation
+
+Documentation for the **1.72.0** version of `@gravity-ui/charts`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
+
+## For AI agents
+
+A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
+
+### When to use
+
+- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
+- Rendering a chart from declarative data rather than drawing imperatively.
+
+### When not to use
+
+- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
+- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
+
+### Common pitfalls
+
+- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
+- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
+- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
+- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
+
+### Useful docs
+
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/get-started.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/tooltip.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/legend.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/html.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/value-formatting.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/data-labels.md)
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/axes/axis-types.md)
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/axes/axis-labels.md)
+
+## Install
+
+```shell
+npm install @gravity-ui/uikit @gravity-ui/charts
+```
+
+`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {Chart} from '@gravity-ui/charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Temperature',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <Chart data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`Chart` adapts to its parent's size, so the wrapping element must have a height.
+
+## Guides
+
+- [Adding a series plugin](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/development/adding-series-plugin.md) — This checklist is for contributors adding a built-in series plugin to Charts.
+- [Area range series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/area-range.md) — An area range series fills the interval between a lower and an upper value at each X position.
+- [Area series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/area.md) — An area series fills the space between a line and its baseline.
+- [Axes](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/axes/index.md) — Configure the X axis with xAxis and Y axes with yAxis. Choose an axis type, then adjust limits, ticks, and labels.
+- [Axis labels](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/axes/axis-labels.md) — Axis labels show a value or category for each tick. Configure them with xAxis.labels for the X axis and yAxis[].labels for Y axes.
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/axes/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
+- [Bar-X series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/bar-x.md) — A Bar-X series compares values with vertical columns.
+- [Bar-Y series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/bar-y.md) — A Bar-Y series compares values with horizontal bars.
+- [Chart config tooling](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/integrations/chart-config.md) — The package publishes two versioned config artifacts:
+- [Colors](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/colors.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/data-labels.md)
+- [Events and interactions](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/chart-interactions.md)
+- [Examples](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/examples.md) — Explore live examples by series type and topic, starting with the basics. Follow Learn more for explanations and code examples in the guides.
+- [Funnel series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/funnel.md) — A funnel series shows values at successive stages of a process.
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/get-started.md)
+- [Heatmap series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/heatmap.md) — A heatmap displays a grid of cells, using color to encode a value at each X/Y position.
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/html.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/legend.md)
+- [Line series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/line.md) — A line series connects points to show how a value changes along an ordered axis.
+- [Local development](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/development.md)
+- [Overview](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/overview.md)
+- [Pie series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/pie.md) — A pie series divides a circle into slices proportional to their values. An inner radius turns it into a donut.
+- [Radar series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/radar.md) — A radar series places values on radial axes and connects them into a profile.
+- [Sankey series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/sankey.md) — A Sankey series connects nodes with flows whose widths represent quantities.
+- [Scatter series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/scatter.md) — A scatter series places independent observations by their X and Y values.
+- [Series types](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/index.md) — A series defines how a set of data points is drawn. Its type determines the point fields and available visual options. Add series to series.data.
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/tooltip.md)
+- [Treemap series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/treemap.md) — A treemap divides an area into rectangles sized by value and grouped by a hierarchy.
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
+- [Waterfall series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/waterfall.md) — A waterfall series shows how positive and negative changes build a running total.
+- [X-Range series](https://unpkg.com/@gravity-ui/charts@1.72.0/dist/docs/guides/series-types/x-range.md) — An X-Range series draws horizontal intervals between a start and an end value.
+
+---
+
+> Docs for `@gravity-ui/charts@1.72.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.72.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/charts@1.71.0`
+
+# @gravity-ui/charts documentation
+
+Documentation for the **1.71.0** version of `@gravity-ui/charts`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
+
+## For AI agents
+
+A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
+
+### When to use
+
+- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
+- Rendering a chart from declarative data rather than drawing imperatively.
+
+### When not to use
+
+- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
+- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
+
+### Common pitfalls
+
+- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
+- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
+- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
+- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
+
+### Useful docs
+
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/get-started.md)
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/tooltip.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/legend.md)
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/html.md)
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/value-formatting.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/data-labels.md)
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/axes/axis-types.md)
+- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/axes/axis-labels.md)
+
+## Install
+
+```shell
+npm install @gravity-ui/uikit @gravity-ui/charts
+```
+
+`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `>=17.0.0` |
+| `react-dom` | `>=17.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import {Chart} from '@gravity-ui/charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Temperature',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <Chart data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`Chart` adapts to its parent's size, so the wrapping element must have a height.
+
+## Guides
+
+- [Adding a series plugin](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/development/adding-series-plugin.md) — This checklist is for contributors adding a built-in series plugin to Charts.
+- [Area range series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/area-range.md) — An area range series fills the interval between a lower and an upper value at each X position.
+- [Area series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/area.md) — An area series fills the space between a line and its baseline.
+- [Axes](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/axes/index.md) — Configure the X axis with xAxis and Y axes with yAxis. Choose an axis type, then adjust limits, ticks, and labels.
+- [Axis labels](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/axes/axis-labels.md) — Axis labels show a value or category for each tick. Configure them with xAxis.labels for the X axis and yAxis[].labels for Y axes.
+- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/axes/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
+- [Bar-X series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/bar-x.md) — A Bar-X series compares values with vertical columns.
+- [Bar-Y series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/bar-y.md) — A Bar-Y series compares values with horizontal bars.
+- [Chart config tooling](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/integrations/chart-config.md) — The package publishes two versioned config artifacts:
+- [Colors](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/colors.md)
+- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/data-labels.md)
+- [Events and interactions](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/chart-interactions.md)
+- [Examples](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/examples.md) — Explore live examples by series type and topic, starting with the basics. Follow Learn more for explanations and code examples in the guides.
+- [Funnel series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/funnel.md) — A funnel series shows values at successive stages of a process.
+- [Get started](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/get-started.md)
+- [Heatmap series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/heatmap.md) — A heatmap displays a grid of cells, using color to encode a value at each X/Y position.
+- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/html.md)
+- [Legend](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/legend.md)
+- [Line series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/line.md) — A line series connects points to show how a value changes along an ordered axis.
+- [Local development](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/development.md)
+- [Overview](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/overview.md)
+- [Pie series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/pie.md) — A pie series divides a circle into slices proportional to their values. An inner radius turns it into a donut.
+- [Radar series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/radar.md) — A radar series places values on radial axes and connects them into a profile.
+- [Sankey series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/sankey.md) — A Sankey series connects nodes with flows whose widths represent quantities.
+- [Scatter series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/scatter.md) — A scatter series places independent observations by their X and Y values.
+- [Series types](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/index.md) — A series defines how a set of data points is drawn. Its type determines the point fields and available visual options. Add series to series.data.
+- [Theming](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/theming.md)
+- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/tooltip.md)
+- [Treemap series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/treemap.md) — A treemap divides an area into rectangles sized by value and grouped by a hierarchy.
+- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
+- [Waterfall series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/waterfall.md) — A waterfall series shows how positive and negative changes build a running total.
+- [X-Range series](https://unpkg.com/@gravity-ui/charts@1.71.0/dist/docs/guides/series-types/x-range.md) — An X-Range series draws horizontal intervals between a start and an end value.
+
+---
+
+> Docs for `@gravity-ui/charts@1.71.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.71.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/charts@1.70.0`
 
 # @gravity-ui/charts documentation
@@ -8154,264 +8444,6 @@ export default function App() {
 
 ---
 
-> Generated for `@gravity-ui/charts@1.62.0`
-
-# @gravity-ui/charts documentation
-
-Documentation for the **1.62.0** version of `@gravity-ui/charts`.
-Your training data may be outdated — these files are the source of truth.
-
-Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
-
-## For AI agents
-
-A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
-
-### When to use
-
-- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
-- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
-- Rendering a chart from declarative data rather than drawing imperatively.
-
-### When not to use
-
-- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
-- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
-- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
-
-### Common pitfalls
-
-- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
-- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
-- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
-- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
-
-### Useful docs
-
-- [Get started](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/get-started.md)
-- [Theming](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/theming.md)
-- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/tooltip.md)
-- [Legend](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/legend.md)
-- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/html.md)
-- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/value-formatting.md)
-- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/data-labels.md)
-- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-types.md)
-- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-labels.md)
-
-## Install
-
-```shell
-npm install @gravity-ui/uikit @gravity-ui/charts
-```
-
-`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import {Chart} from '@gravity-ui/charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Temperature',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <Chart data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`Chart` adapts to its parent's size, so the wrapping element must have a height.
-
-## Guides
-
-- [Adding a series plugin](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/development/adding-series-plugin.md) — This checklist is for contributors adding a built-in series plugin to Charts.
-- [Area range series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/area-range.md) — An area range series shows the interval between a lower and an upper value for every point on the x-axis. It is useful for uncertainty bands, min/max observations, confidence intervals, and other data where both boundaries are meaningful.
-- [Area series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/area.md) — An area series is a line series with the space between the line and its baseline filled. It is useful for showing magnitude over time and for comparing cumulative values with stacking.
-- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-labels.md) — Axis labels show a value or category for each tick. Configure them with xAxis.labels for the X axis and yAxis[].labels for Y axes.
-- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/axes/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
-- [Bar-X series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/bar-x.md) — A Bar-X series displays vertical columns. Each point provides an x coordinate or category and a y value. Set series.data[].type to bar-x.
-- [Chart config tooling](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/integrations/chart-config.md) — The package publishes two versioned config artifacts:
-- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/data-labels.md)
-- [Get started](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/get-started.md)
-- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/html.md)
-- [Legend](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/legend.md)
-- [Line series](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/series-types/line.md) — A line series connects data points to show how a value changes along the X axis. It is commonly used for time series, trends, and comparisons between several metrics.
-- [Local development](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/development.md)
-- [Overview](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/overview.md)
-- [Theming](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/theming.md)
-- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/tooltip.md)
-- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.62.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
-
----
-
-> Docs for `@gravity-ui/charts@1.62.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.62.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/charts@1.61.0`
-
-# @gravity-ui/charts documentation
-
-Documentation for the **1.61.0** version of `@gravity-ui/charts`.
-Your training data may be outdated — these files are the source of truth.
-
-Paths are relative to this file (`node_modules/@gravity-ui/charts/dist/docs/`).
-
-## For AI agents
-
-A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
-
-### When to use
-
-- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
-- Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
-- Rendering a chart from declarative data rather than drawing imperatively.
-
-### When not to use
-
-- Projects still on `@gravity-ui/chartkit` — that is the older adapter-based wrapper (YAGR/Highcharts/D3); this package is the modern standalone renderer and is not a drop-in replacement.
-- Plain tabular data — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
-- Non-React or server-only rendering — `Chart` renders React SVG and needs the DOM.
-
-### Common pitfalls
-
-- **The component is `Chart`, not `ChartKit`.** Import `{Chart}` from `@gravity-ui/charts`; `ChartKit` belongs to the separate legacy `@gravity-ui/chartkit` package.
-- **The data prop is `data`, shaped `{series: {data: [...]}}`.** Each entry in `series.data` is one series with its own `type` and `data` array — there is no top-level array of series.
-- **Nothing renders without a sized container.** `Chart` fills its parent, so give the wrapper an explicit height.
-- **Requires uikit setup.** Wrap in `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` is a required peer dependency.
-
-### Useful docs
-
-- [Get started](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/get-started.md)
-- [Theming](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/theming.md)
-- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/tooltip.md)
-- [Legend](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/legend.md)
-- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/html.md)
-- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/value-formatting.md)
-- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/data-labels.md)
-- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/axes/axis-types.md)
-- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/axes/axis-labels.md)
-
-## Install
-
-```shell
-npm install @gravity-ui/uikit @gravity-ui/charts
-```
-
-`@gravity-ui/uikit` is a required peer dependency — it provides the theming and styles the charts rely on.
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-Import the `@gravity-ui/uikit` styles once in your entry point, wrap your app in `ThemeProvider`, and render a `Chart` inside a container with an explicit height:
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import {Chart} from '@gravity-ui/charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Temperature',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <Chart data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`Chart` adapts to its parent's size, so the wrapping element must have a height.
-
-## Guides
-
-- [Area range series](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/series-types/area-range.md) — An area range series shows the interval between a lower and an upper value for every point on the x-axis. It is useful for uncertainty bands, min/max observations, confidence intervals, and other data where both boundaries are meaningful.
-- [Area series](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/series-types/area.md) — An area series is a line series with the space between the line and its baseline filled. It is useful for showing magnitude over time and for comparing cumulative values with stacking.
-- [Axis Labels](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/axes/axis-labels.md) — Axis labels show a value or category for each tick. Configure them with xAxis.labels for the X axis and yAxis[].labels for Y axes.
-- [Axis Types](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/axes/axis-types.md) — Choosing the correct axis type is crucial for accurate data representation. This guide covers available axis types and their applications.
-- [Chart config tooling](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/integrations/chart-config.md) — The package publishes two versioned config artifacts:
-- [Data Labels](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/data-labels.md)
-- [Development](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/development.md)
-- [Get started](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/get-started.md)
-- [HTML Content](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/html.md)
-- [Legend](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/legend.md)
-- [Line series](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/series-types/line.md) — A line series connects data points to show how a value changes along the X axis. It is commonly used for time series, trends, and comparisons between several metrics.
-- [Overview](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/overview.md)
-- [Theming](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/theming.md)
-- [Tooltip](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/tooltip.md)
-- [Value Formatting](https://unpkg.com/@gravity-ui/charts@1.61.0/dist/docs/guides/value-formatting.md) — Chart values can appear in several places: tooltip rows, data labels rendered on the shapes themselves, axis tick labels, and totals. All of these accept the same ValueFormat shape, so you configure formatting once and apply it consistently across the chart.
-
----
-
-> Docs for `@gravity-ui/charts@1.61.0`. Versioned at: `https://gravity-ui.com/llms/charts/1.61.0/llms.txt` (exact), `https://gravity-ui.com/llms/charts/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/charts/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/charts@0.12.0`
 
 # Charts
@@ -8527,11 +8559,11 @@ export default function App() {
 
 ---
 
-> Generated for `@gravity-ui/graph@1.12.2`
+> Generated for `@gravity-ui/graph@1.13.0`
 
 # @gravity-ui/graph documentation
 
-Documentation for the **1.12.2** version of `@gravity-ui/graph`.
+Documentation for the **1.13.0** version of `@gravity-ui/graph`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/graph/build/docs/`).
@@ -8577,7 +8609,7 @@ Install these in the host project at a compatible version:
 
 ### React Example
 
-[Detailed React Components Documentation](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/react/usage.md)
+[Detailed React Components Documentation](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/react/usage.md)
 
 ```typescript
 import React, { useEffect } from "react";
@@ -8747,293 +8779,37 @@ graph.zoomTo("center", { padding: 100 });
 
 ## Guides
 
-- [Anchors Documentation](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/components/anchors.md) — Anchors are connection points on blocks that allow creating connections between blocks. This document describes the anchor structure, behavior, and how to properly configure them.
-- [Batch Rendering System in BlockConnection](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/connections/batch-rendering.md) — BlockConnection uses a sophisticated batch rendering system to optimize performance when displaying many connections. Instead of drawing each connection individually, the system groups connections with similar visual properties and renders them together, significantly reducing canvas API calls.
-- [Block Component Documentation](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/components/block-component.md) — The Block component is the fundamental building block for rendering graph nodes in the visualization system. This document describes the Block component's structure, behavior, events, and how to extend it with custom implementations.
-- [Camera Service](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/camera.md) — This document describes the camera model in @gravity-ui/graph: how it transforms coordinates, how pan/zoom work, which API is available, and when to use optional viewport insets.
-- [Canvas GraphComponent: The Foundation of Visual Rendering](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/components/canvas-graph-component.md) — The GraphComponent class serves as the cornerstone for all visual elements within the graph system. Think of it as the "DNA" that all visible components share - blocks, connections, anchors, and interactive elements all inherit from this foundational class.
-- [Component Lifecycle](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/component-lifecycle.md) — This document provides an in-depth explanation of the component lifecycle in the rendering system, focusing on both the CoreComponent and Component classes.
-- [Component Rendering and Lifecycle Integration](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/component-rendering-lifecycle.md) — This document provides a comprehensive view of how the component lifecycle, rendering mechanism, and scheduler system work together to create the complete rendering pipeline.
-- [Connection System: Connecting Blocks in Your Graph](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/connections/canvas-connection-system.md) — The Connection System allows you to create visual links between blocks in your graph. It supports different types of connections, from simple straight lines to complex curved paths with multiple points.
-- [CSS Variables Plugin](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/plugins/cssVariables.md)
-- [Declarative Components](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/react/declarative-components.md) — The @gravity-ui/graph library provides declarative React components that simplify working with graph layers and HTML overlays.
-- [DevTools Plugin](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/plugins/devtools.md)
-- [Drag System](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/drag-system.md) — The Drag System provides a centralized way to handle drag operations for all graph components. It automatically manages drag lifecycle, autopanning, cursor states, and coordinates movement across multiple selected components.
-- [Event System](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/events.md) — This document describes the event system used in the graph visualization library, based on the DOM EventTarget API and CustomEvent.
-- [Graph Settings](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/graph-settings.md) — The Graph Visualization Library provides a comprehensive set of configuration options for customizing the appearance and behavior of your graph visualizations. This document describes the available settings and how to use them.
-- [Groups: cookbook](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/blocks/groups.md) — Groups draw a frame behind (or around) blocks: swimlanes, clusters by type, or collapsible regions. This page is organized by what you want to do; implementation details appear where they help you wire the behavior.
-- [Layers](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/rendering/layers.md)
-- [Migration Guide: v0.x → v1.x](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/migration-guides/v0-to-v1.md)
-- [React Components API](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/react/usage.md)
-- [React Hooks](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/react/hooks.md) — This document describes all available React hooks for working with @gravity-ui/graph.
-- [Rendering Mechanism Documentation](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/rendering/rendering-mechanism.md) — This document provides a detailed explanation of the rendering mechanism implemented in the library, focusing on the Component and CoreComponent classes and their lifecycles.
-- [Scheduler System Documentation](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/scheduler-system.md) — This document describes the scheduling system that coordinates component updates in the rendering engine, focusing on the Scheduler and GlobalScheduler classes.
-- [Selection Management System](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/selection-manager.md)
-- [system/event-model](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/event-model.md)
-- [system/public_api](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/public_api.md)
-- [Testing graph applications with Playwright](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/testing/playwright.md) — The package exposes Playwright page objects through a separate entry point. They let tests interact with canvas-rendered blocks and connections without depending on internal DOM structure.
-- [v1 to v2 transition](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/v1-v2-transition.md) — This guide describes the temporary branch and release setup while Gravity Graph v2 is developed. It is intentionally small and is expected to be retired after the transition.
-- [Wheel Intent Resolution](https://unpkg.com/@gravity-ui/graph@1.12.2/build/docs/guides/system/wheel-intent.md) — The camera routes wheel input by intent — pan or zoom — not by inferred device type (trackpad vs mouse). Classification lives in src/utils/functions/wheelIntent.ts and is configured via graph settings (resolveWheelIntent).
+- [Anchors Documentation](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/components/anchors.md) — Anchors are connection points on blocks that allow creating connections between blocks. This document describes the anchor structure, behavior, and how to properly configure them.
+- [Batch Rendering System in BlockConnection](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/connections/batch-rendering.md) — BlockConnection uses a sophisticated batch rendering system to optimize performance when displaying many connections. Instead of drawing each connection individually, the system groups connections with similar visual properties and renders them together, significantly reducing canvas API calls.
+- [Block Component Documentation](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/components/block-component.md) — The Block component is the fundamental building block for rendering graph nodes in the visualization system. This document describes the Block component's structure, behavior, events, and how to extend it with custom implementations.
+- [Camera Service](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/camera.md) — This document describes the camera model in @gravity-ui/graph: how it transforms coordinates, how pan/zoom work, which API is available, and when to use optional viewport insets.
+- [Canvas GraphComponent: The Foundation of Visual Rendering](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/components/canvas-graph-component.md) — The GraphComponent class serves as the cornerstone for all visual elements within the graph system. Think of it as the "DNA" that all visible components share - blocks, connections, anchors, and interactive elements all inherit from this foundational class.
+- [Component Lifecycle](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/component-lifecycle.md) — This document provides an in-depth explanation of the component lifecycle in the rendering system, focusing on both the CoreComponent and Component classes.
+- [Component Rendering and Lifecycle Integration](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/component-rendering-lifecycle.md) — This document provides a comprehensive view of how the component lifecycle, rendering mechanism, and scheduler system work together to create the complete rendering pipeline.
+- [Connection System: Connecting Blocks in Your Graph](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/connections/canvas-connection-system.md) — The Connection System allows you to create visual links between blocks in your graph. It supports different types of connections, from simple straight lines to complex curved paths with multiple points.
+- [CSS Variables Plugin](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/plugins/cssVariables.md)
+- [Declarative Components](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/react/declarative-components.md) — The @gravity-ui/graph library provides declarative React components that simplify working with graph layers and HTML overlays.
+- [DevTools Plugin](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/plugins/devtools.md)
+- [Drag System](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/drag-system.md) — The Drag System provides a centralized way to handle drag operations for all graph components. It automatically manages drag lifecycle, autopanning, cursor states, and coordinates movement across multiple selected components.
+- [Event System](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/events.md) — This document describes the event system used in the graph visualization library, based on the DOM EventTarget API and CustomEvent.
+- [Graph Settings](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/graph-settings.md) — The Graph Visualization Library provides a comprehensive set of configuration options for customizing the appearance and behavior of your graph visualizations. This document describes the available settings and how to use them.
+- [Groups: cookbook](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/blocks/groups.md) — Groups draw a frame behind (or around) blocks: swimlanes, clusters by type, or collapsible regions. This page is organized by what you want to do; implementation details appear where they help you wire the behavior.
+- [Layers](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/rendering/layers.md)
+- [Migration Guide: v0.x → v1.x](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/migration-guides/v0-to-v1.md)
+- [React Components API](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/react/usage.md)
+- [React Hooks](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/react/hooks.md) — This document describes all available React hooks for working with @gravity-ui/graph.
+- [Rendering Mechanism Documentation](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/rendering/rendering-mechanism.md) — This document provides a detailed explanation of the rendering mechanism implemented in the library, focusing on the Component and CoreComponent classes and their lifecycles.
+- [Scheduler System Documentation](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/scheduler-system.md) — This document describes the scheduling system that coordinates component updates in the rendering engine, focusing on the Scheduler and GlobalScheduler classes.
+- [Selection Management System](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/selection-manager.md)
+- [system/event-model](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/event-model.md)
+- [system/public_api](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/public_api.md)
+- [Testing graph applications with Playwright](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/testing/playwright.md) — The package exposes Playwright page objects through a separate entry point. They let tests interact with canvas-rendered blocks and connections without depending on internal DOM structure.
+- [v1 to v2 transition](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/v1-v2-transition.md) — This guide describes the temporary branch and release setup while Gravity Graph v2 is developed. It is intentionally small and is expected to be retired after the transition.
+- [Wheel Intent Resolution](https://unpkg.com/@gravity-ui/graph@1.13.0/build/docs/guides/system/wheel-intent.md) — The camera routes wheel input by intent — pan or zoom — not by inferred device type (trackpad vs mouse). Classification lives in src/utils/functions/wheelIntent.ts and is configured via graph settings (resolveWheelIntent).
 
 ---
 
-> Docs for `@gravity-ui/graph@1.12.2`. Versioned at: `https://gravity-ui.com/llms/graph/1.12.2/llms.txt` (exact), `https://gravity-ui.com/llms/graph/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/graph@1.12.1`
-
-# @gravity-ui/graph documentation
-
-Documentation for the **1.12.1** version of `@gravity-ui/graph`.
-Your training data may be outdated — these files are the source of truth.
-
-Paths are relative to this file (`node_modules/@gravity-ui/graph/build/docs/`).
-
-## For AI agents
-
-A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
-
-### When to use
-
-- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
-- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
-- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
-
-### When not to use
-
-- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
-- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
-
-### Common pitfalls
-
-- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
-- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
-- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
-- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
-
-## Install
-
-```bash
-npm install @gravity-ui/graph
-```
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^17.0.0 || ^18.0.0` |
-| `react-dom` | `^17.0.0 || ^18.0.0` |
-| `@playwright/test` | `>=1.58.0` |
-
-## Usage
-
-### React Example
-
-[Detailed React Components Documentation](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/react/usage.md)
-
-```typescript
-import React, { useEffect } from "react";
-import type { Graph, TBlock } from "@gravity-ui/graph";
-import { EAnchorType, GraphState } from "@gravity-ui/graph";
-import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-
-const config = {};
-
-export function GraphEditor() {
-  const { graph, setEntities, start } = useGraph(config);
-
-  useEffect(() => {
-    setEntities({
-      blocks: [
-        {
-          is: "block-action",
-          id: "action_1",
-          x: -100,
-          y: -450,
-          width: 126,
-          height: 126,
-          selected: true,
-          name: "Block #1",
-          anchors: [
-            {
-              id: "out1",
-              blockId: "action_1",
-              type: EAnchorType.OUT,
-              index: 0,
-            },
-          ],
-        },
-        {
-          id: "action_2",
-          is: "block-action",
-          x: 253,
-          y: 176,
-          width: 126,
-          height: 126,
-          selected: false,
-          name: "Block #2",
-          anchors: [
-            {
-              id: "in1",
-              blockId: "action_2",
-              type: EAnchorType.IN,
-              index: 0,
-            },
-          ],
-        },
-      ],
-      connections: [
-        {
-          sourceBlockId: "action_1",
-          sourceAnchorId: "out1",
-          targetBlockId: "action_2",
-          targetAnchorId: "in1",
-        },
-      ],
-    });
-  }, [setEntities]);
-
-  const renderBlockFn = (graph: Graph, block: TBlock) => {
-    return (
-      <GraphBlock graph={graph} block={block}>
-        {block.id}
-      </GraphBlock>
-    );
-  };
-
-  return (
-    <GraphCanvas
-      graph={graph}
-      renderBlock={renderBlockFn}
-      onStateChanged={({ state }) => {
-        if (state === GraphState.ATTACHED) {
-          start();
-          graph.zoomTo("center", { padding: 300 });
-        }
-      }}
-    />
-  );
-}
-
-```
-
-### Vanilla JavaScript Example
-
-```javascript
-import { Graph } from "@gravity-ui/graph";
-
-// Create container element
-const container = document.createElement('div');
-container.style.width = '100vw';
-container.style.height = '100vh';
-container.style.overflow = 'hidden';
-document.body.appendChild(container);
-
-// Initialize graph with configuration
-const graph = new Graph({
-    configurationName: "example",
-    blocks: [],
-    connections: [],
-    settings: {
-        canDragCamera: true,
-        canZoomCamera: true,
-        useBezierConnections: true,
-        showConnectionArrows: true
-    }
-}, container);
-
-// Add blocks and connections
-graph.setEntities({
-    blocks: [
-        {
-            is: "block-action",
-            id: "block1",
-            x: 100,
-            y: 100,
-            width: 120,
-            height: 120,
-            name: "Block #1",
-            anchors: [
-                {
-                    id: "out1",
-                    blockId: "block1",
-                    type: EAnchorType.OUT,
-                    index: 0
-                }
-            ]
-        },
-        {
-            is: "block-action",
-            id: "block2",
-            x: 300,
-            y: 300,
-            width: 120,
-            height: 120,
-            name: "Block #2",
-            anchors: [
-                {
-                    id: "in1",
-                    blockId: "block2",
-                    type: EAnchorType.IN,
-                    index: 0
-                }
-            ]
-        }
-    ],
-    connections: [
-        {
-            sourceBlockId: "block1",
-            sourceAnchorId: "out1",
-            targetBlockId: "block2",
-            targetAnchorId: "in1"
-        }
-    ]
-});
-
-// Start rendering
-graph.start();
-
-// Center the view
-graph.zoomTo("center", { padding: 100 });
-```
-
-## Guides
-
-- [Anchors Documentation](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/components/anchors.md) — Anchors are connection points on blocks that allow creating connections between blocks. This document describes the anchor structure, behavior, and how to properly configure them.
-- [Batch Rendering System in BlockConnection](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/connections/batch-rendering.md) — BlockConnection uses a sophisticated batch rendering system to optimize performance when displaying many connections. Instead of drawing each connection individually, the system groups connections with similar visual properties and renders them together, significantly reducing canvas API calls.
-- [Block Component Documentation](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/components/block-component.md) — The Block component is the fundamental building block for rendering graph nodes in the visualization system. This document describes the Block component's structure, behavior, events, and how to extend it with custom implementations.
-- [Camera Service](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/camera.md) — This document describes the camera model in @gravity-ui/graph: how it transforms coordinates, how pan/zoom work, which API is available, and when to use optional viewport insets.
-- [Canvas GraphComponent: The Foundation of Visual Rendering](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/components/canvas-graph-component.md) — The GraphComponent class serves as the cornerstone for all visual elements within the graph system. Think of it as the "DNA" that all visible components share - blocks, connections, anchors, and interactive elements all inherit from this foundational class.
-- [Component Lifecycle](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/component-lifecycle.md) — This document provides an in-depth explanation of the component lifecycle in the rendering system, focusing on both the CoreComponent and Component classes.
-- [Component Rendering and Lifecycle Integration](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/component-rendering-lifecycle.md) — This document provides a comprehensive view of how the component lifecycle, rendering mechanism, and scheduler system work together to create the complete rendering pipeline.
-- [Connection System: Connecting Blocks in Your Graph](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/connections/canvas-connection-system.md) — The Connection System allows you to create visual links between blocks in your graph. It supports different types of connections, from simple straight lines to complex curved paths with multiple points.
-- [CSS Variables Plugin](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/plugins/cssVariables.md)
-- [Declarative Components](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/react/declarative-components.md) — The @gravity-ui/graph library provides declarative React components that simplify working with graph layers and HTML overlays.
-- [DevTools Plugin](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/plugins/devtools.md)
-- [Drag System](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/drag-system.md) — The Drag System provides a centralized way to handle drag operations for all graph components. It automatically manages drag lifecycle, autopanning, cursor states, and coordinates movement across multiple selected components.
-- [Event System](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/events.md) — This document describes the event system used in the graph visualization library, based on the DOM EventTarget API and CustomEvent.
-- [Graph Settings](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/graph-settings.md) — The Graph Visualization Library provides a comprehensive set of configuration options for customizing the appearance and behavior of your graph visualizations. This document describes the available settings and how to use them.
-- [Groups: cookbook](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/blocks/groups.md) — Groups draw a frame behind (or around) blocks: swimlanes, clusters by type, or collapsible regions. This page is organized by what you want to do; implementation details appear where they help you wire the behavior.
-- [Layers](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/rendering/layers.md)
-- [Migration Guide: v0.x → v1.x](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/migration-guides/v0-to-v1.md)
-- [React Components API](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/react/usage.md)
-- [React Hooks](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/react/hooks.md) — This document describes all available React hooks for working with @gravity-ui/graph.
-- [Rendering Mechanism Documentation](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/rendering/rendering-mechanism.md) — This document provides a detailed explanation of the rendering mechanism implemented in the library, focusing on the Component and CoreComponent classes and their lifecycles.
-- [Scheduler System Documentation](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/scheduler-system.md) — This document describes the scheduling system that coordinates component updates in the rendering engine, focusing on the Scheduler and GlobalScheduler classes.
-- [Selection Management System](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/selection-manager.md)
-- [system/event-model](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/event-model.md)
-- [system/public_api](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/public_api.md)
-- [Testing graph applications with Playwright](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/testing/playwright.md) — The package exposes Playwright page objects through a separate entry point. They let tests interact with canvas-rendered blocks and connections without depending on internal DOM structure.
-- [v1 to v2 transition](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/v1-v2-transition.md) — This guide describes the temporary branch and release setup while Gravity Graph v2 is developed. It is intentionally small and is expected to be retired after the transition.
-- [Wheel Intent Resolution](https://unpkg.com/@gravity-ui/graph@1.12.1/build/docs/guides/system/wheel-intent.md) — The camera routes wheel input by intent — pan or zoom — not by inferred device type (trackpad vs mouse). Classification lives in src/utils/functions/wheelIntent.ts and is configured via graph settings (resolveWheelIntent).
-
----
-
-> Docs for `@gravity-ui/graph@1.12.1`. Versioned at: `https://gravity-ui.com/llms/graph/1.12.1/llms.txt` (exact), `https://gravity-ui.com/llms/graph/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/graph@1.13.0`. Versioned at: `https://gravity-ui.com/llms/graph/1.13.0/llms.txt` (exact), `https://gravity-ui.com/llms/graph/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -11098,227 +10874,6 @@ graph.zoomTo("center", { padding: 100 });
 
 ---
 
-> Generated for `@gravity-ui/graph@1.3.0`
-
-# Graph
-
-> A hybrid Canvas/React graph editor for node-based diagrams — reach for it to build flowcharts, node editors, or large interactive diagrams where Canvas gives performance at low zoom and React components give rich interactivity when zoomed in.
->
-> **npm:** `@gravity-ui/graph` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```bash
-npm install @gravity-ui/graph
-```
-
-
-## Usage
-
-### React Example
-
-[Detailed React Components Documentation](docs/react/usage.md)
-
-```typescript
-import React, { useEffect } from "react";
-import type { Graph, TBlock } from "@gravity-ui/graph";
-import { EAnchorType, GraphState } from "@gravity-ui/graph";
-import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-
-const config = {};
-
-export function GraphEditor() {
-  const { graph, setEntities, start } = useGraph(config);
-
-  useEffect(() => {
-    setEntities({
-      blocks: [
-        {
-          is: "block-action",
-          id: "action_1",
-          x: -100,
-          y: -450,
-          width: 126,
-          height: 126,
-          selected: true,
-          name: "Block #1",
-          anchors: [
-            {
-              id: "out1",
-              blockId: "action_1",
-              type: EAnchorType.OUT,
-              index: 0,
-            },
-          ],
-        },
-        {
-          id: "action_2",
-          is: "block-action",
-          x: 253,
-          y: 176,
-          width: 126,
-          height: 126,
-          selected: false,
-          name: "Block #2",
-          anchors: [
-            {
-              id: "in1",
-              blockId: "action_2",
-              type: EAnchorType.IN,
-              index: 0,
-            },
-          ],
-        },
-      ],
-      connections: [
-        {
-          sourceBlockId: "action_1",
-          sourceAnchorId: "out1",
-          targetBlockId: "action_2",
-          targetAnchorId: "in1",
-        },
-      ],
-    });
-  }, [setEntities]);
-
-  const renderBlockFn = (graph: Graph, block: TBlock) => {
-    return (
-      <GraphBlock graph={graph} block={block}>
-        {block.id}
-      </GraphBlock>
-    );
-  };
-
-  return (
-    <GraphCanvas
-      graph={graph}
-      renderBlock={renderBlockFn}
-      onStateChanged={({ state }) => {
-        if (state === GraphState.ATTACHED) {
-          start();
-          graph.zoomTo("center", { padding: 300 });
-        }
-      }}
-    />
-  );
-}
-
-```
-
-### Vanilla JavaScript Example
-
-```javascript
-import { Graph } from "@gravity-ui/graph";
-
-// Create container element
-const container = document.createElement('div');
-container.style.width = '100vw';
-container.style.height = '100vh';
-container.style.overflow = 'hidden';
-document.body.appendChild(container);
-
-// Initialize graph with configuration
-const graph = new Graph({
-    configurationName: "example",
-    blocks: [],
-    connections: [],
-    settings: {
-        canDragCamera: true,
-        canZoomCamera: true,
-        useBezierConnections: true,
-        showConnectionArrows: true
-    }
-}, container);
-
-// Add blocks and connections
-graph.setEntities({
-    blocks: [
-        {
-            is: "block-action",
-            id: "block1",
-            x: 100,
-            y: 100,
-            width: 120,
-            height: 120,
-            name: "Block #1",
-            anchors: [
-                {
-                    id: "out1",
-                    blockId: "block1",
-                    type: EAnchorType.OUT,
-                    index: 0
-                }
-            ]
-        },
-        {
-            is: "block-action",
-            id: "block2",
-            x: 300,
-            y: 300,
-            width: 120,
-            height: 120,
-            name: "Block #2",
-            anchors: [
-                {
-                    id: "in1",
-                    blockId: "block2",
-                    type: EAnchorType.IN,
-                    index: 0
-                }
-            ]
-        }
-    ],
-    connections: [
-        {
-            sourceBlockId: "block1",
-            sourceAnchorId: "out1",
-            targetBlockId: "block2",
-            targetAnchorId: "in1"
-        }
-    ]
-});
-
-// Start rendering
-graph.start();
-
-// Center the view
-graph.zoomTo("center", { padding: 100 });
-```
-
-
-### When to use
-
-- Node-based editors (flowcharts, pipelines, visual builders) with hundreds/thousands of nodes and connections.
-- Mixed rendering: Canvas for the full-graph overview, React components for the blocks visible in the viewport at high zoom.
-- Vanilla JS or React consumers — the core `Graph` class is framework-agnostic; `@gravity-ui/graph/react` provides the React bindings.
-
-### When not to use
-
-- To plot numeric data series (line/bar/scatter charts), use [`@gravity-ui/charts`](https://gravity-ui.com/charts) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — graph is a node/edge diagram editor, not a data chart.
-- For a static, non-editable diagram with few nodes, an SVG or a simpler diagram lib may suffice without the Canvas/React viewport machinery.
-
-### Common pitfalls
-
-- **Hallucinated import `GraphEditor`** — the React components are `GraphCanvas`, `GraphBlock`, and the `useGraph` hook, imported from `@gravity-ui/graph/react`; the core class is `Graph` from `@gravity-ui/graph`.
-- **Calling graph methods before `ATTACHED` state** — call `start()`/`zoomTo(...)` inside the `onStateChanged` callback when `state === GraphState.ATTACHED`, not on mount.
-- **Forgetting `setEntities`** — `useGraph` returns `graph`, `setEntities`, `start`; data only appears after `setEntities({blocks, connections})`.
-- **Mixing anchor types** — connections must reference existing anchor ids with matching `EAnchorType` (`IN`/`OUT`) on the source and target blocks.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/graph/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/graph/)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/graph/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/graph)
-
----
-
-> Docs for `@gravity-ui/graph@1.3.0`. Versioned at: `https://gravity-ui.com/llms/graph/1.3.0/llms.txt` (exact), `https://gravity-ui.com/llms/graph/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/graph@0.5.0`
 
 # Graph
@@ -11545,6 +11100,85 @@ graph.zoomTo("center", { padding: 100 });
 ---
 
 > Docs for `@gravity-ui/graph@0.5.0`. Versioned at: `https://gravity-ui.com/llms/graph/0.5.0/llms.txt` (exact), `https://gravity-ui.com/llms/graph/0/llms.txt` (latest of major 0), `https://gravity-ui.com/llms/graph/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/icons@2.23.1`
+
+# Icons
+
+> The official SVG icon set for Gravity UI, shipped as both React components and raw `.svg` files for use with `@gravity-ui/uikit`'s `Icon` renderer.
+>
+> **npm:** `@gravity-ui/icons` — check the installed major version in the user's `package.json` and read docs matching it.
+
+## Install
+
+```shell
+npm install --save-dev @gravity-ui/icons
+```
+
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `*` |
+
+## Usage
+
+### React
+
+```js
+import Cloud from '@gravity-ui/icons/Cloud';
+```
+
+or
+
+```js
+import {Cloud} from '@gravity-ui/icons';
+```
+
+### SVG
+
+> You might need an appropriate loader for this
+
+```js
+import cloudIcon from '@gravity-ui/icons/svgs/cloud.svg';
+```
+
+
+### When to use
+
+- You need an icon inside a Gravity UI app and want a consistent, ready-made set.
+- Rendering an icon via uikit: import the icon component here and pass it to uikit's `Icon` through its `data` prop.
+- You need the raw `.svg` asset (e.g. for CSS `background-image` or a build-time SVG loader) rather than a React component.
+
+### When not to use
+
+- Rendering the icon on screen — this package only provides the glyphs; the actual renderer (sizing, color, a11y) is the `Icon` component from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- You need a custom or brand icon that is not in the set — import your own SVG and pass it to uikit's `Icon`; do not expect it to live here.
+
+### Common pitfalls
+
+- **Icons are passed as data, not by name.** Do `import {Gear} from '@gravity-ui/icons'; <Icon data={Gear} />` — there is no `<Icon name="gear" />` API, and this package exports no `<Icon>` component of its own.
+- **Import path matters for tree-shaking.** `import Cloud from '@gravity-ui/icons/Cloud'` pulls a single icon; `import {Cloud} from '@gravity-ui/icons'` works too but relies on the bundler to tree-shake the barrel.
+- **SVG imports need a loader.** `import icon from '@gravity-ui/icons/svgs/cloud.svg'` only works if your bundler is configured to handle `.svg` files.
+- **Size and color come from the renderer.** Set `size` on uikit's `Icon` and control color with `color`/CSS `currentColor`; the SVGs themselves carry no fixed color.
+
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/icons/main/README.md)
+- [Storybook](https://preview.gravity-ui.com/icons/)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/icons/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/icons)
+
+---
+
+> Docs for `@gravity-ui/icons@2.23.1`. Versioned at: `https://gravity-ui.com/llms/icons/2.23.1/llms.txt` (exact), `https://gravity-ui.com/llms/icons/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/icons/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -16647,11 +16281,11 @@ Install these in the host project at a compatible version:
 
 ---
 
-> Generated for `@gravity-ui/chartkit@8.10.1`
+> Generated for `@gravity-ui/chartkit@8.11.0`
 
 # @gravity-ui/chartkit documentation
 
-Documentation for the **8.10.1** version of `@gravity-ui/chartkit`.
+Documentation for the **8.11.0** version of `@gravity-ui/chartkit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
@@ -16768,11 +16402,11 @@ export default function App() {
 
 ## Guides
 
-- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.10.1/build/docs/guides/testing.md)
+- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.11.0/build/docs/guides/testing.md)
 
 ---
 
-> Docs for `@gravity-ui/chartkit@8.10.1`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.10.1/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/chartkit@8.11.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -17943,136 +17577,6 @@ export default function App() {
 ---
 
 > Docs for `@gravity-ui/chartkit@8.2.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.2.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/chartkit@8.1.0`
-
-# @gravity-ui/chartkit documentation
-
-Documentation for the **8.1.0** version of `@gravity-ui/chartkit`.
-Your training data may be outdated — these files are the source of truth.
-
-Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
-
-## For AI agents
-
-A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
-
-### When to use
-
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
-- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
-
-### When not to use
-
-- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
-- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
-
-### Common pitfalls
-
-- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
-- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
-- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
-- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
-
-## Install
-
-```shell
-npm install @gravity-ui/chartkit @gravity-ui/uikit
-```
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
-| `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-### Requirements
-
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
-
-### Styles
-
-Import the styles from `@gravity-ui/uikit` in your entry point:
-
-```tsx
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-```
-
-For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
-
-### Basic usage
-
-ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
-
-You can register multiple plugins at once:
-
-```ts
-settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
-```
-
-Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
-
-**Basic example:**
-
-```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
-import ChartKit, {settings} from '@gravity-ui/chartkit';
-import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
-
-import '@gravity-ui/uikit/styles/fonts.css';
-import '@gravity-ui/uikit/styles/styles.css';
-
-settings.set({plugins: [GravityChartsPlugin]});
-
-const data = {
-  series: {
-    data: [
-      {
-        type: 'line',
-        name: 'Series',
-        data: [
-          {x: 0, y: 10},
-          {x: 1, y: 25},
-          {x: 2, y: 18},
-          {x: 3, y: 30},
-        ],
-      },
-    ],
-  },
-};
-
-export default function App() {
-  return (
-    <ThemeProvider theme="light">
-      <div style={{height: 300}}>
-        <ChartKit type="gravity-charts" data={data} />
-      </div>
-    </ThemeProvider>
-  );
-}
-```
-
-`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
-
-## Guides
-
-- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.1.0/build/docs/guides/testing.md)
-
----
-
-> Docs for `@gravity-ui/chartkit@8.1.0`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.1.0/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -35624,11 +35128,11 @@ Need something specific? Yagr presents some useful examples in the [demo/example
 
 ---
 
-> Generated for `@gravity-ui/nodekit@2.20.1`
+> Generated for `@gravity-ui/nodekit@2.21.0`
 
 # @gravity-ui/nodekit documentation
 
-Documentation for the **2.20.1** version of `@gravity-ui/nodekit`.
+Documentation for the **2.21.0** version of `@gravity-ui/nodekit`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/nodekit/dist/docs/`).
@@ -35688,15 +35192,15 @@ nodekit.ctx.log('App is ready');
 
 ## Guides
 
-- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.20.1/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
-- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.20.1/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
-- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.20.1/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
-- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.20.1/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
-- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.20.1/dist/docs/guides/telemetry.md)
+- [NodeKit: AppError](https://unpkg.com/@gravity-ui/nodekit@2.21.0/dist/docs/guides/app-error.md) — It's often happens in applications that you want to attach some information to the error that you're throwing. Sometimes this can lead to the situation when application throws not error but object — which is a bad way to deal with this since you're losing a stacktrace.
+- [NodeKit: Configuration](https://unpkg.com/@gravity-ui/nodekit@2.21.0/dist/docs/guides/configuration.md) — Configuration defines how both NodeKit and your application should work. There are a few ways to define configuration and a few ways to access it.
+- [NodeKit: Contexts](https://unpkg.com/@gravity-ui/nodekit@2.21.0/dist/docs/guides/contexts.md) — NodeKit Context is a class that carries app configuration and set of context-dependent utilities for logging, tracing, sending metrics and stats and so on.
+- [NodeKit: utils](https://unpkg.com/@gravity-ui/nodekit@2.21.0/dist/docs/guides/utils.md) — NodeKit is bundled with a few utility helpers that can be helpful.
+- [telemetry](https://unpkg.com/@gravity-ui/nodekit@2.21.0/dist/docs/guides/telemetry.md)
 
 ---
 
-> Docs for `@gravity-ui/nodekit@2.20.1`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.20.1/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/nodekit@2.21.0`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.21.0/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -36374,79 +35878,6 @@ nodekit.ctx.log('App is ready');
 
 ---
 
-> Generated for `@gravity-ui/nodekit@2.11.0`
-
-# NodeKit
-
-> A foundational Node.js toolkit (logging, telemetry, typed errors, config, request contexts) shared across Gravity UI backends — reach for it to get a consistent app spine before adding any HTTP layer, instead of assembling logging/error/config plumbing yourself.
->
-> **npm:** `@gravity-ui/nodekit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```bash
-npm install --save @gravity-ui/nodekit
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `axios` | `^1.7.7` |
-
-## Usage
-
-Add dependency to your project:
-
-```bash
-npm install --save @gravity-ui/nodekit
-```
-
-And then import and init NodeKit in your application:
-
-```typescript
-import {NodeKit} from '@gravity-ui/nodekit';
-
-const nodeKit = new NodeKit();
-nodekit.ctx.log('App is ready');
-```
-
-
-### When to use
-
-- Any Node.js service/script that wants shared logging, telemetry (tracing), and a typed `AppError`.
-- Providing request-scoped context (logs/traces) across async boundaries.
-- Centralizing configuration so multiple services in the same ecosystem behave consistently.
-
-### When not to use
-
-- To expose HTTP routes, middleware, or a server, use [`@gravity-ui/expresskit`](https://github.com/gravity-ui/expresskit) — it builds on top of NodeKit and adds the Express/HTTP layer.
-- For a standalone, single-file script with no logging/telemetry needs, plain Node APIs are lighter than the full NodeKit context system.
-
-### Common pitfalls
-
-- **Hallucinating `import {Logger}` / `logger`** — logging is reached through the NodeKit context: `new NodeKit()` then `nodekit.ctx.log(...)`, not a standalone logger export.
-- **Instantiating NodeKit repeatedly** — create one `NodeKit` instance per app and share its `ctx`; creating many instances fragments logging/telemetry config.
-- **Throwing plain `Error`** — use the bundled `AppError` (see `docs/app-error.md`) so error codes and telemetry are captured consistently.
-- **Skipping config initialization** — NodeKit reads configuration on construction; review `docs/configuration.md` before assuming defaults.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/nodekit/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/nodekit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/nodekit)
-
----
-
-> Docs for `@gravity-ui/nodekit@2.11.0`. Versioned at: `https://gravity-ui.com/llms/nodekit/2.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
 > Generated for `@gravity-ui/nodekit@1.7.0`
 
 # NodeKit
@@ -36516,6 +35947,37 @@ nodekit.ctx.log('App is ready');
 ---
 
 > Docs for `@gravity-ui/nodekit@1.7.0`. Versioned at: `https://gravity-ui.com/llms/nodekit/1.7.0/llms.txt` (exact), `https://gravity-ui.com/llms/nodekit/1/llms.txt` (latest of major 1), `https://gravity-ui.com/llms/nodekit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
+> Generated for `@gravity-ui/expresskit@3.4.0`
+
+# ExpressKit
+
+> Lightweight express.js wrapper that integrates with NodeKit.
+>
+> **npm:** `@gravity-ui/expresskit` — check the installed major version in the user's `package.json` and read docs matching it.
+
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md) for full documentation.
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `@gravity-ui/nodekit` | `^1.6.0 || ^2.0.0` |
+
+## Links
+
+- [README](https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md)
+- [Changelog](https://raw.githubusercontent.com/gravity-ui/expresskit/main/CHANGELOG.md)
+- [GitHub](https://github.com/gravity-ui/expresskit)
+
+---
+
+> Docs for `@gravity-ui/expresskit@3.4.0`. Versioned at: `https://gravity-ui.com/llms/expresskit/3.4.0/llms.txt` (exact), `https://gravity-ui.com/llms/expresskit/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/expresskit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -36826,37 +36288,6 @@ Install these in the host project at a compatible version:
 ---
 
 > Docs for `@gravity-ui/expresskit@2.7.0`. Versioned at: `https://gravity-ui.com/llms/expresskit/2.7.0/llms.txt` (exact), `https://gravity-ui.com/llms/expresskit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/expresskit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/expresskit@2.6.0`
-
-# ExpressKit
-
-> Lightweight express.js wrapper that integrates with NodeKit.
->
-> **npm:** `@gravity-ui/expresskit` — check the installed major version in the user's `package.json` and read docs matching it.
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md) for full documentation.
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `@gravity-ui/nodekit` | `^1.6.0 || ^2.0.0` |
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/expresskit/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/expresskit)
-
----
-
-> Docs for `@gravity-ui/expresskit@2.6.0`. Versioned at: `https://gravity-ui.com/llms/expresskit/2.6.0/llms.txt` (exact), `https://gravity-ui.com/llms/expresskit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/expresskit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -41735,6 +41166,90 @@ export function App() {
 
 ---
 
+> Generated for `@gravity-ui/date-utils@2.7.3`
+
+# @gravity-ui/date-utils documentation
+
+Documentation for the **2.7.3** version of `@gravity-ui/date-utils`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/date-utils/build/docs/`).
+
+## For AI agents
+
+Timezone-aware date/time helpers — parsing (including relative expressions like `now-1d/d`), formatting, and locale management — without any UI, reach for it when you need to compute and format dates reliably across time zones instead of pulling in a full UI calendar.
+
+### When to use
+
+- Parsing absolute or relative date expressions (`'now-1d'`, `'now/d'`) into a timezone-aware `dateTime` object.
+- Formatting dates for display in the user's timezone with locale support.
+- Sharing date logic between server (Node) and client (React) code — the package has no React dependency.
+
+### When not to use
+
+- To render a calendar, date picker, or any date **UI**, use [`@gravity-ui/date-components`](https://gravity-ui.com/components/date-components) — it builds its visuals on top of this package.
+- For lightweight immutable date math and no timezone/relative-expression needs, `date-fns` or the native `Intl`/`Date` APIs may suffice.
+
+### Common pitfalls
+
+- **Calling `dateTimeParse('')` expecting a date** — returns `undefined`, not a `dateTime`; guard with optional chaining or a null check.
+- **Forgetting to load a locale** — `settings.setLocale('de')` only formats localized names (weekdays, months) after `settings.loadLocale('de')` has resolved.
+- **Hallucinated function `formatDate` / `parseDate`** — the entry points are `dateTimeParse` (parse) and `dateTime(...).format(...)` (format).
+- **Assuming the user's timezone is applied automatically** — pass `timeZone` explicitly or the system timezone is used.
+
+## Install
+
+```shell
+npm i @gravity-ui/date-utils
+```
+
+## Usage
+
+```typescript
+import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
+
+// Current date: 2021-08-07T12:10:00
+// User's time zone: Europe/Istanbul
+
+const FORMAT = 'YYYY-MM-DDTHH:mm:ssZ';
+
+// parse absolute date
+dateTimeParse({year: 2021, month: 7, day: 7})?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
+dateTimeParse([2021, 7, 7])?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
+dateTimeParse('2021-08-07')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
+dateTimeParse(1621708204063)?.format(FORMAT); // "2021-05-22T21:30:04+03:00"
+dateTimeParse('')?.format(FORMAT); // undefined
+dateTimeParse('incorrect-date')?.format(FORMAT); // undefined
+
+// parse relative date
+dateTimeParse('now')?.format(FORMAT); // "2021-08-07T12:10:00+03:00"
+dateTimeParse('now-1d')?.format(FORMAT); // "2021-08-06T12:10:00+03:00"
+dateTimeParse('now-1d+1M')?.format(FORMAT); // "2021-09-06T12:10:00+03:00"
+dateTimeParse('now/d')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
+dateTimeParse('now+1d/d')?.format(FORMAT); // "2021-08-08T00:00:00+03:00"
+dateTimeParse('now-1f')?.format(FORMAT); // undefined
+
+// create dateTime
+dateTime().format(FORMAT); // "2021-08-07T12:10:00+03:00"
+dateTime({input: '2021-08-07'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
+dateTime({input: '2021-08-07', format: 'YYYY-MM-DD'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
+dateTime({timeZone: 'Asia/Tokyo'}).format(FORMAT); // "2021-08-07T18:10:00+09:00
+dateTime({input: ''}).format(FORMAT); // "Invalid Date"
+dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid Date"
+```
+
+## Guides
+
+- [Getting Started](https://unpkg.com/@gravity-ui/date-utils@2.7.3/build/docs/guides/get-started.md)
+- [Overview](https://unpkg.com/@gravity-ui/date-utils@2.7.3/build/docs/guides/overview.md)
+
+---
+
+> Docs for `@gravity-ui/date-utils@2.7.3`. Versioned at: `https://gravity-ui.com/llms/date-utils/2.7.3/llms.txt` (exact), `https://gravity-ui.com/llms/date-utils/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-utils/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/date-utils@2.7.2`
 
 # @gravity-ui/date-utils documentation
@@ -42815,6 +42330,163 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 ---
 
+> Generated for `@gravity-ui/date-components@5.0.0`
+
+# @gravity-ui/date-components documentation
+
+Documentation for the **5.0.0** version of `@gravity-ui/date-components`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/date-components/dist/docs/`).
+
+## For AI agents
+
+React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
+
+### When to use
+
+- A single date or date-time input: `DatePicker`, `DateField`.
+- Calendars for month/day selection: `Calendar`, `CalendarView`.
+- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
+- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
+
+### When not to use
+
+- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
+
+### Common pitfalls
+
+- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
+- **Requires uikit setup.** Render inside `Provider` from `@gravity-ui/uikit` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` v8 and `@gravity-ui/date-utils` are required peer dependencies.
+- **Locale is loaded, not just set.** Set language via `Provider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
+- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
+
+## Install
+
+```shell
+npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^18.0.0 || ^19.0.0` |
+| `react-dom` | `^18.0.0 || ^19.0.0` |
+| `@types/react` | `^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^8.0.0` |
+| `@gravity-ui/date-utils` | `^2.6.0` |
+
+## Usage
+
+```jsx
+import {createRoot} from 'react-dom/client';
+import {DatePicker} from '@gravity-ui/date-components';
+import {Provider} from '@gravity-ui/uikit';
+
+import '@gravity-ui/uikit/styles/styles.css';
+
+function App() {
+  return (
+    <Provider>
+      <h1>DatePicker</h1>
+      <form>
+        <label htmlFor="date-picker">Date: </label>
+        <DatePicker id="date-picker" name="date" />
+      </form>
+    </Provider>
+  );
+}
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+```
+
+### Localization
+
+```jsx
+import {settings} from '@gravity-ui/date-utils';
+
+// Load date locales that will be used in an application.
+await settings.loadLocale('ru');
+
+function App() {
+  return (
+    // Set the language to use with components.
+    <Provider lang="ru">
+      <h1>DatePicker</h1>
+      <form>
+        <label htmlFor="date-picker">Дата: </label>
+        <DatePicker id="date-picker" name="date" />
+      </form>
+    </Provider>
+  );
+}
+```
+
+If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
+
+```jsx
+// Preload locales
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+
+// or load locales on demand.
+
+function App() {
+  const [lang, setLang] = React.useState('en');
+
+  const handleLangChange = (newLang) => {
+    settings.loadLocale(newLang).then(() => {
+      setLang(newLang);
+    });
+  };
+
+  return <Provider lang={lang}>...</Provider>;
+}
+```
+
+The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
+
+```ts
+import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
+import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
+
+// Use the Keyset type to specify translations for all available components
+addLanguageKeysets<Keysets>(lang, {...});
+
+// or use the PartialKeysets type to specify only the ones you need
+addLanguageKeysets<PartialKeysets>(lang, {...});
+
+// To specify translations for some components
+addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
+```
+
+## Guides
+
+- [Migration guide: 4.x → 5.x](https://unpkg.com/@gravity-ui/date-components@5.0.0/dist/docs/guides/migration-4-to-5.md) — Version 5 moves @gravity-ui/date-components to @gravity-ui/uikit v8. Most of the changes come from uikit itself: upgrade your application with the uikit v8 migration guide first, then go through the sections below. They cover only what changes for code that uses date components.
+
+## Components
+
+- [Calendar](https://unpkg.com/@gravity-ui/date-components@5.0.0/dist/docs/components/Calendar.md) — Calendar is a flexible, user-friendly calendar component for React applications. It allows users to view, select, and manage dates with ease. Ideal for event scheduling, booking systems, and any application where date selection is essential. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DateField](https://unpkg.com/@gravity-ui/date-components@5.0.0/dist/docs/components/DateField.md) — DateField component is a versatile and convenient input field specifically designed for date entry in React applications. With an intuitive interface and easy integration, it's perfect for any form that requires date or time input, such as event schedulers, booking systems, or data-driven reports. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [DatePicker](https://unpkg.com/@gravity-ui/date-components@5.0.0/dist/docs/components/DatePicker.md) — DatePicker is a sophisticated, lightweight, and fully customizable component designed to provide intuitive date picking functionality in your React applications. Built with user experience and ease of integration in mind, it fits seamlessly within forms, modals, or any UI element requiring date input. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RangeCalendar](https://unpkg.com/@gravity-ui/date-components@5.0.0/dist/docs/components/RangeCalendar.md) — RangeCalendar is a powerful, flexible, and user-friendly UI component designed for selecting a range of dates. Built with React, it combines the functionality of a calendar and a date range picker, making it an ideal choice for applications that require users to input a start and end date. It can be controlled if you set value property. Or it can be uncontrolled if you don't set any value, but in this case you can manage the initial state with optional property defaultValue. Component is uncontrolled by default.
+- [RelativeDateField](https://unpkg.com/@gravity-ui/date-components@5.0.0/dist/docs/components/RelativeDateField.md) — RelativeDateField component is used only for entering relative dates. It can't be used as "normal" DateField.
+- [RelativeDatePicker](https://unpkg.com/@gravity-ui/date-components@5.0.0/dist/docs/components/RelativeDatePicker.md) — RelativeDatePicker is almost the same component as DatePicker but it has ability to use relative dates.
+
+---
+
+> Docs for `@gravity-ui/date-components@5.0.0`. Versioned at: `https://gravity-ui.com/llms/date-components/5.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+
+
+---
+
 > Generated for `@gravity-ui/date-components@4.1.0`
 
 # @gravity-ui/date-components documentation
@@ -43117,155 +42789,6 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 ---
 
 > Docs for `@gravity-ui/date-components@4.0.0`. Versioned at: `https://gravity-ui.com/llms/date-components/4.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/4/llms.txt` (latest of major 4), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/date-components@3.4.2`
-
-# Date Components
-
-> React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
->
-> **npm:** `@gravity-ui/date-components` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@types/react` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^7.21.0` |
-| `@gravity-ui/date-utils` | `^2.6.0` |
-
-## Usage
-
-```jsx
-import {createRoot} from 'react-dom/client';
-import {DatePicker} from '@gravity-ui/date-components';
-import {Provider} from '@gravity-ui/uikit';
-
-import '@gravity-ui/uikit/styles/styles.css';
-
-function App() {
-  return (
-    <Provider>
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Date: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </Provider>
-  );
-}
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-```
-
-### Localization
-
-```jsx
-import {settings} from '@gravity-ui/date-utils';
-
-// Load date locales that will be used in an application.
-await settings.loadLocale('ru');
-
-function App() {
-  return (
-    // Set the language to use with components.
-    <Provider lang="ru">
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Дата: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </Provider>
-  );
-}
-```
-
-If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
-
-```jsx
-// Preload locales
-await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-
-// or load locales on demand.
-
-function App() {
-  const [lang, setLang] = React.useState('en');
-
-  const handleLangChange = (newLang) => {
-    settings.loadLocale(newLang).then(() => {
-      setLang(newLang);
-    });
-  };
-
-  return <Provider lang={lang}>...</Provider>;
-}
-```
-
-The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
-
-```ts
-import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
-import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
-
-// Use the Keyset type to specify translations for all available components
-addLanguageKeysets<Keysets>(lang, {...});
-
-// or use the PartialKeysets type to specify only the ones you need
-addLanguageKeysets<PartialKeysets>(lang, {...});
-
-// To specify translations for some components
-addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
-```
-
-
-### When to use
-
-- A single date or date-time input: `DatePicker`, `DateField`.
-- Calendars for month/day selection: `Calendar`, `CalendarView`.
-- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
-- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
-
-### When not to use
-
-- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
-
-### Common pitfalls
-
-- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
-- **Requires uikit setup.** Render inside `Provider` from `@gravity-ui/uikit` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` v8 and `@gravity-ui/date-utils` are required peer dependencies.
-- **Locale is loaded, not just set.** Set language via `Provider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
-- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/date-components/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/date-components/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/date-components)
-
----
-
-> Docs for `@gravity-ui/date-components@3.4.2`. Versioned at: `https://gravity-ui.com/llms/date-components/3.4.2/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
@@ -44299,153 +43822,6 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 ---
 
 > Docs for `@gravity-ui/date-components@2.11.0`. Versioned at: `https://gravity-ui.com/llms/date-components/2.11.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
-
-
----
-
-> Generated for `@gravity-ui/date-components@2.10.0`
-
-# Date Components
-
-> React date and time controls for Gravity UI apps — date/time pickers, calendars, and absolute/relative range selectors built on `@gravity-ui/date-utils`.
->
-> **npm:** `@gravity-ui/date-components` — check the installed major version in the user's `package.json` and read docs matching it.
-
-## Install
-
-```shell
-npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
-```
-
-
-## Peer dependencies
-
-Install these in the host project at a compatible version:
-
-| Package | Version range |
-| --- | --- |
-| `react` | `>=17.0.0` |
-| `react-dom` | `>=17.0.0` |
-| `@gravity-ui/uikit` | `^6.0.0` |
-
-## Usage
-
-```jsx
-import {createRoot} from 'react-dom/client';
-import {DatePicker} from '@gravity-ui/date-components';
-import {Provider} from '@gravity-ui/uikit';
-
-import '@gravity-ui/uikit/styles/styles.css';
-
-function App() {
-  return (
-    <Provider>
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Date: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </Provider>
-  );
-}
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-```
-
-### Localization
-
-```jsx
-import {settings} from '@gravity-ui/date-utils';
-
-// Load date locales that will be used in an application.
-await settings.loadLocale('ru');
-
-function App() {
-  return (
-    // Set the language to use with components.
-    <Provider lang="ru">
-      <h1>DatePicker</h1>
-      <form>
-        <label htmlFor="date-picker">Дата: </label>
-        <DatePicker id="date-picker" name="date" />
-      </form>
-    </Provider>
-  );
-}
-```
-
-If the app supports language switching, preload all supported locales when the app first loads, or load the locales before switching the language:
-
-```jsx
-// Preload locales
-await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
-
-const root = createRoot(document.getElementById('root'));
-root.render(<App />);
-
-// or load locales on demand.
-
-function App() {
-  const [lang, setLang] = React.useState('en');
-
-  const handleLangChange = (newLang) => {
-    settings.loadLocale(newLang).then(() => {
-      setLang(newLang);
-    });
-  };
-
-  return <Provider lang={lang}>...</Provider>;
-}
-```
-
-The components have translations into English and Russian. To add translations into other languages, use `addLanguageKeysets` from `@gravity-ui/uikit`:
-
-```ts
-import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
-import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
-
-// Use the Keyset type to specify translations for all available components
-addLanguageKeysets<Keysets>(lang, {...});
-
-// or use the PartialKeysets type to specify only the ones you need
-addLanguageKeysets<PartialKeysets>(lang, {...});
-
-// To specify translations for some components
-addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
-```
-
-
-### When to use
-
-- A single date or date-time input: `DatePicker`, `DateField`.
-- Calendars for month/day selection: `Calendar`, `CalendarView`.
-- Date ranges: `RangeDatePicker`, `RangeCalendar`, `RangeDateField`.
-- Relative and mixed absolute/relative ranges (e.g. "last 7 days"): `RelativeDatePicker`, `RelativeRangeDatePicker`, `RelativeDateField`.
-
-### When not to use
-
-- Plain text or number inputs, buttons, or other generic controls — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Low-level date math, parsing, formatting, or timezone handling without UI — use [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils) directly.
-
-### Common pitfalls
-
-- **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
-- **Requires uikit setup.** Render inside `Provider` from `@gravity-ui/uikit` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` v8 and `@gravity-ui/date-utils` are required peer dependencies.
-- **Locale is loaded, not just set.** Set language via `Provider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
-- **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
-
-
-## Links
-
-- [README](https://raw.githubusercontent.com/gravity-ui/date-components/main/README.md)
-- [Storybook](https://preview.gravity-ui.com/date-components/?path=/docs/components-calendar--docs)
-- [Changelog](https://raw.githubusercontent.com/gravity-ui/date-components/main/CHANGELOG.md)
-- [GitHub](https://github.com/gravity-ui/date-components)
-
----
-
-> Docs for `@gravity-ui/date-components@2.10.0`. Versioned at: `https://gravity-ui.com/llms/date-components/2.10.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
 
 
 ---
