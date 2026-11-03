@@ -1,34 +1,34 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-Bibliothèque de composants UI pour les chats IA construite selon les principes de l'Atomic Design.
+Bibliothèque de composants UI pour les chats IA, construite selon les principes de l'Atomic Design.
 
 <!--GITHUB_BLOCK-->
 
-![Image de couverture](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
+![Cover image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_cover.png)
 
-![Image d'exemple](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
+![Example image](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/aikit_example.png)
 
 ## Ressources
 
-### ![Logo Globe Clair](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Logo Globe Sombre](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Site Web](https://gravity-ui.com/libraries/aikit)
+### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Site web](https://gravity-ui.com/libraries/aikit)
 
-### ![Logo Storybook Clair](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Logo Storybook Sombre](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/aikit/)
+### ![Storybook Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Storybook Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/aikit/)
 
-### ![Logo Communauté Clair](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Logo Communauté Sombre](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Communauté](https://t.me/gravity_ui)
+### ![Community Logo Light](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Community Logo Dark](https://raw.githubusercontent.com/gravity-ui/aikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Communauté](https://t.me/gravity_ui)
 
 <!--/GITHUB_BLOCK-->
 
 ## Description
 
-**@gravity-ui/aikit** est une bibliothèque de composants React flexible et extensible pour la création de chats IA de toute complexité. La bibliothèque fournit un ensemble de composants prêts à l'emploi qui peuvent être utilisés tels quels ou personnalisés pour répondre à vos besoins.
+**@gravity-ui/aikit** est une bibliothèque de composants React flexible et extensible pour la création de chats IA de toute complexité. La bibliothèque fournit un ensemble de composants prêts à l'emploi qui peuvent être utilisés tels quels ou personnalisés selon vos besoins.
 
 ### Fonctionnalités clés
 
 - 🎨 **Atomic Design** — hiérarchie claire des composants, des atomes aux pages
-- 🔧 **Indépendant du SDK** — indépendant des SDK IA spécifiques
+- 🔧 **SDK Agnostique** — indépendant des SDK IA spécifiques
 - 🎭 **Approche à deux niveaux** — composants prêts à l'emploi + hooks pour la personnalisation
-- 🎨 **Variables CSS** — thèmes faciles sans remplacement de composants
-- 📦 **TypeScript** — sécurité de type complète dès le départ
+- 🎨 **Variables CSS** — thèmes faciles sans surcharges de composants
+- 📦 **TypeScript** — sécurité de type complète prête à l'emploi
 - 🔌 **Extensible** — système d'enregistrement de types de messages personnalisés
 
 ## Structure du projet
@@ -52,6 +52,10 @@ src/
 ```bash
 npm install @gravity-ui/aikit
 ```
+
+AIKit 3 nécessite `@gravity-ui/uikit@^8.0.0`, React/React DOM 18 ou 19, et Node.js 20.19+ dans la version v20 ou 22.12+. Encapsulez l'application dans le `Provider` de UIKit comme indiqué dans [Démarrage rapide](./docs/GETTING_STARTED.md).
+
+Vous mettez à jour depuis la v2 ? Lisez le [guide de migration](./docs/migration-to-v3.md) ([Русский](./docs/migration-to-v3-ru.md)) et les [notes de version v3](./docs/changelog-v3.md).
 
 ## Démarrage rapide
 
@@ -87,13 +91,13 @@ function App() {
 
 ## Architecture
 
-La bibliothèque est construite sur les principes de l'**Atomic Design** :
+La bibliothèque est construite selon les principes de l'**Atomic Design** :
 
 ### 🔹 Atomes
 
 Éléments UI de base indivisibles sans logique métier :
 
-- `ActionButton` — bouton avec tooltip intégré
+- `ActionButton` — bouton avec info-bulle intégrée
 - `Alert` — messages d'alerte avec variantes
 - `ChatDate` — formatage de date avec dates relatives
 - `ContextIndicator` — indicateur d'utilisation du contexte de jeton
@@ -121,8 +125,8 @@ Combinaisons simples d'atomes :
 - `PromptInputPanel` — panneau conteneur pour le contenu personnalisé
 - `Suggestions` — boutons de suggestion cliquables
 - `Tabs` — onglets de navigation avec fonctionnalité de suppression
-- `ToolFooter` — pied de page du message de l'outil avec actions
-- `ToolHeader` — en-tête du message de l'outil avec icône et actions
+- `ToolFooter` — pied de page de message d'outil avec actions
+- `ToolHeader` — en-tête de message d'outil avec icône et actions
 
 ### 🔶 Organismes
 
@@ -131,10 +135,10 @@ Composants complexes avec logique interne :
 - `AssistantMessage` — message de l'assistant IA
 - `Header` — en-tête du chat
 - `MessageList` — liste des messages
-- `PromptInput` — champ de saisie de message
+- `PromptInput` — champ de saisie des messages
 - `ThinkingMessage` — processus de réflexion de l'IA
-- `ToolMessage` — exécution de l'outil
-- `UserMessage` — message utilisateur
+- `ToolMessage` — exécution d'outil
+- `UserMessage` — message de l'utilisateur
 
 ### 📄 Modèles
 
@@ -142,7 +146,7 @@ Mises en page complètes :
 
 - `ChatContent` — contenu principal du chat
 - `EmptyContainer` — état vide
-- `History` — historique des chats
+- `History` — historique du chat
 
 ### 📱 Pages
 
@@ -167,16 +171,16 @@ Le projet utilise Playwright Component Testing pour les tests de régression vis
 **Important** : Tous les tests doivent être exécutés via Docker pour garantir des captures d'écran cohérentes entre les différents environnements.
 
 ```bash
-# Exécute tous les tests de composants dans Docker (recommandé)
+# Exécuter tous les tests de composants dans Docker (recommandé)
 npm run playwright:docker
 
-# Met à jour les bases de référence des captures d'écran dans Docker
+# Mettre à jour les bases de référence des captures d'écran dans Docker
 npm run playwright:docker:update
 
-# Exécute un test spécifique par motif grep dans Docker
+# Exécuter un test spécifique par motif grep dans Docker
 npm run playwright:docker -- --grep "@ComponentName"
 
-# Efface le cache Docker si nécessaire
+# Effacer le cache Docker si nécessaire
 npm run playwright:docker:clear-cache
 ```
 
@@ -185,15 +189,15 @@ npm run playwright:docker:clear-cache
 Si vous êtes sous Linux, vous pouvez exécuter les tests localement :
 
 ```bash
-# Installe les navigateurs Playwright (à exécuter une fois)
+# Installer les navigateurs Playwright (à exécuter une fois)
 npm run playwright:install
-# Exécute tous les tests de composants
+# Exécuter tous les tests de composants
 npm run playwright
-# Met à jour les bases de référence des captures d'écran
+# Mettre à jour les bases de référence des captures d'écran
 npm run playwright:update
 ```
 
-Pour une documentation de test détaillée, consultez le [Guide Playwright](./playwright/README.md).
+Pour une documentation détaillée sur les tests, consultez le [Guide Playwright](./playwright/README.md).
 
 ## Développement
 
@@ -205,26 +209,26 @@ MIT
 
 ## Pour les agents IA
 
-Une bibliothèque de composants React pour la création d'interfaces de chat IA, organisée selon la conception atomique (atomes → molécules → organismes → modèles → pages) et indépendante du SDK — utilisez-la pour assembler une interface de chat (listes de messages, entrée de prompt, appels d'outils, pièces jointes) au lieu de composer ces primitives à partir de `@gravity-ui/uikit` manuellement.
+Une bibliothèque de composants React pour la création d'interfaces de chat IA, organisée selon la conception atomique (atomes → molécules → organismes → modèles → pages) et indépendante du SDK — utilisez-la pour assembler une interface de chat (listes de messages, saisie de prompt, appels d'outils, pièces jointes) au lieu de composer ces primitives à partir de `@gravity-ui/uikit` manuellement.
 
 ### Quand l'utiliser
 
-- Création d'une interface de chat IA/LLM (messages assistant/utilisateur/outil, entrée de prompt avec suggestions, téléchargements de pièces jointes, états de réflexion).
-- Vous souhaitez des mises en page de chat prêtes à l'emploi (`ChatContainer`, `MessageList`, `PromptInput`) ainsi que des hooks pour personnaliser le comportement.
+- Création d'une interface de chat IA/LLM (messages assistant/utilisateur/outil, saisie de prompt avec suggestions, téléchargements de pièces jointes, états de réflexion).
+- Besoin de mises en page de chat prêtes à l'emploi (`ChatContainer`, `MessageList`, `PromptInput`) ainsi que de hooks pour personnaliser le comportement.
 - Intégration dans l'écosystème Gravity UI avec un thème partagé via des variables CSS.
 
 ### Quand ne pas l'utiliser
 
 - Pour des primitives d'interface utilisateur à usage général (boutons, champs de saisie, modales), utilisez [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) directement — AIKit s'appuie sur celui-ci pour les besoins spécifiques au chat.
-- Pour afficher du markdown riche dans les messages, `MarkdownRenderer` d'AIKit encapsule [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor) ; pour un rendu markdown autonome, utilisez ce package directement.
-- Pour une seule bulle de chat sans orchestration de chat, un `MarkdownRenderer`/bloc de texte de uikit est plus léger que le pipeline de messages complet d'AIKit.
+- Pour afficher du markdown riche dans les messages, le `MarkdownRenderer` d'AIKit encapsule [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor) ; pour un rendu markdown autonome, utilisez ce package directement.
+- Pour une seule bulle de chat sans orchestration de chat, un `MarkdownRenderer`/bloc de texte d'uikit est plus léger que le pipeline de messages complet d'AIKit.
 
 ### Pièges courants
 
 - **Halluciner une importation de SDK IA** — AIKit est indépendant du SDK ; il fournit des composants/hooks, pas un client LLM. Apportez votre propre source de données et alimentez les messages via les props.
 - **Rechercher `<Chat>` / `<AIChat>`** — l'exportation au niveau de la page est `ChatContainer` (et `AIStudioChat`) ; il n'y a pas de composant littéralement nommé `Chat`.
-- **Oublier d'enregistrer les types de messages personnalisés** — les types de messages personnalisés doivent être enregistrés dans le système de types de messages, sinon ils seront rendus comme inconnus.
-- **Modifier les composants de base au lieu d'utiliser des hooks** — la conception à deux niveaux s'attend à ce que vous personnalisiez via des hooks/composition ; la substitution directe des éléments internes casse les mises à niveau.
+- **Oublier d'enregistrer les types de messages pour les types personnalisés** — les types de messages personnalisés doivent être enregistrés dans le système de types de messages, sinon ils seront rendus comme inconnus.
+- **Modifier les composants de base au lieu d'utiliser des hooks** — la conception à deux niveaux attend que vous personnalisiez via des hooks/composition ; remplacer les internes directement casse les mises à niveau.
 
 ## Documentation pour les agents IA
 
