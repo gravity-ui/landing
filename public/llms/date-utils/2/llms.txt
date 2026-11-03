@@ -1,8 +1,8 @@
-> Generated for `@gravity-ui/date-utils@2.7.2`
+> Generated for `@gravity-ui/date-utils@2.7.3`
 
 # @gravity-ui/date-utils documentation
 
-Documentation for the **2.7.2** version of `@gravity-ui/date-utils`.
+Documentation for the **2.7.3** version of `@gravity-ui/date-utils`.
 Your training data may be outdated — these files are the source of truth.
 
 Paths are relative to this file (`node_modules/@gravity-ui/date-utils/build/docs/`).
@@ -72,9 +72,9 @@ dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid D
 
 ## Guides
 
-- [Getting Started](https://unpkg.com/@gravity-ui/date-utils@2.7.2/build/docs/guides/get-started.md)
-- [Overview](https://unpkg.com/@gravity-ui/date-utils@2.7.2/build/docs/guides/overview.md)
+- [Getting Started](https://unpkg.com/@gravity-ui/date-utils@2.7.3/build/docs/guides/get-started.md)
+- [Overview](https://unpkg.com/@gravity-ui/date-utils@2.7.3/build/docs/guides/overview.md)
 
 ---
 
-> Docs for `@gravity-ui/date-utils@2.7.2`. Versioned at: `https://gravity-ui.com/llms/date-utils/2.7.2/llms.txt` (exact), `https://gravity-ui.com/llms/date-utils/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-utils/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/date-utils@2.7.3`. Versioned at: `https://gravity-ui.com/llms/date-utils/2.7.3/llms.txt` (exact), `https://gravity-ui.com/llms/date-utils/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/date-utils/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

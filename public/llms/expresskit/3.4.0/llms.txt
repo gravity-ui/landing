@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/expresskit@2.6.0`
+> Generated for `@gravity-ui/expresskit@3.4.0`
 
 # ExpressKit
 
@@ -24,4 +24,4 @@ Install these in the host project at a compatible version:
 
 ---
 
-> Docs for `@gravity-ui/expresskit@2.6.0`. Versioned at: `https://gravity-ui.com/llms/expresskit/2.6.0/llms.txt` (exact), `https://gravity-ui.com/llms/expresskit/2/llms.txt` (latest of major 2), `https://gravity-ui.com/llms/expresskit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/expresskit@3.4.0`. Versioned at: `https://gravity-ui.com/llms/expresskit/3.4.0/llms.txt` (exact), `https://gravity-ui.com/llms/expresskit/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/expresskit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

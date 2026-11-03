@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/date-components@3.4.2`
+> Generated for `@gravity-ui/date-components@3.4.0`
 
 # Date Components
 
@@ -142,4 +142,4 @@ addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-da
 
 ---
 
-> Docs for `@gravity-ui/date-components@3.4.2`. Versioned at: `https://gravity-ui.com/llms/date-components/3.4.2/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/date-components@3.4.0`. Versioned at: `https://gravity-ui.com/llms/date-components/3.4.0/llms.txt` (exact), `https://gravity-ui.com/llms/date-components/3/llms.txt` (latest of major 3), `https://gravity-ui.com/llms/date-components/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
