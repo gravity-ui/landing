@@ -783,6 +783,13 @@ const ResizingDemo = () => {
 
 #### Column settings
 
+Set `enableReset` to `true` to show the settings popup's Reset button (hidden by default).
+It restores column visibility and order from the table's `initialState`. Reset changes
+the popup draft; press Apply to save it. Without an `initialState`, Reset shows all
+columns in their definition order.
+The optional `onSettingsReset` callback receives that restored visibility and column order
+when Reset is clicked, before the draft is applied.
+
 ```tsx
 const columns: ColumnDef<Person>[] = [
   // ...other columns
