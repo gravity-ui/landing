@@ -18,7 +18,7 @@
     "imageSearch_drop": "Déposer une image pour rechercher des icônes similaires",
     "category": "Catégorie",
     "allIcons": "Toutes les icônes",
-    "categoriesLabel": "Catégories d’icônes",
+    "categoriesLabel": "Catégories d'icônes",
     "categories": {
         "arrows": "Flèches",
         "layout": "Mise en page",
@@ -46,6 +46,6 @@
         "transport": "Transport",
         "weather": "Météo",
         "time": "Temps",
-        "food": "Alimentation"
+        "food": "Nourriture"
     }
 }
