@@ -12,10 +12,10 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## 설명
 
-이 라이브러리는 위젯을 그리드에 정렬하고, 크기를 조절하며, 새로 추가하거나 삭제하는 데 사용됩니다.
+이 라이브러리는 위젯을 그리드에 정렬하고, 크기를 조절하며, 새 위젯을 추가하거나 삭제하는 데 사용됩니다.
 위젯은 React 컴포넌트입니다. 예를 들어 텍스트, 그래픽, 이미지 등이 있습니다.
 
-새로운 위젯은 플러그인 시스템을 통해 추가됩니다.
+새 위젯은 플러그인 시스템을 통해 추가됩니다.
 
 ### 플러그인
 
@@ -75,13 +75,13 @@ interface DashKitProps {
 - **onDrop**: ActionPanel에서 (#DashKitDnDWrapper)를 사용하여 항목을 드롭할 때 호출됩니다.
 - **onItemMountChange**: 항목 마운트 상태가 변경될 때 호출됩니다.
 - **onItemRender**: 항목 렌더링이 완료될 때 호출됩니다.
-- **defaultGlobalParams**, **globalParams**: 모든 위젯에 영향을 미치는 [매개변수](#Params)입니다. DataLens에서 `defaultGlobalParams`는 대시보드 설정에 전역적으로 설정된 매개변수입니다. `globalParams`는 URL에 설정할 수 있는 전역 매개변수입니다.
+- **defaultGlobalParams**, **globalParams**: 모든 위젯에 영향을 미치는 [매개변수](#Params)입니다. DataLens에서 `defaultGlobalParams`는 대시보드 설정에 지정된 전역 매개변수입니다. `globalParams`는 URL에서 설정할 수 있는 전역 매개변수입니다.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)입니다.
-- **settings**: DashKit 설정입니다.
+- **settings**: DashKit 설정입니다. 선택적 `isolateItemUpdates: true`는 다른 위젯의 레이아웃 변경으로 인해 발생하는 렌더러 업데이트를 억제합니다. 자체 데이터, 상태, 매개변수, 기하학적 구조, 설정, 컨텍스트 및 콜백은 여전히 업데이트됩니다. 기본값은 전체 레이아웃 렌더러 업데이트를 유지합니다. 렌더링 간에 `settings` 및 `context`를 메모이제이션합니다. 새 객체 참조는 격리가 활성화된 경우에도 렌더러 업데이트를 트리거합니다. 격리가 활성화된 경우 `layout`을 통해 형제 기하학적 구조를 읽는 플러그인은 오래된 형제 값을 관찰할 수 있습니다.
 - **context**: 모든 위젯에 전달될 객체입니다.
-- **overlayControls**: 편집 시 위젯 컨트롤을 재정의하는 객체입니다. 전달되지 않으면 기본 컨트롤이 표시됩니다. `null`이 전달되면 닫기 버튼 또는 사용자 정의 메뉴만 표시됩니다.
+- **overlayControls**: 편집 시 위젯 컨트롤을 재정의하는 객체입니다. 전송되지 않으면 기본 컨트롤이 표시됩니다. `null`이 전달되면 닫기 버튼 또는 사용자 정의 메뉴만 표시됩니다.
 - **overlayMenuItems**: 사용자 정의 드롭다운 메뉴 항목입니다.
-- **noOverlay**: `true`이면 편집 중 오버레이 및 컨트롤이 표시되지 않습니다.
+- **noOverlay**: `true`이면 편집 중에 오버레이 및 컨트롤이 표시되지 않습니다.
 - **focusable**: `true`이면 그리드 항목에 포커스를 맞출 수 있습니다.
 - **onItemFocus**: `focusable`이 `true`이고 항목에 포커스가 맞춰질 때 호출됩니다.
 - **onItemBlur**: `focusable`이 `true`이고 항목에서 포커스가 해제될 때 호출됩니다.
@@ -92,8 +92,8 @@ interface DashKitProps {
 - **onResizeStart**: 항목 크기 조절이 시작될 때 ReactGridLayout에서 호출됩니다.
 - **onResize**: 항목 크기 조절 중에 ReactGridLayout에서 호출됩니다.
 - **onResizeStop**: 항목 크기 조절이 중지될 때 ReactGridLayout에서 호출됩니다.
-- **getPreparedCopyItemOptions**: 로컬 스토리지에 저장하기 전에 복사된 항목을 직렬화 가능한 객체로 변환할 때 호출됩니다. 비활성화된 `context.getPreparedCopyItemOptions` prop 대신 사용해야 합니다.
-- **onCopyFulfill**: 항목 복사가 성공적으로 완료되면 `error=null` 및 `data`가 정의된 상태로 호출되고, 그렇지 않으면 `error: Error`와 함께 `data` 없이 호출됩니다.
+- **getPreparedCopyItemOptions**: 로컬 스토리지에 저장하기 전에 복사된 항목을 직렬화 가능한 객체로 변환하기 위해 호출됩니다. 이는 더 이상 사용되지 않는 `context.getPreparedCopyItemOptions` prop 대신 사용해야 합니다.
+- **onCopyFulfill**: 항목 복사가 성공적으로 완료되면 `error=null` 및 `data`가 정의된 상태로 호출되고, 그렇지 않으면 `data` 없이 `error: Error`와 함께 호출됩니다.
 
 ## 사용법
 
@@ -111,7 +111,7 @@ interface DashKitProps {
 
 - DashKit.setSettings
 
-  전역 DashKit 설정(위젯 간 마진, 기본 위젯 크기, 위젯 오버레이 메뉴 등)에 사용됩니다.
+  전역 DashKit 설정(예: 위젯 간 마진, 기본 위젯 크기 및 위젯 오버레이 메뉴)에 사용됩니다.
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -125,7 +125,7 @@ interface DashKitProps {
 
 - DashKit.registerPlugins
 
-  플러그인 등록 및 구성
+  플러그인 등록 및 설정
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -159,9 +159,9 @@ export interface Config {
   salt: string; // 고유 ID 생성을 위한 salt
   counter: number; // 고유 ID 생성을 위한 카운터, 증가만 합니다.
   items: ConfigItem[]; // 초기 위젯 상태
-  layout: ConfigLayout[]; // 그리드 상의 위젯 위치 https://github.com/react-grid-layout
+  layout: ConfigLayout[]; // 그리드에서의 위젯 위치 https://github.com/react-grid-layout
   aliases: ConfigAliases; // 매개변수 별칭 #Params 참조
-  connections: ConfigConnection[]; // 위젯 간 연결 #Params 참조
+  connections: ConfigConnection[]; // 위젯 간의 연결 #Params 참조
 }
 ```
 
@@ -250,7 +250,7 @@ const config: DashKitProps['config'] = {
 };
 ```
 
-새로운 항목을 config에 추가하기:
+새로운 항목을 config에 추가합니다:
 
 ```ts
 const newLayout = updateLayout: [
@@ -273,11 +273,11 @@ const newLayout = updateLayout: [
 const newConfig = DashKit.setItem({
   item: {
     data: {
-      text: `일부 텍스트`,
+      text: `Some text`,
     },
     namespace: 'default',
     type: 'text',
-    // 선택 사항. 미리 정의된 차원으로 현재 레이아웃에 새 항목을 삽입해야 하는 경우
+    // 선택 사항. 새 항목을 미리 정의된 크기로 현재 레이아웃에 삽입해야 하는 경우
     layout: { // 현재 항목이 'Ea' 앞에 삽입됨
       h: 6,
       w: 12,
@@ -293,7 +293,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-기존 항목을 config에서 변경하기:
+기존 항목을 config에서 변경합니다:
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -310,7 +310,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-config에서 항목 삭제하기:
+config에서 항목을 삭제합니다:
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -324,7 +324,7 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 });
 ```
 
-### Params
+### 매개변수
 
 ```ts
 type Params = Record<string, string | string[]>;
@@ -337,7 +337,7 @@ type Params = Record<string, string | string[]>;
 1. `defaultGlobalParams`
 2. 기본 위젯 매개변수 `item.default`
 3. `globalParams`
-4. 큐에 따라 [itemsStateAndParams](#itemsStateAndParams)의 매개변수.
+4. 큐에 따라 [itemsStateAndParams](#itemsStateAndParams)의 매개변수
 
 ### itemsStateAndParams
 
@@ -372,7 +372,7 @@ type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 
 > 실험적: 이 API는 마이너 릴리스에서 변경될 수 있습니다.
 
-`DashKit`는 실험적인 인스턴스 이벤트 API를 노출합니다. 컴포넌트 ref를 사용하고 `dashkitRef.current?.on(eventName, handler)`로 구독하세요. 이 메서드는 구독 해제 콜백을 반환합니다.
+`DashKit`는 실험적인 인스턴스 이벤트 API를 제공합니다. 컴포넌트 ref를 사용하고 `dashkitRef.current?.on(eventName, handler)`로 구독하세요. 이 메서드는 구독 해제 콜백을 반환합니다.
 
 지원되는 첫 번째 이벤트는 `change`입니다. 레이아웃이 변경될 때 `onChange`가 호출되기 전에 발생합니다. 핸들러는 이전 및 다음 전체 레이아웃을 읽거나, 레이아웃 패치를 읽거나, `preventDefault()`를 호출하여 기본 `onChange` 호출을 중지할 수 있습니다.
 
@@ -415,7 +415,7 @@ type DashKitChangeEvent = {
 
 #### 이벤트 기반 레이아웃 업데이트
 
-`change` 이벤트 핸들러에서 `preventDefault()`를 사용하면 config prop을 다시 초기화하지 않고 레이아웃 업데이트를 처리할 수 있습니다. DashKit은 내부적으로 기준선을 유지하고 증분 방식으로 패치를 계산합니다.
+`preventDefault()`를 `change` 이벤트 핸들러에서 사용하면, config prop을 다시 초기화하지 않고도 레이아웃 업데이트를 처리할 수 있습니다. DashKit은 내부적으로 기준선을 유지하고 점진적으로 패치를 계산합니다.
 
 ```tsx
 function Dashboard() {
@@ -440,7 +440,7 @@ function Dashboard() {
 }
 ```
 
-**중요:** 나중에 props에서 `config.layout`을 업데이트하는 경우(예: 서버 동기화), DashKit은 새 prop과 일치하도록 내부 기준선을 재설정합니다. 이렇게 하면 이벤트 기반 및 제어 워크플로우 모두와 호환됩니다.
+**중요:** 나중에 props에서 `config.layout`을 업데이트하는 경우(예: 서버 동기화), DashKit은 새 prop과 일치하도록 내부 기준선을 재설정합니다. 이는 이벤트 기반 및 제어 워크플로우 모두와의 호환성을 보장합니다.
 
 ### 메뉴
 
@@ -451,7 +451,7 @@ type MenuItem = {
   id: string; // 고유 ID
   title?: string; // 문자열 제목
   icon?: ReactNode; // 아이콘 노드
-  iconSize?: number | string; // px 단위의 아이콘 크기 (숫자 또는 단위 포함 문자열)
+  iconSize?: number | string; // px 단위의 숫자 또는 단위가 포함된 문자열로 된 아이콘 크기
   handler?: (item: ConfigItem) => void; // 사용자 지정 항목 액션 핸들러
   visible?: (item: ConfigItem) => boolean; // 메뉴 항목 필터링을 위한 선택적 가시성 핸들러
   className?: string; // 사용자 지정 클래스 속성
@@ -479,9 +479,9 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string; // 선택적 사용자 지정 드래그 이미지. 기본적으로 드래그되는 ActionPanel 항목이 미리 보기로 표시됩니다.
-  onDragStart?: (dragProps: ItemDragProps) => void; // ActionPanel에서 요소가 드래그될 때 호출되는 콜백
-  onDragEnd?: () => void; // 요소가 드롭되거나 드래그가 취소될 때 호출되는 콜백
+  dragImageSrc?: string; // 선택적 사용자 지정 드래그 이미지. 기본적으로 ActionPanel 항목이 미리보기로 표시됩니다.
+  onDragStart?: (dragProps: ItemDragProps) => void; // ActionPanel에서 요소를 드래그할 때 호출되는 콜백
+  onDragEnd?: () => void; // 요소를 드롭하거나 드래그를 취소할 때 호출되는 콜백
   onDropDragOver?: (
     draggedItem: DraggedOverItem,
     sharedItem: DraggedOverItem | null,
@@ -489,19 +489,19 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: 선택적 사용자 지정 드래그 이미지. 기본적으로 드래그되는 ActionPanel 항목이 미리 보기로 표시됩니다.
-- **onDragStart**: ActionPanel에서 요소가 드래그될 때 호출되는 콜백
-- **onDragEnd**: 요소가 드롭되거나 드래그가 취소될 때 호출되는 콜백
+- **dragImageSrc**: 선택적 사용자 지정 드래그 이미지. 기본적으로 드래그되는 ActionPanel 항목이 미리보기로 표시됩니다.
+- **onDragStart**: ActionPanel에서 요소를 드래그할 때 호출되는 콜백
+- **onDragEnd**: 요소를 드롭하거나 드래그를 취소할 때 호출되는 콜백
 
 ```ts
 type ItemDragProps = {
   type: string; // 플러그인 유형
   layout?: {
-    // 선택 사항. 미리 보기 및 초기화를 위한 레이아웃 항목 크기
+    // 선택 사항. 미리보기 및 초기화를 위한 레이아웃 항목 크기
     w?: number;
     h?: number;
   };
-  extra?: any; // 사용자 지정 사용자 컨텍스트
+  extra?: any; // 사용자 지정 컨텍스트
 };
 ```
 
@@ -510,7 +510,7 @@ type ItemDropProps = {
   commit: () => void; // 모든 구성 작업이 완료된 후 호출되어야 하는 콜백
   dragProps: ItemDragProps; // 항목 드래그 속성
   itemLayout: ConfigLayout; // 계산된 항목 레이아웃 치수
-  newLayout: ConfigLayout[]; // 요소가 드롭된 후의 새 레이아웃
+  newLayout: ConfigLayout[]; // 요소를 드롭한 후의 새 레이아웃
 };
 ```
 
@@ -521,7 +521,7 @@ const overlayMenuItems = [
   {
     id: 'chart',
     icon: <Icon data={ChartColumn} />,
-    title: '차트',
+    title: 'Chart',
     qa: 'chart',
     dragProps: { // ItemDragProps
         type: 'custom', // 등록된 플러그인 유형
@@ -530,7 +530,7 @@ const overlayMenuItems = [
 ]
 
 const onDrop = (dropProps: ItemDropProps) => {
-  // ... 요소를 구성에 추가
+  // ... 구성에 요소 추가
   dropProps.commit();
 }
 
@@ -555,14 +555,14 @@ const onDrop = (dropProps: ItemDropProps) => {
 | `--dashkit-action-panel-item-color-dragging`   | 드래그 배경색  |
 | `--dashkit-action-panel-item-text-color-hover` | 호버 텍스트 색상 |
 | `--dashkit-action-panel-item-text-color-dragging` | 드래그 텍스트 색상 |
-| 오버레이 변수                                  |                |
+| Overlay 변수                                   |                |
 | `--dashkit-overlay-border-color`               | 테두리 색상    |
 | `--dashkit-overlay-color`                      | 배경색         |
 | `--dashkit-overlay-opacity`                    | 투명도         |
-| 그리드 항목 변수                               |                |
+| Grid 항목 변수                                 |                |
 | `--dashkit-grid-item-edit-opacity`             | 투명도         |
 | `--dashkit-grid-item-border-radius`            | 테두리 반경    |
-| 플레이스홀더 변수                              |                |
+| Placeholder 변수                               |                |
 | `--dashkit-placeholder-color`                  | 배경색         |
 | `--dashkit-placeholder-opacity`                | 투명도         |
 
@@ -637,7 +637,7 @@ server {
 
 ## 라이선스
 
-MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하십시오.
+MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하세요.
 
 ## AI 에이전트용
 
@@ -645,23 +645,23 @@ MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENS
 
 ### 언제 사용해야 할까요?
 
-- 위젯이 그리드에 배치, 크기 조절 및 재배치되는 구성 가능한 대시보드를 렌더링할 때 (`react-grid-layout` 기반).
+- 위젯의 위치, 크기 조절, 재배치가 가능한 구성 가능한 대시보드를 렌더링할 때 (`react-grid-layout` 기반).
 - 사용자 편집 가능한 레이아웃: 액션 패널에서 위젯 추가/제거, 드래그 앤 드롭, 오버레이 컨트롤이 있는 편집 모드.
 - 각 위젯 유형(제목, 텍스트, 차트, 사용자 정의)이 한 번 등록되고 `config`에 의해 구동되는 플러그인 기반 위젯.
 
 ### 언제 사용하지 않아야 할까요?
 
-- 단일 고정 차트 또는 패널의 경우, [`@gravity-ui/charts`](https://gravity-ui.com/charts) 또는 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit)를 직접 사용하세요. 그리드/플러그인 메커니즘은 위젯 하나에 대한 오버헤드입니다.
+- 단일 고정 차트 또는 패널의 경우, [`@gravity-ui/charts`](https://gravity-ui.com/charts) 또는 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit)를 직접 사용하세요. 그리드/플러그인 메커니즘은 위젯 하나에 과도한 오버헤드입니다.
 - 위젯 대시보드가 아닌 일반적인 반응형 그리드의 경우, `react-grid-layout`을 직접 사용하세요.
 - DashKit 대시보드 내에 ChartKit 기반 차트 위젯을 포함하는 경우, DashKit이 쉘 역할을 하며 실제 차트 렌더링은 여전히 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit)에 의존합니다.
 
 ### 일반적인 함정
 
-- **환각적인 컴포넌트 `<Dashboard>`** — 내보내기는 `<DashKit>`입니다 (`<DashKit>` + `<ActionPanel>`을 감싸는 드래그 앤 드롭 쉘은 `<DashKitDnDWrapper>`입니다).
+- **환각 컴포넌트 `<Dashboard>`** — 내보내기는 `<DashKit>`입니다 (`<DashKit>` + `<ActionPanel>`을 감싸는 드래그 앤 드롭 쉘은 `<DashKitDnDWrapper>`입니다).
 - **헬퍼 대신 `config`를 변경하는 경우** — 레이아웃과 ID가 일관되게 유지되도록 항목을 추가/변경/제거하려면 정적 `DashKit.setItem({...})` / `DashKit.removeItem({...})` 헬퍼를 사용하세요.
 - **`DashKit.setSettings` / `DashKit.registerPlugins`를 잊는 경우** — 컴포넌트는 렌더링되기 전에 구성(언어, 그리드 설정, 플러그인 등록)되어야 합니다. 그렇지 않으면 위젯이 아무것도 표시하지 않습니다.
-- **두 개의 매개변수 prop을 혼동하는 경우** — `defaultGlobalParams`(대시보드 수준 기본값) 대 `globalParams`(URL로 재정의 가능한 전역 변수); 둘 다 ChartKit에서 소비하는 매개변수 생성 큐로 흐릅니다.
-- **실험적인 `change` 핸들러에서 `event.preventDefault()`를 호출할 때 수동으로 `onChange`를 호출하는 경우** — DashKit은 내부적으로 시각적 상태를 유지합니다. props에서 `config.layout`을 다시 설정하면 해당 기준선이 재설정됩니다.
+- **두 개의 매개변수 prop을 혼동하는 경우** — `defaultGlobalParams`(대시보드 수준 기본값) 대 `globalParams`(URL로 재정의 가능한 전역 변수); 둘 다 ChartKit에서 소비하는 매개변수 생성 큐로 전달됩니다.
+- **실험적인 `change` 핸들러에서 `event.preventDefault()`를 호출할 때 `change` 이벤트를 수동으로 호출하는 경우** — DashKit은 내부적으로 시각적 상태를 유지합니다. props에서 `config.layout`을 다시 설정하면 해당 기준선이 재설정됩니다.
 
 ## AI 에이전트용 문서
 

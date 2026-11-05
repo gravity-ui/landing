@@ -1,6 +1,6 @@
 # @gravity-ui/navigation &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/navigation)](https://www.npmjs.com/package/@gravity-ui/navigation) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/navigation/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/navigation/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/navigation/)
 
-### Aside Header Navigation &middot; [Vorschau →](https://preview.yandexcloud.dev/navigation/)
+### Seitenleisten-Kopfzeilen-Navigation &middot; [Vorschau →](https://preview.yandexcloud.dev/navigation/)
 
 ![](docs/images/showcase.png)
 
@@ -13,22 +13,24 @@ npm install @gravity-ui/navigation
 Stellen Sie sicher, dass die Peer-Abhängigkeiten in Ihrem Projekt installiert sind
 
 ```bash
-npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+npm install --dev @gravity-ui/uikit@^8.0.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## Migration
 
-Upgrade von Version 4.x, 5.x oder 6.x: siehe [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md).
+Upgrade von Version 7.x (`@gravity-ui/uikit` 8, React 18 oder 19): siehe [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md).
+
+Upgrade von Version 4.x, 5.x oder 6.x: folgen Sie zuerst [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md) und dann [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md).
 
 ## Verwendung
 
-Rendern Sie `AsideHeader` als App-Shell. Dies ist eine gesteuerte Komponente – Sie verwalten den zusammengeklappten Zustand über `compact`/`onChangeCompact` – und Ihr Seiteninhalt wird über `renderContent` bereitgestellt. Richten Sie zuerst die `@gravity-ui/uikit`-Stile und `ThemeProvider` ein (siehe die [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+Rendern Sie `AsideHeader` als App-Shell. Es ist eine gesteuerte Komponente – Sie verwalten den zusammengeklappten Zustand über `compact`/`onChangeCompact` – und Ihr Seiteninhalt wird über `renderContent` bereitgestellt. Richten Sie zuerst die `@gravity-ui/uikit`-Stile und den `Provider` ein (siehe die [uikit-Stilanleitung](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
 
 ```tsx
 import React from 'react';
 import {AsideHeader} from '@gravity-ui/navigation';
 import {Gear, House} from '@gravity-ui/icons';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
@@ -36,7 +38,7 @@ export function App() {
   const [compact, setCompact] = React.useState(false);
 
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <AsideHeader
         logo={{text: 'Meine App', href: '/'}}
         compact={compact}
@@ -47,25 +49,25 @@ export function App() {
         ]}
         renderContent={() => <main>Seiteninhalt</main>}
       />
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
 ## Sandboxes
 
-Basic
+Einfach
 https://codesandbox.io/p/devbox/navigation-demo-simple-x9k5sd
 
-Advanced
+Fortgeschritten
 https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## Roadmap 2025
 
 1. Unterstützung für SSR
-2. Mehr Dokumentation und Beispiele für [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) hinzufügen
+2. Mehr Dokumentation und Beispiele zu [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) hinzufügen
 3. Unterstützung für Navigation im UIKit-Themer
-4. API für subheaderItem, menuItem, footerItem vereinheitlichen
+4. API für `subheaderItem`, `menuItem`, `footerItem` vereinheitlichen
 
 ## Komponenten
 
@@ -113,11 +115,11 @@ Anwendungs-Shell-Navigationskomponenten für Gravity UI-Apps – die einklappbar
 
 ### Häufige Fallstricke
 
-- **`AsideHeader` ist gesteuert.** Sie müssen den zusammengeklappten Zustand mit `compact` verwalten und ihn in `onChangeCompact` aktualisieren; das Übergeben von `compact` ohne Handler friert die Seitenleiste ein.
-- **Menüelemente sind `menuItems`, indiziert nach `id`.** Jedes Element ist `{id, title, icon, current, onItemClick}`; `icon` erwartet eine Icon-Komponente (z. B. von `@gravity-ui/icons`), keine Zeichenkette.
+- **`AsideHeader` ist gesteuert.** Sie müssen den eingeklappten Zustand mit `compact` selbst verwalten und ihn in `onChangeCompact` aktualisieren. Wenn Sie `compact` ohne Handler übergeben, friert die Seitenleiste ein.
+- **Menüpunkte sind `menuItems`, indiziert nach `id`.** Jeder Punkt ist `{id, title, icon, current, onItemClick}`; `icon` erwartet eine Icon-Komponente (z. B. von `@gravity-ui/icons`), keine Zeichenkette.
 - **Peer-Abhängigkeiten sind erforderlich.** `@gravity-ui/uikit`, `@gravity-ui/icons` und `@bem-react/classname` müssen zusammen mit `react`/`react-dom` installiert werden.
-- **Benötigt uikit-Setup.** Rendern Sie innerhalb von `ThemeProvider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`, sonst wird die Shell ungestylt gerendert.
-- **Seiteninhalt wird über `renderContent` bereitgestellt.** Rendern Sie Ihren gerouteten Inhalt über die `renderContent`-Prop / `PageLayout`, nicht als `children`.
+- **Benötigt uikit-Setup.** Rendern Sie innerhalb von `Provider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`, andernfalls wird die Shell ungestylt gerendert.
+- **Seiteninhalt wird über `renderContent` übergeben.** Rendern Sie Ihren gerouteten Inhalt über die `renderContent`-Prop / `PageLayout`, nicht als `children`.
 
 ## Dokumentation für KI-Agenten
 

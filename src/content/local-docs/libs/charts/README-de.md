@@ -12,10 +12,10 @@ npm install @gravity-ui/uikit @gravity-ui/charts
 
 ## Verwendung
 
-Importieren Sie die `@gravity-ui/uikit`-Stile einmal in Ihrem Einstiegspunkt, umschließen Sie Ihre App mit `ThemeProvider` und rendern Sie ein `Chart` innerhalb eines Containers mit expliziter Höhe:
+Importieren Sie die `@gravity-ui/uikit`-Stile einmal in Ihrem Einstiegspunkt, umschließen Sie Ihre App mit `Provider` und rendern Sie ein `Chart` innerhalb eines Containers mit expliziter Höhe:
 
 ```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 import {Chart} from '@gravity-ui/charts';
 
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -40,20 +40,20 @@ const data = {
 
 export default function App() {
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <div style={{height: 300}}>
         <Chart data={data} />
       </div>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
-`Chart` passt sich der Größe seines übergeordneten Elements an, daher muss das umschließende Element eine Höhe haben.
+`Chart` passt sich der Größe seines Elternteils an, daher muss das umschließende Element eine Höhe haben.
 
-## Werkzeuge zur Diagrammkonfiguration
+## Werkzeuge für die Diagrammkonfiguration
 
-Das Paket stellt TypeScript-Deklarationen und JSON-Schema für die Validierung, Generierung und Monaco-Integration von Diagrammkonfigurationen bereit. Details zur Einrichtung und Verwendung finden Sie in der [Dokumentation zu den Werkzeugen für Diagrammkonfigurationen](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html).
+Das Paket stellt TypeScript-Deklarationen und JSON-Schema für die Validierung, Generierung und Monaco-Integration von Diagrammkonfigurationen bereit. Details zur Einrichtung und Verwendung finden Sie in der [Dokumentation zu den Werkzeugen für die Diagrammkonfiguration](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html).
 
 ## Dokumentation
 
@@ -79,7 +79,7 @@ Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Lini
 
 ### Wann nicht verwenden
 
-- Projekte, die noch `@gravity-ui/chartkit` verwenden – dies ist der ältere, auf Adaptern basierende Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne, eigenständige Renderer und kein direkter Ersatz.
+- Projekte, die noch `@gravity-ui/chartkit` verwenden – dies ist der ältere, adapterbasierte Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne, eigenständige Renderer und kein direkter Ersatz.
 - Reine Tabellendaten – verwenden Sie [`@gravity-ui/table`](https://github.com/gravity-ui/table).
 - Nicht-React- oder reine Server-Rendering – `Chart` rendert React SVG und benötigt das DOM.
 
@@ -87,8 +87,8 @@ Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Lini
 
 - **Die Komponente heißt `Chart`, nicht `ChartKit`.** Importieren Sie `{Chart}` aus `@gravity-ui/charts`; `ChartKit` gehört zum separaten Legacy-Paket `@gravity-ui/chartkit`.
 - **Die `data`-Prop ist `data`, strukturiert als `{series: {data: [...]}}`.** Jeder Eintrag in `series.data` ist eine Serie mit ihrem eigenen `type` und einer `data`-Array – es gibt kein Array von Serien auf oberster Ebene.
-- **Ohne einen Container mit definierter Größe wird nichts gerendert.** `Chart` füllt sein übergeordnetes Element, geben Sie dem Wrapper also eine explizite Höhe.
-- **Erfordert uikit-Setup.** Umschließen Sie mit `ThemeProvider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` ist eine erforderliche Peer-Abhängigkeit.
+- **Ohne einen Container mit definierter Größe wird nichts gerendert.** `Chart` füllt seinen Elternteil aus, geben Sie dem Wrapper also eine explizite Höhe.
+- **Erfordert uikit-Setup.** Umschließen Sie mit `Provider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` ist eine erforderliche Peer-Abhängigkeit.
 
 ### Nützliche Dokumente
 

@@ -13,22 +13,24 @@ npm install @gravity-ui/navigation
 プロジェクトにピア依存関係がインストールされていることを確認してください。
 
 ```bash
-npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+npm install --dev @gravity-ui/uikit@^8.0.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## マイグレーション
 
-4.x、5.x、または6.xからのアップグレードについては、[MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md)を参照してください。
+7.x からのアップグレード (`@gravity-ui/uikit` 8、React 18 または 19): [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md) を参照してください。
+
+4.x、5.x、または 6.x からのアップグレード: まず [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md) を、次に [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md) を参照してください。
 
 ## 使用方法
 
-`AsideHeader` をアプリのシェルとしてレンダリングします。これは制御コンポーネントであり、`compact`/`onChangeCompact` を介して折りたたみ状態を管理し、ページコンテンツは `renderContent` を通して渡します。まず、`@gravity-ui/uikit` のスタイルと `ThemeProvider` を設定してください（[uikit スタイルガイド](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)を参照）。
+`AsideHeader` をアプリのシェルとしてレンダリングします。これは制御コンポーネントであり、`compact`/`onChangeCompact` を介して折りたたみ状態を管理し、ページコンテンツは `renderContent` を介して渡します。まず `@gravity-ui/uikit` のスタイルと `Provider` を設定してください (uikit スタイルガイドを参照: [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles))。
 
 ```tsx
 import React from 'react';
 import {AsideHeader} from '@gravity-ui/navigation';
 import {Gear, House} from '@gravity-ui/icons';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
@@ -36,7 +38,7 @@ export function App() {
   const [compact, setCompact] = React.useState(false);
 
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <AsideHeader
         logo={{text: 'My App', href: '/'}}
         compact={compact}
@@ -47,25 +49,25 @@ export function App() {
         ]}
         renderContent={() => <main>Page content</main>}
       />
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
-## Sandboxes
+## サンドボックス
 
-Basic
+基本
 https://codesandbox.io/p/devbox/navigation-demo-simple-x9k5sd
 
-Advanced
+高度
 https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## ロードマップ 2025
 
-1. SSRのサポート
-2. [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)へのドキュメント、例の追加
-3. UIKitテーマでのナビゲーションサポート
-4. subheaderItem、menuItem、footerItem APIの統一
+1. SSR のサポート
+2. [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) にドキュメントと例を追加
+3. UIKit テーマでのナビゲーションのサポート
+4. subheaderItem、menuItem、footerItem API の統一
 
 ## コンポーネント
 
@@ -89,36 +91,36 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## CSS API
 
-Navigationコンポーネントのテーマ設定に使用されます。
+Navigation のコンポーネントのテーマ設定に使用されます。
 
 ## ライセンス
 
-MIT Licenseの下で配布されています。詳細は[LICENSE](LICENSE)を参照してください。
+MIT ライセンスで配布されています。詳細については [LICENSE](LICENSE) を参照してください。
 
-## AIエージェント向け
+## AI エージェント向け
 
-Gravity UIアプリのアプリケーションシェルナビゲーションコンポーネント — 折りたたみ可能な`AsideHeader`サイドバーに加え、フッター、ドロワー、ロゴ、ホットキー、設定パネルがページ全体を構成します。
+Gravity UI アプリケーション用のアプリケーションシェルナビゲーションコンポーネント — 折りたたみ可能な `AsideHeader` サイドバーに、フッター、ドロワー、ロゴ、ホットキー、およびページ全体を囲む設定パネルが含まれます。
 
 ### 使用する場合
 
-- アプリのプライマリナビゲーションフレーム: `AsideHeader`（折りたたみ可能なサイドナビゲーション）に`menuItems`、サブヘッダー、フッターセクションが含まれます。
-- サポートするシェルUI: `Drawer`/`DrawerItem`、`Footer`/`MobileFooter`、`MobileHeader`、`HotkeysPanel`、`Settings`、`ActionBar`、`Logo`。
-- `renderContent` / `PageLayout` を介してナビゲーションフレーム内にページコンテンツを配置する場合。
+- アプリケーションのプライマリナビゲーションフレーム: `AsideHeader` (折りたたみ可能なサイドナビゲーション) に `menuItems`、サブヘッダー、およびフッターセクションが含まれます。
+- サポートするシェル UI: `Drawer`/`DrawerItem`、`Footer`/`MobileFooter`、`MobileHeader`、`HotkeysPanel`、`Settings`、`ActionBar`、`Logo`。
+- `renderContent` / `PageLayout` を介したナビゲーションフレーム内のページコンテンツのレイアウト。
 
 ### 使用しない場合
 
-- 一般的なページ内コントロール（ボタン、タブ、メニュー、パンくずリスト） — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)を使用してください。このパッケージは外側のアプリのクロームであり、一般的なコンポーネントではありません。
-- 設定からページ本文自体をレンダリングする場合 — [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor)を使用してください。
-- クライアントサイドルーティング — これはナビゲーションUIのみを提供します。クリックを独自のルーターに接続してください。
+- 一般的なページ内コントロール (ボタン、タブ、メニュー、パンくずリスト) — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) を使用してください。このパッケージは外側のアプリのクロムであり、一般的なコンポーネントではありません。
+- 設定からページ本文自体をレンダリングする場合 — [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor) を使用してください。
+- クライアントサイドルーティング — これはナビゲーション UI のみを提供します。クリックを独自のルーターに接続してください。
 
-### よくある間違い
+### よくある落とし穴
 
-- **`AsideHeader`は制御されています。** `compact`で折りたたみ状態を管理し、`onChangeCompact`で更新する必要があります。ハンドラーなしで`compact`を渡すと、サイドバーがフリーズします。
-- **メニュー項目は`menuItems`で、`id`でキー付けされます。** 各項目は`{id, title, icon, current, onItemClick}`です。`icon`は文字列名ではなく、アイコンコンポーネント（例: `@gravity-ui/icons`から）を受け取ります。
-- **ピア依存関係が必要です。** `@gravity-ui/uikit`、`@gravity-ui/icons`、`@bem-react/classname`は、`react`/`react-dom`と一緒にインストールする必要があります。
-- **uikitの設定が必要です。** `ThemeProvider`内でレンダリングし、`@gravity-ui/uikit/styles/styles.css`をインポートしないと、シェルはスタイルなしでレンダリングされます。
-- **ページコンテンツは`renderContent`を経由します。** ルートされたコンテンツは、`children`ではなく、`renderContent`プロップ / `PageLayout`を介してレンダリングしてください。
+- **`AsideHeader` は制御可能です。** `compact` プロパティで折りたたみの状態を管理し、`onChangeCompact` で更新する必要があります。`compact` をハンドラーなしで渡すと、サイドバーがフリーズします。
+- **メニュー項目は `menuItems` で、`id` でキー付けされます。** 各項目は `{id, title, icon, current, onItemClick}` です。`icon` には文字列名ではなく、アイコンコンポーネント（例: `@gravity-ui/icons` から）を指定します。
+- **ピア依存関係が必要です。** `@gravity-ui/uikit`、`@gravity-ui/icons`、`@bem-react/classname` は `react`/`react-dom` と共にインストールする必要があります。
+- **uikit のセットアップが必要です。** `Provider` の中でレンダリングし、`@gravity-ui/uikit/styles/styles.css` をインポートしてください。そうしないと、シェルはスタイルなしでレンダリングされます。
+- **ページコンテンツは `renderContent` を介して渡されます。** ルーティングされたコンテンツは `children` としてではなく、`renderContent` プロパティまたは `PageLayout` を介してレンダリングしてください。
 
-## AIエージェント向けドキュメント
+## AI エージェント向けドキュメント
 
-インストールされているバージョンのエージェント可読ドキュメントは、`node_modules/@gravity-ui/navigation/build/docs/INDEX.md`にあります。
+インストールされているバージョンのエージェント可読ドキュメントは、`node_modules/@gravity-ui/navigation/build/docs/INDEX.md` にあります。

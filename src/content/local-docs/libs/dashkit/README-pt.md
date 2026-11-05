@@ -1,8 +1,6 @@
-# @gravity-ui/dashkit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/dashkit)](https://www.npmjs.com/package/@gravity-ui/dashkit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/dashkit/.github/workflows/ci.yaml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/dashkit/actions/workflows/ci.yaml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/dashkit/)
-
 # DashKit
 
-Uma biblioteca para renderizar grades de dashboards.
+Uma biblioteca para renderização de grades de dashboards.
 
 ## Instalação
 
@@ -71,29 +69,29 @@ interface DashKitProps {
 - **config**: [Config](#Config).
 - **editMode**: Se o modo de edição está habilitado.
 - **onItemEdit**: Chamado quando você clica para editar um widget.
-- **onChange**: Chamado quando a config ou [itemsStateAndParams](#itemsStateAndParams) são alterados.
+- **onChange**: Chamado quando o `config` ou `itemsStateAndParams` são alterados.
 - **onDrop**: Chamado quando um item é solto do ActionPanel usando (#DashKitDnDWrapper)
-- **onItemMountChange**: Chamado quando o estado de montagem do item é alterado
-- **onItemRender**: Chamado quando a renderização do item é concluída
+- **onItemMountChange**: Chamado quando o estado de montagem do item é alterado.
+- **onItemRender**: Chamado quando a renderização do item é concluída.
 - **defaultGlobalParams**, **globalParams**: [Parâmetros](#Params) que afetam todos os widgets. No DataLens, `defaultGlobalParams` são parâmetros globais definidos nas configurações do dashboard. `globalParams` são parâmetros globais que podem ser definidos na URL.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
-- **settings**: Configurações do DashKit.
+- **settings**: Configurações do DashKit. Opcionalmente, `isolateItemUpdates: true` suprime atualizações do renderizador causadas apenas por alterações de layout de outros widgets. Dados próprios, estado, parâmetros, geometria, configurações, contexto e callbacks ainda são atualizados; o padrão mantém atualizações completas do renderizador de layout. Memoize `settings` e `context` entre as renderizações: novas referências de objeto acionam atualizações do renderizador mesmo com isolamento habilitado. Com isolamento habilitado, plugins que leem a geometria de irmãos através de `layout` podem observar valores de irmãos desatualizados.
 - **context**: Objeto que será passado para todos os widgets.
 - **overlayControls**: Objeto que substitui os controles do widget no momento da edição. Se não for transmitido, controles básicos serão exibidos. Se `null` for passado, apenas o botão de fechar ou um menu personalizado será exibido.
-- **overlayMenuItems**: Itens de menu suspensos personalizados
+- **overlayMenuItems**: Itens de menu dropdown personalizados.
 - **noOverlay**: Se `true`, a sobreposição e os controles não são exibidos durante a edição.
 - **focusable**: Se `true`, os itens da grade serão focáveis.
 - **onItemFocus**: Chamado quando `focusable` é true e o item recebe foco.
 - **onItemBlur**: Chamado quando `focusable` é true e o item perde o foco.
 - **draggableHandleClassName**: Nome da classe CSS do elemento que torna o widget arrastável.
-- **onDragStart**: Chamado pelo ReactGridLayout quando o arrasto de um item começa
-- **onDrag**: Chamado pelo ReactGridLayout durante o arrasto de um item
-- **onDragStop**: Chamado pelo ReactGridLayout quando o arrasto de um item para
-- **onResizeStart**: Chamado pelo ReactGridLayout quando o redimensionamento de um item começa
-- **onResize**: Chamado pelo ReactGridLayout durante o redimensionamento de um item
-- **onResizeStop**: Chamado pelo ReactGridLayout quando o redimensionamento de um item para
-- **getPreparedCopyItemOptions**: Chamado para converter um item copiado em um objeto serializável antes de salvá-lo no localStorage. Deve ser usado em vez da prop depreciada `context.getPreparedCopyItemOptions`
-- **onCopyFulfill**: Chamado quando a cópia do item é concluída com `error=null` e `data` definido em caso de sucesso, e com `error: Error` sem `data` caso contrário
+- **onDragStart**: Chamado pelo ReactGridLayout quando o arrasto do item começa.
+- **onDrag**: Chamado pelo ReactGridLayout enquanto o item está sendo arrastado.
+- **onDragStop**: Chamado pelo ReactGridLayout quando o arrasto do item para.
+- **onResizeStart**: Chamado pelo ReactGridLayout quando o redimensionamento do item começa.
+- **onResize**: Chamado pelo ReactGridLayout enquanto o item está sendo redimensionado.
+- **onResizeStop**: Chamado pelo ReactGridLayout quando o redimensionamento do item para.
+- **getPreparedCopyItemOptions**: Chamado para converter um item copiado em um objeto serializável antes de salvá-lo no localStorage. Deve ser usado em vez da prop `context.getPreparedCopyItemOptions` depreciada.
+- **onCopyFulfill**: Chamado quando a cópia do item é concluída com `error=null` e `data` definido em caso de sucesso, e com `error: Error` sem `data` caso contrário.
 
 ## Uso
 
@@ -111,7 +109,7 @@ Antes de usar o `DashKit` como um componente React, ele deve ser configurado.
 
 - DashKit.setSettings
 
-  Usado para configurações globais do DashKit (como margens entre widgets, tamanhos padrão de widgets e menu de sobreposição de widgets)
+  Usado para configurações globais do DashKit (como margens entre widgets, tamanhos padrão de widgets e menu de sobreposição de widgets).
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -125,7 +123,7 @@ Antes de usar o `DashKit` como um componente React, ele deve ser configurado.
 
 - DashKit.registerPlugins
 
-  Registro e configuração de plugins
+  Registrando e configurando plugins.
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -250,7 +248,7 @@ const config: DashKitProps['config'] = {
 };
 ```
 
-Adicione um novo item à configuração:
+Adicionar um novo item à configuração:
 
 ```ts
 const newLayout = updateLayout: [
@@ -278,7 +276,7 @@ const newConfig = DashKit.setItem({
     namespace: 'default',
     type: 'text',
     // Opcional. Se o novo item precisar ser inserido no layout atual com dimensões predefinidas
-    layout: { // O item atual é inserido antes de 'Ea'
+    layout: { // Item atual inserido antes de 'Ea'
       h: 6,
       w: 12,
       x: 0,
@@ -293,7 +291,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-Altere um item existente na configuração:
+Alterar um item existente na configuração:
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -310,7 +308,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-Exclua um item da configuração:
+Excluir um item da configuração:
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -372,9 +370,9 @@ type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 
 > Experimental: esta API pode mudar em lançamentos menores.
 
-O `DashKit` expõe uma API experimental de eventos de instância. Use uma referência de componente e assine com `dashkitRef.current?.on(eventName, handler)`. O método retorna um callback de cancelamento de inscrição.
+O `DashKit` expõe uma API de eventos de instância experimental. Use uma referência de componente e assine com `dashkitRef.current?.on(eventName, handler)`. O método retorna um callback de cancelamento de inscrição.
 
-O primeiro evento suportado é `change`. Ele é emitido quando o layout muda, antes que `onChange` seja chamado. O manipulador pode ler os layouts completos, anterior e posterior, ler os patches de layout ou chamar `preventDefault()` para interromper a chamada padrão de `onChange`.
+O primeiro evento suportado é `change`. Ele é emitido quando o layout muda, antes que `onChange` seja chamado. O manipulador pode ler os layouts completo, anterior e atual, ler os patches de layout ou chamar `preventDefault()` para interromper a chamada padrão de `onChange`.
 
 ```tsx
 import React from 'react';
@@ -415,7 +413,7 @@ type DashKitChangeEvent = {
 
 #### Atualizações de layout orientadas a eventos
 
-Se você usar `preventDefault()` no manipulador de eventos `change`, agora você pode lidar com atualizações de layout sem reinicializar a prop `config`. O DashKit mantém uma linha de base interna e calcula os patches incrementalmente:
+Se você usar `preventDefault()` no manipulador de eventos `change`, agora você pode lidar com atualizações de layout sem reinicializar a prop `config`. O DashKit mantém uma linha de base interna e calcula patches incrementalmente:
 
 ```tsx
 function Dashboard() {
@@ -440,7 +438,7 @@ function Dashboard() {
 }
 ```
 
-**Importante:** Se você atualizar `config.layout` posteriormente a partir das props (por exemplo, de uma sincronização do servidor), o DashKit redefinirá sua linha de base interna para corresponder à nova prop. Isso garante a compatibilidade com fluxos de trabalho orientados a eventos e controlados.
+**Importante:** Se você atualizar `config.layout` posteriormente a partir das props (por exemplo, de uma sincronização do servidor), o DashKit redefinirá sua linha de base interna para corresponder à nova prop. Isso garante compatibilidade com fluxos de trabalho orientados a eventos e controlados.
 
 ### Menu
 
@@ -495,13 +493,13 @@ interface DashKitDnDWrapperProps {
 
 ```ts
 type ItemDragProps = {
-  type: string; // Tipo do plugin
+  type: string; // Tipo de plugin
   layout?: {
     // Opcional. Tamanho do item de layout para prévia e inicialização
     w?: number;
     h?: number;
   };
-  extra?: any; // Contexto personalizado do usuário
+  extra?: any; // Contexto de usuário personalizado
 };
 ```
 
@@ -509,7 +507,7 @@ type ItemDragProps = {
 type ItemDropProps = {
   commit: () => void; // Callback deve ser chamado após todas as operações de configuração serem feitas
   dragProps: ItemDragProps; // Props de arrastar do item
-  itemLayout: ConfigLayout; // Dimensões calculadas do layout do item
+  itemLayout: ConfigLayout; // Dimensões de layout do item calculadas
   newLayout: ConfigLayout[]; // Novo layout após o elemento ser solto
 };
 ```
@@ -543,28 +541,28 @@ const onDrop = (dropProps: ItemDropProps) => {
 ### API CSS
 
 | Nome                                           | Descrição           |
-| :--------------------------------------------- | :------------------ |
-| Variáveis do painel de ação                         |                     |
-| `--dashkit-action-panel-color`                 | Cor de fundo        |
-| `--dashkit-action-panel-border-color`          | Cor da borda        |
-| `--dashkit-action-panel-border-radius`         | Raio da borda       |
-| Variáveis do item do painel de ação                 |                     |
-| `--dashkit-action-panel-item-color`            | Cor de fundo        |
-| `--dashkit-action-panel-item-text-color`       | Cor do texto        |
+| :--------------------------------------------- | :-------------------- |
+| Variáveis do painel de ação                         |                       |
+| `--dashkit-action-panel-color`                 | Cor de fundo      |
+| `--dashkit-action-panel-border-color`          | Cor da borda          |
+| `--dashkit-action-panel-border-radius`         | Raio da borda         |
+| Variáveis do item do painel de ação                    |                       |
+| `--dashkit-action-panel-item-color`            | Cor de fundo       |
+| `--dashkit-action-panel-item-text-color`       | Cor do texto      |
 | `--dashkit-action-panel-item-color-hover`      | Cor de fundo ao passar o mouse |
 | `--dashkit-action-panel-item-color-dragging`   | Cor de fundo ao arrastar |
 | `--dashkit-action-panel-item-text-color-hover` | Cor do texto ao passar o mouse |
 | `--dashkit-action-panel-item-text-color-dragging` | Cor do texto ao arrastar |
-| Variáveis de sobreposição                          |                     |
-| `--dashkit-overlay-border-color`               | Cor da borda        |
-| `--dashkit-overlay-color`                      | Cor de fundo        |
-| `--dashkit-overlay-opacity`                    | Opacidade           |
-| Variáveis do item da grade                          |                     |
-| `--dashkit-grid-item-edit-opacity`             | Opacidade           |
-| `--dashkit-grid-item-border-radius`            | Raio da borda       |
-| Variáveis do placeholder                           |                     |
-| `--dashkit-placeholder-color`                  | Cor de fundo        |
-| `--dashkit-placeholder-opacity`                | Opacidade           |
+| Variáveis de sobreposição                             |                       |
+| `--dashkit-overlay-border-color`               | Cor da borda          |
+| `--dashkit-overlay-color`                      | Cor de fundo      |
+| `--dashkit-overlay-opacity`                    | Opacidade               |
+| Variáveis do item da grade                            |                       |
+| `--dashkit-grid-item-edit-opacity`             | Opacidade               |
+| `--dashkit-grid-item-border-radius`            | Raio da borda         |
+| Variáveis do placeholder                             |                       |
+| `--dashkit-placeholder-color`                  | Cor de fundo      |
+| `--dashkit-placeholder-opacity`                | Opacidade               |
 
 #### Exemplo de uso
 
@@ -599,7 +597,7 @@ const CustomThemeWrapper = (props: {
 
 ## Desenvolvimento
 
-### Compilar e observar
+### Build & watch
 
 - Instalar dependências `npm ci`
 - Compilar o projeto `npm run build`
@@ -608,7 +606,7 @@ const CustomThemeWrapper = (props: {
 Por padrão, o storybook roda em `http://localhost:7120/`.
 Novas alterações no projeto nem sempre são capturadas quando o storybook está rodando, então é melhor recompilar o projeto manualmente e reiniciar o storybook.
 
-### Exemplo de configuração nginx para desenvolvimento em uma máquina de desenvolvimento
+### Exemplo de configuração do nginx para desenvolvimento em uma máquina de desenvolvimento
 
 ```bash
 server {
