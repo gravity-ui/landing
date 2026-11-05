@@ -12,10 +12,10 @@ npm install @gravity-ui/uikit @gravity-ui/charts
 
 ## 使用方法
 
-エントリーポイントで `@gravity-ui/uikit` のスタイルを一度インポートし、アプリを `ThemeProvider` でラップし、明示的な高さを持つコンテナ内に `Chart` をレンダリングしてください。
+エントリーポイントで `@gravity-ui/uikit` のスタイルを一度インポートし、アプリを `Provider` でラップし、明示的な高さを指定したコンテナ内に `Chart` をレンダリングしてください。
 
 ```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 import {Chart} from '@gravity-ui/charts';
 
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -40,20 +40,20 @@ const data = {
 
 export default function App() {
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <div style={{height: 300}}>
         <Chart data={data} />
       </div>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
 `Chart` は親要素のサイズに適合するため、ラッパー要素には高さが必要です。
 
-## グラフ設定ツール
+## チャート設定ツール
 
-このパッケージは、グラフ設定の検証、生成、Monacoエディタとの連携のためにTypeScriptの型定義とJSONスキーマを提供します。セットアップと使用方法の詳細については、[グラフ設定ツールのドキュメント](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html)を参照してください。
+このパッケージは、チャート設定の検証、生成、Monacoエディターとの連携のためにTypeScriptの型定義とJSONスキーマを提供します。セットアップと使用方法の詳細については、[チャート設定ツールのドキュメント](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html)を参照してください。
 
 ## ドキュメント
 
@@ -69,26 +69,26 @@ MITライセンスの下で配布されています。詳細は[LICENSE](LICENSE
 
 ## AIエージェント向け
 
-Gravity UIアプリ向けの宣言的なReactグラフ描画ライブラリです。単一の`data`設定から、アプリの他の部分と一致するようにテーマ設定された線、エリア、棒、円、散布図、ツリーマップなどのグラフを描画します。
+Gravity UIアプリ向けの宣言的なReactグラフ描画ライブラリです。単一の`data`設定から、線、エリア、棒、円、散布図、ツリーマップなどのグラフを、アプリの他の部分と一致するようにテーマ設定してレンダリングします。
 
 ### 使用すべき場合
 
-- 標準的なビジネスグラフ: `line`、`area`、`bar-x`/`bar-y`、`pie`、`scatter`、`treemap`、`waterfall`、`sankey`、`radar`、`heatmap`、`funnel`、`x-range`。
-- Gravity UIのテーマ設定（ライト/ダーク）に従い、`@gravity-ui/uikit` アプリとトークンを共有する必要があるビジュアライゼーション。
+- 標準的なビジネスチャート: `line`、`area`、`bar-x`/`bar-y`、`pie`、`scatter`、`treemap`、`waterfall`、`sankey`、`radar`、`heatmap`、`funnel`、`x-range`。
+- Gravity UIのテーマ設定（ライト/ダーク）に従い、`@gravity-ui/uikit`アプリとトークンを共有する必要があるビジュアライゼーション。
 - 命令的に描画するのではなく、宣言的なデータからグラフをレンダリングする場合。
 
 ### 使用すべきでない場合
 
-- まだ`@gravity-ui/chartkit`を使用しているプロジェクト。これは古いアダプターベースのラッパー（YAGR/Highcharts/D3）であり、このパッケージは最新のスタンドアロンレンダラーであり、ドロップインの代替ではありません。
-- 単純な表形式データ。[`@gravity-ui/table`](https://github.com/gravity-ui/table)を使用してください。
-- React以外またはサーバー専用のレンダリング。`Chart`はReact SVGをレンダリングし、DOMが必要です。
+- まだ`@gravity-ui/chartkit`を使用しているプロジェクト — これは古いアダプターベースのラッパー（YAGR/Highcharts/D3）です。このパッケージは最新のスタンドアロンレンダラーであり、ドロップイン置換ではありません。
+- 単純な表形式データ — [`@gravity-ui/table`](https://github.com/gravity-ui/table)を使用してください。
+- Reactを使用しない、またはサーバーサイドのみのレンダリング — `Chart`はReact SVGをレンダリングし、DOMが必要です。
 
-### よくある間違い
+### よくある落とし穴
 
-- **コンポーネント名は `Chart` であり、`ChartKit` ではありません。** `@gravity-ui/charts` から `{Chart}` をインポートしてください。`ChartKit` は、別のレガシーパッケージである `@gravity-ui/chartkit` に属します。
-- **`data` プロップは `data` で、形状は `{series: {data: [...]}}` です。** `series.data` の各エントリは、独自の `type` と `data` 配列を持つ1つのシリーズです。トップレベルのシリーズ配列はありません。
-- **サイズ指定のないコンテナでは何もレンダリングされません。** `Chart` は親要素を埋めるため、ラッパーに明示的な高さを指定してください。
-- **uikitの設定が必要です。** `ThemeProvider` でラップし、`@gravity-ui/uikit/styles/styles.css` をインポートしてください。`@gravity-ui/uikit` は必須のピア依存関係です。
+- **コンポーネント名は`Chart`であり、`ChartKit`ではありません。** `@gravity-ui/charts`から`{Chart}`をインポートしてください。`ChartKit`は、別のレガシーパッケージである`@gravity-ui/chartkit`に属します。
+- **`data`プロップは`data`であり、形状は`{series: {data: [...]}}`です。** `series.data`内の各エントリは、独自の`type`と`data`配列を持つ1つのシリーズです。トップレベルのシリーズ配列はありません。
+- **サイズ指定のないコンテナでは何もレンダリングされません。** `Chart`は親要素を埋めるため、ラッパーに明示的な高さを指定してください。
+- **uikitの設定が必要です。** `Provider`でラップし、`@gravity-ui/uikit/styles/styles.css`をインポートしてください。`@gravity-ui/uikit`は必須のピア依存関係です。
 
 ### 役立つドキュメント
 
@@ -104,4 +104,4 @@ Gravity UIアプリ向けの宣言的なReactグラフ描画ライブラリで�
 
 ## AIエージェント向けドキュメント
 
-インストールされているバージョン向けの、エージェントが読み取れるドキュメントは `node_modules/@gravity-ui/charts/dist/docs/INDEX.md` にあります。
+インストールされているバージョン向けの、エージェントが読み取り可能なドキュメントは、`node_modules/@gravity-ui/charts/dist/docs/INDEX.md`にあります。

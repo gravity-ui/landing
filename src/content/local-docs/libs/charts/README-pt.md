@@ -1,6 +1,6 @@
 # Gravity UI Charts · [![npm package](https://img.shields.io/npm/v/@gravity-ui/charts)](https://www.npmjs.com/package/@gravity-ui/charts) [![License](https://img.shields.io/github/license/gravity-ui/charts)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/charts/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/charts/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/charts/)
 
-Biblioteca de gráficos React com mais de 10 tipos de gráficos: área, barra, linha, pizza, dispersão, treemap e muito mais.
+Biblioteca React para gráficos com mais de 10 tipos de gráficos: área, barra, linha, pizza, dispersão, treemap e muito mais.
 
 ## Instalação
 
@@ -12,10 +12,10 @@ npm install @gravity-ui/uikit @gravity-ui/charts
 
 ## Uso
 
-Importe os estilos de `@gravity-ui/uikit` uma vez no seu ponto de entrada, envolva seu aplicativo em `ThemeProvider` e renderize um `Chart` dentro de um contêiner com altura explícita:
+Importe os estilos de `@gravity-ui/uikit` uma vez no seu ponto de entrada, envolva seu aplicativo em `Provider` e renderize um `Chart` dentro de um contêiner com altura explícita:
 
 ```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 import {Chart} from '@gravity-ui/charts';
 
 import '@gravity-ui/uikit/styles/fonts.css';
@@ -26,7 +26,7 @@ const data = {
     data: [
       {
         type: 'line',
-        name: 'Temperatura',
+        name: 'Temperature',
         data: [
           {x: 0, y: 10},
           {x: 1, y: 25},
@@ -40,11 +40,11 @@ const data = {
 
 export default function App() {
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <div style={{height: 300}}>
         <Chart data={data} />
       </div>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
@@ -53,7 +53,7 @@ export default function App() {
 
 ## Ferramentas de configuração de gráficos
 
-O pacote fornece declarações TypeScript e JSON Schema para validação, geração e integração com Monaco da configuração de gráficos. Veja a [documentação das ferramentas de configuração de gráficos](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html) para detalhes de configuração e uso.
+O pacote fornece declarações TypeScript e JSON Schema para validação, geração e integração do Monaco de configuração de gráficos. Veja a [documentação das ferramentas de configuração de gráficos](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html) para detalhes de configuração e uso.
 
 ## Documentação
 
@@ -74,8 +74,8 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 ### Quando usar
 
 - Gráficos de negócios padrão: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
-- Visualizações que devem seguir a temática do Gravity UI (claro/escuro) e compartilhar tokens com um aplicativo `@gravity-ui/uikit`.
-- Renderização de um gráfico a partir de dados declarativos em vez de desenho imperativo.
+- Visualizações que devem seguir a temática Gravity UI (clara/escura) e compartilhar tokens com um aplicativo `@gravity-ui/uikit`.
+- Renderização de um gráfico a partir de dados declarativos em vez de desenhar imperativamente.
 
 ### Quando não usar
 
@@ -88,7 +88,7 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 - **O componente é `Chart`, não `ChartKit`.** Importe `{Chart}` de `@gravity-ui/charts`; `ChartKit` pertence ao pacote legado separado `@gravity-ui/chartkit`.
 - **A prop `data` é `data`, com formato `{series: {data: [...]}}`.** Cada entrada em `series.data` é uma série com seu próprio `type` e array `data` — não há um array de séries de nível superior.
 - **Nada é renderizado sem um contêiner dimensionado.** `Chart` preenche seu pai, então dê ao wrapper uma altura explícita.
-- **Requer configuração do uikit.** Envolva em `ThemeProvider` e importe `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` é uma dependência peer obrigatória.
+- **Requer configuração do uikit.** Envolva em `Provider` e importe `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` é uma dependência peer obrigatória.
 
 ### Documentos úteis
 
