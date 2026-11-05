@@ -77,7 +77,7 @@ interface DashKitProps {
 - **onItemRender**: Called when item render complete
 - **defaultGlobalParams**, **globalParams**: [Parameters](#Params) that affect all widgets. In DataLens, `defaultGlobalParams` are global parameters set in the dashboard settings. `globalParams` are globals parameters that can be set in the url.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
-- **settings**: DashKit settings.
+- **settings**: DashKit settings. Optional `isolateItemUpdates: true` suppresses renderer updates caused only by other widgets' layout changes. Own data, state, params, geometry, settings, context and callbacks still update; the default keeps full-layout renderer updates. Memoize `settings` and `context` between renders: new object references trigger renderer updates even with isolation enabled. With isolation enabled, plugins reading sibling geometry through `layout` may observe stale sibling values.
 - **context**: Object that will be propped up on all widgets.
 - **overlayControls**: Object that overrides widget controls at the time of editing. If not transmitted, basic controls will be displayed. If `null` passed only close button or custom menu will be displayed.
 - **overlayMenuItems**: Custom dropdown menu items
