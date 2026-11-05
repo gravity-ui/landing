@@ -13,22 +13,24 @@ npm install @gravity-ui/navigation
 프로젝트에 피어 의존성이 설치되어 있는지 확인하세요.
 
 ```bash
-npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+npm install --dev @gravity-ui/uikit@^8.0.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## 마이그레이션
 
-4.x, 5.x 또는 6.x에서 업그레이드하는 경우 [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md)를 참조하세요.
+7.x (`@gravity-ui/uikit` 8, React 18 또는 19)에서 업그레이드하는 경우: [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md)를 참조하세요.
+
+4.x, 5.x 또는 6.x에서 업그레이드하는 경우: 먼저 [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md)를 따르고, 그 다음 [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md)를 따르세요.
 
 ## 사용법
 
-애플리케이션 셸로 `AsideHeader`를 렌더링하세요. 이 컴포넌트는 제어되는 컴포넌트이므로 `compact`/`onChangeCompact`를 통해 접힌 상태를 직접 관리하고, 페이지 콘텐츠는 `renderContent`를 통해 전달합니다. 먼저 `@gravity-ui/uikit` 스타일과 `ThemeProvider`를 설정하세요 ( [uikit 스타일 가이드](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles) 참조).
+`AsideHeader`를 앱 셸로 렌더링합니다. 이 컴포넌트는 제어되는 컴포넌트이므로 `compact`/`onChangeCompact`를 통해 축소 상태를 직접 관리하며, 페이지 콘텐츠는 `renderContent`를 통해 전달합니다. 먼저 `@gravity-ui/uikit` 스타일과 `Provider`를 설정하세요 ( [uikit 스타일 가이드](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles) 참조).
 
 ```tsx
 import React from 'react';
 import {AsideHeader} from '@gravity-ui/navigation';
 import {Gear, House} from '@gravity-ui/icons';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
@@ -36,7 +38,7 @@ export function App() {
   const [compact, setCompact] = React.useState(false);
 
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <AsideHeader
         logo={{text: 'My App', href: '/'}}
         compact={compact}
@@ -47,7 +49,7 @@ export function App() {
         ]}
         renderContent={() => <main>Page content</main>}
       />
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
@@ -109,16 +111,16 @@ Gravity UI 앱을 위한 애플리케이션 셸 네비게이션 컴포넌트 —
 
 - 일반적인 인페이지 컨트롤 (버튼, 탭, 메뉴, 브레드크럼) — [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit)을 사용하세요. 이 패키지는 일반 컴포넌트가 아닌 외부 앱 크롬입니다.
 - 설정에서 페이지 본문 자체를 렌더링하는 경우 — [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor)를 사용하세요.
-- 클라이언트 측 라우팅 — 네비게이션 UI만 제공합니다. 클릭을 자체 라우터에 연결하세요.
+- 클라이언트 측 라우팅 — 이 패키지는 네비게이션 UI만 제공합니다. 클릭 이벤트를 자체 라우터에 연결하세요.
 
 ### 일반적인 함정
 
-- **`AsideHeader`는 제어됩니다.** `compact`로 접힌 상태를 직접 관리하고 `onChangeCompact`에서 업데이트해야 합니다. `compact`만 전달하고 핸들러를 전달하지 않으면 사이드바가 고정됩니다.
-- **메뉴 항목은 `menuItems`이며 `id`로 키가 지정됩니다.** 각 항목은 `{id, title, icon, current, onItemClick}` 형식입니다. `icon`에는 문자열 이름이 아닌 아이콘 컴포넌트 (예: `@gravity-ui/icons`에서)가 사용됩니다.
-- **피어 의존성이 필요합니다.** `@gravity-ui/uikit`, `@gravity-ui/icons`, `@bem-react/classname`은 `react`/`react-dom`과 함께 설치되어야 합니다.
-- **uikit 설정이 필요합니다.** `ThemeProvider` 내에서 렌더링하고 `@gravity-ui/uikit/styles/styles.css`를 가져오거나, 셸이 스타일 없이 렌더링됩니다.
-- **페이지 콘텐츠는 `renderContent`를 통해 전달됩니다.** `children`이 아닌 `renderContent` prop / `PageLayout`을 통해 라우팅된 콘텐츠를 렌더링하세요.
+- **`AsideHeader`는 제어됩니다.** `compact` 속성을 통해 접힌 상태를 직접 관리하고 `onChangeCompact`에서 업데이트해야 합니다. `compact`만 전달하고 핸들러를 제공하지 않으면 사이드바가 고정됩니다.
+- **메뉴 항목은 `menuItems`이며 `id`로 키가 지정됩니다.** 각 항목은 `{id, title, icon, current, onItemClick}` 형식입니다. `icon`은 문자열 이름이 아닌 아이콘 컴포넌트(예: `@gravity-ui/icons`에서 가져온 것)를 받습니다.
+- **피어 의존성은 필수입니다.** `@gravity-ui/uikit`, `@gravity-ui/icons`, `@bem-react/classname`은 `react`/`react-dom`과 함께 설치되어야 합니다.
+- **uikit 설정이 필요합니다.** `Provider` 내부에 렌더링하고 `@gravity-ui/uikit/styles/styles.css`를 임포트해야 합니다. 그렇지 않으면 쉘이 스타일 없이 렌더링됩니다.
+- **페이지 콘텐츠는 `renderContent`를 통해 전달됩니다.** `children`이 아닌 `renderContent` prop 또는 `PageLayout`을 통해 라우팅된 콘텐츠를 렌더링하세요.
 
 ## AI 에이전트용 문서
 
-설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/navigation/build/docs/INDEX.md`에 있습니다.
+설치된 버전의 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/navigation/build/docs/INDEX.md`에서 찾을 수 있습니다.

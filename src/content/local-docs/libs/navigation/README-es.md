@@ -13,22 +13,24 @@ npm install @gravity-ui/navigation
 Asegúrate de que las dependencias peer estén instaladas en tu proyecto
 
 ```bash
-npm install --dev @gravity-ui/uikit@^7.2.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
+npm install --dev @gravity-ui/uikit@^8.0.0 @gravity-ui/icons@^2.2.0 @bem-react/classname@^1.6.0 react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## Migración
 
-Al actualizar desde las versiones 4.x, 5.x o 6.x: consulta [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md).
+Actualización desde la versión 7.x (`@gravity-ui/uikit` 8, React 18 o 19): consulta [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md).
+
+Actualización desde las versiones 4.x, 5.x o 6.x: primero sigue [MIGRATION_GUIDE_v7.md](MIGRATION_GUIDE_v7.md), y luego [MIGRATION_GUIDE_v8.md](MIGRATION_GUIDE_v8.md).
 
 ## Uso
 
-Renderiza `AsideHeader` como el shell de la aplicación. Es un componente controlado: tú gestionas el estado colapsado a través de `compact`/`onChangeCompact`, y el contenido de tu página se pasa mediante `renderContent`. Configura primero los estilos de `@gravity-ui/uikit` y `ThemeProvider` (consulta la [guía de estilos de uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
+Renderiza `AsideHeader` como el shell de la aplicación. Es un componente controlado: tú gestionas el estado colapsado a través de `compact`/`onChangeCompact`, y el contenido de tu página se pasa a través de `renderContent`. Configura primero los estilos de `@gravity-ui/uikit` y el `Provider` (consulta la [guía de estilos de uikit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles)).
 
 ```tsx
 import React from 'react';
 import {AsideHeader} from '@gravity-ui/navigation';
 import {Gear, House} from '@gravity-ui/icons';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
@@ -36,7 +38,7 @@ export function App() {
   const [compact, setCompact] = React.useState(false);
 
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <AsideHeader
         logo={{text: 'Mi App', href: '/'}}
         compact={compact}
@@ -47,7 +49,7 @@ export function App() {
         ]}
         renderContent={() => <main>Contenido de la página</main>}
       />
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
@@ -89,7 +91,7 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
 ## API CSS
 
-Se utiliza para la tematización de los componentes de Navigation.
+Se utiliza para la tematización de los componentes de Navigation
 
 ## Licencia
 
@@ -97,7 +99,7 @@ Distribuido bajo la Licencia MIT. Consulta [LICENSE](LICENSE) para más detalles
 
 ## Para agentes de IA
 
-Componentes de navegación de shell de aplicación para aplicaciones Gravity UI: la barra lateral `AsideHeader` colapsable, además de pies de página, cajones, logo, paneles de atajos de teclado y configuración que enmarcan una página completa.
+Componentes de navegación de shell de aplicación para aplicaciones Gravity UI: la barra lateral `AsideHeader` colapsable, además de pies de página, cajones, logotipos, paneles de atajos de teclado y configuración que enmarcan una página completa.
 
 ### Cuándo usar
 
@@ -109,15 +111,15 @@ Componentes de navegación de shell de aplicación para aplicaciones Gravity UI:
 
 - Controles genéricos dentro de la página (botones, pestañas, menús, breadcrumbs): usa [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit); este paquete es el cromo exterior de la aplicación, no componentes generales.
 - Renderizar el cuerpo de la página en sí mismo a partir de una configuración: usa [`@gravity-ui/page-constructor`](https://github.com/gravity-ui/page-constructor).
-- Enrutamiento del lado del cliente: esto solo proporciona la UI de navegación; conecta los clics a tu propio enrutador.
+- Enrutamiento del lado del cliente: esto solo proporciona la UI de navegación; vincula los clics a tu propio enrutador.
 
 ### Errores comunes
 
 - **`AsideHeader` es controlado.** Debes gestionar el estado colapsado con `compact` y actualizarlo en `onChangeCompact`; pasar `compact` sin el manejador congela la barra lateral.
 - **Los elementos del menú son `menuItems`, indexados por `id`.** Cada elemento es `{id, title, icon, current, onItemClick}`; `icon` acepta un componente de icono (por ejemplo, de `@gravity-ui/icons`), no un nombre de cadena.
-- **Se requieren dependencias peer.** `@gravity-ui/uikit`, `@gravity-ui/icons` y `@bem-react/classname` deben instalarse junto con `react`/`react-dom`.
-- **Necesita configuración de uikit.** Renderiza dentro de `ThemeProvider` e importa `@gravity-ui/uikit/styles/styles.css`, o el shell se renderizará sin estilo.
-- **El contenido de la página se pasa a través de `renderContent`.** Renderiza tu contenido enrutado a través de la prop `renderContent` / `PageLayout`, no como `children`.
+- **Las dependencias peer son requeridas.** `@gravity-ui/uikit`, `@gravity-ui/icons` y `@bem-react/classname` deben instalarse junto con `react`/`react-dom`.
+- **Requiere configuración de uikit.** Renderiza dentro de `Provider` e importa `@gravity-ui/uikit/styles/styles.css`, o la estructura se renderizará sin estilos.
+- **El contenido de la página pasa por `renderContent`.** Renderiza tu contenido enrutado a través de la prop `renderContent` / `PageLayout`, no como `children`.
 
 ## Documentación para agentes de IA
 
