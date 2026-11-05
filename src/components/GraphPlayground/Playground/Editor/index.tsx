@@ -1,7 +1,6 @@
 import {TBlock, TBlockId, TConnection} from '@gravity-ui/graph';
 import {Button, Flex, Hotkey, Text} from '@gravity-ui/uikit';
 import {Editor, OnMount, OnValidate, loader} from '@monaco-editor/react';
-import {KeyCode, KeyMod} from 'monaco-editor/esm/vs/editor/editor.api';
 import {Ref, forwardRef, useCallback, useImperativeHandle, useRef, useState} from 'react';
 
 import {block} from '../../../../utils';
@@ -117,11 +116,17 @@ export const ConfigEditor = forwardRef(function ConfigEditor(
         <Flex direction="column" className={b()}>
             <Flex grow={1}>
                 <Editor
-                    onMount={(editor) => {
+                    onMount={(editor, monaco) => {
                         monacoRef.current = editor;
                         monacoRef.current?.setValue(JSON.stringify(valueRef.current, null, 2));
-                        // eslint-disable-next-line no-bitwise
-                        editor.addCommand(KeyMod.CtrlCmd | KeyCode.Enter, applyChanges);
+                        // Key codes come from the monaco instance rather than a static import
+                        // of `monaco-editor`, which would bundle the whole package alongside
+                        // the copy @monaco-editor/react already loads at runtime.
+                        editor.addCommand(
+                            // eslint-disable-next-line no-bitwise
+                            monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter,
+                            applyChanges,
+                        );
                     }}
                     onValidate={(markers) => {
                         setErrorMarker(markers.filter((m) => m.severity === 8)[0] || null);
