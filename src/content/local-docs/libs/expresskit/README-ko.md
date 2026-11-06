@@ -1,14 +1,14 @@
 # ExpressKit
 
-ExpressKit는 [NodeKit](https://github.com/gravity-ui/nodekit)과 통합되는 경량 [express.js](https://expressjs.com/) 래퍼로, 요청 로깅, 추적 지원, 비동기 컨트롤러 및 미들웨어, 상세한 라우트 설명과 같은 유용한 기능을 제공합니다.
+ExpressKit는 [express.js](https://expressjs.com/)를 경량화하여 [NodeKit](https://github.com/gravity-ui/nodekit)과 통합하고, 요청 로깅, 추적 지원, 비동기 컨트롤러 및 미들웨어, 상세한 라우트 설명과 같은 유용한 기능을 제공하는 래퍼입니다.
 
-설치:
+## 설치
 
 ```bash
 npm install --save @gravity-ui/nodekit @gravity-ui/expresskit
 ```
 
-기본 사용법:
+## 사용법
 
 ```typescript
 import {ExpressKit} from '@gravity-ui/expresskit';
@@ -27,7 +27,7 @@ app.run();
 
 ## 자체 원격 측정
 
-기본적으로 자체 원격 측정은 원본 요청 URL을 전송합니다. 쿼리 문자열이 크거나 고유성이 높은 애플리케이션의 경우 통계를 전송하기 전에 쿼리 매개변수를 제거할 수 있습니다.
+기본적으로 자체 원격 측정은 원본 요청 URL을 전송합니다. 쿼리 문자열이 크거나 고유성이 높은 애플리케이션은 통계 전송 전에 쿼리 매개변수를 제거할 수 있습니다.
 
 ```typescript
 const config: Partial<AppConfig> = {
@@ -89,7 +89,7 @@ export default config;
 | 옵션              | 유형                 | 기본값                              | 설명                                                                                     |
 | ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | `appCsrfSecret`     | `string \| string[]` | -                                    | **필수.** HMAC 토큰 생성을 위한 비밀 키입니다. 여러 개의 비밀 키를 사용하여 키 로테이션이 가능합니다. |
-| `appCsrfLifetime`   | `number`             | `2592000` (30일)                  | 토큰 수명(초). 만료 없음으로 설정하려면 `0`으로 설정하십시오.                                        |
+| `appCsrfLifetime`   | `number`             | `2592000` (30일)                  | 토큰 수명(초). 만료 없음은 `0`으로 설정합니다.                                        |
 | `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | 토큰 검증을 위한 HTTP 헤더 이름입니다.                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | CSRF 검증이 필요한 HTTP 메서드입니다.                                                      |
 
@@ -171,4 +171,35 @@ const app = new ExpressKit(nodekit, {
 
 ## 유효성 검사 및 응답 직렬화
 
-- [요청 유효성 검사 및 응답 직렬화](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - Zod 스키마를 사용하여 요청 유효성 검사 및 응답 직렬화를 자동으로 처리합니다.
+- [요청 유효성 검사 및 응답 직렬화](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - Zod 스키마를 사용하여 요청 유효성 검사 및 응답 직렬화를 자동화합니다.
+
+## 라이선스
+
+MIT 라이선스에 따라 배포됩니다. 자세한 내용은 [LICENSE](LICENSE)를 참조하십시오.
+
+## AI 에이전트용
+
+NodeKit 위에 구축된 얇은 Express.js 래퍼로, 요청 로깅, 추적, 비동기 컨트롤러/미들웨어 및 선언적 라우트 맵을 추가합니다. Express 미들웨어와 NodeKit을 수동으로 연결하는 대신 NodeKit 로깅/원격 측정 스파인을 가진 HTTP 서버가 필요할 때 사용하세요.
+
+### 언제 사용해야 할까요?
+
+- NodeKit의 로깅, 추적 및 구성을 공유해야 하는 Express HTTP 서비스를 구축할 때.
+- 선언적 라우트 (`{'GET /path': handler}`)와 각 라우트별 인증, CSRF 및 캐싱 정책을 사용할 때.
+- 요청 컨텍스트와 통합된 내장 보안 기능(CSRF 토큰, CSP 헤더)이 필요할 때.
+
+### 언제 사용하지 않아야 할까요?
+
+- HTTP 계층 없이 기본 로깅/원격 측정/구성을 위해 [`@gravity-ui/nodekit`](https://github.com/gravity-ui/nodekit)을 직접 사용하세요. ExpressKit은 이에 의존하지만 HTTP 부분은 필요하지 않을 수 있습니다.
+- Express가 아닌 프레임워크(Fastify, Koa, NestJS)의 경우 ExpressKit은 Express에 특화되어 있으므로 해당 프레임워크의 자체 도구를 사용하세요.
+
+### 일반적인 함정
+
+- **`NodeKit` 인스턴스 없이 `ExpressKit` 구성** - 생성자는 첫 번째 인수로 NodeKit 인스턴스를 요구합니다. 먼저 `new NodeKit()`을 생성하세요.
+- **`app.get`/`app.post` 환각** - 라우트는 Express 스타일의 메서드 체이닝이 아닌 `new ExpressKit(nodekit, routes)`에 전달되는 `'METHOD /path': handler` 맵으로 선언됩니다.
+- **`app.run()` 호출 누락** - 라우트는 생성 시 등록되지만 서버는 `app.run()`을 호출할 때만 시작됩니다.
+- **CSRF가 인증 컨텍스트를 예상하는 경우** - CSRF 토큰 생성은 원본 컨텍스트에 사용자 ID를 설정하기 위해 `appAuthHandler`가 필요합니다. 그렇지 않으면 토큰 생성이 실패합니다.
+- **컨텍스트를 우회하는 Express 스타일 미들웨어 사용** - 비동기 컨트롤러/미들웨어는 추적을 유지하기 위해 ExpressKit의 컨텍스트를 사용해야 합니다. 원시 Express 핸들러는 이를 삭제합니다.
+
+## AI 에이전트용 문서
+
+설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/expresskit/dist/docs/INDEX.md`에 있습니다.
