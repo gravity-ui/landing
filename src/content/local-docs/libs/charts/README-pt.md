@@ -1,14 +1,14 @@
 # Gravity UI Charts · [![npm package](https://img.shields.io/npm/v/@gravity-ui/charts)](https://www.npmjs.com/package/@gravity-ui/charts) [![License](https://img.shields.io/github/license/gravity-ui/charts)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/charts/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/charts/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/charts/)
 
-Biblioteca React para gráficos com mais de 10 tipos de gráficos: área, barra, linha, pizza, dispersão, treemap e muito mais.
+Biblioteca declarativa de gráficos React: linha, área, barra, pizza, dispersão, treemap, sankey, heatmap e mais, renderizados a partir de uma única configuração de dados.
 
-## Instalação
+## Instalar
 
 ```shell
 npm install @gravity-ui/uikit @gravity-ui/charts
 ```
 
-`@gravity-ui/uikit` é uma dependência peer obrigatória — ela fornece os temas e estilos dos quais os gráficos dependem.
+`@gravity-ui/uikit` é uma dependência peer obrigatória — ela fornece a tematização e os estilos dos quais os gráficos dependem.
 
 ## Uso
 
@@ -49,19 +49,19 @@ export default function App() {
 }
 ```
 
-`Chart` se adapta ao tamanho de seu pai, portanto, o elemento de envolvimento deve ter uma altura.
+`Chart` se adapta ao tamanho do seu elemento pai, portanto, o elemento de envolvimento deve ter uma altura.
 
 ## Ferramentas de configuração de gráficos
 
-O pacote fornece declarações TypeScript e JSON Schema para validação, geração e integração do Monaco de configuração de gráficos. Veja a [documentação das ferramentas de configuração de gráficos](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html) para detalhes de configuração e uso.
+O pacote fornece declarações TypeScript e JSON Schema para validação, geração e integração com Monaco da configuração de gráficos. Veja a [documentação das ferramentas de configuração de gráficos](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html) para detalhes de configuração e uso.
 
 ## Documentação
 
-- [Visão Geral](https://gravity-ui.github.io/charts/pages/overview.html)
+- [Visão geral](https://gravity-ui.github.io/charts/pages/overview.html)
 - [Começando](https://gravity-ui.github.io/charts/pages/get-started.html)
 - [Desenvolvimento](https://gravity-ui.github.io/charts/pages/development.html)
 - [API](https://gravity-ui.github.io/charts/pages/api/overview.html)
-- [Guias](https://gravity-ui.github.io/charts/pages/guides/tooltip.html)
+- [Guias](https://gravity-ui.github.io/charts/pages/guides/series-types/index.html)
 
 ## Licença
 
@@ -69,17 +69,17 @@ Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
 
 ## Para agentes de IA
 
-Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — renderiza gráficos de linha, área, barra, pizza, dispersão, treemap e outros a partir de uma única configuração `data`, com tema para combinar com o restante do aplicativo.
+Uma biblioteca declarativa de gráficos React — renderiza gráficos de linha, área, barra, pizza, dispersão, treemap, sankey, heatmap e outros a partir de uma única configuração `data`, com temas claro e escuro integrados.
 
 ### Quando usar
 
-- Gráficos de negócios padrão: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
-- Visualizações que devem seguir a temática Gravity UI (clara/escura) e compartilhar tokens com um aplicativo `@gravity-ui/uikit`.
-- Renderização de um gráfico a partir de dados declarativos em vez de desenhar imperativamente.
+- Tipos de série suportados: `line`, `area`, `area-range`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualizações que devem seguir a tematização Gravity UI (claro/escuro) e compartilhar tokens com um aplicativo `@gravity-ui/uikit`.
+- Renderização de um gráfico a partir de dados declarativos em vez de desenho imperativo.
 
 ### Quando não usar
 
-- Projetos ainda em `@gravity-ui/chartkit` — esse é o wrapper mais antigo baseado em adaptadores (YAGR/Highcharts/D3); este pacote é o renderizador independente moderno e não é um substituto direto.
+- Projetos ainda com `@gravity-ui/chartkit` — esse é o wrapper mais antigo baseado em adaptadores (YAGR/Highcharts/D3); este pacote é o renderizador independente moderno e não é um substituto direto.
 - Dados tabulares simples — use [`@gravity-ui/table`](https://github.com/gravity-ui/table).
 - Renderização não-React ou apenas no servidor — `Chart` renderiza SVG React e precisa do DOM.
 
@@ -93,14 +93,18 @@ Uma biblioteca declarativa de gráficos React para aplicativos Gravity UI — re
 ### Documentos úteis
 
 - [Começando](./docs/diplodoc/pages/get-started.md)
+- [Tipos de série](./docs/diplodoc/pages/guides/series-types/index.md)
 - [Tematização](./docs/diplodoc/pages/guides/theming.md)
 - [Tooltip](./docs/diplodoc/pages/guides/tooltip.md)
 - [Legenda](./docs/diplodoc/pages/guides/legend.md)
 - [Conteúdo HTML](./docs/diplodoc/pages/guides/html.md)
-- [Formatação de Valores](./docs/diplodoc/pages/guides/value-formatting.md)
-- [Rótulos de Dados](./docs/diplodoc/pages/guides/data-labels.md)
-- [Tipos de Eixos](./docs/diplodoc/pages/guides/axes/axis-types.md)
-- [Rótulos de Eixos](./docs/diplodoc/pages/guides/axes/axis-labels.md)
+- [Formatação de valores](./docs/diplodoc/pages/guides/value-formatting.md)
+- [Rótulos de dados](./docs/diplodoc/pages/guides/data-labels.md)
+- [Tipos de eixo](./docs/diplodoc/pages/guides/axes/axis-types.md)
+- [Rótulos de eixo](./docs/diplodoc/pages/guides/axes/axis-labels.md)
+- [Eventos e interações](./docs/diplodoc/pages/guides/chart-interactions.md)
+- [Ferramentas de configuração de gráficos](./docs/diplodoc/pages/integrations/chart-config.md)
+- [Migrando de v1 para v2](./docs/diplodoc/pages/migration/v2.md)
 
 ## Documentação para agentes de IA
 

@@ -1,6 +1,6 @@
 # Gravity UI Charts · [![npm package](https://img.shields.io/npm/v/@gravity-ui/charts)](https://www.npmjs.com/package/@gravity-ui/charts) [![License](https://img.shields.io/github/license/gravity-ui/charts)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/charts/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/charts/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/charts/)
 
-React-Charting-Bibliothek mit über 10 Diagrammtypen: Fläche, Balken, Linie, Kreis, Streu, Baumkarte und mehr.
+Deklarative React-Charting-Bibliothek: Linien-, Flächen-, Balken-, Torten-, Streu-, Baumkarten-, Sankey-, Heatmap-Diagramme und mehr, gerendert aus einer einzigen Datenkonfiguration.
 
 ## Installation
 
@@ -49,11 +49,11 @@ export default function App() {
 }
 ```
 
-`Chart` passt sich der Größe seines Elternteils an, daher muss das umschließende Element eine Höhe haben.
+`Chart` passt sich der Größe seines übergeordneten Elements an, daher muss das umschließende Element eine Höhe haben.
 
-## Werkzeuge für die Diagrammkonfiguration
+## Werkzeuge für Diagrammkonfigurationen
 
-Das Paket stellt TypeScript-Deklarationen und JSON-Schema für die Validierung, Generierung und Monaco-Integration von Diagrammkonfigurationen bereit. Details zur Einrichtung und Verwendung finden Sie in der [Dokumentation zu den Werkzeugen für die Diagrammkonfiguration](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html).
+Das Paket bietet TypeScript-Deklarationen und JSON-Schema für die Validierung, Generierung und Monaco-Integration von Diagrammkonfigurationen. Details zur Einrichtung und Verwendung finden Sie in der [Dokumentation zu Werkzeugen für Diagrammkonfigurationen](https://gravity-ui.github.io/charts/pages/integrations/chart-config.html).
 
 ## Dokumentation
 
@@ -61,7 +61,7 @@ Das Paket stellt TypeScript-Deklarationen und JSON-Schema für die Validierung, 
 - [Erste Schritte](https://gravity-ui.github.io/charts/pages/get-started.html)
 - [Entwicklung](https://gravity-ui.github.io/charts/pages/development.html)
 - [API](https://gravity-ui.github.io/charts/pages/api/overview.html)
-- [Anleitungen](https://gravity-ui.github.io/charts/pages/guides/tooltip.html)
+- [Anleitungen](https://gravity-ui.github.io/charts/pages/guides/series-types/index.html)
 
 ## Lizenz
 
@@ -69,30 +69,31 @@ Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
 
 ## Für KI-Agenten
 
-Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Linien-, Flächen-, Balken-, Kreis-, Streu-, Baumkarten- und andere Diagramme aus einer einzigen `data`-Konfiguration, die thematisch auf den Rest der App abgestimmt ist.
+Eine deklarative React-Charting-Bibliothek – rendert Linien-, Flächen-, Balken-, Torten-, Streu-, Baumkarten-, Sankey-, Heatmap-Diagramme und andere Diagramme aus einer einzigen `data`-Konfiguration, mit integrierten hellen und dunklen Themes.
 
-### Wann verwenden
+### Wann zu verwenden
 
-- Standard-Geschäftsdiagramme: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
-- Visualisierungen, die dem Gravity UI-Theming (hell/dunkel) folgen und Tokens mit einer `@gravity-ui/uikit`-App teilen müssen.
+- Unterstützte Serientypen: `line`, `area`, `area-range`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Visualisierungen, die den Gravity UI-Themes (hell/dunkel) folgen und Tokens mit einer `@gravity-ui/uikit`-App teilen müssen.
 - Rendern eines Diagramms aus deklarativen Daten anstatt imperativer Zeichenoperationen.
 
-### Wann nicht verwenden
+### Wann nicht zu verwenden
 
-- Projekte, die noch `@gravity-ui/chartkit` verwenden – dies ist der ältere, adapterbasierte Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne, eigenständige Renderer und kein direkter Ersatz.
-- Reine Tabellendaten – verwenden Sie [`@gravity-ui/table`](https://github.com/gravity-ui/table).
+- Projekte, die noch `@gravity-ui/chartkit` verwenden – dies ist der ältere, Adapter-basierte Wrapper (YAGR/Highcharts/D3); dieses Paket ist der moderne, eigenständige Renderer und kein direkter Ersatz.
+- Reine tabellarische Daten – verwenden Sie [`@gravity-ui/table`](https://github.com/gravity-ui/table).
 - Nicht-React- oder reine Server-Rendering – `Chart` rendert React SVG und benötigt das DOM.
 
 ### Häufige Fallstricke
 
 - **Die Komponente heißt `Chart`, nicht `ChartKit`.** Importieren Sie `{Chart}` aus `@gravity-ui/charts`; `ChartKit` gehört zum separaten Legacy-Paket `@gravity-ui/chartkit`.
 - **Die `data`-Prop ist `data`, strukturiert als `{series: {data: [...]}}`.** Jeder Eintrag in `series.data` ist eine Serie mit ihrem eigenen `type` und einer `data`-Array – es gibt kein Array von Serien auf oberster Ebene.
-- **Ohne einen Container mit definierter Größe wird nichts gerendert.** `Chart` füllt seinen Elternteil aus, geben Sie dem Wrapper also eine explizite Höhe.
+- **Ohne einen dimensionierten Container wird nichts gerendert.** `Chart` füllt sein übergeordnetes Element, geben Sie dem Wrapper also eine explizite Höhe.
 - **Erfordert uikit-Setup.** Umschließen Sie mit `Provider` und importieren Sie `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` ist eine erforderliche Peer-Abhängigkeit.
 
 ### Nützliche Dokumente
 
 - [Erste Schritte](./docs/diplodoc/pages/get-started.md)
+- [Serientypen](./docs/diplodoc/pages/guides/series-types/index.md)
 - [Theming](./docs/diplodoc/pages/guides/theming.md)
 - [Tooltip](./docs/diplodoc/pages/guides/tooltip.md)
 - [Legende](./docs/diplodoc/pages/guides/legend.md)
@@ -101,6 +102,9 @@ Eine deklarative React-Charting-Bibliothek für Gravity UI-Apps – rendert Lini
 - [Datenbeschriftungen](./docs/diplodoc/pages/guides/data-labels.md)
 - [Achsentypen](./docs/diplodoc/pages/guides/axes/axis-types.md)
 - [Achsenbeschriftungen](./docs/diplodoc/pages/guides/axes/axis-labels.md)
+- [Ereignisse und Interaktionen](./docs/diplodoc/pages/guides/chart-interactions.md)
+- [Werkzeuge für Diagrammkonfigurationen](./docs/diplodoc/pages/integrations/chart-config.md)
+- [Migration von v1 zu v2](./docs/diplodoc/pages/migration/v2.md)
 
 ## Dokumentation für KI-Agenten
 
