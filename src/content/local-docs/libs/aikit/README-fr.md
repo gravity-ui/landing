@@ -27,8 +27,8 @@ Bibliothèque de composants UI pour les chats IA, construite selon les principes
 - 🎨 **Atomic Design** — hiérarchie claire des composants, des atomes aux pages
 - 🔧 **SDK Agnostique** — indépendant des SDK IA spécifiques
 - 🎭 **Approche à deux niveaux** — composants prêts à l'emploi + hooks pour la personnalisation
-- 🎨 **Variables CSS** — thèmes faciles sans surcharges de composants
-- 📦 **TypeScript** — sécurité de type complète prête à l'emploi
+- 🎨 **Variables CSS** — thèmes faciles sans surcharger les composants
+- 📦 **TypeScript** — sécurité de type complète dès le départ
 - 🔌 **Extensible** — système d'enregistrement de types de messages personnalisés
 
 ## Structure du projet
@@ -100,13 +100,13 @@ La bibliothèque est construite selon les principes de l'**Atomic Design** :
 - `ActionButton` — bouton avec info-bulle intégrée
 - `Alert` — messages d'alerte avec variantes
 - `ChatDate` — formatage de date avec dates relatives
-- `ContextIndicator` — indicateur d'utilisation du contexte de jeton
+- `ContextIndicator` — indicateur d'utilisation du contexte du token
 - `ContextItem` — libellé de contexte avec action de suppression
 - `DiffStat` — affichage des statistiques de modification de code
 - `Disclaimer` — composant de texte d'avertissement
-- `InlineCitation` — citations textuelles
+- `InlineCitation` — citations de texte
 - `Loader` — indicateur de chargement
-- `MarkdownRenderer` — rendu Yandex Flavored Markdown
+- `MarkdownRenderer` — rendu Markdown au format Yandex
 - `MessageBalloon` — conteneur de message
 - `Shimmer` — effet d'animation de chargement
 - `SubmitButton` — bouton de soumission avec états
@@ -125,8 +125,8 @@ Combinaisons simples d'atomes :
 - `PromptInputPanel` — panneau conteneur pour le contenu personnalisé
 - `Suggestions` — boutons de suggestion cliquables
 - `Tabs` — onglets de navigation avec fonctionnalité de suppression
-- `ToolFooter` — pied de page de message d'outil avec actions
-- `ToolHeader` — en-tête de message d'outil avec icône et actions
+- `ToolFooter` — pied de page du message de l'outil avec actions
+- `ToolHeader` — en-tête du message de l'outil avec icône et actions
 
 ### 🔶 Organismes
 
@@ -157,6 +157,7 @@ Intégrations complètes :
 ## Documentation
 
 - [Guide de démarrage rapide](./docs/GETTING_STARTED.md)
+- [Rendu Markdown personnalisé sans le moteur intégré](./docs/custom-markdown.md)
 - [Architecture](./docs/ARCHITECTURE.md)
 - [Structure du projet](./docs/PROJECT_STRUCTURE.md)
 - [Guide de test](./docs/TESTING.md)
@@ -197,7 +198,7 @@ npm run playwright
 npm run playwright:update
 ```
 
-Pour une documentation détaillée sur les tests, consultez le [Guide Playwright](./playwright/README.md).
+Pour une documentation détaillée des tests, consultez le [Guide Playwright](./playwright/README.md).
 
 ## Développement
 
@@ -214,21 +215,21 @@ Une bibliothèque de composants React pour la création d'interfaces de chat IA,
 ### Quand l'utiliser
 
 - Création d'une interface de chat IA/LLM (messages assistant/utilisateur/outil, saisie de prompt avec suggestions, téléchargements de pièces jointes, états de réflexion).
-- Besoin de mises en page de chat prêtes à l'emploi (`ChatContainer`, `MessageList`, `PromptInput`) ainsi que de hooks pour personnaliser le comportement.
+- Vous souhaitez des mises en page de chat prêtes à l'emploi (`ChatContainer`, `MessageList`, `PromptInput`) ainsi que des hooks pour personnaliser le comportement.
 - Intégration dans l'écosystème Gravity UI avec un thème partagé via des variables CSS.
 
 ### Quand ne pas l'utiliser
 
 - Pour des primitives d'interface utilisateur à usage général (boutons, champs de saisie, modales), utilisez [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) directement — AIKit s'appuie sur celui-ci pour les besoins spécifiques au chat.
-- Pour afficher du markdown riche dans les messages, le `MarkdownRenderer` d'AIKit encapsule [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor) ; pour un rendu markdown autonome, utilisez ce package directement.
-- Pour une seule bulle de chat sans orchestration de chat, un `MarkdownRenderer`/bloc de texte d'uikit est plus léger que le pipeline de messages complet d'AIKit.
+- Pour rendre du Markdown riche dans les messages, le `MarkdownRenderer` d'AIKit encapsule [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor) ; pour un rendu Markdown autonome, utilisez ce package directement.
+- Pour une seule bulle de message sans orchestration de chat, un `MarkdownRenderer`/bloc de texte de uikit est plus léger que le pipeline de messages complet d'AIKit.
 
 ### Pièges courants
 
 - **Halluciner une importation de SDK IA** — AIKit est indépendant du SDK ; il fournit des composants/hooks, pas un client LLM. Apportez votre propre source de données et alimentez les messages via les props.
 - **Rechercher `<Chat>` / `<AIChat>`** — l'exportation au niveau de la page est `ChatContainer` (et `AIStudioChat`) ; il n'y a pas de composant littéralement nommé `Chat`.
 - **Oublier d'enregistrer les types de messages pour les types personnalisés** — les types de messages personnalisés doivent être enregistrés dans le système de types de messages, sinon ils seront rendus comme inconnus.
-- **Modifier les composants de base au lieu d'utiliser des hooks** — la conception à deux niveaux attend que vous personnalisiez via des hooks/composition ; remplacer les internes directement casse les mises à niveau.
+- **Modifier les composants de base au lieu d'utiliser des hooks** — la conception à deux niveaux s'attend à ce que vous personnalisiez via des hooks/composition ; la substitution directe des éléments internes casse les mises à niveau.
 
 ## Documentation pour les agents IA
 

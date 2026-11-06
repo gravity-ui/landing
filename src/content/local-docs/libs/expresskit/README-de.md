@@ -1,14 +1,14 @@
 # ExpressKit
 
-ExpressKit ist ein leichtgewichtiger [express.js](https://expressjs.com/)-Wrapper, der sich in [NodeKit](https://github.com/gravity-ui/nodekit) integriert und einige nützliche Funktionen wie Request-Logging, Tracing-Unterstützung, asynchrone Controller & Middleware und detaillierte Routenbeschreibungen bietet.
+ExpressKit ist ein leichtgewichtiger [express.js](https://expressjs.com/)-Wrapper, der sich in [NodeKit](https://github.com/gravity-ui/nodekit) integriert und einige nützliche Funktionen bietet, wie z. B. Request-Logging, Tracing-Unterstützung, asynchrone Controller & Middleware und detaillierte Routenbeschreibungen.
 
-Installation:
+## Installation
 
 ```bash
 npm install --save @gravity-ui/nodekit @gravity-ui/expresskit
 ```
 
-Grundlegende Verwendung:
+## Verwendung
 
 ```typescript
 import {ExpressKit} from '@gravity-ui/expresskit';
@@ -28,7 +28,7 @@ app.run();
 ## Eigene Telemetrie
 
 Standardmäßig sendet die eigene Telemetrie die ursprüngliche Request-URL. Anwendungen mit großen oder
-Query-Strings mit hoher Kardinalität können Query-Parameter entfernen, bevor Statistiken gesendet werden:
+hochgradig variablen Query-Strings können Query-Parameter entfernen, bevor Statistiken gesendet werden:
 
 ```typescript
 const config: Partial<AppConfig> = {
@@ -68,7 +68,7 @@ export default config;
 
 ## CSRF-Schutz
 
-ExpressKit bietet integrierten Schutz vor Cross-Site Request Forgery (CSRF), um Ihre Anwendungen vor bösartigen Cross-Origin-Anfragen zu schützen. Die CSRF-Middleware generiert und validiert automatisch Tokens für zustandsändernde HTTP-Anfragen.
+ExpressKit bietet integrierten Schutz vor Cross-Site Request Forgery (CSRF), um Ihre Anwendungen vor bösartigen Cross-Origin-Anfragen zu sichern. Die CSRF-Middleware generiert und validiert automatisch Tokens für zustandsändernde HTTP-Anfragen.
 
 ### Grundlegende Konfiguration
 
@@ -121,7 +121,7 @@ const app = new ExpressKit(nodekit, {
 
   'POST /api/submit': (req, res) => {
     // Diese Route validiert automatisch das CSRF-Token
-    res.json({message: 'Formular erfolgreich übermittelt'});
+    res.json({message: 'Formular erfolgreich gesendet'});
   },
 });
 ```
@@ -144,7 +144,7 @@ const app = new ExpressKit(nodekit, {
 
 ## Caching-Steuerung
 
-Standardmäßig setzt ExpressKit `no-cache`-Header auf alle Antworten. Sie können dieses Verhalten global oder pro Route steuern.
+Standardmäßig setzt ExpressKit `no-cache`-Header auf allen Antworten. Sie können dieses Verhalten global oder pro Route steuern.
 
 ### Globale Konfiguration
 
@@ -174,3 +174,34 @@ const app = new ExpressKit(nodekit, {
 ## Validierung und Antwortserialisierung
 
 - [Request Validation and Response Serialization](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - nutze Zod-Schemas für automatische Request-Validierung und Response-Serialisierung.
+
+## Lizenz
+
+Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
+
+## Für KI-Agenten
+
+Ein schlanker Express.js-Wrapper auf NodeKit, der Request-Logging, Tracing, asynchrone Controller/Middleware und eine deklarative Routenübersicht hinzufügt – greifen Sie darauf zurück, wenn Sie einen HTTP-Server mit dem NodeKit Logging/Telemetry-Rückgrat benötigen, anstatt Express-Middleware und NodeKit manuell zu verdrahten.
+
+### Wann verwenden
+
+- Erstellung eines Express-HTTP-Dienstes, der NodeKits Logging, Tracing und Konfiguration teilen muss.
+- Deklarative Routen (`{'GET /path': handler}`) mit pro-Route-Authentifizierung, CSRF und Caching-Richtlinien.
+- Integrierte Sicherheitsfunktionen (CSRF-Tokens, CSP-Header), die mit dem Request-Kontext verknüpft sind.
+
+### Wann nicht verwenden
+
+- Für das grundlegende Logging/Telemetry/Konfiguration ohne eine HTTP-Schicht, verwenden Sie [`@gravity-ui/nodekit`](https://github.com/gravity-ui/nodekit) direkt – ExpressKit hängt davon ab, aber Sie benötigen möglicherweise nicht die HTTP-Teile.
+- Für ein Nicht-Express-Framework (Fastify, Koa, NestJS) ist ExpressKit Express-spezifisch; verwenden Sie die Werkzeuge dieses Frameworks.
+
+### Häufige Fallstricke
+
+- **Konstruktion von `ExpressKit` ohne `NodeKit`-Instanz** – der Konstruktor benötigt eine NodeKit-Instanz als erstes Argument; erstellen Sie zuerst `new NodeKit()`.
+- **Halluzinieren von `app.get`/`app.post`** – Routen werden als Map von `'METHOD /path': handler` deklariert, die an `new ExpressKit(nodekit, routes)` übergeben wird, nicht über Express-Style-Methodenverkettung.
+- **Vergessen, `app.run()` aufzurufen** – Routen werden bei der Konstruktion registriert, aber der Server startet erst, wenn Sie `app.run()` aufrufen.
+- **CSRF erwartet einen Auth-Kontext** – die Generierung von CSRF-Tokens erfordert, dass `appAuthHandler` die Benutzer-ID im ursprünglichen Kontext setzt; ohne diese schlägt die Token-Generierung fehl.
+- **Verwendung von Express-Style-Middleware, die den Kontext umgeht** – asynchrone Controller/Middleware sollten den ExpressKit-Kontext verwenden, um das Tracing zu erhalten; rohe Express-Handler verwerfen ihn.
+
+## Dokumentation für KI-Agenten
+
+Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/expresskit/dist/docs/INDEX.md`.
