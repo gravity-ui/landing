@@ -96,13 +96,16 @@ Browserslist configuration preset used in our services.
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/chartkit/llms.txt)
 > GitHub: [gravity-ui/chartkit](https://github.com/gravity-ui/chartkit)
 
-A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+A plugin-based React component that renders charts from multiple charting libraries, such as Gravity Charts and Yagr, through a single `<ChartKit type="..." data={...} />` API, lazy-loading each library only when its chart type is rendered.
 
 #### When to use
 
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Rendering more than one charting engine behind one consistent component: `gravity-charts` (declarative SVG charts via [`@gravity-ui/charts`](https://github.com/gravity-ui/charts)) and `yagr` (uPlot-based time-series via [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr)).
 - Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+- Mobile-friendly tooltips out of the box — the chart and its tooltip are shown in resizable split panes instead of a hover popup; for `gravity-charts` turn it on with `<ChartKit type="gravity-charts" tooltip={{splitted: true}} />`.
+- Using the split-pane tooltip layout on its own — `SplitTooltip` is a standalone component exported from the root entry: pass `renderMainPane` and `renderTooltip`, and it lays them out as resizable panes (vertical or horizontal, picked from the container size) for any content, not only ChartKit charts.
+- Writing your own plugin — register `{type, renderer}` via `settings.set({plugins: [...]})`, where `renderer` is a `React.lazy` component; ChartKit dispatches to it by `type` exactly like to the built-in plugins.
+- Consistent light/dark theming across every chart engine out of the box — the charts follow the `@gravity-ui/uikit` theme of the surrounding app.
 
 #### When not to use
 
@@ -114,11 +117,11 @@ A plugin-dispatching React component that renders charts from multiple Gravity U
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/charts/llms.txt)
 > GitHub: [gravity-ui/charts](https://github.com/gravity-ui/charts)
 
-A declarative React charting library for Gravity UI apps — render line, area, bar, pie, scatter, treemap, and other charts from a single `data` config, themed to match the rest of the app.
+A declarative React charting library — render line, area, bar, pie, scatter, treemap, sankey, heatmap, and other charts from a single `data` config, with built-in light and dark themes.
 
 #### When to use
 
-- Standard business charts: `line`, `area`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
+- Supported series types: `line`, `area`, `area-range`, `bar-x`/`bar-y`, `pie`, `scatter`, `treemap`, `waterfall`, `sankey`, `radar`, `heatmap`, `funnel`, `x-range`.
 - Visualizations that must follow Gravity UI theming (light/dark) and share tokens with a `@gravity-ui/uikit` app.
 - Rendering a chart from declarative data rather than drawing imperatively.
 
