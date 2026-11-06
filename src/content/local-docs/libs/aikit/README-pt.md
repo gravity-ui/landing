@@ -28,7 +28,7 @@ Biblioteca de componentes de UI para chats de IA construída com princípios de 
 - 🔧 **Independente de SDK** — independente de SDKs de IA específicos
 - 🎭 **Abordagem de Dois Níveis** — componentes prontos + hooks para personalização
 - 🎨 **Variáveis CSS** — temas fáceis sem sobrescrever componentes
-- 📦 **TypeScript** — segurança de tipo completa "out of the box"
+- 📦 **TypeScript** — segurança de tipo completa pronta para uso
 - 🔌 **Extensível** — sistema de registro de tipos de mensagem personalizados
 
 ## Estrutura do Projeto
@@ -53,7 +53,7 @@ src/
 npm install @gravity-ui/aikit
 ```
 
-AIKit 3 requer `@gravity-ui/uikit@^8.0.0`, React/React DOM 18 ou 19, e Node.js 20.19+ dentro da v20 ou 22.12+. Envolva a aplicação no `Provider` do UIKit, como mostrado em [Getting started](./docs/GETTING_STARTED.md).
+AIKit 3 requer `@gravity-ui/uikit@^8.0.0`, React/React DOM 18 ou 19, e Node.js 20.19+ dentro da v20 ou 22.12+. Envolva a aplicação no `Provider` do UIKit, como mostrado em [Primeiros Passos](./docs/GETTING_STARTED.md).
 
 Atualizando da v2? Leia o [guia de migração](./docs/migration-to-v3.md) ([Русский](./docs/migration-to-v3-ru.md)) e as [notas de lançamento da v3](./docs/changelog-v3.md).
 
@@ -82,7 +82,7 @@ function App() {
                 // Criar novo chat
             }}
             onDeleteChat={(chat) => {
-                // Deletar chat
+                // Excluir chat
             }}
         />
     );
@@ -91,11 +91,11 @@ function App() {
 
 ## Arquitetura
 
-A biblioteca é construída sobre os princípios do **Atomic Design**:
+A biblioteca é construída sobre os princípios de **Atomic Design**:
 
 ### 🔹 Átomos
 
-Elementos de UI básicos e indivisíveis sem lógica de negócios:
+Elementos básicos de UI indivisíveis sem lógica de negócios:
 
 - `ActionButton` — botão com tooltip integrado
 - `Alert` — mensagens de alerta com variantes
@@ -119,7 +119,7 @@ Combinações simples de átomos:
 - `BaseMessage` — wrapper base para todos os tipos de mensagem
 - `ButtonGroup` — grupo de botões com suporte a orientação
 - `InputContext` — gerenciamento de contexto
-- `PromptInputBody` — área de texto com crescimento automático
+- `PromptInputBody` — área de texto com auto-redimensionamento
 - `PromptInputFooter` — rodapé com ícones de ação e botão de envio
 - `PromptInputHeader` — cabeçalho com itens de contexto e indicador
 - `PromptInputPanel` — painel contêiner para conteúdo personalizado
@@ -157,6 +157,7 @@ Integrações completas:
 ## Documentação
 
 - [Guia de Início Rápido](./docs/GETTING_STARTED.md)
+- [Renderização de Markdown Personalizada sem o motor embutido](./docs/custom-markdown.md)
 - [Arquitetura](./docs/ARCHITECTURE.md)
 - [Estrutura do Projeto](./docs/PROJECT_STRUCTURE.md)
 - [Guia de Testes](./docs/TESTING.md)
@@ -220,15 +221,15 @@ Uma biblioteca de componentes React para construir interfaces de chat de IA, org
 ### Quando não usar
 
 - Para primitivos de UI de propósito geral (botões, entradas, modais), use [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) diretamente — AIKit é construído sobre ele para necessidades específicas de chat.
-- Para renderizar markdown rico em mensagens, o `MarkdownRenderer` do AIKit envolve [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); para renderização de markdown independente, use esse pacote diretamente.
+- Para renderizar markdown rico em mensagens, o `MarkdownRenderer` do AIKit envolve o [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); para renderização de markdown independente, use esse pacote diretamente.
 - Para uma única bolha de chat sem orquestração de chat, um `MarkdownRenderer`/bloco de texto do uikit é mais leve do que o pipeline completo de mensagens do AIKit.
 
 ### Armadilhas comuns
 
 - **Alucinar uma importação de SDK de IA** — AIKit é agnóstico ao SDK; ele fornece componentes/hooks, não um cliente LLM. Traga sua própria fonte de dados e alimente mensagens via props.
-- **Procurar por `<Chat>` / `<AIChat>`** — a exportação no nível da página é `ChatContainer` (e `AIStudioChat`); não há um componente literalmente chamado `Chat`.
-- **Pular o registro de tipo de mensagem para tipos personalizados** — tipos de mensagem personalizados devem ser registrados no sistema de tipos de mensagem, ou eles serão renderizados como desconhecidos.
-- **Editar componentes base em vez de usar hooks** — o design de dois níveis espera que você personalize via hooks/composição; substituir internos diretamente quebra atualizações.
+- **Procurar por `<Chat>` / `<AIChat>`** — a exportação em nível de página é `ChatContainer` (e `AIStudioChat`); não há um componente chamado literalmente `Chat`.
+- **Pular o registro do tipo de mensagem para tipos personalizados** — tipos de mensagem personalizados devem ser registrados no sistema de tipos de mensagem, ou eles serão renderizados como desconhecidos.
+- **Editar componentes base em vez de usar hooks** — o design de dois níveis espera que você personalize via hooks/composição; substituir os internos diretamente quebra as atualizações.
 
 ## Documentação para agentes de IA
 

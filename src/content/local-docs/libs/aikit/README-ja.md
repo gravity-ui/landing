@@ -157,6 +157,7 @@ function App() {
 ## ドキュメント
 
 - [クイックスタートガイド](./docs/GETTING_STARTED.md)
+- [組み込みエンジンなしでのカスタムMarkdownレンダリング](./docs/custom-markdown.md)
 - [アーキテクチャ](./docs/ARCHITECTURE.md)
 - [プロジェクト構造](./docs/PROJECT_STRUCTURE.md)
 - [テストガイド](./docs/TESTING.md)
@@ -164,14 +165,14 @@ function App() {
 
 ## テスト
 
-このプロジェクトでは、ビジュアルリグレッションテストのためにPlaywright Component Testingを使用しています。
+このプロジェクトでは、視覚的な回帰テストのためにPlaywright Component Testingを使用しています。
 
 ### テストの実行
 
 **重要**: すべてのテストは、環境間で一貫したスクリーンショットを保証するために、Docker経由で実行する必要があります。
 
 ```bash
-# Dockerで全コンポーネントテストを実行 (推奨)
+# Dockerで全てのコンポーネントテストを実行 (推奨)
 npm run playwright:docker
 
 # Dockerでスクリーンショットのベースラインを更新
@@ -191,7 +192,7 @@ Linuxを使用している場合は、ローカルでテストを実行できま
 ```bash
 # Playwrightブラウザをインストール (一度実行)
 npm run playwright:install
-# 全コンポーネントテストを実行
+# 全てのコンポーネントテストを実行
 npm run playwright
 # スクリーンショットのベースラインを更新
 npm run playwright:update
@@ -201,7 +202,7 @@ npm run playwright:update
 
 ## 開発
 
-開発および貢献に関する指示は、[CONTRIBUTING.md](./CONTRIBUTING.md)で確認できます。
+開発および貢献に関する指示は、[CONTRIBUTING.md](./CONTRIBUTING.md)で入手できます。
 
 ## ライセンス
 
@@ -209,27 +210,27 @@ MIT
 
 ## AIエージェント向け
 
-Atomic Design (アトム → モレキュール → オーガニズム → テンプレート → ページ) で構成され、SDKに依存しないAIチャットインターフェース構築のためのReactコンポーネントライブラリです。`@gravity-ui/uikit` を手動で組み合わせてこれらのプリミティブを構成する代わりに、チャットUI (メッセージリスト、プロンプト入力、ツール呼び出し、添付ファイル) を組み立てるために使用してください。
+Atomic Design (アトム → モレキュール → オーガニズム → テンプレート → ページ) に従って整理された、AIチャットインターフェース構築のためのReactコンポーネントライブラリ。SDKに依存しないため、`@gravity-ui/uikit`からこれらのプリミティブを手動で構成する代わりに、チャットUI（メッセージリスト、プロンプト入力、ツール呼び出し、添付ファイル）を組み立てるために使用できます。
 
 ### 使用する場面
 
-- AI/LLMチャットUI (アシスタント/ユーザー/ツールメッセージ、提案付きプロンプト入力、添付ファイルアップロード、思考状態) の構築。
-- 用意されたチャットレイアウト (`ChatContainer`、`MessageList`、`PromptInput`) と、動作をカスタマイズするためのフックが必要な場合。
-- CSS変数経由での共有テーマ設定により、Gravity UIエコシステムへの埋め込み。
+- AI/LLMチャットUI（アシスタント/ユーザー/ツールメッセージ、提案付きプロンプト入力、添付ファイルアップロード、思考状態）の構築。
+- 用意されたチャットレイアウト（`ChatContainer`、`MessageList`、`PromptInput`）と、動作をカスタマイズするためのフックを求めている場合。
+- CSS変数経由で共有テーマ設定を行い、Gravity UIエコシステムに埋め込む場合。
 
 ### 使用しない場面
 
-- 一般的なUIプリミティブ (ボタン、入力、モーダル) の場合、[`@gravity-ui/uikit`](https://gravity-ui.com/uikit) を直接使用してください。AIKitはチャット固有のニーズのためにそれを基盤として構築されています。
-- メッセージでリッチなMarkdownをレンダリングする場合、AIKitの `MarkdownRenderer` は [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor) をラップしています。スタンドアロンのMarkdownレンダリングには、そのパッケージを直接使用してください。
-- チャットオーケストレーションなしの単一のチャットバブルの場合、uikitの `MarkdownRenderer`/テキストブロックは、完全なAIKitメッセージパイプラインよりも軽量です。
+- 一般的なUIプリミティブ（ボタン、入力、モーダル）には、[`@gravity-ui/uikit`](https://gravity-ui.com/uikit)を直接使用してください。AIKitはチャット固有のニーズのためにこれを基盤として構築されています。
+- メッセージでリッチなMarkdownをレンダリングするには、AIKitの`MarkdownRenderer`は[`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor)をラップしています。スタンドアロンのMarkdownレンダリングには、そのパッケージを直接使用してください。
+- チャットオーケストレーションなしの単一のチャットバブルには、uikitの`MarkdownRenderer`/テキストブロックの方が、AIKitの完全なメッセージパイプラインよりも軽量です。
 
 ### よくある落とし穴
 
-- **AI SDKのインポートを誤解する** — AIKitはSDKに依存しません。コンポーネント/フックを提供し、LLMクライアントではありません。独自のデータソースを用意し、props経由でメッセージをフィードしてください。
-- **`<Chat>` / `<AIChat>` を探す** — ページレベルのエクスポートは `ChatContainer` (および `AIStudioChat`) です。文字通り `Chat` という名前のコンポーネントはありません。
+- **AI SDKのインポートを誤解する** — AIKitはSDKに依存しません。コンポーネント/フックを提供し、LLMクライアントではありません。独自のデータソースを用意し、props経由でメッセージを供給してください。
+- **`<Chat>` / `<AIChat>` を探す** — ページレベルのエクスポートは`ChatContainer`（および`AIStudioChat`）です。`Chat`という名前のコンポーネントは文字通り存在しません。
 - **カスタムタイプのメッセージタイプ登録をスキップする** — カスタムメッセージの種類はメッセージタイプシステムに登録する必要があります。そうしないと、不明としてレンダリングされます。
-- **ベースコンポーネントを編集するのではなくフックを使用する** — 2レベルのデザインでは、フック/コンポジションによるカスタマイズが期待されています。内部を直接オーバーライドすると、アップグレード時に問題が発生します。
+- **フックを使用せずにベースコンポーネントを編集する** — 2層設計では、フック/コンポジションによるカスタマイズが期待されています。内部を直接オーバーライドすると、アップグレード時に問題が発生します。
 
 ## AIエージェント向けドキュメント
 
-インストールされているバージョンのエージェント読み取り可能なドキュメントは、`node_modules/@gravity-ui/aikit/build/docs/INDEX.md` にあります。
+インストールされているバージョンのエージェント読み取り可能なドキュメントは、`node_modules/@gravity-ui/aikit/build/docs/INDEX.md`にあります。

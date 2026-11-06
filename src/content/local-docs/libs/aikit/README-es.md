@@ -157,6 +157,7 @@ Integraciones completas:
 ## Documentación
 
 - [Guía de inicio rápido](./docs/GETTING_STARTED.md)
+- [Renderizado de Markdown personalizado sin el motor integrado](./docs/custom-markdown.md)
 - [Arquitectura](./docs/ARCHITECTURE.md)
 - [Estructura del proyecto](./docs/PROJECT_STRUCTURE.md)
 - [Guía de pruebas](./docs/TESTING.md)
@@ -197,7 +198,7 @@ npm run playwright
 npm run playwright:update
 ```
 
-Para obtener documentación detallada sobre pruebas, consulta [Guía de Playwright](./playwright/README.md).
+Para obtener documentación detallada sobre las pruebas, consulta [Guía de Playwright](./playwright/README.md).
 
 ## Desarrollo
 
@@ -219,17 +220,17 @@ Una biblioteca de componentes React para construir interfaces de chat de IA, org
 
 ### Cuándo no usar
 
-- Para primitivas de UI de propósito general (botones, entradas, modales), usa [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) directamente — AIKit se basa en él para necesidades específicas de chat.
-- Para renderizar markdown enriquecido en mensajes, `MarkdownRenderer` de AIKit envuelve [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); para renderizado de markdown independiente, usa ese paquete directamente.
-- Para una sola burbuja de chat sin orquestación de chat, un bloque de texto/`MarkdownRenderer` de uikit es más ligero que el pipeline completo de mensajes de AIKit.
+- Para primitivas de UI de propósito general (botones, entradas, modales), usa [`@gravity-ui/uikit`](https://gravity.ui.com/uikit) directamente — AIKit se basa en él para necesidades específicas de chat.
+- Para renderizar markdown enriquecido en mensajes, `MarkdownRenderer` de AIKit envuelve [`@gravity-ui/markdown-editor`](https://github.com/gravity.ui/markdown-editor); para renderizado de markdown independiente, usa ese paquete directamente.
+- Para una sola burbuja de chat sin orquestación de chat, un `MarkdownRenderer`/bloque de texto de uikit es más ligero que el pipeline completo de mensajes de AIKit.
 
 ### Errores comunes
 
-- **Inventar una importación de SDK de IA** — AIKit es agnóstico al SDK; proporciona componentes/hooks, no un cliente LLM. Aporta tu propia fuente de datos y alimenta los mensajes a través de props.
+- **Crear un import de SDK de IA de forma errónea** — AIKit es agnóstico al SDK; proporciona componentes/hooks, no un cliente LLM. Aporta tu propia fuente de datos y alimenta los mensajes a través de props.
 - **Buscar `<Chat>` / `<AIChat>`** — la exportación a nivel de página es `ChatContainer` (y `AIStudioChat`); no hay un componente llamado literalmente `Chat`.
 - **Omitir el registro de tipos de mensaje para tipos personalizados** — los tipos de mensaje personalizados deben registrarse en el sistema de tipos de mensaje, o se renderizarán como desconocidos.
 - **Editar componentes base en lugar de usar hooks** — el diseño de dos niveles espera que personalices a través de hooks/composición; sobrescribir internos directamente rompe las actualizaciones.
 
 ## Documentación para agentes de IA
 
-La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.
+La documentación legible por agentes para la versión instalada se encuentra en `node_modules/@gravity.ui/aikit/build/docs/INDEX.md`.
