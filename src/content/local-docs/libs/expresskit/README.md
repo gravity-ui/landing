@@ -2,13 +2,13 @@
 
 ExpressKit is a lightweight [express.js](https://expressjs.com/) wrapper that integrates with [NodeKit](https://github.com/gravity-ui/nodekit) and provides some useful features like request logging, tracing support, async controllers & middleware and verbose routes description.
 
-Installation:
+## Install
 
 ```bash
 npm install --save @gravity-ui/nodekit @gravity-ui/expresskit
 ```
 
-Basic usage:
+## Usage
 
 ```typescript
 import {ExpressKit} from '@gravity-ui/expresskit';
@@ -173,3 +173,34 @@ Route-level `enableCaching` overrides the global setting. The caching state is a
 ## Validation and Response Serialization
 
 - [Request Validation and Response Serialization](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - use Zod schemas for automatic request validation and response serialization.
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## For AI agents
+
+A thin Express.js wrapper on top of NodeKit that adds request logging, tracing, async controllers/middleware, and a declarative route map — reach for it when you need an HTTP server with the NodeKit logging/telemetry spine, instead of wiring Express middleware and NodeKit together by hand.
+
+### When to use
+
+- Building an Express HTTP service that must share NodeKit's logging, tracing, and config.
+- Declarative routes (`{'GET /path': handler}`) with per-route auth, CSRF, and caching policy.
+- Built-in security concerns (CSRF tokens, CSP headers) integrated with the request context.
+
+### When not to use
+
+- For the foundational logging/telemetry/config without an HTTP layer, use [`@gravity-ui/nodekit`](https://github.com/gravity-ui/nodekit) directly — ExpressKit depends on it but you may not need the HTTP parts.
+- For a non-Express framework (Fastify, Koa, NestJS), ExpressKit is Express-specific; use that framework's own tooling.
+
+### Common pitfalls
+
+- **Constructing `ExpressKit` without a `NodeKit` instance** — the constructor requires a NodeKit instance as the first argument; create `new NodeKit()` first.
+- **Hallucinating `app.get`/`app.post`** — routes are declared as a map of `'METHOD /path': handler` passed to `new ExpressKit(nodekit, routes)`, not via Express-style method chaining.
+- **Forgetting to call `app.run()`** — routes are registered at construction, but the server only starts when you call `app.run()`.
+- **CSRF expecting an auth context** — CSRF token generation requires `appAuthHandler` to set the user id in the original context; without it, token generation fails.
+- **Using Express-style middleware that bypasses the context** — async controllers/middleware should use ExpressKit's context to preserve tracing; raw Express handlers drop it.
+
+## Documentation for AI agents
+
+Agent-readable documentation for the installed version is located in `node_modules/@gravity-ui/expresskit/dist/docs/INDEX.md`.

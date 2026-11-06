@@ -1,6 +1,6 @@
 # Gravity UI ChartKit · [![npm package](https://img.shields.io/npm/v/@gravity-ui/chartkit)](https://www.npmjs.com/package/@gravity-ui/chartkit) [![License](https://img.shields.io/github/license/gravity-ui/ChartKit)](LICENSE) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/ChartKit/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/ChartKit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/chartkit/)
 
-Plugin-based React component that provides a unified rendering interface for multiple charting libraries. You register one or more plugins and render charts via `<ChartKit type="..." data={...} />` — ChartKit dispatches to the correct renderer automatically.
+Plugin-based React component that renders charts from multiple charting libraries, such as Gravity Charts and Yagr, through a single ChartKit API, with mobile-friendly tooltips and custom plugin support. You register one or more plugins and render charts via `<ChartKit type="..." data={...} />` — ChartKit dispatches to the correct renderer automatically.
 
 Each plugin renderer is lazy-loaded, so the underlying library code is only downloaded when ChartKit is actually rendered in the UI. ChartKit also handles mobile-friendly tooltip display out of the box. You can use the built-in plugins or implement your own.
 
@@ -8,7 +8,7 @@ Each plugin renderer is lazy-loaded, so the underlying library code is only down
 
 - You need modern declarative charts (`gravity-charts`) or time-series / monitoring charts (`yagr`)
 - You need multiple chart types under a single consistent API
-- You're building in the Gravity UI ecosystem
+- You want charts that follow the same light/dark theme as the rest of your UI out of the box
 
 **When not to use:**
 
@@ -24,8 +24,8 @@ Each plugin renderer is lazy-loaded, so the underlying library code is only down
 
 ### Requirements
 
-- React 16, 17, or 18
-- `[@gravity-ui/uikit](https://github.com/gravity-ui/uikit)` — required peer dependency (provides theming and UI primitives)
+- React 18 or 19
+- [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) 8 — required peer dependency (provides theming and UI primitives)
 
 ### Install
 
@@ -59,7 +59,7 @@ Or call `settings.set` multiple times — it merges the plugin list rather than 
 **Basic example:**
 
 ```tsx
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 import ChartKit, {settings} from '@gravity-ui/chartkit';
 import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
 
@@ -87,16 +87,37 @@ const data = {
 
 export default function App() {
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <div style={{height: 300}}>
         <ChartKit type="gravity-charts" data={data} />
       </div>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
 
 `ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+### SplitTooltip
+
+The split-pane tooltip layout that `gravity-charts` uses on touch devices (`tooltip={{splitted: true}}`) is also available as a standalone component. It works with any content: it renders the main pane and the tooltip pane side by side (or stacked, depending on the container size) with a draggable resizer between them.
+
+```tsx
+import {SplitTooltip} from '@gravity-ui/chartkit';
+
+export function Panel() {
+  return (
+    <div style={{height: 400}}>
+      <SplitTooltip
+        renderMainPane={() => <MyVisualization />}
+        renderTooltip={() => <MyTooltipContent />}
+      />
+    </div>
+  );
+}
+```
+
+See the `SplitTooltipProps` type for layout control, pane sizing and resizer options.
 
 ## Updating charting packages
 
@@ -106,6 +127,10 @@ ChartKit bundles two Gravity UI charting libraries as dependencies:
 - [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) — powers the `yagr` plugin
 
 If you need a newer version of one of these packages, open a [Package update request](https://github.com/gravity-ui/ChartKit/issues/new?template=package-update-request.yml) issue and select the package(s) you need. Maintainers will bump the selected packages and release the update.
+
+### Upgrading from ChartKit 8
+
+See the [migration guide](docs/migration-to-v9.md): uikit 8 and React 18+, the CommonJS/ESM build and TypeScript `moduleResolution` notes, and the `gravity-charts` data changes that come with `@gravity-ui/charts` 2.
 
 ## Development
 
@@ -191,6 +216,13 @@ npm ci
 npm test
 ```
 
+To check the built package, build it first. The check loads both the CommonJS and the ESM build in Node, compares their exports, and type-checks a consumer under the `nodenext`, `bundler` and `node` module resolutions:
+
+```shell
+npm run build
+npm run test:build
+```
+
 Visual regression tests run in Docker to ensure consistent screenshots across environments:
 
 ```shell
@@ -213,13 +245,16 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## For AI agents
 
-A plugin-dispatching React component that renders charts from multiple Gravity UI charting libraries through one `<ChartKit type="..." data={...} />` API — reach for it when you need a single lazy-loading entry point for mixed chart types, instead of importing each chart library directly.
+A plugin-based React component that renders charts from multiple charting libraries, such as Gravity Charts and Yagr, through a single `<ChartKit type="..." data={...} />` API, lazy-loading each library only when its chart type is rendered.
 
 ### When to use
 
-- Rendering more than one charting engine (e.g. `gravity-charts` + `yagr`) behind one consistent component.
+- Rendering more than one charting engine behind one consistent component: `gravity-charts` (declarative SVG charts via [`@gravity-ui/charts`](https://github.com/gravity-ui/charts)) and `yagr` (uPlot-based time-series via [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr)).
 - Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
-- Bundling charts into a Gravity UI app that wants mobile-friendly tooltips and unified theming out of the box.
+- Mobile-friendly tooltips out of the box — the chart and its tooltip are shown in resizable split panes instead of a hover popup; for `gravity-charts` turn it on with `<ChartKit type="gravity-charts" tooltip={{splitted: true}} />`.
+- Using the split-pane tooltip layout on its own — `SplitTooltip` is a standalone component exported from the root entry: pass `renderMainPane` and `renderTooltip`, and it lays them out as resizable panes (vertical or horizontal, picked from the container size) for any content, not only ChartKit charts.
+- Writing your own plugin — register `{type, renderer}` via `settings.set({plugins: [...]})`, where `renderer` is a `React.lazy` component; ChartKit dispatches to it by `type` exactly like to the built-in plugins.
+- Consistent light/dark theming across every chart engine out of the box — the charts follow the `@gravity-ui/uikit` theme of the surrounding app.
 
 ### When not to use
 
@@ -230,8 +265,9 @@ A plugin-dispatching React component that renders charts from multiple Gravity U
 
 - **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
 - **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Importing plugins from the root entry** — plugins live in subpath exports (e.g. `@gravity-ui/chartkit/gravity-charts`, `@gravity-ui/chartkit/yagr`); the root `@gravity-ui/chartkit` entry does not re-export them.
+- **Assuming one `data` shape for every `type`** — the shape depends on the plugin, e.g. `gravity-charts` takes `ChartData` from `@gravity-ui/charts` (`{series: {data: [...]}}`), while `yagr` takes `{data: {graphs, timeline}, libraryConfig}` with `libraryConfig` required.
 - **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
-- **Expecting plugins to be bundled** — plugin renderers (`@gravity-ui/chartkit/gravity-charts`, `.../yagr`) are lazy; the first render of a type fetches its bundle.
 - **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
 
 ## Documentation for AI agents
