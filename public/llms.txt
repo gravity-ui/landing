@@ -242,7 +242,18 @@ ESLint configuration preset for Gravity UI projects.
 > If you need this library, read more at package [llms.txt](https://gravity-ui.com/llms/expresskit/llms.txt)
 > GitHub: [gravity-ui/expresskit](https://github.com/gravity-ui/expresskit)
 
-Lightweight express.js wrapper that integrates with NodeKit.
+A thin Express.js wrapper on top of NodeKit that adds request logging, tracing, async controllers/middleware, and a declarative route map — reach for it when you need an HTTP server with the NodeKit logging/telemetry spine, instead of wiring Express middleware and NodeKit together by hand.
+
+#### When to use
+
+- Building an Express HTTP service that must share NodeKit's logging, tracing, and config.
+- Declarative routes (`{'GET /path': handler}`) with per-route auth, CSRF, and caching policy.
+- Built-in security concerns (CSRF tokens, CSP headers) integrated with the request context.
+
+#### When not to use
+
+- For the foundational logging/telemetry/config without an HTTP layer, use [`@gravity-ui/nodekit`](https://github.com/gravity-ui/nodekit) directly — ExpressKit depends on it but you may not need the HTTP parts.
+- For a non-Express framework (Fastify, Koa, NestJS), ExpressKit is Express-specific; use that framework's own tooling.
 
 ## Farm — `@gravity-ui/farm`
 
