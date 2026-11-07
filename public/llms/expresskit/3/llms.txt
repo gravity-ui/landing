@@ -2,11 +2,16 @@
 
 # ExpressKit
 
-> Lightweight express.js wrapper that integrates with NodeKit.
+> A thin Express.js wrapper on top of NodeKit that adds request logging, tracing, async controllers/middleware, and a declarative route map — reach for it when you need an HTTP server with the NodeKit logging/telemetry spine, instead of wiring Express middleware and NodeKit together by hand.
 >
 > **npm:** `@gravity-ui/expresskit` — check the installed major version in the user's `package.json` and read docs matching it.
 
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/expresskit/main/README.md) for full documentation.
+## Install
+
+```bash
+npm install --save @gravity-ui/nodekit @gravity-ui/expresskit
+```
+
 
 ## Peer dependencies
 
@@ -15,6 +20,44 @@ Install these in the host project at a compatible version:
 | Package | Version range |
 | --- | --- |
 | `@gravity-ui/nodekit` | `^1.6.0 || ^2.0.0` |
+
+## Usage
+
+```typescript
+import {ExpressKit} from '@gravity-ui/expresskit';
+import {NodeKit} from '@gravity-ui/nodekit';
+
+const nodekit = new NodeKit();
+
+const app = new ExpressKit(nodekit, {
+  'GET /': (req, res) => {
+    res.send('Hello World!');
+  },
+});
+
+app.run();
+```
+
+
+### When to use
+
+- Building an Express HTTP service that must share NodeKit's logging, tracing, and config.
+- Declarative routes (`{'GET /path': handler}`) with per-route auth, CSRF, and caching policy.
+- Built-in security concerns (CSRF tokens, CSP headers) integrated with the request context.
+
+### When not to use
+
+- For the foundational logging/telemetry/config without an HTTP layer, use [`@gravity-ui/nodekit`](https://github.com/gravity-ui/nodekit) directly — ExpressKit depends on it but you may not need the HTTP parts.
+- For a non-Express framework (Fastify, Koa, NestJS), ExpressKit is Express-specific; use that framework's own tooling.
+
+### Common pitfalls
+
+- **Constructing `ExpressKit` without a `NodeKit` instance** — the constructor requires a NodeKit instance as the first argument; create `new NodeKit()` first.
+- **Hallucinating `app.get`/`app.post`** — routes are declared as a map of `'METHOD /path': handler` passed to `new ExpressKit(nodekit, routes)`, not via Express-style method chaining.
+- **Forgetting to call `app.run()`** — routes are registered at construction, but the server only starts when you call `app.run()`.
+- **CSRF expecting an auth context** — CSRF token generation requires `appAuthHandler` to set the user id in the original context; without it, token generation fails.
+- **Using Express-style middleware that bypasses the context** — async controllers/middleware should use ExpressKit's context to preserve tracing; raw Express handlers drop it.
+
 
 ## Links
 
