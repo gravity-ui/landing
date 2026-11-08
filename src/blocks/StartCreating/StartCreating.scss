@@ -140,6 +140,58 @@ $block: '.#{variables.$ns}start-creating';
         color: var(--g-color-text-secondary);
     }
 
+    &__install-action {
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-4);
+        margin-block-start: auto;
+    }
+
+    & &__benchmark {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--g-spacing-2);
+        color: var(--g-color-text-primary);
+        font-size: var(--g-text-body-2-font-size);
+        line-height: var(--g-text-body-2-line-height);
+
+        strong {
+            color: var(--g-color-base-special);
+            font-weight: var(--g-text-accent-font-weight);
+        }
+
+        &:hover {
+            color: var(--g-color-base-special);
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'sm') - 1) {
+            font-size: var(--g-text-body-1-font-size);
+            line-height: var(--g-text-body-1-line-height);
+        }
+    }
+
+    &__benchmark-icon {
+        flex-shrink: 0;
+        margin-block-start: var(--g-spacing-half);
+        color: var(--g-color-base-special);
+    }
+
+    &__benchmark-text {
+        min-width: 0;
+
+        &_mobile {
+            display: none;
+        }
+
+        @media (max-width: map-get(pcVariables.$gridBreakpoints, 'md') - 1) {
+            display: none;
+
+            &_mobile {
+                display: inline;
+            }
+        }
+    }
+
     &__command {
         position: relative;
         width: 100%;
