@@ -22,8 +22,12 @@ jobs:
         cache: npm
     - name: Install Packages
       run: npm ci
-    - name: Shape packages-versions.json
-      run: npm run get-packages-versions
+    - name: Prepare build metadata
+      run: npm run prepare-metadata
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+    - name: Test metadata generators
+      run: npm run test:unit
     - name: Lint Files
       run: npm run lint
     - name: Typecheck
