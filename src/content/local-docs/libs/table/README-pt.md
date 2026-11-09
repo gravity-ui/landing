@@ -57,9 +57,7 @@ const columns: ColumnDef<Person>[] = [
   // ...outras colunas
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowSelectionExample = () => {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
@@ -83,7 +81,7 @@ Para usar agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler
 
 #### Coluna de Seleção de Intervalo Personalizada
 
-O hook `useToggleRangeSelectionHandler` retorna um manipulador de eventos que escuta cliques com a tecla Shift pressionada e realiza a seleção de linhas em intervalo. Ele precisa receber uma instância de `CellContext` para ter acesso aos estados internos da tabela e da linha.
+O hook `useToggleRangeSelectionHandler` retorna um manipulador de alteração que escuta eventos de Shift+clique e realiza a seleção de linhas em intervalo. Ele precisa receber uma instância de `CellContext` para ter acesso aos estados internos da tabela e da linha.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -144,9 +142,7 @@ const columns: ColumnDef<Person>[] = [
   // ...outras colunas
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowRangedSelectionExample = () => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
@@ -166,7 +162,7 @@ const RowRangedSelectionExample = () => {
 };
 ```
 
-Existe também o componente `RangedSelectionCheckbox`, que utiliza o hook internamente e aceita uma instância de `CellContext` como prop. Este componente oferece um atalho para adicionar a funcionalidade de seleção de intervalo a colunas de seleção personalizadas.
+Existe também o componente `RangedSelectionCheckbox`, que utiliza o hook internamente e aceita uma instância de `CellContext` como prop. Este componente fornece um atalho para adicionar funcionalidade de seleção de intervalo a colunas de seleção personalizadas.
 
 ```tsx
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
@@ -214,18 +210,14 @@ const columns: ColumnDef<Person>[] = [
 
 #### Ordenação
 
-Saiba mais sobre as propriedades de coluna na [documentação](https://tanstack.com/table/v8/docs/guide/sorting) do react-table.
+Saiba mais sobre as propriedades de coluna na [documentação](https://tanstack.com/table/v8/docs/guide/sorting) do react-table
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -319,13 +311,13 @@ const GroupingExample = () => {
 };
 ```
 
-Para usar agrupamento com seleção, utilize o hook `useRowSelectionFixedHandler`. Sem ele, o estado da caixa de seleção da linha pai ficará incorreto. https://github.com/TanStack/table/issues/4878
+Para usar agrupamento com seleção, use o hook `useRowSelectionFixedHandler`. Sem ele, o estado da caixa de seleção da linha pai ficará incorreto. https://github.com/TanStack/table/issues/4878
 
 Para ativar estilos de aninhamento, passe `withNestingStyles = true` na configuração da coluna.
 
 Indicadores de aninhamento podem ser desativados passando `showTreeDepthIndicators = false`.
 
-Para adicionar um controle para expandir/recolher linhas, envolva o conteúdo da célula com o componente `TreeExpandableCell` ou com um componente personalizado semelhante:
+Para adicionar um controle para expandir/recolher linhas, envolva o conteúdo da célula com o componente `TreeExpandableCell` ou com seu componente personalizado semelhante:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -356,9 +348,7 @@ const columns: ColumnDef<Person>[] = [
   // ...outras colunas
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ReorderingExample = () => {
   const table = useTable({
@@ -410,15 +400,16 @@ return (
 );
 ```
 
-O ponteiro deve se mover 8 pixels antes que o arrastar comece, para que cliques normais na linha e em controles continuem funcionando. Para excluir uma parte personalizada de uma linha de iniciar um arrastar, chame `preventDefault()` em seu
+O ponteiro deve se mover 8 pixels antes que o arrastar comece, para que cliques regulares na linha e em controles continuem funcionando. Para excluir uma parte personalizada de uma linha de iniciar um arrastar, chame `preventDefault()` em seu
 manipulador `onPointerDown`.
 
 `ReorderingProvider` ativa a rolagem automática vertical do dnd-kit por padrão. Passe `autoScroll={false}`
 quando a aplicação fornecer sua própria implementação de rolagem automática de arrastar; executar ambos ao mesmo tempo pode
-produzir conflitos de escrita de rolagem.
+produzir escritas de rolagem conflitantes.
 
 Alças de arrastar personalizadas devem ler `attributes`, `listeners` e `setActivatorNodeRef` do
-`DraggableRowContext` e anexá-los ao elemento da alça. Isso reutiliza o registro DnD da linha. Não chame `useSortable` novamente com o mesmo id de linha: uma alça montada posteriormente pela virtualização substituiria o nó DOM registrado da linha.
+`DraggableRowContext` e anexá-los ao elemento da alça. Isso reutiliza o registro DnD da linha. Não chame `useSortable` novamente com o mesmo ID de linha: uma alça montada posteriormente
+pela virtualização substituiria o nó DOM registrado da linha.
 
 #### Reordenação por teclado e acessibilidade
 
@@ -426,7 +417,7 @@ Alças de arrastar personalizadas devem ler `attributes`, `listeners` e `setActi
 Foque em uma alça de arrastar, pressione Espaço ou Enter para pegar a linha, use as teclas de seta para movê-la e pressione Espaço ou Enter para soltá-la. Escape cancela o movimento.
 O arrastar por teclado se aplica apenas a linhas; as interações por teclado com cabeçalhos de coluna permanecem inalteradas.
 
-Use `accessibility` para personalizar instruções do leitor de tela do dnd-kit, anúncios, contêiner de anúncios e restauração de foco para arrastar por teclado e ponteiro.
+Use `accessibility` para personalizar as instruções do leitor de tela do dnd-kit, anúncios, contêiner de anúncios e restauração de foco para arrastar por teclado e ponteiro.
 Quando provedores de linha e coluna são aninhados, eles compartilham o mesmo contexto DnD e configurações de acessibilidade; a ordem dos provedores não importa.
 
 ```tsx
@@ -450,7 +441,9 @@ Envolva a tabela com `ColumnReorderingProvider` para ativar a reordenação de c
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
+```
 
+```tsx
 const columns: ColumnDef<Person>[] = [
   {accessorKey: 'name', header: 'Nome', size: 100},
   {accessorKey: 'age', header: 'Idade', size: 100},
@@ -471,7 +464,7 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-### Reordenação de linhas e colunas juntas
+### Reordenar linhas e colunas juntas
 
 Aninhe `ColumnReorderingProvider` e `ReorderingProvider` para habilitar ambos os eixos de arrastar ao mesmo tempo. A ordem dos provedores não importa — eles compartilham um único contexto dnd-kit internamente.
 
@@ -519,7 +512,7 @@ const CombinedReorderingExample = () => {
 };
 ```
 
-Se você controlar `columnOrder` manualmente (por exemplo, para persistir), passe `onReorder` e aplique a ordem resultante:
+Se você controlar `columnOrder` por conta própria (por exemplo, para persistir), passe `onReorder` e aplique a ordem resultante:
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -543,16 +536,16 @@ return (
 
 API CSS:
 
-| Variável CSS                                 | Padrão                          | Descrição                      |
-| -------------------------------------------- | ------------------------------- | ------------------------------ |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                       | Cor da linha de inserção de drop |
-| `--gt-table-reordering-insertion-line-width` | `2px`                           | Largura da linha de inserção de drop |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                           | Opacidade da coluna arrastada  |
-| `--gt-table-drag-overlay-background`         | `#fff`                          | Fundo da prévia de arrastar    |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)`   | Sombra da caixa da prévia de arrastar |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                           | Raio da borda da prévia de arrastar |
+| Variável CSS                                 | Padrão                        | Descrição                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Cor da linha de inserção de drop |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Largura da linha de inserção de drop |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Opacidade da coluna arrastada    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Fundo da prévia de arrastar      |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Sombra da caixa da prévia de arrastar |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Raio da borda da prévia de arrastar |
 
-Para proibir a reordenação de uma coluna específica, defina `enableColumnReordering: false` em sua definição de coluna. Colunas placeholder (agrupadas) não são arrastáveis. Use `activationDistance` (padrão `8`) para ajustar a distância que o ponteiro deve se mover antes que um arrasto comece, o que mantém os cliques no cabeçalho (como ordenação) funcionando.
+Para proibir a reordenação de uma coluna específica, defina `enableColumnReordering: false` em sua definição de coluna. Colunas de placeholder (agrupadas) não são arrastáveis. Use `activationDistance` (padrão `8`) para ajustar o quão longe o ponteiro deve se mover antes que um arrastar comece, o que mantém os cliques no cabeçalho (como ordenação) funcionando.
 
 Colunas fixadas também podem ser reordenadas, mas apenas entre si: uma coluna pode ser movida dentro do grupo fixado à esquerda, do grupo fixado à direita ou do grupo central (não fixado) — ela nunca cruza um limite de fixação ao arrastar.
 
@@ -574,7 +567,7 @@ Colunas fixadas também podem ser reordenadas, mas apenas entre si: uma coluna p
 Enquanto arrasta:
 
 - uma prévia flutuante da coluna (seu cabeçalho mais as primeiras linhas) segue o ponteiro em uma sobreposição de arrastar;
-- a coluna arrastada fica semitransparente;
+- a coluna arrastada se torna semitransparente;
 - uma linha de inserção azul é desenhada onde a coluna será solta;
 
 ```tsx
@@ -590,18 +583,14 @@ Enquanto arrasta:
 
 #### Virtualização
 
-Use se quiser usar o contêiner da grade como elemento de rolagem (se quiser usar a janela, veja a seção de virtualização de janela). Certifique-se de definir uma altura fixa no contêiner; caso contrário, a virtualização não funcionará.
+Use se você quiser usar o contêiner da grade como o elemento de rolagem (se você quiser usar a janela, veja a seção de virtualização de janela). Certifique-se de definir uma altura fixa no contêiner; caso contrário, a virtualização não funcionará.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const VirtualizationExample = () => {
   const table = useTable({
@@ -628,11 +617,14 @@ const VirtualizationExample = () => {
 ```
 
 Para tabelas que devem permanecer cobertas durante a rolagem bidirecional contínua, habilite o modo adaptativo
-direct-DOM e use chaves semânticas estáveis. A mesma chave deve identificar uma linha antes e depois de uma reordenação imutável ou de um reparenting de árvore:
+direto-DOM e use chaves semânticas estáveis. A mesma chave deve identificar uma linha antes e depois de uma
+reordenação imutável ou de um reparentamento de árvore:
 
 ```tsx
 import {getColumnAwareRowOverscan} from '@gravity-ui/table';
+```
 
+```tsx
 const rows = table.getRowModel().rows;
 const columnCount = table.getVisibleLeafColumns().length;
 
@@ -653,11 +645,11 @@ const rowVirtualizer = useRowVirtualizer({
 });
 ```
 
-`adaptiveFlushSync` mantém um intervalo montado "aquecido" e preenche de forma síncrona apenas um intervalo visível não coberto. `directDomUpdates` permite que o virtualizador atualize as posições das linhas e o tamanho do corpo sem uma renderização do React para cada notificação de rolagem. Use `position` para linhas de tabela, a menos que transformações sejam necessárias pelo layout circundante. Mantenha `getRowId` e `getItemKey` estáveis e defina `count` a partir do modelo de linha achatado atual após expandir, recolher, reordenar ou reparentar linhas. Um `rangeExtractor` personalizado arbitrário permanece autoritativo e desabilita o planejamento adaptativo da janela.
+`adaptiveFlushSync` mantém um intervalo montado "aquecido" e preenche de forma síncrona apenas um intervalo visível não coberto. `directDomUpdates` permite que o virtualizador atualize as posições das linhas e o tamanho do corpo sem uma renderização do React para cada notificação de rolagem. Use `position` para linhas de tabela, a menos que transformações sejam necessárias pelo layout circundante. Mantenha `getRowId` e `getItemKey` estáveis e defina `count` a partir do modelo de linha achatado atual após expandir, recolher, reordenar ou reparentar linhas. Um `rangeExtractor` personalizado arbitrário permanece autoritativo e desabilita o planejamento adaptativo de janelas.
 
-`getColumnAwareRowOverscan(columnCount, options?)` reduz o overscan de linha base à medida que o número de colunas aumenta. Por padrão, ele divide um orçamento de 240 células pelo número de colunas, arredonda para baixo e limita o resultado a 4–24 linhas. Use `table.getVisibleLeafColumns().length` para excluir colunas ocultas e incluir colunas fixadas. O helper funciona com `useRowVirtualizer` e `useWindowRowVirtualizer`; você ainda pode passar um `overscan` numérico explícito em vez disso.
+`getColumnAwareRowOverscan(columnCount, options?)` reduz o overscan de linha base à medida que o número de colunas aumenta. Por padrão, ele divide um orçamento de 240 células pelo número de colunas, arredonda para baixo e limita o resultado a 4–24 linhas. Use `table.getVisibleLeafColumns().length` para excluir colunas ocultas e incluir colunas fixadas. O auxiliar funciona com `useRowVirtualizer` e `useWindowRowVirtualizer`; você ainda pode passar um `overscan` numérico explícito em vez disso.
 
-Ajuste o orçamento e os limites para o custo de renderização de suas células. Se sua aplicação virtualiza colunas, defina `renderedColumnLimit` para o número máximo de colunas renderizadas por linha, incluindo colunas fixadas; o helper limita a contagem de colunas fornecida a esse valor:
+Ajuste o orçamento e os limites para o custo de renderização de suas células. Se sua aplicação virtualiza colunas, defina `renderedColumnLimit` para o número máximo de colunas renderizadas por linha, incluindo colunas fixadas; o auxiliar limita a contagem de colunas fornecida a esse valor:
 
 ```tsx
 const overscan = getColumnAwareRowOverscan(table.getVisibleLeafColumns().length, {
@@ -668,11 +660,11 @@ const overscan = getColumnAwareRowOverscan(table.getVisibleLeafColumns().length,
 });
 ```
 
-O resultado é um overscan de linha base, não um limite estrito para linhas ou células montadas. Linhas visíveis são renderizadas além do overscan, e a rolagem adaptativa pode estender o intervalo montado. Todas as entradas do helper devem ser inteiros seguros não negativos, e `maxOverscan` deve ser pelo menos `minOverscan`; valores inválidos lançam um `RangeError`. Zero colunas são tratadas como uma para o cálculo.
+O resultado é um overscan de linha base, não um limite estrito para linhas ou células montadas. Linhas visíveis são renderizadas além do overscan, e a rolagem adaptativa pode estender o intervalo montado. Todas as entradas do auxiliar devem ser inteiros seguros não negativos, e `maxOverscan` deve ser pelo menos `minOverscan`; valores inválidos lançam um `RangeError`. Zero colunas são tratadas como uma para o cálculo.
 
-`BaseTable.canDeferOffscreenCellContent` é uma opção adicional para tabelas adaptativas muito largas. Retorne `true` apenas para conteúdo de célula passivo cuja montagem atrasada não possa alterar a geometria, o foco, a acessibilidade ou o estado da aplicação. Linhas personalizadas, linhas de grupo, células fixadas e conteúdo interativo ou com efeitos colaterais devem permanecer "eager".
+`BaseTable.canDeferOffscreenCellContent` é uma opção adicional para tabelas adaptativas muito largas. Retorne `true` apenas para conteúdo de célula passivo cuja montagem atrasada não possa alterar a geometria, o foco, a acessibilidade ou o estado da aplicação. Linhas personalizadas, linhas de grupo, células fixadas e conteúdo interativo ou com efeitos colaterais devem permanecer "eager" (imediatos).
 
-Com o extrator de intervalo adaptativo padrão, `BaseTable` fixa a linha ativa sendo arrastada automaticamente. Um extrator de intervalo personalizado é responsável por reter essa linha. Se você usar reordenação com um virtualizador não adaptativo, mantenha o mesmo contrato semântico `getItemKey` e passe a opção `rangeExtractor`:
+Com o extrator de intervalo adaptativo padrão, `BaseTable` fixa a linha arrastada ativa automaticamente. Um extrator de intervalo personalizado é responsável por reter essa linha em si. Se você usar reordenação com um virtualizador não adaptativo, mantenha o mesmo contrato semântico `getItemKey` e passe a opção `rangeExtractor`:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -703,13 +695,9 @@ Use se você quiser usar a janela como elemento de rolagem
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const WindowVirtualizationExample = () => {
   const table = useTable({
@@ -734,13 +722,9 @@ const WindowVirtualizationExample = () => {
 #### Redimensionamento
 
 ```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ResizingDemo = () => {
   const table = useTable({
@@ -756,6 +740,8 @@ const ResizingDemo = () => {
 
 #### Configurações de Coluna
 
+Defina `enableReset` como `true` para mostrar o botão Reset do pop-up de configurações (oculto por padrão). Ele restaura a visibilidade e a ordem das colunas do `initialState` da tabela. Reset altera o rascunho do pop-up; pressione Aplicar para salvar. Sem um `initialState`, Reset mostra todas as colunas em sua ordem de definição. O callback opcional `onSettingsReset` recebe essa visibilidade e ordem de coluna restauradas quando Reset é clicado, antes que o rascunho seja aplicado.
+
 ```tsx
 const columns: ColumnDef<Person>[] = [
   // ...outras colunas
@@ -763,24 +749,20 @@ const columns: ColumnDef<Person>[] = [
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // Opcional. Permite ocultar esta coluna do popover de configurações
+      hideInSettings: false, // Opcional. Permite ocultar esta coluna das configurações do popover
       titleInSettings: 'ReactNode', // Opcional. Substitui o campo header para o popover de configurações (se você precisar de conteúdo diferente para o header e o popover de configurações)
     },
   }, // ou você pode usar a função getSettingsColumn
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // para controle externo e estado inicial
     column_id: false, // para ocultar por padrão
   });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* ids das colunas leaf */
-  ]); // para controle externo e estado inicial
+  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([/* ids das colunas leaf */]); // para controle externo e estado inicial
 
   // Variante alternativa para obter estado, callbacks e definir callbacks de aplicação de configuração - usando o hook useTableSettings:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
@@ -800,7 +782,7 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Saiba mais sobre as propriedades de redimensionamento de tabela e coluna na [documentação](https://tanstack.com/table/v8/docs/api/features/column-sizing) do react-table.
+Saiba mais sobre a tabela e as propriedades de redimensionamento de colunas na [documentação](https://tanstack.com/table/v8/docs/api/features/column-sizing) do react-table.
 
 ## Problemas Conhecidos e Compatibilidade
 
@@ -810,7 +792,13 @@ Saiba mais sobre as propriedades de redimensionamento de tabela e coluna na [doc
 
 **Solução:**
 
-Se você estiver usando o React 19 com o React Compiler e estiver enfrentando problemas com a re-renderização da tabela, você pode usar a diretiva `'use no memo'` no código do seu componente:
+Se você estiver usando o React 19 com o React Compiler e estiver enfrentando problemas com a renderização da tabela, você pode usar a diretiva `'use no memo'` no código do seu componente:
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+```
 
 ```tsx
 import React from 'react';
@@ -826,12 +814,12 @@ function MyTable() {
     data,
     columns,
   });
+
+  return <Table table={table} />;
+}
 ```
 
-```markdown
-# @gravity-ui/table
-
-## Solução Alternativa
+**Solução Alternativa:**
 
 Você também pode memoizar explicitamente a instância da tabela ou os dados para garantir re-renderizações adequadas:
 
@@ -863,29 +851,28 @@ Distribuído sob a Licença MIT. Veja [LICENSE](LICENSE) para detalhes.
 
 ## Para agentes de IA
 
-Uma grade de dados headless, alimentada por TanStack Table, para aplicativos Gravity UI — use-a para tabelas classificáveis, selecionáveis, agrupáveis, reordenáveis e virtualizadas em vez de compor marcação bruta sobre a `Table` básica do uikit.
+Uma grade de dados headless, alimentada por TanStack-Table, para aplicativos Gravity UI — utilize-a para tabelas classificáveis, selecionáveis, agrupáveis, reordenáveis e virtualizadas em vez de compor marcação bruta sobre o `Table` básico do uikit.
 
 ### Quando usar
 
 - Grandes conjuntos de dados que precisam de virtualização de linha ou janela (`useRowVirtualizer`, `useWindowRowVirtualizer`).
 - Classificação de colunas, redimensionamento, reordenação (`ColumnReorderingProvider`), fixação e configurações de coluna por usuário (`TableSettings`).
-- Seleção de linha (única/múltipla, intervalo) e linhas de árvore/agrupadas com células expansíveis.
+- Seleção de linha (única/múltipla, em intervalo) e linhas de árvore/agrupadas com células expansíveis.
 
 ### Quando não usar
 
-- Uma tabela simples e estática com algumas linhas e sem recursos avançados — a `Table` integrada do uikit de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) é mais leve.
+- Uma tabela simples e estática com algumas linhas e sem recursos avançados — o `Table` legado de [`@gravity-ui/uikit/legacy`](https://github.com/gravity-ui/uikit) é mais leve.
 - Uma lista não tabular — use `List` de [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Edição de células em linha no estilo de planilha — esta grade é focada em leitura/exibição, não em uma planilha editável.
+- Edição de células inline no estilo planilha — esta grade é focada em leitura/exibição, não em uma planilha editável.
 
 ### Armadilhas comuns
 
-- **Você constrói a tabela com `useTable`, depois renderiza `<Table table={table} />`.** A propriedade principal é `table` (a instância), não `data`/`columns` diretamente em `<Table>`; passe `data` e `columns` para `useTable`.
+- **Você constrói a tabela com `useTable`, depois renderiza `<Table table={table} />`.** A prop principal é `table` (a instância), não `data`/`columns` diretamente em `<Table>`; passe `data` e `columns` para `useTable`.
 - **Os tipos vêm do subcaminho `@gravity-ui/table/tanstack`.** Importe `ColumnDef`, `RowSelectionState`, `SortingState`, etc. de `@gravity-ui/table/tanstack`, não da raiz do pacote.
 - **A classificação precisa de um acessador.** Uma coluna deve ter `accessorKey`/`accessorFn` para que a classificação funcione; defina `enableSorting` e forneça `getRowId`.
 - **React 19 + React Compiler pode pular re-renderizações.** Este é um problema upstream da TanStack Table — adicione a diretiva `'use no memo'` ao componente ou memoize `data`.
-- **A seleção de intervalo falha com linhas aninhadas.** A seleção de intervalo é um comportamento indefinido quando a tabela tem linhas agrupadas/aninhadas; use `useRowSelectionFixedHandler` para o estado correto da caixa de seleção pai com agrupamento.
+- **A seleção em intervalo falha com linhas aninhadas.** A seleção em intervalo é um comportamento indefinido quando a tabela tem linhas agrupadas/aninhadas; use `useRowSelectionFixedHandler` para o estado correto da caixa de seleção pai com agrupamento.
 
 ## Documentação para agentes de IA
 
 A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/table/build/docs/INDEX.md`.
-```
