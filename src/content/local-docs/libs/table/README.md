@@ -57,9 +57,7 @@ const columns: ColumnDef<Person>[] = [
   // ...other columns
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowSelectionExample = () => {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
@@ -144,9 +142,7 @@ const columns: ColumnDef<Person>[] = [
   // ...other columns
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowRangedSelectionExample = () => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
@@ -219,13 +215,9 @@ Learn about the column properties in the react-table [docs](https://tanstack.com
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -356,9 +348,7 @@ const columns: ColumnDef<Person>[] = [
   // ...other columns
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ReorderingExample = () => {
   const table = useTable({
@@ -601,13 +591,9 @@ Use if you want to use grid container as the scroll element (if you want to use 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const VirtualizationExample = () => {
   const table = useTable({
@@ -730,13 +716,9 @@ Use if you want to use window as the scroll element
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const WindowVirtualizationExample = () => {
   const table = useTable({
@@ -761,13 +743,9 @@ const WindowVirtualizationExample = () => {
 #### Resizing
 
 ```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ResizingDemo = () => {
   const table = useTable({
@@ -803,18 +781,14 @@ const columns: ColumnDef<Person>[] = [
   }, // or you can use function getSettingsColumn
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // for outside control and initial state
     column_id: false, // for hidding by default
   });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* leaf columns ids */
-  ]); // for outside control and initial state
+  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([/* leaf columns ids */]); // for outside control and initial state
 
   // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
@@ -907,7 +881,7 @@ A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for i
 
 ### When not to use
 
-- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A simple, static table with a handful of rows and no advanced features — the legacy `Table` from [`@gravity-ui/uikit/legacy`](https://github.com/gravity-ui/uikit) is lighter.
 - A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
 
