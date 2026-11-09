@@ -4,6 +4,12 @@
 
 一个用于渲染仪表盘网格的库。
 
+可选的 `@gravity-ui/uikit/gridstack` 入口点导出了 `DashKitGridStack`，用于支持基于 GridStack 12.6.0 的扁平化和嵌套式保存布局。它与 DashKit 共享插件注册、受控更新、ref、就绪状态和自动高度功能。原生拖拽支持区域和容器之间的转移，包括整个容器的子树。外部调色板拖放预览并应用整个文档，包括被置换的容器。有关支持的 API、[嵌套文档格式](docs/gridstack.md#nested-document-format) 和调色板拖放载荷，请参阅 [GridStack 文档](docs/gridstack.md)。
+
+`DashKitGridStack` 会在渲染前和静态编辑前验证配置。无效的几何形状、重复的 widget/selector ID、孤立的布局条目和嵌套文档会抛出 `DashKitGridStack:` 错误；宿主应验证保存的文档或使用错误边界。没有布局条目的项将保持未挂载状态。受控布局使用配置的紧凑模式；将 `compactType: null` 设置为保留间隙。
+
+两个渲染器都会将已确认的移动/调整大小的几何形状传递给插件 props 和布局上下文。旧版 `DashKit` 在活动拖拽期间会消耗确认信息，并在手势结束时不会重放旧的几何形状。
+
 ## 安装
 
 ```bash
@@ -12,14 +18,14 @@ npm i @gravity-ui/dashkit @gravity-ui/uikit
 
 ## 描述
 
-该库用于在网格中排列小部件、调整它们的大小、添加新小部件以及删除它们。
-小部件是一个 React 组件。例如，文本、图形和图像。
+该库用于将 widget 排列在网格中，调整它们的大小，添加新的 widget，以及删除它们。
+widget 是一个 React 组件。例如，文本、图形和图像。
 
-新小部件通过插件系统添加。
+新 widget 通过插件系统添加。
 
 ### 插件
 
-插件是创建自定义小部件所必需的。
+插件是创建自定义 widget 所必需的。
 
 ### Props
 
@@ -70,30 +76,30 @@ interface DashKitProps {
 
 - **config**: [配置](#Config)。
 - **editMode**: 是否启用编辑模式。
-- **onItemEdit**: 点击编辑小部件时调用。
-- **onChange**: 配置或 [itemsStateAndParams](#itemsStateAndParams) 更改时调用。
-- **onDrop**: 使用 (#DashKitDnDWrapper) 从 ActionPanel 拖放项目时调用。
-- **onItemMountChange**: 项目挂载状态更改时调用。
-- **onItemRender**: 项目渲染完成时调用。
-- **defaultGlobalParams**, **globalParams**: 影响所有小部件的[参数](#Params)。在 DataLens 中，`defaultGlobalParams` 是在仪表盘设置中设置的全局参数。`globalParams` 是可以在 URL 中设置的全局参数。
+- **onItemEdit**: 点击编辑 widget 时调用。
+- **onChange**: 当 config 或 [itemsStateAndParams](#itemsStateAndParams) 更改时调用。
+- **onDrop**: 当 item 从 ActionPanel 使用 (#DashKitDnDWrapper) 拖放时调用。
+- **onItemMountChange**: 当 item 的挂载状态改变时调用。
+- **onItemRender**: 当 item 渲染完成时调用。
+- **defaultGlobalParams**, **globalParams**: 影响所有 widget 的[参数](#Params)。在 DataLens 中，`defaultGlobalParams` 是在仪表盘设置中设置的全局参数。`globalParams` 是可以在 URL 中设置的全局参数。
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams)。
-- **settings**: DashKit 设置。可选的 `isolateItemUpdates: true` 会抑制仅由其他小部件布局更改引起的可渲染器更新。自身数据、状态、参数、几何形状、设置、上下文和回调仍然会更新；默认情况下，可渲染器会进行完整的布局更新。在渲染器之间进行 `settings` 和 `context` 的记忆化：即使启用了隔离，新的对象引用也会触发可渲染器更新。启用隔离后，通过 `layout` 读取同级几何形状的插件可能会观察到过时的同级值。
-- **context**: 将被传递给所有小部件的对象。
-- **overlayControls**: 在编辑时覆盖小部件控件的对象。如果未传递，将显示基本控件。如果传递 `null`，则仅显示关闭按钮或自定义菜单。
+- **settings**: DashKit 设置。可选的 `isolateItemUpdates: true` 会抑制仅由其他 widget 的布局更改引起的渲染器更新。自身的 data、state、params、geometry、settings、context 和 callbacks 仍然会更新；默认情况下会保持完整的布局渲染器更新。在渲染之间对 `settings` 和 `context` 进行 memoization：即使启用了隔离，新的对象引用也会触发渲染器更新。启用隔离后，通过 `layout` 读取同级几何形状的插件可能会观察到过时的同级值。
+- **context**: 将被传递给所有 widget 的对象。
+- **overlayControls**: 在编辑时覆盖 widget 控件的对象。如果未传递，将显示基本控件。如果传递 `null`，则仅显示关闭按钮或自定义菜单。
 - **overlayMenuItems**: 自定义下拉菜单项。
-- **noOverlay**: 如果为 `true`，则在编辑时不会显示覆盖层和控件。
-- **focusable**: 如果为 `true`，则网格项将可聚焦。
-- **onItemFocus**: 当 `focusable` 为 true 且项目获得焦点时调用。
-- **onItemBlur**: 当 `focusable` 为 true 且项目失去焦点时调用。
-- **draggableHandleClassName**: 使小部件可拖动的元素的 CSS 类名。
-- **onDragStart**: ReactGridLayout 在项目拖动开始时调用。
-- **onDrag**: ReactGridLayout 在项目拖动过程中调用。
-- **onDragStop**: ReactGridLayout 在项目拖动停止时调用。
-- **onResizeStart**: ReactGridLayout 在项目调整大小开始时调用。
-- **onResize**: ReactGridLayout 在项目调整大小过程中调用。
-- **onResizeStop**: ReactGridLayout 在项目调整大小停止时调用。
-- **getPreparedCopyItemOptions**: 在保存到本地存储之前，用于将复制的项目转换为可序列化对象时调用。它应该替代已弃用的 `context.getPreparedCopyItemOptions` prop。
-- **onCopyFulfill**: 在项目复制成功完成时（`error=null` 且 `data` 已定义）调用，否则以 `error: Error` 而不带 `data` 调用。
+- **noOverlay**: 如果为 `true`，在编辑时不会显示覆盖层和控件。
+- **focusable**: 如果为 `true`，网格项将可聚焦。
+- **onItemFocus**: 当 `focusable` 为 true 且 item 获得焦点时调用。
+- **onItemBlur**: 当 `focusable` 为 true 且 item 失去焦点时调用。
+- **draggableHandleClassName**: 使 widget 可拖动的元素的 CSS 类名。
+- **onDragStart**: ReactGridLayout 在 item 开始拖拽时调用。
+- **onDrag**: ReactGridLayout 在 item 拖拽过程中调用。
+- **onDragStop**: ReactGridLayout 在 item 拖拽停止时调用。
+- **onResizeStart**: ReactGridLayout 在 item 开始调整大小时调用。
+- **onResize**: ReactGridLayout 在 item 调整大小时调用。
+- **onResizeStop**: ReactGridLayout 在 item 调整大小停止时调用。
+- **getPreparedCopyItemOptions**: 在保存到本地存储之前，用于将复制的 item 转换为可序列化对象的调用。它应该替代已弃用的 `context.getPreparedCopyItemOptions` prop。
+- **onCopyFulfill**: 当 item 复制完成时调用，成功操作时 `error=null` 和 `data` 已定义，否则为 `error: Error` 且没有 `data`。
 
 ## 用法
 
@@ -111,7 +117,7 @@ interface DashKitProps {
 
 - DashKit.setSettings
 
-  用于全局 DashKit 设置（例如小部件之间的边距、默认小部件大小和小部件覆盖菜单）。
+  用于全局 DashKit 设置（例如 widget 之间的边距、默认 widget 大小和 widget 覆盖菜单）。
 
   ```js
   import {DashKit} from '@gravity-ui/dashkit';
@@ -139,7 +145,9 @@ interface DashKitProps {
       },
     }),
   );
+  ```
 
+```typescript
   DashKit.registerPlugins({
     type: 'custom',
     defaultLayout: {
@@ -156,12 +164,12 @@ interface DashKitProps {
 
 ```ts
 export interface Config {
-  salt: string; // 用于形成唯一 ID
-  counter: number; // 用于形成唯一 ID，仅递增
-  items: ConfigItem[]; // 初始小部件状态
-  layout: ConfigLayout[]; // 网格上的小部件位置 https://github.com/react-grid-layout
-  aliases: ConfigAliases; // 参数的别名，参见 #Params
-  connections: ConfigConnection[]; // 小部件之间的链接，参见 #Params
+  salt: string; // 用于生成唯一 ID
+  counter: number; // 用于生成唯一 ID，仅递增
+  items: ConfigItem[]; //  初始 widget 状态
+  layout: ConfigLayout[]; // widget 在网格上的位置 https://github.com/react-grid-layout
+  aliases: ConfigAliases; // 参数别名，参见 #Params
+  connections: ConfigConnection[]; // widget 之间的链接，参见 #Params
 }
 ```
 
@@ -169,9 +177,7 @@ Config 示例：
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
-```
 
-```ts
 const config: DashKitProps['config'] = {
   salt: '0.46703554571365613',
   counter: 4,
@@ -250,7 +256,7 @@ const config: DashKitProps['config'] = {
 };
 ```
 
-向配置中添加新项：
+向 config 添加新项：
 
 ```ts
 const newLayout = updateLayout: [
@@ -277,7 +283,7 @@ const newConfig = DashKit.setItem({
     },
     namespace: 'default',
     type: 'text',
-    // 可选。如果需要将新项插入到当前布局中，并预定义尺寸
+    // 可选。如果需要插入具有预定义尺寸的新项
     layout: { // 当前项插入到 'Ea' 之前
       h: 6,
       w: 12,
@@ -287,13 +293,13 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // 可选。当新元素从 ActionPanel 拖放时，现有项的新布局值
+    // 可选。当从 ActionPanel 拖放新元素时，现有项的新布局值
     updateLayout: newLayout,
   },
 });
 ```
 
-更改配置中的现有项：
+更改 config 中的现有项：
 
 ```ts
 const newConfig = DashKit.setItem({
@@ -310,7 +316,7 @@ const newConfig = DashKit.setItem({
 });
 ```
 
-从配置中删除一项：
+从 config 中删除项：
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
@@ -330,19 +336,19 @@ const {config: newConfig, itemsStateAndParams} = DashKit.removeItem({
 type Params = Record<string, string | string[]>;
 ```
 
-`DashKit` 根据小部件、链接和别名的默认参数生成参数。这些参数是 [ChartKit](https://github.com/gravity-ui/chartkit) 库所必需的。
+`DashKit` 根据 widget、链接和别名的默认参数生成参数。这些参数是 [ChartKit](https://github.com/gravity-ui/chartkit) 库所必需的。
 
 生成顺序：
 
 1. `defaultGlobalParams`
-2. 默认小部件参数 `item.default`
+2. 默认 widget 参数 `item.default`
 3. `globalParams`
 4. 根据队列从 [itemsStateAndParams](#itemsStateAndParams) 中获取的参数。
 
 ### itemsStateAndParams
 
-存储小部件参数和状态以及参数更改队列的对象。
-它有一个 `__meta__` 字段，用于存储队列和元信息。
+存储 widget 参数和状态以及参数更改队列的对象。
+它有一个 `__meta__` 字段用于存储队列和元信息。
 
 ```ts
 interface StateAndParamsMeta = {
@@ -353,7 +359,7 @@ interface StateAndParamsMeta = {
 }
 ```
 
-以及小部件状态和参数：
+以及 widget 状态和参数：
 
 ```ts
 interface ItemsStateAndParamsBase {
@@ -370,11 +376,11 @@ type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 
 ### 实验性 DashKit 事件
 
-> 实验性：此 API 在次要版本中可能会发生更改。
+> 实验性：此 API 可能在次要版本中发生更改。
 
-`DashKit` 公开了一个实验性的实例事件 API。使用组件 ref 并通过 `dashkitRef.current?.on(eventName, handler)` 进行订阅。该方法返回一个取消订阅的回调函数。
+`DashKit` 公开了实验性的实例事件 API。使用组件 ref 并通过 `dashkitRef.current?.on(eventName, handler)` 进行订阅。该方法返回一个取消订阅的回调。
 
-支持的第一个事件是 `change`。当布局发生更改时，在调用 `onChange` 之前会发出此事件。处理程序可以读取完整的下一个和上一个布局，读取布局补丁，或调用 `preventDefault()` 来阻止默认的 `onChange` 调用。
+支持的第一个事件是 `change`。当布局发生更改时会发出此事件，在调用 `onChange` 之前。处理程序可以读取完整的下一个和上一个布局，读取布局补丁，或调用 `preventDefault()` 来阻止默认的 `onChange` 调用。
 
 ```tsx
 import React from 'react';
@@ -383,6 +389,12 @@ import type {DashKitChangeEvent} from '@gravity-ui/dashkit';
 
 function Dashboard() {
   const dashkitRef = React.useRef<DashKit>(null);
+```
+
+```tsx
+function Dashboard() {
+  const [config, setConfig] = useState(initialConfig);
+  const dashkitRef = useRef<DashKit>(null);
 
   React.useEffect(() => {
     const unsubscribe = dashkitRef.current?.on('change', (event: DashKitChangeEvent) => {
@@ -415,7 +427,7 @@ type DashKitChangeEvent = {
 
 #### 事件驱动的布局更新
 
-如果您在 `change` 事件处理程序中使用 `preventDefault()`，现在您可以处理布局更新而无需重新初始化 `config` prop。DashKit 会维护一个内部基线并逐步计算补丁：
+如果您在 `change` 事件处理程序中使用 `preventDefault()`，现在可以处理布局更新，而无需重新初始化 `config` prop。DashKit 维护一个内部基线并增量计算补丁：
 
 ```tsx
 function Dashboard() {
@@ -424,13 +436,13 @@ function Dashboard() {
 
   useEffect(() => {
     const unsubscribe = dashkitRef.current?.on('change', (event) => {
-      event.preventDefault(); // 不要调用 onChange
+      event.preventDefault(); // 不调用 onChange
 
       // 只将增量补丁发送到您的后端
       sendPatches(event.patches);
 
       // 无需调用 setConfig({ ...config, layout: event.layout })
-      // DashKit 会在内部维护视觉状态
+      // DashKit 在内部维护视觉状态
     });
 
     return unsubscribe;
@@ -440,20 +452,20 @@ function Dashboard() {
 }
 ```
 
-**重要提示：** 如果您之后从 props 更新 `config.layout`（例如，从服务器同步），DashKit 会重置其内部基线以匹配新的 prop。这确保了与事件驱动和受控工作流的兼容性。
+**重要提示：** 如果您之后从 props 更新 `config.layout`（例如，从服务器同步），DashKit 将重置其内部基线以匹配新的 prop。这确保了对事件驱动和受控工作流的兼容性。
 
 ### 菜单
 
-您可以在编辑模式下为 DashKit 指定自定义小部件覆盖菜单
+您可以在编辑模式下指定自定义 DashKit 小部件覆盖菜单
 
 ```ts
 type MenuItem = {
   id: string; // 唯一 ID
   title?: string; // 字符串标题
   icon?: ReactNode; // 图标节点
-  iconSize?: number | string; // 图标大小，以像素为单位（数字）或带单位的字符串
-  handler?: (item: ConfigItem) => void; // 自定义菜单项操作处理程序
-  visible?: (item: ConfigItem) => boolean; // 可选的可见性处理程序，用于过滤菜单项
+  iconSize?: number | string; // 图标大小，以像素为单位的数字或带单位的字符串
+  handler?: (item: ConfigItem) => void; // 自定义项目操作处理程序
+  visible?: (item: ConfigItem) => boolean; // 用于过滤菜单项的可选可见性处理程序
   className?: string; // 自定义类属性
 };
 
@@ -479,9 +491,9 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string; // 可选的自定义拖动图像。默认情况下，会显示被拖动的 ActionPanel 项目作为预览。
+  dragImageSrc?: string; // 可选的自定义拖动图像。默认情况下，会显示拖动的 ActionPanel 项目作为预览。
   onDragStart?: (dragProps: ItemDragProps) => void; // 当元素从 ActionPanel 拖动时调用的回调
-  onDragEnd?: () => void; // 当元素被放置或拖动取消时调用的回调
+  onDragEnd?: () => void; // 元素放置或拖动取消时调用的回调
   onDropDragOver?: (
     draggedItem: DraggedOverItem,
     sharedItem: DraggedOverItem | null,
@@ -489,9 +501,9 @@ interface DashKitDnDWrapperProps {
 }
 ```
 
-- **dragImageSrc**: 可选的自定义拖动图像。默认情况下，被拖动的 ActionPanel 项目会显示为预览。
+- **dragImageSrc**: 可选的自定义拖动图像。默认情况下，拖动的 ActionPanel 项目会显示为预览。
 - **onDragStart**: 当元素从 ActionPanel 拖动时调用的回调。
-- **onDragEnd**: 当元素被放置或拖动取消时调用的回调。
+- **onDragEnd**: 元素放置或拖动取消时调用的回调。
 
 ```ts
 type ItemDragProps = {
@@ -507,7 +519,7 @@ type ItemDragProps = {
 
 ```ts
 type ItemDropProps = {
-  commit: () => void; // 在完成所有配置操作后应调用此回调
+  commit: () => void; // 在所有配置操作完成后应调用此回调
   dragProps: ItemDragProps; // 项目拖动属性
   itemLayout: ConfigLayout; // 计算出的项目布局尺寸
   newLayout: ConfigLayout[]; // 放置元素后的新布局
@@ -542,29 +554,29 @@ const onDrop = (dropProps: ItemDropProps) => {
 
 ### CSS API
 
-| 名称                                           | 描述           |
-| :--------------------------------------------- | :------------- |
-| Action panel 变量                              |                |
-| `--dashkit-action-panel-color`                 | 背景颜色       |
-| `--dashkit-action-panel-border-color`          | 边框颜色       |
-| `--dashkit-action-panel-border-radius`         | 边框半径       |
-| Action panel 项目变量                          |                |
-| `--dashkit-action-panel-item-color`            | 背景颜色       |
-| `--dashkit-action-panel-item-text-color`       | 文本颜色       |
-| `--dashkit-action-panel-item-color-hover`      | 悬停背景颜色   |
-| `--dashkit-action-panel-item-color-dragging`   | 拖动背景颜色   |
-| `--dashkit-action-panel-item-text-color-hover` | 悬停文本颜色   |
-| `--dashkit-action-panel-item-text-color-dragging` | 拖动文本颜色 |
-| Overlay 变量                                   |                |
-| `--dashkit-overlay-border-color`               | 边框颜色       |
-| `--dashkit-overlay-color`                      | 背景颜色       |
-| `--dashkit-overlay-opacity`                    | 不透明度       |
-| Grid item 变量                                 |                |
-| `--dashkit-grid-item-edit-opacity`             | 不透明度       |
-| `--dashkit-grid-item-border-radius`            | 边框半径       |
-| Placeholder 变量                               |                |
-| `--dashkit-placeholder-color`                  | 背景颜色       |
-| `--dashkit-placeholder-opacity`                | 不透明度       |
+| Name                                           | Description           |
+| :--------------------------------------------- | :-------------------- |
+| Action panel variables                         |                       |
+| `--dashkit-action-panel-color`                 | 背景色                |
+| `--dashkit-action-panel-border-color`          | 边框颜色              |
+| `--dashkit-action-panel-border-radius`         | 边框圆角              |
+| Action panel item variables                    |                       |
+| `--dashkit-action-panel-item-color`            | 背景色                |
+| `--dashkit-action-panel-item-text-color`       | 文字颜色              |
+| `--dashkit-action-panel-item-color-hover`      | 悬停背景色            |
+| `--dashkit-action-panel-item-color-dragging`   | 拖拽背景色            |
+| `--dashkit-action-panel-item-text-color-hover` | 悬停文字颜色          |
+| `--dashkit-action-panel-item-text-color-dragging` | 拖拽文字颜色        |
+| Overlay variables                              |                       |
+| `--dashkit-overlay-border-color`               | 边框颜色              |
+| `--dashkit-overlay-color`                      | 背景色                |
+| `--dashkit-overlay-opacity`                    | 透明度                |
+| Grid item variables                            |                       |
+| `--dashkit-grid-item-edit-opacity`             | 透明度                |
+| `--dashkit-grid-item-border-radius`            | 边框圆角              |
+| Placeholder variables                          |                       |
+| `--dashkit-placeholder-color`                  | 背景色                |
+| `--dashkit-placeholder-opacity`                | 透明度                |
 
 #### 使用示例
 
@@ -606,9 +618,9 @@ const CustomThemeWrapper = (props: {
 - 构建 Storybook `npm run start`
 
 默认情况下，Storybook 运行在 `http://localhost:7120/`。
-当 Storybook 运行时，项目中的新更改不一定会被立即拾取，因此最好手动重新构建项目并重启 Storybook。
+当 Storybook 运行时，项目中的新更改不一定会被捕获，因此最好手动重新构建项目并重启 Storybook。
 
-### 开发机器上 Nginx 配置示例
+### 开发环境下 Nginx 配置示例
 
 ```bash
 server {
@@ -635,34 +647,34 @@ server {
 }
 ```
 
-## 许可证
+## 许可
 
-根据 MIT 许可证分发。详情请参阅 [LICENSE](LICENSE)。
+MIT 协议下分发。详情请参阅 [LICENSE](LICENSE)。
 
 ## 致 AI 代理
 
-一个仪表盘网格组合器，通过插件系统以响应式网格排列可调整大小、可拖动的组件 — 当您构建用户可编辑的仪表盘（添加/移动/调整大小/删除组件）时，请使用它，而不是手动放置单个图表或面板。
+一个仪表盘网格编辑器，通过插件系统实现可调整大小、可拖动的组件在响应式网格中的排列——当您需要构建一个用户可编辑的仪表盘（添加/移动/调整大小/删除组件）时，请使用它，而不是手动放置单个图表或面板。
 
 ### 何时使用
 
-- 渲染可配置的仪表盘，其中组件在网格上定位、调整大小和重新排列（基于 `react-grid-layout` 构建）。
-- 用户可编辑的布局：从操作面板添加/删除组件，拖放，带有覆盖控件的编辑模式。
-- 基于插件的组件，其中每种组件类型（标题、文本、图表、自定义）仅注册一次，并由 `config` 驱动。
+- 渲染可配置的仪表盘，其中组件在网格上进行定位、调整大小和重新排列（基于 `react-grid-layout` 构建）。
+- 用户可编辑的布局：从操作面板添加/删除组件、拖放、带有覆盖控件的编辑模式。
+- 基于插件的组件，每种组件类型（标题、文本、图表、自定义）仅注册一次，并由 `config` 驱动。
 
-### 何时**不**使用
+### 何时避免使用
 
-- 对于单个、固定的图表或面板，请直接使用 [`@gravity-ui/charts`](https://gravity-ui.com/charts) 或 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) — 对于单个组件，网格/插件机制是额外的开销。
-- 对于非仪表盘组件的通用响应式网格，请直接使用 `react-grid-layout`。
+- 对于单个、固定的图表或面板，请直接使用 [`@gravity-ui/charts`](https://gravity-ui.com/charts) 或 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit)——对于单个组件来说，网格/插件机制是额外的开销。
+- 对于一个通用的响应式网格，但不是组件仪表盘，请直接使用 `react-grid-layout`。
 - 对于在 DashKit 仪表盘中嵌入基于 ChartKit 的图表组件，DashKit 是外壳；它仍然依赖 [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) 来渲染实际的图表。
 
 ### 常见陷阱
 
-- **组件 `<Dashboard>` 幻觉** — 导出的实际上是 `<DashKit>`（拖放外壳是 `<DashKitDnDWrapper>`，它包装了 `<DashKit>` + `<ActionPanel>`）。
-- **直接修改 `config` 而不是使用辅助函数** — 使用静态的 `DashKit.setItem({...})` / `DashKit.removeItem({...})` 辅助函数来添加/更改/删除项目，以保持布局和 ID 的一致性。
-- **忘记 `DashKit.setSettings` / `DashKit.registerPlugins`** — 组件必须在渲染之前进行配置（语言、网格设置、插件注册），否则组件将不显示任何内容。
-- **混淆两个参数属性** — `defaultGlobalParams`（仪表盘级别的默认值）与 `globalParams`（可被 URL 覆盖的全局参数）；两者都会被 ChartKit 用于参数生成队列。
-- **在实验性的 `change` 处理程序中手动调用 `onChange` 并 `event.preventDefault()`** — 当您在实验性的 `change` 处理程序中 `event.preventDefault()` 时，DashKit 会在内部保留视觉状态；从 props 重新设置 `config.layout` 会重置该基线。
+- **组件 `<Dashboard>` 幻觉** — 实际导出的是 `<DashKit>`（拖放式外壳是 `<DashKitDnDWrapper>`，它包裹了 `<DashKit>` + `<ActionPanel>`）。
+- **直接修改 `config` 而非使用辅助函数** — 请使用静态方法 `DashKit.setItem({...})` / `DashKit.removeItem({...})` 来添加/修改/删除项，以保持布局和 ID 的一致性。
+- **忘记调用 `DashKit.setSettings` / `DashKit.registerPlugins`** — 组件在渲染之前必须进行配置（语言、网格设置、插件注册），否则小部件将显示为空。
+- **混淆两个参数 props** — `defaultGlobalParams`（仪表板级别的默认值）与 `globalParams`（可被 URL 覆盖的全局参数）；两者都会进入 ChartKit 使用的参数生成队列。
+- **在 `change` 事件上手动调用 `onChange`** — 当你在实验性的 `change` 处理程序中调用 `event.preventDefault()` 时，DashKit 会在内部保留视觉状态；从 props 重置 `config.layout` 会重置该基线。
 
-## 致 AI 代理的文档
+## AI 代理文档
 
 已安装版本的代理可读文档位于 `node_modules/@gravity-ui/dashkit/build/docs/INDEX.md`。
