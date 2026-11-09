@@ -2,6 +2,12 @@
 
 Une bibliothèque de rendu de grille de tableaux de bord.
 
+L'entrée optionnelle `@gravity-ui/dashkit/gridstack` exporte `DashKitGridStack` pour les mises en page enregistrées plates et imbriquées utilisant GridStack 12.6.0. Elle partage l'enregistrement des plugins, les mises à jour contrôlées, les refs, la préparation et la hauteur automatique avec DashKit. Le glisser-déposer natif prend en charge les transferts entre les zones et les conteneurs, y compris les sous-arbres de conteneurs entiers. Les dépôts de palettes externes prévisualisent et appliquent le document complet, y compris les conteneurs déplacés. Consultez la [documentation GridStack](docs/gridstack.md) pour l'API prise en charge, le [format de document imbriqué](docs/gridstack.md#nested-document-format) et la charge utile du dépôt de palette.
+
+`DashKitGridStack` valide la configuration avant le rendu et avant les modifications statiques. Une géométrie invalide, des identifiants de widget/sélecteur en double, des entrées de mise en page orphelines et des documents imbriqués génèrent des erreurs `DashKitGridStack:`; les hôtes doivent valider les documents enregistrés ou utiliser une frontière d'erreur. Les éléments sans entrées de mise en page restent non montés. Les mises en page contrôlées utilisent le mode de compaction configuré ; définissez `compactType: null` pour conserver les espaces.
+
+Les deux renderers fournissent également la géométrie de déplacement/redimensionnement reconnue aux props du plugin et au contexte de mise en page. L'ancien `DashKit` consomme les reconnaissances pendant un glisser actif sans rejouer l'ancienne géométrie lorsque ce geste se termine.
+
 ## Installation
 
 ```bash
@@ -75,15 +81,15 @@ interface DashKitProps {
 - **onItemRender**: Appelée lorsque le rendu d'un élément est terminé
 - **defaultGlobalParams**, **globalParams**: [Paramètres](#Params) qui affectent tous les widgets. Dans DataLens, `defaultGlobalParams` sont les paramètres globaux définis dans les paramètres du tableau de bord. `globalParams` sont les paramètres globaux qui peuvent être définis dans l'URL.
 - **itemsStateAndParams**: [itemsStateAndParams](#itemsStateAndParams).
-- **settings**: Paramètres de DashKit. `isolateItemUpdates: true` (optionnel) supprime les mises à jour du rendu causées uniquement par les changements de disposition d'autres widgets. Les données, l'état, les paramètres, la géométrie, les réglages, le contexte et les callbacks propres continuent de se mettre à jour ; par défaut, le rendu complet de la disposition est mis à jour. Mémorisez `settings` et `context` entre les rendus : de nouvelles références d'objets déclenchent des mises à jour du rendu même avec l'isolation activée. Avec l'isolation activée, les plugins lisant la géométrie des frères et sœurs via `layout` peuvent observer des valeurs de frères et sœurs obsolètes.
+- **settings**: Paramètres de DashKit. `isolateItemUpdates: true` (optionnel) supprime les mises à jour du rendu causées uniquement par les changements de mise en page d'autres widgets. Les données, l'état, les paramètres, la géométrie, les réglages, le contexte et les callbacks propres sont toujours mis à jour ; par défaut, le rendu complet de la mise en page est conservé. Mémorisez `settings` et `context` entre les rendus : de nouvelles références d'objets déclenchent des mises à jour du rendu même avec l'isolation activée. Avec l'isolation activée, les plugins qui lisent la géométrie des frères et sœurs via `layout` peuvent observer des valeurs de frères et sœurs obsolètes.
 - **context**: Objet qui sera transmis à tous les widgets.
 - **overlayControls**: Objet qui remplace les contrôles du widget au moment de l'édition. S'il n'est pas transmis, les contrôles de base seront affichés. Si `null` est passé, seul le bouton de fermeture ou un menu personnalisé sera affiché.
 - **overlayMenuItems**: Éléments de menu déroulant personnalisés
 - **noOverlay**: Si `true`, la superposition et les contrôles ne sont pas affichés pendant l'édition.
-- **focusable**: Si `true`, les éléments de la grille seront sélectionnables.
-- **onItemFocus**: Appelée lorsque `focusable` est vrai et que l'élément est sélectionné.
-- **onItemBlur**: Appelée lorsque `focusable` est vrai et que l'élément perd la sélection.
-- **draggableHandleClassName** : Nom de la classe CSS de l'élément qui rend le widget déplaçable.
+- **focusable**: Si `true`, les éléments de la grille seront focalisables.
+- **onItemFocus**: Appelée lorsque `focusable` est vrai et que l'élément est focalisé.
+- **onItemBlur**: Appelée lorsque `focusable` est vrai et que l'élément perd la focalisation.
+- **draggableHandleClassName** : Nom de classe CSS de l'élément qui rend le widget déplaçable.
 - **onDragStart**: Appelée par ReactGridLayout lorsque le déplacement d'un élément commence
 - **onDrag**: Appelée par ReactGridLayout pendant le déplacement d'un élément
 - **onDragStop**: Appelée par ReactGridLayout lorsque le déplacement d'un élément s'arrête
@@ -137,7 +143,9 @@ Avant d'utiliser `DashKit` comme composant React, il doit être configuré.
       },
     }),
   );
+  ```
 
+```tsx
   DashKit.registerPlugins({
     type: 'custom',
     defaultLayout: {
@@ -145,19 +153,19 @@ Avant d'utiliser `DashKit` comme composant React, il doit être configuré.
       h: 8,
     },
     renderer: function CustomPlugin() {
-      return <div>Custom widget with custom controls</div>;
+      return <div>Widget personnalisé avec des contrôles personnalisés</div>;
     },
   });
   ```
 
-### Config
+### Configuration
 
 ```ts
 export interface Config {
-  salt: string; // pour former un ID unique
-  counter: number; // pour former un ID unique, ne fait qu'augmenter
+  salt: string; // pour former un identifiant unique
+  counter: number; // pour former un identifiant unique, ne fait qu'augmenter
   items: ConfigItem[]; // états initiaux des widgets
-  layout: ConfigLayout[]; // position du widget sur la grille https://github.com/react-grid-layout
+  layout: ConfigLayout[]; // position des widgets sur la grille https://github.com/react-grid-layout
   aliases: ConfigAliases; // alias pour les paramètres voir #Params
   connections: ConfigConnection[]; // liens entre les widgets voir #Params
 }
@@ -167,9 +175,7 @@ Exemple de configuration :
 
 ```ts
 import {DashKitProps} from '@gravity-ui/dashkit';
-```
 
-```typescript
 const config: DashKitProps['config'] = {
   salt: '0.46703554571365613',
   counter: 4,
@@ -271,11 +277,11 @@ const newLayout = updateLayout: [
 const newConfig = DashKit.setItem({
   item: {
     data: {
-      text: `Quelques textes`,
+      text: `Quelque texte`,
     },
     namespace: 'default',
     type: 'text',
-    // Optionnel. Si le nouvel élément doit être inséré dans la disposition actuelle avec des dimensions prédéfinies
+    // Optionnel. Si un nouvel élément doit être inséré dans la disposition actuelle avec des dimensions prédéfinies
     layout: { // L'élément actuel est inséré avant 'Ea'
       h: 6,
       w: 12,
@@ -285,7 +291,7 @@ const newConfig = DashKit.setItem({
   },
   config: config,
   options: {
-    // Optionnel. Nouvelles valeurs de disposition pour les éléments existants lorsqu'un nouvel élément est déposé depuis le panneau d'actions
+    // Optionnel. Nouvelles valeurs de disposition pour les éléments existants lorsqu'un nouvel élément est déposé depuis ActionPanel
     updateLayout: newLayout,
   },
 });
@@ -333,13 +339,13 @@ type Params = Record<string, string | string[]>;
 Ordre de génération :
 
 1. `defaultGlobalParams`
-2. Paramètres par défaut du widget `item.default`
+2. Paramètres de widget par défaut `item.default`
 3. `globalParams`
 4. Paramètres de [itemsStateAndParams](#itemsStateAndParams) selon la file d'attente.
 
 ### itemsStateAndParams
 
-Objet qui stocke les paramètres et les états des widgets ainsi qu'une file d'attente de modification des paramètres.
+Objet qui stocke les paramètres et états des widgets ainsi qu'une file d'attente de modifications de paramètres.
 Il possède un champ `__meta__` pour stocker les informations de file d'attente et de métadonnées.
 
 ```ts
@@ -366,11 +372,11 @@ interface ItemsStateAndParamsBase {
 type ItemsStateAndParams = StateAndParamsMeta & ItemsStateAndParamsBase;
 ```
 
-### Événements expérimentaux de DashKit
+### Événements DashKit expérimentaux
 
 > Expérimental : cette API peut changer dans les versions mineures.
 
-`DashKit` expose une API d'événements d'instance expérimentale. Utilisez une référence de composant et abonnez-vous avec `dashkitRef.current?.on(eventName, handler)`. La méthode renvoie une fonction de désabonnement.
+`DashKit` expose une API d'événements d'instance expérimentale. Utilisez une référence de composant et abonnez-vous avec `dashkitRef.current?.on(eventName, handler)`. La méthode renvoie une fonction de rappel de désabonnement.
 
 Le premier événement pris en charge est `change`. Il est émis lorsque la disposition change, avant que `onChange` ne soit appelé. Le gestionnaire peut lire les dispositions complètes suivante et précédente, lire les correctifs de disposition ou appeler `preventDefault()` pour arrêter l'appel `onChange` par défaut.
 
@@ -381,8 +387,10 @@ import type {DashKitChangeEvent} from '@gravity-ui/dashkit';
 
 function Dashboard() {
   const dashkitRef = React.useRef<DashKit>(null);
+```
 
-  React.useEffect(() => {
+```tsx
+React.useEffect(() => {
     const unsubscribe = dashkitRef.current?.on('change', (event: DashKitChangeEvent) => {
       console.log(event.patches);
 
@@ -411,7 +419,7 @@ type DashKitChangeEvent = {
 };
 ```
 
-#### Mises à jour de disposition pilotées par les événements
+#### Mises à jour de la disposition pilotées par les événements
 
 Si vous utilisez `preventDefault()` dans le gestionnaire d'événements `change`, vous pouvez désormais gérer les mises à jour de la disposition sans réinitialiser la prop `config`. DashKit maintient une base de référence interne et calcule les correctifs de manière incrémentielle :
 
@@ -424,7 +432,7 @@ function Dashboard() {
     const unsubscribe = dashkitRef.current?.on('change', (event) => {
       event.preventDefault(); // Ne pas appeler onChange
 
-      // Envoyez uniquement les correctifs incrémentiels à votre backend
+      // Envoyer uniquement les correctifs incrémentiels à votre backend
       sendPatches(event.patches);
 
       // Pas besoin d'appeler setConfig({ ...config, layout: event.layout })
@@ -438,7 +446,7 @@ function Dashboard() {
 }
 ```
 
-**Important :** Si vous mettez à jour `config.layout` ultérieurement à partir des props (par exemple, à partir d'une synchronisation serveur), DashKit réinitialisera sa base de référence interne pour correspondre à la nouvelle prop. Cela garantit la compatibilité avec les flux de travail pilotés par les événements et contrôlés.
+**Important :** Si vous mettez à jour `config.layout` ultérieurement à partir des props (par exemple, lors d'une synchronisation serveur), DashKit réinitialisera sa base de référence interne pour correspondre à la nouvelle prop. Cela garantit la compatibilité avec les flux de travail pilotés par les événements et contrôlés.
 
 ### Menu
 
@@ -446,16 +454,16 @@ Vous pouvez spécifier un menu de superposition de widgets DashKit personnalisé
 
 ```ts
 type MenuItem = {
-  id: string; // id unique
-  title?: string; // titre textuel
-  icon?: ReactNode; // icône sous forme de nœud React
-  iconSize?: number | string; // taille de l'icône en px, en nombre ou en chaîne avec unités
-  handler?: (item: ConfigItem) => void; // gestionnaire d'action personnalisé pour l'élément de menu
-  visible?: (item: ConfigItem) => boolean; // gestionnaire de visibilité optionnel pour filtrer les éléments de menu
+  id: string; // identifiant unique
+  title?: string; // titre de la chaîne
+  icon?: ReactNode; // icône du nœud
+  iconSize?: number | string; // taille de l'icône en px sous forme de nombre ou de chaîne avec unités
+  handler?: (item: ConfigItem) => void; // gestionnaire d'action personnalisé de l'élément
+  visible?: (item: ConfigItem) => boolean; // gestionnaire de visibilité optionnel pour filtrer les éléments du menu
   className?: string; // propriété de classe personnalisée
 };
 
-// utilisez un tableau d'éléments de menu dans les paramètres
+// utiliser un tableau d'éléments de menu dans les paramètres
 <Dashkit overlayMenuItems={[] as Array<MenuItem> | null} />
 
 [déprécié]
@@ -477,19 +485,19 @@ type DraggedOverItem = {
 };
 
 interface DashKitDnDWrapperProps {
-  dragImageSrc?: string; // Source d'image personnalisée pour le glisser-déposer (optionnel)
-  onDragStart?: (dragProps: ItemDragProps) => void; // Callback appelé au début du glisser-déposer
-  onDragEnd?: () => void; // Callback appelé à la fin du glisser-déposer
+  dragImageSrc?: string;
+  onDragStart?: (dragProps: ItemDragProps) => void;
+  onDragEnd?: () => void;
   onDropDragOver?: (
     draggedItem: DraggedOverItem,
     sharedItem: DraggedOverItem | null,
-  ) => void | boolean; // Callback appelé lors du survol d'un élément pendant le glisser-déposer
+  ) => void | boolean;
 }
 ```
 
 - **dragImageSrc** : Image de glisser-déposer personnalisée optionnelle. Par défaut, l'élément ActionPanel déplacé est affiché comme aperçu.
-- **onDragStart** : Callback appelé lorsqu'un élément est déplacé depuis ActionPanel.
-- **onDragEnd** : Callback appelé lorsqu'un élément est déposé ou que le glisser-déposer est annulé.
+- **onDragStart** : Rappel appelé lorsqu'un élément est déplacé depuis ActionPanel.
+- **onDragEnd** : Rappel appelé lorsqu'un élément est déposé ou que le glisser-déposer est annulé.
 
 ```ts
 type ItemDragProps = {
@@ -505,9 +513,9 @@ type ItemDragProps = {
 
 ```ts
 type ItemDropProps = {
-  commit: () => void; // Callback à appeler après toutes les opérations de configuration effectuées
-  dragProps: ItemDragProps; // Props de glisser-déposer de l'élément
-  itemLayout: ConfigLayout; // Dimensions calculées de la disposition de l'élément
+  commit: () => void; // Le rappel doit être appelé après toutes les opérations de configuration effectuées
+  dragProps: ItemDragProps; // Propriétés de glisser-déposer de l'élément
+  itemLayout: ConfigLayout; // Dimensions de l'élément calculées
   newLayout: ConfigLayout[]; // Nouvelle disposition après le dépôt de l'élément
 };
 ```
@@ -519,7 +527,7 @@ const overlayMenuItems = [
   {
     id: 'chart',
     icon: <Icon data={ChartColumn} />,
-    title: 'Graphique',
+    title: 'Chart',
     qa: 'chart',
     dragProps: { // ItemDragProps
         type: 'custom', // Type de plugin enregistré
@@ -528,7 +536,7 @@ const overlayMenuItems = [
 ]
 
 const onDrop = (dropProps: ItemDropProps) => {
-  // ... ajoutez l'élément à votre configuration
+  // ... ajouter l'élément à votre configuration
   dropProps.commit();
 }
 
@@ -543,25 +551,25 @@ const onDrop = (dropProps: ItemDropProps) => {
 | Nom                                           | Description           |
 | :--------------------------------------------- | :-------------------- |
 | Variables du panneau d'action                         |                       |
-| `--dashkit-action-panel-color`                 | Couleur de fond       |
-| `--dashkit-action-panel-border-color`          | Couleur de bordure    |
-| `--dashkit-action-panel-border-radius`         | Rayon de bordure      |
-| Variables des éléments du panneau d'action           |                       |
+| `--dashkit-action-panel-color`                 | Couleur de fond      |
+| `--dashkit-action-panel-border-color`          | Couleur de bordure          |
+| `--dashkit-action-panel-border-radius`         | Rayon de bordure         |
+| Variables des éléments du panneau d'action                    |                       |
 | `--dashkit-action-panel-item-color`            | Couleur de fond       |
-| `--dashkit-action-panel-item-text-color`       | Couleur du texte      |
+| `--dashkit-action-panel-item-text-color`            | Couleur du texte            |
 | `--dashkit-action-panel-item-color-hover`      | Couleur de fond au survol |
-| `--dashkit-action-panel-item-color-dragging`   | Couleur de fond pendant le glisser-déposer |
+| `--dashkit-action-panel-item-color-dragging`   | Couleur de fond en glissant |
 | `--dashkit-action-panel-item-text-color-hover` | Couleur du texte au survol |
-| `--dashkit-action-panel-item-text-color-dragging` | Couleur du texte pendant le glisser-déposer |
-| Variables de superposition                           |                       |
-| `--dashkit-overlay-border-color`               | Couleur de bordure    |
-| `--dashkit-overlay-color`                      | Couleur de fond       |
+| `--dashkit-action-panel-item-text-color-dragging` | Couleur du texte en glissant     |
+| Variables de superposition                              |                       |
+| `--dashkit-overlay-border-color`               | Couleur de bordure          |
+| `--dashkit-overlay-color`                      | Couleur de fond      |
 | `--dashkit-overlay-opacity`                    | Opacité               |
-| Variables des éléments de la grille                  |                       |
+| Variables des éléments de la grille                           |                       |
 | `--dashkit-grid-item-edit-opacity`             | Opacité               |
-| `--dashkit-grid-item-border-radius`            | Rayon de bordure      |
-| Variables des espaces réservés (placeholders)       |                       |
-| `--dashkit-placeholder-color`                  | Couleur de fond       |
+| `--dashkit-grid-item-border-radius`            | Rayon de bordure         |
+| Variables des espaces réservés                          |                       |
+| `--dashkit-placeholder-color`                  | Couleur de fond      |
 | `--dashkit-placeholder-opacity`                | Opacité               |
 
 #### Exemple d'utilisation
@@ -599,12 +607,12 @@ const CustomThemeWrapper = (props: {
 
 ### Compilation et surveillance
 
-- Installation des dépendances `npm ci`
+- Compilation des dépendances `npm ci`
 - Compilation du projet `npm run build`
 - Compilation du storybook `npm run start`
 
 Par défaut, le storybook s'exécute sur `http://localhost:7120/`.
-Les modifications apportées au projet ne sont pas toujours prises en compte lorsque le storybook est en cours d'exécution. Il est donc préférable de recompiler manuellement le projet et de redémarrer le storybook.
+Les nouvelles modifications du projet ne sont pas toujours prises en compte lorsque le storybook est en cours d'exécution. Il est donc préférable de recompiler le projet manuellement et de redémarrer le storybook.
 
 ### Exemple de configuration nginx pour le développement sur une machine de développement
 
@@ -635,31 +643,31 @@ server {
 
 ## Licence
 
-Distribué sous licence MIT. Voir [LICENSE](LICENSE) pour plus de détails.
+Distribué sous la licence MIT. Voir [LICENSE](LICENSE) pour les détails.
 
 ## Pour les agents IA
 
-Un compositeur de grille de tableau de bord qui organise des widgets redimensionnables et déplaçables dans une grille réactive via un système de plugins — utilisez-le lorsque vous créez un tableau de bord modifiable par l'utilisateur (ajout/déplacement/redimensionnement/suppression de widgets) au lieu de placer des graphiques ou des panneaux individuels manuellement.
+Un compositeur de grille de tableau de bord qui organise des widgets redimensionnables et déplaçables dans une grille réactive via un système de plugins — utilisez-le lorsque vous créez un tableau de bord modifiable par l'utilisateur (ajout/déplacement/redimensionnement/suppression de widgets) au lieu de placer des graphiques ou des panneaux individuels à la main.
 
 ### Quand l'utiliser
 
-- Rendu d'un tableau de bord configurable où les widgets sont positionnés, redimensionnés et réorganisés sur une grille (basé sur `react-grid-layout`).
-- Agencements modifiables par l'utilisateur : ajout/suppression de widgets à partir d'un panneau d'actions, glisser-déposer, mode édition avec contrôles superposés.
-- Widgets basés sur des plugins où chaque type de widget (titre, texte, graphique, personnalisé) est enregistré une fois et piloté par une `config`.
+- Pour le rendu d'un tableau de bord configurable où les widgets sont positionnés, redimensionnés et réorganisés sur une grille (basé sur `react-grid-layout`).
+- Des mises en page modifiables par l'utilisateur : ajout/suppression de widgets à partir d'un panneau d'action, glisser-déposer, mode d'édition avec contrôles de superposition.
+- Des widgets basés sur des plugins où chaque type de widget (titre, texte, graphique, personnalisé) est enregistré une fois et piloté par une `config`.
 
 ### Quand ne pas l'utiliser
 
-- Pour un graphique ou un panneau unique et fixe, utilisez directement [`@gravity-ui/charts`](https://gravity-ui.com/charts) ou [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) — la machinerie de grille/plugin représente une surcharge pour un seul widget.
+- Pour un seul graphique ou panneau fixe, utilisez directement [`@gravity-ui/charts`](https://gravity-ui.com/charts) ou [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) — la machinerie de grille/plugin représente une surcharge pour un seul widget.
 - Pour une grille réactive à usage général qui n'est pas un tableau de bord de widgets, utilisez `react-grid-layout` directement.
 - Pour intégrer des widgets graphiques basés sur ChartKit dans un tableau de bord DashKit, DashKit est le conteneur ; il s'appuie toujours sur [`@gravity-ui/chartkit`](https://github.com/gravity-ui/chartkit) pour rendre les graphiques réels.
 
 ### Pièges courants
 
-- **Composant `<Dashboard>` halluciné** — l'exportation est `<DashKit>` (le conteneur glisser-déposer est `<DashKitDnDWrapper>` enveloppant `<DashKit>` + `<ActionPanel>`).
-- **Mutation de `config` au lieu d'utiliser des assistants** — utilisez les assistants statiques `DashKit.setItem({...})` / `DashKit.removeItem({...})` pour ajouter/modifier/supprimer des éléments afin que la disposition et les identifiants restent cohérents.
-- **Oubli de `DashKit.setSettings` / `DashKit.registerPlugins`** — le composant doit être configuré (langue, paramètres de grille, enregistrement des plugins) avant d'être rendu, sinon les widgets n'affichent rien.
-- **Confusion entre les deux props de paramètres** — `defaultGlobalParams` (valeurs par défaut au niveau du tableau de bord) vs `globalParams` (globaux pouvant être remplacés par l'URL) ; les deux sont transmis à la file d'attente de génération de paramètres consommée par ChartKit.
-- **Appel manuel de `onChange` avec l'événement `change`** — lorsque vous utilisez `event.preventDefault()` dans le gestionnaire `change` expérimental, DashKit conserve l'état visuel en interne ; la réinitialisation de `config.layout` à partir des props réinitialise cette base.
+- **Composant `<Dashboard>` halluciné** — l'exportation est `<DashKit>` (le shell de glisser-déposer est `<DashKitDnDWrapper>` enveloppant `<DashKit>` + `<ActionPanel>`).
+- **Mutation de `config` au lieu d'utiliser des helpers** — utilisez les helpers statiques `DashKit.setItem({...})` / `DashKit.removeItem({...})` pour ajouter/modifier/supprimer des éléments afin que la disposition et les identifiants restent cohérents.
+- **Oubli de `DashKit.setSettings` / `DashKit.registerPlugins`** — le composant doit être configuré (langue, paramètres de grille, enregistrement des plugins) avant d'être rendu, sinon les widgets n'afficheront rien.
+- **Confusion entre les deux props de paramètres** — `defaultGlobalParams` (valeurs par défaut au niveau du tableau de bord) vs `globalParams` (paramètres globaux surdéfinissables par l'URL) ; les deux sont intégrés dans la file d'attente de génération des paramètres consommée par ChartKit.
+- **Appel manuel de `onChange` avec l'événement `change`** — lorsque vous utilisez `event.preventDefault()` dans le gestionnaire expérimental `change`, DashKit conserve l'état visuel en interne ; la réinitialisation de `config.layout` à partir des props réinitialise cette base.
 
 ## Documentation pour les agents IA
 
