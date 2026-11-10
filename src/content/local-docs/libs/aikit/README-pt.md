@@ -28,7 +28,7 @@ Biblioteca de componentes de UI para chats de IA construída com princípios de 
 - 🔧 **Independente de SDK** — independente de SDKs de IA específicos
 - 🎭 **Abordagem de Dois Níveis** — componentes prontos + hooks para personalização
 - 🎨 **Variáveis CSS** — temas fáceis sem sobrescrever componentes
-- 📦 **TypeScript** — segurança de tipo completa pronta para uso
+- 📦 **TypeScript** — segurança de tipo completa "out of the box"
 - 🔌 **Extensível** — sistema de registro de tipos de mensagem personalizados
 
 ## Estrutura do Projeto
@@ -172,16 +172,16 @@ O projeto utiliza o Playwright Component Testing para testes de regressão visua
 **Importante**: Todos os testes devem ser executados via Docker para garantir capturas de tela consistentes entre diferentes ambientes.
 
 ```bash
-# Executar todos os testes de componente no Docker (recomendado)
+# Executa todos os testes de componente no Docker (recomendado)
 npm run playwright:docker
 
-# Atualizar linhas de base de capturas de tela no Docker
+# Atualiza as linhas de base das capturas de tela no Docker
 npm run playwright:docker:update
 
-# Executar teste específico por padrão grep no Docker
+# Executa um teste específico por padrão grep no Docker
 npm run playwright:docker -- --grep "@ComponentName"
 
-# Limpar cache do Docker, se necessário
+# Limpa o cache do Docker, se necessário
 npm run playwright:docker:clear-cache
 ```
 
@@ -190,11 +190,11 @@ npm run playwright:docker:clear-cache
 Se você estiver no Linux, pode executar os testes localmente:
 
 ```bash
-# Instalar navegadores do Playwright (executar uma vez)
+# Instala os navegadores do Playwright (execute uma vez)
 npm run playwright:install
-# Executar todos os testes de componente
+# Executa todos os testes de componente
 npm run playwright
-# Atualizar linhas de base de capturas de tela
+# Atualiza as linhas de base das capturas de tela
 npm run playwright:update
 ```
 
@@ -210,7 +210,7 @@ MIT
 
 ## Para agentes de IA
 
-Uma biblioteca de componentes React para construir interfaces de chat de IA, organizada por Atomic Design (átomos → moléculas → organismos → templates → páginas) e agnóstica ao SDK — use-a para montar uma UI de chat (listas de mensagens, entrada de prompt, chamadas de ferramentas, anexos) em vez de compor esses primitivos manualmente a partir do `@gravity-ui/uikit`.
+Uma biblioteca de componentes React para construir interfaces de chat de IA, organizada por Design Atômico (átomos → moléculas → organismos → templates → páginas) e agnóstica ao SDK — use-a para montar uma UI de chat (listas de mensagens, entrada de prompt, chamadas de ferramentas, anexos) em vez de compor esses primitivos manualmente a partir do `@gravity-ui/uikit`.
 
 ### Quando usar
 
@@ -226,11 +226,17 @@ Uma biblioteca de componentes React para construir interfaces de chat de IA, org
 
 ### Armadilhas comuns
 
-- **Alucinar uma importação de SDK de IA** — AIKit é agnóstico ao SDK; ele fornece componentes/hooks, não um cliente LLM. Traga sua própria fonte de dados e alimente mensagens via props.
-- **Procurar por `<Chat>` / `<AIChat>`** — a exportação em nível de página é `ChatContainer` (e `AIStudioChat`); não há um componente chamado literalmente `Chat`.
+- **Alucinar uma importação de SDK de IA** — AIKit é agnóstico ao SDK; ele fornece componentes/hooks, não um cliente LLM. Traga sua própria fonte de dados e alimente as mensagens via props.
+- **Procurar por `<Chat>` / `<AIChat>`** — a exportação no nível da página é `ChatContainer` (e `AIStudioChat`); não há um componente chamado literalmente `Chat`.
 - **Pular o registro do tipo de mensagem para tipos personalizados** — tipos de mensagem personalizados devem ser registrados no sistema de tipos de mensagem, ou eles serão renderizados como desconhecidos.
 - **Editar componentes base em vez de usar hooks** — o design de dois níveis espera que você personalize via hooks/composição; substituir os internos diretamente quebra as atualizações.
 
 ## Documentação para agentes de IA
 
 A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.
+
+## Componentes experimentais
+
+Componentes de espaço de trabalho de agente estão disponíveis apenas em `@gravity-ui/aikit/experimental`.
+Suas APIs podem mudar ou ser removidas em lançamentos menores; lançamentos de patch preservam a compatibilidade.
+Fixe uma versão exata ao adotar um experimento. Veja [a política de API experimental](docs/experimental.md).

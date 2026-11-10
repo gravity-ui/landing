@@ -1,6 +1,6 @@
 # AIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/aikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/aikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/aikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/aikit/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/aikit/?path=/docs/pages-chatcontainer--docs)
 
-UI-Komponentenbibliothek für KI-Chats, erstellt nach den Prinzipien des Atomic Design.
+UI-Komponentenbibliothek für KI-Chats, die nach den Prinzipien des Atomic Design entwickelt wurde.
 
 <!--GITHUB_BLOCK-->
 
@@ -20,11 +20,11 @@ UI-Komponentenbibliothek für KI-Chats, erstellt nach den Prinzipien des Atomic 
 
 ## Beschreibung
 
-**@gravity-ui/aikit** ist eine flexible und erweiterbare React-Komponentenbibliothek zum Erstellen von KI-Chats jeder Komplexität. Die Bibliothek bietet eine Reihe von fertigen Komponenten, die entweder direkt verwendet oder an Ihre Bedürfnisse angepasst werden können.
+**@gravity-ui/aikit** ist eine flexible und erweiterbare React-Komponentenbibliothek zum Erstellen von KI-Chats jeder Komplexität. Die Bibliothek bietet eine Reihe von fertigen Komponenten, die direkt verwendet oder an Ihre Bedürfnisse angepasst werden können.
 
 ### Hauptmerkmale
 
-- 🎨 **Atomic Design** — klare Komponentenhierarchie von Atomen bis zu Seiten
+- 🎨 **Atomic Design** — klare Komponenten-Hierarchie von Atomen bis zu Seiten
 - 🔧 **SDK-unabhängig** — unabhängig von spezifischen KI-SDKs
 - 🎭 **Zweistufiger Ansatz** — fertige Komponenten + Hooks zur Anpassung
 - 🎨 **CSS-Variablen** — einfaches Theming ohne Komponenten-Overrides
@@ -53,7 +53,7 @@ src/
 npm install @gravity-ui/aikit
 ```
 
-AIKit 3 benötigt `@gravity-ui/uikit@^8.0.0`, React/React DOM 18 oder 19 und Node.js 20.19+ innerhalb von v20 oder 22.12+. Wickeln Sie die Anwendung in den `Provider` von UIKit ein, wie im Abschnitt [Erste Schritte](./docs/GETTING_STARTED.md) gezeigt.
+AIKit 3 erfordert `@gravity-ui/uikit@^8.0.0`, React/React DOM 18 oder 19 und Node.js 20.19+ innerhalb von v20 oder 22.12+. Umschließen Sie die Anwendung mit dem `Provider` von UIKit, wie in [Erste Schritte](./docs/GETTING_STARTED.md) gezeigt.
 
 Upgrade von v2? Lesen Sie die [Migrationsanleitung](./docs/migration-to-v3.md) ([Русский](./docs/migration-to-v3-ru.md)) und die [Release Notes v3](./docs/changelog-v3.md).
 
@@ -109,7 +109,7 @@ Grundlegende, unteilbare UI-Elemente ohne Geschäftslogik:
 - `MarkdownRenderer` — Yandex Flavored Markdown Renderer
 - `MessageBalloon` — Nachrichten-Wrapper
 - `Shimmer` — Ladeanimations-Effekt
-- `SubmitButton` — Sende-Schaltfläche mit Zuständen
+- `SubmitButton` — Senden-Schaltfläche mit Zuständen
 - `ToolIndicator` — Anzeige des Status der Werkzeugausführung
 
 ### 🔸 Moleküle
@@ -120,13 +120,13 @@ Einfache Kombinationen von Atomen:
 - `ButtonGroup` — Schaltflächengruppe mit Ausrichtungsunterstützung
 - `InputContext` — Kontextverwaltung
 - `PromptInputBody` — Textbereich mit automatischer Größenanpassung
-- `PromptInputFooter` — Fußzeile mit Aktionssymbolen und Sende-Schaltfläche
+- `PromptInputFooter` — Fußzeile mit Aktionssymbolen und Senden-Schaltfläche
 - `PromptInputHeader` — Kopfzeile mit Kontext-Elementen und Indikator
 - `PromptInputPanel` — Panel-Container für benutzerdefinierten Inhalt
 - `Suggestions` — anklickbare Vorschlags-Schaltflächen
 - `Tabs` — Navigations-Tabs mit Löschfunktion
-- `ToolFooter` — Fußzeile für Tool-Nachrichten mit Aktionen
-- `ToolHeader` — Kopfzeile für Tool-Nachrichten mit Symbol und Aktionen
+- `ToolFooter` — Fußzeile für Werkzeugnachrichten mit Aktionen
+- `ToolHeader` — Kopfzeile für Werkzeugnachrichten mit Symbol und Aktionen
 
 ### 🔶 Organismen
 
@@ -137,7 +137,7 @@ Komplexe Komponenten mit interner Logik:
 - `MessageList` — Nachrichtenliste
 - `PromptInput` — Eingabefeld für Nachrichten
 - `ThinkingMessage` — Denkprozess der KI
-- `ToolMessage` — Werkzeugausführung
+- `ToolMessage` — Ausführung von Tools
 - `UserMessage` — Benutzernachricht
 
 ### 📄 Vorlagen
@@ -210,27 +210,33 @@ MIT
 
 ## Für KI-Agenten
 
-Eine React-Komponentenbibliothek zum Erstellen von KI-Chat-Schnittstellen, organisiert nach Atomic Design (Atome → Moleküle → Organismen → Vorlagen → Seiten) und SDK-agnostisch — greifen Sie darauf zurück, um eine Chat-Benutzeroberfläche (Nachrichtenlisten, Eingabeaufforderungsfeld, Werkzeugaufrufe, Anhänge) zusammenzustellen, anstatt diese Primitiven von Hand aus `@gravity-ui/uikit` zu komponieren.
+Eine React-Komponentenbibliothek zum Erstellen von KI-Chat-Oberflächen, organisiert nach Atomic Design (Atome → Moleküle → Organismen → Vorlagen → Seiten) und SDK-agnostisch — greifen Sie darauf zurück, um eine Chat-UI (Nachrichtenlisten, Eingabeaufforderungsfeld, Toolaufrufe, Anhänge) zusammenzustellen, anstatt diese Primitiven von Hand aus `@gravity-ui/uikit` zu komponieren.
 
 ### Wann verwenden
 
-- Erstellen einer KI/LLM-Chat-Benutzeroberfläche (Assistenten-/Benutzer-/Werkzeugnachrichten, Eingabeaufforderungsfeld mit Vorschlägen, Hochladen von Anhängen, Denkzustände).
-- Bereitgestellte Chat-Layouts (`ChatContainer`, `MessageList`, `PromptInput`) plus Hooks zur Anpassung des Verhaltens wünschen.
+- Erstellen einer KI/LLM-Chat-UI (Assistenten-/Benutzer-/Tool-Nachrichten, Eingabeaufforderungsfeld mit Vorschlägen, Hochladen von Anhängen, Denkzustände).
+- Bereitgestellte Chat-Layouts (`ChatContainer`, `MessageList`, `PromptInput`) plus Hooks zur Anpassung des Verhaltens.
 - Einbettung in das Gravity UI-Ökosystem mit gemeinsam genutztem Theming über CSS-Variablen.
 
 ### Wann nicht verwenden
 
 - Für allgemeine UI-Primitiven (Schaltflächen, Eingabefelder, Modals) verwenden Sie [`@gravity-ui/uikit`](https://gravity-ui.com/uikit) direkt — AIKit baut darauf auf und erfüllt spezifische Chat-Anforderungen.
 - Zum Rendern von Rich-Markdown in Nachrichten umschließt der `MarkdownRenderer` von AIKit [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor); für eigenständiges Markdown-Rendering verwenden Sie dieses Paket direkt.
-- Für eine einzelne Chat-Blase ohne Chat-Orchestrierung ist ein uikit `MarkdownRenderer`/Textblock leichter als die vollständige AIKit-Nachrichtenpipeline.
+- Für eine einzelne Chat-Blase ohne Chat-Orchestrierung ist ein `MarkdownRenderer`/Textblock von uikit leichter als die vollständige AIKit-Nachrichtenpipeline.
 
 ### Häufige Fallstricke
 
 - **Halluzinieren eines KI-SDK-Imports** — AIKit ist SDK-agnostisch; es stellt Komponenten/Hooks bereit, keinen LLM-Client. Bringen Sie Ihre eigene Datenquelle mit und füttern Sie Nachrichten über Props.
-- **Greifen nach `<Chat>` / `<AIChat>`** — der Export auf Seitenebene ist `ChatContainer` (und `AIStudioChat`); es gibt keine Komponente mit dem wörtlichen Namen `Chat`.
-- **Überspringen der Registrierung von Nachrichtentypen für benutzerdefinierte Typen** — benutzerdefinierte Nachrichtenarten müssen im Nachrichtentypsystem registriert werden, sonst werden sie als unbekannt gerendert.
+- **Greifen nach `<Chat>` / `<AIChat>`** — der Export auf Seitenebene ist `ChatContainer` (und `AIStudioChat`); es gibt keine Komponente, die buchstäblich `Chat` heißt.
+- **Überspringen der Registrierung von Nachrichtentypen für benutzerdefinierte Typen** — benutzerdefinierte Nachrichtenarten müssen im Nachrichtentypensystem registriert werden, sonst werden sie als unbekannt gerendert.
 - **Bearbeiten von Basiskomponenten anstelle der Verwendung von Hooks** — das zweistufige Design erwartet, dass Sie über Hooks/Komposition anpassen; das direkte Überschreiben interner Elemente bricht Upgrades.
 
 ## Dokumentation für KI-Agenten
 
 Agentenlesbare Dokumentation für die installierte Version befindet sich in `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`.
+
+## Experimentelle Komponenten
+
+Agenten-Workspace-Komponenten sind nur unter `@gravity-ui/aikit/experimental` verfügbar.
+Ihre APIs können sich in Minor-Releases ändern oder entfernt werden; Patch-Releases wahren die Kompatibilität.
+Fixieren Sie eine exakte Version, wenn Sie ein Experiment übernehmen. Siehe [die Richtlinie für experimentelle APIs](docs/experimental.md).
