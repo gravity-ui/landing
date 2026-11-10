@@ -13,6 +13,8 @@ npm install --save-dev @gravity-ui/dynamic-forms
 ```
 
 
+> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
+
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -25,35 +27,6 @@ Install these in the host project at a compatible version:
 | `final-form` | `^4.20.2` |
 | `react-final-form` | `^6.5.3` |
 | `@gravity-ui/uikit` | `^7.0.0` |
-
-## Usage
-
-```jsx
-import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
-
-// To embed in a final-form
-<DynamicField name={name} spec={spec} config={config} />;
-
-import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
-
-// To get an overview of the values
-<DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
-```
-
-### I18N
-
-Certain components include text tokens (words and phrases) that are available in two languages: `en` (the default) and `ru`. To set the language, use the `configure` function:
-
-```js
-// index.js
-
-import {configure, Lang} from '@gravity-ui/dynamic-forms';
-
-configure({lang: Lang.Ru});
-```
-
-
-> Note: this package's README does not yet have a `## For AI agents` section. See the [README](https://raw.githubusercontent.com/gravity-ui/dynamic-forms/main/README.md) for full documentation.
 
 ## Links
 
