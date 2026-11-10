@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 jobs:
   update_og_images:
-    runs-on: ubuntu-latest
+    # Keep the runner compatible with the locked Playwright browser builds.
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         node-version: [18.x]
@@ -19,8 +20,8 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: npm ci
-      - name: Install playwright dependencies
-        run: npx playwright install
+      - name: Install Playwright Chromium and system dependencies
+        run: npx playwright install --with-deps chromium
       - name: Update og images
         env:
           S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
