@@ -38,7 +38,7 @@ src/
 ├── components/
 │   ├── atoms/          # 기본적인 분리 불가능한 UI 요소
 │   ├── molecules/      # 원자들의 간단한 그룹
-│   ├── organisms/      # 복잡한 로직을 가진 컴포넌트
+│   ├── organisms/      # 로직이 포함된 복잡한 컴포넌트
 │   ├── templates/      # 완전한 레이아웃
 │   └── pages/          # 데이터와 함께하는 완전한 통합
 ├── hooks/              # 범용 훅
@@ -97,8 +97,8 @@ function App() {
 
 비즈니스 로직이 없는 기본적인 UI 요소:
 
-- `ActionButton` — 통합된 툴팁이 있는 버튼
-- `Alert` — 다양한 스타일의 알림 메시지
+- `ActionButton` — 통합 툴팁이 있는 버튼
+- `Alert` — 다양한 종류의 알림 메시지
 - `ChatDate` — 상대적 날짜를 포함한 날짜 형식 지정
 - `ContextIndicator` — 토큰 컨텍스트 사용 표시기
 - `ContextItem` — 제거 액션이 있는 컨텍스트 레이블
@@ -119,7 +119,7 @@ function App() {
 - `BaseMessage` — 모든 메시지 타입에 대한 기본 래퍼
 - `ButtonGroup` — 방향 지원이 있는 버튼 그룹
 - `InputContext` — 컨텍스트 관리
-- `PromptInputBody` — 자동 확장되는 텍스트 영역
+- `PromptInputBody` — 자동 크기 조절이 가능한 텍스트 영역
 - `PromptInputFooter` — 액션 아이콘 및 제출 버튼이 있는 푸터
 - `PromptInputHeader` — 컨텍스트 항목 및 표시기가 있는 헤더
 - `PromptInputPanel` — 사용자 정의 콘텐츠를 위한 패널 컨테이너
@@ -130,7 +130,7 @@ function App() {
 
 ### 🔶 Organisms
 
-내부 로직을 가진 복잡한 컴포넌트:
+내부 로직이 포함된 복잡한 컴포넌트:
 
 - `AssistantMessage` — AI 어시스턴트 메시지
 - `Header` — 채팅 헤더
@@ -142,7 +142,7 @@ function App() {
 
 ### 📄 템플릿
 
-완성된 레이아웃:
+완전한 레이아웃:
 
 - `ChatContent` — 메인 채팅 콘텐츠
 - `EmptyContainer` — 빈 상태
@@ -216,13 +216,13 @@ Atomic Design (atoms → molecules → organisms → templates → pages) 방식
 
 - AI/LLM 채팅 UI 구축 (어시스턴트/사용자/도구 메시지, 제안이 있는 프롬프트 입력, 첨부 파일 업로드, 생각 상태).
 - 준비된 채팅 레이아웃(`ChatContainer`, `MessageList`, `PromptInput`)과 동작을 사용자 정의하기 위한 훅을 원하는 경우.
-- CSS 변수를 통한 공유 테마를 사용하여 Gravity UI 생태계에 통합하려는 경우.
+- CSS 변수를 통한 공유 테마를 사용하여 Gravity UI 생태계에 포함시키는 경우.
 
 ### 언제 사용하지 않아야 할까요?
 
 - 일반적인 UI 기본 요소(버튼, 입력, 모달)의 경우 [`@gravity-ui/uikit`](https://gravity-ui.com/uikit)를 직접 사용하세요. AIKit는 채팅별 요구 사항을 위해 이를 기반으로 구축됩니다.
 - 메시지에서 풍부한 마크다운을 렌더링하려면 AIKit의 `MarkdownRenderer`는 [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor)를 래핑합니다. 독립적인 마크다운 렌더링의 경우 해당 패키지를 직접 사용하세요.
-- 채팅 오케스트레이션 없이 단일 채팅 버블의 경우, uikit `MarkdownRenderer`/텍스트 블록이 전체 AIKit 메시지 파이프라인보다 가볍습니다.
+- 채팅 오케스트레이션 없이 단일 채팅 버블의 경우, uikit `MarkdownRenderer`/텍스트 블록은 전체 AIKit 메시지 파이프라인보다 가볍습니다.
 
 ### 일반적인 함정
 
@@ -234,3 +234,8 @@ Atomic Design (atoms → molecules → organisms → templates → pages) 방식
 ## AI 에이전트용 문서
 
 설치된 버전에 대한 에이전트 읽기 가능 문서는 `node_modules/@gravity-ui/aikit/build/docs/INDEX.md`에 있습니다.
+
+## 실험적 컴포넌트
+
+에이전트 작업 공간 컴포넌트는 `@gravity-ui/aikit/experimental`에서만 사용할 수 있습니다.
+API는 마이너 릴리스에서 변경되거나 제거될 수 있습니다. 패치 릴리스는 호환성을 유지합니다. 실험을 채택할 때 정확한 버전을 고정하세요. [실험적 API 정책](docs/experimental.md)을 참조하세요.
