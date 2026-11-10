@@ -442,7 +442,7 @@ A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for i
 
 #### When not to use
 
-- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A simple, static table with a handful of rows and no advanced features — the legacy `Table` from [`@gravity-ui/uikit/legacy`](https://github.com/gravity-ui/uikit) is lighter.
 - A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
 
