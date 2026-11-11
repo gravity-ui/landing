@@ -1,12 +1,21 @@
 import baseline from './baseline.meta.json';
 import coffee from './coffee.meta.json';
 import dustOlive from './dust-olive.meta.json';
+import moyaNovayaTema from './moya-novaya-tema.meta.json';
 import orange from './orange.meta.json';
 import retroWaveRadio from './retro-wave-radio.meta.json';
 import {type ThemeMetadata, type ThemePayload, validateThemeMetadata} from './schema';
 import tea from './tea.meta.json';
 
-const RAW_META: unknown[] = [baseline, coffee, dustOlive, orange, retroWaveRadio, tea];
+const RAW_META: unknown[] = [
+    baseline,
+    coffee,
+    dustOlive,
+    moyaNovayaTema,
+    orange,
+    retroWaveRadio,
+    tea,
+];
 
 RAW_META.forEach(validateThemeMetadata);
 
