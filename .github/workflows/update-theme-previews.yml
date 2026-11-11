@@ -94,4 +94,4 @@ jobs:
                   gh pr create \
                       --title "$COMMIT_MESSAGE" \
                       --body "Automated regeneration of theme card previews." \
-                      -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
+                      -a "dgaponov" -a "vvtimofeev" 2>/dev/null || true

@@ -38,4 +38,4 @@ jobs:
           export COMMIT_MESSAGE="docs: update llms.txt"
           git commit -m "$COMMIT_MESSAGE" || true
           git push --set-upstream origin update-llms-txt --force
-          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" || true
+          gh pr create --title "$COMMIT_MESSAGE" --body "" -a "dgaponov" -a "vvtimofeev" || true
