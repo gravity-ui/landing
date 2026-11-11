@@ -33,7 +33,8 @@ jobs:
         permissions:
             pull-requests: write
             contents: write
-        runs-on: ubuntu-latest
+        # Keep the runner compatible with the locked Playwright browser builds.
+        runs-on: ubuntu-24.04
         timeout-minutes: 25
         steps:
             - uses: actions/checkout@v4
