@@ -1,0 +1,15 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "moya-tema",
+    "name": "Моя тема",
+    "author": {
+        "name": "Aleksandr Iakimov",
+        "url": "https://github.com/Sociopacific"
+    },
+    "description": {
+        "en": "Тема моя",
+        "ru": "Тема моя"
+    },
+    "tags": [],
+    "brandColor": "#CBFF5C"
+}
