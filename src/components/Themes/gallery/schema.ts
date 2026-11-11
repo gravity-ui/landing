@@ -43,6 +43,52 @@ export type ThemePayload = Record<string, {value: string; ref?: string}>;
 
 const KEBAB_CASE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
+// Russian letters for theme ids; anything else outside a-z0-9 becomes a separator.
+const CYRILLIC_TO_LATIN: Record<string, string> = {
+    а: 'a',
+    б: 'b',
+    в: 'v',
+    г: 'g',
+    д: 'd',
+    е: 'e',
+    ё: 'e',
+    ж: 'zh',
+    з: 'z',
+    и: 'i',
+    й: 'y',
+    к: 'k',
+    л: 'l',
+    м: 'm',
+    н: 'n',
+    о: 'o',
+    п: 'p',
+    р: 'r',
+    с: 's',
+    т: 't',
+    у: 'u',
+    ф: 'f',
+    х: 'kh',
+    ц: 'ts',
+    ч: 'ch',
+    ш: 'sh',
+    щ: 'shch',
+    ъ: '',
+    ы: 'y',
+    ь: '',
+    э: 'e',
+    ю: 'yu',
+    я: 'ya',
+};
+
+// Kebab-case gallery id of a theme name, shared by the submit form and the server.
+export function toThemeId(name: string) {
+    return name
+        .toLowerCase()
+        .replace(/[а-яё]/g, (letter) => CYRILLIC_TO_LATIN[letter] ?? '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
+
 export class ThemeMetadataValidationError extends Error {
     constructor(message: string) {
         super(`Invalid theme metadata: ${message}`);

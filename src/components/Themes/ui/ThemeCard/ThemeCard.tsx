@@ -18,7 +18,7 @@ const pickLocalized = (value: LocalizedString, language: string) =>
 // Spelled out rather than built from the tag at call time: the keys stay
 // greppable for the translation tooling, and adding a tag without a label
 // fails the typecheck.
-const TAG_LABEL_KEYS: Record<ThemeTag, string> = {
+export const TAG_LABEL_KEYS: Record<ThemeTag, string> = {
     'high-contrast': 'gallery_tag_high-contrast',
     accessible: 'gallery_tag_accessible',
     creative: 'gallery_tag_creative',
@@ -32,6 +32,8 @@ interface ThemeCardProps {
     metadata: ThemeMetadata;
     selected?: boolean;
     onApply?: (id: string, mode: ThemePreviewMode) => void;
+    /** Replaces the pre-rendered PNG, e.g. with a live preview of an unsaved theme. */
+    renderPreview?: (mode: ThemePreviewMode) => React.ReactNode;
     className?: string;
 }
 
@@ -39,6 +41,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
     metadata,
     selected = false,
     onApply,
+    renderPreview,
     className,
 }) => {
     const {t, i18n} = useTranslation('themes');
@@ -57,25 +60,31 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                 control, its click just bubbles up to this handler. */}
             <div className={b('preview-stack')} onClick={() => onApply?.(metadata.id, previewMode)}>
                 <div className={b('preview-area')} data-mode={previewMode}>
-                    <img
-                        className={b('preview-image')}
-                        src={`/themes/previews/${metadata.id}-${previewMode}.png`}
-                        alt={t(
-                            previewMode === 'dark'
-                                ? 'gallery_card_preview_alt_dark'
-                                : 'gallery_card_preview_alt_light',
-                            {name: metadata.name},
-                        )}
-                        loading="lazy"
-                        decoding="async"
-                        onError={(event) => {
-                            // eslint-disable-next-line no-param-reassign
-                            event.currentTarget.style.visibility = 'hidden';
-                        }}
-                    />
-                    <span className={b('preview-name')} aria-hidden="true">
-                        {metadata.name}
-                    </span>
+                    {renderPreview ? (
+                        renderPreview(previewMode)
+                    ) : (
+                        <React.Fragment>
+                            <img
+                                className={b('preview-image')}
+                                src={`/themes/previews/${metadata.id}-${previewMode}.png`}
+                                alt={t(
+                                    previewMode === 'dark'
+                                        ? 'gallery_card_preview_alt_dark'
+                                        : 'gallery_card_preview_alt_light',
+                                    {name: metadata.name},
+                                )}
+                                loading="lazy"
+                                decoding="async"
+                                onError={(event) => {
+                                    // eslint-disable-next-line no-param-reassign
+                                    event.currentTarget.style.visibility = 'hidden';
+                                }}
+                            />
+                            <span className={b('preview-name')} aria-hidden="true">
+                                {metadata.name}
+                            </span>
+                        </React.Fragment>
+                    )}
                 </div>
                 <div className={b('selection-frame')} aria-hidden="true" />
                 <div className={b('hover-content')}>
@@ -93,9 +102,11 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                             </div>
                         )}
                     </div>
-                    <Button view="action" size="l">
-                        {t('gallery_card_apply')}
-                    </Button>
+                    {onApply && (
+                        <Button view="action" size="l">
+                            {t('gallery_card_apply')}
+                        </Button>
+                    )}
                 </div>
             </div>
             <Flex

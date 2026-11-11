@@ -43,6 +43,15 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
+# Headless Chromium renders card previews of themes submitted from the Themer
+# (src/api/themes/preview-renderer.ts). The standalone trace may miss files of
+# playwright-core that are loaded lazily, so the package is copied whole. Kept
+# before the app layers so the browser layer stays cached between builds.
+COPY --from=builder /app/node_modules/playwright-core ./node_modules/playwright-core
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+RUN node node_modules/playwright-core/cli.js install --with-deps --only-shell chromium && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static/media ./.next/static/media
 COPY --from=builder /app/scripts ./scripts

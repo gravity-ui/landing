@@ -27,5 +27,12 @@ export OPENAI_BASE_URL
 export OPENAI_PROMPT_ID
 export TRANSFORMERS_CACHE_DIR=/app/.model-cache
 
+# Theme gallery submissions (GitHub OAuth App, src/api/themes).
+# TODO: the Lockbox secret and keys for these values are not defined yet, so
+# they are passed through from the container environment as is.
+export GITHUB_OAUTH_CLIENT_ID
+export GITHUB_OAUTH_CLIENT_SECRET
+export THEMES_SESSION_SECRET
+
 echo "Starting server..."
 exec node server.js
