@@ -14,6 +14,7 @@ import {
 } from '@gravity-ui/uikit';
 import {parseJSON} from '@gravity-ui/uikit-themer';
 import {useTranslation} from 'next-i18next';
+import {useRouter} from 'next/router';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
@@ -52,6 +53,11 @@ import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 import {ThemeGalleryDrawer} from './ui/ThemeGalleryDrawer';
 import {ThemeImport} from './ui/ThemeImport/ThemeImport';
 import {ThemePlaygroundBar} from './ui/ThemePlaygroundBar/ThemePlaygroundBar';
+import {
+    SIGN_IN_FAILED_PARAM,
+    SUBMIT_RETURN_PARAM,
+    restoreSubmitReturn,
+} from './ui/ThemeSubmit/submitReturn';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
 
 const b = block('themes');
@@ -339,6 +345,34 @@ const ThemesContent = () => {
     }, [isStickyBarVisible]);
 
     const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.Preview);
+
+    // Back from the GitHub sign-in of the submit dialog: restore the theme that
+    // was being submitted and reopen the dialog, which lives on the Colors tab.
+    const router = useRouter();
+    useEffect(() => {
+        if (!router.isReady || router.query[SUBMIT_RETURN_PARAM] !== '1') {
+            return;
+        }
+        const themeJson = restoreSubmitReturn({
+            signInFailed: router.query[SIGN_IN_FAILED_PARAM] === '1',
+        });
+        if (themeJson) {
+            try {
+                importTheme(normalizeImportedTheme(parseJSON(JSON.parse(themeJson))));
+                applyGenerationRef.current += 1;
+                setActiveThemeId(null);
+                setActivePresetIndex(null);
+                setForcedPreviewMode(null);
+            } catch {
+                // A broken saved theme is dropped; the dialog still reopens.
+            }
+        }
+        setActiveTab(ThemeTab.Colors);
+        const query = {...router.query};
+        delete query[SUBMIT_RETURN_PARAM];
+        delete query[SIGN_IN_FAILED_PARAM];
+        router.replace({pathname: router.pathname, query}, undefined, {shallow: true});
+    }, [router, importTheme]);
 
     // PreviewTab's UI samples are not SSR-safe (see the import comment), so the
     // subtree is skipped on the server pass and mounted once hydration is done.
