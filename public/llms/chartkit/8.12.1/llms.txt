@@ -1,0 +1,151 @@
+> Generated for `@gravity-ui/chartkit@8.12.1`
+
+# @gravity-ui/chartkit documentation
+
+Documentation for the **8.12.1** version of `@gravity-ui/chartkit`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/chartkit/build/docs/`).
+
+## For AI agents
+
+A plugin-based React component that renders charts from multiple charting libraries, such as Gravity Charts and Yagr, through a single `<ChartKit type="..." data={...} />` API, lazy-loading each library only when its chart type is rendered.
+
+### When to use
+
+- Rendering more than one charting engine behind one consistent component: `gravity-charts` (declarative SVG charts via [`@gravity-ui/charts`](https://github.com/gravity-ui/charts)) and `yagr` (uPlot-based time-series via [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr)).
+- Lazy-loading chart bundles — each plugin's renderer is `React.lazy`, so a library's code is only fetched when its chart type is actually shown.
+- Mobile-friendly tooltips out of the box — the chart and its tooltip are shown in resizable split panes instead of a hover popup; for `gravity-charts` turn it on with `<ChartKit type="gravity-charts" tooltip={{splitted: true}} />`.
+- Using the split-pane tooltip layout on its own — `SplitTooltip` is a standalone component exported from the root entry: pass `renderMainPane` and `renderTooltip`, and it lays them out as resizable panes (vertical or horizontal, picked from the container size) for any content, not only ChartKit charts.
+- Writing your own plugin — register `{type, renderer}` via `settings.set({plugins: [...]})`, where `renderer` is a `React.lazy` component; ChartKit dispatches to it by `type` exactly like to the built-in plugins.
+- Consistent light/dark theming across every chart engine out of the box — the charts follow the `@gravity-ui/uikit` theme of the surrounding app.
+
+### When not to use
+
+- For a single chart type only, import [`@gravity-ui/charts`](https://github.com/gravity-ui/charts) (general) or [`@gravity-ui/yagr`](https://github.com/gravity-ui/yagr) (high-performance time-series) directly — the plugin registry is overhead for one engine.
+- To compose a dashboard grid of widgets, use [`@gravity-ui/dashkit`](https://github.com/gravity-ui/dashkit) — ChartKit renders a chart; DashKit arranges many widgets.
+
+### Common pitfalls
+
+- **Rendering `<ChartKit>` before `settings.set({plugins: [...]})`** — the global plugin registry must be populated at app entry; an unregistered `type` throws at render time.
+- **Hallucinated prop `chartType` / `library`** — the dispatch prop is `type` (e.g. `type="gravity-charts"`), and the data is `data`.
+- **Importing plugins from the root entry** — plugins live in subpath exports (e.g. `@gravity-ui/chartkit/gravity-charts`, `@gravity-ui/chartkit/yagr`); the root `@gravity-ui/chartkit` entry does not re-export them.
+- **Assuming one `data` shape for every `type`** — the shape depends on the plugin, e.g. `gravity-charts` takes `ChartData` from `@gravity-ui/charts` (`{series: {data: [...]}}`), while `yagr` takes `{data: {graphs, timeline}, libraryConfig}` with `libraryConfig` required.
+- **Forgetting a container height** — `ChartKit` fills its parent; without an explicit height on the wrapper, the chart collapses to zero.
+- **Missing the uikit styles import** — theming depends on `@gravity-ui/uikit/styles/styles.css`; without it, charts render unstyled.
+
+## Install
+
+```shell
+npm install @gravity-ui/chartkit @gravity-ui/uikit
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.0.0` |
+
+## Usage
+
+### Requirements
+
+- React 16, 17, or 18
+- [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) — required peer dependency (provides theming and UI primitives)
+
+### Styles
+
+Import the styles from `@gravity-ui/uikit` in your entry point:
+
+```tsx
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+```
+
+For full setup details see the [uikit styles guide](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
+
+### Basic usage
+
+ChartKit uses a global plugin registry. Call `settings.set` once at your app entry point to register the plugins you need. When `<ChartKit type="..." />` renders, it looks up the matching plugin — if none is found, an error is thrown. Each plugin's renderer is a `React.lazy` component, so its code is fetched only when ChartKit first appears in the UI.
+
+You can register multiple plugins at once:
+
+```ts
+settings.set({plugins: [GravityChartsPlugin, YagrPlugin]});
+```
+
+Or call `settings.set` multiple times — it merges the plugin list rather than replacing it.
+
+**Basic example:**
+
+```tsx
+import {ThemeProvider} from '@gravity-ui/uikit';
+import ChartKit, {settings} from '@gravity-ui/chartkit';
+import {GravityChartsPlugin} from '@gravity-ui/chartkit/gravity-charts';
+
+import '@gravity-ui/uikit/styles/fonts.css';
+import '@gravity-ui/uikit/styles/styles.css';
+
+settings.set({plugins: [GravityChartsPlugin]});
+
+const data = {
+  series: {
+    data: [
+      {
+        type: 'line',
+        name: 'Series',
+        data: [
+          {x: 0, y: 10},
+          {x: 1, y: 25},
+          {x: 2, y: 18},
+          {x: 3, y: 30},
+        ],
+      },
+    ],
+  },
+};
+
+export default function App() {
+  return (
+    <ThemeProvider theme="light">
+      <div style={{height: 300}}>
+        <ChartKit type="gravity-charts" data={data} />
+      </div>
+    </ThemeProvider>
+  );
+}
+```
+
+`ChartKit` adapts to its parent's size — make sure the container has an explicit height.
+
+### SplitTooltip
+
+The split-pane tooltip layout that `gravity-charts` uses on touch devices (`tooltip={{splitted: true}}`) is also available as a standalone component. It works with any content: it renders the main pane and the tooltip pane side by side (or stacked, depending on the container size) with a draggable resizer between them.
+
+```tsx
+import {SplitTooltip} from '@gravity-ui/chartkit';
+
+export function Panel() {
+  return (
+    <div style={{height: 400}}>
+      <SplitTooltip
+        renderMainPane={() => <MyVisualization />}
+        renderTooltip={() => <MyTooltipContent />}
+      />
+    </div>
+  );
+}
+```
+
+See the `SplitTooltipProps` type for layout control, pane sizing and resizer options.
+
+## Guides
+
+- [Testing Guide](https://unpkg.com/@gravity-ui/chartkit@8.12.1/build/docs/guides/testing.md)
+
+---
+
+> Docs for `@gravity-ui/chartkit@8.12.1`. Versioned at: `https://gravity-ui.com/llms/chartkit/8.12.1/llms.txt` (exact), `https://gravity-ui.com/llms/chartkit/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/chartkit/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
