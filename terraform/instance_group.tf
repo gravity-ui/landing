@@ -65,8 +65,8 @@ resource "yandex_compute_instance_group" "landing_ig" {
   }
 
   deploy_policy {
-    max_unavailable = 0
-    max_expansion   = 3
+    max_unavailable = 1
+    max_expansion   = 0
   }
 
   health_check {
