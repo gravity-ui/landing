@@ -33,7 +33,16 @@ export const IconsPage = () => {
                 query.delete(ICON_QUERY_KEY);
             }
 
-            router.push({pathname: router.asPath.split('?')[0], search: query.toString()});
+            // shallow: only the query changes, so skip the getServerSideProps round trip.
+            // Without it every click waits for the server, and a failed data request
+            // makes the router fall back to a full page reload.
+            router.push(
+                {pathname: router.asPath.split('?')[0], search: query.toString()},
+                undefined,
+                {
+                    shallow: true,
+                },
+            );
         },
         [router],
     );
