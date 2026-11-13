@@ -10,6 +10,15 @@
 
 ```bash
 $ npm install @gravity-ui/dialog-fields
+```
+
+Depending on your package manager you may need to install `peerDependencies` manually.
+
+Vertical tabs use UIKit's drag-and-drop and virtualization entry points,
+and Select controls virtualize lists of 50 or more options.
+Wrap your application in UIKit's `Provider` and import `@gravity-ui/uikit/styles/styles.css`.
+
+
 ## Peer dependencies
 
 Install these in the host project at a compatible version:
@@ -22,17 +31,15 @@ Install these in the host project at a compatible version:
 | `@gravity-ui/uikit` | `^5.0.0` |
 | `@bem-react/classname` | `^1.6.0` |
 
-# Use required version of react/react-dom in case you haven't installed them yet
-$ npm install @gravity-ui/dialog-fields react@18 react-dom@18
-```
-
-Depending on your package manager you may need to install `peerDependencies` manually.
-
-
 ## Usage
 
-```ts
-import {DFDialog, FormApi} from '@gravity-ui/dialog-fields';
+This example includes the application provider. If your application already has a root
+`Provider`, omit the wrapper shown here.
+
+```tsx
+import {DFDialog} from '@gravity-ui/dialog-fields';
+import {Provider} from '@gravity-ui/uikit';
+import '@gravity-ui/uikit/styles/styles.css';
 
 interface FormValues {
   firstName: string;
@@ -41,30 +48,32 @@ interface FormValues {
 
 function MyForm() {
   return (
-    <DFDialog<FormValues>
-      visible={true}
-      headerProps={{
-        title: 'My form',
-      }}
-      onAdd={(form) => {
-        console.log(form.getState().values);
-        return Promise.resolve();
-      }}
-      fields={[
-        {
-          name: 'firstName',
-          type: 'text',
-          caption: 'First name',
-          tooltip: 'Description for first name field',
-        },
-        {
-          name: 'lastName',
-          type: 'text',
-          caption: 'LastName',
-          tooltip: 'Description for last name field',
-        },
-      ]}
-    />
+    <Provider theme="light">
+      <DFDialog<FormValues>
+        visible={true}
+        headerProps={{
+          title: 'My form',
+        }}
+        onAdd={(form) => {
+          console.log(form.getState().values);
+          return Promise.resolve();
+        }}
+        fields={[
+          {
+            name: 'firstName',
+            type: 'text',
+            caption: 'First name',
+            tooltip: 'Description for first name field',
+          },
+          {
+            name: 'lastName',
+            type: 'text',
+            caption: 'LastName',
+            tooltip: 'Description for last name field',
+          },
+        ]}
+      />
+    </Provider>
   );
 }
 ```
