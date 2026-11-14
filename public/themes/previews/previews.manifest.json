@@ -21,6 +21,13 @@
                 "dark": "1ab0b84688d253fd7954925d26861ab59fc76eafe8d4ecb0bbca2a3cfedcd8ce"
             }
         },
+        "moya-tema": {
+            "themeHash": "ec342656c835cbc603393d5df63ee06a4a4c8cb0906a2664dc021491833573d8",
+            "files": {
+                "light": "f84caab74bb0b05975a3831112edfab0f5f0fefedde474d2506fb44e60c1c4e1",
+                "dark": "194feb2e0167d90595442d0127ab93cce191236584248e24fefbb2494007b33e"
+            }
+        },
         "orange": {
             "themeHash": "8617d270c9c851731800a2c4169dd79783de75c71f641bb6bf9f4003f95d4507",
             "files": {
