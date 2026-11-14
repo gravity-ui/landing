@@ -91,7 +91,12 @@ export class CacheQuery<Data> {
                 return this._data;
             }
 
-            await this._currentQueryPromise;
+            try {
+                await this._currentQueryPromise;
+            } catch {
+                // Rejection is handled in revalidate(), which shares this promise;
+                // awaiting here must not rethrow past onError.
+            }
             return this._data;
         }
 

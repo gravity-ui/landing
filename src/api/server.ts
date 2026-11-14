@@ -136,13 +136,18 @@ export class ServerApi {
 
     async fetchRepositoryCodeOwners(repoOwner: string, repo: string): Promise<CodeOwners[]> {
         const url = `https://raw.githubusercontent.com/${repoOwner}/${repo}/main/CODEOWNERS`;
-        const res = await fetch(url);
 
-        if (!res.ok) {
+        let codeOwnersText: string | null = null;
+        try {
+            codeOwnersText = await this.fetchGithubRawFile(url);
+        } catch (err) {
+            console.error(err);
+        }
+
+        if (!codeOwnersText) {
             return [];
         }
 
-        const codeOwnersText = await res.text();
         const lines = codeOwnersText.split('\n');
         const codeOwners: CodeOwners[] = [];
 
@@ -301,15 +306,8 @@ export class ServerApi {
     async fetchChangelogInfo(changelogUrl: string): Promise<string> {
         if (!changelogUrl) return '';
 
-        const headers: Record<string, string> = {'User-Agent': 'request'};
-
         try {
-            const response = await fetch(changelogUrl, {
-                headers,
-            });
-            if (response.ok) {
-                return await response.text();
-            }
+            return (await this.fetchGithubRawFile(changelogUrl)) ?? '';
         } catch (err) {
             console.error(err);
         }
@@ -328,16 +326,9 @@ export class ServerApi {
         pt: string;
         ja: string;
     }> {
-        const headers: Record<string, string> = {'User-Agent': 'request'};
-
         const fetchReadmeContent = async (url: string) => {
             try {
-                const response = await fetch(url, {
-                    headers,
-                });
-                if (response.ok) {
-                    return await response.text();
-                }
+                return (await this.fetchGithubRawFile(url)) ?? '';
             } catch (err) {
                 console.error(err);
             }
@@ -507,36 +498,33 @@ export class ServerApi {
         componentId: string;
         locale: string;
     }): Promise<string> {
-        let readmeContent = '';
+        let readmeContent: string | null = null;
 
-        const headers: Record<string, string> = {'User-Agent': 'request'};
-
-        try {
-            if (locale !== 'en' && locale !== 'ru') {
-                try {
-                    readmeContent = await import(
-                        `../content/local-docs/components/${libId}/${componentId}/README-${locale}.md`
-                    ).then((module) => module.default);
-                } catch (err) {
-                    console.warn(
-                        `Can't find local docs for "${componentId}", library "${libId}", lang "${locale}"`,
-                    );
-                }
-            } else {
-                const res = await fetch(readmeUrl[locale], {headers});
-                if (res.status >= 200 && res.status < 300) {
-                    readmeContent = await res.text();
-                }
+        if (locale !== 'en' && locale !== 'ru') {
+            try {
+                readmeContent = await import(
+                    `../content/local-docs/components/${libId}/${componentId}/README-${locale}.md`
+                ).then((module) => module.default);
+            } catch (err) {
+                console.warn(
+                    `Can't find local docs for "${componentId}", library "${libId}", lang "${locale}"`,
+                );
             }
+        } else {
+            readmeContent = await this.fetchGithubRawFile(readmeUrl[locale]);
+        }
 
-            if (!readmeContent && locale !== i18n.defaultLocale) {
-                const fallbackRes = await fetch(readmeUrl[i18n.defaultLocale], {headers});
-                if (fallbackRes.status >= 200 && fallbackRes.status < 300) {
-                    readmeContent = await fallbackRes.text();
-                }
-            }
-        } catch (err) {
-            console.warn('Error fetching component README:', err);
+        if (!readmeContent && locale !== i18n.defaultLocale) {
+            readmeContent = await this.fetchGithubRawFile(readmeUrl[i18n.defaultLocale]);
+        }
+
+        // Throwing (instead of returning '') keeps CacheQuery in the error state,
+        // so a transient fetch failure is retried on the next request instead of
+        // being cached as valid empty content for the whole TTL.
+        if (!readmeContent) {
+            throw new Error(
+                `Got empty README for component "${componentId}" (lib "${libId}", locale "${locale}")`,
+            );
         }
 
         return readmeContent;
@@ -564,7 +552,13 @@ export class ServerApi {
             });
         }
 
-        const content = await this.componentsReadmeCache?.[cacheKey]?.getData?.();
+        // Waiting for revalidation (instead of immediately returning a possibly
+        // empty cache) means a request hitting a stale or errored cache entry gets
+        // fresh content rather than a 500. Stale-but-present data is still served
+        // if the refetch fails.
+        const content = await this.componentsReadmeCache?.[cacheKey]?.getData?.({
+            immediateResponse: false,
+        });
 
         if (!content) {
             throw new Error(`Can't find README for ${cacheKey}`);
@@ -761,5 +755,56 @@ export class ServerApi {
     async getSuggestedPosts(_locale: string, _postId?: number): Promise<BlogPostListItem[]> {
         // TODO: Implement when connecting to real API
         return [];
+    }
+
+    /**
+     * Fetches a file that would normally be requested from raw.githubusercontent.com
+     * through the authenticated GitHub API client. Unauthenticated raw.githubusercontent.com
+     * requests share a per-IP rate limit, which intermittently produced empty responses
+     * in production (see issue #729), while API requests count against the much higher
+     * app/token limit. Returns null when the file doesn't exist (404) so callers can
+     * fall back to another locale; throws on other errors after one retry so failures
+     * are not cached as valid content.
+     * @param url - Original raw.githubusercontent.com file URL
+     * @returns File content, or null if the file doesn't exist
+     */
+    private async fetchGithubRawFile(url: string): Promise<string | null> {
+        const match = url.match(
+            /^https:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/,
+        );
+
+        if (!match) {
+            const response = await fetch(url, {headers: {'User-Agent': 'request'}});
+            return response.ok ? await response.text() : null;
+        }
+
+        const [, owner, repo, ref, filePath] = match;
+
+        let lastError: unknown;
+        for (let attempt = 0; attempt < 2; attempt++) {
+            if (attempt > 0) {
+                await new Promise((resolve) => setTimeout(resolve, 500));
+            }
+
+            try {
+                const response = await this.octokit.rest.repos.getContent({
+                    owner,
+                    repo,
+                    path: filePath,
+                    ref,
+                    mediaType: {format: 'raw'},
+                });
+
+                return response.data as unknown as string;
+            } catch (error) {
+                if ((error as {status?: number}).status === 404) {
+                    return null;
+                }
+
+                lastError = error;
+            }
+        }
+
+        throw lastError;
     }
 }

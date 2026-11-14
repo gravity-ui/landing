@@ -27,10 +27,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         };
     }
 
+    // Components without a readme (e.g. isComingSoon) have no page — respond
+    // with 404 instead of an unhandled error that turns into a 500.
     if (!component.content?.readmeUrl) {
-        throw new Error(
-            `Component "${ctx.params?.componentId}" in library "${ctx.params?.libId}" doesn't have url for readme file`,
-        );
+        return {
+            notFound: true,
+        };
     }
 
     const locale = ctx.locale ?? i18nextConfig.i18n.defaultLocale;
