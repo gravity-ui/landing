@@ -1,0 +1,115 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-submit';
+$cardWidth: 320px;
+// Card preview (248px) + name/author row + hint: keeps the dialog height
+// steady while switching between sign-in, form, progress and success.
+$contentMinHeight: 380px;
+// The overline follows the "Recent updates" block on the main page
+// (`custom-header__news`): uppercase 11/16 semibold with 1px tracking.
+
+#{$block} {
+    &__layout {
+        display: grid;
+        grid-template-columns: $cardWidth minmax(0, 1fr);
+        gap: var(--g-spacing-8);
+        align-items: start;
+        width: 100%;
+        min-height: $contentMinHeight;
+
+        &_stacked {
+            grid-template-columns: minmax(0, 1fr);
+            gap: var(--g-spacing-6);
+            min-height: 0;
+
+            // On phones the text and the form come first, the preview below.
+            #{$block}__card {
+                order: 1;
+            }
+        }
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-5);
+        min-width: 0;
+    }
+
+    // Preview on the left, text and form on the right under which the actions sit.
+    &__card {
+        order: -1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-2);
+        min-width: 0;
+    }
+
+    &__heading {
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-2);
+    }
+
+    &__overline {
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--g-color-text-hint);
+    }
+
+    &__note {
+        color: var(--g-color-text-secondary);
+
+        svg {
+            flex: 0 0 auto;
+            margin-top: 2px;
+        }
+    }
+
+    // Holds the dialog height while the GitHub session is being checked.
+    &__loading {
+        flex: 1 0 auto;
+        min-height: $contentMinHeight;
+    }
+
+    &__progress {
+        width: 100%;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-2);
+    }
+
+    &__textarea {
+        --g-text-area-border-radius: 20px;
+    }
+
+    &__pr-link {
+        font-size: var(--g-text-body-2-font-size);
+        line-height: var(--g-text-body-2-line-height);
+    }
+
+    &__action_wide {
+        flex: 1 0 auto;
+    }
+
+    // ThemeActionDialog puts the buttons 16px under the content; another 16px
+    // separates them from the last form field.
+    &__dialog-buttons {
+        padding-top: var(--g-spacing-4);
+        padding-bottom: 22px;
+    }
+
+    // The shared ThemeActionSheet paints the button bar with --g-color-base-modal,
+    // which differs from the sheet surface and makes the bar look detached.
+    &__sheet-buttons {
+        background-color: var(--g-sheet-background-color, var(--g-color-base-float));
+        height: 60px;
+        justify-content: flex-start;
+    }
+}
