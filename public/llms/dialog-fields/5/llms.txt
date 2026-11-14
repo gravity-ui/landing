@@ -1,4 +1,4 @@
-> Generated for `@gravity-ui/dialog-fields@5.0.10`
+> Generated for `@gravity-ui/dialog-fields@5.0.0`
 
 # Dialog Fields
 
@@ -117,4 +117,4 @@ See more examples in [storybook](https://preview.yandexcloud.dev/dialog-fields).
 
 ---
 
-> Docs for `@gravity-ui/dialog-fields@5.0.10`. Versioned at: `https://gravity-ui.com/llms/dialog-fields/5.0.10/llms.txt` (exact), `https://gravity-ui.com/llms/dialog-fields/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dialog-fields/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
+> Docs for `@gravity-ui/dialog-fields@5.0.0`. Versioned at: `https://gravity-ui.com/llms/dialog-fields/5.0.0/llms.txt` (exact), `https://gravity-ui.com/llms/dialog-fields/5/llms.txt` (latest of major 5), `https://gravity-ui.com/llms/dialog-fields/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.
