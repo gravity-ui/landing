@@ -134,6 +134,7 @@ module.exports = withBundleAnalyzer({
     },
     // Transpile ESM-only packages to work with SSR
     transpilePackages: [
+        '@gravity-ui/themes',
         '@gravity-ui/uikit',
         '@gravity-ui/page-constructor',
         '@gravity-ui/blog-constructor',
