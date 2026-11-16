@@ -48,7 +48,8 @@ type SubmissionState =
       };
 
 export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
-    const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
+    const catalog = useThemeCatalog(isOpen);
+    const allThemes = React.useMemo(() => catalog.map(({metadata}) => metadata), [catalog]);
     const themeState = useThemeCreator();
     const {markSaved} = useThemeCreatorMethods();
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
