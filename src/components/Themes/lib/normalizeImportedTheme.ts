@@ -106,7 +106,8 @@ export function normalizeImportedTheme(theme: GravityTheme, payload?: ThemePaylo
             group: group as keyof typeof theme.typography.groups,
             property: 'font-family',
         });
-        const ref = payload?.[variable]?.ref;
+        const entry = payload?.[variable];
+        const ref = entry && 'value' in entry ? entry.ref : undefined;
         if (typeof ref === 'string' && isFontCssVariable(ref)) {
             const family = getKeyFromCssFontVariable(ref);
             if (Object.hasOwn(theme.typography.fontFamilies, family)) {

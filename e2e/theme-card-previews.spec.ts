@@ -1,4 +1,4 @@
-import catalog from '@gravity-ui/themes/dist/catalog.json';
+import catalog from '@gravity-ui/themes';
 import {expect, test} from '@playwright/test';
 
 const allThemes = catalog.map(({metadata}) => metadata);

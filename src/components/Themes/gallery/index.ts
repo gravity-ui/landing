@@ -1,3 +1,8 @@
+import {
+    type JsonTheme,
+    isThemizedValueWithReference,
+    isValueWithReference,
+} from '@gravity-ui/uikit-themer';
 import React from 'react';
 
 import {type ThemeMetadata, type ThemePayload, validateThemeMetadata} from './schema';
@@ -11,7 +16,7 @@ let catalogPromise: Promise<Catalog> | undefined;
 
 export function loadThemeCatalog() {
     if (!catalogPromise) {
-        catalogPromise = import('@gravity-ui/themes/dist/catalog.json')
+        catalogPromise = import('@gravity-ui/themes')
             .then(({default: catalog}) => {
                 return catalog.flatMap((entry) => {
                     const metadata: unknown = entry.metadata;
@@ -56,10 +61,17 @@ export const FEATURED_THEME_IDS = [
     'retro-wave-radio',
 ] as const;
 
-export async function loadThemePayload(id: string): Promise<ThemePayload> {
+export async function loadThemePayload(id: string): Promise<JsonTheme> {
     const entry = (await loadThemeCatalog()).find((theme) => theme.metadata.id === id);
     if (!entry) throw new Error('Unknown theme');
-    return entry.payload as ThemePayload;
+    const payload: JsonTheme = {};
+    // parseJSON ignores incomplete mode pairs; narrow to the values it can import.
+    for (const [key, value] of Object.entries(entry.payload as ThemePayload)) {
+        if (isValueWithReference(value) || isThemizedValueWithReference(value)) {
+            payload[key] = value;
+        }
+    }
+    return payload;
 }
 
 export * from './schema';
