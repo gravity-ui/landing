@@ -16,9 +16,8 @@ import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
 import {createUserOctokit, fetchGithubProfile} from './oauth';
 import {reserveDispatch, submissionJobId} from './quota';
 import {ReceiptError, signReceipt, verifyReceipt} from './receipt';
-import type {ThemeInput} from './receipt';
 import {validateThemeSubmission} from './submission-validation';
-import type {SubmissionEvent} from './types';
+import type {SubmissionEvent, ThemeInput} from './types';
 
 // Preparation has no external write or quota charge: save its response before dispatch.
 export async function submitTheme(token: string, body: unknown) {

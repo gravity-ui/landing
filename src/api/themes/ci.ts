@@ -6,8 +6,9 @@ import {Octokit} from '@octokit/rest';
 import sharp from 'sharp';
 
 import {sha256, validateThemePayload} from './gallery-files';
-import type {ThemeInput, ThemeJob} from './receipt';
+import type {ThemeJob} from './receipt';
 import {ReceiptError} from './receipt';
+import type {ThemeInput} from './types';
 
 export function ciConfig() {
     const names = [

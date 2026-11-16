@@ -23,7 +23,7 @@ import {
     MAX_DESCRIPTION_LENGTH,
     MAX_TAGS,
     MAX_THEME_NAME_LENGTH,
-} from '../../../../api/themes/config';
+} from '../../../../api/themes/types';
 import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
 import {THEME_TAGS, type ThemeMetadata, type ThemeTag, allThemes} from '../../gallery';

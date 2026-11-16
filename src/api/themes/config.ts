@@ -7,10 +7,6 @@ export const UPSTREAM_BRANCH = 'main';
 export const GALLERY_DIR = 'themes';
 export const PREVIEWS_DIR = 'previews';
 
-export const MAX_THEME_NAME_LENGTH = 40;
-export const MAX_DESCRIPTION_LENGTH = 200;
-export const MAX_TAGS = 3;
-
 export const OAUTH_SCOPE = 'public_repo';
 export const SESSION_COOKIE = 'themes_session';
 export const SESSION_COOKIE_PATH = '/api/themes';

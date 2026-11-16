@@ -1,19 +1,8 @@
-import {MAX_DESCRIPTION_LENGTH, MAX_TAGS, MAX_THEME_NAME_LENGTH} from '../../../api/themes/config';
+import {MAX_DESCRIPTION_LENGTH, MAX_TAGS, MAX_THEME_NAME_LENGTH} from '../../../api/themes/types';
+import type {SubmissionFieldErrors} from '../../../api/themes/types';
 import {THEME_TAGS, type ThemeMetadata, type ThemeTag, toThemeId} from '../gallery/schema';
 
-export interface SubmissionDraft {
-    name: string;
-    descriptionEn: string;
-    descriptionRu: string;
-    tags: ThemeTag[];
-}
-
-export type SubmissionFieldErrors = Partial<
-    Record<
-        keyof SubmissionDraft,
-        'required' | 'too-long' | 'invalid-name' | 'name-taken' | 'invalid-tags'
-    >
->;
+export type {SubmissionDraft, SubmissionFieldErrors} from '../../../api/themes/types';
 
 // The server and form must validate the same normalized text.
 export const cleanSubmissionText = (value: unknown) =>
