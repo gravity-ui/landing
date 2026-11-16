@@ -5,8 +5,7 @@ import type {ThemePreviewMode} from '../../gallery';
 import {useThemeCreator} from '../../hooks';
 import {exportTheme, replaceRootToCustomClassName} from '../../lib/themeCreatorExport';
 
-// Same frame as the hidden capture route (`/themes/_internal/card-preview`):
-// a 555x375 box over the Table sample rendered at its natural ~740px width.
+// A 555x375 card frame over the Table sample rendered at its natural ~740px width.
 const CAPTURE_WIDTH = 555;
 const CAPTURE_HEIGHT = 375;
 const SAMPLE_WIDTH = 740;
