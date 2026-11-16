@@ -55,6 +55,7 @@ export const ThemeCardLivePreview: React.FC<ThemeCardLivePreviewProps> = ({mode}
             ref={boxRef}
             style={{position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none'}}
             aria-hidden="true"
+            {...{inert: ''}}
         >
             <div
                 // `PreviewLayout` reads `initialTheme` once, so the sample is remounted per mode.
