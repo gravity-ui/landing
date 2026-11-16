@@ -15,7 +15,7 @@ import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
 import {hashJobInput, isJobInputValid} from './job-input';
 import {createUserOctokit, fetchGithubProfile} from './oauth';
 import {reserveDispatch, submissionJobId} from './quota';
-import {ReceiptError, signReceipt, verifyReceipt} from './receipt';
+import {RECEIPT_TTL_SECONDS, ReceiptError, signReceipt, verifyReceipt} from './receipt';
 import {validateThemeSubmission} from './submission-validation';
 import type {SubmissionEvent, ThemeInput} from './types';
 
@@ -37,7 +37,11 @@ export async function submitTheme(token: string, body: unknown) {
     };
     const input = {metadata, payload};
     workflowDispatchBody(job, input);
-    return {receipt: await signReceipt(job), input, expiresAt: createdAt + 86400000};
+    return {
+        receipt: await signReceipt(job),
+        input,
+        expiresAt: createdAt + RECEIPT_TTL_SECONDS * 1000,
+    };
 }
 
 async function authenticate(token: string, receipt: unknown) {
