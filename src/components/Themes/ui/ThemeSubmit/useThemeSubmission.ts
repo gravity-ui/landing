@@ -126,9 +126,6 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     const activeKey = user ? `${ACTIVE_JOB_KEY}:${user.id}` : null;
     React.useEffect(() => {
         try {
-            // Unowned legacy browser state cannot be safely attributed to an account.
-            localStorage.removeItem(ACTIVE_JOB_KEY);
-            localStorage.removeItem('themes.activeSubmissionJob');
             const job = activeKey ? loadSubmission(activeKey) : null;
             if (
                 job &&
