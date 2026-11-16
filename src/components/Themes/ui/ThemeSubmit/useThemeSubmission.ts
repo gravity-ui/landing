@@ -56,6 +56,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     // Until the session is known the dialog shows neither sign-in nor the form.
     const [isUserLoading, setUserLoading] = React.useState(true);
     const [state, setState] = React.useState<SubmissionState>({status: 'idle'});
+    const [activeJob, setActiveJob] = React.useState<StoredSubmission | null>(null);
 
     // Back from a GitHub sign-in that the server could not finish.
     React.useEffect(() => {
@@ -121,7 +122,6 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         setState({status: 'idle'});
     }, []);
 
-    const [activeJob, setActiveJob] = React.useState<StoredSubmission | null>(null);
     const [pollAttempt, retryPolling] = React.useReducer((value: number) => value + 1, 0);
     const activeKey = user ? `${ACTIVE_JOB_KEY}:${user.id}` : null;
     React.useEffect(() => {
