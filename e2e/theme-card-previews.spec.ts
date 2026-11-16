@@ -1,6 +1,9 @@
+import catalog from '@gravity-ui/themes/dist/catalog.json';
 import {expect, test} from '@playwright/test';
 
-import {allThemes, getThemePreview} from '../src/components/Themes/gallery';
+const allThemes = catalog.map(({metadata}) => metadata);
+const getThemePreview = (id: string, mode: 'light' | 'dark') =>
+    catalog.find(({metadata}) => metadata.id === id)?.previews[mode];
 
 // The catalog ships 740x500 PNGs; cards display them at half size.
 const EXPECTED_WIDTH = 740;
