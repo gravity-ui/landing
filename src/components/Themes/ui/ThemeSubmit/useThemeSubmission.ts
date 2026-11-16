@@ -6,11 +6,7 @@ import {
     SUBMISSION_STEP_COUNT,
     SUBMIT_RETURN_PARAM,
 } from '../../../../api/themes/types';
-import type {
-    SubmissionErrorCode as ServerSubmissionErrorCode,
-    SubmissionEvent,
-    ThemeInput,
-} from '../../../../api/themes/types';
+import type {SubmissionErrorCode as ServerSubmissionErrorCode} from '../../../../api/themes/types';
 import {useThemeCatalog} from '../../gallery';
 import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
 import {
@@ -41,17 +37,15 @@ type SubmissionState =
           fields?: SubmissionFieldErrors;
       };
 
-const API_BASE = '/api/themes';
-
-interface StoredSubmission {
-    receipt: string;
-    input: ThemeInput;
-    expiresAt: number;
-    dispatchAttempted: boolean;
-    userId: number;
-}
-
-const ACTIVE_JOB_KEY = 'themes.activeSubmissionReceipt';
+import {
+    ACTIVE_JOB_KEY,
+    API_BASE,
+    advanceSubmission,
+    clearSubmission,
+    loadSubmission,
+    saveSubmission,
+} from './submissionJob';
+import type {StoredSubmission} from './submissionJob';
 
 export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
@@ -135,8 +129,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
             // Unowned legacy browser state cannot be safely attributed to an account.
             localStorage.removeItem(ACTIVE_JOB_KEY);
             localStorage.removeItem('themes.activeSubmissionJob');
-            const saved = activeKey ? localStorage.getItem(activeKey) : null;
-            const job = saved ? (JSON.parse(saved) as StoredSubmission) : null;
+            const job = activeKey ? loadSubmission(activeKey) : null;
             if (
                 job &&
                 (job.userId !== user?.id ||
@@ -145,7 +138,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     !Number.isFinite(job.expiresAt) ||
                     job.expiresAt <= Date.now())
             ) {
-                if (activeKey) localStorage.removeItem(activeKey);
+                if (activeKey) clearSubmission(activeKey);
                 setActiveJob(null);
                 setState({status: 'error', code: 'receipt-expired'});
             } else setActiveJob(job);
@@ -156,100 +149,26 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     React.useEffect(() => {
         if (!activeJob || !user || !activeKey) return undefined;
         const controller = new AbortController();
-        let job = activeJob;
         let timer: ReturnType<typeof setTimeout>;
         const poll = async () => {
             try {
-                if (job.userId !== user.id) return;
-                if (!job.dispatchAttempted) {
-                    // Persist intent before any network write. A lost response is only polled.
-                    const saved = JSON.parse(
-                        localStorage.getItem(activeKey) || 'null',
-                    ) as StoredSubmission | null;
-                    if (!saved?.dispatchAttempted) {
-                        localStorage.setItem(
-                            activeKey,
-                            JSON.stringify({...job, dispatchAttempted: true}),
-                        );
-                        job = {...job, dispatchAttempted: true};
-                        try {
-                            const dispatched = await fetch(`${API_BASE}/dispatch`, {
-                                method: 'POST',
-                                credentials: 'same-origin',
-                                signal: controller.signal,
-                                headers: {'Content-Type': 'application/json'},
-                                body: JSON.stringify({
-                                    receipt: activeJob.receipt,
-                                    input: activeJob.input,
-                                }),
-                            });
-                            if (!dispatched.ok) {
-                                const error = await dispatched.json();
-                                if (controller.signal.aborted) return;
-                                if (dispatched.status === 401 || error.code === 'session-expired')
-                                    setUser(null);
-                                job = {...job, dispatchAttempted: false};
-                                localStorage.setItem(activeKey, JSON.stringify(job));
-                                if (error.terminal) {
-                                    localStorage.removeItem(activeKey);
-                                    setActiveJob(null);
-                                }
-                                setState({
-                                    status: 'error',
-                                    code:
-                                        dispatched.status === 401
-                                            ? 'session-expired'
-                                            : error.code || 'github',
-                                });
-                                return;
-                            }
-                        } catch {
-                            if (controller.signal.aborted) return;
-                        }
-                    } else job = {...job, dispatchAttempted: true};
-                }
-                const response = await fetch(`${API_BASE}/status`, {
-                    method: 'POST',
-                    credentials: 'same-origin',
-                    signal: controller.signal,
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({receipt: activeJob.receipt}),
-                });
-                if (response.status === 401) {
-                    setUser(null);
-                    setState({status: 'error', code: 'session-expired'});
-                    return;
-                }
-                let event: SubmissionEvent = await response.json();
-                if (
-                    event.type === 'step' &&
-                    event.index === SUBMISSION_STEP.pullRequest &&
-                    !controller.signal.aborted
-                ) {
-                    setState({
-                        status: 'submitting',
-                        stepIndex: SUBMISSION_STEP.pullRequest,
-                        stepCount: event.count,
-                    });
-                    const finalized = await fetch(`${API_BASE}/finalize`, {
-                        method: 'POST',
-                        credentials: 'same-origin',
-                        signal: controller.signal,
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({receipt: activeJob.receipt}),
-                    });
-                    if (controller.signal.aborted) return;
-                    if (finalized.status === 401) {
-                        setUser(null);
-                        setState({status: 'error', code: 'session-expired'});
-                        return;
-                    }
-                    event = await finalized.json();
-                }
+                if (activeJob.userId !== user.id) return;
+                const event = await advanceSubmission(
+                    activeJob,
+                    activeKey,
+                    controller.signal,
+                    (count) => {
+                        setState({
+                            status: 'submitting',
+                            stepIndex: SUBMISSION_STEP.pullRequest,
+                            stepCount: count,
+                        });
+                    },
+                );
                 if (controller.signal.aborted) return;
                 if (event.type === 'error' && event.code === 'session-expired') setUser(null);
                 if (event.type === 'done') {
-                    localStorage.removeItem(activeKey);
+                    clearSubmission(activeKey);
                     setActiveJob(null);
                     setState({
                         status: 'success',
@@ -266,7 +185,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     });
                 } else {
                     if (event.terminal) {
-                        localStorage.removeItem(activeKey);
+                        clearSubmission(activeKey);
                         setActiveJob(null);
                     }
                     setState({
@@ -331,7 +250,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     dispatchAttempted: false,
                 };
                 // Both receipt and immutable canonical input are durable before dispatch starts.
-                localStorage.setItem(activeKey, JSON.stringify(job));
+                saveSubmission(activeKey, job);
                 setActiveJob(job);
             } else {
                 if (response.status === 401 || result.code === 'session-expired') setUser(null);
@@ -347,7 +266,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     }, [activeJob, draft, requestBody, user, activeKey, allThemes]);
 
     const reset = React.useCallback(() => {
-        if (activeKey) localStorage.removeItem(activeKey);
+        if (activeKey) clearSubmission(activeKey);
         setActiveJob(null);
         setState({status: 'idle'});
     }, [activeKey]);
