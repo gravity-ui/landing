@@ -41,6 +41,12 @@ import {useThemeCreator, useThemeCreatorMethods} from './hooks';
 import {DEFAULT_THEME} from './lib/constants';
 import type {BrandPreset} from './lib/constants';
 import {normalizeImportedTheme} from './lib/normalizeImportedTheme';
+import {
+    SIGN_IN_FAILED_PARAM,
+    SUBMIT_RETURN_PARAM,
+    restoreSubmitReturn,
+    takeSubmitReopen,
+} from './lib/themeCreatorPersistence';
 import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
 import {parseRgbStringToHex} from './ui/ColorPickerInput/utils';
 import {ColorsTab} from './ui/ColorsTab/ColorsTab';
@@ -55,12 +61,6 @@ import {ThemeImport} from './ui/ThemeImport/ThemeImport';
 import {ThemePlaygroundBar} from './ui/ThemePlaygroundBar/ThemePlaygroundBar';
 import {ThemeSubmit} from './ui/ThemeSubmit';
 import {ThemeSubmitContext} from './ui/ThemeSubmit/ThemeSubmitContext';
-import {
-    SIGN_IN_FAILED_PARAM,
-    SUBMIT_RETURN_PARAM,
-    restoreSubmitReturn,
-    takeSubmitReopen,
-} from './ui/ThemeSubmit/submitReturn';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
 
 const b = block('themes');

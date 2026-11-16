@@ -6,6 +6,7 @@ import {useOnLeavePageConfirmation} from '../../../hooks/useOnLeavePageConfirmat
 import {BrandPreset} from '../lib/constants';
 import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreatorContext';
 import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
+import {clearSubmitReturn} from '../lib/themeCreatorPersistence';
 import type {
     AddColorToThemeParams,
     AddFontFamilyTypeParams,
@@ -38,8 +39,6 @@ import {
     updateFontFamilyTypeTitleInTheme,
 } from '../lib/themeCreatorUtils';
 import type {AdvancedColorType, ColorsSettingsType, ThemeCreatorState} from '../lib/types';
-
-import {clearSubmitReturn} from './ThemeSubmit/submitReturn';
 
 type ThemeCreatorAction =
     | {type: 'markSaved'}

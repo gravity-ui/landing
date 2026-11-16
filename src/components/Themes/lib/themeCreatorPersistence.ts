@@ -1,4 +1,4 @@
-import type {ThemeCreatorState} from '../../lib/types';
+import type {ThemeCreatorState} from './types';
 
 // Survives the GitHub sign-in round trip of the submit dialog: the Themer
 // keeps its theme only in memory, so the whole editor state is parked in
@@ -13,7 +13,7 @@ const REOPEN_KEY = 'gravity-landing:theme-submit:reopen';
 const SIGN_IN_FAILED_KEY = 'gravity-landing:theme-submit:sign-in-failed';
 
 export const SUBMIT_RETURN_PARAM = 'submitTheme';
-export {SIGN_IN_FAILED_PARAM} from '../../../../api/themes/config';
+export {SIGN_IN_FAILED_PARAM} from '../../../api/themes/config';
 
 function storage() {
     try {
