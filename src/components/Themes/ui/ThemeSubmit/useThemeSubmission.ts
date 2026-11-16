@@ -50,7 +50,6 @@ interface StoredSubmission {
 }
 
 const ACTIVE_JOB_KEY = 'themes.activeSubmissionReceipt';
-const PENDING_REQUEST_KEY = 'themes.pendingSubmissionRequest';
 
 export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft) {
     const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
@@ -129,12 +128,10 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
     const [activeJob, setActiveJob] = React.useState<StoredSubmission | null>(null);
     const [pollAttempt, retryPolling] = React.useReducer((value: number) => value + 1, 0);
     const activeKey = user ? `${ACTIVE_JOB_KEY}:${user.id}` : null;
-    const pendingKey = user ? `${PENDING_REQUEST_KEY}:${user.id}` : null;
     React.useEffect(() => {
         try {
             // Unowned legacy browser state cannot be safely attributed to an account.
             localStorage.removeItem(ACTIVE_JOB_KEY);
-            localStorage.removeItem(PENDING_REQUEST_KEY);
             localStorage.removeItem('themes.activeSubmissionJob');
             const saved = activeKey ? localStorage.getItem(activeKey) : null;
             const job = saved ? (JSON.parse(saved) as StoredSubmission) : null;
@@ -155,7 +152,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
         }
     }, [activeKey, user?.id]);
     React.useEffect(() => {
-        if (!activeJob || !user || !activeKey || !pendingKey) return undefined;
+        if (!activeJob || !user || !activeKey) return undefined;
         const controller = new AbortController();
         let job = activeJob;
         let timer: ReturnType<typeof setTimeout>;
@@ -243,7 +240,6 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                 if (event.type === 'error' && event.code === 'session-expired') setUser(null);
                 if (event.type === 'done') {
                     localStorage.removeItem(activeKey);
-                    localStorage.removeItem(pendingKey);
                     setActiveJob(null);
                     setState({
                         status: 'success',
@@ -261,7 +257,6 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                 } else {
                     if (event.terminal) {
                         localStorage.removeItem(activeKey);
-                        localStorage.removeItem(pendingKey);
                         setActiveJob(null);
                     }
                     setState({
@@ -284,10 +279,10 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
             controller.abort();
             clearTimeout(timer);
         };
-    }, [activeJob, user, activeKey, pendingKey, pollAttempt]);
+    }, [activeJob, user, activeKey, pollAttempt]);
 
     const submit = React.useCallback(async () => {
-        if (!user || !activeKey || !pendingKey) return;
+        if (!user || !activeKey) return;
         if (activeJob) {
             // Re-enter polling without reserving another attempt.
             retryPolling();
@@ -331,7 +326,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
         } catch {
             setState({status: 'error', code: 'github'});
         }
-    }, [activeJob, draft, requestBody, user, activeKey, pendingKey, allThemes]);
+    }, [activeJob, draft, requestBody, user, activeKey, allThemes]);
 
     const reset = React.useCallback(() => {
         if (activeKey) localStorage.removeItem(activeKey);
