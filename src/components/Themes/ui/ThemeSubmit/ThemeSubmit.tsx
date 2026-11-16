@@ -82,7 +82,8 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         }
     }, [state.status]);
 
-    const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
+    const catalog = useThemeCatalog(isOpen);
+    const allThemes = React.useMemo(() => catalog.map(({metadata}) => metadata), [catalog]);
     const themeId = toThemeId(draft.name);
     // The gallery stores only the theme JSON, so the loading link of a custom
     // font would be lost and the published theme would fall back to the default font.
