@@ -17,6 +17,16 @@ import {
 import {exportTheme} from '../../lib/themeCreatorExport';
 import {saveSubmitReturn, takeSignInFailed} from '../../lib/themeCreatorPersistence';
 
+import {
+    ACTIVE_JOB_KEY,
+    API_BASE,
+    advanceSubmission,
+    clearSubmission,
+    loadSubmission,
+    saveSubmission,
+} from './submissionJob';
+import type {StoredSubmission} from './submissionJob';
+
 export type SubmissionErrorCode = ServerSubmissionErrorCode | 'sign-in' | 'storage';
 
 export interface GithubUser {
@@ -36,16 +46,6 @@ type SubmissionState =
           forkUrl?: string;
           fields?: SubmissionFieldErrors;
       };
-
-import {
-    ACTIVE_JOB_KEY,
-    API_BASE,
-    advanceSubmission,
-    clearSubmission,
-    loadSubmission,
-    saveSubmission,
-} from './submissionJob';
-import type {StoredSubmission} from './submissionJob';
 
 export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
