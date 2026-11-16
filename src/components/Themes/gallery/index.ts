@@ -1,16 +1,23 @@
 import React from 'react';
 
-import {type ThemePayload, validateThemeMetadata} from './schema';
+import {type ThemeMetadata, type ThemePayload, validateThemeMetadata} from './schema';
 
-type Catalog = typeof import('@gravity-ui/themes/dist/catalog.json');
+type Catalog = {
+    metadata: ThemeMetadata;
+    payload: unknown;
+    previews: {light: string; dark: string};
+}[];
 let catalogPromise: Promise<Catalog> | undefined;
 
 export function loadThemeCatalog() {
     if (!catalogPromise) {
         catalogPromise = import('@gravity-ui/themes/dist/catalog.json')
             .then(({default: catalog}) => {
-                catalog.forEach(({metadata}) => validateThemeMetadata(metadata));
-                return catalog;
+                return catalog.map((entry) => {
+                    const metadata: unknown = entry.metadata;
+                    validateThemeMetadata(metadata);
+                    return {...entry, metadata};
+                });
             })
             .catch((error) => {
                 catalogPromise = undefined;
@@ -48,7 +55,7 @@ export const FEATURED_THEME_IDS = [
 export async function loadThemePayload(id: string): Promise<ThemePayload> {
     const entry = (await loadThemeCatalog()).find((theme) => theme.metadata.id === id);
     if (!entry) throw new Error('Unknown theme');
-    return entry.payload as unknown as ThemePayload;
+    return entry.payload as ThemePayload;
 }
 
 export * from './schema';
