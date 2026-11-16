@@ -10,6 +10,7 @@ import {
     findRun,
     workflowDispatchBody,
 } from './ci';
+import {DISPATCH_RECONCILIATION_MS, DISPATCH_WINDOW_MS} from './config';
 import {buildGalleryFiles} from './gallery-files';
 import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
 import {hashJobInput, isJobInputValid} from './job-input';
@@ -28,7 +29,7 @@ export async function submitTheme(token: string, body: unknown) {
         id: submissionJobId(profile.id, randomUUID()),
         userId: profile.id,
         createdAt,
-        dispatchBefore: createdAt + 120000,
+        dispatchBefore: createdAt + DISPATCH_WINDOW_MS,
         themeHash: hashJobInput(metadata, payload),
         revision: config.revision,
         repository: `${config.owner}/${config.repo}`,
@@ -72,7 +73,7 @@ export async function readThemeJob(token: string, receipt: unknown): Promise<Sub
     const ci = createCiOctokit();
     const run = await findRun(ci, job);
     if (!run) {
-        if (Date.now() > job.dispatchBefore + 600000) {
+        if (Date.now() > job.dispatchBefore + DISPATCH_RECONCILIATION_MS) {
             return {type: 'error', code: 'dispatch-unconfirmed', terminal: true};
         }
         return {type: 'step', index: 1, count: 5};

@@ -26,3 +26,6 @@ export function isThemeSubmissionConfigured() {
             process.env.THEMES_SESSION_SECRET,
     );
 }
+
+export const DISPATCH_WINDOW_MS = 2 * 60 * 1000;
+export const DISPATCH_RECONCILIATION_MS = 10 * 60 * 1000;

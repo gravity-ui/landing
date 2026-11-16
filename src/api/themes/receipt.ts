@@ -2,6 +2,7 @@ import {hkdfSync} from 'crypto';
 
 import {SignJWT, jwtVerify} from 'jose';
 
+import {DISPATCH_WINDOW_MS} from './config';
 import type {UpstreamState} from './github-pr';
 
 const ISSUER = 'gravity-landing/themes';
@@ -70,7 +71,7 @@ export async function verifyReceipt(receipt: unknown, userId: number): Promise<T
         !/^[a-f0-9]{40}$/.test(job.revision) ||
         !Number.isSafeInteger(job.createdAt) ||
         !Number.isSafeInteger(job.dispatchBefore) ||
-        job.dispatchBefore !== job.createdAt + 120000 ||
+        job.dispatchBefore !== job.createdAt + DISPATCH_WINDOW_MS ||
         payload.iat !== Math.floor(job.createdAt / 1000) ||
         payload.exp !== payload.iat + RECEIPT_TTL_SECONDS ||
         !/^[a-f0-9]{40}$/.test(job.upstream?.commitSha) ||
