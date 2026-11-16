@@ -370,5 +370,5 @@
   "submit_theme_error_receipt_expired_message": "Срок сохранённой квитанции истёк. Отправьте тему заново.",
   "submit_theme_error_receipt_invalid_message": "Квитанция не подходит текущей учётной записи или конфигурации сервера.",
   "submit_theme_error_dispatch_unconfirmed_message": "GitHub не запустил генерацию превью для этой отправки. Отправьте тему ещё раз.",
-  "submit_theme_error_workflow_input_message": "Полная сжатая отправка превышает лимит передачи данных в GitHub workflow. Токены темы не удалялись."
+  "submit_theme_error_workflow_input_message": "Тема слишком большая для отправки."
 }
