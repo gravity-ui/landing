@@ -127,21 +127,20 @@ export async function dispatchRun(octokit: Octokit, job: ThemeJob, input: ThemeI
         throw new Error('Renderer tag does not match pinned revision');
     }
     const body = workflowDispatchBody(job, input);
-    const result = await octokit.request(
-        'POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches',
-        {
-            owner: config.owner,
-            repo: config.repo,
-            workflow_id: 'render-submission.yml',
-            ...body,
-            headers: {'X-GitHub-Api-Version': '2026-03-10'},
-        },
-    );
-    const data = result.data as unknown as {workflow_run_id?: number};
-    if (Number(result.status) !== 200 || !Number.isSafeInteger(data.workflow_run_id)) {
-        throw new Error('Dispatch result unconfirmed; reconcile without redispatch');
+    try {
+        await octokit.request(
+            'POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches',
+            {
+                owner: config.owner,
+                repo: config.repo,
+                workflow_id: 'render-submission.yml',
+                ...body,
+                headers: {'X-GitHub-Api-Version': '2026-03-10'},
+            },
+        );
+    } catch {
+        // Only failures after the POST starts are ambiguous. Reconcile without redispatch.
     }
-    return data.workflow_run_id!;
 }
 
 // GitHub artifact archives must contain exactly one bounded regular file.

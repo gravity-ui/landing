@@ -63,12 +63,7 @@ export async function dispatchThemeJob(token: string, receipt: unknown, input: T
     if (Date.now() > job.dispatchBefore) throw new ReceiptError('dispatch-expired');
     workflowDispatchBody(job, input);
     reserveDispatch(job.userId);
-    try {
-        await dispatchRun(ci, job, input);
-    } catch {
-        // GitHub has no atomic idempotency key. An ambiguous response is only reconciled
-        // by read-only polling; never automatically retry this write.
-    }
+    await dispatchRun(ci, job, input);
     return {accepted: true};
 }
 
