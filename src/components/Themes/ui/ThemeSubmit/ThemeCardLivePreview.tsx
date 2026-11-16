@@ -41,6 +41,7 @@ export const ThemeCardLivePreview: React.FC<ThemeCardLivePreviewProps> = ({mode}
         if (!box) {
             return undefined;
         }
+        box.setAttribute('inert', '');
         const observer = new ResizeObserver(([entry]) => {
             const {width, height} = entry.contentRect;
             setScale(Math.max(width / CAPTURE_WIDTH, height / CAPTURE_HEIGHT));
@@ -54,7 +55,6 @@ export const ThemeCardLivePreview: React.FC<ThemeCardLivePreviewProps> = ({mode}
             ref={boxRef}
             style={{position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none'}}
             aria-hidden="true"
-            {...{inert: ''}}
         >
             <div
                 // `PreviewLayout` reads `initialTheme` once, so the sample is remounted per mode.
