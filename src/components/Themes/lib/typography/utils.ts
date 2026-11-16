@@ -1,7 +1,6 @@
 import {
     DEFAULT_FONT_FAMILIES,
     DEFAULT_FONT_FAMILY_SUGGESTIONS,
-    DefaultFontFamily,
     GOOGLE_FONTS_DOWNLOAD_HOST,
 } from './constants';
 
@@ -21,7 +20,10 @@ export const generateGoogleFontDownloadLink = (fontName?: string) => {
 // (`sans`, `monospace`) whose main font is one of its suggestions. Custom fonts
 // need a loading link, which the gallery format does not store.
 export const isBuiltInFontFamily = (fontType: string, mainFont: string | undefined) =>
-    DEFAULT_FONT_FAMILIES.includes(fontType as DefaultFontFamily) &&
-    DEFAULT_FONT_FAMILY_SUGGESTIONS[fontType as DefaultFontFamily].fontSuggestions.some(
-        ({title}) => title === mainFont,
+    DEFAULT_FONT_FAMILIES.some(
+        (family) =>
+            family === fontType &&
+            DEFAULT_FONT_FAMILY_SUGGESTIONS[family].fontSuggestions.some(
+                ({title}) => title === mainFont,
+            ),
     );
