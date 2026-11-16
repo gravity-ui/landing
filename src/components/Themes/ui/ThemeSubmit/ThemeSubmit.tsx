@@ -194,12 +194,23 @@ const SuccessContent: React.FC<SuccessContentProps> = ({pullRequestUrl}) => {
 };
 
 // Same control as the Interactive "Progress" card on the main page.
-const ProgressWait: React.FC<{value: number}> = ({value}) => {
+// Step indexes come from the submission job: 0 sending, 1 waiting for CI, 2 rendering, 3+ PR.
+const PROGRESS_TITLE_KEYS = [
+    'submit_theme_progress_sending',
+    'submit_theme_progress_starting',
+    'submit_theme_progress_previews',
+] as const;
+
+const ProgressWait: React.FC<{step: number; value: number}> = ({step, value}) => {
     const {t} = useTranslation('themes');
+    const rendering = step === 1 || step === 2;
 
     return (
         <React.Fragment>
-            <Heading title={t('submit_theme_progress_title')} />
+            <Heading
+                title={t(PROGRESS_TITLE_KEYS[step] ?? 'submit_theme_progress_pull_request')}
+                description={rendering ? t('submit_theme_progress_previews_hint') : undefined}
+            />
             <Progress value={value} size="s" className={b('progress')} />
         </React.Fragment>
     );
@@ -478,6 +489,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     } else if (state.status === 'submitting') {
         main = (
             <ProgressWait
+                step={state.stepIndex}
                 value={state.stepCount ? ((state.stepIndex + 1) / state.stepCount) * 100 : 0}
             />
         );
