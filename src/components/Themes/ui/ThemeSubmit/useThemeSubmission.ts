@@ -285,6 +285,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                 }
                 let event: SubmissionEvent = await response.json();
                 if (event.type === 'step' && event.index === 3 && !controller.signal.aborted) {
+                    setState({status: 'submitting', stepIndex: 3, stepCount: event.count});
                     const finalized = await fetch(`${API_BASE}/finalize`, {
                         method: 'POST',
                         credentials: 'same-origin',
