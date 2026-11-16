@@ -1,29 +1,11 @@
 // Shared constants of the "submit a theme to the gallery" flow.
 
-export const UPSTREAM_OWNER = 'gravity-ui';
-export const UPSTREAM_REPO = 'landing';
+// No default repository: it must be created and explicitly configured by the owner.
+export const UPSTREAM_OWNER = process.env.THEMES_REPOSITORY?.split('/')[0] ?? '';
+export const UPSTREAM_REPO = process.env.THEMES_REPOSITORY?.split('/')[1] ?? '';
 export const UPSTREAM_BRANCH = 'main';
-
-export const GALLERY_DIR = 'src/components/Themes/gallery';
-export const GALLERY_INDEX_PATH = `${GALLERY_DIR}/index.ts`;
-export const PREVIEWS_DIR = 'public/themes/previews';
-export const PREVIEWS_MANIFEST_PATH = `${PREVIEWS_DIR}/previews.manifest.json`;
-
-// Files whose sha256 `scripts/update-theme-previews.mjs` mixes into every
-// `themeHash`. Keys and their order must match the script.
-export const PREVIEW_SOURCE_PATHS = {
-    captureRoute: 'src/pages/themes/_internal/card-preview/[id].tsx',
-    previewLayout: 'src/components/UISamples/PreviewLayout/PreviewLayout.tsx',
-    tablePreview: 'src/components/UISamples/TablePreview/TablePreview.tsx',
-} as const;
-
-export type PreviewSourceKey = keyof typeof PREVIEW_SOURCE_PATHS;
-
-export const PREVIEW_MODES = ['light', 'dark'] as const;
-
-// Successful submissions allowed per GitHub login within `RATE_LIMIT_WINDOW_MS`.
-export const SUBMISSIONS_PER_DAY = 3;
-export const RATE_LIMIT_WINDOW_MS = 24 * 60 * 60 * 1000;
+export const GALLERY_DIR = 'themes';
+export const PREVIEWS_DIR = 'previews';
 
 export const MAX_THEME_NAME_LENGTH = 40;
 export const MAX_DESCRIPTION_LENGTH = 200;

@@ -4,6 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
+import {getThemePreview} from '../../gallery';
 import type {LocalizedString, ThemeMetadata, ThemePreviewMode, ThemeTag} from '../../gallery';
 
 import './ThemeCard.scss';
@@ -66,7 +67,7 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                         <React.Fragment>
                             <img
                                 className={b('preview-image')}
-                                src={`/themes/previews/${metadata.id}-${previewMode}.png`}
+                                src={getThemePreview(metadata.id, previewMode)}
                                 alt={t(
                                     previewMode === 'dark'
                                         ? 'gallery_card_preview_alt_dark'

@@ -74,10 +74,11 @@ export async function revokeToken(token: string) {
 }
 
 export function createUserOctokit(token: string) {
-    return new Octokit({auth: token, userAgent: USER_AGENT});
+    return new Octokit({auth: token, userAgent: USER_AGENT, request: {timeout: 15000}});
 }
 
 export interface GithubProfile {
+    id: number;
     login: string;
     name: string | null;
     avatarUrl: string;
@@ -85,7 +86,7 @@ export interface GithubProfile {
 
 export async function fetchGithubProfile(octokit: Octokit): Promise<GithubProfile> {
     const {data} = await octokit.users.getAuthenticated();
-    return {login: data.login, name: data.name || null, avatarUrl: data.avatar_url};
+    return {id: data.id, login: data.login, name: data.name || null, avatarUrl: data.avatar_url};
 }
 
 export function getErrorStatus(error: unknown): number | undefined {

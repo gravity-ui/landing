@@ -1,3 +1,4 @@
+import {FormRow} from '@gravity-ui/components';
 import {ArrowUpRightFromSquare, CircleInfo} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
 import {
@@ -27,7 +28,9 @@ import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
 import {THEME_TAGS, type ThemeMetadata, type ThemeTag} from '../../gallery';
 import {toThemeId} from '../../gallery/schema';
-import {useThemePaletteColor} from '../../hooks';
+import {useThemeCreator, useThemePaletteColor} from '../../hooks';
+import {type SubmissionFieldErrors, validateSubmissionDraft} from '../../lib/submissionValidation';
+import {isBuiltInFontFamily} from '../../lib/typography/utils';
 import {ThemeActionDialog} from '../ThemeActionDialog/ThemeActionDialog';
 import {ThemeActionSheet} from '../ThemeActionSheet/ThemeActionSheet';
 import {TAG_LABEL_KEYS, ThemeCard} from '../ThemeCard/ThemeCard';
@@ -45,6 +48,22 @@ import {
 const b = block('theme-submit');
 
 const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: string}> = {
+    'receipt-expired': {
+        title: 'submit_theme_error_receipt_title',
+        message: 'submit_theme_error_receipt_expired_message',
+    },
+    'receipt-invalid': {
+        title: 'submit_theme_error_receipt_title',
+        message: 'submit_theme_error_receipt_invalid_message',
+    },
+    'dispatch-unconfirmed': {
+        title: 'submit_theme_error_receipt_title',
+        message: 'submit_theme_error_dispatch_unconfirmed_message',
+    },
+    'workflow-input-too-large': {
+        title: 'submit_theme_error_invalid_title',
+        message: 'submit_theme_error_workflow_input_message',
+    },
     'name-taken': {
         title: 'submit_theme_error_name_taken_title',
         message: 'submit_theme_error_name_taken_message',
@@ -53,6 +72,10 @@ const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: string}> 
         title: 'submit_theme_error_rate_limit_title',
         message: 'submit_theme_error_rate_limit_message',
     },
+    preview: {
+        title: 'submit_theme_error_preview_title',
+        message: 'submit_theme_error_preview_message',
+    },
     github: {
         title: 'submit_theme_error_github_title',
         message: 'submit_theme_error_github_message',
@@ -60,6 +83,14 @@ const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: string}> 
     invalid: {
         title: 'submit_theme_error_invalid_title',
         message: 'submit_theme_error_invalid_message',
+    },
+    'invalid-metadata': {
+        title: 'submit_theme_error_metadata_title',
+        message: 'submit_theme_error_metadata_message',
+    },
+    storage: {
+        title: 'submit_theme_error_storage_title',
+        message: 'submit_theme_error_storage_message',
     },
     'sign-in': {
         title: 'submit_theme_error_sign_in_title',
@@ -83,21 +114,26 @@ const INITIAL_DRAFT: ThemeSubmissionDraft = {
 };
 
 interface FieldProps {
+    fieldId: string;
     label: string;
     hint?: string;
     children: React.ReactNode;
 }
 
-const Field: React.FC<FieldProps> = ({label, hint, children}) => (
-    <div className={b('field')}>
-        <Text variant="subheader-2">{label}</Text>
+const Field: React.FC<FieldProps> = ({fieldId, label, hint, children}) => (
+    <FormRow
+        direction="column"
+        fieldId={fieldId}
+        className={b('field')}
+        label={<Text variant="subheader-2">{label}</Text>}
+    >
         {children}
         {hint && (
             <Text variant="caption-2" color="secondary">
                 {hint}
             </Text>
         )}
-    </div>
+    </FormRow>
 );
 
 const Heading: React.FC<{title: string; description?: string}> = ({title, description}) => {
@@ -176,6 +212,8 @@ interface FormContentProps {
     themeId: string;
     errorCode: SubmissionErrorCode | null;
     forkUrl?: string;
+    hasCustomFont: boolean;
+    fieldErrors: SubmissionFieldErrors;
     onChange: (patch: Partial<ThemeSubmissionDraft>) => void;
     onSignOut: () => void;
 }
@@ -186,20 +224,34 @@ const FormContent: React.FC<FormContentProps> = ({
     themeId,
     errorCode,
     forkUrl,
+    hasCustomFont,
+    fieldErrors,
     onChange,
     onSignOut,
 }) => {
     const {t} = useTranslation('themes');
     const error = errorCode ? ERROR_KEYS[errorCode] : null;
-    // A name without letters or digits gives no id, so the submit button stays off.
-    const isNameWithoutId = Boolean(draft.name.trim()) && !themeId;
-
-    let nameHint: string | undefined;
-    if (themeId) {
-        nameHint = t('submit_theme_name_note', {id: themeId});
-    } else if (isNameWithoutId) {
-        nameHint = t('submit_theme_name_no_id');
-    }
+    const fieldId = React.useId();
+    const [touched, setTouched] = React.useState<
+        Partial<Record<keyof ThemeSubmissionDraft, boolean>>
+    >({});
+    const fieldError = (field: keyof ThemeSubmissionDraft) => {
+        const code = fieldErrors[field];
+        if (
+            !code ||
+            (!touched[field] && !draft[field].length && errorCode !== 'invalid-metadata')
+        ) {
+            return undefined;
+        }
+        return t(`submit_theme_field_${field}_${code}`);
+    };
+    const touch = (field: keyof ThemeSubmissionDraft) =>
+        setTouched((prev) => ({...prev, [field]: true}));
+    const nameError =
+        errorCode === 'name-taken'
+            ? t('submit_theme_error_name_taken_message')
+            : fieldError('name');
+    const nameHint = themeId ? t('submit_theme_name_note', {id: themeId}) : undefined;
 
     return (
         <React.Fragment>
@@ -232,50 +284,76 @@ const FormContent: React.FC<FormContentProps> = ({
                     }
                 />
             )}
-            <Field label={t('submit_theme_name_label')} hint={nameHint}>
+            {hasCustomFont && (
+                <Alert
+                    theme="warning"
+                    title={t('submit_theme_custom_font_title')}
+                    message={t('submit_theme_custom_font_message')}
+                />
+            )}
+            <Field fieldId={`${fieldId}-name`} label={t('submit_theme_name_label')} hint={nameHint}>
                 <TextInput
+                    id={`${fieldId}-name`}
                     size="xl"
                     pin="round-round"
+                    onBlur={() => touch('name')}
+                    errorMessage={nameError}
                     value={draft.name}
                     placeholder={t('submit_theme_name_placeholder')}
                     onUpdate={(name) => onChange({name})}
                     controlProps={{maxLength: MAX_THEME_NAME_LENGTH}}
-                    validationState={
-                        errorCode === 'name-taken' || isNameWithoutId ? 'invalid' : undefined
-                    }
+                    validationState={nameError ? 'invalid' : undefined}
                 />
             </Field>
-            <Field label={t('submit_theme_description_en_label')}>
+            <Field
+                fieldId={`${fieldId}-descriptionEn`}
+                label={t('submit_theme_description_en_label')}
+            >
                 <TextArea
                     className={b('textarea')}
                     size="xl"
                     minRows={2}
                     maxRows={4}
+                    id={`${fieldId}-descriptionEn`}
+                    onBlur={() => touch('descriptionEn')}
+                    validationState={fieldError('descriptionEn') ? 'invalid' : undefined}
+                    errorMessage={fieldError('descriptionEn')}
                     value={draft.descriptionEn}
                     placeholder={t('submit_theme_description_placeholder')}
                     onUpdate={(descriptionEn) => onChange({descriptionEn})}
                     controlProps={{maxLength: MAX_DESCRIPTION_LENGTH}}
                 />
             </Field>
-            <Field label={t('submit_theme_description_ru_label')}>
+            <Field
+                fieldId={`${fieldId}-descriptionRu`}
+                label={t('submit_theme_description_ru_label')}
+            >
                 <TextArea
                     className={b('textarea')}
                     size="xl"
                     minRows={2}
                     maxRows={4}
+                    id={`${fieldId}-descriptionRu`}
+                    onBlur={() => touch('descriptionRu')}
+                    validationState={fieldError('descriptionRu') ? 'invalid' : undefined}
+                    errorMessage={fieldError('descriptionRu')}
                     value={draft.descriptionRu}
                     placeholder={t('submit_theme_description_ru_placeholder')}
                     onUpdate={(descriptionRu) => onChange({descriptionRu})}
                     controlProps={{maxLength: MAX_DESCRIPTION_LENGTH}}
                 />
             </Field>
-            <Field label={t('submit_theme_tags_label')}>
+            <Field fieldId={`${fieldId}-tags`} label={t('submit_theme_tags_label')}>
                 <Select
+                    id={`${fieldId}-tags`}
+                    aria-label={t('submit_theme_tags_label')}
                     size="xl"
                     pin="round-round"
                     width="max"
                     multiple
                     hasClear
+                    validationState={fieldError('tags') ? 'invalid' : undefined}
+                    errorMessage={fieldError('tags')}
                     value={draft.tags}
                     placeholder={t('submit_theme_tags_placeholder')}
                     onUpdate={(tags) => onChange({tags: tags.slice(0, MAX_TAGS) as ThemeTag[]})}
@@ -299,9 +377,11 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     const breakpoint = useWindowBreakpoint();
     const isDesktop = breakpoint >= BREAKPOINTS.sm;
 
-    const {user, isUserLoading, state, signIn, signOut, submit, reset} = useThemeSubmission(isOpen);
     const [draft, setDraft] = React.useState<ThemeSubmissionDraft>(INITIAL_DRAFT);
+    const {user, isUserLoading, state, preflight, retryValidation, signIn, signOut, submit, reset} =
+        useThemeSubmission(isOpen, draft);
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
+    const {gravityTheme} = useThemeCreator();
 
     // The saved draft is read after mount: storage is not available during SSR.
     React.useEffect(() => {
@@ -316,13 +396,17 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         }
     }, []);
 
-    const updateDraft = React.useCallback((patch: Partial<ThemeSubmissionDraft>) => {
-        setDraft((prev) => {
-            const next = {...prev, ...patch};
-            saveSubmitDraft(next);
-            return next;
-        });
-    }, []);
+    const updateDraft = React.useCallback(
+        (patch: Partial<ThemeSubmissionDraft>) => {
+            reset();
+            setDraft((prev) => {
+                const next = {...prev, ...patch};
+                saveSubmitDraft(next);
+                return next;
+            });
+        },
+        [reset],
+    );
 
     // An opened pull request ends the draft.
     React.useEffect(() => {
@@ -332,7 +416,18 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     }, [state.status]);
 
     const themeId = toThemeId(draft.name);
-    const canSubmit = Boolean(themeId && draft.descriptionEn.trim());
+    // The gallery stores only the theme JSON, so the loading link of a custom
+    // font would be lost and the published theme would fall back to the default font.
+    const hasCustomFont = Object.entries(gravityTheme.typography.fontFamilies).some(
+        ([fontType, options]) => !isBuiltInFontFamily(fontType, options?.mainFont),
+    );
+    const fieldErrors = validateSubmissionDraft(draft);
+    const canRetryValidation = preflight.status === 'error' && preflight.code === 'github';
+    const canSubmit =
+        !Object.keys(fieldErrors).length &&
+        !hasCustomFont &&
+        (preflight.status === 'valid' || canRetryValidation);
+    const checking = !Object.keys(fieldErrors).length && preflight.status === 'pending';
     const actionClassName = b('action', {wide: !isDesktop});
 
     const previewMetadata: ThemeMetadata = {
@@ -431,13 +526,33 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
             </React.Fragment>
         );
     } else {
+        let errorCode: SubmissionErrorCode | null = null;
+        if (preflight.status === 'error') {
+            errorCode = preflight.code || 'github';
+        }
+        if (state.status === 'error') {
+            errorCode = state.code;
+        }
+        let buttonLabel = t('submit_theme_submit_btn');
+        if (state.status === 'error' || canRetryValidation) {
+            buttonLabel = t('submit_theme_retry_btn');
+        }
+        if (checking) {
+            buttonLabel = t('submit_theme_checking');
+        }
         main = (
             <FormContent
                 user={user}
                 draft={draft}
                 themeId={themeId}
-                errorCode={state.status === 'error' ? state.code : null}
+                errorCode={errorCode}
                 forkUrl={state.status === 'error' ? state.forkUrl : undefined}
+                hasCustomFont={hasCustomFont}
+                fieldErrors={{
+                    ...fieldErrors,
+                    ...(preflight.status === 'error' ? preflight.fields : undefined),
+                    ...(state.status === 'error' ? state.fields : undefined),
+                }}
                 onChange={updateDraft}
                 onSignOut={signOut}
             />
@@ -448,12 +563,11 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
                 pin="round-round"
                 size="xl"
                 disabled={!canSubmit}
-                onClick={() => submit(draft)}
+                loading={checking}
+                onClick={() => (canRetryValidation ? retryValidation() : submit())}
                 className={actionClassName}
             >
-                {state.status === 'error'
-                    ? t('submit_theme_retry_btn')
-                    : t('submit_theme_submit_btn')}
+                {buttonLabel}
             </Button>
         );
     }

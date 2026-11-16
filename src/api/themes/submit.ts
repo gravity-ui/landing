@@ -1,138 +1,131 @@
+import {randomUUID} from 'crypto';
+
 import {
-    SubmissionValidationError,
-    buildGalleryFiles,
-    buildThemeMetadata,
-    validateThemePayload,
-} from './gallery-files';
-import {
-    ForkOutdatedError,
-    commitGalleryFiles,
-    isThemeIdTaken,
-    openPullRequest,
-    prepareFork,
-    readUpstreamState,
-} from './github-pr';
-import {createUserOctokit, fetchGithubProfile, getErrorStatus} from './oauth';
-import {renderThemePreviews} from './preview-renderer';
-import {reserveSubmissionSlot} from './rate-limit';
+    RendererWorkflowFailedError,
+    assertJobConfiguration,
+    ciConfig,
+    collectResult,
+    createCiOctokit,
+    dispatchRun,
+    findRun,
+    hashJobInput,
+    workflowDispatchBody,
+} from './ci';
+import {buildGalleryFiles, validateThemePayload} from './gallery-files';
+import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
+import {createUserOctokit, fetchGithubProfile} from './oauth';
+import {reserveDispatch} from './quota';
+import {ReceiptError, signReceipt, verifyReceipt} from './receipt';
+import type {ThemeInput} from './receipt';
+import {validateThemeSubmission} from './submission-validation';
+import type {SubmissionEvent} from './types';
 
-export type SubmissionErrorCode =
-    | 'name-taken'
-    | 'rate-limit'
-    | 'github'
-    | 'invalid'
-    | 'fork-outdated'
-    | 'session-expired';
-
-export type SubmissionEvent =
-    | {type: 'step'; index: number; count: number}
-    | {type: 'done'; pullRequestUrl: string; pullRequestNumber: number}
-    | {type: 'error'; code: SubmissionErrorCode; forkUrl?: string};
-
-// Progress steps reported to the form, in order.
-const STEPS = ['check', 'render', 'fork', 'commit', 'pull-request'] as const;
-
-class SubmissionError extends Error {
-    readonly code: SubmissionErrorCode;
-
-    constructor(code: SubmissionErrorCode) {
-        super(code);
-        this.name = 'SubmissionError';
-        this.code = code;
-    }
+// Preparation has no external write or quota charge: save its response before dispatch.
+export async function submitTheme(token: string, body: unknown) {
+    const config = ciConfig();
+    const {profile, metadata, payload, upstreamState} = await validateThemeSubmission(token, body);
+    const createdAt = Date.now();
+    const job = {
+        id: randomUUID(),
+        userId: profile.id,
+        createdAt,
+        dispatchBefore: createdAt + 120000,
+        themeHash: hashJobInput(metadata, payload),
+        revision: config.revision,
+        repository: `${config.owner}/${config.repo}`,
+        rendererTag: config.tag,
+        upstream: upstreamState,
+    };
+    const input = {metadata, payload};
+    workflowDispatchBody(job, input);
+    return {receipt: await signReceipt(job), input, expiresAt: createdAt + 86400000};
 }
 
-export interface SubmitThemeParams {
-    token: string;
-    login: string;
-    body: unknown;
-    /** Origin of this server reachable from the server itself, for the render page. */
-    renderBaseUrl: string;
-    emit: (event: SubmissionEvent) => void;
+async function authenticate(token: string, receipt: unknown) {
+    const octokit = createUserOctokit(token);
+    const profile = await fetchGithubProfile(octokit);
+    const job = await verifyReceipt(receipt, profile.id);
+    assertJobConfiguration(job);
+    return {octokit, profile, job};
 }
 
-function mapError(error: unknown): SubmissionErrorCode {
-    if (error instanceof SubmissionError) {
-        return error.code;
+export async function dispatchThemeJob(token: string, receipt: unknown, input: ThemeInput) {
+    const {job} = await authenticate(token, receipt);
+    if (
+        !input ||
+        hashJobInput(input.metadata, input.payload) !== job.themeHash ||
+        hashJobInput(input.metadata, validateThemePayload(input.payload)) !== job.themeHash
+    ) {
+        throw new ReceiptError('receipt-input');
     }
-    if (error instanceof SubmissionValidationError) {
-        return 'invalid';
-    }
-    // The user revoked the app or the token expired: they have to sign in again.
-    if (getErrorStatus(error) === 401) {
-        return 'session-expired';
-    }
-    // eslint-disable-next-line no-console
-    console.error('Theme submission failed:', error);
-    return 'github';
-}
-
-export async function submitTheme({token, login, body, renderBaseUrl, emit}: SubmitThemeParams) {
-    const step = (name: (typeof STEPS)[number]) =>
-        emit({type: 'step', index: STEPS.indexOf(name), count: STEPS.length});
-
-    let slot: ReturnType<typeof reserveSubmissionSlot> = null;
+    const ci = createCiOctokit();
+    if (await findRun(ci, job)) return {accepted: true};
+    if (Date.now() > job.dispatchBefore) throw new ReceiptError('dispatch-expired');
+    workflowDispatchBody(job, input);
+    reserveDispatch(job.userId);
     try {
-        step('check');
-        const {meta, theme} = (body ?? {}) as {meta?: unknown; theme?: unknown};
-        const octokit = createUserOctokit(token);
-        const profile = await fetchGithubProfile(octokit);
-        const metadata = buildThemeMetadata(meta, profile);
-        const payload = validateThemePayload(theme);
-
-        const upstreamState = await readUpstreamState(octokit);
-        if (await isThemeIdTaken(octokit, upstreamState, metadata.id)) {
-            throw new SubmissionError('name-taken');
-        }
-
-        slot = reserveSubmissionSlot(login);
-        if (!slot) {
-            throw new SubmissionError('rate-limit');
-        }
-
-        step('render');
-        const previews = await renderThemePreviews(payload, renderBaseUrl);
-        const files = buildGalleryFiles({
-            metadata,
-            payload,
-            previews,
-            upstream: upstreamState.snapshot,
-        });
-
-        step('fork');
-        const fork = await prepareFork(octokit);
-
-        step('commit');
-        const {branch, commitSha} = await commitGalleryFiles({
-            octokit,
-            fork,
-            state: upstreamState,
-            metadata,
-            files,
-        });
-
-        step('pull-request');
-        const pullRequest = await openPullRequest({
-            octokit,
-            fork,
-            metadata,
-            login: profile.login,
-            branch,
-            commitSha,
-        });
-
-        slot = null;
-        emit({
-            type: 'done',
-            pullRequestUrl: pullRequest.url,
-            pullRequestNumber: pullRequest.number,
-        });
-    } catch (error) {
-        slot?.release();
-        if (error instanceof ForkOutdatedError) {
-            emit({type: 'error', code: 'fork-outdated', forkUrl: error.forkUrl});
-            return;
-        }
-        emit({type: 'error', code: mapError(error)});
+        await dispatchRun(ci, job, input);
+    } catch {
+        // GitHub has no atomic idempotency key. An ambiguous response is only reconciled
+        // by read-only polling; never automatically retry this write.
     }
+    return {accepted: true};
+}
+
+// No dispatch, quota reservation, fork or PR mutation in status requests.
+export async function readThemeJob(token: string, receipt: unknown): Promise<SubmissionEvent> {
+    const {job} = await authenticate(token, receipt);
+    const ci = createCiOctokit();
+    const run = await findRun(ci, job);
+    if (!run) {
+        if (Date.now() > job.dispatchBefore + 600000) {
+            return {type: 'error', code: 'dispatch-unconfirmed', terminal: true};
+        }
+        return {type: 'step', index: 1, count: 5};
+    }
+    try {
+        const result = await collectResult(ci, {...job, runId: run.id});
+        return {type: 'step', index: result ? 3 : 2, count: 5};
+    } catch (error) {
+        if (error instanceof RendererWorkflowFailedError) {
+            return {type: 'error', code: 'preview', terminal: true};
+        }
+        throw error;
+    }
+}
+
+export async function finalizeThemeJob(token: string, receipt: unknown): Promise<SubmissionEvent> {
+    const {octokit, profile, job} = await authenticate(token, receipt);
+    const ci = createCiOctokit();
+    const run = await findRun(ci, job);
+    if (!run) throw new Error('Workflow not found');
+    const result = await collectResult(ci, {...job, runId: run.id});
+    if (!result) return {type: 'step', index: 2, count: 5};
+    const {metadata, payload} = result.input;
+    const fork = await prepareFork(octokit);
+    if (fork.owner.toLowerCase() !== profile.login.toLowerCase())
+        throw new Error('Fork ownership mismatch');
+    const {branch, commitSha} = await commitGalleryFiles({
+        octokit,
+        fork,
+        state: job.upstream,
+        metadata,
+        files: buildGalleryFiles({metadata, payload, previews: result.previews}),
+        jobId: job.id,
+    });
+    const {data: ref} = await octokit.git.getRef({
+        owner: fork.owner,
+        repo: fork.repo,
+        ref: `heads/${branch}`,
+    });
+    if (ref.object.sha !== commitSha) throw new Error('Submission branch changed externally');
+    const pr = await openPullRequest({
+        octokit,
+        fork,
+        metadata,
+        login: profile.login,
+        branch,
+        commitSha,
+    });
+    return {type: 'done', pullRequestUrl: pr.url, pullRequestNumber: pr.number};
 }

@@ -25,6 +25,7 @@ import {CustomFontSelectType} from '../../lib/types';
 import {
     DEFAULT_FONT_FAMILIES,
     DEFAULT_FONT_FAMILY_SETTINGS,
+    DEFAULT_FONT_FAMILY_SUGGESTIONS,
     DefaultFontFamily,
     GOOGLE_FONTS_FONT_PREVIEW_HOST,
     TEXT_GROUP_NAMES,
@@ -32,54 +33,6 @@ import {
 import {generateGoogleFontDownloadLink} from '../../lib/typography/utils';
 
 import './TypographyTab.scss';
-
-type DefaultFontFamilyOption = {
-    name: string;
-    fontSuggestions: {title: string; key: string; link: string}[];
-};
-
-const DEFAULT_FONT_FAMILY_SUGGESTIONS: Record<DefaultFontFamily, DefaultFontFamilyOption> = {
-    sans: {
-        name: 'Sans Font Family',
-        fontSuggestions: [
-            {
-                title: 'Inter',
-                key: 'inter',
-                link: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap',
-            },
-            {
-                title: 'Merriweather',
-                key: 'merriweather',
-                link: 'https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap',
-            },
-            {
-                title: 'Titillium Web',
-                key: 'titillium_web',
-                link: 'https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap',
-            },
-        ],
-    },
-    monospace: {
-        name: 'Monospace Font Family',
-        fontSuggestions: [
-            {
-                title: 'Roboto Mono',
-                key: 'roboto_mono',
-                link: 'https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap',
-            },
-            {
-                title: 'Ubuntu Mono',
-                key: 'ubuntu_mono',
-                link: 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap',
-            },
-            {
-                title: 'IBM Plex Mono',
-                key: 'ibm_plex_mono',
-                link: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap',
-            },
-        ],
-    },
-};
 
 const b = block('typography-tab__font');
 

@@ -1,72 +1,61 @@
 import React from 'react';
+import {flushSync} from 'react-dom';
 
-import type {ThemeTag} from '../../gallery';
-import {useThemeCreator, useThemePaletteColor} from '../../hooks';
+import type {ThemeInput} from '../../../../api/themes/receipt';
+import type {
+    SubmissionErrorCode as ServerSubmissionErrorCode,
+    SubmissionEvent,
+    SubmissionPreflightResult,
+} from '../../../../api/themes/types';
+import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
+import {
+    type SubmissionDraft,
+    type SubmissionFieldErrors,
+    validateSubmissionDraft,
+} from '../../lib/submissionValidation';
 import {exportTheme} from '../../lib/themeCreatorExport';
 
 import {saveSubmitReturn, takeSignInFailed} from './submitReturn';
 
-export type SubmissionErrorCode =
-    | 'name-taken'
-    | 'rate-limit'
-    | 'github'
-    | 'invalid'
-    | 'sign-in'
-    | 'fork-outdated'
-    | 'session-expired';
+export type SubmissionErrorCode = ServerSubmissionErrorCode | 'sign-in' | 'storage';
 
 export interface GithubUser {
+    id: number;
     login: string;
     name: string;
     avatarUrl: string;
 }
 
-export interface ThemeSubmissionDraft {
-    name: string;
-    descriptionEn: string;
-    descriptionRu: string;
-    tags: ThemeTag[];
-}
+export type ThemeSubmissionDraft = SubmissionDraft;
 
 export type SubmissionState =
     | {status: 'idle'}
     | {status: 'submitting'; stepIndex: number; stepCount: number}
     | {status: 'success'; pullRequestUrl: string; pullRequestNumber: number}
-    | {status: 'error'; code: SubmissionErrorCode; forkUrl?: string};
-
-type SubmissionEvent =
-    | {type: 'step'; index: number; count: number}
-    | {type: 'done'; pullRequestUrl: string; pullRequestNumber: number}
-    | {type: 'error'; code: SubmissionErrorCode; forkUrl?: string};
+    | {
+          status: 'error';
+          code: SubmissionErrorCode;
+          forkUrl?: string;
+          fields?: SubmissionFieldErrors;
+      };
 
 const API_BASE = '/api/themes';
 const SUBMIT_RETURN_QUERY = 'submitTheme=1';
 
-// Reads newline-delimited JSON events from a streamed response.
-async function readEvents(response: Response, onEvent: (event: SubmissionEvent) => void) {
-    if (!response.body) {
-        return;
-    }
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let buffer = '';
-    for (;;) {
-        const {value, done} = await reader.read();
-        buffer += decoder.decode(value, {stream: !done});
-        const lines = buffer.split('\n');
-        buffer = lines.pop() ?? '';
-        lines.filter((line) => line.trim()).forEach((line) => onEvent(JSON.parse(line)));
-        if (done) {
-            break;
-        }
-    }
-    if (buffer.trim()) {
-        onEvent(JSON.parse(buffer));
-    }
+interface StoredSubmission {
+    receipt: string;
+    input: ThemeInput;
+    expiresAt: number;
+    dispatchAttempted: boolean;
+    userId: number;
 }
 
-export function useThemeSubmission(isOpen: boolean) {
+const ACTIVE_JOB_KEY = 'themes.activeSubmissionReceipt';
+const PENDING_REQUEST_KEY = 'themes.pendingSubmissionRequest';
+
+export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft) {
     const themeState = useThemeCreator();
+    const {markSaved} = useThemeCreatorMethods();
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
     const [user, setUser] = React.useState<GithubUser | null>(null);
     // Until the session is known the dialog shows neither sign-in nor the form.
@@ -87,7 +76,7 @@ export function useThemeSubmission(isOpen: boolean) {
         fetch(`${API_BASE}/auth/me`, {signal: controller.signal, credentials: 'same-origin'})
             .then((response) => (response.ok ? response.json() : null))
             .then((data: GithubUser | null) => {
-                if (data) {
+                if (data && Number.isSafeInteger(data.id) && data.id > 0) {
                     setUser(data);
                 }
                 setUserLoading(false);
@@ -105,82 +94,303 @@ export function useThemeSubmission(isOpen: boolean) {
         [themeState],
     );
 
-    // GitHub sign-in leaves the page: the unsaved theme is kept for the way
-    // back, where the Themer restores it and reopens this dialog.
+    const requestBody = React.useMemo(() => {
+        try {
+            return JSON.stringify({
+                meta: {...draft, brandColor: brandColor.value},
+                theme: JSON.parse(getThemeJson()),
+            });
+        } catch {
+            return null;
+        }
+    }, [draft, brandColor.value, getThemeJson]);
+    const [validation, setValidation] = React.useState<{
+        body: string | null;
+        status: 'pending' | 'valid' | 'error';
+        code?: SubmissionErrorCode;
+        fields?: SubmissionFieldErrors;
+    }>({body: null, status: 'pending'});
+    const [validationAttempt, retryValidation] = React.useReducer((value: number) => value + 1, 0);
+    const hasFieldErrors = Boolean(Object.keys(validateSubmissionDraft(draft)).length);
+    const isFormActive =
+        isOpen && Boolean(user) && state.status !== 'submitting' && state.status !== 'success';
+
+    React.useEffect(() => {
+        if (!isFormActive || hasFieldErrors) {
+            return undefined;
+        }
+        if (!requestBody) {
+            setValidation({body: requestBody, status: 'error', code: 'invalid'});
+            return undefined;
+        }
+        const controller = new AbortController();
+        setValidation({body: requestBody, status: 'pending'});
+        const timer = setTimeout(async () => {
+            try {
+                const response = await fetch(`${API_BASE}/validate`, {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    signal: controller.signal,
+                    headers: {'Content-Type': 'application/json'},
+                    body: requestBody,
+                });
+                if (controller.signal.aborted) {
+                    return;
+                }
+                if (response.status === 401) {
+                    setUser(null);
+                    setState({status: 'error', code: 'session-expired'});
+                    return;
+                }
+                const result: SubmissionPreflightResult = await response.json();
+                if (controller.signal.aborted) {
+                    return;
+                }
+                setValidation({
+                    body: requestBody,
+                    status: response.ok && result.ok === true ? 'valid' : 'error',
+                    code: result.ok ? undefined : result.code || 'github',
+                    fields: result.ok ? undefined : result.fields,
+                });
+            } catch {
+                if (!controller.signal.aborted) {
+                    setValidation({body: requestBody, status: 'error', code: 'github'});
+                }
+            }
+        }, 500);
+        return () => {
+            clearTimeout(timer);
+            controller.abort();
+        };
+    }, [isFormActive, hasFieldErrors, requestBody, validationAttempt]);
+
+    // A previous response must never enable submission of an edited draft/theme.
+    const preflight =
+        validation.body === requestBody
+            ? validation
+            : {status: 'pending' as const, code: undefined, fields: undefined};
+
+    // GitHub sign-in leaves the page: the unsaved editor state is kept for the
+    // way back, where the Themer restores it and reopens this dialog.
     const signIn = React.useCallback(() => {
-        saveSubmitReturn(getThemeJson());
+        if (!saveSubmitReturn(themeState)) {
+            setState({status: 'error', code: 'storage'});
+            return;
+        }
+        // Commit the saved revision and its leave guard before navigation starts.
+        flushSync(() => markSaved());
         const returnTo = `${window.location.pathname}?${SUBMIT_RETURN_QUERY}`;
         window.location.assign(`${API_BASE}/auth/login?returnTo=${encodeURIComponent(returnTo)}`);
-    }, [getThemeJson]);
+    }, [themeState, markSaved]);
 
     const signOut = React.useCallback(() => {
         fetch(`${API_BASE}/auth/logout`, {method: 'POST', credentials: 'same-origin'}).catch(
             () => undefined,
         );
         setUser(null);
+        setActiveJob(null);
         setState({status: 'idle'});
     }, []);
 
-    const submit = React.useCallback(
-        async (draft: ThemeSubmissionDraft) => {
-            // The step count comes with the first server event; until then the bar is empty.
-            setState({status: 'submitting', stepIndex: 0, stepCount: 0});
-            let finalState: SubmissionState = {status: 'error', code: 'github'};
+    const [activeJob, setActiveJob] = React.useState<StoredSubmission | null>(null);
+    const [pollAttempt, retryPolling] = React.useReducer((value: number) => value + 1, 0);
+    const activeKey = user ? `${ACTIVE_JOB_KEY}:${user.id}` : null;
+    const pendingKey = user ? `${PENDING_REQUEST_KEY}:${user.id}` : null;
+    React.useEffect(() => {
+        try {
+            // Unowned legacy browser state cannot be safely attributed to an account.
+            localStorage.removeItem(ACTIVE_JOB_KEY);
+            localStorage.removeItem(PENDING_REQUEST_KEY);
+            localStorage.removeItem('themes.activeSubmissionJob');
+            const saved = activeKey ? localStorage.getItem(activeKey) : null;
+            const job = saved ? (JSON.parse(saved) as StoredSubmission) : null;
+            if (
+                job &&
+                (job.userId !== user?.id ||
+                    typeof job.receipt !== 'string' ||
+                    !job.input ||
+                    !Number.isFinite(job.expiresAt) ||
+                    job.expiresAt <= Date.now())
+            ) {
+                if (activeKey) localStorage.removeItem(activeKey);
+                setActiveJob(null);
+                setState({status: 'error', code: 'receipt-expired'});
+            } else setActiveJob(job);
+        } catch {
+            setState({status: 'error', code: 'storage'});
+        }
+    }, [activeKey, user?.id]);
+    React.useEffect(() => {
+        if (!activeJob || !user || !activeKey || !pendingKey) return undefined;
+        const controller = new AbortController();
+        let timer: ReturnType<typeof setTimeout>;
+        const poll = async () => {
             try {
-                const response = await fetch(`${API_BASE}/submit`, {
+                if (activeJob.userId !== user.id) return;
+                if (!activeJob.dispatchAttempted) {
+                    // Persist intent before any network write. A lost response is only polled.
+                    const saved = JSON.parse(
+                        localStorage.getItem(activeKey) || 'null',
+                    ) as StoredSubmission | null;
+                    if (!saved?.dispatchAttempted) {
+                        localStorage.setItem(
+                            activeKey,
+                            JSON.stringify({...activeJob, dispatchAttempted: true}),
+                        );
+                        activeJob.dispatchAttempted = true;
+                        try {
+                            const dispatched = await fetch(`${API_BASE}/dispatch`, {
+                                method: 'POST',
+                                credentials: 'same-origin',
+                                signal: controller.signal,
+                                headers: {'Content-Type': 'application/json'},
+                                body: JSON.stringify({
+                                    receipt: activeJob.receipt,
+                                    input: activeJob.input,
+                                }),
+                            });
+                            if (!dispatched.ok) {
+                                const error = await dispatched.json();
+                                if (controller.signal.aborted) return;
+                                if (dispatched.status === 401) setUser(null);
+                                if (error.terminal) {
+                                    localStorage.removeItem(activeKey);
+                                    setActiveJob(null);
+                                }
+                                setState({
+                                    status: 'error',
+                                    code:
+                                        dispatched.status === 401
+                                            ? 'session-expired'
+                                            : error.code || 'github',
+                                });
+                                return;
+                            }
+                        } catch {
+                            if (controller.signal.aborted) return;
+                        }
+                    } else activeJob.dispatchAttempted = true;
+                }
+                const response = await fetch(`${API_BASE}/status`, {
                     method: 'POST',
                     credentials: 'same-origin',
+                    signal: controller.signal,
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        meta: {...draft, brandColor: brandColor.value},
-                        theme: JSON.parse(getThemeJson()),
-                    }),
+                    body: JSON.stringify({receipt: activeJob.receipt}),
                 });
                 if (response.status === 401) {
                     setUser(null);
-                    setState({status: 'idle'});
+                    setState({status: 'error', code: 'session-expired'});
                     return;
                 }
-                if (response.ok) {
-                    await readEvents(response, (event) => {
-                        if (event.type === 'step') {
-                            setState({
-                                status: 'submitting',
-                                stepIndex: event.index,
-                                stepCount: event.count,
-                            });
-                        } else if (event.type === 'done') {
-                            finalState = {
-                                status: 'success',
-                                pullRequestUrl: event.pullRequestUrl,
-                                pullRequestNumber: event.pullRequestNumber,
-                            };
-                        } else {
-                            finalState = {
-                                status: 'error',
-                                code: event.code,
-                                forkUrl: event.forkUrl,
-                            };
-                        }
+                let event: SubmissionEvent = await response.json();
+                if (event.type === 'step' && event.index === 3 && !controller.signal.aborted) {
+                    const finalized = await fetch(`${API_BASE}/finalize`, {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        signal: controller.signal,
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({receipt: activeJob.receipt}),
                     });
+                    if (controller.signal.aborted) return;
+                    if (finalized.status === 401) {
+                        setUser(null);
+                        setState({status: 'error', code: 'session-expired'});
+                        return;
+                    }
+                    event = await finalized.json();
+                }
+                if (controller.signal.aborted) return;
+                if (event.type === 'done') {
+                    localStorage.removeItem(activeKey);
+                    localStorage.removeItem(pendingKey);
+                    setActiveJob(null);
+                    setState({
+                        status: 'success',
+                        pullRequestUrl: event.pullRequestUrl,
+                        pullRequestNumber: event.pullRequestNumber,
+                    });
+                    return;
+                }
+                if (event.type === 'step') {
+                    setState({
+                        status: 'submitting',
+                        stepIndex: event.index,
+                        stepCount: event.count,
+                    });
+                } else {
+                    if (event.terminal) {
+                        localStorage.removeItem(activeKey);
+                        localStorage.removeItem(pendingKey);
+                        setActiveJob(null);
+                    }
+                    setState({
+                        status: 'error',
+                        code: event.code,
+                        fields: event.fields,
+                        forkUrl: event.forkUrl,
+                    });
+                    return;
                 }
             } catch {
-                // Network failure: reported as a GitHub error, the form keeps the draft.
+                if (controller.signal.aborted) return;
+                // A lost response is not a new submission. Resume the same durable job.
             }
-            // A dead token is dropped so the dialog goes back to sign-in with the reason.
-            if (finalState.status === 'error' && finalState.code === 'session-expired') {
-                fetch(`${API_BASE}/auth/logout`, {
-                    method: 'POST',
-                    credentials: 'same-origin',
-                }).catch(() => undefined);
-                setUser(null);
+            timer = setTimeout(poll, 2000);
+        };
+        setState({status: 'submitting', stepIndex: 0, stepCount: 5});
+        poll();
+        return () => {
+            controller.abort();
+            clearTimeout(timer);
+        };
+    }, [activeJob, user, activeKey, pendingKey, pollAttempt]);
+
+    const submit = React.useCallback(async () => {
+        if (!user || !activeKey || !pendingKey) return;
+        if (activeJob) {
+            // Re-enter polling without reserving another attempt.
+            retryPolling();
+            return;
+        }
+        const fields = validateSubmissionDraft(draft);
+        if (Object.keys(fields).length) {
+            setState({status: 'error', code: 'invalid-metadata', fields});
+            return;
+        }
+        if (!requestBody || preflight.status !== 'valid') return;
+        setState({status: 'submitting', stepIndex: 0, stepCount: 5});
+        try {
+            const response = await fetch(`${API_BASE}/submit`, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {'Content-Type': 'application/json'},
+                body: requestBody,
+            });
+            const result = await response.json();
+            if (response.ok && typeof result.receipt === 'string') {
+                const job: StoredSubmission = {
+                    ...result,
+                    userId: user.id,
+                    dispatchAttempted: false,
+                };
+                // Both receipt and immutable canonical input are durable before dispatch starts.
+                localStorage.setItem(activeKey, JSON.stringify(job));
+                setActiveJob(job);
+            } else {
+                if (response.status === 401) setUser(null);
+                setState({
+                    status: 'error',
+                    code: response.status === 401 ? 'session-expired' : result.code || 'github',
+                    fields: result.fields,
+                });
             }
-            setState(finalState);
-        },
-        [brandColor.value, getThemeJson],
-    );
+        } catch {
+            setState({status: 'error', code: 'github'});
+        }
+    }, [activeJob, draft, requestBody, preflight.status, user, activeKey, pendingKey]);
 
     const reset = React.useCallback(() => setState({status: 'idle'}), []);
 
-    return {user, isUserLoading, state, signIn, signOut, submit, reset};
+    return {user, isUserLoading, state, preflight, retryValidation, signIn, signOut, submit, reset};
 }
