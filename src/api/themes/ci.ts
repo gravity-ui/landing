@@ -22,7 +22,9 @@ export function ciConfig() {
     if (missing.length) {
         throw new Error(`Missing configuration: ${missing.join(', ')}`);
     }
-    const [owner, repo, extra] = process.env.THEMES_REPOSITORY!.split('/');
+    // CI runs where the renderer GitHub App is installed; the gallery PR still targets THEMES_REPOSITORY.
+    const ciRepository = process.env.THEMES_CI_REPOSITORY || process.env.THEMES_REPOSITORY!;
+    const [owner, repo, extra] = ciRepository.split('/');
     const revision = process.env.THEMES_RENDERER_REVISION!;
     const tag = process.env.THEMES_RENDERER_TAG!;
     if (
