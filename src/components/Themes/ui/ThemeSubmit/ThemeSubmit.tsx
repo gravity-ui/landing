@@ -175,10 +175,9 @@ const SignInContent: React.FC<{errorCode: SubmissionErrorCode | null}> = ({error
 
 interface SuccessContentProps {
     pullRequestUrl: string;
-    pullRequestNumber: number;
 }
 
-const SuccessContent: React.FC<SuccessContentProps> = ({pullRequestUrl, pullRequestNumber}) => {
+const SuccessContent: React.FC<SuccessContentProps> = ({pullRequestUrl}) => {
     const {t} = useTranslation('themes');
 
     return (
@@ -188,7 +187,7 @@ const SuccessContent: React.FC<SuccessContentProps> = ({pullRequestUrl, pullRequ
                 description={t('submit_theme_success_body')}
             />
             <Link href={pullRequestUrl} target="_blank" className={b('pr-link')}>
-                github.com/gravity-ui/landing/pull/{pullRequestNumber}
+                {pullRequestUrl.replace(/^https:\/\//, '')}
             </Link>
         </React.Fragment>
     );
@@ -495,12 +494,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
             </Button>
         );
     } else if (state.status === 'success') {
-        main = (
-            <SuccessContent
-                pullRequestUrl={state.pullRequestUrl}
-                pullRequestNumber={state.pullRequestNumber}
-            />
-        );
+        main = <SuccessContent pullRequestUrl={state.pullRequestUrl} />;
         buttons = (
             <React.Fragment>
                 <Button
