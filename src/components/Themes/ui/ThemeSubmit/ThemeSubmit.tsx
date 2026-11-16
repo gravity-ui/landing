@@ -67,17 +67,13 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         }
     }, []);
 
-    const updateDraft = React.useCallback(
-        (patch: Partial<SubmissionDraft>) => {
-            reset();
-            setDraft((prev) => {
-                const next = {...prev, ...patch};
-                saveSubmitDraft(next);
-                return next;
-            });
-        },
-        [reset],
-    );
+    const updateDraft = React.useCallback((patch: Partial<SubmissionDraft>) => {
+        setDraft((prev) => {
+            const next = {...prev, ...patch};
+            saveSubmitDraft(next);
+            return next;
+        });
+    }, []);
 
     // An opened pull request ends the draft.
     React.useEffect(() => {
