@@ -157,11 +157,12 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
     React.useEffect(() => {
         if (!activeJob || !user || !activeKey || !pendingKey) return undefined;
         const controller = new AbortController();
+        let job = activeJob;
         let timer: ReturnType<typeof setTimeout>;
         const poll = async () => {
             try {
-                if (activeJob.userId !== user.id) return;
-                if (!activeJob.dispatchAttempted) {
+                if (job.userId !== user.id) return;
+                if (!job.dispatchAttempted) {
                     // Persist intent before any network write. A lost response is only polled.
                     const saved = JSON.parse(
                         localStorage.getItem(activeKey) || 'null',
@@ -169,9 +170,9 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                     if (!saved?.dispatchAttempted) {
                         localStorage.setItem(
                             activeKey,
-                            JSON.stringify({...activeJob, dispatchAttempted: true}),
+                            JSON.stringify({...job, dispatchAttempted: true}),
                         );
-                        activeJob.dispatchAttempted = true;
+                        job = {...job, dispatchAttempted: true};
                         try {
                             const dispatched = await fetch(`${API_BASE}/dispatch`, {
                                 method: 'POST',
@@ -188,6 +189,8 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                                 if (controller.signal.aborted) return;
                                 if (dispatched.status === 401 || error.code === 'session-expired')
                                     setUser(null);
+                                job = {...job, dispatchAttempted: false};
+                                localStorage.setItem(activeKey, JSON.stringify(job));
                                 if (error.terminal) {
                                     localStorage.removeItem(activeKey);
                                     setActiveJob(null);
@@ -204,7 +207,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                         } catch {
                             if (controller.signal.aborted) return;
                         }
-                    } else activeJob.dispatchAttempted = true;
+                    } else job = {...job, dispatchAttempted: true};
                 }
                 const response = await fetch(`${API_BASE}/status`, {
                     method: 'POST',
