@@ -249,6 +249,8 @@ export async function commitGalleryFiles({
 
 // Keeps user-provided text from pinging people or issues in the PR body.
 const neutralizeMentions = (text: string) => text.replace(/([@#])(?=\w)/g, '$1\u200B');
+const escapeMarkdown = (text: string) =>
+    neutralizeMentions(text).replace(/[\\`*_{}[\]()#+.!|<>~-]/g, '\\$&');
 
 function getPullRequestBody({
     metadata,
@@ -263,17 +265,17 @@ function getPullRequestBody({
 }) {
     const imageUrl = (mode: 'light' | 'dark') =>
         `https://github.com/${fork.owner}/${fork.repo}/blob/${commitSha}/${PREVIEWS_DIR}/${metadata.id}-${mode}.png?raw=true`;
-    const name = neutralizeMentions(metadata.name).replace(/[\\`*_{}[\]()#+.!|<>~-]/g, '\\$&');
+    const name = escapeMarkdown(metadata.name);
     const lines = [
         `Adds the **${name}** theme to the [theme gallery](https://gravity-ui.com/themes).`,
         '',
         `Submitted by @${login} from the Themer.`,
         '',
-        `> ${neutralizeMentions(metadata.description.en)}`,
+        `> ${escapeMarkdown(metadata.description.en)}`,
         '',
     ];
     if (metadata.description.ru !== metadata.description.en) {
-        lines.push(`> ${neutralizeMentions(metadata.description.ru)}`, '');
+        lines.push(`> ${escapeMarkdown(metadata.description.ru)}`, '');
     }
     lines.push(
         `Tags: ${metadata.tags.length ? metadata.tags.map((tag) => `\`${tag}\``).join(', ') : '-'}`,
