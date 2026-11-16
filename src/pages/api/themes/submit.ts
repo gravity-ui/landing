@@ -1,7 +1,7 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
+import {submissionError} from '../../../api/themes/submission-errors';
 import {readSubmissionSession} from '../../../api/themes/submission-request';
-import {submissionValidationError} from '../../../api/themes/submission-validation';
 import {submitTheme} from '../../../api/themes/submit';
 
 export const config = {api: {bodyParser: {sizeLimit: '1mb'}}};
@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         res.status(202).json(await submitTheme(session.token, req.body));
     } catch (error) {
-        const failure = submissionValidationError(error);
+        const failure = submissionError(error);
         res.status(400).json({ok: false, ...failure});
     }
 }

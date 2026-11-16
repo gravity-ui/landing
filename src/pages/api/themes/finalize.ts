@@ -1,8 +1,8 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 
 import {ReceiptError} from '../../../api/themes/receipt';
+import {submissionError} from '../../../api/themes/submission-errors';
 import {readSubmissionSession} from '../../../api/themes/submission-request';
-import {submissionValidationError} from '../../../api/themes/submission-validation';
 import {finalizeThemeJob} from '../../../api/themes/submit';
 
 export const config = {api: {bodyParser: {sizeLimit: '1mb'}}};
@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(400).json({
             type: 'error',
             terminal: error instanceof ReceiptError,
-            ...submissionValidationError(error),
+            ...submissionError(error),
         });
     }
 }
