@@ -26,7 +26,7 @@ import {
 } from '../../../../api/themes/types';
 import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
-import {THEME_TAGS, type ThemeMetadata, type ThemeTag, allThemes} from '../../gallery';
+import {THEME_TAGS, type ThemeMetadata, type ThemeTag, useThemeCatalog} from '../../gallery';
 import {toThemeId} from '../../gallery/schema';
 import {useThemeCreator, useThemePaletteColor} from '../../hooks';
 import {type SubmissionFieldErrors, validateSubmissionDraft} from '../../lib/submissionValidation';
@@ -431,6 +431,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         }
     }, [state.status]);
 
+    const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
     const themeId = toThemeId(draft.name);
     // The gallery stores only the theme JSON, so the loading link of a custom
     // font would be lost and the published theme would fall back to the default font.
