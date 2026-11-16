@@ -1,1 +1,1 @@
-export * from '@gravity-ui/themes/dist/schema';
+export * from '@gravity-ui/themes/schema';

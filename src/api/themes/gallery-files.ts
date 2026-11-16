@@ -9,7 +9,7 @@ export {
     SubmissionValidationError,
     buildThemeMetadata,
     validateThemePayload,
-} from '@gravity-ui/themes/dist/validation';
+} from '@gravity-ui/themes/validation';
 export interface GalleryFile {
     path: string;
     content: string | Buffer;
