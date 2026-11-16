@@ -18,6 +18,7 @@ import {createUserOctokit, fetchGithubProfile} from './oauth';
 import {reserveDispatch, submissionJobId} from './quota';
 import {RECEIPT_TTL_SECONDS, ReceiptError, signReceipt, verifyReceipt} from './receipt';
 import {validateThemeSubmission} from './submission-validation';
+import {SUBMISSION_STEP, SUBMISSION_STEP_COUNT} from './types';
 import type {SubmissionEvent, ThemeInput} from './types';
 
 // Preparation has no external write or quota charge: save its response before dispatch.
@@ -76,11 +77,15 @@ export async function readThemeJob(token: string, receipt: unknown): Promise<Sub
         if (Date.now() > job.dispatchBefore + DISPATCH_RECONCILIATION_MS) {
             return {type: 'error', code: 'dispatch-unconfirmed', terminal: true};
         }
-        return {type: 'step', index: 1, count: 5};
+        return {type: 'step', index: SUBMISSION_STEP.waiting, count: SUBMISSION_STEP_COUNT};
     }
     try {
         const result = await collectResult(ci, {...job, runId: run.id});
-        return {type: 'step', index: result ? 3 : 2, count: 5};
+        return {
+            type: 'step',
+            index: result ? SUBMISSION_STEP.pullRequest : SUBMISSION_STEP.rendering,
+            count: SUBMISSION_STEP_COUNT,
+        };
     } catch (error) {
         if (error instanceof RendererWorkflowFailedError) {
             return {type: 'error', code: 'preview', terminal: true};
@@ -95,7 +100,8 @@ export async function finalizeThemeJob(token: string, receipt: unknown): Promise
     const run = await findRun(ci, job);
     if (!run) throw new Error('Workflow not found');
     const result = await collectResult(ci, {...job, runId: run.id});
-    if (!result) return {type: 'step', index: 2, count: 5};
+    if (!result)
+        return {type: 'step', index: SUBMISSION_STEP.rendering, count: SUBMISSION_STEP_COUNT};
     const {metadata, payload} = result.input;
     const fork = await prepareFork(octokit);
     if (fork.owner.toLowerCase() !== profile.login.toLowerCase())
