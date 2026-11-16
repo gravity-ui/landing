@@ -148,7 +148,7 @@ async function isForkBehind(octokit: Octokit, fork: ForkRef) {
 
 // Built from the sanitized id, not the free-form name: a name like `[skip ci]`
 // in the head commit message would make GitHub skip the PR workflows.
-export function getCommitMessage(metadata: ThemeMetadata) {
+function getCommitMessage(metadata: ThemeMetadata) {
     return `feat(themes): add ${metadata.id} theme`;
 }
 
@@ -157,7 +157,7 @@ export function getCommitMessage(metadata: ThemeMetadata) {
 const CI_SKIP_DIRECTIVE_RE =
     /\[\s*(?:skip\s+ci|ci\s+skip|no\s+ci|skip\s+actions|actions\s+skip)\s*\]/gi;
 
-export function getPullRequestTitle(metadata: ThemeMetadata) {
+function getPullRequestTitle(metadata: ThemeMetadata) {
     let name = metadata.name;
     let previousName: string;
     do {

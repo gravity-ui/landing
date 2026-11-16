@@ -10,7 +10,6 @@ export {
     buildThemeMetadata,
     validateThemePayload,
 } from '@gravity-ui/themes/dist/validation';
-export type {ThemeMetaDraft, SubmissionAuthor} from '@gravity-ui/themes/dist/validation';
 export interface GalleryFile {
     path: string;
     content: string | Buffer;
@@ -19,9 +18,9 @@ export const sha256 = (value: string | Buffer) =>
     createHash('sha256')
         .update(typeof value === 'string' ? value : new Uint8Array(value))
         .digest('hex');
-export const formatMetaFile = (metadata: ThemeMetadata) =>
+const formatMetaFile = (metadata: ThemeMetadata) =>
     JSON.stringify({$schema: './meta.schema.json', ...metadata}, null, 4) + '\n';
-export const formatThemeFile = (payload: ThemePayload) => JSON.stringify(payload, null, 4) + '\n';
+const formatThemeFile = (payload: ThemePayload) => JSON.stringify(payload, null, 4) + '\n';
 export function buildGalleryFiles({
     metadata,
     payload,
