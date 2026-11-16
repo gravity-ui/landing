@@ -81,10 +81,10 @@
     "uuid": "^10.0.0",
     "web-vitals": "^5.1.0",
     "yaml": "^2.8.0",
-    "@aws-sdk/client-s3": "^3.775.0",
     "@gravity-ui/themes": "git+https://github.com/gravity-ui/themes.git#a1d9df91e84ac8ad061d76d81f8ed2a0a8e06600"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.775.0",
     "@gravity-ui/eslint-config": "^2.0.0",
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
