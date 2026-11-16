@@ -11,6 +11,9 @@ const upstream = {owner: UPSTREAM_OWNER, repo: UPSTREAM_REPO};
 const FORK_READY_TIMEOUT_MS = 10000;
 const FORK_POLL_INTERVAL_MS = 2000;
 
+// Git's well-known empty tree: a gallery without any commits with files yet.
+const EMPTY_TREE_SHA = '4b825dc642cb6eb9a060e54bf8d69288fbee4904';
+
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function readUpstreamFile(octokit: Octokit, ref: string, path: string) {
@@ -45,6 +48,8 @@ export async function isThemeNameTaken(
     state: UpstreamState,
     metadata: Pick<ThemeMetadata, 'id' | 'name'>,
 ) {
+    // GitHub answers 404 for the empty tree.
+    if (state.treeSha === EMPTY_TREE_SHA) return false;
     const {data} = await octokit.git.getTree({
         ...upstream,
         tree_sha: state.treeSha,
@@ -200,7 +205,7 @@ export async function commitGalleryFiles({
     );
     const {data: newTree} = await octokit.git.createTree({
         ...repo,
-        base_tree: state.treeSha,
+        ...(state.treeSha === EMPTY_TREE_SHA ? {} : {base_tree: state.treeSha}),
         tree,
     });
     const {data: commit} = await octokit.git.createCommit({
