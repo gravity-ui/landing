@@ -47,3 +47,6 @@ export type SubmissionEvent =
     | {type: 'step'; index: number; count: number}
     | {type: 'done'; pullRequestUrl: string; pullRequestNumber: number}
     | ({type: 'error'; terminal?: boolean} & SubmissionFailure);
+
+export const SUBMIT_RETURN_PARAM = 'submitTheme';
+export const SIGN_IN_FAILED_PARAM = 'signInFailed';

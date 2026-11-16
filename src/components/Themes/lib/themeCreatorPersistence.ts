@@ -12,8 +12,7 @@ const STATE_KEY = 'gravity-landing:theme-submit:state';
 const REOPEN_KEY = 'gravity-landing:theme-submit:reopen';
 const SIGN_IN_FAILED_KEY = 'gravity-landing:theme-submit:sign-in-failed';
 
-export const SUBMIT_RETURN_PARAM = 'submitTheme';
-export {SIGN_IN_FAILED_PARAM} from '../../../api/themes/config';
+export {SUBMIT_RETURN_PARAM, SIGN_IN_FAILED_PARAM} from '../../../api/themes/types';
 
 function storage() {
     try {
