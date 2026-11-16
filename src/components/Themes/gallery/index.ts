@@ -13,10 +13,14 @@ export function loadThemeCatalog() {
     if (!catalogPromise) {
         catalogPromise = import('@gravity-ui/themes/dist/catalog.json')
             .then(({default: catalog}) => {
-                return catalog.map((entry) => {
+                return catalog.flatMap((entry) => {
                     const metadata: unknown = entry.metadata;
-                    validateThemeMetadata(metadata);
-                    return {...entry, metadata};
+                    try {
+                        validateThemeMetadata(metadata);
+                        return [{...entry, metadata}];
+                    } catch {
+                        return [];
+                    }
                 });
             })
             .catch((error) => {
