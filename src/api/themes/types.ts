@@ -24,5 +24,3 @@ export type SubmissionEvent =
     | {type: 'step'; index: number; count: number}
     | {type: 'done'; pullRequestUrl: string; pullRequestNumber: number}
     | ({type: 'error'; terminal?: boolean} & SubmissionFailure);
-
-export type SubmissionPreflightResult = {ok: true} | ({ok: false} & SubmissionFailure);

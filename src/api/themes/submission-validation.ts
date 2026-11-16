@@ -12,7 +12,7 @@ import type {SubmissionFailure} from './types';
 
 class ThemeNameTakenError extends Error {}
 
-// Both preflight and submit read a fresh upstream snapshot. No writes or rate-limit slots.
+// Submit reads a fresh upstream snapshot. No writes or rate-limit slots.
 export async function validateThemeSubmission(token: string, body: unknown) {
     const {meta, theme} = (body ?? {}) as {meta?: unknown; theme?: unknown};
     const octokit = createUserOctokit(token);

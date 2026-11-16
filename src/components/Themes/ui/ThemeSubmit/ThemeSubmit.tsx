@@ -26,7 +26,7 @@ import {
 } from '../../../../api/themes/config';
 import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
-import {THEME_TAGS, type ThemeMetadata, type ThemeTag} from '../../gallery';
+import {THEME_TAGS, type ThemeMetadata, type ThemeTag, allThemes} from '../../gallery';
 import {toThemeId} from '../../gallery/schema';
 import {useThemeCreator, useThemePaletteColor} from '../../hooks';
 import {type SubmissionFieldErrors, validateSubmissionDraft} from '../../lib/submissionValidation';
@@ -388,8 +388,10 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     const isDesktop = breakpoint >= BREAKPOINTS.sm;
 
     const [draft, setDraft] = React.useState<ThemeSubmissionDraft>(INITIAL_DRAFT);
-    const {user, isUserLoading, state, preflight, retryValidation, signIn, signOut, submit, reset} =
-        useThemeSubmission(isOpen, draft);
+    const {user, isUserLoading, state, signIn, signOut, submit, reset} = useThemeSubmission(
+        isOpen,
+        draft,
+    );
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
     const {gravityTheme} = useThemeCreator();
 
@@ -431,13 +433,8 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     const hasCustomFont = Object.entries(gravityTheme.typography.fontFamilies).some(
         ([fontType, options]) => !isBuiltInFontFamily(fontType, options?.mainFont),
     );
-    const fieldErrors = validateSubmissionDraft(draft);
-    const canRetryValidation = preflight.status === 'error' && preflight.code === 'github';
-    const canSubmit =
-        !Object.keys(fieldErrors).length &&
-        !hasCustomFont &&
-        (preflight.status === 'valid' || canRetryValidation);
-    const checking = !Object.keys(fieldErrors).length && preflight.status === 'pending';
+    const fieldErrors = validateSubmissionDraft(draft, allThemes);
+    const canSubmit = !Object.keys(fieldErrors).length && !hasCustomFont;
     const actionClassName = b('action', {wide: !isDesktop});
 
     const previewMetadata: ThemeMetadata = {
@@ -532,20 +529,9 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
             </React.Fragment>
         );
     } else {
-        let errorCode: SubmissionErrorCode | null = null;
-        if (preflight.status === 'error') {
-            errorCode = preflight.code || 'github';
-        }
-        if (state.status === 'error') {
-            errorCode = state.code;
-        }
-        let buttonLabel = t('submit_theme_submit_btn');
-        if (state.status === 'error' || canRetryValidation) {
-            buttonLabel = t('submit_theme_retry_btn');
-        }
-        if (checking) {
-            buttonLabel = t('submit_theme_checking');
-        }
+        const errorCode: SubmissionErrorCode | null = state.status === 'error' ? state.code : null;
+        const buttonLabel =
+            state.status === 'error' ? t('submit_theme_retry_btn') : t('submit_theme_submit_btn');
         main = (
             <FormContent
                 user={user}
@@ -556,7 +542,6 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
                 hasCustomFont={hasCustomFont}
                 fieldErrors={{
                     ...fieldErrors,
-                    ...(preflight.status === 'error' ? preflight.fields : undefined),
                     ...(state.status === 'error' ? state.fields : undefined),
                 }}
                 onChange={updateDraft}
@@ -569,8 +554,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
                 pin="round-round"
                 size="xl"
                 disabled={!canSubmit}
-                loading={checking}
-                onClick={() => (canRetryValidation ? retryValidation() : submit())}
+                onClick={submit}
                 className={actionClassName}
             >
                 {buttonLabel}
