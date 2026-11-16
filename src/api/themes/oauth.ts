@@ -73,6 +73,8 @@ export async function revokeToken(token: string) {
     }).catch(() => undefined);
 }
 
+export class UserSessionExpiredError extends Error {}
+
 export function createUserOctokit(token: string) {
     return new Octokit({auth: token, userAgent: USER_AGENT, request: {timeout: 15000}});
 }
