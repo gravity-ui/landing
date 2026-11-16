@@ -2,8 +2,8 @@ import {inflateRawSync} from 'zlib';
 
 import sharp from 'sharp';
 
-import {hashJobInput} from './ci';
-import {sha256, validateThemePayload} from './gallery-files';
+import {sha256} from './gallery-files';
+import {isJobInputValid} from './job-input';
 import type {ThemeJob} from './receipt';
 import type {ThemeInput} from './types';
 
@@ -70,11 +70,7 @@ export async function parseThemeArtifact(archive: Buffer, job: ThemeJob & {runId
         throw new Error('Theme artifact correlation mismatch');
     }
     const input = result.input as ThemeInput;
-    if (
-        !input ||
-        hashJobInput(input.metadata, input.payload) !== job.themeHash ||
-        hashJobInput(input.metadata, validateThemePayload(input.payload)) !== job.themeHash
-    ) {
+    if (!isJobInputValid(input, job.themeHash)) {
         throw new Error('Artifact input hash mismatch');
     }
     const files = result.files as Record<string, string>;
