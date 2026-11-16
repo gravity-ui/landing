@@ -6,7 +6,7 @@ import type {
     SubmissionEvent,
     ThemeInput,
 } from '../../../../api/themes/types';
-import {allThemes} from '../../gallery';
+import {useThemeCatalog} from '../../gallery';
 import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
 import {
     type SubmissionDraft,
@@ -53,6 +53,7 @@ const ACTIVE_JOB_KEY = 'themes.activeSubmissionReceipt';
 const PENDING_REQUEST_KEY = 'themes.pendingSubmissionRequest';
 
 export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft) {
+    const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
     const themeState = useThemeCreator();
     const {markSaved} = useThemeCreatorMethods();
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
@@ -330,7 +331,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
         } catch {
             setState({status: 'error', code: 'github'});
         }
-    }, [activeJob, draft, requestBody, user, activeKey, pendingKey]);
+    }, [activeJob, draft, requestBody, user, activeKey, pendingKey, allThemes]);
 
     const reset = React.useCallback(() => {
         if (activeKey) localStorage.removeItem(activeKey);

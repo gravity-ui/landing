@@ -7,7 +7,7 @@ import React from 'react';
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
-import {allThemes} from '../../gallery';
+import {useThemeCatalog} from '../../gallery';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
 
 import './CommunityThemesModal.scss';
@@ -32,6 +32,7 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
     onStartFromScratch,
 }) => {
     const {t} = useTranslation('themes');
+    const allThemes = useThemeCatalog(open).map(({metadata}) => metadata);
     const breakpoint = useWindowBreakpoint();
     let variant: 'desktop' | 'tablet' | 'mobile' = 'tablet';
     if (breakpoint >= BREAKPOINTS.xl) {
@@ -96,6 +97,7 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
                             <ThemeCard
                                 key={theme.id}
                                 metadata={theme}
+                                active={open}
                                 selected={theme.id === activeThemeId}
                                 onApply={onApplyTheme}
                                 className={b('card')}

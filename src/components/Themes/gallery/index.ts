@@ -1,11 +1,42 @@
-import catalog from '@gravity-ui/themes/dist/catalog.json';
+import React from 'react';
 
-import {type ThemeMetadata, type ThemePayload, validateThemeMetadata} from './schema';
-export const allThemes: ThemeMetadata[] = catalog.map((entry) => {
-    const metadata: unknown = entry.metadata;
-    validateThemeMetadata(metadata);
-    return metadata;
-});
+import {type ThemePayload, validateThemeMetadata} from './schema';
+
+type Catalog = typeof import('@gravity-ui/themes/dist/catalog.json');
+let catalogPromise: Promise<Catalog> | undefined;
+
+export function loadThemeCatalog() {
+    if (!catalogPromise) {
+        catalogPromise = import('@gravity-ui/themes/dist/catalog.json')
+            .then(({default: catalog}) => {
+                catalog.forEach(({metadata}) => validateThemeMetadata(metadata));
+                return catalog;
+            })
+            .catch((error) => {
+                catalogPromise = undefined;
+                throw error;
+            });
+    }
+    return catalogPromise;
+}
+
+export function useThemeCatalog(enabled: boolean) {
+    const [catalog, setCatalog] = React.useState<Catalog>([]);
+    React.useEffect(() => {
+        if (!enabled) return undefined;
+        let cancelled = false;
+        loadThemeCatalog()
+            .then((entries) => {
+                if (!cancelled) setCatalog(entries);
+            })
+            .catch(() => undefined);
+        return () => {
+            cancelled = true;
+        };
+    }, [enabled]);
+    return catalog;
+}
+
 export const FEATURED_THEME_IDS = [
     'baseline',
     'coffee',
@@ -13,16 +44,11 @@ export const FEATURED_THEME_IDS = [
     'orange',
     'retro-wave-radio',
 ] as const;
-export const featuredThemes = allThemes.filter((theme) =>
-    (FEATURED_THEME_IDS as readonly string[]).includes(theme.id),
-);
-export const getThemeById = (id: string) => allThemes.find((theme) => theme.id === id);
+
 export async function loadThemePayload(id: string): Promise<ThemePayload> {
-    const entry = catalog.find((theme) => theme.metadata.id === id);
+    const entry = (await loadThemeCatalog()).find((theme) => theme.metadata.id === id);
     if (!entry) throw new Error('Unknown theme');
     return entry.payload as unknown as ThemePayload;
 }
-export function getThemePreview(id: string, mode: 'light' | 'dark') {
-    return catalog.find((theme) => theme.metadata.id === id)?.previews[mode];
-}
+
 export * from './schema';
