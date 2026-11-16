@@ -342,7 +342,7 @@
   "submit_theme_error_github_title": "GitHub не ответил",
   "submit_theme_error_github_message": "Не удалось связаться с GitHub. Тема сохранена в форме, попробуйте через минуту.",
   "submit_theme_error_fork_outdated_title": "Ваш форк устарел",
-  "submit_theme_error_fork_outdated_message": "GitHub не даёт нам обновить ваш форк gravity-ui/landing. Откройте его, нажмите «Sync fork» и попробуйте снова: тема сохранена.",
+  "submit_theme_error_fork_outdated_message": "GitHub не даёт нам обновить ваш форк галереи тем. Откройте его, нажмите «Sync fork» и попробуйте снова: тема сохранена.",
   "submit_theme_open_fork_btn": "Открыть форк",
   "submit_theme_error_session_expired_title": "Войдите снова",
   "submit_theme_error_session_expired_message": "GitHub больше не принимает доступ, выданный темизатору. Войдите снова: тема и форма сохранены.",

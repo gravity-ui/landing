@@ -342,7 +342,7 @@
   "submit_theme_error_github_title": "GitHub did not respond",
   "submit_theme_error_github_message": "Could not contact GitHub. Your theme is kept in this form, try again in a minute.",
   "submit_theme_error_fork_outdated_title": "Your fork is out of date",
-  "submit_theme_error_fork_outdated_message": "GitHub does not let us update your fork of gravity-ui/landing. Open it, click \"Sync fork\" and try again: your theme is kept.",
+  "submit_theme_error_fork_outdated_message": "GitHub does not let us update your theme gallery fork. Open it, click \"Sync fork\" and try again: your theme is kept.",
   "submit_theme_open_fork_btn": "Open fork",
   "submit_theme_error_session_expired_title": "Sign in again",
   "submit_theme_error_session_expired_message": "GitHub no longer accepts the access given to the Themer. Sign in again: your theme and the form are kept.",
