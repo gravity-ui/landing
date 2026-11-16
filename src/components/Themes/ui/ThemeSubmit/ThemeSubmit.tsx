@@ -23,6 +23,7 @@ import {
     MAX_DESCRIPTION_LENGTH,
     MAX_TAGS,
     MAX_THEME_NAME_LENGTH,
+    SUBMISSION_STEP,
 } from '../../../../api/themes/types';
 import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
@@ -199,15 +200,15 @@ const SuccessContent: React.FC<SuccessContentProps> = ({pullRequestUrl}) => {
 
 // Same control as the Interactive "Progress" card on the main page.
 // Step indexes come from the submission job: 0 sending, 1 waiting for CI, 2 rendering, 3+ PR.
-const PROGRESS_TITLE_KEYS = [
-    'submit_theme_progress_sending',
-    'submit_theme_progress_starting',
-    'submit_theme_progress_previews',
-] as const;
+const PROGRESS_TITLE_KEYS: Record<number, string> = {
+    [SUBMISSION_STEP.sending]: 'submit_theme_progress_sending',
+    [SUBMISSION_STEP.waiting]: 'submit_theme_progress_starting',
+    [SUBMISSION_STEP.rendering]: 'submit_theme_progress_previews',
+};
 
 const ProgressWait: React.FC<{step: number; value: number}> = ({step, value}) => {
     const {t} = useTranslation('themes');
-    const rendering = step === 1 || step === 2;
+    const rendering = step === SUBMISSION_STEP.waiting || step === SUBMISSION_STEP.rendering;
 
     return (
         <React.Fragment>

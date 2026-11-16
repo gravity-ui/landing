@@ -1,7 +1,11 @@
 import React from 'react';
 import {flushSync} from 'react-dom';
 
-import {SUBMIT_RETURN_PARAM} from '../../../../api/themes/types';
+import {
+    SUBMISSION_STEP,
+    SUBMISSION_STEP_COUNT,
+    SUBMIT_RETURN_PARAM,
+} from '../../../../api/themes/types';
 import type {
     SubmissionErrorCode as ServerSubmissionErrorCode,
     SubmissionEvent,
@@ -219,8 +223,16 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                     return;
                 }
                 let event: SubmissionEvent = await response.json();
-                if (event.type === 'step' && event.index === 3 && !controller.signal.aborted) {
-                    setState({status: 'submitting', stepIndex: 3, stepCount: event.count});
+                if (
+                    event.type === 'step' &&
+                    event.index === SUBMISSION_STEP.pullRequest &&
+                    !controller.signal.aborted
+                ) {
+                    setState({
+                        status: 'submitting',
+                        stepIndex: SUBMISSION_STEP.pullRequest,
+                        stepCount: event.count,
+                    });
                     const finalized = await fetch(`${API_BASE}/finalize`, {
                         method: 'POST',
                         credentials: 'same-origin',
@@ -273,7 +285,11 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
             }
             timer = setTimeout(poll, 2000);
         };
-        setState({status: 'submitting', stepIndex: 0, stepCount: 5});
+        setState({
+            status: 'submitting',
+            stepIndex: SUBMISSION_STEP.sending,
+            stepCount: SUBMISSION_STEP_COUNT,
+        });
         poll();
         return () => {
             controller.abort();
@@ -297,7 +313,11 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
             setState({status: 'error', code: 'invalid'});
             return;
         }
-        setState({status: 'submitting', stepIndex: 0, stepCount: 5});
+        setState({
+            status: 'submitting',
+            stepIndex: SUBMISSION_STEP.sending,
+            stepCount: SUBMISSION_STEP_COUNT,
+        });
         try {
             const response = await fetch(`${API_BASE}/submit`, {
                 method: 'POST',

@@ -50,3 +50,6 @@ export type SubmissionEvent =
 
 export const SUBMIT_RETURN_PARAM = 'submitTheme';
 export const SIGN_IN_FAILED_PARAM = 'signInFailed';
+
+export const SUBMISSION_STEP = {sending: 0, waiting: 1, rendering: 2, pullRequest: 3} as const;
+export const SUBMISSION_STEP_COUNT = 5;
