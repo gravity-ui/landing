@@ -1,6 +1,9 @@
 import {createHash} from 'crypto';
 
 import type {ThemeMetadata, ThemePayload} from '../../components/Themes/gallery/schema';
+
+import {GALLERY_DIR, PREVIEWS_DIR} from './config';
+
 export {
     SubmissionMetadataError,
     SubmissionValidationError,
@@ -29,9 +32,9 @@ export function buildGalleryFiles({
     previews: {light: Buffer; dark: Buffer};
 }) {
     return [
-        {path: `themes/${metadata.id}.meta.json`, content: formatMetaFile(metadata)},
-        {path: `themes/${metadata.id}.theme.json`, content: formatThemeFile(payload)},
-        {path: `previews/${metadata.id}-light.png`, content: previews.light},
-        {path: `previews/${metadata.id}-dark.png`, content: previews.dark},
+        {path: `${GALLERY_DIR}/${metadata.id}.meta.json`, content: formatMetaFile(metadata)},
+        {path: `${GALLERY_DIR}/${metadata.id}.theme.json`, content: formatThemeFile(payload)},
+        {path: `${PREVIEWS_DIR}/${metadata.id}-light.png`, content: previews.light},
+        {path: `${PREVIEWS_DIR}/${metadata.id}-dark.png`, content: previews.dark},
     ];
 }
