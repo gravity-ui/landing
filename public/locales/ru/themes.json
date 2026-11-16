@@ -328,7 +328,7 @@
   "submit_theme_progress_starting": "Запускаем генерацию превью…",
   "submit_theme_progress_previews": "Генерируем превью…",
   "submit_theme_progress_pull_request": "Создаём pull request…",
-  "submit_theme_progress_previews_hint": "Превью рисуются в GitHub Actions. Обычно это занимает около 2 минут.",
+  "submit_theme_progress_previews_hint": "Превью рисуются в GitHub Actions. Обычно это занимает около минуты.",
   "submit_theme_success_title": "Pull request создан",
   "submit_theme_success_body": "Спасибо! Мейнтейнеры проверят тему. Уведомления о ревью придут вам в GitHub.",
   "submit_theme_open_pr_btn": "Открыть pull request",
