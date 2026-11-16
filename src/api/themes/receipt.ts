@@ -2,8 +2,6 @@ import {hkdfSync} from 'crypto';
 
 import {SignJWT, jwtVerify} from 'jose';
 
-import type {ThemeMetadata, ThemePayload} from '../../components/Themes/gallery/schema';
-
 import type {UpstreamState} from './github-pr';
 
 const ISSUER = 'gravity-landing/themes';
@@ -20,10 +18,6 @@ export interface ThemeJob {
     repository: string;
     rendererTag: string;
     upstream: UpstreamState;
-}
-export interface ThemeInput {
-    metadata: ThemeMetadata;
-    payload: ThemePayload;
 }
 export class ReceiptError extends Error {}
 

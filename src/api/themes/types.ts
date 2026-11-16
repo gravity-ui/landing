@@ -1,4 +1,27 @@
-import type {SubmissionFieldErrors} from '../../components/Themes/lib/submissionValidation';
+import type {ThemeMetadata, ThemePayload, ThemeTag} from '../../components/Themes/gallery/schema';
+
+export const MAX_THEME_NAME_LENGTH = 40;
+export const MAX_DESCRIPTION_LENGTH = 200;
+export const MAX_TAGS = 3;
+
+export interface ThemeInput {
+    metadata: ThemeMetadata;
+    payload: ThemePayload;
+}
+
+export interface SubmissionDraft {
+    name: string;
+    descriptionEn: string;
+    descriptionRu: string;
+    tags: ThemeTag[];
+}
+
+export type SubmissionFieldErrors = Partial<
+    Record<
+        keyof SubmissionDraft,
+        'required' | 'too-long' | 'invalid-name' | 'name-taken' | 'invalid-tags'
+    >
+>;
 
 export type SubmissionErrorCode =
     | 'receipt-expired'

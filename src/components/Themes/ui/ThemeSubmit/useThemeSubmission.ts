@@ -1,10 +1,10 @@
 import React from 'react';
 import {flushSync} from 'react-dom';
 
-import type {ThemeInput} from '../../../../api/themes/receipt';
 import type {
     SubmissionErrorCode as ServerSubmissionErrorCode,
     SubmissionEvent,
+    ThemeInput,
 } from '../../../../api/themes/types';
 import {allThemes} from '../../gallery';
 import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
