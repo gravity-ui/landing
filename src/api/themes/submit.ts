@@ -14,7 +14,12 @@ import {DISPATCH_RECONCILIATION_MS, DISPATCH_WINDOW_MS} from './config';
 import {buildGalleryFiles} from './gallery-files';
 import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
 import {hashJobInput, isJobInputValid} from './job-input';
-import {createUserOctokit, fetchGithubProfile} from './oauth';
+import {
+    UserSessionExpiredError,
+    createUserOctokit,
+    fetchGithubProfile,
+    getErrorStatus,
+} from './oauth';
 import {reserveDispatch, submissionJobId} from './quota';
 import {RECEIPT_TTL_SECONDS, ReceiptError, signReceipt, verifyReceipt} from './receipt';
 import {validateThemeSubmission} from './submission-validation';
@@ -48,7 +53,10 @@ export async function submitTheme(token: string, body: unknown) {
 
 async function authenticate(token: string, receipt: unknown) {
     const octokit = createUserOctokit(token);
-    const profile = await fetchGithubProfile(octokit);
+    const profile = await fetchGithubProfile(octokit).catch((error: unknown) => {
+        if (getErrorStatus(error) === 401) throw new UserSessionExpiredError();
+        throw error;
+    });
     const job = await verifyReceipt(receipt, profile.id);
     assertJobConfiguration(job);
     return {octokit, profile, job};
