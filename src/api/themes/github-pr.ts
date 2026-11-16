@@ -263,7 +263,7 @@ function getPullRequestBody({
 }) {
     const imageUrl = (mode: 'light' | 'dark') =>
         `https://github.com/${fork.owner}/${fork.repo}/blob/${commitSha}/${PREVIEWS_DIR}/${metadata.id}-${mode}.png?raw=true`;
-    const name = neutralizeMentions(metadata.name);
+    const name = neutralizeMentions(metadata.name).replace(/[\\`*_{}[\]()#+.!|<>~-]/g, '\\$&');
     const lines = [
         `Adds the **${name}** theme to the [theme gallery](https://gravity-ui.com/themes).`,
         '',
