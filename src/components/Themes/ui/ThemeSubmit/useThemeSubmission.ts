@@ -248,6 +248,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     ...result,
                     userId: user.id,
                     dispatchAttempted: false,
+                    requestFingerprint: requestBody,
                 };
                 // Both receipt and immutable canonical input are durable before dispatch starts.
                 saveSubmission(activeKey, job);
@@ -271,13 +272,11 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         setState({status: 'idle'});
     }, [activeKey]);
 
-    const previousRequestBody = React.useRef(requestBody);
     React.useEffect(() => {
-        if (previousRequestBody.current !== requestBody && state.status !== 'submitting') {
+        if (state.status === 'error' && activeJob && activeJob.requestFingerprint !== requestBody) {
             reset();
         }
-        previousRequestBody.current = requestBody;
-    }, [requestBody, state.status, reset]);
+    }, [activeJob, requestBody, state.status, reset]);
 
     return {user, isUserLoading, state, signIn, signOut, submit, reset};
 }
