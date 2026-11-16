@@ -4,6 +4,7 @@ import {createAppAuth} from '@octokit/auth-app';
 import {Octokit} from '@octokit/rest';
 
 import {parseThemeArtifact} from './artifact';
+import {getErrorStatus} from './oauth';
 import type {ThemeJob} from './receipt';
 import {ReceiptError} from './receipt';
 import type {ThemeInput} from './types';
@@ -134,8 +135,10 @@ export async function dispatchRun(octokit: Octokit, job: ThemeJob, input: ThemeI
                 headers: {'X-GitHub-Api-Version': '2026-03-10'},
             },
         );
-    } catch {
-        // Only failures after the POST starts are ambiguous. Reconcile without redispatch.
+    } catch (error) {
+        const status = getErrorStatus(error);
+        if (status !== undefined && status >= 400 && status < 500) throw error;
+        // Network failures, timeouts and server errors may follow an accepted dispatch.
     }
 }
 
