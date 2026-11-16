@@ -1,4 +1,8 @@
-import type {ThemeMetadata, ThemePayload, ThemeTag} from '../../components/Themes/gallery/schema';
+import type {SubmissionFieldErrors as BaseSubmissionFieldErrors} from '@gravity-ui/themes/draft';
+
+import type {ThemeMetadata, ThemePayload} from '../../components/Themes/gallery/schema';
+
+export type {SubmissionDraft} from '@gravity-ui/themes/draft';
 
 export const MAX_THEME_NAME_LENGTH = 40;
 export const MAX_DESCRIPTION_LENGTH = 200;
@@ -9,19 +13,9 @@ export interface ThemeInput {
     payload: ThemePayload;
 }
 
-export interface SubmissionDraft {
-    name: string;
-    descriptionEn: string;
-    descriptionRu: string;
-    tags: ThemeTag[];
-}
-
-export type SubmissionFieldErrors = Partial<
-    Record<
-        keyof SubmissionDraft,
-        'required' | 'too-long' | 'invalid-name' | 'name-taken' | 'invalid-tags'
-    >
->;
+export type SubmissionFieldErrors = Omit<BaseSubmissionFieldErrors, 'name'> & {
+    name?: BaseSubmissionFieldErrors['name'] | 'name-taken';
+};
 
 export type SubmissionErrorCode =
     | 'receipt-expired'
