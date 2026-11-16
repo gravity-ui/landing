@@ -186,7 +186,8 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                             if (!dispatched.ok) {
                                 const error = await dispatched.json();
                                 if (controller.signal.aborted) return;
-                                if (dispatched.status === 401) setUser(null);
+                                if (dispatched.status === 401 || error.code === 'session-expired')
+                                    setUser(null);
                                 if (error.terminal) {
                                     localStorage.removeItem(activeKey);
                                     setActiveJob(null);
@@ -236,6 +237,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                     event = await finalized.json();
                 }
                 if (controller.signal.aborted) return;
+                if (event.type === 'error' && event.code === 'session-expired') setUser(null);
                 if (event.type === 'done') {
                     localStorage.removeItem(activeKey);
                     localStorage.removeItem(pendingKey);
@@ -316,7 +318,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
                 localStorage.setItem(activeKey, JSON.stringify(job));
                 setActiveJob(job);
             } else {
-                if (response.status === 401) setUser(null);
+                if (response.status === 401 || result.code === 'session-expired') setUser(null);
                 setState({
                     status: 'error',
                     code: response.status === 401 ? 'session-expired' : result.code || 'github',
