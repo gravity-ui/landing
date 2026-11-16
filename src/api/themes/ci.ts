@@ -144,7 +144,7 @@ export class RendererWorkflowFailedError extends Error {}
 export async function collectResult(octokit: Octokit, job: ThemeJob & {runId: number}) {
     assertJobConfiguration(job);
     const {owner, repo} = ciConfig();
-    const {data: run} = await octokit.actions.getWorkflowRun({owner, repo, run_id: job.runId!});
+    const {data: run} = await octokit.actions.getWorkflowRun({owner, repo, run_id: job.runId});
     if (
         run.head_sha !== job.revision ||
         run.display_title !== `theme-job:${job.id}` ||
@@ -162,7 +162,7 @@ export async function collectResult(octokit: Octokit, job: ThemeJob & {runId: nu
     const artifacts = await octokit.paginate(octokit.actions.listWorkflowRunArtifacts, {
         owner,
         repo,
-        run_id: job.runId!,
+        run_id: job.runId,
         per_page: 100,
     });
     const matches = artifacts.filter(

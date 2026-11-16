@@ -30,7 +30,11 @@ import {block} from '../../../../utils/block';
 import {THEME_TAGS, type ThemeMetadata, type ThemeTag, useThemeCatalog} from '../../gallery';
 import {toThemeId} from '../../gallery/schema';
 import {useThemeCreator, useThemePaletteColor} from '../../hooks';
-import {type SubmissionFieldErrors, validateSubmissionDraft} from '../../lib/submissionValidation';
+import {
+    type SubmissionDraft,
+    type SubmissionFieldErrors,
+    validateSubmissionDraft,
+} from '../../lib/submissionValidation';
 import {
     clearSubmitDraft,
     loadSubmitDraft,
@@ -43,12 +47,7 @@ import {TAG_LABEL_KEYS, ThemeCard} from '../ThemeCard/ThemeCard';
 
 import {ThemeCardLivePreview} from './ThemeCardLivePreview';
 import './ThemeSubmit.scss';
-import {
-    type GithubUser,
-    type SubmissionErrorCode,
-    type ThemeSubmissionDraft,
-    useThemeSubmission,
-} from './useThemeSubmission';
+import {type GithubUser, type SubmissionErrorCode, useThemeSubmission} from './useThemeSubmission';
 
 const b = block('theme-submit');
 
@@ -111,7 +110,7 @@ const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: string}> 
     },
 };
 
-const INITIAL_DRAFT: ThemeSubmissionDraft = {
+const INITIAL_DRAFT: SubmissionDraft = {
     name: '',
     descriptionEn: '',
     descriptionRu: '',
@@ -223,13 +222,13 @@ const ProgressWait: React.FC<{step: number; value: number}> = ({step, value}) =>
 
 interface FormContentProps {
     user: GithubUser;
-    draft: ThemeSubmissionDraft;
+    draft: SubmissionDraft;
     themeId: string;
     errorCode: SubmissionErrorCode | null;
     forkUrl?: string;
     hasCustomFont: boolean;
     fieldErrors: SubmissionFieldErrors;
-    onChange: (patch: Partial<ThemeSubmissionDraft>) => void;
+    onChange: (patch: Partial<SubmissionDraft>) => void;
     onSignOut: () => void;
 }
 
@@ -247,10 +246,10 @@ const FormContent: React.FC<FormContentProps> = ({
     const {t} = useTranslation('themes');
     const error = errorCode ? ERROR_KEYS[errorCode] : null;
     const fieldId = React.useId();
-    const [touched, setTouched] = React.useState<
-        Partial<Record<keyof ThemeSubmissionDraft, boolean>>
-    >({});
-    const fieldError = (field: keyof ThemeSubmissionDraft) => {
+    const [touched, setTouched] = React.useState<Partial<Record<keyof SubmissionDraft, boolean>>>(
+        {},
+    );
+    const fieldError = (field: keyof SubmissionDraft) => {
         const code = fieldErrors[field];
         if (
             !code ||
@@ -260,7 +259,7 @@ const FormContent: React.FC<FormContentProps> = ({
         }
         return t(`submit_theme_field_${field}_${code}`);
     };
-    const touch = (field: keyof ThemeSubmissionDraft) =>
+    const touch = (field: keyof SubmissionDraft) =>
         setTouched((prev) => ({...prev, [field]: true}));
     const nameError =
         errorCode === 'name-taken'
@@ -392,7 +391,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     const breakpoint = useWindowBreakpoint();
     const isDesktop = breakpoint >= BREAKPOINTS.sm;
 
-    const [draft, setDraft] = React.useState<ThemeSubmissionDraft>(INITIAL_DRAFT);
+    const [draft, setDraft] = React.useState<SubmissionDraft>(INITIAL_DRAFT);
     const {user, isUserLoading, state, signIn, signOut, submit, reset} = useThemeSubmission(
         isOpen,
         draft,
@@ -414,7 +413,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     }, []);
 
     const updateDraft = React.useCallback(
-        (patch: Partial<ThemeSubmissionDraft>) => {
+        (patch: Partial<SubmissionDraft>) => {
             reset();
             setDraft((prev) => {
                 const next = {...prev, ...patch};

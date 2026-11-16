@@ -30,8 +30,6 @@ export interface GithubUser {
     avatarUrl: string;
 }
 
-export type ThemeSubmissionDraft = SubmissionDraft;
-
 type SubmissionState =
     | {status: 'idle'}
     | {status: 'submitting'; stepIndex: number; stepCount: number}
@@ -55,7 +53,7 @@ interface StoredSubmission {
 
 const ACTIVE_JOB_KEY = 'themes.activeSubmissionReceipt';
 
-export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft) {
+export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     const allThemes = useThemeCatalog(isOpen).map(({metadata}) => metadata);
     const themeState = useThemeCreator();
     const {markSaved} = useThemeCreatorMethods();
