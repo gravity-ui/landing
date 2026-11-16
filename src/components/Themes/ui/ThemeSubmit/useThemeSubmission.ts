@@ -1,6 +1,7 @@
 import React from 'react';
 import {flushSync} from 'react-dom';
 
+import {SUBMIT_RETURN_PARAM} from '../../../../api/themes/types';
 import type {
     SubmissionErrorCode as ServerSubmissionErrorCode,
     SubmissionEvent,
@@ -39,7 +40,6 @@ export type SubmissionState =
       };
 
 const API_BASE = '/api/themes';
-const SUBMIT_RETURN_QUERY = 'submitTheme=1';
 
 interface StoredSubmission {
     receipt: string;
@@ -112,7 +112,7 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
         }
         // Commit the saved revision and its leave guard before navigation starts.
         flushSync(() => markSaved());
-        const returnTo = `${window.location.pathname}?${SUBMIT_RETURN_QUERY}`;
+        const returnTo = `${window.location.pathname}?${SUBMIT_RETURN_PARAM}=1`;
         window.location.assign(`${API_BASE}/auth/login?returnTo=${encodeURIComponent(returnTo)}`);
     }, [themeState, markSaved]);
 
