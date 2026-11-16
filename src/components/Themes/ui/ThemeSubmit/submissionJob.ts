@@ -10,6 +10,7 @@ export interface StoredSubmission {
     expiresAt: number;
     dispatchAttempted: boolean;
     userId: number;
+    requestFingerprint: string;
 }
 
 export function loadSubmission(key: string): StoredSubmission | null {
