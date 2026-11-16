@@ -315,7 +315,6 @@
   "submit_theme_name_label": "Theme name",
   "submit_theme_name_placeholder": "My theme",
   "submit_theme_name_note": "Theme id: {{id}}",
-  "submit_theme_name_no_id": "Add letters or digits to the name: the theme id is made from them",
   "submit_theme_description_en_label": "Description",
   "submit_theme_description_placeholder": "A short description of the mood and purpose of the theme",
   "submit_theme_description_ru_label": "Description in Russian (optional)",

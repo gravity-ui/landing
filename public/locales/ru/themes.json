@@ -315,7 +315,6 @@
   "submit_theme_name_label": "Название темы",
   "submit_theme_name_placeholder": "Моя тема",
   "submit_theme_name_note": "Идентификатор темы: {{id}}",
-  "submit_theme_name_no_id": "Добавьте в название буквы или цифры: из них составляется идентификатор темы",
   "submit_theme_description_en_label": "Описание на английском",
   "submit_theme_description_placeholder": "Коротко о настроении и назначении темы",
   "submit_theme_description_ru_label": "Описание на русском (необязательно)",
