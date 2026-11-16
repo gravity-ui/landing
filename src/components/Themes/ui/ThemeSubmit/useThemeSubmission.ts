@@ -5,8 +5,8 @@ import type {ThemeInput} from '../../../../api/themes/receipt';
 import type {
     SubmissionErrorCode as ServerSubmissionErrorCode,
     SubmissionEvent,
-    SubmissionPreflightResult,
 } from '../../../../api/themes/types';
+import {allThemes} from '../../gallery';
 import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
 import {
     type SubmissionDraft,
@@ -104,72 +104,6 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
             return null;
         }
     }, [draft, brandColor.value, getThemeJson]);
-    const [validation, setValidation] = React.useState<{
-        body: string | null;
-        status: 'pending' | 'valid' | 'error';
-        code?: SubmissionErrorCode;
-        fields?: SubmissionFieldErrors;
-    }>({body: null, status: 'pending'});
-    const [validationAttempt, retryValidation] = React.useReducer((value: number) => value + 1, 0);
-    const hasFieldErrors = Boolean(Object.keys(validateSubmissionDraft(draft)).length);
-    const isFormActive =
-        isOpen && Boolean(user) && state.status !== 'submitting' && state.status !== 'success';
-
-    React.useEffect(() => {
-        if (!isFormActive || hasFieldErrors) {
-            return undefined;
-        }
-        if (!requestBody) {
-            setValidation({body: requestBody, status: 'error', code: 'invalid'});
-            return undefined;
-        }
-        const controller = new AbortController();
-        setValidation({body: requestBody, status: 'pending'});
-        const timer = setTimeout(async () => {
-            try {
-                const response = await fetch(`${API_BASE}/validate`, {
-                    method: 'POST',
-                    credentials: 'same-origin',
-                    signal: controller.signal,
-                    headers: {'Content-Type': 'application/json'},
-                    body: requestBody,
-                });
-                if (controller.signal.aborted) {
-                    return;
-                }
-                if (response.status === 401) {
-                    setUser(null);
-                    setState({status: 'error', code: 'session-expired'});
-                    return;
-                }
-                const result: SubmissionPreflightResult = await response.json();
-                if (controller.signal.aborted) {
-                    return;
-                }
-                setValidation({
-                    body: requestBody,
-                    status: response.ok && result.ok === true ? 'valid' : 'error',
-                    code: result.ok ? undefined : result.code || 'github',
-                    fields: result.ok ? undefined : result.fields,
-                });
-            } catch {
-                if (!controller.signal.aborted) {
-                    setValidation({body: requestBody, status: 'error', code: 'github'});
-                }
-            }
-        }, 500);
-        return () => {
-            clearTimeout(timer);
-            controller.abort();
-        };
-    }, [isFormActive, hasFieldErrors, requestBody, validationAttempt]);
-
-    // A previous response must never enable submission of an edited draft/theme.
-    const preflight =
-        validation.body === requestBody
-            ? validation
-            : {status: 'pending' as const, code: undefined, fields: undefined};
-
     // GitHub sign-in leaves the page: the unsaved editor state is kept for the
     // way back, where the Themer restores it and reopens this dialog.
     const signIn = React.useCallback(() => {
@@ -354,12 +288,15 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
             retryPolling();
             return;
         }
-        const fields = validateSubmissionDraft(draft);
+        const fields = validateSubmissionDraft(draft, allThemes);
         if (Object.keys(fields).length) {
             setState({status: 'error', code: 'invalid-metadata', fields});
             return;
         }
-        if (!requestBody || preflight.status !== 'valid') return;
+        if (!requestBody) {
+            setState({status: 'error', code: 'invalid'});
+            return;
+        }
         setState({status: 'submitting', stepIndex: 0, stepCount: 5});
         try {
             const response = await fetch(`${API_BASE}/submit`, {
@@ -389,9 +326,9 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
         } catch {
             setState({status: 'error', code: 'github'});
         }
-    }, [activeJob, draft, requestBody, preflight.status, user, activeKey, pendingKey]);
+    }, [activeJob, draft, requestBody, user, activeKey, pendingKey]);
 
     const reset = React.useCallback(() => setState({status: 'idle'}), []);
 
-    return {user, isUserLoading, state, preflight, retryValidation, signIn, signOut, submit, reset};
+    return {user, isUserLoading, state, signIn, signOut, submit, reset};
 }
