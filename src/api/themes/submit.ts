@@ -8,11 +8,11 @@ import {
     createCiOctokit,
     dispatchRun,
     findRun,
-    hashJobInput,
     workflowDispatchBody,
 } from './ci';
-import {buildGalleryFiles, validateThemePayload} from './gallery-files';
+import {buildGalleryFiles} from './gallery-files';
 import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
+import {hashJobInput, isJobInputValid} from './job-input';
 import {createUserOctokit, fetchGithubProfile} from './oauth';
 import {reserveDispatch, submissionJobId} from './quota';
 import {ReceiptError, signReceipt, verifyReceipt} from './receipt';
@@ -50,11 +50,7 @@ async function authenticate(token: string, receipt: unknown) {
 
 export async function dispatchThemeJob(token: string, receipt: unknown, input: ThemeInput) {
     const {job} = await authenticate(token, receipt);
-    if (
-        !input ||
-        hashJobInput(input.metadata, input.payload) !== job.themeHash ||
-        hashJobInput(input.metadata, validateThemePayload(input.payload)) !== job.themeHash
-    ) {
+    if (!isJobInputValid(input, job.themeHash)) {
         throw new ReceiptError('receipt-input');
     }
     const ci = createCiOctokit();

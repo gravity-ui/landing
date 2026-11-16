@@ -1,4 +1,3 @@
-import {createHash} from 'crypto';
 import {deflateRawSync} from 'zlib';
 
 import {createAppAuth} from '@octokit/auth-app';
@@ -53,9 +52,6 @@ export function createCiOctokit() {
         request: {timeout: 15000},
     });
 }
-
-export const hashJobInput = (metadata: unknown, payload: unknown) =>
-    createHash('sha256').update(JSON.stringify({metadata, payload})).digest('hex');
 
 export async function findRun(octokit: Octokit, job: ThemeJob) {
     const config = ciConfig();
