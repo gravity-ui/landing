@@ -13,7 +13,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(202).json(await submitTheme(session.token, req.body));
     } catch (error) {
         const failure = submissionValidationError(error);
-        if (error instanceof Error && error.message === 'rate-limit') failure.code = 'rate-limit';
         res.status(400).json({ok: false, ...failure});
     }
 }
