@@ -5,7 +5,7 @@ import {THEME_TAGS, type ThemeMetadata, type ThemeTag, toThemeId} from '../galle
 export type {SubmissionDraft, SubmissionFieldErrors} from '../../../api/themes/types';
 
 // The server and form must validate the same normalized text.
-export const cleanSubmissionText = (value: unknown) =>
+const cleanSubmissionText = (value: unknown) =>
     // eslint-disable-next-line no-control-regex
     typeof value === 'string' ? value.replace(/[\u0000-\u001f\u007f]/g, ' ').trim() : '';
 

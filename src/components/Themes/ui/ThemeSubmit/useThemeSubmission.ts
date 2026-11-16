@@ -32,7 +32,7 @@ export interface GithubUser {
 
 export type ThemeSubmissionDraft = SubmissionDraft;
 
-export type SubmissionState =
+type SubmissionState =
     | {status: 'idle'}
     | {status: 'submitting'; stepIndex: number; stepCount: number}
     | {status: 'success'; pullRequestUrl: string; pullRequestNumber: number}
