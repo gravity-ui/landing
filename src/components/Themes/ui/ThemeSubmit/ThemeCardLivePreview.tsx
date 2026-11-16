@@ -6,8 +6,8 @@ import {useThemeCreator} from '../../hooks';
 import {exportTheme, replaceRootToCustomClassName} from '../../lib/themeCreatorExport';
 
 // A 555x375 card frame over the Table sample rendered at its natural ~740px width.
-const CAPTURE_WIDTH = 555;
-const CAPTURE_HEIGHT = 375;
+const PREVIEW_WIDTH = 555;
+const PREVIEW_HEIGHT = 375;
 const SAMPLE_WIDTH = 740;
 
 interface ThemeCardLivePreviewProps {
@@ -44,7 +44,7 @@ export const ThemeCardLivePreview: React.FC<ThemeCardLivePreviewProps> = ({mode}
         box.setAttribute('inert', '');
         const observer = new ResizeObserver(([entry]) => {
             const {width, height} = entry.contentRect;
-            setScale(Math.max(width / CAPTURE_WIDTH, height / CAPTURE_HEIGHT));
+            setScale(Math.max(width / PREVIEW_WIDTH, height / PREVIEW_HEIGHT));
         });
         observer.observe(box);
         return () => observer.disconnect();
@@ -61,8 +61,8 @@ export const ThemeCardLivePreview: React.FC<ThemeCardLivePreviewProps> = ({mode}
                 key={mode}
                 className={`g-root g-root_theme_${mode}`}
                 style={{
-                    width: CAPTURE_WIDTH,
-                    height: CAPTURE_HEIGHT,
+                    width: PREVIEW_WIDTH,
+                    height: PREVIEW_HEIGHT,
                     overflow: 'hidden',
                     background: 'var(--g-color-base-background)',
                     transform: `scale(${scale})`,
