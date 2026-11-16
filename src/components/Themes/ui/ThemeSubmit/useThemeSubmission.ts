@@ -333,7 +333,19 @@ export function useThemeSubmission(isOpen: boolean, draft: ThemeSubmissionDraft)
         }
     }, [activeJob, draft, requestBody, user, activeKey, pendingKey]);
 
-    const reset = React.useCallback(() => setState({status: 'idle'}), []);
+    const reset = React.useCallback(() => {
+        if (activeKey) localStorage.removeItem(activeKey);
+        setActiveJob(null);
+        setState({status: 'idle'});
+    }, [activeKey]);
+
+    const previousRequestBody = React.useRef(requestBody);
+    React.useEffect(() => {
+        if (previousRequestBody.current !== requestBody && state.status !== 'submitting') {
+            reset();
+        }
+        previousRequestBody.current = requestBody;
+    }, [requestBody, state.status, reset]);
 
     return {user, isUserLoading, state, signIn, signOut, submit, reset};
 }
