@@ -21,6 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const profile = await fetchGithubProfile(createUserOctokit(session.token));
         res.status(200).json({
+            id: profile.id,
             login: profile.login,
             name: profile.name || profile.login,
             avatarUrl: profile.avatarUrl,

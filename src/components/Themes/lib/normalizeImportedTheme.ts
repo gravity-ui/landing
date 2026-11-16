@@ -3,11 +3,16 @@ import {
     type GravityTheme,
     createInternalPrivateColorReference,
     createInternalUtilityColorReference,
+    createTextCssVariable,
+    getKeyFromCssFontVariable,
     getUtilityColorTypeFromCssVariable,
+    isFontCssVariable,
     isPrivateColorCssVariable,
     isUtilityColorCssVariable,
     parsePrivateColorCssVariable,
 } from '@gravity-ui/uikit-themer';
+
+import type {ThemePayload} from '../gallery/schema';
 
 // Symmetric inverse of uikit-themer's `normalizeColorOptionsForExport` from
 // json/generate.js. The exporter converts internal refs (`private.brand.550-
@@ -62,10 +67,14 @@ const isBlank = (options: ColorOptions | undefined) =>
  * `generateCSS` actually understands. Without this, gallery themes imported
  * from JSON have their brand/text/line/selection mappings silently ignored.
  *
- * Also drops the blank private shades described above so the exported CSS
- * doesn't carry empty declarations.
+ * Also restores typography family keys from the original JSON refs, when
+ * provided, and drops blank private shades to avoid empty CSS declarations.
+ *
+ * @param theme Parsed theme to normalize in place.
+ * @param payload Original JSON, used only to recover explicit font references.
+ * @returns The normalized theme.
  */
-export function normalizeImportedTheme(theme: GravityTheme): GravityTheme {
+export function normalizeImportedTheme(theme: GravityTheme, payload?: ThemePayload): GravityTheme {
     for (const utilityColor of Object.values(theme.utilityColors)) {
         utilityColor.light = normalizeColorOptions(utilityColor.light) ?? utilityColor.light;
         utilityColor.dark = normalizeColorOptions(utilityColor.dark) ?? utilityColor.dark;
@@ -89,6 +98,21 @@ export function normalizeImportedTheme(theme: GravityTheme): GravityTheme {
     for (const baseColor of Object.values(theme.baseColors)) {
         baseColor.light = normalizeColorOptions(baseColor.light) ?? baseColor.light;
         baseColor.dark = normalizeColorOptions(baseColor.dark) ?? baseColor.dark;
+    }
+    // parseJSON uses the resolved font stack as a key, ignoring generateJSON's ref.
+    // Restore only explicit refs to families present in the imported theme.
+    for (const [group, settings] of Object.entries(theme.typography.groups)) {
+        const variable = createTextCssVariable({
+            group: group as keyof typeof theme.typography.groups,
+            property: 'font-family',
+        });
+        const ref = payload?.[variable]?.ref;
+        if (typeof ref === 'string' && isFontCssVariable(ref)) {
+            const family = getKeyFromCssFontVariable(ref);
+            if (Object.hasOwn(theme.typography.fontFamilies, family)) {
+                settings['font-family'] = family;
+            }
+        }
     }
     return theme;
 }

@@ -2,23 +2,13 @@ import type {Octokit} from '@octokit/rest';
 
 import type {ThemeMetadata} from '../../components/Themes/gallery/schema';
 
-import {
-    GALLERY_DIR,
-    GALLERY_INDEX_PATH,
-    PREVIEWS_DIR,
-    PREVIEWS_MANIFEST_PATH,
-    PREVIEW_SOURCE_PATHS,
-    type PreviewSourceKey,
-    UPSTREAM_BRANCH,
-    UPSTREAM_OWNER,
-    UPSTREAM_REPO,
-} from './config';
-import {type GalleryFile, type UpstreamSnapshot, readGalleryIds} from './gallery-files';
+import {GALLERY_DIR, PREVIEWS_DIR, UPSTREAM_BRANCH, UPSTREAM_OWNER, UPSTREAM_REPO} from './config';
+import type {GalleryFile} from './gallery-files';
 import {getErrorStatus} from './oauth';
 
 const upstream = {owner: UPSTREAM_OWNER, repo: UPSTREAM_REPO};
 
-const FORK_READY_TIMEOUT_MS = 60000;
+const FORK_READY_TIMEOUT_MS = 10000;
 const FORK_POLL_INTERVAL_MS = 2000;
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -41,49 +31,55 @@ async function readUpstreamFile(octokit: Octokit, ref: string, path: string) {
 export interface UpstreamState {
     commitSha: string;
     treeSha: string;
-    snapshot: UpstreamSnapshot;
 }
-
-// Reads everything the new gallery files depend on from one upstream commit,
-// so the `themeHash` matches what CI computes on the pull request.
 export async function readUpstreamState(octokit: Octokit): Promise<UpstreamState> {
+    if (!upstream.owner || !upstream.repo)
+        throw new Error('Missing configuration: THEMES_REPOSITORY');
     const {data: ref} = await octokit.git.getRef({...upstream, ref: `heads/${UPSTREAM_BRANCH}`});
-    const commitSha = ref.object.sha;
-    const {data: commit} = await octokit.git.getCommit({...upstream, commit_sha: commitSha});
-
-    const sourceKeys = Object.keys(PREVIEW_SOURCE_PATHS) as PreviewSourceKey[];
-    const [packageJson, indexSource, manifest, ...sources] = await Promise.all([
-        readUpstreamFile(octokit, commitSha, 'package.json'),
-        readUpstreamFile(octokit, commitSha, GALLERY_INDEX_PATH),
-        readUpstreamFile(octokit, commitSha, PREVIEWS_MANIFEST_PATH),
-        ...sourceKeys.map((key) => readUpstreamFile(octokit, commitSha, PREVIEW_SOURCE_PATHS[key])),
-    ]);
-    if (!packageJson || !indexSource) {
-        throw new Error('Upstream repository layout is not supported');
-    }
-
-    const previewSources = Object.fromEntries(
-        sourceKeys.map((key, index) => [key, sources[index]]),
-    ) as UpstreamSnapshot['previewSources'];
-
-    return {
-        commitSha,
-        treeSha: commit.tree.sha,
-        snapshot: {
-            packageJson: packageJson.toString('utf8'),
-            indexSource: indexSource.toString('utf8'),
-            manifest: manifest ? manifest.toString('utf8') : '{"entries": {}}',
-            previewSources,
-        },
-    };
+    const {data: commit} = await octokit.git.getCommit({...upstream, commit_sha: ref.object.sha});
+    return {commitSha: ref.object.sha, treeSha: commit.tree.sha};
 }
 
-export async function isThemeIdTaken(octokit: Octokit, state: UpstreamState, id: string) {
-    if (readGalleryIds(state.snapshot.indexSource).includes(id)) {
+export async function isThemeNameTaken(
+    octokit: Octokit,
+    state: UpstreamState,
+    metadata: Pick<ThemeMetadata, 'id' | 'name'>,
+) {
+    const {data} = await octokit.git.getTree({
+        ...upstream,
+        tree_sha: state.treeSha,
+        recursive: '1',
+    });
+    if (data.truncated) {
+        throw new Error('Upstream tree is incomplete');
+    }
+    const paths = data.tree
+        .map((entry) => entry.path)
+        .filter((path): path is string => Boolean(path?.startsWith(`${GALLERY_DIR}/`)));
+    if (
+        paths.includes(`${GALLERY_DIR}/${metadata.id}.meta.json`) ||
+        paths.includes(`${GALLERY_DIR}/${metadata.id}.theme.json`)
+    ) {
         return true;
     }
-    const meta = await readUpstreamFile(octokit, state.commitSha, `${GALLERY_DIR}/${id}.meta.json`);
-    return meta !== null;
+    const names = await Promise.all(
+        paths
+            .filter((path) => path.endsWith('.meta.json'))
+            .map(async (path) => {
+                const source = await readUpstreamFile(octokit, state.commitSha, path);
+                const meta: unknown = source && JSON.parse(source.toString('utf8'));
+                if (
+                    !meta ||
+                    typeof meta !== 'object' ||
+                    !('name' in meta) ||
+                    typeof meta.name !== 'string'
+                ) {
+                    throw new Error(`Invalid upstream metadata: ${path}`);
+                }
+                return meta.name.trim().toLowerCase();
+            }),
+    );
+    return names.includes(metadata.name.trim().toLowerCase());
 }
 
 export interface ForkRef {
@@ -145,23 +141,43 @@ async function isForkBehind(octokit: Octokit, fork: ForkRef) {
     return data.behind_by > 0;
 }
 
-export function getThemeBranchName(id: string) {
-    return `theme/${id}`;
+// Built from the sanitized id, not the free-form name: a name like `[skip ci]`
+// in the head commit message would make GitHub skip the PR workflows.
+export function getCommitMessage(metadata: ThemeMetadata) {
+    return `feat(themes): add ${metadata.id} theme`;
 }
 
-// One commit with all gallery files on top of the upstream commit, pushed to `theme/<id>`.
+// GitHub reads these directives from commit messages; they are dropped from the
+// title too, so squash-merging the PR with its title as the message stays safe.
+const CI_SKIP_DIRECTIVE_RE =
+    /\[\s*(?:skip\s+ci|ci\s+skip|no\s+ci|skip\s+actions|actions\s+skip)\s*\]/gi;
+
+export function getPullRequestTitle(metadata: ThemeMetadata) {
+    let name = metadata.name;
+    let previousName: string;
+    do {
+        previousName = name;
+        // Removing an inner directive can expose another one, e.g. [skip[skip ci]ci].
+        name = name.replace(CI_SKIP_DIRECTIVE_RE, ' ').replace(/\s+/g, ' ').trim();
+    } while (name !== previousName);
+    return `feat(themes): add ${name || metadata.id} theme`;
+}
+
+// A deterministic branch per receipt; never overwrite existing branch contents.
 export async function commitGalleryFiles({
     octokit,
     fork,
     state,
     metadata,
     files,
+    jobId,
 }: {
     octokit: Octokit;
     fork: ForkRef;
     state: UpstreamState;
     metadata: ThemeMetadata;
     files: GalleryFile[];
+    jobId: string;
 }) {
     const repo = {owner: fork.owner, repo: fork.repo};
     const tree = await Promise.all(
@@ -182,39 +198,48 @@ export async function commitGalleryFiles({
             return {path: file.path, mode: '100644' as const, type: 'blob' as const, sha: blob.sha};
         }),
     );
-    const {data: newTree} = await octokit.git.createTree({...repo, base_tree: state.treeSha, tree});
+    const {data: newTree} = await octokit.git.createTree({
+        ...repo,
+        base_tree: state.treeSha,
+        tree,
+    });
     const {data: commit} = await octokit.git.createCommit({
         ...repo,
-        message: getPullRequestTitle(metadata),
+        message: getCommitMessage(metadata),
         tree: newTree.sha,
         parents: [state.commitSha],
     });
 
-    const branch = getThemeBranchName(metadata.id);
-    try {
-        await octokit.git.createRef({...repo, ref: `refs/heads/${branch}`, sha: commit.sha});
-    } catch (error) {
-        // GitHub answers 404 when the new branch would bring workflow changes
-        // the fork does not have yet.
+    // GitHub answers 404 when the branch would bring workflow changes the fork
+    // does not have yet.
+    const rethrow = async (error: unknown): Promise<never> => {
         if (getErrorStatus(error) === 404 && (await isForkBehind(octokit, fork))) {
             throw new ForkOutdatedError(fork);
         }
-        if (getErrorStatus(error) !== 422) {
-            throw error;
-        }
-        // A previous submission of the same theme: replace its branch.
-        await octokit.git.updateRef({
-            ...repo,
-            ref: `heads/${branch}`,
-            sha: commit.sha,
-            force: true,
-        });
-    }
-    return {branch, commitSha: commit.sha};
-}
+        throw error;
+    };
 
-export function getPullRequestTitle(metadata: ThemeMetadata) {
-    return `feat(themes): add ${metadata.name} theme`;
+    const branch = `theme/${metadata.id}-${jobId}`;
+    try {
+        await octokit.git.createRef({...repo, ref: `refs/heads/${branch}`, sha: commit.sha});
+        return {branch, commitSha: commit.sha};
+    } catch (error) {
+        if (getErrorStatus(error) !== 422) await rethrow(error);
+        const {data: existing} = await octokit.git.getRef({...repo, ref: `heads/${branch}`});
+        const {data: existingCommit} = await octokit.git.getCommit({
+            ...repo,
+            commit_sha: existing.object.sha,
+        });
+        if (
+            existingCommit.tree.sha !== newTree.sha ||
+            existingCommit.message !== getCommitMessage(metadata) ||
+            existingCommit.parents.length !== 1 ||
+            existingCommit.parents[0].sha !== state.commitSha
+        ) {
+            throw new Error('Submission branch has external changes; refusing to overwrite');
+        }
+        return {branch, commitSha: existing.object.sha};
+    }
 }
 
 // Keeps user-provided text from pinging people or issues in the PR body.
@@ -253,7 +278,7 @@ function getPullRequestBody({
         '| --- | --- |',
         `| ![${name}, light](${imageUrl('light')}) | ![${name}, dark](${imageUrl('dark')}) |`,
         '',
-        'Card previews and `previews.manifest.json` were rendered by gravity-ui.com.',
+        'Card previews were generated by the pinned theme repository CI renderer.',
     );
     return lines.join('\n');
 }
@@ -274,6 +299,29 @@ export async function openPullRequest({
     commitSha: string;
 }) {
     const head = `${fork.owner}:${branch}`;
+    const reconcile = async () => {
+        const existing = await octokit.paginate(octokit.pulls.list, {
+            ...upstream,
+            head,
+            base: UPSTREAM_BRANCH,
+            state: 'all',
+            per_page: 100,
+        });
+        const matches = existing.filter(
+            (pr) =>
+                pr.head.ref === branch &&
+                pr.head.repo?.full_name.toLowerCase() ===
+                    `${fork.owner}/${fork.repo}`.toLowerCase(),
+        );
+        if (matches.length > 1) throw new Error('Multiple submission pull requests');
+        const pr = matches[0];
+        if (!pr) return null;
+        if (pr.head.sha !== commitSha)
+            throw new Error('Submission pull request changed externally');
+        return {url: pr.html_url, number: pr.number};
+    };
+    const existing = await reconcile();
+    if (existing) return existing;
     try {
         const {data} = await octokit.pulls.create({
             ...upstream,
@@ -285,14 +333,9 @@ export async function openPullRequest({
         });
         return {url: data.html_url, number: data.number};
     } catch (error) {
-        if (getErrorStatus(error) !== 422) {
-            throw error;
-        }
-        // The branch already has an open pull request, which now shows the new commit.
-        const {data: existing} = await octokit.pulls.list({...upstream, head, state: 'open'});
-        if (!existing.length) {
-            throw error;
-        }
-        return {url: existing[0].html_url, number: existing[0].number};
+        // Includes accepted writes whose HTTP response was lost and concurrent creators.
+        const recovered = await reconcile();
+        if (recovered) return recovered;
+        throw error;
     }
 }

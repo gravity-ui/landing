@@ -18,10 +18,10 @@ import {useRouter} from 'next/router';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ThemeExport} from 'src/components/Themes/ui/ThemeExport/ThemeExport';
 
+import githubIcon from '../../assets/icons/github.svg';
 import {CONTENT_WRAPPER_ID} from '../../constants';
 import {useWindowBreakpoint} from '../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement, sendAnalyticsEvent} from '../../utils';
-import {CustomScrollbar} from '../CustomScrollbar';
 import {TagItem, Tags} from '../Tags/Tags';
 
 import './Themes.scss';
@@ -53,10 +53,13 @@ import {ThemeCreatorContextProvider} from './ui/ThemeCreatorContextProvider';
 import {ThemeGalleryDrawer} from './ui/ThemeGalleryDrawer';
 import {ThemeImport} from './ui/ThemeImport/ThemeImport';
 import {ThemePlaygroundBar} from './ui/ThemePlaygroundBar/ThemePlaygroundBar';
+import {ThemeSubmit} from './ui/ThemeSubmit';
+import {ThemeSubmitContext} from './ui/ThemeSubmit/ThemeSubmitContext';
 import {
     SIGN_IN_FAILED_PARAM,
     SUBMIT_RETURN_PARAM,
     restoreSubmitReturn,
+    takeSubmitReopen,
 } from './ui/ThemeSubmit/submitReturn';
 import {TypographyTab} from './ui/TypographyTab/TypographyTab';
 
@@ -91,9 +94,10 @@ const ThemesContent = () => {
 
     const breakpoint = useWindowBreakpoint();
     const isMobile = breakpoint < BREAKPOINTS.sm;
+    const compactActions = breakpoint < BREAKPOINTS.md;
 
     const themeCreator = useThemeCreator();
-    const {importTheme, applyBrandPreset} = useThemeCreatorMethods();
+    const {importTheme, restoreState, applyBrandPreset} = useThemeCreatorMethods();
     const {add: addToast} = useToaster();
 
     const stickyBarRef = useRef<HTMLDivElement>(null);
@@ -105,6 +109,7 @@ const ThemesContent = () => {
 
     const [isExportDialogVisible, setIsExportDialogVisible] = useState(false);
     const [isImportDialogVisible, setIsImportDialogVisible] = useState(false);
+    const [isSubmitDialogVisible, setIsSubmitDialogVisible] = useState(false);
     const [galleryDrawerOpen, setGalleryDrawerOpen] = useState(false);
     const [communityModalOpen, setCommunityModalOpen] = useState(false);
     const [activeThemeId, setActiveThemeId] = useState<string | null>(null);
@@ -120,6 +125,8 @@ const ThemesContent = () => {
     const closeExportDialog = useCallback(() => setIsExportDialogVisible(false), []);
     const openImportDialog = useCallback(() => setIsImportDialogVisible(true), []);
     const closeImportDialog = useCallback(() => setIsImportDialogVisible(false), []);
+    const openSubmitDialog = useCallback(() => setIsSubmitDialogVisible(true), []);
+    const closeSubmitDialog = useCallback(() => setIsSubmitDialogVisible(false), []);
     // A hand-pasted theme replaces whatever the gallery/playground had applied,
     // so drop their selection — otherwise the previously applied card keeps its
     // orange frame and the UI misreports the current theme. Bumping the
@@ -178,7 +185,7 @@ const ThemesContent = () => {
                 if (generation !== applyGenerationRef.current) {
                     return;
                 }
-                const gravityTheme = normalizeImportedTheme(parseJSON(payload));
+                const gravityTheme = normalizeImportedTheme(parseJSON(payload), payload);
                 importTheme(gravityTheme);
                 sendAnalyticsEvent('theme_apply', id);
                 setActiveThemeId(id);
@@ -346,33 +353,49 @@ const ThemesContent = () => {
 
     const [activeTab, setActiveTab] = useState<ThemeTab>(ThemeTab.Preview);
 
-    // Back from the GitHub sign-in of the submit dialog: restore the theme that
-    // was being submitted and reopen the dialog, which lives on the Colors tab.
+    // Restore a persisted editor revision after OAuth, reload or a later visit.
+    // A plain visit does not reopen the submit dialog.
     const router = useRouter();
+    const parkedStateRestored = useRef(false);
+    const [restoreComplete, setRestoreComplete] = useState(false);
     useEffect(() => {
-        if (!router.isReady || router.query[SUBMIT_RETURN_PARAM] !== '1') {
+        if (!router.isReady || parkedStateRestored.current) {
             return;
         }
-        const themeJson = restoreSubmitReturn({
+        parkedStateRestored.current = true;
+        const isOAuthReturn = router.query[SUBMIT_RETURN_PARAM] === '1';
+        const parkedState = restoreSubmitReturn({
             signInFailed: router.query[SIGN_IN_FAILED_PARAM] === '1',
+            reopen: isOAuthReturn,
         });
-        if (themeJson) {
-            try {
-                importTheme(normalizeImportedTheme(parseJSON(JSON.parse(themeJson))));
-                applyGenerationRef.current += 1;
-                setActiveThemeId(null);
-                setActivePresetIndex(null);
-                setForcedPreviewMode(null);
-            } catch {
-                // A broken saved theme is dropped; the dialog still reopens.
-            }
+        if (parkedState) {
+            restoreState(parkedState);
+            applyGenerationRef.current += 1;
+            setActiveThemeId(null);
+            setActivePresetIndex(null);
+            setForcedPreviewMode(null);
         }
-        setActiveTab(ThemeTab.Colors);
+        if (isOAuthReturn) {
+            setActiveTab(ThemeTab.Colors);
+        }
+        setRestoreComplete(true);
+    }, [router, restoreState]);
+
+    useEffect(() => {
+        if (restoreComplete && takeSubmitReopen()) {
+            openSubmitDialog();
+        }
+    }, [restoreComplete, openSubmitDialog]);
+
+    useEffect(() => {
+        if (!restoreComplete || router.query[SUBMIT_RETURN_PARAM] !== '1') {
+            return;
+        }
         const query = {...router.query};
         delete query[SUBMIT_RETURN_PARAM];
         delete query[SIGN_IN_FAILED_PARAM];
         router.replace({pathname: router.pathname, query}, undefined, {shallow: true});
-    }, [router, importTheme]);
+    }, [router, restoreComplete]);
 
     // PreviewTab's UI samples are not SSR-safe (see the import comment), so the
     // subtree is skipped on the server pass and mounted once hydration is done.
@@ -418,31 +441,35 @@ const ThemesContent = () => {
         tabContent = <TabComponent />;
     }
 
-    // Plain render helper, not a component: declaring a component inside the
-    // render body makes its identity depend on the memo and remounts both
-    // buttons whenever the deps change.
     const renderThemeActionsButtons = () => (
-        <CustomScrollbar axis="horizontal">
-            <Flex direction="row" gap={2}>
-                <Button
-                    className={b('theme-action-btn')}
-                    view="outlined-action"
-                    size="xl"
-                    onClick={openImportDialog}
-                >
-                    <Text>{t('btn_import_theme')}</Text>
-                </Button>
-                <Button
-                    className={b('theme-action-btn')}
-                    view="action"
-                    size="xl"
-                    onClick={openExportDialog}
-                >
-                    <Icon data={ArrowUpFromSquare} />
-                    <Text>{t('btn_export_theme')}</Text>
-                </Button>
-            </Flex>
-        </CustomScrollbar>
+        <Flex className={b('theme-action-buttons')} direction="row" gap={2} wrap>
+            <Button
+                className={b('theme-action-btn')}
+                view="outlined-action"
+                size="xl"
+                onClick={openSubmitDialog}
+            >
+                <Icon data={githubIcon} size={20} />
+                {t(compactActions ? 'btn_submit_theme_short' : 'btn_submit_theme')}
+            </Button>
+            <Button
+                className={b('theme-action-btn')}
+                view="outlined-action"
+                size="xl"
+                onClick={openImportDialog}
+            >
+                {t(compactActions ? 'btn_import_theme_short' : 'btn_import_theme')}
+            </Button>
+            <Button
+                className={b('theme-action-btn')}
+                view="action"
+                size="xl"
+                onClick={openExportDialog}
+            >
+                <Icon data={ArrowUpFromSquare} />
+                {t(compactActions ? 'btn_export_theme_short' : 'btn_export_theme')}
+            </Button>
+        </Flex>
     );
 
     const renderHeaderRow = () => (
@@ -499,11 +526,14 @@ const ThemesContent = () => {
                     <GalleryHintPopover anchorRef={firstSwatchRef} />
                 </div>
 
-                <Grid className={b('grid')}>
-                    <div className={b('grid__content')}>{tabContent}</div>
-                </Grid>
+                <ThemeSubmitContext.Provider value={openSubmitDialog}>
+                    <Grid className={b('grid')}>
+                        <div className={b('grid__content')}>{tabContent}</div>
+                    </Grid>
+                </ThemeSubmitContext.Provider>
             </div>
 
+            <ThemeSubmit isOpen={isSubmitDialogVisible} onClose={closeSubmitDialog} />
             <ThemeExport isOpen={isExportDialogVisible} onClose={closeExportDialog} />
             <ThemeImport
                 isOpen={isImportDialogVisible}

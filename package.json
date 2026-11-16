@@ -47,6 +47,7 @@
     "husky": "^8.0.3",
     "i18next": "^23.8.3",
     "javascript-time-ago": "^2.5.9",
+    "jose": "^5.10.0",
     "lint-staged": "^15.2.10",
     "lodash": "^4.17.21",
     "lowlight": "^3.0.0",
@@ -59,7 +60,6 @@
     "openai": "^6.14.0",
     "overlayscrollbars": "^2.16.0",
     "overlayscrollbars-react": "^0.5.6",
-    "playwright-core": "1.57.0",
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -80,10 +80,11 @@
     "url": "^0.11.0",
     "uuid": "^10.0.0",
     "web-vitals": "^5.1.0",
-    "yaml": "^2.8.0"
+    "yaml": "^2.8.0",
+    "@aws-sdk/client-s3": "^3.775.0",
+    "@gravity-ui/themes": "git+https://github.com/gravity-ui/themes.git#a1d9df91e84ac8ad061d76d81f8ed2a0a8e06600"
   },
   "devDependencies": {
-    "@aws-sdk/client-s3": "^3.775.0",
     "@gravity-ui/eslint-config": "^2.0.0",
     "@gravity-ui/prettier-config": "^1.0.1",
     "@gravity-ui/stylelint-config": "^2.0.0",
@@ -136,8 +137,6 @@
     "get-packages-versions": "node ./scripts/get-packages-versions.mjs",
     "prepare-metadata": "npm run get-packages-versions && npm run generate-component-catalog",
     "update-og-images": "node ./scripts/update-og-images.mjs",
-    "update-theme-previews": "NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES=1 node ./scripts/update-theme-previews.mjs",
-    "check-theme-previews": "NEXT_PUBLIC_ENABLE_PREVIEW_ROUTES=1 node ./scripts/update-theme-previews.mjs --check",
     "update-packages-readme": "node ./scripts/update-packages-readme.mjs",
     "generate-llms": "node ./scripts/generate-llms.mjs",
     "predev": "npm run prepare-metadata",

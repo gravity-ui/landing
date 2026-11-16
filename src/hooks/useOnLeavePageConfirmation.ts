@@ -1,15 +1,15 @@
 import Router from 'next/router';
-import {useEffect} from 'react';
+import {useEffect, useLayoutEffect} from 'react';
+
+const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 export const useOnLeavePageConfirmation = (unsavedChanges: boolean) => {
-    useEffect(() => {
-        // For reloading.
+    useBrowserLayoutEffect(() => {
         window.onbeforeunload = () => {
             if (unsavedChanges) {
                 return 'You have unsaved changes. Do you really want to leave?';
             }
-
-            return null;
+            return undefined;
         };
 
         const routeChangeStart = () => {
@@ -22,9 +22,7 @@ export const useOnLeavePageConfirmation = (unsavedChanges: boolean) => {
                 }
             }
         };
-
         Router.events.on('routeChangeStart', routeChangeStart);
-
         return () => {
             Router.events.off('routeChangeStart', routeChangeStart);
             window.onbeforeunload = null;
