@@ -14,7 +14,7 @@ import {
 import {buildGalleryFiles, validateThemePayload} from './gallery-files';
 import {commitGalleryFiles, openPullRequest, prepareFork} from './github-pr';
 import {createUserOctokit, fetchGithubProfile} from './oauth';
-import {reserveDispatch} from './quota';
+import {reserveDispatch, submissionJobId} from './quota';
 import {ReceiptError, signReceipt, verifyReceipt} from './receipt';
 import type {ThemeInput} from './receipt';
 import {validateThemeSubmission} from './submission-validation';
@@ -26,7 +26,7 @@ export async function submitTheme(token: string, body: unknown) {
     const {profile, metadata, payload, upstreamState} = await validateThemeSubmission(token, body);
     const createdAt = Date.now();
     const job = {
-        id: randomUUID(),
+        id: submissionJobId(profile.id, randomUUID()),
         userId: profile.id,
         createdAt,
         dispatchBefore: createdAt + 120000,
@@ -62,7 +62,7 @@ export async function dispatchThemeJob(token: string, receipt: unknown, input: T
     if (await findRun(ci, job)) return {accepted: true};
     if (Date.now() > job.dispatchBefore) throw new ReceiptError('dispatch-expired');
     workflowDispatchBody(job, input);
-    reserveDispatch(job.userId);
+    await reserveDispatch(ci, job.userId);
     await dispatchRun(ci, job, input);
     return {accepted: true};
 }
