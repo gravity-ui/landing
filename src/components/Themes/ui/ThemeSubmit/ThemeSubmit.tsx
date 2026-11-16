@@ -30,6 +30,11 @@ import {THEME_TAGS, type ThemeMetadata, type ThemeTag, allThemes} from '../../ga
 import {toThemeId} from '../../gallery/schema';
 import {useThemeCreator, useThemePaletteColor} from '../../hooks';
 import {type SubmissionFieldErrors, validateSubmissionDraft} from '../../lib/submissionValidation';
+import {
+    clearSubmitDraft,
+    loadSubmitDraft,
+    saveSubmitDraft,
+} from '../../lib/themeCreatorPersistence';
 import {isBuiltInFontFamily} from '../../lib/typography/utils';
 import {ThemeActionDialog} from '../ThemeActionDialog/ThemeActionDialog';
 import {ThemeActionSheet} from '../ThemeActionSheet/ThemeActionSheet';
@@ -37,7 +42,6 @@ import {TAG_LABEL_KEYS, ThemeCard} from '../ThemeCard/ThemeCard';
 
 import {ThemeCardLivePreview} from './ThemeCardLivePreview';
 import './ThemeSubmit.scss';
-import {clearSubmitDraft, loadSubmitDraft, saveSubmitDraft} from './submitReturn';
 import {
     type GithubUser,
     type SubmissionErrorCode,

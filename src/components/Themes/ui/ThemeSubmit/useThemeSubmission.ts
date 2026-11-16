@@ -14,8 +14,7 @@ import {
     validateSubmissionDraft,
 } from '../../lib/submissionValidation';
 import {exportTheme} from '../../lib/themeCreatorExport';
-
-import {saveSubmitReturn, takeSignInFailed} from './submitReturn';
+import {saveSubmitReturn, takeSignInFailed} from '../../lib/themeCreatorPersistence';
 
 export type SubmissionErrorCode = ServerSubmissionErrorCode | 'sign-in' | 'storage';
 
