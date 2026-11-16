@@ -180,6 +180,7 @@ module.exports = withBundleAnalyzer({
     // Transpile ESM-only packages to work with SSR
     transpilePackages: [
         '@bem-react/classname',
+        '@gravity-ui/themes',
         '@gravity-ui/uikit',
         '@gravity-ui/uikit-v8',
         '@gravity-ui/page-constructor',
