@@ -9,24 +9,37 @@ import type {ThemeJob} from './receipt';
 import {ReceiptError} from './receipt';
 import type {ThemeInput} from './types';
 
+function readRequiredEnv<T extends string>(names: readonly T[]) {
+    const values = {} as Record<T, string>;
+    const missing: T[] = [];
+    for (const name of names) {
+        const value = process.env[name];
+        if (value) {
+            values[name] = value;
+        } else {
+            missing.push(name);
+        }
+    }
+    if (missing.length) {
+        throw new Error(`Missing configuration: ${missing.join(', ')}`);
+    }
+    return values;
+}
+
 export function ciConfig() {
-    const names = [
+    const env = readRequiredEnv([
         'THEMES_REPOSITORY',
         'THEMES_RENDERER_REVISION',
         'THEMES_RENDERER_TAG',
         'THEMES_GITHUB_APP_ID',
         'THEMES_GITHUB_APP_INSTALLATION_ID',
         'THEMES_GITHUB_APP_PRIVATE_KEY',
-    ];
-    const missing = names.filter((name) => !process.env[name]);
-    if (missing.length) {
-        throw new Error(`Missing configuration: ${missing.join(', ')}`);
-    }
+    ]);
     // CI runs where the renderer GitHub App is installed; the gallery PR still targets THEMES_REPOSITORY.
-    const ciRepository = process.env.THEMES_CI_REPOSITORY || process.env.THEMES_REPOSITORY!;
+    const ciRepository = process.env.THEMES_CI_REPOSITORY || env.THEMES_REPOSITORY;
     const [owner, repo, extra] = ciRepository.split('/');
-    const revision = process.env.THEMES_RENDERER_REVISION!;
-    const tag = process.env.THEMES_RENDERER_TAG!;
+    const revision = env.THEMES_RENDERER_REVISION;
+    const tag = env.THEMES_RENDERER_TAG;
     if (
         !owner ||
         !repo ||
@@ -36,19 +49,25 @@ export function ciConfig() {
     ) {
         throw new Error('Invalid theme CI configuration');
     }
-    return {owner, repo, revision, tag};
+    return {
+        owner,
+        repo,
+        revision,
+        tag,
+        appId: env.THEMES_GITHUB_APP_ID,
+        installationId: env.THEMES_GITHUB_APP_INSTALLATION_ID,
+        privateKey: env.THEMES_GITHUB_APP_PRIVATE_KEY,
+    };
 }
 
 export function createCiOctokit() {
-    ciConfig();
+    const {appId, installationId, privateKey} = ciConfig();
     return new Octokit({
         authStrategy: createAppAuth,
         auth: {
-            appId: process.env.THEMES_GITHUB_APP_ID,
-            installationId: process.env.THEMES_GITHUB_APP_INSTALLATION_ID,
-            privateKey: Buffer.from(process.env.THEMES_GITHUB_APP_PRIVATE_KEY!, 'base64').toString(
-                'utf8',
-            ),
+            appId,
+            installationId,
+            privateKey: Buffer.from(privateKey, 'base64').toString('utf8'),
         },
         request: {timeout: 15000},
     });
