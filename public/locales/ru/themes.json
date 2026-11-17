@@ -279,6 +279,8 @@
   "gallery_modal_footer_body": "Доработайте тему из галереи, импортируйте свой CSS или начните с чистого листа — полная свобода.",
   "gallery_modal_start_from_scratch": "Начать с чистого листа",
   "gallery_modal_import_theme": "Импортировать тему",
+  "gallery_modal_load_error": "Не удалось загрузить темы",
+  "gallery_modal_retry": "Повторить",
   "gallery_card_apply": "Применить тему",
   "gallery_card_author": "автор: {{author}}",
   "gallery_card_preview_alt_dark": "Тёмное превью темы {{name}}",

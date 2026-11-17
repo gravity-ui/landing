@@ -100,6 +100,16 @@ $modal: '.#{variables.$ns}community-themes-modal__modal';
         min-width: 0;
     }
 
+    // Fills the empty grid while the first page is loading or has failed.
+    &__status {
+        flex: 1 0 auto;
+    }
+
+    &__error {
+        width: 100%;
+        max-width: 520px;
+    }
+
     &__footer {
         display: flex;
         flex-direction: column;

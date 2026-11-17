@@ -157,7 +157,14 @@ interface LoadedPages {
     pageCount: number;
 }
 
+interface FailedPages {
+    tag?: ThemeTag;
+    count: number;
+    attempt: number;
+}
+
 // The listing grows a page at a time through `loadMore`; changing the tag starts over.
+// A failed page stops the listing until `retry` requests it again.
 export function useThemePages(enabled: boolean, tag?: ThemeTag) {
     const [requested, setRequested] = React.useState<{tag?: ThemeTag; count: number}>({
         tag,
@@ -165,6 +172,8 @@ export function useThemePages(enabled: boolean, tag?: ThemeTag) {
     });
     const count = requested.tag === tag ? requested.count : 1;
     const [loaded, setLoaded] = React.useState<LoadedPages>();
+    const [attempt, setAttempt] = React.useState(0);
+    const [failed, setFailed] = React.useState<FailedPages>();
 
     React.useEffect(() => {
         if (!enabled) {
@@ -177,21 +186,33 @@ export function useThemePages(enabled: boolean, tag?: ThemeTag) {
                     setLoaded({tag, count, ...result});
                 }
             })
-            .catch(() => undefined);
+            .catch(() => {
+                if (!cancelled) {
+                    setFailed({tag, count, attempt});
+                }
+            });
         return () => {
             cancelled = true;
         };
-    }, [enabled, tag, count]);
+    }, [enabled, tag, count, attempt]);
 
     const current = loaded?.tag === tag ? loaded : undefined;
+    const error =
+        failed !== undefined &&
+        failed.tag === tag &&
+        failed.count === count &&
+        failed.attempt === attempt;
+    const loading = enabled && current?.count !== count && !error;
     const hasMore = current?.count === count && count < current.pageCount;
     const loadMore = React.useCallback(() => {
         if (hasMore) {
             setRequested({tag, count: count + 1});
         }
     }, [hasMore, tag, count]);
+    // Failed requests are evicted from the catalog cache, so a new attempt fetches them again.
+    const retry = React.useCallback(() => setAttempt((value) => value + 1), []);
 
-    return {themes: current?.themes ?? NO_THEMES, hasMore, loadMore};
+    return {themes: current?.themes ?? NO_THEMES, hasMore, loading, error, loadMore, retry};
 }
 
 export * from './schema';
