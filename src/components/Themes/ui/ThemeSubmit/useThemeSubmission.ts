@@ -360,6 +360,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         isUserLoading,
         state,
         fieldErrors,
+        isJobDispatched,
         isRenderedVersionStale,
         signIn,
         signOut,
