@@ -16,21 +16,6 @@ const EMPTY_TREE_SHA = '4b825dc642cb6eb9a060e54bf8d69288fbee4904';
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function readUpstreamFile(octokit: Octokit, ref: string, path: string) {
-    try {
-        const {data} = await octokit.repos.getContent({...upstream, path, ref});
-        if (Array.isArray(data) || data.type !== 'file' || !('content' in data)) {
-            throw new Error(`${path} is not a file`);
-        }
-        return Buffer.from(data.content, 'base64');
-    } catch (error) {
-        if (getErrorStatus(error) === 404) {
-            return null;
-        }
-        throw error;
-    }
-}
-
 export interface UpstreamState {
     commitSha: string;
     treeSha: string;
@@ -44,10 +29,11 @@ export async function readUpstreamState(octokit: Octokit): Promise<UpstreamState
     return {commitSha: ref.object.sha, treeSha: commit.tree.sha};
 }
 
+// Catalog ids are derived from names, so a taken name always shows up as a taken id path.
 export async function isThemeNameTaken(
     octokit: Octokit,
     state: UpstreamState,
-    metadata: Pick<ThemeMetadata, 'id' | 'name'>,
+    metadata: Pick<ThemeMetadata, 'id'>,
 ) {
     // GitHub answers 404 for the empty tree.
     if (state.treeSha === EMPTY_TREE_SHA) {
@@ -61,33 +47,11 @@ export async function isThemeNameTaken(
     if (data.truncated) {
         throw new Error('Upstream tree is incomplete');
     }
-    const paths = data.tree
-        .map((entry) => entry.path)
-        .filter((path): path is string => Boolean(path?.startsWith(`${GALLERY_DIR}/`)));
-    if (
-        paths.includes(`${GALLERY_DIR}/${metadata.id}.meta.json`) ||
-        paths.includes(`${GALLERY_DIR}/${metadata.id}.theme.json`)
-    ) {
-        return true;
-    }
-    const names = await Promise.all(
-        paths
-            .filter((path) => path.endsWith('.meta.json'))
-            .map(async (path) => {
-                const source = await readUpstreamFile(octokit, state.commitSha, path);
-                const meta: unknown = source && JSON.parse(source.toString('utf8'));
-                if (
-                    !meta ||
-                    typeof meta !== 'object' ||
-                    !('name' in meta) ||
-                    typeof meta.name !== 'string'
-                ) {
-                    throw new Error(`Invalid upstream metadata: ${path}`);
-                }
-                return meta.name.trim().toLowerCase();
-            }),
-    );
-    return names.includes(metadata.name.trim().toLowerCase());
+    const takenPaths = [
+        `${GALLERY_DIR}/${metadata.id}.meta.json`,
+        `${GALLERY_DIR}/${metadata.id}.theme.json`,
+    ];
+    return data.tree.some((entry) => entry.path !== undefined && takenPaths.includes(entry.path));
 }
 
 export interface ForkRef {
