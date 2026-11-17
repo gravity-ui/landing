@@ -9,7 +9,9 @@ import type {ThemeInput} from './types';
 
 // GitHub artifact archives must contain exactly one bounded regular file.
 function readArtifactJson(zip: Buffer) {
-    if (zip.length < 22) throw new Error('Invalid artifact archive');
+    if (zip.length < 22) {
+        throw new Error('Invalid artifact archive');
+    }
     let end = zip.length - 22;
     const lowerBound = Math.max(0, zip.length - 65557);
     while (end >= lowerBound && zip.readUInt32LE(end) !== 0x06054b50) {

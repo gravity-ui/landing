@@ -135,21 +135,29 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     !Number.isFinite(job.expiresAt) ||
                     job.expiresAt <= Date.now())
             ) {
-                if (activeKey) clearSubmission(activeKey);
+                if (activeKey) {
+                    clearSubmission(activeKey);
+                }
                 setActiveJob(null);
                 setState({status: 'error', code: 'receipt-expired'});
-            } else setActiveJob(job);
+            } else {
+                setActiveJob(job);
+            }
         } catch {
             setState({status: 'error', code: 'storage'});
         }
     }, [activeKey, user?.id]);
     React.useEffect(() => {
-        if (!activeJob || !user || !activeKey) return undefined;
+        if (!activeJob || !user || !activeKey) {
+            return undefined;
+        }
         const controller = new AbortController();
         let timer: ReturnType<typeof setTimeout>;
         const poll = async () => {
             try {
-                if (activeJob.userId !== user.id) return;
+                if (activeJob.userId !== user.id) {
+                    return;
+                }
                 const event = await advanceSubmission(
                     activeJob,
                     activeKey,
@@ -162,8 +170,12 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                         });
                     },
                 );
-                if (controller.signal.aborted) return;
-                if (event.type === 'error' && event.code === 'session-expired') setUser(null);
+                if (controller.signal.aborted) {
+                    return;
+                }
+                if (event.type === 'error' && event.code === 'session-expired') {
+                    setUser(null);
+                }
                 if (event.type === 'done') {
                     clearSubmission(activeKey);
                     setActiveJob(null);
@@ -194,7 +206,9 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     return;
                 }
             } catch {
-                if (controller.signal.aborted) return;
+                if (controller.signal.aborted) {
+                    return;
+                }
                 // A lost response is not a new submission. Resume the same durable job.
             }
             timer = setTimeout(poll, 2000);
@@ -212,7 +226,9 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     }, [activeJob, user, activeKey, pollAttempt]);
 
     const submit = React.useCallback(async () => {
-        if (!user || !activeKey) return;
+        if (!user || !activeKey) {
+            return;
+        }
         if (activeJob) {
             // Re-enter polling without reserving another attempt.
             retryPolling();
@@ -251,7 +267,9 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                 saveSubmission(activeKey, job);
                 setActiveJob(job);
             } else {
-                if (response.status === 401 || result.code === 'session-expired') setUser(null);
+                if (response.status === 401 || result.code === 'session-expired') {
+                    setUser(null);
+                }
                 setState({
                     status: 'error',
                     code: response.status === 401 ? 'session-expired' : result.code || 'github',
@@ -264,7 +282,9 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     }, [activeJob, draft, requestBody, user, activeKey, takenNames]);
 
     const reset = React.useCallback(() => {
-        if (activeKey) clearSubmission(activeKey);
+        if (activeKey) {
+            clearSubmission(activeKey);
+        }
         setActiveJob(null);
         setState({status: 'idle'});
     }, [activeKey]);

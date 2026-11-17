@@ -9,7 +9,9 @@ export const config = {api: {bodyParser: {sizeLimit: '1mb'}}};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const session = readSubmissionSession(req, res);
-    if (!session) return;
+    if (!session) {
+        return;
+    }
     try {
         res.json(await dispatchThemeJob(session.token, req.body?.receipt, req.body?.input));
     } catch (error) {

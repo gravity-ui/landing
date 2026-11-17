@@ -34,7 +34,9 @@ function fetchCatalogFile(file: string): Promise<unknown> {
     if (!request) {
         request = fetch(`${CATALOG_URL}/${file}`)
             .then((response) => {
-                if (!response.ok) throw new Error(`Failed to load ${file}: ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${file}: ${response.status}`);
+                }
                 return response.json();
             })
             .catch((error) => {
@@ -60,7 +62,9 @@ export const getThemePreviewUrl = (id: string, mode: ThemePreviewMode) =>
 
 export async function loadThemeMetadata(id: string) {
     const [metadata] = toValidMetadata(await fetchCatalogFile(getThemeMetadataPath(id)));
-    if (!metadata) throw new Error('Invalid theme metadata');
+    if (!metadata) {
+        throw new Error('Invalid theme metadata');
+    }
     return metadata;
 }
 
@@ -101,11 +105,15 @@ export async function loadThemePayload(id: string): Promise<JsonTheme> {
 function useCatalogData<T>(enabled: boolean, load: () => Promise<T>, initial: T) {
     const [data, setData] = React.useState(initial);
     React.useEffect(() => {
-        if (!enabled) return undefined;
+        if (!enabled) {
+            return undefined;
+        }
         let cancelled = false;
         load()
             .then((value) => {
-                if (!cancelled) setData(value);
+                if (!cancelled) {
+                    setData(value);
+                }
             })
             .catch(() => undefined);
         return () => {
@@ -159,11 +167,15 @@ export function useThemePages(enabled: boolean, tag?: ThemeTag) {
     const [loaded, setLoaded] = React.useState<LoadedPages>();
 
     React.useEffect(() => {
-        if (!enabled) return undefined;
+        if (!enabled) {
+            return undefined;
+        }
         let cancelled = false;
         loadThemePages(count, tag)
             .then((result) => {
-                if (!cancelled) setLoaded({tag, count, ...result});
+                if (!cancelled) {
+                    setLoaded({tag, count, ...result});
+                }
             })
             .catch(() => undefined);
         return () => {
@@ -174,7 +186,9 @@ export function useThemePages(enabled: boolean, tag?: ThemeTag) {
     const current = loaded?.tag === tag ? loaded : undefined;
     const hasMore = current?.count === count && count < current.pageCount;
     const loadMore = React.useCallback(() => {
-        if (hasMore) setRequested({tag, count: count + 1});
+        if (hasMore) {
+            setRequested({tag, count: count + 1});
+        }
     }, [hasMore, tag, count]);
 
     return {themes: current?.themes ?? NO_THEMES, hasMore, loadMore};

@@ -25,7 +25,9 @@ export class ReceiptError extends Error {}
 
 function receiptKey() {
     const secret = process.env.THEMES_SESSION_SECRET;
-    if (!secret || secret.length < 32) throw new Error('Invalid THEMES_SESSION_SECRET');
+    if (!secret || secret.length < 32) {
+        throw new Error('Invalid THEMES_SESSION_SECRET');
+    }
     return new Uint8Array(
         hkdfSync('sha256', secret, 'gravity-landing-themes', 'submission-receipt-v1', 32),
     );
@@ -43,8 +45,9 @@ export async function signReceipt(job: ThemeJob) {
 }
 
 async function readReceiptPayload(receipt: unknown) {
-    if (typeof receipt !== 'string' || receipt.length > 4096)
+    if (typeof receipt !== 'string' || receipt.length > 4096) {
         throw new ReceiptError('receipt-invalid');
+    }
     try {
         const {payload} = await jwtVerify(receipt, receiptKey(), {
             algorithms: ['HS256'],
@@ -83,9 +86,12 @@ function isReceiptJobValid(job: ThemeJob, payload: JWTPayload) {
 
 export async function verifyReceipt(receipt: unknown, userId: number): Promise<ThemeJob> {
     const payload = await readReceiptPayload(receipt);
-    if (!Number.isSafeInteger(userId) || userId <= 0) throw new ReceiptError('receipt-owner');
-    if (payload.sub !== String(userId) || payload.userId !== userId)
+    if (!Number.isSafeInteger(userId) || userId <= 0) {
         throw new ReceiptError('receipt-owner');
+    }
+    if (payload.sub !== String(userId) || payload.userId !== userId) {
+        throw new ReceiptError('receipt-owner');
+    }
     const job = payload as unknown as ThemeJob;
     if (!isReceiptJobValid(job, payload)) {
         throw new ReceiptError('receipt-invalid');

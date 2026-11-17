@@ -7,7 +7,9 @@ const MAX_SUBMISSIONS = 3;
 
 // Keep a UUID-shaped correlation id while making its owner visible in Actions run names.
 export function submissionJobId(userId: number, uuid: string) {
-    if (!Number.isSafeInteger(userId) || userId <= 0) throw new Error('invalid-user');
+    if (!Number.isSafeInteger(userId) || userId <= 0) {
+        throw new Error('invalid-user');
+    }
     const owner = userId.toString(16).padStart(15, '0');
     return `${owner.slice(0, 8)}-${owner.slice(8, 12)}-4${owner.slice(12)}-${uuid.slice(19)}`;
 }
@@ -31,8 +33,12 @@ export async function reserveDispatch(octokit: Octokit, userId: number, now = Da
             page,
         });
         count += data.workflow_runs.filter((run) => run.display_title.startsWith(prefix)).length;
-        if (count >= MAX_SUBMISSIONS) throw new Error('rate-limit');
-        if (page * 100 >= data.total_count) return;
+        if (count >= MAX_SUBMISSIONS) {
+            throw new Error('rate-limit');
+        }
+        if (page * 100 >= data.total_count) {
+            return;
+        }
     }
     // Never treat a truncated search as an unused budget.
     throw new Error('Workflow quota search exceeds safe bound');

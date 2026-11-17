@@ -54,7 +54,9 @@ export async function submitTheme(token: string, body: unknown) {
 async function authenticate(token: string, receipt: unknown) {
     const octokit = createUserOctokit(token);
     const profile = await fetchGithubProfile(octokit).catch((error: unknown) => {
-        if (getErrorStatus(error) === 401) throw new UserSessionExpiredError();
+        if (getErrorStatus(error) === 401) {
+            throw new UserSessionExpiredError();
+        }
         throw error;
     });
     const job = await verifyReceipt(receipt, profile.id);
@@ -68,8 +70,12 @@ export async function dispatchThemeJob(token: string, receipt: unknown, input: T
         throw new ReceiptError('receipt-input');
     }
     const ci = createCiOctokit();
-    if (await findRun(ci, job)) return {accepted: true};
-    if (Date.now() > job.dispatchBefore) throw new ReceiptError('dispatch-expired');
+    if (await findRun(ci, job)) {
+        return {accepted: true};
+    }
+    if (Date.now() > job.dispatchBefore) {
+        throw new ReceiptError('dispatch-expired');
+    }
     workflowDispatchBody(job, input);
     await reserveDispatch(ci, job.userId);
     await dispatchRun(ci, job, input);
@@ -106,14 +112,18 @@ export async function finalizeThemeJob(token: string, receipt: unknown): Promise
     const {octokit, profile, job} = await authenticate(token, receipt);
     const ci = createCiOctokit();
     const run = await findRun(ci, job);
-    if (!run) throw new Error('Workflow not found');
+    if (!run) {
+        throw new Error('Workflow not found');
+    }
     const result = await collectResult(ci, {...job, runId: run.id});
-    if (!result)
+    if (!result) {
         return {type: 'step', index: SUBMISSION_STEP.rendering, count: SUBMISSION_STEP_COUNT};
+    }
     const {metadata, payload} = result.input;
     const fork = await prepareFork(octokit);
-    if (fork.owner.toLowerCase() !== profile.login.toLowerCase())
+    if (fork.owner.toLowerCase() !== profile.login.toLowerCase()) {
         throw new Error('Fork ownership mismatch');
+    }
     const {branch, commitSha} = await commitGalleryFiles({
         octokit,
         fork,
@@ -127,7 +137,9 @@ export async function finalizeThemeJob(token: string, receipt: unknown): Promise
         repo: fork.repo,
         ref: `heads/${branch}`,
     });
-    if (ref.object.sha !== commitSha) throw new Error('Submission branch changed externally');
+    if (ref.object.sha !== commitSha) {
+        throw new Error('Submission branch changed externally');
+    }
     const pr = await openPullRequest({
         octokit,
         fork,
