@@ -7,12 +7,15 @@ import React from 'react';
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
-import {useThemeCatalog} from '../../gallery';
+import {useThemePages} from '../../gallery';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
 
 import './CommunityThemesModal.scss';
 
 const b = block('community-themes-modal');
+
+// Start fetching the next page this far before the footer under the cards comes into view.
+const LOAD_MORE_MARGIN = '600px';
 
 export interface CommunityThemesModalProps {
     open: boolean;
@@ -32,7 +35,9 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
     onStartFromScratch,
 }) => {
     const {t} = useTranslation('themes');
-    const allThemes = useThemeCatalog(open).map(({metadata}) => metadata);
+    const {themes: allThemes, hasMore, loadMore} = useThemePages(open);
+    const scrollAreaRef = React.useRef<HTMLDivElement>(null);
+    const footerRef = React.useRef<HTMLDivElement>(null);
     const breakpoint = useWindowBreakpoint();
     let variant: 'desktop' | 'tablet' | 'mobile' = 'tablet';
     if (breakpoint >= BREAKPOINTS.xl) {
@@ -59,6 +64,27 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
             wrapper.style.overflow = previousOverflow;
         };
     }, [open]);
+
+    // The gallery shows one page of themes and fetches the next one as the user
+    // scrolls towards the footer. The observer is recreated after every page, so
+    // a footer that is still in view requests the following page as well.
+    React.useEffect(() => {
+        const root = scrollAreaRef.current;
+        const marker = footerRef.current;
+        if (!open || !hasMore || !root || !marker) {
+            return undefined;
+        }
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    loadMore();
+                }
+            },
+            {root, rootMargin: LOAD_MORE_MARGIN},
+        );
+        observer.observe(marker);
+        return () => observer.disconnect();
+    }, [open, hasMore, loadMore, allThemes.length]);
 
     return (
         <Dialog
@@ -91,7 +117,7 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
                         </Button.Icon>
                     </Button>
                 </div>
-                <div className={b('scroll-area')}>
+                <div className={b('scroll-area')} ref={scrollAreaRef}>
                     <div className={b('cards')}>
                         {allThemes.map((theme) => (
                             <ThemeCard
@@ -104,7 +130,7 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
                             />
                         ))}
                     </div>
-                    <div className={b('footer')}>
+                    <div className={b('footer')} ref={footerRef}>
                         <div className={b('footer-text')}>
                             <Text variant="display-2" className={b('footer-title')}>
                                 {t('gallery_modal_footer_title')}

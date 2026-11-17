@@ -7,7 +7,7 @@ import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
-import {THEME_TAGS, type ThemeMetadata, type ThemeTag, useThemeCatalog} from '../../gallery';
+import {THEME_TAGS, type ThemeMetadata, type ThemeTag, useThemeNames} from '../../gallery';
 import {toThemeId} from '../../gallery/schema';
 import {useThemeCreator, useThemePaletteColor} from '../../hooks';
 import {type SubmissionDraft, validateSubmissionDraft} from '../../lib/submissionValidation';
@@ -82,15 +82,14 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         }
     }, [state.status]);
 
-    const catalog = useThemeCatalog(isOpen);
-    const allThemes = React.useMemo(() => catalog.map(({metadata}) => metadata), [catalog]);
+    const takenNames = useThemeNames(isOpen);
     const themeId = toThemeId(draft.name);
     // The gallery stores only the theme JSON, so the loading link of a custom
     // font would be lost and the published theme would fall back to the default font.
     const hasCustomFont = Object.entries(gravityTheme.typography.fontFamilies).some(
         ([fontType, options]) => !isBuiltInFontFamily(fontType, options?.mainFont),
     );
-    const fieldErrors = validateSubmissionDraft(draft, allThemes);
+    const fieldErrors = validateSubmissionDraft(draft, takenNames);
     const canSubmit = !Object.keys(fieldErrors).length && !hasCustomFont;
     const actionClassName = b('action', {wide: !isDesktop});
 

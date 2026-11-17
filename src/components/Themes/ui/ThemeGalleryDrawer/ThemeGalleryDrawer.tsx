@@ -7,7 +7,7 @@ import React from 'react';
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
-import {FEATURED_THEME_IDS, useThemeCatalog} from '../../gallery';
+import {useFeaturedThemes} from '../../gallery';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
 
 import './ThemeGalleryDrawer.scss';
@@ -61,9 +61,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     onOpenAllThemes,
 }) => {
     const {t} = useTranslation('themes');
-    const featuredThemes = useThemeCatalog(open)
-        .map(({metadata}) => metadata)
-        .filter((theme) => (FEATURED_THEME_IDS as readonly string[]).includes(theme.id));
+    const featuredThemes = useFeaturedThemes(open);
     const breakpoint = useWindowBreakpoint();
     // page-constructor's hook returns at most xl=1185 (its BREAKPOINTS map
     // tops out there), so we can't ask it about >= xxl. Track the xxl

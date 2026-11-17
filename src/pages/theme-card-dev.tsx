@@ -2,7 +2,7 @@ import type {GetServerSideProps} from 'next';
 import React from 'react';
 
 import {Layout} from '../components/Layout/Layout';
-import {loadThemePayload, useThemeCatalog} from '../components/Themes/gallery';
+import {loadThemePayload, useThemePages} from '../components/Themes/gallery';
 import {ThemeCard} from '../components/Themes/ui/ThemeCard/ThemeCard';
 import {getI18nProps} from '../utils/i18next';
 
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 export const ThemeCardDevPage = () => {
-    const allThemes = useThemeCatalog(true).map(({metadata}) => metadata);
+    const {themes: allThemes, hasMore, loadMore} = useThemePages(true);
     const [selectedId, setSelectedId] = React.useState<string | null>(null);
     const [lastApplied, setLastApplied] = React.useState<string | null>(null);
     const [payloadInfo, setPayloadInfo] = React.useState<string>('');
@@ -66,6 +66,11 @@ export const ThemeCardDevPage = () => {
                         />
                     ))}
                 </div>
+                {hasMore && (
+                    <button type="button" onClick={loadMore} style={{marginTop: '24px'}}>
+                        Load more
+                    </button>
+                )}
             </div>
         </Layout>
     );
