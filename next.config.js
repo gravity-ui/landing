@@ -5,6 +5,7 @@ const {RsdoctorWebpackPlugin} = require('@rsdoctor/webpack-plugin');
 const {patchWebpackConfig} = require('next-global-css');
 
 const {i18n} = require('./next-i18next.config');
+const {THEME_CATALOG_PATH, ThemeCatalogPlugin} = require('./scripts/theme-catalog-plugin');
 
 const ASSET_PREFIX = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -81,6 +82,7 @@ module.exports = withBundleAnalyzer({
 
         if (!options.isServer) {
             config.resolve.fallback.fs = false;
+            config.plugins.push(new ThemeCatalogPlugin());
         }
 
         if (options.isServer) {
@@ -116,6 +118,9 @@ module.exports = withBundleAnalyzer({
         return config;
     },
     reactStrictMode: true,
+    env: {
+        THEME_CATALOG_URL: `${ASSET_PREFIX}/_next/${THEME_CATALOG_PATH}`,
+    },
     // The theme builder route was renamed /themer -> /themes; keep old
     // links and indexed URLs working with a permanent redirect.
     async redirects() {
@@ -134,6 +139,12 @@ module.exports = withBundleAnalyzer({
     },
     // Transpile ESM-only packages to work with SSR
     transpilePackages: [
+        '@gravity-ui/themes',
+        // The CJS build of @gravity-ui/themes requires these ESM-only packages on the server.
+        // Left as ESM externals they turn into async modules and `require` gets a promise.
+        '@gravity-ui/uikit-themer',
+        'chroma-js',
+        'lodash-es',
         '@gravity-ui/uikit',
         '@gravity-ui/page-constructor',
         '@gravity-ui/blog-constructor',

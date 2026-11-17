@@ -1,18 +1,22 @@
 import {Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Button, Dialog, Icon, Text} from '@gravity-ui/uikit';
+import {Button, Dialog, Flex, Icon, Loader, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
-import {allThemes} from '../../gallery';
+import {useThemePages} from '../../gallery';
+import {GalleryLoadError} from '../GalleryLoadError/GalleryLoadError';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
 
 import './CommunityThemesModal.scss';
 
 const b = block('community-themes-modal');
+
+// Start fetching the next page this far before the footer under the cards comes into view.
+const LOAD_MORE_MARGIN = '600px';
 
 export interface CommunityThemesModalProps {
     open: boolean;
@@ -32,6 +36,9 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
     onStartFromScratch,
 }) => {
     const {t} = useTranslation('themes');
+    const {themes: allThemes, hasMore, loading, error, loadMore, retry} = useThemePages(open);
+    const scrollAreaRef = React.useRef<HTMLDivElement>(null);
+    const footerRef = React.useRef<HTMLDivElement>(null);
     const breakpoint = useWindowBreakpoint();
     let variant: 'desktop' | 'tablet' | 'mobile' = 'tablet';
     if (breakpoint >= BREAKPOINTS.xl) {
@@ -58,6 +65,44 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
             wrapper.style.overflow = previousOverflow;
         };
     }, [open]);
+
+    // The gallery shows one page of themes and fetches the next one as the user
+    // scrolls towards the footer. The observer is recreated after every page, so
+    // a footer that is still in view requests the following page as well.
+    React.useEffect(() => {
+        const root = scrollAreaRef.current;
+        const marker = footerRef.current;
+        if (!open || !hasMore || !root || !marker) {
+            return undefined;
+        }
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    loadMore();
+                }
+            },
+            {root, rootMargin: LOAD_MORE_MARGIN},
+        );
+        observer.observe(marker);
+        return () => observer.disconnect();
+    }, [open, hasMore, loadMore, allThemes.length]);
+
+    let status: React.ReactNode = null;
+    if (allThemes.length === 0 && loading) {
+        status = (
+            <Flex alignItems="center" justifyContent="center" className={b('status')}>
+                <Loader size="m" />
+            </Flex>
+        );
+    } else if (error) {
+        status = allThemes.length ? (
+            <GalleryLoadError inline onRetry={retry} />
+        ) : (
+            <Flex alignItems="center" justifyContent="center" className={b('status')}>
+                <GalleryLoadError onRetry={retry} />
+            </Flex>
+        );
+    }
 
     return (
         <Dialog
@@ -90,19 +135,21 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
                         </Button.Icon>
                     </Button>
                 </div>
-                <div className={b('scroll-area')}>
+                <div className={b('scroll-area')} ref={scrollAreaRef}>
                     <div className={b('cards')}>
                         {allThemes.map((theme) => (
                             <ThemeCard
                                 key={theme.id}
                                 metadata={theme}
+                                active={open}
                                 selected={theme.id === activeThemeId}
                                 onApply={onApplyTheme}
                                 className={b('card')}
                             />
                         ))}
                     </div>
-                    <div className={b('footer')}>
+                    {status}
+                    <div className={b('footer')} ref={footerRef}>
                         <div className={b('footer-text')}>
                             <Text variant="display-2" className={b('footer-title')}>
                                 {t('gallery_modal_footer_title')}

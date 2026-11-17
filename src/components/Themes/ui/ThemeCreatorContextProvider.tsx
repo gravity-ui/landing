@@ -6,6 +6,7 @@ import {useOnLeavePageConfirmation} from '../../../hooks/useOnLeavePageConfirmat
 import {BrandPreset} from '../lib/constants';
 import {ThemeCreatorContext, ThemeCreatorMethodsContext} from '../lib/themeCreatorContext';
 import type {ThemeCreatorMethodsContextType} from '../lib/themeCreatorContext';
+import {clearSubmitReturn} from '../lib/themeCreatorPersistence';
 import type {
     AddColorToThemeParams,
     AddFontFamilyTypeParams,
@@ -104,6 +105,10 @@ type ThemeCreatorAction =
           payload: GravityTheme;
       }
     | {
+          type: 'restore';
+          payload: ThemeCreatorState;
+      }
+    | {
           type: 'openMainSettings';
       }
     | {
@@ -179,6 +184,8 @@ const themeCreatorReducer = (
             };
         case 'reinitialize':
             return initThemeCreator(action.payload);
+        case 'restore':
+            return action.payload;
         case 'setColorsSettingsType':
             return {
                 ...newState,
@@ -208,6 +215,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
     React.useEffect(() => {
         if (prevInitialTheme.current !== initialTheme) {
             prevInitialTheme.current = initialTheme;
+            clearSubmitReturn();
             dispatchThemeCreator({
                 type: 'reinitialize',
                 payload: initialTheme,
@@ -272,6 +280,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
 
     const applyBrandPreset = React.useCallback<ThemeCreatorMethodsContextType['applyBrandPreset']>(
         (payload) => {
+            clearSubmitReturn();
             dispatchThemeCreator({
                 type: 'applyBrandPreset',
                 payload,
@@ -373,9 +382,17 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
     }, []);
 
     const importTheme = React.useCallback((gravityTheme: GravityTheme) => {
+        clearSubmitReturn();
         dispatchThemeCreator({
             type: 'reinitialize',
             payload: gravityTheme,
+        });
+    }, []);
+
+    const restoreState = React.useCallback((state: ThemeCreatorState) => {
+        dispatchThemeCreator({
+            type: 'restore',
+            payload: state,
         });
     }, []);
 
@@ -409,6 +426,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             setAdvancedMode,
             setAdvancedColorType,
             importTheme,
+            restoreState,
             setColorsSettingsType,
         }),
         [
@@ -430,6 +448,7 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             setAdvancedMode,
             setAdvancedColorType,
             importTheme,
+            restoreState,
             setColorsSettingsType,
         ],
     );
