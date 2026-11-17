@@ -349,7 +349,7 @@
   "submit_theme_error_session_expired_title": "Войдите снова",
   "submit_theme_error_session_expired_message": "GitHub больше не принимает доступ, выданный темизатору. Войдите снова: тема и форма сохранены.",
   "submit_theme_error_sign_in_title": "Не удалось войти через GitHub",
-  "submit_theme_error_sign_in_message": "GitHub подтвердил доступ, но завершить вход не получилось. Тема сохранена, попробуйте через минуту.",
+  "submit_theme_error_sign_in_message": "Тема сохранена, попробуйте ещё раз через минуту.",
   "submit_theme_error_invalid_title": "Не удалось отправить тему",
   "submit_theme_error_invalid_message": "В теме есть неподдерживаемые цвета, настройки шрифтов или ссылки на переменные. Проверьте настройки темы: поля формы не являются причиной этой ошибки.",
   "submit_theme_custom_font_title": "Свои шрифты пока не поддерживаются",
@@ -369,8 +369,6 @@
   "submit_theme_field_descriptionEn_too-long": "Не больше 200 символов.",
   "submit_theme_field_descriptionRu_too-long": "Не больше 200 символов.",
   "submit_theme_field_tags_invalid-tags": "Выберите не больше 3 тегов из списка.",
-  "submit_theme_error_storage_title": "Не удалось сохранить тему в браузере",
-  "submit_theme_error_storage_message": "Вход через GitHub не начат: не удалось сохранить тему в хранилище браузера. Разрешите хранение данных и попробуйте снова. Ваши правки остаются на этой странице.",
   "submit_theme_error_receipt_title": "Отправка прервалась",
   "submit_theme_error_receipt_message": "Отправьте тему ещё раз."
 }

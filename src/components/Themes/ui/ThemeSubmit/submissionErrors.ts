@@ -46,8 +46,8 @@ export const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: st
         message: 'submit_theme_error_metadata_message',
     },
     storage: {
-        title: 'submit_theme_error_storage_title',
-        message: 'submit_theme_error_storage_message',
+        title: 'submit_theme_error_sign_in_title',
+        message: 'submit_theme_error_sign_in_message',
     },
     'sign-in': {
         title: 'submit_theme_error_sign_in_title',
