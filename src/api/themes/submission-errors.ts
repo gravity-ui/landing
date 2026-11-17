@@ -43,5 +43,7 @@ export function submissionError(error: unknown): SubmissionFailure {
     if (error instanceof UserSessionExpiredError) {
         return {code: 'session-expired'};
     }
+    // Unexpected failures reach the user as a generic GitHub error; keep the cause for the operators.
+    console.error('Theme submission failed:', error);
     return {code: 'github'};
 }
