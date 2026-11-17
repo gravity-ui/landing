@@ -373,9 +373,7 @@
   "submit_theme_field_tags_invalid-tags": "Выберите не больше 3 тегов из списка.",
   "submit_theme_error_storage_title": "Не удалось сохранить тему в браузере",
   "submit_theme_error_storage_message": "Вход через GitHub не начат: не удалось сохранить тему в хранилище браузера. Разрешите хранение данных и попробуйте снова. Ваши правки остаются на этой странице.",
-  "submit_theme_error_receipt_title": "Квитанция отправки недоступна",
-  "submit_theme_error_receipt_expired_message": "Срок сохранённой квитанции истёк. Отправьте тему заново.",
-  "submit_theme_error_receipt_invalid_message": "Квитанция не подходит текущей учётной записи или конфигурации сервера.",
-  "submit_theme_error_dispatch_unconfirmed_message": "GitHub не запустил генерацию превью для этой отправки. Отправьте тему ещё раз.",
+  "submit_theme_error_receipt_title": "Отправка прервалась",
+  "submit_theme_error_receipt_message": "Отправьте тему ещё раз.",
   "submit_theme_error_workflow_input_message": "Тема слишком большая для отправки."
 }
