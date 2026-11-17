@@ -48,6 +48,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         isUserLoading,
         state,
         fieldErrors,
+        isJobDispatched,
         isRenderedVersionStale,
         signIn,
         signOut,
@@ -211,7 +212,8 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
                 view="action"
                 pin="round-round"
                 size="xl"
-                disabled={!canSubmit}
+                // Retry of a dispatched job only resumes the rendered version, whatever the draft is now.
+                disabled={!isJobDispatched && !canSubmit}
                 onClick={submit}
                 className={actionClassName}
             >
