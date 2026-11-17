@@ -372,6 +372,5 @@
   "submit_theme_error_storage_title": "Could not save the theme in this browser",
   "submit_theme_error_storage_message": "GitHub sign-in was not started because the theme could not be saved in browser storage. Allow browser storage and try again; your edits are still on this page.",
   "submit_theme_error_receipt_title": "Submission was interrupted",
-  "submit_theme_error_receipt_message": "Submit the theme again.",
-  "submit_theme_error_workflow_input_message": "The theme is too large to submit."
+  "submit_theme_error_receipt_message": "Submit the theme again."
 }
