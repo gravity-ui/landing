@@ -7,7 +7,7 @@ import {
     SUBMIT_RETURN_PARAM,
 } from '../../../../api/themes/types';
 import type {SubmissionErrorCode as ServerSubmissionErrorCode} from '../../../../api/themes/types';
-import {useThemeCatalog} from '../../gallery';
+import {useThemeNames} from '../../gallery';
 import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
 import {
     type SubmissionDraft,
@@ -48,8 +48,7 @@ type SubmissionState =
       };
 
 export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
-    const catalog = useThemeCatalog(isOpen);
-    const allThemes = React.useMemo(() => catalog.map(({metadata}) => metadata), [catalog]);
+    const takenNames = useThemeNames(isOpen);
     const themeState = useThemeCreator();
     const {markSaved} = useThemeCreatorMethods();
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
@@ -219,7 +218,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
             retryPolling();
             return;
         }
-        const fields = validateSubmissionDraft(draft, allThemes);
+        const fields = validateSubmissionDraft(draft, takenNames);
         if (Object.keys(fields).length) {
             setState({status: 'error', code: 'invalid-metadata', fields});
             return;
@@ -262,7 +261,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         } catch {
             setState({status: 'error', code: 'github'});
         }
-    }, [activeJob, draft, requestBody, user, activeKey, allThemes]);
+    }, [activeJob, draft, requestBody, user, activeKey, takenNames]);
 
     const reset = React.useCallback(() => {
         if (activeKey) clearSubmission(activeKey);

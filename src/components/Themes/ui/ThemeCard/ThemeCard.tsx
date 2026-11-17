@@ -4,7 +4,7 @@ import {useTranslation} from 'next-i18next';
 import React from 'react';
 
 import {block} from '../../../../utils';
-import {useThemeCatalog} from '../../gallery';
+import {getThemePreviewUrl} from '../../gallery';
 import type {LocalizedString, ThemeMetadata, ThemePreviewMode, ThemeTag} from '../../gallery';
 
 import './ThemeCard.scss';
@@ -48,8 +48,6 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
     className,
 }) => {
     const {t, i18n} = useTranslation('themes');
-    const catalog = useThemeCatalog(active && !renderPreview);
-    const previews = catalog.find((entry) => entry.metadata.id === metadata.id)?.previews;
     // Every card opens dark regardless of `metadata.previewMode` — a mixed
     // light/dark grid reads as visual noise. The light preview is one click
     // away on the mode toggle below the card.
@@ -71,7 +69,11 @@ export const ThemeCard: React.FC<ThemeCardProps> = ({
                         <React.Fragment>
                             <img
                                 className={b('preview-image')}
-                                src={previews?.[previewMode]}
+                                src={
+                                    active
+                                        ? getThemePreviewUrl(metadata.id, previewMode)
+                                        : undefined
+                                }
                                 alt={t(
                                     previewMode === 'dark'
                                         ? 'gallery_card_preview_alt_dark'
