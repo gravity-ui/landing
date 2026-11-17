@@ -98,9 +98,7 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
     const touch = (field: keyof SubmissionDraft) =>
         setTouched((prev) => ({...prev, [field]: true}));
     const nameError =
-        errorCode === 'name-taken'
-            ? t('submit_theme_error_name_taken_message')
-            : fieldError('name');
+        errorCode === 'name-taken' ? t('submit_theme_field_name_name-taken') : fieldError('name');
     const nameHint = themeId ? t('submit_theme_name_note', {id: themeId}) : undefined;
 
     return (

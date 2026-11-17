@@ -17,9 +17,10 @@ export const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: st
         title: 'submit_theme_error_invalid_title',
         message: 'submit_theme_error_invalid_message',
     },
+    // The taken name is explained under the name field.
     'name-taken': {
-        title: 'submit_theme_error_name_taken_title',
-        message: 'submit_theme_error_name_taken_message',
+        title: 'submit_theme_error_metadata_title',
+        message: 'submit_theme_error_metadata_message',
     },
     'rate-limit': {
         title: 'submit_theme_error_rate_limit_title',

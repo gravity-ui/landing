@@ -335,8 +335,6 @@
   "submit_theme_success_body": "Спасибо! Мейнтейнеры проверят тему. Уведомления о ревью придут вам в GitHub.",
   "submit_theme_open_pr_btn": "Открыть pull request",
   "submit_theme_done_btn": "Готово",
-  "submit_theme_error_name_taken_title": "Такое название уже занято",
-  "submit_theme_error_name_taken_message": "В галерее уже есть тема с таким названием или идентификатором. Выберите другое название.",
   "submit_theme_error_rate_limit_title": "Слишком много заявок",
   "submit_theme_error_rate_limit_message": "Можно отправить до 3 тем в день. Попробуйте завтра.",
   "submit_theme_error_preview_title": "Не удалось создать превью",
