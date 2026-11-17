@@ -79,10 +79,6 @@ $block: '.#{variables.$ns}theme-gallery-drawer';
         flex: 1 0 auto;
     }
 
-    &__error {
-        width: 100%;
-    }
-
     // Default CTA wrapper layout — desktop/mobile keep the full-width
     // outlined button; tablet (below) replaces the wrapper with a
     // card-styled slot per the Figma horizontal-drawer mockup.

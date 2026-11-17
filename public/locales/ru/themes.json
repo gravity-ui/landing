@@ -280,6 +280,7 @@
   "gallery_modal_start_from_scratch": "Начать с чистого листа",
   "gallery_modal_import_theme": "Импортировать тему",
   "gallery_modal_load_error": "Не удалось загрузить темы",
+  "gallery_modal_load_error_description": "Проверьте подключение и попробуйте ещё раз.",
   "gallery_modal_retry": "Повторить",
   "gallery_card_apply": "Применить тему",
   "gallery_card_author": "автор: {{author}}",
