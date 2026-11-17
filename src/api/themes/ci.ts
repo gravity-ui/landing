@@ -171,17 +171,43 @@ export async function dispatchRun(octokit: Octokit, job: ThemeJob, input: ThemeI
 
 export class RendererWorkflowFailedError extends Error {}
 
+// The run id comes back from the client, so a run that does not belong to the job is rejected.
+export class InvalidRunIdError extends Error {}
+
+export function parseRunId(value: unknown) {
+    if (value === undefined) {
+        return undefined;
+    }
+    if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) {
+        throw new InvalidRunIdError('run-invalid');
+    }
+    return value;
+}
+
+async function getJobRun(octokit: Octokit, job: ThemeJob & {runId: number}) {
+    const {owner, repo} = ciConfig();
+    try {
+        const {data} = await octokit.actions.getWorkflowRun({owner, repo, run_id: job.runId});
+        return data;
+    } catch (error) {
+        if (getErrorStatus(error) === 404) {
+            throw new InvalidRunIdError('run-invalid');
+        }
+        throw error;
+    }
+}
+
 export async function collectResult(octokit: Octokit, job: ThemeJob & {runId: number}) {
     assertJobConfiguration(job);
     const {owner, repo} = ciConfig();
-    const {data: run} = await octokit.actions.getWorkflowRun({owner, repo, run_id: job.runId});
+    const run = await getJobRun(octokit, job);
     if (
         run.head_sha !== job.revision ||
         run.display_title !== `theme-job:${job.id}` ||
         run.event !== 'workflow_dispatch' ||
         run.path !== '.github/workflows/render-submission.yml'
     ) {
-        throw new Error('Workflow correlation mismatch');
+        throw new InvalidRunIdError('run-invalid');
     }
     if (run.status !== 'completed') {
         return null;

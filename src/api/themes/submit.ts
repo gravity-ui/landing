@@ -8,6 +8,7 @@ import {
     createCiOctokit,
     dispatchRun,
     findRun,
+    parseRunId,
     workflowDispatchBody,
 } from './ci';
 import {DISPATCH_RECONCILIATION_MS, DISPATCH_WINDOW_MS} from './config';
@@ -83,22 +84,32 @@ export async function dispatchThemeJob(token: string, receipt: unknown, input: T
 }
 
 // No dispatch, quota reservation, fork or PR mutation in status requests.
-export async function readThemeJob(token: string, receipt: unknown): Promise<SubmissionEvent> {
+// A known run id skips the run search: one App request per poll instead of two.
+export async function readThemeJob(
+    token: string,
+    receipt: unknown,
+    knownRunId: unknown,
+): Promise<SubmissionEvent> {
     const {job} = await authenticate(token, receipt);
+    let runId = parseRunId(knownRunId);
     const ci = createCiOctokit();
-    const run = await findRun(ci, job);
-    if (!run) {
-        if (Date.now() > job.dispatchBefore + DISPATCH_RECONCILIATION_MS) {
-            return {type: 'error', code: 'dispatch-unconfirmed', terminal: true};
+    if (runId === undefined) {
+        const run = await findRun(ci, job);
+        if (!run) {
+            if (Date.now() > job.dispatchBefore + DISPATCH_RECONCILIATION_MS) {
+                return {type: 'error', code: 'dispatch-unconfirmed', terminal: true};
+            }
+            return {type: 'step', index: SUBMISSION_STEP.waiting, count: SUBMISSION_STEP_COUNT};
         }
-        return {type: 'step', index: SUBMISSION_STEP.waiting, count: SUBMISSION_STEP_COUNT};
+        runId = run.id;
     }
     try {
-        const result = await collectResult(ci, {...job, runId: run.id});
+        const result = await collectResult(ci, {...job, runId});
         return {
             type: 'step',
             index: result ? SUBMISSION_STEP.pullRequest : SUBMISSION_STEP.rendering,
             count: SUBMISSION_STEP_COUNT,
+            runId,
         };
     } catch (error) {
         if (error instanceof RendererWorkflowFailedError) {
@@ -108,16 +119,29 @@ export async function readThemeJob(token: string, receipt: unknown): Promise<Sub
     }
 }
 
-export async function finalizeThemeJob(token: string, receipt: unknown): Promise<SubmissionEvent> {
+export async function finalizeThemeJob(
+    token: string,
+    receipt: unknown,
+    knownRunId: unknown,
+): Promise<SubmissionEvent> {
     const {octokit, profile, job} = await authenticate(token, receipt);
+    let runId = parseRunId(knownRunId);
     const ci = createCiOctokit();
-    const run = await findRun(ci, job);
-    if (!run) {
-        throw new Error('Workflow not found');
+    if (runId === undefined) {
+        const run = await findRun(ci, job);
+        if (!run) {
+            throw new Error('Workflow not found');
+        }
+        runId = run.id;
     }
-    const result = await collectResult(ci, {...job, runId: run.id});
+    const result = await collectResult(ci, {...job, runId});
     if (!result) {
-        return {type: 'step', index: SUBMISSION_STEP.rendering, count: SUBMISSION_STEP_COUNT};
+        return {
+            type: 'step',
+            index: SUBMISSION_STEP.rendering,
+            count: SUBMISSION_STEP_COUNT,
+            runId,
+        };
     }
     const {metadata, payload} = result.input;
     const fork = await prepareFork(octokit);
