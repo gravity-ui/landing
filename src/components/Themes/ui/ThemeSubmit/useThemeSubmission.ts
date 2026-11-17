@@ -27,9 +27,16 @@ import {
 } from './submissionJob';
 import type {StoredSubmission} from './submissionJob';
 
-const POLL_INTERVAL_MS = 2000;
+// Fast polling only while the dispatched run is not found yet.
+const DISPATCH_POLL_INTERVAL_MS = 2000;
+// Rendering takes minutes, and every status call spends the shared GitHub App rate limit.
+const RENDERING_POLL_INTERVAL_MS = 10000;
 
-export type SubmissionErrorCode = ServerSubmissionErrorCode | 'sign-in' | 'storage';
+// 'run-invalid' is recovered by the polling loop and never shown.
+export type SubmissionErrorCode =
+    | Exclude<ServerSubmissionErrorCode, 'run-invalid'>
+    | 'sign-in'
+    | 'storage';
 
 export interface GithubUser {
     id: number;
@@ -153,6 +160,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         }
         const controller = new AbortController();
         let timer: ReturnType<typeof setTimeout>;
+        let pollInterval = DISPATCH_POLL_INTERVAL_MS;
         const poll = async () => {
             try {
                 if (activeJob.userId !== user.id) {
@@ -187,11 +195,18 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     return;
                 }
                 if (event.type === 'step') {
+                    pollInterval =
+                        event.runId === undefined
+                            ? DISPATCH_POLL_INTERVAL_MS
+                            : RENDERING_POLL_INTERVAL_MS;
                     setState({
                         status: 'submitting',
                         stepIndex: event.index,
                         stepCount: event.count,
                     });
+                } else if (event.code === 'run-invalid') {
+                    // advanceSubmission dropped the stored run id; the next poll searches for the run.
+                    pollInterval = DISPATCH_POLL_INTERVAL_MS;
                 } else {
                     if (event.terminal) {
                         clearSubmission(activeKey);
@@ -211,7 +226,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                 }
                 // A lost response is not a new submission. Resume the same durable job.
             }
-            timer = setTimeout(poll, POLL_INTERVAL_MS);
+            timer = setTimeout(poll, pollInterval);
         };
         setState({
             status: 'submitting',

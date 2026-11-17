@@ -21,6 +21,8 @@ export type SubmissionErrorCode =
     | 'receipt-expired'
     | 'receipt-invalid'
     | 'dispatch-unconfirmed'
+    // The client-supplied run id is malformed or not this job's run: drop it and search again.
+    | 'run-invalid'
     | 'workflow-input-too-large'
     | 'name-taken'
     | 'rate-limit'
@@ -38,7 +40,8 @@ export interface SubmissionFailure {
 }
 
 export type SubmissionEvent =
-    | {type: 'step'; index: number; count: number}
+    // runId is set once the workflow run is found; later status and finalize calls send it back.
+    | {type: 'step'; index: number; count: number; runId?: number}
     | {type: 'done'; pullRequestUrl: string; pullRequestNumber: number}
     | ({type: 'error'; terminal?: boolean} & SubmissionFailure);
 

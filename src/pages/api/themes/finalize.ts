@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
     }
     try {
-        res.json(await finalizeThemeJob(session.token, req.body?.receipt));
+        res.json(await finalizeThemeJob(session.token, req.body?.receipt, req.body?.runId));
     } catch (error) {
         res.status(400).json({
             type: 'error',

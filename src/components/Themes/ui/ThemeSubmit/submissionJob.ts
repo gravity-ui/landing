@@ -11,6 +11,8 @@ export interface StoredSubmission {
     dispatchAttempted: boolean;
     userId: number;
     requestFingerprint: string;
+    // Workflow run reported by the server; sent back so it does not search for the run again.
+    runId?: number;
 }
 
 export function loadSubmission(key: string): StoredSubmission | null {
@@ -69,6 +71,20 @@ async function dispatchJob(job: StoredSubmission, key: string, signal: AbortSign
     return (await response.json()) as SubmissionEvent;
 }
 
+// Storage is fresher than the job object the polling loop started with.
+function storedRunId(job: StoredSubmission, key: string) {
+    const stored = loadSubmission(key);
+    return stored?.receipt === job.receipt ? stored.runId : undefined;
+}
+
+function saveRunId(job: StoredSubmission, key: string, runId: number | undefined) {
+    const stored = loadSubmission(key);
+    if (stored?.receipt !== job.receipt || stored.runId === runId) {
+        return;
+    }
+    saveSubmission(key, {...stored, runId});
+}
+
 export async function advanceSubmission(
     job: StoredSubmission,
     key: string,
@@ -79,10 +95,27 @@ export async function advanceSubmission(
     if (rejection) {
         return rejection;
     }
-    const event = await requestJob('status', {receipt: job.receipt}, signal);
-    if (event.type === 'step' && event.index === SUBMISSION_STEP.pullRequest && !signal.aborted) {
+    const runId = storedRunId(job, key);
+    const event = await requestJob('status', {receipt: job.receipt, runId}, signal);
+    if (event.type === 'error' && event.code === 'run-invalid') {
+        saveRunId(job, key, undefined);
+        return event;
+    }
+    if (event.type !== 'step') {
+        return event;
+    }
+    saveRunId(job, key, event.runId);
+    if (event.index === SUBMISSION_STEP.pullRequest && !signal.aborted) {
         onFinalizing(event.count);
-        return requestJob('finalize', {receipt: job.receipt}, signal);
+        const finalized = await requestJob(
+            'finalize',
+            {receipt: job.receipt, runId: event.runId},
+            signal,
+        );
+        if (finalized.type === 'error' && finalized.code === 'run-invalid') {
+            saveRunId(job, key, undefined);
+        }
+        return finalized;
     }
     return event;
 }

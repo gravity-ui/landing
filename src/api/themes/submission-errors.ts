@@ -1,4 +1,4 @@
-import {WorkflowInputTooLargeError} from './ci';
+import {InvalidRunIdError, WorkflowInputTooLargeError} from './ci';
 import {SubmissionMetadataError, SubmissionValidationError} from './gallery-files';
 import {ForkOutdatedError} from './github-pr';
 import {UserSessionExpiredError} from './oauth';
@@ -9,6 +9,9 @@ import type {SubmissionFailure} from './types';
 export function submissionError(error: unknown): SubmissionFailure {
     if (error instanceof WorkflowInputTooLargeError) {
         return {code: 'workflow-input-too-large'};
+    }
+    if (error instanceof InvalidRunIdError) {
+        return {code: 'run-invalid'};
     }
     if (error instanceof ReceiptError) {
         return {
