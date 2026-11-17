@@ -106,10 +106,9 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         brandColor: brandColor.value,
     };
 
+    // The dialog closes during submission too: the job is durable and its polling goes on,
+    // so reopening shows its progress or result.
     const handleClose = () => {
-        if (state.status === 'submitting') {
-            return;
-        }
         if (state.status === 'success') {
             setDraft(INITIAL_DRAFT);
             reset();
