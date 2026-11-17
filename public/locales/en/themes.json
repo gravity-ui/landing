@@ -373,9 +373,7 @@
   "submit_theme_field_tags_invalid-tags": "Choose up to 3 tags from the list.",
   "submit_theme_error_storage_title": "Could not save the theme in this browser",
   "submit_theme_error_storage_message": "GitHub sign-in was not started because the theme could not be saved in browser storage. Allow browser storage and try again; your edits are still on this page.",
-  "submit_theme_error_receipt_title": "Submission receipt unavailable",
-  "submit_theme_error_receipt_expired_message": "The saved submission receipt expired. Submit the theme again.",
-  "submit_theme_error_receipt_invalid_message": "This receipt cannot be used with the current account or server configuration.",
-  "submit_theme_error_dispatch_unconfirmed_message": "GitHub did not start preview generation for this submission. Submit the theme again.",
+  "submit_theme_error_receipt_title": "Submission was interrupted",
+  "submit_theme_error_receipt_message": "Submit the theme again.",
   "submit_theme_error_workflow_input_message": "The theme is too large to submit."
 }

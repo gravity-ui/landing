@@ -3,15 +3,15 @@ import type {SubmissionErrorCode} from './useThemeSubmission';
 export const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: string}> = {
     'receipt-expired': {
         title: 'submit_theme_error_receipt_title',
-        message: 'submit_theme_error_receipt_expired_message',
+        message: 'submit_theme_error_receipt_message',
     },
     'receipt-invalid': {
         title: 'submit_theme_error_receipt_title',
-        message: 'submit_theme_error_receipt_invalid_message',
+        message: 'submit_theme_error_receipt_message',
     },
     'dispatch-unconfirmed': {
         title: 'submit_theme_error_receipt_title',
-        message: 'submit_theme_error_dispatch_unconfirmed_message',
+        message: 'submit_theme_error_receipt_message',
     },
     'workflow-input-too-large': {
         title: 'submit_theme_error_invalid_title',
