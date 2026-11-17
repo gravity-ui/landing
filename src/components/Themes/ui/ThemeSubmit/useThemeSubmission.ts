@@ -85,21 +85,16 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         return () => controller.abort();
     }, []);
 
-    const getThemeJson = React.useCallback(
-        () => exportTheme({themeState, format: 'json'}),
-        [themeState],
-    );
-
     const requestBody = React.useMemo(() => {
         try {
             return JSON.stringify({
                 meta: {...draft, brandColor: brandColor.value},
-                theme: JSON.parse(getThemeJson()),
+                theme: JSON.parse(exportTheme({themeState, format: 'json'})),
             });
         } catch {
             return null;
         }
-    }, [draft, brandColor.value, getThemeJson]);
+    }, [draft, brandColor.value, themeState]);
     // GitHub sign-in leaves the page: the unsaved editor state is kept for the
     // way back, where the Themer restores it and reopens this dialog.
     const signIn = React.useCallback(() => {
