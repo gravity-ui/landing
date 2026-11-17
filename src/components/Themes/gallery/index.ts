@@ -102,31 +102,47 @@ export async function loadThemePayload(id: string): Promise<JsonTheme> {
     return payload;
 }
 
+// A failed load is reported through `error` until `retry` requests it again.
 function useCatalogData<T>(enabled: boolean, load: () => Promise<T>, initial: T) {
-    const [data, setData] = React.useState(initial);
+    const [loaded, setLoaded] = React.useState<{data: T}>();
+    const [attempt, setAttempt] = React.useState(0);
+    const [failedAttempt, setFailedAttempt] = React.useState<number>();
     React.useEffect(() => {
         if (!enabled) {
             return undefined;
         }
         let cancelled = false;
         load()
-            .then((value) => {
+            .then((data) => {
                 if (!cancelled) {
-                    setData(value);
+                    setLoaded({data});
+                    setFailedAttempt(undefined);
                 }
             })
-            .catch(() => undefined);
+            .catch(() => {
+                if (!cancelled) {
+                    setFailedAttempt(attempt);
+                }
+            });
         return () => {
             cancelled = true;
         };
-    }, [enabled, load]);
-    return data;
+    }, [enabled, load, attempt]);
+
+    const error = failedAttempt === attempt;
+    const loading = enabled && loaded === undefined && !error;
+    // Failed requests are evicted from the catalog cache, so a new attempt fetches them again.
+    const retry = React.useCallback(() => setAttempt((value) => value + 1), []);
+
+    return {data: loaded?.data ?? initial, loading, error, retry};
 }
 
 const NO_NAMES: CatalogNames = [];
 
+// Names only pre-check the submit form; the server checks taken names itself,
+// so a failed load leaves the form usable and is retried on the next opening.
 export function useThemeNames(enabled: boolean) {
-    return useCatalogData(enabled, loadThemeNames, NO_NAMES);
+    return useCatalogData(enabled, loadThemeNames, NO_NAMES).data;
 }
 
 export const FEATURED_THEME_IDS = [
@@ -139,15 +155,12 @@ export const FEATURED_THEME_IDS = [
 
 const NO_THEMES: ThemeMetadata[] = [];
 
-const loadFeaturedThemes = async () => {
-    const themes = await Promise.all(
-        FEATURED_THEME_IDS.map((id) => loadThemeMetadata(id).catch(() => undefined)),
-    );
-    return themes.filter((theme): theme is ThemeMetadata => Boolean(theme));
-};
+// Any featured theme that fails to load fails the set, so `retry` can bring it back.
+const loadFeaturedThemes = () => Promise.all(FEATURED_THEME_IDS.map(loadThemeMetadata));
 
 export function useFeaturedThemes(enabled: boolean) {
-    return useCatalogData(enabled, loadFeaturedThemes, NO_THEMES);
+    const {data, loading, error, retry} = useCatalogData(enabled, loadFeaturedThemes, NO_THEMES);
+    return {themes: data, loading, error, retry};
 }
 
 interface LoadedPages {
