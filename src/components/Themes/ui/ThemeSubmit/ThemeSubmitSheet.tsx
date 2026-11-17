@@ -4,11 +4,11 @@ import React from 'react';
 import {block} from '../../../../utils/block';
 import {ThemeActionSheet} from '../ThemeActionSheet/ThemeActionSheet';
 
+import type {ThemeSubmitProps} from './types';
+
 const b = block('theme-submit');
 
-interface ThemeSubmitSheetProps extends React.PropsWithChildren {
-    isOpen: boolean;
-    onClose: () => void;
+interface ThemeSubmitSheetProps extends React.PropsWithChildren, ThemeSubmitProps {
     buttons: React.ReactNode;
 }
 

@@ -1,1 +1,2 @@
-export {ThemeSubmit, type ThemeSubmitProps} from './ThemeSubmit';
+export {ThemeSubmit} from './ThemeSubmit';
+export type {ThemeSubmitProps} from './types';

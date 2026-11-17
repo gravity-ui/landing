@@ -25,6 +25,7 @@ import {ThemeSubmitDialog} from './ThemeSubmitDialog';
 import {FormContent} from './ThemeSubmitForm';
 import {ThemeSubmitSheet} from './ThemeSubmitSheet';
 import {ProgressWait, SignInContent, SuccessContent} from './ThemeSubmitStatus';
+import type {ThemeSubmitProps} from './types';
 import {type SubmissionErrorCode, useThemeSubmission} from './useThemeSubmission';
 
 const b = block('theme-submit');
@@ -35,11 +36,6 @@ const INITIAL_DRAFT: SubmissionDraft = {
     descriptionRu: '',
     tags: [],
 };
-
-export interface ThemeSubmitProps {
-    isOpen: boolean;
-    onClose: () => void;
-}
 
 export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     const {t} = useTranslation('themes');
