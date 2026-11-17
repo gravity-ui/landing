@@ -5,6 +5,7 @@ const {RsdoctorWebpackPlugin} = require('@rsdoctor/webpack-plugin');
 const {patchWebpackConfig} = require('next-global-css');
 
 const {i18n} = require('./next-i18next.config');
+const {THEME_CATALOG_PATH, ThemeCatalogPlugin} = require('./scripts/theme-catalog-plugin');
 
 const ASSET_PREFIX = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -126,6 +127,7 @@ module.exports = withBundleAnalyzer({
 
         if (!options.isServer) {
             config.resolve.fallback.fs = false;
+            config.plugins.push(new ThemeCatalogPlugin());
         }
 
         if (options.isServer) {
@@ -161,6 +163,9 @@ module.exports = withBundleAnalyzer({
         return config;
     },
     reactStrictMode: true,
+    env: {
+        THEME_CATALOG_URL: `${ASSET_PREFIX}/_next/${THEME_CATALOG_PATH}`,
+    },
     // The theme builder route was renamed /themer -> /themes; keep old
     // links and indexed URLs working with a permanent redirect.
     async redirects() {
