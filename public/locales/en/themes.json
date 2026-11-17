@@ -335,8 +335,6 @@
   "submit_theme_success_body": "Thank you! Maintainers will review your theme. You will get GitHub notifications about the review.",
   "submit_theme_open_pr_btn": "Open pull request",
   "submit_theme_done_btn": "Done",
-  "submit_theme_error_name_taken_title": "This name is already taken",
-  "submit_theme_error_name_taken_message": "There is already a theme with this name or id in the gallery. Choose another name.",
   "submit_theme_error_rate_limit_title": "Too many submissions",
   "submit_theme_error_rate_limit_message": "You can submit up to 3 themes per day. Try again tomorrow.",
   "submit_theme_error_preview_title": "Could not generate previews",
