@@ -3,9 +3,8 @@ import {SubmissionMetadataError, SubmissionValidationError} from './gallery-file
 import {ForkOutdatedError} from './github-pr';
 import {UserSessionExpiredError} from './oauth';
 import {ReceiptError} from './receipt';
+import {ThemeNameTakenError} from './submission-validation';
 import type {SubmissionFailure} from './types';
-
-export class ThemeNameTakenError extends Error {}
 
 export function submissionError(error: unknown): SubmissionFailure {
     if (error instanceof WorkflowInputTooLargeError) return {code: 'workflow-input-too-large'};
