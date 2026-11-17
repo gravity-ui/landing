@@ -165,7 +165,14 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         let timer: ReturnType<typeof setTimeout>;
         let pollInterval = DISPATCH_POLL_INTERVAL_MS;
         let transportFailures = 0;
+        // Every open tab would spend the shared GitHub App rate limit: only the visible one polls.
+        // The loop pauses while the page is hidden and resumes when it is shown again.
+        let isPaused = false;
         const poll = async () => {
+            if (document.visibilityState !== 'visible') {
+                isPaused = true;
+                return;
+            }
             try {
                 if (activeJob.userId !== user.id) {
                     return;
@@ -242,6 +249,13 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                 Math.min(pollInterval * 2 ** transportFailures, MAX_TRANSPORT_BACKOFF_MS),
             );
         };
+        const resumeWhenVisible = () => {
+            if (isPaused && document.visibilityState === 'visible') {
+                isPaused = false;
+                poll();
+            }
+        };
+        document.addEventListener('visibilitychange', resumeWhenVisible);
         setState({
             status: 'submitting',
             stepIndex: SUBMISSION_STEP.sending,
@@ -251,6 +265,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         return () => {
             controller.abort();
             clearTimeout(timer);
+            document.removeEventListener('visibilitychange', resumeWhenVisible);
         };
     }, [activeJob, user, activeKey, pollAttempt]);
 
