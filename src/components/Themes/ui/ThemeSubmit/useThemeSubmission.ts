@@ -145,11 +145,11 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     !Number.isFinite(job.expiresAt) ||
                     job.expiresAt <= Date.now())
             ) {
+                // A stale job from an earlier visit says nothing about the theme submitted now.
                 if (activeKey) {
                     clearSubmission(activeKey);
                 }
                 setActiveJob(null);
-                setState({status: 'error', code: 'receipt-expired'});
             } else {
                 setActiveJob(job);
             }
