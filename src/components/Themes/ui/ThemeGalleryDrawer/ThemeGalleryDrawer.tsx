@@ -1,6 +1,6 @@
 import {Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Button, Drawer, Icon, Text} from '@gravity-ui/uikit';
+import {Alert, Button, Drawer, Flex, Icon, Loader, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -61,7 +61,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     onOpenAllThemes,
 }) => {
     const {t} = useTranslation('themes');
-    const featuredThemes = useFeaturedThemes(open);
+    const {themes: featuredThemes, loading, error, retry} = useFeaturedThemes(open);
     const breakpoint = useWindowBreakpoint();
     // page-constructor's hook returns at most xl=1185 (its BREAKPOINTS map
     // tops out there), so we can't ask it about >= xxl. Track the xxl
@@ -110,6 +110,30 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
             delete document.documentElement.dataset[DRAWER_OPEN_ATTR];
         };
     }, [open, isDesktop]);
+
+    let status: React.ReactNode = null;
+    if (loading) {
+        status = (
+            <Flex alignItems="center" justifyContent="center" className={b('status')}>
+                <Loader size="m" />
+            </Flex>
+        );
+    } else if (error) {
+        status = (
+            <Flex alignItems="center" justifyContent="center" className={b('status')}>
+                <Alert
+                    theme="danger"
+                    title={t('gallery_modal_load_error')}
+                    actions={
+                        <Button view="normal" onClick={retry}>
+                            {t('gallery_modal_retry')}
+                        </Button>
+                    }
+                    className={b('error')}
+                />
+            </Flex>
+        );
+    }
 
     const handleOpenChange = (next: boolean) => {
         if (!next) {
@@ -164,6 +188,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
                         />
                     ))}
                 </div>
+                {status}
                 {/* Figma 3325:119973 / 3325:124927 places the "All Gallery
                     Themes" CTA as the last card-sized slot at the end of the
                     tablet drawer's horizontal scroll; desktop renders it under
