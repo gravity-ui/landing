@@ -349,7 +349,7 @@
   "submit_theme_error_session_expired_title": "Sign in again",
   "submit_theme_error_session_expired_message": "GitHub no longer accepts the access given to the Themer. Sign in again: your theme and the form are kept.",
   "submit_theme_error_sign_in_title": "Could not sign in with GitHub",
-  "submit_theme_error_sign_in_message": "GitHub confirmed the access, but we could not finish the sign-in. Your theme is kept, try again in a minute.",
+  "submit_theme_error_sign_in_message": "Your theme is kept. Try again in a minute.",
   "submit_theme_error_invalid_title": "The theme could not be submitted",
   "submit_theme_error_invalid_message": "The theme contains unsupported colors, typography or references. Check the theme settings; the form fields are not the cause of this error.",
   "submit_theme_custom_font_title": "Custom fonts are not supported yet",
@@ -369,8 +369,6 @@
   "submit_theme_field_descriptionEn_too-long": "Use no more than 200 characters.",
   "submit_theme_field_descriptionRu_too-long": "Use no more than 200 characters.",
   "submit_theme_field_tags_invalid-tags": "Choose up to 3 tags from the list.",
-  "submit_theme_error_storage_title": "Could not save the theme in this browser",
-  "submit_theme_error_storage_message": "GitHub sign-in was not started because the theme could not be saved in browser storage. Allow browser storage and try again; your edits are still on this page.",
   "submit_theme_error_receipt_title": "Submission was interrupted",
   "submit_theme_error_receipt_message": "Submit the theme again."
 }
