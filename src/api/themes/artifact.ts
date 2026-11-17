@@ -56,6 +56,24 @@ function readArtifactJson(zip: Buffer) {
     return JSON.parse(bytes.toString('utf8')) as Record<string, unknown>;
 }
 
+// Each preview is a base64 740x500 PNG whose digest is reported by the renderer.
+async function readPreviewPng(encoded: unknown, hash: string) {
+    if (typeof encoded !== 'string' || encoded.length > 4 * 1024 * 1024) {
+        throw new Error('Invalid PNG payload');
+    }
+    const png = Buffer.from(encoded, 'base64');
+    const info = await sharp(png, {limitInputPixels: 740 * 500}).metadata();
+    if (
+        info.format !== 'png' ||
+        info.width !== 740 ||
+        info.height !== 500 ||
+        sha256(png) !== hash
+    ) {
+        throw new Error('Invalid PNG dimensions or digest');
+    }
+    return png;
+}
+
 export async function parseThemeArtifact(archive: Buffer, job: ThemeJob & {runId: number}) {
     const result = readArtifactJson(archive);
     if (
@@ -87,20 +105,7 @@ export async function parseThemeArtifact(archive: Buffer, job: ThemeJob & {runId
     }
     const previews = {} as Record<'light' | 'dark', Buffer>;
     for (const mode of ['light', 'dark'] as const) {
-        if (typeof files[mode] !== 'string' || files[mode].length > 4 * 1024 * 1024) {
-            throw new Error('Invalid PNG payload');
-        }
-        const png = Buffer.from(files[mode], 'base64');
-        const info = await sharp(png, {limitInputPixels: 740 * 500}).metadata();
-        if (
-            info.format !== 'png' ||
-            info.width !== 740 ||
-            info.height !== 500 ||
-            sha256(png) !== hashes[mode]
-        ) {
-            throw new Error('Invalid PNG dimensions or digest');
-        }
-        previews[mode] = png;
+        previews[mode] = await readPreviewPng(files[mode], hashes[mode]);
     }
     return {previews, input};
 }
