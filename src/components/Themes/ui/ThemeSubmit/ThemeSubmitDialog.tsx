@@ -5,11 +5,11 @@ import React from 'react';
 import {block} from '../../../../utils/block';
 import {ThemeActionDialog} from '../ThemeActionDialog/ThemeActionDialog';
 
+import type {ThemeSubmitProps} from './types';
+
 const b = block('theme-submit');
 
-interface ThemeSubmitDialogProps extends React.PropsWithChildren {
-    isOpen: boolean;
-    onClose: () => void;
+interface ThemeSubmitDialogProps extends React.PropsWithChildren, ThemeSubmitProps {
     buttons: React.ReactNode;
     breakpoint: number;
 }
