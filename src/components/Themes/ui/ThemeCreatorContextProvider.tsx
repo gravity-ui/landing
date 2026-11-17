@@ -41,7 +41,6 @@ import {
 import type {AdvancedColorType, ColorsSettingsType, ThemeCreatorState} from '../lib/types';
 
 type ThemeCreatorAction =
-    | {type: 'markSaved'}
     | {
           type: 'addColor';
           payload?: AddColorToThemeParams;
@@ -135,8 +134,6 @@ const themeCreatorReducer = (
     };
 
     switch (action.type) {
-        case 'markSaved':
-            return {...prevState, changesExist: false};
         case 'addColor':
             return addColorToTheme(newState, action.payload);
         case 'removeColor':
@@ -399,10 +396,6 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
         });
     }, []);
 
-    const markSaved = React.useCallback(() => {
-        dispatchThemeCreator({type: 'markSaved'});
-    }, []);
-
     const setColorsSettingsType = React.useCallback<
         ThemeCreatorMethodsContextType['setColorsSettingsType']
     >((payload) => {
@@ -434,7 +427,6 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             setAdvancedColorType,
             importTheme,
             restoreState,
-            markSaved,
             setColorsSettingsType,
         }),
         [
@@ -457,7 +449,6 @@ export const ThemeCreatorContextProvider: React.FC<ThemeCreatorProps> = ({
             setAdvancedColorType,
             importTheme,
             restoreState,
-            markSaved,
             setColorsSettingsType,
         ],
     );

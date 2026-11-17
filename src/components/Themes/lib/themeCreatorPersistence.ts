@@ -5,6 +5,7 @@ import type {ThemeCreatorState} from './types';
 // sessionStorage before leaving and the dialog reopens on return
 // (`/themes?submitTheme=1`), or after a reload if sign-in was interrupted.
 // The saved revision is retained until another theme is explicitly loaded.
+// It keeps its unsaved-changes flag, so the restored editor stays guarded.
 // The exported theme JSON is not enough: custom
 // fonts keep their titles and links in `typography`, outside the theme.
 
@@ -28,7 +29,7 @@ export function saveSubmitReturn(state: ThemeCreatorState): boolean {
         if (!store) {
             return false;
         }
-        const json = JSON.stringify({...state, changesExist: false});
+        const json = JSON.stringify(state);
         store.setItem(STATE_KEY, json);
         return store.getItem(STATE_KEY) === json;
     } catch {
