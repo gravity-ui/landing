@@ -26,6 +26,7 @@ export type SubmissionErrorCode =
     | 'workflow-input-too-large'
     | 'name-taken'
     | 'rate-limit'
+    | 'submissions-busy'
     | 'github'
     | 'preview'
     | 'invalid'

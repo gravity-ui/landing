@@ -5,6 +5,15 @@ import {ciConfig} from './ci';
 const WINDOW_MS = 24 * 60 * 60 * 1000;
 const MAX_SUBMISSIONS = 3;
 
+// More runs in the window than the bounded search reads. Such volume means abuse,
+// so submissions stay closed for everyone until the window moves on.
+export class QuotaSearchExhaustedError extends Error {
+    constructor() {
+        super('Workflow quota search exceeds safe bound');
+        this.name = 'QuotaSearchExhaustedError';
+    }
+}
+
 // Keep a UUID-shaped correlation id while making its owner visible in Actions run names.
 export function submissionJobId(userId: number, uuid: string) {
     if (!Number.isSafeInteger(userId) || userId <= 0) {
@@ -41,5 +50,5 @@ export async function reserveDispatch(octokit: Octokit, userId: number, now = Da
         }
     }
     // Never treat a truncated search as an unused budget.
-    throw new Error('Workflow quota search exceeds safe bound');
+    throw new QuotaSearchExhaustedError();
 }
