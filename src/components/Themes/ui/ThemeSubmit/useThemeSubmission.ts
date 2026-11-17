@@ -1,5 +1,4 @@
 import React from 'react';
-import {flushSync} from 'react-dom';
 
 import {
     SUBMISSION_STEP,
@@ -7,8 +6,9 @@ import {
     SUBMIT_RETURN_PARAM,
 } from '../../../../api/themes/types';
 import type {SubmissionErrorCode as ServerSubmissionErrorCode} from '../../../../api/themes/types';
+import {allowNextPageUnload} from '../../../../hooks/useOnLeavePageConfirmation';
 import {useThemeNames} from '../../gallery';
-import {useThemeCreator, useThemeCreatorMethods, useThemePaletteColor} from '../../hooks';
+import {useThemeCreator, useThemePaletteColor} from '../../hooks';
 import {
     type SubmissionDraft,
     type SubmissionFieldErrors,
@@ -56,7 +56,6 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         [draft, takenNames],
     );
     const themeState = useThemeCreator();
-    const {markSaved} = useThemeCreatorMethods();
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
     const [user, setUser] = React.useState<GithubUser | null>(null);
     // Until the session is known the dialog shows neither sign-in nor the form.
@@ -108,11 +107,11 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
             setState({status: 'error', code: 'storage'});
             return;
         }
-        // Commit the saved revision and its leave guard before navigation starts.
-        flushSync(() => markSaved());
+        // The changes stay unsaved: only this redirect skips the leave prompt.
+        allowNextPageUnload();
         const returnTo = `${window.location.pathname}?${SUBMIT_RETURN_PARAM}=1`;
         window.location.assign(`${API_BASE}/auth/login?returnTo=${encodeURIComponent(returnTo)}`);
-    }, [themeState, markSaved]);
+    }, [themeState]);
 
     const signOut = React.useCallback(() => {
         fetch(`${API_BASE}/auth/logout`, {method: 'POST', credentials: 'same-origin'}).catch(

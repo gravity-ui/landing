@@ -45,7 +45,6 @@ export interface ThemeCreatorMethodsContextType {
     importTheme: (theme: GravityTheme) => void;
     /** Puts back a whole editor state saved earlier, e.g. across a sign-in redirect. */
     restoreState: (state: ThemeCreatorState) => void;
-    markSaved: () => void;
     setColorsSettingsType: (type: ColorsSettingsType) => void;
 }
 
@@ -70,6 +69,5 @@ export const ThemeCreatorMethodsContext = createContext<ThemeCreatorMethodsConte
     setAdvancedColorType: noop,
     importTheme: noop,
     restoreState: noop,
-    markSaved: noop,
     setColorsSettingsType: noop,
 });
