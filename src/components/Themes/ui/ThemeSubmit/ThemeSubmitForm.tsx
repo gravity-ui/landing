@@ -60,8 +60,10 @@ interface ThemeSubmitFormProps {
     forkUrl?: string;
     hasCustomFont: boolean;
     fieldErrors: SubmissionFieldErrors;
+    isRenderedVersionStale: boolean;
     onChange: (patch: Partial<SubmissionDraft>) => void;
     onSignOut: () => void;
+    onStartOver: () => void;
 }
 
 export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
@@ -72,8 +74,10 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
     forkUrl,
     hasCustomFont,
     fieldErrors,
+    isRenderedVersionStale,
     onChange,
     onSignOut,
+    onStartOver,
 }) => {
     const {t} = useTranslation('themes');
     const error = errorCode ? ERROR_KEYS[errorCode] : null;
@@ -127,6 +131,18 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                                 <Icon data={ArrowUpRightFromSquare} size={14} />
                             </Button>
                         ) : undefined
+                    }
+                />
+            )}
+            {isRenderedVersionStale && (
+                <Alert
+                    theme="warning"
+                    title={t('submit_theme_rendered_version_title')}
+                    message={t('submit_theme_rendered_version_message')}
+                    actions={
+                        <Button view="normal" onClick={onStartOver}>
+                            {t('submit_theme_start_over_btn')}
+                        </Button>
                     }
                 />
             )}
