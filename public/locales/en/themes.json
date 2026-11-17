@@ -280,6 +280,7 @@
   "gallery_modal_start_from_scratch": "Start From Scratch",
   "gallery_modal_import_theme": "Import Theme",
   "gallery_modal_load_error": "Couldn't load themes",
+  "gallery_modal_load_error_description": "Check your connection and try again.",
   "gallery_modal_retry": "Retry",
   "gallery_card_apply": "Apply Theme",
   "gallery_card_author": "by {{author}}",

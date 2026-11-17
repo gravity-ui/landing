@@ -105,11 +105,6 @@ $modal: '.#{variables.$ns}community-themes-modal__modal';
         flex: 1 0 auto;
     }
 
-    &__error {
-        width: 100%;
-        max-width: 520px;
-    }
-
     &__footer {
         display: flex;
         flex-direction: column;

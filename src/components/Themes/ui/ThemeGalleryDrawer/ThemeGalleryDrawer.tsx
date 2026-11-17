@@ -1,6 +1,6 @@
 import {Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Alert, Button, Drawer, Flex, Icon, Loader, Text} from '@gravity-ui/uikit';
+import {Button, Drawer, Flex, Icon, Loader, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -8,6 +8,7 @@ import {useWindowBreakpoint} from '../../../../hooks/useWindowBreakpoint';
 import {block, getContentScrollElement} from '../../../../utils';
 import type {ThemePreviewMode} from '../../gallery';
 import {useFeaturedThemes} from '../../gallery';
+import {GalleryLoadError} from '../GalleryLoadError/GalleryLoadError';
 import {ThemeCard} from '../ThemeCard/ThemeCard';
 
 import './ThemeGalleryDrawer.scss';
@@ -121,16 +122,7 @@ export const ThemeGalleryDrawer: React.FC<ThemeGalleryDrawerProps> = ({
     } else if (error) {
         status = (
             <Flex alignItems="center" justifyContent="center" className={b('status')}>
-                <Alert
-                    theme="danger"
-                    title={t('gallery_modal_load_error')}
-                    actions={
-                        <Button view="normal" onClick={retry}>
-                            {t('gallery_modal_retry')}
-                        </Button>
-                    }
-                    className={b('error')}
-                />
+                <GalleryLoadError onRetry={retry} />
             </Flex>
         );
     }
