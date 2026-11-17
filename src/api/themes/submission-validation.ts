@@ -6,7 +6,8 @@ import {
     fetchGithubProfile,
     getErrorStatus,
 } from './oauth';
-import {ThemeNameTakenError} from './submission-errors';
+
+export class ThemeNameTakenError extends Error {}
 
 // Submit reads a fresh upstream snapshot. No writes or rate-limit slots.
 export async function validateThemeSubmission(token: string, body: unknown) {
