@@ -7,10 +7,10 @@ import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
-import {THEME_TAGS, type ThemeMetadata, type ThemeTag, useThemeNames} from '../../gallery';
+import {THEME_TAGS, type ThemeMetadata, type ThemeTag} from '../../gallery';
 import {toThemeId} from '../../gallery/schema';
 import {useThemeCreator, useThemePaletteColor} from '../../hooks';
-import {type SubmissionDraft, validateSubmissionDraft} from '../../lib/submissionValidation';
+import type {SubmissionDraft} from '../../lib/submissionValidation';
 import {
     clearSubmitDraft,
     loadSubmitDraft,
@@ -43,10 +43,8 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     const isDesktop = breakpoint >= BREAKPOINTS.sm;
 
     const [draft, setDraft] = React.useState<SubmissionDraft>(INITIAL_DRAFT);
-    const {user, isUserLoading, state, signIn, signOut, submit, reset} = useThemeSubmission(
-        isOpen,
-        draft,
-    );
+    const {user, isUserLoading, state, fieldErrors, signIn, signOut, submit, reset} =
+        useThemeSubmission(isOpen, draft);
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
     const {gravityTheme} = useThemeCreator();
 
@@ -78,14 +76,12 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         }
     }, [state.status]);
 
-    const takenNames = useThemeNames(isOpen);
     const themeId = toThemeId(draft.name);
     // The gallery stores only the theme JSON, so the loading link of a custom
     // font would be lost and the published theme would fall back to the default font.
     const hasCustomFont = Object.entries(gravityTheme.typography.fontFamilies).some(
         ([fontType, options]) => !isBuiltInFontFamily(fontType, options?.mainFont),
     );
-    const fieldErrors = validateSubmissionDraft(draft, takenNames);
     const canSubmit = !Object.keys(fieldErrors).length && !hasCustomFont;
     const actionClassName = b('action', {wide: !isDesktop});
 
