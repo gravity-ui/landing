@@ -31,6 +31,9 @@ import type {StoredSubmission} from './submissionJob';
 const DISPATCH_POLL_INTERVAL_MS = 2000;
 // Rendering takes minutes, and every status call spends the shared GitHub App rate limit.
 const RENDERING_POLL_INTERVAL_MS = 10000;
+// Network errors and proxy error pages are retried with backoff, then shown as a GitHub error.
+const MAX_TRANSPORT_FAILURES = 5;
+const MAX_TRANSPORT_BACKOFF_MS = 60000;
 
 // 'run-invalid' is recovered by the polling loop and never shown.
 export type SubmissionErrorCode =
@@ -161,6 +164,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         const controller = new AbortController();
         let timer: ReturnType<typeof setTimeout>;
         let pollInterval = DISPATCH_POLL_INTERVAL_MS;
+        let transportFailures = 0;
         const poll = async () => {
             try {
                 if (activeJob.userId !== user.id) {
@@ -181,6 +185,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                 if (controller.signal.aborted) {
                     return;
                 }
+                transportFailures = 0;
                 if (event.type === 'error' && event.code === 'session-expired') {
                     setUser(null);
                 }
@@ -225,8 +230,17 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                     return;
                 }
                 // A lost response is not a new submission. Resume the same durable job.
+                transportFailures += 1;
+                if (transportFailures >= MAX_TRANSPORT_FAILURES) {
+                    // Retry re-enters polling of the same job.
+                    setState({status: 'error', code: 'github'});
+                    return;
+                }
             }
-            timer = setTimeout(poll, pollInterval);
+            timer = setTimeout(
+                poll,
+                Math.min(pollInterval * 2 ** transportFailures, MAX_TRANSPORT_BACKOFF_MS),
+            );
         };
         setState({
             status: 'submitting',
