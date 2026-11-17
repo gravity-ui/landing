@@ -2,6 +2,7 @@ import {inflateRawSync} from 'zlib';
 
 import sharp from 'sharp';
 
+import {MAX_ARTIFACT_BYTES} from './config';
 import {sha256} from './gallery-files';
 import {isJobInputValid} from './job-input';
 import type {ThemeJob} from './receipt';
@@ -36,7 +37,7 @@ function readArtifactJson(zip: Buffer) {
     const local = zip.readUInt32LE(central + 42);
     if (
         name !== 'result.json' ||
-        rawSize > 8 * 1024 * 1024 ||
+        rawSize > MAX_ARTIFACT_BYTES ||
         local + 30 > zip.length ||
         zip.readUInt32LE(local) !== 0x04034b50 ||
         (method !== 0 && method !== 8)
@@ -50,7 +51,7 @@ function readArtifactJson(zip: Buffer) {
     const compressed = zip.subarray(start, start + size);
     const bytes =
         method === 8
-            ? inflateRawSync(new Uint8Array(compressed), {maxOutputLength: 8 * 1024 * 1024})
+            ? inflateRawSync(new Uint8Array(compressed), {maxOutputLength: MAX_ARTIFACT_BYTES})
             : compressed;
     if (bytes.length !== rawSize) {
         throw new Error('Artifact size mismatch');
