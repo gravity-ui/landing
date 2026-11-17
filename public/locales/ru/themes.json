@@ -339,6 +339,8 @@
   "submit_theme_error_name_taken_message": "В галерее уже есть тема с таким названием или идентификатором. Выберите другое название.",
   "submit_theme_error_rate_limit_title": "Слишком много заявок",
   "submit_theme_error_rate_limit_message": "Можно отправить до 3 тем в день. Попробуйте завтра.",
+  "submit_theme_error_busy_title": "Отправка приостановлена",
+  "submit_theme_error_busy_message": "За последние сутки прислали слишком много тем. Попробуйте позже.",
   "submit_theme_error_preview_title": "Не удалось создать превью",
   "submit_theme_error_preview_message": "Ошибка генерации превью. Попробуйте позже. Тема не отправлена на GitHub.",
   "submit_theme_error_github_title": "GitHub не ответил",

@@ -2,6 +2,7 @@ import {InvalidRunIdError, WorkflowInputTooLargeError} from './ci';
 import {SubmissionMetadataError, SubmissionValidationError} from './gallery-files';
 import {ForkOutdatedError} from './github-pr';
 import {UserSessionExpiredError} from './oauth';
+import {QuotaSearchExhaustedError} from './quota';
 import {ReceiptError} from './receipt';
 import {ThemeNameTakenError} from './submission-validation';
 import type {SubmissionFailure} from './types';
@@ -26,6 +27,9 @@ export function submissionError(error: unknown): SubmissionFailure {
     }
     if (error instanceof Error && error.message === 'rate-limit') {
         return {code: 'rate-limit'};
+    }
+    if (error instanceof QuotaSearchExhaustedError) {
+        return {code: 'submissions-busy'};
     }
     if (error instanceof ThemeNameTakenError) {
         return {code: 'name-taken'};
