@@ -4,6 +4,7 @@ import {createAppAuth} from '@octokit/auth-app';
 import {Octokit} from '@octokit/rest';
 
 import {parseThemeArtifact} from './artifact';
+import {MAX_ARTIFACT_BYTES} from './config';
 import {getErrorStatus} from './oauth';
 import type {ThemeJob} from './receipt';
 import {ReceiptError} from './receipt';
@@ -197,7 +198,7 @@ export async function collectResult(octokit: Octokit, job: ThemeJob & {runId: nu
     const matches = artifacts.filter(
         (artifact) => artifact.name === `theme-job-${job.id}` && !artifact.expired,
     );
-    if (matches.length !== 1 || matches[0].size_in_bytes > 8 * 1024 * 1024) {
+    if (matches.length !== 1 || matches[0].size_in_bytes > MAX_ARTIFACT_BYTES) {
         throw new Error('Unexpected theme artifact');
     }
     const {data} = await octokit.actions.downloadArtifact({
@@ -207,7 +208,7 @@ export async function collectResult(octokit: Octokit, job: ThemeJob & {runId: nu
         archive_format: 'zip',
     });
     const archive = Buffer.from(data as ArrayBuffer);
-    if (archive.length > 8 * 1024 * 1024) {
+    if (archive.length > MAX_ARTIFACT_BYTES) {
         throw new Error('Artifact download too large');
     }
     return parseThemeArtifact(archive, job);

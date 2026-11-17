@@ -32,3 +32,6 @@ export function isThemeSubmissionConfigured() {
 
 export const DISPATCH_WINDOW_MS = 2 * 60 * 1000;
 export const DISPATCH_RECONCILIATION_MS = 10 * 60 * 1000;
+
+// Upper bound of the renderer artifact: both the archive and its unpacked result.json.
+export const MAX_ARTIFACT_BYTES = 8 * 1024 * 1024;
