@@ -27,6 +27,8 @@ import {
 } from './submissionJob';
 import type {StoredSubmission} from './submissionJob';
 
+const POLL_INTERVAL_MS = 2000;
+
 export type SubmissionErrorCode = ServerSubmissionErrorCode | 'sign-in' | 'storage';
 
 export interface GithubUser {
@@ -210,7 +212,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                 }
                 // A lost response is not a new submission. Resume the same durable job.
             }
-            timer = setTimeout(poll, 2000);
+            timer = setTimeout(poll, POLL_INTERVAL_MS);
         };
         setState({
             status: 'submitting',
