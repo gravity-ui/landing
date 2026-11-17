@@ -23,7 +23,7 @@
     "@gravity-ui/navigation": "^6.3.1",
     "@gravity-ui/page-constructor": "^8.0.0",
     "@gravity-ui/readme-validator": "^1.3.0",
-    "@gravity-ui/themes": "git+https://github.com/gravity-ui/themes.git#6fd75533b8f0743bba2938359c916ff62bb076cd",
+    "@gravity-ui/themes": "git+https://github.com/gravity-ui/themes.git#e4e578f3f945eb84d000918098a231a80b6fa664",
     "@gravity-ui/timeline": "^1.26.1",
     "@gravity-ui/uikit": "^7.47.1",
     "@gravity-ui/uikit-themer": "^1.8.0",
