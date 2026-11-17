@@ -186,6 +186,11 @@ module.exports = withBundleAnalyzer({
     transpilePackages: [
         '@bem-react/classname',
         '@gravity-ui/themes',
+        // The CJS build of @gravity-ui/themes requires these ESM-only packages on the server.
+        // Left as ESM externals they turn into async modules and `require` gets a promise.
+        '@gravity-ui/uikit-themer',
+        'chroma-js',
+        'lodash-es',
         '@gravity-ui/uikit',
         '@gravity-ui/uikit-v8',
         '@gravity-ui/page-constructor',
