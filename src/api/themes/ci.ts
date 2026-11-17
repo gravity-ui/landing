@@ -67,7 +67,9 @@ export async function findRun(octokit: Octokit, job: ThemeJob) {
         ).toISOString()}`,
         per_page: 100,
     });
-    if (data.total_count > 100) throw new Error('Workflow search exceeds safe bound');
+    if (data.total_count > 100) {
+        throw new Error('Workflow search exceeds safe bound');
+    }
     const matches = data.workflow_runs.filter(
         (run) =>
             run.display_title === `theme-job:${job.id}` &&
@@ -85,16 +87,18 @@ export function assertJobConfiguration(job: ThemeJob) {
         job.repository !== `${config.owner}/${config.repo}` ||
         job.revision !== config.revision ||
         job.rendererTag !== config.tag
-    )
+    ) {
         throw new ReceiptError('receipt-configuration');
+    }
 }
 
 export class WorkflowInputTooLargeError extends Error {}
 
 export function workflowDispatchBody(job: ThemeJob, input: ThemeInput) {
     const json = JSON.stringify(input);
-    if (Buffer.byteLength(json) > 1024 * 1024)
+    if (Buffer.byteLength(json) > 1024 * 1024) {
         throw new WorkflowInputTooLargeError('workflow-input-too-large');
+    }
     const submission = deflateRawSync(new Uint8Array(Buffer.from(json))).toString('base64');
     const body = {
         ref: job.rendererTag,
@@ -107,8 +111,9 @@ export function workflowDispatchBody(job: ThemeJob, input: ThemeInput) {
         },
     };
     // Count the complete serialized dispatch body, including ref, keys and JSON escaping.
-    if (JSON.stringify(body).length > 65535)
+    if (JSON.stringify(body).length > 65535) {
         throw new WorkflowInputTooLargeError('workflow-input-too-large');
+    }
     return body;
 }
 
@@ -137,7 +142,9 @@ export async function dispatchRun(octokit: Octokit, job: ThemeJob, input: ThemeI
         );
     } catch (error) {
         const status = getErrorStatus(error);
-        if (status !== undefined && status >= 400 && status < 500) throw error;
+        if (status !== undefined && status >= 400 && status < 500) {
+            throw error;
+        }
         // Network failures, timeouts and server errors may follow an accepted dispatch.
     }
 }
@@ -181,6 +188,8 @@ export async function collectResult(octokit: Octokit, job: ThemeJob & {runId: nu
         archive_format: 'zip',
     });
     const archive = Buffer.from(data as ArrayBuffer);
-    if (archive.length > 8 * 1024 * 1024) throw new Error('Artifact download too large');
+    if (archive.length > 8 * 1024 * 1024) {
+        throw new Error('Artifact download too large');
+    }
     return parseThemeArtifact(archive, job);
 }

@@ -7,16 +7,23 @@ import {ThemeNameTakenError} from './submission-validation';
 import type {SubmissionFailure} from './types';
 
 export function submissionError(error: unknown): SubmissionFailure {
-    if (error instanceof WorkflowInputTooLargeError) return {code: 'workflow-input-too-large'};
-    if (error instanceof ReceiptError)
+    if (error instanceof WorkflowInputTooLargeError) {
+        return {code: 'workflow-input-too-large'};
+    }
+    if (error instanceof ReceiptError) {
         return {
             code:
                 error.message === 'receipt-expired' || error.message === 'dispatch-expired'
                     ? 'receipt-expired'
                     : 'receipt-invalid',
         };
-    if (error instanceof ForkOutdatedError) return {code: 'fork-outdated', forkUrl: error.forkUrl};
-    if (error instanceof Error && error.message === 'rate-limit') return {code: 'rate-limit'};
+    }
+    if (error instanceof ForkOutdatedError) {
+        return {code: 'fork-outdated', forkUrl: error.forkUrl};
+    }
+    if (error instanceof Error && error.message === 'rate-limit') {
+        return {code: 'rate-limit'};
+    }
     if (error instanceof ThemeNameTakenError) {
         return {code: 'name-taken'};
     }

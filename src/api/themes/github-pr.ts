@@ -36,8 +36,9 @@ export interface UpstreamState {
     treeSha: string;
 }
 export async function readUpstreamState(octokit: Octokit): Promise<UpstreamState> {
-    if (!upstream.owner || !upstream.repo)
+    if (!upstream.owner || !upstream.repo) {
         throw new Error('Missing configuration: THEMES_REPOSITORY');
+    }
     const {data: ref} = await octokit.git.getRef({...upstream, ref: `heads/${UPSTREAM_BRANCH}`});
     const {data: commit} = await octokit.git.getCommit({...upstream, commit_sha: ref.object.sha});
     return {commitSha: ref.object.sha, treeSha: commit.tree.sha};
@@ -49,7 +50,9 @@ export async function isThemeNameTaken(
     metadata: Pick<ThemeMetadata, 'id' | 'name'>,
 ) {
     // GitHub answers 404 for the empty tree.
-    if (state.treeSha === EMPTY_TREE_SHA) return false;
+    if (state.treeSha === EMPTY_TREE_SHA) {
+        return false;
+    }
     const {data} = await octokit.git.getTree({
         ...upstream,
         tree_sha: state.treeSha,
@@ -229,7 +232,9 @@ export async function commitGalleryFiles({
         await octokit.git.createRef({...repo, ref: `refs/heads/${branch}`, sha: commit.sha});
         return {branch, commitSha: commit.sha};
     } catch (error) {
-        if (getErrorStatus(error) !== 422) await rethrow(error);
+        if (getErrorStatus(error) !== 422) {
+            await rethrow(error);
+        }
         const {data: existing} = await octokit.git.getRef({...repo, ref: `heads/${branch}`});
         const {data: existingCommit} = await octokit.git.getCommit({
             ...repo,
@@ -320,15 +325,22 @@ export async function openPullRequest({
                 pr.head.repo?.full_name.toLowerCase() ===
                     `${fork.owner}/${fork.repo}`.toLowerCase(),
         );
-        if (matches.length > 1) throw new Error('Multiple submission pull requests');
+        if (matches.length > 1) {
+            throw new Error('Multiple submission pull requests');
+        }
         const pr = matches[0];
-        if (!pr) return null;
-        if (pr.head.sha !== commitSha)
+        if (!pr) {
+            return null;
+        }
+        if (pr.head.sha !== commitSha) {
             throw new Error('Submission pull request changed externally');
+        }
         return {url: pr.html_url, number: pr.number};
     };
     const existing = await reconcile();
-    if (existing) return existing;
+    if (existing) {
+        return existing;
+    }
     try {
         const {data} = await octokit.pulls.create({
             ...upstream,
@@ -342,7 +354,9 @@ export async function openPullRequest({
     } catch (error) {
         // Includes accepted writes whose HTTP response was lost and concurrent creators.
         const recovered = await reconcile();
-        if (recovered) return recovered;
+        if (recovered) {
+            return recovered;
+        }
         throw error;
     }
 }

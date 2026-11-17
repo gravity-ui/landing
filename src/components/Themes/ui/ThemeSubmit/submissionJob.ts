@@ -41,7 +41,9 @@ async function requestJob(path: string, body: unknown, signal: AbortSignal) {
 }
 
 async function dispatchJob(job: StoredSubmission, key: string, signal: AbortSignal) {
-    if (job.dispatchAttempted || loadSubmission(key)?.dispatchAttempted) return null;
+    if (job.dispatchAttempted || loadSubmission(key)?.dispatchAttempted) {
+        return null;
+    }
     // Persist before the write: a lost response must only be reconciled by polling.
     saveSubmission(key, {...job, dispatchAttempted: true});
     let response: Response;
@@ -56,7 +58,9 @@ async function dispatchJob(job: StoredSubmission, key: string, signal: AbortSign
     } catch {
         return null;
     }
-    if (response.ok) return null;
+    if (response.ok) {
+        return null;
+    }
     // An explicit rejection is not an ambiguous write. Retry can dispatch this receipt.
     saveSubmission(key, {...job, dispatchAttempted: false});
     if (response.status === 401) {
@@ -72,7 +76,9 @@ export async function advanceSubmission(
     onFinalizing: (count: number) => void,
 ): Promise<SubmissionEvent> {
     const rejection = await dispatchJob(job, key, signal);
-    if (rejection) return rejection;
+    if (rejection) {
+        return rejection;
+    }
     const event = await requestJob('status', {receipt: job.receipt}, signal);
     if (event.type === 'step' && event.index === SUBMISSION_STEP.pullRequest && !signal.aborted) {
         onFinalizing(event.count);

@@ -23,7 +23,9 @@ export async function validateThemeSubmission(token: string, body: unknown) {
         }
         return {octokit, profile, metadata, payload, upstreamState};
     } catch (error) {
-        if (getErrorStatus(error) === 401) throw new UserSessionExpiredError();
+        if (getErrorStatus(error) === 401) {
+            throw new UserSessionExpiredError();
+        }
         throw error;
     }
 }
