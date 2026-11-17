@@ -279,6 +279,8 @@
   "gallery_modal_footer_body": "Adjust one from the gallery, import your CSS, or start designing from scratch — complete freedom.",
   "gallery_modal_start_from_scratch": "Start From Scratch",
   "gallery_modal_import_theme": "Import Theme",
+  "gallery_modal_load_error": "Couldn't load themes",
+  "gallery_modal_retry": "Retry",
   "gallery_card_apply": "Apply Theme",
   "gallery_card_author": "by {{author}}",
   "gallery_card_preview_alt_dark": "{{name}} dark preview",

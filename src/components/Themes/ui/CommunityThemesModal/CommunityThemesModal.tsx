@@ -1,6 +1,6 @@
 import {Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Button, Dialog, Icon, Text} from '@gravity-ui/uikit';
+import {Alert, Button, Dialog, Flex, Icon, Loader, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -35,7 +35,7 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
     onStartFromScratch,
 }) => {
     const {t} = useTranslation('themes');
-    const {themes: allThemes, hasMore, loadMore} = useThemePages(open);
+    const {themes: allThemes, hasMore, loading, error, loadMore, retry} = useThemePages(open);
     const scrollAreaRef = React.useRef<HTMLDivElement>(null);
     const footerRef = React.useRef<HTMLDivElement>(null);
     const breakpoint = useWindowBreakpoint();
@@ -86,6 +86,38 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
         return () => observer.disconnect();
     }, [open, hasMore, loadMore, allThemes.length]);
 
+    const loadError = error ? (
+        <Alert
+            theme="danger"
+            title={t('gallery_modal_load_error')}
+            actions={
+                <Button view="normal" onClick={retry}>
+                    {t('gallery_modal_retry')}
+                </Button>
+            }
+            className={b('error')}
+        />
+    ) : null;
+
+    let status: React.ReactNode = null;
+    if (allThemes.length === 0 && loading) {
+        status = (
+            <Flex alignItems="center" justifyContent="center" className={b('status')}>
+                <Loader size="m" />
+            </Flex>
+        );
+    } else if (loadError) {
+        status = (
+            <Flex
+                alignItems="center"
+                justifyContent="center"
+                className={allThemes.length ? undefined : b('status')}
+            >
+                {loadError}
+            </Flex>
+        );
+    }
+
     return (
         <Dialog
             open={open}
@@ -130,6 +162,7 @@ export const CommunityThemesModal: React.FC<CommunityThemesModalProps> = ({
                             />
                         ))}
                     </div>
+                    {status}
                     <div className={b('footer')} ref={footerRef}>
                         <div className={b('footer-text')}>
                             <Text variant="display-2" className={b('footer-title')}>
