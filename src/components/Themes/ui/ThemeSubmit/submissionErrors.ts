@@ -15,7 +15,7 @@ export const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: st
     },
     'workflow-input-too-large': {
         title: 'submit_theme_error_invalid_title',
-        message: 'submit_theme_error_workflow_input_message',
+        message: 'submit_theme_error_invalid_message',
     },
     'name-taken': {
         title: 'submit_theme_error_name_taken_title',
