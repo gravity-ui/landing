@@ -339,8 +339,6 @@
   "submit_theme_error_name_taken_message": "There is already a theme with this name or id in the gallery. Choose another name.",
   "submit_theme_error_rate_limit_title": "Too many submissions",
   "submit_theme_error_rate_limit_message": "You can submit up to 3 themes per day. Try again tomorrow.",
-  "submit_theme_error_busy_title": "Submissions are paused",
-  "submit_theme_error_busy_message": "Too many themes were submitted in the last day. Try again later.",
   "submit_theme_error_preview_title": "Could not generate previews",
   "submit_theme_error_preview_message": "The preview generator failed. Please try again later. Your theme has not been submitted to GitHub.",
   "submit_theme_error_github_title": "GitHub did not respond",

@@ -26,8 +26,8 @@ export const ERROR_KEYS: Record<SubmissionErrorCode, {title: string; message: st
         message: 'submit_theme_error_rate_limit_message',
     },
     'submissions-busy': {
-        title: 'submit_theme_error_busy_title',
-        message: 'submit_theme_error_busy_message',
+        title: 'submit_theme_error_rate_limit_title',
+        message: 'submit_theme_error_rate_limit_message',
     },
     preview: {
         title: 'submit_theme_error_preview_title',
