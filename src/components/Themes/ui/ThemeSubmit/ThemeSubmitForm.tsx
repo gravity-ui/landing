@@ -52,7 +52,7 @@ const Field: React.FC<FieldProps> = ({fieldId, label, hint, children}) => (
     </FormRow>
 );
 
-interface FormContentProps {
+interface ThemeSubmitFormProps {
     user: GithubUser;
     draft: SubmissionDraft;
     themeId: string;
@@ -64,7 +64,7 @@ interface FormContentProps {
     onSignOut: () => void;
 }
 
-export const FormContent: React.FC<FormContentProps> = ({
+export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
     user,
     draft,
     themeId,

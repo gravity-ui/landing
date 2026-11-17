@@ -22,7 +22,7 @@ import {ThemeCard} from '../ThemeCard/ThemeCard';
 import {ThemeCardLivePreview} from './ThemeCardLivePreview';
 import './ThemeSubmit.scss';
 import {ThemeSubmitDialog} from './ThemeSubmitDialog';
-import {FormContent} from './ThemeSubmitForm';
+import {ThemeSubmitForm} from './ThemeSubmitForm';
 import {ThemeSubmitSheet} from './ThemeSubmitSheet';
 import {ProgressWait, SignInContent, SuccessContent} from './ThemeSubmitStatus';
 import type {ThemeSubmitProps} from './types';
@@ -185,7 +185,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         const buttonLabel =
             state.status === 'error' ? t('submit_theme_retry_btn') : t('submit_theme_submit_btn');
         main = (
-            <FormContent
+            <ThemeSubmitForm
                 user={user}
                 draft={draft}
                 themeId={themeId}
