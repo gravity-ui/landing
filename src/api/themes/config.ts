@@ -20,7 +20,6 @@ export const OAUTH_STATE_COOKIE_PATH = '/api/themes/auth';
 export const OAUTH_STATE_TTL_SECONDS = 10 * 60;
 
 export const DEFAULT_RETURN_PATH = `/themes?${SUBMIT_RETURN_PARAM}=1`;
-// Added to the return path when GitHub let the user in but the token exchange failed.
 
 export function isThemeSubmissionConfigured() {
     return Boolean(
