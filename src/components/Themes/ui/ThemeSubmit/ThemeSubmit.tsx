@@ -43,8 +43,17 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     const isDesktop = breakpoint >= BREAKPOINTS.sm;
 
     const [draft, setDraft] = React.useState<SubmissionDraft>(INITIAL_DRAFT);
-    const {user, isUserLoading, state, fieldErrors, signIn, signOut, submit, reset} =
-        useThemeSubmission(isOpen, draft);
+    const {
+        user,
+        isUserLoading,
+        state,
+        fieldErrors,
+        isRenderedVersionStale,
+        signIn,
+        signOut,
+        submit,
+        reset,
+    } = useThemeSubmission(isOpen, draft);
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
     const {gravityTheme} = useThemeCreator();
 
@@ -192,8 +201,10 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
                     ...fieldErrors,
                     ...(state.status === 'error' ? state.fields : undefined),
                 }}
+                isRenderedVersionStale={isRenderedVersionStale}
                 onChange={updateDraft}
                 onSignOut={signOut}
+                onStartOver={reset}
             />
         );
         buttons = (

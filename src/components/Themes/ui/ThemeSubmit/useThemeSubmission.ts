@@ -289,11 +289,38 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         setState({status: 'idle'});
     }, [activeKey]);
 
+    const isJobEdited = Boolean(
+        state.status === 'error' && activeJob && activeJob.requestFingerprint !== requestBody,
+    );
+    // dispatchJob persists the flag before the request, so storage is fresher than activeJob.
+    const isJobDispatched = React.useMemo(
+        () =>
+            Boolean(
+                state.status === 'error' &&
+                    activeJob &&
+                    activeKey &&
+                    loadSubmission(activeKey)?.dispatchAttempted,
+            ),
+        [state, activeJob, activeKey],
+    );
+    // A dispatched job has spent a daily attempt and the server finalizes the rendered input,
+    // so it is kept until it completes or fails terminally. Only an undispatched job is dropped.
     React.useEffect(() => {
-        if (state.status === 'error' && activeJob && activeJob.requestFingerprint !== requestBody) {
+        if (isJobEdited && !isJobDispatched) {
             reset();
         }
-    }, [activeJob, requestBody, state.status, reset]);
+    }, [isJobEdited, isJobDispatched, reset]);
+    const isRenderedVersionStale = isJobEdited && isJobDispatched;
 
-    return {user, isUserLoading, state, fieldErrors, signIn, signOut, submit, reset};
+    return {
+        user,
+        isUserLoading,
+        state,
+        fieldErrors,
+        isRenderedVersionStale,
+        signIn,
+        signOut,
+        submit,
+        reset,
+    };
 }
