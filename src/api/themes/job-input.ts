@@ -1,10 +1,8 @@
-import {createHash} from 'crypto';
-
-import {validateThemePayload} from './gallery-files';
+import {sha256, validateThemePayload} from './gallery-files';
 import type {ThemeInput} from './types';
 
 export const hashJobInput = (metadata: unknown, payload: unknown) =>
-    createHash('sha256').update(JSON.stringify({metadata, payload})).digest('hex');
+    sha256(JSON.stringify({metadata, payload}));
 
 export function isJobInputValid(input: ThemeInput, themeHash: string) {
     return Boolean(
