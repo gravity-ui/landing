@@ -74,29 +74,48 @@ export function createCiOctokit() {
     });
 }
 
+const RUN_SEARCH_PAGE_SIZE = 100;
+// Unrelated runs dispatched in the same window push the job's run onto later pages.
+const RUN_SEARCH_MAX_PAGES = 10;
+
 export async function findRun(octokit: Octokit, job: ThemeJob) {
     const config = ciConfig();
     assertJobConfiguration(job);
-    const {data} = await octokit.actions.listWorkflowRuns({
-        owner: config.owner,
-        repo: config.repo,
-        workflow_id: 'render-submission.yml',
-        event: 'workflow_dispatch',
-        created: `${new Date(job.createdAt - 60000).toISOString()}..${new Date(
-            job.dispatchBefore + 60000,
-        ).toISOString()}`,
-        per_page: 100,
-    });
-    if (data.total_count > 100) {
-        throw new Error('Workflow search exceeds safe bound');
+    const created = `${new Date(job.createdAt - 60000).toISOString()}..${new Date(
+        job.dispatchBefore + 60000,
+    ).toISOString()}`;
+    const matches = [];
+    for (let page = 1; page <= RUN_SEARCH_MAX_PAGES; page++) {
+        const {data} = await octokit.actions.listWorkflowRuns({
+            owner: config.owner,
+            repo: config.repo,
+            workflow_id: 'render-submission.yml',
+            event: 'workflow_dispatch',
+            created,
+            per_page: RUN_SEARCH_PAGE_SIZE,
+            page,
+        });
+        matches.push(
+            ...data.workflow_runs.filter(
+                (run) =>
+                    run.display_title === `theme-job:${job.id}` &&
+                    run.head_sha === job.revision &&
+                    run.path === '.github/workflows/render-submission.yml' &&
+                    run.event === 'workflow_dispatch',
+            ),
+        );
+        if (page * RUN_SEARCH_PAGE_SIZE >= data.total_count) {
+            break;
+        }
+        if (page === RUN_SEARCH_MAX_PAGES && !matches.length) {
+            // A truncated search is not proof that the run does not exist: never report it missing.
+            throw new Error(
+                `Workflow run of ${job.id} not found in the first ${
+                    RUN_SEARCH_MAX_PAGES * RUN_SEARCH_PAGE_SIZE
+                } of ${data.total_count} runs`,
+            );
+        }
     }
-    const matches = data.workflow_runs.filter(
-        (run) =>
-            run.display_title === `theme-job:${job.id}` &&
-            run.head_sha === job.revision &&
-            run.path === '.github/workflows/render-submission.yml' &&
-            run.event === 'workflow_dispatch',
-    );
     // Concurrent dispatches can race: deterministically reconcile the oldest run.
     return matches.sort((a, b) => a.id - b.id)[0];
 }
