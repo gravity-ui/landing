@@ -49,6 +49,10 @@ type SubmissionState =
 
 export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     const takenNames = useThemeNames(isOpen);
+    const fieldErrors = React.useMemo(
+        () => validateSubmissionDraft(draft, takenNames),
+        [draft, takenNames],
+    );
     const themeState = useThemeCreator();
     const {markSaved} = useThemeCreatorMethods();
     const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
@@ -229,9 +233,8 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
             retryPolling();
             return;
         }
-        const fields = validateSubmissionDraft(draft, takenNames);
-        if (Object.keys(fields).length) {
-            setState({status: 'error', code: 'invalid-metadata', fields});
+        if (Object.keys(fieldErrors).length) {
+            setState({status: 'error', code: 'invalid-metadata', fields: fieldErrors});
             return;
         }
         if (!requestBody) {
@@ -274,7 +277,7 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         } catch {
             setState({status: 'error', code: 'github'});
         }
-    }, [activeJob, draft, requestBody, user, activeKey, takenNames]);
+    }, [activeJob, fieldErrors, requestBody, user, activeKey]);
 
     const reset = React.useCallback(() => {
         if (activeKey) {
@@ -290,5 +293,5 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         }
     }, [activeJob, requestBody, state.status, reset]);
 
-    return {user, isUserLoading, state, signIn, signOut, submit, reset};
+    return {user, isUserLoading, state, fieldErrors, signIn, signOut, submit, reset};
 }
