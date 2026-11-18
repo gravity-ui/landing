@@ -29,6 +29,8 @@
     "start_creating_manual_tab": "Manuel (CLI)",
     "start_creating_install_title": "Installez le skill gravity-ui",
     "start_creating_install_description": "Sélection des packages, API à jour, vraies icônes et guide des tokens. Orientez votre agent vers tous les packages gravity-ui et la documentation versionnée.",
+    "start_creating_benchmark": "Jusqu’à <strong>99% de réussite au benchmark</strong> avec la skill",
+    "start_creating_benchmark_short": "Jusqu’à <strong>99% de solutions valides</strong>",
     "start_creating_build_title": "Créez quelque chose",
     "start_creating_example_counter": "Exemple {{current}} sur {{total}}",
     "start_creating_example_prev": "Exemple précédent",

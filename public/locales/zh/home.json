@@ -29,6 +29,8 @@
     "start_creating_manual_tab": "手动 (CLI)",
     "start_creating_install_title": "安装 gravity-ui 技能",
     "start_creating_install_description": "提供包选择、最新 API、真实图标和令牌指南。让您的代理了解全部 gravity-ui 包及版本化文档。",
+    "start_creating_benchmark": "使用技能，<strong>基准测试通过率高达 99%</strong>",
+    "start_creating_benchmark_short": "<strong>高达 99% 的运行通过全部检查</strong>",
     "start_creating_build_title": "构建点什么",
     "start_creating_example_counter": "示例 {{current}} / {{total}}",
     "start_creating_example_prev": "上一个示例",

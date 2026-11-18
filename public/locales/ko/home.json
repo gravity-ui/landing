@@ -29,6 +29,8 @@
     "start_creating_manual_tab": "수동 (CLI)",
     "start_creating_install_title": "gravity-ui 스킬 설치",
     "start_creating_install_description": "패키지 선택, 최신 API, 실제 아이콘 및 토큰 가이드를 제공합니다. 에이전트가 모든 gravity-ui 패키지와 버전별 문서를 참조하도록 안내합니다.",
+    "start_creating_benchmark": "스킬 사용 시 <strong>벤치마크 통과율 최대 99%</strong>",
+    "start_creating_benchmark_short": "<strong>실행의 최대 99%가 모든 검사 통과</strong>",
     "start_creating_build_title": "무언가 만들기",
     "start_creating_example_counter": "예시 {{current}} / {{total}}",
     "start_creating_example_prev": "이전 예시",

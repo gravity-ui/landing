@@ -4,10 +4,11 @@ import {
     ChevronRight,
     CircleCheck,
     Code,
+    Thunderbolt,
 } from '@gravity-ui/icons';
 import {Animatable, AnimateBlock, YFMWrapper} from '@gravity-ui/page-constructor';
 import {Button, ClipboardButton, Icon, Link, Tab, TabList} from '@gravity-ui/uikit';
-import {useTranslation} from 'next-i18next';
+import {Trans, useTranslation} from 'next-i18next';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-bash.js';
 import React from 'react';
@@ -192,10 +193,38 @@ export const StartCreatingBlock: React.FC<StartCreatingProps> = ({animated, titl
                                     <h3 className={b('step-title')}>{ai.install.title}</h3>
                                 </div>
                                 <p className={b('step-description')}>{ai.install.description}</p>
-                                <Command
-                                    command={ai.install.command}
-                                    onCopy={() => sendAnalyticsEvent('install_copy', 'ai')}
-                                />
+                                <div className={b('install-action')}>
+                                    <Link
+                                        className={b('benchmark')}
+                                        href="https://github.com/gravity-ui/skills-evals#results"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Icon
+                                            className={b('benchmark-icon')}
+                                            data={Thunderbolt}
+                                            size={16}
+                                        />
+                                        <span className={b('benchmark-text')}>
+                                            <Trans
+                                                t={t}
+                                                i18nKey="start_creating_benchmark"
+                                                components={{strong: <strong />}}
+                                            />
+                                        </span>
+                                        <span className={b('benchmark-text', {mobile: true})}>
+                                            <Trans
+                                                t={t}
+                                                i18nKey="start_creating_benchmark_short"
+                                                components={{strong: <strong />}}
+                                            />
+                                        </span>
+                                    </Link>
+                                    <Command
+                                        command={ai.install.command}
+                                        onCopy={() => sendAnalyticsEvent('install_copy', 'ai')}
+                                    />
+                                </div>
                             </div>
                             <div className={b('step')}>
                                 <div className={b('step-header')}>

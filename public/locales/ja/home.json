@@ -29,6 +29,8 @@
     "start_creating_manual_tab": "手動 (CLI)",
     "start_creating_install_title": "gravity-uiスキルをインストール",
     "start_creating_install_description": "パッケージ選択、最新API、実際のアイコン、トークンのガイダンスを提供。エージェントにすべてのgravity-uiパッケージとバージョン管理されたドキュメントを参照させます。",
+    "start_creating_benchmark": "スキル使用で<strong>ベンチマーク合格率が最大99%</strong>",
+    "start_creating_benchmark_short": "<strong>最大99%の実行が全チェックに合格</strong>",
     "start_creating_build_title": "何かを作る",
     "start_creating_example_counter": "例 {{current}} / {{total}}",
     "start_creating_example_prev": "前の例",
