@@ -1,8 +1,7 @@
-import {Button, Checkbox, Flex, Icon, Text, TextInput} from '@gravity-ui/uikit';
+import {Button, Checkbox, Flex, Text, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
-import gravityLogo from '../../../../assets/logo-without-text.svg';
 import {block} from '../../../../utils/block';
 import type {ThemePreviewMode} from '../../gallery';
 import {useThemeCreator} from '../../hooks';
@@ -47,7 +46,7 @@ export const ThemeCardLivePreview: React.FC<ThemeCardLivePreviewProps> = ({mode,
             <style>{styles}</style>
             <div className={b('sample-window')}>
                 <Flex gap={2} alignItems="center" className={b('sample-header')}>
-                    <Icon data={gravityLogo} size={18} />
+                    <span className={b('sample-mark')} />
                     <Text variant="subheader-1">{t('submit_theme_sample_workspace')}</Text>
                     <Text color="secondary">/</Text>
                     <Text variant="subheader-1">{t('submit_theme_sample_projects')}</Text>

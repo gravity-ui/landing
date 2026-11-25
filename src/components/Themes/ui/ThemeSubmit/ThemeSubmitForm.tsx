@@ -1,4 +1,3 @@
-import {FormRow} from '@gravity-ui/components';
 import {ArrowUpRightFromSquare, Check} from '@gravity-ui/icons';
 import {Alert, Button, Flex, Icon, Text, TextArea, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
@@ -27,23 +26,17 @@ interface FieldProps {
 }
 
 const Field: React.FC<FieldProps> = ({fieldId, label, annotation, children}) => (
-    <FormRow
-        direction="column"
-        fieldId={fieldId}
-        className={b('field')}
-        label={
-            <Flex justifyContent="space-between" gap={2}>
-                <Text variant="subheader-1">{label}</Text>
-                {annotation && (
-                    <Text color="secondary" variant="caption-2">
-                        {annotation}
-                    </Text>
-                )}
-            </Flex>
-        }
-    >
+    <div className={b('field')}>
+        <label htmlFor={fieldId} className={b('field-label')}>
+            <Text variant="subheader-1">{label}</Text>
+            {annotation && (
+                <Text color="secondary" variant="caption-2">
+                    {annotation}
+                </Text>
+            )}
+        </label>
         {children}
-    </FormRow>
+    </div>
 );
 
 interface ThemeSubmitFormProps {
@@ -129,6 +122,7 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
             <Field fieldId={`${fieldId}-name`} label={t('submit_theme_name_label')}>
                 <TextInput
                     id={`${fieldId}-name`}
+                    className={b('name-input')}
                     size={size}
                     onBlur={() => touch('name')}
                     errorMessage={nameError}
@@ -154,7 +148,10 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                     value={draft.descriptionEn}
                     placeholder={t('submit_theme_description_placeholder')}
                     onUpdate={(descriptionEn) => onChange({descriptionEn})}
-                    controlProps={{maxLength: MAX_DESCRIPTION_LENGTH}}
+                    controlProps={{
+                        className: b('textarea-control'),
+                        maxLength: MAX_DESCRIPTION_LENGTH,
+                    }}
                 />
             </Field>
             <Field
@@ -173,7 +170,10 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                     value={draft.descriptionRu}
                     placeholder={t('submit_theme_description_ru_placeholder')}
                     onUpdate={(descriptionRu) => onChange({descriptionRu})}
-                    controlProps={{maxLength: MAX_DESCRIPTION_LENGTH}}
+                    controlProps={{
+                        className: b('textarea-control'),
+                        maxLength: MAX_DESCRIPTION_LENGTH,
+                    }}
                 />
             </Field>
             <div role="group" aria-labelledby={`${fieldId}-tags`} className={b('field')}>
@@ -185,7 +185,7 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                         {t('submit_theme_tags_count', {count: draft.tags.length, max: MAX_TAGS})}
                     </Text>
                 </Flex>
-                <Flex wrap gap={2}>
+                <Flex wrap className={b('tag-list')}>
                     {THEME_TAGS.map((tag) => {
                         const selected = draft.tags.includes(tag);
                         return (
@@ -193,6 +193,7 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                                 key={tag}
                                 size={size}
                                 view="normal"
+                                className={b('tag', {selected})}
                                 selected={selected}
                                 aria-pressed={selected}
                                 disabled={!selected && draft.tags.length >= MAX_TAGS}
