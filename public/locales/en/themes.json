@@ -295,6 +295,8 @@
   "gallery_tag_high-readability": "High Readability",
   "gallery_tag_corporate": "Corporate",
   "gallery_tag_minimal": "Minimal",
+  "gallery_tag_colorful": "Colorful",
+  "gallery_tag_pastel": "Pastel",
   "gallery_toast_imported_title": "Theme imported",
   "gallery_toast_imported_content": "Your theme has been successfully applied. Explore and configure, then export.",
   "gallery_toast_error_title": "Failed to apply theme",

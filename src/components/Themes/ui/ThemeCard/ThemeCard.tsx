@@ -27,6 +27,8 @@ export const TAG_LABEL_KEYS: Record<ThemeTag, string> = {
     'high-readability': 'gallery_tag_high-readability',
     corporate: 'gallery_tag_corporate',
     minimal: 'gallery_tag_minimal',
+    colorful: 'gallery_tag_colorful',
+    pastel: 'gallery_tag_pastel',
 };
 
 interface ThemeCardProps {

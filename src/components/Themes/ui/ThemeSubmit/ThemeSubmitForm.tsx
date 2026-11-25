@@ -9,7 +9,7 @@ import {
     MAX_THEME_NAME_LENGTH,
 } from '../../../../api/themes/types';
 import {block} from '../../../../utils/block';
-import {THEME_TAGS} from '../../gallery';
+import {SUBMISSION_THEME_TAGS, type ThemeTag} from '../../gallery';
 import type {SubmissionDraft, SubmissionFieldErrors} from '../../lib/submissionValidation';
 import {TAG_LABEL_KEYS} from '../ThemeCard/ThemeCard';
 
@@ -17,6 +17,7 @@ import {ERROR_KEYS} from './submissionErrors';
 import type {SubmissionErrorCode} from './useThemeSubmission';
 
 const b = block('theme-submit');
+const submissionTagOptions: readonly ThemeTag[] = SUBMISSION_THEME_TAGS;
 
 interface FieldProps {
     fieldId: string;
@@ -65,6 +66,11 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
     const {t} = useTranslation('themes');
     const error = errorCode ? ERROR_KEYS[errorCode] : null;
     const fieldId = React.useId();
+    // Keep older draft selections removable while limiting new selections to the current choices.
+    const tagOptions = [
+        ...submissionTagOptions,
+        ...draft.tags.filter((tag) => !submissionTagOptions.includes(tag)),
+    ];
     const [touched, setTouched] = React.useState<Partial<Record<keyof SubmissionDraft, boolean>>>(
         {},
     );
@@ -186,7 +192,7 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                     </Text>
                 </Flex>
                 <Flex wrap className={b('tag-list')}>
-                    {THEME_TAGS.map((tag) => {
+                    {tagOptions.map((tag) => {
                         const selected = draft.tags.includes(tag);
                         return (
                             <Button
