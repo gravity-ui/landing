@@ -10,6 +10,11 @@ import {exportTheme, replaceRootToCustomClassName} from '../../lib/themeCreatorE
 
 const b = block('theme-submit');
 const PREVIEW_SCOPE = b('sample');
+
+function makePreviewInert(element: HTMLDivElement | null) {
+    // React 18 does not forward the boolean inert prop.
+    element?.setAttribute('inert', '');
+}
 const PROJECTS = [
     {name: 'submit_theme_sample_design', status: 'submit_theme_sample_active'},
     {name: 'submit_theme_sample_components', status: 'submit_theme_sample_active'},
@@ -36,7 +41,7 @@ export const ThemeCardLivePreview: React.FC<ThemeCardLivePreviewProps> = ({mode,
     return (
         <div
             className={`g-root g-root_theme_${mode} ${PREVIEW_SCOPE} ${PREVIEW_SCOPE}_theme_${mode}`}
-            inert
+            ref={makePreviewInert}
             aria-hidden="true"
         >
             <style>{styles}</style>
