@@ -150,6 +150,8 @@ $block: '.#{variables.$ns}theme-submit';
     }
 
     &__preview-details {
+        box-sizing: border-box;
+        min-height: 135.65px;
         padding: 16px;
         overflow-wrap: anywhere;
     }
@@ -330,6 +332,7 @@ $block: '.#{variables.$ns}theme-submit';
         }
 
         #{$block}__preview-details {
+            min-height: 140.69px;
             padding: 14px;
         }
 
