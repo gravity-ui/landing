@@ -103,11 +103,12 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
     );
     const canSubmit = !Object.keys(fieldErrors).length && !hasCustomFont;
     const controlSize = isDesktop ? 'l' : 'xl';
-    const author = user?.login ? `@${user.login}` : t('submit_theme_author_placeholder');
-    const description =
-        (previewLanguage === 'ru' && draft.descriptionRu.trim()) ||
-        draft.descriptionEn.trim() ||
-        '';
+    const author = user?.login
+        ? `@${user.login}`
+        : t('submit_theme_author_placeholder', {lng: previewLanguage});
+    const russianDescription = previewLanguage === 'ru' ? draft.descriptionRu.trim() : '';
+    const description = russianDescription || draft.descriptionEn.trim();
+    const descriptionLanguage = russianDescription ? 'ru' : 'en';
 
     // The dialog closes during submission too: the job is durable and its polling goes on,
     // so reopening shows its progress or result.
@@ -261,13 +262,17 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
                                 >
                                     <SegmentedRadioGroup.Option
                                         value="dark"
-                                        aria-label={t('gallery_card_show_dark_aria')}
+                                        controlProps={{
+                                            'aria-label': t('gallery_card_show_dark_aria'),
+                                        }}
                                     >
                                         <Icon data={Moon} size={16} />
                                     </SegmentedRadioGroup.Option>
                                     <SegmentedRadioGroup.Option
                                         value="light"
-                                        aria-label={t('gallery_card_show_light_aria')}
+                                        controlProps={{
+                                            'aria-label': t('gallery_card_show_light_aria'),
+                                        }}
                                     >
                                         <Icon data={Sun} size={16} />
                                     </SegmentedRadioGroup.Option>
@@ -288,7 +293,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
                                     {draft.name.trim() ||
                                         t('submit_theme_name_label', {lng: previewLanguage})}
                                 </Text>
-                                <Text color="secondary" as="div">
+                                <Text color="secondary" as="div" className={b('preview-author')}>
                                     {author}
                                 </Text>
                                 {description && (
@@ -296,14 +301,15 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
                                         color="secondary"
                                         as="p"
                                         className={b('preview-description')}
+                                        lang={descriptionLanguage}
                                     >
                                         {description}
                                     </Text>
                                 )}
                                 {draft.tags.length > 0 && (
-                                    <Flex gap={2} wrap>
+                                    <Flex gap={2} wrap className={b('preview-tags')}>
                                         {draft.tags.map((tag) => (
-                                            <Label key={tag} size="s">
+                                            <Label key={tag} size="m" theme="unknown">
                                                 {t(TAG_LABEL_KEYS[tag], {lng: previewLanguage})}
                                             </Label>
                                         ))}
