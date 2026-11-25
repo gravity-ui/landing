@@ -41,10 +41,13 @@ import {useThemeCreator, useThemeCreatorMethods} from './hooks';
 import {DEFAULT_THEME} from './lib/constants';
 import type {BrandPreset} from './lib/constants';
 import {normalizeImportedTheme} from './lib/normalizeImportedTheme';
+import {exportTheme} from './lib/themeCreatorExport';
 import {
     SIGN_IN_FAILED_PARAM,
     SUBMIT_RETURN_PARAM,
+    loadSubmittedPullRequest,
     restoreSubmitReturn,
+    saveSubmittedPullRequest,
     takeSubmitReopen,
 } from './lib/themeCreatorPersistence';
 import {BorderRadiusTab} from './ui/BorderRadiusTab/BorderRadiusTab';
@@ -110,6 +113,15 @@ const ThemesContent = () => {
     const [isExportDialogVisible, setIsExportDialogVisible] = useState(false);
     const [isImportDialogVisible, setIsImportDialogVisible] = useState(false);
     const [isSubmitDialogVisible, setIsSubmitDialogVisible] = useState(false);
+    const [submittedTheme, setSubmittedTheme] = useState<{
+        url: string;
+        theme: string;
+    } | null>(null);
+    const pullRequestUrl =
+        submittedTheme &&
+        submittedTheme.theme === exportTheme({themeState: themeCreator, format: 'json'})
+            ? submittedTheme.url
+            : null;
     const [galleryDrawerOpen, setGalleryDrawerOpen] = useState(false);
     const [communityModalOpen, setCommunityModalOpen] = useState(false);
     const [activeThemeId, setActiveThemeId] = useState<string | null>(null);
@@ -127,12 +139,18 @@ const ThemesContent = () => {
     const closeImportDialog = useCallback(() => setIsImportDialogVisible(false), []);
     const openSubmitDialog = useCallback(() => setIsSubmitDialogVisible(true), []);
     const closeSubmitDialog = useCallback(() => setIsSubmitDialogVisible(false), []);
+    const handleSubmitDone = (url: string) => {
+        const theme = exportTheme({themeState: themeCreator, format: 'json'});
+        saveSubmittedPullRequest(themeCreator, url, theme);
+        setSubmittedTheme({url, theme});
+    };
     // A hand-pasted theme replaces whatever the gallery/playground had applied,
     // so drop their selection — otherwise the previously applied card keeps its
     // orange frame and the UI misreports the current theme. Bumping the
     // generation also drops a gallery load still in flight so it can't land on
     // top of the freshly imported theme.
     const handleImportSuccess = useCallback(() => {
+        setSubmittedTheme(null);
         sendAnalyticsEvent('theme_import');
         applyGenerationRef.current += 1;
         setActiveThemeId(null);
@@ -164,6 +182,7 @@ const ThemesContent = () => {
         (preset: BrandPreset, index: number) => {
             // Invalidate any in-flight theme load so it can't overwrite this preset.
             applyGenerationRef.current += 1;
+            setSubmittedTheme(null);
             applyBrandPreset(preset);
             sendAnalyticsEvent('theme_preset_select', parseRgbStringToHex(preset.brandColor));
             setActivePresetIndex(index);
@@ -186,6 +205,7 @@ const ThemesContent = () => {
                     return;
                 }
                 const gravityTheme = normalizeImportedTheme(parseJSON(payload), payload);
+                setSubmittedTheme(null);
                 importTheme(gravityTheme);
                 sendAnalyticsEvent('theme_apply', id);
                 setActiveThemeId(id);
@@ -213,6 +233,7 @@ const ThemesContent = () => {
     );
 
     const handleStartFromScratch = useCallback(() => {
+        setSubmittedTheme(null);
         sendAnalyticsEvent('theme_start_scratch');
         applyGenerationRef.current += 1;
         setCommunityModalOpen(false);
@@ -370,6 +391,11 @@ const ThemesContent = () => {
         });
         if (parkedState) {
             restoreState(parkedState);
+            const theme = exportTheme({themeState: parkedState, format: 'json'});
+            const url = loadSubmittedPullRequest(theme);
+            if (url) {
+                setSubmittedTheme({url, theme});
+            }
             applyGenerationRef.current += 1;
             setActiveThemeId(null);
             setActivePresetIndex(null);
@@ -447,10 +473,18 @@ const ThemesContent = () => {
                 className={b('theme-action-btn')}
                 view="outlined-action"
                 size="xl"
-                onClick={openSubmitDialog}
+                href={pullRequestUrl ?? undefined}
+                target={pullRequestUrl ? '_blank' : undefined}
+                onClick={pullRequestUrl ? undefined : openSubmitDialog}
             >
                 <Icon data={githubIcon} size={20} />
-                {t(compactActions ? 'btn_submit_theme_short' : 'btn_submit_theme')}
+                {t(
+                    pullRequestUrl
+                        ? 'btn_view_theme_pr'
+                        : compactActions
+                        ? 'btn_submit_theme_short'
+                        : 'btn_submit_theme',
+                )}
             </Button>
             <Button
                 className={b('theme-action-btn')}
@@ -526,7 +560,13 @@ const ThemesContent = () => {
                     <GalleryHintPopover anchorRef={firstSwatchRef} />
                 </div>
 
-                <ThemeSubmitContext.Provider value={openSubmitDialog}>
+                <ThemeSubmitContext.Provider
+                    value={{
+                        openSubmit: openSubmitDialog,
+                        pullRequestUrl,
+                        createTheme: handleStartFromScratch,
+                    }}
+                >
                     <Grid className={b('grid')}>
                         <div className={b('grid__content')}>{tabContent}</div>
                     </Grid>
@@ -536,6 +576,7 @@ const ThemesContent = () => {
             <ThemeSubmit
                 isOpen={isSubmitDialogVisible}
                 onClose={closeSubmitDialog}
+                onDone={handleSubmitDone}
                 onCreateTheme={handleStartFromScratch}
             />
             <ThemeExport isOpen={isExportDialogVisible} onClose={closeExportDialog} />

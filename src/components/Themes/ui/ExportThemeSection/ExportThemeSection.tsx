@@ -16,11 +16,12 @@ const b = block('export-theme-section');
 export const ExportThemeSection = () => {
     const {t} = useTranslation('themes');
     const [isDialogVisible, toggleDialog] = React.useReducer((isOpen) => !isOpen, false);
-    const openSubmit = React.useContext(ThemeSubmitContext);
+    const actions = React.useContext(ThemeSubmitContext);
+    const pullRequestUrl = actions?.pullRequestUrl;
 
     return (
         <ThemeSection title={t('is_everything_set')} className={b()}>
-            <Flex gap={2} wrap>
+            <Flex gap={2} wrap className={b('actions')}>
                 <Button
                     view="action"
                     size="xl"
@@ -34,11 +35,18 @@ export const ExportThemeSection = () => {
                     view="outlined-action"
                     size="xl"
                     className={b('export-button')}
-                    onClick={openSubmit ?? undefined}
+                    href={pullRequestUrl ?? undefined}
+                    target={pullRequestUrl ? '_blank' : undefined}
+                    onClick={pullRequestUrl ? undefined : actions?.openSubmit}
                 >
                     <Icon data={githubIcon} size={20} />
-                    {t('btn_submit_theme')}
+                    {t(pullRequestUrl ? 'btn_view_theme_pr' : 'btn_submit_theme')}
                 </Button>
+                {pullRequestUrl && (
+                    <Button size="xl" className={b('export-button')} onClick={actions?.createTheme}>
+                        {t('submit_theme_create_new_btn')}
+                    </Button>
+                )}
             </Flex>
             <ThemeExport isOpen={isDialogVisible} onClose={toggleDialog} />
         </ThemeSection>

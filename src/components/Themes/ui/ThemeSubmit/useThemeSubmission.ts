@@ -51,7 +51,13 @@ export interface GithubUser {
 type SubmissionState =
     | {status: 'idle'}
     | {status: 'submitting'; stepIndex: number; stepCount: number}
-    | {status: 'success'; pullRequestUrl: string; pullRequestNumber: number}
+    | {
+          status: 'success';
+          pullRequestUrl: string;
+          pullRequestNumber: number;
+          requestFingerprint: string;
+          name: string;
+      }
     | {
           status: 'error';
           code: SubmissionErrorCode;
@@ -203,6 +209,8 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
                         status: 'success',
                         pullRequestUrl: event.pullRequestUrl,
                         pullRequestNumber: event.pullRequestNumber,
+                        requestFingerprint: activeJob.requestFingerprint,
+                        name: activeJob.input.metadata.name,
                     });
                     return;
                 }
@@ -355,6 +363,19 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
     }, [isJobEdited, isJobDispatched, reset]);
     const isRenderedVersionStale = isJobEdited && isJobDispatched;
 
+    const matchesSubmittedDraft =
+        state.status === 'success' && state.requestFingerprint === requestBody;
+    let matchesSubmittedTheme = matchesSubmittedDraft;
+    if (!matchesSubmittedTheme && state.status === 'success' && requestBody !== null) {
+        try {
+            matchesSubmittedTheme =
+                JSON.stringify(JSON.parse(state.requestFingerprint).theme) ===
+                JSON.stringify(JSON.parse(requestBody).theme);
+        } catch {
+            // A malformed persisted job cannot identify the edited theme.
+        }
+    }
+
     return {
         user,
         isUserLoading,
@@ -362,6 +383,8 @@ export function useThemeSubmission(isOpen: boolean, draft: SubmissionDraft) {
         fieldErrors,
         isJobDispatched,
         isRenderedVersionStale,
+        matchesSubmittedDraft,
+        matchesSubmittedTheme,
         signIn,
         signOut,
         submit,

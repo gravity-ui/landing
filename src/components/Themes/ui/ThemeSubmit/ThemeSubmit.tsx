@@ -43,7 +43,12 @@ const INITIAL_DRAFT: SubmissionDraft = {
     tags: [],
 };
 
-export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCreateTheme}) => {
+export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({
+    isOpen,
+    onClose,
+    onCreateTheme,
+    onDone,
+}) => {
     const {t, i18n} = useTranslation('themes');
     const titleId = React.useId();
     const [previewLanguage, setPreviewLanguage] = React.useState(() =>
@@ -61,6 +66,8 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
         fieldErrors,
         isJobDispatched,
         isRenderedVersionStale,
+        matchesSubmittedDraft,
+        matchesSubmittedTheme,
         signIn,
         signOut,
         submit,
@@ -89,13 +96,6 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
         });
     }, []);
 
-    // An opened pull request ends the draft.
-    React.useEffect(() => {
-        if (state.status === 'success') {
-            clearSubmitDraft();
-        }
-    }, [state.status]);
-
     // The gallery stores only the theme JSON, so the loading link of a custom
     // font would be lost and the published theme would fall back to the default font.
     const hasCustomFont = Object.entries(gravityTheme.typography.fontFamilies).some(
@@ -110,13 +110,22 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
     const description = russianDescription || draft.descriptionEn.trim();
     const descriptionLanguage = russianDescription ? 'ru' : 'en';
 
-    // The dialog closes during submission too: the job is durable and its polling goes on,
-    // so reopening shows its progress or result.
-    const handleClose = () => {
-        if (state.status === 'success') {
-            setDraft(INITIAL_DRAFT);
-            reset();
+    const discardDraft = () => {
+        clearSubmitDraft();
+        setDraft(INITIAL_DRAFT);
+    };
+
+    const handleDone = () => {
+        if (state.status !== 'success') {
+            return;
         }
+        if (matchesSubmittedTheme) {
+            onDone(state.pullRequestUrl);
+        }
+        if (matchesSubmittedDraft) {
+            discardDraft();
+        }
+        reset();
         onClose();
     };
 
@@ -152,7 +161,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
     } else if (state.status === 'success') {
         main = (
             <SuccessContent
-                name={draft.name}
+                name={state.name}
                 pullRequestUrl={state.pullRequestUrl}
                 pullRequestNumber={state.pullRequestNumber}
             />
@@ -162,14 +171,14 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
                 <Button
                     size="xl"
                     onClick={() => {
-                        setDraft(INITIAL_DRAFT);
+                        discardDraft();
                         reset();
                         onCreateTheme();
                     }}
                 >
                     {t('submit_theme_create_new_btn')}
                 </Button>
-                <Button view="action" size="xl" onClick={handleClose}>
+                <Button view="action" size="xl" onClick={handleDone}>
                     {t('submit_theme_done_btn')}
                 </Button>
             </React.Fragment>
@@ -213,7 +222,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
         <Modal
             open={isOpen}
             onOpenChange={(open) => {
-                if (!open) handleClose();
+                if (!open) onClose();
             }}
             aria-labelledby={titleId}
             contentClassName={b('modal', {touch: !isDesktop})}
@@ -228,7 +237,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCrea
                     <Button
                         view="flat-secondary"
                         size={controlSize}
-                        onClick={handleClose}
+                        onClick={onClose}
                         aria-label={t('submit_theme_close')}
                     >
                         <Icon data={Xmark} size={16} />

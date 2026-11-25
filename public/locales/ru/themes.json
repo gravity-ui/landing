@@ -308,6 +308,7 @@
   "gallery_hint_action": "Понятно",
   "gallery_preview_mode_dark_aria": "Показывать тёмную тему",
   "gallery_preview_mode_light_aria": "Показывать светлую тему",
+  "btn_view_theme_pr": "Посмотреть pull request",
   "btn_submit_theme": "Отправить в галерею",
   "submit_theme_title": "Отправить тему в галерею",
   "submit_theme_sign_in_title": "Поделитесь темой с сообществом",

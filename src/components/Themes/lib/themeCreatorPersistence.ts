@@ -10,6 +10,7 @@ import type {ThemeCreatorState} from './types';
 // fonts keep their titles and links in `typography`, outside the theme.
 
 const STATE_KEY = 'gravity-landing:theme-submit:state';
+const PULL_REQUEST_KEY = 'gravity-landing:theme-submit:pull-request';
 const REOPEN_KEY = 'gravity-landing:theme-submit:reopen';
 const SIGN_IN_FAILED_KEY = 'gravity-landing:theme-submit:sign-in-failed';
 
@@ -38,7 +39,37 @@ export function saveSubmitReturn(state: ThemeCreatorState): boolean {
 }
 
 export function clearSubmitReturn() {
-    storage()?.removeItem(STATE_KEY);
+    const store = storage();
+    store?.removeItem(STATE_KEY);
+    store?.removeItem(PULL_REQUEST_KEY);
+}
+
+const isPullRequestUrl = (url: string) =>
+    /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/pull\/[1-9]\d*$/.test(url);
+
+export function saveSubmittedPullRequest(state: ThemeCreatorState, url: string, theme: string) {
+    try {
+        if (isPullRequestUrl(url) && saveSubmitReturn(state)) {
+            storage()?.setItem(PULL_REQUEST_KEY, JSON.stringify({url, theme}));
+        }
+    } catch {
+        // The current editor can still show the result when storage is unavailable.
+    }
+}
+
+export function loadSubmittedPullRequest(theme: string): string | null {
+    try {
+        const value = storage()?.getItem(PULL_REQUEST_KEY);
+        const result: unknown = value ? JSON.parse(value) : null;
+        return isRecord(result) &&
+            result.theme === theme &&
+            typeof result.url === 'string' &&
+            isPullRequestUrl(result.url)
+            ? result.url
+            : null;
+    } catch {
+        return null;
+    }
 }
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
