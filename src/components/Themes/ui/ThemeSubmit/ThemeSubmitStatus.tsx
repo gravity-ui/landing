@@ -1,4 +1,4 @@
-import {CircleInfo} from '@gravity-ui/icons';
+import {ArrowUpRightFromSquare, CircleCheck, CodePullRequest} from '@gravity-ui/icons';
 import {Alert, Flex, Icon, Link, Progress, Text} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
@@ -12,11 +12,8 @@ import type {SubmissionErrorCode} from './useThemeSubmission';
 const b = block('theme-submit');
 
 const Heading: React.FC<{title: string; description?: string}> = ({title, description}) => {
-    const {t} = useTranslation('themes');
-
     return (
         <div className={b('heading')}>
-            <span className={b('overline')}>{t('submit_theme_overline')}</span>
             <Text variant="header-1">{title}</Text>
             {description && (
                 <Text variant="body-2" color="secondary">
@@ -38,32 +35,49 @@ export const SignInContent: React.FC<{errorCode: SubmissionErrorCode | null}> = 
                 description={t('submit_theme_sign_in_body')}
             />
             {error && <Alert theme="danger" title={t(error.title)} message={t(error.message)} />}
-            <Flex gap={2} alignItems="flex-start" className={b('note')}>
-                <Icon data={CircleInfo} size={16} />
-                <Text variant="body-1" color="secondary">
-                    {t('submit_theme_permissions_note')}
-                </Text>
-            </Flex>
         </React.Fragment>
     );
 };
 
 interface SuccessContentProps {
+    name: string;
     pullRequestUrl: string;
+    pullRequestNumber: number;
 }
 
-export const SuccessContent: React.FC<SuccessContentProps> = ({pullRequestUrl}) => {
+export const SuccessContent: React.FC<SuccessContentProps> = ({
+    name,
+    pullRequestUrl,
+    pullRequestNumber,
+}) => {
     const {t} = useTranslation('themes');
+    const repository = pullRequestUrl.match(/github\.com\/([^/]+\/[^/]+)\/pull\//)?.[1];
 
     return (
         <React.Fragment>
-            <Heading
-                title={t('submit_theme_success_title')}
-                description={t('submit_theme_success_body')}
-            />
-            <Link href={pullRequestUrl} target="_blank" className={b('pr-link')}>
-                {pullRequestUrl.replace(/^https:\/\//, '')}
+            <Flex alignItems="center" gap={3}>
+                <Text color="positive">
+                    <Icon data={CircleCheck} size={16} />
+                </Text>
+                <Text variant="header-1">{t('submit_theme_success_title')}</Text>
+            </Flex>
+            <Link href={pullRequestUrl} target="_blank" view="primary" className={b('pr-link')}>
+                <Icon data={CodePullRequest} size={16} />
+                <Flex direction="column" className={b('pr-text')}>
+                    <Text variant="subheader-2">
+                        {name.trim()
+                            ? t('submit_theme_pr_title', {name: name.trim()})
+                            : t('submit_theme_open_pr_btn')}
+                    </Text>
+                    <Text color="secondary">
+                        {repository
+                            ? `${repository} · #${pullRequestNumber}`
+                            : `#${pullRequestNumber}`}
+                    </Text>
+                </Flex>
+                <Icon data={ArrowUpRightFromSquare} size={16} />
             </Link>
+            <Text color="secondary">{t('submit_theme_success_body')}</Text>
         </React.Fragment>
     );
 };

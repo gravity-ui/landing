@@ -1,115 +1,264 @@
 @use '../../../../variables.scss';
 
 $block: '.#{variables.$ns}theme-submit';
-$cardWidth: 320px;
-// Card preview (248px) + name/author row + hint: keeps the dialog height
-// steady while switching between sign-in, form, progress and success.
-$contentMinHeight: 380px;
-// The overline follows the "Recent updates" block on the main page
-// (`custom-header__news`): uppercase 11/16 semibold with 1px tracking.
 
 #{$block} {
-    &__layout {
+    &__modal {
+        --g-modal-width: 940px;
+        --g-modal-max-width: calc(100vw - 40px);
+        --g-modal-border-radius: 20px;
+        --g-border-radius-l: 8px;
+        --g-border-radius-xl: 10px;
+    }
+
+    &__panel {
+        display: flex;
+        flex-direction: column;
+        min-height: min(602px, calc(100dvh - 40px));
+        max-height: calc(100dvh - 40px);
+        border: 1px solid var(--g-color-line-generic);
+        border-radius: inherit;
+    }
+
+    &__header {
+        display: flex;
+        flex: none;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 20px 24px 0 30px;
+
+        h2 {
+            margin: 0;
+        }
+    }
+
+    &__body {
         display: grid;
-        grid-template-columns: $cardWidth minmax(0, 1fr);
-        gap: var(--g-spacing-8);
-        align-items: start;
-        width: 100%;
-        min-height: $contentMinHeight;
-
-        &_stacked {
-            grid-template-columns: minmax(0, 1fr);
-            gap: var(--g-spacing-6);
-            min-height: 0;
-
-            // On phones the text and the form come first, the preview below.
-            #{$block}__card {
-                order: 1;
-            }
-        }
+        grid-template-columns: minmax(0, 389fr) minmax(0, 457fr);
+        gap: 32px;
+        flex: 1 1 auto;
+        align-content: start;
+        min-height: 0;
+        padding: 18px 30px 12px;
+        overflow-y: auto;
     }
 
+    &__preview,
     &__main {
-        display: flex;
-        flex-direction: column;
-        gap: var(--g-spacing-5);
         min-width: 0;
     }
 
-    // Preview on the left, text and form on the right under which the actions sit.
-    &__card {
-        order: -1;
+    &__preview-toolbar,
+    &__preview-controls {
         display: flex;
-        flex-direction: column;
-        gap: var(--g-spacing-2);
-        min-width: 0;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
     }
 
-    &__heading {
-        display: flex;
-        flex-direction: column;
-        gap: var(--g-spacing-2);
+    &__preview-toolbar {
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 20px;
     }
 
-    &__overline {
-        font-size: 11px;
-        line-height: 16px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: var(--g-color-text-hint);
+    &__preview-card {
+        overflow: hidden;
+        border: 1px solid var(--g-color-line-generic);
+        border-radius: 12px;
+        background: var(--g-color-base-generic-ultralight);
     }
 
-    &__note {
-        color: var(--g-color-text-secondary);
+    &__preview-image {
+        position: relative;
+        aspect-ratio: 389 / 238;
+    }
 
-        svg {
-            flex: 0 0 auto;
-            margin-top: 2px;
+    &__sample {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        padding: 16px 18px 0;
+        background: linear-gradient(
+            135deg,
+            var(--g-color-base-selection-hover),
+            var(--g-color-base-background)
+        );
+        color: var(--g-color-text-primary);
+    }
+
+    &__sample-window {
+        overflow: hidden;
+        border: 1px solid var(--g-color-line-generic);
+        border-bottom: 0;
+        border-radius: 8px 8px 0 0;
+        background: var(--g-color-base-background);
+    }
+
+    &__sample-header {
+        padding: 11px 14px;
+        border-bottom: 1px solid var(--g-color-line-generic);
+    }
+
+    &__sample-content {
+        padding: 12px 14px 8px;
+    }
+
+    &__sample-search {
+        margin: 8px 0;
+    }
+
+    &__sample-row {
+        padding: 5px;
+        border-top: 1px solid var(--g-color-line-generic);
+
+        &_selected {
+            background: var(--g-color-base-selection);
         }
     }
 
-    // Holds the dialog height while the GitHub session is being checked.
-    &__loading {
-        flex: 1 0 auto;
-        min-height: $contentMinHeight;
+    &__preview-details {
+        padding: 16px;
+        overflow-wrap: anywhere;
     }
 
-    &__progress {
-        width: 100%;
+    &__preview-description {
+        margin: 8px 0 12px;
     }
 
+    &__main,
+    &__heading,
     &__field {
         display: flex;
         flex-direction: column;
-        gap: var(--g-spacing-2);
+    }
+
+    &__main {
+        gap: 20px;
+    }
+
+    &__heading {
+        gap: 12px;
+    }
+
+    &__field {
+        gap: 8px;
     }
 
     &__textarea {
-        --g-text-area-border-radius: 20px;
+        --g-text-area-border-radius: 8px;
+    }
+
+    &__loading {
+        min-height: 44px;
     }
 
     &__pr-link {
-        font-size: var(--g-text-body-2-font-size);
-        line-height: var(--g-text-body-2-line-height);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 16px;
+        border: 1px solid var(--g-color-line-generic);
+        border-radius: 10px;
+        background: var(--g-color-base-generic);
     }
 
-    &__action_wide {
-        flex: 1 0 auto;
+    &__pr-text {
+        flex: 1;
+        overflow-wrap: anywhere;
     }
 
-    // ThemeActionDialog puts the buttons 16px under the content; another 16px
-    // separates them from the last form field.
-    &__dialog-buttons {
-        padding-top: var(--g-spacing-4);
-        padding-bottom: 22px;
+    &__footer,
+    &__account,
+    &__actions {
+        display: flex;
+        align-items: center;
     }
 
-    // The shared ThemeActionSheet paints the button bar with --g-color-base-modal,
-    // which differs from the sheet surface and makes the bar look detached.
-    &__sheet-buttons {
-        background-color: var(--g-sheet-background-color, var(--g-color-base-float));
-        height: 60px;
-        justify-content: flex-start;
+    &__footer {
+        flex: none;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 30px 24px;
+    }
+
+    &__account {
+        gap: 8px;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    &__actions {
+        gap: 8px;
+        margin-left: auto;
+    }
+
+    &__modal_touch {
+        --g-modal-width: 100vw;
+        --g-modal-max-width: 100vw;
+        --g-modal-height: 100dvh;
+        --g-modal-margin: 0px;
+        --g-modal-border-radius: 0px;
+
+        #{$block}__panel {
+            height: 100%;
+            min-height: 0;
+            max-height: none;
+            border: 0;
+        }
+
+        #{$block}__header {
+            padding: 8px 8px 0 16px;
+        }
+
+        #{$block}__body {
+            grid-template-columns: minmax(0, 1fr);
+            gap: 22px;
+            padding: 12px 16px 20px;
+        }
+
+        #{$block}__preview-image {
+            aspect-ratio: 328 / 196;
+        }
+
+        #{$block}__sample {
+            padding: 10px 12px 0;
+        }
+
+        #{$block}__sample-header,
+        #{$block}__sample-content {
+            padding: 6px 10px;
+        }
+
+        #{$block}__sample-row {
+            padding: 2px;
+        }
+
+        #{$block}__preview-details {
+            padding: 14px;
+        }
+
+        #{$block}__footer {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 4px;
+            padding: 8px 16px max(10px, env(safe-area-inset-bottom));
+        }
+
+        #{$block}__footer_account {
+            border-top: 1px solid var(--g-color-line-generic);
+        }
+
+        #{$block}__account > button {
+            margin-left: auto;
+        }
+
+        #{$block}__actions {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 6px;
+            margin-left: 0;
+        }
     }
 }

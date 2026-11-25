@@ -1,16 +1,6 @@
 import {FormRow} from '@gravity-ui/components';
-import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
-import {
-    Alert,
-    Avatar,
-    Button,
-    Flex,
-    Icon,
-    Select,
-    Text,
-    TextArea,
-    TextInput,
-} from '@gravity-ui/uikit';
+import {ArrowUpRightFromSquare, Check} from '@gravity-ui/icons';
+import {Alert, Button, Flex, Icon, Text, TextArea, TextInput} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 
@@ -20,63 +10,63 @@ import {
     MAX_THEME_NAME_LENGTH,
 } from '../../../../api/themes/types';
 import {block} from '../../../../utils/block';
-import {THEME_TAGS, type ThemeTag} from '../../gallery';
+import {THEME_TAGS} from '../../gallery';
 import type {SubmissionDraft, SubmissionFieldErrors} from '../../lib/submissionValidation';
 import {TAG_LABEL_KEYS} from '../ThemeCard/ThemeCard';
 
 import {ERROR_KEYS} from './submissionErrors';
-import type {GithubUser, SubmissionErrorCode} from './useThemeSubmission';
+import type {SubmissionErrorCode} from './useThemeSubmission';
 
 const b = block('theme-submit');
 
 interface FieldProps {
     fieldId: string;
     label: string;
-    hint?: string;
+    annotation?: string;
     children: React.ReactNode;
 }
 
-const Field: React.FC<FieldProps> = ({fieldId, label, hint, children}) => (
+const Field: React.FC<FieldProps> = ({fieldId, label, annotation, children}) => (
     <FormRow
         direction="column"
         fieldId={fieldId}
         className={b('field')}
-        label={<Text variant="subheader-2">{label}</Text>}
+        label={
+            <Flex justifyContent="space-between" gap={2}>
+                <Text variant="subheader-1">{label}</Text>
+                {annotation && (
+                    <Text color="secondary" variant="caption-2">
+                        {annotation}
+                    </Text>
+                )}
+            </Flex>
+        }
     >
         {children}
-        {hint && (
-            <Text variant="caption-2" color="secondary">
-                {hint}
-            </Text>
-        )}
     </FormRow>
 );
 
 interface ThemeSubmitFormProps {
-    user: GithubUser;
+    size: 'l' | 'xl';
     draft: SubmissionDraft;
-    themeId: string;
     errorCode: SubmissionErrorCode | null;
     forkUrl?: string;
     hasCustomFont: boolean;
     fieldErrors: SubmissionFieldErrors;
     isRenderedVersionStale: boolean;
     onChange: (patch: Partial<SubmissionDraft>) => void;
-    onSignOut: () => void;
     onStartOver: () => void;
 }
 
 export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
-    user,
+    size,
     draft,
-    themeId,
     errorCode,
     forkUrl,
     hasCustomFont,
     fieldErrors,
     isRenderedVersionStale,
     onChange,
-    onSignOut,
     onStartOver,
 }) => {
     const {t} = useTranslation('themes');
@@ -99,24 +89,9 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
         setTouched((prev) => ({...prev, [field]: true}));
     const nameError =
         errorCode === 'name-taken' ? t('submit_theme_field_name_name-taken') : fieldError('name');
-    const nameHint = themeId ? t('submit_theme_name_note', {id: themeId}) : undefined;
 
     return (
         <React.Fragment>
-            <Flex alignItems="center" justifyContent="space-between" gap={2}>
-                <Flex alignItems="center" gap={2}>
-                    <Avatar imgUrl={user.avatarUrl} size="m" />
-                    <Flex direction="column">
-                        <Text variant="subheader-1">{user.name}</Text>
-                        <Text variant="caption-2" color="secondary">
-                            @{user.login}
-                        </Text>
-                    </Flex>
-                </Flex>
-                <Button view="flat-secondary" size="m" onClick={onSignOut}>
-                    {t('submit_theme_sign_out_btn')}
-                </Button>
-            </Flex>
             {error && (
                 <Alert
                     theme="danger"
@@ -151,11 +126,10 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                     message={t('submit_theme_custom_font_message')}
                 />
             )}
-            <Field fieldId={`${fieldId}-name`} label={t('submit_theme_name_label')} hint={nameHint}>
+            <Field fieldId={`${fieldId}-name`} label={t('submit_theme_name_label')}>
                 <TextInput
                     id={`${fieldId}-name`}
-                    size="xl"
-                    pin="round-round"
+                    size={size}
                     onBlur={() => touch('name')}
                     errorMessage={nameError}
                     value={draft.name}
@@ -171,9 +145,8 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
             >
                 <TextArea
                     className={b('textarea')}
-                    size="xl"
-                    minRows={2}
-                    maxRows={4}
+                    size={size}
+                    rows={3}
                     id={`${fieldId}-descriptionEn`}
                     onBlur={() => touch('descriptionEn')}
                     validationState={fieldError('descriptionEn') ? 'invalid' : undefined}
@@ -187,12 +160,12 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
             <Field
                 fieldId={`${fieldId}-descriptionRu`}
                 label={t('submit_theme_description_ru_label')}
+                annotation={t('submit_theme_optional')}
             >
                 <TextArea
                     className={b('textarea')}
-                    size="xl"
-                    minRows={2}
-                    maxRows={4}
+                    size={size}
+                    rows={3}
                     id={`${fieldId}-descriptionRu`}
                     onBlur={() => touch('descriptionRu')}
                     validationState={fieldError('descriptionRu') ? 'invalid' : undefined}
@@ -203,26 +176,42 @@ export const ThemeSubmitForm: React.FC<ThemeSubmitFormProps> = ({
                     controlProps={{maxLength: MAX_DESCRIPTION_LENGTH}}
                 />
             </Field>
-            <Field fieldId={`${fieldId}-tags`} label={t('submit_theme_tags_label')}>
-                <Select
-                    id={`${fieldId}-tags`}
-                    aria-label={t('submit_theme_tags_label')}
-                    size="xl"
-                    pin="round-round"
-                    width="max"
-                    multiple
-                    hasClear
-                    validationState={fieldError('tags') ? 'invalid' : undefined}
-                    errorMessage={fieldError('tags')}
-                    value={draft.tags}
-                    placeholder={t('submit_theme_tags_placeholder')}
-                    onUpdate={(tags) => onChange({tags: tags.slice(0, MAX_TAGS) as ThemeTag[]})}
-                    options={THEME_TAGS.map((tag) => ({
-                        value: tag,
-                        content: t(TAG_LABEL_KEYS[tag]),
-                    }))}
-                />
-            </Field>
+            <div role="group" aria-labelledby={`${fieldId}-tags`} className={b('field')}>
+                <Flex justifyContent="space-between" gap={2}>
+                    <Text id={`${fieldId}-tags`} variant="subheader-1">
+                        {t('submit_theme_tags_label')}
+                    </Text>
+                    <Text color="secondary" variant="caption-2">
+                        {t('submit_theme_tags_count', {count: draft.tags.length, max: MAX_TAGS})}
+                    </Text>
+                </Flex>
+                <Flex wrap gap={2}>
+                    {THEME_TAGS.map((tag) => {
+                        const selected = draft.tags.includes(tag);
+                        return (
+                            <Button
+                                key={tag}
+                                size={size}
+                                view="normal"
+                                selected={selected}
+                                aria-pressed={selected}
+                                disabled={!selected && draft.tags.length >= MAX_TAGS}
+                                onClick={() =>
+                                    onChange({
+                                        tags: selected
+                                            ? draft.tags.filter((value) => value !== tag)
+                                            : [...draft.tags, tag],
+                                    })
+                                }
+                            >
+                                {selected && <Icon data={Check} size={14} />}
+                                {t(TAG_LABEL_KEYS[tag])}
+                            </Button>
+                        );
+                    })}
+                </Flex>
+                {fieldError('tags') && <Text color="danger">{fieldError('tags')}</Text>}
+            </div>
         </React.Fragment>
     );
 };

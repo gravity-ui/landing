@@ -9,7 +9,7 @@ import {getI18nProps} from '../../utils/i18next';
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const result = {
         props: {
-            ...(await getI18nProps(ctx, ['themes'])),
+            ...(await getI18nProps(ctx, ['themes'], ['en', 'ru'])),
         },
     };
     return result;

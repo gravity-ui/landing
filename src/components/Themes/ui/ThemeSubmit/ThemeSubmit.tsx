@@ -1,15 +1,23 @@
-import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
+import {Moon, Sun, Xmark} from '@gravity-ui/icons';
 import {BREAKPOINTS} from '@gravity-ui/page-constructor';
-import {Button, Flex, Icon, Loader} from '@gravity-ui/uikit';
+import {
+    Button,
+    Flex,
+    Icon,
+    Label,
+    Loader,
+    Modal,
+    SegmentedRadioGroup,
+    Text,
+} from '@gravity-ui/uikit';
 import {useTranslation} from 'next-i18next';
 import React from 'react';
 import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import githubIcon from '../../../../assets/icons/github.svg';
 import {block} from '../../../../utils/block';
-import {THEME_TAGS, type ThemeMetadata, type ThemeTag} from '../../gallery';
-import {toThemeId} from '../../gallery/schema';
-import {useThemeCreator, useThemePaletteColor} from '../../hooks';
+import {THEME_TAGS, type ThemePreviewMode, type ThemeTag} from '../../gallery';
+import {useThemeCreator} from '../../hooks';
 import type {SubmissionDraft} from '../../lib/submissionValidation';
 import {
     clearSubmitDraft,
@@ -17,13 +25,11 @@ import {
     saveSubmitDraft,
 } from '../../lib/themeCreatorPersistence';
 import {isBuiltInFontFamily} from '../../lib/typography/utils';
-import {ThemeCard} from '../ThemeCard/ThemeCard';
+import {TAG_LABEL_KEYS} from '../ThemeCard/ThemeCard';
 
 import {ThemeCardLivePreview} from './ThemeCardLivePreview';
 import './ThemeSubmit.scss';
-import {ThemeSubmitDialog} from './ThemeSubmitDialog';
 import {ThemeSubmitForm} from './ThemeSubmitForm';
-import {ThemeSubmitSheet} from './ThemeSubmitSheet';
 import {ProgressWait, SignInContent, SuccessContent} from './ThemeSubmitStatus';
 import type {ThemeSubmitProps} from './types';
 import {type SubmissionErrorCode, useThemeSubmission} from './useThemeSubmission';
@@ -37,8 +43,13 @@ const INITIAL_DRAFT: SubmissionDraft = {
     tags: [],
 };
 
-export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
-    const {t} = useTranslation('themes');
+export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose, onCreateTheme}) => {
+    const {t, i18n} = useTranslation('themes');
+    const titleId = React.useId();
+    const [previewLanguage, setPreviewLanguage] = React.useState(() =>
+        i18n.language.startsWith('ru') ? 'ru' : 'en',
+    );
+    const [previewMode, setPreviewMode] = React.useState<ThemePreviewMode>('dark');
     const breakpoint = useWindowBreakpoint();
     const isDesktop = breakpoint >= BREAKPOINTS.sm;
 
@@ -55,7 +66,6 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         submit,
         reset,
     } = useThemeSubmission(isOpen, draft);
-    const [brandColor] = useThemePaletteColor({token: 'brand', theme: 'light'});
     const {gravityTheme} = useThemeCreator();
 
     // The saved draft is read after mount: storage is not available during SSR.
@@ -86,26 +96,18 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
         }
     }, [state.status]);
 
-    const themeId = toThemeId(draft.name);
     // The gallery stores only the theme JSON, so the loading link of a custom
     // font would be lost and the published theme would fall back to the default font.
     const hasCustomFont = Object.entries(gravityTheme.typography.fontFamilies).some(
         ([fontType, options]) => !isBuiltInFontFamily(fontType, options?.mainFont),
     );
     const canSubmit = !Object.keys(fieldErrors).length && !hasCustomFont;
-    const actionClassName = b('action', {wide: !isDesktop});
-
-    const previewMetadata: ThemeMetadata = {
-        id: themeId || 'new-theme',
-        name: draft.name.trim() || t('submit_theme_name_placeholder'),
-        author: {name: user?.name || user?.login || t('submit_theme_author_placeholder')},
-        description: {
-            en: draft.descriptionEn.trim() || t('submit_theme_description_placeholder'),
-            ru: draft.descriptionRu.trim() || draft.descriptionEn.trim(),
-        },
-        tags: draft.tags,
-        brandColor: brandColor.value,
-    };
+    const controlSize = isDesktop ? 'l' : 'xl';
+    const author = user?.login ? `@${user.login}` : t('submit_theme_author_placeholder');
+    const description =
+        (previewLanguage === 'ru' && draft.descriptionRu.trim()) ||
+        draft.descriptionEn.trim() ||
+        '';
 
     // The dialog closes during submission too: the job is durable and its polling goes on,
     // so reopening shows its progress or result.
@@ -129,13 +131,7 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
     } else if (!user) {
         main = <SignInContent errorCode={state.status === 'error' ? state.code : null} />;
         buttons = (
-            <Button
-                view="action"
-                size="xl"
-                pin="round-round"
-                onClick={signIn}
-                className={actionClassName}
-            >
+            <Button view="action" size="xl" onClick={signIn}>
                 <Icon data={githubIcon} size={20} />
                 {t('submit_theme_sign_in_btn')}
             </Button>
@@ -148,39 +144,31 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
             />
         );
         buttons = (
-            <Button
-                view="action"
-                size="xl"
-                pin="round-round"
-                loading
-                disabled
-                className={actionClassName}
-            >
+            <Button view="action" size="xl" loading disabled>
                 {t('submit_theme_submit_btn')}
             </Button>
         );
     } else if (state.status === 'success') {
-        main = <SuccessContent pullRequestUrl={state.pullRequestUrl} />;
+        main = (
+            <SuccessContent
+                name={draft.name}
+                pullRequestUrl={state.pullRequestUrl}
+                pullRequestNumber={state.pullRequestNumber}
+            />
+        );
         buttons = (
             <React.Fragment>
                 <Button
-                    view="action"
-                    pin="round-round"
                     size="xl"
-                    href={state.pullRequestUrl}
-                    target="_blank"
-                    className={actionClassName}
+                    onClick={() => {
+                        setDraft(INITIAL_DRAFT);
+                        reset();
+                        onCreateTheme();
+                    }}
                 >
-                    {t('submit_theme_open_pr_btn')}
-                    <Icon data={ArrowUpRightFromSquare} size={16} />
+                    {t('submit_theme_create_new_btn')}
                 </Button>
-                <Button
-                    view="outlined-action"
-                    pin="round-round"
-                    size="xl"
-                    onClick={handleClose}
-                    className={actionClassName}
-                >
+                <Button view="action" size="xl" onClick={handleClose}>
                     {t('submit_theme_done_btn')}
                 </Button>
             </React.Fragment>
@@ -191,9 +179,8 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
             state.status === 'error' ? t('submit_theme_retry_btn') : t('submit_theme_submit_btn');
         main = (
             <ThemeSubmitForm
-                user={user}
+                size={controlSize}
                 draft={draft}
-                themeId={themeId}
                 errorCode={errorCode}
                 forkUrl={state.status === 'error' ? state.forkUrl : undefined}
                 hasCustomFont={hasCustomFont}
@@ -203,49 +190,145 @@ export const ThemeSubmit: React.FC<ThemeSubmitProps> = ({isOpen, onClose}) => {
                 }}
                 isRenderedVersionStale={isRenderedVersionStale}
                 onChange={updateDraft}
-                onSignOut={signOut}
                 onStartOver={reset}
             />
         );
         buttons = (
             <Button
                 view="action"
-                pin="round-round"
                 size="xl"
                 // Retry of a dispatched job only resumes the rendered version, whatever the draft is now.
                 disabled={!isJobDispatched && !canSubmit}
                 onClick={submit}
-                className={actionClassName}
             >
                 {buttonLabel}
             </Button>
         );
     }
 
-    const content = (
-        <div className={b('layout', {stacked: !isDesktop})}>
-            <div className={b('main')}>{main}</div>
-            <div className={b('card')}>
-                <ThemeCard
-                    metadata={previewMetadata}
-                    renderPreview={(mode) => <ThemeCardLivePreview mode={mode} />}
-                />
-            </div>
-        </div>
-    );
+    const showAccount = user && state.status !== 'success' && state.status !== 'submitting';
 
-    return isDesktop ? (
-        <ThemeSubmitDialog
-            isOpen={isOpen}
-            onClose={handleClose}
-            breakpoint={breakpoint}
-            buttons={buttons}
+    return (
+        <Modal
+            open={isOpen}
+            onOpenChange={(open) => {
+                if (!open) handleClose();
+            }}
+            aria-labelledby={titleId}
+            contentClassName={b('modal', {touch: !isDesktop})}
+            contentOverflow="visible"
+            disableHeightTransition
         >
-            {content}
-        </ThemeSubmitDialog>
-    ) : (
-        <ThemeSubmitSheet isOpen={isOpen} onClose={handleClose} buttons={buttons}>
-            {content}
-        </ThemeSubmitSheet>
+            <div className={b('panel')}>
+                <header className={b('header')}>
+                    <Text as="h2" id={titleId} variant="header-1">
+                        {t('submit_theme_title')}
+                    </Text>
+                    <Button
+                        view="flat-secondary"
+                        size={controlSize}
+                        onClick={handleClose}
+                        aria-label={t('submit_theme_close')}
+                    >
+                        <Icon data={Xmark} size={16} />
+                    </Button>
+                </header>
+                <div
+                    className={b('body')}
+                    key={state.status === 'success' ? 'success' : 'submission'}
+                >
+                    <div className={b('preview')}>
+                        <div className={b('preview-toolbar')}>
+                            <Text variant="subheader-1">{t('submit_theme_preview')}</Text>
+                            <div className={b('preview-controls')}>
+                                <SegmentedRadioGroup
+                                    size={controlSize}
+                                    value={previewLanguage}
+                                    onUpdate={setPreviewLanguage}
+                                    aria-label={t('submit_theme_preview_language')}
+                                    options={[
+                                        {value: 'en', content: 'EN'},
+                                        {value: 'ru', content: 'RU'},
+                                    ]}
+                                />
+                                <SegmentedRadioGroup
+                                    size={controlSize}
+                                    value={previewMode}
+                                    onUpdate={(mode) =>
+                                        setPreviewMode(mode === 'light' ? 'light' : 'dark')
+                                    }
+                                    aria-label={t('submit_theme_preview_mode')}
+                                >
+                                    <SegmentedRadioGroup.Option
+                                        value="dark"
+                                        aria-label={t('gallery_card_show_dark_aria')}
+                                    >
+                                        <Icon data={Moon} size={16} />
+                                    </SegmentedRadioGroup.Option>
+                                    <SegmentedRadioGroup.Option
+                                        value="light"
+                                        aria-label={t('gallery_card_show_light_aria')}
+                                    >
+                                        <Icon data={Sun} size={16} />
+                                    </SegmentedRadioGroup.Option>
+                                </SegmentedRadioGroup>
+                            </div>
+                        </div>
+                        <div className={b('preview-card')}>
+                            <div className={b('preview-image')}>
+                                {isOpen && (
+                                    <ThemeCardLivePreview
+                                        mode={previewMode}
+                                        language={previewLanguage}
+                                    />
+                                )}
+                            </div>
+                            <div className={b('preview-details')} lang={previewLanguage}>
+                                <Text variant="header-1" as="div">
+                                    {draft.name.trim() ||
+                                        t('submit_theme_name_label', {lng: previewLanguage})}
+                                </Text>
+                                <Text color="secondary" as="div">
+                                    {author}
+                                </Text>
+                                {description && (
+                                    <Text
+                                        color="secondary"
+                                        as="p"
+                                        className={b('preview-description')}
+                                    >
+                                        {description}
+                                    </Text>
+                                )}
+                                {draft.tags.length > 0 && (
+                                    <Flex gap={2} wrap>
+                                        {draft.tags.map((tag) => (
+                                            <Label key={tag} size="s">
+                                                {t(TAG_LABEL_KEYS[tag], {lng: previewLanguage})}
+                                            </Label>
+                                        ))}
+                                    </Flex>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div className={b('main')}>{main}</div>
+                </div>
+                {(showAccount || buttons) && (
+                    <footer className={b('footer', {account: Boolean(showAccount)})}>
+                        {showAccount && (
+                            <div className={b('account')}>
+                                <Icon data={githubIcon} size={16} />
+                                <Text>{author}</Text>
+                                <Button view="flat-secondary" size={controlSize} onClick={signOut}>
+                                    {t('submit_theme_sign_out_btn')}
+                                </Button>
+                            </div>
+                        )}
+                        <div className={b('actions')}>{buttons}</div>
+                    </footer>
+                )}
+            </div>
+        </Modal>
     );
 };

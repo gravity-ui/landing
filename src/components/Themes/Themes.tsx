@@ -533,7 +533,11 @@ const ThemesContent = () => {
                 </ThemeSubmitContext.Provider>
             </div>
 
-            <ThemeSubmit isOpen={isSubmitDialogVisible} onClose={closeSubmitDialog} />
+            <ThemeSubmit
+                isOpen={isSubmitDialogVisible}
+                onClose={closeSubmitDialog}
+                onCreateTheme={handleStartFromScratch}
+            />
             <ThemeExport isOpen={isExportDialogVisible} onClose={closeExportDialog} />
             <ThemeImport
                 isOpen={isImportDialogVisible}
