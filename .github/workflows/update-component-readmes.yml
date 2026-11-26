@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      - run: npm ci --onnxruntime-node-install-cuda=skip
       - run: npm run generate-component-catalog
         env:
           GITHUB_TOKEN: ${{ github.token }}
