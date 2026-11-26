@@ -1,268 +1,123 @@
-<!--GITHUB_BLOCK-->
-
-# TextArea
-
-<!--/GITHUB_BLOCK-->
-
-```tsx
-import {TextArea} from '@gravity-ui/uikit';
-```
-
 `TextArea` 允许用户在 UI 中输入文本。
 
 ## 外观
 
-`TextArea`的外观由 `view` 和 `pin` 属性控制。
+`TextArea` 的外观由 `view` 和 `pin` 属性控制。
 
-### 查看
+### View
 
-`normal` -是的主视图 `TextArea` （默认使用）。
+`normal` - `TextArea` 的主要视图（默认使用）。
 
-<!--LANDING_BLOCK
-<ExampleBlock code={`<TextArea placeholder="Placeholder" />`}>
-    <UIKit.TextArea placeholder="Placeholder" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-`clear` -可以在使用自定义包装器时使用。 `TextArea`
+`clear` - 当使用自定义包装器时，可以为 `TextArea` 使用此选项。
 
-<!--LANDING_BLOCK
-<ExampleBlock code={`<TextArea view="clear" placeholder="Placeholder" />`}>
-    <UIKit.TextArea view="clear" placeholder="Placeholder" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-```tsx
-<TextArea view="normal" />
-<TextArea view="clear" />
-```
+### Pin
 
-<!--/GITHUB_BLOCK-->
+允许您控制 `TextArea` 边框的右边缘和左边缘的外观。
 
-### 别针
+GRAVITY_TRANSLATION_BLOCK_4_END
 
-允许您控制边框左右边缘 `TextArea`的外观。
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<TextArea placeholder="Placeholder" pin="round-brick" />
-<TextArea placeholder="Placeholder" pin="brick-brick" />
-<TextArea placeholder="Placeholder" pin="brick-round" />
-`}
->
-    <UIKit.TextArea placeholder="Placeholder" pin="round-brick" />
-    <UIKit.TextArea placeholder="Placeholder" pin="brick-brick" />
-    <UIKit.TextArea placeholder="Placeholder" pin="brick-round" />
-</ExampleBlock>
-LANDING_BLOCK-->
+## 状态
 
-<!--GITHUB_BLOCK-->
+### Disabled
 
-```tsx
-<TextArea pin="round-brick" />
-<TextArea pin="brick-brick" />
-<TextArea pin="brick-round" />
-```
+`TextArea` 的状态，您不希望用户能够与组件进行交互。
 
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_6_END
 
-## 国家
+GRAVITY_TRANSLATION_BLOCK_7_END
 
-### 已禁用
+### Error
 
-您不希望用户能够与组件交互的状态。 `TextArea`
+`TextArea` 的状态，您想显示用户输入不正确。要更改 `TextArea` 的外观，请使用 `validationState` 属性并将其值设置为 "invalid"。
+可以通过 `errorMessage` 属性添加可选的消息文本。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<TextArea placeholder="Placeholder" disabled={true} />
-`}
->
-    <UIKit.TextArea placeholder="Placeholder" disabled={true} />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_8_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_9_END
 
-```tsx
-<TextArea disabled />
-```
+## Size
 
-<!--/GITHUB_BLOCK-->
+`s` – 当标准控件太大时使用（表格、小卡片）。
 
-### 错误
+`m` – 基本尺寸，在大多数组件中使用。
 
-您要显示错误用户输入的 `TextArea` 位置的状态。要更改的外观 `TextArea` ，请使用值为 “无效” 的 `validationState` 属性。
-可以通过该 `errorMessage` 属性添加可选的消息文本。
+`l` – 在页面标题、模态窗口或弹出窗口的基本控件中使用。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<TextArea placeholder="Placeholder" errorMessage="Error message" validationState="invalid" />
-<TextArea view="clear" placeholder="Placeholder" errorMessage="Error message" validationState="invalid" />
-`}
->
-    <UIKit.TextArea placeholder="Placeholder" errorMessage="Error message" validationState="invalid" />
-    <UIKit.TextArea view="clear" placeholder="Placeholder" errorMessage="Error message" validationState="invalid" />
-</ExampleBlock>
-LANDING_BLOCK-->
+`xl` – 在促销和登陆页面中使用。
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_10_END
 
-```tsx
-<TextArea errorMessage="Error message" validationState="invalid" />
-```
-
-<!--/GITHUB_BLOCK-->
-
-## 大小
-
-`s`— 当标准控件过大（桌子、小牌）时使用。
-
-`m`— 基本尺寸，用于大多数组件。
-
-`l`— 用于页面标题、模态窗口或弹出窗口中的基本控件。
-
-`xl`— 用于促销和登陆页面。
-
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<TextArea placeholder="Placeholder" size="s" />
-<TextArea placeholder="Placeholder" size="m" />
-<TextArea placeholder="Placeholder" size="l" />
-<TextArea placeholder="Placeholder" size="xl" />
-`}
->
-    <UIKit.TextArea placeholder="Placeholder" size="s" />
-    <UIKit.TextArea placeholder="Placeholder" size="m" />
-    <UIKit.TextArea placeholder="Placeholder" size="l" />
-    <UIKit.TextArea placeholder="Placeholder" size="xl" />
-</ExampleBlock>
-LANDING_BLOCK-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<TextArea size="s" />
-<TextArea size="m" />
-<TextArea size="l" />
-<TextArea size="xl" />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_11_END
 
 ## 行管理
 
-的行 `TextArea` 数由 `rows` 、 `minRows` 和 `maxRows` 属性控制。该 `rows` 属性禁用自动高度计算。
-要设置所需的高度 `TextArea` ，请使用 `className` 或 `style` 属性，并将该 `rows` 属性设置为 1。
+`TextArea` 的行数由 `rows`、`minRows` 和 `maxRows` 属性控制。`rows` 属性禁用自动高度计算。
+要设置 `TextArea` 的所需高度，请使用 `className` 或 `style` 属性，并将 `rows` 属性设置为 1。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<TextArea placeholder="Placeholder" size="s" />
-`}
->
-    <div>
-        rows = 2
-        <UIKit.TextArea placeholder="Placeholder" rows={2} />
-    </div>
-    <div>
-        minRows = 2
-        <UIKit.TextArea placeholder="Placeholder" minRows={2} />
-    </div>
-    <div>
-        maxRows = 2
-        <UIKit.TextArea placeholder="Placeholder" maxRows={2} />
-    </div>
-    <div>
-        height = 200px
-        <UIKit.TextArea placeholder="Placeholder" rows={1} style={{height: 200px}}/>
-    </div>
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_12_END
 
 ## 可调整大小的 TextArea
 
-你可以通过为属性提供 `resize` 样式来 `controlProps` 获得可调整大小的行为。如果您允许调整文本区域的高度，请务必指定该 `rows` 属性，否则调整大小将与自动高度计算相冲突。
+通过为 `controlProps` 属性提供 `resize` 样式，可以获得可调整大小的行为。如果您允许文本区域高度可调整，请务必指定 `rows` 属性，否则调整大小将与自动高度计算冲突。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<TextArea
-    rows={4}
-    placeholder="Placeholder"
-    style={{width: "auto", maxWidth: "100%"}}
-    controlProps={{style: {resize: "both"}}}
-/>
-`}
->
-    <UIKit.TextArea
-        rows={4}
-        placeholder="Placeholder"
-        style={{width: "auto", maxWidth: "100%"}}
-        controlProps={{style: {resize: "both"}}}
-    />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_13_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_14_END
 
-```tsx
-<TextArea rows={4} controlProps={{style: {resize: 'both'}}} />
-```
+## Properties
 
-<!--/GITHUB_BLOCK-->
-
-## 属性
-
-| 姓名            | 描述                                                     |                         类型                          |      默认       |
-| :-------------- | :------------------------------------------------------- | :---------------------------------------------------: | :-------------: |
-| autoComplete    | 控件的 `autocomplete` 属性                               |                  `boolean` `string`                   |                 |
-| autoFocus       | 控件的 `autofocus` 属性                                  |                       `boolean`                       |                 |
-| className       | 控件的包装器类名                                         |                       `string`                        |                 |
-| controlProps    | 控件的 html 属性                                         | `react.textareAreahtmlAtributes<HTMLTextAreaElement>` |                 |
-| controlRef      | 向控件提供了 React ref                                   |           `React.Ref<HTMLTextAreaElement>`            |                 |
-| defaultValue    | 控件的默认值。在组件不受控制时使用                       |                       `string`                        |                 |
-| 残疾的          | 表示用户无法与控件进行交互                               |                       `boolean`                       |     `false`     |
-| errorMessage    | 错误文本                                                 |                       `string`                        |                 |
-| hasClear        | 显示用于清除控件值的图标                                 |                       `boolean`                       |     `false`     |
-| id              | 控件的 `id` 属性                                         |                       `string`                        |                 |
-| maxRows         | 控件的最大可见文本行数。如果 `rows` 已指定，则忽略       |                       `number`                        |                 |
-| minRows         | 控件的最小可见文本行数。如果 `rows` 已指定，则忽略       |                       `number`                        |                 |
-| 名称            | 控件的 `name` 属性。如果未指定，它将自动生成。           |                       `string`                        |                 |
-| 便条            | 显示在控件右下角的可选元素，与错误容器共享空间           |                   `React.ReactNode`                   |                 |
-| onBlur          | 当控件失去对焦时触发。提供焦点事件作为回调的参数         |                      `function`                       |                 |
-| onChange        | 当用户更改输入值时触发。提供变更事件作为回调的参数       |                      `function`                       |                 |
-| onFocus         | 当控件获得焦点时触发。提供焦点事件作为回调的参数         |                      `function`                       |                 |
-| onKeyDown       | 按下按键时触发。提供键盘事件作为回调的参数               |                      `function`                       |                 |
-| onKeyUp         | 释放密钥时触发。提供键盘事件作为回调的参数               |                      `function`                       |                 |
-| onUpdate        | 当用户更改输入值时触发。提供新值作为回调的参数           |                      `function`                       |                 |
-| 大头针          | 控件的边框视图                                           |                       `string`                        | `"round-round"` |
-| 占位符          | 未设置值时显示在控件中的文本                             |                       `string`                        |                 |
-| qa              | 测试 ID 属性 (`data-qa`)                                 |                       `string`                        |                 |
-| readOnly        | 表示用户无法更改控件的值                                 |                       `boolean`                       |     `false`     |
-| 行              | 控件的可见文本行数。如果未指定，则将根据内容自动计算夜晚 |                       `number`                        |                 |
-| 尺寸            | 控件的大小                                               |                     `"s"` `"xl"`                      |      `"m"`      |
-| tabIndex        | 控件的 `tabindex` 属性                                   |                       `string`                        |                 |
-| 类型            | 控件的类型                                               |                       `string`                        |                 |
-| validationState | 验证状态                                                 |                      `"invalid"`                      |                 |
-| 价值            | 控件的值                                                 |                       `string`                        |                 |
-| 观点            | 控件的视图                                               |                 `"normal"` `"clear"`                  |   `"normal"`    |
+| 名称            | 描述                                                                                                                       |                        类型                         |     默认值     |
+| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------: | :-------------: |
+| autoComplete    | 控件的 `autocomplete` 属性                                                                                            |                 `boolean` `string`                  |                 |
+| autoFocus       | 控件的 `autofocus` 属性                                                                                               |                      `boolean`                      |                 |
+| className       | 控件的包装器类名                                                                                                  |                      `string`                       |                 |
+| controlProps    | 控件的 html 属性                                                                                                     | `React.TextareaHTMLAttributes<HTMLTextAreaElement>` |                 |
+| controlRef      | 提供给控件的 React ref                                                                                                 |          `React.Ref<HTMLTextAreaElement>`           |                 |
+| defaultValue    | 控件的默认值。在组件未受控时使用                                                            |                      `string`                       |                 |
+| disabled        | 指示用户无法与控件交互                                                                          |                      `boolean`                      |     `false`     |
+| errorMessage    | 错误文本                                                                                                                        |                      `string`                       |                 |
+| hasClear        | 显示用于清除控件值的图标                                                                                   |                      `boolean`                      |     `false`     |
+| id              | 控件的 `id` 属性                                                                                                      |                      `string`                       |                 |
+| maxRows         | 控件可见的文本行数上限。如果指定了 `rows`，则忽略                                          |                      `number`                       |                 |
+| minRows         | 控件可见的文本行数下限。如果指定了 `rows`，则忽略                                          |                      `number`                       |                 |
+| name            | 控件的 `name` 属性。如果未指定，将自动生成。                                                         |                      `string`                       |                 |
+| note            | 显示在控件右下角的可选元素，并与错误容器共享空间                                            |                  `React.ReactNode`                  |                 |
+| onBlur          | 控件失去焦点时触发。将焦点事件作为回调参数提供                                                  |                     `function`                      |                 |
+| onChange        | 用户更改输入值时触发。将更改事件作为回调参数提供                                |                     `function`                      |                 |
+| onFocus         | 控件获得焦点时触发。将焦点事件作为回调参数提供                                                  |                     `function`                      |                 |
+| onKeyDown       | 按下按键时触发。将键盘事件作为回调参数提供                                                     |                     `function`                      |                 |
+| onKeyUp         | 释放按键时触发。将键盘事件作为回调参数提供                                                    |                     `function`                      |                 |
+| onUpdate        | 用户更改输入值时触发。将新值作为回调参数提供                                  |                     `function`                      |                 |
+| pin             | 控件的边框视图                                                                                                         |                      `string`                       | `"round-round"` |
+| placeholder     | 在未设置值时显示在控件中的文本                                                                             |                      `string`                       |                 |
+| qa              | 测试 id 属性 (`data-qa`)                                                                                                     |                      `string`                       |                 |
+| readOnly        | 指示用户无法更改控件的值                                                                             |                      `boolean`                      |     `false`     |
+| rows            | 控件可见的文本行数。如果未指定，高度将根据内容自动计算                                |                      `number`                       |                 |
+| size            | 控件的大小                                                                                                                |              `"s"` `"m"` `"l"` `"xl"`               |      `"m"`      |
+| tabIndex        | 控件的 `tabindex` 属性                                                                                                |                      `string`                       |                 |
+| type            | 控件的类型                                                                                                                |                      `string`                       |                 |
+| validationState | 验证状态                                                                                                                  |                     `"invalid"`                     |                 |
+| value           | 控件的值                                                                                                               |                      `string`                       |                 |
+| view            | 控件的视图                                                                                                                |                `"normal"` `"clear"`                 |   `"normal"`    |
 
 ## CSS API
 
-| 姓名                                | 描述                                 |
-| :---------------------------------- | :----------------------------------- |
-| `--g-text-area-text-color`          | 文字颜色                             |
-| `--g-text-area-placeholder-color`   | 占位符颜色                           |
-| `--g-text-area-background-color`    | 背景颜色                             |
-| `--g-text-area-border-radius`       | 边框半径                             |
-| `--g-text-area-border-width`        | 边框宽度                             |
-| `--g-text-area-border-color`        | 边框颜色                             |
-| `--g-text-area-border-color-hover`  | 悬停时的边框颜色                     |
-| `--g-text-area-border-color-active` | 边框颜色（如果处于活动状态）         |
-| `--g-text-area-focus-outline-color` | 聚焦时的轮廓颜色（默认情况下不显示） |
+| 名称                                | 描述                                         |
+| :---------------------------------- | :-------------------------------------------------- |
+| `--g-text-area-text-color`          | 文本颜色                                          |
+| `--g-text-area-placeholder-color`   | 占位符颜色                                   |
+| `--g-text-area-background-color`    | 背景颜色                                    |
+| `--g-text-area-border-radius`       | 边框圆角                                       |
+| `--g-text-area-border-width`        | 边框宽度                                        |
+| `--g-text-area-border-color`        | 边框颜色                                        |
+| `--g-text-area-border-color-hover`  | 悬停时的边框颜色                             |
+| `--g-text-area-border-color-active` | 活动时的边框颜色                              |
+| `--g-text-area-focus-outline-color` | 聚焦时的轮廓颜色（默认不显示） |
