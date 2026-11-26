@@ -41,3 +41,15 @@ a build.
 Add its package and GitHub repository to `COMPONENT_LIBRARIES` in
 `scripts/component-catalog/index.mjs`. The repository must tag releases as `v<package version>` and
 keep component documentation at `src/components/<Component>/README.md`.
+
+## Updating translations
+
+The **Update component READMEs** workflow runs daily at 06:00 UTC and supports manual dispatch.
+It takes the English README from each installed package tag, including the legacy UIKit routes,
+and stores the source snapshot under `src/content/local-docs/components/<library>/<component>/`.
+New and changed sources are translated into the site's seven additional locales. If a source
+hasn't changed, only missing translations are generated. Russian still uses the package README.
+
+The workflow opens a draft PR and runs the same GPT Translate action as the library README
+workflow. It marks the draft ready after the requested translations are present. A failed run
+closes the draft so the next run can retry against the default branch.
