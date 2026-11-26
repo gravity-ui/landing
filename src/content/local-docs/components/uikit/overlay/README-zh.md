@@ -1,15 +1,9 @@
-<!--GITHUB_BLOCK-->
-
-# 叠加
-
-<!--/GITHUB_BLOCK-->
+`Overlay` 组件会在父元素上渲染一个覆盖层，父元素需要设置 `position: relative`。
+例如，它可用于在加载数据时保持所需的布局。
 
 ```tsx
 import {Overlay} from '@gravity-ui/uikit';
 ```
-
-`Overlay` 组件使用相对位置在父元素上方呈现叠加层，即父元素必须 `position` 设置为 `relative`。
-例如，它可用于在加载数据时保留所需的布局。
 
 ```jsx
 import {Box, Overlay, Loader} from '@gravity-ui/uikit';
@@ -26,22 +20,15 @@ import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 ### 背景
 
-你可以使用 `base` 或 `float` 背景颜色。
+您可以使用 `base` 或 `float` 背景颜色。
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Overlay background="base">
-<Overlay background="float">
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ## 属性
 
-| 姓名      | 描述                         |        类型        |  默认   |
-| :-------- | :--------------------------- | :----------------: | :-----: |
-| className | 根元素的 CSS 类名            |      `string`      |         |
-| 可见的    | 叠加可见性状态               |     `boolean`      | `false` |
-| 背景      | 叠加背景样式                 | `"base"` `"float"` | `base`  |
-| 儿童      | 内容（通常是组 `Loader` 件） | `React.ReactNode`  |         |
+| 名称       | 描述                             |        类型        | 默认值 |
+| :--------- | :------------------------------- | :----------------: | :----: |
+| className  | 根元素的 CSS 类名                |      `string`      |        |
+| visible    | 覆盖层的可见状态                 |     `boolean`      | `false` |
+| background | 覆盖层的背景样式                 | `"base"` `"float"` | `base`  |
+| children   | 内容（通常是 `Loader` 组件）     | `React.ReactNode`  |        |

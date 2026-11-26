@@ -1,21 +1,15 @@
-<!--GITHUB_BLOCK-->
-
-# Superposición
-
-<!--/GITHUB_BLOCK-->
+El componente `Overlay` renderiza una superposición sobre el elemento padre con posición relativa, es decir, el elemento padre debe tener `position` establecido en `relative`.
+Por ejemplo, se puede utilizar para preservar el diseño deseado mientras se cargan datos.
 
 ```tsx
 import {Overlay} from '@gravity-ui/uikit';
 ```
 
-El `Overlay` componente representa una superposición sobre el elemento principal con la posición relativa, es decir, el elemento principal debe haberse `position` establecido en. `relative`
-Por ejemplo, se puede usar para conservar el diseño deseado mientras se cargan los datos.
-
 ```jsx
 import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 <Box position="relative">
-  <div>Some content to hide under overlay</div>
+  <div>Algún contenido para ocultar bajo la superposición</div>
   <Overlay visible={loading}>
     <Loader />
   </Overlay>
@@ -24,24 +18,17 @@ import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 ## Apariencia
 
-### Antecedentes
+### Fondo
 
-Puede utilizar nuestros `base` colores `float` de fondo.
+Puedes usar colores de fondo `base` o `float`.
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Overlay background="base">
-<Overlay background="float">
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
 ## Propiedades
 
-| Nombre    | Descripción                                        |        Tipo        | Predeterminado |
-| :-------- | :------------------------------------------------- | :----------------: | :------------: |
-| className | Nombre de clase CSS del elemento raíz              |      `string`      |                |
-| visible   | Estado de visibilidad superpuesta                  |     `boolean`      |    `false`     |
-| fondo     | Estilo de fondo superpuesto                        | `"base"` `"float"` |     `base`     |
-| niños     | Contenido (por lo general, un `Loader` componente) | `React.ReactNode`  |                |
+| Nombre       | Descripción                             |        Tipo        | Por defecto |
+| :----------- | :-------------------------------------- | :----------------: | :---------: |
+| className  | Nombre de la clase CSS del elemento raíz      |      `string`      |             |
+| visible    | Estado de visibilidad de la superposición                |     `boolean`      | `false` |
+| background | Estilo de fondo de la superposición                | `"base"` `"float"` | `base`  |
+| children   | Contenido (normalmente, un componente `Loader`) | `React.ReactNode`  |             |
