@@ -1,0 +1,807 @@
+<!--GITHUB_BLOCK-->
+
+# ActionsPanel
+
+<!--/GITHUB_BLOCK-->
+
+Utilisez un `ActionsPanel` pour afficher plusieurs boutons en ligne.
+Lorsqu'il n'y a pas assez d'espace, les boutons qui ne rentrent pas seront ajoutés à un menu déroulant.
+
+## Exemple
+
+<!--SANDBOX
+import type {ActionsPanelProps} from '@gravity-ui/uikit';
+import {ActionsPanel} from '@gravity-ui/uikit';
+
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'action_1',
+        button: {
+            props: {
+                children: 'Action 1',
+                onClick: () => console.log('click button action 1'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 1'),
+                text: 'Action 1',
+            },
+        },
+    },
+    {
+        id: 'action_2',
+        button: {
+            props: {
+                children: 'Action 2',
+                onClick: () => console.log('click button action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 2'),
+                text: 'Action 2',
+            },
+        },
+    },
+];
+
+export default function () {
+    return <ActionsPanel actions={actions} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'action_1',
+        button: {
+            props: {
+                children: 'Action 1',
+                onClick: () => console.log('click button action 1'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 1'),
+                text: 'Action 1',
+            },
+        },
+    },
+    {
+        id: 'action_2',
+        button: {
+            props: {
+                children: 'Action 2',
+                onClick: () => console.log('click button action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 2'),
+                text: 'Action 2',
+            },
+        },
+    },
+];
+
+<ActionsPanel {...args} actions={actions} />
+```
+
+<!-- Storybook example -->
+
+<ActionsPanelExample />
+
+<!--/GITHUB_BLOCK-->
+
+## Icônes d'action
+
+Utilisez les propriétés `Button` ou `DropdownMenu` pour définir des icônes.
+
+<!--SANDBOX
+import {Files, PencilToSquare, TrashBin} from '@gravity-ui/icons';
+import type {ActionsPanelProps} from '@gravity-ui/uikit';
+import {ActionsPanel, Flex, Icon} from '@gravity-ui/uikit';
+
+```javascript
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'edit',
+        button: {
+            props: {
+                children: [<Icon key="icon" data={PencilToSquare} />, 'Modifier'],
+                onClick: () => console.log('Modifier'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('Modifier'),
+                text: (
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={PencilToSquare} />
+                        Modifier
+                    </Flex>
+                ),
+            },
+        },
+    },
+    {
+        id: 'copy',
+        button: {
+            props: {
+                children: [<Icon key="icon" data={Files} />, 'Copier'],
+                onClick: () => console.log('Copier'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('Copier'),
+                text: (
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={Files} />
+                        Copier
+                    </Flex>
+                ),
+            },
+        },
+    },
+    {
+        id: 'delete',
+        collapsed: true,
+        button: {
+            props: {
+                children: [<Icon key="icon" data={TrashBin} />, 'Supprimer'],
+                onClick: () => console.log('Supprimer'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('Supprimer'),
+                text: (
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={TrashBin} />
+                        Supprimer
+                    </Flex>
+                ),
+            },
+        },
+    },
+];
+
+export default function () {
+    return <ActionsPanel actions={actions} />;
+}
+```
+
+<!--SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'edit',
+        button: {
+            props: {
+                children: [<Icon key="icon" data={PencilToSquare} />, 'Modifier'],
+                onClick: () => console.log('Edit'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('Edit'),
+                text: (
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={PencilToSquare} />
+                        Modifier
+                    </Flex>
+                ),
+            },
+        },
+    },
+    {
+        id: 'copy',
+        button: {
+            props: {
+                children: [<Icon key="icon" data={Files} />, 'Copier'],
+                onClick: () => console.log('Copy'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('Copy'),
+                text: (
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={Files} />
+                        Copier
+                    </Flex>
+                ),
+            },
+        },
+    },
+    {
+        id: 'delete',
+        collapsed: true,
+        button: {
+            props: {
+                children: [<Icon key="icon" data={TrashBin} />, 'Supprimer'],
+                onClick: () => console.log('Delete'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('Delete'),
+                text: (
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={TrashBin} />
+                        Supprimer
+                    </Flex>
+                ),
+            },
+        },
+    },
+];
+
+<ActionsPanel actions={actions} />
+```
+
+<!-- Storybook example -->
+
+<ActionsPanelWithIcons />
+
+<!--/GITHUB_BLOCK-->
+
+## Note
+
+Utilisez la propriété `renderNote` pour afficher une note.
+
+<!--SANDBOX
+import type {ActionsPanelProps} from '@gravity-ui/uikit';
+import {ActionsPanel} from '@gravity-ui/uikit';
+```
+
+```jsx
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'action_1',
+        button: {
+            props: {
+                children: 'Action 1',
+                onClick: () => console.log('click button action 1'),
+                view: 'normal-contrast',
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 1'),
+                text: 'Action 1',
+            },
+        },
+    },
+    {
+        id: 'action_2',
+        button: {
+            props: {
+                children: 'Action 2',
+                onClick: () => console.log('click button action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 2'),
+                text: 'Action 2',
+            },
+        },
+    },
+    {
+        id: 'action_3',
+        button: {
+            props: {
+                children: 'Action 3',
+                onClick: () => console.log('click button action 3'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 3'),
+                text: 'Action 3',
+            },
+        },
+    },
+    {
+        id: 'action_4',
+        button: {
+            props: {
+                children: 'Action 4',
+                onClick: () => console.log('click button action 4'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 4'),
+                text: 'Action 4',
+            },
+        },
+    },
+];
+
+export default function () {
+    return <ActionsPanel actions={actions} renderNote={() => '10 items'} maxRowActions={2} />;
+}
+```
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'action_1',
+        button: {
+            props: {
+                children: 'Action 1',
+                onClick: () => console.log('click button action 1'),
+                view: 'normal-contrast',
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 1'),
+                text: 'Action 1',
+            },
+        },
+    },
+    {
+        id: 'action_2',
+        button: {
+            props: {
+                children: 'Action 2',
+                onClick: () => console.log('click button action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 2'),
+                text: 'Action 2',
+            },
+        },
+    },
+    {
+        id: 'action_3',
+        button: {
+            props: {
+                children: 'Action 3',
+                onClick: () => console.log('click button action 3'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 3'),
+                text: 'Action 3',
+            },
+        },
+    },
+    {
+        id: 'action_4',
+        button: {
+            props: {
+                children: 'Action 4',
+                onClick: () => console.log('click button action 4'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 4'),
+                text: 'Action 4',
+            },
+        },
+    },
+];
+
+<ActionsPanel
+  actions={actions}
+  onClose={() => console.log('click close handle')}
+  renderNote={() => '10 items'}
+  maxRowActions={2}
+/>
+```
+
+<!-- Storybook example -->
+
+<ActionsPanelWithNote />
+
+<!--/GITHUB_BLOCK-->
+
+## Groupes dans le menu déroulant
+
+Pour regrouper des actions dans le menu déroulant, vous pouvez utiliser la propriété `groups` de l'objet `dropdown`. Chaque groupe peut avoir un titre et une liste d'éléments.
+
+```jsx
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'action_1',
+        button: {
+            props: {
+                children: 'Action 1',
+                onClick: () => console.log('click button action 1'),
+            },
+        },
+        dropdown: {
+            groups: [
+                {
+                    title: 'Groupe 1',
+                    items: [
+                        {
+                            action: () => console.log('click dropdown action 1.1'),
+                            text: 'Action 1.1',
+                        },
+                        {
+                            action: () => console.log('click dropdown action 1.2'),
+                            text: 'Action 1.2',
+                        },
+                    ],
+                },
+                {
+                    title: 'Groupe 2',
+                    items: [
+                        {
+                            action: () => console.log('click dropdown action 1.3'),
+                            text: 'Action 1.3',
+                        },
+                    ],
+                },
+            ],
+        },
+    },
+    {
+        id: 'action_2',
+        button: {
+            props: {
+                children: 'Action 2',
+                onClick: () => console.log('click button action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 2'),
+                text: 'Action 2',
+            },
+        },
+    },
+];
+
+export default function () {
+    return <ActionsPanel actions={actions} />;
+}
+```
+
+<!--SANDBOX
+import type {ActionsPanelProps} from '@gravity-ui/uikit';
+import {ActionsPanel} from '@gravity-ui/uikit';
+
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'action_1',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Action 1',
+                onClick: () => console.log('click button action 1'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 1'),
+                text: 'Action 1',
+            },
+            group: '1',
+        },
+    },
+    {
+        id: 'action_2',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Action 2',
+                onClick: () => console.log('click button action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 2'),
+                text: 'Action 2',
+            },
+            group: '2',
+        },
+    },
+    {
+        id: 'action_3',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Action 3',
+                onClick: () => console.log('click button action 3'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 3'),
+                text: 'Action 3',
+            },
+            group: '1',
+        },
+    },
+];
+
+export default function () {
+    return <ActionsPanel actions={actions} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'action_1',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Action 1',
+                onClick: () => console.log('click button action 1'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 1'),
+                text: 'Action 1',
+            },
+            group: '1',
+        },
+    },
+    {
+        id: 'action_2',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Action 2',
+                onClick: () => console.log('click button action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 2'),
+                text: 'Action 2',
+            },
+            group: '2',
+        },
+    },
+    {
+        id: 'action_3',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Action 3',
+                onClick: () => console.log('click button action 3'),
+            },
+        },
+        dropdown: {
+            item: {
+                action: () => console.log('click dropdown action 3'),
+                text: 'Action 3',
+            },
+            group: '1',
+        },
+    },
+];
+
+<ActionsPanel actions={actions} />
+```
+
+<!-- Storybook example -->
+
+<ActionsPanelGroups />
+
+<!--/GITHUB_BLOCK-->
+
+## Sous-menu d'action et menu déroulant imbriqué
+
+Voir l'exemple `actions` ci-dessous et la documentation du composant `DropdownMenu`.
+
+<!--SANDBOX
+import {ChevronDown} from '@gravity-ui/icons';
+import {ActionsPanel, Icon} from '@gravity-ui/uikit';
+import type {ActionsPanelProps} from '@gravity-ui/uikit';
+
+```javascript
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'button-with-sub-menu',
+        button: {
+            props: {
+                children: ['Sous-menu', <Icon key="icon" data={ChevronDown} />],
+                view: 'outlined-contrast',
+                onClick: () => console.log('clic action bouton 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                text: 'Sous-menu',
+                items: [
+                    {
+                        action: () => console.log('Modifier'),
+                        text: 'Modifier',
+                    },
+                    {
+                        action: () => console.log('Supprimer'),
+                        text: 'Supprimer',
+                        theme: 'danger',
+                    },
+                ],
+            },
+        },
+    },
+    {
+        id: 'nested-menu',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Imbriqué',
+                onClick: () => console.log('clic bouton imbriqué'),
+            },
+        },
+        dropdown: {
+            item: {
+                text: 'Autre',
+                items: [
+                    {
+                        text: 'Sélectionner',
+                        items: [
+                            {
+                                action: () => console.log('Sélectionner un'),
+                                text: 'Un',
+                            },
+                            {
+                                action: () => console.log('Sélectionner tout'),
+                                text: 'Tout',
+                            },
+                        ],
+                    },
+                    {
+                        action: () => console.log('Copier'),
+                        text: 'Copier',
+                    },
+                    {
+                        text: 'Déplacer vers',
+                        items: [
+                            {
+                                action: () => console.log('Déplacer vers dossier 1'),
+                                text: 'Dossier 1',
+                            },
+                            {
+                                action: () => console.log('Déplacer vers dossier 2'),
+                                text: 'Dossier 2',
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    },
+];
+
+export default function () {
+    return <ActionsPanel actions={actions} />;
+}
+```
+<!-- SANDBOX -->
+
+<!-- GITHUB_BLOCK -->
+
+```jsx
+const actions: ActionsPanelProps['actions'] = [
+    {
+        id: 'button-with-sub-menu',
+        button: {
+            props: {
+                children: ['Sous-menu', <Icon key="icon" data={ChevronDown} />],
+                view: 'outlined-contrast',
+                onClick: () => console.log('cliquer sur le bouton action 2'),
+            },
+        },
+        dropdown: {
+            item: {
+                text: 'Sous-menu',
+                items: [
+                    {
+                        action: () => console.log('Modifier'),
+                        text: 'Modifier',
+                    },
+                    {
+                        action: () => console.log('Supprimer'),
+                        text: 'Supprimer',
+                        theme: 'danger',
+                    },
+                ],
+            },
+        },
+    },
+    {
+        id: 'nested-menu',
+        collapsed: true,
+        button: {
+            props: {
+                children: 'Imbriqué',
+                onClick: () => console.log('cliquer sur le bouton imbriqué'),
+            },
+        },
+        dropdown: {
+            item: {
+                text: 'Autre',
+                items: [
+                    {
+                        text: 'Sélectionner',
+                        items: [
+                            {
+                                action: () => console.log('Sélectionner un'),
+                                text: 'Un',
+                            },
+                            {
+                                action: () => console.log('Sélectionner tout'),
+                                text: 'Tout',
+                            },
+                        ],
+                    },
+                    {
+                        action: () => console.log('Copier'),
+                        text: 'Copier',
+                    },
+                    {
+                        text: 'Déplacer vers',
+                        items: [
+                            {
+                                action: () => console.log('Déplacer vers le dossier 1'),
+                                text: 'Dossier 1',
+                            },
+                            {
+                                action: () => console.log('Déplacer vers le dossier 2'),
+                                text: 'Dossier 2',
+                            },
+                        ],
+                    },
+                ],
+            },
+        },
+    },
+];
+
+<ActionsPanel actions={actions} />
+```
+
+<!-- Storybook example -->
+
+<ActionsPanelSubmenu />
+
+<!--/GITHUB_BLOCK-->
+
+## Propriétés
+
+| Nom           | Description                                               |          Type           | Défaut |
+| :------------ | :-------------------------------------------------------- | :---------------------: | :-----: |
+| actions       | Tableau d'actions                                         |  `ActionsPanelItem[]`   |         |
+| onClose       | Gestionnaire de clic optionnel pour le bouton de fermeture |      `() => void`       |         |
+| renderNote    | Render-prop optionnel pour afficher le contenu d'une note | `() => React.ReactNode` |         |
+| className     | Attribut `class` HTML optionnel                           |        `string`         |         |
+| noteClassName | Attribut `class` HTML optionnel                           |        `string`         |         |
+| maxRowActions | Nombre maximum d'actions par ligne                        |        `number`         |   `4`   |
+
+## ActionsPanelItem :
+
+| Nom      | Description                                   |                    Type                    | Défaut |
+| :-------- | :-------------------------------------------- | :----------------------------------------: | :-----: |
+| id        | Identifiant unique de l'action                |                  `string`                  |         |
+| dropdown  | Paramètres pour l'action de menu déroulant dans le menu de dépassement | `{item: DropdownMenuItem; group?: string}` |         |
+| button    | Paramètres pour l'action de bouton            |           `{props: ButtonProps}`           |         |
+| collapsed | Si vrai, alors l'élément est toujours dans le menu déroulant |                 `boolean`                  |         |
