@@ -1,233 +1,126 @@
-<!--GITHUB_BLOCK-->
-
-# Alert
-
-<!--/GITHUB_BLOCK-->
+`Alert` 组件用于显示醒目的消息，以引起用户对重要信息的注意。
 
 ```tsx
 import {Alert} from '@gravity-ui/uikit';
 ```
 
-### 主题 (`theme`)
+### 主题 (Theme)
 
-`normal`：主要主题（默认使用）。
+`normal`: 主要主题（默认使用）。
 
-`info`：用于任何常规信息。
+`info`: 用于任何类型的常规信息。
 
-`success`：用于积极信息。
+`success`: 用于积极信息。
 
-`warning`：用于需要注意的信息。
+`warning`: 用于需要注意的信息。
 
-`danger`：用于严重错误。
+`danger`: 用于严重错误。
 
-`utility`：用于有用的提示。
+`utility`: 用于有用的提示。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert theme="normal" title="Normal" message="Normal theme" />
-<Alert theme="info" title="Info" message="Info theme" />
-<Alert theme="success" title="Success" message="Success theme" />
-<Alert theme="warning" title="Warning" message="Warning theme" />
-<Alert theme="danger" title="Danger" message="Danger theme" />
-<Alert theme="utility" title="utility" message="Utility theme" />
-`}>
-    <UIKit.Alert theme="normal" title="Normal" message="Normal theme" />
-    <UIKit.Alert theme="info" title="Info" message="Info theme" />
-    <UIKit.Alert theme="success" title="Success" message="Success theme" />
-    <UIKit.Alert theme="warning" title="Warning" message="Warning theme" />
-    <UIKit.Alert theme="danger" title="Danger" message="Danger theme" />
-    <UIKit.Alert theme="utility" title="Utility" message="Utility theme" />
-</ExampleBlock>
-LANDING_BLOCK-->
+`clear`: 无样式，适用于在其他组件中使用（例如，作为 `Popover` 的 `content`）。
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-```tsx
-<Alert theme="normal" title="Normal" message="Normal theme"/>
-<Alert theme="info" title="Info" message="Info theme"/>
-<Alert theme="success" title="Success" message="Success theme"/>
-<Alert theme="warning" title="Warning" message="Warning theme"/>
-<Alert theme="danger" title="Danger" message="Danger theme"/>
-<Alert theme="utility" title="Utility" message="Utility theme"/>
-```
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-<!--/GITHUB_BLOCK-->
+### 视图 (View)
 
-### 视图 (`view`)
+`filled`: 用于调整警告框的背景颜色（默认使用）。
 
-`filled`：用于调整警告框的背景颜色（默认使用）。
+`outlined`: 用于调整警告框的边框颜色。
 
-`outlined`：用于调整警告框的边框颜色。
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert title="Filled" message="Filled view" view="filled" />
-<Alert title="Outlined" message="Outlined theme" view="outlined" />
-`}
->
-    <UIKit.Alert title="Filled" message="Filled view" view="filled" />
-    <UIKit.Alert title="Outlined" message="Outlined theme" view="outlined" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-<!--GITHUB_BLOCK-->
+### 布局 (Layout)
 
-```
-<Alert title="Filled" message="Filled view" view="filled" />
-<Alert title="Outlined" message="Outlined theme" view="outlined" />
-```
+`vertical`: 当存在带有按钮的 `actions` 属性时，用于将用户引导至内容。它允许按钮显示在文本下方（默认使用）。
 
-<!--/GITHUB_BLOCK-->
+`horizontal`: 当存在带有按钮的 `actions` 属性时，用于将用户引导至内容。它允许按钮显示在文本右侧。
 
-### 布局 (`layout`)
+GRAVITY_TRANSLATION_BLOCK_4_END
 
-`vertical`：如果有带按钮的 `actions` 属性，用于引导用户到内容。它允许在文本下方显示按钮（默认使用）。
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-`horizontal`：如果有带按钮的 `actions` 属性，用于引导用户到内容。它允许在文本右侧显示按钮。
+### 圆角 (Corners)
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>} />
-<Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>} />
-`}>
-    <UIKit.Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} />
-    <UIKit.Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} />
-</ExampleBlock>
-LANDING_BLOCK-->
+`rounded`: 启用警告框的圆角（默认使用）。
 
-<!--GITHUB_BLOCK-->
+`square`: 启用警告框的直角。
 
-```tsx
-<Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
-<Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
-```
+GRAVITY_TRANSLATION_BLOCK_6_END
 
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_7_END
 
-### 边角 (`corners`)
+## 警告框标题 (Alert title)
 
-`rounded`：启用警告框窗口的圆角（默认使用）。
+`title`: 警告框标题。它的优先级低于 `Alert.Title`。
 
-`square`：启用警告框窗口的方角。
+GRAVITY_TRANSLATION_BLOCK_8_END
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert title="Rounded" message="Rounded corners" corners="rounded"  />
-<Alert title="Square" message="Square corners" corners="square" />
-`}
->
-    <UIKit.Alert title="Rounded" message="Rounded corners" corners="rounded"  />
-    <UIKit.Alert title="Square" message="Square corners" corners="square" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_9_END
 
-<!--GITHUB_BLOCK-->
+## 警告框消息 (Alert message)
 
-```tsx
-<Alert title="Rounded" message="Rounded corners" corners="rounded"/>
-<Alert title="Square" message="Square corners" corners="square"/>
-```
-
-<!--/GITHUB_BLOCK-->
-
-## 警告框标题
-
-`title`：警告框标题。它的优先级低于 `Alert.Title`。
-
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert title={<Alert.Title className={'some-class'} text="some text"></Alert.Title>} />
-`}
->
-    <UIKit.Alert title={<UIKit.Alert.Title className={'some-class'} text="some text"></UIKit.Alert.Title>} />
-</ExampleBlock>
-LANDING_BLOCK-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<Alert title={<Alert.Title className={'some-class'} text="some text"></Alert.Title>} />
-```
-
-<!--/GITHUB_BLOCK-->
-
-## 警告框消息
-
-`message`：警告框消息。它应该足够有意义，能够完全解释警告框的内容。
+`message`: 警告框消息。它应该足够有意义，能够完整地解释警告框的内容。
 
 ## `onClose`
 
-`onClose`：当用户点击警告框的关闭按钮时调用的回调函数。当定义了此属性时，关闭按钮将可见。
+`onClose`: 当用户点击警告框的关闭按钮时调用的回调函数。当定义此属性时，关闭按钮将可见。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert onClose={() => alert('Close button pressed')} title="Alert has close" message="Alert has close" />
-`}
->
-    <UIKit.Alert onClose={() => alert('Close button pressed')} title="Alert has close" message="Alert has close" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_10_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_11_END
 
-```tsx
-<Alert
-  onClose={() => alert('Close button pressed')}
-  title="Alert has close"
-  message="Alert has close"
-/>
-```
-
-<!--/GITHUB_BLOCK-->
-
-### 对齐 (`align`)
+### 对齐 (Align)
 
 确定 `Alert` 组件内部内容的垂直对齐方式。
 
-`baseline`：默认对齐方式。
+`baseline`: 默认对齐。
 
-`center`：内容在 `Alert` 组件内垂直居中。如果操作占用的空间比文本多，或者图标必须位于内容中间，这可能很有用。
+`center`: 内容在 `Alert` 组件内垂直居中。如果操作占用的空间比文本多，或者图标必须位于内容中间，这可能很有用。
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Alert align="baseline" theme="info" title="Baseline" message="Baseline align" actions={<Alert.Action>button</Alert.Action>} />
-<Alert align="center" theme="info" title="Center" message="Center align" actions={<Alert.Action>button</Alert.Action>} align="center"/>
-`}>
-    <UIKit.Alert align="baseline" theme="info" title="Baseline" message="Baseline align" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} />
-    <UIKit.Alert align="center" theme="info" title="Center" message="Center align" actions={<UIKit.Alert.Action>button</UIKit.Alert.Action>} align="center"/>
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_12_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_13_END
 
-```tsx
-<Alert align="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
-<Alert align="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
-```
+## 属性 (Properties)
 
-<!--/GITHUB_BLOCK-->
+| 名称 | 描述 | 类型 | 默认值 |
+| :---------- | :-------------------------------------------------------------------------- | :--------------------------------------------------------------------------: | :----------: |
+| theme | 警报的外观 | `"normal"` `"info"` `"success"` `"warning"` `"danger"` `"utility"` `"clear"` | `"normal"` |
+| size | 警报的大小 | `"s"` `"m"` `"l"` | `"m"` |
+| view | 启用/禁用警报的背景颜色 | `"filled"` `"outlined"` | `"filled"` |
+| layout | 当 `actions` 属性包含按钮时，用于将用户引导至内容 | `"vertical"` `"horizontal"` | `"vertical"` |
+| actionsLayout | 用于控制操作按钮的方向 | `"vertical"` `"horizontal"` | `"vertical"` |
+| corners | 用于警报窗口的圆角/方角 | `"rounded"` `"square"` | `"rounded"` |
+| title | 警报的标题 | `string` | |
+| message | 警报的消息 | `React.ReactNode` | |
+| onClose | 用户点击警报关闭按钮时调用的回调函数 | `Function` | |
+| actions | 按钮或完整自定义组件的数组 | `React.ReactNode` `"AlertAction"` | |
+| align | 确定 Alert 组件内的内容如何垂直对齐 | `"center"` `"baseline"` | `"baseline"` |
+| style | HTML style 属性 | `React.CSSProperties` | |
+| className | 警报类的名称 | `string` | |
+| icon | 覆盖默认图标 | `React.ReactNode` | |
+| qa | HTML `data-qa` 属性，用于测试 | `string` | |
 
-## 属性
+## CSS API
 
-| 名称      | 描述                                              |                                类型                                |    默认值    |
-| :-------- | :------------------------------------------------ | :----------------------------------------------------------------: | :----------: |
-| theme     | 警告框外观                                        | `"normal"` `"info"` `"success"` `"warning"` `"danger"` `"utility"` |  `"normal"`  |
-| view      | 启用/禁用警告框的背景颜色                         |                      `"filled"` `"outlined"`                       |  `"filled"`  |
-| layout    | 如果有带按钮的 `actions` 属性，用于引导用户到内容 |                    `"vertical"` `"horizontal"`                     | `"vertical"` |
-| corners   | 用于警告框窗口的圆角/方角                         |                       `"rounded"` `"square"`                       | `"rounded"`  |
-| title     | 警告框标题                                        |                              `string`                              |              |
-| message   | 警告框消息                                        |                         `React.ReactNode`                          |              |
-| onClose   | 当用户点击警告框的关闭按钮时调用的回调函数        |                             `Function`                             |              |
-| actions   | 按钮数组或完整的自定义组件                        |                 `React.ReactNode` `"AlertAction"`                  |              |
-| align     | 确定 `Alert` 组件内部内容的垂直对齐方式           |                      `"center"` `"baseline"`                       | `"baseline"` |
-| style     | HTML style 属性                                   |                       `React.CSSProperties`                        |              |
-| className | 警告框类名                                        |                              `string`                              |              |
-| icon      | 覆盖默认图标                                      |                         `React.ReactNode`                          |              |
-| qa        | HTML `data-qa` 属性，用于测试                     |                              `string`                              |              |
+| 名称                               | 描述                                                                    |
+| :--------------------------------- | :----------------------------------------------------------------------------- |
+| `--g-alert-padding`                | 侧边内边距。                                                                 |
+| `--g-alert-border-radius`          | 边框圆角。                                                                 |
+| `--g-alert-icon-margin-inline-end` | 图标与内容部分（文本内容 + 操作）之间的缩进         |
+| `--g-alert-close-btn-margin`       | 内容部分（文本内容 + 操作）与关闭按钮之间的缩进 |
+| `--g-alert-actions-margin`         | 文本内容与操作之间的间隙。                                          |
+| `--g-alert-message-title-indent`   | 标题与消息之间的间隙。                                                 |
+| `--g-alert-actions-gap`            | 操作按钮之间的间隙。                                                    |
+| `--g-alert-title-text-color`       | 标题颜色。                                                                   |
+| `--g-alert-title-font-size`        | 标题字体大小。                                                               |
+| `--g-alert-title-line-height`      | 标题行高。                                                             |
+| `--g-alert-message-text-color`     | 消息颜色。                                                                   |
+| `--g-alert-message-font-size`      | 消息字体大小。                                                             |
+| `--g-alert-message-font-weight`    | 消息字体粗细。                                                           |
+| `--g-alert-message-line-height`    | 消息行高。                                                           |
