@@ -3,3 +3,4 @@ public/static
 CONTRIBUTING.md
 src/content/local-docs/libs/**/README*
 *.mdx
+src/content/local-docs/components/**/README*.md
