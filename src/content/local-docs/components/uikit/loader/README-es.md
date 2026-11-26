@@ -1,50 +1,24 @@
-<!--GITHUB_BLOCK-->
-
-# Cargador
-
-<!--/GITHUB_BLOCK-->
+El componente `Loader` muestra el progreso de carga como barras parpadeantes. A diferencia de `Spin`, este componente se utiliza en escenarios globales, por ejemplo, para una página completa o un `Dialog`.
 
 ```tsx
 import {Loader} from '@gravity-ui/uikit';
 ```
 
-El `Loader` componente muestra el progreso de la carga en forma de barras parpadeantes. A diferencia de esto `Spin`, este componente se usa en escenarios globales, por ejemplo, para una página completa o `Dialog`.
-
 ### Tamaño
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<Loader size="s" />
-<Loader size="m" />
-<Loader size="l" />
-`}
->
-    <UIKit.Loader size="s" />
-    <UIKit.Loader size="m" />
-    <UIKit.Loader size="l" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-```tsx
-<Loader size="s" />
-<Loader size="m" />
-<Loader size="l" />
-```
+`S`: Tamaño pequeño, se utiliza cuando el cargador normal es demasiado grande.
 
-<!--/GITHUB_BLOCK-->
+`M`: Tamaño mediano (básico), se utiliza en la mayoría de los casos.
 
-`S`: Tamaño pequeño, se usa cuando el cargador normal es demasiado grande.
-
-`M`: Tamaño mediano (básico), usado en la mayoría de los casos.
-
-`L`: De gran tamaño, se utiliza cuando el cargador normal es demasiado pequeño.
+`L`: Tamaño grande, se utiliza cuando el cargador normal es demasiado pequeño.
 
 ## Propiedades
 
-| Nombre    | Descripción                                   |    Tipo     | Predeterminado |
-| :-------- | :-------------------------------------------- | :---------: | :------------: |
-| tamaño    | Tamaño del cargador                           | `"s"` `"l"` |     `"s"`      |
-| className | Clase CSS personalizada para el elemento raíz |  `string`   |                |
+| Nombre      | Descripción                           |       Tipo        | Por defecto |
+| :-------- | :------------------------------------ | :---------------: | :---------: |
+| size      | Tamaño del cargador                           | `"s"` `"m"` `"l"` |    `"s"`    |
+| className | Clase CSS personalizada para el elemento raíz |     `string`      |             |
