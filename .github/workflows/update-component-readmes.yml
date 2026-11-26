@@ -80,21 +80,30 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: refs/pull/${{ needs.sync.outputs.pr }}/head
+      - name: Protect component README blocks
+        id: protect
+        env:
+          SOURCE: ${{ matrix.readme.input }}
+        run: |
+          input="${SOURCE%.md}.translation-input.md"
+          node scripts/component-catalog/translation-markdown.mjs protect "$SOURCE" "$input"
+          echo "input=$input" >> "$GITHUB_OUTPUT"
       - name: Translate component README
         uses: dgaponov/gpt-translate@master
         with:
           provider: openrouter
           apikey: ${{ secrets.OPENROUTER_API_KEY }}
           model: google/gemini-2.5-flash-lite
-          inputFiles: ${{ matrix.readme.input }}
+          inputFiles: ${{ steps.protect.outputs.input }}
           outputFiles: ${{ join(matrix.readme.outputs, ' ') }}
           languages: ${{ matrix.readme.locales }}
           pullRequestNumber: ${{ needs.sync.outputs.pr }}
           commitMessage: 'docs: translate ${{ matrix.readme.input }}'
           prompt: |
             Translate the Markdown documentation to {targetLanguage}.
-            Preserve component names, API identifiers, links, code blocks, and all HTML comments
-            and directives, including SANDBOX, GITHUB_BLOCK, and LANDING_BLOCK, exactly as written.
+            Preserve component names, API identifiers, links, and code blocks.
+            Copy each GRAVITY_TRANSLATION_BLOCK_<number>_END placeholder verbatim on its
+            own line, in the original order. Keep placeholders outside Markdown code fences.
             Translate the surrounding prose and table descriptions. Return Markdown without an outer code fence.
 
   finish:
@@ -118,20 +127,20 @@ jobs:
         env:
           PLAN: ${{ needs.sync.outputs.matrix }}
         run: |
-          while IFS= read -r path; do
-            if ! grep -q '[^[:space:]]' "$path"; then
-              echo "::error file=$path::Translation is missing or empty"
-              exit 1
-            fi
-          done < <(jq -r '.[].outputs[]' <<< "$PLAN")
+          while IFS=$'\t' read -r source output; do
+            node scripts/component-catalog/translation-markdown.mjs restore "$source" "$output"
+            git add -- "$output"
+          done < <(jq -r '.[] | .input as $source | .outputs[] | [$source, .] | @tsv' <<< "$PLAN")
 
           marker=src/content/local-docs/components/.translation-pending
           if [ -f "$marker" ]; then
+            git rm "$marker"
+          fi
+          if ! git diff --cached --quiet; then
             branch=$(gh pr view "$PR" --json headRefName --jq .headRefName)
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git rm "$marker"
-            git commit -m 'chore: remove translation marker'
+            git commit -m 'docs: restore protected README blocks'
             git push origin "HEAD:refs/heads/$branch"
           fi
           gh pr ready "$PR" --repo "$GITHUB_REPOSITORY"
