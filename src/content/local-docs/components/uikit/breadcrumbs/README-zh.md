@@ -1,50 +1,44 @@
 <!--GITHUB_BLOCK-->
 
-# Breadcrumbs
+# 面包屑
 
 <!--/GITHUB_BLOCK-->
+
+`Breadcrumbs` 是一个导航元素，用于显示页面在网站层级结构中的当前位置。它提供链接，允许用户返回到层级结构中的上一级，从而更轻松地浏览具有多层结构的网站。面包屑对于大型网站和具有基于层级结构的页面的应用程序尤其有用。
 
 ```tsx
 import {Breadcrumbs} from '@gravity-ui/uikit';
 ```
 
-`Breadcrumbs`（面包屑导航）是一种导航元素，显示页面在网站层次结构中的当前位置。它提供链接，允许用户返回到层次结构中的更高级别，使导航多层次网站变得更容易。面包屑导航对于具有基于层次结构页面结构的大型网站和应用程序特别有用。
-
 ## 示例
 
-<!--LANDING_BLOCK
+<!--SANDBOX
+import {Box, Breadcrumbs} from '@gravity-ui/uikit';
 
-<ExampleBlock
-    code={`
-<Breadcrumbs>
-    <Breadcrumbs.Item>Region</Breadcrumbs.Item>
-    <Breadcrumbs.Item>Country</Breadcrumbs.Item>
-    <Breadcrumbs.Item>City</Breadcrumbs.Item>
-    <Breadcrumbs.Item>District</Breadcrumbs.Item>
-    <Breadcrumbs.Item>Street</Breadcrumbs.Item>
-</Breadcrumbs>
-`}
->
-    <UIKit.Breadcrumbs>
-        <UIKit.Breadcrumbs.Item>Region</UIKit.Breadcrumbs.Item>
-        <UIKit.Breadcrumbs.Item>Country</UIKit.Breadcrumbs.Item>
-        <UIKit.Breadcrumbs.Item>City</UIKit.Breadcrumbs.Item>
-        <UIKit.Breadcrumbs.Item>District</UIKit.Breadcrumbs.Item>
-        <UIKit.Breadcrumbs.Item>Street</UIKit.Breadcrumbs.Item>
-    </UIKit.Breadcrumbs>
-</ExampleBlock>
-
-LANDING_BLOCK-->
+export default function () {
+    return (
+        <Box width="100%">
+            <Breadcrumbs>
+                <Breadcrumbs.Item>区域</Breadcrumbs.Item>
+                <Breadcrumbs.Item>国家</Breadcrumbs.Item>
+                <Breadcrumbs.Item>城市</Breadcrumbs.Item>
+                <Breadcrumbs.Item>区</Breadcrumbs.Item>
+                <Breadcrumbs.Item>街道</Breadcrumbs.Item>
+            </Breadcrumbs>
+        </Box>
+    );
+}
+SANDBOX-->
 
 <!--GITHUB_BLOCK-->
 
 ```jsx
 <Breadcrumbs>
-  <Breadcrumbs.Item>Region</Breadcrumbs.Item>
-  <Breadcrumbs.Item>Country</Breadcrumbs.Item>
-  <Breadcrumbs.Item>City</Breadcrumbs.Item>
-  <Breadcrumbs.Item>District</Breadcrumbs.Item>
-  <Breadcrumbs.Item>Street</Breadcrumbs.Item>
+  <Breadcrumbs.Item>区域</Breadcrumbs.Item>
+  <Breadcrumbs.Item>国家</Breadcrumbs.Item>
+  <Breadcrumbs.Item>城市</Breadcrumbs.Item>
+  <Breadcrumbs.Item>区</Breadcrumbs.Item>
+  <Breadcrumbs.Item>街道</Breadcrumbs.Item>
 </Breadcrumbs>
 ```
 
@@ -56,64 +50,507 @@ LANDING_BLOCK-->
 
 ### 事件
 
-使用 `onAction` 属性作为回调来处理项目上的点击事件。
+使用 `onAction` 属性作为回调函数来处理项目上的点击事件。
+
+<!--SANDBOX
+import {Box, Breadcrumbs} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Box width="100%">
+            <Breadcrumbs onAction={(id) => alert(id)}>
+                <Breadcrumbs.Item>区域</Breadcrumbs.Item>
+                <Breadcrumbs.Item>国家</Breadcrumbs.Item>
+                <Breadcrumbs.Item>城市</Breadcrumbs.Item>
+                <Breadcrumbs.Item>区</Breadcrumbs.Item>
+                <Breadcrumbs.Item>街道</Breadcrumbs.Item>
+            </Breadcrumbs>
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+const [currentId, setCurrentId] = React.useState();
+const items = [
+    {id: 1, label: '区域'},
+    {id: 2, label: '国家'},
+    {id: 3, label: '城市'},
+    {id: 4, label: '区'},
+    {id: 5, label: '街道'},
+]
+<div>
+    <Breadcrumbs onAction={setCurrentId}>
+        {items.map((i) => <Breadcrumbs.Item key={i.id}>{i.label}</Breadcrumbs.Item>)}
+    </Breadcrumbs>
+    <p>您点击了项目 ID: {currentId}</p>
+</div>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsEvents />
+
+<!--/GITHUB_BLOCK-->
 
 ### 链接
 
-在 `Breadcrumbs` 中，点击项目通常会触发 `onAction`。但是，您也可以将它们用作指向其他页面或网站的链接。为此，请向 `<Breadcrumbs.Item>` 组件添加 `href` 属性。
+在 `Breadcrumbs` 中，点击项目通常会触发 `onAction`。但是，您也可以将它们用作指向其他页面或网站的链接。为此，请将 `href` 属性添加到 `<Breadcrumbs.Item>` 组件：
+
+<!--SANDBOX
+import {Box, Breadcrumbs} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Box width="100%">
+            <Breadcrumbs>
+                <Breadcrumbs.Item href="/">主页</Breadcrumbs.Item>
+                <Breadcrumbs.Item href="/components">组件</Breadcrumbs.Item>
+                <Breadcrumbs.Item href="/components/uikit/breadcrumbs">面包屑</Breadcrumbs.Item>
+            </Breadcrumbs>
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+<Breadcrumbs>
+  <Breadcrumbs.Item href="/">主页</Breadcrumbs.Item>
+  <Breadcrumbs.Item href="/components">组件</Breadcrumbs.Item>
+  <Breadcrumbs.Item href="/components/uikit/breadcrumbs">面包屑</Breadcrumbs.Item>
+</Breadcrumbs>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsLinks />
+
+<!--/GITHUB_BLOCK-->
 
 ### 根上下文
 
-为了帮助用户理解整体结构，一些应用程序即使在其他项目由于空间限制而隐藏时，也始终显示面包屑的起点（根项目）。
+为了帮助用户理解整体结构，一些应用程序始终显示面包屑的起始点（根项目），即使由于空间限制而隐藏了其他项目。
+
+<!--SANDBOX
+import {Box, Breadcrumbs} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Box width="100%">
+            <Box overflow="hidden" width={200}>
+                <Breadcrumbs showRoot>
+                    <Breadcrumbs.Item key="home">主页</Breadcrumbs.Item>
+                    <Breadcrumbs.Item key="trendy">热门</Breadcrumbs.Item>
+                    <Breadcrumbs.Item key="2020 assets">2020 年 3 月资产</Breadcrumbs.Item>
+                    <Breadcrumbs.Item key="winter">冬季</Breadcrumbs.Item>
+                    <Breadcrumbs.Item key="holiday">假日</Breadcrumbs.Item>
+                </Breadcrumbs>
+            </Box>
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+<Box overflow="hidden" width={200}>
+  <Breadcrumbs showRoot>
+    <Breadcrumbs.Item key="home">Home</Breadcrumbs.Item>
+    <Breadcrumbs.Item key="trendy">Trendy</Breadcrumbs.Item>
+    <Breadcrumbs.Item key="2020 assets">March 2020 Assets</Breadcrumbs.Item>
+    <Breadcrumbs.Item key="winter">Winter</Breadcrumbs.Item>
+    <Breadcrumbs.Item key="holiday">Holiday</Breadcrumbs.Item>
+  </Breadcrumbs>
+</Box>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsRootContext />
+
+<!--/GITHUB_BLOCK-->
 
 ### 分隔符
 
-您可以自定义面包屑项目之间的分隔符。
+<!--SANDBOX
+import {ChevronRight} from '@gravity-ui/icons';
+import {Box, Breadcrumbs, Icon} from '@gravity-ui/uikit';
+
+const breadcrumbsItems = [
+    <Breadcrumbs.Item key="region">Region</Breadcrumbs.Item>,
+    <Breadcrumbs.Item key="country">Country</Breadcrumbs.Item>,
+    <Breadcrumbs.Item key="city">City</Breadcrumbs.Item>,
+    <Breadcrumbs.Item key="district">District</Breadcrumbs.Item>,
+    <Breadcrumbs.Item key="street">Street</Breadcrumbs.Item>,
+];
+
+export default function () {
+    return (
+        <Box width="100%">
+            <Breadcrumbs separator=">">{breadcrumbsItems}</Breadcrumbs>
+            <Breadcrumbs separator="—">{breadcrumbsItems}</Breadcrumbs>
+            <Breadcrumbs separator={<Icon data={ChevronRight} size={16} />}>
+                {breadcrumbsItems}
+            </Breadcrumbs>
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+const breadcrumbsItems = [
+  <Breadcrumbs.Item key="region">Region</Breadcrumbs.Item>,
+  <Breadcrumbs.Item key="country">Country</Breadcrumbs.Item>,
+  <Breadcrumbs.Item key="city">City</Breadcrumbs.Item>,
+  <Breadcrumbs.Item key="district">District</Breadcrumbs.Item>,
+  <Breadcrumbs.Item key="street">Street</Breadcrumbs.Item>,
+];
+
+<Breadcrumbs separator="›">{breadcrumbsItems}</Breadcrumbs>
+<Breadcrumbs separator="—">{breadcrumbsItems}</Breadcrumbs>
+<Breadcrumbs separator={<ChevronRight />}>{breadcrumbsItems}</Breadcrumbs>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsSeparator />
+
+<!--/GITHUB_BLOCK-->
 
 ### 带图标的面包屑
 
-您可以在面包屑项目中添加图标。
+<!--SANDBOX
+import {Flame, House, Rocket} from '@gravity-ui/icons';
+import {Box, Breadcrumbs, Flex, Icon, Text} from '@gravity-ui/uikit';
 
-### 与路由器集成
+export default function () {
+    return (
+        <Box width="100%">
+            <Breadcrumbs>
+                <Breadcrumbs.Item>
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={House} size={16} />
+                        uikit
+                    </Flex>
+                </Breadcrumbs.Item>
+                <Breadcrumbs.Item>
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={Flame} size={16} />
+                        components
+                    </Flex>
+                </Breadcrumbs.Item>
+                <Breadcrumbs.Item>
+                    <Flex alignItems="center" gap={1}>
+                        <Icon data={Rocket} size={16} style={{minWidth: 16}} />
+                        <Text ellipsis variant="inherit">
+                            Breadcrumbs
+                        </Text>
+                    </Flex>
+                </Breadcrumbs.Item>
+            </Breadcrumbs>
+        </Box>
+    );
+}
+SANDBOX-->
 
-面包屑可以与各种路由器集成，如 React Router、Next.js 和 Tanstack Router。
+<!--GITHUB_BLOCK-->
 
-### 导航标记
+```jsx
+<Breadcrumbs>
+  <Breadcrumbs.Item>
+    <Flex alignItems="center" gap={1}>
+      <House /> uikit
+    </Flex>
+  </Breadcrumbs.Item>
+  <Breadcrumbs.Item>
+    <Flex alignItems="center" gap={1}>
+      <Flame /> components
+    </Flex>
+  </Breadcrumbs.Item>
+  <Breadcrumbs.Item>
+    <Flex alignItems="center" gap={1}>
+      <Rocket style={{minWidth: 16}} />
+      <Text ellipsis variant="inherit">
+        Breadcrumbs
+      </Text>
+    </Flex>
+  </Breadcrumbs.Item>
+</Breadcrumbs>
+```
 
-当面包屑作为页面的主要导航元素使用时，可以将其放置在导航标记中。
+<!-- Storybook example -->
 
-### 禁用项目
+<BreadcrumbsWithIcons />
 
-您可以禁用特定的面包屑项目。
+<!--/GITHUB_BLOCK-->
 
-## 属性
+### 与路由器的集成
 
-| 名称             | 描述                                 | 类型                                       | 默认值 |
-| :--------------- | :----------------------------------- | :----------------------------------------- | :----- |
-| children         | 面包屑项目                           | `React.ReactElement<BreadcrumbsItemProps>` |        |
-| disabled         | 确定 `Breadcrumbs` 是否被禁用        | `boolean`                                  |        |
-| showRoot         | 启用或禁用在项目折叠时始终显示根项目 | `boolean`                                  |        |
-| popupPlacement   | 折叠项目弹出窗口的样式               | `PopupPlacement`                           |        |
-| popupStyle       | 折叠项目弹出窗口的样式               | `"staircase"`                              |        |
-| qa               | HTML 属性 `data-qa`，用于测试        | `string`                                   |        |
-| separator        | 自定义分隔符节点                     | `React.ReactNode`                          | "/"    |
-| action           | `click` 事件处理程序                 | `(id: Key) => void`                        |        |
-| navigate         | 客户端导航                           | `(href: string) => void`                   |        |
-| id               | 元素的唯一 ID                        | `string`                                   |        |
-| className        | 元素的 CSS 类名                      | `string`                                   |        |
-| style            | 设置元素的内联样式                   | `CSSProperties`                            |        |
-| aria-label       | 定义标记当前元素的字符串值           | `string`                                   |        |
-| aria-labelledby  | 标识标记当前元素的元素               | `string`                                   |        |
-| aria-describedby | 标识描述对象的元素                   | `string`                                   |        |
+<!--GITHUB_BLOCK-->
+
+#### React Router
+
+```jsx
+import {useLinkClickHandler, useHref} from 'react-router';
+import {Breadcrumbs, BreadcrumbsItem} from '@gravity-ui/uikit';
+
+function RouterLink({to, ...rest}) {
+  const href = useHref(to);
+  const onClick = useLinkClickHandler(to);
+  return <BreadcrumbsItem {...rest} href={href} onClick={onClick} />;
+}
+```
+
+```jsx
+import {Breadcrumbs, BreadcrumbsItem} from '@gravity-ui/uikit';
+
+function RouterLink({href, ...rest}) {
+  return <BreadcrumbsItem {...rest} href={href} />;
+}
+
+function Navigation() {
+  return (
+    <Breadcrumbs itemComponent={RouterLink}>
+      <RouterLink href="/">Home</RouterLink>
+      <RouterLink href="/components">Components</RouterLink>
+      <RouterLink href="/components/breadcrumbs">Breadcrumbs</RouterLink>
+    </Breadcrumbs>
+  );
+}
+```
+
+#### Next.js
+
+```jsx
+import Link from 'next/link';
+import {Breadcrumbs, BreadcrumbsItem} from '@gravity-ui/uikit';
+
+function RouterLink({href, ...rest}) {
+  return (
+    <Link href={href} passHref legacyBehavior>
+      <BreadcrumbsItem {...rest} />;
+    </Link>
+  );
+}
+
+function Navigation() {
+  return (
+    <Breadcrumbs itemComponent={RouterLink}>
+      <RouterLink href="/">Home</RouterLink>
+      <RouterLink href="/components">Components</RouterLink>
+      <RouterLink href="/components/breadcrumbs">Breadcrumbs</RouterLink>
+    </Breadcrumbs>
+  );
+}
+```
+
+#### Tanstack Router
+
+```jsx
+import {createLink} from '@tanstack/react-router';
+import {Breadcrumbs, BreadcrumbsItem} from '@gravity-ui/uikit';
+
+const RouterLink = createLink(BreadcrumbsItem);
+
+function Navigation() {
+  return (
+    <Breadcrumbs itemComponent={RouterLink}>
+      <RouterLink href="/">Home</RouterLink>
+      <RouterLink href="/components">Components</RouterLink>
+      <RouterLink href="/components/breadcrumbs">Breadcrumbs</RouterLink>
+    </Breadcrumbs>
+  );
+}
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsClientNavigation />
+
+<!--/GITHUB_BLOCK-->
+
+### 地标
+
+当面包屑用作页面的主要导航元素时，它们可以放置在 [导航地标](https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html) 中。地标可以帮助辅助技术用户快速找到页面的主要部分。要创建导航地标，请将面包屑放在带有 `aria-label` 的 `<nav>` 元素内：
+
+<!--SANDBOX
+import {Box, Breadcrumbs} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Box width="100%">
+            <nav aria-label="Breadcrumbs">
+                <Breadcrumbs>
+                    <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+                    <Breadcrumbs.Item href="/components">Components</Breadcrumbs.Item>
+                    <Breadcrumbs.Item href="/components/uikit/breadcrumbs">Breadcrumbs</Breadcrumbs.Item>
+                </Breadcrumbs>
+            </nav>
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+<nav aria-label="Breadcrumbs">
+  <Breadcrumbs>
+    <Breadcrumbs.Item href="/">Home</Breadcrumbs.Item>
+    <Breadcrumbs.Item href="/components">Components</Breadcrumbs.Item>
+    <Breadcrumbs.Item href="/components/uikit/breadcrumbs">Breadcrumbs</Breadcrumbs.Item>
+  </Breadcrumbs>
+</nav>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsLinks />
+
+<!--/GITHUB_BLOCK-->
+
+### 禁用项
+
+<!--SANDBOX
+import {Box, Breadcrumbs} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Box width="100%">
+            <Breadcrumbs>
+                <Breadcrumbs.Item href="#Region">Region</Breadcrumbs.Item>
+                <Breadcrumbs.Item href="#Country" disabled>
+                    Country
+                </Breadcrumbs.Item>
+                <Breadcrumbs.Item href="#City">City</Breadcrumbs.Item>
+                <Breadcrumbs.Item href="#District">District</Breadcrumbs.Item>
+                <Breadcrumbs.Item href="#Street" disabled>
+                    Street
+                </Breadcrumbs.Item>
+            </Breadcrumbs>
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+<Breadcrumbs>
+  <Breadcrumbs.Item href="#Region">Region</Breadcrumbs.Item>
+  <Breadcrumbs.Item href="#Country" disabled>
+    Country
+  </Breadcrumbs.Item>
+  <Breadcrumbs.Item href="#City">City</Breadcrumbs.Item>
+  <Breadcrumbs.Item href="#District">District</Breadcrumbs.Item>
+  <Breadcrumbs.Item href="#Street" disabled>
+    Street
+  </Breadcrumbs.Item>
+</Breadcrumbs>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsDisabledItems />
+
+<!--/GITHUB_BLOCK-->
+
+### 结束内容
+
+<!--SANDBOX
+import {Box, Breadcrumbs, Button} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Box width="100%">
+            <Breadcrumbs endContent={<div style={{paddingInlineStart: 4}}><Button>Push</Button></div>}>
+                <Breadcrumbs.Item>Region</Breadcrumbs.Item>
+                <Breadcrumbs.Item>Country</Breadcrumbs.Item>
+                <Breadcrumbs.Item>City</Breadcrumbs.Item>
+                <Breadcrumbs.Item>District</Breadcrumbs.Item>
+                <Breadcrumbs.Item>Street</Breadcrumbs.Item>
+            </Breadcrumbs>
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```jsx
+<Breadcrumbs endContent={<div style={{paddingInlineStart: 4}}><Button>Push</Button></div>}>
+  <Breadcrumbs.Item>Region</Breadcrumbs.Item>
+  <Breadcrumbs.Item>Country</Breadcrumbs.Item>
+  <Breadcrumbs.Item>City</Breadcrumbs.Item>
+  <Breadcrumbs.Item>District</Breadcrumbs.Item>
+  <Breadcrumbs.Item>Street</Breadcrumbs.Item>
+</Breadcrumbs>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsEndContent />
+
+<!--/GITHUB_BLOCK-->
+
+```jsx
+<Breadcrumbs
+  endContent={
+    <Flex gap={1} spacing={{pl: 1}}>
+      <Button>Test1</Button>
+      <Button>Test2</Button>
+    </Flex>
+  }
+>
+  <Breadcrumbs.Item>Region</Breadcrumbs.Item>
+  <Breadcrumbs.Item>Country</Breadcrumbs.Item>
+  <Breadcrumbs.Item>City</Breadcrumbs.Item>
+  <Breadcrumbs.Item>District</Breadcrumbs.Item>
+  <Breadcrumbs.Item>Street</Breadcrumbs.Item>
+</Breadcrumbs>
+```
+
+<!-- Storybook example -->
+
+<BreadcrumbsEndContent />
+
+<!--/GITHUB_BLOCK-->
+
+## Properties
+
+| Name             | Description                                                                  | Type                                       | Default |
+| :--------------- | :--------------------------------------------------------------------------- | :----------------------------------------- | :------ |
+| children         | 面包屑项目                                                             | `React.ReactElement<BreadcrumbsItemProps>` |         |
+| disabled         | 确定 `Breadcrumbs` 是否被禁用。                               | `boolean`                                  |         |
+| showRoot         | 如果项目已折叠，则启用或禁用始终显示根项目。 | `boolean`                                  |         |
+| popupPlacement   | 折叠项目弹出窗口的样式。                                           | `PopupPlacement`                           |         |
+| popupStyle       | 折叠项目弹出窗口的样式。                                           | `"staircase"`                              |         |
+| qa               | `data-qa` HTML 属性，用于测试                                   | `string`                                   |         |
+| separator        | 自定义分隔符节点。                                                       | `React.ReactNode`                          | "/"     |
+| action           | `click` 事件处理程序。                                                       | `(id: Key) => void`                        |         |
+| id               | 元素的唯一 ID。                                                         | `string`                                   |         |
+| className        | 元素的 CSS 类名。                                              | `string`                                   |         |
+| style            | 设置元素的内联样式。                                       | `CSSProperties`                            |         |
+| aria-label       | 定义一个字符串值，该值标记当前元素。                      | `string`                                   |         |
+| aria-labelledby  | 标识标记当前元素的元素。                    | `string`                                   |         |
+| aria-describedby | 标识描述对象的元素。                          | `string`                                   |         |
+| endContent       | 用户在最后一个面包屑项目后渲染的节点。                             | `React.ReactNode`                          |         |
 
 ### BreadcrumbsItemProps
 
-| 名称       | 描述                         | 类型                              | 默认值 |
-| :--------- | :--------------------------- | :-------------------------------- | :----- |
-| children   | 面包屑内容                   | `string`                          |        |
-| title      | 项目内容的字符串表示         | `string`                          |        |
-| aria-label | 项目的无障碍标签             | `string`                          |        |
-| href       | 用于超链接的 URL             | `string`                          |        |
-| target     | 链接的目标窗口               | `React.HTMLAttributeAnchorTarget` |        |
-| rel        | 链接资源与当前页面之间的关系 | `string`                          |        |
-| disabled   | BreadcrumbsItem 是否被禁用   | `boolean`                         |        |
+| 名称       | 描述                                                           | 类型                              | 默认值 |
+| :--------- | :------------------------------------------------------------- | :-------------------------------- | :----- |
+| children   | 面包屑内容。                                                   | `string`                          |        |
+| title      | 项目内容的字符串表示。                                         | `string`                          |        |
+| aria-label | 项目的可访问性标签。                                           | `string`                          |        |
+| href       | 用于超链接的 URL。                                             | `string`                          |        |
+| target     | 链接的目标窗口。                                               | `React.HTMLAttributeAnchorTarget` |        |
+| rel        | 链接资源与当前页面之间的关系。                                 | `string`                          |        |
+| disabled   | `BreadcrumbsItem` 是否被禁用。                                 | `boolean`                         |        |
