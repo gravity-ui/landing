@@ -1,0 +1,42 @@
+<!--GITHUB_BLOCK-->
+
+# ClipboardButton
+
+<!--/GITHUB_BLOCK-->
+
+`ClipboardButton` is a ready-made button that copies given text to the clipboard and plays a success animation. It combines [`CopyToClipboard`](../CopyToClipboard/README.md) (the copy behavior) with [`ClipboardIcon`](../ClipboardIcon/README.md) (the animated icon).
+
+```tsx
+import {ClipboardButton} from '@gravity-ui/uikit';
+```
+
+<!--SANDBOX
+import {ClipboardButton} from '@gravity-ui/uikit';
+
+export default function () {
+    return <ClipboardButton text="Some text to copy" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ClipboardButton text="Some text to copy" />
+```
+
+<!--/GITHUB_BLOCK-->
+
+## Properties
+
+The `ClipboardButton` properties are inherited from the `Button` [properties](../Button/README.md#properties).
+
+| Name               | Description                                                               |            Type            |   Default   |
+| :----------------- | :------------------------------------------------------------------------ | :------------------------: | :---------: |
+| hasTooltip         | Toggles displaying the tooltip                                            |         `boolean`          |   `true`    |
+| onCopy             | Callback after copying `(text: string, result: boolean) => void`          |         `Function`         |             |
+| text               | Text to copy (can be a string or a function that returns a string)        |  `string \| () => string`  |             |
+| timeout            | Time before the state switches back to normal after the button is clicked |          `number`          |   `1000`    |
+| tooltipInitialText | Text shown before copying                                                 |          `string`          |  `"Copy"`   |
+| tooltipSuccessText | Text shown after copying                                                  |          `string`          | `"Copied!"` |
+| icon               | Custom icon                                                               |     `React.ReactNode`      |             |
+| iconPosition       | Position of icon                                                          | `start          \|    end` |   `start`   |
