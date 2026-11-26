@@ -33,7 +33,6 @@ export const ThemeActionSheet = ({
                 <Flex
                     direction="row"
                     gap={2}
-                    justifyContent="center"
                     alignItems="center"
                     className={b('bottom-buttons', bottomContentWrapperClassName)}
                 >

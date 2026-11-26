@@ -142,7 +142,10 @@ const themeCreatorReducer = (
         case 'changeIllustrationColor':
             return changeIllustrationColorInTheme(newState, action.payload);
         case 'applyBrandPreset':
-            return applyBrandPresetToTheme(newState, action.payload);
+            // Applying a preset loads a baseline, it isn't a manual edit — keep
+            // it "clean" (like importTheme/reinitialize) so switching between
+            // presets doesn't trigger the unsaved-changes confirmation.
+            return {...applyBrandPresetToTheme(newState, action.payload), changesExist: false};
         case 'changeRadiusPreset':
             return changeRadiusPresetInTheme(newState, action.payload);
         case 'updateCustomRadiusPreset':

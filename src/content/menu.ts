@@ -25,11 +25,10 @@ export const menu: MenuItem[] = [
     },
     {
         titleKey: 'menu_themer',
-        url: '/themer',
+        url: '/themes',
     },
     {
         titleKey: 'menu_blog',
         url: '/blog',
-        isNew: true,
     },
 ];

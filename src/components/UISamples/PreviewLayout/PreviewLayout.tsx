@@ -26,6 +26,7 @@ import {exportTheme} from 'src/components/Themes/lib/themeCreatorExport';
 
 import gravityUi from '../../../assets/icons/gravity-ui.svg';
 import {block} from '../../../utils';
+import {usePreviewModeContext} from '../PreviewModeContext/PreviewModeContext';
 
 import './PreviewLayout.scss';
 
@@ -40,6 +41,8 @@ interface PreviewLayoutProps {
     hideAsideMenu?: boolean;
     scrollableContent?: boolean;
     noPadding?: boolean;
+    initialTheme?: Theme;
+    hideThemeToggle?: boolean;
 }
 
 export const PreviewLayout = ({
@@ -50,8 +53,14 @@ export const PreviewLayout = ({
     hideAsideMenu,
     scrollableContent,
     noPadding,
+    initialTheme = 'dark',
+    hideThemeToggle = false,
 }: PreviewLayoutProps) => {
-    const [theme, setTheme] = useState<Theme>('dark');
+    const {forcedMode, hideToggle: contextHideToggle} = usePreviewModeContext();
+    const [localTheme, setLocalTheme] = useState<Theme>(initialTheme);
+    const theme: Theme = forcedMode ?? localTheme;
+    const setTheme = setLocalTheme;
+    const isToggleHidden = hideThemeToggle || contextHideToggle;
     const [justify, setJustify] = useState<CSSProperties['justifyContent']>('flex-start');
     const [isCompact, setCompact] = useState<boolean>(true);
     const containerRef = React.useRef<HTMLDivElement>(null);
@@ -102,24 +111,26 @@ export const PreviewLayout = ({
                                     ]}
                                 />
                             </ActionBar.Item>
-                            <ActionBar.Item className={b('header-actions')}>
-                                <SegmentedRadioGroup
-                                    name="theme"
-                                    defaultValue="light"
-                                    value={theme}
-                                    onChange={onThemeChange}
-                                    options={[
-                                        {
-                                            value: 'light',
-                                            content: <Icon data={Sun} />,
-                                        },
-                                        {
-                                            value: 'dark',
-                                            content: <Icon data={Moon} />,
-                                        },
-                                    ]}
-                                />
-                            </ActionBar.Item>
+                            {!isToggleHidden && (
+                                <ActionBar.Item className={b('header-actions')}>
+                                    <SegmentedRadioGroup
+                                        name="theme"
+                                        defaultValue="light"
+                                        value={theme}
+                                        onChange={onThemeChange}
+                                        options={[
+                                            {
+                                                value: 'light',
+                                                content: <Icon data={Sun} />,
+                                            },
+                                            {
+                                                value: 'dark',
+                                                content: <Icon data={Moon} />,
+                                            },
+                                        ]}
+                                    />
+                                </ActionBar.Item>
+                            )}
                         </ActionBar.Group>
                     </ActionBar.Section>
                 </ActionBar>

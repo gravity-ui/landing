@@ -1,0 +1,23 @@
+{
+    "id": 1766,
+    "name": "agent-ready",
+    "isPinned": false,
+    "postId": 1766,
+    "description": "llms.txt is an agent-facing catalog of all 34 Gravity UI packages with versioned per-package docs. The open-source Gravity UI skill helps coding agents pick the right package and use current APIs.",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 3,
+    "title": "Gravity UI Is Now Agent-Ready: Meet llms.txt and the Gravity UI Skill",
+    "date": "2026-08-10T00:00:00Z",
+    "likes": 0,
+    "hasUserLike": false,
+    "addLegacyPrefix": false,
+    "tags": [
+        {
+            "icon": null,
+            "slug": "articles",
+            "name": "Articles"
+        }
+    ],
+    "authors": [],
+    "services": []
+}

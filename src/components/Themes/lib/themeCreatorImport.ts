@@ -4,10 +4,14 @@ import React from 'react';
 import {useThemeCreatorMethods} from '../hooks';
 
 import {DEFAULT_BRAND_COLORS} from './constants';
+import {normalizeImportedTheme} from './normalizeImportedTheme';
 
 const getThemeFromJson = (userString: string) => {
     const parsedUserInput = JSON.parse(userString);
-    return parseJSON(parsedUserInput);
+    // generateJSON emits color refs as raw CSS-var names, which parseJSON keeps
+    // as-is but generateCSS doesn't understand — so without this the colors of
+    // any pasted JSON theme (incl. our own JSON export) fall back to default.
+    return normalizeImportedTheme(parseJSON(parsedUserInput));
 };
 
 const getThemeFromCss = (userString: string) => {

@@ -11,19 +11,19 @@ npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravi
 ```jsx
 import {createRoot} from 'react-dom/client';
 import {DatePicker} from '@gravity-ui/date-components';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 
 import '@gravity-ui/uikit/styles/styles.css';
 
 function App() {
   return (
-    <ThemeProvider>
+    <Provider>
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Date: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 
@@ -42,13 +42,13 @@ await settings.loadLocale('ru');
 function App() {
   return (
     // Set the language to use with components.
-    <ThemeProvider lang="ru">
+    <Provider lang="ru">
       <h1>DatePicker</h1>
       <form>
         <label htmlFor="date-picker">Дата: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
@@ -73,7 +73,7 @@ function App() {
     });
   };
 
-  return <ThemeProvider lang={lang}>...</ThemeProvider>;
+  return <Provider lang={lang}>...</Provider>;
 }
 ```
 
@@ -92,6 +92,10 @@ addLanguageKeysets<PartialKeysets>(lang, {...});
 // To specify translations for some components
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
+
+## Migration
+
+- From 4.x to 5.x (`@gravity-ui/uikit` v8): [docs/migration-4-to-5.md](docs/migration-4-to-5.md)
 
 ## Development
 
@@ -124,8 +128,8 @@ React date and time controls for Gravity UI apps — date/time pickers, calendar
 ### Common pitfalls
 
 - **Values are `DateTime` objects, not JS `Date`.** Components work with `dateTime()` from [`@gravity-ui/date-utils`](https://github.com/gravity-ui/date-utils); pass and read `DateTime`, not native `Date` or ISO strings.
-- **Requires uikit setup.** Render inside `ThemeProvider` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` and `@gravity-ui/date-utils` are required peer dependencies.
-- **Locale is loaded, not just set.** Set language via `ThemeProvider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
+- **Requires uikit setup.** Render inside `Provider` from `@gravity-ui/uikit` and import `@gravity-ui/uikit/styles/styles.css`; `@gravity-ui/uikit` v8 and `@gravity-ui/date-utils` are required peer dependencies.
+- **Locale is loaded, not just set.** Set language via `Provider` `lang`, but load the locale data first with `settings.loadLocale('ru')` from `@gravity-ui/date-utils`, or dates render in the default locale.
 - **Component-specific translations use `addLanguageKeysets`.** For languages beyond `en`/`ru`, register keysets via `addLanguageKeysets` from `@gravity-ui/uikit/i18n` using the `Keysets`/`PartialKeysets` types exported here.
 
 ## Documentation for AI agents

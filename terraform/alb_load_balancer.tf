@@ -70,10 +70,6 @@ resource "yandex_alb_load_balancer" "landing_alb" {
       subnet_id = yandex_vpc_subnet.subnet_a.id
     }
     location {
-      zone_id   = "ru-central1-b"
-      subnet_id = yandex_vpc_subnet.subnet_b.id
-    }
-    location {
       zone_id   = "ru-central1-d"
       subnet_id = yandex_vpc_subnet.subnet_d.id
     }

@@ -1,0 +1,216 @@
+@use '../../../../variables.scss';
+
+$block: '.#{variables.$ns}theme-card';
+
+// `--g-border-radius-2xl` is missing in this uikit version (largest available
+// is xl=32px, too big), so the Figma values live here instead of as tokens.
+// The preview radius is repeated by the scrim and the hover clip-path, which
+// all have to stay in lock-step.
+$previewRadius: 16px;
+$selectionFrameRadius: 20px;
+// Figma puts a dedicated darkening fill over the preview image on hover.
+$scrimColor: rgb(34 29 34 / 75%);
+
+#{$block} {
+    --g-border-radius-l: 8px;
+    --g-border-radius-xl: 8px;
+    // Hover eases in after a short delay so brushing across the gallery
+    // doesn't flash every card, and eases straight back out on leave.
+    --theme-card-hover-in: 0.25s ease 0.12s;
+    --theme-card-hover-out: 0.2s ease 0s;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--g-spacing-3);
+    width: 100%;
+
+    &__preview-stack {
+        position: relative;
+        height: 248px;
+        cursor: pointer;
+    }
+
+    &__preview-area {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: $previewRadius;
+        border: 1px solid var(--g-color-line-generic);
+        box-shadow: 0 4px 24px 0 rgb(0 0 0 / 5%), 0 2px 8px 0 rgb(0 0 0 / 5%);
+        transition: filter var(--theme-card-hover-out), border-color var(--theme-card-hover-out);
+
+        // Brand-colored gradient stands in for the per-theme preview image.
+        // `--theme-card-brand` is set inline from `metadata.brandColor`.
+        // Longhands on purpose: the `background` shorthand would reset
+        // `background-clip`, which has to stay `padding-box` — the generic
+        // line color is semi-transparent, so with the default `border-box`
+        // the gradient shines through the frame and tints it per theme.
+        background-image: linear-gradient(
+            135deg,
+            color-mix(in srgb, var(--theme-card-brand) 65%, #111) 0%,
+            color-mix(in srgb, var(--theme-card-brand) 25%, #111) 100%
+        );
+        background-clip: padding-box;
+        color: var(--g-color-text-light-primary);
+
+        &[data-mode='light'] {
+            background-image: linear-gradient(
+                135deg,
+                color-mix(in srgb, var(--theme-card-brand) 35%, #fff) 0%,
+                color-mix(in srgb, var(--theme-card-brand) 75%, #fff) 100%
+            );
+            color: var(--g-color-text-dark-primary);
+        }
+    }
+
+    // The PNG sits on top of the brand-color gradient fallback. When the file
+    // is missing (404) the inline onError hides the broken-image icon and
+    // the gradient + theme name behind it stay visible.
+    &__preview-image {
+        position: absolute;
+        // Overdrawn by 2px on every side and clipped by the parent's
+        // `overflow: hidden`: the captured PNG carries the sample's own 1px
+        // frame, which would otherwise read as a stray line along the top and
+        // bottom edge of the preview. Explicit width/height are required —
+        // for an absolutely positioned replaced element `auto` resolves to the
+        // intrinsic size and the inset offsets get dropped.
+        top: -2px;
+        left: -2px;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        z-index: 1;
+        object-fit: cover;
+        object-position: left top;
+    }
+
+    &__preview-name {
+        position: relative;
+        z-index: 0;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        text-align: center;
+        padding: 0 var(--g-spacing-4);
+    }
+
+    // Orange frame sits 5px outside the preview area as an absolute sibling so
+    // it stays sharp when the preview-area is blurred.
+    &__selection-frame {
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border: 2px solid var(--g-color-line-brand);
+        border-radius: $selectionFrameRadius;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--theme-card-hover-out);
+    }
+
+    // Description / tags / Apply button sit as an absolute sibling of
+    // preview-area so they are not affected by the blur filter.
+    &__hover-content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--g-spacing-8);
+        padding: 0 var(--g-spacing-5);
+        opacity: 0;
+        transition: opacity var(--theme-card-hover-out);
+        pointer-events: none;
+        text-align: center;
+        // Own stacking context so the scrim below can sit at `z-index: -1`
+        // without escaping behind the preview when opacity hits 1.
+        isolation: isolate;
+
+        // A fill, not a brightness filter: a light theme dimmed with
+        // `brightness()` stays light grey and the white overlay text drowns.
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: $previewRadius;
+            background-color: $scrimColor;
+        }
+    }
+
+    &__overlay-text-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--g-spacing-2);
+        width: 100%;
+    }
+
+    &__description {
+        color: var(--g-color-text-light-primary);
+    }
+
+    &__tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    // Hover triggers via the stack so cursor over the description/button keeps
+    // the state active. Blur is applied to the preview-area — the same element
+    // that owns border-radius — so the rounded shape itself gets blurred.
+    &__preview-stack:hover &__preview-area {
+        // Dimming is the scrim's job (`__hover-content::before`) — the filter
+        // only blurs.
+        filter: blur(6px);
+        border-color: transparent;
+        // `overflow: hidden` clips children, not the element's own filtered
+        // output, so the blur used to smear ~10px past the selection frame
+        // into the drawer background. `clip-path` runs after `filter` and cuts
+        // it back to the rounded box.
+        clip-path: inset(0 round $previewRadius);
+        transition: filter var(--theme-card-hover-in), border-color var(--theme-card-hover-in);
+    }
+
+    &__preview-stack:hover &__hover-content {
+        transition: opacity var(--theme-card-hover-in);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &__preview-stack:hover &__selection-frame {
+        transition: opacity var(--theme-card-hover-in);
+        opacity: 1;
+    }
+
+    // The applied theme keeps the frame permanently — no hover delay for it.
+    &_selected &__selection-frame {
+        transition: opacity var(--theme-card-hover-out);
+        opacity: 1;
+    }
+
+    &__meta {
+        padding: 0;
+    }
+
+    &__name {
+        color: var(--g-color-text-primary);
+    }
+
+    &__author {
+        color: var(--g-color-text-secondary);
+    }
+
+    &__mode-toggle {
+        display: flex;
+        gap: var(--g-spacing-1);
+        align-items: center;
+    }
+}

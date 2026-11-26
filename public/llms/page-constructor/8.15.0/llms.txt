@@ -152,6 +152,7 @@ To start a new project, you can use the [ready-made template on Next.js ](https:
 - **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
 - **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
 - **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+- **The grid needs a global `box-sizing: border-box` reset.** The package does not ship one; without it the container padding overflows the viewport horizontally while typecheck and build stay green. Add `*, *::before, *::after { box-sizing: border-box; }` to the host app styles.
 
 
 ## Links

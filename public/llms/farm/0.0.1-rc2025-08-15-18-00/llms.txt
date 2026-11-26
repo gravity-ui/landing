@@ -2,7 +2,7 @@
 
 # Farm
 
-> Documentation for the Farm package.
+> A self-hosted service for deploying application previews from pull requests.
 >
 > **npm:** `@gravity-ui/farm` — check the installed major version in the user's `package.json` and read docs matching it.
 

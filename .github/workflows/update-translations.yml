@@ -71,7 +71,7 @@ jobs:
           export COMMIT_MESSAGE="initial commit"
           git commit -m "$COMMIT_MESSAGE"
           git push --set-upstream origin update-translations --force
-          gh pr create --title "i18n: update translations" --body "" -a "dgaponov" -a "imsitnikov" -a "vvtimofeev" 2>/dev/null || true
+          gh pr create --title "i18n: update translations" --body "" -a "dgaponov" -a "vvtimofeev" 2>/dev/null || true
           PR_NUMBER=$(gh pr view --json number -q ".number")
 
           echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT

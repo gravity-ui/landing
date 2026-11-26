@@ -25,14 +25,6 @@ resource "yandex_vpc_subnet" "subnet_a" {
   route_table_id = yandex_vpc_route_table.rt.id
 }
 
-resource "yandex_vpc_subnet" "subnet_b" {
-  name           = "landing-subnet-b"
-  zone           = "ru-central1-b"
-  network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["10.2.0.0/24"]
-  route_table_id = yandex_vpc_route_table.rt.id
-}
-
 resource "yandex_vpc_subnet" "subnet_d" {
   name           = "landing-subnet-d"
   zone           = "ru-central1-d"
@@ -83,7 +75,6 @@ resource "yandex_vpc_security_group" "landing_sg" {
     protocol = "TCP"
     v4_cidr_blocks = [
       "10.1.0.0/24",
-      "10.2.0.0/24",
       "10.3.0.0/24",
     ]
   }

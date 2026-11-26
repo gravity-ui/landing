@@ -18,6 +18,19 @@ export const libs = [
         mainBranch: 'main',
     },
     {
+        id: 'components',
+        githubId: 'gravity-ui/components',
+        npmId: '@gravity-ui/components',
+        title: 'Components',
+        primary: false,
+        landing: false,
+        tags: ['ui'],
+        storybookUrl: 'https://preview.gravity-ui.com/components/',
+        readmeUrl: getReadmeUrls('https://raw.githubusercontent.com/gravity-ui/components/main'),
+        changelogUrl: 'https://raw.githubusercontent.com/gravity-ui/components/main/CHANGELOG.md',
+        mainBranch: 'main',
+    },
+    {
         id: 'markdown-editor',
         githubId: 'gravity-ui/markdown-editor',
         npmId: '@gravity-ui/markdown-editor',
@@ -137,7 +150,7 @@ export const libs = [
         primary: false,
         landing: false,
         tags: ['ui'],
-        storybookUrl: 'https://preview.yandexcloud.dev/blog-constructor/',
+        storybookUrl: 'https://preview.gravity-ui.com/blog-constructor/',
         readmeUrl: getReadmeUrls(
             'https://raw.githubusercontent.com/gravity-ui/blog-constructor/main',
         ),

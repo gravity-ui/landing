@@ -1,0 +1,23 @@
+{
+    "id": 1766,
+    "name": "agent-ready",
+    "isPinned": false,
+    "postId": 1766,
+    "description": "llms.txt — каталог всех 34 пакетов Gravity UI для AI-агентов с версионированной документацией по каждому пакету. Open-source-скилл Gravity UI помогает агентам выбирать правильные пакеты и актуальные API.",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 3,
+    "title": "Gravity UI теперь agent-ready: встречайте llms.txt и скилл Gravity UI",
+    "date": "2026-08-10T00:00:00Z",
+    "likes": 0,
+    "hasUserLike": false,
+    "addLegacyPrefix": false,
+    "tags": [
+        {
+            "icon": null,
+            "slug": "articles",
+            "name": "Статьи"
+        }
+    ],
+    "authors": [],
+    "services": []
+}

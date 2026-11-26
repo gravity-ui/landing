@@ -54,12 +54,10 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowSelectionExample = () => {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
@@ -79,11 +77,11 @@ const RowSelectionExample = () => {
 };
 ```
 
-Um Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne diesen Hook ist der Status der übergeordneten Zeilen-Checkboxes falsch. https://github.com/TanStack/table/issues/4878
+Um Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne diesen Hook ist der Status der Checkbox der übergeordneten Zeile falsch. https://github.com/TanStack/table/issues/4878
 
 #### Benutzerdefinierte Bereichsauswahl-Spalte
 
-Der Hook `useToggleRangeSelectionHandler` gibt einen Änderungs-Handler zurück, der auf Shift+Klick-Ereignisse reagiert und eine Bereichsauswahl von Zeilen durchführt. Er benötigt eine `CellContext`-Instanz, um Zugriff auf die internen Zustände der Tabelle und der Zeilen zu haben.
+Der Hook `useToggleRangeSelectionHandler` gibt einen Änderungs-Handler zurück, der auf Shift+Klick-Ereignisse reagiert und eine Bereichsauswahl von Zeilen durchführt. Er benötigt eine `CellContext`-Instanz, um Zugriff auf die internen Zustände der Tabelle und der Zeile zu haben.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -141,12 +139,10 @@ const customSelectionColumn: ColumnDef<unknown> = {
 
 const columns: ColumnDef<Person>[] = [
   customSelectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowRangedSelectionExample = () => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
@@ -206,7 +202,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 ```
 
@@ -214,18 +210,14 @@ const columns: ColumnDef<Person>[] = [
 
 #### Sortierung
 
-Erfahren Sie mehr über die Spalteneigenschaften in der [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting) von react-table.
+Erfahren Sie mehr über die Spalteneigenschaften in react-table in der [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -319,13 +311,13 @@ const GroupingExample = () => {
 };
 ```
 
-Um die Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne diesen ist der Checkbox-Status der übergeordneten Zeile falsch. https://github.com/TanStack/table/issues/4878
+Um die Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne ihn ist der Kontrollkästchenstatus der übergeordneten Zeile falsch. https://github.com/TanStack/table/issues/4878
 
 Um Verschachtelungsstile zu aktivieren, übergeben Sie `withNestingStyles = true` in der Spaltenkonfiguration.
 
-Verschachtelungsindikatoren können durch Übergabe von `showTreeDepthIndicators = false` deaktiviert werden.
+Verschachtelungsindikatoren können deaktiviert werden, indem `showTreeDepthIndicators = false` übergeben wird.
 
-Um eine Steuerung zum Erweitern/Zusammenklappen von Zeilen hinzuzufügen, umschließen Sie den Zelleninhalt mit der Komponente `TreeExpandableCell` oder einer ähnlichen benutzerdefinierten Komponente:
+Um einen Steuerelement zum Erweitern/Zusammenklappen von Zeilen hinzuzufügen, umschließen Sie den Zelleninhalt mit der Komponente `TreeExpandableCell` oder einer ähnlichen benutzerdefinierten Komponente:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -356,9 +348,7 @@ const columns: ColumnDef<Person>[] = [
   // ...andere Spalten
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ReorderingExample = () => {
   const table = useTable({
@@ -409,18 +399,48 @@ return (
 );
 ```
 
-Der Zeiger muss sich um 8 Pixel bewegen, bevor das Ziehen beginnt, damit normale Zeilen- und Klickereignisse weiterhin funktionieren. Um einen benutzerdefinierten Teil einer Zeile vom Starten eines Ziehvorgangs auszuschließen, rufen Sie `preventDefault()` in seinem `onPointerDown`-Handler auf.
+Der Zeiger muss sich um 8 Pixel bewegen, bevor das Ziehen beginnt. Daher funktionieren normale Zeilen- und Klickereignisse weiterhin. Um einen benutzerdefinierten Teil einer Zeile vom Starten eines Ziehvorgangs auszuschließen, rufen Sie `preventDefault()` in seinem `onPointerDown`-Handler auf.
 
-#### Spaltenneuordnung
+`ReorderingProvider` aktiviert standardmäßig das vertikale automatische Scrollen von dnd-kit. Übergeben Sie `autoScroll={false}`, wenn die Anwendung ihre eigene Implementierung für das automatische Scrollen beim Ziehen bereitstellt. Das gleichzeitige Ausführen beider kann zu konkurrierenden Scroll-Schreibvorgängen führen.
+
+Benutzerdefinierte Ziehpunkte sollten `attributes`, `listeners` und `setActivatorNodeRef` aus dem `DraggableRowContext` lesen und sie dem Ziehpunkt-Element zuweisen. Dies nutzt die DnD-Registrierung der Zeile wieder. Rufen Sie `useSortable` nicht erneut mit derselben Zeilen-ID auf: Ein später von der Virtualisierung montierter Ziehpunkt würde den registrierten DOM-Knoten der Zeile ersetzen.
+
+#### Tastatur-Neuordnung und Barrierefreiheit
+
+`ReorderingProvider` unterstützt das Ziehen von Zeilen per Tastatur.
+Fokussieren Sie einen Ziehpunkt, drücken Sie Leertaste oder Eingabetaste, um die Zeile aufzunehmen, verwenden Sie die Pfeiltasten, um sie zu verschieben, und drücken Sie Leertaste oder Eingabetaste, um sie abzulegen. Escape bricht die Verschiebung ab.
+Das Ziehen per Tastatur gilt nur für Zeilen; Tastaturinteraktionen mit Spaltenüberschriften bleiben unverändert.
+
+Verwenden Sie `accessibility`, um die Bildschirmsprachausgaben von dnd-kit, Ankündigungen, den Ankündigungscontainer und die Fokuswiederherstellung für Tastatur- und Zeiger-Ziehvorgänge anzupassen.
+Wenn Zeilen- und Spaltenanbieter verschachtelt sind, teilen sie sich denselben DnD-Kontext und dieselben Barrierefreiheitseinstellungen; die Reihenfolge der Anbieter spielt keine Rolle.
+
+```tsx
+<ReorderingProvider
+  table={table}
+  onReorder={handleReorder}
+  accessibility={{
+    screenReaderInstructions: {
+      draggable:
+        'Drücken Sie die Leertaste, um eine Zeile aufzunehmen, die Pfeiltasten zum Verschieben, die Eingabetaste zum Ablegen oder Escape zum Abbrechen.',
+    },
+  }}
+>
+  <Table table={table} />
+</ReorderingProvider>
+```
+
+#### Spalten-Neuordnung
 
 Umschließen Sie die Tabelle mit `ColumnReorderingProvider`, um die Drag-and-Drop-Neuordnung von Spalten über ihre Header zu aktivieren.
 
 ```tsx
 import {ColumnReorderingProvider} from '@gravity-ui/table';
+```
 
+```tsx
 const columns: ColumnDef<Person>[] = [
   {accessorKey: 'name', header: 'Name', size: 100},
-  {accessorKey: 'age', header: 'Alter', size: 100},
+  {accessorKey: 'age', header: 'Age', size: 100},
 ];
 
 const ColumnReorderingExample = () => {
@@ -438,9 +458,9 @@ const ColumnReorderingExample = () => {
 };
 ```
 
-### Gleichzeitige Neuordnung von Zeilen und Spalten
+### Zeilen- und Spaltenneuanordnung kombiniert
 
-Verschachteln Sie `ColumnReorderingProvider` und `ReorderingProvider`, um beide Ziehachsen gleichzeitig zu aktivieren. Die Reihenfolge der Provider spielt keine Rolle – sie teilen sich intern einen einzigen dnd-kit-Kontext.
+Verschachteln Sie `ColumnReorderingProvider` und `ReorderingProvider`, um beide Drag-Achsen gleichzeitig zu aktivieren. Die Reihenfolge der Provider spielt keine Rolle – sie teilen sich intern einen einzigen dnd-kit-Kontext.
 
 ```tsx
 import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
@@ -449,44 +469,44 @@ import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@g
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
   {accessorKey: 'name', header: 'Name'},
-  {accessorKey: 'age', header: 'Alter'},
+  {accessorKey: 'age', header: 'Age'},
 ];
 
 const CombinedReorderingExample = () => {
   const [data, setData] = React.useState(initialData);
   const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
 
-```tsx
-const table = useTable({
-  columns,
-  data,
-  getRowId: (item) => item.id,
-  state: {columnOrder},
-  onColumnOrderChange: setColumnOrder,
-});
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
 
-const handleRowReorder = React.useCallback<
-  NonNullable<ReorderingProviderProps<Person>['onReorder']>
->(({draggedItemKey, baseItemKey}) => {
-  // Datenarray aktualisieren
-}, []);
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // Daten-Array aktualisieren
+  }, []);
 
-const handleColumnReorder = React.useCallback<
-  NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
->(({columnOrder}) => {
-  setColumnOrder(columnOrder);
-}, []);
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
 
-return (
-  <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
-    <ReorderingProvider table={table} onReorder={handleRowReorder}>
-      <Table table={table} />
-    </ReorderingProvider>
-  </ColumnReorderingProvider>
-);
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
+    </ColumnReorderingProvider>
+  );
+};
 ```
 
-Wenn Sie `columnOrder` selbst steuern (z. B. um es persistent zu speichern), übergeben Sie `onReorder` und wenden Sie die resultierende Reihenfolge an:
+Wenn Sie `columnOrder` selbst verwalten (z. B. um es persistent zu speichern), übergeben Sie `onReorder` und wenden Sie die resultierende Reihenfolge an:
 
 ```tsx
 const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
@@ -510,16 +530,16 @@ return (
 
 CSS API:
 
-| CSS-Variable                                 | Standardwert                  | Beschreibung                         |
-| -------------------------------------------- | ----------------------------- | ------------------------------------ |
-| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Farbe der Einfügungslinie beim Ablegen |
-| `--gt-table-reordering-insertion-line-width` | `2px`                         | Breite der Einfügungslinie beim Ablegen |
-| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Deckkraft der gezogenen Spalte       |
-| `--gt-table-drag-overlay-background`         | `#fff`                        | Hintergrund der Drag-Vorschau        |
-| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Box-Shadow der Drag-Vorschau         |
-| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Radius der Drag-Vorschau             |
+| CSS-Variable                                 | Standardwert                  | Beschreibung                      |
+| -------------------------------------------- | ----------------------------- | -------------------------------- |
+| `--gt-table-reordering-insertion-line-color` | `#4d8bff`                     | Farbe der Einfügungslinie         |
+| `--gt-table-reordering-insertion-line-width` | `2px`                         | Breite der Einfügungslinie        |
+| `--gt-table-reordering-dragged-opacity`      | `0.4`                         | Deckkraft der gezogenen Spalte    |
+| `--gt-table-drag-overlay-background`         | `#fff`                        | Hintergrund der Drag-Vorschau     |
+| `--gt-table-drag-overlay-shadow`             | `0 3px 12px rgba(0,0,0,0.15)` | Box-Shadow der Drag-Vorschau      |
+| `--gt-table-drag-overlay-border-radius`      | `6px`                         | Border-Radius der Drag-Vorschau   |
 
-Um das Neuanordnen einer bestimmten Spalte zu verbieten, setzen Sie `enableColumnReordering: false` in ihrer Spaltendefinition. Platzhalter- (gruppierte) Spalten sind nicht ziehbar. Verwenden Sie `activationDistance` (Standard `8`), um einzustellen, wie weit sich der Zeiger bewegen muss, bevor ein Ziehvorgang beginnt. Dies stellt sicher, dass Header-Klicks (wie Sortierung) weiterhin funktionieren.
+Um die Neuanordnung einer bestimmten Spalte zu verbieten, setzen Sie `enableColumnReordering: false` in ihrer Spaltendefinition. Platzhalter- (gruppierte) Spalten sind nicht ziehbar. Verwenden Sie `activationDistance` (Standardwert `8`), um einzustellen, wie weit sich der Zeiger bewegen muss, bevor ein Ziehvorgang beginnt. Dies stellt sicher, dass Header-Klicks (wie z. B. zum Sortieren) weiterhin funktionieren.
 
 Angepinnte Spalten können ebenfalls neu angeordnet werden, aber nur untereinander: Eine Spalte kann innerhalb der links angepinnten Gruppe, der rechts angepinnten Gruppe oder der mittleren (nicht angepinnten) Gruppe verschoben werden – sie überschreitet beim Ziehen niemals eine Pin-Grenze.
 
@@ -562,13 +582,9 @@ Verwenden Sie dies, wenn Sie den Grid-Container als Scroll-Element verwenden mö
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const VirtualizationExample = () => {
   const table = useTable({
@@ -594,7 +610,55 @@ const VirtualizationExample = () => {
 };
 ```
 
-Wenn Sie Virtualisierung mit der Neuanordnungsfunktion verwenden, müssen Sie auch die Option `rangeExtractor` übergeben:
+Für Tabellen, die während des kontinuierlichen bidirektionalen Scrollens abgedeckt bleiben müssen, aktivieren Sie den adaptiven
+Direct-DOM-Modus und verwenden Sie stabile semantische Schlüssel. Derselbe Schlüssel muss eine Zeile vor und nach einer
+unveränderlichen Neuanordnung oder einer Baum-Reparenting identifizieren:
+
+```tsx
+import {getColumnAwareRowOverscan} from '@gravity-ui/table';
+```
+
+```tsx
+const rows = table.getRowModel().rows;
+const columnCount = table.getVisibleLeafColumns().length;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: getColumnAwareRowOverscan(columnCount),
+});
+```
+
+`adaptiveFlushSync` hält einen warmen gemounteten Bereich vor und füllt synchron nur einen nicht abgedeckten sichtbaren Bereich. `directDomUpdates` ermöglicht es dem Virtualizer, Zeilenpositionen und die Körpergröße ohne ein React-Rendering für jede Scroll-Benachrichtigung zu aktualisieren. Verwenden Sie `position` für Tabellenzeilen, es sei denn, Transformationen sind durch das umgebende Layout erforderlich. Halten Sie `getRowId` und `getItemKey` stabil und setzen Sie `count` aus dem aktuellen abgeflachten Zeilenmodell nach dem Erweitern, Zusammenklappen, Neuordnen oder Verschieben von Zeilen. Ein beliebiger benutzerdefinierter `rangeExtractor` bleibt maßgeblich und deaktiviert die adaptive Fensterplanung.
+
+`getColumnAwareRowOverscan(columnCount, options?)` reduziert den Basis-Zeilen-Overscan, wenn die Anzahl der Spalten wächst. Standardmäßig teilt er ein Budget von 240 Zellen durch die Spaltenanzahl, rundet ab und begrenzt das Ergebnis auf 4–24 Zeilen. Verwenden Sie `table.getVisibleLeafColumns().length`, um ausgeblendete Spalten auszuschließen und angeheftete Spalten einzuschließen. Der Helfer funktioniert sowohl mit `useRowVirtualizer` als auch mit `useWindowRowVirtualizer`; Sie können stattdessen auch einen expliziten numerischen `overscan` übergeben.
+
+Passen Sie das Budget und die Grenzen an Ihre Zellrenderingkosten an. Wenn Ihre Anwendung Spalten virtualisiert, setzen Sie `renderedColumnLimit` auf die maximale Anzahl von Spalten, die pro Zeile gerendert werden, einschließlich angehefteter Spalten; der Helfer begrenzt die angegebene Spaltenanzahl auf diesen Wert:
+
+```tsx
+const overscan = getColumnAwareRowOverscan(table.getVisibleLeafColumns().length, {
+  renderedColumnLimit: 16,
+  cellBudget: 320,
+  minOverscan: 4,
+  maxOverscan: 20,
+});
+```
+
+Das Ergebnis ist ein Basis-Zeilen-Overscan, keine strikte Grenze für gemountete Zeilen oder Zellen. Sichtbare Zeilen werden zusätzlich zum Overscan gerendert, und adaptives Scrollen kann den gemounteten Bereich erweitern. Alle Eingaben des Helfers müssen nicht-negative sichere Ganzzahlen sein, und `maxOverscan` muss mindestens `minOverscan` sein; ungültige Werte lösen einen `RangeError` aus. Null Spalten werden für die Berechnung als eins behandelt.
+
+`BaseTable.canDeferOffscreenCellContent` ist eine zusätzliche Opt-in-Funktion für sehr breite adaptive Tabellen. Geben Sie nur für passive Zellinhalte `true` zurück, deren verzögertes Mounten Geometrie, Fokus, Barrierefreiheit oder Anwendungsstatus nicht ändern kann. Benutzerdefinierte Zeilen, Gruppierungszeilen, angeheftete Zellen sowie interaktive oder seitenwirksame Inhalte sollten weiterhin eifrig behandelt werden.
+
+Mit dem Standard-Adaptive-Range-Extractor heftet `BaseTable` die aktive gezogene Zeile automatisch an. Ein benutzerdefinierter Range-Extractor ist dafür verantwortlich, diese Zeile selbst beizubehalten. Wenn Sie das Neuordnen mit einem nicht-adaptiven Virtualizer verwenden, behalten Sie denselben semantischen `getItemKey`-Vertrag bei und übergeben Sie die `rangeExtractor`-Option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -620,18 +684,14 @@ return (
 
 #### Fenster-Virtualisierung
 
-Verwenden Sie dies, wenn Sie das Fenster als Scroll-Element verwenden möchten
+Verwenden Sie dies, wenn Sie das Fenster als Scroll-Element verwenden möchten.
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const WindowVirtualizationExample = () => {
   const table = useTable({
@@ -656,15 +716,9 @@ const WindowVirtualizationExample = () => {
 #### Größenänderung
 
 ```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
-```
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-```tsx
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ResizingDemo = () => {
   const table = useTable({
@@ -680,6 +734,8 @@ const ResizingDemo = () => {
 
 #### Spalteneinstellungen
 
+Setzen Sie `enableReset` auf `true`, um die Schaltfläche "Zurücksetzen" im Einstellungs-Popup anzuzeigen (standardmäßig ausgeblendet). Sie stellt die Spaltensichtbarkeit und -reihenfolge aus dem `initialState` der Tabelle wieder her. "Zurücksetzen" ändert den Entwurf des Popups; drücken Sie "Anwenden", um ihn zu speichern. Ohne `initialState` zeigt "Zurücksetzen" alle Spalten in ihrer Definitionsreihenfolge an. Der optionale Callback `onSettingsReset` empfängt diese wiederhergestellte Sichtbarkeit und Spaltenreihenfolge, wenn auf "Zurücksetzen" geklickt wird, bevor der Entwurf angewendet wird.
+
 ```tsx
 const columns: ColumnDef<Person>[] = [
   // ...andere Spalten
@@ -688,25 +744,21 @@ const columns: ColumnDef<Person>[] = [
     header: ({table}) => <TableSettings table={table} />,
     meta: {
       hideInSettings: false, // Optional. Ermöglicht das Ausblenden dieser Spalte aus dem Einstellungs-Popover
-      titleInSettings: 'ReactNode', // Optional. Überschreibt das Header-Feld für das Einstellungs-Popover (falls Sie andere Inhalte für Header und Einstellungs-Popover benötigen)
+      titleInSettings: 'ReactNode', // Optional. Überschreibt das Header-Feld für das Einstellungs-Popover (falls Sie unterschiedliche Inhalte für Header und Einstellungs-Popover benötigen)
     },
   }, // oder Sie können die Funktion getSettingsColumn verwenden
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // für externe Steuerung und Anfangszustand
     column_id: false, // zum standardmäßigen Ausblenden
   });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* IDs der Blattspalten */
-  ]); // für externe Steuerung und Anfangszustand
+  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([/* leaf columns ids */]); // für externe Steuerung und Anfangszustand
 
-  // Alternative Variante, um den Zustand, Rückruffunktionen und das Setzen von Rückruffunktionen bei der Anwendungsbestätigung zu erhalten - Verwendung des Hooks useTableSettings:
+  // Alternative Variante, um Zustand, Callbacks und Setzen von Callbacks beim Anwenden von Einstellungen zu erhalten - Verwendung des useTableSettings Hooks:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -740,7 +792,9 @@ Wenn Sie React 19 mit React Compiler verwenden und Probleme mit dem erneuten Ren
 import React from 'react';
 import {Table, useTable} from '@gravity-ui/table';
 import type {ColumnDef} from '@gravity-ui/table/tanstack';
+```
 
+```tsx
 function MyTable() {
   'use no memo'; // Deaktiviert die Memoization des React Compilers für diese Komponente
 
@@ -757,7 +811,7 @@ function MyTable() {
 
 **Alternative Lösung:**
 
-Sie können die Tabelleninstanz oder die Daten auch explizit memoisieren, um ordnungsgemäße Neurenderings sicherzustellen:
+Sie können die Tabelleninstanz oder die Daten auch explizit memoizen, um korrekte Re-Renders sicherzustellen:
 
 ```tsx
 import React from 'react';
@@ -767,7 +821,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 function MyTable() {
   const [data, setData] = React.useState<Person[]>([]);
 
-  // Memoisiert die Daten explizit, um Neurenderings sicherzustellen
+  // Memoisiert die Daten explizit, um Re-Renders sicherzustellen
   const memoizedData = React.useMemo(() => data, [data]);
 
   const table = useTable({
@@ -779,7 +833,7 @@ function MyTable() {
 }
 ```
 
-**Hinweis:** Dieses Problem liegt in der zugrunde liegenden TanStack Table-Bibliothek und muss dort behoben werden. Die oben genannten Workarounds sollten helfen, bis eine Korrektur verfügbar ist.
+**Hinweis:** Dieses Problem liegt in der zugrunde liegenden TanStack Table-Bibliothek und muss dort behoben werden. Die oben genannten Workarounds sollten helfen, bis eine Lösung verfügbar ist.
 
 ## Lizenz
 
@@ -787,27 +841,27 @@ Verteilt unter der MIT-Lizenz. Details finden Sie in [LICENSE](LICENSE).
 
 ## Für KI-Agenten
 
-Ein Headless-Datenraster, das auf TanStack Table basiert und für Gravity UI-Anwendungen entwickelt wurde. Verwenden Sie es für sortierbare, auswählbare, gruppierbare, neu anordnungsfähige und virtualisierte Tabellen, anstatt rohes Markup über die grundlegende `Table` von uikit zu komponieren.
+Ein Headless-Daten-Grid, das auf TanStack Table basiert und für Gravity UI-Anwendungen gedacht ist. Verwenden Sie es für sortierbare, auswählbare, gruppierbare, neu anordnungsfähige und virtualisierte Tabellen, anstatt rohes Markup auf der Basis von uikit's grundlegendem `Table` zu komponieren.
 
 ### Wann verwenden
 
 - Große Datensätze, die Zeilen- oder Fenster-Virtualisierung benötigen (`useRowVirtualizer`, `useWindowRowVirtualizer`).
-- Spaltensortierung, Größenänderung, Neuanordnung (`ColumnReorderingProvider`), Anheften und benutzerspezifische Spalteneinstellungen (`TableSettings`).
-- Zeilenauswahl (einzeln/mehrere, im Bereich) und Baum-/Gruppierungszeilen mit erweiterbaren Zellen.
+- Spaltensortierung, -größenänderung, -neuanordnung (`ColumnReorderingProvider`), -fixierung und benutzerspezifische Spalteneinstellungen (`TableSettings`).
+- Zeilenauswahl (einzeln/mehrfach, Bereich) und Baum-/Gruppierungszeilen mit erweiterbaren Zellen.
 
 ### Wann nicht verwenden
 
-- Eine einfache, statische Tabelle mit wenigen Zeilen und ohne erweiterte Funktionen – die integrierte `Table` von uikit aus [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) ist leichter.
+- Eine einfache, statische Tabelle mit wenigen Zeilen und ohne erweiterte Funktionen – die ältere `Table` aus [`@gravity-ui/uikit/legacy`](https://github.com/gravity-ui/uikit) ist schlanker.
 - Eine nicht-tabellarische Liste – verwenden Sie `List` aus [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
-- Inline-Zellbearbeitung im Tabellenkalkulationsstil – dieses Raster ist auf Lese-/Anzeigefokus ausgelegt, keine bearbeitbare Tabellenkalkulation.
+- Inline-Zellbearbeitung im Tabellenkalkulationsstil – dieses Grid ist auf Lesen/Anzeigen fokussiert, keine bearbeitbare Tabellenkalkulation.
 
 ### Häufige Fallstricke
 
 - **Sie erstellen die Tabelle mit `useTable` und rendern dann `<Table table={table} />`.** Die Haupt-Prop ist `table` (die Instanz), nicht `data`/`columns` direkt auf `<Table>`; übergeben Sie `data` und `columns` an `useTable`.
-- **Typen stammen aus dem Unterpfad `@gravity-ui/table/tanstack`.** Importieren Sie `ColumnDef`, `RowSelectionState`, `SortingState` usw. aus `@gravity-ui/table/tanstack`, nicht aus dem Stammverzeichnis des Pakets.
+- **Typen stammen aus dem Unterpfad `@gravity-ui/table/tanstack`.** Importieren Sie `ColumnDef`, `RowSelectionState`, `SortingState` usw. aus `@gravity-ui/table/tanstack`, nicht aus dem Paket-Root.
 - **Sortierung benötigt einen Accessor.** Eine Spalte muss `accessorKey`/`accessorFn` haben, damit die Sortierung funktioniert; setzen Sie `enableSorting` und stellen Sie `getRowId` bereit.
-- **React 19 + React Compiler kann Neurenderings überspringen.** Dies ist ein Problem in der zugrunde liegenden TanStack Table-Bibliothek – fügen Sie die Direktive `'use no memo'` zur Komponente hinzu oder memoieren Sie `data`.
-- **Bereichsauswahl funktioniert bei verschachtelten Zeilen nicht.** Die Bereichsauswahl ist bei gruppierten/verschachtelten Zeilen in der Tabelle undefiniertes Verhalten; verwenden Sie `useRowSelectionFixedHandler` für den korrekten Status der Eltern-Kontrollkästchen bei Gruppierung.
+- **React 19 + React Compiler kann Re-Renders überspringen.** Dies ist ein Problem in der vorgelagerten TanStack Table-Bibliothek – fügen Sie die Direktive `'use no memo'` zur Komponente hinzu oder memoizen Sie `data`.
+- **Bereichsauswahl funktioniert bei verschachtelten Zeilen nicht.** Die Bereichsauswahl ist ein undefiniertes Verhalten, wenn die Tabelle gruppierte/verschachtelte Zeilen hat; verwenden Sie `useRowSelectionFixedHandler` für den korrekten Eltern-Checkbox-Status bei Gruppierung.
 
 ## Dokumentation für KI-Agenten
 

@@ -1,0 +1,7 @@
+.preview-tab {
+    &__heading-row {
+        // In Figma the toggle sits flush next to the "UI Samples" heading
+        // with a small spacing gap.
+        gap: var(--g-spacing-3);
+    }
+}

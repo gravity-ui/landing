@@ -1,0 +1,207 @@
+> Generated for `@gravity-ui/page-constructor@8.18.0`
+
+# @gravity-ui/page-constructor documentation
+
+Documentation for the **8.18.0** version of `@gravity-ui/page-constructor`.
+Your training data may be outdated — these files are the source of truth.
+
+Paths are relative to this file (`node_modules/@gravity-ui/page-constructor/build/docs/`).
+
+## For AI agents
+
+A library for rendering whole web pages or page sections from declarative JSON/YAML config, using a set of ready-made, orderable blocks — reach for it to build marketing/landing pages, not general application UI.
+
+### When to use
+
+- Data-driven pages: render a `content` config of typed blocks with `PageConstructor` wrapped in `PageConstructorProvider`.
+- Marketing, landing, and documentation pages assembled from prebuilt blocks (headers, media, cards, etc.).
+- Server-side YFM processing of block text via the `@gravity-ui/page-constructor/server` utilities (`contentTransformer`, `fullTransform`).
+- Reusing just the responsive grid (`Grid`/`Row`/`Col`) or `Navigation` component standalone.
+
+### When not to use
+
+- General application UI (buttons, forms, modals) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
+- Editing Markdown/YFM content — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
+- App navigation shells (aside header) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); this package's `Navigation` is a page-level top nav.
+
+### Common pitfalls
+
+- **`PageConstructor` must be wrapped in `PageConstructorProvider`.** Rendering it bare breaks context (locale, theme, SSR, analytics).
+- **The content prop is `content`, shaped `{blocks: [...]}`.** Each block object needs a `type` matching a known block plus its data fields; there is no `data`/`config` prop.
+- **YFM in block text needs server processing.** Markdown-like fields render as plain text unless you run content through `contentTransformer`/`fullTransform` from `@gravity-ui/page-constructor/server`; `@diplodoc/transform` is a required peer dependency.
+- **Import the SCSS styles.** Add `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, not CSS); custom blocks import the same file to reuse mixins/variables.
+- **Vite needs `vite-plugin-dynamic-import`.** Dynamic block imports fail under Vite without it.
+
+## Install
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+## Peer dependencies
+
+Install these in the host project at a compatible version:
+
+| Package | Version range |
+| --- | --- |
+| `react` | `^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0` |
+| `@gravity-ui/uikit` | `^7.1.1` |
+| `@diplodoc/transform` | `^4.28.2` |
+
+## Usage
+
+First, we need a React project and some kind of server. For example, you can create a React project using Vite and an Express server, or you can create Next.js application - it will have a client and server side at once.
+
+Install the required dependencies:
+
+```shell
+npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
+```
+
+Insert the `Page Constructor` to the page. To work correctly, it must be wrapped in a `PageConstructorProvider`:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+
+const App = () => {
+  const content = {
+    blocks: [
+      {
+        type: 'header-block',
+        title: 'Hello world',
+        background: {color: '#f0f0f0'},
+        description:
+          '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+      },
+    ],
+  };
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+This was the simplest example of a connection. In order for YFM markup to work, you need to process content on the server and receive it on the client.
+
+If your server is a separate application, then you need to install page-constructor:
+
+```shell
+npm install @gravity-ui/page-constructor
+```
+
+To process YFM in all base blocks, call the `contentTransformer` and pass the content and options there:
+
+```ts
+const express = require('express');
+const app = express();
+const {contentTransformer} = require('@gravity-ui/page-constructor/server');
+
+const content = {
+  blocks: [
+    {
+      type: 'header-block',
+      title: 'Hello world',
+      background: {color: '#f0f0f0'},
+      description:
+        '**Congratulations!** Have you built a [page-constructor](https://github.com/gravity-ui/page-constructor) into your website',
+    },
+  ],
+};
+
+app.get('/content', (req, res) => {
+  res.send({content: contentTransformer({content, options: {lang: 'en'}})});
+});
+
+app.listen(3000);
+```
+
+On the client, add an endpoint call to receive content:
+
+```tsx
+import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
+import '@gravity-ui/page-constructor/styles/styles.scss';
+import {useEffect, useState} from 'react';
+
+const App = () => {
+  const [content, setContent] = useState();
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('http://localhost:3000/content').then((r) => r.json());
+      setContent(response.content);
+    })();
+  }, []);
+
+  return (
+    <PageConstructorProvider>
+      <PageConstructor content={content} />
+    </PageConstructorProvider>
+  );
+};
+
+export default App;
+```
+
+### Ready-made template
+
+To start a new project, you can use the [ready-made template on Next.js ](https://github.com/gravity-ui/page-constructor-website-template) which we have prepared.
+
+### Static site builder
+
+[Page Constructor Builder](https://github.com/gravity-ui/page-constructor-builder) - command-line utility for building static pages from YAML configurations using the @gravity-ui/page-constructor
+
+## Guides
+
+- [Data preparation](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/guides/data-preparation.md) — This chapter provides documentaion for server utilities for transforming content, including Yandex Flavored Markdown (YFM) to HTML conversion and text processing. Key features include:
+- [Подготовка данных](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/guides/data-preparation-ru.md) — Документацию по серверным утилитам для преобразования контента, включая конвертацию Yandex Flavored Markdown (YFM) в HTML и обработку текста. Основные возможности:
+
+## Blocks
+
+- [Banner](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Banner.md) — Renders a compact promotional card with a title, subtitle, an optional background image or color, and a single call-to-action button. Use it to highlight a feature, announce a release, or drive traffic to a landing page from anywhere in the page flow.
+- [CardLayout](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/CardLayout.md) — Renders a responsive grid of arbitrary cards (children) with an optional header and a decorative background image. Use it whenever you need to lay out a homogeneous set of cards — basic, image, background, price, or layout-item — in a row that adapts to the viewport.
+- [Companies](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Companies.md) — Renders a heading with a logo strip — a set of responsive images (desktop / tablet / mobile) shown beneath an optional title and description. Use it for "trusted by" or "powered by" logo rows that must adapt per device and theme.
+- [ContentLayout](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/ContentLayout.md) — Renders a single-column content section (title, body text, optional list, links, and buttons) paired with an optional list of downloadable files and a background. Use it for documentation-style sections, terms, descriptions, or anywhere a focused block of text with file attachments is needed.
+- [ExtendedFeatures](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/ExtendedFeatures.md) — Renders a responsive grid of feature cards, each with an icon, title, text, an optional label (New / Preview), and an optional link. Use it to present a list of product features, capabilities, or benefits in a compact, icon-driven layout.
+- [FilterBlock](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/FilterBlock.md) — Renders a set of cards grouped by tags, with a row of toggle buttons that lets the visitor filter the visible cards by tag. Use it to present a catalog of cards (articles, features, products) that the user can narrow down without leaving the page.
+- [FoldableList](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/FoldableList.md) — Renders a two-column block: a content panel on the left (title, text, links, buttons) and a list of collapsible items on the right, each with its own title, YFM text, and optional link. Use it for FAQ-style or specification pages where each row expands to reveal more detail.
+- [Footer](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Footer.md) — A configurable page footer assembled from optional floors: navigation columns, contacts (social icons), disclaimer, copyright (legal links, language switcher, logo), and an attribution strip.
+- [Form](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Form.md) — A two-column block that renders a third-party form (Yandex Forms or HubSpot) alongside optional YFM text content, with a configurable layout direction and background.
+- [Header](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Header.md) — Renders a full-width page header with a title, optional overtitle/description, call-to-action buttons, breadcrumbs, and an optional media asset (image, video, or video iframe) positioned to the right or centered. Use it as the primary hero/landing block at the top of a page.
+- [HeaderSlider](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/HeaderSlider.md) — Renders a carousel of full-bleed header-block slides — each slide carries its own title, description, buttons, and background media. Use it when the top of the page needs to rotate multiple equally important campaigns or announcements instead of a single hero.
+- [Hero](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Hero.md) — Renders a modern, content-driven hero block: an overtitle, a rich content column (title, body text, list, links, buttons) and a media column (image/video/iframe) that adapts to its intrinsic aspect ratio. Use it as the primary landing block when you want more layout flexibility than the classic Header provides.
+- [Icons](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Icons.md) — Renders a responsive grid of small icon items, each consisting of an image and a caption. Items can optionally be wrapped in links, turning the grid into a navigable set of icon links.
+- [Info](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Info.md) — Renders a two-column information section: a left content column and a right content column, each with its own title, text, lists, buttons, and links, placed inside an optional themed background container.
+- [Map](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Map.md) — A media-and-content block that embeds an interactive Yandex Map inside a card, paired with an optional title, description, links, and buttons.
+- [Media](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Media.md) — Renders a two-column layout that pairs a content column (title, body, list, links, button) with a media column (image, video, YouTube, iframe, or DataLens embed). Use it for feature or explainer sections where text and a rich media asset need to sit side by side.
+- [PromoFeaturesBlock](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/PromoFeaturesBlock.md) — Renders a masonry layout of promotional feature cards, each pairing a title, YFM text, and an optional media asset, displayed against a full-width background. Use it for marketing sections that showcase several value propositions with rich imagery in a non-uniform grid.
+- [Questions](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Questions.md) — Renders an FAQ block: a left content panel (title, text, links, buttons) and a list of expandable question/answer rows on the right. Automatically emits FAQPage JSON-LD microdata so search engines can index the answers as rich results.
+- [Share](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Share.md) — Renders a row of social-network share buttons that share the current page URL.
+- [Slider](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Slider.md) — A carousel block that renders any number of child cards as swipeable slides, with optional title, description, dots, arrows, autoplay, and per-breakpoint slide counts. Built on top of Swiper.
+- [SliderOld](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/SliderOld.md)
+- [Table](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Table.md) — Renders a title followed by a comparison-style table whose cells are plain strings or numbers. A legend column can be marked with disk or tick markers, and an optional legend list explains the marked columns.
+- [Tabs](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/blocks/Tabs.md) — Renders a set of tab buttons that switch between rich content panels. Each tab panel pairs a content column (title, text, lists, buttons, links) with an optional media column (image, video, YouTube, iframe, DataLens), with control over column order, sizing, and border treatment.
+
+## Sub-blocks
+
+- [BackgroundCard](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/BackgroundCard.md) — A card that renders text content (title, text, links, buttons, or a content list) over a decorative background image or solid color. Useful for promotional cards inside a card layout.
+- [BannerCard](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/BannerCard.md) — A compact banner card with a title, optional subtitle, a single call-to-action button, and a decorative background image. Designed to draw attention inside a card layout.
+- [BasicCard](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/BasicCard.md) — A general-purpose card with an optional icon (image or Gravity UI icon) and text content (title, text, links, buttons, or a content list). The simplest and most versatile card.
+- [Content](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/Content.md) — A text content block rendering a title, body text, additional info, links, buttons, and/or an icon content list. Used on its own as the textual portion of a content layout.
+- [Divider](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/Divider.md) — A spacing/separator element that adds vertical space between sibling items, optionally drawing a horizontal line. Useful for tuning rhythm inside a layout.
+- [HubspotForm](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/HubspotForm.md) — Embeds a HubSpot form inside a page. Loads the HubSpot scripts on demand and renders the form into a container; emits analytics events on submit and supports default field values and form event handlers.
+- [ImageCard](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/ImageCard.md) — A card pairing a foreground image with text content (title, text, links, buttons, or a content list). The image and content can be ordered in either direction.
+- [LayoutItem](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/LayoutItem.md) — Renders a two-part card: a media area (image, video, YouTube, etc.) stacked above a text content area with optional title, body, buttons, links, list, and meta info. Used as the primary content unit inside card-grid blocks.
+- [MediaCard](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/MediaCard.md) — Wraps a single media element (image, image slider, video, YouTube, iframe, or DataLens) inside a card with an optional border. Pure media card — no text content.
+- [PriceCard](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/PriceCard.md) — Renders a pricing card: a title, a price (with optional period and details), a description, a checklist of features, and optional buttons and links. Typically placed in a grid to compare plans.
+- [PriceDetailed](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/PriceDetailed.md)
+- [Quote](https://unpkg.com/@gravity-ui/page-constructor@8.18.0/build/docs/sub-blocks/Quote.md) — Renders a customer testimonial / quote card: a logo, the quote body, an optional author (name + avatar + description), and an optional CTA button. Paired with a large image on the side.
+
+---
+
+> Docs for `@gravity-ui/page-constructor@8.18.0`. Versioned at: `https://gravity-ui.com/llms/page-constructor/8.18.0/llms.txt` (exact), `https://gravity-ui.com/llms/page-constructor/8/llms.txt` (latest of major 8), `https://gravity-ui.com/llms/page-constructor/llms.txt` (latest). If the version installed in the project differs, fetch the matching URL instead.

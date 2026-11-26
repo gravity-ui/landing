@@ -57,9 +57,7 @@ const columns: ColumnDef<Person>[] = [
   // ...other columns
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowSelectionExample = () => {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({});
@@ -144,9 +142,7 @@ const columns: ColumnDef<Person>[] = [
   // ...other columns
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const RowRangedSelectionExample = () => {
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
@@ -219,13 +215,9 @@ Learn about the column properties in the react-table [docs](https://tanstack.com
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -356,9 +348,7 @@ const columns: ColumnDef<Person>[] = [
   // ...other columns
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ReorderingExample = () => {
   const table = useTable({
@@ -413,6 +403,42 @@ return (
 The pointer must move by 8 pixels before dragging starts, so regular row and control clicks keep
 working. To exclude a custom part of a row from starting a drag, call `preventDefault()` in its
 `onPointerDown` handler.
+
+`ReorderingProvider` enables dnd-kit's vertical auto-scroll by default. Pass `autoScroll={false}`
+when the application supplies its own drag auto-scroll implementation; running both at once can
+produce competing scroll writes.
+
+Custom drag handles should read `attributes`, `listeners`, and `setActivatorNodeRef` from
+`DraggableRowContext` and attach them to the handle element. This reuses the row's DnD
+registration. Do not call `useSortable` again with the same row id: a handle mounted later
+by virtualization would replace the row's registered DOM node.
+
+#### Keyboard reordering and accessibility
+
+`ReorderingProvider` supports keyboard row dragging.
+Focus a drag handle, press Space or Enter to pick up the row, use the arrow keys to move it, and press
+Space or Enter to drop it. Escape cancels the move.
+Keyboard dragging applies only to rows; keyboard interactions with column headers remain unchanged.
+
+Use `accessibility` to customize dnd-kit's screen reader instructions, announcements, announcement
+container, and focus restoration for both keyboard and pointer dragging.
+When row and column providers are nested, they share the same DnD context and accessibility settings;
+provider order does not matter.
+
+```tsx
+<ReorderingProvider
+  table={table}
+  onReorder={handleReorder}
+  accessibility={{
+    screenReaderInstructions: {
+      draggable:
+        'Press Space to pick up a row, arrow keys to move, Enter to drop, or Escape to cancel.',
+    },
+  }}
+>
+  <Table table={table} />
+</ReorderingProvider>
+```
 
 #### Column reordering
 
@@ -565,13 +591,9 @@ Use if you want to use grid container as the scroll element (if you want to use 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const VirtualizationExample = () => {
   const table = useTable({
@@ -597,7 +619,73 @@ const VirtualizationExample = () => {
 };
 ```
 
-If you use virtualization with reordering feature you also need to pass `rangeExtractor` option:
+For tables that must stay covered during continuous bidirectional scrolling, enable the adaptive
+direct-DOM mode and use stable semantic keys. The same key must identify a row before and after an
+immutable reorder or a tree reparent:
+
+```tsx
+import {getColumnAwareRowOverscan} from '@gravity-ui/table';
+
+const rows = table.getRowModel().rows;
+const columnCount = table.getVisibleLeafColumns().length;
+
+const getItemKey = React.useCallback(
+  (index: number) => rows[index]?.id ?? `missing:${index}`,
+  [rows],
+);
+
+const rowVirtualizer = useRowVirtualizer({
+  adaptiveFlushSync: true,
+  count: rows.length,
+  directDomUpdates: true,
+  directDomUpdatesMode: 'position',
+  estimateSize: () => 40,
+  getItemKey,
+  getScrollElement: () => containerRef.current,
+  overscan: getColumnAwareRowOverscan(columnCount),
+});
+```
+
+`adaptiveFlushSync` keeps a warm mounted range and synchronously fills only an uncovered visible
+range. `directDomUpdates` lets the virtualizer update row positions and the body size without a
+React render for every scroll notification. Use `position` for table rows unless transforms are
+required by the surrounding layout. Keep `getRowId` and `getItemKey` stable, and set `count` from
+the current flattened row model after expanding, collapsing, reordering, or reparenting rows.
+An arbitrary custom `rangeExtractor` remains authoritative and disables adaptive window planning.
+
+`getColumnAwareRowOverscan(columnCount, options?)` reduces the base row overscan as the number
+of columns grows. By default, it divides a 240-cell budget by the column count, rounds down,
+and clamps the result to 4–24 rows. Use `table.getVisibleLeafColumns().length` to exclude hidden
+columns and include pinned columns. The helper works with both `useRowVirtualizer` and
+`useWindowRowVirtualizer`; you can still pass an explicit numeric `overscan` instead.
+
+Tune the budget and bounds for your cell rendering cost. If your application virtualizes columns,
+set `renderedColumnLimit` to the maximum number of columns rendered per row, including pinned
+columns; the helper caps the supplied column count at this value:
+
+```tsx
+const overscan = getColumnAwareRowOverscan(table.getVisibleLeafColumns().length, {
+  renderedColumnLimit: 16,
+  cellBudget: 320,
+  minOverscan: 4,
+  maxOverscan: 20,
+});
+```
+
+The result is a base row overscan, not a strict limit on mounted rows or cells. Visible rows are
+rendered in addition to the overscan, and adaptive scrolling can extend the mounted range.
+All helper inputs must be non-negative safe integers, and `maxOverscan` must be at least
+`minOverscan`; invalid values throw a `RangeError`. Zero columns are treated as one for the calculation.
+
+`BaseTable.canDeferOffscreenCellContent` is an additional opt-in for very wide adaptive tables.
+Return `true` only for passive cell content whose delayed mount cannot change geometry, focus,
+accessibility, or application state. Custom rows, group rows, pinned cells, and interactive or
+side-effectful content should remain eager.
+
+With the default adaptive range extractor, `BaseTable` pins the active dragged row automatically.
+A custom range extractor is responsible for retaining that row itself. If you use reordering with
+a non-adaptive virtualizer, keep the same semantic `getItemKey` contract and pass the
+`rangeExtractor` option:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -628,13 +716,9 @@ Use if you want to use window as the scroll element
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
 
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const WindowVirtualizationExample = () => {
   const table = useTable({
@@ -659,13 +743,9 @@ const WindowVirtualizationExample = () => {
 #### Resizing
 
 ```tsx
-const columns: ColumnDef<Person>[] = [
-  /* ... */
-];
+const columns: ColumnDef<Person>[] = [/* ... */];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const ResizingDemo = () => {
   const table = useTable({
@@ -681,6 +761,13 @@ const ResizingDemo = () => {
 
 #### Column settings
 
+Set `enableReset` to `true` to show the settings popup's Reset button (hidden by default).
+It restores column visibility and order from the table's `initialState`. Reset changes
+the popup draft; press Apply to save it. Without an `initialState`, Reset shows all
+columns in their definition order.
+The optional `onSettingsReset` callback receives that restored visibility and column order
+when Reset is clicked, before the draft is applied.
+
 ```tsx
 const columns: ColumnDef<Person>[] = [
   // ...other columns
@@ -694,18 +781,14 @@ const columns: ColumnDef<Person>[] = [
   }, // or you can use function getSettingsColumn
 ];
 
-const data: Person[] = [
-  /* ... */
-];
+const data: Person[] = [/* ... */];
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
     // for outside control and initial state
     column_id: false, // for hidding by default
   });
-  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* leaf columns ids */
-  ]); // for outside control and initial state
+  const [columnOrder, onColumnOrderChange] = React.useState<string[]>([/* leaf columns ids */]); // for outside control and initial state
 
   // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
@@ -798,7 +881,7 @@ A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for i
 
 ### When not to use
 
-- A simple, static table with a handful of rows and no advanced features — uikit's built-in `Table` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit) is lighter.
+- A simple, static table with a handful of rows and no advanced features — the legacy `Table` from [`@gravity-ui/uikit/legacy`](https://github.com/gravity-ui/uikit) is lighter.
 - A non-tabular list — use `List` from [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Spreadsheet-style inline cell editing — this grid is read/display-focused, not an editable spreadsheet.
 

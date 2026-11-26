@@ -37,7 +37,7 @@ app.listen(3000);
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // JSON互換の任意のデータ。ページ上の window.__DATA__ に設定されます。
+  // window.__DATA__ に設定される、JSON互換の任意のデータ
   data?: Data;
   // ファビコン
   icon?: Icon;
@@ -49,7 +49,7 @@ interface RenderParams<Data, Plugins> {
   // 一般的なオプション
   // ページのタイトル
   title: string;
-  // ページの言語。html タグに設定されます。
+  // ページの言語、html タグに設定される
   lang?: string;
   isMobile?: boolean;
 
@@ -77,7 +77,7 @@ interface RenderParams<Data, Plugins> {
     attributes?: string;
     // root div タグの前の body の内容
     beforeRoot?: string;
-    // id="root" の div タグの内部 HTML コンテンツ
+    // id="root" の div タグの内部 HTML
     root?: string;
     // root div タグの後の body の内容
     afterRoot?: string;
@@ -128,18 +128,18 @@ interface Meta {
 
 ```js
 const meta = [
-  {name: 'description', content: 'some text'},
+  {name: 'description', content: 'テキスト'},
   {name: 'robots', content: 'noindex'},
-  {name: 'og:title', content: 'Some title'},
+  {name: 'og:title', content: 'タイトル'},
 ];
 ```
 
 次のようにレンダリングされます:
 
 ```html
-<meta name="description" content="some text" />
+<meta name="description" content="テキスト" />
 <meta name="robots" content="noindex" />
-<meta property="og:title" content="Some title" />
+<meta property="og:title" content="タイトル" />
 ```
 
 ### Icon
@@ -200,7 +200,7 @@ const link = {
 
 ### Scripts
 
-プリロード付きスクリプトへのリンクを記述します:
+プリロード付きのスクリプトへのリンクを記述します:
 
 ```typescript
 interface Script {
@@ -318,9 +318,9 @@ export interface RenderHelpers {
 
 ### Google Analytics
 
-ページに Google Analytics カウンターを追加します。
+ページにGoogle Analyticsカウンターを追加します。
 
-使い方:
+使い方：
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
@@ -344,7 +344,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグインオプション:
+プラグインオプション：
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -359,9 +359,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-ページに Yandex メトリカカウンターを追加します。
+ページにYandexメトリカカウンターを追加します。
 
-使い方:
+使い方：
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -388,7 +388,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグインオプション:
+プラグインオプション：
 
 ```typescript
 export type UserParams = {
@@ -419,9 +419,9 @@ export type MetrikaOptions = {
 
 ### Layout
 
-webpack アセットマニフェストファイルからスクリプトとスタイルを追加します。
+webpack assets manifest ファイルからスクリプトとスタイルを追加します。
 
-使い方:
+使い方：
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -444,7 +444,7 @@ app.get((req, res) => {
 });
 ```
 
-プラグインオプション:
+プラグインオプション：
 
 ```typescript
 export interface LayoutOptions {
@@ -453,11 +453,81 @@ export interface LayoutOptions {
 }
 ```
 
+#### Public path のフォールバック
+
+`publicPath` からの読み込みに失敗した場合、バックアップアドレスから初期スクリプトとスタイルシートを読み込みます。
+
+使い方：
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: ['https://backup.example.com/build/', '/build/'],
+});
+```
+
+これらのオプションは `createDefaultPlugins({layout: …})` でも利用可能です。上記の例のように `pluginsOptions.layout.name` でレイアウトプラグインを有効にします。`publicPathFallbacks` を省略するか `[]` を渡すと、通常のレンダリングが維持されます。
+
+コールバック関数を使用することもできます：
+
+```js
+createLayoutPlugin({
+  manifest: 'path/to/assets-manifest.json',
+  publicPath: 'https://static.example.com/build/',
+  publicPathFallbacks: () =>
+    location.hostname.endsWith('.example.org')
+      ? ['https://backup.example.org/build/', '/build/']
+      : ['/build/'],
+});
+```
+
+関数は一度だけ実行され、クロージャやインポートなしで自己完結している必要があります。`{publicPath}` を受け取ります。ルート相対のプライマリパスの場合、この値には `layout.prefix` が含まれます。`[]` を返すと、リトライなしでプライマリアドレスが使用されます。
+
+ローダーは `app-layout` がビルドされる際にバンドルされ、ミニファイされます。ユーザーコールバックは `Function.prototype.toString()` を使用してコンパイルされたサーバーコードからシリアライズされます。esbuild の `keepNames` のような変換は、ブラウザで利用できない外部ヘルパー (`__name`) を注入する可能性があります。コールバックは最終的なサーバービルドでテストしてください。ブートストラップが失敗した場合、HTML パーシング中の同期登録は `document.write` を介してスクリプトタグを復元しますが、これはブラウザの制限を受けます。CSP が登録スクリプトをブロックした場合、リカバリは機能しません。
+
+リトライオプション：
+
+```typescript
+interface AssetRetryOptions {
+  retries?: number; // アドレスごとの追加試行回数。デフォルト: 0。
+  delayMs?: number; // 最初のリトライ前の遅延時間（ミリ秒）。デフォルト: 500。
+  factor?: number; // 後続のリトライ遅延時間の乗数。デフォルト: 2。
+  maxDelayMs?: number; // 最大リトライ遅延時間（ミリ秒）。デフォルト: 3000。
+  timeoutMs?: number; // 試行タイムアウト時間（ミリ秒）。デフォルト: 10000。0 で無効化。
+}
+```
+
+これらのオプションを `assetRetry` として `createLayoutPlugin` に渡します。デフォルトでは、リソースエラーが発生すると、同じ URL をリトライせずに次のアドレスに切り替わります。`retries` を設定すると、指数関数的な遅延で追加の試行が可能になります。ローダーは最後に成功したアドレスを記憶し、後続のスクリプトはそこから開始し、残りのアドレスをバックアップとして循環します。スタイルシートは常に `publicPath` から開始し、次に設定された順序でバックアップアドレスを試行します。個々の失敗は優先アドレスを変更しません。成功したロード後にのみ変更されます。インフライトリソースは候補順序を維持します。明示的な `undefined` オプション値はデフォルト値を使用します。
+
+各スクリプトまたはスタイルシートの試行には `timeoutMs` の制限があります（デフォルトは 10000 ミリ秒）。タイムアウトはロードエラーと同じリトライポリシーに従います。試行回数が残っている間は現在の URL をリトライし、その後次のアドレスを試行します。タイムアウトを無効にするには `0` を設定します。ローダーはタイムアウトした要素を削除し、それらの遅延コールバックを無視します。スクリプトを削除しても、その実行がキャンセルされることは保証されません。
+
+バックアップアドレスは、同じビルドファイルを同じ相対パスで提供する必要があります。ベースアドレスにクエリパラメータやフラグメントを含めないでください。末尾のスラッシュは自動的に追加され、重複するアドレスは削除されます。`/build/` のようなパスはページのオリジンに対して相対的です。アプリケーションプレフィックスがあれば明示的に含めてください。CSP でバックアップドメインを許可し、CORS を設定してください。
+
+読み込みの動作：
+
+- `defer` スクリプト（`async` や `type` なし）とプライマリパス下のスタイルシートをサポートし、`nonce` および `crossOrigin` を保持します。その他のリソースは通常のレンダリングを維持します。レスポンスフラグメントの管理対象アセットはすべて、ブートストラップの直後に、ヘッドの順序（スタイルシート、次にスクリプト）でエミットされる単一のインラインスクリプトによって登録されます。元のスクリプトタグはレンダリングされません。
+- スタイルシートは HTML に含まれ、JavaScript ローダーが開始できない場合でも並列でロードされます。リトライ中に部分的にスタイルが適用されたコンテンツが表示される可能性があります。スクリプトは、スタイルシートの試行が完了し、DOM が準備できた後に順序どおりに実行されます。`DOMContentLoaded` は、アプリケーションのロードが完了したことを意味するわけではありません。
+- 最終的な失敗は、`window` 上で `app-layout:asset-load-error` をエミットします。イベントの詳細には `{type, originalUrl, attempts}` が含まれ、エクスポートされた `AssetLoadError` 型によって記述されます。`attempts` は、リトライを含む試行された URL のリストです。ハンドラーはリソースがロードされる前に登録してください。最終的なスタイルシートのロード失敗はスクリプトをブロックしません。最終的なスクリプトのロード失敗は、ローダーのスクリプトキューを停止します。
+- ストリーミング中の初期スクリプトには、`renderScripts(content, scripts, state)` を使用し、次に同じ `state: AssetRenderState = {}` で `renderHeadContent(content, state)` を使用します。これは 1 つの HTML レスポンスに対して行われ、コンテンツが再生成される場合でも同様です。`renderHeadContent` は HTML レスポンスごとに 1 回呼び出されます。ブートストラップは 1 回エミットされ、その初期設定はレスポンス全体に適用されます。直接の `content.helpers` の呼び出しは、フォールバック処理なしで通常のタグをレンダリングします。
+- ストリーミング中、スタイルシートの `timeoutMs` は、その参照が HTML に到着したときに開始されます。`DOMContentLoaded` で見つからない登録済みスタイルシートリンクは失敗として報告され、スクリプトをブロックしません。
+
+```ts
+import {renderHeadContent, renderScripts, type AssetRenderState} from '@gravity-ui/app-layout';
+
+const state: AssetRenderState = {};
+res.write(renderScripts(content, firstScripts, state));
+// ... await data and regenerate content if needed.
+res.write(renderHeadContent(content, state));
+```
+
+遅延チャンクには、[App Builder](https://github.com/gravity-ui/app-builder) の `client.publicPathFallback` のような個別の設定が必要です。両方のライブラリでバックアップアドレスを設定してください。フォールバックリストはグローバル変数を通じて共有されません。
+
 ### @gravity-ui/uikit
 
 body 属性を追加します。
 
-使い方:
+使用方法:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -467,7 +537,7 @@ const renderLayout = createRenderFunction([createUikitPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'ホームページ',
+      title: 'Home page',
       pluginsOptions: {
         uikit: {
           theme: 'dark',
@@ -492,11 +562,11 @@ interface UikitPluginOptions {
 
 マイクロフロントエンドのバージョン情報をページに追加します。
 
-このプラグインは、指定されたマイクロフロントエンドのバージョンを含むグローバルな `window.__REMOTE_VERSIONS__` オブジェクトを作成します。これは、モジュールフェデレーションや同様のマイクロフロントエンドアーキテクチャが、ロードするリモートモジュールのバージョンを決定するために使用できます。
+このプラグインは、提供されたマイクロフロントエンドのバージョンを含むグローバルな `window.__REMOTE_VERSIONS__` オブジェクトを作成します。これは、モジュールフェデレーションや同様のマイクロフロントエンドアーキテクチャが、ロードするリモートモジュールのバージョンを決定するために使用できます。
 
-[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) および `moduleFederation.remotesRuntimeVersioning` オプションと組み合わせて、対応するバージョンのリモートモジュールを自動的にロードするために使用できます。
+[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) および `moduleFederation.remotesRuntimeVersioning` オプションと組み合わせて使用することで、対応するバージョンのリモートモジュールを自動的にロードできます。
 
-使い方:
+使用方法:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -506,7 +576,7 @@ const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
 app.get((req, res) => {
   res.send(
     renderLayout({
-      title: 'ホームページ',
+      title: 'Home page',
       pluginsOptions: {
         remoteVersions: {
           header: '1.2.3',
@@ -525,7 +595,7 @@ app.get((req, res) => {
 type RemoteVersionsPluginOptions = Record<string, string>;
 ```
 
-### ヘルパー
+### Helpers
 
 すべてのプラグインを作成するためのヘルパーがあります。
 
@@ -538,7 +608,7 @@ const renderLayout = createRenderFunction(
 
 app.get((req, res) => {
     res.send(renderLayout({
-        title: 'ホームページ',
+        title: 'Home page',
         pluginsOptions: {
             layout: {
                 name: 'home'
@@ -554,9 +624,9 @@ app.get((req, res) => {
 })
 ```
 
-## 代替の使い方
+## 代替使用方法
 
-`generateRenderContent`、`renderHeadContent`、`renderBodyContent` のパーツレンダラーを HTML ストリーミング経由で使用します。
+`generateRenderContent`、`renderHeadContent`、`renderBodyContent` のパーツレンダラーを使用して HTML ストリーミングを行います。
 
 ```js
 import express from 'express';
@@ -576,42 +646,17 @@ app.get('/', async function (req, res) {
     'Transfer-Encoding': 'chunked',
   });
 
-```markdown
-# @gravity/uikit
-
-このライブラリは、Reactアプリケーションのサーバーサイドレンダリング（SSR）を容易にするためのユーティリティを提供します。
-
-## インストール
-
-```bash
-npm install @gravity/uikit
-# または
-yarn add @gravity/uikit
-```
-
-## 使用例
-
-以下は、Express.jsアプリケーションでこのライブラリを使用して、基本的なSSRページをレンダリングする例です。
-
-```javascript
-import express from 'express';
-import { createDefaultPlugins, generateRenderContent, renderHeadContent, renderBodyContent } from '@gravity/uikit';
-import htmlescape from 'htmlescape';
-
-const app = express();
-
-app.get('/', async (req, res) => {
-  const plugins = createDefaultPlugins({ layout: { manifest: 'path/to/assets-manifest.json' } });
+  const plugins = createDefaultPlugins({layout: {manifest: 'path/to/assets-manifest.json'}});
 
   const content = generateRenderContent(plugins, {
-    title: 'ホーム',
+    title: 'Home page',
   });
 
-  const { htmlAttributes, helpers, bodyContent } = content;
+  const {htmlAttributes, helpers, bodyContent} = content;
 
   res.write(`
         <!DOCTYPE html>
-        <html ${helpers.attrs({ ...htmlAttributes })}>
+        <html ${helpers.attrs({...htmlAttributes})}>
         <head>
             ${renderHeadContent(content)}
         </head>
@@ -632,48 +677,4 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(3000);
-```
-
-この例では、以下のことを行っています。
-
-1.  `createDefaultPlugins` を使用して、SSRに必要なデフォルトのプラグインを作成します。`layout.manifest` は、アセットマニフェストファイルのパスを指定します。
-2.  `generateRenderContent` を使用して、ページのレンダリングに必要なコンテンツを生成します。`title` はページのタイトルを設定します。
-3.  生成された `content` オブジェクトから `htmlAttributes`、`helpers`、`bodyContent` を取得します。
-4.  基本的なHTML構造を構築し、`helpers.attrs` を使用して属性を適用します。
-5.  `renderHeadContent` でヘッダー部分をレンダリングします。
-6.  `renderBodyContent` でボディ部分をレンダリングします。
-7.  `getUserData` で非同期にデータを取得します。
-8.  `content.renderHelpers.renderInlineScript` を使用して、取得したデータをJavaScript変数 `window.__DATA__` としてインラインスクリプトで埋め込みます。`htmlescape` は、データを安全にエスケープするために使用されます。
-9.  レスポンスを終了します。
-
-## API
-
-### `createDefaultPlugins(options)`
-
-SSRのためのデフォルトプラグインを作成します。
-
-*   `options`:
-    *   `layout`:
-        *   `manifest`: アセットマニフェストファイルのパス (文字列)。
-
-### `generateRenderContent(plugins, pageOptions)`
-
-ページのレンダリングに必要なコンテンツを生成します。
-
-*   `plugins`: プラグインの配列。
-*   `pageOptions`:
-    *   `title`: ページのタイトル (文字列)。
-    *   その他、プラグインが期待するオプション。
-
-### `renderHeadContent(content)`
-
-HTMLの `<head>` セクションの内容をレンダリングします。
-
-### `renderBodyContent(content)`
-
-HTMLの `<body>` セクションの内容をレンダリングします。
-
-## ライセンス
-
-MITライセンスで提供されています。
 ```

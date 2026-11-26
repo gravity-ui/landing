@@ -5,12 +5,14 @@ import React, {useCallback, useMemo} from 'react';
 import {useWindowBreakpoint} from 'src/hooks/useWindowBreakpoint';
 
 import {useLocale} from '../../../../hooks/useLocale';
+import {sendAnalyticsEvent} from '../../../../utils/analytics';
 import {block} from '../../../../utils/block';
 import {CodeExample} from '../../../CodeExample/CodeExample';
 import {useThemeCreator} from '../../hooks';
 import {
     APPLY_THEME_TEMPLATE,
     FIGMA_GRAVITY_THEMER_LINK,
+    createStorybookThemeLink,
     exportThemeForDialog,
 } from '../../lib/themeCreatorExport';
 
@@ -34,8 +36,11 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
         () => exportThemeForDialog({themeState, format: 'css'}),
         [themeState],
     );
+    const storybookThemeLink = useMemo(() => createStorybookThemeLink(themeState), [themeState]);
 
     const onSaveThemeCSSClick = useCallback(() => {
+        sendAnalyticsEvent('theme_export', 'css');
+
         const blob = new Blob([themeStylesCSS]);
 
         const url = URL.createObjectURL(blob);
@@ -48,6 +53,8 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
     }, [themeStylesCSS]);
 
     const onSaveThemeJSONClick = useCallback(() => {
+        sendAnalyticsEvent('theme_export', 'json');
+
         const themeStylesJSONString = exportThemeForDialog({themeState, format: 'json'});
         const blob = new Blob([themeStylesJSONString]);
 
@@ -90,6 +97,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
             isOpen={isOpen}
             onSaveThemeCSSClick={onSaveThemeCSSClick}
             onSaveThemeJSONClick={onSaveThemeJSONClick}
+            storybookThemeLink={storybookThemeLink}
             breakpoint={breakpoint}
         >
             <ExportContent />
@@ -100,6 +108,7 @@ export const ThemeExport = ({isOpen, onClose}: ThemeExportProps) => {
             isOpen={isOpen}
             onSaveThemeCSSClick={onSaveThemeCSSClick}
             onSaveThemeJSONClick={onSaveThemeJSONClick}
+            storybookThemeLink={storybookThemeLink}
         >
             <ExportContent />
         </ThemeExportSheet>

@@ -1,0 +1,85 @@
+{
+    "id": 4849,
+    "name": "blog/agent-ready",
+    "createdAt": "2026-08-10T00:00:00.000Z",
+    "updatedAt": "2026-08-10T00:00:00.000Z",
+    "type": "default",
+    "isDeleted": false,
+    "versionOnTranslationId": null,
+    "searchCategorySlug": "blog",
+    "regions": [],
+    "pageId": 4849,
+    "regionCode": "en-en",
+    "publishedVersionId": 80900,
+    "lastVersionId": 80900,
+    "content": "blocks:\n    - type: 'blog-header-block'\n      resetPaddings: true\n      paddingBottom: l\n      width: m\n      verticalOffset: m\n      theme: dark\n      background:\n        image:\n          src: 'https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png'\n          disableCompress: true\n        color: '#2A1A2A'\n        fullWidth: false\n\n    - type: 'blog-layout-block'\n      resetPaddings: true\n      mobileOrder: reverse\n      children:\n\n      - type: 'blog-yfm-block'\n        column: 'right'\n        resetPaddings: true\n        text: |\n\n          In this article:\n\n            - [llms.txt: a map of Gravity UI for agents](#llms-txt)\n            - [The Gravity UI skill: fewer wrong turns](#skill)\n            - [Try it and tell us what breaks](#try)\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          A growing share of UI code is written not by hand, but by AI coding agents. And that exposed a problem: with 30+ packages in Gravity UI, agents tend to guess. They pick `@gravity-ui/chartkit` when they need `@gravity-ui/charts`, use uikit's built-in Table where the standalone `@gravity-ui/table` belongs, rely on outdated APIs, or simply invent props and icon names.\n\n          Today we're shipping two things that turn guessing into knowing.\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          ## llms.txt: a map of Gravity UI for agents{#llms-txt}\n\n          [gravity-ui.com/llms.txt](https://gravity-ui.com/llms.txt){target=\"_blank\"} is a compact, agent-facing catalog of all 34 Gravity UI packages. For each one it explains what the package is for and, just as importantly, when *not* to use it and what to reach for instead.\n\n          From the catalog, agents can drill down into per-package docs, and those are versioned:\n\n            - `/llms/<package>/llms.txt` — latest\n            - `/llms/<package>/<major>/llms.txt` — latest within a major line\n            - `/llms/<package>/<version>/llms.txt` — exact version\n\n          The catalog explicitly tells agents to read your `package.json` first and match the installed versions. Peer-version mismatches are the most common failure mode we see in agent-generated code.\n\n          If your tool already understands llms.txt, there's nothing to configure. If not, just point your agent at the URL.\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          ## The Gravity UI skill: fewer wrong turns{#skill}\n\n          For agents that support the open skills format, we also released a skill:\n\n          ```bash\n          npx skills add gravity-ui/skills\n          ```\n\n          It installs into Claude Code, Cursor, Codex, GitHub Copilot and 70+ other agents. The skill helps the agent choose the correct package, use current component APIs and real icon names, and handle `@gravity-ui/*` imports, `ThemeProvider` setup and `--g-*` CSS design tokens correctly, across typical tasks like dashboards, data tables, charts and forms.\n\n          The skill is open source under MIT: [github.com/gravity-ui/skills](https://github.com/gravity-ui/skills){target=\"_blank\"}\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          ## Try it and tell us what breaks{#try}\n\n          Install the skill, point your agent at llms.txt, and let it build something real. If the agent still gets something wrong, that's a bug in our docs and we want to know about it. Issues and PRs are welcome in the [skills repo](https://github.com/gravity-ui/skills){target=\"_blank\"}.\n\n    - type: 'blog-layout-block'\n      resetPaddings: true\n      fullWidth: false\n      children:\n      - type: 'blog-meta-block'\n        column: 'left'\n        resetPaddings: true\n\n    - type: 'blog-suggest-block'\n      resetPaddings: true",
+    "title": "",
+    "noIndex": false,
+    "shareTitle": null,
+    "shareDescription": null,
+    "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "pageLocaleId": null,
+    "author": "timofeyevvv",
+    "metaDescription": null,
+    "keywords": [],
+    "shareGenTitle": null,
+    "canonicalLink": null,
+    "sharingType": "semi-full",
+    "sharingTheme": "dark",
+    "comment": "initial en",
+    "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "pageRegionId": 15600,
+    "summary": null,
+    "versionId": 80900,
+    "service": null,
+    "solution": null,
+    "locales": [
+        {
+            "id": 5528,
+            "pageId": 4849,
+            "locale": "ru",
+            "createdAt": "2026-08-10T00:00:00.000Z",
+            "updatedAt": "2026-08-10T00:00:00.000Z",
+            "publishedVersionId": null,
+            "lastVersionId": 80900
+        },
+        {
+            "id": 5529,
+            "pageId": 4849,
+            "locale": "en",
+            "createdAt": "2026-08-10T00:00:00.000Z",
+            "updatedAt": "2026-08-10T00:00:00.000Z",
+            "publishedVersionId": null,
+            "lastVersionId": 80900
+        }
+    ],
+    "pageRegions": [
+        {
+            "regionCode": "int-ru",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "en-ru",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "ru-kz",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "en",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "ru-ru",
+            "publishedVersionId": 80900
+        }
+    ],
+    "searchCategory": {
+        "id": 7,
+        "slug": "blog",
+        "title": "Blog",
+        "url": "/blog"
+    },
+    "voiceovers": []
+}

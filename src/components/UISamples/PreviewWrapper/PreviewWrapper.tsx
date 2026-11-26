@@ -11,6 +11,7 @@ import {
 import React, {ReactNode, useState} from 'react';
 
 import {block} from '../../../utils';
+import {usePreviewModeContext} from '../PreviewModeContext/PreviewModeContext';
 
 import './PreviewWrapper.scss';
 
@@ -22,15 +23,23 @@ export interface PreviewWrapperProps {
 const b = block('themes-preview-wrapper');
 
 export function PreviewWrapper({styles, ...props}: PreviewWrapperProps) {
-    const [theme, setTheme] = useState<Theme>('dark');
+    const {forcedMode, hideToggle} = usePreviewModeContext();
+    const [localTheme, setLocalTheme] = useState<Theme>('dark');
     const containerRef = React.useRef<HTMLDivElement>(null);
+
+    const theme: Theme = forcedMode ?? localTheme;
 
     return (
         <ThemeProvider theme={theme} scoped rootClassName={`${b()} ${b({theme})}`}>
             {styles ? <style>{styles}</style> : undefined}
             <div className={b('content')} ref={containerRef}>
                 <PortalProvider container={containerRef}>
-                    <Content {...props} theme={theme} onThemeUpdate={setTheme} />
+                    <Content
+                        {...props}
+                        theme={theme}
+                        onThemeUpdate={setLocalTheme}
+                        hideThemeSwitcher={hideToggle}
+                    />
                 </PortalProvider>
             </div>
         </ThemeProvider>
@@ -41,11 +50,13 @@ function Content({
     children,
     theme,
     onThemeUpdate,
+    hideThemeSwitcher,
 }: Pick<PreviewWrapperProps, 'children'> & {
     theme: Theme;
     onThemeUpdate: (value: Theme) => void;
+    hideThemeSwitcher: boolean;
 }) {
-    const themeSwitcher = (
+    const themeSwitcher: ReactNode = hideThemeSwitcher ? null : (
         <SegmentedRadioGroup
             name="theme"
             defaultValue="light"

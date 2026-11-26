@@ -1,0 +1,17 @@
+{
+    "$schema": "./meta.schema.json",
+    "id": "dust-olive",
+    "name": "Dust Olive",
+    "author": {
+        "name": "miyako"
+    },
+    "description": {
+        "en": "Muted olive palette grounded in earthy, calm aesthetics.",
+        "ru": "Приглушённые оливковые тона в землистой спокойной эстетике."
+    },
+    "tags": [
+        "minimal",
+        "modern"
+    ],
+    "brandColor": "#5B807C"
+}

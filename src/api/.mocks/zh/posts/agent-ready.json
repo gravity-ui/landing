@@ -1,0 +1,23 @@
+{
+    "id": 1766,
+    "name": "agent-ready",
+    "isPinned": false,
+    "postId": 1766,
+    "description": "llms.txt 是一份面向 AI 智能体的 Gravity UI 全部 34 个包的目录，附带按包版本化的文档。开源的 Gravity UI 技能帮助编码智能体选对包并使用最新 API。",
+    "image": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "readingTime": 3,
+    "title": "Gravity UI 现已 agent-ready：认识 llms.txt 与 Gravity UI 技能",
+    "date": "2026-08-10T00:00:00Z",
+    "likes": 0,
+    "hasUserLike": false,
+    "addLegacyPrefix": false,
+    "tags": [
+        {
+            "icon": null,
+            "slug": "articles",
+            "name": "文章"
+        }
+    ],
+    "authors": [],
+    "services": []
+}

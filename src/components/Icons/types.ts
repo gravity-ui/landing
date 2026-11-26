@@ -6,6 +6,7 @@ export type IconMeta = {
     svgName: string;
     componentName: string;
     keywords: string[];
+    categories: string[];
 };
 
 export type IconItem = {

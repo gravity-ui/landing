@@ -1,0 +1,85 @@
+{
+    "id": 4849,
+    "name": "blog/agent-ready",
+    "createdAt": "2026-08-10T00:00:00.000Z",
+    "updatedAt": "2026-08-10T00:00:00.000Z",
+    "type": "default",
+    "isDeleted": false,
+    "versionOnTranslationId": null,
+    "searchCategorySlug": "blog",
+    "regions": [],
+    "pageId": 4849,
+    "regionCode": "ja-ja",
+    "publishedVersionId": 80900,
+    "lastVersionId": 80900,
+    "content": "blocks:\n    - type: 'blog-header-block'\n      resetPaddings: true\n      paddingBottom: l\n      width: m\n      verticalOffset: m\n      theme: dark\n      background:\n        image:\n          src: 'https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png'\n          disableCompress: true\n        color: '#2A1A2A'\n        fullWidth: false\n\n    - type: 'blog-layout-block'\n      resetPaddings: true\n      mobileOrder: reverse\n      children:\n\n      - type: 'blog-yfm-block'\n        column: 'right'\n        resetPaddings: true\n        text: |\n\n          この記事の内容：\n\n            - [llms.txt：エージェントのためのGravity UIの地図](#llms-txt)\n            - [Gravity UIスキル：間違いを減らす](#skill)\n            - [試して、問題があれば教えてください](#try)\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          UIコードのますます多くの部分が、手書きではなくAIコーディングエージェントによって書かれるようになっています。そこで問題が明らかになりました。Gravity UIには30以上のパッケージがあり、エージェントは推測に頼りがちです。`@gravity-ui/charts`が必要なのに`@gravity-ui/chartkit`を選んだり、独立した`@gravity-ui/table`を使うべき場面でuikit内蔵のTableを使ったり、古いAPIに依存したり、propsやアイコン名をでっち上げたりします。\n\n          今日、推測を知識に変える2つのものをリリースします。\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          ## llms.txt：エージェントのためのGravity UIの地図{#llms-txt}\n\n          [gravity-ui.com/llms.txt](https://gravity-ui.com/llms.txt){target=\"_blank\"}は、Gravity UIの全34パッケージをまとめた、エージェント向けのコンパクトなカタログです。各パッケージについて、その用途に加えて、同じくらい重要な「いつ使うべきでないか、代わりに何を選ぶべきか」も説明しています。\n\n          カタログからエージェントはパッケージごとのドキュメントに降りていくことができ、それらはバージョン管理されています：\n\n            - `/llms/<package>/llms.txt` — 最新版\n            - `/llms/<package>/<major>/llms.txt` — メジャーライン内の最新版\n            - `/llms/<package>/<version>/llms.txt` — 特定バージョン\n\n          カタログはエージェントに、まずプロジェクトの`package.json`を読み、インストール済みのバージョンに合わせるよう明示的に指示します。peerバージョンの不一致は、エージェントが生成したコードで最もよく見られる失敗モードです。\n\n          お使いのツールがすでにllms.txtを理解しているなら、設定は不要です。そうでなければ、エージェントにURLを渡すだけです。\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          ## Gravity UIスキル：間違いを減らす{#skill}\n\n          オープンなスキル形式をサポートするエージェント向けに、スキルもリリースしました：\n\n          ```bash\n          npx skills add gravity-ui/skills\n          ```\n\n          Claude Code、Cursor、Codex、GitHub Copilotをはじめ、70以上のエージェントにインストールできます。スキルは、正しいパッケージの選択、最新のコンポーネントAPIと実在するアイコン名の使用、`@gravity-ui/*`のインポート、`ThemeProvider`のセットアップ、`--g-*` CSSデザイントークンの正しい扱いを支援します。ダッシュボード、データテーブル、チャート、フォームといった典型的なタスクで役立ちます。\n\n          スキルはMITライセンスのオープンソースです：[github.com/gravity-ui/skills](https://github.com/gravity-ui/skills){target=\"_blank\"}\n\n      - type: 'blog-yfm-block'\n        column: 'left'\n        resetPaddings: true\n        text: |\n\n          ## 試して、問題があれば教えてください{#try}\n\n          スキルをインストールし、エージェントにllms.txtを渡して、実際に何かを作らせてみてください。それでもエージェントが間違えるなら、それは私たちのドキュメントのバグです。ぜひ教えてください。[skillsリポジトリ](https://github.com/gravity-ui/skills){target=\"_blank\"}へのissueやPRを歓迎します。\n\n    - type: 'blog-layout-block'\n      resetPaddings: true\n      fullWidth: false\n      children:\n      - type: 'blog-meta-block'\n        column: 'left'\n        resetPaddings: true\n\n    - type: 'blog-suggest-block'\n      resetPaddings: true",
+    "title": "",
+    "noIndex": false,
+    "shareTitle": null,
+    "shareDescription": null,
+    "shareImage": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "pageLocaleId": null,
+    "author": "timofeyevvv",
+    "metaDescription": null,
+    "keywords": [],
+    "shareGenTitle": null,
+    "canonicalLink": null,
+    "sharingType": "semi-full",
+    "sharingTheme": "dark",
+    "comment": "initial ja",
+    "shareImageUrl": "https://storage.yandexcloud.net/gravity-landing-static/blog/blog-cover-bg.png",
+    "pageRegionId": 15600,
+    "summary": null,
+    "versionId": 80900,
+    "service": null,
+    "solution": null,
+    "locales": [
+        {
+            "id": 5528,
+            "pageId": 4849,
+            "locale": "ru",
+            "createdAt": "2026-08-10T00:00:00.000Z",
+            "updatedAt": "2026-08-10T00:00:00.000Z",
+            "publishedVersionId": null,
+            "lastVersionId": 80900
+        },
+        {
+            "id": 5529,
+            "pageId": 4849,
+            "locale": "en",
+            "createdAt": "2026-08-10T00:00:00.000Z",
+            "updatedAt": "2026-08-10T00:00:00.000Z",
+            "publishedVersionId": null,
+            "lastVersionId": 80900
+        }
+    ],
+    "pageRegions": [
+        {
+            "regionCode": "int-ru",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "en-ru",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "ru-kz",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "en",
+            "publishedVersionId": null
+        },
+        {
+            "regionCode": "ru-ru",
+            "publishedVersionId": 80900
+        }
+    ],
+    "searchCategory": {
+        "id": 7,
+        "slug": "blog",
+        "title": "ブログ",
+        "url": "/blog"
+    },
+    "voiceovers": []
+}

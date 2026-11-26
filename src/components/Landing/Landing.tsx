@@ -13,6 +13,7 @@ import {GithubStarsBlock} from '../../blocks/GithubStarsBlock/GithubStarsBlock';
 import {IFrameBlock} from '../../blocks/IFrameBlock/IFrameBlock';
 import {Libraries} from '../../blocks/Libraries/Libraries';
 import {RoadmapBlock} from '../../blocks/RoadmapBlock/RoadmapBlock';
+import StartCreatingBlock from '../../blocks/StartCreating/StartCreating';
 import TemplatesBlock from '../../blocks/TemplatesBlock/TemplatesBlock';
 import {CustomBlock} from '../../blocks/constants';
 import {getLanding} from '../../content/landing';
@@ -70,6 +71,7 @@ export const Landing: React.FC<Props> = ({libs, backgroundImageSrc}) => {
                         [CustomBlock.Libraries]: Libraries,
                         [CustomBlock.Roadmap]: RoadmapBlock,
                         [CustomBlock.Templates]: TemplatesBlock,
+                        [CustomBlock.StartCreating]: StartCreatingBlock,
                         [CustomBlock.Contributors]: ContributorsBlock,
                         [CustomBlock.Iframe]: IFrameBlock,
                     },

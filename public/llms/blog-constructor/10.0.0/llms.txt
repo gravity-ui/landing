@@ -29,7 +29,7 @@ Install these in the host project at a compatible version:
 ## Links
 
 - [README](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/README.md)
-- [Storybook](https://preview.yandexcloud.dev/blog-constructor/)
+- [Storybook](https://preview.gravity-ui.com/blog-constructor/)
 - [Changelog](https://raw.githubusercontent.com/gravity-ui/blog-constructor/main/CHANGELOG.md)
 - [GitHub](https://github.com/gravity-ui/blog-constructor)
 
