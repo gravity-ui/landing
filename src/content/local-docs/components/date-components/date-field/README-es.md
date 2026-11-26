@@ -1,18 +1,14 @@
-<!--GITHUB_BLOCK-->
-
-# DateField
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_0_END
 
 ```tsx
 import {DateField} from '@gravity-ui/date-components';
 ```
 
-`DateField` component es un campo de entrada versátil y conveniente diseñado específicamente para la entrada de fechas en aplicaciones React. Con una interfaz intuitiva y una integración sencilla, es perfecto para cualquier formulario que requiera introducir fecha u hora, como planificadores de eventos, sistemas de reservas o informes basados en datos. Se puede controlar si se establece la `value` propiedad. O puede estar descontrolado si no establece ningún valor, pero en este caso puede administrar el estado inicial con una propiedad `defaultValue` opcional. El componente no está controlado de forma predeterminada.
+El componente `DateField` es un campo de entrada versátil y conveniente diseñado específicamente para la entrada de fechas en aplicaciones React. Con una interfaz intuitiva y una fácil integración, es perfecto para cualquier formulario que requiera la entrada de fecha u hora, como planificadores de eventos, sistemas de reservas o informes basados en datos. Puede ser controlado si establece la propiedad `value`. O puede ser no controlado si no establece ningún valor, pero en este caso puede administrar el estado inicial con la propiedad opcional `defaultValue`. El componente no está controlado por defecto.
 
-### Adición útil
+## Adición útil
 
-Para establecer las fechas en el formato correcto, es posible que deba incluir ayudantes adicionales de la biblioteca de [Date Utils](https://gravity-ui.com/libraries/date-utils).
+Para establecer fechas en el formato correcto, es posible que necesite incluir ayudantes adicionales de la [biblioteca Date Utils](https://gravity-ui.com/libraries/date-utils)
 
 ```tsx
 import {dateTimeParse} from '@gravity-ui/date-utils';
@@ -20,371 +16,169 @@ import {dateTimeParse} from '@gravity-ui/date-utils';
 
 ## Apariencia
 
-La apariencia de `DateField` está controlada por `size` las `pin` propiedades `view` y.
+La apariencia de `DateField` se controla mediante las propiedades `size`, `view` y `pin`.
 
 ### Tamaño
 
-Para controlar el tamaño del `DateField` uso de la `size` propiedad. El tamaño predeterminado es `m`.
+Para controlar el tamaño de `DateField`, use la propiedad `size`. El tamaño predeterminado es `m`.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField size="s" />
-<DateField size="m" />
-<DateField size="l" />
-<DateField size="xl" />
-`}
->
-    <DateComponents.DateField size="s" />
-    <DateComponents.DateField size="m" />
-    <DateComponents.DateField size="l" />
-    <DateComponents.DateField size="xl" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_1_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_2_END
 
-```tsx
-<DateField size="s" />
-<DateField size="m" />
-<DateField size="l" />
-<DateField size="xl" />
-```
+### Vista
 
-<!--/GITHUB_BLOCK-->
+`normal` - la vista principal de `DateField` (utilizada por defecto).
 
-### Ver
+GRAVITY_TRANSLATION_BLOCK_3_END
 
-`normal`- la vista principal de `DateField` (utilizada de forma predeterminada).
+`clear` - vista de `DateField` sin bordes visibles (se puede usar con un contenedor personalizado)
 
-<!--LANDING_BLOCK
-<ExampleBlock code={`<DateField />`}>
-    <DateComponents.DateField />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_4_END
 
-`clear`- vista `DateField` sin bordes visibles (se puede usar con un envoltorio personalizado)
+GRAVITY_TRANSLATION_BLOCK_5_END
 
-<!--LANDING_BLOCK
-<ExampleBlock code={`<DateField view="clear" />`}>
-    <DateComponents.DateField view="clear" />
-</ExampleBlock>
-LANDING_BLOCK-->
+### Pin
 
-<!--GITHUB_BLOCK-->
+La propiedad `pin` le permite controlar la forma de los bordes derecho e izquierdo y se usa generalmente para combinar varios controles en una sola unidad.
+El valor de la propiedad `pin` consta de los nombres de estilo del borde izquierdo y derecho divididos por un guion, por ejemplo, `"round-brick"`.
+Los estilos de borde son: `round` (predeterminado), `circle`, `brick` y `clear`.
 
-```tsx
-<DateField view="normal" />
-<DateField view="clear" />
-```
+GRAVITY_TRANSLATION_BLOCK_6_END
 
-<!--/GITHUB_BLOCK-->
-
-### Alfiler
-
-La `pin` propiedad permite controlar la forma de los bordes derecho e izquierdo y, por lo general, se usa para combinar varios controles en una sola unidad.
-El valor de la `pin` propiedad consiste en los nombres de los estilos izquierdo y de borde divididos por un guión, `"round-brick"` p. ej.
-Los estilos de arista son: `round` (predeterminado) `brick` y `clear`. `circle`
-
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField pin="round-brick" />
-<DateField pin="brick-brick" />
-<DateField pin="brick-round" />
-`}
->
-    <DateComponents.DateField pin="round-brick" />
-    <DateComponents.DateField pin="brick-brick" />
-    <DateComponents.DateField pin="brick-round" />
-</ExampleBlock>
-LANDING_BLOCK-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<DateField pin="round-brick" />
-<DateField pin="brick-brick" />
-<DateField pin="brick-round" />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_7_END
 
 ## Valor
 
 ### Valor mínimo y máximo
 
-La `minValue` propiedad permite especificar la fecha y la hora más tempranas que puede introducir el usuario. Por el contrario, la `maxValue` propiedad especifica la fecha y la hora más recientes que se pueden introducir. Si ingresas el valor fuera de estos límites, el componente cambia su vista, como en el caso de un estado de validación no válido.
+La propiedad `minValue` le permite especificar la fecha y hora más temprana que el usuario puede ingresar. Por el contrario, la propiedad `maxValue` especifica la fecha y hora más tardía que el usuario puede ingresar. Si ingresa un valor fuera de estos límites, el componente cambia su vista, como en el caso de un estado de validación inválido.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField minValue={dateTimeParse('01.01.2024')} placeholder={"minValue: '01.01.2024'"}/>
-<DateField maxValue={dateTimeParse('01.01.2025')} placeholder={"maxValue: '01.01.2025'"}/>
-`}
->
-    <DateComponentsExamples.DateFieldExample minValue={'01.01.2024'} placeholder={"minValue: '01.01.2024'"} />
-    <DateComponentsExamples.DateFieldExample maxValue={'01.01.2025'} placeholder={"maxValue: '01.01.2025'"} />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_8_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-
-<DateField minValue={dateTimeParse('01.01.2024')} />
-<DateField maxValue={dateTimeParse('01.01.2025')} />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_9_END
 
 ## Estados
 
-### Discapacitado
+### Deshabilitado
 
-El estado en el `DateField` que no desea que el usuario pueda interactuar con el componente.
+El estado de `DateField` en el que no desea que el usuario pueda interactuar con el componente.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField disabled={true} defaultValue={dateTimeParse(new Date())} />
-`}
->
-    <DateComponentsExamples.DateFieldExample disabled={true} defaultValue={new Date()} />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_10_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<DateField disabled defaultValue={dateTimeParse(new Date())} />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_11_END
 
 ### Solo lectura
 
-`readOnly` es un atributo booleano que, cuando se establece en verdadero, hace que el `DateField` componente sea inmutable para el usuario. Esto significa que, si bien la entrada mostrará su valor actual, los usuarios no podrán cambiarla.
+`readOnly` es un atributo booleano que, cuando se establece en verdadero, hace que el componente `DateField` sea inmutable para el usuario. Esto significa que, si bien la entrada mostrará su valor actual, los usuarios no podrán cambiarlo.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField readOnly defaultValue={dateTimeParse(new Date())} />
-`}
->
-    <DateComponentsExamples.DateFieldExample readOnly defaultValue={new Date()} />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_12_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<DateField readOnly defaultValue={dateTimeParse(new Date())} />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_13_END
 
 ### Error
 
-El estado `DateField` en el que desea indicar una entrada de usuario incorrecta. Para cambiar el `DateField` aspecto, utilice la `validationState` propiedad con el `"invalid"` valor. Se puede agregar un texto de mensaje opcional a través de la `errorMessage` propiedad. El texto del mensaje se mostrará en el componente.
+El estado de `DateField` en el que desea indicar una entrada de usuario incorrecta. Para cambiar la apariencia de `DateField`, use la propiedad `validationState` con el valor `"invalid"`. Se puede agregar un mensaje opcional a través de la propiedad `errorMessage`. El texto del mensaje se renderizará debajo del componente.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField errorMessage="Error message" validationState="invalid" />
-<DateField validationState="invalid" />
-`}
->
-    <DateComponents.DateField errorMessage="Error message" validationState="invalid" />
-    <DateComponents.DateField validationState="invalid" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_14_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<DateField errorMessage="Error message" validationState="invalid" />
-<DateField validationState="invalid" />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_15_END
 
 ## Contenido adicional
 
 ### Marcador de posición
 
-Este accesorio le permite proporcionar una breve sugerencia que describa el valor esperado del campo de entrada. Esta sugerencia se muestra en el campo de entrada antes de que el usuario introduzca un valor y desaparece al introducir el texto.
+Esta prop le permite proporcionar una breve indicación que describe el valor esperado del campo de entrada. Esta indicación se muestra dentro del campo de entrada antes de que el usuario ingrese un valor y desaparece al ingresar texto.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField placeholder='Placeholder' />
-`}
->
-    <DateComponents.DateField placeholder='Placeholder' />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_16_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<DateField placeholder="Placeholder" />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_17_END
 
 ### Etiqueta
 
-Le permite colocar la etiqueta en la parte izquierda del campo. La etiqueta no puede ocupar más de la mitad del ancho de todo el espacio de `DateField`.
+Permite colocar la etiqueta en la parte izquierda del campo. La etiqueta puede ocupar no más de la mitad del ancho total del espacio de `DateField`.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField label="Label" />
-<DateField label="Very long label with huge amount of symbols" />
-`}
->
-    <DateComponents.DateField label="Label" />
-    <DateComponents.DateField label="Very long label with huge amount of symbols" />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_18_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_19_END
 
-```tsx
-<DateField label="Label" />
-```
+### Botón de borrar
 
-<!--/GITHUB_BLOCK-->
+`hasClear` es una prop booleana que brinda a los usuarios la capacidad de borrar rápidamente el contenido del campo de entrada.
 
-### Botón Borrar
+GRAVITY_TRANSLATION_BLOCK_20_END
 
-`hasClear` es un accesorio booleano que brinda a los usuarios la posibilidad de borrar rápidamente el contenido del campo de entrada.
+GRAVITY_TRANSLATION_BLOCK_21_END
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`<DateField hasClear />`}
->
-    <DateComponents.DateField
-        hasClear
-    />
-</ExampleBlock>
-LANDING_BLOCK-->
+### Contenido de inicio
 
-<!--GITHUB_BLOCK-->
+Permite agregar contenido a la parte inicial del campo. Se coloca antes de todos los demás componentes.
 
-```tsx
-<DateField hasClear />
-```
+GRAVITY_TRANSLATION_BLOCK_22_END
 
-<!--/GITHUB_BLOCK-->
-
-### Iniciar contenido
-
-Le permite agregar contenido a la parte inicial del campo. Se coloca antes que todos los demás componentes.
-
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`<DateField label="Label" startContent={<Label size="s">Start content</Label>} />`}
->
-    <DateComponents.DateField
-        label="Label"
-        startContent={<UIKit.Label size="s">Start content</UIKit.Label>}
-    />
-</ExampleBlock>
-LANDING_BLOCK-->
-
-<!--GITHUB_BLOCK-->
-
-```tsx
-<DateField label="Label" startContent={<Label>Start content</Label>} />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_23_END
 
 ### Contenido final
 
-Le permite agregar contenido a la parte final del campo. Se coloca después de todos los demás componentes.
+Permite agregar contenido a la parte final del campo. Se coloca después de todos los demás componentes.
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`<DateField endContent={<Label size="s">End content</Label>} hasClear/>`}
->
-    <DateComponents.DateField
-        hasClear
-        endContent={<UIKit.Label size="s">End content</UIKit.Label>}
-    />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_24_END
 
-<!--GITHUB_BLOCK-->
-
-```tsx
-<DateField hasClear endContent={<Label>End content</Label>} />
-```
-
-<!--/GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_25_END
 
 ## Formato
 
-El `format` accesorio es una cadena que define el formato de fecha y hora que el `DateField` componente aceptará y mostrará. Este accesorio determina cómo se presentan visualmente la fecha y la hora al usuario y cómo se espera que se formatee la entrada del usuario. [Formatos disponibles](https://day.js.org/docs/en/display/format)
+La prop `format` es una cadena que define el formato de fecha y hora que el componente `DateField` aceptará y mostrará. Esta prop determina cómo se presentan visualmente la fecha y la hora al usuario y cómo se espera que se formatee la entrada del usuario. [Formatos disponibles](https://day.js.org/docs/en/display/format)
 
-<!--LANDING_BLOCK
-<ExampleBlock
-    code={`
-<DateField format='LTS' />
-`}
->
-    <DateComponents.DateField format='LTS' />
-</ExampleBlock>
-LANDING_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_26_END
 
-<!--GITHUB_BLOCK-->
+GRAVITY_TRANSLATION_BLOCK_27_END
 
-```tsx
-<DateField format="LTS" />
-```
+### Analizador de fechas personalizado
 
-<!--/GITHUB_BLOCK-->
+Puede proporcionar una función de análisis personalizada para manejar cadenas de fechas pegadas a través de la prop `parseDateFromString`. Esto es útil cuando necesita admitir formatos de fecha específicos o lógica de análisis personalizada que difiere del comportamiento predeterminado.
+
+GRAVITY_TRANSLATION_BLOCK_28_END
 
 ## Zona horaria
 
-`timeZone` es la propiedad para establecer la zona horaria del valor de la entrada. [Más información sobre las zonas horarias](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)
+`timeZone` es la propiedad para establecer la zona horaria del valor en la entrada. [Más información sobre zonas horarias](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)
 
 ## Propiedades
 
-| Nombre                | Descripción                                                                                                                              |                      Tipo                       |      Predeterminado       |
-| :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------: | :-----------------------: |
-| aria, descrita por    | El `aria-describedby` atributo del control                                                                                               |                    `string`                     |                           |
-| detalles de aria      | El `aria-details` atributo del control                                                                                                   |                    `string`                     |                           |
-| etiqueta aria         | El `aria-label` atributo del control                                                                                                     |                    `string`                     |                           |
-| aria - etiquetada por | El `aria-labelledby` atributo del control                                                                                                |                    `string`                     |                           |
-| autoFocus             | El `autofocus` atributo del control                                                                                                      |                    `boolean`                    |                           |
-| className             | El nombre de la clase contenedora del control                                                                                            |                    `string`                     |                           |
-| defaultValue          | Establece el valor inicial del componente no controlado.                                                                                 |                   `DateTime`                    |                           |
-| inhabilitado          | Indica que el usuario no puede interactuar con el control                                                                                |                    `boolean`                    |          `false`          |
-| errorMessage          | Texto de error                                                                                                                           |                   `ReactNode`                   |                           |
-| formato               | Formato de la fecha cuando se representa en la entrada. [Formatos disponibles](https://day.js.org/docs/en/display/format)                |                    `string`                     |                           |
-| hasClear              | Muestra el icono para borrar el valor del control                                                                                        |                    `boolean`                    |          `false`          |
-| identificación        | El `id` atributo del control                                                                                                             |                    `string`                     |                           |
-| isDateUnavailable     | Llamada que se solicita para cada fecha del calendario. Si se devuelve verdadero, significa que la fecha no está disponible.             |         `((date: DateTime) => boolean)`         |                           |
-| etiqueta              | Texto de ayuda representado a la izquierda del nodo de entrada                                                                           |                    `string`                     |                           |
-| startContent          | El nodo del usuario`renderizado antes de la etiqueta y la entrada                                                                        |                `React.ReactNode`                |                           |
-| maxValue              | La fecha máxima permitida que puede seleccionar un usuario.                                                                              |                   `DateTime`                    |                           |
-| minValue              | La fecha mínima permitida que un usuario puede seleccionar.                                                                              |                   `DateTime`                    |                           |
-| onBlur                | Se dispara cuando el control pierde el foco. Proporciona un evento de enfoque como argumento de devolución de llamada                    | `(e: focusEvent<Element, Element> () => vacío)` |                           |
-| onFocus               | Se dispara cuando el control se enfoca. Proporciona un evento de enfoque como argumento de devolución de llamada                         | `(e: focusEvent<Element, Element> () => vacío)` |                           |
-| onKeyDown             | Se dispara cuando se pulsa una tecla. Proporciona un evento de teclado como argumento de devolución de llamada                           |     `(e: KeyboardEvent<Element>) = nulo)>`      |                           |
-| onKeyUp               | Se dispara cuando se suelta una tecla. Proporciona un evento de teclado como argumento de devolución de llamada                          |     `(e: KeyboardEvent<Element>) = nulo)>`      |                           |
-| onUpdate              | Se activa cuando el usuario cambia el valor. Proporciona un nuevo valor como argumento de devolución de llamada                          |      `(valor: Fecha/hora\| nulo) => nulo`       |                           |
-| alfiler               | Redondeo de esquinas                                                                                                                     |                    `string`                     |      `'round-round'`      |
-| marcador de posición  | Texto que aparece en el control cuando no tiene ningún valor establecido                                                                 |                    `string`                     |                           |
-| placeholderValue      | Un marcador de fecha que controla los valores predeterminados de cada segmento cuando el usuario interactúa con ellos por primera vez.   |                   `DateTime`                    | `today's date at midnigh` |
-| readOnly              | Si el valor del componente es inmutable.                                                                                                 |                    `boolean`                    |          `false`          |
-| endContent            | El nodo del usuario`se representa después del nodo de entrada y el botón de borrar                                                       |                `React.ReactNode`                |                           |
-| tamaño                | El tamaño del control                                                                                                                    |                  `"s"` `"xl"`                   |           `"m"`           |
-| estilo                | Establece el estilo en línea del elemento.                                                                                               |                 `CSSProperties`                 |                           |
-| timeZone              | Establece la zona horaria. [Más información sobre las zonas horarias](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |                    `string`                     |                           |
-| validationState       | Estado de validación                                                                                                                     |                   `"invalid"`                   |                           |
-| valor                 | El valor del control                                                                                                                     |                `DateTime` `null`                |                           |
-| vista                 | La vista del control                                                                                                                     |              `"normal"` `"clear"`               |        `"normal"`         |
+| Nombre                | Descripción                                                                                                          |                               Tipo                                 |          Predeterminado          |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------: | :-----------------------: |
+| aria-describedby    | El atributo `aria-describedby` del control                                                                           |                               `string`                               |                           |
+| aria-details        | El atributo `aria-details` del control                                                                               |                               `string`                               |                           |
+| aria-label          | El atributo `aria-label` del control                                                                                 |                               `string`                               |                           |
+| aria-labelledby     | El atributo `aria-labelledby` del control                                                                            |                               `string`                               |                           |
+| autoFocus           | El atributo `autofocus` del control                                                                                  |                              `boolean`                               |                           |
+| className           | El nombre de clase del contenedor del control                                                                                     |                               `string`                               |                           |
+| defaultValue        | Establece el valor inicial para un componente no controlado.                                                                   |                              `DateTime`                              |                           |
+| disabled            | Indica que el usuario no puede interactuar con el control                                                             |                              `boolean`                               |          `false`          |
+| errorMessage        | Texto de error                                                                                                           |                             `ReactNode`                              |                           |
+| format              | Formato de la fecha cuando se muestra en el input. [Formatos disponibles](https://day.js.org/docs/en/display/format)        |                               `string`                               |                           |
+| hasClear            | Muestra el icono para borrar el valor del control                                                                          |                              `boolean`                               |          `false`          |
+| id                  | El atributo `id` del control                                                                                         |                               `string`                               |                           |
+| isDateUnavailable   | Función de devolución de llamada que se llama para cada fecha del calendario. Si devuelve `true`, la fecha no está disponible.             |                   `((date: DateTime) => boolean)`                    |                           |
+| label               | Texto de ayuda que se muestra a la izquierda del nodo de entrada                                                                     |                               `string`                               |                           |
+| startContent        | El nodo del usuario que se muestra antes de la etiqueta y la entrada                                                                      |                          `React.ReactNode`                           |                           |
+| maxValue            | La fecha máxima permitida que un usuario puede seleccionar.                                                                     |                              `DateTime`                              |                           |
+| minValue            | La fecha mínima permitida que un usuario puede seleccionar.                                                                     |                              `DateTime`                              |                           |
+| onBlur              | Se activa cuando el control pierde el foco. Proporciona el evento de foco como argumento de la devolución de llamada                                     |            `((e: FocusEvent<Element, Element>) => void)`             |                           |
+| onFocus             | Se activa cuando el control obtiene el foco. Proporciona el evento de foco como argumento de la devolución de llamada                                     |            `((e: FocusEvent<Element, Element>) => void)`             |                           |
+| onKeyDown           | Se activa cuando se presiona una tecla. Proporciona el evento de teclado como argumento de la devolución de llamada                                        |               `((e: KeyboardEvent<Element>) => void)`                |                           |
+| onKeyUp             | Se activa cuando se suelta una tecla. Proporciona el evento de teclado como argumento de la devolución de llamada                                       |               `((e: KeyboardEvent<Element>) => void)`                |                           |
+| onUpdate            | Se activa cuando el valor es cambiado por el usuario. Proporciona el nuevo valor como argumento de la devolución de llamada                            |                 `((value: DateTime \| null) => void`                 |                           |
+| parseDateFromString | Función de análisis personalizada para analizar cadenas de fechas pegadas. Si no se proporciona, se utilizará el analizador predeterminado.            | `((dateStr: string, format: string, timeZone?: string) => DateTime)` |                           |
+| pin                 | Redondeo de esquinas                                                                                                      |                               `string`                               |      `'round-round'`      |
+| placeholder         | Texto que aparece en el control cuando no tiene ningún valor establecido                                                            |                               `string`                               |                           |
+| placeholderValue    | Una fecha de marcador de posición que controla los valores predeterminados de cada segmento cuando el usuario interactúa con ellos por primera vez.         |                              `DateTime`                              | `la fecha de hoy a medianoche` |
+| readOnly            | Si el valor del componente es inmutable.                                                                          |                              `boolean`                               |          `false`          |
+| endContent          | Nodo del usuario que se muestra después del nodo de entrada y el botón de borrado                                                           |                          `React.ReactNode`                           |                           |
+| size                | El tamaño del control                                                                                              |                       `"s"` `"m"` `"l"` `"xl"`                       |           `"m"`           |
+| style               | Establece el estilo en línea para el elemento.                                                                                   |                           `CSSProperties`                            |                           |
+| timeZone            | Establece la zona horaria. [Más información sobre zonas horarias](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) |                               `string`                               |                           |
+| validationState     | Estado de validación                                                                                                     |                             `"invalid"`                              |                           |
+| value               | El valor del control                                                                                             |                          `DateTime` `null`                           |                           |
+| view                | La vista del control                                                                                              |                         `"normal"` `"clear"`                         |        `"normal"`         |
