@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Portal
+
+<!--/GITHUB_BLOCK-->
 
 `Portal` est un composant utilitaire. Essentiellement, il s'agit d'un simple wrapper autour de [`createPortal`](https://react.dev/reference/react-dom/createPortal) de React qui vous permet de rendre des enfants dans un nœud DOM en dehors du composant parent.
 
@@ -16,10 +20,10 @@ import {Portal, PortalProvider} from '@gravity-ui/uikit'
 
 const myRoot = document.getElementById('my-root');
 
-<Portal>Ceci est rendu dans document.body</Portal>
-<Portal container={myRoot}>Ceci est rendu dans le nœud #my-root</Portal>
+<Portal>This is rendered inside document.body</Portal>
+<Portal container={myRoot}>This is rendered inside #my-root node</Portal>
 <PortalProvider container={myRoot}>
-    <Portal>Ceci est également rendu dans #my-root</Portal>
+    <Portal>This is also rendered inside #my-root</Portal>
 </PortalProvider>
 ```
 

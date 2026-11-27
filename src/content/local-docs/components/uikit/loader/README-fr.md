@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Loader
+
+<!--/GITHUB_BLOCK-->
+
 Le composant `Loader` affiche la progression du chargement sous forme de barres clignotantes. Contrairement à `Spin`, ce composant est utilisé dans des scénarios globaux, par exemple pour une page entière ou une `Dialog`.
 
 ```tsx
@@ -6,9 +12,29 @@ import {Loader} from '@gravity-ui/uikit';
 
 ### Taille
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Loader} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Loader size="s" />
+            <Loader size="m" />
+            <Loader size="l" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Loader size="s" />
+<Loader size="m" />
+<Loader size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `S` : Petite taille, utilisée lorsque le chargeur normal est trop grand.
 

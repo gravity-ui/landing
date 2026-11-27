@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Select
+
+<!--/GITHUB_BLOCK-->
+
 `Select` est un contrôle qui fournit une liste d'options parmi lesquelles l'utilisateur peut choisir.
 
 ```tsx
@@ -14,15 +20,145 @@ Vous pouvez définir les options sous forme de tableau d'objets ou comme enfants
 
 #### Liste plate
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Flex, Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const options = [
+    {value: 'val_1', content: 'Value 1'},
+    {value: 'val_2', content: 'Value 2'},
+    {value: 'val_3', content: 'Value 3'},
+    {value: 'val_4', content: 'Value 4'},
+];
+
+export default function () {
+    return (
+        <>
+            <Flex gap={1} alignItems="center">
+                Array of objects
+                <Select placeholder="value" options={options} />
+            </Flex>
+            <Flex gap={1} alignItems="center">
+                Child nodes
+                <Select placeholder="value">
+                    <Select.Option value="val_1">Value 1</Select.Option>
+                    <Select.Option value="val_2">Value 2</Select.Option>
+                    <Select.Option value="val_3">Value 3</Select.Option>
+                    <Select.Option value="val_4">Value 4</Select.Option>
+                </Select>
+            </Flex>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+// Array of objects
+<Select
+  placeholder="value"
+  options={[
+    {value: 'val_1', content: 'Value 1'},
+    {value: 'val_2', content: 'Value 2'},
+    {value: 'val_3', content: 'Value 3'},
+    {value: 'val_4', content: 'Value 4'},
+  ]}
+/>
+// Child nodes
+<Select placeholder="value">
+  <Select.Option value="val_1">Value 1</Select.Option>
+  <Select.Option value="val_2">Value 2</Select.Option>
+  <Select.Option value="val_3">Value 3</Select.Option>
+  <Select.Option value="val_4">Value 4</Select.Option>
+</Select>
+```
+
+<!--/GITHUB_BLOCK-->
 
 #### Liste groupée
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Flex, Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const groupedOptions = [
+    {
+        label: 'Group 1',
+        options: [
+            {value: 'val_1', content: 'Value 1'},
+            {value: 'val_2', content: 'Value 2'},
+        ],
+    },
+    {
+        label: 'Group 2',
+        options: [
+            {value: 'val_3', content: 'Value 3'},
+            {value: 'val_4', content: 'Value 4'},
+        ],
+    },
+];
+
+export default function () {
+    return (
+        <>
+            <Flex gap={1} alignItems="center">
+                Array of objects
+                <Select placeholder="value" options={groupedOptions} />
+            </Flex>
+            <Flex gap={1} alignItems="center">
+                Child nodes
+                <Select placeholder="value">
+                    <Select.OptionGroup label="Group 1">
+                        <Select.Option value="val_1" content="Value 1" />
+                        <Select.Option value="val_2" content="Value 2" />
+                    </Select.OptionGroup>
+                    <Select.OptionGroup label="Group 2">
+                        <Select.Option value="val_3" content="Value 3" />
+                        <Select.Option value="val_4" content="Value 4" />
+                    </Select.OptionGroup>
+                </Select>
+            </Flex>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+// Array of objects
+<Select
+  placeholder="value"
+  options={[
+    {
+      label: 'Group 1',
+      options: [
+        {value: 'val_1', content: 'Value 1'},
+        {value: 'val_2', content: 'Value 2'},
+      ],
+    },
+    {
+      label: 'Group 2',
+      options: [
+        {value: 'val_3', content: 'Value 3'},
+        {value: 'val_4', content: 'Value 4'},
+      ],
+    },
+  ]}
+/>
+// Child nodes
+<Select placeholder="value">
+  <Select.OptionGroup label="Group 1">
+    <Select.Option value="val_1" content="Value 1" />
+    <Select.Option value="val_2" content="Value 2" />
+  </Select.OptionGroup>
+  <Select.OptionGroup label="Group 2">
+    <Select.Option value="val_3" content="Value 3" />
+    <Select.Option value="val_4" content="Value 4" />
+  </Select.OptionGroup>
+</Select>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Stockage des données dans les options
 
@@ -32,33 +168,143 @@ Vous pouvez définir et stocker des données uniques dans chaque option en utili
 
 Pour activer la sélection multiple, utilisez la propriété `multiple`. Sa valeur par défaut est `false`.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <Select multiple placeholder="values">
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Select multiple={true} placeholder="values">
+  <Select.Option value="val_1">Value 1</Select.Option>
+  <Select.Option value="val_2">Value 2</Select.Option>
+  <Select.Option value="val_3">Value 3</Select.Option>
+  <Select.Option value="val_4">Value 4</Select.Option>
+</Select>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Compteur
 
 Vous pouvez ajouter un compteur des éléments sélectionnés au composant en utilisant la propriété `hasCounter`.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <Select multiple hasCounter placeholder="values">
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Select multiple={true} hasCounter={true} placeholder="values">
+  <Select.Option value="val_1">Value 1</Select.Option>
+  <Select.Option value="val_2">Value 2</Select.Option>
+  <Select.Option value="val_3">Value 3</Select.Option>
+  <Select.Option value="val_4">Value 4</Select.Option>
+</Select>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Filtrage des options
 
 Pour activer la section de filtre, utilisez la propriété `filterable`. Sa valeur par défaut est `false`.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <Select filterable placeholder="Filterable">
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Select filterable={true} placeholder="Filterable">
+  <Select.Option value="val_1">Value 1</Select.Option>
+  <Select.Option value="val_2">Value 2</Select.Option>
+  <Select.Option value="val_3">Value 3</Select.Option>
+  <Select.Option value="val_4">Value 4</Select.Option>
+</Select>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Taille
 
 Pour gérer la taille par défaut du contrôle et des options, utilisez la propriété `size`. Sa taille par défaut est `m`.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <>
+            <Select size="s" placeholder="S Size">
+                <Select.Option value="val_1">Value 1</Select.Option>
+            </Select>
+            <Select size="m" placeholder="M Size">
+                <Select.Option value="val_1">Value 1</Select.Option>
+            </Select>
+            <Select size="l" placeholder="L Size">
+                <Select.Option value="val_1">Value 1</Select.Option>
+            </Select>
+            <Select size="xl" placeholder="XL Size">
+                <Select.Option value="val_1">Value 1</Select.Option>
+            </Select>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Select size="s" placeholder="S Size">
+  <Select.Option value="val_1">Value 1</Select.Option>
+</Select>
+<Select size="m" placeholder="M Size">
+  <Select.Option value="val_1">Value 1</Select.Option>
+</Select>
+<Select size="l" placeholder="L Size">
+  <Select.Option value="val_1">Value 1</Select.Option>
+</Select>
+<Select size="xl" placeholder="XL Size">
+  <Select.Option value="val_1">Value 1</Select.Option>
+</Select>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Largeur du contrôle
 
@@ -68,7 +314,46 @@ Par défaut, la largeur du contrôle s'étire pour correspondre à la largeur du
 
 `number`: Applique la largeur en pixels.
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--SANDBOX
+import {Select, SelectProps} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const containerStyle: CSSProperties = {
+    width: 150,
+    border: '2px dashed gray',
+    textAlign: 'center',
+};
+
+function SelectExample(props: SelectProps) {
+    return (
+        <Select {...props}>
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+
+export default function () {
+    return (
+        <>
+            <div style={containerStyle}>
+                <h4>Default</h4>
+                <SelectExample multiple />
+            </div>
+            <div style={containerStyle}>
+                <h4>Max</h4>
+                <SelectExample width="max" multiple />
+            </div>
+            <div style={containerStyle}>
+                <h4>In pixels</h4>
+                <SelectExample width={110} multiple />
+            </div>
+        </>
+    );
+}
+SANDBOX-->
 
 ## Largeur de la popup
 
@@ -84,7 +369,72 @@ Points à noter sur le comportement par défaut :
 
 - Les options étroites sont étirées pour s'adapter à la largeur du contrôle.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Box, Select, SelectProps} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const containerStyle: CSSProperties = {
+    width: 200,
+    border: '2px dashed gray',
+    textAlign: 'center',
+};
+
+function ShortValueSelect(props: SelectProps) {
+    return (
+        <Select placeholder="Short value" {...props}>
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+
+function LongValueSelect(props: SelectProps) {
+    return (
+        <Select placeholder="Long value" {...props}>
+            <Select.Option value="val_1">Loooooooooooooooooooong Value 1</Select.Option>
+            <Select.Option value="val_2">Loooooooooooooooooooong Value 2</Select.Option>
+            <Select.Option value="val_3">Loooooooooooooooooooong Value 3</Select.Option>
+            <Select.Option value="val_4">Loooooooooooooooooooong Value 4</Select.Option>
+        </Select>
+    );
+}
+
+export default function () {
+    return (
+        <>
+            <div style={containerStyle}>
+                <h4>Default</h4>
+                <Box spacing={{my: 3}}>
+                    <ShortValueSelect />
+                </Box>
+                <Box spacing={{my: 3}}>
+                    <LongValueSelect />
+                </Box>
+            </div>
+            <div style={containerStyle}>
+                <h4>Fit</h4>
+                <Box spacing={{my: 3}}>
+                    <ShortValueSelect popupWidth="fit" />
+                </Box>
+                <Box spacing={{my: 3}}>
+                    <LongValueSelect popupWidth="fit" />
+                </Box>
+            </div>
+            <div style={containerStyle}>
+                <h4>In pixels</h4>
+                <Box spacing={{my: 3}}>
+                    <ShortValueSelect popupWidth={80} />
+                </Box>
+                <Box spacing={{my: 3}}>
+                    <LongValueSelect popupWidth={80} />
+                </Box>
+            </div>
+        </>
+    );
+}
+SANDBOX-->
 
 ### Liste virtualisée
 
@@ -96,7 +446,51 @@ Lors de l'utilisation de la virtualisation, certaines restrictions s'appliquent 
 
 - La largeur minimale de la popup est égale à la largeur du contrôle, ou `100px` si le contrôle est plus court.
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--SANDBOX
+import {Box, Select} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const containerStyle: CSSProperties = {
+    width: 200,
+    border: '2px dashed gray',
+    textAlign: 'center',
+};
+
+const shortOptions = Array.from({length: 1000}, (_, index) => ({
+    value: String(index),
+    content: `Value ${index}`,
+}));
+
+const longOptions = Array.from({length: 1000}, (_, index) => ({
+    value: String(index),
+    content: `Loooooooooooooooooooong Value ${index}`,
+}));
+
+export default function () {
+    return (
+        <>
+            <div style={containerStyle}>
+                <h4>Default</h4>
+                <Box spacing={{my: 3}}>
+                    <Select placeholder="Short value" options={shortOptions} />
+                </Box>
+                <Box spacing={{my: 3}}>
+                    <Select placeholder="Long value" options={longOptions} />
+                </Box>
+            </div>
+            <div style={containerStyle}>
+                <h4>In pixels</h4>
+                <Box spacing={{my: 3}}>
+                    <Select placeholder="Short value" popupWidth={80} options={shortOptions} />
+                </Box>
+                <Box spacing={{my: 3}}>
+                    <Select placeholder="Long value" popupWidth={80} options={longOptions} />
+                </Box>
+            </div>
+        </>
+    );
+}
+SANDBOX-->
 
 ## Utilisation avancée
 
@@ -107,65 +501,498 @@ Il existe de nombreuses façons de personnaliser votre `Select`.
 Pour rendre un contrôle personnalisé, utilisez la propriété `renderControl`.
 Note : Vous devez transmettre tous les arguments à votre nœud afin d'activer un comportement cohérent, tout comme lors de l'utilisation du contrôle par défaut.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Button, Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <Select
+            renderControl={({onClick, onKeyDown, ref}) => (
+                <Button ref={ref} onClick={onClick} extraProps={{onKeyDown}}>
+                    Custom control
+                </Button>
+            )}
+        >
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {Button} from '@gravity-ui/uikit';
+
+const MyComponent = () => {
+  const renderControl: SelectProps['renderControl'] = ({onClick, onKeyDown, ref}) => {
+    return (
+      <Button
+        ref={ref}
+        onClick={onClick}
+        extraProps={{
+          onKeyDown,
+        }}
+      >
+        Your control
+      </Button>
+    );
+  };
+
+  return <Select renderControl={renderControl}>/* Your options here */</Select>;
+};
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Rendu d'une section de filtre personnalisée
 
 Pour rendre une section de filtre personnalisée, utilisez la propriété `renderFilter` et définissez la propriété `filterable` sur `true`.
 Note : Vous devez transmettre tous les arguments à votre nœud afin d'activer un filtre fonctionnel, tout comme lors de l'utilisation de la configuration par défaut.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--SANDBOX
+import type {SelectProps} from '@gravity-ui/uikit';
+import {Button, Flex, Select, TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+const renderFilter: SelectProps['renderFilter'] = (props) => {
+    const {value, ref, onChange, onKeyDown} = props;
+
+    return (
+        <Flex direction="column" gap={1}>
+            <TextInput
+                controlRef={ref}
+                controlProps={{size: 1}}
+                value={value}
+                onUpdate={onChange}
+                onKeyDown={onKeyDown}
+            />
+            <Button size="xs">Do smth</Button>
+        </Flex>
+    );
+};
+
+export default function () {
+    return (
+        <Select placeholder="Custom filter" filterable renderFilter={renderFilter}>
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {Button, TextInput} from '@gravity-ui/uikit';
+import type {SelectProps} from '@gravity-ui/uikit';
+
+const MyComponent = () => {
+  const renderFilter: SelectProps['renderFilter'] = (props) => {
+    const {value, ref, onChange, onKeyDown} = props;
+
+    return (
+      <div>
+        <TextInput
+          controlRef={ref}
+          controlProps={{size: 1}}
+          value={value}
+          onUpdate={onChange}
+          onKeyDown={onKeyDown}
+        />
+        <Button>Do smth</Button>
+      </div>
+    );
+  };
+
+  return (
+    <Select filterable={true} renderFilter={renderFilter}>
+      /* Your options here */
+    </Select>
+  );
+};
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Rendu d'options personnalisées
 
 Pour rendre des options personnalisées, utilisez la propriété `renderOption` :
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--SANDBOX
+import type {SelectProps} from '@gravity-ui/uikit';
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+const renderOption: SelectProps['renderOption'] = (option) => {
+    return <div style={{color: option.data.color}}>{option.children}</div>;
+};
+
+export default function () {
+    return (
+        <Select placeholder="Custom options" renderOption={renderOption}>
+            <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
+                Value 1
+            </Select.Option>
+            <Select.Option value="val_2" data={{color: '#38C0A8'}}>
+                Value 2
+            </Select.Option>
+            <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
+                Value 3
+            </Select.Option>
+            <Select.Option value="val_4" data={{color: '#534581'}}>
+                Value 4
+            </Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import type {SelectProps} from '@gravity-ui/uikit';
+
+const MyComponent = () => {
+  const renderOption: SelectProps['renderOption'] = (option) => {
+    return <div style={{color: option.data.color}}>{option.children}</div>;
+  };
+
+  return (
+    <Select renderOption={renderOption}>
+      <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
+        Value 1
+      </Select.Option>
+      <Select.Option value="val_2" data={{color: '#38C0A8'}}>
+        Value 2
+      </Select.Option>
+      <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
+        Value 3
+      </Select.Option>
+      <Select.Option value="val_4" data={{color: '#534581'}}>
+        Value 4
+      </Select.Option>
+    </Select>
+  );
+};
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Rendu d'options sélectionnées personnalisées
 
 Pour rendre des options sélectionnées personnalisées, utilisez la propriété `renderSelectedOption` :
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--SANDBOX
+import type {SelectProps} from '@gravity-ui/uikit';
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+const renderSelectedOption: SelectProps['renderSelectedOption'] = (option) => {
+    return <div style={{color: option.data.color}}>{option.children}</div>;
+};
+
+export default function () {
+    return (
+        <Select placeholder="Custom selected options" renderSelectedOption={renderSelectedOption}>
+            <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
+                Value 1
+            </Select.Option>
+            <Select.Option value="val_2" data={{color: '#38C0A8'}}>
+                Value 2
+            </Select.Option>
+            <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
+                Value 3
+            </Select.Option>
+            <Select.Option value="val_4" data={{color: '#534581'}}>
+                Value 4
+            </Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import type {SelectProps} from '@gravity-ui/uikit';
+
+const MyComponent = () => {
+  const renderSelectedOption: SelectProps['renderSelectedOption'] = (option) => {
+    return <div style={{color: option.data.color}}>{option.children}</div>;
+  };
+
+  return (
+    <Select renderSelectedOption={renderSelectedOption}>
+      <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
+        Value 1
+      </Select.Option>
+      <Select.Option value="val_2" data={{color: '#38C0A8'}}>
+        Value 2
+      </Select.Option>
+      <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
+        Value 3
+      </Select.Option>
+      <Select.Option value="val_4" data={{color: '#534581'}}>
+        Value 4
+      </Select.Option>
+    </Select>
+  );
+};
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Rendu d'options de hauteurs différentes
 
 Les options ont une hauteur fixe selon la propriété `size`. Si vous avez besoin de rendre des options de hauteurs différentes, vous pouvez utiliser la propriété `option.data`. Elle stockera les informations sur la hauteur que vous devez définir pour les options, ainsi que la propriété `getOptionHeight` pour définir cette valeur.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--SANDBOX
+import type {SelectProps} from '@gravity-ui/uikit';
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+const getOptionHeight: SelectProps['getOptionHeight'] = (option) => option.data.height;
+
+export default function () {
+    return (
+        <Select placeholder="Different heights" getOptionHeight={getOptionHeight}>
+            <Select.Option value="val_1" data={{height: 20}}>
+                Value 1
+            </Select.Option>
+            <Select.Option value="val_2" data={{height: 40}}>
+                Value 2
+            </Select.Option>
+            <Select.Option value="val_3" data={{height: 60}}>
+                Value 3
+            </Select.Option>
+            <Select.Option value="val_4" data={{height: 80}}>
+                Value 4
+            </Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import type {SelectProps} from '@gravity-ui/uikit';
+
+const MyComponent = () => {
+  const getOptionHeight: SelectProps['getOptionHeight'] = (option) => option.data.height;
+
+  return (
+    <Select getOptionHeight={getOptionHeight}>
+      <Select.Option value="val_1" data={{height: 20}}>
+        Value 1
+      </Select.Option>
+      <Select.Option value="val_2" data={{height: 40}}>
+        Value 2
+      </Select.Option>
+      <Select.Option value="val_3" data={{height: 60}}>
+        Value 3
+      </Select.Option>
+      <Select.Option value="val_4" data={{height: 80}}>
+        Value 4
+      </Select.Option>
+    </Select>
+  );
+};
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Rendu d'un compteur personnalisé
 
 Pour rendre un compteur personnalisé, utilisez la propriété `renderCounter`. Le compteur n'est affiché que lorsque la sélection multiple est activée (`multiple={true}`) et que `hasCounter={true}`.
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--SANDBOX
+import type {SelectProps} from '@gravity-ui/uikit';
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+const renderCounter: SelectProps['renderCounter'] = (_, {count, disabled}) => {
+    if (count === 0) {
+        return null;
+    }
+
+    if (count >= 2) {
+        return (
+            <div
+                style={{
+                    padding: '0 8px',
+                    color: disabled ? '#999' : '#027bf3',
+                    fontWeight: 'bold',
+                }}
+            >
+                +{count}
+            </div>
+        );
+    }
+
+    return count;
+};
+
+export default function () {
+    return (
+        <Select multiple hasCounter renderCounter={renderCounter}>
+            <Select.Option value="val_1">Value 1</Select.Option>
+            <Select.Option value="val_2">Value 2</Select.Option>
+            <Select.Option value="val_3">Value 3</Select.Option>
+            <Select.Option value="val_4">Value 4</Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import type {SelectProps} from '@gravity-ui/uikit';
+
+const MyComponent = () => {
+  const renderCounter: SelectProps['renderCounter'] = (_, {count, disabled}) => {
+    if (count === 0) {
+      return null;
+    }
+    if (count >= 2) {
+      return (
+        <div
+          style={{
+            padding: '0 8px',
+            color: disabled ? '#999' : '#027bf3',
+            fontWeight: 'bold',
+          }}
+        >
+          +{count}
+        </div>
+      );
+    }
+    return count;
+  };
+
+  return (
+    <Select multiple={true} hasCounter={true} renderCounter={renderCounter}>
+      <Select.Option value="val_1">Value 1</Select.Option>
+      <Select.Option value="val_2">Value 2</Select.Option>
+      <Select.Option value="val_3">Value 3</Select.Option>
+      <Select.Option value="val_4">Value 4</Select.Option>
+    </Select>
+  );
+};
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Rendu de la liste d'options
 
 La propriété `renderPopup` vous permet de contrôler le contenu de la liste d'options : changer l'ordre des éléments standard (filtre, liste), les masquer, ou ajouter des éléments personnalisés entre, avant ou après eux.
 
-GRAVITY_TRANSLATION_BLOCK_28_END
+<!--SANDBOX
+import type {SelectProps} from '@gravity-ui/uikit';
+import {Select} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_29_END
+const renderPopup: SelectProps['renderPopup'] = ({renderList, renderFilter}) => {
+    return (
+        <>
+            {renderFilter()}
+            <div style={{width: '100%', height: 20, backgroundColor: 'tomato'}} />
+            {renderList()}
+        </>
+    );
+};
+
+export default function () {
+    return (
+        <Select filterable placeholder="Custom popup" renderPopup={renderPopup}>
+            <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
+                Value 1
+            </Select.Option>
+            <Select.Option value="val_2" data={{color: '#38C0A8'}}>
+                Value 2
+            </Select.Option>
+            <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
+                Value 3
+            </Select.Option>
+            <Select.Option value="val_4" data={{color: '#534581'}}>
+                Value 4
+            </Select.Option>
+        </Select>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import type {SelectProps} from '@gravity-ui/uikit';
+
+const renderPopup: SelectProps['renderPopup'] = ({renderList, renderFilter}) => {
+  return (
+    <React.Fragment>
+      {renderFilter()}
+      <div className="CustomElement" />
+      {renderList()}
+    </React.Fragment>
+  );
+};
+
+const MyComponent = () => {
+  return (
+    <Select filterable renderPopup={renderPopup}>
+      <Select.Option value="val_1" data={{color: '#8FE1A1'}}>
+        Value 1
+      </Select.Option>
+      <Select.Option value="val_2" data={{color: '#38C0A8'}}>
+        Value 2
+      </Select.Option>
+      <Select.Option value="val_3" data={{color: '#3A7AC3'}}>
+        Value 3
+      </Select.Option>
+      <Select.Option value="val_4" data={{color: '#534581'}}>
+        Value 4
+      </Select.Option>
+    </Select>
+  );
+};
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Erreur
 
 Cet état `Select` est destiné aux entrées utilisateur incorrectes. Pour modifier l'apparence du `Select`, utilisez la propriété `validationState` avec la valeur `"invalid"`. Vous pouvez éventuellement fournir un message d'erreur via la propriété `errorMessage`. Par défaut, le texte du message est rendu à l'extérieur du composant.
 Vous pouvez changer cela avec la propriété `errorPlacement`.
 
-GRAVITY_TRANSLATION_BLOCK_30_END
+<!--SANDBOX
+import {Select} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Select placeholder="Placeholder" errorMessage="Error message" validationState="invalid">
+                <Select.Option value="val_1">Value 1</Select.Option>
+                <Select.Option value="val_2">Value 2</Select.Option>
+                <Select.Option value="val_3">Value 3</Select.Option>
+                <Select.Option value="val_4">Value 4</Select.Option>
+            </Select>
+            <Select
+                placeholder="Placeholder"
+                errorPlacement="inside"
+                errorMessage="Error message"
+                validationState="invalid"
+            >
+                <Select.Option value="val_1">Value 1</Select.Option>
+                <Select.Option value="val_2">Value 2</Select.Option>
+                <Select.Option value="val_3">Value 3</Select.Option>
+                <Select.Option value="val_4">Value 4</Select.Option>
+            </Select>
+        </>
+    );
+}
+SANDBOX-->
 
 ## Propriétés
 

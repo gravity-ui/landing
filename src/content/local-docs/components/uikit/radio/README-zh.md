@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Radio
+
+<!--/GITHUB_BLOCK-->
+
 `Radio` 组件允许用户从选项列表中选择单个选项。
 
 ```tsx
@@ -11,25 +17,95 @@ import {Radio} from '@gravity-ui/uikit';
 - 选中：Radio 已被选中。
 - 禁用：Radio 无法被选中。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Radio} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Radio value="option 1" content="Unchecked" size="l" checked={false} />
+            <Radio value="option 2" content="Checked" size="l" checked />
+            <Radio value="option 3" content="Disabled" size="l" disabled />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Radio value="option 1" content="Unchecked" size="l" checked={false}/>
+<Radio value="option 2" content="Checked" size="l" checked/>
+<Radio value="option 3" content="Disabled" size="l" disabled/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 大小
 
 要管理 `Radio` 的大小，请使用 `size` 属性。默认大小为 `m`。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Radio} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Radio value="option 1" content="M Size" size="m" />
+            <Radio value="option 2" content="L Size" size="l" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Radio value="option 1" content="M Size" size="m"/>
+<Radio value="option 2" content="L Size" size="l"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 标签
 
 您可以使用 `content` 属性为 `Radio` 分配标签，或者将其作为子属性提供。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Box, Radio} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Radio value="option-1" content="Content" size="l" />
+            <Box spacing={{mt: 2}}>
+                <Radio value="option-2" size="l">
+                    <span>Content as children</span>
+                </Radio>
+            </Box>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Radio content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Radio size="l">
+      <span>Content as children</span>
+    </Radio>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# ActionTooltip
+
+<!--/GITHUB_BLOCK-->
+
 [`Tooltip`](../Tooltip/README.md) para etiquetar botones de acción sin texto descriptivo (por ejemplo, botones con iconos).
 
 ## Uso
@@ -5,8 +11,8 @@
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Acción">
-  <div tabIndex={0}>Ancla</div>
+<ActionTooltip title="Action">
+  <div tabIndex={0}>Anchor</div>
 </ActionTooltip>;
 ```
 
@@ -20,7 +26,7 @@ Alternativamente, puedes pasar una función como hijo para proporcionar `ref` y 
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Acción">
+<ActionTooltip title="Action">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```
@@ -32,7 +38,6 @@ Pasa tu estado a la prop `open` y cámbialo desde la devolución de llamada `onO
 La devolución de llamada `onOpenChange` tiene la siguiente firma: `(open: boolean, event?: Event, reason: 'hover' | 'focus') => void`.
 
 ## Propiedades
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nombre          | Descripción                                                                                     |                       Tipo                       |     Predeterminado     |
 | :-------------- | :---------------------------------------------------------------------------------------------- | :----------------------------------------------: | :--------------------: |

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# ClipboardButton
+
+<!--/GITHUB_BLOCK-->
 
 `ClipboardButton` は、指定されたテキストをクリップボードにコピーし、成功アニメーションを再生するすぐに使えるボタンです。[`CopyToClipboard`](../CopyToClipboard/README.md)（コピー動作）と [`ClipboardIcon`](../ClipboardIcon/README.md)（アニメーションアイコン）を組み合わせています。
 
@@ -6,9 +10,21 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 import {ClipboardButton} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {ClipboardButton} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <ClipboardButton text="Some text to copy" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ClipboardButton text="Some text to copy" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 

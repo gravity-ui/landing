@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Drawer
+
+<!--/GITHUB_BLOCK-->
 
 Le composant `Drawer` est un élément d'interface polyvalent utilisé dans les applications web pour fournir un panneau coulissant qui apparaît depuis le bord de l'écran. Ce panneau peut contenir des navigations, des outils ou du contenu supplémentaire. Le composant est implémenté à l'aide de transitions React et CSS pour des animations fluides.
 
@@ -19,9 +23,9 @@ const App = () => {
 
   return (
     <div>
-      <button onClick={() => setVisible(true)}>Ouvrir le tiroir</button>
+      <button onClick={() => setVisible(true)}>Open Drawer</button>
       <Drawer onOpenChange={setVisible} open={isVisible}>
-        <p>Contenu du tiroir</p>
+        <p>Content of the drawer</p>
       </Drawer>
     </div>
   );
@@ -36,16 +40,16 @@ Pour contrôler le placement du `Drawer`, vous pouvez passer la prop `placement`
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} placement="left">
-  <p>Contenu du tiroir</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="right">
-  <p>Contenu du tiroir</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="top">
-  <p>Contenu du tiroir</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="bottom">
-  <p>Contenu du tiroir</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -55,7 +59,7 @@ Par défaut, le `Drawer` glisse en entrée et en sortie avec une transition. Pou
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} disableTransition>
-  <p>Contenu du tiroir</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -65,7 +69,7 @@ Un `Drawer` peut être redimensionnable en passant la prop `resizable`.
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} resizable>
-  <p>Contenu du tiroir</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -75,7 +79,7 @@ De plus, vous pouvez utiliser la prop `size` pour contrôler la taille du `Drawe
 const [size, setSize] = useState(500);
 
 <Drawer onOpenChange={setVisible} open={isVisible} resizable size={size} onResize={setSize}>
-  <p>Contenu du tiroir</p>
+  <p>Content of the drawer</p>
 </Drawer>;
 ```
 

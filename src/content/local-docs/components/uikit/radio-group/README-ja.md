@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# RadioGroup
+
+<!--/GITHUB_BLOCK-->
+
 `RadioGroup` コンポーネントは、複数の選択肢の中からユーザーが 1 つのオプションを選択できるグループを作成するために使用されます。
 
 ```tsx
@@ -6,23 +12,123 @@ import {RadioGroup} from '@gravity-ui/uikit';
 
 ### 無効状態
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import type {RadioGroupOption} from '@gravity-ui/uikit';
+import {RadioGroup} from '@gravity-ui/uikit';
+
+const options: RadioGroupOption[] = [
+    {value: 'Value 1', content: 'Value 1'},
+    {value: 'Value 2', content: 'Value 2'},
+    {value: 'Value 3', content: 'Value 3'},
+];
+
+export default function () {
+    return (
+        <RadioGroup name="group2" defaultValue={options[0].value} options={options} disabled />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: RadioGroupOption[] = [
+  {value: 'Value 1', content: 'Value 1'},
+  {value: 'Value 2', content: 'Value 2'},
+  {value: 'Value 3', content: 'Value 3'},
+];
+<RadioGroup name="group2" defaultValue={options[0].value} options={options} disabled />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### サイズ
 
 `size` プロパティを使用して `RadioGroup` のサイズを管理します。デフォルトのサイズは `m` です。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import type {RadioGroupOption} from '@gravity-ui/uikit';
+import {RadioGroup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const options: RadioGroupOption[] = [
+    {value: 'Value 1', content: 'Value 1'},
+    {value: 'Value 2', content: 'Value 2'},
+    {value: 'Value 3', content: 'Value 3'},
+];
+
+export default function () {
+    return (
+        <>
+            <RadioGroup name="group1" defaultValue={options[0].value} options={options} size="m" />
+            <RadioGroup name="group2" defaultValue={options[0].value} options={options} size="l" />
+            <RadioGroup name="group3" defaultValue={options[0].value} options={options} size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+  const options: RadioGroupOption[] = [
+    {value: 'Value 1', content: 'Value 1'},
+    {value: 'Value 2', content: 'Value 2'},
+    {value: 'Value 3', content: 'Value 3'},
+  ];
+  <RadioGroup name="group1" defaultValue={options[0].value} options={options} size="m"/>
+  <RadioGroup name="group2" defaultValue={options[0].value} options={options} size="l"/>
+  <RadioGroup name="group3" defaultValue={options[0].value} options={options} size="xl"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 方向
 
 `direction` プロパティを使用して `RadioGroup` の方向を管理します。デフォルトの方向は `horizontal` です。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import type {RadioGroupOption} from '@gravity-ui/uikit';
+import {RadioGroup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const options: RadioGroupOption[] = [
+    {value: 'Value 1', content: 'Value 1'},
+    {value: 'Value 2', content: 'Value 2'},
+    {value: 'Value 3', content: 'Value 3'},
+];
+
+export default function () {
+    return (
+        <>
+            <RadioGroup
+                name="group1"
+                defaultValue={options[0].value}
+                options={options}
+                direction="horizontal"
+            />
+            <RadioGroup
+                name="group2"
+                defaultValue={options[0].value}
+                options={options}
+                direction="vertical"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+  const options: RadioGroupOption[] = [
+    {value: 'Value 1', content: 'Value 1'},
+    {value: 'Value 2', content: 'Value 2'},
+    {value: 'Value 3', content: 'Value 3'},
+  ];
+  <RadioGroup name="group1" defaultValue={options[0].value} options={options} direction="horizontal"/>
+  <RadioGroup name="group2" defaultValue={options[0].value} options={options} direction="vertical"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 
@@ -45,9 +151,43 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 
 `RadioGroup` コンポーネントは、`Radio` に相当するネストされた `Option` コンポーネントもエクスポートしており、`RadioGroup` 内でラジオオプションを作成するために使用できます。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import type {RadioGroupOption} from '@gravity-ui/uikit';
+import {RadioGroup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+const options: RadioGroupOption[] = [
+    {value: 'Value 1', content: 'Value 1'},
+    {value: 'Value 2', content: 'Value 2'},
+    {value: 'Value 3', content: 'Value 3'},
+];
+
+export default function () {
+    return (
+        <RadioGroup name="group1" defaultValue={options[0].value}>
+            <RadioGroup.Option content={options[0].content} value={options[0].value} />
+            <RadioGroup.Option content={options[1].content} value={options[1].value} />
+            <RadioGroup.Option content={options[2].content} value={options[2].value} />
+        </RadioGroup>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: RadioGroupOption[] = [
+  {value: 'Value 1', content: 'Value 1'},
+  {value: 'Value 2', content: 'Value 2'},
+  {value: 'Value 3', content: 'Value 3'},
+];
+<RadioGroup name="group1" defaultValue={options[0].value}>
+  <RadioGroup.Option content={options[0].content} value={options[0].value} />
+  <RadioGroup.Option content={options[1].content} value={options[1].value} />
+  <RadioGroup.Option content={options[2].content} value={options[2].value} />
+</RadioGroup>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### プロパティ
 

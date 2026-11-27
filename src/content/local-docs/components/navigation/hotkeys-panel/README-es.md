@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# HotkeysPanel
+
+<!--/GITHUB_BLOCK-->
+
 Un panel de navegación para la documentación de atajos de teclado.
 El panel muestra un conjunto de atajos de teclado para su aplicación con una descripción de su propósito.
 
@@ -6,7 +12,6 @@ import {HotkeysPanel} from '@gravity-ui/navigation';
 ```
 
 ## Propiedades
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Propiedad                | Tipo            | Requerido | Predeterminado | Descripción                                                                  |
 | :---------------------- | :-------------- | :-------: | :------------- | :--------------------------------------------------------------------------- |

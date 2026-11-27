@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+## Password Input
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {PasswordInput} from '@gravity-ui/uikit';
@@ -10,13 +14,25 @@ import {PasswordInput} from '@gravity-ui/uikit';
 
 このボタンを使用すると、ユーザーは入力値を簡単にクリップボードにコピーできます。`hideCopyButton` ブーリアンプロパティを使用して、このボタンを非表示にすることができます。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideCopyButton />;
+}
+SANDBOX-->
 
 ### 表示ボタン
 
 `hideRevealButton` プロパティを使用すると、ユーザーはパスワードの表示/非表示を切り替えることができます。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideRevealButton />;
+}
+SANDBOX-->
 
 ### プロパティ
 
@@ -33,4 +49,16 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 | revealValue         | パスワード入力フィールドの表示状態を決定します                    | `boolean` | `false` |
 | onRevealValueUpdate | `revealValue` の状態が変更されるたびに呼び出されるコールバック関数 | `function` |         |
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+#### Usage example
+
+```tsx
+function MyComponent() {
+  const [value, setValue] = React.useState('');
+
+  return <PasswordInput onUpdate={setValue} value={value} />;
+}
+```
+
+<!--/GITHUB_BLOCK-->

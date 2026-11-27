@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Overlay
+
+<!--/GITHUB_BLOCK-->
+
 Le composant `Overlay` rend un surlignage par-dessus l'élément parent avec une position relative, c'est-à-dire que l'élément parent doit avoir la propriété `position` définie sur `relative`.
 Par exemple, il peut être utilisé pour préserver la mise en page souhaitée lors du chargement de données.
 
@@ -22,7 +28,14 @@ import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 Vous pouvez utiliser les couleurs d'arrière-plan `base` ou `float`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Overlay background="base">
+<Overlay background="float">
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# TextInput
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {TextInput} from '@gravity-ui/uikit';
 ```
@@ -12,21 +18,60 @@ TextInput 允许用户在 UI 中输入文本。
 
 `normal` - `TextInput` 的主视图（默认使用）。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <TextInput placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - 可与自定义的 `TextInput` 包装器一起使用。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <TextInput view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput view="normal" />
+<TextInput view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 允许您控制 `TextInput` 边框的右侧和左侧边缘的外观。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" pin="round-brick" />
+            <TextInput placeholder="Placeholder" pin="brick-brick" />
+            <TextInput placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput pin="round-brick" />
+<TextInput pin="brick-brick" />
+<TextInput pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 状态
 
@@ -34,18 +79,57 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 `TextInput` 的状态，您不希望用户能够与该组件进行交互。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <TextInput placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 `TextInput` 的状态，您想在此指示用户输入不正确。要更改 `TextInput` 的外观，请使用 `validationState` 属性并将其值设置为 `"invalid"`。可以通过 `errorMessage` 属性添加可选的消息文本。默认情况下，消息文本会渲染在组件外部。
 此行为可以通过 `errorPlacement` 属性进行更改。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <TextInput
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <TextInput
+                placeholder="Placeholder"
+                errorPlacement="inside"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput errorMessage="Error message" validationState="invalid" />
+<TextInput errorPlacement="inside" errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Size
 
@@ -57,9 +141,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – 在促销和登陆页面上使用。
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" size="s" />
+            <TextInput placeholder="Placeholder" size="m" />
+            <TextInput placeholder="Placeholder" size="l" />
+            <TextInput placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput size="s" />
+<TextInput size="m" />
+<TextInput size="l" />
+<TextInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Label
 
@@ -68,9 +174,26 @@ GRAVITY_TRANSLATION_BLOCK_11_END
 - label 占据相对于控件的最左侧位置。也就是说，通过 `startContent` 属性添加的元素将位于右侧。
 - label 占用的宽度不能超过 TextInput 整个空间的宽度的一半。
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" label="Label" />
+            <TextInput placeholder="Placeholder" label="Very long label with huge amount of symbols" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 附加内容
 
@@ -78,17 +201,53 @@ GRAVITY_TRANSLATION_BLOCK_13_END
 
 允许您在控件的左侧添加内容（如果使用 [rtl](https://developer.mozilla.org/en-US/docs/Glossary/RTL) 则在右侧）。位于通过 `label` 属性添加的标签的左侧（如果使用 rtl 则在右侧）。
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Label, TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <TextInput
+            placeholder="Search"
+            label="Label"
+            startContent={<Label size="s">Left</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput startContent={<Label>Left</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### End content
 
 允许您在控件的右侧添加内容（如果使用 [rtl](https://developer.mozilla.org/en-US/docs/Glossary/RTL) 则在左侧）。位于通过 `hasClear` 属性添加的清除按钮的右侧（如果使用 rtl 则在左侧）。
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Label, TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <TextInput
+            hasClear
+            placeholder="Placeholder"
+            endContent={<Label size="s">Right</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput endContent={<Label>Right</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+## Password Input
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {PasswordInput} from '@gravity-ui/uikit';
@@ -10,13 +14,25 @@ import {PasswordInput} from '@gravity-ui/uikit';
 
 此按钮允许用户轻松地将输入值复制到剪贴板。您可以使用 `hideCopyButton` 布尔属性来隐藏此按钮。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideCopyButton />;
+}
+SANDBOX-->
 
 ### 显示/隐藏按钮
 
 `hideRevealButton` 属性允许用户切换密码的可见性。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideRevealButton />;
+}
+SANDBOX-->
 
 ### 属性
 
@@ -33,4 +49,16 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 | revealValue         | 确定密码输入字段的可见状态                                         | `boolean`  | `false` |
 | onRevealValueUpdate | 每当 `revealValue` 状态发生变化时调用的回调函数                  | `function` |         |
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+#### Usage example
+
+```tsx
+function MyComponent() {
+  const [value, setValue] = React.useState('');
+
+  return <PasswordInput onUpdate={setValue} value={value} />;
+}
+```
+
+<!--/GITHUB_BLOCK-->

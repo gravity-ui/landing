@@ -6,25 +6,88 @@
 
 用于管理头像外观。使用 `"person"` 表示个性化实体，使用 `"email"` 表示电子邮件地址。如果您不需要任何头像，请使用 `"empty"`。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {UserLabel} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <UserLabel type="person" text="Charles Darwin" />
+            <UserLabel type="email" text="email@example.com" />
+            <UserLabel type="empty" text="Alan Turing" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<UserLabel type="person" text="Charles Darwin (person)" />
+<UserLabel type="email" text="email@example.com (email)" />
+<UserLabel type="empty" text="Alan Turing (empty)" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Avatar
 
 此组件可与自定义头像一起使用。它仅适用于 `type: 'person'`。您可以提供一个图像、[Avatar](../Avatar/README.md) 组件的属性或自定义 React 节点。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {UserLabel} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <UserLabel
+                type="person"
+                avatar="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg/193px-Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg"
+                text="Charles Darwin"
+            />
+            <UserLabel type="person" avatar={{icon: GraduationCap}} text="Charles Darwin" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {GraduationCap} from '@gravity-ui/icons';
+
+<UserLabel type="person" avatar="<url>" text="Charles Darwin" />
+<UserLabel type="person" avatar={{icon: GraduationCap}} text="Charles Darwin" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Interactivity
 
 此组件也具有交互性：它可以是可点击的或可关闭的。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {UserLabel} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <UserLabel text="Charles Darwin" onClick={() => alert('onClick triggered')} />
+            <UserLabel text="Charles Darwin" onCloseClick={() => alert('onCloseClick triggered')} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<UserLabel text="Charles Darwin" onClick={() => alert('onClick triggered')} />
+<UserLabel text="Charles Darwin" onCloseClick={() => alert('onCloseClick triggered')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

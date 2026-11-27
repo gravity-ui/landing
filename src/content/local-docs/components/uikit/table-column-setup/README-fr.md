@@ -1,20 +1,74 @@
+<!--GITHUB_BLOCK-->
+
+# TableColumnSetup
+
+<!--/GITHUB_BLOCK-->
+
 Le composant `TableColumnSetup` fournit une interface utilisateur pour configurer la visibilité et l'ordre des colonnes d'un tableau. Il affiche un bouton qui ouvre une popup avec une liste des colonnes disponibles, permettant aux utilisateurs de montrer/masquer les colonnes et éventuellement de les réorganiser par glisser-déposer.
 
 ```tsx
 import {TableColumnSetup} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const items = [
+  {id: 'name', title: 'Name', selected: true, required: true},
+  {id: 'email', title: 'Email', selected: true},
+  {id: 'phone', title: 'Phone', selected: false},
+];
+
+<TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Colonnes triables
 
 Activez la fonctionnalité de glisser-déposer pour permettre aux utilisateurs de réorganiser les colonnes en définissant la propriété `sortable` sur `true`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            sortable
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup items={items} sortable onUpdate={(updatedItems) => console.log(updatedItems)} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Modes d'application
 
@@ -23,25 +77,111 @@ Contrôlez quand les modifications sont appliquées en utilisant la propriété 
 - `true` - Les modifications sont appliquées immédiatement lorsque l'utilisateur bascule les colonnes
 - `false` - Les modifications sont appliquées uniquement lorsque l'utilisateur clique sur le bouton Appliquer
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            hideApplyButton
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  hideApplyButton
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Affichage du statut
 
 Affichez le nombre de colonnes sélectionnées dans le bouton du sélecteur en activant la propriété `showStatus`.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} showStatus onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  showStatus={true}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Sélecteur personnalisé
 
 Personnalisez le bouton de déclenchement en utilisant la propriété `renderSwitcher`.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Button, TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            renderSwitcher={({onClick, onKeyDown}) => (
+                <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+                    Configure Columns
+                </Button>
+            )}
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  renderSwitcher={({onClick, onKeyDown}) => (
+    <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+      Configure Columns
+    </Button>
+  )}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

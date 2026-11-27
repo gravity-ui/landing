@@ -1,10 +1,24 @@
+<!--GITHUB_BLOCK-->
+
+# Disclosure
+
+<!--/GITHUB_BLOCK-->
+
 `Disclosure` es un componente colapsable que permite mostrar y ocultar su contenido anidado.
 
 ```tsx
 import {Disclosure} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+## Base example
+
+```tsx
+<Disclosure summary="Summary">Content</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Controlar el estado de expansión
 
@@ -12,17 +26,73 @@ Puedes controlar el estado de expansión usando las propiedades `expanded` y `on
 
 Ejemplo de componente controlado:
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" defaultExpanded>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+function ControlledDisclosure() {
+  const [expanded, setExpanded] = React.useState(true);
+
+  return (
+    <Disclosure summary="Summary" expanded={expanded} onUpdate={setExpanded}>
+      Content
+    </Disclosure>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Tamaño
 
 Usa la propiedad `size` para controlar el tamaño de `Disclosure`. El tamaño predeterminado es `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Middle size" size="m">
+                Content
+            </Disclosure>
+            <Disclosure summary="Large size" size="l">
+                Content
+            </Disclosure>
+            <Disclosure summary="Extra large size" size="xl">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Middle size" size="m">
+  Content
+</Disclosure>
+<Disclosure summary="Large size" size="l">
+  Content
+</Disclosure>
+<Disclosure summary="Extra large size" size="xl">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Posición de la flecha
 
@@ -30,25 +100,135 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 
 `end`: La flecha se posiciona al final del encabezado.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Summary with start arrow" arrowPosition="start">
+                Content
+            </Disclosure>
+            <Disclosure summary="Summary with end arrow" arrowPosition="end">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary with start arrow" arrowPosition="start">
+  Content
+</Disclosure>
+<Disclosure summary="Summary with end arrow" arrowPosition="end">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Contenido personalizado
 
 Usa el componente `Disclosure.Summary` para crear un encabezado personalizado y `Disclosure.Details` para el contenido personalizado.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Check} from '@gravity-ui/icons';
+import {Button, Disclosure, Flex, Icon} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure>
+                <Disclosure.Summary>
+                    {(props) => (
+                        <Button {...props}>
+                            <Icon data={Check} size={14} />
+                            Custom summary
+                            <Icon data={Check} size={14} />
+                        </Button>
+                    )}
+                </Disclosure.Summary>
+                <div>Custom details</div>
+                <div>More custom details</div>
+            </Disclosure>
+            <Disclosure summary="Summary">
+                <Disclosure.Summary>
+                    {(_props, defaultButton) => (
+                        <Flex gap={4}>
+                            {defaultButton}
+                            <Icon data={Check} size={14} />
+                        </Flex>
+                    )}
+                </Disclosure.Summary>
+                <Disclosure.Details>Custom Details</Disclosure.Details>
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(props) => (
+      <Button {...props}>
+        <Icon data={Check} size={14} />
+        Custom summary
+        <Icon data={Check} size={14} />
+      </Button>
+    )}
+  </Disclosure.Summary>
+  <div>Custom details</div>
+  <div>More custom details</div>
+</Disclosure>
+```
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(_props, defaultButton) => (
+      <Flex gap={4}>
+        {defaultButton}
+        <Icon data={Check} size={14} />
+      </Flex>
+    )}
+  </Disclosure.Summary>
+  <Disclosure.Details>Custom Details</Disclosure.Details>
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estado deshabilitado
 
 `Disclosure` puede ser deshabilitado usando la propiedad `disabled`.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" disabled>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary" disabled>
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 
@@ -77,7 +257,6 @@ GRAVITY_TRANSLATION_BLOCK_10_END
 | qa       | Identificador de prueba                          | `string`                                        | `disclosure-summary` |
 
 ### Disclosure.Details
-GRAVITY_TRANSLATION_BLOCK_11_END
 
 | Nombre     | Descripción     | Tipo              | Por defecto              |
 | :--------- | :-------------- | :---------------- | :----------------------- |

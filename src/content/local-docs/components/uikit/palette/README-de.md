@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Palette
+
+<!--/GITHUB_BLOCK-->
+
 Die `Palette`-Komponente wird verwendet, um ein Raster aus Symbolen, Emojis, Reaktionen und Zeichen anzuzeigen, die Sie auswählen oder abwählen können.
 
 ```tsx
@@ -8,33 +14,142 @@ import {Palette} from '@gravity-ui/uikit';
 
 Sie können alle Optionen mit der Eigenschaft `disabled` deaktivieren. Wenn Sie nur bestimmte Optionen deaktivieren möchten, können Sie die Eigenschaft `disabled` dieser `options` (`PaletteOption[]`) ändern.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+const disabledOptions: PaletteOption[] = [{...options[0], disabled: true}, options[1]];
+
+export default function () {
+    return (
+        <>
+            <Palette options={disabledOptions} />
+            <Palette options={options} disabled />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  // disable a single item
+  {content: '😎', value: 'ID-cool', disabled: true},
+  {content: '🥴', value: 'ID-woozy'},
+];
+// or disable all of them
+<Palette options={options} disabled={true} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Größe
 
 Verwenden Sie die Eigenschaft `size`, um die Größe der `Palette` zu verwalten. Die Standardgröße ist `s`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return (
+        <>
+            <Palette options={options} size="xs" />
+            <Palette options={options} size="s" />
+            <Palette options={options} size="m" />
+            <Palette options={options} size="l" />
+            <Palette options={options} size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} size={"xs"} />
+<Palette options={options} size={"s"} />
+<Palette options={options} size={"m"} />
+<Palette options={options} size={"l"} />
+<Palette options={options} size={"xl"} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Spalten
 
 Sie können die Anzahl der Spalten im Raster ändern, indem Sie die Eigenschaft `columns` ändern (der Standardwert ist `6`).
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} columns={1} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Mehrfachauswahl
 
 Standardmäßig können Sie mehrere Optionen auswählen und abwählen. Wenn Sie nur eine einzelne Option auswählbar machen möchten, können Sie die Eigenschaft `multiple` deaktivieren.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} multiple={false} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

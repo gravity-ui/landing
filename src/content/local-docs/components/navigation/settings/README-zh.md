@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Settings
+
+<!--/GITHUB_BLOCK-->
 
 Settings 组件提供了设置面板的布局，具有以下功能。
 
@@ -6,7 +10,48 @@ Settings 组件提供了设置面板的布局，具有以下功能。
 - 按项目标题过滤面板内容
 - 显示加载状态和内容
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+## Usage
+
+One-level settings example:
+
+```tsx
+<Settings>
+  <Settings.Page title="Appearance">...</Settings.Page>
+  <Settings.Page title="Notifications">...</Settings.Page>
+</Settings>
+```
+
+Two-level settings example:
+_Note:_ `Settings` with `view=mobile` groups `Settings.Group` are ignored.
+
+```tsx
+<Settings>
+  <Settings.Group groupTitle="My service">
+    <Settings.Page title="Appearance">...</Settings.Page>
+    <Settings.Page title="Notifications">...</Settings.Page>
+  </Settings.Group>
+  <Settings.Group groupTitle="General">
+    <Settings.Page title="Appearance">...</Settings.Page>
+    <Settings.Page title="Notifications">...</Settings.Page>
+  </Settings.Group>
+</Settings>
+```
+
+Pages with sections example:
+
+```tsx
+<Settings.Page title="Features" icon={'...'}>
+  <Settings.Section title="Common">
+    <Settings.Item title="Default VCS">...</Settings.Item>
+    <Settings.Item title="Search root">...</Settings.Item>
+  </Settings.Section>
+  <Settings.Section title="Beta functionality">...</Settings.Section>
+</Settings.Page>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

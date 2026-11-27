@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Card
+
+<!--/GITHUB_BLOCK-->
+
 `Card` は、カスタマイズ可能なスタイルと機能を備えた、基本的なカードライクなコンテナである再利用可能な React コンポーネントです。情報を視覚的に魅力的で整理された方法で表示するために使用されます。
 
 ```tsx
@@ -25,7 +31,49 @@ import {Card} from '@gravity-ui/uikit';
 - `danger`: クリティカルな問題やエラーに関連するコンテンツを表示するためのテーマ。
 - `utility`: 役立つヒントを表示するためのテーマ。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} theme="normal" size="l">
+                Normal
+            </Card>
+            <Card style={cardStyle} theme="info" size="l">
+                Info
+            </Card>
+            <Card style={cardStyle} theme="success" size="l">
+                Success
+            </Card>
+            <Card style={cardStyle} theme="warning" size="l">
+                Warning
+            </Card>
+            <Card style={cardStyle} theme="danger" size="l">
+                Danger
+            </Card>
+            <Card style={cardStyle} theme="utility" size="l">
+                Utility
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## タイプ
 
@@ -35,7 +83,46 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 - `action`: クリック時にアクションをトリガーするボタンなどのインタラクティブな要素を持つカード。
 - `selection`: 特定のアクションを実行するために選択またはクリックできるカード。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} view="outlined" type="container" size="l">
+                Container
+            </Card>
+            <Card
+                style={cardStyle}
+                view="outlined"
+                type="action"
+                onClick={() => alert(':wave: hey')}
+                size="l"
+            >
+                action with onClick
+            </Card>
+            <Card style={cardStyle} view="outlined" type="selection" size="l">
+                Selection
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## 表示
 
@@ -46,7 +133,43 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 - `filled`: カードコンテンツを塗りつぶします。
 - `raised`: コンテナをわずかに持ち上げるために影を適用します。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} view="clear" type="container" size="l">
+                Clear
+            </Card>
+            <Card style={cardStyle} view="outlined" type="container" size="l">
+                Outlined
+            </Card>
+            <Card style={cardStyle} view="filled" type="container" size="l">
+                Filled
+            </Card>
+            <Card style={cardStyle} view="raised" type="container" size="l">
+                Raised
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## プロパティ
 

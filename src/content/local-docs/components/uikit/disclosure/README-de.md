@@ -1,10 +1,24 @@
+<!--GITHUB_BLOCK-->
+
+# Disclosure
+
+<!--/GITHUB_BLOCK-->
+
 `Disclosure` ist eine aufklappbare Komponente, die es ermöglicht, ihren verschachtelten Inhalt anzuzeigen und auszublenden.
 
 ```tsx
 import {Disclosure} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+## Base example
+
+```tsx
+<Disclosure summary="Summary">Content</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Steuerung des Erweiterungszustands
 
@@ -12,17 +26,73 @@ Sie können den Erweiterungszustand mit den Eigenschaften `expanded` und `onUpda
 
 Beispiel für eine gesteuerte Komponente:
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" defaultExpanded>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+function ControlledDisclosure() {
+  const [expanded, setExpanded] = React.useState(true);
+
+  return (
+    <Disclosure summary="Summary" expanded={expanded} onUpdate={setExpanded}>
+      Content
+    </Disclosure>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Größe
 
 Verwenden Sie die Eigenschaft `size`, um die Größe von `Disclosure` zu steuern. Die Standardgröße ist `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Middle size" size="m">
+                Content
+            </Disclosure>
+            <Disclosure summary="Large size" size="l">
+                Content
+            </Disclosure>
+            <Disclosure summary="Extra large size" size="xl">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Middle size" size="m">
+  Content
+</Disclosure>
+<Disclosure summary="Large size" size="l">
+  Content
+</Disclosure>
+<Disclosure summary="Extra large size" size="xl">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Pfeilposition
 
@@ -30,25 +100,135 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 
 `end`: Der Pfeil wird am Ende des Headers positioniert.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Summary with start arrow" arrowPosition="start">
+                Content
+            </Disclosure>
+            <Disclosure summary="Summary with end arrow" arrowPosition="end">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary with start arrow" arrowPosition="start">
+  Content
+</Disclosure>
+<Disclosure summary="Summary with end arrow" arrowPosition="end">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Benutzerdefinierter Inhalt
 
 Verwenden Sie die Komponente `Disclosure.Summary`, um eine benutzerdefinierte Kopfzeile zu erstellen, und `Disclosure.Details`, um benutzerdefinierten Inhalt bereitzustellen.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Check} from '@gravity-ui/icons';
+import {Button, Disclosure, Flex, Icon} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure>
+                <Disclosure.Summary>
+                    {(props) => (
+                        <Button {...props}>
+                            <Icon data={Check} size={14} />
+                            Custom summary
+                            <Icon data={Check} size={14} />
+                        </Button>
+                    )}
+                </Disclosure.Summary>
+                <div>Custom details</div>
+                <div>More custom details</div>
+            </Disclosure>
+            <Disclosure summary="Summary">
+                <Disclosure.Summary>
+                    {(_props, defaultButton) => (
+                        <Flex gap={4}>
+                            {defaultButton}
+                            <Icon data={Check} size={14} />
+                        </Flex>
+                    )}
+                </Disclosure.Summary>
+                <Disclosure.Details>Custom Details</Disclosure.Details>
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(props) => (
+      <Button {...props}>
+        <Icon data={Check} size={14} />
+        Custom summary
+        <Icon data={Check} size={14} />
+      </Button>
+    )}
+  </Disclosure.Summary>
+  <div>Custom details</div>
+  <div>More custom details</div>
+</Disclosure>
+```
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(_props, defaultButton) => (
+      <Flex gap={4}>
+        {defaultButton}
+        <Icon data={Check} size={14} />
+      </Flex>
+    )}
+  </Disclosure.Summary>
+  <Disclosure.Details>Custom Details</Disclosure.Details>
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Deaktivierter Zustand
 
 `Disclosure` kann mit der Eigenschaft `disabled` deaktiviert werden.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" disabled>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary" disabled>
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 
@@ -77,7 +257,6 @@ GRAVITY_TRANSLATION_BLOCK_10_END
 | qa       | Test-Identifikator                          | `string`                                       | `disclosure-summary` |
 
 ### Disclosure.Details
-GRAVITY_TRANSLATION_BLOCK_11_END
 
 | Name     | Beschreibung                               | Typ               | Standardwert             |
 | :------- | :----------------------------------------- | :---------------- | :----------------------- |

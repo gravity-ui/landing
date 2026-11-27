@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# DatePicker
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {DatePicker} from '@gravity-ui/date-components';
 ```
@@ -20,21 +26,59 @@ import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
 
 `DatePicker`의 크기를 제어하려면 `size` 속성을 사용하십시오. 기본 크기는 `m`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker size="s" />
+<DatePicker size="m" />
+<DatePicker size="l" />
+<DatePicker size="xl" />
+`}
+>
+    <DateComponents.DatePicker size="s" />
+    <DateComponents.DatePicker size="m" />
+    <DateComponents.DatePicker size="l" />
+    <DateComponents.DatePicker size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker size="s" />
+<DatePicker size="m" />
+<DatePicker size="l" />
+<DatePicker size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 보기
 
 `normal` - `DatePicker`의 기본 보기 (기본값).
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DatePicker />`}>
+    <DateComponents.DatePicker />
+</ExampleBlock>
+LANDING_BLOCK-->
 
 `clear` - 테두리가 보이지 않는 `DatePicker` 보기 (사용자 정의 래퍼와 함께 사용할 수 있음)
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DatePicker view="clear" />`}>
+    <DateComponents.DatePicker view="clear" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker view="normal" />
+<DatePicker view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 핀
 
@@ -42,9 +86,29 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 `pin` 속성의 값은 대시로 구분된 왼쪽 및 가장자리 스타일 이름으로 구성됩니다. 예: `"round-brick"`.
 가장자리 스타일은 `round` (기본값), `circle`, `brick`, `clear`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker pin="round-brick" />
+<DatePicker pin="brick-brick" />
+<DatePicker pin="brick-round" />
+`}
+>
+    <DateComponents.DatePicker pin="round-brick" />
+    <DateComponents.DatePicker pin="brick-brick" />
+    <DateComponents.DatePicker pin="brick-round" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker pin="round-brick" />
+<DatePicker pin="brick-brick" />
+<DatePicker pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 값
 
@@ -52,9 +116,27 @@ GRAVITY_TRANSLATION_BLOCK_7_END
 
 `minValue` 속성을 사용하면 사용자가 입력할 수 있는 가장 빠른 날짜와 시간을 지정할 수 있습니다. 반대로 `maxValue` 속성은 입력할 수 있는 가장 늦은 날짜와 시간을 지정합니다. 이 범위 밖의 값을 입력하면 컴포넌트의 보기가 잘못된 유효성 검사 상태와 같이 변경됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker minValue={dateTimeParse('01.01.2024')} placeholder={"minValue: '01.01.2024'"}/>
+<DatePicker maxValue={dateTimeParse('01.01.2025')} placeholder={"maxValue: '01.01.2025'"}/>
+`}
+>
+    <DateComponentsExamples.DatePickerExample minValue={'01.01.2024'} placeholder={"minValue: '01.01.2024'"} />
+    <DateComponentsExamples.DatePickerExample maxValue={'01.01.2025'} placeholder={"maxValue: '01.01.2025'"} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+
+<DatePicker minValue={dateTimeParse('01.01.2024')} />
+<DatePicker maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 상태
 
@@ -62,25 +144,70 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 사용자가 컴포넌트와 상호 작용할 수 없도록 하려는 `DatePicker`의 상태입니다.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker disabled={true} defaultValue={dateTime()} />
+`}
+>
+    <DateComponentsExamples.DatePickerExample disabled={true} defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker disabled defaultValue={dateTime()} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 읽기 전용
 
 `readOnly`는 true로 설정하면 `DatePicker` 컴포넌트를 사용자가 수정할 수 없게 만드는 부울 속성입니다. 즉, 입력란은 현재 값을 표시하지만 사용자는 이를 변경할 수 없습니다.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker readOnly defaultValue={dateTimeParse(new Date())} />
+`}
+>
+    <DateComponentsExamples.DatePickerExample readOnly defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker readOnly defaultValue={dateTime()} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 오류
 
 사용자 입력이 잘못되었음을 나타내려는 `DatePicker`의 상태입니다. `DatePicker` 모양을 변경하려면 `"invalid"` 값을 가진 `validationState` 속성을 사용하십시오. 선택적 메시지 텍스트는 `errorMessage` 속성을 통해 추가할 수 있습니다. 메시지 텍스트는 컴포넌트 아래에 렌더링됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker errorMessage="Error message" validationState="invalid" />
+<DatePicker validationState="invalid" />
+`}
+>
+    <DateComponents.DatePicker errorMessage="Error message" validationState="invalid" />
+    <DateComponents.DatePicker validationState="invalid" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker errorMessage="Error message" validationState="invalid" />
+<DatePicker validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 추가 콘텐츠
 
@@ -88,39 +215,116 @@ GRAVITY_TRANSLATION_BLOCK_15_END
 
 이 속성을 사용하면 입력 필드에 예상되는 값에 대한 간략한 힌트를 제공할 수 있습니다. 이 힌트는 사용자가 값을 입력하기 전에 입력 필드 내에 표시되며, 텍스트가 입력되면 사라집니다.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker placeholder="Placeholder" />
+`}
+>
+    <DateComponents.DatePicker placeholder='Placeholder' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker placeholder="Placeholder" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 레이블
 
 필드의 왼쪽 부분에 레이블을 배치할 수 있습니다. 레이블은 `DatePicker` 전체 공간의 절반 이상을 차지할 수 없습니다.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker label="Label" />
+<DatePicker label="Very long label with huge amount of symbols" />
+`}
+>
+    <DateComponents.DatePicker label="Label" />
+    <DateComponents.DatePicker label="Very long label with huge amount of symbols" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 지우기 버튼
 
 `hasClear`는 부울 속성으로, 사용자에게 입력 필드의 내용을 빠르게 지울 수 있는 기능을 제공합니다.
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DatePicker hasClear />`}
+>
+    <DateComponents.DatePicker
+        hasClear
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker hasClear />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 형식
 
 `format` 속성은 `DatePicker` 컴포넌트가 수락하고 표시할 날짜 및 시간 형식을 정의하는 문자열입니다. 이 속성은 날짜 및 시간이 사용자에게 시각적으로 표시되는 방식과 사용자의 입력이 어떻게 형식화되어야 하는지를 결정합니다. [사용 가능한 형식](https://day.js.org/docs/en/display/format)
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker format='LL' />
+`}
+>
+    <DateComponents.DatePicker format='LL' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker format="LL" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 사용자 정의 날짜 파서
 
 `parseDateFromString` 속성을 통해 사용자 정의 파서 함수를 제공하여 붙여넣은 날짜 문자열을 처리할 수 있습니다. 이는 특정 날짜 형식을 지원하거나 기본 동작과 다른 사용자 정의 파싱 로직이 필요할 때 유용합니다.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {dateTime} from '@gravity-ui/date-utils';
+
+const customParser = (dateStr: string, format: string, timeZone?: string) => {
+  // Custom parsing logic
+  // For example, handle DD/MM/YYYY format specifically
+  if (dateStr.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+    const [day, month, year] = dateStr.split('/');
+    return dateTime({input: `${year}-${month}-${day}`, timeZone});
+  }
+  // Fallback to default parsing
+  return dateTime({input: dateStr, format, timeZone});
+};
+
+<DatePicker parseDateFromString={customParser} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 시간대
 
@@ -130,9 +334,15 @@ GRAVITY_TRANSLATION_BLOCK_24_END
 
 `DatePicker` 내부에 사용자 정의 달력 컴포넌트를 사용하려면 달력과 유사한 속성을 가진 `children`으로 전달할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+<!--LANDING_BLOCK
+[Learn more about calendar](https://gravity-ui.com/components/date-components/calendar)
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--GITHUB_BLOCK-->
+
+[Learn more about calendar](https://github.com/gravity-ui/date-components/blob/main/src/components/Calendar/README.md)
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

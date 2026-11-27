@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# NumberInput
+
+<!--/GITHUB_BLOCK-->
+
 `NumberInput` は、オプションのステッパーコントロール、最小/最大境界、値のフォーマットを備えた、数値入力用のテキストフィールドです。
 
 ```tsx
@@ -12,21 +18,60 @@ import {NumberInput} from '@gravity-ui/uikit';
 
 `normal` - `NumberInput` のメインビュー（デフォルトで使用）。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <NumberInput placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - `NumberInput` のカスタムラッパーと組み合わせて使用できます。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <NumberInput view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput view="normal" />
+<NumberInput view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 `NumberInput` の境界線の右端と左端の表示を制御できます。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" pin="round-brick" />
+            <NumberInput placeholder="Placeholder" pin="brick-brick" />
+            <NumberInput placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput pin="round-brick" />
+<NumberInput pin="brick-brick" />
+<NumberInput pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ステート
 
@@ -34,18 +79,57 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 ユーザーがコンポーネントを操作できないようにしたい `NumberInput` のステートです。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <NumberInput placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 ユーザーの無効な入力を示したい `NumberInput` のステートです。`NumberInput` の外観を変更するには、`validationState` プロパティを `"invalid"` 値で使用します。オプションのメッセージテキストは、`errorMessage` プロパティを介して追加できます。デフォルトでは、メッセージテキストはコンポーネントの外側にレンダリングされます。
 この動作は、`errorPlacement` プロパティで変更できます。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <NumberInput
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <NumberInput
+                placeholder="Placeholder"
+                errorPlacement="inside"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput errorMessage="Error message" validationState="invalid" />
+<NumberInput errorPlacement="inside" errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## サイズ
 
@@ -57,9 +141,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – プロモおよびランディングページで使用されます。
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" size="s" />
+            <NumberInput placeholder="Placeholder" size="m" />
+            <NumberInput placeholder="Placeholder" size="l" />
+            <NumberInput placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput size="s" />
+<NumberInput size="m" />
+<NumberInput size="l" />
+<NumberInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Label
 
@@ -68,9 +174,29 @@ GRAVITY_TRANSLATION_BLOCK_11_END
 - ラベルは、`startContent` プロパティで追加された要素の右側に配置されます。
 - ラベルは、`NumberInput` 全体の幅の半分を超えることはできません。
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" label="Label" />
+            <NumberInput
+                placeholder="Placeholder"
+                label="Very long label with huge amount of symbols"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 追加コンテンツ
 
@@ -78,25 +204,79 @@ GRAVITY_TRANSLATION_BLOCK_13_END
 
 コントロールの左側にコンテンツを追加できます。`label` プロパティで追加されたラベルの左側に配置されます。
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Label, NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <NumberInput
+            placeholder="Search"
+            label="Label"
+            startContent={<Label size="s">Left</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput startContent={<Label>Left</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### End content
 
 コントロールの右側にコンテンツを追加できます。`hasClear` プロパティで追加されたクリアボタンと、内部に配置されたエラーアイコンの右側に配置されます。
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Label, NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <NumberInput
+            hasClear
+            placeholder="Placeholder"
+            endContent={<Label size="s">Right</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput endContent={<Label>Right</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Controls
 
 コンポーネントの最も右の位置にあるインクリメント/デクリメント矢印コントロールの表示は、`hiddenControls` プロパティで管理できます。
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+export default function () {
+    return (
+        <>
+            <NumberInput />
+            <NumberInput hiddenControls />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput />
+<NumberInput hiddenControls />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ビヘイビア
 
@@ -104,9 +284,21 @@ GRAVITY_TRANSLATION_BLOCK_19_END
 
 入力できる最小値と最大値を設定できます。定義された範囲に収まらない値は、ブラー時に最も近い許容値にクランプされます。
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+export default function () {
+    return <NumberInput min={-100} max={100} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput min={-100} max={100} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Step
 
@@ -118,26 +310,74 @@ GRAVITY_TRANSLATION_BLOCK_21_END
 - `step` が整数で `min` の値が定義されていない場合、許容値は `step` で割り切れる値として定義されます。
 - `step` または `min` の値が小数である場合、クランプは適用されません。
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+export default function () {
+    return <NumberInput min={-10} step={4} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput min={-10} step={4} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Step multiplier
 
 キーボードの Shift キーが押されたときにステップ値に乗算される値を、`shiftMultiplier` プロパティを定義することで設定できます。
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+export default function () {
+    return (
+        <>
+            <NumberInput shiftMultiplier={50} />
+            <NumberInput shiftMultiplier={8} step={4} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput shiftMultiplier={50} />
+<NumberInput shiftMultiplier={8} step={4} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Decimal values restriction
 
 `allowDecimal` プロパティを使用して、整数のみ、または小数も入力できる機能を切り替えることができます。
 `allowDecimal={false}` プロパティを使用すると、入力されたドットは無視され、貼り付けられた小数値は切り捨てられます。
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+export default function () {
+    return (
+        <>
+            <NumberInput allowDecimal />
+            <NumberInput allowDecimal={false} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput allowDecimal />
+<NumberInput allowDecimal={false} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 
@@ -184,5 +424,3 @@ GRAVITY_TRANSLATION_BLOCK_27_END
 ## CSS API
 
 コンポーネント自体にはCSS APIはありませんが、親コンポーネントであるTextInputのAPIを拡張しています。
-
-GRAVITY_TRANSLATION_BLOCK_1_END

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Loader
+
+<!--/GITHUB_BLOCK-->
+
 `Loader` コンポーネントは、点滅するバーでローディングプログレスを表示します。`Spin` とは異なり、このコンポーネントはページ全体や `Dialog` のようなグローバルなシナリオで使用されます。
 
 ```tsx
@@ -6,9 +12,29 @@ import {Loader} from '@gravity-ui/uikit';
 
 ### Size
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Loader} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Loader size="s" />
+            <Loader size="m" />
+            <Loader size="l" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Loader size="s" />
+<Loader size="m" />
+<Loader size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `S`: Small サイズ。通常のローダーが大きすぎる場合に使用します。
 
@@ -22,4 +48,3 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | :-------- | :------------------------------------ | :---------------: | :-----: |
 | size      | ローダーのサイズ                      | `"s"` `"m"` `"l"` |  `"s"`  |
 | className | ルート要素のカスタム CSS クラス       |     `string`      |         |
-GRAVITY_TRANSLATION_BLOCK_2_END

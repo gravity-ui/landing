@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Calendar
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {Calendar} from '@gravity-ui/date-components';
 ```
@@ -16,9 +22,29 @@ import {dateTimeParse} from '@gravity-ui/date-utils';
 
 Um die Größe des `Calendar` zu steuern, verwenden Sie die Eigenschaft `size`. Die Standardgröße ist `m`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar size="m" />
+<Calendar size="l" />
+<Calendar size="xl" />
+`}
+>
+    <DateComponents.Calendar size="m" />
+    <DateComponents.Calendar size="l" />
+    <DateComponents.Calendar size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar size="m" />
+<Calendar size="l" />
+<Calendar size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Wert
 
@@ -26,9 +52,23 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 Die Eigenschaft `minValue` ermöglicht es Ihnen, das früheste Datum und die früheste Uhrzeit anzugeben, die vom Benutzer eingegeben werden können. Umgekehrt gibt die Eigenschaft `maxValue` das späteste Datum und die späteste Uhrzeit an, die vom Benutzer eingegeben werden können. Alle anderen Werte werden für den Benutzer deaktiviert.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+`}
+>
+    <DateComponentsExamples.CalendarExample minValue={'01.01.2024'} maxValue={'01.01.2025'}/>
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Modus
 
@@ -44,9 +84,23 @@ Definiert das Zeitintervall, das `Calendar` anzeigen soll. Mit `mode` können Si
 
 Sie können aktivierte Modi mit der Eigenschaft `modes` einschränken.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar defaultMode="months"/>
+`}
+>
+    <DateComponents.Calendar defaultMode="months" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar defaultMode="months" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zustände
 
@@ -54,25 +108,67 @@ GRAVITY_TRANSLATION_BLOCK_6_END
 
 Der Zustand des `Calendar`, in dem der Benutzer nicht mit der Komponente interagieren kann.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar disabled={true} />
+`}
+>
+    <DateComponents.Calendar disabled={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar disabled={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Nur-Lese-Zugriff
 
 `readOnly` ist ein boolesches Attribut, das, wenn es auf true gesetzt ist, die `Calendar`-Komponente für den Benutzer unveränderlich macht. Das bedeutet, dass der Benutzer den Wert zwar anzeigen, aber nicht ändern kann.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar readOnly={true} />
+`}
+>
+    <DateComponents.Calendar readOnly={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar readOnly={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Fokussierter Wert
 
 Ermöglicht die Auswahl des Datums, auf das die Ansicht des `Calendar` fokussiert ist. Wenn Sie dies gesteuert wünschen, sollten Sie die Eigenschaft `focusedValue` verwenden. Sie können den anfänglichen fokussierten Wert für eine ungesteuerte Komponente mit der optionalen Eigenschaft `defaultFocusedValue` festlegen.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar defaultFocusedValue={dateTimeParse('01.01.2020')} />
+`}
+>
+    <DateComponentsExamples.CalendarExample defaultFocusedValue={'01.01.2020'} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar defaultFocusedValue={dateTimeParse('01.01.2020')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zeitzone
 

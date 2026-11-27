@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Slider
+
+<!--/GITHUB_BLOCK-->
+
 El slider es un componente React personalizable y adaptable que permite a los usuarios seleccionar un único valor o un rango de valores de un conjunto de datos especificado.
 
 ```tsx
@@ -10,17 +16,49 @@ import {Slider} from '@gravity-ui/uikit';
 
 Este es un slider con un control deslizante para seleccionar un único valor. Se utiliza por defecto.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Slider de rango
 
 Este es un slider con dos controles deslizantes para seleccionar un rango. Para usarlo, establezca `defaultValue` (para un slider no controlado) o `value` (para uno controlado) para la matriz.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider defaultValue={[20, 40]} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider defaultValue={[20, 40]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estados
 
@@ -28,25 +66,93 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 
 Este es un estado de un `Slider` en el que no desea permitir que el usuario interactúe con este componente.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider disabled />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider disabled={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 Este estado de `Slider` es para la entrada incorrecta del usuario. Para cambiar la apariencia del `Slider`, utilice la propiedad `validationState` con el valor `"invalid"`. Opcionalmente, puede proporcionar un mensaje de error a través de la propiedad `errorMessage`. El texto de este mensaje se mostrará debajo del slider.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider validationState="invalid" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider validationState="invalid" errorMessage="Error message" />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider validationState={"invalid"} />
+<Slider validationState={"invalid"} errorMessage="Error message" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Tamaño
 
 Utilice la propiedad `size` para gestionar el tamaño del `Slider`. El tamaño predeterminado es `m`.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="s" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="m" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="l" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="xl" />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider size="s" />
+<Slider size="m" />
+<Slider size="l" />
+<Slider size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valor
 
@@ -54,17 +160,59 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 Las propiedades `min` y `max` definen los límites del rango que puede manejar el `Slider`. Estas propiedades son esenciales para establecer los límites de los valores seleccionables.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider min={10} />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider max={50} />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider min={20} max={60} />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider min={10} />
+<Slider max={50} />
+<Slider min={20} max={60} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Paso
 
 La propiedad `step` determina los incrementos dentro del rango de valor mínimo y máximo. Esto significa cuánto cambia el valor con un solo movimiento del slider.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider step={10} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider step={10} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Marcas
 
@@ -72,21 +220,69 @@ La propiedad `marks` se utiliza en el componente `Slider` para especificar marca
 
 - la cantidad de marcadores visuales a lo largo del slider
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={11} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={11} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 - la matriz de valores de marcadores a lo largo del slider
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={[0, 50, 100]} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={[0, 50, 100]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 El valor `0` o la matriz vacía `[]` en la propiedad `marks` ocultan todas las marcas del `Slider`.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={0} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={0} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 > El valor de la marca está disponible para su selección, incluso si no coincide con la condición del valor `step`.
 
@@ -96,17 +292,49 @@ Puede cambiar el formato de visualización de los valores de las marcas utilizan
 
 Puede establecer la propiedad `step` a `null` para definir un conjunto de valores específicos que el slider puede manejar, en lugar de un rango continuo. Esto es particularmente útil cuando solo ciertos valores discretos son válidos para la selección. En ese caso, las propiedades `min`, `max` y `marks` permiten especificar una matriz de números que representan los valores exactos que los usuarios pueden seleccionar utilizando el `Slider`.
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={[10, 20, 50, 55, 65, 80]} step={null} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={[10, 20, 50, 55, 65, 80]} step={null} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Punto de inicio
 
 La propiedad `startPoint` le permite establecer el punto de inicio de la pista. Utiliza el valor mínimo del `Slider` por defecto. Se ignorará si utiliza el `Slider` con valores de rango o si establece la propiedad `inverted`.
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider startPoint={50} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider startPoint={50} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Invertido
 
@@ -115,17 +343,49 @@ Por defecto (de `false`), el `Slider` muestra el intervalo de `min` al control d
 Si es `true`, indica el intervalo desde el pin hasta `max`.
 Solo para `Slider` único. La propiedad `startPoint` se ignorará.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider inverted />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider inverted />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Tooltip
 
 La propiedad `tooltipDisplay` se utiliza en el componente `Slider` para controlar el comportamiento de visualización de un tooltip que muestra el valor actual mientras el usuario interactúa con el slider. El valor `auto` muestra el tooltip solo cuando el cursor se cierne o enfoca los controles deslizantes del `Slider`.
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider tooltipDisplay="on" />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider tooltipDisplay="on" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 Puede cambiar el formato de visualización del valor del tooltip utilizando la propiedad `tooltipFormat`. Si no especifica `tooltipformat`, se utilizará `marksFormat` para mostrar el valor en el tooltip.
 

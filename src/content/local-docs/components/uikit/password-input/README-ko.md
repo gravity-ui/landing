@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+## Password Input
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {PasswordInput} from '@gravity-ui/uikit';
 ```
@@ -8,13 +14,25 @@ import {PasswordInput} from '@gravity-ui/uikit';
 
 이 버튼을 사용하면 사용자는 입력 값을 쉽게 클립보드로 복사할 수 있습니다. `hideCopyButton` 불리언 속성을 사용하여 이 버튼을 숨길 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideCopyButton />;
+}
+SANDBOX-->
 
 ### 보기 버튼
 
 `hideRevealButton` 속성을 사용하면 사용자는 비밀번호의 표시 여부를 전환할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideRevealButton />;
+}
+SANDBOX-->
 
 ### 속성
 
@@ -31,4 +49,16 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 | revealValue         | 비밀번호 입력 필드의 표시 상태 결정                                               | `boolean`  | `false` |
 | onRevealValueUpdate | `revealValue` 상태가 변경될 때마다 호출되는 콜백 함수                                | `function` |         |
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+#### Usage example
+
+```tsx
+function MyComponent() {
+  const [value, setValue] = React.useState('');
+
+  return <PasswordInput onUpdate={setValue} value={value} />;
+}
+```
+
+<!--/GITHUB_BLOCK-->

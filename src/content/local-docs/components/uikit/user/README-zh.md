@@ -1,4 +1,9 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# User
+
+<!--/GITHUB_BLOCK-->
+
 这是一个通用的组件，用于显示带有信息块的用户头像。它使用 [Avatar](../Avatar/README.md) 组件来渲染头像。它还可以接受自定义的 React 节点作为头像。
 
 ```tsx
@@ -9,7 +14,20 @@ import {User} from '@gravity-ui/uikit';
 
 `User` 组件具有 `name` 和 `description` 属性，用于显示信息块。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {User} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <User
+            avatar={{text: 'Charles Darwin', theme: 'brand'}}
+            name="Charles Darwin"
+            description="charles@mail.ai"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 ## 大小
 
@@ -17,7 +35,58 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 
 此属性也提供给内部的 `Avatar` 组件。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {User} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="3xs"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="2xs"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="xs"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="s"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="m"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="l"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="xl"
+            />
+        </>
+    );
+}
+SANDBOX-->
 
 ## 属性
 

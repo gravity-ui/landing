@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Progress
+
+<!--/GITHUB_BLOCK-->
+
 `Progress` コンポーネントは、現在の操作の進捗状況を表示します。セクションに分割することもできます。
 
 ```tsx
@@ -8,43 +14,229 @@ import {Progress} from '@gravity-ui/uikit';
 
 `theme` プロパティを使用して、プログレス全体または複合部分の色を指定します。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Box, Progress} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Box width={'30%'}>
+                <Progress text="default" value={50} />
+                <Box height={4} />
+                <Progress text="success" theme="success" value={50} />
+            </Box>
+            <Box width={'30%'}>
+                <Progress text="warning" theme="warning" value={50} />
+                <Box height={4} />
+                <Progress text="danger" theme="danger" value={50} />
+            </Box>
+            <Box width={'30%'}>
+                <Progress text="info" theme="info" value={50} />
+                <Box height={4} />
+                <Progress text="misc" theme="misc" value={50} />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Progress text="default" value={50} />
+<Progress text="warning" theme="warning" value={50} />
+<Progress text="info" theme="info" value={50} />
+<Progress text="success" theme="success" value={50} />
+<Progress text="danger" theme="danger" value={50} />
+<Progress text="misc" theme="misc" value={50} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## States
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Box, Progress} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <Box width={'30%'}>
+            <Progress text="Loading" theme="misc" value={60} loading />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Progress text="Loading" theme="misc" value={60} loading={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Size
 
 `Progress` コンポーネントのサイズを管理するには、`"xs"`、`"s"`、`"m"` の値を取ることができる `size` プロパティを使用します。`text` プロパティは `"m"` サイズでのみ機能します。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Box, Progress} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <Box width={'30%'}>
+                <Progress theme="success" value={60} size="xs" />
+            </Box>
+            <Box width={'30%'}>
+                <Progress theme="warning" value={70} size="s" />
+            </Box>
+            <Box width={'30%'}>
+                <Progress theme="danger" value={80} size="m" />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Progress theme="success" value={60} size="xs" />
+<Progress theme="warning" value={70} size="s" />
+<Progress theme="danger" value={80} size="m" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Breakpoints
 
 `Progress` コンポーネントのブレークポイントを設定するには、`colorStops` プロパティを使用します。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Box, Progress} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+const colorStops = [
+    {theme: 'danger', stop: 20},
+    {theme: 'warning', stop: 50},
+    {theme: 'success', stop: 100},
+];
+
+export default function () {
+    return (
+        <>
+            <Box width={'30%'}>
+                <Progress value={10} colorStops={colorStops} />
+            </Box>
+            <Box width={'30%'}>
+                <Progress value={40} colorStops={colorStops} />
+            </Box>
+            <Box width={'30%'}>
+                <Progress value={60} colorStops={colorStops} />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Progress value={10} colorStops={[{theme: 'danger', stop: 20}, {theme: 'warning', stop: 50}, {theme: 'success', stop: 100}]} />
+<Progress value={40} colorStops={[{theme: 'danger', stop: 20}, {theme: 'warning', stop: 50}, {theme: 'success', stop: 100}]} />
+<Progress value={60} colorStops={[{theme: 'danger', stop: 20}, {theme: 'warning', stop: 50}, {theme: 'success', stop: 100}]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 オプションの `color` プロパティを使用して、テーマの色を上書きします。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Box, Progress} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+const colorStops = [
+    {theme: 'danger', stop: 20, color: '#ff4444'},
+    {theme: 'warning', stop: 50, color: '#ffaa00'},
+    {theme: 'success', stop: 100, color: '#44ff44'},
+];
+
+export default function () {
+    return (
+        <>
+            <Box width={'30%'}>
+                <Progress value={10} colorStops={colorStops} />
+            </Box>
+            <Box width={'30%'}>
+                <Progress value={40} colorStops={colorStops} />
+            </Box>
+            <Box width={'30%'}>
+                <Progress value={60} colorStops={colorStops} />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Progress value={10} colorStops={[{theme: 'danger', stop: 20, color: '#ff4444'}, {theme: 'warning', stop: 50, color: '#ffaa00'}, {theme: 'success', stop: 100, color: '#44ff44'}]} />
+<Progress value={40} colorStops={[{theme: 'danger', stop: 20, color: '#ff4444'}, {theme: 'warning', stop: 50, color: '#ffaa00'}, {theme: 'success', stop: 100, color: '#44ff44'}]} />
+<Progress value={60} colorStops={[{theme: 'danger', stop: 20, color: '#ff4444'}, {theme: 'warning', stop: 50, color: '#ffaa00'}, {theme: 'success', stop: 100, color: '#44ff44'}]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Stack
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import type {Stack} from '@gravity-ui/uikit';
+import {Box, Progress} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+const defaultStack: Stack[] = [
+    {theme: 'default', content: 'First', value: 25},
+    {theme: 'success', content: 'Second', value: 25},
+    {theme: 'warning', content: 'Third', value: 25},
+    {theme: 'danger', content: 'Fourth', value: 25},
+];
+
+const customColorStack: Stack[] = [
+    {color: '#6e5d8c', value: 33.333333333333336},
+    {color: '#5b785b', value: 33.333333333333336},
+    {color: '#956069', value: 33.333333333333336},
+];
+
+export default function () {
+    return (
+        <>
+            <Box width={'30%'}>
+                <Progress stack={defaultStack} />
+            </Box>
+            <Box width={'30%'}>
+                <Progress text="Progress with custom colors" stack={customColorStack} />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Progress stack={[
+  {theme: 'default', content: 'First', value: 25},
+  {theme: 'success', content: 'Second', value: 25},
+  {theme: 'warning', content: 'Third', value: 25},
+  {theme: 'danger', content: 'Fourth', value: 25},
+]} />
+<Progress text="Progress with custom colors" stack={[
+  {color: '#6e5d8c', value: 33.333333333333336},
+  {color: '#5b785b', value: 33.333333333333336},
+  {color: '#956069', value: 33.333333333333336},
+]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

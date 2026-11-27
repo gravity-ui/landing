@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# NumberInput
+
+<!--/GITHUB_BLOCK-->
+
 `NumberInput` 是一个用于输入数值的文本字段，可选配步进器控件、最小值/最大值限制和数值格式化。
 
 ```tsx
@@ -12,21 +18,60 @@ import {NumberInput} from '@gravity-ui/uikit';
 
 `normal` - `NumberInput` 的主视图（默认使用）。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <NumberInput placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - 可与自定义的 `NumberInput` 包装器一起使用。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <NumberInput view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput view="normal" />
+<NumberInput view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 允许您控制 `NumberInput` 边框的右侧和左侧边缘的外观。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" pin="round-brick" />
+            <NumberInput placeholder="Placeholder" pin="brick-brick" />
+            <NumberInput placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput pin="round-brick" />
+<NumberInput pin="brick-brick" />
+<NumberInput pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 状态
 
@@ -34,18 +79,57 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 `NumberInput` 的禁用状态，此时用户无法与组件进行交互。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <NumberInput placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 `NumberInput` 的错误状态，用于指示用户输入不正确。要更改 `NumberInput` 的外观，请使用 `validationState` 属性并将其值设置为 `"invalid"`。可以通过 `errorMessage` 属性添加可选的错误消息文本。默认情况下，消息文本会渲染在组件外部。
 此行为可以通过 `errorPlacement` 属性进行更改。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <NumberInput
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <NumberInput
+                placeholder="Placeholder"
+                errorPlacement="inside"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput errorMessage="Error message" validationState="invalid" />
+<NumberInput errorPlacement="inside" errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Size
 
@@ -57,9 +141,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – 在促销和登陆页面上使用。
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" size="s" />
+            <NumberInput placeholder="Placeholder" size="m" />
+            <NumberInput placeholder="Placeholder" size="l" />
+            <NumberInput placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput size="s" />
+<NumberInput size="m" />
+<NumberInput size="l" />
+<NumberInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Label
 
@@ -68,9 +174,29 @@ GRAVITY_TRANSLATION_BLOCK_11_END
 - 标签位于通过 `startContent` 属性添加的元素右侧。
 - 标签所占空间不能超过 `NumberInput` 总空间宽度的一半。
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" label="Label" />
+            <NumberInput
+                placeholder="Placeholder"
+                label="Very long label with huge amount of symbols"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Additional content
 
@@ -78,25 +204,79 @@ GRAVITY_TRANSLATION_BLOCK_13_END
 
 允许您在控件的左侧添加内容。位于通过 `label` 属性添加的标签的左侧。
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Label, NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <NumberInput
+            placeholder="Search"
+            label="Label"
+            startContent={<Label size="s">Left</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput startContent={<Label>Left</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### End content
 
 允许您在控件的右侧添加内容。位于通过 `hasClear` 属性添加的清除按钮和内部错误图标的右侧。
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Label, NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <NumberInput
+            hasClear
+            placeholder="Placeholder"
+            endContent={<Label size="s">Right</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput endContent={<Label>Right</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Controls
 
 可以通过 `hiddenControls` 属性管理组件最右侧的递增/递减箭头控件的可见性。
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+export default function () {
+    return (
+        <>
+            <NumberInput />
+            <NumberInput hiddenControls />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput />
+<NumberInput hiddenControls />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Behaviour
 
@@ -104,9 +284,21 @@ GRAVITY_TRANSLATION_BLOCK_19_END
 
 允许您设置可以输入到输入框中的最小值和最大值。不在此范围内的值将在失去焦点时被限制到最近的允许值。
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+export default function () {
+    return <NumberInput min={-100} max={100} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput min={-100} max={100} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Step
 
@@ -118,26 +310,74 @@ GRAVITY_TRANSLATION_BLOCK_21_END
 - 如果 `step` 是整数而 `min` 值未定义，则允许的值定义为可被 `step` 整除的值；
 - 如果 `step` 或 `min` 值是小数，则不适用限制。
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+export default function () {
+    return <NumberInput min={-10} step={4} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput min={-10} step={4} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Step multiplier
 
 允许您通过定义 `shiftMultiplier` 属性来设置当按下键盘上的 Shift 键时，步进值所乘以的数值。
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+export default function () {
+    return (
+        <>
+            <NumberInput shiftMultiplier={50} />
+            <NumberInput shiftMultiplier={8} step={4} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput shiftMultiplier={50} />
+<NumberInput shiftMultiplier={8} step={4} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Decimal values restriction
 
 允许您通过 `allowDecimal` 属性来切换只能输入整数还是也可以输入小数的功能。
 当 `allowDecimal={false}` 时，输入框中的小数点将被忽略，粘贴的小数值将被向下取整。
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+export default function () {
+    return (
+        <>
+            <NumberInput allowDecimal />
+            <NumberInput allowDecimal={false} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput allowDecimal />
+<NumberInput allowDecimal={false} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 
@@ -184,5 +424,3 @@ GRAVITY_TRANSLATION_BLOCK_27_END
 ## CSS API
 
 该组件没有自己的 CSS API，但它继承了父组件 TextInput 的 API。
-
-GRAVITY_TRANSLATION_BLOCK_1_END

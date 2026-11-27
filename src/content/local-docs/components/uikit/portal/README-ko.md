@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Portal
+
+<!--/GITHUB_BLOCK-->
 
 `Portal`는 유틸리티 컴포넌트입니다. 기본적으로 React의 [`createPortal`](https://react.dev/reference/react-dom/createPortal)을 감싸는 간단한 래퍼로, 자식 요소를 부모 컴포넌트 외부의 DOM 노드에 렌더링할 수 있습니다.
 
@@ -16,10 +20,10 @@ import {Portal, PortalProvider} from '@gravity-ui/uikit'
 
 const myRoot = document.getElementById('my-root');
 
-<Portal>이것은 document.body 안에 렌더링됩니다</Portal>
-<Portal container={myRoot}>이것은 #my-root 노드 안에 렌더링됩니다</Portal>
+<Portal>This is rendered inside document.body</Portal>
+<Portal container={myRoot}>This is rendered inside #my-root node</Portal>
 <PortalProvider container={myRoot}>
-    <Portal>이것 또한 #my-root 안에 렌더링됩니다</Portal>
+    <Portal>This is also rendered inside #my-root</Portal>
 </PortalProvider>
 ```
 

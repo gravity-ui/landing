@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Card
+
+<!--/GITHUB_BLOCK-->
+
 `Card`는 사용자 정의 스타일과 기능을 갖춘 카드 모양의 컨테이너인 재사용 가능한 React 컴포넌트입니다. 정보를 시각적으로 매력적이고 잘 구성된 방식으로 표시하는 데 사용됩니다.
 
 ```tsx
@@ -25,7 +31,49 @@ import {Card} from '@gravity-ui/uikit';
 - `danger`: 중요한 문제 또는 오류와 관련된 콘텐츠를 표시하기 위한 테마입니다.
 - `utility`: 유용한 팁을 표시하기 위한 테마입니다.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} theme="normal" size="l">
+                Normal
+            </Card>
+            <Card style={cardStyle} theme="info" size="l">
+                Info
+            </Card>
+            <Card style={cardStyle} theme="success" size="l">
+                Success
+            </Card>
+            <Card style={cardStyle} theme="warning" size="l">
+                Warning
+            </Card>
+            <Card style={cardStyle} theme="danger" size="l">
+                Danger
+            </Card>
+            <Card style={cardStyle} theme="utility" size="l">
+                Utility
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## 타입
 
@@ -35,7 +83,46 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 - `action`: 클릭 시 동작을 트리거하는 버튼과 같은 대화형 요소가 있는 카드입니다.
 - `selection`: 특정 작업을 수행하기 위해 선택하거나 클릭할 수 있는 카드입니다.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} view="outlined" type="container" size="l">
+                Container
+            </Card>
+            <Card
+                style={cardStyle}
+                view="outlined"
+                type="action"
+                onClick={() => alert(':wave: hey')}
+                size="l"
+            >
+                action with onClick
+            </Card>
+            <Card style={cardStyle} view="outlined" type="selection" size="l">
+                Selection
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## 뷰
 
@@ -46,7 +133,43 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 - `filled`: 카드 콘텐츠를 채웁니다.
 - `raised`: 컨테이너를 약간 들어 올리기 위해 그림자를 적용합니다.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} view="clear" type="container" size="l">
+                Clear
+            </Card>
+            <Card style={cardStyle} view="outlined" type="container" size="l">
+                Outlined
+            </Card>
+            <Card style={cardStyle} view="filled" type="container" size="l">
+                Filled
+            </Card>
+            <Card style={cardStyle} view="raised" type="container" size="l">
+                Raised
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## 속성
 
@@ -72,5 +195,3 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 | `--g-card-border-color`     | 테두리 색상     |
 | `--g-card-border-radius`    | 테두리 반경    |
 | `--g-card-box-shadow`       | 그림자           |
-
-GRAVITY_TRANSLATION_BLOCK_3_END

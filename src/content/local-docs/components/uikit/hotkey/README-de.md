@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Hotkey
+
+<!--/GITHUB_BLOCK-->
+
 Sie können die Komponente `Hotkey` verwenden, um Tastenkombinationen für Mac und PC anzuzeigen.
 
 ```tsx
@@ -12,17 +18,33 @@ Die Reihenfolge der Tastenkombinationen kann durch ein Leerzeichen getrennt werd
 
 Sie können `mod` als Kurzform für `cmd` unter Mac und `ctrl` für andere Plattformen verwenden. Zum Beispiel wird `mod+v` unter Mac als ⌘+A und unter PC als Ctrl+A gerendert.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
-
 ### Ansicht
 
 `light`: Wird verwendet, wenn die Komponente auf einem hellen Hintergrund angezeigt wird (standardmäßig verwendet).
 
 `dark`: Wird verwendet, wenn die Komponente auf einem dunklen Hintergrund angezeigt wird.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Hotkey} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Hotkey view="light" value="mod+a mod+c mod+v" />
+            <Hotkey view="dark" value="mod+a mod+c mod+v" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Hotkey view="light" value="mod+a mod+c mod+v" />
+<Hotkey view="dark" value="mod+a mod+c mod+v" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Plattform
 
@@ -32,9 +54,29 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 Standardmäßig wird die Plattform automatisch erkannt.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Hotkey} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Hotkey value="mod+a mod+c mod+v" />
+            <Hotkey platform="pc" value="mod+a mod+c mod+v" />
+            <Hotkey platform="mac" value="mod+a mod+c mod+v" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Hotkey value="mod+a mod+c mod+v" />
+<Hotkey platform="pc" value="mod+a mod+c mod+v" />
+<Hotkey platform="mac" value="mod+a mod+c mod+v" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

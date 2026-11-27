@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Settings
+
+<!--/GITHUB_BLOCK-->
 
 Settingsコンポーネントは、以下の機能を備えた設定パネルのレイアウトを提供します。
 
@@ -6,7 +10,48 @@ Settingsコンポーネントは、以下の機能を備えた設定パネルの
 - アイテムのヘッダーによるパネルコンテンツのフィルタリング
 - ロードステータスとコンテンツの表示
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+## Usage
+
+One-level settings example:
+
+```tsx
+<Settings>
+  <Settings.Page title="Appearance">...</Settings.Page>
+  <Settings.Page title="Notifications">...</Settings.Page>
+</Settings>
+```
+
+Two-level settings example:
+_Note:_ `Settings` with `view=mobile` groups `Settings.Group` are ignored.
+
+```tsx
+<Settings>
+  <Settings.Group groupTitle="My service">
+    <Settings.Page title="Appearance">...</Settings.Page>
+    <Settings.Page title="Notifications">...</Settings.Page>
+  </Settings.Group>
+  <Settings.Group groupTitle="General">
+    <Settings.Page title="Appearance">...</Settings.Page>
+    <Settings.Page title="Notifications">...</Settings.Page>
+  </Settings.Group>
+</Settings>
+```
+
+Pages with sections example:
+
+```tsx
+<Settings.Page title="Features" icon={'...'}>
+  <Settings.Section title="Common">
+    <Settings.Item title="Default VCS">...</Settings.Item>
+    <Settings.Item title="Search root">...</Settings.Item>
+  </Settings.Section>
+  <Settings.Section title="Beta functionality">...</Settings.Section>
+</Settings.Page>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Overlay
+
+<!--/GITHUB_BLOCK-->
 
 `Overlay` コンポーネントは、相対位置を持つ親要素の上にオーバーレイを描画します。つまり、親要素には `position` が `relative` に設定されている必要があります。
 例えば、データ読み込み中に目的のレイアウトを維持するために使用できます。
@@ -24,7 +28,14 @@ import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 `base` または `float` の背景色を使用できます。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Overlay background="base">
+<Overlay background="float">
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 

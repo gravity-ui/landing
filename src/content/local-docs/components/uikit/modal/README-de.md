@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Modal
+
+<!--/GITHUB_BLOCK-->
 
 Die Komponente `Modal` dient als Basis für die Erstellung von Pop-up-Fenstern mit einem Hintergrund über dem restlichen Inhalt einer Seite.
 Sie deaktiviert das Scrollen während des Öffnens und verwaltet den Fokus für den Inhalt. Die Kindkomponenten von `Modal` werden innerhalb der Komponente [`Portal`](../Portal) gerendert.
@@ -16,9 +20,9 @@ import {Button, Modal} from '@gravity-ui/uikit';
 
 const [open, setOpen] = useState(false);
 
-<Button onClick={() => setOpen(true)}>Modal öffnen</Button>
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => setOpen(false)}>
-    Inhalt
+    Content
 </Modal>
 ```
 

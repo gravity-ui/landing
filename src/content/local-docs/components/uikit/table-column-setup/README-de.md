@@ -1,20 +1,74 @@
+<!--GITHUB_BLOCK-->
+
+# TableColumnSetup
+
+<!--/GITHUB_BLOCK-->
+
 Der `TableColumnSetup`-Komponente bietet eine Benutzeroberfläche zur Konfiguration der Sichtbarkeit und Reihenfolge von Tabellenspalten. Sie zeigt eine Schaltfläche an, die ein Popup mit einer Liste verfügbarer Spalten öffnet, sodass Benutzer Spalten ein-/ausblenden und optional per Drag & Drop neu anordnen können.
 
 ```tsx
 import {TableColumnSetup} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const items = [
+  {id: 'name', title: 'Name', selected: true, required: true},
+  {id: 'email', title: 'Email', selected: true},
+  {id: 'phone', title: 'Phone', selected: false},
+];
+
+<TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Sortierbare Spalten
 
 Aktivieren Sie die Drag & Drop-Funktionalität, damit Benutzer Spalten neu anordnen können, indem Sie die Eigenschaft `sortable` auf `true` setzen.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            sortable
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup items={items} sortable onUpdate={(updatedItems) => console.log(updatedItems)} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Anwendungsmodi
 
@@ -23,25 +77,111 @@ Steuern Sie, wann Änderungen angewendet werden, mit der Eigenschaft `hideApplyB
 - `true` - Änderungen werden sofort angewendet, wenn der Benutzer Spalten umschaltet
 - `false` - Änderungen werden erst angewendet, wenn der Benutzer auf die Schaltfläche "Anwenden" klickt
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            hideApplyButton
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  hideApplyButton
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Statusanzeige
 
 Zeigen Sie die Anzahl der ausgewählten Spalten in der Umschalt-Schaltfläche an, indem Sie die Eigenschaft `showStatus` aktivieren.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} showStatus onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  showStatus={true}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Benutzerdefinierter Umschalter
 
 Passen Sie die Auslöser-Schaltfläche mit der Eigenschaft `renderSwitcher` an.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Button, TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            renderSwitcher={({onClick, onKeyDown}) => (
+                <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+                    Configure Columns
+                </Button>
+            )}
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  renderSwitcher={({onClick, onKeyDown}) => (
+    <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+      Configure Columns
+    </Button>
+  )}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 
@@ -71,7 +211,6 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 | sticky   | Feste Positionierung für die Spalte             | `'left' \| 'right'`|          |
 
 ### SwitcherProps
-GRAVITY_TRANSLATION_BLOCK_10_END
 
 | Name      | Beschreibung                            |                   Typ                    |
 | :-------- | :-------------------------------------- | :---------------------------------------: |

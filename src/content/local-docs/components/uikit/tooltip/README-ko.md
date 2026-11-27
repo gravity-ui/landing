@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tooltip
+
+<!--/GITHUB_BLOCK-->
 
 자식 노드를 앵커로 사용하는 간단한 텍스트 팁입니다. 이 컴포넌트는 텍스트 콘텐츠만 허용하며, 작은 크기와 긴 표시 지연 시간으로 브라우저의 `title` 속성을 대체할 수 있습니다.
 

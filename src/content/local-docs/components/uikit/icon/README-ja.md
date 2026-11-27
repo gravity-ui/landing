@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Icon
+
+<!--/GITHUB_BLOCK-->
 
 `Icon` は、指定されたサイズと色で SVG グリフをレンダリングします。SVG は React コンポーネントまたはインポートされたアセットとして受け取ります。これは、コードベース全体で SVG を使用するための単一のプロキシとして機能し、React コンポーネントまたは [`SVGR`](https://react-svgr.com/docs/webpack/)、[`svg-react-loader`](https://github.com/jhamlet/svg-react-loader)、[`svg-inline-loader`](https://github.com/webpack-contrib/svg-inline-loader)、または [`svg-sprite-loader`](https://github.com/JetBrains/svg-sprite-loader) などの Webpack ローダーを介してロードできます。
 

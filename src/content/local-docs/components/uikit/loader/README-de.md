@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Loader
+
+<!--/GITHUB_BLOCK-->
+
 Der `Loader`-Komponente zeigt den Ladefortschritt als blinkende Balken an. Im Gegensatz zu `Spin` wird diese Komponente in globalen Szenarien verwendet, z. B. für eine ganze Seite oder einen `Dialog`.
 
 ```tsx
@@ -6,9 +12,29 @@ import {Loader} from '@gravity-ui/uikit';
 
 ### Größe
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Loader} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Loader size="s" />
+            <Loader size="m" />
+            <Loader size="l" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Loader size="s" />
+<Loader size="m" />
+<Loader size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `S`: Kleine Größe, wird verwendet, wenn der normale Lader zu groß ist.
 

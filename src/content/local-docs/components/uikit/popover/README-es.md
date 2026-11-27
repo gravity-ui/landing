@@ -1,10 +1,14 @@
+<!--GITHUB_BLOCK-->
+
+# Popover
+
+<!--/GITHUB_BLOCK-->
+
 `Popover` muestra contenido flotante, opcionalmente interactivo (texto, enlaces o botones) anclado a un elemento hijo y abierto al pasar el cursor o hacer clic. Envuelve [`Popup`](../Popup/README.md) con interactividad de activación incorporada, utilizando el `ReactElement` pasado a través de la propiedad `children` como activador.
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
-
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 ## Uso
 
@@ -14,8 +18,8 @@ en la propiedad `content`.
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Contenido">
-  <Button>Haz clic o pasa el cursor sobre mí</Button>
+<Popover content="Content">
+  <Button>Click or hover me</Button>
 </Popover>;
 ```
 
@@ -49,4 +53,3 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | style                | Atributo `style` de HTML para el nodo raíz                                                                          |                              `string`                               |                        |
 | toggle               | Si se debe alternar el estado `open` con clics repetidos                                                       |                              `boolean`                              |        `true`          |
 | trigger              | Qué evento debe abrir el `Popover`. El valor predeterminado `all` se refiere tanto a `hover` como a `click`                 |                          `"all"` `"click"`                          |        `"all"`         |
-GRAVITY_TRANSLATION_BLOCK_1_END

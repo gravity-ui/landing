@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# DatePicker
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {DatePicker} from '@gravity-ui/date-components';
 ```
@@ -20,21 +26,59 @@ Die Darstellung von `DatePicker` wird durch die Eigenschaften `size`, `view` und
 
 Um die Größe von `DatePicker` zu steuern, verwenden Sie die Eigenschaft `size`. Die Standardgröße ist `m`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker size="s" />
+<DatePicker size="m" />
+<DatePicker size="l" />
+<DatePicker size="xl" />
+`}
+>
+    <DateComponents.DatePicker size="s" />
+    <DateComponents.DatePicker size="m" />
+    <DateComponents.DatePicker size="l" />
+    <DateComponents.DatePicker size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker size="s" />
+<DatePicker size="m" />
+<DatePicker size="l" />
+<DatePicker size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Ansicht
 
 `normal` - die Hauptansicht von `DatePicker` (standardmäßig verwendet).
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DatePicker />`}>
+    <DateComponents.DatePicker />
+</ExampleBlock>
+LANDING_BLOCK-->
 
 `clear` - Ansicht von `DatePicker` ohne sichtbare Ränder (kann mit einem benutzerdefinierten Wrapper verwendet werden).
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DatePicker view="clear" />`}>
+    <DateComponents.DatePicker view="clear" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker view="normal" />
+<DatePicker view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
@@ -42,9 +86,29 @@ Die Eigenschaft `pin` ermöglicht es Ihnen, die Form der rechten und linken Kant
 Der Wert der Eigenschaft `pin` besteht aus linken und rechten Kantentypnamen, die durch einen Bindestrich getrennt sind, z. B. `"round-brick"`.
 Die Kantentypen sind: `round` (Standard), `circle`, `brick` und `clear`.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker pin="round-brick" />
+<DatePicker pin="brick-brick" />
+<DatePicker pin="brick-round" />
+`}
+>
+    <DateComponents.DatePicker pin="round-brick" />
+    <DateComponents.DatePicker pin="brick-brick" />
+    <DateComponents.DatePicker pin="brick-round" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker pin="round-brick" />
+<DatePicker pin="brick-brick" />
+<DatePicker pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Wert
 
@@ -52,9 +116,27 @@ GRAVITY_TRANSLATION_BLOCK_7_END
 
 Die Eigenschaft `minValue` ermöglicht es Ihnen, das früheste Datum und die früheste Uhrzeit anzugeben, die vom Benutzer eingegeben werden können. Umgekehrt gibt die Eigenschaft `maxValue` das späteste Datum und die späteste Uhrzeit an, die eingegeben werden können. Wenn Sie einen Wert außerhalb dieser Grenzen eingeben, ändert die Komponente ihre Ansicht, wie im Falle eines ungültigen Validierungszustands.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker minValue={dateTimeParse('01.01.2024')} placeholder={"minValue: '01.01.2024'"}/>
+<DatePicker maxValue={dateTimeParse('01.01.2025')} placeholder={"maxValue: '01.01.2025'"}/>
+`}
+>
+    <DateComponentsExamples.DatePickerExample minValue={'01.01.2024'} placeholder={"minValue: '01.01.2024'"} />
+    <DateComponentsExamples.DatePickerExample maxValue={'01.01.2025'} placeholder={"maxValue: '01.01.2025'"} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+
+<DatePicker minValue={dateTimeParse('01.01.2024')} />
+<DatePicker maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zustände
 
@@ -62,25 +144,70 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 Der Zustand von `DatePicker`, in dem Sie nicht möchten, dass der Benutzer mit der Komponente interagieren kann.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker disabled={true} defaultValue={dateTime()} />
+`}
+>
+    <DateComponentsExamples.DatePickerExample disabled={true} defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker disabled defaultValue={dateTime()} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Nur-Lese-Zugriff
 
 `readOnly` ist ein boolesches Attribut, das, wenn es auf true gesetzt ist, die `DatePicker`-Komponente für den Benutzer unveränderlich macht. Das bedeutet, dass die Eingabe zwar ihren aktuellen Wert anzeigt, Benutzer sie jedoch nicht ändern können.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker readOnly defaultValue={dateTimeParse(new Date())} />
+`}
+>
+    <DateComponentsExamples.DatePickerExample readOnly defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker readOnly defaultValue={dateTime()} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Fehler
 
 Der Zustand von `DatePicker`, in dem Sie eine falsche Benutzereingabe anzeigen möchten. Um das Erscheinungsbild von `DatePicker` zu ändern, verwenden Sie die Eigenschaft `validationState` mit dem Wert `"invalid"`. Ein optionaler Nachrichtentext kann über die Eigenschaft `errorMessage` hinzugefügt werden. Der Nachrichtentext wird unter der Komponente gerendert.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker errorMessage="Error message" validationState="invalid" />
+<DatePicker validationState="invalid" />
+`}
+>
+    <DateComponents.DatePicker errorMessage="Error message" validationState="invalid" />
+    <DateComponents.DatePicker validationState="invalid" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker errorMessage="Error message" validationState="invalid" />
+<DatePicker validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zusätzlicher Inhalt
 
@@ -88,39 +215,116 @@ GRAVITY_TRANSLATION_BLOCK_15_END
 
 Diese Eigenschaft ermöglicht es Ihnen, einen kurzen Hinweis zu geben, der den erwarteten Wert des Eingabefelds beschreibt. Dieser Hinweis wird im Eingabefeld angezeigt, bevor der Benutzer einen Wert eingibt, und verschwindet, sobald Text eingegeben wird.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker placeholder="Placeholder" />
+`}
+>
+    <DateComponents.DatePicker placeholder='Placeholder' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker placeholder="Placeholder" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Beschriftung
 
 Ermöglicht die Platzierung der Beschriftung im linken Teil des Feldes. Die Beschriftung kann nicht mehr als die Hälfte der Gesamtbreite des `DatePicker`-Bereichs einnehmen.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker label="Label" />
+<DatePicker label="Very long label with huge amount of symbols" />
+`}
+>
+    <DateComponents.DatePicker label="Label" />
+    <DateComponents.DatePicker label="Very long label with huge amount of symbols" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Löschtaste
 
 `hasClear` ist eine boolesche Eigenschaft, die Benutzern die Möglichkeit gibt, den Inhalt des Eingabefelds schnell zu löschen.
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DatePicker hasClear />`}
+>
+    <DateComponents.DatePicker
+        hasClear
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker hasClear />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Format
 
 Die Eigenschaft `format` ist eine Zeichenkette, die das Datums- und Zeitformat definiert, das die `DatePicker`-Komponente akzeptiert und anzeigt. Diese Eigenschaft bestimmt, wie das Datum und die Uhrzeit dem Benutzer visuell präsentiert werden und wie die Eingabe des Benutzers formatiert sein soll. [Verfügbare Formate](https://day.js.org/docs/en/display/format)
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker format='LL' />
+`}
+>
+    <DateComponents.DatePicker format='LL' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker format="LL" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Benutzerdefinierter Datumsparser
 
 Sie können eine benutzerdefinierte Parserfunktion bereitstellen, um eingefügte Datumszeichenketten über die Eigenschaft `parseDateFromString` zu verarbeiten. Dies ist nützlich, wenn Sie bestimmte Datumsformate oder benutzerdefinierte Parsing-Logik unterstützen müssen, die vom Standardverhalten abweicht.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {dateTime} from '@gravity-ui/date-utils';
+
+const customParser = (dateStr: string, format: string, timeZone?: string) => {
+  // Custom parsing logic
+  // For example, handle DD/MM/YYYY format specifically
+  if (dateStr.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+    const [day, month, year] = dateStr.split('/');
+    return dateTime({input: `${year}-${month}-${day}`, timeZone});
+  }
+  // Fallback to default parsing
+  return dateTime({input: dateStr, format, timeZone});
+};
+
+<DatePicker parseDateFromString={customParser} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zeitzone
 
@@ -130,9 +334,15 @@ GRAVITY_TRANSLATION_BLOCK_24_END
 
 Wenn Sie eine benutzerdefinierte Kalenderkomponente innerhalb von `DatePicker` verwenden möchten, können Sie diese als `children` mit kalenderähnlichen Eigenschaften übergeben.
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+<!--LANDING_BLOCK
+[Learn more about calendar](https://gravity-ui.com/components/date-components/calendar)
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--GITHUB_BLOCK-->
+
+[Learn more about calendar](https://github.com/gravity-ui/date-components/blob/main/src/components/Calendar/README.md)
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

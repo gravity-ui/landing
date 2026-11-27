@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# CopyToClipboard
+
+<!--/GITHUB_BLOCK-->
+
 `CopyToClipboard` 是一个渲染函数包装器，用于将文本复制到剪贴板并将复制状态暴露给其子组件，允许您渲染自己的触发器；现成的按钮请使用 `ClipboardButton`。
 
 ```tsx
@@ -17,9 +23,43 @@ import {CopyToClipboard} from '@gravity-ui/uikit';
 
 `timeout` 选项设置在其中一个结果状态（`success` 或 `error`）之后恢复初始状态（`pending`）的毫秒数。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Button, CopyToClipboard} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const buttonText = {
+    pending: 'Click Me',
+    success: 'Copied!',
+    error: "Couldn't copy...",
+};
+
+export default function () {
+    return (
+        <CopyToClipboard text="Some text to copy" timeout={500}>
+            {(status) => (
+                <Button view="normal" size="l">
+                    {buttonText[status]}
+                </Button>
+            )}
+        </CopyToClipboard>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const buttonText = {
+  pending: 'Click Me',
+  success: 'Copied!',
+  error: "Couldn't copy...",
+};
+
+<CopyToClipboard text="Some text to copy" timeout={500}>
+  {(status) => <button>{buttonText[status]}</button>}
+</CopyToClipboard>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

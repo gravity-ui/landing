@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Palette
+
+<!--/GITHUB_BLOCK-->
+
 O componente `Palette` é usado para exibir uma grade de ícones, emojis, reações e símbolos que você pode selecionar ou desmarcar.
 
 ```tsx
@@ -8,33 +14,142 @@ import {Palette} from '@gravity-ui/uikit';
 
 Você pode desativar todas as opções usando a propriedade `disabled`. Se você quiser desativar apenas certas opções, pode alterar a propriedade `disabled` dessas `options` (`PaletteOption[]`).
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+const disabledOptions: PaletteOption[] = [{...options[0], disabled: true}, options[1]];
+
+export default function () {
+    return (
+        <>
+            <Palette options={disabledOptions} />
+            <Palette options={options} disabled />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  // disable a single item
+  {content: '😎', value: 'ID-cool', disabled: true},
+  {content: '🥴', value: 'ID-woozy'},
+];
+// or disable all of them
+<Palette options={options} disabled={true} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Tamanho
 
 Use a propriedade `size` para gerenciar o tamanho do `Palette`. O tamanho padrão é `s`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return (
+        <>
+            <Palette options={options} size="xs" />
+            <Palette options={options} size="s" />
+            <Palette options={options} size="m" />
+            <Palette options={options} size="l" />
+            <Palette options={options} size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} size={"xs"} />
+<Palette options={options} size={"s"} />
+<Palette options={options} size={"m"} />
+<Palette options={options} size={"l"} />
+<Palette options={options} size={"xl"} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Colunas
 
 Você pode alterar o número de colunas na grade alterando a propriedade `columns` (o valor padrão é `6`).
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} columns={1} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Múltiplos
 
 Por padrão, você pode selecionar e desmarcar várias opções. Caso você queira apenas tornar uma única opção selecionável, pode desativar a propriedade `multiple`.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} multiple={false} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriedades
 

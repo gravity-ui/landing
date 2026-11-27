@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Modal
+
+<!--/GITHUB_BLOCK-->
 
 `Modal` コンポーネントは、ページ上の他のコンテンツの上に背景を表示するポップアップウィンドウを作成するためのベースとして機能します。
 開いている間はスクロールを無効にし、コンテンツのフォーカスを管理します。`Modal` の子コンポーネントは、[`Portal`](../Portal) コンポーネント内でレンダリングされます。
@@ -16,9 +20,9 @@ import {Button, Modal} from '@gravity-ui/uikit';
 
 const [open, setOpen] = useState(false);
 
-<Button onClick={() => setOpen(true)}>モーダルを開く</Button>
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => setOpen(false)}>
-    コンテンツ
+    Content
 </Modal>
 ```
 

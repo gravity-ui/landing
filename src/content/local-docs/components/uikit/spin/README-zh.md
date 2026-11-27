@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Spin
+
+<!--/GITHUB_BLOCK-->
+
 `Spin` 组件在内联场景中显示加载状态（一个旋转的半圆）。与 `Loader` 不同，此组件用于在内联场景中显示加载状态，例如在 `Button` 或 `Label` 中。
 
 ```tsx
@@ -6,9 +12,33 @@ import {Spin} from '@gravity-ui/uikit';
 
 ### Size
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Spin} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Spin size="xs" />
+            <Spin size="s" />
+            <Spin size="m" />
+            <Spin size="l" />
+            <Spin size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Spin size="xs" />
+<Spin size="s" />
+<Spin size="m" />
+<Spin size="l" />
+<Spin size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `XS`: Extra small (特小)。
 
@@ -34,4 +64,3 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | Name             | Description                     |
 | :--------------- | :------------------------------ |
 | `--g-spin-color` | The main color of the component (组件的主颜色) |
-GRAVITY_TRANSLATION_BLOCK_2_END

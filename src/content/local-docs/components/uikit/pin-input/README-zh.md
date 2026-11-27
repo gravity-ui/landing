@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# PinInput
+
+<!--/GITHUB_BLOCK-->
+
 `PinInput` 是一组用于快速输入数字或字母数字值的输入框。它最常见的用例是输入通过短信 (SMS)、电子邮件或身份验证器应用程序收到的 OTP 或确认码。
 
 每个输入框一次只收集一个字符。当接受一个值时，焦点会移到下一个输入框，直到所有字段都填满。
@@ -10,47 +16,129 @@ import {PinInput} from '@gravity-ui/uikit';
 
 默认情况下，输入框只接受数字值。要允许字母数字值，请将 `type` 属性设置为 `"alphanumeric"`：
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return <PinInput type="alphanumeric" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput type="alphanumeric" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 大小
 
 此组件有四种尺寸：`s`、`m`、`l` 和 `xl`。默认尺寸为 `m`。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <PinInput size="s" />
+            <PinInput size="m" />
+            <PinInput size="l" />
+            <PinInput size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput size="s" />
+<PinInput size="m" />
+<PinInput size="l" />
+<PinInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 状态
 
 如果您不希望用户与组件交互，请设置 `disabled` 属性：
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return <PinInput disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 要显示组件的无效状态，请使用 `validationState` 属性并将其值设置为 `"invalid"`。您还可以选择使用 `errorMessage` 属性设置错误消息文本：
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <PinInput validationState="invalid" errorMessage="Incorrect PIN" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput validationState="invalid" errorMessage="Incorrect PIN" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 占位符
 
 默认情况下，输入框没有占位符。您可以使用 `placeholder` 属性设置它：
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return <PinInput placeholder="😎" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput placeholder="😎" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 掩码
 
 如果您需要掩盖输入的值，请使用 `mask` 属性。它的行为类似于 `<input type="password"/>`。
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return <PinInput mask />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput mask />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## OTP
 

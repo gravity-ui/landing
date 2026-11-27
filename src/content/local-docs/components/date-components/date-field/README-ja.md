@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# DateField
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {DateField} from '@gravity-ui/date-components';
 ```
@@ -20,21 +26,59 @@ import {dateTimeParse} from '@gravity-ui/date-utils';
 
 `DateField` のサイズを制御するには、`size` プロパティを使用します。デフォルトのサイズは `m` です。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField size="s" />
+<DateField size="m" />
+<DateField size="l" />
+<DateField size="xl" />
+`}
+>
+    <DateComponents.DateField size="s" />
+    <DateComponents.DateField size="m" />
+    <DateComponents.DateField size="l" />
+    <DateComponents.DateField size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField size="s" />
+<DateField size="m" />
+<DateField size="l" />
+<DateField size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 表示形式
 
 `normal` - `DateField` のメイン表示（デフォルトで使用）。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DateField />`}>
+    <DateComponents.DateField />
+</ExampleBlock>
+LANDING_BLOCK-->
 
 `clear` - 境界線が表示されない `DateField` の表示（カスタムラッパーと組み合わせて使用可能）。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DateField view="clear" />`}>
+    <DateComponents.DateField view="clear" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField view="normal" />
+<DateField view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### ピン留め
 
@@ -42,9 +86,29 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 `pin` プロパティの値は、ダッシュで区切られた左端と右端のスタイル名の組み合わせです。例：「"round-brick"」。
 エッジスタイルは、`round`（デフォルト）、`circle`、`brick`、`clear` です。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField pin="round-brick" />
+<DateField pin="brick-brick" />
+<DateField pin="brick-round" />
+`}
+>
+    <DateComponents.DateField pin="round-brick" />
+    <DateComponents.DateField pin="brick-brick" />
+    <DateComponents.DateField pin="brick-round" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField pin="round-brick" />
+<DateField pin="brick-brick" />
+<DateField pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 値
 
@@ -52,9 +116,27 @@ GRAVITY_TRANSLATION_BLOCK_6_END
 
 `minValue` プロパティを使用すると、ユーザーが入力できる最も早い日付と時刻を指定できます。逆に、`maxValue` プロパティは、入力できる最も遅い日付と時刻を指定します。これらの境界外の値が入力された場合、無効な検証状態の場合と同様にコンポーネントの表示が変更されます。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField minValue={dateTimeParse('01.01.2024')} placeholder={"minValue: '01.01.2024'"}/>
+<DateField maxValue={dateTimeParse('01.01.2025')} placeholder={"maxValue: '01.01.2025'"}/>
+`}
+>
+    <DateComponentsExamples.DateFieldExample minValue={'01.01.2024'} placeholder={"minValue: '01.01.2024'"} />
+    <DateComponentsExamples.DateFieldExample maxValue={'01.01.2025'} placeholder={"maxValue: '01.01.2025'"} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+
+<DateField minValue={dateTimeParse('01.01.2024')} />
+<DateField maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ステート
 
@@ -62,25 +144,70 @@ GRAVITY_TRANSLATION_BLOCK_8_END
 
 ユーザーがコンポーネントと対話できないようにしたい `DateField` のステート。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField disabled={true} defaultValue={dateTimeParse(new Date())} />
+`}
+>
+    <DateComponentsExamples.DateFieldExample disabled={true} defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField disabled defaultValue={dateTimeParse(new Date())} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 読み取り専用
 
 `readOnly` はブール属性であり、`true` に設定すると、`DateField` コンポーネントはユーザーにとって変更不可能になります。これは、入力は現在の値を表示しますが、ユーザーはそれを変更できないことを意味します。
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField readOnly defaultValue={dateTimeParse(new Date())} />
+`}
+>
+    <DateComponentsExamples.DateFieldExample readOnly defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField readOnly defaultValue={dateTimeParse(new Date())} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### エラー
 
 ユーザーの無効な入力を示したい `DateField` のステート。`DateField` の外観を変更するには、`validationState` プロパティを `"invalid"` 値で設定します。オプションのメッセージテキストは、`errorMessage` プロパティを通じて追加できます。メッセージテキストはコンポーネントの下にレンダリングされます。
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField errorMessage="Error message" validationState="invalid" />
+<DateField validationState="invalid" />
+`}
+>
+    <DateComponents.DateField errorMessage="Error message" validationState="invalid" />
+    <DateComponents.DateField validationState="invalid" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField errorMessage="Error message" validationState="invalid" />
+<DateField validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 追加コンテンツ
 
@@ -88,55 +215,162 @@ GRAVITY_TRANSLATION_BLOCK_14_END
 
 このプロパティを使用すると、入力フィールドに期待される値を説明する短いヒントを提供できます。このヒントは、ユーザーが値を入力する前に、入力フィールド内に表示され、テキストが入力されると消えます。
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField placeholder='Placeholder' />
+`}
+>
+    <DateComponents.DateField placeholder='Placeholder' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField placeholder="Placeholder" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### ラベル
 
 フィールドの左側にラベルを配置できます。ラベルは、`DateField` の全スペースの半分を超える幅を占めることはできません。
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField label="Label" />
+<DateField label="Very long label with huge amount of symbols" />
+`}
+>
+    <DateComponents.DateField label="Label" />
+    <DateComponents.DateField label="Very long label with huge amount of symbols" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### クリアボタン
 
 `hasClear` はブール型のプロパティで、ユーザーが入力フィールドの内容をすばやくクリアできるようにします。
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DateField hasClear />`}
+>
+    <DateComponents.DateField
+        hasClear
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField hasClear />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 開始コンテンツ
 
 フィールドの開始部分にコンテンツを追加できます。これは、他のすべてのコンポーネントの前に配置されます。
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DateField label="Label" startContent={<Label size="s">Start content</Label>} />`}
+>
+    <DateComponents.DateField
+        label="Label"
+        startContent={<UIKit.Label size="s">Start content</UIKit.Label>}
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField label="Label" startContent={<Label>Start content</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 終了コンテンツ
 
 フィールドの終了部分にコンテンツを追加できます。これは、他のすべてのコンポーネントの後に配置されます。
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DateField endContent={<Label size="s">End content</Label>} hasClear/>`}
+>
+    <DateComponents.DateField
+        hasClear
+        endContent={<UIKit.Label size="s">End content</UIKit.Label>}
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField hasClear endContent={<Label>End content</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## フォーマット
 
 `format` プロパティは、`DateField` コンポーネントが受け入れ、表示する日付と時刻の形式を定義する文字列です。このプロパティは、日付と時刻がユーザーにどのように視覚的に表示されるか、およびユーザーの入力がどのようにフォーマットされるべきかを決定します。[利用可能なフォーマット](https://day.js.org/docs/en/display/format)
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField format='LTS' />
+`}
+>
+    <DateComponents.DateField format='LTS' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField format="LTS" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### カスタム日付パーサー
 
 `parseDateFromString` プロパティを通じて、貼り付けられた日付文字列を処理するためのカスタムパーサー関数を提供できます。これは、デフォルトの動作とは異なる特定の С даты форматы またはカスタム解析ロジックをサポートする必要がある場合に役立ちます。
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {dateTime} from '@gravity-ui/date-utils';
+
+const customParser = (dateStr: string, format: string, timeZone?: string) => {
+  // Custom parsing logic
+  // For example, handle DD/MM/YYYY format specifically
+  if (dateStr.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+    const [day, month, year] = dateStr.split('/');
+    return dateTime({input: `${year}-${month}-${day}`, timeZone});
+  }
+  // Fallback to default parsing
+  return dateTime({input: dateStr, format, timeZone});
+};
+
+<DateField parseDateFromString={customParser} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## タイムゾーン
 

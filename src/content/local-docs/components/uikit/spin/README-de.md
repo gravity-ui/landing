@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Spin
+
+<!--/GITHUB_BLOCK-->
+
 Der `Spin`-Komponente zeigt den Ladezustand (einen rotierenden Halbkreis) in Inline-Szenarien an. Im Gegensatz zu `Loader` wird diese Komponente verwendet, um den Ladezustand in Inline-Szenarien anzuzeigen, z. B. in einem `Button` oder `Label`.
 
 ```tsx
@@ -6,9 +12,33 @@ import {Spin} from '@gravity-ui/uikit';
 
 ### Größe
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Spin} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Spin size="xs" />
+            <Spin size="s" />
+            <Spin size="m" />
+            <Spin size="l" />
+            <Spin size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Spin size="xs" />
+<Spin size="s" />
+<Spin size="m" />
+<Spin size="l" />
+<Spin size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `XS`: Extra klein.
 
@@ -34,4 +64,3 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | Name             | Beschreibung                      |
 | :--------------- | :-------------------------------- |
 | `--g-spin-color` | Die Hauptfarbe der Komponente     |
-GRAVITY_TRANSLATION_BLOCK_2_END

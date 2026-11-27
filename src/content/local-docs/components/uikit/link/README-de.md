@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Link
+
+<!--/GITHUB_BLOCK-->
 
 `Link` ist ein Textteil, der den Benutzer beim Anklicken zu einem anderen Teil der Seite, einer anderen Seite innerhalb des Dienstes oder einer externen Website führt.
 
@@ -16,49 +20,144 @@ Es gibt drei Arten von Links: `normal` (das übliche Braun), `primary` (Schwarz)
 
 Dies ist das vertrauteste und etablierteste `link`-Muster. Es wird verwendet, um ein Element innerhalb eines Textes oder einer Tabelle visuell hervorzuheben und als Teil der Navigation. Sie können es verwenden, um sowohl zu internen Seiten als auch zu externen Quellen, einschließlich Dokumentationen, zu navigieren. Zusätzlich wird dieser Typ für Fehlerseiten und Zero-States verwendet.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <Link view="normal" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="normal" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Primary
 
 Dieser Typ wird verwendet, wenn es nativ klar ist, dass ein Element klickbar ist, aber die Verwendung eines braunen `Link` die Benutzeroberfläche überladen und Sie daran hindern würde, wichtige Punkte auf einer Seite richtig hervorzuheben.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return <Link view="primary" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="primary" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Secondary
 
 Ähnlich wie der primäre `Link` wird dieser Typ verwendet, wenn es für den Benutzer nativ klar ist, dass ein Element klickbar ist, während die Navigation durch dieses Element nicht wesentlich ist und nur wenige Szenarien betrifft. Sein Hauptziel ist es, den Benutzer nicht von den wichtigsten Punkten auf der Seite abzulenken. Der `Secondary`-Typ wird am häufigsten in Breadcrumbs oder bei der Anzeige sekundärer Attribute verwendet.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return <Link view="secondary" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="secondary" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Visitable
 
 Diese Eigenschaft wird verwendet, um anzuzeigen, dass der `Link` bereits angeklickt wurde.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return <Link href="https://gravity-ui.com/" visitable>Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link href="https://gravity-ui.com/" visitable>
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## `href`
 
 Die `href`-Eigenschaft ist erforderlich.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return <Link href="#">Link with href</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link href="#">Link with href</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Verwendung
 
 Sie können einen `Link` sowohl als eigenständiges Textelement als auch als Teil eines Textes verwenden:
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Link, Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <>
+            <Text>
+                <Link href="#">what roles are active in the service</Link>
+            </Text>
+            <Text>
+                Currently, this role can only be assigned to a{' '}
+                <Link href="#">folder</Link> or <Link href="#">cloud</Link>
+            </Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text>
+    <Link href="#">What roles are available in the service</Link>
+</Text>
+<Text>
+    Currently, this role can only be assigned to a <Link href="#">folder</Link> or <Link href="#">cloud</Link>
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

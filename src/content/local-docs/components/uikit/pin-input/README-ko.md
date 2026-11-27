@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# PinInput
+
+<!--/GITHUB_BLOCK-->
+
 `PinInput`은 숫자 또는 영숫자 값의 시퀀스를 빠르게 입력하기 위한 입력 필드 그룹입니다. 가장 일반적인 사용 사례는 문자 메시지(SMS), 이메일 또는 인증 앱을 통해 받은 OTP 또는 확인 코드를 입력하는 것입니다.
 
 각 입력 필드는 한 번에 한 문자씩 수집합니다. 값이 입력되면 모든 필드가 채워질 때까지 포커스가 다음 입력 필드로 이동합니다.
@@ -10,47 +16,129 @@ import {PinInput} from '@gravity-ui/uikit';
 
 기본적으로 입력 필드는 숫자 값만 허용합니다. 영숫자 값을 허용하려면 `type` 속성을 `"alphanumeric"`으로 설정하세요.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <PinInput type="alphanumeric" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput type="alphanumeric" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 크기
 
 이 컴포넌트는 `s`, `m`, `l`, `xl`의 네 가지 크기로 제공됩니다. 기본 크기는 `m`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <PinInput size="s" />
+            <PinInput size="m" />
+            <PinInput size="l" />
+            <PinInput size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput size="s" />
+<PinInput size="m" />
+<PinInput size="l" />
+<PinInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 상태
 
 사용자가 컴포넌트와 상호 작용하지 못하게 하려면 `disabled` 속성을 설정하세요.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return <PinInput disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 컴포넌트의 유효하지 않은 상태를 표시하려면 `validationState` 속성을 `"invalid"` 값으로 사용하세요. 선택적으로 `errorMessage` 속성을 사용하여 오류 메시지 텍스트를 설정할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return <PinInput validationState="invalid" errorMessage="Incorrect PIN" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput validationState="invalid" errorMessage="Incorrect PIN" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 플레이스홀더
 
 기본적으로 입력 필드에는 플레이스홀더가 없습니다. `placeholder` 속성을 사용하여 설정할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return <PinInput placeholder="😎" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput placeholder="😎" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 마스크
 
 입력된 값을 마스킹해야 하는 경우 `mask` 속성을 사용하세요. 이는 `<input type="password"/>` 동작과 유사합니다.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return <PinInput mask />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput mask />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## OTP
 

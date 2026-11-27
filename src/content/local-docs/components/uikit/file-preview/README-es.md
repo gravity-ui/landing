@@ -1,14 +1,69 @@
+<!--GITHUB_BLOCK-->
+
+# FilePreview
+
+<!--/GITHUB_BLOCK-->
+
 `FilePreview` es una tarjeta de vista previa compacta para un solo archivo, que muestra una miniatura o un icono de tipo de archivo con el nombre del archivo y acciones opcionales.
 
 ```tsx
 import {FilePreview} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+```tsx
+<FilePreview
+  file={{name: 'my-file.docs', type: 'text/docs'} as File}
+  onClick={() => action('onClick')}
+  actions={[
+    {
+      icon: <Link width={14} height={14} />,
+      title: 'Link',
+      onClick: () => action('onLink'),
+    },
+    {
+      icon: <Xmark width={14} height={14} />,
+      title: 'Close',
+      onClick: () => action('onClose'),
+    },
+  ]}
+/>
+```
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!-- Storybook example -->
+
+<FilePreviewExample />
+
+<!--/GITHUB_BLOCK-->
+
+<!--SANDBOX
+import {Link, Xmark} from '@gravity-ui/icons';
+import {FilePreview} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <FilePreview
+            file={{name: 'my-file.docs', type: 'text/docs'} as File}
+            onClick={() => console.log('onClick')}
+            actions={[
+                {
+                    icon: <Link width={14} height={14} />,
+                    title: 'Link',
+                    onClick: () => console.log('onLink'),
+                },
+                {
+                    icon: <Xmark width={14} height={14} />,
+                    title: 'Close',
+                    onClick: () => console.log('onClose'),
+                },
+            ]}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
 
 ## Propiedades
 

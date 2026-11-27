@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# ActionTooltip
+
+<!--/GITHUB_BLOCK-->
 
 [`Tooltip`](../Tooltip/README.md) pour étiqueter les boutons d'action sans texte descriptif (par exemple, les boutons icônes).
 
@@ -8,7 +12,7 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 import {ActionTooltip} from '@gravity-ui/uikit';
 
 <ActionTooltip title="Action">
-  <div tabIndex={0}>Ancre</div>
+  <div tabIndex={0}>Anchor</div>
 </ActionTooltip>;
 ```
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Popover
+
+<!--/GITHUB_BLOCK-->
+
 `Popover` affiche un contenu flottant, facultativement interactif (texte, liens ou boutons) ancré à un élément enfant et ouvert au survol ou au clic. Il encapsule [`Popup`](../Popup/README.md) avec une interactivité de déclenchement intégrée, en utilisant le `ReactElement` passé via la propriété `children` comme déclencheur.
 
 ```tsx
@@ -12,13 +18,12 @@ dans la propriété `content`.
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Contenu">
-  <Button>Cliquez ou survolez-moi</Button>
+<Popover content="Content">
+  <Button>Click or hover me</Button>
 </Popover>;
 ```
 
 ## Propriétés
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nom                 | Description                                                                                                   |                                Type                                 |     Défaut      |
 | :------------------- | :------------------------------------------------------------------------------------------------------------ | :-----------------------------------------------------------------: | :-------------: |

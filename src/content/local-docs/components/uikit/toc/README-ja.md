@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toc
+
+<!--/GITHUB_BLOCK-->
 
 `Toc` コンポーネントは、ページの見出しの目次を表示するように設計されており、2つの階層レベルを持つアイテムのセットを表示します。
 

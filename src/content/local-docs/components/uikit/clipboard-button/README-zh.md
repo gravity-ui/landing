@@ -1,12 +1,30 @@
+<!--GITHUB_BLOCK-->
+
+# ClipboardButton
+
+<!--/GITHUB_BLOCK-->
+
 `ClipboardButton` 是一个现成的按钮，可将给定文本复制到剪贴板并播放成功动画。它结合了 [`CopyToClipboard`](../CopyToClipboard/README.md)（复制行为）和 [`ClipboardIcon`](../ClipboardIcon/README.md)（动画图标）。
 
 ```tsx
 import {ClipboardButton} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {ClipboardButton} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <ClipboardButton text="Some text to copy" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ClipboardButton text="Some text to copy" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

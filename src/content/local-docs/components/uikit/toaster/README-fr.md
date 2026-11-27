@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toaster
+
+<!--/GITHUB_BLOCK-->
 
 Ceci est un composant pour les notifications ajustables, également appelées toasts.
 
@@ -26,7 +30,7 @@ Mais vous pouvez également utiliser `toaster` directement dans différentes par
 
 ```js
 toaster.add({
-  title: 'Toaster est là',
+  title: 'Toaster is here',
 });
 ```
 
@@ -50,7 +54,7 @@ export function FoobarComponent() {
 
   useEffect(() => {
     add({
-      title: 'Toaster est là',
+      title: 'Toaster is here',
     });
   }, []);
 
@@ -128,8 +132,6 @@ Chaque `action` est un objet avec les paramètres suivants :
 | onClick          | `() => void`                              | oui    |          | Gestionnaire de clic sur l'action                                        |
 | view             | [`ButtonView`](../Button/README.md#props) |        | `outlined` | Apparence de l'action, identique à `view` pour `<Button/>`             |
 | removeAfterClick | `boolean`                                 |        | `true`   | Active ou désactive la fermeture de la notification après un clic sur l'action |
-
-GRAVITY_TRANSLATION_BLOCK_1_END
 
 ## API CSS
 

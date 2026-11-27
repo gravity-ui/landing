@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Switch
+
+<!--/GITHUB_BLOCK-->
+
 `Switch` 컴포넌트는 일반적으로 **켜짐**과 **꺼짐**, 또는 **활성화**와 **비활성화**와 같이 두 가지 상태 간에 전환하는 데 사용됩니다.
 
 ```tsx
@@ -11,25 +17,103 @@ import {Switch} from '@gravity-ui/uikit';
 - 선택됨: 스위치가 **켜짐** 상태일 때.
 - 비활성화됨: 스위치를 사용할 수 없을 때.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Switch size="l" checked={false}>
+                Unchecked
+            </Switch>
+            <Switch size="l" checked>
+                Checked
+            </Switch>
+            <Switch size="l" disabled>
+                Disabled
+            </Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="l" checked={false}>Unchecked</Switch>
+<Switch size="l" checked>Checked</Switch>
+<Switch size="l" disabled>Disabled</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 크기
 
 `Switch`의 크기를 관리하려면 `size` 속성을 사용하세요. 기본 크기는 `m`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Switch size="s">S Size</Switch>
+            <Switch size="m">M Size</Switch>
+            <Switch size="l">L Size</Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="s">S Size</Switch>
+<Switch size="m">M Size</Switch>
+<Switch size="l">L Size</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 레이블
 
 `content` 속성을 사용하여 `Switch`에 레이블을 지정하거나 자식 속성으로 제공할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Box, Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Switch content="Content" size="l" />
+            <Box spacing={{mt: 2}}>
+                <Switch size="l">
+                    <span>Content as children</span>
+                </Switch>
+            </Box>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Switch content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Switch size="l">
+      <span>Content as children</span>
+    </Switch>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

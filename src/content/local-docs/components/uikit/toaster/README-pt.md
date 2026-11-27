@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toaster
+
+<!--/GITHUB_BLOCK-->
 
 Este é um componente para notificações ajustáveis, também conhecidas como toasts.
 
@@ -26,7 +30,7 @@ Mas você também pode usar `toaster` diretamente em diferentes partes de sua ap
 
 ```js
 toaster.add({
-  title: 'Toaster está aqui',
+  title: 'Toaster is here',
 });
 ```
 
@@ -50,7 +54,7 @@ export function FoobarComponent() {
 
   useEffect(() => {
     add({
-      title: 'Toaster está aqui',
+      title: 'Toaster is here',
     });
   }, []);
 

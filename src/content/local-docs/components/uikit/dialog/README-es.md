@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Dialog
+
+<!--/GITHUB_BLOCK-->
+
 `Dialog` es una ventana modal con un título, cuerpo y acciones en el pie de página, utilizada para confirmaciones, formularios y avisos. Está construida sobre `Modal`.
 
 ```tsx
@@ -30,7 +36,6 @@ const dialogTitleId = 'app-confirmation-dialog-title';
 ```
 
 ## Propiedades
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nombre                  | Descripción                                                                                             | Tipo                                                                                             | Predeterminado |
 | :-------------------- | :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------- | :------------- |

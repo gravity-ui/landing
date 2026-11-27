@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Alert
+
+<!--/GITHUB_BLOCK-->
+
 `Alert` 컴포넌트는 중요한 정보를 사용자에게 강조하기 위해 사용됩니다.
 
 ```tsx
@@ -20,9 +26,37 @@ import {Alert} from '@gravity-ui/uikit';
 
 `clear`: 스타일이 없으며, 다른 컴포넌트 내에서 사용하기에 적합합니다 (예: `Popover`의 `content`로 사용).
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Alert theme="normal" title="Normal" message="Normal theme" />
+            <Alert theme="info" title="Info" message="Info theme" />
+            <Alert theme="success" title="Success" message="Success theme" />
+            <Alert theme="warning" title="Warning" message="Warning theme" />
+            <Alert theme="danger" title="Danger" message="Danger theme" />
+            <Alert theme="utility" title="Utility" message="Utility theme" />
+            <Alert theme="clear" title="Clear" message="Clear theme" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert theme="normal" title="Normal" message="Normal theme"/>
+<Alert theme="info" title="Info" message="Info theme"/>
+<Alert theme="success" title="Success" message="Success theme"/>
+<Alert theme="warning" title="Warning" message="Warning theme"/>
+<Alert theme="danger" title="Danger" message="Danger theme"/>
+<Alert theme="utility" title="Utility" message="Utility theme"/>
+<Alert theme="clear" title="Clear" message="Clear theme"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 보기
 
@@ -30,9 +64,27 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 
 `outlined`: 알림의 테두리 색상을 조정하는 데 사용됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <Alert title="Filled" message="Filled view" view="filled" />
+            <Alert title="Outlined" message="Outlined theme" view="outlined" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Alert title="Filled" message="Filled view" view="filled" />
+<Alert title="Outlined" message="Outlined theme" view="outlined" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 레이아웃
 
@@ -40,9 +92,37 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 
 `horizontal`: `actions` 속성에 버튼이 있는 경우 사용자에게 콘텐츠를 안내하는 데 사용됩니다. 텍스트 오른쪽에 버튼을 표시할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <Alert
+                layout="vertical"
+                title="Vertical"
+                message="Vertical direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                layout="horizontal"
+                title="Horizontal"
+                message="Horizontal direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
+<Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 모서리
 
@@ -50,17 +130,47 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 `square`: 알림 창의 모서리를 사각형으로 만듭니다.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <>
+            <Alert title="Rounded" message="Rounded corners" corners="rounded" />
+            <Alert title="Square" message="Square corners" corners="square" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert title="Rounded" message="Rounded corners" corners="rounded"/>
+<Alert title="Square" message="Square corners" corners="square"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 알림 제목
 
 `title`: 알림 제목. `Alert.Title`보다 우선순위가 낮습니다.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return <Alert title={<Alert.Title className={'some-class'} text="some text" />} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert title={<Alert.Title className={'some-class'} text="some text"></Alert.Title>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 알림 메시지
 
@@ -70,9 +180,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `onClose`: 사용자가 알림의 닫기 버튼을 클릭할 때 호출되는 콜백 함수입니다. 이 속성이 정의되면 닫기 버튼이 표시됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <Alert
+            onClose={() => alert('Close button pressed')}
+            title="Alert has close"
+            message="Alert has close"
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert
+  onClose={() => alert('Close button pressed')}
+  title="Alert has close"
+  message="Alert has close"
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 정렬
 
@@ -82,9 +214,39 @@ GRAVITY_TRANSLATION_BLOCK_11_END
 
 `center`: 콘텐츠가 `Alert` 컴포넌트 내에서 수직으로 가운데 정렬됩니다. 액션이 텍스트보다 더 많은 공간을 차지하거나 아이콘이 콘텐츠 중앙에 있어야 하는 경우 유용할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <Alert
+                align="baseline"
+                theme="info"
+                title="Baseline"
+                message="Baseline align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                align="center"
+                theme="info"
+                title="Center"
+                message="Center align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert align="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
+<Alert align="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

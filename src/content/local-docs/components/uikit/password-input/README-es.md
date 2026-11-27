@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+## Password Input
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {PasswordInput} from '@gravity-ui/uikit';
@@ -10,13 +14,25 @@ import {PasswordInput} from '@gravity-ui/uikit';
 
 Este botón permite a los usuarios copiar fácilmente el valor del campo de entrada a su portapapeles. Puedes ocultar este botón con la prop booleana `hideCopyButton`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideCopyButton />;
+}
+SANDBOX-->
 
 ### Botón de mostrar
 
 La prop `hideRevealButton` permite a los usuarios alternar la visibilidad de la contraseña.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {PasswordInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <PasswordInput hideRevealButton />;
+}
+SANDBOX-->
 
 ### Propiedades
 
@@ -33,4 +49,16 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 | revealValue         | Determina el estado de visibilidad del campo de entrada de contraseña      | `boolean`  | `false` |
 | onRevealValueUpdate | Una función de devolución de llamada que se invoca cada vez que cambia el estado de `revealValue` | `function` |         |
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+#### Usage example
+
+```tsx
+function MyComponent() {
+  const [value, setValue] = React.useState('');
+
+  return <PasswordInput onUpdate={setValue} value={value} />;
+}
+```
+
+<!--/GITHUB_BLOCK-->

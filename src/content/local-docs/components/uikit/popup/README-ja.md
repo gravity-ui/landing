@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Popup
+
+<!--/GITHUB_BLOCK-->
+
 `Popup` は、ツールチップ、ポップオーバー、メニューの基盤となる低レベルのプリミティブであり、[Floating UI](https://floating-ui.com) 上に構築されています。浮動コンテンツをページの上に配置し、参照要素にアンカーします。その可視性は `open` プロパティで制御され、`disablePortal` プロパティを設定しない限り、子要素は [`Portal`](../Portal) コンポーネント内でレンダリングされます。
 
 ```tsx
@@ -8,9 +14,44 @@ import {Popup} from '@gravity-ui/uikit';
 
 浮動要素のアンカーを指定するには、`anchorElement` プロパティを使用できます。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {useState} from 'react';
+import {Button, Popup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    const [buttonElement, setButtonElement] = useState<HTMLButtonElement | null>(null);
+    const [open, setOpen] = useState(false);
+
+    return (
+        <>
+            <Button ref={setButtonElement} onClick={() => setOpen((prevOpen) => !prevOpen)}>
+                Toggle Popup
+            </Button>
+            <Popup anchorElement={buttonElement} open={open} placement="bottom">
+                <div style={{padding: 5}}>
+                    Content
+                </div>
+            </Popup>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const [buttonElement, setButtonElement] = React.useState(null);
+const [open, setOpen] = React.useState(false);
+
+<Button ref={setButtonElement} onClick={() => setOpen((prevOpen) => !prevOpen)}>
+  Toggle Popup
+</Button>
+<Popup anchorElement={buttonElement} open={open} placement="bottom">
+  Content
+</Popup>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Placement
 
@@ -19,7 +60,77 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 プロパティが配列に設定されている場合、最初の要素がデフォルトの配置値として使用され、残りは [fallback placements](https://floating-ui.com/docs/flip#fallbackplacements) として使用されます。
 `auto`、`auto-start`、`auto-end` の値を使用して、flip の代わりに [autoPlacement middleware](https://floating-ui.com/docs/autoPlacement) を使用することもできます。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Popup, PopupProps} from '@gravity-ui/uikit';
+import {CSSProperties, useState} from 'react';
+
+const anchorStyles: CSSProperties = {
+    margin: '40px 100px',
+    width: 320,
+    height: 140,
+    border: '2px dashed',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '1.5em',
+};
+
+function PopupInstance({children, ...props}: PopupProps) {
+    return (
+        <Popup open disablePortal {...props}>
+            <div style={{padding: 5}}>{children}</div>
+        </Popup>
+    );
+}
+
+export default function () {
+    const [anchorElement, setAnchorElement] = useState<HTMLDivElement | null>(null);
+
+    return (
+        <div>
+            <div ref={setAnchorElement} style={anchorStyles}>
+                Anchor
+            </div>
+            <PopupInstance anchorElement={anchorElement} placement="top-start">
+                Top Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="top">
+                Top
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="top-end">
+                Top End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right-start">
+                Right Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right">
+                Right
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="right-end">
+                Right End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom-end">
+                Bottom End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom">
+                Bottom
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="bottom-start">
+                Bottom Start
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left-end">
+                Left End
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left">
+                Left
+            </PopupInstance>
+            <PopupInstance anchorElement={anchorElement} placement="left-start">
+                Left Start
+            </PopupInstance>
+        </div>
+    );
+};
+SANDBOX-->
 
 ## Properties
 

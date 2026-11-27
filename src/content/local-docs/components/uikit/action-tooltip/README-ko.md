@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# ActionTooltip
+
+<!--/GITHUB_BLOCK-->
+
 [`Tooltip`](../Tooltip/README.md)는 설명 텍스트가 없는 액션 버튼(예: 아이콘 버튼)에 레이블을 지정하는 데 사용됩니다.
 
 ## 사용법

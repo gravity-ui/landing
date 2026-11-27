@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toaster
+
+<!--/GITHUB_BLOCK-->
 
 이것은 토스트라고도 알려진 조정 가능한 알림을 위한 컴포넌트입니다.
 

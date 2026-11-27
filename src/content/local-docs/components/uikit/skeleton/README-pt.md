@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Skeleton
+
+<!--/GITHUB_BLOCK-->
+
 O componente `Skeleton` exibe uma prévia de espaço reservado para o seu conteúdo antes que os dados sejam carregados. Essa prévia é exibida para reduzir a frustração com o tempo de carregamento.
 
 ```tsx
@@ -37,13 +43,34 @@ Use a prop `size` para definir uma altura predefinida para o esqueleto (e largur
 | `'l'`  | Grande        |
 | `'xl'` | Extra grande  |
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Skeleton size="xs" width={120} />
+<Skeleton size="m"  width={200} />
+<Skeleton size="xl" width={280} />
+
+<Skeleton variant="circle" size="l" />
+<Skeleton variant="square" size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Espaço reservado de texto
 
 Use `variant="text"` para renderizar um esqueleto que herda `font-size` e `line-height` do contexto pai. Coloque múltiplos esqueletos dentro de um elemento `<Text variant="...">` para espaços reservados de várias linhas.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={240} />
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriedades
 

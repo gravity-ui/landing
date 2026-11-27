@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Stepper
+
+<!--/GITHUB_BLOCK-->
 
 `Stepper` 可引导用户完成一系列编号步骤，在类似向导的多步工作流中显示进度。
 
@@ -8,53 +12,314 @@ import {Stepper} from '@gravity-ui/uikit';
 
 ## 示例
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item>Step 2</Stepper.Item>
+            <Stepper.Item>Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item>Step 2</Stepper.Item>
+  <Stepper.Item>Step 3</Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperDefault />
+
+<!--/GITHUB_BLOCK-->
 
 ### 可交互项
 
 使用 `onUpdate` 和 `value` 属性配合自定义状态来操作步骤。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {useState} from 'react';
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    const [value, setValue] = useState(0);
+
+    return (
+        <Stepper value={value} onUpdate={setValue}>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item>Step 2</Stepper.Item>
+            <Stepper.Item>Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const [value, setValue] = React.useState();
+
+return (
+  <Stepper value={value} onUpdate={setValue}>
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+    <Stepper.Item>Step 4 with very long title</Stepper.Item>
+  </Stepper>
+);
+```
+
+<!-- Storybook example -->
+
+<StepperInteractiveShowcase />
+
+<!--/GITHUB_BLOCK-->
 
 ### 不同视图
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item view="error">Step 2</Stepper.Item>
+            <Stepper.Item view="error">Step 3</Stepper.Item>
+            <Stepper.Item view="success">Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item view="error">Step 2</Stepper.Item>
+  <Stepper.Item view="error">Step 3</Stepper.Item>
+  <Stepper.Item view="success">Step 4</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperView/>
+
+<!--/GITHUB_BLOCK-->
 
 ### 不同尺寸
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <Stepper size="l">
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item>Step 2</Stepper.Item>
+            <Stepper.Item>Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Flex direction="column" gap={4}>
+  <Stepper {...args} size="s">
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+  </Stepper>
+
+  <Stepper {...args} size="m">
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+  </Stepper>
+
+  <Stepper {...args} size="l">
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+  </Stepper>
+</Flex>
+```
+
+<!-- Storybook example -->
+
+<StepperSize/>
+
+<!--/GITHUB_BLOCK-->
 
 ### 禁用步骤
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item disabled>Step 2</Stepper.Item>
+            <Stepper.Item disabled>Step 3</Stepper.Item>
+            <Stepper.Item disabled>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item disabled>Step 2</Stepper.Item>
+  <Stepper.Item disabled>Step 3</Stepper.Item>
+  <Stepper.Item disabled>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperDisabled/>
+
+<!--/GITHUB_BLOCK-->
 
 ### 自定义图标
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Cloud, Gear, Hammer, Rocket} from '@gravity-ui/icons';
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item icon={Gear}>Step 1</Stepper.Item>
+            <Stepper.Item icon={Rocket}>Step 2</Stepper.Item>
+            <Stepper.Item icon={Cloud}>Step 3</Stepper.Item>
+            <Stepper.Item icon={Hammer}>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item icon={Gear}>Step 1</Stepper.Item>
+  <Stepper.Item view="error" icon={Gear}>
+    Step 2
+  </Stepper.Item>
+  <Stepper.Item view="success" icon={Gear}>
+    Step 3
+  </Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperCustomIcons/>
+
+<!--/GITHUB_BLOCK-->
 
 ### 自定义步骤分隔符
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--SANDBOX
+import {Stepper, Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+const Separator = () => {
+    return <Text color="secondary">{'->'}</Text>;
+};
+
+export default function () {
+    return (
+        <Stepper separator={<Separator />}>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item view="error">Step 2</Stepper.Item>
+            <Stepper.Item view="success">Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const Separator = () => {
+  return <Text color="secondary">{'->'}</Text>;
+};
+
+<Stepper {...args} separator={<Separator />}>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item view="error">Step 2</Stepper.Item>
+  <Stepper.Item view="success">Step 3</Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>;
+```
+
+<!-- Storybook example -->
+
+<StepperCustomSeparator/>
+
+<!--/GITHUB_BLOCK-->
 
 ### 带浮动元素的步骤
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--SANDBOX
+import {Stepper, Tooltip} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+export default function () {
+    return (
+        <Stepper>
+            <Tooltip content="fancy step with tooltip">
+                <Stepper.Item>Step 1</Stepper.Item>
+            </Tooltip>
+            <Stepper.Item view="error">Step 2</Stepper.Item>
+            <Stepper.Item view="success">Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper {...args}>
+  <Tooltip content="fancy step with tooltip">
+    <Stepper.Item>Step 1</Stepper.Item>
+  </Tooltip>
+  <Stepper.Item view="error">Step 2</Stepper.Item>
+  <Stepper.Item view="success">Step 3</Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperWithFloatingElements/>
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

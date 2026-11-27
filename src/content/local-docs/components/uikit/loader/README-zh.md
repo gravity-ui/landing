@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Loader
+
+<!--/GITHUB_BLOCK-->
+
 `Loader` 组件以闪烁的条形图显示加载进度。与 `Spin` 不同，此组件用于全局场景，例如整个页面或 `Dialog`。
 
 ```tsx
@@ -6,9 +12,29 @@ import {Loader} from '@gravity-ui/uikit';
 
 ### Size
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Loader} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Loader size="s" />
+            <Loader size="m" />
+            <Loader size="l" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Loader size="s" />
+<Loader size="m" />
+<Loader size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `S`: 小尺寸，当常规加载器太大时使用。
 
@@ -22,4 +48,3 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | :-------- | :------------------------------------ | :---------------: | :-----: |
 | size      | Loader size                           | `"s"` `"m"` `"l"` |  `"s"`  |
 | className | Custom CSS class for the root element |     `string`      |         |
-GRAVITY_TRANSLATION_BLOCK_2_END

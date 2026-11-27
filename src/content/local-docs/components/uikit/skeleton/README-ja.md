@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Skeleton
+
+<!--/GITHUB_BLOCK-->
 
 Skeleton コンポーネントは、データがロードされる前にコンテンツのプレースホルダープレビューを表示します。このプレビューは、ロード時間のフラストレーションを軽減するために表示されます。
 
@@ -39,13 +43,34 @@ import {Skeleton} from '@gravity-ui/uikit';
 | `'l'`  | Large       |
 | `'xl'` | Extra large |
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Skeleton size="xs" width={120} />
+<Skeleton size="m"  width={200} />
+<Skeleton size="xl" width={280} />
+
+<Skeleton variant="circle" size="l" />
+<Skeleton variant="square" size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## テキストプレースホルダー
 
 `variant="text"` を使用して、親コンテキストから `font-size` と `line-height` を継承するスケルトンをレンダリングします。複数行のプレースホルダーには、`<Text variant="...">` 要素内に複数のスケルトンを配置します。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={240} />
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toc
+
+<!--/GITHUB_BLOCK-->
 
 Le composant `Toc` est conçu pour afficher une table des matières de la page, présentant une liste d'éléments avec deux niveaux de hiérarchie.
 

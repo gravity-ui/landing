@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# HotkeysPanel
+
+<!--/GITHUB_BLOCK-->
 
 핫키 문서용 탐색 패널입니다.
 이 패널은 애플리케이션의 핫키 세트와 해당 목적에 대한 설명을 표시합니다.

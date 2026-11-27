@@ -1,10 +1,24 @@
+<!--GITHUB_BLOCK-->
+
+# Disclosure
+
+<!--/GITHUB_BLOCK-->
+
 `Disclosure` é um componente colapsável que permite exibir e ocultar seu conteúdo aninhado.
 
 ```tsx
 import {Disclosure} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+## Base example
+
+```tsx
+<Disclosure summary="Summary">Content</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Controlando o estado de expansão
 
@@ -12,17 +26,73 @@ Você pode controlar o estado de expansão usando as propriedades `expanded` e `
 
 Exemplo de componente controlado:
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" defaultExpanded>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+function ControlledDisclosure() {
+  const [expanded, setExpanded] = React.useState(true);
+
+  return (
+    <Disclosure summary="Summary" expanded={expanded} onUpdate={setExpanded}>
+      Content
+    </Disclosure>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Tamanho
 
 Use a propriedade `size` para controlar o tamanho do `Disclosure`. O tamanho padrão é `m`.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Middle size" size="m">
+                Content
+            </Disclosure>
+            <Disclosure summary="Large size" size="l">
+                Content
+            </Disclosure>
+            <Disclosure summary="Extra large size" size="xl">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Middle size" size="m">
+  Content
+</Disclosure>
+<Disclosure summary="Large size" size="l">
+  Content
+</Disclosure>
+<Disclosure summary="Extra large size" size="xl">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Posição da Seta
 
@@ -30,25 +100,135 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 `end`: A seta é posicionada no final do cabeçalho.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Summary with start arrow" arrowPosition="start">
+                Content
+            </Disclosure>
+            <Disclosure summary="Summary with end arrow" arrowPosition="end">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary with start arrow" arrowPosition="start">
+  Content
+</Disclosure>
+<Disclosure summary="Summary with end arrow" arrowPosition="end">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Conteúdo Personalizado
 
 Use o componente `Disclosure.Summary` para criar um cabeçalho personalizado e `Disclosure.Details` para preencher o conteúdo personalizado.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Check} from '@gravity-ui/icons';
+import {Button, Disclosure, Flex, Icon} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure>
+                <Disclosure.Summary>
+                    {(props) => (
+                        <Button {...props}>
+                            <Icon data={Check} size={14} />
+                            Custom summary
+                            <Icon data={Check} size={14} />
+                        </Button>
+                    )}
+                </Disclosure.Summary>
+                <div>Custom details</div>
+                <div>More custom details</div>
+            </Disclosure>
+            <Disclosure summary="Summary">
+                <Disclosure.Summary>
+                    {(_props, defaultButton) => (
+                        <Flex gap={4}>
+                            {defaultButton}
+                            <Icon data={Check} size={14} />
+                        </Flex>
+                    )}
+                </Disclosure.Summary>
+                <Disclosure.Details>Custom Details</Disclosure.Details>
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(props) => (
+      <Button {...props}>
+        <Icon data={Check} size={14} />
+        Custom summary
+        <Icon data={Check} size={14} />
+      </Button>
+    )}
+  </Disclosure.Summary>
+  <div>Custom details</div>
+  <div>More custom details</div>
+</Disclosure>
+```
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(_props, defaultButton) => (
+      <Flex gap={4}>
+        {defaultButton}
+        <Icon data={Check} size={14} />
+      </Flex>
+    )}
+  </Disclosure.Summary>
+  <Disclosure.Details>Custom Details</Disclosure.Details>
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estado Desabilitado
 
 O `Disclosure` pode ser desabilitado usando a propriedade `disabled`.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" disabled>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary" disabled>
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriedades
 

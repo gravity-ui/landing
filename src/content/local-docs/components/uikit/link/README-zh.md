@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Link
+
+<!--/GITHUB_BLOCK-->
+
 `Link` 是文本的一部分，点击后会将用户带到页面内的另一部分、服务内的另一页或外部网站页面。
 
 ```tsx
@@ -14,49 +20,144 @@ import {Link} from '@gravity-ui/uikit';
 
 这是最熟悉、最成熟的 `link` 模式。它用于在文本或表格中视觉上突出显示元素，以及作为导航的一部分。您可以使用它来导航到内部页面和外部来源，包括文档。此外，此类型还用于错误页面和零状态。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return <Link view="normal" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="normal" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Primary
 
 当元素本身就明显是可点击的时，可以使用此类型，但使用棕色的 `Link` 会使界面过载，并妨碍您正确突出页面上的关键点。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <Link view="primary" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="primary" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Secondary
 
 与 primary `Link` 类似，当用户明显知道元素是可点击的时，可以使用此类型，但导航到它不是必需的，并且仅影响少量场景。其主要目标是不让用户分心于页面上的关键点。`Secondary` 类型最常用于面包屑导航或显示次要属性时。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return <Link view="secondary" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="secondary" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Visitable
 
 此属性用于显示 `Link` 已被点击。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <Link href="https://gravity-ui.com/" visitable>Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link href="https://gravity-ui.com/" visitable>
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## `href`
 
 `href` 属性是必需的。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return <Link href="#">Link with href</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link href="#">Link with href</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 用法
 
 您可以将 `Link` 用作独立的文本元素，也可以用作文本的一部分：
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Link, Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <Text>
+                <Link href="#">what roles are active in the service</Link>
+            </Text>
+            <Text>
+                Currently, this role can only be assigned to a{' '}
+                <Link href="#">folder</Link> or <Link href="#">cloud</Link>
+            </Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text>
+    <Link href="#">What roles are available in the service</Link>
+</Text>
+<Text>
+    Currently, this role can only be assigned to a <Link href="#">folder</Link> or <Link href="#">cloud</Link>
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Popover
+
+<!--/GITHUB_BLOCK-->
+
 `Popover` exibe conteúdo flutuante, opcionalmente interativo (texto, links ou botões) ancorado a um elemento filho e aberto ao passar o mouse ou clicar. Ele envolve [`Popup`](../Popup/README.md) com interatividade de gatilho integrada, usando o `ReactElement` passado através da propriedade `children` como gatilho.
 
 ```tsx
@@ -12,8 +18,8 @@ na propriedade `content`.
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Conteúdo">
-  <Button>Clique ou passe o mouse sobre mim</Button>
+<Popover content="Content">
+  <Button>Click or hover me</Button>
 </Popover>;
 ```
 

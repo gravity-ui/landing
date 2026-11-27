@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# PlaceholderContainer
+
+<!--/GITHUB_BLOCK-->
+
 `PlaceholderContainer` 是一个用于显示带有图片、文本内容和操作控件的内容的组件。
 
 ## 方向
@@ -12,17 +18,149 @@
 
 `PlaceholderContainer` 可以渲染按钮控件或按钮数组。要显示它，请使用 `actions` 属性。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PlaceholderContainer
+  title="Sample with action control"
+  description="Some description for PlaceholderContainer component demo"
+  direction="column"
+  size="s"
+  align="center"
+  image={
+    <svg width="230" height="230" viewBox="0 0 230 230" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <rect fill="#DDDDDD" height="100%" transform="matrix(1 0 0 1 0 0)" width="100%" />
+        <text
+          fill="#999999"
+          fontFamily="Sans-serif"
+          fontSize="16"
+          strokeWidth="0"
+          textAnchor="middle"
+          transform="matrix(1.88041 0 0 1.88041 -48.1289 -81.7475)"
+          x="86.49"
+          y="114"
+        >
+          1:1
+        </text>
+      </g>
+    </svg>
+  }
+  actions={[
+    {
+      text: 'Main button',
+      view: 'normal',
+      onClick: () => console.log('Click by main button'),
+    },
+  ]}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 您还可以渲染自定义控件：
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PlaceholderContainer
+  title="Sample with custom action"
+  description="Some description for PlaceholderContainer component demo"
+  direction="row"
+  size="s"
+  align="center"
+  image={
+    <svg width="230" height="230" viewBox="0 0 230 230" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <rect fill="#DDDDDD" height="100%" transform="matrix(1 0 0 1 0 0)" width="100%" />
+        <text
+          fill="#999999"
+          fontFamily="Sans-serif"
+          fontSize="16"
+          strokeWidth="0"
+          textAnchor="middle"
+          transform="matrix(1.88041 0 0 1.88041 -48.1289 -81.7475)"
+          x="86.49"
+          y="114"
+        >
+          1:1
+        </text>
+      </g>
+    </svg>
+  }
+  actions={
+    <DropdownMenu
+      defaultSwitcherProps={{view: 'flat-secondary'}}
+      items={[
+        {text: 'text 1', action: () => console.log()},
+        {text: 'text 2', action: () => console.log()},
+      ]}
+      onSwitcherClick={(e) => console.log(e)}
+      switcher={
+        <Button>
+          Text
+          <Icon data={ChevronDown} size={16} />
+        </Button>
+      }
+    />
+  }
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 图片和内容
 
 `image` 属性支持配置图片的 `src` 和 `alt` 设置，或者一个 React 节点。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PlaceholderContainer
+  title="Sample with image node"
+  description="Some description for PlaceholderContainer component demo"
+  direction="row"
+  size="s"
+  align="center"
+  image={
+    <svg width="230" height="230" viewBox="0 0 230 230" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <rect fill="#DDDDDD" height="100%" transform="matrix(1 0 0 1 0 0)" width="100%" />
+        <text
+          fill="#999999"
+          fontFamily="Sans-serif"
+          fontSize="16"
+          strokeWidth="0"
+          textAnchor="middle"
+          transform="matrix(1.88041 0 0 1.88041 -48.1289 -81.7475)"
+          x="86.49"
+          y="114"
+        >
+          1:1
+        </text>
+      </g>
+    </svg>
+  }
+/>
+```
+
+With `src` and `alt` settings:
+
+```tsx
+<PlaceholderContainer
+  title="Sample with image (set by src and alt properties)"
+  description="Some description for PlaceholderContainer component demo"
+  direction="row"
+  size="s"
+  align="center"
+  image={{
+    src: 'https://gravity-ui.com/static/images/design/Resources/img-gravitylib.png',
+    alt: 'logo',
+  }}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 `PlaceholderContainer` 的内容包含标题和描述部分，您可以使用相应的属性进行设置。要渲染自定义内容，请使用 `content` 属性。
 

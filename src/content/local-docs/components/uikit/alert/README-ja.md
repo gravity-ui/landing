@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Alert
+
+<!--/GITHUB_BLOCK-->
+
 `Alert` コンポーネントは、重要な情報をユーザーの注意を引くために表示します。
 
 ```tsx
@@ -20,9 +26,37 @@ import {Alert} from '@gravity-ui/uikit';
 
 `clear`: スタイルなし。他のコンポーネント内での使用に適しています（例: `Popover` の `content` として）。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Alert theme="normal" title="Normal" message="Normal theme" />
+            <Alert theme="info" title="Info" message="Info theme" />
+            <Alert theme="success" title="Success" message="Success theme" />
+            <Alert theme="warning" title="Warning" message="Warning theme" />
+            <Alert theme="danger" title="Danger" message="Danger theme" />
+            <Alert theme="utility" title="Utility" message="Utility theme" />
+            <Alert theme="clear" title="Clear" message="Clear theme" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert theme="normal" title="Normal" message="Normal theme"/>
+<Alert theme="info" title="Info" message="Info theme"/>
+<Alert theme="success" title="Success" message="Success theme"/>
+<Alert theme="warning" title="Warning" message="Warning theme"/>
+<Alert theme="danger" title="Danger" message="Danger theme"/>
+<Alert theme="utility" title="Utility" message="Utility theme"/>
+<Alert theme="clear" title="Clear" message="Clear theme"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### View
 
@@ -30,9 +64,27 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 
 `outlined`: アラートの境界線の色を調整するために使用されます。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <Alert title="Filled" message="Filled view" view="filled" />
+            <Alert title="Outlined" message="Outlined theme" view="outlined" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Alert title="Filled" message="Filled view" view="filled" />
+<Alert title="Outlined" message="Outlined theme" view="outlined" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Layout
 
@@ -40,9 +92,37 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 
 `horizontal`: `actions` プロパティにボタンがある場合に、ユーザーをコンテンツに誘導するために使用されます。テキストの右側にボタンを表示できます。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <Alert
+                layout="vertical"
+                title="Vertical"
+                message="Vertical direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                layout="horizontal"
+                title="Horizontal"
+                message="Horizontal direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
+<Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Corners
 
@@ -50,17 +130,47 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 `square`: アラートウィンドウの角を四角くします。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <>
+            <Alert title="Rounded" message="Rounded corners" corners="rounded" />
+            <Alert title="Square" message="Square corners" corners="square" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert title="Rounded" message="Rounded corners" corners="rounded"/>
+<Alert title="Square" message="Square corners" corners="square"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Alert title
 
 `title`: アラートのタイトル。`Alert.Title` よりも優先度が低いです。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return <Alert title={<Alert.Title className={'some-class'} text="some text" />} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert title={<Alert.Title className={'some-class'} text="some text"></Alert.Title>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Alert message
 
@@ -70,9 +180,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `onClose`: ユーザーがアラートの閉じるボタンをクリックしたときに呼び出されるコールバック関数。このプロパティが定義されている場合、閉じるボタンが表示されます。
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <Alert
+            onClose={() => alert('Close button pressed')}
+            title="Alert has close"
+            message="Alert has close"
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert
+  onClose={() => alert('Close button pressed')}
+  title="Alert has close"
+  message="Alert has close"
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Align
 
@@ -82,9 +214,39 @@ GRAVITY_TRANSLATION_BLOCK_11_END
 
 `center`: コンテンツは `Alert` コンポーネント内で垂直方向に中央揃えされます。アクションがテキストよりも多くのスペースを占める場合や、アイコンをコンテンツの中央に配置したい場合に役立ちます。
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <Alert
+                align="baseline"
+                theme="info"
+                title="Baseline"
+                message="Baseline align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                align="center"
+                theme="info"
+                title="Center"
+                message="Center align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert align="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
+<Alert align="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

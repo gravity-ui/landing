@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# PinInput
+
+<!--/GITHUB_BLOCK-->
+
 `PinInput` est un groupe d'entrées pour saisir rapidement une séquence de valeurs numériques ou alphanumériques. Son cas d'utilisation le plus courant est la saisie de codes OTP ou de confirmation reçus par SMS, e-mails ou applications d'authentification.
 
 Chaque entrée collecte un caractère à la fois. Lorsqu'une valeur est acceptée, le focus est déplacé vers l'entrée suivante, jusqu'à ce que tous les champs soient remplis.
@@ -10,47 +16,129 @@ import {PinInput} from '@gravity-ui/uikit';
 
 Par défaut, les entrées n'acceptent que les valeurs numériques. Pour autoriser les valeurs alphanumériques, définissez la propriété `type` sur `"alphanumeric"` :
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return <PinInput type="alphanumeric" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput type="alphanumeric" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Taille
 
 Ce composant est disponible en quatre tailles : `s`, `m`, `l` et `xl`. La taille par défaut est `m`.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <PinInput size="s" />
+            <PinInput size="m" />
+            <PinInput size="l" />
+            <PinInput size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput size="s" />
+<PinInput size="m" />
+<PinInput size="l" />
+<PinInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## État
 
 Si vous ne souhaitez pas que l'utilisateur interagisse avec le composant, définissez la propriété `disabled` :
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return <PinInput disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 Pour afficher un état invalide du composant, utilisez la propriété `validationState` avec la valeur `"invalid"`. Vous pouvez éventuellement définir un message d'erreur avec la propriété `errorMessage` :
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <PinInput validationState="invalid" errorMessage="Incorrect PIN" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput validationState="invalid" errorMessage="Incorrect PIN" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Placeholder
 
 Par défaut, il n'y a pas de placeholder pour les entrées. Vous pouvez le définir avec la propriété `placeholder` :
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return <PinInput placeholder="😎" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput placeholder="😎" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Masque
 
 Si vous avez besoin de masquer les valeurs saisies, utilisez la propriété `mask`. Elle est similaire au comportement de `<input type="password"/>`.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return <PinInput mask />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput mask />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## OTP
 
@@ -68,7 +156,6 @@ Si vous souhaitez que le navigateur suggère des codes à usage unique à partir
 | `--g-pin-input-item-gap`   | Définit un espace entre les entrées.                                    |
 
 ## Propriétés
-GRAVITY_TRANSLATION_BLOCK_12_END
 
 | Nom             | Description                                                                                                                                           |                     Type                     |   Défaut   |
 | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------: | :---------: |

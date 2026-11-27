@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Modal
+
+<!--/GITHUB_BLOCK-->
+
 El componente `Modal` sirve como base para crear ventanas emergentes con un fondo sobre el resto del contenido de una página.
 Deshabilita el desplazamiento al abrir y gestiona el foco del contenido. Los componentes hijos de `Modal` se renderizan dentro del componente [`Portal`](../Portal).
 Con `Modal`, puedes implementar diálogos, alertas, confirmaciones y más.
@@ -14,9 +20,9 @@ import {Button, Modal} from '@gravity-ui/uikit';
 
 const [open, setOpen] = useState(false);
 
-<Button onClick={() => setOpen(true)}>Abrir Modal</Button>
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => setOpen(false)}>
-    Contenido
+    Content
 </Modal>
 ```
 

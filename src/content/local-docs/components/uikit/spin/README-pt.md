@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Spin
+
+<!--/GITHUB_BLOCK-->
+
 O componente `Spin` exibe o estado de carregamento (um semicírculo giratório) em cenários inline. Ao contrário do `Loader`, este componente é usado para exibir o estado de carregamento em cenários inline, por exemplo, em um `Button` ou `Label`.
 
 ```tsx
@@ -6,9 +12,33 @@ import {Spin} from '@gravity-ui/uikit';
 
 ### Tamanho
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Spin} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Spin size="xs" />
+            <Spin size="s" />
+            <Spin size="m" />
+            <Spin size="l" />
+            <Spin size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Spin size="xs" />
+<Spin size="s" />
+<Spin size="m" />
+<Spin size="l" />
+<Spin size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `XS`: Extra pequeno.
 
@@ -34,4 +64,3 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | Nome             | Descrição                     |
 | :--------------- | :------------------------------ |
 | `--g-spin-color` | A cor principal do componente |
-GRAVITY_TRANSLATION_BLOCK_2_END

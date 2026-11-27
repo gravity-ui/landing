@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# TextInput
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {TextInput} from '@gravity-ui/uikit';
 ```
@@ -12,21 +18,60 @@ Die Darstellung von `TextInput` wird durch die Eigenschaften `view` und `pin` ge
 
 `normal` - die Hauptdarstellung von `TextInput` (wird standardmäßig verwendet).
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <TextInput placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - kann mit einem benutzerdefinierten Wrapper für `TextInput` verwendet werden.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <TextInput view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput view="normal" />
+<TextInput view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 Ermöglicht die Steuerung der Ansicht der rechten und linken Kanten des Rahmens von `TextInput`.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" pin="round-brick" />
+            <TextInput placeholder="Placeholder" pin="brick-brick" />
+            <TextInput placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput pin="round-brick" />
+<TextInput pin="brick-brick" />
+<TextInput pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zustände
 
@@ -34,18 +79,57 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 Der Zustand von `TextInput`, bei dem der Benutzer nicht mit der Komponente interagieren kann.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <TextInput placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Fehler
 
 Der Zustand von `TextInput`, in dem Sie ungültige Benutzereingaben anzeigen möchten. Um die Darstellung von `TextInput` zu ändern, verwenden Sie die Eigenschaft `validationState` mit dem Wert `"invalid"`. Ein optionaler Meldungstext kann über die Eigenschaft `errorMessage` hinzugefügt werden. Standardmäßig wird der Meldungstext außerhalb der Komponente gerendert.
 Dieses Verhalten kann mit der Eigenschaft `errorPlacement` geändert werden.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <TextInput
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <TextInput
+                placeholder="Placeholder"
+                errorPlacement="inside"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput errorMessage="Error message" validationState="invalid" />
+<TextInput errorPlacement="inside" errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Größe
 
@@ -57,9 +141,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – Wird auf Promo- und Landingpages verwendet.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" size="s" />
+            <TextInput placeholder="Placeholder" size="m" />
+            <TextInput placeholder="Placeholder" size="l" />
+            <TextInput placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput size="s" />
+<TextInput size="m" />
+<TextInput size="l" />
+<TextInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Label
 
@@ -68,9 +174,26 @@ Ermöglicht das Setzen eines Labels links vom Steuerelement.
 - Das Label nimmt die linkeste Position relativ zum Steuerelement ein. Das heißt, Elemente, die über die Eigenschaft `startContent` hinzugefügt werden, befinden sich rechts davon.
 - Das Label kann nicht mehr als die Hälfte der Breite des gesamten `TextInput`-Bereichs einnehmen.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" label="Label" />
+            <TextInput placeholder="Placeholder" label="Very long label with huge amount of symbols" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zusätzlicher Inhalt
 
@@ -78,17 +201,53 @@ GRAVITY_TRANSLATION_BLOCK_13_END
 
 Ermöglicht das Hinzufügen von Inhalten links vom Steuerelement (oder rechts bei Verwendung von [rtl](https://developer.mozilla.org/en-US/docs/Glossary/RTL)). Befindet sich links (oder rechts bei Verwendung von rtl) vom über die Eigenschaft `label` hinzugefügten Label.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Label, TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <TextInput
+            placeholder="Search"
+            label="Label"
+            startContent={<Label size="s">Left</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput startContent={<Label>Left</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Endinhalt
 
 Ermöglicht das Hinzufügen von Inhalten rechts vom Steuerelement (oder links bei Verwendung von [rtl](https://developer.mozilla.org/en-US/docs/Glossary/RTL)). Befindet sich rechts (oder links bei Verwendung von rtl) vom über die Eigenschaft `hasClear` hinzugefügten Lösch-Button.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Label, TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <TextInput
+            hasClear
+            placeholder="Placeholder"
+            endContent={<Label size="s">Right</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput endContent={<Label>Right</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

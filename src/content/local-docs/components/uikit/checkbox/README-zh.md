@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Checkbox
+
+<!--/GITHUB_BLOCK-->
+
 `Checkbox` 组件允许用户选中或取消选中特定值。
 
 ```tsx
@@ -12,25 +18,99 @@ import {Checkbox} from '@gravity-ui/uikit';
 - Disabled：复选框不可用。
 - Indeterminate：复选框处于勾选和未勾选之间的中间状态。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Checkbox size="l" checked={false}>Unchecked</Checkbox>
+            <Checkbox size="l" checked>Checked</Checkbox>
+            <Checkbox size="l" disabled>Disabled</Checkbox>
+            <Checkbox size="l" indeterminate>Indeterminate</Checkbox>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Checkbox size="l" checked={false}>Unchecked</Checkbox>
+<Checkbox size="l" checked>Checked</Checkbox>
+<Checkbox size="l" disabled>Disabled</Checkbox>
+<Checkbox size="l" indeterminate>Indeterminate</Checkbox>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 大小
 
 使用 `size` 属性来管理 `Checkbox` 的大小。默认大小为 `m`。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Checkbox size="m">M Size</Checkbox>
+            <Checkbox size="l">L Size</Checkbox>
+            <Checkbox size="xl">XL Size</Checkbox>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Checkbox size="m">M Size</Checkbox>
+<Checkbox size="l">L Size</Checkbox>
+<Checkbox size="xl">XL Size</Checkbox>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 标签
 
 您可以使用 `content` 属性为 `Checkbox` 分配标签，或者将其作为子属性提供。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Checkbox content="Content" size="l" />
+            <div style={{marginTop: 10}}>
+                <Checkbox size="l">
+                    <span>Content as children</span>
+                </Checkbox>
+            </div>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Checkbox content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Checkbox size="l">
+      <span>Content as children</span>
+    </Checkbox>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Pagination
+
+<!--/GITHUB_BLOCK-->
+
 `Pagination` renderiza controles de navegação de página — números de página com botões anterior/próximo e um seletor opcional de tamanho de página — usados para dividir listas ou tabelas longas em várias páginas.
 
 ```tsx
@@ -79,7 +85,6 @@ const pagination = (
 ```
 
 ## Propriedades
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nome            | Descrição                                                                                                                                      |            Tipo             |   Padrão    |
 | :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------: | :---------: |

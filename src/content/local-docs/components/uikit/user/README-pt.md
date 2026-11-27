@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# User
+
+<!--/GITHUB_BLOCK-->
 
 Este é um componente geral para exibir um avatar de usuário com um bloco de informações. Ele usa o componente [Avatar](../Avatar/README.md) para renderizar o avatar. Ele também pode aceitar um nó React personalizado como avatar.
 
@@ -10,7 +14,20 @@ import {User} from '@gravity-ui/uikit';
 
 O componente `User` possui as propriedades `name` e `description` para exibir um bloco de informações.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {User} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <User
+            avatar={{text: 'Charles Darwin', theme: 'brand'}}
+            name="Charles Darwin"
+            description="charles@mail.ai"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 ## Tamanho
 
@@ -18,7 +35,58 @@ Use a propriedade `size` para gerenciar o tamanho do `User`. O tamanho padrão �
 
 Esta propriedade também é fornecida ao componente `Avatar` interno.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {User} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="3xs"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="2xs"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="xs"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="s"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="m"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="l"
+            />
+            <User
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                name="Charles Darwin"
+                description="charles@mail.ai"
+                size="xl"
+            />
+        </>
+    );
+}
+SANDBOX-->
 
 ## Propriedades
 

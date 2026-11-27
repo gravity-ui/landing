@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Avatar
+
+<!--/GITHUB_BLOCK-->
+
 Ce composant est destiné au rendu des avatars. Il existe trois types d'avatars de base : image, icône et texte (initiales du nom). Tous ces types ont des propriétés spéciales pour configurer le comportement et l'apparence.
 
 ```tsx
@@ -10,27 +16,75 @@ import {Avatar} from '@gravity-ui/uikit';
 
 Ce composant peut être utilisé pour rendre des avatars à l'aide d'images. Pour fournir une image, utilisez la propriété `imgUrl`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return <Avatar imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352" size="l" />;
+}
+SANDBOX-->
 
 Vous pouvez également fournir la propriété `srcSet` pour charger des images de différentes tailles.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Avatar
+            imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352"
+            srcSet="https://loremflickr.com/57/43/cats?lock=2879400393572352 1x, https://loremflickr.com/131/98/cats?lock=4373954936438784 2x, https://loremflickr.com/164/123/cats?lock=3007328513163264 3x, https://loremflickr.com/225/169/cats?lock=8243879964835840 4x"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 Le composant `Avatar` possède la propriété `fallbackImgUrl` qui vous permet de fournir l'image affichée en cas d'erreur de chargement d'image, via le lien `imgUrl` (erreur CSP ou pas d'image d'origine).
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Avatar
+            imgUrl="random_link"
+            fallbackImgUrl="https://loremflickr.com/640/480/cats?lock=3552647338524672"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 ### Icône
 
 Ce composant peut être utilisé pour rendre des avatars à l'aide d'icônes. Utilisez la propriété `icon` pour fournir une icône, comme vous le feriez pour le composant `Icon`.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return <Avatar icon={GraduationCap} size="l" />;
+}
+SANDBOX-->
 
 ### Texte
 
 Ce composant peut être utilisé pour rendre des avatars à l'aide de texte. Utilisez la propriété `text` à cet effet. Le texte est rendu sous forme d'initiales (premières lettres de deux mots) ou simplement des deux premières lettres d'un seul mot.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" size="l" />
+            <Avatar text="Guardian" size="l" />
+        </>
+    );
+}
+SANDBOX-->
 
 ## Apparence
 
@@ -40,25 +94,82 @@ Le composant `Avatar` a des thèmes prédéfinis (`normal`, `brand`) et des vues
 
 Le thème par défaut est `normal` et la vue par défaut est `filled`.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar icon={GraduationCap} size="l" theme="normal" view="filled" />
+            <Avatar icon={GraduationCap} size="l" theme="brand" view="filled" />
+            <Avatar icon={GraduationCap} size="l" theme="normal" view="outlined" />
+            <Avatar icon={GraduationCap} size="l" theme="brand" view="outlined" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### Couleurs personnalisées
 
 Vous pouvez également fournir des couleurs personnalisées via les propriétés `backgroundColor`, `borderColor` et `color` (cette dernière ne fonctionne que pour les avatars icônes et texte). Ces couleurs ont une priorité plus élevée que les couleurs du thème.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar
+                text="Charles Darwin"
+                size="l"
+                backgroundColor="var(--g-color-base-danger-medium)"
+                color="var(--g-color-text-primary)"
+            />
+            <Avatar text="Charles Darwin" size="l" borderColor="var(--g-color-line-misc)" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### Taille
 
 Utilisez la propriété `size` pour gérer la taille de l'`Avatar`. La taille par défaut est `m`. Les valeurs possibles sont `3xs`, `2xs`, `xs`, `s`, `m`, `l` et `xl`.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" theme="brand" size="3xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="2xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="s" />
+            <Avatar text="Charles Darwin" theme="brand" size="m" />
+            <Avatar text="Charles Darwin" theme="brand" size="l" />
+            <Avatar text="Charles Darwin" theme="brand" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### Forme
 
 Utilisez la propriété `shape` pour gérer la forme de l'`Avatar`. La forme par défaut est `circle`. Les valeurs possibles sont `circle` et `square`.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" theme="brand" shape="circle" />
+            <Avatar text="Charles Darwin" theme="brand" shape="square" />
+        </>
+    );
+}
+SANDBOX-->
 
 ## Propriétés
 

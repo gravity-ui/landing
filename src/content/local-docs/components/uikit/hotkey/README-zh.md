@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Hotkey
+
+<!--/GITHUB_BLOCK-->
+
 您可以使用 `Hotkey` 组件来显示 Mac 和 PC 的键盘快捷键。
 
 ```tsx
@@ -18,9 +24,27 @@ import {Hotkey} from '@gravity-ui/uikit';
 
 `dark`: 当组件显示在深色背景上时使用。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Hotkey} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Hotkey view="light" value="mod+a mod+c mod+v" />
+            <Hotkey view="dark" value="mod+a mod+c mod+v" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Hotkey view="light" value="mod+a mod+c mod+v" />
+<Hotkey view="dark" value="mod+a mod+c mod+v" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Platform
 
@@ -30,9 +54,29 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 默认情况下，平台会自动检测。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Hotkey} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Hotkey value="mod+a mod+c mod+v" />
+            <Hotkey platform="pc" value="mod+a mod+c mod+v" />
+            <Hotkey platform="mac" value="mod+a mod+c mod+v" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Hotkey value="mod+a mod+c mod+v" />
+<Hotkey platform="pc" value="mod+a mod+c mod+v" />
+<Hotkey platform="mac" value="mod+a mod+c mod+v" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

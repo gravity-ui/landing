@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# NumberInput
+
+<!--/GITHUB_BLOCK-->
+
 `NumberInput` ist ein Textfeld zur Eingabe numerischer Werte, mit optionalen Schrittreglern, Min/Max-Grenzen und Wertformatierung.
 
 ```tsx
@@ -12,21 +18,60 @@ Die Darstellung von `NumberInput` wird durch die Eigenschaften `view` und `pin` 
 
 `normal` - die Hauptansicht von `NumberInput` (standardmäßig verwendet).
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <NumberInput placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - kann mit einem benutzerdefinierten Wrapper für `NumberInput` verwendet werden.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <NumberInput view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput view="normal" />
+<NumberInput view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 Ermöglicht die Steuerung der rechten und linken Kanten des Rahmens von `NumberInput`.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" pin="round-brick" />
+            <NumberInput placeholder="Placeholder" pin="brick-brick" />
+            <NumberInput placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput pin="round-brick" />
+<NumberInput pin="brick-brick" />
+<NumberInput pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zustände
 
@@ -34,18 +79,57 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 Der Zustand von `NumberInput`, bei dem der Benutzer nicht mit der Komponente interagieren kann.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <NumberInput placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Fehler
 
 Der Zustand von `NumberInput`, bei dem Sie eine falsche Benutzereingabe anzeigen möchten. Um die Darstellung von `NumberInput` zu ändern, verwenden Sie die Eigenschaft `validationState` mit dem Wert `"invalid"`. Eine optionale Nachricht kann über die Eigenschaft `errorMessage` hinzugefügt werden. Standardmäßig wird der Nachrichtentext außerhalb der Komponente gerendert.
 Dieses Verhalten kann mit der Eigenschaft `errorPlacement` geändert werden.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <NumberInput
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <NumberInput
+                placeholder="Placeholder"
+                errorPlacement="inside"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput errorMessage="Error message" validationState="invalid" />
+<NumberInput errorPlacement="inside" errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Größe
 
@@ -57,9 +141,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – Wird auf Promo- und Landingpages verwendet.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" size="s" />
+            <NumberInput placeholder="Placeholder" size="m" />
+            <NumberInput placeholder="Placeholder" size="l" />
+            <NumberInput placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput size="s" />
+<NumberInput size="m" />
+<NumberInput size="l" />
+<NumberInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Beschriftung
 
@@ -68,9 +174,29 @@ Ermöglicht das Setzen einer Beschriftung links vom Steuerelement.
 - Die Beschriftung befindet sich rechts von den Elementen, die über die Eigenschaft `startContent` hinzugefügt wurden.
 - Die Beschriftung kann nicht mehr als die Hälfte der Gesamtbreite des `NumberInput`-Bereichs einnehmen.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <NumberInput placeholder="Placeholder" label="Label" />
+            <NumberInput
+                placeholder="Placeholder"
+                label="Very long label with huge amount of symbols"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zusätzlicher Inhalt
 
@@ -78,25 +204,79 @@ GRAVITY_TRANSLATION_BLOCK_13_END
 
 Ermöglicht das Hinzufügen von Inhalten links vom Steuerelement. Befindet sich links von der Beschriftung, die über die Eigenschaft `label` hinzugefügt wurde.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Label, NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <NumberInput
+            placeholder="Search"
+            label="Label"
+            startContent={<Label size="s">Left</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput startContent={<Label>Left</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Endinhalt
 
 Ermöglicht das Hinzufügen von Inhalten rechts vom Steuerelement. Befindet sich rechts von der Schaltfläche zum Löschen, die über die Eigenschaft `hasClear` hinzugefügt wurde, und dem internen Fehler-Icon.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Label, NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <NumberInput
+            hasClear
+            placeholder="Placeholder"
+            endContent={<Label size="s">Right</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput endContent={<Label>Right</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Steuerelemente
 
 Die Sichtbarkeit von Inkrement-/Dekrement-Pfeiltasten an der rechtesten Position in der Komponente kann über die Eigenschaft `hiddenControls` gesteuert werden.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+export default function () {
+    return (
+        <>
+            <NumberInput />
+            <NumberInput hiddenControls />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput />
+<NumberInput hiddenControls />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Verhalten
 
@@ -104,9 +284,21 @@ GRAVITY_TRANSLATION_BLOCK_19_END
 
 Ermöglicht das Festlegen von minimalen und maximalen Werten, die in das Eingabefeld eingegeben werden können. Werte, die nicht in den definierten Bereich passen, werden beim Verlassen des Feldes auf den nächstgelegenen zulässigen Wert begrenzt.
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+export default function () {
+    return <NumberInput min={-100} max={100} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput min={-100} max={100} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Schrittweite
 
@@ -118,26 +310,74 @@ Dies schränkt auch die zulässigen Werte ein und ermöglicht das Begrenzen der 
 - Wenn die Schrittweite eine ganze Zahl ist und kein Minimalwert definiert ist, dann sind die zulässigen Werte als durch die Schrittweite teilbar definiert;
 - Wenn die Schrittweite oder der Minimalwert Dezimalzahlen sind, dann ist die Begrenzung nicht anwendbar.
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+export default function () {
+    return <NumberInput min={-10} step={4} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput min={-10} step={4} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Schritt-Multiplikator
 
 Ermöglicht das Festlegen des Werts, mit dem die Schrittweite multipliziert wird, wenn die Umschalttaste auf der Tastatur gedrückt wird, indem die Eigenschaft `shiftMultiplier` definiert wird.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+export default function () {
+    return (
+        <>
+            <NumberInput shiftMultiplier={50} />
+            <NumberInput shiftMultiplier={8} step={4} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput shiftMultiplier={50} />
+<NumberInput shiftMultiplier={8} step={4} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Einschränkung von Dezimalwerten
 
 Ermöglicht das Umschalten der Fähigkeit, nur Ganzzahlen oder auch Dezimalzahlen über die Eigenschaft `allowDecimal` einzugeben.
 Mit der Eigenschaft `allowDecimal={false}` wird ein in das Eingabefeld eingegebener Punkt ignoriert und eingefügte Dezimalwerte werden abgerundet.
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--SANDBOX
+import {NumberInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+export default function () {
+    return (
+        <>
+            <NumberInput allowDecimal />
+            <NumberInput allowDecimal={false} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<NumberInput allowDecimal />
+<NumberInput allowDecimal={false} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 
@@ -184,5 +424,3 @@ GRAVITY_TRANSLATION_BLOCK_27_END
 ## CSS API
 
 Die Komponente hat keine eigene CSS-API, aber sie erweitert die API der übergeordneten TextInput-Komponente.
-
-GRAVITY_TRANSLATION_BLOCK_1_END

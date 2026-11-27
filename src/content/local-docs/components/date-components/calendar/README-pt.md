@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Calendar
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {Calendar} from '@gravity-ui/date-components';
 ```
@@ -16,9 +22,29 @@ import {dateTimeParse} from '@gravity-ui/date-utils';
 
 Para controlar o tamanho do `Calendar`, use a propriedade `size`. O tamanho padrão é `m`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar size="m" />
+<Calendar size="l" />
+<Calendar size="xl" />
+`}
+>
+    <DateComponents.Calendar size="m" />
+    <DateComponents.Calendar size="l" />
+    <DateComponents.Calendar size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar size="m" />
+<Calendar size="l" />
+<Calendar size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valor
 
@@ -26,9 +52,23 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 A propriedade `minValue` permite que você especifique a data e hora mais cedo que pode ser inserida pelo usuário. Inversamente, a propriedade `maxValue` especifica a data e hora mais tarde que pode ser inserida. Todos os outros valores serão desabilitados para o usuário.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+`}
+>
+    <DateComponentsExamples.CalendarExample minValue={'01.01.2024'} maxValue={'01.01.2025'}/>
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Modo
 
@@ -44,9 +84,23 @@ Define o intervalo de tempo que o `Calendar` deve exibir. Com `mode`, você pode
 
 Você pode limitar os modos habilitados usando a prop `modes`.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar defaultMode="months"/>
+`}
+>
+    <DateComponents.Calendar defaultMode="months" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar defaultMode="months" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estados
 
@@ -54,25 +108,67 @@ GRAVITY_TRANSLATION_BLOCK_6_END
 
 O estado do `Calendar` onde você não quer que o usuário possa interagir com o componente.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar disabled={true} />
+`}
+>
+    <DateComponents.Calendar disabled={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar disabled={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Somente leitura
 
 `readOnly` é um atributo booleano que, quando definido como true, torna o componente `Calendar` imutável para o usuário. Isso significa que, embora a entrada exiba seu valor atual, os usuários não poderão alterá-lo.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar readOnly={true} />
+`}
+>
+    <DateComponents.Calendar readOnly={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar readOnly={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valor focado
 
 Permite selecionar a data em que a visualização do `Calendar` está focada. Se você precisar que seja controlado, deve usar a prop `focusedValue`. Você pode definir o valor focado inicial para um componente não controlado com a prop opcional `defaultFocusedValue`.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar defaultFocusedValue={dateTimeParse('01.01.2020')} />
+`}
+>
+    <DateComponentsExamples.CalendarExample defaultFocusedValue={'01.01.2020'} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar defaultFocusedValue={dateTimeParse('01.01.2020')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Fuso horário
 

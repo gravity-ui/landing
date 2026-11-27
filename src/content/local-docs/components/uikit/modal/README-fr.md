@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Modal
+
+<!--/GITHUB_BLOCK-->
 
 Le composant `Modal` sert de base pour créer des fenêtres contextuelles avec un arrière-plan au-dessus du reste du contenu d'une page.
 Il désactive le défilement lors de l'ouverture et gère le focus pour le contenu. Les composants enfants de `Modal` sont rendus à l'intérieur du composant [`Portal`](../Portal).
@@ -16,9 +20,9 @@ import {Button, Modal} from '@gravity-ui/uikit';
 
 const [open, setOpen] = useState(false);
 
-<Button onClick={() => setOpen(true)}>Ouvrir la modale</Button>
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => setOpen(false)}>
-    Contenu
+    Content
 </Modal>
 ```
 

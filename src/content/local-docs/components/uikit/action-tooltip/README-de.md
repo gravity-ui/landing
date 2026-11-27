@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# ActionTooltip
+
+<!--/GITHUB_BLOCK-->
+
 [`Tooltip`](../Tooltip/README.md) zur Beschriftung von Aktionsschaltflächen ohne beschreibenden Text (z. B. Symbolschaltflächen).
 
 ## Verwendung
@@ -5,8 +11,8 @@
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Aktion">
-  <div tabIndex={0}>Anker</div>
+<ActionTooltip title="Action">
+  <div tabIndex={0}>Anchor</div>
 </ActionTooltip>;
 ```
 
@@ -20,7 +26,7 @@ Alternativ können Sie eine Funktion als Kind übergeben, um `ref` und `props` m
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Aktion">
+<ActionTooltip title="Action">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```

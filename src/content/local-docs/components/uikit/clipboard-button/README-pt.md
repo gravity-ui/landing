@@ -1,12 +1,30 @@
+<!--GITHUB_BLOCK-->
+
+# ClipboardButton
+
+<!--/GITHUB_BLOCK-->
+
 `ClipboardButton` é um botão pronto para uso que copia o texto fornecido para a área de transferência e reproduz uma animação de sucesso. Ele combina [`CopyToClipboard`](../CopyToClipboard/README.md) (o comportamento de cópia) com [`ClipboardIcon`](../ClipboardIcon/README.md) (o ícone animado).
 
 ```tsx
 import {ClipboardButton} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {ClipboardButton} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <ClipboardButton text="Some text to copy" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ClipboardButton text="Some text to copy" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriedades
 

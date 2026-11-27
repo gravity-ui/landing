@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# RelativeDateField
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {RelativeDateField} from '@gravity-ui/date-components';

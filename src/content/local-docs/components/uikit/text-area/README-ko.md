@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# TextArea
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {TextArea} from '@gravity-ui/uikit';
 ```
@@ -12,21 +18,60 @@ import {TextArea} from '@gravity-ui/uikit';
 
 `normal` - `TextArea`의 기본 모양입니다 (기본값).
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
+
+export default function () {
+    return <TextArea placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - `TextArea`에 대한 사용자 정의 래퍼를 사용할 때 사용할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <TextArea view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea view="normal" />
+<TextArea view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 `TextArea` 테두리의 오른쪽 및 왼쪽 가장자리 모양을 제어할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <TextArea placeholder="Placeholder" pin="round-brick" />
+            <TextArea placeholder="Placeholder" pin="brick-brick" />
+            <TextArea placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea pin="round-brick" />
+<TextArea pin="brick-brick" />
+<TextArea pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 상태
 
@@ -34,18 +79,56 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 사용자가 컴포넌트와 상호 작용할 수 없도록 하려는 `TextArea`의 상태입니다.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <TextArea placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 잘못된 사용자 입력을 표시하려는 `TextArea`의 상태입니다. `TextArea`의 모양을 변경하려면 `validationState` 속성을 "invalid" 값으로 사용합니다.
 `errorMessage` 속성을 통해 선택적 메시지 텍스트를 추가할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <TextArea
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <TextArea
+                view="clear"
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 크기
 
@@ -57,24 +140,90 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – 프로모션 및 랜딩 페이지에 사용됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <TextArea placeholder="Placeholder" size="s" />
+            <TextArea placeholder="Placeholder" size="m" />
+            <TextArea placeholder="Placeholder" size="l" />
+            <TextArea placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea size="s" />
+<TextArea size="m" />
+<TextArea size="l" />
+<TextArea size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 행 관리
 
 `TextArea`의 행 수는 `rows`, `minRows` 및 `maxRows` 속성으로 제어됩니다. `rows` 속성은 자동 높이 계산을 비활성화합니다.
 `TextArea`의 원하는 높이를 설정하려면 `rows` 속성을 1로 설정한 `className` 또는 `style` 속성을 사용합니다.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <div>
+                rows = 2
+                <TextArea placeholder="Placeholder" rows={2} />
+            </div>
+            <div>
+                minRows = 2
+                <TextArea placeholder="Placeholder" minRows={2} />
+            </div>
+            <div>
+                maxRows = 2
+                <TextArea placeholder="Placeholder" maxRows={2} />
+            </div>
+            <div>
+                height = 200px
+                <TextArea placeholder="Placeholder" rows={1} style={{height: 200}} />
+            </div>
+        </>
+    );
+}
+SANDBOX-->
 
 ## 크기 조절 가능한 TextArea
 
 `controlProps` 속성에 `resize` 스타일을 제공하여 크기 조절 가능한 동작을 얻을 수 있습니다. 텍스트 영역 높이를 조절할 수 있도록 허용하는 경우 `rows` 속성을 지정해야 합니다. 그렇지 않으면 크기 조절이 자동 높이 계산과 충돌합니다.
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+export default function () {
+    return (
+        <TextArea
+            rows={4}
+            placeholder="Placeholder"
+            style={{width: 'auto', maxWidth: '100%'}}
+            controlProps={{style: {resize: 'both'}}}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea rows={4} controlProps={{style: {resize: 'both'}}} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

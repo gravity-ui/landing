@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# ClipboardIcon
+
+<!--/GITHUB_BLOCK-->
+
 `ClipboardIcon` é um ícone de cópia animado que reflete o estado da cópia (ocioso ou sucesso); ele deve ser usado dentro de `CopyToClipboard` ou `ClipboardButton`, em vez de ser usado sozinho.
 
 ```tsx
@@ -8,9 +14,29 @@ import {ClipboardIcon} from '@gravity-ui/uikit';
 
 Dependendo da propriedade `status`, o ícone mudará de acordo:
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {ClipboardIcon} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <ClipboardIcon size={24} />
+            <ClipboardIcon size={24} status="success" />
+            <ClipboardIcon size={24} status="error" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<CopyToClipboard text="Some text to copy" timeout={500}>
+  {(status) => <ClipboardIcon size={24} status={status} />}
+</CopyToClipboard>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriedades
 

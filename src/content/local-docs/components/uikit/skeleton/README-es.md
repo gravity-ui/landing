@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Skeleton
+
+<!--/GITHUB_BLOCK-->
+
 El componente Skeleton muestra una vista previa de marcador de posición de su contenido antes de que se carguen los datos. Esta vista previa se muestra para reducir la frustración por el tiempo de carga.
 
 ```tsx
@@ -37,13 +43,34 @@ Use la prop `size` para establecer una altura preestablecida del esqueleto (y an
 | `'l'`  | Grande       |
 | `'xl'` | Extra grande |
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Skeleton size="xs" width={120} />
+<Skeleton size="m"  width={200} />
+<Skeleton size="xl" width={280} />
+
+<Skeleton variant="circle" size="l" />
+<Skeleton variant="square" size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Marcador de posición de texto
 
 Use `variant="text"` para renderizar un esqueleto que hereda `font-size` y `line-height` del contexto padre. Coloque varios esqueletos dentro de un elemento `<Text variant="...">` para marcadores de posición de varias líneas.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={240} />
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 

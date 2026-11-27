@@ -1,22 +1,74 @@
+<!--GITHUB_BLOCK-->
+
+# TableColumnSetup
+
+<!--/GITHUB_BLOCK-->
+
 `TableColumnSetup` 组件提供了一个用户界面，用于配置表格列的可见性和顺序。它显示一个按钮，该按钮会打开一个包含可用列列表的弹出窗口，允许用户显示/隐藏列，并通过拖放来选择性地重新排序它们。
 
 ```tsx
 import {TableColumnSetup} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const items = [
+  {id: 'name', title: 'Name', selected: true, required: true},
+  {id: 'email', title: 'Email', selected: true},
+  {id: 'phone', title: 'Phone', selected: false},
+];
+
+<TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 可排序列
 
 通过将 `sortable` 属性设置为 `true` 来启用拖放功能，允许用户重新排序列。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            sortable
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup items={items} sortable onUpdate={(updatedItems) => console.log(updatedItems)} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 应用模式
 
@@ -25,25 +77,111 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 - `true` - 用户切换列时立即应用更改
 - `false` - 仅当用户单击“应用”按钮时才应用更改
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            hideApplyButton
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  hideApplyButton
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 状态显示
 
 通过启用 `showStatus` 属性，在切换器按钮中显示选定列的计数。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} showStatus onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  showStatus={true}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 自定义切换器
 
 使用 `renderSwitcher` 属性自定义触发按钮。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Button, TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            renderSwitcher={({onClick, onKeyDown}) => (
+                <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+                    Configure Columns
+                </Button>
+            )}
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  renderSwitcher={({onClick, onKeyDown}) => (
+    <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+      Configure Columns
+    </Button>
+  )}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

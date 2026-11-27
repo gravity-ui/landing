@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Hotkey
+
+<!--/GITHUB_BLOCK-->
+
 Você pode usar o componente `Hotkey` para exibir atalhos de teclado para Mac e PC.
 
 ```tsx
@@ -18,9 +24,27 @@ Você pode usar `mod` como uma abreviação para `cmd` no Mac e `ctrl` para outr
 
 `dark`: Usado se o componente for exibido em um fundo escuro.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Hotkey} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Hotkey view="light" value="mod+a mod+c mod+v" />
+            <Hotkey view="dark" value="mod+a mod+c mod+v" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Hotkey view="light" value="mod+a mod+c mod+v" />
+<Hotkey view="dark" value="mod+a mod+c mod+v" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Plataforma
 
@@ -30,9 +54,29 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 
 Por padrão, a plataforma é detectada automaticamente.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Hotkey} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <Hotkey value="mod+a mod+c mod+v" />
+            <Hotkey platform="pc" value="mod+a mod+c mod+v" />
+            <Hotkey platform="mac" value="mod+a mod+c mod+v" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Hotkey value="mod+a mod+c mod+v" />
+<Hotkey platform="pc" value="mod+a mod+c mod+v" />
+<Hotkey platform="mac" value="mod+a mod+c mod+v" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriedades
 

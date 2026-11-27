@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Alert
+
+<!--/GITHUB_BLOCK-->
+
 El componente `Alert` muestra un mensaje destacado para llamar la atención del usuario sobre información importante.
 
 ```tsx
@@ -20,9 +26,37 @@ import {Alert} from '@gravity-ui/uikit';
 
 `clear`: Sin estilos, adecuado para su uso en otros componentes (por ejemplo, como `content` en `Popover`)
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Alert theme="normal" title="Normal" message="Normal theme" />
+            <Alert theme="info" title="Info" message="Info theme" />
+            <Alert theme="success" title="Success" message="Success theme" />
+            <Alert theme="warning" title="Warning" message="Warning theme" />
+            <Alert theme="danger" title="Danger" message="Danger theme" />
+            <Alert theme="utility" title="Utility" message="Utility theme" />
+            <Alert theme="clear" title="Clear" message="Clear theme" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert theme="normal" title="Normal" message="Normal theme"/>
+<Alert theme="info" title="Info" message="Info theme"/>
+<Alert theme="success" title="Success" message="Success theme"/>
+<Alert theme="warning" title="Warning" message="Warning theme"/>
+<Alert theme="danger" title="Danger" message="Danger theme"/>
+<Alert theme="utility" title="Utility" message="Utility theme"/>
+<Alert theme="clear" title="Clear" message="Clear theme"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Vista
 
@@ -30,9 +64,27 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 
 `outlined`: Se usa para ajustar el color del borde de la alerta.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <Alert title="Filled" message="Filled view" view="filled" />
+            <Alert title="Outlined" message="Outlined theme" view="outlined" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```
+<Alert title="Filled" message="Filled view" view="filled" />
+<Alert title="Outlined" message="Outlined theme" view="outlined" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Diseño
 
@@ -40,9 +92,37 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 
 `horizontal`: Se usa para dirigir a los usuarios al contenido si hay una propiedad `actions` con botones. Permite mostrar los botones a la derecha del texto.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <Alert
+                layout="vertical"
+                title="Vertical"
+                message="Vertical direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                layout="horizontal"
+                title="Horizontal"
+                message="Horizontal direction"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert layout="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
+<Alert layout="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Esquinas
 
@@ -50,17 +130,47 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 `square`: Habilita esquinas cuadradas de la ventana de alerta.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <>
+            <Alert title="Rounded" message="Rounded corners" corners="rounded" />
+            <Alert title="Square" message="Square corners" corners="square" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert title="Rounded" message="Rounded corners" corners="rounded"/>
+<Alert title="Square" message="Square corners" corners="square"/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Título de la alerta
 
 `title`: Título de la alerta. Tiene una prioridad menor que `Alert.Title`.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return <Alert title={<Alert.Title className={'some-class'} text="some text" />} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert title={<Alert.Title className={'some-class'} text="some text"></Alert.Title>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Mensaje de la alerta
 
@@ -70,9 +180,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `onClose`: Función de callback que se llama cuando el usuario hace clic en el botón de cierre de la alerta. Cuando esta propiedad está definida, el botón de cierre será visible.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <Alert
+            onClose={() => alert('Close button pressed')}
+            title="Alert has close"
+            message="Alert has close"
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert
+  onClose={() => alert('Close button pressed')}
+  title="Alert has close"
+  message="Alert has close"
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Alineación
 
@@ -82,9 +214,39 @@ Determina cómo se alinea verticalmente el contenido dentro del componente `Aler
 
 `center`: El contenido se centra verticalmente dentro del componente `Alert`. Puede ser útil si las acciones ocupan más espacio que el texto, o si el icono debe estar en el medio del contenido.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Alert} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <Alert
+                align="baseline"
+                theme="info"
+                title="Baseline"
+                message="Baseline align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+            <Alert
+                align="center"
+                theme="info"
+                title="Center"
+                message="Center align"
+                actions={<Alert.Action>button</Alert.Action>}
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Alert align="vertical" title="Vertical" message="Vertical direction" actions={<Alert.Action>button</Alert.Action>}/>
+<Alert align="horizontal" title="Horizontal" message="Horizontal direction" actions={<Alert.Action>button</Alert.Action>}/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 

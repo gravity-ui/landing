@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Label
+
+<!--/GITHUB_BLOCK-->
 
 Sie können `Label`s zur Hervorhebung bestimmter Informationen verwenden. Ein `Label` mit der Schaltfläche `Close` oder `Copy` kann für verschiedene einfache Aktionen nützlich sein.
 
@@ -17,9 +21,39 @@ Ein `Label` kann in verschiedenen Stilen angezeigt werden.
 Verwenden Sie die Eigenschaft `theme`, um verschiedene Themen für verschiedene Status anzuwenden. Sie können die folgenden Werte verwenden: `normal`, `info`, `success`, `warning`, `danger`, `utility`, `unknown` und `clear`.
 Das Standardthema ist `normal`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Label} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Label theme="normal">Normal</Label>
+            <Label theme="info">Info</Label>
+            <Label theme="success">Success</Label>
+            <Label theme="warning">Warning</Label>
+            <Label theme="danger">Danger</Label>
+            <Label theme="utility">Utility</Label>
+            <Label theme="unknown">Unknown</Label>
+            <Label theme="clear">Clear</Label>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Label theme="normal">Normal</Label>
+<Label theme="info">Info</Label>
+<Label theme="success">Success</Label>
+<Label theme="warning">Warning</Label>
+<Label theme="danger">Danger</Label>
+<Label theme="utility">Utility</Label>
+<Label theme="unknown">Unknown</Label>
+<Label theme="clear">Clear</Label>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Typ
 
@@ -31,25 +65,104 @@ Die Eigenschaft `type` fügt einem `Label` verschiedene Optionen hinzu:
 
 `info`: Fügt dem Label ein Info-Symbol hinzu.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Label} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Label type="default" onClick={() => alert('On click label')} size="s">
+                Clickable
+            </Label>
+            <Label type="close" onCloseClick={() => alert('On click close')} size="s">
+                Closable
+            </Label>
+            <Label type="copy" copyText="Copy" onCopy={() => alert('On copy')} size="s">
+                Copy
+            </Label>
+            <Label type="info" size="s">Info</Label>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Label type="default" onClick={() => alert('On click label')} size="s">Clickable</Label>
+<Label type="close" onCloseClick={() => alert('On click close')} size="s">Closable</Label>
+<Label type="copy" copyText="Copy" onCopy={() => alert('On copy')} size="s">Copy</Label>
+<Label type="info" size="s">Info</Label>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Symbol
 
 Sie können ein Symbol mit der Eigenschaft `icon` hinzufügen. Verwenden Sie dazu die Komponente [`Icon`](../Icon), die ein spezieller Wrapper für SVGs ist.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Icon, Label} from '@gravity-ui/uikit';
+import {Gear} from '@gravity-ui/icons';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <>
+            <Label icon={<Icon size={16} data={Gear} />}>Icon</Label>
+            <Label type="close" icon={<Icon size={16} data={Gear} />}>Icon and close</Label>
+            <Label type="copy" icon={<Icon size={16} data={Gear} />}>Icon and copy</Label>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Label icon={<Icon size={16} data={GearIcon} />}>Icon</Label>
+<Label type="close" icon={<Icon size={16} data={GearIcon} />}>Icon and close</Label>
+<Label type="copy" icon={<Icon size={16} data={GearIcon} />}>Icon and copy</Label>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Wert
 
 Sie können `Label`s zur Anzeige von Schlüssel-Wert-Informationen verwenden. Dazu müssen Sie den Schlüssel der Eigenschaft `children` und den Wert `value` übergeben:
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Label} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <>
+            <Label theme="normal" value="Value">Key</Label>
+            <Label theme="info" value="Value">Key</Label>
+            <Label theme="success" value="Value">Key</Label>
+            <Label theme="warning" value="Value">Key</Label>
+            <Label theme="danger" value="Value">Key</Label>
+            <Label theme="utility" value="Value">Key</Label>
+            <Label theme="unknown" value="Value">Key</Label>
+            <Label theme="clear" value="Value">Key</Label>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Label theme="normal" value="Value">Key</Label>
+<Label theme="info" value="Value">Key</Label>
+<Label theme="success" value="Value">Key</Label>
+<Label theme="warning" value="Value">Key</Label>
+<Label theme="danger" value="Value">Key</Label>
+<Label theme="utility" value="Value">Key</Label>
+<Label theme="unknown" value="Value">Key</Label>
+<Label theme="clear" value="Value">Key</Label>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Status
 
@@ -59,15 +172,59 @@ Ein `label` kann verschiedene Status haben:
 - `interactive`: Macht das Label hoverbar.
 - `loading`: Zeigt einen Ladezustand an.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Label} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <>
+            <Label>Default</Label>
+            <Label disabled>Disabled</Label>
+            <Label interactive>Interactive</Label>
+            <Label loading>Loading</Label>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Label>Default</Label>
+<Label disabled>Disabled</Label>
+<Label interactive>Interactive</Label>
+<Label loading>Loading</Label>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Größe
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Label} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <>
+            <Label size="xxs">XXS size</Label>
+            <Label size="xs">XS size</Label>
+            <Label size="s">S size</Label>
+            <Label size="m">M size</Label>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Label size="xxs">XXS size</Label>
+<Label size="xs">XS size</Label>
+<Label size="s">S size</Label>
+<Label size="m">M size</Label>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

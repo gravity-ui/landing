@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Overlay
+
+<!--/GITHUB_BLOCK-->
+
 `Overlay` 组件会在父元素上渲染一个覆盖层，父元素需要设置 `position: relative`。
 例如，它可用于在加载数据时保持所需的布局。
 
@@ -22,7 +28,14 @@ import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 您可以使用 `base` 或 `float` 背景颜色。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Overlay background="base">
+<Overlay background="float">
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

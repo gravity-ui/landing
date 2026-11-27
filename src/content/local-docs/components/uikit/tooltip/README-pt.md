@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tooltip
+
+<!--/GITHUB_BLOCK-->
 
 Uma dica de texto simples que usa seu nó filho como âncora. Este componente aceita apenas conteúdo de texto e pode ser uma excelente
 alternativa ao atributo `title` do navegador, com seu pequeno tamanho e longo atraso de exibição.
@@ -8,8 +12,8 @@ alternativa ao atributo `title` do navegador, com seu pequeno tamanho e longo at
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Conteúdo">
-  <div tabIndex={0}>Âncora</div>
+<Tooltip content="Content">
+  <div tabIndex={0}>Anchor</div>
 </Tooltip>;
 ```
 
@@ -23,7 +27,7 @@ Alternativamente, você pode passar uma função como filho para fornecer `ref` 
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Conteúdo">
+<Tooltip content="Content">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```

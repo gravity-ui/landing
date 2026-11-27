@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toc
+
+<!--/GITHUB_BLOCK-->
 
 `Toc` 组件旨在显示页面的目录，即显示具有两个层级结构的条目。
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Button
+
+<!--/GITHUB_BLOCK-->
+
 Les boutons servent de déclencheur pour certaines actions. Bien que ce soit leur objectif principal, dans de très rares cas, ils peuvent être utilisés comme liens pour naviguer vers d'autres pages.
 
 ```tsx
@@ -18,9 +24,29 @@ Nous recommandons d'utiliser un seul bouton de ce type par page.
 
 `raised` : Placé au-dessus du contenu comme un élément flottant, généralement avec un emplacement fixe.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit'
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Button view="action" size="l">Action</Button>
+            <Button view="normal" size="l">Normal</Button>
+            <Button view="raised" size="l">Raised</Button>
+        </>
+    )
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button view="action" size="l">Action</Button>
+<Button view="normal" size="l">Normal</Button>
+<Button view="raised" size="l">Raised</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Contourné
 
@@ -30,9 +56,37 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 
 Ce type a également des variations sémantiques qui peuvent être utilisées lorsque des sémantiques supplémentaires sont nécessaires : `outlined-info`, `outlined-success`, `outlined-warning` et `outlined-danger`.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <Button view="outlined" size="l">Outlined</Button>
+            <Button view="outlined-action" size="l">Outlined Action</Button>
+            <Button view="outlined-info" size="l">Outlined Info</Button>
+            <Button view="outlined-success" size="l">Outlined Success</Button>
+            <Button view="outlined-warning" size="l">Outlined Warning</Button>
+            <Button view="outlined-danger" size="l">Outlined Danger</Button>
+            <Button view="outlined-utility" size="l">Outlined Utility</Button>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button view="outlined" size="l">Outlined</Button>
+<Button view="outlined-action" size="l">Outlined Action</Button>
+<Button view="outlined-info" size="l">Outlined Info</Button>
+<Button view="outlined-success" size="l">Outlined Success</Button>
+<Button view="outlined-warning" size="l">Outlined Warning</Button>
+<Button view="outlined-danger" size="l">Outlined Danger</Button>
+<Button view="outlined-utility" size="l">Outlined Utility</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Plat
 
@@ -44,25 +98,131 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 
 Il a également des variations sémantiques qui peuvent être utilisées lorsque des sémantiques supplémentaires sont nécessaires : `outlined-info`, `outlined-success`, `outlined-warning` et `outlined-danger`.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <Button view="flat" size="l">Flat</Button>
+            <Button view="flat-action" size="l">Flat Action</Button>
+            <Button view="flat-info" size="l">Flat Info</Button>
+            <Button view="flat-success" size="l">Flat Success</Button>
+            <Button view="flat-warning" size="l">Flat Warning</Button>
+            <Button view="flat-danger" size="l">Flat Danger</Button>
+            <Button view="flat-utility" size="l">Flat Utility</Button>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button view="flat" size="l">Flat</Button>
+<Button view="flat-secondary" size="l">Flat Secondary</Button>
+<Button view="flat-action" size="l">Flat Action</Button>
+<Button view="flat-info" size="l">Flat Info</Button>
+<Button view="flat-success" size="l">Flat Success</Button>
+<Button view="flat-warning" size="l">Flat Warning</Button>
+<Button view="flat-danger" size="l">Flat Danger</Button>
+<Button view="flat-utility" size="l">Flat Utility</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Contrasté
 
 Les boutons `normal-contrast`, `outline-contrast` et `flat-contrast` mettent en évidence les actions sur un arrière-plan complexe, par exemple dans une bannière, ou sur un arrière-plan inversé.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit'
+import {type CSSProperties} from 'react';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+const containerStyle: CSSProperties = {
+    display: 'flex',
+    gap: 16,
+    backgroundColor: 'rgb(68, 38, 204)',
+    padding: '20px',
+    borderRadius: '8px'
+}
+
+export default function () {
+    return (
+        <div style={containerStyle}>
+            <Button view="normal-contrast" size="l">Normal Contrast</Button>
+            <Button view="outlined-contrast" size="l">Outlined Contrast</Button>
+            <Button view="flat-contrast" size="l">Flat Contrast</Button>
+        </div>
+    )
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button view="normal-contrast" size="l">Normal Contrast</Button>
+<Button view="outlined-contrast" size="l">Outlined Contrast</Button>
+<Button view="flat-contrast" size="l">Flat Contrast</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Icônes
 
 Pour ajouter une icône à un `Button`, utilisez le composant [`Icon`](../Icon), qui est un wrapper spécial pour les SVGs.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Gear} from '@gravity-ui/icons';
+import {Button, Icon} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <Button view="outlined" size="l">
+                <Icon data={Gear} size={18} />
+                Start
+            </Button>
+            <Button view="outlined" size="l">
+                End
+                <Icon data={Gear} size={18} />
+            </Button>
+            <Button view="outlined" size="l">
+                <Icon data={Gear} size={18} />
+                Both
+                <Icon data={Gear} size={18} />
+            </Button>
+            <Button view="outlined" size="l">
+                <Icon data={Gear} size={18} />
+            </Button>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button view="outlined" size="l">
+    <Icon data={Gear} size={18} />
+    Start
+</Button>
+<Button view="outlined" size="l">
+    End
+    <Icon data={Gear} size={18} />
+</Button>
+<Button view="outlined" size="l">
+    <Icon data={Gear} size={18} />
+    Both
+    <Icon data={Gear} size={18} />
+</Button>
+<Button view="outlined" size="l">
+    No text:
+    <Icon data={Gear} size={18} />
+</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## États
 
@@ -74,25 +234,87 @@ Un `Button` peut avoir différents états :
 
 `selected` : Lorsque l'utilisateur peut **activer** et **désactiver** le bouton.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <Button size="l" disabled>Disabled</Button>
+            <Button size="l" loading>Loading</Button>
+            <Button size="l" selected>Selected</Button>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button size="l" disabled>Disabled</Button>
+<Button size="l" loading>Loading</Button>
+<Button size="l" selected>Selected</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Déclencheur de menu
 
 Le `Button` modifie automatiquement son apparence lorsque les attributs aria correspondants (`aria-haspopup`, `aria-expanded`) sont passés :
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <Button aria-haspopup="menu" aria-expanded="true">Menu</Button>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button aria-haspopup="menu" aria-expanded="true">
+  Menu
+</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Taille
 
 Utilisez la propriété `size` pour gérer la taille du `Button`. La taille par défaut est `m`.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <>
+            <Button size="xs">XS Size</Button>
+            <Button size="s">S Size</Button>
+            <Button size="m">M Size</Button>
+            <Button size="l">L Size</Button>
+            <Button size="xl">XL Size</Button>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Button size="xs">XS Size</Button>
+<Button size="s">S Size</Button>
+<Button size="m">M Size</Button>
+<Button size="l">L Size</Button>
+<Button size="xl">XL Size</Button>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Largeur
 
@@ -102,7 +324,53 @@ Utilisez la propriété `width` pour gérer la façon dont le `Button` se compor
 
 `max` : Fait correspondre la largeur du `Button` à la largeur du conteneur parent, en masquant également le contenu qui dépasse avec des points de suspension.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const containerStyle: CSSProperties = {
+    width: 100,
+    border: '2px dashed gray',
+};
+
+const titleStyle: CSSProperties = {
+    textAlign: 'center',
+};
+
+export default function () {
+    return (
+        <>
+            <div style={containerStyle}>
+                <h4 style={titleStyle}>Default</h4>
+                <p>
+                    <Button>Text</Button>
+                </p>
+                <p>
+                    <Button>Very Long Text</Button>
+                </p>
+            </div>
+            <div style={containerStyle}>
+                <h4 style={titleStyle}>Auto</h4>
+                <p>
+                    <Button width="auto">Text</Button>
+                </p>
+                <p>
+                    <Button width="auto">Very Long Text</Button>
+                </p>
+            </div>
+            <div style={containerStyle}>
+                <h4 style={titleStyle}>Max</h4>
+                <p>
+                    <Button width="max">Text</Button>
+                </p>
+                <p>
+                    <Button width="max">Very Long Text</Button>
+                </p>
+            </div>
+        </>
+    );
+}
+SANDBOX-->
 
 ## Broche
 
@@ -110,9 +378,53 @@ La propriété `pin` vous permet de gérer la forme des bords _début_ et _fin_ 
 La valeur de la propriété `pin` se compose des noms de style _début_ et _fin_ séparés par un trait d'union, par exemple `round-brick`.
 Les styles de bord sont : `round` (par défaut), `circle`, `brick` et `clear`.
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--SANDBOX
+import {Button} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+export default function () {
+    return (
+        <>
+            <div>
+                <Button view="action" size="l" pin="round-clear">Create</Button>
+                <Button view="action" size="l" pin="brick-round">...</Button>
+            </div>
+            <div>
+                <Button view="normal" size="l" pin="circle-clear">Start</Button>
+                <Button view="normal" size="l" pin="brick-brick" selected>Center</Button>
+                <Button view="normal" size="l" pin="clear-circle">End</Button>
+            </div>
+            <div>
+                <Button view="outlined" pin="brick-clear">1</Button>
+                <Button view="outlined" pin="clear-clear">2</Button>
+                <Button view="outlined" pin="clear-clear">3</Button>
+                <Button view="outlined" pin="clear-brick">4</Button>
+            </div>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+    <Button view="action" size="l" pin="round-brick">Create</Button>
+    <Button view="action" size="l" pin="brick-round">...</Button>
+</div>
+<div>
+    <Button view="normal" size="l" pin="circle-clear">Start</Button>
+    <Button view="normal" size="l" pin="brick-brick" selected>Center</Button>
+    <Button view="normal" size="l" pin="clear-circle">End</Button>
+</div>
+<div>
+    <Button view="outlined" pin="brick-clear">1</Button>
+    <Button view="outlined" pin="clear-clear">2</Button>
+    <Button view="outlined" pin="clear-clear">3</Button>
+    <Button view="outlined" pin="clear-brick">4</Button>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

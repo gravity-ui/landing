@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Overlay
+
+<!--/GITHUB_BLOCK-->
+
 El componente `Overlay` renderiza una superposición sobre el elemento padre con posición relativa, es decir, el elemento padre debe tener `position` establecido en `relative`.
 Por ejemplo, se puede utilizar para preservar el diseño deseado mientras se cargan datos.
 
@@ -9,7 +15,7 @@ import {Overlay} from '@gravity-ui/uikit';
 import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 <Box position="relative">
-  <div>Algún contenido para ocultar bajo la superposición</div>
+  <div>Some content to hide under overlay</div>
   <Overlay visible={loading}>
     <Loader />
   </Overlay>
@@ -22,7 +28,14 @@ import {Box, Overlay, Loader} from '@gravity-ui/uikit';
 
 Puedes usar colores de fondo `base` o `float`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Overlay background="base">
+<Overlay background="float">
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 

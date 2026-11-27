@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toc
+
+<!--/GITHUB_BLOCK-->
 
 El componente `Toc` está diseñado para mostrar una tabla de contenidos de la página, mostrando una lista de elementos con dos niveles de jerarquía.
 

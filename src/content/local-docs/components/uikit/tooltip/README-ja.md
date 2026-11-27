@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tooltip
+
+<!--/GITHUB_BLOCK-->
 
 子ノードをアンカーとして使用するシンプルなテキストチップです。このコンポーネントはテキストコンテンツのみを受け入れ、ブラウザの `title` 属性の代替として、サイズが小さく表示遅延が長いため、優れた選択肢となる可能性があります。
 
@@ -7,8 +11,8 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="コンテンツ">
-  <div tabIndex={0}>アンカー</div>
+<Tooltip content="Content">
+  <div tabIndex={0}>Anchor</div>
 </Tooltip>;
 ```
 
@@ -21,7 +25,7 @@ import {Tooltip} from '@gravity-ui/uikit';
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="コンテンツ">
+<Tooltip content="Content">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```

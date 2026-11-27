@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Pagination
+
+<!--/GITHUB_BLOCK-->
 
 `Pagination` rendert Navigationssteuerelemente — Seitenzahlen mit Vorwärts-/Rückwärts-Schaltflächen und einem optionalen Seitengrößenwähler — die zum Aufteilen langer Listen oder Tabellen über mehrere Seiten verwendet werden.
 

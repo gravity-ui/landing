@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Menu
+
+<!--/GITHUB_BLOCK-->
+
 Le composant `Menu` permet de créer facilement des vues pour des listes d'actions.
 
 ```tsx
@@ -6,17 +12,94 @@ import {Menu} from '@gravity-ui/uikit';
 
 Il dispose de composants dédiés pour les éléments (`Menu.Item`) et les groupes (`Menu.Group`). Vous pouvez les combiner pour créer des menus plus complexes.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item>First</Menu.Item>
+            <Menu.Item>Second</Menu.Item>
+            <Menu.Group label="Group">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item>First</Menu.Item>
+  <Menu.Item>Second</Menu.Item>
+  <Menu.Group label="Group">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Taille
 
 Cette propriété est utilisée pour sélectionner la taille du menu. La valeur par défaut est `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Menu size="s">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+            <Menu size="m">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+            <Menu size="l">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+            <Menu size="xl">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu size="s">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+
+<Menu size="m">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+
+<Menu size="l">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+
+<Menu size="xl">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 
@@ -36,25 +119,105 @@ Cette propriété est utilisée pour rendre les éléments du menu.
 
 Utilisez la propriété `iconStart` ou `iconEnd` pour afficher une icône au début ou à la fin d'un élément de menu :
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Gear, TriangleExclamation} from '@gravity-ui/icons';
+import {Icon, Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <>
+            <Menu>
+                <Menu.Item iconStart={<Icon size={16} data={Gear} />}>Item with icon</Menu.Item>
+                <Menu.Item>Item without icon</Menu.Item>
+            </Menu>
+            <Menu>
+                <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>
+                    Item with icon
+                </Menu.Item>
+                <Menu.Item>Item without icon</Menu.Item>
+            </Menu>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item iconStart={<Icon size={16} data={GearIcon} />}>Item with icon</Menu.Item>
+  <Menu.Item>Item without icon</Menu.Item>
+</Menu>
+```
+
+```tsx
+<Menu>
+  <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>Item with icon</Menu.Item>
+  <Menu.Item>Item without icon</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### États
 
 En utilisant cette propriété, vous pouvez activer ou désactiver (griser) des éléments de menu spécifiques :
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item disabled>First</Menu.Item>
+            <Menu.Item>Second</Menu.Item>
+            <Menu.Item selected>Third</Menu.Item>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item disabled>First</Menu.Item>
+  <Menu.Item>Second</Menu.Item>
+  <Menu.Item selected>Third</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Thème
 
 Cela vous permet de changer le thème de l'élément de menu. Le thème par défaut est `normal`.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item theme="danger">First</Menu.Item>
+            <Menu.Item theme="normal">Second</Menu.Item>
+            <Menu.Item>Third</Menu.Item>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item theme="danger">First</Menu.Item>
+  <Menu.Item theme="normal">Second</Menu.Item>
+  <Menu.Item>Third</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Propriétés
 
@@ -82,9 +245,55 @@ GRAVITY_TRANSLATION_BLOCK_10_END
 
 Vous pouvez regrouper des éléments par thèmes au sein d'un même menu :
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item>First</Menu.Item>
+            <Menu.Group label="Group One">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+            <Menu.Group label="Group Two">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+            <Menu.Item>Middle</Menu.Item>
+            <Menu.Group label="Group Three">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+            <Menu.Item>Last</Menu.Item>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item>First</Menu.Item>
+  <Menu.Group label="Group One">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+  <Menu.Group label="Group Two">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+  <Menu.Item>Middle</Menu.Item>
+  <Menu.Group label="Group Three">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+  <Menu.Item>Last</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Propriétés
 

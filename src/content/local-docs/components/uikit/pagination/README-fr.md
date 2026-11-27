@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Pagination
+
+<!--/GITHUB_BLOCK-->
 
 `Pagination` affiche des contrôles de navigation de page — numéros de page avec des boutons précédent/suivant et un sélecteur de taille de page optionnel — utilisés pour diviser de longues listes ou tables sur plusieurs pages.
 

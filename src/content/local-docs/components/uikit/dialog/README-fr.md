@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Dialog
+
+<!--/GITHUB_BLOCK-->
 
 `Dialog` est une fenêtre modale avec un titre, un corps et des actions de pied de page, utilisée pour les confirmations, les formulaires et les invites. Elle est construite sur `Modal`.
 
@@ -20,13 +24,13 @@ const dialogTitleId = 'app-confirmation-dialog-title';
   }}
   aria-labelledby={dialogTitleId}
 >
-  <Dialog.Header caption="Légende" id={dialogTitleId} />
+  <Dialog.Header caption="Caption" id={dialogTitleId} />
   <Dialog.Body>Dialog.Body</Dialog.Body>
   <Dialog.Footer
     onClickButtonCancel={() => setOpen(false)}
     onClickButtonApply={() => alert('onApply')}
-    textButtonApply="Appliquer"
-    textButtonCancel="Annuler"
+    textButtonApply="Apply"
+    textButtonCancel="Cancel"
   />
 </Dialog>;
 ```

@@ -1,13 +1,65 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tabs components
+
+<!--/GITHUB_BLOCK-->
+
 Die Tabs-Komponente wird verwendet, um Inhalte zu erkunden, zu organisieren und zwischen verschiedenen Ansichten zu wechseln.
 
 ```tsx
 import {TabProvider, TabList, Tab, TabPanel} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {useState} from 'react';
+import {Tab, TabList, TabPanel, TabProvider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    const [activeTab, setActiveTab] = useState('second');
+
+    return (
+        <TabProvider value={activeTab} onUpdate={setActiveTab}>
+            <TabList>
+                <Tab value="first">First Tab</Tab>
+                <Tab value="second">Active Tab</Tab>
+                <Tab value="third" disabled>
+                    Disabled Tab
+                </Tab>
+            </TabList>
+            <div>
+                <TabPanel value="first">First Panel</TabPanel>
+                <TabPanel value="second">Second Panel</TabPanel>
+                <TabPanel value="third">Third Panel</TabPanel>
+            </div>
+        </TabProvider>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const [activeTab, setActiveTab] = React.useState('second');
+
+return (
+  <TabProvider value={activeTab} onUpdate={setActiveTab}>
+    <TabList>
+      <Tab value="first">First Tab</Tab>
+      <Tab value="second">Active Tab</Tab>
+      <Tab value="third" disabled>
+        Disabled Tab
+      </Tab>
+    </TabList>
+    <div>
+      <TabPanel value="first">First Panel</TabPanel>
+      <TabPanel value="second">Second Panel</TabPanel>
+      <TabPanel value="third">Third Panel</TabPanel>
+    </div>
+  </TabProvider>
+);
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Komponenten
 
@@ -36,9 +88,47 @@ Komponente, die als Container für eine Reihe von `tabs` dient.
 
 Um die Größe der `tabs` zu steuern, verwenden Sie die Eigenschaft `size`. Die Standardgröße ist `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <TabList value="second" size="m">
+                <Tab value="first">M Size first</Tab>
+                <Tab value="second">M Size second</Tab>
+            </TabList>
+            <TabList value="second" size="l">
+                <Tab value="first">L Size first</Tab>
+                <Tab value="second">L Size second</Tab>
+            </TabList>
+            <TabList value="second" size="xl">
+                <Tab value="first">XL Size first</Tab>
+                <Tab value="second">v Size second</Tab>
+            </TabList>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="second" size="m">
+    <Tab value="first">M Size first</Tab>
+    <Tab value="second">M Size second</Tab>
+</TabList>
+<TabList value="second" size="l">
+    <Tab value="first">L Size first</Tab>
+    <Tab value="second">L Size second</Tab>
+</TabList>
+<TabList value="second" size="xl">
+    <Tab value="first">XL Size first</Tab>
+    <Tab value="second">v Size second</Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Eigenschaften
 
@@ -64,41 +154,178 @@ Diese Komponente wird zum Rendern von Tab-Elementen verwendet.
 
 Wird verwendet, wenn Sie ein Symbol für ein Tab-Element anzeigen möchten.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Gear} from '@gravity-ui/icons';
+import {Icon, Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first" icon={<Icon size={16} data={Gear} />}>
+                Tab with icon
+            </Tab>
+            <Tab value="second">Tab without icon</Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first" icon={<Icon size={16} data={GearIcon} />}>
+    Tab with icon
+  </Tab>
+  <Tab value="second">Tab without icon</Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Zustände
 
 Das Tab-Element hat eine Deaktivierungsflagge.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first">First Tab</Tab>
+            <Tab value="second" disabled>
+                Disabled Tab
+            </Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first">First Tab</Tab>
+  <Tab value="second" disabled>
+    Disabled Tab
+  </Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Zähler
 
 Wird verwendet, wenn Sie eine Zahl für ein Tab-Element anzeigen möchten.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first" counter={13}>
+                First Tab
+            </Tab>
+            <Tab value="second" counter={3}>
+                Second Tab
+            </Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first" counter={13}>
+    First Tab
+  </Tab>
+  <Tab value="second" counter={3}>
+    Second Tab
+  </Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Beschriftung
 
 Wird verwendet, wenn Sie eine Beschriftung für ein Tab-Element anzeigen möchten.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first" label={{content: 'Label 1'}}>
+                First Tab
+            </Tab>
+            <Tab value="second" label={{content: 'Label 2'}}>
+                Second Tab
+            </Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first" label={{content: 'Label 1'}}>
+    First Tab
+  </Tab>
+  <Tab value="second" label={{content: 'Label 2'}}>
+    Second Tab
+  </Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Überlauf des Inhalts
 
 Wird verwendet, wenn Sie Tab-Elemente einklappen möchten.
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
+    <Tab value="first">First Tab</Tab>
+    <Tab value="second">Second Tab</Tab>
+    <Tab value="third">Third Tab</Tab>
+    <Tab value="fourth">Fourth Tab</Tab>
+    <Tab value="fifth">Fifth Tab</Tab>
+</TabList>
+`}
+>
+    <UIKit.TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
+        <UIKit.Tab value="first">First Tab</UIKit.Tab>
+        <UIKit.Tab value="second">Second Tab</UIKit.Tab>
+        <UIKit.Tab value="third">Third Tab</UIKit.Tab>
+        <UIKit.Tab value="fourth">Fourth Tab</UIKit.Tab>
+        <UIKit.Tab value="fifth">Fifth Tab</UIKit.Tab>
+    </UIKit.TabList>
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
+  <Tab value="first">First Tab</Tab>
+  <Tab value="second">Second Tab</Tab>
+  <Tab value="third">Third Tab</Tab>
+  <Tab value="fourth">Fourth Tab</Tab>
+  <Tab value="fifth">Fifth Tab</Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Eigenschaften
 

@@ -1,10 +1,24 @@
+<!--GITHUB_BLOCK-->
+
+# Disclosure
+
+<!--/GITHUB_BLOCK-->
+
 `Disclosure` 是一个可折叠组件，允许显示和隐藏其嵌套内容。
 
 ```tsx
 import {Disclosure} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+## Base example
+
+```tsx
+<Disclosure summary="Summary">Content</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 控制展开状态
 
@@ -12,17 +26,73 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 
 受控组件示例：
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" defaultExpanded>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+function ControlledDisclosure() {
+  const [expanded, setExpanded] = React.useState(true);
+
+  return (
+    <Disclosure summary="Summary" expanded={expanded} onUpdate={setExpanded}>
+      Content
+    </Disclosure>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 大小
 
 使用 `size` 属性来控制 `Disclosure` 的大小。默认大小为 `m`。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Middle size" size="m">
+                Content
+            </Disclosure>
+            <Disclosure summary="Large size" size="l">
+                Content
+            </Disclosure>
+            <Disclosure summary="Extra large size" size="xl">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Middle size" size="m">
+  Content
+</Disclosure>
+<Disclosure summary="Large size" size="l">
+  Content
+</Disclosure>
+<Disclosure summary="Extra large size" size="xl">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 箭头位置
 
@@ -30,25 +100,135 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 
 `end`: 箭头位于标题的末尾。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Disclosure, Flex} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure summary="Summary with start arrow" arrowPosition="start">
+                Content
+            </Disclosure>
+            <Disclosure summary="Summary with end arrow" arrowPosition="end">
+                Content
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary with start arrow" arrowPosition="start">
+  Content
+</Disclosure>
+<Disclosure summary="Summary with end arrow" arrowPosition="end">
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 自定义内容
 
 使用 `Disclosure.Summary` 组件创建自定义标题，并使用 `Disclosure.Details` 来填充自定义内容。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Check} from '@gravity-ui/icons';
+import {Button, Disclosure, Flex, Icon} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <Flex gap={4} alignItems="center">
+            <Disclosure>
+                <Disclosure.Summary>
+                    {(props) => (
+                        <Button {...props}>
+                            <Icon data={Check} size={14} />
+                            Custom summary
+                            <Icon data={Check} size={14} />
+                        </Button>
+                    )}
+                </Disclosure.Summary>
+                <div>Custom details</div>
+                <div>More custom details</div>
+            </Disclosure>
+            <Disclosure summary="Summary">
+                <Disclosure.Summary>
+                    {(_props, defaultButton) => (
+                        <Flex gap={4}>
+                            {defaultButton}
+                            <Icon data={Check} size={14} />
+                        </Flex>
+                    )}
+                </Disclosure.Summary>
+                <Disclosure.Details>Custom Details</Disclosure.Details>
+            </Disclosure>
+        </Flex>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(props) => (
+      <Button {...props}>
+        <Icon data={Check} size={14} />
+        Custom summary
+        <Icon data={Check} size={14} />
+      </Button>
+    )}
+  </Disclosure.Summary>
+  <div>Custom details</div>
+  <div>More custom details</div>
+</Disclosure>
+```
+
+```tsx
+<Disclosure>
+  <Disclosure.Summary>
+    {(_props, defaultButton) => (
+      <Flex gap={4}>
+        {defaultButton}
+        <Icon data={Check} size={14} />
+      </Flex>
+    )}
+  </Disclosure.Summary>
+  <Disclosure.Details>Custom Details</Disclosure.Details>
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 禁用状态
 
 可以使用 `disabled` 属性禁用 `Disclosure`。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Disclosure} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <Disclosure summary="Summary" disabled>
+            Content
+        </Disclosure>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Disclosure summary="Summary" disabled>
+  Content
+</Disclosure>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 
@@ -77,7 +257,6 @@ GRAVITY_TRANSLATION_BLOCK_10_END
 | qa       | 测试标识符                            | `string`                                        | `disclosure-summary` |
 
 ### Disclosure.Details
-GRAVITY_TRANSLATION_BLOCK_11_END
 
 | 名称     | 描述         | 类型              | 默认值           |
 | :------- | :----------- | :---------------- | :--------------- |

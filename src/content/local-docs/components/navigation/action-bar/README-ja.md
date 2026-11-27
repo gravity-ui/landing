@@ -1,8 +1,46 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# ActionBar
+
+<!--/GITHUB_BLOCK-->
 
 このコンポーネントは、アプリケーション内でナビゲーション要素、アクション、および情報コンテンツを整理するための標準化されたレイアウトを提供する柔軟な水平バーです。パンくずリスト、ボタン、ドロップダウンメニューなどのUI要素を定義済みのセクションやグループに整理するためのコンテナとして機能します。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+## Usage
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group>
+          <ActionBar.Item>
+            <LegacyBreadcrumbs
+              lastDisplayedItemsCount={1}
+              firstDisplayedItemsCount={1}
+              items={[{text: 'Root Item', action() {}}]}
+            />
+          </ActionBar.Item>
+        </ActionBar.Group>
+
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 `ActionBar` は、構造化されたレイアウトを作成するために連携するいくつかのネストされたコンポーネントを提供します: `ActionBar.Section`、`ActionBar.Group`、`ActionBar.Item`、`ActionBar.Separator`。
 
@@ -29,7 +67,40 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | style     | HTML `style` 属性                        |   `React.CSSProperties`    |              |
 | qa        | テストに使用される `data-qa` HTML 属性     |          `string`          |              |
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+<ActionBar aria-label="Actions bar">
+  <ActionBar.Section type="secondary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <Button>Toggle Article TOC</Button>
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+
+  <ActionBar.Section type="primary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <LegacyBreadcrumbs
+          lastDisplayedItemsCount={1}
+          firstDisplayedItemsCount={1}
+          items={[
+            {text: 'Wiki Main Page', action() {}},
+            {text: 'Wiki Article', action() {}},
+          ]}
+        />
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+</ActionBar>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ActionBar.Group
 
@@ -62,4 +133,34 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 グループ内の項目を視覚的に区切るために配置できる視覚的な区切り線。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+### Example
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+
+          <ActionBar.Separator />
+
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->

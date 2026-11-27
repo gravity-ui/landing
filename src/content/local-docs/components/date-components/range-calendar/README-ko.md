@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# RangeCalendar
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {RangeCalendar} from '@gravity-ui/date-components';
 ```
@@ -12,15 +18,40 @@ import {RangeCalendar} from '@gravity-ui/date-components';
 import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--LANDING_BLOCK
+
+> [!NOTE]
+> Row with "Selected range: ..." is not a part of the component. It was added to examples only for clarity.
+
+LANDING_BLOCK-->
 
 ## 크기
 
 `RangeCalendar`의 크기를 제어하려면 `size` 속성을 사용하십시오. 기본 크기는 `m`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar size="m" />
+<RangeCalendar size="l" />
+<RangeCalendar size="xl" />
+`}
+>
+    <DateComponentsExamples.RangeCalendarExample size="m" />
+    <DateComponentsExamples.RangeCalendarExample size="l" />
+    <DateComponentsExamples.RangeCalendarExample size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar size="m" />
+<RangeCalendar size="l" />
+<RangeCalendar size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 값
 
@@ -28,9 +59,23 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 `minValue` 속성을 사용하면 사용자가 입력할 수 있는 가장 빠른 날짜와 시간을 지정할 수 있습니다. 반대로 `maxValue` 속성은 입력할 수 있는 가장 늦은 날짜와 시간을 지정합니다. 다른 모든 값은 사용자에게 비활성화됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+`}
+>
+    <DateComponentsExamples.RangeCalendarExample minValue={'01.01.2024'} maxValue={'01.01.2025'}/>
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 모드
 
@@ -46,9 +91,23 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 
 `modes` prop을 사용하여 활성화된 모드를 제한할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar defaultMode="months"/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarExample defaultMode="months" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar defaultMode="months" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 상태
 
@@ -56,25 +115,84 @@ GRAVITY_TRANSLATION_BLOCK_6_END
 
 사용자가 컴포넌트와 상호 작용할 수 없도록 하려는 `RangeCalendar`의 상태입니다.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar
+  disabled={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarWithDefaultValueExample disabled={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar
+  disabled={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 읽기 전용
 
 `readOnly`는 true로 설정하면 `RangeCalendar` 컴포넌트를 사용자에게 변경할 수 없도록 만드는 부울 속성입니다. 즉, 입력은 현재 값을 표시하지만 사용자는 이를 변경할 수 없습니다.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar
+  readOnly={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarWithDefaultValueExample readOnly={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar
+  readOnly={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 포커스된 값
 
 `RangeCalendar` 보기가 포커스된 날짜를 선택할 수 있습니다. 제어하려면 `focusedValue` prop을 사용해야 합니다. 선택적 prop인 `defaultFocusedValue`를 사용하여 제어되지 않는 컴포넌트의 초기 포커스 값을 설정할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar
+  defaultFocusedValue={dateTimeParse('01.01.2020')} defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarWithDefaultValueExample defaultFocusedValue={'01.01.2020'} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar
+  defaultFocusedValue={dateTimeParse('01.01.2020')}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 시간대
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# DefinitionList
+
+<!--/GITHUB_BLOCK-->
+
 O componente para exibir uma lista de definições com termo e definição separados por pontos.
 
 ```tsx
@@ -6,9 +12,33 @@ import {DefinitionList} from '@gravity-ui/uikit';
 
 ## Exemplos
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {DefinitionList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <DefinitionList nameMaxWidth={100} contentMaxWidth={100}>
+            <DefinitionList.Item name="Node value with copy" copyText="value">
+                <strong>value with copy</strong>
+            </DefinitionList.Item>
+            <DefinitionList.Item name="Empty value with copy" copyText="nothing to copy" />
+        </DefinitionList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DefinitionList nameMaxWidth={100} contentMaxWidth={100}>
+  <DefinitionList.Item name="Node value with copy" copyText="value">
+    <strong>value with copy</strong>
+  </DefinitionList.Item>
+  <DefinitionList.Item name="Empty value with copy" copyText="nothing to copy" />
+</DefinitionList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriedades
 
@@ -37,4 +67,3 @@ Os filhos de `DefinitionList` devem ser componentes do tipo `DefinitionList.Item
 | Nome                           | Descrição                         |
 | :----------------------------- | :---------------------------------- |
 | `--g-definition-list-item-gap` | Espaço entre os itens da lista de definições |
-GRAVITY_TRANSLATION_BLOCK_2_END

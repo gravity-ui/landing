@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# ClipboardButton
+
+<!--/GITHUB_BLOCK-->
 
 `ClipboardButton` ist ein fertiger Button, der einen gegebenen Text in die Zwischenablage kopiert und eine Erfolgsanimation abspielt. Er kombiniert [`CopyToClipboard`](../CopyToClipboard/README.md) (das Kopierverhalten) mit [`ClipboardIcon`](../ClipboardIcon/README.md) (dem animierten Icon).
 
@@ -6,9 +10,21 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 import {ClipboardButton} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {ClipboardButton} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <ClipboardButton text="Some text to copy" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ClipboardButton text="Some text to copy" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

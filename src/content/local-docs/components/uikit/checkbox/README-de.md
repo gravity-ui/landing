@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Checkbox
+
+<!--/GITHUB_BLOCK-->
+
 Die Komponente `Checkbox` ermöglicht es dem Benutzer, einen bestimmten Wert auszuwählen oder abzuwählen.
 
 ```tsx
@@ -12,25 +18,99 @@ Eine `Checkbox` kann verschiedene Zustände haben:
 - Disabled: Die Checkbox ist nicht verfügbar.
 - Indeterminate: Die Checkbox befindet sich in einem Zwischenzustand zwischen angehakt und nicht angehakt.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Checkbox size="l" checked={false}>Unchecked</Checkbox>
+            <Checkbox size="l" checked>Checked</Checkbox>
+            <Checkbox size="l" disabled>Disabled</Checkbox>
+            <Checkbox size="l" indeterminate>Indeterminate</Checkbox>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Checkbox size="l" checked={false}>Unchecked</Checkbox>
+<Checkbox size="l" checked>Checked</Checkbox>
+<Checkbox size="l" disabled>Disabled</Checkbox>
+<Checkbox size="l" indeterminate>Indeterminate</Checkbox>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Größe
 
 Verwenden Sie die Eigenschaft `size`, um die Größe der `Checkbox` zu verwalten. Die Standardgröße ist `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Checkbox size="m">M Size</Checkbox>
+            <Checkbox size="l">L Size</Checkbox>
+            <Checkbox size="xl">XL Size</Checkbox>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Checkbox size="m">M Size</Checkbox>
+<Checkbox size="l">L Size</Checkbox>
+<Checkbox size="xl">XL Size</Checkbox>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Beschriftung
 
 Sie können einer `Checkbox` eine Beschriftung mit der Eigenschaft `content` zuweisen oder sie als Kind-Eigenschaft bereitstellen.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Checkbox content="Content" size="l" />
+            <div style={{marginTop: 10}}>
+                <Checkbox size="l">
+                    <span>Content as children</span>
+                </Checkbox>
+            </div>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Checkbox content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Checkbox size="l">
+      <span>Content as children</span>
+    </Checkbox>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

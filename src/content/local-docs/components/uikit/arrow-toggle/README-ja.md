@@ -1,26 +1,111 @@
+<!--GITHUB_BLOCK-->
+
+# ArrowToggle
+
+<!--/GITHUB_BLOCK-->
+
 `ArrowToggle` は、シェブロンアイコンを表示するためのコンポーネントです。4方向に回転でき、ドロップダウンリストやカットコンポーネントなどを表示するために使用できます。
 
 ## 外観
 
 `ArrowToggle` には、`top`、`right`、`bottom`、`left` の4つの方向があります。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {ArrowToggle} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <ArrowToggle direction="top" /> top
+            <ArrowToggle direction="right" /> right
+            <ArrowToggle direction="bottom" /> bottom
+            <ArrowToggle direction="left" /> left
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ArrowToggle direction="top" /> top
+<ArrowToggle direction="right" /> right
+<ArrowToggle direction="bottom" /> bottom
+<ArrowToggle direction="left" /> left
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## サイズ
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {ArrowToggle} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <ArrowToggle size={10} /> 10
+            <ArrowToggle size={20} /> 20
+            <ArrowToggle size={30} /> 30
+            <ArrowToggle size={40} /> 40
+            <ArrowToggle size={50} /> 50
+            <ArrowToggle size={100} /> 100
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ArrowToggle size={10} /> 10
+<ArrowToggle size={20} /> 20
+<ArrowToggle size={30} /> 30
+<ArrowToggle size={40} /> 40
+<ArrowToggle size={50} /> 50
+<ArrowToggle size={100} /> 100
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## インタラクティブ要素としての使用
 
 トグルアイコンを使用した `ArrowToggle` の使用例を以下に示します。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {useState} from 'react';
+import type {ArrowToggleProps} from '@gravity-ui/uikit';
+import {ArrowToggle, Button} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+const directions = ['top', 'left', 'bottom', 'right'] as Array<ArrowToggleProps['direction']>;
+
+export default function () {
+    const [directionIndex, setDirectionIndex] = useState(0);
+    const direction = directions[directionIndex % directions.length];
+
+    return (
+        <Button onClick={() => setDirectionIndex(directionIndex + 1)} view="flat">
+            <ArrowToggle direction={direction} /> <span>{direction}</span>
+        </Button>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const [directionIndex, setDirectionIndex] = React.useState(0);
+const directions = ['top', 'left', 'bottom', 'right'] as Array<ArrowToggleProps['direction']>;
+const direction = directions[directionIndex % directions.length];
+
+return (
+  <Button onClick={() => setDirectionIndex(directionIndex + 1)} view="flat">
+    <ArrowToggle {...args} direction={direction} /> <span>{direction}</span>
+  </Button>
+);
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 
@@ -36,5 +121,3 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 | 名前                                   | 説明         |
 | :------------------------------------- | :----------- |
 | `--g-arrow-toggle-transition-duration` | トランジションの期間 |
-
-GRAVITY_TRANSLATION_BLOCK_6_END

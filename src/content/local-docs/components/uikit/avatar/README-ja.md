@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Avatar
+
+<!--/GITHUB_BLOCK-->
 
 このコンポーネントはアバターのレンダリングを目的としています。画像、アイコン、テキスト（名前のイニシャル）の3つの基本的なアバタータイプがあります。これらのタイプはすべて、動作と外観を設定するための特別なプロパティを持っています。
 
@@ -12,27 +16,75 @@ import {Avatar} from '@gravity-ui/uikit';
 
 このコンポーネントは画像を使用してアバターをレンダリングするために使用できます。画像を提供するには、`imgUrl` プロパティを使用します。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return <Avatar imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352" size="l" />;
+}
+SANDBOX-->
 
 `srcSet` プロパティを提供して、さまざまなサイズの画像を読み込むこともできます。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Avatar
+            imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352"
+            srcSet="https://loremflickr.com/57/43/cats?lock=2879400393572352 1x, https://loremflickr.com/131/98/cats?lock=4373954936438784 2x, https://loremflickr.com/164/123/cats?lock=3007328513163264 3x, https://loremflickr.com/225/169/cats?lock=8243879964835840 4x"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 `Avatar` コンポーネントには `fallbackImgUrl` プロパティがあり、`imgUrl` リンクで画像読み込みエラー（CSPエラーまたは元の画像がない場合）が発生した場合に表示される画像を提供できます。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Avatar
+            imgUrl="random_link"
+            fallbackImgUrl="https://loremflickr.com/640/480/cats?lock=3552647338524672"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 ### アイコン
 
 このコンポーネントはアイコンを使用してアバターをレンダリングするために使用できます。`Icon` コンポーネントの場合と同様に、`icon` プロパティを使用してアイコンを提供します。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return <Avatar icon={GraduationCap} size="l" />;
+}
+SANDBOX-->
 
 ### テキスト
 
 このコンポーネントはテキストを使用してアバターをレンダリングするために使用できます。そのために `text` プロパティを使用します。テキストはイニシャル（2つの単語の最初の文字）または単一の単語の最初の2文字としてレンダリングされます。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" size="l" />
+            <Avatar text="Guardian" size="l" />
+        </>
+    );
+}
+SANDBOX-->
 
 ## 外観
 
@@ -42,25 +94,82 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 デフォルトのテーマは `normal` で、デフォルトの表示は `filled` です。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar icon={GraduationCap} size="l" theme="normal" view="filled" />
+            <Avatar icon={GraduationCap} size="l" theme="brand" view="filled" />
+            <Avatar icon={GraduationCap} size="l" theme="normal" view="outlined" />
+            <Avatar icon={GraduationCap} size="l" theme="brand" view="outlined" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### カスタムカラー
 
 `backgroundColor`、`borderColor`、`color` プロパティ（後者はアイコンとテキストアバターでのみ機能します）を使用してカスタムカラーを指定することもできます。これらのカラーはテーマカラーよりも優先度が高くなります。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar
+                text="Charles Darwin"
+                size="l"
+                backgroundColor="var(--g-color-base-danger-medium)"
+                color="var(--g-color-text-primary)"
+            />
+            <Avatar text="Charles Darwin" size="l" borderColor="var(--g-color-line-misc)" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### サイズ
 
 `size` プロパティを使用して `Avatar` のサイズを管理します。デフォルトのサイズは `m` です。可能な値は `3xs`、`2xs`、`xs`、`s`、`m`、`l`、`xl` です。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" theme="brand" size="3xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="2xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="s" />
+            <Avatar text="Charles Darwin" theme="brand" size="m" />
+            <Avatar text="Charles Darwin" theme="brand" size="l" />
+            <Avatar text="Charles Darwin" theme="brand" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### シェイプ
 
 `shape` プロパティを使用して `Avatar` のシェイプを管理します。デフォルトのシェイプは `circle` です。可能な値は `circle` と `square` です。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" theme="brand" shape="circle" />
+            <Avatar text="Charles Darwin" theme="brand" shape="square" />
+        </>
+    );
+}
+SANDBOX-->
 
 ## プロパティ
 

@@ -1,20 +1,74 @@
+<!--GITHUB_BLOCK-->
+
+# TableColumnSetup
+
+<!--/GITHUB_BLOCK-->
+
 `TableColumnSetup` コンポーネントは、テーブル列の表示と順序を設定するためのユーザーインターフェイスを提供します。ボタンを表示し、クリックすると利用可能な列のリストを含むポップアップが開きます。これにより、ユーザーは列を表示/非表示にし、オプションでドラッグアンドドロップで並べ替えることができます。
 
 ```tsx
 import {TableColumnSetup} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const items = [
+  {id: 'name', title: 'Name', selected: true, required: true},
+  {id: 'email', title: 'Email', selected: true},
+  {id: 'phone', title: 'Phone', selected: false},
+];
+
+<TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 並べ替え可能な列
 
 `sortable` プロパティを `true` に設定することで、ドラッグアンドドロップ機能を使用して列の順序を変更できるようにします。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            sortable
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup items={items} sortable onUpdate={(updatedItems) => console.log(updatedItems)} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 適用モード
 
@@ -23,25 +77,111 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 - `true` - ユーザーが列を切り替えると、変更はすぐに適用されます。
 - `false` - 変更は、ユーザーが「適用」ボタンをクリックしたときにのみ適用されます。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            hideApplyButton
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  hideApplyButton
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ステータス表示
 
 `showStatus` プロパティを有効にすることで、スイッチャーボタンに選択された列の数を表示します。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} showStatus onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  showStatus={true}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## カスタムスイッチャー
 
 `renderSwitcher` プロパティを使用して、トリガーボタンをカスタマイズします。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Button, TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            renderSwitcher={({onClick, onKeyDown}) => (
+                <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+                    Configure Columns
+                </Button>
+            )}
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  renderSwitcher={({onClick, onKeyDown}) => (
+    <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+      Configure Columns
+    </Button>
+  )}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 
@@ -71,7 +211,6 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 | sticky   | 列のスティッキー配置                                        | `'left' \| 'right'` |         |
 
 ### SwitcherProps
-GRAVITY_TRANSLATION_BLOCK_10_END
 
 | 名前      | 説明                                   |                   タイプ                    |
 | :-------- | :------------------------------------- | :---------------------------------------: |

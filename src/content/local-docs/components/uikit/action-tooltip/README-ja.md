@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# ActionTooltip
+
+<!--/GITHUB_BLOCK-->
 
 説明的なテキスト（例：アイコンボタン）がないアクションボタンのラベル付けのための[`Tooltip`](../Tooltip/README.md)。
 
@@ -7,8 +11,8 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="アクション">
-  <div tabIndex={0}>アンカー</div>
+<ActionTooltip title="Action">
+  <div tabIndex={0}>Anchor</div>
 </ActionTooltip>;
 ```
 
@@ -21,7 +25,7 @@ import {ActionTooltip} from '@gravity-ui/uikit';
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="アクション">
+<ActionTooltip title="Action">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```

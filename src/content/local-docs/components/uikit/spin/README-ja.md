@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Spin
+
+<!--/GITHUB_BLOCK-->
 
 `Spin` コンポーネントは、インラインシナリオでローディング状態（回転する半円）を表示します。`Loader` とは異なり、このコンポーネントはインラインシナリオ、例えば `Button` や `Label` 内でローディング状態を表示するために使用されます。
 
@@ -8,9 +12,33 @@ import {Spin} from '@gravity-ui/uikit';
 
 ### Size
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Spin} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Spin size="xs" />
+            <Spin size="s" />
+            <Spin size="m" />
+            <Spin size="l" />
+            <Spin size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Spin size="xs" />
+<Spin size="s" />
+<Spin size="m" />
+<Spin size="l" />
+<Spin size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `XS`: Extra small.
 

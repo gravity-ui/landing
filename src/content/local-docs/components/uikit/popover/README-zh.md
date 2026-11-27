@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Popover
+
+<!--/GITHUB_BLOCK-->
+
 `Popover` 显示浮动的、可选的交互式内容（文本、链接或按钮），它锚定在子元素上，并在悬停或单击时打开。它使用 [`Popup`](../Popup/README.md) 并内置了触发器交互性，使用通过 `children` 属性传递的 `ReactElement` 作为触发器。
 
 ```tsx
@@ -11,13 +17,12 @@ import {Popover} from '@gravity-ui/uikit';
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="内容">
-  <Button>点击或悬停我</Button>
+<Popover content="Content">
+  <Button>Click or hover me</Button>
 </Popover>;
 ```
 
 ## 属性
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | 名称                 | 描述                                                                                                   |                                类型                                 |     默认值     |
 | :------------------- | :------------------------------------------------------------------------------------------------------------ | :-----------------------------------------------------------------: | :-------------: |

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Icon
+
+<!--/GITHUB_BLOCK-->
 
 `Icon` 渲染指定大小和颜色的 SVG 图标，接受 SVG 作为 React 组件或导入的资源。它作为代码库中统一使用 SVG 的代理，可以通过 React 组件或 Webpack 加载器（如 [`SVGR`](https://react-svgr.com/docs/webpack/)、[`svg-react-loader`](https://github.com/jhamlet/svg-react-loader)、[`svg-inline-loader`](https://github.com/webpack-contrib/svg-inline-loader) 或 [`svg-sprite-loader`](https://github.com/JetBrains/svg-sprite-loader)）进行加载。
 

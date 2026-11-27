@@ -1,12 +1,30 @@
+<!--GITHUB_BLOCK-->
+
+# ClipboardButton
+
+<!--/GITHUB_BLOCK-->
+
 `ClipboardButton`은 주어진 텍스트를 클립보드에 복사하고 성공 애니메이션을 재생하는 즉시 사용 가능한 버튼입니다. [`CopyToClipboard`](../CopyToClipboard/README.md) (복사 동작)와 [`ClipboardIcon`](../ClipboardIcon/README.md) (애니메이션 아이콘)을 결합합니다.
 
 ```tsx
 import {ClipboardButton} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {ClipboardButton} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <ClipboardButton text="Some text to copy" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<ClipboardButton text="Some text to copy" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

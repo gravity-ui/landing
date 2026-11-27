@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Popover
+
+<!--/GITHUB_BLOCK-->
+
 `Popover` は、子要素にアンカーされ、ホバーまたはクリックで開くフローティング（オプションでインタラクティブな）コンテンツ（テキスト、リンク、またはボタン）を表示します。これは [`Popup`](../Popup/README.md) をラップし、トリガーのインタラクティビティが組み込まれており、`children` プロパティ経由で渡された `ReactElement` をトリガーとして使用します。
 
 ```tsx
@@ -11,13 +17,12 @@ HTML 要素またはネイティブ DOM ハンドラと ARIA 属性をプロパ�
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="コンテンツ">
-  <Button>クリックまたはホバーしてください</Button>
+<Popover content="Content">
+  <Button>Click or hover me</Button>
 </Popover>;
 ```
 
 ## プロパティ
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | 名前                 | 説明                                                                                                   |                                タイプ                                 |     デフォルト     |
 | :------------------- | :------------------------------------------------------------------------------------------------------------ | :-----------------------------------------------------------------: | :-------------: |

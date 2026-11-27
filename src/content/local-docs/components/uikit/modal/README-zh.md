@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Modal
+
+<!--/GITHUB_BLOCK-->
 
 `Modal` 组件是创建弹出窗口的基础，它会在页面上其他内容之上显示一个背景。
 它会在打开时禁用滚动并管理内容的焦点。`Modal` 的子组件会渲染在 [`Portal`](../Portal) 组件内部。
@@ -16,9 +20,9 @@ import {Button, Modal} from '@gravity-ui/uikit';
 
 const [open, setOpen] = useState(false);
 
-<Button onClick={() => setOpen(true)}>打开模态框</Button>
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => setOpen(false)}>
-    内容
+    Content
 </Modal>
 ```
 

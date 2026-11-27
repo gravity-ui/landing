@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Menu
+
+<!--/GITHUB_BLOCK-->
+
 `Menu` コンポーネントを使用すると、アクションリストのビューを簡単に作成できます。
 
 ```tsx
@@ -6,17 +12,94 @@ import {Menu} from '@gravity-ui/uikit';
 
 アイテム (`Menu.Item`) とグループ (`Menu.Group`) 専用のコンポーネントがあります。これらを組み合わせて、より複雑なメニューを作成できます。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item>First</Menu.Item>
+            <Menu.Item>Second</Menu.Item>
+            <Menu.Group label="Group">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item>First</Menu.Item>
+  <Menu.Item>Second</Menu.Item>
+  <Menu.Group label="Group">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Size
 
 このプロパティは、メニューのサイズを選択するために使用されます。デフォルト値は `m` です。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Menu size="s">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+            <Menu size="m">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+            <Menu size="l">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+            <Menu size="xl">
+                <Menu.Item>First</Menu.Item>
+                <Menu.Item>Second</Menu.Item>
+            </Menu>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu size="s">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+
+<Menu size="m">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+
+<Menu size="l">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+
+<Menu size="xl">
+    <Menu.Item>First</Menu.Item>
+    <Menu.Item>Second</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 
@@ -36,25 +119,105 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 
 `iconStart` または `iconEnd` プロパティを使用して、メニューアイテムの先頭または末尾にアイコンを表示します。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Gear, TriangleExclamation} from '@gravity-ui/icons';
+import {Icon, Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <>
+            <Menu>
+                <Menu.Item iconStart={<Icon size={16} data={Gear} />}>Item with icon</Menu.Item>
+                <Menu.Item>Item without icon</Menu.Item>
+            </Menu>
+            <Menu>
+                <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>
+                    Item with icon
+                </Menu.Item>
+                <Menu.Item>Item without icon</Menu.Item>
+            </Menu>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item iconStart={<Icon size={16} data={GearIcon} />}>Item with icon</Menu.Item>
+  <Menu.Item>Item without icon</Menu.Item>
+</Menu>
+```
+
+```tsx
+<Menu>
+  <Menu.Item iconEnd={<Icon size={16} data={TriangleExclamation} />}>Item with icon</Menu.Item>
+  <Menu.Item>Item without icon</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### States
 
 このプロパティを使用すると、特定のメニューアイテムを有効または無効 (グレーアウト) にできます。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item disabled>First</Menu.Item>
+            <Menu.Item>Second</Menu.Item>
+            <Menu.Item selected>Third</Menu.Item>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item disabled>First</Menu.Item>
+  <Menu.Item>Second</Menu.Item>
+  <Menu.Item selected>Third</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Theme
 
 これにより、メニューアイテムのテーマを変更できます。デフォルトのテーマは `normal` です。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item theme="danger">First</Menu.Item>
+            <Menu.Item theme="normal">Second</Menu.Item>
+            <Menu.Item>Third</Menu.Item>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item theme="danger">First</Menu.Item>
+  <Menu.Item theme="normal">Second</Menu.Item>
+  <Menu.Item>Third</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Properties
 
@@ -82,9 +245,55 @@ GRAVITY_TRANSLATION_BLOCK_10_END
 
 単一のメニュー内で項目をトピックごとにグループ化できます。
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Menu} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <Menu>
+            <Menu.Item>First</Menu.Item>
+            <Menu.Group label="Group One">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+            <Menu.Group label="Group Two">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+            <Menu.Item>Middle</Menu.Item>
+            <Menu.Group label="Group Three">
+                <Menu.Item>One</Menu.Item>
+                <Menu.Item>Two</Menu.Item>
+            </Menu.Group>
+            <Menu.Item>Last</Menu.Item>
+        </Menu>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Menu>
+  <Menu.Item>First</Menu.Item>
+  <Menu.Group label="Group One">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+  <Menu.Group label="Group Two">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+  <Menu.Item>Middle</Menu.Item>
+  <Menu.Group label="Group Three">
+    <Menu.Item>One</Menu.Item>
+    <Menu.Item>Two</Menu.Item>
+  </Menu.Group>
+  <Menu.Item>Last</Menu.Item>
+</Menu>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### プロパティ
 

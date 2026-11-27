@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# RelativeDatePicker
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {RelativeDatePicker} from '@gravity-ui/date-components';
 ```
@@ -12,17 +18,33 @@ import {RelativeDatePicker} from '@gravity-ui/date-components';
 
 Le comportement de `RelativeDatePicker` en mode `absolute` est très similaire à celui de `DatePicker` simple.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+[Learn more about DatePicker](/components/date-components/date-picker)
+
+LANDING_BLOCK-->
+
+<!--GITHUB_BLOCK-->
+
+[Learn more about DatePicker](/src/components/DatePicker)
+
+<!--/GITHUB_BLOCK-->
 
 ### Relatif
 
 Dans ce mode, `RelativeDatePicker` obtient et renvoie des valeurs dans un format relatif spécial.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+[Learn more about rules of relative formulas](/components/date-components/relative-date-field#relative-input)
+
+LANDING_BLOCK-->
+
+<!--GITHUB_BLOCK-->
+
+[Learn more about rules of relative formulas](/src/components/RelativeDateField#relative-input)
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

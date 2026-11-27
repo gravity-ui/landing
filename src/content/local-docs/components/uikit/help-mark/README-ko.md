@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# HelpMark
+
+<!--/GITHUB_BLOCK-->
+
 마우스를 올리거나 클릭하면 팝오버에서 컨텍스트 정보를 보여주는 도움말 아이콘입니다. 인터페이스에서 추가 공간을 차지하지 않고 팁, 설명 또는 지원 콘텐츠를 표시하는 데 이상적입니다.
 
 ```tsx
@@ -8,9 +14,35 @@ import {HelpMark} from '@gravity-ui/uikit';
 
 렌더링된 원시 HTML과 마우스 떠날 때 닫히는 컴포넌트:
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {HelpMark} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <HelpMark onClick={() => console.log('just action happened')}>
+            <b>Lorem ipsum</b> dolor sit{' '}
+            <a href="https://example.com" target="_blank" rel="noreferrer">
+                amet
+            </a>
+            , at scelerisque suspendisse
+        </HelpMark>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<HelpMark onClick={() => console.log('just action happened')}>
+  <b>Lorem ipsum</b> dolor sit{' '}
+  <a href="https://example.com" target="_blank" rel="noreferrer">
+    amet
+  </a>
+  , at scelerisque suspendisse
+</HelpMark>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

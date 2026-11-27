@@ -1,6 +1,46 @@
+<!--GITHUB_BLOCK-->
+
+# ActionBar
+
+<!--/GITHUB_BLOCK-->
+
 O componente é uma barra horizontal flexível que fornece um layout padronizado para organizar elementos de navegação, ações e conteúdo informativo dentro de um aplicativo. Ele serve como um contêiner para organizar elementos de UI como breadcrumbs, botões e menus suspensos em seções e grupos definidos.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+## Usage
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group>
+          <ActionBar.Item>
+            <LegacyBreadcrumbs
+              lastDisplayedItemsCount={1}
+              firstDisplayedItemsCount={1}
+              items={[{text: 'Root Item', action() {}}]}
+            />
+          </ActionBar.Item>
+        </ActionBar.Group>
+
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 O `ActionBar` fornece vários componentes aninhados que trabalham juntos para criar um layout estruturado: `ActionBar.Section`, `ActionBar.Group`, `ActionBar.Item`, `ActionBar.Separator`.
 
@@ -27,7 +67,40 @@ Existem dois tipos de seções apresentados — `primary` e `secondary`. Recomen
 | style     | Atributo `style` do HTML                      |   `React.CSSProperties`    |            |
 | qa        | Atributo `data-qa` do HTML, usado para testes |          `string`          |            |
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+<ActionBar aria-label="Actions bar">
+  <ActionBar.Section type="secondary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <Button>Toggle Article TOC</Button>
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+
+  <ActionBar.Section type="primary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <LegacyBreadcrumbs
+          lastDisplayedItemsCount={1}
+          firstDisplayedItemsCount={1}
+          items={[
+            {text: 'Wiki Main Page', action() {}},
+            {text: 'Wiki Article', action() {}},
+          ]}
+        />
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+</ActionBar>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ActionBar.Group
 
@@ -60,4 +133,34 @@ Contêiner para elementos de UI como botões, breadcrumbs ou outros componentes 
 
 Divisor visual que pode ser colocado entre itens em um grupo para separá-los visualmente.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+### Example
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+
+          <ActionBar.Separator />
+
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->

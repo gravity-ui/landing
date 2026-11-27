@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Skeleton
+
+<!--/GITHUB_BLOCK-->
+
 Le composant Skeleton affiche un aperçu de contenu temporaire avant le chargement des données. Cet aperçu est affiché afin de réduire la frustration liée au temps de chargement.
 
 ```tsx
@@ -37,13 +43,34 @@ Utilisez la prop `size` pour définir une hauteur prédéfinie pour le squelette
 | `'l'`  | Grande        |
 | `'xl'` | Extra large   |
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Skeleton size="xs" width={120} />
+<Skeleton size="m"  width={200} />
+<Skeleton size="xl" width={280} />
+
+<Skeleton variant="circle" size="l" />
+<Skeleton variant="square" size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Espace réservé pour le texte
 
 Utilisez `variant="text"` pour afficher un squelette qui hérite de `font-size` et `line-height` du contexte parent. Placez plusieurs squelettes à l'intérieur d'un élément `<Text variant="...">` pour des espaces réservés multilignes.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={240} />
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

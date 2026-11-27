@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Skeleton
+
+<!--/GITHUB_BLOCK-->
 
 Skeleton 컴포넌트는 데이터가 로드되기 전에 콘텐츠의 미리보기 플레이스홀더를 표시합니다. 이 미리보기는 로딩 시간으로 인한 답답함을 줄이기 위해 표시됩니다.
 
@@ -39,13 +43,34 @@ import {Skeleton} from '@gravity-ui/uikit';
 | `'l'`  | 큼       |
 | `'xl'` | 매우 큼   |
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Skeleton size="xs" width={120} />
+<Skeleton size="m"  width={200} />
+<Skeleton size="xl" width={280} />
+
+<Skeleton variant="circle" size="l" />
+<Skeleton variant="square" size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 텍스트 플레이스홀더
 
 `variant="text"`를 사용하여 부모 컨텍스트의 `font-size` 및 `line-height`를 상속하는 skeleton을 렌더링합니다. 여러 줄 플레이스홀더의 경우 `<Text variant="...">` 요소 안에 여러 skeleton을 배치합니다.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={240} />
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

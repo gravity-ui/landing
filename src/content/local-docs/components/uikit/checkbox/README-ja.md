@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Checkbox
+
+<!--/GITHUB_BLOCK-->
 
 `Checkbox` コンポーネントを使用すると、ユーザーは特定の値をオンまたはオフにできます。
 
@@ -14,25 +18,99 @@ import {Checkbox} from '@gravity-ui/uikit';
 - Disabled: チェックボックスは無効になっています。
 - Indeterminate: チェックボックスは、オンとオフの中間の状態です。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Checkbox size="l" checked={false}>Unchecked</Checkbox>
+            <Checkbox size="l" checked>Checked</Checkbox>
+            <Checkbox size="l" disabled>Disabled</Checkbox>
+            <Checkbox size="l" indeterminate>Indeterminate</Checkbox>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Checkbox size="l" checked={false}>Unchecked</Checkbox>
+<Checkbox size="l" checked>Checked</Checkbox>
+<Checkbox size="l" disabled>Disabled</Checkbox>
+<Checkbox size="l" indeterminate>Indeterminate</Checkbox>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## サイズ
 
 `size` プロパティを使用して `Checkbox` のサイズを管理します。デフォルトのサイズは `m` です。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Checkbox size="m">M Size</Checkbox>
+            <Checkbox size="l">L Size</Checkbox>
+            <Checkbox size="xl">XL Size</Checkbox>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Checkbox size="m">M Size</Checkbox>
+<Checkbox size="l">L Size</Checkbox>
+<Checkbox size="xl">XL Size</Checkbox>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ラベル
 
 `content` プロパティを使用して `Checkbox` にラベルを割り当てるか、子プロパティとして提供できます。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Checkbox} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Checkbox content="Content" size="l" />
+            <div style={{marginTop: 10}}>
+                <Checkbox size="l">
+                    <span>Content as children</span>
+                </Checkbox>
+            </div>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Checkbox content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Checkbox size="l">
+      <span>Content as children</span>
+    </Checkbox>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 

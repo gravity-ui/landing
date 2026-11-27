@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# ClipboardIcon
+
+<!--/GITHUB_BLOCK-->
+
 `ClipboardIcon`은 복사 상태(대기 또는 성공)를 반영하는 애니메이션 복사 아이콘으로, 단독으로 사용하기보다는 `CopyToClipboard` 또는 `ClipboardButton` 내부에 사용하도록 설계되었습니다.
 
 ```tsx
@@ -8,9 +14,29 @@ import {ClipboardIcon} from '@gravity-ui/uikit';
 
 `status` 속성에 따라 아이콘이 변경됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {ClipboardIcon} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <ClipboardIcon size={24} />
+            <ClipboardIcon size={24} status="success" />
+            <ClipboardIcon size={24} status="error" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<CopyToClipboard text="Some text to copy" timeout={500}>
+  {(status) => <ClipboardIcon size={24} status={status} />}
+</CopyToClipboard>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 
@@ -19,5 +45,3 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | className | `class` HTML 속성                          | `string` |        |
 | size      | 아이콘 크기를 결정합니다.                  | `number` |        |
 | status    | 사용 가능한 값은 `pending`, `success`, `error`입니다. | `string` |        |
-
-GRAVITY_TRANSLATION_BLOCK_2_END

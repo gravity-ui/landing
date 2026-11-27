@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tooltip
+
+<!--/GITHUB_BLOCK-->
 
 一个简单的文本提示，它使用其子节点作为锚点。此组件仅接受文本内容，并且由于其体积小巧和延迟显示，可能是浏览器 `title` 属性的一个极佳替代方案。
 
@@ -7,8 +11,8 @@ GRAVITY_TRANSLATION_BLOCK_0_END
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="内容">
-  <div tabIndex={0}>锚点</div>
+<Tooltip content="Content">
+  <div tabIndex={0}>Anchor</div>
 </Tooltip>;
 ```
 
@@ -21,7 +25,7 @@ import {Tooltip} from '@gravity-ui/uikit';
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="内容">
+<Tooltip content="Content">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```

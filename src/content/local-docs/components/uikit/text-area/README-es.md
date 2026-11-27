@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# TextArea
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {TextArea} from '@gravity-ui/uikit';
@@ -14,21 +18,60 @@ La apariencia de `TextArea` se controla mediante las propiedades `view` y `pin`.
 
 `normal` - es la vista principal de `TextArea` (utilizada por defecto).
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
+
+export default function () {
+    return <TextArea placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - se puede utilizar cuando se utiliza un contenedor personalizado para `TextArea`.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <TextArea view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea view="normal" />
+<TextArea view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 Permite controlar la apariencia de los bordes derecho e izquierdo del borde de `TextArea`.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <TextArea placeholder="Placeholder" pin="round-brick" />
+            <TextArea placeholder="Placeholder" pin="brick-brick" />
+            <TextArea placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea pin="round-brick" />
+<TextArea pin="brick-brick" />
+<TextArea pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estados
 
@@ -36,18 +79,56 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 El estado de `TextArea` en el que no se desea que el usuario pueda interactuar con el componente.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <TextArea placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 El estado de `TextArea` en el que se desea mostrar una entrada de usuario incorrecta. Para cambiar la apariencia de `TextArea`, utilice la propiedad `validationState` con el valor "invalid".
 Se puede añadir un mensaje de texto opcional a través de la propiedad `errorMessage`.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <TextArea
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <TextArea
+                view="clear"
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Tamaño
 
@@ -59,24 +140,90 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – Se utiliza en páginas de promoción y de destino.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <TextArea placeholder="Placeholder" size="s" />
+            <TextArea placeholder="Placeholder" size="m" />
+            <TextArea placeholder="Placeholder" size="l" />
+            <TextArea placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea size="s" />
+<TextArea size="m" />
+<TextArea size="l" />
+<TextArea size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Gestión de filas
 
 El número de filas de `TextArea` se controla mediante las propiedades `rows`, `minRows` y `maxRows`. La propiedad `rows` deshabilita el cálculo automático de la altura.
 Para establecer la altura deseada de `TextArea`, utilice la propiedad `className` o `style` con la propiedad `rows` establecida en 1.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <div>
+                rows = 2
+                <TextArea placeholder="Placeholder" rows={2} />
+            </div>
+            <div>
+                minRows = 2
+                <TextArea placeholder="Placeholder" minRows={2} />
+            </div>
+            <div>
+                maxRows = 2
+                <TextArea placeholder="Placeholder" maxRows={2} />
+            </div>
+            <div>
+                height = 200px
+                <TextArea placeholder="Placeholder" rows={1} style={{height: 200}} />
+            </div>
+        </>
+    );
+}
+SANDBOX-->
 
 ## TextArea redimensionable
 
 Puede obtener un comportamiento redimensionable proporcionando el estilo `resize` a la propiedad `controlProps`. Asegúrese de especificar la propiedad `rows` si permite redimensionar la altura del área de texto, de lo contrario, el redimensionamiento entrará en conflicto con el cálculo automático de la altura.
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--SANDBOX
+import {TextArea} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+export default function () {
+    return (
+        <TextArea
+            rows={4}
+            placeholder="Placeholder"
+            style={{width: 'auto', maxWidth: '100%'}}
+            controlProps={{style: {resize: 'both'}}}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextArea rows={4} controlProps={{style: {resize: 'both'}}} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 

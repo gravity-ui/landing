@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# AvatarStack
+
+<!--/GITHUB_BLOCK-->
+
 Este componente é usado para uma pilha de imagens com sobreposição umas sobre as outras e, opcionalmente, um controle. Geralmente se refere a avatares de usuários.
 
 ```ts
@@ -35,7 +41,7 @@ Componente para substituir o botão `Mais`
 ```tsx
 <AvatarStack
   renderMore={({count}) => (
-    <Tooltip content={'Mais usuários'}>
+    <Tooltip content={'More users'}>
       <AvatarStack.MoreButton count={count} />
     </Tooltip>
   )}
@@ -45,4 +51,3 @@ Componente para substituir o botão `Mais`
   <Avatar imgUrl={`https://i.pravatar.cc/150?u=login3`} />
 </AvatarStack>
 ```
-GRAVITY_TRANSLATION_BLOCK_0_END

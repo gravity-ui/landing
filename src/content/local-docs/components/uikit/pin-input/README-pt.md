@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# PinInput
+
+<!--/GITHUB_BLOCK-->
+
 `PinInput` é um grupo de campos de entrada para inserir rapidamente uma sequência de valores numéricos ou alfanuméricos. Seu caso de uso mais comum é a inserção de códigos OTP ou de confirmação recebidos por mensagens de texto (SMS), e-mails ou aplicativos autenticadores.
 
 Cada campo de entrada coleta um caractere por vez. Quando um valor é aceito, o foco é movido para o próximo campo de entrada, até que todos os campos sejam preenchidos.
@@ -10,47 +16,129 @@ import {PinInput} from '@gravity-ui/uikit';
 
 Por padrão, os campos de entrada aceitam apenas valores numéricos. Para permitir valores alfanuméricos, defina a propriedade `type` como `"alphanumeric"`:
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return <PinInput type="alphanumeric" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput type="alphanumeric" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Tamanho
 
 Este componente vem em quatro tamanhos: `s`, `m`, `l` e `xl`. O tamanho padrão é `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <PinInput size="s" />
+            <PinInput size="m" />
+            <PinInput size="l" />
+            <PinInput size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput size="s" />
+<PinInput size="m" />
+<PinInput size="l" />
+<PinInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estado
 
 Se você não quiser que o usuário interaja com o componente, defina a propriedade `disabled`.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return <PinInput disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 Para mostrar um estado inválido do componente, use a propriedade `validationState` com o valor `"invalid"`. Opcionalmente, você pode definir um texto de mensagem de erro com a propriedade `errorMessage`.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return <PinInput validationState="invalid" errorMessage="Incorrect PIN" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput validationState="invalid" errorMessage="Incorrect PIN" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Placeholder
 
 Por padrão, não há placeholder para os campos de entrada. Você pode defini-lo com a propriedade `placeholder`.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return <PinInput placeholder="😎" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput placeholder="😎" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Máscara
 
 Se você precisar mascarar os valores inseridos, use a propriedade `mask`. Ela é semelhante ao comportamento de `<input type="password"/>`.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {PinInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return <PinInput mask />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<PinInput mask />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## OTP
 

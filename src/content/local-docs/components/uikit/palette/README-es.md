@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Palette
+
+<!--/GITHUB_BLOCK-->
+
 El componente `Palette` se utiliza para mostrar una cuadrícula de iconos, emojis, reacciones y símbolos que puedes seleccionar o deseleccionar.
 
 ```tsx
@@ -8,33 +14,142 @@ import {Palette} from '@gravity-ui/uikit';
 
 Puedes deshabilitar todas las opciones usando la propiedad `disabled`. Si solo quieres deshabilitar ciertas opciones, puedes cambiar la propiedad `disabled` de esas `options` (`PaletteOption[]`).
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+const disabledOptions: PaletteOption[] = [{...options[0], disabled: true}, options[1]];
+
+export default function () {
+    return (
+        <>
+            <Palette options={disabledOptions} />
+            <Palette options={options} disabled />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  // disable a single item
+  {content: '😎', value: 'ID-cool', disabled: true},
+  {content: '🥴', value: 'ID-woozy'},
+];
+// or disable all of them
+<Palette options={options} disabled={true} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Tamaño
 
 Usa la propiedad `size` para gestionar el tamaño de `Palette`. El tamaño predeterminado es `s`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return (
+        <>
+            <Palette options={options} size="xs" />
+            <Palette options={options} size="s" />
+            <Palette options={options} size="m" />
+            <Palette options={options} size="l" />
+            <Palette options={options} size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} size={"xs"} />
+<Palette options={options} size={"s"} />
+<Palette options={options} size={"m"} />
+<Palette options={options} size={"l"} />
+<Palette options={options} size={"xl"} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Columnas
 
 Puedes cambiar el número de columnas en la cuadrícula cambiando la propiedad `columns` (el valor predeterminado es `6`).
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} columns={1} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Múltiple
 
 Por defecto, puedes seleccionar y deseleccionar múltiples opciones. En caso de que solo quieras hacer que una sola opción sea seleccionable, puedes deshabilitar la propiedad `multiple`.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} multiple={false} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 

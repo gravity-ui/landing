@@ -1,8 +1,46 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# ActionBar
+
+<!--/GITHUB_BLOCK-->
 
 Die Komponente ist eine flexible horizontale Leiste, die ein standardisiertes Layout für die Anordnung von Navigationselementen, Aktionen und informativen Inhalten innerhalb einer Anwendung bietet. Sie dient als Container zur Organisation von UI-Elementen wie Breadcrumbs, Schaltflächen und Dropdown-Menüs in definierten Abschnitten und Gruppen.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+## Usage
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group>
+          <ActionBar.Item>
+            <LegacyBreadcrumbs
+              lastDisplayedItemsCount={1}
+              firstDisplayedItemsCount={1}
+              items={[{text: 'Root Item', action() {}}]}
+            />
+          </ActionBar.Item>
+        </ActionBar.Group>
+
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 Der `ActionBar` bietet mehrere verschachtelte Komponenten, die zusammenarbeiten, um ein strukturiertes Layout zu erstellen: `ActionBar.Section`, `ActionBar.Group`, `ActionBar.Item`, `ActionBar.Separator`.
 
@@ -30,7 +68,40 @@ Es werden zwei Arten von Abschnitten präsentiert: `primary` und `secondary`. Wi
 | style     | HTML `style`-Attribut                             |   `React.CSSProperties`    |              |
 | qa        | `data-qa` HTML-Attribut, für Tests verwendet      |          `string`          |              |
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+<ActionBar aria-label="Actions bar">
+  <ActionBar.Section type="secondary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <Button>Toggle Article TOC</Button>
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+
+  <ActionBar.Section type="primary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <LegacyBreadcrumbs
+          lastDisplayedItemsCount={1}
+          firstDisplayedItemsCount={1}
+          items={[
+            {text: 'Wiki Main Page', action() {}},
+            {text: 'Wiki Article', action() {}},
+          ]}
+        />
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+</ActionBar>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ActionBar.Group
 
@@ -63,4 +134,34 @@ Container für UI-Elemente wie Schaltflächen, Breadcrumbs oder andere Komponent
 
 Visuelle Trennlinie, die zwischen Elementen einer Gruppe platziert werden kann, um sie visuell zu trennen.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+### Example
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+
+          <ActionBar.Separator />
+
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tooltip
+
+<!--/GITHUB_BLOCK-->
 
 Une astuce textuelle simple qui utilise son nœud enfant comme ancre. Ce composant n'accepte que du contenu textuel et peut être une excellente alternative à l'attribut `title` du navigateur, grâce à sa petite taille et son délai d'apparition long.
 
@@ -7,8 +11,8 @@ Une astuce textuelle simple qui utilise son nœud enfant comme ancre. Ce composa
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Contenu">
-  <div tabIndex={0}>Ancre</div>
+<Tooltip content="Content">
+  <div tabIndex={0}>Anchor</div>
 </Tooltip>;
 ```
 
@@ -22,7 +26,7 @@ Alternativement, vous pouvez passer une fonction comme enfant pour fournir manue
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Contenu">
+<Tooltip content="Content">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Skeleton
+
+<!--/GITHUB_BLOCK-->
+
 Skeleton 组件在数据加载完成前显示内容的占位符预览。此预览旨在减少加载时间带来的挫败感。
 
 ```tsx
@@ -37,13 +43,34 @@ import {Skeleton} from '@gravity-ui/uikit';
 | `'l'`  | 大       |
 | `'xl'` | 特大     |
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Skeleton size="xs" width={120} />
+<Skeleton size="m"  width={200} />
+<Skeleton size="xl" width={280} />
+
+<Skeleton variant="circle" size="l" />
+<Skeleton variant="square" size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Text placeholder
 
 使用 `variant="text"` 来渲染一个继承父级上下文 `font-size` 和 `line-height` 的占位符。将多个占位符放置在 `<Text variant="...">` 元素内以实现多行占位符。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={240} />
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

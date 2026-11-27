@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Link
+
+<!--/GITHUB_BLOCK-->
+
 `Link` — это часть текста, при нажатии на которую пользователь переходит на другую часть страницы, другую страницу внутри сервиса или на внешнюю веб-страницу.
 
 ```tsx
@@ -14,49 +20,144 @@ import {Link} from '@gravity-ui/uikit';
 
 Это самый привычный и устоявшийся паттерн `link`. Он используется для визуального выделения элемента внутри текста или таблицы, а также как часть навигации. С его помощью можно переходить как на внутренние страницы, так и на внешние источники, включая документацию. Кроме того, этот тип используется для страниц ошибок и пустых состояний.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return <Link view="normal" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="normal" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Primary
 
 Этот тип используется, когда пользователю и так понятно, что элемент кликабелен, но использование коричневого `Link` перегрузит интерфейс и не даст должным образом выделить ключевые моменты на странице.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <Link view="primary" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="primary" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Secondary
 
 Как и primary `Link`, этот тип используется, когда пользователю и так понятно, что элемент кликабелен, при этом навигация по нему не является основной задачей и затрагивает небольшое количество сценариев. Его главная цель — не отвлекать пользователя от ключевых моментов на странице. Тип `Secondary` чаще всего используется в хлебных крошках или при отображении второстепенных атрибутов.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return <Link view="secondary" href="#">Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link view="secondary" href="#">
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Visitable
 
 Это свойство используется для отображения того, что `Link` уже был нажат.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <Link href="https://gravity-ui.com/" visitable>Link</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link href="https://gravity-ui.com/" visitable>
+  Link
+</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## `href`
 
 Свойство `href` является обязательным.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Link} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return <Link href="#">Link with href</Link>;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Link href="#">Link with href</Link>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Использование
 
 Вы можете использовать `Link` как самостоятельный текстовый элемент, так и как часть текста:
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Link, Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <Text>
+                <Link href="#">what roles are active in the service</Link>
+            </Text>
+            <Text>
+                Currently, this role can only be assigned to a{' '}
+                <Link href="#">folder</Link> or <Link href="#">cloud</Link>
+            </Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text>
+    <Link href="#">What roles are available in the service</Link>
+</Text>
+<Text>
+    Currently, this role can only be assigned to a <Link href="#">folder</Link> or <Link href="#">cloud</Link>
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Свойства
 

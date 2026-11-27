@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Card
+
+<!--/GITHUB_BLOCK-->
+
 `Card` é um componente React reutilizável que é basicamente um contêiner semelhante a um cartão com estilos e recursos personalizáveis. Ele é usado para exibir informações ou conteúdo de maneira visualmente atraente e bem organizada.
 
 ```tsx
@@ -25,7 +31,49 @@ Ao especificar diferentes valores de tema, você pode personalizar a aparência 
 - `danger`: Tema para exibir conteúdo relacionado a problemas críticos ou erros.
 - `utility`: Tema para exibir dicas úteis.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} theme="normal" size="l">
+                Normal
+            </Card>
+            <Card style={cardStyle} theme="info" size="l">
+                Info
+            </Card>
+            <Card style={cardStyle} theme="success" size="l">
+                Success
+            </Card>
+            <Card style={cardStyle} theme="warning" size="l">
+                Warning
+            </Card>
+            <Card style={cardStyle} theme="danger" size="l">
+                Danger
+            </Card>
+            <Card style={cardStyle} theme="utility" size="l">
+                Utility
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## Tipo
 
@@ -35,7 +83,46 @@ Este parâmetro é usado para definir o tipo do componente `Card`. Ele permite p
 - `action`: Cartão com um elemento interativo, como um botão, que aciona uma ação quando clicado.
 - `selection`: Cartão que pode ser selecionado ou clicado para executar uma ação específica.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} view="outlined" type="container" size="l">
+                Container
+            </Card>
+            <Card
+                style={cardStyle}
+                view="outlined"
+                type="action"
+                onClick={() => alert(':wave: hey')}
+                size="l"
+            >
+                action with onClick
+            </Card>
+            <Card style={cardStyle} view="outlined" type="selection" size="l">
+                Selection
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## Visualização
 
@@ -46,7 +133,43 @@ Este parâmetro é usado para especificar o estilo de visualização ou layout d
 - `filled`: Preenche o conteúdo do cartão.
 - `raised`: Aplica uma sombra para levantar ligeiramente o contêiner.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Card} from '@gravity-ui/uikit';
+import {type CSSProperties} from 'react';
+
+const cardStyle: CSSProperties = {
+    width: '120px',
+    height: '120px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+};
+
+const gridStyle: CSSProperties = {
+    display: 'grid',
+    gridAutoFlow: 'column',
+    gap: '10px',
+};
+
+export default function () {
+    return (
+        <div style={gridStyle}>
+            <Card style={cardStyle} view="clear" type="container" size="l">
+                Clear
+            </Card>
+            <Card style={cardStyle} view="outlined" type="container" size="l">
+                Outlined
+            </Card>
+            <Card style={cardStyle} view="filled" type="container" size="l">
+                Filled
+            </Card>
+            <Card style={cardStyle} view="raised" type="container" size="l">
+                Raised
+            </Card>
+        </div>
+    );
+}
+SANDBOX-->
 
 ## Propriedades
 

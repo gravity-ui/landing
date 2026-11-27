@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# RelativeDatePicker
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {RelativeDatePicker} from '@gravity-ui/date-components';
 ```
@@ -12,17 +18,33 @@ import {RelativeDatePicker} from '@gravity-ui/date-components';
 
 `RelativeDatePicker` 在 `absolute` 模式下的行为与简单的 `DatePicker` 非常相似。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+[Learn more about DatePicker](/components/date-components/date-picker)
+
+LANDING_BLOCK-->
+
+<!--GITHUB_BLOCK-->
+
+[Learn more about DatePicker](/src/components/DatePicker)
+
+<!--/GITHUB_BLOCK-->
 
 ### Relative (相对模式)
 
 在此模式下，`RelativeDatePicker` 以特殊的相对格式获取和返回日期值。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+[Learn more about rules of relative formulas](/components/date-components/relative-date-field#relative-input)
+
+LANDING_BLOCK-->
+
+<!--GITHUB_BLOCK-->
+
+[Learn more about rules of relative formulas](/src/components/RelativeDateField#relative-input)
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

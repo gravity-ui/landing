@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Drawer
+
+<!--/GITHUB_BLOCK-->
 
 `Drawer` 组件是一个多功能的界面元素，用于 Web 应用程序中，提供一个从屏幕边缘滑出的面板。该面板可以包含导航、工具或其他内容。该组件使用 React 和 CSS 过渡来实现流畅的动画。
 
@@ -19,9 +23,9 @@ const App = () => {
 
   return (
     <div>
-      <button onClick={() => setVisible(true)}>打开抽屉</button>
+      <button onClick={() => setVisible(true)}>Open Drawer</button>
       <Drawer onOpenChange={setVisible} open={isVisible}>
-        <p>抽屉内容</p>
+        <p>Content of the drawer</p>
       </Drawer>
     </div>
   );
@@ -36,16 +40,16 @@ export default App;
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} placement="left">
-  <p>抽屉内容</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="right">
-  <p>抽屉内容</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="top">
-  <p>抽屉内容</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="bottom">
-  <p>抽屉内容</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -55,7 +59,7 @@ export default App;
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} disableTransition>
-  <p>抽屉内容</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -65,7 +69,7 @@ export default App;
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} resizable>
-  <p>抽屉内容</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -75,7 +79,7 @@ export default App;
 const [size, setSize] = useState(500);
 
 <Drawer onOpenChange={setVisible} open={isVisible} resizable size={size} onResize={setSize}>
-  <p>抽屉内容</p>
+  <p>Content of the drawer</p>
 </Drawer>;
 ```
 

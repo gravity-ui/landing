@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# ActionTooltip
+
+<!--/GITHUB_BLOCK-->
+
 [`Tooltip`](../Tooltip/README.md) 用于为没有描述性文本的操作按钮（例如图标按钮）添加标签。
 
 ## 用法

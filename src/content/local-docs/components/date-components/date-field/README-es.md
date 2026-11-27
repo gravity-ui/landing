@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# DateField
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {DateField} from '@gravity-ui/date-components';
@@ -22,21 +26,59 @@ La apariencia de `DateField` se controla mediante las propiedades `size`, `view`
 
 Para controlar el tamaño de `DateField`, use la propiedad `size`. El tamaño predeterminado es `m`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField size="s" />
+<DateField size="m" />
+<DateField size="l" />
+<DateField size="xl" />
+`}
+>
+    <DateComponents.DateField size="s" />
+    <DateComponents.DateField size="m" />
+    <DateComponents.DateField size="l" />
+    <DateComponents.DateField size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField size="s" />
+<DateField size="m" />
+<DateField size="l" />
+<DateField size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Vista
 
 `normal` - la vista principal de `DateField` (utilizada por defecto).
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DateField />`}>
+    <DateComponents.DateField />
+</ExampleBlock>
+LANDING_BLOCK-->
 
 `clear` - vista de `DateField` sin bordes visibles (se puede usar con un contenedor personalizado)
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DateField view="clear" />`}>
+    <DateComponents.DateField view="clear" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField view="normal" />
+<DateField view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
@@ -44,9 +86,29 @@ La propiedad `pin` le permite controlar la forma de los bordes derecho e izquier
 El valor de la propiedad `pin` consta de los nombres de estilo del borde izquierdo y derecho divididos por un guion, por ejemplo, `"round-brick"`.
 Los estilos de borde son: `round` (predeterminado), `circle`, `brick` y `clear`.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField pin="round-brick" />
+<DateField pin="brick-brick" />
+<DateField pin="brick-round" />
+`}
+>
+    <DateComponents.DateField pin="round-brick" />
+    <DateComponents.DateField pin="brick-brick" />
+    <DateComponents.DateField pin="brick-round" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField pin="round-brick" />
+<DateField pin="brick-brick" />
+<DateField pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valor
 
@@ -54,9 +116,27 @@ GRAVITY_TRANSLATION_BLOCK_7_END
 
 La propiedad `minValue` le permite especificar la fecha y hora más temprana que el usuario puede ingresar. Por el contrario, la propiedad `maxValue` especifica la fecha y hora más tardía que el usuario puede ingresar. Si ingresa un valor fuera de estos límites, el componente cambia su vista, como en el caso de un estado de validación inválido.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField minValue={dateTimeParse('01.01.2024')} placeholder={"minValue: '01.01.2024'"}/>
+<DateField maxValue={dateTimeParse('01.01.2025')} placeholder={"maxValue: '01.01.2025'"}/>
+`}
+>
+    <DateComponentsExamples.DateFieldExample minValue={'01.01.2024'} placeholder={"minValue: '01.01.2024'"} />
+    <DateComponentsExamples.DateFieldExample maxValue={'01.01.2025'} placeholder={"maxValue: '01.01.2025'"} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+
+<DateField minValue={dateTimeParse('01.01.2024')} />
+<DateField maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estados
 
@@ -64,25 +144,70 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 El estado de `DateField` en el que no desea que el usuario pueda interactuar con el componente.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField disabled={true} defaultValue={dateTimeParse(new Date())} />
+`}
+>
+    <DateComponentsExamples.DateFieldExample disabled={true} defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField disabled defaultValue={dateTimeParse(new Date())} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Solo lectura
 
 `readOnly` es un atributo booleano que, cuando se establece en verdadero, hace que el componente `DateField` sea inmutable para el usuario. Esto significa que, si bien la entrada mostrará su valor actual, los usuarios no podrán cambiarlo.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField readOnly defaultValue={dateTimeParse(new Date())} />
+`}
+>
+    <DateComponentsExamples.DateFieldExample readOnly defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField readOnly defaultValue={dateTimeParse(new Date())} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 El estado de `DateField` en el que desea indicar una entrada de usuario incorrecta. Para cambiar la apariencia de `DateField`, use la propiedad `validationState` con el valor `"invalid"`. Se puede agregar un mensaje opcional a través de la propiedad `errorMessage`. El texto del mensaje se renderizará debajo del componente.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField errorMessage="Error message" validationState="invalid" />
+<DateField validationState="invalid" />
+`}
+>
+    <DateComponents.DateField errorMessage="Error message" validationState="invalid" />
+    <DateComponents.DateField validationState="invalid" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField errorMessage="Error message" validationState="invalid" />
+<DateField validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Contenido adicional
 
@@ -90,55 +215,162 @@ GRAVITY_TRANSLATION_BLOCK_15_END
 
 Esta prop le permite proporcionar una breve indicación que describe el valor esperado del campo de entrada. Esta indicación se muestra dentro del campo de entrada antes de que el usuario ingrese un valor y desaparece al ingresar texto.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField placeholder='Placeholder' />
+`}
+>
+    <DateComponents.DateField placeholder='Placeholder' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField placeholder="Placeholder" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Etiqueta
 
 Permite colocar la etiqueta en la parte izquierda del campo. La etiqueta puede ocupar no más de la mitad del ancho total del espacio de `DateField`.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField label="Label" />
+<DateField label="Very long label with huge amount of symbols" />
+`}
+>
+    <DateComponents.DateField label="Label" />
+    <DateComponents.DateField label="Very long label with huge amount of symbols" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Botón de borrar
 
 `hasClear` es una prop booleana que brinda a los usuarios la capacidad de borrar rápidamente el contenido del campo de entrada.
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DateField hasClear />`}
+>
+    <DateComponents.DateField
+        hasClear
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField hasClear />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Contenido de inicio
 
 Permite agregar contenido a la parte inicial del campo. Se coloca antes de todos los demás componentes.
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DateField label="Label" startContent={<Label size="s">Start content</Label>} />`}
+>
+    <DateComponents.DateField
+        label="Label"
+        startContent={<UIKit.Label size="s">Start content</UIKit.Label>}
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField label="Label" startContent={<Label>Start content</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Contenido final
 
 Permite agregar contenido a la parte final del campo. Se coloca después de todos los demás componentes.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DateField endContent={<Label size="s">End content</Label>} hasClear/>`}
+>
+    <DateComponents.DateField
+        hasClear
+        endContent={<UIKit.Label size="s">End content</UIKit.Label>}
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField hasClear endContent={<Label>End content</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Formato
 
 La prop `format` es una cadena que define el formato de fecha y hora que el componente `DateField` aceptará y mostrará. Esta prop determina cómo se presentan visualmente la fecha y la hora al usuario y cómo se espera que se formatee la entrada del usuario. [Formatos disponibles](https://day.js.org/docs/en/display/format)
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DateField format='LTS' />
+`}
+>
+    <DateComponents.DateField format='LTS' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DateField format="LTS" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Analizador de fechas personalizado
 
 Puede proporcionar una función de análisis personalizada para manejar cadenas de fechas pegadas a través de la prop `parseDateFromString`. Esto es útil cuando necesita admitir formatos de fecha específicos o lógica de análisis personalizada que difiere del comportamiento predeterminado.
 
-GRAVITY_TRANSLATION_BLOCK_28_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {dateTime} from '@gravity-ui/date-utils';
+
+const customParser = (dateStr: string, format: string, timeZone?: string) => {
+  // Custom parsing logic
+  // For example, handle DD/MM/YYYY format specifically
+  if (dateStr.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+    const [day, month, year] = dateStr.split('/');
+    return dateTime({input: `${year}-${month}-${day}`, timeZone});
+  }
+  // Fallback to default parsing
+  return dateTime({input: dateStr, format, timeZone});
+};
+
+<DateField parseDateFromString={customParser} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zona horaria
 

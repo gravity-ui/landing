@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Modal
+
+<!--/GITHUB_BLOCK-->
+
 O componente `Modal` serve como base para criar janelas pop-up com um plano de fundo acima do restante do conteúdo em uma página.
 Ele desabilita a rolagem ao abrir e gerencia o foco para o conteúdo. Os componentes filhos do `Modal` são renderizados dentro do componente [`Portal`](../Portal).
 Com o `Modal`, você pode implementar diálogos, alertas, confirmações e muito mais.
@@ -14,9 +20,9 @@ import {Button, Modal} from '@gravity-ui/uikit';
 
 const [open, setOpen] = useState(false);
 
-<Button onClick={() => setOpen(true)}>Abrir Modal</Button>
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => setOpen(false)}>
-    Conteúdo
+    Content
 </Modal>
 ```
 

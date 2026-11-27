@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Slider
+
+<!--/GITHUB_BLOCK-->
+
 Le curseur est un composant React personnalisable et réactif qui permet aux utilisateurs de sélectionner une seule valeur ou une plage de valeurs à partir d'un ensemble de données spécifié.
 
 ```tsx
@@ -10,17 +16,49 @@ import {Slider} from '@gravity-ui/uikit';
 
 Ceci est un curseur avec une seule poignée pour sélectionner une seule valeur. Il est utilisé par défaut.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Curseur de plage
 
 Ceci est un curseur avec deux poignées pour sélectionner une plage. Pour l'utiliser, définissez `defaultValue` (pour un curseur non contrôlé) ou `value` (pour un curseur contrôlé) pour le tableau.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider defaultValue={[20, 40]} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider defaultValue={[20, 40]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## États
 
@@ -28,25 +66,93 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 
 C'est un état d'un `Slider` où vous ne souhaitez pas permettre à l'utilisateur d'interagir avec ce composant.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider disabled />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider disabled={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Erreur
 
 Cet état du `Slider` est destiné aux entrées utilisateur incorrectes. Pour modifier l'apparence du `Slider`, utilisez la propriété `validationState` avec la valeur `"invalid"`. Vous pouvez éventuellement fournir un message d'erreur via la propriété `errorMessage`. Ce texte du message sera rendu sous le curseur.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider validationState="invalid" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider validationState="invalid" errorMessage="Error message" />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider validationState={"invalid"} />
+<Slider validationState={"invalid"} errorMessage="Error message" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Taille
 
 Utilisez la propriété `size` pour gérer la taille du `Slider`. La taille par défaut est `m`.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="s" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="m" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="l" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="xl" />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider size="s" />
+<Slider size="m" />
+<Slider size="l" />
+<Slider size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valeur
 
@@ -54,17 +160,59 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 Les propriétés `min` et `max` définissent les limites de la plage que le `Slider` peut gérer. Ces propriétés sont essentielles pour définir les limites des valeurs sélectionnables.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider min={10} />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider max={50} />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider min={20} max={60} />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider min={10} />
+<Slider max={50} />
+<Slider min={20} max={60} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pas
 
 La propriété `step` détermine les incréments dans la plage de valeurs minimale et maximale. Cela signifie de combien la valeur change à chaque déplacement du curseur.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider step={10} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider step={10} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Marques
 
@@ -72,21 +220,69 @@ La propriété `marks` est utilisée dans le composant `Slider` pour spécifier 
 
 - le nombre de marqueurs visuels le long du curseur
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={11} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={11} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 - le tableau des valeurs des marqueurs le long du curseur
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={[0, 50, 100]} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={[0, 50, 100]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 La valeur `0` ou un tableau vide `[]` dans la propriété `marks` masque toutes les marques du `Slider`.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={0} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={0} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 > La valeur de la marque est disponible pour la sélection, même si elle ne correspond pas à la condition de la valeur `step`.
 
@@ -96,17 +292,49 @@ Vous pouvez modifier le format d'affichage des valeurs des marques en utilisant 
 
 Vous pouvez définir la propriété `step` sur `null` pour définir un ensemble de valeurs spécifiques que le curseur peut gérer, par opposition à une plage continue. Ceci est particulièrement utile lorsque seules certaines valeurs discrètes sont valides pour la sélection. Dans ce cas, les propriétés `min`, `max` et `marks` permettent de spécifier un tableau de nombres représentant les valeurs exactes que les utilisateurs sont autorisés à sélectionner à l'aide du `Slider`.
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={[10, 20, 50, 55, 65, 80]} step={null} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={[10, 20, 50, 55, 65, 80]} step={null} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Point de départ
 
 La propriété `startPoint` vous permet de définir le point de départ de la piste. Elle utilise la valeur minimale du `Slider` par défaut. Elle sera ignorée si vous utilisez le `Slider` avec des valeurs de plage ou si vous définissez la propriété `inverted`.
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider startPoint={50} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider startPoint={50} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Inversé
 
@@ -115,17 +343,49 @@ Par défaut ( `false`), le `Slider` affiche l'intervalle de `min` à la poignée
 Si `true`, il indique l'intervalle de la poignée à `max`.
 Uniquement pour un `Slider` unique. La propriété `startPoint` sera ignorée.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider inverted />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider inverted />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Infobulle
 
 La propriété `tooltipDisplay` est utilisée dans le composant `Slider` pour contrôler le comportement d'affichage d'une infobulle qui montre la valeur actuelle lorsque l'utilisateur interagit avec le curseur. La valeur `auto` affiche l'infobulle uniquement lorsque les poignées du `Slider` sont survolées par le curseur ou focalisées.
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_27_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider tooltipDisplay="on" />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider tooltipDisplay="on" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 Vous pouvez modifier le format d'affichage de la valeur de l'infobulle en utilisant la propriété `tooltipFormat`. Si vous ne spécifiez pas `tooltipFormat`, `marksFormat` sera utilisé pour afficher la valeur dans l'infobulle.
 

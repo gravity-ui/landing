@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Toc
+
+<!--/GITHUB_BLOCK-->
+
 O componente `Toc` foi projetado para exibir um sumário da página, mostrando um conjunto de itens com dois níveis de hierarquia.
 
 ```tsx
@@ -33,4 +39,3 @@ Se você pular isso, o componente usará a outra opção.
 | content | Conteúdo do item a ser exibido                                                                         | `React.ReactNode[]` |        |
 | href    | A propriedade `href` do elemento `<a>`, para o qual um item será convertido se fornecido                |      `string`       |        |
 | items   | Itens filhos                                                                                           |     `TocItem[]`     |        |
-GRAVITY_TRANSLATION_BLOCK_0_END

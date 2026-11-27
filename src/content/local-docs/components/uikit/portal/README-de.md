@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Portal
+
+<!--/GITHUB_BLOCK-->
 
 `Portal` ist eine Utility-Komponente. Im Grunde ist es ein einfacher Wrapper um Reacts [`createPortal`](https://react.dev/reference/react-dom/createPortal), der es Ihnen ermöglicht, Kinder in einem DOM-Knoten außerhalb der Elternkomponente zu rendern.
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# HotkeysPanel
+
+<!--/GITHUB_BLOCK-->
+
 Un panneau de navigation pour la documentation des raccourcis clavier.
 Le panneau affiche un ensemble de raccourcis clavier pour votre application avec une description de leur objectif.
 
@@ -6,7 +12,6 @@ import {HotkeysPanel} from '@gravity-ui/navigation';
 ```
 
 ## Propriétés
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Propriété                | Type            | Requis | Défaut | Description                                                                  |
 | :---------------------- | :-------------- | :------: | :------ | :--------------------------------------------------------------------------- |

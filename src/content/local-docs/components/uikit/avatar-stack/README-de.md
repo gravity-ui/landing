@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# AvatarStack
+
+<!--/GITHUB_BLOCK-->
 
 Diese Komponente wird für einen Stapel von Bildern verwendet, die sich überlappen, und optional mit einer Steuerung. Sie bezieht sich normalerweise auf Benutzer-Avatare.
 
@@ -37,7 +41,7 @@ Komponente zum Überschreiben des `More`-Buttons
 ```tsx
 <AvatarStack
   renderMore={({count}) => (
-    <Tooltip content={'Weitere Benutzer'}>
+    <Tooltip content={'More users'}>
       <AvatarStack.MoreButton count={count} />
     </Tooltip>
   )}

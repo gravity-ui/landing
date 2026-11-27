@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Calendar
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {Calendar} from '@gravity-ui/date-components';
@@ -18,9 +22,29 @@ import {dateTimeParse} from '@gravity-ui/date-utils';
 
 要控制 `Calendar` 的大小，请使用 `size` 属性。默认大小为 `m`。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar size="m" />
+<Calendar size="l" />
+<Calendar size="xl" />
+`}
+>
+    <DateComponents.Calendar size="m" />
+    <DateComponents.Calendar size="l" />
+    <DateComponents.Calendar size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar size="m" />
+<Calendar size="l" />
+<Calendar size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Value
 
@@ -28,9 +52,23 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 `minValue` 属性允许您指定用户可以输入的最早日期和时间。反之，`maxValue` 属性指定用户可以输入的最新日期和时间。所有其他值都将被禁用。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+`}
+>
+    <DateComponentsExamples.CalendarExample minValue={'01.01.2024'} maxValue={'01.01.2025'}/>
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Mode
 
@@ -46,9 +84,23 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 
 您可以使用 `modes` 属性来限制启用的模式。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar defaultMode="months"/>
+`}
+>
+    <DateComponents.Calendar defaultMode="months" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar defaultMode="months" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## States
 
@@ -56,25 +108,67 @@ GRAVITY_TRANSLATION_BLOCK_6_END
 
 `Calendar` 的状态，您不希望用户能够与组件进行交互。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar disabled={true} />
+`}
+>
+    <DateComponents.Calendar disabled={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar disabled={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Readonly
 
 `readOnly` 是一个布尔属性，当设置为 `true` 时，使 `Calendar` 组件对用户来说是不可变的。这意味着虽然输入将显示其当前值，但用户将无法更改它。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar readOnly={true} />
+`}
+>
+    <DateComponents.Calendar readOnly={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar readOnly={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Focused value
 
 允许选择 `Calendar` 视图聚焦的日期。如果您需要受控，则应使用 `focusedValue` 属性。您可以使用可选的 `defaultFocusedValue` 属性为无状态组件设置初始聚焦值。
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<Calendar defaultFocusedValue={dateTimeParse('01.01.2020')} />
+`}
+>
+    <DateComponentsExamples.CalendarExample defaultFocusedValue={'01.01.2020'} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Calendar defaultFocusedValue={dateTimeParse('01.01.2020')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Time zone
 

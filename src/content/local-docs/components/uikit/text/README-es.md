@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Text
+
+<!--/GITHUB_BLOCK-->
+
 El componente `Text` aplica estilos de tipografía como la variante de fuente, el color y el manejo de desbordamiento de texto a su contenido.
 
 ```tsx
@@ -8,9 +14,29 @@ import {Text} from '@gravity-ui/uikit';
 
 Estas son las fuentes predeterminadas que se pueden anular en el proyecto. Puede ver una lista de todas las fuentes disponibles [aquí](https://preview.gravity-ui.com/uikit/?path=/story/typography--variants).
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <Text variant="body-1">some text</Text>
+            <Text variant="caption-2">some text</Text>
+            <Text variant="display-3">some text</Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">some text</Text>
+<Text variant="caption-2">some text</Text>
+<Text variant="display-3">some text</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Elipsis
 
@@ -20,34 +46,134 @@ Esta propiedad te permite ocultar el texto que se desborda:
 
 `true`: El contenido desbordado oculto se reemplazará con una elipsis (`…`).
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <Text ellipsis={false}>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus
+                est, ab rerum harum hic delectus fuga veniam! Hic, atque, quia sunt consectetur eius
+                corrupti, expedita sapiente exercitationem aperiam quibusdam libero ipsa veritatis quisquam!
+            </Text>
+            <Text ellipsis>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus
+                est, ab rerum harum hic delectus fuga veniam! Hic, atque, quia sunt consectetur eius
+                corrupti, expedita sapiente exercitationem aperiam quibusdam libero ipsa veritatis quisquam!
+            </Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text ellipsis={false}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus est, ab
+    rerum harum hic delectus fuga veniam! Hic, atque, quia sunt consectetur eius corrupti, expedita sapiente
+    exercitationem aperiam quibusdam libero ipsa veritatis quisquam!</Text>
+<Text ellipsis={true}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus est, ab
+    rerum harum hic delectus fuga veniam! Hic, atque, quia sunt consectetur eius corrupti, expedita sapiente
+    exercitationem aperiam quibusdam libero ipsa veritatis quisquam!</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Espacio en blanco
 
 Esto representa la propiedad CSS `white-space`. Puede ser `nowrap` o `break-spaces`.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+            <Text whiteSpace="nowrap">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+            <Text whiteSpace="break-spaces">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+<Text whiteSpace={"nowrap"}>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+<Text whiteSpace={"break-spaces"}>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Salto de palabra
 
 Esto representa la propiedad CSS `word-break`. El único valor disponible es `break-all`. | `break-word`.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <>
+            <Text>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus
+                est, ab rerum harum hic delectus fuga veniam! Hic, atque, quia sunt consectetur eius
+                corrupti, expedita sapiente exercitationem aperiam quibusdam libero ipsa veritatis quisquam!
+            </Text>
+            <Text wordBreak="break-all">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus
+                est, ab rerum harum hic delectus fuga veniam! Hic, atque, quia sunt consectetur eius
+                corrupti, expedita sapiente exercitationem aperiam quibusdam libero ipsa veritatis quisquam!
+            </Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus est, ab rerum harum hic
+    delectus fuga veniam! Hic, atque, quia sunt consectetur eius corrupti, expedita sapiente exercitationem aperiam
+    quibusdam libero ipsa veritatis quisquam!</Text>
+<Text wordBreak="break-all">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates asperiores accusamus
+    est, ab rerum harum hic delectus fuga veniam! Hic, atque, quia sunt consectetur eius corrupti, expedita sapiente
+    exercitationem aperiam quibusdam libero ipsa veritatis quisquam!</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Color
 
 Especifica el color del texto. Los colores disponibles son:
 `primary`, `complementary`, `secondary`, `hint`, `info`, `info-heavy`, `positive`, `positive-heavy`, `warning`, `warning-heavy`, `danger`, `danger-heavy`, `utility`, `utility-heavy`, `misc`, `misc-heavy`, `brand`, `link`, `link-hover`, `link-visited`, `link-visited-hover`, `dark-primary`, `dark-complementary`, `dark-secondary`, `light-primary`, `light-complementary`, `light-secondary`, `light-hint`, `inverted-primary`, `inverted-complementary`, `inverted-secondary`, e `inverted-hint`.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <Text color="info">some text</Text>
+            <Text color="positive">some text</Text>
+            <Text color="warning">some text</Text>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text color="info">some text</Text>
+<Text color="positive">some text</Text>
+<Text color="warning">some text</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 

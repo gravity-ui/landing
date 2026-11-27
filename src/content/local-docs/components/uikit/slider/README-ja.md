@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Slider
+
+<!--/GITHUB_BLOCK-->
+
 スライダーは、指定されたデータセットから単一の値または値の範囲を選択できる、カスタマイズ可能でレスポンシブなReactコンポーネントです。
 
 ```tsx
@@ -10,15 +16,49 @@ import {Slider} from '@gravity-ui/uikit';
 
 これは、単一の値を選択するための1つのハンドルを持つスライダーです。デフォルトで使用されます。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### レンジスライダー
 
 これは、範囲を選択するための2つのハンドルを持つスライダーです。これを使用するには、配列に対して `defaultValue`（制御されていないスライダーの場合）または `value`（制御されているスライダーの場合）を設定します。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider defaultValue={[20, 40]} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider defaultValue={[20, 40]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ステート
 
@@ -26,25 +66,93 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 これは、ユーザーがこのコンポーネントを操作できないようにしたい `Slider` のステートです。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider disabled />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider disabled={true} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### エラー
 
 この `Slider` ステートは、ユーザーの不正な入力用です。 `Slider` の外観を変更するには、 `validationState` プロパティを `"invalid"` 値で設定します。オプションで、 `errorMessage` プロパティを通じてエラーメッセージを提供できます。このメッセージテキストはスライダーの下にレンダリングされます。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider validationState="invalid" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider validationState="invalid" errorMessage="Error message" />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider validationState={"invalid"} />
+<Slider validationState={"invalid"} errorMessage="Error message" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## サイズ
 
 `size` プロパティを使用して `Slider` のサイズを管理します。デフォルトのサイズは `m` です。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="s" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="m" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="l" />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider size="xl" />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider size="s" />
+<Slider size="m" />
+<Slider size="l" />
+<Slider size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 値
 
@@ -52,17 +160,59 @@ GRAVITY_TRANSLATION_BLOCK_8_END
 
 `min` および `max` プロパティは、 `Slider` が処理できる範囲の制限を定義します。これらのプロパティは、選択可能な値の境界を設定するために不可欠です。
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+export default function () {
+    return (
+        <>
+            <Box width="100%" maxWidth={300}>
+                <Slider min={10} />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider max={50} />
+            </Box>
+            <Box width="100%" maxWidth={300}>
+                <Slider min={20} max={60} />
+            </Box>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider min={10} />
+<Slider max={50} />
+<Slider min={20} max={60} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### ステップ
 
 `step` プロパティは、最小値と最大値の範囲内のインクリメントを決定します。これは、スライダーを1回動かすたびに値がどれだけ変化するかを示します。
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider step={10} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider step={10} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### マーカー
 
@@ -70,21 +220,69 @@ GRAVITY_TRANSLATION_BLOCK_12_END
 
 - スライダー上の視覚的なマーカーの数
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={11} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={11} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 - スライダー上のマーカー値の配列
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={[0, 50, 100]} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={[0, 50, 100]} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `marks` プロパティの値が `0` または空の配列 `[]` の場合、 `Slider` からすべてのマーカーが非表示になります。
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={0} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={0} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 > マーカーの値は、 `step` 値の条件に一致しない場合でも選択可能です。
 
@@ -94,17 +292,49 @@ GRAVITY_TRANSLATION_BLOCK_18_END
 
 `step` プロパティを `null` に設定することで、連続的な範囲ではなく、スライダーが処理できる特定の値のセットを定義できます。これは、特定の離散値のみが選択可能である場合に特に役立ちます。その場合、 `min`、 `max`、および `marks` プロパティは、ユーザーが `Slider` を使用して選択できる正確な値を示す数値の配列を指定できます。
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider marks={[10, 20, 50, 55, 65, 80]} step={null} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider marks={[10, 20, 50, 55, 65, 80]} step={null} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 開始点
 
 `startPoint` プロパティを使用すると、トラックの開始点を設定できます。デフォルトでは、最小の `Slider` 値が使用されます。範囲の値を持つ `Slider` を使用している場合や、 `inverted` プロパティを設定している場合は無視されます。
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider startPoint={50} />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider startPoint={50} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 反転
 
@@ -113,17 +343,49 @@ GRAVITY_TRANSLATION_BLOCK_22_END
 `true` の場合、ピンから `max` までの間隔を示します。
 シングル `Slider` のみ。 `startPoint` プロパティは無視されます。
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider inverted />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider inverted />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ツールチップ
 
 `tooltipDisplay` プロパティは、 `Slider` コンポーネントで使用され、スライダーを操作しているユーザーに現在の値を示すツールチップの表示動作を制御します。 `auto` 値は、 `Slider` のハンドルがカーソルでホバーされたりフォーカスされたりした場合にのみツールチップを表示します。
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+<!--SANDBOX
+import {Box, Slider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+export default function () {
+    return (
+        <Box width="100%" maxWidth={300}>
+            <Slider tooltipDisplay="on" />
+        </Box>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Slider tooltipDisplay="on" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 `tooltipFormat` プロパティを使用して、ツールチップの値の表示形式を変更できます。 `tooltipformat` を指定しない場合、ツールチップの値の表示には `marksFormat` が使用されます。
 

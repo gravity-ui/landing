@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Stepper
+
+<!--/GITHUB_BLOCK-->
+
 `Stepper` guide les utilisateurs à travers une séquence d'étapes numérotées, montrant la progression dans un flux de travail multi-étapes de type assistant.
 
 ```tsx
@@ -6,53 +12,314 @@ import {Stepper} from '@gravity-ui/uikit';
 
 ## Exemple
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item>Step 2</Stepper.Item>
+            <Stepper.Item>Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item>Step 2</Stepper.Item>
+  <Stepper.Item>Step 3</Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperDefault />
+
+<!--/GITHUB_BLOCK-->
 
 ### Éléments interactifs
 
 Utilisez les props `onUpdate` et `value` avec un état personnalisé pour manipuler les étapes.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {useState} from 'react';
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    const [value, setValue] = useState(0);
+
+    return (
+        <Stepper value={value} onUpdate={setValue}>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item>Step 2</Stepper.Item>
+            <Stepper.Item>Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const [value, setValue] = React.useState();
+
+return (
+  <Stepper value={value} onUpdate={setValue}>
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+    <Stepper.Item>Step 4 with very long title</Stepper.Item>
+  </Stepper>
+);
+```
+
+<!-- Storybook example -->
+
+<StepperInteractiveShowcase />
+
+<!--/GITHUB_BLOCK-->
 
 ### Vues différentes
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item view="error">Step 2</Stepper.Item>
+            <Stepper.Item view="error">Step 3</Stepper.Item>
+            <Stepper.Item view="success">Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item view="error">Step 2</Stepper.Item>
+  <Stepper.Item view="error">Step 3</Stepper.Item>
+  <Stepper.Item view="success">Step 4</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperView/>
+
+<!--/GITHUB_BLOCK-->
 
 ### Tailles différentes
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <Stepper size="l">
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item>Step 2</Stepper.Item>
+            <Stepper.Item>Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Flex direction="column" gap={4}>
+  <Stepper {...args} size="s">
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+  </Stepper>
+
+  <Stepper {...args} size="m">
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+  </Stepper>
+
+  <Stepper {...args} size="l">
+    <Stepper.Item>Step 1</Stepper.Item>
+    <Stepper.Item>Step 2</Stepper.Item>
+    <Stepper.Item>Step 3</Stepper.Item>
+  </Stepper>
+</Flex>
+```
+
+<!-- Storybook example -->
+
+<StepperSize/>
+
+<!--/GITHUB_BLOCK-->
 
 ### Étapes désactivées
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item disabled>Step 2</Stepper.Item>
+            <Stepper.Item disabled>Step 3</Stepper.Item>
+            <Stepper.Item disabled>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item disabled>Step 2</Stepper.Item>
+  <Stepper.Item disabled>Step 3</Stepper.Item>
+  <Stepper.Item disabled>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperDisabled/>
+
+<!--/GITHUB_BLOCK-->
 
 ### Icônes personnalisées
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Cloud, Gear, Hammer, Rocket} from '@gravity-ui/icons';
+import {Stepper} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <Stepper>
+            <Stepper.Item icon={Gear}>Step 1</Stepper.Item>
+            <Stepper.Item icon={Rocket}>Step 2</Stepper.Item>
+            <Stepper.Item icon={Cloud}>Step 3</Stepper.Item>
+            <Stepper.Item icon={Hammer}>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper>
+  <Stepper.Item icon={Gear}>Step 1</Stepper.Item>
+  <Stepper.Item view="error" icon={Gear}>
+    Step 2
+  </Stepper.Item>
+  <Stepper.Item view="success" icon={Gear}>
+    Step 3
+  </Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperCustomIcons/>
+
+<!--/GITHUB_BLOCK-->
 
 ### Séparateur d'étape personnalisé
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Stepper, Text} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+const Separator = () => {
+    return <Text color="secondary">{'->'}</Text>;
+};
+
+export default function () {
+    return (
+        <Stepper separator={<Separator />}>
+            <Stepper.Item>Step 1</Stepper.Item>
+            <Stepper.Item view="error">Step 2</Stepper.Item>
+            <Stepper.Item view="success">Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const Separator = () => {
+  return <Text color="secondary">{'->'}</Text>;
+};
+
+<Stepper {...args} separator={<Separator />}>
+  <Stepper.Item>Step 1</Stepper.Item>
+  <Stepper.Item view="error">Step 2</Stepper.Item>
+  <Stepper.Item view="success">Step 3</Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>;
+```
+
+<!-- Storybook example -->
+
+<StepperCustomSeparator/>
+
+<!--/GITHUB_BLOCK-->
 
 ### Étape avec élément flottant
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Stepper, Tooltip} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <Stepper>
+            <Tooltip content="fancy step with tooltip">
+                <Stepper.Item>Step 1</Stepper.Item>
+            </Tooltip>
+            <Stepper.Item view="error">Step 2</Stepper.Item>
+            <Stepper.Item view="success">Step 3</Stepper.Item>
+            <Stepper.Item>Step 4 with very long title</Stepper.Item>
+        </Stepper>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Stepper {...args}>
+  <Tooltip content="fancy step with tooltip">
+    <Stepper.Item>Step 1</Stepper.Item>
+  </Tooltip>
+  <Stepper.Item view="error">Step 2</Stepper.Item>
+  <Stepper.Item view="success">Step 3</Stepper.Item>
+  <Stepper.Item>Step 4 with very long title</Stepper.Item>
+</Stepper>
+```
+
+<!-- Storybook example -->
+
+<StepperWithFloatingElements/>
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

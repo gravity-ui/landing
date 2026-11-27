@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Drawer
+
+<!--/GITHUB_BLOCK-->
+
 O componente `Drawer` é um elemento de interface versátil usado em aplicações web para fornecer um painel deslizante que emerge da borda da tela. Este painel pode abrigar navegações, ferramentas ou conteúdo adicional. O componente é implementado usando transições React e CSS para animações suaves.
 
 ```tsx
@@ -17,9 +23,9 @@ const App = () => {
 
   return (
     <div>
-      <button onClick={() => setVisible(true)}>Abrir Drawer</button>
+      <button onClick={() => setVisible(true)}>Open Drawer</button>
       <Drawer onOpenChange={setVisible} open={isVisible}>
-        <p>Conteúdo do drawer</p>
+        <p>Content of the drawer</p>
       </Drawer>
     </div>
   );
@@ -34,16 +40,16 @@ Para controlar o posicionamento do `Drawer`, você pode passar a prop `placement
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} placement="left">
-  <p>Conteúdo do drawer</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="right">
-  <p>Conteúdo do drawer</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="top">
-  <p>Conteúdo do drawer</p>
+  <p>Content of the drawer</p>
 </Drawer>
 <Drawer onOpenChange={setVisible} open={isVisible} placement="bottom">
-  <p>Conteúdo do drawer</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -53,7 +59,7 @@ Por padrão, o `Drawer` desliza para dentro e para fora com uma transição. Par
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} disableTransition>
-  <p>Conteúdo do drawer</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -63,7 +69,7 @@ Um `Drawer` pode ser redimensionável passando a prop `resizable`.
 
 ```tsx
 <Drawer onOpenChange={setVisible} open={isVisible} resizable>
-  <p>Conteúdo do drawer</p>
+  <p>Content of the drawer</p>
 </Drawer>
 ```
 
@@ -73,12 +79,11 @@ Adicionalmente, você pode usar a prop `size` para controlar o tamanho do `Drawe
 const [size, setSize] = useState(500);
 
 <Drawer onOpenChange={setVisible} open={isVisible} resizable size={size} onResize={setSize}>
-  <p>Conteúdo do drawer</p>
+  <p>Content of the drawer</p>
 </Drawer>;
 ```
 
 ## Propriedades
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nome                    | Descrição                                                                                                                             |                Tipo                |     Padrão     |
 | :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------: | :------------: |

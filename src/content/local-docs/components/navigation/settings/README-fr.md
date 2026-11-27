@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Settings
+
+<!--/GITHUB_BLOCK-->
 
 Le composant `Settings` fournit la mise en page d'un panneau de paramètres avec les fonctionnalités suivantes.
 
@@ -6,7 +10,48 @@ Le composant `Settings` fournit la mise en page d'un panneau de paramètres avec
 - filtrage du contenu du panneau par les en-têtes des éléments
 - affichage de l'état de chargement et du contenu
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+## Usage
+
+One-level settings example:
+
+```tsx
+<Settings>
+  <Settings.Page title="Appearance">...</Settings.Page>
+  <Settings.Page title="Notifications">...</Settings.Page>
+</Settings>
+```
+
+Two-level settings example:
+_Note:_ `Settings` with `view=mobile` groups `Settings.Group` are ignored.
+
+```tsx
+<Settings>
+  <Settings.Group groupTitle="My service">
+    <Settings.Page title="Appearance">...</Settings.Page>
+    <Settings.Page title="Notifications">...</Settings.Page>
+  </Settings.Group>
+  <Settings.Group groupTitle="General">
+    <Settings.Page title="Appearance">...</Settings.Page>
+    <Settings.Page title="Notifications">...</Settings.Page>
+  </Settings.Group>
+</Settings>
+```
+
+Pages with sections example:
+
+```tsx
+<Settings.Page title="Features" icon={'...'}>
+  <Settings.Section title="Common">
+    <Settings.Item title="Default VCS">...</Settings.Item>
+    <Settings.Item title="Search root">...</Settings.Item>
+  </Settings.Section>
+  <Settings.Section title="Beta functionality">...</Settings.Section>
+</Settings.Page>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

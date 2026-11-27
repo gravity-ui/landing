@@ -1,20 +1,74 @@
+<!--GITHUB_BLOCK-->
+
+# TableColumnSetup
+
+<!--/GITHUB_BLOCK-->
+
 `TableColumnSetup` 컴포넌트는 테이블 컬럼의 표시 여부와 순서를 설정하는 사용자 인터페이스를 제공합니다. 이 컴포넌트는 버튼을 표시하며, 이 버튼을 클릭하면 사용자가 컬럼을 표시/숨기거나 드래그 앤 드롭으로 순서를 변경할 수 있는 사용 가능한 컬럼 목록이 있는 팝업이 열립니다.
 
 ```tsx
 import {TableColumnSetup} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const items = [
+  {id: 'name', title: 'Name', selected: true, required: true},
+  {id: 'email', title: 'Email', selected: true},
+  {id: 'phone', title: 'Phone', selected: false},
+];
+
+<TableColumnSetup items={items} onUpdate={(updatedItems) => console.log(updatedItems)} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 정렬 가능한 컬럼
 
 `sortable` 속성을 `true`로 설정하여 드래그 앤 드롭 기능을 활성화하면 사용자가 컬럼 순서를 재정렬할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            sortable
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup items={items} sortable onUpdate={(updatedItems) => console.log(updatedItems)} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 적용 모드
 
@@ -23,25 +77,111 @@ GRAVITY_TRANSLATION_BLOCK_3_END
 - `true` - 사용자가 컬럼을 토글할 때 변경 사항이 즉시 적용됩니다.
 - `false` - 사용자가 '적용' 버튼을 클릭할 때만 변경 사항이 적용됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            hideApplyButton
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  hideApplyButton
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 상태 표시
 
 `showStatus` 속성을 활성화하여 스위처 버튼에 선택된 컬럼 수를 표시합니다.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return <TableColumnSetup items={items} showStatus onUpdate={(updatedItems) => console.log(updatedItems)} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  showStatus={true}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 사용자 정의 스위처
 
 `renderSwitcher` 속성을 사용하여 트리거 버튼을 사용자 정의합니다.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Button, TableColumnSetup} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+const items = [
+    {id: 'name', title: 'Name', selected: true, required: true},
+    {id: 'email', title: 'Email', selected: true},
+    {id: 'phone', title: 'Phone', selected: false},
+];
+
+export default function () {
+    return (
+        <TableColumnSetup
+            items={items}
+            renderSwitcher={({onClick, onKeyDown}) => (
+                <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+                    Configure Columns
+                </Button>
+            )}
+            onUpdate={(updatedItems) => console.log(updatedItems)}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TableColumnSetup
+  items={items}
+  renderSwitcher={({onClick, onKeyDown}) => (
+    <Button onClick={onClick} onKeyDown={onKeyDown} view="outlined">
+      Configure Columns
+    </Button>
+  )}
+  onUpdate={(updatedItems) => console.log(updatedItems)}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 
@@ -71,7 +211,6 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 | sticky   | 컬럼의 고정 위치                                        |      `'left' \| 'right'`      |         |
 
 ### SwitcherProps
-GRAVITY_TRANSLATION_BLOCK_10_END
 
 | 이름      | 설명                                   |                   타입                    |
 | :-------- | :------------------------------------- | :---------------------------------------: |

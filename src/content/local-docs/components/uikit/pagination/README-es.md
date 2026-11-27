@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Pagination
+
+<!--/GITHUB_BLOCK-->
 
 `Pagination` renderiza controles de navegación de página — números de página con botones anterior/siguiente y un selector opcional de tamaño de página — utilizados para dividir listas o tablas largas en varias páginas.
 
@@ -98,5 +102,3 @@ const pagination = (
 | view            | Establece la apariencia de los botones y controles. Afecta la vista de la entrada de paginación en dispositivos móviles.                                |   `"outlined" \| "clear"`   |     `"outlined"`    |
 | pageComponent   | Anula el elemento raíz para los elementos de paginación clickeables (botones de navegación y página). Usa `"a"` para enlaces normales o un componente consciente del enrutador. |  `PaginationPageComponent`  |                     |
 | getPageProps    | Devuelve props adicionales por elemento clickeable (por ejemplo, `href` para `"a"` o `to` para un `Link` del enrutador). Solo se aplica cuando se establece `pageComponent`. | `PaginationPagePropsGetter` |                     |
-
-GRAVITY_TRANSLATION_BLOCK_1_END

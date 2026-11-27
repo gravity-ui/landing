@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# AvatarStack
+
+<!--/GITHUB_BLOCK-->
 
 此组件用于堆叠重叠的图像，并可选择添加一个控件。它通常指用户头像。
 
@@ -37,7 +41,7 @@ import {AvatarStack} from '@gravity-ui/uikit';
 ```tsx
 <AvatarStack
   renderMore={({count}) => (
-    <Tooltip content={'更多用户'}>
+    <Tooltip content={'More users'}>
       <AvatarStack.MoreButton count={count} />
     </Tooltip>
   )}

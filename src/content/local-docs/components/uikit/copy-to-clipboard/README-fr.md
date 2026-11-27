@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# CopyToClipboard
+
+<!--/GITHUB_BLOCK-->
+
 `CopyToClipboard` est un wrapper de type render-prop qui copie du texte dans le presse-papiers et expose le statut de la copie à son enfant, vous permettant de rendre votre propre déclencheur ; pour un bouton prêt à l'emploi, utilisez `ClipboardButton`.
 
 ```tsx
@@ -17,9 +23,43 @@ Il existe trois statuts disponibles : `pending`, `success` et `error`.
 
 L'option `timeout` définit le temps en ms pour restaurer le statut initial (`pending`) après l'un des statuts de résultat (`success` ou `error`).
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Button, CopyToClipboard} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const buttonText = {
+    pending: 'Click Me',
+    success: 'Copied!',
+    error: "Couldn't copy...",
+};
+
+export default function () {
+    return (
+        <CopyToClipboard text="Some text to copy" timeout={500}>
+            {(status) => (
+                <Button view="normal" size="l">
+                    {buttonText[status]}
+                </Button>
+            )}
+        </CopyToClipboard>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const buttonText = {
+  pending: 'Click Me',
+  success: 'Copied!',
+  error: "Couldn't copy...",
+};
+
+<CopyToClipboard text="Some text to copy" timeout={500}>
+  {(status) => <button>{buttonText[status]}</button>}
+</CopyToClipboard>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

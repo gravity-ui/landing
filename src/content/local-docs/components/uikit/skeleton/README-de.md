@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Skeleton
+
+<!--/GITHUB_BLOCK-->
+
 Der Skeleton-Komponente zeigt eine Platzhaltervorschau Ihres Inhalts an, bevor die Daten geladen werden. Diese Vorschau wird angezeigt, um die Frustration durch Ladezeiten zu reduzieren.
 
 ```tsx
@@ -37,13 +43,34 @@ Verwenden Sie die `size`-Eigenschaft, um eine voreingestellte Skeleton-Höhe (un
 | `'l'`  | Groß           |
 | `'xl'` | Extra groß     |
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Skeleton size="xs" width={120} />
+<Skeleton size="m"  width={200} />
+<Skeleton size="xl" width={280} />
+
+<Skeleton variant="circle" size="l" />
+<Skeleton variant="square" size="l" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Text-Platzhalter
 
 Verwenden Sie `variant="text"`, um ein Skeleton zu rendern, das `font-size` und `line-height` vom übergeordneten Kontext erbt. Platzieren Sie mehrere Skeletons innerhalb eines `<Text variant="...">`-Elements für mehrzeilige Platzhalter.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Text variant="body-1">
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={400} />
+  <Skeleton variant="text" width={240} />
+</Text>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

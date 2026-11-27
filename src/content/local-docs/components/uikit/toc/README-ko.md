@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toc
+
+<!--/GITHUB_BLOCK-->
 
 `Toc` 컴포넌트는 페이지의 목차를 표시하도록 설계되었으며, 계층 구조가 두 개인 항목 집합을 보여줍니다.
 

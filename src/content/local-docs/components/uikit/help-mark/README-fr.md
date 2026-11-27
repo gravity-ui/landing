@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# HelpMark
+
+<!--/GITHUB_BLOCK-->
+
 Une icône d'aide qui révèle des informations contextuelles dans une bulle au survol ou au clic. Idéal pour afficher des astuces, des explications ou du contenu de support sans prendre d'espace supplémentaire dans l'interface.
 
 ```tsx
@@ -8,9 +14,35 @@ import {HelpMark} from '@gravity-ui/uikit';
 
 Composant avec HTML brut rendu et fermeture à la sortie de la souris :
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {HelpMark} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <HelpMark onClick={() => console.log('just action happened')}>
+            <b>Lorem ipsum</b> dolor sit{' '}
+            <a href="https://example.com" target="_blank" rel="noreferrer">
+                amet
+            </a>
+            , at scelerisque suspendisse
+        </HelpMark>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<HelpMark onClick={() => console.log('just action happened')}>
+  <b>Lorem ipsum</b> dolor sit{' '}
+  <a href="https://example.com" target="_blank" rel="noreferrer">
+    amet
+  </a>
+  , at scelerisque suspendisse
+</HelpMark>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 
@@ -21,5 +53,3 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | iconSize    | Définit la taille de l'icône         | `"s"` `"m"` `"l"` `"xl"` | `"m"`  |
 | popoverProps | Remplace les propriétés de `Popover` |      `PopoverProps`      |        |
 | children    | Contenu affiché à l'intérieur de la bulle |    `React.ReactNode`     |        |
-
-GRAVITY_TRANSLATION_BLOCK_2_END

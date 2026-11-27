@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tooltip
+
+<!--/GITHUB_BLOCK-->
 
 Ein einfacher Text-Tipp, der seinen Kindknoten als Anker verwendet. Diese Komponente akzeptiert nur Textinhalt und kann eine ausgezeichnete
 Alternative zum `title`-Attribut des Browsers sein, mit ihrer geringen Größe und der langen Verzögerung beim Erscheinen.
@@ -8,8 +12,8 @@ Alternative zum `title`-Attribut des Browsers sein, mit ihrer geringen Größe u
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Inhalt">
-  <div tabIndex={0}>Anker</div>
+<Tooltip content="Content">
+  <div tabIndex={0}>Anchor</div>
 </Tooltip>;
 ```
 
@@ -23,7 +27,7 @@ Alternativ können Sie eine Funktion als Kind übergeben, um `ref` und `props` m
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Inhalt">
+<Tooltip content="Content">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```

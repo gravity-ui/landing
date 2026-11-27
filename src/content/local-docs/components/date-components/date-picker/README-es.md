@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# DatePicker
+
+<!--/GITHUB_BLOCK-->
 
 ```tsx
 import {DatePicker} from '@gravity-ui/date-components';
@@ -22,21 +26,59 @@ La apariencia de `DatePicker` se controla mediante las propiedades `size`, `view
 
 Para controlar el tamaño de `DatePicker`, utiliza la propiedad `size`. El tamaño predeterminado es `m`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker size="s" />
+<DatePicker size="m" />
+<DatePicker size="l" />
+<DatePicker size="xl" />
+`}
+>
+    <DateComponents.DatePicker size="s" />
+    <DateComponents.DatePicker size="m" />
+    <DateComponents.DatePicker size="l" />
+    <DateComponents.DatePicker size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker size="s" />
+<DatePicker size="m" />
+<DatePicker size="l" />
+<DatePicker size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Vista
 
 `normal` - la vista principal de `DatePicker` (utilizada por defecto).
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DatePicker />`}>
+    <DateComponents.DatePicker />
+</ExampleBlock>
+LANDING_BLOCK-->
 
 `clear` - vista de `DatePicker` sin bordes visibles (se puede usar con un contenedor personalizado)
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--LANDING_BLOCK
+<ExampleBlock code={`<DatePicker view="clear" />`}>
+    <DateComponents.DatePicker view="clear" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker view="normal" />
+<DatePicker view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
@@ -44,9 +86,29 @@ La propiedad `pin` te permite controlar la forma de los bordes derecho e izquier
 El valor de la propiedad `pin` consta de nombres de estilo de borde izquierdo y derecho divididos por un guion, por ejemplo, `"round-brick"`.
 Los estilos de borde son: `round` (predeterminado), `circle`, `brick` y `clear`.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker pin="round-brick" />
+<DatePicker pin="brick-brick" />
+<DatePicker pin="brick-round" />
+`}
+>
+    <DateComponents.DatePicker pin="round-brick" />
+    <DateComponents.DatePicker pin="brick-brick" />
+    <DateComponents.DatePicker pin="brick-round" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker pin="round-brick" />
+<DatePicker pin="brick-brick" />
+<DatePicker pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valor
 
@@ -54,9 +116,27 @@ GRAVITY_TRANSLATION_BLOCK_7_END
 
 La propiedad `minValue` te permite especificar la fecha y hora más temprana que puede introducir el usuario. Por el contrario, la propiedad `maxValue` especifica la fecha y hora más tardía que se puede introducir. Si introduces un valor fuera de estos límites, el componente cambia su vista, como en el caso de un estado de validación inválido.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker minValue={dateTimeParse('01.01.2024')} placeholder={"minValue: '01.01.2024'"}/>
+<DatePicker maxValue={dateTimeParse('01.01.2025')} placeholder={"maxValue: '01.01.2025'"}/>
+`}
+>
+    <DateComponentsExamples.DatePickerExample minValue={'01.01.2024'} placeholder={"minValue: '01.01.2024'"} />
+    <DateComponentsExamples.DatePickerExample maxValue={'01.01.2025'} placeholder={"maxValue: '01.01.2025'"} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+
+<DatePicker minValue={dateTimeParse('01.01.2024')} />
+<DatePicker maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Estados
 
@@ -64,25 +144,70 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 El estado de `DatePicker` en el que no quieres que el usuario pueda interactuar con el componente.
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker disabled={true} defaultValue={dateTime()} />
+`}
+>
+    <DateComponentsExamples.DatePickerExample disabled={true} defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker disabled defaultValue={dateTime()} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Solo lectura
 
 `readOnly` es un atributo booleano que, cuando se establece en `true`, hace que el componente `DatePicker` sea inmutable para el usuario. Esto significa que, aunque la entrada mostrará su valor actual, los usuarios no podrán cambiarlo.
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker readOnly defaultValue={dateTimeParse(new Date())} />
+`}
+>
+    <DateComponentsExamples.DatePickerExample readOnly defaultValue={new Date()} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker readOnly defaultValue={dateTime()} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 El estado de `DatePicker` en el que deseas indicar una entrada incorrecta del usuario. Para cambiar la apariencia de `DatePicker`, utiliza la propiedad `validationState` con el valor `"invalid"`. Se puede añadir un texto de mensaje opcional a través de la propiedad `errorMessage`. El texto del mensaje se renderizará debajo del componente.
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker errorMessage="Error message" validationState="invalid" />
+<DatePicker validationState="invalid" />
+`}
+>
+    <DateComponents.DatePicker errorMessage="Error message" validationState="invalid" />
+    <DateComponents.DatePicker validationState="invalid" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker errorMessage="Error message" validationState="invalid" />
+<DatePicker validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Contenido adicional
 
@@ -90,39 +215,116 @@ GRAVITY_TRANSLATION_BLOCK_15_END
 
 Esta prop te permite proporcionar una breve indicación que describe el valor esperado del campo de entrada. Esta indicación se muestra dentro del campo de entrada antes de que el usuario introduzca un valor y desaparece al introducir texto.
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker placeholder="Placeholder" />
+`}
+>
+    <DateComponents.DatePicker placeholder='Placeholder' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker placeholder="Placeholder" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Etiqueta
 
 Permite colocar la etiqueta en la parte izquierda del campo. La etiqueta puede ocupar como máximo la mitad del ancho total del espacio de `DatePicker`.
 
-GRAVITY_TRANSLATION_BLOCK_18_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker label="Label" />
+<DatePicker label="Very long label with huge amount of symbols" />
+`}
+>
+    <DateComponents.DatePicker label="Label" />
+    <DateComponents.DatePicker label="Very long label with huge amount of symbols" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_19_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Botón de borrar
 
 `hasClear` es una prop booleana que proporciona a los usuarios la capacidad de borrar rápidamente el contenido del campo de entrada.
 
-GRAVITY_TRANSLATION_BLOCK_20_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`<DatePicker hasClear />`}
+>
+    <DateComponents.DatePicker
+        hasClear
+    />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_21_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker hasClear />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Formato
 
 La prop `format` es una cadena que define el formato de fecha y hora que el componente `DatePicker` aceptará y mostrará. Esta prop determina cómo se presentan visualmente la fecha y la hora al usuario y cómo se espera que se formatee la entrada del usuario. [Formatos disponibles](https://day.js.org/docs/en/display/format)
 
-GRAVITY_TRANSLATION_BLOCK_22_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<DatePicker format='LL' />
+`}
+>
+    <DateComponents.DatePicker format='LL' />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_23_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DatePicker format="LL" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Analizador de fechas personalizado
 
 Puedes proporcionar una función de análisis personalizada para manejar cadenas de fechas pegadas a través de la prop `parseDateFromString`. Esto es útil cuando necesitas admitir formatos de fecha específicos o una lógica de análisis personalizada que difiere del comportamiento predeterminado.
 
-GRAVITY_TRANSLATION_BLOCK_24_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {dateTime} from '@gravity-ui/date-utils';
+
+const customParser = (dateStr: string, format: string, timeZone?: string) => {
+  // Custom parsing logic
+  // For example, handle DD/MM/YYYY format specifically
+  if (dateStr.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
+    const [day, month, year] = dateStr.split('/');
+    return dateTime({input: `${year}-${month}-${day}`, timeZone});
+  }
+  // Fallback to default parsing
+  return dateTime({input: dateStr, format, timeZone});
+};
+
+<DatePicker parseDateFromString={customParser} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Zona horaria
 
@@ -132,9 +334,15 @@ GRAVITY_TRANSLATION_BLOCK_24_END
 
 Si deseas utilizar un componente de calendario personalizado dentro de `DatePicker`, puedes pasarlo como `children` con props similares a las de un calendario.
 
-GRAVITY_TRANSLATION_BLOCK_25_END
+<!--LANDING_BLOCK
+[Learn more about calendar](https://gravity-ui.com/components/date-components/calendar)
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_26_END
+<!--GITHUB_BLOCK-->
+
+[Learn more about calendar](https://github.com/gravity-ui/date-components/blob/main/src/components/Calendar/README.md)
+
+<!--/GITHUB_BLOCK-->
 
 ## Propiedades
 

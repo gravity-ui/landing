@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Switch
+
+<!--/GITHUB_BLOCK-->
 
 `Switch` 组件用于在两种状态之间切换：通常是 **开启** 和 **关闭**，或者 **启用** 和 **禁用**。
 
@@ -13,25 +17,103 @@ import {Switch} from '@gravity-ui/uikit';
 - 选中 (Checked)：当开关处于 **开启** 状态时。
 - 禁用 (Disabled)：当开关不可用时。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Switch size="l" checked={false}>
+                Unchecked
+            </Switch>
+            <Switch size="l" checked>
+                Checked
+            </Switch>
+            <Switch size="l" disabled>
+                Disabled
+            </Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="l" checked={false}>Unchecked</Switch>
+<Switch size="l" checked>Checked</Switch>
+<Switch size="l" disabled>Disabled</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 大小
 
 使用 `size` 属性来管理 `Switch` 的大小。默认大小为 `m`。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Switch size="s">S Size</Switch>
+            <Switch size="m">M Size</Switch>
+            <Switch size="l">L Size</Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="s">S Size</Switch>
+<Switch size="m">M Size</Switch>
+<Switch size="l">L Size</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 标签
 
 您可以使用 `content` 属性为 `Switch` 分配一个标签，或者将其作为子属性提供。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Box, Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Switch content="Content" size="l" />
+            <Box spacing={{mt: 2}}>
+                <Switch size="l">
+                    <span>Content as children</span>
+                </Switch>
+            </Box>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Switch content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Switch size="l">
+      <span>Content as children</span>
+    </Switch>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

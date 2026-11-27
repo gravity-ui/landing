@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# RelativeDatePicker
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {RelativeDatePicker} from '@gravity-ui/date-components';
 ```
@@ -12,17 +18,33 @@ import {RelativeDatePicker} from '@gravity-ui/date-components';
 
 `RelativeDatePicker` の `absolute` モードでの動作は、単純な `DatePicker` と非常によく似ています。
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--LANDING_BLOCK
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+[Learn more about DatePicker](/components/date-components/date-picker)
+
+LANDING_BLOCK-->
+
+<!--GITHUB_BLOCK-->
+
+[Learn more about DatePicker](/src/components/DatePicker)
+
+<!--/GITHUB_BLOCK-->
 
 ### Relative
 
 このモードでは、`RelativeDatePicker` は特別な相対形式で値を取得および返します。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--LANDING_BLOCK
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+[Learn more about rules of relative formulas](/components/date-components/relative-date-field#relative-input)
+
+LANDING_BLOCK-->
+
+<!--GITHUB_BLOCK-->
+
+[Learn more about rules of relative formulas](/src/components/RelativeDateField#relative-input)
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

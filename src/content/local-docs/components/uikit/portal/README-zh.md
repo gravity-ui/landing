@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Portal
+
+<!--/GITHUB_BLOCK-->
 
 `Portal` 是一个实用组件。基本上，它只是 React 的 [`createPortal`](https://react.dev/reference/react-dom/createPortal) 的一个简单包装器，允许您将子组件渲染到父组件外部的 DOM 节点中。
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# ActionTooltip
+
+<!--/GITHUB_BLOCK-->
+
 [`Tooltip`](../Tooltip/README.md) para rotular botões de ação sem texto descritivo (por exemplo, botões de ícone).
 
 ## Uso
@@ -5,8 +11,8 @@
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Ação">
-  <div tabIndex={0}>Ancora</div>
+<ActionTooltip title="Action">
+  <div tabIndex={0}>Anchor</div>
 </ActionTooltip>;
 ```
 
@@ -20,7 +26,7 @@ Alternativamente, você pode passar uma função como filho para fornecer `ref` 
 ```tsx
 import {ActionTooltip} from '@gravity-ui/uikit';
 
-<ActionTooltip title="Ação">
+<ActionTooltip title="Action">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </ActionTooltip>;
 ```

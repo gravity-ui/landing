@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# CopyToClipboard
+
+<!--/GITHUB_BLOCK-->
+
 `CopyToClipboard`는 클립보드로 텍스트를 복사하고 복사 상태를 자식에게 노출하는 렌더-프롭 래퍼입니다. 이를 통해 자체 트리거를 렌더링할 수 있습니다. 바로 사용할 수 있는 버튼은 `ClipboardButton`을 사용하세요.
 
 ```tsx
@@ -17,9 +23,43 @@ import {CopyToClipboard} from '@gravity-ui/uikit';
 
 `timeout` 옵션은 결과 상태(`success` 또는 `error`) 중 하나 이후 초기(`pending`) 상태로 복원되는 시간을 밀리초 단위로 설정합니다.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Button, CopyToClipboard} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const buttonText = {
+    pending: 'Click Me',
+    success: 'Copied!',
+    error: "Couldn't copy...",
+};
+
+export default function () {
+    return (
+        <CopyToClipboard text="Some text to copy" timeout={500}>
+            {(status) => (
+                <Button view="normal" size="l">
+                    {buttonText[status]}
+                </Button>
+            )}
+        </CopyToClipboard>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const buttonText = {
+  pending: 'Click Me',
+  success: 'Copied!',
+  error: "Couldn't copy...",
+};
+
+<CopyToClipboard text="Some text to copy" timeout={500}>
+  {(status) => <button>{buttonText[status]}</button>}
+</CopyToClipboard>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

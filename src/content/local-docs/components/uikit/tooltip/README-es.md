@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Tooltip
+
+<!--/GITHUB_BLOCK-->
 
 Una sugerencia de texto simple que utiliza su nodo hijo como ancla. Este componente solo acepta contenido de texto y puede ser una excelente alternativa al atributo `title` del navegador, con su pequeño tamaño y largo retraso de aparición.
 
@@ -7,8 +11,8 @@ Una sugerencia de texto simple que utiliza su nodo hijo como ancla. Este compone
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Contenido">
-  <div tabIndex={0}>Ancla</div>
+<Tooltip content="Content">
+  <div tabIndex={0}>Anchor</div>
 </Tooltip>;
 ```
 
@@ -22,7 +26,7 @@ Alternativamente, puedes pasar una función como hijo para proporcionar `ref` y 
 ```tsx
 import {Tooltip} from '@gravity-ui/uikit';
 
-<Tooltip content="Contenido">
+<Tooltip content="Content">
   {(props, ref) => <MyCustomButton buttonProps={props} buttonRef={ref} />}
 </Tooltip>;
 ```

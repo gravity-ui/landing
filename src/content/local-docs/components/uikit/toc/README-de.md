@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Toc
+
+<!--/GITHUB_BLOCK-->
 
 Die Komponente `Toc` ist dafür konzipiert, ein Inhaltsverzeichnis der Seite anzuzeigen, nämlich eine Liste von Elementen mit zwei Hierarchieebenen.
 

@@ -1,10 +1,14 @@
+<!--GITHUB_BLOCK-->
+
+# Switch
+
+<!--/GITHUB_BLOCK-->
+
 Die Komponente `Switch` wird verwendet, um zwischen zwei Zuständen umzuschalten: typischerweise zwischen **ein** und **aus** oder **aktiviert** und **deaktiviert**.
 
 ```tsx
 import {Switch} from '@gravity-ui/uikit';
 ```
-
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 ## Zustände
 
@@ -13,25 +17,103 @@ Ein `Switch` kann verschiedene Zustände haben:
 - Checked: Wenn der Schalter den Zustand **Ein** hat.
 - Disabled: Wenn der Schalter nicht verfügbar ist.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Switch size="l" checked={false}>
+                Unchecked
+            </Switch>
+            <Switch size="l" checked>
+                Checked
+            </Switch>
+            <Switch size="l" disabled>
+                Disabled
+            </Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="l" checked={false}>Unchecked</Switch>
+<Switch size="l" checked>Checked</Switch>
+<Switch size="l" disabled>Disabled</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Größe
 
 Verwenden Sie die Eigenschaft `size`, um die Größe des `Switch` zu verwalten. Die Standardgröße ist `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Switch size="s">S Size</Switch>
+            <Switch size="m">M Size</Switch>
+            <Switch size="l">L Size</Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="s">S Size</Switch>
+<Switch size="m">M Size</Switch>
+<Switch size="l">L Size</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Beschriftung
 
 Sie können einem `Switch` eine Beschriftung mit der Eigenschaft `content` zuweisen oder sie als Kind-Eigenschaft bereitstellen.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Box, Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Switch content="Content" size="l" />
+            <Box spacing={{mt: 2}}>
+                <Switch size="l">
+                    <span>Content as children</span>
+                </Switch>
+            </Box>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Switch content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Switch size="l">
+      <span>Content as children</span>
+    </Switch>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# RangeCalendar
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {RangeCalendar} from '@gravity-ui/date-components';
 ```
@@ -12,15 +18,40 @@ Pour définir les dates dans le bon format, vous pourriez avoir besoin d'inclure
 import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--LANDING_BLOCK
+
+> [!NOTE]
+> Row with "Selected range: ..." is not a part of the component. It was added to examples only for clarity.
+
+LANDING_BLOCK-->
 
 ## Taille
 
 Pour contrôler la taille de `RangeCalendar`, utilisez la propriété `size`. La taille par défaut est `m`.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar size="m" />
+<RangeCalendar size="l" />
+<RangeCalendar size="xl" />
+`}
+>
+    <DateComponentsExamples.RangeCalendarExample size="m" />
+    <DateComponentsExamples.RangeCalendarExample size="l" />
+    <DateComponentsExamples.RangeCalendarExample size="xl" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar size="m" />
+<RangeCalendar size="l" />
+<RangeCalendar size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valeur
 
@@ -28,9 +59,23 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 La propriété `minValue` vous permet de spécifier la date et l'heure les plus anciennes que l'utilisateur peut saisir. Inversement, la propriété `maxValue` spécifie la date et l'heure les plus récentes que l'utilisateur peut saisir. Toutes les autres valeurs seront désactivées pour l'utilisateur.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+`}
+>
+    <DateComponentsExamples.RangeCalendarExample minValue={'01.01.2024'} maxValue={'01.01.2025'}/>
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar minValue={dateTimeParse('01.01.2024')} maxValue={dateTimeParse('01.01.2025')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Mode
 
@@ -46,9 +91,23 @@ Définit l'intervalle de temps que `RangeCalendar` doit afficher. Avec `mode`, v
 
 Vous pouvez limiter les modes activés en utilisant la prop `modes`.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar defaultMode="months"/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarExample defaultMode="months" />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar defaultMode="months" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## États
 
@@ -56,25 +115,84 @@ GRAVITY_TRANSLATION_BLOCK_6_END
 
 L'état de `RangeCalendar` où vous ne souhaitez pas que l'utilisateur puisse interagir avec le composant.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar
+  disabled={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarWithDefaultValueExample disabled={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar
+  disabled={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Lecture seule
 
 `readOnly` est un attribut booléen qui, lorsqu'il est défini sur true, rend le composant `RangeCalendar` immuable pour l'utilisateur. Cela signifie que bien que l'entrée affiche sa valeur actuelle, les utilisateurs ne pourront pas la modifier.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar
+  readOnly={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarWithDefaultValueExample readOnly={true} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar
+  readOnly={true}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Valeur focalisée
 
 Permet de sélectionner la date sur laquelle la vue `RangeCalendar` est focalisée. Si vous avez besoin qu'elle soit contrôlée, vous devez utiliser la prop `focusedValue`. Vous pouvez définir la valeur focalisée initiale pour un composant non contrôlé avec la prop optionnelle `defaultFocusedValue`.
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<RangeCalendar
+  defaultFocusedValue={dateTimeParse('01.01.2020')} defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+`}
+>
+    <DateComponentsExamples.RangeCalendarWithDefaultValueExample defaultFocusedValue={'01.01.2020'} />
+</ExampleBlock>
+LANDING_BLOCK-->
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+<RangeCalendar
+  defaultFocusedValue={dateTimeParse('01.01.2020')}
+  defaultValue={{start: dateTime().add({days: 2}), end: dateTime().subtract({days: 2})}}
+/>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Fuseau horaire
 

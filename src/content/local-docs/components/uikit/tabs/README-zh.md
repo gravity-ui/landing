@@ -1,12 +1,65 @@
+<!--GITHUB_BLOCK-->
+
+# Tabs components
+
+<!--/GITHUB_BLOCK-->
+
 Tabs 组件用于探索、组织内容和切换不同视图。
 
 ```tsx
 import {TabProvider, TabList, Tab, TabPanel} from '@gravity-ui/uikit';
 ```
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {useState} from 'react';
+import {Tab, TabList, TabPanel, TabProvider} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    const [activeTab, setActiveTab] = useState('second');
+
+    return (
+        <TabProvider value={activeTab} onUpdate={setActiveTab}>
+            <TabList>
+                <Tab value="first">First Tab</Tab>
+                <Tab value="second">Active Tab</Tab>
+                <Tab value="third" disabled>
+                    Disabled Tab
+                </Tab>
+            </TabList>
+            <div>
+                <TabPanel value="first">First Panel</TabPanel>
+                <TabPanel value="second">Second Panel</TabPanel>
+                <TabPanel value="third">Third Panel</TabPanel>
+            </div>
+        </TabProvider>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const [activeTab, setActiveTab] = React.useState('second');
+
+return (
+  <TabProvider value={activeTab} onUpdate={setActiveTab}>
+    <TabList>
+      <Tab value="first">First Tab</Tab>
+      <Tab value="second">Active Tab</Tab>
+      <Tab value="third" disabled>
+        Disabled Tab
+      </Tab>
+    </TabList>
+    <div>
+      <TabPanel value="first">First Panel</TabPanel>
+      <TabPanel value="second">Second Panel</TabPanel>
+      <TabPanel value="third">Third Panel</TabPanel>
+    </div>
+  </TabProvider>
+);
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 组件
 
@@ -27,8 +80,6 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | value    | 当前活动的选项卡值                     |         `string`          |        |
 | onUpdate | 更新选项卡处理函数                     | `(value: string) => void` |        |
 
-GRAVITY_TRANSLATION_BLOCK_2_END
-
 ## TabList
 
 用作一组 `tabs` 的容器组件
@@ -37,9 +88,47 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 使用 `size` 属性控制 `tabs` 的尺寸。默认尺寸为 `m`。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <TabList value="second" size="m">
+                <Tab value="first">M Size first</Tab>
+                <Tab value="second">M Size second</Tab>
+            </TabList>
+            <TabList value="second" size="l">
+                <Tab value="first">L Size first</Tab>
+                <Tab value="second">L Size second</Tab>
+            </TabList>
+            <TabList value="second" size="xl">
+                <Tab value="first">XL Size first</Tab>
+                <Tab value="second">v Size second</Tab>
+            </TabList>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="second" size="m">
+    <Tab value="first">M Size first</Tab>
+    <Tab value="second">M Size second</Tab>
+</TabList>
+<TabList value="second" size="l">
+    <Tab value="first">L Size first</Tab>
+    <Tab value="second">L Size second</Tab>
+</TabList>
+<TabList value="second" size="xl">
+    <Tab value="first">XL Size first</Tab>
+    <Tab value="second">v Size second</Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 属性
 
@@ -57,8 +146,6 @@ GRAVITY_TRANSLATION_BLOCK_4_END
 | moreLabel       | 当活动选项卡在列表中可见时，用于折叠溢出触发器的标签                              |        `React.ReactNode`         | `"More"`|
 | qa              | HTML `data-qa` 属性，用于测试                                                   |             `string`             |         |
 
-GRAVITY_TRANSLATION_BLOCK_5_END
-
 ## Tab
 
 此组件用于渲染选项卡项。
@@ -67,39 +154,178 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 如果您需要为选项卡项显示图标，请使用此项。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {Gear} from '@gravity-ui/icons';
+import {Icon, Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first" icon={<Icon size={16} data={Gear} />}>
+                Tab with icon
+            </Tab>
+            <Tab value="second">Tab without icon</Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first" icon={<Icon size={16} data={GearIcon} />}>
+    Tab with icon
+  </Tab>
+  <Tab value="second">Tab without icon</Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 状态
 
 选项卡项具有禁用标志。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first">First Tab</Tab>
+            <Tab value="second" disabled>
+                Disabled Tab
+            </Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first">First Tab</Tab>
+  <Tab value="second" disabled>
+    Disabled Tab
+  </Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 计数器
 
 如果您需要为选项卡项显示数字，请使用此项。
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first" counter={13}>
+                First Tab
+            </Tab>
+            <Tab value="second" counter={3}>
+                Second Tab
+            </Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first" counter={13}>
+    First Tab
+  </Tab>
+  <Tab value="second" counter={3}>
+    Second Tab
+  </Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 标签
 
 如果您需要为选项卡项显示标签，请使用此项。
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {Tab, TabList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <TabList value="first">
+            <Tab value="first" label={{content: 'Label 1'}}>
+                First Tab
+            </Tab>
+            <Tab value="second" label={{content: 'Label 2'}}>
+                Second Tab
+            </Tab>
+        </TabList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first">
+  <Tab value="first" label={{content: 'Label 1'}}>
+    First Tab
+  </Tab>
+  <Tab value="second" label={{content: 'Label 2'}}>
+    Second Tab
+  </Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 内容溢出
 
 如果您需要折叠选项卡项，请使用此项。
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--LANDING_BLOCK
+<ExampleBlock
+    code={`
+<TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
+    <Tab value="first">First Tab</Tab>
+    <Tab value="second">Second Tab</Tab>
+    <Tab value="third">Third Tab</Tab>
+    <Tab value="fourth">Fourth Tab</Tab>
+    <Tab value="fifth">Fifth Tab</Tab>
+</TabList>
+`}
+>
+    <UIKit.TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
+        <UIKit.Tab value="first">First Tab</UIKit.Tab>
+        <UIKit.Tab value="second">Second Tab</UIKit.Tab>
+        <UIKit.Tab value="third">Third Tab</UIKit.Tab>
+        <UIKit.Tab value="fourth">Fourth Tab</UIKit.Tab>
+        <UIKit.Tab value="fifth">Fifth Tab</UIKit.Tab>
+    </UIKit.TabList>
+</ExampleBlock>
+LANDING_BLOCK-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TabList value="first" contentOverflow="collapse" style={{maxWidth: 320}}>
+  <Tab value="first">First Tab</Tab>
+  <Tab value="second">Second Tab</Tab>
+  <Tab value="third">Third Tab</Tab>
+  <Tab value="fourth">Fourth Tab</Tab>
+  <Tab value="fifth">Fifth Tab</Tab>
+</TabList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 属性
 

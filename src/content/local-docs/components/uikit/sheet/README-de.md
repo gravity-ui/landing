@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Sheet
+
+<!--/GITHUB_BLOCK-->
+
 `Sheet` ist eine Komponente, die für die Verwendung im mobilen Kontext als Informations- oder interaktives Element konzipiert ist. Sie können Inhalte beliebiger Größe darin platzieren, da internes Scrollen und dynamische Größenänderung unterstützt werden.
 
 ```tsx
@@ -27,7 +33,6 @@ const SheetExample = () => {
 ```
 
 ## Eigenschaften
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Name                        | Beschreibung                                                                                                                                                                                             |     Typ      |     Standard     |
 | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------: | :------------: |

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# DefinitionList
+
+<!--/GITHUB_BLOCK-->
 
 用于显示定义列表的组件，术语和定义之间用点分隔。
 
@@ -8,9 +12,33 @@ import {DefinitionList} from '@gravity-ui/uikit';
 
 ## 示例
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {DefinitionList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <DefinitionList nameMaxWidth={100} contentMaxWidth={100}>
+            <DefinitionList.Item name="Node value with copy" copyText="value">
+                <strong>value with copy</strong>
+            </DefinitionList.Item>
+            <DefinitionList.Item name="Empty value with copy" copyText="nothing to copy" />
+        </DefinitionList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DefinitionList nameMaxWidth={100} contentMaxWidth={100}>
+  <DefinitionList.Item name="Node value with copy" copyText="value">
+    <strong>value with copy</strong>
+  </DefinitionList.Item>
+  <DefinitionList.Item name="Empty value with copy" copyText="nothing to copy" />
+</DefinitionList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 属性
 

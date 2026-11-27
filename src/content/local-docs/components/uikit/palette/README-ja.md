@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Palette
+
+<!--/GITHUB_BLOCK-->
+
 `Palette` コンポーネントは、選択または選択解除できるアイコン、絵文字、リアクション、記号のグリッドを表示するために使用されます。
 
 ```tsx
@@ -8,33 +14,142 @@ import {Palette} from '@gravity-ui/uikit';
 
 `disabled` プロパティを使用して、すべてのオプションを無効にすることができます。特定のオプションのみを無効にしたい場合は、それらの `options` (`PaletteOption[]`) の `disabled` プロパティを変更できます。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+const disabledOptions: PaletteOption[] = [{...options[0], disabled: true}, options[1]];
+
+export default function () {
+    return (
+        <>
+            <Palette options={disabledOptions} />
+            <Palette options={options} disabled />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  // disable a single item
+  {content: '😎', value: 'ID-cool', disabled: true},
+  {content: '🥴', value: 'ID-woozy'},
+];
+// or disable all of them
+<Palette options={options} disabled={true} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### サイズ
 
 `size` プロパティを使用して `Palette` のサイズを管理します。デフォルトのサイズは `s` です。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return (
+        <>
+            <Palette options={options} size="xs" />
+            <Palette options={options} size="s" />
+            <Palette options={options} size="m" />
+            <Palette options={options} size="l" />
+            <Palette options={options} size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} size={"xs"} />
+<Palette options={options} size={"s"} />
+<Palette options={options} size={"m"} />
+<Palette options={options} size={"l"} />
+<Palette options={options} size={"xl"} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 列
 
 `columns` プロパティを変更することで、グリッドの列数を変更できます（デフォルト値は `6` です）。
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} columns={1} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### 複数選択
 
 デフォルトでは、複数のオプションを選択および選択解除できます。単一のオプションのみを選択可能にしたい場合は、`multiple` プロパティを無効にすることができます。
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import type {PaletteOption} from '@gravity-ui/uikit';
+import {Palette} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+const options: PaletteOption[] = [
+    {content: '😎', value: 'ID-cool'},
+    {content: '🥴', value: 'ID-woozy'},
+];
+
+export default function () {
+    return <Palette options={options} multiple={false} />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+const options: PaletteOption[] = [
+  {content: '😎', value: 'ID-cool'},
+  {content: '🥴', value: 'ID-woozy'},
+];
+<Palette options={options} columns={1} />;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## プロパティ
 

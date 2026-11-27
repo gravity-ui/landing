@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# DefinitionList
+
+<!--/GITHUB_BLOCK-->
 
 점(.)으로 구분된 용어와 정의를 표시하는 컴포넌트입니다.
 
@@ -8,9 +12,33 @@ import {DefinitionList} from '@gravity-ui/uikit';
 
 ## 예시
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {DefinitionList} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <DefinitionList nameMaxWidth={100} contentMaxWidth={100}>
+            <DefinitionList.Item name="Node value with copy" copyText="value">
+                <strong>value with copy</strong>
+            </DefinitionList.Item>
+            <DefinitionList.Item name="Empty value with copy" copyText="nothing to copy" />
+        </DefinitionList>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<DefinitionList nameMaxWidth={100} contentMaxWidth={100}>
+  <DefinitionList.Item name="Node value with copy" copyText="value">
+    <strong>value with copy</strong>
+  </DefinitionList.Item>
+  <DefinitionList.Item name="Empty value with copy" copyText="nothing to copy" />
+</DefinitionList>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 속성
 

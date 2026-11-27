@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Pagination
+
+<!--/GITHUB_BLOCK-->
 
 `Pagination` 渲染分页控件 — 页码、上一页/下一页按钮以及可选的每页显示数量选择器 — 用于将长列表或表格分页显示。
 

@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Modal
+
+<!--/GITHUB_BLOCK-->
 
 `Modal` 컴포넌트는 페이지의 다른 콘텐츠 위에 백드롭이 있는 팝업 창을 만드는 기본 컴포넌트입니다.
 모달이 열리는 동안 스크롤을 비활성화하고 콘텐츠에 대한 포커스를 관리합니다. `Modal` 하위 컴포넌트는 [`Portal`](../Portal) 컴포넌트 내부에 렌더링됩니다.
@@ -16,9 +20,9 @@ import {Button, Modal} from '@gravity-ui/uikit';
 
 const [open, setOpen] = useState(false);
 
-<Button onClick={() => setOpen(true)}>모달 열기</Button>
+<Button onClick={() => setOpen(true)}>Open Modal</Button>
 <Modal open={open} onClose={() => setOpen(false)}>
-    콘텐츠
+    Content
 </Modal>
 ```
 

@@ -6,25 +6,88 @@
 
 Wird zur Verwaltung des Avatar-Aussehens verwendet. Verwenden Sie `"person"` für eine personalisierte Entität und `"email"` für eine E-Mail-Adresse. Wenn Sie keinen Avatar benötigen, verwenden Sie `"empty"`.
 
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--SANDBOX
+import {UserLabel} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+export default function () {
+    return (
+        <>
+            <UserLabel type="person" text="Charles Darwin" />
+            <UserLabel type="email" text="email@example.com" />
+            <UserLabel type="empty" text="Alan Turing" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<UserLabel type="person" text="Charles Darwin (person)" />
+<UserLabel type="email" text="email@example.com (email)" />
+<UserLabel type="empty" text="Alan Turing (empty)" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Avatar
 
 Diese Komponente kann mit einem benutzerdefinierten Avatar verwendet werden. Sie funktioniert nur mit `type: 'person'`. Sie können ein Bild, eine Eigenschaft der [Avatar](../Avatar/README.md)-Komponente oder einen benutzerdefinierten React-Knoten bereitstellen.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {UserLabel} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return (
+        <>
+            <UserLabel
+                type="person"
+                avatar="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg/193px-Charles_Darwin_by_Julia_Margaret_Cameron%2C_c._1868.jpg"
+                text="Charles Darwin"
+            />
+            <UserLabel type="person" avatar={{icon: GraduationCap}} text="Charles Darwin" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {GraduationCap} from '@gravity-ui/icons';
+
+<UserLabel type="person" avatar="<url>" text="Charles Darwin" />
+<UserLabel type="person" avatar={{icon: GraduationCap}} text="Charles Darwin" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Interaktivität
 
 Diese Komponente ist auch interaktiv: sie kann klickbar oder schließbar sein.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {UserLabel} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <UserLabel text="Charles Darwin" onClick={() => alert('onClick triggered')} />
+            <UserLabel text="Charles Darwin" onCloseClick={() => alert('onCloseClick triggered')} />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<UserLabel text="Charles Darwin" onClick={() => alert('onClick triggered')} />
+<UserLabel text="Charles Darwin" onCloseClick={() => alert('onCloseClick triggered')} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Eigenschaften
 

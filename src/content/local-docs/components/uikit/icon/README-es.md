@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Icon
+
+<!--/GITHUB_BLOCK-->
 
 `Icon` renderiza un glifo SVG con un tamaño y color dados, tomando el SVG como un componente React o un activo importado. Sirve como un proxy único para usar SVGs en todo el código base, que pueden cargarse a través de un componente React o cargadores de Webpack como [`SVGR`](https://react-svgr.com/docs/webpack/), [`svg-react-loader`](https://github.com/jhamlet/svg-react-loader), [`svg-inline-loader`](https://github.com/webpack-contrib/svg-inline-loader), o [`svg-sprite-loader`](https://github.com/JetBrains/svg-sprite-loader).
 

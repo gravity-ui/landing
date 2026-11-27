@@ -1,8 +1,46 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# ActionBar
+
+<!--/GITHUB_BLOCK-->
 
 该组件是一个灵活的水平栏，为应用程序中的导航元素、操作和信息性内容提供标准化的布局。它充当容器，用于将面包屑、按钮和下拉菜单等 UI 元素组织到定义的区域和组中。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--GITHUB_BLOCK-->
+
+## Usage
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group>
+          <ActionBar.Item>
+            <LegacyBreadcrumbs
+              lastDisplayedItemsCount={1}
+              firstDisplayedItemsCount={1}
+              items={[{text: 'Root Item', action() {}}]}
+            />
+          </ActionBar.Item>
+        </ActionBar.Group>
+
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->
 
 `ActionBar` 提供了几个嵌套组件，它们协同工作以创建结构化布局：`ActionBar.Section`、`ActionBar.Group`、`ActionBar.Item`、`ActionBar.Separator`。
 
@@ -31,7 +69,40 @@ GRAVITY_TRANSLATION_BLOCK_1_END
 | style     | HTML `style` 属性                      |   `React.CSSProperties`    |            |
 | qa        | `data-qa` HTML 属性，用于测试          |          `string`          |            |
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--GITHUB_BLOCK-->
+
+```tsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+<ActionBar aria-label="Actions bar">
+  <ActionBar.Section type="secondary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <Button>Toggle Article TOC</Button>
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+
+  <ActionBar.Section type="primary">
+    <ActionBar.Group>
+      <ActionBar.Item>
+        <LegacyBreadcrumbs
+          lastDisplayedItemsCount={1}
+          firstDisplayedItemsCount={1}
+          items={[
+            {text: 'Wiki Main Page', action() {}},
+            {text: 'Wiki Article', action() {}},
+          ]}
+        />
+      </ActionBar.Item>
+    </ActionBar.Group>
+  </ActionBar.Section>
+</ActionBar>;
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ActionBar.Group
 
@@ -64,4 +135,34 @@ GRAVITY_TRANSLATION_BLOCK_2_END
 
 用于在组内项目之间创建视觉分隔的视觉分隔符。
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--GITHUB_BLOCK-->
+
+### Example
+
+```typescript jsx
+import {Button} from '@gravity-ui/uikit';
+import {Breadcrumbs as LegacyBreadcrumbs} from '@gravity-ui/uikit/legacy';
+import {ActionBar} from '@gravity-ui/navigation';
+
+function Page() {
+  return (
+    <ActionBar aria-label="Actions bar">
+      <ActionBar.Section>
+        <ActionBar.Group pull="right">
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+
+          <ActionBar.Separator />
+
+          <ActionBar.Item>
+            <Button>Do something</Button>
+          </ActionBar.Item>
+        </ActionBar.Group>
+      </ActionBar.Section>
+    </ActionBar>
+  );
+}
+```
+
+<!--/GITHUB_BLOCK-->

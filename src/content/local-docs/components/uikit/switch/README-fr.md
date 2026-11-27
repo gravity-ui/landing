@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Switch
+
+<!--/GITHUB_BLOCK-->
+
 Le composant `Switch` est utilisé pour basculer entre deux états : généralement, entre **activé** et **désactivé**, ou **activé** et **désactivé**.
 
 ```tsx
@@ -11,25 +17,103 @@ Un `Switch` peut avoir différents états :
 - Coché : Lorsque le commutateur est dans l'état **Activé**.
 - Désactivé : Lorsque le commutateur n'est pas disponible.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+export default function () {
+    return (
+        <>
+            <Switch size="l" checked={false}>
+                Unchecked
+            </Switch>
+            <Switch size="l" checked>
+                Checked
+            </Switch>
+            <Switch size="l" disabled>
+                Disabled
+            </Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="l" checked={false}>Unchecked</Switch>
+<Switch size="l" checked>Checked</Switch>
+<Switch size="l" disabled>Disabled</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Taille
 
 Utilisez la propriété `size` pour gérer la taille du `Switch`. La taille par défaut est `m`.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+export default function () {
+    return (
+        <>
+            <Switch size="s">S Size</Switch>
+            <Switch size="m">M Size</Switch>
+            <Switch size="l">L Size</Switch>
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<Switch size="s">S Size</Switch>
+<Switch size="m">M Size</Switch>
+<Switch size="l">L Size</Switch>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Étiquette
 
 Vous pouvez attribuer une étiquette à un `Switch` en utilisant la propriété `content` ou la fournir en tant que propriété enfant.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Box, Switch} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+export default function () {
+    return (
+        <div>
+            <Switch content="Content" size="l" />
+            <Box spacing={{mt: 2}}>
+                <Switch size="l">
+                    <span>Content as children</span>
+                </Switch>
+            </Box>
+        </div>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<div>
+  <Switch content="Content" size="l" />
+  <div
+    style={{
+      marginTop: 10,
+    }}
+  >
+    <Switch size="l">
+      <span>Content as children</span>
+    </Switch>
+  </div>
+</div>
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Propriétés
 

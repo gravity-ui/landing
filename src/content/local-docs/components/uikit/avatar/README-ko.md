@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# Avatar
+
+<!--/GITHUB_BLOCK-->
 
 이 컴포넌트는 아바타 렌더링을 위한 것입니다. 이미지, 아이콘, 텍스트(이름 이니셜)의 세 가지 기본 아바타 유형이 있습니다. 이 모든 유형에는 동작 및 모양을 구성하기 위한 특수 속성이 있습니다.
 
@@ -12,27 +16,75 @@ import {Avatar} from '@gravity-ui/uikit';
 
 이 컴포넌트는 이미지를 사용하여 아바타를 렌더링하는 데 사용할 수 있습니다. 이미지를 제공하려면 `imgUrl` 속성을 사용하세요.
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return <Avatar imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352" size="l" />;
+}
+SANDBOX-->
 
 `srcSet` 속성을 제공하여 다양한 크기의 이미지를 로드할 수도 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Avatar
+            imgUrl="https://loremflickr.com/640/480/cats?lock=8610182282084352"
+            srcSet="https://loremflickr.com/57/43/cats?lock=2879400393572352 1x, https://loremflickr.com/131/98/cats?lock=4373954936438784 2x, https://loremflickr.com/164/123/cats?lock=3007328513163264 3x, https://loremflickr.com/225/169/cats?lock=8243879964835840 4x"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 `Avatar` 컴포넌트에는 `fallbackImgUrl` 속성이 있어 `imgUrl` 링크(CSP 오류 또는 원본 이미지 없음)를 통해 이미지 로딩 오류가 발생했을 때 표시되는 이미지를 제공할 수 있습니다.
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <Avatar
+            imgUrl="random_link"
+            fallbackImgUrl="https://loremflickr.com/640/480/cats?lock=3552647338524672"
+            size="l"
+        />
+    );
+}
+SANDBOX-->
 
 ### 아이콘
 
 이 컴포넌트는 아이콘을 사용하여 아바타를 렌더링하는 데 사용할 수 있습니다. `Icon` 컴포넌트의 경우와 마찬가지로 `icon` 속성을 사용하여 아이콘을 제공하세요.
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return <Avatar icon={GraduationCap} size="l" />;
+}
+SANDBOX-->
 
 ### 텍스트
 
 이 컴포넌트는 텍스트를 사용하여 아바타를 렌더링하는 데 사용할 수 있습니다. 이를 위해 `text` 속성을 사용하세요. 텍스트는 이니셜(두 단어의 첫 글자) 또는 단일 단어의 첫 두 글자로 렌더링됩니다.
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" size="l" />
+            <Avatar text="Guardian" size="l" />
+        </>
+    );
+}
+SANDBOX-->
 
 ## 모양
 
@@ -42,25 +94,82 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 기본 테마는 `normal`이고 기본 보기는 `filled`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {GraduationCap} from '@gravity-ui/icons';
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar icon={GraduationCap} size="l" theme="normal" view="filled" />
+            <Avatar icon={GraduationCap} size="l" theme="brand" view="filled" />
+            <Avatar icon={GraduationCap} size="l" theme="normal" view="outlined" />
+            <Avatar icon={GraduationCap} size="l" theme="brand" view="outlined" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### 사용자 지정 색상
 
 `backgroundColor`, `borderColor`, `color` 속성(후자는 아이콘 및 텍스트 아바타에만 적용됨)을 통해 사용자 지정 색상을 제공할 수도 있습니다. 이러한 색상은 테마 색상보다 우선 순위가 높습니다.
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar
+                text="Charles Darwin"
+                size="l"
+                backgroundColor="var(--g-color-base-danger-medium)"
+                color="var(--g-color-text-primary)"
+            />
+            <Avatar text="Charles Darwin" size="l" borderColor="var(--g-color-line-misc)" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### 크기
 
 `size` 속성을 사용하여 `Avatar` 크기를 관리하세요. 기본 크기는 `m`입니다. 가능한 값은 `3xs`, `2xs`, `xs`, `s`, `m`, `l`, `xl`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" theme="brand" size="3xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="2xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="xs" />
+            <Avatar text="Charles Darwin" theme="brand" size="s" />
+            <Avatar text="Charles Darwin" theme="brand" size="m" />
+            <Avatar text="Charles Darwin" theme="brand" size="l" />
+            <Avatar text="Charles Darwin" theme="brand" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
 
 ### 모양
 
 `shape` 속성을 사용하여 `Avatar` 모양을 관리하세요. 기본 모양은 `circle`입니다. 가능한 값은 `circle` 및 `square`입니다.
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+<!--SANDBOX
+import {Avatar} from '@gravity-ui/uikit';
+
+export default function () {
+    return (
+        <>
+            <Avatar text="Charles Darwin" theme="brand" shape="circle" />
+            <Avatar text="Charles Darwin" theme="brand" shape="square" />
+        </>
+    );
+}
+SANDBOX-->
 
 ## 속성
 

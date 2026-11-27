@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# Sheet
+
+<!--/GITHUB_BLOCK-->
+
 `Sheet` est un composant conçu pour être utilisé dans un contexte mobile comme élément d'information ou interactif. Vous pouvez y placer du contenu de toute taille, car le défilement interne et le redimensionnement dynamique sont pris en charge.
 
 ```tsx
@@ -17,9 +23,9 @@ const SheetExample = () => {
 
   return (
     <React.Fragment>
-      <Button onClick={() => setVisible(true)}>Ouvrir le Sheet</Button>
-      <Sheet visible={visible} onClose={() => setVisible(false)} title="Sheet de contenu">
-        Contenu
+      <Button onClick={() => setVisible(true)}>Open Sheet</Button>
+      <Sheet visible={visible} onClose={() => setVisible(false)} title="Content Sheet">
+        Content
       </Sheet>
     </React.Fragment>
   );
@@ -27,7 +33,6 @@ const SheetExample = () => {
 ```
 
 ## Propriétés
-GRAVITY_TRANSLATION_BLOCK_0_END
 
 | Nom                        | Description                                                                                                                                                                                          |     Type      |     Défaut     |
 | :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------: | :------------: |

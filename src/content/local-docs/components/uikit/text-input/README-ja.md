@@ -1,3 +1,9 @@
+<!--GITHUB_BLOCK-->
+
+# TextInput
+
+<!--/GITHUB_BLOCK-->
+
 ```tsx
 import {TextInput} from '@gravity-ui/uikit';
 ```
@@ -12,21 +18,60 @@ TextInput は、UI にテキストを入力するためにユーザーに使用�
 
 `normal` - `TextInput` のメインビュー（デフォルトで使用されます）。
 
-GRAVITY_TRANSLATION_BLOCK_1_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
+
+export default function () {
+    return <TextInput placeholder="Placeholder" />;
+}
+SANDBOX-->
 
 `clear` - `TextInput` のカスタムラッパーと組み合わせて使用できます。
 
-GRAVITY_TRANSLATION_BLOCK_2_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_3_END
+export default function () {
+    return <TextInput view="clear" placeholder="Placeholder" />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput view="normal" />
+<TextInput view="clear" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Pin
 
 `TextInput` の境界線の右端と左端の外観を制御できます。
 
-GRAVITY_TRANSLATION_BLOCK_4_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_5_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" pin="round-brick" />
+            <TextInput placeholder="Placeholder" pin="brick-brick" />
+            <TextInput placeholder="Placeholder" pin="brick-round" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput pin="round-brick" />
+<TextInput pin="brick-brick" />
+<TextInput pin="brick-round" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## ステート
 
@@ -34,18 +79,57 @@ GRAVITY_TRANSLATION_BLOCK_5_END
 
 ユーザーがコンポーネントを操作できないようにしたい `TextInput` のステートです。
 
-GRAVITY_TRANSLATION_BLOCK_6_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_7_END
+export default function () {
+    return <TextInput placeholder="Placeholder" disabled />;
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput disabled />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### Error
 
 ユーザーの入力が正しくないことを示したい `TextInput` のステートです。`TextInput` の外観を変更するには、`validationState` プロパティを `"invalid"` 値で使用します。オプションのメッセージテキストは、`errorMessage` プロパティで追加できます。デフォルトでは、メッセージテキストはコンポーネントの外側にレンダリングされます。
 この動作は、`errorPlacement` プロパティで変更できます。
 
-GRAVITY_TRANSLATION_BLOCK_8_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_9_END
+export default function () {
+    return (
+        <>
+            <TextInput
+                placeholder="Placeholder"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+            <TextInput
+                placeholder="Placeholder"
+                errorPlacement="inside"
+                errorMessage="Error message"
+                validationState="invalid"
+            />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput errorMessage="Error message" validationState="invalid" />
+<TextInput errorPlacement="inside" errorMessage="Error message" validationState="invalid" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Size
 
@@ -57,9 +141,31 @@ GRAVITY_TRANSLATION_BLOCK_9_END
 
 `xl` – プロモーションおよびランディングページで使用されます。
 
-GRAVITY_TRANSLATION_BLOCK_10_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_11_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" size="s" />
+            <TextInput placeholder="Placeholder" size="m" />
+            <TextInput placeholder="Placeholder" size="l" />
+            <TextInput placeholder="Placeholder" size="xl" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput size="s" />
+<TextInput size="m" />
+<TextInput size="l" />
+<TextInput size="xl" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Label
 
@@ -68,9 +174,26 @@ GRAVITY_TRANSLATION_BLOCK_11_END
 - ラベルは、コントロールに対して最も左の位置を占めます。つまり、`startContent` プロパティを介して追加された要素は右側に配置されます。
 - ラベルは、`TextInput` 全体のスペースの幅の半分を超えることはできません。
 
-GRAVITY_TRANSLATION_BLOCK_12_END
+<!--SANDBOX
+import {TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_13_END
+export default function () {
+    return (
+        <>
+            <TextInput placeholder="Placeholder" label="Label" />
+            <TextInput placeholder="Placeholder" label="Very long label with huge amount of symbols" />
+        </>
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput label="Label" />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## 追加コンテンツ
 
@@ -78,17 +201,53 @@ GRAVITY_TRANSLATION_BLOCK_13_END
 
 コントロールの左側にコンテンツを追加できます（[rtl](https://developer.mozilla.org/en-US/docs/Glossary/RTL) を使用している場合は右側）。`label` プロパティを介して追加されたラベルの左側（または rtl を使用している場合は右側）に配置されます。
 
-GRAVITY_TRANSLATION_BLOCK_14_END
+<!--SANDBOX
+import {Label, TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_15_END
+export default function () {
+    return (
+        <TextInput
+            placeholder="Search"
+            label="Label"
+            startContent={<Label size="s">Left</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput startContent={<Label>Left</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ### End content
 
 コントロールの右側にコンテンツを追加できます（[rtl](https://developer.mozilla.org/en-US/docs/Glossary/RTL) を使用している場合は左側）。`hasClear` プロパティを介して追加されたクリアボタンの右側（または rtl を使用している場合は左側）に配置されます。
 
-GRAVITY_TRANSLATION_BLOCK_16_END
+<!--SANDBOX
+import {Label, TextInput} from '@gravity-ui/uikit';
 
-GRAVITY_TRANSLATION_BLOCK_17_END
+export default function () {
+    return (
+        <TextInput
+            hasClear
+            placeholder="Placeholder"
+            endContent={<Label size="s">Right</Label>}
+        />
+    );
+}
+SANDBOX-->
+
+<!--GITHUB_BLOCK-->
+
+```tsx
+<TextInput endContent={<Label>Right</Label>} />
+```
+
+<!--/GITHUB_BLOCK-->
 
 ## Properties
 

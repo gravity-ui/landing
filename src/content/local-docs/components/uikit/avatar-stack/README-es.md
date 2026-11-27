@@ -1,4 +1,8 @@
-GRAVITY_TRANSLATION_BLOCK_0_END
+<!--GITHUB_BLOCK-->
+
+# AvatarStack
+
+<!--/GITHUB_BLOCK-->
 
 Este componente se utiliza para una pila de imágenes superpuestas y, opcionalmente, un control. Generalmente se refiere a avatares de usuario.
 
@@ -37,7 +41,7 @@ Componente para anular el botón `More`
 ```tsx
 <AvatarStack
   renderMore={({count}) => (
-    <Tooltip content={'Más usuarios'}>
+    <Tooltip content={'More users'}>
       <AvatarStack.MoreButton count={count} />
     </Tooltip>
   )}
