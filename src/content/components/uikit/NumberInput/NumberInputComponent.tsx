@@ -1,4 +1,4 @@
-import {NumberInput, NumberInputProps} from '@gravity-ui/uikit';
+import {NumberInput, NumberInputProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const NumberInputComponent = (props: NumberInputProps) => {

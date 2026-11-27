@@ -6,7 +6,7 @@ import {resolveInstalledPackage} from './component-catalog/package-resolver.mjs'
 
 const packagesMap = {
     '@gravity-ui/aikit': 'aikit',
-    '@gravity-ui/uikit': 'uikit',
+    '@gravity-ui/uikit-v8': 'uikit',
     '@gravity-ui/components': 'components',
     '@gravity-ui/date-components': 'date-components',
     '@gravity-ui/navigation': 'navigation',
@@ -29,8 +29,9 @@ const getPackagesVersions = () => {
         Object.keys(packagesMap).forEach((packageName) => {
             if (dependencies[packageName]) {
                 const {packageJson: installedPackageJson} = resolveInstalledPackage(
-                    packageName,
+                    packageName === '@gravity-ui/uikit-v8' ? '@gravity-ui/uikit' : packageName,
                     projectRoot,
+                    packageName,
                 );
                 result[packagesMap[packageName]] = installedPackageJson.version;
             } else {

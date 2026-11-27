@@ -5,14 +5,15 @@ import path from 'node:path';
 import test from 'node:test';
 
 import {
+    COMPONENT_LIBRARIES,
     componentNameToId,
     componentNameToTitle,
     generateComponentCatalog,
     getComponentNamesFromTree,
 } from './index.mjs';
 
-function createPackageFixture({projectRoot, packageName, version}) {
-    const packageRoot = path.join(projectRoot, 'node_modules', ...packageName.split('/'));
+function createPackageFixture({projectRoot, packageName, version, installName = packageName}) {
+    const packageRoot = path.join(projectRoot, 'node_modules', ...installName.split('/'));
     fs.mkdirSync(packageRoot, {recursive: true});
     fs.writeFileSync(
         path.join(packageRoot, 'package.json'),
@@ -88,6 +89,37 @@ test('generates a catalog from the exact installed package tag', async (context)
         },
     ]);
     assert.deepEqual(JSON.parse(fs.readFileSync(catalogPath, 'utf8')), catalog);
+});
+
+test('uses the UIKit 8 alias and resolves component docs moved below the root', async (context) => {
+    const projectRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'component-catalog-'));
+    context.after(() => fs.rmSync(projectRoot, {recursive: true, force: true}));
+    const library = COMPONENT_LIBRARIES.find(({id}) => id === 'uikit');
+    createPackageFixture({projectRoot, packageName: library.packageName, version: '7.47.1'});
+    createPackageFixture({...library, projectRoot, version: '8.2.0'});
+
+    const {catalog} = await generateComponentCatalog({
+        projectRoot,
+        catalogPath: path.join(projectRoot, 'catalog.json'),
+        libraries: [library],
+        fetchImpl: createFetch([
+            {type: 'blob', path: 'src/components/List/README.md'},
+            {type: 'blob', path: 'src/components/legacy/List/README.md'},
+            {type: 'blob', path: 'src/components/legacy/Table/README.md'},
+            {type: 'blob', path: 'src/components/tabs/README.md'},
+        ]),
+    });
+
+    const {version, components} = catalog.libraries.uikit;
+    assert.equal(version, '8.2.0');
+    assert.deepEqual(
+        components.map(({id, readmeUrl}) => [id, new URL(readmeUrl.en).pathname]),
+        [
+            ['list', '/gravity-ui/uikit/v8.2.0/src/components/List/README.md'],
+            ['table', '/gravity-ui/uikit/v8.2.0/src/components/legacy/Table/README.md'],
+            ['tabs', '/gravity-ui/uikit/v8.2.0/src/components/tabs/README.md'],
+        ],
+    );
 });
 
 test('reuses a catalog while exact package versions are unchanged', async (context) => {

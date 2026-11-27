@@ -14,7 +14,7 @@ export const loaderConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Loader)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.Loader)),
         props: {
             size: {
                 type: 'radioButton',

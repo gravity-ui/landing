@@ -4,6 +4,7 @@ import React from 'react';
 import type {Component} from '../../content/components';
 import {block} from '../../utils';
 import {getLibComponents} from '../../utils/components';
+import {UIKitDemoContent} from '../UIKitDemoFrame/UIKitDemoContent';
 
 import './SandboxComponent.scss';
 
@@ -67,6 +68,25 @@ export const SandboxComponent: React.FC<ComponentProps> = ({componentId, libId})
 
     if (!DynamicComponent || !isMounted) {
         return null;
+    }
+
+    if (libId === 'uikit') {
+        return (
+            <UIKitDemoContent body={document.body} theme={theme} direction={direction} fill>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100%',
+                        boxSizing: 'border-box',
+                        padding: sandboxConfig?.expandedContainer ? 0 : 20,
+                    }}
+                >
+                    <DynamicComponent {...componentProps} />
+                </div>
+            </UIKitDemoContent>
+        );
     }
 
     return (

@@ -1,4 +1,4 @@
-import {ArrowToggle, ArrowToggleProps, Button} from '@gravity-ui/uikit';
+import {ArrowToggle, ArrowToggleProps, Button} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 const directions = ['top', 'left', 'bottom', 'right'] as Array<ArrowToggleProps['direction']>;

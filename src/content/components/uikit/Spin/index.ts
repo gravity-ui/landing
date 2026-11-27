@@ -13,7 +13,7 @@ export const spinConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Spin)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.Spin)),
         props: {
             size: {
                 type: 'radioButton',

@@ -1,4 +1,4 @@
-import {Text, TextProps} from '@gravity-ui/uikit';
+import {Text, TextProps} from '@gravity-ui/uikit-v8';
 
 interface TextComponentProps extends TextProps {
     text: string;

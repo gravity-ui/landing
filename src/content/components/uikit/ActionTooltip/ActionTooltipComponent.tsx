@@ -1,5 +1,5 @@
-import {ActionTooltip, Button} from '@gravity-ui/uikit';
-import type {ActionTooltipProps} from '@gravity-ui/uikit';
+import {ActionTooltip, Button} from '@gravity-ui/uikit-v8';
+import type {ActionTooltipProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type ActionTooltipComponentProps = Pick<

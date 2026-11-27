@@ -1,4 +1,4 @@
-import {Box, Flex, Loader, Overlay} from '@gravity-ui/uikit';
+import {Box, Flex, Loader, Overlay} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type OverlayComponentProps = {
@@ -16,8 +16,8 @@ export const OverlayComponent = ({visible, background}: OverlayComponentProps) =
                 style={{
                     border: '2px dashed',
                 }}
-                width={100}
-                height={100}
+                width="100px"
+                height="100px"
                 color="var(--g-color-text-secondary)"
                 alignItems="center"
                 justifyContent="center"

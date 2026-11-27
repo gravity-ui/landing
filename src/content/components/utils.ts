@@ -1,3 +1,5 @@
+import uikitComponentPaths from 'scripts/component-catalog/uikit-component-paths.json';
+
 import {TARGET_PROFILE} from '../../constants';
 import packagesVersions from '../../data/packages-versions.json';
 import {Repos} from '../../types/common';
@@ -18,16 +20,29 @@ export type GetterProps = {componentName: string; repoName: Repos};
 
 type RepoInfoGetterFunc = (props: GetterProps) => string;
 
-export const getGithubUrl: RepoInfoGetterFunc = ({componentName, repoName}) =>
-    `https://github.com/${githubTargetProfile}/${repoName}/tree/main/src/components/${componentName}`;
+const getComponentPath = ({repoName, componentName}: GetterProps) =>
+    repoName === Repos.Uikit
+        ? (uikitComponentPaths as Record<string, string>)[componentName] ?? componentName
+        : componentName;
+
+export const getGithubUrl: RepoInfoGetterFunc = (options) => {
+    const {repoName} = options;
+    const ref = repoName === Repos.Uikit ? TARGET_REPOS_VERSIONS[repoName] : 'main';
+    return `https://github.com/${githubTargetProfile}/${repoName}/tree/${ref}/src/components/${getComponentPath(
+        options,
+    )}`;
+};
 
 type ReadmeInfoGetterFunc = (props: GetterProps) => {
     en: string;
     ru: string;
 };
 
-export const getReadmeUrl: ReadmeInfoGetterFunc = ({componentName, repoName}) => {
-    const url = `https://raw.githubusercontent.com/${githubTargetProfile}/${repoName}/${TARGET_REPOS_VERSIONS[repoName]}/src/components/${componentName}`;
+export const getReadmeUrl: ReadmeInfoGetterFunc = (options) => {
+    const {repoName} = options;
+    const url = `https://raw.githubusercontent.com/${githubTargetProfile}/${repoName}/${
+        TARGET_REPOS_VERSIONS[repoName]
+    }/src/components/${getComponentPath(options)}`;
     return {
         en: `${url}/README.md`,
         ru: `${url}/README-ru.md`,

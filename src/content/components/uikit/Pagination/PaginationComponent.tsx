@@ -1,4 +1,4 @@
-import {Pagination, PaginationProps} from '@gravity-ui/uikit';
+import {Pagination, PaginationProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 const setDefaultState = (props: PaginationProps) => ({

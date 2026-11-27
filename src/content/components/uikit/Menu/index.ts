@@ -42,10 +42,6 @@ export const menuConfig = {
                 type: 'switch',
                 defaultValue: false,
             },
-            itemActive: {
-                type: 'switch',
-                defaultValue: false,
-            },
             itemHref: {
                 type: 'input',
                 defaultValue: '#',

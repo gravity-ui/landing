@@ -1,4 +1,4 @@
-import {User, type UserProps} from '@gravity-ui/uikit';
+import {User, type UserProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 const USER_AVATAR: UserProps['avatar'] = {text: 'Charles Darwin', theme: 'brand'};

@@ -4,6 +4,11 @@ import * as Icons from '@gravity-ui/icons';
 import * as Navigation from '@gravity-ui/navigation';
 import * as PageConstructor from '@gravity-ui/page-constructor';
 import * as UIKit from '@gravity-ui/uikit';
+import * as UIKit8 from '@gravity-ui/uikit-v8';
+import * as UIKit8Dnd from '@gravity-ui/uikit-v8/hello-pangea-dnd';
+import * as UIKit8Legacy from '@gravity-ui/uikit-v8/legacy';
+import * as UIKit8Virtualizer from '@gravity-ui/uikit-v8/virtualizer';
+import * as HelloPangeaDnd from '@hello-pangea/dnd';
 import React from 'react';
 import type {Scope, Theme} from 'react-live-runner';
 
@@ -16,6 +21,17 @@ export const scope = {
         '@gravity-ui/components': Components,
         '@gravity-ui/page-constructor': PageConstructor,
         '@gravity-ui/icons': Icons,
+    },
+} as const satisfies Scope;
+
+export const uikit8Scope = {
+    import: {
+        ...scope.import,
+        '@gravity-ui/uikit': UIKit8,
+        '@gravity-ui/uikit/hello-pangea-dnd': UIKit8Dnd,
+        '@gravity-ui/uikit/legacy': UIKit8Legacy,
+        '@gravity-ui/uikit/virtualizer': UIKit8Virtualizer,
+        '@hello-pangea/dnd': HelloPangeaDnd,
     },
 } as const satisfies Scope;
 

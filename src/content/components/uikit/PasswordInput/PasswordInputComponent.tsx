@@ -1,4 +1,4 @@
-import {PasswordInput, PasswordInputProps} from '@gravity-ui/uikit';
+import {PasswordInput, PasswordInputProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const PasswordInputComponent = (props: PasswordInputProps) => {

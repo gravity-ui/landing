@@ -1,4 +1,4 @@
-import {Tab, TabList, TabListProps, TabProvider} from '@gravity-ui/uikit';
+import {Tab, TabList, TabListProps, TabProvider} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type TabsComponentProps = {

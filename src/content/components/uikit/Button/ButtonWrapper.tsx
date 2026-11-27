@@ -1,5 +1,5 @@
 import {Gear} from '@gravity-ui/icons';
-import {Button, ButtonProps, Icon} from '@gravity-ui/uikit';
+import {Button, ButtonProps, Icon} from '@gravity-ui/uikit-v8';
 import {FC} from 'react';
 
 export const ButtonWrapper: FC<

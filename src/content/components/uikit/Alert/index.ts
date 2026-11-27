@@ -14,7 +14,7 @@ export const alertConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Alert)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.Alert)),
         props: {
             theme: {
                 type: 'select',

@@ -1,4 +1,4 @@
-import {Palette, PaletteOption, PaletteProps} from '@gravity-ui/uikit';
+import {Palette, PaletteOption, PaletteProps} from '@gravity-ui/uikit-v8';
 
 type PaletteComponentProps = Pick<PaletteProps, 'size' | 'columns' | 'disabled' | 'multiple'>;
 

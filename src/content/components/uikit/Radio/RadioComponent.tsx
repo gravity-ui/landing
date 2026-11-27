@@ -1,4 +1,4 @@
-import {Radio, RadioProps} from '@gravity-ui/uikit';
+import {Radio, RadioProps} from '@gravity-ui/uikit-v8';
 
 type RadioComponentProps = {
     value: RadioProps['value'];

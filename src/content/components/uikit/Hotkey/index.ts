@@ -13,7 +13,7 @@ export const hotkeyConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.Hotkey)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.Hotkey)),
         props: {
             value: {
                 type: 'input',

@@ -1,4 +1,4 @@
-import {PlaceholderContainer, PlaceholderContainerProps} from '@gravity-ui/uikit';
+import {PlaceholderContainer, PlaceholderContainerProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const PlaceholderContainerComponent = (props: PlaceholderContainerProps) => {

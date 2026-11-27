@@ -15,7 +15,7 @@ export const userLabelConfig: Component = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.UserLabel)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.UserLabel)),
         props: {
             view: {
                 type: 'radioButton',

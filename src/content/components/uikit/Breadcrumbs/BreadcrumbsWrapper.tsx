@@ -1,4 +1,4 @@
-import {Breadcrumbs, BreadcrumbsProps} from '@gravity-ui/uikit';
+import {Breadcrumbs, BreadcrumbsProps} from '@gravity-ui/uikit-v8';
 import {FC} from 'react';
 
 export const BreadcrumbsWrapper: FC<Omit<BreadcrumbsProps, 'items'>> = (props) => {

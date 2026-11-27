@@ -15,7 +15,7 @@ export const skeletonConfig = {
     },
     sandbox: {
         component: dynamic(() =>
-            import('@gravity-ui/uikit').then((mod) =>
+            import('@gravity-ui/uikit-v8').then((mod) =>
                 mod.Skeleton.bind(null, {style: {height: '80px'}}),
             ),
         ),
