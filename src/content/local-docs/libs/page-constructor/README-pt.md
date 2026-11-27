@@ -16,7 +16,7 @@ npm install @gravity-ui/page-constructor
 
 ## Início rápido
 
-Primeiro, precisamos de um projeto React e algum tipo de servidor. Por exemplo, você pode criar um projeto React usando Vite e um servidor Express, ou pode criar uma aplicação Next.js - ela terá lado do cliente e do servidor ao mesmo tempo.
+Primeiro, precisamos de um projeto React e algum tipo de servidor. Por exemplo, você pode criar um projeto React usando Vite e um servidor Express, ou pode criar uma aplicação Next.js - ela terá um lado cliente e um lado servidor ao mesmo tempo.
 
 Instale as dependências necessárias:
 
@@ -27,6 +27,7 @@ npm install @gravity-ui/page-constructor @diplodoc/transform @gravity-ui/uikit
 Insira o `Page Constructor` na página. Para que funcione corretamente, ele deve ser envolvido em um `PageConstructorProvider`:
 
 ```tsx
+import {Provider} from '@gravity-ui/uikit';
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
 import '@gravity-ui/page-constructor/styles/styles.scss';
 
@@ -44,9 +45,11 @@ const App = () => {
   };
 
   return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
+    <Provider>
+      <PageConstructorProvider>
+        <PageConstructor content={content} />
+      </PageConstructorProvider>
+    </Provider>
   );
 };
 
@@ -90,6 +93,7 @@ app.listen(3000);
 No cliente, adicione uma chamada de endpoint para receber o conteúdo:
 
 ```tsx
+import {Provider} from '@gravity-ui/uikit';
 import {PageConstructor, PageConstructorProvider} from '@gravity-ui/page-constructor';
 import '@gravity-ui/page-constructor/styles/styles.scss';
 import {useEffect, useState} from 'react';
@@ -105,9 +109,11 @@ const App = () => {
   }, []);
 
   return (
-    <PageConstructorProvider>
-      <PageConstructor content={content} />
-    </PageConstructorProvider>
+    <Provider>
+      <PageConstructorProvider>
+        <PageConstructor content={content} />
+      </PageConstructorProvider>
+    </Provider>
   );
 };
 
@@ -116,7 +122,7 @@ export default App;
 
 ### Template pronto
 
-Para iniciar um novo projeto, você pode usar o [template pronto no Next.js](https://github.com/gravity-ui/page-constructor-website-template) que preparamos.
+Para iniciar um novo projeto, você pode usar o [template pronto no Next.js ](https://github.com/gravity-ui/page-constructor-website-template) que preparamos.
 
 ### Construtor de sites estáticos
 
@@ -133,7 +139,7 @@ interface PageConstructorProps {
   custom?: Custom; // Blocos personalizados (veja `Customization`).
   renderMenu?: () => React.ReactNode; // Uma função que renderiza o menu da página com navegação (planejamos adicionar a renderização para a versão padrão do menu).
   navigation?: NavigationData; // Dados de navegação para usar o componente de navegação em formato JSON
-  isBranded?: boolean; // Se true, adiciona um rodapé que linka para https://gravity-ui.com/. Tente o componente BrandFooter para mais personalização.
+  isBranded?: boolean; // Se verdadeiro, adiciona um rodapé que linka para https://gravity-ui.com/. Tente o componente BrandFooter para mais personalização.
 }
 
 interface PageConstructorProviderProps {
@@ -178,7 +184,9 @@ interface Locale {
 interface SSR {
   isServer?: boolean;
 }
+```
 
+```typescript
 interface NavigationData {
   logo: NavigationLogo;
   header: HeaderData;
@@ -194,9 +202,7 @@ interface HeaderData {
   leftItems: NavigationItem[];
   rightItems?: NavigationItem[];
 }
-```
 
-```
 interface NavigationLogo {
   icon: ImageProps;
   text?: string;
@@ -204,7 +210,7 @@ interface NavigationLogo {
 }
 ```
 
-### Utilitários do Servidor
+### Utilitários de Servidor
 
 O pacote fornece um conjunto de utilitários de servidor para transformar seu conteúdo.
 
@@ -240,13 +246,13 @@ const post = {
 
 Você pode encontrar mais utilitários nesta [seção](https://github.com/gravity-ui/page-constructor/tree/main/src/text-transform).
 
-### Documentação Detalhada sobre Utilitários de Servidor e Transformers
+### Documentação Detalhada sobre Utilitários de Servidor e Transformadores
 
-Para um guia completo sobre o uso de utilitários de servidor, incluindo explicações detalhadas e casos de uso avançados, visite o [capítulo adicional sobre uso de utilitários de servidor](./docs/data-preparation.md).
+Para um guia completo sobre o uso de utilitários de servidor, incluindo explicações detalhadas e casos de uso avançados, visite o [capítulo adicional sobre o uso de utilitários de servidor](./docs/data-preparation.md).
 
 ### Blocos Personalizados
 
-O construtor de páginas permite que você use blocos definidos pelo usuário em seu aplicativo. Blocos são componentes React comuns.
+O construtor de páginas permite que você use blocos que são definidos pelo usuário em seu aplicativo. Blocos são componentes React regulares.
 
 Para passar blocos personalizados para o construtor:
 
@@ -274,7 +280,7 @@ Para usar a fonte padrão, adicione a importação em seu arquivo:
 
 Às vezes, é necessário que um bloco se renderize com base em dados a serem carregados. Nesses casos, blocos carregáveis são usados.
 
-Para adicionar blocos `loadable` personalizados, passe para o `PageConstructor` a propriedade `custom.loadable` com nomes de fontes de dados (string) como chave e um objeto como valor.
+Para adicionar blocos `loadable` personalizados, passe para o `PageConstructor` a propriedade `custom.loadable` com nomes de fontes de dados (string) para o componente como chave e um objeto como valor.
 
 ```typescript
 export interface LoadableConfigItem {
@@ -288,6 +294,16 @@ type FetchLoadableData<TData = any> = (blockKey: string) => Promise<TData>;
 ### Grid
 
 O construtor de páginas usa a grid do `bootstrap` e sua implementação baseada em componentes React que você pode usar em seu próprio projeto (inclusive separadamente do construtor).
+
+A grid espera que o aplicativo host defina um reset global `box-sizing: border-box` (a maioria dos scaffolds de aplicativos faz isso). O pacote não fornece um, então com o padrão do navegador `content-box`, o padding do container é adicionado à sua `width: 100%` e a página transborda horizontalmente:
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+```
 
 Exemplo de uso:
 
@@ -327,7 +343,7 @@ Sub-blocos são componentes que podem ser usados na propriedade `children` de um
 
 2. Adicione o nome do bloco ou sub-bloco ao enum `BlockType` ou `SubBlockType` e descreva suas propriedades em `src/models/constructor-items/blocks.ts` ou `src/models/constructor-items/sub-blocks.ts` de forma semelhante aos existentes.
 
-3. Adicione uma exportação para o bloco em `src/blocks/index.ts` e para o sub-bloco em `src/sub-blocks/index.ts`.
+3. Adicione a exportação para o bloco em `src/blocks/index.ts` e para o sub-bloco em `src/sub-blocks/index.ts`.
 
 4. Adicione um novo componente ou bloco ao mapeamento em `src/constructor-items.ts`.
 
@@ -335,10 +351,10 @@ Sub-blocos são componentes que podem ser usados na propriedade `children` de um
 
    - Adicione um arquivo `schema.ts` ao diretório do bloco ou sub-bloco. Neste arquivo, descreva um validador de parâmetro para o componente no formato [`json-schema`](http://json-schema.org/).
    - Exporte-o em `schema/validators/blocks.ts` ou `schema/validators/sub-blocks.ts`.
-   - Adicione-o ao `enum` ou `selectCases` em `schema/index.ts`.
+   - Adicione-o ao `enum` ou `selectCases` no arquivo `schema/index.ts`.
 
 6. No diretório do bloco, adicione o arquivo `README.md` com uma descrição dos parâmetros de entrada.
-7. No diretório do bloco, adicione uma demonstração do storybook na pasta `__stories__`. Todo o conteúdo de demonstração para a história deve ser colocado em `data.json` no diretório da história. A `Story` genérica deve aceitar o tipo das props do bloco, caso contrário, props incorretas serão exibidas no Storybook.
+7. No diretório do bloco, adicione uma demonstração do storybook na pasta `__stories__`. Todo o conteúdo da demonstração para a história deve ser colocado em `data.json` no diretório da história. A `Story` genérica deve aceitar o tipo das props do bloco, caso contrário, props incorretas serão exibidas no Storybook.
 8. Adicione um template de dados de bloco à pasta `src/editor/data/templates/`, o nome do arquivo deve corresponder ao tipo do bloco.
 9. (opcional) Adicione um ícone de pré-visualização do bloco à pasta `src/editor/data/previews/`, o nome do arquivo deve corresponder ao tipo do bloco.
 
@@ -368,20 +384,21 @@ configure({
 
 ### Mapas
 
-Para usar mapas, coloque o tipo do mapa, `scriptSrc` e `apiKey` no campo `mapContext` em `PageConstructorProvider`.
 
-Você pode definir variáveis de ambiente para o modo de desenvolvimento no arquivo `.env.development` dentro da raiz do projeto.
+Para usar mapas, coloque o tipo de mapa, `scriptSrc` e `apiKey` no campo `mapContext` em `PageConstructorProvider`.
+
+Você pode definir variáveis de ambiente para o modo de desenvolvimento em um arquivo `.env.development` na raiz do projeto.
 `STORYBOOK_GMAP_API_KEY` - apiKey para google maps
 
 ### Analytics
 
 #### Inicialização
 
-Para começar a usar analytics, passe um manipulador para o construtor. O manipulador deve ser criado no lado do projeto. Ele recebe três classes de eventos:
+Para começar a usar a análise, passe um manipulador para o construtor. O manipulador deve ser criado no lado do projeto. Ele recebe três classes de eventos:
 
 - **Eventos padrão** são eventos genéricos do Page Constructor gerados para interações de botões, links, navegação e controles. Defina `autoEvents.enabled` como `true` para emiti-los.
 - **Eventos estendidos** são eventos registrados fornecidos por uma biblioteca de composição. A presença de `autoEvents.extendedEvents` os habilita independentemente de `enabled` e opcionalmente adiciona um prefixo e um contador.
-- **Eventos personalizados** são fornecidos pelos consumidores através de `analyticsEvents`. A configuração de eventos automáticos não os altera.
+- **Eventos personalizados** são fornecidos por consumidores através de `analyticsEvents`. A configuração de eventos automáticos não os altera.
 
 A forma de objeto é a configuração preferida:
 
@@ -422,7 +439,7 @@ type AutoEventsConfig = {
 
 A forma booleana legada ainda é suportada para compatibilidade com versões anteriores: `true` é equivalente a `{enabled: true}`, e `false` é equivalente a `{enabled: false}`. Se `autoEvents` for omitido, tanto os eventos padrão quanto os estendidos são desabilitados. Um objeto `extendedEvents` habilita os eventos estendidos fornecidos mesmo quando `enabled` é `false`.
 
-Eventos estendidos devem ter `type: 'extended-event'`. Seu prefixo é concatenado exatamente como configurado, sem alterar maiúsculas/minúsculas, separadores ou espaços em branco. Se `counter` for definido, ele define `counters.include` para o evento estendido:
+Eventos estendidos devem ter `type: 'extended-event'`. Seu prefixo é concatenado exatamente como configurado, sem alterar maiúsculas, minúsculas, separadores ou espaços em branco. Se `counter` for definido, ele define `counters.include` para o evento estendido:
 
 ```ts
 // Evento fornecido
@@ -438,7 +455,7 @@ Eventos estendidos devem ter `type: 'extended-event'`. Seu prefixo é concatenad
 
 Os eventos são enviados nesta ordem: o evento padrão gerado primeiro (quando habilitado), seguido pelos eventos estendidos e personalizados fornecidos em sua ordem original. Eventos estendidos são omitidos quando `extendedEvents` não está configurado. Qualquer contexto adicional específico da interação é mesclado em cada evento emitido por último.
 
-Um objeto de evento tem apenas um campo obrigatório - `name`. Ele também possui campos predefinidos, que servem para ajudar a gerenciar lógica complexa. Por exemplo, `counter.include` pode ajudar a enviar um evento em um contador específico se vários sistemas de análise forem usados em um projeto.
+Um objeto de evento tem apenas um campo obrigatório - `name`. Ele também possui campos predefinidos, que servem para ajudar a gerenciar a lógica complexa. Por exemplo, `counter.include` pode ajudar a enviar um evento para um contador específico se vários sistemas de análise forem usados em um projeto.
 
 ```ts
 type AnalyticsEvent<T = {}> = T & {
@@ -538,7 +555,7 @@ Você pode ver todas as informações [aqui](https://www.conventionalcommits.org
 
 Quando você receber a aprovação do seu pull-request dos proprietários do código e passar em todas as verificações, por favor, faça o seguinte:
 
-1. Você deve verificar se há um pull-request de lançamento do robô com alterações de outro contribuidor (parece `chore(main): release 0.0.0`). Se existir, você deve verificar por que ele não foi mesclado. Se o contribuidor concordar em lançar uma versão compartilhada, siga o próximo passo. Se não, peça a ele para lançar sua versão, então siga o próximo passo.
+1. Verifique se há um pull-request de lançamento do robô com alterações de outro contribuidor (parece `chore(main): release 0.0.0`). Se existir, verifique por que ele não foi mesclado. Se o contribuidor concordar em lançar uma versão compartilhada, siga para a próxima etapa. Se não, peça a ele para lançar sua versão, então siga para a próxima etapa.
 2. Faça o squash e merge do seu PR (É importante lançar uma nova versão com Github-Actions).
 3. Espere até que o robô crie um PR com uma nova versão do pacote e informações sobre suas alterações no CHANGELOG.md. Você pode ver o processo na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
 4. Verifique suas alterações no CHANGELOG.md e aprove o PR do robô.
@@ -551,43 +568,42 @@ Se você quiser lançar uma versão alpha do pacote a partir do seu branch, voc�
 1. Vá para a aba Actions.
 2. Selecione o workflow "Release alpha version" no lado esquerdo da página.
 3. Você pode ver no lado direito o botão "Run workflow". Aqui você pode escolher o branch.
-4. Você também pode ver um campo com a versão manual. Se você está lançando alpha no seu branch pela primeira vez, não defina nada aqui. Após o primeiro lançamento, você terá que definir a nova versão manualmente porque não alteramos o package.json caso o branch possa expirar muito em breve. Use o prefixo `alpha` na sua versão manual, caso contrário, você receberá um erro.
+4. Você também pode ver um campo com a versão manual. Se você estiver lançando alpha no seu branch pela primeira vez, não defina nada aqui. Após o primeiro lançamento, você terá que definir a nova versão manualmente porque não alteramos o `package.json` caso o branch possa expirar muito em breve. Use o prefixo `alpha` na sua versão manual, caso contrário, você receberá um erro.
 5. Clique em "Run workflow" e espere até que a ação termine. Você pode lançar versões quantas vezes quiser, mas não abuse e lance versões se realmente precisar. Em outros casos, use [npm pack](https://docs.npmjs.com/cli/v7/commands/npm-pack).
 
 ### Lançamento de versões Beta-major
 
-Se você quiser lançar uma nova versão major, você provavelmente precisará de versões beta antes de uma estável, por favor, faça o seguinte:
+Se você deseja lançar uma nova versão principal, provavelmente precisará de versões beta antes de uma estável. Para isso, siga os passos abaixo:
 
 1. Crie ou atualize o branch `beta`.
 2. Adicione suas alterações lá.
 3. Quando estiver pronto para uma nova versão beta, lance-a manualmente com um commit vazio (ou você pode adicionar esta mensagem de commit com um rodapé ao último commit):
 
 ```bash
-git commit -m 'fix: last commit
+git commit -m 'fix: último commit
 
-```
 Release-As: 3.0.0-beta.0' --allow-empty
 ```
 
-4. O robô de release criará um novo PR para o branch `beta` com o `CHANGELOG.md` atualizado e incrementará a versão do pacote.
-5. Você pode repetir isso quantas vezes quiser. Quando estiver pronto para lançar a última versão principal sem a tag beta, você deverá criar um PR do branch `beta` para o branch `main`. Observe que é normal que a versão do seu pacote tenha uma tag beta. O robô sabe disso e a alterará adequadamente. `3.0.0-beta.0` se tornará `3.0.0`.
+4. O robô de lançamento criará um novo PR para o branch `beta` com o `CHANGELOG.md` atualizado e incrementará a versão do pacote.
+5. Você pode repetir isso quantas vezes quiser. Quando estiver pronto para lançar a última versão principal sem a tag beta, você precisará criar um PR do branch `beta` para o branch `main`. Observe que é normal que a versão do seu pacote tenha a tag beta. O robô sabe disso e a alterará adequadamente. `3.0.0-beta.0` se tornará `3.0.0`.
 
-### Fluxo de release para major-versions anteriores
+### Fluxo de lançamento para versões principais anteriores
 
-Se você quiser lançar uma nova versão em uma major anterior após commitá-la no main, faça o seguinte:
+Se você deseja lançar uma nova versão em uma versão principal anterior após commitá-la no `main`, siga os passos abaixo:
 
-1. Atualize o branch necessário, os nomes dos branches de release das major anteriores são:
-   1. `version-1.x.x/fixes` - para a major 1.x.x
-   2. `version-2.x.x` - para a major 2.x.x
-2. Faça checkout de um novo branch a partir do branch de release da major anterior.
-3. Faça cherry-pick do seu commit do branch `main`.
-4. Crie um PR, obtenha aprovação e mescle no branch de release da major anterior.
-5. Faça squash and merge do seu PR (É importante lançar uma nova versão com Github-Actions).
+1. Atualize o branch necessário. Os nomes dos branches de lançamento de versões principais anteriores são:
+   1. `version-1.x.x/fixes` - para a versão principal 1.x.x
+   2. `version-2.x.x` - para a versão principal 2.x.x
+2. Faça checkout de um novo branch a partir do branch de lançamento da versão principal anterior.
+3. Use `cherry-pick` para aplicar seu commit do branch `main`.
+4. Crie um PR, obtenha aprovação e mescle no branch de lançamento da versão principal anterior.
+5. Use "Squash and merge" no seu PR (é importante lançar uma nova versão com Github-Actions).
 6. Aguarde até que o robô crie um PR com uma nova versão do pacote e informações sobre suas alterações no `CHANGELOG.md`. Você pode ver o processo na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
 7. Verifique suas alterações no `CHANGELOG.md` e aprove o PR do robô.
-8. Faça squash and merge do PR. Você pode ver o processo de release na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
+8. Use "Squash and merge" no PR. Você pode ver o processo de lançamento na [aba Actions](https://github.com/gravity-ui/page-constructor/actions).
 
-## Editor de Page Constructor
+## Editor Page Constructor
 
 O editor fornece uma interface de usuário para gerenciamento de conteúdo de páginas com pré-visualização em tempo real.
 
@@ -611,21 +627,21 @@ export const MyAppEditor = ({initialContent, onChange, transformContent}: MyAppE
 
 Este projeto inclui um **Memory Bank** abrangente - uma coleção de arquivos de documentação Markdown que fornecem informações detalhadas sobre a arquitetura, componentes e padrões de uso do projeto. O Memory Bank é particularmente útil ao trabalhar com agentes de IA, pois contém informações estruturadas sobre:
 
-- **Visão Geral do Projeto**: Requisitos principais, objetivos e contexto
+- **Visão Geral do Projeto**: Requisitos centrais, objetivos e contexto
 - **Documentação de Componentes**: Guias de uso detalhados para todos os componentes
 - **Arquitetura do Sistema**: Padrões técnicos e decisões de design
-- **Progresso do Desenvolvimento**: Status atual e detalhes de implementação
+- **Progresso de Desenvolvimento**: Status atual e detalhes de implementação
 
 ### Usando o Memory Bank
 
 O Memory Bank está localizado no diretório `memory-bank/` e consiste em arquivos Markdown regulares que podem ser lidos como qualquer outra documentação:
 
-- `projectbrief.md` - Documento fundamental com os requisitos principais
+- `projectbrief.md` - Documento fundamental com os requisitos centrais
 - `productContext.md` - Propósito do projeto e objetivos de experiência do usuário
 - `systemPatterns.md` - Arquitetura e decisões técnicas
 - `techContext.md` - Tecnologias, configuração e restrições
-- `activeContext.md` - Foco do trabalho atual e alterações recentes
-- `progress.md` - Status da implementação e problemas conhecidos
+- `activeContext.md` - Foco de trabalho atual e alterações recentes
+- `progress.md` - Status de implementação e problemas conhecidos
 - `usage/` - Documentação de uso específica do componente
 - `storybookComponents.md` - Detalhes de integração do Storybook
 
@@ -643,26 +659,26 @@ Uma biblioteca para renderizar páginas web inteiras ou seções de páginas a p
 
 ### Quando usar
 
-- Páginas orientadas por dados: renderize uma configuração de `content` de blocos tipados com `PageConstructor` envolvido em `PageConstructorProvider`.
+- Páginas orientadas por dados: renderize uma configuração de `content` de blocos tipados com `PageConstructor` encapsulado em `PageConstructorProvider`.
 - Páginas de marketing, landing pages e documentação montadas a partir de blocos pré-construídos (cabeçalhos, mídia, cartões, etc.).
-- Processamento YFM do lado do servidor do texto dos blocos através das utilidades `contentTransformer` e `fullTransform` de `@gravity-ui/page-constructor/server`.
-- Reutilizando apenas a grade responsiva (`Grid`/`Row`/`Col`) ou o componente `Navigation` isoladamente.
+- Processamento YFM do lado do servidor do texto dos blocos através das utilidades `server` de `@gravity-ui/page-constructor` (`contentTransformer`, `fullTransform`).
+- Reutilização apenas da grade responsiva (`Grid`/`Row`/`Col`) ou do componente `Navigation` isoladamente.
 
 ### Quando não usar
 
 - Interfaces de aplicativos gerais (botões, formulários, modais) — use [`@gravity-ui/uikit`](https://github.com/gravity-ui/uikit).
 - Edição de conteúdo Markdown/YFM — use [`@gravity-ui/markdown-editor`](https://github.com/gravity-ui/markdown-editor).
-- Estruturas de navegação de aplicativos (cabeçalho lateral) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); o `Navigation` deste pacote é uma navegação superior no nível da página.
+- Conchas de navegação de aplicativos (cabeçalho lateral) — use [`@gravity-ui/navigation`](https://github.com/gravity-ui/navigation); o `Navigation` deste pacote é uma navegação superior no nível da página.
 
 ### Armadilhas comuns
 
-- **`PageConstructor` deve ser envolvido em `PageConstructorProvider`.** Renderizá-lo sem isso quebra o contexto (local, tema, SSR, analytics).
-- **A prop `content` é `content`, com a estrutura `{blocks: [...]}`.** Cada objeto de bloco precisa de um `type` que corresponda a um bloco conhecido mais seus campos de dados; não há prop `data`/`config`.
-- **YFM em texto de bloco requer processamento do lado do servidor.** Campos semelhantes a Markdown são renderizados como texto puro, a menos que você processe o conteúdo através de `contentTransformer`/`fullTransform` de `@gravity-ui/page-constructor/server`; `@diplodoc/transform` é uma dependência peer obrigatória.
+- **`PageConstructor` deve ser encapsulado em `PageConstructorProvider`.** Renderizá-lo sem isso quebra o contexto (local, tema, SSR, analytics).
+- **A prop `content` é `content`, com formato `{blocks: [...]}`.** Cada objeto de bloco precisa de um `type` correspondente a um bloco conhecido, mais seus campos de dados; não há prop `data`/`config`.
+- **YFM em texto de bloco requer processamento do lado do servidor.** Campos semelhantes a Markdown são renderizados como texto simples, a menos que você processe o conteúdo através de `contentTransformer`/`fullTransform` de `@gravity-ui/page-constructor/server`; `@diplodoc/transform` é uma dependência peer obrigatória.
 - **Importe os estilos SCSS.** Adicione `@gravity-ui/page-constructor/styles/styles.scss` (SCSS, não CSS); blocos personalizados importam o mesmo arquivo para reutilizar mixins/variáveis.
 - **Vite precisa de `vite-plugin-dynamic-import`.** Importações dinâmicas de blocos falham no Vite sem ele.
+- **A grade precisa de um reset global `box-sizing: border-box`.** O pacote não fornece um; sem ele, o padding do contêiner transborda a viewport horizontalmente, enquanto a verificação de tipo e a compilação permanecem verdes. Adicione `*, *::before, *::after { box-sizing: border-box; }` aos estilos do aplicativo host.
 
 ## Documentação para agentes de IA
 
 A documentação legível por agente para a versão instalada está localizada em `node_modules/@gravity-ui/page-constructor/build/docs/INDEX.md`.
-```
