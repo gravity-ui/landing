@@ -1,6 +1,6 @@
 import {Link, Xmark} from '@gravity-ui/icons';
-import {FilePreview} from '@gravity-ui/uikit';
-import type {FilePreviewProps} from '@gravity-ui/uikit';
+import {FilePreview} from '@gravity-ui/uikit-v8';
+import type {FilePreviewProps} from '@gravity-ui/uikit-v8';
 
 type FilePreviewComponentProps = Omit<FilePreviewProps, 'className'>;
 

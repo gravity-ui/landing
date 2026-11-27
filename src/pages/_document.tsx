@@ -127,11 +127,21 @@ const generateAlternateLinks = (path: string, query: Record<string, any>, locale
     return links;
 };
 
+class UIKitDemoHead extends Head {
+    getCssLinks() {
+        return null;
+    }
+}
+
 const b = block('g-root');
 
 class CustomDocument extends Document {
     render() {
         const {page, query, locale} = this.props.__NEXT_DATA__;
+        const uikitDemo =
+            page === '/sandbox/uikit/readme' ||
+            (page === '/sandbox/[libId]/[componentId]' && query.libId === 'uikit');
+        const DocumentHead = uikitDemo ? UIKitDemoHead : Head;
 
         // Generate static links for SSG
         const staticLinks = generateAlternateLinks(page, query, locale);
@@ -139,8 +149,12 @@ class CustomDocument extends Document {
 
         return (
             // Workaround for missing direction 'ltr' in ThemeProvider
-            <Html dir="ltr" prefix="og: https://ogp.me/ns#">
-                <Head>
+            <Html
+                dir="ltr"
+                prefix="og: https://ogp.me/ns#"
+                data-uikit-demo={uikitDemo ? '' : undefined}
+            >
+                <DocumentHead>
                     <meta
                         name="google-site-verification"
                         content="QhqdVzck0x0Hw82h7fl_l9ebRsYpSqlC_JhyDRXBnew"
@@ -163,8 +177,11 @@ class CustomDocument extends Document {
                             }}
                         />
                     )}
-                </Head>
-                <body className={b({theme: DEFAULT_THEME})}>
+                </DocumentHead>
+                <body
+                    className={b({theme: DEFAULT_THEME})}
+                    style={uikitDemo ? {margin: 0} : undefined}
+                >
                     {IS_PRODUCTION && (
                         <noscript
                             dangerouslySetInnerHTML={{

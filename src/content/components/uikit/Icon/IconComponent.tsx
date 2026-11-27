@@ -1,5 +1,5 @@
 import {Eye, Gear, Globe, Person, Star} from '@gravity-ui/icons';
-import {Icon} from '@gravity-ui/uikit';
+import {Icon} from '@gravity-ui/uikit-v8';
 import {FC} from 'react';
 
 const ICON_MAP = {

@@ -14,19 +14,21 @@ import remarkGfm from 'remark-gfm';
 
 import {CONTENT_WRAPPER_ID} from '../../constants';
 
-import {componentsAvailableInMDX} from './constants';
+import {componentsAvailableInMDX, uikit8ComponentsAvailableInMDX} from './constants';
 import RemarkLinkRewriteSync from './remark-plugins/remark-link-rewrite-sync';
+import {prepareUIKitReadme} from './uikit-readme-examples';
 import {getCustomImg} from './utils';
 
 type Props = {
     text: string;
     withComponents?: boolean;
+    uikit8?: boolean;
     absoluteImgPath?: string;
     rewriteLinks?: (link: string) => string;
 };
 
 export const MDXRenderer = React.memo<Props>(
-    ({text, withComponents = false, absoluteImgPath, rewriteLinks}) => {
+    ({text, withComponents = false, uikit8 = false, absoluteImgPath, rewriteLinks}) => {
         const [isMounted, setIsMounted] = React.useState(false);
 
         React.useEffect(() => {
@@ -34,13 +36,14 @@ export const MDXRenderer = React.memo<Props>(
         }, []);
 
         const Content = React.useMemo<MDXContent | null>(() => {
-            const preparedText = text
+            const markdown = text
                 .trim()
+                .replace(/<!--GITHUB_BLOCK-->[\s\S]*?(?:<!--\/GITHUB_BLOCK-->|$)/g, '')
                 .replace(/<!--SANDBOX(.*?)SANDBOX-->/gms, (_, code) => {
                     return `<Sandbox code={${JSON.stringify(code.trim())}} />`;
                 })
-                .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1')
-                .replace(/<!--GITHUB_BLOCK(.*?)\/GITHUB_BLOCK-->/gms, '');
+                .replace(/<!--LANDING_BLOCK(.*?)LANDING_BLOCK-->/gms, '$1');
+            const preparedText = uikit8 ? prepareUIKitReadme(markdown) : markdown;
 
             const remarkPlugins: EvaluateOptions['remarkPlugins'] = [remarkGfm];
             if (rewriteLinks) {
@@ -74,16 +77,17 @@ export const MDXRenderer = React.memo<Props>(
                 console.error(err);
             }
             return null;
-        }, [text, withComponents, absoluteImgPath, rewriteLinks]);
+        }, [text, uikit8, rewriteLinks]);
 
         const contentComponents = React.useMemo(() => {
             const CustomImg = getCustomImg({absoluteImgPath});
+            const examples = uikit8 ? uikit8ComponentsAvailableInMDX : componentsAvailableInMDX;
             return {
                 img: CustomImg,
                 Img: CustomImg,
-                ...(withComponents ? componentsAvailableInMDX : {}),
+                ...(withComponents && examples),
             };
-        }, [withComponents, absoluteImgPath]);
+        }, [withComponents, uikit8, absoluteImgPath]);
 
         React.useEffect(() => {
             Prism.highlightAll();

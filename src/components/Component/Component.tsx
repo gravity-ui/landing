@@ -223,6 +223,7 @@ export const Component: React.FC<ComponentProps> = ({
                             rewriteLinks={rewriteLinks}
                             absoluteImgPath={readmeAssetsBasePath}
                             withComponents
+                            uikit8={libId === 'uikit'}
                         />
                     </>
                 )}

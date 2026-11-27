@@ -1,4 +1,4 @@
-import {Alert, CopyToClipboard, Icon, Theme, ThemeProvider} from '@gravity-ui/uikit';
+import {Alert, CopyToClipboard, Icon, ThemeProvider} from '@gravity-ui/uikit';
 import React from 'react';
 import {CodeEditor, useLiveRunner} from 'react-live-runner';
 
@@ -7,26 +7,40 @@ import stackblitzIcon from '../../../assets/icons/stackblitz.svg';
 import themeIcon from '../../../assets/icons/theme.svg';
 import {block} from '../../../utils';
 import {ClipboardIcon} from '../../ClipboardIcon/ClipboardIcon';
+import {UIKitDemoFrame} from '../../UIKitDemoFrame/UIKitDemoFrame';
 
 import './Sandbox.scss';
-import {editorDarkTheme, scope} from './constants';
+import {UIKitReadmeIframe} from './UIKitReadmeIframe';
+import {editorDarkTheme, scope, uikit8Scope} from './constants';
 import {openStackblitz} from './stackblitz';
 
 const b = block('sandbox');
 
 export type SandboxProps = {
     code: string;
+    uikit8?: boolean;
 };
 
-export const Sandbox = ({code: initialCode}: SandboxProps) => {
+export const Sandbox = ({code: initialCode, uikit8}: SandboxProps) => {
     const [isEditorOpen, setIsEditorOpen] = React.useState(false);
-    const [theme, setTheme] = React.useState<Theme>('dark');
+    const [theme, setTheme] = React.useState<'dark' | 'light'>('dark');
+    const [frameError, setFrameError] = React.useState<string | null>(null);
 
-    const {element, error, code, onChange} = useLiveRunner({
+    const {
+        element,
+        error: runnerError,
+        code,
+        onChange,
+    } = useLiveRunner({
         initialCode,
-        scope,
+        scope: uikit8 ? uikit8Scope : scope,
     });
 
+    // Drag sensors attach to the window where their code runs.
+    const needsOwnWindow =
+        uikit8 &&
+        /['"](?:@hello-pangea\/dnd|@gravity-ui\/uikit\/(?:hello-pangea-dnd|legacy))['"]/.test(code);
+    const error = needsOwnWindow ? frameError : runnerError;
     const [errorTitle = 'Error', errorMessage = ''] = (error ?? '').split(':', 2);
 
     const handleToggleEditorOpen = () => {
@@ -38,14 +52,28 @@ export const Sandbox = ({code: initialCode}: SandboxProps) => {
     };
 
     const handleStackblitzOpen = () => {
-        openStackblitz(initialCode);
+        openStackblitz(code, uikit8);
     };
 
     return (
         <div className={b()}>
-            <ThemeProvider theme={theme} scoped rootClassName={b('theme-root', {theme}, 'sandbox')}>
-                <div className={b('content')}>{element}</div>
-            </ThemeProvider>
+            {needsOwnWindow && (
+                <UIKitReadmeIframe code={code} theme={theme} onError={setFrameError} />
+            )}
+            {uikit8 && !needsOwnWindow && (
+                <UIKitDemoFrame theme={theme} title="UIKit sandbox">
+                    {element}
+                </UIKitDemoFrame>
+            )}
+            {!uikit8 && (
+                <ThemeProvider
+                    theme={theme}
+                    scoped
+                    rootClassName={b('theme-root', {theme}, 'sandbox')}
+                >
+                    <div className={b('content')}>{element}</div>
+                </ThemeProvider>
+            )}
 
             <div className={b('controls')}>
                 <button

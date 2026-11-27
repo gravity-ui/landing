@@ -34,7 +34,7 @@ export const dialogConfig = {
                 type: 'switch',
                 defaultValue: false,
             },
-            size: {
+            maxWidth: {
                 type: 'radioButton',
                 values: mappingOptions(['s', 'm', 'l']),
                 defaultValue: 's',

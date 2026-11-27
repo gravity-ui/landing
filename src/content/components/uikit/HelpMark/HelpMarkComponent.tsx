@@ -1,9 +1,9 @@
-import {HelpMark} from '@gravity-ui/uikit';
-import type {HelpMarkProps} from '@gravity-ui/uikit';
+import {HelpMark} from '@gravity-ui/uikit-v8';
+import type {HelpMarkProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
-type HelpMarkComponentProps = Pick<HelpMarkProps, 'iconSize'>;
+type HelpMarkComponentProps = Pick<HelpMarkProps, 'size'>;
 
-export const HelpMarkComponent = ({iconSize}: HelpMarkComponentProps) => {
-    return <HelpMark iconSize={iconSize}>Some content</HelpMark>;
+export const HelpMarkComponent = ({size}: HelpMarkComponentProps) => {
+    return <HelpMark size={size}>Some content</HelpMark>;
 };

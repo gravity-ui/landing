@@ -1,4 +1,4 @@
-import {ToastProps} from '@gravity-ui/uikit';
+import {ToastProps} from '@gravity-ui/uikit-v8';
 import dynamic from 'next/dynamic';
 
 import {Repos} from '../../../../types/common';

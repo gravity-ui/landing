@@ -1,4 +1,4 @@
-import {Progress, ProgressProps} from '@gravity-ui/uikit';
+import {Progress, ProgressProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const ProgressComponent = (props: ProgressProps) => {

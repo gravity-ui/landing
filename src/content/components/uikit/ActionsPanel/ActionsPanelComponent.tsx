@@ -1,4 +1,4 @@
-import {ActionsPanel, ActionsPanelProps} from '@gravity-ui/uikit';
+import {ActionsPanel, ActionsPanelProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type ActionsPanelComponentProps = {
@@ -15,10 +15,10 @@ export const actions: ActionsPanelProps['actions'] = [
                 onClick: () => console.log('click button action 1'),
             },
         },
-        dropdown: {
+        menu: {
             item: {
-                action: () => console.log('click dropdown action 1'),
-                text: 'Action 1',
+                onClick: () => console.log('click dropdown action 1'),
+                children: 'Action 1',
             },
         },
     },
@@ -30,10 +30,10 @@ export const actions: ActionsPanelProps['actions'] = [
                 onClick: () => console.log('click button action 2'),
             },
         },
-        dropdown: {
+        menu: {
             item: {
-                action: () => console.log('click dropdown action 2'),
-                text: 'Action 2',
+                onClick: () => console.log('click dropdown action 2'),
+                children: 'Action 2',
             },
         },
     },

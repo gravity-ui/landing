@@ -1,13 +1,6 @@
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import path from 'node:path';
 
-const legacyUikitReadmes = {
-    'password-input': 'controls/PasswordInput',
-    tabs: 'tabs',
-    'text-area': 'controls/TextArea',
-    'text-input': 'controls/TextInput',
-};
-
 const readText = async (file) =>
     readFile(file, 'utf8').catch((error) => {
         if (error.code === 'ENOENT') {
@@ -19,20 +12,9 @@ const readText = async (file) =>
 export async function syncComponentReadmes({catalog, docsRoot, locales, fetchReadme = fetch}) {
     const pending = [];
 
-    for (const [libraryId, {components, githubRepository, ref}] of Object.entries(
-        catalog.libraries,
-    )) {
-        const urls = new Map(components.map(({id, readmeUrl}) => [id, readmeUrl.en]));
-        if (libraryId === 'uikit') {
-            for (const [id, name] of Object.entries(legacyUikitReadmes)) {
-                urls.set(
-                    id,
-                    `https://raw.githubusercontent.com/${githubRepository}/${ref}/src/components/${name}/README.md`,
-                );
-            }
-        }
-
-        for (const [id, url] of urls) {
+    for (const [libraryId, {components}] of Object.entries(catalog.libraries)) {
+        for (const {id, readmeUrl} of components) {
+            const url = readmeUrl.en;
             const directory = path.join(docsRoot, libraryId, id);
             const input = path.join(directory, 'README.md');
             const outputs = locales.map((locale) => path.join(directory, `README-${locale}.md`));

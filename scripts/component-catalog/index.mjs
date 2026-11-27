@@ -2,8 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import {resolveInstalledPackage} from './package-resolver.mjs';
+import uikitComponentPaths from './uikit-component-paths.json' with {type: 'json'};
 
-export const COMPONENT_CATALOG_SCHEMA_VERSION = 2;
+export const COMPONENT_CATALOG_SCHEMA_VERSION = 3;
 
 const COMPONENT_NAME_RE = /^[A-Z][A-Za-z0-9]*$/;
 const COMPONENT_README_RE = /^src\/components\/([^/]+)\/README\.md$/;
@@ -12,6 +13,7 @@ export const COMPONENT_LIBRARIES = [
     {
         id: 'uikit',
         packageName: '@gravity-ui/uikit',
+        installName: '@gravity-ui/uikit-v8',
         githubRepository: 'gravity-ui/uikit',
     },
     {
@@ -75,7 +77,11 @@ export function getComponentNamesFromTree(tree) {
  */
 function resolveLibraries(projectRoot, libraries) {
     return libraries.map((library) => {
-        const {packageJson} = resolveInstalledPackage(library.packageName, projectRoot);
+        const {packageJson} = resolveInstalledPackage(
+            library.packageName,
+            projectRoot,
+            library.installName,
+        );
         const version = packageJson.version;
 
         if (typeof version !== 'string' || !version) {
@@ -208,14 +214,23 @@ export async function generateComponentCatalog({
     const generatedLibraries = await Promise.all(
         resolvedLibraries.map(async (library) => {
             const tree = await fetchRepositoryTree(library, fetchImpl, githubToken);
-            const components = getComponentNamesFromTree(tree).map((name) => ({
+            const componentPaths = new Map(getComponentNamesFromTree(tree).map((name) => [name, name]));
+            if (library.id === 'uikit') {
+                const files = new Set(tree.filter(({type}) => type === 'blob').map(({path}) => path));
+                for (const [name, componentPath] of Object.entries(uikitComponentPaths)) {
+                    if (files.has(`src/components/${componentPath}/README.md`)) {
+                        componentPaths.set(name, componentPath);
+                    }
+                }
+            }
+            const components = [...componentPaths].map(([name, componentPath]) => ({
                 id: componentNameToId(name),
                 name,
                 title: componentNameToTitle(name),
-                githubUrl: `https://github.com/${library.githubRepository}/tree/${library.ref}/src/components/${name}`,
+                githubUrl: `https://github.com/${library.githubRepository}/tree/${library.ref}/src/components/${componentPath}`,
                 readmeUrl: {
-                    en: `https://raw.githubusercontent.com/${library.githubRepository}/${library.ref}/src/components/${name}/README.md`,
-                    ru: `https://raw.githubusercontent.com/${library.githubRepository}/${library.ref}/src/components/${name}/README-ru.md`,
+                    en: `https://raw.githubusercontent.com/${library.githubRepository}/${library.ref}/src/components/${componentPath}/README.md`,
+                    ru: `https://raw.githubusercontent.com/${library.githubRepository}/${library.ref}/src/components/${componentPath}/README-ru.md`,
                 },
             }));
 

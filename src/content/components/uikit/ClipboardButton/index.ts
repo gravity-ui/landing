@@ -14,7 +14,7 @@ export const clipboardButtonConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.ClipboardButton)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.ClipboardButton)),
         props: {
             size: {
                 type: 'radioButton',

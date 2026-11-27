@@ -1,5 +1,5 @@
-import {Button, Drawer} from '@gravity-ui/uikit';
-import type {DialogFooterProps, DrawerProps} from '@gravity-ui/uikit';
+import {Button, Drawer} from '@gravity-ui/uikit-v8';
+import type {DialogFooterProps, DrawerProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 const MOCK_TEXT =

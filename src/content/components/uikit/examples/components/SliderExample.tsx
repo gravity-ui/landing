@@ -1,4 +1,4 @@
-import {Slider, SliderProps} from '@gravity-ui/uikit';
+import {Slider, SliderProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type SliderExampleProps = Omit<

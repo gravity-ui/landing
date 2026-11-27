@@ -1,4 +1,4 @@
-import {Select, SelectProps} from '@gravity-ui/uikit';
+import {Select, SelectProps} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const SelectComponent = (props: SelectProps) => {

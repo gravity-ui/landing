@@ -17,7 +17,7 @@ export const helpMarkConfig = {
             import('./HelpMarkComponent').then((mod) => mod.HelpMarkComponent),
         ),
         props: {
-            iconSize: {
+            size: {
                 type: 'select',
                 values: mappingOptions(['s', 'm', 'l', 'xl']),
                 defaultValue: 'm',

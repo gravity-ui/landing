@@ -29,6 +29,7 @@ import {
     Card,
     ClipboardButton,
     Col,
+    DropdownMenu,
     Flex,
     Icon,
     Label,
@@ -38,7 +39,7 @@ import {
     Text,
 } from '@gravity-ui/uikit';
 import dynamic from 'next/dynamic';
-import {DropdownMenuComponent} from 'src/content/components/uikit/DropdownMenu/DropdownMenuComponent';
+import {dropdownMenuItems} from 'src/content/components/uikit/DropdownMenu/DropdownMenuComponent';
 import {block} from 'src/utils';
 
 import {PreviewWrapper, PreviewWrapperProps} from '../PreviewWrapper/PreviewWrapper';
@@ -67,7 +68,7 @@ const environmentColumns: TableColumnConfig<unknown>[] = [
         id: 'actions',
         align: 'end',
         width: '24px',
-        template: () => <DropdownMenuComponent initialOpen={false} />,
+        template: () => <DropdownMenu items={dropdownMenuItems} />,
     },
 ];
 
@@ -129,7 +130,7 @@ export const KubernetesPreview = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                 </ActionBar.Group>
                                 <ActionBar.Group className={b('header-group')}>
                                     <ActionBar.Item>
-                                        <DropdownMenuComponent initialOpen={false} />
+                                        <DropdownMenu items={dropdownMenuItems} />
                                     </ActionBar.Item>
                                     <ActionBar.Item>
                                         <Button view="action">
@@ -249,7 +250,7 @@ export const KubernetesPreview = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                                     <Breadcrumbs.Item>Machines</Breadcrumbs.Item>
                                                     <Breadcrumbs.Item>Autoscaling</Breadcrumbs.Item>
                                                 </Breadcrumbs>
-                                                <DropdownMenuComponent initialOpen={false} />
+                                                <DropdownMenu items={dropdownMenuItems} />
                                             </Flex>
                                             <Flex>
                                                 <Flex direction="column">
@@ -283,7 +284,7 @@ export const KubernetesPreview = (props: Pick<PreviewWrapperProps, 'styles'>) =>
                                                     <Breadcrumbs.Item>Volumes</Breadcrumbs.Item>
                                                     <Breadcrumbs.Item>Total</Breadcrumbs.Item>
                                                 </Breadcrumbs>
-                                                <DropdownMenuComponent initialOpen={false} />
+                                                <DropdownMenu items={dropdownMenuItems} />
                                             </Flex>
                                             <Flex>
                                                 <Flex direction="column">

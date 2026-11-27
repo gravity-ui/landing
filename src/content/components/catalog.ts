@@ -3,7 +3,7 @@ import {Repos} from '../../types/common';
 
 import {Component} from './types';
 
-const COMPONENT_CATALOG_SCHEMA_VERSION = 2;
+const COMPONENT_CATALOG_SCHEMA_VERSION = 3;
 
 type PublishedComponent = {
     id: string;

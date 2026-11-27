@@ -1,4 +1,4 @@
-import {Button, Popup} from '@gravity-ui/uikit';
+import {Button, Popup} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 export const PopupAnchorExample = () => {

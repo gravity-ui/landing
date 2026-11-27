@@ -1,4 +1,4 @@
-import {RadioGroup, RadioGroupOption, RadioGroupProps} from '@gravity-ui/uikit';
+import {RadioGroup, RadioGroupOption, RadioGroupProps} from '@gravity-ui/uikit-v8';
 
 type RadioGroupComponentProps = {
     size?: RadioGroupProps['size'];

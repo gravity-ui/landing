@@ -1,4 +1,4 @@
-import {PopupPlacement, Tooltip} from '@gravity-ui/uikit';
+import {PopupPlacement, Tooltip} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 type TooltipComponentProps = {

@@ -9,13 +9,14 @@ const require = createRequire(import.meta.url);
  *
  * @param {string} packageName npm package name.
  * @param {string} projectRoot Directory from which Node would resolve the package.
+ * @param {string} [installName] Dependency name when npm installs the package under an alias.
  * @returns {{packageRoot: string, packageJson: Record<string, unknown>}}
  */
-export function resolveInstalledPackage(packageName, projectRoot) {
+export function resolveInstalledPackage(packageName, projectRoot, installName = packageName) {
     let entryPath;
 
     try {
-        entryPath = require.resolve(packageName, {paths: [projectRoot]});
+        entryPath = require.resolve(installName, {paths: [projectRoot]});
     } catch (error) {
         throw new Error(`Cannot resolve installed package ${packageName} from ${projectRoot}`, {
             cause: error,

@@ -1,4 +1,4 @@
-import {Popup, PopupAnchorElement, PopupPlacement} from '@gravity-ui/uikit';
+import {Popup, PopupAnchorElement, PopupPlacement} from '@gravity-ui/uikit-v8';
 import React from 'react';
 
 function PopupInstance({

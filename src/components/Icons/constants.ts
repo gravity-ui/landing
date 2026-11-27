@@ -9,5 +9,9 @@ const iconsMetadataByName = (iconsMetadata.icons as IconMeta[]).reduce(
 );
 
 export const allIcons: IconItem[] = Object.entries(gravityIcons)
-    .map(([name, data]) => ({name, data, meta: iconsMetadataByName[name]}))
+    .flatMap(([name, data]) =>
+        typeof data === 'function' && iconsMetadataByName[name]
+            ? [{name, data, meta: iconsMetadataByName[name]}]
+            : [],
+    )
     .sort((a, b) => a.name.localeCompare(b.name));

@@ -3,7 +3,7 @@ import prettierConfig from '@gravity-ui/prettier-config';
 import sdk from '@stackblitz/sdk';
 import rootPackageJson from 'package.json';
 
-import {scope} from './constants';
+import {scope, uikit8Scope} from './constants';
 
 const {dependencies, devDependencies} = rootPackageJson;
 
@@ -61,10 +61,10 @@ const indexHtml = `
 </html>
 `;
 
-const main = `
+const getMain = (provider: 'Provider' | 'ThemeProvider') => `
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {${provider}} from '@gravity-ui/uikit';
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 import App from './App';
@@ -72,11 +72,11 @@ import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-        <ThemeProvider theme="dark">
+        <${provider} theme="dark">
             <div className="container">
                 <App />
             </div>
-        </ThemeProvider>
+        </${provider}>
     </React.StrictMode>,
 );
 `;
@@ -120,12 +120,28 @@ export default defineConfig({
 });
 `;
 
-function openStackblitz(source: string) {
+const uikit8Version = dependencies['@gravity-ui/uikit-v8'].replace('npm:@gravity-ui/uikit@', '');
+const uikit8Peers: Record<string, Record<string, string>> = {
+    '@gravity-ui/uikit/legacy': {
+        '@hello-pangea/dnd': dependencies['@hello-pangea/dnd'],
+        'react-window': dependencies['react-window'],
+        'react-virtualized-auto-sizer': dependencies['react-virtualized-auto-sizer'],
+    },
+    '@gravity-ui/uikit/hello-pangea-dnd': {
+        '@hello-pangea/dnd': dependencies['@hello-pangea/dnd'],
+    },
+    '@gravity-ui/uikit/virtualizer': {
+        '@tanstack/react-virtual': dependencies['@tanstack/react-virtual'],
+    },
+};
+
+function openStackblitz(source: string, uikit8 = false) {
     const packageJson = {
         ...packageJsonBase,
         dependencies: {
             ...packageJsonBase.dependencies,
-            ...getExtraDependencies(source),
+            ...getExtraDependencies(source, uikit8),
+            ...(uikit8 && {'@gravity-ui/uikit': uikit8Version}),
         },
     };
 
@@ -139,7 +155,7 @@ function openStackblitz(source: string) {
                 'tsconfig.json': JSON.stringify(tsconfig, null, 4),
                 '.prettierrc': JSON.stringify(prettierrc, null, 4),
                 'index.html': indexHtml.trim(),
-                'src/main.tsx': main.trim(),
+                'src/main.tsx': getMain(uikit8 ? 'Provider' : 'ThemeProvider').trim(),
                 'src/App.tsx': source.trim(),
                 'src/styles.css': styles.trim(),
                 'vite.config.ts': viteConfig.trim(),
@@ -152,17 +168,20 @@ function openStackblitz(source: string) {
     );
 }
 
-function getExtraDependencies(source: string): Record<string, string> {
+function getExtraDependencies(source: string, uikit8: boolean): Record<string, string> {
     const extra: Record<string, string> = {};
 
     for (const specifier of collectImportSpecifiers(source)) {
+        if (uikit8) {
+            Object.assign(extra, uikit8Peers[specifier]);
+        }
         const packageName = getPackageName(specifier);
 
         if (!packageName || packageName in packageJsonBase.dependencies) {
             continue;
         }
 
-        const scopePackageNames = Object.keys(scope.import);
+        const scopePackageNames = Object.keys((uikit8 ? uikit8Scope : scope).import);
         const inScope = scopePackageNames.some(
             (s) => specifier === s || specifier.startsWith(`${s}/`),
         );

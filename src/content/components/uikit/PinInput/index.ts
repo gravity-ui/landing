@@ -14,7 +14,7 @@ export const pinInputConfig = {
         readmeUrl: getReadmeUrl(getterOptions),
     },
     sandbox: {
-        component: dynamic(() => import('@gravity-ui/uikit').then((mod) => mod.PinInput)),
+        component: dynamic(() => import('@gravity-ui/uikit-v8').then((mod) => mod.PinInput)),
         props: {
             size: {
                 type: 'radioButton',
