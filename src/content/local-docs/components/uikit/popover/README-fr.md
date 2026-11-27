@@ -1,25 +1,21 @@
-<!--GITHUB_BLOCK-->
-
-# Popover
-
-<!--/GITHUB_BLOCK-->
-
 `Popover` affiche un contenu flottant, facultativement interactif (texte, liens ou boutons) ancré à un élément enfant et ouvert au survol ou au clic. Il encapsule [`Popup`](../Popup/README.md) avec une interactivité de déclenchement intégrée, en utilisant le `ReactElement` passé via la propriété `children` comme déclencheur.
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
 
+Migration depuis l'ancien `Popover` ? Consultez le [guide de migration](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-popover.md).
+
 ## Utilisation
 
-Encapsulez un élément HTML ou tout composant acceptant les gestionnaires DOM natifs et les attributs ARIA dans les propriétés (par exemple, `Button`) avec le composant `Popover`. Placez votre contenu
+Encapsulez un élément HTML ou tout composant acceptant les gestionnaires DOM natifs et les attributs ARIA dans les propriétés (c'est-à-dire `Button`) avec le composant `Popover`. Placez votre contenu
 dans la propriété `content`.
 
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Content">
-  <Button>Click or hover me</Button>
+<Popover content="Contenu">
+  <Button>Cliquez ou survolez-moi</Button>
 </Popover>;
 ```
 
@@ -40,7 +36,7 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | disabled             | Ne pas ouvrir lors d'un événement quelconque                                                                  |                              `boolean`                              |     `false`     |
 | enableSafePolygon    | Utiliser une zone polygonale dynamique lors du déplacement du pointeur du déclencheur vers le contenu du `Popover` pour éviter sa fermeture |                              `boolean`                              |     `false`     |
 | hasArrow             | Rendre une flèche pointant vers le déclencheur                                                                |                              `boolean`                              |     `false`     |
-| keepMounted          | Le `Popover` ne sera pas supprimé du DOM lors de sa fermeture                                                  |                              `boolean`                              |     `false`     |
+| keepMounted          | Le `Popover` ne sera pas supprimé du DOM lors de sa masquage                                                   |                              `boolean`                              |     `false`     |
 | middlewares          | Middlewares `Floating UI`. S'ils sont définis, ils remplaceront complètement les middlewares par défaut.       |                         `Array<Middleware>`                         |                 |
 | modal                | Active le comportement de piégeage de focus                                                                   |                              `boolean`                              |     `false`     |
 | offset               | Valeur de décalage `Floating UI`                                                                              |                           `PopoverOffset`                           |       `4`       |
@@ -51,5 +47,5 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | rest                 | Combien de temps en ms le curseur doit rester immobile avant l'ouverture.                                     |                              `number`                               |       `0`       |
 | strategy             | Stratégie de positionnement `Floating UI`                                                                     |                       `"absolute"` `"fixed"`                        |  `"absolute"`   |
 | style                | Attribut `style` HTML pour le nœud racine                                                                     |                              `string`                               |                 |
-| toggle               | Si l'état `open` doit être basculé avec des clics répétés                                                     |                              `boolean`                              |     `true`      |
+| toggle               | Permet de basculer l'état `open` avec des clics répétés                                                       |                              `boolean`                              |     `true`      |
 | trigger              | Quel événement doit ouvrir le `Popover`. La valeur par défaut `all` fait référence à `hover` et `click`        |                          `"all"` `"click"`                          |     `"all"`     |

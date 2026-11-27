@@ -1,24 +1,22 @@
-<!--GITHUB_BLOCK-->
-
-# Popover
-
-<!--/GITHUB_BLOCK-->
-
 `Popover` zeigt schwebende, optional interaktive Inhalte (Text, Links oder Schaltflächen) an, die an ein untergeordnetes Element angeheftet sind und beim Hovern oder Klicken geöffnet werden. Es umschließt [`Popup`](../Popup/README.md) mit integrierter Trigger-Interaktivität und verwendet das über die `children`-Eigenschaft übergebene `ReactElement` als Trigger.
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
 
+GRAVITY_TRANSLATION_BLOCK_0_END
+
+Von der alten `Popover`-Version migrieren? Sehen Sie sich die [Migrationsanleitung](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-popover.md) an.
+
 ## Verwendung
 
-Umschließen Sie ein HTML-Element oder eine beliebige Komponente, die native DOM-Handler und ARIA-Attribute in Eigenschaften akzeptiert (z. B. `Button`), mit der `Popover`-Komponente. Platzieren Sie Ihre Inhalte in der `content`-Eigenschaft.
+Umschließen Sie ein HTML-Element oder eine beliebige Komponente, die native DOM-Handler und ARIA-Attribute in Eigenschaften akzeptiert (z. B. `Button`), mit der `Popover`-Komponente. Legen Sie Ihre Inhalte in die `content`-Eigenschaft.
 
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Content">
-  <Button>Click or hover me</Button>
+<Popover content="Inhalt">
+  <Button>Klicken oder Hovern Sie mich</Button>
 </Popover>;
 ```
 

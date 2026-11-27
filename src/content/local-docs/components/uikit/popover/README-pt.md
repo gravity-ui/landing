@@ -1,14 +1,10 @@
-<!--GITHUB_BLOCK-->
-
-# Popover
-
-<!--/GITHUB_BLOCK-->
-
-`Popover` exibe conteúdo flutuante, opcionalmente interativo (texto, links ou botões) ancorado a um elemento filho e aberto ao passar o mouse ou clicar. Ele envolve [`Popup`](../Popup/README.md) com interatividade de gatilho integrada, usando o `ReactElement` passado através da propriedade `children` como gatilho.
+`Popover` exibe conteúdo flutuante, opcionalmente interativo (texto, links ou botões) ancorado a um elemento filho e aberto ao passar o mouse ou clicar. Ele envolve o [`Popup`](../Popup/README.md) com interatividade de gatilho integrada, usando o `ReactElement` passado através da propriedade `children` como gatilho.
 
 ```tsx
 import {Popover} from '@gravity-ui/uikit';
 ```
+
+Migrando do `Popover` legado? Veja o [guia de migração](https://github.com/gravity-ui/uikit/blob/main/docs/migration-from-legacy-popover.md).
 
 ## Uso
 
@@ -18,8 +14,8 @@ na propriedade `content`.
 ```jsx
 import {Button, Popover} from '@gravity-ui/uikit';
 
-<Popover content="Content">
-  <Button>Click or hover me</Button>
+<Popover content="Conteúdo">
+  <Button>Clique ou passe o mouse sobre mim</Button>
 </Popover>;
 ```
 
@@ -40,7 +36,7 @@ import {Button, Popover} from '@gravity-ui/uikit';
 | disabled             | Não abrir em nenhum evento                                                                                    |                              `boolean`                              |     `false`     |
 | enableSafePolygon    | Usa área de polígono dinâmico ao mover o ponteiro do gatilho para o conteúdo do `Popover` para evitar que feche |                              `boolean`                              |     `false`     |
 | hasArrow             | Renderiza uma seta apontando para o gatilho                                                                  |                              `boolean`                              |     `false`     |
-| keepMounted          | O `Popover` não será removido do DOM ao ser ocultado                                                           |                              `boolean`                              |     `false`     |
+| keepMounted          | O `Popover` não será removido do DOM ao ser ocultado                                                          |                              `boolean`                              |     `false`     |
 | middlewares          | Middlewares do `Floating UI`. Se definidos, eles substituirão completamente os middlewares padrão.             |                         `Array<Middleware>`                         |                |
 | modal                | Habilita o comportamento de captura de foco                                                                   |                              `boolean`                              |     `false`     |
 | offset               | Valor de offset do `Floating UI`                                                                              |                           `PopoverOffset`                           |       `4`       |
